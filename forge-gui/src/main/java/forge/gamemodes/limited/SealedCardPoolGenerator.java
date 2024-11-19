@@ -37,7 +37,6 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.model.UnOpenedMeta;
-import forge.util.CollectionUtil;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.MyRandom;
@@ -174,7 +173,7 @@ public class SealedCardPoolGenerator {
             case Prerelease:
                 ArrayList<CardEdition> editions = Lists.newArrayList(StaticData.instance().getEditions().getPrereleaseEditions());
                 Collections.sort(editions);
-                CollectionUtil.reverse(editions);
+                Collections.reverse(editions);
 
                 CardEdition chosenEdition = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseAnEdition"), editions);
                 if (chosenEdition == null) {

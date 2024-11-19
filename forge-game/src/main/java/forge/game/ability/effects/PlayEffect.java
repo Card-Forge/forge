@@ -191,15 +191,15 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidSA")) {
             final String valid[] = sa.getParam("ValidSA").split(",");
-            final List<Card> invalid = new ArrayList<>();
-            for (Card c : tgtCards) {
+            Iterator<Card> it = tgtCards.iterator();
+            while (it.hasNext()) {
+                Card c = it.next();
                 if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , source, sa))) {
-                    invalid.add(c);
+                    // it.remove will only remove item from the list part of CardCollection
+                    tgtCards.asSet().remove(c);
+                    it.remove();
                 }
             }
-            if (!invalid.isEmpty())
-                tgtCards.removeAll(invalid);
-
             if (tgtCards.isEmpty()) {
                 return;
             }
@@ -232,16 +232,16 @@ public class PlayEffect extends SpellAbilityEffect {
         while (!tgtCards.isEmpty() && amount > 0 && totalCMCLimit >= 0) {
             if (hasTotalCMCLimit) {
                 // filter out cards with mana value greater than limit
+                Iterator<Card> it = tgtCards.iterator();
                 final String [] valid = {"Spell.cmcLE" + totalCMCLimit};
-                List<Card> invalid = new ArrayList<>();
-                for (Card c : tgtCards) {
+                while (it.hasNext()) {
+                    Card c = it.next();
                     if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
-                        invalid.add(c);
+                        // it.remove will only remove item from the list part of CardCollection
+                        tgtCards.asSet().remove(c);
+                        it.remove();
                     }
                 }
-                // it.remove will only remove item from the list part of CardCollection
-                if (!invalid.isEmpty())
-                    tgtCards.removeAll(invalid);
                 if (tgtCards.isEmpty())
                     break;
                 params.put("CMCLimit", totalCMCLimit);

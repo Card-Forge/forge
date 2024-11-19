@@ -10,10 +10,10 @@ import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
-import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -81,7 +81,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
             // For Paliano, if player has revealed anything, try to avoid that color
             // For Regicide, don't choose one of my colors
         }
-        CollectionUtil.shuffle(colors);
+        Collections.shuffle(colors);
         return colors.get(0);
     }
 
@@ -89,7 +89,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
     protected String removeWithAny(PaperCard bestPick, List<String> options) {
         // If we have multiple remove from draft options, do none of them for now
 
-        CollectionUtil.shuffle(options);
+        Collections.shuffle(options);
         if (options.get(0).equals("Animus of Predation")) {
             if (removeWithAnimus(bestPick)) {
                 return "Animus of Predation";
@@ -254,7 +254,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
 
     @Override
     protected CardEdition chooseEdition(List<CardEdition> possibleEditions) {
-        CollectionUtil.shuffle(possibleEditions);
+        Collections.shuffle(possibleEditions);
         return possibleEditions.get(0);
     }
 

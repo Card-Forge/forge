@@ -1141,7 +1141,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         endTempShowCards();
         if(topOfDeck)
-            CollectionUtil.reverse(choices);
+            Collections.reverse(choices);
         CardCollection result = new CardCollection();
         gameCacheMove.addToList(choices, result);
         return result;
@@ -1663,7 +1663,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         Collections.sort(sortedResults);
         if (!call) {
-            CollectionUtil.reverse(sortedResults);
+            Collections.reverse(sortedResults);
         }
         return getGui().one(sa.getHostCard().getName() + " - " + localizer.getMessage("lblChooseAResult"), sortedResults).equals(labelsSrc[0]);
     }

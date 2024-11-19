@@ -1,12 +1,6 @@
 package forge.gamemodes.limited;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -33,7 +27,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 
 /**
@@ -628,7 +621,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
         //Iterator<PaperCard> iRandomPool = CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize <= possibleList.size() ? targetSize : possibleList.size())).iterator();
-        CollectionUtil.shuffle(possibleList);
+        Collections.shuffle(possibleList);
         Iterator<PaperCard> iRandomPool = possibleList.iterator();
         while (deckList.size() < targetSize) {
             if (logToConsole) {
@@ -864,7 +857,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if (secondKeyCard != null) {
             possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
         }
-        CollectionUtil.shuffle(possibleList);
+        Collections.shuffle(possibleList);
         //addManaCurveCards(CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize*3 <= possibleList.size() ? targetSize*3 : possibleList.size())),
                 //num, "Random Card");
         addManaCurveCards(possibleList, num, "Random Card");

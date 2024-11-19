@@ -18,12 +18,7 @@
 package forge.gamemodes.quest;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.Subscribe;
@@ -50,7 +45,6 @@ import forge.item.PreconDeck;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.util.CollectionUtil;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
@@ -612,7 +606,7 @@ public class QuestController {
                 }
             }
 
-            CollectionUtil.shuffle(unlockedChallengeIds);
+            Collections.shuffle(unlockedChallengeIds);
 
             maxChallenges = Math.min(maxChallenges, unlockedChallengeIds.size());
 

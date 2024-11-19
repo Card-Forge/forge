@@ -1,14 +1,7 @@
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import forge.util.CollectionUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -701,7 +694,7 @@ public class DeckgenUtil {
             }else {
                 String matrixKey = (format.equals(DeckFormat.TinyLeaders) ? DeckFormat.Commander : format).toString(); //use Commander for Tiny Leaders
                 List<Map.Entry<PaperCard, Integer>> potentialCards = new ArrayList<>(CardRelationMatrixGenerator.cardPools.get(matrixKey).get(commander.getName()));
-                CollectionUtil.shuffle(potentialCards, MyRandom.getRandom());
+                Collections.shuffle(potentialCards, MyRandom.getRandom());
                 for(Map.Entry<PaperCard,Integer> pair:potentialCards){
                     if(format.isLegalCard(pair.getKey())) {
                         preSelectedCards.add(pair.getKey());
@@ -800,7 +793,7 @@ public class DeckgenUtil {
                 break;
             }
             List<PaperCard> cardList = Lists.newArrayList(colorList);
-            CollectionUtil.shuffle(cardList, MyRandom.getRandom());
+            Collections.shuffle(cardList, MyRandom.getRandom());
             int shortlistlength=400;
             if(cardList.size()<shortlistlength){
                 shortlistlength=cardList.size();

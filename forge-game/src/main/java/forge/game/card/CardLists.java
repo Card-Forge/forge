@@ -32,7 +32,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityCrewValue;
-import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
@@ -154,7 +153,7 @@ public class CardLists {
     }
 
     public static void shuffle(List<Card> list) {
-        CollectionUtil.shuffle(list, MyRandom.getRandom());
+        Collections.shuffle(list, MyRandom.getRandom());
     }
 
     public static CardCollection filterControlledBy(Iterable<Card> cardList, Player player) {

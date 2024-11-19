@@ -68,7 +68,6 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -683,7 +682,7 @@ public class ComputerUtil {
 
         // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
         CardLists.sortByCmcDesc(typeList);
-        CollectionUtil.reverse(typeList);
+        Collections.reverse(typeList);
 
 
         // TODO AI needs some improvements here
@@ -737,7 +736,7 @@ public class ComputerUtil {
 
             // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
             CardLists.sortByCmcDesc(typeList);
-            CollectionUtil.reverse(typeList);
+            Collections.reverse(typeList);
             typeList.sort((a, b) -> {
                 if (!a.isInPlay() && b.isInPlay()) return -1;
                 else if (!b.isInPlay() && a.isInPlay()) return 1;
@@ -767,7 +766,7 @@ public class ComputerUtil {
         final CardCollection list = new CardCollection();
 
         if (zone != ZoneType.Hand) {
-            CollectionUtil.reverse(typeList);
+            Collections.reverse(typeList);
         }
 
         for (int i = 0; i < amount; i++) {
@@ -818,7 +817,7 @@ public class ComputerUtil {
             typeList.remove(activate);
         }
         ComputerUtilCard.sortByEvaluateCreature(typeList);
-        CollectionUtil.reverse(typeList);
+        Collections.reverse(typeList);
 
         final CardCollection tapList = new CardCollection();
 
@@ -1770,7 +1769,7 @@ public class ComputerUtil {
 
         // align threatened with resolve order
         // matters if stack contains multiple activations (e.g. Temur Sabertooth)
-        CollectionUtil.reverse(objects);
+        Collections.reverse(objects);
         return objects;
     }
 

@@ -16,7 +16,7 @@ import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -220,12 +220,13 @@ public class PlayAi extends SpellAbilityAi {
 
         if (cards != null & sa.hasParam("ValidSA")) {
             final String valid[] = sa.getParam("ValidSA").split(",");
-            final List<Card> invalid = new ArrayList<>();
-            for (Card c : cards) {
-                if(!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , source, sa)))
-                    invalid.add(c);
+            final Iterator<Card> itr = cards.iterator();
+            while (itr.hasNext()) {
+                final Card c = itr.next();
+                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , source, sa))) {
+                    itr.remove();
+                }
             }
-            cards.removeAll(invalid);
         }
 
         // Ensure that if a ValidZone is specified, there's at least something to choose from in that zone.

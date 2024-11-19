@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -23,7 +24,7 @@ import com.google.common.collect.Sets;
 /**
  * Collection with unique elements ({@link Set}) that maintains the order in
  * which the elements are added to it ({@link List}).
- *
+ * <p>
  * This object is serializable if all elements it contains are.
  *
  * @param <T> the type of the elements this collection contains.
@@ -31,6 +32,7 @@ import com.google.common.collect.Sets;
  */
 public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, Cloneable, Serializable {
     private static final long serialVersionUID = -1664555336364294106L;
+    private final Object lock = new Object();
 
     private static final FCollection<?> EMPTY = new EmptyFCollection<>();
 
@@ -43,13 +45,14 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * The {@link Set} representation of this collection.
      */
     private Set<T> SET;
+
     private Set<T> set() {
         Set<T> result = SET;
         if (result == null) {
-            synchronized (this) {
+            synchronized (lock) {
                 result = SET;
                 if (result == null) {
-                    result = Sets.newConcurrentHashSet();
+                    result = Sets.newHashSet();
                     SET = result;
                 }
             }
@@ -60,14 +63,15 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * The {@link List} representation of this collection.
      */
-    private List<T> LIST;
-    private List<T> list() {
-        List<T> result = LIST;
+    private LinkedList<T> LIST;
+
+    private LinkedList<T> list() {
+        LinkedList<T> result = LIST;
         if (result == null) {
-            synchronized (this) {
+            synchronized (lock) {
                 result = LIST;
                 if (result == null) {
-                    result = Lists.newCopyOnWriteArrayList();
+                    result = Lists.newLinkedList();
                     LIST = result;
                 }
             }
@@ -84,8 +88,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Create an {@link FCollection} containing a single element.
      *
-     * @param e
-     *            the single element the new collection contains.
+     * @param e the single element the new collection contains.
      */
     public FCollection(final T e) {
         add(e);
@@ -95,9 +98,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Create an {@link FCollection} from an array. The order of the elements in
      * the array is preserved in the new collection.
      *
-     * @param c
-     *            an array, whose elements will be in the collection upon its
-     *            creation.
+     * @param c an array, whose elements will be in the collection upon its
+     *          creation.
      */
     public FCollection(final T[] c) {
         this.addAll(Arrays.asList(c));
@@ -107,9 +109,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Create an {@link FCollection} from an {@link Iterable}. The order of the
      * elements in the iterable is preserved in the new collection.
      *
-     * @param i
-     *            an iterable, whose elements will be in the collection upon its
-     *            creation.
+     * @param i an iterable, whose elements will be in the collection upon its
+     *          creation.
      */
     public FCollection(final Iterable<? extends T> i) {
         this.addAll(i);
@@ -118,19 +119,19 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Create an {@link FCollection} from an {@link FCollectionReader}.
      *
-     * @param reader
-     *            a reader used to populate collection
+     * @param reader a reader used to populate collection
      */
     public FCollection(final FCollectionReader<T> reader) {
-        reader.readAll(this);
+        synchronized (lock) {
+            reader.readAll(this);
+        }
     }
 
     /**
      * Check whether an {@link Iterable} contains any iterable, silently
      * returning {@code false} when {@code null} is passed as an argument.
      *
-     * @param iterable
-     *            a card collection.
+     * @param iterable a card collection.
      */
     public static boolean hasElements(final Iterable<?> iterable) {
         return iterable != null && !Iterables.isEmpty(iterable);
@@ -140,10 +141,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Check whether a {@link Collection} contains a particular element, silently
      * returning {@code false} when {@code null} is passed as the first argument.
      *
-     * @param collection
-     *            a collection.
-     * @param element
-     *            a possible element of the collection.
+     * @param collection a collection.
+     * @param element    a possible element of the collection.
      */
     public static <T> boolean hasElement(final Collection<T> collection, final T element) {
         return collection != null && collection.contains(element);
@@ -159,7 +158,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
 
     /**
      * <p>This implementation uses the hash code of the backing list.</p>
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override
@@ -183,35 +182,37 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public final FCollection<T> clone() {
-        return new FCollection<>(list());
+        synchronized (lock) {
+            return new FCollection<>(list());
+        }
     }
 
     /**
      * Get the first object in this {@link FCollection}.
      *
-     * @throws NoSuchElementException
-     *             if the collection is empty.
+     * @throws NoSuchElementException if the collection is empty.
      */
     @Override
     public T getFirst() {
-        if (list().isEmpty())
-            return null;
-        return list().get(0);
-        //return list.getFirst();
+        synchronized (lock) {
+            if (list().isEmpty())
+                return null;
+            return list().getFirst();
+        }
     }
 
     /**
      * Get the last object in this {@link FCollection}.
      *
-     * @throws NoSuchElementException
-     *             if the collection is empty.
+     * @throws NoSuchElementException if the collection is empty.
      */
     @Override
     public T getLast() {
-        if (list().isEmpty())
-            return null;
-        return list().get(list().size() - 1);
-        //return list.getLast();
+        synchronized (lock) {
+            if (list().isEmpty())
+                return null;
+            return list().getLast();
+        }
     }
 
     /**
@@ -219,7 +220,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public int size() {
-        return set().size();
+        synchronized (lock) {
+            return set().size();
+        }
     }
 
     /**
@@ -237,14 +240,15 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Check whether this collection contains a particular object.
      *
-     * @param o
-     *            an object.
+     * @param o an object.
      */
     @Override
     public boolean contains(final Object o) {
-        if (o == null)
-            return false;
-        return set().contains(o);
+        synchronized (lock) {
+            if (o == null)
+                return false;
+            return set().contains(o);
+        }
     }
 
     /**
@@ -252,7 +256,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public Iterator<T> iterator() {
-        return list().iterator();
+        return new Itr();
+        //return list().iterator();
     }
 
     /**
@@ -260,7 +265,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public Object[] toArray() {
-        return list().toArray();
+        synchronized (lock) {
+            return list().toArray();
+        }
     }
 
     /**
@@ -269,52 +276,58 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     @Override
     @SuppressWarnings("hiding")
     public <T> T[] toArray(final T[] a) {
-        return list().toArray(a);
+        synchronized (lock) {
+            return list().toArray(a);
+        }
     }
 
     /**
      * Add an element to this collection, if it isn't already present.
      *
-     * @param e
-     *            the object to add.
+     * @param e the object to add.
      * @return whether the collection changed as a result of this method call.
      */
     @Override
     public boolean add(final T e) {
-        if (e == null)
+        synchronized (lock) {
+            if (e == null)
+                return false;
+            if (set().add(e)) {
+                list().add(e);
+                return true;
+            }
             return false;
-        if (set().add(e)) {
-            list().add(e);
-            return true;
         }
-        return false;
     }
 
     /**
      * Remove an element from this collection.
      *
-     * @param o
-     *            the object to remove.
+     * @param o the object to remove.
      * @return whether the collection changed as a result of this method call.
      */
     @Override
     public boolean remove(final Object o) {
-        if (o == null)
+        synchronized (lock) {
+            if (o == null)
+                return false;
+            if (set().remove(o)) {
+                list().remove(o);
+                return true;
+            }
             return false;
-        if (set().remove(o)) {
-            list().remove(o);
-            return true;
         }
-        return false;
     }
 
     @Override
     public boolean removeIf(Predicate<? super T> filter) {
-        if (list().removeIf(filter)) {
-            set().removeIf(filter);
-            return true;
+        synchronized (lock) {
+            if (list().removeIf(filter)) {
+                set().removeIf(filter);
+                return true;
+            }
+            return false;
         }
-        return false;
     }
 
     /**
@@ -322,7 +335,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean containsAll(final Collection<?> c) {
-        return set().containsAll(c);
+        synchronized (lock) {
+            return set().containsAll(c);
+        }
     }
 
     /**
@@ -337,35 +352,37 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Add all the elements in the specified {@link Iterator} to this
      * collection, in the order in which they appear.
      *
-     * @param i
-     *            an iterator.
+     * @param i an iterator.
      * @return whether this collection changed as a result of this method call.
      * @see #addAll(Collection)
      */
     public boolean addAll(final Iterable<? extends T> i) {
-        boolean changed = false;
-        if (i == null)
-            return false;
-        for (final T e : i) {
-            changed |= add(e);
+        synchronized (lock) {
+            boolean changed = false;
+            if (i == null)
+                return false;
+            for (final T e : i) {
+                changed |= add(e);
+            }
+            return changed;
         }
-        return changed;
     }
 
     /**
      * Add all the elements in the specified array to this collection,
      * respecting the ordering.
      *
-     * @param c
-     *            an array.
+     * @param c an array.
      * @return whether this collection changed as a result of this method call.
      */
     public boolean addAll(final T[] c) {
-        boolean changed = false;
-        for (final T e : c) {
-            changed |= add(e);
+        synchronized (lock) {
+            boolean changed = false;
+            for (final T e : c) {
+                changed |= add(e);
+            }
+            return changed;
         }
-        return changed;
     }
 
     /**
@@ -374,22 +391,24 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     @SuppressWarnings("unchecked")
     @Override
     public boolean addAll(final int index, final Collection<? extends T> c) {
-        if (c == null) {
-            return false;
-        }
+        synchronized (lock) {
+            if (c == null) {
+                return false;
+            }
 
-        final List<? extends T> list;
-        if (c instanceof List) {
-            list = (List<T>) c;
-        } else {
-            list = Lists.newArrayList(c);
-        }
+            final List<? extends T> list;
+            if (c instanceof List) {
+                list = (List<T>) c;
+            } else {
+                list = Lists.newArrayList(c);
+            }
 
-        boolean changed = false;
-        for (int i = list.size() - 1; i >= 0; i--) { //must add in reverse order so they show up in the right place
-            changed |= insert(index, list.get(i));
+            boolean changed = false;
+            for (int i = list.size() - 1; i >= 0; i--) { //must add in reverse order so they show up in the right place
+                changed |= insert(index, list.get(i));
+            }
+            return changed;
         }
-        return changed;
     }
 
     /**
@@ -403,18 +422,19 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Remove all objects appearing in an {@link Iterable}.
      *
-     * @param c
-     *            an iterable.
+     * @param c an iterable.
      * @return whether this collection changed as a result of this method call.
      */
     public boolean removeAll(final Iterable<?> c) {
-        boolean changed = false;
-        if (c == null)
-            return false;
-        for (final Object o : c) {
-            changed |= remove(o);
+        synchronized (lock) {
+            boolean changed = false;
+            if (c == null)
+                return false;
+            for (final Object o : c) {
+                changed |= remove(o);
+            }
+            return changed;
         }
-        return changed;
     }
 
     /**
@@ -422,11 +442,13 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean retainAll(final Collection<?> c) {
-        if (set().retainAll(c)) {
-            list().retainAll(c);
-            return true;
+        synchronized (lock) {
+            if (set().retainAll(c)) {
+                list().retainAll(c);
+                return true;
+            }
+            return false;
         }
-        return false;
     }
 
     /**
@@ -434,9 +456,13 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public void clear() {
-        if (set().isEmpty()) { return; }
-        set().clear();
-        list().clear();
+        synchronized (lock) {
+            if (set().isEmpty()) {
+                return;
+            }
+            set().clear();
+            list().clear();
+        }
     }
 
     /**
@@ -444,7 +470,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public T get(final int index) {
-        return list().get(index);
+        synchronized (lock) {
+            return list().get(index);
+        }
     }
 
     /**
@@ -454,7 +482,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public T set(final int index, final T element) { //assume this isn't called except when changing list order, so don't worry about updating set
-        return list().set(index, element);
+        synchronized (lock) {
+            return list().set(index, element);
+        }
     }
 
     /**
@@ -468,29 +498,29 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Helper method to insert an element at a particular index.
      *
-     * @param index
-     *            the index to insert the element at.
-     * @param element
-     *            the element to insert.
+     * @param index   the index to insert the element at.
+     * @param element the element to insert.
      * @return whether this collection changed as a result of this method call.
      */
     private boolean insert(int index, final T element) {
-        if (set().add(element)) {
+        synchronized (lock) {
+            if (set().add(element)) {
+                list().add(index, element);
+                return true;
+            }
+            //re-position in list if needed
+            final int oldIndex = list().indexOf(element);
+            if (index == oldIndex) {
+                return false;
+            }
+
+            if (index > oldIndex) {
+                index--; //account for being removed
+            }
+            list().remove(oldIndex);
             list().add(index, element);
             return true;
         }
-        //re-position in list if needed
-        final int oldIndex = list().indexOf(element);
-        if (index == oldIndex) {
-            return false;
-        }
-
-        if (index > oldIndex) {
-            index--; //account for being removed
-        }
-        list().remove(oldIndex);
-        list().add(index, element);
-        return true;
     }
 
     /**
@@ -498,11 +528,13 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public T remove(final int index) {
-        final T removedItem = list().remove(index);
-        if (removedItem != null) {
-            set().remove(removedItem);
+        synchronized (lock) {
+            final T removedItem = list().remove(index);
+            if (removedItem != null) {
+                set().remove(removedItem);
+            }
+            return removedItem;
         }
-        return removedItem;
     }
 
     /**
@@ -510,7 +542,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public int indexOf(final Object o) {
-        return list().indexOf(o);
+        synchronized (lock) {
+            return list().indexOf(o);
+        }
     }
 
     /**
@@ -518,7 +552,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public int lastIndexOf(final Object o) {
-        return list().lastIndexOf(o);
+        synchronized (lock) {
+            return list().lastIndexOf(o);
+        }
     }
 
     /**
@@ -526,7 +562,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public ListIterator<T> listIterator() {
-        return list().listIterator();
+        return new ListItr(0);
+        //return list().listIterator();
     }
 
     /**
@@ -534,7 +571,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public ListIterator<T> listIterator(final int index) {
-        return list().listIterator(index);
+        return new ListItr(index);
+        //return list().listIterator(index);
     }
 
     /**
@@ -542,12 +580,14 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * <b>Note</b> This method breaks the contract of {@link List#subList(int, int)}
      * by returning a static collection, rather than a view, of the sublist.
      * </p>
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override
     public List<T> subList(final int fromIndex, final int toIndex) {
-        return ImmutableList.copyOf(list().subList(fromIndex, toIndex));
+        synchronized (lock) {
+            return ImmutableList.copyOf(list().subList(fromIndex, toIndex));
+        }
     }
 
     /**
@@ -566,25 +606,30 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * {@inheritDoc}
      */
     public void sort(final Comparator<? super T> comparator) {
-        try {
-            list().sort(comparator);
-        } catch (Exception e) {
-            System.err.println("FCollection failed to sort: \n" + comparator + "\n" + e.getMessage());
+        synchronized (lock) {
+            try {
+                list().sort(comparator);
+            } catch (Exception e) {
+                System.err.println("FCollection failed to sort: \n" + comparator + "\n" + e.getMessage());
+            }
         }
     }
 
     @Override
     public T get(final T obj) {
-        if (obj == null) {
-            return null;
-        }
-        for(T x : this) {
-            if (x.equals(obj)) {
-                return x;
+        synchronized (lock) {
+            if (obj == null) {
+                return null;
             }
+            for (T x : this) {
+                if (x.equals(obj)) {
+                    return x;
+                }
+            }
+            return obj;
         }
-        return obj;
     }
+
     /**
      * An unmodifiable, empty {@link FCollection}. Overrides all methods with
      * default implementations suitable for an empty collection, to improve
@@ -592,93 +637,155 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     public static class EmptyFCollection<T> extends FCollection<T> {
         private static final long serialVersionUID = 8667965158891635997L;
+
         public EmptyFCollection() {
             super();
         }
-        @Override public final void add(final int index, final T element) {
+
+        @Override
+        public final void add(final int index, final T element) {
         }
-        @Override public final boolean add(final T e) {
+
+        @Override
+        public final boolean add(final T e) {
             return false;
         }
-        @Override public final boolean addAll(final Collection<? extends T> c) {
+
+        @Override
+        public final boolean addAll(final Collection<? extends T> c) {
             return false;
         }
-        @Override public final boolean addAll(final int index, final Collection<? extends T> c) {
+
+        @Override
+        public final boolean addAll(final int index, final Collection<? extends T> c) {
             return false;
         }
-        @Override public final boolean addAll(final Iterable<? extends T> i) {
+
+        @Override
+        public final boolean addAll(final Iterable<? extends T> i) {
             return false;
         }
-        @Override public final boolean addAll(final T[] c) {
+
+        @Override
+        public final boolean addAll(final T[] c) {
             return false;
         }
-        @Override public final void clear() {
+
+        @Override
+        public final void clear() {
         }
-        @Override public final boolean contains(final Object o) {
+
+        @Override
+        public final boolean contains(final Object o) {
             return false;
         }
-        @Override public final boolean containsAll(final Collection<?> c) {
+
+        @Override
+        public final boolean containsAll(final Collection<?> c) {
             return c.isEmpty();
         }
-        @Override public final T get(final int index) {
+
+        @Override
+        public final T get(final int index) {
             throw new IndexOutOfBoundsException("Any index is out of bounds for an empty collection");
         }
-        @Override public final T getFirst() {
+
+        @Override
+        public final T getFirst() {
             throw new NoSuchElementException("Collection is empty");
         }
-        @Override public final T getLast() {
+
+        @Override
+        public final T getLast() {
             throw new NoSuchElementException("Collection is empty");
         }
-        @Override public final int indexOf(final Object o) {
+
+        @Override
+        public final int indexOf(final Object o) {
             return -1;
         }
-        @Override public final boolean isEmpty() {
+
+        @Override
+        public final boolean isEmpty() {
             return true;
         }
-        @Override public final Iterator<T> iterator() {
+
+        @Override
+        public final Iterator<T> iterator() {
             return Collections.emptyIterator();
         }
-        @Override public final int lastIndexOf(final Object o) {
+
+        @Override
+        public final int lastIndexOf(final Object o) {
             return -1;
         }
-        @Override public final ListIterator<T> listIterator() {
+
+        @Override
+        public final ListIterator<T> listIterator() {
             return Collections.emptyListIterator();
         }
-        @Override public final ListIterator<T> listIterator(final int index) {
+
+        @Override
+        public final ListIterator<T> listIterator(final int index) {
             return Collections.emptyListIterator();
         }
-        @Override public final T remove(final int index) {
+
+        @Override
+        public final T remove(final int index) {
             throw new IndexOutOfBoundsException("Any index is out of bounds for an empty collection");
         }
-        @Override public final boolean remove(final Object o) {
+
+        @Override
+        public final boolean remove(final Object o) {
             return false;
         }
-        @Override public boolean removeAll(final Collection<?> c) {
+
+        @Override
+        public boolean removeAll(final Collection<?> c) {
             return false;
         }
-        @Override public final boolean removeAll(final Iterable<?> c) {
+
+        @Override
+        public final boolean removeAll(final Iterable<?> c) {
             return false;
         }
-        @Override public final boolean retainAll(final Collection<?> c) {
+
+        @Override
+        public final boolean retainAll(final Collection<?> c) {
             return false;
         }
-        @Override public final T set(final int index, final T element) {
+
+        @Override
+        public final T set(final int index, final T element) {
             throw new IndexOutOfBoundsException("Any index is out of bounds for an empty collection");
         }
-        @Override public final int size() {
+
+        @Override
+        public final int size() {
             return 0;
         }
-        @Override public final void sort() {
+
+        @Override
+        public final void sort() {
         }
-        @Override public final void sort(final Comparator<? super T> comparator) {
+
+        @Override
+        public final void sort(final Comparator<? super T> comparator) {
         }
-        @Override public final List<T> subList(final int fromIndex, final int toIndex) {
+
+        @Override
+        public final List<T> subList(final int fromIndex, final int toIndex) {
             if (fromIndex == 0 && toIndex == 0) {
                 return this;
             }
             throw new IndexOutOfBoundsException("Any index is out of bounds for an empty collection");
         }
-        @Override public final Object[] toArray() { return ArrayUtils.EMPTY_OBJECT_ARRAY; }
+
+        @Override
+        public final Object[] toArray() {
+            return ArrayUtils.EMPTY_OBJECT_ARRAY;
+        }
+
         @Override
         @SuppressWarnings("hiding")
         public final <T> T[] toArray(final T[] a) {
@@ -687,8 +794,101 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
             }
             return a;
         }
-        @Override public final String toString() {
+
+        @Override
+        public final String toString() {
             return "[]";
+        }
+    }
+
+    private class Itr implements Iterator<T> {
+        protected int cursor;
+        protected int lastRet;
+        final FCollection l;
+
+        public Itr() {
+            cursor = 0;
+            lastRet = -1;
+            l = FCollection.this.clone();
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return cursor < l.size();
+        }
+
+        @Override
+        public T next() {
+            int i = cursor;
+            if (i >= l.size()) {
+                throw new NoSuchElementException();
+            }
+            cursor = i + 1;
+            return (T) l.get(lastRet = i);
+        }
+
+        @Override
+        public void remove() {
+            if (lastRet < 0) {
+                throw new IllegalStateException();
+            }
+
+            l.remove(lastRet);
+            FCollection.this.remove(lastRet);
+            cursor = lastRet;
+            lastRet = -1;
+        }
+    }
+
+    public class ListItr extends Itr implements ListIterator<T> {
+        ListItr(int index) {
+            super();
+            cursor = index;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return cursor > 0;
+        }
+
+        @Override
+        public int nextIndex() {
+            return cursor;
+        }
+
+        @Override
+        public int previousIndex() {
+            return cursor - 1;
+        }
+
+        @Override
+        public T previous() {
+            int i = cursor - 1;
+            if (i < 0) {
+                throw new NoSuchElementException();
+            }
+            cursor = i;
+            return (T) l.get(lastRet = i);
+        }
+
+        @Override
+        public void set(T e) {
+            if (lastRet < 0) {
+                throw new IllegalStateException();
+            }
+
+            l.set(lastRet, e);
+            FCollection.this.set(lastRet, e);
+        }
+
+        @Override
+        public void add(T e) {
+            int i = cursor;
+            l.add(i, e);
+            FCollection.this.add(i, e);
+            cursor = i + 1;
+            lastRet = -1;
         }
     }
 }

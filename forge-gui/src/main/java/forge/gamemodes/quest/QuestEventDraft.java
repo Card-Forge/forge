@@ -46,7 +46,6 @@ import forge.item.PaperCard;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.NameGenerator;
 import forge.util.TextUtil;
@@ -857,7 +856,7 @@ public class QuestEventDraft implements IQuestEvent {
             return null;
         }
 
-        CollectionUtil.shuffle(possibleFormats);
+        Collections.shuffle(possibleFormats);
         return getDraftOrNull(quest, possibleFormats.get(0));
 
     }
@@ -886,7 +885,7 @@ public class QuestEventDraft implements IQuestEvent {
                 System.err.println("Warning: no valid set combinations were detected when trying to generate a draft tournament for the format: " + format);
                 return null;
             }
-            CollectionUtil.shuffle(possibleSetCombinations);
+            Collections.shuffle(possibleSetCombinations);
             event.boosterConfiguration = possibleSetCombinations.get(0);
         }
 
@@ -903,7 +902,7 @@ public class QuestEventDraft implements IQuestEvent {
         players.add("6");
         players.add("7");
 
-        CollectionUtil.shuffle(players);
+        Collections.shuffle(players);
 
         // Initialize tournament
         for (int i = 0; i < players.size(); i++) {
