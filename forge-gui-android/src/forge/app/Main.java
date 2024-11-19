@@ -279,8 +279,8 @@ public class Main extends AndroidApplication {
         row2.addView(button);
         row2.setGravity(Gravity.CENTER);
 
-        TL.addView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-        TL.addView(row2, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        TL.addView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        TL.addView(row2, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         TL.setGravity(Gravity.CENTER);
         TL.setOnClickListener(v -> adapter.restart());
         crossfade(TL, previousView);
@@ -377,9 +377,9 @@ public class Main extends AndroidApplication {
                             buttonRow.addView(button);
                             buttonRow.setGravity(Gravity.CENTER);
 
-                            TL.addView(messageRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                            TL.addView(checkboxRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                            TL.addView(buttonRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                            TL.addView(messageRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                            TL.addView(checkboxRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                            TL.addView(buttonRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                             TL.setGravity(Gravity.CENTER);
                             crossfade(TL, forgeLogo);
                         }
