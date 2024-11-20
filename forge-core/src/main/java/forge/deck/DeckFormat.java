@@ -106,7 +106,7 @@ public enum DeckFormat {
         }
     },
     DuelCommander      ( Range.is(99),                         Range.is(0), 1, null,
-            card -> StaticData.instance().getCommanderPredicate().apply(card)
+            card -> StaticData.instance().getDuelCommanderPredicate().apply(card)
     ) {
         private final Set<String> bannedCommanders = ImmutableSet.of(
                 "Ajani, Nacatl Pariah",
