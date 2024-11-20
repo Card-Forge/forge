@@ -615,7 +615,13 @@ public class VPlayerPanel extends FContainer {
         private final VDisplayArea displayArea;
 
         private InfoTab(FSkinImageInterface icon0, VDisplayArea displayArea0) {
-            icon = icon0;
+            // missing or invalid player infotab icon probably old theme or custom theme.
+            if (icon0 == null) {
+                System.err.println("Missing/Invalid VPlayerPanel icon for: " + displayArea0 + " , defaulting to blank icon. Check your theme/skin layout.");
+                icon = FSkinImage.BLANK;
+            } else {
+                icon = icon0;
+            }
             displayArea = displayArea0;
         }
 
