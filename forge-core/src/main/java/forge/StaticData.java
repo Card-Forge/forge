@@ -43,7 +43,10 @@ public class StaticData {
     private Predicate<PaperCard> modernPredicate;
     private Predicate<PaperCard> commanderPredicate;
     private Predicate<PaperCard> oathbreakerPredicate;
+    private Predicate<PaperCard> tinyLeadersPredicate;
+    private Predicate<PaperCard> tinyLeadersAllowedAsCommanderPredicate;
     private Predicate<PaperCard> duelCommanderPredicate;
+    private Predicate<PaperCard> duelCommanderAllowedAsCommanderPredicate;
 
     private boolean filteredHandsEnabled = false;
 
@@ -430,7 +433,13 @@ public class StaticData {
 
     public void setBrawlPredicate(Predicate<PaperCard> brawlPredicate) { this.brawlPredicate = brawlPredicate; }
 
+    public void setTinyLeadersPredicate(Predicate<PaperCard> tinyLeadersPredicate) { this.tinyLeadersPredicate = tinyLeadersPredicate; }
+
+    public void setTinyLeadersAllowedAsCommanderPredicate(Predicate<PaperCard> tinyLeadersAllowedAsCommanderPredicate) { this.tinyLeadersAllowedAsCommanderPredicate = tinyLeadersAllowedAsCommanderPredicate; }
+
     public void setDuelCommanderPredicate(Predicate<PaperCard> duelCommanderPredicate) { this.duelCommanderPredicate = duelCommanderPredicate; }
+
+    public void setDuelCommanderAllowedAsCommanderPredicate(Predicate<PaperCard> duelCommanderAllowedAsCommanderPredicate) { this.duelCommanderAllowedAsCommanderPredicate = duelCommanderAllowedAsCommanderPredicate; }
 
     public Predicate<PaperCard> getStandardPredicate() { return standardPredicate; }
 
@@ -444,7 +453,13 @@ public class StaticData {
 
     public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
 
+    public Predicate<PaperCard> getTinyLeadersPredicate() { return tinyLeadersPredicate; }
+
     public Predicate<PaperCard> getDuelCommanderPredicate() { return duelCommanderPredicate; }
+
+    public Predicate<PaperCard> getDuelCommanderAllowedAsCommanderPredicate() { return duelCommanderAllowedAsCommanderPredicate; }
+
+    public Predicate<PaperCard> getTinyLeadersAllowedAsCommanderPredicate() { return tinyLeadersAllowedAsCommanderPredicate; }
 
     /**
      * Get an alternative card print for the given card wrt. the input setReleaseDate.

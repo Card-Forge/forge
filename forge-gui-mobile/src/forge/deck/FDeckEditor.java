@@ -10,10 +10,12 @@ import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
+import forge.StaticData;
 import forge.assets.*;
 import forge.card.CardEdition;
 import forge.card.MagicColor;
 import forge.deck.io.DeckPreferences;
+import forge.game.GameFormat;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.planarconquest.ConquestUtil;
 import forge.gui.GuiBase;
@@ -1266,8 +1268,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     return card.getRules().canBeOathbreaker();
                 case PlanarConquest:
                     return false; //don't set commander this way in Planar Conquest
+                case DuelCommander:
+                    return DeckFormat.DuelCommander.isLegalCommander(card);
                 default:
-                    return DeckFormat.Commander.isLegalCommander(card.getRules());
+                    return DeckFormat.Commander.isLegalCommander(card);
             }
         }
 

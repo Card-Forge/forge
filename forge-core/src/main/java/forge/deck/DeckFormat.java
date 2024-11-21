@@ -37,6 +37,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -60,43 +61,19 @@ public enum DeckFormat {
         }
     },
     Commander      ( Range.is(99),                         Range.between(0, 10), 1, null,
-            card -> StaticData.instance().getCommanderPredicate().apply(card)
+            card -> StaticData.instance().getCommanderPredicate().apply(card), null
     ),
     Oathbreaker      ( Range.is(58),                         Range.between(0, 10), 1, null,
-            card -> StaticData.instance().getOathbreakerPredicate().apply(card)
+            card -> StaticData.instance().getOathbreakerPredicate().apply(card), null
     ),
     Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
     Brawl      ( Range.is(59), Range.between(0, 15), 1, null,
-            card -> StaticData.instance().getBrawlPredicate().apply(card)
+            card -> StaticData.instance().getBrawlPredicate().apply(card), null
     ),
-    TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
-        private final Set<String> bannedCards = ImmutableSet.of(
-                "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
-                "Fastbond", "Flash", "Goblin Recruiter", "Grindstone", "Hermit Druid", "Imperial Seal", "Jeweled Bird", "Karakas", "Library of Alexandria", "Mana Crypt", "Mana Drain", "Mana Vault", "Metalworker", "Mind Twist", "Mishra's Workshop",
-                "Mox Emerald", "Mox Jet", "Mox Pearl", "Mox Ruby", "Mox Sapphire", "Najeela, the Blade Blossom", "Necropotence", "Shahrazad", "Skullclamp", "Sol Ring", "Strip Mine", "Survival of the Fittest", "Sword of Body and Mind", "Time Vault", "Time Walk", "Timetwister",
-                "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will");
-
-        @Override
-        public boolean apply(CardRules rules) {
-            // Check for split cards explicitly, as using rules.getManaCost().getCMC()
-            // will return the sum of the costs, which is not what we want.
-            if (rules.getMainPart().getManaCost().getCMC() > 3) {
-                return false; //only cards with CMC less than 3 are allowed
-            }
-            ICardFace otherPart = rules.getOtherPart();
-            if (otherPart != null && otherPart.getManaCost().getCMC() > 3) {
-                return false; //only cards with CMC less than 3 are allowed
-            }
-            return !bannedCards.contains(rules.getName());
-        }
-    }) {
-        private final Set<String> bannedCommanders = ImmutableSet.of("Derevi, Empyrial Tactician", "Erayo, Soratami Ascendant", "Rofellos, Llanowar Emissary");
-
-        @Override
-        public boolean isLegalCommander(CardRules rules) {
-            return super.isLegalCommander(rules) && !bannedCommanders.contains(rules.getName());
-        }
-
+    TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, null,
+            card -> StaticData.instance().getTinyLeadersPredicate().apply(card),
+            card -> StaticData.instance().getTinyLeadersAllowedAsCommanderPredicate().apply(card)
+    ) {
         @Override
         public void adjustCMCLevels(List<ImmutablePair<FilterCMC, Integer>> cmcLevels) {
             cmcLevels.clear();
@@ -105,49 +82,10 @@ public enum DeckFormat {
             cmcLevels.add(ImmutablePair.of(new FilterCMC(3, 3), 3));
         }
     },
-    DuelCommander      ( Range.is(99),                         Range.is(0), 1, null,
-            card -> StaticData.instance().getDuelCommanderPredicate().apply(card)
-    ) {
-        private final Set<String> bannedCommanders = ImmutableSet.of(
-                "Ajani, Nacatl Pariah",
-                "Akiri, Line-Slinger",
-                "Arahbo, Roar of the World",
-                "Asmoranomardicadaistinaculdacar",
-                "Baral, Chief of Compliance",
-                "Breya, Etherium Shaper",
-                "Derevi, Empyrial Tactician",
-                "Dihada, Binder of Wills",
-                "Edgar Markov",
-                "Edric, Spymaster of Trest",
-                "Emry, Lurker of the Loch",
-                "Eris, Roar of the Storm",
-                "Esior, Wardwing Familiar",
-                "Geist of Saint Traft",
-                "Inalla, Archmage Ritualist",
-                "Krark, the Thumbless",
-                "Minsc & Boo, Timeless Heroes",
-                "Nadu, Winged Wisdom",
-                "Najeela, the Blade-Blossom",
-                "Old Stickfingers",
-                "Oloro, Ageless Ascetic",
-                "Omnath, Locus of Creation",
-                "Prime Speaker Vannifar",
-                "Raffine, Scheming Seer",
-                "Rofellos, Llanowar Emissary",
-                "Shorikai, Genesis Engine",
-                "Tamiyo, Inquisitive Student",
-                "Tasigur, the Golden Fang",
-                "Urza, Lord High Artificer",
-                "Vial Smasher the Fierce",
-                "Winota, Joiner of Forces",
-                "Yuriko, the Tiger's Shadow",
-                "Zurgo Bellstriker");
-
-        @Override
-        public boolean isLegalCommander(CardRules rules) {
-            return super.isLegalCommander(rules) && !bannedCommanders.contains(rules.getName());
-        }
-    },
+    DuelCommander      ( Range.is(99),                         Range.between(0, 10), 1, null,
+            card -> StaticData.instance().getDuelCommanderPredicate().apply(card),
+            card -> StaticData.instance().getDuelCommanderAllowedAsCommanderPredicate().apply(card)
+    ),
     PlanarConquest ( Range.between(40, Integer.MAX_VALUE), Range.is(0), 1),
     Adventure      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
@@ -160,31 +98,35 @@ public enum DeckFormat {
     private final int maxCardCopies;
     private final Predicate<CardRules> cardPoolFilter;
     private final Predicate<PaperCard> paperCardPoolFilter;
+    private final Predicate<PaperCard> paperCardCommanderFilter;
     private final static String ADVPROCLAMATION = "Advantageous Proclamation";
     // private final static String SOVREALM = "Sovereign's Realm";
 
-    DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0, Predicate<PaperCard> paperCardPoolFilter0) {
+    DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0, Predicate<PaperCard> paperCardPoolFilter0, Predicate<PaperCard> paperCardCommanderFilter0) {
         mainRange = mainRange0;
         sideRange = sideRange0;
         maxCardCopies = maxCardCopies0;
         cardPoolFilter = cardPoolFilter0;
         paperCardPoolFilter = paperCardPoolFilter0;
+        paperCardCommanderFilter = paperCardCommanderFilter0;
     }
 
     DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0) {
         mainRange = mainRange0;
         sideRange = sideRange0;
         maxCardCopies = maxCardCopies0;
-        paperCardPoolFilter = null;
         cardPoolFilter = cardPoolFilter0;
+        paperCardPoolFilter = null;
+        paperCardCommanderFilter = null;
     }
 
     DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0) {
         mainRange = mainRange0;
         sideRange = sideRange0;
         maxCardCopies = maxCardCopies0;
-        paperCardPoolFilter = null;
         cardPoolFilter = null;
+        paperCardPoolFilter = null;
+        paperCardCommanderFilter = null;
     }
 
     public boolean hasCommander() {
@@ -284,7 +226,7 @@ public enum DeckFormat {
                 }
 
                 for (PaperCard pc : commanders) {
-                    if (!isLegalCommander(pc.getRules())) {
+                    if (!isLegalCommander(pc)) {
                         return "has an illegal commander";
                     }
                     cmdCI |= pc.getRules().getColorIdentity().getColor();
@@ -518,10 +460,16 @@ public enum DeckFormat {
         return cardPoolFilter.apply(pc.getRules());
     }
 
-    public boolean isLegalCommander(CardRules rules) {
+    public boolean isLegalCommander(PaperCard card) {
+        CardRules rules = card.getRules();
+
         if (cardPoolFilter != null && !cardPoolFilter.apply(rules)) {
             return false;
         }
+        if (paperCardCommanderFilter != null && !paperCardCommanderFilter.apply(card)) {
+            return false;
+        }
+
         if (this.equals(DeckFormat.Oathbreaker)) {
             return rules.canBeOathbreaker();
         }
@@ -560,6 +508,17 @@ public enum DeckFormat {
                     }
                 }
             }
+
+            for (final PaperCard commander : deck.getCommanders()) {
+                if (!isLegalCommander(commander)) {
+                    System.err.println(
+                            "Excluding deck: '" + deck.toString() +
+                                    "' Reason: '" + commander.getName() + "' is not a legal commander."
+                    );
+                    return false;
+                }
+            }
+
             return true;
         };
     }
@@ -569,7 +528,7 @@ public enum DeckFormat {
     }
 
     public Predicate<PaperCard> isLegalCommanderPredicate() {
-        return card -> isLegalCommander(card.getRules());
+        return this::isLegalCommander;
     }
 
     public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders) {

@@ -213,7 +213,10 @@ public final class FModel {
         magicDb.setCommanderPredicate(formats.get("Commander").getFilterRules());
         magicDb.setOathbreakerPredicate(formats.get("Oathbreaker").getFilterRules());
         magicDb.setBrawlPredicate(formats.get("Brawl").getFilterRules());
+        magicDb.setTinyLeadersPredicate(formats.get("Tiny Leaders").getFilterRules());
+        magicDb.setTinyLeadersAllowedAsCommanderPredicate(formats.get("Tiny Leaders").getFilterAllowedAsCommander());
         magicDb.setDuelCommanderPredicate(formats.get("Duel Commander").getFilterRules());
+        magicDb.setDuelCommanderAllowedAsCommanderPredicate(formats.get("Duel Commander").getFilterAllowedAsCommander());
 
         magicDb.setFilteredHandsEnabled(preferences.getPrefBoolean(FPref.FILTERED_HANDS));
         try {
