@@ -442,6 +442,9 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
 
         public void clear() {
+            for (Map.Entry<K, Collection<V>> entry : storage().entrySet()) {
+                entry.getValue().clear();
+            }
             storage().clear();
         }
 

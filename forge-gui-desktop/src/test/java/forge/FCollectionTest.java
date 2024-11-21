@@ -36,7 +36,7 @@ public class FCollectionTest {
         int i = 0;
         for (Card c : cc) {
             if (i != 3)
-                cc.remove(c);
+                cc.remove(c);  // throws error if the CardCollection not threadsafe
             i++;
         }
         assertEquals(cc.size(), 1);

@@ -19,6 +19,26 @@ public class ManaPoolTest extends SimulationTest {
      * Just a quick test for ManaPool.
      */
     @Test
+    void testManaPoolBadLogic() {
+        Game game = initAndCreateGame();
+        Player p0 = game.getPlayers().get(0);
+        Player p1 = game.getPlayers().get(1);
+        Mana w = new Mana(MagicColor.WHITE, new Card(1, game), null);
+        Mana b = new Mana(MagicColor.BLACK, new Card(1, game), null);
+        p0.getManaPool().addMana(w, false);
+        p0.getManaPool().addMana(w, false);
+        p0.getManaPool().addMana(w, false);
+        p1.getManaPool().addMana(b, false);
+        p1.getManaPool().addMana(b, false);
+        p1.getManaPool().resetPool(); // empty manapool, should clear all values
+        for (Mana m : p0.getManaPool()) {
+            p1.getManaPool().addMana(m, false);
+            p0.getManaPool().removeMana(m, false); // throws error if ManaPool is not threadsafe
+        }
+        assertEquals(p0.getManaPool().getAmountOfColor(MagicColor.WHITE), 0);
+        assertEquals(p1.getManaPool().getAmountOfColor(MagicColor.WHITE), 3);
+    }
+    @Test
     void testCompletableFuture() {
         Game game = initAndCreateGame();
         Player p0 = game.getPlayers().get(0);
