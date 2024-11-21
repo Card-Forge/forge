@@ -119,9 +119,16 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             safeMana += getAmountOfColor(c);
         }
 
-        // TODO isPersistentMana
+        boolean hasPersistentMana = false;
+        for (Mana m : floatingMana().values()) {
+            AbilityManaPart mp = m.getManaAbility();
+            if (mp != null && mp.isPersistentMana()) {
+                hasPersistentMana = true;
+                break;
+            }
+        }
 
-        return totalMana() != safeMana; //won't lose floating mana if all mana is of colors that aren't going to be emptied
+        return hasPersistentMana || totalMana() != safeMana; //won't lose floating mana if all mana is of colors that aren't going to be emptied
     }
 
     public final boolean hasBurn() {
