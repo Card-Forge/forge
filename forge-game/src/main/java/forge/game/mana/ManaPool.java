@@ -22,9 +22,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 
+import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.Lists;
-
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.Queues;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
@@ -39,7 +44,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityUnspentMana;
-import forge.util.collect.ConcurrentMultiMap;
 
 /**
  * <p>
@@ -51,14 +55,14 @@ import forge.util.collect.ConcurrentMultiMap;
  */
 public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
-    private ConcurrentMultiMap<Byte, Mana> _floatingMana;
-    private ConcurrentMultiMap<Byte, Mana> floatingMana() {
-        ConcurrentMultiMap<Byte, Mana> result = _floatingMana;
+    private ManaMultiMap<Byte, Mana> _floatingMana;
+    private ManaMultiMap<Byte, Mana> floatingMana() {
+        ManaMultiMap<Byte, Mana> result = _floatingMana;
         if (result == null) {
             synchronized (this) {
                 result = _floatingMana;
                 if (result == null) {
-                    result = new ConcurrentMultiMap<>();
+                    result = new ManaMultiMap<>();
                     _floatingMana = result;
                 }
             }
@@ -375,4 +379,96 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return floatingMana().values().iterator();
     }
 
+    private static class ManaMultiMap<K, V> {
+        private Map<K, Collection<V>> _storage;
+        private Map<K, Collection<V>> storage() {
+            Map<K, Collection<V>> result = _storage;
+            if (result == null) {
+                synchronized (this) {
+                    result = _storage;
+                    if (result == null) {
+                        result = Maps.newConcurrentMap();
+                        _storage = result;
+                    }
+                }
+            }
+            return _storage;
+        }
+
+        public int size() {
+            return storage().size();
+        }
+
+
+        public boolean isEmpty() {
+            return storage().isEmpty();
+        }
+
+        @SuppressWarnings("SuspiciousMethodCalls")
+        public boolean containsKey(Object key) {
+            if (key == null)
+                return false;
+            return storage().containsKey(key);
+        }
+
+        public boolean put(K key, V value) {
+            return safeGet(key).add(value);
+        }
+
+        @SuppressWarnings("SuspiciousMethodCalls")
+        public boolean remove(Object key, Object value) {
+            if (key == null || value == null)
+                return false;
+            return storage().get(key).remove(value);
+        }
+
+        public boolean putAll(K key, Iterable<? extends V> iterable) {
+            Collection<V> values = safeGet(key);
+            for (V v : iterable) {
+                if(!values.add(v)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public boolean putAll(Map<? extends K, ? extends V> map) {
+            for (Map.Entry<? extends K, ? extends V> entry : map.entrySet()) {
+                if(!safeGet(entry.getKey()).add(entry.getValue())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void clear() {
+            storage().clear();
+        }
+
+        public Collection<V> safeGet(K key) {
+            return storage().computeIfAbsent(key, value -> Queues.newConcurrentLinkedQueue());
+        }
+
+        public Collection<V> get(K key) {
+            return storage().get(key);
+        }
+
+        public Set<K> keySet() {
+            return storage().keySet();
+        }
+
+        public Multiset<K> keys() {
+            Multiset<K> multiset = ConcurrentHashMultiset.create();
+            multiset.addAll(storage().keySet());
+            return multiset;
+        }
+
+        public Collection<V> values() {
+            Queue<V> values = Queues.newConcurrentLinkedQueue();
+            for (Map.Entry<K, Collection<V>> entry : storage().entrySet()) {
+                values.addAll(entry.getValue());
+            }
+            return values;
+        }
+    }
 }
