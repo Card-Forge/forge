@@ -19,14 +19,12 @@ package forge.deck;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.card.ColorSet;
-import forge.card.ICardFace;
 import forge.deck.generation.DeckGenPool;
 import forge.deck.generation.DeckGeneratorBase.FilterCMC;
 import forge.deck.generation.IDeckGenPool;
@@ -37,7 +35,6 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
