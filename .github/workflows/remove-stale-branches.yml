@@ -1,4 +1,7 @@
+name: Remove stale branches
+
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 0 * * *" # Everday at midnight
 
@@ -9,4 +12,6 @@ jobs:
     steps:
       - uses: fpicalausa/remove-stale-branches@v1.6.0
         with:
-          dry-run: true # Check out the console output before setting this to false
+          dry-run: false # Check out the console output before setting this to false
+          ignore-unknown-authors: true
+          default-recipient: tehdiplomat
