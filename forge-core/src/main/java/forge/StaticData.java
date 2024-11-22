@@ -834,6 +834,9 @@ public class StaticData {
                         }
                     }
                     return 0;
+                }).exceptionally(ex -> {
+                    ex.printStackTrace();
+                    return 0;
                 }));
             }
             CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
