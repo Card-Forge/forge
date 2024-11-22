@@ -384,7 +384,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     if (unpayableCost) {
                         continue;
                     }
-                    abCost = new Cost(source.getManaCost(), false);
+                    abCost = new Cost(tgtSA.getCardState().getManaCost(), false);
                 } else if (cost.equals("SuspendCost")) {
                     abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
                 } else {
@@ -428,7 +428,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.putParam("RaiseCost", raise);
             }
 
-            if (sa.hasParam("Madness")) {
+            if (sa.isKeyword(Keyword.MADNESS)) {
                 tgtSA.setAlternativeCost(AlternativeCost.Madness);
             }
 

@@ -84,7 +84,7 @@ public class TriggerExiled extends Trigger {
             return false;
         }
 
-        if (hasParam("Madness")) {
+        if (isKeyword(Keyword.MADNESS)) {
             if (cause == null || !cause.isKeyword(Keyword.MADNESS)) {
                 return false;
             }

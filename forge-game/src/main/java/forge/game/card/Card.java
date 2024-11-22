@@ -38,6 +38,7 @@ import forge.game.cost.Cost;
 import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.keyword.*;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.*;
@@ -2349,7 +2350,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
-                        final Cost mCost = new Cost(k[1], true);
+                        final Cost mCost;
+                        if ("ManaCost".equals(k[1])) {
+                            ManaCost cost;
+                            if (keyword.startsWith("Miracle") && k.length > 2) {
+                                // TODO better handle 2 hybrid, these should not be reduced?
+                                ManaCostBeingPaid mcbp = new ManaCostBeingPaid(getManaCost());
+                                mcbp.decreaseGenericMana(Integer.valueOf(k[2]));
+                                cost = mcbp.toManaCost();
+                            } else {
+                                cost = getManaCost();
+                            }
+                            mCost = new Cost(cost, true);
+                        } else {
+                            mCost = new Cost(k[1], true);
+                        }
                         if (mCost.isOnlyManaCost()) {
                             sbLong.append(" ");
                         } else {
@@ -2363,17 +2378,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                             if (!mCost.isOnlyManaCost()) {
                                 sbLong.append(".");
                             }
-                            if (k.length > 2) {
+                            if (k.length > 3) {
                                 sbLong.append(". " + k[3]);
                             }
                         }
                         sbLong.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append("\r\n");
                     }
-                } else if (keyword.startsWith("Madness")) {
-                    // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
-                    sbLong.append("Madness ").append(this.getManaCost()).append(" (").append(inst.getReminderText());
-                    sbLong.append(")").append("\r\n");
                 } else if (keyword.startsWith("Reflect")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
@@ -3181,15 +3192,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Disturb") || keyword.startsWith("Overload")
                         || keyword.startsWith("Plot")) {
                     final String[] k = keyword.split(":");
-                    final Cost cost = new Cost(k[1], false);
+                    final Cost mCost;
+                    if ("ManaCost".equals(k[1])) {
+                        mCost = new Cost(getManaCost(), false);
+                    } else {
+                        mCost = new Cost(k[1], false);
+                    }
 
                     StringBuilder sbCost = new StringBuilder(k[0]);
-                    if (!cost.isOnlyManaCost()) {
+                    if (!mCost.isOnlyManaCost()) {
                         sbCost.append("—");
                     } else {
                         sbCost.append(" ");
                     }
-                    sbCost.append(cost.toSimpleString());
+                    sbCost.append(mCost.toSimpleString());
                     sbAfter.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
                 } else if (keyword.equals("Gift")) {

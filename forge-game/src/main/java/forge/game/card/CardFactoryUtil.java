@@ -1460,12 +1460,17 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
-            final String trigStr = "Mode$ Exiled | ValidCard$ Card.Self | Madness$ True | Secondary$ True"
-                    + " | TriggerDescription$ Play Madness " + ManaCostParser.parse(manacost) + " - " + card.getName();
+            StringBuilder desc = new StringBuilder("Play Madness ");
+            if (!"ManaCost".equals(manacost)) {
+                desc.append(ManaCostParser.parse(manacost)).append(" ");
+            }
+            desc.append(" - " + card.getName());
+
+            final String trigStr = "Mode$ Exiled | ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ " + desc.toString();
 
             final String playMadnessStr = "DB$ Play | Defined$ Self | ValidSA$ Spell | PlayCost$ " + manacost +
                     " | ConditionDefined$ Self | ConditionPresent$ Card.StrictlySelf+inZoneExile" +
-                    " | Optional$ True | RememberPlayed$ True | Madness$ True";
+                    " | Optional$ True | RememberPlayed$ True";
 
             final String moveToYardStr = "DB$ ChangeZone | Defined$ Self.StrictlySelf | Origin$ Exile" +
                     " | Destination$ Graveyard | TrackDiscarded$ True | ConditionDefined$ Remembered | ConditionPresent$ Card" +
@@ -1518,7 +1523,10 @@ public class CardFactoryUtil {
             final String manacost = k[1];
             final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self"
                     + " | MiracleCost$ " + manacost;
-            final String abStrPlay = "DB$ Play | Defined$ Self | Optional$ True | PlayCost$ " + manacost;
+            String abStrPlay = "DB$ Play | Defined$ Self | Optional$ True | PlayCost$ " + manacost;
+            if (k.length >= 2) {
+                abStrPlay += " | PlayReduceCost$ " + k[2];
+            }
 
             String revealed = "DB$ ImmediateTrigger | TriggerDescription$ CARDNAME - Miracle";
 
