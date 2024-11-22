@@ -14,3 +14,4 @@ jobs:
         with:
           dry-run: true # Check out the console output before setting this to false
           ignore-unknown-authors: true
+          default-recipient: tehdiplomat
