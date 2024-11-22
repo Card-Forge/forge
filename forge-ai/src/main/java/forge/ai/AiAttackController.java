@@ -78,6 +78,7 @@ public class AiAttackController {
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
+    private final int timeOut;
 
     /**
      * <p>
@@ -95,6 +96,7 @@ public class AiAttackController {
         myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
         refreshCombatants(defendingOpponent);
+        this.timeOut = ai.getGame().getAITimeout();
     } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -108,6 +110,7 @@ public class AiAttackController {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
+        this.timeOut = ai.getGame().getAITimeout();
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
@@ -967,7 +970,7 @@ public class AiAttackController {
                 }));
             }
             CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-            CompletableFuture.allOf(futuresArray).completeOnTimeout(null, ai.getTimeout(), TimeUnit.SECONDS).join();
+            CompletableFuture.allOf(futuresArray).completeOnTimeout(null, timeOut, TimeUnit.SECONDS).join();
             futures.clear();
             if (attackersLeft.isEmpty()) {
                 return aiAggression;

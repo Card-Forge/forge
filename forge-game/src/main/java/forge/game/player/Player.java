@@ -131,8 +131,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private boolean revolt = false;
     private int descended = 0;
-    // AI Timeout
-    private int aiTimeout = 5;
 
     private List<Card> sacrificedThisTurn = new ArrayList<>();
     private List<Card> discardedThisTurn = new ArrayList<>();
@@ -211,7 +209,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         super(id0);
 
         game = game0;
-        aiTimeout = game.AI_TIMEOUT;
         for (final ZoneType z : Player.ALL_ZONES) {
             final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneBattlefield(z, this) : new PlayerZone(z, this);
             zones.put(z, toPut);
@@ -268,10 +265,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setTeam(int iTeam) {
         teamNumber = iTeam;
-    }
-
-    public final int getTimeout() {
-        return aiTimeout;
     }
 
     public boolean isArchenemy() {

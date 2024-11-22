@@ -1356,4 +1356,7 @@ public class Game {
         if (!isNeitherDayNorNight())
             fireEvent(new GameEventDayTimeChanged(isDay()));
     }
+    public int getAITimeout() {
+        return AI_TIMEOUT;
+    }
 }

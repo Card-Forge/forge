@@ -1684,7 +1684,7 @@ public class AiController {
 
         // instead of computing all available concurrently just add a simple timeout depending on the user prefs
         try {
-            return future.completeOnTimeout(null, player.getTimeout(), TimeUnit.SECONDS).get();
+            return future.completeOnTimeout(null, game.getAITimeout(), TimeUnit.SECONDS).get();
         } catch (InterruptedException | ExecutionException e) {
             return null;
         }
