@@ -22,14 +22,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
 
-import com.google.common.collect.ConcurrentHashMultiset;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multiset;
-import com.google.common.collect.Queues;
+
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
@@ -55,20 +51,7 @@ import forge.game.staticability.StaticAbilityUnspentMana;
  */
 public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
-    private ManaMultiMap<Byte, Mana> _floatingMana;
-    private ManaMultiMap<Byte, Mana> floatingMana() {
-        ManaMultiMap<Byte, Mana> result = _floatingMana;
-        if (result == null) {
-            synchronized (this) {
-                result = _floatingMana;
-                if (result == null) {
-                    result = new ManaMultiMap<>();
-                    _floatingMana = result;
-                }
-            }
-        }
-        return _floatingMana;
-    }
+    private final ArrayListMultimap<Byte, Mana> floatingMana = ArrayListMultimap.create();
 
     public ManaPool(final Player player) {
         owner = player;
@@ -76,7 +59,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public final int getAmountOfColor(final byte color) {
-        Collection<Mana> ofColor = floatingMana().get(color);
+        Collection<Mana> ofColor = floatingMana.get(color);
         return ofColor == null ? 0 : ofColor.size();
     }
 
@@ -84,7 +67,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         addMana(mana, true);
     }
     public void addMana(final Mana mana, boolean updateView) {
-        floatingMana().put(mana.getColor(), mana);
+        floatingMana.put(mana.getColor(), mana);
         if (updateView) {
             owner.updateManaForView();
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Added, mana));
@@ -105,7 +88,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
      * </p>
      */
     public final boolean willManaBeLostAtEndOfPhase() {
-        if (floatingMana().isEmpty()) {
+        if (floatingMana.isEmpty()) {
             return false;
         }
 
@@ -119,16 +102,9 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             safeMana += getAmountOfColor(c);
         }
 
-        boolean hasPersistentMana = false;
-        for (Mana m : floatingMana().values()) {
-            AbilityManaPart mp = m.getManaAbility();
-            if (mp != null && mp.isPersistentMana()) {
-                hasPersistentMana = true;
-                break;
-            }
-        }
+        // TODO isPersistentMana
 
-        return hasPersistentMana || totalMana() != safeMana; //won't lose floating mana if all mana is of colors that aren't going to be emptied
+        return totalMana() != safeMana; //won't lose floating mana if all mana is of colors that aren't going to be emptied
     }
 
     public final boolean hasBurn() {
@@ -138,13 +114,13 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
     public final void resetPool() {
         // This should only be used to reset the pool to empty by things like restores.
-        floatingMana().clear();
+        floatingMana.clear();
     }
 
     public final List<Mana> clearPool(boolean isEndOfPhase) {
         // isEndOfPhase parameter: true = end of phase, false = mana drain effect
         List<Mana> cleared = Lists.newArrayList();
-        if (floatingMana().isEmpty()) { return cleared; }
+        if (floatingMana.isEmpty()) { return cleared; }
 
         Byte convertTo = null;
 
@@ -152,17 +128,17 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(owner);
         runParams.put(AbilityKey.Mana, "C");
         switch (owner.getGame().getReplacementHandler().run(ReplacementType.LoseMana, runParams)) {
-            case NotReplaced:
-                break;
-            case Skipped:
-                return cleared;
-            default:
-                convertTo = ManaAtom.fromName((String) runParams.get(AbilityKey.Mana));
-                break;
+        case NotReplaced:
+            break;
+        case Skipped:
+            return cleared;
+        default:
+            convertTo = ManaAtom.fromName((String) runParams.get(AbilityKey.Mana));
+            break;
 
         }
 
-        final List<Byte> keys = Lists.newArrayList(floatingMana().keySet());
+        final List<Byte> keys = Lists.newArrayList(floatingMana.keySet());
         if (isEndOfPhase) {
             keys.removeAll(StaticAbilityUnspentMana.getManaToKeep(owner));
         }
@@ -171,7 +147,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         }
 
         for (Byte b : keys) {
-            Collection<Mana> cm = floatingMana().get(b);
+            Collection<Mana> cm = floatingMana.get(b);
             final List<Mana> pMana = Lists.newArrayList();
             if (isEndOfPhase && !owner.getGame().getPhaseHandler().is(PhaseType.CLEANUP)) {
                 for (final Mana mana : cm) {
@@ -187,7 +163,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             } else {
                 cleared.addAll(cm);
                 cm.clear();
-                floatingMana().putAll(b, pMana);
+                floatingMana.putAll(b, pMana);
             }
         }
 
@@ -198,12 +174,12 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
     private void convertManaColor(final byte originalColor, final byte toColor) {
         List<Mana> convert = Lists.newArrayList();
-        Collection<Mana> cm = floatingMana().get(originalColor);
+        Collection<Mana> cm = floatingMana.get(originalColor);
         for (Mana m : cm) {
             convert.add(new Mana(toColor, m.getSourceCard(), m.getManaAbility()));
         }
         cm.clear();
-        floatingMana().putAll(toColor, convert);
+        floatingMana.putAll(toColor, convert);
         owner.updateManaForView();
     }
 
@@ -211,7 +187,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return removeMana(mana, true);
     }
     public boolean removeMana(final Mana mana, boolean updateView) {
-        boolean result = floatingMana().remove(mana.getColor(), mana);
+        boolean result = floatingMana.remove(mana.getColor(), mana);
         if (result && updateView) {
             owner.updateManaForView();
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
@@ -240,10 +216,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
     public boolean tryPayCostWithColor(byte colorCode, SpellAbility saPaidFor, ManaCostBeingPaid manaCost, List<Mana> manaSpentToPay) {
         Mana manaFound = null;
-        Collection<Mana> cm = floatingMana().get(colorCode);
+        Collection<Mana> cm = floatingMana.get(colorCode);
 
-        if (cm == null)
-            return false;
         for (final Mana mana : cm) {
             if (mana.getManaAbility() != null && !mana.getManaAbility().meetsManaRestrictions(saPaidFor)) {
                 continue;
@@ -279,11 +253,11 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public final boolean isEmpty() {
-        return floatingMana().isEmpty();
+        return floatingMana.isEmpty();
     }
 
     public final int totalMana() {
-        return floatingMana().values().size();
+        return floatingMana.values().size();
     }
 
     //Account for mana part of ability when undoing it
@@ -291,7 +265,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         if (ma == null) {
             return false;
         }
-        if (floatingMana().isEmpty()) {
+        if (floatingMana.isEmpty()) {
             return false;
         }
 
@@ -300,7 +274,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         boolean manaNotAccountedFor = false;
         // loop over mana produced by mana ability
         for (Mana mana : ma.getLastManaProduced()) {
-            Collection<Mana> poolLane = floatingMana().get(mana.getColor());
+            Collection<Mana> poolLane = floatingMana.get(mana.getColor());
 
             if (poolLane != null && poolLane.contains(mana)) {
                 removeFloating.add(mana);
@@ -383,102 +357,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
     @Override
     public Iterator<Mana> iterator() {
-        return floatingMana().values().iterator();
+        return floatingMana.values().iterator();
     }
 
-    private static class ManaMultiMap<K, V> {
-        private Map<K, Collection<V>> _storage;
-        private Map<K, Collection<V>> storage() {
-            Map<K, Collection<V>> result = _storage;
-            if (result == null) {
-                synchronized (this) {
-                    result = _storage;
-                    if (result == null) {
-                        result = Maps.newConcurrentMap();
-                        _storage = result;
-                    }
-                }
-            }
-            return _storage;
-        }
-
-        public int size() {
-            return storage().size();
-        }
-
-
-        public boolean isEmpty() {
-            return storage().isEmpty();
-        }
-
-        @SuppressWarnings("SuspiciousMethodCalls")
-        public boolean containsKey(Object key) {
-            if (key == null)
-                return false;
-            return storage().containsKey(key);
-        }
-
-        public boolean put(K key, V value) {
-            return safeGet(key).add(value);
-        }
-
-        @SuppressWarnings("SuspiciousMethodCalls")
-        public boolean remove(Object key, Object value) {
-            if (key == null || value == null)
-                return false;
-            return storage().get(key).remove(value);
-        }
-
-        public boolean putAll(K key, Iterable<? extends V> iterable) {
-            Collection<V> values = safeGet(key);
-            for (V v : iterable) {
-                if(!values.add(v)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public boolean putAll(Map<? extends K, ? extends V> map) {
-            for (Map.Entry<? extends K, ? extends V> entry : map.entrySet()) {
-                if(!safeGet(entry.getKey()).add(entry.getValue())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public void clear() {
-            for (Map.Entry<K, Collection<V>> entry : storage().entrySet()) {
-                entry.getValue().clear();
-            }
-            storage().clear();
-        }
-
-        public Collection<V> safeGet(K key) {
-            return storage().computeIfAbsent(key, value -> Queues.newConcurrentLinkedQueue());
-        }
-
-        public Collection<V> get(K key) {
-            return storage().get(key);
-        }
-
-        public Set<K> keySet() {
-            return storage().keySet();
-        }
-
-        public Multiset<K> keys() {
-            Multiset<K> multiset = ConcurrentHashMultiset.create();
-            multiset.addAll(storage().keySet());
-            return multiset;
-        }
-
-        public Collection<V> values() {
-            Queue<V> values = Queues.newConcurrentLinkedQueue();
-            for (Map.Entry<K, Collection<V>> entry : storage().entrySet()) {
-                values.addAll(entry.getValue());
-            }
-            return values;
-        }
-    }
 }

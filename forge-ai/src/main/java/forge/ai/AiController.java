@@ -71,7 +71,7 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -1604,15 +1604,22 @@ public class AiController {
         if (all == null || all.isEmpty())
             return null;
 
-        //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
-        boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
-        List<CompletableFuture<Integer>> futures = new ArrayList<>();
-        Queue<SpellAbility> spells = new ConcurrentLinkedQueue<>();
-        for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-            futures.add(CompletableFuture.supplyAsync(()-> {
+        try {
+            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
+            ComputerUtilAbility.sortCreatureSpells(all);
+        } catch (IllegalArgumentException ex) {
+            System.err.println(ex.getMessage());
+            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
+            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+        }
+
+        CompletableFuture<SpellAbility> future = CompletableFuture.supplyAsync(() -> {
+            //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
+            boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
+            for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
                 // Don't add Counterspells to the "normal" playcard lookups
                 if (skipCounter && sa.getApi() == ApiType.Counter) {
-                    return 0;
+                    continue;
                 }
 
                 if (sa.getHostCard().hasKeyword(Keyword.STORM)
@@ -1620,7 +1627,7 @@ public class AiController {
                         && player.getZone(ZoneType.Hand).contains(Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm"))))) {
                     if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
                         // skip evaluating Storm unless we reached the minimum Storm count
-                        return 0;
+                        continue;
                     }
                 }
                 // living end AI decks
@@ -1642,19 +1649,14 @@ public class AiController {
                             aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
                         } else if (CardLists.filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.Presets.CREATURES).size() > 4) {
                             if (player.getCreaturesInPlay().size() >= 4) // it's good minimum
-                                return 0;
+                                continue;
                             else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player) && ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
                                 aiPlayDecision = AiPlayDecision.WillPlay;// needs tuneup for bad matchups like reanimator and other things to check on opponent graveyard
                         } else {
-                            return 0;
+                            continue;
                         }
                     }
                 }
-
-                // dumb check needed? don't really know why the AI tapped the land for nothing at EOT of his opponent.
-                // without this, you can see the weird tapping of single land -> mana ability. with this, it doesn't confuse human player
-                if (sa.isManaAbility() && game.getPhaseHandler() != null && game.getPhaseHandler().is(PhaseType.END_OF_TURN) && !game.getPhaseHandler().isPlayerTurn(player))
-                    return 0;
 
                 sa.setActivatingPlayer(player, true);
                 SpellAbility root = sa.getRootAbility();
@@ -1672,32 +1674,20 @@ public class AiController {
                 // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
                 if (opinion != AiPlayDecision.WillPlay)
-                    return 0;
+                    continue;
 
-                spells.add(sa);
-                return 0;
-            }));
-        }
-        //timeout 5 seconds? even the AI don't acquire all, there should be SA to cast if valid
-        CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-        CompletableFuture.allOf(futuresArray).completeOnTimeout(null, player.getTimeout(), TimeUnit.SECONDS).join();
-        futures.clear();
-
-        if (!spells.isEmpty()) {
-            List<SpellAbility> spellAbilities = new ArrayList<>(spells);
-            if (spellAbilities.size() == 1)
-                return spellAbilities.get(0);
-            try {
-                spellAbilities.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-                ComputerUtilAbility.sortCreatureSpells(spellAbilities);
-            } catch (IllegalArgumentException ex) {
-                System.err.println(ex.getMessage());
-                String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, spellAbilities);
-                Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+                return sa;
             }
-            return spellAbilities.get(0);
+
+            return null;
+        });
+
+        // instead of computing all available concurrently just add a simple timeout depending on the user prefs
+        try {
+            return future.completeOnTimeout(null, player.getTimeout(), TimeUnit.SECONDS).get();
+        } catch (InterruptedException | ExecutionException e) {
+            return null;
         }
-        return null;
     }
 
     public CardCollection chooseCardsToDelve(int genericCost, CardCollection grave) {
