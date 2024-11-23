@@ -67,7 +67,7 @@ public class SeekEffect extends SpellAbilityEffect {
                     pool = CardLists.getValidCards(pool, seekType, source.getController(), source, sa);
                 }
                 if (pool.isEmpty()) {
-                    if (notify.length() != 0) notify.append("\r\n");
+                    if (!notify.isEmpty()) notify.append("\r\n");
                     notify.append(Localizer.getInstance().getMessage("lblSeekFailed", seekType));
                     continue; // can't find if nothing to seek
                 }
@@ -88,7 +88,7 @@ public class SeekEffect extends SpellAbilityEffect {
 
                 }
             }
-            if (notify.length() != 0) {
+            if (!notify.isEmpty()) {
                 game.getAction().notifyOfValue(sa, source, notify.toString(), null);
             }
             if (!soughtCards.isEmpty()) {
@@ -98,7 +98,9 @@ public class SeekEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ImprintFound")) {
                     source.addImprintedCards(soughtCards);
                 }
-                game.getTriggerHandler().runTrigger(TriggerType.SeekAll, AbilityKey.mapFromPlayer(seeker), false);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(seeker);
+                runParams.put(AbilityKey.Cards, soughtCards);
+                game.getTriggerHandler().runTrigger(TriggerType.SeekAll, runParams, false);
             }
         }
         triggerList.triggerChangesZoneAll(game, sa);
