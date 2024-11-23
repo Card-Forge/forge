@@ -586,9 +586,6 @@ public class CostAdjustment {
                         return false;
                     }
                 }
-                case "TurnFaceUp" -> {
-                    if (!sa.isTurnFaceUp()) return false;
-                }
             }
 
         }
