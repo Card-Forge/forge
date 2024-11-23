@@ -777,7 +777,7 @@ public class StaticData {
                 continue;
 
             Map<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
-            List<CompletableFuture<Integer>> futures = new ArrayList<>();
+            List<CompletableFuture<?>> futures = new ArrayList<>();
             for (CardEdition.CardInSet c : e.getAllCardsInSet()) {
                 if (cardCount.containsKey(c.name)) {
                     cardCount.put(c.name, Pair.of(c.collectorNumber != null && c.collectorNumber.startsWith("F"), cardCount.get(c.name).getRight() + 1));
@@ -798,12 +798,12 @@ public class StaticData {
                     }
                     if (cp == null) {
                         if (isFunny) //skip funny cards
-                            return 0;
+                            return null;
                         if (!loadNonLegalCards && CardEdition.Type.FUNNY.equals(e.getType()))
-                            return 0;
+                            return null;
                         EDITION_Q.add(e.getCode() + "_" + e.getName());
                         CNI_Q.add(e.getCode() + "_" + c + "\n");
-                        return 0;
+                        return null;
                     }
                     // check the front image
                     String imagePath = ImageUtil.getImageRelativePath(cp, "", true, false);
@@ -813,7 +813,7 @@ public class StaticData {
                             file = ImageKeys.setLookUpFile(imagePath, imagePath +"border");
                         if (file == null) {
                             if (imagePath.isEmpty())
-                                return 0;
+                                return null;
                             EDITION_Q.add(e.getCode() + "_" + e.getName());
                             NIF_Q.add(e.getCode() + "_" + imagePath + "\n");
                         }
@@ -827,16 +827,16 @@ public class StaticData {
                                 file = ImageKeys.setLookUpFile(imagePath, imagePath +"border");
                             if (file == null) {
                                 if (imagePath.isEmpty())
-                                    return 0;
+                                    return null;
                                 EDITION_Q.add(e.getCode() + "_" + e.getName());
                                 NIF_Q.add(e.getCode() + "_" + imagePath + "\n");
                             }
                         }
                     }
-                    return 0;
+                    return null;
                 }).exceptionally(ex -> {
                     ex.printStackTrace();
-                    return 0;
+                    return null;
                 }));
             }
             CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);

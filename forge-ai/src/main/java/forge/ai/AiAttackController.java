@@ -79,6 +79,7 @@ public class AiAttackController {
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
     private final int timeOut;
+    private List<CompletableFuture<Integer>> futures = new ArrayList<>();
 
     /**
      * <p>
@@ -910,7 +911,6 @@ public class AiAttackController {
         final AtomicInteger numForcedAttackers = new AtomicInteger(0);
         // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
         // because creatures not chosen can't attack.
-        List<CompletableFuture<Integer>> futures = new ArrayList<>();
         if (!nextTurn) {
             for (final Card attacker : this.attackers) {
                 final GameEntity finalDefender = defender;

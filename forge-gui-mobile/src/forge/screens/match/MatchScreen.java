@@ -91,6 +91,11 @@ public class MatchScreen extends FScreen {
     private static List<FDisplayObject> potentialListener;
     private int selectedPlayer;
 
+
+    private final Map<Integer, Vector2> endpoints;
+    private final Set<CardView> cardsonBattlefield;
+    private final Set<PlayerView> playerViewSet;
+
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
 
@@ -164,6 +169,9 @@ public class MatchScreen extends FScreen {
             log.setMenuTab(new HiddenMenuTab(log));
             devMenu.setMenuTab(new HiddenMenuTab(devMenu));
         }
+        endpoints = new HashMap<>();
+        cardsonBattlefield  = new HashSet<>();
+        playerViewSet = new HashSet<>();
     }
 
     private boolean is4Player() {
@@ -459,9 +467,9 @@ public class MatchScreen extends FScreen {
 
     void drawArcs(Graphics g) {
         //get all card targeting arrow origins on the battlefield
-        final Map<Integer, Vector2> endpoints = new HashMap<>();
-        final Set<CardView> cardsonBattlefield = new HashSet<>();
-        final Set<PlayerView> playerViewSet = new HashSet<>();
+        endpoints.clear();
+        cardsonBattlefield.clear();
+        playerViewSet.clear();
         final GameView game = MatchController.instance.getGameView();
         try {
             for (PlayerView p : game.getPlayers()) {
