@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -88,7 +89,7 @@ public class TriggerExiled extends Trigger {
             if (cause == null || !cause.isKeyword(Keyword.MADNESS)) {
                 return false;
             }
-            if (getKeyword().getStatic() != null && !getKeyword().getStatic().equals(cause.getKeyword().getStatic())) {
+            if (!Objects.equals(getKeyword().getStatic(), cause.getKeyword().getStatic())) {
                 return false;
             }
         }
