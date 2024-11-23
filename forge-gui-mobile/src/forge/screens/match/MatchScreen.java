@@ -32,7 +32,6 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
 import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -466,11 +465,13 @@ public class MatchScreen extends FScreen {
     }
 
     void drawArcs(Graphics g) {
+        final GameView game = MatchController.instance.getGameView();
+        if (game == null)
+            return;
         //get all card targeting arrow origins on the battlefield
         endpoints.clear();
         cardsonBattlefield.clear();
         playerViewSet.clear();
-        final GameView game = MatchController.instance.getGameView();
         try {
             for (PlayerView p : game.getPlayers()) {
                 if (p == null)
@@ -496,13 +497,8 @@ public class MatchScreen extends FScreen {
             }
             if (endpoints.isEmpty())
                 return;
-            //draw arrows for combat
-            final CombatView combat = game.getCombat();
-            for (CardView c : cardsonBattlefield) {
-                TargetingOverlay.assembleArrows(g, c, endpoints, combat, playerViewSet);
-            }
-        } catch (Exception ignored) {
-        }
+            TargetingOverlay.assembleArrows(g, cardsonBattlefield, endpoints, game.getCombat(), playerViewSet);
+        } catch (Exception ignored) {}
     }
 
     @Override
