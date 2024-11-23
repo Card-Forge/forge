@@ -88,6 +88,9 @@ public class TriggerExiled extends Trigger {
             if (cause == null || !cause.isKeyword(Keyword.MADNESS)) {
                 return false;
             }
+            if (getKeyword().getStatic() != null && !getKeyword().getStatic().equals(cause.getKeyword().getStatic())) {
+                return false;
+            }
         }
 
         return true;
