@@ -91,6 +91,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final boolean forget = sa.hasParam("ForgetPlayed");
         final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
         final boolean altCost = sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost");
+        final boolean altCostManaCost = "ManaCost".equals(sa.getParam("PlayCost"));
         int totalCMCLimit = Integer.MAX_VALUE;
         final Player controller;
         if (sa.hasParam("Controller")) {
@@ -345,6 +346,9 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // lands will be played
             if (tgtSA.isLandAbility()) {
+                if (altCostManaCost) {
+                    continue;
+                }
                 tgtSA.resolve();
                 amount--;
                 if (remember) {
@@ -380,7 +384,7 @@ public class PlayEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("PlayCost")) {
                 Cost abCost;
                 String cost = sa.getParam("PlayCost");
-                if (cost.equals("ManaCost")) {
+                if (altCostManaCost) {
                     if (unpayableCost) {
                         continue;
                     }
