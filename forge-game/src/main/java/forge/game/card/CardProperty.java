@@ -650,6 +650,10 @@ public class CardProperty {
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
+        } else if (property.startsWith("TopLibrary_")) {
+            CardCollection cards = new CardCollection(card.getOwner().getCardsIn(ZoneType.Library));
+            cards = CardLists.getValidCards(cards, property.substring(11), sourceController, source, spellAbility);
+            if (cards.isEmpty() || !card.equals(cards.get(0))) return false;
         } else if (property.startsWith("TopLibraryLand")) {
             CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Library), CardPredicates.Presets.LANDS);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
