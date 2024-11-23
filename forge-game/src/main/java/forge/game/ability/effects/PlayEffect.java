@@ -309,6 +309,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 sas.removeIf(sp -> !sp.isValid(valid, controller , source, sa));
             }
 
+            if (altCostManaCost) {
+                sas.removeIf(sp -> sp.getPayCosts().getCostMana().getMana().isNoCost());
+            }
+
             if (hasTotalCMCLimit) {
                 Iterator<SpellAbility> it = sas.iterator();
                 while (it.hasNext()) {
@@ -346,9 +350,6 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // lands will be played
             if (tgtSA.isLandAbility()) {
-                if (altCostManaCost) {
-                    continue;
-                }
                 tgtSA.resolve();
                 amount--;
                 if (remember) {
@@ -385,9 +386,6 @@ public class PlayEffect extends SpellAbilityEffect {
                 Cost abCost;
                 String cost = sa.getParam("PlayCost");
                 if (altCostManaCost) {
-                    if (unpayableCost) {
-                        continue;
-                    }
                     abCost = new Cost(tgtSA.getCardState().getManaCost(), false);
                 } else if (cost.equals("SuspendCost")) {
                     abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
