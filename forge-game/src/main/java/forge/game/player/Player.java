@@ -100,6 +100,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeGainedTimesThisTurn;
     private int lifeGainedByTeamThisTurn;
     private int committedCrimeThisTurn;
+    private List<Integer> diceRollsThisTurn = Lists.newArrayList();
     private int expentThisTurn;
     private int numManaShards;
     private int numPowerSurgeLands;
@@ -2520,6 +2521,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setNumManaConversion(0);
 
         setCommitedCrimeThisTurn(0);
+        diceRollsThisTurn = Lists.newArrayList();
         setExpentThisTurn(0);
 
         damageReceivedThisTurn.clear();
@@ -3928,6 +3930,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setCommitedCrimeThisTurn(int v) {
         committedCrimeThisTurn = v;
+    }
+
+    public List<Integer> getDiceRollsThisTurn() {
+        return diceRollsThisTurn;
+    }
+    public void addDieRollThisTurn(List<Integer> rolls) {
+        diceRollsThisTurn.addAll(rolls);
     }
 
     public int getExpentThisTurn() {

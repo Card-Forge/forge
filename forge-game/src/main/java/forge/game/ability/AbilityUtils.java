@@ -2320,6 +2320,12 @@ public class AbilityUtils {
             return doXMath(player.getNumRollsThisTurn(), expr, c, ctb);
         }
 
+        if (sq[0].startsWith("YouRolledThisTurn")) {
+            int n = Integer.parseInt(sq[0].substring(17));
+            boolean didRoll = player.getDiceRollsThisTurn().contains(n);
+            return doXMath(calculateAmount(c, didRoll ? "1" : "0", ctb), expr, c, ctb);
+        }
+
         if (sq[0].equals("YouSurveilThisTurn")) {
             return doXMath(player.getSurveilThisTurn(), expr, c, ctb);
         }

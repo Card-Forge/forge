@@ -143,6 +143,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                         StringUtils.join(ignored, ", ")));
             }
             player.getGame().getAction().notifyOfValue(sa, player, sb.toString(), null);
+            player.addDieRollThisTurn(naturalRolls);
         }
 
         List<Integer> rolls = Lists.newArrayList();
