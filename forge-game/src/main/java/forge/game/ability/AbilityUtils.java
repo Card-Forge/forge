@@ -2322,8 +2322,7 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("YouRolledThisTurn")) {
             int n = Integer.parseInt(sq[0].substring(17));
-            boolean didRoll = player.getDiceRollsThisTurn().contains(n);
-            return doXMath(calculateAmount(c, didRoll ? "1" : "0", ctb), expr, c, ctb);
+            return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
         }
 
         if (sq[0].equals("YouSurveilThisTurn")) {
