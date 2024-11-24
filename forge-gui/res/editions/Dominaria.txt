@@ -4,7 +4,7 @@ Date=2018-04-27
 Name=Dominaria
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 3 Uncommon:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 1 RareMythic:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 1 BasicLand DOM
+Booster=10 Common:fromSheet("DOM cards"), 3 Uncommon:fromSheet("DOM cards"), 1 RareMythic:fromSheet("DOM cards"), 1 BasicLand DOM
 BoosterMustContain=Legendary Creature
 FatPack=10
 FatPackExtraSlots=80 BasicLands
@@ -280,6 +280,8 @@ ScryfallCode=DOM
 267 L Forest @Titus Lunter
 268 L Forest @Dimitar Marinski
 269 L Forest @Mark Poole
+
+[precon product]
 270 M Teferi, Timebender @Zack Stella
 271 C Temporal Machinations @Zack Stella
 272 R Niambi, Faithful Healer @Greg Opalinski
@@ -290,6 +292,8 @@ ScryfallCode=DOM
 277 U Karplusan Hound @Viktor Titov
 278 C Pyromantic Pilgrim @Magali Villeneuve
 279 C Timber Gorge @YW Tang
+
+[buy a box]
 280 R Firesong and Sunspeaker @Zoltan Boros
 
 [tokens]

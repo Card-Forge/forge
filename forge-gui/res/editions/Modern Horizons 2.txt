@@ -318,7 +318,7 @@ ScryfallCode=MH2
 302 U Mishra's Factory @Scott Chou
 303 R Riptide Laboratory @John Avon
 
-[alternate art]
+[borderless]
 304 M Dakkon, Shadow Slayer @Jake Murray
 305 M Geyadrone Dihada @Aleksi Briclot
 306 M Grist, the Hunger Tide @Victor Adame Minguez
@@ -399,7 +399,7 @@ ScryfallCode=MH2
 379 M Kaldra Compleat @Vincent Proce
 380 R Urza's Saga @Titus Lunter
 
-[alternate frame]
+[retro frame]
 381 C Blacksmith's Skill @Jason A. Engle
 382 C Marble Gargoyle @Drew Tucker
 383 R Out of Time @Tobias Kwan
@@ -503,7 +503,7 @@ ScryfallCode=MH2
 479 R Verdant Catacombs @Vance Kovacs
 480 R Yavimaya, Cradle of Growth @Sarah Finnigan
 
-[promo]
+[bundle]
 481 L Plains @Eric Peterson
 482 L Plains @Alan Pollack
 483 L Island @Donato Giancola
@@ -518,7 +518,7 @@ ScryfallCode=MH2
 [buy a box]
 491 M Sanctum Prelate @Michael C. Hayes
 
-[bundle]
+[promo]
 492 R Yusri, Fortune's Flame @Evyn Fong
 
 [Lands]

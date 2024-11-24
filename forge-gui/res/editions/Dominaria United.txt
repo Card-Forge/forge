@@ -300,11 +300,6 @@ ScryfallCode=DMU
 284 R Tyrannical Pitlord @Donato Giancola
 285 R Ragefire Hellkite @Xavier Ribeiro
 286 R Briar Hydra @Caio Monteiro
-423 R Serra Redeemer @Joshua Raphael
-424 R Cosmic Epiphany @Eli Minaya
-425 R Tyrannical Pitlord @Donato Giancola
-426 R Ragefire Hellkite @Xavier Ribeiro
-427 R Briar Hydra @Caio Monteiro
 
 [showcase]
 287 R Danitha, Benalia's Hope @Barbara Rosiak
@@ -447,6 +442,11 @@ ScryfallCode=DMU
 420 R Urborg Lhurgoyf @Andrey Kuzinskiy
 421 R Plaza of Heroes @Gabor Szikszai
 422 R Thran Portal @Sarah Finnigan
+423 R Serra Redeemer @Joshua Raphael
+424 R Cosmic Epiphany @Eli Minaya
+425 R Tyrannical Pitlord @Donato Giancola
+426 R Ragefire Hellkite @Xavier Ribeiro
+427 R Briar Hydra @Caio Monteiro
 
 [buy a box]
 428 R Llanowar Loamspeaker @Volkan Baǵa
