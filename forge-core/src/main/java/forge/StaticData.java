@@ -391,6 +391,10 @@ public class StaticData {
         return printSheets;
     }
 
+    /**
+     * Get a database of all non-variant cards
+     * @return
+     */
     public CardDb getCommonCards() {
         return commonCards;
     }

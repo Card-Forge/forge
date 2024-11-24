@@ -244,6 +244,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("cbExperimentalRestore"),
                 Forge.getLocalizer().getMessage("nlExperimentalRestore")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_LOOP,
+                        Forge.getLocalizer().getMessage("cbExperimentalLoop"),
+                        Forge.getLocalizer().getMessage("nlExperimentaLoop")),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
                 Forge.getLocalizer().getMessage("cbFilteredHands"),
                 Forge.getLocalizer().getMessage("nlFilteredHands")),
