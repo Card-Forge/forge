@@ -54,19 +54,24 @@ public final class CardEdition implements Comparable<CardEdition> {
     // immutable
     public enum Type {
         UNKNOWN,
+
         CORE,
         EXPANSION,
         STARTER,
         REPRINT,
         BOXED_SET,
+
         COLLECTOR_EDITION,
         DUEL_DECK,
         PROMO,
         ONLINE,
+
         DRAFT,
+
         COMMANDER,
         MULTIPLAYER,
         FUNNY,
+
         OTHER,  // FALLBACK CATEGORY
         CUSTOM_SET; // custom sets
 
@@ -126,23 +131,22 @@ public final class CardEdition implements Comparable<CardEdition> {
         SPECIAL_SLOT("special slot"), //to help with convoluted boosters
         PRECON_PRODUCT("precon product"),
         BORDERLESS("borderless"),
+        BORDERLESS_PROFILE("borderless profile"),
+        BORDERLESS_FRAME("borderless frame"),
         ETCHED("etched"),
         SHOWCASE("showcase"),
         FULL_ART("full art"),
         EXTENDED_ART("extended art"),
         ALTERNATE_ART("alternate art"),
-        RETRO_FRAME("retro frame"),
+        ALTERNATE_FRAME("alternate frame"),
         BUY_A_BOX("buy a box"),
         PROMO("promo"),
-        PRERELEASE_PROMO("prerelease promo"),
         BUNDLE("bundle"),
         BOX_TOPPER("box topper"),
         DUNGEONS("dungeons"),
         JUMPSTART("jumpstart"),
         REBALANCED("rebalanced"),
-        ETERNAL("eternal"),
-        CONJURED("conjured"),
-        SCHEME("scheme");
+        ETERNAL("eternal");
 
         private final String name;
 
@@ -211,7 +215,7 @@ public final class CardEdition implements Comparable<CardEdition> {
          */
         public static String getSortableCollectorNumber(final String collectorNumber){
             String inputCollNumber = collectorNumber;
-            if (collectorNumber == null || collectorNumber.isEmpty())
+            if (collectorNumber == null || collectorNumber.length() == 0)
                 inputCollNumber = "50000";  // very big number of 5 digits to have them in last positions
 
             String matchedCollNr = sortableCollNumberLookup.getOrDefault(inputCollNumber, null);
@@ -375,6 +379,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     public String getSlotReplaceCommonWith() { return slotReplaceCommonWith; }
     public String getAdditionalSheetForFoils() { return additionalSheetForFoils; }
     public String getAdditionalUnlockSet() { return additionalUnlockSet; }
+    public boolean getSmallSetOverride() { return smallSetOverride; }
     public String getDoublePickDuringDraft() { return doublePickDuringDraft; }
     public String getBoosterMustContain() { return boosterMustContain; }
     public String getBoosterReplaceSlotFromPrintSheet() { return boosterReplaceSlotFromPrintSheet; }
@@ -509,7 +514,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             for (CardInSet card : cards) {
                 int index = 1;
                 if (cardToIndex.containsKey(card.name)) {
-                    index = cardToIndex.get(card.name) + 1;
+                    index = cardToIndex.get(card.name);
                 }
 
                 cardToIndex.put(card.name, index);
@@ -704,6 +709,9 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.fatPackExtraSlots = metadata.get("FatPackExtraSlots", "");
 
             switch (metadata.get("foil", "newstyle").toLowerCase()) {
+                case "notsupported":
+                    res.foilType = FoilType.NOT_SUPPORTED;
+                    break;
                 case "oldstyle":
                 case "classic":
                     res.foilType = FoilType.OLD_STYLE;
@@ -712,7 +720,6 @@ public final class CardEdition implements Comparable<CardEdition> {
                 case "modern":
                     res.foilType = FoilType.MODERN;
                     break;
-                case "notsupported":
                 default:
                     res.foilType = FoilType.NOT_SUPPORTED;
                     break;
@@ -767,7 +774,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         public void add(CardEdition item) { //Even though we want it to be read only, make an exception for custom content.
             if(lock) throw new UnsupportedOperationException("This is a read-only storage");
             else map.put(item.getName(), item);
-        }
+        };
         public void append(CardEdition.Collection C){ //Append custom editions
             if (lock) throw new UnsupportedOperationException("This is a read-only storage");
             for(CardEdition E : C){ //Update the alias list as above or else it'll fail to look up.
@@ -901,7 +908,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                     StaticData.instance().getEditions().getOrderedEditions(),
                     com.google.common.base.Predicates.and(hasBasicLands, artPreference::accept));
             Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();
-            List<CardEdition> selectedEditions = new ArrayList<>();
+            List<CardEdition> selectedEditions = new ArrayList<CardEdition>();
             while (editionsIterator.hasNext())
                 selectedEditions.add(editionsIterator.next());
             if (selectedEditions.isEmpty())
