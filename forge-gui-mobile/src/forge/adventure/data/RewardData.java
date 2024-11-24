@@ -89,29 +89,46 @@ public class RewardData implements Serializable {
         ConfigData configData = Config.instance().getConfigData();
         RewardData legals = configData.legalCards;
 
-        if(legals==null)
-            allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
-        else
-            allCards = Iterables.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
+        // GetFulLCardPool(false) isn't quite what we want since if it happens to return a card from an edition thats filtered out
+        // We won't get that card added to the card pool even though its legal in other editions
+        Set<String> cardNames = new HashSet<>();
+        if (legals == null) {
+            allCards = CardUtil.getFullCardPool(true);
+        }
+        else {
+            allCards = Iterables.filter(CardUtil.getFullCardPool(true), new CardUtil.CardPredicate(legals, true));
+        }
+
         //Filter out specific cards.
         allCards = Iterables.filter(allCards, input -> {
-            if(input == null)
+            if (input == null) {
                 return false;
-            if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
-               return false;
-            if(input.getRules().getAiHints().getRemNonCommanderDecks())
+            }
+
+            if (cardNames.contains(input.getName())
+                    || input.getRules().getAiHints().getRemNonCommanderDecks()
+                    || Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante.")
+                    || input.getRules().isCustom()
+            ) {
                 return false;
-            if(configData.allowedEditions != null) {
+            }
+
+            if (configData.allowedEditions != null) {
                 if (!Arrays.asList(configData.allowedEditions).contains(input.getEdition()))
                     return false;
-            } else if(Arrays.asList(configData.restrictedEditions).contains(input.getEdition()))
+            } else if (Arrays.asList(configData.restrictedEditions).contains(input.getEdition())) {
                 return false;
-            if(input.getRules().isCustom())
-                return false;
-            return !Arrays.asList(configData.restrictedCards).contains(input.getName());
+            }
+
+            boolean allowed = !Arrays.asList(configData.restrictedCards).contains(input.getName());
+            if (allowed) {
+                cardNames.add(input.getName());
+            }
+
+            return allowed;
         });
         //Filter AI cards for enemies.
-        allEnemyCards=Iterables.filter(allCards, input -> {
+        allEnemyCards = Iterables.filter(allCards, input -> {
             if (input == null) return false;
             return !input.getRules().getAiHints().getRemAIDecks();
         });
