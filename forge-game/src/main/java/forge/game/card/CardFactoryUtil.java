@@ -2395,8 +2395,17 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Madness")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            StringBuilder desc = new StringBuilder("Madness");
+            if (!"ManaCost".equals(manacost)) {
+                desc.append(" ").append(ManaCostParser.parse(manacost));
+            }
+            desc.append(": If you discard this card, discard it into exile.");
+
             String repeffstr = "Event$ Moved | ActiveZones$ Hand | ValidCard$ Card.Self | Discard$ True | Secondary$ True "
-                    + " | Description$ Madness: If you discard this card, discard it into exile.";
+                    + " | Description$ " + desc;
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
             String sVarMadness = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard";
 
