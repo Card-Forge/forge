@@ -94,5 +94,5 @@ jobs:
         if: failure() # This step runs only if the job fails
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"🔴 Snapshot Build Failed in branch: \`${{ github.ref_name }}\` by \`${{ github.actor }}\`.\nCheck logs: ${{ github.run_url }}\"}" \
+          -d "{\"content\": \"🔴 Desktop Snapshot Build Failed in branch: \`${{ github.ref_name }}\` by \`${{ github.actor }}\`.\nCheck logs: ${{ github.run_url }}\"}" \
           ${{ secrets.DISCORD_AUTOMATION_WEBHOOK }}
