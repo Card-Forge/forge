@@ -19,7 +19,12 @@ package forge.util;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -28,60 +33,73 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
 /**
- * Parse text file to extract [sections] and key/value data.
- * Store the result in a HashMap
+ * TODO: Write javadoc for this type.
+ * 
  */
 public class FileSection {
 
     /** The lines. */
-    protected final Map<String, String> lines;
+    private final Map<String, String> lines;
+
+    /**
+     * Gets the lines.
+     *
+     * @return the lines
+     */
+    protected final Map<String, String> getLines() {
+        return this.lines;
+    }
 
     /**
      * Instantiates a new file section.
      */
     protected FileSection() {
-        lines = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        this(new TreeMap<>(String.CASE_INSENSITIVE_ORDER));
+    }
+
+    protected FileSection(Map<String, String> lines0) {
+        lines = lines0;
     }
 
     public static final Pattern DOLLAR_SIGN_KV_SEPARATOR = Pattern.compile(Pattern.quote("$"));
     public static final Pattern ARROW_KV_SEPARATOR = Pattern.compile(Pattern.quote("->"));
     public static final Pattern EQUALS_KV_SEPARATOR = Pattern.compile(Pattern.quote("="));
     public static final Pattern COLON_KV_SEPARATOR = Pattern.compile(Pattern.quote(":"));
+
     private static final String BAR_PAIR_SPLITTER = Pattern.quote("|");
 
-    private static final Table<String, Pattern, Map<String, String>> parseToMapCache = HashBasedTable.create();
+    private static Table<String, Pattern, Map<String, String>> parseToMapCache = HashBasedTable.create();
 
-    /**
-     * Parses the key=value text line and return a HashMap
-     *
-     * @param line the text line to parse
-     * @param kvSeparator the key/value separator
-     * @return a HashMap
-     */
     public static Map<String, String> parseToMap(final String line, final Pattern kvSeparator) {
-        Map<String, String> cached = parseToMapCache.get(line, kvSeparator);
-        if (cached != null) {
-            return cached;
+        Map<String, String> result = parseToMapCache.get(line, kvSeparator);
+        if (result != null) {
+            return result;
+        }
+        result = parseToMapImpl(line, kvSeparator);
+        parseToMapCache.put(line, kvSeparator, result);
+        return result;
+    }
+
+    private static Map<String, String> parseToMapImpl(final String line, final Pattern kvSeparator) {
+        if (StringUtils.isEmpty(line)) {
+            return Collections.emptyMap();
         }
 
-        Map<String, String> result = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-        if (!StringUtils.isEmpty(line)) {
-            for (final String dd : line.split(BAR_PAIR_SPLITTER)) {
-                final String[] v = kvSeparator.split(dd, 2);
-                result.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
-            }
+        final Map<String, String> result = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        final String[] pairs = line.split(BAR_PAIR_SPLITTER);
+        for (final String dd : pairs) {
+            final String[] v = kvSeparator.split(dd, 2);
+            result.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
         }
-        cached = Collections.unmodifiableMap(result);
-        parseToMapCache.put(line, kvSeparator, cached);
-        return cached;
+        return Collections.unmodifiableMap(result);
     }
 
     /**
-     * Parses the key=value text lines and return a HashMap
+     * Parses the.
      *
-     * @param lines the text lines to parse
-     * @param kvSeparator the key/value separator
-     * @return a FileSection Object containing the HashMap
+     * @param lines the lines
+     * @param kvSeparator the kv separator
+     * @return the file section
      */
     public static FileSection parse(final Iterable<String> lines, final Pattern kvSeparator) {
         final FileSection result = new FileSection();
@@ -94,36 +112,11 @@ public class FileSection {
     }
 
     /**
-     * Parses the sections ([sectionName]) from a list of text line
+     * Gets the.
      *
-     * @param lines
-     *            the text lines to parse
-     * @return a LinkedHashMap containing the sections and text line associated. The order of the sections is preserved
+     * @param fieldName the field name
+     * @return the string
      */
-    public static Map<String, List<String>> parseSections(final List<String> lines) {
-        final Map<String, List<String>> result = new LinkedHashMap<>();
-        int lineNumber = 0;
-        String section = null;
-
-        do{
-            String line = lines.get(lineNumber++);
-            if (line.startsWith("[") && line.endsWith("]")) {
-                section = line.substring(1, line.length() - 1);
-                if(!result.containsKey(section)) {
-                    result.put(section, new ArrayList<>());
-                }
-            }
-            else if(null != section && !line.isEmpty() && !line.startsWith("#")){
-                result.get(section).add(line);
-            }
-        }
-        while(lineNumber<lines.size());
-
-        return result;
-    }
-
-
-
     public String get(final String fieldName) {
         return this.lines.get(fieldName);
     }
@@ -132,27 +125,59 @@ public class FileSection {
         return lines.containsKey(fieldName) ? this.lines.get(fieldName) : defaultValue;
     }
 
-    public boolean contains(String fieldName) {
-        return lines.containsKey(fieldName);
+    public boolean contains(String keyName) { 
+        return lines.containsKey(keyName);
     }
 
+    /**
+     * Gets the double.
+     *
+     * @param fieldName the field name
+     * @return the int
+     */
+    public double getDouble(final String fieldName) {
+        return this.getDouble(fieldName, 0.0F);
+    }
+
+    /**
+     * Gets the double.
+     *
+     * @param fieldName the field name
+     * @param defaultValue the default value
+     * @return the int
+     */
     public double getDouble(final String fieldName, final double defaultValue) {
-        final String field = this.get(fieldName);
-        if (null == field)  return defaultValue;
         try {
+            if (this.get(fieldName) == null) {
+                return defaultValue;
+            }
+
             NumberFormat format = NumberFormat.getInstance(Locale.US);
-            Number number = format.parse(field);
+            Number number = format.parse(this.get(fieldName));
+
             return number.doubleValue();
         } catch (final NumberFormatException | ParseException ex) {
             return defaultValue;
         }
     }
 
+    /**
+     * Gets the int.
+     *
+     * @param fieldName the field name
+     * @return the int
+     */
     public int getInt(final String fieldName) {
         return this.getInt(fieldName, 0);
     }
 
-
+    /**
+     * Gets the int.
+     *
+     * @param fieldName the field name
+     * @param defaultValue the default value
+     * @return the int
+     */
     public int getInt(final String fieldName, final int defaultValue) {
         try {
             return Integer.parseInt(this.get(fieldName));
@@ -161,13 +186,79 @@ public class FileSection {
         }
     }
 
+    /**
+     * Gets the boolean.
+     *
+     * @param fieldName the field name
+     * @return the boolean
+     */
     public boolean getBoolean(final String fieldName) {
         return this.getBoolean(fieldName, false);
     }
 
+    /**
+     * Gets the boolean.
+     *
+     * @param fieldName the field name
+     * @param defaultValue the default value
+     * @return the boolean
+     */
     public boolean getBoolean(final String fieldName, final boolean defaultValue) {
-        final String field = this.get(fieldName);
-        if (field == null) return defaultValue;
-        return "true".equalsIgnoreCase(field);
+        final String s = this.get(fieldName);
+        if (s == null) {
+            return defaultValue;
+        }
+        return "true".equalsIgnoreCase(s);
     }
+
+    /**
+     * Parses the sections.
+     * 
+     * @param source
+     *            the source
+     * @return the map
+     */
+    @SuppressWarnings("unchecked")
+    public static Map<String, List<String>> parseSections(final List<String> source) {
+        final Map<String, List<String>> result = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        String currentSection = "";
+        List<String> currentList = null;
+
+        for (final String s : source) {
+            final String st = s.trim();
+            if (st.length() == 0) {
+                continue;
+            }
+            if (st.startsWith("[") && st.endsWith("]")) {
+                if ((currentList != null) && (currentList.size() > 0)) {
+                    final Object oldVal = result.get(currentSection);
+                    if ((oldVal != null) && (oldVal instanceof List<?>)) {
+                        currentList.addAll((List<String>) oldVal);
+                    }
+                    result.put(currentSection, currentList);
+                }
+
+                final String newSection = st.substring(1, st.length() - 1);
+                currentSection = newSection;
+                currentList = null;
+            } else {
+                if (currentList == null) {
+                    currentList = new ArrayList<>();
+                }
+                currentList.add(st);
+            }
+        }
+
+        // save final block
+        if ((currentList != null) && (currentList.size() > 0)) {
+            final Object oldVal = result.get(currentSection);
+            if ((oldVal != null) && (oldVal instanceof List<?>)) {
+                currentList.addAll((List<String>) oldVal);
+            }
+            result.put(currentSection, currentList);
+        }
+
+        return result;
+    }
+
 }

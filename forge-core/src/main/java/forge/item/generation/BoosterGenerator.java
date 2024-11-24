@@ -69,6 +69,7 @@ public class BoosterGenerator {
         }
 
         List<PaperCard> result = new ArrayList<>();
+        List<PrintSheet> sheetsUsed = new ArrayList<>();
 
         CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
 
@@ -232,6 +233,7 @@ public class BoosterGenerator {
             if (sheetKey.startsWith("wholeSheet")) {
                 PrintSheet ps = getPrintSheet(sheetKey);
                 result.addAll(ps.all());
+                sheetsUsed.add(ps);
                 continue;
             }
 
@@ -250,7 +252,7 @@ public class BoosterGenerator {
                 if ((edition.getName().equals("Planeshift")) &&
                         (slotType.startsWith(BoosterSlots.RARE))
                         && (foilSlot.startsWith(BoosterSlots.SPECIAL))
-                ) {
+                        ) {
                     numCards--;
                 }
             }
@@ -262,6 +264,7 @@ public class BoosterGenerator {
                         : edition.getSlotReplaceCommonWith().trim();
                 PrintSheet replaceSheet = getPrintSheet(replaceKey);
                 result.addAll(replaceSheet.random(1, true));
+                sheetsUsed.add(replaceSheet);
                 System.out.println("Common was replaced with something from the replace sheet...");
                 replaceCommon = false;
             }
@@ -280,6 +283,7 @@ public class BoosterGenerator {
             }
 
             result.addAll(paperCards);
+            sheetsUsed.add(ps);
 
             if (foilInThisSlot) {
                 if (!foilAtEndOfPack) {
@@ -391,6 +395,8 @@ public class BoosterGenerator {
     public static List<PaperCard> getBoosterPack(SealedTemplateWithSlots template) {
         // SealedTemplateWithSlots ignores all Edition level params
         // Instead each slot defines their percentages on their own
+
+        CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
         List<PaperCard> result = new ArrayList<>();
         Map<String, BoosterSlot> boosterSlots = template.getNamedSlots();
 
@@ -495,7 +501,7 @@ public class BoosterGenerator {
      * Replaces an already present card in the booster with a card from the supplied print sheet.
      * Nothing is replaced if there is no matching rarity found.
      * @param booster in which a card gets replaced
-     * @param printSheetKey print sheet key from which take the replacement card
+     * @param printSheetKey
      */
     public static void replaceCardFromExtraSheet(List<PaperCard> booster, String printSheetKey) {
         PrintSheet replacementSheet = StaticData.instance().getPrintSheets().get(printSheetKey);
@@ -510,7 +516,7 @@ public class BoosterGenerator {
      * @param toAdd new card which replaces a card in the booster
      */
     public static void replaceCard(List<PaperCard> booster, PaperCard toAdd) {
-        Predicate<PaperCard> rarityPredicate;
+        Predicate<PaperCard> rarityPredicate = null;
         switch (toAdd.getRarity()) {
             case BasicLand:
                 rarityPredicate = Presets.IS_BASIC_LAND;
@@ -567,10 +573,11 @@ public class BoosterGenerator {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static PrintSheet makeSheet(String sheetKey, Iterable<PaperCard> src) {
         PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', 2);
-        Predicate<PaperCard> setPred = (sKey.length > 1 ? IPaperCard.Predicates.printedInSets(sKey[1].split(" ")) : Predicates.alwaysTrue());
+        Predicate<PaperCard> setPred = (Predicate<PaperCard>) (sKey.length > 1 ? IPaperCard.Predicates.printedInSets(sKey[1].split(" ")) : Predicates.alwaysTrue());
 
         List<String> operators = new LinkedList<>(Arrays.asList(TextUtil.splitWithParenthesis(sKey[0], ':')));
         Predicate<PaperCard> extraPred = buildExtraPredicate(operators);
@@ -672,11 +679,11 @@ public class BoosterGenerator {
             Predicate<PaperCard> toAdd = null;
             if (operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD)) {
                 toAdd = Predicates.compose(
-                        Predicates.or(
+                            Predicates.or(
                                 CardRulesPredicates.splitType(CardSplitType.Transform),
                                 CardRulesPredicates.splitType(CardSplitType.Meld),
                                 CardRulesPredicates.splitType(CardSplitType.Modal)
-                        ),
+                            ),
                         PaperCard::getRules);
             } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard::getRules);
             } else if (operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = IPaperCard.Predicates.Presets.IS_BASIC_LAND;
