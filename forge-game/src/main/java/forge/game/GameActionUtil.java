@@ -711,7 +711,15 @@ public final class GameActionUtil {
             host.getGame().getTriggerHandler().resetActiveTriggers(false);
         }
 
-        return result != null ? result : sa;
+        if (result != null) {
+            // sanity check if need to update castSA
+            if (sa.getHostCard().getCastSA() == sa) {
+                sa.getHostCard().setCastSA(result);
+            }
+            return result;
+        }
+
+        return sa;
     }
 
     public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {

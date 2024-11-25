@@ -7,6 +7,7 @@ on:
 
 jobs:
   remove-stale-branches:
+    if: github.repository_owner == 'Card-Forge'
     name: Remove Stale Branches
     runs-on: ubuntu-latest
     steps:
