@@ -31,6 +31,7 @@ import com.google.common.collect.Sets;
 import forge.deck.DeckProxy;
 import forge.gui.GuiBase;
 import forge.util.FileUtil;
+import forge.util.Lazy;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -70,20 +71,7 @@ import forge.util.ImageUtil;
  */
 public class ImageCache {
     private static ImageCache imageCache;
-    private HashSet<String> _missingIconKeys;
-    private HashSet<String> missingIconKeys() {
-        HashSet<String> result = _missingIconKeys;
-        if (result == null) {
-            synchronized (this) {
-                result = _missingIconKeys;
-                if (result == null) {
-                    result = new HashSet<>();
-                    _missingIconKeys = result;
-                }
-            }
-        }
-        return _missingIconKeys;
-    }
+    private Lazy<HashSet<String>> missingIconKeys = Lazy.of(HashSet::new);
     private final List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
     public int counter = 0;
     private int maxCardCapacity = 300; //default card capacity
@@ -133,20 +121,7 @@ public class ImageCache {
         return Forge.getAssets().getDefaultImage();
     }
 
-    private HashMap<String, ImageRecord> _imageRecord;
-    private HashMap<String, ImageRecord> imageRecord() {
-        HashMap<String, ImageRecord> result = _imageRecord;
-        if (result == null) {
-            synchronized (this) {
-                result = _imageRecord;
-                if (result == null) {
-                    result = new HashMap<>(maxCardCapacity + (maxCardCapacity / 3));
-                    _imageRecord = result;
-                }
-            }
-        }
-        return _imageRecord;
-    }
+    private Lazy<HashMap<String, ImageRecord>> imageRecord = Lazy.of(() -> new HashMap<>(maxCardCapacity + (maxCardCapacity / 3)));
     private boolean imageLoaded, delayLoadRequested;
 
     public void allowSingleLoad() {
@@ -155,7 +130,7 @@ public class ImageCache {
     }
 
     public void clear() {
-        missingIconKeys().clear();
+        missingIconKeys.get().clear();
         ImageKeys.clearMissingCards();
     }
 
@@ -201,8 +176,8 @@ public class ImageCache {
     public FImage getIcon(IHasIcon ihi) {
         String imageKey = ihi.getIconImageKey();
         final Texture icon;
-        if (missingIconKeys().contains(imageKey) || (icon = getImage(ihi.getIconImageKey(), false, true)) == null) {
-            missingIconKeys().add(imageKey);
+        if (missingIconKeys.get().contains(imageKey) || (icon = getImage(ihi.getIconImageKey(), false, true)) == null) {
+            missingIconKeys.get().add(imageKey);
             return FSkinImage.UNKNOWN;
         }
         return new FTextureImage(icon);
@@ -317,8 +292,8 @@ public class ImageCache {
                 /*fix not loading image file since we intentionally not to update the cache in order for the
                   image fetcher to update automatically after the card image/s are downloaded*/
                 imageLoaded = false;
-                if (image != null && imageRecord().get(image.toString()) == null)
-                    imageRecord().put(image.toString(), new ImageRecord(Color.valueOf("#171717").toString(), false, getRadius(image))); //black border
+                if (image != null && imageRecord.get().get(image.toString()) == null)
+                    imageRecord.get().put(image.toString(), new ImageRecord(Color.valueOf("#171717").toString(), false, getRadius(image))); //black border
             }
         }
         return image;
@@ -450,7 +425,7 @@ public class ImageCache {
         if (t == null)
             return Color.valueOf("#171717");
         try {
-            return Color.valueOf(imageRecord().get(t.toString()).colorValue);
+            return Color.valueOf(imageRecord.get().get(t.toString()).colorValue);
         } catch (Exception e) {
             return Color.valueOf("#171717");
         }
@@ -468,13 +443,13 @@ public class ImageCache {
         return 0;
     }
     public void updateImageRecord(String textureString, String colorValue, Boolean isClosertoWhite, int radius) {
-        imageRecord().put(textureString, new ImageRecord(colorValue, isClosertoWhite, radius));
+        imageRecord.get().put(textureString, new ImageRecord(colorValue, isClosertoWhite, radius));
     }
 
     public int getRadius(Texture t) {
         if (t == null)
             return 20;
-        ImageRecord record = imageRecord().get(t.toString());
+        ImageRecord record = imageRecord.get().get(t.toString());
         if (record == null)
             return 20;
         Integer i = record.cardRadius;
@@ -484,7 +459,7 @@ public class ImageCache {
     }
 
     public FImage getBorder(String textureString) {
-        ImageRecord record = imageRecord().get(textureString);
+        ImageRecord record = imageRecord.get().get(textureString);
         if (record == null)
             return FSkinImage.IMG_BORDER_BLACK;
         Boolean border = record.isCloserToWhite;

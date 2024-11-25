@@ -25,6 +25,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.util.Lazy;
 
 /**
  * <p>
@@ -64,26 +65,13 @@ public class AiCardMemory {
         REVEALED_CARDS // These cards were recently revealed to the AI by a call to PlayerControllerAi.reveal
     }
 
-    private Map<MemorySet, Set<Card>> _memoryMap;
-    private Map<MemorySet, Set<Card>> memoryMap() {
-        Map<MemorySet, Set<Card>> result = _memoryMap;
-        if (result == null) {
-            synchronized (this) {
-                result = _memoryMap;
-                if (result == null) {
-                    result = Maps.newConcurrentMap();
-                    _memoryMap = result;
-                }
-            }
-        }
-        return _memoryMap;
-    }
+    private final Lazy<Map<MemorySet, Set<Card>>> memoryMap = Lazy.of(Maps::newConcurrentMap);
 
     public AiCardMemory() {
     }
 
     private Set<Card> getMemorySet(MemorySet set) {
-        return memoryMap().computeIfAbsent(set, value -> Sets.newConcurrentHashSet());
+        return memoryMap.get().computeIfAbsent(set, value -> Sets.newConcurrentHashSet());
     }
 
     /**
