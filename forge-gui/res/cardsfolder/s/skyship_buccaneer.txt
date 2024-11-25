@@ -1,0 +1,9 @@
+Name:Skyship Buccaneer
+ManaCost:3 U U
+Types:Creature Human Pirate
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | CheckSVar$ RaidTest | Execute$ TrigDraw | TriggerDescription$ Raid — When this creature enters, if you attacked this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Flying\nRaid — When this creature enters, if you attacked this turn, draw a card.

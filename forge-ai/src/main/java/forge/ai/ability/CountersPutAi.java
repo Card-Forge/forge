@@ -626,6 +626,11 @@ public class CountersPutAi extends CountersAi {
                     return false; // only if next turn and cost is reusable
                 }
             }
+
+            // Useless since the card already has the keyword (or for another reason)
+            if (ComputerUtil.isUselessCounter(CounterType.get(type), cards.get(0))) {
+                return false;
+            }
         }
 
         boolean immediately = ComputerUtil.playImmediately(ai, sa);

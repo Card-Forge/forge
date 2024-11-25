@@ -1,0 +1,9 @@
+Name:Generous Pup
+ManaCost:1 W
+Types:Creature Dog
+PT:2/2
+K:Vigilance
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigPutCounterAll | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, put a +1/+1 counter on each other creature you control. This ability triggers only once each turn.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Vigilance\nWhenever one or more +1/+1 counters are put on Generous Pup, put a +1/+1 counter on each other creature you control. This ability triggers only once each turn.

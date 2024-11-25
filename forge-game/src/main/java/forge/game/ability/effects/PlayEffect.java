@@ -91,6 +91,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final boolean forget = sa.hasParam("ForgetPlayed");
         final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
         final boolean altCost = sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost");
+        final boolean altCostManaCost = "ManaCost".equals(sa.getParam("PlayCost"));
         int totalCMCLimit = Integer.MAX_VALUE;
         final Player controller;
         if (sa.hasParam("Controller")) {
@@ -308,6 +309,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 sas.removeIf(sp -> !sp.isValid(valid, controller , source, sa));
             }
 
+            if (altCostManaCost) {
+                sas.removeIf(sp -> sp.getPayCosts().getCostMana().getMana().isNoCost());
+            }
+
             if (hasTotalCMCLimit) {
                 Iterator<SpellAbility> it = sas.iterator();
                 while (it.hasNext()) {
@@ -380,11 +385,8 @@ public class PlayEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("PlayCost")) {
                 Cost abCost;
                 String cost = sa.getParam("PlayCost");
-                if (cost.equals("ManaCost")) {
-                    if (unpayableCost) {
-                        continue;
-                    }
-                    abCost = new Cost(source.getManaCost(), false);
+                if (altCostManaCost) {
+                    abCost = new Cost(tgtSA.getCardState().getManaCost(), false);
                 } else if (cost.equals("SuspendCost")) {
                     abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
                 } else {
@@ -410,6 +412,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     }
                 }
                 if (!optional) {
+                    // TODO this doesn't work yet for cases where one choice would still be payable, e.g. Lightning Axe
                     tgtSA.getPayCosts().setMandatory(true);
                 }
             }
@@ -427,7 +430,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.putParam("RaiseCost", raise);
             }
 
-            if (sa.hasParam("Madness")) {
+            if (sa.isKeyword(Keyword.MADNESS)) {
                 tgtSA.setAlternativeCost(AlternativeCost.Madness);
             }
 

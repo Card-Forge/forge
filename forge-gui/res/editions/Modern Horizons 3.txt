@@ -47,6 +47,7 @@ Replace=.417F Uncommon:fromSheet("MH3 cards")
 Replace=.078F RareMythic:fromSheet("MH3 cards")
 Replace=.004F RareMythic:fromSheet("MH3 borderless")
 Replace=.042F fromSheet("MH3 retro frame")
+Replace=.042F fromSheet("MH3 commanders")
 
 [cards]
 1 U Breaker of Creation @Yohann Schepacz
@@ -352,8 +353,6 @@ Replace=.042F fromSheet("MH3 retro frame")
 301 R Deserted Temple @Rob Alexander
 302 U Nesting Grounds @Yeong-Hao Han
 303 M Phyrexian Tower @Martin de Diego Sádaba
-
-[bundle]
 310 L Plains @Volkan Baǵa
 311 L Plains @Lius Lasahido
 312 L Island @Alayna Danner
@@ -645,6 +644,16 @@ A122 C A-Galvanic Discharge @Zoltan Boros
 1 Grief|SPG
 1 Fury|SPG
 1 Endurance|SPG
+
+[commanders]
+1 Disa the Restless|M3C
+1 Omo, Queen of Vesuva|M3C
+1 Satya, Aetherflux Genius|M3C
+1 Ulalek, Fused Atrocity|M3C
+1 Azlask, the Swelling Scourge|M3C
+1 Cayth, Famed Mechanist|M3C
+1 Coram, the Undertaker|M3C
+1 Jyoti, Moag Ancient|M3C
 
 [tokens]
 b_0_0_phyrexian_germ

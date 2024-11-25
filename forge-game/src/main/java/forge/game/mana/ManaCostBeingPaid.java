@@ -97,7 +97,10 @@ public class ManaCostBeingPaid {
         @Override
         public int getTotalGenericCost() {
             ShardCount c = unpaidShards.get(ManaCostShard.GENERIC);
-            return c == null ? 0 : c.totalCount;
+            if (c == null) {
+                return unpaidShards.isEmpty() && cntX == 0 ? -1 : 0;
+            }
+            return c.totalCount;
         }
     }
 

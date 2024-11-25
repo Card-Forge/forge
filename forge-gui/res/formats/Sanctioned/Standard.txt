@@ -3,4 +3,4 @@ Name:Standard
 Order:101
 Subtype:Standard
 Type:Sanctioned
-Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK
+Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN

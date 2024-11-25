@@ -522,7 +522,7 @@ public final class GameActionUtil {
 
                         final Cost cost = new Cost(s, false);
                         newSA.setDescription(sa.getDescription() + " (Additional cost: " + cost.toSimpleString() + ")");
-                        newSA.setPayCosts(cost.add(sa.getPayCosts()));
+                        newSA.getPayCosts().add(cost);
                         if (newSA.canPlay()) {
                             abilities.add(newSA);
                         }
@@ -711,7 +711,15 @@ public final class GameActionUtil {
             host.getGame().getTriggerHandler().resetActiveTriggers(false);
         }
 
-        return result != null ? result : sa;
+        if (result != null) {
+            // sanity check if need to update castSA
+            if (sa.getHostCard().getCastSA() == sa) {
+                sa.getHostCard().setCastSA(result);
+            }
+            return result;
+        }
+
+        return sa;
     }
 
     public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {

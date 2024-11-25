@@ -1,0 +1,9 @@
+Name:Scourge of the Undercity
+ManaCost:1 B
+Types:Creature Gorgon Vampire
+PT:2/1
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, another target creature you control gains lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | KW$ Lifelink
+SVar:PlayMain1:TRUE
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nWhen Scourge of the Undercity enters, another target creature you control gains lifelink until end of turn.

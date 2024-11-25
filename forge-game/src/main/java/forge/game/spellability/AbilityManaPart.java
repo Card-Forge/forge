@@ -654,6 +654,10 @@ public class AbilityManaPart implements java.io.Serializable {
         if (origProduced.contains("Chosen")) {
             origProduced = origProduced.replace("Chosen", getChosenColor(sa));
         }
+        // replace Chosen for Spire colors
+        if (origProduced.contains("ColorID")) {
+            origProduced = origProduced.replace("ColorID", getChosenColorID(sa));
+        }
         if (origProduced.contains("NotedColors")) {
             // Should only be used for Paliano, the High City
             if (sa.getActivatingPlayer() == null) {
@@ -695,6 +699,21 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         // TODO: Add support for {C}.
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
+    }
+
+    public String getChosenColorID(SpellAbility sa) {
+        if (sa == null) {
+            return "";
+        }
+        Card card = sa.getHostCard();
+        if (card != null && card.hasChosenColorSpire()) {
+            StringBuilder values = new StringBuilder();
+            for (String s : card.getChosenColorID()) {
+                values.append(MagicColor.toShortString(MagicColor.fromName(s))).append(" ");
+            }
+            return values.toString();
+        }
+        return "";
     }
 
     public String getChosenColor(SpellAbility sa) {

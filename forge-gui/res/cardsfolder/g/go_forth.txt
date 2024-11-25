@@ -1,0 +1,7 @@
+Name:Go Forth
+ManaCost:G
+Types:Instant
+A:SP$ Charm | Choices$ DBSearch,DBPump | CharmNum$ 1
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
+Oracle:Choose one —\n• Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n• Target creature gets +2/+2 until end of turn.

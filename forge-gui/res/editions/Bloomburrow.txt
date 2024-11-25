@@ -442,6 +442,9 @@ Replace=.012F RareMythic:fromSheet("BLB cards")
 385 U Stormcatch Mentor @Manuel Castañón
 386 R Thundertrap Trainer @Jesper Ejsing
 
+[rebalanced]
+A138 U A-Heartfire Hero @Jakub Kasper
+
 [special guests]
 1 Sword of Fire and Ice|SPG
 1 Secluded Courtyard|SPG

@@ -3,6 +3,7 @@ package forge.app;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -31,6 +32,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -51,7 +53,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Version;
-import com.badlogic.gdx.backends.android.ForgeAndroidApplication;
+import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidAudio;
 import com.badlogic.gdx.backends.android.AsynchronousAndroidAudio;
@@ -71,8 +73,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Main extends ForgeAndroidApplication {
+public class Main extends AndroidApplication {
     private AndroidAdapter Gadapter;
     private ArrayList<String> gamepads;
     private AndroidClipboard androidClipboard;
@@ -167,7 +170,7 @@ public class Main extends ForgeAndroidApplication {
     }
 
     private void crossfade(View contentView, View previousView) {
-        activeView = contentView;
+         activeView = contentView;
         // Set the content view to 0% opacity but visible, so that it is visible
         // (but fully transparent) during the animation.
         contentView.setAlpha(0f);
@@ -175,25 +178,18 @@ public class Main extends ForgeAndroidApplication {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         addContentView(contentView, params);
 
-        // Animate the content view to 100% opacity, and clear any animation
-        // listener set on the view.
-        contentView.animate()
-                .alpha(1f)
-                .setDuration(mShortAnimationDuration)
-                .setListener(null);
-
-        // Animate the loading view to 0% opacity. After the animation ends,
-        // set its visibility to GONE as an optimization step (it won't
-        // participate in layout passes, etc.)
-        previousView.animate()
-                .alpha(0f)
-                .setDuration(mShortAnimationDuration)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        previousView.setVisibility(View.GONE);
-                    }
-                });
+        Animator ac = ObjectAnimator.ofFloat(contentView, "alpha", 0f, 1f).setDuration(mShortAnimationDuration);
+        Animator ap = ObjectAnimator.ofFloat(previousView, "alpha", 1f, 0f).setDuration(mShortAnimationDuration);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(ac, ap);
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                previousView.setVisibility(View.GONE);
+            }
+        });
+        animatorSet.start();
     }
 
     private static boolean isTabletDevice(Context activityContext) {
@@ -215,7 +211,12 @@ public class Main extends ForgeAndroidApplication {
         TextView text = new TextView(this);
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
-        String SP = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? "Files & Media" : "Storage Permission";
+        String SP = "Storage Permission";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            SP = "Photos and Videos, Music and Audio Permissions";
+        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            SP = "Files & Media Permissions";
+        }
 
         String title = "Forge needs " + SP + " to run properly...\n" +
                 "Follow these simple steps:\n\n";
@@ -278,8 +279,8 @@ public class Main extends ForgeAndroidApplication {
         row2.addView(button);
         row2.setGravity(Gravity.CENTER);
 
-        TL.addView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-        TL.addView(row2, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        TL.addView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        TL.addView(row2, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         TL.setGravity(Gravity.CENTER);
         TL.setOnClickListener(v -> adapter.restart());
         crossfade(TL, previousView);
@@ -287,96 +288,102 @@ public class Main extends ForgeAndroidApplication {
 
     private void loadGame(final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
         try {
+            final Handler handler = new Handler();
             forgeLogo = findViewById(getResources().getIdentifier("logo_id", "id", getPackageName()));
+            activeView = findViewById(getResources().getIdentifier("mainview", "id", getPackageName()));
+            activeView.setBackgroundColor(Color.WHITE);
             forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName()), config);
-            getAnimator(ObjectAnimator.ofFloat(forgeLogo, "alpha", 0f, 1f).setDuration(1800), null, new AnimatorListenerAdapter() {
+
+            getAnimator(ObjectAnimator.ofFloat(forgeLogo, "alpha", 1f, 1f).setDuration(800), ObjectAnimator.ofObject(activeView, "backgroundColor", new ArgbEvaluator(), Color.WHITE, Color.BLACK).setDuration(1600), new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    if (!permissiongranted || exception) {
-                        displayMessage(forgeLogo, adapter, exception, msg, false);
-                    } else if (title.isEmpty() && steps.isEmpty()) {
-                        if (isLandscape) {
-                            Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
-                                    ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : //Oreo and above has virtual back/menu buttons
-                                    ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                        } else {
-                            Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-                        }
-                        crossfade(forgeView, forgeLogo);
-                    } else {
-                        if (sharedPreferences.getBoolean("run_anyway", false)) {
+                    handler.postDelayed(() -> {
+                        if (!permissiongranted || exception) {
+                            displayMessage(forgeLogo, adapter, exception, msg, false);
+                        } else if (title.isEmpty() && steps.isEmpty()) {
+                            if (isLandscape) {
+                                Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
+                                        ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : //Oreo and above has virtual back/menu buttons
+                                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                            } else {
+                                Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+                            }
                             crossfade(forgeView, forgeLogo);
-                            return;
+                        } else {
+                            if (sharedPreferences.getBoolean("run_anyway", false)) {
+                                crossfade(forgeView, forgeLogo);
+                                return;
+                            }
+                            TableLayout TL = new TableLayout(getContext());
+                            TL.setBackgroundResource(android.R.color.black);
+                            TableRow messageRow = new TableRow(getContext());
+                            TableRow checkboxRow = new TableRow(getContext());
+                            TableRow buttonRow = new TableRow(getContext());
+                            TextView text = new TextView(getContext());
+                            text.setGravity(Gravity.LEFT);
+                            text.setTypeface(Typeface.SERIF);
+
+                            SpannableString ss1 = new SpannableString(title);
+                            ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
+                            text.append(ss1);
+                            text.append(steps + "\n");
+                            messageRow.addView(text);
+                            messageRow.setGravity(Gravity.CENTER);
+
+                            CheckBox checkBox = new CheckBox(getContext());
+                            checkBox.setTypeface(Typeface.SERIF);
+                            checkBox.setGravity(Gravity.TOP);
+                            checkBox.setChecked(false);
+                            checkBox.setPadding(30, 30, 30, 30);
+                            checkBox.setTypeface(Typeface.SERIF);
+                            checkBox.setText(" Don't remind me next time. ");
+                            checkBox.setScaleX(0.9f);
+                            checkBox.setScaleY(0.9f);
+                            checkBox.setOnCheckedChangeListener((buttonView, isChecked) ->
+                                    sharedPreferences.edit().putBoolean("run_anyway", isChecked).apply());
+                            checkboxRow.addView(checkBox);
+                            checkboxRow.setGravity(Gravity.CENTER);
+
+                            int[] colors = {Color.TRANSPARENT, Color.TRANSPARENT};
+                            int[] pressed = {Color.GREEN, Color.GREEN};
+                            GradientDrawable gd = new GradientDrawable(
+                                    GradientDrawable.Orientation.TOP_BOTTOM, colors);
+                            gd.setStroke(3, Color.DKGRAY);
+                            gd.setCornerRadius(100);
+
+                            GradientDrawable gd2 = new GradientDrawable(
+                                    GradientDrawable.Orientation.TOP_BOTTOM, pressed);
+                            gd2.setStroke(3, Color.DKGRAY);
+                            gd2.setCornerRadius(100);
+
+                            Button button = new Button(getContext());
+                            button.setText("Run Forge..");
+                            button.setTypeface(Typeface.DEFAULT_BOLD);
+
+                            StateListDrawable states = new StateListDrawable();
+
+                            states.addState(new int[]{android.R.attr.state_pressed}, gd2);
+                            states.addState(new int[]{}, gd);
+
+                            button.setBackground(states);
+
+                            button.setTextColor(Color.RED);
+                            button.setOnClickListener(v -> {
+                                button.setClickable(false);
+                                crossfade(forgeView, TL);
+                            });
+
+                            buttonRow.addView(button);
+                            buttonRow.setGravity(Gravity.CENTER);
+
+                            TL.addView(messageRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                            TL.addView(checkboxRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                            TL.addView(buttonRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                            TL.setGravity(Gravity.CENTER);
+                            crossfade(TL, forgeLogo);
                         }
-                        TableLayout TL = new TableLayout(getContext());
-                        TL.setBackgroundResource(android.R.color.black);
-                        TableRow messageRow = new TableRow(getContext());
-                        TableRow checkboxRow = new TableRow(getContext());
-                        TableRow buttonRow = new TableRow(getContext());
-                        TextView text = new TextView(getContext());
-                        text.setGravity(Gravity.LEFT);
-                        text.setTypeface(Typeface.SERIF);
-
-                        SpannableString ss1 = new SpannableString(title);
-                        ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, ss1.length(), 0);
-                        text.append(ss1);
-                        text.append(steps + "\n");
-                        messageRow.addView(text);
-                        messageRow.setGravity(Gravity.CENTER);
-
-                        CheckBox checkBox = new CheckBox(getContext());
-                        checkBox.setTypeface(Typeface.SERIF);
-                        checkBox.setGravity(Gravity.TOP);
-                        checkBox.setChecked(false);
-                        checkBox.setPadding(30, 30, 30, 30);
-                        checkBox.setTypeface(Typeface.SERIF);
-                        checkBox.setText(" Don't remind me next time. ");
-                        checkBox.setScaleX(0.9f);
-                        checkBox.setScaleY(0.9f);
-                        checkBox.setOnCheckedChangeListener((buttonView, isChecked) ->
-                                sharedPreferences.edit().putBoolean("run_anyway", isChecked).apply());
-                        checkboxRow.addView(checkBox);
-                        checkboxRow.setGravity(Gravity.CENTER);
-
-                        int[] colors = {Color.TRANSPARENT, Color.TRANSPARENT};
-                        int[] pressed = {Color.GREEN, Color.GREEN};
-                        GradientDrawable gd = new GradientDrawable(
-                                GradientDrawable.Orientation.TOP_BOTTOM, colors);
-                        gd.setStroke(3, Color.DKGRAY);
-                        gd.setCornerRadius(100);
-
-                        GradientDrawable gd2 = new GradientDrawable(
-                                GradientDrawable.Orientation.TOP_BOTTOM, pressed);
-                        gd2.setStroke(3, Color.DKGRAY);
-                        gd2.setCornerRadius(100);
-
-                        Button button = new Button(getContext());
-                        button.setText("Run Forge..");
-                        button.setTypeface(Typeface.DEFAULT_BOLD);
-
-                        StateListDrawable states = new StateListDrawable();
-
-                        states.addState(new int[]{android.R.attr.state_pressed}, gd2);
-                        states.addState(new int[]{}, gd);
-
-                        button.setBackground(states);
-
-                        button.setTextColor(Color.RED);
-                        button.setOnClickListener(v -> {
-                            button.setClickable(false);
-                            crossfade(forgeView, TL);
-                        });
-
-                        buttonRow.addView(button);
-                        buttonRow.setGravity(Gravity.CENTER);
-
-                        TL.addView(messageRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                        TL.addView(checkboxRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                        TL.addView(buttonRow, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                        TL.setGravity(Gravity.CENTER);
-                        crossfade(TL, forgeLogo);
-                    }
+                    }, 600);
                 }
             }).start();
         } catch (Exception e) {
@@ -387,9 +394,8 @@ public class Main extends ForgeAndroidApplication {
     private AnimatorSet getAnimator(Animator play, Animator with, AnimatorListenerAdapter adapter) {
         AnimatorSet animatorSet = new AnimatorSet();
         if (with != null) {
-            animatorSet.playTogether(play, with);
-        }
-        else
+            animatorSet.playSequentially(play, with);
+        } else
             animatorSet.play(play);
         animatorSet.addListener(adapter);
         return animatorSet;
@@ -407,8 +413,14 @@ public class Main extends ForgeAndroidApplication {
         int pid = android.os.Process.myPid();
         int uid = android.os.Process.myUid();
         try {
-            int result = getBaseContext().checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, pid, uid);
-            return result == PackageManager.PERMISSION_GRANTED;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if (getBaseContext().checkPermission(android.Manifest.permission.READ_MEDIA_IMAGES, pid, uid) == PackageManager.PERMISSION_GRANTED)
+                    if (getBaseContext().checkPermission(android.Manifest.permission.READ_MEDIA_AUDIO, pid, uid) == PackageManager.PERMISSION_GRANTED)
+                        return getBaseContext().checkPermission(android.Manifest.permission.READ_MEDIA_VIDEO, pid, uid) == PackageManager.PERMISSION_GRANTED;
+                return false;
+            } else {
+                return getBaseContext().checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, pid, uid) == PackageManager.PERMISSION_GRANTED;
+            }
         } catch (NullPointerException e) {
             return false;
         }
@@ -453,9 +465,11 @@ public class Main extends ForgeAndroidApplication {
         adapter.switchOrientationFile = ASSETS_DIR + "switch_orientation.ini";
         boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
 
-        String info = totalRAM < 3500 || Build.VERSION.SDK_INT < Build.VERSION_CODES.Q ? "Device Specification Check\n" + getDeviceName()
-                + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB\n\nMinimum Requirements:" : "";
-        String lowV = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q ? "\nAPI: Android 10 or higher" : "";
+        String info = totalRAM < 3500 || Build.VERSION.SDK_INT < Build.VERSION_CODES.R ? "Device Specification Check\n" + getDeviceName()
+                + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB\n\nRecommended API:" : "";
+        // Even though Forge runs on Android 8 as minimum, just show indicator that Android 11 is recommended
+        String lowV = Build.VERSION.SDK_INT < Build.VERSION_CODES.R ? "\nAPI: Android 11 or higher" : "";
+        // also show minimum Device RAM
         String lowM = totalRAM < 3500 ? "\nRAM: 4GB RAM or higher" : "";
         if (landscapeMode && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) { //Android 11 onwards
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
@@ -495,9 +509,12 @@ public class Main extends ForgeAndroidApplication {
 
         @Override
         public boolean hasContents() {
-            if (cm.getPrimaryClip().getItemCount() > 0) {
+            ClipData clipData = cm.getPrimaryClip();
+            if (clipData == null)
+                return false;
+            if (clipData.getItemCount() > 0) {
                 try {
-                    return cm.getPrimaryClip().getItemAt(0).coerceToText(getContext()).length() > 0;
+                    return clipData.getItemAt(0).coerceToText(getContext()).length() > 0;
                 } catch (Exception ex) {
                     return false;
                 }
@@ -507,9 +524,12 @@ public class Main extends ForgeAndroidApplication {
 
         @Override
         public String getContents() {
-            if (cm.getPrimaryClip().getItemCount() > 0) {
+            ClipData clipData = cm.getPrimaryClip();
+            if (clipData == null)
+                return "";
+            if (clipData.getItemCount() > 0) {
                 try {
-                    String text = cm.getPrimaryClip().getItemAt(0).coerceToText(getContext()).toString();
+                    String text = clipData.getItemAt(0).coerceToText(getContext()).toString();
                     return Normalizer.normalize(text, Normalizer.Form.NFD);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -543,29 +563,32 @@ public class Main extends ForgeAndroidApplication {
             try {
                 if (connManager != null) {
                     connManager.registerDefaultNetworkCallback(
-                        new ConnectivityManager.NetworkCallback() {
-                            @Override
-                            public void onAvailable(Network network) {
-                                connected = true;
-                            }
+                            new ConnectivityManager.NetworkCallback() {
+                                @Override
+                                public void onAvailable(Network network) {
+                                    connected = true;
+                                }
 
-                            @Override
-                            public void onLost(Network network) {
-                                connected = false;
+                                @Override
+                                public void onLost(Network network) {
+                                    connected = false;
+                                }
                             }
-                        }
                     );
                 }
             } catch (Exception e) {
                 connected = false;
             }
         }
+
         private boolean hasInternet() {
             return isNetworkConnected(false);
         }
+
         private boolean hasWiFiInternet() {
             return isNetworkConnected(true);
         }
+
         private boolean isNetworkConnected(boolean wifiOnly) {
             boolean result = false;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -594,6 +617,7 @@ public class Main extends ForgeAndroidApplication {
             }
             return result;
         }
+
         @Override
         public boolean isConnectedToInternet() {
             //if it can't determine Internet connection within two seconds, assume not connected
@@ -614,6 +638,16 @@ public class Main extends ForgeAndroidApplication {
         @Override
         public String getVersionString() {
             return versionString;
+        }
+
+        @Override
+        public String getLatestChanges(String commitsAtom, Date buildDateOriginal, Date maxDate) {
+            return new GitLogs().getLatest(commitsAtom, buildDateOriginal, maxDate);
+        }
+
+        @Override
+        public String getReleaseTag(String releaseAtom) {
+            return new GitLogs().getLatestReleaseTag(releaseAtom);
         }
 
         @Override

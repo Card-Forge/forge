@@ -2,7 +2,8 @@ Name:Cephalid Sage
 ManaCost:3 U
 Types:Creature Octopus
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | Threshold$ True | TriggerDescription$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters, draw three cards, then discard two cards."
+S:Mode$ Continuous | Affected$ Card.Self | AddTrigger$ TrigETB | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters, draw three cards, then discard two cards."
+SVar:TrigETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw three cards, then discard two cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | Defined$ You
 Oracle:Threshold — As long as seven or more cards are in your graveyard, Cephalid Sage has "When Cephalid Sage enters, draw three cards, then discard two cards."

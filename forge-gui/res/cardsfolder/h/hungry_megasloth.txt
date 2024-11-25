@@ -1,0 +1,7 @@
+Name:Hungry Megasloth
+ManaCost:2 G
+Types:Creature Sloth Beast
+PT:3/3
+K:Reach
+A:AB$ PutCounter | Cost$ 2 T | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+Oracle:Reach (This creature can block creatures with flying.)\n{2}, {T}: Put a +1/+1 counter on Hungry Megasloth.

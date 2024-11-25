@@ -8,6 +8,7 @@ ScryfallCode=PMEI
 [cards]
 4 C Fireball @Mark Tedin
 5 C Blue Elemental Blast @Richard Thomas
+6 R Diabolic Edict @Ron Spencer
 9 C Scent of Cinder @Carl Critchlow
 10 C Lightning Hounds @Andrew Robinson
 10★ C Jamuraan Lion @Stuart Griffin
@@ -64,3 +65,7 @@ ScryfallCode=PMEI
 61 C Shield Wall @Scott Kirschner
 62 R Raiyuu, Storm's Edge @Heonhwa Choe
 63 R Snuff Out @Mike Ploog
+66 R Saryth, the Viper's Fang @Igor Kieryluk
+67 R Gush @Kev Walker
+211 R Park Heights Pegasus @Randy Gallegos
+232 R Liesa, Forgotten Archangel @Dmitry Burmak

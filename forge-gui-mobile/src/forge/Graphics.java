@@ -43,10 +43,10 @@ public class Graphics {
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
-    private final ShaderProgram shaderOutline = new ShaderProgram(Gdx.files.internal("shaders").child("outline.vert"), Gdx.files.internal("shaders").child("outline.frag"));
-    private final ShaderProgram shaderGrayscale = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("grayscale.frag"));
-    private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
-    private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
+    private final ShaderProgram shaderOutline = new ShaderProgram(Shaders.outlineVert, Shaders.outlineFrag);
+    private final ShaderProgram shaderGrayscale = new ShaderProgram(Shaders.grayscaleVert, Shaders.grayscaleFrag);
+    private final ShaderProgram shaderWarp = new ShaderProgram(Shaders.grayscaleVert, Shaders.warpFrag);
+    private final ShaderProgram shaderUnderwater = new ShaderProgram(Shaders.grayscaleVert, Shaders.underwaterFrag);
     private final ShaderProgram shaderNightDay = new ShaderProgram(Shaders.vertexShaderDayNight, Shaders.fragmentShaderDayNight);
     private final ShaderProgram shaderPixelate = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShader);
     private final ShaderProgram shaderRipple = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragRipple);
@@ -916,7 +916,7 @@ public class Graphics {
         batch.end();
         shaderRoundedRect.bind();
         shaderRoundedRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        shaderRoundedRect.setUniformf("edge_radius", (image.getHeight() / image.getWidth()) * ImageCache.getRadius(image));
+        shaderRoundedRect.setUniformf("edge_radius", (float)(image.getHeight() / image.getWidth()) * ImageCache.getInstance().getRadius(image));
         shaderRoundedRect.setUniformf("u_gray", drawGray ? 0.8f : 0f);
         batch.setShader(shaderRoundedRect);
         batch.begin();
@@ -936,7 +936,7 @@ public class Graphics {
         batch.end();
         shaderRoundedRect.bind();
         shaderRoundedRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        shaderRoundedRect.setUniformf("edge_radius", (image.getHeight() / image.getWidth()) * ImageCache.getRadius(image));
+        shaderRoundedRect.setUniformf("edge_radius", (float)(image.getHeight() / image.getWidth()) * ImageCache.getInstance().getRadius(image));
         shaderRoundedRect.setUniformf("u_gray", 0f);
         batch.setShader(shaderRoundedRect);
         batch.begin();

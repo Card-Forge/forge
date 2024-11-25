@@ -95,8 +95,8 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
-        if (damage.equals("X") || source.getSVar("X").equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
-            if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
+        if (damage.equals("X") || source.getSVar("X").equals("Count$xPaid")) {
+            if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid")) {
                 dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
                 // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible
@@ -106,7 +106,7 @@ public class DamageDealAi extends DamageAiBase {
                     if (MyRandom.percentTrue(holdChance)) {
                         int threshold = aic.getIntProperty(AiProps.HOLD_X_DAMAGE_SPELLS_THRESHOLD);
                         boolean inDanger = ComputerUtil.aiLifeInDanger(ai, false, 0);
-                        boolean isLethal = sa.getTargetRestrictions().canTgtPlayer() && dmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
+                        boolean isLethal = sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer() && dmg >= ai.getWeakestOpponent().getLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife();
                         if (dmg < threshold && ai.getGame().getPhaseHandler().getTurn() / 2 < threshold && !inDanger && !isLethal) {
                             return false;
                         }
@@ -116,7 +116,7 @@ public class DamageDealAi extends DamageAiBase {
                 // Set PayX here to maximum value. It will be adjusted later depending on the target.
                 sa.setXManaCostPaid(dmg);
             } else if (sa.getSVar(damage).contains("InYourHand") && source.isInZone(ZoneType.Hand)) {
-                dmg = AbilityUtils.calculateAmount(source, damage, sa) - 1; // the card will be spent casting the spell, so actual damage is 1 less
+                dmg -= - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
                 // cards that deal damage by the number of cards in target player's hand, e.g. Sudden Impact
                 if (sa.getTargetRestrictions().canTgtPlayer()) {
@@ -260,11 +260,9 @@ public class DamageDealAi extends DamageAiBase {
                 AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
                 aic.reserveManaSourcesForNextSpell(chainDmg.getKey(), sa);
             }
-        } else {
+        } else if (!damageTargetAI(ai, sa, dmg, false)) {
             // simple targeting when there is no spell chaining plan
-            if (!damageTargetAI(ai, sa, dmg, false)) {
-                return false;
-            }
+            return false;
         }
 
         if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) ||

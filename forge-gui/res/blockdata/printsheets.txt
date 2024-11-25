@@ -5764,3 +5764,2086 @@ War of the Last Alliance|LTR
 Dawn of a New Age|LTR
 Gandalf the White|LTR
 
+[J25 Angels 1]
+
+1 Giada, Font of Hope|J25
+1 Faithful Pikemaster|J25
+1 Celestial Enforcer|J25
+1 Herald of the Sun|J25
+1 Inspiring Overseer|J25
+1 Serra Angel|J25
+1 Youthful Valkyrie|J25
+1 Destroy Evil|J25
+1 Light of Hope|J25
+1 Pacifism|J25
+1 Starnheim Memento|J25
+1 Secluded Steppe|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Angels 2]
+
+1 Giada, Font of Hope|J25
+1 Herald of War|J25
+1 Faithful Pikemaster|J25
+1 Herald of the Sun|J25
+1 Inspiring Overseer|J25
+1 Stalwart Valkyrie|J25
+1 Youthful Valkyrie|J25
+1 Rally of Wings|J25
+1 Angelic Edict|J25
+1 Pacifism|J25
+1 Starnheim Memento|J25
+1 Secluded Steppe|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Armed 1]
+
+1 Faithful Pikemaster|J25
+1 Danitha Capashen, Paragon|J25
+1 Fencing Ace|J25
+1 Starnheim Courser|J25
+1 Sunspear Shikari|J25
+1 Divine Arrow|J25
+1 Pacifism|J25
+1 Ancestral Blade|J25
+1 Mace of the Valiant|J25
+1 Mirran Bardiche|J25
+1 Starnheim Memento|J25
+1 Valkyrie's Sword|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Armed 2]
+
+1 Stone Haven Outfitter|J25
+1 Faithful Pikemaster|J25
+1 Danitha Capashen, Paragon|J25
+1 Fencing Ace|J25
+1 Militant Inquisitor|J25
+1 Divine Arrow|J25
+1 Light the Way|J25
+1 Pacifism|J25
+1 Ancestral Blade|J25
+1 Hexgold Hoverwings|J25
+1 Mirran Bardiche|J25
+1 Plate Armor|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Armed 3]
+
+1 Faithful Pikemaster|J25
+1 Danitha Capashen, Paragon|J25
+1 Fencing Ace|J25
+1 Flutterfox|J25
+1 Militant Inquisitor|J25
+1 Trusty Retriever|J25
+1 Resistance Reunited|J25
+1 Pacifism|J25
+1 Ancestral Blade|J25
+1 Maul of the Skyclaves|J25
+1 Mirran Bardiche|J25
+1 Valkyrie's Sword|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Armed 4]
+
+1 Faithful Pikemaster|J25
+1 Danitha Capashen, Paragon|J25
+1 Fencing Ace|J25
+1 Militant Inquisitor|J25
+1 Sunspear Shikari|J25
+1 Thopter Architect|J25
+1 Deadly Riposte|J25
+1 Pacifism|J25
+1 Ancestral Blade|J25
+1 Godsend|J25
+1 Mirran Bardiche|J25
+1 Plate Armor|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Enchanted 1]
+
+1 Eidolon of Astral Winds|J25
+1 Psemilla, Meletian Poet|J25
+1 Archon of Falling Stars|J25
+1 Captivating Unicorn|J25
+1 Favored of Iroas|J25
+1 Flutterfox|J25
+1 Glory Bearers|J25
+1 Spirited Companion|J25
+1 Banishing Light|J25
+1 Chosen by Heliod|J25
+1 Dreadful Apathy|J25
+1 Indomitable Will|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Enchanted 2]
+
+1 Eidolon of Astral Winds|J25
+1 Psemilla, Meletian Poet|J25
+1 Archon of Falling Stars|J25
+1 Flutterfox|J25
+1 Glory Bearers|J25
+1 Golden-Tail Disciple|J25
+1 Nyx-Fleece Ram|J25
+1 Sunblade Samurai|J25
+1 Banishing Light|J25
+1 Cage of Hands|J25
+1 Cartouche of Solidarity|J25
+1 Indomitable Will|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Enchanted 3]
+
+1 Nykthos Paragon|J25
+1 Starfield Mystic|J25
+1 Psemilla, Meletian Poet|J25
+1 Flutterfox|J25
+1 Glory Bearers|J25
+1 Golden-Tail Disciple|J25
+1 Nyx-Fleece Ram|J25
+1 Sunblade Samurai|J25
+1 Banishing Light|J25
+1 Divine Favor|J25
+1 Indomitable Will|J25
+1 Serra's Embrace|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Enchanted 4]
+
+1 Archon of Sun's Grace|J25
+1 Psemilla, Meletian Poet|J25
+1 Archon of Falling Stars|J25
+1 Favored of Iroas|J25
+1 Flutterfox|J25
+1 Golden-Tail Disciple|J25
+1 Spirited Companion|J25
+1 Sunblade Samurai|J25
+1 Banishing Light|J25
+1 Angelic Gift|J25
+1 Dreadful Apathy|J25
+1 Indomitable Will|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Giddyap ]
+
+1 Thurid, Mare of Destiny|J25
+1 Celestial Unicorn|J25
+1 Steadfast Unicorn|J25
+1 Brightmare|J25
+1 Ronom Unicorn|J25
+1 Shield Mare|J25
+1 Sungrace Pegasus|J25
+1 Sunmane Pegasus|J25
+1 Tenacity|J25
+1 Moment of Triumph|J25
+1 Outflank|J25
+1 Banishing Light|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Healers 1]
+
+1 Speaker of the Heavens|J25
+1 Hinterland Sanctifier|J25
+1 Qala, Ajani's Pridemate|J25
+1 Ajani's Pridemate|J25
+1 Angel of Mercy|J25
+1 Angel of Vitality|J25
+1 Brightmare|J25
+1 Mesa Unicorn|J25
+1 Desperate Lunge|J25
+1 Divine Arrow|J25
+1 Revitalize|J25
+1 Faith's Fetters|J25
+1 Kabira Crossroads|J25
+1 Thriving Heath|J25
+6 Plains|J25
+
+[J25 Healers 2]
+
+1 Valkyrie Harbinger|J25
+1 Hinterland Sanctifier|J25
+1 Qala, Ajani's Pridemate|J25
+1 Ajani's Pridemate|J25
+1 Angel of Vitality|J25
+1 Bishop's Soldier|J25
+1 Brightmare|J25
+1 Speakeasy Server|J25
+1 Divine Arrow|J25
+1 Revitalize|J25
+1 Take Up the Shield|J25
+1 Recumbent Bliss|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Healers 3]
+
+1 Righteous Valkyrie|J25
+1 Hinterland Sanctifier|J25
+1 Qala, Ajani's Pridemate|J25
+1 Ajani's Pridemate|J25
+1 Angel of Mercy|J25
+1 Angel of Vitality|J25
+1 Banisher Priest|J25
+1 Daybreak Chaplain|J25
+1 Deadly Riposte|J25
+1 Moment of Heroism|J25
+1 Revitalize|J25
+1 Recumbent Bliss|J25
+1 Kabira Crossroads|J25
+1 Thriving Heath|J25
+6 Plains|J25
+
+[J25 Healers 4]
+
+1 Felidar Sovereign|J25
+1 Rhox Faithmender|J25
+1 Hinterland Sanctifier|J25
+1 Qala, Ajani's Pridemate|J25
+1 Ajani's Pridemate|J25
+1 Angel of Vitality|J25
+1 Brightmare|J25
+1 Mesa Unicorn|J25
+1 Battlefield Promotion|J25
+1 Divine Arrow|J25
+1 Revitalize|J25
+1 Faith's Fetters|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Heroes 1]
+
+1 Brigone, Soldier of Meletis|J25
+1 Faithful Pikemaster|J25
+1 Akroan Skyguard|J25
+1 Favored Hoplite|J25
+1 Fencing Ace|J25
+1 Tethmos High Priest|J25
+1 Wingsteed Rider|J25
+1 Dauntless Onslaught|J25
+1 Defiant Strike|J25
+1 Moment of Heroism|J25
+1 Valorous Stance|J25
+1 Chains of Custody|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Heroes 2]
+
+1 Brigone, Soldier of Meletis|J25
+1 Ojutai Exemplars|J25
+1 Faithful Pikemaster|J25
+1 Elite Skirmisher|J25
+1 Favored Hoplite|J25
+1 Fencing Ace|J25
+1 Wingsteed Rider|J25
+1 Defiant Strike|J25
+1 Repel the Darkness|J25
+1 Valorous Stance|J25
+1 Gird for Battle|J25
+1 Chains of Custody|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Legion 1]
+
+1 Adeline, Resplendent Cathar|J25
+1 Dawnwing Marshal|J25
+1 Hinterland Sanctifier|J25
+1 Mentor of the Meek|J25
+1 Argivian Phalanx|J25
+1 Recruitment Officer|J25
+1 Search Party Captain|J25
+1 Raise the Alarm|J25
+1 Dauntless Unity|J25
+1 Make a Stand|J25
+1 Pacifism|J25
+1 Ancestral Blade|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Legion 2]
+
+1 Adeline, Resplendent Cathar|J25
+1 Venerated Loxodon|J25
+1 Dawnwing Marshal|J25
+1 Hinterland Sanctifier|J25
+1 Mentor of the Meek|J25
+1 Recruitment Officer|J25
+1 Raise the Alarm|J25
+1 Dauntless Unity|J25
+1 Defend the Campus|J25
+1 Triplicate Spirits|J25
+1 Conclave Tribunal|J25
+1 Ancestral Blade|J25
+1 Memorial to Glory|J25
+1 Thriving Heath|J25
+6 Plains|J25
+
+[J25 Prideful]
+
+1 Brimaz, King of Oreskos|J25
+1 Dawnwing Marshal|J25
+1 Basri's Acolyte|J25
+1 Ingenious Leonin|J25
+1 King of the Pride|J25
+1 Leonin of the Lost Pride|J25
+1 Leonin Vanguard|J25
+1 Savannah Lions|J25
+1 Impeccable Timing|J25
+1 Take Up the Shield|J25
+1 Pacifism|J25
+1 Leonin Scimitar|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Stalwart 1]
+
+1 Ajani, Adversary of Tyrants|J25
+1 Generous Pup|J25
+1 Urdnan, Dromoka Warrior|J25
+1 Angelic Cub|J25
+1 Gavony Silversmith|J25
+1 Patron of the Valiant|J25
+1 Sandsteppe Outcast|J25
+1 Squad Captain|J25
+1 Steadfast Sentry|J25
+1 Swift Response|J25
+1 Take Up the Shield|J25
+1 Banishing Light|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Stalwart 2]
+
+1 Basri's Lieutenant|J25
+1 Urdnan, Dromoka Warrior|J25
+1 Basri's Acolyte|J25
+1 Lightwalker|J25
+1 Patron of the Valiant|J25
+1 Sandsteppe Outcast|J25
+1 Star Pupil|J25
+1 Steadfast Sentry|J25
+1 Battlefield Promotion|J25
+1 Swift Response|J25
+1 Basri's Solidarity|J25
+1 Banishing Light|J25
+1 Cave of Temptation|J25
+1 Thriving Heath|J25
+6 Plains|J25
+
+[J25 Stalwart 3]
+
+1 Generous Pup|J25
+1 Urdnan, Dromoka Warrior|J25
+1 Steadfast Unicorn|J25
+1 Expedition Raptor|J25
+1 Jubilant Mascot|J25
+1 Paladin of the Bloodstained|J25
+1 Relief Captain|J25
+1 Sandsteppe Outcast|J25
+1 Swift Response|J25
+1 Take Up the Shield|J25
+1 Shoulder to Shoulder|J25
+1 Banishing Light|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Stalwart 4]
+
+1 Light of the Legion|J25
+1 Mikaeus, the Lunarch|J25
+1 Urdnan, Dromoka Warrior|J25
+1 Gavony Silversmith|J25
+1 Parhelion Patrol|J25
+1 Sandsteppe Outcast|J25
+1 Steadfast Sentry|J25
+1 Sunhome Stalwart|J25
+1 Battlefield Promotion|J25
+1 Swift Response|J25
+1 Gird for Battle|J25
+1 Banishing Light|J25
+1 Thriving Heath|J25
+7 Plains|J25
+
+[J25 Illusions]
+
+1 Pol Jamaar, Illusionist|J25
+1 Lord of the Unreal|J25
+1 Phantasmal Shieldback|J25
+1 Murmuring Mystic|J25
+1 Haunting Figment|J25
+1 Krovikan Mist|J25
+1 Oneirophage|J25
+1 Phantom Ninja|J25
+1 Opt|J25
+1 Phantasmal Form|J25
+1 Supreme Will|J25
+1 Starlight Snare|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Ninjas]
+
+1 Taeko, the Patient Avalanche|J25
+1 Ninja of the Deep Hours|J25
+1 Moon-Circuit Hacker|J25
+1 Moonsnare Specialist|J25
+1 Network Disruptor|J25
+1 Nightveil Sprite|J25
+1 Phantom Ninja|J25
+1 Prosperous Thief|J25
+1 Fading Hope|J25
+1 Whirlwind Denial|J25
+1 Starlight Snare|J25
+1 Smoke Shroud|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Drowned 1]
+
+1 Neerdiv, Devious Diver|J25
+1 Expendable Lackey|J25
+1 Merfolk Pupil|J25
+1 Organ Hoarder|J25
+1 Screaming Swarm|J25
+1 Shipwreck Dowser|J25
+1 Stitched Drake|J25
+1 Wall of Lost Thoughts|J25
+1 Sudden Insight|J25
+1 Deep Analysis|J25
+1 Silent Departure|J25
+1 Locked in the Cemetery|J25
+1 Ipnu Rivulet|J25
+1 Thriving Isle|J25
+6 Island|J25
+
+[J25 Drowned 2]
+
+1 Neerdiv, Devious Diver|J25
+1 Cruel Witness|J25
+1 Draugr Thought-Thief|J25
+1 Expendable Lackey|J25
+1 Screaming Swarm|J25
+1 Towering-Wave Mystic|J25
+1 Waker of Waves|J25
+1 Wall of Lost Thoughts|J25
+1 Cackling Counterpart|J25
+1 Sudden Insight|J25
+1 Deep Analysis|J25
+1 Locked in the Cemetery|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Of the Coast 1]
+
+1 Plagon, Lord of the Beach|J25
+1 Gilded Scuttler|J25
+1 Kapsho Kitefins|J25
+1 Purple-Crystal Crab|J25
+1 Shorecomber Crab|J25
+1 Sigiled Starfish|J25
+1 Tidepool Turtle|J25
+1 Yarok's Wavecrasher|J25
+1 Delightful Discovery|J25
+1 Run Ashore|J25
+1 Starlight Snare|J25
+1 Omen of the Sea|J25
+1 Lonely Sandbar|J25
+1 Thriving Isle|J25
+6 Island|J25
+
+[J25 Of the Coast 2]
+
+1 Plagon, Lord of the Beach|J25
+1 Gilded Scuttler|J25
+1 Azure Drake|J25
+1 Glimmerbell|J25
+1 Shipwreck Dowser|J25
+1 Shorecomber Crab|J25
+1 Sigiled Starfish|J25
+1 Tidepool Turtle|J25
+1 Delightful Discovery|J25
+1 Run Ashore|J25
+1 Opt|J25
+1 Starlight Snare|J25
+1 Lonely Sandbar|J25
+1 Thriving Isle|J25
+6 Island|J25
+
+[J25 Wizards 1]
+
+1 Naban, Dean of Iteration|J25
+1 Faerie Seer|J25
+1 Academy Journeymage|J25
+1 Archaeomancer|J25
+1 Augur of Bolas|J25
+1 Cloudkin Seer|J25
+1 Exclusion Mage|J25
+1 Windcaller Aven|J25
+1 Choking Tethers|J25
+1 Remand|J25
+1 Concentrate|J25
+1 Starlight Snare|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Wizards 2]
+
+1 Naban, Dean of Iteration|J25
+1 Aether Channeler|J25
+1 Faerie Seer|J25
+1 Academy Journeymage|J25
+1 Augur of Bolas|J25
+1 Expedition Diviner|J25
+1 Frost Trickster|J25
+1 Shipwreck Dowser|J25
+1 Chilling Trap|J25
+1 Opportunity|J25
+1 Remand|J25
+1 Starlight Snare|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Bookworms 1]
+
+1 Syr Elenora, the Discerning|J25
+1 Faerie Vandal|J25
+1 Lat-Nam Adept|J25
+1 Mystic Skyfish|J25
+1 Reckless Scholar|J25
+1 Shore Keeper|J25
+1 Sky-Eel School|J25
+1 Blink of an Eye|J25
+1 Overflowing Insight|J25
+1 Cartouche of Knowledge|J25
+1 Starlight Snare|J25
+1 Trial of Knowledge|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Bookworms 2]
+
+1 Teferi's Ageless Insight|J25
+1 Phantasmal Shieldback|J25
+1 Starlight Snare|J25
+1 Syr Elenora, the Discerning|J25
+1 Faerie Vandal|J25
+1 Muse Drake|J25
+1 Mystic Skyfish|J25
+1 Reckless Scholar|J25
+1 Sky-Eel School|J25
+1 Uncomfortable Chill|J25
+1 Drag Under|J25
+1 Witching Well|J25
+1 Memorial to Genius|J25
+1 Thriving Isle|J25
+6 Island|J25
+
+[J25 Bookworms 3]
+
+1 Sphinx of Enlightenment|J25
+1 Syr Elenora, the Discerning|J25
+1 Lat-Nam Adept|J25
+1 Mystic Skyfish|J25
+1 Reckless Scholar|J25
+1 Shore Keeper|J25
+1 Thopter Mechanic|J25
+1 Drag Under|J25
+1 Cartouche of Knowledge|J25
+1 Omen of the Sea|J25
+1 Starlight Snare|J25
+1 Trial of Knowledge|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Bookworms 4]
+
+1 Nadir Kraken|J25
+1 Phantasmal Shieldback|J25
+1 Syr Elenora, the Discerning|J25
+1 Faerie Vandal|J25
+1 Lat-Nam Adept|J25
+1 Reckless Scholar|J25
+1 Sky-Eel School|J25
+1 Tolarian Kraken|J25
+1 Opt|J25
+1 Soul Read|J25
+1 Drag Under|J25
+1 Starlight Snare|J25
+1 Memorial to Genius|J25
+1 Thriving Isle|J25
+6 Island|J25
+
+[J25 Inventive 1]
+
+1 Sai, Master Thopterist|J25
+1 Gilded Scuttler|J25
+1 Ornithopter of Paradise|J25
+1 Experimental Aviator|J25
+1 Filigree Attendant|J25
+1 Gearseeker Serpent|J25
+1 Chief of the Foundry|J25
+1 Eager Construct|J25
+1 Blink of an Eye|J25
+1 Bury in Books|J25
+1 Prophetic Prism|J25
+1 Whirlermaker|J25
+1 Seat of the Synod|J25
+1 Thriving Isle|J25
+6 Island|J25
+
+[J25 Inventive 2]
+
+1 Sai, Master Thopterist|J25
+1 Shimmer Dragon|J25
+1 Gilded Scuttler|J25
+1 Ornithopter of Paradise|J25
+1 Experimental Aviator|J25
+1 Chief of the Foundry|J25
+1 Eager Construct|J25
+1 Treasure Keeper|J25
+1 Malfunction|J25
+1 Fireshrieker|J25
+1 Prophetic Prism|J25
+1 Universal Solvent|J25
+1 Seat of the Synod|J25
+1 Thriving Isle|J25
+6 Island|J25
+
+[J25 Inventive 3]
+
+1 Padeem, Consul of Innovation|J25
+1 Thought Monitor|J25
+1 Gilded Scuttler|J25
+1 Ornithopter of Paradise|J25
+1 Experimental Aviator|J25
+1 Chief of the Foundry|J25
+1 Myr Enforcer|J25
+1 Patchwork Automaton|J25
+1 Fading Hope|J25
+1 Thoughtcast|J25
+1 Malfunction|J25
+1 Prophetic Prism|J25
+1 Seat of the Synod|J25
+1 Thriving Isle|J25
+6 Island|J25
+
+[J25 Inventive 4]
+
+1 Padeem, Consul of Innovation|J25
+1 Gilded Scuttler|J25
+1 Shardless Outlander|J25
+1 Ornithopter of Paradise|J25
+1 Experimental Aviator|J25
+1 Chief of the Foundry|J25
+1 Eager Construct|J25
+1 Treasure Keeper|J25
+1 Blink of an Eye|J25
+1 Bury in Books|J25
+1 Guardian Idol|J25
+1 Prophetic Prism|J25
+1 Seat of the Synod|J25
+1 Thriving Isle|J25
+6 Island|J25
+
+[J25 Soaring 1]
+
+1 Windreader Sphinx|J25
+1 Cynette, Jelly Drover|J25
+1 Aerial Guide|J25
+1 Nightveil Sprite|J25
+1 Tide Skimmer|J25
+1 Warden of Evos Isle|J25
+1 Waterkin Shaman|J25
+1 Serpentine Ambush|J25
+1 Uncomfortable Chill|J25
+1 Gust of Wind|J25
+1 Winged Words|J25
+1 Starlight Snare|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Soaring 2]
+
+1 Cavalier of Gales|J25
+1 Cynette, Jelly Drover|J25
+1 Aerial Guide|J25
+1 Owl Familiar|J25
+1 Shorecomber Crab|J25
+1 Tide Skimmer|J25
+1 Warden of Evos Isle|J25
+1 Majestic Metamorphosis|J25
+1 Gust of Wind|J25
+1 Cartouche of Knowledge|J25
+1 Starlight Snare|J25
+1 Trial of Knowledge|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Soaring 3]
+
+1 Mu Yanling, Sky Dancer|J25
+1 Cynette, Jelly Drover|J25
+1 Aerial Guide|J25
+1 Cloudkin Seer|J25
+1 Malcator's Watcher|J25
+1 Thopter Mechanic|J25
+1 Tide Skimmer|J25
+1 Windstorm Drake|J25
+1 Serpentine Ambush|J25
+1 Gust of Wind|J25
+1 Winged Words|J25
+1 Starlight Snare|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Soaring 4]
+
+1 Sprite Noble|J25
+1 Cynette, Jelly Drover|J25
+1 Faerie Seer|J25
+1 Aerial Guide|J25
+1 Air Elemental|J25
+1 Nightveil Sprite|J25
+1 Tide Skimmer|J25
+1 Majestic Metamorphosis|J25
+1 Opt|J25
+1 Stolen by the Fae|J25
+1 Winged Words|J25
+1 Starlight Snare|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Surprise 1]
+
+1 Thryx, the Sudden Storm|J25
+1 Brineborn Cutthroat|J25
+1 Chrome Prowler|J25
+1 Crystacean|J25
+1 Spectral Sailor|J25
+1 Stinging Lionfish|J25
+1 Undersea Invader|J25
+1 Wind Strider|J25
+1 Delightful Discovery|J25
+1 Opt|J25
+1 Capture Sphere|J25
+1 Slimebind|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Surprise 2]
+
+1 Thryx, the Sudden Storm|J25
+1 Voracious Greatshark|J25
+1 Brineborn Cutthroat|J25
+1 Naiad of Hidden Coves|J25
+1 Pestermite|J25
+1 Spectral Sailor|J25
+1 Stinging Lionfish|J25
+1 Undersea Invader|J25
+1 Delightful Discovery|J25
+1 Opt|J25
+1 Capture Sphere|J25
+1 Starlit Mantle|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Surprise 3]
+
+1 Venser, Shaper Savant|J25
+1 Breaching Hippocamp|J25
+1 Brineborn Cutthroat|J25
+1 Naiad of Hidden Coves|J25
+1 Pestermite|J25
+1 Spectral Sailor|J25
+1 Stinging Lionfish|J25
+1 Wind Strider|J25
+1 Opt|J25
+1 Supreme Will|J25
+1 Starlight Snare|J25
+1 Starlit Mantle|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Surprise 4]
+
+1 Venser, Shaper Savant|J25
+1 Wavebreak Hippocamp|J25
+1 Aven Reedstalker|J25
+1 Brineborn Cutthroat|J25
+1 Spectral Sailor|J25
+1 Stinging Lionfish|J25
+1 Vexing Gull|J25
+1 Wind Strider|J25
+1 Fading Hope|J25
+1 Soul Read|J25
+1 Uncomfortable Chill|J25
+1 Starlight Snare|J25
+1 Thriving Isle|J25
+7 Island|J25
+
+[J25 Nefarious]
+
+1 Vilis, Broker of Blood|J25
+1 Dark Confidant|J25
+1 Scourge of the Undercity|J25
+1 Howling Banshee|J25
+1 Arrogant Outlaw|J25
+1 Audacious Thief|J25
+1 Vampire Scrivener|J25
+1 Alchemist's Gift|J25
+1 Infernal Grasp|J25
+1 Ulcerate|J25
+1 Read the Bones|J25
+1 Metalspinner's Puzzleknot|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Snakes]
+
+1 Aphelia, Viper Whisperer|J25
+1 Hooded Blightfang|J25
+1 Scourge of the Undercity|J25
+1 Serpent Assassin|J25
+1 Pharika's Chosen|J25
+1 Ukud Cobra|J25
+1 Venomous Hierophant|J25
+1 Vraska's Finisher|J25
+1 Coat with Venom|J25
+1 Killing Glare|J25
+1 Night's Whisper|J25
+1 Gorgon Flail|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Icky 1]
+
+1 Fumulus, the Infestation|J25
+1 Wriggling Grub|J25
+1 Devouring Swarm|J25
+1 Durable Coilbug|J25
+1 Fretwork Colony|J25
+1 Heartstabber Mosquito|J25
+1 Nantuko Husk|J25
+1 Swarm of Bloodflies|J25
+1 Go for the Throat|J25
+1 Subtle Strike|J25
+1 Village Rites|J25
+1 Eaten Alive|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Icky 2]
+
+1 Fumulus, the Infestation|J25
+1 Endless Cockroaches|J25
+1 Wriggling Grub|J25
+1 Devouring Swarm|J25
+1 Heartstabber Mosquito|J25
+1 Morkrut Necropod|J25
+1 Nantuko Husk|J25
+1 Virus Beetle|J25
+1 Go for the Throat|J25
+1 Subtle Strike|J25
+1 Eaten Alive|J25
+1 Torment of Scarabs|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Ne'er-do-wells 1]
+
+1 Rev, Tithe Extractor|J25
+1 Serpent Assassin|J25
+1 Audacious Thief|J25
+1 Crooked Custodian|J25
+1 Masked Blackguard|J25
+1 Midnight Assassin|J25
+1 Morbid Opportunist|J25
+1 Pilfering Imp|J25
+1 Fake Your Own Death|J25
+1 Murder|J25
+1 Foul Play|J25
+1 Thieves' Tools|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Ne'er-do-wells 2]
+
+1 Rev, Tithe Extractor|J25
+1 Thieves' Guild Enforcer|J25
+1 Audacious Thief|J25
+1 Balustrade Spy|J25
+1 Bloodtithe Collector|J25
+1 Expedition Skulker|J25
+1 Masked Blackguard|J25
+1 Morbid Opportunist|J25
+1 Fake Your Own Death|J25
+1 Foul Play|J25
+1 Grim Bounty|J25
+1 Thieves' Tools|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Treasures 1]
+
+1 Evereth, Viceroy of Plunder|J25
+1 Ruthless Technomancer|J25
+1 Shambling Ghast|J25
+1 Dire Fleet Hoarder|J25
+1 Pitiless Plunderer|J25
+1 Reassembling Skeleton|J25
+1 Ruthless Knave|J25
+1 Undercity Scrounger|J25
+1 Deadly Dispute|J25
+1 Fake Your Own Death|J25
+1 Grim Bounty|J25
+1 Bastion of Remembrance|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Treasures 2]
+
+1 Evereth, Viceroy of Plunder|J25
+1 Shambling Ghast|J25
+1 Dire Fleet Hoarder|J25
+1 Dusk Mangler|J25
+1 Pitiless Plunderer|J25
+1 Reassembling Skeleton|J25
+1 Ruthless Knave|J25
+1 Undercity Scrounger|J25
+1 Deadly Dispute|J25
+1 Fake Your Own Death|J25
+1 Contract Killing|J25
+1 Powerstone Fracture|J25
+1 Thriving Moor|J25
+1 Vault of Whispers|J25
+6 Swamp|J25
+
+[J25 Clerics 1]
+
+1 Taborax, Hope's Demise|J25
+1 Nullpriest of Oblivion|J25
+1 Bonecaller Cleric|J25
+1 Archfiend's Vessel|J25
+1 Eerie Soultender|J25
+1 Koma's Faithful|J25
+1 Scion of the Swarm|J25
+1 Skemfar Shadowsage|J25
+1 Dark Bargain|J25
+1 Disfigure|J25
+1 Agonizing Syphon|J25
+1 Revoke Demise|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Clerics 2]
+
+1 Taborax, Hope's Demise|J25
+1 Bonecaller Cleric|J25
+1 Priest of Gix|J25
+1 Archfiend's Vessel|J25
+1 Elderfang Disciple|J25
+1 Entomber Exarch|J25
+1 Koma's Faithful|J25
+1 Scion of the Swarm|J25
+1 Dark Bargain|J25
+1 Disfigure|J25
+1 Revoke Demise|J25
+1 Severed Strands|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Clerics 3]
+
+1 Vito, Thorn of the Dusk Rose|J25
+1 Bonecaller Cleric|J25
+1 Dark Supplicant|J25
+1 Eerie Soultender|J25
+1 Elderfang Disciple|J25
+1 Koma's Faithful|J25
+1 Scion of Darkness|J25
+1 Skemfar Shadowsage|J25
+1 Dark Bargain|J25
+1 Moment of Craving|J25
+1 Agonizing Syphon|J25
+1 Revoke Demise|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Clerics 4]
+
+1 Vito, Thorn of the Dusk Rose|J25
+1 Priest of Forgotten Gods|J25
+1 Bonecaller Cleric|J25
+1 Priest of Gix|J25
+1 Archfiend's Vessel|J25
+1 Scion of the Swarm|J25
+1 Skemfar Shadowsage|J25
+1 Stronghold Confessor|J25
+1 Alchemist's Gift|J25
+1 Dark Bargain|J25
+1 Extinguish the Light|J25
+1 Revoke Demise|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Ghastly 1]
+
+1 Harvester of Souls|J25
+1 Ozox, the Clattering King|J25
+1 Doomed Dissenter|J25
+1 Dross Hopper|J25
+1 Falkenrath Noble|J25
+1 Morbid Opportunist|J25
+1 Wakedancer|J25
+1 Murder|J25
+1 Tragic Slip|J25
+1 Village Rites|J25
+1 Blood Beckoning|J25
+1 Moan of the Unhallowed|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Ghastly 2]
+
+1 Bloodgift Demon|J25
+1 Ozox, the Clattering King|J25
+1 Doomed Dissenter|J25
+1 Falkenrath Noble|J25
+1 Gnawing Zombie|J25
+1 Morbid Opportunist|J25
+1 Typhoid Rats|J25
+1 Defenestrate|J25
+1 Tragic Slip|J25
+1 Village Rites|J25
+1 Blood Beckoning|J25
+1 Moan of the Unhallowed|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Ghastly 3]
+
+1 Ozox, the Clattering King|J25
+1 Reaper from the Abyss|J25
+1 Wriggling Grub|J25
+1 Boneclad Necromancer|J25
+1 Dross Hopper|J25
+1 Falkenrath Noble|J25
+1 Morbid Opportunist|J25
+1 Morkrut Behemoth|J25
+1 Deadly Dispute|J25
+1 Murder|J25
+1 Tragic Slip|J25
+1 Blood Beckoning|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Ghastly 4]
+
+1 Ozox, the Clattering King|J25
+1 Shambling Ghast|J25
+1 Doomed Dissenter|J25
+1 Falkenrath Noble|J25
+1 Morbid Opportunist|J25
+1 Wakedancer|J25
+1 Deadly Dispute|J25
+1 Defenestrate|J25
+1 Tragic Slip|J25
+1 Army of the Damned|J25
+1 Crawl from the Cellar|J25
+1 Moan of the Unhallowed|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Grave Robbers 1]
+
+1 Gorex, the Tombshell|J25
+1 Eternal Taskmaster|J25
+1 Diregraf Scavenger|J25
+1 Eye Collector|J25
+1 Gorging Vulture|J25
+1 Graveblade Marauder|J25
+1 Gravedigger|J25
+1 Wailing Ghoul|J25
+1 Deal Gone Bad|J25
+1 Murder|J25
+1 Grave Strength|J25
+1 Revoke Demise|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Grave Robbers 2]
+
+1 Gorex, the Tombshell|J25
+1 Doomed Necromancer|J25
+1 Eternal Taskmaster|J25
+1 Dusk Mangler|J25
+1 Eye Collector|J25
+1 Gorging Vulture|J25
+1 Moodmark Painter|J25
+1 Undead Butler|J25
+1 Deal Gone Bad|J25
+1 Fake Your Own Death|J25
+1 Necrotic Wound|J25
+1 Revoke Demise|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Grave Robbers 3]
+
+1 Isareth the Awakener|J25
+1 Eternal Taskmaster|J25
+1 Boneclad Necromancer|J25
+1 Dreadhound|J25
+1 Gorging Vulture|J25
+1 Gravedigger|J25
+1 Persistent Specimen|J25
+1 Wailing Ghoul|J25
+1 Deal Gone Bad|J25
+1 Murder|J25
+1 Grave Strength|J25
+1 Revoke Demise|J25
+1 Memorial to Folly|J25
+1 Thriving Moor|J25
+6 Swamp|J25
+
+[J25 Grave Robbers 4]
+
+1 Liliana, Death's Majesty|J25
+1 Isareth the Awakener|J25
+1 Shardless Outlander|J25
+1 Eternal Taskmaster|J25
+1 Goremand|J25
+1 Gorging Vulture|J25
+1 Gravedigger|J25
+1 Persistent Specimen|J25
+1 Undead Butler|J25
+1 Deal Gone Bad|J25
+1 Murder|J25
+1 Revoke Demise|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Vampires 1]
+
+1 Scourge of the Undercity|J25
+1 Nazar, the Velvet Fang|J25
+1 Skymarch Bloodletter|J25
+1 Blood Burglar|J25
+1 Bloodtithe Collector|J25
+1 Gluttonous Guest|J25
+1 Vampire of the Dire Moon|J25
+1 Bleed Dry|J25
+1 Urge to Feed|J25
+1 Gift of Fangs|J25
+1 Blood Fountain|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Vampires 2]
+
+1 Crossway Troublemakers|J25
+1 Sanctum Seeker|J25
+1 Scourge of the Undercity|J25
+1 Nazar, the Velvet Fang|J25
+1 Bloodthirsty Aerialist|J25
+1 Creeping Bloodsucker|J25
+1 Gluttonous Guest|J25
+1 Vampire of the Dire Moon|J25
+1 Alchemist's Gift|J25
+1 Bleed Dry|J25
+1 Urge to Feed|J25
+1 Blood Fountain|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Vampires 3]
+
+1 Necropolis Regent|J25
+1 Scourge of the Undercity|J25
+1 Nazar, the Velvet Fang|J25
+1 Skymarch Bloodletter|J25
+1 Creeping Bloodsucker|J25
+1 Gluttonous Guest|J25
+1 Thirsting Bloodlord|J25
+1 Vicious Conquistador|J25
+1 Bleed Dry|J25
+1 Go for the Throat|J25
+1 Gift of Fangs|J25
+1 Blood Fountain|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Vampires 4]
+
+1 Rodolf Duskbringer|J25
+1 Scourge of the Undercity|J25
+1 Nazar, the Velvet Fang|J25
+1 Blood Burglar|J25
+1 Epicure of Blood|J25
+1 Gluttonous Guest|J25
+1 Vampire Nighthawk|J25
+1 Vampire of the Dire Moon|J25
+1 Bleed Dry|J25
+1 Moment of Craving|J25
+1 Exsanguinate|J25
+1 Blood Fountain|J25
+1 Thriving Moor|J25
+7 Swamp|J25
+
+[J25 Burning]
+
+
+1 Rionya, Fire Dancer|J25
+1 Firespitter Whelp|J25
+1 Fathom Fleet Firebrand|J25
+1 Goblin Fireslinger|J25
+1 Bloodfire Expert|J25
+1 Chandra's Spitfire|J25
+1 Firebrand Archer|J25
+1 Wildfire Elemental|J25
+1 Hearts on Fire|J25
+1 Play with Fire|J25
+1 Flames of the Firebrand|J25
+1 Jaya's Firenado|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Too Many]
+
+1 Fiendish Duo|J25
+2 Brothers Yamazaki|J25
+1 Battle-Rattle Shaman|J25
+1 Mogg Flunkies|J25
+1 Weaselback Redcap|J25
+1 Goblin Surprise|J25
+1 Twinferno|J25
+1 Krenko's Command|J25
+1 Furious Reprisal|J25
+1 Pigment Storm|J25
+1 Reckless Impulse|J25
+1 Thriving Bluff|J25
+6 Mountain|J25
+
+[J25 Copied 1]
+
+1 Zada, Hedron Grinder|J25
+1 Scholar of Combustion|J25
+1 Guttersnipe|J25
+1 Kiln Fiend|J25
+1 Cyclops Electromancer|J25
+1 Spellgorger Weird|J25
+1 Young Pyromancer|J25
+1 Crimson Wisps|J25
+1 Fire Prophecy|J25
+1 Fists of Flame|J25
+1 Invigorated Rampage|J25
+1 Renegade Tactics|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Copied 2]
+
+1 Zada, Hedron Grinder|J25
+1 Charmbreaker Devils|J25
+1 Firespitter Whelp|J25
+1 Scholar of Combustion|J25
+1 Kiln Fiend|J25
+1 Cyclops Electromancer|J25
+1 Young Pyromancer|J25
+1 Hearts on Fire|J25
+1 Fire Prophecy|J25
+1 Uncaged Fury|J25
+2 Ancestral Anger|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Dragons 1]
+
+1 Lathliss, Dragon Queen|J25
+1 Firespitter Whelp|J25
+1 Dragon Hatchling|J25
+1 Dragon Whelp|J25
+1 Dragonlord's Servant|J25
+1 Rapacious Dragon|J25
+1 Sparktongue Dragon|J25
+1 Dragon's Fire|J25
+1 Seize the Spoils|J25
+1 Bathe in Dragonfire|J25
+1 Carnelian Orb of Dragonkind|J25
+1 Forgotten Cave|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Dragons 2]
+
+1 Sarkhan, Fireblood|J25
+1 Lathliss, Dragon Queen|J25
+1 Firespitter Whelp|J25
+1 Dragon Hatchling|J25
+1 Dragon Whelp|J25
+1 Dragonlord's Servant|J25
+1 Hellkite Whelp|J25
+1 Sparktongue Dragon|J25
+1 Dragon's Fire|J25
+1 Sarkhan's Rage|J25
+1 Seize the Spoils|J25
+1 Forgotten Cave|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Warriors 1]
+
+1 Gornog, the Red Reaper|J25
+1 Boggart Brute|J25
+1 Boldwyr Intimidator|J25
+1 Expedition Champion|J25
+1 Goma Fada Vanguard|J25
+1 Keldon Raider|J25
+1 Kruin Striker|J25
+1 Wrecking Crew|J25
+1 Kindled Fury|J25
+1 Soul Sear|J25
+1 Pyrophobia|J25
+1 Relic Axe|J25
+1 Ghitu Encampment|J25
+1 Thriving Bluff|J25
+6 Mountain|J25
+
+[J25 Warriors 2]
+
+1 Gornog, the Red Reaper|J25
+1 Kargan Intimidator|J25
+1 Boldwyr Intimidator|J25
+1 Daybreak Combatants|J25
+1 Goma Fada Vanguard|J25
+1 Keldon Raider|J25
+1 Unstoppable Ogre|J25
+1 Wrecking Crew|J25
+1 Infuriate|J25
+1 Soul Sear|J25
+1 Pyrophobia|J25
+1 Relic Axe|J25
+1 Ghitu Encampment|J25
+1 Thriving Bluff|J25
+6 Mountain|J25
+
+[J25 Stoked 1]
+
+1 Scholar of Combustion|J25
+1 Cleon, Merry Champion|J25
+1 Kiln Fiend|J25
+1 Arena Athlete|J25
+1 Resistance Skywarden|J25
+1 Satyr Hoplite|J25
+1 Hearts on Fire|J25
+1 Titan's Strength|J25
+1 Twinferno|J25
+1 Uncaged Fury|J25
+1 Roil Eruption|J25
+1 Frontline Heroism|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Stoked 2]
+
+1 Dreadhorde Arcanist|J25
+1 Cleon, Merry Champion|J25
+1 Kiln Fiend|J25
+1 Arena Athlete|J25
+1 Hero of the Games|J25
+1 Resistance Skywarden|J25
+1 Satyr Hoplite|J25
+1 Hearts on Fire|J25
+1 Coordinated Assault|J25
+1 Titan's Strength|J25
+1 Unleash Fury|J25
+1 Roil Eruption|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Stoked 3]
+
+1 Mirrorwing Dragon|J25
+1 Scholar of Combustion|J25
+1 Cleon, Merry Champion|J25
+1 Akroan Crusader|J25
+1 Arena Athlete|J25
+1 Young Pyromancer|J25
+1 Hearts on Fire|J25
+1 Titan's Strength|J25
+1 Twinferno|J25
+1 Unleash Fury|J25
+1 Roil Eruption|J25
+1 Frontline Heroism|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Stoked 4]
+
+1 Goblin Dark-Dwellers|J25
+1 Cleon, Merry Champion|J25
+1 Akroan Crusader|J25
+1 Arena Athlete|J25
+1 Hero of the Games|J25
+1 Weaver of Lightning|J25
+1 Young Pyromancer|J25
+1 Hearts on Fire|J25
+1 Crimson Wisps|J25
+1 Infuriate|J25
+1 Uncaged Fury|J25
+1 Roil Eruption|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Goblins 1]
+
+1 Dropkick Bomber|J25
+1 General Kreat, the Boltbringer|J25
+1 Battle Cry Goblin|J25
+1 Volley Veteran|J25
+1 Fissure Wizard|J25
+1 Goblin Researcher|J25
+1 Weaselback Redcap|J25
+1 Goblin Surprise|J25
+1 Brute Strength|J25
+1 Open Fire|J25
+1 Shock|J25
+1 Krenko's Command|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Goblins 2]
+
+1 Dropkick Bomber|J25
+1 Goblin Goliath|J25
+1 General Kreat, the Boltbringer|J25
+1 Battle Cry Goblin|J25
+1 Volley Veteran|J25
+1 Goblin Arsonist|J25
+1 Mogg Flunkies|J25
+1 Goblin Surprise|J25
+1 Kindled Fury|J25
+1 Open Fire|J25
+1 Shock|J25
+1 Krenko's Command|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Goblins 3]
+
+1 Krenko, Tin Street Kingpin|J25
+1 Goblin Surprise|J25
+1 General Kreat, the Boltbringer|J25
+1 Beetleback Chief|J25
+1 Goblin Smuggler|J25
+1 Krenko's Command|J25
+1 Volley Veteran|J25
+1 Goblin Trailblazer|J25
+1 Open Fire|J25
+1 Shock|J25
+1 Weaselback Redcap|J25
+1 Hearts on Fire|J25
+1 Fling|J25
+1 Shock|J25
+1 Scavenged Blade|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Goblins 4]
+
+1 Goblin Rabblemaster|J25
+1 General Kreat, the Boltbringer|J25
+1 Battle Cry Goblin|J25
+1 Destructive Digger|J25
+1 Volley Veteran|J25
+1 Fanatical Firebrand|J25
+1 Fissure Wizard|J25
+1 Goblin Surprise|J25
+1 Brute Strength|J25
+1 Fire Prophecy|J25
+1 Shock|J25
+1 Krenko's Command|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Bloody 1]
+
+1 Anje's Ravager|J25
+1 Ivora, Insatiable Heir|J25
+1 Belligerent Guest|J25
+1 Blood Petal Celebrant|J25
+1 Falkenrath Celebrants|J25
+1 Incorrigible Youths|J25
+1 Voldaren Duelist|J25
+1 Voldaren Epicure|J25
+1 Abandon Reason|J25
+1 Flame-Blessed Bolt|J25
+1 Soul Sear|J25
+1 Stolen Vitality|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Bloody 2]
+
+1 Markov Blademaster|J25
+1 Markov Enforcer|J25
+1 Ivora, Insatiable Heir|J25
+1 Blood Hypnotist|J25
+1 Blood Petal Celebrant|J25
+1 Falkenrath Celebrants|J25
+1 Insolent Neonate|J25
+1 Voldaren Duelist|J25
+1 Flame-Blessed Bolt|J25
+1 Soul Sear|J25
+1 Stolen Vitality|J25
+1 Markov Retribution|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Bloody 3]
+
+1 Scion of Opulence|J25
+1 Ivora, Insatiable Heir|J25
+1 Belligerent Guest|J25
+1 Blood Petal Celebrant|J25
+1 Falkenrath Celebrants|J25
+1 Insolent Neonate|J25
+1 Markov Warlord|J25
+1 Voldaren Duelist|J25
+1 Flame-Blessed Bolt|J25
+1 Soul Sear|J25
+1 Vampiric Fury|J25
+1 Blood Feud|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Bloody 4]
+
+1 Falkenrath Marauders|J25
+1 Ivora, Insatiable Heir|J25
+1 Belligerent Guest|J25
+1 Blood Petal Celebrant|J25
+1 Falkenrath Celebrants|J25
+1 Voldaren Ambusher|J25
+1 Voldaren Duelist|J25
+1 Voldaren Epicure|J25
+1 Neonate's Rush|J25
+1 Soul Sear|J25
+1 Stolen Vitality|J25
+1 Blood Feud|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Zealots 1]
+
+1 Zealous Conscripts|J25
+1 Anep, Vizier of Hazoret|J25
+1 Ahn-Crop Crasher|J25
+1 Battlefield Scavenger|J25
+1 Bloodlust Inciter|J25
+1 Emberhorn Minotaur|J25
+1 Nef-Crop Entangler|J25
+1 Brute Strength|J25
+1 Flame-Blessed Bolt|J25
+1 Fling|J25
+1 Cartouche of Zeal|J25
+1 Trial of Zeal|J25
+1 Desert of the Fervent|J25
+1 Thriving Bluff|J25
+6 Mountain|J25
+
+[J25 Zealots 2]
+
+1 Sandstorm Crasher|J25
+1 Anep, Vizier of Hazoret|J25
+1 Ahn-Crop Crasher|J25
+1 Battlefield Scavenger|J25
+1 Bloodlust Inciter|J25
+1 Pathmaker Initiate|J25
+1 Zealot of the God-Pharaoh|J25
+1 Flame-Blessed Bolt|J25
+1 Fling|J25
+1 Kindled Fury|J25
+1 Cartouche of Zeal|J25
+1 Trial of Zeal|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Zealots 3]
+
+1 Combat Celebrant|J25
+1 Anep, Vizier of Hazoret|J25
+1 Battlefield Scavenger|J25
+1 Bloodlust Inciter|J25
+1 Emberhorn Minotaur|J25
+1 Nef-Crop Entangler|J25
+1 Trueheart Twins|J25
+1 Hearts on Fire|J25
+1 Fling|J25
+1 Shock|J25
+1 Cartouche of Zeal|J25
+1 Trial of Zeal|J25
+1 Desert of the Fervent|J25
+1 Thriving Bluff|J25
+6 Mountain|J25
+
+[J25 Zealots 4]
+
+1 Sandstorm Crasher|J25
+1 Zealous Conscripts|J25
+1 Anep, Vizier of Hazoret|J25
+1 Battlefield Scavenger|J25
+1 Bloodlust Inciter|J25
+1 Minotaur Sureshot|J25
+1 Nef-Crop Entangler|J25
+1 Trueheart Twins|J25
+1 Fling|J25
+1 Kindled Fury|J25
+1 Cartouche of Zeal|J25
+1 Trial of Zeal|J25
+1 Thriving Bluff|J25
+7 Mountain|J25
+
+[J25 Dinner]
+
+1 Hurska Sweet-Tooth|J25
+1 Saurian Symbiote|J25
+1 Fierce Witchstalker|J25
+1 Maraleaf Rider|J25
+1 Orchard Strider|J25
+1 Tireless Provisioner|J25
+1 Tough Cookie|J25
+1 Gingerbrute|J25
+1 Bite Down|J25
+1 Insatiable Appetite|J25
+1 Giant Opportunity|J25
+1 Trail of Crumbs|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Modified]
+
+1 Kodama of the West Tree|J25
+1 Saurian Symbiote|J25
+1 Shardless Outlander|J25
+1 Gnarlid Colony|J25
+1 Heir of the Ancient Fang|J25
+1 Orochi Merge-Keeper|J25
+1 Reckless Amplimancer|J25
+1 Defend the Celestus|J25
+1 Snakeskin Veil|J25
+1 Cultivate|J25
+1 Declare Dominance|J25
+1 Audacity|J25
+1 Warbriar Blessing|J25
+1 Wolfrider's Saddle|J25
+1 Cave of Temptation|J25
+1 Thriving Grove|J25
+6 Forest|J25
+
+[J25 Beasts 1]
+
+1 Slinza, the Spiked Stampede|J25
+1 Hungry Megasloth|J25
+1 Spined Tyrranax|J25
+1 Woodland Liege|J25
+1 Advocate of the Beast|J25
+1 Brushstrider|J25
+1 Gnarlid Colony|J25
+1 Obstinate Baloth|J25
+1 Predator's Strike|J25
+1 Explore|J25
+1 Gift of the Gargantuan|J25
+1 Time to Feed|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Beasts 2]
+
+1 Garruk, Caller of Beasts|J25
+1 Slinza, the Spiked Stampede|J25
+1 Hungry Megasloth|J25
+1 Woodland Liege|J25
+1 Advocate of the Beast|J25
+1 Baloth Gorger|J25
+1 Brushstrider|J25
+1 Garruk's Packleader|J25
+1 Gnarlid Colony|J25
+1 Predator's Strike|J25
+1 Bushwhack|J25
+1 Time to Feed|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Dinosaurs 1]
+
+1 Ghalta, Primal Hunger|J25
+1 Saurian Symbiote|J25
+1 Armored Kincaller|J25
+1 Colossal Dreadmaw|J25
+1 Drover of the Mighty|J25
+1 Drowsing Tyrannodon|J25
+1 Thrashing Brontodon|J25
+1 Thundering Spineback|J25
+1 Giant Growth|J25
+1 Commune with Dinosaurs|J25
+1 Rampant Growth|J25
+1 Savage Stomp|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Dinosaurs 2]
+
+1 Ghalta, Primal Hunger|J25
+1 Topiary Stomper|J25
+1 Saurian Symbiote|J25
+1 Cherished Hatchling|J25
+1 Colossal Dreadmaw|J25
+1 Drowsing Tyrannodon|J25
+1 Thrashing Brontodon|J25
+1 Thundering Spineback|J25
+1 Predator's Strike|J25
+1 Tail Swipe|J25
+1 Commune with Dinosaurs|J25
+1 Rampant Growth|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Fun Guys 1]
+
+1 Shroofus Sproutsire|J25
+1 Saurian Symbiote|J25
+1 Slimy Piper|J25
+1 Spore Crawler|J25
+1 Sporecrown Thallid|J25
+1 Tukatongue Thallid|J25
+1 Band Together|J25
+1 Might of the Masses|J25
+1 Spore Swarm|J25
+1 Overwhelm|J25
+1 Saproling Migration|J25
+1 Fungal Plots|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Fun Guys 2]
+
+1 Shroofus Sproutsire|J25
+1 Verdeloth the Ancient|J25
+1 Saurian Symbiote|J25
+1 Slimy Piper|J25
+1 Undercellar Myconid|J25
+1 Sporecrown Thallid|J25
+1 Band Together|J25
+1 For the Family|J25
+1 Spore Swarm|J25
+1 Overcome|J25
+1 Saproling Migration|J25
+1 Fungal Plots|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Elves 1]
+
+1 Leaf-Crowned Visionary|J25
+1 Razorgrass Invoker|J25
+1 Dionus, Elvish Archdruid|J25
+1 Elvish Visionary|J25
+1 Llanowar Elves|J25
+1 Ghirapur Guide|J25
+1 Tajuru Pathwarden|J25
+1 Thornweald Archer|J25
+1 Arbor Armament|J25
+1 Band Together|J25
+1 Bounty of Skemfar|J25
+1 Overcome|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Elves 2]
+
+1 Elvish Archdruid|J25
+1 Razorgrass Invoker|J25
+1 Dionus, Elvish Archdruid|J25
+1 Elvish Visionary|J25
+1 Llanowar Elves|J25
+1 Dwynen's Elite|J25
+1 High-Rise Sawjack|J25
+1 Kujar Seedsculptor|J25
+1 Might of the Masses|J25
+1 Bounty of Skemfar|J25
+1 Hunter's Edge|J25
+1 Overcome|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Elves 3]
+
+1 Marwyn, the Nurturer|J25
+1 Razorgrass Invoker|J25
+1 Dionus, Elvish Archdruid|J25
+1 Llanowar Elves|J25
+1 Dwynen's Elite|J25
+1 Llanowar Visionary|J25
+1 Tajuru Pathwarden|J25
+1 Thornweald Archer|J25
+1 Go Forth|J25
+1 Band Together|J25
+1 Bounty of Skemfar|J25
+1 Overcome|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Elves 4]
+
+1 Tyvar Kell|J25
+1 Voice of the Woods|J25
+1 Dionus, Elvish Archdruid|J25
+1 Llanowar Elves|J25
+1 Ghirapur Guide|J25
+1 High-Rise Sawjack|J25
+1 Ivy Lane Denizen|J25
+1 Paradise Druid|J25
+1 Reckless Amplimancer|J25
+1 Arbor Armament|J25
+1 Hunter's Edge|J25
+1 Overcome|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Encounter 1]
+
+1 Jiang Yanggu, Wildcrafter|J25
+1 Forgotten Ancient|J25
+1 Spined Tyrranax|J25
+1 Mowu, Loyal Companion|J25
+1 Ainok Artillerist|J25
+1 Deepwood Denizen|J25
+1 Duskshell Crawler|J25
+1 Greenwood Sentinel|J25
+1 Servant of the Scale|J25
+1 Snakeskin Veil|J25
+1 Biogenic Upgrade|J25
+1 Aggressive Instinct|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Encounter 2]
+
+1 Jiang Yanggu, Wildcrafter|J25
+1 Oran-Rief Ooze|J25
+1 Saurian Symbiote|J25
+1 Spined Tyrranax|J25
+1 Mowu, Loyal Companion|J25
+1 Deepwood Denizen|J25
+1 Duskshell Crawler|J25
+1 Greenwood Sentinel|J25
+1 Jungle Delver|J25
+1 Invigorating Surge|J25
+1 Stony Strength|J25
+1 Aggressive Instinct|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Encounter 3]
+
+1 Jiang Yanggu, Wildcrafter|J25
+1 Rishkar, Peema Renegade|J25
+1 Saurian Symbiote|J25
+1 Spined Tyrranax|J25
+1 Mowu, Loyal Companion|J25
+1 Deepwood Denizen|J25
+1 Duskshell Crawler|J25
+1 Reckless Amplimancer|J25
+1 Servant of the Scale|J25
+1 Snakeskin Veil|J25
+1 Biogenic Upgrade|J25
+1 Aggressive Instinct|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Encounter 4]
+
+1 Jiang Yanggu, Wildcrafter|J25
+1 Quirion Beastcaller|J25
+1 Hungry Megasloth|J25
+1 Mowu, Loyal Companion|J25
+1 Armorcraft Judge|J25
+1 Deepwood Denizen|J25
+1 Gnarlid Colony|J25
+1 Moldgraf Millipede|J25
+1 Pridemalkin|J25
+1 Big Play|J25
+1 Aggressive Instinct|J25
+1 Primeval Bounty|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Explorers 1]
+
+1 Realm Seekers|J25
+1 Razorgrass Invoker|J25
+1 Slimy Piper|J25
+1 Shardless Outlander|J25
+1 Braulios of Pheres Band|J25
+1 Ainok Guide|J25
+1 Ghirapur Guide|J25
+1 Tireless Provisioner|J25
+1 Clear Shot|J25
+1 Go Forth|J25
+1 Adventurous Impulse|J25
+1 Explore|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Explorers 2]
+
+1 Tireless Tracker|J25
+1 Razorgrass Invoker|J25
+1 Slimy Piper|J25
+1 Shardless Outlander|J25
+1 Braulios of Pheres Band|J25
+1 Ainok Guide|J25
+1 Byway Courier|J25
+1 Primeval Herald|J25
+1 Clear Shot|J25
+1 Go Forth|J25
+1 Explore|J25
+1 Ulvenwald Mysteries|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Explorers 3]
+
+1 Briarbridge Tracker|J25
+1 Somberwald Beastmaster|J25
+1 Slimy Piper|J25
+1 Shardless Outlander|J25
+1 Braulios of Pheres Band|J25
+1 Ambassador Oak|J25
+1 Byway Courier|J25
+1 Woodland Champion|J25
+1 Go Forth|J25
+1 Clear Shot|J25
+1 Explore|J25
+1 Ulvenwald Mysteries|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Explorers 4]
+
+1 Jadelight Ranger|J25
+1 Razorgrass Invoker|J25
+1 Slimy Piper|J25
+1 Shardless Outlander|J25
+1 Braulios of Pheres Band|J25
+1 Ixalli's Diviner|J25
+1 Merfolk Branchwalker|J25
+1 Primeval Herald|J25
+1 Clear Shot|J25
+1 Go Forth|J25
+1 Explore|J25
+1 Adventurous Impulse|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Landfall 1]
+
+1 Lotus Cobra|J25
+1 Undergrowth Champion|J25
+1 Sutina, Speaker of the Tajuru|J25
+1 Baloth Woodcrasher|J25
+1 Canopy Baloth|J25
+1 Kazandu Stomper|J25
+1 Snapping Gnarlid|J25
+1 Bite Down|J25
+1 Harrow|J25
+1 Adventure Awaits|J25
+1 Skyclave Pick-Axe|J25
+1 Evolving Wilds|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Landfall 2]
+
+1 Ancient Greenwarden|J25
+1 Sutina, Speaker of the Tajuru|J25
+1 Canopy Baloth|J25
+1 Kazandu Nectarpot|J25
+1 Kazandu Stomper|J25
+1 Krosan Tusker|J25
+1 Snapping Gnarlid|J25
+1 Territorial Scythecat|J25
+1 Bite Down|J25
+1 Bond of Flourishing|J25
+1 Retreat to Kazandu|J25
+1 Evolving Wilds|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Landfall 3]
+
+1 Scythecat Cub|J25
+1 Sutina, Speaker of the Tajuru|J25
+1 Canopy Baloth|J25
+1 Kazandu Stomper|J25
+1 Murasa Ranger|J25
+1 Snapping Gnarlid|J25
+1 Territorial Scythecat|J25
+1 Bite Down|J25
+1 Harrow|J25
+1 Retreat to Kazandu|J25
+1 Cliffhaven Kitesail|J25
+1 Evolving Wilds|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Landfall 4]
+
+1 Scythecat Cub|J25
+1 Sutina, Speaker of the Tajuru|J25
+1 Baloth Woodcrasher|J25
+1 Canopy Baloth|J25
+1 Grazing Gladehart|J25
+1 Snapping Gnarlid|J25
+1 Sporemound|J25
+1 Bite Down|J25
+1 Groundswell|J25
+1 Harrow|J25
+1 Skyclave Pick-Axe|J25
+1 Evolving Wilds|J25
+1 Thriving Grove|J25
+7 Forest|J25
+
+[J25 Chaos]
+
+1 Averna, the Chaos Bloom|J25
+1 Shardless Outlander|J25
+1 Druid of the Anima|J25
+1 Bloodbraid Elf|J25
+1 Enlisted Wurm|J25
+1 Fusion Elemental|J25
+1 Maelstrom Colossus|J25
+1 Chromatic Lantern|J25
+1 Fiery Fall|J25
+1 Bituminous Blast|J25
+1 Violent Outburst|J25
+1 Plains|J25
+1 Island|J25
+1 Swamp|J25
+2 Mountain|J25
+2 Forest|J25
+1 Ash Barrens|J25
+1 Terramorphic Expanse|J25

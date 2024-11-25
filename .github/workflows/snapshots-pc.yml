@@ -56,12 +56,26 @@ jobs:
       - name: Rename before upload
         run: |
           mkdir izpack
-          # If this works just gotta figure out how to append datetime
-          mv /home/runner/.m2/repository/forge/forge-installer/*/*.jar izpack/
+          # move bz2 and jar from work dir to izpack dir
+          mv /home/runner/work/forge/forge/forge-installer/*/*.{bz2,jar} izpack/
+          # move desktop build.txt to izpack
+          mv /home/runner/work/forge/forge/forge-gui-desktop/target/classes/build.txt izpack/
           cd izpack
-          out="$(basename -s .jar *)"
-          d=$(date +%m-%d)
-          mv "${out}.jar" "${out}-${d}.jar"
+          d=$(date +%m.%d)
+          # rename files and append date
+          for file in *.jar; do
+            bname="${file%.*}"
+            echo "file renamed to ${bname}-${d}.jar"
+            mv "${bname}.jar" "${bname}-${d}.jar"
+          done
+          for file in *.bz2; do
+            # remove .bz2
+            fname="${file%.*}"
+            # remove .tar
+            bname="${fname%.*}"
+            echo "file renamed to ${bname}-${d}.tar.bz2"
+            mv "${fname}.bz2" "${bname}-${d}.tar.bz2"
+          done
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -75,6 +89,10 @@ jobs:
             *.pom
             *.repositories
             *.xml
-            
 
-          
+      - name: Send failure notification to Discord
+        if: failure() # This step runs only if the job fails
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"🔴 Desktop Snapshot Build Failed in branch: \`${{ github.ref_name }}\` by \`${{ github.actor }}\`.\nCheck logs: ${{ github.run_url }}\"}" \
+          ${{ secrets.DISCORD_AUTOMATION_WEBHOOK }}

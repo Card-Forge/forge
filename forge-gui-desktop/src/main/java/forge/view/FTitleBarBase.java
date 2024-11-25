@@ -12,10 +12,13 @@ import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.util.concurrent.CompletableFuture;
 
 import javax.swing.SpringLayout;
 import javax.swing.SwingUtilities;
 
+import forge.control.FControl;
+import forge.download.AutoUpdater;
 import forge.gui.framework.ILocalRepaint;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.Colors;
@@ -23,6 +26,9 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedMenuBar;
 import forge.util.Localizer;
+import forge.util.RSSReader;
+
+import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_ATOM;
 
 @SuppressWarnings("serial")
 public abstract class FTitleBarBase extends SkinnedMenuBar {
@@ -42,6 +48,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
     protected final FullScreenButton btnFullScreen = new FullScreenButton();
     protected final MaximizeButton btnMaximize = new MaximizeButton();
     protected final CloseButton btnClose = new CloseButton();
+    protected final UpdaterButton btnUpdateShortcut = new UpdaterButton();
 
     protected FTitleBarBase(ITitleBarOwner owner0) {
         this.owner = owner0;
@@ -71,6 +78,11 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
             add(btnLockTitleBar);
             layout.putConstraint(SpringLayout.EAST, btnLockTitleBar, 0, SpringLayout.WEST, btnMinimize);
             layout.putConstraint(SpringLayout.SOUTH, btnLockTitleBar, 0, SpringLayout.SOUTH, btnMinimize);
+
+            add(btnUpdateShortcut);
+            layout.putConstraint(SpringLayout.EAST, btnUpdateShortcut, 0, SpringLayout.WEST, btnMinimize);
+            layout.putConstraint(SpringLayout.SOUTH, btnUpdateShortcut, 0, SpringLayout.SOUTH, btnMinimize);
+
         }
         else {
             int offset = owner instanceof FDialog && ((FDialog)owner).allowResize() ? 0 : -1;
@@ -82,7 +94,10 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
 
     public abstract void setTitle(String title);
     public abstract void setIconImage(Image image);
-    
+    public void setUpdaterVisibility() {
+        if (btnUpdateShortcut != null)
+            btnUpdateShortcut.updateVisibility();
+    }
     public void updateButtons() {
         boolean fullScreen = owner.isFullScreen();
         btnLockTitleBar.setVisible(fullScreen);
@@ -406,6 +421,45 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
             g2d.setStroke(new BasicStroke(thickness));
             g2d.drawLine(x1, y1, x2, y2);
             g2d.drawLine(x2, y1, x1, y2);
+        }
+    }
+    public class UpdaterButton extends TitleBarButton {
+        final int MARQUEE_SPEED_DIV = 50;
+        final int REPAINT_WITHIN_MS = 50;
+        final int wMod = 60;
+        final String displayText = FControl.instance.getSnapshotNotification();
+        public UpdaterButton() {
+            setToolTipText(Localizer.getInstance().getMessage("btnCheckForUpdates"));
+            setPreferredSize(new Dimension(160, 25));
+            updateVisibility();
+        }
+
+        @Override
+        protected void onClick() {
+            if (!displayText.isEmpty()) {
+                try {
+                    new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_ATOM, FControl.instance.getBuildTimeStamp(), FControl.instance.getSnapsTimestamp())));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        @Override
+        public void paintComponent(Graphics g) {
+            if (displayText.isEmpty())
+                return;
+            g.translate(-((int)((System.currentTimeMillis() / MARQUEE_SPEED_DIV) % ((getWidth() + wMod) * 2)) - (getWidth() + wMod)), 0);
+            super.paintComponent(g);
+            int thickness = 2;
+            Graphics2D g2d = (Graphics2D) g;
+            FSkin.setGraphicsColor(g2d, foreColor);
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setStroke(new BasicStroke(thickness));
+            g2d.drawString(displayText, 0, 17);
+            repaint(REPAINT_WITHIN_MS);
+        }
+        private void updateVisibility() {
+            setVisible(!isVisible());
         }
     }
 }

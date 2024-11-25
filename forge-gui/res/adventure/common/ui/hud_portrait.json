@@ -6,10 +6,10 @@
     {
       "type": "Image",
       "name": "gamehud",
-      "width": 64,
+      "width": 75,
       "height": 104,
       "image": "ui/hud_portrait.png",
-      "x": 206,
+      "x": 195,
       "y": 0
     },
     {
@@ -54,6 +54,15 @@
       "height": 46,
       "x": 215,
       "y": 10
+    },
+    {
+      "type": "TypingLabel",
+      "name": "keyCollection",
+      "font": "default",
+      "width": 75,
+      "height": 96,
+      "x": 200,
+      "y": 5
     },
     {
       "type": "TypingLabel",

@@ -474,6 +474,9 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 [buy a box]
 417 R Twitching Doll @John Tedrick
 
+[rebalanced]
+A143 R A-Leyline of Resonance @Sergey Glushakov
+
 [special guests]
 1 Collected Company|SPG
 1 Damnation|SPG
@@ -485,7 +488,6 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 1 Sacrifice|SPG
 1 Soul Warden|SPG
 1 Unholy Heat|SPG
-
 
 [tokens]
 b_2_2_e_horror

@@ -1,0 +1,9 @@
+Name:Divine Resilience
+ManaCost:W
+Types:Instant
+K:Kicker:2 W
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | TargetMin$ X | TargetMax$ Y | KW$ Indestructible | StackDescription$ SpellDescription | SpellDescription$ Target creature you control gains indestructible until end of turn. If this spell was kicked, any number of target creatures you control gain indestructible until end of turn instead. (Damage and effects that say "destroy" don't destroy them.)
+SVar:X:Count$Kicked.0.1
+SVar:Y:Count$Kicked.Z.1
+SVar:Z:Count$Valid Creature.YouCtrl
+Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nTarget creature you control gains indestructible until end of turn. If this spell was kicked, any number of target creatures you control gain indestructible until end of turn instead. (Damage and effects that say "destroy" don't destroy them.)

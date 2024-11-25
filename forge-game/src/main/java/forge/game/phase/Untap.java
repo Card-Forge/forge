@@ -259,8 +259,10 @@ public class Untap extends Phase {
     }
 
     public static void doPhasing(final Player turn) {
+        Game game = turn.getGame();
+
         // Needs to include phased out cards
-        final List<Card> list = CardLists.filter(turn.getGame().getCardsIncludePhasingIn(ZoneType.Battlefield),
+        final List<Card> list = CardLists.filter(game.getCardsIncludePhasingIn(ZoneType.Battlefield),
                 c -> (c.isPhasedOut(turn) && c.isDirectlyPhasedOut())
                         || (c.hasKeyword(Keyword.PHASING) && c.getController().equals(turn))
         );
@@ -299,11 +301,13 @@ public class Untap extends Phase {
         if (!phasedOut.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, phasedOut);
-            turn.getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOutAll, runParams, false);
+            game.getTriggerHandler().runTrigger(TriggerType.PhaseOutAll, runParams, false);
         }
         if (!toPhase.isEmpty()) {
+            // refresh statics for phased in permanents (e.g. so King of the Oathbreakers sees Changeling)
+            game.getAction().checkStaticAbilities();
             // collect now before some zone change during Untap resets triggers
-            turn.getGame().getTriggerHandler().collectTriggerForWaiting();
+            game.getTriggerHandler().collectTriggerForWaiting();
         }
     }
 

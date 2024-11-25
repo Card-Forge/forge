@@ -169,6 +169,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Modal);
     }
 
+    public boolean isRoom() {
+        return get(TrackableProperty.Room);
+    }
+
     /*
     public boolean isTransformed() {
         return getCurrentState().getState() == CardStateName.Transformed;
@@ -429,7 +433,12 @@ public class CardView extends GameEntityView {
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
-
+    public Set<String> getChosenColorID() {
+        return get(TrackableProperty.ChosenColorID);
+    }
+    void updateChosenColorID(Card c) {
+        set(TrackableProperty.ChosenColorID, c.getChosenColorID());
+    }
     public FCollectionView<CardView> getMergedCardsCollection() {
         return get(TrackableProperty.MergedCardsCollection);
     }
@@ -977,6 +986,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Adventure, c.isAdventureCard());
         set(TrackableProperty.DoubleFaced, c.isDoubleFaced());
         set(TrackableProperty.Modal, c.isModal());
+        set(TrackableProperty.Room, c.isRoom());
 
         //backside
         if (c.getAlternateState() != null)

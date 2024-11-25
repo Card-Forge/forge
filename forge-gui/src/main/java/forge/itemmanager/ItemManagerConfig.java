@@ -15,9 +15,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
-/** 
+/**
  * Preferences associated with individual cards
- *
  */
 public enum ItemManagerConfig {
     STRING_ONLY(SColumnUtil.getStringColumn(), false, false, true,
@@ -120,6 +119,12 @@ public enum ItemManagerConfig {
             null, null, 3, 0),
     NET_ARCHIVE_BLOCK_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
             null, null, 3, 0),
+    ADVENTURE_EDITOR_POOL(SColumnUtil.getAdventureCollectionDefaultColumns(), false, false, false,
+            null, null, 6, 0),
+    ADVENTURE_STORE_POOL(SColumnUtil.getAdventureCollectionDefaultColumns(), false, false, true,
+            null, null, 6, 0),
+    ADVENTURE_SIDEBOARD(SColumnUtil.getDeckEditorDefaultColumns(), false, false, true,
+            null, null, 6, 0),
     SIDEBOARD(SColumnUtil.getDeckEditorDefaultColumns(), false, false, true,
             GroupDef.DEFAULT, ColumnDef.CMC, 3, 0);
 
@@ -164,7 +169,9 @@ public enum ItemManagerConfig {
         }
 
         private void setValue(T value0) {
-            if (value == value0) { return; }
+            if (value == value0) {
+                return;
+            }
             value = value0;
             save();
         }
@@ -175,12 +182,10 @@ public enum ItemManagerConfig {
                 if (defaultValue != null) {
                     el.setAttribute(localName, "");
                 }
-            }
-            else if (!value.equals(defaultValue)) {
+            } else if (!value.equals(defaultValue)) {
                 if (value instanceof Enum) { //use Enum.name to prevent issues with toString() overrides
-                    el.setAttribute(localName, ((Enum)value).name());
-                }
-                else {
+                    el.setAttribute(localName, ((Enum) value).name());
+                } else {
                     el.setAttribute(localName, String.valueOf(value));
                 }
             }
@@ -198,6 +203,7 @@ public enum ItemManagerConfig {
     public boolean getUniqueCardsOnly() {
         return uniqueCardsOnly.getValue();
     }
+
     public void setUniqueCardsOnly(boolean value0) {
         uniqueCardsOnly.setValue(value0);
     }
@@ -205,6 +211,7 @@ public enum ItemManagerConfig {
     public boolean getHideFilters() {
         return hideFilters.getValue();
     }
+
     public void setHideFilters(boolean value0) {
         hideFilters.setValue(value0);
     }
@@ -212,6 +219,7 @@ public enum ItemManagerConfig {
     public boolean getCompactListView() {
         return compactListView.getValue();
     }
+
     public void setCompactListView(boolean value0) {
         compactListView.setValue(value0);
     }
@@ -219,6 +227,7 @@ public enum ItemManagerConfig {
     public GroupDef getGroupBy() {
         return groupBy.getValue();
     }
+
     public void setGroupBy(GroupDef value0) {
         groupBy.setValue(value0);
     }
@@ -226,6 +235,7 @@ public enum ItemManagerConfig {
     public ColumnDef getPileBy() {
         return pileBy.getValue();
     }
+
     public void setPileBy(ColumnDef value0) {
         pileBy.setValue(value0);
     }
@@ -233,6 +243,7 @@ public enum ItemManagerConfig {
     public int getImageColumnCount() {
         return imageColumnCount.getValue();
     }
+
     public void setImageColumnCount(int value0) {
         imageColumnCount.setValue(value0);
     }
@@ -240,6 +251,7 @@ public enum ItemManagerConfig {
     public int getViewIndex() {
         return viewIndex.getValue();
     }
+
     public void setViewIndex(int value0) {
         viewIndex.setValue(value0);
     }
@@ -251,7 +263,7 @@ public enum ItemManagerConfig {
             final NodeList configs = document.getElementsByTagName("config");
             for (int i = 0; i < configs.getLength(); i++) {
                 try { //capture enum parse errors without losing other preferences
-                    final Element el = (Element)configs.item(i);
+                    final Element el = (Element) configs.item(i);
                     final ItemManagerConfig config = Enum.valueOf(ItemManagerConfig.class, el.getAttribute("name"));
                     if (el.hasAttribute("uniqueCardsOnly")) {
                         config.uniqueCardsOnly.value = Boolean.parseBoolean(el.getAttribute("uniqueCardsOnly"));
@@ -266,8 +278,7 @@ public enum ItemManagerConfig {
                         String value = el.getAttribute("groupBy");
                         if (value.isEmpty()) {
                             config.groupBy.value = null;
-                        }
-                        else {
+                        } else {
                             config.groupBy.value = Enum.valueOf(GroupDef.class, value);
                         }
                     }
@@ -275,8 +286,7 @@ public enum ItemManagerConfig {
                         String value = el.getAttribute("pileBy");
                         if (value.isEmpty()) {
                             config.pileBy.value = null;
-                        }
-                        else {
+                        } else {
                             config.pileBy.value = Enum.valueOf(ColumnDef.class, value);
                         }
                     }
@@ -289,7 +299,7 @@ public enum ItemManagerConfig {
                     final NodeList cols = el.getElementsByTagName("col");
                     for (int j = 0; j < cols.getLength(); j++) {
                         try { //capture enum parse errors without losing other column preferences
-                            final Element colEl = (Element)cols.item(j);
+                            final Element colEl = (Element) cols.item(j);
                             ItemColumnConfig colConfig = config.cols.get(Enum.valueOf(ColumnDef.class, colEl.getAttribute("name")));
                             if (colEl.hasAttribute("width")) {
                                 colConfig.setPreferredWidth(Integer.parseInt(colEl.getAttribute("width")));
@@ -306,21 +316,17 @@ public enum ItemManagerConfig {
                             if (colEl.hasAttribute("visible")) {
                                 colConfig.setVisible(Boolean.parseBoolean(colEl.getAttribute("visible")));
                             }
-                        }
-                        catch (final Exception e) {
+                        } catch (final Exception e) {
                             e.printStackTrace();
                         }
                     }
-                }
-                catch (final Exception e) {
+                } catch (final Exception e) {
                     e.printStackTrace();
                 }
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             //ok if file not found
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -366,8 +372,7 @@ public enum ItemManagerConfig {
                 root.appendChild(el);
             }
             XmlUtil.saveDocument(document, ForgeConstants.ITEM_VIEW_PREFS_FILE);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

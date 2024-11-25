@@ -1,0 +1,9 @@
+Name:Eager Trufflesnout
+ManaCost:2 G
+Types:Creature Boar
+PT:4/2
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever this creature deals combat damage to a player, create a Food token. (It's an artifact with "{2}, {T} Sacrifice this token: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nWhenever this creature deals combat damage to a player, create a Food token. (It's an artifact with "{2}, {T} Sacrifice this token: You gain 3 life.")

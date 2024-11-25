@@ -33,6 +33,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.cost.*;
 import forge.game.event.GameEventCardForetold;
+import forge.game.event.GameEventCardPlotted;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -1459,12 +1460,17 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
-            final String trigStr = "Mode$ Exiled | ValidCard$ Card.Self | Madness$ True | Secondary$ True"
-                    + " | TriggerDescription$ Play Madness " + ManaCostParser.parse(manacost) + " - " + card.getName();
+            StringBuilder desc = new StringBuilder("Play Madness ");
+            if (!"ManaCost".equals(manacost)) {
+                desc.append(ManaCostParser.parse(manacost)).append(" ");
+            }
+            desc.append(" - " + card.getName());
+
+            final String trigStr = "Mode$ Exiled | ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ " + desc.toString();
 
             final String playMadnessStr = "DB$ Play | Defined$ Self | ValidSA$ Spell | PlayCost$ " + manacost +
                     " | ConditionDefined$ Self | ConditionPresent$ Card.StrictlySelf+inZoneExile" +
-                    " | Optional$ True | RememberPlayed$ True | Madness$ True";
+                    " | Optional$ True | RememberPlayed$ True";
 
             final String moveToYardStr = "DB$ ChangeZone | Defined$ Self.StrictlySelf | Origin$ Exile" +
                     " | Destination$ Graveyard | TrackDiscarded$ True | ConditionDefined$ Remembered | ConditionPresent$ Card" +
@@ -1517,7 +1523,10 @@ public class CardFactoryUtil {
             final String manacost = k[1];
             final String abStrReveal = "DB$ Reveal | Defined$ You | RevealDefined$ Self"
                     + " | MiracleCost$ " + manacost;
-            final String abStrPlay = "DB$ Play | Defined$ Self | Optional$ True | PlayCost$ " + manacost;
+            String abStrPlay = "DB$ Play | Defined$ Self | Optional$ True | PlayCost$ " + manacost;
+            if (k.length > 2) {
+                abStrPlay += " | PlayReduceCost$ " + k[2];
+            }
 
             String revealed = "DB$ ImmediateTrigger | TriggerDescription$ CARDNAME - Miracle";
 
@@ -1871,10 +1880,10 @@ public class CardFactoryUtil {
             StringBuilder playTrig = new StringBuilder();
 
             playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ TIME | NewCounterAmount$ 0 | Secondary$ True");
-            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
+            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, you may play it without paying its mana cost if able.  ");
             playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
 
-            String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True";
+            String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | Optional$ True";
             if (card.isPermanent()) {
                 abPlay += "| RememberPlayed$ True";
             }
@@ -2386,8 +2395,17 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Madness")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            StringBuilder desc = new StringBuilder("Madness");
+            if (!"ManaCost".equals(manacost)) {
+                desc.append(" ").append(ManaCostParser.parse(manacost));
+            }
+            desc.append(": If you discard this card, discard it into exile.");
+
             String repeffstr = "Event$ Moved | ActiveZones$ Hand | ValidCard$ Card.Self | Discard$ True | Secondary$ True "
-                    + " | Description$ Madness: If you discard this card, discard it into exile.";
+                    + " | Description$ " + desc;
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
             String sVarMadness = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard";
 
@@ -3100,8 +3118,6 @@ public class CardFactoryUtil {
                         // because it doesn't work other wise
                         c.setForetoldCostByEffect(true);
                     }
-                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(), "has foretold.");
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                     game.fireEvent(new GameEventCardForetold(getActivatingPlayer()));
                 }
             };
@@ -3424,7 +3440,7 @@ public class CardFactoryUtil {
 
                     c.setPlotted(true);
 
-                    // TODO add GameEvent
+                    game.fireEvent(new GameEventCardPlotted(c, getActivatingPlayer()));
                 }
             };
 

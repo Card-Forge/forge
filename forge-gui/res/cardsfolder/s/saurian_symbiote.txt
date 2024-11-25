@@ -1,0 +1,11 @@
+Name:Saurian Symbiote
+ManaCost:3 G
+Types:Creature Fungus Dinosaur
+PT:2/3
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBToken
+SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+DeckHas:Ability$Counters|Token
+Oracle:Reach (This creature can block creatures with flying.)\nWhen Saurian Symbiote enters, choose one —\n• Put a +1/+1 counter on Saurian Symbiote.\n• Create a 1/1 green Saproling creature token.

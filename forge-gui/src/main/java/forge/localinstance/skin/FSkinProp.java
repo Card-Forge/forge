@@ -360,6 +360,7 @@ public enum FSkinProp {
     ICO_UNKNOWN         (new int[] {0, 720, 80, 80}, PropType.ICON),
     ICO_LOGO            (new int[] {480, 0, 200, 200}, PropType.ICON),
     ICO_CARDART         (new int[] {0, 1600, 200, 200}, PropType.ICON),
+    ICO_PADLOCK         (new int[] {200, 1600, 143, 200}, PropType.ICON),
 
     ICO_FLIPCARD        (new int[] {400, 0, 80, 120}, PropType.ICON),
     ICO_HDFLIPCARD      (new int[] {2, 1268, 387, 500}, PropType.BUTTONS),

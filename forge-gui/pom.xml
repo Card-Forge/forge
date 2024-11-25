@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.4.20</version>
+            <version>1.4.21</version>
             <exclusions>
                 <exclusion>
                     <groupId>xmlpull</groupId>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.1.114.Final</version>
+            <version>4.1.115.Final</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

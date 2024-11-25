@@ -1,0 +1,7 @@
+Name:Fleeting Flight
+ManaCost:W
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. It gains flying until end of turn. Prevent all combat damage that would be dealt to it this turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Flying & Prevent all combat damage that would be dealt to CARDNAME.
+DeckHas:Ability$Counters
+Oracle:Put a +1/+1 counter on target creature. It gains flying until end of turn. Prevent all combat damage that would be dealt to it this turn.

@@ -650,25 +650,15 @@ public class CardProperty {
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
-        } else if (property.startsWith("TopLibraryLand")) {
-            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Library), CardPredicates.Presets.LANDS);
-            if (cards.isEmpty() || !card.equals(cards.get(0))) {
-                return false;
+        } else if (property.startsWith("TopLibrary") || property.startsWith("BottomLibrary")) {
+            CardCollection cards = (CardCollection) card.getOwner().getCardsIn(ZoneType.Library);
+            if (!property.equals("TopLibrary")) {
+                if (property.equals("TopLibraryLand")) cards = CardLists.filter(cards, Presets.LANDS);
+                else if (property.contains("_")) cards = CardLists.getValidCards(cards, property.split("_")[1],
+                        sourceController, source, spellAbility);
+                if (property.startsWith("Bottom")) Collections.reverse(cards);
             }
-        } else if (property.startsWith("TopLibrary")) {
-            final CardCollectionView cards = card.getOwner().getCardsIn(ZoneType.Library);
-            if (cards.isEmpty() || !card.equals(cards.get(0))) {
-                return false;
-            }
-        } else if (property.startsWith("BottomLibrary")) {
-            CardCollection cards = new CardCollection(card.getOwner().getCardsIn(ZoneType.Library));
-            if (property.startsWith("BottomLibrary_")) {
-                cards = CardLists.getValidCards(cards, property.substring(14), sourceController, source, spellAbility);
-            }
-            Collections.reverse(cards);
-            if (cards.isEmpty() || !card.equals(cards.get(0))) {
-                return false;
-            }
+            if (cards.isEmpty() || !card.equals(cards.get(0))) return false;
         } else if (property.startsWith("Cloned")) {
             if (card.getCloneOrigin() == null || !card.getCloneOrigin().equals(source)) {
                 return false;

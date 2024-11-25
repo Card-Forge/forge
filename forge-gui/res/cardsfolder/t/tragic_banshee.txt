@@ -1,0 +1,8 @@
+Name:Tragic Banshee
+ManaCost:4 B
+Types:Creature Spirit
+PT:5/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Morbid — When this creature enters, target creature an opponent controls gets -1/-1 until end of turn. If a creature died this turn, that creature gets -13/-13 instead.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -X | NumDef$ -X | IsCurse$ True
+SVar:X:Count$Morbid.13.1
+Oracle:Morbid — When this creature enters, target creature an opponent controls gets -1/-1 until end of turn. If a creature died this turn, that creature gets -13/-13 instead.

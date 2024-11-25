@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.robovm.apple.foundation.NSAutoreleasePool;
@@ -76,6 +77,16 @@ public class Main extends IOSApplication.Delegate {
         @Override
         public String getVersionString() {
             return "0.0";
+        }
+
+        @Override
+        public String getLatestChanges(String commitsAtom, Date buildDateOriginal, Date maxDate) {
+            return "";
+        }
+
+        @Override
+        public String getReleaseTag(String releaseAtom) {
+            return "";
         }
 
         @Override
