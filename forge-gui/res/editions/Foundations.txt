@@ -11,10 +11,10 @@ Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 
 [Common]
-Base=Common:fromSheet("FDN cards")
+Base=Common:!fromSheet("FDN gain lands"):fromSheet("FDN cards")
 
 [Common-Guest]
-Base=Common:fromSheet("FDN cards")
+Base=Common:!fromSheet("FDN gain lands"):fromSheet("FDN cards")
 Replace=.015625F fromSheet("FDN special guests")
 
 [Uncommon]
@@ -26,7 +26,7 @@ Replace=.077F Rare:fromSheet("FDN borderless")
 Replace=.015F Mythic:fromSheet("FDN borderless")
 
 [AnyLand]
-Base=Land:Common:fromSheet("FDN cards")
+Base=fromSheet("FDN gain lands")
 Replace=.25F Land:fromSheet("FDN full art")
 Replace=.25F BasicLand:fromSheet("FDN cards")
 
@@ -783,6 +783,18 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 [promo]
 728 R Phyrexian Arena @Aaron J. Riley
 729 R Solemn Simulacrum @Forrest Imel
+
+[gain lands]
+1 Bloodfell Caves|FDN
+1 Blossoming Sands|FDN
+1 Dismal Backwater|FDN
+1 Jungle Hollow|FDN
+1 Rugged Highlands|FDN
+1 Scoured Barrens|FDN
+1 Swiftwater Cliffs|FDN
+1 Thornwood Falls|FDN
+1 Tranquil Cove|FDN
+1 Wind-Scarred Crag|FDN
 
 [special guests]
 1 Akroma's Memorial|SPG
