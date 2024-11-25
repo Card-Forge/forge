@@ -23,9 +23,7 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import com.google.common.base.*;
 import com.google.common.collect.Iterables;
 
 import forge.Forge;
@@ -58,7 +56,6 @@ import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.util.ItemPool;
 import forge.util.LayoutHelper;
-import forge.util.Lazy;
 
 
 public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T>, ActivateHandler {
@@ -68,7 +65,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     protected final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
     private AdvancedSearchFilter<? extends T> advancedSearchFilter;
-    private Lazy<List<ItemFilter<? extends T>>> filters = Lazy.of(ArrayList::new);
+    private Supplier<List<ItemFilter<? extends T>>> filters = Suppliers.memoize(ArrayList::new);
     private boolean hideFilters = false;
     private boolean wantUnique = false;
     private boolean showRanking = false;
@@ -81,7 +78,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ItemManagerConfig config;
     private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet;
     private boolean viewUpdating, needSecondUpdate;
-    private Lazy<List<ItemColumn>> sortCols = Lazy.of(ArrayList::new);
+    private Supplier<List<ItemColumn>> sortCols = Suppliers.memoize(ArrayList::new);
     private final TextSearchFilter<? extends T> searchFilter;
     private CardFormatFilter cardFormatFilter;
 

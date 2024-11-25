@@ -25,13 +25,14 @@ import java.util.Queue;
 import java.util.Set;
 
 import com.badlogic.gdx.graphics.Pixmap;
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import com.google.common.collect.EvictingQueue;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import forge.deck.DeckProxy;
 import forge.gui.GuiBase;
 import forge.util.FileUtil;
-import forge.util.Lazy;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -71,7 +72,7 @@ import forge.util.ImageUtil;
  */
 public class ImageCache {
     private static ImageCache imageCache;
-    private Lazy<HashSet<String>> missingIconKeys = Lazy.of(HashSet::new);
+    private Supplier<HashSet<String>> missingIconKeys = Suppliers.memoize(HashSet::new);
     private final List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
     public int counter = 0;
     private int maxCardCapacity = 300; //default card capacity
@@ -121,7 +122,7 @@ public class ImageCache {
         return Forge.getAssets().getDefaultImage();
     }
 
-    private Lazy<HashMap<String, ImageRecord>> imageRecord = Lazy.of(() -> new HashMap<>(maxCardCapacity + (maxCardCapacity / 3)));
+    private Supplier<HashMap<String, ImageRecord>> imageRecord = Suppliers.memoize(() -> new HashMap<>(maxCardCapacity + (maxCardCapacity / 3)));
     private boolean imageLoaded, delayLoadRequested;
 
     public void allowSingleLoad() {

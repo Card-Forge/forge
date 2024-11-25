@@ -21,11 +21,12 @@ package forge.ai;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import forge.game.card.Card;
 import forge.game.player.Player;
-import forge.util.Lazy;
 
 /**
  * <p>
@@ -65,7 +66,7 @@ public class AiCardMemory {
         REVEALED_CARDS // These cards were recently revealed to the AI by a call to PlayerControllerAi.reveal
     }
 
-    private final Lazy<Map<MemorySet, Set<Card>>> memoryMap = Lazy.of(Maps::newConcurrentMap);
+    private final Supplier<Map<MemorySet, Set<Card>>> memoryMap = Suppliers.memoize(Maps::newConcurrentMap);
 
     public AiCardMemory() {
     }

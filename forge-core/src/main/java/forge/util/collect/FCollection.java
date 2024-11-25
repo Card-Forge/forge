@@ -13,7 +13,8 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import forge.util.Lazy;
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -45,12 +46,12 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * The {@link Set} representation of this collection.
      */
-    private final Lazy<Set<T>> set = Lazy.of(Sets::newHashSet);
+    private final Supplier<Set<T>> set = Suppliers.memoize(Sets::newHashSet);
 
     /**
      * The {@link List} representation of this collection.
      */
-    private final Lazy<LinkedList<T>> list = Lazy.of(Lists::newLinkedList);
+    private final Supplier<LinkedList<T>> list = Suppliers.memoize(Lists::newLinkedList);
 
     /**
      * Create an empty {@link FCollection}.

@@ -19,6 +19,8 @@ package forge.game.spellability;
 
 import java.util.*;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import forge.game.cost.CostSacrifice;
 import forge.util.*;
 import org.apache.commons.lang3.ObjectUtils;
@@ -143,9 +145,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private TreeBasedTable<String, Boolean, CardCollection> paidLists = TreeBasedTable.create();
     private EnumMap<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
     private EnumMap<AbilityKey, Object> replacingObjects = AbilityKey.newMap();
-    private final Lazy<List<String>> pipsToReduce = Lazy.of(ArrayList::new);
+    private final Supplier<List<String>> pipsToReduce = Suppliers.memoize(ArrayList::new);
     private List<AbilitySub> chosenList = null;
-    private final Lazy<CardCollection> tappedForConvoke = Lazy.of(CardCollection::new);
+    private final Supplier<CardCollection> tappedForConvoke = Suppliers.memoize(CardCollection::new);
     private Card sacrificedAsOffering;
     private Card sacrificedAsEmerge;
 
@@ -170,7 +172,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private CardCollection lastStateBattlefield;
     private CardCollection lastStateGraveyard;
 
-    private final Lazy<CardCollection> rollbackEffects = Lazy.of(CardCollection::new);
+    private final Supplier<CardCollection> rollbackEffects = Suppliers.memoize(CardCollection::new);
 
     private CardDamageMap damageMap;
     private CardDamageMap preventMap;

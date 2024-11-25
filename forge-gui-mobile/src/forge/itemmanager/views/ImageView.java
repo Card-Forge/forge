@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
@@ -28,7 +30,6 @@ import forge.model.FModel;
 import forge.toolbox.*;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
-import forge.util.Lazy;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
@@ -66,7 +67,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int MIN_COLUMN_COUNT = Forge.isLandscapeMode() ? 2 : 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
-    private Lazy<List<Integer>> selectedIndices = Lazy.of(ArrayList::new);
+    private Supplier<List<Integer>> selectedIndices = Suppliers.memoize(ArrayList::new);
     private int columnCount = 4;
     private float scrollHeight = 0;
     private ColumnDef pileBy = null;
@@ -74,8 +75,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo focalItem;
     private boolean updatingLayout;
     private float totalZoomAmount;
-    private Lazy<List<ItemInfo>> orderedItems = Lazy.of(ArrayList::new);
-    private Lazy<List<Group>> groups = Lazy.of(ArrayList::new);
+    private Supplier<List<ItemInfo>> orderedItems = Suppliers.memoize(ArrayList::new);
+    private Supplier<List<Group>> groups = Suppliers.memoize(ArrayList::new);
 
     private class ExpandCollapseButton extends FLabel {
         private boolean isAllCollapsed;

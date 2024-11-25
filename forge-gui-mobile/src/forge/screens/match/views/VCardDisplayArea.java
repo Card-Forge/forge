@@ -9,6 +9,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import forge.Forge;
 import forge.Graphics;
 import forge.card.CardRenderer.CardStackPosition;
@@ -22,15 +24,14 @@ import forge.gui.GuiBase;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
-import forge.util.Lazy;
 import forge.util.ThreadUtil;
 import io.sentry.Sentry;
 
 public abstract class VCardDisplayArea extends VDisplayArea implements ActivateHandler {
     private static final float CARD_STACK_OFFSET = 0.2f;
 
-    protected Lazy<List<CardView>> orderedCards = Lazy.of(ArrayList::new);
-    protected Lazy<List<CardAreaPanel>> cardPanels = Lazy.of(ArrayList::new);
+    protected Supplier<List<CardView>> orderedCards = Suppliers.memoize(ArrayList::new);
+    protected Supplier<List<CardAreaPanel>> cardPanels = Suppliers.memoize(ArrayList::new);
     private boolean rotateCards180;
 
     public Iterable<CardView> getOrderedCards() {

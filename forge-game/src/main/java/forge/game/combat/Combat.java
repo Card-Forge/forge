@@ -17,6 +17,8 @@
  */
 package forge.game.combat;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import com.google.common.collect.*;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -32,7 +34,6 @@ import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
-import forge.util.Lazy;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -54,17 +55,17 @@ public class Combat {
     private boolean legacyOrderCombatants;
     private AttackConstraints attackConstraints;
     // Defenders, as they are attacked by hostile forces
-    private final Lazy<FCollection<GameEntity>> attackableEntries = Lazy.of(FCollection::new);
+    private final Supplier<FCollection<GameEntity>> attackableEntries = Suppliers.memoize(FCollection::new);
     // Keyed by attackable defender (player or planeswalker or battle)
-    private final Lazy<Multimap<GameEntity, AttackingBand>> attackedByBands = Lazy.of(() -> Multimaps.synchronizedMultimap(ArrayListMultimap.create()));
-    private final Lazy<Multimap<AttackingBand, Card>> blockedBands = Lazy.of(() -> Multimaps.synchronizedMultimap(ArrayListMultimap.create()));
-    private final Lazy<Map<Card, CardCollection>> attackersOrderedForDamageAssignment = Lazy.of(Maps::newHashMap);
-    private final Lazy<Map<Card, CardCollection>> blockersOrderedForDamageAssignment = Lazy.of(Maps::newHashMap);
-    private final Lazy<CardCollection> lkiCache = Lazy.of(CardCollection::new);
-    private final Lazy<CardDamageMap> damageMap = Lazy.of(CardDamageMap::new);
+    private final Supplier<Multimap<GameEntity, AttackingBand>> attackedByBands = Suppliers.memoize(() -> Multimaps.synchronizedMultimap(ArrayListMultimap.create()));
+    private final Supplier<Multimap<AttackingBand, Card>> blockedBands = Suppliers.memoize(() -> Multimaps.synchronizedMultimap(ArrayListMultimap.create()));
+    private final Supplier<Map<Card, CardCollection>> attackersOrderedForDamageAssignment = Suppliers.memoize(Maps::newHashMap);
+    private final Supplier<Map<Card, CardCollection>> blockersOrderedForDamageAssignment = Suppliers.memoize(Maps::newHashMap);
+    private final Supplier<CardCollection> lkiCache = Suppliers.memoize(CardCollection::new);
+    private final Supplier<CardDamageMap> damageMap = Suppliers.memoize(CardDamageMap::new);
 
     // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW)
-    private final Lazy<CardCollection> combatantsThatDealtFirstStrikeDamage = Lazy.of(CardCollection::new);
+    private final Supplier<CardCollection> combatantsThatDealtFirstStrikeDamage = Suppliers.memoize(CardCollection::new);
 
     public Combat(final Player attacker) {
         playerWhoAttacks = attacker;
