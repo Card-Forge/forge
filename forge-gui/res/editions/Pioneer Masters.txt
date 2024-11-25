@@ -1,0 +1,22 @@
+[metadata]
+Code=PIO
+Date=2024-12-10
+Name=Pioneer Masters
+Type=Reprint
+ScryfallCode=PIO
+
+[cards]
+0 R Silence @Wayne Reynolds
+0 U Hidden Strings @Daarken
+0 M Jace, Vryn's Prodigy @Jaime Jones
+0 M Liliana, Heretical Healer @Karla Ortiz
+0 R Tasigur, the Golden Fang @Chris Rahn
+0 R Legion Loyalist @Eric Deschamps
+0 M Purphoros, God of the Forge @Eric Deschamps
+0 C Gladecover Scout @Brian Valeza
+0 R Hornet Nest @Adam Paquette
+0 R Sylvan Caryatid @Chase Stone
+0 M Athreos, God of Passage @Ryan Barger
+0 R Bring to Light @Jonas De Ro
+0 M Mogis, God of Slaughter @Chase Stone
+0 R Urborg, Tomb of Yawgmoth @John Avon
