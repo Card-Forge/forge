@@ -318,7 +318,7 @@ CW12 C Taught by Serra @
 RA12a R Guildmark @
 RA12b R Trampled Lotus @
 RG12a R HONK! @
-RG12b R Clean, Fair Magic @
+RG12b R Clear, Fair Magic @
 RU12 R Untap, Upkeep, Draw @
 RZ12 R Eldest Dragon Highlander @
 RZ12b R Zimone's Homework @
