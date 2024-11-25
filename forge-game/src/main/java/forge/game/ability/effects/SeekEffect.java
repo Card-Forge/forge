@@ -67,7 +67,7 @@ public class SeekEffect extends SpellAbilityEffect {
                     pool = CardLists.getValidCards(pool, seekType, source.getController(), source, sa);
                 }
                 if (pool.isEmpty()) {
-                    if (!notify.length() != 0) notify.append("\r\n");
+                    if (notify.length() != 0) notify.append("\r\n");
                     notify.append(Localizer.getInstance().getMessage("lblSeekFailed", seekType));
                     continue; // can't find if nothing to seek
                 }
@@ -88,7 +88,7 @@ public class SeekEffect extends SpellAbilityEffect {
 
                 }
             }
-            if (!notify.length() != 0) {
+            if (notify.length() != 0) {
                 game.getAction().notifyOfValue(sa, source, notify.toString(), null);
             }
             if (!soughtCards.isEmpty()) {
