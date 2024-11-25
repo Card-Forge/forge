@@ -353,5 +353,3 @@ voja_friend_to_elves
 w_0_3_wall_defender
 w_2_2_soldier_vigilance
 w_4_4_angel_flying_vigilance
-
- 
