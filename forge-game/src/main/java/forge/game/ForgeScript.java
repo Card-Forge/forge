@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ForgeScript {
@@ -91,6 +92,29 @@ public class ForgeScript {
                 default:
                     return false;
             }
+        } else if (property.startsWith("ChosenLetter")) {
+            final List<String> letters = source.getChosenLetters();
+            if (letters == null) return false; // some things check before letters have been chosen
+            String name = cardState.getName();
+            if (name.startsWith("A-")) name = name.substring(2); // remove Alchemy tag
+            if (property.contains("FirstWord")) name = name.split(" ")[0];
+            boolean found = false;
+            if (property.endsWith("Starts")) {
+                for (String l : letters) {
+                    if (name.startsWith(l)) {
+                        found = true;
+                        break;
+                    }
+                }
+            } else if (property.endsWith("Contains")) {
+                for (String l : letters) {
+                    if (name.contains(l) || name.contains(l.toLowerCase())) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            return found;
         } else if (property.equals("Outlaw")) {
             return type.isOutlaw();
         } else if (property.startsWith("non")) {

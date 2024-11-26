@@ -1,0 +1,8 @@
+Name:Alpha Guard
+ManaCost:1 G
+Types:Creature Elf Employee
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseLetter | TriggerDescription$ When CARDNAME enters, choose a letter.
+SVar:TrigChooseLetter:DB$ ChooseLetter
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other+ChosenLetterNameStarts | TgtPrompt$ Select another target permanent whose name starts with the chosen letter | SpellDescription$ Untap another target permanent whose name starts with the chosen letter.
+Oracle:When Alpha Guard enters, choose a letter.\n{T}: Untap another target permanent whose name starts with the chosen letter.
