@@ -2321,7 +2321,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("YouRolledThisTurn")) {
-            int n = Integer.parseInt(sq[0].substring(17));
+            int n = calculateAmount(c, sq[0].substring(17), ctb);
             return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
         }
 
