@@ -1,0 +1,7 @@
+Name:Leading Performance
+ManaCost:1 W
+Types:Sorcery
+A:SP$ ChooseLetter | Num$ 2 | SubAbility$ PutCounterAll | SpellDescription$ Choose two letters.
+SVar:PutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+ChosenLetterNameStarts | CounterType$ P1P1 | StackDescription$ SpellDescription | SpellDescription$ Put a +1/+1 counter on each creature you control whose name begins with either of the chosen letters.
+DeckHas:Ability$Counters
+Oracle:Choose two letters. Put a +1/+1 counter on each creature you control whose name begins with either of the chosen letters.

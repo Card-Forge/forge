@@ -1393,6 +1393,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public List<String> chooseLetter(int n, String ai, List<String> letters) {
+        List<String> chosen = Lists.newArrayList();
+        for (int i = 0; i < n; i++) {
+            String choice = getGui().one(Localizer.getInstance().getMessage("lblChooseLetter"), letters);
+            letters.remove(choice);
+            chosen.add(choice);
+        }
+        return chosen;
+    }
+
+    @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         String prompt;
         if (assignee != null) {

@@ -1,0 +1,7 @@
+Name:Cat Token
+ManaCost:no cost
+Colors:white
+Types:Creature Cat
+PT:2/2
+K:Flying
+Oracle:Flying

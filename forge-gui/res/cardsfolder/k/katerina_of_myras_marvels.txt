@@ -1,0 +1,11 @@
+Name:Katerina of Myra's Marvels
+ManaCost:2 W W
+Types:Legendary Creature Human Performer
+PT:3/3
+K:ETBReplacement:Other:DBChooseLetter
+SVar:DBChooseLetter:DB$ ChooseLetter | SpellDescription$ As CARDNAME enters, choose a letter.
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.ChosenLetterNameStarts | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a spell whose name begins with the chosen letter, create a white 2/2 Cat creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_cat_flying
+K:Partner
+DeckHas:Ability$Token & Type$Cat
+Oracle:As Katerina of Myra's Marvels enters, choose a letter.\nWhenever you cast a spell whose name begins with the chosen letter, create a white 2/2 Cat creature token with flying.\nPartner (You can have two commanders if they both have partner.)
