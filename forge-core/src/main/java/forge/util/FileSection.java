@@ -105,24 +105,24 @@ public class FileSection {
         int lineNumber = 0;
         String section = null;
 
-        do{
-            String line = lines.get(lineNumber++);
-            if (line.startsWith("[") && line.endsWith("]")) {
-                section = line.substring(1, line.length() - 1);
-                if(!result.containsKey(section)) {
-                    result.put(section, new ArrayList<>());
+        if(null != lines && !lines.isEmpty()){
+            do{
+                String line = lines.get(lineNumber++);
+                if (line.startsWith("[") && line.endsWith("]")) {
+                    section = line.substring(1, line.length() - 1);
+                    if(!result.containsKey(section)) {
+                        result.put(section, new ArrayList<>());
+                    }
+                }
+                else if(null != section && !line.isEmpty() && !line.startsWith("#")){
+                    result.get(section).add(line);
                 }
             }
-            else if(null != section && !line.isEmpty() && !line.startsWith("#")){
-                result.get(section).add(line);
-            }
+            while(lineNumber<lines.size());
         }
-        while(lineNumber<lines.size());
 
         return result;
     }
-
-
 
     public String get(final String fieldName) {
         return this.lines.get(fieldName);
