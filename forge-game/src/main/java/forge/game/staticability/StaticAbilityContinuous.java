@@ -831,12 +831,7 @@ public final class StaticAbilityContinuous {
                 // add triggers
                 if (addTriggers != null) {
                     for (final String trigger : addTriggers) {
-                        final Trigger actualTrigger = affectedCard.getTriggerForStaticAbility(trigger, stAb);
-                        // if the trigger has Execute param, which most trigger gained by Static Abilties should have
-                        // turn them into SpellAbility object before adding to card
-                        // with that the TargetedCard does not need the Svars added to them anymore
-                        // but only do it if the trigger doesn't already have a overriding ability
-                        addedTrigger.add(actualTrigger);
+                        addedTrigger.add(affectedCard.getTriggerForStaticAbility(trigger, stAb));
                     }
                 }
 
