@@ -20,6 +20,9 @@ public class ClassLevelUpAi extends SpellAbilityAi {
             }
             for (String sTrig : stAb.getParam("AddTrigger").split(" & ")) {
                 Trigger t = host.getTriggerForStaticAbility(AbilityUtils.getSVar(stAb, sTrig), stAb);
+                if (t.getMode() != TriggerType.ClassLevelGained) {
+                    continue;
+                }
                 SpellAbility effect = t.ensureAbility();
                 if (!SpellApiToAi.Converter.get(effect.getApi()).doTriggerAI(aiPlayer, effect, false)) {
                     return false;
