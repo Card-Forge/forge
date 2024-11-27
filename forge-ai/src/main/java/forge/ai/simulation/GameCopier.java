@@ -358,13 +358,7 @@ public class GameCopier {
             newCard.setDamage(c.getDamage());
             newCard.setDamageReceivedThisTurn(c.getDamageReceivedThisTurn());
 
-            newCard.setChangedCardColors(c.getChangedCardColorsTable());
-            newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
-
-            newCard.setChangedCardTypes(c.getChangedCardTypesTable());
-            newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
-            newCard.setChangedCardKeywords(c.getChangedCardKeywords());
-            newCard.setChangedCardNames(c.getChangedCardNames());
+            newCard.copyFrom(c);
 
             for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {
                 newCard.addHiddenExtrinsicKeywords(kw.getRowKey(), kw.getColumnKey(), kw.getValue());

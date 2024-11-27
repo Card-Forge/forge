@@ -47,7 +47,7 @@
 #46|Floodpits Drowner|U|DSK
 #47|Patchwork Beastie|U|DSK
 #48|Threats Around Every Corner|U|DSK
-#49|Phantasmal Image|M|DSK
+#49|Phantasmal Image|M|SPG
 #50|Betrayer's Bargain|U|DSK
 #51|Ethereal Armor|U|DSK
 #52|Growing Dread|U|DSK
@@ -66,7 +66,7 @@
 #65|Inquisitive Glimmer|U|DSK
 #66|Painter's Studio Defeated Gallery|U|DSK
 #67|Piggy Bank|U|DSK
-#68|Damnation|M|DSK
+#68|Damnation|M|SPG
 #69|Glassworks Shattered Yard|C|DSK
 #70|Glimmerlight|C|DSK
 #71|Spineseeker Centipede|C|DSK
@@ -91,7 +91,7 @@
 #90|Cursed Windbreaker|U|DSK
 #91|Insidious Fungus|U|DSK
 #92|Paranormal Analyst|U|DSK
-#93|Unholy Heat|M|DSK
+#93|Unholy Heat|M|SPG
 #94|Monstrous Emergence|C|DSK
 #95|Say Its Name|C|DSK
 #96|Seized from Slumber|C|DSK
@@ -173,7 +173,7 @@
 #172|Rite of the Moth|U|DSK
 #173|Valgavoth's Faithful|U|DSK
 #174|Raucous Carnival|C|DSK
-#175|Hallowed Haunting|M|DSK
+#175|Hallowed Haunting|M|SPG
 #176|Emerge from the Cocoon|C|DSK
 #177|Fear of Lost Teeth|C|DSK
 #178|Grasping Longneck|C|DSK
@@ -216,7 +216,7 @@
 #215|Nashi, Searcher in the Dark|R|DSK
 #216|Fear of Exposure|U|DSK
 #217|Neglected Manor|C|DSK
-#218|Collected Company|M|DSK
+#218|Collected Company|M|SPG
 #219|Derelict Attic Widow's Walk|C|DSK
 #220|Possessed Goat|C|DSK
 #221|Central Elevator Promising Stairs|R|DSK
@@ -275,11 +275,11 @@
 #274|Leyline of Transformation|R|DSK
 #275|Marina Vendrell's Grimoire|R|DSK
 #276|The Tale of Tamiyo|R|DSK
-#277|Noxious Revival|M|DSK
-#278|Maddening Hex|M|DSK
-#279|Sacrifice|M|DSK
-#280|Expropriate|M|DSK
-#281|Soul Warden|M|DSK
+#277|Noxious Revival|M|SPG
+#278|Maddening Hex|M|SPG
+#279|Sacrifice|M|SPG
+#280|Expropriate|M|SPG
+#281|Soul Warden|M|SPG
 #282|Forest|C|DSK
 #283|Mountain|C|DSK
 #284|Swamp|C|DSK

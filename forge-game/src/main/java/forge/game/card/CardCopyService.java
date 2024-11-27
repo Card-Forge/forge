@@ -356,13 +356,7 @@ public class CardCopyService {
 
         newCopy.setUnearthed(copyFrom.isUnearthed());
 
-        newCopy.setChangedCardColors(copyFrom.getChangedCardColorsTable());
-        newCopy.setChangedCardColorsCharacterDefining(copyFrom.getChangedCardColorsCharacterDefiningTable());
-        newCopy.setChangedCardKeywords(copyFrom.getChangedCardKeywords());
-        newCopy.setChangedCardTypes(copyFrom.getChangedCardTypesTable());
-        newCopy.setChangedCardTypesCharacterDefining(copyFrom.getChangedCardTypesCharacterDefiningTable());
-        newCopy.setChangedCardNames(copyFrom.getChangedCardNames());
-        newCopy.setChangedCardTraits(copyFrom.getChangedCardTraits());
+        newCopy.copyFrom(copyFrom);
 
         // for getReplacementList (run after setChangedCardKeywords for caching)
         newCopy.setStoredKeywords(copyFrom.getStoredKeywords(), true);

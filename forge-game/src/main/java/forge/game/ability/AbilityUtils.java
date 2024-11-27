@@ -2320,6 +2320,11 @@ public class AbilityUtils {
             return doXMath(player.getNumRollsThisTurn(), expr, c, ctb);
         }
 
+        if (sq[0].startsWith("YouRolledThisTurn")) {
+            int n = calculateAmount(c, sq[0].substring(17), ctb);
+            return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
+        }
+
         if (sq[0].equals("YouSurveilThisTurn")) {
             return doXMath(player.getSurveilThisTurn(), expr, c, ctb);
         }
@@ -3004,7 +3009,7 @@ public class AbilityUtils {
                 sp.setCardState(original);
                 list.add(sp);
             }
-            if (tgtCard.isModal()) {
+            if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Modal)) {
                 collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Modal), controller, withAltCost);
             }
         }
