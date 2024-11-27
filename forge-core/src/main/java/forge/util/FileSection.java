@@ -102,23 +102,21 @@ public class FileSection {
      */
     public static Map<String, List<String>> parseSections(final List<String> lines) {
         final Map<String, List<String>> result = new LinkedHashMap<>();
-        int lineNumber = 0;
         String section = null;
 
         if(null != lines && !lines.isEmpty()){
-            do{
-                String line = lines.get(lineNumber++);
+            for(String l : lines) {
+                String line = l.trim();
+                if (line.startsWith("#")) continue;
                 if (line.startsWith("[") && line.endsWith("]")) {
                     section = line.substring(1, line.length() - 1);
-                    if(!result.containsKey(section)) {
+                    if (!result.containsKey(section)) {
                         result.put(section, new ArrayList<>());
                     }
-                }
-                else if(null != section && !line.isEmpty() && !line.startsWith("#")){
+                } else if (null != section && !line.isEmpty()) {
                     result.get(section).add(line);
                 }
             }
-            while(lineNumber<lines.size());
         }
 
         return result;
