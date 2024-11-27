@@ -3009,7 +3009,7 @@ public class AbilityUtils {
                 sp.setCardState(original);
                 list.add(sp);
             }
-            if (tgtCard.isModal()) {
+            if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Modal)) {
                 collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Modal), controller, withAltCost);
             }
         }
