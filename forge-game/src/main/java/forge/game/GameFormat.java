@@ -143,6 +143,7 @@ public class GameFormat implements Comparable<GameFormat> {
         this.filterPrinted = this.buildFilterPrinted();
         this.filterAllowedAsCommander = Predicates.not(IPaperCard.Predicates.names(this.getBannedAsCommanderCardNames()));
     }
+
     protected Predicate<PaperCard> buildFilter(boolean printed) {
         Predicate<PaperCard> p = Predicates.not(IPaperCard.Predicates.names(this.getBannedCardNames()));
 

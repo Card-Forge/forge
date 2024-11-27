@@ -21,10 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.card.CardType;
-import forge.card.ColorSet;
+import forge.card.*;
 import forge.deck.generation.DeckGenPool;
 import forge.deck.generation.DeckGeneratorBase.FilterCMC;
 import forge.deck.generation.IDeckGenPool;
@@ -67,8 +64,20 @@ public enum DeckFormat {
     Brawl      ( Range.is(59), Range.between(0, 15), 1, null,
             card -> StaticData.instance().getBrawlPredicate().apply(card), null
     ),
-    TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, null,
-            card -> StaticData.instance().getTinyLeadersPredicate().apply(card),
+    TinyLeaders(Range.is(49), Range.between(0, 10), 1,
+            null,
+            Predicates.and(card -> StaticData.instance().getTinyLeadersPredicate().apply(card), card -> {
+                // Check for split cards explicitly, as using rules.getManaCost().getCMC()
+                // will return the sum of the costs, which is not what we want.
+                if (card.getRules().getMainPart().getManaCost().getCMC() > 3) {
+                    return false; //only cards with CMC less than 3 are allowed
+                }
+                ICardFace otherPart = card.getRules().getOtherPart();
+                if (otherPart != null && otherPart.getManaCost().getCMC() > 3) {
+                    return false; //only cards with CMC less than 3 are allowed
+                }
+                return true;
+            }),
             card -> StaticData.instance().getTinyLeadersAllowedAsCommanderPredicate().apply(card)
     ) {
         @Override
