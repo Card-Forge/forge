@@ -34,7 +34,6 @@ public class ClassLevelUpEffect extends SpellAbilityEffect {
         game.getTriggerHandler().clearActiveTriggers(host, null);
         game.getTriggerHandler().registerActiveTrigger(host, false);
 
-        // Run ClassLevelGained trigger
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
         runParams.put(AbilityKey.ClassLevel, level);
         game.getTriggerHandler().runTrigger(TriggerType.ClassLevelGained, runParams, false);

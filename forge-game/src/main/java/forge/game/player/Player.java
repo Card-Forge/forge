@@ -2292,7 +2292,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         sacrificedThisTurn.add(cpy);
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
         runParams.put(AbilityKey.Card, cpy);

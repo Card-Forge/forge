@@ -26,9 +26,9 @@ public class UnlockDoorEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final Player activator = sa.getActivatingPlayer();
-        
+
         CardCollection list;
-        
+
         if (sa.hasParam("Choices")) {
             Player chooser = activator;
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChoose") + " ";
@@ -43,7 +43,7 @@ public class UnlockDoorEffect extends SpellAbilityEffect {
         } else {
             list = getTargetCards(sa);
         }
-        
+
         for (Card c : list) {
             Map<String, Object> params = Maps.newHashMap();
             params.put("Object", c);
