@@ -177,7 +177,7 @@ public class TextRenderer {
                                     needClip = true;
                                 }
                             }
-                            addPiece(new SymbolPiece(symbol, inReminderTextCount > 0), lineNum, x, y - font.getAscent() + (lineHeight - pieceWidth) / 2, pieceWidth, pieceWidth);
+                            addPiece(new SymbolPiece(symbol, inReminderTextCount > 0), lineNum, x, y - lineHeight / 4, pieceWidth, pieceWidth);
                             x += pieceWidth;
                             pieceWidth = 0;
                             text.setLength(0);
