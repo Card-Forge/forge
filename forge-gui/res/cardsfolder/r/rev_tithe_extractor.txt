@@ -1,0 +1,15 @@
+Name:Rev, Tithe Extractor
+ManaCost:3 B
+Types:Legendary Creature Human Rogue
+PT:3/3
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target creature gains deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, create a Treasure token, then look at the top card of that player's library and exile it face down. You may cast that card for as long as it remains exiled. (A Treasure token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ 1 | Defined$ TriggeredTarget | ForceRevealToController$ True | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ Permanent
+SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Token
+Oracle:Whenever you attack, target creature gains deathtouch until end of turn.\nWhenever one or more creatures you control deal combat damage to a player, create a Treasure token, then look at the top card of that player's library and exile it face down. You may cast that card for as long as it remains exiled. (A Treasure token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

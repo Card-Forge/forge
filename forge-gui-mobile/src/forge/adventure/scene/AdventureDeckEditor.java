@@ -17,12 +17,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardEdition;
 import forge.card.CardZoom;
-import forge.deck.AddBasicLandsDialog;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckFormat;
-import forge.deck.DeckSection;
-import forge.deck.FDeckViewer;
+import forge.deck.*;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.item.InventoryItem;
@@ -37,11 +32,7 @@ import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.GuiChoose;
+import forge.toolbox.*;
 import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Utils;
@@ -56,8 +47,9 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         Deck contents = new Deck();
 
         protected ContentPreviewPage(Deck cardsToShow) {
-            super(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             contents = cardsToShow;
+            cardManager.setBtnAdvancedSearchOptions(false);
         }
 
         @Override
@@ -142,8 +134,9 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
     private static class StoreCatalogPage extends CatalogPage {
         protected StoreCatalogPage() {
-            super(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             Current.player().onGoldChange(() -> lblGold.setText(String.valueOf(AdventurePlayer.current().getGold())));
+            cardManager.setBtnAdvancedSearchOptions(false);
         }
 
         @Override
@@ -177,7 +170,10 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
     private static class CollectionCatalogPage extends CatalogPage {
         protected CollectionCatalogPage() {
-            super(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            cardManager.setBtnAdvancedSearchOptions(true);
+            cardManager.setCatalogDisplay(true);
+            cardManager.setShowNFSWatermark(true);
         }
 
         @Override
@@ -226,11 +222,17 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             }
 
             if (sellableCount > 0) {
-                FMenuItem moveToAutosell = new FMenuItem(Forge.getLocalizer().getMessage("lbltoSell", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> Current.player().autoSellCards.add(card));
+                FMenuItem moveToAutosell = new FMenuItem(Forge.getLocalizer().getMessage("lbltoSell", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> {
+                    Current.player().autoSellCards.add(card);
+                    refresh();
+                });
                 moveToAutosell.setEnabled(sellableCount - autoSellCount > 0);
                 menu.addItem(moveToAutosell);
 
-                FMenuItem moveToCatalog = new FMenuItem(Forge.getLocalizer().getMessage("lbltoInventory", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> Current.player().autoSellCards.remove(card));
+                FMenuItem moveToCatalog = new FMenuItem(Forge.getLocalizer().getMessage("lbltoInventory", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> {
+                    Current.player().autoSellCards.remove(card);
+                    refresh();
+                });
                 moveToCatalog.setEnabled(autoSellCount > 0);
                 menu.addItem(moveToCatalog);
             }
@@ -419,6 +421,42 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         }
     }
 
+    public void showDefault() {
+        if (catalogPage == null)
+            return;
+        catalogPage.showCollectionCards = true;
+        catalogPage.showAutoSellCards = false;
+        catalogPage.showNoSellCards = true;
+        catalogPage.refresh();
+    }
+
+    public void showCollection() {
+        if (catalogPage == null)
+            return;
+        catalogPage.showCollectionCards = true;
+        catalogPage.showAutoSellCards = false;
+        catalogPage.showNoSellCards = false;
+        catalogPage.refresh();
+    }
+
+    public void showAutoSell() {
+        if (catalogPage == null)
+            return;
+        catalogPage.showCollectionCards = false;
+        catalogPage.showAutoSellCards = true;
+        catalogPage.showNoSellCards = false;
+        catalogPage.refresh();
+    }
+
+    public void showNoSell() {
+        if (catalogPage == null)
+            return;
+        catalogPage.showCollectionCards = false;
+        catalogPage.showAutoSellCards = false;
+        catalogPage.showNoSellCards = true;
+        catalogPage.refresh();
+    }
+
     private static DeckEditorPage[] getPages(boolean isShop) {
         if (isShop) {
             return new DeckEditorPage[]{
@@ -427,8 +465,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         } else {
             return new DeckEditorPage[]{
                     new CollectionCatalogPage(),
-                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
-                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)};
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD)};
         }
     }
 
@@ -455,9 +493,9 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                             new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
                 default:
                     return new DeckEditorPage[]{
-                            new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
-                            new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
-                            new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
+                            new CatalogPage(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
+                            new DeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
+                            new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD)};
 
             }
         } else if (event.format == AdventureEventController.EventFormat.Jumpstart) {
@@ -544,30 +582,37 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                             addItem(addBasic);
                         }
                         if (!isShop && catalogPage != null && !(catalogPage instanceof ContentPreviewPage)) {
-                            if (catalogPage.showNoSellCards) {
-                                FMenuItem hideNoSell = new FMenuItem(Forge.getLocalizer().getMessage("lblHideNoSell"), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleNoSellCards(false));
-                                addItem(hideNoSell);
-                                hideNoSell.setEnabled(catalogPage.showAutoSellCards || catalogPage.showCollectionCards);
-                            } else {
-                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowNoSell"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleNoSellCards(true)));
+                            // Add bulk sell menu option. This will sell all cards in the current filter.
+                            int count = 0;
+                            int value = 0;
+
+                            for (Map.Entry<PaperCard, Integer> entry : catalogPage.cardManager.getFilteredItems()) {
+                                value += AdventurePlayer.current().cardSellPrice(entry.getKey()) * entry.getValue();
+                                count += entry.getValue();
                             }
-                            if (catalogPage.showAutoSellCards) {
-                                FMenuItem hideAutoSell = new FMenuItem(Forge.getLocalizer().getMessage("lblHideAutoSell"), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleAutoSellCards(false));
-                                addItem(hideAutoSell);
-                                hideAutoSell.setEnabled(catalogPage.showCollectionCards || catalogPage.showNoSellCards);
-                            } else {
-                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowAutoSell"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleAutoSellCards(true)));
-                            }
-                            if (catalogPage.showCollectionCards) {
-                                FMenuItem hideCollection = new FMenuItem(Forge.getLocalizer().getMessage("lblHideCollection"), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleCollectionCards(false));
-                                addItem(hideCollection);
-                                hideCollection.setEnabled(catalogPage.showAutoSellCards || catalogPage.showNoSellCards);
-                            } else {
-                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowCollection"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleCollectionCards(true)));
-                            }
-                            if (!catalogPage.showNoSellCards || !catalogPage.showAutoSellCards || !catalogPage.showCollectionCards) {
-                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowAll"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.showAllCards()));
-                            }
+
+                            final int finalCount = count;
+                            final int finalValue = value;
+                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSellCurrentFilters"), FSkinImage.QUEST_COINSTACK, e1 -> {
+                                // aloww selling on catalog page only
+                                if (catalogPage.cardManager.getCatalogSelectedIndex() == 1) {
+                                    FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", finalCount, finalValue), Forge.getLocalizer().getMessage("lblSellCurrentFilters"), Forge.getLocalizer().getMessage("lblSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
+                                        @Override
+                                        public void run(Boolean result) {
+                                            if (result) {
+                                                for (Map.Entry<PaperCard, Integer> entry : catalogPage.cardManager.getFilteredItems()) {
+                                                    AdventurePlayer.current().sellCard(entry.getKey(), entry.getValue());
+                                                }
+                                                catalogPage.refresh();
+                                                lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblChoose") + " " +
+                                        Forge.getLocalizer().getMessage("lblSellable"));
+                                }
+                            }));
                         }
                         ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
                     }
@@ -589,8 +634,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
             }
             defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
-        }
-        else {
+        } else {
             defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
         }
 
@@ -751,7 +795,6 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
             ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, fnNewCompare, fnNewGet);
             ItemColumn.addColOverride(config, colOverrides, ColumnDef.DECKS, fnDeckCompare, fnDeckGet);
-
             cardManager.setup(config, colOverrides);
         }
 
@@ -991,28 +1034,6 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
         boolean showCollectionCards = true, showAutoSellCards = false, showNoSellCards = true;
 
-        public void showAllCards() {
-            showCollectionCards = true;
-            showAutoSellCards = true;
-            showNoSellCards = true;
-            refresh();
-        }
-
-        public void toggleCollectionCards(boolean show) {
-            showCollectionCards = show;
-            refresh();
-        }
-
-        public void toggleAutoSellCards(boolean show) {
-            showAutoSellCards = show;
-            refresh();
-        }
-
-        public void toggleNoSellCards(boolean show) {
-            showNoSellCards = show;
-            refresh();
-        }
-
         protected CatalogPage(ItemManagerConfig config, String caption0, FImage icon0) {
             super(config, caption0, icon0);
             refresh();
@@ -1228,16 +1249,22 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     captionPrefix = Forge.getLocalizer().getMessage("lblMain");
                     cardManager.setCaption(Forge.getLocalizer().getMessage("ttMain"));
                     icon = MAIN_DECK_ICON;
+                    cardManager.setBtnAdvancedSearchOptions(true);
+                    cardManager.setCatalogDisplay(false);
                     break;
                 case Sideboard:
                     captionPrefix = Forge.getLocalizer().getMessage("lblSide");
                     cardManager.setCaption(Forge.getLocalizer().getMessage("lblSideboard"));
                     icon = SIDEBOARD_ICON;
+                    cardManager.setBtnAdvancedSearchOptions(false);
+                    cardManager.setCatalogDisplay(false);
                     break;
                 case Commander:
                     captionPrefix = Forge.getLocalizer().getMessage("lblCommander");
                     cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommander"));
                     icon = FSkinImage.COMMANDER;
+                    cardManager.setBtnAdvancedSearchOptions(true);
+                    cardManager.setCatalogDisplay(false);
                     break;
             }
         }

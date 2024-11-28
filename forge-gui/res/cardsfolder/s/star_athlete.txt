@@ -1,5 +1,5 @@
 Name:Star Athlete
-ManaCost:2 R R
+ManaCost:1 R R
 Types:Creature Human Warrior
 PT:3/2
 K:Menace

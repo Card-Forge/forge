@@ -98,7 +98,9 @@ public class SeekEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ImprintFound")) {
                     source.addImprintedCards(soughtCards);
                 }
-                game.getTriggerHandler().runTrigger(TriggerType.SeekAll, AbilityKey.mapFromPlayer(seeker), false);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(seeker);
+                runParams.put(AbilityKey.Cards, soughtCards);
+                game.getTriggerHandler().runTrigger(TriggerType.SeekAll, runParams, false);
             }
         }
         triggerList.triggerChangesZoneAll(game, sa);

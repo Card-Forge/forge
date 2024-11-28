@@ -199,6 +199,8 @@ public class CloneEffect extends SpellAbilityEffect {
             if (sa.hasParam("RememberCloneOrigin")) {
                 tgtCard.addRemembered(cardToCopy);
             }
+            // spire
+            tgtCard.setChosenColorID(cardToCopy.getChosenColorID());
 
             game.fireEvent(new GameEventCardStatsChanged(tgtCard));
         }

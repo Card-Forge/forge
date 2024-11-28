@@ -19,6 +19,6 @@ public class GameEventCardForetold extends GameEvent {
      */
     @Override
     public String toString() {
-        return activatingPlayer.getName()+" has foretold.";
+        return activatingPlayer.getName() + " has foretold a card.";
     }
 }

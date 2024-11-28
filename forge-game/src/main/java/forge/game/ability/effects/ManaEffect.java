@@ -119,7 +119,7 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
                 }
 
-                if (choiceString.toString().isEmpty() && "Combo ColorIdentity".equals(abMana.getOrigProduced())) {
+                if (choiceString.toString().isEmpty() && ("Combo ColorIdentity".equals(abMana.getOrigProduced()) || "Combo Spire".equals(abMana.getOrigProduced()))) {
                     // No mana could be produced here (non-EDH match?), so cut short
                     continue;
                 }

@@ -1,0 +1,12 @@
+Name:Fiendish Panda
+ManaCost:2 W B
+Types:Creature Bear Demon
+PT:3/2
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature dies, return another target non-Bear creature card with mana value less than or equal to this creature's power from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.cmcLEX+YouOwn+nonBear+Other | TgtPrompt$ Select target non-Bear creature card with mana value less than or equal to this creature's power | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Counters|Graveyard
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, put a +1/+1 counter on this creature.\nWhen this creature dies, return another target non-Bear creature card with mana value less than or equal to this creature's power from your graveyard to the battlefield.

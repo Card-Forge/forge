@@ -1640,9 +1640,15 @@ public class AbilityUtils {
                 return doXMath(calculateAmount(c, sq[v ? 1 : 2], ctb), expr, c, ctb);
             }
 
+            SpellAbility sa = null;
             if (ctb instanceof SpellAbility) {
-                final SpellAbility sa = (SpellAbility) ctb;
+                sa = (SpellAbility) ctb;
+            } else if (sq[0].contains("xPaid") && ctb instanceof TriggerReplacementBase) {
+                // try avoid fallback
+                sa = ((TriggerReplacementBase) ctb).getOverridingAbility();
+            }
 
+            if (sa != null) {
                 // special logic for xPaid in SpellAbility
                 if (sq[0].contains("xPaid")) {
                     SpellAbility root = sa.getRootAbility();
@@ -1672,7 +1678,8 @@ public class AbilityUtils {
                         // and the spell that became that object as it resolved had a value of X chosen for any of its costs,
                         // the value of X for that ability is the same as the value of X for that spell, although the value of X for that permanent is 0.
                         if (TriggerType.ChangesZone.equals(t.getMode()) && ZoneType.Battlefield.name().equals(t.getParam("Destination"))) {
-                           return doXMath(c.getXManaCostPaid(), expr, c, ctb);
+                           int x = isUnlinkedFromCastSA(ctb, c) ? 0 : c.getXManaCostPaid();
+                           return doXMath(x, expr, c, ctb);
                         } else if (TriggerType.SpellCast.equals(t.getMode())) {
                             // Cast Trigger like Hydroid Krasis
                             SpellAbilityStackInstance castSI = (SpellAbilityStackInstance) root.getTriggeringObject(AbilityKey.StackInstance);
@@ -1696,7 +1703,8 @@ public class AbilityUtils {
                     }
 
                     if (root.isReplacementAbility() && sa.hasParam("ETB")) {
-                        return doXMath(c.getXManaCostPaid(), expr, c, ctb);
+                        int x = isUnlinkedFromCastSA(ctb, c) ? 0 : c.getXManaCostPaid();
+                        return doXMath(x, expr, c, ctb);
                     }
 
                     return doXMath(0, expr, c, ctb);
@@ -1705,7 +1713,7 @@ public class AbilityUtils {
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
                     boolean kicked = sa.isKicked() || (!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0);
-                    return doXMath(Integer.parseInt(kicked ? sq[1] : sq[2]), expr, c, ctb);
+                    return doXMath(calculateAmount(c, sq[kicked ? 1 : 2], ctb), expr, c, ctb);
                 }
 
                 if (sq[0].startsWith("Bargain")) {
@@ -2310,6 +2318,11 @@ public class AbilityUtils {
 
         if (sq[0].equals("YouRollThisTurn")) {
             return doXMath(player.getNumRollsThisTurn(), expr, c, ctb);
+        }
+
+        if (sq[0].startsWith("YouRolledThisTurn")) {
+            int n = calculateAmount(c, sq[0].substring(17), ctb);
+            return doXMath(Collections.frequency(player.getDiceRollsThisTurn(), n), expr, c, ctb);
         }
 
         if (sq[0].equals("YouSurveilThisTurn")) {
@@ -2996,7 +3009,7 @@ public class AbilityUtils {
                 sp.setCardState(original);
                 list.add(sp);
             }
-            if (tgtCard.isModal()) {
+            if (tgtCard.isModal() && tgtCard.hasState(CardStateName.Modal)) {
                 collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Modal), controller, withAltCost);
             }
         }

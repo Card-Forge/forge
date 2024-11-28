@@ -100,6 +100,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeGainedTimesThisTurn;
     private int lifeGainedByTeamThisTurn;
     private int committedCrimeThisTurn;
+    private List<Integer> diceRollsThisTurn = Lists.newArrayList();
     private int expentThisTurn;
     private int numManaShards;
     private int numPowerSurgeLands;
@@ -154,7 +155,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private boolean beenDealtCombatDamageSinceLastTurn = false;
 
-    private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private List<Card> completedDungeons = new ArrayList<>();
 
@@ -1207,19 +1207,20 @@ public class Player extends GameEntity implements Comparable<Player> {
             return drawn;
         }
 
-        // Replacement effects
-        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
-        repRunParams.put(AbilityKey.Number, n);
-        if (params != null) {
-            repRunParams.putAll(params);
-        }
-
-        if (game.getReplacementHandler().run(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
-            return drawn;
-        }
-
         // always allow drawing cards before the game actually starts (e.g. Maralen of the Mornsong Avatar)
         final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
+
+        if (gameStarted) {
+            final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
+            repRunParams.put(AbilityKey.Number, n);
+            if (params != null) {
+                repRunParams.putAll(params);
+            }
+            if (game.getReplacementHandler().run(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
+                return drawn;
+            }
+        }
+
         final Map<Player, CardCollection> toReveal = Maps.newHashMap();
 
         for (int i = 0; i < n; i++) {
@@ -1250,14 +1251,17 @@ public class Player extends GameEntity implements Comparable<Player> {
             cause = (SpellAbility) cause.getReplacingObject(AbilityKey.Cause);
         }
 
-        // Replacement effects
-        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        repParams.put(AbilityKey.Cause, cause);
-        if (params != null) {
-            repParams.putAll(params);
-        }
-        if (game.getReplacementHandler().run(ReplacementType.Draw, repParams) != ReplacementResult.NotReplaced) {
-            return drawn;
+        final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
+
+        if (gameStarted) {
+            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+            repParams.put(AbilityKey.Cause, cause);
+            if (params != null) {
+                repParams.putAll(params);
+            }
+            if (game.getReplacementHandler().run(ReplacementType.Draw, repParams) != ReplacementResult.NotReplaced) {
+                return drawn;
+            }
         }
 
         if (!library.isEmpty()) {
@@ -1292,7 +1296,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 revealed.get(p).add(c);
             }
 
-            final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
             if (gameStarted) {
                 setLastDrawnCard(c);
                 c.setDrawnThisTurn(true);
@@ -1886,11 +1889,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         beenDealtCombatDamageSinceLastTurn = b;
     }
 
-    public final boolean getActivateLoyaltyAbilityThisTurn() {
-        return activateLoyaltyAbilityThisTurn;
-    }
-    public final void setActivateLoyaltyAbilityThisTurn(final boolean b) {
-        activateLoyaltyAbilityThisTurn = b;
+    public final boolean getActivateLoyaltyAbilityThisTurn(CardTraitBase ctb) {
+        return !CardUtil.getThisTurnActivated("Activated.Loyalty+Planeswalker+YouCtrl", ctb.getHostCard(), ctb, this).isEmpty();
     }
 
     public final List<Card> getCreaturesAttackedThisTurn() {
@@ -2499,7 +2499,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
-        setActivateLoyaltyAbilityThisTurn(false);
         setTappedLandForManaThisTurn(false);
         setLandsPlayedLastTurn(getLandsPlayedThisTurn());
         resetLandsPlayedThisTurn();
@@ -2522,6 +2521,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setNumManaConversion(0);
 
         setCommitedCrimeThisTurn(0);
+        diceRollsThisTurn = Lists.newArrayList();
         setExpentThisTurn(0);
 
         damageReceivedThisTurn.clear();
@@ -3930,6 +3930,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setCommitedCrimeThisTurn(int v) {
         committedCrimeThisTurn = v;
+    }
+
+    public List<Integer> getDiceRollsThisTurn() {
+        return diceRollsThisTurn;
+    }
+    public void addDieRollThisTurn(List<Integer> rolls) {
+        diceRollsThisTurn.addAll(rolls);
     }
 
     public int getExpentThisTurn() {

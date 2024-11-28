@@ -1,0 +1,10 @@
+Name:Harrowing Swarm
+ManaCost:1 G
+Types:Sorcery
+A:SP$ ManifestDread | SubAbility$ DBAnimate | SpellDescription$ Manifest dread.
+SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Creature.faceDown+YouCtrl | Zone$ Battlefield | staticAbilities$ ReduceCost | Triggers$ TurnedFaceUp | Duration$ Permanent | StackDescription$ SpellDescription | SpellDescription$ Then each face-down creature you control gains "This permanent costs {2} less to turn face up" and "When this permanent is turned face up, if it's a creature, put a +1/+1 counter on it."
+SVar:ReduceCost:Mode$ ReduceCost | Amount$ 2 | ValidSpell$ Static.isTurnFaceUp | ValidCard$ Card.Self | Activator$ You | EffectZone$ All | Description$ This permanent costs {2} less to turn face up.
+SVar:TurnedFaceUp:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When this permanent is turned face up, if it's a creature, put a +1/+1 counter on it.
+SVar:TrigPump:DB$ PutCounter | Defined$ TriggeredCard | CounterType$ P1P1 | ConditionDefined$ TriggeredCard | ConditionPresent$ Creature
+DeckHas:Ability$Counters
+Oracle:Manifest dread. Then each face-down creature you control gains "This permanent costs {2} less to turn face up" and "When this permanent is turned face up, if it's a creature, put a +1/+1 counter on it."

@@ -53,7 +53,7 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public void add(final String cardRequest, final int amount) {
         CardDb.CardRequest request = CardDb.CardRequest.fromString(cardRequest);
-        this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.artIndex, amount);
+        this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.artIndex, amount, false, request.colorID);
     }
 
     public void add(final String cardName, final String setCode) {
@@ -65,14 +65,14 @@ public class CardPool extends ItemPool<PaperCard> {
     }
 
     public void add(final String cardName, final String setCode, final int amount, boolean addAny) {
-        this.add(cardName, setCode, IPaperCard.NO_ART_INDEX, amount, addAny);
+        this.add(cardName, setCode, IPaperCard.NO_ART_INDEX, amount, addAny, null);
     }
 
     // NOTE: ART indices are "1" -based
     public void add(String cardName, String setCode, int artIndex, final int amount) {
-        this.add(cardName, setCode, artIndex, amount, false);
+        this.add(cardName, setCode, artIndex, amount, false, null);
     }
-    public void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny) {
+    public void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny, Set<String> colorID) {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
         PaperCard paperCard = null;
         String selectedDbName = "";
@@ -82,7 +82,7 @@ public class CardPool extends ItemPool<PaperCard> {
             for (Map.Entry<String, CardDb> entry: dbs.entrySet()){
                 String dbName = entry.getKey();
                 CardDb db = entry.getValue();
-                paperCard = db.getCard(cardName, setCode, artIndex);
+                paperCard = db.getCard(cardName, setCode, artIndex, colorID);
                 if (paperCard != null) {
                     selectedDbName = dbName;
                     break;
@@ -124,7 +124,7 @@ public class CardPool extends ItemPool<PaperCard> {
                 int cnt = artGroups[i - 1];
                 if (cnt <= 0)
                     continue;
-                PaperCard randomCard = cardDb.getCard(cardName, setCode, i);
+                PaperCard randomCard = cardDb.getCard(cardName, setCode, i, colorID);
                 this.add(randomCard, cnt);
             }
         }

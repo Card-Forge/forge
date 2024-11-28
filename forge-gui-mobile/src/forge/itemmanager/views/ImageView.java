@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
@@ -44,6 +45,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final FSkinFont LABEL_FONT = FSkinFont.get(12);
+    private TextRenderer textRenderer = new TextRenderer(true);
 
     private static FSkinColor getGroupHeaderForeColor() {
         if (Forge.isMobileAdventureMode)
@@ -1029,6 +1031,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private boolean selected, deckSelectMode, showRanking;
         private final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
         private DeckProxy deckProxy = null;
+        private String colorID = null;
         private FImageComplex deckCover = null;
         private Texture dpImg = null;
         //private TextureRegion tr;
@@ -1054,6 +1057,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     } else if (draftRank >= 25) {
                         draftRankImage = FSkinImage.DRAFTRANK_C;
                     }
+                }
+                if (((PaperCard) item).getColorID() != null) {
+                    colorID = ((PaperCard) item).getColorID().stream().map(MagicColor::toSymbol).collect(Collectors.joining());
                 }
             }
         }
@@ -1126,13 +1132,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         if (cardPrice == null)
                             cardPrice = ((ShopScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);
                         drawCardLabel(g, "$" + cardPrice, Color.GOLD, x, y ,w ,h);
-                    } /*else if (Forge.getCurrentScene() instanceof DeckEditScene) {
-                        if (((DeckEditScene) Forge.getCurrentScene()).isAutoSell((PaperCard) item)) {
-                            drawCardLabel(g, Forge.getLocalizer().getMessage("lblAutoSell"), Color.GREEN, x, y, w, h);
-                        } else if (((DeckEditScene) Forge.getCurrentScene()).isNoSell((PaperCard) item)) {
-                            drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
+                    } else {
+                        if (((PaperCard) item).isNoSell() && itemManager.showNFSWatermark()) {
+                            Texture nfs = Forge.getAssets().getTexture(getDefaultSkinFile("nfs.png"), false);
+                            if (nfs != null)
+                                g.drawImage(nfs, x, y, w, h);
+                            else
+                                drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                         }
-                    }*///TODO FIX Distinction
+                    }
+                }
+                // spire colors
+                if (colorID != null && !colorID.isEmpty()) {
+                    textRenderer.drawText(g, colorID, FSkinFont.forHeight(w / 5), Color.WHITE, x, y + h / 4, w, h, y, h, false, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);
@@ -1166,7 +1178,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             //g.drawImage(tr, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                         }
                         //draw plastic effect overlay.
-                        g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png")), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
+                        g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png"), false), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                     }
                     //fake labelname shadow
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING) - 1f, (y + PADDING * 2) + 1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
@@ -1194,7 +1206,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             //temporary fill image
                             g.fillRect(Color.BLACK, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                             //draw plastic effect overlay.
-                            g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png")), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
+                            g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png"), false), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
 
                         }
                     }

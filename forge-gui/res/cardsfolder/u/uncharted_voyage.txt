@@ -1,0 +1,6 @@
+Name:Uncharted Voyage
+ManaCost:3 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | SubAbility$ DBSurveil | StackDescription$ {p:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ Target creature's owner puts it on their choice of the top or bottom of their library. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:DBSurveil:DB$ Surveil | Amount$ 1
+Oracle:Target creature's owner puts it on their choice of the top or bottom of their library.\nSurveil 1. (Look at the top card of your library. You may put it into your graveyard.)

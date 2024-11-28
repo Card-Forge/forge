@@ -115,6 +115,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ANTE ("false"),
         UI_ANTE_MATCH_RARITY ("false"),
         UI_MANABURN("false"),
+        LEGACY_ORDER_COMBATANTS("false"),
         UI_SKIN ("Default"),
         UI_CJK_FONT (""),
         UI_PREFERRED_AVATARS_ONLY ("false"),
@@ -247,6 +248,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         PHASE_HUMAN_MAIN2 ("true"),
         PHASE_HUMAN_EOT ("false"),
         PHASE_HUMAN_CLEANUP ("false"),
+        PROMPT_FOR_AUTOSELL ("true"),
 
         ZONE_LOC_HUMAN_HAND(""),
         ZONE_LOC_HUMAN_LIBRARY(""),

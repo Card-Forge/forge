@@ -1,5 +1,0 @@
-Name:Hearts on Fire
-ManaCost:1 R
-Types:Instant
-A:SP$ Pump | TargetMin$ 1 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ One or two target creatures each get +2/+1 until end of turn.
-Oracle:One or two target creatures each get +2/+1 until end of turn.

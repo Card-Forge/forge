@@ -1,0 +1,9 @@
+Name:Strix Lookout
+ManaCost:1 U
+Types:Creature Bird
+PT:1/2
+K:Flying
+K:Vigilance
+A:AB$ Draw | Cost$ 1 U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+Oracle:Flying, vigilance (Attacking doesn't cause this creature to tap.)\n{1}{U}, {T}: Draw a card, then discard a card.
