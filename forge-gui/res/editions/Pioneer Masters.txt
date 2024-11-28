@@ -6,17 +6,26 @@ Type=Reprint
 ScryfallCode=PIO
 
 [cards]
+0 U Bane of Bala Ged @Chase Stone
 0 R Silence @Wayne Reynolds
 0 U Hidden Strings @Daarken
 0 M Jace, Vryn's Prodigy @Jaime Jones
+0 M Temporal Trespass @Clint Cearley
+0 C Void Shatter @Yohann Schepacz
+0 M Behold the Beyond @Madeline Boni
+0 R Dark Petition @Igor Kieryluk
+0 C Gurmag Angler @YW Tang
 0 M Liliana, Heretical Healer @Karla Ortiz
 0 R Tasigur, the Golden Fang @Chris Rahn
 0 R Legion Loyalist @Eric Deschamps
 0 M Purphoros, God of the Forge @Eric Deschamps
 0 C Gladecover Scout @Brian Valeza
 0 R Hornet Nest @Adam Paquette
+0 R Oath of Nissa @Wesley Burt
 0 R Sylvan Caryatid @Chase Stone
+0 C Voyaging Satyr @Tyler Jacobson
 0 M Athreos, God of Passage @Ryan Barger
 0 R Bring to Light @Jonas De Ro
 0 M Mogis, God of Slaughter @Chase Stone
+0 M The Chain Veil @Volkan Baǵa
 0 R Urborg, Tomb of Yawgmoth @John Avon
