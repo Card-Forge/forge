@@ -1,6 +1,6 @@
 Name:Dream Chisel
 ManaCost:2
 Types:Artifact
-S:Mode$ ReduceCost | ValidCard$ Creature | Type$ MorphDown | Activator$ You | Amount$ 1 | Description$ Face-down creature spells you cast cost {1} less to cast.
+S:Mode$ ReduceCost | ValidCard$ Creature | ValidSpell$ Spell.isCastFaceDown | Activator$ You | Amount$ 1 | Description$ Face-down creature spells you cast cost {1} less to cast.
 AI:RemoveDeck:Random
 Oracle:Face-down creature spells you cast cost {1} less to cast.
