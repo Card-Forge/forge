@@ -12,7 +12,7 @@ ScryfallCode=UNH
 [cards]
 1 U Atinlay Igpay @Evkay Alkerway
 2 C AWOL @Stephen Tappin
-3 U Bosom Buddy @Dan Scott
+3 U Bosom Buddy @Dan Murayama Scott
 4 C Cardpecker @Richard Sardinha
 5 C Cheap Ass @Randy Gallegos
 6 C Circle of Protection: Art @Jim "Stop the Da Vinci Beatdown" Pavelec
@@ -150,7 +150,7 @@ ScryfallCode=UNH
 138 L Swamp @John Avon
 139 L Mountain @John Avon
 140 L Forest @John Avon
-141 S Super Secret Tech @Dan Frazier
+141 R Super Secret Tech @Dan Frazier
 
 [tokens]
 r_1_1_goblin

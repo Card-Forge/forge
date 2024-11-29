@@ -426,7 +426,7 @@ ScryfallCode=2X2
 411 U Selesnya Sanctuary @Ron Spears
 412 U Simic Growth Chamber @Pete Venters
 
-[showcase]
+[etched]
 413 M Emrakul, the Aeons Torn @Mark Tedin
 414 M Kozilek, Butcher of Truth @Michael Komarck
 415 M Ulamog, the Infinite Gyre @Aleksi Briclot
