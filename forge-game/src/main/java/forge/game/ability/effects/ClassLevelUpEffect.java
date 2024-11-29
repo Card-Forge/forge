@@ -25,7 +25,7 @@ public class ClassLevelUpEffect extends SpellAbilityEffect {
             return;
         }
 
-        host.setClassLevel(level +1);
+        host.setClassLevel(++level);
 
         // need to run static ability to get Trigger online
         game.getAction().checkStaticAbilities();
