@@ -595,7 +595,7 @@ public class Main extends AndroidApplication {
                 if (connManager != null) {
                     NetworkCapabilities capabilities = connManager.getNetworkCapabilities(connManager.getActiveNetwork());
                     if (capabilities != null) {
-                        if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
                             result = connected;
                         } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
                             result = connected && !wifiOnly;
@@ -607,7 +607,7 @@ public class Main extends AndroidApplication {
                     NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
                     if (activeNetwork != null) {
                         // connected to the internet
-                        if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                        if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_ETHERNET) {
                             result = true;
                         } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
                             result = !wifiOnly;
