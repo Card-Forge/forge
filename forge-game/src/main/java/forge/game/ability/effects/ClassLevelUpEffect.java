@@ -19,7 +19,7 @@ public class ClassLevelUpEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
-        final int level = host.getClassLevel();
+        int level = host.getClassLevel();
 
         if (AbilityUtils.calculateAmount(host, sa.getRestrictions().getClassLevel(), sa) != level) {
             return;
