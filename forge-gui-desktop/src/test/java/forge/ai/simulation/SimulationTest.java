@@ -47,6 +47,7 @@ public class SimulationTest {
         Game game = new Game(players, rules, match);
         game.setAge(GameStage.Play);
         game.EXPERIMENTAL_RESTORE_SNAPSHOT = false;
+        game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
 
         return game;
     }

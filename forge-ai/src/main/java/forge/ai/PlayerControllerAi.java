@@ -1565,8 +1565,13 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
-        int i = MyRandom.getRandom().nextInt(dungeonNames.size());
-        return Card.fromPaperCard(dungeonCards.get(i), ai);
+        try {
+            // if this fail somehow add fallback to get any from dungeonCards
+            int i = MyRandom.getRandom().nextInt(dungeonNames.size());
+            return Card.fromPaperCard(dungeonCards.get(i), ai);
+        } catch (Exception e) {
+            return Card.fromPaperCard(Aggregates.random(dungeonCards), ai);
+        }
     }
 
     @Override

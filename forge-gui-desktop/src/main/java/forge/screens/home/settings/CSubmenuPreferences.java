@@ -209,6 +209,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
         initializeAiSideboardingModeComboBox();
+        initializeAiTimeoutComboBox();
         initializeSoundSetsComboBox();
         initializeMusicSetsComboBox();
         initializeStackAdditionsComboBox();
@@ -413,6 +414,14 @@ public enum CSubmenuPreferences implements ICDoc {
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
         comboBox.addActionListener(actionEvent -> AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(comboBox.getSelectedItem())));
+    }
+
+    private void initializeAiTimeoutComboBox() {
+        final FPref userSetting = FPref.MATCH_AI_TIMEOUT;
+        final FComboBoxPanel<String> panel = this.view.getAiTimeoutComboBox();
+        final FComboBox<String> comboBox = createComboBox(new String[] {"5", "10", "60", "120", "240", "300", "600"}, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
     }
 
     private void initializeSoundSetsComboBox() {

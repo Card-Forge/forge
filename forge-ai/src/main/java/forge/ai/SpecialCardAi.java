@@ -385,7 +385,7 @@ public class SpecialCardAi {
     public static class Donate {
         public static boolean considerTargetingOpponent(final Player ai, final SpellAbility sa) {
             final Card donateTarget = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DonateMe", CardLists.filter(
-                    ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
+                    ai.getCardsIn(ZoneType.Battlefield), CardPredicates.hasSVar("DonateMe")));
             if (donateTarget != null) {
                 // first filter for opponents which can be targeted by SA
                 final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
@@ -420,7 +420,7 @@ public class SpecialCardAi {
         }
 
         public static boolean considerDonatingPermanent(final Player ai, final SpellAbility sa) {
-            Card donateTarget = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DonateMe", CardLists.filter(ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
+            Card donateTarget = ComputerUtil.getCardPreference(ai, sa.getHostCard(), "DonateMe", CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.hasSVar("DonateMe")));
             if (donateTarget != null) {
                 sa.resetTargets();
                 sa.getTargets().add(donateTarget);

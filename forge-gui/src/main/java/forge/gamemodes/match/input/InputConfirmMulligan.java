@@ -121,7 +121,7 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
             ThreadUtil.invokeInGameThread(() -> {
                 final CardCollectionView hand = c0.getController().getCardsIn(ZoneType.Hand);
                 final int handSize = hand.size();
-                for (final Card c : hand.threadSafeIterable()) {
+                for (final Card c : hand) {
                     player.getGame().getAction().exile(c, null, null);
                 }
                 c0.getController().drawCards(handSize);
