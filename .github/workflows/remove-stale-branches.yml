@@ -15,4 +15,5 @@ jobs:
         with:
           dry-run: false # Check out the console output before setting this to false
           ignore-unknown-authors: true
+          ignore-branches-with-open-prs: true
           default-recipient: tehdiplomat
