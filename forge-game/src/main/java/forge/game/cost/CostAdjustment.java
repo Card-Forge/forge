@@ -568,16 +568,6 @@ public class CostAdjustment {
                         }
                     }
                 }
-                case "NonManaAbility" -> {
-                    if (!sa.isActivatedAbility() || sa.isManaAbility() || sa.isReplacementAbility()) {
-                        return false;
-                    }
-                }
-                case "MorphDown" -> {
-                    if (!sa.isSpell() || !sa.isCastFaceDown()) {
-                        return false;
-                    }
-                }
                 case "Foretell" -> {
                     if (!sa.isForetelling()) {
                         return false;

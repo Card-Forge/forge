@@ -73,7 +73,6 @@ public class SeekEffect extends SpellAbilityEffect {
                 }
 
                 for (final Card c : Aggregates.random(pool, seekNum)) {
-
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                     moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
@@ -85,9 +84,9 @@ public class SeekEffect extends SpellAbilityEffect {
                     if (resultZone.equals(ZoneType.Hand)) { // if it went to hand as planned, consider it "sought"
                         soughtCards.add(movedCard);
                     }
-
                 }
             }
+
             if (notify.length() != 0) {
                 game.getAction().notifyOfValue(sa, source, notify.toString(), null);
             }

@@ -5,8 +5,8 @@ Name=Amonkhet
 Code2=AKH
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common:!fromSheet("AKH Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("AKH Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("AKH Planeswalker Decks and Toolkit"), 1 BasicLand AKH
-AdditionalSheetForFoils=fromSheet("MPS Amonkhet Invocations")
+Booster=10 Common:fromSheet("AKH cards"), 3 Uncommon:fromSheet("AKH cards"), 1 RareMythic:fromSheet("AKH cards"), 1 BasicLand AKH
+AdditionalSheetForFoils=fromSheet("MPS_AKH cards")
 FatPack=10
 FatPackExtraSlots=80 BasicLands
 AdditionalSetUnlockedInQuest=MPS_AKH
@@ -283,6 +283,8 @@ ScryfallCode=AKH
 267 L Forest @Titus Lunter
 268 L Forest @Titus Lunter
 269 L Forest @Matt Stewart
+
+[precon product]
 270 M Gideon, Martial Paragon @Daarken
 271 U Companion of the Trials @Aaron Miller
 272 R Gideon's Resolve @Jakub Kasper

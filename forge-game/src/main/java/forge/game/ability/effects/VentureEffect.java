@@ -115,7 +115,6 @@ public class VentureEffect  extends SpellAbilityEffect {
         // TODO: Currently play the Add Counter sound, but maybe add soundeffect for marker?
         game.fireEvent(new GameEventCardCounters(dungeon, CounterType.getType("LEVEL"), 0, 1));
 
-        // Run RoomEntered trigger
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(dungeon);
         runParams.put(AbilityKey.RoomName, nextRoom);
         game.getTriggerHandler().runTrigger(TriggerType.RoomEntered, runParams, false);

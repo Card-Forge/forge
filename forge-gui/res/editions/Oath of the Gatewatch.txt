@@ -8,7 +8,7 @@ BoosterCovers=4
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand BFZ
 FatPack=9
 FatPackExtraSlots=66 BasicLands BFZ, 14 name("Wastes")
-AdditionalSheetForFoils=fromSheet("EXP Lands 2")
+AdditionalSheetForFoils=fromSheet("EXP special slot")
 AdditionalSetUnlockedInQuest=EXP
 ScryfallCode=OGW
 
@@ -196,9 +196,9 @@ ScryfallCode=OGW
 181 C Unknown Shores @Jung Park
 182 R Wandering Fumarole @Florian de Gesincourt
 183 C Wastes @Jason Felix
-183 C Wastes @Jason Felix
+183a C Wastes @Jason Felix
 184 C Wastes @Raymond Swanland
-184 C Wastes @Raymond Swanland
+184a C Wastes @Raymond Swanland
 
 [tokens]
 c_1_1_eldrazi_scion_sac
