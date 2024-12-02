@@ -48,6 +48,7 @@ public class SimulationTest {
         game.setAge(GameStage.Play);
         game.EXPERIMENTAL_RESTORE_SNAPSHOT = false;
         game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
+        game.AI_CAN_USE_TIMEOUT = true; //Only Android is restricted according to API Level
 
         return game;
     }
