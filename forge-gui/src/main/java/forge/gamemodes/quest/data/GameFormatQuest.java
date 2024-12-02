@@ -71,14 +71,14 @@ public final class GameFormatQuest extends GameFormat {
 	 * @param setsToAllow List<String>, these are the allowed sets
 	 * @param cardsToBan  List<String>, these will be the banned cards
 	 */
-	public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan) {
-		super(newName, setsToAllow, cardsToBan);
+	public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> additionalCards, final List<String> cardsToBan) {
+		super(newName, setsToAllow, additionalCards, cardsToBan);
 		allowUnlocks = false;
 		setRotation = null;
 	}
 
-	public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan, boolean allowSetUnlocks) {
-		super(newName, setsToAllow, cardsToBan);
+	public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> additionalCards, final List<String> cardsToBan, boolean allowSetUnlocks) {
+		super(newName, setsToAllow, additionalCards, cardsToBan);
 		allowUnlocks = allowSetUnlocks;
 		setRotation = null;
 	}
@@ -91,8 +91,8 @@ public final class GameFormatQuest extends GameFormat {
 	 * @param allowSetUnlocks
 	 * @param setRotation	  an ISetRotation that determines the currently allowed sets
 	 */
-	public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan, boolean allowSetUnlocks, ISetRotation setRotation) {
-		super(newName, setsToAllow, cardsToBan);
+	public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> additionalCards, final List<String> cardsToBan, boolean allowSetUnlocks, ISetRotation setRotation) {
+		super(newName, setsToAllow, additionalCards, cardsToBan);
 		allowUnlocks = allowSetUnlocks;
 		this.setRotation = setRotation;
 	}

@@ -540,15 +540,26 @@ public class QuestWinLoseController {
             }
 
             boolean customBooster = false;
+            boolean noExtraCards = FModel.getQuest().getFormat().getAdditionalCards().isEmpty();
 
             //No boosters found for current quest settings
+            //if there aren't any sets but there are extra cards, it rewards a colored booster containing additional cards
             if (sets.isEmpty()) {
-                customBooster = true;
-                CardEdition.Collection editions = FModel.getMagicDb().getEditions();
-                for (CardEdition edition : editions) {
-                    if (qData.getFormat().isSetLegal(edition.getCode())) {
-                        sets.add(edition.getCode());
+                if(noExtraCards){
+                    customBooster = true;
+                    CardEdition.Collection editions = FModel.getMagicDb().getEditions();
+                    for (CardEdition edition : editions) {
+                        if (qData.getFormat().isSetLegal(edition.getCode())) {
+                            sets.add(edition.getCode());
+                        }
                     }
+                }else{
+                    sets.add("Chaos Green");
+                    sets.add("Chaos Red");
+                    sets.add("Chaos Blue");
+                    sets.add("Chaos Black");
+                    sets.add("Chaos White");
+                    sets.add("Chaos Colorless");
                 }
             }
 
@@ -562,37 +573,44 @@ public class QuestWinLoseController {
                 maxChoices += qData.getAssets().getItemLevel(QuestItemType.MEMBERSHIP_TOKEN);
             }
 
-            final List<CardEdition> options = new ArrayList<>();
+            //had to change to string to allow for additional cards
+            final List<String> options = new ArrayList<>();
 
             while (!sets.isEmpty() && maxChoices > 0) {
                 final int ix = MyRandom.getRandom().nextInt(sets.size());
                 final String set = sets.get(ix);
                 sets.remove(ix);
-                options.add(FModel.getMagicDb().getEditions().get(set));
+                options.add(set);
                 maxChoices--;
             }
 
-            final CardEdition chooseEd = SGuiChoose.one(Localizer.getInstance().getMessage("lblChooseBonusBoosterSet"), options);
+            final String chooseEd = SGuiChoose.one(Localizer.getInstance().getMessage("lblChooseBonusBoosterSet"), options);
+            CardEdition edition = FModel.getMagicDb().getEditions().get(chooseEd);
 
-            if (customBooster) {
-                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(Predicates.printedInSet(chooseEd.getCode()));
+            //returns a colored random booster
+            if(chooseEd.startsWith("Chaos")){
+                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(FModel.getQuest().getFormat().getFilterPrinted());
+                final IUnOpenedProduct product = new UnOpenedProduct(QuestUtilCards.getColoredBoosterTemplate(chooseEd.replace("Chaos ", "")), cards);
+                cardsWon = product.get();
+            }else if (customBooster) {
+                List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(Predicates.printedInSet(edition.getCode()));
                 final IUnOpenedProduct product = new UnOpenedProduct(getBoosterTemplate(), cards);
                 cardsWon = product.get();
             } else {
                 final IUnOpenedProduct product;
-                List<String> boosterTypes = Lists.newArrayList(chooseEd.getAvailableBoosterTypes());
+                List<String> boosterTypes = Lists.newArrayList(edition.getAvailableBoosterTypes());
                 String setAffix = "";
                 String type = SGuiChoose.one("Which booster type do you choose?", boosterTypes);
                 if (!type.equals("Draft")) {
                     setAffix = type;
                 }
-                product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode() + setAffix));
+                product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(edition.getCode() + setAffix));
 
                 cardsWon = product.get();
             }
 
             qData.getCards().addAllCards(cardsWon);
-            title = Localizer.getInstance().getMessage("lblBonusSetBoosterPack", chooseEd.getName());
+            title = Localizer.getInstance().getMessage("lblBonusSetBoosterPack", chooseEd);
 
         }
 

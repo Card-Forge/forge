@@ -27,11 +27,14 @@ import java.util.Set;
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.game.GameFormat;
+import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.quest.data.GameFormatQuest;
 import forge.gamemodes.quest.setrotation.ISetRotation;
 import forge.gamemodes.quest.setrotation.QueueRandomRotation;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
+import forge.util.FileUtil;
 import forge.util.storage.StorageReaderFile;
 
 /** 
@@ -41,7 +44,10 @@ import forge.util.storage.StorageReaderFile;
 public class QuestWorld implements Comparable<QuestWorld>{
     private final String name;
     private final String dir;
+    private boolean hasDuels = false;
+    private boolean hasChallenges = false;
     private final GameFormatQuest format;
+    private QuestPreferences customPreferences = null;
     public static final String STANDARDWORLDNAME = "Random Standard";
     public static final String PIONEERWORLDNAME = "Random Pioneer";
     public static final String MODERNWORLDNAME = "Random Modern";
@@ -57,11 +63,19 @@ public class QuestWorld implements Comparable<QuestWorld>{
      * @param useDir String, the basedir that contains the duels and challenges for the quest world
      * @param useFormat GameFormatQuest that contains the initial format for the world
      */
-    public QuestWorld(final String useName, final String useDir, final GameFormatQuest useFormat) {
+    public QuestWorld(final String useName,
+                      final String useDir,
+                      final GameFormatQuest useFormat,
+                      final boolean hasDuels,
+                      final boolean hasChallenges,
+                      final QuestPreferences preferences) {
         name = useName;
         dir = useDir;
         format = useFormat;
         isCustom = false;
+        this.hasDuels = hasDuels;
+        this.hasChallenges = hasChallenges;
+        customPreferences = preferences;
     }
 
     /**
@@ -71,11 +85,20 @@ public class QuestWorld implements Comparable<QuestWorld>{
      * @param useFormat GameFormatQuest that contains the initial format for the world
      * @param isCustom0 boolean determining whether the world is from the user's custom folder
      */
-    public QuestWorld(final String useName, final String useDir, final GameFormatQuest useFormat, final boolean isCustom0) {
+    public QuestWorld(final String useName,
+                      final String useDir,
+                      final GameFormatQuest useFormat,
+                      final boolean isCustom0,
+                      final boolean hasDuels,
+                      final boolean hasChallenges,
+                      final QuestPreferences customPreferences) {
         name = useName;
         dir = useDir;
         format = useFormat;
         isCustom = isCustom0;
+        this.hasDuels = hasDuels;
+        this.hasChallenges = hasChallenges;
+        this.customPreferences = customPreferences;
     }
 
     /**
@@ -91,7 +114,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
      * @return String, the duels directory
      */
     public String getDuelsDir() {
-        return dir == null ? null : dir + "/duels";
+        return !hasDuels || dir == null ? null : dir + "/duels";
     }
 
     /**
@@ -99,7 +122,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
      * @return String, the challenges directory
      */
     public String getChallengesDir() {
-        return dir == null ? null : dir + "/challenges";
+        return !hasChallenges || dir == null ? null : dir + "/challenges";
     }
 
     public GameFormatQuest getFormat() {
@@ -115,6 +138,10 @@ public class QuestWorld implements Comparable<QuestWorld>{
             return format0.getAllCards();
         }
         return FModel.getMagicDb().getCommonCards().getAllCards();
+    }
+
+    public QuestPreferences getCustomPreferences() {
+        return customPreferences;
     }
 
     @Override
@@ -142,9 +169,14 @@ public class QuestWorld implements Comparable<QuestWorld>{
         protected QuestWorld read(String line, int i) {
             String useName = null;
             String useDir = null;
+            boolean hasDuels = false;
+            boolean hasChallenges = false;
             GameFormatQuest useFormat = null;
 
+            QuestPreferences preferences = null;
+
             final List<String> sets = new ArrayList<>();
+            final List<String> extraCards = new ArrayList<>();
             final List<String> bannedCards = new ArrayList<>(); // if both empty, no format
 
             String key, value;
@@ -170,6 +202,9 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 case "sets":
                     sets.addAll(Arrays.asList(value.split(", ")));
                     break;
+                case "extra":
+                     extraCards.addAll(Arrays.asList(value.split(";")));
+                     break;
                 case "banned":
                     bannedCards.addAll(Arrays.asList(value.split("; ")));
                     break;
@@ -184,31 +219,50 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 return null;
             }
 
-            if (!sets.isEmpty() || !bannedCards.isEmpty()) {
-                useFormat = new GameFormatQuest(useName, sets, bannedCards);
+            //looks into the directory to retrieve all the extra cards
+            if(useDir != null){
+                if(FileUtil.doesFileExist(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra_cards.txt")){
+                    for (String extraCardName : FileUtil.readFile(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra_cards.txt")) {
+                        extraCardName = extraCardName.trim();
+                        extraCards.add(extraCardName);
+                    }
+                }
+                if(FileUtil.doesFileExist(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\shop.preferences")){
+                    preferences = new QuestPreferences(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\shop.preferences");
+                }
+                hasDuels = FileUtil.isDirectoryWithFiles(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\duels");
+                hasChallenges = FileUtil.isDirectoryWithFiles(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\challenges");
+            }
+
+            if (!sets.isEmpty() || !bannedCards.isEmpty() || !extraCards.isEmpty()) {
+                useFormat = new GameFormatQuest(useName, sets, extraCards, bannedCards);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.STANDARDWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.STANDARDWORLDNAME,
                         FModel.getFormats().getStandard().getAllowedSetCodes(),
+                        null,
                         FModel.getFormats().getStandard().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.PIONEERWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.PIONEERWORLDNAME,
                         FModel.getFormats().getPioneer().getAllowedSetCodes(),
+                        null,
                         FModel.getFormats().getPioneer().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.MODERNWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.MODERNWORLDNAME,
                         FModel.getFormats().getModern().getAllowedSetCodes(),
+                        null,
                         FModel.getFormats().getModern().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.RANDOMCOMMANDERWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.RANDOMCOMMANDERWORLDNAME,
                         FModel.getFormats().getFormat("Commander").getAllowedSetCodes(),
+                        null,
                         FModel.getFormats().getFormat("Commander").getBannedCardNames(),false);
             }
 
@@ -223,13 +277,14 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 }
                 useFormat = new GameFormatQuest(QuestWorld.EVOLVINGWILDSWORLDNAME,
                         allowedCodes,
+                        extraCards,
                         FModel.getFormats().getVintage().getBannedCardNames(),false, rot);
             }
 
             // System.out.println("Creating quest world " + useName + " (index " + useIdx + ", dir: " + useDir);
             // if (useFormat != null) { System.out.println("SETS: " + sets + "\nBANNED: " + bannedCards); }
 
-            return new QuestWorld(useName, useDir, useFormat);
+            return new QuestWorld(useName, useDir, useFormat, hasDuels, hasChallenges, preferences);
 
         }
 
