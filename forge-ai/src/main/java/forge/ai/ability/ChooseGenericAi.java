@@ -96,7 +96,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
                 Cost unless = new Cost(unlessCost, false);
                 SpellAbility paycost = new SpellAbility.EmptySa(sa.getHostCard(), player);
                 paycost.setPayCosts(unless);
-                if (ComputerUtilCost.willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
+                if (SpellApiToAi.Converter.get(sp.getApi()).willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
                         && ComputerUtilCost.canPayCost(paycost, player, true)) {
                     return sp;
                 }

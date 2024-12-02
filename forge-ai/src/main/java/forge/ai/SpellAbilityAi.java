@@ -1,15 +1,22 @@
 package forge.ai;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.card.CounterType;
+import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
@@ -22,10 +29,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import forge.util.collect.FCollectionView;
 
 /**
  * Base class for API-specific AI logic
@@ -153,7 +157,7 @@ public abstract class SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         return true;
     }
-    
+
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
             final String logic) {
         return checkPhaseRestrictions(ai, sa, ph);
@@ -167,7 +171,7 @@ public abstract class SpellAbilityAi {
         }
         return MyRandom.getRandom().nextFloat() < .8f; // random success
     }
-    
+
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         // this evaluation order is currently intentional as it does more stuff that helps avoiding some crashes
         if (!ComputerUtilCost.canPayCost(sa, aiPlayer, true) && !mandatory) {
@@ -247,7 +251,7 @@ public abstract class SpellAbilityAi {
      * <p>
      * isSorcerySpeed.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
@@ -263,7 +267,7 @@ public abstract class SpellAbilityAi {
      * <p>
      * playReusable.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
@@ -276,15 +280,15 @@ public abstract class SpellAbilityAi {
         if (sa instanceof AbilitySub) {
             return true; // This is only true for Drawbacks and triggers
         }
-        
+
         if (!sa.getPayCosts().isReusuableResource()) {
             return false;
         }
-        
+
         if (ComputerUtil.playImmediately(ai, sa)) {
             return true;
         }
-    
+
         if (sa.isPwAbility() && phase.is(PhaseType.MAIN2)) {
             return true;
         }
@@ -303,12 +307,87 @@ public abstract class SpellAbilityAi {
      */
     public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
-        return SpellApiToAi.Converter.get(ab.getApi()).chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));  
+        return SpellApiToAi.Converter.get(ab.getApi()).chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));
     }
 
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of confirmAction is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return true;
+    }
+
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final Card source = sa.getHostCard();
+        final String aiLogic = sa.getParam("UnlessAI");
+        boolean payForOwnOnly = "OnlyOwn".equals(aiLogic);
+        boolean payOwner = sa.hasParam("UnlessAI") && aiLogic.startsWith("Defined");
+        boolean payNever = "Never".equals(aiLogic);
+        boolean isMine = sa.getActivatingPlayer().equals(payer);
+
+        if (payNever) { return false; }
+        if (payForOwnOnly && !isMine) { return false; }
+        if (payOwner) {
+            final String defined = aiLogic.substring(7);
+            final Player player = AbilityUtils.getDefinedPlayers(source, defined, sa).get(0);
+            if (!payer.equals(player)) {
+                return false;
+            }
+        } else if ("OnlyDontControl".equals(aiLogic)) {
+            if (source == null || payer.equals(source.getController())) {
+                return false;
+            }
+        } else if ("Paralyze".equals(aiLogic)) {
+            final Card c = source.getEnchantingCard();
+            if (c == null || c.isUntapped()) {
+                return false;
+            }
+        } else if ("RiskFactor".equals(aiLogic)) {
+            final Player activator = sa.getActivatingPlayer();
+            if (!activator.canDraw()) {
+                return false;
+            }
+        } else if ("MorePowerful".equals(aiLogic)) {
+            final int sourceCreatures = sa.getActivatingPlayer().getCreaturesInPlay().size();
+            final int payerCreatures = payer.getCreaturesInPlay().size();
+            if (payerCreatures > sourceCreatures + 1) {
+                return false;
+            }
+        } else if (aiLogic != null && aiLogic.startsWith("LifeLE")) {
+            // if payer can't lose life its no need to pay unless
+            if (!payer.canLoseLife())
+                return false;
+            else if (payer.getLife() <= AbilityUtils.calculateAmount(source, aiLogic.substring(6), sa)) {
+                return true;
+            }
+        } else if ("WillAttack".equals(aiLogic)) {
+            AiAttackController aiAtk = new AiAttackController(payer);
+            Combat combat = new Combat(payer);
+            aiAtk.declareAttackers(combat);
+            if (combat.getAttackers().isEmpty()) {
+                return false;
+            }
+        } else if ("nonToken".equals(aiLogic) && !AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).isEmpty()
+                && AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0).isToken()) {
+            return false;
+        } else if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
+            return false;
+        }
+
+        // AI will only pay when it's not already payed and only opponents abilities
+        if (alreadyPaid || (payers.size() > 1 && (isMine && !payForOwnOnly))) {
+            return false;
+        }
+
+        // AI was crashing because the blank ability used to pay costs
+        // Didn't have any of the data on the original SA to pay dependant costs
+
+        return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
+                && ComputerUtilCost.checkDamageCost(payer, cost, source, 4, sa)
+                && (isMine || ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa))
+                && (isMine || ComputerUtilCost.checkDiscardCost(payer, cost, source, sa))
+                && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
+                && (!source.getName().equals("Perplex") || payer.getCardsIn(ZoneType.Hand).size() < 2)
+                && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
+                && (!source.getName().equals("Chain of Vapor") || (payer.getWeakestOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3));
     }
 
     @SuppressWarnings("unchecked")
@@ -348,7 +427,7 @@ public abstract class SpellAbilityAi {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleCard is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }
-    
+
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayer is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
