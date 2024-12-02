@@ -1221,19 +1221,19 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
         final Card source = sa.getHostCard();
-        // TODO replace with EmptySa
-        final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
-        emptyAbility.setActivatingPlayer(player);
-        emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
-        emptyAbility.setReplacingObjects(sa.getReplacingObjects());
-        emptyAbility.setTrigger(sa.getTrigger());
-        emptyAbility.setReplacementEffect(sa.getReplacementEffect());
-        emptyAbility.setSVars(sa.getSVars());
-        emptyAbility.setCardState(sa.getCardState());
-        emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
-        emptyAbility.setTargets(sa.getTargets().clone());
+        if (SpellApiToAi.Converter.get(sa.getApi()).willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
+            // TODO replace with EmptySa
+            final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
+            emptyAbility.setActivatingPlayer(player);
+            emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
+            emptyAbility.setReplacingObjects(sa.getReplacingObjects());
+            emptyAbility.setTrigger(sa.getTrigger());
+            emptyAbility.setReplacementEffect(sa.getReplacementEffect());
+            emptyAbility.setSVars(sa.getSVars());
+            emptyAbility.setCardState(sa.getCardState());
+            emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
+            emptyAbility.setTargets(sa.getTargets().clone());
 
-        if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
             boolean result = ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
             if (!emptyAbility.getPaidHash().isEmpty()) {
                 // report info to original sa (Argentum Masticore)

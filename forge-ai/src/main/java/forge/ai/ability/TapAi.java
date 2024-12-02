@@ -1,16 +1,20 @@
 package forge.ai.ability;
 
 import forge.ai.*;
+import forge.card.ColorSet;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostPayLife;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.collect.FCollectionView;
 
 public class TapAi extends TapAiBase {
     @Override
@@ -84,4 +88,35 @@ public class TapAi extends TapAiBase {
         }
     }
 
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+
+        // Check for shocklands and similar ETB replacement effects
+        if (sa.hasParam("ETB")) {
+            final Card source = sa.getHostCard();
+            for (final CostPart part : cost.getCostParts()) {
+                if (part instanceof CostPayLife) {
+                    final CostPayLife lifeCost = (CostPayLife) part;
+                    Integer amount = lifeCost.convertAmount();
+                    if (payer.getLife() > (amount + 1) && payer.canPayLife(amount, true, sa)) {
+                        final int landsize = payer.getLandsInPlay().size() + 1;
+                        for (Card c : payer.getCardsIn(ZoneType.Hand)) {
+                            // Check if the AI has enough lands to play the card
+                            if (landsize != c.getCMC()) {
+                                continue;
+                            }
+                            // Check if the AI intends to play the card and if it can pay for it with the mana it has
+                            boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
+                            boolean canPay = c.getManaCost().canBePaidWithAvailable(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(payer, source)).getColor());
+                            if (canPay && willPlay) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+    }
 }
