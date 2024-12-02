@@ -7,6 +7,6 @@ SVar:TrigReveal:DB$ Reveal | RevealValid$ Dinosaur | RememberRevealed$ True | Op
 SVar:DBGainLife:DB$ GainLife | ConditionCheckSVar$ Count$RememberedSize/Plus.DinoControlled | LifeAmount$ 3 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DinoControlled:Count$Valid Dinosaur.Other+YouCtrl
-DeckHints:Type$Dinosaur
 DeckHas:Ability$LifeGain
+DeckHints:Type$Dinosaur
 Oracle:When Armored Kincaller enters, you may reveal a Dinosaur card from your hand. If you do or if you control another Dinosaur, you gain 3 life.
