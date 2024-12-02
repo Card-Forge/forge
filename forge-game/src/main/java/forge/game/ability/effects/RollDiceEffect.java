@@ -129,7 +129,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("UseHighestRoll")) {
+        if (sa != null && sa.hasParam("UseHighestRoll")) {
             naturalRolls.subList(0, naturalRolls.size() - 1).clear();
         }
 

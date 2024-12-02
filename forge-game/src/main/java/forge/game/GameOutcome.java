@@ -87,22 +87,11 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
                 winningTeam = p.getTeam();
             }
         }
-        
+
         // Unable to calculate lifeDelta between a winning and losing player whe a draw is in place
         if (winCondition == GameEndReason.Draw) return;
 
-        int winnersHealth = 0;
-        int opponentsHealth = 0;
-        for (final Player p : players) {
-            if (p.getTeam() == winningTeam) {
-                winnersHealth += p.getLife();
-            } else {
-                opponentsHealth += p.getLife();
-            }
-        }
-
         calculateLifeDelta(players);
-        lifeDelta = Math.max(0, winnersHealth - opponentsHealth);
     }
 
     private void calculateLifeDelta(Iterable<Player> players) {
