@@ -79,6 +79,7 @@ public class AiAttackController {
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
     private final int timeOut;
+    private final boolean canUseTimeout;
     private List<CompletableFuture<Integer>> futures = new ArrayList<>();
 
     /**
@@ -98,6 +99,7 @@ public class AiAttackController {
         this.nextTurn = nextTurn;
         refreshCombatants(defendingOpponent);
         this.timeOut = ai.getGame().getAITimeout();
+        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -112,6 +114,7 @@ public class AiAttackController {
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
         this.timeOut = ai.getGame().getAITimeout();
+        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
@@ -967,10 +970,16 @@ public class AiAttackController {
                         numForcedAttackers.incrementAndGet();
                     }
                     return 0;
+                }).exceptionally(ex -> {
+                    ex.printStackTrace();
+                    return 0;
                 }));
             }
             CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-            CompletableFuture.allOf(futuresArray).completeOnTimeout(null, timeOut, TimeUnit.SECONDS).join();
+            if (canUseTimeout)
+                CompletableFuture.allOf(futuresArray).completeOnTimeout(null, timeOut, TimeUnit.SECONDS).join();
+            else
+                CompletableFuture.allOf(futuresArray).join();
             futures.clear();
             if (attackersLeft.isEmpty()) {
                 return aiAggression;
