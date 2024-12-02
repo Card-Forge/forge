@@ -3,4 +3,5 @@ ManaCost:2 B
 Types:Creature Vampire
 PT:3/1
 K:Bloodthirst:1
+DeckHas:Ability$Counters
 Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters with a +1/+1 counter on it.)

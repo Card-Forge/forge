@@ -4,4 +4,5 @@ Types:Creature Phyrexian Spider
 PT:2/4
 K:Reach
 K:Infect
+DeckHas:Ability$Counters
 Oracle:Reach (This creature can block creatures with flying.)\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

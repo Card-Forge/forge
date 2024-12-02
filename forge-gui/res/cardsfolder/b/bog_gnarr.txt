@@ -6,6 +6,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Card.Black
 AI:RemoveDeck:Random
-DeckNeeds:Color$Black
 DeckHints:Color$Black
+DeckNeeds:Color$Black
 Oracle:Whenever a player casts a black spell, Bog Gnarr gets +2/+2 until end of turn.

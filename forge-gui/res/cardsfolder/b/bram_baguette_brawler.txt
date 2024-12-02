@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Food.nonCreature+YouCtrl | AddType$ Equipment | AddStaticAbility$ FoodEquip | AddKeyword$ Equip:1 | Description$ Each noncreature Food you control is an Equipment with equip {1} and "Equipped creature gets +1/+1."
 SVar:FoodEquip:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
-DeckHas:Ability$Token|Sacrifice & Type$Food|Artifact|Equipment
+DeckHas:Ability$Token & Type$Equipment
 DeckHints:Type$Food
 Oracle:When Bram, Baguette Brawler enters the battlefield, create a Food token.\nEach noncreature Food you control is an Equipment with equip {1} and "Equipped creature gets +1/+1."
