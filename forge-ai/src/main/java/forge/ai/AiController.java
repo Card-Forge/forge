@@ -73,6 +73,7 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * <p>
@@ -1687,8 +1688,8 @@ public class AiController {
             if (game.AI_CAN_USE_TIMEOUT)
                 return future.completeOnTimeout(null, game.getAITimeout(), TimeUnit.SECONDS).get();
             else
-                return future.get();
-        } catch (InterruptedException | ExecutionException e) {
+                return future.get(game.getAITimeout(), TimeUnit.SECONDS);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
             return null;
         }
     }
