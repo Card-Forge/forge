@@ -4,7 +4,6 @@ import java.util.Map;
 
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -21,7 +20,7 @@ public class ClassLevelUpEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         int level = host.getClassLevel();
 
-        if (AbilityUtils.calculateAmount(host, sa.getRestrictions().getClassLevel(), sa) != level) {
+        if (!sa.isClassLevelNAbility(level)) {
             return;
         }
 
