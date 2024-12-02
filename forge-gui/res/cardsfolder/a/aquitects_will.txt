@@ -7,4 +7,6 @@ SVar:FountainStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRe
 SVar:DBDraw:DB$ Draw | ConditionPresent$ Merfolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Merfolk,
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
+DeckHas:Ability$Counters & Type$Island
+DeckHints:Type$Merfolk
 Oracle:Put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
