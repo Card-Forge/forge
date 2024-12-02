@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import java.util.Iterator;
+import java.util.List;
 
 import forge.game.ability.effects.CounterEffect;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,7 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
+import forge.ai.SpellApiToAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -28,6 +30,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
 
 public class CounterAi extends SpellAbilityAi {
 
@@ -350,5 +353,23 @@ public class CounterAi extends SpellAbilityAi {
         }
 
         return new ImmutablePair<>(bestOption != null ? bestOption : leastBadOption, bestOption != null);
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        // ward or human misplay
+        final Card source = sa.getHostCard();
+        List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
+        for (SpellAbility toBeCountered : spells) {
+            if (!toBeCountered.isCounterableBy(sa)) {
+                return false;
+            }
+            // no reason to pay if we don't plan to confirm
+            if (toBeCountered.isOptionalTrigger() && !SpellApiToAi.Converter.get(toBeCountered.getApi()).doTriggerNoCostWithSubs(payer, toBeCountered, false)) {
+                return false;
+            }
+            // TODO check hasFizzled
+        }
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }
