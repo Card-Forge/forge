@@ -5,5 +5,6 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on each Fractal you control.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gu_0_0_fractal | TokenOwner$ You | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Creature.Fractal+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
-DeckHas:Ability$Counters
+DeckHas:Ability$Counters|Token
+DeckHints:Type$Fractal
 Oracle:When Biomathematician enters, create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on each Fractal you control.

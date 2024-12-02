@@ -6,4 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_merfolk_wizard | TokenOwner$ You
 A:AB$ Untap | Cost$ tapXType<2/Merfolk> | SubAbility$ GainShroud | SpellDescription$ Untap CARDNAME.
 SVar:GainShroud:DB$ Pump | Defined$ Self | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.
+DeckHas:Ability$Token
+DeckHints:Type$Merfolk
 Oracle:When Benthicore enters, create two 1/1 blue Merfolk Wizard creature tokens.\nTap two untapped Merfolk you control: Untap Benthicore. It gains shroud until end of turn. (It can't be the target of spells or abilities.)
