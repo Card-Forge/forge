@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -18,6 +17,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.CollectionUtil;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
@@ -199,7 +199,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     if (optionalFound &&
                             !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()), null)) {
                         if (ZoneType.None.equals(optionalNoDestination)) {
-                            itr.remove();
+                            if (sequential)
+                                revealed.remove(c);
+                            else
+                                found.remove(c);
                             continue;
                         }
                         foundDest = optionalNoDestination;
@@ -261,7 +264,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("RevealRandomOrder")) {
-                Collections.shuffle(revealed, MyRandom.getRandom());
+                CollectionUtil.shuffle(revealed, MyRandom.getRandom());
             }
 
             if (sa.hasParam("NoMoveRevealed") || sequential) {

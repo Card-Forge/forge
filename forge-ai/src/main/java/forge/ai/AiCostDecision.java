@@ -17,6 +17,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.CollectionUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.ObjectUtils;
@@ -161,7 +162,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         List<Player> res = cost.getPotentialPlayers(player, ability);
         // I should only choose one of these right?
         // TODO Choose the "worst" player.
-        Collections.shuffle(res);
+        CollectionUtil.shuffle(res);
 
         return PaymentDecision.players(res.subList(0, 1));
     }
@@ -185,7 +186,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             CardCollection chosen = new CardCollection();
 
             CardLists.sortByCmcDesc(valid);
-            Collections.reverse(valid);
+            CollectionUtil.reverse(valid);
 
             int totalCMC = 0;
             for (Card card : valid) {

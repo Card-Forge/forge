@@ -19,7 +19,6 @@ package forge.gamemodes.quest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import forge.deck.CardArchetypeLDAGenerator;
@@ -30,6 +29,7 @@ import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.model.FModel;
 import forge.util.CollectionSuppliers;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -236,7 +236,7 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
     public void randomizeOpponents() {
         for (QuestEventDifficulty qd : sortedDuels.keySet()) {
             List<QuestEventDuel> list = (List<QuestEventDuel>) sortedDuels.get(qd);
-            Collections.shuffle(list, MyRandom.getRandom());
+            CollectionUtil.shuffle(list, MyRandom.getRandom());
         }
     }
 }

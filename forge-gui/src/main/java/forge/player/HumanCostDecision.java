@@ -465,7 +465,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     private PaymentDecision exileFromTopGraveType(final int nNeeded, final CardCollection typeList) {
-        Collections.reverse(typeList);
+        CollectionUtil.reverse(typeList);
         return PaymentDecision.card(Iterables.limit(typeList, nNeeded));
     }
 

@@ -47,6 +47,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.trackable.Tracker;
 import forge.util.Aggregates;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.Visitor;
 import forge.util.collect.FCollection;
@@ -400,7 +401,7 @@ public class Game {
             return ingamePlayers;
         }
         final PlayerCollection players = new PlayerCollection(ingamePlayers);
-        Collections.reverse(players);
+        CollectionUtil.reverse(players);
         return players;
     }
 
@@ -420,7 +421,7 @@ public class Game {
         final PlayerCollection players = new PlayerCollection(ingamePlayers);
         players.remove(phaseHandler.getPlayerTurn());
         if (!getTurnOrder().isDefaultDirection()) {
-            Collections.reverse(players);
+            CollectionUtil.reverse(players);
         }
         return players;
     }

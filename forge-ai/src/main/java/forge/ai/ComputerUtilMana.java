@@ -38,6 +38,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -1520,11 +1521,11 @@ public class ComputerUtilMana {
         sortedManaSources.addAll(sortedManaSources.size(), anyColorManaSources);
         //use better creatures later
         ComputerUtilCard.sortByEvaluateCreature(otherManaSources);
-        Collections.reverse(otherManaSources);
+        CollectionUtil.reverse(otherManaSources);
         sortedManaSources.addAll(sortedManaSources.size(), otherManaSources);
         // This should be things like sacrifice other stuff.
         ComputerUtilCard.sortByEvaluateCreature(useLastManaSources);
-        Collections.reverse(useLastManaSources);
+        CollectionUtil.reverse(useLastManaSources);
         sortedManaSources.addAll(sortedManaSources.size(), useLastManaSources);
 
         if (DEBUG_MANA_PAYMENT) {

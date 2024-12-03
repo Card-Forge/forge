@@ -26,12 +26,12 @@ import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
 import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.toolbox.FOptionPane;
+import forge.util.CollectionUtil;
 import forge.util.Localizer;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -163,7 +163,7 @@ public enum CSubmenuDraft implements ICDoc {
             for(int i = 0; i < maxDecks; i++) {
                 aiIndices.add(i);
             }
-            Collections.shuffle(aiIndices);
+            CollectionUtil.shuffle(aiIndices);
             aiIndices = aiIndices.subList(0, numOpponents);
 
             for(int i : aiIndices) {

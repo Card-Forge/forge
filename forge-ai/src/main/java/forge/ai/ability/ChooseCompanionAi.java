@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.CollectionUtil;
 
 public class ChooseCompanionAi extends SpellAbilityAi {
 
@@ -23,7 +23,7 @@ public class ChooseCompanionAi extends SpellAbilityAi {
             return null;
         }
 
-        Collections.shuffle(cards);
+        CollectionUtil.shuffle(cards);
         return cards.get(0);
     }
 }

@@ -11,6 +11,7 @@ import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.CollectionUtil;
 import forge.util.TextUtil;
 
 import java.util.*;
@@ -723,7 +724,7 @@ public class LimitedPlayer {
     }
 
     public PaperCard pickFromArchdemonCurse(DraftPack chooseFrom) {
-        Collections.shuffle(chooseFrom);
+        CollectionUtil.shuffle(chooseFrom);
         reduceArchdemonOfPalianoCurse();
         return chooseFrom.get(0);
     }

@@ -7,6 +7,7 @@ import forge.gui.GuiBase;
 import forge.gui.download.GuiDownloadZipService;
 import forge.gui.util.SGuiChoose;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.CollectionUtil;
 import forge.util.FileUtil;
 import forge.util.WaitCallback;
 import forge.util.storage.StorageBase;
@@ -71,7 +72,7 @@ public class NetDeckArchivePioneer extends StorageBase<Deck> {
         }
 
         List<NetDeckArchivePioneer> category = new ArrayList<>(categories.values());
-        Collections.reverse(category);
+        CollectionUtil.reverse(category);
 
         final NetDeckArchivePioneer c = SGuiChoose.oneOrNone("Select a Net Deck Archive Pioneer category", category);
         if (c == null) { return null; }

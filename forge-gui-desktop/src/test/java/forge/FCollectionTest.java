@@ -5,7 +5,6 @@ import forge.game.card.CardCollection;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -15,7 +14,7 @@ public class FCollectionTest {
     /**
      * Just a quick test for FCollection.
      */
-    @Test
+    /*@Test
     void testBadIteratorLogic() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i < 5; i++)
@@ -25,7 +24,7 @@ public class FCollectionTest {
         it.next();
         it.remove();
         assertEquals(cc.size(), 3);
-    }
+    }*/// Commented out since we use copyOnWriteArrayList on FCollection and it doesn't support Iterator add, remove and set
 
     @Test
     void testBadIteratorLogicTwo() {

@@ -40,6 +40,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.CollectionUtil;
 import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
@@ -650,7 +651,7 @@ public class PlayerControllerAi extends PlayerController {
             if(source == null || !source.hasParam("LibraryPosition")
                     || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0) {
                 //Cards going to the top of a deck are returned in reverse order.
-                Collections.reverse(reordered);
+                CollectionUtil.reverse(reordered);
             }
 
             assert(reordered.size() == cards.size());

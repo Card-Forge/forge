@@ -22,6 +22,7 @@ import java.util.*;
 import com.google.common.collect.*;
 import forge.game.card.*;
 import forge.game.cost.*;
+import forge.util.CollectionUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -682,7 +683,7 @@ public class ComputerUtil {
 
         // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
         CardLists.sortByCmcDesc(typeList);
-        Collections.reverse(typeList);
+        CollectionUtil.reverse(typeList);
 
 
         // TODO AI needs some improvements here
@@ -736,7 +737,7 @@ public class ComputerUtil {
 
             // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
             CardLists.sortByCmcDesc(typeList);
-            Collections.reverse(typeList);
+            CollectionUtil.reverse(typeList);
             typeList.sort((a, b) -> {
                 if (!a.isInPlay() && b.isInPlay()) return -1;
                 else if (!b.isInPlay() && a.isInPlay()) return 1;
@@ -766,7 +767,7 @@ public class ComputerUtil {
         final CardCollection list = new CardCollection();
 
         if (zone != ZoneType.Hand) {
-            Collections.reverse(typeList);
+            CollectionUtil.reverse(typeList);
         }
 
         for (int i = 0; i < amount; i++) {
@@ -817,7 +818,7 @@ public class ComputerUtil {
             typeList.remove(activate);
         }
         ComputerUtilCard.sortByEvaluateCreature(typeList);
-        Collections.reverse(typeList);
+        CollectionUtil.reverse(typeList);
 
         final CardCollection tapList = new CardCollection();
 
@@ -1769,7 +1770,7 @@ public class ComputerUtil {
 
         // align threatened with resolve order
         // matters if stack contains multiple activations (e.g. Temur Sabertooth)
-        Collections.reverse(objects);
+        CollectionUtil.reverse(objects);
         return objects;
     }
 

@@ -16,10 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -174,7 +171,7 @@ public class DigEffect extends SpellAbilityEffect {
             CardCollection all = new CardCollection(p.getCardsIn(srcZone));
 
             if (sa.hasParam("FromBottom")) {
-                Collections.reverse(all);
+                CollectionUtil.reverse(all);
             }
 
             int numToDig = Math.min(digNum, all.size());
@@ -356,7 +353,7 @@ public class DigEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ForgetOtherRemembered")) {
                     host.clearRemembered();
                 }
-                Collections.reverse(movedCards);
+                CollectionUtil.reverse(movedCards);
 
                 if (destZone1.equals(ZoneType.Battlefield) || destZone1.equals(ZoneType.Library)) {
                     if (sa.hasParam("GainControl")) {

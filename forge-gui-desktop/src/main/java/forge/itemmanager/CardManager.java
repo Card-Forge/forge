@@ -18,6 +18,7 @@ import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.CollectionSuppliers;
+import forge.util.CollectionUtil;
 import forge.util.Localizer;
 
 import javax.swing.*;
@@ -98,7 +99,7 @@ public class CardManager extends ItemManager<PaperCard> {
         // Use standard sort + index, for better performance!
         Collections.sort(acceptedEditions);
         if (StaticData.instance().cardArtPreferenceIsLatest())
-            Collections.reverse(acceptedEditions);
+            CollectionUtil.reverse(acceptedEditions);
         Iterator<CardEdition> editionIterator = acceptedEditions.iterator();
         Entry<PaperCard, Integer> candidateEntry = null;
         Entry<PaperCard, Integer> firstCandidateEntryFound = null;

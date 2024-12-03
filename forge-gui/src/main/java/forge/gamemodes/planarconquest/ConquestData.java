@@ -41,11 +41,7 @@ import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
-import forge.util.CardTranslation;
-import forge.util.FileUtil;
-import forge.util.Localizer;
-import forge.util.XmlReader;
-import forge.util.XmlWriter;
+import forge.util.*;
 
 public final class ConquestData {
     private static final String XML_FILE = "data.xml";
@@ -589,7 +585,7 @@ public final class ConquestData {
                         path.add(current.loc);
                         current = current.came_from;
                     }
-                    Collections.reverse(path); //reverse path so it begins with start location
+                    CollectionUtil.reverse(path); //reverse path so it begins with start location
                     return path;
                 }
 

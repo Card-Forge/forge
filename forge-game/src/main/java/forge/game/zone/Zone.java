@@ -32,6 +32,7 @@ import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
 import forge.util.CollectionSuppliers;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -274,7 +275,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public void shuffle() {
-        Collections.shuffle(cardList, MyRandom.getRandom());
+        CollectionUtil.shuffle(cardList, MyRandom.getRandom());
         onChanged();
     }
 

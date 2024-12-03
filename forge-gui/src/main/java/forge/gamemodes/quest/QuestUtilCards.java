@@ -42,13 +42,13 @@ import forge.item.generation.UnOpenedProduct;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.Aggregates;
+import forge.util.CollectionUtil;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -678,7 +678,7 @@ public final class QuestUtilCards {
             editions.add(e);
         }
 
-        Collections.shuffle(editions);
+        CollectionUtil.shuffle(editions);
 
         int numberOfBoxes = Math.min(Math.max(count / 2, 1), editions.size());
 

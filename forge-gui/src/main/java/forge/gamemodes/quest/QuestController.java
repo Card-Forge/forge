@@ -45,6 +45,7 @@ import forge.item.PreconDeck;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.util.CollectionUtil;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
@@ -606,7 +607,7 @@ public class QuestController {
                 }
             }
 
-            Collections.shuffle(unlockedChallengeIds);
+            CollectionUtil.shuffle(unlockedChallengeIds);
 
             maxChallenges = Math.min(maxChallenges, unlockedChallengeIds.size());
 

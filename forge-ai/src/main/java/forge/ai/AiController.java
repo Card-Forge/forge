@@ -62,10 +62,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.ComparatorUtil;
-import forge.util.Expressions;
-import forge.util.MyRandom;
+import forge.util.*;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -2258,7 +2255,7 @@ public class AiController {
         result.addAll(activePlayerSAs);
 
         //need to reverse because of magic stack
-        Collections.reverse(result);
+        CollectionUtil.reverse(result);
         return result;
     }
 

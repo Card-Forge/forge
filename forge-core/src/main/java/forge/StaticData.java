@@ -7,6 +7,7 @@ import forge.card.CardRules;
 import forge.card.PrintSheet;
 import forge.item.*;
 import forge.token.TokenDb;
+import forge.util.CollectionUtil;
 import forge.util.FileUtil;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
@@ -195,7 +196,7 @@ public class StaticData {
                 sortedEditions.add(set);
             }
             Collections.sort(sortedEditions);
-            Collections.reverse(sortedEditions); //put newer sets at the top
+            CollectionUtil.reverse(sortedEditions); //put newer sets at the top
         }
         return sortedEditions;
     }

@@ -1,7 +1,6 @@
 package forge.gamemodes.quest;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import forge.deck.CardPool;
@@ -12,6 +11,7 @@ import forge.deck.DeckProxy;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 
 /**
@@ -198,6 +198,6 @@ public class QuestEventCommanderDuelManager implements QuestEventDuelManagerInte
      * Randomizes the list of Commander Duels.
      */
     public void randomizeOpponents(){
-        Collections.shuffle(commanderDuels);
+        CollectionUtil.shuffle(commanderDuels);
     }
 }

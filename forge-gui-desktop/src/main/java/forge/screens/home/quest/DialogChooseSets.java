@@ -13,6 +13,7 @@ import forge.game.GameFormat;
 import forge.gui.SOverlayUtils;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
+import forge.util.CollectionUtil;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import forge.toolbox.FCheckBoxTree.FTreeNode;
@@ -467,7 +468,7 @@ public class DialogChooseSets {
 				FTreeNode setTypeNode = checkBoxTree.getNodeByKey(editionType);
 				if (setTypeNode != null){
 					List<FTreeNode> activeChildNodes = checkBoxTree.getActiveChildNodes(setTypeNode);
-					Collections.shuffle(activeChildNodes);
+					CollectionUtil.shuffle(activeChildNodes);
 					for (int i = 0; i < totalToSelect; i++)
 						checkBoxTree.setNodeCheckStatus(activeChildNodes.get(i), true);
 				}
