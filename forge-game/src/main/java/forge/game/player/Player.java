@@ -1143,7 +1143,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             if (toTop != null) {
-                CollectionUtil.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
+                Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
                 for (Card c : toTop) {
                     getGame().getAction().moveToLibrary(c, cause, params);
                     numToTop++;
@@ -1673,7 +1673,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final CardCollection list = new CardCollection(getCardsIn(ZoneType.Library));
 
         // Note: Shuffling once is sufficient.
-        CollectionUtil.shuffle(list, MyRandom.getRandom());
+        Collections.shuffle(list, MyRandom.getRandom());
 
         getZone(ZoneType.Library).setCards(getController().cheatShuffle(list));
 

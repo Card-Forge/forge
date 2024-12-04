@@ -1,10 +1,10 @@
 package forge.gamemodes.quest.setrotation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import forge.model.FModel;
-import forge.util.CollectionUtil;
 
 import static java.lang.Integer.min;
 
@@ -27,7 +27,7 @@ public class QueueRandomRotation implements ISetRotation {
         int seed = FModel.getQuest().getName().hashCode();
         Random rnd = new Random(seed);
         List<String> shuffledSets = new ArrayList<>(allSets);
-        CollectionUtil.shuffle(shuffledSets, rnd);
+        Collections.shuffle(shuffledSets, rnd);
 
         List<String> currentCodes = new ArrayList<>();
         int outRotations = FModel.getQuest().getAchievements().getWin() / rotateAfterWins;

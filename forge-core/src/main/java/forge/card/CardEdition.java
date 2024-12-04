@@ -485,7 +485,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             return null;
         }
 
-        CollectionUtil.shuffle(boosterTypes);
+        Collections.shuffle(boosterTypes);
         return boosterTypes.get(0);
     }
 
@@ -795,7 +795,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         public Iterable<CardEdition> getOrderedEditions() {
             List<CardEdition> res = Lists.newArrayList(this);
             Collections.sort(res);
-            CollectionUtil.reverse(res);
+            Collections.reverse(res);
             return res;
         }
 

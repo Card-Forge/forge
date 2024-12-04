@@ -24,9 +24,9 @@ public class FCollectionTest {
         it.next();
         it.remove();
         assertEquals(cc.size(), 3);
-    }*/// Commented out since we use copyOnWriteArrayList on FCollection and it doesn't support Iterator add, remove and set
+    }
 
-    @Test
+    /*@Test
     void testBadIteratorLogicTwo() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i <= 10; i++)
@@ -39,7 +39,7 @@ public class FCollectionTest {
             i++;
         }
         assertEquals(cc.size(), 1);
-    }
+    }*/// Commented out since we use synchronized collection and it doesn't support modification while iteration
 
     @Test
     void testCompletableFuture() {

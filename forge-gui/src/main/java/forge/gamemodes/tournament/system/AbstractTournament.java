@@ -2,6 +2,7 @@ package forge.gamemodes.tournament.system;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -11,7 +12,6 @@ import forge.LobbyPlayer;
 import forge.deck.DeckGroup;
 import forge.game.player.RegisteredPlayer;
 import forge.player.GamePlayerUtil;
-import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 
@@ -44,7 +44,7 @@ public abstract class AbstractTournament implements Serializable {
 
     public void initializeTournament() {
         // "Randomly" seed players to start tournament
-        CollectionUtil.shuffle(remainingPlayers, MyRandom.getRandom());
+        Collections.shuffle(remainingPlayers, MyRandom.getRandom());
         generateActivePairings();
         initialized = true;
     }

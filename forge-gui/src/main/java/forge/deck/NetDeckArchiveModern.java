@@ -7,7 +7,6 @@ import forge.gui.GuiBase;
 import forge.gui.download.GuiDownloadZipService;
 import forge.gui.util.SGuiChoose;
 import forge.localinstance.properties.ForgeConstants;
-import forge.util.CollectionUtil;
 import forge.util.FileUtil;
 import forge.util.WaitCallback;
 import forge.util.storage.StorageBase;
@@ -72,7 +71,7 @@ public class NetDeckArchiveModern extends StorageBase<Deck> {
         }
 
         List<NetDeckArchiveModern> category = new ArrayList<>(categories.values());
-        CollectionUtil.reverse(category);
+        Collections.reverse(category);
 
         final NetDeckArchiveModern c = SGuiChoose.oneOrNone("Select a Net Deck Archive Modern category", category);
         if (c == null) { return null; }

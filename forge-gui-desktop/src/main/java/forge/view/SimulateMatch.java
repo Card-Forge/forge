@@ -5,7 +5,6 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import forge.util.CollectionUtil;
 import org.apache.commons.lang3.time.StopWatch;
 
 import forge.LobbyPlayer;
@@ -197,7 +196,7 @@ public class SimulateMatch {
         } else {
             log = g1.getGameLog().getLogEntries(GameLogEntryType.MATCH_RESULTS);
         }
-        CollectionUtil.reverse(log);
+        Collections.reverse(log);
         for (GameLogEntry l : log) {
             System.out.println(l);
         }

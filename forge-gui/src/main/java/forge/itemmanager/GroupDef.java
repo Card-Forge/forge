@@ -15,7 +15,6 @@ import forge.deck.DeckProxy;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.util.CollectionUtil;
 import forge.util.Localizer;
 
 public enum GroupDef {
@@ -240,7 +239,7 @@ public enum GroupDef {
         //build sorted list of sets
         List<CardEdition> sortedSets = Lists.newArrayList(FModel.getMagicDb().getEditions());
         Collections.sort(sortedSets);
-        CollectionUtil.reverse(sortedSets);
+        Collections.reverse(sortedSets);
 
         int groupNum = 0;
         String[] setGroups = new String[sortedSets.size()];

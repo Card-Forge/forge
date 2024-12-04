@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.Collections;
 import java.util.List;
 
 import forge.game.ability.SpellAbilityEffect;
@@ -8,7 +9,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CollectionUtil;
 import forge.util.Lang;
 import forge.util.MyRandom;
 
@@ -34,7 +34,7 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
 
             CardCollection list = new CardCollection(p.getCardsIn(zone));
             if (shuffle) {
-                CollectionUtil.shuffle(list, MyRandom.getRandom());
+                Collections.shuffle(list, MyRandom.getRandom());
                 p.getZone(zone).setCards(list);
             } else {
                 CardCollectionView orderedCards = p.getController().orderMoveToZoneList(list, zone, sa);

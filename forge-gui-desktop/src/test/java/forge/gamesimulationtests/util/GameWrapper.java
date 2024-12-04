@@ -21,10 +21,10 @@ import forge.gamesimulationtests.util.playeractions.PlayerActions;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class GameWrapper {
@@ -169,7 +169,7 @@ public class GameWrapper {
 
 		sb.append("Game log : \r\n");
 		List<GameLogEntry> gameLogEntries = gameLog.getLogEntries(GameLogEntryType.PHASE);
-		CollectionUtil.reverse(gameLogEntries);
+		Collections.reverse(gameLogEntries);
 		for (GameLogEntry gameLogEntry : gameLogEntries) {
 			sb.append(gameLogEntry.toString()).append("\r\n");
 		}

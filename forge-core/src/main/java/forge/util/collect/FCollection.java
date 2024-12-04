@@ -1,10 +1,12 @@
 package forge.util.collect;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -18,7 +20,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
-import com.google.common.collect.Sets;
 
 /**
  * Collection with unique elements ({@link Set}) that maintains the order in
@@ -42,12 +43,12 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * The {@link Set} representation of this collection.
      */
-    private final Set<T> set = Sets.newConcurrentHashSet();
+    private final Set<T> set = Collections.synchronizedSet(new HashSet<>());
 
     /**
      * The {@link List} representation of this collection.
      */
-    private final List<T> list = Lists.newCopyOnWriteArrayList();
+    private final List<T> list = Collections.synchronizedList(new ArrayList<>());
 
     /**
      * Create an empty {@link FCollection}.

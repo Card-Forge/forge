@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 
 public class DiscardAi extends SpellAbilityAi {
@@ -148,7 +148,7 @@ public class DiscardAi extends SpellAbilityAi {
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final PlayerCollection opps = ai.getOpponents();
-        CollectionUtil.shuffle(opps);
+        Collections.shuffle(opps);
         for (Player opp : opps) {
             if (opp.getCardsIn(ZoneType.Hand).isEmpty() && !ComputerUtil.activateForCost(sa, ai)) {
                 continue;

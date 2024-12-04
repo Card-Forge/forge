@@ -47,7 +47,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.maps.LinkedHashMapToAmount;
@@ -320,7 +319,7 @@ public class SpecialCardAi {
             best = ComputerUtilCard.getBestCreatureAI(cardlist);
             if (best == null) {
                 // If nothing on the battlefield has a nonmana ability choose something
-                CollectionUtil.shuffle(cardlist);
+                Collections.shuffle(cardlist);
                 best = cardlist.getFirst();
             }
 
