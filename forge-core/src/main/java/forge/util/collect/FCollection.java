@@ -12,8 +12,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -44,12 +42,12 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * The {@link Set} representation of this collection.
      */
-    private final Supplier<Set<T>> set = Suppliers.memoize(Sets::newConcurrentHashSet);
+    private final Set<T> set = Sets.newConcurrentHashSet();
 
     /**
      * The {@link List} representation of this collection.
      */
-    private final Supplier<List<T>> list = Suppliers.memoize(Lists::newCopyOnWriteArrayList);
+    private final List<T> list = Lists.newCopyOnWriteArrayList();
 
     /**
      * Create an empty {@link FCollection}.
@@ -140,7 +138,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public int hashCode() {
-        return list.get().hashCode();
+        return list.hashCode();
     }
 
     /**
@@ -150,7 +148,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public String toString() {
-        return list.get().toString();
+        return list.toString();
     }
 
     /**
@@ -159,7 +157,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public final FCollection<T> clone() {
-        return new FCollection<>(list.get());
+        return new FCollection<>(list);
     }
 
     /**
@@ -170,9 +168,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public T getFirst() {
-        if (list.get().isEmpty())
+        if (list.isEmpty())
             return null;
-        return list.get().get(0);
+        return list.get(0);
         //return list.getFirst();
     }
 
@@ -184,9 +182,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public T getLast() {
-        if (list.get().isEmpty())
+        if (list.isEmpty())
             return null;
-        return list.get().get(list.get().size() - 1);
+        return list.get(list.size() - 1);
         //return list.getLast();
     }
 
@@ -195,7 +193,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public int size() {
-        return set.get().size();
+        return set.size();
     }
 
     /**
@@ -203,11 +201,11 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean isEmpty() {
-        return set.get().isEmpty();
+        return set.isEmpty();
     }
 
     public Set<T> asSet() {
-        return set.get();
+        return set;
     }
 
     /**
@@ -220,7 +218,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     public boolean contains(final Object o) {
         if (o == null)
             return false;
-        return set.get().contains(o);
+        return set.contains(o);
     }
 
     /**
@@ -228,7 +226,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public Iterator<T> iterator() {
-        return list.get().iterator();
+        return list.iterator();
     }
 
     /**
@@ -236,7 +234,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public Object[] toArray() {
-        return list.get().toArray();
+        return list.toArray();
     }
 
     /**
@@ -245,7 +243,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     @Override
     @SuppressWarnings("hiding")
     public <T> T[] toArray(final T[] a) {
-        return list.get().toArray(a);
+        return list.toArray(a);
     }
 
     /**
@@ -259,8 +257,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     public boolean add(final T e) {
         if (e == null)
             return false;
-        if (set.get().add(e)) {
-            list.get().add(e);
+        if (set.add(e)) {
+            list.add(e);
             return true;
         }
         return false;
@@ -277,8 +275,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     public boolean remove(final Object o) {
         if (o == null)
             return false;
-        if (set.get().remove(o)) {
-            list.get().remove(o);
+        if (set.remove(o)) {
+            list.remove(o);
             return true;
         }
         return false;
@@ -286,8 +284,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
 
     @Override
     public boolean removeIf(Predicate<? super T> filter) {
-        if (list.get().removeIf(filter)) {
-            set.get().removeIf(filter);
+        if (list.removeIf(filter)) {
+            set.removeIf(filter);
             return true;
         }
         return false;
@@ -298,7 +296,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean containsAll(final Collection<?> c) {
-        return set.get().containsAll(c);
+        return set.containsAll(c);
     }
 
     /**
@@ -398,8 +396,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public boolean retainAll(final Collection<?> c) {
-        if (set.get().retainAll(c)) {
-            list.get().retainAll(c);
+        if (set.retainAll(c)) {
+            list.retainAll(c);
             return true;
         }
         return false;
@@ -410,9 +408,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public void clear() {
-        if (set.get().isEmpty()) { return; }
-        set.get().clear();
-        list.get().clear();
+        if (set.isEmpty()) { return; }
+        set.clear();
+        list.clear();
     }
 
     /**
@@ -420,7 +418,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public T get(final int index) {
-        return list.get().get(index);
+        return list.get(index);
     }
 
     /**
@@ -430,7 +428,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public T set(final int index, final T element) { //assume this isn't called except when changing list order, so don't worry about updating set
-        return list.get().set(index, element);
+        return list.set(index, element);
     }
 
     /**
@@ -451,12 +449,12 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * @return whether this collection changed as a result of this method call.
      */
     private boolean insert(int index, final T element) {
-        if (set.get().add(element)) {
-            list.get().add(index, element);
+        if (set.add(element)) {
+            list.add(index, element);
             return true;
         }
         //re-position in list if needed
-        final int oldIndex = list.get().indexOf(element);
+        final int oldIndex = list.indexOf(element);
         if (index == oldIndex) {
             return false;
         }
@@ -464,8 +462,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
         if (index > oldIndex) {
             index--; //account for being removed
         }
-        list.get().remove(oldIndex);
-        list.get().add(index, element);
+        list.remove(oldIndex);
+        list.add(index, element);
         return true;
     }
 
@@ -474,9 +472,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public T remove(final int index) {
-        final T removedItem = list.get().remove(index);
+        final T removedItem = list.remove(index);
         if (removedItem != null) {
-            set.get().remove(removedItem);
+            set.remove(removedItem);
         }
         return removedItem;
     }
@@ -486,7 +484,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public int indexOf(final Object o) {
-        return list.get().indexOf(o);
+        return list.indexOf(o);
     }
 
     /**
@@ -494,7 +492,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public int lastIndexOf(final Object o) {
-        return list.get().lastIndexOf(o);
+        return list.lastIndexOf(o);
     }
 
     /**
@@ -502,7 +500,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public ListIterator<T> listIterator() {
-        return list.get().listIterator();
+        return list.listIterator();
     }
 
     /**
@@ -510,7 +508,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public ListIterator<T> listIterator(final int index) {
-        return list.get().listIterator(index);
+        return list.listIterator(index);
     }
 
     /**
@@ -523,7 +521,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public List<T> subList(final int fromIndex, final int toIndex) {
-        return ImmutableList.copyOf(list.get().subList(fromIndex, toIndex));
+        return ImmutableList.copyOf(list.subList(fromIndex, toIndex));
     }
 
     /**
@@ -543,7 +541,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     public void sort(final Comparator<? super T> comparator) {
         try {
-            list.get().sort(comparator);
+            list.sort(comparator);
         } catch (Exception e) {
             System.err.println("FCollection failed to sort: \n" + comparator + "\n" + e.getMessage());
         }
