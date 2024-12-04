@@ -1,0 +1,406 @@
+[metadata]
+Code=PIO
+Date=2024-12-10
+Name=Pioneer Masters
+Type=Reprint
+ScryfallCode=PIO
+
+[cards]
+94223 U Bane of Bala Ged @Chase Stone
+94224 U Scion of Ugin @
+94225 M Void Winnower @
+94226 M Archangel of Thune @
+94227 U Archway Angel @
+94228 C Ardenvale Tactician @
+94230 C Artful Maneuver @
+94231 R Celestial Archon @
+94232 R Chained to the Rocks @
+94233 C Compulsory Rest @
+94234 R Dictate of Heliod @
+94235 U Extricator of Sin @
+94237 U Ghostblade Eidolon @
+94238 M Gideon, Ally of Zendikar @
+94239 C Heliod's Pilgrim @
+94240 R Hero of Iroas @
+94241 C Hopeful Eidolon @
+94242 R Imposing Sovereign @
+94243 U Kabira Takedown @
+94245 C Keening Apparition @
+94246 R Knight of the White Orchid @
+94247 C Knightly Valor @
+94248 M Kytheon, Hero of Akros @
+94250 C Lagonna-Band Trailblazer @
+94251 M Linvala, the Preserver @
+94252 U Lotus-Eye Mystics @
+94253 R Mentor of the Meek @
+94254 U Phalanx Leader @
+94255 U Phalanx Tactics @
+94256 R Secure the Wastes @
+94257 U Sejiri Shelter @
+94259 R Silence @Wayne Reynolds
+94260 U Silkwrap @
+94261 U Sphere of Safety @
+94262 R Spirit of the Labyrinth @
+94263 M Starfield of Nyx @
+94264 U Stasis Snare @
+94265 U Steward of Solidarity @
+94266 U Swift Reckoning @
+94267 C Syndicate Messenger @
+94268 C Triplicate Spirits @
+94269 U War Oracle @
+94270 R Aetherling @
+94271 U Anchor to the Aether @
+94272 C Aqueous Form @
+94273 R Artisan of Forms @
+94274 R Bident of Thassa @
+94275 U Brineborn Cutthroat @
+94276 R Chasm Skulker @
+94277 C Cloudfin Raptor @
+94278 C Consider @
+94279 M Crush of Tentacles @
+94280 M Day's Undoing @
+94281 C Essence Scatter @
+94282 C Fallaji Archaeologist @
+94283 U Guild Summit @
+94284 C Gust of Wind @
+94285 U Illusory Angel @
+94286 C Ingenious Skaab @
+94287 M Jace, Vryn's Prodigy @Jaime Jones
+94289 U Jhessian Thief @
+94290 U Jwari Disruption @
+94292 M Master of Waves @
+94293 C Mizzium Skin @
+94294 U Murmuring Mystic @
+94295 R Niblis of Frost @
+94296 C Nimbus Naiad @
+94297 C Opal Lake Gatekeepers @
+94298 R Quicken @
+94299 U Rapid Hybridization @
+94300 R Scatter to the Winds @
+94301 R Shipbreaker Kraken @
+94302 U Sight Beyond Sight @
+94303 U Silundi Vision @
+94305 R Stormtide Leviathan @
+94306 C Tah-Crop Skirmisher @
+94307 M Temporal Trespass @Clint Cearley
+94308 R Tidebinder Mage @
+94309 C Treasure Cruise @
+94310 U Windrider Patrol @
+94311 C Zephyr Winder @
+94312 C Baleful Eidolon @
+94313 C Basilica Screecher @
+94314 M Behold the Beyond @Madeline Boni
+94315 U Blackbloom Rogue @
+94317 R Blood Scrivener @
+94318 U Cruel Revival @
+94319 C Crypt Incursion @
+94320 U Dark Deal @
+94321 C Devour Flesh @
+94322 R Dictate of Erebos @
+94323 U Dreadhound @
+94324 U Fell Stinger @
+94325 C Gurmag Angler @YW Tang
+94326 R Lifebane Zombie @
+94327 M Liliana, Heretical Healer @Karla Ortiz
+94329 C Nantuko Husk @
+94330 R Nighthowler @
+94331 M Ob Nixilis Reignited @
+94332 C Ob Nixilis's Cruelty @
+94333 R Painful Truths @
+94334 U Pelakka Predation @
+94336 R Priest of the Blood Rite @
+94337 C Read the Bones @
+94338 U Rescue from the Underworld @
+94339 C Returned Centaur @
+94340 C Sanitarium Skeleton @
+94341 R Sidisi, Undead Vizier @
+94342 C Silumgar Butcher @
+94343 R Soulflayer @
+94344 U Stab Wound @
+94345 C Supernatural Stamina @
+94346 R Tasigur, the Golden Fang @Chris Rahn
+94347 U Tormented Hero @
+94348 C Ubul Sar Gatekeepers @
+94349 U Ultimate Price @
+94350 U Undead Butler @
+94351 R Urborg, Tomb of Yawgmoth @John Avon
+94352 R Whip of Erebos @
+94353 R Xathrid Necromancer @
+94354 U Zulaport Cutthroat @
+94355 U Akoum Warrior @
+94357 C Akroan Crusader @
+94358 U Bloodfire Enforcers @
+94359 C Boulder Salvo @
+94360 U Boundary Lands Ranger @
+94361 U Burning Anger @
+94362 M Chandra, Flamecaller @
+94363 U Coordinated Assault @
+94364 U Draconic Roar @
+94365 C Dragon Mantle @
+94366 R Dragon-Style Twins @
+94367 R Exquisite Firecraft @
+94368 C Fall of the Hammer @
+94369 U Fight with Fire @
+94370 U Furious Rise @
+94371 U Gates Ablaze @
+94372 C Ghirapur Gearcrafter @
+94373 R Goblin Rabblemaster @
+94374 R Heart-Piercer Manticore @
+94375 U Humble Defector @
+94376 M Kozilek's Return @
+94377 R Labyrinth Champion @
+94378 R Legion Loyalist @Eric Deschamps
+94379 C Makindi Sliderunner @
+94380 U Mogis's Warhound @
+94381 U Monastery Swiftspear @
+94382 R Oath of Chandra @
+94383 U Ordeal of Purphoros @
+94384 R Outpost Siege @
+94385 R Pia and Kiran Nalaar @
+94386 U Purphoros's Emissary @
+94387 C Rimrock Knight @
+94389 R Scab-Clan Berserker @
+94390 M Scourge of Valkas @
+94391 U Scytheclaw Raptor @
+94392 M Stormbreath Dragon @
+94393 R Valakut Awakening @
+94395 U Wild Slash @
+94396 C Witch's Mark @
+94397 R Zurgo Bellstriker @
+94398 U Alpha Authority @
+94399 C Aspect of Hydra @
+94400 U Audacity @
+94401 U Bala Ged Recovery @
+94403 U Bassara Tower Archer @
+94404 R Boon Satyr @
+94405 U Clear Shot @
+94406 C Commune with the Gods @
+94407 U Conclave Naturalists @
+94408 U Courier's Briefcase @
+94409 U District Guide @
+94410 U Experiment One @
+94411 U Gatebreaker Ram @
+94412 C Gladecover Scout @Brian Valeza
+94413 U Gnarlback Rhino @
+94414 R Goreclaw, Terror of Qal Sisma
+94415 R Hero of Leina Tower @
+94416 R Honored Hydra @
+94417 R Hornet Nest @Adam Paquette
+94418 U Khalni Ambush @
+94420 U Kraul Harpooner @
+94421 C Leafcrown Dryad @
+94422 R Mistcutter Hydra @
+94423 U Nemesis of Mortals @
+94424 C Nessian Asp @
+94425 M Nissa, Vastwood Seer @
+94427 M Nissa, Voice of Zendikar @
+94428 R Oath of Nissa @
+94429 M Polukranos, World Eater @
+94430 U Pulse of Murasa @
+94431 C Savage Punch @
+94432 U Seed Guardian @
+94433 R Shamanic Revelation @
+94434 R Skylasher @
+94435 R Sylvan Caryatid @Chase Stone
+94436 R Sylvan Primordial @
+94437 U Unravel the Aether @
+94438 C Voyaging Satyr @Tyler Jacobson
+94439 M Whisperwood Elemental @
+94440 R Woodland Wanderer @
+94441 R Anax and Cymede @
+94442 M Ashen Rider @
+94443 R Assemble the Legion @
+94444 U Azorius Charm @
+94445 M Blood Baron of Vizkopa @
+94446 U Bloodtithe Harvester @
+94447 R Boros Reckoner @
+94448 R Bring to Light @Jonas De Ro
+94449 U Cartel Aristocrat @
+94450 U Catacomb Sifter @
+94451 M Chromanticore @
+94452 R Counterflux @
+94453 U Destructive Revelry @
+94454 U Dinrova Horror @
+94455 M Dragonlord Atarka @
+94456 M Dragonlord Dromoka @
+94457 M Dragonlord Kolaghan @
+94458 M Dragonlord Ojutai @
+94459 M Dragonlord Silumgar @
+94460 R Dreadbore @
+94461 U Dreg Mangler @
+94462 M Epic Experiment @
+94463 R Fleecemane Lion @
+94464 M Garruk, Apex Predator @
+94465 U Ghor-Clan Rampager @
+94466 C Imperious Oligarch @
+94467 U Kiora's Follower @
+94468 R Lotleth Troll @
+94469 R Loxodon Smiter @
+94470 U Lyev Skyknight @
+94471 C Martial Glory @
+94472 M Medomai the Ageless @
+94473 C Nivix Cyclops @
+94474 R Notion Thief @
+94475 U Nyx Weaver @
+94476 U Possessed Skaab @
+94477 M Progenitor Mimic @
+94478 R Ruric Thar, the Unbowed @
+94479 U Selesnya Charm @
+94480 U Sin Collector @
+94481 R Sire of Insanity @
+94482 U Skyrider Elf @
+94483 R Steam Augury @
+94484 U Stormchaser Mage @
+94485 U Swift Warkite @
+94486 U Tenth District Legionnaire @
+94487 U Thunderclap Wyvern @
+94488 U Tomebound Lich @
+94489 U Unflinching Courage @
+94490 U Urban Evolution @
+94491 U Zendikar Incarnate @
+94492 U Crackdown Construct @
+94493 U Darksteel Ingot @
+94494 U Gate Colossus @
+94495 C Halo Scarab @
+94496 C Pilgrim's Eye @
+94497 C Azorius Guildgate @
+94498 C Boros Guildgate @
+94499 C Dimir Guildgate @
+94500 C Evolving Wilds @
+94501 C Gateway Plaza @
+94502 C Golgari Guildgate @
+94503 C Gruul Guildgate @
+94504 R Haven of the Spirit Dragon @
+94505 R Hissing Quagmire @
+94506 C Izzet Guildgate @
+94507 R Lumbering Falls @
+94508 M Maze's End @
+94509 R Needle Spires @
+94510 C Orzhov Guildgate @
+94511 C Rakdos Guildgate @
+94512 U Rogue's Passage @
+94513 C Selesnya Guildgate @
+94514 R Shambling Vent @
+94515 C Simic Guildgate @
+94516 U Spawning Bed @
+94517 R Wandering Fumarole @
+94518 U Eidolon of Rhetoric @
+94519 U Evangel of Heliod @
+94520 R Fiendslayer Paladin @
+94521 M Heliod, God of the Sun @
+94522 C Wingsteed Rider @
+94523 C Archaeomancer @
+94524 U Silumgar Sorcerer @
+94525 R Sphinx of Magosi @
+94526 U Sphinx's Tutelage @
+94527 M Thassa, God of the Sea @
+94528 R Abhorrent Overlord @
+94529 C Disciple of Phenax @
+94530 M Erebos, God of the Dead @
+94531 U Illness in the Ranks @
+94532 U Keepsake Gorgon @
+94533 R Ash Zealot @
+94534 U Fanatic of Mogis @
+94535 M Purphoros, God of the Forge @Eric Deschamps
+94536 U Pyromancer's Assault @
+94537 U Stoneshock Giant @
+94538 R Avatar of the Resolute @
+94539 U Bounding Krasis @
+94540 M Nylea, God of the Hunt @
+94541 C Nylea's Disciple @
+94542 R Reverent Hunter @
+94543 M Athreos, God of Passage @Ryan Barger
+94544 M Ephara, God of the Polis @
+94545 C Frostburn Weird @
+94546 U Gift of Orzhova @
+94547 R Growing Ranks @
+94548 M Iroas, God of Victory @
+94549 M Karametra, God of Harvests @
+94550 M Keranos, God of Storms @
+94551 M Kruphix, God of Horizons @
+94552 M Mogis, God of Slaughter @Chase Stone
+94553 R Nightveil Specter @
+94554 M Pharika, God of Affliction @
+94555 M Phenax, God of Deception @
+94556 R Rubblebelt Raiders @
+94557 M Xenagos, God of Revels @
+94558 M Ajani Steadfast @
+94559 R Call the Gatewatch @
+94560 M Elspeth, Sun's Champion @
+94561 R Hushwing Gryff @
+94562 R Oath of Gideon @
+94563 U Sage's Reverie @
+94564 C Sungrace Pegasus @
+94565 C Clutch of Currents @
+94566 U Flitterstep Eidolon @
+94567 U Hidden Strings @Daarken @
+94568 M Jace, Architect of Thought @
+94569 M Jace, Memory Adept @
+94570 R Oath of Jace @
+94571 C Retraction Helix @
+94572 C Cavern Lampad @
+94573 M Liliana of the Dark Realms @
+94574 R Liliana Vess @
+94575 R Oath of Liliana @
+94576 U Ovalchase Daredevil @
+94577 R Ruinous Path @
+94578 R Stain the Mind @
+94579 U Crumble to Dust @
+94580 C Goblin Heelcutter @
+94581 U Reckless Bushwhacker @
+94582 C Smash to Smithereens @
+94583 U Thopter Engineer @
+94584 U Brood Monitor @
+94585 C Fog @
+94586 M Garruk, Caller of Beasts @
+94587 C Nissa's Pilgrimage @
+94588 U Skyreaping @
+94589 C Stampeding Elk Herd @
+94590 M Ajani, Mentor of Heroes @
+94591 M Ashiok, Nightmare Weaver @
+94592 M Domri Rade @
+94593 M Kiora, the Crashing Wave @
+94594 M Narset Transcendent @
+94595 M Sarkhan Unbroken @
+94596 M Xenagos, the Reveler @
+94597 M The Chain Veil @Volkan Baǵa
+94598 R Hallowed Moonlight @
+94599 U Open the Armory @
+94600 U Reprisal @
+94601 C Shoulder to Shoulder @
+94602 R Tragic Arrogance @
+94603 C Dramatic Reversal @
+94604 M Enter the Infinite @Lindsey Look
+94605 M Part the Waterveil @
+94606 C Tome Scour @
+94607 C Void Shatter @Yohann Schepacz
+94608 U Bile Blight @
+94609 U Dark Betrayal @
+94610 R Dark Petition @Igor Kieryluk
+94611 C Touch of Moonglove @
+94612 M Worst Fears @
+94613 C Expedite @
+94614 U Limits of Solidarity @
+94615 R Mizzium Mortars @
+94616 R Radiant Flames @
+94617 C Seismic Stomp @
+94618 U Gather the Pack @
+94619 M The Great Aurora @
+94620 R Hunter's Prowess @
+94621 U Miming Slime @
+94622 C Natural State @
+94623 M Aurelia's Fury @
+94624 R Jarad's Orders @
+94625 M Rakdos's Return @
+94626 R Render Silent @
+94627 R Unexpected Results @
+94671 U Alive // Well @
+94674 U Armed // Dangerous @
+94677 U Down // Dirty @
+94680 U Far // Away @
+94683 U Give // Take @
+94686 U Profit // Loss @
+94689 U Protect // Serve @
+94692 U Toil // Trouble @
+94695 U Turn // Burn @
+94698 U Wear // Tear @

@@ -70,7 +70,6 @@ public class BoosterGenerator {
         }
 
         List<PaperCard> result = new ArrayList<>();
-        List<PrintSheet> sheetsUsed = new ArrayList<>();
 
         CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
 
@@ -234,7 +233,6 @@ public class BoosterGenerator {
             if (sheetKey.startsWith("wholeSheet")) {
                 PrintSheet ps = getPrintSheet(sheetKey);
                 result.addAll(ps.all());
-                sheetsUsed.add(ps);
                 continue;
             }
 
@@ -253,7 +251,7 @@ public class BoosterGenerator {
                 if ((edition.getName().equals("Planeshift")) &&
                         (slotType.startsWith(BoosterSlots.RARE))
                         && (foilSlot.startsWith(BoosterSlots.SPECIAL))
-                        ) {
+                ) {
                     numCards--;
                 }
             }
@@ -265,7 +263,6 @@ public class BoosterGenerator {
                         : edition.getSlotReplaceCommonWith().trim();
                 PrintSheet replaceSheet = getPrintSheet(replaceKey);
                 result.addAll(replaceSheet.random(1, true));
-                sheetsUsed.add(replaceSheet);
                 System.out.println("Common was replaced with something from the replace sheet...");
                 replaceCommon = false;
             }
@@ -284,7 +281,6 @@ public class BoosterGenerator {
             }
 
             result.addAll(paperCards);
-            sheetsUsed.add(ps);
 
             if (foilInThisSlot) {
                 if (!foilAtEndOfPack) {
@@ -396,8 +392,6 @@ public class BoosterGenerator {
     public static List<PaperCard> getBoosterPack(SealedTemplateWithSlots template) {
         // SealedTemplateWithSlots ignores all Edition level params
         // Instead each slot defines their percentages on their own
-
-        CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
         List<PaperCard> result = new ArrayList<>();
         Map<String, BoosterSlot> boosterSlots = template.getNamedSlots();
 
@@ -502,7 +496,7 @@ public class BoosterGenerator {
      * Replaces an already present card in the booster with a card from the supplied print sheet.
      * Nothing is replaced if there is no matching rarity found.
      * @param booster in which a card gets replaced
-     * @param printSheetKey
+     * @param printSheetKey print sheet key from which take the replacement card
      */
     public static void replaceCardFromExtraSheet(List<PaperCard> booster, String printSheetKey) {
         PrintSheet replacementSheet = StaticData.instance().getPrintSheets().get(printSheetKey);
@@ -517,7 +511,7 @@ public class BoosterGenerator {
      * @param toAdd new card which replaces a card in the booster
      */
     public static void replaceCard(List<PaperCard> booster, PaperCard toAdd) {
-        Predicate<PaperCard> rarityPredicate = null;
+        Predicate<PaperCard> rarityPredicate;
         switch (toAdd.getRarity()) {
             case BasicLand:
                 rarityPredicate = PaperCardPredicates.IS_BASIC_LAND_RARITY;
@@ -574,7 +568,6 @@ public class BoosterGenerator {
         }
     }
 
-    @SuppressWarnings("unchecked")
     public static PrintSheet makeSheet(String sheetKey, Iterable<PaperCard> src) {
         PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', 2);

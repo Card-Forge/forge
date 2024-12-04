@@ -159,6 +159,9 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
+        // closeSplashScreen() is called early on non-Windows OS so it will not crash, LWJGL3 bug on AWT Splash.
+        if (OperatingSystem.isWindows())
+            getDeviceAdapter().closeSplashScreen();
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
@@ -257,8 +260,6 @@ public class Forge implements ApplicationListener {
                     /*  call preloadExtendedArt here, if we put it above we will  *
                      *  get error: No OpenGL context found in the current thread. */
                     preloadExtendedArt();
-                    // should be after create method but try to close this at a later time.
-                    getDeviceAdapter().closeSplashScreen();
                 });
             };
             //see if app or assets need updating

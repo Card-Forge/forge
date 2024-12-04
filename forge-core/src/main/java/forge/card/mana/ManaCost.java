@@ -99,7 +99,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         }
         int generic = parser.getTotalGenericCost(); // collect generic mana here
         this.hasNoCost = generic == -1;
-        this.genericCost = generic == -1 ? 0 : generic;
+        this.genericCost = hasNoCost ? 0 : generic;
         sealClass(shardsTemp);
     }
 

@@ -228,6 +228,11 @@ public abstract class ImageFetcher {
                 }
                 if (filename.equalsIgnoreCase("null.jpg"))
                     return;
+
+                if (ImageKeys.missingCards.contains(filename))
+                    return;
+
+                ImageKeys.missingCards.add(filename);
                 System.err.println("No specified file for '" + filename + "'.. Attempting to download from default Url");
                 tokenUrl = String.format("%s%s", ForgeConstants.URL_TOKEN_DOWNLOAD, filename);
             }

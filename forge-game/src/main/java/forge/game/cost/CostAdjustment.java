@@ -518,64 +518,58 @@ public class CostAdjustment {
         }
 
         if (st.hasParam("Type")) {
-            final String type = st.getParam("Type");
-            if (type.equals("Spell")) {
-                if (!sa.isSpell()) {
-                    return false;
-                }
-                if (st.hasParam("OnlyFirstSpell")) {
-                    if (activator == null ) {
+            switch (st.getParam("Type")) {
+                case "Spell" -> {
+                    if (!sa.isSpell()) {
                         return false;
                     }
-                    List<Card> list;
-                    if (st.hasParam("ValidCard")) {
-                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st, controller);
-                    } else {
-                        list = game.getStack().getSpellsCastThisTurn();
-                    }
+                    if (st.hasParam("OnlyFirstSpell")) {
+                        if (activator == null) {
+                            return false;
+                        }
+                        List<Card> list;
+                        if (st.hasParam("ValidCard")) {
+                            list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st, controller);
+                        } else {
+                            list = game.getStack().getSpellsCastThisTurn();
+                        }
 
-                    if (st.hasParam("ValidSpell")) {
-                        list = CardLists.filterAsList(list, CardPredicates.castSA(
-                            SpellAbilityPredicates.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, st))
-                        );
-                    }
+                        if (st.hasParam("ValidSpell")) {
+                            list = CardLists.filterAsList(list, CardPredicates.castSA(
+                                    SpellAbilityPredicates.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, st))
+                            );
+                        }
 
-                    if (CardLists.filterControlledBy(list, activator).size() > 0) {
+                        if (!CardLists.filterControlledBy(list, activator).isEmpty()) return false;
+                    }
+                }
+                case "Ability" -> {
+                    if (!sa.isActivatedAbility() || sa.isReplacementAbility()) {
                         return false;
                     }
-                }
-            } else if (type.equals("Ability")) {
-                if (!sa.isActivatedAbility() || sa.isReplacementAbility()) {
-                    return false;
-                }
-                if (st.hasParam("OnlyFirstActivation")) {
-                    int times = 0;
-                    for (IndividualCostPaymentInstance i : game.costPaymentStack) {
-                        SpellAbility paymentSa = i.getPayment().getAbility();
-                        if (paymentSa.isActivatedAbility() && st.matchesValidParam("ValidCard", paymentSa.getHostCard())) {
-                            times++;
-                            if (times > 1) {
-                                return false;
+                    if (st.hasParam("OnlyFirstActivation")) {
+                        int times = 0;
+                        for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+                            SpellAbility paymentSa = i.getPayment().getAbility();
+                            if (paymentSa.isActivatedAbility() && st.matchesValidParam("ValidCard", paymentSa.getHostCard())) {
+                                times++;
+                                if (times > 1) {
+                                    return false;
+                                }
                             }
                         }
                     }
                 }
-            } else if (type.equals("NonManaAbility")) {
-                if (!sa.isActivatedAbility() || sa.isManaAbility() || sa.isReplacementAbility()) {
-                    return false;
-                }
-            } else if (type.equals("MorphDown")) {
-                if (!sa.isSpell() || !sa.isCastFaceDown()) {
-                    return false;
-                }
-            } else if (type.equals("Foretell")) {
-                if (!sa.isForetelling()) {
-                    return false;
-                }
-                if (st.hasParam("FirstForetell") && activator.getNumForetoldThisTurn() > 0) {
-                    return false;
+                case "Foretell" -> {
+                    if (!sa.isForetelling()) {
+                        return false;
+                    }
+                    if (st.hasParam("FirstForetell") && activator.getNumForetoldThisTurn() > 0) {
+                        return false;
+                    }
                 }
             }
+
         }
         if (st.hasParam("AffectedZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(st.getParam("AffectedZone"));

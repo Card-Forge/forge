@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
@@ -36,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static forge.assets.FSkin.getDefaultSkinFile;
@@ -44,6 +47,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final FSkinFont LABEL_FONT = FSkinFont.get(12);
+    private TextRenderer textRenderer = new TextRenderer(true);
 
     private static FSkinColor getGroupHeaderForeColor() {
         if (Forge.isMobileAdventureMode)
@@ -63,20 +67,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int MIN_COLUMN_COUNT = Forge.isLandscapeMode() ? 2 : 1;
     private static final int MAX_COLUMN_COUNT = 10;
 
-    private List<Integer> _selectedIndices;
-    private List<Integer> selectedIndices() {
-        List<Integer> result = _selectedIndices;
-        if (result == null) {
-            synchronized (this) {
-                result = _selectedIndices;
-                if (result == null) {
-                    result = new ArrayList<>();
-                    _selectedIndices = result;
-                }
-            }
-        }
-        return _selectedIndices;
-    }
+    private Supplier<List<Integer>> selectedIndices = Suppliers.memoize(ArrayList::new);
     private int columnCount = 4;
     private float scrollHeight = 0;
     private ColumnDef pileBy = null;
@@ -84,34 +75,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo focalItem;
     private boolean updatingLayout;
     private float totalZoomAmount;
-    private List<ItemInfo> _orderedItems;
-    private List<ItemInfo> orderedItems() {
-        List<ItemInfo> result = _orderedItems;
-        if (result == null) {
-            synchronized (this) {
-                result = _orderedItems;
-                if (result == null) {
-                    result = new ArrayList<>();
-                    _orderedItems = result;
-                }
-            }
-        }
-        return _orderedItems;
-    }
-    private List<Group> _groups;
-    private List<Group> groups() {
-        List<Group> result = _groups;
-        if (result == null) {
-            synchronized (this) {
-                result = _groups;
-                if (result == null) {
-                    result = new ArrayList<>();
-                    _groups = result;
-                }
-            }
-        }
-        return _groups;
-    }
+    private Supplier<List<ItemInfo>> orderedItems = Suppliers.memoize(ArrayList::new);
+    private Supplier<List<Group>> groups = Suppliers.memoize(ArrayList::new);
 
     private class ExpandCollapseButton extends FLabel {
         private boolean isAllCollapsed;
@@ -124,7 +89,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
 
                 boolean collapsed = !isAllCollapsed;
-                for (Group group : groups()) {
+                for (Group group : groups.get()) {
                     group.isCollapsed = collapsed;
                 }
 
@@ -136,7 +101,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         private void updateIsAllCollapsed() {
             boolean isAllCollapsed0 = true;
-            for (Group group : groups()) {
+            for (Group group : groups.get()) {
                 if (!group.isCollapsed) {
                     isAllCollapsed0 = false;
                     break;
@@ -211,7 +176,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         getPnlOptions().add(cbPileByOptions);
 
         Group group = new Group(""); //add default group
-        groups().add(group);
+        groups.get().add(group);
         getScroller().add(group);
     }
 
@@ -242,26 +207,26 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             cbGroupByOptions.setSelectedItem(groupBy);
         }
 
-        groups().clear();
+        groups.get().clear();
 
         if (groupBy == null) {
-            groups().add(new Group(""));
+            groups.get().add(new Group(""));
             btnExpandCollapseAll.updateIsAllCollapsed();
         } else {
             for (String groupName : groupBy.getGroups()) {
-                groups().add(new Group(groupName));
+                groups.get().add(new Group(groupName));
             }
 
             //collapse all groups by default if all previous groups were collapsed
             if (btnExpandCollapseAll.isAllCollapsed) {
-                for (Group group : groups()) {
+                for (Group group : groups.get()) {
                     group.isCollapsed = true;
                 }
             }
         }
 
         getScroller().clear();
-        for (Group group : groups()) {
+        for (Group group : groups.get()) {
             getScroller().add(group);
         }
 
@@ -352,7 +317,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         //if not item hovered, use first fully visible item as focal point
         final float visibleTop = getScrollValue();
-        for (Group group : groups()) {
+        for (Group group : groups.get()) {
             if (group.getBottom() < visibleTop) {
                 continue;
             }
@@ -367,10 +332,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
             }
         }
-        if (orderedItems().isEmpty()) {
+        if (orderedItems.get().isEmpty()) {
             return null;
         }
-        return orderedItems().get(0);
+        return orderedItems.get().get(0);
     }
 
     @Override
@@ -380,9 +345,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     protected void onRefresh() {
-        Group otherItems = groupBy == null ? groups().get(0) : null;
+        Group otherItems = groupBy == null ? groups.get().get(0) : null;
 
-        for (Group group : groups()) {
+        for (Group group : groups.get()) {
             group.items.clear();
         }
         clearSelection();
@@ -395,19 +360,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
                 Group group;
                 if (groupIndex >= 0) {
-                    if (groupIndex >= groups().size())
-                        group = groups().get(groups().size() - 1);
+                    if (groupIndex >= groups.get().size())
+                        group = groups.get().get(groups.get().size() - 1);
                     else
-                        group = groups().get(groupIndex);
+                        group = groups.get().get(groupIndex);
                 } else {
                     if (otherItems == null) {
                         //reuse existing Other group if possible
-                        if (groups().size() > groupBy.getGroups().length) {
-                            otherItems = groups().get(groups().size() - 1);
+                        if (groups.get().size() > groupBy.getGroups().length) {
+                            otherItems = groups.get().get(groups.get().size() - 1);
                         } else {
                             otherItems = new Group(Forge.getLocalizer().getMessage("lblOther"));
                             otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
-                            groups().add(otherItems);
+                            groups.get().add(otherItems);
                         }
                     }
                     group = otherItems;
@@ -419,10 +384,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         }
 
-        if (otherItems == null && groups().size() > groupBy.getGroups().length) {
-            int index = groups().size() - 1;
-            if (index < groups().size() && index >= 0)
-                groups().remove(index); //remove Other group if empty
+        if (otherItems == null && groups.get().size() > groupBy.getGroups().length) {
+            int index = groups.get().size() - 1;
+            if (index < groups.get().size() && index >= 0)
+                groups.get().remove(index); //remove Other group if empty
             btnExpandCollapseAll.updateIsAllCollapsed();
         }
 
@@ -470,8 +435,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         float dx = itemWidth + gap;
         float dy = pileBy == null ? itemHeight + gap : itemHeight * PILE_SPACING_Y;
 
-        for (int i = 0; i < groups().size(); i++) {
-            Group group = groups().get(i);
+        for (int i = 0; i < groups.get().size(); i++) {
+            Group group = groups.get().get(i);
 
             if (forRefresh && pileBy != null) { //refresh piles if needed
                 //use TreeMap to build pile set so iterating below sorts on key
@@ -564,8 +529,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         if (forRefresh) { //refresh ordered items if needed
             int index = 0;
-            orderedItems().clear();
-            for (Group group : groups()) {
+            orderedItems.get().clear();
+            for (Group group : groups.get()) {
                 if (group.isCollapsed || group.items.isEmpty()) {
                     continue;
                 }
@@ -573,7 +538,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 for (Pile pile : group.piles) {
                     for (ItemInfo itemInfo : pile.items) {
                         itemInfo.index = index++;
-                        orderedItems().add(itemInfo);
+                        orderedItems.get().add(itemInfo);
                     }
                 }
             }
@@ -623,11 +588,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     private ItemInfo getItemAtPoint(float x, float y) {
         //check selected items first since they appear on top
-        for (int i = selectedIndices().size() - 1; i >= 0; i--) {
-            int currentIndex = selectedIndices().get(i);
-            if (currentIndex < 0 || orderedItems().size() <= currentIndex)
+        for (int i = selectedIndices.get().size() - 1; i >= 0; i--) {
+            int currentIndex = selectedIndices.get().get(i);
+            if (currentIndex < 0 || orderedItems.get().size() <= currentIndex)
                 continue;
-            ItemInfo item = orderedItems().get(currentIndex);
+            ItemInfo item = orderedItems.get().get(currentIndex);
             float relX = x + item.group.getScrollLeft() - item.group.getLeft();
             float relY = y + getScrollValue();
             if (item.contains(relX, relY)) {
@@ -635,8 +600,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         }
 
-        for (int i = groups().size() - 1; i >= 0; i--) {
-            Group group = groups().get(i);
+        for (int i = groups.get().size() - 1; i >= 0; i--) {
+            Group group = groups.get().get(i);
             if (!group.isCollapsed) {
                 for (int j = group.piles.size() - 1; j >= 0; j--) {
                     float relX = x + group.getScrollLeft() - group.getLeft();
@@ -659,14 +624,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     public T getItemAtIndex(int index) {
         if (index >= 0 && index < getCount()) {
-            return orderedItems().get(index).item;
+            return orderedItems.get().get(index).item;
         }
         return null;
     }
 
     @Override
     public int getIndexOfItem(T item) {
-        for (Group group : groups()) {
+        for (Group group : groups.get()) {
             for (ItemInfo itemInfo : group.items) {
                 if (itemInfo.item == item) {
                     //if group containing item is collapsed, expand it so the item can be selected and has a valid index
@@ -685,22 +650,22 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public int getSelectedIndex() {
-        return selectedIndices().isEmpty() ? -1 : selectedIndices().get(0);
+        return selectedIndices.get().isEmpty() ? -1 : selectedIndices.get().get(0);
     }
 
     @Override
     public Iterable<Integer> getSelectedIndices() {
-        return selectedIndices();
+        return selectedIndices.get();
     }
 
     @Override
     public int getCount() {
-        return orderedItems().size();
+        return orderedItems.get().size();
     }
 
     @Override
     public int getSelectionCount() {
-        return selectedIndices().size();
+        return selectedIndices.get().size();
     }
 
     @Override
@@ -728,7 +693,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     public void selectAll() {
         clearSelection();
-        IntStream.range(0, getCount()).forEach(selectedIndices()::add);
+        IntStream.range(0, getCount()).forEach(selectedIndices.get()::add);
         updateSelection();
         onSelectionChange();
     }
@@ -736,7 +701,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     protected void onSetSelectedIndex(int index) {
         clearSelection();
-        selectedIndices().add(index);
+        selectedIndices.get().add(index);
         updateSelection();
     }
 
@@ -744,24 +709,24 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     protected void onSetSelectedIndices(Iterable<Integer> indices) {
         clearSelection();
         for (Integer index : indices) {
-            selectedIndices().add(index);
+            selectedIndices.get().add(index);
         }
         updateSelection();
     }
 
     private void clearSelection() {
         int count = getCount();
-        for (Integer i : selectedIndices()) {
+        for (Integer i : selectedIndices.get()) {
             if (i < count) {
-                orderedItems().get(i).selected = false;
+                orderedItems.get().get(i).selected = false;
             }
         }
-        selectedIndices().clear();
+        selectedIndices.get().clear();
     }
 
     private void updateSelection() {
-        for (Integer i : selectedIndices()) {
-            orderedItems().get(i).selected = true;
+        for (Integer i : selectedIndices.get()) {
+            orderedItems.get().get(i).selected = true;
         }
     }
 
@@ -777,9 +742,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
 
         if (item.selected) { //unselect item if already selected
-            if (selectedIndices().size() > minSelections) {
+            if (selectedIndices.get().size() > minSelections) {
                 item.selected = false;
-                selectedIndices().remove((Object) item.index);
+                selectedIndices.get().remove((Object) item.index);
                 onSelectionChange();
                 item.group.scrollIntoView(item);
             }
@@ -788,8 +753,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (maxSelections <= 1 || (!KeyInputAdapter.isCtrlKeyDown() && !KeyInputAdapter.isShiftKeyDown())) {
             clearSelection();
         }
-        if (selectedIndices().size() < maxSelections) {
-            selectedIndices().add(0, item.index);
+        if (selectedIndices.get().size() < maxSelections) {
+            selectedIndices.get().add(0, item.index);
             item.selected = true;
             onSelectionChange();
             item.group.scrollIntoView(item);
@@ -800,29 +765,29 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void scrollSelectionIntoView() {
-        if (selectedIndices().isEmpty()) {
+        if (selectedIndices.get().isEmpty()) {
             return;
         }
-        int index = selectedIndices().get(0);
-        if (index < 0 || orderedItems().size() <= index) {
+        int index = selectedIndices.get().get(0);
+        if (index < 0 || orderedItems.get().size() <= index) {
             return;
         }
 
-        ItemInfo itemInfo = orderedItems().get(index);
+        ItemInfo itemInfo = orderedItems.get().get(index);
         getScroller().scrollIntoView(itemInfo);
     }
 
     @Override
     public Rectangle getSelectionBounds() {
-        if (selectedIndices().isEmpty()) {
+        if (selectedIndices.get().isEmpty()) {
             return new Rectangle();
         }
 
-        int index = selectedIndices().get(0);
-        if (index < 0 || orderedItems().size() <= index) {
+        int index = selectedIndices.get().get(0);
+        if (index < 0 || orderedItems.get().size() <= index) {
             return new Rectangle();
         }
-        ItemInfo itemInfo = orderedItems().get(index);
+        ItemInfo itemInfo = orderedItems.get().get(index);
         Vector2 relPos = itemInfo.group.getChildRelativePosition(itemInfo);
         return new Rectangle(itemInfo.group.screenPos.x + relPos.x - SEL_BORDER_SIZE + itemInfo.group.getLeft(),
                 itemInfo.group.screenPos.y + relPos.y - SEL_BORDER_SIZE,
@@ -831,21 +796,21 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void zoomSelected() {
-        if (selectedIndices().isEmpty()) {
+        if (selectedIndices.get().isEmpty()) {
             return;
         }
-        int index = selectedIndices().get(0);
-        if (index < 0 || orderedItems().size() <= index) {
+        int index = selectedIndices.get().get(0);
+        if (index < 0 || orderedItems.get().size() <= index) {
             return;
         }
 
-        ItemInfo itemInfo = orderedItems().get(index);
+        ItemInfo itemInfo = orderedItems.get().get(index);
         if (itemInfo != null) {
             if (itemInfo.getKey() instanceof CardThemedDeckGenerator || itemInfo.getKey() instanceof CommanderDeckGenerator
                     || itemInfo.getKey() instanceof ArchetypeDeckGenerator || itemInfo.getKey() instanceof DeckProxy) {
                 FDeckViewer.show(((DeckProxy) itemInfo.getKey()).getDeck());
             }
-            CardZoom.show(orderedItems(), orderedItems().indexOf(itemInfo), itemManager);
+            CardZoom.show(orderedItems.get(), orderedItems.get().indexOf(itemInfo), itemManager);
         }
     }
 
@@ -975,7 +940,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     FDeckViewer.show(((DeckProxy) item.getKey()).getDeck());
                     return true;
                 }
-                CardZoom.show(orderedItems(), orderedItems().indexOf(item), itemManager);
+                CardZoom.show(orderedItems.get(), orderedItems.get().indexOf(item), itemManager);
                 return true;
             }
             return false;
@@ -1029,6 +994,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private boolean selected, deckSelectMode, showRanking;
         private final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
         private DeckProxy deckProxy = null;
+        private String colorID = null;
         private FImageComplex deckCover = null;
         private Texture dpImg = null;
         //private TextureRegion tr;
@@ -1054,6 +1020,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     } else if (draftRank >= 25) {
                         draftRankImage = FSkinImage.DRAFTRANK_C;
                     }
+                }
+                if (((PaperCard) item).getColorID() != null) {
+                    colorID = ((PaperCard) item).getColorID().stream().map(MagicColor::toSymbol).collect(Collectors.joining());
                 }
             }
         }
@@ -1135,6 +1104,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                                 drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                         }
                     }
+                }
+                // spire colors
+                if (colorID != null && !colorID.isEmpty()) {
+                    textRenderer.drawText(g, colorID, FSkinFont.forHeight(w / 5), Color.WHITE, x, y + h / 4, w, h, y, h, false, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);

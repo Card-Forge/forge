@@ -572,6 +572,10 @@ public class GameAction {
             game.getTriggerHandler().registerActiveTrigger(copied, false);
         }
 
+        if (c.hasChosenColorSpire()) {
+            copied.setChosenColorID(ImmutableSet.copyOf(c.getChosenColorID()));
+        }
+
         // update state for view
         copied.updateStateForView();
 
@@ -1183,7 +1187,7 @@ public class GameAction {
         // in that case Always trigger should not Run
         if (preList.isEmpty()) {
             for (Player p : game.getPlayers()) {
-                for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterable()) {
+                for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
                     if (!c.getController().equals(p)) {
                         controllerChangeZoneCorrection(c);
                         affectedCards.add(c);
@@ -1265,7 +1269,7 @@ public class GameAction {
                     if (zt == ZoneType.Battlefield) {
                         continue;
                     }
-                    for (final Card c : p.getCardsIn(zt).threadSafeIterable()) {
+                    for (final Card c : p.getCardsIn(zt)) {
                         checkAgain |= stateBasedAction704_5d(c);
                          // Dungeon Card won't affect other cards, so don't need to set checkAgain
                         stateBasedAction_Dungeon(c);
@@ -1377,10 +1381,10 @@ public class GameAction {
                 if ((game.getRules().hasAppliedVariant(GameType.Commander)
                         || game.getRules().hasAppliedVariant(GameType.Brawl)
                         || game.getRules().hasAppliedVariant(GameType.Planeswalker)) && !checkAgain) {
-                    for (final Card c : p.getCardsIn(ZoneType.Graveyard).threadSafeIterable()) {
+                    for (final Card c : p.getCardsIn(ZoneType.Graveyard)) {
                         checkAgain |= stateBasedAction_Commander(c, mapParams);
                     }
-                    for (final Card c : p.getCardsIn(ZoneType.Exile).threadSafeIterable()) {
+                    for (final Card c : p.getCardsIn(ZoneType.Exile)) {
                         checkAgain |= stateBasedAction_Commander(c, mapParams);
                     }
                 }
@@ -1586,7 +1590,7 @@ public class GameAction {
 
         CardCollection toAssign = new CardCollection();
 
-        for (final Card c : p.getCreaturesInPlay().threadSafeIterable()) {
+        for (final Card c : p.getCreaturesInPlay()) {
             if (!c.hasSector()) {
                 toAssign.add(c);
                 if (!checkAgain) {
@@ -2036,11 +2040,11 @@ public class GameAction {
 
     private void drawStartingHand(Player p1) {
         //check initial hand
-        List<Card> lib1 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> lib1 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards());
         List<Card> hand1 = lib1.subList(0,p1.getMaxHandSize());
 
         //shuffle
-        List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards());
         Collections.shuffle(shuffledCards);
 
         //check a second hand
@@ -2223,14 +2227,18 @@ public class GameAction {
                 c.setChosenNumber(chosen);
             }
             for (Card c : spires) {
-                if (!c.hasChosenColor()) {
-                    List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
-                    String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
-                            Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
-                    SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
-                    sa.putParam("AILogic", "MostProminentInComputerDeck");
-                    List<String> chosenColors = takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices);
-                    c.setChosenColors(chosenColors);
+                // TODO: only do this for the AI, for the player part, get the encoded color from the deck file and pass
+                //  it to either player or the papercard object so it feels like rule based for the player side..
+                if (!c.hasChosenColorSpire()) {
+                    if (takesAction.isAI()) {
+                        List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
+                        String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
+                                Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
+                        SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
+                        sa.putParam("AILogic", "MostProminentInComputerDeck");
+                        Set<String> chosenColors = new HashSet<>(takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices));
+                        c.setChosenColorID(chosenColors);
+                    }
                 }
             }
             takesAction = game.getNextPlayerAfter(takesAction);
@@ -2456,7 +2464,7 @@ public class GameAction {
                     game.getAction().reveal(milledPlayer, destination, p, false, message, addSuffix);
                 }
                 game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +
-                        Lang.joinHomogenous(milled) + toZoneStr + ".");
+                        Lang.joinHomogenous(milledPlayer) + toZoneStr + ".");
             }
         }
 

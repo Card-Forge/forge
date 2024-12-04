@@ -129,20 +129,7 @@ public class CardDetailUtil {
     }
 
     public static String getCurrentColors(final CardStateView c) {
-        ColorSet curColors = c.getColors();
-        String strCurColors = "";
-
-        if (curColors.hasWhite()) { strCurColors += "{W}"; }
-        if (curColors.hasBlue())  { strCurColors += "{U}"; }
-        if (curColors.hasBlack()) { strCurColors += "{B}"; }
-        if (curColors.hasRed())   { strCurColors += "{R}"; }
-        if (curColors.hasGreen()) { strCurColors += "{G}"; }
-
-        if (strCurColors.isEmpty()) {
-            strCurColors = "{C}";
-        }
-
-        return strCurColors;
+        return c.getColors().toEnumSet().stream().map(MagicColor.Color::getSymbol).collect(Collectors.joining());
     }
 
     public static DetailColors getRarityColor(final CardRarity rarity) {
@@ -484,6 +471,16 @@ public class CardDetailUtil {
             }
             area.append("(noted type").append(card.getNotedTypes().size() == 1 ? ": " : "s: ");
             area.append(Lang.joinHomogenous(card.getNotedTypes()));
+            area.append(")");
+        }
+
+        // chosen spire
+        if (card.getChosenColorID() != null && !card.getChosenColorID().isEmpty()) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(").append(Localizer.getInstance().getMessage("lblSelected")).append(": ");
+            area.append(Lang.joinHomogenous(card.getChosenColorID().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
             area.append(")");
         }
 

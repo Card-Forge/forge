@@ -337,7 +337,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         int amount = entry.getValue();
         String poolCardRequest = CardDb.CardRequest.compose(
                 card.isFoil() ? CardDb.CardRequest.compose(card.getName(), true) : card.getName(),
-                card.getEdition(), card.getArtIndex());
+                card.getEdition(), card.getArtIndex(), card.getColorID());
         String originalRequestCandidate = null;
         for (Pair<String, Integer> originalRequest : originalCardRequests){
             String cardRequest = originalRequest.getLeft();

@@ -51,6 +51,7 @@ public final class CardRules implements ICardCharacteristics {
     private String meldWith;
     private String partnerWith;
     private boolean addsWildCardColor;
+    private int setColorID;
     private boolean custom;
 
     public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
@@ -70,6 +71,8 @@ public final class CardRules implements ICardCharacteristics {
         meldWith = "";
         partnerWith = "";
         addsWildCardColor = false;
+        setColorID = 0;
+
 
         //calculate color identity
         byte colMask = calculateColorIdentity(mainPart);
@@ -93,6 +96,7 @@ public final class CardRules implements ICardCharacteristics {
         meldWith = newRules.meldWith;
         partnerWith = newRules.partnerWith;
         addsWildCardColor = newRules.addsWildCardColor;
+        setColorID = newRules.setColorID;
         tokens = newRules.tokens;
     }
 
@@ -395,6 +399,10 @@ public final class CardRules implements ICardCharacteristics {
         return addsWildCardColor;
     }
 
+    public int getSetColorID() {
+        return setColorID;
+    }
+
     // vanguard card fields, they don't use sides.
     private int deltaHand;
     private int deltaLife;
@@ -446,6 +454,7 @@ public final class CardRules implements ICardCharacteristics {
         private String meldWith = "";
         private String partnerWith = "";
         private boolean addsWildCardColor = false;
+        private int setColorID = 0;
         private String handLife = null;
         private String normalizedName = "";
         private Set<String> supportedFunctionalVariants = null;
@@ -510,6 +519,7 @@ public final class CardRules implements ICardCharacteristics {
             result.meldWith = this.meldWith;
             result.partnerWith = this.partnerWith;
             result.addsWildCardColor = this.addsWildCardColor;
+            result.setColorID = this.setColorID;
             if (!tokens.isEmpty()) {
                 result.tokens = tokens;
             }
@@ -685,6 +695,8 @@ public final class CardRules implements ICardCharacteristics {
                         value = colonPos > 0 ? value.substring(1+colonPos) : null;
 
                         face.addSVar(variable, value);
+                    } else if (key.startsWith("SETCOLORID")) {
+                        this.setColorID = Integer.parseInt(value);
                     }
                     break;
 

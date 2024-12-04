@@ -1,5 +1,5 @@
 Name:Rune-Sealed Wall
-ManaCost:1 U
+ManaCost:2 U
 Types:Artifact Creature Wall
 PT:0/6
 K:Defender

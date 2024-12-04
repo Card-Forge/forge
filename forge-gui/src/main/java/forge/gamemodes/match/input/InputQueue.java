@@ -56,8 +56,9 @@ public class InputQueue extends Observable {
 
         if (topMostInput != inp) {
             System.out.println("Cannot remove input " + inp.getClass().getSimpleName() + " because it's not on top of stack. Stack = " + inputStack );
-        } else {
-          inputStack.pop();
+        } else if (topMostInput != null) {
+            // if topMostInput is null then it means the inputstack is already empty, why this is called twice?
+           inputStack.pop();
         }
         updateObservers();
     }

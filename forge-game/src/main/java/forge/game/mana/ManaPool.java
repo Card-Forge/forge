@@ -316,7 +316,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
      * Checks if the given mana cost can be paid from floating mana.
      * @param cost mana cost to pay for
      * @param sa ability to pay for
-     * @param player activating player
      * @param test actual payment is made if this is false
      * @param manaSpentToPay list of mana spent
      * @return whether the floating mana is sufficient to pay the cost fully

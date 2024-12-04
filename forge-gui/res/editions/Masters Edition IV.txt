@@ -5,7 +5,7 @@ Name=Masters Edition IV
 Code2=ME4
 Type=Online
 BoosterCovers=1
-Booster=10 Common, 3 Uncommon, 1 Rare, 1 fromSheet("ME4 UrzaLands")
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 ScryfallCode=ME4
 
 [cards]
@@ -278,20 +278,6 @@ ScryfallCode=ME4
 259c L Urza's Tower @Mark Poole
 259d L Urza's Tower @Mark Poole
 260 R Volcanic Island @Brian Snõddy
-
-[UrzaLands]
-1 Urza's Tower|ME4|1
-1 Urza's Tower|ME4|2
-1 Urza's Tower|ME4|3
-1 Urza's Tower|ME4|4
-1 Urza's Mine|ME4|1
-1 Urza's Mine|ME4|2
-1 Urza's Mine|ME4|3
-1 Urza's Mine|ME4|4
-1 Urza's Power Plant|ME4|1
-1 Urza's Power Plant|ME4|2
-1 Urza's Power Plant|ME4|3
-1 Urza's Power Plant|ME4|4
 
 [tokens]
 r_1_1_goblin

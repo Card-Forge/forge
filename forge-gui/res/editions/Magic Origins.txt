@@ -5,7 +5,7 @@ Name=Magic Origins
 Code2=ORI
 Type=Core
 BoosterCovers=5
-Booster=10 Common:!fromSheet("ORI Sample Cards"), 3 Uncommon:!fromSheet("ORI Sample Cards"), 1 RareMythic:!fromSheet("ORI Sample Cards"), 1 BasicLand
+Booster=10 Common:fromSheet("ORI cards"), 3 Uncommon:fromSheet("ORI cards"), 1 RareMythic:fromSheet("ORI cards"), 1 BasicLand
 FatPack=9
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=CORE_SET
@@ -284,6 +284,8 @@ ScryfallCode=ORI
 270 L Forest @Jonas De Ro
 271 L Forest @Jonas De Ro
 272 L Forest @Vincent Proce
+
+[precon product]
 273 R Aegis Angel @Aleksi Briclot
 274 C Divine Verdict @Kev Walker
 275 C Eagle of the Watch @Scott Murphy

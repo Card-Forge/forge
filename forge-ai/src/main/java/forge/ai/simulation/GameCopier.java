@@ -212,6 +212,8 @@ public class GameCopier {
 
     private void copyGameState(Game newGame, Player aiPlayer) {
         newGame.EXPERIMENTAL_RESTORE_SNAPSHOT = origGame.EXPERIMENTAL_RESTORE_SNAPSHOT;
+        newGame.AI_TIMEOUT = origGame.AI_TIMEOUT;
+        newGame.AI_CAN_USE_TIMEOUT = origGame.AI_CAN_USE_TIMEOUT;
         newGame.setAge(origGame.getAge());
 
         // TODO countersAddedThisTurn
@@ -355,13 +357,7 @@ public class GameCopier {
             newCard.setDamage(c.getDamage());
             newCard.setDamageReceivedThisTurn(c.getDamageReceivedThisTurn());
 
-            newCard.setChangedCardColors(c.getChangedCardColorsTable());
-            newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
-
-            newCard.setChangedCardTypes(c.getChangedCardTypesTable());
-            newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
-            newCard.setChangedCardKeywords(c.getChangedCardKeywords());
-            newCard.setChangedCardNames(c.getChangedCardNames());
+            newCard.copyFrom(c);
 
             for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {
                 newCard.addHiddenExtrinsicKeywords(kw.getRowKey(), kw.getColumnKey(), kw.getValue());

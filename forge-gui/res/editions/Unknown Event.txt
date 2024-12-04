@@ -90,7 +90,7 @@ UW02c U Identify the Culprit @
 WW02 S The Pleasant Taxer @
 CA03 C Unicycling Automaton @
 CB03 C May of the Machine @
-CG03a C Garruk's Lost Wolf // Hey, Has Anyone Seen Garruk? @
+CG03a C Garruk's Lost Wolf @
 CG03b C Growing Detective @
 CG03c C Investi-Gate @
 CG03d C Merfolk Surveyor @
@@ -269,7 +269,7 @@ PLA007 C Pin Collector's Booth @
 RA07a R Battle Myrsphere @
 RA07b R Chancellor of the Mulligan @
 RC07a R Call Up Emrakul to Help @
-RC07b R The Battle of Dragon Brothers // Fate Reforged @
+RC07b R The Battle of Dragon Brothers @
 RG07 R The Massive Zatcatl @
 RU07a R The Value Knight @
 RU07b R Fourth Stage of Magic Design @
@@ -318,7 +318,7 @@ CW12 C Taught by Serra @
 RA12a R Guildmark @
 RA12b R Trampled Lotus @
 RG12a R HONK! @
-RG12b R Clean, Fair Magic @
+RG12b R Clear, Fair Magic @
 RU12 R Untap, Upkeep, Draw @
 RZ12 R Eldest Dragon Highlander @
 RZ12b R Zimone's Homework @
@@ -374,9 +374,3 @@ RR66 R The Crafter @
 RU72 R The Rhystic Storyteller @
 RW90 R The Keeper of Favorite Cards @
 MZ99 M The Collector @
-ZZ1 R Anax and Cymede and Kynaios and Tiro @
-ZZ2 R Myojin of Night's Reach Grim Betrayal @
-ZZ3 C Garruk's Lost Wolf @
-ZZ4 R Sort of ____ and ____ @
-ZZ5 R Quest Compleated Best @
-ZZ6 R The Magic City, New @

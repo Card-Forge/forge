@@ -32,7 +32,6 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
 import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -90,6 +89,11 @@ public class MatchScreen extends FScreen {
     private ViewWinLose viewWinLose = null;
     private static List<FDisplayObject> potentialListener;
     private int selectedPlayer;
+
+
+    private final Map<Integer, Vector2> endpoints;
+    private final Set<CardView> cardsonBattlefield;
+    private final Set<PlayerView> playerViewSet;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -164,6 +168,9 @@ public class MatchScreen extends FScreen {
             log.setMenuTab(new HiddenMenuTab(log));
             devMenu.setMenuTab(new HiddenMenuTab(devMenu));
         }
+        endpoints = new HashMap<>();
+        cardsonBattlefield  = new HashSet<>();
+        playerViewSet = new HashSet<>();
     }
 
     private boolean is4Player() {
@@ -392,8 +399,7 @@ public class MatchScreen extends FScreen {
             if (Forge.isLandscapeMode() && (!GuiBase.isAndroid() || Forge.hasGamepad()) && !CardZoom.isOpen() && potentialListener != null) {
                 for (FDisplayObject object : potentialListener) {
                     if (object != null) {
-                        if (object instanceof FCardPanel) {
-                            FCardPanel cardPanel = (FCardPanel) object;
+                        if (object instanceof FCardPanel cardPanel) {
                             try {
                                 if (cardPanel.isHovered()) {
                                     VPlayerPanel vPlayerPanel = getPlayerPanel(cardPanel.getCard().getController());
@@ -431,9 +437,9 @@ public class MatchScreen extends FScreen {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                        } else if (object instanceof VStack.StackInstanceDisplay) {
+                        } else if (object instanceof VStack.StackInstanceDisplay vstackDisplay) {
                             try {
-                                CardView cardView = ((VStack.StackInstanceDisplay) object).stackInstance.getSourceCard();
+                                CardView cardView = vstackDisplay.stackInstance.getSourceCard();
                                 if (object.isHovered() && cardView != null && getStack().isVisible()) {
                                     float cardW = getHeight() * 0.45f;
                                     float cardH = FCardPanel.ASPECT_RATIO * cardW;
@@ -459,30 +465,40 @@ public class MatchScreen extends FScreen {
     }
 
     void drawArcs(Graphics g) {
-        //get all card targeting arrow origins on the battlefield
-        final Map<Integer, Vector2> endpoints = new HashMap<>();
-        final Set<CardView> cardsonBattlefield = new HashSet<>();
-        final Set<PlayerView> playerViewSet = new HashSet<>();
         final GameView game = MatchController.instance.getGameView();
+        if (game == null)
+            return;
+        //get all card targeting arrow origins on the battlefield
+        endpoints.clear();
+        cardsonBattlefield.clear();
+        playerViewSet.clear();
         try {
             for (PlayerView p : game.getPlayers()) {
-                if (p != null && playerPanelsList.contains(getPlayerPanel(p))) {
+                if (p == null)
+                    continue;
+                VPlayerPanel playerPanel = getPlayerPanel(p);
+                if (playerPanel != null && playerPanelsList.contains(playerPanel)) {
                     playerViewSet.add(p);
                     if (p.getBattlefield() != null) {
                         for (CardView c : p.getBattlefield()) {
-                            endpoints.put(c.getId(), CardAreaPanel.get(c).getTargetingArrowOrigin());
+                            CardAreaPanel panel = CardAreaPanel.get(c);
+                            Vector2 origin = panel.getTargetingArrowOrigin();
+                            //outside left bounds
+                            if (origin.x < playerPanel.getField().getLeft())
+                                continue;
+                            //outside right bounds
+                            if (origin.x > playerPanel.getField().getRight())
+                                continue;
+                            endpoints.put(c.getId(), origin);
                             cardsonBattlefield.add(c);
                         }
                     }
                 }
             }
-            //draw arrows for combat
-            final CombatView combat = game.getCombat();
-            for (CardView c : cardsonBattlefield) {
-                TargetingOverlay.assembleArrows(g, c, endpoints, combat, playerViewSet);
-            }
-        } catch (Exception e) {
-        }
+            if (endpoints.isEmpty())
+                return;
+            TargetingOverlay.assembleArrows(g, cardsonBattlefield, endpoints, game.getCombat(), playerViewSet);
+        } catch (Exception ignored) {}
     }
 
     @Override
@@ -511,7 +527,7 @@ public class MatchScreen extends FScreen {
                             }
                         }
                         revalidate(true);
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
                     }
                 }
                 break;
@@ -525,7 +541,7 @@ public class MatchScreen extends FScreen {
                             selectedPlayerPanel().getSelectedRow().setNextSelected(1);
                         }
                         revalidate(true);
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
                     }
                 }
                 break;
@@ -549,7 +565,7 @@ public class MatchScreen extends FScreen {
                             }
                         }
                         revalidate(true);
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
                     }
                 }
                 break;
@@ -563,7 +579,7 @@ public class MatchScreen extends FScreen {
                             selectedPlayerPanel().getSelectedRow().setPreviousSelected(1);
                         }
                         revalidate(true);
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
                     }
                 }
                 break;
@@ -576,7 +592,7 @@ public class MatchScreen extends FScreen {
                         } else {
                             selectedPlayerPanel().getSelectedRow().showZoom();
                         }
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
                     }
                 }
                 break;
@@ -591,7 +607,7 @@ public class MatchScreen extends FScreen {
                             //nullPotentialListener();
                             selectedPlayerPanel().getSelectedRow().tapChild();
                         }
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
                     }
                 }
                 break;
@@ -615,7 +631,7 @@ public class MatchScreen extends FScreen {
                 return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
             case Keys.ESCAPE:
                 if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) && !Forge.hasGamepad()) {//bypass check
-                    if (getActivePrompt().getBtnCancel().getText().equals(Forge.getLocalizer().getInstance().getMessage("lblEndTurn"))) {
+                    if (getActivePrompt().getBtnCancel().getText().equals(Forge.getLocalizer().getMessage("lblEndTurn"))) {
                         return false;
                     }
                 }
@@ -796,12 +812,11 @@ public class MatchScreen extends FScreen {
     }
 
     public void updateSingleCard(final CardView card) {
-        final CardAreaPanel pnl = CardAreaPanel.get(card);
-        if (pnl == null) {
+        if (card == null)
             return;
-        }
+        final CardAreaPanel pnl = CardAreaPanel.get(card);
         final ZoneType zone = card.getZone();
-        if (zone != null && zone == ZoneType.Battlefield) {
+        if (zone == ZoneType.Battlefield) {
             pnl.updateCard(card);
         } else { //ensure card not on battlefield is reset such that it no longer thinks it's on the battlefield
             pnl.setTapped(false);
@@ -818,28 +833,18 @@ public class MatchScreen extends FScreen {
 
     FSkinTexture getBG() {
         if (Forge.isMobileAdventureMode) {
-            switch (GameScene.instance().getAdventurePlayerLocation(false, true)) {
-                case "green":
-                    return FSkinTexture.ADV_BG_FOREST;
-                case "black":
-                    return FSkinTexture.ADV_BG_SWAMP;
-                case "red":
-                    return FSkinTexture.ADV_BG_MOUNTAIN;
-                case "blue":
-                    return FSkinTexture.ADV_BG_ISLAND;
-                case "white":
-                    return FSkinTexture.ADV_BG_PLAINS;
-                case "waste":
-                    return FSkinTexture.ADV_BG_WASTE;
-                case "cave":
-                    return FSkinTexture.ADV_BG_CAVE;
-                case "dungeon":
-                    return FSkinTexture.ADV_BG_DUNGEON;
-                case "castle":
-                    return FSkinTexture.ADV_BG_CASTLE;
-                default:
-                    return FSkinTexture.ADV_BG_COMMON;
-            }
+            return switch (GameScene.instance().getAdventurePlayerLocation(false, true)) {
+                case "green" -> FSkinTexture.ADV_BG_FOREST;
+                case "black" -> FSkinTexture.ADV_BG_SWAMP;
+                case "red" -> FSkinTexture.ADV_BG_MOUNTAIN;
+                case "blue" -> FSkinTexture.ADV_BG_ISLAND;
+                case "white" -> FSkinTexture.ADV_BG_PLAINS;
+                case "waste" -> FSkinTexture.ADV_BG_WASTE;
+                case "cave" -> FSkinTexture.ADV_BG_CAVE;
+                case "dungeon" -> FSkinTexture.ADV_BG_DUNGEON;
+                case "castle" -> FSkinTexture.ADV_BG_CASTLE;
+                default -> FSkinTexture.ADV_BG_COMMON;
+            };
         }
         return FSkinTexture.BG_MATCH;
     }
@@ -952,7 +957,7 @@ public class MatchScreen extends FScreen {
                     if (!hasActivePlane())
                         return;
             }
-            boolean isGameFast = MatchController.instance.isGameFast();
+            //boolean isGameFast = MatchController.instance.isGameFast(); //this used to control animation speed
             float midField = topPlayerPanel.getBottom();
             float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight() / 1.3f;
             float x = topPlayerPanel.getField().getLeft();

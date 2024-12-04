@@ -105,6 +105,7 @@ public interface ICostVisitor<T> {
         public T visit(CostFlipCoin cost) {
             return null;
         }
+
         @Override
         public T visit(CostForage cost) {
             return null;
@@ -146,7 +147,9 @@ public interface ICostVisitor<T> {
         }
 
         @Override
-        public T visit(CostPromiseGift cost) { return null; }
+        public T visit(CostPromiseGift cost) {
+            return null;
+        }
 
         @Override
         public T visit(CostPutCardToLib cost) {

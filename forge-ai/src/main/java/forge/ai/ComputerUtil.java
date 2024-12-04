@@ -78,6 +78,8 @@ public class ComputerUtil {
     }
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
         final Card source = sa.getHostCard();
+        final Card host = sa.getHostCard();
+        final Zone hz = host.isCopiedSpell() ? null : host.getZone();
         source.setSplitStateToPlayAbility(sa);
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -135,8 +137,15 @@ public class ComputerUtil {
                 return true;
             }
         }
-        //Should not arrive here
-        System.out.println("AI failed to play " + sa.getHostCard());
+        // FIXME: Should not arrive here, though the card seems to be stucked on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
+        System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
+        sa.setSkip(true);
+        if (host != null && hz != null && hz.is(ZoneType.Stack)) {
+            Card c = game.getAction().moveTo(hz.getZoneType(), host, null, null);
+            for (SpellAbility csa : c.getSpellAbilities()) {
+                csa.setSkip(true);
+            }
+        }
         return false;
     }
 
@@ -773,6 +782,7 @@ public class ComputerUtil {
         }
 
         CardLists.sortByPowerAsc(typeList);
+        // TODO prefer noncreatures without tap abilities
 
         final CardCollection tapList = new CardCollection();
 

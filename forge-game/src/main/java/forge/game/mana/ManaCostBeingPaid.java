@@ -93,7 +93,7 @@ public class ManaCostBeingPaid {
         public int getTotalGenericCost() {
             ShardCount c = unpaidShards.get(ManaCostShard.GENERIC);
             if (c == null) {
-                return unpaidShards.isEmpty() ? -1 : 0;
+                return unpaidShards.isEmpty() && cntX == 0 ? -1 : 0;
             }
             return c.totalCount;
         }

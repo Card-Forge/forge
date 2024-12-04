@@ -9,6 +9,7 @@ import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.assets.*;
 import forge.card.CardEdition;
+import forge.card.MagicColor;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.planarconquest.ConquestUtil;
@@ -1798,6 +1799,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             CardManagerPage cardSourceSection;
             DeckSection destination = DeckSection.matchingSection(card);
             final DeckSectionPage destinationPage = parentScreen.getPageForSection(destination);
+            // val for colorID setup
+            int val;
             switch (deckSection) {
             default:
             case Main:
@@ -1840,6 +1843,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 }
                 addCommanderItems(menu, card);
+                if ((val = card.getRules().getSetColorID()) > 0) {
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                        //sort options so current option is on top and selected by default
+                        Set<String> colorChoices = new HashSet<>(MagicColor.Constant.ONLY_COLORS);
+                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(val)), val, val, colorChoices, new Callback<>() {
+                            @Override
+                            public void run(List<String> result) {
+                                addCard(card.getColorIDVersion(new HashSet<>(result)));
+                                removeCard(card);
+                            }
+                        });
+                    }));
+                }
                 break;
             case Sideboard:
                 cardSourceSection = parentScreen.isLimitedEditor() ? parentScreen.getMainDeckPage() : parentScreen.getCatalogPage();
@@ -1879,6 +1895,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 }
                 addCommanderItems(menu, card);
+                if ((val = card.getRules().getSetColorID()) > 0) {
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                        //sort options so current option is on top and selected by default
+                        Set<String> colorChoices = new HashSet<>(MagicColor.Constant.ONLY_COLORS);
+                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(val)), val, val, colorChoices, new Callback<>() {
+                            @Override
+                            public void run(List<String> result) {
+                                addCard(card.getColorIDVersion(new HashSet<>(result)));
+                                removeCard(card);
+                            }
+                        });
+                    }));
+                }
                 break;
             case Commander:
                 if (parentScreen.editorType != EditorType.PlanarConquest || isPartnerCommander(card)) {

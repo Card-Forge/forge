@@ -159,7 +159,15 @@ public class StaticAbilityPanharmonicon {
             if (!stAb.matchesValidParam("ValidActivator", sa.getActivatingPlayer())) {
                 return false;
             }
-        } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce) 
+        } else if (trigMode.equals(TriggerType.BecomesTarget)) {
+            if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.Target))) {
+                return false;
+            }
+        } else if (trigMode.equals(TriggerType.BecomesTargetOnce)) {
+            if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.Targets))) {
+                return false;
+            }
+        } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce)
                 || trigMode.equals(TriggerType.DamageAll) || trigMode.equals(TriggerType.DamageDealtOnce)) {
             if (stAb.hasParam("CombatDamage") && stAb.getParam("CombatDamage").equalsIgnoreCase("True") != 
                     (Boolean) runParams.get(AbilityKey.IsCombatDamage)) {

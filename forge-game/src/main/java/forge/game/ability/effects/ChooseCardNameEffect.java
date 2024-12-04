@@ -22,12 +22,8 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
 
-        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
-        sb.append("names a card.");
-
-        return sb.toString();
+        return Lang.joinHomogenous(getTargetPlayers(sa)) + " names a card.";
     }
 
     @Override
@@ -61,7 +57,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-            String chosen = "";
+            String chosen;
             //This section was used for Momir Avatar, which no longer uses it - commented out 7/28/2021
             //if (randomChoice) {
             //String numericAmount = "X";

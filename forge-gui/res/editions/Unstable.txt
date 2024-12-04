@@ -10,270 +10,270 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=UST
 
 [cards]
-3a C Amateur Auteur
-3b C Amateur Auteur
-3c C Amateur Auteur
-3d C Amateur Auteur
-6 M Do-It-Yourself Seraph
-7 U Gimme Five
-8 C GO TO JAIL
-9 U Half-Kitten, Half-
-10 C Humming-
-11 R Jackknight
-12a U Knight of the Kitchen Sink $A
-12b U Knight of the Kitchen Sink $B
-12c U Knight of the Kitchen Sink $C
-12d U Knight of the Kitchen Sink $D
-12e U Knight of the Kitchen Sink $E
-12f U Knight of the Kitchen Sink $F
-13 U Knight of the Widget
-14 U Midlife Upgrade
-15 R Oddly Uneven
-16 C Old Guard
-17 C Ordinary Pony
-18 U Rhino-
-19 C Riveting Rigger
-20 R Rules Lawyer
-21 C Sacrifice Play
-22 C Shaggy Camel
-23 U Side Quest
-24 C Success!
-25 U Teacher's Pet
-26 R Animate Library
-27 C Blurry Beeble
-28 C Chipper Chopper
-29 R Clocknapper
-30 C Crafty Octopus
-31 U Crow Storm
-32 C Defective Detective
-33 U Five-Finger Discount
-34 R Graveyard Busybody
-35 U Half-Shark, Half-
-36 R Incite Insight
-37 U Kindly Cognician
-38 C Magic Word
-39 C Mer Man
-40 U More or Less
-41a C Novellamental
-41b C Novellamental
-41c C Novellamental
-41d C Novellamental
-42 C Numbing Jellyfish
-43 U S.N.E.A.K. Dispatcher
-44 U Socketed Sprocketer
-45 C Spell Suck
-46 U Spy Eye
-47 U Suspicious Nanny
-48 C Time Out
-49a R Very Cryptic Command $A
-49b R Very Cryptic Command $B
-49c R Very Cryptic Command $C
-49d R Very Cryptic Command $D
-49e R Very Cryptic Command $E
-49f R Very Cryptic Command $F
-50 C Wall of Fortune
-51 C Big Boa Constrictor
-52 C capital offense
-53 C Dirty Rat
-54a C Extremely Slow Zombie
-54b C Extremely Slow Zombie
-54c C Extremely Slow Zombie
-54d C Extremely Slow Zombie
-55 C Finders, Keepers
-56 R Hangman
-57 C Hazmat Suit (Used)
-58 C Hoisted Hireling
-59 U Inhumaniac
-60 R Masterful Ninja
-61 U Ninja
-62 U Old-Fashioned Vampire
-63 R Over My Dead Bodies
-64 U Overt Operative
-65 U "Rumors of My Death..."
-66 U Skull Saucer
-67a U Sly Spy $A
-67b U Sly Spy $B
-67c U Sly Spy $C
-67d U Sly Spy $D
-67e U Sly Spy $E
-67f U Sly Spy $F
-68 C Snickering Squirrel
-69 R Spike, Tournament Grinder
-70 U Squirrel-Powered Scheme
-71 C Steady-Handed Mook
-72 C Stinging Scorpion
-73 C Subcontract
-74 M Summon the Pack
-75 U Zombified
-76 R The Big Idea
-77 C Box of Free-Range Goblins
-78 C Bumbling Pangolin
-79 C Common Iguana
-80 R The Countdown Is at One
-81 C Feisty Stegosaurus
-82a U Garbage Elemental $A
-82b U Garbage Elemental $B
-82c U Garbage Elemental $C
-82d U Garbage Elemental $D
-82e U Garbage Elemental $E
-82f U Garbage Elemental $F
-83 U Goblin Haberdasher
-84 U Half-Orc, Half-
-85 C Hammer Helper
-86 U Hammer Jammer
-87 U Hammerfest Boomtacular
-88 M Infinity Elemental
-89 C It That Gets Left Hanging
-90 C Just Desserts
-91 C Painiac
-92 U Party Crasher
-93 R Steamflogger Boss
-94 R Steamflogger of the Month
-95 U Steamflogger Temp
-96 U Steamfloggery
-97 U Super-Duper Death Ray
-98a C Target Minotaur
-98b C Target Minotaur
-98c C Target Minotaur
-98d C Target Minotaur
-99 R Three-Headed Goblin
-100 C Work a Double
-101 C Wrench-Rigger
-102 R As Luck Would Have It
-103a C Beast in Show
-103b C Beast in Show
-103c C Beast in Show
-103d C Beast in Show
-104 U Chittering Doom
-105 U Clever Combo
-106 U Druid of the Sacred Beaker
-107 C Eager Beaver
-108 R Earl of Squirrel
-109 U First Pick
-110 U Ground Pounder
-111 U Half-Squirrel, Half-
-112 R Hydradoodle
-113a R Ineffable Blessing $A
-113b R Ineffable Blessing $B
-113c R Ineffable Blessing $C
-113d R Ineffable Blessing $D
-113e R Ineffable Blessing $E
-113f R Ineffable Blessing $F
-114 C Joyride Rigger
-115 U Monkey-
-116 C Mother Kangaroo
-117 C Multi-Headed
-118 C Really Epic Punch
-119 C Selfie Preservation
-120 R Serpentine
-121 U Shellephant
-122 U Slaying Mantis
-123 C Squirrel Dealer
-124 U Steamflogger Service Rep
-125 C Wild Crocodile
-126 C Willing Test Subject
-127 M Baron Von Count
-128 R Better Than One
-129 R Cramped Bunker
-130 M Dr. Julius Jumblemorph
-131 M The Grand Calcutron
-132 R Grusilda, Monster Masher
-133 R Hot Fix
-134 M Ol' Buzzbark
-135 M Phoebe, Head of S.N.E.A.K.
-136 M Urza, Academy Headmaster
-137 R X
-138 R Mary O'Kill
-139 R Angelic Rocket
-140 U Border Guardian
-141 U Buzzing Whack-a-Doodle
-142 U Clock of DOOOOOOOOOOOOM!
-143 U Cogmentor
-144 U Contraption Cannon
-145a C Curious Killbot
-145b C Delighted Killbot
-145c C Despondent Killbot
-145d C Enraged Killbot
-146 U Entirely Normal Armchair
-147a R Everythingamajig $A
-147b R Everythingamajig $B
-147c R Everythingamajig $C
-147d R Everythingamajig $D
-147e R Everythingamajig $E
-147f R Everythingamajig $F
-148 C Gnome-Made Engine
-149 R Handy Dandy Clone Machine
-150 R Kindslaver
-151 U Krark's Other Thumb
-152 U Labro Bot
-153 U Lobe Lobber
-154 C Mad Science Fair Project
-155 R Modular Monstrosity
-156 U Proper Laboratory Attire
-157 U Robo-
-158 R Split Screen
-159 U Staff of the Letter Magus
-160 U Stamp of Approval
-161 U Steam-Powered
-162 U Steel Squirrel
-163 M Sword of Dungeons & Dragons
-164 C Voracious Vacuum
-165a C Secret Base
-165b C Secret Base
-165c C Secret Base
-165d C Secret Base
-165e C Secret Base
-166 R Watermarket
-167 U Accessories to Murder
-168 C Applied Aeronautics
-169 U Arms Depot
-170 C Auto-Key
-171 M Bee-Bee Gun
-172 C Boomflinger
-173 C Buzz Buggy
-174 R Deadly Poison Sampler
-175 C Dictation Quillograph
-176 U Dispatch Dispensary
-177 C Division Table
-178 U Dogsnail Engine
-179 R Dual Doomsuits
-180 R Duplication Device
-181 M Faerie Aerie
-182 U Genetic Recombinator
-183 R Gift Horse
-184 U Gnomeball Machine
-185 R Goblin Slingshot
-186 R Guest List
-187 M Hard Hat Area
-188 C Head Banger
-189 R Hypnotic Swirly Disc
-190 C Inflation Station
-191 U Insufferable Syphon
-192 U Jamming Device
-193 C Lackey Recycler
-194 C Mandatory Friendship Shackles
-195 U Neural Network
-196 R Oaken Power Suit
-197 U Optical Optimizer
-198 M Pet Project
-199 C Quick-Stick Lick Trick
-200 M Rapid Prototyper
-201 R Record Store
-202 R Refibrillator
-203 C Sap Sucker
-204 U Sundering Fork
-205 U Targeting Rocket
-206 U Thud-for-Duds
-207 C Top-Secret Tunnel
-208 C Tread Mill
-209 U Turbo-Thwacking Auto-Hammer
-210 C Twiddlestick Charger
-211 U Widget Contraption
-212 L Plains
-213 L Island
-214 L Swamp
-215 L Mountain
-216 L Forest
+3a C Amateur Auteur @McLean Kendree
+3b C Amateur Auteur @McLean Kendree
+3c C Amateur Auteur @McLean Kendree
+3d C Amateur Auteur @McLean Kendree
+6 M Do-It-Yourself Seraph @David Sladek
+7 U Gimme Five @Jesper Ejsing
+8 C GO TO JAIL @Marco Teixeira
+9 U Half-Kitten, Half- @Andrea Radeck
+10 C Humming- @Mark Behm
+11 R Jackknight @Ben Wootten
+12a U Knight of the Kitchen Sink @Mark A. Nelson $A
+12b U Knight of the Kitchen Sink @Mark A. Nelson $B
+12c U Knight of the Kitchen Sink @Mark A. Nelson $C
+12d U Knight of the Kitchen Sink @Mark A. Nelson $D
+12e U Knight of the Kitchen Sink @Mark A. Nelson $E
+12f U Knight of the Kitchen Sink @Mark A. Nelson $F
+13 U Knight of the Widget @Emrah Elmasli
+14 U Midlife Upgrade @Hector Ortiz
+15 R Oddly Uneven @Ben Wootten
+16 C Old Guard @David Sladek
+17 C Ordinary Pony @Andrea Radeck
+18 U Rhino- @YW Tang
+19 C Riveting Rigger @Mark A. Nelson
+20 R Rules Lawyer @Sean Murray
+21 C Sacrifice Play @Matt Gaser
+22 C Shaggy Camel @Kari Christensen
+23 U Side Quest @Alex Konstad
+24 C Success! @Andrea Radeck
+25 U Teacher's Pet @Mark Behm
+26 R Animate Library @Raymond Swanland
+27 C Blurry Beeble @Jeff Miracola
+28 C Chipper Chopper @Dmitry Burmak
+29 R Clocknapper @Marco Teixeira
+30 C Crafty Octopus @Mark Behm
+31 U Crow Storm @YW Tang
+32 C Defective Detective @Matt Dixon
+33 U Five-Finger Discount @Milivoj Ćeran
+34 R Graveyard Busybody @Bram Sels
+35 U Half-Shark, Half- @Brynn Metheney
+36 R Incite Insight @David Sladek
+37 U Kindly Cognician @Mark Behm
+38 C Magic Word @Carl Frank
+39 C Mer Man @Mark Behm
+40 U More or Less @Chris Seaman
+41a C Novellamental @Tom Babbey
+41b C Novellamental @Tom Babbey
+41c C Novellamental @Tom Babbey
+41d C Novellamental @Tom Babbey
+42 C Numbing Jellyfish @Matt Dixon
+43 U S.N.E.A.K. Dispatcher @John Thacker
+44 U Socketed Sprocketer @David Sladek
+45 C Spell Suck @Michael Phillippi
+46 U Spy Eye @Ben Wootten
+47 U Suspicious Nanny @Chris Seaman
+48 C Time Out @Dave Allsop
+49a R Very Cryptic Command @Wayne England $A
+49b R Very Cryptic Command @Zoltan Boros $B
+49c R Very Cryptic Command @Zoltan Boros $C
+49d R Very Cryptic Command @Zoltan Boros $D
+49e R Very Cryptic Command @Zoltan Boros $E
+49f R Very Cryptic Command @Zoltan Boros $F
+50 C Wall of Fortune @Tom Babbey
+51 C Big Boa Constrictor @Kari Christensen
+52 C capital offense @Matt Dixon
+53 C Dirty Rat @Kari Christensen
+54a C Extremely Slow Zombie @Emrah Elmasli
+54b C Extremely Slow Zombie @Emrah Elmasli
+54c C Extremely Slow Zombie @Emrah Elmasli
+54d C Extremely Slow Zombie @Emrah Elmasli
+55 C Finders, Keepers @Mark Behm
+56 R Hangman @Alex Konstad
+57 C Hazmat Suit (Used) @Michael Phillippi
+58 C Hoisted Hireling @Alex Konstad
+59 U Inhumaniac @Matt Dixon
+60 R Masterful Ninja @Matt Gaser
+61 U Ninja @David Sladek
+62 U Old-Fashioned Vampire @Simon Dominic
+63 R Over My Dead Bodies @Even Amundsen
+64 U Overt Operative @Bram Sels
+65 U "Rumors of My Death..." @Alex Konstad
+66 U Skull Saucer @Mike Burns
+67a U Sly Spy @Michael Phillippi $A
+67b U Sly Spy @Michael Phillippi $B
+67c U Sly Spy @Michael Phillippi $C
+67d U Sly Spy @Michael Phillippi $D
+67e U Sly Spy @Michael Phillippi $E
+67f U Sly Spy @Michael Phillippi $F
+68 C Snickering Squirrel @Michael Phillippi
+69 R Spike, Tournament Grinder @Zoltan Boros
+70 U Squirrel-Powered Scheme @Even Amundsen
+71 C Steady-Handed Mook @Carl Frank
+72 C Stinging Scorpion @YW Tang
+73 C Subcontract @Hector Ortiz
+74 M Summon the Pack @Matt Cavotta
+75 U Zombified @Kev Walker
+76 R The Big Idea @Bram Sels
+77 C Box of Free-Range Goblins @Chris Seaman
+78 C Bumbling Pangolin @YW Tang
+79 C Common Iguana @Brynn Metheney
+80 R The Countdown Is at One @Jesper Ejsing
+81 C Feisty Stegosaurus @Kari Christensen
+82a U Garbage Elemental @Hector Ortiz $A
+82b U Garbage Elemental @Hector Ortiz $B
+82c U Garbage Elemental @Hector Ortiz $C
+82d U Garbage Elemental @Hector Ortiz $D
+82e U Garbage Elemental @Hector Ortiz $E
+82f U Garbage Elemental @Hector Ortiz $F
+83 U Goblin Haberdasher @Jesper Ejsing
+84 U Half-Orc, Half- @Kev Walker
+85 C Hammer Helper @Dave Allsop
+86 U Hammer Jammer @Wayne Reynolds
+87 U Hammerfest Boomtacular @Dave Allsop
+88 M Infinity Elemental @Seb McKinnon
+89 C It That Gets Left Hanging @Jesper Ejsing
+90 C Just Desserts @Zoltan Boros
+91 C Painiac @McLean Kendree
+92 U Party Crasher @Mike Burns
+93 R Steamflogger Boss @Warren Mahy
+94 R Steamflogger of the Month @Warren Mahy
+95 U Steamflogger Temp @Jeff Miracola
+96 U Steamfloggery @Emrah Elmasli
+97 U Super-Duper Death Ray @Even Amundsen
+98a C Target Minotaur @Warren Mahy
+98b C Target Minotaur @Warren Mahy
+98c C Target Minotaur @Warren Mahy
+98d C Target Minotaur @Warren Mahy
+99 R Three-Headed Goblin @Mike Burns
+100 C Work a Double @Carl Frank
+101 C Wrench-Rigger @Jesper Ejsing
+102 R As Luck Would Have It @Milivoj Ćeran
+103a C Beast in Show @Mike Burns
+103b C Beast in Show @Mike Burns
+103c C Beast in Show @Mike Burns
+103d C Beast in Show @Mike Burns
+104 U Chittering Doom @Kari Christensen
+105 U Clever Combo @Kev Walker
+106 U Druid of the Sacred Beaker @Simon Dominic
+107 C Eager Beaver @Andrea Radeck
+108 R Earl of Squirrel @Milivoj Ćeran
+109 U First Pick @John Thacker
+110 C Ground Pounder @Warren Mahy
+111 U Half-Squirrel, Half- @Andrea Radeck
+112 R Hydradoodle @Mathias Kollros
+113a R Ineffable Blessing @Milivoj Ćeran $A
+113b R Ineffable Blessing @Milivoj Ćeran $B
+113c R Ineffable Blessing @Milivoj Ćeran $C
+113d R Ineffable Blessing @Milivoj Ćeran $D
+113e R Ineffable Blessing @Milivoj Ćeran $E
+113f R Ineffable Blessing @Milivoj Ćeran $F
+114 C Joyride Rigger @Wayne Reynolds
+115 U Monkey- @Andrea Radeck
+116 C Mother Kangaroo @Andrea Radeck
+117 C Multi-Headed @YW Tang
+118 C Really Epic Punch @Ben Wootten
+119 C Selfie Preservation @Chris Seaman
+120 R Serpentine @Kari Christensen
+121 U Shellephant @Hector Ortiz
+122 U Slaying Mantis @Ben Wootten
+123 C Squirrel Dealer @Bram Sels
+124 U Steamflogger Service Rep @Warren Mahy
+125 C Wild Crocodile @Brynn Metheney
+126 C Willing Test Subject @Dmitry Burmak
+127 M Baron Von Count @Jesper Ejsing
+128 R Better Than One @Alex Konstad
+129 R Cramped Bunker @Ben Wootten
+130 M Dr. Julius Jumblemorph @Simon Dominic
+131 M The Grand Calcutron @Sean Murray
+132 R Grusilda, Monster Masher @Mathias Kollros
+133 R Hot Fix @David Sladek
+134 M Ol' Buzzbark @Wayne Reynolds
+135 M Phoebe, Head of S.N.E.A.K. @Ralph Horsley
+136 M Urza, Academy Headmaster @Terese Nielsen
+137 R X @Dmitry Burmak
+138 R Mary O'Kill @Simon Dominic
+139 R Angelic Rocket @Carl Critchlow
+140 U Border Guardian @Chris Seaman
+141 U Buzzing Whack-a-Doodle @Mark A. Nelson
+142 U Clock of DOOOOOOOOOOOOM! @Tom Babbey
+143 U Cogmentor @Matt Gaser
+144 U Contraption Cannon @Mike Burns
+145a C Curious Killbot @Alex Konstad
+145b C Delighted Killbot @Alex Konstad
+145c C Despondent Killbot @Alex Konstad
+145d C Enraged Killbot @Alex Konstad
+146 U Entirely Normal Armchair @Tom Babbey
+147a R Everythingamajig @Chris Seaman $A
+147b R Everythingamajig @Chris Seaman $B
+147c R Everythingamajig @Chris Seaman $C
+147d R Everythingamajig @Chris Seaman $D
+147e R Everythingamajig @Chris Seaman $E
+147f R Everythingamajig @Chris Seaman $F
+148 C Gnome-Made Engine @Sean Murray
+149 R Handy Dandy Clone Machine @Mike Burns
+150 R Kindslaver @Zoltan Boros
+151 U Krark's Other Thumb @Jeff Miracola
+152 U Labro Bot @Carl Critchlow
+153 U Lobe Lobber @Dmitry Burmak
+154 C Mad Science Fair Project @Carl Frank
+155 R Modular Monstrosity @Alex Konstad
+156 U Proper Laboratory Attire @Tom Babbey
+157 U Robo- @Matt Dixon
+158 R Split Screen @Simon Dominic
+159 U Staff of the Letter Magus @Daniel Ljunggren
+160 U Stamp of Approval @Zoltan Boros
+161 U Steam-Powered @Carl Critchlow
+162 U Steel Squirrel @Carl Critchlow
+163 M Sword of Dungeons & Dragons @Chris Rahn
+164 C Voracious Vacuum @Matt Dixon
+165a C Secret Base @John Thacker
+165b C Secret Base @Matt Gaser
+165c C Secret Base @Seb McKinnon
+165d C Secret Base @Dave Allsop
+165e C Secret Base @Simon Dominic
+166 R Watermarket @Simon Dominic
+167 U Accessories to Murder @Ralph Horsley
+168 C Applied Aeronautics @Jason Felix
+169 U Arms Depot @Chuck Lukacs
+170 C Auto-Key @Jason Felix
+171 M Bee-Bee Gun @Chuck Lukacs
+172 C Boomflinger @Steve Prescott
+173 C Buzz Buggy @Steve Prescott
+174 R Deadly Poison Sampler @Ralph Horsley
+175 C Dictation Quillograph @Ralph Horsley
+176 U Dispatch Dispensary @Ralph Horsley
+177 C Division Table @Franz Vohwinkel
+178 U Dogsnail Engine @Chuck Lukacs
+179 R Dual Doomsuits @Franz Vohwinkel
+180 R Duplication Device @Jason Felix
+181 M Faerie Aerie @Ralph Horsley
+182 U Genetic Recombinator @Chuck Lukacs
+183 R Gift Horse @Steve Prescott
+184 U Gnomeball Machine @Jason Felix
+185 R Goblin Slingshot @Steve Prescott
+186 R Guest List @Franz Vohwinkel
+187 M Hard Hat Area @Steve Prescott
+188 C Head Banger @Steve Prescott
+189 R Hypnotic Swirly Disc @Ralph Horsley
+190 C Inflation Station @Chuck Lukacs
+191 U Insufferable Syphon @Ralph Horsley
+192 U Jamming Device @Franz Vohwinkel
+193 C Lackey Recycler @Franz Vohwinkel
+194 C Mandatory Friendship Shackles @Franz Vohwinkel
+195 U Neural Network @Franz Vohwinkel
+196 R Oaken Power Suit @Chuck Lukacs
+197 U Optical Optimizer @Jason Felix
+198 M Pet Project @Franz Vohwinkel
+199 C Quick-Stick Lick Trick @Chuck Lukacs
+200 M Rapid Prototyper @Jason Felix
+201 R Record Store @Jason Felix
+202 R Refibrillator @Chuck Lukacs
+203 C Sap Sucker @Chuck Lukacs
+204 U Sundering Fork @Franz Vohwinkel
+205 U Targeting Rocket @Steve Prescott
+206 U Thud-for-Duds @Steve Prescott
+207 C Top-Secret Tunnel @Ralph Horsley
+208 C Tread Mill @Jason Felix
+209 U Turbo-Thwacking Auto-Hammer @Steve Prescott
+210 C Twiddlestick Charger @Ralph Horsley
+211 U Widget Contraption @Jason Felix
+212 L Plains @John Avon
+213 L Island @John Avon
+214 L Swamp @John Avon
+215 L Mountain @John Avon
+216 L Forest @John Avon
 
 [tokens]
 storm_crow

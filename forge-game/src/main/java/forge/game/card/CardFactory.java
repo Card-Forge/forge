@@ -264,17 +264,17 @@ public class CardFactory {
                 original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
                 for (Trigger t : card.getCurrentState().getTriggers()) {
                     if (t.isIntrinsic()) {
-                        original.addTrigger(t.copy(card, false));
+                        original.addTrigger(t);
                     }
                 }
                 for (StaticAbility st : card.getCurrentState().getStaticAbilities()) {
                     if (st.isIntrinsic()) {
-                        original.addStaticAbility(st.copy(card, false));
+                        original.addStaticAbility(st);
                     }
                 }
                 for (ReplacementEffect re : card.getCurrentState().getReplacementEffects()) {
                     if (re.isIntrinsic()) {
-                        original.addReplacementEffect(re.copy(card, false));
+                        original.addReplacementEffect(re);
                     }
                 }
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)

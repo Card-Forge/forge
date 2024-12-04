@@ -1,7 +1,6 @@
 package forge.util.collect;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
@@ -68,14 +67,6 @@ public interface FCollectionView<T> extends Iterable<T> {
      * @return a sublist.
      */
     List<T> subList(int fromIndex, int toIndex);
-
-    /**
-     * Get a thread-safe {@link Iterable}, ie. one that is not backed by this
-     * collection, but rather represents the state at the time this method is
-     * called. The iterator is read-only (does not support
-     * {@link Iterator#remove()}), as such an operation would have no meaning.
-     */
-    Iterable<T> threadSafeIterable();
 
     T get(final T obj);
 

@@ -275,6 +275,7 @@ public class ComputerUtilMana {
         }
 
         for (final SpellAbility ma : saList) {
+            // this rarely seems like a good idea
             if (ma.getHostCard() == saHost) {
                 continue;
             }
@@ -283,7 +284,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, new CardCollection())) {
+            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST))) {
                 continue;
             }
 
@@ -473,18 +474,18 @@ public class ComputerUtilMana {
     public static String predictManafromSpellAbility(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
         Card hostCard = saPayment.getHostCard();
 
-        String manaProduced = predictManaReplacement(saPayment, ai, toPay);
-        String originalProduced = manaProduced;
+        StringBuilder manaProduced = new StringBuilder(predictManaReplacement(saPayment, ai, toPay));
+        String originalProduced = manaProduced.toString();
 
         if (originalProduced.isEmpty()) {
-            return manaProduced;
+            return manaProduced.toString();
         }
 
         // Run triggers like Nissa
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
         runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
         runParams.put(AbilityKey.AbilityMana, saPayment);
-        runParams.put(AbilityKey.Produced, manaProduced);
+        runParams.put(AbilityKey.Produced, manaProduced.toString());
         for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
             SpellAbility trSA = tr.ensureAbility();
             if (trSA == null) {
@@ -496,7 +497,7 @@ public class ComputerUtilMana {
                 if (produced.equals("Chosen")) {
                     produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
                 }
-                manaProduced += " " + StringUtils.repeat(produced, " ", pAmount);
+                manaProduced.append(" ").append(StringUtils.repeat(produced, " ", pAmount));
             } else if (ApiType.ManaReflected.equals(trSA.getApi())) {
                 final String colorOrType = trSA.getParamOrDefault("ColorOrType", "Color");
                 // currently Color or Type, Type is colors + colorless
@@ -505,11 +506,11 @@ public class ComputerUtilMana {
                 if (reflectProperty.equals("Produced") && !originalProduced.isEmpty()) {
                     // check if a colorless shard can be paid from the trigger
                     if (toPay.equals(ManaCostShard.COLORLESS) && colorOrType.equals("Type") && originalProduced.contains("C")) {
-                        manaProduced += " " + "C";
+                        manaProduced.append(" " + "C");
                     } else if (originalProduced.length() == 1) {
                         // if length is only one, and it either is equal C == Type
                         if (colorOrType.equals("Type") || !originalProduced.equals("C")) {
-                            manaProduced += " " + originalProduced;
+                            manaProduced.append(" ").append(originalProduced);
                         }
                     } else {
                         // should it look for other shards too?
@@ -517,7 +518,7 @@ public class ComputerUtilMana {
                         for (String s : originalProduced.split(" ")) {
                             if (colorOrType.equals("Type") || !s.equals("C") && toPay.canBePaidWithManaOfColor(MagicColor.fromName(s))) {
                                 found = true;
-                                manaProduced += " " + s;
+                                manaProduced.append(" ").append(s);
                                 break;
                             }
                         }
@@ -525,7 +526,7 @@ public class ComputerUtilMana {
                         if (!found) {
                             for (String s : originalProduced.split(" ")) {
                                 if (colorOrType.equals("Type") || !s.equals("C")) {
-                                    manaProduced += " " + s;
+                                    manaProduced.append(" ").append(s);
                                     break;
                                 }
                             }
@@ -534,7 +535,7 @@ public class ComputerUtilMana {
                 }
             }
         }
-        return manaProduced;
+        return manaProduced.toString();
     }
 
     public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
@@ -833,7 +834,8 @@ public class ComputerUtilMana {
             if (test) {
                 resetPayment(paymentList);
             } else {
-                System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa.toString() + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
+                System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
+                sa.setSkip(true);
             }
             return false;
         }

@@ -313,6 +313,8 @@ public class CopyPermanentEffect extends TokenEffectBase {
                 copy.setState(copy.getCurrentStateName(), true, true);
             }
         }
+        // spire
+        copy.setChosenColorID(original.getChosenColorID());
 
         copy.setTokenSpawningAbility(sa);
         copy.setGamePieceType(GamePieceType.TOKEN);
