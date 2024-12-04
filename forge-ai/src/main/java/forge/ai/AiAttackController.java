@@ -789,6 +789,7 @@ public class AiAttackController {
                 }
             }
             remainingBlockers.removeAll(removedBlockers);
+            removedBlockers.clear();
             if (damage > 0) {
                 trampleDamage += damage;
             }
