@@ -579,13 +579,13 @@ public class AdventureEventData implements Serializable {
             description += "Block: " + getCardBlock() + "\n";
             description += "Boosters: " + String.join(", ", packConfiguration) + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (getPairingDescription()) + "\n\n";
-            description += String.format("Entry Fee (incl. reputation)\nGold %d[][+Gold][BLACK]\nMana Shards %d[][+Shards][BLACK]\n", Math.round(eventRules.goldToEnter * townPriceModifier), Math.round(eventRules.shardsToEnter * townPriceModifier));
+            description += String.format("Pay 1 Entry Fee\n- Gold %d[][+Gold][BLACK]\n- Mana Shards %d[][+Shards][BLACK]\n", Math.round(eventRules.goldToEnter * townPriceModifier), Math.round(eventRules.shardsToEnter * townPriceModifier));
             if (eventRules.acceptsBronzeChallengeCoin) {
-                description += "Bronze Challenge Coin [][+BronzeChallengeCoin][BLACK]\n\n";
+                description += "- Bronze Challenge Coin [][+BronzeChallengeCoin][BLACK]\n\n";
             } else if (eventRules.acceptsSilverChallengeCoin) {
-                description += "Silver Challenge Coin [][+SilverChallengeCoin][BLACK]\n\n";
+                description += "- Silver Challenge Coin [][+SilverChallengeCoin][BLACK]\n\n";
             } else if (eventRules.acceptsChallengeCoin) {
-                description += "Gold Challenge Coin [][+ChallengeCoin][BLACK]\n\n";
+                description += "- Gold Challenge Coin [][+ChallengeCoin][BLACK]\n\n";
             } else {
                 description += "\n";
             }
@@ -594,13 +594,13 @@ public class AdventureEventData implements Serializable {
             description = "Event Type: Jumpstart\n";
             description += "Block: " + getCardBlock() + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (getPairingDescription()) + "\n\n";
-            description += String.format("Entry Fee (incl. reputation)\nGold %d[][+Gold][BLACK]\nMana Shards %d[][+Shards][BLACK]\n", Math.round(eventRules.goldToEnter * townPriceModifier), Math.round(eventRules.shardsToEnter * townPriceModifier));
+            description += String.format("Pay 1 Entry Fee\n- Gold %d[][+Gold][BLACK]\n- Mana Shards %d[][+Shards][BLACK]\n", Math.round(eventRules.goldToEnter * townPriceModifier), Math.round(eventRules.shardsToEnter * townPriceModifier));
             if (eventRules.acceptsBronzeChallengeCoin) {
-                description += "Bronze Challenge Coin [][+BronzeChallengeCoin][BLACK]\n\n";
+                description += "- Bronze Challenge Coin [][+BronzeChallengeCoin][BLACK]\n\n";
             } else if (eventRules.acceptsSilverChallengeCoin) {
-                description += "Silver Challenge Coin [][+SilverChallengeCoin][BLACK]\n\n";
+                description += "- Silver Challenge Coin [][+SilverChallengeCoin][BLACK]\n\n";
             } else if (eventRules.acceptsChallengeCoin) {
-                description += "Gold Challenge Coin [][+ChallengeCoin][BLACK]\n\n";
+                description += "- Gold Challenge Coin [][+ChallengeCoin][BLACK]\n\n";
             } else {
                 description += "\n";
             }
