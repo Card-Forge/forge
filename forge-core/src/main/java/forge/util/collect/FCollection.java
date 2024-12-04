@@ -548,6 +548,15 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Iterable<T> threadSafeIterable() {
+        //create a new linked list for iterating to make it thread safe and avoid concurrent modification exceptions
+        return Iterables.unmodifiableIterable(new ArrayList<>(list));
+    }
+
     @Override
     public T get(final T obj) {
         if (obj == null) {
@@ -652,6 +661,9 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
                 return this;
             }
             throw new IndexOutOfBoundsException("Any index is out of bounds for an empty collection");
+        }
+        @Override public final Iterable<T> threadSafeIterable() {
+            return this;
         }
         @Override public final Object[] toArray() { return ArrayUtils.EMPTY_OBJECT_ARRAY; }
         @Override

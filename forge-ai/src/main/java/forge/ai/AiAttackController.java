@@ -771,7 +771,6 @@ public class AiAttackController {
         int currentAttackTax = 0;
         int trampleDamage = 0;
         CardCollection remainingBlockers = new CardCollection(blockers);
-        List<Card> removedBlockers = new ArrayList<>();
         for (Card attacker : CardLists.getKeyword(blockedAttackers, Keyword.TRAMPLE)) {
             // TODO might sort by quotient of dmg/cost for best combination
             Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
@@ -782,14 +781,12 @@ public class AiAttackController {
             currentAttackTax += taxCMC;
 
             int damage = ComputerUtilCombat.getAttack(attacker);
-            for (Card blocker : remainingBlockers) {
+            for (Card blocker : remainingBlockers.threadSafeIterable()) {
                 if (CombatUtil.canBlock(attacker, blocker) && damage > 0) {
                     damage -= ComputerUtilCombat.shieldDamage(attacker, blocker);
-                    removedBlockers.add(blocker);
+                    remainingBlockers.remove(blocker);
                 }
             }
-            remainingBlockers.removeAll(removedBlockers);
-            removedBlockers.clear();
             if (damage > 0) {
                 trampleDamage += damage;
             }
