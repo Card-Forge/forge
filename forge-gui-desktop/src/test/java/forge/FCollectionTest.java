@@ -5,7 +5,6 @@ import forge.game.card.CardCollection;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -15,7 +14,7 @@ public class FCollectionTest {
     /**
      * Just a quick test for FCollection.
      */
-    @Test
+    /*@Test
     void testBadIteratorLogic() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i < 5; i++)
@@ -27,7 +26,7 @@ public class FCollectionTest {
         assertEquals(cc.size(), 3);
     }
 
-    @Test
+    /*@Test
     void testBadIteratorLogicTwo() {
         List<Card> cards = new ArrayList<>();
         for (int i = 1; i <= 10; i++)
@@ -40,7 +39,7 @@ public class FCollectionTest {
             i++;
         }
         assertEquals(cc.size(), 1);
-    }
+    }*/// Commented out since we use synchronized collection and it doesn't support modification while iteration
 
     @Test
     void testCompletableFuture() {
