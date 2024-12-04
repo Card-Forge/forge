@@ -5,6 +5,7 @@ import forge.card.CardRules;
 import forge.card.ICardFace;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public interface IPaperCard extends InventoryItem, Serializable {
 
