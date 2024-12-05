@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.*;
 import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import forge.card.CardDb;
 import forge.card.CardStateName;
@@ -185,16 +186,9 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidSA")) {
             final String valid[] = sa.getParam("ValidSA").split(",");
-            Iterator<Card> it = tgtCards.iterator();
-            while (it.hasNext()) {
-                Card c = it.next();
-                if (AbilityUtils.getBasicSpellsFromPlayEffect(c, controller).stream()
-                        .noneMatch(SpellAbilityPredicates.isValid(valid, controller, source, sa))) {
-                    // it.remove will only remove item from the list part of CardCollection
-                    tgtCards.asSet().remove(c);
-                    it.remove();
-                }
-            }
+            final List<Card> invalid = tgtCards.stream().filter(c -> !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller, source, sa))).collect(Collectors.toList());
+            if (!invalid.isEmpty())
+                tgtCards.removeAll(invalid);
             if (tgtCards.isEmpty()) {
                 return;
             }
@@ -227,17 +221,10 @@ public class PlayEffect extends SpellAbilityEffect {
         while (!tgtCards.isEmpty() && amount > 0 && totalCMCLimit >= 0) {
             if (hasTotalCMCLimit) {
                 // filter out cards with mana value greater than limit
-                Iterator<Card> it = tgtCards.iterator();
                 final String [] valid = {"Spell.cmcLE" + totalCMCLimit};
-                while (it.hasNext()) {
-                    Card c = it.next();
-                    if (AbilityUtils.getBasicSpellsFromPlayEffect(c, controller).stream()
-                            .noneMatch(SpellAbilityPredicates.isValid(valid, controller, c, sa))) {
-                        // it.remove will only remove item from the list part of CardCollection
-                        tgtCards.asSet().remove(c);
-                        it.remove();
-                    }
-                }
+                final List<Card> invalid = tgtCards.stream().filter(c -> !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller, c, sa))).collect(Collectors.toList());
+                if (!invalid.isEmpty())
+                    tgtCards.removeAll(invalid);
                 if (tgtCards.isEmpty())
                     break;
                 params.put("CMCLimit", totalCMCLimit);

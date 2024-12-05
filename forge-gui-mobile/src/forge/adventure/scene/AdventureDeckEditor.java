@@ -581,7 +581,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                             FMenuItem addBasic = new FMenuItem(Forge.getLocalizer().getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> launchBasicLandDialog());
                             addItem(addBasic);
                         }
-                        if (!isShop && catalogPage != null && !(catalogPage instanceof ContentPreviewPage)) {
+                        if (!isShop && catalogPage != null && catalogPage instanceof CollectionCatalogPage && ItemManagerConfig.DRAFT_PACK != catalogPage.cardManager.getConfig()) {
                             // Add bulk sell menu option. This will sell all cards in the current filter.
                             int count = 0;
                             int value = 0;

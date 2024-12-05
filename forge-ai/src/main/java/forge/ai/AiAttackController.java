@@ -778,7 +778,7 @@ public class AiAttackController {
             currentAttackTax += taxCMC;
 
             int damage = ComputerUtilCombat.getAttack(attacker);
-            for (Card blocker : remainingBlockers) {
+            for (Card blocker : remainingBlockers.threadSafeIterable()) {
                 if (CombatUtil.canBlock(attacker, blocker) && damage > 0) {
                     damage -= ComputerUtilCombat.shieldDamage(attacker, blocker);
                     remainingBlockers.remove(blocker);

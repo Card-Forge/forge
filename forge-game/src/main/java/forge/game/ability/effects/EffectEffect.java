@@ -131,7 +131,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
         // Unique$ is for effects that should be one per player (e.g. Gollum, Obsessed Stalker)
         if (sa.hasParam("Unique")) {
-            for (Player eo : effectOwner) {
+            for (Player eo : effectOwner.threadSafeIterable()) {
                 if (eo.isCardInCommand(name)) {
                     effectOwner.remove(eo);
                 }

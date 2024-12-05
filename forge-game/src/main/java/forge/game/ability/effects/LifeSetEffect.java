@@ -68,7 +68,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
         }
 
         final Map<Player, Integer> lossMap = Maps.newHashMap();
-        for (final Player p : players) {
+        for (final Player p : players.threadSafeIterable()) {
             if (!p.isInGame()) {
                 continue;
             }
