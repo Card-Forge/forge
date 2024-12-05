@@ -2759,32 +2759,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public List<Card> getCommanders() {
         return commanders;
     }
-    public void setCommanders(List<Card> commanders) {
-        boolean needsUpdate = false;
-        //Remove any existing commanders not in the new list.
-        for(Card oldCommander : this.commanders) {
-            if(commanders.contains(oldCommander))
-                continue;
-            needsUpdate = true;
-            this.commanders.remove(oldCommander);
-            oldCommander.setCommander(false);
-        }
-        if(this.commanderEffect == null && !commanders.isEmpty())
-            this.createCommanderEffect();
-        //Add any new commanders that aren't in the existing list.
-        for(Card newCommander : commanders) {
-            assert(this.equals(newCommander.getOwner()));
-            if(this.commanders.contains(newCommander))
-                continue;
-
-            needsUpdate = true;
-            this.commanders.add(newCommander);
-            newCommander.setCommander(true);
-        }
-        if(needsUpdate) {
-            view.updateCommander(this);
-        }
-    }
 
     public void copyCommandersToSnapshot(Player toPlayer, Function<Card, Card> mapper) {
         //Seems like the rest of the logic for copying players should be in this class too.
