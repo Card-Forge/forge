@@ -733,6 +733,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     // not change the game state)
     // 2012/01/02: No longer used in calculating the finalized damage, but
     // retained for damageprediction. -Hellfish
+    // TODO make this more generic in looking at the ReplacementEffects
     @Override
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
         int restDamage = damage;
