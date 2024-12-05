@@ -156,8 +156,6 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
     }
 
     private static List<String> getInvalidTypes(SpellAbility sa) {
-        if(sa.getHostCard().hasAnyNotedType())
-            return (List<String>) sa.getHostCard().getNotedTypes();
         return sa.hasParam("InvalidTypes") ?
                 Arrays.asList(sa.getParam("InvalidTypes").split(",")) :
                 new ArrayList<>();
