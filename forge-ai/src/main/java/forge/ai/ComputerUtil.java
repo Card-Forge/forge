@@ -2572,7 +2572,13 @@ public class ComputerUtil {
                 }
             }
             if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
-                chosen = "Sliver";
+                // assume invalid types is all non-valid types
+                List <String> invalid = Lists.newArrayList(CardType.getAllCreatureTypes());
+                invalid.removeAll(validTypes);
+                if (sa.getHostCard().hasAnyNotedType())
+                    validTypes.removeAll((Collection<String>) sa.getHostCard().getNotedTypes());
+                chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), validTypes, false);
+                //chosen = "Sliver";
             }
 
         } else if (kindOfType.equals("Basic Land")) {
