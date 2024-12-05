@@ -875,29 +875,14 @@ public class ComputerUtilCard {
         int max = 0;
         String maxType = "";
 
-        // Check if the valid list is not empty
-        if (!valid.isEmpty()) {
-            // Iterate through typesInDeck and consider only valid types
-            for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
-                final String type = entry.getKey();
+        // Iterate through typesInDeck and consider only valid types
+        for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
+            final String type = entry.getKey();
 
-                // Only consider the types that are in the valid list
-                if (valid.contains(type)) {
-                    if (max < entry.getValue()) {
-                        max = entry.getValue();
-                        maxType = type;
-                    }
-                }
-            }
-        } else {
-            // If valid is empty, find the max from all typesInDeck
-            for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
-                final String type = entry.getKey();
-
-                if (max < entry.getValue()) {
+            // consider the types that are in the valid list
+            if ((valid.isEmpty() || valid.contains(type)) && max < entry.getValue()) {
                     max = entry.getValue();
                     maxType = type;
-                }
             }
         }
 
