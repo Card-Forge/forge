@@ -1133,7 +1133,7 @@ public abstract class GameState {
             p.getZone(zt).removeAllCards(true);
         }
 
-        p.setCommanders(Lists.newArrayList());
+        p.getCommanders().clear();
         p.clearTheRing();
 
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<>(ZoneType.class);
