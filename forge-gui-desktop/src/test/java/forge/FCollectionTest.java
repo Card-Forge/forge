@@ -48,7 +48,7 @@ public class FCollectionTest {
             cards.add(new Card(i, null));
         CardCollection cc = new CardCollection(cards);
         List<CompletableFuture<Integer>> futures = new ArrayList<>();
-        for (Card c : cc) {
+        for (Card c : cc.threadSafeIterable()) {
             futures.add(CompletableFuture.supplyAsync(() -> {
                 if (c.getId() % 2 > 0)
                     cc.remove(c);
