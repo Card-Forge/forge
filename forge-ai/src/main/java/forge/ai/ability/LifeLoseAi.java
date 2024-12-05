@@ -212,6 +212,9 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
         int n = AbilityUtils.calculateAmount(source, sa.getParam("LifeAmount"), sa);
         // what should be the limit where AI stops letting it lose life?
+        // TODO predict lose life modifier
+        // also check if life loss would trigger life gain for Activating Player
+        // and that resulting in another life loss
         if (payer.getLife() < 2 * n) {
             return true;
         }
