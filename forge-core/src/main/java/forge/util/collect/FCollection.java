@@ -43,12 +43,12 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * The {@link Set} representation of this collection.
      */
-    private final Set<T> set = Collections.synchronizedSet(new HashSet<>());
+    private final Set<T> set = new HashSet<>();
 
     /**
      * The {@link List} representation of this collection.
      */
-    private final List<T> list = Collections.synchronizedList(new ArrayList<>());
+    private final List<T> list = new ArrayList<>();
 
     /**
      * Create an empty {@link FCollection}.
