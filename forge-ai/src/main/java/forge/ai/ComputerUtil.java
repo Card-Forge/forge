@@ -2567,9 +2567,6 @@ public class ComputerUtil {
                 }
             }
 
-            if (sa.hasParam("Note") && sa.getHostCard().hasAnyNotedType())
-                validTypes.removeAll((Collection<String>) sa.getHostCard().getNotedTypes());
-
             if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
                 chosen = validTypes.size() == 1 ? (String) validTypes.toArray()[0] :
                         ComputerUtilCard.getMostProminentType(ai.getAllCards(), validTypes, false);

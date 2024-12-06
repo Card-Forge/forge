@@ -1,15 +1,6 @@
 package forge.ai.simulation;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import forge.game.card.CardCollectionView;
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
-
 import com.google.common.collect.Lists;
-
 import forge.ai.ComputerUtilAbility;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
@@ -17,12 +8,19 @@ import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CounterEnumType;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GameSimulationTest extends SimulationTest {
 
@@ -157,7 +155,7 @@ public class GameSimulationTest extends SimulationTest {
     @Test
     public void testEtbTriggers() {
         Game game = initAndCreateGame();
-        Player p0 =  game.getPlayers().get(0);
+        Player p0 = game.getPlayers().get(0);
         Player p = game.getPlayers().get(1);
         addCard("Black Knight", p);
         addCards("Swamp", 5, p);
@@ -1394,7 +1392,7 @@ public class GameSimulationTest extends SimulationTest {
         p.setLife(-1, null);
         game.getAction().checkStateEffects(true);
         assert (deathsShadow.getNetPower() == 13); // on negative life, should
-                                                   // always be 13/13
+        // always be 13/13
     }
 
     @Test
@@ -2558,10 +2556,10 @@ public class GameSimulationTest extends SimulationTest {
     @Test
     public void testVoloJournal() {
         Game game = initAndCreateGame();
-        Player p0 =  game.getPlayers().get(0);
+        Player p0 = game.getPlayers().get(0);
         Player p = game.getPlayers().get(1);
 
-        addCards("Island", 6, p);
+        addCards("Island", 7, p);
         addCards("Mountain", 2, p);
         addCards("Forest", 2, p);
 
@@ -2569,11 +2567,12 @@ public class GameSimulationTest extends SimulationTest {
         Card[] cards = {
                 addCardToZone("Cathartic Adept", p, ZoneType.Hand),
                 addCardToZone("Cathartic Adept", p, ZoneType.Hand),
-                addCardToZone("Ceta Disciple", p, ZoneType.Hand),
+                addCardToZone("Drowner Initiate", p, ZoneType.Hand),
+                addCardToZone("Atog", p, ZoneType.Hand),
                 addCardToZone("Atog", p, ZoneType.Hand)
         };
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
 
         SpellAbility playVoloSA = c.getFirstSpellAbility();
@@ -2583,7 +2582,7 @@ public class GameSimulationTest extends SimulationTest {
         sim.simulateSpellAbility(playVoloSA);
         Game simGame = sim.getSimulatedGameState();
 
-        for(Card card : cards) {
+        for (Card card : cards) {
             SpellAbility a1 = card.getSpellAbilities().get(0);
             a1.setActivatingPlayer(p);
             sim.simulateSpellAbility(a1);
@@ -2593,28 +2592,29 @@ public class GameSimulationTest extends SimulationTest {
         CardCollectionView btlf = simP.getCardsIn(ZoneType.Battlefield);
         List<String> words = List.of(new String[]{"Human", "Wizard", "Atog", "Merfolk"});
 
-        for(Card card : cards) {
+        for (Card card : btlf) {
             if (card.getName().equals("Volo's Journal")) {
                 // All words are present in the iterable
-                AssertJUnit.assertTrue(areWordsInIterable(words,card.getNotedTypes()));
+                AssertJUnit.assertTrue(areWordsInIterable(words, card.getNotedTypes()));
             }
         }
-
     }
 
     protected boolean areWordsInIterable(List<String> words, Iterable<String> iterable) {
-        Set<String> iterableSet = new HashSet<>();
+        // Create a frequency map for the words in the iterable
+        Map<String, Integer> frequencyMap = new HashMap<>();
         for (String item : iterable) {
-            iterableSet.add(item);  // Populate the set from the iterable
+            frequencyMap.put(item, frequencyMap.getOrDefault(item, 0) + 1);
         }
 
-        // Check if all words are present in the set
+        // Check if each word in the list appears exactly once
         for (String word : words) {
-            if (!iterableSet.contains(word)) {
-                return false;  // If any word is not found in the set, return false
+            if (frequencyMap.getOrDefault(word, 0) != 1) {
+                return false;  // If the word doesn't appear exactly once, return false
             }
         }
-        return true;  // All words are present in the iterable
+
+        return true;  // All words appear exactly once
     }
 
 }
