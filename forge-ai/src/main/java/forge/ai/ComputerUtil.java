@@ -2570,7 +2570,8 @@ public class ComputerUtil {
             if (sa.getHostCard().hasAnyNotedType())
                 validTypes.removeAll((Collection<String>) sa.getHostCard().getNotedTypes());
             if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
-                chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), validTypes, false);
+                chosen = validTypes.size() == 1 ? (String) validTypes.toArray()[0] :
+                        ComputerUtilCard.getMostProminentType(ai.getAllCards(), validTypes, false);
                 //chosen = "Sliver";
             }
 
