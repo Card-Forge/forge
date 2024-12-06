@@ -1,16 +1,12 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostTapType;
 import forge.game.keyword.Keyword;
@@ -23,11 +19,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PumpAi extends PumpAiBase {
 
@@ -403,7 +395,7 @@ public class PumpAi extends PumpAiBase {
         CardCollection list;
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("HighestPower") || sa.getParam("AILogic").equals("ContinuousBonus")) {
-                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source, sa);
+                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES), tgt.getValidTgts(), ai, source, sa);
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
 
@@ -450,7 +442,7 @@ public class PumpAi extends PumpAiBase {
                     return false;
                 }
 
-                List<Card> alliedTgts = CardLists.filter(tgts, Predicates.or(CardPredicates.isControlledByAnyOf(ai.getAllies()), CardPredicates.isController(ai)));
+                List<Card> alliedTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
                 List<Card> oppTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
 
                 Card destroyTgt = null;
@@ -512,7 +504,7 @@ public class PumpAi extends PumpAiBase {
         // Detain target nonland permanent: don't target noncreature permanents that don't have
         // any activated abilities.
         if ("DetainNonLand".equals(sa.getParam("AILogic"))) {
-            list = CardLists.filter(list, Predicates.or(CardPredicates.Presets.CREATURES, card -> {
+            list = CardLists.filter(list, CardPredicates.CREATURES.or(card -> {
                 for (SpellAbility sa1 : card.getSpellAbilities()) {
                     if (sa1.isActivatedAbility()) {
                         return true;
@@ -797,7 +789,7 @@ public class PumpAi extends PumpAiBase {
 
             List<String> toRemove = Lists.newArrayList();
             for (final String name : values.keySet()) {
-                if (!Iterables.any(oppList, CardPredicates.nameEquals(name))) {
+                if (!oppList.anyMatch(CardPredicates.nameEquals(name))) {
                     toRemove.add(name);
                 }
             }

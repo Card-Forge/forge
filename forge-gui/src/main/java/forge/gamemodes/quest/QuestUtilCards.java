@@ -17,16 +17,9 @@
  */
 package forge.gamemodes.quest;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.ICardDatabase;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
@@ -41,28 +34,23 @@ import forge.item.generation.BoosterSlots;
 import forge.item.generation.UnOpenedProduct;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.util.Aggregates;
-import forge.util.ItemPool;
-import forge.util.MyRandom;
+import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
  * created to decrease complexity of questData class
  */
 public final class QuestUtilCards {
-
-	private static final Predicate<PaperCard> COMMON_PREDICATE = IPaperCard.Predicates.Presets.IS_COMMON;
-	private static final Predicate<PaperCard> UNCOMMON_PREDICATE = IPaperCard.Predicates.Presets.IS_UNCOMMON;
-	private static final Predicate<PaperCard> RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC;
-	private static final Predicate<PaperCard> ONLY_RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE;
-	private static final Predicate<PaperCard> MYTHIC_PREDICATE = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
 
     private final QuestController  questController;
     private final QuestPreferences questPreferences;
@@ -97,7 +85,7 @@ public final class QuestUtilCards {
             for (String edCode : availableEditions) {
                 CardEdition ed = FModel.getMagicDb().getEditions().get(edCode);
                 // Duel decks might have only 2 types of basic lands
-                if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
+                if (CardEdition.Predicates.hasBasicLands.test(ed)) {
                     landCodes.add(edCode);
                 }
             }
@@ -115,10 +103,10 @@ public final class QuestUtilCards {
                 wastesCodes.add("OGW");
             }
         } else {
-            Iterable<CardEdition> allEditions = FModel.getMagicDb().getEditions();
-            for (CardEdition edition : Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands)) {
-                landCodes.add(edition.getCode());
-            }
+            FModel.getMagicDb().getEditions().stream()
+                    .filter(CardEdition.Predicates.hasBasicLands)
+                    .map(CardEdition::getCode)
+                    .forEach(landCodes::add);
             snowLandCodes.add("ICE");
             snowLandCodes.add("CSP");
             snowLandCodes.add("KHM");
@@ -211,7 +199,19 @@ public final class QuestUtilCards {
      * @return the composite predicate.
      */
     public Predicate<PaperCard> applyFormatFilter(Predicate<PaperCard> source) {
-       return questController.getFormat() == null ? source : Predicates.and(source, questController.getFormat().getFilterPrinted());
+        return questController.getFormat() == null ? source : source.and(questController.getFormat().getFilterPrinted());
+    }
+
+    /**
+     * @return a stream of cards that can be rewarded according to the quest format and preferences.
+     */
+    private Stream<PaperCard> getQuestCardPool() {
+        Stream<PaperCard> pool = FModel.getMagicDb().getCommonCards().streamAllCards();
+        if(!(questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0))
+            pool = pool.filter(CardDb.EDITION_NON_PROMO);
+        if(questController.getFormat() != null)
+            pool = pool.filter(questController.getFormat().getFilterPrinted());
+        return pool;
     }
 
     /**
@@ -220,113 +220,29 @@ public final class QuestUtilCards {
      * @return the card printed
      */
     public PaperCard addRandomRare() {
-        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
-        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
-                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
+        Stream<PaperCard> pool = getQuestCardPool();
+        final PaperCard card = pool
+                .filter(applyFormatFilter(PaperCardPredicates.IS_RARE_OR_MYTHIC))
+                .collect(StreamUtil.random()).get();
 
-        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
-
-        final PaperCard card = Aggregates.random(Iterables.filter(pool, myFilter));
         addSingleCard(card, 1);
         return card;
     }
 
     /**
-     * Adds a random common.
+     * Adds n random cards that match the given predicate (and all other format restrictions)
+     * to the player card pool.
      *
-     * @param n the number of cards to add
-     * @return the list of cards added
+     * @param n         Number of cards to add from the reward pool.
+     * @param predicate Filter to select possible new cards from.
+     * @return the list of cards added to the card pool.
      */
-    public List<PaperCard> addRandomCommon(final int n) {
-        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
-        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
-                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
+    public List<PaperCard> addRandomCards(final int n, Predicate<PaperCard> predicate) {
+        Stream<PaperCard> pool = getQuestCardPool();
+        final List<PaperCard> newCards = pool.filter(predicate).collect(StreamUtil.random(n));
 
-        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.COMMON_PREDICATE);
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(pool, myFilter), n);
         addAllCards(newCards);
         return newCards;
-    }
-
-    /**
-     * Adds a random uncommon.
-     *
-     * @param n the number of cards to add
-     * @return the list of cards added
-     */
-    public List<PaperCard> addRandomUncommon(final int n) {
-        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
-        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
-                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
-
-        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.UNCOMMON_PREDICATE);
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(pool, myFilter), n);
-        addAllCards(newCards);
-        return newCards;
-    }
-
-    /**
-     * Adds the random rare.
-     *
-     * @param n
-     *            the n
-     * @return the list
-     */
-    public List<PaperCard> addRandomRare(final int n) {
-        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
-        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
-                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
-
-        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
-
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(pool, myFilter), n);
-        addAllCards(newCards);
-        return newCards;
-    }
-
-    /**
-     * Adds the random rare.
-     *
-     * @param n
-     *            the n
-     * @return the list
-     */
-    public List<PaperCard> addRandomRareNotMythic(final int n) {
-        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
-        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
-                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
-
-        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.ONLY_RARE_PREDICATE);
-
-        final List<PaperCard> newCards = Aggregates.random(Iterables.filter(pool, myFilter), n);
-        addAllCards(newCards);
-        return newCards;
-    }
-
-    /**
-     * Adds the random rare.
-     *
-     * @param n
-     *            the n
-     * @return the list
-     */
-    public List<PaperCard> addRandomMythicRare(final int n) {
-        final boolean usePromos = questPreferences.getPrefInt(QPref.EXCLUDE_PROMOS_FROM_POOL) == 0;
-        final Collection<PaperCard> pool = usePromos ? FModel.getMagicDb().getCommonCards().getAllCards()
-                : FModel.getMagicDb().getCommonCards().getAllNonPromoCards();
-
-        final Predicate<PaperCard> myFilter = applyFormatFilter(QuestUtilCards.MYTHIC_PREDICATE);
-
-        final Iterable<PaperCard> cardPool = Iterables.filter(pool, myFilter);
-
-        if (!cardPool.iterator().hasNext()) {
-            return null;
-        }
-
-        final List<PaperCard> newCards = Aggregates.random(cardPool, n);
-        addAllCards(newCards);
-        return newCards;
-
     }
 
     /**
@@ -547,7 +463,9 @@ public final class QuestUtilCards {
      * @return the predicate
      */
     public static Predicate<CardEdition> isLegalInQuestFormat(final GameFormatQuest qFormat) {
-        return GameFormatQuest.QPredicates.isLegalInFormatQuest(qFormat);
+        if(qFormat == null)
+            return x -> true;
+        return edition -> qFormat.isSetLegal(edition.getCode());
     }
 
 
@@ -617,7 +535,7 @@ public final class QuestUtilCards {
     	List<PaperCard> temp = new ArrayList<>();
 
 	    for (PaperCard card : cards) {
-		    if (predicate.apply(card)) {
+		    if (predicate.test(card)) {
 		    	temp.add(card);
 		    }
 	    }
@@ -638,12 +556,12 @@ public final class QuestUtilCards {
      *            the count
      */
     private void generateTournamentsInShop(final int count) {
-        Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
-        if (questController.getFormat() != null) {
-            formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
-        }
-        Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
-        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack::fromSet), count));
+        List<TournamentPack> packs = FModel.getMagicDb().getEditions().stream()
+                .filter(CardEdition.Predicates.HAS_TOURNAMENT_PACK)
+                .filter(isLegalInQuestFormat(questController.getFormat()))
+                .map(TournamentPack::fromSet)
+                .collect(StreamUtil.random(count));
+        questAssets.getShopList().addAllOfTypeFlat(packs);
     }
 
     /**
@@ -653,12 +571,12 @@ public final class QuestUtilCards {
      *            the count
      */
     private void generateFatPacksInShop(final int count) {
-        Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_FAT_PACK;
-        if (questController.getFormat() != null) {
-            formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
-        }
-        Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
-        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack::fromSet), count));
+        List<FatPack> packs = FModel.getMagicDb().getEditions().stream()
+                .filter(CardEdition.Predicates.HAS_FAT_PACK)
+                .filter(isLegalInQuestFormat(questController.getFormat()))
+                .map(FatPack::fromSet)
+                .collect(StreamUtil.random(count));
+        questAssets.getShopList().addAllOfTypeFlat(packs);
     }
 
     private void generateBoosterBoxesInShop(final int count) {
@@ -669,14 +587,11 @@ public final class QuestUtilCards {
 
         Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_BOOSTER_BOX;
         if (questController.getFormat() != null) {
-            formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
+            formatFilter = formatFilter.and(isLegalInQuestFormat(questController.getFormat()));
         }
-        Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
 
-        List<CardEdition> editions = new ArrayList<>();
-        for (CardEdition e : rightEditions) {
-            editions.add(e);
-        }
+        List<CardEdition> editions = FModel.getMagicDb().getEditions().stream()
+                .filter(formatFilter).collect(Collectors.toList());
 
         Collections.shuffle(editions);
 
@@ -704,14 +619,14 @@ public final class QuestUtilCards {
      *            the count
      */
     private void generatePreconsInShop(final int count) {
-        final List<PreconDeck> meetRequirements = new ArrayList<>();
-        for (final PreconDeck deck : QuestController.getPrecons()) {
-            if (QuestController.getPreconDeals(deck).meetsRequiremnts(questController.getAchievements())
-                    && (null == questController.getFormat() || questController.getFormat().isSetLegal(deck.getEdition()))) {
-                meetRequirements.add(deck);
-            }
+        Predicate<PreconDeck> formatFilter = deck -> QuestController.getPreconDeals(deck).meetsRequiremnts(questController.getAchievements());
+        if (questController.getFormat() != null) {
+            formatFilter = formatFilter.and(deck -> questController.getFormat().isSetLegal(deck.getEdition()));
         }
-        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(meetRequirements, count));
+        final List<PreconDeck> decks = QuestController.getPrecons().stream()
+                .filter(formatFilter)
+                .collect(StreamUtil.random(count));
+        questAssets.getShopList().addAllOfTypeFlat(decks);
     }
 
     @SuppressWarnings("unchecked")
@@ -874,8 +789,8 @@ public final class QuestUtilCards {
         }
 
         // get all cards in the specified edition
-        Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(edition);
-        Iterable<PaperCard> editionCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter);
+        Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(edition);
+        Iterable<PaperCard> editionCards = IterableUtil.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter);
 
         ItemPool<PaperCard> ownedCards = questAssets.getCardPool();
         // 100% means at least one of every basic land and at least 4 of every other card in the set

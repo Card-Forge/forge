@@ -1,12 +1,12 @@
 package forge.card;
 
-import com.google.common.base.Predicate;
 import forge.card.CardDb.CardArtPreference;
 import forge.item.PaperCard;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import java.util.Set;
 
 public interface ICardDatabase extends Iterable<PaperCard> {
@@ -89,12 +89,15 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     Collection<PaperCard> getAllCards(CardEdition edition);
     Collection<PaperCard> getUniqueCards();
 
+    Stream<PaperCard> streamAllCards();
+    Stream<PaperCard> streamUniqueCards();
+
     /* UTILITY METHODS
      * =============== */
     int getMaxArtIndex(String cardName);
     int getArtCount(String cardName, String edition);
     // Utility Predicates
-    Predicate<? super PaperCard> wasPrintedInSets(List<String> allowedSetCodes);
-    Predicate<? super PaperCard> isLegal(List<String> allowedSetCodes);
+    Predicate<? super PaperCard> wasPrintedInSets(Collection<String> allowedSetCodes);
+    Predicate<? super PaperCard> isLegal(Collection<String> allowedSetCodes);
     Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity);
 }

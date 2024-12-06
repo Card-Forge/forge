@@ -1,7 +1,6 @@
 package forge.itemmanager.filters;
 
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -12,6 +11,8 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSpinner;
 import forge.util.ComparableOp;
+
+import java.util.function.Predicate;
 
 
 public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilter<T> {

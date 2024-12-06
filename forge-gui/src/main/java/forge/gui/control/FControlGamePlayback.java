@@ -1,26 +1,16 @@
 package forge.gui.control;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.google.common.eventbus.Subscribe;
-
 import forge.game.Game;
 import forge.game.card.CardView;
-import forge.game.event.GameEvent;
-import forge.game.event.GameEventBlockersDeclared;
-import forge.game.event.GameEventGameFinished;
-import forge.game.event.GameEventGameStarted;
-import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventPlayerPriority;
-import forge.game.event.GameEventSpellAbilityCast;
-import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventTurnPhase;
-import forge.game.event.IGameEventVisitor;
+import forge.game.event.*;
 import forge.gamemodes.match.input.InputPlaybackControl;
 import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
+
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
     private InputPlaybackControl inputPlayback;

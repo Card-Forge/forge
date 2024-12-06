@@ -1,12 +1,7 @@
 package forge.ai.ability;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
@@ -24,6 +19,10 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 public class MillAi extends SpellAbilityAi {
 
     @Override
@@ -37,7 +36,7 @@ public class MillAi extends SpellAbilityAi {
             return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         } else if (aiLogic.equals("LilianaMill")) {
             // Only mill if a "Raise Dead" target is available, in case of control decks with few creatures
-            return CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES).size() >= 1;
+            return CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES).size() >= 1;
         }
         return true;
     }

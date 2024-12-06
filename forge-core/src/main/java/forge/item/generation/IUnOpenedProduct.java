@@ -1,10 +1,9 @@
 package forge.item.generation;
 
-import java.util.List;
-
-import com.google.common.base.Supplier;
-
 import forge.item.PaperCard;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * TODO: Write javadoc for this type.

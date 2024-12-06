@@ -17,7 +17,6 @@
  */
 package forge.game.player;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.ImageKeys;
 import forge.LobbyPlayer;
@@ -31,7 +30,6 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
 import forge.game.keyword.*;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
@@ -65,7 +63,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * <p>
@@ -357,7 +354,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Should keep player relations somewhere in the match structure
      */
     public final PlayerCollection getAllies() {
-        return getAllOtherPlayers().filter(Predicates.not(PlayerPredicates.isOpponentOf(this)));
+        return getAllOtherPlayers().filter(PlayerPredicates.isOpponentOf(this).negate());
     }
 
     public final PlayerCollection getTeamMates(final boolean inclThis) {
@@ -1628,7 +1625,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         Iterable<Card> milledView = getCardsIn(ZoneType.Library);
         // 614.13c
         if (sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB) != null) {
-            milledView = Iterables.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
+            milledView = IterableUtil.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
         }
         CardCollectionView milled = new CardCollection(Iterables.limit(milledView, n));
 
@@ -1910,7 +1907,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final Iterable<Player> getAttackedPlayersMyTurn() {
-        return Iterables.filter(attackedThisTurn.keySet(), Player.class);
+        return IterableUtil.filter(attackedThisTurn.keySet(), Player.class);
     }
     public final List<Player> getAttackedPlayersMyLastTurn() {
         return attackedPlayersLastTurn;
@@ -1920,7 +1917,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setAttackedPlayersMyLastTurn(Iterable<Player> players) {
         attackedPlayersLastTurn.clear();
-        Iterables.addAll(attackedPlayersLastTurn, players);
+        players.forEach(attackedPlayersLastTurn::add);
     }
 
     public final List<Player> getAttackedPlayersMyCombat() {
@@ -2082,13 +2079,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasMetalcraft() {
-        return CardLists.count(getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS) >= 3;
+        return CardLists.count(getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS) >= 3;
     }
 
     public final boolean hasDesert() {
-        return Iterables.any(
-                getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)),
-                CardPredicates.isType("Desert"));
+        return getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)).anyMatch(CardPredicates.isType("Desert"));
     }
 
     public final boolean hasThreshold() {
@@ -2121,7 +2116,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasLandfall() {
-        return Iterables.any(getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null), CardPredicates.Presets.LANDS);
+        return getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null).stream()
+                .anyMatch(CardPredicates.LANDS);
     }
 
     public boolean hasFerocious() {
@@ -2436,29 +2432,29 @@ public class Player extends GameEntity implements Comparable<Player> {
      * use to get a list of creatures in play for a given player.
      */
     public CardCollection getCreaturesInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
     }
 
     public CardCollection getPlaneswalkersInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.PLANESWALKERS);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.PLANESWALKERS);
     }
 
     public CardCollection getBattlesInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.BATTLES);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.BATTLES);
     }
 
     /**
      * use to get a list of tokens in play for a given player.
      */
     public CardCollection getTokensInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.TOKEN);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.TOKEN);
     }
 
     /**
      * use to get a list of all lands a given player has on the battlefield.
      */
     public CardCollection getLandsInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS);
     }
 
     public boolean isCardInPlay(final String cardName) {
@@ -3660,7 +3656,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean isCursed() {
-        return CardLists.count(getAttachedCards(), CardPredicates.Presets.CURSE) > 0;
+        return CardLists.count(getAttachedCards(), CardPredicates.CURSE) > 0;
     }
 
     public boolean canDiscardBy(SpellAbility sa, final boolean effect) {
@@ -3814,9 +3810,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean hasUrzaLands() {
         final CardCollectionView landsControlled = getCardsIn(ZoneType.Battlefield);
-        return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))
-                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Power-Plant")))
-                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Tower")));
+        return landsControlled.anyMatch(CardPredicates.isType("Urza's").and(CardPredicates.isType("Mine")))
+                && landsControlled.anyMatch(CardPredicates.isType("Urza's").and(CardPredicates.isType("Power-Plant")))
+                && landsControlled.anyMatch(CardPredicates.isType("Urza's").and(CardPredicates.isType("Tower")));
     }
 
     public void revealFaceDownCards() {
@@ -3956,7 +3952,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public List<String> getUnlockedDoors() {
-        return StreamSupport.stream(getCardsIn(ZoneType.Battlefield).spliterator(), false)
+        return StreamUtil.stream(getCardsIn(ZoneType.Battlefield))
                 .filter(Card::isRoom)
                 .map(Card::getUnlockedRoomNames)
                 .flatMap(Collection::stream)

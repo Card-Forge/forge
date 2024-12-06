@@ -254,7 +254,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
             if (format == null) {
                 format = FModel.getQuest().getMainFormat();
             }
-            if (format == null || format.getFilterRules().apply(card)) {
+            if (format == null || format.getFilterRules().test(card)) {
                 result.add(qw);
             }
         }

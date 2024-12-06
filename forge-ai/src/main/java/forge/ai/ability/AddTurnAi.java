@@ -17,16 +17,15 @@
  */
 package forge.ai.ability;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 /**
  * <p>

@@ -18,11 +18,10 @@
 
 package forge.model;
 
-import com.google.common.base.Predicate;
 import forge.gamemodes.limited.CustomLimited;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.item.SealedTemplate;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
@@ -31,6 +30,7 @@ import forge.util.FileUtil;
 
 import java.io.File;
 import java.util.List;
+import java.util.function.Predicate;
 
 /** 
  * The class MetaSet. This class is used to define 'special'
@@ -177,7 +177,7 @@ public class MetaSet {
                 return new UnOpenedProduct(FModel.getMagicDb().getTournamentPacks().get(data));
 
             case JoinedSet:
-                Predicate<PaperCard> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
+                Predicate<PaperCard> predicate = PaperCardPredicates.printedInSets(data.split(" "));
                 return new UnOpenedProduct(SealedTemplate.genericDraftBooster, predicate);
 
             case Choose: return UnOpenedMeta.choose(data);

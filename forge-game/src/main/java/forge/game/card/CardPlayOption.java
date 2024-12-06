@@ -1,13 +1,12 @@
 package forge.game.card;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.MagicColor;
 import forge.game.ability.AbilityUtils;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
+import org.apache.commons.lang3.StringUtils;
 
 public final class CardPlayOption {
     public enum PayManaCost {

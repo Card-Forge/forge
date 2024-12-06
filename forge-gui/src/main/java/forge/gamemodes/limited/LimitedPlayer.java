@@ -14,6 +14,7 @@ import forge.model.FModel;
 import forge.util.TextUtil;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LimitedPlayer {
     // A Player class for inside some type of limited environment, like Draft.
@@ -731,7 +732,9 @@ public class LimitedPlayer {
     public void addSingleBoosterPack() {
         // if this is just a normal draft, allow picking a pack from any set
         // If this is adventure or quest or whatever then we should limit it to something
-        List<CardEdition> possibleEditions = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getEditions(), CardEdition.Predicates.CAN_MAKE_BOOSTER));
+        List<CardEdition> possibleEditions = FModel.getMagicDb().getEditions().stream()
+                .filter(CardEdition.Predicates.CAN_MAKE_BOOSTER)
+                .collect(Collectors.toList());
         CardEdition edition = chooseEdition(possibleEditions);
         if (edition == null) {
             addLog(name() + " chose not to add a booster pack to the draft.");

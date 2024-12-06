@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -133,7 +131,7 @@ public class LifeSetAi extends SpellAbilityAi {
         }
 
         if (sourceName.equals("Eternity Vessel")
-                && (Iterables.any(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vampire Hexmage")) || (source.getCounters(CounterEnumType.CHARGE) == 0))) {
+                && (ai.getOpponents().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Vampire Hexmage")) || (source.getCounters(CounterEnumType.CHARGE) == 0))) {
             return false;
         }
 

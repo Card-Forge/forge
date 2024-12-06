@@ -1,20 +1,15 @@
 package forge.ai.simulation;
 
 import forge.ai.ComputerUtilAbility;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
-
-import org.apache.commons.math3.util.CombinatoricsUtils;
-
 import forge.ai.ComputerUtilCost;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import org.apache.commons.math3.util.CombinatoricsUtils;
+
+import java.util.*;
 
 public class SpellAbilityChoicesIterator {
     private final SimulationController controller;

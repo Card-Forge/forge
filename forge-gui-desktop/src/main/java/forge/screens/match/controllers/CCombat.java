@@ -1,8 +1,7 @@
 package forge.screens.match.controllers;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
+import org.apache.commons.lang3.StringUtils;
 
 import forge.game.GameEntityView;
 import forge.game.card.CardView;

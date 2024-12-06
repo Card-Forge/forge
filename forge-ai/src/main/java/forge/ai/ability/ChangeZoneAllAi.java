@@ -1,28 +1,9 @@
 package forge.ai.ability;
 
-import java.util.Collections;
-import java.util.Map;
-
-import com.google.common.collect.Iterables;
-
-import forge.ai.AiController;
-import forge.ai.AiPlayerPredicates;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -32,6 +13,9 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.Collections;
+import java.util.Map;
 
 public class ChangeZoneAllAi extends SpellAbilityAi {
     @Override
@@ -93,7 +77,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         } else if ("ExileGraveyards".equals(aiLogic)) {
             for (Player opp : ai.getOpponents()) {
                 CardCollectionView cardsGY = opp.getCardsIn(ZoneType.Graveyard);
-                CardCollection creats = CardLists.filter(cardsGY, CardPredicates.Presets.CREATURES);
+                CardCollection creats = CardLists.filter(cardsGY, CardPredicates.CREATURES);
 
                 if (opp.hasDelirium() || opp.hasThreshold() || creats.size() >= 5) {
                     return true;
@@ -108,7 +92,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 Player bestTgt = null;
                 if (player.canBeTargetedBy(sa)) {
                     int numGY = CardLists.count(player.getCardsIn(ZoneType.Graveyard),
-                            CardPredicates.Presets.CREATURES);
+                            CardPredicates.CREATURES);
                     if (numGY > maxSize) {
                         maxSize = numGY;
                         bestTgt = player;
@@ -354,7 +338,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             // TODO: this is a stub to prevent the AI from crashing the game when, for instance, playing the opponent's
             // Profaner from exile without paying its mana cost. Otherwise the card is marked AI:RemoveDeck:All and
             // there is no specific AI to support playing it in a smarter way. Feel free to expand.
-            return Iterables.any(ai.getOpponents().getCardsIn(origin), CardPredicates.Presets.CREATURES);
+            return ai.getOpponents().getCardsIn(origin).anyMatch(CardPredicates.CREATURES);
         }
 
         CardCollectionView humanType = ai.getOpponents().getCardsIn(origin);

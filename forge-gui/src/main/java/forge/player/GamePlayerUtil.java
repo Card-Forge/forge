@@ -1,9 +1,5 @@
 package forge.player;
 
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.LobbyPlayer;
 import forge.ai.AIOption;
 import forge.ai.AiProfileUtil;
@@ -14,6 +10,9 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Set;
 
 public final class GamePlayerUtil {
     private GamePlayerUtil() { }

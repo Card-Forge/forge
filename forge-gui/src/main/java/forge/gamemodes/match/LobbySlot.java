@@ -1,13 +1,12 @@
 package forge.gamemodes.match;
 
-import java.io.Serializable;
-import java.util.Set;
-
 import com.google.common.collect.ImmutableSet;
-
 import forge.ai.AIOption;
 import forge.deck.Deck;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
+
+import java.io.Serializable;
+import java.util.Set;
 
 public final class LobbySlot implements Serializable {
     private static final long serialVersionUID = 9203252798721142264L;

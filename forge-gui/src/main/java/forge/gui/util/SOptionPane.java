@@ -1,12 +1,11 @@
 package forge.gui.util;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.gui.GuiBase;
 import forge.localinstance.skin.FSkinProp;
 import forge.util.Localizer;
+
+import java.util.List;
 
 public class SOptionPane {
     public static final FSkinProp QUESTION_ICON = FSkinProp.ICO_QUESTION;

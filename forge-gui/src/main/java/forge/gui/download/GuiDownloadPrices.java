@@ -17,11 +17,10 @@
  */
 package forge.gui.download;
 
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
-
 import forge.localinstance.properties.ForgeConstants;
+
+import java.util.Map;
 
 public class GuiDownloadPrices extends GuiDownloadService {
     @Override

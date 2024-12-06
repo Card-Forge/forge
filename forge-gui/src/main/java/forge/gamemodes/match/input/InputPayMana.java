@@ -1,14 +1,6 @@
 package forge.gamemodes.match.input;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
 import com.google.common.collect.Lists;
-
 import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.card.ColorSet;
@@ -32,6 +24,8 @@ import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.TextUtil;
+
+import java.util.*;
 
 public abstract class InputPayMana extends InputSyncronizedBase {
     private static final long serialVersionUID = 718128600948280315L;

@@ -2,8 +2,6 @@ package forge.game.trigger;
 
 import java.util.Map;
 
-import com.google.common.base.Functions;
-
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -38,7 +36,7 @@ public class TriggerCounterPlayerAddedAll extends Trigger {
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.Source, AbilityKey.Object, AbilityKey.CounterMap);
-        sa.setTriggeringObject(AbilityKey.Amount, Aggregates.sum(((Map<CounterType, Integer>) runParams.get(AbilityKey.CounterMap)).values(), Functions.identity()));
+        sa.setTriggeringObject(AbilityKey.Amount, Aggregates.sum(((Map<CounterType, Integer>) runParams.get(AbilityKey.CounterMap)).values()));
     }
 
     @Override
