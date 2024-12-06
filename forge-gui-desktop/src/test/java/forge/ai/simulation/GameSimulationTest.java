@@ -1,7 +1,10 @@
 package forge.ai.simulation;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import forge.game.card.CardCollectionView;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
@@ -2548,4 +2551,70 @@ public class GameSimulationTest extends SimulationTest {
         // spell should fizzle so no card was drawn
         AssertJUnit.assertEquals(0, game.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
     }
+
+    /**
+     * blah
+     */
+    @Test
+    public void testVoloJournal() {
+        Game game = initAndCreateGame();
+        Player p0 =  game.getPlayers().get(0);
+        Player p = game.getPlayers().get(1);
+
+        addCards("Island", 6, p);
+        addCards("Mountain", 2, p);
+        addCards("Forest", 2, p);
+
+        Card c = addCardToZone("Volo, Itinerant Scholar", p, ZoneType.Hand);
+        Card[] cards = {
+                addCardToZone("Cathartic Adept", p, ZoneType.Hand),
+                addCardToZone("Cathartic Adept", p, ZoneType.Hand),
+                addCardToZone("Ceta Disciple", p, ZoneType.Hand),
+                addCardToZone("Atog", p, ZoneType.Hand)
+        };
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility playVoloSA = c.getFirstSpellAbility();
+        playVoloSA.setActivatingPlayer(p);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(playVoloSA);
+        Game simGame = sim.getSimulatedGameState();
+
+        for(Card card : cards) {
+            SpellAbility a1 = card.getSpellAbilities().get(0);
+            a1.setActivatingPlayer(p);
+            sim.simulateSpellAbility(a1);
+        }
+
+        Player simP = simGame.getPlayer(p.getId());
+        CardCollectionView btlf = simP.getCardsIn(ZoneType.Battlefield);
+        List<String> words = List.of(new String[]{"Human", "Wizard", "Atog", "Merfolk"});
+
+        for(Card card : cards) {
+            if (card.getName().equals("Volo's Journal")) {
+                // All words are present in the iterable
+                AssertJUnit.assertTrue(areWordsInIterable(words,card.getNotedTypes()));
+            }
+        }
+
+    }
+
+    protected boolean areWordsInIterable(List<String> words, Iterable<String> iterable) {
+        Set<String> iterableSet = new HashSet<>();
+        for (String item : iterable) {
+            iterableSet.add(item);  // Populate the set from the iterable
+        }
+
+        // Check if all words are present in the set
+        for (String word : words) {
+            if (!iterableSet.contains(word)) {
+                return false;  // If any word is not found in the set, return false
+            }
+        }
+        return true;  // All words are present in the iterable
+    }
+
 }
