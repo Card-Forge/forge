@@ -281,7 +281,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                 }
             }
         } else if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
-            return -20; // can be sacrificed in response to ability or spell, thus, less prioritable
+            return -10; // can be sacrificed in response to ability or spell, thus, less prioritable
         }
         // default value
         return 10;
