@@ -841,7 +841,7 @@ public class PlayerControllerAi extends PlayerController {
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
         // TODO replace with EmptySa
         final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
-        ability.setActivatingPlayer(c.getController(), true);
+        ability.setActivatingPlayer(c.getController());
         ability.setCardState(sa.getCardState());
 
         if (ComputerUtil.playNoStack(c.getController(), ability, getGame(), true)) {
@@ -1228,7 +1228,7 @@ public class PlayerControllerAi extends PlayerController {
         final Card source = sa.getHostCard();
         // TODO replace with EmptySa
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
-        emptyAbility.setActivatingPlayer(player, true);
+        emptyAbility.setActivatingPlayer(player);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
         emptyAbility.setReplacingObjects(sa.getReplacingObjects());
         emptyAbility.setTrigger(sa.getTrigger());

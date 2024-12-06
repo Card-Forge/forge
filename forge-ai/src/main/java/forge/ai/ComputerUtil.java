@@ -234,7 +234,7 @@ public class ComputerUtil {
 
     // this is used for AI's counterspells
     public static final boolean playStack(SpellAbility sa, final Player ai, final Game game) {
-        sa.setActivatingPlayer(ai, true);
+        sa.setActivatingPlayer(ai);
         if (!ComputerUtilCost.canPayCost(sa, ai, false))
             return false;
 
@@ -274,7 +274,7 @@ public class ComputerUtil {
 
     public static final void playSpellAbilityForFree(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
-        sa.setActivatingPlayer(ai, true);
+        sa.setActivatingPlayer(ai);
 
         final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -286,7 +286,7 @@ public class ComputerUtil {
 
     public static final boolean playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
         SpellAbility newSA = sa.copyWithNoManaCost();
-        newSA.setActivatingPlayer(ai, true);
+        newSA.setActivatingPlayer(ai);
 
         if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA, false) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0, false)) {
             return false;
@@ -326,7 +326,7 @@ public class ComputerUtil {
     }
 
     public static final boolean playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
-        sa.setActivatingPlayer(ai, true);
+        sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (!ComputerUtilCost.canPayCost(sa, ai, effect)) {
             return false;
@@ -1077,7 +1077,7 @@ public class ComputerUtil {
                     if (!sa.isActivatedAbility() || sa.getApi() != ApiType.Regenerate) {
                         continue; // Not a Regenerate ability
                     }
-                    sa.setActivatingPlayer(controller, true);
+                    sa.setActivatingPlayer(controller);
                     if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller, false))) {
                         continue; // Can't play ability
                     }
@@ -1680,7 +1680,7 @@ public class ComputerUtil {
                 if (sa.getApi() != ApiType.DealDamage) {
                     continue;
                 }
-                sa.setActivatingPlayer(ai, true);
+                sa.setActivatingPlayer(ai);
                 final String numDam = sa.getParam("NumDmg");
                 int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), numDam, sa);
                 if (dmg <= damage) {
@@ -2545,7 +2545,7 @@ public class ComputerUtil {
                 } else if (logic.equals("MostProminentOppControls")) {
                     CardCollection list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
                     chosen = ComputerUtilCard.getMostProminentType(list, validTypes);
-                    if (!CardType.isACreatureType(chosen) || validTypes.contains(chosen)) {
+                    if (!CardType.isACreatureType(chosen)) {
                         list = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
                         chosen = ComputerUtilCard.getMostProminentType(list, validTypes);
                     }
@@ -3142,7 +3142,7 @@ public class ComputerUtil {
                 }
                 SpellAbility abTest = withoutPayingManaCost ? ab.copyWithNoManaCost() : ab.copy();
                 // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
-                abTest.setActivatingPlayer(ai, true);
+                abTest.setActivatingPlayer(ai);
                 abTest.getRestrictions().setZone(c.getZone().getZoneType());
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(abTest) && ComputerUtilCost.canPayCost(abTest, ai, false)) {
                     targets.add(c);

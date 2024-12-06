@@ -1243,7 +1243,7 @@ public class ComputerUtilCombat {
                 continue;
             }
 
-            sa.setActivatingPlayer(source.getController(), true);
+            sa.setActivatingPlayer(source.getController());
 
             if (sa.hasParam("Cost")) {
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, true)) {
@@ -1427,11 +1427,12 @@ public class ComputerUtilCombat {
             if (sa == null) {
                 continue;
             }
-            sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.usesTargeting()) {
                 continue; // targeted pumping not supported
             }
+
+            sa.setActivatingPlayer(source.getController());
 
             // DealDamage triggers
             if (ApiType.DealDamage.equals(sa.getApi())) {

@@ -57,8 +57,8 @@ public class SpellAbilityView extends TrackableObject implements IHasCardView {
     public boolean canPlay() {
         return get(TrackableProperty.CanPlay);
     }
-    void updateCanPlay(SpellAbility sa, boolean optionalCost) {
-        set(TrackableProperty.CanPlay, sa.canPlay(optionalCost));
+    public void updateCanPlay(SpellAbility sa) {
+        set(TrackableProperty.CanPlay, sa.canPlay(true));
     }
 
     public boolean promptIfOnlyPossibleAbility() {

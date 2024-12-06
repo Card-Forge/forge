@@ -717,7 +717,7 @@ public class ComputerUtilCard {
                     if (!ComputerUtilCost.canPayCost(sa, opp, sa.isTrigger())) {
                         continue;
                     }
-                    sa.setActivatingPlayer(opp, true);
+                    sa.setActivatingPlayer(opp);
                     if (sa.canTarget(card)) {
                         continue;
                     }
@@ -861,8 +861,8 @@ public class ComputerUtilCard {
 
             // consider the types that are in the valid list
             if ((valid.isEmpty() || valid.contains(type)) && max < entry.getValue()) {
-                    max = entry.getValue();
-                    maxType = type;
+                max = entry.getValue();
+                maxType = type;
             }
         }
 

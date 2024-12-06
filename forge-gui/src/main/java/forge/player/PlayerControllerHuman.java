@@ -240,6 +240,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         //FIXME - on mobile gui it allows the card to cast from opponent hands issue #2127, investigate where the bug occurs before this method is called
         spellViewCache = SpellAbilityView.getMap(abilities);
+        for (SpellAbility sa : abilities) {
+            sa.getView().updateCanPlay(sa);
+        }
         final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard),
                 Lists.newArrayList(spellViewCache.keySet()), triggerEvent);
         return resultView == null ? null : spellViewCache.get(resultView);
@@ -247,7 +250,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void playSpellAbilityForFree(final SpellAbility copySA, final boolean mayChoseNewTargets) {
-        HumanPlay.playSaWithoutPayingManaCost(this, player.getGame(), copySA, mayChoseNewTargets);
+        HumanPlay.playSaWithoutPayingManaCost(this, copySA, mayChoseNewTargets);
     }
 
     @Override
@@ -2942,7 +2945,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             // controlled by chosen player.
                             sa.setActivatingPlayer(p);
                             sa.setCastFromPlayEffect(true);
-                            HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, getGame(), sa, true);
+                            HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, sa, true);
                         }
                         // playSa could fire some triggers
                         getGame().getStack().addAllTriggeredAbilitiesToStack();

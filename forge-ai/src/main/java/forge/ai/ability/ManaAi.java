@@ -217,7 +217,7 @@ public class ManaAi extends SpellAbilityAi {
             if (testSaNoCost == null) {
                 continue;
             }
-            testSaNoCost.setActivatingPlayer(ai, true);
+            testSaNoCost.setActivatingPlayer(ai);
             if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
                 if (testSa.getHostCard().isPermanent() && !testSa.getHostCard().hasKeyword(Keyword.HASTE)
                     && !ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
