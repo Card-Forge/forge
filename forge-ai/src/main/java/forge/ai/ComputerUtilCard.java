@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.google.common.base.Function;
+
+import forge.StaticData;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.card.mana.ManaCost;
 import forge.game.card.*;
@@ -17,6 +19,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.card.CardRules;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -714,7 +717,7 @@ public class ComputerUtilCard {
                     if (!ComputerUtilCost.canPayCost(sa, opp, sa.isTrigger())) {
                         continue;
                     }
-                    sa.setActivatingPlayer(opp, true);
+                    sa.setActivatingPlayer(opp);
                     if (sa.canTarget(card)) {
                         continue;
                     }
@@ -791,9 +794,8 @@ public class ComputerUtilCard {
     public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid) {
         return getMostProminentType(list, valid, true);
     }
-
     public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid, boolean includeTokens) {
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             return "";
         }
 
@@ -834,43 +836,21 @@ public class ComputerUtilCard {
 
             //also take into account abilities that generate tokens
             if (includeTokens) {
-                for (SpellAbility sa : c.getAllSpellAbilities()) {
-                    if (sa.getApi() != ApiType.Token) {
-                        continue;
-                    }
-                    if (sa.hasParam("TokenTypes")) {
-                        for (String var : sa.getParam("TokenTypes").split(",")) {
-                            if (!CardType.isACreatureType(var)) {
-                                continue;
-                            }
-                            Integer count = typesInDeck.getOrDefault(var, 0);
-                            typesInDeck.put(var, count + weight);
-                        }
+                for (String token : c.getRules().getTokens()) {
+                    CardRules tok = StaticData.instance().getAllTokens().getToken(token).getRules();
+                    for (String type : tok.getType().getCreatureTypes()) {
+                        Integer count = typesInDeck.getOrDefault(type, 0);
+                        typesInDeck.put(type, count + 1);
                     }
                 }
-                // same for Trigger that does make Tokens
-                for (Trigger t : c.getTriggers()) {
-                    SpellAbility sa = t.ensureAbility();
-                    if (sa != null) {
-                        if (sa.getApi() != ApiType.Token || !sa.hasParam("TokenTypes")) {
-                            continue;
-                        }
-                        for (String var : sa.getParam("TokenTypes").split(",")) {
-                            if (!CardType.isACreatureType(var)) {
-                                continue;
-                            }
-                            Integer count = typesInDeck.getOrDefault(var, 0);
-                            typesInDeck.put(var, count + weight);
-                        }
-                    }
-                }
+
                 // special rule for Fabricate and Servo
                 if (c.hasKeyword(Keyword.FABRICATE)) {
                     Integer count = typesInDeck.getOrDefault("Servo", 0);
                     typesInDeck.put("Servo", count + weight);
                 }
             }
-        } // for
+        }
 
         int max = 0;
         String maxType = "";
@@ -881,8 +861,8 @@ public class ComputerUtilCard {
 
             // consider the types that are in the valid list
             if ((valid.isEmpty() || valid.contains(type)) && max < entry.getValue()) {
-                    max = entry.getValue();
-                    maxType = type;
+                max = entry.getValue();
+                maxType = type;
             }
         }
 
@@ -2111,7 +2091,7 @@ public class ComputerUtilCard {
         CardCollection deduped = new CardCollection();
         for (Card c : cc) {
             boolean unique = true;
-            if (c.isInZone(ZoneType.Hand)) {
+            if (c.isInZone(ZoneType.Hand) && !c.hasPerpetual()) {
                 for (Card d : deduped) {
                     if (d.isInZone(ZoneType.Hand) && d.getOwner().equals(c.getOwner()) && d.getName().equals(c.getName())) {
                         unique = false;

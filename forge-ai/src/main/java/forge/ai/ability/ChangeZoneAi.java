@@ -1418,11 +1418,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
         }
-        if (bestChoice != null) {
-            return bestChoice;
-        }
 
-        return null;
+        return bestChoice;
     }
 
     private static boolean isUnpreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {

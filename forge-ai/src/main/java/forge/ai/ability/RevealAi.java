@@ -38,7 +38,7 @@ public class RevealAi extends RevealAiBase {
             final Card c = sa.getHostCard();
             for (SpellAbility s : c.getBasicSpells()) {
                 Spell spell = (Spell) s;
-                s.setActivatingPlayer(ai, true);
+                s.setActivatingPlayer(ai);
                 // timing restrictions still apply
                 if (!s.getRestrictions().checkTimingRestrictions(c, s))
                     continue;

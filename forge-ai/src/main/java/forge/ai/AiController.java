@@ -173,7 +173,7 @@ public class AiController {
         for (final Card c : all) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {
                 if (sa instanceof SpellPermanent) {
-                    sa.setActivatingPlayer(player, true);
+                    sa.setActivatingPlayer(player);
                     if (checkETBEffects(c, sa, ApiType.Counter)) {
                         spellAbilities.add(sa);
                     }
@@ -560,7 +560,7 @@ public class AiController {
                     if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
                         continue;
                     }
-                    reSA.setActivatingPlayer(reSA.getHostCard().getController(), true);
+                    reSA.setActivatingPlayer(reSA.getHostCard().getController());
                     if (reSA.metConditions()) {
                         foundTapped = true;
                         break;
@@ -644,7 +644,7 @@ public class AiController {
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
             SpellAbility currentSA = sa;
-            sa.setActivatingPlayer(player, true);
+            sa.setActivatingPlayer(player);
             // check everything necessary
 
             AiPlayDecision opinion = canPlayAndPayFor(currentSA);
@@ -699,7 +699,7 @@ public class AiController {
             if (saApi == ApiType.Counter || saApi == exceptSA) {
                 continue;
             }
-            sa.setActivatingPlayer(player, true);
+            sa.setActivatingPlayer(player);
             // TODO: this currently only works as a limited prediction of permanent spells.
             // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
             // but that is currently difficult to implement due to various side effects leading to stack overflow.
@@ -1659,7 +1659,7 @@ public class AiController {
                     }
                 }
 
-                sa.setActivatingPlayer(player, true);
+                sa.setActivatingPlayer(player);
                 SpellAbility root = sa.getRootAbility();
 
                 if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {

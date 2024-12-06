@@ -57,8 +57,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
-        String choice = player.getController().chooseSomeType("Creature", ability, CardType.getAllCreatureTypes(),
-                Lists.newArrayList());
+        String choice = player.getController().chooseSomeType("Creature", ability, CardType.getAllCreatureTypes());
         return PaymentDecision.type(choice);
     }
 

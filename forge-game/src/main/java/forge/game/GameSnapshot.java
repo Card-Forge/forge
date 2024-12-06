@@ -117,7 +117,7 @@ public class GameSnapshot {
             for (SpellAbility sa : c.getSpellAbilities()) {
                 Player activatingPlayer = sa.getActivatingPlayer();
                 if (activatingPlayer != null && activatingPlayer.getGame() != toGame) {
-                    sa.setActivatingPlayer(findBy(toGame, activatingPlayer), true);
+                    sa.setActivatingPlayer(findBy(toGame, activatingPlayer));
                 }
             }
         }
@@ -250,7 +250,7 @@ public class GameSnapshot {
 
             // Is the SA on the stack?
             if (newSa != null) {
-                newSa.setActivatingPlayer(findBy(toGame, origSa.getActivatingPlayer()), true);
+                newSa.setActivatingPlayer(findBy(toGame, origSa.getActivatingPlayer()));
                 if (origSa.usesTargeting()) {
                     for (GameObject o : origSa.getTargets()) {
                         if (o instanceof Card) {

@@ -260,7 +260,7 @@ public class CounterEffect extends SpellAbilityEffect {
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : tgtSA.isAftermath() ? "Exile" : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) { //Hinder
             List<String> pos = Arrays.asList(srcSA.getParam("DestinationChoice").split(","));
-            destination = srcSA.getActivatingPlayer().getController().chooseSomeType(Localizer.getInstance().getMessage("lblRemoveDestination"), tgtSA, pos, null);
+            destination = srcSA.getActivatingPlayer().getController().chooseSomeType(Localizer.getInstance().getMessage("lblRemoveDestination"), tgtSA, pos);
         }
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,
