@@ -875,12 +875,14 @@ public class ComputerUtilCard {
         int max = 0;
         String maxType = "";
 
+        // Iterate through typesInDeck and consider only valid types
         for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
             final String type = entry.getKey();
 
-            if (max < entry.getValue()) {
-                max = entry.getValue();
-                maxType = type;
+            // consider the types that are in the valid list
+            if ((valid.isEmpty() || valid.contains(type)) && max < entry.getValue()) {
+                    max = entry.getValue();
+                    maxType = type;
             }
         }
 
