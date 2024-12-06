@@ -2544,39 +2544,32 @@ public class ComputerUtil {
 
                 if (logic.equals("MostProminentOnBattlefield")) {
                     chosen = ComputerUtilCard.getMostProminentType(game.getCardsIn(ZoneType.Battlefield), valid);
-                }
-                else if (logic.equals("MostProminentComputerControls")) {
+                } else if (logic.equals("MostProminentComputerControls")) {
                     chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Battlefield), valid);
-                }
-                else if (logic.equals("MostProminentComputerControlsOrOwns")) {
+                } else if (logic.equals("MostProminentComputerControlsOrOwns")) {
                     CardCollectionView list = ai.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
                     if (list.isEmpty()) {
                         list = ai.getCardsIn(Arrays.asList(ZoneType.Library));
                     }
                     chosen = ComputerUtilCard.getMostProminentType(list, valid);
-                }
-                else if (logic.equals("MostProminentOppControls")) {
+                } else if (logic.equals("MostProminentOppControls")) {
                     CardCollection list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
                     chosen = ComputerUtilCard.getMostProminentType(list, valid);
                     if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
                         list = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
                         chosen = ComputerUtilCard.getMostProminentType(list, valid);
                     }
-                }
-                else if (logic.startsWith("MostProminentInComputerDeck")) {
+                } else if (logic.startsWith("MostProminentInComputerDeck")) {
                     boolean includeTokens = !logic.endsWith("NonToken");
                     chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), valid, includeTokens);
-                }
-                else if (logic.equals("MostProminentInComputerGraveyard")) {
+                } else if (logic.equals("MostProminentInComputerGraveyard")) {
                     chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Graveyard), valid);
                 }
             }
+
+            if (sa.getHostCard().hasAnyNotedType())
+                validTypes.removeAll((Collection<String>) sa.getHostCard().getNotedTypes());
             if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
-                // assume invalid types is all non-valid types
-                List <String> invalid = Lists.newArrayList(CardType.getAllCreatureTypes());
-                invalid.removeAll(validTypes);
-                if (sa.getHostCard().hasAnyNotedType())
-                    validTypes.removeAll((Collection<String>) sa.getHostCard().getNotedTypes());
                 chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), validTypes, false);
                 //chosen = "Sliver";
             }
