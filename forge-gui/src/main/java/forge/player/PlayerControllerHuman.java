@@ -1263,12 +1263,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * java.lang.String, java.util.List, java.util.List, java.lang.String)
      */
     @Override
-    public String chooseSomeType(final String kindOfType, final SpellAbility sa, final Collection<String> validTypes,
-                                 final List<String> invalidTypes, final boolean isOptional) {
+    public String chooseSomeType(final String kindOfType, final SpellAbility sa, final Collection<String> validTypes, final boolean isOptional) {
         final List<String> types = Lists.newArrayList(validTypes);
-        if (invalidTypes != null && !invalidTypes.isEmpty()) {
-            Iterables.removeAll(types, invalidTypes);
-        }
         if (kindOfType.equals("Creature")) {
             sortCreatureTypes(types);
         }
@@ -1325,7 +1321,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             typesInDeck.put(type, count + 1);
                         }
                     }
-
                 }
             }
             // same for Trigger that does make Tokens

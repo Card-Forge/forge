@@ -2476,12 +2476,9 @@ public class ComputerUtil {
         return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min, max);
     }
 
-    public static String chooseSomeType(Player ai, String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes) {
+    public static String chooseSomeType(Player ai, String kindOfType, SpellAbility sa, Collection<String> validTypes) {
         final String logic = sa.getParam("AILogic");
 
-        if (invalidTypes == null) {
-            invalidTypes = ImmutableList.of();
-        }
         if (validTypes == null) {
             validTypes = ImmutableList.of();
         }
@@ -2494,14 +2491,12 @@ public class ComputerUtil {
             // otherwise, lib search for most common type left then, reveal chosenType to Human
             if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
                 double amount = 0;
-                for (String type : CardType.getAllCardTypes()) {
-                    if (!invalidTypes.contains(type)) {
-                        CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), Presets.TAPPED);
-                        double i = type.equals("Creature") ? list.size() * 1.5 : list.size();
-                        if (i > amount) {
-                            amount = i;
-                            chosen = type;
-                        }
+                for (String type : validTypes) {
+                    CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), Presets.TAPPED);
+                    double i = type.equals("Creature") ? list.size() * 1.5 : list.size();
+                    if (i > amount) {
+                        amount = i;
+                        chosen = type;
                     }
                 }
             } else if ("ProtectionFromType".equals(logic)) {
@@ -2516,8 +2511,7 @@ public class ComputerUtil {
                 if (StringUtils.isEmpty(chosen)) {
                     chosen = "Creature"; // if in doubt, choose Creature, I guess
                 }
-            }
-            else {
+            } else {
                 // Are we picking a type to reduce costs for that type?
                 boolean reducingCost = false;
                 for (StaticAbility s : sa.getHostCard().getStaticAbilities()) {
@@ -2529,7 +2523,6 @@ public class ComputerUtil {
 
                 if (reducingCost) {
                     List<String> valid = Lists.newArrayList(validTypes);
-                    valid.removeAll(invalidTypes);
                     valid.remove("Land"); // Lands don't have costs to reduce
                     chosen = ComputerUtilCard.getMostProminentCardType(ai.getAllCards(), valid);
                 }
@@ -2539,35 +2532,32 @@ public class ComputerUtil {
             }
         } else if (kindOfType.equals("Creature")) {
             if (logic != null) {
-                List <String> valid = Lists.newArrayList(CardType.getAllCreatureTypes());
-                valid.removeAll(invalidTypes);
-
                 if (logic.equals("MostProminentOnBattlefield")) {
-                    chosen = ComputerUtilCard.getMostProminentType(game.getCardsIn(ZoneType.Battlefield), valid);
+                    chosen = ComputerUtilCard.getMostProminentType(game.getCardsIn(ZoneType.Battlefield), validTypes);
                 } else if (logic.equals("MostProminentComputerControls")) {
-                    chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Battlefield), valid);
+                    chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Battlefield), validTypes);
                 } else if (logic.equals("MostProminentComputerControlsOrOwns")) {
                     CardCollectionView list = ai.getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
                     if (list.isEmpty()) {
                         list = ai.getCardsIn(Arrays.asList(ZoneType.Library));
                     }
-                    chosen = ComputerUtilCard.getMostProminentType(list, valid);
+                    chosen = ComputerUtilCard.getMostProminentType(list, validTypes);
                 } else if (logic.equals("MostProminentOppControls")) {
                     CardCollection list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
-                    chosen = ComputerUtilCard.getMostProminentType(list, valid);
-                    if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
+                    chosen = ComputerUtilCard.getMostProminentType(list, validTypes);
+                    if (!CardType.isACreatureType(chosen) || validTypes.contains(chosen)) {
                         list = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
-                        chosen = ComputerUtilCard.getMostProminentType(list, valid);
+                        chosen = ComputerUtilCard.getMostProminentType(list, validTypes);
                     }
                 } else if (logic.startsWith("MostProminentInComputerDeck")) {
                     boolean includeTokens = !logic.endsWith("NonToken");
-                    chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), valid, includeTokens);
+                    chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), validTypes, includeTokens);
                 } else if (logic.equals("MostProminentInComputerGraveyard")) {
-                    chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Graveyard), valid);
+                    chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Graveyard), validTypes);
                 }
             }
 
-            if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
+            if (!CardType.isACreatureType(chosen)) {
                 chosen = validTypes.size() == 1 ? (String) validTypes.toArray()[0] :
                         ComputerUtilCard.getMostProminentType(ai.getAllCards(), validTypes, false);
                 //chosen = "Sliver";
@@ -2577,10 +2567,7 @@ public class ComputerUtil {
             if (logic != null) {
                 if (logic.equals("MostProminentOppControls")) {
                     CardCollection list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
-                    List<String> valid = Lists.newArrayList(CardType.getBasicTypes());
-                    valid.removeAll(invalidTypes);
-
-                    chosen = ComputerUtilCard.getMostProminentType(list, valid);
+                    chosen = ComputerUtilCard.getMostProminentType(list, validTypes);
                 } else  if (logic.equals("MostNeededType")) {
                     // Choose a type that is in the deck, but not in hand or on the battlefield
                     final List<String> basics = new ArrayList<>(CardType.Constant.BASIC_TYPES);
@@ -2603,7 +2590,7 @@ public class ComputerUtil {
                 else if (logic.equals("ChosenLandwalk")) {
                     for (Card c : AiAttackController.choosePreferredDefenderPlayer(ai).getLandsInPlay()) {
                         for (String t : c.getType()) {
-                            if (!invalidTypes.contains(t) && CardType.isABasicLandType(t)) {
+                            if (CardType.isABasicLandType(t)) {
                                 chosen = t;
                                 break;
                             }
@@ -2612,7 +2599,7 @@ public class ComputerUtil {
                 }
             }
 
-            if (!CardType.isABasicLandType(chosen) || invalidTypes.contains(chosen)) {
+            if (!CardType.isABasicLandType(chosen) || !validTypes.contains(chosen)) {
                 chosen = "Island";
             }
         }
@@ -2621,7 +2608,7 @@ public class ComputerUtil {
                 if (logic.equals("ChosenLandwalk")) {
                     for (Card c : AiAttackController.choosePreferredDefenderPlayer(ai).getLandsInPlay()) {
                         for (String t : c.getType().getLandTypes()) {
-                            if (!invalidTypes.contains(t)) {
+                            if (validTypes.contains(t)) {
                                 chosen = t;
                                 break;
                             }
