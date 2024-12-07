@@ -351,13 +351,6 @@ public abstract class SpellAbilityAi {
             if (payerCreatures > sourceCreatures + 1) {
                 return false;
             }
-        } else if (aiLogic != null && aiLogic.startsWith("LifeLE")) {
-            // if payer can't lose life its no need to pay unless
-            if (!payer.canLoseLife())
-                return false;
-            else if (payer.getLife() <= AbilityUtils.calculateAmount(source, aiLogic.substring(6), sa)) {
-                return true;
-            }
         } else if ("WillAttack".equals(aiLogic)) {
             AiAttackController aiAtk = new AiAttackController(payer);
             Combat combat = new Combat(payer);
