@@ -434,6 +434,7 @@ public class GameCopier {
 
             newCard.setSprocket(c.getSprocket());
 
+            if (c.hasChosenLetter()) newCard.setChosenLetters(Lists.newArrayList(c.getChosenLetters()));
             newCard.setSVars(c.getSVars());
             newCard.copyChangedSVarsFrom(c);
         }

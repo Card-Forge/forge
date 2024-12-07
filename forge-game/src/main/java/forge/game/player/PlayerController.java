@@ -209,7 +209,7 @@ public abstract class PlayerController {
     public abstract PlayerZone chooseStartingHand(List<PlayerZone> zones);
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
 
-    public abstract List<String> chooseLetter(int n, String ai, List<String> letters);
+    public abstract List<String> chooseLetter(int n, SpellAbility sa, List<String> letters);
 
     public abstract String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, boolean isOptional);
     public final String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes) {

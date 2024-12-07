@@ -24,6 +24,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -95,7 +96,7 @@ public class ForgeScript {
         } else if (property.startsWith("ChosenLetter")) {
             final List<String> letters = source.getChosenLetters();
             if (letters == null) return false; // some things check before letters have been chosen
-            String name = cardState.getName();
+            String name = Normalizer.normalize(cardState.getName().toUpperCase(), Normalizer.Form.NFD);
             if (name.startsWith("A-")) name = name.substring(2); // remove Alchemy tag
             if (property.contains("FirstWord")) name = name.split(" ")[0];
             boolean found = false;
@@ -108,7 +109,7 @@ public class ForgeScript {
                 }
             } else if (property.endsWith("Contains")) {
                 for (String l : letters) {
-                    if (name.contains(l) || name.contains(l.toLowerCase())) {
+                    if (name.contains(l)) {
                         found = true;
                         break;
                     }

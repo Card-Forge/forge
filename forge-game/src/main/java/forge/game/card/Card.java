@@ -2017,6 +2017,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         view.clearChosenNumber();
     }
 
+    public boolean hasChosenLetter() {
+        return chosenLetters != null && !chosenLetters.isEmpty();
+    }
+
     public final List<String> getChosenLetters() {
         return chosenLetters;
     }
