@@ -1,70 +1,70 @@
 [metadata]
 Code=PMEI
 Date=1995-01-01
-Name=Media Inserts
+Name=Media and Collaboration Promos
 Type=Promo
 ScryfallCode=PMEI
 
 [cards]
-4 C Fireball @Mark Tedin
-5 C Blue Elemental Blast @Richard Thomas
-6 R Diabolic Edict @Ron Spencer
-9 C Scent of Cinder @Carl Critchlow
-10 C Lightning Hounds @Andrew Robinson
-10★ C Jamuraan Lion @Stuart Griffin
-11 R Voltaic Key @Henry G. Higginbotham
-12 U Warmonger @Heather Hudson
-13 C Silver Drake @Alan Pollack
-14 C Phyrexian Rager @Mark Tedin
-15 R Shivan Dragon @Donato Giancola
-16 M Jace Beleren @Aleksi Briclot
-16j R Darksteel Juggernaut @Randis Albion
-17 U Cunning Sparkmage @Wayne Reynolds
-18 C Chandra's Outrage @Christopher Moeller
-19 U Chandra's Spitfire @Justin Sweet
-20 R Kuldotha Phoenix @Mike Bierek
-21 U Phantasmal Dragon @Wayne Reynolds
-22 C Sandbar Crocodile @Una Fricker
-23 C Zhalfirin Knight @John Bolton
-24 C Shrieking Drake @Ian Miller
-25 C Stream of Life @Terese Nielsen
-26 R Thorn Elemental @rk post
-27 C Parallax Dementia @Eric Peterson
-28 R Ascendant Evincar @Mark Zug
-29 R Archangel @Donato Giancola
-30 U Cast Down @Ittoku
-31 R Diabolic Edict @Ron Spencer
-32 R Shock @Randy Gallegos
-33 U Lava Coil @Wesley Burt & コーヘー
-34 R Duress @Lawrence Snelly
-35 R Voltaic Key @Henry G. Higginbotham
-36 U Daxos, Blessed by the Sun @Lius Lasahido
-37 R Staggering Insight @Dmitry Burmak
-38 R Dark Ritual @Tom Fleming
-39 R Sprite Dragon @Gabor Szikszai
-40 R Hypnotic Sprite @Irina Nordsol
-41 R Heliod's Pilgrim @Micah Epstein
-42 R Crop Rotation @DiTerlizzi
-43 R Tangled Florahedron @Randy Vargas
-44 R Counterspell @Hannibal King
-45 R Bone Shredder @Ron Spencer
-46 R Disenchant @Allen Williams
-47 R Wild Growth @Pat Lewis
-48 R Harald, King of Skemfar @Grzegorz Rutkowski
-49 R Usher of the Fallen @Anastasia Ovchinnikova
-50 R Frantic Search @Jeff Miracola
-51 R Mental Misstep @Erica Yang
-52 R Worn Powerstone @Henry G. Higginbotham
-53 R Gingerbrute @Vincent Proce
-54 R Ruin Crab @Simon Dominic
-55 R Avalanche Riders @Lake Hurwitz
-56 R Pyromancer's Gauntlet @Magali Villeneuve
-57 R Culling the Weak @Scott M. Fischer
-58 R Winged Boots @Filipe Pagliuso
-60 C Talruum Champion @Pete Venters
-61 C Shield Wall @Scott Kirschner
-63 R Snuff Out @Mike Ploog
-67 R Gush @Kev Walker
-80 M Jace, Memory Adept @D. Alexander Gregory
-81 M Ajani, Mentor of Heroes @Aaron Miller
-121 C Spined Wurm @Keith Parkinson
+19951 C Fireball @Mark Tedin
+19952 C Blue Elemental Blast @Richard Thomas
+19961 C Sandbar Crocodile @Una Fricker
+19962 C Zhalfirin Knight @John Bolton
+19963 C Jamuraan Lion @Stuart Griffin
+19971 C Talruum Champion @Pete Venters
+19972 C Shrieking Drake @Ian Miller
+19973 C Shield Wall @Scott Kirschner
+19974 C Stream of Life @Terese Nielsen
+19991 C Scent of Cinder @Carl Critchlow
+19992 U Warmonger @Heather Hudson
+20001 C Lightning Hounds @Andrew Robinson
+20002 C Silver Drake @Alan Pollack
+20003 R Thorn Elemental @rk post
+20004 R Archangel @Donato Giancola
+20005 C Phyrexian Rager @Mark Tedin
+20006 C Parallax Dementia @Eric Peterson
+20007 R Ascendant Evincar @Mark Zug
+20011 C Spined Wurm @Keith Parkinson
+20012 R Shivan Dragon @Donato Giancola
+20091 M Jace Beleren @Aleksi Briclot
+20101 R Darksteel Juggernaut @Randis Albion
+20102 U Cunning Sparkmage @Wayne Reynolds
+20103 C Chandra's Outrage @Christopher Moeller
+20104 U Chandra's Spitfire @Justin Sweet
+20105 R Kuldotha Phoenix @Mike Bierek
+20111 U Phantasmal Dragon @Wayne Reynolds
+20191 U Cast Down @Ittoku
+20192 R Diabolic Edict @Ron Spencer
+20193 R Shock @Randy Gallegos
+20194 U Lava Coil @Wesley Burt & コーヘー
+20195 R Hypnotic Sprite @Irina Nordsol
+20196 R Duress @Lawrence Snelly
+20201 R Voltaic Key @Henry G. Higginbotham
+20202 U Daxos, Blessed by the Sun @Lius Lasahido
+20203 R Staggering Insight @Dmitry Burmak
+20204 R Dark Ritual @Tom Fleming
+20205 R Sprite Dragon @Gabor Szikszai
+20206 R Heliod's Pilgrim @Micah Epstein
+20207 R Crop Rotation @DiTerlizzi
+20208 U Tangled Florahedron @Randy Vargas
+20211 R Counterspell @Hannibal King
+20212 R Bone Shredder @Ron Spencer
+20213 R Harald, King of Skemfar @Grzegorz Rutkowski
+20221 R Disenchant @Allen Williams
+20222 R Wild Growth @Pat Lewis
+20223 R Usher of the Fallen @Anastasia Ovchinnikova
+20224 R Frantic Search @Jeff Miracola
+20231 R Mental Misstep @Erica Yang
+20232 R Worn Powerstone @Henry G. Higginbotham
+20233 R Gingerbrute @Vincent Proce
+20234 R Ruin Crab @Simon Dominic
+20235 R Avalanche Riders @Lake Hurwitz
+20236 R Pyromancer's Gauntlet @Magali Villeneuve
+20237 R Winged Boots @Filipe Pagliuso
+20238 R Culling the Weak @Scott M. Fischer
+20241 R Snuff Out @Mike Ploog
+20242 M Jace, Memory Adept @D. Alexander Gregory
+20243 M Ajani, Mentor of Heroes @Aaron Miller
+20244 R Gush @Kev Walker
+20245 R Diabolic Edict @Ron Spencer
+20246 R Voltaic Key @Henry G. Higginbotham
