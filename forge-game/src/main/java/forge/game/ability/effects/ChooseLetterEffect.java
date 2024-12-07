@@ -13,7 +13,7 @@ public class ChooseLetterEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        List<String> letters = Lists.newArrayList("A", "B", "C", "D", "E", "É", "F", "G", "H", "I", "J", "K", "L", "M", "N",
+        List<String> letters = Lists.newArrayList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
                 "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
         List<String> consonants = Lists.newArrayList("B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q",
                 "R", "S", "T", "V", "W", "X", "Y", "Z");
