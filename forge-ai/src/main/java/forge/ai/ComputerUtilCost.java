@@ -217,10 +217,7 @@ public class ComputerUtilCost {
             if (part instanceof CostPayLife) {
                 final CostPayLife payLife = (CostPayLife) part;
 
-                Integer amount = payLife.convertAmount();
-                if (amount == null) {
-                    amount = AbilityUtils.calculateAmount(source, payLife.getAmount(), sourceAbility);
-                }
+                int amount = payLife.getAbilityAmount(sourceAbility);
 
                 // check if there's override for the remainingLife threshold
                 if (sourceAbility != null && sourceAbility.hasParam("AILifeThreshold")) {
