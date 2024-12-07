@@ -1,9 +1,10 @@
 [metadata]
-Code=PDCI
+Code=DCI
 Date=2006-01-01
 Name=DCI Promos
+Code2=PDCI
 Type=Promo
-ScryfallCode=PDCI
+ScryfallCode=DCI
 
 [cards]
 1 R Wood Elves @Rebecca Guay
