@@ -167,6 +167,8 @@ public abstract class PreferencesStore<T extends Enum<T>> {
             result.add(GameType.TinyLeaders);
         else if (gameType.equals("Brawl"))
             result.add(GameType.Brawl);
+        else if (gameType.equals("Duel Commander"))
+            result.add(GameType.DuelCommander);
         else if (gameType.equals("Planechase"))
             result.add(GameType.Planechase);
         else if (gameType.equals("Archenemy"))

@@ -73,11 +73,11 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
      */
     @SuppressWarnings("serial")
     public CEditorCommander(final CDetailPicture cDetailPicture, GameType gameType0) {
-        super(gameType0 == GameType.TinyLeaders ? FScreen.DECK_EDITOR_TINY_LEADERS : gameType0 == GameType.Brawl ? FScreen.DECK_EDITOR_BRAWL :
-                gameType0 == GameType.Oathbreaker ? FScreen.DECK_EDITOR_OATHBREAKER : FScreen.DECK_EDITOR_COMMANDER, cDetailPicture, gameType0);
+        super(getFScreen(gameType0), cDetailPicture, gameType0);
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Sideboard);
         allSections.add(DeckSection.Commander);
+
 
         CardDb commonCards = FModel.getMagicDb().getCommonCards();
         if (gameType == GameType.Brawl){
@@ -115,12 +115,32 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         case Oathbreaker:
             this.controller = new DeckController<>(decks.getOathbreaker(), this, newCreator);
             break;
+        case DuelCommander:
+            this.controller = new DeckController<>(decks.getDuelCommander(), this, newCreator);
+            break;
         default:
             this.controller = new DeckController<>(decks.getCommander(), this, newCreator);
             break;
         }
 
         getBtnAddBasicLands().setCommand((UiCommand) () -> CEditorConstructed.addBasicLands(CEditorCommander.this));
+    }
+
+    private static FScreen getFScreen(GameType gameType0) {
+        FScreen fScreen;
+        switch (gameType0) {
+            case TinyLeaders:
+                fScreen = FScreen.DECK_EDITOR_TINY_LEADERS;
+            case Brawl:
+                fScreen = FScreen.DECK_EDITOR_BRAWL;
+            case Oathbreaker:
+                fScreen = FScreen.DECK_EDITOR_OATHBREAKER;
+            case DuelCommander:
+                fScreen = FScreen.DECK_EDITOR_DUEL_COMMANDER;
+            default:
+                fScreen = FScreen.DECK_EDITOR_COMMANDER;
+        }
+        return fScreen;
     }
 
     //=========== Overridden from ACEditorBase

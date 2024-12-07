@@ -105,8 +105,8 @@ public final class GameFormatQuest extends GameFormat {
 	 * @param setRotation
 	 */
 	public GameFormatQuest(final GameFormat toCopy, boolean allowSetUnlocks, ISetRotation setRotation) {
-		super(toCopy.getName(), toCopy.getEffectiveDate(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames(), toCopy.getRestrictedCards(),
-				toCopy.isRestrictedLegendary(),toCopy.getAdditionalCards(), toCopy.getAllowedRarities(),
+		super(toCopy.getName(), toCopy.getEffectiveDate(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames(), toCopy.getBannedAsCommanderCardNames(),
+				toCopy.getRestrictedCards(), toCopy.isRestrictedLegendary(),toCopy.getAdditionalCards(), toCopy.getAllowedRarities(),
 				toCopy.getIndex(), FormatType.CUSTOM, FormatSubType.CUSTOM);
 		allowUnlocks = allowSetUnlocks;
 		this.setRotation = setRotation;

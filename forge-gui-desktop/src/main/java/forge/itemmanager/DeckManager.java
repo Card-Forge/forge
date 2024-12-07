@@ -335,6 +335,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 DeckPreferences.setTinyLeadersDeck((deck != null) ? deck.toString() : "");
                 editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
                 break;
+            case DuelCommander:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
+                DeckPreferences.setDuelCommanderDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
             case Sealed:
                 screen = FScreen.DECK_EDITOR_SEALED;
                 editorCtrl = new CEditorLimited(FModel.getDecks().getSealed(), screen, getCDetailPicture());
@@ -386,6 +391,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             case Commander:
             case Oathbreaker:
             case TinyLeaders:
+            case DuelCommander:
             case Constructed:
             case Draft:
             case Sealed:

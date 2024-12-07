@@ -36,6 +36,7 @@ public enum GameType {
     Oathbreaker         (DeckFormat.Oathbreaker, false, false, false, "lblOathbreaker", "lblOathbreakerDesc"),
     TinyLeaders         (DeckFormat.TinyLeaders, false, false, false, "lblTinyLeaders", "lblTinyLeadersDesc"),
     Brawl               (DeckFormat.Brawl, false, false, false, "lblBrawl", "lblBrawlDesc"),
+    DuelCommander       (DeckFormat.DuelCommander, false, false, false, "lblDuelCommander", "lblDuelCommanderDesc"),
     Planeswalker        (DeckFormat.PlanarConquest, false, false, true, "lblPlaneswalker", "lblPlaneswalkerDesc"),
     Planechase          (DeckFormat.Planechase, false, false, true, "lblPlanechase", "lblPlanechaseDesc"),
     Archenemy           (DeckFormat.Archenemy, false, false, true, "lblArchenemy", "lblArchenemyDesc"),

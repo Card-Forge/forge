@@ -73,6 +73,10 @@ public class SEditorIO {
                     COathbreakerDecks.SINGLETON_INSTANCE.refresh();
                     VOathbreakerDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
                     break;
+                case DuelCommander:
+                    CDuelCommanderDecks.SINGLETON_INSTANCE.refresh();
+                    VDuelCommanderDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+                    break;
                 default:
                     CAllDecks.SINGLETON_INSTANCE.refresh(); //pull new deck into deck list and select it
                     VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);

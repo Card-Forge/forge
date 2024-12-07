@@ -16,7 +16,7 @@ import java.util.*;
 
 public class NetDeckCategory extends StorageBase<Deck> {
     public static final String PREFIX = "NET_DECK_";
-    private static Map<String, NetDeckCategory> constructed, commander, brawl, oathbreaker, tinyleaders;
+    private static Map<String, NetDeckCategory> constructed, commander, brawl, oathbreaker, tinyleaders, duelCommander;
 
     private static Map<String, NetDeckCategory> loadCategories(String filename) {
         Map<String, NetDeckCategory> categories = new TreeMap<>();
@@ -70,6 +70,12 @@ public class NetDeckCategory extends StorageBase<Deck> {
                     tinyleaders = loadCategories(ForgeConstants.NET_DECKS_TINYLEADERS_LIST_FILE);
                 }
                 categories = tinyleaders;
+                break;
+            case DuelCommander:
+                if (duelCommander == null) {
+                    duelCommander = loadCategories(ForgeConstants.NET_DECKS_DUEL_COMMANDER_LIST_FILE);
+                }
+                categories = duelCommander;
                 break;
         default:
             return null;

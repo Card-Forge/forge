@@ -90,13 +90,14 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntOathbreaker = new VariantCheckBox(GameType.Oathbreaker);
     private final VariantCheckBox vntTinyLeaders = new VariantCheckBox(GameType.TinyLeaders);
     private final VariantCheckBox vntBrawl = new VariantCheckBox(GameType.Brawl);
+    private final VariantCheckBox vntDuelCommander = new VariantCheckBox(GameType.DuelCommander);
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntDuelCommander, vntPlanechase, vntArchenemy, vntArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntDuelCommander /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -582,6 +583,7 @@ public class VLobby implements ILobbyView {
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
+        case DuelCommander:
             decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
             break;
         case Planechase:
@@ -793,6 +795,11 @@ public class VLobby implements ILobbyView {
                 forCommander = true;
                 deckType = iSlot == 0 ? DeckType.BRAWL_DECK : DeckType.CUSTOM_DECK;
                 prefKey = FPref.BRAWL_DECK_STATES[iSlot];
+                break;
+            case DuelCommander:
+                forCommander = true;
+                deckType = iSlot == 0 ? DeckType.DUEL_COMMANDER_DECK : DeckType.CUSTOM_DECK;
+                prefKey = FPref.DUEL_COMMANDER_DECK_STATES[iSlot];
                 break;
             default:
                 forCommander = false;

@@ -922,7 +922,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             }
             boolean isLegalCommander;
             String captionSuffix = Forge.getLocalizer().getMessage("lblCommander");
-            isLegalCommander = DeckFormat.Commander.isLegalCommander(card.getRules());
+            isLegalCommander = DeckFormat.Commander.isLegalCommander(card);
             if (isLegalCommander && !parentScreen.getCommanderPage().cardManager.getPool().contains(card)) {
                 addItem(menu, "Set", "as " + captionSuffix, parentScreen.getCommanderPage().getIcon(), isAddMenu, isAddSource, new Callback<Integer>() {
                     @Override

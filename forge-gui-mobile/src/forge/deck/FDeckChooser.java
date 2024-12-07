@@ -211,6 +211,7 @@ public class FDeckChooser extends FScreen {
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
+        case DuelCommander:
         case Gauntlet:
             initialize(null, DeckType.CUSTOM_DECK);
             break;
@@ -274,6 +275,9 @@ public class FDeckChooser extends FScreen {
                 case Brawl:
                     lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
                     break;
+                case DuelCommander:
+                    lstDecks.setSelectedString(DeckPreferences.getDuelCommanderDeck());
+                    break;
                 case Archenemy:
                     lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
                     break;
@@ -293,6 +297,9 @@ public class FDeckChooser extends FScreen {
                             break;
                         case BRAWL_DECK:
                             lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
+                            break;
+                        case DUEL_COMMANDER_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getDuelCommanderDeck());
                             break;
                         case SCHEME_DECK:
                             lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
@@ -376,6 +383,7 @@ public class FDeckChooser extends FScreen {
                         case OATHBREAKER_DECK:
                         case TINY_LEADERS_DECK:
                         case BRAWL_DECK:
+                        case DUEL_COMMANDER_DECK:
                         case SCHEME_DECK:
                         case PLANAR_DECK:
                         case DRAFT_DECK:
@@ -405,6 +413,7 @@ public class FDeckChooser extends FScreen {
         case OATHBREAKER_DECK:
         case TINY_LEADERS_DECK:
         case BRAWL_DECK:
+        case DUEL_COMMANDER_DECK:
         case SCHEME_DECK:
         case PLANAR_DECK:
         case DRAFT_DECK:
@@ -446,6 +455,9 @@ public class FDeckChooser extends FScreen {
                             case Oathbreaker:
                                 storage = FModel.getDecks().getOathbreaker();
                                 break;
+                            case DuelCommander:
+                                storage = FModel.getDecks().getDuelCommander();
+                                break;
                             default:
                                 storage = FModel.getDecks().getConstructed();
                                 break;
@@ -472,6 +484,8 @@ public class FDeckChooser extends FScreen {
                 return EditorType.TinyLeaders;
             case BRAWL_DECK:
                 return EditorType.Brawl;
+            case DUEL_COMMANDER_DECK:
+                return EditorType.DuelCommander;
             case SCHEME_DECK:
                 return EditorType.Archenemy;
             case PLANAR_DECK:
@@ -491,6 +505,8 @@ public class FDeckChooser extends FScreen {
             return EditorType.TinyLeaders;
         case Brawl:
             return EditorType.Brawl;
+        case DuelCommander:
+            return EditorType.DuelCommander;
         case Archenemy:
             return EditorType.Archenemy;
         case Planechase:
@@ -578,6 +594,7 @@ public class FDeckChooser extends FScreen {
             case Oathbreaker:
             case TinyLeaders:
             case Brawl:
+            case DuelCommander:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
                 cmbDeckTypes.addItem(DeckType.PRECON_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
@@ -593,6 +610,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.OATHBREAKER_DECK);
                 cmbDeckTypes.addItem(DeckType.TINY_LEADERS_DECK);
                 cmbDeckTypes.addItem(DeckType.BRAWL_DECK);
+                cmbDeckTypes.addItem(DeckType.DUEL_COMMANDER_DECK);
                 cmbDeckTypes.addItem(DeckType.SCHEME_DECK);
                 cmbDeckTypes.addItem(DeckType.PLANAR_DECK);
                 cmbDeckTypes.addItem(DeckType.DRAFT_DECK);
@@ -872,6 +890,10 @@ public class FDeckChooser extends FScreen {
                 pool = DeckProxy.getAllBrawlDecks();
                 config = ItemManagerConfig.COMMANDER_DECKS;
                 break;
+            case DuelCommander:
+                pool = DeckProxy.getAllDuelCommanderDecks();
+                config = ItemManagerConfig.COMMANDER_DECKS;
+                break;
             case Archenemy:
                 pool = DeckProxy.getAllSchemeDecks();
                 config = ItemManagerConfig.SCHEME_DECKS;
@@ -908,6 +930,10 @@ public class FDeckChooser extends FScreen {
             break;
         case BRAWL_DECK:
             pool = DeckProxy.getAllBrawlDecks();
+            config = ItemManagerConfig.COMMANDER_DECKS;
+            break;
+        case DUEL_COMMANDER_DECK:
+            pool = DeckProxy.getAllDuelCommanderDecks();
             config = ItemManagerConfig.COMMANDER_DECKS;
             break;
         case RANDOM_COMMANDER_DECK:
@@ -1408,8 +1434,14 @@ public class FDeckChooser extends FScreen {
         }
 
         if (selectedDeckType == DeckType.BRAWL_DECK) {
-            //cannot create gauntlet for tiny leaders decks, so just start single match
+            //cannot create gauntlet for brawl decks, so just start single match
             testVariantDeck(userDeck, GameType.Brawl);
+            return;
+        }
+
+        if (selectedDeckType == DeckType.DUEL_COMMANDER_DECK) {
+            //cannot create gauntlet for duel commander decks, so just start single match
+            testVariantDeck(userDeck, GameType.DuelCommander);
             return;
         }
 
