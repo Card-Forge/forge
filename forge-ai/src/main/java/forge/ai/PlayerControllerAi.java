@@ -734,14 +734,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<String> chooseLetter(int n, String ai, List<String> letters) {
-        List<String> chosen = Lists.newArrayList();
-        for (int i = 0; i <=n; i++) {
-            String choice = Aggregates.random(letters);
-            letters.remove(choice);
-            chosen.add(choice);
-        }
-        return chosen;
+    public List<String> chooseLetter(int n, SpellAbility sa, List<String> letters) {
+        return Aggregates.random(letters, n);
     }
 
     @Override
