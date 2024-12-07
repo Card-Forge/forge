@@ -8,4 +8,6 @@ SVar:DBPay:DB$ Pump | UnlessCost$ Mandatory PayEnergy<N> | UnlessPayer$ You | Un
 SVar:DBCounter:DB$ Counter | Defined$ Targeted | UnlessCost$ N | UnlessPayer$ TargetedController | StackDescription$ SpellDescription | SpellDescription$ Counter that spell unless its controller pays {1} for each {E} paid this way.
 SVar:Max:Count$YourCountersEnergy
 SVar:N:Count$ChosenNumber
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 Oracle:Choose target spell. You get {E}{E} (two energy counters), then you may pay any amount of {E}. Counter that spell unless its controller pays {1} for each {E} paid this way.

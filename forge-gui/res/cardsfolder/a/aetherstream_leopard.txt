@@ -8,4 +8,6 @@ SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}. If you do, it gets +2/+0 until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ PayEnergy<1> | Defined$ Self | NumAtt$ +2
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 Oracle:Trample\nWhen Aetherstream Leopard enters, you get {E} (an energy counter).\nWhenever Aetherstream Leopard attacks, you may pay {E}. If you do, it gets +2/+0 until end of turn.

@@ -9,4 +9,6 @@ SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum
 SVar:X:Count$TypeYouCtrl.Creature
 A:AB$ Pump | Cost$ PayEnergy<1> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 Oracle:Trample\nWhenever Aetherwind Basker enters or attacks, you get {E} (an energy counter) for each creature you control.\nPay {E}: Aetherwind Basker gets +1/+1 until end of turn.
