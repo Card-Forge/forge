@@ -358,9 +358,6 @@ public abstract class SpellAbilityAi {
             if (combat.getAttackers().isEmpty()) {
                 return false;
             }
-        } else if ("nonToken".equals(aiLogic) && !AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).isEmpty()
-                && AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0).isToken()) {
-            return false;
         } else if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
             return false;
         }
