@@ -6,6 +6,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPayLife;
@@ -115,6 +116,23 @@ public class TapAi extends TapAiBase {
                     }
                     return false;
                 }
+            }
+        } else if (sa.hasParam("UnlessSwitched")) {
+            // effect is each opponent may sacrifice to tap creature
+            Card source = sa.getHostCard();
+            if (alreadyPaid) {
+                return false;
+            }
+            // if it can't attack the payer, do nothing?
+            // TODO check if it can attack team mates?
+            if (!CombatUtil.canAttack(source, payer)) {
+                return false;
+            }
+
+            // predict combat damage
+            int dmg = ComputerUtilCombat.damageIfUnblocked(source, payer, null, false);
+            if (payer.getLife() < dmg * 1.5) {
+                return true;
             }
         }
         return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
