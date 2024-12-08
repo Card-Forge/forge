@@ -12,6 +12,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -19,6 +20,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.collect.FCollectionView;
 
 public class SacrificeAi extends SpellAbilityAi {
 
@@ -201,4 +203,17 @@ public class SacrificeAi extends SpellAbilityAi {
         return true;
     }
 
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        // Icy Prison
+        if (payers.size() > 1) {
+            final Player p = sa.getActivatingPlayer();
+            // not me or team mate
+            if (!p.sameTeam(payer)) {
+                return false;
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+    }
 }
