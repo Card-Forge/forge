@@ -317,12 +317,10 @@ public abstract class SpellAbilityAi {
     public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card source = sa.getHostCard();
         final String aiLogic = sa.getParam("UnlessAI");
-        boolean payForOwnOnly = "OnlyOwn".equals(aiLogic);
         boolean payNever = "Never".equals(aiLogic);
         boolean isMine = sa.getActivatingPlayer().equals(payer);
 
         if (payNever) { return false; }
-        if (payForOwnOnly && !isMine) { return false; }
         if ("Paralyze".equals(aiLogic)) {
             final Card c = source.getEnchantingCard();
             if (c == null || c.isUntapped()) {
@@ -351,7 +349,7 @@ public abstract class SpellAbilityAi {
         }
 
         // AI will only pay when it's not already payed and only opponents abilities
-        if (alreadyPaid || (payers.size() > 1 && (isMine && !payForOwnOnly))) {
+        if (alreadyPaid || (payers.size() > 1 && isMine)) {
             return false;
         }
 
