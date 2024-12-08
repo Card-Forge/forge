@@ -704,7 +704,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             FOptionPane.showErrorDialog(errorMessage);
         }
 
-        // if currentDvent is null, it should have been cleared or overwritten somehow
+        // if currentEvent is null, it should have been cleared or overwritten somehow
         if (currentEvent != null && currentEvent.getDraft() != null && !isShop) {
             if (currentEvent.isDraftComplete || canCloseCallback == null) {
                 super.onClose(canCloseCallback); //can skip prompt if draft saved
