@@ -836,11 +836,15 @@ public class ComputerUtilCard {
 
             //also take into account abilities that generate tokens
             if (includeTokens) {
-                for (String token : c.getRules().getTokens()) {
-                    CardRules tok = StaticData.instance().getAllTokens().getToken(token).getRules();
-                    for (String type : tok.getType().getCreatureTypes()) {
-                        Integer count = typesInDeck.getOrDefault(type, 0);
-                        typesInDeck.put(type, count + 1);
+                if (c.getRules() != null) {
+                    for (String token : c.getRules().getTokens()) {
+                        CardRules tokenCR = StaticData.instance().getAllTokens().getToken(token).getRules();
+                        if (tokenCR == null)
+                            continue;
+                        for (String type : tokenCR.getType().getCreatureTypes()) {
+                            Integer count = typesInDeck.getOrDefault(type, 0);
+                            typesInDeck.put(type, count + 1);
+                        }
                     }
                 }
 
