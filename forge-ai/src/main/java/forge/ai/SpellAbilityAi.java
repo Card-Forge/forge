@@ -321,12 +321,7 @@ public abstract class SpellAbilityAi {
         boolean isMine = sa.getActivatingPlayer().equals(payer);
 
         if (payNever) { return false; }
-        if ("RiskFactor".equals(aiLogic)) {
-            final Player activator = sa.getActivatingPlayer();
-            if (!activator.canDraw()) {
-                return false;
-            }
-        } else if ("MorePowerful".equals(aiLogic)) {
+        if ("MorePowerful".equals(aiLogic)) {
             final int sourceCreatures = sa.getActivatingPlayer().getCreaturesInPlay().size();
             final int payerCreatures = payer.getCreaturesInPlay().size();
             if (payerCreatures > sourceCreatures + 1) {
