@@ -67,6 +67,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
     private static class DraftPackPage extends CatalogPage {
         protected DraftPackPage() {
             super(ItemManagerConfig.DRAFT_PACK, Forge.getLocalizer().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
+            cardManager.setShowRanking(true);
         }
 
         @Override
@@ -85,7 +86,6 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             int packNumber = draft.getCurrentBoosterIndex() + 1;
             caption = Forge.getLocalizer().getMessage("lblPackN", String.valueOf(packNumber));
             cardManager.setPool(pool);
-            cardManager.setShowRanking(true);
         }
 
         @Override
