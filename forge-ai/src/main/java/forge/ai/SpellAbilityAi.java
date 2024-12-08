@@ -321,12 +321,7 @@ public abstract class SpellAbilityAi {
         boolean isMine = sa.getActivatingPlayer().equals(payer);
 
         if (payNever) { return false; }
-        if ("Paralyze".equals(aiLogic)) {
-            final Card c = source.getEnchantingCard();
-            if (c == null || c.isUntapped()) {
-                return false;
-            }
-        } else if ("RiskFactor".equals(aiLogic)) {
+        if ("RiskFactor".equals(aiLogic)) {
             final Player activator = sa.getActivatingPlayer();
             if (!activator.canDraw()) {
                 return false;
