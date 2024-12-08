@@ -12,7 +12,6 @@ import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.card.CounterType;
@@ -319,19 +318,12 @@ public abstract class SpellAbilityAi {
         final Card source = sa.getHostCard();
         final String aiLogic = sa.getParam("UnlessAI");
         boolean payForOwnOnly = "OnlyOwn".equals(aiLogic);
-        boolean payOwner = sa.hasParam("UnlessAI") && aiLogic.startsWith("Defined");
         boolean payNever = "Never".equals(aiLogic);
         boolean isMine = sa.getActivatingPlayer().equals(payer);
 
         if (payNever) { return false; }
         if (payForOwnOnly && !isMine) { return false; }
-        if (payOwner) {
-            final String defined = aiLogic.substring(7);
-            final Player player = AbilityUtils.getDefinedPlayers(source, defined, sa).get(0);
-            if (!payer.equals(player)) {
-                return false;
-            }
-        } else if ("OnlyDontControl".equals(aiLogic)) {
+        if ("OnlyDontControl".equals(aiLogic)) {
             if (source == null || payer.equals(source.getController())) {
                 return false;
             }
