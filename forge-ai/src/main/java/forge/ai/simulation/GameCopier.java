@@ -432,6 +432,7 @@ public class GameCopier {
             if (c.hasNamedCard()) {
                 newCard.setNamedCards(Lists.newArrayList(c.getNamedCards()));
             }
+            if (c.hasChosenLetter()) newCard.setChosenLetters(Lists.newArrayList(c.getChosenLetters()));
             newCard.setSVars(c.getSVars());
             newCard.copyChangedSVarsFrom(c);
         }
