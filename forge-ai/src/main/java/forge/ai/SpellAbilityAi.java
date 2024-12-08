@@ -323,11 +323,7 @@ public abstract class SpellAbilityAi {
 
         if (payNever) { return false; }
         if (payForOwnOnly && !isMine) { return false; }
-        if ("OnlyDontControl".equals(aiLogic)) {
-            if (source == null || payer.equals(source.getController())) {
-                return false;
-            }
-        } else if ("Paralyze".equals(aiLogic)) {
+        if ("Paralyze".equals(aiLogic)) {
             final Card c = source.getEnchantingCard();
             if (c == null || c.isUntapped()) {
                 return false;
