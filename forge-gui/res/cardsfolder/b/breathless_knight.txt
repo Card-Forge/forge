@@ -7,5 +7,6 @@ K:Lifelink
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+Other,Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME or another creature you control enters, if that creature entered from a graveyard or you cast it from a graveyard, put a +1/+1 counter on CARDNAME.
 T:Mode$ ChangesZone | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+Other+wasCastFromGraveyardByYou,Card.Self+wasCastFromGraveyardByYou | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature you control enters, if that creature entered from a graveyard or you cast it from a graveyard, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
-DeckHas:Ability$Counters
+DeckHas:Ability$Counters|LifeGain
+DeckHints:Ability$Graveyard
 Oracle:Flying, lifelink\nWhenever Breathless Knight or another creature you control enters, if that creature entered from a graveyard or you cast it from a graveyard, put a +1/+1 counter on Breathless Knight.

@@ -5,4 +5,5 @@ A:SP$ Destroy | ValidTgts$ Creature.attacking+nonArtifact | TgtPrompt$ Select ta
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_x_x_spirit | TokenOwner$ You | TokenPower$ dX | TokenToughness$ dY | AtEOT$ Sacrifice
 SVar:dX:Targeted$CardPower
 SVar:dY:Targeted$CardToughness
+DeckHas:Ability$Token|Sacrifice
 Oracle:Destroy target nonartifact attacking creature. It can't be regenerated. Create a black Spirit creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness. Sacrifice the token at the beginning of the next end step.
