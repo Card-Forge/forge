@@ -3,4 +3,5 @@ ManaCost:4 B
 Types:Creature Vampire
 PT:4/3
 K:Lifelink
+DeckHas:Ability$LifeGain
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)
