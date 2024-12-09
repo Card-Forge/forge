@@ -8,6 +8,7 @@ SVar:TrigUnblockable:DB$ Effect | TgtPrompt$ Select up to one target attacking c
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return that creature to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand
+DeckHas:Ability$Token
 AlternateMode:Specialize
 Oracle:Specialize {2}\nWhenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand.
 
@@ -24,7 +25,6 @@ SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresen
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ w_1_1_soldier | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token & Type$Soldier
 Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, create a 1/1 white Soldier creature token.
 
 SPECIALIZE:BLUE
@@ -72,7 +72,6 @@ SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresen
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBTreasure
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
 Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, create a Treasure token.
 
 SPECIALIZE:GREEN
