@@ -8,4 +8,6 @@ SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.Artifact+StrictlyOt
 K:Modular:2
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
+DeckHints:Ability$Counters|Proliferate
+DeckNeeds:Type$Artifact
 Oracle:First strike\nWhen Arcbound Shikari enters, put a +1/+1 counter on each other artifact creature you control.\nModular 2 (This creature enters with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)

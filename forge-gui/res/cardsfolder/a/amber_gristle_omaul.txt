@@ -7,7 +7,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$
 SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Hand> | NumCards$ X
 SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisCombat
 K:Choose a Background
-DeckHas:Ability$Discard
 SVar:HasAttackEffect:TRUE
 AI:RemoveDeck:Random
+DeckHas:Ability$Discard
 Oracle:Haste\nWhenever Amber Gristle O'Maul attacks, you may discard your hand. If you do, draw a card for each player being attacked.\nChoose a Background (You can have a Background as a second commander.)
