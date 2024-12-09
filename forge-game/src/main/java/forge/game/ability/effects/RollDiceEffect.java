@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.base.Functions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.game.ability.AbilityKey;
@@ -13,7 +12,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
@@ -197,7 +195,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
-        return Aggregates.sum(rolls, Functions.identity());
+        return rolls.stream().reduce(0, Integer::sum);
     }
 
     private static void resolveSub(SpellAbility sa, int num) {

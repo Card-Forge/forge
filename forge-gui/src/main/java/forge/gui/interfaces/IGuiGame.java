@@ -1,11 +1,5 @@
 package forge.gui.interfaces;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.base.Function;
-
 import forge.LobbyPlayer;
 import forge.ai.GameState;
 import forge.deck.CardPool;
@@ -29,6 +23,11 @@ import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);

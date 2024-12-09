@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
-import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
@@ -13,6 +10,9 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.util.IterableUtil;
+
+import java.util.Map;
 
 public class RepeatAi extends SpellAbilityAi {
 
@@ -53,9 +53,9 @@ public class RepeatAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (logic.startsWith("CopyBestCreature")) {
                 Card best = null;
-                Iterable<Card> targetableAi = Iterables.filter(ai.getCreaturesInPlay(), CardPredicates.isTargetableBy(sa));
+                Iterable<Card> targetableAi = IterableUtil.filter(ai.getCreaturesInPlay(), CardPredicates.isTargetableBy(sa));
                 if (!logic.endsWith("IgnoreLegendary")) {
-                    best = ComputerUtilCard.getBestAI(Iterables.filter(targetableAi, Card::ignoreLegendRule));
+                    best = ComputerUtilCard.getBestAI(IterableUtil.filter(targetableAi, Card::ignoreLegendRule));
                 } else {
                     best = ComputerUtilCard.getBestAI(targetableAi);
                 }

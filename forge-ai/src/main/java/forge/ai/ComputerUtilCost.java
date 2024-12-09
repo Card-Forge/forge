@@ -1,7 +1,5 @@
 package forge.ai;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
@@ -12,7 +10,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
@@ -23,6 +20,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
@@ -32,6 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 
 public class ComputerUtilCost {
@@ -607,7 +606,7 @@ public class ComputerUtilCost {
                 if (part instanceof CostSacrifice) {
                     CardCollection valid = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
                             sa.getActivatingPlayer(), sa.getHostCard(), sa);
-                    valid = CardLists.filter(valid, Predicates.not(CardPredicates.hasSVar("AIDontSacToCasualty")));
+                    valid = CardLists.filter(valid, CardPredicates.hasSVar("AIDontSacToCasualty").negate());
                     if (valid.isEmpty()) {
                         return false;
                     }
@@ -720,7 +719,7 @@ public class ComputerUtilCost {
 
             // Special Card logic, this one try to median its power with the number of artifacts
             if ("Marionette Master".equals(source.getName())) {
-                CardCollection list = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
+                CardCollection list = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS);
                 return list.size() >= copy.getNetPower();
             } else if ("Cultivator of Blades".equals(source.getName())) {
                 // Cultivator does try to median with number of Creatures
@@ -807,7 +806,7 @@ public class ComputerUtilCost {
         return getAvailableManaColors(ai, Lists.newArrayList(additionalLand));
     }
     public static Set<String> getAvailableManaColors(Player ai, List<Card> additionalLands) {
-        CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.UNTAPPED);
+        CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.UNTAPPED);
         Set<String> colorsAvailable = Sets.newHashSet();
 
         if (additionalLands != null) {
@@ -897,8 +896,8 @@ public class ComputerUtilCost {
 
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
         if (source.usesTargeting()) {
-            final CardCollection targets = new CardCollection(source.getTargets().getTargetCards());
-            choices = Iterables.filter(choices, Predicates.not(Predicates.and(CardPredicates.isController(ai), Predicates.in(targets))));
+            final CardCollectionView targets = source.getTargets().getTargetCards();
+            choices = IterableUtil.filter(choices, Predicate.not(CardPredicates.isController(ai).and(targets::contains)));
         }
         return new CardCollection(choices);
     }

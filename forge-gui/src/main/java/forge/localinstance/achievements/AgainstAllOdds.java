@@ -1,8 +1,5 @@
 package forge.localinstance.achievements;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -27,9 +24,9 @@ public class AgainstAllOdds extends Achievement {
             for (Player opp : player.getRegisteredOpponents()) {
                 PlayerCollection otherOpps = player.getRegisteredOpponents();
                 otherOpps.remove(opp);
-                if (Iterables.all(otherOpps, PlayerPredicates.sameTeam(opp))) {
+                if (otherOpps.stream().allMatch(PlayerPredicates.sameTeam(opp))) {
                     teamNum++;   
-                } else if (Iterables.all(otherOpps, Predicates.not(PlayerPredicates.sameTeam(opp)))) {
+                } else if (otherOpps.stream().allMatch(PlayerPredicates.sameTeam(opp).negate())) {
                     teamNum--;
                 }
             }

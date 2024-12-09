@@ -17,14 +17,16 @@
  */
 package forge.gui.download;
 
-import java.util.*;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.ImageUtil;
+
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class GuiDownloadPicturesLQ extends GuiDownloadService {
     final Map<String, String> downloads = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);

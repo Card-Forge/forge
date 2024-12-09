@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -14,7 +13,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
@@ -374,7 +372,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // remove cards that won't be seen if library can't be searched
             if (!ai.canSearchLibraryWith(sa, p)) {
-                list = CardLists.filter(list, Predicates.not(CardPredicates.inZone(ZoneType.Library)));
+                list = CardLists.filter(list, CardPredicates.inZone(ZoneType.Library).negate());
             }
 
             if (type != null && p == ai) {
@@ -617,8 +615,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // pick dual lands if available
-        if (Iterables.any(result, Predicates.not(CardPredicates.Presets.BASIC_LANDS))) {
-            result = CardLists.filter(result, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
+        if (result.stream().anyMatch(CardPredicates.NONBASIC_LANDS)) {
+            result = CardLists.filter(result, CardPredicates.NONBASIC_LANDS);
         }
 
         return result.get(0);
@@ -909,7 +907,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         if (source.isInZone(ZoneType.Hand)) {
-            list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
+            list = CardLists.filter(list, CardPredicates.nameNotEquals(source.getName())); // Don't get the same card back.
         }
         if (sa.isSpell()) {
             list.remove(source); // spells can't target their own source, because it's actually in the stack zone
@@ -1016,7 +1014,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     boolean saheeliFelidarCombo = ComputerUtilAbility.getAbilitySourceName(sa).equals("Felidar Guardian")
                             && tobounce.getName().equals("Saheeli Rai")
                             && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Felidar Guardian")).size() <
-                            CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Creature")).size() + ai.getOpponentsGreatestLifeTotal() + 10;
+                            CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES).size() + ai.getOpponentsGreatestLifeTotal() + 10;
 
                     // remember that the card was bounced already unless it's a special combo case
                     if (!saheeliFelidarCombo) {
@@ -1200,7 +1198,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
-                    choice = chooseCreature(ai, CardLists.filter(nonLands, CardPredicates.Presets.CREATURES));
+                    choice = chooseCreature(ai, CardLists.filter(nonLands, CardPredicates.CREATURES));
                     if (choice == null) { // Could not find a creature.
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
@@ -1312,7 +1310,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         Game game = ai.getGame();
         // filter out untargetables
         CardCollectionView aiPermanents = CardLists.filterControlledBy(list, ai);
-        CardCollection aiPlaneswalkers = CardLists.filter(aiPermanents, Presets.PLANESWALKERS);
+        CardCollection aiPlaneswalkers = CardLists.filter(aiPermanents, CardPredicates.PLANESWALKERS);
 
         // Felidar Guardian + Saheeli Rai combo support
         if (sa.getHostCard().getName().equals("Felidar Guardian")) {
@@ -1338,7 +1336,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             Combat combat = game.getCombat();
             final CardCollection combatants = CardLists.filter(aiPermanents,
-                    CardPredicates.Presets.CREATURES);
+                    CardPredicates.CREATURES);
             ComputerUtilCard.sortByEvaluateCreature(combatants);
 
             for (final Card c : combatants) {
@@ -1455,7 +1453,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
-                    choice = chooseCreature(ai, CardLists.filter(nonLands, CardPredicates.Presets.CREATURES));
+                    choice = chooseCreature(ai, CardLists.filter(nonLands, CardPredicates.CREATURES));
                     if (choice == null) { // Could not find a creature.
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
@@ -1631,14 +1629,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         } else {
             // Don't fetch another tutor with the same name
-            CardCollection sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(ComputerUtilAbility.getAbilitySourceName(sa))));
+            CardCollection sameNamed = CardLists.filter(fetchList, CardPredicates.nameNotEquals(ComputerUtilAbility.getAbilitySourceName(sa)));
             if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                 fetchList = sameNamed;
             }
 
             // Does AI need a land?
             CardCollectionView hand = decider.getCardsIn(ZoneType.Hand);
-            if (!Iterables.any(hand, Presets.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), Presets.LANDS) < 4) {
+            if (!hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4) {
                 boolean canCastSomething = false;
                 for (Card cardInHand : hand) {
                     canCastSomething = canCastSomething || ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), decider);
@@ -1648,13 +1646,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (c == null) {
-                if (Iterables.all(fetchList, Presets.LANDS)) {
+                if (fetchList.allMatch(CardPredicates.LANDS)) {
                     // we're only choosing from lands, so get the best land
                     c = ComputerUtilCard.getBestLandAI(fetchList);
                 } else {
                     fetchList = CardLists.getNotType(fetchList, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
-                    c = chooseCreature(decider, CardLists.filter(fetchList, CardPredicates.Presets.CREATURES));
+                    c = chooseCreature(decider, CardLists.filter(fetchList, CardPredicates.CREATURES));
                 }
             }
             if (c == null) { // Could not find a creature.
@@ -1772,7 +1770,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         CardCollection listToSac = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), definedSac, ai, source, sa);
         listToSac.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
 
-        CardCollection listToRet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+        CardCollection listToRet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
         listToRet.sort(CardLists.CmcComparatorInv);
 
         if (!listToSac.isEmpty() && !listToRet.isEmpty()) {
@@ -1963,7 +1961,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             if (logic.contains("NonLand")) {
-                scanList = CardLists.filter(scanList, Predicates.not(Presets.LANDS));
+                scanList = CardLists.filter(scanList, CardPredicates.NON_LANDS);
             }
 
             if (logic.contains("NonExiled")) {

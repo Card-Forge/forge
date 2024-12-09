@@ -18,8 +18,6 @@
 package forge.gamemodes.quest;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import forge.card.CardEdition;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.ReadPriceList;
@@ -35,6 +33,7 @@ import forge.util.storage.IStorage;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited
@@ -136,14 +135,17 @@ public class QuestUtilUnlockSets {
             throw new RuntimeException("BUG? Could not find unlockable sets even though we should.");
         }
         List<CardEdition> options = new ArrayList<>();
+        CardEdition.Collection editions = FModel.getMagicDb().getEditions();
 
         // Sort current sets by date
-        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), FModel.getMagicDb().getEditions()::get));
-        Collections.sort(allowedSets);
+        List<CardEdition> allowedSets = qData.getFormat().getAllowedSetCodes().stream()
+                .map(editions::get)
+                .sorted().collect(Collectors.toList());
         
         // Sort unlockable sets by date
-        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), FModel.getMagicDb().getEditions()::get));
-        Collections.sort(excludedSets);
+        List<CardEdition> excludedSets = qData.getFormat().getLockedSets().stream()
+                .map(editions::get)
+                .sorted().collect(Collectors.toList());
         
         // get a number of sets between an excluded and any included set
         List<ImmutablePair<CardEdition, Long>> excludedWithDistances = new ArrayList<>();

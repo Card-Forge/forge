@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
@@ -12,8 +11,12 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.*;
+import forge.game.spellability.Spell;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.spellability.SpellPermanent;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 
 import java.util.List;
@@ -220,7 +223,7 @@ public class PlayAi extends SpellAbilityAi {
 
         if (cards != null & sa.hasParam("ValidSA")) {
             final String valid[] = sa.getParam("ValidSA").split(",");
-            final List<Card> invalid = cards.stream().filter(c -> !Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai, source, sa))).collect(Collectors.toList());
+            final List<Card> invalid = cards.stream().filter(c -> !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai, source, sa))).collect(Collectors.toList());
             if (!invalid.isEmpty())
                 cards.removeAll(invalid);
         }

@@ -16,19 +16,17 @@
 
 package forge.lda.lda.inference.internal;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.IntStream;
-
+import forge.lda.dataset.Vocabulary;
 import forge.lda.lda.LDA;
 import forge.lda.lda.inference.Inference;
 import forge.lda.lda.inference.InferenceProperties;
-
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.math3.distribution.EnumeratedIntegerDistribution;
 import org.apache.commons.math3.distribution.IntegerDistribution;
 
-import forge.lda.dataset.Vocabulary;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class CollapsedGibbsSampler implements Inference {
     private LDA lda;

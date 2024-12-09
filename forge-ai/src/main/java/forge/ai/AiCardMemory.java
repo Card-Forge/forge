@@ -28,6 +28,7 @@ import com.google.common.collect.Sets;
 import forge.game.card.Card;
 import forge.game.player.Player;
 
+
 /**
  * <p>
  * AiCardMemory class.

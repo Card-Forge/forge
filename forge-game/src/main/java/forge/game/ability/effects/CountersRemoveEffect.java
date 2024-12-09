@@ -5,7 +5,6 @@ import java.util.Map;
 import forge.game.card.*;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -238,7 +237,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             int max = Math.min(cntToRemove, tgtCounters.get(chosenType));
             // remove selection so player can't cheat additional trigger by choosing the same type multiple times
             tgtCounters.remove(chosenType);
-            int remaining = Aggregates.sum(tgtCounters.values(), Functions.identity());
+            int remaining = Aggregates.sum(tgtCounters.values());
             // player must choose enough so he can still reach the amount with other types
             int min = sa.hasParam("UpTo") ? 0 : Math.max(1, max - remaining);
             prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName());

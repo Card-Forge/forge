@@ -1,6 +1,5 @@
 package forge.deckchooser;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import forge.deck.*;
 import forge.game.GameFormat;
@@ -31,6 +30,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel implements IDecksComboBoxListener {

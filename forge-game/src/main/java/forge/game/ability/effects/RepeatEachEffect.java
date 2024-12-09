@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.*;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -22,6 +21,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.collect.FCollection;
 
 public class RepeatEachEffect extends SpellAbilityEffect {
@@ -179,7 +179,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 }
                 if (nextTurn) {
                     game.getCleanup().addUntil(p, (GameCommand) () -> {
-                        List<Object> tempRemembered = Lists.newArrayList(Iterables.filter(source.getRemembered(), Player.class));
+                        List<Object> tempRemembered = Lists.newArrayList(IterableUtil.filter(source.getRemembered(), Player.class));
                         source.removeRemembered(tempRemembered);
                         source.addRemembered(p);
                         AbilityUtils.resolve(repeat);
@@ -188,7 +188,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     });
                 } else {
                     // to avoid risk of collision with other abilities swap out other Remembered Player while resolving
-                    List<Object> tempRemembered = Lists.newArrayList(Iterables.filter(source.getRemembered(), Player.class));
+                    List<Object> tempRemembered = Lists.newArrayList(IterableUtil.filter(source.getRemembered(), Player.class));
                     source.removeRemembered(tempRemembered);
                     source.addRemembered(p);
                     if (sa.hasParam("AmountFromVotes")) {

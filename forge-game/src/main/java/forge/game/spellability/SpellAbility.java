@@ -19,6 +19,8 @@ package forge.game.spellability;
 
 import java.util.*;
 
+import com.google.common.collect.*;
+
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import forge.game.cost.CostSacrifice;
@@ -26,8 +28,6 @@ import forge.util.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.collect.*;
 
 import forge.GameCommand;
 import forge.card.CardStateName;
@@ -1974,7 +1974,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         SpellAbility child = getParent();
         while (child != null) {
             if (child.usesTargeting()) {
-                Iterables.addAll(targets, child.getTargets());
+                targets.addAll(child.getTargets());
             }
             child = child.getParent();
         }

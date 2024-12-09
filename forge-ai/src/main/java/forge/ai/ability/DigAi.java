@@ -1,17 +1,7 @@
 package forge.ai.ability;
 
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
-
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -27,6 +17,8 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+
+import java.util.Map;
 
 
 public class DigAi extends SpellAbilityAi {

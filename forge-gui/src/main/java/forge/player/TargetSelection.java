@@ -17,22 +17,9 @@
  */
 package forge.player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
-import forge.game.GameObject;
+import forge.game.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
@@ -48,7 +35,11 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputSelectTargets;
 import forge.util.Aggregates;
+import forge.util.IterableUtil;
 import forge.util.TextUtil;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -117,7 +108,7 @@ public class TargetSelection {
         boolean hasEnoughCandidates = candidates.size() >= minTargets;
         if (tgt.isDifferentControllers() || tgt.isForEachPlayer()) {
             PlayerCollection controllers = new PlayerCollection();
-            Iterables.filter(candidates, Card.class).forEach(c -> controllers.add(c.getController()));
+            IterableUtil.filter(candidates, Card.class).forEach(c -> controllers.add(c.getController()));
             hasEnoughCandidates &= controllers.size() >= minTargets;
         }
         mandatory &= hasEnoughCandidates;
@@ -154,7 +145,7 @@ public class TargetSelection {
             mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(controller.getPlayer(), validTargets, ability);
         }
         if (filter != null) {
-            validTargets = new CardCollection(Iterables.filter(validTargets, filter));
+            validTargets = new CardCollection(IterableUtil.filter(validTargets, filter));
         }
 
         // single zone

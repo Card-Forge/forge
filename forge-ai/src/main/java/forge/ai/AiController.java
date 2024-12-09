@@ -18,8 +18,6 @@
 package forge.ai;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -39,7 +37,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
@@ -62,14 +59,13 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.ComparatorUtil;
-import forge.util.Expressions;
-import forge.util.MyRandom;
+import forge.util.*;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -207,7 +203,7 @@ public class AiController {
                             return true;
                         }
                     }
-                    if (Iterables.any(game.getCardsIn(ZoneType.Graveyard), CardPredicates.nameEquals(hostName))) {
+                    if (game.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.nameEquals(hostName))) {
                         return true;
                     }
                 }
@@ -433,10 +429,10 @@ public class AiController {
 
     private CardCollection filterLandsToPlay(CardCollection landList) {
         final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
-        CardCollection nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
+        CardCollection nonLandList = CardLists.filter(hand, CardPredicates.NON_LANDS);
         if (landList.size() == 1 && nonLandList.size() < 3) {
             CardCollectionView cardsInPlay = player.getCardsIn(ZoneType.Battlefield);
-            CardCollection landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
+            CardCollection landsInPlay = CardLists.filter(cardsInPlay, CardPredicates.LANDS);
             CardCollection allCards = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
             allCards.addAll(player.getCardsIn(ZoneType.Command));
             allCards.addAll(cardsInPlay);
@@ -466,7 +462,7 @@ public class AiController {
             String name = c.getName();
             CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
             if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
-                if (Iterables.any(battlefield, CardPredicates.nameEquals(name))) {
+                if (battlefield.anyMatch(CardPredicates.nameEquals(name))) {
                     return false;
                 }
             }
@@ -474,7 +470,7 @@ public class AiController {
             final CardCollectionView hand1 = player.getCardsIn(ZoneType.Hand);
             CardCollection lands = new CardCollection(battlefield);
             lands.addAll(hand1);
-            lands = CardLists.filter(lands, Presets.LANDS);
+            lands = CardLists.filter(lands, CardPredicates.LANDS);
             int maxCmcInHand = Aggregates.max(hand1, Card::getCMC);
 
             if (lands.size() >= Math.max(maxCmcInHand, 6)) {
@@ -488,7 +484,7 @@ public class AiController {
                     return false;
                 }
             }
-            return Iterables.any(c.getAllPossibleAbilities(player, true), SpellAbility::isLandAbility);
+            return c.getAllPossibleAbilities(player, true).stream().anyMatch(SpellAbility::isLandAbility);
         });
         return landList;
     }
@@ -498,7 +494,7 @@ public class AiController {
             return null;
         }
 
-        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
+        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
 
         // Some considerations for Momir/MoJhoSto
         boolean hasMomir = player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
@@ -584,7 +580,7 @@ public class AiController {
             CardCollection oneDrops = CardLists.filter(nonLandsInHand, CardPredicates.hasCMC(1));
             for (int i = 0; i < MagicColor.WUBRG.length; i++) {
                 byte color = MagicColor.WUBRG[i];
-                if (Iterables.any(oneDrops, CardPredicates.isColor(color))) {
+                if (oneDrops.anyMatch(CardPredicates.isColor(color))) {
                     for (Card land : landList) {
                         if (land.getType().hasSubtype(MagicColor.Constant.BASIC_LANDS.get(i))) {
                             return land;
@@ -627,8 +623,8 @@ public class AiController {
             }
 
             // pick dual lands if available
-            if (Iterables.any(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS))) {
-                landList = CardLists.filter(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
+            if (landList.anyMatch(CardPredicates.NONBASIC_LANDS)) {
+                landList = CardLists.filter(landList, CardPredicates.NONBASIC_LANDS);
             }
         }
         return ComputerUtilCard.getBestLandToPlayAI(landList);
@@ -1097,7 +1093,7 @@ public class AiController {
                 if ("DiscardUncastableAndExcess".equals(sa.getParam("AILogic"))) {
                     CardCollection discards = new CardCollection();
                     final CardCollectionView inHand = player.getCardsIn(ZoneType.Hand);
-                    final int numLandsOTB = CardLists.count(inHand, CardPredicates.Presets.LANDS);
+                    final int numLandsOTB = CardLists.count(inHand, CardPredicates.LANDS);
                     int numOppInHand = 0;
                     for (Player p : player.getGame().getPlayers()) {
                         if (p.getCardsIn(ZoneType.Hand).size() > numOppInHand) {
@@ -1155,8 +1151,8 @@ public class AiController {
             if (validCards.isEmpty()) {
                 continue;
             }
-            final int numLandsInPlay = CardLists.count(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
-            final CardCollection landsInHand = CardLists.filter(validCards, CardPredicates.Presets.LANDS);
+            final int numLandsInPlay = CardLists.count(player.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
+            final CardCollection landsInHand = CardLists.filter(validCards, CardPredicates.LANDS);
             final int numLandsInHand = landsInHand.size();
 
             // Discard a land
@@ -1431,12 +1427,11 @@ public class AiController {
             return false;
         }
 
-        CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand),
-                Predicates.not(CardPredicates.Presets.LANDS));
+        CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
         if (getBooleanProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
-            if (!Iterables.any(otb, Predicates.not(CardPredicates.Presets.LANDS))) {
+            if (!otb.anyMatch(CardPredicates.NON_LANDS)) {
                 return false;
             }
         }
@@ -1458,7 +1453,7 @@ public class AiController {
         boolean canCastWithLandDrop = (predictedMana + 1 >= minCMCInHand) && minCMCInHand > 0 && !isTapLand;
         boolean cantCastAnythingNow = predictedMana < minCMCInHand;
 
-        boolean hasRelevantAbsOTB = Iterables.any(otb, card -> {
+        boolean hasRelevantAbsOTB = otb.anyMatch(card -> {
             boolean isTapLand1 = false;
             for (ReplacementEffect repl : card.getReplacementEffects()) {
                 // TODO: improve the detection of taplands
@@ -1479,7 +1474,7 @@ public class AiController {
             return false;
         });
 
-        boolean hasLandBasedEffect = Iterables.any(otb, card -> {
+        boolean hasLandBasedEffect = otb.anyMatch(card -> {
             for (Trigger t : card.getTriggers()) {
                 Map<String, String> params = t.getMapParams();
                 if ("ChangesZone".equals(params.get("Mode"))
@@ -1581,16 +1576,16 @@ public class AiController {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
         }
 
-        Iterables.removeIf(saList, spellAbility -> { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
+        saList.removeIf(spellAbility -> { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
             // TODO allow when experimental profile?
             return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
         });
         //removed skipped SA
-        skipped = Lists.newArrayList(Iterables.filter(saList, SpellAbility::isSkip));
+        skipped = saList.stream().filter(SpellAbility::isSkip).collect(Collectors.toList());
         if (!skipped.isEmpty())
             saList.removeAll(skipped);
         //update LivingEndPlayer
-        useLivingEnd = Iterables.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
+        useLivingEnd = IterableUtil.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
 
         SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
 
@@ -1623,32 +1618,34 @@ public class AiController {
                     continue;
                 }
 
-                if (sa.getHostCard().hasKeyword(Keyword.STORM)
-                        && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
-                        && player.getZone(ZoneType.Hand).contains(Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm"))))) {
-                    if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
-                        // skip evaluating Storm unless we reached the minimum Storm count
-                        continue;
-                    }
+            if (sa.getHostCard().hasKeyword(Keyword.STORM)
+                    && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
+                    && player.getZone(ZoneType.Hand).contains(
+                            Predicate.not(CardPredicates.LANDS.or(CardPredicates.hasKeyword("Storm")))
+                )) {
+                if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
+                    // skip evaluating Storm unless we reached the minimum Storm count
+                    continue;
                 }
-                // living end AI decks
-                // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
-                AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
-                if (useLivingEnd) {
-                    if (sa.isCycling() && sa.canCastTiming(player) && player.getCardsIn(ZoneType.Library).size() >= 10) {
-                        if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
-                            if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
-                                    && !player.cantLoseForZeroOrLessLife()
-                                    && player.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
-                                aiPlayDecision = AiPlayDecision.CantAfford;
-                            } else {
-                                aiPlayDecision = AiPlayDecision.WillPlay;
-                            }
+            }
+            // living end AI decks
+            // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
+            AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
+            if (useLivingEnd) {
+                if (sa.isCycling() && sa.canCastTiming(player) && player.getCardsIn(ZoneType.Library).size() >= 10) {
+                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
+                        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                                && !player.cantLoseForZeroOrLessLife()
+                                && player.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                            aiPlayDecision = AiPlayDecision.CantAfford;
+                        } else {
+                            aiPlayDecision = AiPlayDecision.WillPlay;
                         }
-                    } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
-                        if (isLifeInDanger) { //needs more tune up for certain conditions
-                            aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
-                        } else if (CardLists.filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.Presets.CREATURES).size() > 4) {
+                    }
+                } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
+                    if (isLifeInDanger) { //needs more tune up for certain conditions
+                        aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
+                    } else if (CardLists.filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.CREATURES).size() > 4) {
                             if (player.getCreaturesInPlay().size() >= 4) // it's good minimum
                                 continue;
                             else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player) && ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
@@ -2029,7 +2026,7 @@ public class AiController {
                         break;
                     }
                 } else {
-                    CardCollectionView viableOptions = CardLists.filter(pool, CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents()), CardPredicates.Presets.CAN_BE_DESTROYED);
+                    CardCollectionView viableOptions = CardLists.filter(pool, CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents()), CardPredicates.CAN_BE_DESTROYED);
                     Card best = ComputerUtilCard.getBestAI(viableOptions);
                     if (best != null) {
                         result.add(best);
@@ -2105,7 +2102,7 @@ public class AiController {
         CardLists.shuffle(library);
 
         // remove all land, keep non-basicland in there, shuffled
-        CardCollection land = CardLists.filter(library, CardPredicates.Presets.LANDS);
+        CardCollection land = CardLists.filter(library, CardPredicates.LANDS);
         for (Card c : land) {
             if (c.isLand()) {
                 library.remove(c);
@@ -2155,7 +2152,7 @@ public class AiController {
             }
         }
         if ("Aminatou".equals(sa.getParam("AILogic")) && game.getPlayers().size() > 2) {
-            CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.NONLAND_PERMANENTS);
+            CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.NONLAND_PERMANENTS);
             CardCollection left = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Left));
             CardCollection right = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Right));
             return Aggregates.sum(left, Card::getCMC) > Aggregates.sum(right, Card::getCMC);
@@ -2231,7 +2228,7 @@ public class AiController {
         // do mandatory discard early if hand is empty or has DiscardMe card
         boolean discardEarly = false;
         CardCollectionView playerHand = player.getCardsIn(ZoneType.Hand);
-        if (playerHand.isEmpty() || Iterables.any(playerHand, CardPredicates.hasSVar("DiscardMe"))) {
+        if (playerHand.isEmpty() || playerHand.anyMatch(CardPredicates.hasSVar("DiscardMe"))) {
             discardEarly = true;
             result.addAll(mandatoryDiscard);
         }
@@ -2264,7 +2261,7 @@ public class AiController {
 
     // TODO move to more common place
     private static <T> List<T> filterList(List<T> input, Predicate<? super T> pred) {
-        List<T> filtered = Lists.newArrayList(Iterables.filter(input, pred));
+        List<T> filtered = input.stream().filter(pred).collect(Collectors.toList());
         input.removeAll(filtered);
         return filtered;
     }
@@ -2343,7 +2340,7 @@ public class AiController {
             List<ReplacementEffect> shield = filterList(list, CardTraitPredicates.hasParam("ShieldCounter"));
             List<ReplacementEffect> regeneration = filterList(list, CardTraitPredicates.hasParam("Regeneration"));
             List<ReplacementEffect> umbraArmor = filterList(list, CardTraitPredicates.isKeyword(Keyword.UMBRA_ARMOR));
-            List<ReplacementEffect> umbraArmorIndestructible = filterList(umbraArmor, Predicates.compose(CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE), CardTraitBase::getHostCard));
+            List<ReplacementEffect> umbraArmorIndestructible = filterList(umbraArmor, x -> x.getHostCard().hasKeyword(Keyword.INDESTRUCTIBLE));
 
             // Indestructible umbra armor is the best
             if (!umbraArmorIndestructible.isEmpty()) {

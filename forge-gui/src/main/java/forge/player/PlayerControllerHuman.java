@@ -1,7 +1,5 @@
 package forge.player;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
@@ -79,6 +77,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -1815,16 +1815,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public ICardFace chooseSingleCardFace(final SpellAbility sa, final String message, final Predicate<ICardFace> cpp,
                                           final String name) {
-        final Iterable<ICardFace> cardsFromDb = FModel.getMagicDb().getCommonCards().getAllFaces();
-        final List<ICardFace> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
-        CardFaceView cardFaceView;
-        List<CardFaceView> choices = new ArrayList<>();
-        for (ICardFace cardFace : cards) {
-            cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
-            choices.add(cardFaceView);
-        }
-        Collections.sort(choices);
-        cardFaceView = getGui().one(message, choices);
+        List<CardFaceView> choices = FModel.getMagicDb().getCommonCards().streamAllFaces()
+                .filter(cpp)
+                .map(cardFace -> new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName()))
+                .sorted()
+                .collect(Collectors.toList());
+        CardFaceView cardFaceView = getGui().one(message, choices);
         return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getOracleName());
     }
 
@@ -2651,7 +2647,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         public void tapPermanents() {
             getGame().getAction().invoke(() -> {
                 final CardCollectionView untapped = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield),
-                        CardPredicates.Presets.UNTAPPED);
+                        CardPredicates.UNTAPPED);
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0,
                         Integer.MAX_VALUE, untapped);
                 inp.setCancelAllowed(true);
@@ -2680,7 +2676,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         public void untapPermanents() {
             getGame().getAction().invoke(() -> {
                 final CardCollectionView tapped = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield),
-                        CardPredicates.Presets.TAPPED);
+                        CardPredicates.TAPPED);
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0,
                         Integer.MAX_VALUE, tapped);
                 inp.setCancelAllowed(true);

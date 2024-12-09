@@ -1,6 +1,5 @@
 package forge.ai;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.ai.AiCardMemory.MemorySet;
@@ -110,13 +109,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 Card chosen;
                 if (!discardMe.isEmpty()) {
                     chosen = Aggregates.random(discardMe);
-                    discardMe = CardLists.filter(discardMe, Predicates.not(CardPredicates.sharesNameWith(chosen)));
+                    discardMe = CardLists.filter(discardMe, CardPredicates.sharesNameWith(chosen).negate());
                 } else {
                     final Card worst = ComputerUtilCard.getWorstAI(hand);
                     chosen = worst != null ? worst : Aggregates.random(hand);
                 }
                 differentNames.add(chosen);
-                hand = CardLists.filter(hand, Predicates.not(CardPredicates.sharesNameWith(chosen)));
+                hand = CardLists.filter(hand, CardPredicates.sharesNameWith(chosen).negate());
                 c--;
             }
             return PaymentDecision.card(differentNames);

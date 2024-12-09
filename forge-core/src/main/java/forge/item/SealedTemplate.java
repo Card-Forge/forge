@@ -1,6 +1,5 @@
 package forge.item;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import forge.item.generation.BoosterSlots;
 import forge.util.TextUtil;
@@ -11,6 +10,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class SealedTemplate {
 

@@ -1,16 +1,9 @@
 package forge.gamemodes.limited;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.CardAiHints;
@@ -28,7 +21,9 @@ import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.model.FModel;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 
 /**
@@ -82,15 +77,15 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         this.colors = pClrs.getChosenColors();
 
         // remove Unplayables
-        final Iterable<PaperCard> playables = Iterables.filter(availableList,
-                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_LIMITED_DECKS, PaperCard::getRules));
-        this.aiPlayables = Lists.newArrayList(playables);
+        this.aiPlayables = availableList.stream()
+                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_LIMITED_DECKS))
+                .collect(Collectors.toList());
         this.availableList.removeAll(aiPlayables);
 
         // keep Conspiracies in a separate list
-        final Iterable<PaperCard> conspiracies = Iterables.filter(aiPlayables,
-                Predicates.compose(CardRulesPredicates.coreType(true, "Conspiracy"), PaperCard::getRules));
-        this.draftedConspiracies = Lists.newArrayList(conspiracies);
+        this.draftedConspiracies = aiPlayables.stream()
+                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONSPIRACY))
+                .collect(Collectors.toList());
         this.aiPlayables.removeAll(draftedConspiracies);
 
         findBasicLandSets();
@@ -134,21 +129,20 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     @SuppressWarnings("unused")
     public Deck buildDeck(final String landSetCode) {
         // 1. Prepare
-        hasColor = Predicates.or(new MatchColorIdentity(colors), COLORLESS_CARDS);
-        Iterable<PaperCard> colorList = Iterables.filter(aiPlayables,
-                Predicates.compose(hasColor, PaperCard::getRules));
+        hasColor = new MatchColorIdentity(colors).or(COLORLESS_CARDS);
+        Iterable<PaperCard> colorList = IterableUtil.filter(aiPlayables,
+                PaperCardPredicates.fromRules(hasColor));
         rankedColorList = CardRanker.rankCardsInDeck(colorList);
-        onColorCreatures = Iterables.filter(rankedColorList,
-                Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard::getRules));
-        onColorNonCreatures = Iterables.filter(rankedColorList,
-                Predicates.compose(CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, PaperCard::getRules));
+        onColorCreatures = IterableUtil.filter(rankedColorList, PaperCardPredicates.IS_CREATURE);
+        onColorNonCreatures = IterableUtil.filter(rankedColorList,
+                PaperCardPredicates.fromRules(CardRulesPredicates.IS_NON_CREATURE_SPELL));
         // Guava iterables do not copy the collection contents, instead they act
         // as filters and iterate over _source_ collection each time. So even if
         // aiPlayable has changed, there is no need to create a new iterable.
 
         // 2. Add any planeswalkers
-        final Iterable<PaperCard> onColorWalkers = Iterables.filter(colorList,
-                Predicates.compose(CardRulesPredicates.Presets.IS_PLANESWALKER, PaperCard::getRules));
+        final Iterable<PaperCard> onColorWalkers = IterableUtil.filter(colorList,
+                PaperCardPredicates.fromRules(CardRulesPredicates.IS_PLANESWALKER));
         final List<PaperCard> walkers = Lists.newArrayList(onColorWalkers);
         deckList.addAll(walkers);
         aiPlayables.removeAll(walkers);
@@ -170,9 +164,9 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         // 6. If there are still on-color cards, and the average cmc is low, add
         // an extra.
         if (deckList.size() == numSpellsNeeded && getAverageCMC(deckList) < 4) {
-            final Iterable<PaperCard> nonLands = Iterables.filter(rankedColorList,
-                    Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard::getRules));
-            final PaperCard card = Iterables.getFirst(nonLands, null);
+            final PaperCard card = rankedColorList.stream()
+                    .filter(PaperCardPredicates.IS_NON_LAND)
+                    .findFirst().orElse(null);
             if (card != null) {
                 deckList.add(card);
                 aiPlayables.remove(card);
@@ -322,7 +316,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         final Set<String> sets = new HashSet<>();
         for (final PaperCard cp : aiPlayables) {
             final CardEdition ee = FModel.getMagicDb().getEditions().get(cp.getEdition());
-            if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.apply(ee)) {
+            if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.test(ee)) {
                 sets.add(cp.getEdition());
             }
         }
@@ -342,7 +336,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      */
     private void addLands(final int[] clrCnts, final String landSetCode) {
         // basic lands that are available in the deck
-        final Iterable<PaperCard> basicLands = Iterables.filter(aiPlayables, Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
+        final Iterable<PaperCard> basicLands = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_BASIC_LAND);
         final Set<PaperCard> snowLands = new HashSet<>();
 
         // total of all ClrCnts
@@ -454,8 +448,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * Add non-basic lands to the deck.
      */
     private void addNonBasicLands() {
-        final Iterable<PaperCard> lands = Iterables.filter(aiPlayables,
-                Predicates.compose(CardRulesPredicates.Presets.IS_NONBASIC_LAND, PaperCard::getRules));
+        final Iterable<PaperCard> lands = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_NONBASIC_LAND);
         List<PaperCard> landsToAdd = new ArrayList<>();
         for (final PaperCard card : lands) {
             if (landsNeeded > 0) {
@@ -482,8 +475,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      */
     private void addThirdColorCards(int num) {
         if (num > 0) {
-            final Iterable<PaperCard> others = Iterables.filter(aiPlayables,
-                    Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard::getRules));
+            final Iterable<PaperCard> others = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_NON_LAND);
             // We haven't yet ranked the off-color cards.
             // Compare them to the cards already in the deckList.
             List<PaperCard> rankedOthers = CardRanker.rankCardsInPack(others, deckList, colors, true);
@@ -497,10 +489,9 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                 }
             }
 
-            hasColor = Predicates.or(new DeckGeneratorBase.MatchColorIdentity(colors),
-                    DeckGeneratorBase.COLORLESS_CARDS);
-            final Iterable<PaperCard> threeColorList = Iterables.filter(rankedOthers,
-                    Predicates.compose(hasColor, PaperCard::getRules));
+            hasColor = new MatchColorIdentity(colors).or(DeckGeneratorBase.COLORLESS_CARDS);
+            final Iterable<PaperCard> threeColorList = IterableUtil.filter(rankedOthers,
+                    PaperCardPredicates.fromRules(hasColor));
             for (final PaperCard card : threeColorList) {
                 if (num > 0) {
                     toAdd.add(card);
@@ -526,8 +517,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      *           number to add
      */
     private void addRandomCards(int num) {
-        final Iterable<PaperCard> others = Iterables.filter(aiPlayables,
-                Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard::getRules));
+        final Iterable<PaperCard> others = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_NON_LAND);
         List <PaperCard> toAdd = new ArrayList<>();
         for (final PaperCard card : others) {
             if (num > 0) {
@@ -590,10 +580,10 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
             if (ai.getRemRandomDecks()) {
                 final List<PaperCard> comboCards = new ArrayList<>();
                 if (ai.getDeckNeeds() != null && ai.getDeckNeeds().isValid()) {
-                    Iterables.addAll(comboCards, ai.getDeckNeeds().filter(deckList));
+                    ai.getDeckNeeds().filter(deckList).forEach(comboCards::add);
                 }
                 if (ai.getDeckHints() != null && ai.getDeckHints().isValid()) {
-                    Iterables.addAll(comboCards, ai.getDeckHints().filter(deckList));
+                    ai.getDeckHints().filter(deckList).forEach(comboCards::add);
                 }
                 if (comboCards.isEmpty()) {
                     if (logToConsole) {
@@ -670,17 +660,10 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         for (int i = 1; i < 7; i++) {
             creatureCosts.put(i, 0);
         }
-        final Predicate<PaperCard> filter = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE,
-                PaperCard::getRules);
-        for (final IPaperCard creature : Iterables.filter(deckList, filter)) {
-            int cmc = creature.getRules().getManaCost().getCMC();
-            if (cmc < 1) {
-                cmc = 1;
-            } else if (cmc > 6) {
-                cmc = 6;
-            }
-            creatureCosts.put(cmc, creatureCosts.get(cmc) + 1);
-        }
+        deckList.stream().filter(PaperCardPredicates.IS_CREATURE)
+                .mapToInt(creature -> creature.getRules().getManaCost().getCMC())
+                .map(cmc -> Math.max(1, Math.min(cmc, 6)))
+                .forEach(cmc -> creatureCosts.put(cmc, creatureCosts.get(cmc) + 1));
 
         List<PaperCard> creaturesToAdd = new ArrayList<>();
         for (final PaperCard card : creatures) {
