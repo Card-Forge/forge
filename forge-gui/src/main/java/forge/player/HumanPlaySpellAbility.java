@@ -39,8 +39,6 @@ import forge.game.zone.Zone;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Collections;
-
 /**
  * <p>
  * SpellAbility_Requirements class.
