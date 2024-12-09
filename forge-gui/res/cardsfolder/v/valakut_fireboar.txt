@@ -3,6 +3,6 @@ ManaCost:4 R
 Types:Creature Elemental Boar
 PT:1/7
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, switch its power and toughness until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME's power and toughness are switched
+SVar:TrigPump:DB$ Pump | Defined$ Self | SwitchPT$ True
 AI:RemoveDeck:Random
 Oracle:Whenever Valakut Fireboar attacks, switch its power and toughness until end of turn.
