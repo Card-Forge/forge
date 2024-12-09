@@ -2551,12 +2551,13 @@ public class GameSimulationTest extends SimulationTest {
     }
 
     /**
-     * blah
+     * Test for "Volo's Journal" usage by the AI. This test checks if the AI correctly
+     * adds the correct types to the "Volo's Journal" when casting the spells in order
+     * and makes sure the entries are unique.
      */
     @Test
     public void testVoloJournal() {
         Game game = initAndCreateGame();
-        Player p0 = game.getPlayers().get(0);
         Player p = game.getPlayers().get(1);
 
         addCards("Island", 7, p);
@@ -2600,6 +2601,13 @@ public class GameSimulationTest extends SimulationTest {
         }
     }
 
+    /**
+     * Helper method to check if all words in the given list are present in the iterable and unique.
+     *
+     * @param words    The list of words to check for.
+     * @param iterable The iterable to check against.
+     * @return true if all words are present in the iterable, false otherwise.
+     */
     protected boolean areWordsInIterable(List<String> words, Iterable<String> iterable) {
         // Create a frequency map for the words in the iterable
         Map<String, Integer> frequencyMap = new HashMap<>();
