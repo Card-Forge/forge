@@ -6,7 +6,7 @@ SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Token | Cost$ 2 G G T | TokenScript$ g_2_2_bear | SorcerySpeed$ True | SubAbility$ DBMill | SpellDescription$ Create a 2/2 green Bear creature token, then mill three cards. Activate only as a sorcery.
 SVar:DBMill:DB$ Mill | NumCards$ 3 | Defined$ You
-DeckHas:Ability$Token & Type$Bear
+DeckHas:Ability$Token
 DeckNeeds:Name$Titania, Voice of Gaea
 MeldPair:Titania, Voice of Gaea
 AlternateMode:Meld

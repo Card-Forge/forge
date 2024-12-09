@@ -2,6 +2,7 @@ Name:Assault
 ManaCost:R
 Types:Sorcery
 A:SP$ DealDamage | NumDmg$ 2 | ValidTgts$ Any | SpellDescription$ CARDNAME deals 2 damage to any target.
+DeckHas:Ability$Token
 AlternateMode:Split
 Oracle:Assault deals 2 damage to any target.
 

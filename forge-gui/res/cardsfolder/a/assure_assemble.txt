@@ -3,6 +3,7 @@ ManaCost:GW GW
 Types:Instant
 A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. That creature gains indestructible until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible
+DeckHas:Ability$Counters|Token
 AlternateMode:Split
 Oracle:Put a +1/+1 counter on target creature. That creature gains indestructible until end of turn.
 
@@ -12,5 +13,4 @@ Name:Assemble
 ManaCost:4 G W
 Types:Instant
 A:SP$ Token | TokenAmount$ 3 | TokenScript$ gw_2_2_elf_knight_vigilance | SpellDescription$ Create three 2/2 green and white Elf Knight creature tokens with vigilance.
-DeckHas:Ability$Counters|Token
 Oracle:Create three 2/2 green and white Elf Knight creature tokens with vigilance.
