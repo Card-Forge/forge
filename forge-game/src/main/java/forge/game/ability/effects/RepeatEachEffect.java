@@ -157,7 +157,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 chooser = AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);
             }
             while (!validTypes.isEmpty()) {
-                String chosenT = chooser.getController().chooseSomeType("card", sa, validTypes, null);
+                String chosenT = chooser.getController().chooseSomeType("Card", sa, validTypes);
                 source.setChosenType(chosenT);
                 AbilityUtils.resolve(repeat);
                 validTypes.remove(chosenT);
@@ -218,7 +218,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
     }
 
-    private void setVoteAmount (Object o, SpellAbility sa) {
+    private void setVoteAmount(Object o, SpellAbility sa) {
         SpellAbility rootAbility = sa.getRootAbility();
         if (rootAbility.isWrapper()) {
             rootAbility = ((WrappedAbility) rootAbility).getWrappedAbility();

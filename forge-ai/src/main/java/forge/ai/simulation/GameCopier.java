@@ -149,7 +149,7 @@ public class GameCopier {
             for (SpellAbility sa : c.getSpellAbilities()) {
                 Player activatingPlayer = sa.getActivatingPlayer();
                 if (activatingPlayer != null && activatingPlayer.getGame() != newGame) {
-                    sa.setActivatingPlayer(gameObjectMap.map(activatingPlayer), true);
+                    sa.setActivatingPlayer(gameObjectMap.map(activatingPlayer));
                 }
             }
         }
@@ -188,7 +188,7 @@ public class GameCopier {
                 newSa = findSAInCard(origSa, newCard);
             }
             if (newSa != null) {
-                newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()), true);
+                newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
                 if (origSa.usesTargeting()) {
                     for (GameObject o : origSa.getTargets()) {
                         newSa.getTargets().add(map.map(o));

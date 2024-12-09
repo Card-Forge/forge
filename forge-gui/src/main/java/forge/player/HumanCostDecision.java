@@ -55,7 +55,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostChooseCreatureType cost) {
-        final String choice = controller.chooseSomeType(Localizer.getInstance().getMessage("lblCreature"), ability, new ArrayList<>(CardType.Constant.CREATURE_TYPES), new ArrayList<>(), true);
+        final String choice = controller.chooseSomeType(Localizer.getInstance().getMessage("lblCreature"), ability, CardType.getAllCreatureTypes(), true);
         if (null == choice) {
             return null;
         }

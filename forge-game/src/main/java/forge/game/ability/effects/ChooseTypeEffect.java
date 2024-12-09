@@ -38,7 +38,6 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         final String type = sa.getParam("Type");
-        final List<String> invalidTypes = sa.hasParam("InvalidTypes") ? Arrays.asList(sa.getParam("InvalidTypes").split(",")) : new ArrayList<>();
         final List<String> validTypes = new ArrayList<>();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final boolean secret = sa.hasParam("Secretly");
@@ -114,7 +113,9 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             }
         }
 
-        validTypes.removeAll(invalidTypes);
+        if (sa.hasParam("InvalidTypes")) {
+            validTypes.removeAll(Arrays.asList(sa.getParam("InvalidTypes").split(",")));
+        }
 
         if (sa.hasParam("Note") && card.hasAnyNotedType()) {
             for (String noted : card.getNotedTypes()) {
@@ -132,7 +133,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                     choice = Aggregates.random(validTypes);
                     noNotify = null;
                 } else {
-                    choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
+                    choice = p.getController().chooseSomeType(type, sa, validTypes);
                 }
 
                 if (!secret) p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
@@ -154,4 +155,5 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             throw new InvalidParameterException(sa.getHostCard() + "'s ability resulted in no types to choose from");
         }
     }
+
 }

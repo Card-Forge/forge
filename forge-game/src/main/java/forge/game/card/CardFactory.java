@@ -479,7 +479,7 @@ public class CardFactory {
 
         // do this after other abilities are copied
         if (p != null) {
-            to.setActivatingPlayer(p, lki);
+            to.setActivatingPlayer(p);
         }
     }
 

@@ -92,7 +92,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
         } else if ("PayUnlessCost".equals(logic)) {
             for (final SpellAbility sp : spells) {
                 String unlessCost = sp.getParam("UnlessCost");
-                sp.setActivatingPlayer(sa.getActivatingPlayer(), true);
+                sp.setActivatingPlayer(sa.getActivatingPlayer());
                 Cost unless = new Cost(unlessCost, false);
                 SpellAbility paycost = new SpellAbility.EmptySa(sa.getHostCard(), player);
                 paycost.setPayCosts(unless);

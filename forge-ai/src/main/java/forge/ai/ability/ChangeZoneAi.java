@@ -1416,11 +1416,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
         }
-        if (bestChoice != null) {
-            return bestChoice;
-        }
 
-        return null;
+        return bestChoice;
     }
 
     private static boolean isUnpreferredTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
@@ -1568,6 +1565,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             } else if (logic.startsWith("ExilePreference")) {
                 return doExilePreferenceLogic(decider, sa, fetchList);
+            } else if (logic.equals("BounceOwnTrigger")) {
+                return doBounceOwnTriggerLogic(decider, fetchList);
             }
         }
         if (fetchList.isEmpty()) {
@@ -2127,5 +2126,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
     private static boolean isBouncedThisTurn(Player ai, Card c) {
         return AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.BOUNCED_THIS_TURN);
+    }
+
+    private static Card doBounceOwnTriggerLogic(Player ai, CardCollection choices) {
+        CardCollection unprefChoices = CardLists.filter(choices, c -> !c.isToken() && c.getOwner().equals(ai));
+        CardCollection prefChoices = CardLists.filter(unprefChoices, c -> c.hasETBTrigger(false));
+        if (!prefChoices.isEmpty()) {
+            return ComputerUtilCard.getBestAI(prefChoices);
+        } else if (!unprefChoices.isEmpty()) {
+            return ComputerUtilCard.getWorstAI(unprefChoices);
+        } else {
+            return null;
+        }
     }
 }

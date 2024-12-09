@@ -169,7 +169,7 @@ public class GameSimulator {
             }
 
             debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
-            sa.setActivatingPlayer(aiPlayer, true);
+            sa.setActivatingPlayer(aiPlayer);
             SpellAbility origSaOrSubSa = origSa;
             SpellAbility saOrSubSa = sa;
             do {

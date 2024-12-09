@@ -281,7 +281,7 @@ public class HumanPlaySpellAbility {
             for (final String aVar : announce.split(",")) {
                 final String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
-                    final String choice = pc.chooseSomeType("Creature", ability, CardType.Constant.CREATURE_TYPES, Collections.emptyList());
+                    final String choice = pc.chooseSomeType("Creature", ability, CardType.getAllCreatureTypes());
                     ability.getHostCard().setChosenType(choice);
                 }
                 if ("ChooseNumber".equals(varName)) {

@@ -85,7 +85,7 @@ public class ComputerUtilMana {
     public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
         if (ai == null || sa == null)
             return false;
-        sa.setActivatingPlayer(ai, true);
+        sa.setActivatingPlayer(ai);
         return payManaCost(sa, ai, true, 0, false, false);
     }
 
@@ -93,7 +93,7 @@ public class ComputerUtilMana {
         int score = 0;
 
         for (SpellAbility ability : card.getSpellAbilities()) {
-            ability.setActivatingPlayer(card.getController(), true);
+            ability.setActivatingPlayer(card.getController());
             if (ability.isManaAbility()) {
                 score += ability.calculateScoreForManaAbility();
                 // TODO check TriggersWhenSpent
@@ -950,7 +950,7 @@ public class ComputerUtilMana {
 
         if (checkCosts) {
             // Check if AI can still play this mana ability
-            ma.setActivatingPlayer(ai, true);
+            ma.setActivatingPlayer(ai);
             // if the AI can't pay the additional costs skip the mana ability
             if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma, false)) {
                 return false;
@@ -1357,7 +1357,7 @@ public class ComputerUtilMana {
             maxProduced = 0;
 
             for (SpellAbility ma : src.getManaAbilities()) {
-                ma.setActivatingPlayer(p, true);
+                ma.setActivatingPlayer(p);
                 if (!checkPlayable || ma.canPlay()) {
                     int costsToActivate = ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
                     int producedMana = ma.getParamOrDefault("Produced", "").split(" ").length;
@@ -1394,7 +1394,7 @@ public class ComputerUtilMana {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
         final List<Card> manaSources = CardLists.filter(list, c -> {
             for (final SpellAbility am : getAIPlayableMana(c)) {
-                am.setActivatingPlayer(ai, true);
+                am.setActivatingPlayer(ai);
                 if (!checkPlayable || (am.canPlay() && am.checkRestrictions(ai))) {
                     return true;
                 }
@@ -1470,7 +1470,7 @@ public class ComputerUtilMana {
 
                 if (cost != null) {
                     // if the AI can't pay the additional costs skip the mana ability
-                    m.setActivatingPlayer(ai, true);
+                    m.setActivatingPlayer(ai);
                     if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m, false)) {
                         continue;
                     }
@@ -1554,7 +1554,7 @@ public class ComputerUtilMana {
                 if (DEBUG_MANA_PAYMENT) {
                     System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor m = " + m);
                 }
-                m.setActivatingPlayer(ai, true);
+                m.setActivatingPlayer(ai);
                 if (checkPlayable && !m.canPlay()) {
                     continue;
                 }

@@ -452,9 +452,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return activatingPlayer;
     }
     public void setActivatingPlayer(final Player player) {
-        setActivatingPlayer(player, false);
-    }
-    public boolean setActivatingPlayer(final Player player, final boolean lki) {
         // trickle down activating player
         boolean updated = false;
         // don't use equals because player might be from simulation
@@ -463,20 +460,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             updated = true;
         }
         if (subAbility != null) {
-            updated |= subAbility.setActivatingPlayer(player, lki);
+            subAbility.setActivatingPlayer(player);
         }
         for (SpellAbility sa : additionalAbilities.values()) {
-            updated |= sa.setActivatingPlayer(player, lki);
+            sa.setActivatingPlayer(player);
         }
         for (List<AbilitySub> list : additionalAbilityLists.values()) {
             for (AbilitySub sa : list) {
-                updated |= sa.setActivatingPlayer(player, lki);
+                sa.setActivatingPlayer(player);
             }
         }
-        if (!lki && updated) {
-            view.updateCanPlay(this, false);
-        }
-        return updated;
     }
 
     public Player getTargetingPlayer() {
@@ -2311,7 +2304,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbilityView getView() {
         view.updateHostCard(this);
         view.updateDescription(this);
-        view.updateCanPlay(this, true);
         view.updatePromptIfOnlyPossibleAbility(this);
         return view;
     }

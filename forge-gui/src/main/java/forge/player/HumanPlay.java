@@ -144,7 +144,7 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    public static final void playSaWithoutPayingManaCost(final PlayerControllerHuman controller, final Game game, SpellAbility sa, boolean mayChooseNewTargets) {
+    public static final void playSaWithoutPayingManaCost(final PlayerControllerHuman controller, SpellAbility sa, boolean mayChooseNewTargets) {
         FThreads.assertExecutedByEdt(false);
         final Card source = sa.getHostCard();
 

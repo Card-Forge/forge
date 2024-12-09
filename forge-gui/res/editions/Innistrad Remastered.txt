@@ -11,7 +11,7 @@ ScryfallCode=INR
 11 M Archangel Avacyn @James Ryman
 30 U Lingering Souls @Johann Bodin
 45 C Thraben Inspector @Matt Stewart
-55 R Cackling Counterpart @David Rapoza
+55 U Cackling Counterpart @David Rapoza
 59 R Deadeye Navigator @Lie Setiawan
 72 C Lantern Bearer @Zoltan Boros
 74 R Mausoleum Wanderer @Kieran Yanner
@@ -42,7 +42,7 @@ ScryfallCode=INR
 328 M Edgar Markov @Betty Jiang
 330 M Emrakul, the Promised End @Jaime Jones
 331 C It of the Horrid Swarm @Jason Felix
-353 R Cackling Counterpart @David Rapoza
+353 U Cackling Counterpart @David Rapoza
 360 R Mausoleum Wanderer @Kieran Yanner
 369 C Think Twice @Anthony Francisco
 372 U Blood Artist @LA Draws
@@ -58,7 +58,7 @@ ScryfallCode=INR
 449 M Archangel Avacyn @James Ryman
 470 R Huntmaster of the Fells @Chris Rahn
 475 M Liliana of the Veil @Steve Argyle
-478 R Snapcaster Mage @Volkan Baǵa
+478 M Snapcaster Mage @Volkan Baǵa
 481 M Emrakul, the Promised End @Josh Newton
 486 M The Meathook Massacre @James Bousema
 491 M Edgar Markov @Jack Hughes

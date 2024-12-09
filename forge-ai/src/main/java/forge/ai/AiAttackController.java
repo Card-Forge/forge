@@ -1610,7 +1610,7 @@ public class AiAttackController {
                     break;
                 }
                 if (sa.usesTargeting()) {
-                    sa.setActivatingPlayer(c.getController(), true);
+                    sa.setActivatingPlayer(c.getController());
                     List<Card> validTargets = CardUtil.getValidCardsToTarget(sa);
                     if (validTargets.isEmpty()) {
                         missTarget = true;
