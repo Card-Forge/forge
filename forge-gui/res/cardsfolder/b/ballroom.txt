@@ -5,5 +5,5 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementRe
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
 A:AB$ Investigate | Cost$ 4 T | SpellDescription$ Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-DeckHints:Ability$Investigate|Token
+DeckHints:Ability$Investigate|Sacrifice|Token & Type$Artifact|Clue
 Oracle:Ballroom enters tapped.\n{T}: Add {W} or {B}.\n{4}, {T}: Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

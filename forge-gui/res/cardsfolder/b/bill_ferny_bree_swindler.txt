@@ -10,6 +10,6 @@ SVar:DBHorseDonate:DB$ GainControl | ValidTgts$ Horse.YouCtrl | NewController$ T
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBTreasureTree
 SVar:DBTreasureTree:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token|Sacrifice & Type$Treasure
+DeckHas:Ability$Token
 DeckHints:Type$Horse
 Oracle:Whenever Bill Ferny, Bree Swindler becomes blocked, choose one —\n• Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\n• Target opponent gains control of target Horse you control. If they do, remove Bill Ferny from combat and create three Treasure tokens.

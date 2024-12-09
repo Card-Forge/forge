@@ -8,6 +8,6 @@ SVar:Y:Count$Valid Planeswalker.YouCtrl$CardCounters.LOYALTY
 T:Mode$ CounterAddedAll | CounterType$ LOYALTY | Valid$ Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more loyalty counters are put on planeswalkers you control, put that many +1/+1 counters on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Z
 SVar:Z:TriggerCount$Amount
-DeckHints:Type$Planeswalker
 DeckHas:Ability$Counters
+DeckHints:Ability$Counters & Type$Planeswalker
 Oracle:Trample\nBioessence Hydra enters with a +1/+1 counter on it for each loyalty counter on planeswalkers you control.\nWhenever one or more loyalty counters are put on planeswalkers you control, put that many +1/+1 counters on Bioessence Hydra.
