@@ -98,6 +98,15 @@ public class FScreen {
             "lblCloseEditor",
             ForgeConstants.EDITOR_LAYOUT_FILE,
             false);
+    public static final FScreen DECK_EDITOR_DUEL_COMMANDER = new FScreen(
+            VDeckEditorUI.SINGLETON_INSTANCE,
+            CDeckEditorUI.SINGLETON_INSTANCE,
+            "lblDuelCommanderDeckEditor",
+            FSkin.getImage(FSkinProp.IMG_PACK),
+            true,
+            "lblCloseEditor",
+            ForgeConstants.EDITOR_LAYOUT_FILE,
+            false);
     public static final FScreen DECK_EDITOR_PLANECHASE = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
             CDeckEditorUI.SINGLETON_INSTANCE,
