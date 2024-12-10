@@ -95,6 +95,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
                 break;
             case Commander:
+            case DuelCommander:
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getCommanderPool();
@@ -161,6 +162,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             case TinyLeaders:
                 this.controller = new DeckController<>(FModel.getDecks().getTinyLeaders(), this, newCreator);
                 break;
+            case DuelCommander:
+                this.controller = new DeckController<>(FModel.getDecks().getDuelCommander(), this, newCreator);
+                break;
             default:
         }
 
@@ -182,6 +186,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 case Oathbreaker:
                 case TinyLeaders:
                 case Brawl:
+                case DuelCommander:
                     return CardLimit.Singleton;
                 default:
             }
@@ -491,6 +496,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             case Oathbreaker:
             case TinyLeaders:
             case Brawl:
+            case DuelCommander:
                 switch(sectionMode) {
                     case Main:
                         this.getCatalogManager().setup(ItemManagerConfig.CARD_CATALOG);

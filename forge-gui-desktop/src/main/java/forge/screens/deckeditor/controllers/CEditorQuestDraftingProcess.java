@@ -62,6 +62,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     private DragCell oathbreakerDecksParent = null;
     private DragCell brawlDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
+    private DragCell duelCommanderDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean saved = false;
 
@@ -285,6 +286,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
         brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
         tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
+        duelCommanderDecksParent = removeTab(VDuelCommanderDecks.SINGLETON_INSTANCE);
 
         // set catalog table to single-selection only mode
         getCatalogManager().setAllowMultipleSelections(false);
@@ -342,6 +344,9 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         }
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
+        }
+        if (duelCommanderDecksParent != null) {
+            duelCommanderDecksParent.addDoc(VDuelCommanderDecks.SINGLETON_INSTANCE);
         }
 
         // set catalog table back to free-selection mode

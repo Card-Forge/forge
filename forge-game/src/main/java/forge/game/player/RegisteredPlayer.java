@@ -175,6 +175,9 @@ public class RegisteredPlayer {
             start.commanders = deck.getCommanders();
             start.setStartingLife(start.getStartingLife() + 10);
         }
+        if (appliedVariants.contains(GameType.DuelCommander)) {
+            start.commanders = deck.getCommanders();
+        }
     	if (appliedVariants.contains(GameType.Planechase)) {
             start.planes = planes;
     	}

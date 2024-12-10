@@ -58,6 +58,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         Oathbreaker(new DeckController<>(FModel.getDecks().getOathbreaker(), (Supplier<Deck>) Deck::new), null),
         TinyLeaders(new DeckController<>(FModel.getDecks().getTinyLeaders(), (Supplier<Deck>) Deck::new), DeckFormat.TinyLeaders.isLegalCardPredicate()),
         Brawl(new DeckController<>(FModel.getDecks().getBrawl(), (Supplier<Deck>) Deck::new), DeckFormat.Brawl.isLegalCardPredicate()),
+        DuelCommander(new DeckController<>(FModel.getDecks().getDuelCommander(), (Supplier<Deck>) Deck::new), DeckFormat.DuelCommander.isLegalCardPredicate()),
         Archenemy(new DeckController<>(FModel.getDecks().getScheme(), (Supplier<Deck>) Deck::new), null),
         Planechase(new DeckController<>(FModel.getDecks().getPlane(), (Supplier<Deck>) Deck::new), null),
         Quest(new DeckController<>(null, (Supplier<Deck>) Deck::new), null), //delay setting root folder until quest loaded
@@ -72,7 +73,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 EnumSet.of(Draft, Sealed, Winston, QuestDraft, Quest, QuestCommander, PlanarConquest)
         );
         private static final Set<EditorType> COMMANDER_TYPES = Collections.unmodifiableSet(
-                EnumSet.of(Commander, Oathbreaker, TinyLeaders, Brawl, QuestCommander)
+                EnumSet.of(Commander, Oathbreaker, TinyLeaders, Brawl, DuelCommander, QuestCommander)
         );
         private final DeckController<? extends DeckBase> controller;
         private final Predicate<PaperCard> cardFilter;
@@ -147,6 +148,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Commander:
         case TinyLeaders:
         case Brawl:
+        case DuelCommander:
             return isLandscape ? new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
@@ -610,6 +612,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
+        case DuelCommander:
         case PlanarConquest:
             return CardLimit.Singleton;
         }
@@ -878,6 +881,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Oathbreaker:
             case TinyLeaders:
             case Brawl:
+            case DuelCommander:
                 return true;
             default:
             {
@@ -1262,8 +1266,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     return card.getRules().canBeOathbreaker();
                 case PlanarConquest:
                     return false; //don't set commander this way in Planar Conquest
+                case DuelCommander:
+                    return DeckFormat.DuelCommander.isLegalCommander(card);
                 default:
-                    return DeckFormat.Commander.isLegalCommander(card.getRules());
+                    return DeckFormat.Commander.isLegalCommander(card);
             }
         }
 
@@ -1480,6 +1486,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 case Oathbreaker:
                 case TinyLeaders:
                 case Brawl:
+                case DuelCommander:
                     final List<PaperCard> commanders = currentDeck.getCommanders();
                     if (commanders.isEmpty()) {
                         //if no commander set for deck, only show valid commanders
@@ -1500,6 +1507,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 additionalFilter = DeckFormat.Brawl.isLegalCommanderPredicate();
                                 cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommanders"));
                                 break;
+                            case DuelCommander:
+                                additionalFilter = DeckFormat.DuelCommander.isLegalCommanderPredicate();
+                                cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommanders"));
+                                break;
                             default:
                                 // Do nothing
                         }
@@ -1517,6 +1528,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 break;
                             case Brawl:
                                 additionalFilter = DeckFormat.Brawl.isLegalCardForCommanderPredicate(commanders);
+                                break;
+                            case DuelCommander:
+                                additionalFilter = DeckFormat.DuelCommander.isLegalCardForCommanderPredicate(commanders);
                                 break;
                             default:
                                 // Do nothing
@@ -2244,6 +2258,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Brawl:
                 DeckPreferences.setBrawlDeck(deckStr);
+                break;
+            case DuelCommander:
+                DeckPreferences.setDuelCommanderDeck(deckStr);
                 break;
             case Archenemy:
                 DeckPreferences.setSchemeDeck(deckStr);
