@@ -503,6 +503,14 @@ public class CardDetailUtil {
             area.append(Lang.joinHomogenous(card.getChosenCards())).append(")");
         }
 
+        // chosen letters
+        if (card.getChosenLetters() != null && !card.getChosenLetters().isEmpty()) {
+            if (area.length() != 0) area.append("\n");
+            List<String> cl = card.getChosenLetters();
+            area.append("(chosen letter").append(cl.size() > 1 ? "s: " : ": ");
+            area.append(StringUtils.join(cl, ", ")).append(")");
+        }
+
         // chosen number
         if (!card.getChosenNumber().isEmpty()) {
             if (area.length() != 0) {
