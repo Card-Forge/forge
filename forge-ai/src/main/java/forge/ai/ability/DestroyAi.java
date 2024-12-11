@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -15,6 +17,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
+import forge.util.collect.FCollectionView;
 
 public class DestroyAi extends SpellAbilityAi {
     @Override
@@ -441,4 +444,20 @@ public class DestroyAi extends SpellAbilityAi {
         }
     }
 
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final Card host = sa.getHostCard();
+        if (alreadyPaid) {
+            return false;
+        }
+
+        if (sa.hasParam("Defined")) {
+            CardCollection cards = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
+            if (!Iterables.any(cards, CardPredicates.isController(payer))) {
+                return false;
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+    }
 }

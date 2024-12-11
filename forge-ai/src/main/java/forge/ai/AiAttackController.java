@@ -1394,7 +1394,7 @@ public class AiAttackController {
 
             // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
             dangerousBlockersPresent = Iterables.any(validBlockers, Predicates.or(
-                    CardPredicates.hasKeyword(Keyword.WITHER), CardPredicates.hasKeyword(Keyword.INFECT),
+                    Card::isWitherDamage,
                     CardPredicates.hasKeyword(Keyword.LIFELINK)));
 
             // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
@@ -1423,7 +1423,7 @@ public class AiAttackController {
                         canKillAll = false;
 
                         if (blocker.getSVar("HasCombatEffect").equals("TRUE") || blocker.getSVar("HasBlockEffect").equals("TRUE")
-                                || blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT) || blocker.hasKeyword(Keyword.LIFELINK)) {
+                                || blocker.isWitherDamage() || blocker.hasKeyword(Keyword.LIFELINK)) {
                             canKillAllDangerous = false;
                             // there is a creature that can survive an attack from this creature
                             // and combat will have negative effects
