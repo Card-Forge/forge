@@ -1771,6 +1771,18 @@ public class AbilityUtils {
                     }
                     return count;
                 }
+                // Count$TriggeredAmountChosenLetterInName
+                if (sq[0].startsWith("TriggeredAmountChosenLetterInName")) {
+                    if (c.getChosenLetters() == null) return 0; // just in case
+                    final SpellAbility root = sa.getRootAbility();
+                    Card card = (Card) root.getTriggeringObject(AbilityKey.Card);
+                    String name = card.getCurrentState().getName();
+                    if (name.startsWith("A-")) name = name.substring(2); // remove Alchemy tag
+                    int count = StringUtils.countMatches(name, c.getChosenLetters().get(0));
+                    count += StringUtils.countMatches(name, c.getChosenLetters().get(0).toLowerCase());
+                    return count;
+                }
+
                 // Count$ManaProduced
                 if (sq[0].startsWith("AmountManaProduced")) {
                     final SpellAbility root = sa.getRootAbility();
