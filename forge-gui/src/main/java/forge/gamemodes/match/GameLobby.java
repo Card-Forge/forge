@@ -240,6 +240,7 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);
+            data.appliedVariants.remove(GameType.DuelCommander);
             data.appliedVariants.remove(GameType.MomirBasic);
             data.appliedVariants.remove(GameType.MoJhoSto);
             break;
@@ -247,6 +248,7 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);
+            data.appliedVariants.remove(GameType.DuelCommander);
             data.appliedVariants.remove(GameType.MomirBasic);
             data.appliedVariants.remove(GameType.MoJhoSto);
             break;
@@ -254,6 +256,7 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.Brawl);
+            data.appliedVariants.remove(GameType.DuelCommander);
             data.appliedVariants.remove(GameType.MomirBasic);
             data.appliedVariants.remove(GameType.MoJhoSto);
             break;
@@ -261,8 +264,17 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.Commander);
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.TinyLeaders);
+            data.appliedVariants.remove(GameType.DuelCommander);
             data.appliedVariants.remove(GameType.MomirBasic);
             data.appliedVariants.remove(GameType.MoJhoSto);
+            break;
+        case DuelCommander:
+            data.appliedVariants.remove(GameType.Commander);
+            data.appliedVariants.remove(GameType.Oathbreaker);
+            data.appliedVariants.remove(GameType.TinyLeaders);
+            data.appliedVariants.remove(GameType.Brawl);
+            data.appliedVariants.remove(GameType.Vanguard);
+            data.appliedVariants.remove(GameType.MomirBasic);
             break;
         case Vanguard:
             data.appliedVariants.remove(GameType.MomirBasic);
@@ -273,6 +285,7 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);
+            data.appliedVariants.remove(GameType.DuelCommander);
             data.appliedVariants.remove(GameType.Vanguard);
             data.appliedVariants.remove(GameType.MoJhoSto);
             break;
@@ -281,6 +294,7 @@ public abstract class GameLobby implements IHasGameType {
             data.appliedVariants.remove(GameType.Oathbreaker);
             data.appliedVariants.remove(GameType.TinyLeaders);
             data.appliedVariants.remove(GameType.Brawl);
+            data.appliedVariants.remove(GameType.DuelCommander);
             data.appliedVariants.remove(GameType.Vanguard);
             data.appliedVariants.remove(GameType.MomirBasic);
             break;
@@ -305,6 +319,8 @@ public abstract class GameLobby implements IHasGameType {
                 currentGameType = GameType.TinyLeaders;
             } else if (hasVariant(GameType.Brawl)) {
                 currentGameType = GameType.Brawl;
+            } else if (hasVariant(GameType.DuelCommander)) {
+                currentGameType = GameType.DuelCommander;
             } else {
                 currentGameType = GameType.Constructed;
             }
@@ -368,7 +384,7 @@ public abstract class GameLobby implements IHasGameType {
                 SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPleaseSpecifyPlayerDeck", slot.getName()));
                 return null;
             }
-            if (hasVariant(GameType.Commander) || hasVariant(GameType.Oathbreaker) || hasVariant(GameType.TinyLeaders) || hasVariant(GameType.Brawl)) {
+            if (hasVariant(GameType.Commander) || hasVariant(GameType.Oathbreaker) || hasVariant(GameType.TinyLeaders) || hasVariant(GameType.Brawl) || hasVariant(GameType.DuelCommander)) {
                 if (!slot.getDeck().has(DeckSection.Commander)) {
                     SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblPlayerDoesntHaveCommander", slot.getName()));
                     return null;
@@ -383,11 +399,13 @@ public abstract class GameLobby implements IHasGameType {
         boolean isOathbreakerMatch = false;
         boolean isTinyLeadersMatch = false;
         boolean isBrawlMatch = false;
+        boolean isDuelCommanderMatch = false;
         if (!variantTypes.isEmpty()) {
             isOathbreakerMatch = variantTypes.contains(GameType.Oathbreaker);
             isTinyLeadersMatch = variantTypes.contains(GameType.TinyLeaders);
             isBrawlMatch = variantTypes.contains(GameType.Brawl);
-            isCommanderMatch = isBrawlMatch || isTinyLeadersMatch || isOathbreakerMatch || variantTypes.contains(GameType.Commander);
+            isDuelCommanderMatch = variantTypes.contains(GameType.DuelCommander);
+            isCommanderMatch = isBrawlMatch || isTinyLeadersMatch || isOathbreakerMatch || isDuelCommanderMatch ||variantTypes.contains(GameType.Commander);
             if (!isCommanderMatch) {
                 for (final GameType variant : variantTypes) {
                     if (variant.isAutoGenerated()) {
@@ -449,7 +467,8 @@ public abstract class GameLobby implements IHasGameType {
                             isOathbreakerMatch ? GameType.Oathbreaker :
                                 isTinyLeadersMatch ? GameType.TinyLeaders :
                                     isBrawlMatch ? GameType.Brawl :
-                                        GameType.Commander;
+                                        isDuelCommanderMatch? GameType.DuelCommander :
+                                            GameType.Commander;
                     if (checkLegality) {
                         final String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
                         if (errMsg != null) {
@@ -524,6 +543,14 @@ public abstract class GameLobby implements IHasGameType {
                     player.setStartingLife(25);
                 }
             }
+
+            //override starting life for 1v1 Duel Commander
+            if (hasVariant(GameType.DuelCommander) && activeSlots.size() == 2){
+                for (RegisteredPlayer player : players){
+                    player.setStartingLife(20);
+                }
+            }
+
             playerToSlot.put(rp, slot);
         }
 

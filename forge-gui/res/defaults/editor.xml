@@ -18,6 +18,7 @@
 		<doc>EDITOR_OATHBREAKER</doc>
 		<doc>EDITOR_BRAWL</doc>
 		<doc>EDITOR_TINY_LEADERS</doc>
+		<doc>EDITOR_DUEL_COMMANDER</doc>
 		<doc>EDITOR_DECKGEN</doc>
 	</cell>
 </layout>

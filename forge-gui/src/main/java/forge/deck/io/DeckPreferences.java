@@ -23,7 +23,7 @@ import forge.util.XmlUtil;
  */
 public class DeckPreferences {
     private static String selectedDeckType = "", currentDeck = "", draftDeck = "", sealedDeck = "", commanderDeck = "",
-            oathbreakerDeck = "", tinyLeadersDeck = "", brawlDeck = "", planarDeck = "", schemeDeck = "";
+            oathbreakerDeck = "", tinyLeadersDeck = "", brawlDeck = "", duelCommanderDeck = "", planarDeck = "", schemeDeck = "";
     private static Map<String, DeckPreferences> allPrefs = new HashMap<>();
 
     public static DeckType getSelectedDeckType() {
@@ -90,12 +90,19 @@ public class DeckPreferences {
         save();
     }
 
-    public static String getBrawlDeck() {
-        return brawlDeck;
-    }
+    public static String getBrawlDeck() { return brawlDeck; }
     public static void setBrawlDeck(String brawlDeck0) {
         if (brawlDeck.equals(brawlDeck0)) { return; }
         brawlDeck = brawlDeck0;
+        save();
+    }
+
+    public static String getDuelCommanderDeck() {
+        return duelCommanderDeck;
+    }
+    public static void setDuelCommanderDeck(String duelCommanderDeck0) {
+        if (duelCommanderDeck.equals(duelCommanderDeck0)) { return; }
+        duelCommanderDeck = duelCommanderDeck0;
         save();
     }
 
@@ -139,6 +146,7 @@ public class DeckPreferences {
             oathbreakerDeck = root.getAttribute("oathbreakerDeck");
             brawlDeck = root.getAttribute("brawlDeck");
             tinyLeadersDeck = root.getAttribute("tinyLeadersDeck");
+            duelCommanderDeck = root.getAttribute("duelCommanderDeck");
             planarDeck = root.getAttribute("planarDeck");
             schemeDeck = root.getAttribute("schemeDeck");
 
@@ -172,6 +180,7 @@ public class DeckPreferences {
             root.setAttribute("oathbreakerDeck", oathbreakerDeck);
             root.setAttribute("brawlDeck", brawlDeck);
             root.setAttribute("tinyLeadersDeck", tinyLeadersDeck);
+            root.setAttribute("duelCommanderDeck", duelCommanderDeck);
             root.setAttribute("planarDeck", planarDeck);
             root.setAttribute("schemeDeck", schemeDeck);
             document.appendChild(root);
