@@ -33,7 +33,6 @@ Base=Common:fromSheet("PIO bonus sheet")
 Replace=.417F Uncommon:fromSheet("PIO bonus sheet")
 Replace=.078F RareMythic:fromSheet("PIO bonus sheet")
 
-
 [cards]
 1 U Bane of Bala Ged @Chase Stone
 2 C Scion of Ugin @Cliff Childs
