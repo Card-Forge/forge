@@ -28,11 +28,11 @@ Base=RareMythic:fromSheet("DSK cards")
 #Replace=.014F fromSheet("DSK showcase")
 
 [AnyLand]
-Base=Land:Common:fromSheet("DSK cards")
-Replace=.10F Land:Common:fromSheet("DSK cards")+
-Replace=.267F Land:fromSheet("DSK cards")
-Replace=.067F Land:fromSheet("DSK cards")+
-Replace=.133F Land:Rare:fromSheet("DSK cards")+
+Base=fromSheet("DSK thirteen lands")
+Replace=.10F fromSheet("DSK thirteen lands")+
+Replace=.267F BasicLand:fromSheet("DSK cards"):!fromSheet("DSK thirteen lands")
+Replace=.067F BasicLand:fromSheet("DSK cards"):!fromSheet("DSK thirteen lands")+
+Replace=.133F Land:Rare:fromSheet("DSK cards")
 Replace=.033F Land:Rare:fromSheet("DSK cards")+
 
 [Wildcard]
@@ -296,20 +296,20 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 252 C Malevolent Chandelier @Mirko Failoni
 253 R Marvin, Murderous Mimic @Mirko Failoni
 254 U Saw @Jarel Threat
-255 C Abandoned Campground @Cristi Balanescu
+255 L Abandoned Campground @Cristi Balanescu
 256 R Blazemire Verge @Andrew Mar
-257 C Bleeding Woods @Henry Peters
-258 C Etched Cornfield @Randy Gallegos
+257 L Bleeding Woods @Henry Peters
+258 L Etched Cornfield @Randy Gallegos
 259 R Floodfarm Verge @Randy Gallegos
 260 R Gloomlake Verge @Marco Gorlei
 261 R Hushwood Verge @Kasia 'Kafis' Zielińska
-262 C Lakeside Shack @Bartek Fedyczak
-263 C Murky Sewer @Martin de Diego Sádaba
-264 C Neglected Manor @Carlos Palma Cruchaga
-265 C Peculiar Lighthouse @Raymond Bonilla
-266 C Raucous Carnival @Josu Solano
-267 C Razortrap Gorge @Filip Burburan
-268 C Strangled Cemetery @Marco Gorlei
+262 L Lakeside Shack @Bartek Fedyczak
+263 L Murky Sewer @Martin de Diego Sádaba
+264 L Neglected Manor @Carlos Palma Cruchaga
+265 L Peculiar Lighthouse @Raymond Bonilla
+266 L Raucous Carnival @Josu Solano
+267 L Razortrap Gorge @Filip Burburan
+268 L Strangled Cemetery @Marco Gorlei
 269 C Terramorphic Expanse @Sam Burley
 270 R Thornspire Verge @Kasia 'Kafis' Zielińska
 271 R Valgavoth's Lair @Martin de Diego Sádaba
@@ -488,6 +488,18 @@ A143 R A-Leyline of Resonance @Sergey Glushakov
 1 Sacrifice|SPG
 1 Soul Warden|SPG
 1 Unholy Heat|SPG
+
+[thirteen lands]
+1 Abandoned Campground|DSK
+1 Bleeding Woods|DSK
+1 Etched Cornfield|DSK
+1 Lakeside Shack|DSK
+1 Murky Sewer|DSK
+1 Neglected Manor|DSK
+1 Peculiar Lighthouse|DSK
+1 Raucous Carnival|DSK
+1 Razortrap Gorge|DSK
+1 Strangled Cemetery|DSK
 
 [tokens]
 b_2_2_e_horror
