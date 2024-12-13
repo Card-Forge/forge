@@ -4,6 +4,35 @@ Date=2024-12-10
 Name=Pioneer Masters
 Type=Reprint
 ScryfallCode=PIO
+# https://magic.wizards.com/en/news/mtg-arena/collecting-pioneer-masters
+BoosterSlots=Common,Variety,Uncommon,RareMythic,Guildgate,BonusSheet
+Booster=8 Common, 1 Variety, 3 Uncommon, 1 RareMythic, 1 Guildgate, 1 BonusSheet
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+
+[Common]
+Base=Common:fromSheet("PIO cards"):!fromSheet("PIO guildgates")
+
+[Variety]
+Base=Uncommon:fromSheet("PIO cards")
+Replace=.20 Common:fromSheet("PIO cards"):!fromSheet("PIO guildgates")
+Replace=.12 Rare:fromSheet("PIO cards")
+Replace=.04 Mythic:fromSheet("PIO cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("PIO cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("PIO cards")
+
+[Guildgate]
+Base=fromSheet("PIO guildgates")
+
+[BonusSheet]
+Base=Common:fromSheet("PIO bonus sheet")
+Replace=.417F Uncommon:fromSheet("PIO bonus sheet")
+Replace=.078F RareMythic:fromSheet("PIO bonus sheet")
+
 
 [cards]
 1 U Bane of Bala Ged @Chase Stone
@@ -284,6 +313,8 @@ ScryfallCode=PIO
 276 C Simic Guildgate @Svetlin Velinov
 277 U Spawning Bed @Francisco Badilla
 278 R Wandering Fumarole @Florian de Gesincourt
+
+[bonus sheet]
 279 U Eidolon of Rhetoric @Ryan Yee
 280 U Evangel of Heliod @Nils Hamm
 281 U Fiendslayer Paladin @Wesley Burt
@@ -404,3 +435,15 @@ ScryfallCode=PIO
 396 U Turn // Burn @Ryan Barger
 397 R Unexpected Results @Mike Bierek
 398 U Wear // Tear @Ryan Pancoast
+
+[guildgates]
+1 Azorius Guildgate|PIO
+1 Boros Guildgate|PIO
+1 Dimir Guildgate|PIO
+1 Golgari Guildgate|PIO
+1 Gruul Guildgate|PIO
+1 Izzet Guildgate|PIO
+1 Orzhov Guildgate|PIO
+1 Rakdos Guildgate|PIO
+1 Selesnya Guildgate|PIO
+1 Simic Guildgate|PIO
