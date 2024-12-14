@@ -54,10 +54,7 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Default harmless implementation for tests.
@@ -506,6 +503,16 @@ public class PlayerControllerForTests extends PlayerController {
         return chooseItem(validTypes);
     }
 
+    @Override
+    public List<String> chooseLetter(int n, SpellAbility sa, List<String> letters) {
+        List<String> chosen = Lists.newArrayList();
+        for (int i = 0; i <=n; i++) {
+            String choice = chooseItem(letters);
+            letters.remove(choice);
+            chosen.add(choice);
+        }
+        return chosen;
+    }
     @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         return chooseItem(sectors);
