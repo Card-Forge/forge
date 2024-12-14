@@ -2,8 +2,11 @@ package forge.adventure.world;
 
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.adventure.scene.MapViewScene;
 import forge.adventure.scene.SaveLoadScene;
+import forge.adventure.stage.PointOfInterestMapSprite;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
@@ -181,6 +184,22 @@ public class WorldSave   {
 
     public void clearChanges() {
         pointOfInterestChanges.clear();
+    }
+
+    public void clearBookmarks() {
+        for (PointOfInterest poi : currentSave.world.getAllPointOfInterest()) {
+            if (poi == null)
+                continue;
+            PointOfInterestMapSprite mapSprite = WorldStage.getInstance().getMapSprite(poi);
+            if (mapSprite != null)
+                mapSprite.setBookmarked(false, poi);
+            PointOfInterestChanges p = pointOfInterestChanges.get(poi.getID());
+            if (p == null)
+                continue;
+            p.setIsBookmarked(false);
+            p.save();
+        }
+        MapViewScene.instance().clearBookMarks();
     }
 
 }
