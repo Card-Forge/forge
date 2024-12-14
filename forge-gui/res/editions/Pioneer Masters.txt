@@ -29,9 +29,9 @@ Base=RareMythic:fromSheet("PIO cards")
 Base=fromSheet("PIO guildgates")
 
 [BonusSheet]
-Base=Common:fromSheet("PIO bonus sheet")
-Replace=.417F Uncommon:fromSheet("PIO bonus sheet")
-Replace=.078F RareMythic:fromSheet("PIO bonus sheet")
+Base=Common:fromSheet("PIO special slot")
+Replace=.417F Uncommon:fromSheet("PIO special slot")
+Replace=.078F RareMythic:fromSheet("PIO special slot")
 
 [cards]
 1 U Bane of Bala Ged @Chase Stone
@@ -313,7 +313,7 @@ Replace=.078F RareMythic:fromSheet("PIO bonus sheet")
 277 U Spawning Bed @Francisco Badilla
 278 R Wandering Fumarole @Florian de Gesincourt
 
-[bonus sheet]
+[special slot]
 279 U Eidolon of Rhetoric @Ryan Yee
 280 U Evangel of Heliod @Nils Hamm
 281 U Fiendslayer Paladin @Wesley Burt
