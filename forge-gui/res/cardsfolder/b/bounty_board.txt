@@ -6,6 +6,6 @@ A:AB$ PutCounter | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target cr
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.counters_GE1_BOUNTY | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature with a bounty counter on it dies, each of its controller's opponents draws a card and gains 2 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ Player.OpponentOf TriggeredCardController | LifeAmount$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player.OpponentOf TriggeredCardController | NumCards$ 1
+DeckHas:Ability$LifeGain|Counters
 DeckHints:Name$Bounty Hunter|Mathas, Fiend Seeker|Termination Facilitator|Chevill, Bane of Monsters
-DeckHints:Ability$LifeGain
 Oracle:{T}: Add one mana of any color.\n{1}, {T}: Put a bounty counter on target creature. Activate only as a sorcery.\nWhenever a creature with a bounty counter on it dies, each of its controller's opponents draws a card and gains 2 life.

@@ -9,6 +9,7 @@ SVar:DBConvert:DB$ SetState | Mode$ Transform | ConditionCheckSVar$ AFLifeLost |
 SVar:X:TargetedPlayer$LifeLostThisTurn
 SVar:AFLifeLost:Number$0
 # AFLifeLost will be set by LoseLife
+DeckHas:Keyword$Flying|Indestructible
 AlternateMode:DoubleFaced
 Oracle:More Than Meets the Eye {3}{B} (You may cast this card converted for {3}{B}.)\nAt the beginning of your end step, target opponent loses life equal to the life that player lost this turn. If no life is lost this way, convert Blitzwing.
 
@@ -25,5 +26,4 @@ SVar:TrigRandomPump:DB$ Pump | Defined$ Self | KW$ Flying & Indestructible | Ran
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigConvert | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, convert it.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform
 SVar:HasAttackEffect:TRUE
-DeckHas:Keyword$Flying|Indestructible
 Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nAt the beginning of combat on your turn, choose flying or indestructible at random. Blitzwing gains that ability until end of turn.\nWhenever Blitzwing deals combat damage to a player, convert it.

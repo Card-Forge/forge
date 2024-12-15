@@ -8,4 +8,5 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ 
 SVar:X:Count$LifeYouGainedThisTurn
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$LifeGain
+DeckHints:Ability$LifeGain
 Oracle:Whenever Blossoming Bogbeast attacks, you gain 2 life. Then creatures you control gain trample and get +X/+X until end of turn, where X is the amount of life you gained this turn.
