@@ -334,8 +334,6 @@ public abstract class SpellAbilityAi {
             if (combat.getAttackers().isEmpty()) {
                 return false;
             }
-        } else if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
-            return false;
         }
 
         // AI will only pay when it's not already payed and only opponents abilities
