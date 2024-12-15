@@ -82,6 +82,8 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(final GameEventTokenCreated event) { return SoundEffectType.Token; }
     @Override
+    public SoundEffectType visit(final GameEventSprocketUpdate event) { return SoundEffectType.Sprocket; }
+    @Override
     public SoundEffectType visit(final GameEventDayTimeChanged event) {
         return event.daytime ? SoundEffectType.Daytime : SoundEffectType.Nighttime;
     }

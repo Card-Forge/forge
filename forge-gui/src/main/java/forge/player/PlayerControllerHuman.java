@@ -1401,9 +1401,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public int chooseSprocket(Card assignee, boolean forceDifferent) {
         String cardName = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
         String prompt = Localizer.getInstance().getMessage("lblAssignSprocket", cardName);
-        List<Integer> options = Lists.newArrayList(1, 2, 3); //TODO: List.of after Java 8 is dropped
+        List<Integer> options = Lists.newArrayList(1, 2, 3);
         if(forceDifferent)
-            options.remove(assignee.getSprocket());
+            options.remove(Integer.valueOf(assignee.getSprocket()));
         int crankedNextTurn = (player.getCrankCounter() % 3) + 1;
         getGui().setCard(assignee.getView());
         List<Integer> choices = getGui().getChoices(prompt, 1, 1, options, null, (sprocket) -> {

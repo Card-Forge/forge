@@ -2192,8 +2192,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return this.sprocket;
     }
     public void setSprocket(int sprocket) {
+        int oldSprocket = this.sprocket;
         this.sprocket = sprocket;
         view.updateSprocket(this);
+        game.fireEvent(new GameEventSprocketUpdate(this, oldSprocket, sprocket));
     }
 
     // used for cards like Meddling Mage...

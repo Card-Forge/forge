@@ -7,16 +7,16 @@ import forge.util.Localizer;
 import java.util.function.Function;
 
 public enum DeckSection {
-    Avatar("lblAvatar", 1, Validators.AVATAR_VALIDATOR),
-    Commander("lblCommanderDeck", 1, Validators.COMMANDER_VALIDATOR),
-    Main("lblMainDeck", 60, Validators.DECK_AND_SIDE_VALIDATOR),
-    Sideboard("lblSideboard", 15, Validators.DECK_AND_SIDE_VALIDATOR),
-    Planes("lblPlanarDeck", 10, Validators.PLANES_VALIDATOR),
-    Schemes("lblSchemeDeck", 20, Validators.SCHEME_VALIDATOR),
-    Conspiracy("lblConspiracies", 0, Validators.CONSPIRACY_VALIDATOR),
-    Dungeon("lblDungeons", 0, Validators.DUNGEON_VALIDATOR),
-    Attractions("lblAttractions", 0, Validators.ATTRACTION_VALIDATOR),
-    Contraptions("lblContraptions", 0, Validators.CONTRAPTION_VALIDATOR);
+    Main("lblMainDeck", Validators.DECK_AND_SIDE_VALIDATOR),
+    Sideboard("lblSideboard", Validators.DECK_AND_SIDE_VALIDATOR),
+    Commander("lblCommander", Validators.COMMANDER_VALIDATOR),
+    Avatar("lblAvatar", Validators.AVATAR_VALIDATOR),
+    Planes("lblPlanarDeck", Validators.PLANES_VALIDATOR),
+    Schemes("lblSchemeDeck", Validators.SCHEME_VALIDATOR),
+    Conspiracy("lblConspiracies", Validators.CONSPIRACY_VALIDATOR),
+    Dungeon("lblDungeons", Validators.DUNGEON_VALIDATOR),
+    Attractions("lblAttractions", Validators.ATTRACTION_VALIDATOR),
+    Contraptions("lblContraptions", Validators.CONTRAPTION_VALIDATOR);
 
     /**
      * Array of DeckSections that contain nontraditional cards.
@@ -24,12 +24,10 @@ public enum DeckSection {
     public static final DeckSection[] NONTRADITIONAL_SECTIONS = new DeckSection[]{Avatar, Planes, Schemes, Conspiracy, Dungeon, Attractions, Contraptions};
 
     private final String nameLbl;
-    private final int typicalSize; // Rules enforcement is done in DeckFormat class, this is for reference only
-    private Function<PaperCard, Boolean> fnValidator;
+    private final Function<PaperCard, Boolean> fnValidator;
 
-    DeckSection(String nameLbl, int commonSize, Function<PaperCard, Boolean> validator){
+    DeckSection(String nameLbl, Function<PaperCard, Boolean> validator) {
         this.nameLbl = nameLbl;
-        this.typicalSize = commonSize;
         fnValidator = validator;
     }
 
@@ -37,7 +35,17 @@ public enum DeckSection {
         return Localizer.getInstance().getMessage(this.nameLbl);
     }
 
-    public boolean isSingleCard() { return typicalSize == 1; }
+    public String getLocalizedShortName() {
+        String shortNameLabel;
+        switch(this) {
+            case Main: shortNameLabel = "lblMain"; break;
+            case Sideboard: shortNameLabel = "lblSide"; break;
+            case Planes: shortNameLabel = "lblPlanes"; break;
+            case Schemes: shortNameLabel = "lblSchemes"; break;
+            default: return getLocalizedName();
+        }
+        return Localizer.getInstance().getMessage(shortNameLabel);
+    }
 
     public boolean validate(PaperCard card){
         if (fnValidator == null) return true;

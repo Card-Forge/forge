@@ -43,7 +43,19 @@ public class AssembleContraptionEffect extends SpellAbilityEffect {
             return sb.toString();
         }
 
-        int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
+        int amount;
+        if (sa.hasParam("Amount")) {
+            String amountText = sa.getParam("Amount");
+            if(amountText.equals("Result")) {
+                //Used for Hard-Hat Area; Shouldn't actually display, usually overridden by a parent ability's trigger
+                //description, but gets evaluated regardless and calculateAmount complains since Result isn't defined.
+                sb.append(" assembles a number of Contraptions equal to the result.");
+                return sb.toString();
+            }
+            amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountText, sa);
+        }
+        else
+            amount = 1;
 
         if (assemblers.size() > 1) {
             sb.append(" each");

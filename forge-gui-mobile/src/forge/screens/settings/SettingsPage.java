@@ -322,6 +322,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
             }
         },1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_STACK_CREATURES,
+                        Forge.getLocalizer().getMessage("cbStackCreatures"),
+                        Forge.getLocalizer().getMessage("nlStackCreatures")),
+                1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,

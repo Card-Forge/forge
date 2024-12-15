@@ -255,23 +255,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    private static String labelFromDeckSection(DeckSection deckSection) {
-        String label = null;
+    public static FImage iconFromDeckSection(DeckSection deckSection) {
         switch (deckSection) {
-            case Main: label = "lblMain"; break;
-            case Sideboard: label = "lblSide"; break;
-            case Commander: label = "lblCommander"; break;
-            case Planes: label = "lblPlanes"; break;
-            case Schemes: label = "lblSchemes"; break;
-            case Avatar: label = "lblAvatar"; break;
-            case Conspiracy: label = "lblConspiracies"; break;
-            case Attractions: label = "lblAttractions"; break;
-            case Contraptions: label = "lblContraptions"; break;
+            case Main: return MAIN_DECK_ICON;
+            case Sideboard: return SIDEBOARD_ICON;
+            case Commander: return FSkinImage.COMMAND;
+            case Avatar: return FSkinImage.AVATAR;
+            case Conspiracy: return FSkinImage.CONSPIRACY;
+            case Planes: return FSkinImage.PLANAR;
+            case Schemes: return FSkinImage.SCHEME;
+            case Attractions: return FSkinImage.ATTRACTION;
+            case Contraptions: return FSkinImage.CONTRAPTION;
+            default: return FSkinImage.HDSIDEBOARD;
         }
-        String text = Localizer.getInstance().getMessage(label);
-        if(text == null)
-            return deckSection.toString();
-        return text;
     }
 
     private final EditorType editorType;
@@ -432,7 +428,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             }));
                         if (allowsAddExtraSection()) {
                             addItem(new FMenuItem(localizer.getMessage("lblAddDeckSection"), FSkinImage.CHAOS, e -> {
-                                List<String> options = hiddenExtraSections.stream().map(FDeckEditor::labelFromDeckSection).collect(Collectors.toList());
+                                List<String> options = hiddenExtraSections.stream().map(DeckSection::getLocalizedName).collect(Collectors.toList());
                                 GuiChoose.oneOrNone(localizer.getMessage("lblAddDeckSectionSelect"), options, new Callback<String>() {
                                     @Override
                                     public void run(String result) {
@@ -1670,65 +1666,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected static class DeckSectionPage extends CardManagerPage {
-        private String captionPrefix;
+        private final String captionPrefix;
         private final DeckSection deckSection;
 
         protected DeckSectionPage(DeckSection deckSection0) {
             this(deckSection0, ItemManagerConfig.DECK_EDITOR);
         }
-        protected DeckSectionPage(DeckSection deckSection0, ItemManagerConfig config) {
+        protected DeckSectionPage(DeckSection deckSection, ItemManagerConfig config) {
             super(config, null, null);
 
-            deckSection = deckSection0;
-            final Localizer localizer = Forge.getLocalizer();
-            switch (deckSection) {
-            default:
-            case Main:
-                captionPrefix = localizer.getMessage("lblMain");
-                cardManager.setCaption(localizer.getMessage("ttMain"));
-                icon = MAIN_DECK_ICON;
-                break;
-            case Sideboard:
-                captionPrefix = localizer.getMessage("lblSide");
-                cardManager.setCaption(localizer.getMessage("lblSideboard"));
-                icon = SIDEBOARD_ICON;
-                break;
-            case Commander:
-                captionPrefix = localizer.getMessage("lblCommander");
-                cardManager.setCaption(localizer.getMessage("lblCommander"));
-                icon = FSkinImage.COMMANDER;
-                break;
-            case Avatar:
-                captionPrefix = localizer.getMessage("lblAvatar");
-                cardManager.setCaption(localizer.getMessage("lblAvatar"));
-                icon = new FTextureRegionImage(FSkin.getAvatars().get(0));
-                break;
-            case Conspiracy:
-                captionPrefix = localizer.getMessage("lblConspiracies");
-                cardManager.setCaption(localizer.getMessage("lblConspiracies"));
-                icon = FSkinImage.UNKNOWN; //TODO: This and the other extra sections definitely need better icons.
-                break;
-            case Planes:
-                captionPrefix = localizer.getMessage("lblPlanes");
-                cardManager.setCaption(localizer.getMessage("lblPlanes"));
-                icon = FSkinImage.CHAOS;
-                break;
-            case Schemes:
-                captionPrefix = localizer.getMessage("lblSchemes");
-                cardManager.setCaption(localizer.getMessage("lblSchemes"));
-                icon = FSkinImage.POISON;
-                break;
-            case Attractions:
-                captionPrefix = localizer.getMessage("lblAttractions");
-                cardManager.setCaption(localizer.getMessage("lblAttractions"));
-                icon = FSkinImage.TICKET;
-                break;
-            case Contraptions:
-                captionPrefix = localizer.getMessage("lblContraptions");
-                cardManager.setCaption(localizer.getMessage("lblContraptions"));
-                icon = FSkinImage.UNKNOWN; //TODO: Definitely needs a better image. Maybe after the 2.0 skin is in place?
-                break;
-            }
+            this.deckSection = deckSection;
+            captionPrefix = this.deckSection.getLocalizedShortName();
+            cardManager.setCaption(this.deckSection.getLocalizedName());
+            icon = iconFromDeckSection(deckSection);
         }
         protected DeckSectionPage(DeckSection deckSection0, ItemManagerConfig config, String caption0, FImage icon0) {
             super(config, null, icon0);

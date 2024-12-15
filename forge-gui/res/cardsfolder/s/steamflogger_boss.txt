@@ -5,4 +5,5 @@ PT:3/3
 R:Event$ AssembleContraption | ActiveZones$ Battlefield | ValidCause$ Rigger.YouCtrl | ReplaceWith$ AssembleTwo | Description$ If a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.
 SVar:AssembleTwo:DB$ AssembleContraption | DefinedAssembler$ ReplacedCause | Amount$ 2
 S:Mode$ Continuous | Affected$ Creature.Other+Rigger+YouCtrl | AddKeyword$ Haste | AddPower$ 1 | Description$ Other Riggers you control get +1/+0 and have haste.
+SVar:PlayMain1:TRUE
 Oracle:Other Riggers you control get +1/+0 and have haste.\nIf a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.

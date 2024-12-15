@@ -1587,6 +1587,7 @@ public class GameAction {
     }
 
     private boolean stateBasedAction_Contraption(Card c) {
+        //There isn't a rule-based source for this SBA, but it seems like something that should exist given the one for Space Sculptor.
         if(!c.isContraption())
             return false;
         if(c.getSprocket() > 0 && c.getSprocket() <= 3)
@@ -1594,7 +1595,7 @@ public class GameAction {
 
         int sprocket = c.getController().getController().chooseSprocket(c);
         c.setSprocket(sprocket);
-        return false; //This shouldn't necessitate a recheck.
+        return true;
     }
 
     private boolean stateBasedAction704_5u(Player p) {
