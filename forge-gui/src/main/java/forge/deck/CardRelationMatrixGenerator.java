@@ -1,30 +1,19 @@
 package forge.deck;
 
-import java.io.File;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.ArrayUtils;
-
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
-import forge.card.CardRulesPredicates;
 import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.io.File;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by maustin on 09/05/2017.
@@ -73,9 +62,9 @@ public final class CardRelationMatrixGenerator {
                 ForgeConstants.DECK_GEN_DIR, false),
                 true);
 
-        final Iterable<PaperCard> cards = Iterables.filter(format.getAllCards()
-                , Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard::getRules));
-        List<PaperCard> cardList = Lists.newArrayList(cards);
+        List<PaperCard> cardList = format.getAllCards().stream()
+                .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
+                .collect(Collectors.toList());
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
         Map<Integer, PaperCard> integerCardMap = new HashMap<>();
@@ -88,18 +77,19 @@ public final class CardRelationMatrixGenerator {
 
         for (PaperCard card:cardList){
             for (Deck deck:decks){
-                if (deck.getMain().contains(card)){
-                    for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                            Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard::getRules))){
-                        if (!pairCard.getName().equals(card.getName())){
+                if (deck.getMain().contains(card)) {
+                    String cardName = card.getName();
+                    deck.getMain().toFlatList().stream()
+                        .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
+                        .filter(pairCard -> !pairCard.getName().equals(cardName))
+                        .forEach(pairCard -> {
                             try {
-                                int old = matrix[cardIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())];
-                                matrix[cardIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())] = old + 1;
-                            }catch (NullPointerException ne){
+                                int old = matrix[cardIntegerMap.get(cardName)][cardIntegerMap.get(pairCard.getName())];
+                                matrix[cardIntegerMap.get(cardName)][cardIntegerMap.get(pairCard.getName())] = old + 1;
+                            } catch (NullPointerException ne) {
                                 //Todo: Not sure what was failing here
                             }
-                        }
-                    }
+                    });
                 }
             }
         }
@@ -142,9 +132,9 @@ public final class CardRelationMatrixGenerator {
                 true);
 
         //get all cards
-        final Iterable<PaperCard> cards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards()
-                , Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard::getRules));
-        List<PaperCard> cardList = Lists.newArrayList(cards);
+        List<PaperCard> cardList = FModel.getMagicDb().getCommonCards().streamUniqueCards()
+                .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
+                .collect(Collectors.toList());
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
         Map<Integer, PaperCard> integerCardMap = new HashMap<>();
@@ -157,7 +147,7 @@ public final class CardRelationMatrixGenerator {
         }
 
         //filter to just legal commanders
-        List<PaperCard> legends = Lists.newArrayList(Iterables.filter(cardList, format.isLegalCommanderPredicate()));
+        List<PaperCard> legends = cardList.stream().filter(format.isLegalCommanderPredicate()).collect(Collectors.toList());
 
         //generate lookups for legends to link commander names to matrix rows
         for (int i=0; i<legends.size(); ++i){
@@ -199,25 +189,25 @@ public final class CardRelationMatrixGenerator {
     //update the matrix by incrementing the connectivity count for each card in the deck
     public static void updateLegendMatrix(Deck deck, PaperCard legend, Map<String, Integer> cardIntegerMap,
                              Map<String, Integer> legendIntegerMap, int[][] matrix){
-        for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard::getRules))){
-            if (!pairCard.getName().equals(legend.getName())){
+        String cardName = legend.getName();
+        deck.getMain().toFlatList().stream()
+            .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
+            .filter(pairCard -> !pairCard.getName().equals(cardName))
+            .forEach(pairCard -> {
                 try {
-                    int old = matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())];
-                    matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())] = old + 1;
-                }catch (NullPointerException ne){
+                    int old = matrix[legendIntegerMap.get(cardName)][cardIntegerMap.get(pairCard.getName())];
+                    matrix[legendIntegerMap.get(cardName)][cardIntegerMap.get(pairCard.getName())] = old + 1;
+                } catch (NullPointerException ne) {
                     //Todo: Not sure what was failing here
                     ne.printStackTrace();
                 }
-            }
-
-        }
+        });
         //add partner commanders to matrix
         if(deck.getCommanders().size()>1){
             for(PaperCard partner:deck.getCommanders()){
                 if(!partner.equals(legend)){
-                    int old = matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(partner.getName())];
-                    matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(partner.getName())] = old + 1;
+                    int old = matrix[legendIntegerMap.get(cardName)][cardIntegerMap.get(partner.getName())];
+                    matrix[legendIntegerMap.get(cardName)][cardIntegerMap.get(partner.getName())] = old + 1;
                 }
             }
         }

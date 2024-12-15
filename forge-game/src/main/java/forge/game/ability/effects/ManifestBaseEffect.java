@@ -2,8 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -59,7 +57,7 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
             fromLibrary = true;
         } else {
             tgtCards = getTargetCards(sa);
-            if (Iterables.all(tgtCards, CardPredicates.inZone(ZoneType.Library))) {
+            if (tgtCards.allMatch(CardPredicates.inZone(ZoneType.Library))) {
                 fromLibrary = true;
             }
         }

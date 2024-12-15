@@ -17,12 +17,12 @@
  */
 package forge.gamemodes.match.input;
 
+import forge.game.GameView;
+import forge.player.PlayerControllerHuman;
+
 import java.util.Observable;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
-
-import forge.game.GameView;
-import forge.player.PlayerControllerHuman;
 
 /**
  * <p>

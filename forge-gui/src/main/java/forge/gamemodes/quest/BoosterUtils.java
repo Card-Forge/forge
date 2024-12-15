@@ -19,34 +19,18 @@ package forge.gamemodes.quest;
 
 import static forge.gamemodes.quest.QuestUtilCards.isLegalInQuestFormat;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import forge.card.*;
+import forge.item.*;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
-import forge.card.CardEdition;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.card.MagicColor;
-import forge.card.PrintSheet;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
-import forge.item.BoosterPack;
-import forge.item.IPaperCard;
-import forge.item.IPaperCard.Predicates.Presets;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.TournamentPack;
 import forge.model.FModel;
-import forge.util.Aggregates;
-import forge.util.MyRandom;
 import forge.util.PredicateString.StringOp;
 
 /**
@@ -72,20 +56,17 @@ public final class BoosterUtils {
     private static final Predicate<CardEdition> filterPioneer = formats.getPioneer().editionLegalPredicate;
     private static final Predicate<CardEdition> filterModern= formats.getModern().editionLegalPredicate;
 
-    private static final Predicate<CardEdition> filterStandard = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            formats.getStandard().editionLegalPredicate);
+    private static final Predicate<CardEdition> filterStandard = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(formats.getStandard().editionLegalPredicate);
 
-    private static final Predicate<CardEdition> filterPioneerNotStandard = Predicates.and(
-            CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.and(filterPioneer, Predicates.not(formats.getStandard().editionLegalPredicate)));
+    private static final Predicate<CardEdition> filterPioneerNotStandard = CardEdition.Predicates.CAN_MAKE_BOOSTER
+            .and(filterPioneer.and(Predicate.not(formats.getStandard().editionLegalPredicate)));
 
-    private static final Predicate<CardEdition> filterModernNotPioneer = Predicates.and(
-            CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.and(filterModern, Predicates.not(filterPioneer)));
+    private static final Predicate<CardEdition> filterModernNotPioneer = CardEdition.Predicates.CAN_MAKE_BOOSTER
+            .and(filterModern.and(Predicate.not(filterPioneer)));
 
     /** The filter not ext. */
-    private static final Predicate<CardEdition> filterNotModern = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.not(filterModern));
+    private static final Predicate<CardEdition> filterNotModern = CardEdition.Predicates.CAN_MAKE_BOOSTER
+            .and(Predicate.not(filterModern));
 
     /**
      * Gets the quest starter deck.
@@ -126,12 +107,13 @@ public final class BoosterUtils {
 
         }
 
-        Predicate<PaperCard> filter = Predicates.alwaysTrue();
+        Predicate<PaperCard> filter = CardDb.EDITION_NON_PROMO;
         if (formatStartingPool != null) {
-            filter = formatStartingPool.getFilterPrinted();
+            filter = filter.and(formatStartingPool.getFilterPrinted());
         }
 
-        final List<PaperCard> cardPool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), filter));
+        final List<PaperCard> cardPool = FModel.getMagicDb().getCommonCards().streamAllCards()
+                .filter(filter).collect(Collectors.toList());
 
         if (userPrefs != null && userPrefs.grantCompleteSet()) {
             for (PaperCard card : cardPool) {
@@ -144,18 +126,18 @@ public final class BoosterUtils {
         }
 
         final boolean allowDuplicates = userPrefs != null && userPrefs.allowDuplicates();
-        final boolean mythicsAvailable = Iterables.any(cardPool, Presets.IS_MYTHIC_RARE);
+        final boolean mythicsAvailable = cardPool.stream().anyMatch(PaperCardPredicates.IS_MYTHIC_RARE);
         final int numMythics = mythicsAvailable ? numRares / RARES_PER_MYTHIC : 0;
         final int adjustedRares = numRares - numMythics;
 
         final List<Predicate<CardRules>> colorFilters = getColorFilters(userPrefs, cardPool);
 
-        cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_COMMON, numCommons, colorFilters, allowDuplicates));
-        cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_UNCOMMON, numUncommons, colorFilters, allowDuplicates));
-        cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_RARE, adjustedRares, colorFilters, allowDuplicates));
+        cards.addAll(BoosterUtils.generateCards(cardPool, PaperCardPredicates.IS_COMMON, numCommons, colorFilters, allowDuplicates));
+        cards.addAll(BoosterUtils.generateCards(cardPool, PaperCardPredicates.IS_UNCOMMON, numUncommons, colorFilters, allowDuplicates));
+        cards.addAll(BoosterUtils.generateCards(cardPool, PaperCardPredicates.IS_RARE, adjustedRares, colorFilters, allowDuplicates));
 
         if (numMythics > 0) {
-            cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_MYTHIC_RARE, numMythics, colorFilters, allowDuplicates));
+            cards.addAll(BoosterUtils.generateCards(cardPool, PaperCardPredicates.IS_MYTHIC_RARE, numMythics, colorFilters, allowDuplicates));
         }
 
         return cards;
@@ -198,8 +180,8 @@ public final class BoosterUtils {
 
         List<InventoryItem> output = new ArrayList<>();
 
-        Predicate<CardEdition> filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, editionFilter);
-        Iterable<CardEdition> possibleEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
+        Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(editionFilter);
+        Iterable<CardEdition> possibleEditions = IterableUtil.filter(FModel.getMagicDb().getEditions(), filter);
 
         if (!possibleEditions.iterator().hasNext()) {
             System.err.println("No sets found in starting pool that can create boosters.");
@@ -273,7 +255,7 @@ public final class BoosterUtils {
                 predicate = CardRulesPredicates.hasColor(color);
             }
             if (MyRandom.getRandom().nextDouble() < 0.1) {
-                predicate = Predicates.and(predicate, CardRulesPredicates.Presets.IS_MULTICOLOR);
+                predicate = predicate.and(CardRulesPredicates.IS_MULTICOLOR);
             }
             colorFilters.add(predicate);
         }
@@ -305,16 +287,16 @@ public final class BoosterUtils {
 
                     //Add artifacts here if there's no colorless selection
                     if (i % 8 == 0 && !preferredColors.contains(MagicColor.COLORLESS) && includeArtifacts) {
-                        colorFilters.add(CardRulesPredicates.Presets.IS_ARTIFACT);
+                        colorFilters.add(CardRulesPredicates.IS_ARTIFACT);
                     } else if (i % 5 == 0) {
 
                         //If colorless is the only color selected, add a small chance to get Phyrexian mana cost cards.
                         if (preferredColors.contains(MagicColor.COLORLESS) && preferredColors.size() == 1) {
 
                             Predicate<CardRules> predicateRules =  CardRulesPredicates.cost(StringOp.CONTAINS_IC, "p/");
-                            Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard::getRules);
+                            Predicate<PaperCard> predicateCard = PaperCardPredicates.fromRules(predicateRules);
 
-                            int size = Iterables.size(Iterables.filter(cardPool, predicateCard));
+                            int size = (int) cardPool.stream().filter(predicateCard).count();
                             int totalSize = cardPool.size();
 
                             double phyrexianAmount = (double) size / totalSize;
@@ -329,16 +311,14 @@ public final class BoosterUtils {
                         }
 
                         //Try to get multicolored cards that fit into the preferred colors.
-                        Predicate<CardRules> predicateRules = Predicates.and(
-                                CardRulesPredicates.isColor(preferredColors.get(index)),
-                                CardRulesPredicates.Presets.IS_MULTICOLOR
-                        );
-                        Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard::getRules);
+                        Predicate<CardRules> predicateRules = CardRulesPredicates.isColor(preferredColors.get(index))
+                                .and(CardRulesPredicates.IS_MULTICOLOR);
+                        Predicate<PaperCard> predicateCard = PaperCardPredicates.fromRules(predicateRules);
 
                         //Adjust for the number of multicolored possibilities. This prevents flooding of non-selected
                         //colors if multicolored cards aren't in the selected sets. The more multi-colored cards in the
                         //sets, the more that will be selected.
-                        if (usedMulticolor / 8 < Iterables.size(Iterables.filter(cardPool, predicateCard))) {
+                        if (usedMulticolor / 8 < cardPool.stream().filter(predicateCard).count()) {
                             colorFilters.add(predicateRules);
                             usedMulticolor++;
                         } else {
@@ -355,7 +335,7 @@ public final class BoosterUtils {
 
                 for (Byte color : otherColors) {
                     if (i % 6 == 0) {
-                        colorFilters.add(Predicates.and(CardRulesPredicates.isColor(color), CardRulesPredicates.Presets.IS_MULTICOLOR));
+                        colorFilters.add(CardRulesPredicates.isColor(color).and(CardRulesPredicates.IS_MULTICOLOR));
                     } else {
                         colorFilters.add(CardRulesPredicates.isMonoColor(color));
                     }
@@ -410,8 +390,8 @@ public final class BoosterUtils {
                 //handful of multi-colored cards.
                 do {
                     if (color2 != null) {
-                        Predicate<PaperCard> color2c = Predicates.compose(color2, PaperCard::getRules);
-                        card = Aggregates.random(Iterables.filter(source, Predicates.and(filter, color2c)));
+                        Predicate<PaperCard> color2c = PaperCardPredicates.fromRules(color2);
+                        card = Aggregates.random(IterableUtil.filter(source, filter.and(color2c)));
                     }
                 } while (card == null && colorMisses++ < 10);
             }
@@ -449,24 +429,24 @@ public final class BoosterUtils {
      */
     public static Predicate<CardRules> parseRulesLimitation(final String input) {
         if (null == input || "random".equalsIgnoreCase(input)) {
-            return Predicates.alwaysTrue();
+            return null;
         }
 
-        if (input.equalsIgnoreCase("black"))          return CardRulesPredicates.Presets.IS_BLACK;
-        if (input.equalsIgnoreCase("blue"))           return CardRulesPredicates.Presets.IS_BLUE;
-        if (input.equalsIgnoreCase("green"))          return CardRulesPredicates.Presets.IS_GREEN;
-        if (input.equalsIgnoreCase("red"))            return CardRulesPredicates.Presets.IS_RED;
-        if (input.equalsIgnoreCase("white"))          return CardRulesPredicates.Presets.IS_WHITE;
-        if (input.equalsIgnoreCase("colorless"))      return CardRulesPredicates.Presets.IS_COLORLESS;
-        if (input.equalsIgnoreCase("multicolor"))     return CardRulesPredicates.Presets.IS_MULTICOLOR;
+        if (input.equalsIgnoreCase("black"))          return CardRulesPredicates.IS_BLACK;
+        if (input.equalsIgnoreCase("blue"))           return CardRulesPredicates.IS_BLUE;
+        if (input.equalsIgnoreCase("green"))          return CardRulesPredicates.IS_GREEN;
+        if (input.equalsIgnoreCase("red"))            return CardRulesPredicates.IS_RED;
+        if (input.equalsIgnoreCase("white"))          return CardRulesPredicates.IS_WHITE;
+        if (input.equalsIgnoreCase("colorless"))      return CardRulesPredicates.IS_COLORLESS;
+        if (input.equalsIgnoreCase("multicolor"))     return CardRulesPredicates.IS_MULTICOLOR;
 
-        if (input.equalsIgnoreCase("land"))           return CardRulesPredicates.Presets.IS_LAND;
-        if (input.equalsIgnoreCase("creature"))       return CardRulesPredicates.Presets.IS_CREATURE;
-        if (input.equalsIgnoreCase("artifact"))       return CardRulesPredicates.Presets.IS_ARTIFACT;
-        if (input.equalsIgnoreCase("planeswalker"))   return CardRulesPredicates.Presets.IS_PLANESWALKER;
-        if (input.equalsIgnoreCase("instant"))        return CardRulesPredicates.Presets.IS_INSTANT;
-        if (input.equalsIgnoreCase("sorcery"))        return CardRulesPredicates.Presets.IS_SORCERY;
-        if (input.equalsIgnoreCase("enchantment"))    return CardRulesPredicates.Presets.IS_ENCHANTMENT;
+        if (input.equalsIgnoreCase("land"))           return CardRulesPredicates.IS_LAND;
+        if (input.equalsIgnoreCase("creature"))       return CardRulesPredicates.IS_CREATURE;
+        if (input.equalsIgnoreCase("artifact"))       return CardRulesPredicates.IS_ARTIFACT;
+        if (input.equalsIgnoreCase("planeswalker"))   return CardRulesPredicates.IS_PLANESWALKER;
+        if (input.equalsIgnoreCase("instant"))        return CardRulesPredicates.IS_INSTANT;
+        if (input.equalsIgnoreCase("sorcery"))        return CardRulesPredicates.IS_SORCERY;
+        if (input.equalsIgnoreCase("enchantment"))    return CardRulesPredicates.IS_ENCHANTMENT;
 
         throw new IllegalArgumentException("No CardRules limitations could be parsed from: " + input);
     }
@@ -487,13 +467,13 @@ public final class BoosterUtils {
             final int qty = Integer.parseInt(temp[0]);
 
             List<Predicate<PaperCard>> preds = new ArrayList<>();
-            preds.add(IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC); // Determine rarity
+            preds.add(PaperCardPredicates.IS_RARE_OR_MYTHIC); // Determine rarity
+            preds.add(CardDb.EDITION_NON_PROMO);
 
             if (temp.length > 2) {
                 Predicate<CardRules> cr = parseRulesLimitation(temp[1]);
-                //noinspection RedundantCast
-                if (Predicates.alwaysTrue() != (Object) cr) { // guava has a single instance for always-const predicates
-                    preds.add(Predicates.compose(cr, PaperCard::getRules));
+                if (cr != null) {
+                    preds.add(PaperCardPredicates.fromRules(cr));
                 }
             }
 
@@ -502,8 +482,9 @@ public final class BoosterUtils {
             }
 
             PrintSheet ps = new PrintSheet("Quest rewards");
-            Predicate<PaperCard> predicate = preds.size() == 1 ? preds.get(0) : Predicates.and(preds);
-            ps.addAll(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), predicate));
+            Predicate<PaperCard> predicate = IterableUtil.and(preds);
+            FModel.getMagicDb().getCommonCards().streamAllCards()
+                    .filter(predicate).forEach(ps::add);
             rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice

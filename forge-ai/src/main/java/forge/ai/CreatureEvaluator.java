@@ -1,7 +1,5 @@
 package forge.ai;
 
-import com.google.common.base.Function;
-
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -15,6 +13,7 @@ import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustAttack;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class CreatureEvaluator implements Function<Card, Integer> {
     @Override

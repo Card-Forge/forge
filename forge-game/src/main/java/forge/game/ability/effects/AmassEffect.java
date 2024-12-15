@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -58,7 +57,7 @@ public class AmassEffect extends TokenEffectBase {
         final String type = sa.getParam("Type");
 
         // create army token if needed
-        if (!Iterables.any(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army"))) {
+        if (!activator.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.isType("Army"))) {
             CardZoneTable triggerList = new CardZoneTable();
             MutableBoolean combatChanged = new MutableBoolean(false);
 

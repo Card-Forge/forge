@@ -1,10 +1,10 @@
 package forge.util;
 
+import org.apache.commons.lang3.reflect.TypeUtils;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-
-import org.apache.commons.lang3.reflect.TypeUtils;
 
 /**
  * Static utilities related to reflection.

@@ -17,13 +17,6 @@
  */
 package forge.gui.error;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SOptionPane;
@@ -31,6 +24,8 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Localizer;
 import io.sentry.Sentry;
+
+import java.io.*;
 
 /**
  * The class ErrorViewer. Enables showing and saving error messages that

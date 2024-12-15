@@ -17,7 +17,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -119,7 +118,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             boolean dontRevealToOwner = true;
             if (sa.hasParam("EachBasicType")) {
                 // Get all lands,
-                List<Card> land = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+                List<Card> land = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS);
                 String eachBasic = sa.getParam("EachBasicType");
                 if (eachBasic.equals("Controlled")) {
                     land = CardLists.filterControlledBy(land, p);

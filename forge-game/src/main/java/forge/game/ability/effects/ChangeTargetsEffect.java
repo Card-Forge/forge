@@ -2,12 +2,11 @@ package forge.game.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import forge.game.GameEntity;
 import forge.game.GameObject;

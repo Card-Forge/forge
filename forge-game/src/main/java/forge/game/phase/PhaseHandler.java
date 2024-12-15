@@ -17,13 +17,15 @@
  */
 package forge.game.phase;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
 import forge.game.ability.effects.SkipPhaseEffect;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostEnlist;
@@ -38,7 +40,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -181,7 +182,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                 game.getAction().resetActivationsPerTurn();
 
-                final int lands = CardLists.count(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
+                final int lands = CardLists.count(playerTurn.getLandsInPlay(), CardPredicates.UNTAPPED);
                 playerTurn.setNumPowerSurgeLands(lands);
             }
             //update tokens
@@ -281,7 +282,7 @@ public class PhaseHandler implements java.io.Serializable {
                     table.replaceCounterEffect(game, null, false);
 
                     // roll for attractions if we have any
-                    if (Iterables.any(playerTurn.getCardsIn(ZoneType.Battlefield), Presets.ATTRACTIONS)) {
+                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.ATTRACTIONS)) {
                         playerTurn.rollToVisitAttractions();
                     }
 
@@ -714,7 +715,7 @@ public class PhaseHandler implements java.io.Serializable {
             // map: defender => (many) attacker => (many) blocker
             Map<GameEntity, MapOfLists<Card, Card>> blockers = Maps.newHashMap();
             for (GameEntity ge : combat.getDefendersControlledBy(p)) {
-                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
+                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<>(ArrayList::new);
                 for (Card att : combat.getAttackersOf(ge)) {
                     protectThisDefender.addAll(att, combat.getBlockers(att));
                 }

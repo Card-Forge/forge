@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
@@ -27,7 +26,6 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -163,8 +161,10 @@ public class DamageDealAi extends DamageAiBase {
             }
         } else if ("WildHunt".equals(logic)) {
             // This dummy ability will just deal 0 damage, but holds the logic for the AI for Master of Wild Hunt
-            List<Card> wolves = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.Wolf+untapped+YouCtrl+Other", ai, source, sa);
-            dmg = Aggregates.sum(wolves, Card::getNetPower);
+            dmg = ai.getCardsIn(ZoneType.Battlefield).stream()
+                    .filter(CardPredicates.restriction("Creature.Wolf+untapped+YouCtrl+Other", ai, source, sa))
+                    .mapToInt(Card::getNetPower)
+                    .sum();
         } else if ("Triskelion".equals(logic)) {
             final int n = source.getCounters(CounterEnumType.P1P1);
             if (n > 0) {
@@ -400,7 +400,7 @@ public class DamageDealAi extends DamageAiBase {
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.Presets.PLANESWALKERS);
+        List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.PLANESWALKERS);
 
         CardCollection killables = CardLists.filter(hPlay, c -> c.getSVar("Targeting").equals("Dies")
                 || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
@@ -885,7 +885,10 @@ public class DamageDealAi extends DamageAiBase {
 
             // See if there's an indestructible target that can be used
             CardCollection indestructible = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.Presets.PLANESWALKERS, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE), CardPredicates.isTargetableBy(sa)));
+                    (CardPredicates.CREATURES.or(CardPredicates.PLANESWALKERS))
+                            .and(CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE))
+                            .and(CardPredicates.isTargetableBy(sa))
+            );
 
             if (!indestructible.isEmpty()) {
                 Card c = ComputerUtilCard.getWorstPermanentAI(indestructible, false, false, false, false);
@@ -898,7 +901,7 @@ public class DamageDealAi extends DamageAiBase {
             }
             else if (tgt.canTgtPlaneswalker()) {
                 // Second pass for planeswalkers: choose AI's worst planeswalker
-                final Card c = ComputerUtilCard.getWorstPlaneswalkerToDamage(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.PLANESWALKERS), CardPredicates.isTargetableBy(sa)));
+                final Card c = ComputerUtilCard.getWorstPlaneswalkerToDamage(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.PLANESWALKERS, CardPredicates.isTargetableBy(sa)));
                 if (c != null) {
                     sa.getTargets().add(c);
                     if (divided) {

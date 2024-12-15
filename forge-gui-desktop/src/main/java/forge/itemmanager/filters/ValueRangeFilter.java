@@ -1,11 +1,10 @@
 package forge.itemmanager.filters;
 
 import java.awt.Component;
+import java.util.function.Predicate;
 
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-
-import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;

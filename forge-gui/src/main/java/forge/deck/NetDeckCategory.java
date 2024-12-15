@@ -11,8 +11,13 @@ import forge.util.FileUtil;
 import forge.util.WaitCallback;
 import forge.util.storage.StorageBase;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class NetDeckCategory extends StorageBase<Deck> {
     public static final String PREFIX = "NET_DECK_";

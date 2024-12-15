@@ -3,7 +3,6 @@ package forge.game;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
-
 import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameOutcome.AnteResult;

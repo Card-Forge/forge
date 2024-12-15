@@ -1,12 +1,12 @@
 package forge.gamemodes.net;
 
+import com.google.common.collect.Maps;
+
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
-import com.google.common.collect.Maps;
 
 public class ReplyPool {
 

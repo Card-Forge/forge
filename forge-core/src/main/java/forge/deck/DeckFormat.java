@@ -17,21 +17,16 @@
  */
 package forge.deck;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.ICardFace;
+import forge.card.*;
 import forge.deck.generation.DeckGenPool;
 import forge.deck.generation.DeckGeneratorBase.FilterCMC;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.Aggregates;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
@@ -42,6 +37,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * GameType is an enum to determine the type of current game. :)
@@ -60,14 +56,14 @@ public enum DeckFormat {
         }
     },
     Commander      ( Range.is(99),                         Range.between(0, 10), 1, null,
-            card -> StaticData.instance().getCommanderPredicate().apply(card)
+            card -> StaticData.instance().getCommanderPredicate().test(card)
     ),
     Oathbreaker      ( Range.is(58),                         Range.between(0, 10), 1, null,
-            card -> StaticData.instance().getOathbreakerPredicate().apply(card)
+            card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
     Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
     Brawl      ( Range.is(59), Range.between(0, 15), 1, null,
-            card -> StaticData.instance().getBrawlPredicate().apply(card)
+            card -> StaticData.instance().getBrawlPredicate().test(card)
     ),
     TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
         private final Set<String> bannedCards = ImmutableSet.of(
@@ -77,7 +73,7 @@ public enum DeckFormat {
                 "Timmerian Fiends", "Tolarian Academy", "Umezawa's Jitte", "Vampiric Tutor", "Wheel of Fortune", "Yawgmoth's Will");
 
         @Override
-        public boolean apply(CardRules rules) {
+        public boolean test(CardRules rules) {
             // Check for split cards explicitly, as using rules.getManaCost().getCMC()
             // will return the sum of the costs, which is not what we want.
             if (rules.getMainPart().getManaCost().getCMC() > 3) {
@@ -314,7 +310,7 @@ public enum DeckFormat {
         if (cardPoolFilter != null) {
             final List<PaperCard> erroneousCI = new ArrayList<>();
             for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
-                if (!cardPoolFilter.apply(cp.getKey().getRules())) {
+                if (!cardPoolFilter.test(cp.getKey().getRules())) {
                     erroneousCI.add(cp.getKey());
                 }
             }
@@ -446,7 +442,7 @@ public enum DeckFormat {
             }
             DeckGenPool filteredPool = new DeckGenPool();
             for (PaperCard pc : basePool.getAllCards()) {
-                if (paperCardPoolFilter.apply(pc)) {
+                if (paperCardPoolFilter.test(pc)) {
                     filteredPool.add(pc);
                 }
             }
@@ -454,7 +450,7 @@ public enum DeckFormat {
         }
         DeckGenPool filteredPool = new DeckGenPool();
         for (PaperCard pc : basePool.getAllCards()) {
-            if (cardPoolFilter.apply(pc.getRules())) {
+            if (cardPoolFilter.test(pc.getRules())) {
                 filteredPool.add(pc);
             }
         }
@@ -470,13 +466,13 @@ public enum DeckFormat {
             if (paperCardPoolFilter == null) {
                 return true;
             }
-            return paperCardPoolFilter.apply(pc);
+            return paperCardPoolFilter.test(pc);
         }
-        return cardPoolFilter.apply(pc.getRules());
+        return cardPoolFilter.test(pc.getRules());
     }
 
     public boolean isLegalCommander(CardRules rules) {
-        if (cardPoolFilter != null && !cardPoolFilter.apply(rules)) {
+        if (cardPoolFilter != null && !cardPoolFilter.test(rules)) {
             return false;
         }
         if (this.equals(DeckFormat.Oathbreaker)) {
@@ -501,14 +497,14 @@ public enum DeckFormat {
                 return true;
             if (cardPoolFilter != null) {
                 for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
-                    if (!cardPoolFilter.apply(cp.getKey().getRules())) {
+                    if (!cardPoolFilter.test(cp.getKey().getRules())) {
                         return false;
                     }
                 }
             }
             if (paperCardPoolFilter != null) {
                 for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
-                    if (!paperCardPoolFilter.apply(cp.getKey())) {
+                    if (!paperCardPoolFilter.test(cp.getKey())) {
                         System.err.println(
                                 "Excluding deck: '" + deck.toString() +
                                 "' Reason: '" + cp.getKey() + "' is not legal."
@@ -538,8 +534,8 @@ public enum DeckFormat {
         if (commanders.size() == 1 && commanders.get(0).getRules().canBePartnerCommander()) { //also show available partners a commander can have a partner
             //702.124g If a legendary card has more than one partner ability, you may choose which one to use when designating your commander, but you can’t use both.
             //Notably, no partner ability or combination of partner abilities can ever let a player have more than two commanders.
-            predicate = Predicates.or(predicate, CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
+            predicate = predicate.or(CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
         }
-        return Predicates.compose(predicate, PaperCard::getRules);
+        return PaperCardPredicates.fromRules(predicate);
     }
 }

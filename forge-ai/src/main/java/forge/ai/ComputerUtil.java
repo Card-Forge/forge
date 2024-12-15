@@ -17,16 +17,7 @@
  */
 package forge.ai;
 
-import java.util.*;
-
 import com.google.common.collect.*;
-import forge.game.card.*;
-import forge.game.cost.*;
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
@@ -35,20 +26,15 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
-import forge.game.CardTraitPredicates;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameObject;
-import forge.game.GameType;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.CardPredicates.Presets;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -69,8 +55,13 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import forge.util.StreamUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 
 /**
@@ -539,7 +530,7 @@ public class ComputerUtil {
             // Discard lands
             final CardCollection landsInHand = CardLists.getType(typeList, "Land");
             if (!landsInHand.isEmpty()) {
-                final int numLandsInPlay = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+                final int numLandsInPlay = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
                 final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
                 if (numLandsInPlay >= highestCMC
@@ -650,7 +641,7 @@ public class ComputerUtil {
         // if the source has "Casualty", don't sacrifice cards that may have granted the effect
         // TODO: is there a surefire way to determine which card added Casualty?
         if (source.hasKeyword(Keyword.CASUALTY)) {
-            typeList = CardLists.filter(typeList, Predicates.not(CardPredicates.hasSVar("AIDontSacToCasualty")));
+            typeList = CardLists.filter(typeList, CardPredicates.hasSVar("AIDontSacToCasualty").negate());
         }
 
         if (typeList.size() < amount) {
@@ -780,7 +771,7 @@ public class ComputerUtil {
         all.removeAll(exclude);
         CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
-        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
+        typeList = CardLists.filter(typeList, CardPredicates.CAN_TAP);
 
         if (tap) {
             typeList.remove(activate);
@@ -811,7 +802,7 @@ public class ComputerUtil {
         all.removeAll(exclude);
         CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
-        typeList = CardLists.filter(typeList, sa.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
+        typeList = CardLists.filter(typeList, sa.isCrew() ? CardPredicates.CAN_CREW : CardPredicates.CAN_TAP);
 
         if (tap) {
             typeList.remove(activate);
@@ -848,7 +839,7 @@ public class ComputerUtil {
     public static CardCollection chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount, SpellAbility sa) {
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
 
-        typeList = CardLists.filter(typeList, Presets.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterType.get(CounterEnumType.STUN)));
+        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterType.get(CounterEnumType.STUN)));
 
         if (untap) {
             typeList.remove(activate);
@@ -1041,7 +1032,7 @@ public class ComputerUtil {
             c = ComputerUtilCard.getWorstCreatureAI(remaining);
         }
         else if (CardLists.getNotType(remaining, "Land").isEmpty()) {
-            c = ComputerUtilCard.getWorstLand(CardLists.filter(remaining, CardPredicates.Presets.LANDS));
+            c = ComputerUtilCard.getWorstLand(CardLists.filter(remaining, CardPredicates.LANDS));
         }
         else {
             c = ComputerUtilCard.getWorstPermanentAI(remaining, false, false, false, false);
@@ -1350,8 +1341,8 @@ public class ComputerUtil {
         }
 
         final Game game = ai.getGame();
-        final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
-        final CardCollection landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
+        final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
+        final CardCollection landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS);
         final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
         final int discardCMC = discard.getCMC();
@@ -1670,7 +1661,7 @@ public class ComputerUtil {
         int damage = 0;
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.addAll(ai.getCardsActivatableInExternalZones(true));
-        all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(Presets.PERMANENTS)));
+        all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.PERMANENTS.negate()));
 
         for (final Card c : all) {
             if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
@@ -1760,7 +1751,7 @@ public class ComputerUtil {
                 sub = sub.getSubAbility();
             }
             if (sa == null || (sa != spell && sa != sub)) {
-                Iterables.addAll(objects, predictThreatenedObjects(ai, sa, spell));
+                predictThreatenedObjects(ai, sa, spell).forEach(objects::add);
             }
             if (top) {
                 break; // only evaluate top-stack
@@ -2110,7 +2101,7 @@ public class ComputerUtil {
             }
         }
 
-        Iterables.addAll(threatened, predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
+        predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()).forEach(threatened::add);
         return threatened;
     }
 
@@ -2224,7 +2215,7 @@ public class ComputerUtil {
         }
 
         CardCollectionView library = ai.getCardsIn(ZoneType.Library);
-        int landsInDeck = CardLists.count(library, CardPredicates.isType("Land"));
+        int landsInDeck = CardLists.count(library, CardPredicates.LANDS);
 
         // no land deck, can't do anything better
         if (landsInDeck == 0) {
@@ -2369,14 +2360,14 @@ public class ComputerUtil {
         CardCollectionView cardsInHand = player.getCardsIn(ZoneType.Hand);
         CardCollectionView cardsOTB = player.getCardsIn(ZoneType.Battlefield);
 
-        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.LANDS_PRODUCING_MANA);
         CardCollection thisLandOTB = CardLists.filter(cardsOTB, CardPredicates.nameEquals(c.getName()));
-        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.LANDS_PRODUCING_MANA);
         // valuable mana-producing artifacts that may be equated to a land
         List<String> manaArts = Arrays.asList("Mox Pearl", "Mox Sapphire", "Mox Jet", "Mox Ruby", "Mox Emerald");
 
         // evaluate creatures available in deck
-        CardCollectionView allCreatures = CardLists.filter(allCards, CardPredicates.Presets.CREATURES, CardPredicates.isOwner(player));
+        CardCollectionView allCreatures = CardLists.filter(allCards, CardPredicates.CREATURES, CardPredicates.isOwner(player));
         int numCards = allCreatures.size();
 
         if (landsOTB.size() < maxLandsToScryLandsToTop && landsInHand.isEmpty()) {
@@ -2405,7 +2396,7 @@ public class ComputerUtil {
                 }
             }
         } else if (c.isCreature()) {
-            CardCollection creaturesOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.CREATURES);
+            CardCollection creaturesOTB = CardLists.filter(cardsOTB, CardPredicates.CREATURES);
             int avgCreatureValue = numCards != 0 ? ComputerUtilCard.evaluateCreatureList(allCreatures) / numCards : 0;
             int maxControlledCMC = Aggregates.max(creaturesOTB, Card::getCMC);
 
@@ -2456,7 +2447,10 @@ public class ComputerUtil {
         // not enough good choices, need to fill the rest
         int minDiff = min - goodChoices.size();
         if (minDiff > 0) {
-            goodChoices.addAll(Aggregates.random(CardLists.filter(validCards, Predicates.not(Predicates.in(goodChoices))), minDiff));
+            List<Card> choices = validCards.stream()
+                    .filter(Predicate.not(goodChoices::contains))
+                    .collect(StreamUtil.random(minDiff));
+            goodChoices.addAll(choices);
             return goodChoices;
         }
 
@@ -2492,7 +2486,7 @@ public class ComputerUtil {
             if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
                 double amount = 0;
                 for (String type : validTypes) {
-                    CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), Presets.TAPPED);
+                    CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), CardPredicates.TAPPED);
                     double i = type.equals("Creature") ? list.size() * 1.5 : list.size();
                     if (i > amount) {
                         amount = i;
@@ -2575,13 +2569,13 @@ public class ComputerUtil {
                     CardCollectionView possibleCards = ai.getAllCards();
 
                     for (String b : basics) {
-                        if (!Iterables.any(presentCards, CardPredicates.isType(b)) && Iterables.any(possibleCards, CardPredicates.isType(b))) {
+                        if (!presentCards.anyMatch(CardPredicates.isType(b)) && possibleCards.anyMatch(CardPredicates.isType(b))) {
                             chosen = b;
                         }
                     }
                     if (chosen.isEmpty()) {
                         for (String b : basics) {
-                            if (Iterables.any(possibleCards, CardPredicates.isType(b))) {
+                            if (possibleCards.anyMatch(CardPredicates.isType(b))) {
                                 chosen = b;
                             }
                         }
@@ -2792,8 +2786,7 @@ public class ComputerUtil {
                 }
 
                 // has cards with SacMe or Token
-                if (CardLists.count(aiCreatures,
-                        Predicates.or(CardPredicates.hasSVar("SacMe"), CardPredicates.Presets.TOKEN)) >= numDeath) {
+                if (CardLists.count(aiCreatures, CardPredicates.hasSVar("SacMe").or(CardPredicates.TOKEN)) >= numDeath) {
                     return "Death";
                 }
 
@@ -3076,11 +3069,11 @@ public class ComputerUtil {
                 repParams,
                 ReplacementLayer.Other);
 
-        if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "NoLife"))) {
+        if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "NoLife"))) {
             return false;
-        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "LoseLife"))) {
+        } else if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "LoseLife"))) {
             return false;
-        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "LichDraw"))) {
+        } else if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "LichDraw"))) {
             return false;
         }
         return true;
@@ -3105,13 +3098,13 @@ public class ComputerUtil {
             ReplacementLayer.Other
         );
 
-        if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "NoLife"))) {
+        if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "NoLife"))) {
             // no life gain is not negative
             return false;
-        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "LoseLife"))) {
+        } else if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "LoseLife"))) {
             // lose life is only negative is the player can lose life
             return player.canLoseLife();
-        } else if (Iterables.any(list, CardTraitPredicates.hasParam("AILogic", "LichDraw"))) {
+        } else if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "LichDraw"))) {
             // if it would draw more cards than player has, then its negative
             return player.getCardsIn(ZoneType.Library).size() <= n;
         }

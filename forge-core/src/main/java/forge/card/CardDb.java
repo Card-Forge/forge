@@ -17,27 +17,27 @@
  */
 package forge.card;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.*;
-
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimaps;
 import forge.StaticData;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardEdition.Type;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.util.CollectionSuppliers;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.lang.LangEnglish;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
@@ -47,7 +47,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final String exlcudedCardSet = "DS0";
 
     // need this to obtain cardReference by name+set+artindex
-    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
@@ -76,9 +76,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             latestFirst = latestSetFirst;
         }
 
+        private static final EnumSet<Type> ALLOWED_SET_TYPES = EnumSet.of(Type.CORE, Type.EXPANSION, Type.REPRINT);
+
         public boolean accept(CardEdition ed) {
             if (ed == null) return false;
-            return !filterSets || ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION || ed.getType() == Type.REPRINT;
+            return !filterSets || ALLOWED_SET_TYPES.contains(ed.getType());
         }
     }
 
@@ -835,7 +837,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         List<PaperCard> cards;
         Predicate<PaperCard> cardQueryFilter;
-        filter = (filter != null) ? filter : Predicates.alwaysTrue();
+        filter = filter != null ? filter : (x -> true);
         if (releaseDate != null) {
             cardQueryFilter = c -> {
                 if (c.getArtIndex() != cr.artIndex)
@@ -849,7 +851,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             };
         } else  // filter candidates based on requested artIndex
             cardQueryFilter = card -> card.getArtIndex() == cr.artIndex;
-        cardQueryFilter = Predicates.and(cardQueryFilter, filter);
+        cardQueryFilter = cardQueryFilter.and(filter);
         cards = getAllCards(cr.cardName, cardQueryFilter);
         // Note: No need to check whether "cards" is empty; the next for loop will validate condition at L699
         if (cards.size() == 1)  // if only one candidate, there much else we should do
@@ -876,7 +878,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return null;  // nothing to do
 
         // Filter Cards Editions based on set preferences
-        List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(cardEditions, artPref::accept));
+        List<CardEdition> acceptedEditions = cardEditions.stream().filter(artPref::accept).collect(Collectors.toList());
 
         /* At this point, it may be possible that Art Preference is too-strict for the requested card!
             i.e. acceptedEditions.size() == 0!
@@ -928,7 +930,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return 0;
         Predicate<PaperCard> predicate = card -> card.getEdition().equalsIgnoreCase(setCode);
         if(functionalVariantName != null && !functionalVariantName.equals(IPaperCard.NO_FUNCTIONAL_VARIANT)) {
-            predicate = Predicates.and(predicate, card -> functionalVariantName.equals(card.getFunctionalVariant()));
+            predicate = predicate.and(card -> functionalVariantName.equals(card.getFunctionalVariant()));
         }
         Collection<PaperCard> cardsInSet = getAllCards(cardName, predicate);
         return cardsInSet.size();
@@ -946,6 +948,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return false;
             return e.getKey().equals(e.getValue().getName());
         }).values();
+    }
+
+    public List<PaperCard> getUniqueCardsNoAlt(String cardName) {
+        return Lists.newArrayList(Maps.filterEntries(uniqueCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getName(cardName)));
     }
 
     public PaperCard getUniqueByName(final String name) {
@@ -989,44 +995,43 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).values();
     }
 
-    public Collection<PaperCard> getAllNonPromoCards() {
-        return Lists.newArrayList(Iterables.filter(getAllCards(), paperCard -> {
-            CardEdition edition = null;
-            try {
-                edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-            } catch (Exception ex) {
-                return false;
-            }
-            return edition != null && edition.getType() != Type.PROMO;
-        }));
+    @Override
+    public Stream<PaperCard> streamAllCards() {
+        return allCardsByName.values().stream();
+    }
+    @Override
+    public Stream<PaperCard> streamUniqueCards() {
+        return uniqueCardsByName.values().stream();
+    }
+    public Stream<PaperCard> streamAllCardsNoAlt() {
+        return allCardsByName.entries().stream().filter(e -> e.getKey().equals(e.getValue().getName())).map(Entry::getValue);
+    }
+    public Stream<PaperCard> streamUniqueCardsNoAlt() {
+        return uniqueCardsByName.entrySet().stream().filter(e -> e.getKey().equals(e.getValue().getName())).map(Entry::getValue);
     }
 
-    public Collection<PaperCard> getUniqueCardsNoAltNoOnline() {
-        return Lists.newArrayList(Iterables.filter(getUniqueCardsNoAlt(), paperCard -> {
-            CardEdition edition = null;
-            try {
-                edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                if (edition.getType() == Type.ONLINE||edition.getType() == Type.FUNNY)
-                    return false;
-            } catch (Exception ex) {
-                return false;
-            }
-            return true;
-        }));
+    public Stream<ICardFace> streamAllFaces() {
+        return facesByName.values().stream();
     }
+
+    public static final Predicate<PaperCard> EDITION_NON_PROMO = paperCard -> {
+        String code = paperCard.getEdition();
+        CardEdition edition = StaticData.instance().getCardEdition(code);
+        if(edition == null && code.equals("???"))
+            return true;
+        return edition != null && edition.getType() != Type.PROMO;
+    };
+
+    public static final Predicate<PaperCard> EDITION_NON_REPRINT = paperCard -> {
+        String code = paperCard.getEdition();
+        CardEdition edition = StaticData.instance().getCardEdition(code);
+        if(edition == null && code.equals("???"))
+            return true;
+        return edition != null && Type.REPRINT_SET_TYPES.contains(edition.getType());
+    };
 
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
-        return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), paperCard -> {
-            CardEdition edition = null;
-            try {
-                edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                if (edition.getType() == Type.PROMO || edition.getType() == Type.REPRINT || edition.getType()==Type.COLLECTOR_EDITION)
-                    return false;
-            } catch (Exception ex) {
-                return false;
-            }
-            return true;
-        }));
+        return streamAllCardsNoAlt().filter(EDITION_NON_REPRINT).collect(Collectors.toList());
     }
 
     public String getName(final String cardName) {
@@ -1056,19 +1061,19 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      */
     @Override
     public List<PaperCard> getAllCards(Predicate<PaperCard> predicate) {
-        return Lists.newArrayList(Iterables.filter(getAllCards(), predicate));
+        return streamAllCards().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
     public List<PaperCard> getAllCards(final String cardName, Predicate<PaperCard> predicate){
-        return Lists.newArrayList(Iterables.filter(getAllCards(cardName), predicate));
+        return getAllCards(cardName).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
      * Returns a modifiable list of cards matching the given predicate
      */
     public List<PaperCard> getAllCardsNoAlt(Predicate<PaperCard> predicate) {
-        return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), predicate));
+        return streamAllCardsNoAlt().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     // Do I want a foiled version of these cards?
@@ -1099,69 +1104,26 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
-    public Predicate<? super PaperCard> wasPrintedInSets(List<String> setCodes) {
-        return new PredicateExistsInSets(setCodes);
-    }
-
-    private class PredicateExistsInSets implements Predicate<PaperCard> {
-        private final List<String> sets;
-
-        public PredicateExistsInSets(final List<String> wantSets) {
-            this.sets = wantSets; // maybe should make a copy here?
-        }
-
-        @Override
-        public boolean apply(final PaperCard subject) {
-            for (PaperCard c : getAllCards(subject.getName())) {
-                if (sets.contains(c.getEdition())) {
-                    return true;
-                }
-            }
-            return false;
-        }
+    public Predicate<? super PaperCard> wasPrintedInSets(Collection<String> setCodes) {
+        Set<String> sets = new HashSet<>(setCodes);
+        return paperCard -> getAllCards(paperCard.getName()).stream()
+                .map(PaperCard::getEdition)
+                .anyMatch(sets::contains);
     }
 
     // This Predicate validates if a card is legal in a given format (identified by the list of allowed sets)
     @Override
-    public Predicate<? super PaperCard> isLegal(List<String> allowedSetCodes){
-        return new PredicateLegalInSets(allowedSetCodes);
-    }
-
-    private class PredicateLegalInSets implements Predicate<PaperCard> {
-        private final List<String> sets = new ArrayList<>();
-
-        public PredicateLegalInSets(final List<String> allowedSets){
-            this.sets.addAll(allowedSets);
-        }
-        @Override
-        public boolean apply(final PaperCard card){
-            if (card == null) return false;
-            return this.sets.contains(card.getEdition());
-        }
+    public Predicate<? super PaperCard> isLegal(Collection<String> allowedSetCodes){
+        Set<String> sets = new HashSet<>(allowedSetCodes);
+        return paperCard -> paperCard != null && sets.contains(paperCard.getEdition());
     }
 
     // This Predicate validates if a card was printed at [rarity], on any of its printings
     @Override
     public Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity) {
-        return new PredicatePrintedAtRarity(rarity);
-    }
-
-    private class PredicatePrintedAtRarity implements Predicate<PaperCard> {
-        private final Set<String> matchingCards;
-
-        public PredicatePrintedAtRarity(CardRarity rarity) {
-            this.matchingCards = new HashSet<>();
-            for (PaperCard c : getAllCards()) {
-                if (c.getRarity() == rarity) {
-                    this.matchingCards.add(c.getName());
-                }
-            }
-        }
-
-        @Override
-        public boolean apply(final PaperCard subject) {
-            return matchingCards.contains(subject.getName());
-        }
+        return paperCard -> getAllCards(paperCard.getName()).stream()
+                .map(PaperCard::getRarity)
+                .anyMatch(rarity::equals);
     }
 
     public StringBuilder appendCardToStringBuilder(PaperCard card, StringBuilder sb) {

@@ -1,19 +1,18 @@
 package forge.game.card;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.ObjectUtils;
-
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
-
 import forge.game.CardTraitBase;
+import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.player.Player;
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
 
@@ -48,8 +47,8 @@ public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
         }
 
         if (validOwner != null) {
-            filteredPlayer = Lists.newArrayList(Iterables.filter(rowKeySet(),
-                    GameObjectPredicates.restriction(validOwner.split(","), host.getController(), host, ctb)));
+            Predicate<GameObject> restriction = GameObjectPredicates.restriction(validOwner.split(","), host.getController(), host, ctb);
+            filteredPlayer = rowKeySet().stream().filter(restriction).collect(Collectors.toList());
             if (filteredPlayer.isEmpty()) {
                 return 0;
             }

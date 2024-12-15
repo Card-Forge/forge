@@ -10,6 +10,7 @@ import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.util.IterableUtil;
 
 import java.io.Serializable;
 import java.util.*;
@@ -92,9 +93,9 @@ public class RewardData implements Serializable {
         if(legals==null)
             allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
         else
-            allCards = Iterables.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
+            allCards = IterableUtil.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
         //Filter out specific cards.
-        allCards = Iterables.filter(allCards, input -> {
+        allCards = IterableUtil.filter(allCards, input -> {
             if(input == null)
                 return false;
             if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
@@ -111,7 +112,7 @@ public class RewardData implements Serializable {
             return !Arrays.asList(configData.restrictedCards).contains(input.getName());
         });
         //Filter AI cards for enemies.
-        allEnemyCards=Iterables.filter(allCards, input -> {
+        allEnemyCards= IterableUtil.filter(allCards, input -> {
             if (input == null) return false;
             return !input.getRules().getAiHints().getRemAIDecks();
         });

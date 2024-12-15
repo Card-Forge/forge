@@ -6,7 +6,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -25,7 +25,7 @@ public class ChooseDirectionAi extends SpellAbilityAi {
             return false;
         } else {
             if ("Aminatou".equals(logic)) {
-                CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.NONLAND_PERMANENTS);
+                CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.NONLAND_PERMANENTS);
                 CardCollection aiPermanent = CardLists.filterControlledBy(all, ai);
                 aiPermanent.remove(sa.getHostCard());
                 int aiValue = Aggregates.sum(aiPermanent, Card::getCMC);
