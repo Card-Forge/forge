@@ -137,21 +137,27 @@ public class ComputerUtilCost {
                 final CostDiscard disc = (CostDiscard) part;
 
                 final String type = disc.getType();
-                if (type.equals("CARDNAME")) {
-                    if (source.getAbilityText().contains("Bloodrush")) {
-                        continue;
-                    } else if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
-                            && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize()) {
-                        // Better do something than just discard stuff
-                        return true;
+                final CardCollection typeList;
+                int num;
+                if (type.equals("Hand")) {
+                    typeList = hand;
+                    num = hand.size();
+                } else {
+                    if (type.equals("CARDNAME")) {
+                        if (source.getAbilityText().contains("Bloodrush")) {
+                            continue;
+                        } else if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
+                                && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize()) {
+                            // Better do something than just discard stuff
+                            return true;
+                        }
                     }
+                    typeList = CardLists.getValidCards(hand, type, source.getController(), source, sa);
+                    if (typeList.size() > ai.getMaxHandSize()) {
+                        continue;
+                    }
+                    num = AbilityUtils.calculateAmount(source, disc.getAmount(), sa);
                 }
-                final CardCollection typeList = CardLists.getValidCards(hand, type, source.getController(), source, sa);
-                if (typeList.size() > ai.getMaxHandSize()) {
-                    continue;
-                }
-                int num = AbilityUtils.calculateAmount(source, disc.getAmount(), sa);
-
                 for (int i = 0; i < num; i++) {
                     Card pref = ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList);
                     if (pref == null) {

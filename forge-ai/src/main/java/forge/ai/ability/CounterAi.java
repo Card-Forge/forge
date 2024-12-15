@@ -13,6 +13,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CounterEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostExile;
@@ -76,10 +78,17 @@ public class CounterAi extends SpellAbilityAi {
                 return false;
             }
 
-            if ("OppDiscardsHand".equals(sa.getParam("AILogic"))) {
-                if (topSA.getActivatingPlayer().getCardsIn(ZoneType.Hand).size() < 2) {
-                    return false;
+            if (sa.hasParam("UnlessCost") && "TargetedController".equals(sa.getParamOrDefault("UnlessPayer", "TargetedController"))) {
+                Cost unlessCost = AbilityUtils.calculateUnlessCost(sa, sa.getParam("UnlessCost"), false);
+                if (unlessCost.hasSpecificCostType(CostDiscard.class)) {
+                    CostDiscard discardCost = unlessCost.getCostPartByType(CostDiscard.class);
+                    if ("Hand".equals(discardCost.getType())) {
+                        if (topSA.getActivatingPlayer().getCardsIn(ZoneType.Hand).size() < 2) {
+                            return false;
+                        }
+                    }
                 }
+                // TODO check if Player can pay the unless cost?
             }
 
             sa.resetTargets();
@@ -352,17 +361,46 @@ public class CounterAi extends SpellAbilityAi {
     public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // ward or human misplay
         final Card source = sa.getHostCard();
+        final Game game = source.getGame();
         List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
         for (SpellAbility toBeCountered : spells) {
             if (!toBeCountered.isCounterableBy(sa)) {
                 return false;
             }
+
+            if (toBeCountered.isSpell()) {
+                Card spellHost = toBeCountered.getHostCard();
+                Card gameCard = game.getCardState(spellHost, null);
+                // Spell Host already left the Stack Zone
+                if (gameCard == null || !gameCard.isInZone(ZoneType.Stack) || !gameCard.equalsWithGameTimestamp(spellHost)) {
+                    return false;
+                }
+            }
+
             // no reason to pay if we don't plan to confirm
             if (toBeCountered.isOptionalTrigger() && !SpellApiToAi.Converter.get(toBeCountered.getApi()).doTriggerNoCostWithSubs(payer, toBeCountered, false)) {
                 return false;
             }
             // TODO check hasFizzled
         }
+        CardCollectionView hand = payer.getCardsIn(ZoneType.Hand);
+        if (cost.hasSpecificCostType(CostDiscard.class)) {
+            CostDiscard discard = cost.getCostPartByType(CostDiscard.class);
+            String type = discard.getType();
+            if (type.equals("Hand")) {
+                if (hand.isEmpty()) {
+                    return true;
+                }
+
+                // TODO how to check if the Spell on the Stack is more valuable than the Cards in Hand?
+                int spellSum = spells.stream().map(SpellAbility::getHostCard).filter(CardPredicates.CREATURES).mapToInt(ComputerUtilCard::evaluateCreature).sum();
+                int handSum = hand.stream().filter(CardPredicates.CREATURES).mapToInt(ComputerUtilCard::evaluateCreature).sum();
+                if (spellSum <= handSum) {
+                    return false;
+                }
+            }
+        }
+
         return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }
