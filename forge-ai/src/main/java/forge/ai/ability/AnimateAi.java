@@ -244,18 +244,22 @@ public class AnimateAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        if (sa.usesTargeting() && !animateTgtAI(sa) && !mandatory) {
-            return false;
-        } else if (sa.usesTargeting() && mandatory) {
-            // fallback if animate is mandatory
-            sa.resetTargets();
-            List<Card> list = CardUtil.getValidCardsToTarget(sa);
-            if (list.isEmpty()) {
+        if (sa.usesTargeting()) {
+            if(animateTgtAI(sa))
+                return true;
+            else if (!mandatory)
                 return false;
+            else {
+                // fallback if animate is mandatory
+                sa.resetTargets();
+                List<Card> list = CardUtil.getValidCardsToTarget(sa);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                Card toAnimate = ComputerUtilCard.getWorstAI(list);
+                rememberAnimatedThisTurn(aiPlayer, toAnimate);
+                sa.getTargets().add(toAnimate);
             }
-            Card toAnimate = ComputerUtilCard.getWorstAI(list);
-            rememberAnimatedThisTurn(aiPlayer, toAnimate);
-            sa.getTargets().add(toAnimate);
         }
         return true;
     }
