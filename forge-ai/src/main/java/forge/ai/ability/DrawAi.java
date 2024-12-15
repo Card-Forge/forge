@@ -33,6 +33,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.*;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 
 public class DrawAi extends SpellAbilityAi {
@@ -553,7 +554,15 @@ public class DrawAi extends SpellAbilityAi {
     public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card host = sa.getHostCard();
 
+        // TODO better logic for Indulgent Tormentor
+        final String aiLogic = sa.getParam("UnlessAI");
+        if ("Never".equals(aiLogic)) { return false; }
+
         if (alreadyPaid && payers.size() > 1) {
+            return false;
+        }
+
+        if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
             return false;
         }
 
@@ -573,9 +582,18 @@ public class DrawAi extends SpellAbilityAi {
                         return false;
                     }
                 }
+                if (cost.hasSpecificCostType(CostPayLife.class)) {
+                    if (!ComputerUtilCost.checkLifeCost(payer, cost, host, 4, sa)) {
+                        return false;
+                    }
+                }
+                if (cost.hasSpecificCostType(CostSacrifice.class)) {
+                    if (!ComputerUtilCost.checkSacrificeCost(payer, cost, host, sa, false)) {
+                        return false;
+                    }
+                }
             }
         }
-
         // TODO add logic for Discard + Draw Effects
 
         return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
