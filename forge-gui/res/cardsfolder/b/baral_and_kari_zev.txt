@@ -9,5 +9,6 @@ SVar:TrigMayCast:DB$ Play | Valid$ Card.nonLand+YouOwn+sharesCardTypeWith Trigge
 SVar:DBTokenIfNotPlayed:DB$ Token | TokenScript$ first_mate_ragavan | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | PumpKeywords$ Haste | PumpDuration$ EOT | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredCard$CardManaCost
+DeckHas:Ability$Token & Keyword$Haste
 DeckHints:Type$Instant|Sorcery
 Oracle:First strike, menace\nWhenever you cast your first instant or sorcery spell each turn, you may cast a spell with lesser mana value that shares a card type with it from your hand without paying its mana cost. If you don't, create First Mate Ragavan, a legendary 2/1 red Monkey Pirate creature token. It gains haste until end of turn.

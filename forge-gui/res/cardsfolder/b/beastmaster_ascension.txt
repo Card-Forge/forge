@@ -6,6 +6,6 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Exec
 SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:PlayMain1:TRUE
 SVar:MaxQuestEffect:7
-DeckHints:Ability$Token
 DeckHas:Ability$Counters
+DeckHints:Ability$Token|Counters|Proliferate
 Oracle:Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension.\nAs long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5.
