@@ -16,6 +16,7 @@ import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostDraw;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
@@ -407,6 +408,7 @@ public class TokenAi extends SpellAbilityAi {
     @Override
     public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card source = sa.getHostCard();
+        Player p = sa.getActivatingPlayer();
         if (sa.isKeyword(Keyword.FABRICATE)) {
             final int n = Integer.parseInt(sa.getParam("TokenAmount"));
 
@@ -473,6 +475,35 @@ public class TokenAi extends SpellAbilityAi {
             int evalToken = ComputerUtilCard.evaluateCreatureList(tokenList);
 
             return evalToken < evalCounter;
+        }
+
+        // Development effect, Payer can let Opponent draw, or they get a token
+        if (payer.isOpponentOf(sa.getActivatingPlayer())) {
+            if (cost.hasSpecificCostType(CostDraw.class)) {
+                CostDraw draw = cost.getCostPartByType(CostDraw.class);
+                // try to deck out opponent
+                if (draw.getPotentialPlayers(payer, sa).contains(p) && p.getCardsIn(ZoneType.Library).size() < 5) {
+                    if (!p.isCardInPlay("Laboratory Maniac") || p.cantWin()) {
+                        return true;
+                    }
+                }
+            }
+
+            if (alreadyPaid) {
+                return false;
+            }
+            final Card tokenCard = TokenAi.spawnToken(p, sa);
+
+            // Token would not survive
+            if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
+                return false;
+            }
+            int evalActivator = ComputerUtilCard.evaluateCreature(tokenCard) + ComputerUtilCard.evaluateCreatureList(p.getCreaturesInPlay());;
+            int evalPayerCreatures = ComputerUtilCard.evaluateCreatureList(payer.getCreaturesInPlay());
+
+            if (evalActivator > evalPayerCreatures) {
+                return true;
+            }
         }
         return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
