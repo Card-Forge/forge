@@ -11,4 +11,5 @@ SVar:TrigToken:DB$ CopyPermanent | ValidTgts$ Artifact.YouDontCtrl | TgtPrompt$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
 DeckHas:Ability$Token & Type$Squirrel
+DeckHints:Type$Artifact
 Oracle:Flying, deathtouch\nWhenever Arteeoh deals combat damage to a player, you may exchange control of two other target artifacts. When you do, create a token that's a copy of target artifact you don't control, except it's a 1/1 green Squirrel creature token in addition to its other colors and types.

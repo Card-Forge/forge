@@ -4,4 +4,5 @@ Types:Artifact Equipment
 K:Equip:2
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigPutCounter | TriggerDescription$ Whenever equipped creature attacks, put a +1/+1 counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
 Oracle:Whenever equipped creature attacks, put a +1/+1 counter on it.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

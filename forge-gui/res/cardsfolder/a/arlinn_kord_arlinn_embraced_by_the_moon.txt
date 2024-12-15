@@ -6,6 +6,7 @@ A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ +2 | Num
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | Planeswalker$ True | SubAbility$ DBTransform | SpellDescription$ Create a 2/2 green Wolf creature token. Transform CARDNAME.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | StackDescription$ None
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Token & Keyword$Trample
 AlternateMode:DoubleFaced
 Oracle:[+1]: Until end of turn, up to one target creature gets +2/+2 and gains vigilance and haste.\n[0]: Create a 2/2 green Wolf creature token. Transform Arlinn Kord.
 
