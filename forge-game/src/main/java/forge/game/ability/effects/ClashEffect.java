@@ -51,7 +51,6 @@ public class ClashEffect extends SpellAbilityEffect {
             }
         }
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
         runParams.put(AbilityKey.Won, player.equals(winner) ? "True" : "False");
         source.getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);

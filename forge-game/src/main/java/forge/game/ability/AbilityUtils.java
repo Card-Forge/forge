@@ -1484,7 +1484,7 @@ public class AbilityUtils {
                 if (modifier.startsWith("Minus")) {
                     int max = Integer.parseInt(modifier.substring(5));
                     if (sa.hasParam("UnlessUpTo") && beforePayment) { // Flash
-                        max = sa.getActivatingPlayer().getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblChooseNumber"), 0, max);
+                        max = sa.getActivatingPlayer().getController().chooseNumberForCostReduction(sa, 0, max);
                     }
                     newCost.decreaseGenericMana(max);
                 } else {
@@ -3997,6 +3997,7 @@ public class AbilityUtils {
         Set<String> types = new HashSet<>();
         for (Card c1 : list) {
             Iterables.addAll(types, c1.getType().getSubtypes());
+            Iterables.addAll(types, c1.getType().getCreatureTypes());
         }
 
         return types.size();
