@@ -437,11 +437,14 @@ public class AdventureEventData implements Serializable {
     }
 
     public void generateParticipants(int numberOfOpponents) {
-        participants = StreamUtil.stream(WorldData.getAllEnemies())
-                .filter(q -> q.nextEnemy == null)
-                .collect(StreamUtil.random(numberOfOpponents)).stream()
-                .map(q -> new AdventureEventParticipant().generate(q))
-                .toArray(i -> new AdventureEventParticipant[i + 1]);
+        participants = new AdventureEventParticipant[numberOfOpponents + 1];
+
+        List<EnemyData> data = Aggregates.random(WorldData.getAllEnemies(), numberOfOpponents);
+        data.removeIf(q -> q.nextEnemy != null);
+        for (int i = 0; i < numberOfOpponents; i++) {
+            participants[i] = new AdventureEventParticipant().generate(data.get(i));
+        }
+
         participants[numberOfOpponents] = getHumanPlayer();
     }
 
