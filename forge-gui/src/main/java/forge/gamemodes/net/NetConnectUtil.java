@@ -1,7 +1,5 @@
 package forge.gamemodes.net;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.client.ClientGameLobby;
@@ -23,6 +21,7 @@ import forge.localinstance.properties.ForgeProfileProperties;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
 
 public class NetConnectUtil {
     private NetConnectUtil() { }

@@ -589,7 +589,7 @@ public class CardView extends GameEntityView {
     public boolean canBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
 
-        return Iterables.any(viewers, this::canBeShownTo);
+        return IterableUtil.any(viewers, this::canBeShownTo);
     }
 
     public boolean canBeShownTo(final PlayerView viewer) {
@@ -655,7 +655,7 @@ public class CardView extends GameEntityView {
     public boolean canFaceDownBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
 
-        return Iterables.any(viewers, this::canFaceDownBeShownTo);
+        return IterableUtil.any(viewers, this::canFaceDownBeShownTo);
     }
 
     public boolean canFaceDownBeShownTo(final PlayerView viewer) {

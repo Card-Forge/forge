@@ -30,8 +30,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-import com.google.common.collect.Iterables;
-
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -66,10 +64,7 @@ import forge.toolbox.ContextMenuBuilder;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
-import forge.util.Aggregates;
-import forge.util.ItemPool;
-import forge.util.Lang;
-import forge.util.Localizer;
+import forge.util.*;
 import forge.view.FView;
 
 /**
@@ -237,7 +232,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     max = cardCopies;
                 }
 
-                Entry<String, Integer> cardAmountInfo = Iterables.find(cardsByName,
+                Entry<String, Integer> cardAmountInfo = IterableUtil.find(cardsByName,
                         t -> t.getKey().equals(card.getRules().getNormalizedName()), null);
                 if (cardAmountInfo != null) {
                     max -= cardAmountInfo.getValue();

@@ -4,12 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import forge.item.PaperCardPredicates;
+import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.GuiDesktop;
 import forge.LobbyPlayer;
@@ -37,9 +36,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.util.AbstractGeneticAlgorithm;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
 import forge.view.SimulateMatch;
 
 public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
@@ -109,12 +105,12 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
             cards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
         }
 
-        Iterable<PaperCard> filtered= Iterables.filter(cards, Predicates.and(
-                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules),
-                Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard::getRules),
-                gameFormat.getFilterPrinted()));
+        List<PaperCard> filteredList = cards.stream()
+                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS
+                                .and(CardRulesPredicates.IS_NON_LAND)))
+                .filter(gameFormat.getFilterPrinted())
+                .collect(Collectors.toList());
 
-        List<PaperCard> filteredList = Lists.newArrayList(filtered);
         setRankedList(CardRanker.rankCardsInDeck(filteredList));
         List<Deck> decks = new ArrayList<>();
         for(PaperCard card: getRankedList().subList(0,cardsToUse)){

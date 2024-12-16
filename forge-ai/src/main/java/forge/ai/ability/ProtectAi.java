@@ -1,14 +1,6 @@
 package forge.ai.ability;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -26,6 +18,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.MyRandom;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProtectAi extends SpellAbilityAi {
     private static boolean hasProtectionFrom(final Card card, final String color) {

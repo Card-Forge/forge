@@ -1,7 +1,7 @@
 Name:Razorfield Ripper
 ManaCost:2 W
 Types:Artifact Creature Equipment Rhino
-PT:2/2
+PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self,Creature.EquippedBy | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME or equipped creature attacks, you get {E}, then it gets +X/+X until end of turn, where X is the amount of {E} you have.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X | NumDef$ +X

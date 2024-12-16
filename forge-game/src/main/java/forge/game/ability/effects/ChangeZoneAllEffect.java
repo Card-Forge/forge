@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
-
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;

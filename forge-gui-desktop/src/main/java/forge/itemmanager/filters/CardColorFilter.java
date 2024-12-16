@@ -2,13 +2,13 @@ package forge.itemmanager.filters;
 
 import javax.swing.JPanel;
 
-import com.google.common.base.Predicate;
-
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.itemmanager.SpellShopManager;
+
+import java.util.function.Predicate;
 
 
 public class CardColorFilter extends StatTypeFilter<PaperCard> {

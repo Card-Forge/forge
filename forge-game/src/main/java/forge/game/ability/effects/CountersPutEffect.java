@@ -3,11 +3,9 @@ package forge.game.ability.effects;
 import java.util.*;
 import java.util.Map.Entry;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.common.base.Optional;
 
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -28,10 +26,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
+import forge.util.*;
 
 public class CountersPutEffect extends SpellAbilityEffect {
     @Override
@@ -197,8 +192,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
 
-            Iterables.addAll(tgtObjects, activator.getController().chooseCardsForEffect(leastToughness, sa,
-                    Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false, params));
+            activator.getController().chooseCardsForEffect(leastToughness, sa,
+                        Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false, params).forEach(tgtObjects::add);
         } else if (sa.hasParam("Choices") && (counterType != null || putOnEachOther || putOnDefined)) {
             ZoneType choiceZone = ZoneType.Battlefield;
             if (sa.hasParam("ChoiceZone")) {
@@ -246,8 +241,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             if (sa.hasParam("DividedRandomly")) {
                 tgtObjects.addAll(choices);
             } else {
-                Iterables.addAll(tgtObjects, chooser.getController().chooseCardsForEffect(choices, sa, title, m, n,
-                        sa.hasParam("ChoiceOptional"), params));
+                chooser.getController().chooseCardsForEffect(choices, sa, title, m, n,
+                                sa.hasParam("ChoiceOptional"), params).forEach(tgtObjects::add);
             }
         } else {
             tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));

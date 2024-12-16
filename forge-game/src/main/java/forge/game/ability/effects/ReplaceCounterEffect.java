@@ -3,8 +3,8 @@ package forge.game.ability.effects;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -46,14 +46,14 @@ public class ReplaceCounterEffect extends SpellAbilityEffect {
             Multimap<CounterType, Player> playerMap = HashMultimap.create();
             for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : counterTable.entrySet()) {
                 for (CounterType ct : e.getValue().keySet()) {
-                    playerMap.put(ct, e.getKey().orNull());
+                    playerMap.put(ct, e.getKey().orElse(null));
                 }
             }
 
             // there shouldn't be a case where one of the players is null, and the other is not
 
             for (Map.Entry<CounterType, Collection<Player>> e : playerMap.asMap().entrySet()) {
-                Optional<Player> p = Optional.fromNullable(chooser.getController().chooseSingleEntityForEffect(new PlayerCollection(e.getValue()), sa, "Choose Player for " + e.getKey().getName(), null));
+                Optional<Player> p = Optional.ofNullable(chooser.getController().chooseSingleEntityForEffect(new PlayerCollection(e.getValue()), sa, "Choose Player for " + e.getKey().getName(), null));
 
                 sa.setReplacingObject(AbilityKey.CounterNum, counterTable.get(p).get(e.getKey()));
                 int value = AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa);
@@ -65,7 +65,7 @@ public class ReplaceCounterEffect extends SpellAbilityEffect {
             }
         } else {
             for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : counterTable.entrySet()) {
-                if (!sa.matchesValidParam("ValidSource", e.getKey().orNull())) {
+                if (!sa.matchesValidParam("ValidSource", e.getKey().orElse(null))) {
                     continue;
                 }
 

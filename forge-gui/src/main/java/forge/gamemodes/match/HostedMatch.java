@@ -35,7 +35,6 @@ import forge.player.PlayerControllerHuman;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
-import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
@@ -180,7 +179,7 @@ public class HostedMatch {
         final GameView gameView = getGameView();
 
         humanCount = 0;
-        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
+        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(ArrayList::new);
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);

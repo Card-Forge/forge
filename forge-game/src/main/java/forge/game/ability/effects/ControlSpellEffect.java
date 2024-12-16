@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
-
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.SpellAbilityEffect;

@@ -131,18 +131,18 @@ public class GameAction {
         // need to check before it enters
         if (c.isAura() && !c.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
             boolean found = false;
-            if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c, null))) {
+            if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(c, null))) {
                 found = true;
             }
 
             if (!found) {
-                if (Iterables.any(lastBattlefield, CardPredicates.canBeAttached(c, null))) {
+                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(c, null))) {
                     found = true;
                 }
             }
 
             if (!found) {
-                if (Iterables.any(lastGraveyard, CardPredicates.canBeAttached(c, null))) {
+                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(c, null))) {
                     found = true;
                 }
             }
@@ -399,13 +399,13 @@ public class GameAction {
         if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield) {
             if (zoneFrom != null && zoneFrom.is(ZoneType.Stack) && game.getStack().isResolving(c)) {
                 boolean found = false;
-                if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(copied, null))) {
+                if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
-                if (Iterables.any(lastBattlefield, CardPredicates.canBeAttached(copied, null))) {
+                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
-                if (Iterables.any(lastGraveyard, CardPredicates.canBeAttached(copied, null))) {
+                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
                 if (!found) {
@@ -799,14 +799,14 @@ public class GameAction {
                 if (!stAb.hasParam("ValidAttacker") || (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
                     continue;
                 }
-                for (Card creature : Iterables.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
+                for (Card creature : IterableUtil.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES)) {
                     if (stAb.matchesValidParam("ValidAttacker", creature)) {
                         creature.updateAbilityTextForView();
                     }
                 }
             }
             if (stAb.checkMode(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
-                for (Card creature : Iterables.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
+                for (Card creature : IterableUtil.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES)) {
                     if (stAb.matchesValidParam("ValidCard", creature)) {
                         creature.updateAbilityTextForView();
                     }
@@ -1159,7 +1159,7 @@ public class GameAction {
 
         for (final CardCollectionView affected : affectedPerAbility.values()) {
             if (affected != null) {
-                Iterables.addAll(affectedCards, affected);
+                affected.forEach(affectedCards::add);
             }
         }
 
@@ -1413,7 +1413,7 @@ public class GameAction {
 
             if (desCreats != null) {
                 if (desCreats.size() > 1 && !orderedDesCreats) {
-                    desCreats = CardLists.filter(desCreats, CardPredicates.Presets.CAN_BE_DESTROYED);
+                    desCreats = CardLists.filter(desCreats, CardPredicates.CAN_BE_DESTROYED);
                     if (!desCreats.isEmpty()) {
                         desCreats = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, desCreats, ZoneType.Graveyard, null);
                     }

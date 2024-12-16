@@ -18,8 +18,6 @@
 package forge.game.card;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.StaticData;
@@ -2878,7 +2876,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             // only show this info if this card does not has the meld Effect itself
 
             boolean hasMeldEffect = hasSVar("Meld")
-                    || Iterables.any(state.getNonManaAbilities(), SpellAbilityPredicates.isApi(ApiType.Meld));
+                    || state.getNonManaAbilities().anyMatch(SpellAbilityPredicates.isApi(ApiType.Meld));
             String meld = this.getRules().getMeldWith();
             if (meld != "" && !hasMeldEffect) {
                 sb.append("\r\n");
@@ -3454,9 +3452,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (ck.isRemoveNonMana()) {
                 // List only has nonMana
                 if (null == mana) {
-                    List<SpellAbility> toRemove = Lists.newArrayList(
-                            Iterables.filter(list, Predicates.not(SpellAbilityPredicates.isManaAbility())));
-                    list.removeAll(toRemove);
+                    list.removeIf(SpellAbilityPredicates.isManaAbility().negate());
                 } else if (false == mana) {
                     list.clear();
                 }
@@ -3953,11 +3949,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final CardCollectionView getEquippedBy() {
-        return CardLists.filter(getAttachedCards(), CardPredicates.Presets.EQUIPMENT);
+        return CardLists.filter(getAttachedCards(), CardPredicates.EQUIPMENT);
     }
 
     public final boolean isEquipped() {
-        return Iterables.any(getAttachedCards(), CardPredicates.Presets.EQUIPMENT);
+        return getAttachedCards().anyMatch(CardPredicates.EQUIPMENT);
     }
     public final boolean isEquippedBy(Card c) {
         return this.hasCardAttachment(c);
@@ -3967,11 +3963,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final CardCollectionView getFortifiedBy() {
-        return CardLists.filter(getAttachedCards(), CardPredicates.Presets.FORTIFICATION);
+        return CardLists.filter(getAttachedCards(), CardPredicates.FORTIFICATION);
     }
 
     public final boolean isFortified() {
-        return Iterables.any(getAttachedCards(), CardPredicates.Presets.FORTIFICATION);
+        return getAttachedCards().anyMatch(CardPredicates.FORTIFICATION);
     }
     public final boolean isFortifiedBy(Card c) {
         // 301.5e + 301.6
@@ -4121,7 +4117,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (this.isEquipped() || this.hasCounters()) {
             return true;
         }
-        return Iterables.any(this.getEnchantedBy(), CardPredicates.isController(this.getController()));
+        return this.getEnchantedBy().anyMatch(CardPredicates.isController(this.getController()));
     }
 
     public final void setType(final CardType type0) {
@@ -5590,6 +5586,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final boolean isKindred()     { return getType().isKindred(); }
     public final boolean isSorcery()    { return getType().isSorcery(); }
     public final boolean isInstant()    { return getType().isInstant(); }
+    public final boolean isInstantOrSorcery() {return getType().isInstant() || getType().isSorcery();}
 
     public final boolean isCreature()   { return getType().isCreature(); }
     public final boolean isArtifact()   { return getType().isArtifact(); }

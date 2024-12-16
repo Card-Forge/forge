@@ -1,22 +1,20 @@
 package forge.card;
 
+import com.google.common.collect.Iterables;
+import forge.StaticData;
+import forge.item.PaperCard;
+import forge.token.TokenDb;
+import forge.util.IterableUtil;
+import forge.util.PredicateString.StringOp;
+import forge.util.collect.FCollection;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
-import forge.StaticData;
-import forge.item.PaperCard;
-import forge.token.TokenDb;
-import forge.util.PredicateString.StringOp;
-import forge.util.collect.FCollection;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * DeckHints provides the ability for a Card to "want" another Card or type of
@@ -123,14 +121,12 @@ public class DeckHints {
         for (Pair<Type, String> pair : filters) {
             Type type = pair.getLeft();
             String param = pair.getRight();
-            Iterable<PaperCard> cards = getCardsForFilter(cardList, type, param);
-            if (cards != null) {
-                // if a type is used more than once intersect respective matches
-                if (ret.containsKey(type)) {
-                    Iterables.retainAll(cards, new FCollection<>(ret.get(type)));
-                }
-                ret.put(type, cards);
+            List<PaperCard> cards = getCardsForFilter(cardList, type, param);
+            // if a type is used more than once intersect respective matches
+            if (ret.containsKey(type)) {
+                cards.retainAll(new FCollection<>(ret.get(type)));
             }
+            ret.put(type, cards);
         }
         return ret;
     }
@@ -166,17 +162,17 @@ public class DeckHints {
         return pair;
     }
 
-    private Iterable<PaperCard> getCardsForFilter(Iterable<PaperCard> cardList, Type type, String param) {
+    private List<PaperCard> getCardsForFilter(Iterable<PaperCard> cardList, Type type, String param) {
         List<PaperCard> cards = new ArrayList<>();
 
         // this is case ABILITY, but other types can also use this when the implicit parsing would miss
         String[] params = param.split("\\|");
         for (String ability : params) {
-            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHas(type, ability), PaperCard::getRules));
+            getMatchingItems(cardList, CardRulesPredicates.deckHas(type, ability), PaperCard::getRules).forEach(cards::add);
         }
         // bonus if a DeckHas can satisfy the type with multiple ones
         if (params.length > 1) {
-            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHasExactly(type, params), PaperCard::getRules));
+            getMatchingItems(cardList, CardRulesPredicates.deckHasExactly(type, params), PaperCard::getRules).forEach(cards::add);
         }
 
         for (String p : params) {
@@ -185,23 +181,23 @@ public class DeckHints {
                 ColorSet cc = ColorSet.fromNames(p);
                 if (cc.isColorless()) {
                     // ignoring Devoid here since having the colored mana symbol might be enough
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.Presets.IS_COLORLESS, PaperCard::getRules));
+                    getMatchingItems(cardList, CardRulesPredicates.IS_COLORLESS, PaperCard::getRules).forEach(cards::add);
                 } else {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard::getRules));
+                    getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard::getRules).forEach(cards::add);
                 }
                 break;
             case KEYWORD:
-                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.hasKeyword(p), PaperCard::getRules));
+                getMatchingItems(cardList, CardRulesPredicates.hasKeyword(p), PaperCard::getRules).forEach(cards::add);
                 break;
             case NAME:
-                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, p), PaperCard::getRules));
+                getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, p), PaperCard::getRules).forEach(cards::add);
                 break;
             case TYPE:
                 Predicate<CardRules> typePred = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p);
                 if (CardType.isACreatureType(p)) {
-                    typePred = Predicates.or(CardRulesPredicates.hasKeyword("Changeling"), typePred);
+                    typePred = typePred.or(CardRulesPredicates.hasKeyword("Changeling"));
                 }
-                Iterables.addAll(cards, getMatchingItems(cardList, typePred, PaperCard::getRules));
+                getMatchingItems(cardList, typePred, PaperCard::getRules).forEach(cards::add);
                 break;
             case NONE:
             case ABILITY: // already done above
@@ -213,7 +209,9 @@ public class DeckHints {
 
     private Iterable<PaperCard> getMatchingItems(Iterable<PaperCard> source, Predicate<CardRules> predicate, Function<PaperCard, CardRules> fn) {
         // TODO should token generators be counted differently for their potential?
-        return Iterables.filter(source, Predicates.compose(tokens ? rulesWithTokens(predicate) : predicate, fn));
+        // And would there ever be a circumstance where `fn` should be anything but PaperCard::getRules?
+        Predicate<CardRules> predicate1 = tokens ? rulesWithTokens(predicate) : predicate;
+        return IterableUtil.filter(source, x -> predicate1.test(fn.apply(x)));
     }
 
     public static Predicate<CardRules> rulesWithTokens(final Predicate<CardRules> predicate) {
@@ -225,12 +223,12 @@ public class DeckHints {
             tdb = null;
         }
         return card -> {
-            if (predicate.apply(card)) {
+            if (predicate.test(card)) {
                 return true;
             }
             for (String tok : card.getTokens()) {
                 // unfortunately this doesn't include keyworded ones yet
-                if (tdb != null && tdb.containsRule(tok) && rulesWithTokens(predicate).apply(tdb.getToken(tok).getRules())) {
+                if (tdb != null && tdb.containsRule(tok) && rulesWithTokens(predicate).test(tdb.getToken(tok).getRules())) {
                     return true;
                 }
             }

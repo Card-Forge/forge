@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -15,6 +14,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
+
+import java.util.function.Predicate;
 
 public class DestroyAi extends SpellAbilityAi {
     @Override
@@ -167,7 +168,8 @@ public class DestroyAi extends SpellAbilityAi {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
             if (!playReusable(ai, sa)) {
-                list = CardLists.filter(list, Predicates.not(CardPredicates.hasCounter(CounterEnumType.SHIELD, 1)));
+                Predicate<Card> hasCounter = CardPredicates.hasCounter(CounterEnumType.SHIELD, 1);
+                list = CardLists.filter(list, hasCounter.negate());
 
                 list = CardLists.filter(list, c -> {
                     //Check for cards that can be sacrificed in response
@@ -321,7 +323,8 @@ public class DestroyAi extends SpellAbilityAi {
 
             CardCollection preferred = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
-            preferred = CardLists.filter(preferred, Predicates.not(CardPredicates.hasCounter(CounterEnumType.SHIELD, 1)));
+            Predicate<Card> hasCounter = CardPredicates.hasCounter(CounterEnumType.SHIELD, 1);
+            preferred = CardLists.filter(preferred, hasCounter.negate());
             if (CardLists.getNotType(preferred, "Creature").isEmpty()) {
                 preferred = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, preferred, false);
             }
@@ -422,8 +425,8 @@ public class DestroyAi extends SpellAbilityAi {
         boolean nonBasicTgt = !tgtLand.isBasicLand();
 
         // Try not to lose tempo too much and not to mana-screw yourself when considering this logic
-        int numLandsInHand = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA);
-        int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        int numLandsInHand = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA);
+        int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
 
         // If the opponent skipped a land drop, consider not looking at having the extra land in hand if the profile allows it
         boolean isHighPriority = highPriorityIfNoLandDrop && oppSkippedLandDrop;

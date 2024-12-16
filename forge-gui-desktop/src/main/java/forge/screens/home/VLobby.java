@@ -51,10 +51,7 @@ import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FTextField;
-import forge.util.Aggregates;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.NameGenerator;
+import forge.util.*;
 import net.miginfocom.swing.MigLayout;
 
 /**

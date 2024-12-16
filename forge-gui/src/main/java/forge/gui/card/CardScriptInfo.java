@@ -17,13 +17,13 @@
  */
 package forge.gui.card;
 
+import forge.localinstance.properties.ForgeConstants;
+import forge.util.FileUtil;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import forge.localinstance.properties.ForgeConstants;
-import forge.util.FileUtil;
 
 public final class CardScriptInfo {
     private String text;

@@ -17,9 +17,6 @@
  */
 package forge.gamemodes.limited;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
@@ -36,15 +33,14 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.CardBlock;
 import forge.model.FModel;
-import forge.util.FileUtil;
-import forge.util.ItemPool;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Booster Draft Format.
@@ -208,7 +204,7 @@ public class BoosterDraft implements IBoosterDraft {
                 // Filter all sets by theme restrictions
                 final Predicate<CardEdition> themeFilter = theme.getEditionFilter();
                 final CardEdition.Collection allEditions = StaticData.instance().getEditions();
-                final Iterable<CardEdition> chaosDraftEditions = Iterables.filter(
+                final Iterable<CardEdition> chaosDraftEditions = IterableUtil.filter(
                         allEditions.getOrderedEditions(),
                         themeFilter);
                 // Add chaos "boosters" as special suppliers

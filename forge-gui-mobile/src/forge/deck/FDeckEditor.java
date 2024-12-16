@@ -3,9 +3,6 @@ package forge.deck;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
@@ -42,6 +39,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
@@ -95,12 +94,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
             else if (additionalFilter != null) {
-                filter = Predicates.and(filter, additionalFilter);
+                filter = filter.and(additionalFilter);
             }
 
             ItemPool<PaperCard> filteredPool = new ItemPool<>(PaperCard.class);
             for (Entry<PaperCard, Integer> entry : cardPool) {
-                if (filter.apply(entry.getKey())) {
+                if (filter.test(entry.getKey())) {
                     filteredPool.add(entry.getKey(), entry.getValue());
                 }
             }

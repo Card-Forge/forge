@@ -19,13 +19,7 @@ package forge.game.cost;
 
 import com.google.common.collect.Maps;
 import forge.game.ability.AbilityKey;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
-import forge.game.card.CardPredicates.Presets;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -92,7 +86,7 @@ public class CostUntapType extends CostPartWithList {
         if (!canUntapSource) {
             typeList.remove(source);
         }
-        typeList = CardLists.filter(typeList, Presets.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterType.get(CounterEnumType.STUN)));
+        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterType.get(CounterEnumType.STUN)));
 
         final int amount = this.getAbilityAmount(ability);
         return (typeList.size() != 0) && (typeList.size() >= amount);

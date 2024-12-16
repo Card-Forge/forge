@@ -6,18 +6,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.CollectionSuppliers;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
 
 /**
  * Test Class (only for test purposes) to compare previous method
@@ -29,7 +25,7 @@ import forge.util.TextUtil;
 public class LegacyCardDb {
     public CardEdition.Collection editions;
     public ListMultimap<String, PaperCard> allCardsByName = Multimaps
-            .newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+            .newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
 
     public enum LegacySetPreference {
         Latest(false), LatestCoreExp(true), Earliest(false), EarliestCoreExp(true), Random(false);
@@ -208,7 +204,7 @@ public class LegacyCardDb {
         LegacySetPreference fromSet = fromSets;
         List<PaperCard> cards = getAllCards(cr.cardName);
         if (printedBefore != null) {
-            cards = Lists.newArrayList(Iterables.filter(cards, c -> {
+            cards = Lists.newArrayList(IterableUtil.filter(cards, c -> {
                 CardEdition ed = editions.get(c.getEdition());
                 return ed.getDate().before(printedBefore);
             }));
@@ -224,7 +220,7 @@ public class LegacyCardDb {
 //            fromSet = LegacySetPreference.EarliestCoreExp;
 
         if (StringUtils.isNotBlank(cr.edition)) {
-            cards = Lists.newArrayList(Iterables.filter(cards, input -> input.getEdition().equalsIgnoreCase(cr.edition)));
+            cards = Lists.newArrayList(IterableUtil.filter(cards, input -> input.getEdition().equalsIgnoreCase(cr.edition)));
         }
         if (artIndex == -1 && cr.artIndex > 0) {
             artIndex = cr.artIndex;

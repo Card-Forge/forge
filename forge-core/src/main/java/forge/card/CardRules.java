@@ -17,20 +17,18 @@
  */
 package forge.card;
 
-import java.util.*;
-
-import com.google.common.collect.Lists;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
 
-import static forge.card.MagicColor.Constant.*;
+import java.util.*;
+
+import static forge.card.MagicColor.Constant.BASIC_LANDS;
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 /**

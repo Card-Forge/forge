@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
@@ -14,9 +15,7 @@ import forge.item.IPaperCard;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.Forge;
@@ -680,7 +679,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public GameEntityView chooseSingleEntityForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
-        if (delayedReveal == null || Iterables.isEmpty(delayedReveal.getCards())) {
+        if (delayedReveal == null || delayedReveal.getCards().isEmpty()) {
             if (isOptional) {
                 return SGuiChoose.oneOrNone(title, optionList);
             }

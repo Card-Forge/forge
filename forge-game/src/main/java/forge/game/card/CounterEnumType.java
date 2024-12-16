@@ -18,9 +18,9 @@
 
 package forge.game.card;
 
-import java.util.Locale;
-
 import com.google.common.collect.ImmutableList;
+
+import java.util.Locale;
 
 /**
  * The class Counters.

@@ -17,8 +17,6 @@
  */
 package forge.ai;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
@@ -42,14 +40,13 @@ import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.Expressions;
-import forge.util.MyRandom;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
@@ -140,7 +137,7 @@ public class AiAttackController {
 
         CardCollection tappedDefenders = new CardCollection();
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
-            for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
+            for (SpellAbility sa : IterableUtil.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
                 if (sa.usesTargeting() || !sa.getParamOrDefault("Defined", "Self").equals("Self")) {
                     continue;
                 }
@@ -164,7 +161,7 @@ public class AiAttackController {
             defenders.removeAll(tappedDefenders);
 
             // Transform (e.g. Incubator tokens)
-            for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
+            for (SpellAbility sa : IterableUtil.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
                 Card transformedCopy = ComputerUtilCombat.canTransform(c);
                 if (transformedCopy.isCreature()) {
                     int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
@@ -626,9 +623,9 @@ public class AiAttackController {
             // TODO: the AI should ideally predict how many times it can activate
             // for now, unless the opponent is tapped out, break at this point
             // and do not predict the blocker limit (which is safer)
-            if (Iterables.any(defendingOpponent.getLandsInPlay(), CardPredicates.Presets.UNTAPPED)) {
+            if (defendingOpponent.getLandsInPlay().anyMatch(CardPredicates.UNTAPPED)) {
                 maxBlockersAfterCrew += CardLists.count(CardLists.getNotType(defendingOpponent.getCardsIn(ZoneType.Battlefield), "Creature"),
-                        Predicates.and(CardPredicates.isType("Vehicle"), CardPredicates.Presets.UNTAPPED));
+                        CardPredicates.isType("Vehicle").and(CardPredicates.UNTAPPED));
             }
         }
 
@@ -1343,7 +1340,7 @@ public class AiAttackController {
             if (left.isEmpty() || possibleDefenders.isEmpty()) {
                 break;
             }
-            CardCollection pwDefending = new CardCollection(Iterables.filter(possibleDefenders, Card.class));
+            CardCollection pwDefending = new CardCollection(IterableUtil.filter(possibleDefenders, Card.class));
             if (pwDefending.isEmpty()) {
                 // TODO for now only looks at same player as we'd have to check the others from start too
                 //defender = new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)).min(PlayerPredicates.compareByLife());
@@ -1393,9 +1390,11 @@ public class AiAttackController {
             canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, Card::getNetToughness);
 
             // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
-            dangerousBlockersPresent = Iterables.any(validBlockers, Predicates.or(
-                    CardPredicates.hasKeyword(Keyword.WITHER), CardPredicates.hasKeyword(Keyword.INFECT),
-                    CardPredicates.hasKeyword(Keyword.LIFELINK)));
+            dangerousBlockersPresent = validBlockers.anyMatch(
+                    CardPredicates.hasKeyword(Keyword.WITHER)
+                            .or(CardPredicates.hasKeyword(Keyword.INFECT))
+                            .or(CardPredicates.hasKeyword(Keyword.LIFELINK))
+            );
 
             // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
             defPower = CardLists.getTotalPower(validBlockers, true, false);
@@ -1616,7 +1615,7 @@ public class AiAttackController {
                     if (validTargets.isEmpty()) {
                         missTarget = true;
                         break;
-                    } else if (sa.isCurse() && !Iterables.any(validTargets,
+                    } else if (sa.isCurse() && validTargets.stream().noneMatch(
                             CardPredicates.isControlledByAnyOf(c.getController().getOpponents()))) {
                         // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
                         missTarget = true;

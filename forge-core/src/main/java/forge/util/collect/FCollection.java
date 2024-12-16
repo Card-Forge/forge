@@ -1,18 +1,9 @@
 package forge.util.collect;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -555,6 +546,22 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
         }
         return obj;
     }
+
+    @Override
+    public Stream<T> stream() {
+            return list.stream();
+    }
+
+    @Override
+    public boolean anyMatch(Predicate<? super T> test) {
+            return set.stream().anyMatch(test);
+    }
+
+    @Override
+    public boolean allMatch(Predicate<? super T> test) {
+            return set.stream().allMatch(test);
+    }
+
     /**
      * An unmodifiable, empty {@link FCollection}. Overrides all methods with
      * default implementations suitable for an empty collection, to improve
@@ -660,7 +667,13 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
             }
             return a;
         }
-        @Override public final String toString() {
+
+        @Override public Stream<T> stream() {return Stream.empty();}
+        @Override public boolean anyMatch(Predicate<? super T> test) {return false;}
+        @Override public boolean allMatch(Predicate<? super T> test) {return true;}
+
+        @Override
+        public final String toString() {
             return "[]";
         }
     }

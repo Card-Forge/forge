@@ -1,30 +1,22 @@
 package forge.ai.ability;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class CountersMultiplyAi extends SpellAbilityAi {
 
@@ -104,7 +96,9 @@ public class CountersMultiplyAi extends SpellAbilityAi {
             if (list.isEmpty()) {
                 return false;
             }
-            Card safeMatch = Iterables.getFirst(Iterables.filter(list, Predicates.not(CardPredicates.hasCounters())), null);
+            Card safeMatch = list.stream()
+                    .filter(CardPredicates.hasCounters().negate())
+                    .findFirst().orElse(null);
             sa.getTargets().add(safeMatch == null ? list.getFirst() : safeMatch);
             return true;
         }

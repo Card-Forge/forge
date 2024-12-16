@@ -21,10 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -35,7 +33,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -113,7 +110,7 @@ public class Untap extends Phase {
      */
     private void doUntap() {
         final Player player = game.getPhaseHandler().getPlayerTurn();
-        final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, CANUNTAP);
+        final Predicate<Card> tappedCanUntap = CardPredicates.TAPPED.and(CANUNTAP);
         Map<Player, CardCollection> untapMap = Maps.newHashMap();
 
         CardCollection list = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
@@ -315,7 +312,7 @@ public class Untap extends Phase {
         final Game game = previous.getGame();
         List<Card> casted = game.getStack().getSpellsCastLastTurn();
 
-        if (game.isDay() && !Iterables.any(casted, CardPredicates.isController(previous))) {
+        if (game.isDay() && casted.stream().noneMatch(CardPredicates.isController(previous))) {
             game.setDayTime(true);
         } else if (game.isNight() && CardLists.count(casted, CardPredicates.isController(previous)) > 1) {
             game.setDayTime(false);

@@ -1,17 +1,7 @@
 package forge.game.cost;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import forge.game.player.PlayerCollection;
-import forge.game.ability.AbilityKey;
-import forge.game.trigger.TriggerType;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -19,25 +9,27 @@ import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class CostAdjustment {
 
@@ -338,11 +330,11 @@ public class CostAdjustment {
 
         final Player activator = sa.getActivatingPlayer();
         CardCollectionView untappedCards = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield),
-                CardPredicates.Presets.CAN_TAP);
+                CardPredicates.CAN_TAP);
         if (improvise) {
-            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.ARTIFACTS);
+            untappedCards = CardLists.filter(untappedCards, CardPredicates.ARTIFACTS);
         } else {
-            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.CREATURES);
+            untappedCards = CardLists.filter(untappedCards, CardPredicates.CREATURES);
         }
 
         Map<Card, ManaCostShard> convokedCards = activator.getController().chooseCardsForConvokeOrImprovise(sa,
