@@ -19,7 +19,6 @@ import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -99,7 +98,7 @@ public class VPlayerPanel extends FContainer {
         addZoneDisplay(ZoneType.Flashback);
 
         VManaPool manaPool = add(new VManaPool(player));
-        tabManaPool = add(new InfoTabSingleDisplay(Forge.hdbuttons ? FSkinImage.HDMANAPOOL : Forge.getAssets().images().get(FSkinProp.IMG_MANA_X), manaPool));
+        tabManaPool = add(new InfoTabSingleDisplay(FSkinImage.HDMANAPOOL, manaPool));
         tabs.add(tabManaPool);
 
         addZoneDisplay(ZoneType.Exile);
@@ -650,11 +649,7 @@ public class VPlayerPanel extends FContainer {
         protected String value = "0";
         protected FSkinImageInterface icon;
 
-        public InfoTab(FSkinImageInterface icon) {
-            if (icon == null) {
-                System.err.println("Missing/Invalid VPlayerPanel icon for: " + displayArea0 + " , defaulting to blank icon. Check your theme/skin layout.");
-                icon = FSkinImage.BLANK;
-            }
+        protected InfoTab(FSkinImageInterface icon) {
             this.icon = icon;
         }
 
