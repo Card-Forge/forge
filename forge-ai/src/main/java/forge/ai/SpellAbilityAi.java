@@ -341,8 +341,7 @@ public abstract class SpellAbilityAi {
         return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
                 && ComputerUtilCost.checkDamageCost(payer, cost, source, 4, sa)
                 && (isMine || ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa))
-                && (isMine || ComputerUtilCost.checkDiscardCost(payer, cost, source, sa))
-                && (!source.getName().equals("Chain of Vapor") || (payer.getWeakestOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3));
+                && (isMine || ComputerUtilCost.checkDiscardCost(payer, cost, source, sa));
     }
 
     @SuppressWarnings("unchecked")
