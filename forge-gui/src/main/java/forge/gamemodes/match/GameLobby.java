@@ -1,20 +1,8 @@
 package forge.gamemodes.match;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
-
 import forge.LobbyPlayer;
 import forge.ai.AIOption;
 import forge.deck.CardPool;
@@ -38,6 +26,10 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
 import forge.util.NameGenerator;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
+import java.util.*;
 
 public abstract class GameLobby implements IHasGameType {
     private final static int MAX_PLAYERS = 8;
@@ -443,17 +435,13 @@ public abstract class GameLobby implements IHasGameType {
             Deck deck = slot.getDeck();
             RegisteredPlayer rp = new RegisteredPlayer(deck);
 
-            if (variantTypes.isEmpty()) {
-                rp.setTeamNumber(team);
-                players.add(rp.setPlayer(lobbyPlayer));
-            }
-            else {
+            if (!variantTypes.isEmpty()) {
                 if (isCommanderMatch) {
                     final GameType commanderGameType =
                             isOathbreakerMatch ? GameType.Oathbreaker :
-                            isTinyLeadersMatch ? GameType.TinyLeaders :
-                            isBrawlMatch ? GameType.Brawl :
-                            GameType.Commander;
+                                isTinyLeadersMatch ? GameType.TinyLeaders :
+                                    isBrawlMatch ? GameType.Brawl :
+                                        GameType.Commander;
                     if (checkLegality) {
                         final String errMsg = commanderGameType.getDeckFormat().getDeckConformanceProblem(deck);
                         if (errMsg != null) {
@@ -481,7 +469,6 @@ public abstract class GameLobby implements IHasGameType {
                 Iterable<PaperCard> schemes = null;
                 Iterable<PaperCard> planes = null;
 
-                //Archenemy
                 if (variantTypes.contains(GameType.ArchenemyRumble)
                         || (variantTypes.contains(GameType.Archenemy) && isArchenemy)) {
                     final CardPool schemePool = deck.get(DeckSection.Schemes);
@@ -495,7 +482,6 @@ public abstract class GameLobby implements IHasGameType {
                     schemes = schemePool == null ? Collections.emptyList() : schemePool.toFlatList();
                 }
 
-                //Planechase
                 if (variantTypes.contains(GameType.Planechase)) {
                     final CardPool planePool = deck.get(DeckSection.Planes);
                     if (checkLegality) {
@@ -508,7 +494,6 @@ public abstract class GameLobby implements IHasGameType {
                     planes = planePool == null ? Collections.emptyList() : planePool.toFlatList();
                 }
 
-                //Vanguard
                 if (variantTypes.contains(GameType.Vanguard)) {
                     if (avatarPool == null || avatarPool.countAll() == 0) { //ERROR! null if avatar deselected on list
                         SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNoSelectedVanguardAvatarForPlayer", name));
@@ -517,9 +502,10 @@ public abstract class GameLobby implements IHasGameType {
                 }
 
                 rp = RegisteredPlayer.forVariants(activeSlots.size(), variantTypes, deck, schemes, isArchenemy, planes, avatarPool);
-                rp.setTeamNumber(team);
-                players.add(rp.setPlayer(lobbyPlayer));
             }
+
+            rp.setTeamNumber(team);
+            players.add(rp.setPlayer(lobbyPlayer));
 
             if (!isAI) {
                 guis.put(rp, gui);

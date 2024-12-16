@@ -1,8 +1,5 @@
 package forge.sound;
 
-import java.io.File;
-import java.util.Collection;
-
 import forge.LobbyPlayer;
 import forge.game.card.Card;
 import forge.game.event.*;
@@ -15,6 +12,9 @@ import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.events.UiEventNextGameDecision;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
+
+import java.io.File;
+import java.util.Collection;
 
 /**
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.

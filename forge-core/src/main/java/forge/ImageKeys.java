@@ -85,7 +85,7 @@ public final class ImageKeys {
     }
 
     private static final Map<String, File> cachedCards = new HashMap<>(50000);
-    private static HashSet<String> missingCards = new HashSet<>();
+    public static HashSet<String> missingCards = new HashSet<>();
     public static void clearMissingCards() {
         missingCards.clear();
     }
@@ -310,7 +310,7 @@ public final class ImageKeys {
         }
 
         // System.out.println("File not found, no image created: " + key);
-        //add missing cards - disable for desktop version for compatibility reasons with autodownloader
+        // add missing cards - disable for desktop version for compatibility reasons with autodownloader
         if (isLibGDXPort && !hasSetLookup(filename)) //missing cards with setlookup is handled differently
             missingCards.add(filename);
         return null;
@@ -322,6 +322,8 @@ public final class ImageKeys {
                 : CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
     public static boolean hasSetLookup(String filename) {
+        if (filename == null)
+            return false;
         if (!StaticData.instance().getSetLookup().isEmpty()) {
             return StaticData.instance().getSetLookup().keySet().stream().anyMatch(filename::startsWith);
         }

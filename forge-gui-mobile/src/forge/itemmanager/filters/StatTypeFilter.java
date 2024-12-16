@@ -37,7 +37,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
     protected <U extends InventoryItem> boolean showUnsupportedItem(U item) {
         FLabel btnPackOrDeck = buttonMap.get(StatTypes.PACK_OR_DECK); //support special pack/deck case
         if (btnPackOrDeck != null && btnPackOrDeck.isSelected()) {
-            return ItemPredicate.Presets.IS_PACK_OR_DECK.apply(item);
+            return ItemPredicate.IS_PACK_OR_DECK.test(item);
         }
         return false;
     }

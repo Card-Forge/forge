@@ -6,9 +6,60 @@ Type=Reprint
 ScryfallCode=INR
 
 [cards]
+5 M Emrakul, the Promised End @Jaime Jones
+6 C It of the Horrid Swarm @Jason Felix
+11 M Archangel Avacyn @James Ryman
+30 U Lingering Souls @Johann Bodin
+45 C Thraben Inspector @Matt Stewart
+55 U Cackling Counterpart @David Rapoza
 59 R Deadeye Navigator @Lie Setiawan
+72 C Lantern Bearer @Zoltan Boros
+74 R Mausoleum Wanderer @Kieran Yanner
+92 C Think Twice @Anthony Francisco
+97 U Blood Artist @LA Draws
+113 U Graf Rats @Jason Felix
+120 R Invasion of Innistrad @Alexey Kruglov
+122 M The Meathook Massacre @Chris Seaman
+123 C Midnight Scavengers @Jason Felix
+136 U Triskaidekaphobia @Willian Murai
+138 R Voldaren Bloodcaster @Kim Sokol
+146 C Borrowed Hostility @Volkan Baǵa
+152 R Falkenrath Gorger @Anna Steinbauer
+164 R Mass Hysteria @Justine Cruz
+167 R Reforge the Soul @Jaime Jones
+216 U Spider Spawning @Daniel Ljunggren
+222 U Ulvenwald Mysteries @Nereida
+227 C Young Wolf @Ryan Pancoast
 234 M Edgar Markov @Volkan Baǵa
+241 R Huntmaster of the Fells @Chris Rahn
+248 R Spell Queller @Adam Paquette
+301 C Thraben Inspector @Aurore Folny
+305 R Mausoleum Wanderer @Andrey Kuzinskiy
+319 C Young Wolf @John Stanko
+320 R Spell Queller @Dave Kendall
+325 R Huntmaster of the Fells @Steve Ellis
+326 U Blood Artist @Kekai Kotaki
 328 M Edgar Markov @Betty Jiang
+330 M Emrakul, the Promised End @Jaime Jones
+331 C It of the Horrid Swarm @Jason Felix
+353 U Cackling Counterpart @David Rapoza
+360 R Mausoleum Wanderer @Kieran Yanner
+369 C Think Twice @Anthony Francisco
+372 U Blood Artist @LA Draws
+387 M The Meathook Massacre @Chris Seaman
+391 U Triskaidekaphobia @Willian Murai
+396 C Borrowed Hostility @Volkan Baǵa
+400 R Mass Hysteria @Justine Cruz
+419 U Spider Spawning @Daniel Ljunggren
+423 U Ulvenwald Mysteries @Nereida
+425 C Young Wolf @Ryan Pancoast
 428 M Edgar Markov @Volkan Baǵa
+435 R Spell Queller @Adam Paquette
+449 M Archangel Avacyn @James Ryman
+470 R Huntmaster of the Fells @Chris Rahn
+475 M Liliana of the Veil @Steve Argyle
+478 M Snapcaster Mage @Volkan Baǵa
+481 M Emrakul, the Promised End @Josh Newton
+486 M The Meathook Massacre @James Bousema
 491 M Edgar Markov @Jack Hughes
 492 R Deadeye Navigator @Lie Setiawan

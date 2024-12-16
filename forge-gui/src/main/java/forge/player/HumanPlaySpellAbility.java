@@ -17,12 +17,7 @@
  */
 package forge.player;
 
-import java.util.Collections;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -42,6 +37,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.zone.Zone;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>
@@ -283,7 +279,7 @@ public class HumanPlaySpellAbility {
             for (final String aVar : announce.split(",")) {
                 final String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
-                    final String choice = pc.chooseSomeType("Creature", ability, CardType.Constant.CREATURE_TYPES, Collections.emptyList());
+                    final String choice = pc.chooseSomeType("Creature", ability, CardType.getAllCreatureTypes());
                     ability.getHostCard().setChosenType(choice);
                 }
                 if ("ChooseNumber".equals(varName)) {

@@ -4,8 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 
 public class HashMapOfLists<K, V> extends HashMap<K, Collection<V>> implements MapOfLists<K, V> {
 

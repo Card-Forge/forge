@@ -1,11 +1,11 @@
 package forge.gamemodes.net;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ChatMessage {
     private static final ForgePreferences prefs = FModel.getPreferences();

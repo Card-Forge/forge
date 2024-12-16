@@ -23,9 +23,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.Lang;
-import forge.util.Localizer;
+import forge.util.*;
 import forge.util.collect.FCollection;
 
 public class DamageDealEffect extends DamageBaseEffect {
@@ -228,7 +226,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                     return;
                 }
 
-                CardCollection assigneeCards = new CardCollection(Iterables.filter(tgts, Card.class));
+                CardCollection assigneeCards = new CardCollection(IterableUtil.filter(tgts, Card.class));
 
                 Player assigningPlayer = players.get(0);
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, null, dmg, null, true);

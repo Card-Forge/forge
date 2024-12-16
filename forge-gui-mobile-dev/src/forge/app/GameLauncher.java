@@ -25,7 +25,6 @@ public class GameLauncher {
             Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
         }
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-        config.setResizable(false);
         ApplicationListener start = Forge.getApp(new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
                 assetsDir, false, false, 0, false, 0, "", "");
         if (Config.instance().getSettingData().fullScreen) {
@@ -34,6 +33,7 @@ public class GameLauncher {
             config.setHdpiMode(HdpiMode.Logical);
         } else {
             config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
+            config.setResizable(false);
         }
         config.setTitle("Forge - " + versionString);
         config.setWindowListener(new Lwjgl3WindowAdapter() {

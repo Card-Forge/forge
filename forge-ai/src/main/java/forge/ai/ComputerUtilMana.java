@@ -1,7 +1,10 @@
 package forge.ai;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
@@ -43,6 +46,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
@@ -81,7 +85,7 @@ public class ComputerUtilMana {
     public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
         if (ai == null || sa == null)
             return false;
-        sa.setActivatingPlayer(ai, true);
+        sa.setActivatingPlayer(ai);
         return payManaCost(sa, ai, true, 0, false, false);
     }
 
@@ -89,7 +93,7 @@ public class ComputerUtilMana {
         int score = 0;
 
         for (SpellAbility ability : card.getSpellAbilities()) {
-            ability.setActivatingPlayer(card.getController(), true);
+            ability.setActivatingPlayer(card.getController());
             if (ability.isManaAbility()) {
                 score += ability.calculateScoreForManaAbility();
                 // TODO check TriggersWhenSpent
@@ -260,7 +264,10 @@ public class ComputerUtilMana {
                     saList = filteredList;
                     break;
                 case "NotSameCard":
-                    saList = Lists.newArrayList(Iterables.filter(filteredList, saPay -> !saPay.getHostCard().getName().equals(sa.getHostCard().getName())));
+                    String hostName = sa.getHostCard().getName();
+                    saList = filteredList.stream()
+                            .filter(saPay -> !saPay.getHostCard().getName().equals(hostName))
+                            .collect(Collectors.toList());
                     break;
                 default:
                     break;
@@ -268,6 +275,7 @@ public class ComputerUtilMana {
         }
 
         for (final SpellAbility ma : saList) {
+            // this rarely seems like a good idea
             if (ma.getHostCard() == saHost) {
                 continue;
             }
@@ -276,7 +284,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, new CardCollection())) {
+            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST))) {
                 continue;
             }
 
@@ -309,7 +317,7 @@ public class ComputerUtilMana {
                 // For cards like Genju of the Cedars, make sure we're not attaching to the same land that will
                 // be tapped to pay its own cost if there's another untapped land like that available
                 if (ma.getHostCard().equals(sa.getTargetCard())) {
-                    if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.nameEquals(ma.getHostCard().getName()), CardPredicates.Presets.UNTAPPED)) > 1) {
+                    if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(ma.getHostCard().getName()).and(CardPredicates.UNTAPPED)) > 1) {
                         continue;
                     }
                 }
@@ -466,18 +474,18 @@ public class ComputerUtilMana {
     public static String predictManafromSpellAbility(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
         Card hostCard = saPayment.getHostCard();
 
-        String manaProduced = predictManaReplacement(saPayment, ai, toPay);
-        String originalProduced = manaProduced;
+        StringBuilder manaProduced = new StringBuilder(predictManaReplacement(saPayment, ai, toPay));
+        String originalProduced = manaProduced.toString();
 
         if (originalProduced.isEmpty()) {
-            return manaProduced;
+            return manaProduced.toString();
         }
 
         // Run triggers like Nissa
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
         runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
         runParams.put(AbilityKey.AbilityMana, saPayment);
-        runParams.put(AbilityKey.Produced, manaProduced);
+        runParams.put(AbilityKey.Produced, manaProduced.toString());
         for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
             SpellAbility trSA = tr.ensureAbility();
             if (trSA == null) {
@@ -489,7 +497,7 @@ public class ComputerUtilMana {
                 if (produced.equals("Chosen")) {
                     produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
                 }
-                manaProduced += " " + StringUtils.repeat(produced, " ", pAmount);
+                manaProduced.append(" ").append(StringUtils.repeat(produced, " ", pAmount));
             } else if (ApiType.ManaReflected.equals(trSA.getApi())) {
                 final String colorOrType = trSA.getParamOrDefault("ColorOrType", "Color");
                 // currently Color or Type, Type is colors + colorless
@@ -498,11 +506,11 @@ public class ComputerUtilMana {
                 if (reflectProperty.equals("Produced") && !originalProduced.isEmpty()) {
                     // check if a colorless shard can be paid from the trigger
                     if (toPay.equals(ManaCostShard.COLORLESS) && colorOrType.equals("Type") && originalProduced.contains("C")) {
-                        manaProduced += " " + "C";
+                        manaProduced.append(" " + "C");
                     } else if (originalProduced.length() == 1) {
                         // if length is only one, and it either is equal C == Type
                         if (colorOrType.equals("Type") || !originalProduced.equals("C")) {
-                            manaProduced += " " + originalProduced;
+                            manaProduced.append(" ").append(originalProduced);
                         }
                     } else {
                         // should it look for other shards too?
@@ -510,7 +518,7 @@ public class ComputerUtilMana {
                         for (String s : originalProduced.split(" ")) {
                             if (colorOrType.equals("Type") || !s.equals("C") && toPay.canBePaidWithManaOfColor(MagicColor.fromName(s))) {
                                 found = true;
-                                manaProduced += " " + s;
+                                manaProduced.append(" ").append(s);
                                 break;
                             }
                         }
@@ -518,7 +526,7 @@ public class ComputerUtilMana {
                         if (!found) {
                             for (String s : originalProduced.split(" ")) {
                                 if (colorOrType.equals("Type") || !s.equals("C")) {
-                                    manaProduced += " " + s;
+                                    manaProduced.append(" ").append(s);
                                     break;
                                 }
                             }
@@ -527,7 +535,7 @@ public class ComputerUtilMana {
                 }
             }
         }
-        return manaProduced;
+        return manaProduced.toString();
     }
 
     public static CardCollection getManaSourcesToPayCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
@@ -608,7 +616,7 @@ public class ComputerUtilMana {
             payMultipleMana(cost, manaProduced, ai);
 
             // remove from available lists
-            Iterables.removeIf(sourcesForShards.values(), CardTraitPredicates.isHostCard(saPayment.getHostCard()));
+            sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
         }
 
         CostPayment.handleOfferings(sa, true, cost.isPaid());
@@ -747,7 +755,7 @@ public class ComputerUtilMana {
                         break; // unwise to pay
                     } else if (sa.getParam("AIPhyrexianPayment").startsWith("OnFatalDamage.")) {
                         int dmg = Integer.parseInt(sa.getParam("AIPhyrexianPayment").substring(14));
-                        if (!Iterables.any(ai.getOpponents(), PlayerPredicates.lifeLessOrEqualTo(dmg))) {
+                        if (ai.getOpponents().stream().noneMatch(PlayerPredicates.lifeLessOrEqualTo(dmg))) {
                             break; // no one to finish with the gut shot
                         }
                     }
@@ -790,7 +798,7 @@ public class ComputerUtilMana {
                 payMultipleMana(cost, manaProduced, ai);
 
                 // remove from available lists
-                Iterables.removeIf(sourcesForShards.values(), CardTraitPredicates.isHostCard(saPayment.getHostCard()));
+                sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
             } else {
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
                 if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect))) {
@@ -807,7 +815,7 @@ public class ComputerUtilMana {
 
                 if (hasConverge) {
                     // hack to prevent converge re-using sources
-                    Iterables.removeIf(sourcesForShards.values(), CardTraitPredicates.isHostCard(saPayment.getHostCard()));
+                    sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
                 }
             }
         }
@@ -826,7 +834,8 @@ public class ComputerUtilMana {
             if (test) {
                 resetPayment(paymentList);
             } else {
-                System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa.toString() + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
+                System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
+                sa.setSkip(true);
             }
             return false;
         }
@@ -941,7 +950,7 @@ public class ComputerUtilMana {
 
         if (checkCosts) {
             // Check if AI can still play this mana ability
-            ma.setActivatingPlayer(ai, true);
+            ma.setActivatingPlayer(ai);
             // if the AI can't pay the additional costs skip the mana ability
             if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma, false)) {
                 return false;
@@ -1348,7 +1357,7 @@ public class ComputerUtilMana {
             maxProduced = 0;
 
             for (SpellAbility ma : src.getManaAbilities()) {
-                ma.setActivatingPlayer(p, true);
+                ma.setActivatingPlayer(p);
                 if (!checkPlayable || ma.canPlay()) {
                     int costsToActivate = ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
                     int producedMana = ma.getParamOrDefault("Produced", "").split(" ").length;
@@ -1385,7 +1394,7 @@ public class ComputerUtilMana {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
         final List<Card> manaSources = CardLists.filter(list, c -> {
             for (final SpellAbility am : getAIPlayableMana(c)) {
-                am.setActivatingPlayer(ai, true);
+                am.setActivatingPlayer(ai);
                 if (!checkPlayable || (am.canPlay() && am.checkRestrictions(ai))) {
                     return true;
                 }
@@ -1461,7 +1470,7 @@ public class ComputerUtilMana {
 
                 if (cost != null) {
                     // if the AI can't pay the additional costs skip the mana ability
-                    m.setActivatingPlayer(ai, true);
+                    m.setActivatingPlayer(ai);
                     if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m, false)) {
                         continue;
                     }
@@ -1545,7 +1554,7 @@ public class ComputerUtilMana {
                 if (DEBUG_MANA_PAYMENT) {
                     System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor m = " + m);
                 }
-                m.setActivatingPlayer(ai, true);
+                m.setActivatingPlayer(ai);
                 if (checkPlayable && !m.canPlay()) {
                     continue;
                 }

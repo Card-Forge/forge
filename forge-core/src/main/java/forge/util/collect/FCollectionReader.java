@@ -1,8 +1,8 @@
 package forge.util.collect;
 
-import java.io.File;
-
 import forge.util.FileUtil;
+
+import java.io.File;
 
 public abstract class FCollectionReader<T> {
     protected final File file;

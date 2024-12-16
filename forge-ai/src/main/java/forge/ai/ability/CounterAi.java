@@ -1,23 +1,10 @@
 package forge.ai.ability;
 
-import java.util.Iterator;
-
-import forge.game.ability.effects.CounterEffect;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.CounterEffect;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
@@ -28,6 +15,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Iterator;
 
 public class CounterAi extends SpellAbilityAi {
 

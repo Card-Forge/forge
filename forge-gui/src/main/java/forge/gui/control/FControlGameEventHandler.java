@@ -1,12 +1,8 @@
 package forge.gui.control;
 
-import java.util.*;
-import java.util.Map.Entry;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -25,6 +21,9 @@ import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final PlayerControllerHuman humanController;

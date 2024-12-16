@@ -1,5 +1,5 @@
 Name:Nazar, the Velvet Fang
-ManaCost:2 B
+ManaCost:3 B
 Types:Legendary Creature Vampire Warlock
 PT:3/3
 K:Menace

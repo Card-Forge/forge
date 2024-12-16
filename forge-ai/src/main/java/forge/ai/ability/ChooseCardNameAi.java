@@ -1,22 +1,10 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
-import forge.card.CardDb;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.CardStateName;
-import forge.card.ICardFace;
+import forge.ai.*;
+import forge.card.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCopyService;
@@ -27,6 +15,9 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Map;
 
 public class ChooseCardNameAi extends SpellAbilityAi {
 

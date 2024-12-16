@@ -1,20 +1,17 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
+import forge.card.CardDb;
 import forge.card.CardStateName;
 import forge.card.GamePieceType;
+import forge.item.PaperCardPredicates;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
@@ -45,10 +42,6 @@ import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override
@@ -91,6 +84,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final boolean forget = sa.hasParam("ForgetPlayed");
         final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
         final boolean altCost = sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost");
+        final boolean altCostManaCost = "ManaCost".equals(sa.getParam("PlayCost"));
         int totalCMCLimit = Integer.MAX_VALUE;
         final Player controller;
         if (sa.hasParam("Controller")) {
@@ -117,27 +111,28 @@ public class PlayEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("AnySupportedCard")) {
             final String valid = sa.getParam("AnySupportedCard");
-            List<PaperCard> cards = null;
+            Stream<PaperCard> cards;
+            CardDb cardDb = StaticData.instance().getCommonCards();
             if (valid.startsWith("Names:")) {
-                cards = new ArrayList<>();
-                for (String name : valid.substring(6).split(",")) {
-                    name = name.replace(";", ",");
-                    cards.add(StaticData.instance().getCommonCards().getUniqueByName(name));
-                }
+                cards = Arrays.stream(valid.substring(6).split(","))
+                        .map(name -> name.replace(";", ","))
+                        .map(cardDb::getUniqueByName);
             } else if (valid.equalsIgnoreCase("sorcery")) {
-                cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
-                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, PaperCard::getRules);
-                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                cards = cardDb.streamUniqueCards()
+                        .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_SORCERY));
             } else if (valid.equalsIgnoreCase("instant")) {
-                cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
-                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_INSTANT, PaperCard::getRules);
-                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                cards = cardDb.streamUniqueCards()
+                        .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_INSTANT));
+            } else {
+                //Could just return a stream of all cards, but that should probably be a specific option rather than a fallback.
+                //Could also just leave it null but there's currently nothing else that can happen that case.
+                throw new UnsupportedOperationException("Unknown parameter for AnySupportedCard: " + valid);
             }
             if (sa.hasParam("RandomCopied")) {
                 final CardCollection choice = new CardCollection();
                 final String num = sa.getParamOrDefault("RandomNum", "1");
-                int ncopied = AbilityUtils.calculateAmount(source, num, sa);
-                for (PaperCard cp : Aggregates.random(cards, ncopied)) {
+                int nCopied = AbilityUtils.calculateAmount(source, num, sa);
+                for (PaperCard cp : cards.collect(StreamUtil.random(nCopied))) {
                     final Card possibleCard = Card.fromPaperCard(cp, sa.getActivatingPlayer());
                     if (sa.getActivatingPlayer().isAI() && possibleCard.getRules() != null && possibleCard.getRules().getAiHints().getRemAIDecks())
                         continue;
@@ -191,15 +186,9 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidSA")) {
             final String valid[] = sa.getParam("ValidSA").split(",");
-            Iterator<Card> it = tgtCards.iterator();
-            while (it.hasNext()) {
-                Card c = it.next();
-                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , source, sa))) {
-                    // it.remove will only remove item from the list part of CardCollection
-                    tgtCards.asSet().remove(c);
-                    it.remove();
-                }
-            }
+            final List<Card> invalid = tgtCards.stream().filter(c -> !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller, source, sa))).collect(Collectors.toList());
+            if (!invalid.isEmpty())
+                tgtCards.removeAll(invalid);
             if (tgtCards.isEmpty()) {
                 return;
             }
@@ -232,16 +221,10 @@ public class PlayEffect extends SpellAbilityEffect {
         while (!tgtCards.isEmpty() && amount > 0 && totalCMCLimit >= 0) {
             if (hasTotalCMCLimit) {
                 // filter out cards with mana value greater than limit
-                Iterator<Card> it = tgtCards.iterator();
                 final String [] valid = {"Spell.cmcLE" + totalCMCLimit};
-                while (it.hasNext()) {
-                    Card c = it.next();
-                    if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
-                        // it.remove will only remove item from the list part of CardCollection
-                        tgtCards.asSet().remove(c);
-                        it.remove();
-                    }
-                }
+                final List<Card> invalid = tgtCards.stream().filter(c -> !IterableUtil.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller, c, sa))).collect(Collectors.toList());
+                if (!invalid.isEmpty())
+                    tgtCards.removeAll(invalid);
                 if (tgtCards.isEmpty())
                     break;
                 params.put("CMCLimit", totalCMCLimit);
@@ -306,6 +289,10 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ValidSA")) {
                 final String valid[] = sa.getParam("ValidSA").split(",");
                 sas.removeIf(sp -> !sp.isValid(valid, controller , source, sa));
+            }
+
+            if (altCostManaCost) {
+                sas.removeIf(sp -> sp.getPayCosts().getCostMana().getMana().isNoCost());
             }
 
             if (hasTotalCMCLimit) {
@@ -380,13 +367,10 @@ public class PlayEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("PlayCost")) {
                 Cost abCost;
                 String cost = sa.getParam("PlayCost");
-                if (cost.equals("ManaCost")) {
-                    if (unpayableCost) {
-                        continue;
-                    }
-                    abCost = new Cost(source.getManaCost(), false);
+                if (altCostManaCost) {
+                    abCost = new Cost(tgtSA.getCardState().getManaCost(), false);
                 } else if (cost.equals("SuspendCost")) {
-                    abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
+                    abCost = IterableUtil.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
                 } else {
                     if (cost.contains("ConvertedManaCost")) {
                         final String costcmc = Integer.toString(tgtCard.getCMC());
@@ -428,7 +412,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.putParam("RaiseCost", raise);
             }
 
-            if (sa.hasParam("Madness")) {
+            if (sa.isKeyword(Keyword.MADNESS)) {
                 tgtSA.setAlternativeCost(AlternativeCost.Madness);
             }
 

@@ -17,10 +17,7 @@
  */
 package forge.gamemodes.match.input;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
@@ -29,6 +26,8 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.Localizer;
+
+import java.util.List;
 
  /**
   * <p>

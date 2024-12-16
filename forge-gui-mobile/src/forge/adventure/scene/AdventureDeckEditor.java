@@ -4,7 +4,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Function;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.AdventureEventData;
@@ -39,6 +38,7 @@ import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
@@ -67,6 +67,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
     private static class DraftPackPage extends CatalogPage {
         protected DraftPackPage() {
             super(ItemManagerConfig.DRAFT_PACK, Forge.getLocalizer().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
+            cardManager.setShowRanking(true);
         }
 
         @Override
@@ -85,7 +86,6 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             int packNumber = draft.getCurrentBoosterIndex() + 1;
             caption = Forge.getLocalizer().getMessage("lblPackN", String.valueOf(packNumber));
             cardManager.setPool(pool);
-            cardManager.setShowRanking(true);
         }
 
         @Override
@@ -173,6 +173,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             super(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             cardManager.setBtnAdvancedSearchOptions(true);
             cardManager.setCatalogDisplay(true);
+            cardManager.setShowNFSWatermark(true);
         }
 
         @Override
@@ -580,7 +581,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                             FMenuItem addBasic = new FMenuItem(Forge.getLocalizer().getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> launchBasicLandDialog());
                             addItem(addBasic);
                         }
-                        if (!isShop && catalogPage != null && !(catalogPage instanceof ContentPreviewPage)) {
+                        if (!isShop && catalogPage != null && catalogPage instanceof CollectionCatalogPage && ItemManagerConfig.DRAFT_PACK != catalogPage.cardManager.getConfig()) {
                             // Add bulk sell menu option. This will sell all cards in the current filter.
                             int count = 0;
                             int value = 0;
@@ -703,7 +704,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             FOptionPane.showErrorDialog(errorMessage);
         }
 
-        if (currentEvent.getDraft() != null && !isShop) {
+        // if currentEvent is null, it should have been cleared or overwritten somehow
+        if (currentEvent != null && currentEvent.getDraft() != null && !isShop) {
             if (currentEvent.isDraftComplete || canCloseCallback == null) {
                 super.onClose(canCloseCallback); //can skip prompt if draft saved
                 return;

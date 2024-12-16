@@ -1,14 +1,7 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
-import forge.ai.AiCardMemory;
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -22,6 +15,8 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.Map;
 
 public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
     /* (non-Javadoc)
@@ -115,7 +110,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             uncastableCMCThreshold = aic.getIntProperty(AiProps.SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF);
         }
 
-        int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
         int cmc = top.isSplitCard() ? Math.min(top.getCMC(Card.SplitCMCMode.LeftSplitCMC), top.getCMC(Card.SplitCMCMode.RightSplitCMC))
                 : top.getCMC();
         int maxCastable = ComputerUtilMana.getAvailableManaEstimate(p, false);

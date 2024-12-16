@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.game.ability.AbilityUtils;
@@ -38,7 +37,7 @@ public class RevealAi extends RevealAiBase {
             final Card c = sa.getHostCard();
             for (SpellAbility s : c.getBasicSpells()) {
                 Spell spell = (Spell) s;
-                s.setActivatingPlayer(ai, true);
+                s.setActivatingPlayer(ai);
                 // timing restrictions still apply
                 if (!s.getRestrictions().checkTimingRestrictions(c, s))
                     continue;

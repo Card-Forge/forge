@@ -225,6 +225,7 @@ public class SaveLoadScene extends UIScene {
                 break;
             case Load:
                 try {
+                    MapViewScene.instance().clearBookMarks();
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
                         loaded = false;
                         if (WorldSave.load(currentSlot)) {
@@ -253,6 +254,7 @@ public class SaveLoadScene extends UIScene {
                                 Current.player().resetQuestFlags();
                                 Current.player().setCharacterFlag("newGamePlus", 1);
                                 AdventurePlayer.current().addQuest("28");
+                                WorldSave.getCurrentSave().clearBookmarks();
                                 WorldStage.getInstance().enterSpawnPOI();
                                 SoundSystem.instance.changeBackgroundTrack();
                                 Forge.switchScene(GameScene.instance());

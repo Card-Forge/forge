@@ -298,21 +298,11 @@ ScryfallCode=LTR
 284 R Ringwraiths @Warren Mahy
 285 R Assault on Osgiliath @Warren Mahy
 286 R Elanor Gardner @Torgeir Fjereide
-383 R Saradoc, Master of Buckland @Sean Vo
-384 R Elvish Mariner @Axel Sauerwald
-385 R Ringwraiths @Warren Mahy
-386 R Assault on Osgiliath @Warren Mahy
-387 R Elanor Gardner @Torgeir Fjereide
 824 R Eagle of Deliverance @Sidharth Chaturvedi
 825 R Minas Tirith Garrison @Irina Nordsol
 826 R Warg Rider @Pascal Quidault
 827 R Riders of the Mark @Antonio José Manzanedo
 828 R Mirkwood Channeler @Irina Nordsol
-829 R Eagle of Deliverance @Sidharth Chaturvedi
-830 R Minas Tirith Garrison @Irina Nordsol
-831 R Warg Rider @Pascal Quidault
-832 R Riders of the Mark @Antonio José Manzanedo
-833 R Mirkwood Channeler @Irina Nordsol
 
 [bundle]
 287 M Aragorn and Arwen, Wed @Magali Villeneuve
@@ -805,6 +795,11 @@ ScryfallCode=LTR
 380 M The One Ring @Veli Nyström
 381 M Palantír of Orthanc @Tatiana Veryayskaya
 382 R Phial of Galadriel @Andrea Piparo
+383 R Saradoc, Master of Buckland @Sean Vo
+384 R Elvish Mariner @Axel Sauerwald
+385 R Ringwraiths @Warren Mahy
+386 R Assault on Osgiliath @Warren Mahy
+387 R Elanor Gardner @Torgeir Fjereide
 388 R Frodo, Determined Hero @Magali Villeneuve
 389 R Gandalf, White Rider @Ekaterina Burmak
 390 R Gollum, Scheming Guide @Dmitry Burmak
@@ -852,6 +847,11 @@ ScryfallCode=LTR
 791 M The One Ring @Veli Nyström
 792 M Palantír of Orthanc @Tatiana Veryayskaya
 793 R Phial of Galadriel @Andrea Piparo
+829 R Eagle of Deliverance @Sidharth Chaturvedi
+830 R Minas Tirith Garrison @Irina Nordsol
+831 R Warg Rider @Pascal Quidault
+832 R Riders of the Mark @Antonio José Manzanedo
+833 R Mirkwood Channeler @Irina Nordsol
 
 [buy a box]
 398 R Trailblazer's Boots @Alexander Gering

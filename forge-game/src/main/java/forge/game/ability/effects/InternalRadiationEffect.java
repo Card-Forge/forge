@@ -2,17 +2,12 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -34,7 +29,7 @@ public class InternalRadiationEffect extends SpellAbilityEffect {
 
         final CardCollectionView milled = game.getAction().mill(new PlayerCollection(p), numRad, ZoneType.Graveyard, sa, moveParams);
         table.triggerChangesZoneAll(game, sa);
-        int n = CardLists.count(milled, Predicates.not(CardPredicates.Presets.LANDS));
+        int n = CardLists.count(milled, CardPredicates.NON_LANDS);
 
         if (StaticAbilityGainLifeRadiation.gainLifeRadiation(p)) {
             p.gainLife(n, sa.getHostCard(), sa);

@@ -1,7 +1,5 @@
 package forge.ai;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
@@ -12,7 +10,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
@@ -23,14 +20,17 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 
 public class ComputerUtilCost {
@@ -450,7 +450,7 @@ public class ComputerUtilCost {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkTapTypeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sa, final CardCollection alreadyTapped) {
+    public static boolean checkTapTypeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sa, final Collection<Card> alreadyTapped) {
         if (cost == null) {
             return true;
         }
@@ -487,8 +487,8 @@ public class ComputerUtilCost {
                     c = AbilityUtils.calculateAmount(source, part.getAmount(), sa);
                 }
                 CardCollection exclude = new CardCollection();
-                if (AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST) != null) {
-                    exclude.addAll(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST));
+                if (alreadyTapped != null) {
+                    exclude.addAll(alreadyTapped);
                 }
                 // trying to produce mana that includes tapping source that will already be tapped
                 if (exclude.contains(source) && cost.hasTapCost()) {
@@ -500,12 +500,12 @@ public class ComputerUtilCost {
                 }
                 CardCollection tapChoices = ComputerUtil.chooseTapType(ai, type, source, cost.hasTapCost(), c, exclude, sa);
                 if (tapChoices != null) {
-                    for (Card choice : tapChoices) {
-                        AiCardMemory.rememberCard(ai, choice, MemorySet.PAYS_TAP_COST);
-                    }
-                    // if manasource gets tapped to produce it also can't help paying another
-                    if (cost.hasTapCost()) {
-                        AiCardMemory.rememberCard(ai, source, MemorySet.PAYS_TAP_COST);
+                    if (alreadyTapped != null) {
+                        alreadyTapped.addAll(tapChoices);
+                        // if manasource gets tapped to produce it also can't help paying another
+                        if (cost.hasTapCost()) {
+                            alreadyTapped.add(source);
+                        }
                     }
                     return true;
                 }
@@ -528,7 +528,7 @@ public class ComputerUtilCost {
      */
     public static boolean canPayCost(final SpellAbility sa, final Player player, final boolean effect) {
         if (sa.getActivatingPlayer() == null) {
-            sa.setActivatingPlayer(player, true); // complaints on NPE had came before this line was added.
+            sa.setActivatingPlayer(player); // complaints on NPE had came before this line was added.
         }
 
         boolean cannotBeCountered = false;
@@ -600,40 +600,13 @@ public class ComputerUtilCost {
             }
         }
 
-        // TODO: Alternate costs which involve both paying mana and tapping a card, e.g. Zahid, Djinn of the Lamp
-        // Current AI decides on each part separately, thus making it possible for the AI to cheat by
-        // tapping a mana source for mana and for the tap cost at the same time. Until this is improved, AI
-        // will not consider mana sources valid for paying the tap cost to avoid this exact situation.
-        if ("DontPayTapCostWithManaSources".equals(sa.getHostCard().getSVar("AIPaymentPreference"))) {
-            for (final CostPart part : sa.getPayCosts().getCostParts()) {
-                if (part instanceof CostTapType) {
-                    CardCollectionView nonManaSources =
-                            CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
-                                    sa.getActivatingPlayer(), sa.getHostCard(), sa);
-                    nonManaSources = CardLists.filter(nonManaSources, card -> {
-                        boolean hasManaSa = false;
-                        for (final SpellAbility sa1 : card.getSpellAbilities()) {
-                            if (sa1.isManaAbility() && sa1.getPayCosts().hasTapCost()) {
-                                hasManaSa = true;
-                                break;
-                            }
-                        }
-                        return !hasManaSa;
-                    });
-                    if (nonManaSources.size() < part.convertAmount()) {
-                        return false;
-                    }
-                }
-            }
-        }
-
         // Bail early on Casualty in case there are no cards that would make sense to pay with
         if (sa.getHostCard().hasKeyword(Keyword.CASUALTY)) {
             for (final CostPart part : sa.getPayCosts().getCostParts()) {
                 if (part instanceof CostSacrifice) {
                     CardCollection valid = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
                             sa.getActivatingPlayer(), sa.getHostCard(), sa);
-                    valid = CardLists.filter(valid, Predicates.not(CardPredicates.hasSVar("AIDontSacToCasualty")));
+                    valid = CardLists.filter(valid, CardPredicates.hasSVar("AIDontSacToCasualty").negate());
                     if (valid.isEmpty()) {
                         return false;
                     }
@@ -746,7 +719,7 @@ public class ComputerUtilCost {
 
             // Special Card logic, this one try to median its power with the number of artifacts
             if ("Marionette Master".equals(source.getName())) {
-                CardCollection list = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
+                CardCollection list = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS);
                 return list.size() >= copy.getNetPower();
             } else if ("Cultivator of Blades".equals(source.getName())) {
                 // Cultivator does try to median with number of Creatures
@@ -833,7 +806,7 @@ public class ComputerUtilCost {
         return getAvailableManaColors(ai, Lists.newArrayList(additionalLand));
     }
     public static Set<String> getAvailableManaColors(Player ai, List<Card> additionalLands) {
-        CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.UNTAPPED);
+        CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.UNTAPPED);
         Set<String> colorsAvailable = Sets.newHashSet();
 
         if (additionalLands != null) {
@@ -923,8 +896,8 @@ public class ComputerUtilCost {
 
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
         if (source.usesTargeting()) {
-            final CardCollection targets = new CardCollection(source.getTargets().getTargetCards());
-            choices = Iterables.filter(choices, Predicates.not(Predicates.and(CardPredicates.isController(ai), Predicates.in(targets))));
+            final CardCollectionView targets = source.getTargets().getTargetCards();
+            choices = IterableUtil.filter(choices, Predicate.not(CardPredicates.isController(ai).and(targets::contains)));
         }
         return new CardCollection(choices);
     }

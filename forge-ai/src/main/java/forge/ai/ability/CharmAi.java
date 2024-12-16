@@ -1,16 +1,7 @@
 package forge.ai.ability;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Lists;
-
-import forge.ai.AiController;
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
@@ -20,6 +11,10 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
@@ -107,7 +102,7 @@ public class CharmAi extends SpellAbilityAi {
 
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
-            sub.setActivatingPlayer(ai, true);
+            sub.setActivatingPlayer(ai);
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 if (pawprintLimit > 0) {
                     int curPawprintAmount = AbilityUtils.calculateAmount(sub.getHostCard(), sub.getParamOrDefault("Pawprint", "0"), sub);
@@ -246,13 +241,13 @@ public class CharmAi extends SpellAbilityAi {
         List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
-            sub.setActivatingPlayer(ai, true);
+            sub.setActivatingPlayer(ai);
             // Assign generic good choice to fill up choices if necessary 
             if ("Good".equals(sub.getParam("AILogic")) && aic.doTrigger(sub, false)) {
                 goodChoice = sub;
             } else {
                 // Standard canPlayAi()
-                sub.setActivatingPlayer(ai, true);
+                sub.setActivatingPlayer(ai);
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {

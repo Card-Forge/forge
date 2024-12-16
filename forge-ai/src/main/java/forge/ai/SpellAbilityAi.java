@@ -119,7 +119,7 @@ public abstract class SpellAbilityAi {
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if (aiLogic.equals("CheckCondition")) {
             SpellAbility saCopy = sa.copy();
-            saCopy.setActivatingPlayer(ai, true);
+            saCopy.setActivatingPlayer(ai);
             return saCopy.metConditions();
         }
 
@@ -362,7 +362,7 @@ public abstract class SpellAbilityAi {
     public String chooseCardName(Player ai, SpellAbility sa, List<ICardFace> faces) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseCardName is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
 
-        final ICardFace face = Iterables.getFirst(faces, null); 
+        final ICardFace face = Iterables.getFirst(faces, null);
         return face == null ? "" : face.getName();
     }
 

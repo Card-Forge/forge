@@ -19,9 +19,8 @@ package forge.game.spellability;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.game.Game;
@@ -468,7 +467,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 list = new FCollection<>(game.getCardsIn(getPresentZone()));
             }
 
-            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa)));
+            Predicate<GameObject> restriction = GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa);
+            final int left = (int) list.stream().filter(restriction).count();
 
             final String rightString = this.getPresentCompare().substring(2);
             int right = AbilityUtils.calculateAmount(c, rightString, sa);
@@ -573,7 +573,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (this.getGameTypes().size() > 0) {
             Predicate<GameType> pgt = type -> game.getRules().hasAppliedVariant(type);
-            if (!Iterables.any(getGameTypes(), pgt)) {
+            if (getGameTypes().stream().noneMatch(pgt)) {
                 return false;
             }
         }

@@ -3,17 +3,10 @@
  */
 package forge.game.card;
 
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
-
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -24,6 +17,11 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
     private Table<Card, GameEntity, Integer> dataMap = HashBasedTable.create();
@@ -190,10 +188,10 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         Set<Card> filteredSource = null;
         Set<GameEntity> filteredTarget = null;
         if (validSource != null) {
-            filteredSource = Sets.newHashSet(Iterables.filter(rowKeySet(), GameObjectPredicates.restriction(validSource.split(","), host.getController(), host, sa)));
+            filteredSource = rowKeySet().stream().filter(GameObjectPredicates.restriction(validSource.split(","), host.getController(), host, sa)).collect(Collectors.toSet());
         }
         if (validTarget != null) {
-            filteredTarget = Sets.newHashSet(Iterables.filter(columnKeySet(), GameObjectPredicates.restriction(validTarget.split(","), host.getController(), host, sa)));
+            filteredTarget = columnKeySet().stream().filter(GameObjectPredicates.restriction(validTarget.split(","), host.getController(), host, sa)).collect(Collectors.toSet());
         }
 
         for (Table.Cell<Card, GameEntity, Integer> c : cellSet()) {

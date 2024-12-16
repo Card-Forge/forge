@@ -237,8 +237,7 @@ public class DuelScene extends ForgeScene {
         DeckProxy deckProxy = null;
         if (chaosBattle) {
             deckProxyMapMap = DeckProxy.getAllQuestChallenges();
-            List<DeckProxy> decks = new ArrayList<>(deckProxyMapMap.keySet());
-            deckProxy = Aggregates.random(decks);
+            deckProxy = Aggregates.random(deckProxyMapMap.keySet());
             //playerextras
             List<IPaperCard> playerCards = new ArrayList<>();
             for (String s : deckProxyMapMap.get(deckProxy).getLeft()) {

@@ -34,6 +34,7 @@ import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -385,7 +386,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 }
             }
 
-            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), activator, host, sa)));
+            Predicate<GameObject> restriction = GameObjectPredicates.restriction(getIsPresent().split(","), activator, host, sa);
+            final int left = (int) list.stream().filter(restriction).count();
 
             final String rightString = this.getPresentCompare().substring(2);
             int right = AbilityUtils.calculateAmount(host, rightString, sa);
@@ -416,7 +418,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 }
             }
 
-            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent2().split(","), activator, host, sa)));
+            Predicate<GameObject> restriction = GameObjectPredicates.restriction(getIsPresent2().split(","), activator, host, sa);
+            final int left = (int) list.stream().filter(restriction).count();
 
             final String rightString = this.getPresentCompare2().substring(2);
             int right = AbilityUtils.calculateAmount(host, rightString, sa);

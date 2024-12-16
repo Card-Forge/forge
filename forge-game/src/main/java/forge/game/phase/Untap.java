@@ -21,14 +21,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
@@ -36,7 +33,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -114,7 +110,7 @@ public class Untap extends Phase {
      */
     private void doUntap() {
         final Player player = game.getPhaseHandler().getPlayerTurn();
-        final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, CANUNTAP);
+        final Predicate<Card> tappedCanUntap = CardPredicates.TAPPED.and(CANUNTAP);
         Map<Player, CardCollection> untapMap = Maps.newHashMap();
 
         CardCollection list = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
@@ -141,10 +137,8 @@ public class Untap extends Phase {
             }
             if (kw.startsWith("OnlyUntapChosen") && !hasChosen) {
                 List<String> validTypes = Arrays.asList(kw.split(":")[1].split(","));
-                List<String> invalidTypes = Lists.newArrayList(CardType.getAllCardTypes());
-                invalidTypes.removeAll(validTypes);
-                final String chosen = player.getController().chooseSomeType("Card", new SpellAbility.EmptySa(ApiType.ChooseType, null, player), validTypes, invalidTypes);
-                list = CardLists.getType(list,chosen);
+                final String chosen = player.getController().chooseSomeType("Card", new SpellAbility.EmptySa(ApiType.ChooseType, null, player), validTypes);
+                list = CardLists.getType(list, chosen);
                 hasChosen = true;
             }
         }
@@ -318,7 +312,7 @@ public class Untap extends Phase {
         final Game game = previous.getGame();
         List<Card> casted = game.getStack().getSpellsCastLastTurn();
 
-        if (game.isDay() && !Iterables.any(casted, CardPredicates.isController(previous))) {
+        if (game.isDay() && casted.stream().noneMatch(CardPredicates.isController(previous))) {
             game.setDayTime(true);
         } else if (game.isNight() && CardLists.count(casted, CardPredicates.isController(previous)) > 1) {
             game.setDayTime(false);

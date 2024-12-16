@@ -1,8 +1,6 @@
 package forge.itemmanager.filters;
 
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.Forge;
 import forge.Graphics;
@@ -12,6 +10,8 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FTextField;
+
+import java.util.function.Predicate;
 
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -62,7 +62,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     protected Predicate<T> buildPredicate() {
         String text = txtSearch.getText();
         if (text.trim().isEmpty()) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
         return SFilterUtil.buildItemTextFilter(text);
     }

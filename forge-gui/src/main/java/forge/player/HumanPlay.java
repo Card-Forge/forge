@@ -1,39 +1,23 @@
 package forge.player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import forge.ImageKeys;
-import forge.game.ability.AbilityKey;
-import forge.game.cost.*;
-
 import com.google.common.collect.Iterables;
-
+import forge.ImageKeys;
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityView;
 import forge.game.GameEntityViewMap;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardView;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
+import forge.game.cost.*;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.mana.ManaRefundService;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
-
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
@@ -47,6 +31,10 @@ import forge.util.Aggregates;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class HumanPlay {
@@ -156,7 +144,7 @@ public class HumanPlay {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    public static final void playSaWithoutPayingManaCost(final PlayerControllerHuman controller, final Game game, SpellAbility sa, boolean mayChooseNewTargets) {
+    public static final void playSaWithoutPayingManaCost(final PlayerControllerHuman controller, SpellAbility sa, boolean mayChooseNewTargets) {
         FThreads.assertExecutedByEdt(false);
         final Card source = sa.getHostCard();
 
@@ -197,7 +185,8 @@ public class HumanPlay {
         // Only human player pays this way
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
         if (sourceAbility.hasParam("ShowCurrentCard")) {
-            current = Iterables.getFirst(AbilityUtils.getDefinedCards(source, sourceAbility.getParam("ShowCurrentCard"), sourceAbility), null);
+            Iterable<? extends Card> iterable = AbilityUtils.getDefinedCards(source, sourceAbility.getParam("ShowCurrentCard"), sourceAbility);
+            current = Iterables.getFirst(iterable, null);
         }
 
         final List<CostPart> parts = cost.getCostParts();
@@ -428,7 +417,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostTapType) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source, sourceAbility);
-                list = CardLists.filter(list, Presets.CAN_TAP);
+                list = CardLists.filter(list, CardPredicates.CAN_TAP);
                 int amount = part.getAbilityAmount(sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
                 if (!hasPaid) { return false; }

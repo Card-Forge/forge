@@ -1,12 +1,6 @@
 package forge.ai.simulation;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
@@ -18,6 +12,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.util.collect.FCollectionView;
+
+import java.util.*;
 
 public class GameSimulator {
     public static boolean COPY_STACK = false;
@@ -173,7 +169,7 @@ public class GameSimulator {
             }
 
             debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
-            sa.setActivatingPlayer(aiPlayer, true);
+            sa.setActivatingPlayer(aiPlayer);
             SpellAbility origSaOrSubSa = origSa;
             SpellAbility saOrSubSa = sa;
             do {

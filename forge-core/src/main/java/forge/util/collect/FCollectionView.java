@@ -1,9 +1,10 @@
 package forge.util.collect;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Read-only interface to an {@link FCollection}.
@@ -76,4 +77,16 @@ public interface FCollectionView<T> extends Iterable<T> {
     Iterable<T> threadSafeIterable();
 
     T get(final T obj);
+
+    Stream<T> stream();
+
+    /**
+     * Returns true if any member of this collection matches the given predicate.
+     */
+    boolean anyMatch(Predicate<? super T> test);
+
+    /**
+     * Returns true if each member of this collection matches the given predicate.
+     */
+    boolean allMatch(Predicate<? super T> test);
 }

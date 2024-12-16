@@ -110,7 +110,7 @@ public class BiomeStructure {
     }
 
     public ColorMap sourceImage() {
-        return new ColorMap(Config.instance().getFile(data.sourcePath));
+        return new ColorMap(Config.instance().getFile(data.sourcePath), data.sourcePath);
     }
 
     public String sourceImagePath() {
@@ -118,8 +118,7 @@ public class BiomeStructure {
     }
 
     private ColorMap maskImage() {
-        return new ColorMap(Config.instance().getFile(data.maskPath));
-
+        return new ColorMap(Config.instance().getFile(data.maskPath), data.maskPath);
     }
 
 

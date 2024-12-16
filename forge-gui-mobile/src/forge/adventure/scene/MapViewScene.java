@@ -149,4 +149,8 @@ public class MapViewScene extends UIScene {
         return (posY / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * img.getHeight();
     }
 
+    public void clearBookMarks() {
+        if (bookmark != null)
+            bookmark.clear();
+    }
 }

@@ -1,13 +1,13 @@
 package forge.item;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
+import forge.ImageKeys;
 import forge.card.*;
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.ImageKeys;
-import forge.util.MyRandom;
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Set;
 
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private static final long serialVersionUID = 1L;
@@ -150,6 +150,11 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     public String getFunctionalVariant() {
         //Tokens aren't differentiated by name, so they don't really need support for this.
         return IPaperCard.NO_FUNCTIONAL_VARIANT;
+    }
+
+    @Override
+    public Set<String> getColorID() {
+        return null;
     }
 
     @Override

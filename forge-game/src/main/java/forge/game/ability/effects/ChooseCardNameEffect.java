@@ -1,11 +1,8 @@
 package forge.game.ability.effects;
 
 import java.util.*;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
-import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.card.CardFacePredicates;
 import forge.card.CardRules;
@@ -18,21 +15,15 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.Aggregates;
-import forge.util.Lang;
-import forge.util.Localizer;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 public class ChooseCardNameEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
 
-        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
-        sb.append("names a card.");
-
-        return sb.toString();
+        return Lang.joinHomogenous(getTargetPlayers(sa)) + " names a card.";
     }
 
     @Override
@@ -66,7 +57,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
-            String chosen = "";
+            String chosen;
             //This section was used for Momir Avatar, which no longer uses it - commented out 7/28/2021
             //if (randomChoice) {
             //String numericAmount = "X";
@@ -75,7 +66,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             // Momir needs PaperCard
             //Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
             //Predicate<PaperCard> cpp = Predicates.and(
-            //    Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES),
+            //    Predicates.compose(CardRulesPredicates.IS_CREATURE, PaperCard.FN_GET_RULES),
             //    Predicates.compose(CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount), PaperCard.FN_GET_RULES));
             //cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             //if (!cards.isEmpty()) { chosen = Aggregates.random(cards).getName();
@@ -117,7 +108,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 }
             }  else {
                 // use CardFace because you might name a alternate names
-                Predicate<ICardFace> cpp = Predicates.alwaysTrue();
+                Predicate<ICardFace> cpp = x -> true;
                 if (sa.hasParam("ValidCards")) {
                     //Calculating/replacing this must happen before running valid in CardFacePredicates
                     if (valid.contains("cmcEQ") && !StringUtils.isNumeric(valid.split("cmcEQ")[1])) {
@@ -136,8 +127,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     cpp = CardFacePredicates.valid(valid);
                 }
                 if (randomChoice) {
-                    final Iterable<ICardFace> cards = Iterables.filter(StaticData.instance().getCommonCards().getAllFaces(), cpp);
-                    chosen = Aggregates.random(cards).getName();
+                    chosen = StaticData.instance().getCommonCards().streamAllFaces()
+                            .filter(cpp).collect(StreamUtil.random()).get()
+                            .getName();
                 } else {
                     chosen = p.getController().chooseCardName(sa, cpp, valid, message);
                 }

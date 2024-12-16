@@ -8,12 +8,11 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.function.Predicate;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
-import com.google.common.base.Predicate;
 
 import forge.gui.framework.ILocalRepaint;
 import forge.item.InventoryItem;
@@ -119,7 +118,7 @@ public abstract class ItemFilter<T extends InventoryItem> {
         return item -> {
             try {
                 //noinspection unchecked
-                return predicate.apply((T)item);
+                return predicate.test((T)item);
             }
             catch (Exception ex) {
                 return showUnsupportedItem(item); //if can't cast U to T, filter item out unless derived class can handle it

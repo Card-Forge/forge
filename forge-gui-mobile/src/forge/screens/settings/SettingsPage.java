@@ -244,6 +244,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("cbExperimentalRestore"),
                 Forge.getLocalizer().getMessage("nlExperimentalRestore")),
                 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.MATCH_AI_TIMEOUT, Forge.getLocalizer().getMessage("cbAITimeout"),
+                Forge.getLocalizer().getMessage("nlAITimeout"),
+                Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
                 Forge.getLocalizer().getMessage("cbFilteredHands"),
                 Forge.getLocalizer().getMessage("nlFilteredHands")),

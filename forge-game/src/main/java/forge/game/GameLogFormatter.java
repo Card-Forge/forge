@@ -16,10 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.maps.MapOfLists;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
@@ -304,6 +301,17 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     public GameLogEntry visit(GameEventMulligan ev) {
         String message = localizer.getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player.getZone(ZoneType.Hand).size())).replace("%s", ev.player.toString());
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventCardForetold ev) {
+        String sb = TextUtil.concatWithSpace(ev.activatingPlayer.toString(), "has foretold.");
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, sb);
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventCardPlotted ev) {
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
     }
 
     @Subscribe

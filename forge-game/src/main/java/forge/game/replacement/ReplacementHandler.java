@@ -17,20 +17,13 @@
  */
 package forge.game.replacement;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.google.common.base.MoreObjects;
 import forge.game.card.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -71,8 +64,6 @@ public class ReplacementHandler {
         game = gameState;
     }
 
-    //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
-
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
         final CardCollection preList = new CardCollection();
         boolean checkAgain = false;
@@ -108,13 +99,6 @@ public class ReplacementHandler {
         }
 
         final List<ReplacementEffect> possibleReplacers = Lists.newArrayList();
-        // Round up Non-static replacement effects ("Until EOT," or
-        // "The next time you would..." etc)
-        /*for (final ReplacementEffect replacementEffect : this.tmpEffects) {
-            if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams) && replacementEffect.getLayer() == layer) {
-                possibleReplacers.add(replacementEffect);
-            }
-        }*/
 
         // Round up Static replacement effects
         game.forEachCardInGame(new Visitor<Card>() {
@@ -665,6 +649,7 @@ public class ReplacementHandler {
             }
 
             List<ReplacementEffect> possibleReplacers = new ArrayList<>(replaceCandidateMap.keySet());
+            // TODO should be able to choose different order for each entity
             ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(possibleReplacers);
             List<Map<AbilityKey, Object>> runParamList = replaceCandidateMap.get(chosenRE);
 

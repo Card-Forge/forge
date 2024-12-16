@@ -651,6 +651,10 @@ public class VPlayerPanel extends FContainer {
         protected FSkinImageInterface icon;
 
         public InfoTab(FSkinImageInterface icon) {
+            if (icon == null) {
+                System.err.println("Missing/Invalid VPlayerPanel icon for: " + displayArea0 + " , defaulting to blank icon. Check your theme/skin layout.");
+                icon = FSkinImage.BLANK;
+            }
             this.icon = icon;
         }
 

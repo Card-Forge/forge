@@ -17,8 +17,6 @@
  */
 package forge.itemmanager;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.DeckProxy;
@@ -32,9 +30,7 @@ import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.model.FModel;
-import forge.util.CardTranslation;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -43,6 +39,7 @@ import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Function;
 
 public enum ColumnDef {
     /**
@@ -57,8 +54,9 @@ public enum ColumnDef {
     NAME("lblName", "lblName", 180, false, SortState.ASC,
             from -> {
                 if (from.getKey() instanceof PaperCard) {
+                    String spire = ((PaperCard) from.getKey()).getColorID() == null ? "" : ((PaperCard) from.getKey()).getColorID().toString();
                     String sortableName = ((PaperCard)from.getKey()).getSortableName();
-                    return sortableName == null ? TextUtil.toSortableName(from.getKey().getName()) : sortableName;
+                    return sortableName == null ? TextUtil.toSortableName(from.getKey().getName() + spire) : sortableName + spire;
                 }
                 return TextUtil.toSortableName(from.getKey().getName());
             },
@@ -190,7 +188,7 @@ public enum ColumnDef {
                         sanctioned.add(gf);
                     }
                 }
-                return StringUtils.join(Iterables.transform(sanctioned, GameFormat::getName), ", ");
+                return StringUtils.join(IterableUtil.transform(sanctioned, GameFormat::getName), ", ");
             }),
     /**
      * The Draft ranking column.

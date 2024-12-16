@@ -24,10 +24,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
@@ -237,7 +234,7 @@ public abstract class SpellAbilityEffect {
                 resultUnique = new CardCollection();
                 resultDuplicate = resultUnique;
             }
-            Iterables.addAll(resultDuplicate, sa.getTargets().getTargetCards());
+            sa.getTargets().getTargetCards().forEach(resultDuplicate::add);
         } else {
             String[] def = sa.getParamOrDefault(definedParam, "Self").split(" & ");
             for (String d : def) {
@@ -287,7 +284,7 @@ public abstract class SpellAbilityEffect {
                 resultUnique = new PlayerCollection();
                 resultDuplicate = resultUnique;
             }
-            Iterables.addAll(resultDuplicate, sa.getTargets().getTargetPlayers());
+            sa.getTargets().getTargetPlayers().forEach(resultDuplicate::add);
         } else {
             String[] def = sa.getParamOrDefault(definedParam, "You").split(" & ");
             for (String d : def) {

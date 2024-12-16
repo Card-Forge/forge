@@ -1,6 +1,5 @@
 package forge.game.player;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -38,6 +37,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * A prototype for player controller class
@@ -194,9 +194,9 @@ public abstract class PlayerController {
     public abstract PlayerZone chooseStartingHand(List<PlayerZone> zones);
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
 
-    public abstract String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional);
-    public final String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes) {
-        return chooseSomeType(kindOfType, sa, validTypes, invalidTypes, false);
+    public abstract String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, boolean isOptional);
+    public final String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes) {
+        return chooseSomeType(kindOfType, sa, validTypes, false);
     }
 
     public abstract String chooseSector(Card assignee, String ai, List<String> sectors);

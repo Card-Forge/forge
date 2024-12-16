@@ -3,7 +3,6 @@ package forge.screens.workshop.views;
 import javax.swing.JPanel;
 
 import com.google.common.collect.Iterables;
-
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;

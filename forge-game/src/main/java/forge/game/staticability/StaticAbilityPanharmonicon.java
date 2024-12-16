@@ -1,8 +1,6 @@
 package forge.game.staticability;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -161,7 +159,15 @@ public class StaticAbilityPanharmonicon {
             if (!stAb.matchesValidParam("ValidActivator", sa.getActivatingPlayer())) {
                 return false;
             }
-        } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce) 
+        } else if (trigMode.equals(TriggerType.BecomesTarget)) {
+            if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.Target))) {
+                return false;
+            }
+        } else if (trigMode.equals(TriggerType.BecomesTargetOnce)) {
+            if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.Targets))) {
+                return false;
+            }
+        } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce)
                 || trigMode.equals(TriggerType.DamageAll) || trigMode.equals(TriggerType.DamageDealtOnce)) {
             if (stAb.hasParam("CombatDamage") && stAb.getParam("CombatDamage").equalsIgnoreCase("True") != 
                     (Boolean) runParams.get(AbilityKey.IsCombatDamage)) {
@@ -182,10 +188,10 @@ public class StaticAbilityPanharmonicon {
                 Map<Card, Integer> dmgMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
                 // 1. check it's valid cause for static
                 // 2. and it must also be valid for trigger event
-                if (!Iterables.any(dmgMap.keySet(), Predicates.and(
-                        GameObjectPredicates.matchesValidParam(stAb, "ValidSource"),
-                        GameObjectPredicates.matchesValidParam(trigger, "ValidSource")
-                        ))) {
+                if (dmgMap.keySet().stream().noneMatch(
+                        GameObjectPredicates.matchesValidParam(stAb, "ValidSource")
+                                .and(GameObjectPredicates.matchesValidParam(trigger, "ValidSource"))
+                )) {
                     return false;
                 }
                 // DamageAmount$ can be ignored for now (its usage doesn't interact with ValidSource from either)
@@ -195,10 +201,10 @@ public class StaticAbilityPanharmonicon {
                     return false;
                 }
                 Map<GameEntity, Integer> dmgMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
-                if (!Iterables.any(dmgMap.keySet(), Predicates.and(
-                        GameObjectPredicates.matchesValidParam(stAb, "ValidTarget"),
-                        GameObjectPredicates.matchesValidParam(trigger, "ValidTarget")
-                        ))) {
+                if (dmgMap.keySet().stream().noneMatch(
+                        GameObjectPredicates.matchesValidParam(stAb, "ValidTarget")
+                                .and(GameObjectPredicates.matchesValidParam(trigger, "ValidTarget"))
+                )) {
                     return false;
                 }
             }

@@ -2,9 +2,6 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -23,12 +20,13 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import forge.util.StreamUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 public class AdventureEventData implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -325,9 +323,12 @@ public class AdventureEventData implements Serializable {
     private CardBlock pickWeightedCardBlock() {
         CardEdition.Collection editions = FModel.getMagicDb().getEditions();
         Iterable<CardBlock> src = FModel.getBlocks(); //all blocks
-        Predicate<CardEdition> filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, selectSetPool());
+        Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(selectSetPool());
         List<CardEdition> allEditions = new ArrayList<>();
-        StreamSupport.stream(editions.spliterator(), false).filter(filter::apply).filter(CardEdition::hasBoosterTemplate).collect(Collectors.toList()).iterator().forEachRemaining(allEditions::add);
+        StreamUtil.stream(editions)
+                .filter(filter)
+                .filter(CardEdition::hasBoosterTemplate)
+                .forEach(allEditions::add);
 
         //Temporary restriction until rewards are more diverse - don't want to award restricted cards so these editions need different rewards added.
         List<String> restrictedDrafts = new ArrayList<>();
@@ -438,9 +439,8 @@ public class AdventureEventData implements Serializable {
     public void generateParticipants(int numberOfOpponents) {
         participants = new AdventureEventParticipant[numberOfOpponents + 1];
 
-        //TODO: Switch this to a stream with StreamUtil.random once the guava migration branch is merged.
-        Iterable<EnemyData> validParticipants = Iterables.filter(WorldData.getAllEnemies(), q -> q.nextEnemy == null);
-        List<EnemyData> data = Aggregates.random(validParticipants, numberOfOpponents);
+        List<EnemyData> data = Aggregates.random(WorldData.getAllEnemies(), numberOfOpponents);
+        data.removeIf(q -> q.nextEnemy != null);
         for (int i = 0; i < numberOfOpponents; i++) {
             participants[i] = new AdventureEventParticipant().generate(data.get(i));
         }
@@ -579,13 +579,13 @@ public class AdventureEventData implements Serializable {
             description += "Block: " + getCardBlock() + "\n";
             description += "Boosters: " + String.join(", ", packConfiguration) + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (getPairingDescription()) + "\n\n";
-            description += String.format("Entry Fee (incl. reputation)\nGold %d[][+Gold][BLACK]\nMana Shards %d[][+Shards][BLACK]\n", Math.round(eventRules.goldToEnter * townPriceModifier), Math.round(eventRules.shardsToEnter * townPriceModifier));
+            description += String.format("Pay 1 Entry Fee\n- Gold %d[][+Gold][BLACK]\n- Mana Shards %d[][+Shards][BLACK]\n", Math.round(eventRules.goldToEnter * townPriceModifier), Math.round(eventRules.shardsToEnter * townPriceModifier));
             if (eventRules.acceptsBronzeChallengeCoin) {
-                description += "Bronze Challenge Coin [][+BronzeChallengeCoin][BLACK]\n\n";
+                description += "- Bronze Challenge Coin [][+BronzeChallengeCoin][BLACK]\n\n";
             } else if (eventRules.acceptsSilverChallengeCoin) {
-                description += "Silver Challenge Coin [][+SilverChallengeCoin][BLACK]\n\n";
+                description += "- Silver Challenge Coin [][+SilverChallengeCoin][BLACK]\n\n";
             } else if (eventRules.acceptsChallengeCoin) {
-                description += "Gold Challenge Coin [][+ChallengeCoin][BLACK]\n\n";
+                description += "- Gold Challenge Coin [][+ChallengeCoin][BLACK]\n\n";
             } else {
                 description += "\n";
             }
@@ -594,13 +594,13 @@ public class AdventureEventData implements Serializable {
             description = "Event Type: Jumpstart\n";
             description += "Block: " + getCardBlock() + "\n";
             description += "Competition Style: " + participants.length + " players, matches played as best of " + eventRules.gamesPerMatch + ", " + (getPairingDescription()) + "\n\n";
-            description += String.format("Entry Fee (incl. reputation)\nGold %d[][+Gold][BLACK]\nMana Shards %d[][+Shards][BLACK]\n", Math.round(eventRules.goldToEnter * townPriceModifier), Math.round(eventRules.shardsToEnter * townPriceModifier));
+            description += String.format("Pay 1 Entry Fee\n- Gold %d[][+Gold][BLACK]\n- Mana Shards %d[][+Shards][BLACK]\n", Math.round(eventRules.goldToEnter * townPriceModifier), Math.round(eventRules.shardsToEnter * townPriceModifier));
             if (eventRules.acceptsBronzeChallengeCoin) {
-                description += "Bronze Challenge Coin [][+BronzeChallengeCoin][BLACK]\n\n";
+                description += "- Bronze Challenge Coin [][+BronzeChallengeCoin][BLACK]\n\n";
             } else if (eventRules.acceptsSilverChallengeCoin) {
-                description += "Silver Challenge Coin [][+SilverChallengeCoin][BLACK]\n\n";
+                description += "- Silver Challenge Coin [][+SilverChallengeCoin][BLACK]\n\n";
             } else if (eventRules.acceptsChallengeCoin) {
-                description += "Gold Challenge Coin [][+ChallengeCoin][BLACK]\n\n";
+                description += "- Gold Challenge Coin [][+ChallengeCoin][BLACK]\n\n";
             } else {
                 description += "\n";
             }

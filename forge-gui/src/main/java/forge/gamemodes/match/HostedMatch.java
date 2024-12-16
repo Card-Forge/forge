@@ -35,7 +35,6 @@ import forge.player.PlayerControllerHuman;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
-import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
@@ -155,6 +154,10 @@ public class HostedMatch {
 
         game = match.createGame();
         game.EXPERIMENTAL_RESTORE_SNAPSHOT = FModel.getPreferences().getPrefBoolean(FPref.MATCH_EXPERIMENTAL_RESTORE);
+        game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
+        // Android API 31 and above can use completeOnTimeout -> CompletableFuture:
+        //https://developer.android.com/reference/java/util/concurrent/CompletableFuture#completeOnTimeout(T,%20long,%20java.util.concurrent.TimeUnit)
+        game.AI_CAN_USE_TIMEOUT = !GuiBase.isAndroid() || GuiBase.getAndroidAPILevel() > 30;
 
         StaticData.instance().setSourceImageForClone(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
 
@@ -176,7 +179,7 @@ public class HostedMatch {
         final GameView gameView = getGameView();
 
         humanCount = 0;
-        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
+        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(ArrayList::new);
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);

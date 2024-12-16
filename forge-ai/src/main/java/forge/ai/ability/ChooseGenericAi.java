@@ -1,11 +1,11 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -18,6 +18,7 @@ import forge.util.collect.FCollection;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class ChooseGenericAi extends SpellAbilityAi {
@@ -84,12 +85,14 @@ public class ChooseGenericAi extends SpellAbilityAi {
         } else if ("Random".equals(logic)) {
             return Aggregates.random(spells);
         } else if ("Phasing".equals(logic)) { // Teferi's Realm : keep aggressive
-            List<SpellAbility> filtered = Lists.newArrayList(Iterables.filter(spells, sp -> !sp.getDescription().contains("Creature") && !sp.getDescription().contains("Land")));
+            List<SpellAbility> filtered = spells.stream()
+                    .filter(sp -> !sp.getDescription().contains("Creature") && !sp.getDescription().contains("Land"))
+                    .collect(Collectors.toList());
             return Aggregates.random(filtered);
         } else if ("PayUnlessCost".equals(logic)) {
             for (final SpellAbility sp : spells) {
                 String unlessCost = sp.getParam("UnlessCost");
-                sp.setActivatingPlayer(sa.getActivatingPlayer(), true);
+                sp.setActivatingPlayer(sa.getActivatingPlayer());
                 Cost unless = new Cost(unlessCost, false);
                 SpellAbility paycost = new SpellAbility.EmptySa(sa.getHostCard(), player);
                 paycost.setPayCosts(unless);

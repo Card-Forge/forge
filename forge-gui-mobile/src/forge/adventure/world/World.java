@@ -27,6 +27,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class that will create the world from the configuration
@@ -276,11 +277,8 @@ public class World implements Disposable, SaveFileContent {
         for (int xclear = -size; xclear < size; xclear++)
             for (int yclear = -size; yclear < size; yclear++) {
                 try {
-
                     terrainMap[x + xclear][height - 1 - (y + yclear)] = 0;
-                } catch (ArrayIndexOutOfBoundsException e) {
-
-                }
+                } catch (ArrayIndexOutOfBoundsException ignored) {}
             }
     }
 
@@ -325,7 +323,7 @@ public class World implements Disposable, SaveFileContent {
 
             final int[] biomeIndex = {-1};
             currentTime[0] = measureGenerationTime("loading data", currentTime[0]);
-            HashMap<BiomeStructureData, BiomeStructure> structureDataMap = new HashMap<>();
+            Map<BiomeStructureData, BiomeStructure> structureDataMap = new ConcurrentHashMap<>();
 
 //////////////////
 ///////// calculation structure position with wavefunctioncollapse
@@ -343,6 +341,9 @@ public class World implements Disposable, SaveFileContent {
                             structure.initialize();
                             structureDataMap.put(data, structure);
                             return measureGenerationTime("wavefunctioncollapse " + data.sourcePath, threadStartTime);
+                        }).exceptionally(ex -> {
+                            ex.printStackTrace();
+                            return 0L;
                         }));
                     }
                 }
@@ -647,7 +648,10 @@ public class World implements Disposable, SaveFileContent {
                             startY = startY + sy;
                         }
                     }
-                    return 0l;
+                    return 0L;
+                }).exceptionally(ex -> {
+                    ex.printStackTrace();
+                    return 0L;
                 }));
             }
             futuresArray = futures.toArray(new CompletableFuture<?>[0]);
@@ -688,7 +692,10 @@ public class World implements Disposable, SaveFileContent {
                             startY = startY + sy;
                         }
                     }
-                    return 0l;
+                    return 0L;
+                }).exceptionally(ex -> {
+                    ex.printStackTrace();
+                    return 0L;
                 }));
             }
             futuresArray = futures.toArray(new CompletableFuture<?>[0]);
@@ -930,7 +937,7 @@ public class World implements Disposable, SaveFileContent {
     }
 
     public int getChunkSize() {
-        return (Scene.getIntendedWidth() > Scene.getIntendedHeight() ? Scene.getIntendedWidth() : Scene.getIntendedHeight()) / data.tileSize;
+        return (Math.max(Scene.getIntendedWidth(), Scene.getIntendedHeight())) / data.tileSize;
     }
 
     public void dispose() {

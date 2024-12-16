@@ -1,0 +1,19 @@
+name: Remove stale branches
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *" # Everday at midnight
+
+jobs:
+  remove-stale-branches:
+    if: github.repository_owner == 'Card-Forge'
+    name: Remove Stale Branches
+    runs-on: ubuntu-latest
+    steps:
+      - uses: fpicalausa/remove-stale-branches@v2.1.0
+        with:
+          dry-run: false # Check out the console output before setting this to false
+          ignore-unknown-authors: true
+          ignore-branches-with-open-prs: true
+          default-recipient: tehdiplomat

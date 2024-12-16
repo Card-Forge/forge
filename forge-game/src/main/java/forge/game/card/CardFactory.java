@@ -44,8 +44,11 @@ import forge.item.IPaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -261,17 +264,17 @@ public class CardFactory {
                 original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
                 for (Trigger t : card.getCurrentState().getTriggers()) {
                     if (t.isIntrinsic()) {
-                        original.addTrigger(t.copy(card, false));
+                        original.addTrigger(t);
                     }
                 }
                 for (StaticAbility st : card.getCurrentState().getStaticAbilities()) {
                     if (st.isIntrinsic()) {
-                        original.addStaticAbility(st.copy(card, false));
+                        original.addStaticAbility(st);
                     }
                 }
                 for (ReplacementEffect re : card.getCurrentState().getReplacementEffects()) {
                     if (re.isIntrinsic()) {
-                        original.addReplacementEffect(re.copy(card, false));
+                        original.addReplacementEffect(re);
                     }
                 }
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
@@ -465,7 +468,7 @@ public class CardFactory {
             to.setAdditionalAbility(e.getKey(), e.getValue().copy(host, p, lki, keepTextChanges));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
-            to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), input -> (AbilitySub) input.copy(host, p, lki, keepTextChanges)));
+            to.setAdditionalAbilityList(e.getKey(), e.getValue().stream().map(input -> (AbilitySub) input.copy(host, p, lki, keepTextChanges)).collect(Collectors.toList()));
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());
@@ -476,7 +479,7 @@ public class CardFactory {
 
         // do this after other abilities are copied
         if (p != null) {
-            to.setActivatingPlayer(p, lki);
+            to.setActivatingPlayer(p);
         }
     }
 

@@ -17,10 +17,10 @@
  */
 package forge.game;
 
-import com.google.common.base.Predicate;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
+
+import java.util.function.Predicate;
 
 
 /**

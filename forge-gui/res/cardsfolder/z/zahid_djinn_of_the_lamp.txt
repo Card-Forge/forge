@@ -4,6 +4,4 @@ Types:Legendary Creature Djinn
 PT:5/6
 K:Flying
 S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ 3 U tapXType<1/Artifact> | Description$ You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell's mana cost.
-# TODO: Currently the AI may cheat without the following flag by tapping the same artifact for mana and for the tap cost, e.g. 2 Islands + Sol Ring. Remove this flag once the AI is smart enough not to do that.
-SVar:AIPaymentPreference:DontPayTapCostWithManaSources
 Oracle:You may pay {3}{U} and tap an untapped artifact you control rather than pay this spell's mana cost.\nFlying

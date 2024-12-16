@@ -17,7 +17,6 @@
  */
 package forge.card;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.StaticData;
 import forge.card.CardDb.CardArtPreference;
@@ -37,8 +36,10 @@ import java.io.FilenameFilter;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 /**
@@ -54,26 +55,23 @@ public final class CardEdition implements Comparable<CardEdition> {
     // immutable
     public enum Type {
         UNKNOWN,
-
         CORE,
         EXPANSION,
         STARTER,
         REPRINT,
         BOXED_SET,
-
         COLLECTOR_EDITION,
         DUEL_DECK,
         PROMO,
         ONLINE,
-
         DRAFT,
-
         COMMANDER,
         MULTIPLAYER,
         FUNNY,
-
         OTHER,  // FALLBACK CATEGORY
         CUSTOM_SET; // custom sets
+
+        public static final EnumSet<Type> REPRINT_SET_TYPES = EnumSet.of(REPRINT, PROMO, COLLECTOR_EDITION);
 
         public String getBoosterBoxDefault() {
             switch (this) {
@@ -131,22 +129,23 @@ public final class CardEdition implements Comparable<CardEdition> {
         SPECIAL_SLOT("special slot"), //to help with convoluted boosters
         PRECON_PRODUCT("precon product"),
         BORDERLESS("borderless"),
-        BORDERLESS_PROFILE("borderless profile"),
-        BORDERLESS_FRAME("borderless frame"),
         ETCHED("etched"),
         SHOWCASE("showcase"),
         FULL_ART("full art"),
         EXTENDED_ART("extended art"),
         ALTERNATE_ART("alternate art"),
-        ALTERNATE_FRAME("alternate frame"),
+        RETRO_FRAME("retro frame"),
         BUY_A_BOX("buy a box"),
         PROMO("promo"),
+        PRERELEASE_PROMO("prerelease promo"),
         BUNDLE("bundle"),
         BOX_TOPPER("box topper"),
         DUNGEONS("dungeons"),
         JUMPSTART("jumpstart"),
         REBALANCED("rebalanced"),
-        ETERNAL("eternal");
+        ETERNAL("eternal"),
+        CONJURED("conjured"),
+        SCHEME("scheme");
 
         private final String name;
 
@@ -215,7 +214,7 @@ public final class CardEdition implements Comparable<CardEdition> {
          */
         public static String getSortableCollectorNumber(final String collectorNumber){
             String inputCollNumber = collectorNumber;
-            if (collectorNumber == null || collectorNumber.length() == 0)
+            if (collectorNumber == null || collectorNumber.isEmpty())
                 inputCollNumber = "50000";  // very big number of 5 digits to have them in last positions
 
             String matchedCollNr = sortableCollNumberLookup.getOrDefault(inputCollNumber, null);
@@ -379,7 +378,6 @@ public final class CardEdition implements Comparable<CardEdition> {
     public String getSlotReplaceCommonWith() { return slotReplaceCommonWith; }
     public String getAdditionalSheetForFoils() { return additionalSheetForFoils; }
     public String getAdditionalUnlockSet() { return additionalUnlockSet; }
-    public boolean getSmallSetOverride() { return smallSetOverride; }
     public String getDoublePickDuringDraft() { return doublePickDuringDraft; }
     public String getBoosterMustContain() { return boosterMustContain; }
     public String getBoosterReplaceSlotFromPrintSheet() { return boosterReplaceSlotFromPrintSheet; }
@@ -405,7 +403,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     public List<CardInSet> getCardInSet(String cardName){
         if (cardsInSetLookupMap == null) {
             // initialise
-            cardsInSetLookupMap = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+            cardsInSetLookupMap = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
             List<CardInSet> cardsInSet = this.getAllCardsInSet();
             for (CardInSet cis : cardsInSet){
                 String key = cis.name;
@@ -514,7 +512,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             for (CardInSet card : cards) {
                 int index = 1;
                 if (cardToIndex.containsKey(card.name)) {
-                    index = cardToIndex.get(card.name);
+                    index = cardToIndex.get(card.name) + 1;
                 }
 
                 cardToIndex.put(card.name, index);
@@ -709,9 +707,6 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.fatPackExtraSlots = metadata.get("FatPackExtraSlots", "");
 
             switch (metadata.get("foil", "newstyle").toLowerCase()) {
-                case "notsupported":
-                    res.foilType = FoilType.NOT_SUPPORTED;
-                    break;
                 case "oldstyle":
                 case "classic":
                     res.foilType = FoilType.OLD_STYLE;
@@ -720,6 +715,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 case "modern":
                     res.foilType = FoilType.MODERN;
                     break;
+                case "notsupported":
                 default:
                     res.foilType = FoilType.NOT_SUPPORTED;
                     break;
@@ -774,7 +770,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         public void add(CardEdition item) { //Even though we want it to be read only, make an exception for custom content.
             if(lock) throw new UnsupportedOperationException("This is a read-only storage");
             else map.put(item.getName(), item);
-        };
+        }
         public void append(CardEdition.Collection C){ //Append custom editions
             if (lock) throw new UnsupportedOperationException("This is a read-only storage");
             for(CardEdition E : C){ //Update the alias list as above or else it'll fail to look up.
@@ -807,8 +803,9 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
 
         public Iterable<CardEdition> getPrereleaseEditions() {
-            List<CardEdition> res = Lists.newArrayList(this);
-            return Iterables.filter(res, edition -> edition.getPrerelease() != null);
+            return this.stream()
+                    .filter(edition -> edition.getPrerelease() != null)
+                    .collect(Collectors.toList());
         }
 
         public CardEdition getEditionByCodeOrThrow(final String code) {
@@ -889,26 +886,19 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public static class Predicates {
-        public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = new CanMakeBooster();
-
-        private static class CanMakeBooster implements Predicate<CardEdition> {
-            @Override
-            public boolean apply(final CardEdition subject) {
-                return subject.hasBoosterTemplate();
-            }
-        }
+        public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = CardEdition::hasBoosterTemplate;
 
         public static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
-            return Aggregates.random(Iterables.filter(allEditions, hasBasicLands));
+            return Aggregates.random(IterableUtil.filter(allEditions, hasBasicLands));
         }
 
         public static CardEdition getPreferredArtEditionWithAllBasicLands() {
             CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
-            Iterable<CardEdition> editionsWithBasicLands = Iterables.filter(
+            Iterable<CardEdition> editionsWithBasicLands = IterableUtil.filter(
                     StaticData.instance().getEditions().getOrderedEditions(),
-                    com.google.common.base.Predicates.and(hasBasicLands, artPreference::accept));
+                    hasBasicLands.and(artPreference::accept));
             Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();
-            List<CardEdition> selectedEditions = new ArrayList<CardEdition>();
+            List<CardEdition> selectedEditions = new ArrayList<>();
             while (editionsIterator.hasNext())
                 selectedEditions.add(editionsIterator.next());
             if (selectedEditions.isEmpty())
@@ -918,29 +908,11 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
 
 
-        public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
-        private static class CanMakeStarter implements Predicate<CardEdition> {
-            @Override
-            public boolean apply(final CardEdition subject) {
-                return StaticData.instance().getTournamentPacks().contains(subject.getCode());
-            }
-        }
+        public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = edition -> StaticData.instance().getTournamentPacks().contains(edition.getCode());
 
-        public static final Predicate<CardEdition> HAS_FAT_PACK = new CanMakeFatPack();
-        private static class CanMakeFatPack implements Predicate<CardEdition> {
-            @Override
-            public boolean apply(final CardEdition subject) {
-                return subject.getFatPackCount() > 0;
-            }
-        }
+        public static final Predicate<CardEdition> HAS_FAT_PACK = edition -> edition.getFatPackCount() > 0;
 
-        public static final Predicate<CardEdition> HAS_BOOSTER_BOX = new CanMakeBoosterBox();
-        private static class CanMakeBoosterBox implements Predicate<CardEdition> {
-            @Override
-            public boolean apply(final CardEdition subject) {
-                return subject.getBoosterBoxCount() > 0;
-            }
-        }
+        public static final Predicate<CardEdition> HAS_BOOSTER_BOX = edition -> edition.getBoosterBoxCount() > 0;
 
         public static final Predicate<CardEdition> hasBasicLands = ed -> {
             if (ed == null) {
