@@ -17,7 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import forge.StaticData;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;

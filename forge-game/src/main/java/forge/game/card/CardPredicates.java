@@ -347,4 +347,5 @@ public final class CardPredicates {
     public static final Predicate<Card> BATTLES = Card::isBattle;
     public static final Predicate<Card> CAN_BE_DESTROYED = Card::canBeDestroyed;
     public static final Predicate<Card> ATTRACTIONS = Card::isAttraction;
+    public static final Predicate<Card> CONTRAPTIONS = Card::isContraption;
 }

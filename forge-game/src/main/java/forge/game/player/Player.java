@@ -3947,8 +3947,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.CRANK), this.crankCounter);
             contraptionSprocketEffect.setCounters(counterMap);
         }
-        else if (Iterables.any(this.getCardsIn(ZoneType.Battlefield), Card::isContraption)) {
-            //TODO: Rewrite above for predicates update
+        else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
             this.createContraptionSprockets();
         }
     }
