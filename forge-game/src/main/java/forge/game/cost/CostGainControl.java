@@ -96,7 +96,7 @@ public class CostGainControl extends CostPartWithList {
      */
     @Override
     public String getHashForLKIList() {
-        return "ControllGained"; // why the hell double "L"?
+        return "ControlGained";
     }
     @Override
     public String getHashForCardList() {

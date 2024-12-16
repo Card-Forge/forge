@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
+
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -41,12 +42,9 @@ public class ChaosEnsuesEffect extends SpellAbilityEffect {
             for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa)) {
                 for (Trigger t : c.getTriggers()) {
                     if (t.getMode() == TriggerType.ChaosEnsues) { // also allow current zone for any Defined
-                        //String zones = t.getParam("TriggerZones");
-                        //t.putParam("TriggerZones", zones + "," + c.getZone().getZoneType().toString());
-                        EnumSet<ZoneType> zones = (EnumSet<ZoneType>) t.getActiveZone();
-                        tweakedTrigs.put(t.getId(), zones);
+                        Set<ZoneType> zones = t.getActiveZone();
+                        tweakedTrigs.put(t.getId(), EnumSet.copyOf(zones));
                         zones.add(c.getZone().getZoneType());
-                        t.setActiveZone(zones);
                         affected.add(c);
                         game.getTriggerHandler().registerOneTrigger(t);
                     }
@@ -58,13 +56,13 @@ public class ChaosEnsuesEffect extends SpellAbilityEffect {
             }
         }
 
-        game.getTriggerHandler().runTrigger(TriggerType.ChaosEnsues, runParams,false);
+        game.getTriggerHandler().runTrigger(TriggerType.ChaosEnsues, runParams, false);
 
         for (Map.Entry<Integer, EnumSet<ZoneType>> e : tweakedTrigs.entrySet()) {
             for (Card c : affected) {
                 for (Trigger t : c.getTriggers()) {
                     if (t.getId() == e.getKey()) {
-                       EnumSet<ZoneType> zones = e.getValue();
+                        EnumSet<ZoneType> zones = e.getValue();
                         t.setActiveZone(zones);
                     }
                 }

@@ -20,6 +20,7 @@ package forge.game;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -70,7 +71,7 @@ public final class GameOutcome implements Iterable<Entry<RegisteredPlayer, Playe
     private int winningTeam = -1;
 
     private final HashMap<RegisteredPlayer, PlayerStatistics> playerRating = new HashMap<>();
-    private final HashMap<RegisteredPlayer, String> playerNames = new HashMap<>();
+    private final HashMap<RegisteredPlayer, String> playerNames = new LinkedHashMap<>();
 
     private final Map<RegisteredPlayer, AnteResult> anteResult = new HashMap<>();
     private GameEndReason winCondition;

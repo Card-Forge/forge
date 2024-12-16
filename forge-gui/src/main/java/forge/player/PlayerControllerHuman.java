@@ -1630,9 +1630,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             case UntapOrLeaveTapped:
                 labels = ImmutableList.of(localizer.getMessage("lblUntap"), localizer.getMessage("lblLeaveTapped"));
                 break;
-            case UntapTimeVault:
-                labels = ImmutableList.of(localizer.getMessage("lblUntapAndSkipThisTurn"), localizer.getMessage("lblLeaveTapped"));
-                break;
             case PlayOrDraw:
                 labels = ImmutableList.of(localizer.getMessage("lblPlay"), localizer.getMessage("lblDraw"));
                 break;
