@@ -28,9 +28,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -68,6 +70,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -1518,5 +1521,38 @@ public final class CMatchUI
 
             FOptionPane.showOptionDialog(null, title, null, mainPanel, options);
         }
+    }
+
+    @Override
+    public void showFullControl(PlayerView pv, Set<FullControlFlag> controlFlags) {
+        final String lblFullControl = Localizer.getInstance().getMessage("lblFullControl");
+        final JPopupMenu menu = new JPopupMenu(lblFullControl);
+        GuiUtils.addMenuItem(menu, lblFullControl, null, () -> {
+            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblFullControlDetails"), lblFullControl);
+        });
+
+        addFullControlEntry(menu, "lblChooseCostOrder", FullControlFlag.ChooseCostOrder, controlFlags);
+        addFullControlEntry(menu, "lblChooseCostReductionOrder", FullControlFlag.ChooseCostReductionOrderAndVariableAmount, controlFlags);
+        addFullControlEntry(menu, "lblNoPaymentFromManaAbility", FullControlFlag.NoPaymentFromManaAbility, controlFlags);
+        addFullControlEntry(menu, "lblNoFreeCombatCostHandling", FullControlFlag.NoFreeCombatCostHandling, controlFlags);
+        addFullControlEntry(menu, "lblAllowPaymentStartWithMissingResources", FullControlFlag.AllowPaymentStartWithMissingResources, controlFlags);
+
+        Component parent = view.getControl().getFieldViewFor(pv).getAvatarArea();
+        menu.show(parent, parent.getX(), parent.getY());
+    }
+
+    private void addFullControlEntry(JPopupMenu menu, String label, FullControlFlag flag, Set<FullControlFlag> controlFlags) {
+        JCheckBoxMenuItem item = new JCheckBoxMenuItem(Localizer.getInstance().getMessage(label));
+        if (controlFlags.contains(flag)) {
+            item.setSelected(true);
+        }
+        item.addActionListener(arg0 -> {
+            if (controlFlags.contains(flag)) {
+                controlFlags.remove(flag);
+            } else {
+                controlFlags.add(flag);
+            }
+        });
+        menu.add(item);
     }
 }

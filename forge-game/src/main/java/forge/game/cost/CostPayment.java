@@ -28,6 +28,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
 import forge.game.mana.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.spellability.SpellAbility;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -109,13 +110,7 @@ public class CostPayment extends ManaConversionMatrix {
      * @return a boolean.
      */
     public final boolean isFullyPaid() {
-        for (final CostPart part : adjustedCost.getCostParts()) {
-            if (!this.paidCostParts.contains(part)) {
-                return false;
-            }
-        }
-
-        return true;
+        return paidCostParts.containsAll(adjustedCost.getCostParts());
     }
 
     /**
@@ -136,7 +131,12 @@ public class CostPayment extends ManaConversionMatrix {
 
     public boolean payCost(final CostDecisionMakerBase decisionMaker) {
         adjustedCost = CostAdjustment.adjust(cost, ability);
-        final List<CostPart> costParts = adjustedCost.getCostPartsWithZeroMana();
+        List<CostPart> costParts = adjustedCost.getCostPartsWithZeroMana();
+
+        if (adjustedCost.getCostParts().size() > 1 && decisionMaker.getPlayer().getController().isFullControl(FullControlFlag.ChooseCostOrder)) {
+            // if mana part is shown here it wouldn't include reductions, but that's just a minor inconvenience
+            costParts = decisionMaker.getPlayer().getController().orderCosts(costParts);
+        }
 
         final Game game = decisionMaker.getPlayer().getGame();
 

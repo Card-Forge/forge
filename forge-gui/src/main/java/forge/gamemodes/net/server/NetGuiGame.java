@@ -9,6 +9,7 @@ import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
@@ -25,6 +26,7 @@ import forge.util.ITriggerEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 
 public class NetGuiGame extends AbstractGuiGame {
@@ -316,6 +318,11 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     protected void updateCurrentPlayer(final PlayerView player) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void showFullControl(PlayerView view, Set<FullControlFlag> controlFlags) {
         // TODO Auto-generated method stub
     }
 

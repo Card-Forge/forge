@@ -94,8 +94,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private boolean mayLookAtAllCards = false;
     private boolean disableAutoYields = false;
 
-    private boolean fullControl = false;
-
     private IGuiGame gui;
 
     protected final InputQueue inputQueue;
@@ -197,15 +195,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             c.removeMayLookTemp(player);
         }
         tempShownCards.clear();
-    }
-
-    @Override
-    public boolean isFullControl() {
-        return fullControl;
-    }
-    @Override
-    public void setFullControl(boolean full) {
-        fullControl = full;
     }
 
     /**
@@ -399,7 +388,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             if (cost != null) {
                 Integer costX = cost.getMaxForNonManaX(ability, player, false);
-                if (costX != null) {
+                if (costX != null && !player.getController().isFullControl(FullControlFlag.AllowPaymentStartWithMissingResources)) {
                     max = Math.min(max, costX);
                 }
                 if (cost.hasManaCost() && !abXMin) {
@@ -836,31 +825,25 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Player chooseStartingPlayer(final boolean isFirstGame) {
+        String prompt = null;
+        if (isFirstGame) {
+            prompt = localizer.getMessage("lblYouHaveWonTheCoinToss", player.getName());
+        } else {
+            prompt = localizer.getMessage("lblYouLostTheLastGame", player.getName());
+        }
+
         if (getGame().getPlayers().size() == 2) {
-            String prompt = null;
-            if (isFirstGame) {
-                prompt = localizer.getMessage("lblYouHaveWonTheCoinToss", player.getName());
-            } else {
-                prompt = localizer.getMessage("lblYouLostTheLastGame", player.getName());
-            }
             prompt += "\n\n" + localizer.getMessage("lblWouldYouLiketoPlayorDraw");
             final InputConfirm inp = new InputConfirm(this, prompt, localizer.getMessage("lblPlay"), localizer.getMessage("lblDraw"));
             inp.showAndWait();
             return inp.getResult() ? this.player : this.player.getOpponents().get(0);
-        } else {
-            String prompt = null;
-            if (isFirstGame) {
-                prompt = localizer.getMessage("lblYouHaveWonTheCoinToss", player.getName());
-            } else {
-                prompt = localizer.getMessage("lblYouLostTheLastGame", player.getName());
-            }
-            prompt += "\n\n" + localizer.getMessage("lblWhoWouldYouLiketoStartthisGame");
-            final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<>(this, 1, 1,
-                    new FCollection<>(getGame().getPlayersInTurnOrder()));
-            input.setMessage(prompt);
-            input.showAndWait();
-            return input.getFirstSelected();
         }
+
+        prompt += "\n\n" + localizer.getMessage("lblWhoWouldYouLiketoStartthisGame");
+        final InputSelectEntitiesFromList<Player> input = new InputSelectEntitiesFromList<>(this, 1, 1, getGame().getPlayersInTurnOrder());
+        input.setMessage(prompt);
+        input.showAndWait();
+        return input.getFirstSelected();
     }
 
     @Override
@@ -895,6 +878,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         List<Card> chosenCards = new CardCollection();
         gameCacheExert.addToList(chosen, chosenCards);
         return chosenCards;
+    }
+
+    @Override
+    public List<CostPart> orderCosts(List<CostPart> costs) {
+        if (costs.size() < 2) {
+            return costs;
+        }
+        List<CostPart> chosen = getGui().order(localizer.getMessage("lblOrderCosts"), localizer.getMessage("lblPayFirst"),
+                0, 0, costs, null, null, false);
+        return chosen;
     }
 
     @Override
@@ -1562,10 +1555,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean payManaOptional(final Card c, final Cost cost, final SpellAbility sa, final String prompt,
-                                   final ManaPaymentPurpose purpose) {
-        if (sa == null && cost.isOnlyManaCost() && cost.getTotalMana().isZero()
-                && !FModel.getPreferences().getPrefBoolean(FPref.MATCHPREF_PROMPT_FREE_BLOCKS)) {
+    public boolean payManaOptional(final Card c, final Cost cost, final SpellAbility sa, final String prompt, final ManaPaymentPurpose purpose) {
+        if (cost.isOnlyManaCost() && cost.getTotalMana().isZero() && isFullControl(FullControlFlag.NoFreeCombatCostHandling)
+                && (purpose == ManaPaymentPurpose.DeclareAttacker || purpose == ManaPaymentPurpose.DeclareBlocker)) {
             return true;
         }
         return HumanPlay.payCostDuringAbilityResolve(this, player, c, cost, sa, prompt);
@@ -1899,7 +1891,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public StaticAbility chooseSingleStaticAbility(final String prompt, final List<StaticAbility> possibleStatics) {
         final StaticAbility first = possibleStatics.get(0);
-        if (possibleStatics.size() == 1 || !fullControl) {
+        if (possibleStatics.size() == 1 || !isFullControl(FullControlFlag.ChooseCostOrder)) {
             return first;
         }
         final List<String> sts = possibleStatics.stream().map(StaticAbility::toString).collect(Collectors.toList());
@@ -3283,7 +3275,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public int chooseNumberForCostReduction(final SpellAbility sa, final int min, final int max) {
-        if (fullControl) {
+        if (isFullControl(FullControlFlag.ChooseCostReductionOrderAndVariableAmount)) {
             return chooseNumber(sa, localizer.getMessage("lblChooseAmountCostReduction"), min, max);
         }
         return max;

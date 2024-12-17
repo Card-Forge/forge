@@ -1672,4 +1672,9 @@ public class PlayerControllerAi extends PlayerController {
 
         return choices;
     }
+
+    @Override
+    public List<CostPart> orderCosts(List<CostPart> costs) {
+        return null;
+    }
 }

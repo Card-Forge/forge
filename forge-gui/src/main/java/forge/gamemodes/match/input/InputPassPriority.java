@@ -124,8 +124,8 @@ public class InputPassPriority extends InputSyncronizedBase {
     @Override
     protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
         PlayerController pc = selected.getController();
-        if (pc.isGuiPlayer()) {
-           pc.setFullControl(!pc.isFullControl());
+        if (!pc.isAI()) {
+           getController().getGui().showFullControl(selected.getView(), pc.getFullControl());
         }
     }
 
