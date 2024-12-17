@@ -31,6 +31,7 @@ import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.*;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
 import forge.game.replacement.ReplacementEffect;
@@ -882,7 +883,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<CostPart> orderCosts(List<CostPart> costs) {
-        if (costs.size() < 2) {
+        if (!isFullControl(FullControlFlag.ChooseCostOrder) || costs.size() < 2) {
             return costs;
         }
         List<CostPart> chosen = getGui().order(localizer.getMessage("lblOrderCosts"), localizer.getMessage("lblPayFirst"),

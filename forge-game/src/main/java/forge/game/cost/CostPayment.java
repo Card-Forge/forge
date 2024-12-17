@@ -28,7 +28,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
 import forge.game.mana.*;
 import forge.game.player.Player;
-import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.spellability.SpellAbility;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -133,7 +132,7 @@ public class CostPayment extends ManaConversionMatrix {
         adjustedCost = CostAdjustment.adjust(cost, ability);
         List<CostPart> costParts = adjustedCost.getCostPartsWithZeroMana();
 
-        if (adjustedCost.getCostParts().size() > 1 && decisionMaker.getPlayer().getController().isFullControl(FullControlFlag.ChooseCostOrder)) {
+        if (adjustedCost.getCostParts().size() > 1) {
             // if mana part is shown here it wouldn't include reductions, but that's just a minor inconvenience
             costParts = decisionMaker.getPlayer().getController().orderCosts(costParts);
         }
