@@ -11,6 +11,7 @@ import forge.game.GameActionUtil;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PayManaFromPoolAction;
 import forge.game.spellability.AbilityManaPart;
@@ -344,7 +345,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                     }
                 }
 
-                if (restrictionsMet && !player.getController().isFullControl()) {
+                if (restrictionsMet && !player.getController().isFullControl(FullControlFlag.NoPaymentFromManaAbility)) {
                     player.getManaPool().payManaFromAbility(saPaidFor, manaCost, chosen);
                 }
                 if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {

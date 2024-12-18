@@ -140,7 +140,6 @@ public class Localizer {
     }
 
     public void setLanguage(final String languageRegionID, final String languagesDirectory) {
-
         String[] splitLocale = languageRegionID.split("-");
 
         Locale oldLocale = locale;
@@ -174,7 +173,6 @@ public class Localizer {
             notifyObservers();
 
         }
-
     }
 
     public List<Language> getLanguages() {

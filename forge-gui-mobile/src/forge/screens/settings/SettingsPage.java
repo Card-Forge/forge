@@ -256,10 +256,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("cbCloneImgSource"),
                 Forge.getLocalizer().getMessage("nlCloneImgSource")),
                 1);
-        lstSettings.addItem(new BooleanSetting(FPref.MATCHPREF_PROMPT_FREE_BLOCKS,
-                Forge.getLocalizer().getMessage("cbPromptFreeBlocks"),
-                Forge.getLocalizer().getMessage("nlPromptFreeBlocks")),
-                1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DETAILED_SPELLDESC_IN_PROMPT,
                 Forge.getLocalizer().getMessage("cbDetailedPaymentDesc"),
                 Forge.getLocalizer().getMessage("nlDetailedPaymentDesc")),

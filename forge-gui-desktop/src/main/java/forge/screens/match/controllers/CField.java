@@ -22,6 +22,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.function.Function;
 
+import javax.swing.SwingUtilities;
+
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.Input;
@@ -46,7 +48,11 @@ public class CField implements ICDoc {
     private final MouseListener madAvatar = new MouseAdapter() {
         @Override
         public void mousePressed(final MouseEvent e) {
-            matchUI.getGameController().selectPlayer(player, new MouseTriggerEvent(e));
+            if (SwingUtilities.isRightMouseButton(e)) {
+                matchUI.showFullControl(player, e);
+            } else {
+                matchUI.getGameController().selectPlayer(player, new MouseTriggerEvent(e));
+            }
         }
     };
 
