@@ -27,6 +27,8 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -1122,5 +1124,29 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid,
+            FCollectionView<Player> payers) {
+        if (!payer.canLoseLife() || payer.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+
+        final Card hostCard = sa.getHostCard();
+
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(hostCard, sa.getParam("DamageSource"), sa);
+        if (definedSources == null || definedSources.isEmpty()) {
+            return false;
+        }
+        int dmg = AbilityUtils.calculateAmount(hostCard, sa.getParam("NumDmg"), sa);
+        for (Card source : definedSources) {
+            int predictedDamage = ComputerUtilCombat.predictDamageTo(payer, dmg, source, false);
+            if (payer.getLife() < predictedDamage * 1.5) {
+                return true;
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }

@@ -11,6 +11,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -26,6 +27,7 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -636,5 +638,21 @@ public class EffectAi extends SpellAbilityAi {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final String aiLogic = sa.getParam("UnlessAI");
+        if ("Never".equals(aiLogic)) { return false; }
+        if ("WillAttack".equals(aiLogic)) {
+            // TODO use AiController::getPredictedCombat
+            AiAttackController aiAtk = new AiAttackController(payer);
+            Combat combat = new Combat(payer);
+            aiAtk.declareAttackers(combat);
+            if (combat.getAttackers().isEmpty()) {
+                return false;
+            }
+        }
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }

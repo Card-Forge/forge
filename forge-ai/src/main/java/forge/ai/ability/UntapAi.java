@@ -11,6 +11,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPartMana;
 import forge.game.cost.CostTap;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
@@ -21,6 +22,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.collect.FCollectionView;
 
 import java.util.List;
 import java.util.Map;
@@ -348,7 +350,6 @@ public class UntapAi extends SpellAbilityAi {
     private boolean doPreventCombatDamageLogic(final Player ai, final SpellAbility sa) {
         // Only Maze of Ith and Maze of Shadows uses this. Feel free to use it aggressively.
         Game game = ai.getGame();
-        Card source = sa.getHostCard();
         sa.resetTargets();
 
         if (!game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
@@ -464,4 +465,29 @@ public class UntapAi extends SpellAbilityAi {
         // haven't found any immediate playable options
     }
 
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        // Paralyze effects
+        if (sa.hasParam("UnlessSwitched")) {
+            final Card host = sa.getHostCard();
+            final Game game = host.getGame();
+            for (Card card : AbilityUtils.getDefinedCards(host, null, sa)) {
+                final Card gameCard = game.getCardState(card, null);
+                if (gameCard == null
+                        || !gameCard.isInPlay() // not in play
+                        || gameCard.isUntapped() // already untapped
+                        ) {
+                    return false;
+                }
+
+                // if the ManaCost would cost more than the creatures CMC, it is not worth it
+                CostPartMana mana = cost.getCostMana();
+                if (mana != null && mana.getManaCostFor(sa).getCMC() > card.getCMC()) {
+                    return false;
+                }
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+    }
 }

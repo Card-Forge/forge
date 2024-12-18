@@ -452,12 +452,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return activatingPlayer;
     }
     public void setActivatingPlayer(final Player player) {
-        // trickle down activating player
-        boolean updated = false;
         // don't use equals because player might be from simulation
         if (player == null || player != activatingPlayer) {
             activatingPlayer = player;
-            updated = true;
         }
         if (subAbility != null) {
             subAbility.setActivatingPlayer(player);

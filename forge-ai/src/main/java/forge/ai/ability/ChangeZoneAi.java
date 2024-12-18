@@ -28,6 +28,8 @@ import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -2138,5 +2140,43 @@ public class ChangeZoneAi extends SpellAbilityAi {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final Card host = sa.getHostCard();
+
+        int lifeLoss;
+        if (cost.hasSpecificCostType(CostDamage.class)) {
+            if (!payer.canLoseLife()) {
+                return true;
+            }
+            CostDamage damageCost = cost.getCostPartByType(CostDamage.class);
+            lifeLoss = ComputerUtilCombat.predictDamageTo(payer, damageCost.getAbilityAmount(sa), host, false);
+            if (lifeLoss > 0) {
+                if (!ComputerUtilCost.checkDamageCost(payer, cost, host, 4, sa)) {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            CostPayLife lifeCost = cost.getCostPartByType(CostPayLife.class);
+            lifeLoss = lifeCost.getAbilityAmount(sa);
+            if (!ComputerUtilCost.checkLifeCost(payer, cost, host, 4, sa)) {
+                return false;
+            }
+        }
+
+        for (Card c : AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa)) {
+            if (c.isToken()) {
+                return false;
+            }
+            if (c.isCreature() && c.getBasePower() > lifeLoss && payer.getLife() > lifeLoss * 2) { // costs use either pay 3 life or deal 3 damage
+                return true;
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }
