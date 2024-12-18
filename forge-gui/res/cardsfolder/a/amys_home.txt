@@ -9,4 +9,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigTimeTravel | TriggerDescription$ Whenever chaos ensues, time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)
 SVar:TrigTimeTravel:DB$ TimeTravel
+DeckHas:Ability$Counters & Keyword$Suspend
 Oracle:When you planeswalk to Amy's Home and at the beginning of your upkeep, you may exile a nonland card from your hand with a number of time counters on it equal to its mana value. If it doesn't have suspend, it gains suspend.\nWhenever chaos ensues, time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)

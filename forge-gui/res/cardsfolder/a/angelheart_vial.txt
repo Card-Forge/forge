@@ -6,4 +6,6 @@ T:Mode$ DamageDoneOnce | ValidTarget$ You | TriggerZones$ Battlefield | Execute$
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ X
 SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Counters|LifeGain
+DeckHints:Ability$Counters|Proliferate
 Oracle:Whenever you're dealt damage, you may put that many charge counters on Angelheart Vial.\n{2}, {T}, Remove four charge counters from Angelheart Vial: You gain 2 life and draw a card.

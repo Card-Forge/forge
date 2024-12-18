@@ -4,7 +4,9 @@ Types:Artifact Creature Golem
 PT:0/0
 A:AB$ ChangeZone | Cost$ SubCounter<1/P1P1> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Library | SpellDescription$ Put target artifact card from your graveyard on top of your library.
 K:Modular:2
-DeckHas:Ability$Counters
 SVar:BuffedBy:Artifact
 AI:RemoveDeck:Random
+DeckHas:Ability$Counters|Graveyard
+DeckHints:Ability$Counters|Proliferate
+DeckNeeds:Type$Artifact
 Oracle:Remove a +1/+1 counter from Arcbound Reclaimer: Put target artifact card from your graveyard on top of your library.\nModular 2 (This creature enters with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
