@@ -68,3 +68,5 @@ ScryfallCode=PMEI
 20244 R Gush @Kev Walker
 20245 R Diabolic Edict @Ron Spencer
 20246 R Voltaic Key @Henry G. Higginbotham
+20247 R Patchwork Banner @Sarah Finnigan
+20248 M Liliana of the Dark Realms @D. Alexander Gregory

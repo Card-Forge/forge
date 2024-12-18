@@ -122,8 +122,7 @@ public class TokenEffect extends TokenEffectBase {
             useZoneTable = true;
         }
 
-        makeTokenTable(getDefinedPlayersOrTargeted(sa, "TokenOwner"),
-                sa.getParam("TokenScript").split(","),
+        makeTokenTable(getDefinedPlayersOrTargeted(sa, "TokenOwner"), sa.getParam("TokenScript").split(","),
                 AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa),
                 false, triggerList, combatChanged, sa);
 
