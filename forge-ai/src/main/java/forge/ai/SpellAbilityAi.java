@@ -15,7 +15,6 @@ import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.card.CounterType;
-import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
@@ -321,14 +320,6 @@ public abstract class SpellAbilityAi {
         boolean isMine = sa.getActivatingPlayer().equals(payer);
 
         if (payNever) { return false; }
-        if ("WillAttack".equals(aiLogic)) {
-            AiAttackController aiAtk = new AiAttackController(payer);
-            Combat combat = new Combat(payer);
-            aiAtk.declareAttackers(combat);
-            if (combat.getAttackers().isEmpty()) {
-                return false;
-            }
-        }
 
         // AI will only pay when it's not already payed and only opponents abilities
         if (alreadyPaid || (payers.size() > 1 && isMine)) {
