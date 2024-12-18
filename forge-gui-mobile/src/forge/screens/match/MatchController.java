@@ -744,8 +744,11 @@ public class MatchController extends AbstractGuiGame {
         return hostedMatch;
     }
 
-    @Override
-    public void showFullControl(PlayerView selected, Set<FullControlFlag> controlFlags) {
+    public void showFullControl(PlayerView selected, float x, float y) {
+        if (selected.isAI()) {
+            return;
+        }
+        Set<FullControlFlag> controlFlags = getGameView().getGame().getPlayer(selected).getController().getFullControl();
         FPopupMenu menu = new FPopupMenu() {
             @Override
             protected void buildMenu() {
@@ -761,7 +764,7 @@ public class MatchController extends AbstractGuiGame {
             }
         };
 
-        menu.show(getView(), getView().getPlayerPanel(selected).localToScreenX(0), getView().getPlayerPanel(selected).localToScreenY(0));        
+       menu.show(getView(), getView().getPlayerPanel(selected).localToScreenX(x), getView().getPlayerPanel(selected).localToScreenY(y));        
     }
 
     private FCheckBoxMenuItem getFullControlMenuEntry(String label, FullControlFlag flag, Set<FullControlFlag> controlFlags) {

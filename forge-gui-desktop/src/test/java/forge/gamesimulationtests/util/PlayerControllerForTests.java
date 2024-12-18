@@ -789,7 +789,6 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public List<CostPart> orderCosts(List<CostPart> costs) {
-        // TODO Auto-generated method stub
-        return null;
+        return costs;
     }
 }

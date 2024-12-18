@@ -19,6 +19,7 @@ package forge.screens.match;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -1523,8 +1524,11 @@ public final class CMatchUI
         }
     }
 
-    @Override
-    public void showFullControl(PlayerView pv, Set<FullControlFlag> controlFlags) {
+    public void showFullControl(PlayerView pv, MouseEvent e) {
+        if (pv.isAI()) {
+            return;
+        }
+        Set<FullControlFlag> controlFlags = getGameView().getGame().getPlayer(pv).getController().getFullControl();
         final String lblFullControl = Localizer.getInstance().getMessage("lblFullControl");
         final JPopupMenu menu = new JPopupMenu(lblFullControl);
         GuiUtils.addMenuItem(menu, lblFullControl, null, () -> {
@@ -1537,8 +1541,7 @@ public final class CMatchUI
         addFullControlEntry(menu, "lblNoFreeCombatCostHandling", FullControlFlag.NoFreeCombatCostHandling, controlFlags);
         addFullControlEntry(menu, "lblAllowPaymentStartWithMissingResources", FullControlFlag.AllowPaymentStartWithMissingResources, controlFlags);
 
-        Component parent = view.getControl().getFieldViewFor(pv).getAvatarArea();
-        menu.show(parent, parent.getX(), parent.getY());
+        menu.show(view.getControl().getFieldViewFor(pv).getAvatarArea(), e.getX(), e.getY());
     }
 
     private void addFullControlEntry(JPopupMenu menu, String label, FullControlFlag flag, Set<FullControlFlag> controlFlags) {

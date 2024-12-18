@@ -12,7 +12,6 @@ import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
-import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
@@ -28,7 +27,6 @@ import forge.util.ITriggerEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 
 public interface IGuiGame {
@@ -275,6 +273,4 @@ public interface IGuiGame {
     void clearAutoYields();
 
     void setCurrentPlayer(PlayerView player);
-
-    void showFullControl(PlayerView view, Set<FullControlFlag> controlFlags);
 }
