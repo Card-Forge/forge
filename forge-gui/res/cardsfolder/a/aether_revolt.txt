@@ -5,4 +5,5 @@ R:Event$ DamageDone | Revolt$ True | ActiveZones$ Battlefield | ValidSource$ Car
 SVar:DamageReplace:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ ReplaceCount$DamageAmount/Plus.2
 T:Mode$ CounterAddedOnce | ValidPlayer$ You | TriggerZones$ Battlefield | CounterType$ ENERGY | Execute$ TrigDealDamage | TriggerDescription$ Whenever you get one or more {E}, CARDNAME deals that much damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ TriggerCount$Amount
+DeckHints:Ability$Counters & Ability$Sacrifice
 Oracle:Revolt — As long as a permanent you controlled left the battlefield this turn, if a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.\nWhenever you get one or more {E}, Aether Revolt deals that much damage to any target.
