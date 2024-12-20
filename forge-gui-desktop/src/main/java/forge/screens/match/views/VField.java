@@ -102,7 +102,7 @@ public class VField implements IVDoc<CField> {
         if (p != null) { tab.setText(Localizer.getInstance().getMessage("lblPlayField", p.getName())); }
         else { tab.setText(Localizer.getInstance().getMessage("lblNoPlayerForEDocID", docID.toString())); }
 
-        detailsPanel = new PlayerDetailsPanel(player);
+        detailsPanel = new PlayerDetailsPanel(player, CMatchUI.FLOATING_ZONE_TYPES);
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12

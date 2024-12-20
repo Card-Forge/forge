@@ -419,43 +419,25 @@ public class PlayerView extends GameEntityView {
     public FCollectionView<CardView> getAnte() {
         return get(TrackableProperty.Ante);
     }
-    public int getAnteSize() {
-        return getZoneSize(TrackableProperty.Ante);
-    }
 
     public FCollectionView<CardView> getBattlefield() {
         return get(TrackableProperty.Battlefield);
-    }
-    public int getBattlefieldSize() {
-        return getZoneSize(TrackableProperty.Battlefield);
     }
 
     public FCollectionView<CardView> getCommand() {
         return get(TrackableProperty.Command);
     }
-    public int getCommandSize() {
-        return getZoneSize(TrackableProperty.Command);
-    }
 
     public FCollectionView<CardView> getExile() {
         return get(TrackableProperty.Exile);
-    }
-    public int getExileSize() {
-        return getZoneSize(TrackableProperty.Exile);
     }
 
     public FCollectionView<CardView> getFlashback() {
         return get(TrackableProperty.Flashback);
     }
-    public int getFlashbackSize() {
-        return getZoneSize(TrackableProperty.Flashback);
-    }
 
     public FCollectionView<CardView> getGraveyard() {
         return get(TrackableProperty.Graveyard);
-    }
-    public int getGraveyardSize() {
-        return getZoneSize(TrackableProperty.Graveyard);
     }
 
     public FCollectionView<CardView> getHand() {
@@ -468,15 +450,9 @@ public class PlayerView extends GameEntityView {
     public FCollectionView<CardView> getLibrary() {
         return get(TrackableProperty.Library);
     }
-    public int getLibrarySize() {
-        return getZoneSize(TrackableProperty.Library);
-    }
 
     public FCollectionView<CardView> getSideboard() {
         return get(TrackableProperty.Sideboard);
-    }
-    public int getSideboardSize() {
-        return getZoneSize(TrackableProperty.Sideboard);
     }
 
     public FCollectionView<CardView> getCards(final ZoneType zone) {
@@ -489,6 +465,11 @@ public class PlayerView extends GameEntityView {
     private int getZoneSize(TrackableProperty zoneProp) {
         TrackableCollection<CardView> cards = get(zoneProp);
         return cards == null ? 0 : cards.size();
+    }
+
+    public int getZoneSize(final ZoneType zone) {
+        TrackableProperty prop = getZoneProp(zone);
+        return prop == null ? 0 : getZoneSize(prop);
     }
 
     public int getZoneTypes(TrackableProperty zoneProp) {
@@ -555,6 +536,9 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Flashback, CardView.getCollection(p.getCardsIn(ZoneType.Flashback)));
     }
 
+    public int getMana(final int manaAtom) {
+        return getMana((byte) manaAtom);
+    }
     public int getMana(final byte color) {
         Integer count = null;
         try {

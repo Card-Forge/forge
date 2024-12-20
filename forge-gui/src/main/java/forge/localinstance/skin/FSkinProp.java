@@ -98,7 +98,7 @@ public enum FSkinProp {
     IMG_HDZONE_MANAPOOL  (new int[] {2, 6, 128, 128}, PropType.BUTTONS),
 
     //Some of these also serve as deck section icons in the deck builder.
-    IMG_ZONE_COMMAND     (new int[] {128, 384, 128, 128}, PropType.ZONES),
+    IMG_ZONE_COMMAND     (new int[] {384, 128, 128, 128}, PropType.ZONES),
     IMG_ZONE_AVATAR      (new int[] {0, 256, 128, 128}, PropType.ZONES),
     IMG_ZONE_SCHEME      (new int[] {128, 256, 128, 128}, PropType.ZONES),
     IMG_ZONE_PLANAR      (new int[] {256, 256, 128, 128}, PropType.ZONES),
@@ -620,7 +620,7 @@ public enum FSkinProp {
         return coords[3];
     }
 
-    public static Map<ManaCostShard, FSkinProp> SHARD_IMG = ImmutableMap.<ManaCostShard, FSkinProp>builder()
+    public static final Map<ManaCostShard, FSkinProp> SHARD_IMG = ImmutableMap.<ManaCostShard, FSkinProp>builder()
             .put(ManaCostShard.WHITE, IMG_MANA_W)
             .put(ManaCostShard.BLUE, IMG_MANA_U)
             .put(ManaCostShard.BLACK, IMG_MANA_B)
@@ -673,7 +673,7 @@ public enum FSkinProp {
 
             .build();
 
-    public static Map<String, FSkinProp> MANA_IMG = Maps.newHashMap();
+    public static final Map<String, FSkinProp> MANA_IMG = Maps.newHashMap();
     static {
         for (Map.Entry<ManaCostShard, FSkinProp> e : SHARD_IMG.entrySet()) {
             MANA_IMG.put(e.getKey().getImageKey(), e.getValue());

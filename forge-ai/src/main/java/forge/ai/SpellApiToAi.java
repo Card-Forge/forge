@@ -54,6 +54,7 @@ public enum SpellApiToAi {
             .put(ApiType.ChooseSector, AlwaysPlayAi.class)
             .put(ApiType.ChooseSource, ChooseSourceAi.class)
             .put(ApiType.ChooseType, ChooseTypeAi.class)
+            .put(ApiType.ClaimThePrize, AlwaysPlayAi.class)
             .put(ApiType.Clash, ClashAi.class)
             .put(ApiType.ClassLevelUp, ClassLevelUpAi.class)
             .put(ApiType.Cleanup, AlwaysPlayAi.class)

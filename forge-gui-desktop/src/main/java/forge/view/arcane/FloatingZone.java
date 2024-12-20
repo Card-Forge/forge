@@ -35,6 +35,7 @@ import forge.screens.match.CMatchUI;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
@@ -160,35 +161,7 @@ public class FloatingZone extends FloatingCardArea {
         window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); //pfps so that old content does not reappear?
         getScrollPane().setViewportView(this);
         setOpaque(false);
-        switch (zone0) {
-            case Exile:
-                window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_EXILE));
-                break;
-            case Graveyard:
-                window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_GRAVEYARD));
-                break;
-            case Hand:
-                window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_HAND));
-                break;
-            case Library:
-                window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_LIBRARY));
-                break;
-            case Flashback:
-                window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_FLASHBACK));
-                break;
-            case Command:
-                window.setIconImage(FSkin.getImage(FSkinProp.IMG_PLANESWALKER));
-                break;
-            case Ante:
-                window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_ANTE));
-                break;
-            case Sideboard:
-                window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_SIDEBOARD));
-                break;
-            default:
-                locPref = null;
-                break;
-        }
+        window.setIconImage(FSkin.getImage(PlayerDetailsPanel.iconFromZone(zone0)));
         zone = zone0;
         setPlayer(player0);
         setVertical(true);
