@@ -5,5 +5,5 @@ PT:4/3
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put a -1/-1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
-DeckHas:Ability$Counters
+DeckHas:Ability$Counters|LifeGain
 Oracle:Lifelink\nWhen Baleful Ammit enters, put a -1/-1 counter on target creature you control.

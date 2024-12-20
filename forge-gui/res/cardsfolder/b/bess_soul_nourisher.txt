@@ -10,5 +10,5 @@ SVar:X:Count$CardCounters.P1P1
 SVar:HasAttackEffect:TRUE
 SVar:BuffedBy:Creature.powerEQ1,Creature.toughnessEQ1
 DeckHas:Ability$Counters
-DeckHints:Type$Citizen
+DeckHints:Ability$Counters|Proliferate & Type$Citizen
 Oracle:Whenever one or more other creatures you control with base power and toughness 1/1 enter, put a +1/+1 counter on Bess, Soul Nourisher.\nWhenever Bess attacks, each other creature you control with base power and toughness 1/1 gets +X/+X until end of turn, where X is the number of +1/+1 counters on Bess.
