@@ -458,7 +458,7 @@ Schemes have been added to the Archenemy mode. This is a work in progress and th
 Quest Worlds:
 -------------
 
-This version allows you to travel between the regular quest world and the other worlds (Shandalar, Ravnica, Jamuraa, more may be added in the future) to get different duel opponents and challenges. You will have to complete your current challenges before traveling or you will lose them. 
+This version allows you to travel between the regular quest world and the other worlds (Shandalar, Ravnica, Jamuraa, more may be added in the future) to get different duel opponents and challenges. You will have to complete your current challenges before traveling or you will lose them.
 
 World-specific format enforcing and starting world selection are available. Something has to be done about locked (non-repeatable) challenges so they do not end up locking other challenges in different worlds.
 
@@ -524,7 +524,7 @@ From a technical perspective, the following sets are available to the player in 
 Jamuraa contains:
 - 81 opponent decks, broken down as follows: 13 'easy' decks, 17 'medium' decks, 31 'hard' decks, and 20 'very hard' decks.
 - 9 challenges, including the 4 demon planeswalkers (the 3 demon rulers and Lilith) and 5 other special scenarios set in Jamuraa. All challenges are repeatable. All are fairly hard, and the 4 demon challenges are especially fiendish.
-For the most part, the opponent duel and challenge decks are built with the same format restrictions as your own cardpool, and some of the easiest opponent decks were in fact based on a limited cardpool. But there will be exceptions, especially in the hard/very hard decks and challenges, which can be more like Vintage/T1 decks than pure Mirage + 5th Edition decks. There will be older cards here and there, and maybe even a random Tempest card or two (although these are extremely scarce!). 
+For the most part, the opponent duel and challenge decks are built with the same format restrictions as your own cardpool, and some of the easiest opponent decks were in fact based on a limited cardpool. But there will be exceptions, especially in the hard/very hard decks and challenges, which can be more like Vintage/T1 decks than pure Mirage + 5th Edition decks. There will be older cards here and there, and maybe even a random Tempest card or two (although these are extremely scarce!).
 Hint: if you find the later 'Vintage' opponent decks unfair or near-impossible to beat with your 5th Edition/Mirage block cards, you can Travel to Shandalar and collect some old power cards there, and then return to Jamuraa. Just remember to complete your challenges before traveling.
 
 Information on the quest worlds format can be found in this topic:
@@ -588,7 +588,7 @@ Work was also done on making the UI more keyboard-friendly. For example, the OK 
 Gatecrash Guild Sealed game mode:
 ---------------------------------
 
-Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards). 
+Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards).
 
 The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
 
@@ -827,9 +827,9 @@ The feature is half-complete now. Forge can read subfolders in constructed deck,
 
 
 === Forge now has a Menubar ===
-- Toggle visibility using the F1 key. 
-- The Forge menu contains Exit and Restart options. 
-- The Layout menu contains the selector for the various themes and a Set Window Size option. 
+- Toggle visibility using the F1 key.
+- The Forge menu contains Exit and Restart options.
+- The Layout menu contains the selector for the various themes and a Set Window Size option.
 - The Help menu contains links to online articles and the local TXT files.
 
 === Duel/Match Screen Changes ===
@@ -1187,7 +1187,7 @@ You can then construct large and very specific expressions to find exactly what 
     ("human" || "cat") && ("warrior" || "cleric" || "soldier")
 will find all humans or cats that are also warriors, clerics, or soldiers.
 
-More improvements are on their way in the next version of Forge, including removing the need for quotation marks and adding NOT operators. 
+More improvements are on their way in the next version of Forge, including removing the need for quotation marks and adding NOT operators.
 
 
 - Improved auto-yield support - 
@@ -1254,11 +1254,11 @@ When triggered abilities have only one valid target, that target will now be aut
 
 - AI improvements -
 Some artificial intelligence improvements were made in this version of Forge.
-The AI will now always attack with creatures that it has temporarily gained control of until end of turn in order not to miss the opportunity and thus waste the gain control spell. 
+The AI will now always attack with creatures that it has temporarily gained control of until end of turn in order not to miss the opportunity and thus waste the gain control spell.
 The AI will no longer bounce guild lands back to hand right after playing them, which sometimes caused the AI to lock itself on land drops completely.
-The AI will now try to predict if it wants to cast a spell in Main 2 and reserve some mana for it instead of aggressively pumping creatures with all available mana. 
-The AI will now also consider pumping a creature if it can predict that this creature will deal more damage to the opponent with its increased power, which should eliminate the senseless attacks with 0/1 creatures that do not get pumped even when they do not get blocked. 
-The AI will no longer waste equipment on cards that are useless (e.g. are tapped and do not normally untap, or can't attack or block anymore, etc.). 
+The AI will now try to predict if it wants to cast a spell in Main 2 and reserve some mana for it instead of aggressively pumping creatures with all available mana.
+The AI will now also consider pumping a creature if it can predict that this creature will deal more damage to the opponent with its increased power, which should eliminate the senseless attacks with 0/1 creatures that do not get pumped even when they do not get blocked.
+The AI will no longer waste equipment on cards that are useless (e.g. are tapped and do not normally untap, or can't attack or block anymore, etc.).
 The AI can now optionally move equipment from one creature to another. For this purpose, a new AI profile variable was added: MOVE_EQUIPMENT_TO_BETTER_CREATURES. It defines whether the AI will always move equipment to better creatures if it has mana ('always'), will only move if the currently equipped creature becomes useless as defined above or because the AI loses control of the creature ('from_useless_only'), or will never move equipment around ('never'). The "Default" profile is set to only move the equipment to other creatures if the currently equipped creatures become useless for the AI, while the "Reckless" AI profile always moves equipment to better creatures when given a chance to (if it has mana and if it doesn't need to reserve mana for a future spell in Main 2).
 
 
@@ -1310,7 +1310,7 @@ These examples should get you started with this powerful-now-that-it's-finished 
 
 
 - Trigger Fixes -
-The long awaited fixes to Blood Artist/Deathgreeter triggering with multiple other creatures is finally here. There may be some residual oddness with other triggers, so please report those if you see them so we can get that worked out. 
+The long awaited fixes to Blood Artist/Deathgreeter triggering with multiple other creatures is finally here. There may be some residual oddness with other triggers, so please report those if you see them so we can get that worked out.
 
 
 - New Floating Zone Windows -
@@ -1536,7 +1536,7 @@ It is now possible to simulate random AI vs. AI match outcome instead of playing
 
 
 - Incremental Updates and Fixes -
-This release features many bug fixes and general improvements. Multiple corner cases and card interactions were fixed or changed to conform to Magic: the Gathering rules more closely. For example, the damage subsystem has been rewritten to allow proper interaction with replacement effects and lifelink (e.g. Gisela, Blade of Goldnight + Kalitas, Traitor or Ghet or Ajani's Pridemate getting a counter from Kalitas, Traitor of Ghet dealing damage to multiple creatures via Chandra's Ignition). Splice onto Arcane has been reworked to make it more intuitive for the player and more rule compliant. 
+This release features many bug fixes and general improvements. Multiple corner cases and card interactions were fixed or changed to conform to Magic: the Gathering rules more closely. For example, the damage subsystem has been rewritten to allow proper interaction with replacement effects and lifelink (e.g. Gisela, Blade of Goldnight + Kalitas, Traitor or Ghet or Ajani's Pridemate getting a counter from Kalitas, Traitor of Ghet dealing damage to multiple creatures via Chandra's Ignition). Splice onto Arcane has been reworked to make it more intuitive for the player and more rule compliant.
 
 
 - AI Updates and New AI-Playable Cards -

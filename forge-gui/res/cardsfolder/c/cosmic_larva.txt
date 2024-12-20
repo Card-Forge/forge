@@ -3,6 +3,7 @@ ManaCost:1 R R
 Types:Creature Beast
 PT:7/6
 K:Trample
-K:UpkeepCost:Sac<2/Land>
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you sacrifice two lands.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Sac<2/Land>
 AI:RemoveDeck:All
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice Cosmic Larva unless you sacrifice two lands.

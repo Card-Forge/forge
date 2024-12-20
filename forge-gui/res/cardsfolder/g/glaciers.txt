@@ -1,7 +1,8 @@
 Name:Glaciers
 ManaCost:2 W U
 Types:Enchantment
-K:UpkeepCost:W U
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {W}{U}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ W U
 S:Mode$ Continuous | Affected$ Mountain | AddType$ Plains | RemoveLandTypes$ True | Description$ All Mountains are Plains.
 AI:RemoveDeck:Random
 Oracle:At the beginning of your upkeep, sacrifice Glaciers unless you pay {W}{U}.\nAll Mountains are Plains.
