@@ -56,25 +56,31 @@ public class ComputerUtilMana {
         return payManaCost(cost, sa, ai, true, true, effect);
     }
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
-        return payManaCost(sa, ai, true, extraMana, true, effect);
+        return canPayManaCost(sa.getPayCosts(), sa, ai, extraMana, effect);
+    }
+    public static boolean canPayManaCost(final Cost cost, final SpellAbility sa, final Player ai, final int extraMana, final boolean effect) {
+        return payManaCost(cost, sa, ai, true, extraMana, true, effect);
     }
 
     public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
         return payManaCost(cost, sa, ai, false, true, effect);
     }
     public static boolean payManaCost(final Player ai, final SpellAbility sa, final boolean effect) {
-        return payManaCost(sa, ai, false, 0, true, effect);
+        return payManaCost(sa.getPayCosts(), ai, sa, effect);
     }
-    private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, final boolean effect) {
-        ManaCostBeingPaid cost = calculateManaCost(sa, test, extraMana);
-        return payManaCost(cost, sa, ai, test, checkPlayable, effect);
+    public static boolean payManaCost(final Cost cost, final Player ai, final SpellAbility sa, final boolean effect) {
+        return payManaCost(cost, sa, ai, false, 0, true, effect);
+    }
+    private static boolean payManaCost(final Cost cost, final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable, final boolean effect) {
+        ManaCostBeingPaid manaCost = calculateManaCost(cost, sa, test, extraMana, effect);
+        return payManaCost(manaCost, sa, ai, test, checkPlayable, effect);
     }
 
     /**
      * Return the number of colors used for payment for Converge
      */
     public static int getConvergeCount(final SpellAbility sa, final Player ai) {
-        ManaCostBeingPaid cost = calculateManaCost(sa, true, 0);
+        ManaCostBeingPaid cost = calculateManaCost(sa.getPayCosts(), sa, true, 0, false);
         if (payManaCost(cost, sa, ai, true, true, false)) {
             return cost.getSunburst();
         }
@@ -86,7 +92,7 @@ public class ComputerUtilMana {
         if (ai == null || sa == null)
             return false;
         sa.setActivatingPlayer(ai);
-        return payManaCost(sa, ai, true, 0, false, false);
+        return payManaCost(sa.getPayCosts(), sa, ai, true, 0, false, false);
     }
 
     private static Integer scoreManaProducingCard(final Card card) {
@@ -1269,7 +1275,7 @@ public class ComputerUtilMana {
      * @param extraMana extraMana
      * @return ManaCost
      */
-    public static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
+    public static ManaCostBeingPaid calculateManaCost(final Cost cost, final SpellAbility sa, final boolean test, final int extraMana, final boolean effect) {
         Card card = sa.getHostCard();
         Zone castFromBackup = null;
         if (test && sa.isSpell() && !card.isInZone(ZoneType.Stack)) {
@@ -1277,16 +1283,16 @@ public class ComputerUtilMana {
             card.setCastFrom(card.getZone() != null ? card.getZone() : null);
         }
 
-        Cost payCosts = CostAdjustment.adjust(sa.getPayCosts(), sa);
+        Cost payCosts = CostAdjustment.adjust(cost, sa, effect);
         CostPartMana manapart = payCosts != null ? payCosts.getCostMana() : null;
         final ManaCost mana = payCosts != null ? ( manapart == null ? ManaCost.ZERO : manapart.getManaCostFor(sa) ) : ManaCost.NO_COST;
 
-        ManaCostBeingPaid cost = new ManaCostBeingPaid(mana);
+        ManaCostBeingPaid manaCost = new ManaCostBeingPaid(mana);
 
         // Tack xMana Payments into mana here if X is a set value
-        if (cost.getXcounter() > 0 || extraMana > 0) {
+        if (manaCost.getXcounter() > 0 || extraMana > 0) {
             int manaToAdd = 0;
-            int xCounter = cost.getXcounter();
+            int xCounter = manaCost.getXcounter();
             if (test && extraMana > 0) {
                 final int multiplicator = Math.max(xCounter, 1);
                 manaToAdd = extraMana * multiplicator;
@@ -1307,9 +1313,9 @@ public class ComputerUtilMana {
                 xColor = "WUBRGX";
             }
             if (xCounter > 0) {
-                cost.setXManaCostPaid(manaToAdd / xCounter, xColor);
+                manaCost.setXManaCostPaid(manaToAdd / xCounter, xColor);
             } else {
-                cost.increaseShard(ManaCostShard.parseNonGeneric(xColor), manaToAdd);
+                manaCost.increaseShard(ManaCostShard.parseNonGeneric(xColor), manaToAdd);
             }
 
             if (!test) {
@@ -1317,7 +1323,7 @@ public class ComputerUtilMana {
             }
         }
 
-        CostAdjustment.adjust(cost, sa, null, test);
+        CostAdjustment.adjust(manaCost, sa, null, test);
 
         if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
             ManaCost mkCost = sa.getPayCosts().getTotalMana();
@@ -1336,7 +1342,7 @@ public class ComputerUtilMana {
             sa.getHostCard().setCastFrom(castFromBackup);
         }
 
-        return cost;
+        return manaCost;
     }
 
     // This method can be used to estimate the total amount of mana available to the player,

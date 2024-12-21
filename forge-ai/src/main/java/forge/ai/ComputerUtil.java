@@ -239,9 +239,8 @@ public class ComputerUtil {
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
+            sa = GameActionUtil.addExtraKeywordCost(sa);
         }
-
-        sa = GameActionUtil.addExtraKeywordCost(sa);
 
         final Cost cost = sa.getPayCosts();
         final CostPayment pay = new CostPayment(cost, sa);
@@ -324,11 +323,10 @@ public class ComputerUtil {
         }
 
         final Card source = sa.getHostCard();
-        if (sa.isSpell() && !source.isCopiedSpell()) {
+        if (!effect && sa.isSpell() && !source.isCopiedSpell()) {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
+            sa = GameActionUtil.addExtraKeywordCost(sa);
         }
-
-        sa = GameActionUtil.addExtraKeywordCost(sa);
 
         final Cost cost = sa.getPayCosts();
         if (cost == null) {

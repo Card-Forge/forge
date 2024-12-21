@@ -527,6 +527,9 @@ public class ComputerUtilCost {
      * @return a boolean.
      */
     public static boolean canPayCost(final SpellAbility sa, final Player player, final boolean effect) {
+        return canPayCost(sa.getPayCosts(), sa, player, effect);
+    }
+    public static boolean canPayCost(final Cost cost, final SpellAbility sa, final Player player, final boolean effect) {
         if (sa.getActivatingPlayer() == null) {
             sa.setActivatingPlayer(player); // complaints on NPE had came before this line was added.
         }
@@ -535,50 +538,80 @@ public class ComputerUtilCost {
 
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
-        if (sa instanceof Spell) {
-            cannotBeCountered = !sa.isCounterableBy(null);
-            for (Card c : player.getGame().getCardsIn(ZoneType.Battlefield)) {
-                final String snem = c.getSVar("AI_SpellsNeedExtraMana");
-                if (!StringUtils.isBlank(snem)) {
-                    if (cannotBeCountered && c.getName().equals("Nether Void")) {
+        if (!effect) {
+            if (sa instanceof Spell) {
+                cannotBeCountered = !sa.isCounterableBy(null);
+                for (Card c : player.getGame().getCardsIn(ZoneType.Battlefield)) {
+                    final String snem = c.getSVar("AI_SpellsNeedExtraMana");
+                    if (!StringUtils.isBlank(snem)) {
+                        if (cannotBeCountered && c.getName().equals("Nether Void")) {
+                            continue;
+                        }
+                        String[] parts = TextUtil.split(snem, ' ');
+                        boolean meetsRestriction = parts.length == 1 || player.isValid(parts[1], c.getController(), c, sa);
+                        if(!meetsRestriction)
+                            continue;
+
+                        if (StringUtils.isNumeric(parts[0])) {
+                            extraManaNeeded += Integer.parseInt(parts[0]);
+                        } else {
+                            System.out.println("wrong SpellsNeedExtraMana SVar format on " + c);
+                        }
+                    }
+                }
+                for (Card c : player.getCardsIn(ZoneType.Command)) {
+                    if (cannotBeCountered) {
                         continue;
                     }
-                    String[] parts = TextUtil.split(snem, ' ');
-                    boolean meetsRestriction = parts.length == 1 || player.isValid(parts[1], c.getController(), c, sa);
-                    if(!meetsRestriction)
-                        continue;
-
-                    if (StringUtils.isNumeric(parts[0])) {
-                        extraManaNeeded += Integer.parseInt(parts[0]);
-                    } else {
-                        System.out.println("wrong SpellsNeedExtraMana SVar format on " + c);
+                    final String snem = c.getSVar("SpellsNeedExtraManaEffect");
+                    if (!StringUtils.isBlank(snem)) {
+                        if (StringUtils.isNumeric(snem)) {
+                            extraManaNeeded += Integer.parseInt(snem);
+                        } else {
+                            System.out.println("wrong SpellsNeedExtraManaEffect SVar format on " + c);
+                        }
                     }
                 }
             }
-            for (Card c : player.getCardsIn(ZoneType.Command)) {
-                if (cannotBeCountered) {
-                    continue;
-                }
-                final String snem = c.getSVar("SpellsNeedExtraManaEffect");
-                if (!StringUtils.isBlank(snem)) {
-                    if (StringUtils.isNumeric(snem)) {
-                        extraManaNeeded += Integer.parseInt(snem);
-                    } else {
-                        System.out.println("wrong SpellsNeedExtraManaEffect SVar format on " + c);
+
+            // Try not to lose Planeswalker if not threatened
+            if (sa.isPwAbility()) {
+                for (final CostPart part : cost.getCostParts()) {
+                    if (part instanceof CostRemoveCounter) {
+                        if (part.convertAmount() != null && part.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {
+                            // refuse to pay if opponent has no creature threats or
+                            // 50% chance otherwise
+                            if (player.getOpponents().getCreaturesInPlay().isEmpty()
+                                    || MyRandom.getRandom().nextFloat() < .5f) {
+                                return false;
+                            }
+                        }
                     }
                 }
             }
-        }
 
-        // Try not to lose Planeswalker if not threatened
-        if (sa.isPwAbility()) {
-            for (final CostPart part : sa.getPayCosts().getCostParts()) {
-                if (part instanceof CostRemoveCounter) {
-                    if (part.convertAmount() != null && part.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {
-                        // refuse to pay if opponent has no creature threats or
-                        // 50% chance otherwise
-                        if (player.getOpponents().getCreaturesInPlay().isEmpty()
-                                || MyRandom.getRandom().nextFloat() < .5f) {
+            // Ward - will be accounted for when rechecking a targeted ability
+            if (!sa.isTrigger() && (!sa.isSpell() || !cannotBeCountered)) {
+                for (TargetChoices tc : sa.getAllTargetChoices()) {
+                    for (Card tgt : tc.getTargetCards()) {
+                        if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
+                            Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                            if (wardCost.hasManaCost()) {
+                                extraManaNeeded += wardCost.getTotalMana().getCMC();
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Bail early on Casualty in case there are no cards that would make sense to pay with
+            if (sa.getHostCard().hasKeyword(Keyword.CASUALTY)) {
+                for (final CostPart part : cost.getCostParts()) {
+                    if (part instanceof CostSacrifice) {
+                        CardCollection valid = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
+                                sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                        valid = CardLists.filter(valid, CardPredicates.hasSVar("AIDontSacToCasualty").negate());
+                        if (valid.isEmpty()) {
                             return false;
                         }
                     }
@@ -586,36 +619,8 @@ public class ComputerUtilCost {
             }
         }
 
-        // Ward - will be accounted for when rechecking a targeted ability
-        if (!sa.isTrigger() && (!sa.isSpell() || !cannotBeCountered)) {
-            for (TargetChoices tc : sa.getAllTargetChoices()) {
-                for (Card tgt : tc.getTargetCards()) {
-                    if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
-                        Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
-                        if (wardCost.hasManaCost()) {
-                            extraManaNeeded += wardCost.getTotalMana().getCMC();
-                        }
-                    }
-                }
-            }
-        }
-
-        // Bail early on Casualty in case there are no cards that would make sense to pay with
-        if (sa.getHostCard().hasKeyword(Keyword.CASUALTY)) {
-            for (final CostPart part : sa.getPayCosts().getCostParts()) {
-                if (part instanceof CostSacrifice) {
-                    CardCollection valid = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
-                            sa.getActivatingPlayer(), sa.getHostCard(), sa);
-                    valid = CardLists.filter(valid, CardPredicates.hasSVar("AIDontSacToCasualty").negate());
-                    if (valid.isEmpty()) {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded, effect)
-                && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, effect);
+        return ComputerUtilMana.canPayManaCost(cost, sa, player, extraManaNeeded, effect)
+                && CostPayment.canPayAdditionalCosts(cost, sa, effect);
     }
 
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {
