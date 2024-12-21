@@ -233,7 +233,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
 
         if (c.hasSVar("EndOfTurnLeavePlay")) {
             value -= subValue(50, "eot-leaves");
-        } else if (c.isInPlay()) {
+        } else {
             for (Trigger t : c.getTriggers()) {
                 if (!TriggerType.Phase.equals(t.getMode())) {
                     continue;
@@ -271,19 +271,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                     }
                     value -= subValue(20, "sac-unless");
                 }
-            }
-        } else {
-            if (c.hasKeyword(Keyword.CUMULATIVE_UPKEEP)) {
-                value -= subValue(30, "cupkeep");
-            } else if (c.hasKeyword(Keyword.ECHO) && c.cameUnderControlSinceLastUpkeep()) {
-                value -= subValue(10, "echo-unpaid");
-            }
-
-            if (c.hasKeyword(Keyword.FADING)) {
-                value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.FADE))), "fading");
-            }
-            if (c.hasKeyword(Keyword.VANISHING)) {
-                value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.TIME))), "vanishing");
             }
         }
 
