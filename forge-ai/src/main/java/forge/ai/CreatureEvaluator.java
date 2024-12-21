@@ -11,6 +11,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustAttack;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 
 import java.util.List;
 import java.util.function.Function;
@@ -224,30 +226,53 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         } else {
             value -= subValue(10 * c.getCounters(CounterEnumType.STUN), "stunned");
         }
-        if (c.hasSVar("EndOfTurnLeavePlay")) {
-            value -= subValue(50, "eot-leaves");
-        } else if (c.hasKeyword(Keyword.CUMULATIVE_UPKEEP)) {
-            value -= subValue(30, "cupkeep");
-        } else if (c.hasStartOfKeyword("UpkeepCost")) {
-            value -= subValue(20, "sac-unless");
-        } else if (c.hasKeyword(Keyword.ECHO) && c.cameUnderControlSinceLastUpkeep()) {
-            value -= subValue(10, "echo-unpaid");
-        }
-        if (c.hasKeyword(Keyword.FADING)) {
-            value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.FADE))), "fading");
-        }
-        if (c.hasKeyword(Keyword.VANISHING)) {
-            value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.TIME))), "vanishing");
-        }
         // use scaling because the creature is only available halfway
         if (c.hasKeyword(Keyword.PHASING)) {
             value -= subValue(Math.max(20, value / 2), "phasing");
         }
 
-        // TODO no longer a KW
-        if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
-            value -= subValue(20, "upkeep-dmg");
-        } 
+        if (c.hasSVar("EndOfTurnLeavePlay")) {
+            value -= subValue(50, "eot-leaves");
+        } else {
+            for (Trigger t : c.getTriggers()) {
+                if (!TriggerType.Phase.equals(t.getMode())) {
+                    continue;
+                }
+                if (!"Upkeep".equals(t.getParam("Phase"))) {
+                    continue;
+                }
+
+                if (t.isKeyword(Keyword.CUMULATIVE_UPKEEP)) {
+                    value -= subValue(30, "cupkeep");
+                } else if (t.isKeyword(Keyword.ECHO) && c.cameUnderControlSinceLastUpkeep()) {
+                    value -= subValue(10, "echo-unpaid");
+                }
+                if (t.isKeyword(Keyword.FADING)) {
+                    value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.FADE))), "fading");
+                }
+                if (t.isKeyword(Keyword.VANISHING)) {
+                    value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.TIME))), "vanishing");
+                }
+
+                SpellAbility ab = t.ensureAbility();
+                if (ab == null) {
+                    continue;
+                }
+                if (ApiType.DealDamage.equals(ab.getApi())) {
+                    if (!"You".equals(ab.getParamOrDefault("Defined", "You"))) {
+                        continue;
+                    }
+                    if (c.getController().canLoseLife()) {
+                        value -= subValue(20, "upkeep-dmg");
+                    }
+                } else if (ApiType.Sacrifice.equals(ab.getApi())) {
+                    if (!ab.hasParam("UnlessCost")) {
+                        continue;
+                    }
+                    value -= subValue(20, "sac-unless");
+                }
+            }
+        }
 
         // card-specific evaluation modifier
         if (c.hasSVar("AIEvaluationModifier")) {

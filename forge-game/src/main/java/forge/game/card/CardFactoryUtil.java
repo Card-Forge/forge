@@ -1942,29 +1942,6 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
             inst.addTrigger(parsedTrigger);
-        } else if (keyword.startsWith("UpkeepCost")) {
-            final String[] k = keyword.split(":");
-            final Cost cost = new Cost(k[1], true);
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("At the beginning of your upkeep, sacrifice CARDNAME unless you ");
-            if (cost.isOnlyManaCost()) {
-                sb.append("pay ");
-            }
-            final String costStr = k.length == 3 ? k[2] : cost.toSimpleString();
-
-            sb.append(costStr.substring(0, 1).toLowerCase()).append(costStr.substring(1));
-            sb.append(".");
-
-            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | " +
-                    "TriggerDescription$ " + sb.toString();
-
-            String effect = "DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ " + k[1];
-
-            final Trigger parsedTrigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
-            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-
-            inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Vanishing")) {
             // Remove Time counter trigger
             final StringBuilder upkeepTrig = new StringBuilder("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | " +
