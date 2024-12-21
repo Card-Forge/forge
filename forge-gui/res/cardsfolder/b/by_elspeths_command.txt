@@ -8,6 +8,6 @@ SVar:PumpHand:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Soldier.YouOwn | Choi
 SVar:DBPump:DB$ Pump | Defined$ ChosenCard | PumpZone$ Hand | KW$ Vigilance | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:Token:DB$ Token | TokenScript$ c_1_1_a_soldier | SpellDescription$ Create a 1/1 colorless Soldier artifact creature token.
-DeckHas:Ability$Token & Type$Artifact|Soldier
+DeckHas:Ability$Token
 DeckHints:Type$Soldier
 Oracle:At the beginning of combat on your turn, choose one that wasn't chosen during your last combat —\n• Up to one target Soldier perpetually gets +1/+1 and gains flying.\n• Choose a Soldier card in your hand. It perpetually gets +1/+1 and gains vigilance.\n• Create a 1/1 colorless Soldier artifact creature token.
