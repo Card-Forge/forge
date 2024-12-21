@@ -8,5 +8,5 @@ SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. It gains trample and haste until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample & Haste | StackDescription$ None
 SVar:DBPowerstone:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone | SpellDescription$ Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
-DeckHas:Ability$Counters|Token & Type$Artifact
+DeckHas:Ability$Counters|Token
 Oracle:When Arbalest Engineers enters, choose one —\n• Arbalest Engineers deals 1 damage to any target.\n• Put a +1/+1 counter on target creature. It gains trample and haste until end of turn.\n• Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

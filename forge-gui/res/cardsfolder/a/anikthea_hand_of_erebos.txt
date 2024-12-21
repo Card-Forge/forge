@@ -10,7 +10,7 @@ SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Enchantment.nonAura+YouCtrl | Origin$
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 3 | SetToughness$ 3 | AddTypes$ Creature & Zombie | SetColor$ Black | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Token|Graveyard
-DeckHints:Ability$Graveyard|Mill
+DeckHas:Ability$Token|Graveyard & Type$Zombie
+DeckHints:Ability$Graveyard|Mill|Discard|Sacrifice
 DeckNeeds:Type$Enchantment
 Oracle:Menace\nOther enchantment creatures you control have menace.\nWhenever Anikthea enters or attacks, exile up to one target non-Aura enchantment card from your graveyard. Create a token that's a copy of that card, except it's a 3/3 black Zombie creature in addition to its other types.
