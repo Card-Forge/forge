@@ -75,8 +75,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells,
-            Map<String, Object> params) {
+    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells, Map<String, Object> params) {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String logic = sa.getParam("AILogic");
@@ -94,10 +93,8 @@ public class ChooseGenericAi extends SpellAbilityAi {
                 String unlessCost = sp.getParam("UnlessCost");
                 sp.setActivatingPlayer(sa.getActivatingPlayer());
                 Cost unless = new Cost(unlessCost, false);
-                SpellAbility paycost = new SpellAbility.EmptySa(sa.getHostCard(), player);
-                paycost.setPayCosts(unless);
                 if (SpellApiToAi.Converter.get(sp.getApi()).willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
-                        && ComputerUtilCost.canPayCost(paycost, player, true)) {
+                        && ComputerUtilCost.canPayCost(unless, sp, player, true)) {
                     return sp;
                 }
             }

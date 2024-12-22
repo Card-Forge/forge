@@ -553,14 +553,7 @@ public class DrawAi extends SpellAbilityAi {
     @Override
     public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         final Card host = sa.getHostCard();
-
-        // TODO better logic for Indulgent Tormentor
         final String aiLogic = sa.getParam("UnlessAI");
-        if ("Never".equals(aiLogic)) { return false; }
-
-        if (alreadyPaid && payers.size() > 1) {
-            return false;
-        }
 
         if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
             return false;
@@ -574,21 +567,11 @@ public class DrawAi extends SpellAbilityAi {
                 }
                 if (cost.hasSpecificCostType(CostDamage.class)) {
                     if (!payer.canLoseLife()) {
-                        return true;
+                        continue;
                     }
                     final CostDamage pay = cost.getCostPartByType(CostDamage.class);
                     int realDamage = ComputerUtilCombat.predictDamageTo(payer, pay.getAbilityAmount(sa), host, false);
                     if (payer.getLife() < realDamage * 2) {
-                        return false;
-                    }
-                }
-                if (cost.hasSpecificCostType(CostPayLife.class)) {
-                    if (!ComputerUtilCost.checkLifeCost(payer, cost, host, 4, sa)) {
-                        return false;
-                    }
-                }
-                if (cost.hasSpecificCostType(CostSacrifice.class)) {
-                    if (!ComputerUtilCost.checkSacrificeCost(payer, cost, host, sa, false)) {
                         return false;
                     }
                 }

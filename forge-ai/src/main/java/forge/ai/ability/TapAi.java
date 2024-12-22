@@ -91,7 +91,6 @@ public class TapAi extends TapAiBase {
 
     @Override
     public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
-
         // Check for shocklands and similar ETB replacement effects
         if (sa.hasParam("ETB")) {
             final Card source = sa.getHostCard();
