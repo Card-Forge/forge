@@ -836,14 +836,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
-        // TODO replace with EmptySa
-        final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
-        ability.setActivatingPlayer(c.getController());
-        ability.setCardState(sa.getCardState());
-
-        if (ComputerUtil.playNoStack(c.getController(), ability, getGame(), true)) {
-            // transfer this info for Balduvian Fallen
-            sa.setPayingMana(ability.getPayingMana());
+        if (ComputerUtil.playNoStack(c.getController(), sa, getGame(), true)) {
             return true;
         }
         return false;

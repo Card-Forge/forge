@@ -21,7 +21,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
-import forge.game.player.PlayerController.ManaPaymentPurpose;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -42,8 +42,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     && activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPayEcho") + " {0}?", null)) {
                 isPaid = true;
             } else {
-                isPaid = activator.getController().payManaOptional(host, new Cost(sa.getParam("Echo"), true),
-                    sa, Localizer.getInstance().getMessage("lblPayEcho"), ManaPaymentPurpose.Echo);
+                isPaid = activator.getController().payCostToPreventEffect(new Cost(sa.getParam("Echo"), true), sa, false, new PlayerCollection(activator));
             }
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
             runParams.put(AbilityKey.EchoPaid, isPaid);
@@ -66,10 +65,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
             game.updateLastStateForCard(host);
 
-            StringBuilder sb = new StringBuilder();
-            sb.append("Cumulative upkeep for ").append(host);
-
-            boolean isPaid = activator.getController().payManaOptional(host, payCost, sa, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
+            boolean isPaid = activator.getController().payCostToPreventEffect(payCost, sa, false, new PlayerCollection(activator));
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
             runParams.put(AbilityKey.CumulativeUpkeepPaid, isPaid);
             runParams.put(AbilityKey.PayingMana, StringUtils.join(sa.getPayingMana(), ""));
