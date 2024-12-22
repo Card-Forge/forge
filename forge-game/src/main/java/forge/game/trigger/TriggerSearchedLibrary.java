@@ -17,7 +17,6 @@
  */
 package forge.game.trigger;
 
-import java.util.List;
 import java.util.Map;
 
 import forge.game.ability.AbilityKey;
@@ -60,9 +59,8 @@ public class TriggerSearchedLibrary extends Trigger {
             return false;
         }
         if (hasParam("SearchOwnLibrary")) {
-            @SuppressWarnings("unchecked")
-            List<Player> targets = (List<Player>) runParams.get(AbilityKey.Target);
-            if (!targets.contains(runParams.get(AbilityKey.Player))) {
+            Player target = (Player) runParams.get(AbilityKey.Target);
+            if (!target.equals(runParams.get(AbilityKey.Player))) {
                 return false;
             }
         }

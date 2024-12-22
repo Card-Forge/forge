@@ -22,7 +22,6 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-
         return Lang.joinHomogenous(getTargetPlayers(sa)) + " names a card.";
     }
 
@@ -58,21 +57,6 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 continue;
             }
             String chosen;
-            //This section was used for Momir Avatar, which no longer uses it - commented out 7/28/2021
-            //if (randomChoice) {
-            //String numericAmount = "X";
-            //final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
-            //    AbilityUtils.calculateAmount(host, numericAmount, sa);
-            // Momir needs PaperCard
-            //Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
-            //Predicate<PaperCard> cpp = Predicates.and(
-            //    Predicates.compose(CardRulesPredicates.IS_CREATURE, PaperCard.FN_GET_RULES),
-            //    Predicates.compose(CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount), PaperCard.FN_GET_RULES));
-            //cards = Lists.newArrayList(Iterables.filter(cards, cpp));
-            //if (!cards.isEmpty()) { chosen = Aggregates.random(cards).getName();
-            //} else {
-            //    chosen = "";
-            //}
             if (chooseFromDefined) {
                 CardCollection choices = AbilityUtils.getDefinedCards(host, sa.getParam("ChooseFromDefinedCards"), sa);
                 choices = CardLists.getValidCards(choices, valid, host.getController(), host, sa);

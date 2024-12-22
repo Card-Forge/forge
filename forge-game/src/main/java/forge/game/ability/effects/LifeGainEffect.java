@@ -26,7 +26,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
 
         sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
         if (sb.length() == 0 && spellDesc != null) {
-            return (spellDesc);
+            return spellDesc;
         } else {
             sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ");
             if (!StringUtils.isNumeric(amountStr) && spellDesc != null && spellDesc.contains("life equal to")) {

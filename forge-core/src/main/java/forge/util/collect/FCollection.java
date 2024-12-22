@@ -549,17 +549,17 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
 
     @Override
     public Stream<T> stream() {
-            return list.stream();
+        return list.stream();
     }
 
     @Override
     public boolean anyMatch(Predicate<? super T> test) {
-            return set.stream().anyMatch(test);
+        return set.stream().anyMatch(test);
     }
 
     @Override
     public boolean allMatch(Predicate<? super T> test) {
-            return set.stream().allMatch(test);
+        return set.stream().allMatch(test);
     }
 
     /**

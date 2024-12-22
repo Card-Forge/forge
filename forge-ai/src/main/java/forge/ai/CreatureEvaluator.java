@@ -248,10 +248,10 @@ public class CreatureEvaluator implements Function<Card, Integer> {
                     value -= subValue(10, "echo-unpaid");
                 }
                 if (t.isKeyword(Keyword.FADING)) {
-                    value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.FADE))), "fading");
+                    value -= subValue(20 / (Math.max(1, c.isInPlay() ? c.getCounters(CounterEnumType.FADE) : c.getKeywordMagnitude(Keyword.FADING))), "fading");
                 }
                 if (t.isKeyword(Keyword.VANISHING)) {
-                    value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.TIME))), "vanishing");
+                    value -= subValue(20 / (Math.max(1, c.isInPlay() ? c.getCounters(CounterEnumType.TIME) : c.getKeywordMagnitude(Keyword.VANISHING))), "vanishing");
                 }
 
                 SpellAbility ab = t.ensureAbility();
