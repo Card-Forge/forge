@@ -18,7 +18,6 @@
 package forge.ai;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.AiCardMemory.MemorySet;
@@ -64,6 +63,7 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.concurrent.CompletableFuture;
@@ -2210,8 +2210,6 @@ public class AiController {
             return activePlayerSAs;
         }
 
-        List<SpellAbility> result = Lists.newArrayList();
-
         // filter list by ApiTypes
         List<SpellAbility> discard = filterListByApi(activePlayerSAs, ApiType.Discard);
         List<SpellAbility> mandatoryDiscard = filterList(discard, SpellAbilityPredicates.isMandatory());
@@ -2227,37 +2225,33 @@ public class AiController {
         List<SpellAbility> pump = filterListByApi(activePlayerSAs, ApiType.Pump);
         List<SpellAbility> pumpAll = filterListByApi(activePlayerSAs, ApiType.PumpAll);
 
+        List<SpellAbility> result = Lists.newArrayList(activePlayerSAs);
+
         // do mandatory discard early if hand is empty or has DiscardMe card
-        boolean discardEarly = false;
         CardCollectionView playerHand = player.getCardsIn(ZoneType.Hand);
-        if (playerHand.isEmpty() || playerHand.anyMatch(CardPredicates.hasSVar("DiscardMe"))) {
-            discardEarly = true;
+        if (!playerHand.isEmpty() && !playerHand.anyMatch(CardPredicates.hasSVar("DiscardMe"))) {
             result.addAll(mandatoryDiscard);
+            mandatoryDiscard.clear();
         }
 
-        // token should be added first so they might get the pump bonus
-        result.addAll(token);
-        result.addAll(pump);
-        result.addAll(pumpAll);
-
-        // do Evolve Trigger before other PutCounter SpellAbilities
-        // do putCounter before Draw/Discard because it can cause a Draw Trigger
-        result.addAll(evolve);
-        result.addAll(putCounter);
-        result.addAll(putCounterAll);
-
+        // optional Discard, probably combined with Draw
+        result.addAll(discard);
         // do Draw before Discard
         result.addAll(draw);
-        result.addAll(discard); // optional Discard, probably combined with Draw
 
-        if (!discardEarly) {
-            result.addAll(mandatoryDiscard);
-        }
+        result.addAll(putCounterAll);
+        // do putCounter before Draw/Discard because it can cause a Draw Trigger
+        result.addAll(putCounter);
+        // do Evolve Trigger before other PutCounter SpellAbilities
+        result.addAll(evolve);
 
-        result.addAll(activePlayerSAs);
+        // token should be added first so they might get the pump bonus
+        result.addAll(pumpAll);
+        result.addAll(pump);
+        result.addAll(token);
 
-        //need to reverse because of magic stack
-        Collections.reverse(result);
+        result.addAll(mandatoryDiscard);
+
         return result;
     }
 
@@ -2269,6 +2263,10 @@ public class AiController {
     }
 
     // TODO move to more common place
+    public static <T extends TriggerReplacementBase> List<T> filterList(List<T> input, Function<SpellAbility, Object> pred, Object value) {
+        return filterList(input, trb -> pred.apply(trb.ensureAbility()) == value);
+    }
+
     public static List<SpellAbility> filterListByApi(List<SpellAbility> input, ApiType type) {
         return filterList(input, SpellAbilityPredicates.isApi(type));
     }
@@ -2305,12 +2303,11 @@ public class AiController {
     public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> list) {
         // no need to choose anything
         if (list.size() <= 1) {
-            return Iterables.getFirst(list, null);
+            return list.get(0);
         }
 
-        ReplacementType mode = Iterables.getFirst(list, null).getMode();
+        ReplacementType mode = list.get(0).getMode();
 
-        // replace lifegain effects
         if (mode.equals(ReplacementType.GainLife)) {
             List<ReplacementEffect> noGain = filterListByAiLogic(list, "NoLife");
             List<ReplacementEffect> loseLife = filterListByAiLogic(list, "LoseLife");
@@ -2319,16 +2316,16 @@ public class AiController {
 
             if (!noGain.isEmpty()) {
                 // no lifegain is better than lose life
-                return Iterables.getFirst(noGain, null);
+                return noGain.get(0);
             } else if (!loseLife.isEmpty()) {
                 // lose life before double life to prevent lose double
-                return Iterables.getFirst(loseLife, null);
+                return loseLife.get(0);
             } else if (!lichDraw.isEmpty()) {
                 // lich draw before double life to prevent to draw to much
-                return Iterables.getFirst(lichDraw, null);
+                return lichDraw.get(0);
             } else if (!doubleLife.isEmpty()) {
                 // other than that, do double life
-                return Iterables.getFirst(doubleLife, null);
+                return doubleLife.get(0);
             }
         } else if (mode.equals(ReplacementType.DamageDone)) {
             List<ReplacementEffect> prevention = filterList(list, CardTraitPredicates.hasParam("Prevent"));
@@ -2336,7 +2333,7 @@ public class AiController {
             // TODO when Protection is done as ReplacementEffect do them
             // before normal prevention
             if (!prevention.isEmpty()) {
-                return Iterables.getFirst(prevention, null);
+                return prevention.get(0);
             }
         } else if (mode.equals(ReplacementType.Destroy)) {
             List<ReplacementEffect> shield = filterList(list, CardTraitPredicates.hasParam("ShieldCounter"));
@@ -2346,30 +2343,35 @@ public class AiController {
 
             // Indestructible umbra armor is the best
             if (!umbraArmorIndestructible.isEmpty()) {
-                return Iterables.getFirst(umbraArmorIndestructible, null);
+                return umbraArmorIndestructible.get(0);
             }
 
             // then it might be better to remove shield counter if able?
             if (!shield.isEmpty()) {
-                return Iterables.getFirst(shield, null);
+                return shield.get(0);
             }
 
             // TODO get the RunParams for Affected to check if the creature already dealt combat damage for Regeneration effects
             // is using a Regeneration Effect better than using a Umbra Armor?
             if (!regeneration.isEmpty()) {
-                return Iterables.getFirst(regeneration, null);
+                return regeneration.get(0);
             }
 
             if (!umbraArmor.isEmpty()) {
                 // sort them by cmc
                 umbraArmor.sort(Comparator.comparing(CardTraitBase::getHostCard, Comparator.comparing(Card::getCMC)));
-                return Iterables.getFirst(umbraArmor, null);
+                return umbraArmor.get(0);
+            }
+        } else if (mode.equals(ReplacementType.Draw)) {
+            List<ReplacementEffect> winGame = filterList(list, SpellAbility::getApi, ApiType.WinsGame);
+            if (!winGame.isEmpty()) {
+                return winGame.get(0);
             }
         }
 
         // TODO always lower counters with Vorinclex first, might turn it from 1 to 0 as final
 
-        return Iterables.getFirst(list, null);
+        return list.get(0);
     }
 
 }

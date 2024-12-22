@@ -65,7 +65,7 @@ public class DrawEffect extends SpellAbilityEffect {
 
         final List<Player> tgts = getTargetPlayersWithDuplicates(true, "Defined", sa);
 
-        for (final Player p : Sets.newHashSet(tgts)) {
+        for (final Player p : Sets.newLinkedHashSet(tgts)) {
             if (!p.isInGame()) {
                 continue;
             }

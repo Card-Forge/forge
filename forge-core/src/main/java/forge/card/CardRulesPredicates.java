@@ -253,7 +253,7 @@ public final class CardRulesPredicates {
     }
 
     public static Predicate<CardRules> canBePartnerCommanderWith(final CardRules commander) {
-        return (rules) -> rules.canBePartnerCommanders(commander);
+        return rules -> rules.canBePartnerCommanders(commander);
     }
 
     private static class LeafString extends PredicateString<CardRules> {
