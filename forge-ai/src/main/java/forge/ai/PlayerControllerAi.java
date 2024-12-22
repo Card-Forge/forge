@@ -1367,7 +1367,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
-        return ComputerUtilMana.payManaCost(player, sa, effect);
+        return ComputerUtilMana.payManaCost(new Cost(toPay, effect), player, sa, effect);
     }
 
     @Override
