@@ -65,9 +65,6 @@ public class ComputerUtilMana {
     public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean effect) {
         return payManaCost(cost, sa, ai, false, true, effect);
     }
-    public static boolean payManaCost(final Player ai, final SpellAbility sa, final boolean effect) {
-        return payManaCost(sa.getPayCosts(), ai, sa, effect);
-    }
     public static boolean payManaCost(final Cost cost, final Player ai, final SpellAbility sa, final boolean effect) {
         return payManaCost(cost, sa, ai, false, 0, true, effect);
     }
