@@ -98,7 +98,7 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
         // as well as the current card attachments that are visually located next to the requested card or are assumed to be near it.
         Player controller = c.getController();
         ArrayList<Card> attachments = Lists.newArrayList();
-        ArrayList<Card> cardsOTB = Lists.newArrayList(CardLists.filter(
+        CardCollection cardsOTB = CardLists.filter(
                 controller.getCardsIn(ZoneType.Battlefield), card -> {
                     if (card.isAttachedToEntity(c)) {
                         attachments.add(card);
@@ -114,7 +114,7 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
                     }
                     return card.sharesCardTypeWith(c);
                 }
-        ));
+        );
 
         // Chance to hit an attachment
         float hitAttachment = 0.50f;

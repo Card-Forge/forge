@@ -252,7 +252,7 @@ public class AbilityManaPart implements java.io.Serializable {
         eff.setColor(MagicColor.COLORLESS);
         eff.setGamePieceType(GamePieceType.EFFECT);
 
-        String cantcounterstr = "Event$ Counter | ValidCard$ Card.IsRemembered | Description$ That spell can't be countered.";
+        String cantcounterstr = "Event$ Counter | ValidSA$ Spell.IsRemembered | Description$ That spell can't be countered.";
         ReplacementEffect re = ReplacementHandler.parseReplacement(cantcounterstr, eff, true);
         re.setLayer(ReplacementLayer.CantHappen);
         eff.addReplacementEffect(re);

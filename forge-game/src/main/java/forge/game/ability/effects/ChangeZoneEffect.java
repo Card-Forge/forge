@@ -880,13 +880,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private void changeHiddenOriginResolve(final SpellAbility sa) {
-        List<Player> fetchers;
-
-        if (sa.hasParam("DefinedPlayer")) {
-            fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
-        } else {
-            fetchers = Lists.newArrayList(sa.getActivatingPlayer());
-        }
+        List<Player> fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
 
         Player chooser = null;
         if (sa.hasParam("Chooser")) {
@@ -1059,7 +1053,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     handleCastWhileSearching(fetchList, decider);
                 }
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
-                runParams.put(AbilityKey.Target, Lists.newArrayList(player));
+                runParams.put(AbilityKey.Target, player);
                 game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
             }
             if (searchedLibrary && sa.hasParam("Searched")) {
