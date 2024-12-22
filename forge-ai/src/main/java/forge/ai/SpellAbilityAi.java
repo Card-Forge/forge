@@ -326,9 +326,6 @@ public abstract class SpellAbilityAi {
             return false;
         }
 
-        // AI was crashing because the blank ability used to pay costs
-        // Didn't have any of the data on the original SA to pay dependant costs
-
         return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
                 && ComputerUtilCost.checkDamageCost(payer, cost, source, 4, sa)
                 && (isMine || ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa))
