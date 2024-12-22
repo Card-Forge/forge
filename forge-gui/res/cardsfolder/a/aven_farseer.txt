@@ -5,4 +5,5 @@ PT:1/1
 K:Flying
 T:Mode$ TurnFaceUp | ValidCard$ Permanent | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent is turned face up, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
 Oracle:Flying\nWhenever a permanent is turned face up, put a +1/+1 counter on Aven Farseer.
