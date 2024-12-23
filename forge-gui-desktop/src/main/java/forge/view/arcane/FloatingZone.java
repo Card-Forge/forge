@@ -30,7 +30,6 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;

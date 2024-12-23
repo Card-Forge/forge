@@ -6,7 +6,6 @@ import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
