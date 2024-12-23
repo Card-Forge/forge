@@ -27,5 +27,5 @@ Variant:D:PT:3/3
 Variant:D:K:Cascade
 Variant:D:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll | TriggerDescription$ When CARDNAME enters, roll a six-sided die. CARDNAME deals damage equal to the result to target opponent or planeswalker.
 Variant:D:SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBDamage
-Variant:D:SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ Result
+Variant:D:SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ Result | AIExpectAmount$ 2
 Variant:D:Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nWhen Garbage Elemental enters, roll a six-sided die. Garbage Elemental deals damage equal to the result to target opponent or planeswalker.

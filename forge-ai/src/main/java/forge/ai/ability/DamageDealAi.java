@@ -40,7 +40,7 @@ public class DamageDealAi extends DamageAiBase {
         final SpellAbility root = sa.getRootAbility();
         final String damage = sa.getParam("NumDmg");
         Card source = sa.getHostCard();
-        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
+        int dmg = calculateDamageAmount(sa, source, damage);
         final String logic = sa.getParam("AILogic");
 
         if ("MadSarkhanDigDmg".equals(logic)) {
@@ -91,7 +91,7 @@ public class DamageDealAi extends DamageAiBase {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
+        int dmg = calculateDamageAmount(sa, source, damage);
 
         if (damage.equals("X") || source.getSVar("X").equals("Count$xPaid")) {
             if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid")) {
@@ -933,7 +933,7 @@ public class DamageDealAi extends DamageAiBase {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
+        int dmg = calculateDamageAmount(sa, source, damage);
 
         // Remove all damage
         if (sa.hasParam("Remove")) {
@@ -975,6 +975,17 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return true;
+    }
+
+    private static int calculateDamageAmount(SpellAbility sa, Card source, String damage) {
+        if(damage == null)
+            return 0;
+
+        //Used when the value isn't yet known when making decisions, e.g. dice rolls.
+        if(sa.hasParam("AIExpectAmount"))
+            return AbilityUtils.calculateAmount(source, sa.getParam("AIExpectAmount"), sa);
+
+        return AbilityUtils.calculateAmount(source, damage, sa);
     }
 
     private boolean doXLifeDrainLogic(Player ai, SpellAbility sa) {
