@@ -95,16 +95,23 @@ public class AssembleContraptionEffect extends SpellAbilityEffect {
             if (p == null || !p.isInGame()) return;
 
             for (Card card : tgtCards) {
+                boolean changedControllers = card.getController() != p;
                 card.setController(p, game.getNextTimestamp());
                 if (card.getZone().getZoneType() != ZoneType.Battlefield)
                     card.getGame().getAction().moveToPlay(card, sa, moveParams);
 
-                //Assign a sprocket. If reassembling, it needs to be a different sprocket than the current one.
-                int sprocket = card.getController().getController().chooseSprocket(card, sa.hasParam("Reassemble"));
-                card.setSprocket(sprocket);
                 if (sa.hasParam("Remember")) {
                     source.addRemembered(card);
                 }
+
+                if(changedControllers)
+                    //Sprocket will be cleared next game update, then SBA will handle assignment. Kinda a cop-out but
+                    //the alternative is messy and could only matter with a really specific custom design.
+                    continue;
+
+                //Assign a sprocket. If reassembling, it needs to be a different sprocket than the current one.
+                int sprocket = card.getController().getController().chooseSprocket(card, sa.hasParam("Reassemble"));
+                card.setSprocket(sprocket);
             }
             triggerList.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);
             return;
