@@ -1358,6 +1358,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         && c.getCMC() > c.getController().getCardsIn(ZoneType.Graveyard).size()) {
                     return false;
                 }
+                else if(prop.equals("powerLECardsInGraveyard")
+                        && c.getNetPower() > c.getController().getCardsIn(ZoneType.Graveyard).size()) {
+                    return false;
+                }
             }
             if (hasParam("TargetsWithRelatedProperty") && entity instanceof Card) {
                 final String related = getParam("TargetsWithRelatedProperty");
@@ -1995,6 +1999,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             final String prop = getParam("TargetsWithControllerProperty");
             if (prop.equals("cmcLECardsInGraveyard")
                     && topSA.getHostCard().getCMC() > topSA.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size()) {
+                return false;
+            }
+            else if(prop.equals("powerLECardsInGraveyard")
+                    && topSA.getHostCard().getNetPower() > topSA.getActivatingPlayer().getCardsIn(ZoneType.Graveyard).size()) {
                 return false;
             }
         }

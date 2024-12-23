@@ -1,0 +1,6 @@
+Name:Genetic Recombinator
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, up to two target creatures each get +2/+2 until end of turn.
+SVar:TrigCrank:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | NumAtt$ +2 | NumDef$ +2
+Oracle:Whenever you crank Genetic Recombinator, up to two target creatures each get +2/+2 until end of turn.
