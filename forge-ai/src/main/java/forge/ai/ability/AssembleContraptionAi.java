@@ -6,6 +6,7 @@ import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -18,8 +19,7 @@ public class AssembleContraptionAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         //Pulls double duty as the OpenAttraction API. Same logic; usually good to do as long as we have the appropriate cards.
-        CardCollectionView deck = ai.getCardsIn(sa.getApi() == ApiType.OpenAttraction ?
-                ZoneType.AttractionDeck : ZoneType.ContraptionDeck);
+        CardCollectionView deck = getDeck(ai, sa);
 
         if(deck.isEmpty())
             return false;
@@ -41,6 +41,11 @@ public class AssembleContraptionAi extends SpellAbilityAi {
         }
 
         return true;
+    }
+
+    private static CardCollectionView getDeck(Player ai, SpellAbility sa) {
+        return ai.getCardsIn(sa.getApi() == ApiType.OpenAttraction ?
+                ZoneType.AttractionDeck : ZoneType.ContraptionDeck);
     }
 
     @Override
@@ -85,5 +90,21 @@ public class AssembleContraptionAi extends SpellAbilityAi {
             return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
 
         return super.checkPhaseRestrictions(ai, sa, ph);
+    }
+
+    @Override
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        if(getDeck(aiPlayer, sa).isEmpty())
+            return false;
+
+        return super.chkAIDrawback(sa, aiPlayer);
+    }
+
+    @Override
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        if(!mandatory && getDeck(aiPlayer, sa).isEmpty())
+            return false;
+
+        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
     }
 }
