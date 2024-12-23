@@ -545,6 +545,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return choices;
     }
 
+    /**
+     * IDs of Contraptions that have been cranked previously, and will default to the "cranked" column next time their
+     * sprocket is cranked.
+     */
+    private final Set<Integer> savedCrankedIDs = new HashSet<>();
+
     @Override
     public List<Card> chooseContraptionsToCrank(List<Card> contraptions) {
         if(contraptions.isEmpty())
@@ -552,12 +558,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShowCards(contraptions);
         GameEntityViewMap<Card, CardView> gameCacheChoose = GameEntityView.getMap(contraptions);
-        List<CardView> views = getGui().many(localizer.getMessage("lblChooseCrank"), localizer.getMessage("lblCranked"), -1,
-                gameCacheChoose.getTrackableKeys(), null);
+        TrackableCollection<CardView> viewList = gameCacheChoose.getTrackableKeys();
+
+        //Contraptions that were cranked previously will start in the cranked column when the dialog is shown.
+        List<CardView> cranked = new ArrayList<>(), uncranked = new ArrayList<>();
+        for(CardView c : viewList) {
+            int id = c.getId();
+            (savedCrankedIDs.contains(id) ? cranked : uncranked).add(c);
+        }
+
+        List<CardView> views = getGui().many(localizer.getMessage("lblChooseCrank"),
+                localizer.getMessage("lblCranked"), -1, -1, uncranked, cranked, null);
         endTempShowCards();
+
+        //If any were on the saved cranked list before but aren't cranked now, remove them from the saved list.
+        cranked.stream().filter(v -> !views.contains(v)).map(CardView::getId).forEach(savedCrankedIDs::remove);
+        //Add any that were cranked this time to the saved list.
+        views.stream().map(CardView::getId).forEach(savedCrankedIDs::add);
 
         List<Card> choices = new CardCollection();
         gameCacheChoose.addToList(views, choices);
+
         return choices;
     }
 
