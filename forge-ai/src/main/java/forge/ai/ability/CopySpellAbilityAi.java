@@ -22,7 +22,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if (game.getStack().isEmpty()) {
-            return sa.isMandatory();
+            return sa.isMandatory() || "Always".equals(logic);
         }
 
         final SpellAbility top = game.getStack().peekAbility();

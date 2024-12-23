@@ -2,7 +2,8 @@ Name:Masticore
 ManaCost:4
 Types:Artifact Creature Masticore
 PT:4/4
-K:UpkeepCost:Discard<1/Card>
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Discard<1/Card>
 A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 A:AB$ DealDamage | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
 AI:RemoveDeck:All

@@ -2470,8 +2470,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbLong.append(inst.getReminderText()).append("\r\n");
                 } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                         || keyword.startsWith("ETBReplacement")
-                        || keyword.startsWith("Affinity")
-                        || keyword.startsWith("UpkeepCost")) {
+                        || keyword.startsWith("Affinity")) {
                 } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
                         || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")

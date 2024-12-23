@@ -1,6 +1,8 @@
 Name:Vile Consumption
 ManaCost:1 U B
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature | AddKeyword$ UpkeepCost:PayLife<1> | Description$ All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1 life."
+S:Mode$ Continuous | Affected$ Creature | AddTrigger$ UpkeepCostTrigger | Description$ All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1 life."
+SVar:UpkeepCostTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 life.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ PayLife<1>
 AI:RemoveDeck:Random
 Oracle:All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1 life."

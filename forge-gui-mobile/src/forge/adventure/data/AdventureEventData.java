@@ -19,6 +19,7 @@ import forge.gamemodes.limited.LimitedPoolType;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.StreamUtil;
 import org.apache.commons.lang3.tuple.Pair;
@@ -439,8 +440,8 @@ public class AdventureEventData implements Serializable {
     public void generateParticipants(int numberOfOpponents) {
         participants = new AdventureEventParticipant[numberOfOpponents + 1];
 
-        List<EnemyData> data = Aggregates.random(WorldData.getAllEnemies(), numberOfOpponents);
-        data.removeIf(q -> q.nextEnemy != null);
+        Iterable<EnemyData> validParticipants = IterableUtil.filter(WorldData.getAllEnemies(), q -> q.nextEnemy == null);
+        List<EnemyData> data = Aggregates.random(validParticipants, numberOfOpponents);
         for (int i = 0; i < numberOfOpponents; i++) {
             participants[i] = new AdventureEventParticipant().generate(data.get(i));
         }

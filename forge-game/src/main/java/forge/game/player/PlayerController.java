@@ -60,7 +60,6 @@ public abstract class PlayerController {
         PlayOrDraw,
         OddsOrEvens,
         UntapOrLeaveTapped,
-        UntapTimeVault,
         LeftOrRight,
         AddOrRemove,
     }
