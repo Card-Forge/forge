@@ -424,6 +424,16 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
 
+        if (sa.hasParam("AITgts") && !list.isEmpty()) {
+            //No logic, but we do have preferences. Pick the best among those?
+            Card best = ComputerUtilCard.getBestAI(list);
+            if(best != null) {
+                sa.getTargets().add(best);
+                rememberAnimatedThisTurn(ai, best);
+                return true;
+            }
+        }
+
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that animate a target. Those can just use AI:RemoveDeck:All until
