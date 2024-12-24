@@ -109,7 +109,9 @@ public class HumanPlaySpellAbility {
             ability.setPaidLife(0);
         }
 
-        ability = GameActionUtil.addExtraKeywordCost(ability);
+        if (ability.isSpell() && !c.isCopiedSpell()) {
+            ability = GameActionUtil.addExtraKeywordCost(ability);
+        }
 
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);

@@ -33,8 +33,8 @@ import java.util.Map.Entry;
 
 public class CostAdjustment {
 
-    public static Cost adjust(final Cost cost, final SpellAbility sa) {
-        if (sa.isTrigger() || cost == null) {
+    public static Cost adjust(final Cost cost, final SpellAbility sa, boolean effect) {
+        if (sa.isTrigger() || cost == null || effect) {
             return cost;
         }
 

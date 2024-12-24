@@ -5,11 +5,13 @@ import forge.card.MagicColor;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
+import forge.game.cost.CostDamage;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.collect.FCollectionView;
 
 import java.util.function.Predicate;
 
@@ -179,4 +181,38 @@ public class DestroyAllAi extends SpellAbilityAi {
         return false;
     }
     
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final Card source = sa.getHostCard();
+        if (payers.size() > 1) {
+            if (alreadyPaid) {
+                return false;
+            }
+        }
+        String valid = sa.getParamOrDefault("ValidCards", "");
+
+        CardCollection ailist = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
+        ailist = CardLists.filter(ailist, predicate);
+
+        if (ailist.isEmpty()) {
+            return false;
+        }
+
+        if (cost.hasSpecificCostType(CostDamage.class)) {
+            if (!payer.canLoseLife()) {
+                return false;
+            }
+            final CostDamage pay = cost.getCostPartByType(CostDamage.class);
+            int realDamage = ComputerUtilCombat.predictDamageTo(payer, pay.getAbilityAmount(sa), source, false);
+            if (realDamage > payer.getLife()) {
+                return false;
+            }
+            if (realDamage > ailist.size() * 3) { // three life points per one creature
+                return false;
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+    }
 }

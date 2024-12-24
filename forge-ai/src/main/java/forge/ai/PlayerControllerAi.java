@@ -21,6 +21,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostEnlist;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPayment;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -835,14 +836,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
-        // TODO replace with EmptySa
-        final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
-        ability.setActivatingPlayer(c.getController());
-        ability.setCardState(sa.getCardState());
-
-        if (ComputerUtil.playNoStack(c.getController(), ability, getGame(), true)) {
-            // transfer this info for Balduvian Fallen
-            sa.setPayingMana(ability.getPayingMana());
+        if (ComputerUtil.playNoStack(c.getController(), sa, getGame(), true)) {
             return true;
         }
         return false;
@@ -1220,26 +1214,13 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
-        final Card source = sa.getHostCard();
-        // TODO replace with EmptySa
-        final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
-        emptyAbility.setActivatingPlayer(player);
-        emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
-        emptyAbility.setReplacingObjects(sa.getReplacingObjects());
-        emptyAbility.setTrigger(sa.getTrigger());
-        emptyAbility.setReplacementEffect(sa.getReplacementEffect());
-        emptyAbility.setSVars(sa.getSVars());
-        emptyAbility.setCardState(sa.getCardState());
-        emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
-        emptyAbility.setTargets(sa.getTargets().clone());
-
-        if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
-            boolean result = ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
-            if (!emptyAbility.getPaidHash().isEmpty()) {
-                // report info to original sa (Argentum Masticore)
-                sa.setPaidHash(emptyAbility.getPaidHash());
+        if (SpellApiToAi.Converter.get(sa.getApi()).willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
+            if (!ComputerUtilCost.canPayCost(cost, sa, player, true)) {
+                return false;
             }
-            return result;
+
+            final CostPayment pay = new CostPayment(cost, sa);
+            return pay.payComputerCosts(new AiCostDecision(player, sa, true));
         }
         return false;
     }
@@ -1379,7 +1360,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
-        return ComputerUtilMana.payManaCost(player, sa, effect);
+        return ComputerUtilMana.payManaCost(new Cost(toPay, effect), player, sa, effect);
     }
 
     @Override
