@@ -304,6 +304,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private String currentRoom = null;
     private String sector = null;
     private String chosenSector = null;
+    private int sprocket = 0;
 
     // points to the host that exiled this card, usually the one that has this object it its exiledCards field
     // however it could also be a different card which isn't an error but means the exiling SA was gained
@@ -2190,6 +2191,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public final void setChosenSector(final String s) {
         chosenSector = s;
+    }
+
+    public int getSprocket() {
+        return this.sprocket;
+    }
+    public void setSprocket(int sprocket) {
+        int oldSprocket = this.sprocket;
+        this.sprocket = sprocket;
+        view.updateSprocket(this);
+        game.fireEvent(new GameEventSprocketUpdate(this, oldSprocket, sprocket));
     }
 
     // used for cards like Meddling Mage...
@@ -5596,6 +5607,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final boolean isEquipment()  { return getType().isEquipment(); }
     public final boolean isFortification()  { return getType().isFortification(); }
     public final boolean isAttraction()     { return getType().isAttraction(); }
+    public final boolean isContraption()    { return getType().isContraption(); }
     public final boolean isCurse()          { return getType().hasSubtype("Curse"); }
     public final boolean isAura()           { return getType().isAura(); }
     public final boolean isShrine()           { return getType().hasSubtype("Shrine"); }

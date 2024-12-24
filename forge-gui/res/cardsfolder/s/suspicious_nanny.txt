@@ -1,0 +1,7 @@
+Name:Suspicious Nanny
+ManaCost:4 U
+Types:Creature Human Spy Rigger
+PT:3/4
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigReassemble | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, it reassembles target Contraption that player controls.
+SVar:TrigReassemble:DB$ AssembleContraption | Reassemble$ True | DefinedContraption$ Targeted | ValidTgts$ Contraption.ControlledBy TriggeredTarget | TgtPrompt$ Select target contraption damaged player controls
+Oracle:Whenever Suspicious Nanny deals combat damage to a player, it reassembles target Contraption that player controls. (Gain control of it and move it onto one of your sprockets.)

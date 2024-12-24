@@ -1,0 +1,6 @@
+Name:Gnomeball Machine
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, create two 1/1 colorless Gnome artifact creature tokens.
+SVar:TrigCrank:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_gnome
+Oracle:Whenever you crank Gnomeball Machine, create two 1/1 colorless Gnome artifact creature tokens.

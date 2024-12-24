@@ -54,6 +54,12 @@ public enum DeckFormat {
                 return "must contain at least 3 attractions, or none at all";
             return null;
         }
+
+        @Override
+        public String getContraptionDeckConformanceProblem(Deck deck) {
+            //Limited contraption decks have no restrictions.
+            return null;
+        }
     },
     Commander      ( Range.is(99),                         Range.between(0, 10), 1, null,
             card -> StaticData.instance().getCommanderPredicate().test(card)
@@ -331,6 +337,12 @@ public enum DeckFormat {
                 return attractionError;
         }
 
+        if (deck.has(DeckSection.Contraptions)) {
+            String contraptionError = getContraptionDeckConformanceProblem(deck);
+            if (contraptionError != null)
+                return contraptionError;
+        }
+
         final int maxCopies = getMaxCardCopies();
         //Must contain no more than 4 of the same card
         //shared among the main deck and sideboard, except
@@ -386,6 +398,18 @@ public enum DeckFormat {
             //Constructed Attraction deck must be singleton
             if (attractionDeck.countByName(cp.getKey()) > 1)
                 return TextUtil.concatWithSpace("contains more than 1 copy of the attraction", cp.getKey().getName());
+        }
+        return null;
+    }
+
+    public String getContraptionDeckConformanceProblem(Deck deck) {
+        CardPool contraptionDeck = deck.get(DeckSection.Contraptions);
+        if (contraptionDeck.countAll() < 15)
+            return "must contain at least 15 contraptions, or none at all";
+        for (Entry<PaperCard, Integer> cp : contraptionDeck) {
+            //Constructed Contraption deck must be singleton
+            if (contraptionDeck.countByName(cp.getKey()) > 1)
+                return TextUtil.concatWithSpace("contains more than 1 copy of the contraption", cp.getKey().getName());
         }
         return null;
     }

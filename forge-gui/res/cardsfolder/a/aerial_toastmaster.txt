@@ -1,0 +1,7 @@
+Name:Aerial Toastmaster
+ManaCost:3 W
+Types:Artifact Creature Cyborg Rigger
+PT:3/2
+K:Flying
+A:AB$ AssembleContraption | Cost$ 3 W Sac<1/Artifact.Other/another artifact> | SpellDescription$ CARDNAME assembles a Contraption.
+Oracle:Flying\n{3}{W}, Sacrifice another artifact: Aerial Toastmaster assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)

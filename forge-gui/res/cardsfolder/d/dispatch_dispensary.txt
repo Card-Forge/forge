@@ -1,0 +1,6 @@
+Name:Dispatch Dispensary
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, create a 2/2 black Rogue creature token with menace.
+SVar:TrigCrank:DB$ Token | TokenScript$ b_2_2_rogue_menace
+Oracle:Whenever you crank Dispatch Dispensary, create a 2/2 black Rogue creature token with menace.

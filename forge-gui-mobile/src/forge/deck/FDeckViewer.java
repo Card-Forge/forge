@@ -4,9 +4,7 @@ import java.util.Map.Entry;
 
 import forge.Forge;
 import forge.assets.FImage;
-import forge.assets.FSkin;
 import forge.assets.FSkinImage;
-import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -30,35 +28,8 @@ public class FDeckViewer extends FScreen {
                 int count = pool.countAll();
                 if (count == 0) { continue; }
 
-                final String captionPrefix;
-                final FImage icon;
-                switch (section) {
-                default:
-                case Main:
-                    captionPrefix = Forge.getLocalizer().getMessage("ttMain");
-                    icon = FDeckEditor.MAIN_DECK_ICON;
-                    break;
-                case Sideboard:
-                    captionPrefix = Forge.getLocalizer().getMessage("lblSideboard");
-                    icon = FDeckEditor.SIDEBOARD_ICON;
-                    break;
-                case Commander:
-                    captionPrefix = Forge.getLocalizer().getMessage("lblCommander");
-                    icon = FSkinImage.COMMANDER;
-                    break;
-                case Avatar:
-                    captionPrefix = Forge.getLocalizer().getMessage("lblAvatar");
-                    icon = new FTextureRegionImage(FSkin.getAvatars().get(0));
-                    break;
-                case Planes:
-                    captionPrefix = Forge.getLocalizer().getMessage("lblPlanes");
-                    icon = FSkinImage.CHAOS;
-                    break;
-                case Schemes:
-                    captionPrefix = Forge.getLocalizer().getMessage("lblSchemes");
-                    icon = FSkinImage.POISON;
-                    break;
-                }
+                final String captionPrefix = section.getLocalizedName();
+                final FImage icon = FDeckEditor.iconFromDeckSection(section);
 
                 FMenuItem item = new FMenuItem(captionPrefix + " (" + count + ")", icon, e -> deckViewer.setCurrentSection(section));
                 if (section == deckViewer.currentSection) {

@@ -10,6 +10,7 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=UST
 
 [cards]
+2 U Aerial Toastmaster @Carl Critchlow
 3a C Amateur Auteur @McLean Kendree
 3b C Amateur Auteur @McLean Kendree
 3c C Amateur Auteur @McLean Kendree

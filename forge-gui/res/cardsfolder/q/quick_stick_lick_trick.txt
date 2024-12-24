@@ -1,0 +1,6 @@
+Name:Quick-Stick Lick Trick
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, target creature gets +1/+1 and gains lifelink until end of turn.
+SVar:TrigCrank:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink
+Oracle:Whenever you crank Quick-Stick Lick Trick, target creature gets +1/+1 and gains lifelink until end of turn.

@@ -1,13 +1,13 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FCardPanel;
@@ -20,11 +20,14 @@ public class VField extends FContainer {
     private boolean flipped;
     private float commandZoneWidth;
     private float fieldModifier;
+    private final boolean stackNonTokenCreatures;
 
     public VField(PlayerView player0) {
         player = player0;
         row1 = add(new FieldRow());
         row2 = add(new FieldRow());
+
+        stackNonTokenCreatures = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_STACK_CREATURES);
     }
 
     public boolean isFlipped() {
@@ -70,6 +73,7 @@ public class VField extends FContainer {
 
             List<CardView> creatures = new ArrayList<>();
             List<CardView> lands = new ArrayList<>();
+            List<CardView> contraptions = null; //Usually not used; create on demand.
             List<CardView> otherPermanents = new ArrayList<>();
 
             for (CardView card : model) {
@@ -86,12 +90,22 @@ public class VField extends FContainer {
                             lands.add(card);
                         }
                     }
+                    else if (details.isArtifact() && (details.isContraption() || details.isAttraction())) {
+                        if (contraptions == null)
+                            contraptions = new ArrayList<>();
+                        contraptions.add(card); //Arrange these later.
+                    }
                     else {
                         if (!tryStackCard(card, otherPermanents)) {
                             otherPermanents.add(card);
                         }
                     }
                 }
+            }
+
+            if(contraptions != null) {
+                contraptions = arrangeContraptions(contraptions);
+                otherPermanents.addAll(contraptions);
             }
 
             if (creatures.isEmpty()) {
@@ -110,49 +124,91 @@ public class VField extends FContainer {
         if (card.hasCardAttachments()) {
             return false; //can stack with enchanted or equipped card
         }
-        if (card.getCurrentState().isCreature() && !card.isToken()) {
-            return false; //don't stack non-token creatures
+        CardStateView cardState = card.getCurrentState();
+        if (!this.stackNonTokenCreatures && cardState.isCreature() && !card.isToken()) {
+            return false;
         }
-        final String cardName = card.getCurrentState().getName();
+        final String cardName = cardState.getName();
         for (CardView c : cardsOfType) {
-            if (c.getCurrentState().isCreature()) {
+            CardStateView cState = c.getCurrentState();
+            if (cState.isCreature()) {
                 if (!c.hasCardAttachments() &&
-                        cardName.equals(c.getCurrentState().getName()) &&
+                        cardName.equals(cState.getName()) &&
                         card.hasSameCounters(c) &&
                         card.hasSamePT(c) && //don't stack token with different PT
-                        card.getCurrentState().getKeywordKey().equals(c.getCurrentState().getKeywordKey()) &&
+                        cardState.getKeywordKey().equals(cState.getKeywordKey()) &&
                         card.isTapped() == c.isTapped() && // don't stack tapped tokens on untapped tokens
                         card.isSick() == c.isSick() && //don't stack sick tokens on non sick
                         card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
-                    CardAreaPanel cPanel = CardAreaPanel.get(c);
-                    while (cPanel.getNextPanelInStack() != null) {
-                        cPanel = cPanel.getNextPanelInStack();
-                    }
-                    CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                    cPanel.setNextPanelInStack(cardPanel);
-                    cardPanel.setPrevPanelInStack(cPanel);
+                    stackOnto(card, c);
                     return true;
                 }
             } else {
                 if (!c.hasCardAttachments() &&
-                        cardName.equals(c.getCurrentState().getName()) &&
+                        cardName.equals(cState.getName()) &&
                         card.hasSameCounters(c) &&
-                        card.getCurrentState().getKeywordKey().equals(c.getCurrentState().getKeywordKey()) &&
-                        card.getCurrentState().getColors() == c.getCurrentState().getColors() &&
+                        cardState.getKeywordKey().equals(cState.getKeywordKey()) &&
+                        cardState.getColors() == cState.getColors() &&
                         card.isSick() == c.isSick() && //don't stack sick tokens on non sick
                         card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
-                    CardAreaPanel cPanel = CardAreaPanel.get(c);
-                    while (cPanel.getNextPanelInStack() != null) {
-                        cPanel = cPanel.getNextPanelInStack();
-                    }
-                    CardAreaPanel cardPanel = CardAreaPanel.get(card);
-                    cPanel.setNextPanelInStack(cardPanel);
-                    cardPanel.setPrevPanelInStack(cPanel);
+                    stackOnto(card, c);
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    private static void stackOnto(CardView card, CardView topOfStack) {
+        CardAreaPanel cPanel = CardAreaPanel.get(topOfStack);
+        while (cPanel.getNextPanelInStack() != null) {
+            cPanel = cPanel.getNextPanelInStack();
+        }
+        CardAreaPanel cardPanel = CardAreaPanel.get(card);
+        cPanel.setNextPanelInStack(cardPanel);
+        cardPanel.setPrevPanelInStack(cPanel);
+    }
+
+    private List<CardView> arrangeContraptions(List<CardView> contraptions) {
+        TreeSet<CardView> row = new TreeSet<>((c1, c2) -> {
+            //Order is sprocket-less cards, then sprocket 1, sprocket 2, sprocket 3, and finally attractions.
+            int sprocket1 = c1.getSprocket(), sprocket2 = c2.getSprocket();
+            if(sprocket1 == 0 && c1.getCurrentState().isAttraction())
+                sprocket1 = 4;
+            if(sprocket2 == 0 && c2.getCurrentState().isAttraction())
+                sprocket2 = 4;
+            return sprocket1 - sprocket2;
+        });
+        outer: for (CardView card : contraptions) {
+            if (card.hasCardAttachments()) {
+                row.add(card); //Don't stack contraptions or attractions with attachments.
+                continue;
+            }
+            if (card.getCurrentState().isAttraction()) {
+                //Stack attractions with other attractions.
+                for (CardView c : row) {
+                    if(c.getCurrentState().isAttraction() && !c.hasCardAttachments()) {
+                        stackOnto(card, c);
+                        continue outer;
+                    }
+                }
+                row.add(card);
+                continue;
+            }
+            if (card.getSprocket() <= 0) {
+                //Sprocket-less contraptions don't stack. They're probably awaiting an SBA that assembles them onto one.
+                row.add(card);
+                continue;
+            }
+            for (CardView c : row) {
+                if (c.getSprocket() == card.getSprocket() && !c.hasCardAttachments()) {
+                    stackOnto(card, c);
+                    continue outer;
+                }
+            }
+            row.add(card);
+        }
+        return List.copyOf(row);
     }
 
     public FieldRow getRow1() {

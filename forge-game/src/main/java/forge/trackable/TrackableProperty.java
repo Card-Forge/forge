@@ -79,6 +79,7 @@ public enum TrackableProperty {
     ChosenMode(TrackableTypes.StringType),
     ChosenSector(TrackableTypes.StringType),
     Sector(TrackableTypes.StringListType),
+    Sprocket(TrackableTypes.IntegerType),
     DraftAction(TrackableTypes.StringListType),
     ClassLevel(TrackableTypes.IntegerType),
     RingLevel(TrackableTypes.IntegerType),
@@ -220,6 +221,7 @@ public enum TrackableProperty {
     CommanderCast(TrackableTypes.IntegerMapType),
     CommanderDamage(TrackableTypes.IntegerMapType),
     MindSlaveMaster(TrackableTypes.PlayerViewType),
+
     Ante(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Battlefield(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze), //zones can't respect freeze, otherwise cards that die from state based effects won't have that reflected in the UI
     Command(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
@@ -229,7 +231,14 @@ public enum TrackableProperty {
     Hand(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Library(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Sideboard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    PlanarDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    SchemeDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    AttractionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    ContraptionDeck(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    Junkyard(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
+
     IsExtraTurn(TrackableTypes.BooleanType),
     ExtraTurnCount(TrackableTypes.IntegerType),
     HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),

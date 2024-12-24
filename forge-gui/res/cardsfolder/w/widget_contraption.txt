@@ -1,0 +1,6 @@
+Name:Widget Contraption
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, it assembles a Contraption.
+SVar:TrigCrank:DB$ AssembleContraption | DefinedAssembler$ Self
+Oracle:Whenever you crank Widget Contraption, it assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)

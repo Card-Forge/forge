@@ -1,0 +1,7 @@
+Name:Optical Optimizer
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, until end of turn, target creature becomes an artifact in addition to its other types and gains "{T}: Draw a card."
+SVar:TrigCrank:DB$ Animate | ValidTgts$ Creature | Types$ Artifact | Abilities$ ABDraw | AILogic$ Worst | AITgts$ Creature.untapped+YouCtrl
+SVar:ABDraw:AB$ Draw | Cost$ T | SpellDescription$ Draw a card.
+Oracle:Whenever you crank Optical Optimizer, until end of turn, target creature becomes an artifact in addition to its other types and gains "{T}: Draw a card."

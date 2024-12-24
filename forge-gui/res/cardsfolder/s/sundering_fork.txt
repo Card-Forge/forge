@@ -1,0 +1,6 @@
+Name:Sundering Fork
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, destroy target artifact.
+SVar:TrigCrank:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
+Oracle:Whenever you crank Sundering Fork, destroy target artifact.

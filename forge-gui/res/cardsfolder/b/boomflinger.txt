@@ -1,0 +1,7 @@
+Name:Boomflinger
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, roll two six-sided dice. CARDNAME deals damage to target player or planeswalker equal to the difference between those results.
+SVar:TrigCrank:DB$ RollDice | ResultSVar$ Result | Sides$ 6 | Amount$ 2 | UseDifferenceBetweenRolls$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ Result | AIExpectAmount$ 3
+Oracle:Whenever you crank Boomflinger, roll two six-sided dice. Boomflinger deals damage to target player or planeswalker equal to the difference between those results.

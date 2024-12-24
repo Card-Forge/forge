@@ -1,0 +1,6 @@
+Name:Head Banger
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, target creature must be blocked this turn if able.
+SVar:TrigCrank:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME must be blocked if able.
+Oracle:Whenever you crank Head Banger, target creature must be blocked this turn if able.

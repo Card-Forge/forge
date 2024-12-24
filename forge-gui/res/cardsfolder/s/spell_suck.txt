@@ -1,0 +1,6 @@
+Name:Spell Suck
+ManaCost:2 U U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBAssemble | SpellDescription$ Counter target spell, then assemble a Contraption.
+SVar:DBAssemble:DB$ AssembleContraption
+Oracle:Counter target spell, then assemble a Contraption.

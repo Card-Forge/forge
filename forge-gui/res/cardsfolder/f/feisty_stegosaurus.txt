@@ -4,5 +4,5 @@ Types:Host Creature Dinosaur
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll | Host$ True | TriggerDescription$ When this creature enters, roll a six-sided die. This creature deals damage equal to the result to target creature an opponent controls.
 SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ Result
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ Result | AIExpectAmount$ 3
 Oracle:When this creature enters, roll a six-sided die. This creature deals damage equal to the result to target creature an opponent controls.

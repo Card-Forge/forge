@@ -247,18 +247,22 @@ public class AnimateAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        if (sa.usesTargeting() && !animateTgtAI(sa) && !mandatory) {
-            return false;
-        } else if (sa.usesTargeting() && mandatory) {
-            // fallback if animate is mandatory
-            sa.resetTargets();
-            List<Card> list = CardUtil.getValidCardsToTarget(sa);
-            if (list.isEmpty()) {
+        if (sa.usesTargeting()) {
+            if(animateTgtAI(sa))
+                return true;
+            else if (!mandatory)
                 return false;
+            else {
+                // fallback if animate is mandatory
+                sa.resetTargets();
+                List<Card> list = CardUtil.getValidCardsToTarget(sa);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                Card toAnimate = ComputerUtilCard.getWorstAI(list);
+                rememberAnimatedThisTurn(aiPlayer, toAnimate);
+                sa.getTargets().add(toAnimate);
             }
-            Card toAnimate = ComputerUtilCard.getWorstAI(list);
-            rememberAnimatedThisTurn(aiPlayer, toAnimate);
-            sa.getTargets().add(toAnimate);
         }
         return true;
     }
@@ -282,19 +286,19 @@ public class AnimateAi extends SpellAbilityAi {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
+        final Game game = ai.getGame();
+        CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+
+        // Filter AI-specific targets if provided
+        list = ComputerUtil.filterAITgts(sa, ai, list, false);
+
+        // list is empty, no possible targets
+        if (list.isEmpty() && !alwaysActivatePWAbility) {
+            return false;
+        }
+
         // something is used for animate into creature
         if (types.isCreature()) {
-            final Game game = ai.getGame();
-            CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
-
-            // Filter AI-specific targets if provided
-            list = ComputerUtil.filterAITgts(sa, ai, list, false);
-
-            // list is empty, no possible targets
-            if (list.isEmpty() && !alwaysActivatePWAbility) {
-                return false;
-            }
-
             Map<Card, Integer> data = Maps.newHashMap();
             for (final Card c : list) {
                 // don't use Permanent animate on something that would leave the field
@@ -405,7 +409,6 @@ public class AnimateAi extends SpellAbilityAi {
         if (logic.equals("ValuableAttackerOrBlocker")) {
             if (ph.inCombat()) {
                 final Combat combat = ph.getCombat();
-                CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
                 for (Card c : list) {
                     Card animated = becomeAnimated(c, sa);
                     boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
@@ -415,6 +418,26 @@ public class AnimateAi extends SpellAbilityAi {
                 }
             }
         }
+
+        if (logic.equals("Worst")) {
+            Card worst = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
+            if(worst != null) {
+                sa.getTargets().add(worst);
+                rememberAnimatedThisTurn(ai, worst);
+                return true;
+            }
+        }
+
+        if (sa.hasParam("AITgts") && !list.isEmpty()) {
+            //No logic, but we do have preferences. Pick the best among those?
+            Card best = ComputerUtilCard.getBestAI(list);
+            if(best != null) {
+                sa.getTargets().add(best);
+                rememberAnimatedThisTurn(ai, best);
+                return true;
+            }
+        }
+
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that animate a target. Those can just use AI:RemoveDeck:All until

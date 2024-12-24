@@ -1,0 +1,6 @@
+Name:Contraption Cannon
+ManaCost:4
+Types:Artifact
+A:AB$ DealDamage | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the number of Contraptions you control.
+SVar:X:Count$Valid Contraption.YouCtrl
+Oracle:{2}, Sacrifice Contraption Cannon: It deals damage to any target equal to the number of Contraptions you control.

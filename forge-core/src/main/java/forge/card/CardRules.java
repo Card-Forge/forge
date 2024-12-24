@@ -138,7 +138,7 @@ public final class CardRules implements ICardCharacteristics {
     public boolean isVariant() {
         CardType t = getType();
         return t.isVanguard() || t.isScheme() || t.isPlane() || t.isPhenomenon()
-                || t.isConspiracy() || t.isDungeon() || t.isAttraction();
+                || t.isConspiracy() || t.isDungeon() || t.isAttraction() || t.isContraption();
     }
 
     public CardSplitType getSplitType() {

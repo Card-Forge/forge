@@ -1,0 +1,6 @@
+Name:Steamfloggery
+ManaCost:4 R R
+Types:Instant
+A:SP$ RollDice | ResultSVar$ Result | SubAbility$ DBAssemble
+SVar:DBAssemble:DB$ AssembleContraption | Amount$ Result | SpellDescription$ Assemble a number of Contraptions equal to the result.
+Oracle:Roll a six-sided die. Assemble a number of Contraptions equal to the result. (To assemble a Contraption, put the top card of your Contraption deck face up onto one of your sprockets.)

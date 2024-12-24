@@ -1,0 +1,6 @@
+Name:Steamflogger Temp
+ManaCost:1 R
+Types:Creature Goblin Rigger
+PT:2/1
+A:AB$ AssembleContraption | Cost$ 6 T | SpellDescription$ CARDNAME assembles a Contraption.
+Oracle:{6}, {T}: Steamflogger Temp assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)

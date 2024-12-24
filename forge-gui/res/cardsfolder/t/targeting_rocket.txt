@@ -1,0 +1,7 @@
+Name:Targeting Rocket
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, target creature blocks this turn if able.
+SVar:TrigCrank:DB$ Effect | ValidTgts$ Creature | StaticAbilities$ MustBlock | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | IsCurse$ True | TgtPrompt$ Select target creature.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+Oracle:Whenever you crank Targeting Rocket, target creature blocks this turn if able.

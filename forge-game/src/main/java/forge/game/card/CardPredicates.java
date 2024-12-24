@@ -306,6 +306,10 @@ public final class CardPredicates {
         return c -> c.isAttraction() && c.getAttractionLights().contains(light);
     }
 
+    public static Predicate<Card> isContraptionOnSprocket(int sprocket) {
+        return c -> c.getSprocket() == sprocket && c.isContraption();
+    }
+
     public static final Predicate<Card> TAPPED = Card::isTapped;
     public static final Predicate<Card> FACE_DOWN = Card::isFaceDown;
     public static final Predicate<Card> UNTAPPED = Card::isUntapped;
@@ -343,4 +347,5 @@ public final class CardPredicates {
     public static final Predicate<Card> BATTLES = Card::isBattle;
     public static final Predicate<Card> CAN_BE_DESTROYED = Card::canBeDestroyed;
     public static final Predicate<Card> ATTRACTIONS = Card::isAttraction;
+    public static final Predicate<Card> CONTRAPTIONS = Card::isContraption;
 }
