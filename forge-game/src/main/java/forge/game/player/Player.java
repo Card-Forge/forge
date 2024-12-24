@@ -3978,9 +3978,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.CRANK), this.crankCounter);
         contraptionSprocketEffect.setCounters(counterMap);
         contraptionSprocketEffect.setText("At the beginning of your upkeep, if you control a Contraption, move the CRANK! counter to the next sprocket and crank any number of that sprocket's Contraptions.");
-        //TODO: Cleanup
-//        List<String> text = Lists.newArrayList("At the beginning of your upkeep, if you control a Contraption, move the CRANK! counter to the next sprocket and crank any number of that sprocket's Contraptions.");
-//        contraptionSprocketEffect.addHiddenExtrinsicKeywords(game.getNextTimestamp(), 0, text);
 
         contraptionSprocketEffect.updateStateForView();
 

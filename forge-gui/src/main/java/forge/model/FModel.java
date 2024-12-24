@@ -397,8 +397,9 @@ public final class FModel {
     }
 
     public static ItemPool<PaperCard> getContraptionPool() {
-        if(contraptionPool == null) //TODO: Handle predicate rewrite.
-            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(c -> c.getRules().getType().isContraption()), PaperCard.class);
+        if(contraptionPool == null)
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(
+                    CardRulesPredicates.IS_CONTRAPTION)), PaperCard.class);
         return contraptionPool;
     }
 

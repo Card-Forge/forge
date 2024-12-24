@@ -303,8 +303,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<Card> chooseContraptionsToCrank(List<Card> contraptions) {
         return CardLists.filter(contraptions, c -> {
-            //TODO: Rewrite after guava migration
-            Trigger crankTrigger = Iterables.find(c.getTriggers(), t -> t.getMode() == TriggerType.CrankContraption);
+            Trigger crankTrigger = IterableUtil.find(c.getTriggers(), t -> t.getMode() == TriggerType.CrankContraption);
             return confirmTrigger(new WrappedAbility(crankTrigger, crankTrigger.getOverridingAbility(), player));
         });
     }
