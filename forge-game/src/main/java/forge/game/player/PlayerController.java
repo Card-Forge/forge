@@ -35,8 +35,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 
 /**
@@ -58,8 +60,20 @@ public abstract class PlayerController {
         OddsOrEvens,
         UntapOrLeaveTapped,
         LeftOrRight,
-        AddOrRemove,
+        AddOrRemove
     }
+
+    public enum FullControlFlag {
+        ChooseCostOrder,
+        ChooseCostReductionOrderAndVariableAmount,
+        //ChooseManaPoolShard, // select shard with special properties
+        NoPaymentFromManaAbility,
+        NoFreeCombatCostHandling,
+        AllowPaymentStartWithMissingResources,
+        //AdditionalLayerTimestampOrder // tokens etc.
+    }
+
+    private Set<FullControlFlag> fullControls = EnumSet.noneOf(FullControlFlag.class);
 
     protected final GameView gameView;
 
@@ -287,10 +301,12 @@ public abstract class PlayerController {
 
     public abstract List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider);
 
-    public boolean isFullControl() {
-        return false;
+    public Set<FullControlFlag> getFullControl() {
+        return fullControls;
     }
-    public void setFullControl(boolean full) {}
+    public boolean isFullControl(FullControlFlag f) {
+        return fullControls.contains(f);
+    }
 
     public abstract void autoPassCancel();
 
@@ -320,5 +336,7 @@ public abstract class PlayerController {
 
     public abstract CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap,
             SpellAbility sa, String title, boolean isOptional);
+
+    public abstract List<CostPart> orderCosts(List<CostPart> costs);
 
 }

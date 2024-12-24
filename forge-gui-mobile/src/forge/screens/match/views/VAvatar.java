@@ -97,10 +97,18 @@ public class VAvatar extends FDisplayObject {
             player.setAvatarLifeDifference(0);
         }
     }
+
     @Override
     public boolean tap(float x, float y, int count) {
         //must invoke in game thread in case a dialog needs to be shown
         ThreadUtil.invokeInGameThread(() -> MatchController.instance.getGameController().selectPlayer(player, null));
+        return true;
+    }
+
+    @Override
+    public boolean longPress(float x, float y) {
+        //must invoke in game thread in case a dialog needs to be shown
+        ThreadUtil.invokeInGameThread(() -> MatchController.instance.showFullControl(player, x, y));
         return true;
     }
 

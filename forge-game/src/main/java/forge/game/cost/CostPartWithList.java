@@ -118,6 +118,8 @@ public abstract class CostPartWithList extends CostPart {
 
     // always returns true, made this to inline with return
     protected boolean executePayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
+        // need to refresh statics (e.g. sacrificing Omnath, Locus of Mana to Momentous Fall could end up with less toughness)
+        payer.getGame().getAction().checkStaticAbilities();
         table.setLastStateBattlefield(payer.getGame().copyLastStateBattlefield());
         table.setLastStateGraveyard(payer.getGame().copyLastStateGraveyard());
 
