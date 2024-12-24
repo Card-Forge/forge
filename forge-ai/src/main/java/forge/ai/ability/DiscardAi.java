@@ -1,5 +1,9 @@
 package forge.ai.ability;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -7,6 +11,8 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
+import forge.game.cost.CostDamage;
+import forge.game.cost.CostDraw;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -15,10 +21,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import forge.util.collect.FCollectionView;
 
 public class DiscardAi extends SpellAbilityAi {
 
@@ -213,5 +216,58 @@ public class DiscardAi extends SpellAbilityAi {
             return true;
         }
         return super.confirmAction(player, sa, mode, message, params);
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final Card host = sa.getHostCard();
+        final String aiLogic = sa.getParam("UnlessAI");
+        if ("Never".equals(aiLogic)) { return false; }
+
+        CardCollectionView hand = payer.getCardsIn(ZoneType.Hand);
+
+        if ("Hand".equals(sa.getParam("Mode"))) {
+            if (hand.size() <= 2) {
+                return false;
+            }
+        } else {
+            int amount = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
+            // damage cost with prevention?
+            if (cost.hasSpecificCostType(CostDamage.class)) {
+                if (!payer.canLoseLife()) {
+                    return false;
+                }
+                final CostDamage pay = cost.getCostPartByType(CostDamage.class);
+                int realDamage = ComputerUtilCombat.predictDamageTo(payer, pay.getAbilityAmount(sa), host, false);
+                if (realDamage > payer.getLife()) {
+                    return false;
+                }
+                if (realDamage > amount * 2) { // two life points per not discarded card?
+                    return false;
+                }
+            }
+
+            boolean isDrawDiscard = cost.hasOnlySpecificCostType(CostDraw.class) && sa.hasParam("UnlessSwitched");
+            // TODO should AI do draw + discard effects when hand is empty?
+            // maybe if deck supports Graveyard or discard effects?
+            if (hand.isEmpty()) {
+                return false;
+            }
+            // is it always better?
+            if (isDrawDiscard) {
+                // check to not deck yourself
+                int libSize = payer.getCardsIn(ZoneType.Library).size();
+                if (amount >= libSize - 3) {
+                    if (payer.isCardInPlay("Laboratory Maniac") && !payer.cantWin()) {
+                        return true;
+                    }
+                    // Don't deck yourself
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }

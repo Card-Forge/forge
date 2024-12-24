@@ -7,6 +7,8 @@ import forge.ai.SpellAbilityAi;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
@@ -16,6 +18,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
 
@@ -110,7 +114,7 @@ public class PermanentAi extends SpellAbilityAi {
         if ("SacToReduceCost".equals(sa.getParam("AILogic"))) {
             // reset X to better calculate
             sa.setXManaCostPaid(0);
-            ManaCostBeingPaid paidCost = ComputerUtilMana.calculateManaCost(sa, true, 0);
+            ManaCostBeingPaid paidCost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, true, 0, false);
 
             int generic = paidCost.getGenericManaAmount();
             // Set PayX here to maximum value.
@@ -181,22 +185,39 @@ public class PermanentAi extends SpellAbilityAi {
         }
 
         // don't play cards without being able to pay the upkeep for
-        for (KeywordInterface inst : source.getKeywords()) {
-            String ability = inst.getOriginal();
-            if (ability.startsWith("UpkeepCost")) {
-                final String[] k = ability.split(":");
-                final String costs = k[1];
+        boolean hasUpkeepCost = false;
+        Cost upkeepCost = new Cost("0", true);
+        for (Trigger t : source.getTriggers()) {
+            if (!TriggerType.Phase.equals(t.getMode())) {
+                continue;
+            }
+            if (!"Upkeep".equals(t.getParam("Phase"))) {
+                continue;
+            }
+            SpellAbility ab = t.ensureAbility();
+            if (ab == null) {
+                continue;
+            }
 
-                final SpellAbility emptyAbility = new SpellAbility.EmptySa(source, ai);
-                emptyAbility.setPayCosts(new Cost(costs, true));
-                emptyAbility.setTargetRestrictions(sa.getTargetRestrictions());
-                emptyAbility.setCardState(sa.getCardState());
-                emptyAbility.setActivatingPlayer(ai);
-
-                if (!ComputerUtilCost.canPayCost(emptyAbility, ai, true)) {
-                    // AiPlayDecision.AnotherTime
-                    return false;
+            if (ApiType.Sacrifice.equals(ab.getApi())) {
+                if (!ab.hasParam("UnlessCost")) {
+                    continue;
                 }
+                hasUpkeepCost = true;
+                upkeepCost.add(AbilityUtils.calculateUnlessCost(ab, ab.getParam("UnlessCost"), true));
+            }
+        }
+
+        if (hasUpkeepCost) {
+            final SpellAbility emptyAbility = new SpellAbility.EmptySa(source, ai);
+            emptyAbility.setPayCosts(upkeepCost);
+            emptyAbility.setTargetRestrictions(sa.getTargetRestrictions());
+            emptyAbility.setCardState(sa.getCardState());
+            emptyAbility.setActivatingPlayer(ai);
+
+            if (!ComputerUtilCost.canPayCost(emptyAbility, ai, true)) {
+                // AiPlayDecision.AnotherTime
+                return false;
             }
         }
 

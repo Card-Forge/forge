@@ -72,10 +72,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             return;
         }
 
-        List<Player> controllers = Lists.newArrayList(sa.getActivatingPlayer());
-        if (sa.hasParam("Controller")) {
-            controllers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Controller"), sa);
-        }
+        List<Player> controllers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Controller"), sa);
 
         boolean isOptional = sa.hasParam("Optional");
 

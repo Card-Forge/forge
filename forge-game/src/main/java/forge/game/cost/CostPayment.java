@@ -97,7 +97,7 @@ public class CostPayment extends ManaConversionMatrix {
             return true;
         }
 
-        cost = CostAdjustment.adjust(cost, ability);
+        cost = CostAdjustment.adjust(cost, ability, effect);
         return cost.canPay(ability, effect);
     }
 
@@ -129,7 +129,7 @@ public class CostPayment extends ManaConversionMatrix {
     }
 
     public boolean payCost(final CostDecisionMakerBase decisionMaker) {
-        adjustedCost = CostAdjustment.adjust(cost, ability);
+        adjustedCost = CostAdjustment.adjust(cost, ability, decisionMaker.isEffect());
         List<CostPart> costParts = adjustedCost.getCostPartsWithZeroMana();
 
         if (adjustedCost.getCostParts().size() > 1) {
@@ -177,7 +177,7 @@ public class CostPayment extends ManaConversionMatrix {
 
         Map<CostPart, PaymentDecision> decisions = Maps.newHashMap();
         // for Trinisphere make sure to include Zero
-        List<CostPart> parts = CostAdjustment.adjust(cost, ability).getCostPartsWithZeroMana();
+        List<CostPart> parts = CostAdjustment.adjust(cost, ability, decisionMaker.isEffect()).getCostPartsWithZeroMana();
 
         // Set all of the decisions before attempting to pay anything
 

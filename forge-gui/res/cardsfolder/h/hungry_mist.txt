@@ -2,5 +2,6 @@ Name:Hungry Mist
 ManaCost:2 G G
 Types:Creature Elemental
 PT:6/2
-K:UpkeepCost:G G
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {G}{G}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ G G
 Oracle:At the beginning of your upkeep, sacrifice Hungry Mist unless you pay {G}{G}.

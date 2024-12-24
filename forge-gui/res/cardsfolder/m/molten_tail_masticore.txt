@@ -2,7 +2,8 @@ Name:Molten-Tail Masticore
 ManaCost:4
 Types:Artifact Creature Masticore
 PT:4/4
-K:UpkeepCost:Discard<1/Card>
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Discard<1/Card>
 A:AB$ DealDamage | Cost$ 4 ExileFromGrave<1/Creature> | NumDmg$ 4 | ValidTgts$ Any | SpellDescription$ CARDNAME deals 4 damage to any target.
 A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:NeedsToPlayVar:Z GE3

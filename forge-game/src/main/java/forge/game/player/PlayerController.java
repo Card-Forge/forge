@@ -50,10 +50,7 @@ public abstract class PlayerController {
 
     public enum ManaPaymentPurpose {
         DeclareAttacker,
-        DeclareBlocker,
-        Echo,
-        Multikicker,
-        CumulativeUpkeep
+        DeclareBlocker
     }
 
     public enum BinaryChoiceType {

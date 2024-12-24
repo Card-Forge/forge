@@ -1916,10 +1916,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean payCostToPreventEffect(final Cost cost, final SpellAbility sa, final boolean alreadyPaid,
-                                          final FCollectionView<Player> allPayers) {
+    public boolean payCostToPreventEffect(final Cost cost, final SpellAbility sa, final boolean alreadyPaid, final FCollectionView<Player> allPayers) {
         // if it's paid by the AI already the human can pay, but it won't change anything
-        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
+        String prompt = null;
+        if (sa.isKeyword(Keyword.ECHO)) {
+            prompt = Localizer.getInstance().getMessage("lblPayEcho");
+        } else if (sa.isKeyword(Keyword.CUMULATIVE_UPKEEP)) {
+            prompt = "Cumulative upkeep for " + sa.getHostCard();
+        }
+        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, prompt);
     }
 
     // stores saved order for different sets of SpellAbilities

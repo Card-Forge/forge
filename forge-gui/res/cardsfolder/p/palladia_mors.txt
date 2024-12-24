@@ -4,5 +4,6 @@ Types:Legendary Creature Elder Dragon
 PT:7/7
 K:Flying
 K:Trample
-K:UpkeepCost:R G W
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {R}{G}{W}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ R G W
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice Palladia-Mors unless you pay {R}{G}{W}.

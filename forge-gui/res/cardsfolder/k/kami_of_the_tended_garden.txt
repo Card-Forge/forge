@@ -2,6 +2,7 @@ Name:Kami of the Tended Garden
 ManaCost:3 G
 Types:Creature Spirit
 PT:4/4
-K:UpkeepCost:G
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {G}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ G
 K:Soulshift:3
 Oracle:At the beginning of your upkeep, sacrifice Kami of the Tended Garden unless you pay {G}.\nSoulshift 3 (When this creature dies, you may return target Spirit card with mana value 3 or less from your graveyard to your hand.)
