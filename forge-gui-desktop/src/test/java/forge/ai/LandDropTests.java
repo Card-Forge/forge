@@ -1,0 +1,28 @@
+package forge.ai;
+
+import forge.game.Game;
+import forge.game.phase.PhaseType;
+import forge.game.player.Player;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+
+public class LandDropTests extends AITest {
+    @Test
+    public void testSwingForLethal() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCard("Nest Robber", p);
+        addCard("Nest Robber", p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+
+        addCard("Runeclaw Bear", opponent);
+        opponent.setLife(2, null);
+
+        this.playUntilPhase(game, PhaseType.END_OF_TURN);
+
+        AssertJUnit.assertTrue(game.isGameOver());
+    }
+}
