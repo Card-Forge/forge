@@ -1,15 +1,14 @@
 package forge.game.card;
 
-import java.io.Serializable;
-import java.util.Map;
-import java.util.Objects;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
+import java.io.Serializable;
+import java.util.Map;
+import java.util.Objects;
 
 public class CounterType implements Comparable<CounterType>, Serializable {
     private static final long serialVersionUID = -7575835723159144478L;

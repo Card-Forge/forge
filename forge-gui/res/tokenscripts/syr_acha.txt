@@ -1,0 +1,10 @@
+Name:Syr Acha
+ManaCost:no cost
+Colors:red
+Types:Legendary Artifact Creature Food Knight
+PT:1/1
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SubAbility$ DBEffect | SpellDescription$ You gain 3 life.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ CardDrawn | StackDescription$ Until end of turn, if {p:You} would draw a card, they draw two cards instead. | SpellDescription$ Until end of turn, if you would draw a card, draw two cards instead.
+SVar:CardDrawn:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DrawTwo | Description$ If you would draw a card, draw two cards instead.
+SVar:DrawTwo:DB$ Draw | Defined$ You | NumCards$ 2
+Oracle:{2}, {T}, Sacrifice this token: You gain 3 life. Until end of turn, if you would draw a card, draw two cards instead.

@@ -161,7 +161,7 @@ public class InventoryScene extends UIScene {
             ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
         if (data.dialogOnUse != null && data.dialogOnUse.text != null && !data.dialogOnUse.text.isEmpty()) {
             MapDialog dialog = new MapDialog(data.dialogOnUse, MapStage.getInstance(),0,null);
-            MapStage.instance.showDialog();
+            MapStage.getInstance().showDialog();
             dialog.activate();
             ChangeListener listen = new ChangeListener() {
                 @Override
@@ -180,7 +180,7 @@ public class InventoryScene extends UIScene {
         Deck data = (deckLocation.get(selected));
         if (data == null) return;
 
-        done();
+        //done();
         setSelected(null);
         RewardScene.instance().loadRewards(data, RewardScene.Type.Loot, null, data.getTags().contains("noSell"));
         Forge.switchScene(RewardScene.instance());
@@ -206,22 +206,17 @@ public class InventoryScene extends UIScene {
             Deck data = deckLocation.get(selected);
             if (data == null)
                 return;
-            if (openDialog == null) {
-                openDialog = createGenericDialog("", null, Forge.getLocalizer().getMessage("lblYes"),
-                        Forge.getLocalizer().getMessage("lblNo"), () -> {
-                            this.openBooster();
-                            removeDialog();
-                        }, this::removeDialog);
-                openDialog.getContentTable().add(Controls.newTextraLabel("Open Booster Pack?"));
-            }
-            showDialog(openDialog);
+            this.openBooster();
         }
     }
 
+    public void clearItemDescription() {
+        itemDescription.setText("");
+    }
     private void setSelected(Button actor) {
         selected = actor;
         if (actor == null) {
-            itemDescription.setText("");
+            clearItemDescription();
             deleteButton.setDisabled(true);
             equipButton.setDisabled(true);
             useButton.setDisabled(true);
@@ -246,7 +241,7 @@ public class InventoryScene extends UIScene {
             if (Current.player().getShards() < data.shardsNeeded)
                 useButton.setDisabled(true);
 
-            if (data.equipmentSlot == null || data.equipmentSlot.isEmpty()) {
+            if (data.equipmentSlot == null || data.equipmentSlot.isEmpty() || data.isCracked) {
                 equipButton.setDisabled(true);
             } else {
                 equipButton.setDisabled(false);
@@ -261,7 +256,8 @@ public class InventoryScene extends UIScene {
                     button.layout();
                 }
             }
-            itemDescription.setText(data.name + "\n[%98]" + data.getDescription());
+            String status = data.isCracked ? " (" + Forge.getLocalizer().getMessage("lblCracked") + ")" : "";
+            itemDescription.setText(data.name + status + "\n[%98]" + data.getDescription());
         }
         else if (deckLocation.containsKey(actor)){
             Deck data = (deckLocation.get(actor));
@@ -273,7 +269,7 @@ public class InventoryScene extends UIScene {
             useButton.layout();
             equipButton.setDisabled(true);
 
-            itemDescription.setText("Card Pack - " + data.getName() + "\n[%98]" + (data.getComment() == null?"":data.getComment()+" - ") + data.getAllCardsInASinglePool().countAll() + " cards");
+            itemDescription.setText(data.getName() + "\n[%98]" + (data.getComment() == null?"":data.getComment()+" - ") + data.getAllCardsInASinglePool().countAll() + " cards");
         }
 
 

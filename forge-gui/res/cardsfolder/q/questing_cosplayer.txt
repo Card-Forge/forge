@@ -1,0 +1,9 @@
+Name:Questing Cosplayer
+ManaCost:1 G
+Types:Creature Human Bard
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Questing Role token and attach it to target creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature has all the abilities of Questing Beast.)
+SVar:TrigToken:DB$ Token | TokenScript$ role_questing | AttachedTo$ Targeted | ValidTgts$ Creature | TokenOwner$ You
+DeckHas:Type$Aura|Role & Ability$Token
+DeckHints:Type$Aura
+Oracle:When Questing Cosplayer enters the battlefield, create a Questing Role token and attach it to target creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature has all the abilities of Questing Beast.)

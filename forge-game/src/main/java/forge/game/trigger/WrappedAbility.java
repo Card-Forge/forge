@@ -347,10 +347,6 @@ public class WrappedAbility extends Ability {
     public void setActivatingPlayer(final Player player) {
         sa.setActivatingPlayer(player);
     }
-    @Override
-    public boolean setActivatingPlayer(final Player player, final boolean lki) {
-        return sa.setActivatingPlayer(player, lki);
-    }
 
     @Override
     public String getDescription() {
@@ -359,15 +355,6 @@ public class WrappedAbility extends Ability {
     @Override
     public void setDescription(final String s) {
         sa.setDescription(s);
-    }
-
-    @Override
-    public ManaCost getMultiKickerManaCost() {
-        return sa.getMultiKickerManaCost();
-    }
-    @Override
-    public void setMultiKickerManaCost(final ManaCost cost) {
-        sa.setMultiKickerManaCost(cost);
     }
 
     @Override

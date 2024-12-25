@@ -1,0 +1,6 @@
+Name:Keys to the House
+ManaCost:1
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+A:AB$ UnlockDoor | Cost$ 3 T Sac<1/CARDNAME> | Mode$ LockOrUnlock | ValidTgts$ Room.YouCtrl | TgtPrompt$ Choose target Room you control | SorcerySpeed$ True | SpellDescription$ Lock or unlock a door of target Room you control. Activate only as a sorcery.
+Oracle:{1}, {T}, Sacrifice Keys to the House: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\n{3}, {T}, Sacrifice Keys to the House: Lock or unlock a door of target Room you control. Activate only as a sorcery.

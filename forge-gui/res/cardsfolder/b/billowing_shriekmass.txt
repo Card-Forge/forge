@@ -1,0 +1,11 @@
+Name:Billowing Shriekmass
+ManaCost:3 B
+Types:Creature Spirit
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, mill three cards. (Put the top three cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | Condition$ Threshold | Description$ Threshold — This creature gets +2/+1 as long as there are seven or more cards in your graveyard.
+DeckHas:Ability$Mill|Graveyard
+DeckHints:Ability$Mill|Graveyard
+Oracle:Flying\nWhen this creature enters, mill three cards. (Put the top three cards of your library into your graveyard.)\nThreshold — This creature gets +2/+1 as long as there are seven or more cards in your graveyard.

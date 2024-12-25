@@ -1,0 +1,11 @@
+Name:Scurry of Squirrels
+ManaCost:2 G
+Types:Creature Squirrel Scout
+PT:2/2
+K:Myriad
+K:Myriad
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ DBCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on target creature you control.
+SVar:DBCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | ValidTgts$ Creature.YouCtrl
+AI:RemoveDeck:Random
+DeckHas:Ability$Counters
+Oracle:Myriad, myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Then do it again. Exile the tokens at end of combat.)\nWhenever Scurry of Squirrels deals combat damage to a player, put a +1/+1 counter on target creature you control.

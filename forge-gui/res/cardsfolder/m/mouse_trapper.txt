@@ -1,0 +1,8 @@
+Name:Mouse Trapper
+ManaCost:2 W
+Types:Creature Mouse Soldier
+PT:3/2
+K:Flash
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | Valiant$ True | Execute$ TrigTap | TriggerDescription$ Valiant — Whenever CARDNAME becomes the target of a spell or ability you control for the first time each turn, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
+Oracle:Flash\nValiant — Whenever Mouse Trapper becomes the target of a spell or ability you control for the first time each turn, tap target creature an opponent controls.

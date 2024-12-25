@@ -67,6 +67,7 @@ public enum TrackableProperty {
     ChosenType2(TrackableTypes.StringType),
     NotedTypes(TrackableTypes.StringListType),
     ChosenColors(TrackableTypes.StringListType),
+    ChosenColorID(TrackableTypes.StringSetType),
     ChosenCards(TrackableTypes.CardViewCollectionType),
     ChosenNumber(TrackableTypes.StringType),
     StoredRolls(TrackableTypes.StringListType),
@@ -109,6 +110,7 @@ public enum TrackableProperty {
     AlternateState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     LeftSplitState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
     RightSplitState(TrackableTypes.CardStateViewType, FreezeMode.IgnoresFreeze),
+    Room(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     HiddenId(TrackableTypes.IntegerType),
     ExertedThisTurn(TrackableTypes.BooleanType),
 
@@ -123,6 +125,7 @@ public enum TrackableProperty {
     ManaCost(TrackableTypes.ManaCostType),
     SetCode(TrackableTypes.StringType),
     Rarity(TrackableTypes.EnumType(CardRarity.class)),
+    FunctionalVariant(TrackableTypes.StringType),
     OracleText(TrackableTypes.StringType),
     RulesText(TrackableTypes.StringType),
     Power(TrackableTypes.IntegerType),
@@ -239,6 +242,14 @@ public enum TrackableProperty {
     Description(TrackableTypes.StringType),
     CanPlay(TrackableTypes.BooleanType),
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
+
+    //ReplacementEffectView
+    RE_HostCard(TrackableTypes.CardViewType),
+    RE_Description(TrackableTypes.StringType),
+
+    //StaticAbilityView
+    ST_HostCard(TrackableTypes.CardViewType),
+    ST_Description(TrackableTypes.StringType),
 
     //HasBackSide
     BackSideName(TrackableTypes.StringType),

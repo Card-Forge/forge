@@ -15,14 +15,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Function;
 
 import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;

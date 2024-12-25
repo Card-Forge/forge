@@ -1,0 +1,12 @@
+Name:Thornplate Intimidator
+ManaCost:3 B
+Types:Creature Rat Rogue
+PT:4/3
+K:Offspring:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGenericChoice | TriggerDescription$ When this creature enters, target opponent loses 3 life unless they sacrifice a nonland permanent or discard a card.
+SVar:TrigGenericChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ PaySac,PayDiscard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost
+SVar:PaySac:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | UnlessCost$ Sac<1/Permanent.nonland/nonland permanent> | UnlessPayer$ Targeted | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent.
+SVar:PayDiscard:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | UnlessCost$ Discard<1/Card> | UnlessPayer$ Targeted | SpellDescription$ You lose 3 life unless you discard a card.
+# TODO: Most likely the ChooseGenericEffect code can be simplified somehow to avoid the necessity of having a dedicated fallback ability
+SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 3
+Oracle:Offspring {3} (You may pay an additional {3} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nWhen this creature enters, target opponent loses 3 life unless they sacrifice a nonland permanent or discard a card.

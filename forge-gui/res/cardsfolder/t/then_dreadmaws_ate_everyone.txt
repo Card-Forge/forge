@@ -1,0 +1,7 @@
+Name:Then, Dreadmaws Ate Everyone
+ManaCost:X 4 G G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ colossal_dreadmaw | TokenOwner$ You | SpellDescription$ Create X 6/6 green Dinosaur creature tokens with trample named Colossal Dreadmaw.
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Dinosaur
+Oracle:Create X 6/6 green Dinosaur creature tokens with trample named Colossal Dreadmaw.

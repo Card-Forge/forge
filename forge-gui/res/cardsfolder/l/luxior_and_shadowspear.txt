@@ -1,0 +1,10 @@
+Name:Luxior and Shadowspear
+ManaCost:2
+Types:Legendary Artifact Equipment
+K:Equip:3:Planeswalker.YouCtrl:planeswalker
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Trample & Lifelink | Description$ Equipped creature gets +1/+1 for each counter on it, and has trample and lifelink.
+SVar:X:Equipped$CardCounters.ALL
+S:Mode$ Continuous | Affected$ Permanent.EquippedBy | RemoveType$ Planeswalker | AddType$ Creature | Description$ Equipped permanent isn't a planeswalker and is a creature in addition to its other types. (Loyalty abilities can still be activated.)
+A:AB$ AnimateAll | Cost$ 1 | ValidCards$ Permanent.OppCtrl | RemoveKeywords$ Hexproof & Indestructible | SpellDescription$ Permanents your opponents control lose hexproof and indestructible until end of turn. | StackDescription$ SpellDescription
+Oracle:Equipped creature gets +1/+1 for each counter on it, and has trample and lifelink.\n{1}: Permanents your opponents control lose hexproof and indestructible until end of turn.\nEquipped permanent isn't a planeswalker and is a creature in addition to its other types. (Loyalty abilities can still be activated.)\Equip creature or planeswalker {3}

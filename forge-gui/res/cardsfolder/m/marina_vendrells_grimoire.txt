@@ -1,0 +1,15 @@
+Name:Marina Vendrell's Grimoire
+ManaCost:5 U
+Types:Legendary Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigDraw1 | TriggerDescription$ When CARDNAME enters, if you cast it, draw five cards.
+SVar:TrigDraw1:DB$ Draw | NumCards$ 5
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size and don't lose the game for having 0 or less life.
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ValidLoseReason$ LifeReachedZero | Layer$ CantHappen | Secondary$ True | Description$ You have no maximum hand size and don't lose the game for having 0 or less life.
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw2 | TriggerDescription$ Whenever you gain life, draw that many cards.
+SVar:TrigDraw2:DB$ Draw | Defined$ You | NumCards$ X
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever you lose life, discard that many cards. Then if you have no cards in hand, you lose the game.
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose | SubAbility$ DBLosesGame
+SVar:DBLosesGame:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0
+SVar:X:TriggerCount$LifeAmount
+SVar:Y:Count$InYourHand
+Oracle:When Marine Vendrell's Grimoire enters, if you cast it, draw five cards.\nYou have no maximum hand size and don't lose the game for having 0 or less life.\nWhenever you gain life, draw that many cards.\nWhenever you lose life, discard that many cards. Then if you have no cards in hand, you lose the game.

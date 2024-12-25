@@ -3,7 +3,6 @@ package forge;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.google.common.base.Function;
 import forge.adventure.stage.MapStage;
 import forge.assets.*;
 import forge.card.CardRenderer;
@@ -32,11 +31,12 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
-    private ImageFetcher imageFetcher = new LibGDXImageFetcher();
-    private List<Integer> integerChoices = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+    private final ImageFetcher imageFetcher = new LibGDXImageFetcher();
+    private final List<Integer> integerChoices = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     public GuiMobile(final String assetsDir0) {
         assetsDir = assetsDir0;
@@ -44,7 +44,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public boolean isRunningOnDesktop() {
-        return Gdx.app==null ? true : Gdx.app.getType() == ApplicationType.Desktop;
+        return Gdx.app == null || Gdx.app.getType() == ApplicationType.Desktop;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public String getCurrentVersion() {
-        return Forge.CURRENT_VERSION;
+        return Forge.getDeviceAdapter().getVersionString();
     }
 
     @Override
@@ -136,11 +136,11 @@ public class GuiMobile implements IGuiBase {
                 if (FileUtil.doesFileExist(overlayFilename)) {
                     try {
                         final Texture overlay = Forge.getAssets().getTexture(Gdx.files.absolute(overlayFilename));
-                        g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
-                    } catch (final Exception e) {
+                        g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2f, (background.getHeight() - overlay.getHeight()) / 2f, overlay.getWidth(), overlay.getHeight());
+                    } catch (Exception ignored) {
                     }
                 } else if (paperCard != null) {
-                    Texture cardImage = ImageCache.getImage(paperCard.getCardImageKey(), false);
+                    Texture cardImage = ImageCache.getInstance().getImage(paperCard.getCardImageKey(), false);
                     if (cardImage != null)
                         g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false);
                 }
@@ -153,7 +153,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public void showImageDialog(final ISkinImage image, final String message, final String title) {
         if (Forge.isMobileAdventureMode) {
-            FThreads.invokeInEdtNowOrLater(() -> MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image));
+            FThreads.invokeInEdtNowOrLater(() -> MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image, null));
             return;
         }
         new WaitCallback<Integer>() {
@@ -306,7 +306,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void clearImageCache() {
-        ImageCache.clear();
+        ImageCache.getInstance().clear();
         ImageKeys.clearMissingCards();
     }
 

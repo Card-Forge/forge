@@ -20,7 +20,6 @@ package forge.game.cost;
 import forge.card.CardType;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -67,7 +66,7 @@ public class CostTapType extends CostPartWithList {
         if (!canTapSource) {
             typeList.remove(source);
         }
-        typeList = CardLists.filter(typeList, ability.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
+        typeList = CardLists.filter(typeList, ability.isCrew() ? CardPredicates.CAN_CREW : CardPredicates.CAN_TAP);
 
         return typeList.size();
     }
@@ -148,6 +147,10 @@ public class CostTapType extends CostPartWithList {
         String type = this.getType();
         boolean sameType = false;
 
+        if (type.equals("OriginalHost")) {
+            return ability.getOriginalHost().canTap();
+        }
+
         if (type.contains(".sharesCreatureTypeWith")) {
             sameType = true;
             type = TextUtil.fastReplace(type, ".sharesCreatureTypeWith", "");
@@ -165,7 +168,7 @@ public class CostTapType extends CostPartWithList {
         if (!canTapSource) {
             typeList.remove(source);
         }
-        typeList = CardLists.filter(typeList, ability.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
+        typeList = CardLists.filter(typeList, ability.isCrew() ? CardPredicates.CAN_CREW : CardPredicates.CAN_TAP);
 
         if (sameType) {
             for (final Card card : typeList) {

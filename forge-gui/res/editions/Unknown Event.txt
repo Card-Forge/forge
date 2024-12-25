@@ -1,0 +1,376 @@
+[metadata]
+Code=DA1
+Date=2023-02-15
+Name=Unknown Event
+Type=Funny
+ScryfallCode=DA1
+
+[cards]
+CAa C Potatoes @
+CAb C Simic Slaw @
+UB U Halving Season @
+CA01 C Phyrexian Ornithopter @
+CC01 C Common Curve Filler @
+CL01a C The Forgotten Place @
+CL01b C Unknown Event Shores @
+CU01 C Irrefutable Evidence @
+CW01 C Illuminating Detective @
+MG01 M Minnea, Planar Tourist @
+MR01 M Polis the Planeshifter @
+MZ01 M The Unknown Wizard @
+PLA001 C City Hall @
+RA01 R Cinnamon, Seasoned Steed @
+RC01a R Banned Eldraine Card @
+RC01b R Command From the Shadows @
+RC01c R Enolc, Perfect Clone @
+RC01d R Guild Pact @
+RG01a R Chatterstorm and Awaken the Woods @
+RG01b R The Disciple of Nissa @
+RL01a R The Belligerent and Useless Island @
+RL01b R The Magical City, New @
+RZ01a R Anax and Cymede & Kynaios and Tiro @
+RZ01b R The Water Maro @
+RZ01c R Valko Indorian, Researcher @
+UA01a U Black Tulip @
+UA01b U That Which Was Compleated @
+UB01a U Bloodspatter Vampire @
+UB01b U Nim Mongoose @
+UL01a U Mana Conference @
+UL01b U Urza's Hot Dog Stand @
+UW01 U Good Knight @
+CA02a C Leisure Bicycle @
+CA02b C Your Mana Rock @
+CB02a C Demon Detective @
+CB02b C Syr Konrad's Squire @
+CG02a C Naturalize the Phyresis @
+CG02b C That's No Moonmist @
+CR02 C Fear of Going 0-2 Drop @
+CW02 C Unclaimed Cat @
+MW02 M You, Magic Playtester @
+MZ02 M Delphia, Undecided @
+PLA002 C Pin Trading @
+RA02a R Goblin Savant @
+RA02b R Huge Truck @
+RA02c R Jitte and Divining Top @
+RA02d R Spice Rack @
+RB02 R Seer of the Bright Side @
+RC02 R Playtest Wish @
+RG02a R Bringer of Green Zenith's Twilight @
+RG02b R Locus Cobra @
+RG02c R Lona, Tracker of the Known @
+RG02d R Questing Cosplayer @
+RR02 R Norin and Feldon @
+RU02 R Memnarchitect @
+RU02a R Disguise Agent @
+RU02c R Phyrexian Adapter @
+RU02d R Really Charming Prince @
+RW02a R Bram, Baguette Brawler @
+RW02b R Isamaru and Yoshimaru @
+RW02c R The Kami Knight @
+RZ02a R Kallist Rhoka @
+RZ02b R The Keeper of the Yellow Hat @
+RZ02c R The Chaos Keeper @
+RZ02d R The Multiplayer Nitpickers @
+UA02a U Cat Oven @
+UA02b U Deep Dish Pizza @
+UB02a U Bad Knight @
+UB02b U Incubob @
+UB02c U Innistrad Charm @
+UC02 U Magic Designer @
+UG02a U Primetime Suspect @
+UG02b U Tax Keeper @
+UR02a U Must Be Knights @
+UR02b U Red Priest of Yawgmoth @
+UR02c U Unclaimed Battle Axe @
+UU02a U Ensoul Ring @
+UU02b U Ring Out @
+UW02a U Gather, the Townsfolk @
+UW02b U Hero's Uncle @
+UW02c U Identify the Culprit @
+WW02 S The Pleasant Taxer @
+CA03 C Unicycling Automaton @
+CB03 C May of the Machine @
+CG03a C Garruk's Lost Wolf @
+CG03b C Growing Detective @
+CG03c C Investi-Gate @
+CG03d C Merfolk Surveyor @
+CL03a C Artifact Unknown Shores @
+CL03b C Command Mine @
+CR03c C Aggressive Detective @
+CR03d C Join the Winning Team @
+CU03 C Drake with Set's Mechanic @
+CW03 C Incisor Steed @
+MU03 M Barce, Friend Finder @
+MZ03 M Gen, Confider of Ages @
+PLA003 C Shy Town @
+RA03a R Bob the Claymore @
+RA03b R Luxior and Shadowspear @
+RA03c R Manakin and Millikin @
+RA03d R Phyrexian Incubator @
+RB03a R Auntie Flint @
+RB03b R Dan, Shrewd Trader @
+RB03c R Incubation Triformer @
+RB03d R Old Way Phyrexian @
+RB03e R The Juzam Master @
+RG03a R Maître Tree @
+RG03b R Mr. Wiggles, Helpful Butterfly @
+RG03c R Pulse of the Hunter Maze @
+RG03d R The Dilu Horse @
+RG03e R The Spike Cactus @
+RG03f R The Paradise Bird @
+RR03 R The Wiley Speedster @
+RU03a R Dockbreacher @
+RU03b R Wrath of Oko @
+RU03c R The Covert Blue Mage @
+RU03d R Second Stage of Magic Design @
+RW03a R Azorius Traffic Enforcement @
+RW03b R Fioran Reformist @
+RW03c R Ratatwotwo @
+RW03d R Stika, Playtestress @
+RW03e R The Inspector Inspector @
+RW03f R White Rhystic Study @
+RW03g R The Tokenator @
+RW03h R Sixth Stage of Magic Design @
+RZ03a R Slobad, Actually Just Fine @
+RZ03b R The Egotistical Velociraptor @
+RZ03c R The Keeper of Kaldra @
+RZ03d R The Caffeinated Runner @
+RZ03e R The Weekly Princess @
+RZ03f R The Milling Runner @
+RZ03g R The Fifth Alias @
+RZ03h R The Actualizer @
+UA03a U Bag of Stroopwafels @
+UA03b U Famous Museum @
+UA03c U Interrogation Robot @
+UA03d U Sagrada Familiar @
+UA03e U Segovian Sword @
+UB03 U Impressive Rat @
+UG03a U Ate-o'-Clock @
+UG03b U Kamigawa Charm @
+UU03 U Tricky Mage @
+UU03b U Ulgrotha Charm @
+UU03c U Xerex Squire @
+UW03 U Tax Hounds @
+CG04 C Fear of Unsleeved Decks @
+CL04 C Command Power Plant @
+CR04a C Azra Matchthrower @
+CR04b C Believe in the Cleave @
+CR04c C Phyrexian Esthetician @
+CU04 C Unclaimed Bird @
+CU04a C Educated Detective @
+CU04b C Shadowmoor Draw Spell @
+CU04d C Wistful Puppeteer @
+PLA004 C Artist Alley @
+RB04 R The Gunky Runner @
+RB04a R Hidetsugu's Poison Rite @
+RB04b R Invasion Specialist @
+RB04c R Night Out in Vegas @
+RB04d R Quest Compleated Beast @
+RB04e R Rankle, Master of Pranksters @
+RB04f R The Magic Bandit @
+RG04 R Phyrexian Cytoshaper @
+RR04a R Mzed, Mercenary Leader @
+RR04b R The Great Juggernaut @
+RR04c R At Least It's a Dry Heat @
+RR04d R The Wheeling Runner @
+RU04a R The Clever Magician @
+RU04b R Toothy and Zndrsplt @
+RU04c R The Fearsome Flock @
+RW04 R Leech Medic @
+RW04a R Gerrard and Hanna @
+RW04b R Kylem All-Star @
+RW04d R The Miniaturizer @
+RW04e R Theopholos, Order Acolyte @
+RW04f R Try-My-Deck Elemental @
+RZ04a R Forestfolk @
+RZ04b R Hadran, Naya Sunseeder @
+RZ04c R Halana and Alena and Gisa and Geralf @
+RZ04d R Maeve, Wearer of Many Hats @
+RZ04e R Princess Snowfall @
+RZ04f R Riku and Riku @
+RZ04g R Shahrazad and Sindbad @
+RZ04h R The Joiner of Cats @
+RZ04i R The Karst, Enchanted @
+RZ04j R The Marvelous Scientist @
+RZ04k R The Sprinkler of Stardust @
+RZ04l R The Trivia Mastermind @
+RZ04m R The Bus Runner @
+RZ04n R The Majestic Duo @
+RZ04o R Fifth Stage of Magic Design @
+UG04 U Arcbound Mamba @
+UR04a U Guess Who it Is! @
+UR04b U Jeska and Kamahl @
+UR04c U Tarkir Charm @
+UU04 U Farseeing Flockmate @
+CB05 C Shedding Snake @
+MZ05 M The Horizon Seeker @
+MZ05a M The Convincing General @
+PLA005 C Sky Deck @
+RA05a R Glorious Dragon-Kin @
+RA05b R Oilskelion @
+RB05 R The Keeper of Dark Pacts @
+RC05a R Mysterious Confluence @
+RC05b R The Companion of the Wilds @
+RC05c R Your Favorite Character @
+RG05a R Grek the Ogre @
+RG05b R Oozeavite @
+RR05 R Snapsail Rider @
+RU05 R Welcome to Mini-apolis @
+RU05a R The Cosplayzer @
+RU05b R The Countering Runner @
+RW05a R Agoraphobic Phyrexian @
+RW05b R Form of the Stax Player @
+RW05c R The Sixth Seraph @
+RW05d R The Keeper of Four Scythes @
+RW05e R Hosting Season @
+RW05f R Third Stage of Magic Design @
+RZ05a R Genevieve, Conniving Dragon @
+RZ05b R Margle, Cousin of Yargle @
+RZ05c R The Ash Lizard @
+RZ05d R The Knight of Commentary @
+RZ05e R The Master of Cuisine @
+RZ05f R The Judge of Height @
+RZ05g R The Zonian Brawler @
+UA05a U Compleated Clone Shell @
+UA05b U Guilded Lotus @
+UA05c U Power Level Analyzer @
+UB05 U Phyrexian Chimney Imp @
+UR05 U Joven and Chandler @
+UU05 U Adventurer Beguiler @
+UW05 U Rosewater's Nemesis @
+UW05b U Windy City Elemental @
+CA06a C Karlov's Crossbow @
+CA06b C Sojourner's Enforcermite @
+PLA006 C Black Lotus Lounge @
+RA06a R Platinum Persecutor @
+RA06b R Soul of Mirrodin @
+RA06c R Sword of Fire and Ice and War and Peace @
+RA06d R Sharp Eraser @
+RB06 R The Zassacre Zirl @
+RC06 R Who's That Praetor? @
+RC06b R Fear of the Unknown @
+RG06a R Praetorhoof Behemoth @
+RG06b R The Colossal Dreadmaw @
+RR06 R Hound of Urabrask @
+RR06b R The Powerful Dragon @
+RW06 R The Knight of Weeks @
+RW06b R The Highland Runner @
+RZ06 R The Cobra King @
+RZ06a R Arvad of the Weatherlight @
+RZ06b R Autumn Willow and Baron Sengir @
+RZ06c R The Wise Sable @
+RZ06d R Seventh Stage of Magic Design @
+UA06a U Gingerbehemoth @
+UA06b U Sawtooth Avenger @
+UB06 U Soul Drainer @
+UZ06 U Trash Panda @
+CG07 C Unclaimed Tanadon @
+PLA007 C Pin Collector's Booth @
+RA07a R Battle Myrsphere @
+RA07b R Chancellor of the Mulligan @
+RC07a R Call Up Emrakul to Help @
+RC07b R The Battle of Dragon Brothers @
+RG07 R The Massive Zatcatl @
+RU07a R The Value Knight @
+RU07b R Fourth Stage of Magic Design @
+RZ07a R Colossal Dreadmaw and Storm Crow @
+RZ07b R Groaaaaag, Hungry Monster @
+UC07 U Windmill Slam @
+PLA008 C The Windy City @
+RB08 R Myojin of Night's Reach and Grim Betrayal @
+RG08 R Then, Dreadmaws Ate Everyone @
+RR08a R Kevin, Questing Dragon @
+RR08b R The Knight of Land Drops @
+RU08 R Phyrexian Broodstar @
+RU08a R Lorthos, Tentacled Terror @
+RZ08a R Avacyn and Griselbrand @
+RZ08b R Koma and Toski, Compleated @
+RZ08c R Riven Turnbull and Princess Lucrezia @
+RZ08d R Simic, Value Engine @
+PLA009 C The Bean @
+RZ09 R Daxiver, Izzet Electromancer @
+PLA010 C Unknown Event @
+RG10 R Emrakul and Chatterfang @
+RR10 R The Crimson Avenger @
+RZ10 R Ano'thr, Equipment Commander @
+CA11 C Toe-Breaking Helmet @
+CB11 C Unclaimed Blessing @
+CB11a C Life at Stake @
+CU11 C Point to the Scoreboard @
+CW11 C Drive to Work @
+RA11a R Mindslaver Toolkit @
+RA11b R Mox Poison @
+RG11 R Occupation of Llanowar @
+RZ11a R Awoken Nephilim @
+RZ11b R The Scholar of Seas @
+UA11 U Original Skullclamp @
+UB11 U Delve too Deep @
+UR11a U Nevermind @
+UR11b U Tax Bolt @
+UU11a U Clear, the Mind @
+UU11b U Elemental, My Dear @
+UW11 U Echoing Echo @
+CA12 C Melira's Snacks @
+CB12 C Mark Ritual @
+CU12a C One Does Not @
+CU12b C Taught by Narset @
+CW12 C Taught by Serra @
+RA12a R Guildmark @
+RA12b R Trampled Lotus @
+RG12a R HONK! @
+RG12b R Clear, Fair Magic @
+RU12 R Untap, Upkeep, Draw @
+RZ12 R Eldest Dragon Highlander @
+RZ12b R Zimone's Homework @
+UB12 U Sheoldred's Terror @
+UG12 U Rampant, Growth @
+CB13 C Long-Term Phyresis Study @
+CB13b C Taught by Vito @
+CG13 C Take the High Ground @
+CR13 C Burn the Phyresis @
+CU13 C More of That Strange Oil... @
+RA13 R Sort of _____ and _____ @
+RB13 R The Archenemy's Charm @
+RR13b R Triple Threat @
+RW13 R Life Cloud @
+UR13 U Furnace Oriflamme @
+UR13b U Across the Multiverse @
+UU13 U Takesies // Backsies @
+CG14 C Taught by Surrak @
+CR14a C My Deck is About a Seven @
+CR14b C Taught by Bruce Tarl @
+RB14 R Another Night in Vegas @
+UU14a U Tax Draw @
+UU14b U Tax Sweeper @
+PLA015 C Event Horizon @
+RR15 R Force of Rowan @
+RW15 R Crux of Mirrodin @
+RZ15 R Knowing // Half the Battle @
+RZ15b R First Stage of Magic Design @
+UG15 U The Alright Henge @
+UR15 U Lava, Axe @
+UW15 U Theros Charm @
+RR16 R Math is for Blockers @
+RZ16 R The Beleaguered Boxer @
+UB16 U Ransack, the Lab @
+PLA018 C Stroopwafel Cafe @
+PLA019 C Shrinking Plane @
+PLA020 C Windmill Farm @
+PLA023 C Royal Booster @
+PLA024 C Bicycle Rack @
+RZ24 R The Dogronmaster @
+MA30 M Phila, Unsealed @
+RA31 R The Rebellious Intelligence @
+RZ34 R The Duke of Midrange @
+RW35 R The Asker of More Mana @
+RU38 R The Crab Queen @
+RU42 R The Fish Brewer @
+RW47 R The Curve Keeper @
+RB54 R The Disciple of Vess @
+RG59 R The Bear Force Pilot @
+RG59a R The Bear Force Pilot Runner @
+RG63 R The Roaring Toeclaws @
+RR66 R The Crafter @
+RU72 R The Rhystic Storyteller @
+RW90 R The Keeper of Favorite Cards @
+MZ99 M The Collector @

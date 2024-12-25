@@ -1,0 +1,7 @@
+Name:Get Out
+ManaCost:U U
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBChangeZone
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Creature,Enchantment | TgtPrompt$ Counter target creature or enchantment spell | SpellDescription$ Counter target creature or enchantment spell.
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature.YouOwn,Enchantment.YouOwn | TgtPrompt$ Select target creature or enchantment you own | TargetMin$ 1 | TargetMax$ 2 | TgtZone$ Battlefield | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return one or two target creatures and/or enchantments you own to your hand.
+Oracle:Choose one —\n• Counter target creature or enchantment spell.\n• Return one or two target creatures and/or enchantments you own to your hand.

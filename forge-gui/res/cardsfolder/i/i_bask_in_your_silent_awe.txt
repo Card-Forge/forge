@@ -7,6 +7,6 @@ T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | Execute$ DBCount | 
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ DBReset | TriggerZones$ Command | Static$ True
 SVar:DBCount:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1
 SVar:DBReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
-SVar:Abandon:AB$ Abandon | Cost$ 0
+SVar:Abandon:DB$ Abandon
 SVar:X:Number$0
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nEach opponent can't cast more than one spell each turn.\nAt the beginning of your upkeep, if no opponent cast a spell since your last turn ended, abandon this scheme.

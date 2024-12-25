@@ -49,7 +49,7 @@ ScryfallCode=DMU
 35 C Take Up the Shield @Manuel Castañón
 36 R Temporary Lockdown @Bryan Sola
 37 R Urza Assembles the Titans @Josu Hernaiz
-38 R Valiant Veteran @Nestor Ossandon Leal
+38 R Valiant Veteran @Néstor Ossandón Leal
 39 U Wingmantle Chaplain @Miranda Meeks
 40 R Academy Loremaster @Marcela Medeiros
 41 C Academy Wall @Adam Paquette
@@ -108,7 +108,7 @@ ScryfallCode=DMU
 94 C Extinguish the Light @Ekaterina Burmak
 95 C Gibbering Barricade @Drew Tucker
 96 U Knight of Dusk's Shadow @Wisnu Tan
-97 M Liliana of the Veil @Martina Fackova
+97 M Liliana of the Veil @Martina Fačková
 98 U Monstrous War-Leech @Christopher Burdett
 99 C Phyrexian Rager @Brock Grossman
 100 C Phyrexian Vivisector @Irina Nordsol
@@ -158,7 +158,7 @@ ScryfallCode=DMU
 144 C Smash to Dust @Marc Simonetti
 145 U Sprouting Goblin @Uriah Voth
 146 R Squee, Dubious Monarch @Zoltan Boros
-147 R Temporal Firestorm @Nestor Ossandon Leal
+147 R Temporal Firestorm @Néstor Ossandón Leal
 148 C Thrill of Possibility @David Auden Nash
 149 U Twinferno @Justyna Dura
 150 C Viashino Branchrider @Andrew Mar
@@ -300,11 +300,6 @@ ScryfallCode=DMU
 284 R Tyrannical Pitlord @Donato Giancola
 285 R Ragefire Hellkite @Xavier Ribeiro
 286 R Briar Hydra @Caio Monteiro
-423 R Serra Redeemer @Joshua Raphael
-424 R Cosmic Epiphany @Eli Minaya
-425 R Tyrannical Pitlord @Donato Giancola
-426 R Ragefire Hellkite @Xavier Ribeiro
-427 R Briar Hydra @Caio Monteiro
 
 [showcase]
 287 R Danitha, Benalia's Hope @Barbara Rosiak
@@ -414,7 +409,7 @@ ScryfallCode=DMU
 387 R Leyline Binding @Cristi Balanescu
 388 M Serra Paragon @Heonhwa Choe
 389 R Temporary Lockdown @Bryan Sola
-390 R Valiant Veteran @Nestor Ossandon Leal
+390 R Valiant Veteran @Néstor Ossandón Leal
 391 R Academy Loremaster @Marcela Medeiros
 392 R Aether Channeler @Caio Monteiro
 393 R Defiler of Dreams @Ryan Pancoast
@@ -435,7 +430,7 @@ ScryfallCode=DMU
 408 R Radha's Firebrand @Ângelo Bortolini
 409 R Rundvelt Hordemaster @Bruno Biazotto
 410 M Shivan Devastator @Brent Hollowell
-411 R Temporal Firestorm @Nestor Ossandon Leal
+411 R Temporal Firestorm @Néstor Ossandón Leal
 412 R Defiler of Vigor @Chase Stone
 413 R Herd Migration @Eric Deschamps
 414 R Leaf-Crowned Visionary @Anna Steinbauer
@@ -447,6 +442,11 @@ ScryfallCode=DMU
 420 R Urborg Lhurgoyf @Andrey Kuzinskiy
 421 R Plaza of Heroes @Gabor Szikszai
 422 R Thran Portal @Sarah Finnigan
+423 R Serra Redeemer @Joshua Raphael
+424 R Cosmic Epiphany @Eli Minaya
+425 R Tyrannical Pitlord @Donato Giancola
+426 R Ragefire Hellkite @Xavier Ribeiro
+427 R Briar Hydra @Caio Monteiro
 
 [buy a box]
 428 R Llanowar Loamspeaker @Volkan Baǵa

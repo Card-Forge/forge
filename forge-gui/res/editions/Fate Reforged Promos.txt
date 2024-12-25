@@ -10,7 +10,7 @@ ScryfallCode=PFRF
 50 R Sage-Eye Avengers @Viktor Titov
 54 R Supplant Form @Mike Bierek
 62 R Archfiend of Depravity @Volkan Baǵa
-74 U Mardu Shadowspear @Dan Scott
+74 U Mardu Shadowspear @Dan Murayama Scott
 99 R Flamerush Rider @Viktor Titov
 137 R Sandsteppe Mastodon @Kev Walker
 138 R Shamanic Revelation @Matt Stewart

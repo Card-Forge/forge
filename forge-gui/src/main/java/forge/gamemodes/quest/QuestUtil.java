@@ -594,7 +594,7 @@ public class QuestUtil {
         rules.setPlayForAnte(useAnte);
         rules.setMatchAnteRarity(matchAnteRarity);
         rules.setGamesPerMatch(qData.getMatchLength());
-        rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        rules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         rules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
 
         final TreeSet<GameType> variant = new TreeSet<>();

@@ -1,0 +1,8 @@
+Name:Traverse Valley
+ManaCost:G
+Types:Sorcery
+K:Kicker:Forage
+A:SP$ Seek | Type$ Land.nonBasic | RememberFound$ True | SubAbility$ DBChangeZone | SpellDescription$ Seek a nonbasic land card.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Tapped$ True | Condition$ Kicked | Origin$ Hand | Destination$ Battlefield | SubAbility$ DBCleanup | SpellDescription$ If this spell was kicked, put that card onto the battlefield tapped.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Kicker — Forage.\nSeek a nonbasic land card. If this spell was kicked, put that card onto the battlefield tapped.

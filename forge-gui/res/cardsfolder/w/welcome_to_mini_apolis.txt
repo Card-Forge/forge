@@ -1,0 +1,6 @@
+Name:Welcome to Mini-apolis
+ManaCost:3 U U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigCopySpell | TriggerDescription$ Whenever an opponent casts a creature spell, create a token that's a copy of it, except it's 1/1.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Controller$ You | Defined$ TriggeredSpellAbility | SetPower$ 1 | SetToughness$ 1
+Oracle:Whenever an opponent casts a creature spell, create a token that's a copy of it, except it's 1/1.

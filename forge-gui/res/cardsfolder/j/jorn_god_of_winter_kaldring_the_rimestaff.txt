@@ -5,8 +5,8 @@ PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntapAllSnow | TriggerDescription$ Whenever NICKNAME attacks, untap each snow permanent you control.
 SVar:TrigUntapAllSnow:DB$ UntapAll | ValidCards$ Permanent.Snow+YouCtrl
 SVar:PlayMain1:TRUE
-DeckNeeds:Type$Snow
 DeckHas:Ability$Graveyard
+DeckNeeds:Type$Snow
 AlternateMode:Modal
 Oracle:Whenever Jorn attacks, untap each snow permanent you control.
 

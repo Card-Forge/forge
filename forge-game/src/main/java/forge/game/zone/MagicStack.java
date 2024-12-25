@@ -18,8 +18,10 @@
 package forge.game.zone;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Predicate;
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import forge.GameCommand;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -40,11 +42,13 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.util.IterableUtil;
 import forge.util.TextUtil;
 
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -226,7 +230,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         undoStackOwner = null;
     }
     public Iterable<SpellAbility> filterUndoStackByHost(final Card c) {
-        return Iterables.filter(undoStack, CardTraitPredicates.isHostCard(c));
+        return IterableUtil.filter(undoStack, CardTraitPredicates.isHostCard(c));
     }
 
     public final void add(SpellAbility sp) {
@@ -437,13 +441,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Create a new object, since the triggers aren't happening right away
         List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
         if (!chosenTargets.isEmpty()) {
-            runParams = AbilityKey.newMap();
             SpellAbility s = sp;
             if (si != null) {
                 s = si.getSpellAbility();
                 chosenTargets = s.getAllTargetChoices();
             }
-            runParams.put(AbilityKey.SourceSA, s);
             Set<GameObject> distinctObjects = Sets.newHashSet();
             for (final TargetChoices tc : chosenTargets) {
                 for (final GameObject tgt : tc) {
@@ -453,14 +455,22 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         continue;
                     }
 
+                    runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.SourceSA, s);
                     if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
                         runParams.put(AbilityKey.FirstTime, null);
                         ((Card) tgt).setBecameTargetThisTurn(true);
+                    }
+                    if (tgt instanceof Card && !((Card) tgt).isValiant() && activator.equals(((Card) tgt).getController())) {
+                        runParams.put(AbilityKey.Valiant, null);
+                        ((Card) tgt).setValiant(true);
                     }
                     runParams.put(AbilityKey.Target, tgt);
                     game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                 }
             }
+            runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.SourceSA, s);
             runParams.put(AbilityKey.Targets, distinctObjects);
             runParams.put(AbilityKey.Cause, s.getHostCard());
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
@@ -540,11 +550,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         GameActionUtil.checkStaticAfterPaying(sp.getHostCard());
 
-        if (sp.isActivatedAbility() && sp.isPwAbility()) {
-            sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
-        }
         game.updateStackForView();
-        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex, false));
+        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
         return si;
     }
 
@@ -601,10 +608,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
+            AbilityUtils.resolve(sa);
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
             runParams.put(AbilityKey.SpellAbility, sa);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
-            AbilityUtils.resolve(sa);
         } else {
             sa.resolve();
             // do creatures ETB from here?
@@ -619,9 +626,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
-        finishResolving(sa, thisHasFizzled);
 
         game.getAction().checkStaticAbilities();
+
+        finishResolving(sa, thisHasFizzled);
+
         game.copyLastState();
         if (isEmpty() && !hasSimultaneousStackEntries()) {
             // assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object)
@@ -976,14 +985,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         for (SpellAbilityStackInstance si : stack) {
             if (si.isTrigger() && si.getSourceCard().equals(source)) {
-                if (pred == null || pred.apply(si.getSpellAbility())) {
+                if (pred == null || pred.test(si.getSpellAbility())) {
                     return true;
                 }
             }
         }
         for (SpellAbility sa : simultaneousStackEntryList) {
             if (sa.isTrigger() && sa.getHostCard().equals(source)) {
-                if (pred == null || pred.apply(sa)) {
+                if (pred == null || pred.test(sa)) {
                     return true;
                 }
             }
@@ -1016,7 +1025,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         List<ZoneType> zoneList = ImmutableList.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Stack);
 
         for (TargetChoices tc : chosenTargets) {
-            if (Iterables.any(tc.getTargetPlayers(), PlayerPredicates.isOpponentOf(p))) {
+            if (IterableUtil.any(tc.getTargetPlayers(), PlayerPredicates.isOpponentOf(p))) {
                 return true;
             }
             for (SpellAbility sp : tc.getTargetSpells()) {

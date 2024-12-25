@@ -1,0 +1,8 @@
+Name:Clammy Prowler
+ManaCost:3 U
+Types:Enchantment Creature Horror
+PT:2/5
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target attacking creature can't be blocked this turn.
+SVar:TrigPump:DB$ Effect | ValidTgts$ Creature.Other+attacking | TgtPrompt$ Select another target attacking creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:Whenever Clammy Prowler attacks, another target attacking creature can't be blocked this turn.

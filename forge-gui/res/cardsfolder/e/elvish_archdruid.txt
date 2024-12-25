@@ -5,6 +5,6 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Elf+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elf creatures you control get +1/+1.
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each Elf you control.
 SVar:X:Count$Valid Elf.YouCtrl
-DeckHints:Type$Elf
 SVar:PlayMain1:TRUE
+DeckHints:Type$Elf
 Oracle:Other Elf creatures you control get +1/+1.\n{T}: Add {G} for each Elf you control.

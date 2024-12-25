@@ -1,0 +1,6 @@
+Name:Primo, the Indivisible
+ManaCost:no cost
+Colors:green, blue
+Types:Legendary Creature Fractal
+PT:0/0
+Oracle:

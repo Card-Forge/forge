@@ -1,0 +1,11 @@
+Name:Cat Collector
+ManaCost:2 W
+Types:Creature Human Citizen
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When this creature enters, create a Food token. (It's an artifact with "2, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | FirstTime$ True | PlayerTurn$ True | Execute$ DBToken | TriggerDescription$ Whenever you gain life for the first time during each of your turns, create a 1/1 white Cat creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_cat | TokenOwner$ You
+DeckHas:Ability$LifeGain|Token|Food
+DeckHints:Ability$LifeGain
+Oracle:When this creature enters, create a Food token. (It's an artifact with "2, {T}, Sacrifice this token: You gain 3 life.")\nWhenever you gain life for the first time during each of your turns, create a 1/1 white Cat creature token.

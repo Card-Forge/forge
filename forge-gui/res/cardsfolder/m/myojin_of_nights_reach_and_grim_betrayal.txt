@@ -1,0 +1,10 @@
+Name:Myojin of Night's Reach and Grim Betrayal
+ManaCost:5 B B B
+Types:Legendary Creature Spirit
+PT:10/4
+K:etbCounter:Indestructible:1:CheckSVar$ FromHand:CARDNAME enters the battlefield with an indestructible counter on it if you cast it from your hand.
+SVar:FromHand:Count$wasCastFromYourHandByYou.1.0
+A:AB$ Discard | Cost$ SubCounter<1/Indestructible> | Defined$ Player.Opponent | Mode$ Hand | SubAbility$ DBReturn | SpellDescription$ Each opponent discards their hand. Put onto the battlefield under your control all creature cards in all graveyards that were put there from anywhere this turn.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Creature.ThisTurnEntered | GainControl$ True
+DeckHas:Ability$Graveyard
+Oracle:Myojin of Night's Reach and Grim Betrayal enters the battlefield with an indestructible counter on it if you cast it from your hand.\nRemove an indestructible counter from Myojin of Night's Reach and Grim Betrayal: Each opponent discards their hand. Put onto the battlefield under your control all creature cards in all graveyards that were put there from anywhere this turn.

@@ -17,8 +17,6 @@
  */
 package forge.gamemodes.match.input;
 
-import java.util.List;
-
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
@@ -33,6 +31,8 @@ import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
+
+import java.util.List;
 
 /**
  * <p>
@@ -148,14 +148,14 @@ public class InputBlock extends InputSyncronizedBase {
     @Override
     public String getActivateAction(Card card) {
         if (combat.isAttacking(card)) {
-            return "declare blockers for card";
+            return Localizer.getInstance().getMessage("lblDeclareBlockersForCard");
         }
         if (currentAttacker != null && card.isCreature() && defender.getZone(ZoneType.Battlefield).contains(card)) {
             if (combat.isBlocking(card, currentAttacker)) {
-                return "remove card from combat";
+                return Localizer.getInstance().getMessage("lblRemoveFromCombat");
             }
             if (CombatUtil.canBlock(currentAttacker, card, combat)) {
-                return "block with card";
+                return Localizer.getInstance().getMessage("lblBlockWithCard");
             }
         }
         return null;

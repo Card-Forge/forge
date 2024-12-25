@@ -1,6 +1,5 @@
 package forge.gamesimulationtests.util;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
@@ -58,6 +57,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * Default harmless implementation for tests.
@@ -502,7 +502,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional) {
+    public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, boolean isOptional) {
         return chooseItem(validTypes);
     }
 
@@ -723,6 +723,18 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -92,9 +92,6 @@ public class ReplaceDamage extends ReplacementEffect {
                 return false;
             }
         }
-        if (hasParam("IsEquipping") && !getHostCard().isEquipping()) {
-            return false;
-        }
 
         if (hasParam("DamageTarget")) {
             //Lava Burst and Whippoorwill check

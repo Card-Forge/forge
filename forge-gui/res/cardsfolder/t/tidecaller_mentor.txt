@@ -1,0 +1,8 @@
+Name:Tidecaller Mentor
+ManaCost:1 U B
+Types:Creature Rat Wizard
+PT:3/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | Threshold$ True | TriggerDescription$ Threshold — When CARDNAME enters, if seven or more cards are in your graveyard, return up to one target nonland permanent to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target nonland permanent
+Oracle:Menace\nThreshold — When Tidecaller Mentor enters, if seven or more cards are in your graveyard, return up to one target nonland permanent to its owner's hand.

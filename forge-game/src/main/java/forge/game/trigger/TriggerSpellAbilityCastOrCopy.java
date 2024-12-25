@@ -38,7 +38,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
-import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -139,6 +138,9 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         if (!matchesValidParam("ValidSA", spellAbility)) {
             return false;
         }
+        if (!matchesValidParam("ValidSAonCard", spellAbility, cast)) {
+            return false;
+        }
 
         if (hasParam("TargetsValid")) {
             SpellAbility sa = spellAbility;
@@ -222,23 +224,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 }
             }
             if (targets.size() != 1) {
-                return false;
-            }
-        }
-
-        if (hasParam("SharesNameWithActivatorsZone")) {
-            String zones = getParam("SharesNameWithActivatorsZone");
-            if (si == null) {
-                return false;
-            }
-            boolean sameNameFound = false;
-            for (Card c: si.getSpellAbility().getActivatingPlayer().getCardsIn(ZoneType.listValueOf(zones))) {
-                if (cast.getName().equals(c.getName())) {
-                    sameNameFound = true;
-                    break;
-                }
-            }
-            if (!sameNameFound) {
                 return false;
             }
         }

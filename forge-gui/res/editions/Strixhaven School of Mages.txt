@@ -6,7 +6,7 @@ Code2=STX
 Type=Expansion
 BoosterCovers=5
 DraftBooster=1 fromSheet("STX lesson"), 9 Common:fromSheet("STX cards"), 3 Uncommon:fromSheet("STX cards"), 1 RareMythic:fromSheet("STX cards"), 1 Any STA
-CollectorBooster=2 Uncommon:fromSheet("STA")+, 2 RareMythic:fromSheet("STA")+, 1 RareMythic:fromSheet("STX extended art"), 1 RareMythic C21, 1 fromSheet("STX lesson")+, 1 RareMythic+, 2 Uncommon+, 5 Common+
+CollectorBooster=2 Uncommon:fromSheet("STA cards")+, 2 RareMythic:fromSheet("STA cards")+, 1 RareMythic:fromSheet("STX extended art"), 1 RareMythic C21, 1 fromSheet("STX lesson")+, 1 RareMythic+, 2 Uncommon+, 5 Common+
 Prerelease=6 Boosters, 1 RareMythic+
 FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 ScryfallCode=STX
@@ -146,7 +146,7 @@ ScryfallCode=STX
 132 U Fortifying Draught @Andrey Kuzinskiy
 133 R Gnarled Professor @Simon Dominic
 134 U Honor Troll @Jesper Ejsing
-135 U Karok Wrangler @Dan Scott
+135 U Karok Wrangler @Dan Murayama Scott
 136 C Leyline Invocation @Liiga Smilshkalne
 137 C Mage Duel @Randy Vargas
 138 U Master Symmetrist @Forrest Imel
@@ -165,7 +165,7 @@ ScryfallCode=STX
 151 M Jadzi, Oracle of Arcavios @Chris Rahn
 152 R Kianne, Dean of Substance @Ryan Pancoast
 153 M Mila, Crafty Companion @Kieran Yanner
-154 R Pestilent Cauldron @Dan Scott
+154 R Pestilent Cauldron @Dan Murayama Scott
 155 R Plargg, Dean of Chaos @Bryan Sola
 156 M Rowan, Scholar of Sparks @Magali Villeneuve
 157 R Selfless Glyphweaver @Johannes Voss
@@ -344,7 +344,7 @@ ScryfallCode=STX
 324 R Flamescroll Celebrant @Uriah Voth
 325 M Jadzi, Oracle of Arcavios @Chris Rahn
 326 R Kianne, Dean of Substance @Ryan Pancoast
-327 R Pestilent Cauldron @Dan Scott
+327 R Pestilent Cauldron @Dan Murayama Scott
 328 R Plargg, Dean of Chaos @Bryan Sola
 329 R Selfless Glyphweaver @Johannes Voss
 330 R Shaile, Dean of Radiance @Yongjae Choi

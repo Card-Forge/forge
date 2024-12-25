@@ -52,11 +52,11 @@ ScryfallCode=C21
 44 R Stinging Study @Kieran Yanner
 45 R Tivash, Gloom Summoner @Kieran Yanner
 46 R Veinwitch Coven @Caio Monteiro
-47 R Audacious Reshapers @Justyna Gil
+47 R Audacious Reshapers @Justyna Dura
 48 R Battlemage's Bracers @David Gaillet
 49 R Creative Technique @Gaboleps
 50 R Cursed Mirror @David Gaillet
-51 R Fiery Encore @Justyna Gil
+51 R Fiery Encore @Justyna Dura
 52 R Inferno Project @Olivier Bernard
 53 R Laelia, the Blade Reforged @Wisnu Tan
 54 R Radiant Performer @Alessandra Pisano
@@ -119,7 +119,7 @@ ScryfallCode=C21
 111 R Windborn Muse @Adam Rex
 112 R Zetalpa, Primal Dawn @Chris Rallis
 113 R Aether Gale @Jack Wang
-114 R Aetherspouts @Dan Scott
+114 R Aetherspouts @Dan Murayama Scott
 115 C Brainstorm @Willian Murai
 116 R Champion of Wits @Even Amundsen
 117 R Crafty Cutpurse @Grzegorz Rutkowski
@@ -130,9 +130,9 @@ ScryfallCode=C21
 122 M Metallurgic Summonings @Kieran Yanner
 123 R Mind's Desire @Anthony Francisco
 124 M Naru Meha, Master Wizard @Matt Stewart
-125 C Ponder @Dan Scott
+125 C Ponder @Dan Murayama Scott
 126 U Rapid Hybridization @Jack Wang
-127 R Reef Worm @Dan Scott
+127 R Reef Worm @Dan Murayama Scott
 128 R Rite of Replication @Matt Cavotta
 129 U Serum Visions @Izzy
 130 R Swarm Intelligence @Daniel Ljunggren
@@ -158,7 +158,7 @@ ScryfallCode=C21
 150 U Parasitic Impetus @Mila Pesic
 151 U Reckless Spite @Karl Kopinski
 152 R Sangromancer @Igor Kieryluk
-153 U Sanguine Bond @Jaime Jones
+153 R Sanguine Bond @Jaime Jones
 154 U Silversmote Ghoul @Bryan Sola
 155 U Suffer the Past @Trevor Claxton
 156 R Taste of Death @Chris Rallis
@@ -167,9 +167,9 @@ ScryfallCode=C21
 159 R Blasphemous Act @Daarken
 160 R Brass's Bounty @Grzegorz Rutkowski
 161 R Chain Reaction @Trevor Claxton
-162 R Charmbreaker Devils @Dan Scott
+162 R Charmbreaker Devils @Dan Murayama Scott
 163 M Combustible Gearhulk @Daarken
-164 M Daretti, Scrap Savant @Dan Scott
+164 M Daretti, Scrap Savant @Dan Murayama Scott
 165 R Dualcaster Mage @Matt Stewart
 166 R Erratic Cyclops @Milivoj Ćeran
 167 R Etali, Primal Storm @Raymond Swanland
@@ -205,7 +205,7 @@ ScryfallCode=C21
 197 C Kodama's Reach @John Avon
 198 U Krosan Grip @Zoltan Boros & Gabor Szikszai
 199 R Managorger Hydra @Lucas Graciano
-200 U Nissa's Expedition @Dan Scott
+200 U Nissa's Expedition @Dan Murayama Scott
 201 R Nissa's Renewal @Lius Lasahido
 202 U Pulse of Murasa @Matt Stewart
 203 R Rampaging Baloths @Steve Prescott
@@ -214,14 +214,14 @@ ScryfallCode=C21
 206 R Shamanic Revelation @Cynthia Sheppard
 207 R Terastodon @Lars Grant-West
 208 R Verdant Sun's Avatar @Izzy
-209 R Biomass Mutation @Dan Scott
+209 R Biomass Mutation @Dan Murayama Scott
 210 U Boros Charm @Zoltan Boros
 211 R Call the Skybreaker @Randy Gallegos
 212 C Coiling Oracle @Mark Zug
 213 U Crackling Drake @Victor Adame Minguez
 214 R Deathbringer Liege @Drew Tucker
 215 R Debtors' Knell @Kev Walker
-216 M Epic Experiment @Dan Scott
+216 M Epic Experiment @Dan Murayama Scott
 217 R Gaze of Granite @Nils Hamm
 218 R Gluttonous Troll @Joe Slucher
 219 U Incubation // Incongruity @Mike Bierek
@@ -239,7 +239,7 @@ ScryfallCode=C21
 231 U Trygon Predator @Carl Critchlow
 232 R Utter End @Mark Winters
 233 M Alhammarret's Archive @Richard Wright
-234 C Arcane Signet @Dan Scott
+234 C Arcane Signet @Dan Murayama Scott
 235 U Bloodthirsty Blade @Jason Kang
 236 C Boros Locket @Aaron Miller
 237 R Bosh, Iron Golem @Brom
@@ -262,7 +262,7 @@ ScryfallCode=C21
 254 U Orzhov Signet @Martina Pilcerova
 255 U Paradise Plume @Wayne England
 256 R Pendant of Prosperity @Raoul Vitale
-257 C Pilgrim's Eye @Dan Scott
+257 C Pilgrim's Eye @Dan Murayama Scott
 258 C Pristine Talisman @Matt Cavotta
 259 M Pyromancer's Goggles @James Paick
 260 R Scrap Trawler @Daarken
@@ -320,7 +320,7 @@ ScryfallCode=C21
 312 U Rogue's Passage @Christine Choi
 313 U Sapseep Forest @Aleksi Briclot
 314 R Scavenger Grounds @Steven Belledin
-315 C Secluded Steppe @Heather Hudson
+315 U Secluded Steppe @Heather Hudson
 316 R Shivan Reef @Rob Alexander
 317 U Simic Growth Chamber @John Avon
 318 R Slayers' Stronghold @Karl Kopinski
@@ -379,11 +379,11 @@ ScryfallCode=C21
 371 R Stinging Study @Kieran Yanner
 372 R Tivash, Gloom Summoner @Kieran Yanner
 373 R Veinwitch Coven @Caio Monteiro
-374 R Audacious Reshapers @Justyna Gil
+374 R Audacious Reshapers @Justyna Dura
 375 R Battlemage's Bracers @David Gaillet
 376 R Creative Technique @Gaboleps
 377 R Cursed Mirror @David Gaillet
-378 R Fiery Encore @Justyna Gil
+378 R Fiery Encore @Justyna Dura
 379 R Inferno Project @Olivier Bernard
 380 R Laelia, the Blade Reforged @Wisnu Tan
 381 R Radiant Performer @Alessandra Pisano
@@ -439,7 +439,7 @@ g_6_6_wurm
 u_9_9_kraken
 g_1_1_insect_flying_deathtouch
 g_4_4_beast
-g_4_4_phyrexian_beast
+g_4_4_fungus_beast_trample
 g_x_x_hydra
 g_2_2_boar
 g_3_3_frog_lizard

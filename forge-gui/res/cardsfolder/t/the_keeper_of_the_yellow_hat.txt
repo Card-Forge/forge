@@ -1,0 +1,9 @@
+Name:The Keeper of the Yellow Hat
+ManaCost:W U
+Types:Legendary Creature Human Wizard
+PT:1/1
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | Caster$ Player.Active | CheckSVar$ Count$YourTurns | SVarCompare$ LE7 | Description$ You can't cast CARDNAME during your first seven turns of the game. (Keep track if you're playing with this!)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a legendary artifact equipment token named Yellow Hat with equip {2} and "Equipped creature gets +4/+4 and gains lifelink."
+SVar:TrigToken:DB$ Token | TokenScript$ yellow_hat
+DeckHas:Ability$Token & Type$Artifact|Equipment
+Oracle:You can't cast Keeper of the Yellow Hat during your first seven turns of the game. (Keep track if you're playing with this!)\nWhen The Keeper of the Yellow Hat enters the battlefield, create a legendary artifact equipment token named Yellow Hat with equip {2} and "Equipped creature gets +4/+4 and gains lifelink."

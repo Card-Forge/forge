@@ -1,0 +1,12 @@
+Name:Sagrada Familiar
+ManaCost:3
+Types:Artifact Creature Wall
+PT:0/5
+K:Reach
+K:Defender
+S:Mode$ ReduceCost | ValidCard$ Card.IsCommander+YouCtrl | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Commander spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Card.IsCommander+YouCtrl | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a commander spell, create X 1/1 Stained Glass artifact creature tokens that are all colors, where X is the number of colors of that commander.
+SVar:TrigToken:DB$ Token | TokenScript$ all_1_1_a_stained_glass | TokenAmount$ X
+SVar:X:TriggeredCard$CardNumColors
+DeckHas:Ability$Token
+Oracle:Reach, defender\nCommander spells you cast cost {1} less to cast.\nWhenever you cast a commander spell, create X 1/1 Stained Glass artifact creature tokens that are all colors, where X is the number of colors of that commander.

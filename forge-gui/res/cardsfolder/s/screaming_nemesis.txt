@@ -1,0 +1,13 @@
+Name:Screaming Nemesis
+ManaCost:2 R
+Types:Creature Spirit
+PT:3/3
+K:Haste
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to any other target. If a player is dealt damage this way, they can't gain life for the rest of the game.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature.Other,Player,Planeswalker.Other,Battle.Other | TgtPrompt$ Select any other target | RememberDamaged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CantGainLife | Duration$ Permanent | RememberObjects$ Player.IsRemembered | SubAbility$ DBCleanup
+SVar:CantGainLife:Mode$ CantGainLife | ValidPlayer$ Player.IsRemembered | Description$ The damaged player can't gain life for the rest of the game.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
+Oracle:Haste\nWhenever Screaming Nemesis is dealt damage, it deals that much damage to any other target. If a player is dealt damage this way, they can't gain life for the rest of the game.

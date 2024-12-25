@@ -1,0 +1,8 @@
+Name:Splitskin Doll
+ManaCost:1 W
+Types:Artifact Creature Toy
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card. Then discard a card unless you control another creature with power 2 or less.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | ConditionPresent$ Creature.Other+YouCtrl+powerLE2 | ConditionCompare$ EQ0
+Oracle:When Splitskin Doll enters, draw a card. Then discard a card unless you control another creature with power 2 or less.

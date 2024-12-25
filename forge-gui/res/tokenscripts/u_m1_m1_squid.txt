@@ -1,0 +1,6 @@
+Name:Squid Token
+ManaCost:no cost
+Colors:blue
+Types:Creature Squid
+PT:-1/-1
+Oracle:

@@ -1,0 +1,5 @@
+Name:Black Tulip
+ManaCost:0
+Types:Artifact
+A:AB$ Mana | Cost$ T Exile<1/CARDNAME> | Produced$ Any | Amount$ 3 | AILogic$ BlackLotus | CheckSVar$ Count$YourTurns | SVarCompare$ GE6 | SpellDescription$ Add three mana of any one color. You can't activate this ability until you've begun your sixth turn of the game. (Keep track if this is in your deck!)
+Oracle:{T}, Exile Black Tulip: Add three mana of any one color. You can't activate this ability until you've begun your sixth turn of the game. (Keep track if this is in your deck!)

@@ -35,3 +35,6 @@ ScryfallCode=SCH
 27 R Monastery Swiftspear @Francisco Miyara
 28 R Shark Typhoon @Carlos Palma Cruchaga
 29 R Urza's Saga @Eytan Zana
+30 R Chromatic Sphere @Lorenzo Lanfranconi
+31 R Reality Smasher @Michal Ivan
+32 R Void Winnower @Joshua Raphael

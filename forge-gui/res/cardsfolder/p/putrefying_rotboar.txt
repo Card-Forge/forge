@@ -1,0 +1,10 @@
+Name:Putrefying Rotboar
+ManaCost:2 B B
+Types:Creature Elemental Boar
+PT:4/5
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Boar.YouCtrl | Execute$ TrigAnimateAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Boar you control attacks, each nonland card in defending player's hand perpetually gains "When you cast this spell, you lose 1 life."
+SVar:TrigAnimateAll:DB$ AnimateAll | Duration$ Perpetual | ValidCards$ Card.nonLand+OwnedBy TriggeredDefendingPlayer | Zone$ Hand | Triggers$ CastSpellLoseLife
+SVar:CastSpellLoseLife:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When you cast this spell, you lose 1 life.
+SVar:TrigDrain:DB$ LoseLife | LifeAmount$ 1
+Oracle:Lifelink\nWhenever a Boar you control attacks, each nonland card in defending player's hand perpetually gains "When you cast this spell, you lose 1 life."

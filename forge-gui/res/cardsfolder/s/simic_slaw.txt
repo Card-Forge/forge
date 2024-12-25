@@ -1,0 +1,10 @@
+Name:Simic Slaw
+ManaCost:2
+Types:Artifact Food Clue
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigCounter | TriggerDescription$ Whenever one or more creatures die, put a charge counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ CHARGE
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ X | SubAbility$ DBLife | SpellDescription$ Draw X cards and gain X life, where X is the number of charge counters on CARDNAME.
+SVar:DBLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$CardCounters.CHARGE
+DeckHas:Ability$LifeGain|Sacrifice|Counters
+Oracle:Whenever one or more creatures die, put a charge counter on Simic Slaw.\n{2}, Sacrifice Simic Slaw: Draw X cards and gain X life, where X is the number of charge counters on Simic Slaw.

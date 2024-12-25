@@ -1,0 +1,5 @@
+Name:Boltwave
+ManaCost:R
+Types:Sorcery
+A:SP$ DealDamage | Defined$ Player.Opponent | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each opponent.
+Oracle:Boltwave deals 3 damage to each opponent.

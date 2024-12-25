@@ -4,6 +4,6 @@ Types:Enchantment
 A:AB$ GainLife | Cost$ SubCounter<3/QUEST> Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 8 | SpellDescription$ You gain 8 life.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
-DeckHas:Ability$Counters|LifeGain
 SVar:MaxQuestEffect:3
+DeckHas:Ability$Counters|LifeGain
 Oracle:Landfall — Whenever a land you control enters, you may put a quest counter on Sunspring Expedition.\nRemove three quest counters from Sunspring Expedition and sacrifice it: You gain 8 life.

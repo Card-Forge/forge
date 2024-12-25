@@ -17,9 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.base.Supplier;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -31,6 +28,7 @@ import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.CardCollections;
@@ -45,6 +43,8 @@ import forge.util.ItemPool;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -82,15 +82,15 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         CardDb commonCards = FModel.getMagicDb().getCommonCards();
         if (gameType == GameType.Brawl){
             GameFormat format = FModel.getFormats().get("Brawl");
-            Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
-            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(Predicates.and(format.getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard::getRules))), PaperCard.class);
+            Predicate<CardRules> commanderFilter = CardRulesPredicates.CAN_BE_BRAWL_COMMANDER;
+            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(format.getFilterPrinted().and(PaperCardPredicates.fromRules(commanderFilter))), PaperCard.class);
             normalPool = ItemPool.createFrom(format.getAllCards(), PaperCard.class);
         }
         else {
             Predicate<CardRules> commanderFilter = gameType == GameType.Oathbreaker
-                    ? Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL)
-                    : CardRulesPredicates.Presets.CAN_BE_COMMANDER;
-            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard::getRules)),PaperCard.class);
+                    ? CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL)
+                    : CardRulesPredicates.CAN_BE_COMMANDER;
+            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(PaperCardPredicates.fromRules(commanderFilter)),PaperCard.class);
             normalPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(), PaperCard.class);
         }
 

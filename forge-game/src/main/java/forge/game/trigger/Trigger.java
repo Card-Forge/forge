@@ -36,6 +36,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.CostPaymentStack;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
+import forge.util.ITranslatable;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
@@ -119,17 +120,13 @@ public abstract class Trigger extends TriggerReplacementBase {
     public String toString(boolean active) {
         if (hasParam("TriggerDescription") && !this.isSuppressed()) {
             StringBuilder sb = new StringBuilder();
-            String currentName;
-            if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
-                currentName = cardState.getName();
-            } else {
-                currentName = getHostCard().getName();
-            }
+            ITranslatable nameSource = getHostName(this);
             String desc = getParam("TriggerDescription");
             if (!desc.contains("ABILITY")) {
-                desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), currentName);
-                desc = TextUtil.fastReplace(desc,"CARDNAME", CardTranslation.getTranslatedName(currentName));
-                desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+                desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), nameSource);
+                String translatedName = CardTranslation.getTranslatedName(nameSource);
+                desc = TextUtil.fastReplace(desc,"CARDNAME", translatedName);
+                desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(translatedName));
                 if (desc.contains("ORIGINALHOST") && this.getOriginalHost() != null) {
                     desc = TextUtil.fastReplace(desc, "ORIGINALHOST", this.getOriginalHost().getName());
                 }
@@ -220,10 +217,10 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
             result = TextUtil.fastReplace(result, "ABILITY", saDesc);
 
-            String currentName = sa.getHostCard().getName();
-            result = CardTranslation.translateMultipleDescriptionText(result, currentName);
-            result = TextUtil.fastReplace(result,"CARDNAME", CardTranslation.getTranslatedName(currentName));
-            result = TextUtil.fastReplace(result,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+            result = CardTranslation.translateMultipleDescriptionText(result, sa.getHostCard());
+            String translatedName = CardTranslation.getTranslatedName(sa.getHostCard());
+            result = TextUtil.fastReplace(result,"CARDNAME", translatedName);
+            result = TextUtil.fastReplace(result,"NICKNAME", Lang.getInstance().getNickName(translatedName));
         }
 
         return result;
@@ -240,6 +237,10 @@ public abstract class Trigger extends TriggerReplacementBase {
         PhaseHandler phaseHandler = game.getPhaseHandler();
         if (null != validPhases) {
             if (!validPhases.contains(phaseHandler.getPhase())) {
+                return false;
+            }
+            // add support for calculation if needed
+            if (hasParam("PhaseCount") && phaseHandler.getNumMain() + 1 != 2) {
                 return false;
             }
         }

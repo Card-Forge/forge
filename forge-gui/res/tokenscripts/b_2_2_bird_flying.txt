@@ -1,0 +1,7 @@
+Name:Bird Token
+ManaCost:no cost
+Types:Creature Bird
+Colors:black
+PT:2/2
+K:Flying
+Oracle:Flying

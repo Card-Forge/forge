@@ -1,0 +1,7 @@
+Name:Rune-Sealed Wall
+ManaCost:2 U
+Types:Artifact Creature Wall
+PT:0/6
+K:Defender
+A:AB$ Surveil | Cost$ T | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+Oracle:Defender\n{T}: Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

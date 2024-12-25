@@ -107,6 +107,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbAnteMatchRarity(), FPref.UI_ANTE_MATCH_RARITY));
         lstControls.add(Pair.of(view.getCbManaBurn(), FPref.UI_MANABURN));
+        lstControls.add(Pair.of(view.getCbOrderCombatants(), FPref.LEGACY_ORDER_COMBATANTS));
         lstControls.add(Pair.of(view.getCbScaleLarger(), FPref.UI_SCALE_LARGER));
         lstControls.add(Pair.of(view.getCbRenderBlackCardBorders(), FPref.UI_RENDER_BLACK_BORDERS));
         lstControls.add(Pair.of(view.getCbLargeCardViewers(), FPref.UI_LARGE_CARD_VIEWERS));
@@ -138,6 +139,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbTimedTargOverlay(), FPref.UI_TIMED_TARGETING_OVERLAY_UPDATES));
         lstControls.add(Pair.of(view.getCbCompactMainMenu(), FPref.UI_COMPACT_MAIN_MENU));
         lstControls.add(Pair.of(view.getCbUseSentry(), FPref.USE_SENTRY));
+        lstControls.add(Pair.of(view.getCbCheckSnapshot(), FPref.CHECK_SNAPSHOT_AT_STARTUP));
         lstControls.add(Pair.of(view.getCbPromptFreeBlocks(), FPref.MATCHPREF_PROMPT_FREE_BLOCKS));
         lstControls.add(Pair.of(view.getCbPauseWhileMinimized(), FPref.UI_PAUSE_WHILE_MINIMIZED));
         lstControls.add(Pair.of(view.getCbWorkshopSyntax(), FPref.DEV_WORKSHOP_SYNTAX));
@@ -193,13 +195,11 @@ public enum CSubmenuPreferences implements ICDoc {
 
         view.getBtnTokenPreviewer().setCommand((UiCommand) CSubmenuPreferences.this::openTokenPreviewer);
 
-        view.getBtnResetJavaFutureCompatibilityWarnings().setCommand((UiCommand) () -> {
-            prefs.setPref(FPref.DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING, false);
-            prefs.save();
-            FOptionPane.showMessageDialog(localizer.getMessage("CompatibilityWarningsReEnabled"));
-        });
-
         view.getBtnContentDirectoryUI().setCommand((UiCommand) CSubmenuPreferences.this::openContentDirectory);
+        view.getCbCheckSnapshot().addItemListener(e -> {
+            Singletons.getView().getNavigationBar().setUpdaterVisibility();
+            prefs.save();
+        });
 
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
@@ -210,6 +210,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
         initializeAiSideboardingModeComboBox();
+        initializeAiTimeoutComboBox();
         initializeSoundSetsComboBox();
         initializeMusicSetsComboBox();
         initializeStackAdditionsComboBox();
@@ -414,6 +415,14 @@ public enum CSubmenuPreferences implements ICDoc {
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
         comboBox.addActionListener(actionEvent -> AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(comboBox.getSelectedItem())));
+    }
+
+    private void initializeAiTimeoutComboBox() {
+        final FPref userSetting = FPref.MATCH_AI_TIMEOUT;
+        final FComboBoxPanel<String> panel = this.view.getAiTimeoutComboBox();
+        final FComboBox<String> comboBox = createComboBox(new String[] {"5", "10", "60", "120", "240", "300", "600"}, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
     }
 
     private void initializeSoundSetsComboBox() {

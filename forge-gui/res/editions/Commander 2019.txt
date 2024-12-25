@@ -129,7 +129,7 @@ ScryfallCode=C19
 120 R Hex @Michael Sutfin
 121 R In Garruk's Wake @Chase Stone
 122 C Murderous Compulsion @David Palumbo
-123 C Nightshade Assassin @Darren Tan
+123 U Nightshade Assassin @Darren Tan
 124 M Ob Nixilis Reignited @Chris Rahn
 125 R Overseer of the Damned @rk post
 126 U Plaguecrafter @Anna Steinbauer
@@ -193,7 +193,7 @@ ScryfallCode=C19
 184 R Thelonite Hermit @Chippy
 185 R Thragtusk @Nils Hamm
 186 R Trail of Mystery @Raymond Swanland
-187 R Biomass Mutation @Dan Scott
+187 R Biomass Mutation @Dan Murayama Scott
 188 R Bloodhall Priest @Mark Winters
 189 R Bounty of the Luxa @Jonas De Ro
 190 U Crackling Drake @Victor Adame Minguez
@@ -287,7 +287,7 @@ ScryfallCode=C19
 278 R Sunken Hollow @Adam Paquette
 279 C Swiftwater Cliffs @Eytan Zana
 280 U Temple of the False God @James Zapata
-281 C Terramorphic Expanse @Dan Scott
+281 C Terramorphic Expanse @Dan Murayama Scott
 282 R Thespian's Stage @John Avon
 283 C Thornwood Falls @Eytan Zana
 284 C Tranquil Cove @John Avon

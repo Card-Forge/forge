@@ -1,0 +1,11 @@
+Name:Star Athlete
+ManaCost:1 R R
+Types:Creature Human Warrior
+PT:3/2
+K:Menace
+K:Blitz:3 R
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ Whenever CARDNAME attacks, choose up to one target nonland permanent. Its controller may sacrifice it. If they don't, CARDNAME deals 5 damage to that player.
+SVar:DBPump:DB$ Pump | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target nonland permanent | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | UnlessCost$ Sac<1/Permanent.nonLand+targetedBy/targeted nonland permanent> | NumDmg$ 5
+DeckHas:Ability$Sacrifice
+Oracle:Menace\nWhenever Star Athlete attacks, choose up to one target nonland permanent. Its controller may sacrifice it. If they don't, Star Athlete deals 5 damage to that player.\nBlitz {3}{R} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

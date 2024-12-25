@@ -1,0 +1,7 @@
+Name:Overgrown Zealot
+ManaCost:1 G
+Types:Creature Elf Druid
+PT:0/4
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | RestrictValid$ Static.isTurnFaceUp | SpellDescription$ Add two mana of any one color. Spend this mana only to turn permanents face up.
+Oracle:{T}: Add one mana of any color.\n{T}: Add two mana of any one color. Spend this mana only to turn permanents face up.

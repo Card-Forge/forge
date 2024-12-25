@@ -1,24 +1,6 @@
 package forge.gamemodes.match;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import forge.gui.control.PlaybackSpeed;
-import forge.trackable.TrackableCollection;
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
+import com.google.common.collect.*;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -28,6 +10,7 @@ import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
 import forge.interfaces.IGameController;
@@ -36,8 +19,13 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
+import java.util.*;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;
@@ -461,17 +449,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void awaitNextInput() {
-        if (awaitNextInputTimer == null) {
-            String name = "?";
-            if (this.currentPlayer != null)
-                name = this.currentPlayer.getLobbyPlayerName();
-            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name);
-        }
+        checkAwaitNextInputTimer();
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
             public void run() {
                 FThreads.invokeInEdtLater(() -> {
+                    checkAwaitNextInputTimer();
                     synchronized (awaitNextInputTimer) {
                         if (awaitNextInputTask != null) {
                             updatePromptForAwait(getCurrentPlayer());
@@ -482,6 +466,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             }
         };
         awaitNextInputTimer.schedule(awaitNextInputTask, 250);
+    }
+    private void checkAwaitNextInputTimer() {
+        if (awaitNextInputTimer == null) {
+            String name = "?";
+            if (this.currentPlayer != null)
+                name = this.currentPlayer.getLobbyPlayerName();
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name);
+        }
     }
 
     protected final void updatePromptForAwait(final PlayerView playerView) {

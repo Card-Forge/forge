@@ -6,5 +6,401 @@ Type=Commander
 ScryfallCode=DSC
 
 [cards]
+1 M Aminatou, Veil Piercer @David Palumbo
+2 M Kianne, Corrupted Memory @Mila Pesic
+3 M The Lord of Pain @Greg Staples
+4 M The Master of Keys @Wisnu Tan
+5 M Rendmaw, Creaking Nest @Ryan Pancoast
+6 M Valgavoth, Harrower of Souls @Chris Cold
+7 M Winter, Cynical Opportunist @Andrey Kuzinskiy
+8 M Zimone, Mystery Unraveler @Mila Pesic
+9 R Redress Fate @Julie Dillon
+10 R Secret Arcade // Dusty Parlor @Arthur Yuan
+11 R Soaring Lightbringer @Michele Giorgi
+12 R Fear of Sleep Paralysis @Joshua Raphael
+13 R Glitch Interpreter @Miguel Mercado
+14 R They Came from the Pipes @Andreas Zafiratos
+15 R Zimone's Hypothesis @Crystal Fae
+16 R Ancient Cellarspawn @Alexandre Honoré
+17 R Cramped Vents // Access Maze @Arthur Yuan
+18 R Deluge of Doom @Nereida
+19 R Demonic Covenant @LA Draws
+20 R Into the Pit @Greg Staples
+21 R Metamorphosis Fanatic @Andreas Zafiratos
+22 R Persistent Constrictor @Steve Ellis
+23 R Polluted Cistern // Dim Oubliette @Arthur Yuan
+24 R Sadistic Shell Game @Karl Kopinski
+25 R Suspended Sentence @LA Draws
+26 R Barbflare Gremlin @Matt Stewart
+27 R Gleeful Arsonist @Nereida
+28 R Spiked Corridor // Torture Pit @Arthur Yuan
+29 R Star Athlete @Andrey Kuzinskiy
+30 R Curator Beastie @Nils Hamm
+31 R Demolisher Spawn @Nino Is
+32 R Disorienting Choice @Mirko Failoni
+33 R Experimental Lab // Staff Room @Arthur Yuan
+34 R Formless Genesis @Mark Poole
+35 R Shriekwood Devourer @David Astruga
+36 R Ursine Monstrosity @Carlos Palma Cruchaga
+37 R Convert to Slime @LA Draws
+38 R Phenomenon Investigators @Viko Menezes
+39 R Giggling Skitterspike @Nino Is
+40 R Séance Board @Robin Olausson
+41 R Redress Fate @Julie Dillon
+42 R Soaring Lightbringer @Michele Giorgi
+43 R Fear of Sleep Paralysis @Joshua Raphael
+44 R Glitch Interpreter @Miguel Mercado
+45 R They Came from the Pipes @Andreas Zafiratos
+46 R Zimone's Hypothesis @Crystal Fae
+47 R Ancient Cellarspawn @Alexandre Honoré
+48 R Deluge of Doom @Nereida
+49 R Demonic Covenant @LA Draws
+50 R Into the Pit @Greg Staples
+51 R Metamorphosis Fanatic @Andreas Zafiratos
+52 R Persistent Constrictor @Steve Ellis
+53 R Sadistic Shell Game @Karl Kopinski
+54 R Suspended Sentence @LA Draws
+55 R Barbflare Gremlin @Matt Stewart
+56 R Gleeful Arsonist @Nereida
+57 R Star Athlete @Andrey Kuzinskiy
+58 R Curator Beastie @Nils Hamm
+59 R Demolisher Spawn @Nino Is
+60 R Disorienting Choice @Mirko Failoni
+61 R Formless Genesis @Mark Poole
+62 R Shriekwood Devourer @David Astruga
+63 R Ursine Monstrosity @Carlos Palma Cruchaga
+64 R Convert to Slime @LA Draws
+65 R Phenomenon Investigators @Viko Menezes
+66 R Giggling Skitterspike @Nino Is
+67 R Séance Board @Robin Olausson
+68 R Mesa Enchantress @Eelis Kyttanen
+69 U Moon-Blessed Cleric @Mark Poole
+70 R Terminus @Jarel Threat
+71 R Aminatou's Augury @Loïc Canavaggia
+72 R Cackling Counterpart @Zezhou Chen
+73 C Ponder @Ernanda Souza
+74 C Portent @Bartek Fedyczak
+75 U Telling Time @LA Draws
+76 C Blood Pact @Camille Alquier
+77 C Blood Seeker @David Astruga
+78 C Feed the Swarm @Nino Is
+79 C Night's Whisper @Carlos Palma Cruchaga
+80 U Beast Within @David Astruga
+81 R Citanul Hierophants @Zezhou Chen
+82 C Grapple with the Past @Filip Burburan
+83 R Moldgraf Monstrosity @Nino Is
+84 R Bedevil @Nicholas Gregory
+85 R Culling Ritual @Lorenzo Mastroianni
+86 U Deathreap Ritual @GodMachine
+87 U Diabolic Vision @Mirko Failoni
+88 C Growth Spiral @Nicholas Gregory
+89 M Mogis, God of Slaughter @Chase Stone
+90 U Putrefy @Nicholas Gregory
+91 R Utter End @Nicholas Gregory
+92 C Arcane Signet @David Astruga
+93 U Lightning Greaves @Adrián Rodríguez Pérez
+94 U Sol Ring @John Stanko
+95 U Suspicious Bookcase @Tyler Walpole
+96 C Command Tower @Eddie Schillo
+97 C Auramancer @Rebecca Guay
+98 U Cast Out @Magali Villeneuve
+99 M Entreat the Angels @Todd Lockwood
+100 R Monologue Tax @Justine Cruz
+101 R Ondu Spiritdancer @Tran Nguyen
+102 U Return to Dust @Anato Finnstark
+103 R Sigil of the Empty Throne @Cyril Van Der Haegen
+104 U Sphere of Safety @Slawomir Maniak
+105 R Starfield Mystic @Eric Deschamps
+106 U Swords to Plowshares @Jesper Ejsing
+107 R Timely Ward @Matt Stewart
+108 R Verge Rangers @Livia Prima
+109 R Aether Gale @Jack Wang
+110 C Arcane Denial @Xi Zhang
+111 U Archetype of Imagination @Robbie Trevino
+112 R Body of Knowledge @Clint Cearley
+113 C Brainstorm @Willian Murai
+114 U Counterspell @Zack Stella
+115 R Dig Through Time @Ryan Yee
+116 M Dream Eater @Daarken
+117 R Extravagant Replication @Pauline Voss
+118 M Kefnet the Mindful @Chase Stone
+119 R Kheru Spellsnatcher @Clint Cearley
+120 R Mirrormade @Volkan Baǵa
+121 M One with the Multiverse @Liiga Smilshkalne
+122 C Otherworldly Gaze @Chris Cold
+123 R Primordial Mist @Titus Lunter
+124 R Prognostic Sphinx @Jesper Ejsing
+125 U Reality Shift @Howard Lyon
+126 U Retreat to Coralhelm @Kieran Yanner
+127 R Shark Typhoon @Caio Monteiro
+128 M Skaab Ruinator @Chris Rahn
+129 C Thirst for Meaning @Brian Valeza
+130 M Arvinox, the Mind Flail @Nikola Matkovic
+131 U Bastion of Remembrance @Volkan Baǵa
+132 U Blood Artist @LA Draws
+133 R Braids, Arisen Nightmare @Heonhwa Choe
+134 C Carrion Grub @Nicholas Gregory
+135 R Cemetery Tampering @Taras Susak
+136 R Decree of Pain @Mathias Kollros
+137 R Demon of Fate's Design @Fajareka Setiawan
+138 R Doomwake Giant @Kev Walker
+139 U The Eldest Reborn @Ravenna Tran
+140 U Falkenrath Noble @Slawomir Maniak
+141 R Fate Unraveler @David Palumbo
+142 U Gray Merchant of Asphodel @Scott Murphy
+143 U Infernal Grasp @Naomi Baker
+144 R Kederekt Parasite @Dan Murayama Scott
+145 R Mask of Griselbrand @Jason Felix
+146 R Massacre Girl @Chris Rallis
+147 M Massacre Wurm @Jason Chan
+148 U Morbid Opportunist @Tyler Walpole
+149 R Nightmare Shepherd @Tyler Jacobson
+150 R Nightshade Harvester @PINDURSKI
+151 M Noxious Gearhulk @Lius Lasahido
+152 M Ob Nixilis Reignited @Chris Rahn
+153 M Professor Onyx @Kieran Yanner
+154 C Read the Bones @Lars Grant-West
+155 R Reanimate @Johann Bodin
+156 C Sign in Blood @Howard Lyon
+157 U Stitcher's Supplier @Pete Venters
+158 U Syr Konrad, the Grim @Anna Steinbauer
+159 R Whip of Erebos @Yeong-Hao Han
+160 R Blasphemous Act @Daarken
+161 R Brash Taunter @Edgar Sánchez Hidalgo
+162 R Chaos Warp @Trevor Claxton
+163 M Combustible Gearhulk @Daarken
+164 R Enchanter's Bane @Steve Prescott
+165 R Harsh Mentor @Shreya Shetty
+166 U Light Up the Stage @Dmitry Burmak
+167 R Rampaging Ferocidon @Jonathan Kuo
+168 R Tectonic Giant @Slawomir Maniak
+169 R Arachnogenesis @Johannes Voss
+170 M Ashaya, Soul of the Wild @Chase Stone
+171 R Augur of Autumn @Billy Christian
+172 U Beanstalk Giant @Jason A. Engle
+173 U Crawling Sensation @Christopher Moeller
+174 C Cultivate @Justyna Dura
+175 R Deathcap Cultivator @Karla Ortiz
+176 M Deathmist Raptor @Filip Burburan
+177 U Explosive Vegetation @John Avon
+178 R Ezuri's Predation @Uriah Voth
+179 M Giant Adephage @Christine Choi
+180 U Gnarlwood Dryad @Raymond Swanland
+181 C Greater Tanuki @Ilse Gort
+182 U Harmonize @Dan Murayama Scott
+183 C Harrow @Rob Alexander
+184 R Hornet Queen @Jonathan Kuo
+185 M Hydra Omnivore @Svetlin Velinov
+186 R Inscription of Abundance @Zoltan Boros
+187 M Ishkanah, Grafwidow @Christine Choi
+188 C Moldgraf Millipede @Simon Dominic
+189 C Mulch @Lucas Graciano
+190 M Multani, Yavimaya's Avatar @Ryan Yee
+191 U Obsessive Skinner @John Stanko
+192 R Overwhelming Stampede @Steven Belledin
+193 C Rampant Growth @Steven Belledin
+194 C Sakura-Tribe Elder @Anastasia Ovchinnikova
+195 R Sandwurm Convergence @Slawomir Maniak
+196 R Scavenging Ooze @Austin Hsu
+197 R Scute Swarm @Alex Konstad
+198 R Shigeki, Jukai Visionary @Anna Podedworna
+199 C Skola Grovedancer @Josh Hass
+200 R Temur War Shaman @Raymond Swanland
+201 R Thunderfoot Baloth @Nicholas Gregory
+202 M Titania, Nature's Force @Heonhwa Choe
+203 R Trail of Mystery @Raymond Swanland
+204 M Whisperwood Elemental @Raymond Swanland
+205 U Wilderness Reclamation @Tyler Walpole
+206 M Worldspine Wurm @Richard Wright
+207 M Wrenn and Seven @Heonhwa Choe
+208 C Yavimaya Elder @Matt Cavotta
+209 U Yedora, Grave Gardener @Svetlin Velinov
+210 M Aesi, Tyrant of Gyre Strait @Viktor Titov
+211 R Arixmethes, Slumbering Isle @Dimitar Marinski
+212 M Athreos, Shroud-Veiled @Igor Kieryluk
+213 U Binding the Old Gods @Victor Adame Minguez
+214 R Biomass Mutation @Dan Murayama Scott
+215 M Deadbridge Chant @Zoltan Boros
+216 C Eureka Moment @Anna Steinbauer
+217 R Florian, Voldaren Scion @Justine Cruz
+218 R Grim Flayer @Mathias Kollros
+219 C Grisly Salvage @Dave Kendall
+220 M Grist, the Hunger Tide @Yongjae Choi
+221 R Inkshield @Jarel Threat
+222 R Kaervek the Merciless @Heonhwa Choe
+223 U Kardur, Doomscourge @Chris Rahn
+224 R Life Insurance @Brian Valeza
+225 U Mayhem Devil @Dmitry Burmak
+226 U Nyx Weaver @Jack Wang
+227 R Old Stickfingers @Jehan Choo
+228 R Oversimplify @Liiga Smilshkalne
+229 U Rakdos Charm @Zoltan Boros
+230 M Rakdos, Lord of Riots @Yigit Koroglu
+231 M Rashmi, Eternities Crafter @Magali Villeneuve
+232 M Spirit-Sister's Call @Dominik Mayer
+233 R Spiteful Visions @Brandon Kitkouski
+234 R Stormfist Crusader @Chris Rallis
+235 U Tatyova, Benthic Druid @Mathias Kollros
+236 R Theater of Horrors @Daarken
+237 R Time Wipe @Svetlin Velinov
+238 U Trygon Predator @Carl Critchlow
+239 M Vial Smasher the Fierce @Deruchenko Alexander
+240 U Azorius Signet @Raoul Vitale
+241 R Basilisk Collar @Howard Lyon
+242 U Brainstone @Drew Tucker
+243 U Burnished Hart @Yeong-Hao Han
+244 C Commander's Sphere @Ryan Alexander Lee
+245 U Fellwar Stone @John Avon
+246 C Golgari Signet @Raoul Vitale
+247 U Haywire Mite @Izzy
+248 U Mind Stone @Camille Alquier
+249 U Orzhov Signet @Martina Pilcerova
+250 U Rakdos Signet @Martina Pilcerova
+251 R Scroll of Fate @Piotr Dura
+252 U Simic Signet @Mike Sass
+253 R Solemn Simulacrum @Donato Giancola
+254 U Talisman of Indulgence @Mike Dringenberg
+255 U Talisman of Resilience @Lindsey Look
+256 U Thought Vessel @rk post
+257 U Whispersilk Cloak @Daren Bader
+258 R Adarkar Wastes @Piotr Dura
+259 U Arcane Sanctum @Anthony Francisco
+260 C Ash Barrens @Rockey Chen
+261 U Azorius Chancery @John Avon
+262 U Barren Moor @Heather Hudson
+263 R Blackcleave Cliffs @Yeong-Hao Han
+264 C Bloodfell Caves @Julian Kok Joon Wen
+265 C Bojuka Bog @Howard Lyon
+266 R Canyon Slough @Titus Lunter
+267 R Castle Vantress @John Avon
+268 R Caves of Koilos @Julian Kok Joon Wen
+269 C Darkmoss Bridge @Raoul Vitale
+270 U Dimir Aqueduct @John Avon
+271 R Dragonskull Summit @Alayna Danner
+272 R Drownyard Temple @John Avon
+273 R Dryad Arbor @Eric Fortune
+274 C Evolving Wilds @Steven Belledin
+275 R Exotic Orchard @Steven Belledin
+276 R Flooded Grove @Dave Kendall
+277 R Foreboding Ruins @Adam Paquette
+278 C Geothermal Bog @Gabor Szikszai
+279 U Golgari Rot Farm @John Avon
+280 R Graven Cairns @Anthony S. Waters
+281 R Grim Backwoods @Vincent Proce
+282 C Halimar Depths @Volkan Baǵa
+283 R Hall of Heliod's Generosity @Daniel Ljunggren
+284 R Hinterland Harbor @Karl Kopinski
+285 C Jungle Hollow @Eytan Zana
+286 U Leechridden Swamp @Drew Tucker
+287 R Llanowar Wastes @Lucas Graciano
+288 R Mosswort Bridge @Jeremy Jarvis
+289 U Myriad Landscape @Richard Wright
+290 R Necroblossom Snarl @Sam Burley
+291 C Obscura Storefront @Muhammad Firdaus
+292 U Orzhov Basilica @John Avon
+293 R Overflowing Basin @Sarah Finnigan
+294 C Quandrix Campus @Piotr Dura
+295 U Reliquary Tower @Jesper Ejsing
+296 R Shadowblood Ridge @Sam White
+297 R Shivan Gorge @John Matson
+298 U Simic Growth Chamber @John Avon
+299 R Smoldering Marsh @Adam Paquette
+300 R Spinerock Knoll @Steve Prescott
+301 R Sulfurous Springs @Bruce Brenneise
+302 U Tainted Field @Alayna Danner
+303 U Tainted Isle @Alan Pollack
+304 U Tainted Peak @Tony Szczudlo
+305 U Tainted Wood @Rob Alexander
+306 C Tangled Islet @Randy Gallegos
+307 R Temple of Deceit @Jonas De Ro
+308 R Temple of Enlightenment @Piotr Dura
+309 R Temple of Malady @Titus Lunter
+310 R Temple of Malice @Jonas De Ro
+311 R Temple of Mystery @Piotr Dura
+312 R Temple of Silence @Adam Paquette
+313 U Temple of the False God @Brian Snõddy
+314 C Thornwood Falls @Roman Kuteynikov
+315 C Thriving Heath @Alayna Danner
+316 C Thriving Isle @Jonas De Ro
+317 C Thriving Moor @Titus Lunter
+318 C Tranquil Thicket @Heather Hudson
+319 C Tree of Tales @John Avon
+320 R Twilight Mire @Rob Alexander
+321 R Underground River @Volkan Baǵa
+322 C Vault of Whispers @Rob Alexander
+323 R Vineglimmer Snarl @Sam Burley
+324 R Viridescent Bog @Piotr Dura
+325 R Witch's Clinic @Piotr Dura
+326 R Woodland Cemetery @Lars Grant-West
+327 R Yavimaya Coast @Jesper Ejsing
+328 C Behold the Power of Destruction @Alix Branwyn
+329 C Chaos Is My Plaything @Alix Branwyn
+330 C Choose Your Champion @Pavel Kolomeyets
+331 C Choose Your Demise @Volkan Baǵa
+332 C Dark Wings Bring Your Downfall @Miklós Ligeti
+333 C Fear My Authority @Steven Belledin
+334 C I Am Duskmourn @Liiga Smilshkalne
+335 C I Am Never Alone @Marcela Bolívar
+336 C I Am Untouchable @Bartek Fedyczak
+337 C I Call for Slaughter @Pavel Kolomeyets
 338 C I Will Savor Your Agony @Michael Walsh
+339 C Kneel Before My Legions @Dave Kendall
+340 C Mine Is the Only Truth @Eli Minaya
+341 C My Champion Stands Supreme @Justyna Dura
+342 C My Crushing Masterstroke @Jana Heidersdorf
+343 C My Followers Ascend @Steven Russell Black
+344 C My Laughter Echoes @Richard Kane Ferguson
+345 C My Tendrils Run Deep @Marcela Bolívar
+346 C My Wealth Will Bury You @Valera Lutfullina
+347 C My Will Is Irresistible @Samuel Araya
+348 C My Wings Enfold All @A. M. Sartor
+349 C No Secret Is Hidden from Me @Jeremy Wilson
+350 C Only I Know What Awaits @Samuel Araya
+351 C Plots That Span Centuries @Septian Fajrianto
+352 C Power Without Equal @Eli Minaya
+353 C A Premonition of Your Demise @Jessica Fong
+354 C Reality Is Mine to Control @Valera Lutfullina
+355 C Rot Like the Scum You Are @Isis
+356 C Running Is Useless @Dominik Mayer
 357 C Time Bends to My Will @Eli Minaya
+358 C When Will You Learn? @Jana Heidersdorf
+359 C You Are Unworthy of Mercy @WolfSkullJack
+360 C You Cannot Hide from Me @Allen Williams
+361 C You Exist Only to Amuse @WolfSkullJack
+362 C You Live Only Because I Will It @Samuel Araya
+363 C You Will Know True Suffering @Pavel Kolomeyets
+364 C Your Mistake Is My Triumph @Eli Minaya
+365 C Your Nightmares Are Delicious @Lars Grant-West
+366 C Your Own Face Mocks You @Dominik Mayer
+367 C Your Plans Mean Nothing @Fernando Falcone
+368 M Crypt Ghast @Tim Jacobus
+369 M Damn @Tim Jacobus
+370 M Exhume @Tim Jacobus
+371 M Archon of Cruelty @James Bousema
+372 M Goryo's Vengeance @Martin Ansin
+373 M Living Death @Josh Newton
+
+[tokens]
+b_2_2_bird_flying
+b_5_5_demon_flying
+bg_1_1_insect
+c_4_4_a_scarecrow_vigilance
+c_x_x_shapeshifter_changeling_deathtouch
+g_1_1_insect
+g_1_1_insect
+g_1_1_insect_flying_deathtouch
+g_1_2_spider_reach
+g_2_2_ooze
+g_3_3_beast
+g_4_4_phyrexian_beast
+g_5_3_elemental
+g_5_5_wurm
+g_5_5_wurm_trample
+g_x_x_ooze
+g_x_x_treefolk_reach_total_lands
+gu_0_0_fractal
+r_1_1_devil_burn
+u_x_x_shark_flying
+w_1_1_human_soldier
+w_4_4_angel_flying
+wb_2_1_inkling_flying

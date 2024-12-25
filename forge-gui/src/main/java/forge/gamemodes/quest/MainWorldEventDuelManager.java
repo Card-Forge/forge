@@ -11,7 +11,6 @@ import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.MainWorldDuelReader;
 import forge.model.FModel;
-import forge.util.CollectionSuppliers;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -20,7 +19,7 @@ import forge.util.storage.StorageBase;
 
 public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface {
 
-    protected final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, CollectionSuppliers.arrayLists());
+    protected final MapOfLists<QuestEventDifficulty, QuestEventDuel> sortedDuels = new EnumMapOfLists<>(QuestEventDifficulty.class, ArrayList::new);
     protected final IStorage<QuestEventDuel> allDuels;
 
     /**

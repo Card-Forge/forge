@@ -30,6 +30,7 @@ public enum AbilityKey {
     Blockers("Blockers"),
     CanReveal("CanReveal"),
     Card("Card"),
+    CardState("CardState"),
     Cards("Cards"),
     CardsFiltered("CardsFiltered"),
     CardLKI("CardLKI"),
@@ -88,6 +89,7 @@ public enum AbilityKey {
     LastStateGraveyard("LastStateGraveyard"),
     LifeAmount("LifeAmount"), //TODO confirm that this and LifeGained can be merged
     LifeGained("LifeGained"),
+    LoseReason("LoseReason"),
     Map("Map"),
     Mana("Mana"),
     MergedCards("MergedCards"),
@@ -136,6 +138,7 @@ public enum AbilityKey {
     Targets("Targets"),
     Token("Token"),
     TokenNum("TokenNum"),
+    Valiant("Valiant"),
     Vehicle("Vehicle"),
     Won("Won"),
 

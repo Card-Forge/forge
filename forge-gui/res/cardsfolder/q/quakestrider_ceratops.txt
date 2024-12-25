@@ -1,0 +1,5 @@
+Name:Quakestrider Ceratops
+ManaCost:3 G G G
+Types:Creature Dinosaur
+PT:12/8
+Oracle:

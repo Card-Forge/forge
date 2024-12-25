@@ -1,0 +1,6 @@
+Name:Raise the Past
+ManaCost:2 W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Creature.YouOwn+cmcLE2 | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all creature cards with mana value 2 or less from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
+Oracle:Return all creature cards with mana value 2 or less from your graveyard to the battlefield.

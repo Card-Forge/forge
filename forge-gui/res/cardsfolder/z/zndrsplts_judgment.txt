@@ -10,6 +10,6 @@ SVar:BounceAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | Cha
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:SVar$Z1/Plus.Z2
-SVar:Z1:Count$Valid Creature.YourTeamCtrl+inZoneBattlefield
-SVar:Z2:Count$Valid Creature.OppCtrl+inZoneBattlefield
+SVar:Z1:Count$Valid Creature.YourTeamCtrl
+SVar:Z2:Count$Valid Creature.OppCtrl
 Oracle:For each player, choose friend or foe. Each friend creates a token that's a copy of a creature they control. Each foe returns a creature they control to its owner's hand.

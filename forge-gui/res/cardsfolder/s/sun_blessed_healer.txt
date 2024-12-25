@@ -1,0 +1,10 @@
+Name:Sun-Blessed Healer
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:3/1
+K:Kicker:1 W
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigChange | TriggerDescription$ When this creature enters, if it was kicked, return target nonland permanent card with mana value 2 or less from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+nonLand+cmcLE2 | TgtPrompt$ Select target nonland permanent card with mana value 2 or less in your graveyard
+DeckHints:Ability$Graveyard
+Oracle:Kicker {1}{W} (You may pay an additional {1}{W} as you cast this spell.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)\nWhen this creature enters, if it was kicked, return target nonland permanent card with mana value 2 or less from your graveyard to the battlefield.

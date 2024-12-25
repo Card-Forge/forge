@@ -1,0 +1,11 @@
+Name:Ate-o'-Clock
+ManaCost:2 G
+Types:Instant
+K:Replicate:2 G
+A:SP$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | SubAbility$ DBProlif | SpellDescription$ Populate. Proliferate. Investigate. Regenerate target creature.
+SVar:DBProlif:DB$ Proliferate | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate | SubAbility$ DBRegen
+SVar:DBRegen:DB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Token|Counters
+Oracle:Populate. Proliferate. Investigate.\nRegenerate target creature.\nReplicate {2}{G} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copy.)

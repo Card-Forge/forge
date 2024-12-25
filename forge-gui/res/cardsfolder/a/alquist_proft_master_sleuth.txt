@@ -8,6 +8,6 @@ SVar:TrigInvestigate:DB$ Investigate
 A:AB$ Draw | Cost$ X W U U T Sac<1/Clue> | NumCards$ X | SubAbility$ DBGainLife | SpellDescription$ You draw X cards and gain X life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$xPaid
-DeckHints:Ability$Investigate
 DeckHas:Ability$Investigate|Token|Sacrifice|LifeGain & Type$Artifact|Clue
+DeckHints:Ability$Investigate
 Oracle:Vigilance\nWhen Alquist Proft, Master Sleuth enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\n{X}{W}{U}{U}, {T}, Sacrifice a Clue: You draw X cards and gain X life.

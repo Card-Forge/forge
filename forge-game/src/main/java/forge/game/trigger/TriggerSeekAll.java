@@ -24,6 +24,7 @@ public class TriggerSeekAll extends Trigger {
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Cards);
     }
 
     @Override

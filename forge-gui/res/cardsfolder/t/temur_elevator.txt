@@ -1,0 +1,8 @@
+Name:Temur Elevator
+ManaCost:no cost
+Types:Land
+K:Ascend
+A:AB$ Mana | Cost$ T | Produced$ Combo G U R | SubAbility$ DBLoseLife | SpellDescription$ Add {G}, {U}, or {R}. If you don't have the city's blessing, you lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ You
+SVar:X:Count$Blessing.0.1
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{T}: Add {G}, {U}, or {R}. If you don't have the city's blessing, you lose 1 life.

@@ -4,9 +4,10 @@ Types:Creature Hippo
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigActivateManaAbility | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may have defending player activate a mana ability of each land they control and lose all unspent mana. If you do, CARDNAME assigns no combat damage this turn and at the beginning of your postcombat main phase, you add an amount of {C} equal to the amount of mana that player lost this way.
 SVar:TrigActivateManaAbility:DB$ ActivateAbility | Defined$ DefendingPlayer | Type$ Land | ManaAbility$ True | SubAbility$ DBEmptyPool
-SVar:DBEmptyPool:DB$ DrainMana | Defined$ DefendingPlayer | SubAbility$ DBPump | RememberDrainedMana$ True
-SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ DBDelTrig
-SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main2 | Execute$ TrigAddMana | TriggerDescription$ At the beginning of your postcombat main phase, you add an amount of {C} equal to the amount of mana the defending player lost this way | SubAbility$ DBCleanup | RememberNumber$ True
+SVar:DBEmptyPool:DB$ DrainMana | Defined$ DefendingPlayer | SubAbility$ DBNoCombatDamage | RememberDrainedMana$ True
+SVar:DBNoCombatDamage:DB$ Effect | StaticAbilities$ SNoCombatDamage | Duration$ UntilHostLeavesPlayOrEOT | SubAbility$ DBDelTrig
+SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE assigns no combat damage this turn.
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main2 | Execute$ TrigAddMana | TriggerDescription$ At the beginning of your postcombat main phase, you add an amount of {C} equal to the amount of mana the defending player lost this way. | SubAbility$ DBCleanup | RememberNumber$ True
 SVar:TrigAddMana:DB$ Mana | Produced$ C | Amount$ X
 SVar:X:Count$TriggerRememberAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

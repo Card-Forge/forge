@@ -5,7 +5,7 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.
 SVar:X:Count$Valid Creature.namedPlague Rats
 SVar:BuffedBy:Creature.namedPlague Rats
-AI:RemoveDeck:Random
 SVar:NoZeroToughnessAI:True
+AI:RemoveDeck:Random
 DeckHints:Name$Plague Rats
 Oracle:Plague Rats's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.

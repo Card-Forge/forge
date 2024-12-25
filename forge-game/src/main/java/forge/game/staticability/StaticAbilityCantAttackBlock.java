@@ -20,8 +20,6 @@ package forge.game.staticability;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
@@ -106,7 +104,7 @@ public class StaticAbilityCantAttackBlock {
         if (stAb.hasParam("UnlessDefenderControls")) {
             String type = stAb.getParam("UnlessDefenderControls");
             CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
-            if (Iterables.any(list,
+            if (list.anyMatch(
                     CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, stAb))) {
                 return false;
             }
@@ -114,7 +112,7 @@ public class StaticAbilityCantAttackBlock {
         if (stAb.hasParam("IfDefenderControls")) {
             String type = stAb.getParam("IfDefenderControls");
             CardCollectionView list = defender.getCardsIn(ZoneType.Battlefield);
-            if (!Iterables.any(list,
+            if (!list.anyMatch(
                     CardPredicates.restriction(type.split(","), hostCard.getController(), hostCard, stAb))) {
                 return false;
             }

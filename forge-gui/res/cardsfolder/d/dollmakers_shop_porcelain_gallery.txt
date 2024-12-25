@@ -1,0 +1,16 @@
+Name:Dollmaker's Shop
+ManaCost:1 W
+Types:Enchantment Room
+T:Mode$ AttackersDeclaredOneTarget | Execute$ TrigToken | AttackedTarget$ Player | ValidAttackers$ Creature.YouCtrl+!Toy | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever one or more non-Toy creatures you control attack a player, create a 1/1 white Toy artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_a_toy
+AlternateMode:Split
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhenever one or more non-Toy creatures you control attack a player, create a 1/1 white Toy artifact creature token.
+
+ALTERNATE
+
+Name:Porcelain Gallery
+ManaCost:4 W W
+Types:Enchantment Room
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | SetPower$ X | SetToughness$ X | Description$ Creatures you control have base power and toughness each equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nCreatures you control have base power and toughness each equal to the number of creatures you control.

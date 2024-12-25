@@ -1,10 +1,12 @@
 package forge.ai.ability;
 
-
 import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
@@ -16,8 +18,8 @@ import java.util.Map;
 public class TimeTravelAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        boolean hasSuspendedCards = Iterables.any(aiPlayer.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend());
-        boolean hasRelevantCardsOTB = Iterables.any(aiPlayer.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounter(CounterEnumType.TIME));
+        boolean hasSuspendedCards = aiPlayer.getCardsIn(ZoneType.Exile).anyMatch(CardPredicates.hasSuspend());
+        boolean hasRelevantCardsOTB = aiPlayer.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.hasCounter(CounterEnumType.TIME));
 
         // TODO: add more logic for cards which may need it
         return hasSuspendedCards || hasRelevantCardsOTB;

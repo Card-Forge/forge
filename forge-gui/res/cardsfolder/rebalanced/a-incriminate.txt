@@ -5,4 +5,5 @@ A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose two target creatures contro
 SVar:DBChooseSac:DB$ ChooseCard | Choices$ Card.IsRemembered | Defined$ TargetedController | ChoiceTitle$ Choose one to sacrifice | SubAbility$ DBSac | StackDescription$ None | AILogic$ WorstCard
 SVar:DBSac:DB$ SacrificeAll | Defined$ ChosenCard | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice
 Oracle:Choose two target creatures controlled by the same player. That player sacrifices one of them.

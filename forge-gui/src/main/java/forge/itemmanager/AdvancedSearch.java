@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
@@ -82,11 +81,12 @@ public class AdvancedSearch {
             protected Set<String> getItemValues(PaperCard input) {
                 Set<String> names = new HashSet<>();
                 names.add(input.getRules().getOracleText());
-                names.add(CardTranslation.getTranslatedOracle(input.getName()));
+                names.add(CardTranslation.getTranslatedOracle(input));
                 CardSplitType cardSplitType = input.getRules().getSplitType();
                 if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
                     if (input.getRules().getOtherPart() != null) {
                         names.add(input.getRules().getOtherPart().getOracleText());
+                        //Doesn't support a combination of functional variant + split card, but none of those exist yet.
                         names.add(CardTranslation.getTranslatedOracle(input.getRules().getOtherPart().getName()));
                     }
                 }
@@ -1538,7 +1538,7 @@ public class AdvancedSearch {
 
         public Predicate<T> getPredicate() {
             if (isEmpty()) {
-                return Predicates.alwaysTrue();
+                return x -> true;
             }
             return getPredicatePiece(new ExpressionIterator());
         }
@@ -1574,17 +1574,17 @@ public class AdvancedSearch {
                     predPiece = ((AdvancedSearch.Filter<T>) piece).getPredicate();
                 }
                 if (applyNot) {
-                    predPiece = Predicates.not(predPiece);
+                    predPiece = predPiece.negate();
                     applyNot = false;
                 }
                 if (pred == null) {
                     pred = predPiece;
                 }
                 else if (operator == Operator.AND) {
-                    pred = Predicates.and(pred, predPiece);
+                    pred = pred.and(predPiece);
                 }
                 else if (operator == Operator.OR) {
-                    pred = Predicates.or(pred, predPiece);
+                    pred = pred.or(predPiece);
                 }
                 operator = null;
             }

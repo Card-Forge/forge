@@ -1,0 +1,13 @@
+Name:Lunar Convocation
+ManaCost:W B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, if you gained life this turn, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | CheckSVar$ Y | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you gained and lost life this turn, create a 1/1 black Bat creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_bat_flying | TokenOwner$ You
+A:AB$ Draw | Cost$ 1 B PayLife<2> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:X:Count$LifeYouGainedThisTurn
+SVar:Y:PlayerCountPropertyYou$LifeLostThisTurn/Times.X
+AI:RemoveDeck:Random
+DeckNeeds:Ability$LifeGain
+Oracle:At the beginning of your end step, if you gained life this turn, each opponent loses 1 life.\nAt the beginning of your end step, if you gained and lost life this turn, create a 1/1 black Bat creature token with flying.\n{1}{B}, Pay 2 life: Draw a card.

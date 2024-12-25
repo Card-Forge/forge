@@ -48,6 +48,7 @@ import javax.swing.SwingUtilities;
 import forge.CachedCardImage;
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -62,9 +63,11 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeConstants.CounterDisplayType;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.CardFaceSymbols;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.IDisposable;
 import forge.util.CardTranslation;
@@ -365,6 +368,22 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         final boolean canShow = matchUI.mayView(card);
+        if (canShow && ZoneType.Battlefield.equals(card.getZone())) {
+            CardStateView cardStateView = card.getCurrentState();
+            if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && !CardStateName.Original.equals(cardStateView.getState())) {
+                switch (cardStateView.getState()) {
+                    case EmptyRoom -> {
+                        FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset + cardHeight / 2, cardWidth, cardHeight);
+                        FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset, cardWidth, cardHeight);
+                    }
+                    case RightSplit ->
+                            FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset + cardHeight / 2, cardWidth, cardHeight);
+                    case LeftSplit ->
+                            FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset, cardWidth, cardHeight);
+                }
+            }
+
+        }
         displayIconOverlay(g, canShow);
         if (canShow) {
             drawFoilEffect(g, card, cardXOffset, cardYOffset,
@@ -479,12 +498,15 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private void displayIconOverlay(final Graphics g, final boolean canShow) {
         if (canShow && showCardManaCostOverlay() && cardWidth < 200) {
-            final boolean showSplitMana = card.isSplitCard();
+            final boolean showSplitMana = card.isSplitCard() && card.getZone() != ZoneType.Battlefield;
             if (!showSplitMana) {
                 drawManaCost(g, card.getCurrentState().getManaCost(), 0);
             } else {
                 if (!card.isFaceDown()) { // no need to draw mana symbols on face down split cards (e.g. manifested)
-                    PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
+                    PaperCard pc = null;
+                    if (!card.getName().isEmpty()) {
+                        pc = StaticData.instance().getCommonCards().getCard(card.getName());
+                    }
                     int ofs = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH) ? -12 : 12;
 
                     drawManaCost(g, card.getLeftSplitState().getManaCost(), ofs);

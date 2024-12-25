@@ -12,160 +12,160 @@ ScryfallCode=CSP
 
 [cards]
 1 R Adarkar Valkyrie @Jeremy Jarvis
-26 U Adarkar Windform @Randy Gallegos
-101 R Allosaurus Rider @Daren Bader
-143 U Arctic Flats @John Avon
-102 U Arctic Nishoba @Dave Kendall
-27 R Arcum Dagsson @Pete Venters
-103 C Aurochs Herd @Darrell Riche
-51 U Balduvian Fallen @Dave Kendall
-28 U Balduvian Frostwaker @Stephen Tappin
-76 U Balduvian Rage @John Matson
-77 U Balduvian Warlord @Paolo Parente
-126 U Blizzard Specter @Hideaki Takamura
-104 C Boreal Centaur @Marcelo Vignali
-105 C Boreal Druid @Dan Dos Santos
 2 C Boreal Griffin @Cyril Van Der Haegen
-144 U Boreal Shelf @Heather Hudson
-78 R Braid of Fire @Cyril Van Der Haegen
-106 R Brooding Saurian @rk post
-107 C Bull Aurochs @Kev Walker
-52 C Chill to the Bone @Jim Murray
-53 C Chilling Shade @Jeff Nentrup
-136 U Coldsteel Heart @Mark Romanoski
-29 R Commandeer @John Matson
-30 U Controvert @Joel Thomas
-31 U Counterbalance @John Zeleznik
 3 R Cover of Winter @Wayne Reynolds
-79 U Cryoclasm @Zoltan Boros & Gabor Szikszai
 4 R Darien, King of Kjeldor @Michael Phillippi
-145 R Dark Depths @Stephan Martiniere
-54 U Deathmark @Jeremy Jarvis
-127 U Deepfire Elemental @Joel Thomas
-128 R Diamond Faerie @Heather Hudson
-55 C Disciple of Tevesh Szat @Pete Venters
-32 C Drelnoch @Zoltan Boros & Gabor Szikszai
-80 U Earthen Goo @Nick Percival
-56 C Feast of Flesh @Volkan Baǵa
 5 R Field Marshal @Stephen Tappin
-33 U Flashfreeze @Brian Despain
-108 U Freyalise's Radiance @Thomas M. Baxa
-146 U Frost Marsh @Jim Pavelec
-34 C Frost Raptor @Lars Grant-West
-109 C Frostweb Spider @Greg Hildebrandt
-35 C Frozen Solid @Ralph Horsley
-81 R Fury of the Horde @Stephen Tappin
-129 R Garza Zol, Plague Queen @Darrell Riche
-57 R Garza's Assassin @Paolo Parente
 6 C Gelid Shackles @Alex Horley-Orlandelli
 7 U Glacial Plating @Brian Despain
-82 C Goblin Furrier @Warren Mahy
-83 C Goblin Rimerunner @Christopher Rush
-84 U Greater Stone Spirit @Yokota Katsumi
-58 C Grim Harvest @Zoltan Boros & Gabor Szikszai
-59 U Gristle Grinner @Dave Allsop
-60 C Gutless Ghoul @Kensuke Okabayashi
-61 R Haakon, Stromgald Scourge @Mark Zug
-36 R Heidar, Rimewind Master @Ron Spears
-62 R Herald of Leshrac @Alex Horley-Orlandelli
-110 R Hibernation's End @Steven Belledin
-147 U Highland Weald @John Avon
-85 C Icefall @Warren Mahy
-111 C Into the North @Richard Sardinha
-137 R Jester's Scepter @Matt Cavotta
-37 R Jokulmorder @Mark Zug
 8 U Jötun Grunt @Franz Vohwinkel
 9 U Jötun Owl Keeper @Dave Dorman
-130 U Juniper Order Ranger @Greg Hildebrandt
-86 R Karplusan Minotaur @Wayne England
-112 U Karplusan Strider @Dan Scott
-87 C Karplusan Wolverine @Greg Hildebrandt
 10 U Kjeldoran Gargoyle @Marcelo Vignali
 11 C Kjeldoran Javelineer @Dave Dorman
 12 C Kjeldoran Outrider @Carl Critchlow
 13 C Kjeldoran War Cry @Michael Phillippi
+14 U Luminesce @Daren Bader
+15 C Martyr of Sands @Randy Gallegos
+16 C Ronom Unicorn @Carl Critchlow
+17 C Squall Drifter @Joel Thomas
+18 C Sun's Bounty @Michael Sutfin
+19 R Sunscour @Jim Murray
+20 C Surging Sentinels @Christopher Moeller
+21 C Swift Maneuver @Michael Sutfin
+22 U Ursine Fylgja @Yokota Katsumi
+23 U Wall of Shards @Alex Horley-Orlandelli
+24 U White Shield Crusader @Jeff Easley
+25 R Woolly Razorback @Richard Sardinha
+26 U Adarkar Windform @Randy Gallegos
+27 R Arcum Dagsson @Pete Venters
+28 U Balduvian Frostwaker @Stephen Tappin
+29 R Commandeer @John Matson
+30 U Controvert @Joel Thomas
+31 U Counterbalance @John Zeleznik
+32 C Drelnoch @Zoltan Boros & Gabor Szikszai
+33 U Flashfreeze @Brian Despain
+34 C Frost Raptor @Lars Grant-West
+35 C Frozen Solid @Ralph Horsley
+36 R Heidar, Rimewind Master @Ron Spears
+37 R Jokulmorder @Mark Zug
 38 C Krovikan Mist @Jeremy Jarvis
+39 U Krovikan Whispers @Nick Percival
+40 C Martyr of Frost @Wayne England
+41 U Perilous Research @Dany Orizio
+42 R Rimefeather Owl @Kensuke Okabayashi
+43 U Rimewind Cryomancer @Dan Murayama Scott
+44 C Rimewind Taskmage @Ron Spears
+45 C Ronom Serpent @Ron Spencer
+46 C Rune Snag @Dave Dorman
+47 C Surging Aether @Anthony S. Waters
+48 C Survivor of the Unseen @Alan Pollack
+49 C Thermal Flux @Jeff Miracola
+50 R Vexing Sphinx @Lars Grant-West
+51 U Balduvian Fallen @Dave Kendall
+52 C Chill to the Bone @Jim Murray
+53 C Chilling Shade @Jeff Nentrup
+54 U Deathmark @Jeremy Jarvis
+55 C Disciple of Tevesh Szat @Pete Venters
+56 C Feast of Flesh @Volkan Baǵa
+57 R Garza's Assassin @Paolo Parente
+58 C Grim Harvest @Zoltan Boros & Gabor Szikszai
+59 U Gristle Grinner @Dave Allsop
+60 C Gutless Ghoul @Kensuke Okabayashi
+61 R Haakon, Stromgald Scourge @Mark Zug
+62 R Herald of Leshrac @Alex Horley-Orlandelli
 63 U Krovikan Rot @Michael Sutfin
 64 C Krovikan Scoundrel @Ralph Horsley
-39 U Krovikan Whispers @Nick Percival
+65 C Martyr of Bones @E. M. Gist
+66 U Phobian Phantasm @Steven Belledin
+67 R Phyrexian Etchings @Ron Spears
+68 U Rime Transfusion @Jeff Nentrup
+69 C Rimebound Dead @Dave Kendall
+70 R Soul Spike @Wayne England
+71 U Stromgald Crusader @Volkan Baǵa
+72 C Surging Dementia @Hideaki Takamura
+73 U Tresserhorn Skyknight @Dan Dos Santos
+74 R Void Maw @E. M. Gist
+75 C Zombie Musher @Kev Walker
+76 U Balduvian Rage @John Matson
+77 U Balduvian Warlord @Paolo Parente
+78 R Braid of Fire @Cyril Van Der Haegen
+79 U Cryoclasm @Zoltan Boros & Gabor Szikszai
+80 U Earthen Goo @Nick Percival
+81 R Fury of the Horde @Stephen Tappin
+82 C Goblin Furrier @Warren Mahy
+83 C Goblin Rimerunner @Christopher Rush
+84 U Greater Stone Spirit @Yokota Katsumi
+85 C Icefall @Warren Mahy
+86 R Karplusan Minotaur @Wayne England
+87 C Karplusan Wolverine @Greg Hildebrandt
 88 R Lightning Serpent @John Avon
 89 U Lightning Storm @Luca Zontini
 90 R Lovisa Coldeyes @Brian Snõddy
-14 U Luminesce @Daren Bader
 91 U Magmatic Core @Matt Cavotta
 92 C Martyr of Ashes @Ralph Horsley
-65 C Martyr of Bones @E. M. Gist
-40 C Martyr of Frost @Wayne England
-15 C Martyr of Sands @Randy Gallegos
-113 C Martyr of Spores @Dan Scott
-138 U Mishra's Bauble @Chippy
-148 U Mouth of Ronom @Daren Bader
-114 U Mystic Melting @Chippy
-115 R Ohran Viper @Kev Walker
 93 C Ohran Yeti @Wayne Reynolds
 94 C Orcish Bloodpainter @Alan Pollack
-116 R Panglacial Wurm @Jim Pavelec
-41 U Perilous Research @Dany Orizio
-66 U Phobian Phantasm @Steven Belledin
-67 R Phyrexian Etchings @Ron Spears
-139 U Phyrexian Ironfoot @Stephan Martiniere
-140 U Phyrexian Snowcrusher @Dave Allsop
-141 R Phyrexian Soulgorger @Brian Snõddy
-117 U Resize @Daren Bader
-68 U Rime Transfusion @Jeff Nentrup
-69 C Rimebound Dead @Dave Kendall
-42 R Rimefeather Owl @Kensuke Okabayashi
-118 U Rimehorn Aurochs @Brian Despain
 95 R Rimescale Dragon @Jeff Easley
-43 U Rimewind Cryomancer @Dan Scott
-44 C Rimewind Taskmage @Ron Spears
 96 C Rite of Flame @Dany Orizio
+97 C Skred @Christopher Moeller
+98 U Stalking Yeti @Brian Snõddy
+99 C Surging Flame @Ron Spencer
+100 C Thermopod @Dan Dos Santos
+101 R Allosaurus Rider @Daren Bader
+102 U Arctic Nishoba @Dave Kendall
+103 C Aurochs Herd @Darrell Riche
+104 C Boreal Centaur @Marcelo Vignali
+105 C Boreal Druid @Dan Dos Santos
+106 R Brooding Saurian @rk post
+107 C Bull Aurochs @Kev Walker
+108 U Freyalise's Radiance @Thomas M. Baxa
+109 C Frostweb Spider @Greg Hildebrandt
+110 R Hibernation's End @Steven Belledin
+111 C Into the North @Richard Sardinha
+112 U Karplusan Strider @Dan Murayama Scott
+113 C Martyr of Spores @Dan Murayama Scott
+114 U Mystic Melting @Chippy
+115 R Ohran Viper @Kev Walker
+116 R Panglacial Wurm @Jim Pavelec
+117 U Resize @Daren Bader
+118 U Rimehorn Aurochs @Brian Despain
 119 C Ronom Hulk @Zoltan Boros & Gabor Szikszai
-45 C Ronom Serpent @Ron Spencer
-16 C Ronom Unicorn @Carl Critchlow
-46 C Rune Snag @Dave Dorman
-149 R Scrying Sheets @Thomas M. Baxa
-131 R Sek'Kuar, Deathkeeper @Jeff Miracola
 120 R Shape of the Wiitigo @Ron Spencer
 121 U Sheltering Ancient @Pete Venters
 122 C Simian Brawler @Warren Mahy
-97 C Skred @Christopher Moeller
-155 C Snow-Covered Forest @Jim Nelson
-152 C Snow-Covered Island @Franz Vohwinkel
-154 C Snow-Covered Mountain @John Zeleznik
-151 C Snow-Covered Plains @Mark Romanoski
-153 C Snow-Covered Swamp @Rob Alexander
-70 R Soul Spike @Wayne England
 123 C Sound the Call @Jim Nelson
-17 C Squall Drifter @Joel Thomas
-98 U Stalking Yeti @Brian Snõddy
 124 U Steam Spitter @Christopher Rush
-71 U Stromgald Crusader @Volkan Baǵa
-18 C Sun's Bounty @Michael Sutfin
-19 R Sunscour @Jim Murray
-47 C Surging Aether @Anthony S. Waters
-72 C Surging Dementia @Hideaki Takamura
-99 C Surging Flame @Ron Spencer
 125 C Surging Might @Luca Zontini
-20 C Surging Sentinels @Christopher Moeller
-48 C Survivor of the Unseen @Alan Pollack
-21 C Swift Maneuver @Michael Sutfin
+126 U Blizzard Specter @Hideaki Takamura
+127 U Deepfire Elemental @Joel Thomas
+128 R Diamond Faerie @Heather Hudson
+129 R Garza Zol, Plague Queen @Darrell Riche
+130 U Juniper Order Ranger @Greg Hildebrandt
+131 R Sek'Kuar, Deathkeeper @Jeff Miracola
 132 R Tamanoa @rk post
-49 C Thermal Flux @Jeff Miracola
-100 C Thermopod @Dan Dos Santos
-142 R Thrumming Stone @Rob Alexander
-150 U Tresserhorn Sinks @Darrell Riche
-73 U Tresserhorn Skyknight @Dan Dos Santos
-22 U Ursine Fylgja @Yokota Katsumi
 133 U Vanish into Memory @Rebekah Lynn
-50 R Vexing Sphinx @Lars Grant-West
-74 R Void Maw @E. M. Gist
-23 U Wall of Shards @Alex Horley-Orlandelli
-24 U White Shield Crusader @Jeff Easley
 134 U Wilderness Elemental @Anthony S. Waters
-25 R Woolly Razorback @Richard Sardinha
-75 C Zombie Musher @Kev Walker
 135 R Zur the Enchanter @Pete Venters
+136 U Coldsteel Heart @Mark Romanoski
+137 R Jester's Scepter @Matt Cavotta
+138 U Mishra's Bauble @Chippy
+139 U Phyrexian Ironfoot @Stephan Martiniere
+140 U Phyrexian Snowcrusher @Dave Allsop
+141 R Phyrexian Soulgorger @Brian Snõddy
+142 R Thrumming Stone @Rob Alexander
+143 U Arctic Flats @John Avon
+144 U Boreal Shelf @Heather Hudson
+145 R Dark Depths @Stephan Martiniere
+146 U Frost Marsh @Jim Pavelec
+147 U Highland Weald @John Avon
+148 U Mouth of Ronom @Daren Bader
+149 R Scrying Sheets @Thomas M. Baxa
+150 U Tresserhorn Sinks @Darrell Riche
+151 C Snow-Covered Plains @Mark Romanoski
+152 C Snow-Covered Island @Franz Vohwinkel
+153 C Snow-Covered Swamp @Rob Alexander
+154 C Snow-Covered Mountain @John Zeleznik
+155 C Snow-Covered Forest @Jim Nelson
 
 [tokens]
 marit_lage

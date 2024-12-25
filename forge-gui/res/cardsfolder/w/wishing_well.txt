@@ -1,0 +1,10 @@
+Name:Wishing Well
+ManaCost:3 U
+Types:Artifact
+A:AB$ PutCounter | Cost$ T | Defined$ Self | SorcerySpeed$ True | CounterType$ COIN | CounterNum$ 1 | RememberAmount$ True | SubAbility$ DBImmediateTrig | SpellDescription$ Put a coin counter on CARDNAME. When you do, you may cast target instant or sorcery card with mana value equal to the number of coin counters on CARDNAME from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigPlay | TriggerAmount$ Count$RememberedNumber | SubAbility$ DBCleanup | TriggerDescription$ When you do, you may cast target instant or sorcery card with mana value equal to the number of coin counters on CARDNAME from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
+SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Instant.YouCtrl+cmcEQX,Sorcery.YouCtrl+cmcEQX | ValidSA$ Spell | TgtPrompt$ Choose target instant or sorcery card with mana value equal to the number of coin counters on CARDNAME from your graveyard | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$CardCounters.COIN
+DeckHints:Ability$Counters
+Oracle:{T}: Put a coin counter on Wishing Well. When you do, you may cast target instant or sorcery card with mana value equal to the number of coin counters on Wishing Well from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.

@@ -1,0 +1,19 @@
+Name:Incubator Dark Confidant
+ManaCost:no cost
+Types:Artifact Incubator
+A:AB$ SetState | Cost$ 2 | Mode$ Transform | SpellDescription$ Transform this artifact.
+AlternateMode:DoubleFaced
+Oracle:{2}: Transform this artifact.
+
+ALTERNATE
+
+Name:Dark Confidant
+ManaCost:1 B
+Types:Creature Phyrexian Human Wizard
+PT:2/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its mana value.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | RememberChanged$ True | SubAbility$ DBLose
+SVar:DBLose:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+Oracle:At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its mana value.

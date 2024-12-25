@@ -1,0 +1,11 @@
+Name:Moonstone Harbinger
+ManaCost:2 B
+Types:Creature Bat Warrior
+PT:1/3
+K:Flying
+K:Deathtouch
+T:Mode$ LifeChanged | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | ActivationLimit$ 1 | PlayerTurn$ True | TriggerDescription$ Whenever you gain or lose life during your turn, Bats you control get +1/+0 and gain deathtouch until end of turn. This ability triggers only once each turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Bat.YouCtrl | KW$ Deathtouch | NumAtt$ +1
+SVar:PlayMain1:TRUE
+DeckHints:Type$Bat
+Oracle:Flying, deathtouch\nWhenever you gain or lose life during your turn, Bats you control get +1/+0 and gain deathtouch until end of turn. This ability triggers only once each turn.

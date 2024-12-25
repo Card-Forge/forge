@@ -1,0 +1,12 @@
+Name:Mangled Soulrager
+ManaCost:1 U R
+Types:Creature Spirit
+PT:1/4
+K:Flying
+K:Cycling:1 U
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, switch the power and toughness of each creature on the battlefield. You get a twelve-time boon with "Whenever a creature you control enters, switch its power and toughness."
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature | PumpZone$ Battlefield | KW$ HIDDEN CARDNAME's power and toughness are switched | Duration$ Permanent | SubAbility$ DBBoon
+SVar:DBBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ CreatureETB
+SVar:CreatureETB:Mode$ ChangesZone | ValidCards$ Creature.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | BoonAmount$ 12 | Execute$ TrigPumpETB | TriggerDescription$ Whenever a creature you control enters, switch its power and toughness.
+SVar:TrigPumpETB:DB$ Pump | Defined$ TriggeredCardLKICopy | Duration$ Permanent | KW$ HIDDEN CARDNAME's power and toughness are switched
+Oracle:Flying\nWhen Mangled Soulrager enters, switch the power and toughness of each creature on the battlefield. You get a twelve-time boon with "Whenever a creature you control enters, switch its power and toughness."\nCycling {1}{U}

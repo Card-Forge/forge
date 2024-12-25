@@ -9,6 +9,6 @@ SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$InYourHand
 SVar:Y:Remembered$Amount
-DeckHints:Type$Human
 SVar:HasAttackEffect:TRUE
+DeckHints:Type$Human
 Oracle:Minas Tirith Garrison's power is equal to the number of cards in your hand.\nWhenever Minas Tirith Garrison attacks, you may tap any number of untapped Humans you control. Draw a card for each Human tapped this way.

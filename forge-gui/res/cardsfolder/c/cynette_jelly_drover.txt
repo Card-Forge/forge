@@ -1,0 +1,10 @@
+Name:Cynette, Jelly Drover
+ManaCost:3 U
+Types:Legendary Creature Human Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters or dies, create a 1/1 blue Jellyfish creature token with flying.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters or dies, create a 1/1 blue Jellyfish creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_jellyfish_flying | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Creature.withFlying+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control with flying get +1/+1.
+SVar:PlayMain1:TRUE
+Oracle:When Cynette, Jelly Drover enters or dies, create a 1/1 blue Jellyfish creature token with flying.\nCreatures you control with flying get +1/+1.

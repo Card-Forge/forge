@@ -6,7 +6,8 @@ T:Mode$ PhaseOutAll | ValidCards$ Permanent.phasedOutOther | TriggerZones$ Battl
 T:Mode$ ChangesZoneAll | ValidCards$ Card.Other+nonToken+!copiedSpell | Origin$ Any | Destination$ Exile | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever one or more other permanents phase out and whenever one or more other cards are put into exile from anywhere, put a time counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ TIME
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage equal to the number of time counters on it to any target. If a creature dealt damage this way would die this turn, exile it instead.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | DamageSource$ TriggeredAttackerLKICopy | NumDmg$ Count$CardCounters.TIME | ReplaceDyingDefined$ Targeted.Creature
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | DamageSource$ TriggeredAttackerLKICopy | NumDmg$ Count$CardCounters.TIME | RememberDamaged$ True | ReplaceDyingDefined$ Remembered.Creature | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
 DeckHints:Keyword$Phasing
 Oracle:Whenever one or more other permanents phase out and whenever one or more other cards are put into exile from anywhere, put a time counter on The War Doctor.\nWhenever The War Doctor attacks, it deals damage equal to the number of time counters on it to any target. If a creature dealt damage this way would die this turn, exile it instead.

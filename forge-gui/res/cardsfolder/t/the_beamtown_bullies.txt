@@ -10,6 +10,6 @@ SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Defined$ Targeted | Duration$ Per
 SVar:DBGoad:DB$ Goad | Defined$ Targeted | SubAbility$ DelTrig | SpellDescription$ Goad it.
 SVar:DelTrig:DB$ DelayedTrigger | RememberObjects$ Targeted.Creature | Mode$ Phase | Phase$ End of Turn | Execute$ TrigExile | TriggerDescription$ At the beginning of the next end step, exile it. | SpellDescription$ At the beginning of the next end step, exile it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ DelayTriggerRememberedLKI
-DeckHas:Ability$Graveyard
 AI:RemoveDeck:Random
+DeckHas:Ability$Graveyard
 Oracle:Vigilance, haste\n{T}: Target opponent whose turn it is puts target nonlegendary creature card from your graveyard onto the battlefield under their control. It gains haste. Goad it. At the beginning of the next end step, exile it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

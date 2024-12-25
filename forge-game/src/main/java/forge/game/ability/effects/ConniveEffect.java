@@ -78,7 +78,7 @@ public class ConniveEffect extends SpellAbilityEffect {
 
                 p.drawCards(num, sa, moveParams);
 
-                CardCollection validDiscards = CardLists.filter(p.getCardsIn(ZoneType.Hand), CardPredicates.Presets.NON_TOKEN);
+                CardCollection validDiscards = CardLists.filter(p.getCardsIn(ZoneType.Hand), CardPredicates.NON_TOKEN);
                 if (validDiscards.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, just to be safe
                     continue;
                 }

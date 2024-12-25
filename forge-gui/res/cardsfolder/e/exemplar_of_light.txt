@@ -1,0 +1,12 @@
+Name:Exemplar of Light
+ManaCost:2 W W
+Types:Creature Angel
+PT:3/3
+K:Flying
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ CounterAddedOnce | CounterType$ P1P1 | ValidSource$ You | ValidCard$ Card.Self | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever you put one or more +1/+1 counters on this creature, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:Flying\nWhenever you gain life, put a +1/+1 counter on this creature.\nWhenever you put one or more +1/+1 counters on this creature, draw a card. This ability triggers only once each turn.

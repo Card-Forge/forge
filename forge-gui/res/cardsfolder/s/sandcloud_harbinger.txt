@@ -1,0 +1,10 @@
+Name:Sandcloud Harbinger
+ManaCost:2 W
+Types:Creature Elemental Horse
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters, conjure three cards named Sunscorched Desert into the top ten cards of each player's library at random.
+SVar:TrigConjure:DB$ MakeCard | Amount$ 3 | Conjure$ True | Name$ Sunscorched Desert | Defined$ Player | Zone$ Library | LibraryPosition$ Count$Random.0.10
+T:Mode$ LandPlayed | ValidCard$ Desert | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player plays a Desert, that player draws a card and you gain 3 life.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+Oracle:When Sandcloud Harbinger enters, conjure three cards named Sunscorched Desert into the top ten cards of each player's library at random.\nWhenever a player plays a Desert, that player draws a card and you gain 3 life.

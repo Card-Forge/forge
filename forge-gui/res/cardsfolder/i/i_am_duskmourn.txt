@@ -1,0 +1,8 @@
+Name:I Am Duskmourn
+ManaCost:no cost
+Types:Ongoing Scheme
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPlay | TriggerDescription$ At the beginning of your end step, you may cast a spell from your hand without paying its mana cost. If you do, abandon this scheme.
+SVar:TrigPlay:DB$ Play | Valid$ Card.YouCtrl | ValidSA$ Spell | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True | RememberPlayed$ True
+SVar:Abandon:DB$ Abandon | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nAt the beginning of your end step, you may cast a spell from your hand without paying its mana cost. If you do, abandon this scheme.

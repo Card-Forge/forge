@@ -1,0 +1,13 @@
+Name:Elenda, Saint of Dusk
+ManaCost:2 W B
+Types:Legendary Creature Vampire Knight
+PT:4/4
+K:Lifelink
+K:Hexproof:Card.Instant:instants
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Menace | CheckSVar$ X | SVarCompare$ GTY | Description$ As long as your life total is greater than your starting life total, NICKNAME gets +1/+1 and has menace. NICKNAME gets an additional +5/+5 as long as your life total is at least 10 greater than your starting life total.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 5 | AddToughness$ 5 | Secondary$ True | CheckSVar$ X | SVarCompare$ GEZ | Description$ As long as your life total is greater than your starting life total, NICKNAME gets +1/+1 and has menace. NICKNAME gets an additional +5/+5 as long as your life total is at least 10 greater than your starting life total.
+SVar:X:Count$YourLifeTotal
+SVar:Y:Count$YourStartingLife
+SVar:Z:Count$YourStartingLife/Plus.10
+DeckHints:Ability$LifeGain
+Oracle:Lifelink, hexproof from instants\nAs long as your life total is greater than your starting life total, Elenda gets +1/+1 and has menace. Elenda gets an additional +5/+5 as long as your life total is at least 10 greater than your starting life total.

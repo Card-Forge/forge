@@ -30,7 +30,7 @@ ScryfallCode=GN3
 22 U Angler Drake @Svetlin Velinov
 23 R Angler Turtle @Alex Konstad
 24 U Brineborn Cutthroat @Caio Monteiro
-25 C Counterspell @Zack Stella
+25 U Counterspell @Zack Stella
 26 R Diluvian Primordial @Stephan Martiniere
 27 U Fact or Fiction @Matt Cavotta
 28 U Fog Bank @Howard Lyon
@@ -52,17 +52,17 @@ ScryfallCode=GN3
 44 C Bushmeat Poacher @Randy Vargas
 45 R Demon of Loathing @Tomasz Jedruszek
 46 R Demonic Embrace @Sidharth Chaturvedi
-47 U Doom Blade @Chippy
+47 C Doom Blade @Chippy
 48 C Doomed Dissenter @Tony Foti
 49 C Dusk Legion Zealot @Winona Nelson
-50 U Fleshbag Marauder @Mark Zug
+50 C Fleshbag Marauder @Mark Zug
 51 C Gavony Unhallowed @Christopher Moeller
 52 U Gifted Aetherborn @Ryan Yee
 53 R Gravewaker @Daniel Ljunggren
 54 R Liliana's Mastery @Kieran Yanner
 55 U Lord of the Accursed @Grzegorz Rutkowski
 56 C Maalfeld Twins @Mike Sass
-57 C Moan of the Unhallowed @Nils Hamm
+57 U Moan of the Unhallowed @Nils Hamm
 58 R Priest of the Blood Rite @David Palumbo
 59 U Ravenous Chupacabra @Daarken
 60 U Reassembling Skeleton @Austin Hsu
@@ -110,7 +110,7 @@ ScryfallCode=GN3
 103 U Overrun @Carl Critchlow
 104 C Rabid Bite @John Thacker
 105 C Ram Through @Zoltan Boros
-106 U Regrowth @Dan Scott
+106 U Regrowth @Dan Murayama Scott
 107 U Sylvan Messenger @PINDURSKI
 108 C Taunting Elf @Rebecca Guay
 109 R Thorn Lieutenant @Uriah Voth
@@ -124,7 +124,7 @@ ScryfallCode=GN3
 117 C Howling Golem @Grzegorz Rutkowski
 118 R Moonsilver Spear @James Paick
 119 U Ring of Thune @Erica Yang
-120 R Sword of Vengeance @Dan Scott
+120 R Sword of Vengeance @Dan Murayama Scott
 121 U Trusty Machete @Raymond Swanland
 122 L Plains @Sam Burley
 123 L Plains @Alayna Danner

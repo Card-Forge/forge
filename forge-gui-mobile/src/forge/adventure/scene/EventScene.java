@@ -57,29 +57,30 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
     private EventScene() {
         super(Forge.isLandscapeMode() ? "ui/event.json" : "ui/event_portrait.json");
-        //todo: add translation
+        // TODO: Add translation
+        float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
         DialogData introDialog = new DialogData();
         introDialog.text = "Enter this event?";
         DialogData enterWithCoin = new DialogData();
 
         DialogData enterWithShards = new DialogData();
-        enterWithShards.name = String.format("Spend %d [+shards]", Math.round(currentEvent.eventRules.shardsToEnter* changes.getTownPriceModifier()));
+        enterWithShards.name = String.format("Spend %d [+shards]", Math.round(currentEvent.eventRules.shardsToEnter * townPriceModifier));
         DialogData enterWithGold = new DialogData();
-        enterWithGold.name = String.format("Spend %d [+gold]", Math.round(currentEvent.eventRules.goldToEnter * changes.getTownPriceModifier()));
+        enterWithGold.name = String.format("Spend %d [+gold]", Math.round(currentEvent.eventRules.goldToEnter * townPriceModifier));
 
         DialogData.ConditionData hasGold = new DialogData.ConditionData();
-        hasGold.hasGold = Math.round(currentEvent.eventRules.goldToEnter * changes.getTownPriceModifier());
+        hasGold.hasGold = Math.round(currentEvent.eventRules.goldToEnter * townPriceModifier);
         enterWithGold.condition = new DialogData.ConditionData[]{hasGold};
 
         DialogData.ConditionData hasShards = new DialogData.ConditionData();
-        hasShards.hasShards = Math.round(currentEvent.eventRules.shardsToEnter * changes.getTownPriceModifier());
+        hasShards.hasShards = Math.round(currentEvent.eventRules.shardsToEnter * townPriceModifier);
         enterWithShards.condition = new DialogData.ConditionData[]{hasShards};
 
         if (currentEvent.eventRules.acceptsChallengeCoin) {
             enterWithCoin.name = "Redeem a Challenge Coin [+ChallengeCoin]";
 
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
-            hasCoin.item="Challenge Coin";
+            hasCoin.item = "Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
 
             DialogData.ActionData giveCoin = new DialogData.ActionData();
@@ -88,7 +89,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         } else if (currentEvent.eventRules.acceptsSilverChallengeCoin) {
             enterWithCoin.name = "Redeem a Challenge Coin [+SilverChallengeCoin]";
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
-            hasCoin.item="Silver Challenge Coin";
+            hasCoin.item = "Silver Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
 
             DialogData.ActionData giveCoin = new DialogData.ActionData();
@@ -97,28 +98,26 @@ public class EventScene extends MenuScene implements IAfterMatch {
         } else if (currentEvent.eventRules.acceptsBronzeChallengeCoin) {
             enterWithCoin.name = "Redeem a Challenge Coin [+BronzeChallengeCoin]";
             DialogData.ConditionData hasCoin = new DialogData.ConditionData();
-            hasCoin.item="Bronze Challenge Coin";
+            hasCoin.item = "Bronze Challenge Coin";
             enterWithCoin.condition = new DialogData.ConditionData[]{hasCoin};
 
             DialogData.ActionData giveCoin = new DialogData.ActionData();
             giveCoin.removeItem = hasCoin.item;
             enterWithCoin.action = new DialogData.ActionData[]{giveCoin};
 
-        }
-        else {
+        } else {
             DialogData.ConditionData alwaysFalse = new DialogData.ConditionData();
             alwaysFalse.item = "NonexistentItem";
             enterWithCoin.condition = new DialogData.ConditionData[]{alwaysFalse};
         }
 
         DialogData.ActionData spendGold = new DialogData.ActionData();
-        spendGold.addGold=-Math.round(currentEvent.eventRules.goldToEnter * changes.getTownPriceModifier());
+        spendGold.addGold = -Math.round(currentEvent.eventRules.goldToEnter * townPriceModifier);
         enterWithGold.action = new DialogData.ActionData[]{spendGold};
 
         DialogData.ActionData spendShards = new DialogData.ActionData();
-        spendShards.addShards =-Math.round(currentEvent.eventRules.shardsToEnter * changes.getTownPriceModifier());
+        spendShards.addShards = -Math.round(currentEvent.eventRules.shardsToEnter * townPriceModifier);
         enterWithShards.action = new DialogData.ActionData[]{spendShards};
-
 
 
         DialogData decline = new DialogData();
@@ -194,8 +193,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 if (currentEvent.format == AdventureEventController.EventFormat.Draft && currentEvent.eventStatus == Ready) {
                     DraftScene.instance().loadEvent(currentEvent);
                     Forge.switchScene(DraftScene.instance());
-                }
-                else if (currentEvent.format == AdventureEventController.EventFormat.Jumpstart && currentEvent.eventStatus == Ready) {
+                } else if (currentEvent.format == AdventureEventController.EventFormat.Jumpstart && currentEvent.eventStatus == Ready) {
                     DeckEditScene.getInstance().loadEvent(currentEvent);
                     Forge.switchScene(DeckEditScene.getInstance());
                 }
@@ -214,7 +212,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
         ScrollPane blessing = ui.findActor("blessingInfo");
         blessing.setActor(blessingScroll);
-        blessingScroll.setWidth(blessing.getWidth()-5);
+        blessingScroll.setWidth(blessing.getWidth() - 5);
         blessing.layout();
         window.add(root);
 
@@ -225,19 +223,18 @@ public class EventScene extends MenuScene implements IAfterMatch {
         refresh();
     }
 
-    private void refresh(){
-        if (metaDraftTable.isVisible()){
+    private void refresh() {
+        if (metaDraftTable.isVisible()) {
             scrollContainer = metaDraftTable;
             headerTable.clear();
             //todo: add translation
             headerTable.add("Pack Selection");
 
-            if (currentEvent.eventStatus == Entered){
+            if (currentEvent.eventStatus == Entered) {
                 loadMetaDraft();
             }
 
-        }
-        else {
+        } else {
             scrollContainer = new Table(Controls.getSkin());
             scrollContainer.row();
 
@@ -340,7 +337,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         performTouch(scroller);
 
         //todo: add translations
-        switch (currentEvent.eventStatus){
+        switch (currentEvent.eventStatus) {
             case Available:
                 nextPage.setDisabled(true);
                 previousPage.setDisabled(true);
@@ -354,10 +351,9 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 previousPage.setDisabled(true);
                 editDeck.setDisabled(true);
                 editDeck.setVisible(false);
-                if (currentEvent.getDraft() != null){
+                if (currentEvent.getDraft() != null) {
                     advance.setText("Enter Draft");
-                }
-                else{
+                } else {
                     advance.setText("Select Deck");
                 }
                 advance.setVisible(true);
@@ -371,7 +367,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 previousPage.setDisabled(false);
                 break;
             case Started:
-                advance.setText("Play round " +currentEvent.currentRound);
+                advance.setText("Play round " + currentEvent.currentRound);
                 advance.setVisible(true);
                 editDeck.setDisabled(true);
                 editDeck.setVisible(false);
@@ -406,23 +402,21 @@ public class EventScene extends MenuScene implements IAfterMatch {
         // if (object == null)
         object = new EventScene();
         if (lastGameScene != null)
-            object.lastGameScene=lastGameScene;
+            object.lastGameScene = lastGameScene;
         return object;
     }
 
     private void nextPage(boolean reverse) {
         //todo: add translations
         headerTable.clear();
-        if (!reverse && ++pageIndex >= eventPages.length){
+        if (!reverse && ++pageIndex >= eventPages.length) {
             pageIndex = 0;
-        }
-        else if (reverse && --pageIndex < 0) {
+        } else if (reverse && --pageIndex < 0) {
             pageIndex = eventPages.length - 1;
         }
-        if (pageIndex == 0){
+        if (pageIndex == 0) {
             headerTable.add("Event Standings").expand();
-        }
-        else{
+        } else {
             headerTable.add("Round " + (pageIndex) + " of " + (eventPages.length - 1));
         }
 
@@ -443,29 +437,29 @@ public class EventScene extends MenuScene implements IAfterMatch {
         }
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
 
-        if (currentEvent.eventStatus == Entered){
+        if (currentEvent.eventStatus == Entered) {
             loadMetaDraft();
         }
 
         refresh();
     }
 
-    public void editDeck(){
-        if (currentEvent.eventStatus == Ready){
+    public void editDeck() {
+        if (currentEvent.eventStatus == Ready) {
             DraftScene.instance().loadEvent(currentEvent);
             Forge.switchScene(DraftScene.instance());
         }
     }
 
     public void advance() {
-        switch (currentEvent.eventStatus){
+        switch (currentEvent.eventStatus) {
             case Available:
                 activate(entryDialog); //Entry fee pop-up
 
                 break;
             case Entered: //Start draft or select deck
                 //Show progress / wait indicator? Draft can take a while to generate
-                switch (currentEvent.format){
+                switch (currentEvent.format) {
                     case Draft:
                         DraftScene.instance().loadEvent(currentEvent);
                         Forge.switchScene(DraftScene.instance());
@@ -495,12 +489,12 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     @Override
-    public boolean back(){
-        if (currentEvent.eventStatus.equals(Awarded)){
+    public boolean back() {
+        if (currentEvent.eventStatus.equals(Awarded)) {
             AdventureEventController.instance().finalizeEvent(currentEvent);
             currentEvent = null;
         }
-        Forge.switchScene(lastGameScene==null?GameScene.instance():lastGameScene);
+        Forge.switchScene(lastGameScene == null ? GameScene.instance() : lastGameScene);
         return true;
     }
 
@@ -512,7 +506,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
             if (match.p2 == null) {
                 //shouldn't happen under current setup, but this would be a bye
                 match.winner = match.p1;
-                match.p1.wins +=1;
+                match.p1.wins += 1;
             }
 
             if (match.p1 instanceof AdventureEventData.AdventureEventHuman) {
@@ -526,12 +520,11 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 continue;
             } else {
                 //Todo: Actually run match simulation here
-                if(MyRandom.percentTrue(50)){
+                if (MyRandom.percentTrue(50)) {
                     match.p1.wins++;
                     match.p2.losses++;
                     match.winner = match.p1;
-                }
-                else{
+                } else {
                     match.p1.losses++;
                     match.p2.wins++;
                     match.winner = match.p2;
@@ -542,8 +535,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
         if (humanMatch != null && humanMatch.round != currentEvent.currentRound)
             humanMatch = null;
-        if (humanMatch != null)
-        {
+        if (humanMatch != null) {
             DuelScene duelScene = DuelScene.instance();
             EnemySprite enemy = humanMatch.p2.getSprite();
             currentEvent.nextOpponent = humanMatch.p2;
@@ -551,9 +543,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy, false, currentEvent);
                 Forge.switchScene(duelScene);
             }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName(), humanMatch.p1.getRecord(), humanMatch.p2.getRecord())));
-        }
-        else
-        {
+        } else {
             finishRound();
         }
         advance.setDisabled(false);
@@ -577,8 +567,7 @@ public class EventScene extends MenuScene implements IAfterMatch {
         if (winner) {
             //AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
             //AdventureQuestController.instance().showQuestDialogs(MapStage.this);
-        }
-        else{
+        } else {
 //            AdventureQuestController.instance().updateQuestsLose(currentMob);
 //            AdventureQuestController.instance().showQuestDialogs(MapStage.this);
         }
@@ -586,23 +575,22 @@ public class EventScene extends MenuScene implements IAfterMatch {
         finishRound();
     }
 
-    public void finishRound(){
-        if (currentEvent.currentRound == currentEvent.rounds){
+    public void finishRound() {
+        if (currentEvent.currentRound == currentEvent.rounds) {
             finishEvent();
-        }
-        else currentEvent.currentRound += 1;
+        } else currentEvent.currentRound += 1;
         refresh();
     }
 
-    public void finishEvent(){
+    public void finishEvent() {
         currentEvent.eventStatus = AdventureEventController.EventStatus.Completed;
     }
 
-    public void loadMetaDraft(){
+    public void loadMetaDraft() {
         metaDraftTable.setVisible(true);
 
         metaDraftTable.clear();
-        for (Deck deckOption :  currentEvent.jumpstartBoosters) {
+        for (Deck deckOption : currentEvent.jumpstartBoosters) {
             if (metaDraftTable.hasChildren())
                 metaDraftTable.row();
 
@@ -629,11 +617,9 @@ public class EventScene extends MenuScene implements IAfterMatch {
                     public void clicked(InputEvent event, float x, float y) {
                         selectButton.clearListeners();
                         deckOption.getTags().add("Selected");
-                        if (!selectedJumpstartPackIsLast(deckOption))
-                        {
+                        if (!selectedJumpstartPackIsLast(deckOption)) {
                             loadMetaDraft();
-                        }
-                        else {
+                        } else {
                             metaDraftTable.setVisible(false);
                         }
                     }
@@ -646,11 +632,11 @@ public class EventScene extends MenuScene implements IAfterMatch {
         eventPages[0] = metaDraftTable;
     }
 
-    private boolean selectedJumpstartPackIsLast(Deck selectedPack){
+    private boolean selectedJumpstartPackIsLast(Deck selectedPack) {
         int packsToPick = 3;
         int packsPicked = 0;
         Deck currentPicks = new Deck();
-        for (Deck deckOption :  currentEvent.jumpstartBoosters) {
+        for (Deck deckOption : currentEvent.jumpstartBoosters) {
             if (deckOption.getTags().contains("Selected")) {
                 packsPicked++;
                 currentPicks.getMain().addAll(deckOption.getAllCardsInASinglePool());

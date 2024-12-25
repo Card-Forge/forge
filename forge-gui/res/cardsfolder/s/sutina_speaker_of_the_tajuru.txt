@@ -1,0 +1,11 @@
+Name:Sutina, Speaker of the Tajuru
+ManaCost:2 G
+Types:Legendary Creature Elf Scout
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever NICKNAME attacks, you may return a land you control to its owner's hand. When you do, put a +1/+1 counter on target creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Return<1/Land> | Execute$ TrigPutCounter | TriggerDescription$ When you do, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:When Sutina, Speaker of the Tajuru enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nWhenever Sutina attacks, you may return a land you control to its owner's hand. When you do, put a +1/+1 counter on target creature.

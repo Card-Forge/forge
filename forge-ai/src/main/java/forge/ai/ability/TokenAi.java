@@ -1,32 +1,22 @@
 package forge.ai.ability;
 
+
 import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
 
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.Cost;
+import forge.game.cost.CostDraw;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
@@ -42,12 +32,13 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
 
 /**
  * <p>
  * AbilityFactory_Token class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: AbilityFactoryToken.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
@@ -81,7 +72,7 @@ public class TokenAi extends SpellAbilityAi {
 
         Card actualToken = spawnToken(ai, sa);
 
-        if (actualToken == null || actualToken.getNetToughness() < 1) {
+        if (actualToken == null || (actualToken.isCreature() && actualToken.getNetToughness() < 1)) {
             final AbilitySub sub = sa.getSubAbility();
             // useful
             // no token created
@@ -115,7 +106,7 @@ public class TokenAi extends SpellAbilityAi {
         if (canInterruptSacrifice(ai, sa, actualToken, tokenAmount)) {
             return true;
         }
-        
+
         boolean haste = actualToken.hasKeyword(Keyword.HASTE);
         boolean oneShot = sa.getSubAbility() != null
                 && sa.getSubAbility().getApi() == ApiType.DelayedTrigger;
@@ -141,7 +132,7 @@ public class TokenAi extends SpellAbilityAi {
         }
         return (!ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) && ph.isPlayerTurn(ai)) || !oneShot;
     }
-    
+
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         /*
@@ -381,7 +372,8 @@ public class TokenAi extends SpellAbilityAi {
 
         // look for card without role from ai
         List<Card> prefListSBA = CardLists.filter(tgts, c ->
-        !Iterables.any(c.getAttachedCards(), att -> att.getController() == ai && att.getType().hasSubtype("Role")));
+                !c.getAttachedCards().anyMatch(att ->
+                        att.getController() == ai && att.getType().hasSubtype("Role")));
 
         List<Card> prefList;
         if (isCurse) {
@@ -413,4 +405,106 @@ public class TokenAi extends SpellAbilityAi {
         return false;
     }
 
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final Card source = sa.getHostCard();
+        Player p = sa.getActivatingPlayer();
+        if (sa.isKeyword(Keyword.FABRICATE)) {
+            final int n = Integer.parseInt(sa.getParam("TokenAmount"));
+
+            // if host would leave the play or if host is useless, create tokens
+            if (source.hasSVar("EndOfTurnLeavePlay") || ComputerUtilCard.isUselessCreature(payer, source)) {
+                return false;
+            }
+
+            // need a copy for one with extra +1/+1 counter boost,
+            // without causing triggers to run
+            final Card copy = CardCopyService.getLKICopy(source);
+            copy.setCounters(CounterEnumType.P1P1, copy.getCounters(CounterEnumType.P1P1) + n);
+            copy.setZone(source.getZone());
+
+            // if host would put into the battlefield attacking
+            Combat combat = source.getGame().getCombat();
+            if (combat != null && combat.isAttacking(source)) {
+                final Player defender = combat.getDefenderPlayerByAttacker(source);
+                if (defender.canLoseLife() && !ComputerUtilCard.canBeBlockedProfitably(defender, copy, true)) {
+                    return true;
+                }
+                return false;
+            }
+
+            // if the host has haste and can attack
+            if (CombatUtil.canAttack(copy)) {
+                for (final Player opp : payer.getOpponents()) {
+                    if (CombatUtil.canAttack(copy, opp) &&
+                            opp.canLoseLife() &&
+                            !ComputerUtilCard.canBeBlockedProfitably(opp, copy, true))
+                        return true;
+                }
+            }
+
+            // TODO check for trigger to turn token ETB into +1/+1 counter for host
+            // TODO check for trigger to turn token ETB into damage or life loss for opponent
+            // in this cases Token might be prefered even if they would not survive
+            final Card tokenCard = TokenAi.spawnToken(payer, sa);
+
+            // Token would not survive
+            if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
+                return true;
+            }
+
+            // Special Card logic, this one try to median its power with the number of artifacts
+            if ("Marionette Master".equals(source.getName())) {
+                CardCollection list = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS);
+                return list.size() >= copy.getNetPower();
+            } else if ("Cultivator of Blades".equals(source.getName())) {
+                // Cultivator does try to median with number of Creatures
+                CardCollection list = payer.getCreaturesInPlay();
+                return list.size() >= copy.getNetPower();
+            }
+
+            // evaluate Creature with +1/+1
+            int evalCounter = ComputerUtilCard.evaluateCreature(copy);
+
+            final CardCollection tokenList = new CardCollection(source);
+            for (int i = 0; i < n; ++i) {
+                tokenList.add(TokenAi.spawnToken(payer, sa));
+            }
+
+            // evaluate Host with Tokens
+            int evalToken = ComputerUtilCard.evaluateCreatureList(tokenList);
+
+            return evalToken < evalCounter;
+        }
+
+        // Development effect, Payer can let Opponent draw, or they get a token
+        if (payer.isOpponentOf(sa.getActivatingPlayer())) {
+            if (cost.hasSpecificCostType(CostDraw.class)) {
+                CostDraw draw = cost.getCostPartByType(CostDraw.class);
+                // try to deck out opponent
+                if (draw.getPotentialPlayers(payer, sa).contains(p) && p.getCardsIn(ZoneType.Library).size() < 5) {
+                    if (!p.isCardInPlay("Laboratory Maniac") || p.cantWin()) {
+                        return true;
+                    }
+                }
+            }
+
+            if (alreadyPaid) {
+                return false;
+            }
+            final Card tokenCard = TokenAi.spawnToken(p, sa);
+
+            // Token would not survive
+            if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
+                return false;
+            }
+            int evalActivator = ComputerUtilCard.evaluateCreature(tokenCard) + ComputerUtilCard.evaluateCreatureList(p.getCreaturesInPlay());;
+            int evalPayerCreatures = ComputerUtilCard.evaluateCreatureList(payer.getCreaturesInPlay());
+
+            if (evalActivator > evalPayerCreatures) {
+                return true;
+            }
+        }
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+    }
 }

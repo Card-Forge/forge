@@ -2,8 +2,9 @@ Name:Carrion Rats
 ManaCost:B
 Types:Creature Rat
 PT:2/1
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigNoCombatDamage | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile a card from their graveyard. If a player does, CARDNAME assigns no combat damage this turn.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigNoCombatDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile a card from their graveyard. If a player does, CARDNAME assigns no combat damage this turn.
-SVar:TrigNoCombatDamage:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ Player | UnlessSwitched$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBNoCombatDamage | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile a card from their graveyard. If a player does, CARDNAME assigns no combat damage this turn.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DBNoCombatDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile a card from their graveyard. If a player does, CARDNAME assigns no combat damage this turn.
+SVar:DBNoCombatDamage:DB$ Effect | StaticAbilities$ SNoCombatDamage | Duration$ UntilHostLeavesPlayOrEOT | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ Player | UnlessSwitched$ True
+SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE assigns no combat damage this turn.
 AI:RemoveDeck:All
 Oracle:Whenever Carrion Rats attacks or blocks, any player may exile a card from their graveyard. If a player does, Carrion Rats assigns no combat damage this turn.

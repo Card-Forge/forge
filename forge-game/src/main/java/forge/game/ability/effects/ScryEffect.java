@@ -17,8 +17,7 @@ public class ScryEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Player> players = Lists.newArrayList(); // players really affected
-        players.addAll(getTargetPlayers(sa));
+        final List<Player> players = getTargetPlayers(sa);
         sb.append(Lang.joinHomogenous(players)).append(" ");
 
         int num = 1;

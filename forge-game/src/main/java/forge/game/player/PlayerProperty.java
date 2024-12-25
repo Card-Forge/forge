@@ -13,10 +13,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,11 +21,11 @@ public class PlayerProperty {
 
     public static boolean playerHasProperty(Player player, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         Game game = player.getGame();
-        if (property.endsWith("Activator")) {
-            sourceController = spellAbility.getHostCard().getController();
-            property = property.substring(0, property.length() - 9);
-        }
-        if (property.equals("You")) {
+        if (property.equals("Activator")) {
+            if (!player.equals(spellAbility.getHostCard().getController())) {
+                return false;
+            }
+        } else if (property.equals("You")) {
             if (!player.equals(sourceController)) {
                 return false;
             }
@@ -78,7 +75,7 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("descended")) {
-            if (!(player.getDescended() > 0)) {
+            if (player.getDescended() < 1) {
                 return false;
             }
         } else if (property.equals("committedCrimeThisTurn")) {
@@ -243,10 +240,6 @@ public class PlayerProperty {
             if (!player.isEnchantedBy(source)) {
                 return false;
             }
-        } else if (property.equals("NotEnchantedBy")) {
-            if (player.isEnchantedBy(source)) {
-                return false;
-            }
         } else if (property.equals("EnchantedController")) {
             Card enchanting = source.getEnchantingCard();
             if (enchanting == null || !player.equals(enchanting.getController())) {
@@ -259,7 +252,7 @@ public class PlayerProperty {
         } else if (property.equals("NotedDefender")) {
             String tracker = player.getDraftNotes().getOrDefault("Cogwork Tracker", "");
 
-            return Iterables.contains(Arrays.asList(tracker.split(",")), String.valueOf(player));
+            return Arrays.asList(tracker.split(",")).contains(String.valueOf(player));
         } else if (property.startsWith("life")) {
             int life = player.getLife();
             int amount = AbilityUtils.calculateAmount(source, property.substring(6), spellAbility);

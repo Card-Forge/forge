@@ -82,7 +82,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
             return;
         }
         // exclude cards that can't be destroyed at this moment
-        list = CardLists.filter(list, CardPredicates.Presets.CAN_BE_DESTROYED);
+        list = CardLists.filter(list, CardPredicates.CAN_BE_DESTROYED);
 
         list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard, sa);
 

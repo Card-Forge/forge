@@ -1,0 +1,6 @@
+Name:Omenpath to Naya
+ManaCost:no cost
+Types:Land Omenpath
+K:Vanishing:4
+A:AB$ Mana | Cost$ T | Produced$ Combo R G W | SpellDescription$ Add {R}, {G}, or {W}.
+Oracle:Vanishing 4 (This land enters the battlefield with four time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\n{T}: Add {R}, {G}, or {W}.

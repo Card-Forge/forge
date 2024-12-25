@@ -1,11 +1,5 @@
 package forge.ai.simulation;
 
-import forge.game.spellability.LandAbility;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
@@ -18,6 +12,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.util.collect.FCollectionView;
+
+import java.util.*;
 
 public class GameSimulator {
     public static boolean COPY_STACK = false;
@@ -158,9 +154,9 @@ public class GameSimulator {
     }
     public Score simulateSpellAbility(SpellAbility origSa, GameStateEvaluator eval, boolean resolve) {
         SpellAbility sa;
-        if (origSa instanceof LandAbility) {
+        if (origSa.isLandAbility()) {
             Card hostCard = (Card) copier.find(origSa.getHostCard());
-            if (!aiPlayer.playLand(hostCard, false)) {
+            if (!aiPlayer.playLand(hostCard, false, origSa)) {
                 System.err.println("Simulation: Couldn't play land! " + origSa);
             }
             sa = origSa;
@@ -173,7 +169,7 @@ public class GameSimulator {
             }
 
             debugPrint("Found SA " + sa + " on host card " + sa.getHostCard() + " with owner:"+ sa.getHostCard().getOwner());
-            sa.setActivatingPlayer(aiPlayer, true);
+            sa.setActivatingPlayer(aiPlayer);
             SpellAbility origSaOrSubSa = origSa;
             SpellAbility saOrSubSa = sa;
             do {

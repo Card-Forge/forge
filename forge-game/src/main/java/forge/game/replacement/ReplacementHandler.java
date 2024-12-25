@@ -17,19 +17,13 @@
  */
 package forge.game.replacement;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import com.google.common.base.MoreObjects;
 import forge.game.card.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -70,8 +64,6 @@ public class ReplacementHandler {
         game = gameState;
     }
 
-    //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
-
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
         final CardCollection preList = new CardCollection();
         boolean checkAgain = false;
@@ -107,13 +99,6 @@ public class ReplacementHandler {
         }
 
         final List<ReplacementEffect> possibleReplacers = Lists.newArrayList();
-        // Round up Non-static replacement effects ("Until EOT," or
-        // "The next time you would..." etc)
-        /*for (final ReplacementEffect replacementEffect : this.tmpEffects) {
-            if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams) && replacementEffect.getLayer() == layer) {
-                possibleReplacers.add(replacementEffect);
-            }
-        }*/
 
         // Round up Static replacement effects
         game.forEachCardInGame(new Visitor<Card>() {
@@ -150,7 +135,7 @@ public class ReplacementHandler {
                 return true;
             }
 
-        });
+        }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
         if (checkAgain) {
             if (affectedLKI != null && affectedCard != null) {
@@ -173,6 +158,10 @@ public class ReplacementHandler {
         }
 
         return possibleReplacers;
+    }
+
+    public boolean cantHappenCheck(final ReplacementType event, final Map<AbilityKey, Object> runParams) {
+        return !getReplacementList(event, runParams, ReplacementLayer.CantHappen).isEmpty();
     }
 
     /**
@@ -329,7 +318,7 @@ public class ReplacementHandler {
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            String name = CardTranslation.getTranslatedName(host.getCardForUi().getName());
+            String name = CardTranslation.getTranslatedName(MoreObjects.firstNonNull(host.getCardForUi(), host).getName());
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)
@@ -660,6 +649,7 @@ public class ReplacementHandler {
             }
 
             List<ReplacementEffect> possibleReplacers = new ArrayList<>(replaceCandidateMap.keySet());
+            // TODO should be able to choose different order for each entity
             ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(possibleReplacers);
             List<Map<AbilityKey, Object>> runParamList = replaceCandidateMap.get(chosenRE);
 
@@ -689,8 +679,7 @@ public class ReplacementHandler {
 
                 // Determine if need to divide shield among affected entity and
                 // determine if the prevent next N damage shield is large enough to replace all damage
-                Map<String, String> mapParams = chosenRE.getMapParams();
-                if ((mapParams.containsKey("PreventionEffect") && mapParams.get("PreventionEffect").equals("NextN"))
+                if ((chosenRE.hasParam("PreventionEffect") && chosenRE.getParam("PreventionEffect").equals("NextN"))
                         || apiType == ApiType.ReplaceSplitDamage) {
                     if (apiType == ApiType.ReplaceDamage) {
                         shieldAmount = AbilityUtils.calculateAmount(effectSA.getHostCard(), effectSA.getParamOrDefault("Amount", "1"), effectSA);

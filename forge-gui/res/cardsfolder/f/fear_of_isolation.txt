@@ -1,0 +1,7 @@
+Name:Fear of Isolation
+ManaCost:1 U
+Types:Enchantment Creature Nightmare
+PT:2/3
+A:SP$ PermanentCreature | Cost$ 1 U Return<1/Permanent/permanent>
+K:Flying
+Oracle:As an additional cost to cast this spell, return a permanent you control to its owner's hand.\nFlying

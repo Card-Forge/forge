@@ -1,0 +1,6 @@
+Name:Creeping Peeper
+ManaCost:1 U
+Types:Creature Eye
+PT:2/1
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ 1 | RestrictValid$ Spell.Enchantment,Static.Unlock,Static.isTurnFaceUp | SpellDescription$ Add {U}. Spend this mana only to cast an enchantment spell, unlock a door, or turn a permanent face up.
+Oracle:{T}: Add {U}. Spend this mana only to cast an enchantment spell, unlock a door, or turn a permanent face up.

@@ -1,0 +1,6 @@
+Name:Glimmerburst
+ManaCost:3 U
+Types:Instant
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBToken | SpellDescription$ Draw two cards. Create a 1/1 white Glimmer enchantment creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_e_glimmer | TokenOwner$ You
+Oracle:Draw two cards. Create a 1/1 white Glimmer enchantment creature token.

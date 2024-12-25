@@ -6,6 +6,7 @@ Type=Promo
 ScryfallCode=PDOM
 
 [cards]
+33c U Serra Angel @Scott M. Fischer
 60 C Opt @Tyler Jacobson
 76 R Zahid, Djinn of the Lamp @Tyler Jacobson
 81 U Cast Down @Bastien L. Deharme
@@ -13,4 +14,3 @@ ScryfallCode=PDOM
 182 R Steel Leaf Champion @Simon Dominic
 204 U Shanna, Sisay's Legacy @Magali Villeneuve
 249 U Zhalfirin Void @John Avon
-33c U Serra Angel @Scott M. Fischer

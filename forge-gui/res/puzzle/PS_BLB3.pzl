@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Bloomburrow #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/08/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume any cards you or your opponent could draw are not relevant to the puzzle. Ensure your solution considers all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Bitter Reunion;Season of the Burrow;Harvestrite Host;For the Common Good
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Baylen, the Haymaker;Alchemist's Talent;Plains;Copperline Gorge;Copperline Gorge;T:c_a_treasure_sac;T:c_a_treasure_sac;T:c_a_treasure_sac;T:c_a_treasure_sac;T:c_a_treasure_sac
+p1life=12
+p1library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p1battlefield=Vengeful Tracker

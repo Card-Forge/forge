@@ -1,0 +1,9 @@
+Name:Persistent Constrictor
+ManaCost:4 B
+Types:Creature Zombie Snake
+PT:5/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, they lose 1 life and you put a -1/-1 counter on up to one target creature they control.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ TriggeredPlayer | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature they control | CounterType$ M1M1 | CounterNum$ 1 | TargetsWithDefinedController$ TriggeredPlayer
+K:Persist
+Oracle:At the beginning of each opponent's upkeep, they lose 1 life and you put a -1/-1 counter on up to one target creature they control.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

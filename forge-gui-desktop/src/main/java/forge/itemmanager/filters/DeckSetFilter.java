@@ -3,8 +3,8 @@ package forge.itemmanager.filters;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
 import forge.itemmanager.ItemManager;
@@ -25,7 +25,9 @@ public class DeckSetFilter extends DeckFormatFilter {
     public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0,
                          Collection<String> limitedSets0, boolean allowReprints0) {
         this(itemManager0, sets0, allowReprints0);
-        this.limitedSets.addAll(limitedSets0);
+        if (limitedSets0 != null) {
+            this.limitedSets.addAll(limitedSets0);
+        }
     }
 
     @Override

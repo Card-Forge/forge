@@ -5,7 +5,6 @@ import java.util.Map;
 import forge.game.card.*;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -110,8 +109,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             // Removing energy
             if (type.equals("All")) {
                 for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtPlayer.getCounters().entrySet())) {
-                    tgtPlayer.subtractCounter(e.getKey(), e.getValue(), activator);
-                    totalRemoved += e.getValue();
+                    totalRemoved += tgtPlayer.subtractCounter(e.getKey(), e.getValue(), activator);
                 }
             } else {
                 if (num.equals("All")) {
@@ -120,8 +118,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                 if (type.equals("Any")) {
                     totalRemoved += removeAnyType(tgtPlayer, cntToRemove, sa);
                 } else {
-                    tgtPlayer.subtractCounter(counterType, cntToRemove, activator);
-                    totalRemoved += cntToRemove;
+                    totalRemoved += tgtPlayer.subtractCounter(counterType, cntToRemove, activator);
                 }
             }
         }
@@ -165,11 +162,11 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             if (gameCard == null || !tgtCard.equalsWithGameTimestamp(gameCard)) {
                 continue;
             }
+
             final Zone zone = game.getZoneOf(gameCard);
             if (type.equals("All")) {
                 for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(gameCard.getCounters().entrySet())) {
-                    gameCard.subtractCounter(e.getKey(), e.getValue(), activator);
-                    totalRemoved += e.getValue();
+                    totalRemoved += gameCard.subtractCounter(e.getKey(), e.getValue(), activator);
                 }
                 game.updateLastStateForCard(gameCard);
                 continue;
@@ -180,6 +177,9 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             if (type.equals("Any")) {
                 totalRemoved += removeAnyType(gameCard, cntToRemove, sa);
             } else {
+                if (!tgtCard.canRemoveCounters(counterType)) {
+                    continue;
+                }
                 cntToRemove = Math.min(cntToRemove, gameCard.getCounters(counterType));
 
                 if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Exile)) {
@@ -221,19 +221,23 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
         final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(entity.getCounters());
+        for (CounterType ct : ImmutableList.copyOf(tgtCounters.keySet())) {
+            if (!entity.canRemoveCounters(ct)) {
+                tgtCounters.remove(ct);
+            }
+        }
 
         while (cntToRemove > 0 && !tgtCounters.isEmpty()) {
             Map<String, Object> params = Maps.newHashMap();
             params.put("Target", entity);
 
             String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
-            CounterType chosenType = pc.chooseCounterType(
-                    ImmutableList.copyOf(tgtCounters.keySet()), sa, prompt, params);
+            CounterType chosenType = pc.chooseCounterType(ImmutableList.copyOf(tgtCounters.keySet()), sa, prompt, params);
 
             int max = Math.min(cntToRemove, tgtCounters.get(chosenType));
             // remove selection so player can't cheat additional trigger by choosing the same type multiple times
             tgtCounters.remove(chosenType);
-            int remaining = Aggregates.sum(tgtCounters.values(), Functions.identity());
+            int remaining = Aggregates.sum(tgtCounters.values());
             // player must choose enough so he can still reach the amount with other types
             int min = sa.hasParam("UpTo") ? 0 : Math.max(1, max - remaining);
             prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName());

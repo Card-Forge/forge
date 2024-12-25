@@ -10,26 +10,26 @@ BoosterCovers=3
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MH3
 
+#Numbers from https://mtgscribe.com/2024/05/22/play-booster-fact-sheet-modern-horizons-3/
 [Common]
-Base=Common
+Base=Common:fromSheet("MH3 cards")
 
 [Common-Guest]
-Base=Common
+Base=Common:fromSheet("MH3 cards")
 Replace=.015625F fromSheet("MH3 special guests")
 
 [Uncommon]
-Base=Uncommon
+Base=Uncommon:fromSheet("MH3 cards")
 
 [RareMythic]
-Base=RareMythic
-Replace=.021F fromSheet("MH3 retro frame")
-# Fetch lands, Concept Eldrazi, Planeswalkers, Frame Break treatments, Profile treatments, and borderless treatments on Rare or Mythic Rare cards will appear 5.1 percent of the time
-Replace=.051F fromSheet("MH3 booster fun")
+Base=RareMythic:fromSheet("MH3 cards")
+Replace=.021F RareMythic:fromSheet("MH3 retro frame")
+Replace=.051F RareMythic:fromSheet("MH3 borderless")
 
 [Common-Land]
-Base=Common
-Replace=.20F Land
-Replace=.133F Land+
+Base=Common:fromSheet("MH3 cards")
+Replace=.20F Land:fromSheet("MH3 cards")
+Replace=.133F Land:fromSheet("MH3 cards")+
 Replace=.10F fromSheet("MH3 full art")
 Replace=.067F fromSheet("MH3 full art")+
 
@@ -37,16 +37,17 @@ Replace=.067F fromSheet("MH3 full art")+
 Base=Uncommon:fromSheet("MH3 new to modern")
 Replace=.213F Rare:fromSheet("MH3 new to modern")
 Replace=.023F Mythic:fromSheet("MH3 new to modern")
-Replace=.008F fromSheet("MH3 borderless frame")
-Replace=.003F fromSheet("MH3 borderless profile")
-Replace=.001F fromSheet("MH3 retro")
+Replace=.011F RareMythic:fromSheet("MH3 borderless")
+Replace=.001F Mythic:fromSheet("MH3 borderless")
+Replace=.002F RareMythic:fromSheet("MH3 retro frame")
 
 [Wildcard]
-Base=Common
-Replace=.417F Uncommon
-Replace=.078F MythicRare
-Replace=.004F fromSheet("MH3 borderless frame")
-Replace=.042F fromSheet("MH3 retro")
+Base=Common:fromSheet("MH3 cards")
+Replace=.417F Uncommon:fromSheet("MH3 cards")
+Replace=.078F RareMythic:fromSheet("MH3 cards")
+Replace=.004F RareMythic:fromSheet("MH3 borderless")
+Replace=.042F fromSheet("MH3 retro frame")
+Replace=.042F fromSheet("MH3 commanders")
 
 [cards]
 1 U Breaker of Creation @Yohann Schepacz
@@ -302,7 +303,7 @@ Replace=.042F fromSheet("MH3 retro")
 251 M Grist, Voracious Larva @Chris Rahn
 252 U Bloodsoaked Insight @David Álvarez
 253 U Drowner of Truth @Nicholas Gregory
-254 U Glasswing Grace @Craig Elliott
+254 U Glasswing Grace @Craig Elliott & Maxime Minard
 255 U Legion Leadership @Ryan Valle
 256 U Revitalizing Repast @Raoul Vitale
 257 U Rush of Inspiration @Jorge Jacinto
@@ -352,12 +353,6 @@ Replace=.042F fromSheet("MH3 retro")
 301 R Deserted Temple @Rob Alexander
 302 U Nesting Grounds @Yeong-Hao Han
 303 M Phyrexian Tower @Martin de Diego Sádaba
-304 L Plains @Nadia Hurianova
-305 L Island @Samuele Bandini
-306 L Swamp @Yohann Schepacz
-307 L Mountain @Chuck Lukacs
-308 L Forest @Vance Kovacs
-309 U Snow-Covered Wastes @Tomáš Honz
 310 L Plains @Volkan Baǵa
 311 L Plains @Lius Lasahido
 312 L Island @Alayna Danner
@@ -368,6 +363,14 @@ Replace=.042F fromSheet("MH3 retro")
 317 L Mountain @Paolo Parente
 318 L Forest @Lars Grant-West
 319 L Forest @Brian Valeza
+
+[full art]
+304 L Plains @Nadia Hurianova
+305 L Island @Samuele Bandini
+306 L Swamp @Yohann Schepacz
+307 L Mountain @Chuck Lukacs
+308 L Forest @Vance Kovacs
+309 U Snow-Covered Wastes @Tomáš Honz
 
 [borderless]
 320 R Echoes of Eternity @Clint Lockwood
@@ -445,7 +448,7 @@ Replace=.042F fromSheet("MH3 retro")
 471 M Ral, Monsoon Mage @Borja Pindado
 472 M Grist, Voracious Larva @Ron Spencer
 
-[showcase]
+[retro frame]
 384 M Emrakul, the World Anew @Brent Hollowell
 385 U It That Heralds the End @Alex Konstad
 386 M Kozilek, the Broken Reality @Brent Hollowell
@@ -504,28 +507,8 @@ Replace=.042F fromSheet("MH3 retro")
 439 U Snow-Covered Wastes @Mark Poole
 440 R Windswept Heath @Alexander Forssberg
 441 R Wooded Foothills @Chris Ostrowski
-473 M Emrakul, the World Anew @Brent Hollowell
-474 M Herigast, Erupting Nullkite @Lucas Graciano
-475 M Kozilek, the Broken Reality @Brent Hollowell
-476 M Ulamog, the Defiler @Chase Stone
-477 R Pearl-Ear, Imperial Advisor @Fajareka Setiawan
-478 R Phelia, Exuberant Shepherd @Rudy Siswanto
-479 R K'rrik, Son of Yawgmoth @Chase Stone
-480 R Shilgengar, Sire of Famine @Chris Rallis
-481 M Ashling, Flame Dancer @Michal Ivan
-482 R Laelia, the Blade Reforged @Wisnu Tan
-483 M Eladamri, Korvecdal @Zoltan Boros
-484 R Six @Andrew Mar
-485 M Arna Kennerüd, Skycaptain @Cristi Balanescu
-486 M Breya, Etherium Shaper @Tiffany Turrill
-487 R Genku, Future Shaper @Chuck Lukacs
-488 R Imskir Iron-Eater @Xavier Ribeiro
-489 M Kaalia of the Vast @Justyna Dura
-490 R Kudo, King Among Bears @Ekaterina Burmak
-491 R Nadu, Winged Wisdom @Daren Bader
-492 R The Necrobloom @Igor Krstic
-493 M Phlage, Titan of Fire's Fury @Lucas Graciano
-494 R Rosheen, Roaring Prophet @Fang Xinyu
+
+[etched]
 497 L Plains @Volkan Baǵa
 498 L Plains @Lius Lasahido
 499 L Island @Alayna Danner
@@ -551,6 +534,28 @@ Replace=.042F fromSheet("MH3 retro")
 519 U Solar Transformer @Mike Bierek
 520 C Tranquil Landscape @Randy Gallegos
 521 C Twisted Landscape @Piotr Dura
+473 M Emrakul, the World Anew @Brent Hollowell
+474 M Herigast, Erupting Nullkite @Lucas Graciano
+475 M Kozilek, the Broken Reality @Brent Hollowell
+476 M Ulamog, the Defiler @Chase Stone
+477 R Pearl-Ear, Imperial Advisor @Fajareka Setiawan
+478 R Phelia, Exuberant Shepherd @Rudy Siswanto
+479 R K'rrik, Son of Yawgmoth @Chase Stone
+480 R Shilgengar, Sire of Famine @Chris Rallis
+481 M Ashling, Flame Dancer @Michal Ivan
+482 R Laelia, the Blade Reforged @Wisnu Tan
+483 M Eladamri, Korvecdal @Zoltan Boros
+484 R Six @Andrew Mar
+485 M Arna Kennerüd, Skycaptain @Cristi Balanescu
+486 M Breya, Etherium Shaper @Tiffany Turrill
+487 R Genku, Future Shaper @Chuck Lukacs
+488 R Imskir Iron-Eater @Xavier Ribeiro
+489 M Kaalia of the Vast @Justyna Dura
+490 R Kudo, King Among Bears @Ekaterina Burmak
+491 R Nadu, Winged Wisdom @Daren Bader
+492 R The Necrobloom @Igor Krstic
+493 M Phlage, Titan of Fire's Fury @Lucas Graciano
+494 R Rosheen, Roaring Prophet @Fang Xinyu
 
 [extended art]
 447 R Argent Dais @Carlos Palma Cruchaga
@@ -583,6 +588,7 @@ Replace=.042F fromSheet("MH3 retro")
 A29 R A-Guide of Souls @Ryan Valle
 A38 M A-Ocelot Pride @Chris Seaman
 A122 C A-Galvanic Discharge @Zoltan Boros
+A193 R A-Nadu, Winged Wisdom @Daren Bader
 
 [new to modern]
 1 Angel of the Ruins|MH3
@@ -640,6 +646,16 @@ A122 C A-Galvanic Discharge @Zoltan Boros
 1 Fury|SPG
 1 Endurance|SPG
 
+[commanders]
+1 Disa the Restless|M3C
+1 Omo, Queen of Vesuva|M3C
+1 Satya, Aetherflux Genius|M3C
+1 Ulalek, Fused Atrocity|M3C
+1 Azlask, the Swelling Scourge|M3C
+1 Cayth, Famed Mechanist|M3C
+1 Coram, the Undertaker|M3C
+1 Jyoti, Moag Ancient|M3C
+
 [tokens]
 b_0_0_phyrexian_germ
 b_0_0_zombie_army
@@ -659,7 +675,6 @@ c_a_treasure_sac
 g_0_1_plant
 g_1_1_insect
 r_1_1_gremlin
-spellgorger_weird
 u_1_1_a_thopter_flying
 u_1_2_moonfolk_flying
 u_2_2_bird_flying

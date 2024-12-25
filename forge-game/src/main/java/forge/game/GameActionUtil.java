@@ -48,7 +48,6 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -91,10 +90,10 @@ public final class GameActionUtil {
             return alternatives;
         }
 
-        if (sa.isSpell()) {
+        if (sa.isSpell() || sa.isLandAbility()) {
             boolean lkicheck = false;
 
-            Card newHost = ((Spell)sa).getAlternateHost(source);
+            Card newHost = sa.getAlternateHost(source);
             if (newHost != null) {
                 source = newHost;
                 lkicheck = true;
@@ -339,7 +338,7 @@ public final class GameActionUtil {
             newSA.setMayPlay(o);
 
             final StringBuilder sb = new StringBuilder(sa.getDescription());
-            if (!source.equals(host)) {
+            if (!source.equals(host) && host.getCardForUi() != null) {
                 sb.append(" by ");
                 if (host.isImmutable() && host.getEffectSource() != null) {
                     sb.append(host.getEffectSource());
@@ -523,7 +522,7 @@ public final class GameActionUtil {
 
                         final Cost cost = new Cost(s, false);
                         newSA.setDescription(sa.getDescription() + " (Additional cost: " + cost.toSimpleString() + ")");
-                        newSA.setPayCosts(cost.add(sa.getPayCosts()));
+                        newSA.getPayCosts().add(cost);
                         if (newSA.canPlay()) {
                             abilities.add(newSA);
                         }
@@ -604,6 +603,25 @@ public final class GameActionUtil {
                     result.getPayCosts().add(cost);
                     result.setOptionalKeywordAmount(ki, 1);
                     reset = true;
+                }
+            } else if (o.startsWith("Multikicker")) {
+                String costStr = o.split(":")[1];
+                final Cost cost = new Cost(costStr, false);
+
+                String str = "Choose Amount for Multikicker: " + cost.toSimpleString();
+
+                int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+
+                for (int i = 0; i < v; i++) {
+                    if (result == null) {
+                        result = sa.copy();
+                    }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                }
+
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
                 }
             } else if (o.startsWith("Offspring")) {
                 String[] k = o.split(":");
@@ -693,7 +711,15 @@ public final class GameActionUtil {
             host.getGame().getTriggerHandler().resetActiveTriggers(false);
         }
 
-        return result != null ? result : sa;
+        if (result != null) {
+            // sanity check if need to update castSA
+            if (sa.getHostCard().getCastSA() == sa) {
+                sa.getHostCard().setCastSA(result);
+            }
+            return result;
+        }
+
+        return sa;
     }
 
     public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {
@@ -813,16 +839,16 @@ public final class GameActionUtil {
             return list;
         }
         CardCollection completeList = new CardCollection();
-        PlayerCollection players = new PlayerCollection(game.getPlayers());
         // CR 613.7m use APNAP
-        int indexAP = players.indexOf(game.getPhaseHandler().getPlayerTurn());
-        if (indexAP != -1) {
-            Collections.rotate(players, - indexAP);
-        }
+        PlayerCollection players = game.getPlayersInTurnOrder(game.getPhaseHandler().getPlayerTurn());
         for (Player p : players) {
             CardCollection subList = new CardCollection();
             for (Card c : list) {
                 Player decider = dest == ZoneType.Battlefield ? c.getController() : c.getOwner();
+                if (sa != null && sa.hasParam("GainControl")) {
+                    // TODO this doesn't account for changes from e.g. Gather Specimens yet
+                    decider = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("GainControl"), sa).get(0);
+                }
                 if (decider.equals(p)) {
                     subList.add(c);
                 }

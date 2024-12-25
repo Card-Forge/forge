@@ -1,0 +1,9 @@
+Name:The Roaring Toeclaws
+ManaCost:3 G G
+Types:Legendary Creature Dinosaur
+PT:5/5
+T:Mode$ Untaps | ValidCard$ Card.Self,Creature.Other+YouCtrl+cmcGE5 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME or another creature you control with mana value five or greater becomes untapped, put +1/+1 counters on it equal to its power.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Counters
+Oracle:Whenever The Roaring Toeclaws or another creature you control with mana value five or greater becomes untapped, put +1/+1 counters on it equal to its power.

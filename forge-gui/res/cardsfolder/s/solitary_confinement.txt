@@ -1,7 +1,8 @@
 Name:Solitary Confinement
 ManaCost:2 W
 Types:Enchantment
-K:UpkeepCost:Discard<1/Card>
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Discard<1/Card>
 R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have shroud. (You can't be the target of spells or abilities.)
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ You | Description$ Prevent all damage that would be dealt to you.

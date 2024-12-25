@@ -168,6 +168,11 @@ public abstract class FGestureAdapter extends InputAdapter {
     }
 
     @Override
+    public boolean touchCancelled(int x, int y, int pointer, int button) {
+        return touchUp((float)x, (float)y, pointer, button);
+    }
+
+    @Override
     public boolean touchUp(int x, int y, int pointer, int button) {
         return touchUp((float)x, (float)y, pointer, button);
     }

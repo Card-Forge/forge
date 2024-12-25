@@ -1,7 +1,7 @@
 Name:Wall Token
 ManaCost:no cost
-Types:Creature Wall
 Colors:blue
+Types:Creature Wall
 PT:5/5
 K:Defender
 Oracle:Defender

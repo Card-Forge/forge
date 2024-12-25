@@ -54,8 +54,6 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.65-SNAPSHOT";
-
     private static ApplicationListener app = null;
     static Scene currentScene = null;
     static Array<Scene> lastScene = new Array<>();
@@ -63,7 +61,7 @@ public class Forge implements ApplicationListener {
     static Batch animationBatch;
     static TextureRegion lastScreenTexture;
     private static boolean sceneWasSwapped = false;
-    public static boolean restrictAdvMenus = false;
+    public static boolean advFreezePlayerControls = false;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;
@@ -78,7 +76,7 @@ public class Forge implements ApplicationListener {
     protected static ClosingScreen closingScreen;
     protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
-    private static boolean exited;
+    private static boolean exited, initialized;
     public boolean needsUpdate = false;
     public static boolean advStartup = false;
     public static boolean safeToClose = true;
@@ -92,6 +90,7 @@ public class Forge implements ApplicationListener {
     private static boolean destroyThis = false;
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
+    public static float deltaTime = 0f;
     private static boolean isloadingaMatch = false;
     public static boolean autoAIDeckSelection = false;
     public static boolean showFPS = false;
@@ -126,20 +125,22 @@ public class Forge implements ApplicationListener {
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
-        app = new Forge();
-        if (GuiBase.getInterface() == null) {
-            clipboard = clipboard0;
-            deviceAdapter = deviceAdapter0;
-            GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
-            GuiBase.setInterface(new GuiMobile(assetDir0));
-            GuiBase.enablePropertyConfig(value);
-            isPortraitMode = androidOrientation;
-            totalDeviceRAM = totalRAM;
-            isTabletDevice = isTablet;
-            androidVersion = AndroidAPI;
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+        if (app == null) {
+            app = new Forge();
+            if (GuiBase.getInterface() == null) {
+                clipboard = clipboard0;
+                deviceAdapter = deviceAdapter0;
+                GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
+                GuiBase.setInterface(new GuiMobile(assetDir0));
+                GuiBase.enablePropertyConfig(propertyConfig);
+                isPortraitMode = androidOrientation;
+                totalDeviceRAM = totalRAM;
+                isTabletDevice = isTablet;
+                androidVersion = AndroidAPI;
+            }
+            GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         }
-        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
 
@@ -158,6 +159,9 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
+        // closeSplashScreen() is called early on non-Windows OS so it will not crash, LWJGL3 bug on AWT Splash.
+        if (OperatingSystem.isWindows())
+            getDeviceAdapter().closeSplashScreen();
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
@@ -197,7 +201,8 @@ public class Forge implements ApplicationListener {
         } else {
             skinName = "default"; //use default skin if preferences file doesn't exist yet
         }
-        FSkin.loadLight(skinName, splashScreen);
+        if (!initialized)
+            FSkin.loadLight(skinName, getSplashScreen());
 
         textureFiltering = getForgePreferences().getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = getForgePreferences().getPrefBoolean(FPref.UI_SHOW_FPS);
@@ -221,49 +226,45 @@ public class Forge implements ApplicationListener {
             if (totalDeviceRAM > 5000) //devices with more than 10GB RAM will have 600 Cache size, 400 Cache size for morethan 5GB RAM
                 cacheSize = totalDeviceRAM > 10000 ? 600 : 400;
         }
-        //init cache
-        ImageCache.initCache(cacheSize);
+        if (!initialized) {
+            initialized = true;
 
-        //load model on background thread (using progress bar to report progress)
-        FThreads.invokeInBackgroundThread(() -> {
+            Runnable runnable = () -> {
+                safeToClose = false;
+                ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
+                FModel.initialize(getSplashScreen().getProgressBar(), null);
+
+                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingFonts"));
+                FSkinFont.preloadAll(locale);
+
+                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingCardTranslations"));
+                CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
+
+                getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
+
+                //add reminder to preload
+                if (enablePreloadExtendedArt) {
+                    if (autoCache)
+                        getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
+                    else
+                        getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt"));
+                } else {
+                    if (autoCache)
+                        getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
+                    else
+                        getSplashScreen().getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
+                }
+
+                Gdx.app.postRunnable(() -> {
+                    afterDbLoaded();
+                    /*  call preloadExtendedArt here, if we put it above we will  *
+                     *  get error: No OpenGL context found in the current thread. */
+                    preloadExtendedArt();
+                });
+            };
             //see if app or assets need updating
-            AssetsDownloader.checkForUpdates(splashScreen);
-            if (exited) {
-                return;
-            } //don't continue if user chose to exit or couldn't download required assets
-
-            safeToClose = false;
-            ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
-            FModel.initialize(splashScreen.getProgressBar(), null);
-
-            splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingFonts"));
-            FSkinFont.preloadAll(locale);
-
-            splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingCardTranslations"));
-            CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
-
-            splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
-
-            //add reminder to preload
-            if (enablePreloadExtendedArt) {
-                if (autoCache)
-                    splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
-                else
-                    splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt"));
-            } else {
-                if (autoCache)
-                    splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
-                else
-                    splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
-            }
-
-            Gdx.app.postRunnable(() -> {
-                afterDbLoaded();
-                /*  call preloadExtendedArt here, if we put it above we will  *
-                 *  get error: No OpenGL context found in the current thread. */
-                preloadExtendedArt();
-            });
-        });
+            FThreads.invokeInBackgroundThread(() -> AssetsDownloader.checkForUpdates(exited, runnable));
+        }
     }
     public static boolean hasGamepad() {
         //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
@@ -279,6 +280,11 @@ public class Forge implements ApplicationListener {
 
     public static Graphics getGraphics() {
         return graphics;
+    }
+    public static SplashScreen getSplashScreen() {
+        if (splashScreen == null)
+            splashScreen = new SplashScreen();
+        return splashScreen;
     }
 
     public static Scene getCurrentScene() {
@@ -298,7 +304,7 @@ public class Forge implements ApplicationListener {
                 filteredkeys.add(cardname);
         }
         if (!filteredkeys.isEmpty())
-            ImageCache.preloadCache(filteredkeys);
+            ImageCache.getInstance().preloadCache(filteredkeys);
     }
 
     private void preloadBoosterDrafts() {
@@ -445,10 +451,10 @@ public class Forge implements ApplicationListener {
             String path = "skin/cursor" + name + ".png";
             Pixmap pm = new Pixmap(Config.instance().getFile(path));
 
-            if (name == "0") {
+            if ("0".equals(name)) {
                 cursorA0 = Gdx.graphics.newCursor(pm, 0, 0);
                 setGdxCursor(cursorA0);
-            } else if (name == "1") {
+            } else if ("1".equals(name)) {
                 cursorA1 = Gdx.graphics.newCursor(pm, 0, 0);
                 setGdxCursor(cursorA1);
             } else {
@@ -459,20 +465,20 @@ public class Forge implements ApplicationListener {
             pm.dispose();
             return;
         }
-        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && name != "0")
+        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && !"0".equals(name))
             return; //don't change if it's disabled
-        if (currentScreen != null && !currentScreen.toString().toLowerCase().contains("match") && name != "0")
+        if (currentScreen != null && !currentScreen.toString().toLowerCase().contains("match") && !"0".equals(name))
             return; // cursor indicator should be during matches
         if (textureRegion == null) {
             return;
         }
-        if (cursor0 != null && name == "0") {
+        if (cursor0 != null && "0".equals(name)) {
             setGdxCursor(cursor0);
             return;
-        } else if (cursor1 != null && name == "1") {
+        } else if (cursor1 != null && "1".equals(name)) {
             setGdxCursor(cursor1);
             return;
-        } else if (cursor2 != null && name == "2") {
+        } else if (cursor2 != null && "2".equals(name)) {
             setGdxCursor(cursor2);
             return;
         }
@@ -494,10 +500,10 @@ public class Forge implements ApplicationListener {
                 textureRegion.getRegionWidth(), // The width of the area from the other Pixmap in pixels
                 textureRegion.getRegionHeight() // The height of the area from the other Pixmap in pixels
         );
-        if (name == "0") {
+        if ("0".equals(name)) {
             cursor0 = Gdx.graphics.newCursor(pm, 0, 0);
             setGdxCursor(cursor0);
-        } else if (name == "1") {
+        } else if ("1".equals(name)) {
             cursor1 = Gdx.graphics.newCursor(pm, 0, 0);
             setGdxCursor(cursor1);
         } else {
@@ -713,6 +719,7 @@ public class Forge implements ApplicationListener {
                             }
                         }
                     }
+                    deltaTime = 0f;
                 }
             }
         });
@@ -754,7 +761,7 @@ public class Forge implements ApplicationListener {
 
     public static void switchToClassic() {
         setTransitionScreen(new TransitionScreen(() -> {
-            ImageCache.disposeTextures();
+            ImageCache.getInstance().disposeTextures();
             isMobileAdventureMode = false;
             GuiBase.setIsAdventureMode(false);
             setCursor(FSkin.getCursor().get(0), "0");
@@ -768,7 +775,7 @@ public class Forge implements ApplicationListener {
 
     public static void switchToAdventure() {
         setTransitionScreen(new TransitionScreen(() -> {
-            ImageCache.disposeTextures();
+            ImageCache.getInstance().disposeTextures();
             clearCurrentScreen();
             clearTransitionScreen();
             openAdventure();
@@ -826,8 +833,10 @@ public class Forge implements ApplicationListener {
             endKeyInput(); //end key input before switching screens
             ForgeAnimation.endAll(); //end all active animations before switching screens
             currentScreen = screen0;
-            currentScreen.setSize(screenWidth, screenHeight);
-            currentScreen.onActivate();
+            if (currentScreen != null) {
+                currentScreen.setSize(screenWidth, screenHeight);
+                currentScreen.onActivate();
+            }
         } catch (Exception ex) {
             graphics.end();
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
@@ -835,20 +844,24 @@ public class Forge implements ApplicationListener {
                 BugReporter.reportException(ex);
         } finally {
             if (dispose)
-                ImageCache.disposeTextures();
+                ImageCache.getInstance().disposeTextures();
         }
     }
 
     @Override
     public void render() {
         if (showFPS)
-            frameRate.update(ImageCache.counter, getAssets().manager().getMemoryInMegabytes());
+            frameRate.update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
         try {
-            ImageCache.allowSingleLoad();
+            ImageCache.getInstance().allowSingleLoad();
             ForgeAnimation.advanceAll();
 
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
+            //set delta for rotation
+            deltaTime += Gdx.graphics.getDeltaTime();
+            if (deltaTime > 22.5f)
+                deltaTime = 0f;
 
             FContainer screen = currentScreen;
 
@@ -1081,7 +1094,7 @@ public class Forge implements ApplicationListener {
         System.out.println(message);
     }
 
-    public static void startKeyInput(KeyInputAdapter adapter, boolean numeric) {
+    public static void startKeyInput(KeyInputAdapter adapter) {
         if (keyInputAdapter == adapter) {
             return;
         }
@@ -1089,7 +1102,9 @@ public class Forge implements ApplicationListener {
             keyInputAdapter.onInputEnd(); //make sure previous adapter is ended
         }
         keyInputAdapter = adapter;
-        Gdx.input.setOnscreenKeyboardVisible(true, numeric ? Input.OnscreenKeyboardType.NumberPad : Input.OnscreenKeyboardType.Default);
+    }
+    public static void setOnScreenKeyboard(boolean val, boolean numeric) {
+        Gdx.input.setOnscreenKeyboardVisible(val, numeric ? Input.OnscreenKeyboardType.NumberPad : Input.OnscreenKeyboardType.Default);
     }
 
     public static boolean endKeyInput() {

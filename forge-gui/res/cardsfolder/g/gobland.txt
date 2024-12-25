@@ -1,0 +1,7 @@
+Name:Gobland
+ManaCost:no cost
+Colors:red
+Types:Land Creature Mountain Goblin
+PT:2/1
+K:CARDNAME can't block.
+Oracle:(Gobland isn't a spell, it's affected by summoning sickness, and it has "{T}: Add {R}.")\nGobland can't block.

@@ -33,6 +33,7 @@ import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.MatchController;
+import forge.screens.match.MatchScreen;
 import forge.screens.match.TargetingOverlay;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
@@ -179,7 +180,8 @@ public class VStack extends FDropDown {
                 activeItem = display;
             }
             else {
-                activeItem.setHeight(display.preferredHeight); //increase active item height to preferred height if needed
+                if (display != null)
+                    activeItem.setHeight(display.preferredHeight); //increase active item height to preferred height if needed
                 if (activeItem.getBottom() > y) {
                     y = activeItem.getBottom(); //ensure stack height increases if needed
                 }
@@ -233,7 +235,7 @@ public class VStack extends FDropDown {
                 }
                 for (PlayerView p : instance.getTargetPlayers()) {
                     TargetingOverlay.ArcConnection conn = activator.isOpponentOf(p) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    TargetingOverlay.drawArrow(g, arrowOrigin, MatchController.getView().getPlayerPanel(p).getAvatar().getTargetingArrowOrigin(), conn);
+                    TargetingOverlay.drawArrow(g, arrowOrigin, MatchScreen.getPlayerPanel(p).getAvatar().getTargetingArrowOrigin(), conn);
                 }
                 instance = instance.getSubInstance();
             }

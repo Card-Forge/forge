@@ -4,37 +4,516 @@ Date=2024-09-27
 Name=Duskmourn: House of Horror
 Type=Expansion
 ScryfallCode=DSK
+# Lurking evil treatment for Commons and Uncommons is 1 in 4, but only relevant for 6 total cards so isn't handled
+# https://mtgscribe.com/2024/09/01/play-booster-fact-sheet-duskmourn/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 Wildcard+
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+
+[Common]
+Base=Common:fromSheet("DSK cards")
+
+[Common-Guest]
+Base=Common:fromSheet("DSK cards")
+Replace=.015625F fromSheet("DSK special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("DSK cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("DSK cards")
+# Someone needs to do the replace math here
+#Replace=.082F fromSheet("DSK borderless")
+#Replace=.014F fromSheet("DSK showcase")
+
+[AnyLand]
+Base=fromSheet("DSK thirteen lands")
+Replace=.10F fromSheet("DSK thirteen lands")+
+Replace=.267F BasicLand:fromSheet("DSK cards"):!fromSheet("DSK thirteen lands")
+Replace=.067F BasicLand:fromSheet("DSK cards"):!fromSheet("DSK thirteen lands")+
+Replace=.133F Land:Rare:fromSheet("DSK cards")
+Replace=.033F Land:Rare:fromSheet("DSK cards")+
+
+[Wildcard]
+Base=Common:fromSheet("DSK cards")
+# I don't know about these numbers, so i'm just copying them from BLB
+Replace=.417F Uncommon:fromSheet("DSK cards")
+Replace=.078F RareMythic:fromSheet("DSK cards")
 
 [cards]
+1 C Acrobatic Cheerleader @Julia Metzger
+2 C Cult Healer @Diana Franco
+3 R Dazzling Theater // Prop Room @Henry Peters
+4 M Dollmaker's Shop // Porcelain Gallery @Chris Cold
+5 C Emerge from the Cocoon @Marta Nael
+6 R Enduring Innocence @Liiga Smilshkalne
+7 U Ethereal Armor @Tyler Walpole
+8 U Exorcise @Dominik Mayer
+9 U Fear of Abduction @Fernando Falcone
+10 C Fear of Immobility @Martin de Diego Sádaba
+11 C Fear of Surveillance @Jana Heidersdorf
+12 C Friendly Ghost @Sean Murray
+13 R Ghostly Dancers @Josh Newton
+14 U Glimmer Seeker @Kev Fang
+15 C Grand Entryway // Elegant Rotunda @Carlos Palma Cruchaga
+16 C Hardened Escort @John Stanko
+17 C Jump Scare @John Tedrick
 18 R Leyline of Hope @Sergey Glushakov
+19 U Lionheart Glimmer @Josu Hernaiz
+20 C Living Phone @Domenico Cava
+21 U Optimistic Scavenger @Brian Valeza
+22 U Orphans of the Wheat @Julie Dillon
+23 M Overlord of the Mistmoors @Steven Belledin
+24 U Patched Plaything @Domenico Cava
+25 C Possessed Goat @Edgar Sánchez Hidalgo
+26 R Reluctant Role Model @Chris Rallis
+27 U Savior of the Small @Elizabeth Peiró
+28 C Seized from Slumber @Miranda Meeks
+29 U Shardmage's Rescue @Jarel Threat
+30 U Sheltered by Ghosts @Mirko Failoni
+31 C Shepherding Spirits @Billy Christian
+32 R Split Up @Dominik Mayer
+33 U Splitskin Doll @Diana Franco
+34 U Surgical Suite // Hospital Room @Titus Lunter
 35 R Toby, Beastie Befriender @Jehan Choo
+36 C Trapped in the Screen @Michael Phillippi
+37 R Unidentified Hovership @Jana Heidersdorf
+38 C Unsettling Twins @Lauren K. Cannon
+39 U Unwanted Remake @Eli Minaya
+40 U Veteran Survivor @Kai Carpenter
 41 M The Wandering Rescuer @Anna Pavleeva
+42 M Abhorrent Oculus @Bryan Sola
+43 U Bottomless Pool // Locker Room @Diana Franco
+44 R Central Elevator // Promising Stairs @Cristi Balanescu
+45 C Clammy Prowler @John Tedrick
+46 C Creeping Peeper @Maxime Minard
+47 U Cursed Windbreaker @Nino Vecia
+48 C Daggermaw Megalodon @Helge C. Balzer
+49 C Don't Make a Sound @Zezhou Chen
+50 U Duskmourn's Domination @Eli Minaya
+51 R Enduring Curiosity @Julie Dillon
+52 C Enter the Enigma @Chris Rallis
+53 R Entity Tracker @Cristi Balanescu
+54 C Erratic Apparition @Miranda Meeks
+55 U Fear of Failed Tests @Jana Heidersdorf
+56 U Fear of Falling @Maxime Minard
+57 U Fear of Impostors @David Szabo
+58 U Fear of Isolation @Irina Nordsol
+59 U Floodpits Drowner @John Tedrick
+60 U Get Out @Mirko Failoni
+61 U Ghostly Keybearer @Marco Gorlei
+62 C Glimmerburst @Dan Watson
+63 R Leyline of Transformation @Sergey Glushakov
+64 R Marina Vendrell's Grimoire @Denys Tsiperko
+65 C Meat Locker // Drowned Diner @Sergey Glushakov
+66 R The Mindskinner @Abz J Harding
+67 M Mirror Room // Fractured Realm @Helge C. Balzer
+68 M Overlord of the Floodpits @Abz J Harding
+69 U Paranormal Analyst @James Ryman
+70 C Piranha Fly @Kekai Kotaki
+71 U Scrabbling Skullcrab @John Tedrick
+72 R Silent Hallcreeper @Joshua Raphael
+73 C Stalked Researcher @Marta Nael
+74 U Stay Hidden, Stay Silent @Josu Hernaiz
+75 R The Tale of Tamiyo @Anna Pavleeva
+76 C Tunnel Surveyor @John Stanko
+77 C Twist Reality @Allen Williams
+78 C Unable to Scream @Fariba Khamseh
+79 C Underwater Tunnel // Slimy Aquarium @Titus Lunter
+80 U Unnerving Grasp @Jeremy Wilson
+81 U Unwilling Vessel @Josu Hernaiz
+82 C Vanish from Sight @Billy Christian
+83 C Appendage Amalgam @Bartek Fedyczak
+84 C Balemurk Leech @John Tedrick
+85 C Cackling Slasher @Johann Bodin
 86 R Come Back Wrong @David Auden Nash
+87 U Commune with Evil @Ovidio Cartagena
+88 C Cracked Skull @Mirko Failoni
+89 U Cynical Loner @Miranda Meeks
+90 U Dashing Bloodsucker @Randy Gallegos
+91 U Defiled Crypt // Cadaver Lab @Martin de Diego Sádaba
+92 R Demonic Counsel @Babs Webb
+93 C Derelict Attic // Widow's Walk @Marc Simonetti
 94 R Doomsday Excruciator @Denys Tsiperko
 95 R Enduring Tenacity @Isis
+96 C Fanatic of the Harrowing @Fajareka Setiawan
+97 C Fear of Lost Teeth @Oriana Menendez
+98 C Fear of the Dark @Sam Wolfe Connelly
+99 C Final Vengeance @David Szabo
+100 M Funeral Room // Awakening Hall @Miklós Ligeti
+101 C Give In to Violence @Septian Fajrianto
+102 R Grievous Wound @Martina Fačková
+103 C Innocuous Rat @Maxime Minard
+104 U Killer's Mask @Wero Gallo
+105 U Let's Play a Game @Riccardo Federici
+106 R Leyline of the Void @Sergey Glushakov
+107 U Live or Die @Lorenzo Mastroianni
+108 M Meathook Massacre II @Tiffany Turrill
+109 U Miasma Demon @Mathias Kollros
+110 C Murder @Domenico Cava
 111 U Nowhere to Run @Jodie Muir
+112 U Osseous Sticktwister @Mathias Kollros
+113 M Overlord of the Balemurk @Babs Webb
+114 U Popular Egotist @Julia Metzger
+115 C Resurrected Cultist @Tyler Walpole
+116 C Spectral Snatcher @Domenico Cava
+117 U Sporogenic Infection @Warren Mahy
+118 R Unholy Annex // Ritual Chamber @Matteo Bassini
+119 R Unstoppable Slasher @Maxime Minard
+120 M Valgavoth, Terror Eater @Antonio José Manzanedo
+121 U Valgavoth's Faithful @Jodie Muir
+122 U Vile Mutilator @Néstor Ossandón Leal
+123 C Winter's Intervention @Cristi Balanescu
+124 U Withering Torment @Inkognit
+125 C Bedhead Beastie @David Auden Nash
+126 U Betrayer's Bargain @Billy Christian
+127 C Boilerbilges Ripper @Kai Carpenter
 128 R Chainsaw @J.P. Targete
+129 M Charred Foyer // Warped Space @Andrew Mar
+130 C Clockwork Percussionist @Eric Wilkerson
 131 R Cursed Recording @Kim Sokol
+132 U Diversion Specialist @Tuan Duong Chu
+133 R Enduring Courage @Yigit Koroglu
+134 U Fear of Being Hunted @Maxime Minard
+135 U Fear of Burning Alive @J.P. Targete
 136 R Fear of Missing Out @John Stanko
+137 C Glassworks // Shattered Yard @Sergey Glushakov
+138 C Grab the Prize @Halil Ural
+139 C Hand That Feeds @Loïc Canavaggia
+140 C Impossible Inferno @Edgar Sánchez Hidalgo
+141 U Infernal Phantom @Mike Sass
+142 U Irreverent Gremlin @Fajareka Setiawan
+143 R Leyline of Resonance @Sergey Glushakov
+144 C Most Valuable Slayer @Patrik Hell
+145 U Norin, Swift Survivalist @Yigit Koroglu
+146 M Overlord of the Boilerbilges @Helge C. Balzer
+147 U Painter's Studio // Defaced Gallery @Marc Simonetti
+148 U Piggy Bank @Steve Ellis
+149 U Pyroclasm @Néstor Ossandón Leal
+150 C Ragged Playmate @Kaitlyn McCulley
+151 C Rampaging Soulrager @Slawomir Maniak
+152 U Razorkin Hordecaller @David Álvarez
+153 R Razorkin Needlehead @Riccardo Federici
+154 C Ripchain Razorkin @David Szabo
+155 M The Rollercrusher Ride @Deruchenko Alexander
+156 C Scorching Dragonfire @Marta Nael
 157 M Screaming Nemesis @Liiga Smilshkalne
+158 C Ticket Booth // Tunnel of Hate @Marco Gorlei
+159 U Trial of Agony @Mike Sass
+160 C Turn Inside Out @Loïc Canavaggia
+161 U Untimely Malfunction @Jarel Threat
+162 U Vengeful Possession @Dominik Mayer
+163 C Vicious Clown @Johann Bodin
+164 U Violent Urge @Mirko Failoni
+165 R Waltz of Rage @Mathias Kollros
+166 U Altanak, the Thrice-Called @Sam Wolfe Connelly
+167 C Anthropede @Loïc Canavaggia
+168 R Balustrade Wurm @Maxime Minard
+169 C Bashful Beastie @Aaron Miller
+170 U Break Down the Door @Ralph Horsley
+171 U Cathartic Parting @Miranda Meeks
+172 C Cautious Survivor @Jodie Muir
+173 U Coordinated Clobbering @Fajareka Setiawan
+174 C Cryptid Inspector @Kim Sokol
+175 U Defiant Survivor @Jessica Fong
+176 R Enduring Vitality @Valera Lutfullina
+177 U Fear of Exposure @Josu Hernaiz
+178 C Flesh Burrower @Maxime Minard
+179 C Frantic Strength @Flavio Greco Paglia
+180 C Grasping Longneck @Mathias Kollros
+181 U Greenhouse // Rickety Gazebo @John Di Giovanni
+182 M Hauntwoods Shrieker @John Tedrick
+183 R Hedge Shredder @Cristi Balanescu
+184 C Horrid Vigor @Chris Cold
+185 U House Cartographer @Kai Carpenter
+186 U Insidious Fungus @Slawomir Maniak
+187 R Kona, Rescue Beastie @Brian Valeza
+188 R Leyline of Mutation @Sergey Glushakov
+189 C Manifest Dread @Andrey Kuzinskiy
+190 C Moldering Gym // Weight Room @Helge C. Balzer
+191 C Monstrous Emergence @Loïc Canavaggia
+192 R Omnivorous Flytrap @Antonio José Manzanedo
+193 U Overgrown Zealot @Tyler Walpole
 194 M Overlord of the Hauntwoods @Tiffany Turrill
+195 U Patchwork Beastie @John Tedrick
+196 U Rootwise Survivor @Joseph Weston
+197 C Say Its Name @Sam Wolfe Connelly
+198 C Slavering Branchsnapper @John Tedrick
+199 C Spineseeker Centipede @Dave Kendall
+200 U Threats Around Every Corner @Andrea Piparo
+201 R Twitching Doll @Warren Mahy
+202 M Tyvar, the Pummeler @Olivier Bernard
+203 U Under the Skin @Fernando Falcone
+204 R Valgavoth's Onslaught @Lie Setiawan
+205 M Walk-In Closet // Forgotten Cellar @Miklós Ligeti
+206 C Wary Watchdog @Olivier Bernard
+207 U Wickerfolk Thresher @WolfSkullJack
+208 U Arabella, Abandoned Doll @J.P. Targete
+209 U Baseball Bat @John Stanko
+210 U Beastie Beatdown @Inkognit
+211 U Broodspinner @Igor Krstic
+212 U Disturbing Mirth @Nino Vecia
+213 U Drag to the Roots @Deruchenko Alexander
+214 U Fear of Infinity @Fernando Falcone
+215 U Gremlin Tamer @Billy Christian
+216 U Growing Dread @Maxime Minard
+217 U Inquisitive Glimmer @Julie Dillon
+218 U Intruding Soulrager @Jeremy Wilson
+219 R The Jolly Balloon Man @Campbell White
+220 M Kaito, Bane of Nightmares @Joshua Raphael
+221 R Marina Vendrell @Magali Villeneuve
+222 U Midnight Mayhem @Olivier Bernard
+223 R Nashi, Searcher in the Dark @Johan Grenier
+224 M Niko, Light of Hope @Aurore Folny
+225 U Oblivious Bookworm @Josh Newton
+226 R Peer Past the Veil @Tuan Duong Chu
+227 R Restricted Office // Lecture Hall @Antonio José Manzanedo
+228 R Rip, Spawn Hunter @Justine Cruz
+229 U Rite of the Moth @A. M. Sartor
+230 R Roaring Furnace // Steaming Sauna @Miklós Ligeti
+231 U Sawblade Skinripper @Zezhou Chen
+232 U Shrewd Storyteller @David Palumbo
+233 U Shroudstomper @Campbell White
+234 U Skullsnap Nuisance @Allen Douglas
+235 U Smoky Lounge // Misty Salon @Marco Gorlei
+236 R The Swarmweaver @Helge C. Balzer
+237 R Undead Sprinter @Nino Vecia
+238 R Victor, Valgavoth's Seneschal @Jeremy Wilson
+239 U Wildfire Wickerfolk @J.Lonnee
+240 R Winter, Misanthropic Guide @Jodie Muir
+241 R Zimone, All-Questioning @Ekaterina Burmak
+242 U Attack-in-the-Box @Domenico Cava
+243 C Bear Trap @Michele Giorgi
+244 U Conductive Machete @Steven Russell Black
+245 R Dissection Tools @Diana Franco
+246 C Found Footage @Jarel Threat
+247 C Friendly Teddy @Johann Bodin
+248 R Ghost Vacuum @David Szabo
+249 C Glimmerlight @Wero Gallo
+250 U Haunted Screen @Sean Murray
+251 U Keys to the House @Artur Treffner
+252 C Malevolent Chandelier @Mirko Failoni
+253 R Marvin, Murderous Mimic @Mirko Failoni
+254 U Saw @Jarel Threat
+255 L Abandoned Campground @Cristi Balanescu
+256 R Blazemire Verge @Andrew Mar
+257 L Bleeding Woods @Henry Peters
+258 L Etched Cornfield @Randy Gallegos
+259 R Floodfarm Verge @Randy Gallegos
+260 R Gloomlake Verge @Marco Gorlei
+261 R Hushwood Verge @Kasia 'Kafis' Zielińska
+262 L Lakeside Shack @Bartek Fedyczak
+263 L Murky Sewer @Martin de Diego Sádaba
+264 L Neglected Manor @Carlos Palma Cruchaga
+265 L Peculiar Lighthouse @Raymond Bonilla
+266 L Raucous Carnival @Josu Solano
+267 L Razortrap Gorge @Filip Burburan
+268 L Strangled Cemetery @Marco Gorlei
+269 C Terramorphic Expanse @Sam Burley
+270 R Thornspire Verge @Kasia 'Kafis' Zielińska
+271 R Valgavoth's Lair @Martin de Diego Sádaba
 272 L Plains @Dan Mumford
 273 L Island @Dan Mumford
 274 L Swamp @Dan Mumford
 275 L Mountain @Dan Mumford
 276 L Forest @Dan Mumford
+277 L Plains @Marco Gorlei
+278 L Plains @Josu Hernaiz
+279 L Island @Raymond Bonilla
+280 L Island @Leonardo Borazio
+281 L Swamp @Martin de Diego Sádaba
+282 L Swamp @Néstor Ossandón Leal
+283 L Mountain @Ralph Horsley
+284 L Mountain @Néstor Ossandón Leal
+285 L Forest @Martin de Diego Sádaba
+286 L Forest @Josu Hernaiz
+
+[alternate art]
+287 C Grand Entryway // Elegant Rotunda @Carlos Palma Cruchaga
+288 U Optimistic Scavenger @Brian Valeza
+289 R Reluctant Role Model @Chris Rallis
+290 R Entity Tracker @Cristi Balanescu
+291 U Stay Hidden, Stay Silent @Josu Hernaiz
 292 R Come Back Wrong @David Auden Nash
+293 M Meathook Massacre II @Tiffany Turrill
+294 R Unstoppable Slasher @Maxime Minard
+295 C Clockwork Percussionist @Eric Wilkerson
+296 R Cursed Recording @Kim Sokol
+297 U Norin, Swift Survivalist @Yigit Koroglu
+298 M The Rollercrusher Ride @Deruchenko Alexander
+299 R Kona, Rescue Beastie @Brian Valeza
+300 U Oblivious Bookworm @Josh Newton
+301 R The Swarmweaver @Helge C. Balzer
+
+[showcase]
+302 R Ghostly Dancers @Scott Buoncristiano
+303 R Reluctant Role Model @Ivan Shavrin
+304 R Split Up @Toni Infante
+305 R Unidentified Hovership @Calder Moore
+306 U Unwanted Remake @Ivan Shavrin
+307 R Entity Tracker @Ivan Shavrin
+308 R Marina Vendrell's Grimoire @Lenka Šimečková & Scott Okumura
 309 R Come Back Wrong @Alexis Ziritt
+310 R Demonic Counsel @Bastien Grivet
+311 M Meathook Massacre II @SchmandrewART
+312 R Unstoppable Slasher @SchmandrewART
+313 U Withering Torment @Ivan Shavrin
 314 R Chainsaw @Alexis Ziritt
-346 R Doomsday Excruciator @Jarel Threat
-348 M Screaming Nemesis @Inkognit
+315 R Cursed Recording @Alexis Ziritt
+316 R Fear of Missing Out @Cacho Rubione
+317 M The Rollercrusher Ride @Cacho Rubione
+318 R Waltz of Rage @SchmandrewART
+319 R Balustrade Wurm @Alexis Ziritt
+320 R Hedge Shredder @Neo.G
+321 U Insidious Fungus @Bastien Grivet
+322 R Omnivorous Flytrap @Chun Lo
+323 U Under the Skin @Cacho Rubione
+324 R Valgavoth's Onslaught @Cacho Rubione
+325 R Peer Past the Veil @Scott Buoncristiano
+326 R Ghost Vacuum @Lenka Šimečková & Scott Okumura
+327 R Valgavoth's Lair @Ivan Shavrin
 351 M The Wandering Rescuer @Vance Kelly
+352 M Valgavoth, Terror Eater @Pig Hands
+353 M Tyvar, the Pummeler @Richard Luong
+354 M Kaito, Bane of Nightmares @Richard Luong
+355 M Niko, Light of Hope @Vance Kelly
 356 R Toby, Beastie Befriender @Ashley Mackenzie
-374 R Enduring Tenacity @Isis
-383 M Overlord of the Hauntwoods @Tiffany Turrill
+357 R The Mindskinner @Goñi Montes
+358 R Kona, Rescue Beastie @Sam Wolfe Connelly
+359 R The Jolly Balloon Man @Richard Luong
+360 R Marina Vendrell @Jack Hughes
+361 R Nashi, Searcher in the Dark @Ashley Mackenzie
+362 R Rip, Spawn Hunter @Ashley Mackenzie
+363 R The Swarmweaver @Sam Wolfe Connelly
+364 R Victor, Valgavoth's Seneschal @Ashley Mackenzie
+365 R Winter, Misanthropic Guide @Sam Wolfe Connelly
+366 R Zimone, All-Questioning @Sam Wolfe Connelly
+367 R Marvin, Murderous Mimic @Sam Wolfe Connelly
+386 M Enduring Innocence @Kawasumi
+387 M Overlord of the Mistmoors @Takeuchi Moto
+388 R Enduring Curiosity @D-suzuki
+389 M Overlord of the Floodpits @Sansyu
 390 M Enduring Tenacity @TAPIOCA
+391 M Overlord of the Balemurk @Mikio Masuda
+392 M Enduring Courage @Nuisuke
+393 M Overlord of the Boilerbilges @akio
+394 M Enduring Vitality @Issei Murakami
 395 M Overlord of the Hauntwoods @Aogachou
+396 R Enduring Innocence @Kawasumi
+397 M Overlord of the Mistmoors @Takeuchi Moto
+398 R Enduring Curiosity @D-suzuki
+399 M Overlord of the Floodpits @Sansyu
 400 M Enduring Tenacity @TAPIOCA
+401 M Overlord of the Balemurk @Mikio Masuda
+402 M Enduring Courage @Nuisuke
+403 M Overlord of the Boilerbilges @akio
+404 M Enduring Vitality @Issei Murakami
 405 M Overlord of the Hauntwoods @Aogachou
 406 M The Wandering Rescuer @Vance Kelly
+407 M Valgavoth, Terror Eater @Pig Hands
+408 M Tyvar, the Pummeler @Richard Luong
+409 M Kaito, Bane of Nightmares @Richard Luong
+410 M Niko, Light of Hope @Vance Kelly
+
+[borderless]
+328 M Kaito, Bane of Nightmares @Marta Nael
+329 R Blazemire Verge @Allen Douglas
+330 R Floodfarm Verge @Sam Burley
+331 R Gloomlake Verge @Julian Kok Joon Wen
+332 R Hushwood Verge @Henry Peters
+333 R Thornspire Verge @Pavel Kolomeyets
+334 R Dazzling Theater // Prop Room @Ivan Shavrin
+335 M Dollmaker's Shop // Porcelain Gallery @Cacho Rubione
+336 R Central Elevator // Promising Stairs @Ivan Shavrin
+337 M Mirror Room // Fractured Realm @Cacho Rubione
+338 M Funeral Room // Awakening Hall @Alexandre Chaudret
+339 R Unholy Annex // Ritual Chamber @Alexis Ziritt
+340 M Charred Foyer // Warped Space @Oliver Barrett
+341 M Walk-In Closet // Forgotten Cellar @Bastien Grivet
+342 R Restricted Office // Lecture Hall @Scott Buoncristiano
+343 R Roaring Furnace // Steaming Sauna @Toni Infante
+344 M Abhorrent Oculus @Igor Krstic
+345 R Silent Hallcreeper @Inkognit
+346 R Doomsday Excruciator @Jarel Threat
+347 R Razorkin Needlehead @Loïc Canavaggia
+348 M Screaming Nemesis @Inkognit
+349 M Hauntwoods Shrieker @Sidharth Chaturvedi
+350 R Undead Sprinter @John Thacker
+
+[extended art]
+368 R Enduring Innocence @Liiga Smilshkalne
+369 R Leyline of Hope @Sergey Glushakov
+370 M Overlord of the Mistmoors @Steven Belledin
+371 R Enduring Curiosity @Julie Dillon
+372 R Leyline of Transformation @Sergey Glushakov
+373 M Overlord of the Floodpits @Abz J Harding
+374 R Enduring Tenacity @Isis
+375 R Grievous Wound @Martina Fačková
+376 R Leyline of the Void @Sergey Glushakov
+377 M Overlord of the Balemurk @Babs Webb
+378 R Enduring Courage @Yigit Koroglu
+379 R Leyline of Resonance @Sergey Glushakov
+380 M Overlord of the Boilerbilges @Helge C. Balzer
+381 R Enduring Vitality @Valera Lutfullina
+382 R Leyline of Mutation @Sergey Glushakov
+383 M Overlord of the Hauntwoods @Tiffany Turrill
+384 R Twitching Doll @Warren Mahy
+385 R Dissection Tools @Diana Franco
+
+[promo]
+411 U Shardmage's Rescue @Jarel Threat
+412 U Valgavoth's Faithful @Jodie Muir
+413 U Pyroclasm @Néstor Ossandón Leal
+414 U Drag to the Roots @Deruchenko Alexander
+415 U Inquisitive Glimmer @Julie Dillon
+
+[bundle]
+416 R Grievous Wound @Fajareka Setiawan
+
+[buy a box]
 417 R Twitching Doll @John Tedrick
+
+[rebalanced]
+A143 R A-Leyline of Resonance @Sergey Glushakov
+
+[special guests]
+1 Collected Company|SPG
+1 Damnation|SPG
+1 Expropriate|SPG
+1 Hallowed Haunting|SPG
+1 Maddening Hex|SPG
+1 Noxious Revival|SPG
+1 Phantasmal Image|SPG
+1 Sacrifice|SPG
+1 Soul Warden|SPG
+1 Unholy Heat|SPG
+
+[thirteen lands]
+1 Abandoned Campground|DSK
+1 Bleeding Woods|DSK
+1 Etched Cornfield|DSK
+1 Lakeside Shack|DSK
+1 Murky Sewer|DSK
+1 Neglected Manor|DSK
+1 Peculiar Lighthouse|DSK
+1 Raucous Carnival|DSK
+1 Razortrap Gorge|DSK
+1 Strangled Cemetery|DSK
+
+[tokens]
+b_2_2_e_horror
+b_6_6_demon_flying
+bg_1_1_insect_flying
+c_a_treasure_sac
+c_e_shard_draw
+everywhere
+g_2_2_spider_reach
+primo_the_indivisible
+r_1_1_gremlin
+u_x_x_spirit_flying
+w_1_1_a_toy
+w_1_1_e_glimmer
+w_2_1_insect_flying
+w_3_1_spirit_flying
+w_4_4_beast_lonely

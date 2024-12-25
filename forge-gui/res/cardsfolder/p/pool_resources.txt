@@ -1,0 +1,8 @@
+Name:Pool Resources
+ManaCost:2 U
+Types:Instant
+K:Gift
+SVar:GiftAbility:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_fish | TokenTapped$ True | TokenOwner$ Promised | LockTokenScript$ True | GiftDescription$ a tapped Fish
+A:SP$ Draw | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ0 | SubAbility$ DBSeek | NumCards$ 2 | StackDescription$ {p:You} draws two cards. | SpellDescription$ Draw two cards. If the gift was promised, seek two nonland cards instead.
+SVar:DBSeek:DB$ Seek | Defined$ You | Num$ 2 | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1 | Type$ Card.nonLand | StackDescription$ If the gift was promised, {p:You} seeks two nonland cards instead.
+Oracle:Gift a tapped Fish\nDraw two cards. If the gift was promised, seek two nonland cards instead.

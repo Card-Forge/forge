@@ -1,17 +1,8 @@
 package forge.ai.ability;
 
 
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.ai.*;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -43,8 +34,8 @@ public class ExploreAi extends SpellAbilityAi {
         int predictedMana = ComputerUtilMana.getAvailableManaSources(ai, false).size();
         CardCollectionView cardsOTB = ai.getCardsIn(ZoneType.Battlefield);
         CardCollectionView cardsInHand = ai.getCardsIn(ZoneType.Hand);
-        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.LANDS_PRODUCING_MANA);
-        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.LANDS_PRODUCING_MANA);
+        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.LANDS_PRODUCING_MANA);
 
         int maxCMCDiff = 1;
         int numLandsToStillNeedMore = 2;

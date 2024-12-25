@@ -1,0 +1,14 @@
+Name:Persistent Marshstalker
+ManaCost:1 B
+Types:Creature Rat Berserker
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each other Rat you control.
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Rat | TriggerZones$ Graveyard | Execute$ TrigChangeZone | Threshold$ True | TriggerDescription$ Threshold — Whenever you attack with one or more Rats, if seven of more cards are in your graveyard, you may pay {2}{B}. If you do, return CARDNAME from your graveyard to the battlefield tapped and attacking.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Attacking$ True
+SVar:X:Count$Valid Rat.YouCtrl+Other
+SVar:SacMe:3
+SVar:DiscardMe:3
+SVar:BuffedBy:Rat
+SVar:PlayMain1:TRUE
+DeckNeeds:Type$Rat
+Oracle:Persistent Marshstalker gets +1/+0 for each other Rat you control.\nThreshold — Whenever you attack with one or more Rats, if seven of more cards are in your graveyard, you may pay {2}{B}. If you do, return Persistent Marshstalker from your graveyard to the battlefield tapped and attacking.

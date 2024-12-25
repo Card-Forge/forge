@@ -1,0 +1,10 @@
+Name:Barbflare Gremlin
+ManaCost:3 R
+Types:Creature Gremlin
+PT:3/2
+K:First Strike
+K:Haste
+T:Mode$ TapsForMana | ValidCard$ Land | PresentDefined$ Self | IsPresent$ Card.tapped | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, if CARDNAME is tapped, that player adds one mana of any type that land produced. Then that land deals 1 damage to that player.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TriggeredActivator | DamageSource$ TriggeredCard | NumDmg$ 1
+Oracle:First strike, haste\nWhenever a player taps a land for mana, if Barbflare Gremlin is tapped, that player adds one mana of any type that land produced. Then that land deals 1 damage to that player.

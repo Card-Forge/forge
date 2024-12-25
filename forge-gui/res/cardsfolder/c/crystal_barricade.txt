@@ -1,0 +1,8 @@
+Name:Crystal Barricade
+ManaCost:1 W
+Types:Artifact Creature Wall
+PT:0/4
+K:Defender
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof.
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.YouCtrl+Other | IsCombat$ False | Description$ Prevent all noncombat damage that would be dealt to other creatures you control.
+Oracle:Defender (This creature can't attack.)\nYou have hexproof. (You can't be the target of spells or abilities your opponents control.)\nPrevent all noncombat damage that would be dealt to other creatures you control.

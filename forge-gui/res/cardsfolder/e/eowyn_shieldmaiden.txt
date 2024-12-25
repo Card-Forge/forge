@@ -8,6 +8,6 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_2_2_human_knight_tram
 SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE6
 SVar:X:Count$Valid Human.YouCtrl
 SVar:HumanEntered:Count$ThisTurnEntered_Battlefield_Creature.Human+StrictlyOther+YouCtrl
-DeckNeeds:Type$Human
 DeckHas:Ability$Token
+DeckNeeds:Type$Human
 Oracle:First strike\nAt the beginning of combat on your turn, if another Human entered the battlefield under your control this turn, create two 2/2 red Human Knight creature tokens with trample and haste. Then if you control six or more Humans, draw a card.

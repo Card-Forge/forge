@@ -1,0 +1,14 @@
+Name:Urdnan, Dromoka Warrior
+ManaCost:1 W
+Types:Legendary Creature Human Warrior
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on target creature.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking creature with a +1/+1 counter on it gains first strike until end of turn. If that creature has two or more +1/+1 counters on it, it gains double strike until end of turn instead.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+counters_GE1_P1P1 | TgtPrompt$ Select target attacking creature with a +1/+1 counter on it | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE2 | TrueSubAbility$ DBPump1 | FalseSubAbility$ DBPump2
+SVar:DBPump1:DB$ Pump | Defined$ Targeted | KW$ Double Strike
+SVar:DBPump2:DB$ Pump | Defined$ Targeted | KW$ First Strike
+SVar:X:Targeted$CardCounters.P1P1
+DeckHas:Ability$Counters
+Oracle:When Urdnan, Dromoka Warrior enters, put a +1/+1 counter on target creature.\nWhenever you attack, target attacking creature with a +1/+1 counter on it gains first strike until end of turn. If that creature has two or more +1/+1 counters on it, it gains double strike until end of turn instead.

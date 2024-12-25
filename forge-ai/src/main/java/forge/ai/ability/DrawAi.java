@@ -20,15 +20,7 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import forge.ai.AiCostDecision;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -38,12 +30,11 @@ import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerPredicates;
+import forge.game.player.*;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
 
 public class DrawAi extends SpellAbilityAi {
 
@@ -80,6 +71,13 @@ public class DrawAi extends SpellAbilityAi {
         if (!canLoot(ai, sa)) {
             return false;
         }
+
+        if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
+            // Canopy lands and other cards that sacrifice themselves to draw cards
+            return ai.getCardsIn(ZoneType.Hand).isEmpty()
+                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5); // TODO: make this configurable in the AI profile
+        }
+
         return true;
     }
 
@@ -325,7 +323,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 // try to kill opponent
-                if (oppA.cantLose() || !oppA.canDraw()) {
+                if (oppA.cantLoseCheck(GameLossReason.Milled) || !oppA.canDraw()) {
                     continue;
                 }
 
@@ -550,5 +548,37 @@ public class DrawAi extends SpellAbilityAi {
             return true;
         // except it has Laboratory Maniac
         return player.isCardInPlay("Laboratory Maniac");
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final Card host = sa.getHostCard();
+        final String aiLogic = sa.getParam("UnlessAI");
+
+        if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
+            return false;
+        }
+
+        // Risk Factor Effects
+        for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("Defined"), sa)) {
+            if (p.isOpponentOf(payer)) {
+                if (!p.canDraw()) {
+                    return false;
+                }
+                if (cost.hasSpecificCostType(CostDamage.class)) {
+                    if (!payer.canLoseLife()) {
+                        continue;
+                    }
+                    final CostDamage pay = cost.getCostPartByType(CostDamage.class);
+                    int realDamage = ComputerUtilCombat.predictDamageTo(payer, pay.getAbilityAmount(sa), host, false);
+                    if (payer.getLife() < realDamage * 2) {
+                        return false;
+                    }
+                }
+            }
+        }
+        // TODO add logic for Discard + Draw Effects
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }

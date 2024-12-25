@@ -1,0 +1,9 @@
+Name:Intruding Soulrager
+ManaCost:U R
+Types:Creature Spirit
+PT:2/2
+K:Vigilance
+A:AB$ DealDamage | Cost$ T Sac<1/Room> | NumDmg$ 2 | Defined$ Opponent | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 2 damage to each opponent. Draw a card.
+SVar:DBDraw:DB$ Draw
+DeckNeeds:Type$Room
+Oracle:Vigilance\n{T}, Sacrifice a Room: Intruding Soulrager deals 2 damage to each opponent. Draw a card.

@@ -1,0 +1,7 @@
+Name:Arcane Epiphany
+ManaCost:3 U U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Wizard.YouCtrl | Description$ This spell costs {1} less to cast if you control a Wizard.
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
+DeckNeeds:Type$Wizard
+Oracle:This spell costs {1} less to cast if you control a Wizard.\nDraw three cards.

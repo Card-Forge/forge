@@ -5,7 +5,7 @@ Name=War of the Spark
 Code2=WAR
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 3 Uncommon:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 1 RareMythic:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 1 BasicLand
+Booster=10 Common:fromSheet("WAR cards"), 3 Uncommon:fromSheet("WAR cards"), 1 RareMythic:fromSheet("WAR cards"), 1 BasicLand
 BoosterMustContain=Planeswalker
 FatPack=10
 FatPackExtraSlots=80 BasicLands
@@ -51,7 +51,7 @@ ScryfallCode=WAR
 36 C Trusted Pegasus @Chris Rahn
 37 U The Wanderer @Wesley Burt
 38 C Wanderer's Strike @Sara Winters
-39 C War Screecher @Dan Scott
+39 C War Screecher @Dan Murayama Scott
 40 C Ashiok's Skulker @Livia Prima
 41 U Augur of Bolas @Alex Konstad
 42 C Aven Eternal @Johan Grenier
@@ -277,17 +277,8 @@ ScryfallCode=WAR
 262 L Forest @Jonas De Ro
 263 L Forest @Titus Lunter
 264 L Forest @Richard Wright
-265 M Gideon, the Oathsworn @Kieran Yanner
-266 C Desperate Lunge @Deruchenko Alexander
-267 R Gideon's Battle Cry @Zoltan Boros
-268 U Gideon's Company @Milivoj Ćeran
-269 C Orzhov Guildgate @Cliff Childs
-270 M Jace, Arcane Strategist @Kieran Yanner
-271 C Guildpact Informant @Randy Gallegos
-272 U Jace's Projection @Darek Zabrocki
-273 R Jace's Ruse @Clint Cearley
-274 C Simic Guildgate @Adam Paquette
-275 M Tezzeret, Master of the Bridge @Chase Stone
+
+[promo]
 1★ R Karn, the Great Creator @Naochika Morishita
 2★ R Ugin, the Ineffable @Maekawa Yuichi
 13★ M Gideon Blackblade @Tada
@@ -317,13 +308,28 @@ ScryfallCode=WAR
 227★ U Angrath, Captain of Chaos @Sansyu
 228★ U Ashiok, Dream Render @Hozan Shinomaru
 229★ U Dovin, Hand of Control @Nablange
-230★ U Huatli, the Sun's Heart @Masuda Mikio
+230★ U Huatli, the Sun's Heart @Mikio Masuda
 231★ U Kaya, Bane of the Dead @Mid
 232★ U Kiora, Behemoth Beckoner @Yamamoto Akifumi
 233★ U Nahiri, Storm of Stone @Yukie Tajima
 234★ U Saheeli, Sublime Artificer @Hisashi Momose
 235★ U Samut, Tyrant Smasher @Norikatsu Miyoshi
 236★ U Vraska, Swarm's Eminence @Ryota Murayama
+
+[precon product]
+265 M Gideon, the Oathsworn @Kieran Yanner
+266 C Desperate Lunge @Deruchenko Alexander
+267 R Gideon's Battle Cry @Zoltan Boros
+268 U Gideon's Company @Milivoj Ćeran
+269 C Orzhov Guildgate @Cliff Childs
+270 M Jace, Arcane Strategist @Kieran Yanner
+271 C Guildpact Informant @Randy Gallegos
+272 U Jace's Projection @Darek Zabrocki
+273 R Jace's Ruse @Clint Cearley
+274 C Simic Guildgate @Adam Paquette
+
+[buy a box]
+275 M Tezzeret, Master of the Bridge @Chase Stone
 
 [rebalanced]
 A221 R A-Teferi, Time Raveler @Chris Rallis

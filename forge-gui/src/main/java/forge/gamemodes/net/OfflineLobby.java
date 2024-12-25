@@ -1,11 +1,11 @@
 package forge.gamemodes.net;
 
-import java.util.Collections;
-
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gui.interfaces.IGuiGame;
+
+import java.util.Collections;
 
 //Temporary lobby instance to use for OnlineLobby before connecting to a server
 public final class OfflineLobby extends GameLobby {

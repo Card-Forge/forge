@@ -59,5 +59,4 @@ public class DeckEditScene extends ForgeScene {
         }
         return screen;
     }
-
 }

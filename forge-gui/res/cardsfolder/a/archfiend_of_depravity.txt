@@ -3,8 +3,9 @@ ManaCost:3 B B
 Types:Creature Demon
 PT:5/4
 K:Flying
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of each opponent's end step, that player chooses up to two creature they control, then sacrifices the rest.
-SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | MinAmount$ 0 | Amount$ 2 | TargetControls$ True | Choices$ Creature | ChoiceTitle$ Choose up to two creatures | SubAbility$ DBSacrificeAll
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest.
+SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | MinAmount$ 0 | Amount$ 2 | TargetControls$ True | Choices$ Creature | ChoiceTitle$ Choose up to two creatures to keep | Reveal$ True | SubAbility$ DBSacrificeAll
 SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Creature.nonChosenCard | Controller$ TriggeredPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHas:Ability$Sacrifice
 Oracle:Flying\nAt the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest.

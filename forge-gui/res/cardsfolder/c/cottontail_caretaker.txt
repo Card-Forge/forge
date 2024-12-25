@@ -1,0 +1,9 @@
+Name:Cottontail Caretaker
+ManaCost:1 W
+Types:Creature Rabbit Citizen
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters, choose a white creature card in your hand. That card perpetually gains offspring {1}.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn+White | ChoiceTitle$ Choose a white creature card in your hand | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | PumpZone$ Hand | KW$ Offspring:1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:When Cottontail Caretaker enters, choose a white creature card in your hand. That card perpetually gains offspring {1}.

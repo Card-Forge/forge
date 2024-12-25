@@ -17,26 +17,21 @@
  */
 package forge.game.mana;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.util.IterableUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -97,7 +92,10 @@ public class ManaCostBeingPaid {
         @Override
         public int getTotalGenericCost() {
             ShardCount c = unpaidShards.get(ManaCostShard.GENERIC);
-            return c == null ? 0 : c.totalCount;
+            if (c == null) {
+                return unpaidShards.isEmpty() && cntX == 0 ? -1 : 0;
+            }
+            return c.totalCount;
         }
     }
 
@@ -307,7 +305,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -327,7 +325,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -347,7 +345,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -367,7 +365,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -389,7 +387,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     } else if (sc.xCount > 0) { // X part that can only be paid by specific color
                         if (otherSubtract >= sc.xCount) {
@@ -403,7 +401,7 @@ public class ManaCostBeingPaid {
                             sc.totalCount -= otherSubtract;
                             sc.xCount -= otherSubtract;
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -464,7 +462,7 @@ public class ManaCostBeingPaid {
             return pool.canPayForShardWithColor(ms, colorMask);
         };
 
-        return tryPayMana(colorMask, Iterables.filter(unpaidShards.keySet(), predCanBePaid), pool.getPossibleColorUses(colorMask)) != null;
+        return tryPayMana(colorMask, IterableUtil.filter(unpaidShards.keySet(), predCanBePaid), pool.getPossibleColorUses(colorMask)) != null;
     }
 
     /**
@@ -485,12 +483,12 @@ public class ManaCostBeingPaid {
 
         byte inColor = mana.getColor();
         byte outColor = pool.getPossibleColorUses(inColor);
-        return tryPayMana(inColor, Iterables.filter(unpaidShards.keySet(), predCanBePaid), outColor) != null;
+        return tryPayMana(inColor, IterableUtil.filter(unpaidShards.keySet(), predCanBePaid), outColor) != null;
     }
     
     public final ManaCostShard payManaViaConvoke(final byte color) {
         Predicate<ManaCostShard> predCanBePaid = ms -> !ms.isSnow() && !ms.isColorless() && ms.canBePaidWithManaOfColor(color);
-        return tryPayMana(color, Iterables.filter(unpaidShards.keySet(), predCanBePaid), (byte)0xFF);
+        return tryPayMana(color, IterableUtil.filter(unpaidShards.keySet(), predCanBePaid), (byte)0xFF);
     }
 
     public ManaCostShard getShardToPayByPriority(Iterable<ManaCostShard> payableShards, byte possibleUses) {
@@ -511,7 +509,7 @@ public class ManaCostBeingPaid {
             return null;
         }
 
-       return Iterables.getFirst(choice, null);
+        return Iterables.getFirst(choice, null);
     }
 
     private ManaCostShard tryPayMana(final byte colorMask, Iterable<ManaCostShard> payableShards, byte possibleUses) {

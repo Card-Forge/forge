@@ -1,8 +1,8 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.ai.*;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -13,7 +13,9 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.AnimateEffectBase;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.cost.Cost;
 import forge.game.cost.CostPutCounter;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -24,6 +26,7 @@ import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import forge.util.collect.FCollectionView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +36,7 @@ import java.util.Map;
  * <p>
  * AbilityFactoryAnimate class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: AbilityFactoryAnimate.java 17608 2012-10-20 22:27:27Z Max mtg $
  */
@@ -70,7 +73,7 @@ public class AnimateAi extends SpellAbilityAi {
             }
 
             // check for duplicate static ability
-            if (Iterables.any(host.getStaticAbilities(), CardTraitPredicates.hasParam("Description", map.get("Description")))) {
+            if (host.getStaticAbilities().anyMatch(CardTraitPredicates.hasParam("Description", map.get("Description")))) {
                 return false;
             }
             // TODO check if Bone Man would deal damage to something that otherwise would regenerate
@@ -130,7 +133,7 @@ public class AnimateAi extends SpellAbilityAi {
                 && game.getPhaseHandler().getNextTurn() != ai
                 && source.isPermanent();
         if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
-                && opponent.getZone(ZoneType.Battlefield).contains(CardPredicates.Presets.CREATURES)
+                && opponent.getZone(ZoneType.Battlefield).contains(CardPredicates.CREATURES)
                 && !sa.hasParam("AILogic") && !"Permanent".equals(sa.getParam("Duration")) && !activateAsPotentialBlocker) {
             return false;
         }
@@ -170,7 +173,7 @@ public class AnimateAi extends SpellAbilityAi {
                 bFlag |= !c.isCreature() && !c.isTapped()
                         && (!c.hasSickness() || givesHaste || !ph.isPlayerTurn(aiPlayer))
                         && !c.isEquipping();
-                
+
                 // for creatures that could be improved (like Figure of Destiny)
                 if (!bFlag && c.isCreature() && ("Permanent".equals(sa.getParam("Duration")) || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
@@ -264,7 +267,7 @@ public class AnimateAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         return player.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2);
     }
-    
+
     private boolean animateTgtAI(final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
@@ -273,7 +276,7 @@ public class AnimateAi extends SpellAbilityAi {
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
                 && sa.usesTargeting()
                 && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
-        
+
         final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
@@ -357,11 +360,11 @@ public class AnimateAi extends SpellAbilityAi {
                 return false;
             }
 
-            // get the best creature to be animated 
+            // get the best creature to be animated
             List<Card> maxList = Lists.newArrayList();
             int maxValue = 0;
             for (final Map.Entry<Card, Integer> e : data.entrySet()) {
-                int v = e.getValue(); 
+                int v = e.getValue();
                 if (v > maxValue) {
                     maxValue = v;
                     maxList.clear();
@@ -576,5 +579,13 @@ public class AnimateAi extends SpellAbilityAi {
 
     private void releaseHeldTillMain2(Player ai, Card c) {
         AiCardMemory.forgetCard(ai, c, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        if (sa.isKeyword(Keyword.RIOT)) {
+            return !SpecialAiLogic.preferHasteForRiot(sa, payer);
+        }
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }

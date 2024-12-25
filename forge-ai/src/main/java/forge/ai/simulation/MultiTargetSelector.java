@@ -1,11 +1,11 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MultiTargetSelector {
     public static class Targets {

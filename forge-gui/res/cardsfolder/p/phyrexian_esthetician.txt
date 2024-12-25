@@ -1,0 +1,8 @@
+Name:Phyrexian Esthetician
+ManaCost:3 R
+Types:Artifact Creature Phyrexian Cleric
+PT:4/3
+K:Haste
+A:AB$ PutCounter | Cost$ 3 R ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ OIL | CounterNum$ ScavengeX | SorcerySpeed$ True | PrecostDesc$ Oil Scavenge {3}{R} | CostDesc$ ({3}{R}, Exile this card from your graveyard: | StackDescription$ {p:You} puts a number of oil counters equal to CARDNAME's power on {c:Targeted}. | SpellDescription$ Put a number of oil counters equal to this card's power on target creature. Oil Scavenge only as a sorcery.)
+SVar:ScavengeX:Exiled$CardPower
+Oracle:Haste\nOil Scavenge {3}{R} ({3}{R}, Exile this card from your graveyard: Put a number of oil counters equal to this card's power on target creature. Oil Scavenge only as a sorcery.)

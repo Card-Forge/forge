@@ -1,6 +1,8 @@
 Name:Aura Flux
 ManaCost:2 U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Enchantment.Other | AddKeyword$ UpkeepCost:2 | Description$ Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."
+S:Mode$ Continuous | Affected$ Enchantment.Other | AddTrigger$ UpkeepCostTrigger | Description$ Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."
+SVar:UpkeepCostTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {2}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ 2
 AI:RemoveDeck:Random
 Oracle:Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."

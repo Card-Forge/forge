@@ -1,6 +1,6 @@
 Name:Serf Token
 ManaCost:no cost
-Types:Creature Serf
 Colors:black
+Types:Creature Serf
 PT:0/1
 Oracle:

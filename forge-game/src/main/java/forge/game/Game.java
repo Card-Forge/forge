@@ -17,9 +17,12 @@
  */
 package forge.game;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 import forge.GameCommand;
 import forge.card.CardRarity;
@@ -46,14 +49,13 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.trackable.Tracker;
-import forge.util.Aggregates;
-import forge.util.MyRandom;
-import forge.util.Visitor;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -89,6 +91,8 @@ public class Game {
     private final GameLog gameLog = new GameLog();
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
+    public int AI_TIMEOUT = 5;
+    public boolean AI_CAN_USE_TIMEOUT = true;
 
     // While these are false here, they're really set by the Match/Preferences
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
@@ -633,11 +637,11 @@ public class Game {
     }
 
     public boolean isCardInPlay(final String cardName) {
-        return Iterables.any(getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
+        return getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals(cardName));
     }
 
     public boolean isCardInCommand(final String cardName) {
-        return Iterables.any(getCardsIn(ZoneType.Command), CardPredicates.nameEquals(cardName));
+        return getCardsIn(ZoneType.Command).anyMatch(CardPredicates.nameEquals(cardName));
     }
 
     public CardCollectionView getColoredCardsInPlay(final String color) {
@@ -876,17 +880,23 @@ public class Game {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
-                    for (Card cc : cards) {
-                        cc.removeImprintedCard(c);
-                        cc.removeEncodedCard(c);
-                        cc.removeRemembered(c);
-                        cc.removeAttachedTo(c);
-                        cc.removeAttachedCard(c);
+                    if (c.getEffectSource() != null && !c.isEmblem()) {
+                        // move effect to another player so they continue to work
+                        c.getZone().remove(c);
+                        getNextPlayerAfter(p).getZone(ZoneType.Command).add(c);
+                    } else {
+                        for (Card cc : cards) {
+                            cc.removeImprintedCard(c);
+                            cc.removeEncodedCard(c);
+                            cc.removeRemembered(c);
+                            cc.removeAttachedTo(c);
+                            cc.removeAttachedCard(c);
+                        }
+                        triggerList.put(c.getZone().getZoneType(), null, c);
+                        getAction().ceaseToExist(c, false);
+                        // CR 603.2f owner of trigger source lost game
+                        getTriggerHandler().clearDelayedTrigger(c);
                     }
-                    triggerList.put(c.getZone().getZoneType(), null, c);
-                    getAction().ceaseToExist(c, false);
-                    // CR 603.2f owner of trigger source lost game
-                    getTriggerHandler().clearDelayedTrigger(c);
                 } else {
                     // return stolen permanents
                     if (c.isInPlay() && (c.getController().equals(p) || c.getZone().getPlayer().equals(p))) {
@@ -897,7 +907,9 @@ public class Game {
                     // return stolen spells
                     if (c.isInZone(ZoneType.Stack)) {
                         SpellAbilityStackInstance si = getStack().getInstanceMatchingSpellAbilityID(c.getCastSA());
-                        si.setActivatingPlayer(c.getController());
+                        if (si != null) {
+                            si.setActivatingPlayer(c.getController());
+                        }
                     }
                     if (c.getController().equals(p) && !(c.isPlane() || c.isPhenomenon())) {
                         getAction().exile(c, null, null);
@@ -1092,8 +1104,8 @@ public class Game {
 
     private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed) {
         final CardCollectionView lib = player.getCardsIn(ZoneType.Library);
-        Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
-        Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
+        Predicate<Card> goodForAnte = CardPredicates.BASIC_LANDS.negate();
+        Card ante = Aggregates.random(IterableUtil.filter(lib, goodForAnte));
         if (ante == null) {
             getGameLog().add(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them");
             ante = Aggregates.random(lib);
@@ -1347,5 +1359,11 @@ public class Game {
         }
         if (!isNeitherDayNorNight())
             fireEvent(new GameEventDayTimeChanged(isDay()));
+    }
+    public int getAITimeout() {
+        return AI_TIMEOUT;
+    }
+    public boolean canUseTimeout() {
+        return AI_CAN_USE_TIMEOUT;
     }
 }

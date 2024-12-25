@@ -3,14 +3,13 @@
                 android:id="@+id/mainview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:background="@color/splashBackground">
+                android:gravity="center">
 
     <ImageView
             android:id="@+id/logo_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxHeight="400dp"
+            android:maxHeight="250dp"
             android:adjustViewBounds="true"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/logo"/>

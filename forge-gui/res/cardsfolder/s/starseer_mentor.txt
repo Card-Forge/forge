@@ -1,0 +1,15 @@
+Name:Starseer Mentor
+ManaCost:3 W B
+Types:Creature Bat Warlock
+PT:3/5
+K:Flying
+K:Vigilance
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigGenericChoice | TriggerDescription$ At the beginning of your end step, if you gained or lost life this turn, target opponent loses 3 life unless they sacrifice a nonland permanent or discard a card.
+SVar:TrigGenericChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ PaySac,PayDiscard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost
+SVar:PaySac:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | UnlessCost$ Sac<1/Permanent.nonland/nonland permanent> | UnlessPayer$ Targeted | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent.
+SVar:PayDiscard:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | UnlessCost$ Discard<1/Card> | UnlessPayer$ Targeted | SpellDescription$ You lose 3 life unless you discard a card.
+# TODO: Most likely the ChooseGenericEffect code can be simplified somehow to avoid the necessity of having a dedicated fallback ability
+SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 3
+SVar:X:Count$LifeYouGainedThisTurn/Plus.Y
+SVar:Y:PlayerCountPropertyYou$LifeLostThisTurn
+Oracle:Flying, vigilance\nAt the beginning of your end step, if you gained or lost life this turn, target opponent loses 3 life unless they sacrifice a nonland permanent or discard a card.

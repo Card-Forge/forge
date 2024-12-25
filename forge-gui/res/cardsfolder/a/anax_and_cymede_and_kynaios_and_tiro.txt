@@ -1,0 +1,12 @@
+Name:Anax and Cymede & Kynaios and Tiro
+ManaCost:1 W U R G
+Types:Legendary Creature Human Soldier
+PT:3/8
+K:First Strike
+K:Vigilance
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, draw a card. Each player may put a land card from their hand onto the battlefield, then each opponent who didn't draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ EachPlayLand
+SVar:EachPlayLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | DefinedPlayer$ Player | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DrawAbstainers
+SVar:DrawAbstainers:DB$ Draw | Defined$ OppNonRememberedOwner | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:First strike, vigilance\nHeroic — Whenever you cast a spell that targets Anax and Cymede & Kynaios and Tiro, draw a card. Each player may put a land card from their hand onto the battlefield, then each opponent who didn't draws a card.

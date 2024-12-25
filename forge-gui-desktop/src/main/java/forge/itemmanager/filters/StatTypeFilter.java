@@ -5,13 +5,12 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
-import com.google.common.base.Predicates;
-
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
 import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
@@ -60,7 +59,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
     protected <U extends InventoryItem> boolean showUnsupportedItem(U item) {
         FLabel btnPackOrDeck = buttonMap.get(StatTypes.PACK_OR_DECK); //support special pack/deck case
         if (btnPackOrDeck != null && btnPackOrDeck.isSelected()) {
-            return ItemPredicate.Presets.IS_PACK_OR_DECK.apply(item);
+            return ItemPredicate.IS_PACK_OR_DECK.test(item);
         }
         return false;
     }
@@ -71,13 +70,13 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
         FLabel btnPackOrDeck = buttonMap.get(StatTypes.PACK_OR_DECK);
         if (btnPackOrDeck != null) { //support special pack/deck case
-            int count = items.countAll(ItemPredicate.Presets.IS_PACK_OR_DECK, InventoryItem.class);
+            int count = items.countAll(ItemPredicate.IS_PACK_OR_DECK, InventoryItem.class);
             btnPackOrDeck.setText(String.valueOf(count));
         }
 
         for (StatTypes statTypes : buttonMap.keySet()) {
             if (statTypes.predicate != null) {
-                int count = items.countAll(Predicates.compose(statTypes.predicate, PaperCard::getRules), PaperCard.class);
+                int count = items.countAll(PaperCardPredicates.fromRules(statTypes.predicate), PaperCard.class);
                 buttonMap.get(statTypes).setText(String.valueOf(count));
             }
         }

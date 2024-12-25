@@ -8,7 +8,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRadiation | TriggerDescrip
 SVar:TrigRadiation:DB$ Radiation | Defined$ Player | Num$ 2
 T:Mode$ MilledAll | ValidPlayer$ Player | ValidCard$ Card.nonLand | TriggerZones$ Battlefield | Execute$ TrigToken | ResolvedLimit$ 1 | OptionalDecider$ You | TriggerDescription$ Whenever one or more nonland cards are milled, you may create that many 2/2 black Zombie Mutant creature tokens. Do this only once each turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ TriggerCount$Amount | TokenScript$ b_2_2_zombie_mutant | TokenOwner$ You
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token & Type$Zombie
 DeckHints:Ability$Mill
-SVar:HasAttackEffect:TRUE
 Oracle:Flying, menace\nWhenever Screeching Scorchbeast attacks, each player gets two rad counters.\nWhenever one or more nonland cards are milled, you may create that many 2/2 black Zombie Mutant creature tokens. Do this only once each turn.

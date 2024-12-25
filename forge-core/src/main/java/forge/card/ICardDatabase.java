@@ -1,12 +1,13 @@
 package forge.card;
 
-import com.google.common.base.Predicate;
 import forge.card.CardDb.CardArtPreference;
 import forge.item.PaperCard;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+import java.util.Set;
 
 public interface ICardDatabase extends Iterable<PaperCard> {
     /**
@@ -50,18 +51,21 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     // [NEW Methods] Including the card CollectorNumber as criterion for DB lookup
     PaperCard getCard(String cardName, String edition, String collectorNumber);
     PaperCard getCard(String cardName, String edition, int artIndex, String collectorNumber);
+    PaperCard getCard(String cardName, String edition, int artIndex, Set<String> colorID);
 
     // 2. Card Lookup from a single Expansion Set
     PaperCard getCardFromSet(String cardName, CardEdition edition, boolean isFoil);  // NOT yet used, included for API symmetry
     PaperCard getCardFromSet(String cardName, CardEdition edition, String collectorNumber, boolean isFoil);
     PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, boolean isFoil);
     PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, String collectorNumber, boolean isFoil);
+    PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, String collectorNumber, boolean isFoil, Set<String> colorID);
 
     // 3. Card lookup based on CardArtPreference Selection Policy
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference);
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, Predicate<PaperCard> filter);
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex);
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter);
+    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex, Set<String> colorID);
 
     // 4. Specialised Card Lookup on CardArtPreference Selection and Release Date
     PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate);
@@ -85,12 +89,15 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     Collection<PaperCard> getAllCards(CardEdition edition);
     Collection<PaperCard> getUniqueCards();
 
+    Stream<PaperCard> streamAllCards();
+    Stream<PaperCard> streamUniqueCards();
+
     /* UTILITY METHODS
      * =============== */
     int getMaxArtIndex(String cardName);
     int getArtCount(String cardName, String edition);
     // Utility Predicates
-    Predicate<? super PaperCard> wasPrintedInSets(List<String> allowedSetCodes);
-    Predicate<? super PaperCard> isLegal(List<String> allowedSetCodes);
+    Predicate<? super PaperCard> wasPrintedInSets(Collection<String> allowedSetCodes);
+    Predicate<? super PaperCard> isLegal(Collection<String> allowedSetCodes);
     Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity);
 }

@@ -1,0 +1,8 @@
+Name:Hauntwoods Shrieker
+ManaCost:1 G G
+Types:Creature Beast Mutant
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDread | TriggerDescription$ Whenever CARDNAME attacks, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigDread:DB$ ManifestDread
+A:AB$ SetState | ValidTgts$ Card.faceDown | Cost$ 1 G | Mode$ TurnFaceUp | Optional$ True | RevealFirst$ True | ValidNewFace$ Creature | StackDescription$ SpellDescription | SpellDescription$ Reveal target face-down permanent. If it's a creature card, you may turn it face up.
+Oracle:Whenever Hauntwoods Shrieker attacks, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)\n{1}{G}: Reveal target face-down permanent. If it's a creature card, you may turn it face up.

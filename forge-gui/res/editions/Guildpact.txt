@@ -13,171 +13,171 @@ ChaosDraftThemes=RAVNICA
 ScryfallCode=GPT
 
 [cards]
-22 U Aetherplasm @Nottsuo
 1 C Absolver Thrull @Rob Alexander
-43 R Abyssal Nocturnus @Jon Foster
-100 U Agent of Masks @Matt Thompson
-101 R Angel of Despair @Todd Lockwood
-79 U Battering Wurm @Darrell Riche
-80 C Beastmaster's Magemark @Brandon Kitkouski
 2 U Belfry Spirit @Daren Bader
 3 C Benediction of Moons @Matt Cavotta
-81 R Bioplasm @Jon Foster
-102 C Blind Hunter @Warren Mahy
-64 C Bloodscale Prowler @Lars Grant-West
-103 R Borborygmos @Todd Lockwood
-104 C Burning-Tree Bloodscale @Kev Walker
-105 R Burning-Tree Shaman @Dan Scott
-106 C Castigate @Darrell Riche
-44 U Caustic Rain @Luca Zontini
-107 R Cerebral Vortex @Jeremy Jarvis
-108 U Conjurer's Ban @Pete Venters
-82 U Crash Landing @Darrell Riche
-45 C Cremate @Paolo Parente
-46 C Cry of Contrition @Daren Bader
-47 U Cryptwailing @Nick Percival
-23 C Crystal Seer @Glen Angus
-109 R Culling Sun @Daren Bader
-48 U Daggerclaw Imp @Pete Venters
-141 R Debtors' Knell @Kev Walker
-142 R Djinn Illuminatus @Carl Critchlow
-49 C Douse in Gloom @Kev Walker
 4 U Droning Bureaucrats @Kev Walker
-24 U Drowned Rusalka @Dany Orizio
-83 U Dryad Sophisticate @Ron Spears
-110 R Dune-Brood Nephilim @Jim Murray
-84 R Earth Surge @Luca Zontini
-111 U Electrolyze @Zoltan Boros & Gabor Szikszai
-50 U Exhumer Thrull @Warren Mahy
-65 C Fencer's Magemark @Brandon Kitkouski
-112 U Feral Animist @Ron Spears
-25 U Frazzle @Pete Venters
-85 U Gatherer of Graces @Heather Hudson
-113 U Gelectrode @Dan Scott
-66 U Ghor-Clan Bloodscale @Paolo Parente
-86 C Ghor-Clan Savage @Greg Staples
-114 R Ghost Council of Orzhova @Greg Staples
 5 C Ghost Warden @Ittoku
 6 R Ghostway @Jim Murray
-143 R Giant Solifuge @Pat Lee
-26 C Gigadrowse @Alex Horley-Orlandelli
-115 R Glint-Eye Nephilim @Mark Zug
-116 U Goblin Flectomancer @Matt Cavotta
-157 R Godless Shrine @Rob Alexander
 7 R Graven Dominator @Carl Critchlow
-87 U Gristleback @Lars Grant-West
-144 U Gruul Guildmage @Paolo Parente
-88 C Gruul Nodorog @Pete Venters
-89 C Gruul Scrapper @Liam Sharp
-150 C Gruul Signet @Greg Hildebrandt
-158 C Gruul Turf @John Avon
-151 R Gruul War Plow @Martina Pilcerova
 8 C Guardian's Magemark @Brandon Kitkouski
 9 U Harrier Griffin @Jim Nelson
-27 R Hatching Plans @Heather Hudson
-51 U Hissing Miasma @Ben Thompson
-67 U Hypervolt Grasp @Mark Romanoski
-28 C Infiltrator's Magemark @Brandon Kitkouski
-117 R Ink-Treader Nephilim @Christopher Moeller
-118 R Invoke the Firemind @Zoltan Boros & Gabor Szikszai
-159 C Izzet Boilerworks @John Avon
-119 C Izzet Chronarch @Nick Percival
-145 U Izzet Guildmage @Jim Murray
-152 C Izzet Signet @Greg Hildebrandt
-120 R Killer Instinct @Christopher Moeller
-121 C Leap of Flame @Greg Hildebrandt
-90 R Leyline of Lifeforce @Kev Walker
-68 R Leyline of Lightning @Paolo Parente
-29 R Leyline of Singularity @Zoltan Boros & Gabor Szikszai
 10 R Leyline of the Meek @Mark Zug
-52 R Leyline of the Void @Adam Rex
 11 C Lionheart Maverick @Hideaki Takamura
-69 R Living Inferno @John Avon
 12 U Martyred Rusalka @Alex Horley-Orlandelli
-30 R Mimeofacture @Dan Scott
-153 R Mizzium Transreliquat @John Avon
-154 R Moratorium Stone @Martina Pilcerova
-122 U Mortify @Glen Angus
-146 C Mourning Thrull @Dany Orizio
-53 C Necromancer's Magemark @Brandon Kitkouski
-123 R Niv-Mizzet, the Firemind @Todd Lockwood
-160 U Nivix, Aerie of the Firemind @Martina Pilcerova
-70 C Ogre Savant @Paolo Parente
 13 U Order of the Stars @Heather Hudson
-161 C Orzhov Basilica @John Avon
-54 C Orzhov Euthanist @Zoltan Boros & Gabor Szikszai
-147 U Orzhov Guildmage @Greg Staples
-124 R Orzhov Pontiff @Adam Rex
-155 C Orzhov Signet @Greg Hildebrandt
-162 U Orzhova, the Church of Deals @Martina Pilcerova
-55 C Ostiary Thrull @Ron Spencer
-71 R Parallectric Feedback @Mitch Cotie
-148 C Petrahydrox @Anthony S. Waters
-91 R Petrified Wood-Kin @Kev Walker
-125 C Pillory of the Sleepless @Mark Romanoski
-56 U Plagued Rusalka @Alex Horley-Orlandelli
-57 C Poisonbelly Ogre @Zoltan Boros & Gabor Szikszai
-92 U Predatory Focus @Zoltan Boros & Gabor Szikszai
-93 U Primeval Light @Jim Nelson
-72 C Pyromatics @Glen Angus
-31 R Quicken @Aleksi Briclot
-73 U Rabble-Rouser @Justin Norman
-32 C Repeal @Dan Scott
-58 C Restless Bones @Glenn Fabry
-59 U Revenant Patriarch @Nick Percival
-126 R Rumbling Slum @Carl Critchlow
-33 C Runeboggle @Ron Spencer
-60 R Sanguine Praetor @rk post
-127 U Savage Twister @Luca Zontini
-128 C Scab-Clan Mauler @Liam Sharp
-129 U Schismotivate @Ron Spencer
-74 U Scorched Rusalka @Luca Zontini
-61 R Seize the Soul @Aleksi Briclot
 14 U Shadow Lance @Hideaki Takamura
-75 U Shattering Spree @Pat Lee
 15 C Shrieking Grotesque @Dany Orizio
-76 R Siege of Towers @Anthony S. Waters
-94 C Silhana Ledgewalker @James Wong
-95 C Silhana Starfletcher @Alex Horley-Orlandelli
 16 U Sinstriker's Will @Ben Thompson
-163 U Skarrg, the Rage Pits @Martina Pilcerova
-77 R Skarrgan Firebird @Kev Walker
-96 C Skarrgan Pit-Skulk @Liam Sharp
-130 U Skarrgan Skybreaker @Dan Scott
-62 R Skeletal Vampire @Wayne Reynolds
-34 R Sky Swallower @rk post
 17 C Skyrider Trainee @Adam Rex
-63 U Smogsteed Rider @Alex Horley-Orlandelli
-131 U Souls of the Faultless @Pat Lee
 18 R Spelltithe Enforcer @Greg Staples
-97 U Starved Rusalka @Dany Orizio
-164 R Steam Vents @Rob Alexander
-35 C Steamcore Weird @Justin Norman
-132 R Stitch in Time @Jon Foster
-165 R Stomping Ground @Rob Alexander
 19 R Storm Herd @Jim Nelson
-36 U Stratozeppelid @Ittoku
-133 C Streetbreaker Wurm @Greg Hildebrandt
-156 R Sword of the Paruns @Greg Hildebrandt
-134 R Teysa, Orzhov Scion @Todd Lockwood
-37 U Thunderheads @Hideaki Takamura
-135 R Tibor and Lumia @Jim Murray
-78 C Tin Street Hooligan @Luca Zontini
 20 U To Arms! @Aleksi Briclot
+21 C Withstand @Ron Spears
+22 U Aetherplasm @Nottsuo
+23 C Crystal Seer @Glen Angus
+24 U Drowned Rusalka @Dany Orizio
+25 U Frazzle @Pete Venters
+26 C Gigadrowse @Alex Horley-Orlandelli
+27 R Hatching Plans @Heather Hudson
+28 C Infiltrator's Magemark @Brandon Kitkouski
+29 R Leyline of Singularity @Zoltan Boros & Gabor Szikszai
+30 R Mimeofacture @Dan Murayama Scott
+31 R Quicken @Aleksi Briclot
+32 C Repeal @Dan Murayama Scott
+33 C Runeboggle @Ron Spencer
+34 R Sky Swallower @rk post
+35 C Steamcore Weird @Justin Norman
+36 U Stratozeppelid @Ittoku
+37 U Thunderheads @Hideaki Takamura
 38 C Torch Drake @Daren Bader
 39 C Train of Thought @Matt Thompson
-136 R Ulasht, the Hate Seed @Nottsuo
 40 U Vacuumelt @Nottsuo
 41 U Vedalken Plotter @Greg Staples
 42 U Vertigo Spawn @Ittoku
-137 C Wee Dragonauts @Greg Staples
-149 C Wild Cantor @Glenn Fabry
+43 R Abyssal Nocturnus @Jon Foster
+44 U Caustic Rain @Luca Zontini
+45 C Cremate @Paolo Parente
+46 C Cry of Contrition @Daren Bader
+47 U Cryptwailing @Nick Percival
+48 U Daggerclaw Imp @Pete Venters
+49 C Douse in Gloom @Kev Walker
+50 U Exhumer Thrull @Warren Mahy
+51 U Hissing Miasma @Ben Thompson
+52 R Leyline of the Void @Adam Rex
+53 C Necromancer's Magemark @Brandon Kitkouski
+54 C Orzhov Euthanist @Zoltan Boros & Gabor Szikszai
+55 C Ostiary Thrull @Ron Spencer
+56 U Plagued Rusalka @Alex Horley-Orlandelli
+57 C Poisonbelly Ogre @Zoltan Boros & Gabor Szikszai
+58 C Restless Bones @Glenn Fabry
+59 U Revenant Patriarch @Nick Percival
+60 R Sanguine Praetor @rk post
+61 R Seize the Soul @Aleksi Briclot
+62 R Skeletal Vampire @Wayne Reynolds
+63 U Smogsteed Rider @Alex Horley-Orlandelli
+64 C Bloodscale Prowler @Lars Grant-West
+65 C Fencer's Magemark @Brandon Kitkouski
+66 U Ghor-Clan Bloodscale @Paolo Parente
+67 U Hypervolt Grasp @Mark Romanoski
+68 R Leyline of Lightning @Paolo Parente
+69 R Living Inferno @John Avon
+70 C Ogre Savant @Paolo Parente
+71 R Parallectric Feedback @Mitch Cotie
+72 C Pyromatics @Glen Angus
+73 U Rabble-Rouser @Justin Norman
+74 U Scorched Rusalka @Luca Zontini
+75 U Shattering Spree @Pat Lee
+76 R Siege of Towers @Anthony S. Waters
+77 R Skarrgan Firebird @Kev Walker
+78 C Tin Street Hooligan @Luca Zontini
+79 U Battering Wurm @Darrell Riche
+80 C Beastmaster's Magemark @Brandon Kitkouski
+81 R Bioplasm @Jon Foster
+82 U Crash Landing @Darrell Riche
+83 U Dryad Sophisticate @Ron Spears
+84 R Earth Surge @Luca Zontini
+85 U Gatherer of Graces @Heather Hudson
+86 C Ghor-Clan Savage @Greg Staples
+87 U Gristleback @Lars Grant-West
+88 C Gruul Nodorog @Pete Venters
+89 C Gruul Scrapper @Liam Sharp
+90 R Leyline of Lifeforce @Kev Walker
+91 R Petrified Wood-Kin @Kev Walker
+92 U Predatory Focus @Zoltan Boros & Gabor Szikszai
+93 U Primeval Light @Jim Nelson
+94 C Silhana Ledgewalker @James Wong
+95 C Silhana Starfletcher @Alex Horley-Orlandelli
+96 C Skarrgan Pit-Skulk @Liam Sharp
+97 U Starved Rusalka @Dany Orizio
 98 C Wildsize @Jim Murray
-138 R Witch-Maw Nephilim @Greg Staples
-21 C Withstand @Ron Spears
-139 U Wreak Havoc @Wayne Reynolds
 99 R Wurmweaver Coil @Mitch Cotie
+100 U Agent of Masks @Matt Thompson
+101 R Angel of Despair @Todd Lockwood
+102 C Blind Hunter @Warren Mahy
+103 R Borborygmos @Todd Lockwood
+104 C Burning-Tree Bloodscale @Kev Walker
+105 R Burning-Tree Shaman @Dan Murayama Scott
+106 C Castigate @Darrell Riche
+107 R Cerebral Vortex @Jeremy Jarvis
+108 U Conjurer's Ban @Pete Venters
+109 R Culling Sun @Daren Bader
+110 R Dune-Brood Nephilim @Jim Murray
+111 U Electrolyze @Zoltan Boros & Gabor Szikszai
+112 U Feral Animist @Ron Spears
+113 U Gelectrode @Dan Murayama Scott
+114 R Ghost Council of Orzhova @Greg Staples
+115 R Glint-Eye Nephilim @Mark Zug
+116 U Goblin Flectomancer @Matt Cavotta
+117 R Ink-Treader Nephilim @Christopher Moeller
+118 R Invoke the Firemind @Zoltan Boros & Gabor Szikszai
+119 C Izzet Chronarch @Nick Percival
+120 R Killer Instinct @Christopher Moeller
+121 C Leap of Flame @Greg Hildebrandt
+122 U Mortify @Glen Angus
+123 R Niv-Mizzet, the Firemind @Todd Lockwood
+124 R Orzhov Pontiff @Adam Rex
+125 C Pillory of the Sleepless @Mark Romanoski
+126 R Rumbling Slum @Carl Critchlow
+127 U Savage Twister @Luca Zontini
+128 C Scab-Clan Mauler @Liam Sharp
+129 U Schismotivate @Ron Spencer
+130 U Skarrgan Skybreaker @Dan Murayama Scott
+131 U Souls of the Faultless @Pat Lee
+132 R Stitch in Time @Jon Foster
+133 C Streetbreaker Wurm @Greg Hildebrandt
+134 R Teysa, Orzhov Scion @Todd Lockwood
+135 R Tibor and Lumia @Jim Murray
+136 R Ulasht, the Hate Seed @Nottsuo
+137 C Wee Dragonauts @Greg Staples
+138 R Witch-Maw Nephilim @Greg Staples
+139 U Wreak Havoc @Wayne Reynolds
 140 R Yore-Tiller Nephilim @Jeremy Jarvis
+141 R Debtors' Knell @Kev Walker
+142 R Djinn Illuminatus @Carl Critchlow
+143 R Giant Solifuge @Pat Lee
+144 U Gruul Guildmage @Paolo Parente
+145 U Izzet Guildmage @Jim Murray
+146 C Mourning Thrull @Dany Orizio
+147 U Orzhov Guildmage @Greg Staples
+148 C Petrahydrox @Anthony S. Waters
+149 C Wild Cantor @Glenn Fabry
+150 C Gruul Signet @Greg Hildebrandt
+151 R Gruul War Plow @Martina Pilcerova
+152 C Izzet Signet @Greg Hildebrandt
+153 R Mizzium Transreliquat @John Avon
+154 R Moratorium Stone @Martina Pilcerova
+155 C Orzhov Signet @Greg Hildebrandt
+156 R Sword of the Paruns @Greg Hildebrandt
+157 R Godless Shrine @Rob Alexander
+158 C Gruul Turf @John Avon
+159 C Izzet Boilerworks @John Avon
+160 U Nivix, Aerie of the Firemind @Martina Pilcerova
+161 C Orzhov Basilica @John Avon
+162 U Orzhova, the Church of Deals @Martina Pilcerova
+163 U Skarrg, the Rage Pits @Martina Pilcerova
+164 R Steam Vents @Rob Alexander
+165 R Stomping Ground @Rob Alexander
 
 [tokens]
 c_1_1_sand

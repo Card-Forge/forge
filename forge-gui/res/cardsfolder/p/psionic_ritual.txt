@@ -6,8 +6,8 @@ A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose ta
 SVar:DBCopy:DB$ Play | Defined$ Remembered | Amount$ All | CopyCard$ True | WithoutManaCost$ True | Optional$ True | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | Defined$ Self | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckNeeds:Type$Horror
-DeckHints:Type$Instant|Sorcery
-DeckHas:Ability$Graveyard
 AI:RemoveDeck:All
+DeckHas:Ability$Graveyard
+DeckHints:Type$Instant|Sorcery
+DeckNeeds:Type$Horror
 Oracle:Replicate—Tap an untapped Horror you control. (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nExile target instant or sorcery card from a graveyard and copy it. You may cast the copy without paying its mana cost.\nExile Psionic Ritual.

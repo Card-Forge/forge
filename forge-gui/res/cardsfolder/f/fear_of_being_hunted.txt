@@ -1,0 +1,7 @@
+Name:Fear of Being Hunted
+ManaCost:1 R R
+Types:Enchantment Creature Nightmare
+PT:4/2
+K:Haste
+K:CARDNAME must be blocked if able.
+Oracle:Haste\nFear of Being Hunted must be blocked if able.

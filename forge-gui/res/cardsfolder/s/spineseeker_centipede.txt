@@ -1,0 +1,10 @@
+Name:Spineseeker Centipede
+ManaCost:2 G
+Types:Creature Insect
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Vigilance | Condition$ Delirium | Description$ Delirium — CARDNAME gets +1/+2 and has vigilance as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:When Spineseeker Centipede enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nDelirium — Spineseeker Centipede gets +1/+2 and has vigilance as long as there are four or more card types among cards in your graveyard.

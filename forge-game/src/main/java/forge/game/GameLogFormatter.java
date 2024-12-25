@@ -2,7 +2,6 @@ package forge.game;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Iterables;
@@ -17,10 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.maps.MapOfLists;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
@@ -93,11 +89,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if (event.sa.getTargetRestrictions() != null) {
             StringBuilder sb = new StringBuilder();
 
-            List<TargetChoices> targets = event.sa.getAllTargetChoices();
-            // Include the TargetChoices from the stack instance, since the real target choices
-            // are on that object at this point (see SpellAbilityStackInstance constructor).
-            targets.add(event.si.getTargetChoices());
-            for (TargetChoices ch : targets) {
+            for (TargetChoices ch : event.sa.getAllTargetChoices()) {
                 if (null != ch) {
                     sb.append(ch);
                 }
@@ -261,7 +253,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
 
-
     @Override
     public GameLogEntry visit(final GameEventBlockersDeclared ev) {
         final StringBuilder sb = new StringBuilder();
@@ -312,6 +303,17 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 
+    @Override
+    public GameLogEntry visit(GameEventCardForetold ev) {
+        String sb = TextUtil.concatWithSpace(ev.activatingPlayer.toString(), "has foretold.");
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, sb);
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventCardPlotted ev) {
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
+    }
+
     @Subscribe
     public void recieve(GameEvent ev) {
         GameLogEntry le = ev.visit(this);
@@ -319,4 +321,4 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             log.add(le);
         }
     }
-} // end class GameLog
+}

@@ -1,0 +1,11 @@
+Name:Leisure Bicycle
+ManaCost:2
+Types:Artifact Vehicle
+PT:3/1
+K:Crew:1
+K:Cycling:2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExplore | TriggerDescription$ Whenever CARDNAME attacks, target creature that crewed it this turn explores.
+SVar:TrigExplore:DB$ Explore | ValidTgts$ Creature.CrewedThisTurn | TgtPrompt$ Select target creature that crewed it this turn
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters|Discard
+Oracle:Whenever Leisure Bicycle attacks, target creature that crewed it this turn explores.\nCrew 1\nCycling {2}

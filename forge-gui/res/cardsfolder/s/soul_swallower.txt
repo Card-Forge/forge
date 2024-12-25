@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Wurm
 PT:3/3
 K:Trample
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Delirium$ True | Execute$ DBPutCounter | TriggerDescription$ Delirium — At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, put three +1/+1 counters on CARDNAME
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Delirium$ True | Execute$ DBPutCounter | TriggerDescription$ Delirium — At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, put three +1/+1 counters on CARDNAME.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3
 DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium

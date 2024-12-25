@@ -3,10 +3,10 @@
  */
 package forge.game.card;
 
-import java.util.Map;
-
-import com.google.common.collect.*;
-
+import com.google.common.collect.ForwardingTable;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Table;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameAction;
@@ -16,6 +16,9 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
+
+import java.util.Map;
 
 public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardCollection> {
     // TODO use EnumBasedTable if exist
@@ -100,15 +103,16 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
             // will be handled by original "cause" instead
             return;
         }
-        // this should still refresh for empty battlefield
-        if (lastStateBattlefield != CardCollection.EMPTY) {
-            game.getTriggerHandler().resetActiveTriggers(false);
-            // register all LTB trigger from last state battlefield
-            for (Card lki : lastStateBattlefield) {
-                game.getTriggerHandler().registerActiveLTBTrigger(lki);
-            }
-        }
         if (!isEmpty()) {
+            // this should still refresh for empty battlefield
+            if (lastStateBattlefield != CardCollection.EMPTY) {
+                game.getTriggerHandler().resetActiveTriggers(false);
+                // register all LTB trigger from last state battlefield
+                for (Card lki : lastStateBattlefield) {
+                    game.getTriggerHandler().registerActiveLTBTrigger(lki);
+                }
+            }
+
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardZoneTable(this));
             runParams.put(AbilityKey.Cause, cause);
@@ -132,7 +136,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public CardCollection filterCards(Iterable<ZoneType> origin, Iterable<ZoneType> destination, String valid, Card host, CardTraitBase sa) {
         CardCollection allCards = new CardCollection();
-        if (destination != null && !Iterables.any(destination, d -> columnKeySet().contains(d))) {
+        if (destination != null && !IterableUtil.any(destination, d -> columnKeySet().contains(d))) {
             return allCards;
         }
         if (origin != null) {

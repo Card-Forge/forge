@@ -1,0 +1,15 @@
+Name:Night Out in Vegas
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Buffet,SeeAShow,PlayGames,GoToSleep | ChoiceRestriction$ ThisGame | CharmNum$ 1
+SVar:Buffet:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ 3 | SpellDescription$ Buffet — Create three Food tokens.
+SVar:SeeAShow:DB$ Token | TokenScript$ w_2_2_performer | TokenAmount$ 2 | SpellDescription$ See a Show — Create two 2/2 white Performer creature tokens.
+SVar:PlayGames:DB$ ChangeZone | Origin$ Library | NoShuffle$ True | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | SubAbility$ DBDiscard | Mandatory$ True | SpellDescription$ Play Games — Search your library for a card, put that card into your hand, discard a card at random, then shuffle.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ You
+SVar:GoToSleep:DB$ LoseLife | LifeAmount$ 15 | SubAbility$ DBSacSelf | SpellDescription$ Go to Sleep — You lose 15 life. Sacrifice CARDNAME.
+SVar:DBSacSelf:DB$ Sacrifice
+AI:RemoveDeck:All
+DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Food|Artifact|Performer
+Oracle:At the beginning of your upkeep, choose one that hasn't been chosen —\n• Buffet — Create three Food tokens.\n• See a Show — Create two 2/2 white Performer creature tokens.\n• Play Games — Search your library for a card, put that card into your hand, discard a card at random, then shuffle.\n• Go to Sleep — You lose 15 life. Sacrifice Night Out in Vegas.

@@ -1,0 +1,9 @@
+Name:Deep Dish Pizza
+ManaCost:no cost
+Types:Artifact Food
+K:Suspend:2:2
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ Gain 3 life, draw three cards, and CARDNAME deals 3 damage to each opponent.
+SVar:DBDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 3
+DeckHas:Ability$LifeGain|Sacrifice
+Oracle:Suspend 2—{2} (Deep Dish Pizza has no mana cost and must be suspended.)\n{2}, {T}, Sacrifice Deep Dish Pizza: Gain 3 life, draw three cards, and Deep Dish Pizza deals 3 damage to each opponent.

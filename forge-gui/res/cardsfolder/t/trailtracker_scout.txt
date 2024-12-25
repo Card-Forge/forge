@@ -1,0 +1,8 @@
+Name:Trailtracker Scout
+ManaCost:1 G
+Types:Creature Raccoon Scout
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+T:Mode$ ManaExpend | Amount$ 8 | Player$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever you expend 8, return up to one target permanent card from your graveyard to your hand. (You expend 8 as you spend your eighth total mana to cast spells during a turn.)
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Choose up to one target permanent card | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1
+Oracle:{T}: Add one mana of any color.\nWhenever you expend 8, return up to one target permanent card from your graveyard to your hand. (You expend 8 as you spend your eighth total mana to cast spells during a turn.)

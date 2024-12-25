@@ -6,6 +6,6 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters, creatures you control get +1/+0 and gain first strike until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | NumAtt$ +1 | ValidCards$ Creature.YouCtrl | KW$ First Strike
 K:TypeCycling:Plains:1
-DeckHas:Ability$Discard
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Discard
 Oracle:Flying\nWhen Eagles of the North enters, creatures you control get +1/+0 and gain first strike until end of turn.\nPlainscycling {1} ({1}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)

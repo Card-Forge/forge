@@ -1,12 +1,6 @@
 package forge.gamemodes.match.input;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -20,6 +14,11 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.TextUtil;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public final class InputSelectCardsForConvokeOrImprovise extends InputSelectManyBase<Card> {
@@ -44,11 +43,11 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
 
     @Override
     protected String getMessage() {
-	StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
-	     sa != null ) {
-	    sb.append(sa.getStackDescription()).append("\n");
-	}
+                sa != null ) {
+            sb.append(sa.getStackDescription()).append("\n");
+        }
         sb.append(TextUtil.concatNoSpace("Choose ", cardType, " to tap for ", description, ".\nRemaining mana cost is ", remainingCost.toString()));
         return sb.toString();
     }

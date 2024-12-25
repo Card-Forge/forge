@@ -8,7 +8,7 @@ SVar:X:Count$ThisTurnEntered_Battlefield_Card.tokenCreated+Treasure+YouOwn
 T:Mode$ SpellAbilityCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | ValidSA$ SpellAbility.ManaFromTreasure | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts a spell or activates an ability, if mana from a Treasure was spent to cast or activate it, put a +1/+1 counter on target creature, then draw a card.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
-DeckNeeds:Ability$Token & Type$Treasure
-DeckHas:Ability$Counters
 AI:RemoveDeck:Random
+DeckHas:Ability$Counters
+DeckNeeds:Ability$Token & Type$Treasure
 Oracle:Haste\n{T}: Target opponent creates X Treasure tokens, where X is the number of Treasure tokens you created this turn.\nWhenever an opponent casts a spell or activates an ability, if mana from a Treasure was spent to cast or activate it, put a +1/+1 counter on target creature, then draw a card.

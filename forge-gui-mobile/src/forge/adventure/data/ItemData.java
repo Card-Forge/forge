@@ -23,6 +23,7 @@ public class ItemData {
 
     public boolean usableOnWorldMap;
     public boolean usableInPoi;
+    public boolean isCracked;
     public String commandOnUse;
     public int shardsNeeded;
     public DialogData dialogOnUse;

@@ -101,8 +101,8 @@ ScryfallCode=C18
 92 C Into the Roil @Kieran Yanner
 93 R Jeskai Infiltrator @Cynthia Sheppard
 94 U Mulldrifter @Eric Fortune
-95 C Ninja of the Deep Hours @Dan Scott
-96 C Ponder @Dan Scott
+95 C Ninja of the Deep Hours @Dan Murayama Scott
+96 C Ponder @Dan Murayama Scott
 97 C Portent @Christopher Burdett
 98 U Predict @Rebecca Guay
 99 U Reverse Engineer @Chase Stone
@@ -213,14 +213,14 @@ ScryfallCode=C18
 204 U Dreamstone Hedron @Eric Deschamps
 205 R Duplicant @Marco Nelor
 206 U Hedron Archive @Craig J Spearing
-207 U Izzet Signet @Raoul Vitale
-208 U Magnifying Glass @Dan Scott
+207 C Izzet Signet @Raoul Vitale
+208 U Magnifying Glass @Dan Murayama Scott
 209 R Mimic Vat @Matt Cavotta
 210 C Mind Stone @Adam Rex
 211 R Mirrorworks @John Avon
 212 R Myr Battlesphere @Franz Vohwinkel
 213 C Orzhov Signet @Martina Pilcerova
-214 C Pilgrim's Eye @Dan Scott
+214 C Pilgrim's Eye @Dan Murayama Scott
 215 U Prismatic Lens @Alan Pollack
 216 R Prototype Portal @Drew Baker
 217 R Psychosis Crawler @Stephan Martiniere
@@ -292,7 +292,7 @@ ScryfallCode=C18
 283 U Submerged Boneyard @Cliff Childs
 284 C Swiftwater Cliffs @Eytan Zana
 285 U Temple of the False God @James Zapata
-286 C Terramorphic Expanse @Dan Scott
+286 C Terramorphic Expanse @Dan Murayama Scott
 287 C Thornwood Falls @Eytan Zana
 288 C Tranquil Cove @John Avon
 289 U Tranquil Expanse @Cliff Childs

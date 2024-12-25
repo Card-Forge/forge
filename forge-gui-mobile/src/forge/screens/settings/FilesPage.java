@@ -61,14 +61,6 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     StringBuffer nifSB = new StringBuffer(); // NO IMAGE FOUND BUFFER
                     StringBuffer cniSB = new StringBuffer(); // CARD NOT IMPLEMENTED BUFFER
 
-                    nifSB.append("\n\n-------------------\n");
-                    nifSB.append("NO IMAGE FOUND LIST\n");
-                    nifSB.append("-------------------\n\n");
-
-                    cniSB.append("\n\n-------------------\n");
-                    cniSB.append("UNIMPLEMENTED CARD LIST\n");
-                    cniSB.append("-------------------\n\n");
-
                     Pair<Integer, Integer> totalAudit = StaticData.instance().audit(nifSB, cniSB);
                     String msg = nifSB.toString();
                     String title = "Missing images: " + totalAudit.getLeft() + "\nUnimplemented cards: " + totalAudit.getRight();

@@ -1,8 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -12,6 +9,9 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+
+import java.util.List;
+import java.util.Map;
 
 public class AlterAttributeAi extends SpellAbilityAi {
 

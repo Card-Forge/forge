@@ -66,7 +66,7 @@ ScryfallCode=SPG
 52 M Fury @Campbell White
 53 M Endurance @Campbell White
 54 M Swords to Plowshares @Izzy
-55 R Ledger Shredder @Volkan Baǵa
+55 M Ledger Shredder @Volkan Baǵa
 56 M Rat Colony @Mark Zug
 57 M Relentless Rats @Mathias Kollros
 58 M Kindred Charge @Milivoj Ćeran
@@ -75,4 +75,23 @@ ScryfallCode=SPG
 61 M Frogmite @Mike Sass
 62 M Sword of Fire and Ice @Volkan Baǵa
 63 M Secluded Courtyard @Dan Murayama Scott
+64 M Hallowed Haunting @Mila Pesic
+65 M Soul Warden @Joshua Cairos
+66 M Expropriate @Borja Pindado
+67 M Phantasmal Image @Darren Tan
+68 M Damnation @Masahiro Ito
+69 M Sacrifice @David Palumbo
+70 M Maddening Hex @Javier Charro
+71 M Unholy Heat @Josh Hass
 72 M Collected Company @Borja Pindado
+73 M Noxious Revival @Javier Charro
+74 M Condemn @Rovina Cai
+75 M Sphinx's Tutelage @Jason A. Engle
+76 M Grim Tutor @DZO
+77 M Embercleave @Wylie Beckert
+78 M Goblin Bushwhacker @Dominik Mayer
+79 M Bloom Tender @Julie Dillon
+80 M Paradise Druid @Alex Dos Diaz
+81 M Akroma's Memorial @Carly Mazur
+82 M Temporal Manipulation @Raita Kazama
+83 M Fiend Artisan @Carl Critchlow

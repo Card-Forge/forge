@@ -1,0 +1,9 @@
+Name:Tyvar, the Pummeler
+ManaCost:1 G G
+Types:Legendary Creature Elf Warrior
+PT:3/3
+A:AB$ Pump | Cost$ tapXType<1/Creature.Other> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it.
+SVar:DBTap:DB$ Tap | Defined$ Self
+A:AB$ PumpAll | Cost$ 3 G G | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | SpellDescription$ Creatures you control get +X/+X until end of turn, where X is the greatest power among creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+Oracle:Tap another untapped creature you control: Tyvar, the Pummeler gains indestructible until end of turn. Tap it.\n{3}{G}{G}: Creatures you control get +X/+X until end of turn, where X is the greatest power among creatures you control.

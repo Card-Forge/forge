@@ -5,6 +5,6 @@ PT:6/6
 T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Dinosaur.YouCtrl+Other | PresentCompare$ EQ0 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigStunCounter | TriggerDescription$ Whenever CARDNAME attacks while you don't control another Dinosaur, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 SVar:TrigStunCounter:DB$ PutCounter | Defined$ Self | CounterType$ Stun | CounterNum$ 1
 SVar:HasAttackEffect:TRUE
-DeckNeeds:Type$Dinosaur
 DeckHas:Ability$Counters
+DeckNeeds:Type$Dinosaur
 Oracle:Whenever Pugnacious Hammerskull attacks while you don't control another Dinosaur, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)

@@ -1,7 +1,8 @@
 package forge.ai;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+
+import forge.ai.AiCardMemory.MemorySet;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -32,6 +33,10 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         discarded = new CardCollection();
         tapped = new CardCollection();
+        Set<Card> tappedForMana = AiCardMemory.getMemorySet(ai0, MemorySet.PAYS_TAP_COST);
+        if (tappedForMana != null) {
+            tapped.addAll(tappedForMana);
+        }
     }
 
     @Override
@@ -51,8 +56,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
-        String choice = player.getController().chooseSomeType("Creature", ability, CardType.getAllCreatureTypes(),
-                Lists.newArrayList());
+        String choice = player.getController().chooseSomeType("Creature", ability, CardType.getAllCreatureTypes());
         return PaymentDecision.type(choice);
     }
 
@@ -105,13 +109,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 Card chosen;
                 if (!discardMe.isEmpty()) {
                     chosen = Aggregates.random(discardMe);
-                    discardMe = CardLists.filter(discardMe, Predicates.not(CardPredicates.sharesNameWith(chosen)));
+                    discardMe = CardLists.filter(discardMe, CardPredicates.sharesNameWith(chosen).negate());
                 } else {
                     final Card worst = ComputerUtilCard.getWorstAI(hand);
                     chosen = worst != null ? worst : Aggregates.random(hand);
                 }
                 differentNames.add(chosen);
-                hand = CardLists.filter(hand, Predicates.not(CardPredicates.sharesNameWith(chosen)));
+                hand = CardLists.filter(hand, CardPredicates.sharesNameWith(chosen).negate());
                 c--;
             }
             return PaymentDecision.card(differentNames);
@@ -440,21 +444,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        if ("DontPayTapCostWithManaSources".equals(source.getSVar("AIPaymentPreference"))) {
-            CardCollectionView toExclude =
-                    CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"),
-                            ability.getActivatingPlayer(), ability.getHostCard(), ability);
-            toExclude = CardLists.filter(toExclude, card -> {
-                for (final SpellAbility sa : card.getSpellAbilities()) {
-                    if (sa.isManaAbility() && sa.getPayCosts().hasTapCost()) {
-                        return true;
-                    }
-                }
-                return false;
-            });
-            exclude.addAll(toExclude);
-        }
-
         String totalP = "";
         CardCollectionView totap;
         if (isVehicle) {
@@ -651,7 +640,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 // TODO sort negatives to remove from best Cards first?
                 for (final Card crd : negatives) {
                     for (Map.Entry<CounterType, Integer> e : table.filterToRemove(crd).entrySet()) {
-                        if (ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
+                        if (ComputerUtil.isNegativeCounter(e.getKey(), crd) && crd.canRemoveCounters(e.getKey())) {
                             int over = Math.min(e.getValue(), c - toRemove);
                             if (over > 0) {
                                 toRemove += over;
@@ -762,7 +751,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             }
         }
 
-        // if table is empty, than no counter was removed
+        // if table is empty, then no counter was removed
         return table.isEmpty() ? null : PaymentDecision.counters(table);
     }
 
@@ -838,12 +827,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostUnattach cost) {
-        final Card cardToUnattach = cost.findCardToUnattach(source, player, ability);
-        if (cardToUnattach == null) {
+        final CardCollection cardToUnattach = cost.findCardToUnattach(source, player, ability);
+        if (cardToUnattach.isEmpty()) {
             // We really shouldn't be able to get here if there's nothing to unattach
             return null;
         }
-        return PaymentDecision.card(cardToUnattach);
+        return PaymentDecision.card(cardToUnattach.getFirst());
     }
 
     @Override

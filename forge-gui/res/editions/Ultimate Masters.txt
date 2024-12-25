@@ -34,7 +34,7 @@ ScryfallCode=UMA
 20 U Hero of Iroas @Willian Murai
 21 C Hyena Umbra @Howard Lyon
 22 C Icatian Crier @Michael Phillippi
-23 C Lotus-Eye Mystics @Dan Scott
+23 C Lotus-Eye Mystics @Dan Murayama Scott
 24 C Mammoth Umbra @Howard Lyon
 25 C Martyr of Sands @Randy Gallegos
 26 U Miraculous Recovery @Mark Winters
@@ -160,7 +160,7 @@ ScryfallCode=UMA
 146 R Seismic Assault @Adam Paquette
 147 R Seize the Day @Greg Staples
 148 C Soul's Fire @Wayne Reynolds
-149 C Sparkspitter @Dan Scott
+149 C Sparkspitter @Dan Murayama Scott
 150 R Squee, Goblin Nabob @Greg Staples
 151 C Thermo-Alchemist @Raymond Swanland
 152 R Through the Breach @Randy Vargas
@@ -236,7 +236,7 @@ ScryfallCode=UMA
 222 C Shielding Plax @Brian Hagan
 223 U Slippery Bogle @Jesper Ejsing
 224 C Turn to Mist @Greg Staples
-225 C Fire // Ice @Dan Scott
+225 C Fire // Ice @Dan Murayama Scott
 226 C Cathodion @Izzy
 227 R Engineered Explosives @Lars Grant-West
 228 U Heap Doll @John Avon
@@ -263,7 +263,7 @@ ScryfallCode=UMA
 249 R Raging Ravine @Todd Lockwood
 250 U Rogue's Passage @Christine Choi
 251 R Stirring Wildwood @Eric Deschamps
-252 C Terramorphic Expanse @Dan Scott
+252 C Terramorphic Expanse @Dan Murayama Scott
 253 R Thespian's Stage @John Avon
 254 R Urborg, Tomb of Yawgmoth @Jung Park
 

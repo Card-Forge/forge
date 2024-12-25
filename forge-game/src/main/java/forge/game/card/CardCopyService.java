@@ -7,6 +7,7 @@ import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import io.sentry.Breadcrumb;
@@ -108,13 +109,17 @@ public class CardCopyService {
         if (assignNewId) {
             id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
         }
-        final Card c = new Card(id, in.getPaperCard(), in.getGame());
+        final Card c;
+        if(in instanceof DetachedCardEffect)
+            c = new DetachedCardEffect((DetachedCardEffect) in, assignNewId);
+        else
+            c = new Card(id, in.getPaperCard(), in.getGame());
 
         c.setOwner(newOwner);
         c.setSetCode(in.getSetCode());
 
         for (final CardStateName state : in.getStates()) {
-            copyState(in, state, c, state);
+            copyState(in, state, c, state, false);
         }
 
         c.setState(in.getCurrentStateName(), false);
@@ -217,7 +222,11 @@ public class CardCopyService {
         bread.setData("Player", copyFrom.getController().getName());
         Sentry.addBreadcrumb(bread);
 
-        final Card newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
+        final Card newCopy;
+        if(copyFrom instanceof DetachedCardEffect)
+            newCopy = new DetachedCardEffect((DetachedCardEffect) copyFrom, false);
+        else
+            newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
         cachedMap.put(copyFrom.getId(), newCopy);
         newCopy.setSetCode(copyFrom.getSetCode());
         newCopy.setOwner(copyFrom.getOwner());
@@ -347,13 +356,7 @@ public class CardCopyService {
 
         newCopy.setUnearthed(copyFrom.isUnearthed());
 
-        newCopy.setChangedCardColors(copyFrom.getChangedCardColorsTable());
-        newCopy.setChangedCardColorsCharacterDefining(copyFrom.getChangedCardColorsCharacterDefiningTable());
-        newCopy.setChangedCardKeywords(copyFrom.getChangedCardKeywords());
-        newCopy.setChangedCardTypes(copyFrom.getChangedCardTypesTable());
-        newCopy.setChangedCardTypesCharacterDefining(copyFrom.getChangedCardTypesCharacterDefiningTable());
-        newCopy.setChangedCardNames(copyFrom.getChangedCardNames());
-        newCopy.setChangedCardTraits(copyFrom.getChangedCardTraits());
+        newCopy.copyFrom(copyFrom);
 
         // for getReplacementList (run after setChangedCardKeywords for caching)
         newCopy.setStoredKeywords(copyFrom.getStoredKeywords(), true);
@@ -378,8 +381,6 @@ public class CardCopyService {
         for (CardStateName s : newCopy.getStates()) {
             newCopy.updateKeywordsCache(newCopy.getState(s));
         }
-
-        newCopy.setKickerMagnitude(copyFrom.getKickerMagnitude());
 
         if (copyFrom.getCastSA() != null) {
             SpellAbility castSA = copyFrom.getCastSA().copy(newCopy, true);

@@ -1,0 +1,9 @@
+Name:Fear My Authority
+ManaCost:no cost
+Types:Ongoing Scheme
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Fear | Description$ Creatures you control get +2/+2 and have fear.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ DBAbandonCheck | TriggerDescription$ At the beginning of your upkeep, abandon this scheme unless you discard a card or pay 3 life.
+SVar:DBAbandonCheck:DB$ GenericChoice | Choices$ DBPayLife,DBDiscard
+SVar:DBPayLife:DB$ Abandon | UnlessCost$ PayLife<3> | UnlessPayer$ You | SpellDescription$ Pay 3 life or abandon this scheme
+SVar:DBDiscard:DB$ Abandon | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | SpellDescription$ Discard a card or abandon this scheme
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nCreatures you control get +2/+2 and have fear. (They can't be blocked except by artifact creatures and/or black creatures.)\nAt the beginning of your upkeep, abandon this scheme unless you discard a card or pay 3 life.

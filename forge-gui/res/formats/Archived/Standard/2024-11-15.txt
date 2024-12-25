@@ -1,0 +1,6 @@
+[format]
+Name:Standard (FDN)
+Type:Archived
+Subtype:Standard
+Effective:2024-11-15
+Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN

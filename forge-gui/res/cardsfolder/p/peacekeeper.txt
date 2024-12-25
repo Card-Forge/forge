@@ -2,7 +2,8 @@ Name:Peacekeeper
 ManaCost:2 W
 Types:Creature Human
 PT:1/1
-K:UpkeepCost:1 W
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {1}{W}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ 1 W
 S:Mode$ CantAttack | ValidCard$ Creature | Description$ Creatures can't attack.
 AI:RemoveDeck:All
 Oracle:At the beginning of your upkeep, sacrifice Peacekeeper unless you pay {1}{W}.\nCreatures can't attack.

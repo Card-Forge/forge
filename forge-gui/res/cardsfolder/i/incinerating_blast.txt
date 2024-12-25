@@ -1,0 +1,6 @@
+Name:Incinerating Blast
+ManaCost:4 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 6 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 6 damage to target creature. You may discard a card. If you do, draw a card.
+SVar:DBDraw:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You
+Oracle:Incinerating Blast deals 6 damage to target creature.\nYou may discard a card. If you do, draw a card.

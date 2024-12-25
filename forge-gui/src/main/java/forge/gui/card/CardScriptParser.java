@@ -1,24 +1,21 @@
 package forge.gui.card;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSortedSet;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-
 import forge.card.CardType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.ability.ApiType;
 import forge.game.replacement.ReplacementType;
 import forge.game.trigger.TriggerType;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public final class CardScriptParser {
 
@@ -393,7 +390,7 @@ public final class CardScriptParser {
         if (DEFINED_CARDS.contains(defined)) {
             return true;
         }
-        return Iterables.any(DEFINED_CARDS_STARTSWITH, startsWith(defined));
+        return DEFINED_CARDS_STARTSWITH.stream().anyMatch(startsWith(defined));
     }
     private static boolean isDefinedPlayerLegal(final String defined) {
         final boolean non = defined.startsWith("Non"), flipped = defined.startsWith("Flipped");
@@ -409,7 +406,7 @@ public final class CardScriptParser {
         if (DEFINED_PLAYERS.contains(defined)) {
             return true;
         }
-        return Iterables.any(DEFINED_PLAYERS_STARTSWITH, startsWith(defined));
+        return DEFINED_PLAYERS_STARTSWITH.stream().anyMatch(startsWith(defined));
     }
 
     private static final Set<String> VALID_INCLUSIVE = ImmutableSortedSet.of(
@@ -440,19 +437,17 @@ public final class CardScriptParser {
             "sameName", "namedCard", "NamedByRememberedPlayer", "Permanent",
             "ChosenCard", "nonChosenCard", "White", "Blue", "Black", "Red",
             "Green", "nonWhite", "nonBlue", "nonBlack", "nonRed", "nonGreen",
-            "Colorless", "nonColorless", "Multicolor", "nonMulticolor",
-            "Monocolor", "nonMonocolor", "ChosenColor", "AllChosenColors",
+            "Colorless", "nonColorless", "Multicolor", "Monocolor", "ChosenColor", "AllChosenColors",
             "AnyChosenColor", "DoubleFaced", "Flip", "YouCtrl", "YourTeamCtrl",
             "YouDontCtrl", "OppCtrl", "ChosenCtrl", "DefenderCtrl",
             "DefenderCtrlForRemembered", "DefendingPlayerCtrl",
             "EnchantedPlayerCtrl", "EnchantedControllerCtrl",
-            "RememberedPlayer", "RememberedPlayerCtrl",
-            "nonRememberedPlayerCtrl", "TargetedPlayerCtrl",
+            "RememberedPlayer", "RememberedPlayerCtrl", "TargetedPlayerCtrl",
             "TargetedControllerCtrl", "ActivePlayerCtrl",
             "YouOwn", "YouDontOwn", "OppOwn",
             "TargetedPlayerOwn", "OwnerDoesntControl", "Other", "Self",
             "AttachedBy", "Attached", "NameNotEnchantingEnchantedPlayer",
-            "NotAttachedTo", "Enchanted", "CanEnchantRemembered",
+            "Enchanted", "CanEnchantRemembered",
             "CanEnchantSource", "CanBeEnchantedBy", "CanBeEnchantedByTargeted",
             "CanBeEnchantedByAllRemembered", "EquippedBy",
             "EquippedByTargeted", "EquippedByEnchanted", "FortifiedBy",
@@ -463,9 +458,8 @@ public final class CardScriptParser {
             "sharesPermanentTypeWith", "canProduceSameManaTypeWith", "SecondSpellCastThisTurn",
             "ThisTurnCast", "withFlashback", "tapped", "untapped", "faceDown",
             "faceUp", "hasLevelUp", "DrawnThisTurn",
-            "firstTurnControlled", "notFirstTurnControlled",
-            "startedTheTurnUntapped", "attackedOrBlockedSinceYourLastUpkeep",
-            "blockedOrBeenBlockedSinceYourLastUpkeep",
+            "firstTurnControlled", "startedTheTurnUntapped",
+            "attackedOrBlockedSinceYourLastUpkeep", "blockedOrBeenBlockedSinceYourLastUpkeep",
             "dealtDamageToYouThisTurn", "dealtDamageToOppThisTurn",
             "controllerWasDealtCombatDamageByThisTurn",
             "controllerWasDealtDamageByThisTurn", "wasDealtDamageThisTurn",
@@ -473,7 +467,7 @@ public final class CardScriptParser {
             "wasDealtDamageByEnchantedThisTurn", "dealtDamageThisTurn",
             "attackedThisTurn", "attackedLastTurn", "blockedThisTurn",
             "gotBlockedThisTurn", "notAttackedThisTurn",
-            "notBlockedThisTurn", "greatestPower", "yardGreatestPower",
+            "greatestPower", "yardGreatestPower",
             "leastPower", "leastToughness", "greatestCMC",
             "greatestRememberedCMC", "lowestRememberedCMC", "lowestCMC",
             "enchanted", "unenchanted", "enchanting", "equipped", "unequipped",
@@ -514,7 +508,7 @@ public final class CardScriptParser {
         if (VALID_EXCLUSIVE.contains(valid)) {
             return true;
         }
-        return Iterables.any(VALID_EXCLUSIVE_STARTSWITH, startsWith(valid));
+        return VALID_EXCLUSIVE_STARTSWITH.stream().anyMatch(startsWith(valid));
     }
 
     private static final class KeyValuePair {

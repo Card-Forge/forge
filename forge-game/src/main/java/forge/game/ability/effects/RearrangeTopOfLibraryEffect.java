@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -104,11 +103,9 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         }
 
         CardCollection topCards  = player.getTopXCardsFromLibrary(numCards);
-        int maxCards = topCards.size();
 
         CardCollectionView orderedCards = activator.getController().orderMoveToZoneList(topCards, ZoneType.Library, sa);
-        for (int i = maxCards - 1; i >= 0; i--) {
-            Card next = orderedCards.get(i);
+        for (Card next : orderedCards) {
             player.getGame().getAction().moveToLibrary(next, 0, sa);
         }
         if (mayshuffle && activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantShuffleTheLibrary"), null)) {

@@ -1,19 +1,18 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+
+import java.util.List;
+import java.util.Map;
 
 
 public class RepeatEachAi extends SpellAbilityAi {
@@ -30,7 +29,7 @@ public class RepeatEachAi extends SpellAbilityAi {
         } else if ("Never".equals(logic)) {
             return false;
         } else if ("CloneAllTokens".equals(logic)) {
-            List<Card> humTokenCreats = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), Presets.TOKEN);
+            List<Card> humTokenCreats = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), CardPredicates.TOKEN);
             List<Card> compTokenCreats = aiPlayer.getTokensInPlay();
 
             return compTokenCreats.size() > humTokenCreats.size();
@@ -45,20 +44,6 @@ public class RepeatEachAi extends SpellAbilityAi {
                     return false;
                 }
             }
-        } else if ("OpponentHasCreatures".equals(logic)) { //TODO convert this to NeedsToPlayVar
-            for (Player opp : aiPlayer.getOpponents()) {
-                if (!opp.getCreaturesInPlay().isEmpty()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if ("OpponentHasMultipleCreatures".equals(logic)) {
-            for (Player opp : aiPlayer.getOpponents()) {
-                if (opp.getCreaturesInPlay().size() > 1) {
-                    return true;
-                }
-            }
-            return false;
         } else if ("AllPlayerLoseLife".equals(logic)) {
             final Card source = sa.getHostCard();
             SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");

@@ -1,7 +1,7 @@
 Name:Lich's Tomb
 ManaCost:4
 Types:Artifact
-S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ValidLoseReason$ LifeReachedZero | Layer$ CantHappen | Description$ You don't lose the game for having 0 or less life.
 T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever you lose life, sacrifice a permanent for each 1 life you lost. (Damage causes loss of life.)
 SVar:TrigSac:DB$ Sacrifice | Amount$ X | SacValid$ Permanent
 SVar:X:TriggerCount$LifeAmount

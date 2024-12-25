@@ -1,0 +1,19 @@
+Name:Garruk's Lost Wolf
+ManaCost:3 G
+Types:Creature Wolf
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Huntsman Role token attached to another target creature you control. (Enchanted creature gets +1/+1 and has "{T}: Add {G}.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_huntsman | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control
+DeckHas:Ability$Mill|Graveyard|Token & Type$Aura|Enchantment|Role
+AlternateMode:Adventure
+Oracle:When Garruk's Lost Wolf enters the battlefield, create a Huntsman Role token attached to another target creature you control. (Enchanted creature gets +1/+1 and has "{T}: Add {G}.")
+
+ALTERNATE
+
+Name:Hey, Has Anyone Seen Garruk?
+ManaCost:1 G
+Types:Sorcery Adventure
+A:SP$ Mill | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill the top four cards of your library. Return a creature or planeswalker card milled this way to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Mandatory$ True | Destination$ Hand | ChangeType$ Card.IsRemembered+Creature,Card.IsRemembered+Planeswalker | SelectPrompt$ Return a creature or planeswalker card milled this way to your hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Mill the top four cards of your library. Return a creature or planeswalker card milled this way to your hand.

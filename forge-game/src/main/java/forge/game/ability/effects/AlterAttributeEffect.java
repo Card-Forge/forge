@@ -2,10 +2,13 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
+import forge.game.GameLogEntryType;
+import forge.game.GameType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.Lang;
@@ -17,7 +20,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         boolean activate = Boolean.parseBoolean(sa.getParamOrDefault("Activate", "true"));
         String[] attributes = sa.getParam("Attributes").split(",");
-        CardCollection defined = getDefinedCardsOrTargeted(sa, "Defined");
+        CardCollection defined = getDefinedCardsOrTargeted(sa);
 
         if (sa.hasParam("Optional")) {
             final String targets = Lang.joinHomogenous(defined);
@@ -62,6 +65,26 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                             runParams.put(AbilityKey.Crew, saddlers);
                             c.getGame().getTriggerHandler().runTrigger(TriggerType.BecomesSaddled, runParams, false);
                         }
+                        break;
+                    case "Commander":
+                        //This implementation doesn't let a card make someone else's creature your commander. But that's an edge case among edge cases.
+                        Player p = c.getOwner();
+                        if (c.isCommander() == activate || p.getCommanders().contains(c) == activate)
+                            break; //Isn't changing status.
+                        if (activate) {
+                            if(!c.getGame().getRules().hasCommander()) {
+                                System.out.println("Commander status applied in non-commander format. Applying Commander variant.");
+                                c.getGame().getRules().addAppliedVariant(GameType.Commander);
+                            }
+                            p.addCommander(c);
+                            //Seems important enough to mention in the game log.
+                            c.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is now %s's commander.", c.getPaperCard().getName(), p));
+                        }
+                        else {
+                            p.removeCommander(c);
+                            c.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is no longer %s's commander.", c.getPaperCard().getName(), p));
+                        }
+                        altered = true;
                         break;
 
                         // Other attributes: renown, monstrous, suspected, etc

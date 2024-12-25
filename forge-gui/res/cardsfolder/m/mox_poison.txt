@@ -1,0 +1,6 @@
+Name:Mox Poison
+ManaCost:0
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBPain | SpellDescription$ Add one mana of any color. You get two poison counters.
+SVar:DBPain:DB$ Poison | Defined$ You | Num$ 2
+Oracle:{T}: Add one mana of any color. You get two poison counters.

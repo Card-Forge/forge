@@ -17,7 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.base.Supplier;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -39,6 +38,7 @@ import forge.util.Localizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Supplier;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -375,6 +375,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         if (foilAvailable) {
             cmb.addMakeFoils();
         }
+        cmb.addSetColorID();
     }
 
     /* (non-Javadoc)

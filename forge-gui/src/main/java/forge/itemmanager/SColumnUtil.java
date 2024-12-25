@@ -143,6 +143,13 @@ public final class SColumnUtil {
         return columns;
     }
 
+    public static Map<ColumnDef, ItemColumnConfig> getAdventureCollectionDefaultColumns() {
+        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.QUANTITY, false, false, false, true, false);
+        columns.get(ColumnDef.NEW).setSortPriority(1);
+        columns.get(ColumnDef.NAME).setSortPriority(2);
+        return columns;
+    }
+
     public static Map<ColumnDef, ItemColumnConfig> getAttractionPoolDefaultColumns() {
         //Similar to special card pool, but show the collector number and hide the type.
         List<ColumnDef> colDefs = new ArrayList<>();

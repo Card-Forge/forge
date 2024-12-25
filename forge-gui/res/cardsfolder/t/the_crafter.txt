@@ -1,0 +1,12 @@
+Name:The Crafter
+ManaCost:3 R
+Types:Legendary Artifact Creature Human
+PT:3/4
+K:Affinity:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two colorless Scrap artifact tokens (They have no abilities.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ scrap
+A:AB$ Token | Cost$ T Sac<1/Artifact> | TokenScript$ bling | SpellDescription$ Create an equipment token named Bling with "Equipped creature gets +1/+0" and "Equip {1}."
+SVar:AIPreference:SacCost$Artifact.nonCreature+nonEquipment+Token+powerLE1+toughnessEQ1
+DeckHas:Ability$Token|Sacrifice & Type$Equipment
+DeckHints:Type$Artifact
+Oracle:Affinity for artifacts\nWhen The Crafter enters the battlefield, create two colorless Scrap artifact tokens (They have no abilities.)\n{T}, Sacrifice an artifact: Create an equipment token named Bling with "Equipped creature gets +1/+0" and "Equip {1}."

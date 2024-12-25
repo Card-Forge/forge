@@ -1,0 +1,12 @@
+Name:The Master of Keys
+ManaCost:X W U B
+Types:Legendary Enchantment Creature Horror
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put X +1/+1 counters on it and mill twice X cards.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBMill
+SVar:DBMill:DB$ Mill | NumCards$ Y
+S:Mode$ Continuous | Affected$ Enchantment.YouOwn | AffectedZone$ Graveyard | AddKeyword$ Escape:CardManaCost ExileFromGrave<3/Card.Other/other> | Description$ Each enchantment card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard. (You may cast cards from your graveyard for their escape cost.)
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Twice
+Oracle:Flying\nWhen The Master of Keys enters, put X +1/+1 counters on it and mill twice X cards.\nEach enchantment card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard. (You may cast cards from your graveyard for their escape cost.)

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="forge.app">
+
+    <uses-sdk
+        android:minSdkVersion="26"
+        android:targetSdkVersion="35" />
+    <!-- When your app targets Android 11 or higher and it declares the MANAGE_EXTERNAL_STORAGE permission,
+         Android Studio shows the lint warning. This warning reminds you that the Google Play store has a policy
+         that limits usage of the permission. -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <!-- Required only if your app needs to access images or photos
+         that other apps created. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <!-- Required only if your app needs to access videos
+         that other apps created. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <!-- Required only if your app needs to access audio files
+         that other apps created. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- This one needs Android Runtime Permission for Android 6+ -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-feature android:name="android.hardware.gamepad" android:required="false"/>
+
+    <application
+        android:allowBackup="true"
+        android:isGame="true"
+        android:appCategory="game"
+        android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:resizeableActivity="false">
+        <activity
+            android:name=".Launcher"
+            android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
+            android:theme="@style/Theme.Transparent"
+            android:exported="true">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="android.intent.action.SEND" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <data android:mimeType="text/plain" />
+                </intent-filter>
+        </activity>
+        <activity
+            android:name=".Main"
+            android:label="@string/app_name"
+            android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
+            android:launchMode="singleInstance"
+            android:theme="@style/NormalTheme"
+            android:exported="false">
+        </activity>
+        <meta-data android:name="io.sentry.dsn" android:value="https://a0b8dbad9b8a49cfa51bf65d462e8dae:b3f27d7461224cb8836eb5c6050c666c@sentry.cardforge.org/2?buffer.enabled=false" />
+        <meta-data android:name="io.sentry.anr.enable" android:value="false" />
+        <!-- To disable the activity lifecycle breadcrumbs integration -->
+        <meta-data android:name="io.sentry.breadcrumbs.activity-lifecycle" android:value="false" />
+        <!-- To disable the app lifecycle breadcrumbs integration -->
+        <meta-data android:name="io.sentry.breadcrumbs.app-lifecycle" android:value="false" />
+        <!-- To disable the system events breadcrumbs integration -->
+        <meta-data android:name="io.sentry.breadcrumbs.system-events" android:value="false" />
+        <!-- To disable the app components breadcrumbs integration -->
+        <meta-data android:name="io.sentry.breadcrumbs.app-components" android:value="false" />
+        <!-- To disable the user interaction breadcrumbs integration -->
+        <meta-data android:name="io.sentry.breadcrumbs.user-interaction" android:value="false" />
+        <!-- manually added -->
+        <provider
+            android:name="io.sentry.android.core.SentryInitProvider"
+            android:authorities=".SentryInitProvider"
+            android:exported="false"/>
+        <provider
+            android:name="io.sentry.android.core.SentryPerformanceProvider"
+            android:authorities=".SentryPerformanceProvider"
+            android:initOrder="200"
+            android:exported="false"/>
+        <provider
+                android:name="de.cketti.fileprovider.PublicFileProvider"
+                android:authorities="com.mydomain.publicfileprovider"
+                android:exported="true">
+
+            <meta-data
+                    android:name="de.cketti.fileprovider.PUBLIC_FILE_PROVIDER_PATHS"
+                    android:resource="@xml/publicfileprovider_paths" />
+
+        </provider>
+    </application>
+</manifest>

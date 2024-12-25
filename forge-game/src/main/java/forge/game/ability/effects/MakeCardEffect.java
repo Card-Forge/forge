@@ -15,13 +15,8 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.item.BoosterPack;
-import forge.item.IPaperCard;
-import forge.item.PaperCard;
-import forge.item.SealedTemplate;
-import forge.util.Aggregates;
-import forge.util.CardTranslation;
-import forge.util.Localizer;
+import forge.item.*;
+import forge.util.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +38,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
             List<ICardFace> faces = new ArrayList<>();
             List<PaperCard> pack = null;
             List<String> names = Lists.newArrayList();
-            
+
             final String desc = sa.getParamOrDefault("OptionPrompt", "");
             if (sa.hasParam("Optional") && sa.hasParam("OptionPrompt") && //for now, OptionPrompt is needed
                     !player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(desc), null)) {
@@ -153,7 +148,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     while (toMake > 0) {
                         PaperCard pc;
                         if (pack != null) {
-                            pc = Iterables.getLast(Iterables.filter(pack, IPaperCard.Predicates.name(name)));
+                            pc = Iterables.getLast(IterableUtil.filter(pack, PaperCardPredicates.name(name)));
                         } else {
                             pc = StaticData.instance().getCommonCards().getUniqueByName(name);
                         }
@@ -175,7 +170,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
             CardCollection madeCards = new CardCollection();
             final boolean wCounter = sa.hasParam("WithCounter");
             final boolean battlefield = zone.equals(ZoneType.Battlefield);
-            
+
             for (final Card c : cards) {
                 if (wCounter && battlefield) {
                     int numCtr = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), sa);
@@ -230,7 +225,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
         }
     }
 
-    private List<ICardFace> parseFaces (final SpellAbility sa, final String param) {
+    private List<ICardFace> parseFaces(final SpellAbility sa, final String param) {
         List<ICardFace> parsedFaces = new ArrayList<>();
         for (String s : sa.getParam(param).split(",")) {
             // Cardnames that include "," must use ";" instead (i.e. Tovolar; Dire Overlord)
@@ -244,7 +239,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
         return parsedFaces;
     }
 
-    private Card finishMaking (final SpellAbility sa, final Card made, final Card source) {
+    private Card finishMaking(final SpellAbility sa, final Card made, final Card source) {
         if (sa.hasParam("FaceDown")) made.turnFaceDown(true);
         if (sa.hasParam("RememberMade")) source.addRemembered(made);
         if (sa.hasParam("ImprintMade")) source.addImprintedCard(made);

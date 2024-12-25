@@ -214,6 +214,11 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("cbManaBurn"),
                 Forge.getLocalizer().getMessage("nlManaBurn")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.LEGACY_ORDER_COMBATANTS,
+                        Forge.getLocalizer().getMessage("cbOrderCombatants"),
+                        Forge.getLocalizer().getMessage("nlOrderCombatants")),
+                1);
+
         lstSettings.addItem(new BooleanSetting(FPref.UI_MANA_LOST_PROMPT,
                 Forge.getLocalizer().getMessage("cbManaLostPrompt"),
                 Forge.getLocalizer().getMessage("nlManaLostPrompt")),
@@ -242,6 +247,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_LOOP,
                         Forge.getLocalizer().getMessage("cbExperimentalLoop"),
                         Forge.getLocalizer().getMessage("nlExperimentaLoop")),
+                1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.MATCH_AI_TIMEOUT, Forge.getLocalizer().getMessage("cbAITimeout"),
+                Forge.getLocalizer().getMessage("nlAITimeout"),
+                Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
                 Forge.getLocalizer().getMessage("cbFilteredHands"),
@@ -481,7 +490,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     @Override
                     public void select() {
                         super.select();
-                        ImageCache.disposeTextures();
+                        ImageCache.getInstance().disposeTextures();
                     }
                 },
                 4);
@@ -584,8 +593,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void valueChanged(String newValue) {
                 super.valueChanged(newValue);
                 Forge.enableUIMask = FModel.getPreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
-                ImageCache.clearGeneratedCards();
-                ImageCache.disposeTextures();
+                ImageCache.getInstance().disposeTextures();
             }
         }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,

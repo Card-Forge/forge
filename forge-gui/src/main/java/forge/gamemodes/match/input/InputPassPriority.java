@@ -17,15 +17,11 @@
  */
 package forge.gamemodes.match.input;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.actions.PassPriorityAction;
-import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -34,6 +30,9 @@ import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -169,7 +168,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         if (sa.isSpell()) {
             return Localizer.getInstance().getMessage("lblCastSpell");
         }
-        if (sa instanceof LandAbility) {
+        if (sa.isLandAbility()) {
             return Localizer.getInstance().getMessage("lblPlayLand");
         }
         return Localizer.getInstance().getMessage("lblActivateAbility");

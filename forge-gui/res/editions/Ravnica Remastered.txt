@@ -13,7 +13,7 @@ ScryfallCode=RVR
 4 C Arrester's Zeal @Izzy
 5 C Azorius Arrester @Wayne Reynolds
 6 U Azorius Justiciar @Chris Rahn
-7 C Basilica Guards @Dan Scott
+7 C Basilica Guards @Dan Murayama Scott
 8 R Blazing Archon @Zoltan Boros & Gabor Szikszai
 9 R Blind Obedience @Seb McKinnon
 10 C Boros Elite @Willian Murai
@@ -31,7 +31,7 @@ ScryfallCode=RVR
 22 C Makeshift Battalion @Zoltan Boros
 23 U Ministrant of Obligation @Bastien L. Deharme
 24 U Mistral Charger @Nils Hamm
-25 C Rising Populace @Nestor Ossandon Leal
+25 C Rising Populace @Néstor Ossandón Leal
 26 C Rootborn Defenses @Mark Zug
 27 C Summary Judgment @Deruchenko Alexander
 28 U Sunhome Stalwart @Matt Stewart
@@ -66,7 +66,7 @@ ScryfallCode=RVR
 57 U Quicken @Aleksi Briclot
 58 C Radical Idea @Izzy
 59 U Remand @Mark A. Nelson
-60 C Repeal @Dan Scott
+60 C Repeal @Dan Murayama Scott
 61 C Sinister Sabotage @Mathias Kollros
 62 R Spark Double @Eric Deschamps
 63 R Tidespout Tyrant @Dany Orizio
@@ -80,7 +80,7 @@ ScryfallCode=RVR
 71 M Dark Confidant @Alex Brock
 72 C Debtors' Transport @Jakub Kasper
 73 C Dimir House Guard @John Zeleznik
-74 C Disembowel
+74 C Disembowel @David Astruga
 75 U Dreadmalkin @Aaron Miller
 76 U Golgari Thug @Kev Walker
 77 C Ill-Gotten Inheritance @Winona Nelson
@@ -124,7 +124,7 @@ ScryfallCode=RVR
 115 C Krenko's Command @Karl Kopinski
 116 R Legion Warboss @Alex Konstad
 117 U Light Up the Stage @Dmitry Burmak
-118 R Mizzix's Mastery @Dan Scott
+118 R Mizzix's Mastery @Dan Murayama Scott
 119 C Mugging @Greg Staples
 120 U Rakdos Pit Dragon @Kev Walker
 121 C Rubblebelt Maaka @Eric Velhagen
@@ -208,7 +208,7 @@ ScryfallCode=RVR
 199 U Mayhem Devil @Dmitry Burmak
 200 C Merfolk of the Depths @Scott Chou
 201 R Mindleech Mass @Kev Walker
-202 U Moroii @Dan Scott
+202 U Moroii @Dan Murayama Scott
 203 C Mortus Strider @Tiffany Turrill
 204 C Mourning Thrull @Dany Orizio
 205 M Nicol Bolas, Dragon-God @Raymond Swanland
@@ -248,7 +248,7 @@ ScryfallCode=RVR
 239 C Wild Cantor @Cristi Balanescu
 240 R Warrant // Warden @Matt Stewart
 241 R Revival // Revenge @Paul Scott Canavan
-242 R Connive // Concoct @Dan Scott
+242 R Connive // Concoct @Dan Murayama Scott
 243 R Expansion // Explosion @Deruchenko Alexander
 244 R Bedeck // Bedazzle @Randy Vargas
 245 R Find // Finality @Steve Ellis
@@ -341,7 +341,7 @@ ScryfallCode=RVR
 444 M Domri Rade @Susumu Kuroi
 445 M Ral Zarek @Fukuzo Katsura
 
-[showcase]
+[retro frame]
 302 R Blazing Archon @Zoltan Boros & Gabor Szikszai
 303 R Blind Obedience @Seb McKinnon
 304 U Condemn @Daren Bader
@@ -379,7 +379,7 @@ ScryfallCode=RVR
 336 C Krenko's Command @Karl Kopinski
 337 R Legion Warboss @Alex Konstad
 338 U Light Up the Stage @Dmitry Burmak
-339 R Mizzix's Mastery @Dan Scott
+339 R Mizzix's Mastery @Dan Murayama Scott
 340 C Skewer the Critics @Heonhwa Choe
 341 U Skullcrack @Dave Kendall
 342 M Utvara Hellkite @Mark Zug
@@ -462,7 +462,7 @@ ScryfallCode=RVR
 449 M Enter the Infinite @Jake Murray
 450 R Gigantoplasm @Kev Walker
 451 U Narcomoeba @Howard Lyon
-452 U Turnabout @Dan Scott
+452 U Turnabout @Dan Murayama Scott
 453 U Creeping Chill @Wisnu Tan
 454 U Darkblast @Randy Gallegos
 455 R Pack Rat @Kev Walker

@@ -1,0 +1,14 @@
+Name:Hazel's Brewmaster
+ManaCost:3 B
+Types:Creature Squirrel Warlock
+PT:3/4
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME enters or attacks, exile up to one target card from a graveyard and create a Food token.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, exile up to one target card from a graveyard and create a Food token.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Card | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | Destination$ Exile | TgtPrompt$ Select up to one target card from a graveyard | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Food.YouCtrl | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.ExiledWithSource | GainsAbilitiesOfZones$ Exile | Description$ Foods you control have all activated abilities of all creature cards exiled with CARDNAME.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Graveyard & Type$Food|Artifact
+DeckHints:Ability$Graveyard|Mill
+Oracle:Menace\nWhenever Hazel's Brewmaster enters or attacks, exile up to one target card from a graveyard and create a Food token.\nFoods you control have all activated abilities of all creature cards exiled with Hazel's Brewmaster.

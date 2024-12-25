@@ -1,0 +1,10 @@
+Name:Ace Flockbringer
+ManaCost:1 W U
+Types:Creature Bird Scout
+PT:3/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Creature.withoutFlying | ActivationLimit$ 1 | ValidActivatingPlayer$ You | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell without flying, conjure a duplicate of it into your hand. The duplicate perpetually gains flying. This ability triggers only once each turn.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | PumpZone$ Hand | KW$ Flying | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Flying\nWhenever you cast a creature spell without flying, conjure a duplicate of it into your hand. The duplicate perpetually gains flying. This ability triggers only once each turn.

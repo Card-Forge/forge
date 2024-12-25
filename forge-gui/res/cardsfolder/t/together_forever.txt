@@ -7,8 +7,8 @@ A:AB$ ChooseCard | Cost$ 1 | ValidTgts$ Creature.HasCounters | TgtPrompt$ Choose
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigReturn | StackDescription$ None | TriggerDescription$ When that creature dies this turn, return that card to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredCard
 SVar:NonStackingEffect:True
-DeckNeeds:Ability$Counters
-DeckHas:Ability$Counters
 SVar:PlayMain1:ALWAYS
 SVar:NeedsToPlay:Creature.YouCtrl
+DeckHas:Ability$Counters
+DeckNeeds:Ability$Counters
 Oracle:When Together Forever enters, support 2. (Put a +1/+1 counter on each of up to two target creatures.)\n{1}: Choose target creature with a counter on it. When that creature dies this turn, return that card to its owner's hand.

@@ -2,6 +2,8 @@ package forge.game.card;
 
 import forge.util.collect.FCollection;
 
+import java.util.function.Predicate;
+
 public class CardCollection extends FCollection<Card> implements CardCollectionView {
     private static final long serialVersionUID = -8133537013727100275L;
 
@@ -121,6 +123,16 @@ public class CardCollection extends FCollection<Card> implements CardCollectionV
     @Override
     public CardCollection subList(final int fromIndex, final int toIndex) {
         return new CardCollection(super.subList(fromIndex, toIndex));
+    }
+
+    /**
+     * Creates a new CardCollection containing the elements from this collection which match
+     * the given predicate.
+     */
+    public CardCollection filter(Predicate<? super Card> test) {
+        CardCollection out = new CardCollection();
+        this.stream().filter(test).forEach(out::add);
+        return out;
     }
 
     /**

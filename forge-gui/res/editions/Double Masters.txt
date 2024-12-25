@@ -4,7 +4,7 @@ Date=2020-08-07
 Name=Double Masters
 Type=Reprint
 BoosterCovers=3
-Booster=8 Common, 3 Uncommon, 2 RareMythic, 2 fromSheet("2XM Foils")
+Booster=8 Common:fromsheet("2XM cards"), 3 Uncommon:fromsheet("2XM cards"), 2 RareMythic:fromsheet("2XM cards"), 2 fromSheet("2XM Foils")
 Foil=NotSupported
 DoublePick=FirstPick
 ChaosDraftThemes=MASTERS_SET
@@ -145,7 +145,7 @@ ScryfallCode=2XM
 132 R Ion Storm @Michael Sutfin
 133 C Kazuul's Toll Collector @Greg Staples
 134 U Kuldotha Flamefiend @Raymond Swanland
-135 C Lightning Axe @Dan Scott
+135 C Lightning Axe @Dan Murayama Scott
 136 M Mana Echoes @Christopher Moeller
 137 C Orcish Vandal @Alex Konstad
 138 U Pyrewild Shaman @Lucas Graciano
@@ -279,7 +279,7 @@ ScryfallCode=2XM
 266 R Kuldotha Forgemaster @jD
 267 U Lightning Greaves @Jeremy Jarvis
 268 R Lux Cannon @Martina Pilcerova
-269 C Magnifying Glass @Dan Scott
+269 C Magnifying Glass @Dan Murayama Scott
 270 M Mana Crypt @Matt Stewart
 271 R Masterwork of Ingenuity @Ulrich Brunin
 272 R Mesmeric Orb @David Martin
@@ -343,6 +343,8 @@ ScryfallCode=2XM
 330 C Urza's Power Plant @Brian Snõddy
 331 C Urza's Tower @Brian Snõddy
 332 R Wooded Bastion @Christopher Moeller
+
+[borderless]
 333 M Karn Liberated @Mark Tedin
 334 M Jace, the Mind Sculptor @Jason Chan
 335 M Avacyn, Angel of Hope @Randy Vargas
@@ -383,6 +385,8 @@ ScryfallCode=2XM
 370 R Urza's Mine @Mark Tedin
 371 R Urza's Power Plant @Mark Tedin
 372 R Urza's Tower @Mark Tedin
+
+[buy a box]
 373 L Plains @John Avon
 374 L Plains @Noah Bradley
 375 L Island @John Avon

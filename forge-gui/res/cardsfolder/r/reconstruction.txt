@@ -3,6 +3,6 @@ ManaCost:U
 Types:Sorcery
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to your hand.
 DeckHas:Ability$Graveyard
-DeckNeeds:Type$Artifact
 DeckHints:Ability$Mill
+DeckNeeds:Type$Artifact
 Oracle:Return target artifact card from your graveyard to your hand.

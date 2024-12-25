@@ -8,6 +8,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerZones
 SVar:TrigInvestigate:DB$ Investigate | Num$ X
 SVar:X:Count$Valid Creature.attacking+nonToken
 K:Friends forever
-DeckHas:Ability$Investigate|Token|Sacrifice
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Investigate|Token|Sacrifice
 Oracle:Menace\nWhenever Chief Jim Hopper attacks, investigate once for each nontoken attacking creature.\nFriends forever (You can have two commanders if both have friends forever.)

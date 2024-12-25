@@ -5,7 +5,7 @@ Name=Khans of Tarkir
 Code2=KTK
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KTK
+Booster=10 Common:fromsheet("KTK cards"), 3 Uncommon:fromsheet("KTK cards"), 1 RareMythic:fromsheet("KTK cards"), 1 BasicLand KTK
 FatPack=9
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=GRAVEYARD_MATTERS
@@ -30,7 +30,7 @@ ScryfallCode=KTK
 16 C Mardu Hateblade @Ryan Alexander Lee
 17 C Mardu Hordechief @Torstein Nordstrand
 18 R Master of Pearls @David Gaillet
-19 C Rush of Battle @Dan Scott
+19 C Rush of Battle @Dan Murayama Scott
 20 C Sage-Eye Harrier @Chase Stone
 21 C Salt Road Patrol @Scott Murphy
 22 U Seeker of the Way @Craig J Spearing
@@ -191,7 +191,7 @@ ScryfallCode=KTK
 177 U Highspire Mantis @Igor Kieryluk
 178 U Icefeather Aven @Slawomir Maniak
 179 R Ivorytusk Fortress @Jasper Sandner
-180 R Jeskai Ascendancy @Dan Scott
+180 R Jeskai Ascendancy @Dan Murayama Scott
 181 U Jeskai Charm @Mathias Kollros
 182 R Kheru Lich Lord @Karl Kopinski
 183 U Kin-Tree Invocation @Ryan Alexander Lee
@@ -306,7 +306,7 @@ ScryfallCode=KTK
 211y R Villainous Wealth @Josu Solano
 218y U Cranial Archive @Igor Krstic
 236y U Mystic Monastery @Josu Solano
-237y C Nomad Outpost @Kamila Szutenberg
+237y U Nomad Outpost @Kamila Szutenberg
 
 [tokens]
 w_3_4_bird_flying

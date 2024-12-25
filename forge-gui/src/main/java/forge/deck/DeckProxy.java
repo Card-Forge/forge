@@ -1,8 +1,5 @@
 package forge.deck;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCostShard;
@@ -20,6 +17,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.BinaryUtil;
 import forge.util.IHasName;
+import forge.util.IterableUtil;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -28,6 +26,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
@@ -362,7 +361,7 @@ public class DeckProxy implements InventoryItem {
     public String getFormatsString() {
         Set<GameFormat> formats = getFormats();
         if (formats.size() > 1)
-            return StringUtils.join(Iterables.transform(formats, GameFormat::getName), ", ");
+            return StringUtils.join(IterableUtil.transform(formats, GameFormat::getName), ", ");
         Object[] formatArray = formats.toArray();
         GameFormat format = (GameFormat)formatArray[0];
         if (format != GameFormat.NoFormat)
@@ -473,7 +472,7 @@ public class DeckProxy implements InventoryItem {
         if (filter == null) {
             filter = DeckFormat.TinyLeaders.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
         } else {
-            filter = Predicates.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)), filter);
+            filter = filter.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)));
         }
         addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getTinyLeaders(), filter);
         return result;
@@ -487,7 +486,7 @@ public class DeckProxy implements InventoryItem {
         if (filter == null) {
             filter = DeckFormat.Brawl.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
         } else {
-            filter = Predicates.and(DeckFormat.Brawl.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)), filter);
+            filter = filter.and(DeckFormat.Brawl.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)));
         }
         addDecksRecursivelly("Brawl", GameType.Brawl, result, "", FModel.getDecks().getBrawl(), filter);
         return result;
@@ -518,7 +517,7 @@ public class DeckProxy implements InventoryItem {
         }
 
         for (final Deck d : folder) {
-            if (filter == null || filter.apply(d)) {
+            if (filter == null || filter.test(d)) {
                 list.add(new DeckProxy(d, deckType, gameType, path, folder, null));
             }
         }
@@ -533,7 +532,7 @@ public class DeckProxy implements InventoryItem {
                 case Sideboard:
                 case Commander:
                     for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                        if (!cardPredicate.apply(poolEntry.getKey())) {
+                        if (!cardPredicate.test(poolEntry.getKey())) {
                             return false; //all cards in deck must pass card predicate to pass deck predicate
                         }
                     }

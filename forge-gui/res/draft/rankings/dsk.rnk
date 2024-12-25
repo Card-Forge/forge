@@ -1,0 +1,287 @@
+//Rank|Name|Rarity|Set
+#1|Overlord of the Mistmoors|M|DSK
+#2|Valgavoth's Onslaught|R|DSK
+#3|Overlord of the Boilerbilges|M|DSK
+#4|Ghostly Dancers|R|DSK
+#5|The Swarmweaver|R|DSK
+#6|Unholy Annex Ritual Chamber|R|DSK
+#7|Dollmaker's Shop Porcelain Gallery|M|DSK
+#8|Overlord of the Floodpits|M|DSK
+#9|Tyvar, the Pummeler|M|DSK
+#10|Overlord of the Balemurk|M|DSK
+#11|Dissection Tools|R|DSK
+#12|Unstoppable Slasher|R|DSK
+#13|Screaming Nemesis|M|DSK
+#14|Entity Tracker|R|DSK
+#15|Toby, Beastie Befriender|R|DSK
+#16|Zimone, All-Questioning|R|DSK
+#17|Midnight Mayhem|U|DSK
+#18|Sheltered by Ghosts|U|DSK
+#19|Enduring Curiosity|R|DSK
+#20|Optimistic Scavenger|U|DSK
+#21|Unnerving Grasp|U|DSK
+#22|The Rollercrusher Ride|M|DSK
+#23|Silent Hallcreeper|R|DSK
+#24|Unidentified Hovership|R|DSK
+#25|Oblivious Bookworm|U|DSK
+#26|Chainsaw|R|DSK
+#27|Enduring Innocence|R|DSK
+#28|Fear of Missing Out|R|DSK
+#29|Broodspinner|U|DSK
+#30|Disturbing Mirth|U|DSK
+#31|Gremlin Tamer|U|DSK
+#32|Under the Skin|U|DSK
+#33|Abhorrent Oculus|M|DSK
+#34|Niko, Light of Hope|M|DSK
+#35|Roaring Furnace Steaming Sauna|R|DSK
+#36|Arabella, Abandoned Doll|U|DSK
+#37|Fear of Isolation|U|DSK
+#38|Wildfire Wickerfolk|U|DSK
+#39|Balustrade Wurm|R|DSK
+#40|Razorkin Hordecaller|U|DSK
+#41|Splitskin Doll|U|DSK
+#42|Stay Hidden, Stay Silent|U|DSK
+#43|The Wandering Rescuer|M|DSK
+#44|Twitching Doll|R|DSK
+#45|Beastie Beatdown|U|DSK
+#46|Floodpits Drowner|U|DSK
+#47|Patchwork Beastie|U|DSK
+#48|Threats Around Every Corner|U|DSK
+#49|Phantasmal Image|M|SPG
+#50|Betrayer's Bargain|U|DSK
+#51|Ethereal Armor|U|DSK
+#52|Growing Dread|U|DSK
+#53|Irreverent Gremlin|U|DSK
+#54|Clockwork Percussionist|C|DSK
+#55|Glimmerburst|C|DSK
+#56|Scorching Dragonfire|C|DSK
+#57|Trapped in the Screen|C|DSK
+#58|Hauntwoods Shrieker|M|DSK
+#59|Kaito, Bane of Nightmares|M|DSK
+#60|Omnivorous Flytrap|R|DSK
+#61|Undead Sprinter|R|DSK
+#62|Bottomless Pool Locker Room|U|DSK
+#63|Drag to the Roots|U|DSK
+#64|Fear of Burning Alive|U|DSK
+#65|Inquisitive Glimmer|U|DSK
+#66|Painter's Studio Defeated Gallery|U|DSK
+#67|Piggy Bank|U|DSK
+#68|Damnation|M|SPG
+#69|Glassworks Shattered Yard|C|DSK
+#70|Glimmerlight|C|DSK
+#71|Spineseeker Centipede|C|DSK
+#72|Turn Inside Out|C|DSK
+#73|Unable to Scream|C|DSK
+#74|Vanish from Sight|C|DSK
+#75|Overlord of the Hauntwoods|M|DSK
+#76|Split Up|R|DSK
+#77|Exorcise|U|DSK
+#78|Fear of Being Hunted|U|DSK
+#79|Glimmer Seeker|U|DSK
+#80|Nowhere to Run|U|DSK
+#81|Shardmage's Rescue|U|DSK
+#82|Surgical Suite Hospital Room|U|DSK
+#83|Vengeful Possession|U|DSK
+#84|Final Vengeance|C|DSK
+#85|Manifest Dread|C|DSK
+#86|Unsettling Twins|C|DSK
+#87|Enduring Vitality|R|DSK
+#88|Reluctant Role Model|R|DSK
+#89|Commune with Evil|U|DSK
+#90|Cursed Windbreaker|U|DSK
+#91|Insidious Fungus|U|DSK
+#92|Paranormal Analyst|U|DSK
+#93|Unholy Heat|M|SPG
+#94|Monstrous Emergence|C|DSK
+#95|Say Its Name|C|DSK
+#96|Seized from Slumber|C|DSK
+#97|Enduring Courage|R|DSK
+#98|Ghost Vacuum|R|DSK
+#99|Razorkin Needlehead|R|DSK
+#100|Waltz of Rage|R|DSK
+#101|Break Down the Door|U|DSK
+#102|Fear of Abduction|U|DSK
+#103|Osseous Sticktwister|U|DSK
+#104|Veteran Survivor|U|DSK
+#105|Fear of Surveillance|C|DSK
+#106|Jump Scare|C|DSK
+#107|Tunnel Surveyor|C|DSK
+#108|Twist Reality|C|DSK
+#109|Wary Watchdog|C|DSK
+#110|Meat Locker Drowned Diner|C|DSK
+#111|Come Back Wrong|R|DSK
+#112|The Mindskinner|R|DSK
+#113|Conductive Machete|U|DSK
+#114|Fear of Falling|U|DSK
+#115|Sawblade Skinripper|U|DSK
+#116|Bashful Beastie|C|DSK
+#117|Don't Make a Sound|C|DSK
+#118|Fear of Immobility|C|DSK
+#119|Friendly Ghost|C|DSK
+#120|Innocuous Rat|C|DSK
+#121|Murder|C|DSK
+#122|Terramorphic Expanse|C|DSK
+#123|Ticket Booth Tunnel of Hate|C|DSK
+#124|Funeral Room Awakening Hall|M|DSK
+#125|Mirror Room Fractured Realm|M|DSK
+#126|Valgavoth, Terror Eater|M|DSK
+#127|Floodfarm Verge|R|DSK
+#128|Restricted Office Lecture Hall|R|DSK
+#129|Coordinated Clobbering|U|DSK
+#130|Defiant Survivor|U|DSK
+#131|Duskmourn's Domination|U|DSK
+#132|Get Out|U|DSK
+#133|Lionheart Glimmer|U|DSK
+#134|Live or Die|U|DSK
+#135|Overgrown Zealot|U|DSK
+#136|Rootwise Survivor|U|DSK
+#137|Sporogenic Infection|U|DSK
+#138|Wickerfolk Thresher|U|DSK
+#139|Lakeside Shack|C|DSK
+#140|Fanatic of the Harrowing|C|DSK
+#141|Grand Entryway Elegant Rotunda|C|DSK
+#142|Hand That Feeds|C|DSK
+#143|Most Valuable Slayer|C|DSK
+#144|Ragged Playmate|C|DSK
+#145|Winter's Intervention|C|DSK
+#146|Underwater Tunnel Slimy Aquarium|C|DSK
+#147|Cynical Loner|U|DSK
+#148|Let's Play a Game|U|DSK
+#149|Norin, Swift Survivalist|U|DSK
+#150|Shroudstomper|U|DSK
+#151|Vile Mutilator|U|DSK
+#152|Withering Torment|U|DSK
+#153|Abandoned Campground|C|DSK
+#154|Flesh Burrower|C|DSK
+#155|Found Footage|C|DSK
+#156|Impossible Inferno|C|DSK
+#157|Moldering Gym Weight Room|C|DSK
+#158|Piranha Fly|C|DSK
+#159|Slavering Branchsnapper|C|DSK
+#160|Stalked Researcher|C|DSK
+#161|Vicious Clown|C|DSK
+#162|Blazemire Verge|R|DSK
+#163|Gloomlake Verge|R|DSK
+#164|Rip, Spawn Hunter|R|DSK
+#165|The Jolly Balloon Man|R|DSK
+#166|Thornspire Verge|R|DSK
+#167|Altanak, the Thrice-Called|U|DSK
+#168|Cathartic Parting|U|DSK
+#169|House Cartographer|U|DSK
+#170|Patched Plaything|U|DSK
+#171|Popular Egotist|U|DSK
+#172|Rite of the Moth|U|DSK
+#173|Valgavoth's Faithful|U|DSK
+#174|Raucous Carnival|C|DSK
+#175|Hallowed Haunting|M|SPG
+#176|Emerge from the Cocoon|C|DSK
+#177|Fear of Lost Teeth|C|DSK
+#178|Grasping Longneck|C|DSK
+#179|Hushwood Verge|R|DSK
+#180|Peer Past the Veil|R|DSK
+#181|Defiled Crypt Cadaver Lab|U|DSK
+#182|Fear of Impostors|U|DSK
+#183|Fear of Infinity|U|DSK
+#184|Orphans of the Wheat|U|DSK
+#185|Smoky Lounge Misty Salon|U|DSK
+#186|Trial of Agony|U|DSK
+#187|Untimely Malfunction|U|DSK
+#188|Unwilling Vessel|U|DSK
+#189|Bleeding Woods|C|DSK
+#190|Murky Sewer|C|DSK
+#191|Strangled Cemetery|C|DSK
+#192|Acrobatic Cheerleader|C|DSK
+#193|Cult Healer|C|DSK
+#194|Frantic Strength|C|DSK
+#195|Grab the Prize|C|DSK
+#196|Hardened Escort|C|DSK
+#197|Horrid Vigor|C|DSK
+#198|Ripchain Razorkin|C|DSK
+#199|Hedge Shredder|R|DSK
+#200|Valgavoth's Lair|R|DSK
+#201|Diversion Specialist|U|DSK
+#202|Ghostly Keybearer|U|DSK
+#203|Intruding Soulrager|U|DSK
+#204|Miasma Demon|U|DSK
+#205|Saw|U|DSK
+#206|Violent Urge|U|DSK
+#207|Peculiar Lighthouse|C|DSK
+#208|Razortrap Gorge|C|DSK
+#209|Boilerbilges Ripper|C|DSK
+#210|Cautious Survivor|C|DSK
+#211|Cryptid Inspector|C|DSK
+#212|Daggermaw Megalodon|C|DSK
+#213|Erratic Apparition|C|DSK
+#214|Spectral Snatcher|C|DSK
+#215|Nashi, Searcher in the Dark|R|DSK
+#216|Fear of Exposure|U|DSK
+#217|Neglected Manor|C|DSK
+#218|Collected Company|M|SPG
+#219|Derelict Attic Widow's Walk|C|DSK
+#220|Possessed Goat|C|DSK
+#221|Central Elevator Promising Stairs|R|DSK
+#222|Dashing Bloodsucker|U|DSK
+#223|Skullsnap Nuisance|U|DSK
+#224|Etched Cornfield|C|DSK
+#225|Appendage Amalgam|C|DSK
+#226|Clammy Prowler|C|DSK
+#227|Cracked Skull|C|DSK
+#228|Creeping Peeper|C|DSK
+#229|Friendly Teddy|C|DSK
+#230|Resurrected Cultist|C|DSK
+#231|Shepherding Spirits|C|DSK
+#232|Enduring Tenacity|R|DSK
+#233|Haunted Screen|U|DSK
+#234|Infernal Phantom|U|DSK
+#235|Pyroclasm|U|DSK
+#236|Bear Trap|C|DSK
+#237|Enter the Enigma|C|DSK
+#238|Living Phone|C|DSK
+#239|Malevolent Chandelier|C|DSK
+#240|Killer's Mask|U|DSK
+#241|Scrabbling Skullcrab|U|DSK
+#242|Bedhead Beastie|C|DSK
+#243|Fear of the Dark|C|DSK
+#244|Give In to Violence|C|DSK
+#245|Baseball Bat|U|DSK
+#246|Fear of Failed Tests|U|DSK
+#247|Keys to the House|U|DSK
+#248|Savior of the Small|U|DSK
+#249|Shrewd Storyteller|U|DSK
+#250|Anthropede|C|DSK
+#251|Balemurk Leech|C|DSK
+#252|Marvin, Murderous Mimic|R|DSK
+#253|Victor, Valgavoth's Seneschal|R|DSK
+#254|Cackling Slasher|C|DSK
+#255|Rampaging Soulrager|C|DSK
+#256|Charred Foyer Warped Space|M|DSK
+#257|Meathook Massacre II|M|DSK
+#258|Walk-In Closet Forgotten Cellar|M|DSK
+#259|Cursed Recording|R|DSK
+#260|Dazzling Theater Prop Room|R|DSK
+#261|Demonic Counsel|R|DSK
+#262|Doomsday Excruciator|R|DSK
+#263|Grievous Wound|R|DSK
+#264|Kona, Rescue Beastie|R|DSK
+#265|Marina Vendrell|R|DSK
+#266|Winter, Misanthropic Guide|R|DSK
+#267|Attack-in-the-Box|U|DSK
+#268|Greenhouse Rickety Gazebo|U|DSK
+#269|Unwanted Remake|U|DSK
+#270|Leyline of Hope|R|DSK
+#271|Leyline of Mutation|R|DSK
+#272|Leyline of Resonance|R|DSK
+#273|Leyline of the Void|R|DSK
+#274|Leyline of Transformation|R|DSK
+#275|Marina Vendrell's Grimoire|R|DSK
+#276|The Tale of Tamiyo|R|DSK
+#277|Noxious Revival|M|SPG
+#278|Maddening Hex|M|SPG
+#279|Sacrifice|M|SPG
+#280|Expropriate|M|SPG
+#281|Soul Warden|M|SPG
+#282|Forest|C|DSK
+#283|Mountain|C|DSK
+#284|Swamp|C|DSK
+#285|Island|C|DSK
+#286|Plains|C|DSK

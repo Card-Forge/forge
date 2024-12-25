@@ -1,0 +1,9 @@
+Name:Aminatou, Veil Piercer
+ManaCost:1 W U B
+Types:Legendary Creature Human Wizard
+PT:2/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+S:Mode$ Continuous | Affected$ Card.Enchantment+YouOwn | AffectedZone$ Hand | AddKeyword$ Miracle:ManaCost:4 | Description$ Each enchantment card in your hand has miracle. Its miracle cost is equal to its mana cost reduced by {4}. (You may cast a card for its miracle cost when you draw it if it's the first card you drew this turn.)
+DeckHints:Ability$Graveyard & Type$Enchantment
+Oracle:At the beginning of your upkeep, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nEach enchantment card in your hand has miracle. Its miracle cost is equal to its mana cost reduced by {4}. (You may cast a card for its miracle cost when you draw it if it's the first card you drew this turn.)

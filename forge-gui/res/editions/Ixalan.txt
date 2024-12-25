@@ -46,7 +46,7 @@ ScryfallCode=XLN
 33 R Sanguine Sacrament @Bastien L. Deharme
 34 R Settle the Wreckage @Dimitar Marinski
 35 U Sheltering Light @Gabor Szikszai
-36 C Shining Aerosaur @Dan Scott
+36 C Shining Aerosaur @Dan Murayama Scott
 37 C Skyblade of the Legion @Daarken
 38 C Slash of Talons @Magali Villeneuve
 39 U Steadfast Armasaur @Greg Opalinski
@@ -120,7 +120,7 @@ ScryfallCode=XLN
 107 C Fathom Fleet Cutthroat @Josu Hernaiz
 108 U Grim Captain's Call @Winona Nelson
 109 U Heartless Pillage @Sara Winters
-110 U Kitesail Freebooter @Dan Scott
+110 U Kitesail Freebooter @Dan Murayama Scott
 111 U Lurking Chupacabra @YW Tang
 112 C March of the Drowned @Ben Wootten
 113 C Mark of the Vampire @Yongjae Choi
@@ -166,7 +166,7 @@ ScryfallCode=XLN
 153 U Otepec Huntmaster @Daarken
 154 R Rampaging Ferocidon @Jonathan Kuo
 155 U Raptor Hatchling @Even Amundsen
-156 R Repeating Barrage @Dan Scott
+156 R Repeating Barrage @Dan Murayama Scott
 157 U Rigging Runner @Simon Dominic
 158 C Rile @Igor Kieryluk
 159 M Rowdy Crew @Steve Prescott
@@ -218,7 +218,7 @@ ScryfallCode=XLN
 205 U Savage Stomp @Wayne Reynolds
 206 R Shapers' Sanctuary @Zezhou Chen
 207 U Slice in Twain @Even Amundsen
-208 U Snapping Sailback @Dan Scott
+208 U Snapping Sailback @Dan Murayama Scott
 209 C Spike-Tailed Ceratops @Lius Lasahido
 210 U Thundering Spineback @Tomasz Jedruszek
 211 C Tishana's Wayfinder @Shreya Shetty
@@ -228,7 +228,7 @@ ScryfallCode=XLN
 215 R Waker of the Wilds @Shreya Shetty
 216 U Wildgrowth Walker @Ryan Alexander Lee
 217 M Admiral Beckett Brass @Jason Rainville
-218 U Belligerent Brontodon @Dan Scott
+218 U Belligerent Brontodon @Dan Murayama Scott
 219 U Call to the Feast @Yongjae Choi
 220 U Deadeye Plunderers @Greg Opalinski
 221 U Dire Fleet Captain @Yongjae Choi

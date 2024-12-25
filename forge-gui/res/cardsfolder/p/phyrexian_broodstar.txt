@@ -1,0 +1,12 @@
+Name:Phyrexian Broodstar
+ManaCost:6 U U
+Types:Creature Phyrexian Beast
+PT:*/*
+K:Affinity:Phyrexian
+K:Flying
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Phyrexians you control.
+SVar:X:Count$Valid Phyrexian.YouCtrl
+SVar:NoZeroToughnessAI:True
+SVar:BuffedBy:Phyrexian
+DeckNeeds:Type$Phyrexian
+Oracle:Affinity for Phyrexians (This spell costs {1} less to cast for each Phyrexian you control.)\nFlying\nPhyrexian Broodstar's power and toughness are each equal to the number of Phyrexians you control.

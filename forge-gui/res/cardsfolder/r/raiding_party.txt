@@ -9,7 +9,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Plains.IsNotImprinted | SubAbility$ DBCleanImp | AILogic$ RaidingParty | StackDescription$ None
 SVar:DBCleanImp:DB$ Cleanup | ClearImprinted$ True
 SVar:TappedXTwo:Count$Valid Creature.IsRemembered/Times.2
-AI:RemoveDeck:Random
 SVar:NeedsToPlay:Plains.OppCtrl
+AI:RemoveDeck:Random
 DeckNeeds:Type$Orc
 Oracle:Raiding Party can't be the target of white spells or abilities from white sources.\nSacrifice an Orc: Each player may tap any number of untapped white creatures they control. For each creature tapped this way, that player chooses up to two Plains. Then destroy all Plains that weren't chosen this way by any player.

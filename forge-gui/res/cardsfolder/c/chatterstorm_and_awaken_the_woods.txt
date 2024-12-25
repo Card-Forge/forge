@@ -1,0 +1,7 @@
+Name:Chatterstorm and Awaken the Woods
+ManaCost:1 G
+Types:Sorcery
+K:Storm
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_forest_dryad_squirrel | TokenOwner$ You | SpellDescription$ Create a 1/1 green Forest Dryad Squirrel land creature token.
+DeckHas:Ability$Token
+Oracle:Create a 1/1 green Forest Dryad Squirrel land creature token. (It's affected by summoning sickness.)\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)

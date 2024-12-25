@@ -17,8 +17,6 @@
  */
 package forge.gamemodes.match.input;
 
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -33,6 +31,8 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
+
+import java.util.List;
 
 /**
  * <p>

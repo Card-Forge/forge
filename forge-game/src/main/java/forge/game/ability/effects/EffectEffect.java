@@ -5,7 +5,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
@@ -26,6 +25,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
@@ -88,7 +88,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("ForgetCounter")) {
                 CounterType cType = CounterType.getType(sa.getParam("ForgetCounter"));
-                rememberList = new FCollection<>(CardLists.filter(Iterables.filter(rememberList, Card.class), CardPredicates.hasCounter(cType)));
+                rememberList = new FCollection<>(CardLists.filter(IterableUtil.filter(rememberList, Card.class), CardPredicates.hasCounter(cType)));
             }
 
             // don't create Effect if there is no remembered Objects
@@ -245,6 +245,14 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
             } else if (sa.hasParam("ForgetOnCast")) {
                 addForgetOnCastTrigger(eff, sa.getParam("ForgetOnCast"));
+            }
+
+            if (sa.hasParam("ExileOnLost")) {
+                addExileOnLostTrigger(eff);
+            }
+
+            if (sa.hasParam("ExileOnCounter")) {
+                addExileCounterTrigger(eff, sa.getParam("ExileOnCounter"));
             }
 
             // Set Imprinted

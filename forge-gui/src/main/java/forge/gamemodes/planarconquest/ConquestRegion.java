@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import java.util.function.Predicate;
 
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
@@ -14,6 +12,7 @@ import forge.deck.generation.DeckGenPool;
 import forge.game.card.Card;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
 import forge.util.collect.FCollection;
@@ -107,7 +106,7 @@ public class ConquestRegion {
             String name = null;
             String artCardName = null;
             ColorSet colorSet = ColorSet.ALL_COLORS;
-            Predicate<PaperCard> pred = Predicates.alwaysTrue();
+            Predicate<PaperCard> pred = x -> true;
 
             String key, value;
             String[] pieces = line.split("\\|");
@@ -131,7 +130,7 @@ public class ConquestRegion {
                     break;
                 case "colors":
                     colorSet = ColorSet.fromNames(value.toCharArray());
-                    pred = Predicates.compose(CardRulesPredicates.hasColorIdentity(colorSet.getColor()), PaperCard::getRules);
+                    pred = PaperCardPredicates.fromRules(CardRulesPredicates.hasColorIdentity(colorSet.getColor()));
                     break;
                 case "sets":
                     final String[] sets = value.split(",");
@@ -159,7 +158,7 @@ public class ConquestRegion {
     static void addCard(PaperCard pc, Iterable<ConquestRegion> regions) {
         boolean foundRegion = false;
         for (ConquestRegion region : regions) {
-            if (region.pred.apply(pc)) {
+            if (region.pred.test(pc)) {
                 region.cardPool.add(pc);
                 foundRegion = true;
             }

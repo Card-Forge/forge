@@ -1,0 +1,7 @@
+Name:Dauntless Veteran
+ManaCost:1 W W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1
+Oracle:Whenever this creature attacks, creatures you control get +1/+1 until end of turn.

@@ -16,7 +16,6 @@ public class RunChaosEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-
         List<SpellAbility> validSA = Lists.newArrayList();
         for (final Card c : getTargetCards(sa)) {
             for (Trigger t : c.getTriggers()) {

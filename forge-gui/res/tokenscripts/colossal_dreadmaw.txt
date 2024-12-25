@@ -1,0 +1,7 @@
+Name:Colossal Dreadmaw
+ManaCost:no cost
+Colors:green
+Types:Creature Dinosaur
+PT:6/6
+K:Trample
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

@@ -13,254 +13,254 @@ ScryfallCode=SOM
 
 [cards]
 1 U Abuna Acolyte @Igor Kieryluk
-136 C Accorder's Shield @Alan Pollack
+2 C Arrest @Daarken
+3 U Auriok Edgewright @Mike Bierek
+4 C Auriok Sunchaser @James Ryman
+5 U Dispense Justice @Austin Hsu
+6 M Elspeth Tirel @Michael Komarck
+7 C Fulgent Distraction @Nic Klein
+8 C Ghalma's Warden @Mike Bierek
+9 U Glimmerpoint Stag @Ryan Pancoast
+10 C Glint Hawk @Dave Allsop
+11 M Indomitable Archangel @Allen Williams
+12 R Kemba, Kha Regent @Todd Lockwood
+13 C Kemba's Skyguard @Whit Brachna
+14 R Leonin Arbiter @Shelly Wan
+15 C Loxodon Wayfarer @Steven Belledin
+16 U Myrsmith @Eric Deschamps
+17 U Razor Hippogriff @David Rapoza
+18 C Revoke Existence @Allen Williams
+19 C Salvage Scout @Randis Albion
+20 C Seize the Initiative @Steve Argyle
+21 C Soul Parry @Igor Kieryluk
+22 R Sunblast Angel @Jason Chan
+23 C Sunspear Shikari @Allen Williams
+24 R Tempered Steel @Wayne Reynolds
+25 R True Conviction @Svetlin Velinov
+26 U Vigil for the Lost @Igor Kieryluk
+27 C Whitesun's Passage @John Avon
+28 R Argent Sphinx @Chris Rahn
+29 C Bonds of Quicksilver @Steven Belledin
+30 U Darkslick Drake @Chippy
+31 C Disperse @Adrian Smith
+32 R Dissipation Field @Matt Cavotta
+33 R Grand Architect @Steven Belledin
+34 U Halt Order @Izzy
+35 R Inexorable Tide @Dave Kendall
+36 C Lumengrid Drake @Johann Bodin
+37 C Neurok Invisimancer @Izzy
+38 C Plated Seastrider @Izzy
+39 M Quicksilver Gargantuan @Steven Belledin
+40 U Riddlesmith @Eric Deschamps
+41 C Scrapdiver Serpent @Adrian Smith
+42 C Screeching Silcaw @Mike Bierek
+43 R Shape Anew @Zoltan Boros & Gabor Szikszai
+44 C Sky-Eel School @Daniel Ljunggren
+45 C Steady Progress @Efrem Palacios
+46 C Stoic Rebuttal @Chris Rahn
+47 U Thrummingbird @Efrem Palacios
+48 U Trinket Mage @Scott Chou
+49 C Turn Aside @Shelly Wan
+50 U Twisted Image @Izzy
+51 C Vault Skyward @Dan Murayama Scott
+52 C Vedalken Certarch @Karl Kopinski
+53 U Volition Reins @Svetlin Velinov
+54 C Blackcleave Goblin @Nils Hamm
+55 C Bleak Coven Vampires @Randis Albion
+56 C Blistergrub @Daarken
+57 R Carnifex Demon @Aleksi Briclot
+58 C Contagious Nim @Efrem Palacios
+59 U Corrupted Harvester @Nils Hamm
+60 C Dross Hopper @Dave Allsop
+61 U Exsanguinate @Carl Critchlow
+62 U Flesh Allergy @Vance Kovacs
+63 C Fume Spitter @Nils Hamm
+64 M Geth, Lord of the Vault @Whit Brachna
+65 C Grasp of Darkness @Johann Bodin
+66 R Hand of the Praetors @Izzy
+67 U Ichor Rats @Matt Stewart
+68 C Instill Infection @Chris Rahn
+69 R Memoricide @James Ryman
+70 C Moriok Reaver @Marc Simonetti
+71 U Necrogen Scudder @Raymond Swanland
+72 R Necrotic Ooze @James Ryman
+73 R Painful Quandary @Whit Brachna
+74 U Painsmith @Eric Deschamps
+75 C Plague Stinger @Ryan Pancoast
+76 C Psychic Miasma @Svetlin Velinov
+77 C Relic Putrescence @Allen Williams
+78 U Skinrender @David Rapoza
+79 M Skithiryx, the Blight Dragon @Chippy
+80 C Tainted Strike @James Ryman
+81 U Arc Trail @Marc Simonetti
+82 C Assault Strobe @Kev Walker
+83 U Barrage Ogre @David Rapoza
+84 C Blade-Tribe Berserkers @Kev Walker
+85 U Bloodshot Trainee @Matt Stewart
+86 R Cerebral Eruption @Kev Walker
+87 U Embersmith @Eric Deschamps
+88 C Ferrovore @Austin Hsu
+89 C Flameborn Hellion @Aleksi Briclot
+90 U Furnace Celebration @Svetlin Velinov
+91 C Galvanic Blast @Marc Simonetti
+92 C Goblin Gaveleer @Svetlin Velinov
+93 R Hoard-Smelter Dragon @Eric Deschamps
+94 M Koth of the Hammer @Jason Chan
+95 R Kuldotha Phoenix @Mike Bierek
+96 C Kuldotha Rebirth @Goran Josic
+97 C Melt Terrain @John Avon
+98 R Molten Psyche @Ryan Yee
+99 U Ogre Geargrabber @David Rapoza
+100 C Oxidda Daredevil @Pete Venters
+101 U Oxidda Scrapmelter @Igor Kieryluk
+102 C Scoria Elemental @Karl Kopinski
+103 C Shatter @jD
+104 R Spikeshot Elder @Izzy
+105 R Tunnel Ignus @Scott Chou
+106 C Turn to Slag @Zoltan Boros & Gabor Szikszai
+107 C Vulshok Heartstoker @Shelly Wan
 108 U Acid Web Spider @Austin Hsu
 109 C Alpha Tyrranax @Dave Kendall
-81 U Arc Trail @Marc Simonetti
-28 R Argent Sphinx @Chris Rahn
-137 R Argentum Armor @Matt Cavotta
-2 C Arrest @Daarken
 110 R Asceticism @Daarken
-82 C Assault Strobe @Kev Walker
-3 U Auriok Edgewright @Mike Bierek
-138 C Auriok Replica @Zoltan Boros & Gabor Szikszai
-4 C Auriok Sunchaser @James Ryman
-139 U Barbed Battlegear @Steve Argyle
-83 U Barrage Ogre @David Rapoza
 111 U Bellowing Tanglewurm @jD
-224 R Blackcleave Cliffs @Dave Kendall
-54 C Blackcleave Goblin @Nils Hamm
-84 C Blade-Tribe Berserkers @Kev Walker
-140 C Bladed Pinions @Steve Argyle
-55 C Bleak Coven Vampires @Randis Albion
 112 C Blight Mamba @Drew Baker
-56 C Blistergrub @Daarken
-85 U Bloodshot Trainee @Matt Stewart
 113 C Blunt the Assault @Matt Stewart
-29 C Bonds of Quicksilver @Steven Belledin
 114 C Carapace Forger @Matt Cavotta
-57 R Carnifex Demon @Aleksi Briclot
 115 U Carrion Call @Adrian Smith
-86 R Cerebral Eruption @Kev Walker
+116 C Copperhorn Scout @Shelly Wan
+117 C Cystbearer @Kev Walker
+118 R Engulfing Slagwurm @Jaime Jones
+119 R Ezuri, Renegade Leader @Karl Kopinski
+120 C Ezuri's Archers @Shelly Wan
+121 R Ezuri's Brigade @Nic Klein
+122 R Genesis Wave @James Paick
+123 M Liege of the Tangle @Jason Chan
+124 U Lifesmith @Eric Deschamps
+125 C Molder Beast @Randis Albion
+126 R Putrefax @Steven Belledin
+127 U Slice in Twain @Efrem Palacios
+128 U Tangle Angler @Igor Kieryluk
+129 C Tel-Jilad Defiance @Goran Josic
+130 C Tel-Jilad Fallen @James Ryman
+131 C Untamed Might @Erica Yang
+132 U Viridian Revel @rk post
+133 C Wing Puncture @jD
+134 C Withstand Death @Tomasz Jedruszek
+135 M Venser, the Sojourner @Eric Deschamps
+136 C Accorder's Shield @Alan Pollack
+137 R Argentum Armor @Matt Cavotta
+138 C Auriok Replica @Zoltan Boros & Gabor Szikszai
+139 U Barbed Battlegear @Steve Argyle
+140 C Bladed Pinions @Steve Argyle
 141 R Chimeric Mass @David Palumbo
 142 C Chrome Steed @Jana Schirmer & Johannes Voss
 143 U Clone Shell @Volkan Baǵa
 144 U Contagion Clasp @Anthony Palumbo
 145 R Contagion Engine @Daarken
-58 C Contagious Nim @Efrem Palacios
 146 C Copper Myr @Alan Pollack
-116 C Copperhorn Scout @Shelly Wan
-225 R Copperline Gorge @Zoltan Boros & Gabor Szikszai
 147 C Corpse Cur @Pete Venters
-59 U Corrupted Harvester @Nils Hamm
 148 U Culling Dais @Anthony Palumbo
-117 C Cystbearer @Kev Walker
-30 U Darkslick Drake @Chippy
-226 R Darkslick Shores @Charles Urbach
 149 U Darksteel Axe @Daniel Ljunggren
 150 R Darksteel Juggernaut @Randis Albion
 151 U Darksteel Myr @Randis Albion
 152 U Darksteel Sentinel @Erica Yang
-5 U Dispense Justice @Austin Hsu
-31 C Disperse @Adrian Smith
-32 R Dissipation Field @Matt Cavotta
-60 C Dross Hopper @Dave Allsop
 153 C Echo Circlet @Daarken
-6 M Elspeth Tirel @Michael Komarck
-87 U Embersmith @Eric Deschamps
-118 R Engulfing Slagwurm @Jaime Jones
 154 R Etched Champion @Matt Cavotta
-61 U Exsanguinate @Carl Critchlow
-120 C Ezuri's Archers @Shelly Wan
-121 R Ezuri's Brigade @Nic Klein
-119 R Ezuri, Renegade Leader @Karl Kopinski
-88 C Ferrovore @Austin Hsu
-89 C Flameborn Hellion @Aleksi Briclot
-62 U Flesh Allergy @Vance Kovacs
 155 C Flight Spellbomb @Franz Vohwinkel
-246 L Forest @Mark Tedin
-247 L Forest @Mark Tedin
-248 L Forest @Mark Tedin
-249 L Forest @Mark Tedin
-7 C Fulgent Distraction @Nic Klein
-63 C Fume Spitter @Nils Hamm
-90 U Furnace Celebration @Svetlin Velinov
-91 C Galvanic Blast @Marc Simonetti
-122 R Genesis Wave @James Paick
-64 M Geth, Lord of the Vault @Whit Brachna
-8 C Ghalma's Warden @Mike Bierek
-9 U Glimmerpoint Stag @Ryan Pancoast
-227 C Glimmerpost @Matt Cavotta
-10 C Glint Hawk @Dave Allsop
 156 C Glint Hawk Idol @Dave Allsop
-92 C Goblin Gaveleer @Svetlin Velinov
 157 C Gold Myr @Alan Pollack
 158 C Golden Urn @Charles Urbach
 159 U Golem Artisan @Nic Klein
 160 C Golem Foundry @Nic Klein
 161 U Golem's Heart @Matt Cavotta
 162 U Grafted Exoskeleton @Allen Williams
-33 R Grand Architect @Steven Belledin
-65 C Grasp of Darkness @Johann Bodin
 163 R Grindclock @Nils Hamm
-34 U Halt Order @Izzy
-66 R Hand of the Praetors @Izzy
 164 U Heavy Arbalest @David Rapoza
-93 R Hoard-Smelter Dragon @Eric Deschamps
 165 C Horizon Spellbomb @Franz Vohwinkel
-67 U Ichor Rats @Matt Stewart
 166 C Ichorclaw Myr @Eric Deschamps
-11 M Indomitable Archangel @Allen Williams
-35 R Inexorable Tide @Dave Kendall
 167 U Infiltration Lens @Izzy
-68 C Instill Infection @Chris Rahn
 168 C Iron Myr @Alan Pollack
-234 L Island @Jung Park
-235 L Island @Jung Park
-236 L Island @Jung Park
-237 L Island @Jung Park
-13 C Kemba's Skyguard @Whit Brachna
-12 R Kemba, Kha Regent @Todd Lockwood
-94 M Koth of the Hammer @Jason Chan
 169 R Kuldotha Forgemaster @jD
-95 R Kuldotha Phoenix @Mike Bierek
-96 C Kuldotha Rebirth @Goran Josic
 170 C Leaden Myr @Alan Pollack
-14 R Leonin Arbiter @Shelly Wan
-123 M Liege of the Tangle @Jason Chan
-124 U Lifesmith @Eric Deschamps
 171 U Liquimetal Coating @Johann Bodin
 172 R Livewire Lash @Daniel Ljunggren
-15 C Loxodon Wayfarer @Steven Belledin
-36 C Lumengrid Drake @Johann Bodin
 173 M Lux Cannon @Martina Pilcerova
-97 C Melt Terrain @John Avon
 174 U Memnite @Svetlin Velinov
-69 R Memoricide @James Ryman
 175 R Mimic Vat @Matt Cavotta
 176 M Mindslaver @Volkan Baǵa
-125 C Molder Beast @Randis Albion
-98 R Molten Psyche @Ryan Yee
 177 M Molten-Tail Masticore @Whit Brachna
-70 C Moriok Reaver @Marc Simonetti
 178 C Moriok Replica @Zoltan Boros & Gabor Szikszai
-242 L Mountain @Tomasz Jedruszek
-243 L Mountain @Tomasz Jedruszek
-244 L Mountain @Tomasz Jedruszek
-245 L Mountain @Tomasz Jedruszek
 179 M Mox Opal @Volkan Baǵa
 180 R Myr Battlesphere @Franz Vohwinkel
 181 U Myr Galvanizer @Greg Staples
 182 R Myr Propagator @Ryan Pancoast
 183 R Myr Reservoir @Jung Park
-16 U Myrsmith @Eric Deschamps
 184 C Necrogen Censer @Pete Venters
-71 U Necrogen Scudder @Raymond Swanland
 185 U Necropede @Nic Klein
-72 R Necrotic Ooze @James Ryman
-37 C Neurok Invisimancer @Izzy
 186 C Neurok Replica @Zoltan Boros & Gabor Szikszai
 187 C Nihil Spellbomb @Franz Vohwinkel
 188 R Nim Deathmantle @Karl Kopinski
-99 U Ogre Geargrabber @David Rapoza
 189 C Origin Spellbomb @Franz Vohwinkel
-100 C Oxidda Daredevil @Pete Venters
-101 U Oxidda Scrapmelter @Igor Kieryluk
-73 R Painful Quandary @Whit Brachna
-74 U Painsmith @Eric Deschamps
 190 U Palladium Myr @Alan Pollack
 191 C Panic Spellbomb @Franz Vohwinkel
 192 C Perilous Myr @Jason Felix
-75 C Plague Stinger @Ryan Pancoast
-230 L Plains @James Paick
-231 L Plains @James Paick
-232 L Plains @James Paick
-233 L Plains @James Paick
-38 C Plated Seastrider @Izzy
 193 M Platinum Emperion @Chris Rahn
 194 R Precursor Golem @Chippy
 195 R Prototype Portal @Drew Baker
-76 C Psychic Miasma @Svetlin Velinov
-126 R Putrefax @Steven Belledin
-39 M Quicksilver Gargantuan @Steven Belledin
 196 R Ratchet Bomb @Austin Hsu
-17 U Razor Hippogriff @David Rapoza
 197 C Razorfield Thresher @Karl Kopinski
-228 R Razorverge Thicket @James Paick
-77 C Relic Putrescence @Allen Williams
-18 C Revoke Existence @Allen Williams
-40 U Riddlesmith @Eric Deschamps
 198 U Rust Tick @Carl Critchlow
 199 U Rusted Relic @Igor Kieryluk
 200 C Saberclaw Golem @Mike Bierek
-19 C Salvage Scout @Randis Albion
-102 C Scoria Elemental @Karl Kopinski
-41 C Scrapdiver Serpent @Adrian Smith
-42 C Screeching Silcaw @Mike Bierek
-229 R Seachrome Coast @Lars Grant-West
-20 C Seize the Initiative @Steve Argyle
-201 R Semblance Anvil @Dan Scott
-43 R Shape Anew @Zoltan Boros & Gabor Szikszai
-103 C Shatter @jD
+201 R Semblance Anvil @Dan Murayama Scott
 202 C Silver Myr @Alan Pollack
-78 U Skinrender @David Rapoza
-79 M Skithiryx, the Blight Dragon @Chippy
-44 C Sky-Eel School @Daniel Ljunggren
-127 U Slice in Twain @Efrem Palacios
 203 C Snapsail Glider @Efrem Palacios
 204 C Soliton @Jason Felix
-21 C Soul Parry @Igor Kieryluk
-104 R Spikeshot Elder @Izzy
-45 C Steady Progress @Efrem Palacios
 205 R Steel Hellkite @James Paick
-46 C Stoic Rebuttal @Chris Rahn
 206 R Strata Scythe @Scott Chou
 207 C Strider Harness @Matt Stewart
-22 R Sunblast Angel @Jason Chan
-23 C Sunspear Shikari @Allen Williams
-238 L Swamp @Lars Grant-West
-239 L Swamp @Lars Grant-West
-240 L Swamp @Lars Grant-West
-241 L Swamp @Lars Grant-West
 208 M Sword of Body and Mind @Chris Rahn
 209 C Sylvok Lifestaff @Martina Pilcerova
 210 C Sylvok Replica @Zoltan Boros & Gabor Szikszai
-80 C Tainted Strike @James Ryman
-128 U Tangle Angler @Igor Kieryluk
-129 C Tel-Jilad Defiance @Goran Josic
-130 C Tel-Jilad Fallen @James Ryman
-24 R Tempered Steel @Wayne Reynolds
 211 U Throne of Geth @Jana Schirmer & Johannes Voss
-47 U Thrummingbird @Efrem Palacios
 212 R Tower of Calamities @Aleksi Briclot
 213 U Trigon of Corruption @Nils Hamm
 214 U Trigon of Infestation @Dave Allsop
 215 U Trigon of Mending @Igor Kieryluk
 216 U Trigon of Rage @Marc Simonetti
 217 U Trigon of Thought @Mike Bierek
-48 U Trinket Mage @Scott Chou
-25 R True Conviction @Svetlin Velinov
 218 C Tumble Magnet @Drew Baker
-105 R Tunnel Ignus @Scott Chou
-49 C Turn Aside @Shelly Wan
-106 C Turn to Slag @Zoltan Boros & Gabor Szikszai
-50 U Twisted Image @Izzy
-131 C Untamed Might @Erica Yang
-51 C Vault Skyward @Dan Scott
 219 C Vector Asp @Erica Yang
-52 C Vedalken Certarch @Karl Kopinski
 220 R Venser's Journal @Christopher Moeller
-135 M Venser, the Sojourner @Eric Deschamps
-26 U Vigil for the Lost @Igor Kieryluk
-132 U Viridian Revel @rk post
-53 U Volition Reins @Svetlin Velinov
-107 C Vulshok Heartstoker @Shelly Wan
 221 C Vulshok Replica @Zoltan Boros & Gabor Szikszai
 222 C Wall of Tanglecord @Vance Kovacs
-27 C Whitesun's Passage @John Avon
-133 C Wing Puncture @jD
-134 C Withstand Death @Tomasz Jedruszek
 223 M Wurmcoil Engine @Raymond Swanland
+224 R Blackcleave Cliffs @Dave Kendall
+225 R Copperline Gorge @Zoltan Boros & Gabor Szikszai
+226 R Darkslick Shores @Charles Urbach
+227 C Glimmerpost @Matt Cavotta
+228 R Razorverge Thicket @James Paick
+229 R Seachrome Coast @Lars Grant-West
+230 L Plains @James Paick
+231 L Plains @James Paick
+232 L Plains @James Paick
+233 L Plains @James Paick
+234 L Island @Jung Park
+235 L Island @Jung Park
+236 L Island @Jung Park
+237 L Island @Jung Park
+238 L Swamp @Lars Grant-West
+239 L Swamp @Lars Grant-West
+240 L Swamp @Lars Grant-West
+241 L Swamp @Lars Grant-West
+242 L Mountain @Tomasz Jedruszek
+243 L Mountain @Tomasz Jedruszek
+244 L Mountain @Tomasz Jedruszek
+245 L Mountain @Tomasz Jedruszek
+246 L Forest @Mark Tedin
+247 L Forest @Mark Tedin
+248 L Forest @Mark Tedin
+249 L Forest @Mark Tedin
 
 [tokens]
 w_2_2_cat

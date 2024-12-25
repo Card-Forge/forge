@@ -9,6 +9,7 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.PointOfInterestMapRenderer;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.sound.SoundEffectType;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
  * Scene that will render tiled maps.
  * Used for towns dungeons etc
  */
-public class TileMapScene extends HudScene   {
+public class TileMapScene extends HudScene {
     TiledMap map;
     PointOfInterestMapRenderer tiledMapRenderer;
     private String nextMap;
@@ -38,8 +39,8 @@ public class TileMapScene extends HudScene   {
     private static TileMapScene object;
 
     public static TileMapScene instance() {
-        if(object==null)
-            object=new TileMapScene();
+        if (object == null)
+            object = new TileMapScene();
         return object;
     }
 
@@ -65,7 +66,7 @@ public class TileMapScene extends HudScene   {
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
         if (autoheal) {
-            stage.getPlayerSprite().playEffect(Paths.EFFECT_HEAL,2);
+            stage.getPlayerSprite().playEffect(Paths.EFFECT_HEAL, 2);
             SoundSystem.instance.play(SoundEffectType.Enchantment, false);
             autoheal = false;
         }
@@ -99,8 +100,15 @@ public class TileMapScene extends HudScene   {
         }
         AdventureQuestController.instance().updateEnteredPOI(rootPoint);
         AdventureQuestController.instance().showQuestDialogs(stage);
+    }
 
-
+    @Override
+    public boolean leave() {
+        // clear player collision on WorldStage and the GameHUD will restore it after the flicker animation.
+        // There's at least 2 seconds to get away from problematic collision point and player can retry
+        // a few times to move to different position if the POI is loaded again from WorldStage
+        WorldStage.getInstance().getPlayerSprite().clearCollisionHeight();
+        return super.leave();
     }
 
     public void load(PointOfInterest point) {
@@ -111,11 +119,12 @@ public class TileMapScene extends HudScene   {
         ((MapStage) stage).setPointOfInterest(getPointOfInterestChanges());
         stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(point.getSeedOffset());
-        tiledMapRenderer.loadMap(map, "", oldMap,0);
+        tiledMapRenderer.loadMap(map, "", oldMap, 0);
         stage.getPlayerSprite().stop();
     }
 
     private final static ArrayList<String> AUTO_HEAL_LOCATIONS = Lists.newArrayList("capital", "town");
+
     public boolean isAutoHealLocation() {
         return AUTO_HEAL_LOCATIONS.contains(rootPoint.getData().type);
     }
@@ -133,10 +142,11 @@ public class TileMapScene extends HudScene   {
         stage.getPlayerSprite().stop();
     }
 
-    public PointOfInterestChanges getPointOfInterestChanges(){
+    public PointOfInterestChanges getPointOfInterestChanges() {
         return WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID());
     }
-    public PointOfInterestChanges getPointOfInterestChanges(String targetMap){
+
+    public PointOfInterestChanges getPointOfInterestChanges(String targetMap) {
         if (rootPoint.getID().endsWith(targetMap))
             return getPointOfInterestChanges();
         return WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID() + targetMap);

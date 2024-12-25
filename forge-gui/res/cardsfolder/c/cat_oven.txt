@@ -1,0 +1,12 @@
+Name:Cat Oven
+ManaCost:1
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token.
+SVar:TrigFood:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ 1
+A:AB$ Token | Cost$ T Sac<1/Food> | TokenScript$ b_1_1_cat | TokenAmount$ 1 | SubAbility$ DBDrain | SpellDescription$ Create a 1/1 black Cat creature token. Each opponent loses 1 life and you gain 1 life.
+SVar:DBDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:AIPreference:SacCost$Food.token
+DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Food|Artifact|Cat
+DeckHints:Type$Food
+Oracle:When Cat Oven enters the battlefield, create a Food token.\n{T}, Sacrifice a Food: Create a 1/1 black Cat creature token. Each opponent loses 1 life and you gain 1 life.

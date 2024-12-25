@@ -1,0 +1,26 @@
+[metadata]
+Code=DFT
+Date=2025-02-14
+Name=Aetherdrift
+Type=Expansion
+ScryfallCode=DFT
+
+[cards]
+120 R Daretti, Rocketeer Engineer @Borja Pindado
+160 U Earthrumbler @Jean Pierre Targete
+191 M Brightglass Gearhulk @José Parodi
+277 L Plains @Samuele Bandini
+278 L Plains @Titus Lunter
+279 L Plains @Leon Tukker
+280 L Island @Samuele Bandini
+281 L Island @Titus Lunter
+282 L Island @Leon Tukker
+283 L Swamp @Samuele Bandini
+284 L Swamp @Ron Spencer
+285 L Swamp @Leon Tukker
+286 L Mountain @Samuele Bandini
+287 L Mountain @Florian de Gesincourt
+288 L Mountain @Leon Tukker
+289 L Forest @Samuele Bandini
+290 L Forest @Yeong-Hao Han
+291 L Forest @Leon Tukker

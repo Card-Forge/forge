@@ -1,7 +1,7 @@
 Name:Faerie Rogue Token
 ManaCost:no cost
-Types:Creature Faerie Rogue
 Colors:black
+Types:Creature Faerie Rogue
 PT:1/1
 K:Flying
 Oracle:Flying

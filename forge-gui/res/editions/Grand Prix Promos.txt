@@ -15,7 +15,7 @@ ScryfallCode=PGPX
 2012a R Goblin Guide @Steve Prescott
 2012b R Lotus Cobra @Terese Nielsen
 2013a M Primeval Titan @Peter Mohrbacher
-2013b R All Is Dust @Vincent Proce
+2013b M All Is Dust @Vincent Proce
 2014 M Batterskull @Igor Kieryluk
 2015 M Griselbrand @Jaime Jones
 2016 R Stoneforge Mystic @Johannes Voss

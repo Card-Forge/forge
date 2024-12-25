@@ -1,0 +1,9 @@
+Name:Recruit Instructor
+ManaCost:R W
+Types:Creature Mouse Warrior
+PT:1/1
+T:Mode$ AttackersDeclared | ValidAttackers$ Mouse.YouCtrl | Execute$ TrigDraft | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Mice you control attack, draft a card from CARDNAME's spellbook.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Angelfire Ignition,Barge In,Become Brutes,Boon of Safety,Cheeky House-Mouse,Crumb and Get It,Defiant Strike,Embercleave,Feather of Flight,Mabel's Mettle,Might of the Meek,Moment of Heroism,Unleash Fury,War Squeak
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigToken | TriggerDescription$ Valiant — Whenever CARDNAME becomes the target of a spell or ability you control for the first time each turn, create a 1/1 white Mouse creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_mouse | TokenAmount$ 1 | TokenOwner$ You
+Oracle:Whenever one or more Mice you control attack, draft a card from Recruit Instructor's spellbook.\nValiant — Whenever Recruit Instructor becomes the target of a spell or ability you control for the first time each turn, create a 1/1 white Mouse creature token.

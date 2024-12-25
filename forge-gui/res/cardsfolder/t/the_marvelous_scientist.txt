@@ -1,0 +1,17 @@
+Name:The Marvelous Scientist
+ManaCost:1 U R
+Types:Legendary Creature Human Wizard
+PT:2/2
+K:ETBReplacement:Other:SiegeChoice
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Cosplay,Science | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters the battlefield, choose cosplay or science.
+SVar:Cosplay:DB$ Pump | SpellDescription$ Cosplay
+SVar:Science:DB$ Pump | SpellDescription$ Science
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeCosplay | AddTrigger$ CosplayTrigger | Description$ • Cosplay — Whenever you cast a creature or planeswalker spell, CARDNAME's base power and toughness each become equal to that spell's mana value until end of turn.
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeScience | AddTrigger$ ScienceTrigger | Description$ • Science — Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to each opponent.
+SVar:CosplayTrigger:Mode$ SpellCast | ValidCard$ Creature,Planeswalker | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a creature or planeswalker spell, CARDNAME's base power and toughness each become equal to that spell's mana value until end of turn.
+SVar:TrigAnimate:DB$ Animate | Power$ X | Toughness$ X
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+SVar:ScienceTrigger:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
+DeckHints:Type$Instant|Sorcery
+Oracle:As this creature enters the battlefield, choose cosplay or science.\n• Cosplay — Whenever you cast a creature or planeswalker spell, this creature's base power and toughness each become equal to that spell's mana value until end of turn.\n• Science — Whenever you cast an instant or sorcery spell, this creature deals 2 damage to each opponent.

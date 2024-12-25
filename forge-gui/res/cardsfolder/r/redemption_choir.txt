@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | CheckSVar$ X | SVarCompare$ GE3 | Origin$ Any | Destinatio
 T:Mode$ Attacks | CheckSVar$ X | SVarCompare$ GE3 | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Coven — Whenever CARDNAME enters or attacks, if you control three or more creatures with different powers, return target permanent card with mana value 3 or less from your graveyard to the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+cmcLE3
 SVar:X:Count$DifferentPower_Creature.YouCtrl
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$LifeGain|Graveyard
 DeckHints:Ability$Graveyard|Mill
-SVar:HasAttackEffect:TRUE
 Oracle:Lifelink\nCoven — Whenever Redemption Choir enters or attacks, if you control three or more creatures with different powers, return target permanent card with mana value 3 or less from your graveyard to the battlefield.
