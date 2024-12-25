@@ -29,13 +29,10 @@ public class GameFuzzingTest {
     @Test
     public void PlayGameWithRandomDecks() {
         GuiBase.setInterface(new GuiDesktop());
-        FModel.initialize(null, new Function<ForgePreferences, Void>() {
-            @Override
-            public Void apply(ForgePreferences preferences) {
-                preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                preferences.setPref(ForgePreferences.FPref.UI_LANGUAGE, "en-US");
-                return null;
-            }
+        FModel.initialize(null, preferences -> {
+            preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+            preferences.setPref(ForgePreferences.FPref.UI_LANGUAGE, "en-US");
+            return null;
         });
 
         // first deck

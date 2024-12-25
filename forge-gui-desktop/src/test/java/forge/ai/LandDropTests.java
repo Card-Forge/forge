@@ -1,28 +1,58 @@
 package forge.ai;
 
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 public class LandDropTests extends AITest {
     @Test
-    public void testSwingForLethal() {
+    public void testPlayTapland() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         p.setTeam(0);
-        addCard("Nest Robber", p);
-        addCard("Nest Robber", p);
+        addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+        addCardToZone("Forest", p, ZoneType.Hand);
+        Card te = addCardToZone("Tranquil Expanse", p, ZoneType.Hand);
 
         Player opponent = game.getPlayers().get(0);
         opponent.setTeam(1);
 
-        addCard("Runeclaw Bear", opponent);
-        opponent.setLife(2, null);
+        this.playUntilPhase(game, PhaseType.END_OF_TURN);
+
+        AssertJUnit.assertTrue(game.getCardsIn(ZoneType.Battlefield).contains(te));
+    }
+
+    @Test
+    public void testPlayShockland() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCardToZone("Godless Shrine", p, ZoneType.Hand);
+        addCardToZone("Plains", p, ZoneType.Hand);
+        addCardToZone("Swamp", p, ZoneType.Hand);
+        Card ts = addCardToZone("Thoughtseize", p, ZoneType.Hand);
+        addCardToZone("Bitterblossom", p, ZoneType.Hand);
+        addCardToZone("Lingering Souls", p, ZoneType.Hand);
+        addCardToZone("Sorin, Solemn Visitor", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCardToZone("Godless Shrine", p, ZoneType.Hand);
+        addCardToZone("Plains", p, ZoneType.Hand);
+        addCardToZone("Swamp", p, ZoneType.Hand);
+        addCardToZone("Thoughtseize", p, ZoneType.Hand);
+        Card bb = addCardToZone("Bitterblossom", p, ZoneType.Hand);
+        addCardToZone("Lingering Souls", p, ZoneType.Hand);
+        addCardToZone("Sorin, Solemn Visitor", p, ZoneType.Hand);
 
         this.playUntilPhase(game, PhaseType.END_OF_TURN);
 
-        AssertJUnit.assertTrue(game.isGameOver());
+        // test that we shock in Godless Shrine and cast thoughtseize, and then take bitterblossom
+        AssertJUnit.assertTrue(game.getCardsIn(ZoneType.Graveyard).contains(ts));
+        AssertJUnit.assertTrue(game.getCardsIn(ZoneType.Graveyard).contains(bb));
     }
 }

@@ -18,6 +18,8 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 
 public class SimulationTest extends AITest {
 
@@ -34,7 +36,7 @@ public class SimulationTest extends AITest {
         Game game = new Game(players, rules, match);
         game.setAge(GameStage.Play);
         game.EXPERIMENTAL_RESTORE_SNAPSHOT = false;
-        game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
+        game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(ForgePreferences.FPref.MATCH_AI_TIMEOUT);
         game.AI_CAN_USE_TIMEOUT = true; //Only Android is restricted according to API Level
 
         return game;

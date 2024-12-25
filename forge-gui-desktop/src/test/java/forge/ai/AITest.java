@@ -101,6 +101,9 @@ public class AITest {
             StaticData.instance().attemptToLoadCard(name);
             paperCard = FModel.getMagicDb().getCommonCards().getCard(name);
         }
+        if (paperCard == null) {
+            throw new RuntimeException("Card not found: " + name);
+        }
         return Card.fromPaperCard(paperCard, p);
     }
 
