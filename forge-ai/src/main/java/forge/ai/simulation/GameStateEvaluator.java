@@ -177,7 +177,6 @@ public class GameStateEvaluator {
         // TODO should these be fixed quantities or should they be linear out of like 1000/(desired - total)?
         int value = 0;
         // get the colors of mana we can produce and the maximum number of pips
-        int max_colored = 0;
         int max_total = 0;
         // this logic taken from ManaCost.getColorShardCounts()
         int[] counts = new int[6]; // in WUBRGC order

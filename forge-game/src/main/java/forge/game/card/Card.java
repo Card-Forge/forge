@@ -64,6 +64,8 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.util.*;
 import java.util.Map.Entry;
 
+import static java.lang.Math.max;
+
 /**
  * <p>
  * Card class.
@@ -3342,6 +3344,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
         return canProduceColorMana(colors);
+    }
+
+    public final int getMaxManaProduced() {
+        int max_produced = 0;
+        for (SpellAbility m: getManaAbilities()) {
+            m.setActivatingPlayer(getController());
+            int mana_cost = m.getPayCosts().getTotalMana().getCMC();
+            max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
+        }
+        return max_produced;
     }
 
     public final void clearFirstSpell() {
