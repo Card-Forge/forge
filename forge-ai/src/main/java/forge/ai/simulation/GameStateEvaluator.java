@@ -1,6 +1,6 @@
 package forge.ai.simulation;
 
-import forge.ai.AIDeckStatistics;
+import forge.ai.AiDeckStatistics;
 import forge.ai.CreatureEvaluator;
 import forge.card.mana.ManaAtom;
 import forge.game.Game;
@@ -133,7 +133,7 @@ public class GameStateEvaluator {
         score -= 2* opponentLife / (game.getPlayers().size() - 1);
 
         // evaluate mana base quality
-        score += evalManaBase(game, aiPlayer, AIDeckStatistics.fromPlayer(aiPlayer));
+        score += evalManaBase(game, aiPlayer, AiDeckStatistics.fromPlayer(aiPlayer));
         // TODO deal with opponents. Do we want to use perfect information to evaluate their manabase?
         //int opponentManaScore = 0;
         //for (Player opponent : aiPlayer.getOpponents()) {
@@ -173,7 +173,7 @@ public class GameStateEvaluator {
         return new Score(score, summonSickScore);
     }
 
-    public int evalManaBase(Game game, Player player, AIDeckStatistics statistics) {
+    public int evalManaBase(Game game, Player player, AiDeckStatistics statistics) {
         // TODO should these be fixed quantities or should they be linear out of like 1000/(desired - total)?
         int value = 0;
         // get the colors of mana we can produce and the maximum number of pips
