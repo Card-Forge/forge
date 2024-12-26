@@ -379,7 +379,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 }
 
                 manaPayer.setExpentThisTurn(totalMana);
-                for(int i = startingMana + 1; i <= totalMana; i++) {
+                for (int i = startingMana + 1; i <= totalMana; i++) {
                     Map<AbilityKey, Object> expendParams = AbilityKey.mapFromPlayer(manaPayer);
                     expendParams.put(AbilityKey.SpellAbility, sp);
                     expendParams.put(AbilityKey.Amount, i);

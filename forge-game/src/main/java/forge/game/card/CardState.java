@@ -211,7 +211,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         view.setFunctionalVariantName(functionalVariantName);
     }
 
-
     public final int getBasePower() {
         return basePower;
     }
@@ -263,7 +262,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public Set<Integer> getAttractionLights() {
         return this.attractionLights;
     }
-
     public final void setAttractionLights(Set<Integer> attractionLights) {
         this.attractionLights = attractionLights;
         view.updateAttractionLights(this);
@@ -490,14 +488,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
     public final void clearStaticAbilities() {
         staticAbilities.clear();
-    }
-
-    public final String getImageKey() {
-        return imageKey;
-    }
-    public final void setImageKey(final String imageFilename0) {
-        imageKey = imageFilename0;
-        view.updateImageKey(this);
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
@@ -750,6 +740,14 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public void setSetCode(String setCode0) {
         setCode = setCode0;
         view.updateSetCode(this);
+    }
+
+    public final String getImageKey() {
+        return imageKey;
+    }
+    public final void setImageKey(final String imageFilename0) {
+        imageKey = imageFilename0;
+        view.updateImageKey(this);
     }
 
     /* (non-Javadoc)
