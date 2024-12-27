@@ -663,9 +663,6 @@ public class AiController {
             }
         }
         if (!basics.isEmpty()) {
-            // Which basic land is least available
-            String minType = null;
-
             for (int i = 0; i < MagicColor.Constant.BASIC_LANDS.size(); i++) {
                 String b = MagicColor.Constant.BASIC_LANDS.get(i);
                 final int num = CardLists.getType(landsInBattlefield, b).size();
@@ -687,6 +684,8 @@ public class AiController {
                             score += 25;
                         }
                     }
+
+                    // TODO handle fetchlands and what they can fetch for
                     // determine new color pips
                     int[] card_counts = new int[6]; // in WUBRGC order
                     for (SpellAbility m: card.getManaAbilities()) {
@@ -701,6 +700,7 @@ public class AiController {
                             }
                         }
                     }
+
                     // use 1 / x+1 for diminishing returns
                     // TODO use max pips of each color in the deck to weight this
                     for (int i = 0; i < card_counts.length; i++) {
