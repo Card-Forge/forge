@@ -20,7 +20,6 @@ package forge.ai;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Lists;
 
-import com.google.common.collect.Maps;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
@@ -64,7 +63,6 @@ import forge.item.PaperCard;
 import forge.util.*;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.function.Function;
@@ -540,7 +538,7 @@ public class AiController {
             landList = unreflectedLands;
         }
 
-        // try to skip lands that enter the battlefield tapped if we want to play something this turn
+        // try to skip lands that enter the battlefield tapped if we might want to play something this turn
         if (!nonLandsInHand.isEmpty()) {
             // get the tapped and non-tapped lands
             CardCollection tappedLands = new CardCollection();
@@ -578,7 +576,6 @@ public class AiController {
 
                 nonTappedLands.add(land);
             }
-
 
             // if we have the choice, see if we can play an untapped land
             if (!nonTappedLands.isEmpty()) {
@@ -672,7 +669,6 @@ public class AiController {
 
         // pick the land with the best score.
         // use the evaluation plus a modifier for each new color pip and basic type
-
         Card toReturn = Aggregates.itemWithMax(IterableUtil.filter(landList, Card::hasPlayableLandFace),
                 (card -> {
                     // base score is for the evaluation score
@@ -702,15 +698,17 @@ public class AiController {
                     }
 
                     // use 1 / x+1 for diminishing returns
-                    // TODO use max pips of each color in the deck to weight this
+                    // TODO use max pips of each color in the deck from deck statistics to weight this
                     for (int i = 0; i < card_counts.length; i++) {
                         int diff = (card_counts[i] * 50) / (counts[i] + 1);
                         score += diff;
                     }
 
+                    // TODO utility lands only if we have enough to pay their costs
+                    // TODO Tron lands and other lands that care about land counts
+
                     return score;
                 }));
-
         return toReturn;
     }
 
