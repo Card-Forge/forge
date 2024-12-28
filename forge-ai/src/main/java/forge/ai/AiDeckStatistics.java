@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AIDeckStatistics {
+public class AiDeckStatistics {
 
     public float averageCMC = 0;
     // TODO implement this. Use a numerically stable algorithm from
@@ -24,9 +24,9 @@ public class AIDeckStatistics {
 
     // in WUBRGC order from ManaCost.getColorShardCounts()
     public int[] maxPips = null;
-//    public int[] numSources = new int[6];
+    // public int[] numSources = new int[6];
     public int numLands = 0;
-    public AIDeckStatistics(float averageCMC, float stddevCMC, int maxCost, int maxColoredCost, int[] maxPips, int numLands) {
+    public AiDeckStatistics(float averageCMC, float stddevCMC, int maxCost, int maxColoredCost, int[] maxPips, int numLands) {
         this.averageCMC = averageCMC;
         this.stddevCMC = stddevCMC;
         this.maxCost = maxCost;
@@ -35,7 +35,7 @@ public class AIDeckStatistics {
         this.numLands = numLands;
     }
 
-    public static AIDeckStatistics fromCards(List<Card> cards) {
+    public static AiDeckStatistics fromCards(List<Card> cards) {
         int totalCMC = 0;
         int totalCount = 0;
         int numLands = 0;
@@ -75,7 +75,7 @@ public class AIDeckStatistics {
 
         }
 
-        return new AIDeckStatistics(totalCount == 0 ? 0 : totalCMC / (float)totalCount,
+        return new AiDeckStatistics(totalCount == 0 ? 0 : totalCMC / (float)totalCount,
                 0, // TODO use https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance
                 maxCost,
                 maxColoredCost,
@@ -85,7 +85,7 @@ public class AIDeckStatistics {
     }
 
 
-    public static AIDeckStatistics fromDeck(Deck deck, Player player) {
+    public static AiDeckStatistics fromDeck(Deck deck, Player player) {
         List<Card> cardlist = new ArrayList<>();
         for (final Map.Entry<DeckSection, CardPool> deckEntry : deck) {
             switch (deckEntry.getKey()) {
@@ -104,7 +104,7 @@ public class AIDeckStatistics {
         return fromCards(cardlist);
     }
 
-    public static AIDeckStatistics fromPlayer(Player player) {
+    public static AiDeckStatistics fromPlayer(Player player) {
         Deck deck = player.getRegisteredPlayer().getDeck();
         if (deck.isEmpty()) {
             // we're in a test or some weird match, search through the hand and library and build the decklist

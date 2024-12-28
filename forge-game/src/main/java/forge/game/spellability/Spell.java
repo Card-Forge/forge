@@ -30,6 +30,7 @@ import forge.game.card.CardFactory;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.replacement.ReplacementType;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.zone.ZoneType;
@@ -101,7 +102,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this, false)) {
+        if (!activator.getController().isFullControl(FullControlFlag.AllowPaymentStartWithMissingResources) &&
+                !CostPayment.canPayAdditionalCosts(this.getPayCosts(), this, false)) {
             return false;
         }
 
