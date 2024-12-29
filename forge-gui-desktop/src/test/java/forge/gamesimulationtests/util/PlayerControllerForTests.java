@@ -87,11 +87,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets) {
-        throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");
-    }
-
-    @Override
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets) {
         //TODO: eventually (when the real code is refactored) this should be handled normally...
         if (effectSA.getDescription().equals("At the beginning of your upkeep, if you have exactly 1 life, you win the game.")) {//test_104_2b_effect_may_state_that_player_wins_the_game
@@ -447,7 +442,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
+    public boolean payCombatCost(Card card, Cost cost, SpellAbility sa, String prompt) {
         throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");
     }
 

@@ -549,7 +549,7 @@ public class AiController {
                 repParams.put(AbilityKey.EffectOnly, true);
                 repParams.put(AbilityKey.CounterTable, table);
                 repParams.put(AbilityKey.CounterMap, table.column(land));
-                
+
                 boolean foundTapped = false;
                 for (ReplacementEffect re : player.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
                     SpellAbility reSA = re.ensureAbility();

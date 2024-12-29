@@ -30,7 +30,6 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityBlockRestrict;
@@ -275,8 +274,8 @@ public class CombatUtil {
         fakeSA.setPayCosts(attackCost);
         // prevent recalculating X
         fakeSA.setSVar("X", "0");
-        return attacker.getController().getController().payManaOptional(attacker, attackCost, fakeSA,
-                "Pay additional cost to declare " + attacker + " an attacker", ManaPaymentPurpose.DeclareAttacker);
+        return attacker.getController().getController().payCombatCost(attacker, attackCost, fakeSA,
+                "Pay additional cost to declare " + attacker + " an attacker");
     }
 
     public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
@@ -338,7 +337,7 @@ public class CombatUtil {
         fakeSA.setCardState(blocker.getCurrentState());
         fakeSA.setPayCosts(blockCost);
         fakeSA.setSVar("X", "0");
-        return blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
+        return blocker.getController().getController().payCombatCost(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ");
     }
 
     public static Cost getBlockCost(Game game, Card blocker, Card attacker) {
