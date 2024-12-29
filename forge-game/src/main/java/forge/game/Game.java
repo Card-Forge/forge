@@ -94,8 +94,9 @@ public class Game {
     public int AI_TIMEOUT = 5;
     public boolean AI_CAN_USE_TIMEOUT = true;
 
+    // While these are false here, they're really set by the Match/Preferences
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
-    // While this is false here, its really set by the Match/Preferences
+    public boolean EXPERIMENTAL_LOOP = false;
 
     // If this merges with LKI In the future, it will need to change forms
     private GameSnapshot previousGameState = null;

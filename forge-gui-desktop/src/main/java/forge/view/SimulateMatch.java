@@ -166,7 +166,7 @@ public class SimulateMatch {
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
 
-    public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog) {
+    public static Game simulateSingleGameOfMatch(final Match mc, int timeout) {
         final StopWatch sw = new StopWatch();
         sw.start();
 
@@ -176,7 +176,7 @@ public class SimulateMatch {
             TimeLimitedCodeBlock.runWithTimeout(() -> {
                 mc.startGame(g1);
                 sw.stop();
-            }, 120, TimeUnit.SECONDS);
+            }, timeout, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
             System.out.println("Stopping slow match as draw");
         } catch (Exception | StackOverflowError e) {
@@ -190,6 +190,13 @@ public class SimulateMatch {
             }
         }
 
+        return g1;
+    }
+
+    public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog) {
+        final StopWatch sw = new StopWatch();
+        sw.start();
+        final Game g1 = simulateSingleGameOfMatch(mc, 120);
         List<GameLogEntry> log;
         if (outputGamelog) {
             log = g1.getGameLog().getLogEntries(null);
