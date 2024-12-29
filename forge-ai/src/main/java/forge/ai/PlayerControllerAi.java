@@ -452,13 +452,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Player chooseStartingPlayer(boolean isFirstgame) {
-        return this.player; // AI is brave :)
+    public boolean confirmPayment(CostPart costPart, String prompt, SpellAbility sa) {
+        return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method)
     }
 
     @Override
-    public CardCollection orderBlockers(Card attacker, CardCollection blockers) {
-        return AiBlockController.orderBlockers(attacker, blockers);
+    public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question) {
+        return brains.aiShouldRun(replacementEffect, effectSA, affected);
     }
 
     @Override
@@ -479,6 +479,11 @@ public class PlayerControllerAi extends PlayerController {
         }
         // TODO check if not needed as defender
         return chosenAttackers;
+    }
+
+    @Override
+    public CardCollection orderBlockers(Card attacker, CardCollection blockers) {
+        return AiBlockController.orderBlockers(attacker, blockers);
     }
 
     @Override
@@ -673,20 +678,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void playSpellAbilityForFree(SpellAbility copySA, boolean mayChooseNewTargets) {
-        // Ai is known to set targets in doTrigger, so if it cannot choose new targets, we won't call canPlays
-        if (mayChooseNewTargets) {
-            if (copySA instanceof Spell) {
-                Spell spell = (Spell) copySA;
-                ((PlayerControllerAi) player.getController()).getAi().canPlayFromEffectAI(spell, true, true);
-            } else {
-                getAi().canPlaySa(copySA);
-            }
-        }
-        ComputerUtil.playSpellAbilityForFree(player, copySA);
-    }
-
-    @Override
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean canSetupTargets) {
         if (canSetupTargets)
             brains.doTrigger(effectSA, true); // first parameter does not matter, since return value won't be used
@@ -835,16 +826,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
-        if (ComputerUtil.playNoStack(c.getController(), sa, getGame(), true)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
-        return brains.chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
+    public Player chooseStartingPlayer(boolean isFirstgame) {
+        return this.player; // AI is brave :)
     }
 
     @Override
@@ -861,6 +844,11 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         return bestZone;
+    }
+
+    @Override
+    public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
+        return brains.chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
     }
 
     @Override
@@ -1033,12 +1021,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public ICardFace chooseSingleCardFace(SpellAbility sa, String message,
-            Predicate<ICardFace> cpp, String name) {
-        throw new UnsupportedOperationException("Should not be called for AI"); // or implement it if you know how
-    }
-
-    @Override
     public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
         return ComputerUtilCard.chooseColor(sa, min, max, options);
     }
@@ -1123,19 +1105,9 @@ public class PlayerControllerAi extends PlayerController {
         }
         if (!possible.isEmpty()) {
             return Aggregates.random(possible);
-        } else {
-            return Aggregates.random(options); // if worst comes to worst, at least do something
         }
-    }
 
-    @Override
-    public boolean confirmPayment(CostPart costPart, String prompt, SpellAbility sa) {
-        return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method)
-    }
-
-    @Override
-    public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question) {
-        return brains.aiShouldRun(replacementEffect, effectSA, affected);
+        return Aggregates.random(options); // if worst comes to worst, at least do something
     }
 
     @Override
@@ -1210,6 +1182,19 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
         return choice;
+    }
+
+    @Override
+    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
+        return ComputerUtilMana.payManaCost(new Cost(toPay, effect), player, sa, effect);
+    }
+
+    @Override
+    public boolean payCombatCost(Card c, Cost cost, SpellAbility sa, String prompt) {
+        if (ComputerUtil.playNoStack(c.getController(), sa, getGame(), true)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -1359,11 +1344,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
-        return ComputerUtilMana.payManaCost(new Cost(toPay, effect), player, sa, effect);
-    }
-
-    @Override
     public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean improvise) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
@@ -1395,6 +1375,15 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
         return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, improvise);
+    }
+
+    @Override
+    public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return SpellApiToAi.Converter.get(api).chooseCardName(player, sa, faces);
     }
 
     @Override
@@ -1498,21 +1487,17 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return SpellApiToAi.Converter.get(api).chooseCardName(player, sa, faces);
-    }
-
-    @Override
     public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
         ApiType api = sa.getApi();
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return SpellApiToAi.Converter.get(api).chooseCardFace(player, sa, faces);
+    }
+
+    @Override
+    public ICardFace chooseSingleCardFace(SpellAbility sa, String message, Predicate<ICardFace> cpp, String name) {
+        throw new UnsupportedOperationException("Should not be called for AI"); // or implement it if you know how
     }
 
     @Override
@@ -1639,6 +1624,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public List<CostPart> orderCosts(List<CostPart> costs) {
+        return costs;
+    }
+
+    @Override
     public CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap, SpellAbility sa, String title, boolean isOptional) {
         CardCollection choices = new CardCollection();
 
@@ -1654,8 +1644,4 @@ public class PlayerControllerAi extends PlayerController {
         return choices;
     }
 
-    @Override
-    public List<CostPart> orderCosts(List<CostPart> costs) {
-        return costs;
-    }
 }

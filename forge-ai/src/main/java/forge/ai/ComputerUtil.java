@@ -249,18 +249,6 @@ public class ComputerUtil {
         return false;
     }
 
-    public static final void playSpellAbilityForFree(final Player ai, final SpellAbility sa) {
-        final Game game = ai.getGame();
-        sa.setActivatingPlayer(ai);
-
-        final Card source = sa.getHostCard();
-        if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setHostCard(game.getAction().moveToStack(source, sa));
-        }
-
-        game.getStack().add(sa);
-    }
-
     public static final boolean playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
         SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);

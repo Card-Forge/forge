@@ -31,7 +31,6 @@ import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.*;
-import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
 import forge.game.replacement.ReplacementEffect;
@@ -236,11 +235,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard),
                 Lists.newArrayList(spellViewCache.keySet()), triggerEvent);
         return resultView == null ? null : spellViewCache.get(resultView);
-    }
-
-    @Override
-    public void playSpellAbilityForFree(final SpellAbility copySA, final boolean mayChoseNewTargets) {
-        HumanPlay.playSaWithoutPayingManaCost(this, copySA, mayChoseNewTargets);
     }
 
     @Override
@@ -1556,9 +1550,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean payManaOptional(final Card c, final Cost cost, final SpellAbility sa, final String prompt, final ManaPaymentPurpose purpose) {
-        if (cost.isOnlyManaCost() && cost.getTotalMana().isZero() && isFullControl(FullControlFlag.NoFreeCombatCostHandling)
-                && (purpose == ManaPaymentPurpose.DeclareAttacker || purpose == ManaPaymentPurpose.DeclareBlocker)) {
+    public boolean payCombatCost(final Card c, final Cost cost, final SpellAbility sa, final String prompt) {
+        if (cost.isOnlyManaCost() && cost.getTotalMana().isZero() && isFullControl(FullControlFlag.NoFreeCombatCostHandling)) {
             return true;
         }
         return HumanPlay.payCostDuringAbilityResolve(this, player, c, cost, sa, prompt);

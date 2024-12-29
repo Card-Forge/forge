@@ -1807,7 +1807,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addMaingameCardMapping(Card subgameCard, Card maingameCard) {
         maingameCardsMap.put(subgameCard, maingameCard);
     }
-
     public final Card getMappingMaingameCard(Card subgameCard) {
         return maingameCardsMap.get(subgameCard);
     }

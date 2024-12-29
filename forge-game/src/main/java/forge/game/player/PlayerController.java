@@ -48,11 +48,6 @@ import java.util.function.Predicate;
  */
 public abstract class PlayerController {
 
-    public enum ManaPaymentPurpose {
-        DeclareAttacker,
-        DeclareBlocker
-    }
-
     public enum BinaryChoiceType {
         HeadsOrTails, // coin
         TapOrUntap,
@@ -101,8 +96,6 @@ public abstract class PlayerController {
     public final SpellAbility getAbilityToPlay(final Card hostCard, final List<SpellAbility> abilities) { return getAbilityToPlay(hostCard, abilities, null); }
     public abstract SpellAbility getAbilityToPlay(Card hostCard, List<SpellAbility> abilities, ITriggerEvent triggerEvent);
 
-    @Deprecated
-    public abstract void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets);
     public abstract void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets);
 
     public abstract List<PaperCard> sideboard(final Deck deck, GameType gameType, String message);
@@ -123,7 +116,6 @@ public abstract class PlayerController {
 
     // Q: why is there min/max and optional at once? A: This is to handle cases like 'choose 3 to 5 cards or none at all'
     public abstract CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params);
-
 
     public abstract boolean helpPayForAssistSpell(ManaCostBeingPaid cost, SpellAbility sa, int max, int requested);
     public abstract Player choosePlayerToAssistPayment(FCollectionView<Player> optionList, SpellAbility sa, String title, int max);
@@ -224,10 +216,9 @@ public abstract class PlayerController {
 
     public abstract void declareAttackers(Player attacker, Combat combat);
     public abstract void declareBlockers(Player defender, Combat combat);
+
     public abstract List<SpellAbility> chooseSpellAbilityToPlay();
     public abstract boolean playChosenSpellAbility(SpellAbility sa);
-
-    public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose);
 
     public abstract int chooseNumberForCostReduction(final SpellAbility sa, final int min, final int max);
     public abstract int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max);
@@ -266,7 +257,6 @@ public abstract class PlayerController {
     public abstract StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleReplacers);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
 
-    // these 4 need some refining.
     public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers);
     public abstract void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs);
     public abstract boolean playTrigger(Card host, WrappedAbility wrapperAbility, boolean isMandatory);
@@ -282,6 +272,8 @@ public abstract class PlayerController {
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) { return null; }
 
     public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
+
+    public abstract boolean payCombatCost(Card card, Cost cost, SpellAbility sa, String prompt);
 
     public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean effect) {
         return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, matrix, effect);
@@ -311,7 +303,6 @@ public abstract class PlayerController {
     public abstract void autoPassCancel();
 
     public abstract void awaitNextInput();
-
     public abstract void cancelAwaitNextInput();
 
     public void resetInputs() {
