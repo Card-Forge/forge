@@ -269,7 +269,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 continue;
             }
 
-            int sprocket = state.isAttraction() ? 4 : card.getSprocket();
+            //Attractions go on 4, anything on -1 (i.e. pending new sprocket) goes on 0.
+            int sprocket = state.isAttraction() ? 4 : Math.max(card.getSprocket(), 0);
 
             List<CardStack> sprocketStacks = stacksBySprocket.computeIfAbsent(sprocket, k -> new ArrayList<>());
 
@@ -294,6 +295,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             iterator.remove();
             sprocketStacks.add(stack);
         }
+        //Take the lists of stacks, make sure they're arranged by sprocket, flatten them into a
+        //big list of card stacks, and dump them into our output CardStackRow.
         stacksBySprocket.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .map(Map.Entry::getValue)

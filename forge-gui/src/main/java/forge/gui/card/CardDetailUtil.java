@@ -452,9 +452,7 @@ public class CardDetailUtil {
 
         // chosen spire
         if (card.getChosenColorID() != null && !card.getChosenColorID().isEmpty()) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
+            area.append("\n");
             area.append("(").append(Localizer.getInstance().getMessage("lblSelected")).append(": ");
             area.append(Lang.joinHomogenous(card.getChosenColorID().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
             area.append(")");
@@ -652,6 +650,6 @@ public class CardDetailUtil {
             area.append("\n\n");
             area.append("Owner: ").append(card.getOwner().toString());
         }
-        return area.toString();
+        return area.toString().trim();
     }
 }

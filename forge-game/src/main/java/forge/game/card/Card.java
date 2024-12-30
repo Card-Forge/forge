@@ -302,8 +302,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private String currentRoom = null;
     private String sector = null;
     private String chosenSector = null;
-    private Map<Player, CardCollection> chosenMap = Maps.newHashMap();
     private int sprocket = 0;
+    private Map<Player, CardCollection> chosenMap = Maps.newHashMap();
 
     // points to the host that exiled this card, usually the one that has this object it its exiledCards field
     // however it could also be a different card which isn't an error but means the exiling SA was gained
@@ -2200,6 +2200,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this.sprocket = sprocket;
         view.updateSprocket(this);
         game.fireEvent(new GameEventSprocketUpdate(this, oldSprocket, sprocket));
+    }
+    public void handleChangedControllerSprocketReset() {
+        //See GameAction.stateBasedAction_Contraption.
+        //This could be rolled into a bigger handleChangedController method, but I don't know what else would go in it.
+        if(this.sprocket != 0)
+            this.setSprocket(-1);
     }
 
     // used for cards like Meddling Mage...

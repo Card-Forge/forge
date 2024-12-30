@@ -1047,7 +1047,7 @@ public class GameAction {
         }
 
         c.setCameUnderControlSinceLastUpkeep(true);
-        c.setSprocket(0); //Contraptions that change controllers are assigned to sprockets by their new controller.
+        c.handleChangedControllerSprocketReset();
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.OriginalController, original);
@@ -1328,7 +1328,7 @@ public class GameAction {
                 checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
                 checkAgainCard |= stateBasedAction_Role(c, unAttachList);
                 checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
-                checkAgainCard |= stateBasedAction_Contraption(c);
+                checkAgainCard |= stateBasedAction_Contraption(c, noRegCreats);
 
                 checkAgainCard |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
 
@@ -1590,11 +1590,22 @@ public class GameAction {
         return checkAgain;
     }
 
-    private boolean stateBasedAction_Contraption(Card c) {
-        //There isn't a rule-based source for this SBA, but it seems like something that should exist given the one for Space Sculptor.
+    private boolean stateBasedAction_Contraption(Card c, CardCollection removeList) {
         if(!c.isContraption())
             return false;
-        if(c.getSprocket() > 0 && c.getSprocket() <= 3)
+        int currentSprocket = c.getSprocket();
+
+        //A contraption that is in the battlefield without being assembled is put into the graveyard or junkyard.
+        if(currentSprocket == 0) {
+            removeList.add(c);
+            return true;
+        }
+
+        //An assembled contraption that changes controller is reassembled onto a sprocket by its new controller.
+        //A reassemble effect can handle that on its own. But if it changed controller due to some other effect,
+        //we assign it here. A contraption uses sprocket -1 to signify it has been assembled previously but now needs
+        //a new sprocket.
+        if(currentSprocket > 0 && currentSprocket <= 3)
             return false;
 
         int sprocket = c.getController().getController().chooseSprocket(c);

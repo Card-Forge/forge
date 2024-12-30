@@ -105,9 +105,7 @@ public class AssembleContraptionEffect extends SpellAbilityEffect {
                 }
 
                 if(changedControllers)
-                    //Sprocket will be cleared next game update, then SBA will handle assignment. Kinda a cop-out but
-                    //the alternative is messy and could only matter with a really specific custom design.
-                    continue;
+                    game.getAction().controllerChangeZoneCorrection(card);
 
                 //Assign a sprocket. If reassembling, it needs to be a different sprocket than the current one.
                 int sprocket = card.getController().getController().chooseSprocket(card, sa.hasParam("Reassemble"));
