@@ -8,7 +8,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigJoinForces | TriggerDescri
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigJoinForces | Secondary$ True | TriggerDescription$ Join forces — Whenever CARDNAME attacks or blocks, each player starting with you may pay any amount of mana. CARDNAME gets +X/+0 until end of turn, where X is the total amount of mana paid this way.
 SVar:TrigJoinForces:DB$ RepeatEach | RepeatPlayers$ Player | StartingWith$ You | RepeatSubAbility$ DBPay | SubAbility$ DBPump
 SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ amount of mana to pay | SubAbility$ DBStore
-SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.Y | UnlessCost$ Y | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessAI$ OnlyOwn
+SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.Y | UnlessCost$ Y | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ JoinForcesAmount | SubAbility$ DBReset
 SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0
 SVar:Y:Count$ChosenNumber

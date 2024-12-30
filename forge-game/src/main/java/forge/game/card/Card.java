@@ -100,7 +100,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
     private List<Card> blockedThisTurn = Lists.newArrayList();
     private List<Card> blockedByThisTurn = Lists.newArrayList();
-    private Map<Player, CardCollection> chosenMap = Maps.newHashMap();
 
     private CardCollection untilLeavesBattlefield = new CardCollection();
 
@@ -112,8 +111,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private SpellAbility tokenSpawningAbility;
 
     private GameEntity entityAttachedTo;
-
-    private Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
     // changes by AF animate and continuous static effects
 
@@ -160,6 +157,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     private final Table<Long, Long, Map<String, String>> changedSVars = TreeBasedTable.create();
 
+    private Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
+
     private final Map<Long, PlayerCollection> mayLook = Maps.newHashMap();
     private final PlayerCollection mayLookFaceDownExile = new PlayerCollection();
     private final PlayerCollection mayLookTemp = new PlayerCollection();
@@ -200,9 +199,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean unearthed;
     private boolean ringbearer;
     private boolean monstrous;
-
     private boolean renowned;
-    private boolean solved = false;
+    private boolean solved;
     private Long suspectedTimestamp = null;
     private StaticAbility suspectedStatic = null;
 
@@ -304,6 +302,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private String currentRoom = null;
     private String sector = null;
     private String chosenSector = null;
+    private Map<Player, CardCollection> chosenMap = Maps.newHashMap();
     private int sprocket = 0;
 
     // points to the host that exiled this card, usually the one that has this object it its exiledCards field
@@ -332,6 +331,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // breaking when the LKI object is changed to a different card state.
     private int lkiCMC = -1;
 
+    private CombatLki combatLKI;
+
     private CardRules cardRules;
     private final CardView view;
 
@@ -353,8 +354,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourCombatStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourLastCombatStatic = HashBasedTable.create();
-
-    private CombatLki combatLKI;
 
     private ReplacementEffect shieldCounterReplaceDamage = null;
     private ReplacementEffect shieldCounterReplaceDestroy = null;
@@ -4839,7 +4838,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.Attacker, attacker);
         runParams.put(AbilityKey.Cause, cause);
@@ -4855,12 +4853,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final boolean untap(boolean untapAnimation) {
         if (!tapped) { return false; }
 
-        // Run Replacement effects
         if (getGame().getReplacementHandler().run(ReplacementType.Untap, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return false;
         }
 
-        // Run triggers
         getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, AbilityKey.mapFromCard(this), false);
 
         runUntapCommands();
@@ -8250,6 +8246,5 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         this.changedCardNames.putAll(in.changedCardNames);
         setChangedCardTraits(in.getChangedCardTraits());
-
     }
 }

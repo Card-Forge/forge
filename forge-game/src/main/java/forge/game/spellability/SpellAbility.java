@@ -118,7 +118,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean basicSpell = true;
     private Trigger triggerObj;
     private boolean optionalTrigger = false;
-    private ReplacementEffect replacementEffect = null;
+    private ReplacementEffect replacementEffect;
     private int sourceTrigger = -1;
     private List<Object> triggerRemembered = Lists.newArrayList();
 
@@ -272,6 +272,25 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 sa.setKeyword(kw);
             }
         }
+    }
+
+    // If this is not null, then ability was made in a factory
+    public ApiType getApi() {
+        return api;
+    }
+    public void setApi(ApiType apiType) {
+        api = apiType;
+    }
+
+    public SpellAbility findSubAbilityByType(ApiType apiType) {
+        SpellAbility sub = this.getSubAbility();
+        while (sub != null) {
+            if (apiType.equals(sub.getApi())) {
+                return sub;
+            }
+            sub = sub.getSubAbility();
+        }
+        return null;
     }
 
     public boolean canThisProduce(final String s) {
@@ -509,6 +528,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         manaCostBeingPaid = costBeingPaid;
     }
 
+    public Iterable<OptionalCost> getOptionalCosts() {
+        return optionalCosts;
+    }
+    public final void addOptionalCost(OptionalCost cost) {
+        // Optional costs are added to swallow copies of original SAs,
+        // Thus, to protect the original's set from changes, we make a copy right here.
+        optionalCosts = EnumSet.copyOf(optionalCosts);
+        optionalCosts.add(cost);
+        if (!cost.getPip().isEmpty()) {
+            pipsToReduce.get().add(cost.getPip());
+        }
+    }
+    public boolean isOptionalCostPaid(OptionalCost cost) {
+        SpellAbility saRoot = getRootAbility();
+        return saRoot.optionalCosts.contains(cost);
+    }
+
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
     public boolean isActivatedAbility() { return false; }
@@ -568,23 +604,141 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return sub != null && sub.hasParam("Epic");
     }
 
-    // If this is not null, then ability was made in a factory
-    public ApiType getApi() {
-        return api;
-    }
-    public void setApi(ApiType apiType) {
-        api = apiType;
+    public boolean isBargained() {
+        return isOptionalCostPaid(OptionalCost.Bargain);
     }
 
-    public SpellAbility findSubAbilityByType(ApiType apiType) {
-        SpellAbility sub = this.getSubAbility();
-        while (sub != null) {
-            if (apiType.equals(sub.getApi())) {
-                return sub;
-            }
-            sub = sub.getSubAbility();
+    public boolean isBuyback() {
+        return isOptionalCostPaid(OptionalCost.Buyback);
+    }
+
+    public boolean isKicked() {
+        return isOptionalCostPaid(OptionalCost.Kicker1) || isOptionalCostPaid(OptionalCost.Kicker2) ||
+                getRootAbility().getOptionalKeywordAmount(Keyword.MULTIKICKER) > 0;
+    }
+
+    public boolean isEntwine() {
+        return isOptionalCostPaid(OptionalCost.Entwine);
+    }
+
+    public boolean isJumpstart() {
+        return isOptionalCostPaid(OptionalCost.Jumpstart);
+    }
+
+    public final boolean isBestow() {
+        return isAlternativeCost(AlternativeCost.Bestow);
+    }
+
+    public final boolean isBlitz() {
+        return isAlternativeCost(AlternativeCost.Blitz);
+    }
+
+    public final boolean isDash() {
+        return isAlternativeCost(AlternativeCost.Dash);
+    }
+
+    public final boolean isDisturb() {
+        return isAlternativeCost(AlternativeCost.Disturb);
+    }
+
+    public final boolean isEscape() {
+        return isAlternativeCost(AlternativeCost.Escape);
+    }
+
+    public final boolean isEvoke() {
+        return isAlternativeCost(AlternativeCost.Evoke);
+    }
+
+    public final boolean isFreerunning() {
+        return isAlternativeCost(AlternativeCost.Freerunning);
+    }
+
+    public final boolean isImpending() {
+        return isAlternativeCost(AlternativeCost.Impending);
+    }
+
+    public final boolean isMadness() {
+        return isAlternativeCost(AlternativeCost.Madness);
+    }
+
+    public final boolean isMutate() {
+        return isAlternativeCost(AlternativeCost.Mutate);
+    }
+
+    public final boolean isProwl() {
+        return isAlternativeCost(AlternativeCost.Prowl);
+    }
+
+    public final boolean isSurged() {
+        return isAlternativeCost(AlternativeCost.Surge);
+    }
+
+    public final boolean isSpectacle() {
+        return isAlternativeCost(AlternativeCost.Spectacle);
+    }
+
+    public boolean isFlashback() {
+        return this.isAlternativeCost(AlternativeCost.Flashback);
+    }
+
+    public boolean isForetelling() {
+        return false;
+    }
+    public boolean isForetold() {
+        return this.isAlternativeCost(AlternativeCost.Foretold);
+    }
+
+    public boolean isPlotting() {
+        return false;
+    }
+
+    public boolean isOutlast() {
+        return isKeyword(Keyword.OUTLAST);
+    }
+
+    public boolean isCraft() {
+        return isKeyword(Keyword.CRAFT);
+    }
+
+    public boolean isCrew() {
+        return isKeyword(Keyword.CREW);
+    }
+
+    public boolean isEquip() {
+        return isKeyword(Keyword.EQUIP);
+    }
+
+    /**
+     * @return the aftermath
+     */
+    public boolean isAftermath() {
+        return aftermath;
+    }
+
+    /**
+     * @param aftermath the aftermath to set
+     */
+    public void setAftermath(boolean aftermath) {
+        this.aftermath = aftermath;
+    }
+
+    public boolean isChapter() {
+        return isTrigger() && getTrigger().isChapter();
+    }
+
+    public Integer getChapter() {
+        if (!isTrigger()) {
+            return null;
         }
-        return null;
+        return getTrigger().getChapter();
+    }
+
+    public boolean isLastChapter() {
+        return isTrigger() && getTrigger().isLastChapter();
+    }
+
+    public boolean isAdventure() {
+        return this.getCardStateName() == CardStateName.Adventure;
     }
 
     public final boolean isCurse() {
@@ -752,45 +906,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void resetPaidHash() {
         paidLists.clear();
-    }
-
-    public Iterable<OptionalCost> getOptionalCosts() {
-        return optionalCosts;
-    }
-    public final void addOptionalCost(OptionalCost cost) {
-        // Optional costs are added to swallow copies of original SAs,
-        // Thus, to protect the original's set from changes, we make a copy right here.
-        optionalCosts = EnumSet.copyOf(optionalCosts);
-        optionalCosts.add(cost);
-        if (!cost.getPip().isEmpty()) {
-            pipsToReduce.get().add(cost.getPip());
-        }
-    }
-
-    public boolean isBargained() {
-        return isOptionalCostPaid(OptionalCost.Bargain);
-    }
-
-    public boolean isBuyback() {
-        return isOptionalCostPaid(OptionalCost.Buyback);
-    }
-
-    public boolean isKicked() {
-        return isOptionalCostPaid(OptionalCost.Kicker1) || isOptionalCostPaid(OptionalCost.Kicker2) ||
-                getRootAbility().getOptionalKeywordAmount(Keyword.MULTIKICKER) > 0;
-    }
-
-    public boolean isEntwine() {
-        return isOptionalCostPaid(OptionalCost.Entwine);
-    }
-
-    public boolean isJumpstart() {
-        return isOptionalCostPaid(OptionalCost.Jumpstart);
-    }
-
-    public boolean isOptionalCostPaid(OptionalCost cost) {
-        SpellAbility saRoot = getRootAbility();
-        return saRoot.optionalCosts.contains(cost);
     }
 
     public Map<AbilityKey, Object> getTriggeringObjects() {
@@ -1068,64 +1183,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         basicSpell = basicSpell0;
     }
 
-    public boolean isFlashback() {
-        return this.isAlternativeCost(AlternativeCost.Flashback);
-    }
-
-    public boolean isForetelling() {
-        return false;
-    }
-    public boolean isForetold() {
-        return this.isAlternativeCost(AlternativeCost.Foretold);
-    }
-
-    public boolean isPlotting() {
-        return false;
-    }
-
-    /**
-     * @return the aftermath
-     */
-    public boolean isAftermath() {
-        return aftermath;
-    }
-
-    /**
-     * @param aftermath the aftermath to set
-     */
-    public void setAftermath(boolean aftermath) {
-        this.aftermath = aftermath;
-    }
-
-    public boolean isOutlast() {
-        return isKeyword(Keyword.OUTLAST);
-    }
-
-    public boolean isCraft() {
-        return isKeyword(Keyword.CRAFT);
-    }
-    public boolean isCrew() {
-        return isKeyword(Keyword.CREW);
-    }
-    public boolean isEquip() {
-        return isKeyword(Keyword.EQUIP);
-    }
-
-    public boolean isChapter() {
-        return isTrigger() && getTrigger().isChapter();
-    }
-
-    public Integer getChapter() {
-        if (!isTrigger()) {
-            return null;
-        }
-        return getTrigger().getChapter();
-    }
-
-    public boolean isLastChapter() {
-        return isTrigger() && getTrigger().isLastChapter();
-    }
-
     public CardPlayOption getMayPlayOption() {
         return mayPlay;
     }
@@ -1134,10 +1191,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setMayPlay(final CardPlayOption sta) {
         mayPlay = sta;
-    }
-
-    public boolean isAdventure() {
-        return this.getCardStateName() == CardStateName.Adventure;
     }
 
     public SpellAbility copy() {
@@ -1501,58 +1554,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     // is this a wrapping ability (used by trigger abilities)
     public boolean isWrapper() {
         return false;
-    }
-
-    public final boolean isBestow() {
-        return isAlternativeCost(AlternativeCost.Bestow);
-    }
-
-    public final boolean isBlitz() {
-        return isAlternativeCost(AlternativeCost.Blitz);
-    }
-
-    public final boolean isDash() {
-        return isAlternativeCost(AlternativeCost.Dash);
-    }
-
-    public final boolean isDisturb() {
-        return isAlternativeCost(AlternativeCost.Disturb);
-    }
-
-    public final boolean isEscape() {
-        return isAlternativeCost(AlternativeCost.Escape);
-    }
-
-    public final boolean isEvoke() {
-        return isAlternativeCost(AlternativeCost.Evoke);
-    }
-
-    public final boolean isFreerunning() {
-        return isAlternativeCost(AlternativeCost.Freerunning);
-    }
-
-    public final boolean isImpending() {
-        return isAlternativeCost(AlternativeCost.Impending);
-    }
-
-    public final boolean isMadness() {
-        return isAlternativeCost(AlternativeCost.Madness);
-    }
-
-    public final boolean isMutate() {
-        return isAlternativeCost(AlternativeCost.Mutate);
-    }
-
-    public final boolean isProwl() {
-        return isAlternativeCost(AlternativeCost.Prowl);
-    }
-
-    public final boolean isSurged() {
-        return isAlternativeCost(AlternativeCost.Surge);
-    }
-
-    public final boolean isSpectacle() {
-        return isAlternativeCost(AlternativeCost.Spectacle);
     }
 
     public List<String> getPipsToReduce() {
@@ -2503,6 +2504,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setSkip(boolean val) {
         skip = val;
     }
+
     public boolean canCastTiming(Player activator) {
         return canCastTiming(getHostCard(), activator);
     }
@@ -2547,7 +2549,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean checkRestrictions(Player activator) {
         return checkRestrictions(getHostCard(), activator);
     }
-
     public boolean checkRestrictions(Card host, Player activator) {
         return true;
     }

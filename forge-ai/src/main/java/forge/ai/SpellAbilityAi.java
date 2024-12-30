@@ -1,7 +1,12 @@
 package forge.ai;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
 import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
@@ -22,10 +27,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import forge.util.collect.FCollectionView;
 
 /**
  * Base class for API-specific AI logic
@@ -153,7 +155,7 @@ public abstract class SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         return true;
     }
-    
+
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
             final String logic) {
         return checkPhaseRestrictions(ai, sa, ph);
@@ -167,7 +169,7 @@ public abstract class SpellAbilityAi {
         }
         return MyRandom.getRandom().nextFloat() < .8f; // random success
     }
-    
+
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         // this evaluation order is currently intentional as it does more stuff that helps avoiding some crashes
         if (!ComputerUtilCost.canPayCost(sa, aiPlayer, true) && !mandatory) {
@@ -247,7 +249,7 @@ public abstract class SpellAbilityAi {
      * <p>
      * isSorcerySpeed.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
@@ -263,7 +265,7 @@ public abstract class SpellAbilityAi {
      * <p>
      * playReusable.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
@@ -276,15 +278,15 @@ public abstract class SpellAbilityAi {
         if (sa instanceof AbilitySub) {
             return true; // This is only true for Drawbacks and triggers
         }
-        
+
         if (!sa.getPayCosts().isReusuableResource()) {
             return false;
         }
-        
+
         if (ComputerUtil.playImmediately(ai, sa)) {
             return true;
         }
-    
+
         if (sa.isPwAbility() && phase.is(PhaseType.MAIN2)) {
             return true;
         }
@@ -303,12 +305,31 @@ public abstract class SpellAbilityAi {
      */
     public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
-        return SpellApiToAi.Converter.get(ab.getApi()).chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));  
+        return SpellApiToAi.Converter.get(ab.getApi()).chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));
     }
 
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of confirmAction is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return true;
+    }
+
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final Card source = sa.getHostCard();
+        final String aiLogic = sa.getParam("UnlessAI");
+        boolean payNever = "Never".equals(aiLogic);
+        boolean isMine = sa.getActivatingPlayer().equals(payer);
+
+        if (payNever) { return false; }
+
+        // AI will only pay when it's not already payed and only opponents abilities
+        if (alreadyPaid || (payers.size() > 1 && isMine)) {
+            return false;
+        }
+
+        return ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
+                && ComputerUtilCost.checkDamageCost(payer, cost, source, 4, sa)
+                && (isMine || ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa))
+                && (isMine || ComputerUtilCost.checkDiscardCost(payer, cost, source, sa));
     }
 
     @SuppressWarnings("unchecked")
@@ -348,7 +369,7 @@ public abstract class SpellAbilityAi {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSingleCard is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);
     }
-    
+
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseSinglePlayer is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
         return Iterables.getFirst(options, null);

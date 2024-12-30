@@ -374,7 +374,7 @@ public class ForgeScript {
             if (sa.isManaAbilityFor(paidFor, colorCanUse)) {
                 return false;
             }
-        } else if(property.equals("NamedSpell")) {
+        } else if (property.equals("NamedSpell")) {
             boolean found = false;
             for (String name : source.getNamedCards()) {
                 if (sa.cardState.getName().equals(name)) {

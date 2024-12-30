@@ -120,22 +120,13 @@ public class ComputerUtil {
 
         game.getStack().freezeStack(sa);
 
-        // TODO: update mana color conversion for Daxos of Meletis
-        if (cost == null) {
-            // Is this fork even used for anything anymore?
-            if (ComputerUtilMana.payManaCost(ai, sa, false)) {
-                game.getStack().addAndUnfreeze(sa);
-                return true;
+        final CostPayment pay = new CostPayment(cost, sa);
+        if (pay.payComputerCosts(new AiCostDecision(ai, sa, false))) {
+            game.getStack().addAndUnfreeze(sa);
+            if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
+                game.getAction().reveal(sa.getSplicedCards(), ai, true, "Computer reveals spliced cards from ");
             }
-        } else {
-            final CostPayment pay = new CostPayment(cost, sa);
-            if (pay.payComputerCosts(new AiCostDecision(ai, sa, false))) {
-                game.getStack().addAndUnfreeze(sa);
-                if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
-                    game.getAction().reveal(sa.getSplicedCards(), ai, true, "Computer reveals spliced cards from ");
-                }
-                return true;
-            }
+            return true;
         }
         // FIXME: Should not arrive here, though the card seems to be stucked on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
         System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
@@ -239,9 +230,8 @@ public class ComputerUtil {
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
+            sa = GameActionUtil.addExtraKeywordCost(sa);
         }
-
-        sa = GameActionUtil.addExtraKeywordCost(sa);
 
         final Cost cost = sa.getPayCosts();
         final CostPayment pay = new CostPayment(cost, sa);
@@ -252,27 +242,11 @@ public class ComputerUtil {
             return false;
         }
 
-        if (cost == null) {
-            ComputerUtilMana.payManaCost(ai, sa, false);
+        if (pay.payComputerCosts(new AiCostDecision(ai, sa, false))) {
             game.getStack().add(sa);
-        } else {
-            if (pay.payComputerCosts(new AiCostDecision(ai, sa, false))) {
-                game.getStack().add(sa);
-            }
+            return true;
         }
-        return true;
-    }
-
-    public static final void playSpellAbilityForFree(final Player ai, final SpellAbility sa) {
-        final Game game = ai.getGame();
-        sa.setActivatingPlayer(ai);
-
-        final Card source = sa.getHostCard();
-        if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setHostCard(game.getAction().moveToStack(source, sa));
-        }
-
-        game.getStack().add(sa);
+        return false;
     }
 
     public static final boolean playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
@@ -324,22 +298,19 @@ public class ComputerUtil {
         }
 
         final Card source = sa.getHostCard();
-        if (sa.isSpell() && !source.isCopiedSpell()) {
+        if (!effect && sa.isSpell() && !source.isCopiedSpell()) {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
+            sa = GameActionUtil.addExtraKeywordCost(sa);
         }
-
-        sa = GameActionUtil.addExtraKeywordCost(sa);
 
         final Cost cost = sa.getPayCosts();
-        if (cost == null) {
-            ComputerUtilMana.payManaCost(ai, sa, effect);
-        } else {
-            final CostPayment pay = new CostPayment(cost, sa);
-            pay.payComputerCosts(new AiCostDecision(ai, sa, effect));
+        final CostPayment pay = new CostPayment(cost, sa);
+        if (pay.payComputerCosts(new AiCostDecision(ai, sa, effect))) {
+            AbilityUtils.resolve(sa);
+            return true;
         }
 
-        AbilityUtils.resolve(sa);
-        return true;
+        return false;
     }
 
     public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList) {
@@ -675,14 +646,13 @@ public class ComputerUtil {
         CardLists.sortByCmcDesc(typeList);
         Collections.reverse(typeList);
 
-
         // TODO AI needs some improvements here
         // Whats the best way to choose evidence to collect?
         // Probably want to filter out cards that have graveyard abilities/castable from graveyard
         // Ideally we remove as few cards as possible "Don't overspend"
 
         final CardCollection exileList = new CardCollection();
-        while(amount > 0) {
+        while (amount > 0) {
             Card c = typeList.remove(0);
 
             amount -= c.getCMC();

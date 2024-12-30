@@ -110,12 +110,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CARD_SIZE ("small"),
         UI_SINGLE_CARD_ZOOM("false"),
         UI_LIBGDX_TEXTURE_FILTERING("true"),
-        UI_BUGZ_NAME (""),
-        UI_BUGZ_PWD (""),
         UI_ANTE ("false"),
         UI_ANTE_MATCH_RARITY ("false"),
-        UI_MANABURN("false"),
-        LEGACY_ORDER_COMBATANTS("false"),
         UI_SKIN ("Default"),
         UI_CJK_FONT (""),
         UI_PREFERRED_AVATARS_ONLY ("false"),
@@ -177,6 +173,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     	UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_FOR_TOUCHSCREN("false"),
         UI_SWITCH_STATES_DECKVIEW("Switch back on hover"),
+        UI_ORDER_HAND("false"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),
@@ -188,7 +185,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         CHECK_SNAPSHOT_AT_STARTUP("true"),
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
-        MATCHPREF_PROMPT_FREE_BLOCKS("false"),
 
         NEW_GAME_SCREEN("Constructed"),
         LOAD_GAME_SCREEN("BoosterDraft"),
@@ -210,6 +206,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         PERFORMANCE_MODE ("false"),
         FILTERED_HANDS ("false"),
         MULLIGAN_RULE(MulliganDefs.getDefaultRule().name()),
+
+        UI_MANABURN("false"),
+        LEGACY_ORDER_COMBATANTS("false"),
 
         DEV_MODE_ENABLED ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),

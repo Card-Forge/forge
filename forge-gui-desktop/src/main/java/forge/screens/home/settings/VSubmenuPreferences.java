@@ -98,7 +98,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox(localizer.getMessage("cbCompactMainMenu"));
     private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox(localizer.getMessage("cbDetailedPaymentDesc"));
     private final JCheckBox cbGrayText = new OptionsCheckBox(localizer.getMessage("cbGrayText"));
-    private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox(localizer.getMessage("cbPromptFreeBlocks"));
     private final JCheckBox cbPauseWhileMinimized = new OptionsCheckBox(localizer.getMessage("cbPauseWhileMinimized"));
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox(localizer.getMessage("cbCompactPrompt"));
     private final JCheckBox cbEscapeEndsTurn = new OptionsCheckBox(localizer.getMessage("cbEscapeEndsTurn"));
@@ -121,6 +120,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCardArtCoreExpansionsOnlyOpt = new OptionsCheckBox(localizer.getMessage("lblPrefArtExpansionOnly"));
     private final JCheckBox cbSmartCardArtSelectionOpt = new OptionsCheckBox(localizer.getMessage("lblSmartCardArtOpt"));
     private final JCheckBox cbShowDraftRanking = new OptionsCheckBox(localizer.getMessage("lblShowDraftRankingOverlay"));
+    private final JCheckBox cbOrderHand = new OptionsCheckBox(localizer.getMessage("cbOrderHand"));
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -161,7 +161,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         final String comboBoxConstraints = "w 80%!, h 25px!, gap 25px 0 0 0px, span 2 1";
         final String descriptionConstraints = "w 80%!, h 22px!, gap 28px 0 0 20px, span 2 1";
 
-        // Troubleshooting
         pnlPrefs.add(new SectionLabel(localizer.getMessage("Troubleshooting")), sectionConstraints);
 
         // Reset buttons
@@ -176,10 +175,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(btnClearImageCache, twoButtonConstraints1);
         pnlPrefs.add(btnTokenPreviewer, twoButtonConstraints2);
 
-        // General Configuration
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GeneralConfiguration")), sectionConstraints);
-
-        // language
 
         pnlPrefs.add(cbpAutoUpdater, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAutoUpdater")), descriptionConstraints);
@@ -233,7 +229,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpLandPlayed, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpLandPlayed")), descriptionConstraints);
-        
+
         pnlPrefs.add(cbEnforceDeckLegality, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnforceDeckLegality")), descriptionConstraints);
 
@@ -249,14 +245,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbpAiTimeout, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAITimeout")), descriptionConstraints);
 
+        pnlPrefs.add(cbOrderHand, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOrderHand")), descriptionConstraints);
+
         pnlPrefs.add(cbFilteredHands, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlFilteredHands")), descriptionConstraints);
 
         pnlPrefs.add(cbCloneImgSource, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloneImgSource")), descriptionConstraints);
-
-        pnlPrefs.add(cbPromptFreeBlocks, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPromptFreeBlocks")), descriptionConstraints);
 
         pnlPrefs.add(cbPauseWhileMinimized, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPauseWhileMinimized")), descriptionConstraints);
@@ -801,11 +797,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FComboBoxPanel<String> getCbpStackAdditionsComboBoxPanel() {
         return cbpStackAdditions;
     }
-  
+
     public FComboBoxPanel<String> getCbpLandPlayedComboBoxPanel() {
         return cbpLandPlayed;
     }
-    
+
     public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
     }
@@ -874,6 +870,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbExperimentalRestore;
     }
 
+    public JCheckBox getCbOrderHand() {
+        return cbOrderHand;
+    }
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbFilteredHands() {
         return cbFilteredHands;
@@ -882,11 +882,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbCloneImgSource() {
         return cbCloneImgSource;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbPromptFreeBlocks() {
-        return cbPromptFreeBlocks;
     }
 
     public JCheckBox getCbPauseWhileMinimized() {
@@ -912,7 +907,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public JCheckBox getCbSROptimize() {
         return cbSROptimize;
     }
-    
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbTimedTargOverlay() {
         return cbTimedTargOverlay;
@@ -957,7 +952,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public final JCheckBox getCbManaLostPrompt() {
     	return cbManaLostPrompt;
     }
-    
+
     public final JCheckBox getCbDetailedPaymentDesc() {
         return cbDetailedPaymentDesc;
     }

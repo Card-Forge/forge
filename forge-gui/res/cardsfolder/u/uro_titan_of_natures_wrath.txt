@@ -10,6 +10,5 @@ SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | SubAbility$ DBLand
 SVar:DBLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | OptionalDecider$ You
 K:Escape:G G U U ExileFromGrave<5/Card.Other/other>
-SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
 DeckHas:Ability$LifeGain
 Oracle:When Uro enters, sacrifice it unless it escaped.\nWhenever Uro enters or attacks, you gain 3 life and draw a card, then you may put a land card from your hand onto the battlefield.\nEscape—{G}{G}{U}{U}, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

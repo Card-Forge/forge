@@ -549,7 +549,7 @@ public class AiController {
                 repParams.put(AbilityKey.EffectOnly, true);
                 repParams.put(AbilityKey.CounterTable, table);
                 repParams.put(AbilityKey.CounterMap, table.column(land));
-                
+
                 boolean foundTapped = false;
                 for (ReplacementEffect re : player.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
                     SpellAbility reSA = re.ensureAbility();
@@ -717,12 +717,14 @@ public class AiController {
         return reserveManaSources(sa, phaseType, enemy, true, null);
     }
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean forNextSpell, SpellAbility exceptForThisSa) {
-        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
+        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa.getPayCosts(), sa, true, 0, false);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
 
         // used for chained spells where two spells need to be cast in succession
         if (exceptForThisSa != null) {
-            manaSources.removeAll(ComputerUtilMana.getManaSourcesToPayCost(ComputerUtilMana.calculateManaCost(exceptForThisSa, true, 0), exceptForThisSa, player));
+            manaSources.removeAll(ComputerUtilMana.getManaSourcesToPayCost(
+                    ComputerUtilMana.calculateManaCost(exceptForThisSa.getPayCosts(), exceptForThisSa, true, 0, false),
+                    exceptForThisSa, player));
         }
 
         if (manaSources.isEmpty()) {
@@ -820,7 +822,7 @@ public class AiController {
             }
             // TODO check for Reduce too, e.g. Battlefield Thaumaturge could make it castable
             if (!sa.getAllTargetChoices().isEmpty()) {
-                oldCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
+                oldCMC = CostAdjustment.adjust(sa.getPayCosts(), sa, false).getTotalMana().getCMC();
             }
         }
 
@@ -853,7 +855,7 @@ public class AiController {
 
         // check if some target raised cost
         if (!xCost && oldCMC > -1) {
-            int finalCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
+            int finalCMC = CostAdjustment.adjust(sa.getPayCosts(), sa, false).getTotalMana().getCMC();
             if (finalCMC > oldCMC) {
                 xCost = true;
             }
@@ -1013,7 +1015,7 @@ public class AiController {
                 costWithBuyback.add(opt.getCost());
             }
         }
-        costWithBuyback = CostAdjustment.adjust(costWithBuyback, sa);
+        costWithBuyback = CostAdjustment.adjust(costWithBuyback, sa, false);
         if (costWithBuyback.hasSpecificCostType(CostPayLife.class)
                 || costWithBuyback.hasSpecificCostType(CostDiscard.class)
                 || costWithBuyback.hasSpecificCostType(CostSacrifice.class)) {
