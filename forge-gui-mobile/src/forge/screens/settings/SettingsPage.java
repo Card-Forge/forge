@@ -248,6 +248,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("nlAITimeout"),
                 Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ORDER_HAND,
+                Forge.getLocalizer().getMessage("cbOrderHand"),
+                Forge.getLocalizer().getMessage("nlOrderHand")),
+        1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
                 Forge.getLocalizer().getMessage("cbFilteredHands"),
                 Forge.getLocalizer().getMessage("nlFilteredHands")),

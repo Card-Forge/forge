@@ -321,6 +321,8 @@ public abstract class PlayerController {
         return gameView.getAnteResult(player.getView());
     }
 
+    public boolean isOrderedZone() { return false; }
+
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
 
     public abstract boolean confirmMulliganScry(final Player p);
