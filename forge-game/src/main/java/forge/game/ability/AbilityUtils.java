@@ -1366,7 +1366,7 @@ public class AbilityUtils {
             }
         }
 
-        if (source.hasKeyword(Keyword.GIFT) && sa.isOptionalCostPaid(OptionalCost.PromiseGift)) {
+        if (source.hasKeyword(Keyword.GIFT) && sa.isGiftPromised()) {
             game.getAction().checkStaticAbilities();
             // Is AdditionalAbility available from anything here?
             AbilitySub giftAbility = (AbilitySub) sa.getAdditionalAbility("GiftAbility");
@@ -2058,6 +2058,9 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("Kicked")) { // fallback for not spellAbility
             return doXMath(calculateAmount(c, sq[!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0 ? 1 : 2], ctb), expr, c, ctb);
+        }
+        if (sq[0].startsWith("PromisedGift")) {
+            return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isGiftPromised() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("Escaped")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2], ctb), expr, c, ctb);
