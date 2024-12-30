@@ -3304,4 +3304,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return result;
     }
 
+    @Override
+    public boolean isOrderedZone() {
+        return FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND);
+    }
+
 }
