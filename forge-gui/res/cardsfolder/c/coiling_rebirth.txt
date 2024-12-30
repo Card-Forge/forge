@@ -4,8 +4,7 @@ Types:Sorcery
 K:Gift
 SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBCopy | RememberChanged$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield. Then if the gift was promised and that creature isn't legendary, create a token that's a copy of that creature, except it's 1/1.
-SVar:DBCopy:DB$ CopyPermanent | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2 | Defined$ Remembered | SetPower$ 1 | SetToughness$ 1 | SubAbility$ DBCleanup
+SVar:DBCopy:DB$ CopyPermanent | ConditionCheckSVar$ X | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLegendary | Defined$ Remembered | SetPower$ 1 | SetToughness$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$ValidStack Card.Self+PromisedGift/Plus.Y
-SVar:Y:Count$Valid Card.IsRemembered+nonLegendary
+SVar:X:Count$PromisedGift.1.0
 Oracle:Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)\nReturn target creature card from your graveyard to the battlefield. Then if the gift was promised and that creature isn't legendary, create a token that's a copy of that creature, except it's 1/1.

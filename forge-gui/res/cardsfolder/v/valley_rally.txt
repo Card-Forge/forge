@@ -5,5 +5,5 @@ K:Gift
 SVar:GiftAbility:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ Promised | GiftDescription$ a Food
 A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ DBPump | SpellDescription$ Creatures you control get +2/+0 until end of turn. If the gift was promised, target creature you control gains first strike until end of turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select target creature you control | KW$ First Strike
-SVar:X:Count$ValidStack Card.Self+PromisedGift
+SVar:X:Count$PromisedGift.1.0
 Oracle:Gift a Food (You may promise an opponent a gift as you cast this spell. If you do, they create a Food token before its other effects. It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nCreatures you control get +2/+0 until end of turn. If the gift was promised, target creature you control gains first strike until end of turn.
