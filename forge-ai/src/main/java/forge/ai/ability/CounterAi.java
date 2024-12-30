@@ -378,7 +378,7 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             // no reason to pay if we don't plan to confirm
-            if (toBeCountered.isOptionalTrigger() && !SpellApiToAi.Converter.get(toBeCountered.getApi()).doTriggerNoCostWithSubs(payer, toBeCountered, false)) {
+            if (toBeCountered.isOptionalTrigger() && !SpellApiToAi.Converter.get(toBeCountered).doTriggerNoCostWithSubs(payer, toBeCountered, false)) {
                 return false;
             }
             // TODO check hasFizzled

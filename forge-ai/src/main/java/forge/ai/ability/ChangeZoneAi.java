@@ -455,7 +455,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        return subAb == null || SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb);
+        return subAb == null || SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(ai, subAb);
     }
 
     /**
@@ -773,7 +773,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        return subAb == null || SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb);
+        return subAb == null || SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(ai, subAb);
     }
 
     /*

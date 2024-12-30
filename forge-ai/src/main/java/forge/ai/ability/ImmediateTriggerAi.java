@@ -24,7 +24,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
-            return SpellApiToAi.Converter.get(trigsa.getApi()).chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
+            return SpellApiToAi.Converter.get(trigsa).chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
         } else {
             return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
         }

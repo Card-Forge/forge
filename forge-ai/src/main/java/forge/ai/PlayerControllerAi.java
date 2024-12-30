@@ -46,7 +46,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -352,11 +351,7 @@ public class PlayerControllerAi extends PlayerController {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return SpellApiToAi.Converter.get(api).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer, params);
+        return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer, params);
     }
 
     @Override
@@ -398,11 +393,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public SpellAbility chooseSingleSpellForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
             Map<String, Object> params) {
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return SpellApiToAi.Converter.get(api).chooseSingleSpellAbility(player, sa, spells, params);
+        return SpellApiToAi.Converter.get(sa).chooseSingleSpellAbility(player, sa, spells, params);
     }
 
     @Override
@@ -876,11 +867,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public int chooseNumber(SpellAbility sa, String string, int min, int max, Map<String, Object> params) {
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return SpellApiToAi.Converter.get(api).chooseNumber(player, sa, min, max, params);
+        return SpellApiToAi.Converter.get(sa).chooseNumber(player, sa, min, max, params);
     }
 
     @Override
@@ -982,11 +969,7 @@ public class PlayerControllerAi extends PlayerController {
      */
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Map<String, Object> params) {
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return SpellApiToAi.Converter.get(api).chooseBinary(kindOfChoice, sa, params);
+        return SpellApiToAi.Converter.get(sa).chooseBinary(kindOfChoice, sa, params);
     }
 
     @Override
@@ -1056,11 +1039,7 @@ public class PlayerControllerAi extends PlayerController {
         if (options.size() <= 1) {
             return Iterables.getFirst(options, null);
         }
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return SpellApiToAi.Converter.get(api).chooseCounterType(options, sa, params);
+        return SpellApiToAi.Converter.get(sa).chooseCounterType(options, sa, params);
     }
 
     @Override
@@ -1217,7 +1196,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
-        if (SpellApiToAi.Converter.get(sa.getApi()).willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
+        if (SpellApiToAi.Converter.get(sa).willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
             if (!ComputerUtilCost.canPayCost(cost, sa, player, true)) {
                 return false;
             }
@@ -1397,11 +1376,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return SpellApiToAi.Converter.get(api).chooseCardName(player, sa, faces);
+        return SpellApiToAi.Converter.get(sa).chooseCardName(player, sa, faces);
     }
 
     @Override
@@ -1506,11 +1481,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return SpellApiToAi.Converter.get(api).chooseCardFace(player, sa, faces);
+        return SpellApiToAi.Converter.get(sa).chooseCardFace(player, sa, faces);
     }
 
     @Override
@@ -1520,11 +1491,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
-        ApiType api = sa.getApi();
-        if (null == api) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        return SpellApiToAi.Converter.get(api).chooseCardState(player, sa, states, params);
+        return SpellApiToAi.Converter.get(sa).chooseCardState(player, sa, states, params);
     }
 
     @Override
@@ -1576,32 +1543,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen, List<OptionalCostValue> optionalCostValues) {
-        List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
-        Cost costSoFar = chosen.getPayCosts().copy();
-
-        for (OptionalCostValue opt : optionalCostValues) {
-            // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
-            Cost fullCost = opt.getCost().copy().add(costSoFar);
-            SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
-
-            // Playability check for Kicker
-            if (opt.getType() == OptionalCost.Kicker1 || opt.getType() == OptionalCost.Kicker2) {
-                SpellAbility kickedSaCopy = fullCostSa.copy();
-                kickedSaCopy.addOptionalCost(opt.getType());
-                Card copy = CardCopyService.getLKICopy(chosen.getHostCard());
-                copy.setCastSA(kickedSaCopy);
-                if (ComputerUtilCard.checkNeedsToPlayReqs(copy, kickedSaCopy) != AiPlayDecision.WillPlay) {
-                    continue; // don't choose kickers we don't want to play
-                }
-            }
-
-            if (ComputerUtilCost.canPayCost(fullCostSa, player, false)) {
-                chosenOptCosts.add(opt);
-                costSoFar.add(opt.getCost());
-            }
-        }
-
-        return chosenOptCosts;
+        return SpellApiToAi.Converter.get(chosen).chooseOptionalCosts(chosen, player, optionalCostValues);
     }
 
     @Override
@@ -1661,5 +1603,4 @@ public class PlayerControllerAi extends PlayerController {
 
         return choices;
     }
-
 }
