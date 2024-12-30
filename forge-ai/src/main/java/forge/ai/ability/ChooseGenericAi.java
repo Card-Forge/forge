@@ -29,7 +29,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
             return true;
         } else if ("Pump".equals(aiLogic) || "BestOption".equals(aiLogic)) {
             for (AbilitySub sb : sa.getAdditionalAbilityList("Choices")) {
-                if (SpellApiToAi.Converter.get(sb.getApi()).canPlayAIWithSubs(ai, sb)) {
+                if (SpellApiToAi.Converter.get(sb).canPlayAIWithSubs(ai, sb)) {
                     return true;
                 }
             }
@@ -93,7 +93,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
                 String unlessCost = sp.getParam("UnlessCost");
                 sp.setActivatingPlayer(sa.getActivatingPlayer());
                 Cost unless = new Cost(unlessCost, false);
-                if (SpellApiToAi.Converter.get(sp.getApi()).willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
+                if (SpellApiToAi.Converter.get(sp).willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
                         && ComputerUtilCost.canPayCost(unless, sp, player, true)) {
                     return sp;
                 }
@@ -262,7 +262,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
             List<SpellAbility> filtered = Lists.newArrayList();
             // filter first for the spells which can be done
             for (SpellAbility sp : spells) {
-                if (SpellApiToAi.Converter.get(sp.getApi()).canPlayAIWithSubs(player, sp)) {
+                if (SpellApiToAi.Converter.get(sp).canPlayAIWithSubs(player, sp)) {
                     filtered.add(sp);
                 }
             }
