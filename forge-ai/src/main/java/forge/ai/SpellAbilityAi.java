@@ -418,6 +418,7 @@ public abstract class SpellAbilityAi {
         List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
         Cost costSoFar = chosen.getPayCosts().copy();
 
+        outer:
         for (OptionalCostValue opt : optionalCostValues) {
             // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
             Cost fullCost = opt.getCost().copy().add(costSoFar);
@@ -435,6 +436,33 @@ public abstract class SpellAbilityAi {
             }
 
             if (ComputerUtilCost.canPayCost(fullCostSa, player, false)) {
+                // check for additional Cost breaking targets AI had already chosen
+                boolean targeting = false;
+                SpellAbility sub = fullCostSa;
+                while (sub != null) {
+                    if (sub.usesTargeting()) {
+                        targeting = true;
+                        break;
+                    }
+                    sub = sub.getSubAbility();
+                }
+                if (targeting) {
+                    fullCostSa.addOptionalCost(opt.getType());
+                    Card copy = CardCopyService.getLKICopy(chosen.getHostCard());
+                    copy.setCastSA(fullCostSa);
+                    fullCostSa.setHostCard(copy);
+
+                    sub = fullCostSa;
+                    while (sub != null) {
+                        if (sub.usesTargeting() && !sub.isTargetNumberValid()) {
+                            // adding cost would break target
+                            continue outer;
+                        }
+                        sub = sub.getSubAbility();
+                    }
+
+                }
+
                 chosenOptCosts.add(opt);
                 costSoFar.add(opt.getCost());
             }
