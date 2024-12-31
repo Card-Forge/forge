@@ -7,6 +7,7 @@ import forge.game.zone.ZoneType;
 public class StaticAbilityCantChangeDayTime {
 
     static String MODE = "CantChangeDayTime";
+
     public static boolean cantChangeDay(final Game game, Boolean value) {
         if (value == null) {
             return false;
@@ -22,7 +23,6 @@ public class StaticAbilityCantChangeDayTime {
             }
         }
         return false;
-        
     }
 
     private static boolean cantChangeDayCheck(final StaticAbility stAb, final Boolean value) {

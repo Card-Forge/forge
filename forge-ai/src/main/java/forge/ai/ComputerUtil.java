@@ -646,14 +646,13 @@ public class ComputerUtil {
         CardLists.sortByCmcDesc(typeList);
         Collections.reverse(typeList);
 
-
         // TODO AI needs some improvements here
         // Whats the best way to choose evidence to collect?
         // Probably want to filter out cards that have graveyard abilities/castable from graveyard
         // Ideally we remove as few cards as possible "Don't overspend"
 
         final CardCollection exileList = new CardCollection();
-        while(amount > 0) {
+        while (amount > 0) {
             Card c = typeList.remove(0);
 
             amount -= c.getCMC();
