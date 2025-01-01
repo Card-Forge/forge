@@ -42,7 +42,6 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventPlayerStatsChanged event);
     T visit(GameEventRandomLog event);
     T visit(GameEventRollDie event);
-    T visit(GameEventTokenStateUpdate event);
     T visit(GameEventScry event);
     T visit(GameEventShuffle event);
     T visit(GameEventSpellAbilityCast event);
@@ -98,7 +97,6 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventPlayerStatsChanged event) { return null; }
         public T visit(GameEventRandomLog event) { return null; }
         public T visit(GameEventRollDie event) { return null; }
-        public T visit(GameEventTokenStateUpdate event) { return null; }
         public T visit(GameEventScry event) { return null; }
         public T visit(GameEventShuffle event) { return null; }
         public T visit(GameEventSpellResolved event) { return null; }

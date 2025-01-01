@@ -190,10 +190,13 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventTurnPhase ev) {
         needPhaseUpdate = true;
-        if (ev.phaseDesc == "dev")
-            needSaveState = false;
-        else
-            needSaveState = true;
+        needSaveState = !"dev".equals(ev.phaseDesc);
+
+        Player ap = ev.playerTurn;
+        boolean refreshField = !ap.getTokensInPlay().isEmpty() || (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && !ap.getCreaturesInPlay().isEmpty());
+        if (refreshField) {
+            updateZone(ap, ZoneType.Battlefield);
+        }
         return processEvent();
     }
 
@@ -207,10 +210,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventTurnBegan event) {
         turnUpdate = event.turnOwner.getView();
         processPlayer(event.turnOwner, livesUpdate);
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && event.turnOwner != null) {
-            // anything except stack will get here
-            updateZone(event.turnOwner, ZoneType.Battlefield);
-        }
         return processEvent();
     }
 
@@ -408,7 +407,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardChangeZone event) {
-        if(GuiBase.getInterface().isLibgdxPort()) {
+        if (GuiBase.getInterface().isLibgdxPort()) {
             updateZone(event.from);
             return updateZone(event.to);
         } else {
@@ -456,13 +455,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         processPlayer(event.player, livesUpdate);
         matchController.handleLandPlayed(event.land);
         return processCard(event.land, cardsRefreshDetails);
-    }
-
-    @Override
-    public Void visit(final GameEventTokenStateUpdate event) {
-        refreshFieldUpdate = true;
-        processCards(event.cards, cardsRefreshDetails);
-        return processCards(event.cards, cardsUpdate);
     }
 
     @Override

@@ -788,7 +788,6 @@ public class MatchScreen extends FScreen {
     public void forceRevalidate() {
         for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
             playerPanel.revalidate(true);
-
         }
     }
 
