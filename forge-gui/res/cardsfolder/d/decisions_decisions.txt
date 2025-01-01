@@ -1,0 +1,9 @@
+Name:Decisions, Decisions
+ManaCost:3 U
+Types:Sorcery
+A:SP$ PeekAndReveal | PeekAmount$ 3 | RememberRevealed$ True | SubAbility$ DBChooseConsonant | StackDescription$ SpellDescription | SpellDescription$ Reveal the top three cards of your library, then choose a consonant. (Y counts.)
+SVar:DBChooseConsonant:DB$ ChooseLetter | Consonant$ True | SubAbility$ DBChangeZone | StackDescription$ None
+SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered+ChosenLetterFirstWordContains | ForgetChanged$ True | SubAbility$ DBLibrary | StackDescription$ SpellDescription | SpellDescription$ Put each card that has the chosen letter in the first word of its name from among them into your hand and the rest on the bottom of your library in any order.
+SVar:DBLibrary:DB$ ChangeZoneAll | Origin$ Library | Destination$ Library | ChangeType$ Card.IsRemembered | LibraryPosition$ -1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Reveal the top three cards of your library, then choose a consonant. (Y counts.) Put each card that has the chosen letter in the first word of its name from among them into your hand and the rest on the bottom of your library in any order.
