@@ -185,8 +185,6 @@ public class PhaseHandler implements java.io.Serializable {
                 final int lands = CardLists.count(playerTurn.getLandsInPlay(), CardPredicates.UNTAPPED);
                 playerTurn.setNumPowerSurgeLands(lands);
             }
-            //update tokens
-            game.fireEvent(new GameEventTokenStateUpdate(playerTurn.getTokensInPlay()));
 
             // Replacement effects
             final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(playerTurn);

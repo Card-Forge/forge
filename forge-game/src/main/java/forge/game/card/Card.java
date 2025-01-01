@@ -5150,8 +5150,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         if (updateView) {
             updateKeywords();
-            if (isToken())
-                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
     }
 
@@ -5239,8 +5237,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         changed |= changedCardKeywordsByText.remove(timestamp, staticId) != null;
         if (updateView) {
             updateKeywords();
-            if (isToken())
-                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
         return changed;
     }
@@ -5515,8 +5511,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (change && updateView) {
             getView().updateCantHaveKeyword(this);
             updateKeywords();
-            if (isToken())
-                game.fireEvent(new GameEventTokenStateUpdate(this));
         }
         return change;
     }
