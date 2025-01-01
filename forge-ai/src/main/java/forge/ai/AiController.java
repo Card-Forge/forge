@@ -775,9 +775,15 @@ public class AiController {
         if (currentState != null) {
             host.setState(sa.getCardStateName(), false);
         }
+        if (sa.isSpell()) {
+            host.setCastSA(sa);
+        }
 
         AiPlayDecision decision = canPlayAndPayForFace(sa);
 
+        if (sa.isSpell()) {
+            host.setCastSA(null);
+        }
         if (currentState != null) {
             host.setState(currentState, false);
         }
