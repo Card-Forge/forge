@@ -254,6 +254,11 @@ public class PhaseHandler implements java.io.Serializable {
                     nUpkeepsThisGame++;
                     game.getUpkeep().executeUntil(playerTurn);
                     game.getUpkeep().executeAt();
+
+                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
+                        playerTurn.advanceCrankCounter();
+                    }
+
                     break;
 
                 case DRAW:

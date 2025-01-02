@@ -166,6 +166,11 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public List<Card> chooseContraptionsToCrank(List<Card> contraptions) {
+        return contraptions;
+    }
+
+    @Override
     public boolean helpPayForAssistSpell(ManaCostBeingPaid cost, SpellAbility sa, int max, int requested) {
         // For now, don't change anything for assists in tests
         // "True" here means don't rewind spell
@@ -504,6 +509,11 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         return chooseItem(sectors);
+    }
+
+    @Override
+    public int chooseSprocket(Card assignee, boolean forceDifferent) {
+        return forceDifferent && assignee.getSprocket() == 1 ? 2 : 1;
     }
 
     @Override

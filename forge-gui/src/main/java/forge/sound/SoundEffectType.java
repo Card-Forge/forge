@@ -89,6 +89,7 @@ public enum SoundEffectType {
     ScriptedEffect("", false), // Plays the effect defined by SVar:SoundEffect
     Shuffle("shuffle.mp3", false),
     Sorcery("sorcery.mp3", false),
+    Sprocket("sprocket.mp3", true),
     TakeShard("take_shard.mp3", false),
     StartDuel("start_duel.mp3",false),
     Tap("tap.mp3", false),

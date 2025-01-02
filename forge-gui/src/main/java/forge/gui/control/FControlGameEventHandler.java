@@ -480,6 +480,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(GameEventSprocketUpdate event) {
+        updateZone(event.contraption.getZone());
+        return processEvent();
+    }
+
+    @Override
     public Void visit(final GameEventManaPool event) {
         return processPlayer(event.player, manaPoolUpdate);
     }

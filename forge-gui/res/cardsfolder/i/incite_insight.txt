@@ -1,0 +1,6 @@
+Name:Incite Insight
+ManaCost:X U U
+Types:Sorcery
+A:SP$ AssembleContraption | Amount$ X | SpellDescription$ Assemble X Contraptions.
+SVar:X:Count$xPaid
+Oracle:Assemble X Contraptions. (To assemble a Contraption, put the top card of your Contraption deck face up onto one of your sprockets.)
