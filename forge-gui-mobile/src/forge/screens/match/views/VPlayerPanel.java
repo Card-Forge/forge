@@ -408,7 +408,7 @@ public class VPlayerPanel extends FContainer {
                 tab.setBounds(x, y, infoTabWidth, infoTabHeight);
                 y += infoTabHeight;
             } else {
-                if (tab.getUseAltDisplay()) {
+                if (!tab.isAlignedRightForAltDisplay()) {
                     tab.setBounds(x, y, infoTabWidth, infoTabHeight);
                     y += infoTabHeight;
                 } else {
@@ -670,7 +670,7 @@ public class VPlayerPanel extends FContainer {
         protected FSkinColor getSelectedBackgroundColor() {
             return getDisplayAreaBackColor();
         }
-        protected boolean getUseAltDisplay() {
+        protected boolean isAlignedRightForAltDisplay() {
             return false;
         }
 
@@ -678,7 +678,7 @@ public class VPlayerPanel extends FContainer {
         public void draw(Graphics g) {
             float x, y, w, h;
             boolean drawOverlay = MatchController.getView().selectedPlayerPanel().getPlayer() == player && Forge.hasGamepad();
-            if (Forge.altZoneTabs && this.getUseAltDisplay()) {
+            if (Forge.altZoneTabs && this.isAlignedRightForAltDisplay()) {
                 //draw extra
                 g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2), 0, 0, getWidth(), getHeight());
                 if (isSelected()) {
@@ -842,7 +842,7 @@ public class VPlayerPanel extends FContainer {
         }
 
         private final EnumSet<ZoneType> altDisplayZones = EnumSet.of(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile);
-        public boolean getUseAltDisplay() {
+        public boolean isAlignedRightForAltDisplay() {
             return altDisplayZones.contains(this.zoneType);
         }
 
