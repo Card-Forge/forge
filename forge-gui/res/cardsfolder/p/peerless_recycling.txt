@@ -4,5 +4,5 @@ Types:Instant
 K:Gift
 SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ X | TargetMax$ X | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return target permanent card from your graveyard to your hand. If the gift was promised, instead return two target permanent cards from your graveyard to your hand.
-SVar:X:Count$ValidStack Card.Self+PromisedGift/Plus.1
+SVar:X:Count$PromisedGift.2.1
 Oracle:Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)\nReturn target permanent card from your graveyard to your hand. If the gift was promised, instead return two target permanent cards from your graveyard to your hand.

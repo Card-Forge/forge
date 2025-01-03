@@ -775,9 +775,15 @@ public class AiController {
         if (currentState != null) {
             host.setState(sa.getCardStateName(), false);
         }
+        if (sa.isSpell()) {
+            host.setCastSA(sa);
+        }
 
         AiPlayDecision decision = canPlayAndPayForFace(sa);
 
+        if (sa.isSpell()) {
+            host.setCastSA(null);
+        }
         if (currentState != null) {
             host.setState(currentState, false);
         }
@@ -918,7 +924,7 @@ public class AiController {
             Sentry.setExtra("Card", card.getName());
             Sentry.setExtra("SA", sa.toString());
 
-            boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
+            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayAIWithSubs(player, sa);
 
             // remove added extra
             Sentry.removeExtra("Card");
@@ -1296,9 +1302,9 @@ public class AiController {
         if (spell instanceof SpellApiBased) {
             boolean chance = false;
             if (withoutPayingManaCost) {
-                chance = SpellApiToAi.Converter.get(spell.getApi()).doTriggerNoCostWithSubs(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell).doTriggerNoCostWithSubs(player, spell, mandatory);
             } else {
-                chance = SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell).doTriggerAI(player, spell, mandatory);
             }
             if (!chance) {
                 return AiPlayDecision.TargetingFailed;
@@ -1726,7 +1732,7 @@ public class AiController {
         if (spell instanceof WrappedAbility)
             return doTrigger(((WrappedAbility) spell).getWrappedAbility(), mandatory);
         if (spell.getApi() != null)
-            return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
+            return SpellApiToAi.Converter.get(spell).doTriggerAI(player, spell, mandatory);
         if (spell.getPayCosts() == Cost.Zero && !spell.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;

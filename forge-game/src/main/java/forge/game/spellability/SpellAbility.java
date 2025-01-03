@@ -625,6 +625,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isOptionalCostPaid(OptionalCost.Jumpstart);
     }
 
+    public boolean isGiftPromised() {
+        return isOptionalCostPaid(OptionalCost.PromiseGift);
+    }
+
     public final boolean isBestow() {
         return isAlternativeCost(AlternativeCost.Bestow);
     }
