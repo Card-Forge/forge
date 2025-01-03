@@ -14,8 +14,11 @@ import forge.assets.FSkinImageInterface;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.player.PlayerView;
+import forge.gamemodes.match.input.Input;
+import forge.gamemodes.match.input.InputPayMana;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.GamePlayerUtil;
+import forge.player.PlayerControllerHuman;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 
@@ -111,9 +114,12 @@ public class VManaPool extends VDisplayArea {
             return true;
         }
         public void activate() {
-            if (player.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
-                MatchController.instance.getGameController().useMana(colorCode);
-            }
+            if(!(MatchController.instance.getGameController() instanceof PlayerControllerHuman))
+                return;
+            PlayerControllerHuman controller = (PlayerControllerHuman) MatchController.instance.getGameController();
+            final Input ipm = controller.getInputQueue().getInput();
+            if(ipm instanceof InputPayMana && ipm.getOwner().equals(player))
+                controller.useMana(colorCode);
         }
         @Override
         public boolean flick(float x, float y) {

@@ -303,6 +303,8 @@ public class FSkin {
         final FileHandle f14 = getDefaultSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
         final FileHandle f15 = getSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
         final FileHandle f16 = getDefaultSkinFile(ForgeConstants.SPRITE_WATERMARK_FILE);
+        final FileHandle f24 = getSkinFile(ForgeConstants.SPRITE_ZONE_FILE);
+        final FileHandle f24b = getDefaultSkinFile(ForgeConstants.SPRITE_ZONE_FILE);
         */
 
         try {

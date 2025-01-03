@@ -21,13 +21,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
@@ -151,6 +146,10 @@ import net.miginfocom.swing.MigLayout;
 public final class CMatchUI
     extends AbstractGuiGame
     implements ICDoc, IMenuProvider {
+
+    public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
+            ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,
+            ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck, ZoneType.Junkyard);
 
     private final FScreen screen;
     private final VMatchUI view;
@@ -450,7 +449,12 @@ public final class CMatchUI
                 }
             }
 
+            if (updateAnte) {
+                cAntes.update();
+            }
             final VField vField = getFieldViewFor(owner);
+            if(vField == null)
+                return;
             if (setupPlayZone) {
                 vField.getTabletop().update();
             }
@@ -461,9 +465,6 @@ public final class CMatchUI
                 }
                 // update Cards in Hand
                 vField.updateDetails();
-            }
-            if (updateAnte) {
-                cAntes.update();
             }
             if (updateZones) {
                 vField.updateZones();
@@ -488,18 +489,12 @@ public final class CMatchUI
                                 }
                             }
                             break;
-                        case Library:
-                        case Graveyard:
-                        case Exile:
-                        case Flashback:
-                        case Command:
-                        case Ante:
-                        case Sideboard:
+                        default:
+                            if(!FLOATING_ZONE_TYPES.contains(zone))
+                                break;
                             if (FloatingZone.show(this,player,zone)) {
                                 updatedPlayerZones.add(update);
                             }
-                            break;
-                        default:
                             break;
                     }
                 }
@@ -513,22 +508,8 @@ public final class CMatchUI
             for (final PlayerZoneUpdate update : zonesToUpdate) {
                 final PlayerView player = update.getPlayer();
                 for (final ZoneType zone : update.getZones()) {
-                    switch (zone) {
-                        case Battlefield: // always shown
-                            break;
-                        case Hand: // the controller's hand should never be temporarily shown, but ...
-                        case Library:
-                        case Graveyard:
-                        case Exile:
-                        case Flashback:
-                        case Command:
-                        case Ante:
-                        case Sideboard:
-                            FloatingZone.hide(this,player,zone);
-                            break;
-                        default:
-                            break;
-                    }
+                    if(FLOATING_ZONE_TYPES.contains(zone))
+                        FloatingZone.hide(this,player,zone);
                 }
             }
         }
@@ -579,7 +560,7 @@ public final class CMatchUI
                 }
                 break;
             default:
-		        FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
+                FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
                 break;
             }
         }
@@ -706,8 +687,8 @@ public final class CMatchUI
      */
     private CardPanel findCardPanel(final CardView card) {
         final int id = card.getId();
-        switch (card.getZone()) {
-        case Battlefield:
+        ZoneType zone = card.getZone();
+        if (zone == ZoneType.Battlefield) {
             for (final VField f : view.getFieldViews()) {
                 final CardPanel panel = f.getTabletop().getCardPanel(id);
                 if (panel != null) {
@@ -715,8 +696,8 @@ public final class CMatchUI
                     return panel;
                 }
             }
-            break;
-        case Hand:
+        }
+        else if (zone == ZoneType.Hand) {
             for (final VHand h : view.getHands()) {
                 final CardPanel panel = h.getHandArea().getCardPanel(id);
                 if (panel != null) {
@@ -724,15 +705,9 @@ public final class CMatchUI
                     return panel;
                 }
             }
-            break;
-        case Command:
-        case Exile:
-        case Graveyard:
-        case Library:
-            return FloatingZone.getCardPanel(this, card);
-        default:
-            break;
         }
+        else if (FLOATING_ZONE_TYPES.contains(zone))
+            return FloatingZone.getCardPanel(this, card);
         return null;
     }
 
@@ -1230,6 +1205,7 @@ public final class CMatchUI
         final List<VField> fieldViews = getFieldViews();
 
         // Human field is at index [0]
+        //TODO: Rework without that assumption; not true in 4 AI game or hotseat game.
         final PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
         fvHuman.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
         fvHuman.getLblDraw().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));

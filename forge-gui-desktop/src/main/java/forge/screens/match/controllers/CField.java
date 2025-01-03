@@ -58,24 +58,11 @@ public class CField implements ICDoc {
 
     /**
      * Controls Swing components of a player's field instance.
-     *
-     * @param player0 &emsp; {@link forge.game.player.Player}
-     * @param v0 &emsp; {@link forge.screens.match.views.VField}
-     * @param playerViewer
      */
     public CField(final CMatchUI matchUI, final PlayerView player0, final VField v0) {
         this.matchUI = matchUI;
         this.player = player0;
         this.view = v0;
-
-        final ZoneAction handAction      = new ZoneAction(matchUI, player, ZoneType.Hand);
-        final ZoneAction libraryAction   = new ZoneAction(matchUI, player, ZoneType.Library);
-        final ZoneAction exileAction     = new ZoneAction(matchUI, player, ZoneType.Exile);
-        final ZoneAction graveAction     = new ZoneAction(matchUI, player, ZoneType.Graveyard);
-        final ZoneAction flashBackAction = new ZoneAction(matchUI, player, ZoneType.Flashback);
-        final ZoneAction commandAction   = new ZoneAction(matchUI, player, ZoneType.Command);
-        final ZoneAction anteAction      = new ZoneAction(matchUI, player, ZoneType.Ante);
-        final ZoneAction sideboardAction = new ZoneAction(matchUI, player, ZoneType.Sideboard);
 
         final Function<Byte, Boolean> manaAction = colorCode -> {
             if (matchUI.getGameController() instanceof PlayerControllerHuman) {
@@ -90,8 +77,8 @@ public class CField implements ICDoc {
             return Boolean.FALSE;
         };
 
-        view.getDetailsPanel().setupMouseActions(handAction, libraryAction, exileAction, graveAction, flashBackAction,
-            commandAction, anteAction, sideboardAction, manaAction);
+        Function<ZoneType, Runnable> zoneActionFactory = (zone) -> new ZoneAction(matchUI, player, zone);
+        view.getDetailsPanel().setupMouseActions(zoneActionFactory, manaAction);
     }
 
     public final CMatchUI getMatchUI() {

@@ -1,0 +1,6 @@
+Name:Arms Depot
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, put two +1/+1 counters on target creature.
+SVar:TrigCrank:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2
+Oracle:Whenever you crank Arms Depot, put two +1/+1 counters on target creature.

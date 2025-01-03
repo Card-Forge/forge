@@ -1877,7 +1877,12 @@
 						"options": [
 							{
 								"name": "You pause for a moment, considering your words carefully. \"I'm not so sure I'm comfortable with that.\" (Decline Quest)",
-								"text": "The wizard frowns and vanishes. His confused companion turns around and walks back the way they had come from. (-1 Town Reputation)"
+								"text": "The wizard frowns and vanishes. His confused companion turns around and walks back the way they had come from. (-1 Town Reputation)",
+								"action": [
+								  {
+								    "addMapReputation": -1
+								  }
+								]
 							},
 							{
 								"action": [
@@ -2071,7 +2076,8 @@
 								"count": 2,
 								"addMaxCount": 3
 							}
-						]
+						],
+						"addMapReputation": 3,
 					}
 				],
 				"name": "(Complete Quest)"
@@ -3636,7 +3642,7 @@
 					"key": ""
 				},
 				"issueQuest": "",
-				"addMapReputation": -3,
+				"addMapReputation": -2,
 				"POIReference": "$(poi_2)"
 			}
 		],
@@ -3752,6 +3758,11 @@
 					{
 						"name": "You give a wry grin. \"I was under the impression that destruction, fire, and ruin were popular hobbies around here.\"",
 						"text": "He scowls at you and continues. \"This is no laughing matter. A spawn of Lathliss seeks a new home, and will come here soon unless we intervene.\" (-1 Local Reputation)",
+						"action": [
+						  {
+						    "addMapReputation": -1
+						  }
+						],
 						"options": [
 							{
 								"name": "\"A fight with a dragon? I look forward to the challenge!\"",
@@ -3862,6 +3873,11 @@
 				"text": "He exclaims at you as you walk by. \"Leave. NOW!!! You must leave!!!\" (-2 Local Reputation)",
 				"options": [
 					{
+					  "action": [
+					    {
+						    "addMapReputation": -2
+					    }
+					  ],
 						"name": "(Continue)"
 					}
 				]
@@ -4127,6 +4143,11 @@
 			{
 				"name": "You can't put your finger on it, but something seems off about the man. \"This isn't a good time.\" (Decline Quest)",
 				"text": "He gives you the smallest bow imaginable, just enough to say that one was given, without indicating respect. (-1 Local Reputation)",
+				"action": [
+				  {
+						"addMapReputation": -1
+				  }
+				],
 				"options": [
 					{
 						"name": "(Continue)"
@@ -5443,6 +5464,11 @@
 			{
 				"name": "\"Are $(enemy_1)s so despised around here?\"",
 				"text": "One of the merchants laughs. \"No, but Sir Kallus is. And since you left, we haven't seen him. Thank you, from the bottom of our hearts.\" (+3 Local Reputation)",
+				"action": [
+				  {
+						"addMapReputation": 3
+				  }
+				],
 				"options": [
 					{
 						"name": "(Continue)"
@@ -5590,7 +5616,10 @@
 	"prologue": {},
 	"epilogue": {
 		"action": [
-			{}
+			{
+			  "addMapReputation": 3,
+				"POIReference": "$(poi_1)"
+			}
 		],
 		"text": "You walk back into the town with the requested cargo of $(enemy_1)s. You're unsure if they will be useful, but the dwarf seems extremely excited to begin his work. (+3 Local Reputation)",
 		"options": [
@@ -5774,7 +5803,9 @@
 									"Common"
 								]
 							}
-						]
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_1)"
 					}
 				],
 				"name": "(Complete Quest)"
@@ -6177,7 +6208,9 @@
 								],
 								"cardText": "Insect"
 							}
-						]
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_1)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -6381,7 +6414,9 @@
 								"count": 10,
 								"addMaxCount": 10
 							}
-						]
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_1)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -6479,6 +6514,7 @@
 							"key": ""
 						},
 						"issueQuest": "",
+						"addMapReputation": -1,
 						"POIReference": ""
 					}
 				],
@@ -6577,7 +6613,9 @@
 									"Fungus"
 								]
 							}
-						]
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_1)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -6780,7 +6818,9 @@
 									"Mythic Rare"
 								]
 							}
-						]
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_1)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -7806,7 +7846,9 @@
 									"Mythic Rare"
 								]
 							}
-						]
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_1)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"

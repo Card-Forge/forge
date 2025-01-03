@@ -1,0 +1,6 @@
+Name:Division Table
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, target player loses 2 life.
+SVar:TrigCrank:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2
+Oracle:Whenever you crank Division Table, target player loses 2 life.

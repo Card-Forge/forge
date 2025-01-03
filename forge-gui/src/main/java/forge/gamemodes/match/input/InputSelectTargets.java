@@ -87,7 +87,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             // sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n").append(tgt.getVTSelection());
             // Apparently <b>...</b> tags do not work in mobile Forge, so don't include them (for now)
             sb.append(sa.getHostCard().toString()).append(" - ");
-            sb.append(sa.toString()).append("\n");
+            String abilityDescript = sa.toString();
+            if(abilityDescript.isEmpty()) //If this is a sub-ability with no description, inherit from the parent.
+                abilityDescript = sa.getRootAbility().toString();
+            sb.append(abilityDescript).append("\n");
             if(!ForgeConstants.isGdxPortLandscape)
                 sb.append("\n");
             sb.append(tgt.getVTSelection());

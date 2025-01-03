@@ -104,6 +104,7 @@ public class GameCopier {
             }
             newPlayer.setMaxHandSize(origPlayer.getMaxHandSize());
             newPlayer.setUnlimitedHandSize(origPlayer.isUnlimitedHandSize());
+            newPlayer.setCrankCounter(origPlayer.getCrankCounter());
             // TODO creatureAttackedThisTurn
             for (Mana m : origPlayer.getManaPool()) {
                 newPlayer.getManaPool().addMana(m, false);
@@ -429,6 +430,9 @@ public class GameCopier {
             if (c.hasNamedCard()) {
                 newCard.setNamedCards(Lists.newArrayList(c.getNamedCards()));
             }
+
+            newCard.setSprocket(c.getSprocket());
+
             newCard.setSVars(c.getSVars());
             newCard.copyChangedSVarsFrom(c);
         }

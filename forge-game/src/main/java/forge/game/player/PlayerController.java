@@ -117,6 +117,8 @@ public abstract class PlayerController {
     // Q: why is there min/max and optional at once? A: This is to handle cases like 'choose 3 to 5 cards or none at all'
     public abstract CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params);
 
+    public abstract List<Card> chooseContraptionsToCrank(List<Card> contraptions);
+
     public abstract boolean helpPayForAssistSpell(ManaCostBeingPaid cost, SpellAbility sa, int max, int requested);
     public abstract Player choosePlayerToAssistPayment(FCollectionView<Player> optionList, SpellAbility sa, String title, int max);
     public final <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, SpellAbility sa, String title, Map<String, Object> params) { return chooseSingleEntityForEffect(optionList, null, sa, title, false, null, params); }
@@ -204,6 +206,11 @@ public abstract class PlayerController {
     public final String chooseSector(Card assignee, String ai) {
         final List<String> sectors = Arrays.asList("Alpha", "Beta", "Gamma");
         return chooseSector(assignee, ai, sectors);
+    }
+
+    public abstract int chooseSprocket(Card assignee, boolean forceDifferent);
+    public final int chooseSprocket(Card assignee) {
+        return chooseSprocket(assignee, false);
     }
 
     public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);
@@ -331,5 +338,4 @@ public abstract class PlayerController {
             SpellAbility sa, String title, boolean isOptional);
 
     public abstract List<CostPart> orderCosts(List<CostPart> costs);
-
 }

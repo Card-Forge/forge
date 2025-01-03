@@ -12,6 +12,7 @@ import forge.game.card.Card;
  */
 public enum ReplacementType {
     AddCounter(ReplaceAddCounter.class),
+    AssembleContraption(ReplaceAssembleContraption.class),
     AssignDealDamage(ReplaceAssignDealDamage.class),
     Attached(ReplaceAttached.class),
     BeginPhase(ReplaceBeginPhase.class),
