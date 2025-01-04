@@ -941,6 +941,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
+        if (list.isEmpty() && immediately && sa.getMaxTargets() == 0) {
+            return true;
+        }
+
         // Narrow down the list:
         if (origin.contains(ZoneType.Battlefield)) {
             if ("Polymorph".equals(sa.getParam("AILogic"))) {

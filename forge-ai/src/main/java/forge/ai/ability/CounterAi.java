@@ -255,6 +255,9 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             sa.resetTargets();
+            if (mandatory && !sa.canAddMoreTarget()) {
+                return true;
+            }
             Pair<SpellAbility, Boolean> pair = chooseTargetSpellAbility(game, sa, ai, mandatory);
             SpellAbility tgtSA = pair.getLeft();
 
