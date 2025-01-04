@@ -11,6 +11,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
+import forge.game.keyword.Keyword;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
@@ -675,7 +676,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (movedCard.getZone().equals(originZone)) {
                     continue;
                 }
-                if (sa.hasParam("Unearth") && movedCard.isInPlay()) {
+                if (sa.isKeyword(Keyword.UNEARTH) && movedCard.isInPlay()) {
                     movedCard.setUnearthed(true);
                     movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false,
                             game.getNextTimestamp(), null, true);

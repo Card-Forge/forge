@@ -821,7 +821,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         //don't unearth after attacking is possible
-        if (sa.hasParam("Unearth") && ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (sa.isKeyword(Keyword.UNEARTH) && ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return false;
         }
 
