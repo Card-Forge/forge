@@ -79,7 +79,6 @@ public class PumpEffect extends SpellAbilityEffect {
                 gameCard.addPerpetual(params);
             }
             gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, null);
-            
         }
         if (!hiddenKws.isEmpty()) {
             gameCard.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);

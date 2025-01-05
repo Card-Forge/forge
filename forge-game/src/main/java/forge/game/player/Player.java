@@ -112,9 +112,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int expentThisTurn;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
     private int venturedThisTurn;
-    private int descended = 0;
+    private int descended;
+    private int numRingTemptedYou;
     private boolean revolt = false;
-    private int numRingTemptedYou = 0;
     private Card ringBearer, theRing;
 
     private List<Card> discardedThisTurn = new ArrayList<>();

@@ -81,8 +81,7 @@ public class StaticAbilityCantTarget {
      *            the spell/ability
      * @return true, if successful
      */
-    public static boolean applyCantTargetAbility(final StaticAbility stAb, final Card card,
-            final SpellAbility spellAbility) {
+    public static boolean applyCantTargetAbility(final StaticAbility stAb, final Card card, final SpellAbility spellAbility) {
         if (stAb.hasParam("ValidPlayer")) {
             return false;
         }

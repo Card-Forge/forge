@@ -1280,7 +1280,13 @@ public class ComputerUtilMana {
             card.setCastFrom(card.getZone() != null ? card.getZone() : null);
         }
 
-        Cost payCosts = CostAdjustment.adjust(cost, sa, effect);
+        Cost payCosts;
+        if (test) {
+            payCosts = CostAdjustment.adjust(cost, sa, effect);
+        } else {
+            // when not testing CostPayment already handled raise
+            payCosts = cost;
+        }
         CostPartMana manapart = payCosts != null ? payCosts.getCostMana() : null;
         final ManaCost mana = payCosts != null ? ( manapart == null ? ManaCost.ZERO : manapart.getManaCostFor(sa) ) : ManaCost.NO_COST;
 
