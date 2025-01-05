@@ -775,9 +775,15 @@ public class AiController {
         if (currentState != null) {
             host.setState(sa.getCardStateName(), false);
         }
+        if (sa.isSpell()) {
+            host.setCastSA(sa);
+        }
 
         AiPlayDecision decision = canPlayAndPayForFace(sa);
 
+        if (sa.isSpell()) {
+            host.setCastSA(null);
+        }
         if (currentState != null) {
             host.setState(currentState, false);
         }
@@ -918,7 +924,7 @@ public class AiController {
             Sentry.setExtra("Card", card.getName());
             Sentry.setExtra("SA", sa.toString());
 
-            boolean canPlay = SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(player, sa);
+            boolean canPlay = SpellApiToAi.Converter.get(sa).canPlayAIWithSubs(player, sa);
 
             // remove added extra
             Sentry.removeExtra("Card");
@@ -1296,9 +1302,9 @@ public class AiController {
         if (spell instanceof SpellApiBased) {
             boolean chance = false;
             if (withoutPayingManaCost) {
-                chance = SpellApiToAi.Converter.get(spell.getApi()).doTriggerNoCostWithSubs(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell).doTriggerNoCostWithSubs(player, spell, mandatory);
             } else {
-                chance = SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
+                chance = SpellApiToAi.Converter.get(spell).doTriggerAI(player, spell, mandatory);
             }
             if (!chance) {
                 return AiPlayDecision.TargetingFailed;
@@ -1620,38 +1626,45 @@ public class AiController {
                     continue;
                 }
 
-            if (sa.getHostCard().hasKeyword(Keyword.STORM)
-                    && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
-                    && player.getZone(ZoneType.Hand).contains(
-                            Predicate.not(CardPredicates.LANDS.or(CardPredicates.hasKeyword("Storm")))
-                )) {
-                if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
-                    // skip evaluating Storm unless we reached the minimum Storm count
-                    continue;
-                }
-            }
-            // living end AI decks
-            // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
-            AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
-            if (useLivingEnd) {
-                if (sa.isCycling() && sa.canCastTiming(player) && player.getCardsIn(ZoneType.Library).size() >= 10) {
-                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
-                        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
-                                && !player.cantLoseForZeroOrLessLife()
-                                && player.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
-                            aiPlayDecision = AiPlayDecision.CantAfford;
-                        } else {
-                            aiPlayDecision = AiPlayDecision.WillPlay;
-                        }
+                if (sa.getHostCard().hasKeyword(Keyword.STORM)
+                        && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
+                        && player.getZone(ZoneType.Hand).contains(
+                                Predicate.not(CardPredicates.LANDS.or(CardPredicates.hasKeyword("Storm")))
+                    )) {
+                    if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
+                        // skip evaluating Storm unless we reached the minimum Storm count
+                        continue;
                     }
-                } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
-                    if (isLifeInDanger) { //needs more tune up for certain conditions
-                        aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
-                    } else if (CardLists.filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.CREATURES).size() > 4) {
+                }
+
+                // living end AI decks
+                // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
+                AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
+                if (useLivingEnd) {
+                    if (sa.isCycling() && sa.canCastTiming(player)
+                            && player.getCardsIn(ZoneType.Library).size() >= 10) {
+                        if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
+                            if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                                    && !player.cantLoseForZeroOrLessLife() && player.getLife() <= sa.getPayCosts()
+                                            .getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                                aiPlayDecision = AiPlayDecision.CantAfford;
+                            } else {
+                                aiPlayDecision = AiPlayDecision.WillPlay;
+                            }
+                        }
+                    } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
+                        if (isLifeInDanger) { // needs more tune up for certain conditions
+                            aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa
+                                    : AiPlayDecision.WillPlay;
+                        } else if (CardLists
+                                .filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.CREATURES)
+                                .size() > 4) {
                             if (player.getCreaturesInPlay().size() >= 4) // it's good minimum
                                 continue;
-                            else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player) && ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
-                                aiPlayDecision = AiPlayDecision.WillPlay;// needs tuneup for bad matchups like reanimator and other things to check on opponent graveyard
+                            else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player)
+                                    && ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
+                                aiPlayDecision = AiPlayDecision.WillPlay;
+                            // needs tuneup for bad matchups like reanimator and other things to check on opponent graveyard
                         } else {
                             continue;
                         }
@@ -1726,7 +1739,7 @@ public class AiController {
         if (spell instanceof WrappedAbility)
             return doTrigger(((WrappedAbility) spell).getWrappedAbility(), mandatory);
         if (spell.getApi() != null)
-            return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
+            return SpellApiToAi.Converter.get(spell).doTriggerAI(player, spell, mandatory);
         if (spell.getPayCosts() == Cost.Zero && !spell.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;

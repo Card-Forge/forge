@@ -4,8 +4,10 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import forge.ai.ability.*;
 import forge.game.ability.ApiType;
+import forge.game.spellability.SpellAbility;
 import forge.util.ReflectionUtil;
 
+import java.security.InvalidParameterException;
 import java.util.Map;
 
 public enum SpellApiToAi {
@@ -206,6 +208,14 @@ public enum SpellApiToAi {
             .put(ApiType.InternalIgnoreEffect, CannotPlayAi.class)
             .put(ApiType.InternalRadiation, AlwaysPlayAi.class)
             .build());
+
+    public SpellAbilityAi get(final SpellAbility sa) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return get(api);
+    }
 
     public SpellAbilityAi get(final ApiType api) {
         SpellAbilityAi result = apiToInstance.get(api);

@@ -1826,7 +1826,7 @@ public class CardProperty {
             if (card.getCastSA() == null) {
                 return false;
             }
-            return card.getCastSA().isOptionalCostPaid(OptionalCost.PromiseGift);
+            return card.getCastSA().isGiftPromised();
         } else if (property.equals("impended")) {
             if (card.getCastSA() == null) {
                 return false;

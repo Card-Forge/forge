@@ -3704,9 +3704,8 @@ public class CardFactoryUtil {
 
             String effect = "AB$ ChangeZone | Cost$ " + manacost + " | Defined$ Self" +
                     " | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True" +
-                    " | ActivationZone$ Graveyard | Unearth$ True | " +
-                    " | PrecostDesc$ Unearth | CostDesc$ " + ManaCostParser.parse(manacost) + " | StackDescription$ " +
-                    "Unearth: Return CARDNAME to the battlefield. | SpellDescription$" +
+                    " | ActivationZone$ Graveyard | PrecostDesc$ Unearth | CostDesc$ " + ManaCostParser.parse(manacost)
+                    + " | StackDescription$ Unearth: Return CARDNAME to the battlefield. | SpellDescription$" +
                     " (" + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
