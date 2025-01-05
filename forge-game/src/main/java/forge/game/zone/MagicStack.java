@@ -266,6 +266,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 // Copied abilities aren't activated, so they shouldn't change these values
                 addAbilityActivatedThisTurn(sp, source);
             }
+
             Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(source.getController());
             runParams.put(AbilityKey.Cost, sp.getPayCosts());
             runParams.put(AbilityKey.Activator, activator);
@@ -281,7 +282,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams2.put(AbilityKey.SpellAbility, sp);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams2, false);
 
-            game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
+            game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp);
             sp.resetOnceResolved();
             return;
         }

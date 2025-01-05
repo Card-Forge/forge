@@ -154,7 +154,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, null, true);
+            tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, null);
             game.fireEvent(new GameEventCardStatsChanged(tgtC));
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {

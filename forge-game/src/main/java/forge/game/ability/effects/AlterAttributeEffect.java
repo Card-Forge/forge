@@ -59,7 +59,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                         // currently clean up in Card manually
                         altered = c.setSaddled(activate);
                         if (altered) {
-                            CardCollection saddlers = (CardCollection) sa.getPaidList("TappedCards", true);
+                            CardCollection saddlers = sa.getPaidList("TappedCards", true);
                             c.addSaddledByThisTurn(saddlers);
                             Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
                             runParams.put(AbilityKey.Crew, saddlers);
@@ -72,15 +72,14 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                         if (c.isCommander() == activate || p.getCommanders().contains(c) == activate)
                             break; //Isn't changing status.
                         if (activate) {
-                            if(!c.getGame().getRules().hasCommander()) {
+                            if (!c.getGame().getRules().hasCommander()) {
                                 System.out.println("Commander status applied in non-commander format. Applying Commander variant.");
                                 c.getGame().getRules().addAppliedVariant(GameType.Commander);
                             }
                             p.addCommander(c);
                             //Seems important enough to mention in the game log.
                             c.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is now %s's commander.", c.getPaperCard().getName(), p));
-                        }
-                        else {
+                        } else {
                             p.removeCommander(c);
                             c.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is no longer %s's commander.", c.getPaperCard().getName(), p));
                         }

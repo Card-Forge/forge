@@ -333,6 +333,12 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         return changed;
     }
 
+    public void addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
+        for (KeywordInterface inst : intrinsicKeywords2) {
+            intrinsicKeywords.insert(inst);
+        }
+    }
+
     public final boolean removeIntrinsicKeyword(final String s) {
         return intrinsicKeywords.remove(s);
     }
@@ -756,12 +762,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     @Override
     public boolean hasProperty(String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         return ForgeScript.cardStateHasProperty(this, property, sourceController, source, spellAbility);
-    }
-
-    public void addIntrinsicKeywords(Collection<KeywordInterface> intrinsicKeywords2) {
-        for (KeywordInterface inst : intrinsicKeywords2) {
-            intrinsicKeywords.insert(inst);
-        }
     }
 
     public ImmutableList<CardTraitBase> getTraits() {

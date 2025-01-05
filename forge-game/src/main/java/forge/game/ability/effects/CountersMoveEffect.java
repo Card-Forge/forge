@@ -283,7 +283,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         final List<CounterType> typeChoices = Lists.newArrayList();
                         // get types of counters
                         for (CounterType ct : tgtCounters.keySet()) {
-                            if (dest.canReceiveCounters(ct) && source.canRemoveCounters(cType)) {
+                            if (dest.canReceiveCounters(ct) && source.canRemoveCounters(ct)) {
                                 typeChoices.add(ct);
                             }
                         }

@@ -116,8 +116,8 @@ public class Game {
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer> facedownWhileCasting = Maps.newHashMap();
 
-    private Player monarch;
     private Player initiative;
+    private Player monarch;
     private Player monarchBeginTurn;
     private Player startingPlayer;
 
