@@ -87,8 +87,7 @@ public class CharmAi extends SpellAbilityAi {
         return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num,
-            int min) {
+    private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {
         List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         boolean allowRepeat = sa.hasParam("CanRepeatModes"); // FIXME: unused for now, the AI doesn't know how to effectively handle repeated choices

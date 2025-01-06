@@ -193,7 +193,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             source.setLKICMC(-1);
             source.setLKICMC(source.getCMC());
             lkicheck = true;
-        } else if (hasParam("Prototype")) {
+        } else if (hasParam("Prototype") && source.getPrototypeTimestamp() == -1) {
             if (!source.isLKI()) {
                 source = CardCopyService.getLKICopy(source);
             }

@@ -2015,7 +2015,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean cantLoseCheck(final GameLossReason state) {
-        // Replacement effects
         Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.LoseReason, state);
         return game.getReplacementHandler().cantHappenCheck(ReplacementType.GameLoss, repParams);
