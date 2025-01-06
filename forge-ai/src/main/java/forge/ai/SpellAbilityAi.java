@@ -86,10 +86,8 @@ public abstract class SpellAbilityAi {
             if (!alwaysOnDiscard && !checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler(), logic)) {
                 return false;
             }
-        } else {
-            if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
-                return false;
-            }
+        } else if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
+            return false;
         }
 
         if (!checkApiLogic(ai, sa)) {

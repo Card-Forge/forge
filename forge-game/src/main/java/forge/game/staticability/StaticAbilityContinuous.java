@@ -842,6 +842,7 @@ public final class StaticAbilityContinuous {
                     for (Card c : cards) {
                         for (final Trigger trig : c.getTriggers()) {
                             final Trigger newTrigger = affectedCard.addTriggerForStaticAbility(trig, stAb);
+                            newTrigger.removeParam("Secondary");
                             addedTrigger.add(newTrigger);
                         }
                     }

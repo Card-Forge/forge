@@ -156,7 +156,6 @@ public class ComputerUtil {
     }
 
     public static int counterSpellRestriction(final Player ai, final SpellAbility sa) {
-        // Move this to AF?
         // Restriction Level is Based off a handful of factors
 
         int restrict = 0;
@@ -214,7 +213,6 @@ public class ComputerUtil {
         return restrict;
     }
 
-    // this is used for AI's counterspells
     public static final boolean playStack(SpellAbility sa, final Player ai, final Game game) {
         sa.setActivatingPlayer(ai);
         if (!ComputerUtilCost.canPayCost(sa, ai, false))
@@ -247,47 +245,6 @@ public class ComputerUtil {
             return true;
         }
         return false;
-    }
-
-    public static final boolean playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
-        SpellAbility newSA = sa.copyWithNoManaCost();
-        newSA.setActivatingPlayer(ai);
-
-        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA, false) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0, false)) {
-            return false;
-        }
-
-        newSA = GameActionUtil.addExtraKeywordCost(newSA);
-
-        final Card source = newSA.getHostCard();
-
-        Zone fromZone = game.getZoneOf(source);
-        int zonePosition = 0;
-        if (fromZone != null) {
-            zonePosition = fromZone.getCards().indexOf(source);
-        }
-
-        if (newSA.isSpell() && !source.isCopiedSpell()) {
-            newSA.setHostCard(game.getAction().moveToStack(source, newSA));
-
-            if (newSA.getApi() == ApiType.Charm && !CharmEffect.makeChoices(newSA)) {
-                // 603.3c If no mode is chosen, the ability is removed from the stack.
-                return false;
-            }
-        }
-
-        final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
-
-        // do this after card got added to stack
-        if (!newSA.checkRestrictions(ai)) {
-            GameActionUtil.rollbackAbility(newSA, fromZone, zonePosition, pay, source);
-            return false;
-        }
-        
-        pay.payComputerCosts(new AiCostDecision(ai, newSA, false));
-
-        game.getStack().add(newSA);
-        return true;
     }
 
     public static final boolean playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
@@ -2839,16 +2796,12 @@ public class ComputerUtil {
             if (!trigger.requirementsCheck(game)) {
                 continue;
             }
-            if (trigger.hasParam("ValidCard")) {
-                if (!card.isValid(trigger.getParam("ValidCard").split(","), source.getController(), source, sa)) {
-                    continue;
-                }
-            }
 
-            if (trigger.hasParam("ValidActivatingPlayer")) {
-                if (!player.isValid(trigger.getParam("ValidActivatingPlayer"), source.getController(), source, sa)) {
-                    continue;
-                }
+            if (!trigger.matchesValidParam("ValidCard", card)) {
+                continue;
+            }
+            if (!trigger.matchesValidParam("ValidActivatingPlayer", player)) {
+                continue;
             }
 
             // fall back for OverridingAbility
@@ -2906,10 +2859,8 @@ public class ComputerUtil {
                     && AbilityUtils.getDefinedCards(permanent, source.getSVar(trigger.getParam("CheckOnTriggeredCard").split(" ")[0]), null).isEmpty()) {
                 continue;
             }
-            if (trigger.hasParam("ValidCard")) {
-                if (!permanent.isValid(trigger.getParam("ValidCard"), source.getController(), source, null)) {
-                    continue;
-                }
+            if (!trigger.matchesValidParam("ValidCard", permanent)) {
+                continue;
             }
             // fall back for OverridingAbility
             SpellAbility trigSa = trigger.ensureAbility();
