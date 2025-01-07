@@ -64,6 +64,8 @@ import org.apache.commons.lang3.tuple.Triple;
 import java.util.*;
 import java.util.Map.Entry;
 
+import static java.lang.Math.max;
+
 /**
  * <p>
  * Card class.
@@ -1751,7 +1753,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final int subtractCounter(final CounterType counterName, final int n, final Player remover, final boolean isDamage) {
         int oldValue = getCounters(counterName);
-        int newValue = Math.max(oldValue - n, 0);
+        int newValue = max(oldValue - n, 0);
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.CounterType, counterName);
@@ -3359,6 +3361,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
         return canProduceColorMana(colors);
+    }
+
+    public final int getMaxManaProduced() {
+        int max_produced = 0;
+        for (SpellAbility m: getManaAbilities()) {
+            m.setActivatingPlayer(getController());
+            int mana_cost = m.getPayCosts().getTotalMana().getCMC();
+            max_produced = max(max_produced, m.amountOfManaGenerated(true) - mana_cost);
+        }
+        return max_produced;
     }
 
     public final void clearFirstSpell() {
@@ -6184,7 +6196,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (withDeathtouch && lethal > 0) {
                 excessCharacteristics.add(1);
             } else {
-                excessCharacteristics.add(Math.max(0, lethal));
+                excessCharacteristics.add(max(0, lethal));
             }
         }
         if (this.isPlaneswalker()) {

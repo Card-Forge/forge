@@ -23,10 +23,12 @@ import com.google.common.collect.Lists;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
+import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -70,6 +72,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import static java.lang.Math.max;
 
 /**
  * <p>
@@ -534,8 +538,10 @@ public class AiController {
             landList = unreflectedLands;
         }
 
-        //try to skip lands that enter the battlefield tapped
+        // try to skip lands that enter the battlefield tapped if we might want to play something this turn
         if (!nonLandsInHand.isEmpty()) {
+            // get the tapped and non-tapped lands
+            CardCollection tappedLands = new CardCollection();
             CardCollection nonTappedLands = new CardCollection();
             for (Card land : landList) {
                 // check replacement effects if land would enter tapped or not
@@ -570,9 +576,39 @@ public class AiController {
 
                 nonTappedLands.add(land);
             }
+
+            // if we have the choice, see if we can play an untapped land
             if (!nonTappedLands.isEmpty()) {
-                landList = nonTappedLands;
+                // get the costs of the nonland cards in hand and the mana we have available.
+                // If adding one won't make something new castable, then pick a tapland.
+                int max_inc = 0;
+                for (Card c : nonTappedLands) {
+                    max_inc = max(max_inc, c.getMaxManaProduced());
+                }
+
+                int mana_available = 0;
+                for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
+                    mana_available += c.getMaxManaProduced();
+                }
+
+                boolean found = false;
+                for (Card c : nonLandsInHand) {
+                    // TODO make this work better with split cards and Monocolored Hybrid
+                    if (c.getManaCost().getCMC() == max_inc + mana_available) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    landList = nonTappedLands;
+                }
             }
+        }
+
+        // Early out if we only have one card left
+        if (landList.size() == 1) {
+            return landList.get(0);
         }
 
         // Choose first land to be able to play a one drop
@@ -595,40 +631,86 @@ public class AiController {
             }
         }
 
-        //play lands with a basic type that is needed the most
+        // play lands with a basic type and/or color that is needed the most
         final CardCollectionView landsInBattlefield = player.getCardsIn(ZoneType.Battlefield);
         final List<String> basics = Lists.newArrayList();
 
+        // what colors are available?
+        int[] counts = new int[6]; // in WUBRGC order
+
+        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
+            for (SpellAbility m: c.getManaAbilities()) {
+                m.setActivatingPlayer(c.getController());
+                for (AbilityManaPart mp : m.getAllManaParts()) {
+                    for (String part : mp.mana(m).split(" ")) {
+                        // TODO handle any
+                        int index = ManaAtom.getIndexFromName(part);
+                        if (index != -1) {
+                            counts[index] += 1;
+                        }
+                    }
+                }
+            }
+        }
+
         // what types can I go get?
+        int[] basic_counts = new int[5]; // in WUBRG order
         for (final String name : MagicColor.Constant.BASIC_LANDS) {
             if (!CardLists.getType(landList, name).isEmpty()) {
                 basics.add(name);
             }
         }
         if (!basics.isEmpty()) {
-            // Which basic land is least available
-            int minSize = Integer.MAX_VALUE;
-            String minType = null;
-
-            for (String b : basics) {
+            for (int i = 0; i < MagicColor.Constant.BASIC_LANDS.size(); i++) {
+                String b = MagicColor.Constant.BASIC_LANDS.get(i);
                 final int num = CardLists.getType(landsInBattlefield, b).size();
-                if (num < minSize) {
-                    minType = b;
-                    minSize = num;
-                }
-            }
-
-            if (minType != null) {
-                landList = CardLists.getType(landList, minType);
-            }
-
-            // pick dual lands if available
-            if (landList.anyMatch(CardPredicates.NONBASIC_LANDS)) {
-                landList = CardLists.filter(landList, CardPredicates.NONBASIC_LANDS);
+                basic_counts[i] = num;
             }
         }
-        return ComputerUtilCard.getBestLandToPlayAI(landList);
-    }
+        // pick the land with the best score.
+        // use the evaluation plus a modifier for each new color pip and basic type
+        Card toReturn = Aggregates.itemWithMax(IterableUtil.filter(landList, Card::hasPlayableLandFace),
+                (card -> {
+                    // base score is for the evaluation score
+                    int score = GameStateEvaluator.evaluateLand(card);
+                    // add for new basic type
+                    for (String cardType: card.getType()) {
+                        int index = MagicColor.Constant.BASIC_LANDS.indexOf(cardType);
+                        if (index != -1 && basic_counts[index] == 0) {
+                            score += 25;
+                        }
+                    }
+
+
+                    // TODO handle fetchlands and what they can fetch for
+                    // determine new color pips
+                    int[] card_counts = new int[6]; // in WUBRGC order
+                    for (SpellAbility m: card.getManaAbilities()) {
+                        m.setActivatingPlayer(card.getController());
+                        for (AbilityManaPart mp : m.getAllManaParts()) {
+                            for (String part : mp.mana(m).split(" ")) {
+                                // TODO handle any
+                                int index = ManaAtom.getIndexFromName(part);
+                                if (index != -1) {
+                                    card_counts[index] += 1;
+                                }
+                            }
+                        }
+                    }
+
+                    // use 1 / x+1 for diminishing returns
+                    // TODO use max pips of each color in the deck from deck statistics to weight this
+                    for (int i = 0; i < card_counts.length; i++) {
+                        int diff = (card_counts[i] * 50) / (counts[i] + 1);
+                        score += diff;
+                    }
+
+                    // TODO utility lands only if we have enough to pay their costs
+                    // TODO Tron lands and other lands that care about land counts
+
+                    return score;
+                }));
+        return toReturn;    }
 
     // if return true, go to next phase
     private SpellAbility chooseCounterSpell(final List<SpellAbility> possibleCounters) {
