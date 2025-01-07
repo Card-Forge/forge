@@ -118,9 +118,9 @@ public class GameAction {
             return c;
         }
 
-        // Rules 304.4, 307.4: non-permanents (instants, sorceries) can't enter the battlefield and remain
+        // Rules 304.4, 307.4: instants, sorceries can't enter the battlefield and remain
         // in their previous zone
-        if (toBattlefield && !c.isPermanent()) {
+        if (toBattlefield && (c.isInstant() || c.isSorcery())) {
             return c;
         }
 
