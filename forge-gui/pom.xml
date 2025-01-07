@@ -59,9 +59,14 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.fourthline.cling</groupId>
-            <artifactId>cling-support</artifactId>
-            <version>2.1.2</version>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp.support</artifactId>
+            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.lz4</groupId>
