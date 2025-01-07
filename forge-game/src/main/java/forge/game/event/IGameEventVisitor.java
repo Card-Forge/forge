@@ -42,12 +42,12 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventPlayerStatsChanged event);
     T visit(GameEventRandomLog event);
     T visit(GameEventRollDie event);
-    T visit(GameEventTokenStateUpdate event);
     T visit(GameEventScry event);
     T visit(GameEventShuffle event);
     T visit(GameEventSpellAbilityCast event);
     T visit(GameEventSpellResolved event);
     T visit(GameEventSpellRemovedFromStack event);
+    T visit(GameEventSprocketUpdate event);
     T visit(GameEventSubgameStart event);
     T visit(GameEventSubgameEnd event);
     T visit(GameEventSurveil event);
@@ -98,12 +98,12 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventPlayerStatsChanged event) { return null; }
         public T visit(GameEventRandomLog event) { return null; }
         public T visit(GameEventRollDie event) { return null; }
-        public T visit(GameEventTokenStateUpdate event) { return null; }
         public T visit(GameEventScry event) { return null; }
         public T visit(GameEventShuffle event) { return null; }
         public T visit(GameEventSpellResolved event) { return null; }
         public T visit(GameEventSpellAbilityCast event) { return null; }
         public T visit(GameEventSpellRemovedFromStack event) { return null; }
+        public T visit(GameEventSprocketUpdate event) { return null; }
         public T visit(GameEventSubgameStart event) { return null; }
         public T visit(GameEventSubgameEnd event) { return null; }
         public T visit(GameEventSurveil event) { return null; }

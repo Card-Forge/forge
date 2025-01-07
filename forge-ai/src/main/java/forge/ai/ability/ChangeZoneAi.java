@@ -455,7 +455,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        return subAb == null || SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb);
+        return subAb == null || SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(ai, subAb);
     }
 
     /**
@@ -773,7 +773,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        return subAb == null || SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(ai, subAb);
+        return subAb == null || SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(ai, subAb);
     }
 
     /*
@@ -821,7 +821,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         //don't unearth after attacking is possible
-        if (sa.hasParam("Unearth") && ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (sa.isKeyword(Keyword.UNEARTH) && ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return false;
         }
 
@@ -940,6 +940,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         immediately = immediately || ComputerUtil.playImmediately(ai, sa);
+
+        if (list.isEmpty() && immediately && sa.getMaxTargets() == 0) {
+            return true;
+        }
 
         // Narrow down the list:
         if (origin.contains(ZoneType.Battlefield)) {

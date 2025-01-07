@@ -1,0 +1,6 @@
+Name:Goblin Slingshot
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, creatures you control get +2/+0 and gain trample until end of turn.
+SVar:TrigCrank:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | KW$ Trample
+Oracle:Whenever you crank Goblin Slingshot, creatures you control get +2/+0 and gain trample until end of turn.

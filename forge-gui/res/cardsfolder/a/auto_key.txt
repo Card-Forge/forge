@@ -1,0 +1,7 @@
+Name:Auto-Key
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, until end of turn, target creature becomes an artifact in addition to its other types and gains "{T}: You gain 3 life."
+SVar:TrigCrank:DB$ Animate | ValidTgts$ Creature | Types$ Artifact | Abilities$ ABLife | AILogic$ Worst | AITgts$ Creature.untapped+YouCtrl
+SVar:ABLife:AB$ GainLife | Cost$ T | LifeAmount$ 3 | SpellDescription$ Gain 3 life.
+Oracle:Whenever you crank Auto-Key, until end of turn, target creature becomes an artifact in addition to its other types and gains "{T}: You gain 3 life."

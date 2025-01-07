@@ -287,7 +287,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("Burn")) {
                 // for DamageDeal sub-abilities (eg. Wild Slash, Skullcrack)
                 SpellAbility burn = sa.getSubAbility();
-                return SpellApiToAi.Converter.get(burn.getApi()).canPlayAIWithSubs(ai, burn);
+                return SpellApiToAi.Converter.get(burn).canPlayAIWithSubs(ai, burn);
             } else if (logic.equals("YawgmothsWill")) {
                 return SpecialCardAi.YawgmothsWill.consider(ai, sa);
             } else if (logic.startsWith("NeedCreatures")) {

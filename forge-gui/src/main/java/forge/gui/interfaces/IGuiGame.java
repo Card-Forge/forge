@@ -189,6 +189,8 @@ public interface IGuiGame {
 
     <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, CardView c);
 
+    <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, List<T> destChoices, CardView c);
+
     <T> List<T> order(String title, String top, List<T> sourceChoices, CardView c);
 
     <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode);

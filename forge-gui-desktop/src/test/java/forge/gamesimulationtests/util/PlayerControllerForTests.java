@@ -87,11 +87,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public void playSpellAbilityForFree(SpellAbility copySA, boolean mayChoseNewTargets) {
-        throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");
-    }
-
-    @Override
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets) {
         //TODO: eventually (when the real code is refactored) this should be handled normally...
         if (effectSA.getDescription().equals("At the beginning of your upkeep, if you have exactly 1 life, you win the game.")) {//test_104_2b_effect_may_state_that_player_wins_the_game
@@ -168,6 +163,11 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params) {
         return chooseItems(sourceList, max);
+    }
+
+    @Override
+    public List<Card> chooseContraptionsToCrank(List<Card> contraptions) {
+        return contraptions;
     }
 
     @Override
@@ -447,7 +447,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
+    public boolean payCombatCost(Card card, Cost cost, SpellAbility sa, String prompt) {
         throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");
     }
 
@@ -509,6 +509,11 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         return chooseItem(sectors);
+    }
+
+    @Override
+    public int chooseSprocket(Card assignee, boolean forceDifferent) {
+        return forceDifferent && assignee.getSprocket() == 1 ? 2 : 1;
     }
 
     @Override
@@ -599,18 +604,13 @@ public class PlayerControllerForTests extends PlayerController {
 
     @Override
     public boolean playSaFromPlayEffect(SpellAbility tgtSA) {
-        // TODO Auto-generated method stub
-        boolean optional = tgtSA.hasParam("Optional");
+        boolean optional = !tgtSA.getPayCosts().isMandatory();
         boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
         if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
             Spell spell = (Spell) tgtSA;
             // if (spell.canPlayFromEffectAI(player, !optional, noManaCost) || !optional) {  -- could not save this part
             if (spell.canPlay() || !optional) {
-                if (noManaCost) {
-                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, tgtSA, getGame());
-                } else {
-                    ComputerUtil.playStack(tgtSA, player, getGame());
-                }
+                ComputerUtil.playStack(tgtSA, player, getGame());
             } else
                 return false; // didn't play spell
         }

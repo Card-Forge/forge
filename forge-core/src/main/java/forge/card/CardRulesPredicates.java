@@ -448,6 +448,7 @@ public final class CardRulesPredicates {
     public static final Predicate<CardRules> IS_LEGENDARY = CardRulesPredicates.superType(CardType.Supertype.Legendary);
     public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates.coreType(CardType.CoreType.Artifact);
     public static final Predicate<CardRules> IS_ATTRACTION = CardRulesPredicates.IS_ARTIFACT.and(CardRulesPredicates.subType("Attraction"));
+    public static final Predicate<CardRules> IS_CONTRAPTION = CardRulesPredicates.IS_ARTIFACT.and(CardRulesPredicates.subType("Contraption"));
     public static final Predicate<CardRules> IS_EQUIPMENT = CardRulesPredicates.subType("Equipment");
     public static final Predicate<CardRules> IS_LAND = CardRulesPredicates.coreType(CardType.CoreType.Land);
     public static final Predicate<CardRules> IS_BASIC_LAND = subject -> subject.getType().isBasicLand();

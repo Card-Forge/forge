@@ -52,6 +52,16 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
     protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
 
+    // might support different order via preference later
+    private static final Comparator<Card> COMPARATOR = Comparator.comparingInt((Card c) -> c.getCMC())
+            .thenComparing(c -> c.getColor())
+            .thenComparing(Comparator.comparing(Card::getName))
+            .thenComparing(Card::hasPerpetual);
+
+    protected void sort() {
+        cardList.sort(COMPARATOR);
+    }
+
     public Zone(final ZoneType zone0, Game game0) {
         zoneType = zone0;
         game = game0;

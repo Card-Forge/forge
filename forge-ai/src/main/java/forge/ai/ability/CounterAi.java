@@ -255,6 +255,9 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             sa.resetTargets();
+            if (mandatory && !sa.canAddMoreTarget()) {
+                return true;
+            }
             Pair<SpellAbility, Boolean> pair = chooseTargetSpellAbility(game, sa, ai, mandatory);
             SpellAbility tgtSA = pair.getLeft();
 
@@ -378,7 +381,7 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             // no reason to pay if we don't plan to confirm
-            if (toBeCountered.isOptionalTrigger() && !SpellApiToAi.Converter.get(toBeCountered.getApi()).doTriggerNoCostWithSubs(payer, toBeCountered, false)) {
+            if (toBeCountered.isOptionalTrigger() && !SpellApiToAi.Converter.get(toBeCountered).doTriggerNoCostWithSubs(payer, toBeCountered, false)) {
                 return false;
             }
             // TODO check hasFizzled

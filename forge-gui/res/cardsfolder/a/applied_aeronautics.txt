@@ -1,0 +1,7 @@
+Name:Applied Aeronautics
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, until end of turn, target creature gets +1/+0, gains flying, and becomes an artifact in addition to its other types.
+SVar:TrigCrank:DB$ Pump | ValidTgts$ Creature | NumAtt$ +1 | KW$ Flying | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Artifact
+Oracle:Whenever you crank Applied Aeronautics, until end of turn, target creature gets +1/+0, gains flying, and becomes an artifact in addition to its other types.

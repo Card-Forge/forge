@@ -1280,7 +1280,13 @@ public class ComputerUtilMana {
             card.setCastFrom(card.getZone() != null ? card.getZone() : null);
         }
 
-        Cost payCosts = CostAdjustment.adjust(cost, sa, effect);
+        Cost payCosts;
+        if (test) {
+            payCosts = CostAdjustment.adjust(cost, sa, effect);
+        } else {
+            // when not testing CostPayment already handled raise
+            payCosts = cost;
+        }
         CostPartMana manapart = payCosts != null ? payCosts.getCostMana() : null;
         final ManaCost mana = payCosts != null ? ( manapart == null ? ManaCost.ZERO : manapart.getManaCostFor(sa) ) : ManaCost.NO_COST;
 
@@ -1491,7 +1497,7 @@ public class ComputerUtilMana {
                 AbilitySub sub = m.getSubAbility();
                 // We really shouldn't be hardcoding names here. ChkDrawback should just return true for them
                 if (sub != null && !card.getName().equals("Pristine Talisman") && !card.getName().equals("Zhur-Taa Druid")) {
-                    if (!SpellApiToAi.Converter.get(sub.getApi()).chkDrawbackWithSubs(ai, sub)) {
+                    if (!SpellApiToAi.Converter.get(sub).chkDrawbackWithSubs(ai, sub)) {
                         continue;
                     }
                     needsLimitedResources = true; // TODO: check for good drawbacks (gainLife)
@@ -1571,7 +1577,7 @@ public class ComputerUtilMana {
                 // don't use abilities with dangerous drawbacks
                 AbilitySub sub = m.getSubAbility();
                 if (sub != null) {
-                    if (!SpellApiToAi.Converter.get(sub.getApi()).chkDrawbackWithSubs(ai, sub)) {
+                    if (!SpellApiToAi.Converter.get(sub).chkDrawbackWithSubs(ai, sub)) {
                         continue;
                     }
                 }

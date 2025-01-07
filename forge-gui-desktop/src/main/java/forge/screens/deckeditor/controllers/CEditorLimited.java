@@ -99,8 +99,11 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         getBtnAddBasicLands().setCommand((UiCommand) () -> CEditorLimited.addBasicLands(CEditorLimited.this));
 
         allSections.add(DeckSection.Main);
+
+        //TODO: Ideally these should only show when the draft pool includes cards that could go in them.
         allSections.add(DeckSection.Conspiracy);
         allSections.add(DeckSection.Attractions);
+        allSections.add(DeckSection.Contraptions);
 
         this.getCbxSection().removeAllItems();
         for (DeckSection section : allSections) {
@@ -209,6 +212,10 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
             case Attractions:
                 this.getCatalogManager().setup(ItemManagerConfig.ATTRACTION_POOL);
                 this.getDeckManager().setPool(getHumanDeck().getOrCreate(DeckSection.Attractions));
+                break;
+            case Contraptions:
+                this.getCatalogManager().setup(ItemManagerConfig.CONTRAPTION_POOL);
+                this.getDeckManager().setPool(getHumanDeck().getOrCreate(DeckSection.Contraptions));
                 break;
             case Main:
                 this.getCatalogManager().setup(getScreen() == FScreen.DECK_EDITOR_DRAFT ? ItemManagerConfig.DRAFT_POOL : ItemManagerConfig.SEALED_POOL);

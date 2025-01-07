@@ -1,0 +1,6 @@
+Name:Faerie Aerie
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, create two 1/1 blue Faerie Spy creature tokens with flying, haste, and "Whenever this creature deals combat damage to a player, draw a card." Exile them at the beginning of the next end step.
+SVar:TrigCrank:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_faerie_spy_flying_haste_draw | AtEOT$ Exile
+Oracle:Whenever you crank Faerie Aerie, create two 1/1 blue Faerie Spy creature tokens with flying, haste, and "Whenever this creature deals combat damage to a player, draw a card." Exile them at the beginning of the next end step.

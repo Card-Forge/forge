@@ -156,7 +156,6 @@ public class ComputerUtil {
     }
 
     public static int counterSpellRestriction(final Player ai, final SpellAbility sa) {
-        // Move this to AF?
         // Restriction Level is Based off a handful of factors
 
         int restrict = 0;
@@ -214,7 +213,6 @@ public class ComputerUtil {
         return restrict;
     }
 
-    // this is used for AI's counterspells
     public static final boolean playStack(SpellAbility sa, final Player ai, final Game game) {
         sa.setActivatingPlayer(ai);
         if (!ComputerUtilCost.canPayCost(sa, ai, false))
@@ -247,59 +245,6 @@ public class ComputerUtil {
             return true;
         }
         return false;
-    }
-
-    public static final void playSpellAbilityForFree(final Player ai, final SpellAbility sa) {
-        final Game game = ai.getGame();
-        sa.setActivatingPlayer(ai);
-
-        final Card source = sa.getHostCard();
-        if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setHostCard(game.getAction().moveToStack(source, sa));
-        }
-
-        game.getStack().add(sa);
-    }
-
-    public static final boolean playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
-        SpellAbility newSA = sa.copyWithNoManaCost();
-        newSA.setActivatingPlayer(ai);
-
-        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA, false) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0, false)) {
-            return false;
-        }
-
-        newSA = GameActionUtil.addExtraKeywordCost(newSA);
-
-        final Card source = newSA.getHostCard();
-
-        Zone fromZone = game.getZoneOf(source);
-        int zonePosition = 0;
-        if (fromZone != null) {
-            zonePosition = fromZone.getCards().indexOf(source);
-        }
-
-        if (newSA.isSpell() && !source.isCopiedSpell()) {
-            newSA.setHostCard(game.getAction().moveToStack(source, newSA));
-
-            if (newSA.getApi() == ApiType.Charm && !CharmEffect.makeChoices(newSA)) {
-                // 603.3c If no mode is chosen, the ability is removed from the stack.
-                return false;
-            }
-        }
-
-        final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
-
-        // do this after card got added to stack
-        if (!newSA.checkRestrictions(ai)) {
-            GameActionUtil.rollbackAbility(newSA, fromZone, zonePosition, pay, source);
-            return false;
-        }
-        
-        pay.payComputerCosts(new AiCostDecision(ai, newSA, false));
-
-        game.getStack().add(newSA);
-        return true;
     }
 
     public static final boolean playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
@@ -658,14 +603,13 @@ public class ComputerUtil {
         CardLists.sortByCmcDesc(typeList);
         Collections.reverse(typeList);
 
-
         // TODO AI needs some improvements here
         // Whats the best way to choose evidence to collect?
         // Probably want to filter out cards that have graveyard abilities/castable from graveyard
         // Ideally we remove as few cards as possible "Don't overspend"
 
         final CardCollection exileList = new CardCollection();
-        while(amount > 0) {
+        while (amount > 0) {
             Card c = typeList.remove(0);
 
             amount -= c.getCMC();
@@ -919,7 +863,7 @@ public class ComputerUtil {
 
                         // Run non-mandatory trigger.
                         // These checks only work if the Executing SpellAbility is an Ability_Sub.
-                        if ((exSA instanceof AbilitySub) && !SpellApiToAi.Converter.get(exSA.getApi()).doTriggerAI(ai, exSA, false)) {
+                        if ((exSA instanceof AbilitySub) && !SpellApiToAi.Converter.get(exSA).doTriggerAI(ai, exSA, false)) {
                             // AI would not run this trigger if given the chance
                             return sacrificed;
                         }
@@ -2852,16 +2796,12 @@ public class ComputerUtil {
             if (!trigger.requirementsCheck(game)) {
                 continue;
             }
-            if (trigger.hasParam("ValidCard")) {
-                if (!card.isValid(trigger.getParam("ValidCard").split(","), source.getController(), source, sa)) {
-                    continue;
-                }
-            }
 
-            if (trigger.hasParam("ValidActivatingPlayer")) {
-                if (!player.isValid(trigger.getParam("ValidActivatingPlayer"), source.getController(), source, sa)) {
-                    continue;
-                }
+            if (!trigger.matchesValidParam("ValidCard", card)) {
+                continue;
+            }
+            if (!trigger.matchesValidParam("ValidActivatingPlayer", player)) {
+                continue;
             }
 
             // fall back for OverridingAbility
@@ -2919,10 +2859,8 @@ public class ComputerUtil {
                     && AbilityUtils.getDefinedCards(permanent, source.getSVar(trigger.getParam("CheckOnTriggeredCard").split(" ")[0]), null).isEmpty()) {
                 continue;
             }
-            if (trigger.hasParam("ValidCard")) {
-                if (!permanent.isValid(trigger.getParam("ValidCard"), source.getController(), source, null)) {
-                    continue;
-                }
+            if (!trigger.matchesValidParam("ValidCard", permanent)) {
+                continue;
             }
             // fall back for OverridingAbility
             SpellAbility trigSa = trigger.ensureAbility();

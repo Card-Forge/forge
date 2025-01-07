@@ -13,6 +13,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.card.CardState;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
@@ -23,6 +24,8 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
@@ -83,10 +86,8 @@ public abstract class SpellAbilityAi {
             if (!alwaysOnDiscard && !checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler(), logic)) {
                 return false;
             }
-        } else {
-            if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
-                return false;
-            }
+        } else if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
+            return false;
         }
 
         if (!checkApiLogic(ai, sa)) {
@@ -305,7 +306,7 @@ public abstract class SpellAbilityAi {
      */
     public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
-        return SpellApiToAi.Converter.get(ab.getApi()).chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));
+        return SpellApiToAi.Converter.get(ab).chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));
     }
 
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
@@ -409,5 +410,34 @@ public abstract class SpellAbilityAi {
 
     public boolean chooseBinary(BinaryChoiceType kindOfChoice, SpellAbility sa, Map<String, Object> params) {
         return MyRandom.getRandom().nextBoolean();
+    }
+
+    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen, Player player, List<OptionalCostValue> optionalCostValues) {
+        List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
+        Cost costSoFar = chosen.getPayCosts().copy();
+
+        for (OptionalCostValue opt : optionalCostValues) {
+            // Choose the optional cost if it can be paid (to be improved later, check for playability and other conditions perhaps)
+            Cost fullCost = opt.getCost().copy().add(costSoFar);
+            SpellAbility fullCostSa = chosen.copyWithDefinedCost(fullCost);
+
+            // Playability check for Kicker
+            if (opt.getType() == OptionalCost.Kicker1 || opt.getType() == OptionalCost.Kicker2) {
+                SpellAbility kickedSaCopy = fullCostSa.copy();
+                kickedSaCopy.addOptionalCost(opt.getType());
+                Card copy = CardCopyService.getLKICopy(chosen.getHostCard());
+                copy.setCastSA(kickedSaCopy);
+                if (ComputerUtilCard.checkNeedsToPlayReqs(copy, kickedSaCopy) != AiPlayDecision.WillPlay) {
+                    continue; // don't choose kickers we don't want to play
+                }
+            }
+
+            if (ComputerUtilCost.canPayCost(fullCostSa, player, false)) {
+                chosenOptCosts.add(opt);
+                costSoFar.add(opt.getCost());
+            }
+        }
+
+        return chosenOptCosts;
     }
 }

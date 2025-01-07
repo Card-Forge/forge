@@ -52,7 +52,6 @@ import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.screens.match.views.VDevMenu;
 import forge.screens.match.views.VGameMenu;
 import forge.screens.match.views.VLog;
-import forge.screens.match.views.VManaPool;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
@@ -777,18 +776,13 @@ public class MatchScreen extends FScreen {
             for (CardAreaPanel p : playerPanel.getField().getCardPanels()) {
                 p.reset();
             }
-            playerPanel.getZoneTab(ZoneType.Hand).getDisplayArea().clear();
-            playerPanel.getZoneTab(ZoneType.Library).getDisplayArea().clear();
-            playerPanel.getZoneTab(ZoneType.Graveyard).getDisplayArea().clear();
-            playerPanel.getZoneTab(ZoneType.Exile).getDisplayArea().clear();
-
+            playerPanel.resetZoneTabs();
         }
     }
 
     public void forceRevalidate() {
         for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
             playerPanel.revalidate(true);
-
         }
     }
 
@@ -1136,8 +1130,8 @@ public class MatchScreen extends FScreen {
 
             //build map of all horizontal scroll panes and their current scrollWidths and adjusted X values
             Map<FScrollPane, Pair<Float, Float>> horzScrollPanes = new HashMap<>();
-            backupHorzScrollPanes(topPlayerPanel, x, horzScrollPanes);
-            backupHorzScrollPanes(bottomPlayerPanel, x, horzScrollPanes);
+            backupHorzScrollPanes(topPlayerPanel, horzScrollPanes);
+            backupHorzScrollPanes(bottomPlayerPanel, horzScrollPanes);
 
             float zoom = oldScrollHeight / (getHeight() - staticHeight);
             extraHeight += amount * zoom; //scale amount by current zoom
@@ -1165,20 +1159,9 @@ public class MatchScreen extends FScreen {
             return true;
         }
 
-        private void backupHorzScrollPanes(VPlayerPanel playerPanel, float x, Map<FScrollPane, Pair<Float, Float>> horzScrollPanes) {
-            backupHorzScrollPane(playerPanel.getField().getRow1(), x, horzScrollPanes);
-            backupHorzScrollPane(playerPanel.getField().getRow2(), x, horzScrollPanes);
-            for (InfoTab tab : playerPanel.getTabs()) {
-                if (tab.getDisplayArea() instanceof VManaPool) {
-                    continue; //don't include Mana pool in this
-                }
-                backupHorzScrollPane(tab.getDisplayArea(), x, horzScrollPanes);
-            }
-            backupHorzScrollPane(playerPanel.getCommandZone(), x, horzScrollPanes);
-        }
-
-        private void backupHorzScrollPane(FScrollPane scrollPane, float x, Map<FScrollPane, Pair<Float, Float>> horzScrollPanes) {
-            horzScrollPanes.put(scrollPane, Pair.of(scrollPane.getScrollLeft(), scrollPane.getScrollWidth()));
+        private void backupHorzScrollPanes(VPlayerPanel playerPanel, Map<FScrollPane, Pair<Float, Float>> horzScrollPanes) {
+            for(FScrollPane scrollPane : playerPanel.getAllScrollPanes())
+                horzScrollPanes.put(scrollPane, Pair.of(scrollPane.getScrollLeft(), scrollPane.getScrollWidth()));
         }
     }
 

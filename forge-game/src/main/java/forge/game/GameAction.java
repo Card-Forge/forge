@@ -157,8 +157,8 @@ public class GameAction {
 
         //717.6. If a card with an Astrotorium card back would be put into a zone other than the battlefield, exile,
         //or the command zone from anywhere, instead its owner puts it into the junkyard.
-        if (c.getGamePieceType() == GamePieceType.ATTRACTION && !toBattlefield
-                && !zoneTo.getZoneType().isPartOfCommandZone() && !zoneTo.is(ZoneType.Exile)) {
+        if ((c.getGamePieceType() == GamePieceType.ATTRACTION || c.getGamePieceType() == GamePieceType.CONTRAPTION)
+                && !toBattlefield && !zoneTo.getZoneType().isPartOfCommandZone() && !zoneTo.is(ZoneType.Exile)) {
             //This should technically be a replacement effect, but with the "can apply more than once to the same event"
             //clause, this seems sufficient for now.
             //TODO: Figure out what on earth happens if you animate an attraction, mutate a creature/commander/token onto it, and it dies...
@@ -767,10 +767,13 @@ public class GameAction {
                 }
                 return exile(c, cause, params);
             case Stack:         return moveToStack(c, cause, params);
-            case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, params);
-            case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, params);
-            case AttractionDeck: return moveToVariantDeck(c, ZoneType.AttractionDeck, libPosition, cause, params);
-            case Junkyard:      return moveToJunkyard(c, cause, params);
+            case PlanarDeck:
+            case SchemeDeck:
+            case AttractionDeck:
+            case ContraptionDeck:
+                return moveToVariantDeck(c, name, libPosition, cause, params);
+            case Junkyard:
+                return moveToJunkyard(c, cause, params);
             default: // sideboard will also get there
                 return moveTo(c.getOwner().getZone(name), c, cause);
         }
@@ -1044,6 +1047,7 @@ public class GameAction {
         }
 
         c.setCameUnderControlSinceLastUpkeep(true);
+        c.handleChangedControllerSprocketReset();
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.OriginalController, original);
@@ -1324,6 +1328,7 @@ public class GameAction {
                 checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
                 checkAgainCard |= stateBasedAction_Role(c, unAttachList);
                 checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
+                checkAgainCard |= stateBasedAction_Contraption(c, noRegCreats);
 
                 checkAgainCard |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
 
@@ -1585,6 +1590,29 @@ public class GameAction {
         return checkAgain;
     }
 
+    private boolean stateBasedAction_Contraption(Card c, CardCollection removeList) {
+        if(!c.isContraption())
+            return false;
+        int currentSprocket = c.getSprocket();
+
+        //A contraption that is in the battlefield without being assembled is put into the graveyard or junkyard.
+        if(currentSprocket == 0) {
+            removeList.add(c);
+            return true;
+        }
+
+        //An assembled contraption that changes controller is reassembled onto a sprocket by its new controller.
+        //A reassemble effect can handle that on its own. But if it changed controller due to some other effect,
+        //we assign it here. A contraption uses sprocket -1 to signify it has been assembled previously but now needs
+        //a new sprocket.
+        if(currentSprocket > 0 && currentSprocket <= 3)
+            return false;
+
+        int sprocket = c.getController().getController().chooseSprocket(c);
+        c.setSprocket(sprocket);
+        return true;
+    }
+
     private boolean stateBasedAction704_5u(Player p) {
         boolean checkAgain = false;
 
@@ -1593,9 +1621,7 @@ public class GameAction {
         for (final Card c : p.getCreaturesInPlay().threadSafeIterable()) {
             if (!c.hasSector()) {
                 toAssign.add(c);
-                if (!checkAgain) {
-                    checkAgain = true;
-                }
+                checkAgain = true;
             }
         }
 

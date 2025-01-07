@@ -56,7 +56,6 @@ public class KeywordCollection implements Iterable<KeywordInterface> {
             return true;
         }
         return false;
-
     }
 
     public void addAll(Iterable<String> keywords) {

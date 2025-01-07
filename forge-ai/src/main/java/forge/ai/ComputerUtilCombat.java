@@ -457,11 +457,11 @@ public class ComputerUtilCombat {
             maxTreshold--;
         }
 
-        if (!ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife())) {
+        if (resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters())) {
             return true;
         }
 
-        return resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters());
+        return !ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife());
     }
 
     /**
@@ -500,11 +500,11 @@ public class ComputerUtilCombat {
             }
         }
 
-        if (!ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < 1) {
+        if (resultingPoison(ai, combat) >= ai.getGame().getRules().getPoisonCountersToLose()) {
             return true;
         }
 
-        return resultingPoison(ai, combat) >= ai.getGame().getRules().getPoisonCountersToLose();
+        return !ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < 1;
     }
 
     // This calculates the amount of damage a blockgang can deal to the attacker

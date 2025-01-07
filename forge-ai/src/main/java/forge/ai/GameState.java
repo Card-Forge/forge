@@ -225,7 +225,7 @@ public abstract class GameState {
                 if (card instanceof DetachedCardEffect) {
                     continue;
                 }
-                int playerIndex = game.getPlayers().indexOf(card.getController());
+                int playerIndex = game.getPlayers().indexOf(card.getZone().getPlayer());
                 addCard(zone, playerStates.get(playerIndex).cardTexts, card);
             }
         }

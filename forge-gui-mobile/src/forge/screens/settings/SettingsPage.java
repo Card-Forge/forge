@@ -252,6 +252,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("nlAITimeout"),
                 Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ORDER_HAND,
+                Forge.getLocalizer().getMessage("cbOrderHand"),
+                Forge.getLocalizer().getMessage("nlOrderHand")),
+        1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
                 Forge.getLocalizer().getMessage("cbFilteredHands"),
                 Forge.getLocalizer().getMessage("nlFilteredHands")),
@@ -326,6 +330,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
             }
         },1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_STACK_CREATURES,
+                        Forge.getLocalizer().getMessage("cbStackCreatures"),
+                        Forge.getLocalizer().getMessage("nlStackCreatures")),
+                1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,

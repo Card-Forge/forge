@@ -1,9 +1,6 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -22,15 +19,19 @@ import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMenuBar;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.toolbox.FScrollPane;
 import forge.util.Utils;
+import forge.util.collect.FCollectionView;
+import org.apache.commons.text.WordUtils;
 
 public class VPlayerPanel extends FContainer {
     private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
@@ -55,6 +56,12 @@ public class VPlayerPanel extends FContainer {
     private static final float INFO_TAB_PADDING_X = Utils.scale(2);
     private static final float INFO_TAB_PADDING_Y = Utils.scale(2);
 
+    /**
+     * Zones to include in the extra zones dropdown.
+     */
+    private static final EnumSet<ZoneType> EXTRA_ZONES = EnumSet.of(ZoneType.Sideboard, ZoneType.PlanarDeck,
+            ZoneType.SchemeDeck, ZoneType.ContraptionDeck, ZoneType.AttractionDeck, ZoneType.Junkyard, ZoneType.Ante);
+
     private final PlayerView player;
     private final VPhaseIndicator phaseIndicator;
     private final VField field;
@@ -62,7 +69,8 @@ public class VPlayerPanel extends FContainer {
     private final VZoneDisplay commandZone;
     private final LifeLabel lblLife;
     private final InfoTab tabManaPool;
-    private final Map<ZoneType, InfoTab> zoneTabs = new HashMap<>();
+    private final Map<ZoneType, InfoTabZone> zoneTabs = new HashMap<>();
+    private final InfoTabExtra extraTab;
     private final List<InfoTab> tabs = new ArrayList<>();
     private InfoTab selectedTab;
     private VField.FieldRow selectedRow;
@@ -84,17 +92,18 @@ public class VPlayerPanel extends FContainer {
         selectedRow = field.getRow1();
         avatar = add(new VAvatar(player, avatarHeight));
         lblLife = add(new LifeLabel());
-        addZoneDisplay(ZoneType.Hand, Forge.hdbuttons ? FSkinImage.HDHAND : FSkinImage.HAND);
-        addZoneDisplay(ZoneType.Graveyard, Forge.hdbuttons ? FSkinImage.HDGRAVEYARD : FSkinImage.GRAVEYARD);
-        addZoneDisplay(ZoneType.Library, Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.LIBRARY);
-        addZoneDisplay(ZoneType.Flashback, Forge.hdbuttons ? FSkinImage.HDFLASHBACK :FSkinImage.FLASHBACK);
+        addZoneDisplay(ZoneType.Hand);
+        addZoneDisplay(ZoneType.Graveyard);
+        addZoneDisplay(ZoneType.Library);
+        addZoneDisplay(ZoneType.Flashback);
 
         VManaPool manaPool = add(new VManaPool(player));
-        tabManaPool = add(new InfoTab(Forge.hdbuttons ? FSkinImage.HDMANAPOOL : Forge.getAssets().images().get(FSkinProp.IMG_MANA_X), manaPool));
+        tabManaPool = add(new InfoTabSingleDisplay(FSkinImage.HDMANAPOOL, manaPool));
         tabs.add(tabManaPool);
 
-        addZoneDisplay(ZoneType.Exile, Forge.hdbuttons ? FSkinImage.HDEXILE : FSkinImage.EXILE);
-        addZoneDisplay(ZoneType.Sideboard, Forge.hdbuttons ? FSkinImage.HDSIDEBOARD :FSkinImage.SIDEBOARD);
+        addZoneDisplay(ZoneType.Exile);
+        extraTab = add(new InfoTabExtra());
+        tabs.add(extraTab);
 
         commandZone = add(new CommandZoneDisplay(player));
 
@@ -107,11 +116,30 @@ public class VPlayerPanel extends FContainer {
         return player;
     }
 
-    public void addZoneDisplay(ZoneType zoneType, FSkinImage tabIcon) {
+    public void addZoneDisplay(ZoneType zoneType) {
         VZoneDisplay zoneDisplay = add(new VZoneDisplay(player, zoneType));
-        InfoTab zoneTab = add(new InfoTab(tabIcon, zoneDisplay));
+        InfoTabZone zoneTab = add(new InfoTabZone(zoneDisplay, zoneType));
         zoneTabs.put(zoneType, zoneTab);
         tabs.add(zoneTab);
+    }
+
+    public static FSkinImage iconFromZone(ZoneType zoneType) {
+        switch (zoneType) {
+            case Hand: return Forge.hdbuttons ? FSkinImage.HDHAND : FSkinImage.HAND;
+            case Library: return Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.LIBRARY;
+            case Graveyard: return Forge.hdbuttons ? FSkinImage.HDGRAVEYARD : FSkinImage.GRAVEYARD;
+            case Exile: return Forge.hdbuttons ? FSkinImage.HDEXILE : FSkinImage.EXILE;
+            case Sideboard: return Forge.hdbuttons ? FSkinImage.HDSIDEBOARD :FSkinImage.SIDEBOARD;
+            case Flashback: return Forge.hdbuttons ? FSkinImage.HDFLASHBACK :FSkinImage.FLASHBACK;
+            case Command: return FSkinImage.COMMAND;
+            case PlanarDeck: return FSkinImage.PLANAR;
+            case SchemeDeck: return FSkinImage.SCHEME;
+            case AttractionDeck: return FSkinImage.ATTRACTION;
+            case ContraptionDeck: return FSkinImage.CONTRAPTION;
+            case Ante: return FSkinImage.ANTE;
+            case Junkyard: return FSkinImage.JUNKYARD;
+            default: return FSkinImage.HDLIBRARY;
+        }
     }
 
     public Iterable<InfoTab> getTabs() {
@@ -122,54 +150,39 @@ public class VPlayerPanel extends FContainer {
         return selectedTab;
     }
 
-    public InfoTab getZoneTab(ZoneType zoneType) {
-        return zoneTabs.get(zoneType);
-    }
-
-    public ZoneType getZoneByInfoTab(InfoTab tab) {
-        for(ZoneType zone : zoneTabs.keySet()) {
-            if (zoneTabs.get(zone).equals(tab)) {
-                return zone;
-            }
-        }
-
-        return null;
-    }
-
-    private boolean isAltZoneDisplay(InfoTab tab) {
-        if (tab.getIcon() == FSkinImage.HDHAND || tab.getIcon() == FSkinImage.HAND)
-            return true;
-        if (tab.getIcon() == FSkinImage.HDGRAVEYARD || tab.getIcon() == FSkinImage.GRAVEYARD)
-            return true;
-        if (tab.getIcon() == FSkinImage.HDLIBRARY || tab.getIcon() == FSkinImage.LIBRARY)
-            return true;
-        if (tab.getIcon() == FSkinImage.HDEXILE || tab.getIcon() == FSkinImage.EXILE)
-            return true;
-        return false;
+    public void resetZoneTabs() {
+        for(InfoTab tab : tabs)
+            tab.reset();
     }
 
     public void setSelectedZone(ZoneType zoneType) {
-        setSelectedTab(zoneTabs.get(zoneType));
+        if(zoneTabs.containsKey(zoneType))
+            setSelectedTab(zoneTabs.get(zoneType));
+        else {
+            extraTab.setActiveZone(zoneType);
+            setSelectedTab(extraTab);
+        }
     }
 
     public void hideSelectedTab() {
         if (selectedTab != null) {
-            selectedTab.displayArea.setVisible(false);
+            selectedTab.setDisplayVisible(false);
             selectedTab = null;
         }
     }
 
-    public void setSelectedTab(InfoTab selectedTab0) {
-        if (selectedTab == selectedTab0) {
+    public void setSelectedTab(InfoTab tab) {
+        if (this.selectedTab == tab) {
             return;
         }
 
         hideSelectedTab();
 
-        selectedTab = selectedTab0;
+        this.selectedTab = tab;
+        selected = tabs.indexOf(tab);
 
-        if (selectedTab != null) {
-            selectedTab.displayArea.setVisible(true);
+        if (this.selectedTab != null) {
+            this.selectedTab.setDisplayVisible(true);
         }
 
         if (MatchController.getView() != null) { //must revalidate entire screen so panel heights updated
@@ -179,7 +192,7 @@ public class VPlayerPanel extends FContainer {
     public void setNextSelectedTab(boolean change) {
         if (change) {
             if (selectedTab != null) {
-                selectedTab.displayArea.setVisible(false);
+                selectedTab.setDisplayVisible(false);
                 selectedTab = null;
             }
             if (MatchController.getView() != null) { //must revalidate entire screen so panel heights updated
@@ -190,15 +203,20 @@ public class VPlayerPanel extends FContainer {
             selected++;
         else
             hideSelectedTab();
-        if (selected >= tabs.size())
+        int numTabs = tabs.size();
+        int numExtraTabs = extraTab.displayAreas.size();
+        if (selected < 0 || selected >= numTabs + numExtraTabs)
             selected = 0;
-        if (selected < 0)
-            selected = 0;
-        setSelectedTab(tabs.get(selected));
+        if(selected >= numTabs) {
+            extraTab.setActiveZoneByIndex(selected - numTabs);
+            setSelectedTab(extraTab);
+        }
+        else
+            setSelectedTab(tabs.get(selected));
     }
     public void closeSelectedTab() {
         if (selectedTab != null) {
-            selectedTab.displayArea.setVisible(false);
+            selectedTab.setDisplayVisible(false);
             selectedTab = null;
         }
         if (MatchController.getView() != null) { //must revalidate entire screen so panel heights updated
@@ -227,7 +245,7 @@ public class VPlayerPanel extends FContainer {
         lblLife.setRotate180(b0);
         phaseIndicator.setRotate180(b0);
         for (InfoTab tab : tabs) {
-            tab.displayArea.setRotate180(b0);
+            tab.setRotate180(b0);
         }
         field.getRow1().setRotate180(b0);
         field.getRow2().setRotate180(b0);
@@ -278,9 +296,10 @@ public class VPlayerPanel extends FContainer {
             commandZone.update();
         }
         else {
-            InfoTab zoneTab = zoneTabs.get(zoneType);
-            if (zoneTab != null) { //TODO: Support Ante somehow
-                zoneTab.update();
+            if(zoneTabs.containsKey(zoneType))
+                zoneTabs.get(zoneType).update();
+            else if(EXTRA_ZONES.contains(zoneType)) {
+                extraTab.update(zoneType);
             }
 
             //update flashback zone when graveyard, library, exile, or stack zones updated
@@ -318,7 +337,7 @@ public class VPlayerPanel extends FContainer {
         float displayAreaHeight = displayAreaHeightFactor * y / 3;
         y -= displayAreaHeight;
         for (InfoTab tab : tabs) {
-            tab.displayArea.setBounds(0, y, width, displayAreaHeight);
+            tab.setDisplayBounds(0, y, width, displayAreaHeight);
         }
 
         y = height - avatarHeight;
@@ -389,7 +408,7 @@ public class VPlayerPanel extends FContainer {
                 tab.setBounds(x, y, infoTabWidth, infoTabHeight);
                 y += infoTabHeight;
             } else {
-                if (!isAltZoneDisplay(tab)) {
+                if (!tab.isAlignedRightForAltDisplay()) {
                     tab.setBounds(x, y, infoTabWidth, infoTabHeight);
                     y += infoTabHeight;
                 } else {
@@ -429,7 +448,7 @@ public class VPlayerPanel extends FContainer {
 
         x = width - displayAreaWidth-avatarWidth;
         for (InfoTab tab : tabs) {
-            tab.displayArea.setBounds(x, 0, displayAreaWidth, height);
+            tab.setDisplayBounds(x, 0, displayAreaWidth, height);
         }
 
         if (!Forge.altZoneTabs)
@@ -441,9 +460,9 @@ public class VPlayerPanel extends FContainer {
     @Override
     public void drawBackground(Graphics g) {
         float y;
-        VPlayerPanel.InfoTab infoTab = selectedTab;
+        InfoTab infoTab = selectedTab;
         if (infoTab != null) { //draw background and border for selected zone if needed
-            VDisplayArea selectedDisplayArea = infoTab.displayArea;
+            VDisplayArea selectedDisplayArea = infoTab.getDisplayArea();
             float x = selectedDisplayArea == null ? 0 : selectedDisplayArea.getLeft();
             float w = selectedDisplayArea == null ? 0 : selectedDisplayArea.getWidth();
             float top = selectedDisplayArea == null ? 0 : selectedDisplayArea.getTop();
@@ -473,6 +492,18 @@ public class VPlayerPanel extends FContainer {
             }
             g.drawLine(1, MatchScreen.getBorderColor(), x, y, x + commandZone.getWidth(), y);
         }
+    }
+
+    public Iterable<FScrollPane> getAllScrollPanes() {
+        //Used to catalog scroll positions before resizing UI.
+        ArrayList<FScrollPane> out = new ArrayList<>();
+        out.add(field.getRow1());
+        out.add(field.getRow2());
+        for(InfoTabZone tab : zoneTabs.values())
+            out.add(tab.displayArea);
+        out.add(commandZone);
+        out.addAll(extraTab.displayAreas.values());
+        return out;
     }
 
     private class LifeLabel extends FDisplayObject {
@@ -511,6 +542,8 @@ public class VPlayerPanel extends FContainer {
 
             energyCounters = player.getCounters(CounterEnumType.ENERGY);
             experienceCounters = player.getCounters(CounterEnumType.EXPERIENCE);
+            ticketCounters = player.getCounters(CounterEnumType.TICKET);
+            radCounters = player.getCounters(CounterEnumType.RAD);
             manaShards = player.getNumManaShards();
 
             //when gui player loses life, vibrate device for a length of time based on amount of life lost
@@ -609,61 +642,52 @@ public class VPlayerPanel extends FContainer {
         }
     }
 
-    public class InfoTab extends FDisplayObject {
-        private String value = "0";
-        private final FSkinImageInterface icon;
-        private final VDisplayArea displayArea;
+    /**
+     * A tab in the player panel, which toggles the visibility of the player's zones or mana pool.
+     */
+    public abstract class InfoTab extends FDisplayObject {
+        protected String value = "0";
+        protected FSkinImageInterface icon;
 
-        private InfoTab(FSkinImageInterface icon0, VDisplayArea displayArea0) {
-            // missing or invalid player infotab icon probably old theme or custom theme.
-            if (icon0 == null) {
-                System.err.println("Missing/Invalid VPlayerPanel icon for: " + displayArea0 + " , defaulting to blank icon. Check your theme/skin layout.");
-                icon = FSkinImage.BLANK;
-            } else {
-                icon = icon0;
-            }
-            displayArea = displayArea0;
+        protected InfoTab(FSkinImageInterface icon) {
+            this.icon = icon;
         }
 
         public FSkinImageInterface getIcon() {
             return icon;
         }
-        public VDisplayArea getDisplayArea() {
-            return displayArea;
-        }
 
-        @Override
-        public boolean tap(float x, float y, int count) {
-            if (selectedTab == this) {
-                setSelectedTab(null);
-            }
-            else {
-                setSelectedTab(this);
-            }
-            return true;
-        }
+        public abstract VDisplayArea getDisplayArea();
+        public abstract void setDisplayVisible(boolean visible);
+        public abstract void setDisplayBounds(float x, float y, float width, float height);
+        public abstract void setRotate180(boolean rotate180);
+        public abstract void update();
+        public abstract void reset();
 
-        public void update() {
-            displayArea.update();
-            value = String.valueOf(displayArea.getCount());
+        protected boolean isSelected() {
+            return selectedTab == this;
+        }
+        protected FSkinColor getSelectedBackgroundColor() {
+            return getDisplayAreaBackColor();
+        }
+        protected boolean isAlignedRightForAltDisplay() {
+            return false;
         }
 
         @Override
         public void draw(Graphics g) {
             float x, y, w, h;
             boolean drawOverlay = MatchController.getView().selectedPlayerPanel().getPlayer() == player && Forge.hasGamepad();
-            if (Forge.altZoneTabs) {
+            if (Forge.altZoneTabs && this.isAlignedRightForAltDisplay()) {
                 //draw extra
-                if (isAltZoneDisplay(this)) {
-                    g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2), 0, 0, getWidth(), getHeight());
-                    if (selectedTab == this) {
-                        if (drawOverlay)
-                            g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
-                        g.fillRect(getDisplayAreaBackColor(), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
-                    }
+                g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2), 0, 0, getWidth(), getHeight());
+                if (isSelected()) {
+                    if (drawOverlay)
+                        g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
+                    g.fillRect(getDisplayAreaBackColor(), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
                 }
             }
-            if (selectedTab == this) {
+            if (isSelected()) {
                 y = 0;
                 w = getWidth();
                 h = getHeight();
@@ -682,11 +706,7 @@ public class VPlayerPanel extends FContainer {
                 if (drawOverlay)
                     g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
                 //change the graveyard tab selection color to active phase color to indicate the player has delirium
-                if ((icon == FSkinImage.HDGRAVEYARD || icon == FSkinImage.GRAVEYARD) && player.hasDelirium()) {
-                    g.fillRect(getDeliriumHighlight(), 0 ,isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
-                } else {
-                    g.fillRect(getDisplayAreaBackColor(), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
-                }
+                g.fillRect(this.getSelectedBackgroundColor(), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
                 if (!Forge.isLandscapeMode()) {
                     if (isFlipped()) { //use clip to ensure all corners connect
                         g.startClip(-1, y, w + 2, h);
@@ -701,6 +721,8 @@ public class VPlayerPanel extends FContainer {
                     g.endClip();
                 }
             }
+
+            FSkinImageInterface icon = this.getIcon();
 
             //show image left of text if wider than tall
             if (getWidth() > getHeight()) {
@@ -760,6 +782,239 @@ public class VPlayerPanel extends FContainer {
                     g.endTransform();
                 }
             }
+        }
+    }
+
+    /**
+     * Player panel tab linked to a single display area - usually either the mana pool or a zone via InfoTabZone.
+     */
+    public class InfoTabSingleDisplay extends InfoTab {
+        protected final VDisplayArea displayArea;
+
+        private InfoTabSingleDisplay(FSkinImageInterface icon, VDisplayArea displayArea) {
+            super(icon);
+            this.displayArea = displayArea;
+        }
+
+        public VDisplayArea getDisplayArea() {
+            return displayArea;
+        }
+
+        public void setDisplayVisible(boolean visible) {
+            this.displayArea.setVisible(visible);
+        }
+
+        public void setDisplayBounds(float x, float y, float width, float height) {
+            this.displayArea.setBounds(x, y, width, height);
+        }
+
+        public void setRotate180(boolean rotate180) {
+            this.displayArea.setRotate180(rotate180);
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (isSelected())
+                setSelectedTab(null);
+            else
+                setSelectedTab(this);
+            return true;
+        }
+
+        public void update() {
+            displayArea.update();
+            value = String.valueOf(displayArea.getCount());
+        }
+
+        @Override
+        public void reset() {} //Mana Display does not get cleared.
+    }
+
+    /**
+     * Player panel tab for a single typical card zone, such as the hand.
+     */
+    public class InfoTabZone extends InfoTabSingleDisplay {
+        public final ZoneType zoneType;
+
+        private InfoTabZone(VDisplayArea displayArea, ZoneType zoneType) {
+            super(iconFromZone(zoneType), displayArea);
+            this.zoneType = zoneType;
+        }
+
+        private final EnumSet<ZoneType> altDisplayZones = EnumSet.of(ZoneType.Hand, ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile);
+        public boolean isAlignedRightForAltDisplay() {
+            return altDisplayZones.contains(this.zoneType);
+        }
+
+        @Override
+        protected FSkinColor getSelectedBackgroundColor() {
+            if ((this.zoneType == ZoneType.Graveyard) && player.hasDelirium())
+                return getDeliriumHighlight();
+            return super.getSelectedBackgroundColor();
+        }
+
+        @Override
+        public void reset() {
+            displayArea.clear();
+        }
+    }
+
+    /**
+     * Player panel tab that can contain several extra rarely-used zones. Displays a dropdown when clicked, letting the
+     * player pick which one to show.
+     */
+    public class InfoTabExtra extends InfoTab {
+        private static final FSkinImageInterface DEFAULT_ICON = FSkinImage.HDSTAR_OUTLINE;
+
+        private final EnumMap<ZoneType, VDisplayArea> displayAreas;
+        private ZoneType activeZone;
+        private boolean hasCardsInExtraZone = false;
+
+        private InfoTabExtra() {
+            super(DEFAULT_ICON);
+            this.displayAreas = new EnumMap<>(ZoneType.class);
+            for(ZoneType zoneType : EXTRA_ZONES) {
+                FCollectionView<CardView> cards = player.getCards(zoneType);
+                if(cards == null || cards.isEmpty())
+                    continue;
+                createZoneIfMissing(zoneType);
+                hasCardsInExtraZone = true;
+            }
+            VZoneDisplay sb = VPlayerPanel.this.add(new VZoneDisplay(player, ZoneType.Sideboard));
+            this.displayAreas.put(ZoneType.Sideboard, sb);
+            this.activeZone = ZoneType.Sideboard;
+            this.updateTab();
+        }
+
+        public void createZoneIfMissing(ZoneType zone) {
+            if(this.displayAreas.containsKey(zone))
+                return;
+            VZoneDisplay display = VPlayerPanel.this.add(new VZoneDisplay(player, zone));
+            this.displayAreas.put(zone, display);
+            this.hasCardsInExtraZone = true;
+            if(zone == ZoneType.AttractionDeck || zone == ZoneType.ContraptionDeck)
+                createZoneIfMissing(ZoneType.Junkyard); //If the game uses one, it uses both.
+        }
+
+        public void setActiveZone(ZoneType zone) {
+            if(this.activeZone == zone)
+                return;
+            createZoneIfMissing(zone);
+            getDisplayArea().setVisible(false);
+            this.activeZone = zone;
+            if(isSelected())
+                getDisplayArea().setVisible(true);
+            updateTab();
+        }
+        public void setActiveZoneByIndex(int index) {
+            List<ZoneType> keyList = List.copyOf(displayAreas.keySet());
+            setActiveZone(keyList.get(index % keyList.size()));
+        }
+
+        private void updateTab() {
+            if(!hasCardsInExtraZone)
+                this.value = "";
+            else if(!getDisplayArea().isVisible())
+                this.value = "+";
+            else
+                this.value = String.valueOf(displayAreas.get(this.activeZone).getCount());
+            if(getDisplayArea().isVisible())
+                this.icon = iconFromZone(this.activeZone);
+            else
+                this.icon = DEFAULT_ICON;
+        }
+
+
+        @Override
+        public VDisplayArea getDisplayArea() {
+            return displayAreas.get(activeZone);
+        }
+
+        @Override
+        public void setDisplayVisible(boolean visible) {
+            if(!visible)
+                displayAreas.values().forEach(d -> d.setVisible(false));
+            else
+                getDisplayArea().setVisible(true);
+            updateTab();
+        }
+
+        @Override
+        public void setDisplayBounds(float x, float y, float width, float height) {
+            displayAreas.values().forEach(d -> d.setBounds(x, y, width, height));
+        }
+
+        @Override
+        public void setRotate180(boolean rotate180) {
+            displayAreas.values().forEach(d -> d.setRotate180(rotate180));
+        }
+
+        @Override
+        public void update() {
+            displayAreas.values().forEach(VDisplayArea::update);
+            updateTab();
+        }
+        public void update(ZoneType zoneType) {
+            if(!displayAreas.containsKey(zoneType)) {
+                if(!EXTRA_ZONES.contains(zoneType))
+                    return;
+                FCollectionView<CardView> cards = player.getCards(zoneType);
+                if(cards == null || cards.isEmpty())
+                    return;
+                createZoneIfMissing(zoneType);
+            }
+            displayAreas.get(zoneType).update();
+            updateTab();
+        }
+
+        @Override
+        public void reset() {
+            Iterator<Map.Entry<ZoneType, VDisplayArea>> iterator = displayAreas.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<ZoneType, VDisplayArea> e = iterator.next();
+                VDisplayArea display = e.getValue();
+                display.clear();
+                //Remove all zones besides sideboard, as this tab is in its initial state.
+                //Seems appropriate when resetting, but this code path only gets visited from resetFields in
+                //MatchScreen.java, which only gets called when initiating an online game. I'm not sure why zones are
+                //specifically cleared at that point, but I'm not really able to test this part right now. Feel free to
+                //uncomment and see what happens, or delete entirely if unnecessary.
+                //if (e.getKey() == ZoneType.Sideboard)
+                //    continue;
+                //VPlayerPanel.this.remove(display);
+                //iterator.remove();
+            }
+            activeZone = ZoneType.Sideboard;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if(this.displayAreas.isEmpty())
+                return false;
+            if(count >= 2) {
+                onClickZone(this.activeZone);
+                return true;
+            }
+            FPopupMenu menu = new FPopupMenu() {
+                @Override
+                protected void buildMenu() {
+                    for(ZoneType zone : displayAreas.keySet()) {
+                        String label = WordUtils.capitalize(zone.getTranslatedName());
+                        addItem(new FMenuItem(label, iconFromZone(zone), (e) -> onClickZone(zone)));
+                    }
+                }
+            };
+            menu.show(this, this.getWidth(), 0);
+            return true;
+        }
+
+        public void onClickZone(ZoneType zone) {
+            if(activeZone == zone && this.isSelected()) {
+                setSelectedTab(null);
+                return;
+            }
+            setActiveZone(zone);
+            setSelectedTab(this);
         }
     }
 
