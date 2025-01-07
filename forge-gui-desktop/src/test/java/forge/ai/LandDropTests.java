@@ -67,7 +67,7 @@ public class LandDropTests extends AITest {
     }
 
     @Test
-    public void testPlayUntappedLand() {
+    public void testPlayUntappedLandWhenNeeded() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         p.setTeam(0);
@@ -83,6 +83,56 @@ public class LandDropTests extends AITest {
         this.playUntilPhase(game, PhaseType.END_OF_TURN);
 
         AssertJUnit.assertTrue(game.getCardsIn(ZoneType.Battlefield).contains(t));
+    }
+
+    @Test
+    public void testPlayNonTappedFetchLand() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCard("Plains", p);
+        addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+        // this card will fetch a land that will enter tapped
+        addCardToZone("Evolving Wilds", p, ZoneType.Hand);
+        // This land doesn't have basic land types, but enters untapped
+        Card t = addCardToZone("Pendelhaven", p, ZoneType.Hand);
+        addCardToZone("Eiganjo Castle", p, ZoneType.Hand);
+        // make sure there are fetchable targets
+        addCardToZone("Forest", p, ZoneType.Library);
+        addCardToZone("Plains", p, ZoneType.Library);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+
+        this.playUntilPhase(game, PhaseType.END_OF_TURN);
+
+        AssertJUnit.assertTrue(game.getCardsIn(ZoneType.Battlefield).contains(t));
+    }
+
+    @Ignore
+    @Test
+    public void testPlayUntappedFetchLand() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCard("Plains", p);
+        addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+        // this card will fetch a land that will enter tapped
+        addCardToZone("Evolving Wilds", p, ZoneType.Hand);
+        // This land doesn't have basic land types, but enters untapped
+        Card t = addCardToZone("Windswept Heath", p, ZoneType.Hand);
+        addCardToZone("Plains", p, ZoneType.Hand);
+        // make sure there are fetchable targets
+        addCardToZone("Forest", p, ZoneType.Library);
+        addCardToZone("Plains", p, ZoneType.Library);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+
+        this.playUntilPhase(game, PhaseType.END_OF_TURN);
+
+        // check the graveyard because they need to have fetched to play the grizzly bears
+        AssertJUnit.assertTrue(game.getCardsIn(ZoneType.Graveyard).contains(t));
     }
 
     @Test
