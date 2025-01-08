@@ -30,6 +30,7 @@ import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.*;
@@ -73,6 +74,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
 import static java.lang.Math.max;
 
 /**
@@ -585,23 +587,30 @@ public class AiController {
                 for (Card c : nonTappedLands) {
                     max_inc = max(max_inc, c.getMaxManaProduced());
                 }
-
-                int mana_available = 0;
-                for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
-                    mana_available += c.getMaxManaProduced();
-                }
-
-                boolean found = false;
-                for (Card c : nonLandsInHand) {
-                    // TODO make this work better with split cards and Monocolored Hybrid
-                    if (c.getManaCost().getCMC() == max_inc + mana_available) {
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (found) {
+                // If we have a lot of mana, prefer untapped lands.
+                // We're either topdecking or have drawn enough the tempo no longer matters.
+                int mana_available = getAvailableManaEstimate(player);
+                if (mana_available > 6) {
                     landList = nonTappedLands;
+                }
+                // check for lands with no mana abilities
+                else if (max_inc > 0) {
+                    boolean found = false;
+                    for (Card c : nonLandsInHand) {
+                        // TODO make this work better with split cards and Monocolored Hybrid
+                        ManaCost cost = c.getManaCost();
+                        // check for incremental cmc
+                        // check for X cost spells
+                        if (cost.getCMC() == max_inc + mana_available ||
+                                (cost.getShardCount(ManaCostShard.X) > 0 && cost.getCMC() >= mana_available)) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found) {
+                        landList = nonTappedLands;
+                    }
                 }
             }
         }
@@ -1129,7 +1138,7 @@ public class AiController {
             neededMana = 0;
         }
 
-        int hasMana = ComputerUtilMana.getAvailableManaEstimate(player, false);
+        int hasMana = getAvailableManaEstimate(player, false);
         if (hasMana < neededMana - 1) {
             return true;
         }
@@ -1538,7 +1547,7 @@ public class AiController {
         int minCMCInHand = Aggregates.min(inHand, Card::getCMC);
         if (minCMCInHand == Integer.MAX_VALUE)
             minCMCInHand = 0;
-        int predictedMana = ComputerUtilMana.getAvailableManaEstimate(player, true);
+        int predictedMana = getAvailableManaEstimate(player, true);
 
         boolean canCastWithLandDrop = (predictedMana + 1 >= minCMCInHand) && minCMCInHand > 0 && !isTapLand;
         boolean cantCastAnythingNow = predictedMana < minCMCInHand;
@@ -2061,7 +2070,7 @@ public class AiController {
         }
 
         // AI has decided to help. Now let's figure out how much they can help
-        int mana = ComputerUtilMana.getAvailableManaEstimate(player, true);
+        int mana = getAvailableManaEstimate(player, true);
 
         // TODO We should make a logical guess here, but for now just uh yknow randomly decide?
         // What do I want to play next? Can I still pay for that and have mana left over to help?
