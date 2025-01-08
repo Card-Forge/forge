@@ -53,6 +53,15 @@ public final class FServerManager {
     private FServerManager() {
     }
 
+
+    RemoteClient getClient(final Channel ch) {
+        return clients.get(ch);
+    }
+
+    IGameController getController(final int index) {
+        return localLobby.getController(index);
+    }
+
     /**
      * Get the singleton instance of {@link FServerManager}.
      *
@@ -63,14 +72,6 @@ public final class FServerManager {
             instance = new FServerManager();
         }
         return instance;
-    }
-
-    RemoteClient getClient(final Channel ch) {
-        return clients.get(ch);
-    }
-
-    IGameController getController(final int index) {
-        return localLobby.getController(index);
     }
 
     public void startServer(final int port) {
