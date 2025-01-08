@@ -30,6 +30,7 @@ import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.*;
@@ -73,6 +74,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
 import static java.lang.Math.max;
 
 /**
@@ -585,23 +587,30 @@ public class AiController {
                 for (Card c : nonTappedLands) {
                     max_inc = max(max_inc, c.getMaxManaProduced());
                 }
-
-                int mana_available = 0;
-                for (Card c: player.getCardsIn(ZoneType.Battlefield)) {
-                    mana_available += c.getMaxManaProduced();
-                }
-
-                boolean found = false;
-                for (Card c : nonLandsInHand) {
-                    // TODO make this work better with split cards and Monocolored Hybrid
-                    if (c.getManaCost().getCMC() == max_inc + mana_available) {
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (found) {
+                // If we have a lot of mana, prefer untapped lands.
+                // We're either topdecking or have drawn enough the tempo no longer matters.
+                int mana_available = getAvailableManaEstimate(player);
+                if (mana_available > 6) {
                     landList = nonTappedLands;
+                }
+                // check for lands with no mana abilities
+                else if (max_inc > 0) {
+                    boolean found = false;
+                    for (Card c : nonLandsInHand) {
+                        // TODO make this work better with split cards and Monocolored Hybrid
+                        ManaCost cost = c.getManaCost();
+                        // check for incremental cmc
+                        // check for X cost spells
+                        if (cost.getCMC() == max_inc + mana_available ||
+                                (cost.getShardCount(ManaCostShard.X) > 0 && cost.getCMC() >= mana_available)) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found) {
+                        landList = nonTappedLands;
+                    }
                 }
             }
         }
