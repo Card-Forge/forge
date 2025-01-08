@@ -44,6 +44,11 @@ public final class FServerManager {
     private UpnpService upnpService = null;
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
+    private final Thread shutdownHook = new Thread(() -> {
+        if (isHosting()) {
+            stopServer(false);
+        }
+    });
 
     private FServerManager() {
     }
@@ -59,31 +64,6 @@ public final class FServerManager {
         }
         return instance;
     }
-
-    public static String getExternalAddress() {
-        BufferedReader in = null;
-        try {
-            URL whatismyip = new URL("https://checkip.amazonaws.com");
-            in = new BufferedReader(new InputStreamReader(
-                    whatismyip.openStream()));
-            return in.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
-    }    private final Thread shutdownHook = new Thread(() -> {
-        if (isHosting()) {
-            stopServer(false);
-        }
-    });
 
     RemoteClient getClient(final Channel ch) {
         return clients.get(ch);
@@ -264,6 +244,27 @@ public final class FServerManager {
         }
     }
 
+    public static String getExternalAddress() {
+        BufferedReader in = null;
+        try {
+            URL whatismyip = new URL("https://checkip.amazonaws.com");
+            in = new BufferedReader(new InputStreamReader(
+                    whatismyip.openStream()));
+            return in.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
     private void mapNatPort(final int port) {
         final String localAddress = getLocalAddress();
         final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
@@ -358,7 +359,4 @@ public final class FServerManager {
             super.channelInactive(ctx);
         }
     }
-
-
-
 }
