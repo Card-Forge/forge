@@ -3641,4 +3641,3 @@
 2025-01-05 12727258 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2025-01-05-12727258-legacy-challenge-32.zip
 2025-01-05 8672 Legacy League (25 decks) | https://downloads.cardforge.org/decks/archive/legacy/2025-01-05-8672-legacy-league.zip
 2025-01-06 8672 Legacy League (10 decks) | https://downloads.cardforge.org/decks/archive/legacy/2025-01-06-8672-legacy-league.zip
-
