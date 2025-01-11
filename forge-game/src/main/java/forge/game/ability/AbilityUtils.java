@@ -1938,8 +1938,8 @@ public class AbilityUtils {
                             colorOccurrences++;
                         }
                     }
-                    colorOccurrences += c0.getAmountOfKeyword("Your devotion to each color and each combination of colors is increased by one.");
                 }
+                colorOccurrences += player.getDevotionMod();
                 return doXMath(colorOccurrences, expr, c, ctb);
             }
         } // end ctb != null
