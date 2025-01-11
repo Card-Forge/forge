@@ -114,6 +114,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int venturedThisTurn;
     private int descended;
     private int numRingTemptedYou;
+    private int devotionMod;
     private boolean revolt = false;
     private Card ringBearer, theRing;
 
@@ -4016,5 +4017,17 @@ public class Player extends GameEntity implements Comparable<Player> {
                 .map(Card::getUnlockedRoomNames)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
+    }
+
+    public int getDevotionMod() {
+        return devotionMod;
+    }
+
+    public void afterStaticAbilityLayer(StaticAbilityLayer layer) {
+        if (layer != StaticAbilityLayer.TEXT) {
+            return;
+        }
+
+        devotionMod = StaticAbilityDevotion.getDevotionMod(this);
     }
 }

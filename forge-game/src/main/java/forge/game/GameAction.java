@@ -1159,6 +1159,9 @@ public class GameAction {
                 }
             }
             staticAbilities.addAll(toAdd);
+            for (Player p : game.getPlayers()) {
+                p.afterStaticAbilityLayer(layer);
+            }
         }
 
         for (final CardCollectionView affected : affectedPerAbility.values()) {
