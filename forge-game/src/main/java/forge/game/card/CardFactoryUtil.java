@@ -825,18 +825,10 @@ public class CardFactoryUtil {
             SpellAbility dig = AbilityFactory.getAbility(abString, card);
             dig.setSVar("CascadeX", "Count$CardManaCost");
 
-            final String dbLandPut = "DB$ ChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1" +
-                    " | Hidden$ True | Origin$ Exile | Destination$ Battlefield | ChangeType$ Land.IsRemembered" +
-                    " | ChangeNum$ X | Tapped$ True | ForgetChanged$ True" +
-                    " | SelectPrompt$ You may select a land to put on the battlefield tapped";
-            AbilitySub landPut = (AbilitySub)AbilityFactory.getAbility(dbLandPut, card);
-            landPut.setSVar("X", "Count$Averna");
-            dig.setSubAbility(landPut);
-
             final String dbCascadeCast = "DB$ Play | Defined$ Imprinted | WithoutManaCost$ True | Optional$ True | ValidSA$ Spell.cmcLTCascadeX";
             AbilitySub cascadeCast = (AbilitySub)AbilityFactory.getAbility(dbCascadeCast, card);
             cascadeCast.setSVar("CascadeX", "Count$CardManaCost");
-            landPut.setSubAbility(cascadeCast);
+            dig.setSubAbility(cascadeCast);
 
             final String dbMoveToLib = "DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted"
                     + " | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1";

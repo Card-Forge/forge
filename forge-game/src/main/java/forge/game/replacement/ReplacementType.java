@@ -17,6 +17,7 @@ public enum ReplacementType {
     Attached(ReplaceAttached.class),
     BeginPhase(ReplaceBeginPhase.class),
     BeginTurn(ReplaceBeginTurn.class),
+    Cascade(ReplaceCascade.class),
     Counter(ReplaceCounter.class),
     CopySpell(ReplaceCopySpell.class),
     CreateToken(ReplaceToken.class),
