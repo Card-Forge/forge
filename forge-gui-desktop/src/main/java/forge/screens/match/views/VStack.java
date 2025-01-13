@@ -123,7 +123,7 @@ public class VStack implements IVDoc<CStack> {
         tab.setText(Localizer.getInstance().getMessage("lblStack") + " : " + items.size());
 
         // No need to update the rest unless it's showing
-        if (!parentCell.getSelected().equals(this)) { return; }
+        if (parentCell == null || !parentCell.getSelected().equals(this)) { return; }
 
         hoveredItem = null;
         scroller.removeAll();
