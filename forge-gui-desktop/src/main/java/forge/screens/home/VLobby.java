@@ -603,7 +603,7 @@ public class VLobby implements ILobbyView {
     public JPanel getConstructedFrame() { return constructedFrame; }
     public JPanel getPanelStart() { return pnlStart; }
     public List<FDeckChooser> getDeckChoosers() {
-        List<FDeckChooser> choosers = new ArrayList<>(playerPanels.size());
+        List<FDeckChooser> choosers = Lists.newArrayList();
         for (final PlayerPanel playerPanel : playerPanels) {
             choosers.add(playerPanel.getDeckChooser());
         }
