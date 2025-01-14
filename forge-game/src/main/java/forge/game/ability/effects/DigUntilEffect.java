@@ -277,11 +277,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
 
                 // Allow ordering the rest of the revealed cards
-                if (finalDest.isKnown() && revealed.size() >= 2) {
-                    revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, finalDest, sa);
-                }
-                if (finalDest == ZoneType.Library && !shuffle
-                        && !sa.hasParam("RevealRandomOrder") && revealed.size() >= 2) {
+                if ((finalDest.isKnown() || (finalDest == ZoneType.Library && !shuffle && !sa.hasParam("RevealRandomOrder"))) && revealed.size() >= 2) {
                     revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, finalDest, sa);
                 }
 

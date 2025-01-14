@@ -120,7 +120,6 @@ public class AiDeckStatistics {
         }
 
         return fromDeck(deck, player);
-
     }
 
 }
