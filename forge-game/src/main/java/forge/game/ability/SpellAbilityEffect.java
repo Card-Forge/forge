@@ -972,7 +972,7 @@ public abstract class SpellAbilityEffect {
         if (("AsLongAsControl".equals(duration) || "AsLongAsInPlay".equals(duration)) && hostCard.isPhasedOut()) {
             return false;
         }
-        if (("UntilLoseControlOfHost".equals(duration) || "ForAsLongAsControl".equals(duration)) && hostCard.getController() != sa.getActivatingPlayer()) {
+        if (("UntilLoseControlOfHost".equals(duration) || "AsLongAsControl".equals(duration)) && hostCard.getController() != sa.getActivatingPlayer()) {
             return false;
         }
         if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
