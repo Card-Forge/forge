@@ -1,8 +1,0 @@
-This file contains the current build notes for Forge.
-
--- Compiling Forge for Android: Pre-requisites --
-When compiling Forge for Android, make sure the following prerequisites are met:
-Java 17, either Oracle or OpenJDK.
-Android SDK 35
-Android Build-Tools 35.0.0 (this is important, build-tools 33 and below do not work with Java 17)
-Proguard 7.6.0 (proguard.jar included under "forge-gui-android/tools").
