@@ -505,12 +505,12 @@ public class PumpAi extends PumpAiBase {
                     List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
                     // non-Regeneration one like Totem-Armor
                     // should do it anyway to destroy the aura?
-                    if (Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
+                    if (repDestoryList.stream().anyMatch(r -> !r.hasParam("Regeneration"))) {
                         return false;
                     }
                     // TODO make it force to use regen?
                     // should check phase and make it before combat damage or better before blocker?
-                    if (Iterables.any(repDestoryList, CardTraitPredicates.hasParam("Regeneration")) && card.canBeShielded()) {
+                    if (repDestoryList.stream().anyMatch(r -> r.hasParam("Regeneration")) && card.canBeShielded()) {
                         return false;
                     }
 
