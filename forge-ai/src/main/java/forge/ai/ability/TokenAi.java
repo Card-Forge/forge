@@ -498,7 +498,7 @@ public class TokenAi extends SpellAbilityAi {
             if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
                 return false;
             }
-            int evalActivator = ComputerUtilCard.evaluateCreature(tokenCard) + ComputerUtilCard.evaluateCreatureList(p.getCreaturesInPlay());;
+            int evalActivator = ComputerUtilCard.evaluateCreature(tokenCard) + ComputerUtilCard.evaluateCreatureList(p.getCreaturesInPlay());
             int evalPayerCreatures = ComputerUtilCard.evaluateCreatureList(payer.getCreaturesInPlay());
 
             if (evalActivator > evalPayerCreatures) {

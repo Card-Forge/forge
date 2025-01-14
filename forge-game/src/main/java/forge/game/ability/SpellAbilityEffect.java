@@ -80,8 +80,8 @@ public abstract class SpellAbilityEffect {
             }
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
-                String rawSDesc = params.get("SpellDescription");
                 if (params.containsKey("SpellDescription")) {
+                    String rawSDesc = params.get("SpellDescription");
                     if (rawSDesc.contains(",,,,,,")) rawSDesc = rawSDesc.replaceAll(",,,,,,", " ");
                     if (rawSDesc.contains(",,,")) rawSDesc = rawSDesc.replaceAll(",,,", " ");
                     String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc, sa.getHostCard());
