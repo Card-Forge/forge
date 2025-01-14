@@ -153,7 +153,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("SetPower") || hasParam("SetToughness")) {
-            layers.add(hasParam("CharacteristicDefining") ? StaticAbilityLayer.CHARACTERISTIC :
+            layers.add(isCharacteristicDefining() ? StaticAbilityLayer.CHARACTERISTIC :
                 StaticAbilityLayer.SETPT);
         }
         if (hasParam("AddPower") || hasParam("AddToughness")) {
@@ -172,6 +172,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         return layers;
+    }
+
+    public boolean isCharacteristicDefining() {
+        return hasParam("CharacteristicDefining");
     }
 
     /**

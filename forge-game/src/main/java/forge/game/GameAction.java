@@ -1127,7 +1127,7 @@ public class GameAction {
         }, true);
 
         final Comparator<StaticAbility> comp = (a, b) -> ComparisonChain.start()
-                .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
+                .compareTrueFirst(a.isCharacteristicDefining(), b.isCharacteristicDefining())
                 .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
                 .result();
         staticAbilities.sort(comp);
