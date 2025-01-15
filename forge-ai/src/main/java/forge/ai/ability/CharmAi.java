@@ -32,13 +32,14 @@ public class CharmAi extends SpellAbilityAi {
         }
 
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
+        boolean choiceForOpp = !ai.equals(sa.getActivatingPlayer());
 
         // Reset the chosen list otherwise it will be locked in forever by earlier calls
         sa.setChosenList(null);
         sa.setSubAbility(null);
         List<AbilitySub> chosenList;
-        
-        if (!ai.equals(sa.getActivatingPlayer())) {
+
+        if (choiceForOpp) {
             // This branch is for "An Opponent chooses" Charm spells from Alliances
             // Current just choose the first available spell, which seem generally less disastrous for the AI.
             chosenList = choices.subList(1, choices.size());
@@ -78,6 +79,11 @@ public class CharmAi extends SpellAbilityAi {
 
         // store the choices so they'll get reused
         sa.setChosenList(chosenList);
+
+        if (choiceForOpp) {
+            return true;
+        }
+
         if (sa.isSpell()) {
             // prebuild chain to improve cost calculation accuracy
             CharmEffect.chainAbilities(sa, chosenList);
@@ -107,9 +113,8 @@ public class CharmAi extends SpellAbilityAi {
                     int curPawprintAmount = AbilityUtils.calculateAmount(sub.getHostCard(), sub.getParamOrDefault("Pawprint", "0"), sub);
                     if (pawprintAmount + curPawprintAmount > pawprintLimit) {
                         continue;
-                    } else {
-                        pawprintAmount += curPawprintAmount;
                     }
+                    pawprintAmount += curPawprintAmount;
                 }
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
