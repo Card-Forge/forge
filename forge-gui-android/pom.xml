@@ -16,6 +16,7 @@
         <cardforge.user>user</cardforge.user>
         <cardforge.pass>pass</cardforge.pass>
         <cardforge.server>ftp.cardforge.org</cardforge.server>
+        <androidBuildTools>35.0.0</androidBuildTools>
     </properties>
 
     <parent>
@@ -263,7 +264,7 @@
                             </sign>
                             <sdk>
                                 <platform>35</platform>
-                                <buildTools>35.0.0</buildTools>
+                                <buildTools>${androidBuildTools}</buildTools>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
                             <assetsDirectory>${project.basedir}/assets</assetsDirectory>
@@ -393,7 +394,7 @@
                             </sign>
                             <sdk>
                                 <platform>35</platform>
-                                <buildTools>35.0.0</buildTools>
+                                <buildTools>${androidBuildTools}</buildTools>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
@@ -610,7 +611,7 @@
                             </sign>
                             <sdk>
                                 <platform>35</platform>
-                                <buildTools>35.0.0</buildTools>
+                                <buildTools>${androidBuildTools}</buildTools>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
