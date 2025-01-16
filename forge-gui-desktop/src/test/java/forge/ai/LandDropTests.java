@@ -89,6 +89,7 @@ public class LandDropTests extends AITest {
         p.setTeam(0);
         addCard("Plains", p);
         addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+        // comes in tapped, should not be played
         addCardToZone("Tranquil Expanse", p, ZoneType.Hand);
         Card t = addCardToZone("Temple Garden", p, ZoneType.Hand);
         // wrong color, should not be played
@@ -99,6 +100,26 @@ public class LandDropTests extends AITest {
 
         SpellAbility sa = p.getController().chooseSpellAbilityToPlay().get(0);
         AssertJUnit.assertEquals(t, sa.getHostCard());
+    }
+
+    @Test
+    public void testNoPlayUntappedShockLandWhenLifeLow() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setLife(2, null);
+        p.setTeam(0);
+        addCard("Plains", p);
+        addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+        addCardToZone("Tranquil Expanse", p, ZoneType.Hand);
+        Card t = addCardToZone("Temple Garden", p, ZoneType.Hand);
+        addCardToZone("Plains", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+
+        SpellAbility sa = p.getController().chooseSpellAbilityToPlay().get(0);
+        // Don't play the shock
+        AssertJUnit.assertNotSame(t, sa.getHostCard());
     }
 
     @Test

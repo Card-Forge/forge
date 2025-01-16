@@ -105,12 +105,15 @@ public class TapAi extends TapAiBase {
                             if (landsize != c.getCMC()) {
                                 continue;
                             }
-                            // Check if the AI intends to play the card and if it can pay for it with the mana it has
-                            boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
-                            boolean canPay = c.getManaCost().canBePaidWithAvailable(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(payer, source)).getColor());
-                            if (canPay && willPlay) {
+                            if (payer.getLife() > 10 || landsize < 3) {
                                 return true;
                             }
+//                            // Check if the AI intends to play the card and if it can pay for it with the mana it has
+//                            boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
+//                            boolean canPay = c.getManaCost().canBePaidWithAvailable(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(payer, source)).getColor());
+//                            if (canPay && willPlay) {
+//                                return true;
+//                            }
                         }
                     }
                     return false;

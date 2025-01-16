@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
+import forge.ai.ability.TapAi;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
@@ -74,6 +75,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
+import static forge.game.ability.AbilityUtils.calculateUnlessCost;
 import static java.lang.Math.max;
 
 /**
@@ -542,6 +544,8 @@ public class AiController {
         }
 
         // try to skip lands that enter the battlefield tapped if we might want to play something this turn
+        // TODO figure out a better life level for shocking in lands
+        boolean check_shocks = player.getLife() > 10;
         if (!nonLandsInHand.isEmpty()) {
             CardCollection nonTappedLands = new CardCollection();
             for (Card land : landList) {
@@ -561,6 +565,14 @@ public class AiController {
                     SpellAbility reSA = re.ensureAbility();
                     if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
                         continue;
+                    }
+                    // check unlesscost parameters. At this point, it should be a tapapi ability
+                    if (reSA.hasParam("UnlessCost")) {
+                        String unlessCost = reSA.getParam("UnlessCost").trim();
+                        Cost cost = calculateUnlessCost(reSA, unlessCost, true);
+                        if (SpellApiToAi.Converter.get(ApiType.Tap).willPayUnlessCost(reSA, player, cost, false, new PlayerCollection(player))) {
+                            continue;
+                        }
                     }
                     reSA.setActivatingPlayer(reSA.getHostCard().getController());
                     if (reSA.metConditions()) {
