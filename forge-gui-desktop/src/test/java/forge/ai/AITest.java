@@ -81,7 +81,6 @@ public class AITest {
         return null;
     }
 
-
     protected SpellAbility findSAWithPrefix(Card c, String prefix) {
         return findSAWithPrefix(c.getSpellAbilities(), prefix);
     }
