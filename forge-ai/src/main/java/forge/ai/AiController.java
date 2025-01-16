@@ -23,7 +23,6 @@ import com.google.common.collect.Lists;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
-import forge.ai.ability.TapAi;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
@@ -75,7 +74,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import static forge.ai.ComputerUtilMana.getAvailableManaEstimate;
-import static forge.game.ability.AbilityUtils.calculateUnlessCost;
 import static java.lang.Math.max;
 
 /**
@@ -569,8 +567,8 @@ public class AiController {
                     // check unlesscost parameters. At this point, it should be a tapapi ability
                     if (reSA.hasParam("UnlessCost")) {
                         String unlessCost = reSA.getParam("UnlessCost").trim();
-                        Cost cost = calculateUnlessCost(reSA, unlessCost, true);
-                        if (SpellApiToAi.Converter.get(ApiType.Tap).willPayUnlessCost(reSA, player, cost, false, new PlayerCollection(player))) {
+                        Cost cost = AbilityUtils.calculateUnlessCost(reSA, unlessCost, true);
+                        if (SpellApiToAi.Converter.get(reSA).willPayUnlessCost(reSA, player, cost, false, new PlayerCollection(player))) {
                             continue;
                         }
                     }
