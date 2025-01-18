@@ -12,5 +12,5 @@ Name:Tunnel of Hate
 ManaCost:4 R R
 Types:Enchantment Room
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking creature gains double strike until end of turn.
-SVar:TrigPump:DB$ Pump | KW$ Double Strike | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature 
+SVar:TrigPump:DB$ Pump | KW$ Double Strike | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature
 Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhenever you attack, target attacking creature gains double strike until end of turn.
