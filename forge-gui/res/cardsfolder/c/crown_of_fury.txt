@@ -2,7 +2,7 @@ Name:Crown of Fury
 ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ First Strike | Description$ Enchanted creature gets +1/+0 and has first strike.
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ AttachedBy Sacrificed | NumAtt$ 1 | KW$ First Strike | SubAbility$ DBPumpAll | SpellDescription$ Enchanted creature and other creatures that share a creature type with it get +1/+0 and gain first strike until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.NotDefinedAttachedBy Sacrificed+sharesCreatureTypeWith AttachedBy Sacrificed | NumAtt$ 1 | KW$ First Strike

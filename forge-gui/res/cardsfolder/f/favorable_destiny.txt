@@ -2,7 +2,7 @@ Name:Favorable Destiny
 ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AITgts$ Card.White | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AITgts$ Card.White | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddToughness$ 2 | Description$ Enchanted creature gets +1/+2 as long as it's white.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | CheckSVar$ X | SVarCompare$ GE2 | Description$ Enchanted creature has shroud as long as its controller controls another creature. (It can't be the target of spells or abilities.)
 SVar:X:Count$EnchantedControllerCreatures

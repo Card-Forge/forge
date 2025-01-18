@@ -2,7 +2,7 @@ Name:So Shiny
 ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ KeepTapped
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | IsPresent$ Card.YouCtrl+token | PresentCompare$ GE1 | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, if you control a token, tap enchanted creature, then scry 2.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2

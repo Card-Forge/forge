@@ -2,7 +2,7 @@ Name:Merseine
 ManaCost:2 U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ KeepTapped | AITgts$ Card.cmcGE2
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped | AITgts$ Card.cmcGE2
 K:etbCounter:NET:3
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | CheckSVar$ X | Description$ Enchanted creature doesn't untap during its controller's untap step if CARDNAME has a net counter on it.
 A:AB$ RemoveCounter | Activator$ Player.EnchantedController | Cost$ Mana<0\EnchantedCost> | CostDesc$ Pay enchanted creature's mana cost: | CounterType$ NET | CounterNum$ 1 | SpellDescription$ Remove a net counter from CARDNAME. Only the controller of the enchanted creature may activate this ability.

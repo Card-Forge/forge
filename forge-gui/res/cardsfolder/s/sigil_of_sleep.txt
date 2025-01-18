@@ -2,7 +2,7 @@ Name:Sigil of Sleep
 ManaCost:U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curiosity
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curiosity
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | Execute$ TrigReturn | TriggerDescription$ Whenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select target creature your opponent controls | IsCurse$ True | Origin$ Battlefield | Destination$ Hand
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.

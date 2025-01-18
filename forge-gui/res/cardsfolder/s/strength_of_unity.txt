@@ -2,7 +2,7 @@ Name:Strength of Unity
 ManaCost:3 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Domain — Enchanted creature gets +1/+1 for each basic land type among lands you control.
 SVar:X:Count$Domain
 AI:RemoveDeck:Random

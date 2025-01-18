@@ -2,7 +2,7 @@ Name:Errant Minion
 ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | Execute$ DBPay | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may pay any amount of mana. CARDNAME deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Self | ReplaceWith$ DBReplace | PreventionEffect$ True | Secondary$ True
 SVar:DBReplace:DB$ ReplaceDamage | Amount$ PaidAmount

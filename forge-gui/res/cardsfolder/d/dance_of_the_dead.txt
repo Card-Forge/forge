@@ -2,7 +2,7 @@ Name:Dance of the Dead
 ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant creature card in a graveyard
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | TgtZone$ Graveyard | AILogic$ Reanimate
+A:SP$ Attach | ValidTgts$ Creature | TgtZone$ Graveyard | AILogic$ Reanimate
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReanimate | TriggerDescription$ When CARDNAME enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with CARDNAME." Put enchanted creature card onto the battlefield tapped under your control and attach CARDNAME to it. When CARDNAME leaves the battlefield, that creature's controller sacrifices it.
 SVar:TrigReanimate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Enchanted | RememberChanged$ True | GainControl$ True | Tapped$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Self | OverwriteSpells$ True | Abilities$ NewAttach | Keywords$ Enchant creature put onto the battlefield with CARDNAME | RemoveKeywords$ Enchant creature card in a graveyard | Duration$ Permanent | SubAbility$ DBAttach

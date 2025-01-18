@@ -2,7 +2,7 @@ Name:Instill Furor
 ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ EOTTrigger | AddSVar$ InstillTrigSac & MustAttack | Description$ Enchanted creature has "At the beginning of your end step, sacrifice this creature unless it attacked this turn."
 SVar:EOTTrigger:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ InstillTrigSac | TriggerDescription$ At the beginning of your end step, sacrifice this creature unless it attacked this turn.
 SVar:InstillTrigSac:DB$ Sacrifice | ConditionPresent$ Card.Self+notAttackedThisTurn | ConditionCompare$ GE1

@@ -2,6 +2,6 @@ Name:Enfeeblement
 ManaCost:B B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ B B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | AddToughness$ -2 | Description$ Enchanted creature gets -2/-2.
 Oracle:Enchant creature (Target a creature as you cast this. This card enters attached to that creature.)\nEnchanted creature gets -2/-2.

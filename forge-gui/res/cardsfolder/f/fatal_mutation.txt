@@ -2,7 +2,7 @@ Name:Fatal Mutation
 ManaCost:B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ TurnFaceUp | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When enchanted creature is turned face up, destroy it. It can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy | NoRegen$ True
 AI:RemoveDeck:Random

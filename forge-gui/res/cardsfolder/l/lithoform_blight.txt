@@ -2,7 +2,7 @@ Name:Lithoform Blight
 ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Land | AITgts$ Land.nonBasic | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Land | AITgts$ Land.nonBasic | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | RemoveLandTypes$ True | RemoveAllAbilities$ True | AddAbility$ ABManaC & ABManaAny | Description$ Enchanted land loses all land types and abilities and has "{T}: Add {C}" and "{T}, Pay 1 life: Add one mana of any color."

@@ -2,7 +2,7 @@ Name:Heart of Light
 ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 R:Event$ DamageDone | Prevent$ True | ValidTarget$ Creature.EnchantedBy | Description$ Prevent all damage that would be dealt to and dealt by enchanted creature.
 R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.EnchantedBy | Secondary$ True | Description$ Prevent all damage that would be dealt to and dealt by enchanted creature.
 Oracle:Enchant creature (Target a creature as you cast this. This card enters attached to that creature.)\nPrevent all damage that would be dealt to and dealt by enchanted creature.

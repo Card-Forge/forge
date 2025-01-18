@@ -2,6 +2,6 @@ Name:Brainwash
 ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ CantAttackUnless | ValidCard$ Creature.AttachedBy | Cost$ 3 | Description$ Enchanted creature can't attack unless its controller pays {3}.
 Oracle:Enchant creature\nEnchanted creature can't attack unless its controller pays {3}.

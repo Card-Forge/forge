@@ -2,7 +2,7 @@ Name:Blight
 ManaCost:B B
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ B B | ValidTgts$ Land | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy
 SVar:NonStackingAttachEffect:True

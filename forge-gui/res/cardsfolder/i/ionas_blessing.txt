@@ -2,6 +2,6 @@ Name:Iona's Blessing
 ManaCost:3 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | CanBlockAmount$ 1 | Description$ Enchanted creature gets +2/+2, has vigilance, and can block an additional creature each combat.
 Oracle:Enchant creature\nEnchanted creature gets +2/+2, has vigilance, and can block an additional creature each combat.

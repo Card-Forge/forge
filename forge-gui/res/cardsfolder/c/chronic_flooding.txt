@@ -2,7 +2,7 @@ Name:Chronic Flooding
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever enchanted land becomes tapped, its controller mills three cards.
 SVar:TrigMill:DB$ Mill | Defined$ TriggeredCardController | NumCards$ 3
 Oracle:Enchant land\nWhenever enchanted land becomes tapped, its controller mills three cards.

@@ -2,6 +2,6 @@ Name:Lightning Talons
 ManaCost:2 R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddKeyword$ First Strike | Description$ Enchanted creature gets +3/+0 and has first strike. (It deals combat damage before creatures without first strike.)
 Oracle:Enchant creature\nEnchanted creature gets +3/+0 and has first strike. (It deals combat damage before creatures without first strike.)

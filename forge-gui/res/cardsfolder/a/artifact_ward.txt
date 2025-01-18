@@ -2,7 +2,7 @@ Name:Artifact Ward
 ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.Artifact | Description$ Enchanted creature can't be blocked by artifact creatures.
 R:Event$ DamageDone | Prevent$ True | ActiveZones$ Battlefield | ValidTarget$ Creature.EnchantedBy | ValidSource$ Artifact | Description$ Prevent all damage that would be dealt to enchanted creature by artifact sources.
 S:Mode$ CantTarget | ValidCard$ Card.EnchantedBy | ValidSource$ Artifact | Description$ Enchanted creature can't be the target of abilities from artifact sources.

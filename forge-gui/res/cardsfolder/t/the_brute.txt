@@ -2,7 +2,7 @@ Name:The Brute
 ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
 A:AB$ Regenerate | Cost$ R R R | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 DeckHas:Keyword$Regenerate
