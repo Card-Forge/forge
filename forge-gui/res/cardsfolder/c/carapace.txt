@@ -2,7 +2,7 @@ Name:Carapace
 ManaCost:G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2.
 A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 Oracle:Enchant creature\nEnchanted creature gets +0/+2.\nSacrifice Carapace: Regenerate enchanted creature.

@@ -2,7 +2,7 @@ Name:Colossification
 ManaCost:5 G G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 5 G G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 20 | AddToughness$ 20 | Description$ Enchanted creature gets +20/+20.

@@ -2,6 +2,6 @@ Name:Confiscate
 ManaCost:4 U U
 Types:Enchantment Aura
 K:Enchant permanent
-A:SP$ Attach | Cost$ 4 U U | ValidTgts$ Permanent | AILogic$ GainControl
+A:SP$ Attach | ValidTgts$ Permanent | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
 Oracle:Enchant permanent\nYou control enchanted permanent.

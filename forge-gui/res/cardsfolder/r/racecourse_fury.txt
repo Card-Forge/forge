@@ -2,7 +2,7 @@ Name:Racecourse Fury
 ManaCost:R
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ R | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ RFPump | Description$ Enchanted land has "{T}: Target creature gains haste until end of turn."
 SVar:RFPump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 SVar:NonStackingEffect:True

@@ -2,7 +2,7 @@ Name:Duskmourn's Domination
 ManaCost:4 U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 4 U U | ValidTgts$ Creature | AILogic$ GainControl
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | RemoveAllAbilities$ True | Description$ Enchanted creature gets -3/-0 and loses all abilities.
 Oracle:Enchant creature\nYou control enchanted creature.\nEnchanted creature gets -3/-0 and loses all abilities.

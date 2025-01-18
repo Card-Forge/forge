@@ -2,7 +2,7 @@ Name:Favor of the Woods
 ManaCost:2 G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever enchanted creature blocks, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | Defined$ You
 Oracle:Enchant creature\nWhenever enchanted creature blocks, you gain 3 life.

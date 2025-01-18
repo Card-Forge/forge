@@ -2,7 +2,7 @@ Name:Setessan Training
 ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature you control
-A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Trample | Description$ Enchanted creature gets +1/+0 and has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)

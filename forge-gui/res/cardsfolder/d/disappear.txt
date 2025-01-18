@@ -2,7 +2,7 @@ Name:Disappear
 ManaCost:2 U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 A:AB$ ChangeZone | Cost$ U | Defined$ EnchantedAndSelf | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return enchanted creature and CARDNAME to their owners' hands.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\n{U}: Return enchanted creature and Disappear to their owners' hands.

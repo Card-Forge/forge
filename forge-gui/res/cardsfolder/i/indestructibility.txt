@@ -2,6 +2,6 @@ Name:Indestructibility
 ManaCost:3 W
 Types:Enchantment Aura
 K:Enchant permanent
-A:SP$ Attach | Cost$ 3 W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Indestructible | Description$ Enchanted permanent has indestructible. (Effects that say "destroy" don't destroy that permanent. A creature with indestructible can't be destroyed by damage.)
 Oracle:Enchant permanent\nEnchanted permanent has indestructible. (Effects that say "destroy" don't destroy that permanent. A creature with indestructible can't be destroyed by damage.)

@@ -2,6 +2,6 @@ Name:Tall as a Beanstalk
 ManaCost:3 G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Reach | AddType$ Giant | Description$ Enchanted creature gets +3/+3, has reach, and is a Giant in addition to its other types.
 Oracle:Enchant creature\nEnchanted creature gets +3/+3, has reach, and is a Giant in addition to its other types.

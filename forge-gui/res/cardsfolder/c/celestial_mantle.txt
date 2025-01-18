@@ -2,7 +2,7 @@ Name:Celestial Mantle
 ManaCost:3 W W W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 W W W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigSetLife | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, double its controller's life total.
 SVar:TrigSetLife:DB$ SetLife | Defined$ TriggeredSourceController | LifeAmount$ X

@@ -2,7 +2,7 @@ Name:Fatal Attraction
 ManaCost:2 R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDamage2 | TriggerDescription$ When CARDNAME enters, it deals 2 damage to enchanted creature.
 SVar:TrigDamage2:DB$ DealDamage | Defined$ Enchanted | NumDmg$ 2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage4 | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 4 damage to enchanted creature.

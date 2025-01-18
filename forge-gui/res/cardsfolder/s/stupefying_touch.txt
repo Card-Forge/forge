@@ -2,7 +2,7 @@ Name:Stupefying Touch
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AITgts$ Card.hasActivatedAbility | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AITgts$ Card.hasActivatedAbility | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ CantBeActivated | ValidCard$ Creature.EnchantedBy | ValidSA$ Activated | Description$ Enchanted creature's activated abilities can't be activated.

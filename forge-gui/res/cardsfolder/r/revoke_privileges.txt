@@ -2,7 +2,7 @@ Name:Revoke Privileges
 ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack, block, or crew Vehicles.
 S:Mode$ CantCrew | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature can't crew Vehicles.
 Oracle:Enchant creature\nEnchanted creature can't attack, block, or crew Vehicles.
