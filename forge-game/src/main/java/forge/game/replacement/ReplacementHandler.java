@@ -318,7 +318,7 @@ public class ReplacementHandler {
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            String name = CardTranslation.getTranslatedName(MoreObjects.firstNonNull(host.getCardForUi(), host).getName());
+            String name = CardTranslation.getTranslatedName(MoreObjects.firstNonNull(host.getRenderForUI() ? host.getCardForUi() : null, host).getName());
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)

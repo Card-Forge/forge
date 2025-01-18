@@ -337,6 +337,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private CombatLki combatLKI;
 
     private CardRules cardRules;
+    protected boolean renderForUi = true;
     private final CardView view;
 
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
@@ -6452,16 +6453,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final String getImageKey() {
+        if (!getRenderForUI()) {
+            return "";
+        }
         Card uiCard = getCardForUi();
         if(uiCard == null)
             return "";
         return uiCard.currentState.getImageKey();
     }
     public final void setImageKey(final String iFN) {
+        if (!getRenderForUI()) {
+            return;
+        }
         Card uiCard = getCardForUi();
-        if(uiCard == null)
-            this.currentState.setImageKey(iFN); //Shouldn't really matter; the card isn't supposed to show in the UI anyway.
-        else
+        if(uiCard != null)
             uiCard.currentState.setImageKey(iFN);
     }
     public final void setImageKey(final IPaperCard ipc, final CardStateName stateName) {
@@ -6489,6 +6494,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public String getImageKey(CardStateName state) {
+        if (!getRenderForUI()) {
+            return "";
+        }
         Card uiCard = getCardForUi();
         if(uiCard == null)
             return "";
@@ -7615,6 +7623,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     //allow special cards to override this function to return another card for the sake of UI logic
     public Card getCardForUi() {
         return this;
+    }
+
+    public boolean getRenderForUI() {
+        return this.renderForUi;
+    }
+
+    public void setRenderForUI(boolean value) {
+        renderForUi = value;
     }
 
     public IPaperCard getPaperCard() {
