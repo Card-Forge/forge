@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.EnumSet;
 import java.util.Map;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
@@ -9,7 +8,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardType;
-import forge.card.RemoveType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
@@ -89,7 +87,7 @@ public class AmassEffect extends TokenEffectBase {
 
         Map<String, Object> params = Maps.newHashMap();
         params.put("CounterType", CounterType.get(CounterEnumType.P1P1));
-        params.put("Amount", 1);
+        params.put("Amount", amount);
         Card tgt = activator.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), false, params);
 
         if (sa.hasParam("RememberAmass")) {
@@ -100,7 +98,20 @@ public class AmassEffect extends TokenEffectBase {
         tgt.addCounter(CounterEnumType.P1P1, amount, activator, table);
         table.replaceCounterEffect(game, sa, true);
         // change type after counters
-        tgt.addChangedCardTypes(CardType.parse(type, true), null, false, EnumSet.noneOf(RemoveType.class), game.getNextTimestamp(), 0, true, false);
+        if (!tgt.getType().hasCreatureType(type)) {
+            Card eff = createEffect(sa, activator, "Amass Effect", source.getImageKey());
+            eff.setSetCode(source.getSetCode());
+            eff.setRarity(source.getRarity());
+            // TODO hide effect from Command Zone
+
+            eff.addRemembered(tgt);
+
+            String s = "Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AddType$ " + type;
+            eff.addStaticAbility(s);
+
+            tgt.addLeavesPlayCommand(exileEffectCommand(game, eff));
+            game.getAction().moveToCommand(eff, sa);
+        }
     }
 
 }
