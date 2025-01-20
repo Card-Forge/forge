@@ -4,5 +4,5 @@ Types:Creature Human Warrior
 PT:2/2
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttachAll | TriggerDescription$ When CARDNAME enters, attach all Equipment on the battlefield to it. (Control of the Equipment doesn't change.)
-SVar:TrigAttachAll:DB$ Attach | Object$ Valid Equipment | Defined$ TriggeredCard | SpellDescription$ attach all Equipment on the battlefield to CARDNAME.
+SVar:TrigAttachAll:DB$ Attach | Object$ Valid Equipment | Defined$ Self | SpellDescription$ attach all Equipment on the battlefield to CARDNAME.
 Oracle:Haste\nWhen Vulshok Battlemaster enters, attach all Equipment on the battlefield to it. (Control of the Equipment doesn't change.)

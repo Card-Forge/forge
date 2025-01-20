@@ -64,12 +64,19 @@ public class MustBlockEffect extends SpellAbilityEffect {
 
         long ts = game.getNextTimestamp();
 
-        for (final Card c : tgtCards) {
+        for (final Card tgtC : tgtCards) {
+            final Card gameCard = game.getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard) || gameCard.isPhasedOut()) {
+                continue;
+            }
             if (mustBlockAll) {
-                c.addMustBlockCards(ts, cards);
+                gameCard.addMustBlockCards(ts, cards);
             } else {
                 final Card attacker = cards.get(0);
-                c.addMustBlockCard(ts, attacker);
+                gameCard.addMustBlockCard(ts, attacker);
             }
         }
 

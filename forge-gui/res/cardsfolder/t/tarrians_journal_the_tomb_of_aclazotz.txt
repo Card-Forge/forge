@@ -21,6 +21,6 @@ SVar:ReplEffAddCounter:DB$ Effect | ReplacementEffects$ ETBAddCounter | Remember
 SVar:ETBAddCounter:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated
 SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ FINALITY | CounterNum$ 1 | SubAbility$ DBExileSelf
 SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Vampire | Duration$ Permanent
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCardLKICopy | Types$ Vampire | Duration$ Permanent
 DeckHas:Ability$Counters
 Oracle:{T}: Add {B}.\n{T}: You may cast a creature spell from your graveyard this turn. If you do, it enters with a finality counter on it and is a Vampire in addition to its other types. (If a creature with a finality counter on it would die, exile it instead.)
