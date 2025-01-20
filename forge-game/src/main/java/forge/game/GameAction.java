@@ -1278,9 +1278,9 @@ public class GameAction {
                     }
                     for (final Card c : p.getCardsIn(zt).threadSafeIterable()) {
                         checkAgain |= stateBasedAction704_5d(c);
-                         // Dungeon Card won't affect other cards, so don't need to set checkAgain
-                        stateBasedAction_Dungeon(c);
                         if (zt == ZoneType.Command) {
+                            // Dungeon Card won't affect other cards, so don't need to set checkAgain
+                            stateBasedAction_Dungeon(c);
                             stateBasedAction_Scheme(c);
                         }
                     }
