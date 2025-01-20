@@ -4,5 +4,5 @@ Types:Creature Shapeshifter
 PT:0/1
 # Make SVars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ RDCopy | TriggerDescription$ Whenever another creature you control enters, you may have CARDNAME become a copy of that creature until end of turn. (If it does, it loses this ability for the rest of the turn.)
-SVar:RDCopy:DB$ Clone | Defined$ TriggeredCard | Duration$ UntilEndOfTurn | AILogic$ IfDefinedCreatureIsBetter
+SVar:RDCopy:DB$ Clone | Defined$ TriggeredCardLKICopy | Duration$ UntilEndOfTurn | AILogic$ IfDefinedCreatureIsBetter
 Oracle:Whenever another creature you control enters, you may have Renegade Doppelganger become a copy of that creature until end of turn. (If it does, it loses this ability for the rest of the turn.)

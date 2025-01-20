@@ -68,6 +68,8 @@ public class WrappedAbility extends Ability {
             ApiType.BidLife, // only player
             ApiType.Clash, // only player
 
+            ApiType.Clone, // checked
+
             ApiType.GenericChoice, // only player
 
             ApiType.Connive, // no triggered
