@@ -176,17 +176,13 @@ public enum TrackableProperty {
     HasVigilance(TrackableTypes.BooleanType),
     HasLandwalk(TrackableTypes.BooleanType),
     HasAftermath(TrackableTypes.BooleanType),
-    //protectionkey
     ProtectionKey(TrackableTypes.StringType),
-    //hexproofkey
     HexproofKey(TrackableTypes.StringType),
     HasHaste(TrackableTypes.BooleanType),
     HasInfect(TrackableTypes.BooleanType),
     HasStorm(TrackableTypes.BooleanType),
     HasWard(TrackableTypes.BooleanType),
     HasWither(TrackableTypes.BooleanType),
-    YouMayLook(TrackableTypes.BooleanType),
-    OpponentMayLook(TrackableTypes.BooleanType),
     BlockAdditional(TrackableTypes.IntegerType),
     BlockAny(TrackableTypes.BooleanType),
     AbilityText(TrackableTypes.StringType),

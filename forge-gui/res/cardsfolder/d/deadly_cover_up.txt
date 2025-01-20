@@ -11,5 +11,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumInLib:PlayerCountDefinedRememberedOwner$CardsInLibrary
 SVar:NumInHand:PlayerCountDefinedRememberedOwner$CardsInHand
 SVar:NumInYard:PlayerCountDefinedRememberedOwner$CardsInGraveyard
-DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+DeckHints:Ability$Graveyard|Mill|Discard & Keyword$Dredge
 Oracle:As an additional cost to cast this spell, you may collect evidence 6.\nDestroy all creatures. If evidence was collected, exile a card from an opponent's graveyard. Then search its owner's graveyard, hand, and library for any number of cards with that name and exile them.
