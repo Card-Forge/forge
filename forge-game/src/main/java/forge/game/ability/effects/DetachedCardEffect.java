@@ -14,7 +14,6 @@ public class DetachedCardEffect extends Card {
         super(card0.getOwner().getGame().nextCardId(), card0.getPaperCard(), card0.getOwner().getGame());
         card = card0;
 
-        this.renderForUi = false;
         setName(name0);
         setOwner(card0.getOwner());
         setGamePieceType(GamePieceType.EFFECT);
@@ -38,7 +37,7 @@ public class DetachedCardEffect extends Card {
 
     public DetachedCardEffect(DetachedCardEffect from, Game game, boolean assignNewId) {
         super(assignNewId ? game.nextCardId() : from.id, from.getPaperCard(), game);
-        this.renderForUi = false;
+        this.renderForUi = from.renderForUi;
         this.setName(from.getName());
         this.setGamePieceType(GamePieceType.EFFECT);
         if(from.getGame() == game) {
