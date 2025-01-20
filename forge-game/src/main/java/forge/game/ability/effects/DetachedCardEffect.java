@@ -14,6 +14,7 @@ public class DetachedCardEffect extends Card {
         super(card0.getOwner().getGame().nextCardId(), card0.getPaperCard(), card0.getOwner().getGame());
         card = card0;
 
+        this.renderForUi = false;
         setName(name0);
         setOwner(card0.getOwner());
         setGamePieceType(GamePieceType.EFFECT);
