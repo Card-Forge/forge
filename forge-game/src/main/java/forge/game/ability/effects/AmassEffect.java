@@ -97,13 +97,12 @@ public class AmassEffect extends TokenEffectBase {
         GameEntityCounterTable table = new GameEntityCounterTable();
         tgt.addCounter(CounterEnumType.P1P1, amount, activator, table);
         table.replaceCounterEffect(game, sa, true);
-        // change type after counters
+        // 01.44a If it isn’t a [subtype], it becomes a [subtype] in addition to its other types.
         if (!tgt.getType().hasCreatureType(type)) {
             Card eff = createEffect(sa, activator, "Amass Effect", source.getImageKey());
             eff.setSetCode(source.getSetCode());
             eff.setRarity(source.getRarity());
-            // TODO hide effect from Command Zone
-
+            eff.setRenderForUI(false);
             eff.addRemembered(tgt);
 
             String s = "Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AddType$ " + type;
