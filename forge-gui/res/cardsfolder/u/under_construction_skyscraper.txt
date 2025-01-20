@@ -8,6 +8,6 @@ DeckHas:Ability$Mana.Colorless
 S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ ABManaAbzan | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE7_LEVEL | Description$ LEVEL 1-7 {T}: Add {W}, {B}, {G}, or {C}.
 SVar:ABManaAbzan:AB$ Mana | Cost$ T | Produced$ Combo W B G C | SpellDescription$ Add {W}, {B}, {G}, or {C}.
 S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ ABManaScry | IsPresent$ Card.Self+counters_GE8_LEVEL | Description$ LEVEL 8+ {T}: Add {W}, {B}, {G}, or {C}. Scry 1.
-SVar:ABManaScry:AB$ Mana | Cost$ T | Produced$ Combo W B G C | Subability$ DBScry | SpellDescription$ Add {W}, {B}, {G}, or {C}. Scry 1.
+SVar:ABManaScry:AB$ Mana | Cost$ T | Produced$ Combo W B G C | SubAbility$ DBScry | SpellDescription$ Add {W}, {B}, {G}, or {C}. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Level up {1} ({1}: Put a level counter on this. Level up only as a sorcery.)\n{T}: Add {C}.\nLEVEL 1-7\n{T}: Add {W}, {B}, {G}, or {C}.\nLEVEL 8+\n{T}: Add {W}, {B}, {G}, or {C}. Scry 1.
