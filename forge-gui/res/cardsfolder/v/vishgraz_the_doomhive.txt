@@ -11,4 +11,4 @@ SVar:X:Count$TotalOppPoisonCounters
 AI:RemoveDeck:Random
 DeckHas:Ability$Token & Type$Mite|Artifact
 DeckHints:Ability$Counters & Keyword$Infect|Toxic|Poisonous
-Oracle:Menace, toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Vishgraz, the Doomhive enters, create three 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block."\nVishgraz gets +1/+1 for each poison counter your opponents have
+Oracle:Menace, toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Vishgraz, the Doomhive enters, create three 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block."\nVishgraz gets +1/+1 for each poison counter your opponents have.

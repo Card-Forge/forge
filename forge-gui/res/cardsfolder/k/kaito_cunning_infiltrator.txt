@@ -13,4 +13,4 @@ A:AB$ Effect | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:CastTrig:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever a player casts a spell, you create a 2/1 blue Ninja creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ u_2_1_ninja
 DeckHas:Ability$Token & Type$Ninja
-Oracle:Whenever a creature you control deals combat damage to a player, put a loyalty counter on Kaito.\n[+1]: Up to one target creature you control can't be blocked this turn. Draw a card, then discard a card.\n[−2]: Create a 2/1 blue Ninja creature token.\n[−9]: You get an emblem with "Whenever a player casts a spell, you create a 2/1 blue Ninja creature token."
+Oracle:Whenever a creature you control deals combat damage to a player, put a loyalty counter on Kaito.\n[+1]: Up to one target creature you control can't be blocked this turn. Draw a card, then discard a card.\n[-2]: Create a 2/1 blue Ninja creature token.\n[-9]: You get an emblem with "Whenever a player casts a spell, you create a 2/1 blue Ninja creature token."
