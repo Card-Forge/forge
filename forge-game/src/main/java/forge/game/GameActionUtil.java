@@ -692,7 +692,6 @@ public final class GameActionUtil {
 
                         if (v > 0) {
                             Card eff = createETBCountersEffect(c, host, activator, "P1P1", String.valueOf(v));
-
                             if (result == null) {
                                 result = sa.copy();
                             }
@@ -725,6 +724,7 @@ public final class GameActionUtil {
     public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {
         final Game game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
+
         eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(sourceCard + "'s Effect");
         eff.setOwner(controller);

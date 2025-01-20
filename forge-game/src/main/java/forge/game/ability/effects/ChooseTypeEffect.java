@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -152,7 +151,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 }
             }
         } else {
-            throw new InvalidParameterException(sa.getHostCard() + "'s ability resulted in no types to choose from");
+            throw new RuntimeException(sa.getHostCard() + "'s ability resulted in no types to choose from");
         }
     }
 

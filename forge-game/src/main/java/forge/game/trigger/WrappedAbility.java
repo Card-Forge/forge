@@ -57,9 +57,9 @@ public class WrappedAbility extends Ability {
             ApiType.RemoveCounter,
             ApiType.AddOrRemoveCounter,
             ApiType.MoveCounter,
-            ApiType.Draw,
-            ApiType.GainLife,
-            ApiType.LoseLife,
+            ApiType.Draw, // only player
+            ApiType.GainLife, // only player
+            ApiType.LoseLife, // only player
             ApiType.ChangeZone,
             ApiType.Destroy,
             ApiType.Token,
@@ -70,10 +70,61 @@ public class WrappedAbility extends Ability {
 
             ApiType.DealDamage, // checked
 
+            ApiType.DelayedTrigger,
+
+            ApiType.EachDamage,
+            ApiType.WinsGame, // only player
+            ApiType.Incubate, // only player
+            ApiType.Mill, // only player
+
+            ApiType.Explore,
+            ApiType.Protection, // should not care about triggered
+            ApiType.ProtectionAll, // No Triggered
+            ApiType.Proliferate, // only player no triggered interaction
+            ApiType.CopyPermanent,
+            ApiType.Debuff, // updated
+            ApiType.Manifest, // no triggered
+            ApiType.Scry, // only player
+            ApiType.SetInMotion, // No Triggered
+            ApiType.Shuffle, // only player
+            ApiType.Surveil, // only player
+            ApiType.Tap, // Done
+            ApiType.TapAll, // uses filterListByType
+            ApiType.TapOrUntap, // No TriggeredCard
+            ApiType.TapOrUntapAll, // No TriggeredCard
+            ApiType.Untap, // Done
+            ApiType.UntapAll, // only player
+            ApiType.Unattach, // No Triggered
+            ApiType.UnattachAll, // No Triggered
+
             ApiType.Regenerate, // Updated
             ApiType.Regeneration, // Replacement Effect only
 
-            ApiType.DelayedTrigger
+            ApiType.RemoveFromCombat, // Done
+
+            // only Replacement Effects, no Trigger
+            ApiType.ReplaceCounter,
+            ApiType.ReplaceDamage,
+            ApiType.ReplaceEffect,
+            ApiType.ReplaceMana,
+            ApiType.ReplaceSplitDamage,
+            ApiType.ReplaceToken,
+
+            ApiType.RollDice, // only player
+            ApiType.RollPlanarDice, // only player
+            ApiType.Seek, // only player
+
+            ApiType.TakeInitiative, // only player
+
+            ApiType.Poison, // only player
+            ApiType.Venture, // only player
+            ApiType.Vote, // only player
+            // internal
+            ApiType.BlankLine,
+            ApiType.DamageResolve,
+            ApiType.ChangeZoneResolve,
+            ApiType.InternalLegendaryRule,
+            ApiType.InternalIgnoreEffect
             );
 
     private final SpellAbility sa;
