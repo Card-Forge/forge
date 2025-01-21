@@ -908,6 +908,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 decider = player;
             }
 
+            if (sa.usesTargeting() && !sa.hasParam("DefinedPlayer")) {
+                player = sa.getTargets().getFirstTargetedPlayer();
+            }
+
             List<ZoneType> origin = Lists.newArrayList();
             if (sa.hasParam("Origin")) {
                 origin = ZoneType.listValueOf(sa.getParam("Origin"));
