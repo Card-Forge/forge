@@ -1,0 +1,9 @@
+Name:Hulldrifter
+ManaCost:3 U U
+Types:Artifact Vehicle
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this Vehicle enters, draw two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2
+K:Crew:3
+Oracle:Flying\nWhen this Vehicle enters, draw two cards.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

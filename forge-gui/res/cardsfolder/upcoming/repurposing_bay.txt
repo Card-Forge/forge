@@ -1,0 +1,8 @@
+Name:Repurposing Bay
+ManaCost:2 U
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/Artifact.Other/another artifact> | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcEQX | ChangeNum$ 1 | SorcerySpeed$ True | AILogic$ SacAndUpgrade | StackDescription$ Search your library for an artifact card with mana value equal to 1 plus the sacrificed artifact's mana value, put that card onto the battlefield, then shuffle. | SpellDescription$ Search your library for an artifact card with mana value equal to 1 plus the sacrificed artifact's mana value, put that card onto the battlefield, then shuffle. Activate only as a sorcery.
+SVar:X:Sacrificed$CardManaCost/Plus.1
+# AI Preference is needed to make the AI consider the ability. Further constraints are defined by AILogic SacAndUpgrade.
+SVar:AIPreference:SacCost$Artifact
+Oracle:{2}, {T}, Sacrifice another artifact: Search your library for an artifact card with mana value equal to 1 plus the sacrificed artifact's mana value, put that card onto the battlefield, then shuffle. Activate only as a sorcery.
