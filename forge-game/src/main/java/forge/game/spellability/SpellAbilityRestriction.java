@@ -34,6 +34,7 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.staticability.StaticAbilityExhaust;
 import forge.game.staticability.StaticAbilityNumLoyaltyAct;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -540,6 +541,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (sa.isBoast()) {
             int limit = activator.hasKeyword("Creatures you control can boast twice during each of your turns rather than once.") ? 2 : 1;
             if (limit <= sa.getActivationsThisTurn()) {
+                return false;
+            }
+        } else if (sa.isExhaust()) {
+            if (sa.getActivationsThisGame() > 0 && !StaticAbilityExhaust.anyWithExhaust(activator)) {
                 return false;
             }
         }
