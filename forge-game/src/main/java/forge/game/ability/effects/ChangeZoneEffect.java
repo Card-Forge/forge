@@ -521,12 +521,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final CardCollection random = new CardCollection(tgtCards);
                 CardLists.shuffle(random);
                 tgtCards = random;
+            } else if (sa.hasParam("Chooser")) {
+                tgtCards = chooser.getController().orderMoveToZoneList(tgtCards, destination, sa);
             } else {
-                if (sa.hasParam("Chooser"))
-                    tgtCards = chooser.getController().orderMoveToZoneList(tgtCards, destination, sa);
-                else
-                    tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
+                tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
             }
+        }
+
+        // if the player didn't order the effect above use default
+        if (sa.hasParam("StaticEffect") && !sa.hasSVar("StaticEffectTimestamp")) {
+            sa.setSVar("StaticEffectTimestamp", String.valueOf(game.getNextTimestamp()));
         }
 
         for (final Card tgtC : tgtCards) {

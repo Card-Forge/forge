@@ -585,14 +585,16 @@ public abstract class SpellAbilityEffect {
         eff.addReplacementEffect(re);
     }
 
-    // create a basic template for Effect to be used somewhere else
-    public static Card createEffect(final SpellAbility sa, final Player controller, final String name,
-            final String image) {
+    // create a basic template for Effect to be used somewhere els
+    public static Card createEffect(final SpellAbility sa, final Player controller, final String name, final String image) {
+        return createEffect(sa, controller, name, image, controller.getGame().getNextTimestamp());
+    }
+    public static Card createEffect(final SpellAbility sa, final Player controller, final String name, final String image, final long timestamp) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
 
-        eff.setGameTimestamp(game.getNextTimestamp());
+        eff.setGameTimestamp(timestamp);
         eff.setName(name);
         eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
