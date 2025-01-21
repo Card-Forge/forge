@@ -87,11 +87,10 @@ public class DebuffEffect extends SpellAbilityEffect {
 
             final List<String> addedKW = Lists.newArrayList();
             final List<String> removedKW = Lists.newArrayList();
-
             if (sa.hasParam("AllSuffixKeywords")) {
                 // this only for walk abilities, may to try better
                 if (sa.getParam("AllSuffixKeywords").equals("walk")) {
-                    for (final KeywordInterface kw : tgtC.getKeywords(Keyword.LANDWALK)) {
+                    for (final KeywordInterface kw : gameCard.getKeywords(Keyword.LANDWALK)) {
                         removedKW.add(kw.getOriginal());
                     }
                 }
@@ -109,7 +108,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                         continue;
                     }
                     final String wardString = StringUtils.capitalize(colString) + ":" + colString;
-                    for (final KeywordInterface inst : tgtC.getKeywords(Keyword.PROTECTION)) {
+                    for (final KeywordInterface inst : gameCard.getKeywords(Keyword.PROTECTION)) {
                         // special for the Ward Auras Protection:Card.<Color>:<color>:*
                         String keyword = inst.getOriginal();
                         if (keyword.startsWith("Protection:") && keyword.contains(wardString)) {
@@ -122,11 +121,12 @@ public class DebuffEffect extends SpellAbilityEffect {
             if (ProtectionFromColor) {
                 // Split "Protection from each color" into extra Protection from <color>
                 String allColors = "Protection from each color";
-                if (tgtC.hasKeyword(allColors)) {
+                if (gameCard.hasKeyword(allColors)) {
                     final List<String> allColorsProtect = Lists.newArrayList();
 
                     for (byte col : MagicColor.WUBRG) {
                         allColorsProtect.add("Protection from " + MagicColor.toLongString(col));
+
                     }
                     allColorsProtect.removeAll(kws);
                     addedKW.addAll(allColorsProtect);
@@ -135,7 +135,7 @@ public class DebuffEffect extends SpellAbilityEffect {
 
                 // Extra for Spectra Ward
                 allColors = "Protection:Card.nonColorless:each color:Aura";
-                if (tgtC.hasKeyword(allColors)) {
+                if (gameCard.hasKeyword(allColors)) {
                     final List<String> allColorsProtect = Lists.newArrayList();
 
                     for (byte col : MagicColor.WUBRG) {
@@ -150,7 +150,7 @@ public class DebuffEffect extends SpellAbilityEffect {
             }
 
             removedKW.addAll(kws);
-            tgtC.addChangedCardKeywords(addedKW, removedKW, false, timestamp, null);
+            gameCard.addChangedCardKeywords(addedKW, removedKW, false, timestamp, null);
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 final GameCommand until = new GameCommand() {
@@ -158,7 +158,7 @@ public class DebuffEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        tgtC.removeChangedCardKeywords(timestamp, 0);
+                        gameCard.removeChangedCardKeywords(timestamp, 0);
                     }
                 };
                 addUntilCommand(sa, until);

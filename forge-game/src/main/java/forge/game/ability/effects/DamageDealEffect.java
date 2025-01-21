@@ -255,11 +255,8 @@ public class DamageDealEffect extends DamageBaseEffect {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     final Card gc = game.getCardState(c, null);
-                    if (gc == null || !c.equalsWithGameTimestamp(gc) || !gc.isInPlay()) {
+                    if (gc == null || !c.equalsWithGameTimestamp(gc) || !gc.isInPlay() || gc.isPhasedOut()) {
                         // timestamp different or not in play
-                        continue;
-                    }
-                    if (c.isPhasedOut()) {
                         continue;
                     }
                     internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap);

@@ -41,39 +41,137 @@ public class WrappedAbility extends Ability {
 
     static Set<ApiType> noTimestampCheck = ImmutableSet.of(
             ApiType.Abandon, // no Triggered
+            ApiType.ActivateAbility, // no Triggered
             ApiType.AddPhase, // only player
             ApiType.AddTurn, // only player
+            ApiType.SkipPhase, // only player
+            ApiType.SkipTurn, // only player
+            ApiType.AlterAttribute, // updated
 
             ApiType.Amass, // no Triggered only you
             ApiType.Ascend, // only player (you)
 
+            ApiType.Animate, // updated
+            ApiType.AnimateAll, // no triggered
+ 
+            ApiType.Attach, // checked
+
+            ApiType.Balance, // only player
+
+            ApiType.BecomesBlocked, // no triggered
+            ApiType.MustBlock, // updated
+            ApiType.SwitchBlock, // no triggered
+
             ApiType.BecomeMonarch, // only player
             ApiType.Bond, // updated
 
+            ApiType.BidLife, // only player
+            ApiType.Clash, // only player
+
+            ApiType.Clone, // checked
+
+            ApiType.GenericChoice, // only player
+
+            ApiType.Connive, // no triggered
+            ApiType.Encode, // no triggered
+            ApiType.Meld, // no triggered
+            ApiType.Haunt, // has own logic
+
             ApiType.PutCounter,
+            ApiType.PutCounterAll, // no triggered
             ApiType.MoveCounter,
             ApiType.MultiplyCounter,
             ApiType.MoveCounter,
             ApiType.RemoveCounter,
             ApiType.AddOrRemoveCounter,
             ApiType.MoveCounter,
-            ApiType.Draw,
-            ApiType.GainLife,
-            ApiType.LoseLife,
+
+            ApiType.Draw, // only player
+            ApiType.GainLife, // only player
+            ApiType.SetLife, // only player
+            ApiType.LoseLife, // only player
             ApiType.ChangeZone,
             ApiType.Destroy,
             ApiType.Token,
             ApiType.SetState,
             ApiType.Play,
+            ApiType.Sacrifice, // no triggered
             ApiType.SacrificeAll,
             ApiType.Pump,
 
+            ApiType.Phases, // updated
+
             ApiType.DealDamage, // checked
+
+            ApiType.DelayedTrigger,
+            ApiType.ImmediateTrigger,
+
+            ApiType.Goad, // updated
+
+            ApiType.EachDamage,
+            ApiType.WinsGame, // only player
+            ApiType.LosesGame, // only player
+            ApiType.Incubate, // only player
+            ApiType.Mill, // only player
+
+            ApiType.Explore,
+            ApiType.Protection, // should not care about triggered
+            ApiType.ProtectionAll, // No Triggered
+            ApiType.Proliferate, // only player no triggered interaction
+            ApiType.TimeTravel, // only player no triggered interaction
+            ApiType.CopyPermanent,
+            ApiType.Token,
+            ApiType.Debuff, // updated
+            ApiType.Manifest, // no triggered
+            ApiType.Scry, // only player
+            ApiType.SetInMotion, // No Triggered
+            ApiType.Shuffle, // only player
+            ApiType.Surveil, // only player
+            ApiType.Tap, // Done
+            ApiType.TapAll, // uses filterListByType
+            ApiType.TapOrUntap, // No TriggeredCard
+            ApiType.TapOrUntapAll, // No TriggeredCard
+            ApiType.Untap, // Done
+            ApiType.UntapAll, // only player
+            ApiType.Unattach, // No Triggered
+            ApiType.UnattachAll, // No Triggered
 
             ApiType.Regenerate, // Updated
             ApiType.Regeneration, // Replacement Effect only
 
-            ApiType.DelayedTrigger
+            ApiType.RemoveFromCombat, // Done
+
+            // only Replacement Effects, no Trigger
+            ApiType.ReplaceCounter,
+            ApiType.ReplaceDamage,
+            ApiType.ReplaceEffect,
+            ApiType.ReplaceMana,
+            ApiType.ReplaceSplitDamage,
+            ApiType.ReplaceToken,
+
+            ApiType.Repeat,
+            ApiType.RepeatEach,
+
+            ApiType.RollDice, // only player
+            ApiType.RollPlanarDice, // only player
+            ApiType.Seek, // only player
+            ApiType.Heist, // only player
+
+            ApiType.RingTemptsYou, // only player
+            ApiType.TakeInitiative, // only player
+
+            ApiType.UnlockDoor, // no triggered
+
+            ApiType.Poison, // only player
+            ApiType.Venture, // only player
+            ApiType.VillainousChoice, // only player
+            ApiType.Vote, // only player
+            // internal
+            ApiType.BlankLine,
+            ApiType.DamageResolve,
+            ApiType.ChangeZoneResolve,
+            ApiType.InternalLegendaryRule,
+            ApiType.InternalIgnoreEffect
             );
 
     private final SpellAbility sa;

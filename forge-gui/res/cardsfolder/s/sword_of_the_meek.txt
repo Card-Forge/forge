@@ -5,5 +5,5 @@ K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Equipped creature gets +1/+2.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerEQ1+toughnessEQ1+YouCtrl | Execute$ TrigReturn | TriggerZones$ Graveyard | OptionalDecider$ You | TriggerDescription$ Whenever a 1/1 creature you control enters, you may return CARDNAME from your graveyard to the battlefield, then attach it to that creature.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Defined$ TriggeredCard
+SVar:DBAttach:DB$ Attach | Defined$ TriggeredCardLKICopy
 Oracle:Equipped creature gets +1/+2.\nEquip {2}\nWhenever a 1/1 creature you control enters, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.

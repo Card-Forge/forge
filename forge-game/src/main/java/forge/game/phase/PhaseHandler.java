@@ -827,7 +827,7 @@ public class PhaseHandler implements java.io.Serializable {
         game.getTriggerHandler().clearThisTurnDelayedTrigger();
 
         Player next = getNextActivePlayer();
-        while (next.hasLost()) {
+        while (!next.isInGame()) {
             next = getNextActivePlayer();
         }
 

@@ -25,24 +25,33 @@ public class RegenerationEffect extends SpellAbilityEffect {
         for (Card c : getTargetCards(sa)) {
             // checks already done in ReplacementEffect
 
+            // check if the object is still in game or if it was moved
+            Card gameCard = game.getCardState(c, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !c.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
+
             SpellAbility cause = (SpellAbility)sa.getReplacingObject(AbilityKey.Cause);
 
-            c.setDamage(0);
-            c.setHasBeenDealtDeathtouchDamage(false);
-            if (c.tap(true, cause, c.getController())) tapped.add(c);
-            c.addRegeneratedThisTurn();
+            gameCard.setDamage(0);
+            gameCard.setHasBeenDealtDeathtouchDamage(false);
+            if (gameCard.tap(true, cause, gameCard.getController())) tapped.add(gameCard);
+            gameCard.addRegeneratedThisTurn();
 
             if (game.getCombat() != null) {
-                game.getCombat().saveLKI(c);
-                game.getCombat().removeFromCombat(c);
+                game.getCombat().saveLKI(gameCard);
+                game.getCombat().removeFromCombat(gameCard);
             }
 
             // Play the Regen sound
-            game.fireEvent(new GameEventCardRegenerated(c));
+            game.fireEvent(new GameEventCardRegenerated(gameCard));
 
             if (host.isImmutable()) {
-                c.decShieldCount();
-                host.removeRemembered(c);
+                gameCard.decShieldCount();
+                host.removeRemembered(gameCard);
             }
         }
         if (!tapped.isEmpty()) {

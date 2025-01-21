@@ -2,5 +2,5 @@ Name:Amulet of Vigor
 ManaCost:1
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.tapped+YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent you control enters tapped, untap it.
-SVar:TrigUntap:DB$ Untap | Defined$ TriggeredCard
+SVar:TrigUntap:DB$ Untap | Defined$ TriggeredCardLKICopy
 Oracle:Whenever a permanent you control enters tapped, untap it.

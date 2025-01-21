@@ -258,7 +258,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private int timesMutated = 0;
 
     private long gameTimestamp = -1; // permanents on the battlefield
-    private long layerTimestamp = -1;
+    private long layerTimestamp = -1; // order for Static Abilities
 
     // stack of set power/toughness
     // x=timestamp y=StaticAbility id
@@ -7050,16 +7050,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
 
-        // keywords don't work outside battlefield
-        if (!isInPlay()) {
-            return true;
-        }
-
-        if (isPhasedOut()) {
-            return false;
-        }
-
-        return true;
+        return !isInPlay() || !isPhasedOut();
     }
 
     public final boolean canBeControlledBy(final Player newController) {

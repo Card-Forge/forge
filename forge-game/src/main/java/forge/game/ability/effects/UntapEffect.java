@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Maps;
+
+import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -40,6 +42,7 @@ public class UntapEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final boolean etb = sa.hasParam("ETB");
+        final Game game = sa.getHostCard().getGame();
 
         if (sa.hasParam("UntapUpTo")) {
             untapChoose(sa, false);
@@ -55,7 +58,15 @@ public class UntapEffect extends SpellAbilityEffect {
                     continue;
                 }
                 if (tgtC.isInPlay()) {
-                    if (tgtC.untap(true)) untapped.add(tgtC);
+                    // check if the object is still in game or if it was moved
+                    Card gameCard = game.getCardState(tgtC, null);
+                    // gameCard is LKI in that case, the card is not in game anymore
+                    // or the timestamp did change
+                    // this should check Self too
+                    if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                        continue;
+                    }
+                    if (gameCard.untap(true)) untapped.add(gameCard);
                 }
                 if (etb) {
                     // do not fire triggers
@@ -88,7 +99,6 @@ public class UntapEffect extends SpellAbilityEffect {
         final String valid = sa.getParam("UntapType");
 
         for (final Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa)) {
-            CardCollection untapped = new CardCollection();
             if (!p.isInGame()) {
                 continue;
             }
@@ -100,6 +110,7 @@ public class UntapEffect extends SpellAbilityEffect {
                 list = CardLists.filter(list, CardPredicates.TAPPED);
             }
 
+            CardCollection untapped = new CardCollection();
             final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory, null);
             if (selected != null) {
                 for (final Card c : selected) {

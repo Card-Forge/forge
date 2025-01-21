@@ -114,7 +114,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
                 // combination is valid, check next
                 PlayerCollection nextPlayers = new PlayerCollection(players);
                 nextPlayers.remove(p);
-                List<Integer> nextChoices = new ArrayList<>(remainingChoices);
+                List<Integer> nextChoices = Lists.newArrayList(remainingChoices);
                 nextChoices.remove(choice);
                 nextChoices = getDistribution(nextPlayers, false, nextChoices);
                 if (nextChoices.isEmpty()) {
@@ -131,7 +131,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
                 return validChoices;
             }
         }
-        return new ArrayList<>();
+        return Lists.newArrayList();
     }
 
     /* (non-Javadoc)

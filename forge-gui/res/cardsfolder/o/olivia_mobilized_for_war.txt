@@ -5,6 +5,6 @@ PT:3/3
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature you control enters, you may discard a card. If you do, put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a vampire in addition to its other types.
 SVar:TrigDiscard:AB$ PutCounter | Cost$ Discard<1/Card> | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | KW$ Haste | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Vampire | Duration$ Permanent
+SVar:DBPump:DB$ Pump | Defined$ TriggeredCardLKICopy | KW$ Haste | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCardLKICopy | Types$ Vampire | Duration$ Permanent
 Oracle:Flying\nWhenever another creature you control enters, you may discard a card. If you do, put a +1/+1 counter on that creature, it gains haste until end of turn, and it becomes a Vampire in addition to its other types.

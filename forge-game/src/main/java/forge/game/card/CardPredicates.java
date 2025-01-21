@@ -55,7 +55,7 @@ public final class CardPredicates {
     }
 
     public static Predicate<Card> ownerLives() {
-        return c -> !c.getOwner().hasLost();
+        return c -> c.getOwner().isInGame();
     }
 
     public static Predicate<Card> isType(final String cardType) {
