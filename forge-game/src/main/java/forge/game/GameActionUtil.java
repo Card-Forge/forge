@@ -857,10 +857,9 @@ public final class GameActionUtil {
                     subList.add(c);
                 }
             }
-            if (sa.getActivatingPlayer() == p && sa.hasParam("StaticEffect")) {
-                String name = "Static Effect of " + sa.getHostCard();
+            if (sa != null && sa.getActivatingPlayer() == p && sa.hasParam("StaticEffect")) {
                 // create helper card for ordering
-                eff = new DetachedCardEffect(sa.getHostCard(), name);
+                eff = new DetachedCardEffect(sa.getHostCard(), "Static Effect of " + sa.getHostCard());
                 subList.add(eff);
             }
             CardCollectionView subListView = subList;
@@ -874,8 +873,8 @@ public final class GameActionUtil {
             // add generous buffer to timestamp, to ensure it applies last compared to cards that were ordered to ETB before it
             sa.setSVar("StaticEffectTimestamp", String.valueOf(game.getTimestamp() + idx + 100));
             // effects with this param have the responsibility to realign it when later cards are reached
-            if (idx < completeList.size() - 1) {
-                sa.setSVar("StaticEffectUntilCardID", String.valueOf(completeList.get(idx + 1).getId()));
+            if (idx > 0) {
+                sa.setSVar("StaticEffectUntilCardID", String.valueOf(completeList.get(idx - 1).getId()));
             }
             completeList.remove(eff);
         }

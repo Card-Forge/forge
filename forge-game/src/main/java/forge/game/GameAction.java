@@ -738,14 +738,24 @@ public class GameAction {
                 }
             }
 
-            Integer timestamp = cause.getSVarInt("StaticEffectTimestamp");
-            String name = "Static Effect #" + timestamp;
+            Long timestamp;
+            // check if player ordered it manually
+            if (cause.hasSVar("StaticEffectTimestamp"))  {
+                timestamp = Long.parseLong(cause.getSVar("StaticEffectTimestamp"));
+            } else {
+                // else create default value (or realign)
+                timestamp = game.getNextTimestamp();
+                cause.setSVar("StaticEffectTimestamp", String.valueOf(timestamp));
+            }
+            String name = "Static Effect #" + source.getGameTimestamp();
             // check if this isn't the first card being moved
             Optional<Card> opt = IterableUtil.tryFind(cause.getActivatingPlayer().getZone(ZoneType.Command).getCards(), CardPredicates.nameEquals(name));
 
             Card eff;
             if (opt.isPresent()) {
                 eff = opt.get();
+                // update in case player manually ordered
+                eff.setLayerTimestamp(timestamp);
             } else {
                 // otherwise create effect first
                 eff = SpellAbilityEffect.createEffect(cause, cause.getActivatingPlayer(), name, source.getImageKey(), timestamp);

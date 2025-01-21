@@ -529,14 +529,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        // if the player didn't order the effect above use default
-        if (sa.hasParam("StaticEffect") && !sa.hasSVar("StaticEffectTimestamp")) {
-            sa.setSVar("StaticEffectTimestamp", String.valueOf(game.getNextTimestamp()));
-        }
-
         for (final Card tgtC : tgtCards) {
             if (sa.hasSVar("StaticEffectUntilCardID") && sa.getSVarInt("StaticEffectUntilCardID") == tgtC.getId()) {
-                sa.setSVar("StaticEffectTimestamp", String.valueOf(game.getNextTimestamp()));
+                sa.removeSVar("StaticEffectTimestamp");
             }
 
             final Card gameCard = game.getCardState(tgtC, null);
@@ -659,19 +654,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     else { // When it should enter the battlefield attached to an illegal player it fails
                         continue;
                     }
-                }
-
-                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
-                    // need LKI before Animate does apply
-                    if (!moveParams.containsKey(AbilityKey.CardLKI)) {
-                        moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(gameCard));
-                    }
-
-                    final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
-                    hostCard.addRemembered(gameCard);
-                    AbilityUtils.resolve(animate);
-                    hostCard.removeRemembered(gameCard);
-                    animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                 }
 
                 // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
@@ -1285,16 +1267,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     moveParams.put(AbilityKey.SimultaneousETB, chosenCards);
                     if (sa.hasParam("Tapped")) {
                         c.setTapped(true);
-                    }
-                    if (sa.hasAdditionalAbility("AnimateSubAbility")) {
-                        // need LKI before Animate does apply
-                        moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
-
-                        final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
-                        source.addRemembered(c);
-                        AbilityUtils.resolve(animate);
-                        source.removeRemembered(c);
-                        animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                     }
                     if (sa.hasParam("GainControl")) {
                         final String g = sa.getParam("GainControl");
