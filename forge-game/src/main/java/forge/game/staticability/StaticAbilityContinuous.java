@@ -842,7 +842,9 @@ public final class StaticAbilityContinuous {
                     for (Card c : cards) {
                         for (final Trigger trig : c.getTriggers()) {
                             final Trigger newTrigger = affectedCard.addTriggerForStaticAbility(trig, stAb);
-                            newTrigger.removeParam("Secondary");
+                            if (newTrigger.getKeyword() != null) {
+                                newTrigger.removeParam("Secondary");
+                            }
                             addedTrigger.add(newTrigger);
                         }
                     }
@@ -876,12 +878,12 @@ public final class StaticAbilityContinuous {
             // add Types
             if ((addTypes != null && !addTypes.isEmpty()) || (removeTypes != null && !removeTypes.isEmpty()) || addAllCreatureTypes || !remove.isEmpty()) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, remove,
-                        se.getTimestamp(), stAb.getId(), true, stAb.hasParam("CharacteristicDefining"));
+                        se.getTimestamp(), stAb.getId(), true, stAb.isCharacteristicDefining());
             }
 
             // add colors
             if (addColors != null) {
-                affectedCard.addColor(addColors, !overwriteColors, se.getTimestamp(), stAb.getId(), stAb.hasParam("CharacteristicDefining"));
+                affectedCard.addColor(addColors, !overwriteColors, se.getTimestamp(), stAb.getId(), stAb.isCharacteristicDefining());
             }
 
             if (layer == StaticAbilityLayer.RULES) {
@@ -1019,7 +1021,7 @@ public final class StaticAbilityContinuous {
         final Game game = hostCard.getGame();
         final Player controller = hostCard.getController();
 
-        if (stAb.hasParam("CharacteristicDefining")) {
+        if (stAb.isCharacteristicDefining()) {
             if (stAb.hasParam("ExcludeZone")) {
                 for (ZoneType zt : ZoneType.listValueOf(stAb.getParam("ExcludeZone"))) {
                     if (hostCard.isInZone(zt)) {

@@ -338,7 +338,7 @@ public final class GameActionUtil {
             newSA.setMayPlay(o);
 
             final StringBuilder sb = new StringBuilder(sa.getDescription());
-            if (!source.equals(host) && host.getCardForUi() != null) {
+            if (!source.equals(host) && host.getRenderForUI()) {
                 sb.append(" by ");
                 if (host.isImmutable() && host.getEffectSource() != null) {
                     sb.append(host.getEffectSource());

@@ -586,7 +586,7 @@ public abstract class SpellAbilityEffect {
     }
 
     // create a basic template for Effect to be used somewhere else
-    protected static Card createEffect(final SpellAbility sa, final Player controller, final String name,
+    public static Card createEffect(final SpellAbility sa, final Player controller, final String name,
             final String image) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
@@ -607,7 +607,9 @@ public abstract class SpellAbilityEffect {
         eff.setOwner(controller);
         eff.setSVars(sa.getSVars());
 
-        eff.setImageKey(image);
+        if (image != null) {
+            eff.setImageKey(image);
+        }
 
         eff.setGamePieceType(GamePieceType.EFFECT);
         eff.setEffectSource(sa);

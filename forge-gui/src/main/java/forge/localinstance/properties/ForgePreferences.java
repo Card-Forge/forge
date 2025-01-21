@@ -227,7 +227,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         PHASE_AI_DRAW ("false"),
         PHASE_AI_MAIN1 ("false"),
         PHASE_AI_BEGINCOMBAT ("true"),
-        PHASE_AI_DECLAREATTACKERS ("false"),
+        PHASE_AI_DECLAREATTACKERS ("true"),
         PHASE_AI_DECLAREBLOCKERS ("true"),
         PHASE_AI_FIRSTSTRIKE ("false"),
         PHASE_AI_COMBATDAMAGE ("false"),

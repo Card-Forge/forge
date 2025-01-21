@@ -2,7 +2,7 @@ Name:Tin Street Market
 ManaCost:4 R
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ 4 R | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ UCDraw | Description$ Enchanted land has "{T}, Discard a card: Draw a card."
 SVar:UCDraw:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:NonStackingAttachEffect:True

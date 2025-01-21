@@ -2,7 +2,7 @@ Name:Curse of Chaos
 ManaCost:2 R
 Types:Enchantment Aura Curse
 K:Enchant player
-A:SP$ Attach | Cost$ 2 R | ValidTgts$ Player | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ AttackersDeclared | Execute$ TrigDiscard | TriggerZones$ Battlefield | AttackedTarget$ Player.EnchantedBy | OptionalDecider$ TriggeredAttackingPlayer | TriggerDescription$ Whenever a player attacks enchanted player with one or more creatures, that attacking player may discard a card. If the player does, they draw a card.
 SVar:TrigDiscard:DB$ Draw | Defined$ TriggeredAttackingPlayer | NumCards$ 1 | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ TriggeredAttackingPlayer
 AI:RemoveDeck:All

@@ -787,7 +787,7 @@ public class CardFactory {
 
             // remove some characteristic static abilities
             for (StaticAbility sta : state.getStaticAbilities()) {
-                if (!sta.hasParam("CharacteristicDefining")) {
+                if (!sta.isCharacteristicDefining()) {
                     continue;
                 }
 

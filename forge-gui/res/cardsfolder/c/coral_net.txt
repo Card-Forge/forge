@@ -2,7 +2,7 @@ Name:Coral Net
 ManaCost:U
 Types:Enchantment Aura
 K:Enchant green or white creature
-A:SP$ Attach | Cost$ U | ValidTgts$ Creature.Green,Creature.White | TgtPrompt$ Select target green or white creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature.Green,Creature.White | TgtPrompt$ Select target green or white creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddTrigger$ TrigCoralPhase | AddSVar$ TrigCoralDiscard & DBCoralSacrifice & DBCoralCleanup | Description$ Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you discard a card."
 SVar:TrigCoralPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCoralDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice this creature unless you discard a card.
 SVar:TrigCoralDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Optional$ True | RememberDiscarded$ True | SubAbility$ DBCoralSacrifice

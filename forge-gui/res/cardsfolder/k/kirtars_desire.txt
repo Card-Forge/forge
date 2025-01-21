@@ -2,7 +2,7 @@ Name:Kirtar's Desire
 ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | Condition$ Threshold | Description$ Threshold — Enchanted creature can't block as long as seven or more cards are in your graveyard.
 Oracle:Enchant creature\nEnchanted creature can't attack.\nThreshold — Enchanted creature can't block as long as seven or more cards are in your graveyard.

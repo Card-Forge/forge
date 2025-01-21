@@ -1,0 +1,8 @@
+[metadata]
+Code=DRC
+Date=2025-02-14
+Name=Aetherdrift Commander
+Type=Commander
+ScryfallCode=DRC
+
+[cards]

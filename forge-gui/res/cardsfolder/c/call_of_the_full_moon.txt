@@ -2,7 +2,7 @@ Name:Call of the Full Moon
 ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Enchanted creature gets +3/+2 and has trample.
 T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice

@@ -2,7 +2,7 @@ Name:Nature's Kiss
 ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Pump | Cost$ 1 ExileFromGrave<1/Card.TopGraveyard> | Defined$ Enchanted | NumAtt$ +1 | NumDef$ +1 | CostDesc$ {1}, Exile the top card of your graveyard: | SpellDescription$ Enchanted creature gets +1/+1 until end of turn.
 SVar:NonStackingAttachEffect:True
 SVar:NeedsOrderedGraveyard:TRUE

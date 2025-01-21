@@ -2,6 +2,6 @@ Name:Ice Over
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant artifact or creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | AILogic$ KeepTapped
+A:SP$ Attach | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted permanent doesn't untap during its controller's untap step.
 Oracle:Enchant artifact or creature\nEnchanted permanent doesn't untap during its controller's untap step.

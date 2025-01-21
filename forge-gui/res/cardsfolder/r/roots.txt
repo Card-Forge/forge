@@ -2,7 +2,7 @@ Name:Roots
 ManaCost:3 G
 Types:Enchantment Aura
 K:Enchant creature without flying
-A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature.withoutFlying | AILogic$ KeepTapped
+A:SP$ Attach | ValidTgts$ Creature.withoutFlying | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted

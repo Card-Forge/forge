@@ -2,7 +2,7 @@ Name:Burden of Guilt
 ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ KeepTapped
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
 A:AB$ Tap | Cost$ 1 | Defined$ Enchanted | SpellDescription$ Tap enchanted creature.
 AI:RemoveDeck:All
 SVar:NonStackingAttachEffect:True

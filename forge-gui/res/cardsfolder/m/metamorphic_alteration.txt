@@ -2,7 +2,7 @@ Name:Metamorphic Alteration
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature
+A:SP$ Attach | ValidTgts$ Creature
 K:ETBReplacement:Other:ChooseCreature
 SVar:ChooseCreature:DB$ ChooseCard | Defined$ You | Mandatory$ True | Choices$ Creature.Other | SpellDescription$ As CARDNAME enters, choose a creature.
 T:Mode$ Attached | ValidSource$ Card.Self | Static$ True | Execute$ DBClone | TriggerDescription$ Enchanted creature is a copy of the chosen creature.

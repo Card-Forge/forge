@@ -5,8 +5,7 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E}{E} (three energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
 A:AB$ Pump | Cost$ PayEnergy<1> | KWChoice$ Flying,Vigilance,Lifelink | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gains your choice of flying, vigilance, or lifelink until end of turn.
-A:AB$ Pump | Cost$ PayEnergy<1> | Subability$ ABChoice | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gets +2/-2 or -2/+2 until end of turn.
-SVar:ABChoice:DB$ GenericChoice | Defined$ You | Choices$ ABPump1,ABPump2
+A:AB$ GenericChoice | Cost$ PayEnergy<1> | Defined$ You | Choices$ ABPump1,ABPump2 | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gets +2/-2 or -2/+2 until end of turn.
 SVar:ABPump1:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ +2/-2
 SVar:ABPump2:DB$ Pump | Defined$ Self | NumAtt$ -2 | NumDef$ +2 | SpellDescription$ -2/+2
 Oracle:When Multiform Wonder enters, you get {E}{E}{E} (three energy counters).\nPay {E}: Multiform Wonder gains your choice of flying, vigilance, or lifelink until end of turn.\nPay {E}: Multiform Wonder gets +2/-2 or -2/+2 until end of turn.

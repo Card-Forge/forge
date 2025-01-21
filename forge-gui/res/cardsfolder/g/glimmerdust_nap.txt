@@ -2,6 +2,6 @@ Name:Glimmerdust Nap
 ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant tapped creature
-A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature.tapped | AILogic$ KeepTapped
+A:SP$ Attach | ValidTgts$ Creature.tapped | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 Oracle:Enchant tapped creature\nEnchanted creature doesn't untap during its controller's untap step.

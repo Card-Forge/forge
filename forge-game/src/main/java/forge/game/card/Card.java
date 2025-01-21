@@ -30,6 +30,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatLki;
 import forge.game.cost.Cost;
@@ -338,6 +339,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private CombatLki combatLKI;
 
     private CardRules cardRules;
+    protected boolean renderForUi = true;
     private final CardView view;
 
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
@@ -4096,21 +4098,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
 
         if (hasKeyword(Keyword.RECONFIGURE)) {
-            // need extra time stamp so it doesn't collide with existing ones
-            long ts = getGame().getNextTimestamp();
-            // 702.151b Attaching an Equipment with reconfigure to another creature causes the Equipment to stop being a creature until it becomes unattached from that creature.
-            // it is not a Static Ability
-            addChangedCardTypes(null, CardType.parse("Creature", true), false, EnumSet.noneOf(RemoveType.class), ts, 0, true, false);
+            Card eff = SpellAbilityEffect.createEffect(sa, sa.getActivatingPlayer(), "Reconfigure Effect", getImageKey());
+            eff.setSetCode(getSetCode());
+            eff.setRarity(getRarity());
+            eff.setRenderForUI(false);
+            eff.addRemembered(this);
 
-            GameCommand unattach = new GameCommand() {
-                private static final long serialVersionUID = 1L;
+            String s = "Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | RemoveType$ Creature";
+            eff.addStaticAbility(s);
 
-                @Override
-                public void run() {
-                    removeChangedCardTypes(ts, 0);
-                }
-            };
-            addUnattachCommand(unattach);
+            GameCommand until = SpellAbilityEffect.exileEffectCommand(game, eff);
+            addLeavesPlayCommand(until);
+            addUnattachCommand(until);
+            game.getAction().moveToCommand(eff, sa);
         }
     }
 
@@ -6473,16 +6473,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final String getImageKey() {
+        if (!getRenderForUI()) {
+            return "";
+        }
         Card uiCard = getCardForUi();
         if(uiCard == null)
             return "";
         return uiCard.currentState.getImageKey();
     }
     public final void setImageKey(final String iFN) {
+        if (!getRenderForUI()) {
+            return;
+        }
         Card uiCard = getCardForUi();
-        if(uiCard == null)
-            this.currentState.setImageKey(iFN); //Shouldn't really matter; the card isn't supposed to show in the UI anyway.
-        else
+        if(uiCard != null)
             uiCard.currentState.setImageKey(iFN);
     }
     public final void setImageKey(final IPaperCard ipc, final CardStateName stateName) {
@@ -6510,6 +6514,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public String getImageKey(CardStateName state) {
+        if (!getRenderForUI()) {
+            return "";
+        }
         Card uiCard = getCardForUi();
         if(uiCard == null)
             return "";
@@ -7636,6 +7643,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     //allow special cards to override this function to return another card for the sake of UI logic
     public Card getCardForUi() {
         return this;
+    }
+
+    public boolean getRenderForUI() {
+        return this.renderForUi;
+    }
+
+    public void setRenderForUI(boolean value) {
+        renderForUi = value;
     }
 
     public IPaperCard getPaperCard() {

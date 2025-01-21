@@ -2,7 +2,7 @@ Name:Tarmogoyf Nest
 ManaCost:2 G
 Types:Kindred Enchantment Lhurgoyf Aura
 K:Enchant land
-A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ Token | Description$ Enchanted land has "{T}: Create a Tarmogoyf token. (It's a {1}{G} Lhurgoyf creature with "Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.")
 SVar:Token:AB$ CopyPermanent | Cost$ 1 G T | DefinedName$ Tarmogoyf | SpellDescription$ Create a Tarmogoyf token. (It's a {1}{G} Lhurgoyf creature with "Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.")
 DeckHas:Ability$Token & Type$Lhurgoyf

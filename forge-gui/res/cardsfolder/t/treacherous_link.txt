@@ -2,7 +2,7 @@ Name:Treacherous Link
 ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.EnchantedBy | ReplaceWith$ DmgEnchanted | DamageTarget$ ReplacedTargetController | Description$ All damage that would be dealt to enchanted creature is dealt to its controller instead.
 SVar:DmgEnchanted:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ReplacedTargetController | VarType$ Player
 AI:RemoveDeck:All

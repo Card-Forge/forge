@@ -2,7 +2,7 @@ Name:Consecrate Land
 ManaCost:W
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ W | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddKeyword$ Indestructible | Description$ Enchanted land has indestructible.
 S:Mode$ CantAttach | ValidCard$ Aura.Other | Target$ Land.EnchantedBy | Description$ Enchanted land can't be enchanted by other Auras.
 SVar:NonStackingAttachEffect:True

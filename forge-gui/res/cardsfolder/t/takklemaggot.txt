@@ -2,7 +2,7 @@ Name:Takklemaggot
 ManaCost:2 B B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self+nonAura | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.

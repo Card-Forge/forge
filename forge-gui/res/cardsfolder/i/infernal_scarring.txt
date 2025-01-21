@@ -2,7 +2,7 @@ Name:Infernal Scarring
 ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddTrigger$ TrigDraw | AddSVar$ InfernalDraw | Description$ Enchanted creature gets +2/+0 and has "When this creature dies, draw a card."
 SVar:TrigDraw:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ InfernalDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, draw a card.
 SVar:InfernalDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController

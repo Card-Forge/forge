@@ -2,7 +2,7 @@ Name:Uncontrolled Infestation
 ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant nonbasic land
-A:SP$ Attach | Cost$ 1 R | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy
 SVar:NonStackingAttachEffect:True

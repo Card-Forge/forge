@@ -2,7 +2,7 @@ Name:Market Festival
 ManaCost:3 G
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ 3 G | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds an additional two mana in any combination of colors.
 SVar:TrigMana:DB$ Mana | Produced$ Combo Any | Amount$ 2 | Defined$ TriggeredCardController
 AI:RemoveDeck:All

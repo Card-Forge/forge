@@ -3470,7 +3470,7 @@ public class CardFactoryUtil {
             }
             String[] k = keyword.split(":");
             String extra = k.length > 2 ? " | AlternateCost$ " + k[2] : "";
-            String bothStr = "| Cost$ " + k[1] + " | SorcerySpeed$ True | Reconfigure$ True | PrecostDesc$ Reconfigure | Secondary$ True" + extra;
+            String bothStr = "| Cost$ " + k[1] + " | SorcerySpeed$ True | PrecostDesc$ Reconfigure | Secondary$ True" + extra;
             final StringBuilder attachStr = new StringBuilder();
             attachStr.append("AB$ Attach | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select target creature you control ");
             attachStr.append("| AILogic$ Pump | SpellDescription$ Attach ").append(bothStr);

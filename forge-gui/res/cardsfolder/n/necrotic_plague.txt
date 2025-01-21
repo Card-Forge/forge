@@ -2,7 +2,7 @@ Name:Necrotic Plague
 ManaCost:2 B B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ NecroticPlagueTrig | AddSVar$ NecroticPlagueSac | Description$ Enchanted creature has "At the beginning of your upkeep, sacrifice this creature."
 SVar:NecroticPlagueTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ NecroticPlagueSac | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME.
 SVar:NecroticPlagueSac:DB$ Sacrifice | SacValid$ Self

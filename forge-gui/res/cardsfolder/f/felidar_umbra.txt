@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
 K:Umbra armor
-A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Lifelink | Description$ Enchanted creature has lifelink.
 A:AB$ Attach | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
 Oracle:Enchant creature\nEnchanted creature has lifelink.\n{1}{W}: Attach Felidar Umbra to target creature you control.\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)

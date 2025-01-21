@@ -2,7 +2,7 @@ Name:Ferocity
 ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ AttackerBlocked | ValidCard$ Card.AttachedBy | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | Execute$ TrigPutCounter2 | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1

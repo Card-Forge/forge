@@ -2,7 +2,7 @@ Name:Foul Presence
 ManaCost:2 B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | AddAbility$ Pump | Description$ Enchanted creature gets -1/-1 and has "{T}: Target creature gets -1/-1 until end of turn."
 SVar:Pump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Target creature gets -1/-1 until end of turn."
 AI:RemoveDeck:Random

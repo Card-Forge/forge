@@ -2,7 +2,7 @@ Name:Tourach's Gate
 ManaCost:1 B B
 Types:Enchantment Aura
 K:Enchant land you control
-A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | AILogic$ Pump
 A:AB$ PutCounter | Cost$ Sac<1/Thrull> | Defined$ Self | CounterType$ TIME | CounterNum$ 3 | SpellDescription$ Put three time counters on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At the beginning of your upkeep, remove a time counter from CARDNAME. If there are no time counters on CARDNAME, sacrifice it.
 SVar:TrigSubCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | SubAbility$ Sac

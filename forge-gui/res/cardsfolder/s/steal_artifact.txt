@@ -2,6 +2,6 @@ Name:Steal Artifact
 ManaCost:2 U U
 Types:Enchantment Aura
 K:Enchant artifact
-A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Artifact | AILogic$ GainControl
+A:SP$ Attach | ValidTgts$ Artifact | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted artifact.
 Oracle:Enchant artifact\nYou control enchanted artifact.

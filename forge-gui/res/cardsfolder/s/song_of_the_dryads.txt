@@ -2,7 +2,7 @@ Name:Song of the Dryads
 ManaCost:2 G
 Types:Enchantment Aura
 K:Enchant permanent
-A:SP$ Attach | Cost$ 2 G | ValidTgts$ Permanent | AILogic$ Curse | AITgts$ Card.cmcGE3
+A:SP$ Attach | ValidTgts$ Permanent | AILogic$ Curse | AITgts$ Card.cmcGE3
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetColor$ Colorless | AddType$ Land & Forest | RemoveCardTypes$ True | RemoveLandTypes$ True | Description$ Enchanted permanent is a colorless Forest land.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant permanent\nEnchanted permanent is a colorless Forest land.

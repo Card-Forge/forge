@@ -2,7 +2,7 @@ Name:Mark of Sakiko
 ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ SakikoTrig | AddSVar$ SakuraManaSingle & SakuraX | Description$ Enchanted creature has "Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as phases and steps end."
 SVar:SakikoTrig:Mode$ DamageDone | ValidSource$ Creature.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ SakuraManaSingle | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, add that much {G}. Until end of turn, you don't lose this mana as steps and phases end.
 SVar:SakuraManaSingle:DB$ Mana | Produced$ G | Amount$ SakuraX | PersistentMana$ True

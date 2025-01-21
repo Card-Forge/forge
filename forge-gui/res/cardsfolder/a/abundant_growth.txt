@@ -2,7 +2,7 @@ Name:Abundant Growth
 ManaCost:G
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ G | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ AbundantGrowthTap | Description$ Enchanted land has "{T}: Add one mana of any color."

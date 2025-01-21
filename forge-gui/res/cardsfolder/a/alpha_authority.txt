@@ -2,7 +2,7 @@ Name:Alpha Authority
 ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Hexproof | Description$ Enchanted creature has hexproof and can't be blocked by more than one creature.
 S:Mode$ MinMaxBlocker | ValidCard$ Creature.EnchantedBy | Max$ 1 | Secondary$ True | Description$ Enchanted creature can't be blocked by more than one creature.
 Oracle:Enchant creature\nEnchanted creature has hexproof and can't be blocked by more than one creature.

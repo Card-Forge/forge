@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment Aura
 K:Flash
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Regenerate | Cost$ 1 G | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 SVar:NonStackingAttachEffect:True
 Oracle:Flash\nEnchant creature\n{1}{G}: Regenerate enchanted creature.

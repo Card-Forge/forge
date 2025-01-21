@@ -70,3 +70,4 @@ ScryfallCode=PMEI
 20246 R Voltaic Key @Henry G. Higginbotham
 20247 R Patchwork Banner @Sarah Finnigan
 20248 M Liliana of the Dark Realms @D. Alexander Gregory
+20251 R Shock @Randy Gallegos

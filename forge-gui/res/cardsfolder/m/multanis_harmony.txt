@@ -2,7 +2,7 @@ Name:Multani's Harmony
 ManaCost:G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ AnyMana | Description$ Enchanted creature has "{T}: Add one mana of any color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:NonStackingAttachEffect:True

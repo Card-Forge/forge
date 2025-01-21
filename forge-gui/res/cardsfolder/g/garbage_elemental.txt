@@ -10,9 +10,9 @@ Variant:B:PT:3/1
 Variant:B:K:Undying
 Variant:B:T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigAssemble | TriggerDescription$ When CARDNAME enters, it assembles a Contraption.
 Variant:B:SVar:TrigAssemble:DB$ AssembleContraption
-Variant:B:Oracle:When Garbage Elemental enters, it assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner’s control with a +1/+1 counter on it.)
+Variant:B:Oracle:When Garbage Elemental enters, it assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
 
-# --- VARIANT C --- 
+# --- VARIANT C ---
 
 Variant:C:PT:3/2
 Variant:C:K:Battle cry

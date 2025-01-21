@@ -2,7 +2,7 @@ Name:Mirror Mockery
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigCopy | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, you may create a token that's a copy of that creature. Exile that token at end of combat.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredAttackerLKICopy | NumCopies$ 1 | AtEOT$ ExileCombat
 Oracle:Enchant creature\nWhenever enchanted creature attacks, you may create a token that's a copy of that creature. Exile that token at end of combat.

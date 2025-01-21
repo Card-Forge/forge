@@ -2,6 +2,6 @@ Name:Primal Frenzy
 ManaCost:G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample | Description$ Enchanted creature has trample.
 Oracle:Enchant creature\nEnchanted creature has trample.

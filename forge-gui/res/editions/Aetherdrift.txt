@@ -9,6 +9,7 @@ ScryfallCode=DFT
 120 R Daretti, Rocketeer Engineer @Borja Pindado
 160 U Earthrumbler @Jean Pierre Targete
 191 M Brightglass Gearhulk @José Parodi
+234 R Lifecraft Engine @Mirko Failoni
 277 L Plains @Samuele Bandini
 278 L Plains @Titus Lunter
 279 L Plains @Leon Tukker
@@ -24,3 +25,5 @@ ScryfallCode=DFT
 289 L Forest @Samuele Bandini
 290 L Forest @Yeong-Hao Han
 291 L Forest @Leon Tukker
+329 R Lifecraft Engine @Eduardo Francisco
+423 R Lifecraft Engine @José Parodi

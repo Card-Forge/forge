@@ -2,7 +2,7 @@ Name:Claustrophobia
 ManaCost:1 U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature | AILogic$ KeepTapped
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.

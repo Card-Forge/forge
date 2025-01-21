@@ -2,6 +2,6 @@ Name:Goblin War Paint
 ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Enchanted creature gets +2/+2 and has haste.
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has haste.

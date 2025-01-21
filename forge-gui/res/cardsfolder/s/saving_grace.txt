@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Flash
 K:Enchant creature you control
-A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBEffect | TriggerDescription$ When CARDNAME enters, all damage that would be dealt this turn to you and permanents you control is dealt to enchanted creature instead.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ SavingGraceDamage | Duration$ EndOfTurn | RememberObjects$ Enchanted | ExileOnMoved$ Battlefield
 SVar:SavingGraceDamage:Event$ DamageDone | ValidTarget$ You,Permanent.YouCtrl | ReplaceWith$ SavingGraceDmg | DamageTarget$ Remembered | Description$ All damage that would be dealt this turn to you and permanents you control is dealt to enchanted creature instead.

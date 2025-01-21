@@ -2,7 +2,7 @@ Name:Griffin Guide
 ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+2 and has flying.
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When enchanted creature dies, create a 2/2 white Griffin creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_griffin_flying | TokenOwner$ You

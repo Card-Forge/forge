@@ -2,7 +2,7 @@ Name:Soaring Hope
 ManaCost:4 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 4 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put CARDNAME on top of its owner's library.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life.

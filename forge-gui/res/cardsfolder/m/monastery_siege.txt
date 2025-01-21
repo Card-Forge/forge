@@ -2,7 +2,7 @@ Name:Monastery Siege
 ManaCost:2 U
 Types:Enchantment
 K:ETBReplacement:Other:SiegeChoice
-SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Khans | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters the, choose Khans or Dragons.
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Khans | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Khans or Dragons.
 SVar:Khans:DB$ Pump | SpellDescription$ Khans
 SVar:Dragons:DB$ Pump | SpellDescription$ Dragons
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of your draw step, draw an additional card, then discard a card.

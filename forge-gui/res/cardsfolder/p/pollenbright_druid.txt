@@ -4,7 +4,7 @@ Types:Creature Elf Druid
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBProliferate
-SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature | Tgtprompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters & Ability$Proliferate

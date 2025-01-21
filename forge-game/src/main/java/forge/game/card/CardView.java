@@ -65,7 +65,7 @@ public class CardView extends GameEntityView {
         }
         TrackableCollection<CardView> collection = new TrackableCollection<>();
         for (Card c : cards) {
-            if (c.getCardForUi() == c) { //only add cards that match their card for UI
+            if (c.getRenderForUI()) { //only add cards that match their card for UI
                 collection.add(c.getView());
             }
         }

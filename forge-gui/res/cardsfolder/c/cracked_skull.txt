@@ -2,7 +2,7 @@ Name:Cracked Skull
 ManaCost:2 B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, look at target player's hand. You may choose a nonland card from it. That player discards that card.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | Optional$ True | DiscardValid$ Card.nonLand | DiscardValidDesc$ nonland card
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddSVar$ MortalDestroy

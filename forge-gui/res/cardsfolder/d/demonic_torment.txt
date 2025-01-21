@@ -2,7 +2,7 @@ Name:Demonic Torment
 ManaCost:2 B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
 R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Creature.EnchantedBy | Description$ Prevent all combat damage that would be dealt by enchanted creature.
 Oracle:Enchant creature\nEnchanted creature can't attack.\nPrevent all combat damage that would be dealt by enchanted creature.

@@ -1,5 +1,5 @@
 Name:Radiant Smite
-ManaCost:W
+ManaCost:1 W
 Types:Instant
 A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature with power 4 or greater. If you weren't the starting player, you gain 4 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0

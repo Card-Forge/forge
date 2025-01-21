@@ -30,7 +30,6 @@ import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.*;
@@ -500,6 +499,8 @@ public class AiController {
             return null;
         }
 
+        landList = ComputerUtilCard.dedupeCards(landList);
+
         CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
 
         // Some considerations for Momir/MoJhoSto
@@ -542,15 +543,12 @@ public class AiController {
 
         // try to skip lands that enter the battlefield tapped if we might want to play something this turn
         if (!nonLandsInHand.isEmpty()) {
-            // get the tapped and non-tapped lands
-            CardCollection tappedLands = new CardCollection();
             CardCollection nonTappedLands = new CardCollection();
             for (Card land : landList) {
                 // check replacement effects if land would enter tapped or not
                 final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(land);
                 repParams.put(AbilityKey.Origin, land.getZone().getZoneType());
                 repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
-                repParams.put(AbilityKey.Source, land);
 
                 // add Params for AddCounter Replacements
                 GameEntityCounterTable table = new GameEntityCounterTable();
@@ -581,35 +579,36 @@ public class AiController {
 
             // if we have the choice, see if we can play an untapped land
             if (!nonTappedLands.isEmpty()) {
-                // get the costs of the nonland cards in hand and the mana we have available.
-                // If adding one won't make something new castable, then pick a tapland.
-                int max_inc = 0;
-                for (Card c : nonTappedLands) {
-                    max_inc = max(max_inc, c.getMaxManaProduced());
-                }
                 // If we have a lot of mana, prefer untapped lands.
                 // We're either topdecking or have drawn enough the tempo no longer matters.
                 int mana_available = getAvailableManaEstimate(player);
                 if (mana_available > 6) {
                     landList = nonTappedLands;
-                }
-                // check for lands with no mana abilities
-                else if (max_inc > 0) {
-                    boolean found = false;
-                    for (Card c : nonLandsInHand) {
-                        // TODO make this work better with split cards and Monocolored Hybrid
-                        ManaCost cost = c.getManaCost();
-                        // check for incremental cmc
-                        // check for X cost spells
-                        if (cost.getCMC() == max_inc + mana_available ||
-                                (cost.getShardCount(ManaCostShard.X) > 0 && cost.getCMC() >= mana_available)) {
-                            found = true;
-                            break;
-                        }
+                } else {
+                    // get the costs of the nonland cards in hand and the mana we have available.
+                    // If adding one won't make something new castable, then pick a tapland.
+                    int max_inc = 0;
+                    for (Card c : nonTappedLands) {
+                        max_inc = max(max_inc, c.getMaxManaProduced());
                     }
+                    // check for lands with no mana abilities
+                    if (max_inc > 0) {
+                        boolean found = false;
+                        for (Card c : nonLandsInHand) {
+                            // TODO make this work better with split cards and Monocolored Hybrid
+                            ManaCost cost = c.getManaCost();
+                            // check for incremental cmc
+                            // check for X cost spells
+                            if ((cost.getCMC() - mana_available) * (cost.getCMC() - mana_available - max_inc - 1) < 0 ||
+                                    (cost.countX() > 0 && cost.getCMC() >= mana_available)) {
+                                found = true;
+                                break;
+                            }
+                        }
 
-                    if (found) {
-                        landList = nonTappedLands;
+                        if (found) {
+                            landList = nonTappedLands;
+                        }
                     }
                 }
             }
@@ -719,7 +718,8 @@ public class AiController {
 
                     return score;
                 }));
-        return toReturn;    }
+        return toReturn;
+    }
 
     // if return true, go to next phase
     private SpellAbility chooseCounterSpell(final List<SpellAbility> possibleCounters) {

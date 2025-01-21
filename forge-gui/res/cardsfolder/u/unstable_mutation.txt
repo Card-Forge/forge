@@ -1,7 +1,7 @@
 Name:Unstable Mutation
 ManaCost:U
 Types:Enchantment Aura
-A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, put a -1/-1 counter on that creature.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ M1M1 | CounterNum$ 1

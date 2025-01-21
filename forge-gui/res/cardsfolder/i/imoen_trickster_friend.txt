@@ -33,7 +33,7 @@ PT:3/2
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigImmTrigger | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. When you do, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
 SVar:TrigImmTrigger:AB$ ImmediateTrigger | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | Execute$ TrigTap | Secondary$ True | TriggerDescription$ When you do, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
-SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPromopt$ Select target creature an opponent controls | SubAbility$ DBPump
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
 Oracle:Imoen, Wily Trickster can't be blocked.\nWhenever Imoen deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. When you do, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.

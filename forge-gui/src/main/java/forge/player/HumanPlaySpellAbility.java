@@ -60,10 +60,13 @@ public class HumanPlaySpellAbility {
     public final boolean playAbility(final boolean mayChooseTargets, final boolean isFree, final boolean skipStack) {
         final Player human = ability.getActivatingPlayer();
         final Game game = human.getGame();
+        boolean refreeze = game.getStack().isFrozen();
 
         if (!skipStack) {
-            // CR 401.5: freeze top library cards until cast/activated so player can't cheat and see the next
-            game.setTopLibsCast();
+            if (!refreeze) {
+                // CR 401.5: freeze top library cards until cast/activated so player can't cheat and see the next
+                game.setTopLibsCast();
+            }
 
             if (ability.getApi() == ApiType.Charm) {
                 if (ability.isAnnouncing("X")) {
@@ -91,9 +94,6 @@ public class HumanPlaySpellAbility {
 
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(ability.getMayPlay());
-
-        // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
-        boolean refreeze = game.getStack().isFrozen();
 
         if (ability.isSpell() && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
