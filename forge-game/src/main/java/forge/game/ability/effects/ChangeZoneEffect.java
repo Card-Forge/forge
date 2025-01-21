@@ -13,6 +13,7 @@ import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.keyword.Keyword;
 import forge.game.player.*;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
@@ -516,7 +517,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         // CR 401.4
-        if (destination.isDeck() && !shuffle && tgtCards.size() > 1) {
+        if (((destination.isDeck() && tgtCards.size() > 1) || chooser.getController().isFullControl(FullControlFlag.LayerTimestampOrder)) && !shuffle) {
             if (sa.hasParam("RandomOrder")) {
                 final CardCollection random = new CardCollection(tgtCards);
                 CardLists.shuffle(random);
@@ -534,6 +535,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         for (final Card tgtC : tgtCards) {
+            if (sa.hasSVar("StaticEffectUntilCardID") && sa.getSVarInt("StaticEffectUntilCardID") == tgtC.getId()) {
+                sa.setSVar("StaticEffectTimestamp", String.valueOf(game.getNextTimestamp()));
+            }
+
             final Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
