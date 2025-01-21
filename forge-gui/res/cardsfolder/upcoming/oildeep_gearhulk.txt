@@ -1,0 +1,12 @@
+Name:Oildeep Gearhulk
+ManaCost:U U B B
+Types:Artifact Creature Construct
+PT:4/4
+K:Lifelink
+K:Ward:1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, look at target player's hand. You may choose a card from it. If you do, that player discards that card, then draws a card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | Optional$ True | DiscardValid$ Card | DiscardValidDesc$ card | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Targeted | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Discard
+Oracle:Lifelink, ward {1}\nWhen this creature enters, look at target player's hand. You may choose a card from it. If you do, that player discards that card, then draws a card.
