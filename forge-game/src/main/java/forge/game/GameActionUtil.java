@@ -870,12 +870,13 @@ public final class GameActionUtil {
         }
         if (eff != null) {
             int idx = completeList.indexOf(eff);
-            // add generous buffer to timestamp, to ensure it applies last compared to cards that were ordered to ETB before it
-            sa.setSVar("StaticEffectTimestamp", String.valueOf(game.getTimestamp() + idx + 100));
-            // effects with this param have the responsibility to realign it when later cards are reached
             if (idx > 0) {
+                // effects with this param have the responsibility to realign it when later cards are reached
                 sa.setSVar("StaticEffectUntilCardID", String.valueOf(completeList.get(idx - 1).getId()));
+                // add generous offset to timestamp, to ensure it applies last compared to cards that were ordered to ETB before it
+                idx += completeList.size() * 2;
             }
+            sa.setSVar("StaticEffectTimestamp", String.valueOf(game.getNextTimestamp() + idx));
             completeList.remove(eff);
         }
         return completeList;
