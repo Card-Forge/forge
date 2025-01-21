@@ -599,12 +599,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 if (sa.hasParam("WithCountersType")) {
-                    CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                     int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-
                     GameEntityCounterTable table = new GameEntityCounterTable();
-                    table.put(activator, gameCard, cType, cAmount);
                     moveParams.put(AbilityKey.CounterTable, table);
+                    for (String type : sa.getParam("WithCountersType").split(",")) {
+                        CounterType cType = CounterType.getType(type);
+                        table.put(activator, gameCard, cType, cAmount);
+                    }
                 } else if (sa.hasParam("WithNotedCounters")) {
                     CountersNoteEffect.loadCounters(gameCard, hostCard, chooser, sa, moveParams);
                 }
