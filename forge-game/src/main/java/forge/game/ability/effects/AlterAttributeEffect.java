@@ -53,7 +53,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                     case "Solved":
                         altered = gameCard.setSolved(activate);
                         if (altered) {
-                            Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+                            Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                             runParams.put(AbilityKey.Player, sa.getActivatingPlayer());
                             c.getGame().getTriggerHandler().runTrigger(TriggerType.CaseSolved, runParams, false);
                         }
@@ -104,7 +104,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                     sa.getHostCard().addRemembered(gameCard);
                 }
             }
-            c.updateAbilityTextForView();
+            gameCard.updateAbilityTextForView();
         }
     }
 }

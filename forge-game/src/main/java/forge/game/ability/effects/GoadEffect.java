@@ -73,7 +73,7 @@ public class GoadEffect extends SpellAbilityEffect {
             }
 
             if (remember && gameCard.isGoaded()) {
-                sa.getHostCard().addRemembered(tgtC);
+                sa.getHostCard().addRemembered(gameCard);
             }
         }
     }

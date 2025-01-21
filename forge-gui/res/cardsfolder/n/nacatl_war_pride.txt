@@ -4,7 +4,7 @@ Types:Creature Cat Warrior
 PT:3/3
 K:CARDNAME must be blocked by exactly one creature if able.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopyPermanent | TriggerDescription$ Whenever CARDNAME attacks, create X tokens that are copies of CARDNAME and that are tapped and attacking, where X is the number of creatures defending player controls. Exile the tokens at the beginning of the next end step.
-SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredAttacker | NumCopies$ X | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Exile
+SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredAttackerLKICopy | NumCopies$ X | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Exile
 SVar:X:Count$Valid Creature.DefenderCtrl
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
