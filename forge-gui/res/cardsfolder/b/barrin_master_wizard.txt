@@ -2,6 +2,6 @@ Name:Barrin, Master Wizard
 ManaCost:1 U U
 Types:Legendary Creature Human Wizard
 PT:1/1
-A:AB$ ChangeZone | Cost$ 2 Sac<1/Permanent> | ValidTgts$ Creature | TgtPrompt$ Select target Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+A:AB$ ChangeZone | Cost$ 2 Sac<1/Permanent> | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 AI:RemoveDeck:All
 Oracle:{2}, Sacrifice a permanent: Return target creature to its owner's hand.
