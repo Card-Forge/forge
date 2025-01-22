@@ -1,0 +1,15 @@
+Name:The Aetherspark
+ManaCost:4
+Types:Legendary Artifact Planeswalker Equipment
+Loyalty:4
+S:Mode$ CantAttack | ValidCard$ Creature | Target$ Card.Self+AttachedTo Creature | Description$ As long as CARDNAME is attached to a creature, CARDNAME can't be attacked and has "Whenever equipped creature deals combat damage during your turn, put that many loyalty counters on CARDNAME."
+S:Mode$ Continuous | Affected$ Card.Self+AttachedTo Creature | Secondary$ True | AddTrigger$ TrigDamageDoneOnce | Description$ As long as CARDNAME is attached to a creature, CARDNAME can't be attacked and has "Whenever equipped creature deals combat damage during your turn, put that many loyalty counters on CARDNAME."
+SVar:TrigDamageDoneOnce:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.EquippedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | PlayerTurn$ True | TriggerDescription$ Whenever equipped creature deals combat damage during your turn, put that many loyalty counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ LOYALTY | CounterNum$ X
+A:AB$ Attach | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you control | SubAbility$ DBPutCounter | SpellDescription$ Attach CARDNAME to up to one target creature you control. Put a +1/+1 counter on that creature.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Draw | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:AB$ Mana | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | Produced$ Any | Amount$ 10 | SpellDescription$ Add ten mana of any one color.
+DeckHas:Ability$Counters
+SVar:X:TriggerCount$DamageAmount
+Oracle:As long as The Aetherspark is attached to a creature, The Aetherspark can't be attacked and has "Whenever equipped creature deals combat damage during your turn, put that many loyalty counters on The Aetherspark."\n[+1]: Attach The Aetherspark to up to one target creature you control. Put a +1/+1 counter on that creature.\n[-5]: Draw two cards.\n[-10]: Add ten mana of any one color.
