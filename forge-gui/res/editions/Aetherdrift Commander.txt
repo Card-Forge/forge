@@ -6,3 +6,7 @@ Type=Commander
 ScryfallCode=DRC
 
 [cards]
+1 M Hashaton, Scarab's Fist @Wisnu Tan
+2 M Pia Nalaar, Chief Mechanic @Bram Sels
+3 M Saheeli, Radiant Creator @Ernanda Souza
+4 M Temmet, Naktamun's Will @Douglas Shuler
