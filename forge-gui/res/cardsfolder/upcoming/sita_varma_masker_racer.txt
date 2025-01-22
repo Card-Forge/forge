@@ -3,7 +3,7 @@ ManaCost:G U
 Types:Legendary Creature Human Rogue
 PT:2/3
 A:AB$ PutCounter | Cost$ X G G U | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | Exhaust$ True | SubAbility$ DBAnimateAll | SpellDescription$ Put X +1/+1 counters on NICKNAME. Then you may have the base power and toughness of each other creature you control become equal to NICKNAME's power until end of turn. (Activate each exhaust ability only once.)
-SVar:DBAnimateAll:DB$ Animate | Power$ Y | Toughness$ Y | ValidCards$ Creature.YouCtrl+Other | Optional$ True
+SVar:DBAnimateAll:DB$ Animate | Power$ Y | Toughness$ Y | Defined$ Valid Creature.YouCtrl+Other | Optional$ True
 DeckHas:Ability$Counters
 SVar:X:Count$xPaid
 SVar:Y:Count$CardPower
