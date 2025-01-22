@@ -2,6 +2,6 @@ Name:Surge Node
 ManaCost:1
 Types:Artifact
 K:etbCounter:CHARGE:6
-A:AB$ PutCounter | Cost$ 1 T SubCounter<1/CHARGE> | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on target artifact.
+A:AB$ PutCounter | Cost$ 1 T SubCounter<1/CHARGE> | ValidTgts$ Artifact | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on target artifact.
 AI:RemoveDeck:Random
 Oracle:Surge Node enters with six charge counters on it.\n{1}, {T}, Remove a charge counter from Surge Node: Put a charge counter on target artifact.

@@ -1,7 +1,7 @@
 Name:Teferi's Care
 ManaCost:2 W
 Types:Enchantment
-A:AB$ Destroy | Cost$ W Sac<1/Enchantment> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-A:AB$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target Enchantment | ValidTgts$ Enchantment | SpellDescription$ Counter target enchantment spell.
+A:AB$ Destroy | Cost$ W Sac<1/Enchantment> | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+A:AB$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target enchantment spell | ValidTgts$ Enchantment | SpellDescription$ Counter target enchantment spell.
 AI:RemoveDeck:All
 Oracle:{W}, Sacrifice an enchantment: Destroy target enchantment.\n{3}{U}{U}: Counter target enchantment spell.
