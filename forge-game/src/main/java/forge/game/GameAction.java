@@ -730,7 +730,7 @@ public class GameAction {
         if (cause != null && cause.hasParam("StaticEffect") && copied.isPermanent()) {
             final Card source = cause.getHostCard();
             if (cause.hasParam("StaticEffectCheckSVar")) {
-                String cmp = cause.getParamOrDefault("StaticEffectSVarCompare$", "GE1");
+                String cmp = cause.getParamOrDefault("StaticEffectSVarCompare", "GE1");
                 int lhs = AbilityUtils.calculateAmount(source, cause.getParam("StaticEffectCheckSVar"), cause);
                 int rhs = AbilityUtils.calculateAmount(source, cmp.substring(2), cause);
                 if (!Expressions.compare(lhs, cmp, rhs)) {
