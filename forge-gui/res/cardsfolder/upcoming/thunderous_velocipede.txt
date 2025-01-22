@@ -1,0 +1,10 @@
+Name:Thunderous Velocipede
+ManaCost:1 G G
+Types:Artifact Vehicle
+PT:5/5
+K:Trample
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.YouCtrl+Other,Vehicle.YouCtrl+Other
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Each other Vehicle and creature you control enters with an additional +1/+1 counter on it if its mana value is 4 or less. Otherwise, it enters with three additional +1/+1 counters on it.
+SVar:X:Count$Compare ReplacedCard$CardManaCost LE4.1.3
+K:Crew:3
+Oracle:Trample\nEach other Vehicle and creature you control enters with an additional +1/+1 counter on it if its mana value is 4 or less. Otherwise, it enters with three additional +1/+1 counters on it.\nCrew 3

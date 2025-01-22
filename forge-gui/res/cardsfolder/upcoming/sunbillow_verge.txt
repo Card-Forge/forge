@@ -1,0 +1,6 @@
+Name:Sunbillow Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Mana | Cost$ T | Produced$ R | IsPresent$ Mountain.YouCtrl,Plains.YouCtrl | SpellDescription$ Add {R}. Activate only if you control a Mountain or a Plains.
+Oracle:{T}: Add {W}.\n{T}: Add {R}. Activate only if you control a Mountain or a Plains.

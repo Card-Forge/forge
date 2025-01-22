@@ -1,0 +1,7 @@
+Name:Nalaar Aetherjet
+ManaCost:no cost
+Types:Artifact Vehicle
+PT:*/*
+K:Flying
+K:Crew:2
+Oracle:Flying\nCrew 2
