@@ -1,0 +1,10 @@
+Name:Brightfield Mustang
+ManaCost:3 W
+Types:Creature Horse Mount
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever this creature attacks while saddled, untap it and put a +1/+1 counter on it.
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Saddle:1
+DeckHas:Ability$Counters
+Oracle:Whenever this creature attacks while saddled, untap it and put a +1/+1 counter on it.\nSaddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)
