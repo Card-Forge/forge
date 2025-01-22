@@ -3,5 +3,5 @@ ManaCost:3 W
 Types:Creature Griffin
 PT:2/2
 K:Flying
-A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target Red Instant or Sorcery spell | ValidTgts$ Instant.Red,Sorcery.Red | SpellDescription$ Counter target red instant or sorcery spell.
+A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target red instant or sorcery spell | ValidTgts$ Instant.Red,Sorcery.Red | SpellDescription$ Counter target red instant or sorcery spell.
 Oracle:Flying\nSacrifice Unyaro Griffin: Counter target red instant or sorcery spell.
