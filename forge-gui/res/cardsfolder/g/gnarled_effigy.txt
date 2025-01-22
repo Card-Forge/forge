@@ -1,5 +1,5 @@
 Name:Gnarled Effigy
 ManaCost:4
 Types:Artifact
-A:AB$ PutCounter | Cost$ 4 T | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target Creature | CounterType$ M1M1 | CounterNum$ 1 | SpellDescription$ Put a -1/-1 counter on target creature.
+A:AB$ PutCounter | Cost$ 4 T | IsCurse$ True | ValidTgts$ Creature | CounterType$ M1M1 | CounterNum$ 1 | SpellDescription$ Put a -1/-1 counter on target creature.
 Oracle:{4}, {T}: Put a -1/-1 counter on target creature.

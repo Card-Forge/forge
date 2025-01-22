@@ -2,6 +2,6 @@ Name:Greenside Watcher
 ManaCost:1 G
 Types:Creature Elf Druid
 PT:2/1
-A:AB$ Untap | Cost$ T | ValidTgts$ Gate | TgtPrompt$ Select target gate | AILogic$ PoolExtraMana | SpellDescription$ Untap target Gate.
+A:AB$ Untap | Cost$ T | ValidTgts$ Gate | TgtPrompt$ Select target Gate | AILogic$ PoolExtraMana | SpellDescription$ Untap target Gate.
 DeckNeeds:Type$Gate
 Oracle:{T}: Untap target Gate.
