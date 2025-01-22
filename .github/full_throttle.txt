@@ -3,6 +3,6 @@ ManaCost:4 R R
 Types:Sorcery
 A:SP$ AddPhase | ExtraPhase$ Combat | NumPhases$ 2 | ConditionPhases$ Main1,Main2 | SubAbility$ DBEffect | SpellDescription$ After this main phase, there are two additional combat phases. At the beginning of each combat this turn, untap all creatures that attacked this turn.
 SVar:DBEffect:DB$ Effect | Triggers$ TrigPhase | SpellDescription$ At the beginning of each combat this turn, untap all creatures that attacked this turn.
-SVar:TrigPhase:Mode$ Phase | Phase$ BeginCombat | OptionalDecider$ You | Execute$ TrigUntapAll | TriggerDescription$ At the beginning of each combat this turn, untap all creatures that attacked this turn.
+SVar:TrigPhase:Mode$ Phase | Phase$ BeginCombat | Execute$ TrigUntapAll | TriggerDescription$ At the beginning of each combat this turn, untap all creatures that attacked this turn.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.attackedThisTurn
 Oracle:After this main phase, there are two additional combat phases.\nAt the beginning of each combat this turn, untap all creatures that attacked this turn.
