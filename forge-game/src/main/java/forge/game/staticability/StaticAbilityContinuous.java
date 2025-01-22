@@ -792,9 +792,7 @@ public final class StaticAbilityContinuous {
                             final String costcmc = Integer.toString(affectedCard.getCMC());
                             ability = TextUtil.fastReplace(ability, "ConvertedManaCost", costcmc);
                         }
-                        if (ability.startsWith("AB") || ability.startsWith("ST")) { // grant the ability
-                            addedAbilities.add(affectedCard.getSpellAbilityForStaticAbility(ability, stAb));
-                        }
+                        addedAbilities.add(affectedCard.getSpellAbilityForStaticAbility(ability, stAb));
                     }
                 }
 

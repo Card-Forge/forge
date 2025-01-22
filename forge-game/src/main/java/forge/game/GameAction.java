@@ -128,33 +128,6 @@ public class GameAction {
         CardCollectionView lastBattlefield = getLastState(AbilityKey.LastStateBattlefield, cause, params, false);
         CardCollectionView lastGraveyard = getLastState(AbilityKey.LastStateGraveyard, cause, params, false);
 
-        // Aura entering indirectly
-        // need to check before it enters
-        if (c.isAura() && !c.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
-            boolean found = false;
-            if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(c, null))) {
-                found = true;
-            }
-
-            if (!found) {
-                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(c, null))) {
-                    found = true;
-                }
-            }
-
-            if (!found) {
-                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(c, null))) {
-                    found = true;
-                }
-            }
-            if (!found) {
-                c.clearControllers();
-                if (cause != null) {
-                }
-                return c;
-            }
-        }
-
         //717.6. If a card with an Astrotorium card back would be put into a zone other than the battlefield, exile,
         //or the command zone from anywhere, instead its owner puts it into the junkyard.
         if ((c.getGamePieceType() == GamePieceType.ATTRACTION || c.getGamePieceType() == GamePieceType.CONTRAPTION)
@@ -393,6 +366,33 @@ public class GameAction {
 
         copied.getOwner().removeInboundToken(copied);
 
+        handleStaticEffect(copied, cause);
+
+        // Aura entering indirectly
+        // need to check before it enters
+        if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
+            boolean found = false;
+            if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(copied, null))) {
+                found = true;
+            }
+
+            if (!found) {
+                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null))) {
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(copied, null))) {
+                    found = true;
+                }
+            }
+            if (!found) {
+                c.clearControllers();
+                return c;
+            }
+        }
+
         // Aura entering as Copy from stack
         // without targets it is sent to graveyard
         if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield) {
@@ -575,7 +575,6 @@ public class GameAction {
             copied.setChosenColorID(ImmutableSet.copyOf(c.getChosenColorID()));
         }
 
-        // update state for view
         copied.updateStateForView();
 
         if (fromBattlefield) {
@@ -586,8 +585,6 @@ public class GameAction {
                 game.fireEvent(new GameEventCardTapped(c, false));
             }
         }
-
-        handleStaticEffect(copied, cause);
 
         if (!table.isEmpty()) {
             // we don't want always trigger before counters are placed
@@ -727,6 +724,7 @@ public class GameAction {
     }
 
     private void handleStaticEffect(Card copied, SpellAbility cause) {
+        // CR 611.2e
         if (cause == null || !cause.hasParam("StaticEffect") || !copied.isPermanent()) {
             return;
         }
@@ -765,11 +763,15 @@ public class GameAction {
             eff.setRenderForUI(false);
             StaticAbility stAb = eff.addStaticAbility(AbilityUtils.getSVar(cause, cause.getParam("StaticEffect")));
             stAb.putParam("EffectZone", "Command");
+            stAb.putParam("AffectedZone", "Battlefield,Hand,Graveyard,Exile,Stack,Library,Command");
             SpellAbilityEffect.addForgetOnMovedTrigger(copied, "Battlefield");
             game.getAction().moveToCommand(eff, cause);
         }
 
         eff.addRemembered(copied);
+
+        // refresh needed for effects like Bronzehide Lion
+        game.getAction().checkStaticAbilities(false, Sets.newHashSet(copied), new CardCollection(copied));
     }
 
     private void storeChangesZoneAll(Card c, Zone zoneFrom, Zone zoneTo, Map<AbilityKey, Object> params) {
