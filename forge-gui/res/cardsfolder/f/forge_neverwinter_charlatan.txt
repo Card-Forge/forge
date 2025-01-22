@@ -1,4 +1,5 @@
 Name:Forge, Neverwinter Charlatan
+AltName:Evin, Waterdeep Opportunist
 ManaCost:3 B
 Types:Legendary Creature Human Rogue
 PT:2/4

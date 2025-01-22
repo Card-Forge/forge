@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Chapter:3:DBMill,DBEffect,DBEffect
 SVar:DBMill:DB$ Mill | NumCards$ 4 | Defined$ Player | SubAbility$ DBRepeatEach | SpellDescription$ Each player mills four cards. Then you may exile a creature or planeswalker card from each graveyard.
 SVar:DBRepeatEach:DB$ RepeatEach | Optional$ True | OptionPrompt$ Do you want to exile a creature or planeswalker card from each graveyard? | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SubAbility$ DBExile
-SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Creature.RememberedPlayerCtrl,Planeswalker.RememberedPlayerCtrl | ChoiceZone$ Graveyard | ChoiceTitle$ Select a creature or planeswalker | Mandatory$ True | RememberChosen$ True
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Creature.RememberedPlayerCtrl,Planeswalker.RememberedPlayerCtrl | ChoiceZone$ Graveyard | ChoiceTitle$ Choose a creature or planeswalker card in a graveyard | Mandatory$ True | RememberChosen$ True
 SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PlayExile | SpellDescription$ Until end of turn, you may cast spells from among cards exiled with CARDNAME, and you may spend mana as though it were mana of any color to cast those spells.

@@ -1,4 +1,5 @@
 Name:Edgin, Larcenous Lutenist
+AltName:Bohn, Beguiling Balladeer
 ManaCost:1 U R
 Types:Legendary Creature Human Bard
 PT:3/3
