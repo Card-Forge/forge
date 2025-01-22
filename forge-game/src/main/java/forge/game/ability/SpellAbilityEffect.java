@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import forge.GameCommand;
+import forge.card.CardRarity;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -596,19 +597,25 @@ public abstract class SpellAbilityEffect {
 
         eff.setGameTimestamp(timestamp);
         eff.setName(name);
-        eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
         if (name.startsWith("Emblem")) {
             eff.setEmblem(true);
             // Emblem needs to be colorless
             eff.setColor(MagicColor.COLORLESS);
-        } else if (sa.hasParam("Boon")) {
+            eff.setRarity(CardRarity.Common);
+        } else {
+            eff.setColor(hostCard.getColor().getColor());
+            eff.setRarity(hostCard.getRarity());
+        }
+
+        if (sa.hasParam("Boon")) {
             eff.setBoon(true);
         }
 
         eff.setOwner(controller);
         eff.setSVars(sa.getSVars());
 
+        eff.setSetCode(hostCard.getSetCode());
         if (image != null) {
             eff.setImageKey(image);
         }

@@ -727,47 +727,49 @@ public class GameAction {
     }
 
     private void handleStaticEffect(Card copied, SpellAbility cause) {
-        if (cause != null && cause.hasParam("StaticEffect") && copied.isPermanent()) {
-            final Card source = cause.getHostCard();
-            if (cause.hasParam("StaticEffectCheckSVar")) {
-                String cmp = cause.getParamOrDefault("StaticEffectSVarCompare", "GE1");
-                int lhs = AbilityUtils.calculateAmount(source, cause.getParam("StaticEffectCheckSVar"), cause);
-                int rhs = AbilityUtils.calculateAmount(source, cmp.substring(2), cause);
-                if (!Expressions.compare(lhs, cmp, rhs)) {
-                    return;
-                }
-            }
-
-            Long timestamp;
-            // check if player ordered it manually
-            if (cause.hasSVar("StaticEffectTimestamp"))  {
-                timestamp = Long.parseLong(cause.getSVar("StaticEffectTimestamp"));
-            } else {
-                // else create default value (or realign)
-                timestamp = game.getNextTimestamp();
-                cause.setSVar("StaticEffectTimestamp", String.valueOf(timestamp));
-            }
-            String name = "Static Effect #" + source.getGameTimestamp();
-            // check if this isn't the first card being moved
-            Optional<Card> opt = IterableUtil.tryFind(cause.getActivatingPlayer().getZone(ZoneType.Command).getCards(), CardPredicates.nameEquals(name));
-
-            Card eff;
-            if (opt.isPresent()) {
-                eff = opt.get();
-                // update in case player manually ordered
-                eff.setLayerTimestamp(timestamp);
-            } else {
-                // otherwise create effect first
-                eff = SpellAbilityEffect.createEffect(cause, cause.getActivatingPlayer(), name, source.getImageKey(), timestamp);
-                eff.setRenderForUI(false);
-                StaticAbility stAb = eff.addStaticAbility(AbilityUtils.getSVar(cause, cause.getParam("StaticEffect")));
-                stAb.putParam("EffectZone", "Command");
-                SpellAbilityEffect.addForgetOnMovedTrigger(copied, "Battlefield");
-                game.getAction().moveToCommand(eff, cause);
-            }
-
-            eff.addRemembered(copied);
+        if (cause == null || !cause.hasParam("StaticEffect") || !copied.isPermanent()) {
+            return;
         }
+
+        final Card source = cause.getHostCard();
+        if (cause.hasParam("StaticEffectCheckSVar")) {
+            String cmp = cause.getParamOrDefault("StaticEffectSVarCompare", "GE1");
+            int lhs = AbilityUtils.calculateAmount(source, cause.getParam("StaticEffectCheckSVar"), cause);
+            int rhs = AbilityUtils.calculateAmount(source, cmp.substring(2), cause);
+            if (!Expressions.compare(lhs, cmp, rhs)) {
+                return;
+            }
+        }
+
+        Long timestamp;
+        // check if player ordered it manually
+        if (cause.hasSVar("StaticEffectTimestamp"))  {
+            timestamp = Long.parseLong(cause.getSVar("StaticEffectTimestamp"));
+        } else {
+            // else create default value (or realign)
+            timestamp = game.getNextTimestamp();
+            cause.setSVar("StaticEffectTimestamp", String.valueOf(timestamp));
+        }
+        String name = "Static Effect #" + source.getGameTimestamp();
+        // check if this isn't the first card being moved
+        Optional<Card> opt = IterableUtil.tryFind(cause.getActivatingPlayer().getZone(ZoneType.Command).getCards(), CardPredicates.nameEquals(name));
+
+        Card eff;
+        if (opt.isPresent()) {
+            eff = opt.get();
+            // update in case player manually ordered
+            eff.setLayerTimestamp(timestamp);
+        } else {
+            // otherwise create effect first
+            eff = SpellAbilityEffect.createEffect(cause, cause.getActivatingPlayer(), name, source.getImageKey(), timestamp);
+            eff.setRenderForUI(false);
+            StaticAbility stAb = eff.addStaticAbility(AbilityUtils.getSVar(cause, cause.getParam("StaticEffect")));
+            stAb.putParam("EffectZone", "Command");
+            SpellAbilityEffect.addForgetOnMovedTrigger(copied, "Battlefield");
+            game.getAction().moveToCommand(eff, cause);
+        }
+
+        eff.addRemembered(copied);
     }
 
     private void storeChangesZoneAll(Card c, Zone zoneFrom, Zone zoneTo, Map<AbilityKey, Object> params) {
