@@ -587,6 +587,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isBoast() {
         return this.hasParam("Boast");
     }
+    public boolean isExhaust() {
+        return this.hasParam("Exhaust");
+    }
 
     public boolean isNinjutsu() {
         return this.isKeyword(Keyword.NINJUTSU);

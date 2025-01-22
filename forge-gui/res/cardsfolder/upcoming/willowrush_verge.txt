@@ -1,0 +1,6 @@
+Name:Willowrush Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ G | IsPresent$ Forest.YouCtrl,Island.YouCtrl | SpellDescription$ Add {G}. Activate only if you control a Forest or an Island.
+Oracle:{T}: Add {U}.\n{T}: Add {G}. Activate only if you control a Forest or an Island.

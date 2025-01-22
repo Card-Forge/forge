@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:5/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target non-Demon creature.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonDemon | TgtPrompt$ Select target non-demon creature
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonDemon | TgtPrompt$ Select target non-Demon creature
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl | PresentZone$ Graveyard | PresentCompare$ LT6 | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, if there are fewer than six creatures in your graveyard, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 Oracle:Flying\nWhen Shadowborn Demon enters, destroy target non-Demon creature.\nAt the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.

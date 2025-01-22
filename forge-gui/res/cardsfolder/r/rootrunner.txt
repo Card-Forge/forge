@@ -2,7 +2,7 @@ Name:Rootrunner
 ManaCost:2 G G
 Types:Creature Spirit
 PT:3/3
-A:AB$ ChangeZone | Cost$ G G Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select target Land | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target land on top of its owner's library.
+A:AB$ ChangeZone | Cost$ G G Sac<1/CARDNAME> | ValidTgts$ Land | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target land on top of its owner's library.
 K:Soulshift:3
 AI:RemoveDeck:All
 DeckHints:Type$Spirit

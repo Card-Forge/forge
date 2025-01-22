@@ -253,10 +253,13 @@ public final class AbilityFactory {
             spellAbility.putParam("PlayerTurn", "True");
             spellAbility.putParam("PrecostDesc", "Forecast — ");
         }
-        if (mapParams.containsKey("Boast")) {
+        if (spellAbility.isBoast()) {
             spellAbility.putParam("PresentDefined", "Self");
             spellAbility.putParam("IsPresent", "Card.attackedThisTurn");
             spellAbility.putParam("PrecostDesc", "Boast — ");
+        }
+        if (spellAbility.isExhaust()) {
+            spellAbility.putParam("PrecostDesc", "Exhaust — ");
         }
 
         // *********************************************

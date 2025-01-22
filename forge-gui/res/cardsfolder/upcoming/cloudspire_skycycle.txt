@@ -1,0 +1,11 @@
+Name:Cloudspire Skycycle
+ManaCost:2 R W
+Types:Artifact Vehicle
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this Vehicle enters, distribute two +1/+1 counters among one or two other target Vehicles and/or creatures you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl+Other,Vehicle.YouCtrl+Other | TgtPrompt$ Select another target creature or Vehicle you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2
+K:Crew:1
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen this Vehicle enters, distribute two +1/+1 counters among one or two other target Vehicles and/or creatures you control.\nCrew 1

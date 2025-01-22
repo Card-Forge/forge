@@ -1,0 +1,10 @@
+Name:Cryptcaller Chariot
+ManaCost:3 B
+Types:Artifact Vehicle
+PT:5/5
+K:Menace
+T:Mode$ DiscardedAll | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you discard one or more cards, create that many tapped 2/2 black Zombie creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True
+SVar:X:TriggerCount$Amount
+K:Crew:2
+Oracle:Menace\nWhenever you discard one or more cards, create that many tapped 2/2 black Zombie creature tokens.\nCrew 2

@@ -1,0 +1,6 @@
+Name:Bleachbone Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ T | Produced$ W | IsPresent$ Plains.YouCtrl,Swamp.YouCtrl | SpellDescription$ Add {W}. Activate only if you control a Plains or a Swamp.
+Oracle:{T}: Add {B}.\n{T}: Add {W}. Activate only if you control a Plains or a Swamp.

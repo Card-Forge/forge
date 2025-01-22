@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant creature
 Oracle:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select creature to enchant | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ DiesTrig | Description$ Enchanted creature has "Whenever another creature dies, put a +1/+1 counter on this creature."
 SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature dies, put a +1/+1 counter on this creature.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
