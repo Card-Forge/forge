@@ -2,7 +2,7 @@ Name:The Aetherspark
 ManaCost:4
 Types:Legendary Artifact Planeswalker Equipment
 Loyalty:4
-S:Mode$ CantAttack | ValidCard$ Creature | Target$ Card.Self | IsPresent$ Card.Self+AttachedTo Creature | Description$ As long as CARDNAME is attached to a creature, CARDNAME can't be attacked and has "Whenever equipped creature deals combat damage during your turn, put that many loyalty counters on CARDNAME."
+S:Mode$ CantAttack | ValidCard$ Creature | Target$ Card.Self+AttachedTo Creature | Description$ As long as CARDNAME is attached to a creature, CARDNAME can't be attacked and has "Whenever equipped creature deals combat damage during your turn, put that many loyalty counters on CARDNAME."
 S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Card.Self+AttachedTo Creature | Secondary$ True | AddTrigger$ TrigDamageDoneOnce | Description$ As long as CARDNAME is attached to a creature, CARDNAME can't be attacked and has "Whenever equipped creature deals combat damage during your turn, put that many loyalty counters on CARDNAME."
 SVar:TrigDamageDoneOnce:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.EquippedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | PlayerTurn$ True | TriggerDescription$ Whenever equipped creature deals combat damage during your turn, put that many loyalty counters on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ LOYALTY | CounterNum$ X
