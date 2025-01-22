@@ -2,7 +2,7 @@ Name:Doubling Chant
 ManaCost:5 G
 Types:Sorcery
 A:SP$ RepeatEach | RepeatSubAbility$ DBSearch | RepeatCards$ Creature.YouCtrl | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle.
-SVar:DBSearch:DB$ ChooseCard | ChoiceZone$ Library | QuasiLibrarySearch$ You | Choices$ Card.YouOwn+IsNotImprinted+sharesNameWith Remembered | ImprintChosen$ True | ChoiceTitle$ You may select a card with the same name from your library
+SVar:DBSearch:DB$ ChooseCard | ChoiceZone$ Library | QuasiLibrarySearch$ You | Choices$ Card.YouOwn+IsNotImprinted+sharesNameWith Remembered | ImprintChosen$ True | ChoiceTitle$ You may choose a card with the same name from your library
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Battlefield | Searched$ True | Shuffle$ True | StackDescription$ None
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.YouCtrl
