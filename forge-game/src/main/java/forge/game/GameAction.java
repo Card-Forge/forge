@@ -285,13 +285,6 @@ public class GameAction {
         // ensure that any leftover keyword/type changes are cleared in the state view
         copied.updateStateForView();
 
-        GameEntityCounterTable table;
-        if (params != null && params.containsKey(AbilityKey.CounterTable)) {
-            table = (GameEntityCounterTable) params.get(AbilityKey.CounterTable);
-        } else {
-            table = new GameEntityCounterTable();
-        }
-
         final Card staticEff = setupStaticEffect(copied, cause);
 
         // Aura entering indirectly
@@ -318,6 +311,13 @@ public class GameAction {
                 cleanStaticEffect(staticEff, copied);
                 return c;
             }
+        }
+
+        GameEntityCounterTable table;
+        if (params != null && params.containsKey(AbilityKey.CounterTable)) {
+            table = (GameEntityCounterTable) params.get(AbilityKey.CounterTable);
+        } else {
+            table = new GameEntityCounterTable();
         }
 
         if (!suppress) {

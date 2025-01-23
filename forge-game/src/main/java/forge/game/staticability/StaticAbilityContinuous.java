@@ -592,9 +592,7 @@ public final class StaticAbilityContinuous {
         }
 
         // start modifying the cards
-        for (int i = 0; i < affectedCards.size(); i++) {
-            final Card affectedCard = affectedCards.get(i);
-
+        for (Card affectedCard : affectedCards) {
             // Gain control
             if (layer == StaticAbilityLayer.CONTROL && params.containsKey("GainControl")) {
                 final PlayerCollection gain = AbilityUtils.getDefinedPlayers(hostCard, params.get("GainControl"), stAb);
