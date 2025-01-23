@@ -7,7 +7,7 @@ A:AB$ DealDamage | Cost$ 1 R T SubCounter<X/CHARGE> | NumDmg$ X | ValidTgts$ Any
 SVar:X:Count$xPaid
 A:AB$ Dig | Cost$ 1 R T | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | AILogic$ ExileAndPlayUntilEOT | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. You may play that card this turn.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
 DeckHints:Type$Instant|Sorcery

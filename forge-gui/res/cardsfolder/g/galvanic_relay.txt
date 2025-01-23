@@ -6,5 +6,5 @@ A:SP$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile |
 SVar:DBDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBEffect | RememberObjects$ Remembered | Static$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ DelayTriggerRemembered | ForgetOnMoved$ Exile
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card.
 Oracle:Exile the top card of your library. During your next turn, you may play that card.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
