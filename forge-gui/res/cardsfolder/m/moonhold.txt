@@ -3,6 +3,6 @@ ManaCost:2 RW
 Types:Instant
 A:SP$ Effect | Name$ Moonhold's Effect — No Lands | ValidTgts$ Player | IsCurse$ True | StaticAbilities$ STCantPlayLand | EffectOwner$ Targeted | AILogic$ BeginningOfOppTurn | ConditionManaSpent$ R | SubAbility$ WPaid | SpellDescription$ Target player can't play lands this turn if {R} was spent to cast this spell and can't cast creature spells this turn if {W} was spent to cast this spell. (Do both if {R}{W} was spent.)
 SVar:WPaid:DB$ Effect | Name$ Moonhold's Effect — No Creatures | IsCurse$ True | StaticAbilities$ STCantPlayCreats | EffectOwner$ Targeted | AILogic$ BeginningOfOppTurn | ConditionManaSpent$ W
-SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ You | Description$ You can't play lands this turn.
-SVar:STCantPlayCreats:Mode$ CantBeCast | ValidCard$ Creature | EffectZone$ Command | Caster$ You | Description$ You can't cast creature spells this turn.
+SVar:STCantPlayLand:Mode$ CantPlayLand | Player$ You | Description$ You can't play lands this turn.
+SVar:STCantPlayCreats:Mode$ CantBeCast | ValidCard$ Creature | Caster$ You | Description$ You can't cast creature spells this turn.
 Oracle:Target player can't play lands this turn if {R} was spent to cast this spell and can't cast creature spells this turn if {W} was spent to cast this spell. (Do both if {R}{W} was spent.)
