@@ -6,7 +6,7 @@ T:Mode$ DamageDone | ValidSource$ Spell.Instant+YouCtrl,Spell.Sorcery+YouCtrl,Ca
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | RememberObjects$ Remembered | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card.
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ NICKNAME deals 1 damage to any target.
 SVar:NonCombatPriority:1
 DeckHints:Type$Instant|Sorcery
