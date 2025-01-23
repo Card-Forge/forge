@@ -7,7 +7,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigExile:DB$ Dig | Defined$ Player.Opponent | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlayIgnoreColor$ True | Description$ You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlayIgnoreColor$ True | Description$ You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.OppOwn+YouCtrl+nonLand | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nonland permanent an opponent owns enters the battlefield under your control, they lose life equal to its mana value.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ X
 SVar:X:TriggeredCard$CardManaCost
