@@ -14,7 +14,7 @@ SVar:DBEffect:DB$ Pump | PumpZone$ Hand | Defined$ Remembered | NumAtt$ 1 | NumD
 SVar:ReturnBig:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.cmcEQV | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | AtRandom$ True | SpellDescription$ Return a random creature card with the highest mana value from among cards in your graveyard to the battlefield.
 SVar:V:Count$ValidGraveyard Creature.YouOwn$GreatestCMC
 SVar:EmblemBuff:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 5) | StaticAbilities$ YoursP2Pow | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +2/+0."
-SVar:YoursP2Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ 2 | EffectZone$ Command | AffectedZone$ Battlefield | Description$ Creatures you control get +2/+0.
+SVar:YoursP2Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ 2 | AffectedZone$ Battlefield | Description$ Creatures you control get +2/+0.
 SVar:EmblemReduceCost:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 6) | StaticAbilities$ CostBLess | Duration$ Permanent | SpellDescription$ You get an emblem with "Spells you cast cost {B} less to cast."
 SVar:CostBLess:Mode$ ReduceCost | ValidCard$ Card | Activator$ You | Type$ Spell | Amount$ 1 | Color$ B | Description$ Spells you cast cost {B} less to cast.
 SVar:EmblemDavrielPW:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 7) | StaticAbilities$ AddP2Ab | Duration$ Permanent | SpellDescription$ You get an emblem with "Davriel planeswalkers you control have '[+2]: Draw a card.'"
@@ -32,7 +32,7 @@ SVar:Y:Number$2/Minus.X
 SVar:Sac2:DB$ Sacrifice | Amount$ 2 | SacValid$ Permanent | Defined$ You | SpellDescription$ Sacrifice two permanents.
 SVar:PerpetualBuffTheirs:DB$ PumpAll | ValidCards$ Creature.YouDontCtrl | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SpellDescription$ Each creature you don't control perpetually gains +1/+1.
 SVar:EmblemDebuff:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Condition 5) | StaticAbilities$ YoursM1Pow | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get -1/-0."
-SVar:YoursM1Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ -1 | EffectZone$ Command | AffectedZone$ Battlefield | Description$ Creatures you control get -1/-0.
+SVar:YoursM1Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ -1 | AffectedZone$ Battlefield | Description$ Creatures you control get -1/-0.
 SVar:EmblemRaiseCost:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Condition 6) | StaticAbilities$ CostBMore | Duration$ Permanent | SpellDescription$ You get an emblem with "Spells you cast cost {B} more to cast."
 SVar:CostBMore:Mode$ RaiseCost | ValidCard$ Card | Activator$ You | Type$ Spell | Cost$ B | Description$ Spells you cast cost {B} more to cast.
 SVar:EmblemDrawExile:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Condition 7) | Triggers$ DrawTrig | Duration$ Permanent | SpellDescription$ You get an emblem with "Whenever you draw a card, exile the top two cards of your library."

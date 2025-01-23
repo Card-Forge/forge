@@ -7,7 +7,7 @@ SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | Toke
 T:Mode$ DamageDone | ValidSource$ Vehicle.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever a Vehicle you control deals combat damage to a player, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled.
 SVar:TrigDig:DB$ Dig | DigNum$ 1 | Defined$ TriggeredTarget | ForceRevealToController$ True | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ Permanent
-SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card for as long as it remains exiled.
+SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card for as long as it remains exiled.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Assassin.tapped+YouCtrl,Pirate.tapped+YouCtrl,Vehicle.tapped+YouCtrl
 Oracle:At the beginning of your end step, create a Treasure token for each tapped Assassin, Pirate, and/or Vehicle you control.\nWhenever a Vehicle you control deals combat damage to a player, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled.

@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Instant
 K:Flashback:R
 A:SP$ Effect | StaticAbilities$ STCantPrevent | SpellDescription$ Damage can't be prevented this turn.
-SVar:STCantPrevent:Mode$ CantPreventDamage | EffectZone$ Command | Description$ Damage can't be prevented.
+SVar:STCantPrevent:Mode$ CantPreventDamage | Description$ Damage can't be prevented.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Damage can't be prevented this turn.\nFlashback {R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

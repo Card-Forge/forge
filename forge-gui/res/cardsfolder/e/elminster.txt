@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Elminster
 Loyalty:5
 T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEff | TriggerDescription$ Whenever you scry, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying this way.
 SVar:TrigEff:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | SetChosenNumber$ X
-SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCard$ Instant,Sorcery | Activator$ You | Amount$ Count$ChosenNumber | Description$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying.
+SVar:ReduceCost:Mode$ ReduceCost | Type$ Spell | ValidCard$ Instant,Sorcery | Activator$ You | Amount$ Count$ChosenNumber | Description$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying.
 SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:X:TriggerCount$ScryNum
