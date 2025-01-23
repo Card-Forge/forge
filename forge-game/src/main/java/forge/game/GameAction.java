@@ -292,6 +292,34 @@ public class GameAction {
             table = new GameEntityCounterTable();
         }
 
+        final Card staticEff = setupStaticEffect(copied, cause);
+
+        // Aura entering indirectly
+        // need to check before it enters
+        if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
+            boolean found = false;
+            if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(copied, null))) {
+                found = true;
+            }
+
+            if (!found) {
+                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null))) {
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(copied, null))) {
+                    found = true;
+                }
+            }
+            if (!found) {
+                c.clearControllers();
+                cleanStaticEffect(staticEff, copied);
+                return c;
+            }
+        }
+
         if (!suppress) {
             // Temporary disable commander replacement effect
             // 903.9a
@@ -333,6 +361,7 @@ public class GameAction {
 
                 if (repres == ReplacementResult.Prevented) {
                     c.clearControllers();
+                    cleanStaticEffect(staticEff, copied);
                     if (cause != null) {
                         if (cause.hasParam("Transformed") || cause.hasParam("FaceDown")) {
                             c.setBackSide(false);
@@ -365,33 +394,6 @@ public class GameAction {
         }
 
         copied.getOwner().removeInboundToken(copied);
-
-        handleStaticEffect(copied, cause);
-
-        // Aura entering indirectly
-        // need to check before it enters
-        if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
-            boolean found = false;
-            if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(copied, null))) {
-                found = true;
-            }
-
-            if (!found) {
-                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null))) {
-                    found = true;
-                }
-            }
-
-            if (!found) {
-                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(copied, null))) {
-                    found = true;
-                }
-            }
-            if (!found) {
-                c.clearControllers();
-                return c;
-            }
-        }
 
         // Aura entering as Copy from stack
         // without targets it is sent to graveyard
@@ -723,10 +725,10 @@ public class GameAction {
         return copied;
     }
 
-    private void handleStaticEffect(Card copied, SpellAbility cause) {
+    private Card setupStaticEffect(Card copied, SpellAbility cause) {
         // CR 611.2e
         if (cause == null || !cause.hasParam("StaticEffect") || !copied.isPermanent()) {
-            return;
+            return null;
         }
 
         final Card source = cause.getHostCard();
@@ -735,13 +737,14 @@ public class GameAction {
             int lhs = AbilityUtils.calculateAmount(source, cause.getParam("StaticEffectCheckSVar"), cause);
             int rhs = AbilityUtils.calculateAmount(source, cmp.substring(2), cause);
             if (!Expressions.compare(lhs, cmp, rhs)) {
-                return;
+                return null;
             }
         }
 
         Long timestamp;
         // check if player ordered it manually
         if (cause.hasSVar("StaticEffectTimestamp"))  {
+            // TODO the copied card won't have new timestamp yet
             timestamp = Long.parseLong(cause.getSVar("StaticEffectTimestamp"));
         } else {
             // else create default value (or realign)
@@ -763,16 +766,26 @@ public class GameAction {
             eff.setRenderForUI(false);
             StaticAbility stAb = eff.addStaticAbility(AbilityUtils.getSVar(cause, cause.getParam("StaticEffect")));
             stAb.putParam("EffectZone", "Command");
+            // needed for ETB lookahead like Bronzehide Lion
             stAb.putParam("AffectedZone", "Battlefield,Hand,Graveyard,Exile,Stack,Library,Command");
-            SpellAbilityEffect.addForgetOnMovedTrigger(copied, "Battlefield");
+            SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Battlefield");
             game.getAction().moveToCommand(eff, cause);
         }
 
         eff.addRemembered(copied);
-
-        // refresh needed for effects like Bronzehide Lion
+        // refresh needed for canEnchant checks
         game.getAction().checkStaticAbilities(false, Sets.newHashSet(copied), new CardCollection(copied));
+        return eff;
     }
+    private void cleanStaticEffect(Card eff, Card copied) {
+        if (eff != null) {
+            eff.removeRemembered(copied);
+            if (!eff.hasRemembered()) {
+                exileEffect(eff);
+            }
+        }
+    }
+
 
     private void storeChangesZoneAll(Card c, Zone zoneFrom, Zone zoneTo, Map<AbilityKey, Object> params) {
         if (params != null && params.containsKey(AbilityKey.InternalTriggerTable)) {
