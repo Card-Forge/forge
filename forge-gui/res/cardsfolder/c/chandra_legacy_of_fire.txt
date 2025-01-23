@@ -9,7 +9,7 @@ A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Produced$ R | Amount$ X | Planeswalke
 A:AB$ RemoveCounter | Cost$ AddCounter<0/LOYALTY> | Choices$ Permanent.YouCtrl | CounterType$ LOYALTY | CounterNum$ 1 | ChoiceOptional$ True | Planeswalker$ True | SubAbility$ DBExile | RememberAmount$ True | SpellDescription$ Remove a loyalty counter from each of any number of permanents you control. Exile that many cards from the top of your library. You may play them this turn.
 SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ Z | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ Imprinted | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play them this turn.
+SVar:STPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play them this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Z:Count$RememberedNumber
 DeckHints:Type$Planeswalker
