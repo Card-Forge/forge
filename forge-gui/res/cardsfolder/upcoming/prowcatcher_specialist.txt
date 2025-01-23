@@ -1,0 +1,8 @@
+Name:Prowcatcher Specialist
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/1
+K:Haste
+A:AB$ PutCounter | Cost$ 3 R | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | Exhaust$ True | SpellDescription$ Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
+DeckHas:Ability$Counters
+Oracle:Haste\nExhaust — {3}{R}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)

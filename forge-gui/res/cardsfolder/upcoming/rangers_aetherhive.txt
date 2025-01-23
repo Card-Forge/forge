@@ -1,0 +1,10 @@
+Name:Rangers' Aetherhive
+ManaCost:1 G U
+Types:Artifact Vehicle
+PT:3/5
+K:Vigilance
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ Activated.Exhaust | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you activate an exhaust ability, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
+K:Crew:1
+DeckHas:Ability$Token
+Oracle:Vigilance\nWhenever you activate an exhaust ability, create a 1/1 colorless Thopter artifact creature token with flying.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

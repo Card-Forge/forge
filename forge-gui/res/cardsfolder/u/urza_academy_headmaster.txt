@@ -5,7 +5,7 @@ Loyalty:4
 A:AB$ GenericChoice | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | AtRandom$ Urza | ShowChoice$ Description | Choices$ Pump1,PutCounter2,Destroy3,Token4,Token5,Token6,Dig7,MustAttack8,PutCounter9,Effect10,Exile11,Dig12,Animate13,Draw14,Animate15,PumpAll16,Dig17,DealDamage18,Animate19,Mana20 | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click +1.
 SVar:Pump1:DB$ Pump | TargetMin$ 0 | TargetMax$ 1 | KW$ First Strike & Vigilance & Lifelink | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike & Vigilance & Lifelink | SpellDescription$ Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.
 SVar:PutCounter2:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures you control.
-SVar:Destroy3:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select a noncreature permanent | SpellDescription$ Destroy target noncreature permanent.
+SVar:Destroy3:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | SpellDescription$ Destroy target noncreature permanent.
 SVar:Token4:DB$ Token | TokenAmount$ 2 | TokenScript$ r_3_1_elemental_haste | AtEOT$ Exile | SpellDescription$ Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
 SVar:Token5:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | SpellDescription$ Create three 1/1 white Soldier creature tokens.
 SVar:Token6:DB$ Token | TokenScript$ b_3_3_beast_deathtouch | SpellDescription$ Create a 3/3 black Beast creature token with deathtouch.
@@ -45,7 +45,7 @@ SVar:Effect5M:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (5M) | Stat
 SVar:STPump5M:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
 SVar:ChangeZone6M:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
 SVar:Draw7M:DB$ Draw | NumCards$ 3 | SubAbility$ DBChangeZone7M | SpellDescription$ Draw three cards, then put a card from your hand on top of your library.
-SVar:DBChangeZone7M:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Select a card from your hand to put on top of your library
+SVar:DBChangeZone7M:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Select a card in your hand to put on top of your library
 SVar:Mill8M:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 10 | SpellDescription$ Target player puts the top ten cards of their library into their graveyard.
 SVar:Dig9M:DB$ PeekAndReveal | PeekAmount$ 5 | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBTwoPiles9M | SpellDescription$ Reveal the top five cards of your library. An opponent separates them into two piles. Put one pile into your hand and the other on the bottom of your library in any order.
 SVar:DBTwoPiles9M:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | ChosenPile$ DBHand9M | UnchosenPile$ DBLibraryBottom9M
@@ -62,7 +62,7 @@ SVar:Token14M:DB$ Token | TokenScript$ b_5_5_demon_flying | SubAbility$ DBLoseli
 SVar:DBLoselife14M:DB$ LoseLife | LifeAmount$ 2
 SVar:Token15M:DB$ Token | TokenScript$ c_4_4_dragon_flying | SpellDescription$ Create a 4/4 gold Dragon creature token with flying.
 SVar:SetLife16M:DB$ SetLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 10 | SpellDescription$ Target player's life total becomes 10.
-SVar:Destroy17M:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select a nonland permanent | SpellDescription$ Destroy target nonland permanent.
+SVar:Destroy17M:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
 SVar:Return18M:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Select target permanent in a graveyard | ValidTgts$ Permanent | SpellDescription$ Return target permanent from a graveyard to the battlefield under your control.
 SVar:Token19M:DB$ Token | TokenAmount$ 2 | TokenScript$ g_3_3_beast | SpellDescription$ Create two 3/3 green Beast creature tokens.
 SVar:Draw20M:DB$ Draw | NumCards$ 4 | SubAbility$ DBDiscard20M | SpellDescription$ Draw four cards, then discard two cards.

@@ -1890,10 +1890,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         beenDealtCombatDamageSinceLastTurn = b;
     }
 
-    public final boolean getActivateLoyaltyAbilityThisTurn(CardTraitBase ctb) {
-        return !CardUtil.getThisTurnActivated("Activated.Loyalty+Planeswalker+YouCtrl", ctb.getHostCard(), ctb, this).isEmpty();
-    }
-
     public final List<Card> getCreaturesAttackedThisTurn() {
         List<Card> result = Lists.newArrayList(Iterables.concat(attackedThisTurn.values()));
         return result;

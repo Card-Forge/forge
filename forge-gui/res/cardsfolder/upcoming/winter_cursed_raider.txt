@@ -1,0 +1,11 @@
+Name:Winter, Cursed Rider
+ManaCost:U B
+Types:Legendary Creature Human Warlock
+PT:3/2
+K:Ward:PayLife<2>
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Ward:PayLife<2> | Description$ Artifacts you control have "Ward—Pay 2 life."
+A:AB$ PumpAll | Cost$ 2 U B T ExileFromGrave<X/Artifact> | ValidCards$ Creature.nonArtifact+Other | NumAtt$ -X | NumDef$ -X | IsCurse$ True | Exhaust$ True | SpellDescription$ Each other nonartifact creature gets -X/-X until end of turn. (Activate each exhaust ability only once.)
+SVar:X:Count$xPaid
+DeckHints:Type$Artifact
+DeckHas:Keyword$Ward
+Oracle:Ward—Pay 2 life.\nArtifacts you control have "Ward—Pay 2 life."\nExhaust — {2}{U}{B}, {T}, Exile X artifact cards from your graveyard: Each other nonartifact creature gets -X/-X until end of turn. (Activate each exhaust ability only once.)

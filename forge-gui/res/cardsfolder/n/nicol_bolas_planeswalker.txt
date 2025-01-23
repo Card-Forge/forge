@@ -2,7 +2,7 @@ Name:Nicol Bolas, Planeswalker
 ManaCost:4 U B B R
 Types:Legendary Planeswalker Bolas
 Loyalty:5
-A:AB$ Destroy | Cost$ AddCounter<3/LOYALTY> | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select a noncreature permanent. | Planeswalker$ True | SpellDescription$ Destroy target noncreature permanent.
+A:AB$ Destroy | Cost$ AddCounter<3/LOYALTY> | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | Planeswalker$ True | SpellDescription$ Destroy target noncreature permanent.
 A:AB$ GainControl | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature | Planeswalker$ True | SpellDescription$ Gain control of target creature.
 A:AB$ DealDamage | Cost$ SubCounter<9/LOYALTY> | NumDmg$ 7 | ValidTgts$ Player,Planeswalker | Planeswalker$ True | Ultimate$ True | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 7 damage to target player or planeswalker. That player or that planeswalker's controller discards seven cards, then sacrifices seven permanents.
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedOrController | NumCards$ 7 | Mode$ TgtChoose | SubAbility$ DBSac

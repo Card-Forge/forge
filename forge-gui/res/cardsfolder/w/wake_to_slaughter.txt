@@ -3,7 +3,7 @@ ManaCost:3 B R
 Types:Sorcery
 A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose up to two target creature cards in your graveyard | TgtZone$ Graveyard | RememberObjects$ Targeted | SubAbility$ DBChoosePlayer | StackDescription$ SpellDescription | SpellDescription$ Choose up to two target creature cards in your graveyard. An opponent chooses one of them. Return that card to your hand. Return the other to the battlefield under your control. It gains haste. Exile it at the beginning of the next end step.
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBOppChoose | StackDescription$ None
-SVar:DBOppChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Graveyard | Defined$ ChosenPlayer | ChoiceTitle$ Select a card for the hand | Mandatory$ True | ForgetChosen$ True | SubAbility$ DBChangeZone1 | StackDescription$ None
+SVar:DBOppChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Graveyard | Defined$ ChosenPlayer | ChoiceTitle$ Choose a card to be put into the hand of CARDNAME's controller | Mandatory$ True | ForgetChosen$ True | SubAbility$ DBChangeZone1 | StackDescription$ None
 SVar:DBChangeZone1:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChangeZone2 | StackDescription$ None
 SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | StackDescription$ None | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ Sacrifice | StackDescription$ None | SubAbility$ DBCleanup

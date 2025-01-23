@@ -3,7 +3,7 @@ ManaCost:G G W W W U U
 Types:Sorcery
 A:SP$ ChooseCard | Defined$ You | Amount$ 5 | Mandatory$ True | Choices$ Permanent.YouCtrl | ChoiceTitle$ Choose five permanents you control | ChoiceZone$ Battlefield | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Choose five permanents you control. For each of those permanents, you may search your library for a card with the same name as that permanent. Put those cards onto the battlefield tapped, then shuffle.
 SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Card.ChosenCard | Zone$ Battlefield | RepeatSubAbility$ DBSearch | SubAbility$ DBChangeZone
-SVar:DBSearch:DB$ ChooseCard | ChoiceZone$ Library | QuasiLibrarySearch$ You | Choices$ Card.YouOwn+IsNotImprinted+sharesNameWith Remembered | ImprintChosen$ True | ChoiceTitle$ You may select a card with this name from your library
+SVar:DBSearch:DB$ ChooseCard | ChoiceZone$ Library | QuasiLibrarySearch$ You | Choices$ Card.YouOwn+IsNotImprinted+sharesNameWith Remembered | ImprintChosen$ True | ChoiceTitle$ You may choose a card with this name from your library
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Battlefield | Tapped$ True | Searched$ True | Shuffle$ True | StackDescription$ None
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$Valid Permanent.YouCtrl
