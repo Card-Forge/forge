@@ -6,6 +6,6 @@ A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.In
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | ActivatorThisTurnCast$ EQ3 | TriggerDescription$ Whenever you cast your third spell each turn, exile a random card from your library. Until end of turn, you may play that card without paying its mana cost.
 SVar:TrigExile:DB$ ChangeZone | DefinedPlayer$ You | ChangeType$ Card | ChangeNum$ 1 | Origin$ Library | Destination$ Exile | AtRandom$ True | Hidden$ True | NoLooking$ True | NoShuffle$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlayWithoutManaCost$ True | AffectedZone$ Exile | Description$ You may play remembered card without paying its mana cost.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | MayPlayWithoutManaCost$ True | AffectedZone$ Exile | Description$ You may play remembered card without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:{T}: Add two mana in any combination of colors. Spend this mana only to cast instant or sorcery spells.\nWhenever you cast your third spell each turn, exile a random card from your library. Until end of turn, you may play that card without paying its mana cost.

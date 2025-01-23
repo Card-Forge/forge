@@ -2,7 +2,7 @@ Name:War Tax
 ManaCost:2 U
 Types:Enchantment
 A:AB$ Effect | Cost$ X U | StaticAbilities$ AttackTax | SetChosenNumber$ X | SpellDescription$ This turn, creatures can't attack unless their controller pays {X} for each attacking creature they control.
-SVar:AttackTax:Mode$ CantAttackUnless | ValidCard$ Creature | EffectZone$ Command | Cost$ XChosen | Description$ Creatures can't attack unless their controller pays {X} for each attacking creature they control.
+SVar:AttackTax:Mode$ CantAttackUnless | ValidCard$ Creature | Cost$ XChosen | Description$ Creatures can't attack unless their controller pays {X} for each attacking creature they control.
 SVar:X:Count$xPaid
 SVar:XChosen:Count$ChosenNumber
 AI:RemoveDeck:All

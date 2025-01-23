@@ -2,6 +2,6 @@ Name:Urban Evolution
 ManaCost:3 G U
 Types:Sorcery
 A:SP$ Effect | Name$ Urban Evolution's Effect — Exploration | StaticAbilities$ Exploration | AILogic$ Always | SubAbility$ DBDraw | SpellDescription$ Draw three cards. You may play an additional land this turn.
-SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
+SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land this turn.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
 Oracle:Draw three cards. You may play an additional land this turn.
