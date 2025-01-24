@@ -1,0 +1,11 @@
+Name:District Mascot
+ManaCost:G
+Types:Creature Dog Mount
+PT:0/0
+K:etbCounter:P1P1:1
+A:AB$ Destroy | Cost$ 1 G SubCounter<2/P1P1> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature attacks while saddled, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Saddle:1
+DeckHas:Ability$Counters
+Oracle:This creature enters with a +1/+1 counter on it.\n{1}{G}, Remove two +1/+1 counters from this creature: Destroy target artifact.\nWhenever this creature attacks while saddled, put a +1/+1 counter on it.\nSaddle 1
