@@ -1,0 +1,6 @@
+Name:Wickerfolk Indomitable
+ManaCost:3 B
+Types:Artifact Creature Scarecrow
+PT:4/3
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Graveyard | RaiseCost$ PayLife<2> Sac<1/Artifact;Creature/artifact or creature> | Description$ You may cast this card from your graveyard by paying 2 life and sacrificing an artifact or creature in addition to paying its other costs.
+Oracle:You may cast this card from your graveyard by paying 2 life and sacrificing an artifact or creature in addition to paying its other costs.
