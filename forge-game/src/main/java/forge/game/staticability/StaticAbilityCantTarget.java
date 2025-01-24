@@ -19,6 +19,7 @@ package forge.game.staticability;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
@@ -103,8 +104,9 @@ public class StaticAbilityCantTarget {
                 return false;
             }
         }
+        Set<ZoneType> zones = stAb.getActiveZone();
 
-        if ("Stack".equals(stAb.getParam("EffectZone"))) {
+        if (zones != null && zones.contains(ZoneType.Stack)) {
             // Enthralling Hold: only works if it wasn't already cast
             if (card.getGame().getStack().getSpellMatchingHost(spellAbility.getHostCard()) != null) {
                 return false;

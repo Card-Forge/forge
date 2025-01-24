@@ -60,6 +60,9 @@ public enum ZoneType {
     }
 
     public static List<ZoneType> listValueOf(final String values) {
+        if ("All".equals(values)) {
+            return List.of(Battlefield, Hand, Graveyard, Exile, Stack, Library, Command);
+        }
         final List<ZoneType> result = new ArrayList<>();
         for (final String s : values.split("[, ]+")) {
             ZoneType zt = ZoneType.smartValueOf(s);
