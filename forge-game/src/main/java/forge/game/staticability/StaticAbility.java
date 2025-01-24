@@ -591,6 +591,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             }
 
             clone.layers = this.generateLayer();
+            if (validHostZones != null) {
+                clone.setActiveZone(EnumSet.copyOf(validHostZones));
+            }
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }
