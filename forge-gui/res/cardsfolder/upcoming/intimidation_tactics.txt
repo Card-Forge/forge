@@ -1,0 +1,7 @@
+Name:Intimidation Tactics
+ManaCost:B
+Types:Sorcery
+A:SP$ RevealHand | Defined$ Targeted | ValidTgts$ Opponent | SubAbility$ ExileCard | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand. You choose an artifact or creature card from it. Exile that card.
+SVar:ExileCard:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Artifact,Creature | IsCurse$ True | Mandatory$ True | AlreadyRevealed$ True
+K:Cycling:3
+Oracle:Target opponent reveals their hand. You choose an artifact or creature card from it. Exile that card.\nCycling {3} ({3}, Discard this card: Draw a card.)

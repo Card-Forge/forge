@@ -1,0 +1,8 @@
+Name:Rhet-Tomb Mystic
+ManaCost:1 U
+Types:Creature Zombie Bird Wizard
+PT:2/1
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouOwn | EffectZone$ Battlefield | AffectedZone$ Hand | AddKeyword$ Cycling:1 U | Description$ Each creature card in your hand has cycling {1}{U}. ({1}{U}, Discard that card: Draw a card.)
+DeckHas:Ability$Discard
+Oracle:Flying\nEach creature card in your hand has cycling {1}{U}. ({1}{U}, Discard that card: Draw a card.)
