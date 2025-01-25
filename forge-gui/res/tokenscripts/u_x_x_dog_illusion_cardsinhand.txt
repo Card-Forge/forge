@@ -3,6 +3,6 @@ ManaCost:no cost
 Colors:blue
 Types:Creature Dog Illusion
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to twice the number of cards in your hand.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to twice the number of cards in your hand.
 SVar:X:Count$InYourHand/Times.2
 Oracle:This creature's power and toughness are each equal to twice the number of cards in your hand.
