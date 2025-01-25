@@ -2,5 +2,5 @@ Name:Disguise Agent
 ManaCost:1 U
 Types:Creature Vedalken Detective
 PT:1/3
-S:Mode$ Continuous | Affected$ Card.YouOwn+IsCommander | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddKeyword$ Disguise:CardManaCost | Description$ Commanders you own have disguise. Their disguise cost is equal to their mana cost.
+S:Mode$ Continuous | Affected$ Card.YouOwn+IsCommander | AffectedZone$ All | AddKeyword$ Disguise:CardManaCost | Description$ Commanders you own have disguise. Their disguise cost is equal to their mana cost.
 Oracle:Commanders you own have disguise. Their disguise cost is equal to their mana cost.
