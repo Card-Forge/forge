@@ -15,6 +15,6 @@ ManaCost:1 G
 Types:Sorcery Adventure
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBEffect | SpellDescription$ Exile target creature card from your graveyard.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Targeted | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | SpellDescription$ Until the end of your next turn, you may cast that card. (Then exile this card. You may cast the creature later from exile.)
-SVar:STPlay:Mode$ Continuous | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | EffectZone$ Command | MayPlay$ True | Description$ You may cast that card.
+SVar:STPlay:Mode$ Continuous | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | MayPlay$ True | Description$ You may cast that card.
 DeckHas:Ability$Graveyard
 Oracle:Exile target creature card from your graveyard. Until the end of your next turn, you may cast that card. (Then exile this card. You may cast the creature later from exile.)

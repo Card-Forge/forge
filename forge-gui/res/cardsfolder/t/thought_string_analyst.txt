@@ -7,6 +7,6 @@ SVar:TrigDig:DB$ Dig | DigNum$ 1 | Defined$ Targeted | ValidTgts$ Opponent | Cha
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBEffect
 SVar:X:Remembered$CardManaCost
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ Permanent
-SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it.
+SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:At the beginning of your upkeep, exile the top card of target opponent's library face down. You lose life equal to its mana value. You may look at and play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell.

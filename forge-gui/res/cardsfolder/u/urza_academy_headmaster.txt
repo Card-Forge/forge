@@ -12,7 +12,7 @@ SVar:Token6:DB$ Token | TokenScript$ b_3_3_beast_deathtouch | SpellDescription$ 
 SVar:Dig7:DB$ Dig | DigNum$ 5 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | SpellDescription$ Reveal the top five cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:MustAttack8:DB$ DelayedTrigger | ValidTgts$ Opponent | Mode$ Phase | Phase$ Upkeep-> | DelayedTriggerDefinedPlayer$ Targeted | RememberObjects$ Targeted | Execute$ TrigEffect | Static$ True | SpellDescription$ During target opponent's next turn, creatures that player controls attack NICKNAME if able.
 SVar:TrigEffect:DB$ Effect | RememberObjects$ DelayTriggerRemembered | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
-SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ EffectSource | Description$ During target player's next turn, creatures that player controls attack EFFECTSOURCE if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ EffectSource | Description$ During target player's next turn, creatures that player controls attack EFFECTSOURCE if able.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PutCounter9:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ X9 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | StackDescription$ SpellDescription | SpellDescription$ Put a loyalty counter on NICKNAME for each creature target opponent controls.
 SVar:X9:TargetedPlayer$CreaturesInPlay
@@ -42,7 +42,7 @@ SVar:Destroy4M:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DBGainLife4M:DB$ GainLife | Defined$ You | LifeAmount$ X4M
 SVar:X4M:Targeted$CardToughness
 SVar:Effect5M:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (5M) | StaticAbilities$ STPump5M | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +1/+1."
-SVar:STPump5M:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
+SVar:STPump5M:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
 SVar:ChangeZone6M:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
 SVar:Draw7M:DB$ Draw | NumCards$ 3 | SubAbility$ DBChangeZone7M | SpellDescription$ Draw three cards, then put a card from your hand on top of your library.
 SVar:DBChangeZone7M:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Select a card in your hand to put on top of your library
@@ -83,9 +83,9 @@ SVar:Damage6U:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Selec
 SVar:DmgAll6U:DB$ DamageAll | NumDmg$ 10 | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve6U
 SVar:DBDamageResolve6U:DB$ DamageResolve
 SVar:Effect7U:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (7U) | StaticAbilities$ ST7U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."
-SVar:ST7U:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Double Strike & Trample & Hexproof & Haste | Description$ Creatures you control have double strike, trample, hexproof and haste.
+SVar:ST7U:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Double Strike & Trample & Hexproof & Haste | Description$ Creatures you control have double strike, trample, hexproof and haste.
 SVar:Effect8U:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (8U) | StaticAbilities$ STIndestructible8U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Artifacts, creatures, enchantments, and lands you control have indestructible."
-SVar:STIndestructible8U:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl,Land.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Indestructible | Description$ Artifacts, creatures, enchantments, and lands you control are indestructible.
+SVar:STIndestructible8U:Mode$ Continuous | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl,Land.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Indestructible | Description$ Artifacts, creatures, enchantments, and lands you control are indestructible.
 SVar:Token9U:DB$ Token | TokenAmount$ Lands | TokenScript$ g_6_6_wurm | SpellDescription$ Create a 6/6 green Wurm creature token for each land you control.
 SVar:Lands:Count$Valid Land.YouCtrl
 SVar:Shuffle10U:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw10U | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand and graveyard into their library. You draw seven cards.

@@ -19,7 +19,7 @@ Types:Legendary Planeswalker Urza
 Loyalty:7
 S:Mode$ NumLoyaltyAct | ValidCard$ Card.Self | Twice$ True | Description$ You may activate the loyalty abilities of CARDNAME twice each turn rather than only once. (You may activate the same ability twice.)
 A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | StaticAbilities$ ReduceCost | SubAbility$ DBGainLife | SpellDescription$ Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast.
-SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Artifact,Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast.
+SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Artifact,Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
