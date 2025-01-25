@@ -5,7 +5,7 @@ T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigRepeatDefender:DB$ RepeatEach | RepeatPlayers$ TriggeredAttackedTarget | RepeatSubAbility$ DBDefLeftEffect | SubAbility$ DBAtkLeftRight
 SVar:DBDefLeftEffect:DB$ Effect | EffectOwner$ Remembered | Name$ Raging River Left | StaticAbilities$ DBCantBlock | ImprintOnHost$ True | Duration$ UntilEndOfCombat | SubAbility$ DBDefRightEffect
 SVar:DBDefRightEffect:DB$ Effect | EffectOwner$ Remembered | Name$ Raging River Right | StaticAbilities$ DBCantBlock | ImprintOnHost$ True | Duration$ UntilEndOfCombat | SubAbility$ DBDefLeftRight
-SVar:DBCantBlock:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.withoutFlying+IsNotImprinted+YouCtrl | EffectZone$ Command
+SVar:DBCantBlock:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.withoutFlying+IsNotImprinted+YouCtrl
 SVar:DBDefLeftRight:DB$ TwoPiles | Defined$ Remembered | Separator$ Remembered | ValidCards$ Creature.withoutFlying+RememberedPlayerCtrl | Zone$ Battlefield | LeftRightPile$ True | ChosenPile$ DBDefLeftPile | UnchosenPile$ DBDefRightPile | AILogic$ Random | SubAbility$ DBClearImprinted
 SVar:DBDefLeftPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Left+IsImprinted | ImprintCards$ Remembered | Duration$ Permanent | SubAbility$ DBLeftPump
 SVar:DBDefRightPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Right+IsImprinted | ImprintCards$ Remembered | Duration$ Permanent | SubAbility$ DBRightPump

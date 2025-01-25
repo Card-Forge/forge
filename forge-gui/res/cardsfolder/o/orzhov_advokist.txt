@@ -7,5 +7,5 @@ SVar:TrigChoose:DB$ ChooseCard | Defined$ Player | Amount$ 1 | MinAmount$ 0 | Ch
 SVar:DBPutCounter:DB$ PutCounterAll | Placer$ Controller | ValidCards$ Creature.ChosenCard | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ ChosenCardController | StaticAbilities$ STCantAttack | Duration$ UntilYourNextTurn | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
-SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.RememberedPlayerCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Creatures that player controls can't attack you or planeswalkers you control until your next turn.
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature.RememberedPlayerCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Creatures that player controls can't attack you or planeswalkers you control until your next turn.
 Oracle:At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn.

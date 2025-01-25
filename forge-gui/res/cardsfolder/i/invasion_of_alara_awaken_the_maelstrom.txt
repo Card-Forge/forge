@@ -16,7 +16,7 @@ ALTERNATE
 Name:Awaken the Maelstrom
 ManaCost:no cost
 Types:Sorcery
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | SetColor$ All | Description$ CARDNAME is all colors.
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | SetColor$ All | Description$ CARDNAME is all colors.
 A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBChangeZone | TgtPrompt$ Select target player | SpellDescription$ Target player draws two cards.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | SubAbility$ DBCopy | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ You may put an artifact card from your hand onto the battlefield.
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Permanent.YouCtrl | ChoiceTitle$ Choose a permanent you control to copy | SubAbility$ DBCounter | SpellDescription$ Create a token that's a copy of a permanent you control.

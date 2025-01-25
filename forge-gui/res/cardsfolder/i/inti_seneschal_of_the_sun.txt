@@ -9,7 +9,7 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
 T:Mode$ DiscardedAll | ValidPlayer$ You | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever you discard one or more cards, exile the top card of your library. You may play that card until your next end step.
 SVar:TrigDig:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play those cards.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play those cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Discard|Counters
 DeckHints:Ability$Discard

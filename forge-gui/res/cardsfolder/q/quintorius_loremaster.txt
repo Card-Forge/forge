@@ -8,7 +8,7 @@ SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Va
 SVar:DBToken:DB$ Token | TokenScript$ rw_3_2_spirit
 A:AB$ Pump | Cost$ 1 R W T Sac<1/Spirit> | ValidTgts$ Card.ExiledWithSource | TgtZone$ Exile | TgtPrompt$ Choose target card exiled with this creature | SubAbility$ DBEffect | StackDescription$ {p:You} chooses {c:Targeted} exiled with NICKNAME. {p:You} may cast that card this turn without paying its mana cost. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead. | SpellDescription$ Choose target card exiled with NICKNAME. You may cast that card this turn without paying its mana cost. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ REQuintorius | StaticAbilities$ MayPlay | RememberObjects$ Targeted
-SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | Description$ Until end of turn, you may cast this card without paying its mana cost.
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | Description$ Until end of turn, you may cast this card without paying its mana cost.
 SVar:REQuintorius:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveLibrary
 SVar:MoveLibrary:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Library | LibraryPosition$ -1
 DeckHas:Ability$Token|Graveyard|Sacrifice & Type$Spirit

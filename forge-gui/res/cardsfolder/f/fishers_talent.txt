@@ -8,8 +8,8 @@ SVar:DBDraw:DB$ Draw | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Class:2:G U:AddReplacementEffect$ SharkCatch
 SVar:SharkCatch:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ValidToken$ Fish | ReplaceWith$ TokenReplace1 | Description$ If you would create a Fish token, create a 3/3 blue Shark creature token instead.
-SVar:TokenReplace1:DB$ ReplaceToken | Type$ ReplaceToken | ValidCard$ Fish | TokenScript$ u_3_3_shark
+SVar:TokenReplace1:DB$ ReplaceToken | Type$ ReplaceToken | TokenScript$ u_3_3_shark
 K:Class:3:2 G U:AddReplacementEffect$ OctopusCatch
 SVar:OctopusCatch:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ValidToken$ Shark | ReplaceWith$ TokenReplace2 | Description$ If you would create a Shark token, create an 8/8 blue Octopus creature token instead.
-SVar:TokenReplace2:DB$ ReplaceToken | Type$ ReplaceToken | ValidCard$ Shark | TokenScript$ u_8_8_octopus
+SVar:TokenReplace2:DB$ ReplaceToken | Type$ ReplaceToken | TokenScript$ u_8_8_octopus
 Oracle:(Gain the next level as a sorcery to add its ability.)\nAt the beginning of your upkeep, look at the top card of your library. You may reveal it if it's a land card. Create a 1/1 blue Fish creature token if you revealed it this way. Then draw a card.\n{G}{U}: Level 2\nIf you would create a Fish token, create a 3/3 blue Shark creature token instead.\n{2}{G}{U}: Level 3\nIf you would create a Shark token, create an 8/8 blue Octopus creature token instead.

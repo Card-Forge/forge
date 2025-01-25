@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 PT:2/2
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters, choose a creature type.
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ ChosenType | Description$ CARDNAME is the chosen type in addition to its other types.
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ ChosenType | Description$ CARDNAME is the chosen type in addition to its other types.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, other creatures you control of the chosen type and creature cards of that type in your hand perpetually get +1/+1.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl+Other+ChosenType | PumpZone$ Battlefield,Hand | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
 Oracle:As Coalition Construct enters, choose a creature type.\nCoalition Construct is the chosen type in addition to its other types.\nWhen Coalition Construct enters, other creatures you control of the chosen type and creature cards of that type in your hand perpetually get +1/+1.

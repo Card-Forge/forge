@@ -18,6 +18,6 @@ Types:Legendary Artifact Vehicle
 PT:*/4
 K:Flying
 K:Crew:1
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of artifacts you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 Oracle:Flying\nAetherwing, Golden-Scale Flagship's power is equal to the number of artifacts you control.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

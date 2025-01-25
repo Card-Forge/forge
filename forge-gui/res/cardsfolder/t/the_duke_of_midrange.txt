@@ -5,7 +5,7 @@ PT:*/1+*
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose one of Thoughtseize, Lightning Bolt, or Abrupt Decay. Cast a copy of the chosen card without paying its mana cost.
 SVar:TrigChoose:DB$ NameCard | Defined$ You | ChooseFromList$ Thoughtseize,Lightning Bolt,Abrupt Decay | SubAbility$ DBCast
 SVar:DBCast:DB$ Play | CopyFromChosenName$ True | WithoutManaCost$ True | StackDescription$ None
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ CARDNAME's power is equal to the number of card types among all cards in all graveyards, and its toughness is equal to that number plus 1.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ CARDNAME's power is equal to the number of card types among all cards in all graveyards, and its toughness is equal to that number plus 1.
 SVar:X:Count$ValidGraveyard Card$CardTypes
 SVar:Y:SVar$X/Plus.1
 SVar:PlayMain1:TRUE

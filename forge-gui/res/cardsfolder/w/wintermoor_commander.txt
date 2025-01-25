@@ -3,7 +3,7 @@ ManaCost:W B
 Types:Creature Human Knight
 PT:2/*
 K:Deathtouch
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Knights you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Knights you control.
 SVar:X:Count$Valid Knight.YouCtrl
 SVar:BuffedBy:Knight
 SVar:NoZeroToughnessAI:True

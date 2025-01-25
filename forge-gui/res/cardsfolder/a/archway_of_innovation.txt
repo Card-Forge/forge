@@ -5,7 +5,7 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ 
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Island.YouCtrl | ConditionCompare$ EQ0
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Effect | Cost$ U T | StaticAbilities$ GrantImprovise | Triggers$ ExileEffect | SpellDescription$ The next spell you cast this turn has improvise. (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)
-SVar:GrantImprovise:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Stack | AddKeyword$ Improvise | Description$ The next spell you cast this turn has improvise. (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)
+SVar:GrantImprovise:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Stack | AddKeyword$ Improvise | Description$ The next spell you cast this turn has improvise. (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)
 SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.YouCtrl | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 Oracle:Archway of Innovation enters tapped unless you control an Island.\n{T}: Add {U}.\n{U}, {T}: The next spell you cast this turn has improvise. (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)

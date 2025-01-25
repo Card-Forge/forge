@@ -4,7 +4,7 @@ Types:Creature Spirit
 PT:*/*+1
 K:AlternateAdditionalCost:Discard<1/Card>:Sac<1/Permanent>
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ Fathomless descent — CARDNAME's power is equal to the number of permanent cards in your graveyard and its toughness is equal to that number plus 1.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ Fathomless descent — CARDNAME's power is equal to the number of permanent cards in your graveyard and its toughness is equal to that number plus 1.
 SVar:X:Count$ValidGraveyard Permanent.YouOwn
 SVar:Y:Count$ValidGraveyard Permanent.YouOwn/Plus.1
 DeckHas:Ability$Sacrifice|Discard

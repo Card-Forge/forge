@@ -1,0 +1,9 @@
+Name:Haunt the Network
+ManaCost:3 U B
+Types:Sorcery
+A:SP$ Token | TokenScript$ c_1_1_a_thopter_flying | TokenAmount$ 2 | SubAbility$ DBLoseLife | SpellDescription$ Choose target opponent. Create two 1/1 colorless Thopter artifact creature tokens with flying. Then the chosen player loses X life and you gain X life, where X is the number of artifacts you control.
+SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Artifact.YouCtrl
+DeckHas:Ability$Token|LifeGain
+Oracle:Choose target opponent. Create two 1/1 colorless Thopter artifact creature tokens with flying. Then the chosen player loses X life and you gain X life, where X is the number of artifacts you control.

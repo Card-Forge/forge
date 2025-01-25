@@ -3,6 +3,6 @@ ManaCost:no cost
 Colors:blue
 Types:Legendary Creature Ox
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of lands you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 Oracle:This creature's power and toughness are each equal to the number of lands you control.

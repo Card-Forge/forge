@@ -3,6 +3,6 @@ ManaCost:1 R G
 Types:Creature Elemental
 PT:*/3
 K:Trample
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of nonbasic lands your opponents control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of nonbasic lands your opponents control.
 SVar:X:Count$Valid Land.nonBasic+OppCtrl
 Oracle:Trample\nWilderness Elemental's power is equal to the number of nonbasic lands your opponents control.
