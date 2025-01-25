@@ -8,7 +8,7 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescript
 SVar:TrigRemove:DB$ RemoveCounter | ValidTgts$ Permanent,Opponent | TargetMin$ 0 | TargetMax$ 1 | Defined$ Targeted | CounterType$ All | TgtPrompt$ Select up to one target permanent or opponent | CounterNum$ All | RememberAmount$ True | SubAbility$ DBEffect
 SVar:X:Count$RememberedNumber
 SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | SetChosenNumber$ X | ConditionCheckSVar$ X | SubAbility$ DBCleanup
-SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | Activator$ You | Amount$ Count$ChosenNumber | Description$ The next spell you cast this turn costs {1} less to cast for each counter removed this way.
+SVar:ReduceCost:Mode$ ReduceCost | Type$ Spell | Activator$ You | Amount$ Count$ChosenNumber | Description$ The next spell you cast this turn costs {1} less to cast for each counter removed this way.
 SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
