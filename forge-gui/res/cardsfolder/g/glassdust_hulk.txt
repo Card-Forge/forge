@@ -4,7 +4,7 @@ Types:Artifact Creature Golem
 PT:3/4
 K:Cycling:WU
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another artifact you control enters, CARDNAME gets +1/+1 until end of turn and can't be blocked this turn.
-SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBUnblockable
+SVar:TrigPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBUnblockable
 SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 SVar:BuffedBy:Artifact
