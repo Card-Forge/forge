@@ -4,5 +4,5 @@ Types:Creature Vampire
 PT:2/1
 K:Flying
 R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ValidToken$ Clue | ReplaceWith$ TokenReplace | Description$ If an opponent would create a Clue, they create a Blood instead.
-SVar:TokenReplace:DB$ ReplaceToken | Type$ ReplaceToken | ValidCard$ Clue | TokenScript$ c_a_blood_draw
+SVar:TokenReplace:DB$ ReplaceToken | Type$ ReplaceToken | TokenScript$ c_a_blood_draw
 Oracle:Flying\nIf an opponent would create a Clue, they create a Blood instead. (It's an artifact with {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.)
