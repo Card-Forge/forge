@@ -1,0 +1,9 @@
+Name:Spotcycle Scouter
+ManaCost:1 W
+Types:Artifact Vehicle
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When this Vehicle enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+K:Crew:1
+DeckHas:Ability$Counters
+Oracle:When this Vehicle enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

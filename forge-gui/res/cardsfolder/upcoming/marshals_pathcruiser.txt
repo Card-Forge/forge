@@ -1,0 +1,10 @@
+Name:Marshals' Pathcruiser
+ManaCost:3
+Types:Artifact Vehicle
+PT:6/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this Vehicle enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic
+A:AB$ Animate | Cost$ W U B R G | Defined$ Self | Types$ Artifact,Creature | Exhaust$ True | Duration$ Permanent | SubAbility$ DBPutCounter | SpellDescription$ This Vehicle becomes an artifact creature. Put two +1/+1 counters on it. (Activate each exhaust ability only once.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+K:Crew:5
+Oracle:When this Vehicle enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nExhaust — {W}{U}{B}{R}{G}: This Vehicle becomes an artifact creature. Put two +1/+1 counters on it. (Activate each exhaust ability only once.)\nCrew 5
