@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Ooze
 PT:1+*/1+*
 K:Cumulative upkeep:2
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to 1 plus twice the number of age counters on it.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to 1 plus twice the number of age counters on it.
 SVar:Y:Number$1/Plus.X
 SVar:X:Count$CardCounters.AGE/Times.2
 Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay {2} for each age counter on it.)\nMwonvuli Ooze's power and toughness are each equal to 1 plus twice the number of age counters on it.

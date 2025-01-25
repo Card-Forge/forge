@@ -2,7 +2,7 @@ Name:Sumala Rumblers
 ManaCost:2 GW GW
 Types:Creature Wurm
 PT:*/4
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 K:Myriad
 DeckHas:Ability$Token
