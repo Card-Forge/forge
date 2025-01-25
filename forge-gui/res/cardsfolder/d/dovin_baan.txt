@@ -6,5 +6,5 @@ A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -3 | IsC
 A:AB$ GainLife | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Emblem — Dovin Baan | Image$ Emblem_dovin_baan | StaticAbilities$ STDovin | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Your opponents can't untap more than two permanents during their untap steps."
-SVar:STDovin:Mode$ Continuous | EffectZone$ Command | Affected$ Player.Opponent | AddKeyword$ UntapAdjust:Permanent:2 | Description$ Your opponents can't untap more than two permanents during their untap steps.
+SVar:STDovin:Mode$ Continuous | Affected$ Player.Opponent | AddKeyword$ UntapAdjust:Permanent:2 | Description$ Your opponents can't untap more than two permanents during their untap steps.
 Oracle:[+1]: Until your next turn, up to one target creature gets -3/-0 and its activated abilities can't be activated.\n[-1]: You gain 2 life and draw a card.\n[-7]: You get an emblem with "Your opponents can't untap more than two permanents during their untap steps."
