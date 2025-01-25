@@ -2,5 +2,5 @@ Name:Parallel Lives
 ManaCost:3 G
 Types:Enchantment
 R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | EffectOnly$ True | Description$ If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
-SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount | ValidCard$ Card.YouCtrl
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount
 Oracle:If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
