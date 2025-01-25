@@ -5,7 +5,7 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a token you control enters, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gets +X/+X until end of turn, where X is CARDNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | NumDef$ X
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
 DeckHints:Ability$Token

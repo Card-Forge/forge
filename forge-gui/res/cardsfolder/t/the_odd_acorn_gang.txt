@@ -6,7 +6,7 @@ K:Menace
 K:Trample
 K:Reach
 S:Mode$ Continuous | Affected$ Squirrel.YouCtrl | AddAbility$ Pump | Description$ Squirrels you control have "{T}: Target Squirrel gets +2/+2 and gains trample until end of turn. Activate only as a sorcery."
-SVar:Pump:AB$ Pump | Cost$ T | ValidTgts$ Squirrel | TgtPrompt$ Select target Squirrel | NumAtt$ 2 | NumDef$ 2 | KW$ Trample | SorcerySpeed$ True | SpellDescription$ Target Squirrel gets +2/+2 and gains trample until end of turn. Activate only as a sorcery.
+SVar:Pump:AB$ Pump | Cost$ T | ValidTgts$ Squirrel | TgtPrompt$ Select target Squirrel | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SorcerySpeed$ True | SpellDescription$ Target Squirrel gets +2/+2 and gains trample until end of turn. Activate only as a sorcery.
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Squirrel.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more Squirrels you control deal combat damage to a player, draw a card.
 SVar:TrigDraw:DB$ Draw
 SVar:PlayMain1:TRUE

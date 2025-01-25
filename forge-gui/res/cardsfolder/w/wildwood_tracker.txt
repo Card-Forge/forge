@@ -4,6 +4,6 @@ Types:Creature Elf Warrior
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | IsPresent$ Creature.nonHuman+Other+YouCtrl | TriggerDescription$ Whenever CARDNAME attacks or blocks, if you control another non-Human creature, CARDNAME gets +1/+1 until end of turn.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | IsPresent$ Creature.nonHuman+Other+YouCtrl | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, if you control another non-Human creature, CARDNAME gets +1/+1 until end of turn.
-SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | Defined$ Self
+SVar:TrigPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
 SVar:BuffedBy:Creature.nonHuman
 Oracle:Whenever Wildwood Tracker attacks or blocks, if you control another non-Human creature, Wildwood Tracker gets +1/+1 until end of turn.

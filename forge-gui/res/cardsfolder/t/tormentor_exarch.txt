@@ -4,7 +4,7 @@ Types:Creature Phyrexian Cleric
 PT:2/2
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters, ABILITY
 SVar:TrigChoose:DB$ Charm | Choices$ DBPump,DBCurse
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ 2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 SVar:DBCurse:DB$ Pump | ValidTgts$ Creature | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -0/-2 until end of turn.
 SVar:PlayMain1:TRUE
 Oracle:When Tormentor Exarch enters, choose one —\n• Target creature gets +2/+0 until end of turn.\n• Target creature gets -0/-2 until end of turn.

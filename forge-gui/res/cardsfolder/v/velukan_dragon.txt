@@ -6,6 +6,6 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRoll | TriggerDescription$ Whenever CARDNAME attacks or blocks, roll a six-sided die. CARDNAME gets +X/+0 until end of turn, where X is the result minus 1.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigRoll | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, roll a six-sided die. CARDNAME gets +X/+0 until end of turn, where X is the result minus 1.
 SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ X
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +X
 SVar:X:SVar$Result/Minus.1
 Oracle:Flying\nWhenever Velukan Dragon attacks or blocks, roll a six-sided die. Velukan Dragon gets +X/+0 until end of turn, where X is the result minus 1.
