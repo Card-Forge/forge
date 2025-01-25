@@ -2,7 +2,7 @@ Name:Cruel Somnophage
 ManaCost:1 B
 Types:Creature Nightmare
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in all graveyards.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in all graveyards.
 SVar:X:Count$TypeInAllYards.Creature
 DeckHints:Ability$Mill|Discard|Graveyard
 DeckHas:Ability$Mill

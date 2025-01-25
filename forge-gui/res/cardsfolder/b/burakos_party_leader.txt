@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Legendary Creature Orc
 PT:2/4
 K:Choose a Background
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ Cleric & Rogue & Warrior & Wizard | Description$ CARDNAME is also a Cleric, Rogue, Warrior, and Wizard.
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ Cleric & Rogue & Warrior & Wizard | Description$ CARDNAME is also a Cleric, Rogue, Warrior, and Wizard.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever NICKNAME attacks, defending player loses X life and you create X Treasure tokens, where X is the number of creatures in your party.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ X | SubAbility$ DBTreasureTokens
 SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You

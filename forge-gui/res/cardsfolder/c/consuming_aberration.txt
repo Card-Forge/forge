@@ -2,7 +2,7 @@ Name:Consuming Aberration
 ManaCost:3 U B
 Types:Creature Horror
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ ConsumingPT | SetToughness$ ConsumingPT | Description$ CARDNAME's power and toughness are each equal to the number of cards in your opponents' graveyards.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ ConsumingPT | SetToughness$ ConsumingPT | Description$ CARDNAME's power and toughness are each equal to the number of cards in your opponents' graveyards.
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ Grind | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, each opponent reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.
 SVar:Grind:DB$ DigUntil | Defined$ Player.Opponent | Amount$ 1 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
 SVar:ConsumingPT:Count$ValidGraveyard Card.OppOwn

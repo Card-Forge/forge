@@ -5,6 +5,6 @@ PT:1/2
 K:Flying
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters, choose an opponent.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to 1 plus the number of green creature cards in the chosen player's graveyard.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to 1 plus the number of green creature cards in the chosen player's graveyard.
 SVar:X:Count$ValidGraveyard Creature.Green+ChosenCtrl/Plus.1
 Oracle:Flying\nAs Haunting Apparition enters, choose an opponent.\nHaunting Apparition's power is equal to 1 plus the number of green creature cards in the chosen player's graveyard.
