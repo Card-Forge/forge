@@ -19,6 +19,6 @@ ManaCost:no cost
 Colors:red
 Types:Artifact Creature Dinosaur
 PT:*/4
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the total power of the exiled cards used to craft it.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the total power of the exiled cards used to craft it.
 SVar:X:ExiledWith$CardPower
 Oracle:Mastercraft Raptor's power is equal to the total power of the exiled cards used to craft it.
