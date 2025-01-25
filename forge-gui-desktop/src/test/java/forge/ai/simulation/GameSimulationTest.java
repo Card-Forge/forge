@@ -2550,6 +2550,41 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(0, game.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
     }
 
+    @Test
+    public void testControlLayerDependency() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player opp = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card bear = addCard("Bear Cub", p);
+        addCards("Island", 6, p);
+        addCards("Island", 5, opp);
+        addCard("Vedalken Orrery", opp);
+        Card control = addCardToZone("Mind Control", opp, ZoneType.Hand);
+
+        GameSimulator sim = createSimulator(game, opp);
+        game = sim.getSimulatedGameState();
+
+        SpellAbility controlSA = control.getFirstSpellAbility();
+        controlSA.getTargets().add(bear);
+        sim.simulateSpellAbility(controlSA);
+
+        p = game.getPlayers().get(0);
+        Card confiscate = addCardToZone("Confiscate", p, ZoneType.Hand);
+        control = findCardWithName(game, "Mind Control");
+        SpellAbility confiscateSA = confiscate.getFirstSpellAbility();
+        confiscateSA.getTargets().add(control);
+
+        sim = createSimulator(game, p);
+        game = sim.getSimulatedGameState();
+        bear = findCardWithName(game, "Bear Cub");
+
+        AssertJUnit.assertTrue(bear.getController().equals(opp));
+        sim.simulateSpellAbility(confiscateSA);
+        AssertJUnit.assertTrue(bear.getController().equals(p));
+    }
+
     /**
      * Test for "Volo's Journal" usage by the AI. This test checks if the AI correctly
      * adds the correct types to the "Volo's Journal" when casting the spells in order
