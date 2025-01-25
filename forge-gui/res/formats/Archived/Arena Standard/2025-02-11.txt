@@ -1,6 +1,7 @@
 [format]
-Name:Standard
-Order:101
+Name:Arena Standard (DFT)
+Type:Archived
 Subtype:Standard
-Type:Sanctioned
+Effective:2025-02-11
 Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT
+Banned:Leyline of Resonance
