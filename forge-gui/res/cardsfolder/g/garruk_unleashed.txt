@@ -2,7 +2,7 @@ Name:Garruk, Unleashed
 ManaCost:2 G G
 Types:Legendary Planeswalker Garruk
 Loyalty:4
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | KW$ Trample | SpellDescription$ Up to one target creature gets +3/+3 and gains trample until end of turn.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Up to one target creature gets +3/+3 and gains trample until end of turn.
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ Create a 3/3 green Beast creature token. Then if an opponent controls more creatures than you, put a loyalty counter on CARDNAME.
 SVar:DBPutCounter:DB$ PutCounter | ConditionPresent$ Creature.OppCtrl | ConditionCompare$ GTX | Defined$ Self | CounterNum$ 1 | CounterType$ LOYALTY | StackDescription$ None
 SVar:X:Count$Valid Creature.YouCtrl

@@ -7,5 +7,5 @@ SVar:TrigCharm:DB$ Charm | Choices$ DBMustBeBlocked,DBEffect | AdditionalDescrip
 SVar:DBMustBeBlocked:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME must be blocked if able. | SubAbility$ DBPump | SpellDescription$ NICKNAME must be blocked this turn if able.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MinMaxBlocked | ExileOnMoved$ Battlefield | SubAbility$ DBPump | SpellDescription$ NICKNAME can't be blocked by more than one creature each combat this turn.
 SVar:MinMaxBlocked:Mode$ MinMaxBlocker | ValidCard$ Card.EffectSource | Max$ 1 | Description$ NICKNAME can't be blocked by more than one creature each combat this turn.
-SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
 Oracle:Whenever you scry, choose one and Glorfindel, Dauntless Rescuer gets +1/+1 until end of turn.\n• Glorfindel must be blocked this turn if able.\n• Glorfindel can't be blocked by more than one creature each combat this turn.

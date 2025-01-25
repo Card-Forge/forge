@@ -2,7 +2,7 @@ Name:Giant Regrowth
 ManaCost:1 G G
 Types:Instant
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouOwn | SubAbility$ DBEffect | RememberChanged$ True | SpellDescription$ Return target card from your graveyard to your hand.
-SVar:DBEffect:DB$ Pump | ConditionDefined$ Targeted | ConditionPresent$ Creature | PumpZone$ Hand | Defined$ Remembered | NumAtt$ 3 | NumDef$ 3 | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If it's a creature card, it perpetually gets +3/+3.
+SVar:DBEffect:DB$ Pump | ConditionDefined$ Targeted | ConditionPresent$ Creature | PumpZone$ Hand | Defined$ Remembered | NumAtt$ +3 | NumDef$ +3 | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If it's a creature card, it perpetually gets +3/+3.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard
 Oracle:Return target card from your graveyard to your hand. If it's a creature card, it perpetually gets +3/+3.
