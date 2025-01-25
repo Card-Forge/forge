@@ -1,0 +1,9 @@
+Name:Marauding Mako
+ManaCost:R
+Types:Creature Shark Pirate
+PT:1/1
+T:Mode$ DiscardedAll | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you discard one or more cards, put that many +1/+1 counters on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$Amount
+K:Cycling:2
+Oracle:Whenever you discard one or more cards, put that many +1/+1 counters on this creature.\nCycling {2} ({2}, Discard this card: Draw a card.)

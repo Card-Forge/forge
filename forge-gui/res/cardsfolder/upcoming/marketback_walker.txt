@@ -1,0 +1,12 @@
+Name:Marketback Walker
+ManaCost:X X
+Types:Artifact Creature Construct
+PT:0/0
+K:etbCounter:P1P1:X
+A:AB$ PutCounter | Cost$ 4 | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on this creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature dies, draw a card for each +1/+1 counter on it.
+SVar:TrigDraw:DB$ Draw | NumCards$ Y
+SVar:X:Count$xPaid
+SVar:Y:TriggeredCard$CardCounters.P1P1
+DeckHas:Ability$Token
+Oracle:This creature enters with X +1/+1 counters on it.\n{4}: Put a +1/+1 counter on this creature.\nWhen this creature dies, draw a card for each +1/+1 counter on it.

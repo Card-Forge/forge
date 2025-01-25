@@ -1,0 +1,7 @@
+Name:March of the World Ooze
+ManaCost:3 G G G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | SetPower$ 6 | SetToughness$ 6 | AddType$ Ooze | Description$ Creatures you control have base power and toughness 6/6 and are Oozes in addition to their other creature types.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent.NonActive | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent casts a spell, if it's not their turn, you create a 3/3 green Elephant creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_3_3_elephant
+Oracle:Creatures you control have base power and toughness 6/6 and are Oozes in addition to their other creature types.\nWhenever an opponent casts a spell, if it's not their turn, you create a 3/3 green Elephant creature token.

@@ -1,0 +1,8 @@
+Name:Clamorous Ironclad
+ManaCost:3 R
+Types:Artifact Vehicle
+PT:6/3
+K:Menace
+K:Crew:3
+K:Cycling:R
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)\nCycling {R} ({R}, Discard this card: Draw a card.)

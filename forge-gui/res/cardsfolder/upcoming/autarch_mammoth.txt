@@ -1,0 +1,10 @@
+Name:Autarch Mammoth
+ManaCost:4 G G
+Types:Creature Elephant Mount
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature enters and whenever it attacks while saddled, create a 3/3 green Elephant creature token.
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever this creature enters and whenever it attacks while saddled, create a 3/3 green Elephant creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_3_3_elephant
+K:Saddle:5
+DeckHas:Ability$Token
+Oracle:Whenever this creature enters and whenever it attacks while saddled, create a 3/3 green Elephant creature token.\nSaddle 5 (Tap any number of other creatures you control with total power 5 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

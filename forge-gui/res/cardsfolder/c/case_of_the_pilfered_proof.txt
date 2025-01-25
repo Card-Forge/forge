@@ -7,7 +7,7 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Detective.YouCtrl | PresentCompare$ GE3 | IsPresent2$ Card.Self+IsUnsolved | Execute$ Solved | TriggerDescription$ To solve — You control three or more Detectives. (If unsolved, solve at the beginning of your end step.)
 SVar:Solved:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
 R:Event$ CreateToken | IsPresent$ Card.Self+IsSolved | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DBReplace | Description$ Solved — If one or more tokens would be created under your control, those tokens plus a Clue token are created instead. (It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | ValidCard$ Card.YouCtrl | TokenScript$ c_a_clue_draw
+SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | TokenScript$ c_a_clue_draw
 DeckHas:Ability$Counters|Token|Sacrifice & Type$Artifact|Clue
 DeckHints:Ability$Token
 DeckNeeds:Type$Detective

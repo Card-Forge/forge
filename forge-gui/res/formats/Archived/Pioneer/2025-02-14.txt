@@ -1,0 +1,7 @@
+[format]
+Name:Pioneer (DFT)
+Type:Archived
+Subtype:Pioneer
+Effective:2025-02-14
+Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ, OGW, SOI, W16, EMN, KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD, THB, IKO, M21, ZNR, KHM, STX, AFR, MID, Q06, VOW, DBL, NEO, SNC, DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT
+Banned:Amalia Benavides Aguirre; Balustrade Spy; Bloodstained Mire; Expressive Iteration; Felidar Guardian; Field of the Dead; Flooded Strand; Geological Appraiser; Inverter of Truth; Jegantha, the Wellspring; Karn, the Great Creator; Kethis, the Hidden Hand; Leyline of Abundance; Lurrus of the Dream-Den; Nexus of Fate; Oko, Thief of Crowns; Once Upon a Time; Polluted Delta; Sorin, Imperious Bloodlord; Teferi, Time Raveler; Undercity Informer; Underworld Breach; Uro, Titan of Nature's Wrath; Veil of Summer; Walking Ballista; Wilderness Reclamation; Windswept Heath; Winota, Joiner of Forces; Wooded Foothills

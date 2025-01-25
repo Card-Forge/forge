@@ -8,39 +8,88 @@ ScryfallCode=DFT
 [cards]
 1 U Air Response Unit @Brock Grossman
 3 R Basri, Tomorrow's Champion @Kai Carpenter
+4 C Brightfield Glider @Andreia Ugrai
+5 C Brightfield Mustang @Slawomir Maniak
 7 R Bulwark Ox @Brent Hollowell
+8 U Canyon Vaulter @David Astruga
+9 U Cloudspire Captain @Manny Edeko
+14 U Gloryheath Lynx @Deruchenko Alexander
+17 C Interface Ace @Wonchun Choi
 19 C Lightshield Parry @Leanna Crossan
+22 U Nesting Bot @Racrufi
+23 R Perilous Snare @Chris Seaman
+30 C Spotcycle Scouter @Josiah "Jo" Cameron
+33 U Tune Up @Chris Rallis
+34 U Unswerving Sloth @Daren Bader
 35 M Valor's Flagship @Stephan Martiniere
+36 R Voyager Glidecar @Eduardo Francisco
+38 U Aether Syphon @Martin de Diego Sádaba
 47 C Hulldrifter @Alexandre Honoré
 50 C Midnight Mangler @Villarrte
+51 R Mindspring Merfolk @Andreia Ugrai
+52 M Mu Yanling, Wind Rider @Justyna Dura
+54 R Possession Engine @Leroy Steinmann
 56 R Repurposing Bay @William Tempest
+58 U Roadside Blowout @Michele Giorgi
+67 U Stock Up @Izzy
+68 R Thopter Fabricator @Racrufi
 73 R Vnwxt, Verbose Host @Izzy
+76 U Back on Track @Raoul Vitale
 77 R Bloodghast @Francisco Badilla
+78 U Carrion Cruiser @Mathias Kollros
 80 R Cryptcaller Chariot @Aaron Miller
+81 R Cursecloth Wrappings @Dominik Mayer
+83 R Demonic Junker @Stephan Martiniere
+91 U Hour of Victory @Aaron Miller
 94 M The Last Ride @Michele Giorgi
+97 U Momentum Breaker @Dmitry Burmak
 100 R Quag Feast @Loïc Canavaggia
 107 C Streaking Oilgorger @Campbell White
+109 U Wickerfolk Indomitable @Sergio Cosmai
 113 R Boommobile @Alexandr Leskinen
 116 M Chandra, Spark Hunter @Devin Elle Kurtz
+117 C Clamorous Ironclad @Svetlin Velinov
+118 R Count on Luck @Michal Ivan
 120 R Daretti, Rocketeer Engineer @Borja Pindado
 121 R Draconautics Engineer @Artur Nakhodkin
+124 C Endrider Catalyzer @Karl Kopinski
+127 R Full Throttle @Benjamin Ee
+130 C Gilded Ghoda @Alexandre Honoré
+131 C Goblin Surveyor @Pete Venters
+132 U Greasewrench Goblin @Alexandre Honoré
 133 M Hazoret, Godseeker @Chris Rallis
 138 U Marauding Mako @Alix Branwyn
+140 U Pacesetter Paragon @Wonchun Choi
+141 C Pedal to the Metal @Anthony Devine
 142 C Prowcatcher Specialist @Konstantin Porubov
 151 R Agonasaur Rex @Lucas Graciano
+153 U Autarch Mammoth @Leonardo Santanna
+154 C Beastrider Vanguard @Andrey Kuzinskiy
+155 C Bestow Greatness @Jeff Carpenter
+157 U Defend the Rider @Raph Lomotan
+158 R District Mascot @Liiga Smilshkalne
 160 U Earthrumbler @Jean Pierre Targete
 161 U Elvish Refueler @Carly Milligan
+169 M March of the World Ooze @Helge C. Balzer
+171 U Molt Tender @Filip Burburan
 183 M Thunderous Velocipede @Adrián Rodríguez Pérez
+184 C Veloheart Bike @Anthony Devine
 185 C Venomsac Lagac @Andrey Kuzinskiy
 187 R Aatchik, Emerald Radian @Loïc Canavaggia
 188 U Apocalypse Runner @Aaron J. Riley
+189 U Boom Scholar @Brian Valeza
 190 U Boosted Sloop @José Parodi
 191 M Brightglass Gearhulk @José Parodi
 194 R Captain Howler, Sea Scourge @Mirko Failoni
 195 R Caradora, Heart of Alacria @Mirko Failoni
+196 U Cloudspire Coordinator @Eduardo Francisco
 197 U Cloudspire Skycycle @Hardy Fowler
+202 R Explosive Getaway @Caio Monteiro
 203 R Far Fortune, End Boss @Javier Charro
+204 R Fearless Swashbuckler @Konstantin Porubov
 206 U Guidelight Pathmaker @Stephan Martiniere
+207 U Haunt the Network @Jeff Carpenter
+209 M Ketramose, the New Dawn @Maaz Ali Khan
 210 R Kolodin, Triumph Caster @Michal Ivan
 211 U Lagorin, Soul of Alacria @Mirko Failoni
 212 M Loot, the Pathfinder @Ernanda Souza
@@ -57,7 +106,10 @@ ScryfallCode=DFT
 229 R Zahur, Glory's Past @Leroy Steinmann
 231 M The Aetherspark @Donato Giancola
 234 R Lifecraft Engine @Mirko Failoni
+235 R Marketback Walker @Svetlin Velinov
+236 U Marshals' Pathcruiser @Javier Charro
 244 C Starting Column @Jakub Kasper
+247 C Wreck Remover @Villarrte
 248 U Amonkhet Raceway @Brian Valeza
 249 C Avishkar Raceway @Julian Kok Joon Wen
 250 R Bleachbone Verge @Mark Tedin
@@ -103,14 +155,21 @@ ScryfallCode=DFT
 290 L Forest @Yeong-Hao Han
 291 L Forest @Leon Tukker
 292 U Air Response Unit @SchmandrewART
+297 C Spotcycle Scouter @Neo.G
 298 M Valor's Flagship @William Tempest
+299 R Voyager Glidecar @Andrew Griffith
 300 C Hulldrifter @Juan Marquez
 301 C Midnight Mangler @Boneface
+302 R Possession Engine @Douglas P. Lobo
+304 R Thopter Fabricator @William Tempest
+305 U Carrion Cruiser @Ian Jepson
 306 R Cryptcaller Chariot @Oliver Barrett
 308 M The Last Ride @Death Burger
 310 R Boommobile @Ian Jepson
+312 C Clamorous Ironclad @Cosmin Podar
 315 U Earthrumbler @SchmandrewART
 317 M Thunderous Velocipede @Eduardo Francisco
+318 C Veloheart Bike @Juan Marquez
 319 U Apocalypse Runner @Arik Roper
 320 U Boosted Sloop @Gabriel Rubio
 321 U Cloudspire Skycycle @Yuko Shimizu
@@ -118,12 +177,17 @@ ScryfallCode=DFT
 326 U Rangers' Aetherhive @Francisco Badilla
 327 U Rocketeer Boostbuggy @Adam Volker
 329 R Lifecraft Engine @Eduardo Francisco
+330 U Marshals' Pathcruiser @Michal Ivan
 333 R Bulwark Ox @Jon Vermilyea
+335 R Mindspring Merfolk @CatDirty
 337 R Bloodghast @Wojtek Łebski
 341 R Draconautics Engineer @Ryan Roadkill
 343 R Agonasaur Rex @Jon Vermilyea
+344 R District Mascot @Ryan Roadkill
+346 R Fearless Swashbuckler @CatDirty
 347 M Hazoret, Godseeker @Massiveface
 348 M Brightglass Gearhulk @Jorge Gutierrez Garcia
+350 M Ketramose, the New Dawn @Florian Bertmer
 351 M Oildeep Gearhulk @Chun Lo
 352 M Pyrewood Gearhulk @William Tempest
 354 M Sab-Sunen, Luxa Embodied @Benjamin Ee
@@ -148,12 +212,25 @@ ScryfallCode=DFT
 375 R Willowrush Verge @Carl Critchlow
 376 M The Aetherspark @Dominik Mayer
 380 R Repurposing Bay @William Tempest
+383 R Cursecloth Wrappings @Dominik Mayer
 384 R Quag Feast @Loïc Canavaggia
+385 R Count on Luck @Michal Ivan
+386 R Full Throttle @Benjamin Ee
+390 R Explosive Getaway @Caio Monteiro
 391 M Loot, the Pathfinder @Ernanda Souza
+393 R Marketback Walker @Svetlin Velinov
+395 R Count on Luck @Michal Ivan
 396 R Muraganda Raceway @Brian Valeza
+399 M Mu Yanling, Wind Rider @D-suzuki
+400 M Cursecloth Wrappings @BARON UEDA
 401 M Chandra, Spark Hunter @jbstyle.
+402 M March of the World Ooze @Raimaru
+403 R Explosive Getaway @TSCR
 404 M Loot, the Pathfinder @Tetsu Kurosawa
+409 M Mu Yanling, Wind Rider @D-suzuki
+410 M Cursecloth Wrappings @BARON UEDA
 411 M Chandra, Spark Hunter @jbstyle.
+412 M March of the World Ooze @Raimaru
 414 M Loot, the Pathfinder @Tetsu Kurosawa
 419 U Marauding Mako @Alix Branwyn
 423 R Lifecraft Engine @José Parodi
@@ -163,32 +240,49 @@ ScryfallCode=DFT
 427 R Basri, Tomorrow's Champion @Kai Carpenter
 428 R Bulwark Ox @Brent Hollowell
 434 M Valor's Flagship @Stephan Martiniere
+435 R Voyager Glidecar @Eduardo Francisco
+436 R Mindspring Merfolk @Andreia Ugrai
+438 R Possession Engine @Leroy Steinmann
 439 R Repurposing Bay @William Tempest
+441 R Thopter Fabricator @Racrufi
 443 R Vnwxt, Verbose Host @Izzy
 445 R Bloodghast @Francisco Badilla
 446 R Cryptcaller Chariot @Aaron Miller
+447 R Cursecloth Wrappings @Dominik Mayer
 451 M The Last Ride @Michele Giorgi
 452 R Quag Feast @Loïc Canavaggia
 454 R Boommobile @Alexandr Leskinen
 456 M Chandra, Spark Hunter @Devin Elle Kurtz
+457 R Count on Luck @Michal Ivan
 458 R Daretti, Rocketeer Engineer @Borja Pindado
 459 R Draconautics Engineer @Artur Nakhodkin
+460 R Full Throttle @Benjamin Ee
 462 M Hazoret, Godseeker @Chris Rallis
 465 R Agonasaur Rex @Lucas Graciano
+466 R District Mascot @Liiga Smilshkalne
 471 M Thunderous Velocipede @Adrián Rodríguez Pérez
 473 R Aatchik, Emerald Radian @Loïc Canavaggia
 474 M Brightglass Gearhulk @José Parodi
 475 R Captain Howler, Sea Scourge @Mirko Failoni
 476 R Caradora, Heart of Alacria @Mirko Failoni
+479 R Explosive Getaway @Caio Monteiro
 480 R Far Fortune, End Boss @Javier Charro
+481 R Fearless Swashbuckler @Konstantin Porubov
+482 M Ketramose, the New Dawn @Maaz Ali Khan
+483 R Kolodin, Triumph Caster @Michal Ivan
+484 M Loot, the Pathfinder @Ernanda Souza
+485 R Mendicant Core, Guidelight @Zezhou Chen
+487 M Oildeep Gearhulk @Artur Nakhodkin
 488 M Pyrewood Gearhulk @Martin de Diego Sádaba
 489 R Redshift, Rocketeer Chief @Wayne Reynolds
 491 M Sab-Sunen, Luxa Embodied @Valera Lutfullina
+492 R Samut, the Driving Force @Chris Rallis
 493 R Sita Varma, Masked Racer @Kai Carpenter
 494 R Winter, Cursed Rider @Daren Bader
 495 R Zahur, Glory's Past @Leroy Steinmann
 496 M The Aetherspark @Donato Giancola
 497 R Lifecraft Engine @Mirko Failoni
+498 R Marketback Walker @Svetlin Velinov
 501 R Bleachbone Verge @Mark Tedin
 502 R Muraganda Raceway @Brian Valeza
 503 R Riverpyre Verge @Titus Lunter
@@ -206,16 +300,23 @@ ScryfallCode=DFT
 515 L Mountain @Calder Moore
 516 L Forest @Calder Moore
 519 M Valor's Flagship @William Tempest
+520 R Voyager Glidecar @Andrew Griffith
+521 R Possession Engine @Douglas P. Lobo
+522 R Thopter Fabricator @William Tempest
 523 R Cryptcaller Chariot @Oliver Barrett
 525 M The Last Ride @Death Burger
 526 R Boommobile @Ian Jepson
 529 M Thunderous Velocipede @Eduardo Francisco
 532 R Bulwark Ox @Jon Vermilyea
+534 R Mindspring Merfolk @CatDirty
 536 R Bloodghast @Wojtek Łebski
 540 R Draconautics Engineer @Ryan Roadkill
 542 R Agonasaur Rex @Jon Vermilyea
+543 R District Mascot @Ryan Roadkill
+545 R Fearless Swashbuckler @CatDirty
 546 M Hazoret, Godseeker @Massiveface
 547 M Brightglass Gearhulk @Jorge Gutierrez Garcia
+549 M Ketramose, the New Dawn @Florian Bertmer
 550 M Oildeep Gearhulk @Chun Lo
 551 M Pyrewood Gearhulk @William Tempest
 553 M Sab-Sunen, Luxa Embodied @Benjamin Ee
