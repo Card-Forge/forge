@@ -5,7 +5,7 @@ PT:4/4
 K:Flying
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the greatest mana value among artifacts you control.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
 T:Mode$ ManaExpend | Amount$ 6 | Player$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever you expend 6, gain control of up to one target artifact for as long as you control CARDNAME. (You expend 6 as you spend your sixth total mana to cast spells during a turn.)
 SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | TargetMin$ 0 | TargetMax$ 1 | LoseControl$ LeavesPlay,LoseControl
 SVar:X:Count$Valid Artifact.YouCtrl$GreatestCMC

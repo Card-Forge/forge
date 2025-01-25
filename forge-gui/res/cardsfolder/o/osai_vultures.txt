@@ -5,7 +5,7 @@ PT:1/1
 K:Flying
 T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, if a creature died this turn, put a carrion counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CARRION | CounterNum$ 1 | Defined$ Self
-A:AB$ Pump | Cost$ SubCounter<2/CARRION> | NumAtt$ 1 | NumDef$ 1 | Defined$ Self | CostDesc$ Remove two carrion counters from CARDNAME: | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ SubCounter<2/CARRION> | NumAtt$ +1 | NumDef$ +1 | Defined$ Self | CostDesc$ Remove two carrion counters from CARDNAME: | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 DeckHas:Ability$Counters
 DeckHints:Ability$Sacrifice

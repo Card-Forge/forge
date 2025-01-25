@@ -15,5 +15,5 @@ Name:Defaced Gallery
 ManaCost:1 R
 Types:Enchantment Room
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you attack, attacking creatures you control get +1/+0 until end of turn.
-SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ 1
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +1
 Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhenever you attack, attacking creatures you control get +1/+0 until end of turn.
