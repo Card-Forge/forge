@@ -13,6 +13,6 @@ ManaCost:2 R
 Types:Enchantment Room
 T:Mode$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Creature | CombatDamage$ False | TriggerZones$ Battlefield | Execute$ TrigChooseCard | TriggerDescription$ Whenever a source you control deals noncombat damage to a creature, choose a creature card in your hand. It perpetually gets +2/+0 and gains haste.
 SVar:TrigChooseCard:DB$ ChooseCard | Choices$ Creature.YouOwn | ChoiceZone$ Hand | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | NumAtt$ 2 | KW$ Haste | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | NumAtt$ +2 | KW$ Haste | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 Oracle:Whenever a source you control deals noncombat damage to a creature, choose a creature card in your hand. It perpetually gets +2/+0 and gains haste.
