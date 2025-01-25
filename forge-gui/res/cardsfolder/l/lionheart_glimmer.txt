@@ -4,5 +4,5 @@ Types:Enchantment Creature Cat Glimmer
 PT:2/5
 K:Ward:2
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, creatures you control get +1/+1 until end of turn.
-SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1
 Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhenever you attack, creatures you control get +1/+1 until end of turn.

@@ -4,7 +4,7 @@ Types:Creature Human Warrior
 PT:3/1
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Warrior | ValidBlocker$ Creature.Coward | Description$ Cowards can't block Warriors.
 A:AB$ Charm | Cost$ 1 | Choices$ Pump,Coward,Trample | ChoiceRestriction$ ThisTurn | CharmNum$ 1
-SVar:Pump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+SVar:Pump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Coward:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Coward | RemoveCreatureTypes$ True | SpellDescription$ Target creature becomes a Coward until end of turn.
 SVar:Trample:DB$ Pump | ValidTgts$ Warrior | TgtPrompt$ Select target Warrior | KW$ Trample | SpellDescription$ Target Warrior gains trample until end of turn.
 SVar:PlayMain1:TRUE

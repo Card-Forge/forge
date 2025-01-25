@@ -4,7 +4,7 @@ Types:Land
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature gets +1/+1 and gains first strike until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ First Strike
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike
 SVar:PlayMain1:TRUE
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 Oracle:Looming Spires enters tapped.\nWhen Looming Spires enters, target creature gets +1/+1 and gains first strike until end of turn.\n{T}: Add {R}.
