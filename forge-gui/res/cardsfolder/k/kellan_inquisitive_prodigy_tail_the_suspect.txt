@@ -19,5 +19,5 @@ ManaCost:G U
 Types:Sorcery Adventure
 A:SP$ Investigate | SubAbility$ DBEffect | SpellDescription$ Investigate. You may play an additional land this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration
-SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
+SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land this turn.
 Oracle:Investigate. You may play an additional land this turn.
