@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Sorcery
 A:SP$ RepeatEach | RepeatPlayers$ Player.Opponent | NextTurnForEachPlayer$ True | RepeatSubAbility$ DBEffect | SpellDescription$ Each opponent can't cast instant or sorcery spells during that player's next turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeCast | EffectOwner$ Remembered
-SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Instant,Sorcery | Caster$ You | EffectZone$ Command | Description$ You can't cast instant or sorcery spells.
+SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Instant,Sorcery | Caster$ You | Description$ You can't cast instant or sorcery spells.
 AI:RemoveDeck:All
 Oracle:Each opponent can't cast instant or sorcery spells during that player's next turn.
