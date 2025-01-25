@@ -3,6 +3,6 @@ ManaCost:3
 Types:Artifact Vehicle
 PT:4/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 and gains trample until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ Trample
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
 K:Crew:2
 Oracle:Whenever Renegade Freighter attacks, it gets +1/+1 and gains trample until end of turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

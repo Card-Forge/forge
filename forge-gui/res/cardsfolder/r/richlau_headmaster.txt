@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigPump | TriggerDescription$ When you do, target artifact card in your graveyard perpetually gains "This spell costs {1} less to cast." If it's a creature or Vehicle card, it perpetually gets +2/+2. Put it into your library second from the top.
 SVar:TrigPump:DB$ Animate | TgtZone$ Graveyard | ValidTgts$ Artifact.YouOwn | TgtPrompt$ Select target artifact card in your graveyard | staticAbilities$ ReduceCost | Duration$ Perpetual | SubAbility$ PumpVehicle
 SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
-SVar:PumpVehicle:DB$ Pump | Defined$ Targeted | PumpZone$ Graveyard | ConditionDefined$ Targeted | ConditionPresent$ Vehicle,Creature | NumAtt$ 2 | NumDef$ 2 | Duration$ Perpetual | SubAbility$ DBChangeZone
+SVar:PumpVehicle:DB$ Pump | Defined$ Targeted | PumpZone$ Graveyard | ConditionDefined$ Targeted | ConditionPresent$ Vehicle,Creature | NumAtt$ +2 | NumDef$ +2 | Duration$ Perpetual | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 1 | Defined$ Targeted
 DeckNeeds:Type$Artifact
 DeckHints:Ability$Discard|Sacrifice & Type$Vehicle
