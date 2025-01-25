@@ -7,7 +7,7 @@ SVar:TrigDraw:DB$ Draw | NumCards$ UU
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ BB | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, for each {B}{B} spent to cast it, each opponent discards a card.
 SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | NumCards$ BB | Mode$ TgtChoose
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RR | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, for each {R}{R} spent to cast it, it gets +1/+0 and gains trample and haste until end of turn.
-SVar:TrigPump:DB$ Pump | KW$ Trample & Haste | NumAtt$ RR
+SVar:TrigPump:DB$ Pump | KW$ Trample & Haste | NumAtt$ +RR
 SVar:UU:Count$EachSpentToCast.U/HalfDown
 SVar:BB:Count$EachSpentToCast.B/HalfDown
 SVar:RR:Count$EachSpentToCast.R/HalfDown

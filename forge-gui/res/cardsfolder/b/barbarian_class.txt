@@ -6,7 +6,7 @@ SVar:PlusRoll:DB$ ReplaceEffect | VarName$ Number | VarValue$ ReplaceCount$Numbe
 SVar:IgnoreLowest:DB$ ReplaceEffect | VarName$ Ignore | VarValue$ ReplaceCount$Ignore/Plus.1
 K:Class:2:1 R:AddTrigger$ TriggerRoll
 SVar:TriggerRoll:Mode$ RolledDieOnce | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever you roll one or more dice, target creature you control gets +2/+0 and gains menace until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ 2 | KW$ Menace
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +2 | KW$ Menace
 K:Class:3:2 R:AddStaticAbility$ SHaste
 SVar:SHaste:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Secondary$ True | Description$ Creatures you control have haste.
 SVar:PlayMain1:TRUE
