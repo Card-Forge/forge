@@ -2585,6 +2585,22 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(bear.getController().equals(p));
     }
 
+    @Test
+    public void testTypeLayerDependency() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card swamp = addCard("Swamp", p);
+        addCard("Life and Limb", p);
+        addCard("Dryad of the Ilysian Grove", p);
+
+        game.getAction().checkStaticAbilities();
+
+        AssertJUnit.assertTrue(swamp.isCreature());
+        AssertJUnit.assertEquals(1, swamp.getNetPower());
+    }
+
     /**
      * Test for "Volo's Journal" usage by the AI. This test checks if the AI correctly
      * adds the correct types to the "Volo's Journal" when casting the spells in order
