@@ -2,7 +2,7 @@ Name:Eluge, the Shoreless Sea
 ManaCost:1 U U U
 Types:Legendary Creature Elemental Fish
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ NICKNAME's power and toughness are each equal to the number of Islands you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ NICKNAME's power and toughness are each equal to the number of Islands you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME enters or attacks, put a flood counter on target land. It's an Island in addition to its other types for as long as it has a flood counter on it.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, put a flood counter on target land. It's an Island in addition to its other types for as long as it has a flood counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Land | TgtPrompt$ Select target land | CounterType$ FLOOD | CounterNum$ 1 | SubAbility$ DBEffect

@@ -2,6 +2,6 @@ Name:Aysen Crusader
 ManaCost:2 W W
 Types:Creature Human Knight
 PT:2+*/2+*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to 2 plus the number of Soldiers and Warriors you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to 2 plus the number of Soldiers and Warriors you control.
 SVar:X:Count$Valid Soldier.YouCtrl,Warrior.YouCtrl/Plus.2
 Oracle:Aysen Crusader's power and toughness are each equal to 2 plus the number of Soldiers and Warriors you control.
