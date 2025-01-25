@@ -9,7 +9,7 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigJoinForces | Secondary$ Tru
 SVar:TrigJoinForces:DB$ RepeatEach | RepeatPlayers$ Player | StartingWith$ You | RepeatSubAbility$ DBPay | SubAbility$ DBPump
 SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ amount of mana to pay | SubAbility$ DBStore
 SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.Y | UnlessCost$ Y | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True
-SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ JoinForcesAmount | SubAbility$ DBReset
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +JoinForcesAmount | SubAbility$ DBReset
 SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0
 SVar:Y:Count$ChosenNumber
 SVar:JoinForcesAmount:Number$0

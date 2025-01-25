@@ -4,7 +4,7 @@ Types:Creature Devil Warrior
 PT:1/2
 K:Menace
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature gets +1/+0 until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1
 K:Blitz:1 R
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice
