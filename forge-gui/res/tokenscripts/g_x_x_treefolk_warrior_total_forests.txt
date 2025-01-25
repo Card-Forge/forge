@@ -3,7 +3,7 @@ ManaCost:no cost
 Colors:green
 Types:Creature Treefolk Warrior
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:BuffedBy:Forest
 Oracle:CARDNAMEs power and toughness are each equal to the number of Forests you control.
