@@ -422,7 +422,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
 
             if (sp.isCrew() && sp.getHostCard().getType().hasSubtype("Vehicle")) {
-                Iterable<Card> crews = sp.getPaidList("TappedCards", true);
+                Iterable<Card> crews = sp.getPaidList("Tapped", true);
                 if (crews != null) {
                     for (Card c : crews) {
                         Map<AbilityKey, Object> crewParams = AbilityKey.mapFromCard(sp.getHostCard());
@@ -432,7 +432,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 }
             }
             if (sp.isKeyword(Keyword.SADDLE) && sp.getHostCard().getType().hasSubtype("Mount")) {
-                Iterable<Card> crews = sp.getPaidList("TappedCards", true);
+                Iterable<Card> crews = sp.getPaidList("Tapped", true);
                 if (crews != null) {
                     for (Card c : crews) {
                         Map<AbilityKey, Object> saddleParams = AbilityKey.mapFromCard(sp.getHostCard());

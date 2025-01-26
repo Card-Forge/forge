@@ -6755,7 +6755,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public void becomesCrewed(SpellAbility sa) {
         timesCrewedThisTurn++;
-        CardCollection crew = sa.getPaidList("TappedCards", true);
+        CardCollection crew = sa.getPaidList("Tapped", true);
         addCrewedByThisTurn(crew);
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.Crew, crew);
