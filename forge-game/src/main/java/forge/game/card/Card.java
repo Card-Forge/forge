@@ -6755,10 +6755,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public void becomesCrewed(SpellAbility sa) {
         timesCrewedThisTurn++;
-        CardCollection crew = sa.getPaidList("TappedCards", true);
+        CardCollection crew = sa.getPaidList("Tapped", true);
         addCrewedByThisTurn(crew);
-        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Vehicle, this);
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.Crew, crew);
         game.getTriggerHandler().runTrigger(TriggerType.BecomesCrewed, runParams, false);
     }
@@ -6771,11 +6770,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (crewedByThisTurn != null) crewedByThisTurn.addAll(crew);
         else crewedByThisTurn = crew;
     }
-    public final CardCollection getCrewedByThisTurn() {
+    public final CardCollectionView getCrewedByThisTurn() {
+        if (crewedByThisTurn == null) {
+            return CardCollection.EMPTY;
+        }
         return crewedByThisTurn;
     }
-    public final void setCrewedByThisTurn(final CardCollection crew) {
-        crewedByThisTurn = crew;
+    public final void setCrewedByThisTurn(final CardCollectionView crew) {
+        crewedByThisTurn = new CardCollection(crew);
     }
 
     public final void visitAttraction(Player visitor) {

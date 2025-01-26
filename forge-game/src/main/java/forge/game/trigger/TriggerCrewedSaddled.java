@@ -7,15 +7,15 @@ import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
-public class TriggerCrewed extends Trigger {
+public class TriggerCrewedSaddled extends Trigger {
 
-    public TriggerCrewed(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCrewedSaddled(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidVehicle", runParams.get(AbilityKey.Vehicle))) {
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }
         if (!matchesValidParam("ValidCrew", runParams.get(AbilityKey.Crew))) {
@@ -26,13 +26,13 @@ public class TriggerCrewed extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Vehicle, AbilityKey.Crew);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Crew);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblVehicle")).append(": ").append(sa.getTriggeringObject(AbilityKey.Vehicle));
+        sb.append(Localizer.getInstance().getMessage("lblCard")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
         sb.append("  ");
         sb.append(Localizer.getInstance().getMessage("lblCrew")).append(": ").append(sa.getTriggeringObject(AbilityKey.Crew));
         return sb.toString();
