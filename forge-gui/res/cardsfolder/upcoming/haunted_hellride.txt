@@ -1,0 +1,10 @@
+Name:Haunted Hellride
+ManaCost:1 U B
+Types:Artifact Vehicle
+PT:3/3
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target creature you control gets +1/+0 and gains deathtouch until end of turn. Untap it.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | KW$ Deathtouch | SubABility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+K:Crew:1
+SVar:PlayMain1:TRUE
+Oracle:Whenever you attack, target creature you control gets +1/+0 and gains deathtouch until end of turn. Untap it.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)
