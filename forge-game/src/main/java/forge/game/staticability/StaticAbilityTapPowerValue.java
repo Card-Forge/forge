@@ -2,20 +2,21 @@ package forge.game.staticability;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-public class StaticAbilityCrewValue {
+public class StaticAbilityTapPowerValue {
 
-    static String MODE = "CrewValue";
+    static String MODE = "TapPowerValue";
 
-    public static boolean crewsWithToughness(final Card card) {
+    public static boolean withToughness(final Card card, final SpellAbility sa) {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(MODE)) {
                     continue;
                 }
-                if (crewsWithToughness(stAb, card)) {
+                if (withToughness(stAb, card, sa)) {
                     return true;
                 }
             }
@@ -23,11 +24,20 @@ public class StaticAbilityCrewValue {
         return false;
     }
 
-    public static boolean crewsWithToughness(final StaticAbility stAb, final Card card) {
-        return stAb.getParam("Value").equals("Toughness") && stAb.matchesValidParam("ValidCard", card);
+    public static boolean withToughness(final StaticAbility stAb, final Card card, final SpellAbility sa) {
+        if (!stAb.getParam("Value").equals("Toughness")) {
+            return false;
+        }
+        if (!stAb.matchesValidParam("ValidCard", card)) {
+            return false;
+        }
+        if (!stAb.matchesValidParam("ValidSA", sa)) {
+            return false;
+        }
+        return true;
     }
 
-    public static int getCrewMod(final Card card) {
+    public static int getMod(final Card card, SpellAbility sa) {
         int i = 0;
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
@@ -36,6 +46,9 @@ public class StaticAbilityCrewValue {
                     continue;
                 }
                 if (!stAb.matchesValidParam("ValidCard", card)) {
+                    continue;
+                }
+                if (!stAb.matchesValidParam("ValidSA", sa)) {
                     continue;
                 }
                 int t = Integer.parseInt(stAb.getParam("Value"));
