@@ -2591,14 +2591,23 @@ public class GameSimulationTest extends SimulationTest {
         Player p = game.getPlayers().get(0);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
 
-        Card swamp = addCard("Swamp", p);
+        Card nonBasicForest = addCard("Breeding Pool", p);
         addCard("Life and Limb", p);
-        addCard("Dryad of the Ilysian Grove", p);
+        addCard("Blood Moon", p);
 
         game.getAction().checkStaticAbilities();
 
-        AssertJUnit.assertTrue(swamp.isCreature());
-        AssertJUnit.assertEquals(1, swamp.getNetPower());
+        // Blood Moon will be applied first because Life and Limb depends on it
+        AssertJUnit.assertFalse(nonBasicForest.isCreature());
+        AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
+
+        // adding Saproling causes dependency loop, so Life and Limb gets applied first instead
+        addCard("Shroofus Sproutsire", p);
+
+        game.getAction().checkStaticAbilities();
+
+        AssertJUnit.assertTrue(nonBasicForest.isCreature());
+        AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
     }
 
     /**
