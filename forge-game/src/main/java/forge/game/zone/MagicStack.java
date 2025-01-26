@@ -424,8 +424,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (sp.isCrew() && sp.getHostCard().getType().hasSubtype("Vehicle")) {
                 Iterable<Card> crews = sp.getPaidList("TappedCards", true);
                 if (crews != null) {
-                    Map<AbilityKey, Object> crewParams = AbilityKey.mapFromCard(sp.getHostCard());
                     for (Card c : crews) {
+                        Map<AbilityKey, Object> crewParams = AbilityKey.mapFromCard(sp.getHostCard());
                         crewParams.put(AbilityKey.Crew, c);
                         game.getTriggerHandler().runTrigger(TriggerType.Crewed, crewParams, false);
                     }
@@ -434,10 +434,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (sp.isKeyword(Keyword.SADDLE) && sp.getHostCard().getType().hasSubtype("Mount")) {
                 Iterable<Card> crews = sp.getPaidList("TappedCards", true);
                 if (crews != null) {
-                    Map<AbilityKey, Object> crewParams = AbilityKey.mapFromCard(sp.getHostCard());
                     for (Card c : crews) {
-                        crewParams.put(AbilityKey.Crew, c);
-                        game.getTriggerHandler().runTrigger(TriggerType.Saddled, crewParams, false);
+                        Map<AbilityKey, Object> saddleParams = AbilityKey.mapFromCard(sp.getHostCard());
+                        saddleParams.put(AbilityKey.Crew, c);
+                        game.getTriggerHandler().runTrigger(TriggerType.Saddled, saddleParams, false);
                     }
                 }
             }
