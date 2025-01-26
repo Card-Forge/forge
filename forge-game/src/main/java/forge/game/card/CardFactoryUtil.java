@@ -1835,6 +1835,15 @@ public class CardFactoryUtil {
             squadTrigger.setOverridingAbility(squadAbility);
             squadTrigger.setSVar("SquadAmount", "Count$OptionalKeywordAmount");
             inst.addTrigger(squadTrigger);
+        } else if (keyword.equals("Start your engines")) {
+            final String trig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | CheckDefinedPlayer$ " +
+                    "You.NoSpeed | TriggerDescription$ Start your engines! (" + inst.getReminderText() + ")";
+            final String effect = "DB$ IncreaseSpeed";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+
+            inst.addTrigger(trigger);
         } else if (keyword.equals("Storm")) {
             final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | Secondary$ True"
                     + "| TriggerDescription$ Storm (" + inst.getReminderText() + ")";

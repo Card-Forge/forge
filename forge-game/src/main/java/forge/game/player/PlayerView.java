@@ -329,6 +329,13 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.ControlVotes, val);
     }
 
+    public int getSpeed() {
+        return get(TrackableProperty.Speed);
+    }
+    void updateSpeed(Player p) {
+        set(TrackableProperty.Speed, p.getSpeed());
+    }
+
     public int getAdditionalVillainousChoices() {
         return get(TrackableProperty.AdditionalVillainousChoices);
     }
@@ -596,6 +603,11 @@ public class PlayerView extends GameEntityView {
             details.add(Localizer.getInstance().getMessage("lblIsExtraTurn"));
         }
         details.add(Localizer.getInstance().getMessage("lblExtraTurnCountHas", String.valueOf(getExtraTurnCount())));
+
+        if (getSpeed() > 0) {
+            details.add(Localizer.getInstance().getMessage("lblSpeed", String.valueOf(getSpeed())));
+        }
+
         final String keywords = Lang.joinHomogenous(getDisplayableKeywords());
         if (!keywords.isEmpty()) {
             details.add(keywords);
