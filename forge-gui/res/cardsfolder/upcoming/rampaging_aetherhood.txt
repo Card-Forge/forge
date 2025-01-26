@@ -11,4 +11,5 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | UnlessCost$ PayEnergy<Y> | Un
 SVar:X:Count$CardPower
 SVar:Max:Count$YourCountersEnergy
 SVar:Y:Count$ChosenNumber
+DeckHas:Ability$Counters
 Oracle:Trample, ward {2}\nAt the beginning of your upkeep, you get an amount of {E} (energy counters) equal to this creature's power. Then you may pay one or more {E}. If you do, put that many +1/+1 counters on this creature.

@@ -105,6 +105,7 @@ public enum ApiType {
     Goad (GoadEffect.class),
     Haunt (HauntEffect.class),
     Heist (HeistEffect.class),
+    IncreaseSpeed (IncreaseSpeedEffect.class),
     Investigate (InvestigateEffect.class),
     Intensify (IntensifyEffect.class),
     ImmediateTrigger (ImmediateTriggerEffect.class),

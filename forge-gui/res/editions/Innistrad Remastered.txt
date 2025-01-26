@@ -4,6 +4,40 @@ Date=2025-01-24
 Name=Innistrad Remastered
 Type=Reprint
 ScryfallCode=INR
+# https://magic.wizards.com/en/news/feature/collecting-innistrad-remastered
+BoosterSlots=Common,CommonDFC,Uncommon,RareMythic,Land,Wildcard,RetroFrame
+Booster=5 Common, 1 CommonDFC, 3 Uncommon, 1 RareMythic, 1 Land, 1 Wildcard, 1 Wildcard+, 1 RetroFrame
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+
+[Common]
+Base=Common:fromSheet("INR cards"):!dfc
+
+[CommonDFC]
+Base=Common:fromSheet("INR cards"):dfc
+
+[Uncommon]
+Base=Uncommon:fromSheet("INR cards")
+#Replace.006 Uncommon:fromSheet("INR equinox") # Equinox replacement
+
+[RareMythic]
+Base=RareMythic:fromSheet("INR cards")
+
+[Land]
+Base=Land:fromSheet("INR cards")
+Replace=.20 Land:fromSheet("INR cards")+
+
+[RetroFrame]
+Base=Uncommon:fromSheet("INR retro frame")
+Replace=.20 Common:fromSheet("INR retro frame")
+Replace=.12 Rare:fromSheet("INR retro frame")
+Replace=.04 Mythic:fromSheet("INR retro frame")
+
+[Wildcard]
+Base=Uncommon:fromSheet("INR cards")
+Replace=.20 Common:fromSheet("INR cards")
+Replace=.12 Rare:fromSheet("INR cards")
+Replace=.04 Mythic:fromSheet("INR cards")
 
 [cards]
 1 C Abundant Maw @Greg Staples
