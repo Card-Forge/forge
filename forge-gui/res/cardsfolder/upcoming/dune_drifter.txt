@@ -1,0 +1,10 @@
+Name:Dune Drifter
+ManaCost:X W B
+Types:Artifact Vehicle
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When this Vehicle enters, return target artifact or creature card with mana value X or less from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Artifact.YouOwn+cmcLEX,Creature.YouOwn+cmcLEX | TgtPrompt$ Select target artifact or creature card with mana value X or less in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+K:Crew:2
+SVar:X:Count$xPaid
+DeckHas:Ability$Graveyard
+Oracle:When this Vehicle enters, return target artifact or creature card with mana value X or less from your graveyard to the battlefield.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
