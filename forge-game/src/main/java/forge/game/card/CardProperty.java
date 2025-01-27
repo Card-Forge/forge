@@ -2187,7 +2187,7 @@ public class CardProperty {
         return true;
     }
 
-    private static boolean hasTimestampMatch(final Card card, final CardCollection coll) {
+    private static boolean hasTimestampMatch(final Card card, final CardCollectionView coll) {
         if (coll == null) {
             return false;
         }

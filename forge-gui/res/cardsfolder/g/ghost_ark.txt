@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Vehicle
 PT:3/3
 K:Flying
-T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | Execute$ DBPumpAll | TriggerDescription$ Repair Barge — Whenever CARDNAME becomes crewed, each artifact creature card in your graveyard gains unearth {3} until end of turn.
+T:Mode$ BecomesCrewed | ValidCard$ Card.Self | Execute$ DBPumpAll | TriggerDescription$ Repair Barge — Whenever CARDNAME becomes crewed, each artifact creature card in your graveyard gains unearth {3} until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Artifact.Creature+YouCtrl | KW$ Unearth:3 | PumpZone$ Graveyard
 K:Crew:2
 DeckHas:Ability$Graveyard & Keyword$Unearth

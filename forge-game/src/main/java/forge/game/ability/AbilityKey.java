@@ -139,7 +139,6 @@ public enum AbilityKey {
     Token("Token"),
     TokenNum("TokenNum"),
     Valiant("Valiant"),
-    Vehicle("Vehicle"),
     Won("Won"),
 
     // below used across different Replacements, don't reuse

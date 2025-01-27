@@ -171,6 +171,7 @@ public enum Keyword {
     SPLIT_SECOND("Split second", SimpleKeyword.class, true, "As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities."),
     SPREE("Spree", SimpleKeyword.class, true, "Choose one or more additional costs."),
     SQUAD("Squad", KeywordWithCost.class, false, "As an additional cost to cast this spell, you may pay %s any number of times. When this creature enters, create that many tokens that are copies of it."),
+    START_YOUR_ENGINES("Start your engines", SimpleKeyword.class, true, "If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4."),
     STARTING_INTENSITY("Starting intensity", KeywordWithAmount.class, true, null),
     STORM("Storm", SimpleKeyword.class, false, "When you cast this spell, copy it for each other spell that was cast before it this turn. You may choose new targets for the copies."),
     STRIVE("Strive", KeywordWithCost.class, false, "CARDNAME costs %s more to cast for each target beyond the first."),

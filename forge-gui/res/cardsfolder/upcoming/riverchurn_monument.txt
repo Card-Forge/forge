@@ -1,0 +1,11 @@
+Name:Riverchurn Monument
+ManaCost:1 U
+Types:Artifact
+A:AB$ Mill | Cost$ 1 T | ValidTgts$ Player | TgtPrompt$ Select any number of target players | TargetMin$ 0 | TargetMax$ MaxTgt | NumCards$ 2 | SpellDescription$ Any number of target players each mill two cards. (Each of them puts the top two cards of their library into their graveyard.)
+A:AB$ Pump | Cost$ 2 U U T | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ MaxTgt | TgtPrompt$ Select any number of target players | Exhaust$ True | SubAbility$ DBRepeat | SpellDescription$ Any number of target players each mill cards equal to the number of cards in their graveyard. (Activate each exhaust ability only once.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Targeted | RepeatSubAbility$ DBMill
+SVar:DBMill:DB$ Mill | Defined$ Remembered | NumCards$ X
+SVar:X:Count$ValidGraveyard Card.RememberedPlayerCtrl
+SVar:MaxTgt:PlayerCountPlayers$Amount
+DeckHas:Ability$Mill
+Oracle:{1}, {T}: Any number of target players each mill two cards. (Each of them puts the top two cards of their library into their graveyard.)\nExhaust — {2}{U}{U}, {T}: Any number of target players each mill cards equal to the number of cards in their graveyard. (Activate each exhaust ability only once.)

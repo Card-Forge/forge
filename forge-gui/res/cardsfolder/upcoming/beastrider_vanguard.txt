@@ -1,0 +1,6 @@
+Name:Beastrider Vanguard
+ManaCost:1 G
+Types:Creature Human Knight
+PT:2/2
+A:AB$ Dig | Cost$ 4 G | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Permanent | SpellDescription$ Look at the top three cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+Oracle:{4}{G}: Look at the top three cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

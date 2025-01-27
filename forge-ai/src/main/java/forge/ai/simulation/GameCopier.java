@@ -95,6 +95,7 @@ public class GameCopier {
             newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
             newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
             newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
+            newPlayer.setSpeed(origPlayer.getSpeed());
             newPlayer.setBlessing(origPlayer.hasBlessing());
             newPlayer.setRevolt(origPlayer.hasRevolt());
             newPlayer.setDescended(origPlayer.getDescended());

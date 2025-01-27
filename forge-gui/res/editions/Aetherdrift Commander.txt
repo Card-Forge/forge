@@ -43,6 +43,7 @@ ScryfallCode=DRC
 43 R Gravecrawler @Josh Hass
 44 R Midnight Reaper @Josh Hass
 45 R Murderous Rider @Raluca Marinescu
+46 R Zombie Master @Yohann Schepacz
 47 R Chain Reaction @Maxime Minard
 48 R Chaos Warp @Mathias Kollros
 49 R Druid of Purification @Volkan Baǵa

@@ -751,7 +751,7 @@ public class ComputerUtil {
                 tapList.clear();
             }
             tapList.add(next);
-            totalPower = CardLists.getTotalPower(tapList, true, sa.isCrew());
+            totalPower = CardLists.getTotalPower(tapList, sa);
             if (totalPower >= amount) {
                 break;
             }
