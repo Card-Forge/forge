@@ -74,6 +74,9 @@ public class GameAction {
 
     private boolean holdCheckingStaticAbilities = false;
 
+    private final static Comparator<StaticAbility> effectOrder = Comparator.comparing(StaticAbility::isCharacteristicDefining).reversed()
+            .thenComparing(s -> s.getHostCard().getLayerTimestamp());
+
     public GameAction(Game game0) {
         game = game0;
     }
@@ -1130,11 +1133,7 @@ public class GameAction {
             }
         }, true);
 
-        final Comparator<StaticAbility> comp = (a, b) -> ComparisonChain.start()
-                .compareTrueFirst(a.isCharacteristicDefining(), b.isCharacteristicDefining())
-                .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
-                .result();
-        staticAbilities.sort(comp);
+        staticAbilities.sort(effectOrder);
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
         for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {
