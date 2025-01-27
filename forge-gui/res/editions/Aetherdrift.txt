@@ -18,6 +18,7 @@ ScryfallCode=DFT
 19 C Lightshield Parry @Leanna Crossan
 22 U Nesting Bot @Racrufi
 23 R Perilous Snare @Chris Seaman
+26 U Roadside Assistance @Artur Nakhodkin
 30 C Spotcycle Scouter @Josiah "Jo" Cameron
 33 U Tune Up @Chris Rallis
 34 U Unswerving Sloth @Daren Bader
@@ -29,10 +30,13 @@ ScryfallCode=DFT
 51 R Mindspring Merfolk @Andreia Ugrai
 52 M Mu Yanling, Wind Rider @Justyna Dura
 54 R Possession Engine @Leroy Steinmann
+55 U Rangers' Refueler @Samuel Perin
 56 R Repurposing Bay @William Tempest
 58 U Roadside Blowout @Michele Giorgi
+62 U Slick Imitator @Xabi Gaztelua
 67 U Stock Up @Izzy
 68 R Thopter Fabricator @Racrufi
+70 U Transit Mage @Mark Poole
 73 R Vnwxt, Verbose Host @Izzy
 76 U Back on Track @Raoul Vitale
 77 R Bloodghast @Francisco Badilla
@@ -40,10 +44,13 @@ ScryfallCode=DFT
 80 R Cryptcaller Chariot @Aaron Miller
 81 R Cursecloth Wrappings @Dominik Mayer
 83 R Demonic Junker @Stephan Martiniere
+85 R Gas Guzzler @Yohann Schepacz
 91 U Hour of Victory @Aaron Miller
+92 U Intimidation Tactics @Cristi Balanescu
 94 M The Last Ride @Michele Giorgi
 97 U Momentum Breaker @Dmitry Burmak
 100 R Quag Feast @Loïc Canavaggia
+102 U Risen Necroregent @Inkognit
 107 C Streaking Oilgorger @Campbell White
 109 U Wickerfolk Indomitable @Sergio Cosmai
 113 R Boommobile @Alexandr Leskinen
@@ -62,12 +69,14 @@ ScryfallCode=DFT
 140 U Pacesetter Paragon @Wonchun Choi
 141 C Pedal to the Metal @Anthony Devine
 142 C Prowcatcher Specialist @Konstantin Porubov
+144 U Reckless Velocitaur @Inkognit
 151 R Agonasaur Rex @Lucas Graciano
 153 U Autarch Mammoth @Leonardo Santanna
 154 C Beastrider Vanguard @Andrey Kuzinskiy
 155 C Bestow Greatness @Jeff Carpenter
 157 U Defend the Rider @Raph Lomotan
 158 R District Mascot @Liiga Smilshkalne
+159 U Dredger's Insight @Bartek Fedyczak
 160 U Earthrumbler @Jean Pierre Targete
 161 U Elvish Refueler @Carly Milligan
 169 M March of the World Ooze @Helge C. Balzer
@@ -84,11 +93,13 @@ ScryfallCode=DFT
 195 R Caradora, Heart of Alacria @Mirko Failoni
 196 U Cloudspire Coordinator @Eduardo Francisco
 197 U Cloudspire Skycycle @Hardy Fowler
+201 U Embalmed Ascendant @Edgar Sánchez Hidalgo
 202 R Explosive Getaway @Caio Monteiro
 203 R Far Fortune, End Boss @Javier Charro
 204 R Fearless Swashbuckler @Konstantin Porubov
 206 U Guidelight Pathmaker @Stephan Martiniere
 207 U Haunt the Network @Jeff Carpenter
+208 U Haunted Hellride @Olivier Bernard
 209 M Ketramose, the New Dawn @Maaz Ali Khan
 210 R Kolodin, Triumph Caster @Michal Ivan
 211 U Lagorin, Soul of Alacria @Mirko Failoni
@@ -104,6 +115,7 @@ ScryfallCode=DFT
 223 R Sita Varma, Masked Racer @Kai Carpenter
 228 R Winter, Cursed Rider @Daren Bader
 229 R Zahur, Glory's Past @Leroy Steinmann
+230 C Aetherjacket @Domenico Cava
 231 M The Aetherspark @Donato Giancola
 234 R Lifecraft Engine @Mirko Failoni
 235 R Marketback Walker @Svetlin Velinov
@@ -181,6 +193,7 @@ ScryfallCode=DFT
 333 R Bulwark Ox @Jon Vermilyea
 335 R Mindspring Merfolk @CatDirty
 337 R Bloodghast @Wojtek Łebski
+338 R Gas Guzzler @Sam McKenzie
 341 R Draconautics Engineer @Ryan Roadkill
 343 R Agonasaur Rex @Jon Vermilyea
 344 R District Mascot @Ryan Roadkill
@@ -211,21 +224,22 @@ ScryfallCode=DFT
 374 R Wastewood Verge @Kev Walker
 375 R Willowrush Verge @Carl Critchlow
 376 M The Aetherspark @Dominik Mayer
+379 M Mu Yanling, Wind Rider @Justyna Dura
 380 R Repurposing Bay @William Tempest
 383 R Cursecloth Wrappings @Dominik Mayer
 384 R Quag Feast @Loïc Canavaggia
 385 R Count on Luck @Michal Ivan
 386 R Full Throttle @Benjamin Ee
+388 M March of the World Ooze @Helge C. Balzer
 390 R Explosive Getaway @Caio Monteiro
 391 M Loot, the Pathfinder @Ernanda Souza
 393 R Marketback Walker @Svetlin Velinov
-395 R Count on Luck @Michal Ivan
 396 R Muraganda Raceway @Brian Valeza
 399 M Mu Yanling, Wind Rider @D-suzuki
 400 M Cursecloth Wrappings @BARON UEDA
 401 M Chandra, Spark Hunter @jbstyle.
 402 M March of the World Ooze @Raimaru
-403 R Explosive Getaway @TSCR
+403 M Explosive Getaway @TSCR
 404 M Loot, the Pathfinder @Tetsu Kurosawa
 409 M Mu Yanling, Wind Rider @D-suzuki
 410 M Cursecloth Wrappings @BARON UEDA
@@ -242,6 +256,7 @@ ScryfallCode=DFT
 434 M Valor's Flagship @Stephan Martiniere
 435 R Voyager Glidecar @Eduardo Francisco
 436 R Mindspring Merfolk @Andreia Ugrai
+437 M Mu Yanling, Wind Rider @Justyna Dura
 438 R Possession Engine @Leroy Steinmann
 439 R Repurposing Bay @William Tempest
 441 R Thopter Fabricator @Racrufi
@@ -249,6 +264,7 @@ ScryfallCode=DFT
 445 R Bloodghast @Francisco Badilla
 446 R Cryptcaller Chariot @Aaron Miller
 447 R Cursecloth Wrappings @Dominik Mayer
+449 R Gas Guzzler @Yohann Schepacz
 451 M The Last Ride @Michele Giorgi
 452 R Quag Feast @Loïc Canavaggia
 454 R Boommobile @Alexandr Leskinen
@@ -260,6 +276,7 @@ ScryfallCode=DFT
 462 M Hazoret, Godseeker @Chris Rallis
 465 R Agonasaur Rex @Lucas Graciano
 466 R District Mascot @Liiga Smilshkalne
+468 M March of the World Ooze @Helge C. Balzer
 471 M Thunderous Velocipede @Adrián Rodríguez Pérez
 473 R Aatchik, Emerald Radian @Loïc Canavaggia
 474 M Brightglass Gearhulk @José Parodi
@@ -310,6 +327,7 @@ ScryfallCode=DFT
 532 R Bulwark Ox @Jon Vermilyea
 534 R Mindspring Merfolk @CatDirty
 536 R Bloodghast @Wojtek Łebski
+537 R Gas Guzzler @Sam McKenzie
 540 R Draconautics Engineer @Ryan Roadkill
 542 R Agonasaur Rex @Jon Vermilyea
 543 R District Mascot @Ryan Roadkill
