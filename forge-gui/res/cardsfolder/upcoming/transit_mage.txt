@@ -1,0 +1,7 @@
+Name:Transit Mage
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may search your library for an artifact card with mana value 4 or 5, reveal that card, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Artifact.cmcEQ4,Artifact.cmcEQ5 | ChangeNum$ 1 | ShuffleNonMandatory$ True
+Oracle:When this creature enters, you may search your library for an artifact card with mana value 4 or 5, reveal that card, put it into your hand, then shuffle.
