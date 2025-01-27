@@ -1,0 +1,8 @@
+Name:Reckless Velocitaur
+ManaCost:3 R
+Types:Creature Minotaur Pilot
+PT:3/3
+T:Mode$ Saddled | ValidCrew$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | PlayerTurn$ True | Phase$ Main1,Main2 | TriggerDescription$ Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gets +2/+0 and gains trample until end of turn.
+T:Mode$ Crewed | ValidCrew$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | Secondary$ True | PlayerTurn$ True | Phase$ Main1,Main2 | TriggerDescription$ Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gets +2/+0 and gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCardLKICopy | NumAtt$ +2 | KW$ Trample
+Oracle:Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gets +2/+0 and gains trample until end of turn.
