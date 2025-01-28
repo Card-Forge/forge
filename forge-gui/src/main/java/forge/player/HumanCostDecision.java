@@ -1288,7 +1288,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, ability.isCrew()) < i) {
+            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), ability) < i) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());

@@ -1,0 +1,9 @@
+Name:Interface Ace
+ManaCost:1 W
+Types:Artifact Creature Robot Pilot
+PT:0/4
+S:Mode$ TapPowerValue | ValidSA$ Activated.Crew+Vehicle,Activated.Saddle+Mount | ValidCard$ Card.Self | Value$ Toughness | Description$ This creature saddles Mounts and crews Vehicles using its toughness rather than its power.
+T:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | ActivationLimit$ 1 | PlayerTurn$ True | Execute$ TrigUntap | TriggerDescription$ Whenever this creature becomes tapped during your turn, untap it. This ability triggers only once each turn.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+DeckHints:Type$Vehicle|Mount
+Oracle:This creature saddles Mounts and crews Vehicles using its toughness rather than its power.\nWhenever this creature becomes tapped during your turn, untap it. This ability triggers only once each turn.

@@ -1,0 +1,13 @@
+Name:Lost Monarch of Ifnir
+ManaCost:3 B
+Types:Creature Zombie Noble
+PT:4/4
+K:Afflict:3
+S:Mode$ Continuous | Affected$ Zombie.Other+YouCtrl | AddKeyword$ Afflict:3 | Description$ Other Zombies you control have afflict 3.
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigMill | TriggerDescription$ At the beginning of your second main phase, if a player was dealt combat damage by a Zombie this turn, mill three cards, then you may return a creature card from your graveyard to your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn | Hidden$ True | Optional$ True
+SVar:X:PlayerCountDefinedRegistered$HasPropertywasDealtCombatDamageThisTurnBy Zombie GE1
+DeckHas:Ability$Graveyard|Mill
+DeckHints:Type$Zombie
+Oracle:Afflict 3 (Whenever this creature becomes blocked, defending player loses 3 life.)\nOther Zombies you control have afflict 3.\nAt the beginning of your second main phase, if a player was dealt combat damage by a Zombie this turn, mill three cards, then you may return a creature card from your graveyard to your hand.

@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any number of targets to distribute damage to | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | RememberDamaged$ True | SubAbility$ CowedByAurelia | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of any targets. Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
 SVar:CowedByAurelia:DB$ TapAll | ValidCards$ Creature.IsRemembered | SubAbility$ SpellLimitations
 SVar:SpellLimitations:DB$ Effect | StaticAbilities$ STCantBeCast | RememberObjects$ Player.IsRemembered | SubAbility$ DBCleanup
-SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.nonCreature | Caster$ Player.IsRemembered | Description$ Players damaged by EFFECTSOURCE can't cast creature spells this turn.
+SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Card.nonCreature | Caster$ Player.IsRemembered | Description$ Players damaged by EFFECTSOURCE can't cast creature spells this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.MaxPermanents
 SVar:MaxPermanents:Count$Valid Any

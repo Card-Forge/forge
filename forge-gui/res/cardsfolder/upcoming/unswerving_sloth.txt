@@ -1,0 +1,9 @@
+Name:Unswerving Sloth
+ManaCost:3 W W
+Types:Creature Sloth Mount
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks while saddled, it gains indestructible until end of turn. Untap all creatures you control.
+SVar:TrigPump:DB$ Pump | KW$ Indestructible | SubAbility$ DBUntapAll
+SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
+K:Saddle:4
+Oracle:Whenever this creature attacks while saddled, it gains indestructible until end of turn. Untap all creatures you control.\nSaddle 4 (Tap any number of other creatures you control with total power 4 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

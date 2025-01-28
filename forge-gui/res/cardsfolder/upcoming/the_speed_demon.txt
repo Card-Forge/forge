@@ -1,0 +1,11 @@
+Name:The Speed Demon
+ManaCost:3 B B
+Types:Legendary Creature Demon
+PT:5/5
+K:Flying
+K:Trample
+K:Start your engines
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you draw X cards and lose X life, where X is your speed.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Count$YourSpeed | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ Count$YourSpeed
+Oracle:Flying, trample\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nAt the beginning of your end step, you draw X cards and lose X life, where X is your speed.

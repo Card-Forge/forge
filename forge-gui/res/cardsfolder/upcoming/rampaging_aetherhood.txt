@@ -1,0 +1,15 @@
+Name:Rampaging Aetherhood
+ManaCost:4 G
+Types:Creature Snake Hydra
+PT:4/4
+K:Trample
+K:Ward:2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEnergy | TriggerDescription$ At the beginning of your upkeep, you get an amount of {E} (energy counters) equal to this creature's power. Then you may pay one or more {E}. If you do, put that many +1/+1 counters on this creature.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X | SubAbility$ DBChooseNumber
+SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ amount of energy to pay | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | UnlessCost$ PayEnergy<Y> | UnlessPayer$ You | UnlessSwitched$ True | CounterType$ P1P1 | CounterNum$ Y
+SVar:X:Count$CardPower
+SVar:Max:Count$YourCountersEnergy
+SVar:Y:Count$ChosenNumber
+DeckHas:Ability$Counters
+Oracle:Trample, ward {2}\nAt the beginning of your upkeep, you get an amount of {E} (energy counters) equal to this creature's power. Then you may pay one or more {E}. If you do, put that many +1/+1 counters on this creature.

@@ -1,0 +1,9 @@
+Name:Possession Engine
+ManaCost:3 U U
+Types:Artifact Vehicle
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this Vehicle enters, gain control of target creature an opponent controls for as long as you control this Vehicle. That creature can't attack or block for as long as you control this Vehicle.
+SVar:TrigChange:DB$ GainControl | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | LoseControl$ LeavesPlay,LoseControl | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ HIDDEN CARDNAME can't attack or block. | Duration$ AsLongAsControl | Defined$ Targeted
+K:Crew:3
+Oracle:When this Vehicle enters, gain control of target creature an opponent controls for as long as you control this Vehicle. That creature can't attack or block for as long as you control this Vehicle.\nCrew 3

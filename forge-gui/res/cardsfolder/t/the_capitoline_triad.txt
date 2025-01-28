@@ -4,7 +4,7 @@ Types:Legendary Creature God Artificer
 PT:7/7
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Those Who Came Before — This spell costs {1} less to cast for each historic card in your graveyard. (Artifacts, legendaries, and Sagas are historic.)
 A:AB$ Effect | Cost$ ExileFromGrave<1+/Card.Historic+withTotalCMCGE30> | CostDesc$ Exile any number of historic cards from your graveyard with total mana value 30 or greater: | Name$ Emblem — The Capitoline Triad | Image$ emblem_the_capitoline_triad | StaticAbilities$ STSetPT | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control have base power and toughness 9/9."
-SVar:STSetPT:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | SetPower$ 9 | SetToughness$ 9 | Description$ Creatures you control have base power and toughness 9/9.
+SVar:STSetPT:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | SetPower$ 9 | SetToughness$ 9 | Description$ Creatures you control have base power and toughness 9/9.
 SVar:X:Count$ValidGraveyard Card.Historic+YouOwn
 DeckHints:Ability$Graveyard
 DeckNeeds:Type$Artifact|Saga|Legendary

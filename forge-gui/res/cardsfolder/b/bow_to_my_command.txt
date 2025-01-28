@@ -6,7 +6,7 @@ SVar:ChooseOpponent:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent |
 SVar:CantAttackEffect:DB$ Effect | StaticAbilities$ STCantAttack | Triggers$ TrigAbandoned | RememberObjects$ Self | Duration$ Permanent
 SVar:TrigAbandoned:Mode$ Abandoned | ValidCard$ Card.IsRemembered | Execute$ EffectCleanup | Static$ True
 SVar:EffectCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.ChosenCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Creatures the chosen player controls can't attack you or planeswalkers you control.
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature.ChosenCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Creatures the chosen player controls can't attack you or planeswalkers you control.
 # TODO: If shared turns are ever implemented that are needed for proper E01 support, this would need to be updated to ensure that several opponents may choose to tap a total of 8 power creatures, as opposed to one opponent fully paying the cost. Ideally, UnlessCost should be expanded to support tapXType<Any/Creature.YouCtrl+withTotalPowerGE8> cost, which would allow to also get rid of the complex script part below and the AILogic$ BowToMyCommand hack in AiController#chooseCardsForEffect
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Command | Execute$ RepeatOpp | TriggerDescription$ At the beginning of your opponents' end step, they may tap any number of untapped creatures they control with total power 8 or greater. If they do, abandon this scheme.
 SVar:RepeatOpp:DB$ RepeatEach | RepeatSubAbility$ ChooseCardsToTap | RepeatPlayers$ Opponent

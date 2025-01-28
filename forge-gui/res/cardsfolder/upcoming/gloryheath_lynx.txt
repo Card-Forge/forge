@@ -1,0 +1,10 @@
+Name:Gloryheath Lynx
+ManaCost:1 W
+Types:Creature Cat Mount
+PT:2/3
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever this creature attacks while saddled, search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains.Basic
+K:Saddle:2
+DeckHas:Ability$Token
+Oracle:Lifelink\nWhenever this creature attacks while saddled, search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

@@ -1,0 +1,11 @@
+Name:Wreck Remover
+ManaCost:4
+Types:Artifact Creature Construct
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever this creature enters or attacks, exile up to one target card from a graveyard. You gain 1 life.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever this creature enters or attacks, exile up to one target card from a graveyard. You gain 1 life.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target card in a graveyard to exile | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+K:Cycling:2
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature enters or attacks, exile up to one target card from a graveyard. You gain 1 life.\nCycling {2} ({2}, Discard this card: Draw a card.)

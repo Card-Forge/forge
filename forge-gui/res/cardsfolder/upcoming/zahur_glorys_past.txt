@@ -1,0 +1,10 @@
+Name:Zahur, Glory's Past
+ManaCost:W B
+Types:Legendary Creature Zombie Cat Warrior
+PT:3/2
+K:Start your engines
+A:AB$ Surveil | Cost$ Sac<1/Creature.Other/another creature> | ActivationLimit$ 1 | SpellDescription$ Surveil 1. Activate only once each turn.
+DeckHas:Ability$Sacrifice|Token
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | MaxSpeed$ True | TriggerDescription$ Whenever a nontoken creature you control dies, create a tapped 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenTapped$ True
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nSacrifice another creature: Surveil 1. Activate only once each turn.\nMax speed — Whenever a nontoken creature you control dies, create a tapped 2/2 black Zombie creature token.

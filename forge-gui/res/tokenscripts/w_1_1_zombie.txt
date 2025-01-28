@@ -1,0 +1,6 @@
+Name:Zombie Token
+ManaCost:no cost
+Colors:white
+Types:Creature Zombie
+PT:1/1
+Oracle:

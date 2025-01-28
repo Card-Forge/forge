@@ -11,7 +11,7 @@ SVar:NumInYard:TargetedController$CardsInGraveyard
 SVar:NumInHand:TargetedController$CardsInHand
 SVar:NumInLib:TargetedController$CardsInLibrary
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Triggers$ TrigLandPlayed,TrigCast | Duration$ UntilLoseControlOfHost | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | MayPlayLimit$ 1 | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as you control EFFECTSOURCE, you may play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | MayPlayLimit$ 1 | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as you control EFFECTSOURCE, you may play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it.
 SVar:TrigLandPlayed:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ TrigRemoveSelf
 SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ TrigRemoveSelf
 SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

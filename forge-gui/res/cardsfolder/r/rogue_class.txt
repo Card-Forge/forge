@@ -11,7 +11,7 @@ SVar:TrigDig:DB$ Dig | DigNum$ 1 | Defined$ TriggeredTarget | DestinationZone$ E
 SVar:DBExile:DB$ ChangeZone | Defined$ Imprinted | Origin$ Command | Destination$ Exile | SubAbility$ DBUnimprint
 SVar:DBUnimprint:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | ImprintOnHost$ True | StaticAbilities$ STMayLook | Duration$ Permanent | ForgetOnMoved$ Exile
-SVar:STMayLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at it for as long as it remains exiled.
+SVar:STMayLook:Mode$ Continuous | MayLookAt$ You | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at it for as long as it remains exiled.
 K:Class:2:1 U B:AddStaticAbility$ SMenace
 SVar:SMenace:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Secondary$ True | Description$ Creatures you control have menace.
 K:Class:3:2 U B:AddStaticAbility$ SMayPlay

@@ -5,6 +5,6 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBTax,DBDetain
 SVar:DBTax:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ RaiseCost | SpellDescription$ Until your next turn, spells your opponents cast cost {1} more to cast.
-SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card | Activator$ Opponent | Type$ Spell | Amount$ 1 | EffectZone$ Command | Description$ Spells your opponents cast cost {1} more to cast.
+SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card | Activator$ Opponent | Type$ Spell | Amount$ 1 | Description$ Spells your opponents cast cost {1} more to cast.
 SVar:DBDetain:DB$ Pump | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | Duration$ UntilYourNextTurn | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain. | SpellDescription$ Arrest — Detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
 Oracle:When Tax Collector enters, choose one —\n• Tax — Until your next turn, spells your opponents cast cost {1} more to cast.\n• Arrest — Detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)

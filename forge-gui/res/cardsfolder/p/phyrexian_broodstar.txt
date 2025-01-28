@@ -4,7 +4,7 @@ Types:Creature Phyrexian Beast
 PT:*/*
 K:Affinity:Phyrexian
 K:Flying
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Phyrexians you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Phyrexians you control.
 SVar:X:Count$Valid Phyrexian.YouCtrl
 SVar:NoZeroToughnessAI:True
 SVar:BuffedBy:Phyrexian

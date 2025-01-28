@@ -2,7 +2,7 @@ Name:Isengard Unleashed
 ManaCost:2 R R R
 Types:Sorcery
 A:SP$ Effect | ReplacementEffects$ DamageEvent | StaticAbilities$ STCantPrevent | SpellDescription$ Damage can't be prevented this turn. If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead.
-SVar:STCantPrevent:Mode$ CantPreventDamage | EffectZone$ Command | Description$ Damage can't be prevented this turn.
+SVar:STCantPrevent:Mode$ CantPreventDamage | Description$ Damage can't be prevented this turn.
 SVar:DamageEvent:Event$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent.OppCtrl,Opponent | ReplaceWith$ DmgTrice | Description$ If a source you control would deal damage this turn to an opponent or a permanent an opponent controls, it deals triple that damage instead.
 SVar:DmgTrice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Thrice

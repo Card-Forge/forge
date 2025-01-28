@@ -16,7 +16,7 @@ Name:Kaldring, the Rimestaff
 ManaCost:1 U B
 Types:Legendary Snow Artifact
 A:AB$ Effect | Cost$ T | TgtZone$ Graveyard | ValidTgts$ Permanent.Snow+YouCtrl | TgtPrompt$ Choose target snow permanent card in your graveyard | StaticAbilities$ STPlay | ReplacementEffects$ ETBCreat | RememberObjects$ Targeted | ForgetOnMoved$ Graveyard,Stack | ForgetOnCast$ False | SpellDescription$ You may play target snow permanent card from your graveyard this turn. If you do, it enters tapped.
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play target snow permanent card from your graveyard this turn.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play target snow permanent card from your graveyard this turn.
 SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | ValidCause$ SpellAbility.MayPlaySource | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ If you do, it enters tapped.
 SVar:DBTap:DB$ Tap | Defined$ ReplacedCard | ETB$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
