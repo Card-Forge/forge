@@ -1971,6 +1971,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateSpeed(this);
         game.fireEvent(new GameEventSpeedUp()); //play sound effect
     }
+    public final void decreaseSpeed() {
+        if (speed > 1) { // can't decrease speed below 1
+            speed--;
+            view.updateSpeed(this);
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        }
+    }
     public final boolean noSpeed() {
         return speed == 0;
     }

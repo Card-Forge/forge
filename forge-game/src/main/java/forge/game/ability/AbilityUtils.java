@@ -3591,6 +3591,10 @@ public class AbilityUtils {
             return doXMath(player.getLifeStartedThisTurnWith(), m, source, ctb);
         }
 
+        if (value.contains("Speed")) {
+            return doXMath(player.getSpeed(), m, source, ctb);
+        }
+
         if (value.contains("SVarAmount")) {
             return doXMath(calculateAmount(source, ctb.getSVar(player.toString()), ctb), m, source, ctb);
         }
