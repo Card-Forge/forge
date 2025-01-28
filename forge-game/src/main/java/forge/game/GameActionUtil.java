@@ -870,9 +870,9 @@ public final class GameActionUtil {
         }
         if (eff != null) {
             int idx = completeList.indexOf(eff);
-            if (idx > 0) {
+            if (idx < completeList.size() - 1) {
                 // effects with this param have the responsibility to realign it when later cards are reached
-                sa.setSVar("StaticEffectUntilCardID", String.valueOf(completeList.get(idx - 1).getId()));
+                sa.setSVar("StaticEffectUntilCardID", String.valueOf(completeList.get(idx + 1).getId()));
                 // add generous offset to timestamp, to ensure it applies last compared to cards that were ordered to ETB before it
                 idx += completeList.size() * 2;
             }
