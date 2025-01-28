@@ -1838,7 +1838,7 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Start your engines")) {
             final String trig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | CheckDefinedPlayer$ " +
                     "You.NoSpeed | TriggerDescription$ Start your engines! (" + inst.getReminderText() + ")";
-            final String effect = "DB$ IncreaseSpeed";
+            final String effect = "DB$ ChangeSpeed";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
