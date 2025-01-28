@@ -46,6 +46,7 @@ import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
@@ -57,6 +58,9 @@ import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jgrapht.alg.cycle.SzwarcfiterLauerSimpleCycles;
+import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DefaultEdge;
 
 import java.util.*;
 
@@ -70,6 +74,9 @@ public class GameAction {
     private final Game game;
 
     private boolean holdCheckingStaticAbilities = false;
+
+    private final static Comparator<StaticAbility> effectOrder = Comparator.comparing(StaticAbility::isCharacteristicDefining).reversed()
+            .thenComparing(s -> s.getHostCard().getLayerTimestamp());
 
     public GameAction(Game game0) {
         game = game0;
@@ -138,8 +145,16 @@ public class GameAction {
             return moveToJunkyard(c, cause, params);
         }
 
-        boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
+        if (c.isSplitCard() && toBattlefield && c.getCastSA() == null) {
+            // need to set as empty room
+            c.updateRooms();
+        }
 
+        if (fromBattlefield && !toBattlefield) {
+            c.getController().setRevolt(true);
+        }
+
+        boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
         Card copied = null;
         Card lastKnownInfo = null;
 
@@ -153,33 +168,6 @@ public class GameAction {
             if (ReplacementType.Moved.equals(re.getMode()) && cause.getReplacingObject(AbilityKey.CardLKI).equals(c)) {
                 lastKnownInfo = (Card) cause.getReplacingObject(AbilityKey.CardLKI);
             }
-        }
-
-        if (c.isSplitCard()) {
-            boolean resetToOriginal = false;
-
-            if (c.isManifested() || c.isCloaked()) {
-                if (fromBattlefield) {
-                    // Make sure the card returns from the battlefield as the original card with two halves
-                    resetToOriginal = true;
-                }
-            } else if (zoneTo.is(ZoneType.Battlefield) && c.isRoom()) {
-                if (c.getCastSA() == null) {
-                    // need to set as empty room
-                    c.updateRooms();
-                }
-            } else if (!zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield)) {
-                // For regular splits, recreate the original state unless the card is going to stack as one half
-                resetToOriginal = true;
-            }
-
-            if (resetToOriginal) {
-                c.setState(CardStateName.Original, true);
-            }
-        }
-
-        if (fromBattlefield && !toBattlefield) {
-            c.getController().setRevolt(true);
         }
 
         // Don't copy Tokens, copy only cards leaving the battlefield
@@ -258,8 +246,6 @@ public class GameAction {
                 }
             } else {
                 // when a card leaves the battlefield, ensure it's in its original state
-                // (we need to do this on the object before copying it, or it won't work correctly e.g.
-                // on Transformed objects)
                 copied.setState(CardStateName.Original, false);
                 copied.setBackSide(false);
             }
@@ -1188,16 +1174,25 @@ public class GameAction {
             }
         }, true);
 
-        final Comparator<StaticAbility> comp = (a, b) -> ComparisonChain.start()
-                .compareTrueFirst(a.isCharacteristicDefining(), b.isCharacteristicDefining())
-                .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
-                .result();
-        staticAbilities.sort(comp);
+        staticAbilities.sort(effectOrder);
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
         for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {
             List<StaticAbility> toAdd = Lists.newArrayList();
-            for (final StaticAbility stAb : staticAbilities) {
+            List<StaticAbility> staticsForLayer = Lists.newArrayList();
+            for (StaticAbility stAb : staticAbilities) {
+                if (stAb.getLayers().contains(layer)) {
+                    staticsForLayer.add(stAb);
+                }
+            }
+
+            while (!staticsForLayer.isEmpty()) {
+                StaticAbility stAb = staticsForLayer.get(0);
+                // dependency with CDA seems unlikely
+                if (!stAb.isCharacteristicDefining()) {
+                    stAb = findStaticAbilityToApply(layer, staticsForLayer, preList, affectedPerAbility);
+                }
+                staticsForLayer.remove(stAb);
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
                 final CardCollectionView affectedHere;
                 if (previouslyAffected == null) {
@@ -1206,6 +1201,9 @@ public class GameAction {
                         affectedPerAbility.put(stAb, affectedHere);
                     }
                 } else {
+                    // 613.6 If an effect starts to apply in one layer and/or sublayer, it will continue to be applied
+                    // to the same set of objects in each other applicable layer and/or sublayer,
+                    // even if the ability generating the effect is removed during this process.
                     affectedHere = previouslyAffected;
                     stAb.applyContinuousAbility(layer, previouslyAffected);
                 }
@@ -1219,6 +1217,9 @@ public class GameAction {
                         }
                     }
                 }
+                // 613.8c. After each effect is applied, the order of remaining effects is reevaluated
+                // and may change if an effect that has not yet been applied becomes
+                // dependent on or independent of one or more other effects that have not yet been applied.
             }
             staticAbilities.addAll(toAdd);
             for (Player p : game.getPlayers()) {
@@ -1292,6 +1293,115 @@ public class GameAction {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
         game.getTracker().unfreeze();
+    }
+
+    private StaticAbility findStaticAbilityToApply(StaticAbilityLayer layer, List<StaticAbility> staticsForLayer, CardCollectionView preList, Map<StaticAbility, CardCollectionView> affectedPerAbility) {
+        if (staticsForLayer.size() == 1) {
+            return staticsForLayer.get(0);
+        }
+        if (!StaticAbilityLayer.CONTINUOUS_LAYERS_WITH_DEPENDENCY.contains(layer)) {
+            return staticsForLayer.get(0);
+        }
+
+        DefaultDirectedGraph<StaticAbility, DefaultEdge> dependencyGraph = new DefaultDirectedGraph<>(DefaultEdge.class);
+
+        for (StaticAbility stAb : staticsForLayer) {
+            dependencyGraph.addVertex(stAb);
+
+            boolean exists = stAb.getHostCard().getStaticAbilities().contains(stAb);
+            boolean compareAffected = true;
+            CardCollectionView affectedHere = affectedPerAbility.get(stAb);
+            if (affectedHere == null) {
+                affectedHere = StaticAbilityContinuous.getAffectedCards(stAb, preList);
+            } else {
+                compareAffected = false;
+            }
+            List<Object> effectResults = generateStaticAbilityResult(layer, stAb);
+
+            for (StaticAbility otherStAb : staticsForLayer) {
+                if (stAb == otherStAb) {
+                    continue;
+                }
+
+                boolean removeFull = true;
+                CardCollectionView affectedOther = affectedPerAbility.get(otherStAb);
+                if (affectedOther == null) {
+                    affectedOther = otherStAb.applyContinuousAbilityBefore(layer, preList);
+                    if (affectedOther == null) {
+                        // ability was removed
+                        continue;
+                    }
+                } else {
+                    removeFull = false;
+                    otherStAb.applyContinuousAbility(layer, affectedOther);
+                }
+
+                // 613.8a. An effect is said to "depend on" another if
+                // (b) applying the other would change the text or the existence of the first effect...
+                boolean dependency = exists != stAb.getHostCard().getStaticAbilities().contains(stAb);
+                // ...what it applies to...
+                if (!dependency && compareAffected) {
+                    CardCollectionView affectedAfterOther = StaticAbilityContinuous.getAffectedCards(stAb, preList);
+                    if (!Iterators.elementsEqual(affectedHere.iterator(), affectedAfterOther.iterator())) {
+                        dependency = true;
+                    }
+                }
+                // ...or what it does to any of the things it applies to
+                if (!dependency) {
+                    List<Object> effectResultsAfterOther = generateStaticAbilityResult(layer, stAb);
+                    if (!effectResults.equals(effectResultsAfterOther)) {
+                        dependency = true;
+                    }
+                }
+
+                if (dependency) {
+                    dependencyGraph.addVertex(otherStAb);
+                    dependencyGraph.addEdge(stAb, otherStAb);
+                }
+
+                // undo changes and check next pair
+                game.getStaticEffects().removeStaticEffect(otherStAb, layer, removeFull);
+            }
+            // when lucky the effect with the earliest timestamp has no dependency
+            // then we can safely return it - otherwise we need to build the whole graph
+            // because it might still be part of a loop
+            if (dependencyGraph.edgeSet().isEmpty() && stAb == staticsForLayer.get(0)) {
+                return stAb;
+            }
+        }
+
+        // 613.8b. If several dependent effects form a dependency loop, then this rule is ignored
+        List<List<StaticAbility>> cycles = new SzwarcfiterLauerSimpleCycles<>(dependencyGraph).findSimpleCycles();
+        for (List<StaticAbility> cyc : cycles) {
+            for (int i = 0 ; i < cyc.size() - 1 ; i++) {
+                dependencyGraph.removeEdge(cyc.get(i), cyc.get(i + 1));
+            }
+            // remove final edge
+            dependencyGraph.removeEdge(cyc.get(cyc.size() - 1), cyc.get(0));
+        }
+
+        // remove all effects that are still dependent on another
+        Set<StaticAbility> toRemove = Sets.newHashSet();
+        for (StaticAbility stAb : dependencyGraph.vertexSet()) {
+            if (dependencyGraph.outDegreeOf(stAb) > 0) {
+                toRemove.add(stAb);
+            }
+        }
+        dependencyGraph.removeAllVertices(toRemove);
+
+        // now the earlist one left is the correct choice
+        List<StaticAbility> statics = Lists.newArrayList(dependencyGraph.vertexSet());
+        statics.sort(Comparator.comparing(s -> s.getHostCard().getLayerTimestamp()));
+
+        return statics.get(0);
+    }
+
+    private List<Object> generateStaticAbilityResult(StaticAbilityLayer layer, StaticAbility stAb) {
+        List<Object> results = Lists.newArrayList();
+        if (layer == StaticAbilityLayer.CONTROL) {
+            results.addAll(AbilityUtils.getDefinedPlayers(stAb.getHostCard(), stAb.getParam("GainControl"), stAb));
+        }
+        return results;
     }
 
     public final boolean checkStateEffects(final boolean runEvents) {
