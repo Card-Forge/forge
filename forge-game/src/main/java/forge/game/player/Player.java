@@ -1967,9 +1967,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void increaseSpeed() {
         if (speedEffect == null) createSpeedEffect();
-        speed++;
-        view.updateSpeed(this);
-        game.fireEvent(new GameEventSpeedUp()); //play sound effect
+        if (!maxSpeed()) { // can't increase past 4
+            speed++;
+            view.updateSpeed(this);
+            game.fireEvent(new GameEventSpeedUp()); //play sound effect
+        }
     }
     public final void decreaseSpeed() {
         if (speed > 1) { // can't decrease speed below 1
@@ -1994,7 +1996,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         String trigger = "Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Command | ActivationLimit$ 1 | " +
                 "PlayerTurn$ True | TriggerDescription$ Your speed increases once on each of your turns when an " +
                 "opponent loses life.";
-        String speedUp = "DB$ IncreaseSpeed";
+        String speedUp = "DB$ ChangeSpeed";
         Trigger lifeLostTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
         lifeLostTrigger.setOverridingAbility(AbilityFactory.getAbility(speedUp, eff));
         eff.addTrigger(lifeLostTrigger);
