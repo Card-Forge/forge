@@ -26,6 +26,13 @@ ScryfallCode=DRC
 18 R Aetheric Amplifier @Victor Sales
 19 R Stridehangar Automaton @Aaron J. Riley
 20 R Accursed Duneyard @Maxime Minard
+21 R On Wings of Gold @Danny Schwartz
+22 R Priest of the Crossing @Edgar Sánchez Hidalgo
+23 R Renewed Solidarity @Julie Dillon
+24 R Wizened Mentor @Bruno Biazotto
+25 R Prophet of the Scarab @Cristi Balanescu
+26 R Rhet-Tomb Mystic @Irina Nordsol
+27 R Lost Monarch of Ifnir @Piotr Dura
 28 R Territorial Aetherkite @Lars Grant-West
 29 R Nissa, Worldsoul Speaker @Magali Villeneuve
 30 R Peema Trailblazer @Michele Giorgi
@@ -34,6 +41,7 @@ ScryfallCode=DRC
 33 R Aetherflux Conduit @Michael Phillippi
 34 R Aetheric Amplifier @Victor Sales
 35 R Stridehangar Automaton @Aaron J. Riley
+36 R Accursed Duneyard @Maxime Minard
 37 U Swords to Plowshares @Piotr Dura
 38 R Commence the Endgame @Helge C. Balzer
 39 U Reality Shift @Villarrte

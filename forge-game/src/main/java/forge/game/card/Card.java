@@ -4099,8 +4099,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         if (hasKeyword(Keyword.RECONFIGURE)) {
             Card eff = SpellAbilityEffect.createEffect(sa, sa.getActivatingPlayer(), "Reconfigure Effect", getImageKey());
-            eff.setSetCode(getSetCode());
-            eff.setRarity(getRarity());
             eff.setRenderForUI(false);
             eff.addRemembered(this);
 
