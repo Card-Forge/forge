@@ -165,8 +165,16 @@ public class GameAction {
             return moveToJunkyard(c, cause, params);
         }
 
-        boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
+        if (c.isSplitCard() && toBattlefield && c.getCastSA() == null) {
+            // need to set as empty room
+            c.updateRooms();
+        }
 
+        if (fromBattlefield && !toBattlefield) {
+            c.getController().setRevolt(true);
+        }
+
+        boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
         Card copied = null;
         Card lastKnownInfo = null;
 
@@ -180,33 +188,6 @@ public class GameAction {
             if (ReplacementType.Moved.equals(re.getMode()) && cause.getReplacingObject(AbilityKey.CardLKI).equals(c)) {
                 lastKnownInfo = (Card) cause.getReplacingObject(AbilityKey.CardLKI);
             }
-        }
-
-        if (c.isSplitCard()) {
-            boolean resetToOriginal = false;
-
-            if (c.isManifested() || c.isCloaked()) {
-                if (fromBattlefield) {
-                    // Make sure the card returns from the battlefield as the original card with two halves
-                    resetToOriginal = true;
-                }
-            } else if (zoneTo.is(ZoneType.Battlefield) && c.isRoom()) {
-                if (c.getCastSA() == null) {
-                    // need to set as empty room
-                    c.updateRooms();
-                }
-            } else if (!zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield)) {
-                // For regular splits, recreate the original state unless the card is going to stack as one half
-                resetToOriginal = true;
-            }
-
-            if (resetToOriginal) {
-                c.setState(CardStateName.Original, true);
-            }
-        }
-
-        if (fromBattlefield && !toBattlefield) {
-            c.getController().setRevolt(true);
         }
 
         // Don't copy Tokens, copy only cards leaving the battlefield
@@ -285,8 +266,6 @@ public class GameAction {
                 }
             } else {
                 // when a card leaves the battlefield, ensure it's in its original state
-                // (we need to do this on the object before copying it, or it won't work correctly e.g.
-                // on Transformed objects)
                 copied.setState(CardStateName.Original, false);
                 copied.setBackSide(false);
             }
