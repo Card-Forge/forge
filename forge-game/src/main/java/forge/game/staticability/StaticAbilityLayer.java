@@ -35,4 +35,6 @@ public enum StaticAbilityLayer {
 
     public final static ImmutableList<StaticAbilityLayer> CONTINUOUS_LAYERS =
             ImmutableList.of(COPY, CONTROL, TEXT, TYPE, COLOR, ABILITIES, CHARACTERISTIC, SETPT, MODIFYPT, RULES);
+    public final static ImmutableList<StaticAbilityLayer> CONTINUOUS_LAYERS_WITH_DEPENDENCY =
+            ImmutableList.of(COPY, CONTROL, TEXT, TYPE, ABILITIES, CHARACTERISTIC, SETPT);
 }

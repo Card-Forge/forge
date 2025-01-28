@@ -592,9 +592,7 @@ public final class StaticAbilityContinuous {
         }
 
         // start modifying the cards
-        for (int i = 0; i < affectedCards.size(); i++) {
-            final Card affectedCard = affectedCards.get(i);
-
+        for (Card affectedCard : affectedCards) {
             // Gain control
             if (layer == StaticAbilityLayer.CONTROL && params.containsKey("GainControl")) {
                 final PlayerCollection gain = AbilityUtils.getDefinedPlayers(hostCard, params.get("GainControl"), stAb);
@@ -792,9 +790,7 @@ public final class StaticAbilityContinuous {
                             final String costcmc = Integer.toString(affectedCard.getCMC());
                             ability = TextUtil.fastReplace(ability, "ConvertedManaCost", costcmc);
                         }
-                        if (ability.startsWith("AB") || ability.startsWith("ST")) { // grant the ability
-                            addedAbilities.add(affectedCard.getSpellAbilityForStaticAbility(ability, stAb));
-                        }
+                        addedAbilities.add(affectedCard.getSpellAbilityForStaticAbility(ability, stAb));
                     }
                 }
 
@@ -1016,7 +1012,7 @@ public final class StaticAbilityContinuous {
         return players;
     }
 
-    private static CardCollectionView getAffectedCards(final StaticAbility stAb, final CardCollectionView preList) {
+    public static CardCollectionView getAffectedCards(final StaticAbility stAb, final CardCollectionView preList) {
         final Card hostCard = stAb.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = hostCard.getController();
