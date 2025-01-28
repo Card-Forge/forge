@@ -399,16 +399,6 @@ public class DigEffect extends SpellAbilityEffect {
                                 moveParams.put(AbilityKey.CounterTable, table);
                             }
                         }
-                        if (sa.hasAdditionalAbility("AnimateSubAbility")) {
-                            // need LKI before Animate does apply
-                            moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
-
-                            final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
-                            host.addRemembered(c);
-                            AbilityUtils.resolve(animate);
-                            host.removeRemembered(c);
-                            animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
-                        }
                         c = game.getAction().moveTo(c.getController().getZone(destZone1), c, sa, moveParams);
                         if (destZone1.equals(ZoneType.Battlefield)) {
                             if (addToCombat(c, sa, "Attacking", "Blocking")) {

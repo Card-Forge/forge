@@ -757,6 +757,7 @@ public class MatchController extends AbstractGuiGame {
                 addItem(getFullControlMenuEntry("lblNoPaymentFromManaAbility", FullControlFlag.NoPaymentFromManaAbility, controlFlags));
                 addItem(getFullControlMenuEntry("lblNoFreeCombatCostHandling", FullControlFlag.NoFreeCombatCostHandling, controlFlags));
                 addItem(getFullControlMenuEntry("lblAllowPaymentStartWithMissingResources", FullControlFlag.AllowPaymentStartWithMissingResources, controlFlags));
+                addItem(getFullControlMenuEntry("lblLayerTimestampOrder", FullControlFlag.LayerTimestampOrder, controlFlags));
             }
         };
 

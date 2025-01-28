@@ -1516,6 +1516,7 @@ public final class CMatchUI
         addFullControlEntry(menu, "lblNoPaymentFromManaAbility", FullControlFlag.NoPaymentFromManaAbility, controlFlags);
         addFullControlEntry(menu, "lblNoFreeCombatCostHandling", FullControlFlag.NoFreeCombatCostHandling, controlFlags);
         addFullControlEntry(menu, "lblAllowPaymentStartWithMissingResources", FullControlFlag.AllowPaymentStartWithMissingResources, controlFlags);
+        addFullControlEntry(menu, "lblLayerTimestampOrder", FullControlFlag.LayerTimestampOrder, controlFlags);
 
         menu.show(view.getControl().getFieldViewFor(pv).getAvatarArea(), e.getX(), e.getY());
     }
