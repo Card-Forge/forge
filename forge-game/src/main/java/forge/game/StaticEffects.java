@@ -20,10 +20,12 @@ package forge.game;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.card.Card;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityLayer;
 
 /**
  * <p>
@@ -67,12 +69,17 @@ public class StaticEffects {
         return staticEffects.values();
     }
 
-    public boolean removeStaticEffect(final StaticAbility staticAbility) {
-        final StaticEffect currentEffect = staticEffects.remove(staticAbility);
+    public boolean removeStaticEffect(final StaticAbility staticAbility, final StaticAbilityLayer layer, final boolean removeFull) {
+        final StaticEffect currentEffect;
+        if (removeFull) {
+            currentEffect = staticEffects.remove(staticAbility);
+        } else {
+            currentEffect = staticEffects.get(staticAbility);
+        }
         if (currentEffect == null) {
             return false;
         }
-        currentEffect.remove();
+        currentEffect.remove(Lists.newArrayList(layer));
         return true;
     }
 }
