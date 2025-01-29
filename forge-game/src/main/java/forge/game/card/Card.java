@@ -844,6 +844,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             // 613.7f A permanent receives a new timestamp each time it turns face up or face down.
             c.setLayerTimestamp(ts);
             c.turnedFaceUpThisTurn = true;
+            c.updateRooms();
             c.updateStateForView(); //fixes cards with backside viewable
             // need to run faceup commands, currently
             // it does cleanup the modified facedown state
@@ -8217,10 +8218,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void updateRooms() {
-        if (!this.isRoom()) {
+        if (!isRoom()) {
             return;
         }
-        if (this.isFaceDown()) {
+        if (!isInPlay()) {
+            return;
+        }
+        if (isFaceDown()) {
             return;
         }
         if (unlockedRooms.isEmpty()) {
