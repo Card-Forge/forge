@@ -1,0 +1,11 @@
+Name:Debris Beetle
+ManaCost:2 B G
+Types:Artifact Vehicle
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When this Vehicle enters, each opponent loses 3 life and you gain 3 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Opponent | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+K:Crew:2
+DeckHas:Ability$LifeGain
+Oracle:Trample\nWhen this Vehicle enters, each opponent loses 3 life and you gain 3 life.\nCrew 2
