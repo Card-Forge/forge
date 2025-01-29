@@ -1,0 +1,11 @@
+Name:Thundering Broodwagon
+ManaCost:2 B B G G
+Types:Artifact Vehicle
+PT:6/5
+K:Menace
+K:Reach
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When this Vehicle enters, destroy target nonland permanent an opponent controls with mana value 4 or less.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+OppCtrl+cmcLE4 | TgtPrompt$ Select target nonland permanent an opponent controls with mana value 4 or less
+K:Crew:3
+K:Cycling:2
+Oracle:Menace, reach\nWhen this Vehicle enters, destroy target nonland permanent an opponent controls with mana value 4 or less.\nCrew 3\nCycling {2} ({2}, Discard this card: Draw a card.)

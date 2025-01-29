@@ -1,0 +1,9 @@
+Name:Afterburner Expert
+ManaCost:2 G
+Types:Creature Goblin Artificer
+PT:4/2
+A:AB$ PutCounter | Cost$ 2 G G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | Exhaust$ True | SpellDescription$ Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ Activated.Exhaust | TriggerZones$ Graveyard | Execute$ TrigChangeZone | TriggerDescription$ Whenever you activate an exhaust ability, return this card from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield
+DeckHas:Ability$Counters
+Oracle:Exhaust — {2}{G}{G}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)\nWhenever you activate an exhaust ability, return this card from your graveyard to the battlefield.

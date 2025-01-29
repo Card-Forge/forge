@@ -844,6 +844,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             // 613.7f A permanent receives a new timestamp each time it turns face up or face down.
             c.setLayerTimestamp(ts);
             c.turnedFaceUpThisTurn = true;
+            c.updateRooms();
             c.updateStateForView(); //fixes cards with backside viewable
             // need to run faceup commands, currently
             // it does cleanup the modified facedown state
@@ -2649,7 +2650,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
-                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")) {
+                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")
+                        || keyword.equals("Start your engines")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -4098,8 +4100,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         if (hasKeyword(Keyword.RECONFIGURE)) {
             Card eff = SpellAbilityEffect.createEffect(sa, sa.getActivatingPlayer(), "Reconfigure Effect", getImageKey());
-            eff.setSetCode(getSetCode());
-            eff.setRarity(getRarity());
             eff.setRenderForUI(false);
             eff.addRemembered(this);
 
@@ -6754,10 +6754,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public void becomesCrewed(SpellAbility sa) {
         timesCrewedThisTurn++;
-        CardCollection crew = sa.getPaidList("TappedCards", true);
+        CardCollection crew = sa.getPaidList("Tapped", true);
         addCrewedByThisTurn(crew);
-        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Vehicle, this);
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.Crew, crew);
         game.getTriggerHandler().runTrigger(TriggerType.BecomesCrewed, runParams, false);
     }
@@ -6770,11 +6769,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (crewedByThisTurn != null) crewedByThisTurn.addAll(crew);
         else crewedByThisTurn = crew;
     }
-    public final CardCollection getCrewedByThisTurn() {
+    public final CardCollectionView getCrewedByThisTurn() {
+        if (crewedByThisTurn == null) {
+            return CardCollection.EMPTY;
+        }
         return crewedByThisTurn;
     }
-    public final void setCrewedByThisTurn(final CardCollection crew) {
-        crewedByThisTurn = crew;
+    public final void setCrewedByThisTurn(final CardCollectionView crew) {
+        crewedByThisTurn = new CardCollection(crew);
     }
 
     public final void visitAttraction(Player visitor) {
@@ -7269,10 +7271,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void onCleanupPhase(final Player turn) {
-        if (!StaticAbilityNoCleanupDamage.damageNotRemoved(this)) {
-            setDamage(0);
-        }
-        setHasBeenDealtDeathtouchDamage(false);
         resetExcessDamage();
         setRegeneratedThisTurn(0);
         resetShieldCount();
@@ -8216,10 +8214,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void updateRooms() {
-        if (!this.isRoom()) {
+        if (!isRoom()) {
             return;
         }
-        if (this.isFaceDown()) {
+        if (!isInPlay()) {
+            return;
+        }
+        if (isFaceDown()) {
             return;
         }
         if (unlockedRooms.isEmpty()) {

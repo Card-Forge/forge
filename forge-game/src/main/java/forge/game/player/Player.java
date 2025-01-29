@@ -117,6 +117,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int devotionMod;
     private boolean revolt = false;
     private Card ringBearer, theRing;
+    private int speed;
 
     private List<Card> discardedThisTurn = new ArrayList<>();
     private List<Card> sacrificedThisTurn = new ArrayList<>();
@@ -188,6 +189,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<Card, Integer> commanderCast = Maps.newHashMap();
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
     private DetachedCardEffect commanderEffect = null;
+    private DetachedCardEffect speedEffect;
 
     private Card monarchEffect;
     private Card initiativeEffect;
@@ -1958,6 +1960,48 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void resetRingTemptedYou() {
         numRingTemptedYou = 0;
+    }
+
+    public final int getSpeed() {
+        return speed;
+    }
+    public final void increaseSpeed() {
+        if (speedEffect == null) createSpeedEffect();
+        if (!maxSpeed()) { // can't increase past 4
+            speed++;
+            view.updateSpeed(this);
+            game.fireEvent(new GameEventSpeedUp()); //play sound effect
+        }
+    }
+    public final void decreaseSpeed() {
+        if (speed > 1) { // can't decrease speed below 1
+            speed--;
+            view.updateSpeed(this);
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        }
+    }
+    public final boolean noSpeed() {
+        return speed == 0;
+    }
+    public final boolean maxSpeed() {
+        return speed == 4;
+    }
+    public final void setSpeed(int i) { //just used for copy/save
+        speed = i;
+        if (speed > 0) view.updateSpeed(this);
+    }
+    public final void createSpeedEffect() {
+        final PlayerZone com = getZone(ZoneType.Command);
+        DetachedCardEffect eff = new DetachedCardEffect(this, "Speed Effect");
+        String trigger = "Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Command | ActivationLimit$ 1 | " +
+                "PlayerTurn$ True | CheckSVar$ Count$YourSpeed | SVarCompare$ LT4 | "
+                + "TriggerDescription$ Your speed increases once on each of your turns when an opponent loses life.";
+        String speedUp = "DB$ ChangeSpeed";
+        Trigger lifeLostTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
+        lifeLostTrigger.setOverridingAbility(AbilityFactory.getAbility(speedUp, eff));
+        eff.addTrigger(lifeLostTrigger);
+        this.speedEffect = eff;
+        com.add(eff);
     }
 
     public final List<Card> getPlaneswalkedToThisTurn() {

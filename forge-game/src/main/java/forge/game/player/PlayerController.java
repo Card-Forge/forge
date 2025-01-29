@@ -65,7 +65,7 @@ public abstract class PlayerController {
         NoPaymentFromManaAbility,
         NoFreeCombatCostHandling,
         AllowPaymentStartWithMissingResources,
-        //AdditionalLayerTimestampOrder // tokens etc.
+        LayerTimestampOrder // for StaticEffect$, tokens later etc.
     }
 
     private Set<FullControlFlag> fullControls = EnumSet.noneOf(FullControlFlag.class);

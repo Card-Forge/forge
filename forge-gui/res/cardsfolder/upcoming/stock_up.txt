@@ -1,0 +1,5 @@
+Name:Stock Up
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Dig | DigNum$ 5 | ChangeNum$ 2 | SpellDescription$ Look at the top five cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
+Oracle:Look at the top five cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
