@@ -7271,10 +7271,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public void onCleanupPhase(final Player turn) {
-        if (!StaticAbilityNoCleanupDamage.damageNotRemoved(this)) {
-            setDamage(0);
-        }
-        setHasBeenDealtDeathtouchDamage(false);
         resetExcessDamage();
         setRegeneratedThisTurn(0);
         resetShieldCount();
