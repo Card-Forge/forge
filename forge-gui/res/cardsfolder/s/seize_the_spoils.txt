@@ -1,7 +1,8 @@
 Name:Seize the Spoils
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 R Discard<1/Card/card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create a Treasure token. | StackDescription$ SpellDescription
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Discard<1/Card> | EffectZone$ All | Description$ As an additional cost to cast this spell, discard a card.
+A:SP$ Draw | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create a Treasure token. | StackDescription$ SpellDescription
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHas:Ability$Discard|Token
 DeckHints:Keyword$Madness & Ability$Delirium
