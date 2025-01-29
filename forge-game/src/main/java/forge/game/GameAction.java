@@ -82,12 +82,6 @@ public class GameAction {
         game = game0;
     }
 
-    public final void resetActivationsPerTurn() {
-        for (final Card card : game.getCardsInGame()) {
-            card.resetActivationsPerTurn();
-        }
-    }
-
     public Card changeZone(final Zone zoneFrom, Zone zoneTo, final Card c, Integer position, SpellAbility cause) {
         return changeZone(zoneFrom, zoneTo, c, position, cause, null);
     }

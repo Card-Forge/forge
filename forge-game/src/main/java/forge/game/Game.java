@@ -1185,6 +1185,12 @@ public class Game {
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();
         }
+        for (final Card c : getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+            c.onCleanupPhase(getPhaseHandler().getPlayerTurn());
+        }
+        for (final Card card : getCardsInGame()) {
+            card.resetActivationsPerTurn();
+        }
     }
 
     public void addCounterAddedThisTurn(Player putter, CounterType cType, Card card, Integer value) {
