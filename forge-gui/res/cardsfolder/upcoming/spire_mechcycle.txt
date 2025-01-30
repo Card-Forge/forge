@@ -7,4 +7,5 @@ A:AB$ Animate | Cost$ tapXType<1/Mount.Other,Vehicle.Other/another Mount or Vehi
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$Valid Mount.Other+YouCtrl,Vehicle.Other+YouCtrl
 K:Crew:2
+DeckHints:Type$Mount|Vehicle
 Oracle:Haste\nExhaust — Tap another untapped Mount or Vehicle you control: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it for each Mount and/or Vehicle you control other than this Vehicle. (Activate each exhaust ability only once.)\nCrew 2
