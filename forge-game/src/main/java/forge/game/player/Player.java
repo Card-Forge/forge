@@ -1994,8 +1994,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerZone com = getZone(ZoneType.Command);
         DetachedCardEffect eff = new DetachedCardEffect(this, "Speed Effect");
         String trigger = "Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Command | ActivationLimit$ 1 | " +
-                "PlayerTurn$ True | TriggerDescription$ Your speed increases once on each of your turns when an " +
-                "opponent loses life.";
+                "PlayerTurn$ True | CheckSVar$ Count$YourSpeed | SVarCompare$ LT4 | "
+                + "TriggerDescription$ Your speed increases once on each of your turns when an opponent loses life.";
         String speedUp = "DB$ ChangeSpeed";
         Trigger lifeLostTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
         lifeLostTrigger.setOverridingAbility(AbilityFactory.getAbility(speedUp, eff));

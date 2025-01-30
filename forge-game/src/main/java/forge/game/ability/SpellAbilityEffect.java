@@ -1041,7 +1041,9 @@ public abstract class SpellAbilityEffect {
             exilingSource = cause.getOriginalHost();
         }
         movedCard.setExiledWith(exilingSource);
-        movedCard.setExiledBy(cause.getActivatingPlayer());
+        Player exiler = cause.hasParam("DefinedExiler") ?
+                getDefinedPlayersOrTargeted(cause, "DefinedExiler").get(0) : cause.getActivatingPlayer();
+        movedCard.setExiledBy(exiler);
     }
 
     public static GameCommand exileEffectCommand(final Game game, final Card effect) {
