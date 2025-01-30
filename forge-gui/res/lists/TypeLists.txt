@@ -251,6 +251,7 @@ Scion:Scions
 Scorpion:Scorpions
 Scout:Scouts
 Sculpture:Sculptures
+Seal:Seals
 Serf:Serfs
 Serpent:Serpents
 Servo:Servos
