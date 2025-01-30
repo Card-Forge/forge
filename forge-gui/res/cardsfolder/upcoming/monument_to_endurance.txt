@@ -6,4 +6,6 @@ SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBToken,DBLoseLife | ChoiceRestrictio
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3 | SpellDescription$ Each opponent loses 3 life.
+DeckNeeds:Ability$Discard
+DeckHas:Ability$Token
 Oracle:Whenever you discard a card, choose one that hasn't been chosen this turn —\n• Draw a card.\n• Create a Treasure token.\n• Each opponent loses 3 life.

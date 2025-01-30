@@ -7,4 +7,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescri
 SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact.YouOwn | TgtPrompt$ Choose up to one target artifact card in your graveyard | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 1
 K:Crew:6
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Graveyard
 Oracle:Other artifact creatures you control get +2/+2.\nWhenever this Vehicle attacks, return up to one target artifact card from your graveyard to the battlefield.\nCrew 6
