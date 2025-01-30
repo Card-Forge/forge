@@ -1,0 +1,8 @@
+Name:Stampeding Scurryfoot
+ManaCost:G
+Types:Creature Mouse
+PT:1/1
+A:AB$ PutCounter | Cost$ 3 G | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | Exhaust$ True | SubAbility$ DBToken | SpellDescription$ Put a +1/+1 counter on this creature. Create a 3/3 green Elephant creature token. (Activate each exhaust ability only once.)
+SVar:DBToken:DB$ Token | TokenScript$ g_3_3_elephant
+DeckHas:Ability$Counters|Token
+Oracle:Exhaust — {3}{G}: Put a +1/+1 counter on this creature. Create a 3/3 green Elephant creature token. (Activate each exhaust ability only once.)
