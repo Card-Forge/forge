@@ -295,6 +295,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private List<String> notedTypes = new ArrayList<>();
     private List<String> chosenColors;
     private Set<String> chosenColorID;
+    private List<String> chosenLetters;
     private List<String> chosenName = new ArrayList<>();
     private Integer chosenNumber;
     private Player chosenPlayer;
@@ -2015,6 +2016,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void clearChosenNumber() {
         chosenNumber = null;
         view.clearChosenNumber();
+    }
+
+    public boolean hasChosenLetter() {
+        return chosenLetters != null && !chosenLetters.isEmpty();
+    }
+
+    public final List<String> getChosenLetters() {
+        return chosenLetters;
+    }
+    public final void setChosenLetters(final List<String> letters) {
+        Collections.sort(letters);
+        chosenLetters = letters;
+        view.updateChosenLetters(this);
     }
 
     public final Card getExiledWith() {

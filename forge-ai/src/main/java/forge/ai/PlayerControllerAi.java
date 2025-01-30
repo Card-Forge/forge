@@ -734,6 +734,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public List<String> chooseLetter(int n, SpellAbility sa, List<String> letters) {
+        return Aggregates.random(letters, n);
+    }
+
+    @Override
     public PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls) {
         //TODO create AI logic for this
         return Aggregates.random(rolls);

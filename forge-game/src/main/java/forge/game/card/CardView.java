@@ -410,6 +410,12 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.NotedTypes, c.getNotedTypes());
     }
 
+    public List<String> getChosenLetters() {
+        return get(TrackableProperty.ChosenLetters);
+    }
+    void updateChosenLetters(Card c) {
+        set(TrackableProperty.ChosenLetters, c.getChosenLetters());
+    }
     public String getChosenNumber() {
         return get(TrackableProperty.ChosenNumber);
     }
