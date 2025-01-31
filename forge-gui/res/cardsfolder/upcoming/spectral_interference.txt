@@ -1,0 +1,5 @@
+Name:Spectral Interference
+ManaCost:1 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature spell | UnlessCost$ 4 | SpellDescription$ Counter target artifact or creature spell unless its controller pays {4}.
+Oracle:Counter target artifact or creature spell unless its controller pays {4}.
