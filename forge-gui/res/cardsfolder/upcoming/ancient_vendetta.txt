@@ -8,5 +8,4 @@ SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPla
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Y:SVar$X/NMinus.4
-SVar:Z:Imprinted$Amount
 Oracle:Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. Then that player shuffles.
