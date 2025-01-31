@@ -1,0 +1,6 @@
+Name:Gallant Strike
+ManaCost:1 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.toughnessGE4 | TgtPrompt$ Select target creature with toughness 4 or greater | SpellDescription$ Destroy target creature with toughness 4 or greater.
+K:Cycling:2
+Oracle:Destroy target creature with toughness 4 or greater.\nCycling {2} ({2}, Discard this card: Draw a card.)
