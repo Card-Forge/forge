@@ -98,6 +98,7 @@ public class AdventureEventController implements Serializable {
 
         AdventureEventData e;
 
+        // TODO After a certain amount of wins, stop offering jump start events
         if (random.nextInt(10) <= 2) {
             e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
         } else {
