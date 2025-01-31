@@ -1,0 +1,8 @@
+Name:Broodheart Engine
+ManaCost:B G
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+A:AB$ ChangeZone | Cost$ 2 B G T Sac<1/CARDNAME/this artifact> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn,Vehicle.YouOwn | SorcerySpeed$ True | SpellDescription$ Return target creature or Vehicle card from your graveyard to the battlefield. Activate only as a sorcery.
+DeckHas:Ability$Surveil|Sacrifice|Graveyard
+Oracle:At the beginning of your upkeep, surveil 1.\n{2}{B}{G}, {T}, Sacrifice this artifact: Return target creature or Vehicle card from your graveyard to the battlefield. Activate only as a sorcery.

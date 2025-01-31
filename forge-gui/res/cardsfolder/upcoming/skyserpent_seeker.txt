@@ -1,0 +1,10 @@
+Name:Skyserpent Seeker
+ManaCost:G U
+Types:Creature Snake
+PT:1/1
+K:Flying
+K:Deathtouch
+A:AB$ DigUntil | Cost$ 4 | Valid$ Land | ValidDescription$ land | Amount$ 2 | FoundDestination$ Battlefield | Tapped$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | Exhaust$ True | SubABility$ DBPutCounter | SpellDescription$ Reveal cards from the top of your library until you reveal two land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying, deathtouch\nExhaust — {4}: Reveal cards from the top of your library until you reveal two land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)

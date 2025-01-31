@@ -13,6 +13,7 @@ import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.keyword.Keyword;
 import forge.game.player.*;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
@@ -516,20 +517,23 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         // CR 401.4
-        if (destination.isDeck() && !shuffle && tgtCards.size() > 1) {
+        if (((destination.isDeck() && tgtCards.size() > 1) || chooser.getController().isFullControl(FullControlFlag.LayerTimestampOrder)) && !shuffle) {
             if (sa.hasParam("RandomOrder")) {
                 final CardCollection random = new CardCollection(tgtCards);
                 CardLists.shuffle(random);
                 tgtCards = random;
+            } else if (sa.hasParam("Chooser")) {
+                tgtCards = chooser.getController().orderMoveToZoneList(tgtCards, destination, sa);
             } else {
-                if (sa.hasParam("Chooser"))
-                    tgtCards = chooser.getController().orderMoveToZoneList(tgtCards, destination, sa);
-                else
-                    tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
+                tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
             }
         }
 
         for (final Card tgtC : tgtCards) {
+            if (sa.hasSVar("StaticEffectUntilCardID") && sa.getSVarInt("StaticEffectUntilCardID") == tgtC.getId()) {
+                sa.removeSVar("StaticEffectTimestamp");
+            }
+
             final Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
@@ -595,12 +599,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 if (sa.hasParam("WithCountersType")) {
-                    CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                     int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-
                     GameEntityCounterTable table = new GameEntityCounterTable();
-                    table.put(activator, gameCard, cType, cAmount);
                     moveParams.put(AbilityKey.CounterTable, table);
+                    for (String type : sa.getParam("WithCountersType").split(",")) {
+                        CounterType cType = CounterType.getType(type);
+                        table.put(activator, gameCard, cType, cAmount);
+                    }
                 } else if (sa.hasParam("WithNotedCounters")) {
                     CountersNoteEffect.loadCounters(gameCard, hostCard, chooser, sa, moveParams);
                 }
@@ -650,19 +655,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     else { // When it should enter the battlefield attached to an illegal player it fails
                         continue;
                     }
-                }
-
-                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
-                    // need LKI before Animate does apply
-                    if (!moveParams.containsKey(AbilityKey.CardLKI)) {
-                        moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(gameCard));
-                    }
-
-                    final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
-                    hostCard.addRemembered(gameCard);
-                    AbilityUtils.resolve(animate);
-                    hostCard.removeRemembered(gameCard);
-                    animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                 }
 
                 // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
@@ -1276,16 +1268,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     moveParams.put(AbilityKey.SimultaneousETB, chosenCards);
                     if (sa.hasParam("Tapped")) {
                         c.setTapped(true);
-                    }
-                    if (sa.hasAdditionalAbility("AnimateSubAbility")) {
-                        // need LKI before Animate does apply
-                        moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
-
-                        final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
-                        source.addRemembered(c);
-                        AbilityUtils.resolve(animate);
-                        source.removeRemembered(c);
-                        animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                     }
                     if (sa.hasParam("GainControl")) {
                         final String g = sa.getParam("GainControl");

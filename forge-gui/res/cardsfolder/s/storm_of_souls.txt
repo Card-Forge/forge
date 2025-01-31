@@ -1,8 +1,8 @@
 Name:Storm of Souls
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ ChangeZoneAll | ChangeType$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield | AnimateSubAbility$ DBAnimate | SubAbility$ DBExile | SpellDescription$ Return all creature cards from your graveyard to the battlefield. Each of them is a 1/1 Spirit with flying in addition to its other types.
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 1 | Toughness$ 1 | Types$ Spirit | Duration$ Permanent | Keywords$ Flying
+A:SP$ ChangeZoneAll | ChangeType$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield | StaticEffect$ Animate | SubAbility$ DBExile | SpellDescription$ Return all creature cards from your graveyard to the battlefield. Each of them is a 1/1 Spirit with flying in addition to its other types.
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ 1 | SetToughness$ 1 | AddType$ Spirit | AddKeyword$ Flying
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:NeedsToPlayVar:X GE4

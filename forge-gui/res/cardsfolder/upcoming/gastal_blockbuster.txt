@@ -1,0 +1,9 @@
+Name:Gastal Blockbuster
+ManaCost:2 R
+Types:Creature Human Berserker
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature enters, you may sacrifice a creature or Vehicle. When you do, destroy target artifact an opponent controls.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature;Vehicle/a creature or Vehicle> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target artifact an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact an opponent controls
+DeckHas:Ability$Sacrifice
+Oracle:When this creature enters, you may sacrifice a creature or Vehicle. When you do, destroy target artifact an opponent controls.

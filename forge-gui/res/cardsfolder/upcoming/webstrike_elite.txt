@@ -1,0 +1,11 @@
+Name:Webstrike Elite
+ManaCost:G G
+Types:Creature Insect Archer
+PT:3/3
+K:Reach
+K:Cycling:X G G
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cycle this card, destroy up to one target artifact or enchantment with mana value X.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.cmcEQX,Enchantment.cmcEQX | TgtPrompt$ Select up to one target artifact or enchantment with mana value X | TargetMin$ 0 | TargetMax$ 1
+SVar:X:Count$xPaid
+DeckHas:Ability$Discard
+Oracle:Reach\nCycling {X}{G}{G} ({X}{G}{G}, Discard this card: Draw a card.)\nWhen you cycle this card, destroy up to one target artifact or enchantment with mana value X.

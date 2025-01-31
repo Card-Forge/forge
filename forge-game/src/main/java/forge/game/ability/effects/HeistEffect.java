@@ -53,8 +53,6 @@ public class HeistEffect extends SpellAbilityEffect {
 
         if (!heisted.isEmpty()) {
             final Card eff = createEffect(sa, player, source + "'s Heist Effect", source.getImageKey());
-            eff.setSetCode(source.getSetCode());
-            eff.setRarity(source.getRarity());
             eff.addRemembered(heisted);
             String mayPlay = "Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | " +
             "Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the heisted card for as " +

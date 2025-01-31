@@ -1,0 +1,11 @@
+Name:Samut, the Driving Force
+ManaCost:3 R G W
+Types:Legendary Creature Human Warrior Cleric
+PT:4/5
+K:First Strike
+K:Vigilance
+K:Haste
+K:Start your engines
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ Count$YourSpeed | Description$ Other creatures you control get +X/+0, where X is your speed.
+S:Mode$ ReduceCost | ValidCard$ Card.nonCreature | Type$ Spell | Activator$ You | Amount$ Count$YourSpeed | Description$ Noncreature spells you cast cost {X} less to cast, where X is your speed.
+Oracle:First strike, vigilance, haste\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nOther creatures you control get +X/+0, where X is your speed.\nNoncreature spells you cast cost {X} less to cast, where X is your speed.

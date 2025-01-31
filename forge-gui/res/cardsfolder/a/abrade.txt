@@ -3,5 +3,5 @@ ManaCost:1 R
 Types:Instant
 A:SP$ Charm | Choices$ DBDmg,DBDestroy
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 Oracle:Choose one —\n• Abrade deals 3 damage to target creature.\n• Destroy target artifact.

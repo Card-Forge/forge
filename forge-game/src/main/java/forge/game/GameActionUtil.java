@@ -26,6 +26,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
@@ -34,6 +35,7 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
@@ -835,9 +837,11 @@ public final class GameActionUtil {
     }
 
     public static CardCollectionView orderCardsByTheirOwners(Game game, CardCollectionView list, ZoneType dest, SpellAbility sa) {
-        if (list.size() <= 1) {
+        if (list.size() <= 1 &&
+                (sa == null || !sa.getActivatingPlayer().getController().isFullControl(FullControlFlag.LayerTimestampOrder))) {
             return list;
         }
+        Card eff = null;
         CardCollection completeList = new CardCollection();
         // CR 613.7m use APNAP
         PlayerCollection players = game.getPlayersInTurnOrder(game.getPhaseHandler().getPlayerTurn());
@@ -853,11 +857,27 @@ public final class GameActionUtil {
                     subList.add(c);
                 }
             }
+            if (sa != null && sa.getActivatingPlayer() == p && sa.hasParam("StaticEffect")) {
+                // create helper card for ordering
+                eff = new DetachedCardEffect(sa.getHostCard(), "Static Effect of " + sa.getHostCard());
+                subList.add(eff);
+            }
             CardCollectionView subListView = subList;
             if (subList.size() > 1) {
                 subListView = p.getController().orderMoveToZoneList(subList, dest, sa);
             }
             completeList.addAll(subListView);
+        }
+        if (eff != null) {
+            int idx = completeList.indexOf(eff);
+            if (idx < completeList.size() - 1) {
+                // effects with this param have the responsibility to realign it when later cards are reached
+                sa.setSVar("StaticEffectUntilCardID", String.valueOf(completeList.get(idx + 1).getId()));
+                // add generous offset to timestamp, to ensure it applies last compared to cards that were ordered to ETB before it
+                idx += completeList.size() * 2;
+            }
+            sa.setSVar("StaticEffectTimestamp", String.valueOf(game.getNextTimestamp() + idx));
+            completeList.remove(eff);
         }
         return completeList;
     }

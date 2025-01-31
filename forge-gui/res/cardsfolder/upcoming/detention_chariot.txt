@@ -1,0 +1,11 @@
+Name:Detention Chariot
+ManaCost:4 W W
+Types:Artifact Vehicle
+PT:6/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this Vehicle enters, exile target artifact or creature an opponent controls until this Vehicle leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl | TgtPrompt$ Select target artifact or creature an opponent controls | Duration$ UntilHostLeavesPlay
+K:Crew:3
+K:Cycling:W
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Discard
+Oracle:When this Vehicle enters, exile target artifact or creature an opponent controls until this Vehicle leaves the battlefield.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)\nCycling {W} ({W}, Discard this card: Draw a card.)

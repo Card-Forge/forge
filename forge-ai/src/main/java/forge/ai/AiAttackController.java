@@ -1396,7 +1396,7 @@ public class AiAttackController {
             );
 
             // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
-            defPower = CardLists.getTotalPower(validBlockers, true, false);
+            defPower = CardLists.getTotalPower(validBlockers, null);
 
             // look at the attacker in relation to the blockers to establish a
             // number of factors about the attacking context that will be relevant

@@ -1,0 +1,8 @@
+Name:Spikeshell Harrier
+ManaCost:4 U
+Types:Artifact Creature Robot Turtle
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, return target creature or Vehicle an opponent controls to its owner's hand. If that opponent's speed is greater than each other player's speed, reduce that player's speed by 1. This effect can't reduce their speed below 1.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl,Vehicle.OppCtrl | TgtPrompt$ Select target creature or Vehicle an opponent controls | Origin$ Battlefield | Destination$ Hand | SubAbility$ DecreaseSpeed
+SVar:DecreaseSpeed:DB$ ChangeSpeed | Mode$ Decrease | Defined$ TargetedController | ConditionCheckSVar$ TargetedController$Speed | ConditionSVarCompare$ GTPlayerCountDefinedNonTargetedController$HighestSpeed
+Oracle:When this creature enters, return target creature or Vehicle an opponent controls to its owner's hand. If that opponent's speed is greater than each other player's speed, reduce that player's speed by 1. This effect can't reduce their speed below 1.
