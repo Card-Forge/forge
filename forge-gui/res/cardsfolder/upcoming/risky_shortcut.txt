@@ -1,0 +1,6 @@
+Name:Risky Shortcut
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ Draw two cards. Each player loses 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Player
+Oracle:Draw two cards. Each player loses 2 life.
