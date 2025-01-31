@@ -1,4 +1,5 @@
 Name:Skybox Ferry
+ManaCost:5
 Types:Artifact Vehicle
 PT:4/4
 K:Flying
