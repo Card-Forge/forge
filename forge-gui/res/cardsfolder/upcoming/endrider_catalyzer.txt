@@ -3,5 +3,6 @@ ManaCost:1 R
 Types:Creature Human Warrior
 PT:3/1
 K:Start your engines
-A:AB$ Mana | PrecostDesc$ Max speed — | Cost$ T | Produced$ R R | Activation$ MaxSpeed | SpellDescription$ Add {R}{R}.
+S:Mode$ Continuous | CharacteristicDefining$ True | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABMana | Description$ Max speed — {T}: Add {R}{R}.
+SVar:ABMana:AB$ Mana | PrecostDesc$ Max speed — | Cost$ T | Produced$ R R | SpellDescription$ Add {R}{R}.
 Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — {T}: Add {R}{R}.
