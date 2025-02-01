@@ -2,5 +2,5 @@ Name:Mabel's Mettle
 ManaCost:1 W
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +2/+2 | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. Up to one other target creature gets +1/+1 until end of turn.
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one other target creature to get +1/+1 | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ 1 | NumDef$ 1 | TargetUnique$ True
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one other target creature to get +1/+1 | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ +1 | NumDef$ +1 | TargetUnique$ True
 Oracle:Target creature gets +2/+2 until end of turn. Up to one other target creature gets +1/+1 until end of turn.

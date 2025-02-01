@@ -5,6 +5,6 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate | Num$ 1
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you draw your second card each turn, CARDNAME gets +1/+1 and gains vigilance until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Vigilance | NumAtt$ 1 | NumDef$ 1
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Vigilance | NumAtt$ +1 | NumDef$ +1
 DeckHas:Ability$Investigate|Token|Sacrifice & Type$Artifact|Clue
 Oracle:When Loxodon Eavesdropper enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you draw your second card each turn, Loxodon Eavesdropper gets +1/+1 and gains vigilance until end of turn.
