@@ -1,0 +1,7 @@
+Name:Memory Guardian
+ManaCost:4 U
+Types:Artifact Creature Robot Artificer
+PT:3/4
+K:Affinity:Artifact
+K:Flying
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying
