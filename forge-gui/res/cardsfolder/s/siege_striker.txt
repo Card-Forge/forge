@@ -5,7 +5,7 @@ PT:1/1
 K:Double Strike
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may tap any number of untapped creatures you control. CARDNAME gets +1/+1 until end of turn for each creature tapped this way.
 SVar:TrigTap:DB$ Tap | CardChoices$ Creature.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.YouCtrl+untapped | RememberTapped$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ Y | NumDef$ Y | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +Y | NumDef$ +Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$RememberedSize
 Oracle:Double strike (This creature deals both first-strike and regular combat damage.)\nWhenever Siege Striker attacks, you may tap any number of untapped creatures you control. Siege Striker gets +1/+1 until end of turn for each creature tapped this way.
