@@ -3,5 +3,5 @@ ManaCost:2 R
 Types:Creature Goblin Warrior
 PT:3/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may tap an untapped non-Human creature you control. If you do, CARDNAME gets +1/+1 and gains trample until end of turn.
-SVar:TrigPump:AB$ Pump | Cost$ tapXType<1/Creature.nonHuman/non-Human creature> | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ Trample
+SVar:TrigPump:AB$ Pump | Cost$ tapXType<1/Creature.nonHuman/non-Human creature> | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
 Oracle:Whenever Redcap Raiders attacks, you may tap an untapped non-Human creature you control. If you do, Redcap Raiders gets +1/+1 and gains trample until end of turn.

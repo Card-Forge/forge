@@ -10,7 +10,7 @@ SVar:DBTrigger:AB$ ImmediateTrigger | Cost$ PayLife<1> | Execute$ TrigDiscard | 
 SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SubAbility$ DBSacCreature
 SVar:DBSacCreature:DB$ Sacrifice | SacValid$ Creature | Defined$ Player
 T:Mode$ Discarded | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player discards a card, NICKNAME perpetually gets +1/+0.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | Duration$ Perpetual
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | Duration$ Perpetual
 DeckHas:Ability$Discard|LifeGain|Sacrifice
 DeckHints:Ability$LifeGain
 Oracle:Flying\nRankle has lifelink and haste as long as an opponent controls no creatures.\nWhen Rankle enters, you may pay 1 life. When you do, each player discards a card and sacrifices a creature.\nWhenever a player discards a card, Rankle perpetually gets +1/+0.
