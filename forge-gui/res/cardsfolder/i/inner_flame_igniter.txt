@@ -2,7 +2,7 @@ Name:Inner-Flame Igniter
 ManaCost:2 R
 Types:Creature Elemental Warrior
 PT:2/2
-A:AB$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | SubAbility$ InnerHeatStrike | StackDescription$ SpellDescription | SpellDescription$ Creatures you control get +1/+0 until end of turn. If this is the third time this ability has resolved this turn, creatures you control gain first strike until end of turn.
+A:AB$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SubAbility$ InnerHeatStrike | StackDescription$ SpellDescription | SpellDescription$ Creatures you control get +1/+0 until end of turn. If this is the third time this ability has resolved this turn, creatures you control gain first strike until end of turn.
 SVar:InnerHeatStrike:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike | ConditionCheckSVar$ InnerFlameStrength | ConditionSVarCompare$ EQ3 | StackDescription$ None
 SVar:InnerFlameStrength:Count$ResolvedThisTurn
 Oracle:{2}{R}: Creatures you control get +1/+0 until end of turn. If this is the third time this ability has resolved this turn, creatures you control gain first strike until end of turn.
