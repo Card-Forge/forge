@@ -9,7 +9,7 @@ SVar:PayLife:AB$ StoreSVar | Cost$ Mandatory PayLife<X> | XMaxLimit$ Limit | SVa
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered.
 SVar:X:Count$xPaid
 SVar:Limit:SVar$Active/Plus.Buried
-SVar:Active:Count$Valid Permanent.White+nonToken+OppCtrl
+SVar:Active:Count$Valid Permanent.White+!Token+OppCtrl
 SVar:Buried:Count$ValidGraveyard Card.White+OppCtrl
 SVar:LifePaidOnETB:Number$0
 AI:RemoveDeck:All
