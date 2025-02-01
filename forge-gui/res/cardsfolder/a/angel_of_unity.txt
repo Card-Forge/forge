@@ -7,7 +7,7 @@ K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME enters or you cast a party spell, choose a party creature card in your hand. It perpetually gets +1/+1. (A party card or spell is a Cleric, Rogue, Warrior, or Wizard.)
 T:Mode$ SpellCast | ValidCard$ Card.Party | ValidActivatingPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or you cast a party spell, choose a party creature card in your hand. It perpetually gets +1/+1. (A party card or spell is a Cleric, Rogue, Warrior, or Wizard.)
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.Party+YouOwn | ChoiceTitle$ Choose a party creature card in your hand | Amount$ 1 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ ChosenCard | PumpZone$ Hand | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | PumpZone$ Hand | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:BuffedBy:Cleric,Rogue,Warrior,Wizard
 DeckHas:Ability$Party|LifeGain
