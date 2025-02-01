@@ -5,6 +5,6 @@ PT:2/1
 K:First Strike
 K:Renown:1
 T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.Self+IsRenowned | TriggerZones$ Battlefield | Execute$ TrigPumpAttack | TriggerDescription$ Whenever CARDNAME attacks, if it's renowned, other attacking creatures get +1/+1 until end of turn.
-SVar:TrigPumpAttack:DB$ PumpAll | ValidCards$ Creature.attacking+Other+YouCtrl | NumAtt$ 1 | NumDef$ 1
+SVar:TrigPumpAttack:DB$ PumpAll | ValidCards$ Creature.attacking+Other+YouCtrl | NumAtt$ +1 | NumDef$ +1
 DeckHas:Ability$Counters
 Oracle:First strike\nRenown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)\nWhenever Consul's Lieutenant attacks, if it's renowned, other attacking creatures you control get +1/+1 until end of turn.

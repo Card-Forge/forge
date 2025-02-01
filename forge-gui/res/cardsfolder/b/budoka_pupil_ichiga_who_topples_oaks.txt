@@ -18,5 +18,5 @@ Colors:green
 Types:Legendary Creature Spirit
 PT:4/3
 K:Trample
-A:AB$ Pump | Cost$ SubCounter<1/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
+A:AB$ Pump | Cost$ SubCounter<1/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 Oracle:Trample\nRemove a ki counter from Ichiga, Who Topples Oaks: Target creature gets +2/+2 until end of turn.
