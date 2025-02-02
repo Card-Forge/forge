@@ -219,7 +219,9 @@ public class StaticEffect {
 
             if (layers.contains(StaticAbilityLayer.TEXT)) {
                 // Revert changed color words
-                affectedCard.removeChangedTextColorWord(getTimestamp(), ability.getId());
+                if (hasParam("ChangeColorWordsTo")) {
+                    affectedCard.removeChangedTextColorWord(getTimestamp(), ability.getId());
+                }
 
                 // remove changed name
                 if (hasParam("SetName") || hasParam("AddNames")) {
@@ -275,6 +277,9 @@ public class StaticEffect {
                 }
 
                 affectedCard.removeChangedSVars(getTimestamp(), ability.getId());
+
+                // need update for clean reapply
+                affectedCard.updateKeywordsCache(affectedCard.getCurrentState());
             }
 
             if (layers.contains(StaticAbilityLayer.SETPT)) {
@@ -311,8 +316,6 @@ public class StaticEffect {
                     affectedCard.removeCanBlockAdditional(getTimestamp());
                 }
             }
-
-            affectedCard.updateAbilityTextForView(); // need to update keyword cache for clean reapply
         }
         return affectedCards;
     }

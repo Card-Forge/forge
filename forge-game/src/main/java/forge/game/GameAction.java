@@ -1278,7 +1278,7 @@ public class GameAction {
             c.updateNameforView();
             c.updatePowerToughnessForView();
             c.updateTypesForView();
-            c.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
+            c.updateKeywords();
         }
 
         // TODO filter out old copies from zone change
