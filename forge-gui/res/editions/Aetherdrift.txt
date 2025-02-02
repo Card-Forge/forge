@@ -336,6 +336,8 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 289 L Forest @Samuele Bandini
 290 L Forest @Yeong-Hao Han
 291 L Forest @Leon Tukker
+
+[etched]
 292 U Air Response Unit @SchmandrewART
 293 C Broadcast Rambler @Francisco Badilla
 294 U Detention Chariot @Arik Roper
@@ -377,6 +379,8 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 330 U Marshals' Pathcruiser @Michal Ivan
 331 U Rover Blades @Eduardo Francisco
 332 C Skybox Ferry @SchmandrewART
+
+[extended art]
 333 R Bulwark Ox @Jon Vermilyea
 334 R Guardian Sunmare @Wojtek Łebski
 335 R Mindspring Merfolk @CatDirty
@@ -391,6 +395,8 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 344 R District Mascot @Ryan Roadkill
 345 R Webstrike Elite @Sam McKenzie
 346 R Fearless Swashbuckler @CatDirty
+
+[showcase]
 347 M Hazoret, Godseeker @Massiveface
 348 M Brightglass Gearhulk @Jorge Gutierrez Garcia
 349 M Coalstoke Gearhulk @Ivan Shavrin
@@ -399,6 +405,8 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 352 M Pyrewood Gearhulk @William Tempest
 353 M Riptide Gearhulk @Kudaman
 354 M Sab-Sunen, Luxa Embodied @Benjamin Ee
+
+[borderless]
 355 R Basri, Tomorrow's Champion @Justyna Dura
 356 R Vnwxt, Verbose Host @Chris Seaman
 357 R Gonti, Night Minister @Richard Kane Ferguson
@@ -420,6 +428,8 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 373 R Sunbillow Verge @Darrell Riche
 374 R Wastewood Verge @Kev Walker
 375 R Willowrush Verge @Carl Critchlow
+
+[alternate art]
 376 M The Aetherspark @Dominik Mayer
 377 R Perilous Snare @Chris Seaman
 378 R Spectacular Pileup @Zezhou Chen
