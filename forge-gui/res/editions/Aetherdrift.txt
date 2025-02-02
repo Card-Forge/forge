@@ -4,6 +4,45 @@ Date=2025-02-14
 Name=Aetherdrift
 Type=Expansion
 ScryfallCode=DFT
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+# https://mtgscribe.com/2025/01/21/play-booster-fact-sheet-aetherdrift/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 WildcardFoil+
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+
+[Common]
+Base=Common:!fromSheet("DFT gain lands"):fromSheet("DFT cards")
+
+[Common-Guest]
+Base=Common:!fromSheet("DFT gain lands"):fromSheet("DFT cards")
+Replace=.015625F fromSheet("DFT special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("DFT cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("DFT cards")
+#Needs borderless replacements
+
+[AnyLand]
+Base=fromSheet("DFT gain lands")
+Replace=.5F BasicLand:fromSheet("DFT cards"):!fromSheet("DFT gain lands")
+
+[Wildcard]
+Base=Uncommon:fromSheet("DFT cards")
+Replace=.083F Common:fromSheet("DFT cards")
+Replace=.163F Rare:fromSheet("DFT cards")
+Replace=.026F Mythic:fromSheet("DFT cards")
+#Replace=.026F RevvedUp:fromSheet("DFT cards")
+
+[WildcardFoil]
+Base=Common:fromSheet("DFT cards")
+Replace=.30F Uncommon:fromSheet("DFT cards")
+Replace=.064F Rare:fromSheet("DFT cards")
+Replace=.011F Mythic:fromSheet("DFT cards")
+#Needs borderless replacements
 
 [cards]
 1 U Air Response Unit @Brock Grossman
@@ -146,27 +185,27 @@ ScryfallCode=DFT
 248 U Amonkhet Raceway @Brian Valeza
 249 C Avishkar Raceway @Julian Kok Joon Wen
 250 R Bleachbone Verge @Mark Tedin
-251 C Bloodfell Caves @Ron Spencer
-252 C Blossoming Sands @Valera Lutfullina
+251 L Bloodfell Caves @Ron Spencer
+252 L Blossoming Sands @Valera Lutfullina
 253 U Country Roads @Mark Poole
-254 C Dismal Backwater @Sam Burley
+254 L Dismal Backwater @Sam Burley
 255 U Foul Roads @Borja Pindado
-256 C Jungle Hollow @Eddie Mendoza
+256 L Jungle Hollow @Eddie Mendoza
 257 R Muraganda Raceway @Brian Valeza
 258 C Night Market @David Álvarez
 259 U Reef Roads @David Álvarez
 260 R Riverpyre Verge @Titus Lunter
 261 U Rocky Roads @Arthur Yuan
-262 C Rugged Highlands @Florian de Gesincourt
-263 C Scoured Barrens @Eddie Mendoza
+262 L Rugged Highlands @Florian de Gesincourt
+263 L Scoured Barrens @Eddie Mendoza
 264 R Sunbillow Verge @Pete Venters
-265 C Swiftwater Cliffs @Mark Poole
-266 C Thornwood Falls @Eddie Mendoza
-267 C Tranquil Cove @Wayne Wu
+265 L Swiftwater Cliffs @Mark Poole
+266 L Thornwood Falls @Eddie Mendoza
+267 L Tranquil Cove @Wayne Wu
 268 R Wastewood Verge @Bartek Fedyczak
 269 U Wild Roads @Leanna Crossan
 270 R Willowrush Verge @Aaron Miller
-271 C Wind-Scarred Crag @Svetlin Velinov
+271 L Wind-Scarred Crag @Svetlin Velinov
 272 L Plains @Adam Paquette
 273 L Island @Maxime Minard
 274 L Swamp @Jonas De Ro
@@ -376,3 +415,27 @@ ScryfallCode=DFT
 550 M Oildeep Gearhulk @Chun Lo
 551 M Pyrewood Gearhulk @William Tempest
 553 M Sab-Sunen, Luxa Embodied @Benjamin Ee
+
+[gain lands]
+1 Bloodfell Caves|DFT
+1 Blossoming Sands|DFT
+1 Dismal Backwater|DFT
+1 Jungle Hollow|DFT
+1 Rugged Highlands|DFT
+1 Scoured Barrens|DFT
+1 Swiftwater Cliffs|DFT
+1 Thornwood Falls|DFT
+1 Tranquil Cove|DFT
+1 Wind-Scarred Crag|DFT
+
+[FDN Special Guests]
+1 Bone Miser|SPG
+1 Cavalier of Dawn|SPG
+1 Chandra’s Ignition|SPG
+1 Chrome Mox|SPG
+1 Galvanic Blast|SPG
+1 Lord of the Undead|SPG
+1 Pathbreaker Ibex|SPG
+1 Skysoverign, Consul Flagship|SPG
+1 Thoughtcast|SPG
+1 Whir of Invention|SPG
