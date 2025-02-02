@@ -600,8 +600,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     // The following methods are used to selectively update certain view components (text,
     // P/T, card types) in order to avoid card flickering due to aggressive full update
     public void updateAbilityTextForView() {
-        updateKeywords(); // does call update Ability text
-        //view.getCurrentState().updateAbilityText(this, getCurrentState());
+        view.getCurrentState().updateAbilityText(this, getCurrentState());
     }
 
     public void updateManaCostForView() {
@@ -1690,8 +1689,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         if (newValue <= 0) {
             removeCounterTimestamp(counterType);
-        } else if (addCounterTimestamp(counterType)) {
-            updateAbilityTextForView();
+        } else if (addCounterTimestamp(counterType, false)) {
+            updateKeywords();
         }
         if (table != null) {
             table.put(source, this, counterType, addAmount);
@@ -1789,8 +1788,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         view.updateCounters(this);
 
         if (newValue <= 0) {
-            if (removeCounterTimestamp(counterName)) {
-                updateAbilityTextForView();
+            if (removeCounterTimestamp(counterName, false)) {
+                updateKeywords();
             }
         }
 
@@ -1838,7 +1837,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         if (changed) {
             updateKeywords();
-            updateAbilityTextForView();
         }
     }
 
@@ -1856,7 +1854,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         if (changed) {
             updateKeywords();
-            updateAbilityTextForView();
         }
     }
 
@@ -2169,7 +2166,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void setCurrentRoom(String room) {
         currentRoom = room;
         view.updateCurrentRoom(this);
-        view.getCurrentState().updateAbilityText(this, getCurrentState());
+        updateAbilityTextForView();
     }
     public boolean isInLastRoom() {
         for (final Trigger t : getTriggers()) {
@@ -4896,7 +4893,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         changedCardTraitsByText.put(timestamp, staticId, new CardTraitChanges(
             spells, null, trigger, replacements, statics, true, false
         ));
-        // update view
         updateAbilityTextForView();
     }
 
@@ -5046,13 +5042,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         changedCardTraits.put(timestamp, staticId, new CardTraitChanges(
             spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana
         ));
-        // update view
         updateAbilityTextForView();
     }
 
     public final void addChangedCardTraits(CardTraitChanges ctc, long timestamp, long staticId) {
         changedCardTraits.put(timestamp, staticId, ctc);
-        // update view
         updateAbilityTextForView();
     }
 
@@ -5144,6 +5138,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final void updateKeywords() {
         getCurrentState().getView().updateKeywords(this, getCurrentState());
+        // for Zilortha
         getView().updateLethalDamage(this);
     }
 
@@ -5434,7 +5429,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         getView().updateChangedTypes(this);
         updateManaCostForView();
 
-        currentState.getView().updateAbilityText(this, currentState);
+        updateAbilityTextForView();
         view.updateNonAbilityText(this);
     }
 
@@ -6796,7 +6791,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void setClassLevel(int level) {
         classLevel = level;
         view.updateClassLevel(this);
-        view.getCurrentState().updateAbilityText(this, getCurrentState());
+        updateAbilityTextForView();
     }
     public boolean isClassCard() {
         return getType().hasStringType("Class");

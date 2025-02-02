@@ -3615,7 +3615,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         final PlayerZone com = getZone(ZoneType.Command);
         keywordEffect.setText("");
-        keywordEffect.updateAbilityTextForView();
         boolean headerAdded = false;
         StringBuilder kw = new StringBuilder();
         for (KeywordInterface k : keywords) {
@@ -3627,8 +3626,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (!kw.toString().isEmpty()) {
             keywordEffect.setText(trimKeywords(kw.toString()));
-            keywordEffect.updateAbilityTextForView();
         }
+        keywordEffect.updateAbilityTextForView();
         this.updateZoneForView(com);
     }
     public String trimKeywords(String keywordTexts) {
