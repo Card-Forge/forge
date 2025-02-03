@@ -267,7 +267,7 @@ public class StaticEffect {
                 if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf")
                         || hasParam("GainsAbilitiesOfDefined") || hasParam("GainsTriggerAbsOf")
                         || hasParam("AddTrigger") || hasParam("AddStaticAbility")
-                        || hasParam("AddReplacementEffects") || hasParam("RemoveAllAbilities")
+                        || hasParam("AddReplacementEffect") || hasParam("RemoveAllAbilities")
                         || hasParam("RemoveLandTypes")) {
                     affectedCard.removeChangedCardTraits(getTimestamp(), ability.getId());
                 }
@@ -282,9 +282,9 @@ public class StaticEffect {
                 affectedCard.updateKeywordsCache(affectedCard.getCurrentState());
             }
 
-            if (layers.contains(StaticAbilityLayer.SETPT)) {
+            if (layers.contains(StaticAbilityLayer.CHARACTERISTIC) || layers.contains(StaticAbilityLayer.SETPT)) {
                 if (hasParam("SetPower") || hasParam("SetToughness")) {
-                    affectedCard.removeNewPT(getTimestamp(), ability.getId());
+                    affectedCard.removeNewPT(getTimestamp(), ability.getId(), false);
                 }
             }
 
