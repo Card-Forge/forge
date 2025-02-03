@@ -1,5 +1,5 @@
 Name:Sundial, Dawn Tyrant
-ManaCost:1 G
+ManaCost:1 W
 Types:Legendary Artifact Creature Construct
 PT:3/3
 Oracle:
