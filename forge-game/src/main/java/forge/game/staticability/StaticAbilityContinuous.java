@@ -704,7 +704,7 @@ public final class StaticAbilityContinuous {
                         setToughness = AbilityUtils.calculateAmount(affectedCard, setT, stAb, true);
                     }
                     affectedCard.addNewPT(setPower, setToughness,
-                        se.getTimestamp(), stAb.getId(), layer == StaticAbilityLayer.CHARACTERISTIC);
+                        se.getTimestamp(), stAb.getId(), layer == StaticAbilityLayer.CHARACTERISTIC, false);
                 }
             }
 
@@ -752,7 +752,8 @@ public final class StaticAbilityContinuous {
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, se.getTimestamp(), stAb, true);
+                        removeAllAbilities, se.getTimestamp(), stAb, false);
+                affectedCard.updateKeywordsCache(affectedCard.getCurrentState());
             }
 
             // add HIDDEN keywords
@@ -862,7 +863,7 @@ public final class StaticAbilityContinuous {
                     || removeAllAbilities) {
                     affectedCard.addChangedCardTraits(
                         addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana,
-                        se.getTimestamp(), stAb.getId()
+                        se.getTimestamp(), stAb.getId(), false
                     );
                 }
 
@@ -874,7 +875,7 @@ public final class StaticAbilityContinuous {
             // add Types
             if ((addTypes != null && !addTypes.isEmpty()) || (removeTypes != null && !removeTypes.isEmpty()) || addAllCreatureTypes || !remove.isEmpty()) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, remove,
-                        se.getTimestamp(), stAb.getId(), true, stAb.isCharacteristicDefining());
+                        se.getTimestamp(), stAb.getId(), false, stAb.isCharacteristicDefining());
             }
 
             // add colors
