@@ -337,11 +337,11 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 290 L Forest @Yeong-Hao Han
 291 L Forest @Leon Tukker
 
-[etched]
+[borderless]
 292 U Air Response Unit @SchmandrewART
 293 C Broadcast Rambler @Francisco Badilla
 294 U Detention Chariot @Arik Roper
-295 M Salvation Engine @
+295 M Salvation Engine @Adam Volker
 296 R Skyseer's Chariot @Douglas P. Lobo
 297 C Spotcycle Scouter @Neo.G
 298 M Valor's Flagship @William Tempest
@@ -379,8 +379,6 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 330 U Marshals' Pathcruiser @Michal Ivan
 331 U Rover Blades @Eduardo Francisco
 332 C Skybox Ferry @SchmandrewART
-
-[extended art]
 333 R Bulwark Ox @Jon Vermilyea
 334 R Guardian Sunmare @Wojtek Łebski
 335 R Mindspring Merfolk @CatDirty
@@ -395,8 +393,6 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 344 R District Mascot @Ryan Roadkill
 345 R Webstrike Elite @Sam McKenzie
 346 R Fearless Swashbuckler @CatDirty
-
-[showcase]
 347 M Hazoret, Godseeker @Massiveface
 348 M Brightglass Gearhulk @Jorge Gutierrez Garcia
 349 M Coalstoke Gearhulk @Ivan Shavrin
@@ -405,8 +401,6 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 352 M Pyrewood Gearhulk @William Tempest
 353 M Riptide Gearhulk @Kudaman
 354 M Sab-Sunen, Luxa Embodied @Benjamin Ee
-
-[borderless]
 355 R Basri, Tomorrow's Champion @Justyna Dura
 356 R Vnwxt, Verbose Host @Chris Seaman
 357 R Gonti, Night Minister @Richard Kane Ferguson
@@ -428,9 +422,9 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 373 R Sunbillow Verge @Darrell Riche
 374 R Wastewood Verge @Kev Walker
 375 R Willowrush Verge @Carl Critchlow
-
-[alternate art]
 376 M The Aetherspark @Dominik Mayer
+
+[extended art]
 377 R Perilous Snare @Chris Seaman
 378 R Spectacular Pileup @Zezhou Chen
 379 M Mu Yanling, Wind Rider @Justyna Dura
@@ -451,6 +445,11 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 394 R Monument to Endurance @Victor Sales
 395 M Radiant Lotus @Bruce Brenneise
 396 R Muraganda Raceway @Brian Valeza
+424 U Amonkhet Raceway @Titus Lunter
+425 C Avishkar Raceway @Titus Lunter
+426 R Muraganda Raceway @Titus Lunter
+
+[showcase]
 397 M Salvation Engine @Mai Minamiura
 398 M Spectacular Pileup @JIN-E YAMAMOTO
 399 M Mu Yanling, Wind Rider @D-suzuki
@@ -461,6 +460,8 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 404 M Loot, the Pathfinder @Tetsu Kurosawa
 405 M Mimeoplasm, Revered One @SH11NA
 406 M Radiant Lotus @Tomoyuki Mizufune
+
+[etched]
 407 M Salvation Engine @Mai Minamiura
 408 M Spectacular Pileup @JIN-E YAMAMOTO
 409 M Mu Yanling, Wind Rider @D-suzuki
@@ -471,16 +472,6 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 414 M Loot, the Pathfinder @Tetsu Kurosawa
 415 M Mimeoplasm, Revered One @SH11NA
 416 M Radiant Lotus @Tomoyuki Mizufune
-417 U Tune Up @Chris Rallis
-418 U Gastal Raider @Lorenzo Mastroianni
-419 U Marauding Mako @Alix Branwyn
-420 U Skyserpent Seeker @Johan Grenier
-421 U Voyage Home @Hardy Fowler
-422 R Lumbering Worldwagon @Adam Volker
-423 R Lifecraft Engine @José Parodi
-424 U Amonkhet Raceway @Titus Lunter
-425 C Avishkar Raceway @Titus Lunter
-426 R Muraganda Raceway @Titus Lunter
 427 R Basri, Tomorrow's Champion @Kai Carpenter
 428 R Bulwark Ox @Brent Hollowell
 429 R Guardian Sunmare @Christina Kraus
@@ -609,6 +600,15 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 552 M Riptide Gearhulk @Kudaman
 553 M Sab-Sunen, Luxa Embodied @Benjamin Ee
 
+[promo]
+417 U Tune Up @Chris Rallis
+418 U Gastal Raider @Lorenzo Mastroianni
+419 U Marauding Mako @Alix Branwyn
+420 U Skyserpent Seeker @Johan Grenier
+421 U Voyage Home @Hardy Fowler
+422 R Lumbering Worldwagon @Adam Volker
+423 R Lifecraft Engine @José Parodi
+
 [gain lands]
 1 Bloodfell Caves|DFT
 1 Blossoming Sands|DFT
@@ -621,10 +621,10 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 1 Tranquil Cove|DFT
 1 Wind-Scarred Crag|DFT
 
-[FDN Special Guests]
+[special guests]
 1 Bone Miser|SPG
 1 Cavalier of Dawn|SPG
-1 Chandra’s Ignition|SPG
+1 Chandra's Ignition|SPG
 1 Chrome Mox|SPG
 1 Galvanic Blast|SPG
 1 Lord of the Undead|SPG
@@ -632,3 +632,17 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 1 Skysoverign, Consul Flagship|SPG
 1 Thoughtcast|SPG
 1 Whir of Invention|SPG
+
+[tokens]
+b_2_2_zombie
+c_1_1_a_servo
+c_1_1_a_thopter_flying
+c_1_1_a_thopter_flying
+c_1_1_pilot_crewsaddlebuff
+c_3_2_a_vehicle_crew_1
+c_a_treasure_sac
+g_1_1_insect
+g_3_3_elephant
+r_1_1_goblin
+r_4_4_dragon_flying
+w_1_1_cat_lifelink
