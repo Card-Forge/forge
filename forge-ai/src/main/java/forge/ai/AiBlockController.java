@@ -161,12 +161,12 @@ public class AiBlockController {
         // defend battles with fewer defense counters before battles with more defense counters,
         // if planeswalker/battle will be too difficult to defend don't even bother
         for (GameEntity defender : defenders) {
-            if ((defender instanceof Card && ((Card) defender).getController().equals(ai))
-                    || (defender instanceof Card && ((Card) defender).isBattle() && ((Card) defender).getProtectingPlayer().equals(ai))) {
-                final CardCollection attackers = combat.getAttackersOf(defender);
+            if ((defender instanceof Card card1 && card1.getController().equals(ai))
+                    || (defender instanceof Card card2 && card2.isBattle() && card2.getProtectingPlayer().equals(ai))) {
+                final CardCollection ccAttackers = combat.getAttackersOf(defender);
                 // Begin with the attackers that pose the biggest threat
-                CardLists.sortByPowerDesc(attackers);
-                sortedAttackers.addAll(attackers);
+                CardLists.sortByPowerDesc(ccAttackers);
+                sortedAttackers.addAll(ccAttackers);
             } else if (defender instanceof Player && defender.equals(ai)) {
                 firstAttacker = combat.getAttackersOf(defender);
                 CardLists.sortByPowerDesc(firstAttacker);
@@ -872,9 +872,9 @@ public class AiBlockController {
             CardCollection threatenedPWs = new CardCollection();
             for (final Card attacker : attackers) {
                 GameEntity def = combat.getDefenderByAttacker(attacker);
-                if (def instanceof Card) {
+                if (def instanceof Card card) {
                     if (!onlyIfLethal) {
-                        threatenedPWs.add((Card) def);
+                        threatenedPWs.add(card);
                     } else {
                         int damageToPW = 0;
                         for (final Card pwatkr : combat.getAttackersOf(def)) {
@@ -906,12 +906,12 @@ public class AiBlockController {
                         continue;
                     }
                     GameEntity def = combat.getDefenderByAttacker(attacker);
-                    if (def instanceof Card && threatenedPWs.contains(def)) {
+                    if (def instanceof Card card && threatenedPWs.contains(def)) {
                         Card blockerDecided = null;
                         for (final Card blocker : chumpPWDefenders) {
                             if (CombatUtil.canBlock(attacker, blocker, combat)) {
                                 combat.addBlocker(attacker, blocker);
-                                pwsWithChumpBlocks.add((Card) def);
+                                pwsWithChumpBlocks.add(card);
                                 chosenChumpBlockers.add(blocker);
                                 blockerDecided = blocker;
                                 blockersLeft.remove(blocker);
@@ -1346,8 +1346,8 @@ public class AiBlockController {
                 && ai.getZone(ZoneType.Hand).contains(CardPredicates.CREATURES)
                 && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
         boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToSavePW)
-                && combat.getDefenderByAttacker(attacker) instanceof Card
-                && ((Card) combat.getDefenderByAttacker(attacker)).isPlaneswalker();
+                && combat.getDefenderByAttacker(attacker) instanceof Card card
+                && card.isPlaneswalker();
         boolean wantToTradeDownToSavePW = chanceToTradeDownToSaveWalker > 0;
 
         return ((evalBlk <= evalAtk + 1) || (wantToSavePlaneswalker && wantToTradeDownToSavePW)) // "1" accounts for tapped.

@@ -43,9 +43,8 @@ public class WorldEditor extends JComponent {
                 JList list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if(!(value instanceof BiomeData))
+            if(!(value instanceof BiomeData biome))
                 return label;
-            BiomeData biome=(BiomeData) value;
             // Get the renderer component from parent class
 
             label.setText(biome.name);

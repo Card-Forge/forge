@@ -27,17 +27,16 @@ public class ItemsEditor extends JComponent {
                 JList list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if(!(value instanceof ItemData))
+            if(!(value instanceof ItemData item))
                 return label;
-            ItemData Item=(ItemData) value;
             // Get the renderer component from parent class
 
-            label.setText(Item.name);
+            label.setText(item.name);
             if(itemAtlas==null)
                 itemAtlas=new SwingAtlas(Config.instance().getFile(Paths.ITEMS_ATLAS));
             
-            if(itemAtlas.has(Item.iconName))
-                label.setIcon(itemAtlas.get(Item.iconName));
+            if(itemAtlas.has(item.iconName))
+                label.setIcon(itemAtlas.get(item.iconName));
             else
             {
                 ImageIcon img=itemAtlas.getAny();
