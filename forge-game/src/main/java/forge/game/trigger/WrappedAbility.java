@@ -323,7 +323,7 @@ public class WrappedAbility extends Ability {
     // a real solution would include only the triggering information that actually is used, but that's a major change
     @Override
     public String toUnsuppressedString() {
-        String desc = this.getStackDescription(); /* use augmented stack description as string for wrapped things */
+        String desc = this.getStackDescription(false); /* use augmented stack description as string for wrapped things */
         String card = getHostCard().toString();
         if (!desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
                 return card + ": " + desc;
@@ -332,15 +332,23 @@ public class WrappedAbility extends Ability {
 
     @Override
     public String getStackDescription() {
+        return getStackDescription(true);
+    }
+
+    public String getStackDescription(boolean withTargets) {
         final Trigger regtrig = getTrigger();
         if (regtrig == null) return "";
         final StringBuilder sb =
                 new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this, true));
-        List<TargetChoices> allTargets = sa.getAllTargetChoices();
-        if (!allTargets.isEmpty() && !ApiType.Charm.equals(sa.getApi())) {
-            sb.append(" (Targeting: ");
-            sb.append(allTargets);
-            sb.append(")");
+
+        // prevent text growing too long when SA target other in a chain and also potential StackOverflow
+        if (withTargets) {
+            List<TargetChoices> allTargets = sa.getAllTargetChoices();
+            if (!allTargets.isEmpty() && !ApiType.Charm.equals(sa.getApi())) {
+                sb.append(" (Targeting: ");
+                sb.append(allTargets);
+                sb.append(")");
+            }
         }
 
         String important = regtrig.getImportantStackObjects(this);

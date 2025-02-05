@@ -70,6 +70,7 @@ import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 
 //only SpellAbility can go on the stack
@@ -1072,11 +1073,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void rebuiltDescription() {
-
         // SubAbilities don't have Costs or Cost descriptors
 
-        String sb = getCostDescription() +
-                getParam("SpellDescription");
+        String sb = getCostDescription() + getParam("SpellDescription");
         setDescription(sb);
     }
 
@@ -1991,7 +1990,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return targets;
     }
 
-    public boolean canTargetSpellAbility(final SpellAbility topSA) {
+    public boolean canTargetSpellAbility(SpellAbility topSA) {
+        if (topSA.isWrapper()) {
+            topSA = ((WrappedAbility) topSA).getWrappedAbility();
+        }
+
         final TargetRestrictions tgt = getTargetRestrictions();
 
         if (this.equals(topSA)) {
