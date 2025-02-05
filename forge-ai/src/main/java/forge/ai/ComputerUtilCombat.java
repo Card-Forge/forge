@@ -176,7 +176,7 @@ public class ComputerUtilCombat {
     public static int damageIfUnblocked(final Card attacker, final GameEntity attacked, final Combat combat, boolean withoutAbilities) {
         int damage = attacker.getNetCombatDamage();
         int sum = 0;
-        if (attacked instanceof Player && !((Player) attacked).canLoseLife()) {
+        if (attacked instanceof Player player && !player.canLoseLife()) {
             return 0;
         }
 
@@ -2539,20 +2539,20 @@ public class ComputerUtilCombat {
         if (combat != null) {
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
             // 1. If the card that spawned the attacker was sent at a card, attack the same. Consider improving.
-            if (def instanceof Card && Iterables.contains(defenders, def)) {
-                if (((Card) def).isPlaneswalker()) {
+            if (def instanceof Card card && Iterables.contains(defenders, def)) {
+                if (card.isPlaneswalker()) {
                     return def;
                 }
-                if (((Card) def).isBattle()) {
+                if (card.isBattle()) {
                     return def;
                 }
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
             for (GameEntity p : defenders) {
-                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker, true)) {
+                if (p instanceof Player p1 && !ComputerUtilCard.canBeBlockedProfitably(p1, attacker, true)) {
                     return p;
                 }
-                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker, true)) {
+                if (p instanceof Card card && !ComputerUtilCard.canBeBlockedProfitably(card.getController(), attacker, true)) {
                     return p;
                 }
             }

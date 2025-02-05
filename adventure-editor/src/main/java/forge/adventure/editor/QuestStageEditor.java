@@ -26,9 +26,8 @@ public class QuestStageEditor extends JComponent{
                 JList list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if(!(value instanceof AdventureQuestStage))
+            if(!(value instanceof AdventureQuestStage stageData))
                 return label;
-            AdventureQuestStage stageData=(AdventureQuestStage) value;
             label.setText(stageData.name);
             //label.setIcon(new ImageIcon(Config.instance().getFilePath(stageData.sourcePath))); //Type icon eventually?
             return label;

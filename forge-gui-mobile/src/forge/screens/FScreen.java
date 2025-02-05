@@ -53,8 +53,8 @@ public abstract class FScreen extends FContainer {
     }
 
     public void setHeaderCaption(String headerCaption) {
-        if (header instanceof DefaultHeader) {
-            ((DefaultHeader)header).lblCaption.setText(headerCaption);
+        if (header instanceof DefaultHeader dh) {
+            dh.lblCaption.setText(headerCaption);
         }
     }
 
@@ -77,8 +77,8 @@ public abstract class FScreen extends FContainer {
     }
 
     public void showMenu() {
-        if (header instanceof MenuHeader) {
-            ((MenuHeader)header).btnMenu.trigger();
+        if (header instanceof MenuHeader mh) {
+            mh.btnMenu.trigger();
         }
         else { //just so settings screen if no menu header
             SettingsScreen.show(false);
