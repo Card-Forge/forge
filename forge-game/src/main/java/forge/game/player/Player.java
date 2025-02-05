@@ -1717,14 +1717,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause);
         game.updateLastStateForCard(c);
 
-        // play a sound
-        game.fireEvent(new GameEventLandPlayed(this, land));
-
         // Run triggers
         runParams.put(AbilityKey.SpellAbility, cause);
         game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
+
         game.getStack().unfreezeStack();
         addLandPlayedThisTurn();
+
+        // play a sound
+        game.fireEvent(new GameEventLandPlayed(this, land));
 
         return c;
     }
