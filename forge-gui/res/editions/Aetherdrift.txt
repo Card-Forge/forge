@@ -644,5 +644,5 @@ c_a_treasure_sac
 g_1_1_insect
 g_3_3_elephant
 r_1_1_goblin
-r_4_4_dragon_flying
+r_4_4_dinosaur_dragon_flying
 w_1_1_cat_lifelink
