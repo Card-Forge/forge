@@ -77,7 +77,6 @@ public class ComputerUtilCost {
         final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa, false);
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostRemoveCounter remCounter) {
-
                 final CounterType type = remCounter.counter;
                 if (!part.payCostFromSource()) {
                     if (type.is(CounterEnumType.P1P1)) {
@@ -105,7 +104,6 @@ public class ComputerUtilCost {
                     return false;
                 }
             } else if (part instanceof CostRemoveAnyCounter remCounter) {
-
                 PaymentDecision pay = decision.visit(remCounter);
                 return pay != null;
             }
@@ -131,7 +129,6 @@ public class ComputerUtilCost {
 
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDiscard disc) {
-
                 final String type = disc.getType();
                 final CardCollection typeList;
                 int num;
@@ -216,7 +213,6 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife payLife) {
-
                 int amount = payLife.getAbilityAmount(sourceAbility);
 
                 // check if there's override for the remainingLife threshold

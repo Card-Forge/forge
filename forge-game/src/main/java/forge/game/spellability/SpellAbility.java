@@ -1535,8 +1535,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
-            if (entity instanceof GameEntity) {
-                GameEntity e = (GameEntity)entity;
+            if (entity instanceof GameEntity e) {
                 if (!e.isValid(tr.getValidTgts(), getActivatingPlayer(), getHostCard(), this)) {
                     return false;
                 }
@@ -1545,8 +1544,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
-            if (entity instanceof Card) {
-                final Card c = (Card) entity;
+            if (entity instanceof Card c) {
                 if (c.getZone() != null && !tr.getZone().contains(c.getZone().getZoneType())) {
                     return false;
                 }
