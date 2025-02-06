@@ -838,7 +838,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         for (Mana mana : getPayingMana()) {
             if (mana.triggersWhenSpent()) {
-                mana.getManaAbility().addTriggersWhenSpent(this, host);
+                mana.getManaAbility().addTriggersWhenSpent(this);
             }
 
             if (mana.addsCounters(this)) {
