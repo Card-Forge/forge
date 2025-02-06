@@ -35,8 +35,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     protected GameFormat format;
     private String selectedFormat;
     private boolean preventHandling = false;
-    private FComboBox<Object> cbxFormats = new FComboBox<>();
-    private FComboBox<Object> catalogDisplay = new FComboBox<>();
+    private final FComboBox<Object> cbxFormats = new FComboBox<>();
 
     public FormatFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
@@ -48,16 +47,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         }
         cbxFormats.addItem(Forge.getLocalizer().getMessage("lblOtherFormats"));
         cbxFormats.addItem(Forge.getLocalizer().getMessage("lblChooseSets"));
-        cbxFormats.setEnabled(!Forge.isMobileAdventureMode);
-        cbxFormats.setVisible(!Forge.isMobileAdventureMode);
-
-        catalogDisplay.setFont(FSkinFont.get(12));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblCollection"));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblSellable"));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblAutoSellable"));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblNonSellable"));
-        catalogDisplay.setEnabled(Forge.isMobileAdventureMode);
-        catalogDisplay.setVisible(Forge.isMobileAdventureMode);
 
         selectedFormat = cbxFormats.getText();
 
@@ -93,20 +82,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                 applyChange();
             }
         });
-        catalogDisplay.setChangedHandler(e -> {
-            if (preventHandling)
-                return;
-            int index = catalogDisplay.getSelectedIndex();
-            if (index == -1) {
-                //Do nothing when index set to -1
-            }
-            switch (index) {
-                case 0 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showDefault();
-                case 1 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showCollection();
-                case 2 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showAutoSell();
-                case 3 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showNoSell();
-            }
-        });
     }
 
     @Override
@@ -119,15 +94,12 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     public void reset() {
         preventHandling = true;
         cbxFormats.setSelectedIndex(0);
-        catalogDisplay.setSelectedIndex(0);
         preventHandling = false;
         format = null;
     }
 
     @Override
     public FDisplayObject getMainComponent() {
-        if (Forge.isMobileAdventureMode)
-            return catalogDisplay;
         return cbxFormats;
     }
 
@@ -138,12 +110,11 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
 
     @Override
     protected void buildWidget(Widget widget) {
-        widget.add(Forge.isMobileAdventureMode ? catalogDisplay : cbxFormats);
+        widget.add(cbxFormats);
     }
 
     @Override
     protected void doWidgetLayout(float width, float height) {
-        catalogDisplay.setSize(width, height);
         cbxFormats.setSize(width, height);
     }
 

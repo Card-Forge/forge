@@ -32,11 +32,8 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.function.Predicate;
 
 /**
@@ -195,6 +192,24 @@ public enum DeckFormat {
      */
     public int getMaxCardCopies() {
         return maxCardCopies;
+    }
+
+    /**
+     * @return the deck sections used by most decks in this format.
+     */
+    public EnumSet<DeckSection> getPrimaryDeckSections() {
+        if(this == Planechase)
+            return EnumSet.of(DeckSection.Planes);
+        if(this == Archenemy)
+            return EnumSet.of(DeckSection.Schemes);
+        if(this == Vanguard)
+            return EnumSet.of(DeckSection.Avatar);
+        EnumSet<DeckSection> out = EnumSet.of(DeckSection.Main);
+        if(sideRange.getMaximum() > 0)
+            out.add(DeckSection.Sideboard);
+        if(hasCommander())
+            out.add(DeckSection.Commander);
+        return out;
     }
 
     public String getDeckConformanceProblem(Deck deck) {
@@ -499,13 +514,13 @@ public enum DeckFormat {
         if (cardPoolFilter != null && !cardPoolFilter.test(rules)) {
             return false;
         }
-        if (this.equals(DeckFormat.Oathbreaker)) {
+        if (this == DeckFormat.Oathbreaker) {
             return rules.canBeOathbreaker();
         }
-        if (this.equals(DeckFormat.Brawl)) {
+        if (this == DeckFormat.Brawl) {
             return rules.canBeBrawlCommander();
         }
-        if (this.equals(DeckFormat.TinyLeaders)) {
+        if (this == DeckFormat.TinyLeaders) {
             return rules.canBeTinyLeadersCommander();
         }
         return rules.canBeCommander();
@@ -554,6 +569,8 @@ public enum DeckFormat {
         for (final PaperCard p : commanders) {
             cmdCI |= p.getRules().getColorIdentity().getColor();
         }
+        if(cmdCI == MagicColor.ALL_COLORS)
+            return x -> true;
         Predicate<CardRules> predicate = CardRulesPredicates.hasColorIdentity(cmdCI);
         if (commanders.size() == 1 && commanders.get(0).getRules().canBePartnerCommander()) { //also show available partners a commander can have a partner
             //702.124g If a legendary card has more than one partner ability, you may choose which one to use when designating your commander, but you can’t use both.

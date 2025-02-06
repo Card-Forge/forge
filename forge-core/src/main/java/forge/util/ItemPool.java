@@ -269,6 +269,10 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         // need not set out-of-sync: either remove did set, or nothing was removed
     }
 
+    public void retainIf(Predicate<T> filter) {
+        items.keySet().removeIf(filter.negate());
+    }
+
     public void clear() {
         items.clear();
     }

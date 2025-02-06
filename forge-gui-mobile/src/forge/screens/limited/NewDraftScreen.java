@@ -2,7 +2,7 @@ package forge.screens.limited;
 
 import forge.Forge;
 import forge.assets.FSkinFont;
-import forge.deck.FDeckEditor.EditorType;
+import forge.deck.FDeckEditor;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gui.FThreads;
@@ -49,7 +49,11 @@ public class NewDraftScreen extends LaunchScreen {
             final BoosterDraft draft = BoosterDraft.createDraft(poolType);
             if (draft == null) { return; }
 
-            FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewDraft"), true, () -> Forge.openScreen(new DraftingProcessScreen(draft, EditorType.Draft, null))));
+            FThreads.invokeInEdtLater(() ->
+                    LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewDraft"), true,
+                            () -> Forge.openScreen(new DraftingProcessScreen(draft, FDeckEditor.EditorConfigDraft))
+                    )
+            );
         });
     }
 }

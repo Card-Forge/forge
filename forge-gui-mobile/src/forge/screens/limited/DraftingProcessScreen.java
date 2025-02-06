@@ -12,7 +12,6 @@ import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestTournamentController;
 import forge.gui.FThreads;
 import forge.model.FModel;
-import forge.screens.FScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
@@ -22,16 +21,24 @@ public class DraftingProcessScreen extends FDeckEditor {
     private final BoosterDraft draft;
     private final QuestTournamentController questDraftController;
 
-    public DraftingProcessScreen(BoosterDraft draft0, EditorType editorType0, QuestTournamentController questDraftController0) {
-        super(editorType0, "", false);
-        draft = draft0;
-        questDraftController = questDraftController0;
+    public DraftingProcessScreen(BoosterDraft draft, DeckEditorConfig editorConfig) {
+        this(draft, editorConfig, null);
+    }
+
+    public DraftingProcessScreen(BoosterDraft draft, DeckEditorConfig editorConfig, QuestTournamentController questDraftController) {
+        super(editorConfig, "");
+        this.draft = draft;
+        this.questDraftController = questDraftController;
         getCatalogPage().refresh(); //must refresh after draft set
     }
 
     @Override
     public BoosterDraft getDraft() {
         return draft;
+    }
+
+    protected boolean isQuestDraft() {
+        return questDraftController != null;
     }
 
     @Override
@@ -41,7 +48,7 @@ public class DraftingProcessScreen extends FDeckEditor {
             return;
         }
 
-        if (getEditorType() == EditorType.QuestDraft) {
+        if (isQuestDraft()) {
             finishSave(QuestEventDraft.DECK_NAME);
             if (callback != null) {
                 callback.run(true);
@@ -98,21 +105,17 @@ public class DraftingProcessScreen extends FDeckEditor {
         finishedDraft.setHumanDeck((Deck) getDeck().copyTo(name));
         finishedDraft.addAiDecks(computer);
 
-        switch (getEditorType()) {
-        case Draft:
+        if(!isQuestDraft()) {
             FModel.getDecks().getDraft().add(finishedDraft);
-            getEditorType().getController().load("", name);
+            FDeckEditor.DECK_CONTROLLER_DRAFT.load("", name);
             DeckPreferences.setDraftDeck(name);
 
             LoadGameScreen.BoosterDraft.setAsBackScreen(false); //set load draft screen to be opened when user done editing deck
             LoadGameScreen.BoosterDraft.open();
-            break;
-        case QuestDraft:
+        }
+        else {
             FModel.getQuest().getDraftDecks().add(finishedDraft);
-            getEditorType().getController().load("", name);
-            break;
-        default:
-            break;
+            FDeckEditor.DECK_CONTROLLER_QUEST_DRAFT.load("", name);
         }
 
         //show header for main deck and sideboard when finished drafting
@@ -127,7 +130,7 @@ public class DraftingProcessScreen extends FDeckEditor {
             return;
         }
 
-        if (getEditorType() == EditorType.QuestDraft) {
+        if (isQuestDraft()) {
             FThreads.invokeInBackgroundThread(() -> {
                 if (questDraftController.cancelDraft()) {
                     FThreads.invokeInEdtLater(() -> canCloseCallback.run(true));
@@ -137,10 +140,5 @@ public class DraftingProcessScreen extends FDeckEditor {
         }
 
         FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblEndDraftConfirm"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, canCloseCallback);
-    }
-
-    @Override
-    public FScreen getLandscapeBackdropScreen() {
-        return null;
     }
 }

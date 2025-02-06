@@ -23,6 +23,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 
@@ -516,6 +517,21 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void setSelectedIndices(Iterable<Integer> indices) {
         currentView.setSelectedIndices(indices);
+    }
+
+    public void setSelectedIndexRelative(int indexOffset) {
+        int current = getSelectedIndex();
+        int size = getItemCount();
+        if(size == 0)
+            return;
+        //Desired behavior: if we're on item 8 out of 10, and we move the selection by 5, stop at item 10 first.
+        //A second input will wrap the selection around to item 1 again.
+        if(current <= 0 && indexOffset < 0)
+            setSelectedIndex(size - 1);
+        else if(current >= size - 1 && indexOffset > 0)
+            setSelectedIndex(0);
+        else
+            setSelectedIndex(Math.max(0, Math.max(current + indexOffset, size - 1)));
     }
 
     public void addItem(final T item, int qty) {
@@ -1101,5 +1117,61 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             return 0f;
         }
         return filters.get().get(filters.get().size() - 1).getWidget().getWidth();
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if(isContextMenuOpen()) {
+            switch (keyCode) {
+                case Input.Keys.DPAD_UP:
+                    selectPreviousContext();
+                    return true;
+                case Input.Keys.DPAD_DOWN:
+                    selectNextContext();
+                    return true;
+                case Input.Keys.BUTTON_A:
+                    activateSelectedContext();
+                    return true;
+                case Input.Keys.BUTTON_B:
+                    closeMenu();
+                    return true;
+                case Input.Keys.BUTTON_Y:
+                case Input.Keys.BUTTON_L1:
+                    closeMenu();
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        boolean usingListView = currentView == listView;
+        switch(keyCode) {
+            case(Input.Keys.DPAD_RIGHT):
+                setSelectedIndexRelative(usingListView ? 10 : 1);
+                return true;
+            case Input.Keys.DPAD_LEFT:
+                setSelectedIndexRelative(usingListView ? -10 : -1);
+                return true;
+            case Input.Keys.DPAD_DOWN:
+                setSelectedIndexRelative(usingListView ? 1 : getConfig().getImageColumnCount());
+                return true;
+            case Input.Keys.DPAD_UP:
+                setSelectedIndexRelative(usingListView ? -1 : -getConfig().getImageColumnCount());
+                return true;
+            case Input.Keys.BUTTON_A:
+                showMenu(true);
+                return true;
+            case Input.Keys.BUTTON_Y:
+                if(getCurrentView().getSelectionCount() > 0) {
+                    getCurrentView().zoomSelected();
+                    return true;
+                }
+                break;
+            case Input.Keys.BUTTON_L1:
+                setViewIndex(config.getViewIndex() == 1 ? 0 : 1);
+                return true;
+        }
+
+        return false;
     }
 }
