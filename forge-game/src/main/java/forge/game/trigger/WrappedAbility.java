@@ -585,7 +585,7 @@ public class WrappedAbility extends Ability {
             }
         }
 
-        timestampCheck();
+        //timestampCheck();
 
         getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
     }
