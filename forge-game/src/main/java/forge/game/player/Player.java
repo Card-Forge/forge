@@ -3686,6 +3686,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             blessingEffect.updateStateForView();
 
             com.add(blessingEffect);
+
+            // 702.131d. After a player gets the city's blessing, continuous effects are reapplied
+            game.getAction().checkStaticAbilities();
         } else {
             com.remove(blessingEffect);
             blessingEffect = null;
