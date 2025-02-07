@@ -401,6 +401,8 @@ public enum CounterEnumType {
 
     SOOT("SOOT", 211, 194, 198),
 
+    SPEED("SPEED", 240, 145, 20),
+
     SPITE("SPITE", 0, 218, 255),
 
     SPORE("SPORE", 122, 218, 150),

@@ -189,7 +189,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<Card, Integer> commanderCast = Maps.newHashMap();
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
     private DetachedCardEffect commanderEffect = null;
-    private DetachedCardEffect speedEffect;
 
     private Card monarchEffect;
     private Card initiativeEffect;
@@ -197,6 +196,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Card contraptionSprocketEffect;
     private Card radiationEffect;
     private Card keywordEffect;
+    private Card speedEffect;
 
     private Map<Long, Integer> additionalVotes = Maps.newHashMap();
     private Map<Long, Integer> additionalOptionalVotes = Maps.newHashMap();
@@ -1976,6 +1976,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             speed++;
             view.updateSpeed(this);
             game.fireEvent(new GameEventSpeedUp()); //play sound effect
+            updateSpeedEffect();
         }
     }
     public final void decreaseSpeed() {
@@ -1983,6 +1984,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             speed--;
             view.updateSpeed(this);
             getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+            updateSpeedEffect();
         }
     }
     public final boolean noSpeed() {
@@ -1996,17 +1998,61 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (speed > 0) view.updateSpeed(this);
     }
     public final void createSpeedEffect() {
-        final PlayerZone com = getZone(ZoneType.Command);
-        DetachedCardEffect eff = new DetachedCardEffect(this, "Speed Effect");
+        if(this.speedEffect != null || this.speed <= 0)
+            return;
+
+        speedEffect = new Card(game.nextCardId(), null, game);
+        speedEffect.setOwner(this);
+        speedEffect.setGamePieceType(GamePieceType.EFFECT);
+
+        speedEffect.addAlternateState(CardStateName.Flipped, false);
+        CardState speedFront = speedEffect.getState(CardStateName.Original);
+        CardState speedBack = speedEffect.getState(CardStateName.Flipped);
+
+        speedFront.setImageKey("t:speed");
+        speedFront.setName("Start Your Engines!");
+
+        speedBack.setImageKey("t:max_speed");
+        speedBack.setName("Max Speed!");
+
+        //Add "counters" on the effect to represent the current speed value.
+        Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.SPEED), this.speed);
+        speedEffect.setCounters(counterMap);
+
+        /* Actual effect: 702.179d There is an inherent triggered ability associated with a player having 1 or more
+         speed. This ability has no source and is controlled by that player. That ability is “Whenever one or more
+         opponents lose life during your turn, if your speed is less than 4, your speed increases by 1. This ability
+         triggers only once each turn.”
+        */
         String trigger = "Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Command | ActivationLimit$ 1 | " +
                 "PlayerTurn$ True | CheckSVar$ Count$YourSpeed | SVarCompare$ LT4 | "
-                + "TriggerDescription$ Your speed increases once on each of your turns when an opponent loses life.";
+                + "TriggerDescription$ Whenever an opponent loses life during your turn, if your speed is 1 or greater, increase your speed by 1. Max speed is 4. This ability triggers only once each turn.";
         String speedUp = "DB$ ChangeSpeed";
-        Trigger lifeLostTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
-        lifeLostTrigger.setOverridingAbility(AbilityFactory.getAbility(speedUp, eff));
-        eff.addTrigger(lifeLostTrigger);
-        this.speedEffect = eff;
-        com.add(eff);
+        Trigger lifeLostTrigger = TriggerHandler.parseTrigger(trigger, speedEffect, true);
+        lifeLostTrigger.setOverridingAbility(AbilityFactory.getAbility(speedUp, speedEffect));
+        speedFront.addTrigger(lifeLostTrigger);
+
+        speedEffect.updateStateForView();
+
+        if(this.maxSpeed())
+            speedEffect.setState(CardStateName.Flipped, true);
+
+        final PlayerZone com = getZone(ZoneType.Command);
+        com.add(speedEffect);
+        this.updateZoneForView(com);
+    }
+    protected void updateSpeedEffect() {
+        if(this.speedEffect == null) {
+            if(this.speed == 0)
+                return;
+            createSpeedEffect();
+        }
+        Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.SPEED), this.speed);
+        speedEffect.setCounters(counterMap);
+        if(maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Original)
+            speedEffect.setState(CardStateName.Flipped, true);
+        else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Flipped)
+            speedEffect.setState(CardStateName.Original, true);
     }
 
     public final List<Card> getPlaneswalkedToThisTurn() {
