@@ -98,9 +98,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (value.equals("Solved")) {
                 this.setSolved(true);
             }
-            if (value.equals("MaxSpeed")) {
-                this.setMaxSpeed(true);
-            }
         }
 
         if (params.containsKey("ActivationZone")) {
@@ -442,9 +439,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (!activator.hasDesert()) {
                 return false;
             }
-        }
-        if (isMaxSpeed()) {
-            if (!activator.maxSpeed()) return false;
         }
         if (isBlessing()) {
             if (!activator.hasBlessing()) {
