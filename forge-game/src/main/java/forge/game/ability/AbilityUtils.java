@@ -14,6 +14,7 @@ import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -2837,7 +2838,13 @@ public class AbilityUtils {
             final String[] workingCopy = paidparts[0].split("_");
             final String validFilter = workingCopy[1];
             // use objectXCount ?
-            return CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
+            int activated = CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
+            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+                if (i.getPayment().getAbility().isValid(validFilter, player, c, ctb)) {
+                    activated++;
+                }
+            }
+            return activated;
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
