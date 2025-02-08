@@ -1998,7 +1998,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (speed > 0) view.updateSpeed(this);
     }
     public final void createSpeedEffect() {
-        if(this.speedEffect != null || this.speed <= 0)
+        if(this.speedEffect != null || this.noSpeed())
             return;
 
         speedEffect = new Card(game.nextCardId(), null, game);
@@ -2024,7 +2024,7 @@ public class Player extends GameEntity implements Comparable<Player> {
          opponents lose life during your turn, if your speed is less than 4, your speed increases by 1. This ability
          triggers only once each turn.”
         */
-        String trigger = "Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Command | ActivationLimit$ 1 | " +
+        String trigger = "Mode$ LifeLostAll | ValidPlayer$ Opponent | TriggerZones$ Command | ActivationLimit$ 1 | " +
                 "PlayerTurn$ True | CheckSVar$ Count$YourSpeed | SVarCompare$ LT4 | "
                 + "TriggerDescription$ Whenever an opponent loses life during your turn, if your speed is 1 or greater, increase your speed by 1. Max speed is 4. This ability triggers only once each turn.";
         String speedUp = "DB$ ChangeSpeed";
@@ -2043,7 +2043,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     protected void updateSpeedEffect() {
         if(this.speedEffect == null) {
-            if(this.speed == 0)
+            if(this.noSpeed())
                 return;
             createSpeedEffect();
         }
