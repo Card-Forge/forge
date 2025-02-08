@@ -452,29 +452,11 @@ public final class StaticAbilityContinuous {
 
         if (layer == StaticAbilityLayer.COLOR) {
             if (params.containsKey("AddColor")) {
-                final String colors = params.get("AddColor");
-                if (colors.equals("ChosenColor")) {
-                    if (hostCard.hasChosenColor()) {
-                        addColors = ColorSet.fromNames(hostCard.getChosenColors());
-                    }
-                } else if (colors.equals("All")) {
-                    addColors = ColorSet.ALL_COLORS;
-                } else {
-                    addColors = ColorSet.fromNames(colors.split(" & "));
-                }
+                addColors = getColorsFromParam(stAb, params.get("AddColor"));
             }
 
             if (params.containsKey("SetColor")) {
-                final String colors = params.get("SetColor");
-                if (colors.equals("ChosenColor")) {
-                    if (hostCard.hasChosenColor()) {
-                        addColors = ColorSet.fromNames(hostCard.getChosenColors());
-                    }
-                } else if (colors.equals("All")) {
-                    addColors = ColorSet.ALL_COLORS;
-                } else {
-                    addColors = ColorSet.fromNames(colors.split(" & "));
-                }
+                addColors = getColorsFromParam(stAb, params.get("SetColor"));
                 overwriteColors = true;
             }
         }
@@ -933,6 +915,22 @@ public final class StaticAbilityContinuous {
         return affectedCards;
     }
 
+    private static ColorSet getColorsFromParam(StaticAbility stAb, final String colors) {
+        final Card hostCard = stAb.getHostCard();
+        ColorSet addColors;
+        if (colors.equals("ChosenColor")) {
+            if (hostCard.hasChosenColor()) {
+                addColors = ColorSet.fromNames(hostCard.getChosenColors());
+            }
+            return null;
+        } else if (colors.equals("All")) {
+            addColors = ColorSet.ALL_COLORS;
+        } else {
+            addColors = ColorSet.fromNames(colors.split(" & "));
+        }
+        return addColors;
+    }
+
     private static void buildIgnorEffectAbility(final StaticAbility stAb, final String costString, final List<Player> players, final CardCollectionView cards) {
         final List<Player> validActivator = new ArrayList<>(players);
         for (final Card c : cards) {
@@ -1032,10 +1030,18 @@ public final class StaticAbilityContinuous {
         // non - CharacteristicDefining
         CardCollection affectedCards = new CardCollection();
 
+        CardCollection definedCards = null;
+        if (stAb.hasParam("AffectedDefined")) {
+            definedCards = AbilityUtils.getDefinedCards(hostCard, stAb.getParam("AffectedDefined"), stAb);
+        }
+
         // add preList in addition to the normal affected cards
         // need to add before game cards to have preference over them
         if (!preList.isEmpty()) {
-            if (stAb.hasParam("AffectedZone")) {
+            if (stAb.hasParam("AffectedDefined")) {
+                affectedCards.addAll(preList);
+                affectedCards.retainAll(definedCards);
+            } else if (stAb.hasParam("AffectedZone")) {
                 affectedCards.addAll(CardLists.filter(preList, CardPredicates.inZone(
                         ZoneType.listValueOf(stAb.getParam("AffectedZone")))));
             } else {
@@ -1043,7 +1049,9 @@ public final class StaticAbilityContinuous {
             }
         }
 
-        if (stAb.hasParam("AffectedZone")) {
+        if (stAb.hasParam("AffectedDefined")) {
+            affectedCards.addAll(definedCards);
+        } else if (stAb.hasParam("AffectedZone")) {
             affectedCards.addAll(game.getCardsIn(ZoneType.listValueOf(stAb.getParam("AffectedZone"))));
         } else {
             affectedCards.addAll(game.getCardsIn(ZoneType.Battlefield));

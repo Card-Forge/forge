@@ -4139,7 +4139,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             eff.setRenderForUI(false);
             eff.addRemembered(this);
 
-            String s = "Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | RemoveType$ Creature";
+            String s = "Mode$ Continuous | AffectedDefined$ RememberedCard | EffectZone$ Command | RemoveType$ Creature";
             eff.addStaticAbility(s);
 
             GameCommand until = SpellAbilityEffect.exileEffectCommand(game, eff);
