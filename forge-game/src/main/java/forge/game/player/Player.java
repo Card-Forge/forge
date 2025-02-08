@@ -2014,7 +2014,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         speedBack.setImageKey("t:max_speed");
         speedBack.setName("Max Speed!");
 
-        speedEffect.setOverlayText("SPEED - " + this.speed);
+        speedEffect.setOverlayText("SPEED: " + this.speed);
 
         /* Actual effect: 702.179d There is an inherent triggered ability associated with a player having 1 or more
          speed. This ability has no source and is controlled by that player. That ability is “Whenever one or more
@@ -2044,7 +2044,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return;
             createSpeedEffect();
         }
-        speedEffect.setOverlayText("SPEED - " + (this.maxSpeed() ? "MAX!" : this.speed));
+        speedEffect.setOverlayText("SPEED: " + (this.maxSpeed() ? "MAX!" : this.speed));
         if(maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Original)
             speedEffect.setState(CardStateName.Flipped, true);
         else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Flipped)
@@ -4028,7 +4028,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void setCrankCounter(int counters) {
         this.crankCounter = counters;
         if (this.contraptionSprocketEffect != null) {
-            contraptionSprocketEffect.setOverlayText("CRANK! - " + this.crankCounter);
+            contraptionSprocketEffect.setOverlayText("CRANK! — " + this.crankCounter);
         }
         else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
             this.createContraptionSprockets();
@@ -4054,7 +4054,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         contraptionSprocketEffect.setName("Contraption Sprockets");
         contraptionSprocketEffect.setGamePieceType(GamePieceType.EFFECT);
 
-        contraptionSprocketEffect.setOverlayText("CRANK! - " + this.crankCounter);
+        contraptionSprocketEffect.setOverlayText("CRANK! — " + this.crankCounter);
         contraptionSprocketEffect.setText("At the beginning of your upkeep, if you control a Contraption, move the CRANK! counter to the next sprocket and crank any number of that sprocket's Contraptions.");
 
         contraptionSprocketEffect.updateStateForView();
