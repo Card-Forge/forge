@@ -2016,7 +2016,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         speedBack.setName("Max Speed!");
 
         //Add "counters" on the effect to represent the current speed value.
-        Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.SPEED), this.speed);
+        Map<CounterType, Integer> counterMap = Map.of(CounterType.get("SPEED"), this.speed);
         speedEffect.setCounters(counterMap);
 
         /* Actual effect: 702.179d There is an inherent triggered ability associated with a player having 1 or more
@@ -2047,7 +2047,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return;
             createSpeedEffect();
         }
-        Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.SPEED), this.speed);
+        Map<CounterType, Integer> counterMap = Map.of(CounterType.get("SPEED"), this.speed);
         speedEffect.setCounters(counterMap);
         if(maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Original)
             speedEffect.setState(CardStateName.Flipped, true);
