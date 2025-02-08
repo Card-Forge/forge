@@ -87,9 +87,13 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(final GameEventShuffle event) { return SoundEffectType.Shuffle; }
     @Override
-    public SoundEffectType visit(final GameEventSpeedUp event) { return SoundEffectType.SpeedUp; }
-    @Override
     public SoundEffectType visit(final GameEventTokenCreated event) { return SoundEffectType.Token; }
+    @Override
+    public SoundEffectType visit(final GameEventSpeedChanged event) {
+        if(event.deltaSpeed <= 0)
+            return null;
+        return SoundEffectType.SpeedUp;
+    }
     @Override
     public SoundEffectType visit(final GameEventSprocketUpdate event) {
         if(event.oldSprocket == event.sprocket || event.sprocket <= 0)

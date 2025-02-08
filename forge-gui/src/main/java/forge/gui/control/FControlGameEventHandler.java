@@ -451,7 +451,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         return processCards(cards, cardsRefreshDetails);
     }
 
-    public Void visit(final GameEventSpeedUp event) {
+    public Void visit(final GameEventSpeedChanged event) {
         Player p = event.player;
         processPlayer(p, livesUpdate);
         return processEvent();
