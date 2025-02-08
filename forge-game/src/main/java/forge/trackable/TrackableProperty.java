@@ -85,6 +85,8 @@ public enum TrackableProperty {
     RingLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
     Intensity(TrackableTypes.IntegerType),
+    OverlayText(TrackableTypes.StringType),
+    MarkerText(TrackableTypes.StringListType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringListType),
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
