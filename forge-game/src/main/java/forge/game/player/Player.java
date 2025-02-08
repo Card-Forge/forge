@@ -1717,14 +1717,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause);
         game.updateLastStateForCard(c);
 
-        // play a sound
-        game.fireEvent(new GameEventLandPlayed(this, land));
-
         // Run triggers
         runParams.put(AbilityKey.SpellAbility, cause);
         game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
+
         game.getStack().unfreezeStack();
         addLandPlayedThisTurn();
+
+        // play a sound
+        game.fireEvent(new GameEventLandPlayed(this, land));
 
         return c;
     }
@@ -1878,6 +1879,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         stats.nextTurn();
     }
 
+    public final int getLastTurnNr() {
+        return this.lastTurnNr;
+    }
+
     public boolean hasTappedLandForManaThisTurn() {
         return tappedLandForManaThisTurn;
     }
@@ -1970,7 +1975,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!maxSpeed()) { // can't increase past 4
             speed++;
             view.updateSpeed(this);
-            game.fireEvent(new GameEventSpeedUp()); //play sound effect
+            game.fireEvent(new GameEventSpeedUp(this)); //play sound effect
         }
     }
     public final void decreaseSpeed() {
@@ -2285,6 +2290,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateUnlimitedHandSize(this);
     }
 
+    public int getStartingHandSize() {
+        return startingHandSize;
+    }
+    public void setStartingHandSize(int shs) {
+        startingHandSize = shs;
+    }
+
     public final int getLandsPlayedThisTurn() {
         return landsPlayedThisTurn;
     }
@@ -2519,10 +2531,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return keywords.getAmount(k);
     }
 
-    public final int getLastTurnNr() {
-        return this.lastTurnNr;
-    }
-
     public void onCleanupPhase() {
         for (Card c : getCardsIn(ZoneType.Hand)) {
             c.setDrawnThisTurn(false);
@@ -2691,13 +2699,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean isSkippingCombat() {
         return !isInGame();
-    }
-
-    public int getStartingHandSize() {
-        return startingHandSize;
-    }
-    public void setStartingHandSize(int shs) {
-        startingHandSize = shs;
     }
 
     /**
@@ -3615,7 +3616,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         final PlayerZone com = getZone(ZoneType.Command);
         keywordEffect.setText("");
-        keywordEffect.updateAbilityTextForView();
         boolean headerAdded = false;
         StringBuilder kw = new StringBuilder();
         for (KeywordInterface k : keywords) {
@@ -3627,8 +3627,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (!kw.toString().isEmpty()) {
             keywordEffect.setText(trimKeywords(kw.toString()));
-            keywordEffect.updateAbilityTextForView();
         }
+        keywordEffect.updateAbilityTextForView();
         this.updateZoneForView(com);
     }
     public String trimKeywords(String keywordTexts) {
@@ -3686,6 +3686,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             blessingEffect.updateStateForView();
 
             com.add(blessingEffect);
+
+            // 702.131d. After a player gets the city's blessing, continuous effects are reapplied
+            game.getAction().checkStaticAbilities();
         } else {
             com.remove(blessingEffect);
             blessingEffect = null;
@@ -4028,11 +4031,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void addDeclaresAttackers(long ts, Player p) {
         this.declaresAttackers.put(ts, p);
     }
-
     public void removeDeclaresAttackers(long ts) {
         this.declaresAttackers.remove(ts);
     }
-
     public Player getDeclaresAttackers() {
         Map.Entry<Long, Player> e = declaresAttackers.lastEntry();
         return e == null ? null : e.getValue();
@@ -4041,11 +4042,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void addDeclaresBlockers(long ts, Player p) {
         this.declaresBlockers.put(ts, p);
     }
-
     public void removeDeclaresBlockers(long ts) {
         this.declaresBlockers.remove(ts);
     }
-
     public Player getDeclaresBlockers() {
         Map.Entry<Long, Player> e = declaresBlockers.lastEntry();
         return e == null ? null : e.getValue();

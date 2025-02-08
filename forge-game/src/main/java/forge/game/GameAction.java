@@ -543,14 +543,14 @@ public class GameAction {
             // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
             unattachCardLeavingBattlefield(copied, c);
             c.runLeavesPlayCommands();
+
+            if (copied.isTapped()) {
+                copied.setTapped(false); //untap card after it leaves the battlefield if needed
+                game.fireEvent(new GameEventCardTapped(c, false));
+            }
         }
         if (fromGraveyard) {
             game.addLeftGraveyardThisTurn(lastKnownInfo);
-        }
-
-        // do ETB counters after zone add
-        if (!suppress && toBattlefield && !table.isEmpty()) {
-            game.getTriggerHandler().registerActiveTrigger(copied, false);
         }
 
         if (c.hasChosenColorSpire()) {
@@ -559,13 +559,9 @@ public class GameAction {
 
         copied.updateStateForView();
 
-        if (fromBattlefield) {
-            copied.setDamage(0); //clear damage after a card leaves the battlefield
-            copied.setHasBeenDealtDeathtouchDamage(false);
-            if (copied.isTapped()) {
-                copied.setTapped(false); //untap card after it leaves the battlefield if needed
-                game.fireEvent(new GameEventCardTapped(c, false));
-            }
+        // needed for counters + ascend
+        if (!suppress && toBattlefield) {
+            game.getTriggerHandler().registerActiveTrigger(copied, false);
         }
 
         if (!table.isEmpty()) {
@@ -573,12 +569,12 @@ public class GameAction {
             game.getTriggerHandler().suppressMode(TriggerType.Always);
             // Need to apply any static effects to produce correct triggers
             checkStaticAbilities();
+            // do ETB counters after zone add
+            table.replaceCounterEffect(game, null, true, true, params);
+            game.getTriggerHandler().clearSuppression(TriggerType.Always);
         }
 
-        table.replaceCounterEffect(game, null, true, true, params);
-
         // update static abilities after etb counters have been placed
-        game.getTriggerHandler().clearSuppression(TriggerType.Always);
         checkStaticAbilities();
 
         // 400.7g try adding keyword back into card if it doesn't already have it
@@ -601,11 +597,11 @@ public class GameAction {
             c.cleanupExiledWith();
         }
 
-        game.getTriggerHandler().clearActiveTriggers(copied, null);
-        game.getTriggerHandler().registerActiveTrigger(copied, false);
-
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
+
+        game.getTriggerHandler().clearActiveTriggers(copied, null);
+        game.getTriggerHandler().registerActiveTrigger(copied, false);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(copied);
         runParams.put(AbilityKey.CardLKI, lastKnownInfo);
@@ -1032,7 +1028,8 @@ public class GameAction {
                 lki = CardCopyService.getLKICopy(c);
             }
             game.addChangeZoneLKIInfo(lki);
-            if (lki.isInPlay()) {
+            // CR 702.26k
+            if (lki.isInPlay() && !lki.isPhasedOut()) {
                 if (game.getCombat() != null) {
                     game.getCombat().saveLKI(lki);
                     game.getCombat().removeFromCombat(c);
@@ -1276,9 +1273,9 @@ public class GameAction {
         // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
         for (Card c : affectedCards) {
             c.updateNameforView();
-            c.updatePowerToughnessForView();
+            c.updatePTforView();
             c.updateTypesForView();
-            c.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
+            c.updateKeywords();
         }
 
         // TODO filter out old copies from zone change
@@ -2678,8 +2675,8 @@ public class GameAction {
         if (isCombat) {
             for (Map.Entry<GameEntity, Map<Card, Integer>> et : damageMap.columnMap().entrySet()) {
                 final GameEntity ge = et.getKey();
-                if (ge instanceof Card) {
-                    ((Card) ge).clearAssignedDamage();
+                if (ge instanceof Card c) {
+                    c.clearAssignedDamage();
                 }
             }
         }
@@ -2699,8 +2696,7 @@ public class GameAction {
                     continue;
                 }
 
-                if (e.getKey() instanceof Card && !lethalDamage.containsKey(e.getKey())) {
-                    Card c = (Card) e.getKey();
+                if (e.getKey() instanceof Card c && !lethalDamage.containsKey(c)) {
                     lethalDamage.put(c, c.getExcessDamageValue(false));
                 }
 

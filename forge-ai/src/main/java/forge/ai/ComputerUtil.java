@@ -1408,9 +1408,7 @@ public class ComputerUtil {
             }
         }
         for (final CostPart part : abCost.getCostParts()) {
-            if (part instanceof CostSacrifice) {
-                final CostSacrifice sac = (CostSacrifice) part;
-
+            if (part instanceof CostSacrifice sac) {
                 final String type = sac.getType();
 
                 if (type.equals("CARDNAME")) {
@@ -1776,9 +1774,7 @@ public class ComputerUtil {
                 noRegen = true;
             }
             for (final Object o : objects) {
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
-
+                if (o instanceof Card c) {
                     // indestructible
                     if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                         continue;
@@ -1842,9 +1838,7 @@ public class ComputerUtil {
                     if (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c, false)) {
                         threatened.add(c);
                     }
-                } else if (o instanceof Player) {
-                    final Player p = (Player) o;
-
+                } else if (o instanceof Player p) {
                     if (source.hasKeyword(Keyword.INFECT)) {
                         if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= 10 - p.getPoisonCounters()) {
                             threatened.add(p);
@@ -1862,8 +1856,7 @@ public class ComputerUtil {
                 || saviourApi == null)) {
             final int dmg = -AbilityUtils.calculateAmount(source, topStack.getParam("NumDef"), topStack);
             for (final Object o : objects) {
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
+                if (o instanceof Card c) {
                     final boolean canRemove = (c.getNetToughness() <= dmg)
                             || (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && c.getShieldCount() == 0 && dmg >= ComputerUtilCombat.getDamageToKill(c, false));
                     if (!canRemove) {
@@ -1909,9 +1902,7 @@ public class ComputerUtil {
                         || saviourApi == ApiType.Protection || saviourApi == null
                         || saviorWithSubsApi == ApiType.Pump || saviorWithSubsApi == ApiType.PumpAll)) {
             for (final Object o : objects) {
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
-                    // indestructible
+                if (o instanceof Card c) {
                     if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                         continue;
                     }
@@ -1960,8 +1951,7 @@ public class ComputerUtil {
                 && topStack.hasParam("Destination")
                 && topStack.getParam("Destination").equals("Exile")) {
             for (final Object o : objects) {
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
+                if (o instanceof Card c) {
                     // give Shroud to targeted creatures
                     if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                         continue;
@@ -1988,8 +1978,7 @@ public class ComputerUtil {
                 && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                 || saviourApi == ApiType.Protection || saviourApi == null)) {
             for (final Object o : objects) {
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
+                if (o instanceof Card c) {
                     // give Shroud to targeted creatures
                     if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                         continue;
@@ -2011,8 +2000,7 @@ public class ComputerUtil {
             boolean enableCurseAuraRemoval = aic != null ? aic.getBooleanProperty(AiProps.ACTIVELY_DESTROY_IMMEDIATELY_UNBLOCKABLE) : false;
             if (enableCurseAuraRemoval) {
                 for (final Object o : objects) {
-                    if (o instanceof Card) {
-                        final Card c = (Card) o;
+                    if (o instanceof Card c) {
                         // give Shroud to targeted creatures
                         if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                             continue;

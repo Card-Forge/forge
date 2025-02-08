@@ -547,18 +547,6 @@ public class CostAdjustment {
                     if (!sa.isActivatedAbility() || sa.isReplacementAbility()) {
                         return false;
                     }
-                    if (st.hasParam("OnlyFirstActivation")) {
-                        int times = 0;
-                        for (IndividualCostPaymentInstance i : game.costPaymentStack) {
-                            SpellAbility paymentSa = i.getPayment().getAbility();
-                            if (paymentSa.isActivatedAbility() && st.matchesValidParam("ValidCard", paymentSa.getHostCard())) {
-                                times++;
-                                if (times > 1) {
-                                    return false;
-                                }
-                            }
-                        }
-                    }
                 }
                 case "Foretell" -> {
                     if (!sa.isForetelling()) {

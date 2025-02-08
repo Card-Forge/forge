@@ -84,7 +84,7 @@ public class PumpEffect extends SpellAbilityEffect {
             gameCard.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
         }
         if (redrawPT) {
-            gameCard.updatePowerToughnessForView();
+            gameCard.updatePTforView();
         }
 
         if (sa.hasParam("CanBlockAny")) {
@@ -120,7 +120,7 @@ public class PumpEffect extends SpellAbilityEffect {
                         gameCard.removeHiddenExtrinsicKeywords(timestamp, 0);
                         gameCard.removeChangedCardKeywords(timestamp, 0);
                     }
-                    gameCard.updatePowerToughnessForView();
+                    gameCard.updatePTforView();
                     if (updateText) {
                         gameCard.updateAbilityTextForView();
                     }
