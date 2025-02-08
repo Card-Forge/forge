@@ -2643,7 +2643,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                          || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
                          || keyword.equals("Undying") || keyword.equals("Wither")
                          || keyword.equals("Bargain")
-                         || keyword.equals("Mentor") || keyword.equals("Training")) {
+                         || keyword.equals("Mentor") || keyword.equals("Training")
+                         || keyword.equals("Start your engines")) {
                     if (sb.length() != 0) {
                         sb.append("\r\n");
                     }
@@ -2706,8 +2707,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
-                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")
-                        || keyword.equals("Start your engines")) {
+                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));

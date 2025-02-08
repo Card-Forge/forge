@@ -1560,6 +1560,12 @@ public class GameAction {
                     }
                 }
 
+                // 704.5z If a player controls a permanent with start your engines! and that player has no speed, that player’s speed becomes 1. See rule 702.179, “Start Your Engines!”
+                if (p.getSpeed() == 0 && p.getCardsIn(ZoneType.Battlefield).anyMatch(c -> c.hasKeyword(Keyword.START_YOUR_ENGINES))) {
+                    p.increaseSpeed();
+                    checkAgain = true;
+                }
+
                 if (handlePlaneswalkerRule(p, noRegCreats)) {
                     checkAgain = true;
                 }
