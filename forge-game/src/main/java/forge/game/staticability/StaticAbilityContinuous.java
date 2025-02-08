@@ -1032,7 +1032,7 @@ public final class StaticAbilityContinuous {
 
         CardCollection definedCards = null;
         if (stAb.hasParam("AffectedDefined")) {
-            definedCards = AbilityUtils.getDefinedCards(hostCard, stAb.getParam("AffectedDefined"), stAb);
+            definedCards = AbilityUtils.getDefinedCards(hostCard, stAb.getParam("AffectedDefined"), stAb).filter(CardPredicates.phasedIn());
         }
 
         // add preList in addition to the normal affected cards
