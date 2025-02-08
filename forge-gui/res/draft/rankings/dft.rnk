@@ -7,9 +7,9 @@
 #6|Gonti, Night Minister|R|DFT
 #7|Chandra, Spark Hunter|M|DFT
 #8|Pyrewood Gearhulk|M|DFT
-#9|Skysovereign, Consul Flagship|M|DFT
+#9|Skysovereign, Consul Flagship|M|SPG
 #10|Draconautics Engineer|R|DFT
-#11|Pathbreaker Ibex|M|DFT
+#11|Pathbreaker Ibex|M|SPG
 #12|Guardian Sunmare|R|DFT
 #13|Voyager Glidecar|R|DFT
 #14|Thopter Fabricator|R|DFT
@@ -33,9 +33,9 @@
 #32|Riptide Gearhulk|M|DFT
 #33|Sab-Sunen, Luxa Embodied|M|DFT
 #34|The Aetherspark|M|DFT
-#35|Bone Miser|M|DFT
-#36|Lord of the Undead|M|DFT
-#37|Chandra's Ignition|M|DFT
+#35|Bone Miser|M|SPG
+#36|Lord of the Undead|M|SPG
+#37|Chandra's Ignition|M|SPG
 #38|Skyseer's Chariot|R|DFT
 #39|Boommobile|R|DFT
 #40|Howlsquad Heavy|R|DFT
@@ -58,7 +58,7 @@
 #57|Rangers' Aetherhive|U|DFT
 #58|Skyserpent Seeker|U|DFT
 #59|Gastal Thrillseeker|U|DFT
-#60|Cavalier of Dawn|M|DFT
+#60|Cavalier of Dawn|M|SPG
 #61|Canyon Vaulter|U|DFT
 #62|Cloudspire Captain|U|DFT
 #63|Nesting Bot|U|DFT
@@ -105,8 +105,8 @@
 #104|Voyage Home|U|DFT
 #105|Sabotage Strategist|U|DFT
 #106|Scrounging Skyray|U|DFT
-#107|Thoughtcast|M|DFT
-#108|Galvanic Blast|M|DFT
+#107|Thoughtcast|M|SPG
+#108|Galvanic Blast|M|SPG
 #109|Gloryheath Lynx|U|DFT
 #110|Interface Ace|C|DFT
 #111|Spotcycle Scouter|C|DFT
@@ -275,11 +275,11 @@
 #274|The Last Ride|M|DFT
 #275|Push the Limit|U|DFT
 #276|Point the Way|U|DFT
-#277|Chrome Mox|M|DFT
+#277|Chrome Mox|M|SPG
 #278|Riverchurn Monument|R|DFT
 #279|Radiant Lotus|M|DFT
 #280|Ancient Vendetta|U|DFT
-#281|Whir of Invention|M|DFT
+#281|Whir of Invention|M|SPG
 #282|Plains|C|DFT
 #283|Island|C|DFT
 #284|Swamp|C|DFT
