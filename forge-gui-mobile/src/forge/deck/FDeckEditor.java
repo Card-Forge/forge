@@ -389,6 +389,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected final DeckHeader deckHeader;
 
+    private boolean tabsInitialized = false;
+
     public FDeckEditor(DeckEditorConfig editorConfig, String editDeckName) {
         this(editorConfig, editDeckName, null);
     }
@@ -423,6 +425,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         //Initialize pages.
         tabPages.stream().map(DeckEditorPage.class::cast).forEach(DeckEditorPage::initialize);
+        tabsInitialized = true;
 
         if(isDraftEditor()) {
             if(deckController.getDeck().isEmpty()) {
@@ -641,7 +644,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public void setDeck(Deck deck) {
         if (this.deck == deck) { return; }
         this.deck = deck;
-        if (deck == null) { return; }
+        this.deckHeader.lblName.setText(getDeckController().getDeckDisplayName());
+        if (deck == null || !tabsInitialized) { return; }
 
         //reinitialize tab pages when deck changes
         for (TabPage<FDeckEditor> tabPage : tabPages) {
@@ -2145,6 +2149,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         void setDeck(Deck deck);
         Deck getDeck();
         void newDeck();
+        String getDeckDisplayName();
         void notifyModelChanged();
         void exitWithoutSaving();
         default boolean supportsSave() { return false; }
@@ -2222,6 +2227,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             this.newModel();
         }
 
+        @Override
+        public String getDeckDisplayName() {
+            String name = this.getModelName();
+            if (name.isEmpty()) {
+                name = "[" + Forge.getLocalizer().getMessage("lblNewDeck") + "]";
+            }
+            if (!saved && editor.allowSave()) {
+                name = "*" + name;
+            }
+            return name;
+        }
+
         private void setModel(final T document) {
             setModel(document, false);
         }
@@ -2279,14 +2296,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             saved = val;
 
             if (editor != null) {
-                String name = this.getModelName();
-                if (name.isEmpty()) {
-                    name = "[" + Forge.getLocalizer().getMessage("lblNewDeck") + "]";
-                }
-                if (!saved && editor.allowSave()) {
-                    name = "*" + name;
-                }
-                editor.deckHeader.lblName.setText(name);
                 editor.deckHeader.btnSave.setEnabled(!saved);
             }
         }

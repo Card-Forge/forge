@@ -324,7 +324,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     private static final FileHandle deckIcon = Config.instance().getFile("ui/maindeck.png");
-    private static final FImage MAIN_DECK_ICON = deckIcon.exists() ? new FImage() { //TODO: Where does this get plugged in?
+    private static final FImage MAIN_DECK_ICON = deckIcon.exists() ? new FImage() {
         @Override
         public float getWidth() {
             return 100f;
@@ -375,6 +375,14 @@ public class AdventureDeckEditor extends FDeckEditor {
             g.drawImage(Forge.getAssets().getTexture(binderIcon), x, y, w, h);
         }
     } : FSkinImage.QUEST_BOX;
+
+    public static FImage iconFromDeckSection(DeckSection deckSection) {
+        if(deckSection == DeckSection.Main)
+            return MAIN_DECK_ICON;
+        if(deckSection == DeckSection.Sideboard)
+            return FDeckEditor.SIDEBOARD_ICON;
+        return FDeckEditor.iconFromDeckSection(deckSection);
+    }
 
     private static ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<>(InventoryItem.class);
 
@@ -739,7 +747,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     protected static class AdventureDeckSectionPage extends DeckSectionPage {
         protected AdventureDeckSectionPage(DeckSection deckSection, ItemManagerConfig config) {
-            super(deckSection, config);
+            super(deckSection, config, deckSection.getLocalizedShortName(), iconFromDeckSection(deckSection));
             cardManager.setBtnAdvancedSearchOptions(deckSection == DeckSection.Main);
             cardManager.setCatalogDisplay(false);
             refresh();
@@ -767,6 +775,13 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
         @Override public Deck getDeck() { return currentDeck; }
         @Override public void newDeck() { this.currentDeck = new Deck("Adventure Deck"); }
+
+        @Override
+        public String getDeckDisplayName() {
+            if(currentDeck == null)
+                return "New Deck";
+            return currentDeck.getName();
+        }
 
         @Override public void notifyModelChanged() {} //
         @Override public void exitWithoutSaving() {} //Too many external variables to just revert the deck. Not supported for now.
