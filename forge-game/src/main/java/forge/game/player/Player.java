@@ -1971,7 +1971,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return speed;
     }
     public final void increaseSpeed() {
-        if (speedEffect == null) createSpeedEffect();
         if (!maxSpeed()) { // can't increase past 4
             speed++;
             view.updateSpeed(this);
