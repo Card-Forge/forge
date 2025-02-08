@@ -2000,9 +2000,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void createSpeedEffect() {
         final PlayerZone com = getZone(ZoneType.Command);
         DetachedCardEffect eff = new DetachedCardEffect(this, "Speed Effect");
+        // 702.179d There is an inherent triggered ability associated with a player having 1 or more speed. This ability has no source and is controlled by that player.
+        // That ability is “Whenever one or more opponents lose life during your turn, if your speed is less than 4, your speed increases by 1. This ability triggers only once each turn.”
         String trigger = "Mode$ LifeLostAll | ValidPlayer$ Opponent | TriggerZones$ Command | ActivationLimit$ 1 | " +
                 "PlayerTurn$ True | CheckSVar$ Count$YourSpeed | SVarCompare$ LT4 | "
-                + "TriggerDescription$ Your speed increases once on each of your turns when an opponent loses life.";
+                + "TriggerDescription$ Whenever one or more opponents lose life during your turn, if your speed is less than 4, your speed increases by 1. This ability triggers only once each turn.";
         String speedUp = "DB$ ChangeSpeed";
         Trigger lifeLostTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
         lifeLostTrigger.setOverridingAbility(AbilityFactory.getAbility(speedUp, eff));
