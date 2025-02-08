@@ -1975,7 +1975,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!maxSpeed()) { // can't increase past 4
             speed++;
             view.updateSpeed(this);
-            game.fireEvent(new GameEventSpeedUp()); //play sound effect
+            game.fireEvent(new GameEventSpeedUp(this)); //play sound effect
         }
     }
     public final void decreaseSpeed() {
