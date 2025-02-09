@@ -1123,9 +1123,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         devouredCards.add(c);
     }
-    public final void clearDevoured() {
-        devouredCards = null;
-    }
 
     public final CardCollectionView getExploited() {
         return CardCollection.getView(exploitedCards);
@@ -1135,9 +1132,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             exploitedCards = new CardCollection();
         }
         exploitedCards.add(c);
-    }
-    public final void clearExploited() {
-        exploitedCards = null;
     }
 
     public final CardCollectionView getDelved() {
