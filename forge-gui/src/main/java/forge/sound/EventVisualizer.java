@@ -1,7 +1,6 @@
 package forge.sound;
 
 import forge.LobbyPlayer;
-import forge.card.GamePieceType;
 import forge.game.card.Card;
 import forge.game.event.*;
 import forge.game.spellability.AbilityManaPart;
@@ -63,13 +62,7 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(final GameEventCardSacrificed event) { return SoundEffectType.Sacrifice; }
     @Override
-    public SoundEffectType visit(final GameEventCardCounters event) {
-        if(event.card.getGamePieceType() == GamePieceType.EFFECT && event.card.getZone().is(ZoneType.Command))
-            return null; //Don't play the sound if the counters are being used as game trackers.
-        return event.newValue > event.oldValue ? SoundEffectType.AddCounter
-                : event.newValue < event.oldValue ? SoundEffectType.RemoveCounter
-                : null;
-    }
+    public SoundEffectType visit(final GameEventCardCounters event) { return event.newValue > event.oldValue ? SoundEffectType.AddCounter : event.newValue < event.oldValue ? SoundEffectType.RemoveCounter : null; }
     @Override
     public SoundEffectType visit(final GameEventTurnEnded event) { return SoundEffectType.EndOfTurn; }
     @Override
@@ -87,13 +80,9 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(final GameEventShuffle event) { return SoundEffectType.Shuffle; }
     @Override
-    public SoundEffectType visit(final GameEventTokenCreated event) { return SoundEffectType.Token; }
+    public SoundEffectType visit(final GameEventSpeedChanged event) { return event.newValue > event.oldValue ? SoundEffectType.SpeedUp : null; }
     @Override
-    public SoundEffectType visit(final GameEventSpeedChanged event) {
-        if(event.deltaSpeed <= 0)
-            return null;
-        return SoundEffectType.SpeedUp;
-    }
+    public SoundEffectType visit(final GameEventTokenCreated event) { return SoundEffectType.Token; }
     @Override
     public SoundEffectType visit(final GameEventSprocketUpdate event) {
         if(event.oldSprocket == event.sprocket || event.sprocket <= 0)
