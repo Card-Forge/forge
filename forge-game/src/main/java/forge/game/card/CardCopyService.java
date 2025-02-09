@@ -311,7 +311,7 @@ public class CardCopyService {
         newCopy.setSaddled(copyFrom.isSaddled());
         newCopy.setPromisedGift(copyFrom.getPromisedGift());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
-        if (newCopy.isSuspected()) {
+        if (copyFrom.isSuspected()) {
             newCopy.setSuspectedEffect(getLKICopy(copyFrom.getSuspectedEffect(), cachedMap));
         }
 
