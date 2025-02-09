@@ -268,6 +268,8 @@ public final class GameActionUtil {
 
             // reset static abilities
             if (lkicheck) {
+                // unanimate host again
+                sa.undoAlternateHost(newHost);
                 game.getAction().checkStaticAbilities(false);
                 // clear delayed changes, this check should not have updated the view
                 game.getTracker().clearDelayed();
@@ -504,6 +506,7 @@ public final class GameActionUtil {
 
         // reset static abilities
         if (lkicheck) {
+            sa.undoAlternateHost(newHost);
             game.getAction().checkStaticAbilities(false);
             // clear delayed changes, this check should not have updated the view
             game.getTracker().clearDelayed();

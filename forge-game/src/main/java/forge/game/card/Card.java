@@ -211,6 +211,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean solved;
     private boolean tributed;
     private StaticAbility suspectedStatic = null;
+    private StaticAbility bestowStatic = null;
 
     private SpellAbility manifestedSA;
     private SpellAbility cloakedSA;
@@ -259,7 +260,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private PlayerCollection targetedFromThisTurn = new PlayerCollection();
 
     private long worldTimestamp = -1;
-    private long bestowTimestamp = -1;
     private long transformedTimestamp = -1;
     private long prototypeTimestamp = -1;
     private long mutatedTimestamp = -1;
@@ -6908,43 +6908,30 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void animateBestow() {
-        animateBestow(true);
-    }
-    public final void animateBestow(final boolean updateView) {
         if (isBestowed()) {
             return;
         }
 
-        bestowTimestamp = getGame().getNextTimestamp();
-        addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
-                new CardType(Collections.singletonList("Creature"), true),
-                false, EnumSet.of(RemoveType.EnchantmentTypes), bestowTimestamp, 0, updateView, false);
-        addChangedCardKeywords(Collections.singletonList("Enchant:Creature"), Lists.newArrayList(),
-                false, bestowTimestamp, null, updateView);
+        String s = "Mode$ Continuous | AffectedDefined$ Self | EffectZone$ All | AddType$ Aura | RemoveType$ Creature | RemoveEnchantmentTypes$ True | AddKeyword$ Enchant:Creature";
+        bestowStatic = StaticAbility.create(s, this, currentState, true);
     }
 
     public final void unanimateBestow() {
-        unanimateBestow(true);
-    }
-    public final void unanimateBestow(final boolean updateView) {
         if (!isBestowed()) {
             return;
         }
-
-        removeChangedCardKeywords(bestowTimestamp, 0, updateView);
-        removeChangedCardTypes(bestowTimestamp, 0, updateView);
-        bestowTimestamp = -1;
+        bestowStatic = null;
     }
 
     public final boolean isBestowed() {
-        return bestowTimestamp != -1;
+        return bestowStatic != null;
     }
 
-    public final long getBestowTimestamp() {
-        return bestowTimestamp;
+    public StaticAbility getBestowStatic() {
+        return this.bestowStatic;
     }
-    public final void setBestowTimestamp(final long t) {
-        bestowTimestamp = t;
+    public void setBestowStatic(StaticAbility stAb) {
+        this.bestowStatic = stAb;
     }
 
     public final long getGameTimestamp() {
@@ -7251,6 +7238,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // Suspected
         if (this.isInPlay() && this.isSuspected()) {
             result.add(suspectedStatic);
+        }
+        if (this.isBestowed()) {
+            result.add(bestowStatic);
         }
         for (Map.Entry<CounterType, StaticAbility> e : this.counterTypeKeywordStatic.entrySet()) {
             if (this.getCounters(e.getKey()) > 0) {
