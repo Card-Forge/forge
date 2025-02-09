@@ -2550,7 +2550,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
                         || keyword.equals("Friends forever") || keyword.equals("Choose a Background")
-                        || keyword.equals("Space sculptor") || keyword.equals("Doctor's companion")) {
+                        || keyword.equals("Space sculptor") || keyword.equals("Doctor's companion")
+                        || keyword.equals("Start your engines")) {
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");
@@ -2706,8 +2707,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
-                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")
-                        || keyword.equals("Start your engines")) {
+                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
