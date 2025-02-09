@@ -204,8 +204,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean renowned;
     private boolean solved;
     private boolean tributed;
-    private Long suspectedTimestamp = null;
-    private StaticAbility suspectedStatic = null;
+    private Card suspectedEffect = null;
 
     private boolean manifested;
     private boolean cloaked;
@@ -6668,15 +6667,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public Long getSuspectedTimestamp() {
-        return this.suspectedTimestamp;
+    public Card getSuspectedEffect() {
+        return this.suspectedEffect;
     }
-    public void setSuspectedTimestamp(final Long timestamp) {
-        this.suspectedTimestamp = timestamp;
+    public void setSuspectedEffect(Card effect) {
+        this.suspectedEffect = effect;
     }
 
     public final boolean isSuspected() {
-        return suspectedTimestamp != null;
+        return suspectedEffect != null;
     }
 
     public final boolean setSuspected(final boolean suspected) {
@@ -6684,26 +6683,28 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         if (suspected) {
-            if (suspectedTimestamp != null) {
+            if (isSuspected()) {
                 // 701.58d A suspected permanent can’t become suspected again.
                 return true;
             }
-            suspectedTimestamp = getGame().getNextTimestamp();
 
-            // use this for CantHaveKeyword
-            addChangedCardKeywords(ImmutableList.of("Menace"), ImmutableList.<String>of(), false, suspectedTimestamp, null, false);
+            suspectedEffect = SpellAbilityEffect.createEffect(null, this, this.getController(), "Suspected Effect", getImageKey(), getGame().getNextTimestamp());
+            suspectedEffect.setRenderForUI(false);
+            suspectedEffect.addRemembered(this);
 
-            if (suspectedStatic == null) {
-                String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.";
-                suspectedStatic = StaticAbility.create(effect, this, getCurrentState(), false);
-            }
-            addChangedCardTraits(null, null, null, null, ImmutableList.of(suspectedStatic), false, false, suspectedTimestamp, 0);
+            String s = "Mode$ Continuous | AffectedDefined$ RememberedCard | EffectZone$ Command | AddKeyword$ Menace | AddStaticAbility$ SuspectedCantBlockBy";
+            StaticAbility suspectedStatic = suspectedEffect.addStaticAbility(s);
+            String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.";
+            suspectedStatic.setSVar("SuspectedCantBlockBy", effect);
+
+            GameCommand until = SpellAbilityEffect.exileEffectCommand(getGame(), suspectedEffect);
+            addLeavesPlayCommand(until);
+            getGame().getAction().moveToCommand(suspectedEffect, null);
         } else {
-            if (suspectedTimestamp != null) {
-                removeChangedCardKeywords(suspectedTimestamp, 0);
-                removeChangedCardTraits(suspectedTimestamp, 0);
+            if (isSuspected()) {
+                getGame().getAction().exileEffect(suspectedEffect);
+                suspectedEffect = null;
             }
-            suspectedTimestamp = null;
         }
         return true;
     }
