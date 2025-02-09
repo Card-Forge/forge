@@ -1974,7 +1974,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!maxSpeed()) { // can't increase past 4
             int old = speed;
             speed++;
-            view.updateSpeed(this);
             getGame().fireEvent(new GameEventSpeedChanged(this, old, speed)); //play sound effect
             updateSpeedEffect();
         }
@@ -1983,7 +1982,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (speed > 1) { // can't decrease speed below 1
             int old = speed;
             speed--;
-            view.updateSpeed(this);
             game.fireEvent(new GameEventSpeedChanged(this, old, speed));
             updateSpeedEffect();
         }
@@ -1996,7 +1994,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setSpeed(int i) { //just used for copy/save
         speed = i;
-        if (speed > 0) view.updateSpeed(this);
+        if(this.speedEffect != null)
+            updateSpeedEffect();
     }
     public final void createSpeedEffect() {
         if(this.speedEffect != null || this.noSpeed())
@@ -2016,7 +2015,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         speedBack.setImageKey("t:max_speed");
         speedBack.setName("Max Speed!");
 
-        speedEffect.setOverlayText("SPEED: " + this.speed);
+        String label = Localizer.getInstance().getMessage("lblSpeed", this.speed);
+        speedEffect.setOverlayText(label);
 
         // 702.179d There is an inherent triggered ability associated with a player having 1 or more speed. This ability has no source and is controlled by that player.
         // That ability is “Whenever one or more opponents lose life during your turn, if your speed is less than 4, your speed increases by 1. This ability triggers only once each turn.”
@@ -2043,7 +2043,9 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return;
             createSpeedEffect();
         }
-        speedEffect.setOverlayText("SPEED: " + (this.maxSpeed() ? "MAX!" : this.speed));
+        Localizer localizer = Localizer.getInstance();
+        String label = this.maxSpeed() ? localizer.getMessage("lblMaxSpeed") : localizer.getMessage("lblSpeed", this.speed);
+        speedEffect.setOverlayText(label);
         if(maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Original)
             speedEffect.setState(CardStateName.Flipped, true);
         else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Flipped)
@@ -4027,7 +4029,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void setCrankCounter(int counters) {
         this.crankCounter = counters;
         if (this.contraptionSprocketEffect != null) {
-            contraptionSprocketEffect.setOverlayText("CRANK! — " + this.crankCounter);
+            String label = Localizer.getInstance().getMessage("lblCrank", this.crankCounter);
+            contraptionSprocketEffect.setOverlayText(label);
         }
         else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
             this.createContraptionSprockets();
@@ -4053,7 +4056,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         contraptionSprocketEffect.setName("Contraption Sprockets");
         contraptionSprocketEffect.setGamePieceType(GamePieceType.EFFECT);
 
-        contraptionSprocketEffect.setOverlayText("CRANK! — " + this.crankCounter);
+        String label = Localizer.getInstance().getMessage("lblCrank", this.crankCounter);
+        contraptionSprocketEffect.setOverlayText(label);
         contraptionSprocketEffect.setText("At the beginning of your upkeep, if you control a Contraption, move the CRANK! counter to the next sprocket and crank any number of that sprocket's Contraptions.");
 
         contraptionSprocketEffect.updateStateForView();
