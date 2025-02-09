@@ -1421,9 +1421,6 @@ public class GameAction {
                 if (c.hasKeyword(Keyword.SPACE_SCULPTOR)) {
                     spaceSculptors.add(c.getController());
                 }
-                if (c.hasKeyword(Keyword.START_YOUR_ENGINES) && c.getController().noSpeed()) {
-                    c.getController().increaseSpeed();
-                }
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetToughness() <= 0) {
