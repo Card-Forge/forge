@@ -189,7 +189,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final Map<Card, Integer> commanderCast = Maps.newHashMap();
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
     private DetachedCardEffect commanderEffect = null;
-    private DetachedCardEffect speedEffect;
 
     private Card monarchEffect;
     private Card initiativeEffect;
@@ -197,6 +196,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Card contraptionSprocketEffect;
     private Card radiationEffect;
     private Card keywordEffect;
+    private Card speedEffect;
 
     private Map<Long, Integer> additionalVotes = Maps.newHashMap();
     private Map<Long, Integer> additionalOptionalVotes = Maps.newHashMap();
@@ -1971,20 +1971,19 @@ public class Player extends GameEntity implements Comparable<Player> {
         return speed;
     }
     public final void increaseSpeed() {
-        if (speedEffect == null) createSpeedEffect();
         if (!maxSpeed()) { // can't increase past 4
             int old = speed;
             speed++;
-            view.updateSpeed(this);
             getGame().fireEvent(new GameEventSpeedChanged(this, old, speed)); //play sound effect
+            updateSpeedEffect();
         }
     }
     public final void decreaseSpeed() {
         if (speed > 1) { // can't decrease speed below 1
             int old = speed;
             speed--;
-            view.updateSpeed(this);
             game.fireEvent(new GameEventSpeedChanged(this, old, speed));
+            updateSpeedEffect();
         }
     }
     public final boolean noSpeed() {
@@ -1995,22 +1994,62 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setSpeed(int i) { //just used for copy/save
         speed = i;
-        if (speed > 0) view.updateSpeed(this);
+        if(this.speedEffect != null)
+            updateSpeedEffect();
     }
     public final void createSpeedEffect() {
-        final PlayerZone com = getZone(ZoneType.Command);
-        DetachedCardEffect eff = new DetachedCardEffect(this, "Speed Effect");
+        if(this.speedEffect != null || this.noSpeed())
+            return;
+
+        speedEffect = new Card(game.nextCardId(), null, game);
+        speedEffect.setOwner(this);
+        speedEffect.setGamePieceType(GamePieceType.EFFECT);
+
+        speedEffect.addAlternateState(CardStateName.Flipped, false);
+        CardState speedFront = speedEffect.getState(CardStateName.Original);
+        CardState speedBack = speedEffect.getState(CardStateName.Flipped);
+
+        speedFront.setImageKey("t:speed");
+        speedFront.setName("Start Your Engines!");
+
+        speedBack.setImageKey("t:max_speed");
+        speedBack.setName("Max Speed!");
+
+        String label = Localizer.getInstance().getMessage("lblSpeed", this.speed);
+        speedEffect.setOverlayText(label);
+
         // 702.179d There is an inherent triggered ability associated with a player having 1 or more speed. This ability has no source and is controlled by that player.
         // That ability is “Whenever one or more opponents lose life during your turn, if your speed is less than 4, your speed increases by 1. This ability triggers only once each turn.”
         String trigger = "Mode$ LifeLostAll | ValidPlayer$ Opponent | TriggerZones$ Command | ActivationLimit$ 1 | " +
                 "PlayerTurn$ True | CheckSVar$ Count$YourSpeed | SVarCompare$ LT4 | "
                 + "TriggerDescription$ Whenever one or more opponents lose life during your turn, if your speed is less than 4, your speed increases by 1. This ability triggers only once each turn.";
         String speedUp = "DB$ ChangeSpeed";
-        Trigger lifeLostTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
-        lifeLostTrigger.setOverridingAbility(AbilityFactory.getAbility(speedUp, eff));
-        eff.addTrigger(lifeLostTrigger);
-        this.speedEffect = eff;
-        com.add(eff);
+        Trigger lifeLostTrigger = TriggerHandler.parseTrigger(trigger, speedEffect, true);
+        lifeLostTrigger.setOverridingAbility(AbilityFactory.getAbility(speedUp, speedEffect));
+        speedFront.addTrigger(lifeLostTrigger);
+
+        speedEffect.updateStateForView();
+
+        if(this.maxSpeed())
+            speedEffect.setState(CardStateName.Flipped, true);
+
+        final PlayerZone com = getZone(ZoneType.Command);
+        com.add(speedEffect);
+        this.updateZoneForView(com);
+    }
+    protected void updateSpeedEffect() {
+        if(this.speedEffect == null) {
+            if(this.noSpeed())
+                return;
+            createSpeedEffect();
+        }
+        Localizer localizer = Localizer.getInstance();
+        String label = this.maxSpeed() ? localizer.getMessage("lblMaxSpeed") : localizer.getMessage("lblSpeed", this.speed);
+        speedEffect.setOverlayText(label);
+        if(maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Original)
+            speedEffect.setState(CardStateName.Flipped, true);
+        else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Flipped)
+            speedEffect.setState(CardStateName.Original, true);
     }
 
     public final List<Card> getPlaneswalkedToThisTurn() {
@@ -3990,8 +4029,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void setCrankCounter(int counters) {
         this.crankCounter = counters;
         if (this.contraptionSprocketEffect != null) {
-            Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.CRANK), this.crankCounter);
-            contraptionSprocketEffect.setCounters(counterMap);
+            String label = Localizer.getInstance().getMessage("lblCrank", this.crankCounter);
+            contraptionSprocketEffect.setOverlayText(label);
         }
         else if (this.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
             this.createContraptionSprockets();
@@ -4017,12 +4056,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         contraptionSprocketEffect.setName("Contraption Sprockets");
         contraptionSprocketEffect.setGamePieceType(GamePieceType.EFFECT);
 
-        //Add "counters" on the effect to represent the current CRANK counter position.
-        //This and some other un-cards could benefit from a distinct system for positional counters or markers,
-        //see for instance Baron von Count or B-I-N-G-O. For now this is sufficient to display the current sprocket
-        //on the counter overlay, and I don't think any existing effect will notice it.
-        Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.CRANK), this.crankCounter);
-        contraptionSprocketEffect.setCounters(counterMap);
+        String label = Localizer.getInstance().getMessage("lblCrank", this.crankCounter);
+        contraptionSprocketEffect.setOverlayText(label);
         contraptionSprocketEffect.setText("At the beginning of your upkeep, if you control a Contraption, move the CRANK! counter to the next sprocket and crank any number of that sprocket's Contraptions.");
 
         contraptionSprocketEffect.updateStateForView();

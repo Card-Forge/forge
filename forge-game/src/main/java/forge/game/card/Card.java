@@ -340,6 +340,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     protected boolean renderForUi = true;
     private final CardView view;
 
+    private String overlayText = null;
+
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
 
     private int planeswalkerAbilityActivated;
@@ -6824,6 +6826,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public boolean isClassCard() {
         return getType().hasStringType("Class");
+    }
+
+    /**
+     * Displays a string as an overlay on top of this card (similar to the way counter text is shown).
+     */
+    public void setOverlayText(String overlayText) {
+        this.overlayText = overlayText;
+        view.updateMarkerText(this);
+    }
+    public String getOverlayText() {
+        return this.overlayText;
     }
 
     public final void animateBestow() {

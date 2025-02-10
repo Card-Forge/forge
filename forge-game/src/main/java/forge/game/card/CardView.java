@@ -491,6 +491,7 @@ public class CardView extends GameEntityView {
     }
     void updateCurrentRoom(Card c) {
         set(TrackableProperty.CurrentRoom, c.getCurrentRoom());
+        updateMarkerText(c);
     }
 
     public int getIntensity() {
@@ -514,6 +515,7 @@ public class CardView extends GameEntityView {
     }
     void updateClassLevel(Card c) {
         set(TrackableProperty.ClassLevel, c.getClassLevel());
+        updateMarkerText(c);
     }
 
     public int getRingLevel() {
@@ -523,6 +525,41 @@ public class CardView extends GameEntityView {
         Player p = c.getController();
         if (p != null && p.getTheRing() == c)
             set(TrackableProperty.RingLevel, p.getNumRingTemptedYou());
+    }
+
+    public String getOverlayText() {
+        return get(TrackableProperty.OverlayText);
+    }
+    public List<String> getMarkerText() {
+        return get(TrackableProperty.MarkerText);
+    }
+    void updateMarkerText(Card c) {
+        List<String> markerItems = new ArrayList<>();
+        if(c.getCurrentRoom() != null && !c.getCurrentRoom().isEmpty()) {
+            markerItems.add("In Room:");
+            markerItems.add(c.getCurrentRoom());
+        }
+        if(c.isClassCard() && c.isInZone(ZoneType.Battlefield)) {
+            markerItems.add("CL:" + c.getClassLevel());
+        }
+        if(getRingLevel() > 0) {
+            markerItems.add("RL:" + getRingLevel());
+        }
+
+        if(StringUtils.isNotEmpty(c.getOverlayText())) {
+            set(TrackableProperty.OverlayText, c.getOverlayText());
+            markerItems.add(c.getOverlayText());
+        }
+        else {
+            //Overlay text is any custom string. It gets mixed in with the other marker lines, but it also needs its
+            //own property so that it can display in the card detail text.
+            set(TrackableProperty.OverlayText, null);
+        }
+
+        if(markerItems.isEmpty())
+            set(TrackableProperty.MarkerText, null);
+        else
+            set(TrackableProperty.MarkerText, markerItems);
     }
 
     private String getRemembered() {
@@ -974,6 +1011,7 @@ public class CardView extends GameEntityView {
         updateDamage(c);
         updateSpecialize(c);
         updateRingLevel(c);
+        updateMarkerText(c);
 
         if (c.getIntensity(false) > 0) {
             updateIntensity(c);
