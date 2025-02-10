@@ -17,8 +17,7 @@ Name:Infectious Curse
 ManaCost:no cost
 Colors:black
 Types:Enchantment Aura Curse
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player
+K:Enchant:Player
 S:Mode$ ReduceCost | ValidTarget$ Player.EnchantedBy | Activator$ You | Type$ Spell | Amount$ 1 | Description$ Spells you cast that target enchanted player cost {1} less to cast.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of enchanted player's upkeep, that player loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife

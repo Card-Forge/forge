@@ -1,8 +1,8 @@
 Name:Farmstead
 ManaCost:W W W
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddTrigger$ TriggerGainLife | AddSVar$ FarmsteadGainLife | Description$ Enchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."
 SVar:TriggerGainLife:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ FarmsteadGainLife | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Enchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."
 SVar:FarmsteadGainLife:AB$ GainLife | Cost$ W W | Defined$ You | LifeAmount$ 1

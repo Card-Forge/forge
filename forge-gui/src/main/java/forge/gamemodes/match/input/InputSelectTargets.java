@@ -174,6 +174,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             showMessage(sa.getHostCard() + " - Cannot target this card (Shroud? Protection? Restrictions).");
             return false;
         }
+
+        if (sa.isSpell() && sa.getHostCard().isAura() && !card.canBeAttached(sa.getHostCard(), sa)) {
+            showMessage(sa.getHostCard() + " - Cannot enchant this card (Shroud? Protection? Restrictions?).");
+            return false;
+        }
         // If all cards must be from the same zone
         if (tgt.isSingleZone() && lastTarget != null && !card.getController().equals(lastTarget.getController())) {
             showMessage(sa.getHostCard() + " - Cannot target this card (not in the same zone)");
@@ -327,6 +332,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         //TODO return the correct reason to display
         if (!sa.canTarget(player) || mustTargetFiltered) {
             showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
+            return;
+        }
+        if (sa.isSpell() && sa.getHostCard().isAura() && !player.canBeAttached(sa.getHostCard(), sa)) {
+            showMessage(sa.getHostCard() + " - Cannot enchant this player (Hexproof? Protection? Restrictions?).");
             return;
         }
         if (filter != null && !filter.test(player)) {

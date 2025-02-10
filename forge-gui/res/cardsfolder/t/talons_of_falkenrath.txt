@@ -1,9 +1,9 @@
 Name:Talons of Falkenrath
 ManaCost:1 R
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 K:Flash
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Pump | Description$ Enchanted creature has "{1}{R}: This creature gets +2/+0 until end of turn."
 SVar:Pump:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature has "{1}{R}: This creature gets +2/+0 until end of turn."

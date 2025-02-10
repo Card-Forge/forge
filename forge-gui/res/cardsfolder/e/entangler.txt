@@ -1,7 +1,7 @@
 Name:Entangler
 ManaCost:2 W W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | CanBlockAny$ True | Description$ Enchanted creature can block any number of creatures.
 Oracle:Enchant creature\nEnchanted creature can block any number of creatures.

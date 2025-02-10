@@ -1,8 +1,8 @@
 Name:Pattern of Rebirth
 ManaCost:3 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigSearch | TriggerDescription$ When enchanted creature dies, that creature's controller may search their library for a creature card, put that card onto the battlefield, then shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Optional$ True | DefinedPlayer$ TriggeredCardController | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | Origin$ Library | Destination$ Battlefield | ShuffleNonMandatory$ True
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ Sac

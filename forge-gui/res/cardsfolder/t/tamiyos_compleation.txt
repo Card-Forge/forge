@@ -2,8 +2,8 @@ Name:Tamiyo's Compleation
 ManaCost:3 U
 Types:Enchantment Aura
 K:Flash
-K:Enchant artifact, creature, or planeswalker
-A:SP$ Attach | ValidTgts$ Artifact,Creature,Planeswalker | TgtPrompt$ Select target artifact, creature, or planeswalker | AILogic$ KeepTapped
+K:Enchant:Artifact,Creature,Planeswalker:artifact, creature, or planeswalker
+SVar:AttachAILogic:KeepTapped
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted permanent. If it's an Equipment, unattach it.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBUnattach
 SVar:DBUnattach:DB$ Unattach | Defined$ Enchanted | ConditionDefined$ Enchanted | ConditionPresent$ Equipment

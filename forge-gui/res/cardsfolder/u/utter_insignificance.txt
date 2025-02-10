@@ -2,8 +2,8 @@ Name:Utter Insignificance
 ManaCost:1 U
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | RemoveAllAbilities$ True | Description$ Enchanted creature loses all abilities and has base power and toughness 1/1.
 A:AB$ ChangeZone | Cost$ 2 C | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile enchanted creature.
 Oracle:Flash\nEnchant creature\nEnchanted creature loses all abilities and has base power and toughness 1/1.\n{2}{C}: Exile enchanted creature.

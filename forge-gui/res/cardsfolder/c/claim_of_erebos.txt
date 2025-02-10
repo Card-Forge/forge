@@ -1,8 +1,8 @@
 Name:Claim of Erebos
 ManaCost:1 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABLoseLife | Description$ Enchanted creature has "{1}{B}, {T}: Target player loses 2 life."
 SVar:ABLoseLife:AB$ LoseLife | Cost$ 1 B T | ValidTgts$ Player | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life.
 Oracle:Enchant creature\nEnchanted creature has "{1}{B}, {T}: Target player loses 2 life."

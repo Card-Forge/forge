@@ -1,8 +1,8 @@
 Name:Soul Link
 ManaCost:1 W B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature is dealt damage, you gain that much life.
 SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X

@@ -2,7 +2,7 @@ Name:Soar
 ManaCost:1 U
 Types:Enchantment Aura
 K:MayFlashSac
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 1 | AddKeyword$ Flying | Description$ Enchanted creature gets +0/+1 and has flying.
 Oracle:You may cast Soar as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant creature\nEnchanted creature gets +0/+1 and has flying.

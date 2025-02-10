@@ -1,8 +1,8 @@
 Name:Genju of the Falls
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant Island
-A:SP$ Attach | ValidTgts$ Island | AILogic$ Pump
+K:Enchant:Island
+SVar:AttachAILogic:Pump
 A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 3 | Toughness$ 2 | Types$ Creature,Spirit | Colors$ Blue | Keywords$ Flying | SpellDescription$ Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land.
 T:Mode$ ChangesZone | ValidCard$ Card.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | OptionalDecider$ You | TriggerDescription$ When enchanted Island is put into a graveyard, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigReturnOwner:DB$ ChangeZone | Hidden$ True | ChangeType$ Card.StrictlySelf | DefinedPlayer$ You | Origin$ Graveyard | Destination$ Hand | Mandatory$ True

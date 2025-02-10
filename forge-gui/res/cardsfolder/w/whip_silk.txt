@@ -1,8 +1,8 @@
 Name:Whip Silk
 ManaCost:G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Reach | Description$ Enchanted creature has reach. (It can block creatures with flying.)
 A:AB$ ChangeZone | Cost$ G | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 Oracle:Enchant creature\nEnchanted creature has reach. (It can block creatures with flying.)\n{G}: Return Whip Silk to its owner's hand.

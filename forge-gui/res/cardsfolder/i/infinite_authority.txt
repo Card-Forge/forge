@@ -1,8 +1,8 @@
 Name:Infinite Authority
 ManaCost:W W W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.EnchantedBy | ValidBlocker$ Creature.toughnessLE3 | Execute$ DelTrigBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, destroy the other creature at end of combat. At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.toughnessLE3 | ValidBlocker$ Creature.EnchantedBy | Execute$ DelTrigBlocked | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature with toughness 3 or less, destroy the other creature at end of combat. At the beginning of the next end step, if that creature was destroyed this way, put a +1/+1 counter on the first creature.
 SVar:DelTrigBlocked:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocked | TriggerDescription$ Destroy blocked creature at end of combat.

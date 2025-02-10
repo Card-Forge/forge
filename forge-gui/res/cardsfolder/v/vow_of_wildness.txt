@@ -1,8 +1,8 @@
 Name:Vow of Wildness
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Trample | Description$ Enchanted creature gets +3/+3, has trample, and can't attack you or planeswalkers you control.
 S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Target$ You,Planeswalker.YouCtrl
 Oracle:Enchant creature\nEnchanted creature gets +3/+3, has trample, and can't attack you or planeswalkers you control.

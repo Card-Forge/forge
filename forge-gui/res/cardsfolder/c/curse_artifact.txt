@@ -1,8 +1,8 @@
 Name:Curse Artifact
 ManaCost:2 B B
 Types:Enchantment Aura
-K:Enchant artifact
-A:SP$ Attach | ValidTgts$ Artifact | AILogic$ Curse
+K:Enchant:Artifact
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | Execute$ TrigCurseArtifactSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted artifact's controller, CARDNAME deals 2 damage to that player unless they sacrifice that artifact.
 SVar:TrigCurseArtifactSacrifice:DB$ Sacrifice | Defined$ TriggeredPlayer | SacValid$ Artifact.EnchantedBy | Optional$ True | RememberSacrificed$ True | SubAbility$ DBCurseArtifactDamage
 SVar:DBCurseArtifactDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCurseArtifactCleanup

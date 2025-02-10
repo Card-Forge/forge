@@ -1,8 +1,8 @@
 Name:Mardu Runemark
 ManaCost:2 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ First Strike | IsPresent$ Permanent.White+YouCtrl,Permanent.Black+YouCtrl | Description$ Enchanted creature has first strike as long as you control a white or black permanent.
 SVar:BuffedBy:Permanent.White,Permanent.Black

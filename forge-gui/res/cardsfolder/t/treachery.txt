@@ -1,8 +1,8 @@
 Name:Treachery
 ManaCost:3 U U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ GainControl
+K:Enchant:Creature
+SVar:AttachAILogic:GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, untap up to five lands.
 SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 5

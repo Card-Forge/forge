@@ -1,9 +1,9 @@
 Name:Grim Reaper's Sprint
 ManaCost:4 R
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE1 | Description$ Morbid — This spell costs {3} less to cast if a creature died this turn.
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, untap each creature you control. If it's your main phase, there is an additional combat phase after this phase.
 SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | ConditionPhases$ Main1,Main2 | ConditionPlayerTurn$ True

@@ -1,8 +1,8 @@
 Name:Genju of the Fields
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant Plains
-A:SP$ Attach | ValidTgts$ Plains | AILogic$ Pump
+K:Enchant:Plains
+SVar:AttachAILogic:Pump
 A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 2 | Toughness$ 5 | Types$ Creature,Spirit | Colors$ White | Triggers$ PseudoLifelink | SpellDescription$ Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature with "Whenever this creature deals damage, its controller gains that much life." It's still a land.
 T:Mode$ ChangesZone | ValidCard$ Card.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | OptionalDecider$ You | TriggerDescription$ When enchanted Plains is put into a graveyard, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigReturnOwner:DB$ ChangeZone | Hidden$ True | ChangeType$ Card.StrictlySelf | DefinedPlayer$ You | Origin$ Graveyard | Destination$ Hand | Mandatory$ True

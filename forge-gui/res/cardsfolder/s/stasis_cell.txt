@@ -1,8 +1,8 @@
 Name:Stasis Cell
 ManaCost:4 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
+K:Enchant:Creature
+SVar:AttachAILogic:KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 A:AB$ Attach | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ KeepTapped | SpellDescription$ Attach CARDNAME to target creature.
 AI:RemoveDeck:All

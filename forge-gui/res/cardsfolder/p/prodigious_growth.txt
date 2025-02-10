@@ -1,7 +1,7 @@
 Name:Prodigious Growth
 ManaCost:4 G G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 7 | AddToughness$ 7 | AddKeyword$ Trample | Description$ Enchanted creature gets +7/+7 and has trample.
 Oracle:Enchant creature\nEnchanted creature gets +7/+7 and has trample.

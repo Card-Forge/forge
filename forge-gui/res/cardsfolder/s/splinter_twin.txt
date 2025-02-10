@@ -1,8 +1,8 @@
 Name:Splinter Twin
 ManaCost:2 R R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABCopy | Description$ Enchanted creature has "{T}: Create a token that's a copy of this creature, except it has haste. Exile it at the beginning of the next end step."
 SVar:ABCopy:AB$ CopyPermanent | Cost$ T | Defined$ Self | AddKeywords$ Haste | AtEOT$ Exile | SpellDescription$ Create a token that's a copy of this creature, except it has haste. Exile it at the beginning of the next end step.
 SVar:NonStackingAttachEffect:True

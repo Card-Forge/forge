@@ -1,8 +1,8 @@
 Name:Ephara's Enlightenment
 ManaCost:1 W U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on enchanted creature.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.

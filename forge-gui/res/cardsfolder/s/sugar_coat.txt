@@ -2,8 +2,8 @@ Name:Sugar Coat
 ManaCost:2 U
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature or Food
-A:SP$ Attach | ValidTgts$ Creature,Food | TgtPrompt$ Select target creature or Food | AILogic$ Curse
+K:Enchant:Creature,Food:creature or Food
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | SetColor$ Colorless | AddType$ Food & Artifact | RemoveCardTypes$ True | RemoveAllAbilities$ True | AddAbility$ FoodSac | Description$ Enchanted permanent is a colorless Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life" and loses all other card types and abilities.
 SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 Oracle:Flash\nEnchant creature or Food\nEnchanted permanent is a colorless Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life" and loses all other card types and abilities.

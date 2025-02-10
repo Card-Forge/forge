@@ -2,8 +2,8 @@ Name:Astral Wingspan
 ManaCost:4 U
 Types:Enchantment Aura
 K:Convoke
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+2 and has flying.

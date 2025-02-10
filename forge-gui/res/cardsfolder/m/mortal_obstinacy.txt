@@ -1,8 +1,8 @@
 Name:Mortal Obstinacy
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature you control
-A:SP$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
 T:Mode$ DamageDone | ValidSource$ Card.EnchantedBy | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, you may sacrifice CARDNAME. If you do, destroy target enchantment.
 SVar:TrigDestroy:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment

@@ -1,8 +1,8 @@
 Name:Beastmaster's Magemark
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control that are enchanted get +1/+1.
 T:Mode$ AttackerBlocked | ValidCard$ Creature.enchanted+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control that's enchanted becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X | NumDef$ +X

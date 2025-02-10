@@ -1,8 +1,8 @@
 Name:Murder Investigation
 ManaCost:1 W
 Types:Enchantment Aura
-K:Enchant creature you control
-A:SP$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When enchanted creature dies, create X 1/1 white Soldier creature tokens, where X is its power.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You
 SVar:X:TriggeredCard$CardPower

@@ -1,8 +1,8 @@
 Name:Dragon Wings
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 K:Cycling:1 U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.cmcGE6 | Execute$ TrigReturn | TriggerZones$ Graveyard | OptionalDecider$ You | TriggerDescription$ When a creature with mana value 6 or greater enters, you may return CARDNAME from your graveyard to the battlefield attached to that creature.
