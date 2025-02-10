@@ -237,10 +237,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return achievementTracker;
     }
 
-    public final PlayerOutcome getOutcome() {
-        return stats.getOutcome();
-    }
-
     private String chooseName(String originalName) {
         String nameCandidate = originalName;
         for (int i = 2; i <= 8; i++) { // several tries, not matter how many
@@ -1333,6 +1329,25 @@ public class Player extends GameEntity implements Comparable<Player> {
         return drawn;
     }
 
+    public final void resetNumDrawnThisDrawStep() {
+        numDrawnThisDrawStep = 0;
+    }
+
+    public final void resetNumDrawnThisTurn() {
+        numDrawnThisTurn = 0;
+        view.updateNumDrawnThisTurn(this);
+    }
+
+    public final int getNumDrawnThisTurn() {
+        return numDrawnThisTurn;
+    }
+    public final int getNumDrawnLastTurn() {
+        return numDrawnLastTurn;
+    }
+    public final int numDrawnThisDrawStep() {
+        return numDrawnThisDrawStep;
+    }
+
     /**
      * Returns PlayerZone corresponding to the given zone of game.
      */
@@ -1359,7 +1374,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             extraZones = null;
         }
     }
-
 
     public final CardCollectionView getCardsIn(final ZoneType zoneType) {
         return getCardsIn(zoneType, true);
@@ -1448,35 +1462,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return CardCollection.combine(getCardsIn(Player.ALL_ZONES), getCardsIn(ZoneType.Stack), inboundTokens);
     }
 
-    public final void resetNumDrawnThisDrawStep() {
-        numDrawnThisDrawStep = 0;
-    }
-
-    public final void resetNumDrawnThisTurn() {
-        numDrawnThisTurn = 0;
-        view.updateNumDrawnThisTurn(this);
-    }
-
-    public final int getNumDrawnThisTurn() {
-        return numDrawnThisTurn;
-    }
-
-    public final int getNumDrawnLastTurn() {
-        return numDrawnLastTurn;
-    }
-
-    public final int numDrawnThisDrawStep() {
-        return numDrawnThisDrawStep;
-    }
-
     public final void resetNumRollsThisTurn() {
         numRollsThisTurn = 0;
     }
-
     public final int getNumRollsThisTurn() {
         return numRollsThisTurn;
     }
-
     public void roll() {
         numRollsThisTurn++;
     }
@@ -1954,19 +1945,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         completedDungeons.clear();
     }
 
-    public final int getNumRingTemptedYou() {
-        return numRingTemptedYou;
-    }
-    public final void incrementRingTemptedYou() {
-        numRingTemptedYou++;
-    }
-    public final void setNumRingTemptedYou(int value) {
-        numRingTemptedYou = value;
-    }
-    public final void resetRingTemptedYou() {
-        numRingTemptedYou = 0;
-    }
-
     public final int getSpeed() {
         return speed;
     }
@@ -2050,10 +2028,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             speedEffect.setState(CardStateName.Flipped, true);
         else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Flipped)
             speedEffect.setState(CardStateName.Original, true);
-    }
-
-    public final List<Card> getPlaneswalkedToThisTurn() {
-        return planeswalkedToThisTurn;
     }
 
     public final void altWinBySpellEffect(final String sourceName) {
@@ -2516,6 +2490,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         return game.getMatch().getPlayers().get(game.getRegisteredPlayers().indexOf(this));
     }
 
+    public final PlayerOutcome getOutcome() {
+        return stats.getOutcome();
+    }
     private void setOutcome(PlayerOutcome outcome) {
         stats.setOutcome(outcome);
     }
@@ -2742,6 +2719,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean isSkippingCombat() {
         return !isInGame();
+    }
+
+    public final List<Card> getPlaneswalkedToThisTurn() {
+        return planeswalkedToThisTurn;
     }
 
     /**
@@ -3430,6 +3411,19 @@ public class Player extends GameEntity implements Comparable<Player> {
         getTheRing().updateStateForView();
     }
 
+    public final int getNumRingTemptedYou() {
+        return numRingTemptedYou;
+    }
+    public final void incrementRingTemptedYou() {
+        numRingTemptedYou++;
+    }
+    public final void setNumRingTemptedYou(int value) {
+        numRingTemptedYou = value;
+    }
+    public final void resetRingTemptedYou() {
+        numRingTemptedYou = 0;
+    }
+
     public void changeOwnership(Card card) {
         // If lost then gained, just clear out of lost.
         // If gained then lost, just clear out of gained.
@@ -3654,6 +3648,26 @@ public class Player extends GameEntity implements Comparable<Player> {
         return radiationEffect != null;
     }
 
+    public Card getKeywordCard() {
+        if (keywordEffect != null) {
+            return keywordEffect;
+        }
+
+        final PlayerZone com = getZone(ZoneType.Command);
+
+        keywordEffect = new Card(game.nextCardId(), null, game);
+        keywordEffect.setGamePieceType(GamePieceType.EFFECT);
+        keywordEffect.setOwner(this);
+        keywordEffect.setName("Keyword Effects");
+        keywordEffect.setImageKey(ImageKeys.HIDDEN_CARD);
+
+        keywordEffect.updateStateForView();
+
+        com.add(keywordEffect);
+
+        this.updateZoneForView(com);
+        return keywordEffect;
+    }
     public void updateKeywordCardAbilityText() {
         if (getKeywordCard() == null)
             return;
@@ -3776,27 +3790,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
                 || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
-    }
-
-    public Card getKeywordCard() {
-        if (keywordEffect != null) {
-            return keywordEffect;
-        }
-
-        final PlayerZone com = getZone(ZoneType.Command);
-
-        keywordEffect = new Card(game.nextCardId(), null, game);
-        keywordEffect.setGamePieceType(GamePieceType.EFFECT);
-        keywordEffect.setOwner(this);
-        keywordEffect.setName("Keyword Effects");
-        keywordEffect.setImageKey(ImageKeys.HIDDEN_CARD);
-
-        keywordEffect.updateStateForView();
-
-        com.add(keywordEffect);
-
-        this.updateZoneForView(com);
-        return keywordEffect;
     }
 
     public void addAdditionalVote(long timestamp, int value) {
@@ -3989,7 +3982,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         game.getTriggerHandler().runTrigger(TriggerType.CommitCrime, runParams, false);
-
     }
 
     public int getCommittedCrimeThisTurn() {
