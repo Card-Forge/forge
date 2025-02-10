@@ -917,12 +917,11 @@ public final class StaticAbilityContinuous {
 
     private static ColorSet getColorsFromParam(StaticAbility stAb, final String colors) {
         final Card hostCard = stAb.getHostCard();
-        ColorSet addColors;
+        ColorSet addColors = null;
         if (colors.equals("ChosenColor")) {
             if (hostCard.hasChosenColor()) {
                 addColors = ColorSet.fromNames(hostCard.getChosenColors());
             }
-            return null;
         } else if (colors.equals("All")) {
             addColors = ColorSet.ALL_COLORS;
         } else {
