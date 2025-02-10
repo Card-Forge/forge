@@ -1,8 +1,9 @@
 Name:Faith's Fetters
 ManaCost:3 W
 Types:Enchantment Aura
-K:Enchant permanent
-A:SP$ Attach | ValidTgts$ Permanent | AITgts$ Creature | AILogic$ Curse
+K:Enchant:Permanent
+SVar:AttachAITgts:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 4 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
 S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | ValidSA$ Activated.nonManaAbility | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.

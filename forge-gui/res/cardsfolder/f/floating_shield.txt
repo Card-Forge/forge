@@ -1,10 +1,10 @@
 Name:Floating Shield
 ManaCost:2 W
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters, choose a color. | AILogic$ MostProminentInHumanDeck
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:chosenColor:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
 A:AB$ Protection | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ ChosenColor | SpellDescription$ Target creature gains protection from the chosen color until end of turn.
 AI:RemoveDeck:All

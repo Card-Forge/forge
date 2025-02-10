@@ -1,8 +1,8 @@
 Name:Volition Reins
 ManaCost:3 U U U
 Types:Enchantment Aura
-K:Enchant permanent
-A:SP$ Attach | ValidTgts$ Permanent | AILogic$ GainControl
+K:Enchant:Permanent:permanent
+SVar:AttachAILogic:GainControl
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.EnchantedBy+tapped | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, if enchanted permanent is tapped, untap it.
 SVar:TrigUntap:DB$ Untap | Defined$ Enchanted

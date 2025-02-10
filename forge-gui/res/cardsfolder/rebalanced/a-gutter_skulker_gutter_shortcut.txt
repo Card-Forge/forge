@@ -14,8 +14,8 @@ Name:A-Gutter Shortcut
 ManaCost:no cost
 Colors:blue
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | Description$ Enchanted creature gets +3/+0. It can't be blocked as long as it's attacking alone.
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy+attacking | IsPresent$ Card.attacking | PresentCompare$ EQ1 | Secondary$ True | Description$ It can't be blocked as long as it's attacking alone.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.

@@ -1,8 +1,8 @@
 Name:Frenzied Fugue
 ManaCost:3 R
 Types:Enchantment Aura
-K:Enchant permanent
-A:SP$ Attach | ValidTgts$ Permanent | AILogic$ Curse
+K:Enchant:Permanent
+SVar:AttachAILogic:Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Execute$ TrigGainControl | Origin$ Any | Destination$ Battlefield | TriggerDescription$ When CARDNAME enters or at the beginning of your upkeep, gain control of enchanted permanent until end of turn. Untap that permanent. It gains haste until end of turn.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl | Secondary$ True | TriggerDescription$ When CARDNAME enters or at the beginning of your upkeep, gain control of enchanted permanent until end of turn. Untap that permanent. It gains haste until end of turn.
 SVar:TrigGainControl:DB$ GainControl | Defined$ Enchanted | Untap$ True | AddKWs$ Haste | LoseControl$ EOT

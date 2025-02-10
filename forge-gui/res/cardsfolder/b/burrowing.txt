@@ -1,8 +1,8 @@
 Name:Burrowing
 ManaCost:R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Landwalk:Mountain | Description$ Enchanted creature has mountainwalk.
 AI:RemoveDeck:Random
 DeckHas:Keyword$Mountainwalk

@@ -1,8 +1,8 @@
 Name:Encrust
 ManaCost:1 U U
 Types:Enchantment Aura
-K:Enchant artifact or creature
-A:SP$ Attach | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AILogic$ Curse
+K:Enchant:Creature,Artifact:artifact or creature
+SVar:AttachAILogic:Curse
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
 S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | Secondary$ True | Description$ Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
 Oracle:Enchant artifact or creature\nEnchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.

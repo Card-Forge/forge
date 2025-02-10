@@ -1,8 +1,8 @@
 Name:Gremlin Infestation
 ManaCost:3 R
 Types:Enchantment Aura
-K:Enchant artifact
-A:SP$ Attach | ValidTgts$ Artifact | AILogic$ Curse
+K:Enchant:Artifact
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals 2 damage to enchanted artifact's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ EnchantedController | NumDmg$ 2
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When enchanted artifact is put into a graveyard, create a 2/2 red Gremlin creature token.

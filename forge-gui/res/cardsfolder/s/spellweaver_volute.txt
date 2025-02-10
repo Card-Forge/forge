@@ -1,8 +1,8 @@
 Name:Spellweaver Volute
 ManaCost:3 U U
 Types:Enchantment Aura
-K:Enchant instant card in a graveyard
-A:SP$ Attach | ValidTgts$ Instant | TgtZone$ Graveyard | TgtPrompt$ Select target instant card in a graveyard | AILogic$ Pump
+K:Enchant:Instant.inZoneGraveyard:instant card in a graveyard
+SVar:AttachAILogic:Pump
 T:Mode$ SpellCast | ValidCard$ Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost. If you do, exile the enchanted card and attach CARDNAME to another instant card in a graveyard.
 SVar:TrigCopy:DB$ Play | Defined$ Enchanted | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | CopyCard$ True | RememberPlayed$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ Enchanted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBAttach

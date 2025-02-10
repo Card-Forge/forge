@@ -1,8 +1,8 @@
 Name:Journey to Eternity
 ManaCost:1 B G
 Types:Legendary Enchantment Aura
-K:Enchant creature you control
-A:SP$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EnchantedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted creature dies, return it to the battlefield under your control, then return CARDNAME to the battlefield transformed under your control.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredNewCardLKICopy | GainControl$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self | GainControl$ True | Transformed$ True

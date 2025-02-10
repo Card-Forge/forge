@@ -1,8 +1,8 @@
 Name:Cunning
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ DelayedTrig | TriggerDescription$ When enchanted creature attacks or blocks, sacrifice CARDNAME at the beginning of the next cleanup step.
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ DelayedTrig | Secondary$ True | TriggerDescription$ When enchanted creature attacks or blocks, sacrifice CARDNAME at the beginning of the next cleanup step.

@@ -1,8 +1,8 @@
 Name:Primetime Suspect
 ManaCost:1 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigChange | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature attacks, you may search your library for a land card, put that card onto the battlefield tapped, then shuffle. If enchanted creature is suspected, you search for two lands instead.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land | ChangeNum$ X | ShuffleNonMandatory$ True
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddSVar$ AE

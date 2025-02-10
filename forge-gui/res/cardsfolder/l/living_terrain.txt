@@ -1,7 +1,7 @@
 Name:Living Terrain
 ManaCost:2 G G
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 5 | SetToughness$ 6 | SetColor$ Green | AddType$ Creature & Treefolk | Description$ Enchanted land is a 5/6 green Treefolk creature that's still a land.
 Oracle:Enchant land\nEnchanted land is a 5/6 green Treefolk creature that's still a land.

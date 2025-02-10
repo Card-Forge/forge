@@ -1,9 +1,9 @@
 Name:Crab Umbra
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 K:Umbra armor
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+SVar:AttachAILogic:Pump
 A:AB$ Untap | Cost$ 2 U | Defined$ Enchanted | SpellDescription$ Untap enchanted creature.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\n{2}{U}: Untap enchanted creature.\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)

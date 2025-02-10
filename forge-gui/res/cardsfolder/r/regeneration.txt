@@ -1,8 +1,8 @@
 Name:Regeneration
 ManaCost:1 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 A:AB$ Regenerate | Cost$ G | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 SVar:NonStackingAttachEffect:True
 DeckHas:Keyword$Regenerate

@@ -2,8 +2,8 @@ Name:Aether Meltdown
 ManaCost:1 U
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature or Vehicle
-A:SP$ Attach | ValidTgts$ Creature,Vehicle | AILogic$ Curse
+K:Enchant:Creature,Vehicle:creature or Vehicle
+SVar:AttachAILogic:Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddPower$ -4 | Description$ Enchanted creature gets -4/-0.
