@@ -551,11 +551,7 @@ public class AttachAi extends SpellAbilityAi {
         final Player ai = sa.getActivatingPlayer();
         final Card attachSourceLki = CardCopyService.getLKICopy(attachSource);
         attachSourceLki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
-        // Suppress original attach Spell to replace it with another
-        attachSourceLki.getFirstAttachSpell().setSuppressed(true);
 
-        //TODO for Reanimate Auras i need the new Attach Spell, in later versions it might be part of the Enchant Keyword
-        attachSourceLki.addSpellAbility(AbilityFactory.getAbility(attachSourceLki, "NewAttach"));
         List<Card> betterList = CardLists.filter(list, c -> {
             final Card lki = CardCopyService.getLKICopy(c);
             // need to fake it as if lki would be on the battlefield
