@@ -5,4 +5,4 @@ PT:4/4
 K:Affinity:Enchantment
 K:Flying
 DeckHints:Type$Enchantment
-Oracle:Oracle:Affinity for enchantments (This spell costs {1} less to cast for each enchantment you control.)\nFlying
+Oracle:Affinity for enchantments (This spell costs {1} less to cast for each enchantment you control.)\nFlying
