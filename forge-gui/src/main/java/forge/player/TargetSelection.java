@@ -22,7 +22,6 @@ import com.google.common.collect.Maps;
 import forge.game.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.player.PlayerCollection;
@@ -141,9 +140,6 @@ public class TargetSelection {
         }
 
         List<Card> validTargets = CardUtil.getValidCardsToTarget(ability);
-        if (ability.isSpell() && ability.getHostCard().isAura()) {
-            validTargets = new CardCollection(IterableUtil.filter(validTargets, CardPredicates.canBeAttached(ability.getHostCard(), ability)));
-        }
         boolean mustTargetFiltered = false;
         if (canFilterMustTarget) {
             mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(controller.getPlayer(), validTargets, ability);
