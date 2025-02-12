@@ -506,11 +506,7 @@ public class TargetRestrictions {
     public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean isTargeted, final boolean onlyNonCard) {
         final Game game = sa.getActivatingPlayer().getGame();
         final List<GameEntity> candidates = Lists.newArrayList();
-        final boolean isAuraSpell = sa.isSpell() && sa.getHostCard().isAura();
         for (Player player : game.getPlayers()) {
-            if (isAuraSpell && !player.canBeAttached(sa.getHostCard(), sa)) {
-                continue;
-            }
             if (sa.canTarget(player)) {
                 candidates.add(player);
             }
@@ -525,9 +521,6 @@ public class TargetRestrictions {
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
 
         for (final Card c : game.getCardsIn(this.tgtZone)) {
-            if (isAuraSpell && !c.canBeAttached(sa.getHostCard(), sa)) {
-                continue;
-            }
             if (c.isValid(this.validTgts, sa.getActivatingPlayer(), srcCard, sa)
                     && (!isTargeted || sa.canTarget(c))
                     && !sa.getTargets().contains(c)) {
