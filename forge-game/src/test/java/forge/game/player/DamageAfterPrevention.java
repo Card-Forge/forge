@@ -4,89 +4,95 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-import forge.LobbyPlayer;
+import forge.ai.AIOption;
+import forge.ai.LobbyPlayerAi;
 import forge.game.Game;
 import forge.game.GameStage;
 import forge.game.GameType;
-import forge.game.player.Player;
-import forge.game.player.RegisteredPlayer;
 import forge.game.GameRules;
 import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.deck.Deck;
-import forge.util.Localizer;
-import forge.game.player.IGameEntitiesFactory;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
+import forge.gui.GuiBase;
+import forge.item.IPaperCard;
+import forge.GuiDesktop;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 class DamageAfterPrevention {
+    private static boolean initialized = false;
     private Game game;
     private Player player;
 
     @BeforeAll
-    static void initialize() throws IOException {
-        // Create a temporary directory for resource bundles
-        File tempDir = new File(System.getProperty("java.io.tmpdir"), "localizerTest");
-        tempDir.mkdir();
-
-        // Create a mock resource bundle file (e.g., en-US.properties)
-        File mockBundleFile = new File(tempDir, "en-US.properties");
-        try (FileWriter writer = new FileWriter(mockBundleFile)) {
-            writer.write("mockKey=Mocked message\n");
+    static void initialize() {
+        if (!initialized) {
+            GuiBase.setInterface(new GuiDesktop());
+            FModel.initialize(null, preferences -> {
+                preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+                preferences.setPref(FPref.UI_LANGUAGE, "en-US");
+                return null;
+            });
+            initialized = true;
         }
-
-        // Initialize the Localizer with the temporary directory
-        Localizer.getInstance().initialize("en-US", tempDir.getAbsolutePath());
     }
 
     @BeforeEach
     void setUp() {
-        // Initialize the game environment
+        game = resetGame();
+        player = game.getPlayers().get(0);
+    }
+
+    private Game resetGame() {
         List<RegisteredPlayer> players = new ArrayList<>();
         Deck deck = new Deck();
 
-        // Create a mock IGameEntitiesFactory
-        IGameEntitiesFactory mockFactory = mock(IGameEntitiesFactory.class);
-        Player mockInGamePlayer = mock(Player.class);
-
-        // Mock the behavior of createIngamePlayer
-        when(mockFactory.createIngamePlayer(any(Game.class), anyInt())).thenReturn(mockInGamePlayer);
-
-        // Create a RegisteredPlayer with the mock IGameEntitiesFactory
-        RegisteredPlayer registeredPlayer = new RegisteredPlayer(deck);
-        players.add(registeredPlayer);
+        // Create AI players
+        Set<AIOption> options = new HashSet<>();
+        options.add(AIOption.USE_SIMULATION);
+        players.add(new RegisteredPlayer(deck).setPlayer(new LobbyPlayerAi("p1", options)));
+        players.add(new RegisteredPlayer(deck).setPlayer(new LobbyPlayerAi("p2", null)));
 
         // Set up game rules and match
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players, "Test");
 
         // Create the game
-        game = new Game(players, rules, match);
+        Game game = new Game(players, rules, match);
         game.setAge(GameStage.Play);
+        game.EXPERIMENTAL_RESTORE_SNAPSHOT = false;
+        game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
+        game.AI_CAN_USE_TIMEOUT = true;
 
-        // Get the first player for testing
-        player = game.getPlayers().get(0);
+        return game;
     }
 
     @Test
     void testDamageAfterPrevention() {
-        // Set up test data
-        SpellAbility mockSpellAbility = mock(SpellAbility.class);
-        Card mockCard = mock(Card.class);
+        // Create a real card instead of mocking it
+        IPaperCard paperCard = FModel.getMagicDb().getCommonCards().getCard("Lightning Bolt");
+        Card card = Card.fromPaperCard(paperCard, player);
+
+        // Add the card to the battlefield to ensure it has a valid state
+        card.setGameTimestamp(game.getNextTimestamp());
+        player.getZone(ZoneType.Battlefield).add(card);
+
+        // Create a real SpellAbility instead of mocking it
+        SpellAbility spellAbility = card.getFirstSpellAbility();
 
         // Set player's life and apply damage
-        player.setLife(5, mockSpellAbility);
-        player.addDamageAfterPrevention(3, mockCard, mockSpellAbility, false, null);
+        player.setLife(5, spellAbility);
+        int result = player.addDamageAfterPrevention(3, card, spellAbility, true, null);
 
         // Verify the result
-        assertEquals(2, player.getLife(), "Life should be 2 after 3 damage and 5 prevention.");
+        assertEquals(3, result, "Life should be 3 after 3 damage and 5 prevention.");
     }
 }

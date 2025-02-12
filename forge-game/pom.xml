@@ -56,5 +56,25 @@
                 <version>4.0.0</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>forge</groupId>
+                <artifactId>forge-ai</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>forge</groupId>
+                <artifactId>forge-game</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>forge</groupId>
+                <artifactId>forge-gui</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>forge</groupId>
+                <artifactId>forge-gui-desktop</artifactId>
+                <version>${project.version}</version>
+            </dependency>
     </dependencies>
 </project>
