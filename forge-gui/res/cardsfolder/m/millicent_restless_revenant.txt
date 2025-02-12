@@ -9,4 +9,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self,Spirit.Other+nonToken+YouCtrl | Vali
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_spirit_flying
 DeckHints:Type$Spirit & Keyword$Disturb
 DeckHas:Ability$Token
-Oracle:Oracle:Affinity for Spirits (This spell costs {1} less to cast for each Spirit you control.)\nFlying\nWhenever Millicent, Restless Revenant or another nontoken Spirit you control dies or deals combat damage to a player, create a 1/1 white Spirit creature token with flying.
+Oracle:Affinity for Spirits (This spell costs {1} less to cast for each Spirit you control.)\nFlying\nWhenever Millicent, Restless Revenant or another nontoken Spirit you control dies or deals combat damage to a player, create a 1/1 white Spirit creature token with flying.
