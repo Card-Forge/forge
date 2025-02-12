@@ -1369,11 +1369,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (rootAbility.isSpell() && rootAbility.getHostCard() == entity) {
             return false;
         }
-        if (rootAbility.isSpell() && rootAbility.getHostCard().isAura() && entity instanceof GameEntity ge) {
-            if (!ge.canBeAttached(rootAbility.getHostCard(), rootAbility)) {
-                return false;
-            }
-        }
 
         // Restriction related to this ability
         if (usesTargeting()) {
