@@ -378,6 +378,9 @@ public final class CardUtil {
 
         List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), activatingCard, ability);
         List<Card> choices = CardLists.getTargetableCards(validCards, ability);
+        if (ability.isSpell() && activatingCard.isAura()) {
+            choices = CardLists.filter(choices, CardPredicates.canBeAttached(activatingCard, ability));
+        }
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
