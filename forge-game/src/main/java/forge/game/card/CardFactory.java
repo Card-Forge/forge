@@ -468,7 +468,7 @@ public class CardFactory {
                 if (c.hasSVar("AttachAIValid")) { // TODO combine with AttachAITgts
                     extra += " | AIValid$ " + c.getSVar("AttachAIValid");
                 }
-                String st = "SP$ Attach | ValidTgts$ Card,Player | TgtZone$ Battlefield,Graveyard | TgtPrompt$ Select target " + desc + extra;
+                String st = "SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield,Graveyard | TgtPrompt$ Select target " + desc + extra;
                 SpellAbility sa = AbilityFactory.getAbility(st, c);
                 sa.setIntrinsic(true);
                 sa.setCardState(c.getCurrentState());
