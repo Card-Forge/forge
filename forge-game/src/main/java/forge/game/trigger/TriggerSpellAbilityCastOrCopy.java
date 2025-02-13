@@ -251,6 +251,13 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 return false;
             }
         }
+
+        if (getSpawningAbility() != null && getSpawningAbility().hasParam("TriggersWhenSpent")) {
+            if (!getTriggerRemembered().contains(spellAbility)) {
+                return false;
+            }
+        }
+
         return true;
     }
 

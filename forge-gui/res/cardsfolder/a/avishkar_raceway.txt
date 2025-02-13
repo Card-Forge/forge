@@ -1,0 +1,9 @@
+Name:Avishkar Raceway
+ManaCost:no cost
+Types:Land
+K:Start your engines
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+S:Mode$ Continuous | CharacteristicDefining$ True | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABDraw | Description$ Max speed — {3}, {T}, Discard a card: Draw a card.
+SVar:ABDraw:AB$ Draw | PrecostDesc$ Max speed — | Cost$ 3 T Discard<1/Card> | Secondary$ True | SpellDescription$ Draw a card.
+DeckHas:Ability$Discard
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{T}: Add {C}.\nMax speed — {3}, {T}, Discard a card: Draw a card.

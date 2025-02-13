@@ -2,6 +2,6 @@ Name:Shao Jun
 ManaCost:1 U R
 Types:Legendary Creature Human Assassin
 PT:3/3
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying & First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has flying and first strike.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying & First Strike | Condition$ PlayerTurn | Description$ Leap Strike — During your turn, CARDNAME has flying and first strike.
 A:AB$ DealDamage | Cost$ tapXType<2/Artifact> | PrecostDesc$ Rope Dart — | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
-Oracle:Leap Strike — As long as it's your turn, Shao Jun has flying and first strike.\nRope Dart — Tap two untapped artifacts you control: Shao Jun deals 1 damage to each opponent.
+Oracle:Leap Strike — During your turn, Shao Jun has flying and first strike.\nRope Dart — Tap two untapped artifacts you control: Shao Jun deals 1 damage to each opponent.

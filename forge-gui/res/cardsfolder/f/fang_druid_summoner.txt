@@ -1,0 +1,10 @@
+Name:Fang-Druid Summoner
+ManaCost:3 G
+Types:Creature Ape Druid
+PT:2/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may search your library and/or graveyard for a creature card with no abilities, reveal it, and put it into your hand. If you search your library this way, shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn+NoAbilities | Optional$ True
+DeckHas:Ability$Graveyard
+AI:RemoveDeck:Random
+Oracle:Reach\nWhen this creature enters, you may search your library and/or graveyard for a creature card with no abilities, reveal it, and put it into your hand. If you search your library this way, shuffle.

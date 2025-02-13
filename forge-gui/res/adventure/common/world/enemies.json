@@ -12193,9 +12193,9 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.5,
+			"probability": 0.3,
 			"count": 1,
-			"cardName": "Elder Gargaroth"
+			"cardName": "Gaea's Cradle"
 		},
 		{
 			"type": "card",
@@ -19341,7 +19341,7 @@
 },
 {
 	"name": "Merfolk",
-	"nameOverride": "Merfok Raider",
+	"nameOverride": "Merfolk Raider",
 	"sprite": "sprites/enemy/elemental/waterelemental.atlas",
 	"deck": [
 		"decks/standard/merfolk_bad.json"

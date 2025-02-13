@@ -1,0 +1,7 @@
+Name:Point the Way
+ManaCost:G
+Types:Enchantment
+K:Start your engines
+A:AB$ ChangeZone | Cost$ 3 G Sac<1/CARDNAME/this enchantment> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ Count$YourSpeed | Tapped$ True | SpellDescription$ Search your library for up to X basic land cards, where X is your speed. Put those cards onto the battlefield tapped, then shuffle.
+DeckHas:Ability$Sacrifice
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{3}{G}, Sacrifice this enchantment: Search your library for up to X basic land cards, where X is your speed. Put those cards onto the battlefield tapped, then shuffle.

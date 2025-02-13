@@ -1,0 +1,9 @@
+Name:Guardian Sunmare
+ManaCost:3 W W
+Types:Creature Horse Mount
+PT:5/5
+K:Ward:2
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever this creature attacks while saddled, search your library for a nonland permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.nonLand+cmcLE3
+K:Saddle:4
+Oracle:Ward {2}\nWhenever this creature attacks while saddled, search your library for a nonland permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.\nSaddle 4

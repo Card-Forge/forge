@@ -1,0 +1,8 @@
+Name:Fang Guardian
+ManaCost:3 G
+Types:Creature Ape Druid
+PT:4/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, another target creature or Vehicle you control gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other,Vehicle.YouCtrl+Other | TgtPrompt$ Select another target creature or Vehicle you control | NumAtt$ +2 | NumDef$ +2
+Oracle:Flash\nWhen this creature enters, another target creature or Vehicle you control gets +2/+2 until end of turn.

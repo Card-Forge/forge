@@ -1,0 +1,9 @@
+Name:Migrating Ketradon
+ManaCost:4 G G
+Types:Creature Dinosaur
+PT:6/6
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 4 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
+K:Cycling:2
+Oracle:Reach\nWhen this creature enters, you gain 4 life.\nCycling {2} ({2}, Discard this card: Draw a card.)

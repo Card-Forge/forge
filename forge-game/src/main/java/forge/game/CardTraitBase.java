@@ -337,9 +337,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         if (params.containsKey("Blessing")) {
             if ("True".equalsIgnoreCase(params.get("Blessing")) != hostController.hasBlessing()) return false;
         }
-        if (params.containsKey("MaxSpeed")) {
-            if ("True".equalsIgnoreCase(params.get("MaxSpeed")) != hostController.maxSpeed()) return false;
-        }
 
         if (params.containsKey("DayTime")) {
             if ("Day".equalsIgnoreCase(params.get("DayTime"))) {

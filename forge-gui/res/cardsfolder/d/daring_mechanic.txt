@@ -1,0 +1,8 @@
+Name:Daring Mechanic
+ManaCost:2 W
+Types:Creature Human Artificer
+PT:3/3
+A:AB$ PutCounter | Cost$ 3 W | ValidTgts$ Mount,Vehicle | TgtPrompt$ Select target Mount or Vehicle | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target Mount or Vehicle.
+DeckHas:Ability$Counters
+DeckNeeds:Type$Mount|Vehicle
+Oracle:{3}{W}: Put a +1/+1 counter on target Mount or Vehicle.

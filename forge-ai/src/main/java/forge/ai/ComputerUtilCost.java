@@ -50,8 +50,7 @@ public class ComputerUtilCost {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostPutCounter) {
-                final CostPutCounter addCounter = (CostPutCounter) part;
+            if (part instanceof CostPutCounter addCounter) {
                 final CounterType type = addCounter.getCounter();
 
                 if (type.is(CounterEnumType.M1M1)) {
@@ -77,9 +76,7 @@ public class ComputerUtilCost {
         }
         final AiCostDecision decision = new AiCostDecision(sa.getActivatingPlayer(), sa, false);
         for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostRemoveCounter) {
-                final CostRemoveCounter remCounter = (CostRemoveCounter) part;
-
+            if (part instanceof CostRemoveCounter remCounter) {
                 final CounterType type = remCounter.counter;
                 if (!part.payCostFromSource()) {
                     if (type.is(CounterEnumType.P1P1)) {
@@ -106,9 +103,7 @@ public class ComputerUtilCost {
                         && !source.hasKeyword(Keyword.UNDYING)) {
                     return false;
                 }
-            } else if (part instanceof CostRemoveAnyCounter) {
-                final CostRemoveAnyCounter remCounter = (CostRemoveAnyCounter) part;
-
+            } else if (part instanceof CostRemoveAnyCounter remCounter) {
                 PaymentDecision pay = decision.visit(remCounter);
                 return pay != null;
             }
@@ -133,9 +128,7 @@ public class ComputerUtilCost {
         CardCollection hand = new CardCollection(ai.getCardsIn(ZoneType.Hand));
 
         for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostDiscard) {
-                final CostDiscard disc = (CostDiscard) part;
-
+            if (part instanceof CostDiscard disc) {
                 final String type = disc.getType();
                 final CardCollection typeList;
                 int num;
@@ -187,8 +180,7 @@ public class ComputerUtilCost {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostDamage) {
-                final CostDamage pay = (CostDamage) part;
+            if (part instanceof CostDamage pay) {
                 int realDamage = ComputerUtilCombat.predictDamageTo(ai, pay.getAbilityAmount(sa), source, false);
                 if (ai.getLife() - realDamage < remainingLife
                         && realDamage > 0 && !ai.cantLoseForZeroOrLessLife()
@@ -220,9 +212,7 @@ public class ComputerUtilCost {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostPayLife) {
-                final CostPayLife payLife = (CostPayLife) part;
-
+            if (part instanceof CostPayLife payLife) {
                 int amount = payLife.getAbilityAmount(sourceAbility);
 
                 // check if there's override for the remainingLife threshold
@@ -296,8 +286,7 @@ public class ComputerUtilCost {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostSacrifice) {
-                final CostSacrifice sac = (CostSacrifice) part;
+            if (part instanceof CostSacrifice sac) {
                 final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
 
                 if (sac.payCostFromSource() && source.isCreature()) {
@@ -346,12 +335,11 @@ public class ComputerUtilCost {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostSacrifice) {
+            if (part instanceof CostSacrifice sac) {
                 if (suppressRecursiveSacCostCheck) {
                     return false;
                 }
 
-                final CostSacrifice sac = (CostSacrifice) part;
                 final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
 
                 String type = sac.getType();

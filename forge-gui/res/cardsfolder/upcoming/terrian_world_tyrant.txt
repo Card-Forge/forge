@@ -1,5 +1,0 @@
-Name:Terrian, World Tyrant
-ManaCost:2 G G G
-Types:Legendary Creature Dinosaur Ooze
-PT:9/7
-Oracle:

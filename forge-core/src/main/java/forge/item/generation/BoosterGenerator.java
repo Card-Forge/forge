@@ -65,8 +65,8 @@ public class BoosterGenerator {
     }
 
     public static List<PaperCard> getBoosterPack(SealedTemplate template) {
-        if (template instanceof SealedTemplateWithSlots) {
-            return BoosterGenerator.getBoosterPack((SealedTemplateWithSlots) template);
+        if (template instanceof SealedTemplateWithSlots slots) {
+            return BoosterGenerator.getBoosterPack(slots);
         }
 
         List<PaperCard> result = new ArrayList<>();

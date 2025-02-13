@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="54">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -36,7 +36,7 @@
   </object>
   <object id="53" template="../../obj/enemy.tx" x="197.5" y="138.75">
    <properties>
-    <property name="enemy" value="Mimic"/>
+    <property name="enemy" value="Fog Trap"/>
    </properties>
   </object>
  </objectgroup>

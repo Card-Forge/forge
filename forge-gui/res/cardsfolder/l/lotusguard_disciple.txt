@@ -1,0 +1,9 @@
+Name:Lotusguard Disciple
+ManaCost:2 W
+Types:Creature Bird Cleric
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, target creature or Vehicle gains lifelink and indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or Vehicle | KW$ Lifelink & Indestructible
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhen this creature enters, target creature or Vehicle gains lifelink and indestructible until end of turn.

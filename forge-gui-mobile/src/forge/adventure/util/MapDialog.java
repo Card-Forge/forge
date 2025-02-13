@@ -336,11 +336,11 @@ public class MapDialog {
                 else Current.player().takeGold(-E.addShards);
             }
             if (E.addMapReputation != 0) {
-                if (!E.POIReference.isEmpty() && !E.POIReference.contains("$")) {
+                if (E.POIReference != null && !E.POIReference.isEmpty() && !E.POIReference.contains("$")) {
                     WorldSave.getCurrentSave().getPointOfInterestChanges(E.POIReference).addMapReputation(E.addMapReputation);
-                }
-                else
+                } else {
                     stage.getChanges().addMapReputation(E.addMapReputation);
+                }
             }
             if (E.deleteMapObject != 0) { //Removes a dummy object from the map.
                 if (E.deleteMapObject < 0) stage.deleteObject(parentID);

@@ -1,0 +1,9 @@
+Name:Chitin Gravestalker
+ManaCost:5 B
+Types:Creature Insect Warrior
+PT:5/4
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each artifact and/or creature card in your graveyard.
+K:Cycling:2
+SVar:X:Count$ValidGraveyard Artifact.YouOwn,Creature.YouOwn
+DeckHints:Ability$Graveyard
+Oracle:This spell costs {1} less to cast for each artifact and/or creature card in your graveyard.\nCycling {2} ({2}, Discard this card: Draw a card.)
