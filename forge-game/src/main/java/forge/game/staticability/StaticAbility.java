@@ -344,10 +344,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
                 if (zone == null || !this.validHostZones.contains(zone.getZoneType())) {
                     return false;
                 }
-            } else {
-                if (!getHostCard().isInPlay()) { // default
-                    return false;
-                }
+            } else if (!getHostCard().isInPlay()) { // default
+                return false;
             }
         }
 

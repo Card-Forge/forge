@@ -5,6 +5,6 @@ PT:3/3
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTuck | TriggerDescription$ When CARDNAME enters, choose up to one target creature spell or planeswalker spell. Its owner puts it on the top or bottom of their library.
-SVar:TrigTuck:DB$ ChangeZone | ValidTgts$ Card.inZoneStack+Creature,Card.inZoneStack+Planeswalker | TgtZone$ Stack | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature spell or planeswalker spell | AlternativeDecider$ TargetedOwner | Origin$ Stack | Fizzle$ True | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1
+SVar:TrigTuck:DB$ ChangeZone | ValidTgts$ Card.inZoneStack+Creature,Card.inZoneStack+Planeswalker | TgtZone$ Stack | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature spell or planeswalker spell | AlternativeDecider$ TargetedOwner | Origin$ Stack | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1
 K:Evoke:ExileFromHand<1/Card.Blue+Other/blue card>
 Oracle:Flash\nFlying\nWhen Subtlety enters, choose up to one target creature spell or planeswalker spell. Its owner puts it on the top or bottom of their library.\nEvoke—Exile a blue card from your hand.

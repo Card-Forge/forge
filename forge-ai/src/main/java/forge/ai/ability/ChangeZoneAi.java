@@ -22,7 +22,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
@@ -138,8 +137,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (aiLogic != null) {
             if (aiLogic.equals("Always")) {
                 return true;
-            } else if (aiLogic.startsWith("ExileSpell")) {
-                return doExileSpellLogic(aiPlayer, sa);
             } else if (aiLogic.startsWith("SacAndUpgrade")) { // Birthing Pod, Natural Order, etc.
                 return doSacAndUpgradeLogic(aiPlayer, sa);
             } else if (aiLogic.startsWith("SacAndRetFromGrave")) { // Recurring Nightmare, etc.
@@ -878,6 +875,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             origin.addAll(ZoneType.listValueOf(sa.getParam("TgtZone")));
         }
 
+        if (origin.contains(ZoneType.Stack) && doExileSpellLogic(ai, sa, mandatory)) {
+            return true;
+        }
+
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final Game game = ai.getGame();
 
@@ -902,7 +903,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
         CardCollection list = CardLists.getTargetableCards(game.getCardsIn(origin), sa);
 
-        // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, true);
         if (sa.hasParam("AITgtsOnlyBetterThanSelf")) {
             list = CardLists.filter(list, card -> ComputerUtilCard.evaluateCreature(card) > ComputerUtilCard.evaluateCreature(source) + 30);
@@ -2061,31 +2061,24 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
     }
 
-    private boolean doExileSpellLogic(final Player aiPlayer, final SpellAbility sa) {
-        String aiLogic = sa.getParamOrDefault("AILogic", "");
-        SpellAbilityStackInstance top = aiPlayer.getGame().getStack().peek();
-        List<ApiType> dangerousApi = Arrays.asList(ApiType.DealDamage, ApiType.DamageAll, ApiType.Destroy, ApiType.DestroyAll, ApiType.Sacrifice, ApiType.SacrificeAll);
-        int manaCost = 0;
-        int minCost = 0;
-
-        if (aiLogic.contains(".")) {
-            minCost = Integer.parseInt(aiLogic.substring(aiLogic.indexOf(".") + 1));
+    private static boolean doExileSpellLogic(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        List<ApiType> dangerousApi = null;
+        CardCollection spells = new CardCollection(ai.getGame().getStackZone().getCards());
+        Collections.reverse(spells);
+        if (!mandatory && !spells.isEmpty()) {
+            spells = spells.subList(0, 1);
+            spells = ComputerUtil.filterAITgts(sa, ai, spells, true);
+            dangerousApi = Arrays.asList(ApiType.DealDamage, ApiType.DamageAll, ApiType.Destroy, ApiType.DestroyAll, ApiType.Sacrifice, ApiType.SacrificeAll);
         }
 
-        if (top != null) {
-            SpellAbility topSA = top.getSpellAbility();
-            if (topSA != null) {
-                if (topSA.getPayCosts().hasManaCost()) {
-                    manaCost = topSA.getPayCosts().getTotalMana().getCMC();
-                }
-
-                if ((manaCost >= minCost || dangerousApi.contains(topSA.getApi()))
-                        && topSA.getActivatingPlayer().isOpponentOf(aiPlayer)
-                        && sa.canTargetSpellAbility(topSA)) {
-                    sa.resetTargets();
-                    sa.getTargets().add(topSA);
-                    return sa.isTargetNumberValid();
-                }
+        for (Card c : spells) {
+            SpellAbility topSA = ai.getGame().getStack().getSpellMatchingHost(c);
+            if (topSA != null && (dangerousApi == null ||
+                    (dangerousApi.contains(topSA.getApi()) && topSA.getActivatingPlayer().isOpponentOf(ai)))
+                    && sa.canTarget(topSA)) {
+                sa.resetTargets();
+                sa.getTargets().add(topSA);
+                return sa.isTargetNumberValid();
             }
         }
         return false;

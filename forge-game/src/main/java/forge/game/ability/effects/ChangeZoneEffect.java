@@ -558,22 +558,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            if (originZone.is(ZoneType.Stack)) {
+                game.getStack().remove(gameCard);
+            }
+
             Card movedCard = null;
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
-            if (destination.equals(ZoneType.Library)) {
-                // If a card is moved to library from the stack, remove its spells from the stack
-                if (sa.hasParam("Fizzle")) {
-                    // TODO only AI still targets as card, try to remove it
-                    if (gameCard.isInZone(ZoneType.Exile) || gameCard.isInZone(ZoneType.Hand) || gameCard.isInZone(ZoneType.Stack)) {
-                        // This only fizzles spells, not anything else.
-                        game.getStack().remove(gameCard);
-                    }
-                }
-
-                movedCard = game.getAction().moveToLibrary(gameCard, libraryPosition, sa, moveParams);
-            } else if (destination.equals(ZoneType.Battlefield)) {
+            if (destination.equals(ZoneType.Battlefield)) {
                 moveParams.put(AbilityKey.SimultaneousETB, tgtCards);
                 if (sa.isReplacementAbility()) {
                     ReplacementEffect re = sa.getReplacementEffect();
@@ -723,15 +716,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(activator).append("'s hand.");
                     game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
                     commandCards.add(movedCard); //add to list to reveal the commandzone cards
-                }
-
-                // If a card is Exiled from the stack, remove its spells from the stack
-                if (sa.hasParam("Fizzle")) {
-                    if (gameCard.isInZone(ZoneType.Exile) || gameCard.isInZone(ZoneType.Hand)
-                            || gameCard.isInZone(ZoneType.Stack) || gameCard.isInZone(ZoneType.Command)) {
-                        // This only fizzles spells, not anything else.
-                        game.getStack().remove(gameCard);
-                    }
                 }
 
                 if (sa.hasParam("WithCountersType")) {
