@@ -705,7 +705,7 @@ public class GameAction {
             StaticAbility stAb = eff.addStaticAbility(AbilityUtils.getSVar(cause, cause.getParam("StaticEffect")));
             stAb.setActiveZone(EnumSet.of(ZoneType.Command));
             // needed for ETB lookahead like Bronzehide Lion
-            stAb.putParam("AffectedZone", "Battlefield,Hand,Graveyard,Exile,Stack,Library,Command");
+            stAb.putParam("AffectedZone", "All");
             SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Battlefield");
             game.getAction().moveToCommand(eff, cause);
         }

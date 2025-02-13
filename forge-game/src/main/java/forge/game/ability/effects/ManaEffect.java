@@ -32,6 +32,7 @@ public class ManaEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
+        final Game game = card.getGame();
         final AbilityManaPart abMana = sa.getManaPart();
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         final Player activator = sa.getActivatingPlayer();
@@ -39,10 +40,7 @@ public class ManaEffect extends SpellAbilityEffect {
         // Spells are not undoable
         sa.setUndoable(sa.isAbility() && sa.isUndoable() && tgtPlayers.size() < 2 && !sa.hasParam("ActivationLimit"));
 
-        final boolean optional = sa.hasParam("Optional");
-        final Game game = activator.getGame();
-
-        if (optional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantAddMana"), null)) {
+        if (sa.hasParam("Optional") && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantAddMana"), null)) {
             return;
         }
 
