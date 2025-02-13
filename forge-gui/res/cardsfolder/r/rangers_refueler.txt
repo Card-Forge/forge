@@ -1,0 +1,10 @@
+Name:Rangers' Refueler
+ManaCost:1 U
+Types:Artifact Vehicle
+PT:3/3
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ Activated.Exhaust | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you activate an exhaust ability, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ Animate | Cost$ 4 | Defined$ Self | Types$ Artifact,Creature | Exhaust$ True | Duration$ Permanent | SubAbility$ DBPutCounter | SpellDescription$ This Vehicle becomes an artifact creature. Put a +1/+1 counter on it. (Activate each exhaust ability only once.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Crew:2
+Oracle:Whenever you activate an exhaust ability, draw a card.\nExhaust — {4}: This Vehicle becomes an artifact creature. Put a +1/+1 counter on it. (Activate each exhaust ability only once.)\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

@@ -25,9 +25,8 @@ public class DialogOptionEditor extends JComponent{
                 JList list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if(!(value instanceof DialogData))
+            if(!(value instanceof DialogData dialog))
                 return label;
-            DialogData dialog=(DialogData) value;
             StringBuilder builder=new StringBuilder();
             if(dialog.name==null||dialog.name.isEmpty())
                 builder.append("[[Blank Option]]");

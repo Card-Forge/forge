@@ -214,8 +214,8 @@ public class CardCopyService {
         if (cachedCard != null) {
             return cachedCard;
         }
-        String msg = "CardUtil:getLKICopy copy object";
 
+        String msg = "CardUtil:getLKICopy copy object";
         Breadcrumb bread = new Breadcrumb(msg);
         bread.setData("Card", copyFrom.getName());
         bread.setData("CardState", copyFrom.getCurrentStateName().toString());
@@ -304,19 +304,19 @@ public class CardCopyService {
 
         newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()));
 
+        newCopy.setColor(copyFrom.getColor().getColor());
+        newCopy.setPhasedOut(copyFrom.getPhasedOut());
+        newCopy.setTapped(copyFrom.isTapped());
         newCopy.setTributed(copyFrom.isTributed());
         newCopy.setMonstrous(copyFrom.isMonstrous());
         newCopy.setRenowned(copyFrom.isRenowned());
         newCopy.setSolved(copyFrom.isSolved());
-        newCopy.setSaddled(copyFrom.isSaddled());
         newCopy.setPromisedGift(copyFrom.getPromisedGift());
+        newCopy.setSaddled(copyFrom.isSaddled());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
-        newCopy.setSuspectedTimestamp(copyFrom.getSuspectedTimestamp());
-
-        newCopy.setColor(copyFrom.getColor().getColor());
-        newCopy.setPhasedOut(copyFrom.getPhasedOut());
-
-        newCopy.setTapped(copyFrom.isTapped());
+        if (copyFrom.isSuspected()) {
+            newCopy.setSuspectedEffect(getLKICopy(copyFrom.getSuspectedEffect(), cachedMap));
+        }
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(copyFrom.getDamageReceivedThisTurn());
@@ -351,8 +351,6 @@ public class CardCopyService {
             newCopy.setChosenNumber(copyFrom.getChosenNumber());
         }
         newCopy.setChosenEvenOdd(copyFrom.getChosenEvenOdd());
-
-        //newCopy.getEtbCounters().putAll(copyFrom.getEtbCounters());
 
         newCopy.setUnearthed(copyFrom.isUnearthed());
 

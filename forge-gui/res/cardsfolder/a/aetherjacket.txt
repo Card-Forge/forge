@@ -1,0 +1,9 @@
+Name:Aetherjacket
+ManaCost:3
+Types:Artifact Creature Thopter
+PT:2/1
+K:Flying
+K:Vigilance
+A:AB$ Destroy | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Artifact.Other | TgtPrompt$ Select another target artifact | SorcerySpeed$ True | SpellDescription$ Destroy another target artifact. Activate only as a sorcery.
+DeckHas:Ability$Sacrifice
+Oracle:Flying, vigilance\n{2}, {T}, Sacrifice this creature: Destroy another target artifact. Activate only as a sorcery.

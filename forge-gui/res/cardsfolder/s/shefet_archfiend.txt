@@ -1,0 +1,11 @@
+Name:Shefet Archfiend
+ManaCost:5 B B
+Types:Creature Demon
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When this creature enters, all other creatures get -2/-2 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature.StrictlyOther | IsCurse$ True
+K:Cycling:2
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Discard
+Oracle:Flying\nWhen this creature enters, all other creatures get -2/-2 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

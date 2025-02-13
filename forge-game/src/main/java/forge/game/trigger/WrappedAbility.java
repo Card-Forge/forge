@@ -2,10 +2,7 @@ package forge.game.trigger;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.collect.TreeBasedTable;
 
@@ -38,141 +35,6 @@ import forge.game.spellability.TargetRestrictions;
 // (The trigger can have a hardcoded OverridingAbility which can make
 // use of any of the methods)
 public class WrappedAbility extends Ability {
-
-    static Set<ApiType> noTimestampCheck = ImmutableSet.of(
-            ApiType.Abandon, // no Triggered
-            ApiType.ActivateAbility, // no Triggered
-            ApiType.AddPhase, // only player
-            ApiType.AddTurn, // only player
-            ApiType.SkipPhase, // only player
-            ApiType.SkipTurn, // only player
-            ApiType.AlterAttribute, // updated
-
-            ApiType.Amass, // no Triggered only you
-            ApiType.Ascend, // only player (you)
-
-            ApiType.Animate, // updated
-            ApiType.AnimateAll, // no triggered
- 
-            ApiType.Attach, // checked
-
-            ApiType.Balance, // only player
-
-            ApiType.BecomesBlocked, // no triggered
-            ApiType.MustBlock, // updated
-            ApiType.SwitchBlock, // no triggered
-
-            ApiType.BecomeMonarch, // only player
-            ApiType.Bond, // updated
-
-            ApiType.BidLife, // only player
-            ApiType.Clash, // only player
-
-            ApiType.Clone, // checked
-
-            ApiType.GenericChoice, // only player
-
-            ApiType.Connive, // no triggered
-            ApiType.Encode, // no triggered
-            ApiType.Meld, // no triggered
-            ApiType.Haunt, // has own logic
-
-            ApiType.PutCounter,
-            ApiType.PutCounterAll, // no triggered
-            ApiType.MoveCounter,
-            ApiType.MultiplyCounter,
-            ApiType.MoveCounter,
-            ApiType.RemoveCounter,
-            ApiType.AddOrRemoveCounter,
-            ApiType.MoveCounter,
-
-            ApiType.Draw, // only player
-            ApiType.GainLife, // only player
-            ApiType.SetLife, // only player
-            ApiType.LoseLife, // only player
-            ApiType.ChangeZone,
-            ApiType.Destroy,
-            ApiType.Token,
-            ApiType.SetState,
-            ApiType.Play,
-            ApiType.Sacrifice, // no triggered
-            ApiType.SacrificeAll,
-            ApiType.Pump,
-
-            ApiType.Phases, // updated
-
-            ApiType.DealDamage, // checked
-
-            ApiType.DelayedTrigger,
-            ApiType.ImmediateTrigger,
-
-            ApiType.Goad, // updated
-
-            ApiType.EachDamage,
-            ApiType.WinsGame, // only player
-            ApiType.LosesGame, // only player
-            ApiType.Incubate, // only player
-            ApiType.Mill, // only player
-
-            ApiType.Explore,
-            ApiType.Protection, // should not care about triggered
-            ApiType.ProtectionAll, // No Triggered
-            ApiType.Proliferate, // only player no triggered interaction
-            ApiType.TimeTravel, // only player no triggered interaction
-            ApiType.CopyPermanent,
-            ApiType.Token,
-            ApiType.Debuff, // updated
-            ApiType.Manifest, // no triggered
-            ApiType.Scry, // only player
-            ApiType.SetInMotion, // No Triggered
-            ApiType.Shuffle, // only player
-            ApiType.Surveil, // only player
-            ApiType.Tap, // Done
-            ApiType.TapAll, // uses filterListByType
-            ApiType.TapOrUntap, // No TriggeredCard
-            ApiType.TapOrUntapAll, // No TriggeredCard
-            ApiType.Untap, // Done
-            ApiType.UntapAll, // only player
-            ApiType.Unattach, // No Triggered
-            ApiType.UnattachAll, // No Triggered
-
-            ApiType.Regenerate, // Updated
-            ApiType.Regeneration, // Replacement Effect only
-
-            ApiType.RemoveFromCombat, // Done
-
-            // only Replacement Effects, no Trigger
-            ApiType.ReplaceCounter,
-            ApiType.ReplaceDamage,
-            ApiType.ReplaceEffect,
-            ApiType.ReplaceMana,
-            ApiType.ReplaceSplitDamage,
-            ApiType.ReplaceToken,
-
-            ApiType.Repeat,
-            ApiType.RepeatEach,
-
-            ApiType.RollDice, // only player
-            ApiType.RollPlanarDice, // only player
-            ApiType.Seek, // only player
-            ApiType.Heist, // only player
-
-            ApiType.RingTemptsYou, // only player
-            ApiType.TakeInitiative, // only player
-
-            ApiType.UnlockDoor, // no triggered
-
-            ApiType.Poison, // only player
-            ApiType.Venture, // only player
-            ApiType.VillainousChoice, // only player
-            ApiType.Vote, // only player
-            // internal
-            ApiType.BlankLine,
-            ApiType.DamageResolve,
-            ApiType.ChangeZoneResolve,
-            ApiType.InternalLegendaryRule,
-            ApiType.InternalIgnoreEffect
-            );
 
     private final SpellAbility sa;
     private Player decider;
@@ -323,7 +185,7 @@ public class WrappedAbility extends Ability {
     // a real solution would include only the triggering information that actually is used, but that's a major change
     @Override
     public String toUnsuppressedString() {
-        String desc = this.getStackDescription(); /* use augmented stack description as string for wrapped things */
+        String desc = this.getStackDescription(false); /* use augmented stack description as string for wrapped things */
         String card = getHostCard().toString();
         if (!desc.contains(card) && desc.contains(" this ")) { /* a hack for Evolve and similar that don't have CARDNAME */
                 return card + ": " + desc;
@@ -332,15 +194,23 @@ public class WrappedAbility extends Ability {
 
     @Override
     public String getStackDescription() {
+        return getStackDescription(true);
+    }
+
+    public String getStackDescription(boolean withTargets) {
         final Trigger regtrig = getTrigger();
         if (regtrig == null) return "";
         final StringBuilder sb =
                 new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this, true));
-        List<TargetChoices> allTargets = sa.getAllTargetChoices();
-        if (!allTargets.isEmpty() && !ApiType.Charm.equals(sa.getApi())) {
-            sb.append(" (Targeting: ");
-            sb.append(allTargets);
-            sb.append(")");
+
+        // prevent text growing too long when SA target other in a chain and also potential StackOverflow
+        if (withTargets) {
+            List<TargetChoices> allTargets = sa.getAllTargetChoices();
+            if (!allTargets.isEmpty() && !ApiType.Charm.equals(sa.getApi())) {
+                sb.append(" (Targeting: ");
+                sb.append(allTargets);
+                sb.append(")");
+            }
         }
 
         String important = regtrig.getImportantStackObjects(this);
@@ -577,33 +447,7 @@ public class WrappedAbility extends Ability {
             }
         }
 
-        timestampCheck();
-
         getActivatingPlayer().getController().playSpellAbilityNoStack(sa, false);
-    }
-
-    /**
-     * TODO remove this function after the Effects are updated
-     */
-    protected void timestampCheck() {
-        final Game game = sa.getActivatingPlayer().getGame();
-
-        if (noTimestampCheck.contains(sa.getApi())) {
-            return;
-        }
-
-        final Map<AbilityKey, Object> triggerMap = AbilityKey.newMap(sa.getTriggeringObjects());
-        for (Entry<AbilityKey, Object> ev : triggerMap.entrySet()) {
-            if (ev.getValue() instanceof Card) {
-                Card card = (Card) ev.getValue();
-                Card current = game.getCardState(card);
-                if (card.isInPlay() && current.isInPlay() && !current.equalsWithGameTimestamp(card)) {
-                    // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
-                    sa.getTriggeringObjects().remove(ev.getKey());
-                }
-            }
-        }
-        // TODO: CardCollection
     }
 
     @Override

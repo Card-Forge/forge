@@ -85,6 +85,8 @@ public enum TrackableProperty {
     RingLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
     Intensity(TrackableTypes.IntegerType),
+    OverlayText(TrackableTypes.StringType),
+    MarkerText(TrackableTypes.StringListType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringListType),
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
@@ -217,7 +219,6 @@ public enum TrackableProperty {
     CommanderCast(TrackableTypes.IntegerMapType),
     CommanderDamage(TrackableTypes.IntegerMapType),
     MindSlaveMaster(TrackableTypes.PlayerViewType),
-    Speed(TrackableTypes.IntegerType),
 
     Ante(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     Battlefield(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze), //zones can't respect freeze, otherwise cards that die from state based effects won't have that reflected in the UI

@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import forge.GameCommand;
+import forge.card.CardRarity;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -585,34 +586,41 @@ public abstract class SpellAbilityEffect {
         eff.addReplacementEffect(re);
     }
 
-    // create a basic template for Effect to be used somewhere else
-    public static Card createEffect(final SpellAbility sa, final Player controller, final String name,
-            final String image) {
-        final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+    // create a basic template for Effect to be used somewhere els
+    public static Card createEffect(final SpellAbility sa, final Player controller, final String name, final String image) {
+        return createEffect(sa, sa.getHostCard(), controller, name, image, controller.getGame().getNextTimestamp());
+    }
+    public static Card createEffect(final SpellAbility sa, final Card hostCard, final Player controller, final String name, final String image, final long timestamp) {
+        final Game game = controller.getGame();
         final Card eff = new Card(game.nextCardId(), game);
 
-        eff.setGameTimestamp(game.getNextTimestamp());
+        eff.setGameTimestamp(timestamp);
         eff.setName(name);
-        eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
         if (name.startsWith("Emblem")) {
             eff.setEmblem(true);
             // Emblem needs to be colorless
             eff.setColor(MagicColor.COLORLESS);
-        } else if (sa.hasParam("Boon")) {
-            eff.setBoon(true);
+            eff.setRarity(CardRarity.Common);
+        } else {
+            eff.setColor(hostCard.getColor().getColor());
+            eff.setRarity(hostCard.getRarity());
         }
 
         eff.setOwner(controller);
-        eff.setSVars(sa.getSVars());
 
+        eff.setSetCode(hostCard.getSetCode());
         if (image != null) {
             eff.setImageKey(image);
         }
 
         eff.setGamePieceType(GamePieceType.EFFECT);
-        eff.setEffectSource(sa);
+        if (sa != null) {
+            eff.setEffectSource(sa);
+            eff.setSVars(sa.getSVars());
+        } else {
+            eff.setEffectSource(hostCard);
+        }
 
         return eff;
     }
@@ -1032,7 +1040,9 @@ public abstract class SpellAbilityEffect {
             exilingSource = cause.getOriginalHost();
         }
         movedCard.setExiledWith(exilingSource);
-        movedCard.setExiledBy(cause.getActivatingPlayer());
+        Player exiler = cause.hasParam("DefinedExiler") ?
+                getDefinedPlayersOrTargeted(cause, "DefinedExiler").get(0) : cause.getActivatingPlayer();
+        movedCard.setExiledBy(exiler);
     }
 
     public static GameCommand exileEffectCommand(final Game game, final Card effect) {

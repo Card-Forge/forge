@@ -17,24 +17,25 @@ public class ManifestDreadEffect extends ManifestEffect {
         final Game game = p.getGame();
         for (int i = 0; i < amount; i++) {
             CardCollection tgtCards = p.getTopXCardsFromLibrary(2);
-            Card manifest = null;
-            Card toGrave = null;
+            CardCollection toGrave = new CardCollection();
             if (!tgtCards.isEmpty()) {
-                manifest = p.getController().chooseSingleEntityForEffect(tgtCards, sa, getDefaultMessage(), null);
+                Card manifest = p.getController().chooseSingleEntityForEffect(tgtCards, sa, getDefaultMessage(), null);
                 tgtCards.remove(manifest);
-                toGrave = tgtCards.isEmpty() ? null : tgtCards.getFirst();
 
-                // CR 701.34d If an effect instructs a player to manifest multiple cards from their library, those cards are manifested one at a time.
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
-                internalEffect(manifest, p, sa, moveParams);
-                if (toGrave != null) {
-                    toGrave = game.getAction().moveToGraveyard(toGrave, sa, moveParams);
+                manifest = internalEffect(manifest, p, sa, moveParams);
+                // CR 701.60a
+                if (!manifest.isManifested()) {
+                    tgtCards.add(manifest);
+                }
+                for (Card c : tgtCards) {
+                    toGrave.add(game.getAction().moveToGraveyard(c, sa, moveParams));
                 }
                 triggerList.triggerChangesZoneAll(game, sa);
             }
             Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
-            runParams.put(AbilityKey.Card, toGrave);
+            runParams.put(AbilityKey.Cards, toGrave);
             game.getTriggerHandler().runTrigger(TriggerType.ManifestDread, runParams, true);
         }
     }

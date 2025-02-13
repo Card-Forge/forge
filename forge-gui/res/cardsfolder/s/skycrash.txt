@@ -1,0 +1,6 @@
+Name:Skycrash
+ManaCost:1 R
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+K:Cycling:R
+Oracle:Destroy target artifact.\nCycling {R} ({R}, Discard this card: Draw a card.)

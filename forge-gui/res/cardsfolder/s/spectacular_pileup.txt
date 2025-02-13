@@ -1,0 +1,8 @@
+Name:Spectacular Pileup
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ AnimateAll | ValidCards$ Creature,Vehicle | RemoveKeywords$ Indestructible | SubAbility$ DBDestroyAll | SpellDescription$ All creatures and Vehicles lose indestructible until end of turn, then destroy all creatures and Vehicles.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature,Vehicle
+K:Cycling:2
+DeckHas:Ability$Discard
+Oracle:All creatures and Vehicles lose indestructible until end of turn, then destroy all creatures and Vehicles.\nCycling {2} ({2}, Discard this card: Draw a card.)

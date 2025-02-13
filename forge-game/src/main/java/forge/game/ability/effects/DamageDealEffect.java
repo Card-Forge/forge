@@ -252,16 +252,14 @@ public class DamageDealEffect extends DamageBaseEffect {
                         continue;
                     }
                 }
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
+                if (o instanceof Card c) {
                     final Card gc = game.getCardState(c, null);
                     if (gc == null || !c.equalsWithGameTimestamp(gc) || !gc.isInPlay() || gc.isPhasedOut()) {
                         // timestamp different or not in play
                         continue;
                     }
                     internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap);
-                } else if (o instanceof Player) {
-                    final Player p = (Player) o;
+                } else if (o instanceof Player p) {
                     damageMap.put(sourceLKI, p, dmg);
                 }
             }

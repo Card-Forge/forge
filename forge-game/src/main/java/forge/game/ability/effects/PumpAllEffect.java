@@ -71,7 +71,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 tgtC.addChangedCardKeywords(kws, null, false, timestamp, null);
             }
             if (redrawPT) {
-                tgtC.updatePowerToughnessForView();
+                tgtC.updatePTforView();
             }
 
             if (!hiddenkws.isEmpty()) {
@@ -93,7 +93,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                         tgtC.removeChangedCardKeywords(timestamp, 0);
                         tgtC.removeHiddenExtrinsicKeywords(timestamp, 0);
 
-                        tgtC.updatePowerToughnessForView();
+                        tgtC.updatePTforView();
 
                         game.fireEvent(new GameEventCardStatsChanged(tgtC));
                     }

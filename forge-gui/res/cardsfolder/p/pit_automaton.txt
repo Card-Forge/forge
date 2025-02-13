@@ -1,0 +1,9 @@
+Name:Pit Automaton
+ManaCost:2
+Types:Artifact Creature Construct
+PT:0/4
+K:Defender
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Activated | SpellDescription$ Add {C}{C}. Spend this mana only to activate abilities.
+A:AB$ DelayedTrigger | Cost$ 2 T | AILogic$ SpellCopy | Mode$ AbilityCast | ValidSA$ Activated.Exhaust+nonManaAbility | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you next activate an exhaust ability that isn't a mana ability this turn, copy it. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:Defender\n{T}: Add {C}{C}. Spend this mana only to activate abilities.\n{2}, {T}: When you next activate an exhaust ability that isn't a mana ability this turn, copy it. You may choose new targets for the copy.

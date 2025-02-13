@@ -1,8 +1,0 @@
-Name:Canyon Vaulter
-ManaCost:1 W
-Types:Creature Kor Pilot
-PT:3/1
-T:Mode$ Crewed | ValidCrew$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gains flying until end of turn.
-T:Mode$ Saddled | ValidCrew$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gains flying until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredCardLKICopy | KW$ Flying
-Oracle:Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gains flying until end of turn.

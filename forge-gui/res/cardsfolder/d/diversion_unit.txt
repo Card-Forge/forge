@@ -1,0 +1,8 @@
+Name:Diversion Unit
+ManaCost:1 U
+Types:Artifact Creature Robot
+PT:2/1
+K:Flying
+A:AB$ Counter | Cost$ U Sac<1/CARDNAME/this creature> | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery spell | UnlessCost$ 3 | SpellDescription$ Counter target instant or sorcery spell unless its controller pays {3}.
+DeckHas:Ability$Sacrifice
+Oracle:Flying\n{U}, Sacrifice this creature: Counter target instant or sorcery spell unless its controller pays {3}.

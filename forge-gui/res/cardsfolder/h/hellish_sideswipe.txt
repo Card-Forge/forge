@@ -1,0 +1,7 @@
+Name:Hellish Sideswipe
+ManaCost:B
+Types:Sorcery
+A:SP$ Destroy | Cost$ B Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or Vehicle | SubAbility$ DBDraw | SpellDescription$ Destroy target creature or Vehicle. If the sacrificed permanent was a Vehicle, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Sacrificed | ConditionPresent$ Vehicle
+DeckHints:Type$Vehicle
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nDestroy target creature or Vehicle. If the sacrificed permanent was a Vehicle, draw a card.

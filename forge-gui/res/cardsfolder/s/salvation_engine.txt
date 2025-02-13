@@ -1,0 +1,11 @@
+Name:Salvation Engine
+ManaCost:4 W
+Types:Artifact Vehicle
+PT:6/10
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl+Other | AddPower$ 2 | AddToughness$ 2 | Description$ Other artifact creatures you control get +2/+2.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever this Vehicle attacks, return up to one target artifact card from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact.YouOwn | TgtPrompt$ Choose up to one target artifact card in your graveyard | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 1
+K:Crew:6
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Graveyard
+Oracle:Other artifact creatures you control get +2/+2.\nWhenever this Vehicle attacks, return up to one target artifact card from your graveyard to the battlefield.\nCrew 6

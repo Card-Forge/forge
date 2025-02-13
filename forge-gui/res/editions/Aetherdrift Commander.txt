@@ -26,6 +26,13 @@ ScryfallCode=DRC
 18 R Aetheric Amplifier @Victor Sales
 19 R Stridehangar Automaton @Aaron J. Riley
 20 R Accursed Duneyard @Maxime Minard
+21 R On Wings of Gold @Danny Schwartz
+22 R Priest of the Crossing @Edgar Sánchez Hidalgo
+23 R Renewed Solidarity @Julie Dillon
+24 R Wizened Mentor @Bruno Biazotto
+25 R Prophet of the Scarab @Cristi Balanescu
+26 R Rhet-Tomb Mystic @Irina Nordsol
+27 R Lost Monarch of Ifnir @Piotr Dura
 28 R Territorial Aetherkite @Lars Grant-West
 29 R Nissa, Worldsoul Speaker @Magali Villeneuve
 30 R Peema Trailblazer @Michele Giorgi
@@ -34,6 +41,7 @@ ScryfallCode=DRC
 33 R Aetherflux Conduit @Michael Phillippi
 34 R Aetheric Amplifier @Victor Sales
 35 R Stridehangar Automaton @Aaron J. Riley
+36 R Accursed Duneyard @Maxime Minard
 37 U Swords to Plowshares @Piotr Dura
 38 R Commence the Endgame @Helge C. Balzer
 39 U Reality Shift @Villarrte
@@ -43,6 +51,7 @@ ScryfallCode=DRC
 43 R Gravecrawler @Josh Hass
 44 R Midnight Reaper @Josh Hass
 45 R Murderous Rider @Raluca Marinescu
+46 R Zombie Master @Yohann Schepacz
 47 R Chain Reaction @Maxime Minard
 48 R Chaos Warp @Mathias Kollros
 49 R Druid of Purification @Volkan Baǵa
@@ -181,3 +190,23 @@ ScryfallCode=DRC
 182 R Unholy Grotto @John Avon
 183 R Vineglimmer Snarl @Sam Burley
 184 R Yavimaya Coast @Jesper Ejsing
+
+[tokens]
+b_0_0_zombie_army
+b_2_2_zombie_decayed
+b_4_4_zombie_warrior_vigilance
+c_3_3_a_golem_flying
+c_3_3_a_golem_trample
+c_3_3_a_golem_vigilance
+c_4_4_a_construct
+c_6_6_a_beast
+g_3_3_beast
+nalaar_aetherjet
+u_2_2_shapeshifter_changeling
+w_1_1_zombie
+
+[other]
+embalm_angel_of_sanctions
+embalm_vizier_of_many_faces
+eternalize_champion_of_wits
+eternalize_timeless_dragon

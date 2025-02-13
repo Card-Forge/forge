@@ -1,0 +1,11 @@
+Name:Grim Javelineer
+ManaCost:2 B
+Types:Creature Human Warrior
+PT:3/2
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking creature gets +1/+0 until end of turn. When that creature dies this turn, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +1 | SubAbility$ DBDelayedTrigger
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ DBSurveil | SpellDescription$ When that creature dies this turn, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:DBSurveil:DB$ Surveil | Defined$ You | Amount$ 1
+DeckHas:Ability$Surveil
+SVar:PlayMain1:TRUE
+Oracle:Whenever you attack, target attacking creature gets +1/+0 until end of turn. When that creature dies this turn, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

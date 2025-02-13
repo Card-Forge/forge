@@ -115,8 +115,8 @@ public class AiAttackController {
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
-        if (defender instanceof Card && ((Card) defender).isBattle()) {
-            this.oppList = getOpponentCreatures(((Card) defender).getProtectingPlayer());
+        if (defender instanceof Card card && card.isBattle()) {
+            this.oppList = getOpponentCreatures(card.getProtectingPlayer());
         } else {
             this.oppList = getOpponentCreatures(defendingOpponent);
         }
@@ -312,7 +312,8 @@ public class AiAttackController {
             }
         }
         // Poison opponent if unblocked
-        if (defender instanceof Player && ComputerUtilCombat.poisonIfUnblocked(attacker, (Player) defender) > 0) {
+        if (defender instanceof Player player
+                && ComputerUtilCombat.poisonIfUnblocked(attacker, player) > 0) {
             return true;
         }
 
@@ -849,10 +850,9 @@ public class AiAttackController {
         // decided to attack another defender so related lists need to be updated
         // (though usually rather try to avoid this situation for performance reasons)
         if (defender != defendingOpponent) {
-            if (defender instanceof Player) {
-                defendingOpponent = (Player) defender;
-            } else if (defender instanceof Card) {
-                Card defCard = (Card) defender;
+            if (defender instanceof Player p) {
+                defendingOpponent = p;
+            } else if (defender instanceof Card defCard) {
                 if (defCard.isBattle()) {
                     defendingOpponent = defCard.getProtectingPlayer();
                 } else {
@@ -946,8 +946,8 @@ public class AiAttackController {
                                     return 1;
                                 }
                                 // or weakest player
-                                if (r1.getKey() instanceof Player && r2.getKey() instanceof Player) {
-                                    return ((Player) r1.getKey()).getLife() - ((Player) r2.getKey()).getLife();
+                                if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
+                                    return p1.getLife() - p2.getLife();
                                 }
                             }
                             return r2.getValue() - r1.getValue();
@@ -1314,7 +1314,7 @@ public class AiAttackController {
                     attackersAssigned.add(attacker);
 
                     // check if attackers are enough to finish the attacked planeswalker
-                    if (i < left.size() - 1 && defender instanceof Card) {
+                    if (i < left.size() - 1 && defender instanceof Card card) {
                         final int blockNum = this.blockers.size();
                         int attackNum = 0;
                         int damage = 0;
@@ -1328,7 +1328,7 @@ public class AiAttackController {
                             }
                         }
                         // if enough damage: switch to next planeswalker
-                        if (damage >= ComputerUtilCombat.getDamageToKill((Card) defender, true)) {
+                        if (damage >= ComputerUtilCombat.getDamageToKill(card, true)) {
                             break;
                         }
                     }
@@ -1396,7 +1396,7 @@ public class AiAttackController {
             );
 
             // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
-            defPower = CardLists.getTotalPower(validBlockers, true, false);
+            defPower = CardLists.getTotalPower(validBlockers, null);
 
             // look at the attacker in relation to the blockers to establish a
             // number of factors about the attacking context that will be relevant
@@ -1754,10 +1754,12 @@ public class AiAttackController {
     private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, int maxAttack) {
         // TODO: detect Revenge of Ravens by the trigger instead of by name
         boolean revengeOfRavens = false;
-        if (defender instanceof Player) {
-            revengeOfRavens = !CardLists.filter(((Player)defender).getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
-        } else if (defender instanceof Card) {
-            revengeOfRavens = !CardLists.filter(((Card)defender).getController().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
+        if (defender instanceof Player player) {
+            revengeOfRavens = !CardLists.filter(player.getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
+        } else if (defender instanceof Card card) {
+            revengeOfRavens = !CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
         }
 
         if (!revengeOfRavens) {

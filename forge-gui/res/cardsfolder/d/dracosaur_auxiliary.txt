@@ -1,0 +1,10 @@
+Name:Dracosaur Auxiliary
+ManaCost:4 R R
+Types:Creature Dinosaur Dragon Mount
+PT:4/4
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever this creature attacks while saddled, it deals 2 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+K:Saddle:3
+Oracle:Flying, haste\nWhenever this creature attacks while saddled, it deals 2 damage to any target.\nSaddle 3 (Tap any number of other creatures you control with total power 3 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

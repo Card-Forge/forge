@@ -1,0 +1,11 @@
+Name:Ooze Patrol
+ManaCost:3 G
+Types:Creature Ooze
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters the battlefield, mill two cards, then put a +1/+1 counter on this creature for each card in your graveyard that is an artifact or creature.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$ValidGraveyard Artifact.YouOwn,Creature.YouOwn
+DeckHas:Ability$Graveyard|Mill|Counters
+DeckHints:Type$Artifact & Ability$Discard|Sacrifice
+Oracle:When this creature enters the battlefield, mill two cards, then put a +1/+1 counter on this creature for each card in your graveyard that is an artifact or creature.

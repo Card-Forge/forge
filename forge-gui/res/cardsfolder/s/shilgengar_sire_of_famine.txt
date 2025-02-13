@@ -7,8 +7,8 @@ A:AB$ Token | Cost$ Sac<1/Creature.Other/another creature> | TokenScript$ c_a_bl
 SVar:X:Count$Compare AngelSac EQ1.SacT.1
 SVar:SacT:Sacrificed$CardToughness
 SVar:AngelSac:Sacrificed$Valid Card.Angel
-A:AB$ ChangeZoneAll | Cost$ WB WB WB Sac<6/Blood.token/Blood token> | WithCountersType$ FINALITY | AnimateSubAbility$ DBAnimate | ChangeType$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return each creature card from your graveyard to the battlefield with a finality counter on it. Those creatures are Vampires in addition to their other types.
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Vampire | Duration$ Permanent
+A:AB$ ChangeZoneAll | Cost$ WB WB WB Sac<6/Blood.token/Blood token> | WithCountersType$ FINALITY | StaticEffect$ Animate | ChangeType$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return each creature card from your graveyard to the battlefield with a finality counter on it. Those creatures are Vampires in addition to their other types.
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Vampire
 DeckHas:Ability$Sacrifice|Graveyard|Token & Type$Blood|Vampire
 DeckHints:Ability$Mill & Type$Angel
 Oracle:Flying\nSacrifice another creature: Create a Blood token. If you sacrificed an Angel this way, create a number of Blood tokens equal to its toughness instead.\n{W/B}{W/B}{W/B}, Sacrifice six Blood tokens: Return each creature card from your graveyard to the battlefield with a finality counter on it. Those creatures are Vampires in addition to their other types.

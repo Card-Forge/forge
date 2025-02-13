@@ -1,0 +1,7 @@
+Name:Engine Rat
+ManaCost:B
+Types:Creature Zombie Rat
+PT:1/1
+K:Deathtouch
+A:AB$ LoseLife | Cost$ 5 B | LifeAmount$ 2 | Defined$ Opponent | SpellDescription$ Each opponent loses 2 life.
+Oracle:Deathtouch\n{5}{B}: Each opponent loses 2 life.

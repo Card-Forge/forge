@@ -1,0 +1,8 @@
+Name:Guidelight Matrix
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this artifact enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ AlterAttribute | Cost$ 2 T | ValidTgts$ Mount.YouCtrl | TgtPrompt$ Select target Mount you control | SorcerySpeed$ True | Attributes$ Saddled | SpellDescription$ Target Mount you control becomes saddled until end of turn. Activate only as a sorcery.
+A:AB$ Animate | Cost$ 2 T | ValidTgts$ Vehicle.YouCtrl | TgtPrompt$ Select target Vehicle you control | Types$ Artifact,Creature | SpellDescription$ Target Vehicle you control becomes an artifact creature until end of turn.
+Oracle:When this artifact enters, draw a card.\n{2}, {T}: Target Mount you control becomes saddled until end of turn. Activate only as a sorcery.\n{2}, {T}: Target Vehicle you control becomes an artifact creature until end of turn.
