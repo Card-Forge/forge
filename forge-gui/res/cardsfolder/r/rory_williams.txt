@@ -6,7 +6,7 @@ K:Partner:Amy Pond
 K:First Strike
 K:Lifelink
 T:Mode$ SpellCast | ValidCard$ Card.Self+!wasCastFromExile | Execute$ TrigExile | TriggerDescription$ The Last Centurion — When you cast this spell from anywhere other than exile, exile it with three time counters on it. It gains suspend. Then investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredSpellAbility | Origin$ Stack | Destination$ Exile | Fizzle$ True | WithCountersType$ TIME | WithCountersAmount$ 3 | RememberChanged$ True | SubAbility$ GiveSuspend
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredSpellAbility | Origin$ Stack | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 3 | RememberChanged$ True | SubAbility$ GiveSuspend
 SVar:GiveSuspend:DB$ Pump | Defined$ Remembered | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBInvestigate
 SVar:DBInvestigate:DB$ Investigate

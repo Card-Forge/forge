@@ -6,7 +6,7 @@ K:Flash
 K:Bargain
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters, return up to one target spell or nonland permanent to its owner's hand. If CARDNAME was bargained, that card perpetually gains "This spell costs {2} more to cast."
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand,Card.inZoneStack | TgtZone$ Stack,Battlefield | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand | RememberChanged$ True | TgtPrompt$ Select up to one target spell or nonland permanent | SubAbility$ DBAnimate
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand,Card.inZoneStack | TgtZone$ Stack,Battlefield | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield,Stack | Destination$ Hand | RememberChanged$ True | TgtPrompt$ Select up to one target spell or nonland permanent | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | ConditionDefined$ Self | ConditionPresent$ Card.bargained | staticAbilities$ RaiseCost | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | Description$ This spell costs {2} more to cast.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

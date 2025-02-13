@@ -1,7 +1,7 @@
 Name:Commit
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZone | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Destination$ Library | ValidTgts$ Permanent.nonLand,Card.inZoneStack | TgtPrompt$ Select target spell or nonland permanent | LibraryPosition$ 1 | Fizzle$ True | SpellDescription$ Put target spell or nonland permanent into its owner's library second from the top.
+A:SP$ ChangeZone | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Destination$ Library | ValidTgts$ Permanent.nonLand,Card.inZoneStack | TgtPrompt$ Select target spell or nonland permanent | LibraryPosition$ 1 | SpellDescription$ Put target spell or nonland permanent into its owner's library second from the top.
 # LibraryPosition is zero indexed. So 1 is second from the top
 AlternateMode:Split
 Oracle:Put target spell or nonland permanent into its owner's library second from the top.
