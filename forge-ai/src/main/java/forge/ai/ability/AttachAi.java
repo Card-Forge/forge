@@ -960,9 +960,6 @@ public class AttachAi extends SpellAbilityAi {
         if (tgt.canTgtPlayer() && (!isAuraSpell(sa) || spellCanTargetPlayer)) {
             List<Player> targetable = new ArrayList<>();
             for (final Player player : sa.getHostCard().getGame().getPlayers()) {
-                if (isAuraSpell(sa) && !player.canBeAttached(sa.getHostCard(), sa)) {
-                    continue;
-                }
                 if (sa.canTarget(player)) {
                     targetable.add(player);
                 }
