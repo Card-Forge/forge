@@ -3,6 +3,9 @@ package forge.game;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Table;
+import com.google.common.collect.Table.Cell;
+
 import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameOutcome.AnteResult;
@@ -16,6 +19,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.StackItemView;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityLayer;
 import forge.game.zone.MagicStack;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
@@ -200,15 +205,29 @@ public class GameView extends TrackableObject {
     public TrackableCollection<CardView> getRevealedCollection() {
         return get(TrackableProperty.RevealedCardsCollection);
     }
-
     public void updateRevealedCards(TrackableCollection<CardView> collection) {
         set(TrackableProperty.RevealedCardsCollection, collection);
+    }
+
+    public String getDependencies() {
+        return get(TrackableProperty.Dependencies);
+    }
+    public void setDependencies(Table<StaticAbility, StaticAbility, StaticAbilityLayer> dependencies) {
+        StringBuilder sb = new StringBuilder();
+        StaticAbilityLayer layer = null;
+        for (Cell<StaticAbility, StaticAbility, StaticAbilityLayer> dep : dependencies.cellSet()) {
+            if (layer != dep.getValue()) {
+                layer = dep.getValue();
+                sb.append("Layer " + (StaticAbilityLayer.CONTINUOUS_LAYERS.indexOf(layer) + 1)).append(": ");
+            }
+            sb.append(dep.getColumnKey().getHostCard().toString()).append(" <- ").append(dep.getRowKey().getHostCard().toString()).append("\n");
+        }
+        set(TrackableProperty.Dependencies, sb.toString());
     }
 
     public CombatView getCombat() {
         return get(TrackableProperty.CombatView);
     }
-
     public void updateCombatView(CombatView combatView) {
         set(TrackableProperty.CombatView, combatView);
     }
