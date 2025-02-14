@@ -3704,6 +3704,10 @@ public class AbilityUtils {
             return doXMath(amount, m, source, ctb);
         }
 
+        if (value.equals("AttractionsVisitedThisTurn")) {
+            return doXMath(player.getAttractionsVisitedThisTurn(), m, source, ctb);
+        }
+
         if (value.startsWith("PlaneswalkedToThisTurn")) {
             int found = 0;
             String name = value.split(" ")[1];

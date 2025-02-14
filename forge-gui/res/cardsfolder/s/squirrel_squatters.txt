@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigOpenAttraction:DB$ OpenAttraction
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 green Squirrel creature token that's tapped and attacking for each Attraction you've visited this turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_squirrel | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
-SVar:X:Count$Valid Attraction.VisitedThisTurn
+SVar:X:PlayerCountPropertyYou$AttractionsVisitedThisTurn
 SVar:HasAttackEffect:TRUE
 Oracle:When Squirrel Squatters enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)\nWhenever Squirrel Squatters attacks, create a 1/1 green Squirrel creature token that's tapped and attacking for each Attraction you've visited this turn.
