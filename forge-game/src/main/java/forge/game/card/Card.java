@@ -4624,36 +4624,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return total;
     }
 
-    public final StatBreakdown getUnswitchedPowerBreakdown() {
-        // 208.3 A noncreature permanent has no power or toughness
-        if (isInPlay() && !isCreature()) {
-            return new StatBreakdown();
-        }
-        return new StatBreakdown(getCurrentPower(), getTempPowerBoost(), getPowerBonusFromCounters());
-    }
-    public final int getUnswitchedPower() {
-        return getUnswitchedPowerBreakdown().getTotal();
-    }
-
-    public final int getPowerBonusFromCounters() {
-        return getCounters(CounterEnumType.P1P1) + getCounters(CounterEnumType.P1P2) + getCounters(CounterEnumType.P1P0)
-                - getCounters(CounterEnumType.M1M1) + 2 * getCounters(CounterEnumType.P2P2) - 2 * getCounters(CounterEnumType.M2M1)
-                - 2 * getCounters(CounterEnumType.M2M2) - getCounters(CounterEnumType.M1M0) + 2 * getCounters(CounterEnumType.P2P0);
-    }
-
-    public final StatBreakdown getNetPowerBreakdown() {
-        if (isSwitchPT()) {
-            return getUnswitchedToughnessBreakdown();
-        }
-        return getUnswitchedPowerBreakdown();
-    }
-    public final int getNetPower() {
-        if (isSwitchPT()) {
-            return getUnswitchedToughness();
-        }
-        return getUnswitchedPower();
-    }
-
     public final int getCurrentToughness() {
         int total = getBaseToughness();
         for (Pair<Integer, Integer> p : getPTIterable()) {
@@ -4687,6 +4657,33 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
+    public final StatBreakdown getUnswitchedPowerBreakdown() {
+        // 208.3 A noncreature permanent has no power or toughness
+        if (isInPlay() && !isCreature()) {
+            return new StatBreakdown();
+        }
+        return new StatBreakdown(getCurrentPower(), getTempPowerBoost(), getPowerBonusFromCounters());
+    }
+
+    public final int getPowerBonusFromCounters() {
+        if (!hasCounters()) {
+            return 0;
+        }
+        return getCounters(CounterEnumType.P1P1) + getCounters(CounterEnumType.P1P2) + getCounters(CounterEnumType.P1P0)
+                - getCounters(CounterEnumType.M1M1) + 2 * getCounters(CounterEnumType.P2P2) - 2 * getCounters(CounterEnumType.M2M1)
+                - 2 * getCounters(CounterEnumType.M2M2) - getCounters(CounterEnumType.M1M0) + 2 * getCounters(CounterEnumType.P2P0);
+    }
+
+    public final StatBreakdown getNetPowerBreakdown() {
+        if (isSwitchPT()) {
+            return getUnswitchedToughnessBreakdown();
+        }
+        return getUnswitchedPowerBreakdown();
+    }
+    public final int getNetPower() {
+        return getNetPowerBreakdown().getTotal();
+    }
+
     public final StatBreakdown getUnswitchedToughnessBreakdown() {
         // 208.3 A noncreature permanent has no power or toughness
         if (isInPlay() && !isCreature()) {
@@ -4694,11 +4691,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         return new StatBreakdown(getCurrentToughness(), getTempToughnessBoost(), getToughnessBonusFromCounters());
     }
-    public final int getUnswitchedToughness() {
-        return getUnswitchedToughnessBreakdown().getTotal();
-    }
 
     public final int getToughnessBonusFromCounters() {
+        if (!hasCounters()) {
+            return 0;
+        }
         return getCounters(CounterEnumType.P1P1) + 2 * getCounters(CounterEnumType.P1P2) - getCounters(CounterEnumType.M1M1)
                 + getCounters(CounterEnumType.P0P1) - 2 * getCounters(CounterEnumType.M0M2) + 2 * getCounters(CounterEnumType.P2P2)
                 - getCounters(CounterEnumType.M0M1) - getCounters(CounterEnumType.M2M1) - 2 * getCounters(CounterEnumType.M2M2)
@@ -4730,26 +4727,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // for cards like Giant Growth, etc.
     public final int getTempPowerBoost() {
-        int result = 0;
-        for (Pair<Integer, Integer> pair : boostPT.values()) {
-            if (pair.getLeft() != null) {
-                result += pair.getLeft();
-            }
-        }
-        return result;
+        return boostPT.values().stream().mapToInt(Pair::getLeft).sum();
     }
 
     public final int getTempToughnessBoost() {
-        int result = 0;
-        for (Pair<Integer, Integer> pair : boostPT.values()) {
-            if (pair.getRight() != null) {
-                result += pair.getRight();
-            }
-        }
-        return result;
+        return boostPT.values().stream().mapToInt(Pair::getRight).sum();
     }
 
-    public void addPTBoost(final Integer power, final Integer toughness, final long timestamp, final long staticId) {
+    public void addPTBoost(final int power, final int toughness, final long timestamp, final long staticId) {
         boostPT.put(timestamp, staticId, Pair.of(power, toughness));
     }
 
