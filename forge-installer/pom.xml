@@ -4,7 +4,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>2.0.03-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>forge-installer</artifactId>
@@ -39,7 +39,7 @@
                         <configuration>
                             <!-- generate versionName from revision property to snapshot-version property  -->
                             <name>snapshot-version</name>
-                            <value>2.0.02-SNAPSHOT</value>
+                            <value>${revision}</value>
                             <regex>-SNAPSHOT</regex>
                             <replacement>-SNAPSHOT-${month.date}</replacement>
                             <failIfNoMatch>false</failIfNoMatch>
