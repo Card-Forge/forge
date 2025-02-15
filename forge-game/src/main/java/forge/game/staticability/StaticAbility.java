@@ -293,7 +293,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (!checkMode("CantAttackUnless") && (!checkMode("OptionalAttackCost") || !attackersWithOptionalCost.contains(attacker))) {
             return null;
         }
-        if (!this.checkConditions()) {
+        if (!checkConditions()) {
             return null;
         }
         return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, target);
@@ -321,6 +321,26 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return checkMode(mode) && checkConditions();
     }
 
+    public final boolean zonesCheck() {
+        if (isSuppressed()) {
+            return false;
+        }
+        if (getHostCard().isPhasedOut()) {
+            return false;
+        }
+        if (!isCharacteristicDefining()) {
+            if (this.validHostZones != null) {
+                Zone zone = getHostCard().getGame().getZoneOf(getHostCard());
+                if (zone == null || !this.validHostZones.contains(zone.getZoneType())) {
+                    return false;
+                }
+            } else if (!getHostCard().isInPlay()) { // default
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Check conditions.
      *
@@ -331,22 +351,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         final Game game = getHostCard().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
-        if (isSuppressed()) {
+        if (!zonesCheck()) {
             return false;
-        }
-        if (getHostCard().isPhasedOut()) {
-            return false;
-        }
-
-        if (!isCharacteristicDefining()) {
-            if (this.validHostZones != null) {
-                Zone zone = game.getZoneOf(getHostCard());
-                if (zone == null || !this.validHostZones.contains(zone.getZoneType())) {
-                    return false;
-                }
-            } else if (!getHostCard().isInPlay()) { // default
-                return false;
-            }
         }
 
         String condition = getParam("Condition");

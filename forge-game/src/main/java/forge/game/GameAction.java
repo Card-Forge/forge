@@ -724,7 +724,6 @@ public class GameAction {
         }
     }
 
-
     private void storeChangesZoneAll(Card c, Zone zoneFrom, Zone zoneTo, Map<AbilityKey, Object> params) {
         if (params != null && params.containsKey(AbilityKey.InternalTriggerTable)) {
             ((CardZoneTable) params.get(AbilityKey.InternalTriggerTable)).put(zoneFrom != null ? zoneFrom.getZoneType() : null, zoneTo.getZoneType(), c);
@@ -1116,7 +1115,7 @@ public class GameAction {
                 // need to get Card from preList if able
                 final Card co = preList.get(c);
                 for (StaticAbility stAb : co.getStaticAbilities()) {
-                    if (stAb.checkMode("Continuous")) {
+                    if (stAb.checkMode("Continuous") && stAb.zonesCheck()) {
                         staticAbilities.add(stAb);
                     }
                  }
@@ -1163,7 +1162,7 @@ public class GameAction {
                 if (affectedHere != null) {
                     for (final Card c : affectedHere) {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
-                            if (!staticAbilities.contains(st2)) {
+                            if (!staticAbilities.contains(st2) && st2.checkMode("Continuous") && st2.zonesCheck()) {
                                 toAdd.add(st2);
                                 st2.applyContinuousAbilityBefore(layer, preList);
                             }
@@ -1295,16 +1294,12 @@ public class GameAction {
                 // ...what it applies to...
                 if (!dependency && compareAffected) {
                     CardCollectionView affectedAfterOther = StaticAbilityContinuous.getAffectedCards(stAb, preList);
-                    if (!Iterators.elementsEqual(affectedHere.iterator(), affectedAfterOther.iterator())) {
-                        dependency = true;
-                    }
+                    dependency = !Iterators.elementsEqual(affectedHere.iterator(), affectedAfterOther.iterator());
                 }
                 // ...or what it does to any of the things it applies to
                 if (!dependency) {
                     List<Object> effectResultsAfterOther = generateStaticAbilityResult(layer, stAb);
-                    if (!effectResults.equals(effectResultsAfterOther)) {
-                        dependency = true;
-                    }
+                    dependency = !effectResults.equals(effectResultsAfterOther);
                 }
 
                 if (dependency) {
