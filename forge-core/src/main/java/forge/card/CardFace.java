@@ -222,7 +222,7 @@ final class CardFace implements ICardFace, Cloneable {
                 else variant.replacements.addAll(0, this.replacements);
 
                 if(variant.variables == null) variant.variables = this.variables;
-                else variant.variables.putAll(this.variables);
+                else this.variables.forEach((k, v) -> variant.variables.putIfAbsent(k, v));
 
                 if(variant.nonAbilityText == null) variant.nonAbilityText = this.nonAbilityText;
                 if(variant.draftActions == null) variant.draftActions = this.draftActions;
