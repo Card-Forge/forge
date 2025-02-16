@@ -8,6 +8,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.event.GameEventCardPlotted;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -48,6 +49,8 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                 switch (attr.trim()) {
                     case "Plotted":
                         altered = gameCard.setPlotted(activate);
+
+                        c.getGame().fireEvent(new GameEventCardPlotted(c, sa.getActivatingPlayer()));
                         break;
                     case "Solve":
                     case "Solved":
