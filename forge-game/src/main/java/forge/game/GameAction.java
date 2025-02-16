@@ -933,6 +933,10 @@ public class GameAction {
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
         final Card copied = moveTo(removed, c, cause, params);
 
+        if (c.isImmutable()) {            
+            return copied;
+        }
+
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Cause, cause);
         if (origin != null) { // is generally null when adding via dev mode
