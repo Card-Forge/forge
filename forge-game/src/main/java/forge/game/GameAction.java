@@ -933,18 +933,20 @@ public class GameAction {
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
         final Card copied = moveTo(removed, c, cause, params);
 
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
-        runParams.put(AbilityKey.Cause, cause);
-        if (origin != null) { // is generally null when adding via dev mode
-            runParams.put(AbilityKey.Origin, origin.getZoneType().name());
-        }
-        if (params != null) {
-            runParams.putAll(params);
-        }
-        runParams.put(AbilityKey.CostStack, game.costPaymentStack);
-        runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
+        if (!c.isImmutable()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+            runParams.put(AbilityKey.Cause, cause);
+            if (origin != null) { // is generally null when adding via dev mode
+                runParams.put(AbilityKey.Origin, origin.getZoneType().name());
+            }
+            if (params != null) {
+                runParams.putAll(params);
+            }
+            runParams.put(AbilityKey.CostStack, game.costPaymentStack);
+            runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
 
-        game.getTriggerHandler().runTrigger(TriggerType.Exiled, runParams, false);
+            game.getTriggerHandler().runTrigger(TriggerType.Exiled, runParams, false);
+        }
 
         return copied;
     }
