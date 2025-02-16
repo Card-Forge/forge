@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Legendary Creature Zombie Knight
 PT:3/2
 A:AB$ ChangeZone | Cost$ 2 W | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self | ActivationZone$ Graveyard | IsPresent$ Creature.YouCtrl+powerEQ1+toughnessEQ1 | Tapped$ True | SubAbility$ DBEffect | PrecostDesc$ Rejuvenation — | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
-SVar:DBEffect:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | StackDescription$ It perpetually gets +1/+1. | SpellDescription$ It perpetually gets +1/+1. Activate only if you control a 1/1 creature.
+SVar:DBEffect:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | StackDescription$ It perpetually gets +1/+1. | SpellDescription$ It perpetually gets +1/+1. Activate only if you control a 1/1 creature.
 SVar:SacMe:3
 SVar:DiscardMe:3
 AI:RemoveDeck:Random
