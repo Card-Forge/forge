@@ -32,7 +32,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.util.FileUtil;
 import forge.util.Localizer;
-import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.tuple.Pair;
 
