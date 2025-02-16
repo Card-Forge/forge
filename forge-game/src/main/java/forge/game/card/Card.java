@@ -8181,6 +8181,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         updateRooms();
 
+        getGame().fireEvent(new GameEventDoorChanged(p, this, stateName, true));
+
         Map<AbilityKey, Object> unlockParams =  AbilityKey.mapFromPlayer(p);
         unlockParams.put(AbilityKey.Card, this);
         unlockParams.put(AbilityKey.CardState, getState(stateName));
@@ -8204,6 +8206,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         unlockedRooms.remove(stateName);
 
         updateRooms();
+
+        getGame().fireEvent(new GameEventDoorChanged(p, this, stateName, false));
 
         return true;
     }
