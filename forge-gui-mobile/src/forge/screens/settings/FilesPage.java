@@ -80,34 +80,34 @@ public class FilesPage extends TabPage<SettingsScreen> {
             }
         }, 0);
         //content downloaders
-        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPics"),
-                Forge.getLocalizer().getMessage("lblDownloadPics")) {
-            @Override
-            protected GuiDownloadService createService() {
-                return new GuiDownloadPicturesLQ();
-            }
-        }, 1);
-        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSetPics"),
-                Forge.getLocalizer().getMessage("lblDownloadSetPics")) {
-            @Override
-            protected GuiDownloadService createService() {
-                return new GuiDownloadSetPicturesLQ();
-            }
-        }, 1);
-        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
-                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
-            @Override
-            protected GuiDownloadService createService() {
-                return new GuiDownloadQuestImages();
-            }
-        }, 1);
-        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAchievementImages"),
-                Forge.getLocalizer().getMessage("lblDownloadAchievementImages")) {
-            @Override
-            protected GuiDownloadService createService() {
-                return new GuiDownloadAchievementImages();
-            }
-        }, 1);
+//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPics"),
+//                Forge.getLocalizer().getMessage("lblDownloadPics")) {
+//            @Override
+//            protected GuiDownloadService createService() {
+//                return new GuiDownloadPicturesLQ();
+//            }
+//        }, 1);
+//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSetPics"),
+//                Forge.getLocalizer().getMessage("lblDownloadSetPics")) {
+//            @Override
+//            protected GuiDownloadService createService() {
+//                return new GuiDownloadSetPicturesLQ();
+//            }
+//        }, 1);
+//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
+//                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
+//            @Override
+//            protected GuiDownloadService createService() {
+//                return new GuiDownloadQuestImages();
+//            }
+//        }, 1);
+//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAchievementImages"),
+//                Forge.getLocalizer().getMessage("lblDownloadAchievementImages")) {
+//            @Override
+//            protected GuiDownloadService createService() {
+//                return new GuiDownloadAchievementImages();
+//            }
+//        }, 1);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPrices"),
                 Forge.getLocalizer().getMessage("lblDownloadPrices")) {
             @Override
