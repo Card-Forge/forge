@@ -1,7 +1,22 @@
 Name:Phila, Unsealed
 ManaCost:4
-Types:Legendary Artifact Creature Rebel Golem
+Types:Legendary Artifact Creature Golem
 PT:4/4
-S:Mode$ CantPutCounter | ValidPlayer$ You | CounterType$ POISON | Description$ You can't get poison counters.
-A:AB$ ChangeZone | Cost$ W U B R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact.
-Oracle:You can't get poison counters.\n{W}{U}{B}{R}{G}: Exile target artifact.
+# Developer's note: The Mirrans won that event. However, in the interest of fun, Forge has the three possible versions of the card implemented.
+SVar:WhoWon:Number$1
+S:Mode$ Continuous | Affected$ Card.Self | AddType$ Rebel | AddStaticAbility$ NoCountersOnYou | AddAbility$ ABExile | CheckSVar$ WhoWon | SVarCompare$ EQ1 | Description$ If the Mirrans won the Unknown event on February 17th, 2023, CARDNAME is also a Rebel with "You can’t get poison counters," and has "{W}{U}{B}{R}{G}: Exile target artifact."
+SVar:NoCountersOnYou:Mode$ CantPutCounter | ValidPlayer$ You | CounterType$ POISON | Description$ You can't get poison counters.
+SVar:ABExile:AB$ ChangeZone | Cost$ W U B R G | ValidTgts$ Artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact.
+S:Mode$ Continuous | Affected$ Card.Self | AddType$ Phyrexian | AddStaticAbility$ PhyresisPump | CheckSVar$ WhoWon | SVarCompare$ EQ2 | Description$ If the Phyrexians won that event, NICKNAME is also a Phyrexian with "Other Phyrexians you control get +1/+1 and have toxic 1."
+SVar:PhyresisPump:Mode$ Continuous | Affected$ Phyrexian.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Toxic:1 | Description$ Other Phyrexians you control get +1/+1 and have toxic 1.
+Oracle:(Variant: The Mirrans won the event.)\nIf the Mirrans won the Unknown event on February 17th, 2023, Phila, Unsealed is also a Rebel with "You can’t get poison counters," and has "{W}{U}{B}{R}{G}: Exile target artifact."\nIf the Phyrexians won that event, Phila is also a Phyrexian with "Other Phyrexians you control get +1/+1 and gain Toxic 1."
+
+# --- VARIANT: PhyrexianWin ---
+
+Variant:PhyrexianWin:SVar:WhoWon:Number$2
+Variant:PhyrexianWin:Oracle:(Variant: The Phyrexians won the event.)\nIf the Mirrans won the Unknown event on February 17th, 2023, Phila, Unsealed is also a Rebel with "You can’t get poison counters," and has "{W}{U}{B}{R}{G}: Exile target artifact."\nIf the Phyrexians won that event, Phila is also a Phyrexian with "Other Phyrexians you control get +1/+1 and gain Toxic 1."
+
+# --- VARIANT: Unknown ---
+
+Variant:Unknown:SVar:WhoWon:Number$0
+Variant:Unknown:Oracle:(Variant: The outcome of the event isn't yet known.)\nIf the Mirrans won the Unknown event on February 17th, 2023, Phila, Unsealed is also a Rebel with "You can’t get poison counters," and has "{W}{U}{B}{R}{G}: Exile target artifact."\nIf the Phyrexians won that event, Phila is also a Phyrexian with "Other Phyrexians you control get +1/+1 and gain Toxic 1."
