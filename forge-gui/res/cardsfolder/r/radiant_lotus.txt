@@ -1,8 +1,7 @@
 Name:Radiant Lotus
 ManaCost:6
 Types:Artifact
-A:AB$ ChooseColor | Cost$ T Sac<X/Artifact> | XMin$ 1 | Defined$ You | SubAbility$ DBMana | SpellDescription$ Choose a color. Target player adds three mana of the chosen color for each artifact sacrificed this way.
-SVar:DBMana:DB$ Mana | ValidTgts$ Player | Produced$ Chosen | Amount$ Y
+A:AB$ Mana | Cost$ T Sac<X/Artifact> | XMin$ 1 | Chooser$ You | ValidTgts$ Player | Produced$ Any | Amount$ Y | StackDescription$ SpellDescription | SpellDescription$ Choose a color. Target player adds three mana of the chosen color for each artifact sacrificed this way.
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.3
 SVar:BuffedBy:Artifact
