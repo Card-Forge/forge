@@ -651,12 +651,14 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("TopLibrary") || property.startsWith("BottomLibrary")) {
-            CardCollection cards = (CardCollection) card.getOwner().getCardsIn(ZoneType.Library);
+            CardCollectionView cards = card.getOwner().getCardsIn(ZoneType.Library);
             if (!property.equals("TopLibrary")) {
-                if (property.equals("TopLibraryLand")) cards = CardLists.filter(cards, CardPredicates.LANDS);
-                else if (property.contains("_")) cards = CardLists.getValidCards(cards, property.split("_")[1],
+                if (property.contains("_")) cards = CardLists.getValidCards(cards, property.split("_")[1],
                         sourceController, source, spellAbility);
-                if (property.startsWith("Bottom")) Collections.reverse(cards);
+                if (property.startsWith("Bottom")) {
+                    cards = new CardCollection(cards);
+                    Collections.reverse((CardCollection) cards);
+                }
             }
             if (cards.isEmpty() || !card.equals(cards.get(0))) return false;
         } else if (property.startsWith("Cloned")) {
