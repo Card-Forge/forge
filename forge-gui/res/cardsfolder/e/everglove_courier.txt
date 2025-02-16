@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Elf
 PT:2/1
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Pump | Cost$ 2 G T | ValidTgts$ Creature.Elf | TgtPrompt$ Select target Elf creature | NumAtt$ 2 | NumDef$ 2 | KW$ Trample | Duration$ UntilUntaps | AILogic$ ContinuousBonus | SpellDescription$ Target Elf creature gets +2/+2 and has trample for as long as CARDNAME remains tapped.
+A:AB$ Pump | Cost$ 2 G T | ValidTgts$ Creature.Elf | TgtPrompt$ Select target Elf creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | Duration$ UntilUntaps | AILogic$ ContinuousBonus | SpellDescription$ Target Elf creature gets +2/+2 and has trample for as long as CARDNAME remains tapped.
 SVar:AIUntapPreference:BetterTgtThanRemembered
 DeckNeeds:Type$Elf
 Oracle:You may choose not to untap Everglove Courier during your untap step.\n{2}{G}, {T}: Target Elf creature gets +2/+2 and has trample for as long as Everglove Courier remains tapped.
