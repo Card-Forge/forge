@@ -92,6 +92,10 @@ public class PlayerProperty {
             if (!player.hasBlessing()) {
                 return false;
             }
+        } else if (property.equals("CanBeEnchantedBy")) {
+            if (!player.canBeAttached(source, null)) {
+                return false;
+            }
         } else if (property.startsWith("damageDoneSingleSource")) {
             String props = property.split(" ")[1];
             List<Integer> sourceDmg = game.getDamageDoneThisTurn(null, false, "Card.YouCtrl", null, source, sourceController, spellAbility);

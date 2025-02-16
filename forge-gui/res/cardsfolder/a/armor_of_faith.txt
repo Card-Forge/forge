@@ -1,8 +1,8 @@
 Name:Armor of Faith
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
 A:AB$ Pump | Cost$ W | Defined$ Enchanted | NumDef$ +1 | SpellDescription$ Enchanted creature gets +0/+1 until end of turn.
 Oracle:Enchant creature\nEnchanted creature gets +1/+1.\n{W}: Enchanted creature gets +0/+1 until end of turn.

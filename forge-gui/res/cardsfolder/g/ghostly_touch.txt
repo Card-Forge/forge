@@ -1,8 +1,8 @@
 Name:Ghostly Touch
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ AttackTrigger | AddSVar$ TrigTapUnTap | Description$ Enchanted creature has "Whenever this creature attacks, you may tap or untap target permanent."
 SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTapUnTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, you may tap or untap target permanent.
 SVar:TrigTapUnTap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent

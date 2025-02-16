@@ -1,8 +1,8 @@
 Name:Presence of Gond
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.AttachedBy | AddAbility$ Token | Description$ Enchanted creature has "{T}: Create a 1/1 green Elf Warrior creature token."
 SVar:Token:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | SpellDescription$ Create a 1/1 green Elf Warrior creature token.
 SVar:NonStackingAttachEffect:True

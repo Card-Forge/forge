@@ -2,8 +2,8 @@ Name:Ragged Veins
 ManaCost:1 B
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever enchanted creature is dealt damage, its controller loses that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTargetController | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount

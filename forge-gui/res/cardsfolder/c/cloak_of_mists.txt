@@ -1,7 +1,7 @@
 Name:Cloak of Mists
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | Description$ Enchanted creature can't be blocked.
 Oracle:Enchant creature\nEnchanted creature can't be blocked.

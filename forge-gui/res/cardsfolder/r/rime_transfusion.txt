@@ -1,8 +1,8 @@
 Name:Rime Transfusion
 ManaCost:1 B
 Types:Snow Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | AddAbility$ PumpA | Description$ Enchanted creature gets +2/+1 and has "{S}: This creature can't be blocked this turn except by snow creatures." ({S} can be paid with one mana from a snow source.)
 SVar:PumpA:AB$ Effect | Cost$ S | Duration$ UntilHostLeavesPlayOrEOT | StaticAbilities$ KWPump | SpellDescription$ CARDNAME can't be blocked this turn except by snow creatures.
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.nonSnow | Description$ EFFECTSOURCE can't be blocked this turn except by snow creatures.

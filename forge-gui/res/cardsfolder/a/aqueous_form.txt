@@ -1,8 +1,8 @@
 Name:Aqueous Form
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | Description$ Enchanted creature can't be blocked.
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ DBScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1

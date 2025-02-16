@@ -2,8 +2,8 @@ Name:Strands of Undeath
 ManaCost:3 B
 Types:Enchantment Aura
 PT:2/2
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, target player discards two cards.
 A:AB$ Regenerate | Cost$ B | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ 2 | Mode$ TgtChoose

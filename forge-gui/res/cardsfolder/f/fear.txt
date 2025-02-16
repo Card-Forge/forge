@@ -1,8 +1,8 @@
 Name:Fear
 ManaCost:B B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Fear | Description$ Enchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 DeckHas:Keyword$Fear
 Oracle:Enchant creature (Target a creature as you cast this. This card enters attached to that creature.)\nEnchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)

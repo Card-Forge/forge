@@ -1,8 +1,8 @@
 Name:Lingering Mirage
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ ChangeType
+K:Enchant:Land
+SVar:AttachAILogic:ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Island | RemoveLandTypes$ True | Description$ Enchanted land is an Island.
 K:Cycling:2
 Oracle:Enchant land\nEnchanted land is an Island.\nCycling {2} ({2}, Discard this card: Draw a card.)

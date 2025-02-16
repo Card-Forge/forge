@@ -1,8 +1,8 @@
 Name:Temur Runemark
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample | IsPresent$ Permanent.Blue+YouCtrl,Permanent.Red+YouCtrl | Description$ Enchanted creature has trample as long as you control a blue or red permanent.
 SVar:BuffedBy:Permanent.Blue,Permanent.Red

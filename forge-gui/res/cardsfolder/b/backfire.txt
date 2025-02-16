@@ -1,8 +1,8 @@
 Name:Backfire
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever enchanted creature deals damage to you, CARDNAME deals that much damage to that creature's controller.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
