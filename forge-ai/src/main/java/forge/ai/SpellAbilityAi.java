@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -51,13 +53,18 @@ public abstract class SpellAbilityAi {
      * Handles the AI decision to play a "main" SpellAbility
      */
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
-        final Card source = sa.getHostCard();
+        Card source = sa.getHostCard();
+        try {
+            source = ObjectUtils.firstNonNull(sa.getAlternateHost(source), source);
 
-        if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(source, sa)) {
-            return false;
+            if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(source, sa)) {
+                return false;
+            }
+
+            return canPlayWithoutRestrict(ai, sa);
+        } finally {
+            sa.undoAlternateHost(source);
         }
-
-        return canPlayWithoutRestrict(ai, sa);
     }
 
     protected boolean canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
