@@ -1112,7 +1112,7 @@ public class GameAction {
         // search for cards with static abilities
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
         final CardCollection staticList = new CardCollection();
-        Table<StaticAbility, StaticAbility, StaticAbilityLayer> dependencies = null;
+        Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies = null;
         if (preList.isEmpty()) {
             dependencies = HashBasedTable.create();
         }
@@ -1257,7 +1257,8 @@ public class GameAction {
         game.getTracker().unfreeze();
     }
 
-    private StaticAbility findStaticAbilityToApply(StaticAbilityLayer layer, List<StaticAbility> staticsForLayer, CardCollectionView preList, Map<StaticAbility, CardCollectionView> affectedPerAbility, Table<StaticAbility, StaticAbility, StaticAbilityLayer> dependencies) {
+    private StaticAbility findStaticAbilityToApply(StaticAbilityLayer layer, List<StaticAbility> staticsForLayer, CardCollectionView preList, Map<StaticAbility, CardCollectionView> affectedPerAbility,
+            Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
         if (staticsForLayer.size() == 1) {
             return staticsForLayer.get(0);
         }
@@ -1316,7 +1317,11 @@ public class GameAction {
                     dependencyGraph.addVertex(otherStAb);
                     dependencyGraph.addEdge(stAb, otherStAb);
                     if (dependencies != null) {
-                        dependencies.put(stAb, otherStAb, layer);
+                        if (dependencies.contains(stAb, otherStAb)) {
+                            dependencies.get(stAb, otherStAb).add(layer);
+                        } else {
+                            dependencies.put(stAb, otherStAb, EnumSet.of(layer));
+                        }
                     }
                 }
 

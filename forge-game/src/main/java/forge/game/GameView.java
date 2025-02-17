@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Table;
@@ -212,15 +213,19 @@ public class GameView extends TrackableObject {
     public String getDependencies() {
         return get(TrackableProperty.Dependencies);
     }
-    public void setDependencies(Table<StaticAbility, StaticAbility, StaticAbilityLayer> dependencies) {
+    public void setDependencies(Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
         StringBuilder sb = new StringBuilder();
         StaticAbilityLayer layer = null;
-        for (Cell<StaticAbility, StaticAbility, StaticAbilityLayer> dep : dependencies.cellSet()) {
-            if (layer != dep.getValue()) {
-                layer = dep.getValue();
-                sb.append("Layer " + (StaticAbilityLayer.CONTINUOUS_LAYERS.indexOf(layer) + 1)).append(": ");
+        for (StaticAbilityLayer sal : StaticAbilityLayer.CONTINUOUS_LAYERS_WITH_DEPENDENCY) {
+            for (Cell<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dep : dependencies.cellSet()) {
+                if (dep.getValue().contains(sal)) {
+                    if (layer != sal) {
+                        layer = sal;
+                        sb.append("Layer " + (StaticAbilityLayer.CONTINUOUS_LAYERS.indexOf(layer) + 1)).append(": ");
+                    }
+                    sb.append(dep.getColumnKey().getHostCard().toString()).append(" <- ").append(dep.getRowKey().getHostCard().toString()).append("\n");
+                }
             }
-            sb.append(dep.getColumnKey().getHostCard().toString()).append(" <- ").append(dep.getRowKey().getHostCard().toString()).append("\n");
         }
         set(TrackableProperty.Dependencies, sb.toString());
     }
