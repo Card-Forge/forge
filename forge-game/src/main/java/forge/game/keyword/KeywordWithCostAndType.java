@@ -26,6 +26,8 @@ public class KeywordWithCostAndType extends KeywordInstance<KeywordWithCostAndTy
                     n[i] = "basic land";
                 } else if (n[i].equals("Land.Artifact")) {
                     n[i] = "artifact land";
+                } else if (n[i].startsWith("Card.with")) {
+                    n[i] = n[i].substring(9);
                 }
             }
 
