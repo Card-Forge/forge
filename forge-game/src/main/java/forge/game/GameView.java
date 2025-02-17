@@ -214,6 +214,9 @@ public class GameView extends TrackableObject {
         return get(TrackableProperty.Dependencies);
     }
     public void setDependencies(Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
+        if (dependencies.isEmpty()) {
+            return;
+        }
         StringBuilder sb = new StringBuilder();
         StaticAbilityLayer layer = null;
         for (StaticAbilityLayer sal : StaticAbilityLayer.CONTINUOUS_LAYERS_WITH_DEPENDENCY) {
@@ -221,7 +224,7 @@ public class GameView extends TrackableObject {
                 if (dep.getValue().contains(sal)) {
                     if (layer != sal) {
                         layer = sal;
-                        sb.append("Layer " + (StaticAbilityLayer.CONTINUOUS_LAYERS.indexOf(layer) + 1)).append(": ");
+                        sb.append("Layer " + layer.num).append(": ");
                     }
                     sb.append(dep.getColumnKey().getHostCard().toString()).append(" <- ").append(dep.getRowKey().getHostCard().toString()).append("\n");
                 }
