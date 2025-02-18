@@ -47,7 +47,7 @@ CG02b C That's No Moonmist @
 CR02 C Fear of Going 0-2 Drop @
 CW02 C Unclaimed Cat @
 MW02 M You, Magic Playtester @
-MZ02a M Delphia, Undecided @
+MZ02 M Delphia, Undecided @
 MZ02b M Delphia, Undecided @ $MirranWin
 MZ02c M Delphia, Undecided @ $Unknown
 PLA002 C Pin Trading @
@@ -361,7 +361,7 @@ PLA020 C Windmill Farm @
 PLA023 C Royal Booster @
 PLA024 C Bicycle Rack @
 RZ24 R The Dogronmaster @ 
-MA30a M Phila, Unsealed @
+MA30 M Phila, Unsealed @
 MA30b M Phila, Unsealed @ $PhyrexianWin
 MA30c M Phila, Unsealed @ $Unknown
 RA31 R The Rebellious Intelligence @
