@@ -7007,15 +7007,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean isInZones(final List<ZoneType> zones) {
-        boolean inZones = false;
         Zone z = this.getLastKnownZone();
-        for (ZoneType okZone : zones) {
-            if (z.is(okZone)) {
-                inZones = true;
-                break;
-            }
-        }
-        return z != null && inZones;
+        return z != null && zones.contains(z.getZoneType());
     }
 
     public boolean canBeDiscardedBy(SpellAbility sa, final boolean effect) {
