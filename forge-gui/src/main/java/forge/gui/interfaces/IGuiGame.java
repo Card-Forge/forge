@@ -105,6 +105,8 @@ public interface IGuiGame {
     void updateLives(Iterable<PlayerView> livesUpdate);
     void updateShards(Iterable<PlayerView> shardsUpdate);
 
+    void updateDependencies();
+
     void setPanelSelection(CardView hostCard);
 
     SpellAbilityView getAbilityToPlay(CardView hostCard, List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
