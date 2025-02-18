@@ -1,0 +1,8 @@
+[metadata]
+Code=FIN
+Date=2025-06-13
+Name=Final Fantasy
+Type=Expansion
+ScryfallCode=FIN
+
+[cards]

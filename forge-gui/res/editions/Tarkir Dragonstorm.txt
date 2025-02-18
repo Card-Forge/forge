@@ -1,0 +1,8 @@
+[metadata]
+Code=TDM
+Date=2025-04-11
+Name=Tarkir: Dragonstorm
+Type=Expansion
+ScryfallCode=TDM
+
+[cards]
