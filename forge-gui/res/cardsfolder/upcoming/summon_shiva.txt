@@ -1,0 +1,11 @@
+Name:Summon: Shiva
+ManaCost:3 U U
+Types:Enchantment Creature Saga Elemental
+PT:4/5
+K:Chapter:3:DBTap,DBTap,DBDraw
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBPutCounter | SpellDescription$ Heavenly Strike — Tap target creature an opponent controls. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+SVar:DBDraw:DB$ Draw | NumCards$ X | SpellDescription$ Diamond Dust — Draw a card for each tapped creature your opponents control.
+SVar:X:Count$Valid Creature.tapped+OppCtrl
+SVar:PlayMain1:TRUE
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Heavenly Strike — Tap target creature an opponent controls. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nIII — Diamond Dust — Draw a card for each tapped creature your opponents control.
