@@ -3,7 +3,7 @@ package forge.game.staticability;
 import com.google.common.collect.ImmutableList;
 
 public enum StaticAbilityLayer {
-    /** Layer 1 for control-changing effects. */
+    /** Layer 1 for copiable values. */
     COPY("1"),
 
     /** Layer 2 for control-changing effects. */
@@ -29,6 +29,9 @@ public enum StaticAbilityLayer {
 
     /** Layer 7c for power- and/or toughness-modifying effects. */
     MODIFYPT("7c"),
+
+    /** Layer 7d for power- and/or toughness-switching effects. */
+    //SWITCHPT("7d"),
 
     /** Layer for game rule-changing effects. */
     RULES("8");
