@@ -9,7 +9,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$
 SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBTreasure
 SVar:DBTreasure:DB$ Token | ConditionDefined$ Self | ConditionPresent$ Creature.powerGE7 | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac
 SVar:X:Count$Valid Creature.attacking+equipped
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+withoutDefender | AddSVar$ EqMe | Secondary$ True
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl+withoutDefender | AddSVar$ EqMe | Secondary$ True
 SVar:EqMe:SVar:EquipMe:Once
 SVar:HasAttackEffect:TRUE
 SVar:EquipMe:Once
