@@ -21,7 +21,7 @@ public class StaticAbilityDevotion {
                     continue;
                 }
                 int t = Integer.parseInt(stAb.getParamOrDefault("Value", "1"));
-                i = i + t;
+                i += t;
             }
         }
         return i;
