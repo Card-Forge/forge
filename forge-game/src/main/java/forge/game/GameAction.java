@@ -707,7 +707,7 @@ public class GameAction {
             // needed for ETB lookahead like Bronzehide Lion
             stAb.putParam("AffectedZone", "All");
             SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Battlefield");
-            game.getAction().moveToCommand(eff, cause);
+            eff.getOwner().getZone(ZoneType.Command).add(eff);
         }
 
         eff.addRemembered(copied);
@@ -1112,6 +1112,10 @@ public class GameAction {
         // search for cards with static abilities
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
         final CardCollection staticList = new CardCollection();
+        Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies = null;
+        if (preList.isEmpty()) {
+            dependencies = HashBasedTable.create();
+        }
 
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
@@ -1146,7 +1150,7 @@ public class GameAction {
                 StaticAbility stAb = staticsForLayer.get(0);
                 // dependency with CDA seems unlikely
                 if (!stAb.isCharacteristicDefining()) {
-                    stAb = findStaticAbilityToApply(layer, staticsForLayer, preList, affectedPerAbility);
+                    stAb = findStaticAbilityToApply(layer, staticsForLayer, preList, affectedPerAbility, dependencies);
                 }
                 staticsForLayer.remove(stAb);
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
@@ -1233,6 +1237,8 @@ public class GameAction {
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
             game.getTriggerHandler().runTrigger(TriggerType.Immediate, runParams, false);
+
+            game.getView().setDependencies(dependencies);
         }
 
         // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
@@ -1251,7 +1257,8 @@ public class GameAction {
         game.getTracker().unfreeze();
     }
 
-    private StaticAbility findStaticAbilityToApply(StaticAbilityLayer layer, List<StaticAbility> staticsForLayer, CardCollectionView preList, Map<StaticAbility, CardCollectionView> affectedPerAbility) {
+    private StaticAbility findStaticAbilityToApply(StaticAbilityLayer layer, List<StaticAbility> staticsForLayer, CardCollectionView preList, Map<StaticAbility, CardCollectionView> affectedPerAbility,
+            Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
         if (staticsForLayer.size() == 1) {
             return staticsForLayer.get(0);
         }
@@ -1309,6 +1316,13 @@ public class GameAction {
                 if (dependency) {
                     dependencyGraph.addVertex(otherStAb);
                     dependencyGraph.addEdge(stAb, otherStAb);
+                    if (dependencies != null) {
+                        if (dependencies.contains(stAb, otherStAb)) {
+                            dependencies.get(stAb, otherStAb).add(layer);
+                        } else {
+                            dependencies.put(stAb, otherStAb, EnumSet.of(layer));
+                        }
+                    }
                 }
 
                 // undo changes and check next pair
