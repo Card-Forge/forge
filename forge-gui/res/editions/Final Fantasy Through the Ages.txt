@@ -1,0 +1,10 @@
+[metadata]
+Code=FCA
+Date=2025-06-13
+Name=Final Fantasy: Through the Ages
+Type=Collector_Edition
+ScryfallCode=FCA
+
+[cards]
+12 M Ancient Copper Dragon @Yoshitaka Amano
+60 R Yuriko, the Tiger's Shadow @Tetsuya Nomura
