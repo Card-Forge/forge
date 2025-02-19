@@ -425,9 +425,6 @@ public class DigEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Imprint")) {
                         host.addImprintedCard(c);
                     }
-                    if (sa.hasParam("ForgetOtherRemembered")) {
-                        host.clearRemembered();
-                    }
                     if (remZone1) {
                         host.addRemembered(c);
                     }
