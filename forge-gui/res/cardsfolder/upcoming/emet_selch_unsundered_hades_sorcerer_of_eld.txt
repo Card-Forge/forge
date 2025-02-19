@@ -12,7 +12,7 @@ SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 DeckHas:Ability$Discard|Graveyard
 DeckHints:Ability$Discard|Mill|Sacrifice
 AlternateMode:DoubleFaced
-Oracle:Vigilance\nWhenever Emet-Selch enters or attacks, draw a card, then discard a card.\n At the beginning of your upkeep, if there are fourteen or more cards in your graveyard, you may transform Emet-Selch.
+Oracle:Vigilance\nWhenever Emet-Selch enters or attacks, draw a card, then discard a card.\nAt the beginning of your upkeep, if there are fourteen or more cards in your graveyard, you may transform Emet-Selch.
 
 ALTERNATE
 
