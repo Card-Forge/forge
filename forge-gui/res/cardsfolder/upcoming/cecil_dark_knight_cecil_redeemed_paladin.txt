@@ -22,7 +22,7 @@ Colors:white
 Types:Legendary Creature Human Knight
 PT:4/4
 K:Lifelink
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAttack | TriggerDescription$ Protect — Whenever CARDNAME attacks, other attacking creatures gain indestructible until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAttack | TriggerDescription$ Protect — Whenever NICKNAME attacks, other attacking creatures gain indestructible until end of turn.
 SVar:HasAttackEffect:TRUE
 SVar:TrigPumpAttack:DB$ PumpAll | ValidCards$ Creature.attacking+Other | KW$ Indestructible
 Oracle:Lifelink\nProtect — Whenever Cecil attacks, other attacking creatures gain indestructible until end of turn.
