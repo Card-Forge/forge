@@ -166,14 +166,6 @@ public class DiscardEffect extends SpellAbilityEffect {
                     toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                 }
 
-                if (mode.equals("NotRemembered")) {
-                    if (!p.canDiscardBy(sa, true)) {
-                        continue;
-                    }
-                    toBeDiscarded = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source, sa);
-                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-                }
-
                 int numCards = 1;
                 if (sa.hasParam("NumCards")) {
                     numCards = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
