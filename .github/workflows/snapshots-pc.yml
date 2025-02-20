@@ -14,7 +14,7 @@ on:
 
 jobs:
   build:
-    if: github.repository_owner == 'Card-Forge'
+    #if: github.repository_owner == 'Card-Forge'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -77,18 +77,20 @@ jobs:
             mv "${fname}.bz2" "${bname}-${d}.tar.bz2"
           done
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Record today's date
+        id: date
+        run: |
+          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+
+      - name: Create a Release
+        uses: elgohr/Github-Release-Action@v5
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          server: ftp.cardforge.org
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: izpack/
-          server-dir: downloads/dailysnapshots/
-          exclude: |
-            *.pom
-            *.repositories
-            *.xml
+          title: Desktop Snapshot ${{ env.date }}
+          tag: snapshot-desktop
+          prerelease: true
+          files: izpack/*
 
       - name: Send failure notification to Discord
         if: failure() # This step runs only if the job fails
