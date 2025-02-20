@@ -87,10 +87,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: Desktop Snapshot ${{ env.date }}
+          name: Desktop Snapshot ${{ env.date }}
           tag: snapshot-desktop
           prerelease: true
           artifacts: izpack/*
+          allowUpdates: true
+          
 
       - name: Send failure notification to Discord
         if: failure() # This step runs only if the job fails
