@@ -90,7 +90,7 @@ jobs:
           title: Desktop Snapshot ${{ env.date }}
           tag: snapshot-desktop
           prerelease: true
-          workdir: izpack/*
+          workdir: izpack
 
       - name: Send failure notification to Discord
         if: failure() # This step runs only if the job fails
