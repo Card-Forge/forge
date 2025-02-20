@@ -15,7 +15,6 @@ import forge.game.trigger.TriggerType;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-
 public class AlterAttributeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
