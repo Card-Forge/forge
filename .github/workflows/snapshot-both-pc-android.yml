@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    if: github.repository_owner == 'Card-Forge'
+    #if: github.repository_owner == 'Card-Forge'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -109,16 +109,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Upload snapshot to GitHub Prerelease
+        uses: ncipollo/release-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          server: ftp.cardforge.org
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: izpack/
-          server-dir: downloads/dailysnapshots/
-          state-name: .ftp-deploy-both-sync-state.json
-          exclude: |
-            *.pom
-            *.repositories
-            *.xml
+          name: Snapshot $(date +%m.%d)
+          tag: daily-snapshots
+          prerelease: true
+          artifacts: izpack/*
+          allowUpdates: true
