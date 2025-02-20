@@ -1844,19 +1844,10 @@ public class GameAction {
 
     public void checkGameOverCondition() {
         // award loses as SBE
-        List<Player> losers = null;
-
-        FCollectionView<Player> allPlayers = game.getPlayers();
-        for (Player p : allPlayers) {
-            if (p.checkLoseCondition()) { // this will set appropriate outcomes
-                if (losers == null) {
-                    losers = Lists.newArrayListWithCapacity(3);
-                }
-                losers.add(p);
-            }
-        }
-
         GameEndReason reason = null;
+        List<Player> losers = null;
+        FCollectionView<Player> allPlayers = game.getPlayers();
+
         // Has anyone won by spelleffect?
         for (Player p : allPlayers) {
             if (!p.hasWon()) {
@@ -1882,24 +1873,17 @@ public class GameAction {
             break;
         }
 
-        // loop through all the non-losing players that can't win
-        // see if all of their opponents are in that "about to lose" collection
-        if (losers != null) {
+        if (reason == null) {
             for (Player p : allPlayers) {
-                if (losers.contains(p)) {
-                    continue;
-                }
-                if (p.cantWin()) {
-                    if (losers.containsAll(p.getOpponents())) {
-                        // what to do here?!?!?!
-                        System.err.println(p.toString() + " is about to win, but can't!");
+                if (p.checkLoseCondition()) { // this will set appropriate outcomes
+                    if (losers == null) {
+                        losers = Lists.newArrayListWithCapacity(3);
                     }
+                    losers.add(p);
                 }
-
             }
         }
 
-        // need a separate loop here, otherwise ConcurrentModificationException is raised
         if (losers != null) {
             for (Player p : losers) {
                 game.onPlayerLost(p);

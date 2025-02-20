@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -18,6 +17,9 @@ public class GameWinEffect extends SpellAbilityEffect {
         for (final Player p : getTargetPlayers(sa)) {
             p.altWinBySpellEffect(card.getName());
         }
+
+        // CR 104.1. A game ends immediately when a player wins
+        card.getGame().getAction().checkGameOverCondition();
     }
 
 }
