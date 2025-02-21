@@ -1,4 +1,4 @@
-Name:Narset, Jeskai Wayfinder
+Name:Narset, Jeskai Waymaster
 ManaCost:U R W
 Types:Legendary Creature Human Monk
 PT:3/4
