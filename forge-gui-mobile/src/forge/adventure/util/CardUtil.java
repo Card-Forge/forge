@@ -590,21 +590,25 @@ public class CardUtil {
             RewardData sub2= new RewardData(base);
             RewardData sub3= new RewardData(base);
             RewardData sub4= new RewardData(base);
-            sub1.count/=5;
-            sub2.count/=5;
-            sub3.count/=5;
-            sub4.count/=5;
+            RewardData sub5= new RewardData(base);
+            sub1.count/=6;
+            sub2.count/=6;
+            sub3.count/=6;
+            sub4.count/=6;
+            sub5.count/=6;
             base.count-=sub1.count;
             base.count-=sub2.count;
             base.count-=sub3.count;
             base.count-=sub4.count;
+            base.count-=sub5.count;
 
             base.subTypes = new String[]{landName.get(0),landName.get(1)};
             sub1.subTypes = new String[]{landName.get(0),landName.get(2)};
             sub2.subTypes = new String[]{landName.get(0),landName.get(3)};
             sub3.subTypes = new String[]{landName.get(1),landName.get(2)};
             sub4.subTypes = new String[]{landName.get(1),landName.get(3)};
-            rewards.addAll(Arrays.asList(sub1,sub2,sub3,sub4));
+            sub5.subtypes = new String[]{landName.get(2),landName.get(3)};
+            rewards.addAll(Arrays.asList(sub1,sub2,sub3,sub4,sub5));
         }
         else if(landName.size()==5)
         {
