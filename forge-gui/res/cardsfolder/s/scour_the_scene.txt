@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenScript$ wu_2_2_detective
 T:Mode$ Sacrificed | ValidCard$ Artifact | ValidPlayer$ You | Execute$ TrigChooseCard | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice an artifact, choose a creature card in your hand or a creature you control. It perpetually gets +1/+0.
 SVar:TrigChooseCard:DB$ ChooseCard | ChoiceZone$ Hand,Battlefield | ChoiceTitle$ Choose a creature card in your hand or a creature you control | Mandatory$ True | Choices$ Creature.YouCtrl | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | PumpZone$ Hand,Battlefield | Defined$ ChosenCard | NumAtt$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | PumpZone$ Hand,Battlefield | Defined$ ChosenCard | NumAtt$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 DeckHas:Ability$Token & Type$Detective
 DeckHints:Type$Artifact
