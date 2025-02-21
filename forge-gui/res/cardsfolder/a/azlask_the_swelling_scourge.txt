@@ -4,7 +4,7 @@ Types:Legendary Creature Eldrazi
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Colorless+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExperience | TriggerDescription$ Whenever CARDNAME or another colorless creature you control dies, you get an experience counter.
 SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
-A:AB$ PumpAll | Cost$ W U B R G | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ X | SubAbility$ DBPumpAll | SpellDescription$ Creatures you control get +X/+X until end of turn, where X is the number of experience counters you have.
+A:AB$ PumpAll | Cost$ W U B R G | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | SubAbility$ DBPumpAll | SpellDescription$ Creatures you control get +X/+X until end of turn, where X is the number of experience counters you have.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Scion.YouCtrl,Spawn.YouCtrl | KW$ Annihilator:1 & Indestructible | SpellDescription$ Scions and Spawns you control gain indestructible and annihilator 1 until end of turn.
 SVar:X:Count$YourCountersExperience
 DeckNeeds:Type$Scion|Spawn

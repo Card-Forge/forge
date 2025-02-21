@@ -21,7 +21,7 @@ Types:Legendary Creature Dwarf Cleric
 PT:4/3
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. If you do, other creatures you control get +X/+X until end of turn, where X is the number of cards you've discarded this turn.
-SVar:TrigPump:AB$ PumpAll | Cost$ Discard<1/Hand> Draw<2/You> | ValidCards$ Creature.Other+YouCtrl | NumAtt$ X | NumDef$ X
+SVar:TrigPump:AB$ PumpAll | Cost$ Discard<1/Hand> Draw<2/You> | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +X | NumDef$ +X
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 SVar:HasAttackEffect:TRUE
 Oracle:Haste\nWhenever Ambergris, Agent of Law attacks, you may discard your hand and draw two cards. If you do, other creatures you control get +X/+X until end of turn, where X is the number of cards you've discarded this turn.
