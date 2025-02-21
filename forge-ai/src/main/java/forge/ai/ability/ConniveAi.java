@@ -18,6 +18,11 @@ public class ConniveAi extends SpellAbilityAi {
             return false; // can't draw anything
         }
 
+        final int num = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ConniveNum", "1"), sa);
+        if (num == 0) {
+            return false; // Won't do anything
+        }
+
         CardCollection list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
 
         // Filter AI-specific targets if provided
