@@ -104,6 +104,8 @@ public class HumanPlay {
                     if (rollback.isInZone(ZoneType.Exile)) {
                         rollback.addMayLookTemp(p);
                     }
+                } else {
+                    sa.undoAlternateHost(rollback);
                 }
             }
 
@@ -151,7 +153,9 @@ public class HumanPlay {
         source.setSplitStateToPlayAbility(sa);
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
-        req.playAbility(mayChooseNewTargets, true, false);
+        if (!req.playAbility(mayChooseNewTargets, true, false)) {
+            sa.undoAlternateHost(source);
+        }
     }
 
     /**
