@@ -15,6 +15,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -551,11 +552,7 @@ public class AttachAi extends SpellAbilityAi {
         final Player ai = sa.getActivatingPlayer();
         final Card attachSourceLki = CardCopyService.getLKICopy(attachSource);
         attachSourceLki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
-        // Suppress original attach Spell to replace it with another
-        attachSourceLki.getFirstAttachSpell().setSuppressed(true);
 
-        //TODO for Reanimate Auras i need the new Attach Spell, in later versions it might be part of the Enchant Keyword
-        attachSourceLki.addSpellAbility(AbilityFactory.getAbility(attachSourceLki, "NewAttach"));
         List<Card> betterList = CardLists.filter(list, c -> {
             final Card lki = CardCopyService.getLKICopy(c);
             // need to fake it as if lki would be on the battlefield
@@ -925,6 +922,10 @@ public class AttachAi extends SpellAbilityAi {
         return true;
     }
 
+    private static boolean isAuraSpell(final SpellAbility sa) {
+        return sa.isSpell() && sa.getHostCard().isAura();
+    }
+
     /**
      * Attach preference.
      *
@@ -940,7 +941,23 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static boolean attachPreference(final SpellAbility sa, final TargetRestrictions tgt, final boolean mandatory) {
         GameObject o;
-        if (tgt.canTgtPlayer()) {
+        boolean spellCanTargetPlayer = false;
+        if (isAuraSpell(sa)) {
+            Card source = sa.getHostCard();
+            if (!source.hasKeyword(Keyword.ENCHANT)) {
+                return false;
+            }
+            for (KeywordInterface ki : source.getKeywords(Keyword.ENCHANT)) {
+                String ko = ki.getOriginal();
+                String m[] = ko.split(":");
+                String v = m[1];
+                if (v.contains("Player") || v.contains("Opponent")) {
+                    spellCanTargetPlayer = true;
+                    break;
+                }
+            }
+        }
+        if (tgt.canTgtPlayer() && (!isAuraSpell(sa) || spellCanTargetPlayer)) {
             List<Player> targetable = new ArrayList<>();
             for (final Player player : sa.getHostCard().getGame().getPlayers()) {
                 if (sa.canTarget(player)) {

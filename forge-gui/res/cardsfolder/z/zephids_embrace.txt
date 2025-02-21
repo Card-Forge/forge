@@ -1,7 +1,7 @@
 Name:Zephid's Embrace
 ManaCost:2 U U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying & Shroud | Description$ Enchanted creature gets +2/+2 and has flying and shroud. (It can't be the target of spells or abilities.)
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying and shroud. (It can't be the target of spells or abilities.)

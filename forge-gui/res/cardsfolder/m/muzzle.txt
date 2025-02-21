@@ -1,7 +1,7 @@
 Name:Muzzle
 ManaCost:1 W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidSource$ Creature.EnchantedBy | Description$ Prevent all damage that would be dealt by enchanted creature.
 Oracle:Enchant creature\nPrevent all damage that would be dealt by enchanted creature.

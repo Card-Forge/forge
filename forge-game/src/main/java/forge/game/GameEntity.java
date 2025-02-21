@@ -37,11 +37,11 @@ import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityCantAttach;
 import forge.game.zone.ZoneType;
 
@@ -267,15 +267,18 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     protected boolean canBeEnchantedBy(final Card aura) {
-        // TODO need to check for multiple Enchant Keywords
-
-        SpellAbility sa = aura.getFirstAttachSpell();
-        TargetRestrictions tgt = null;
-        if (sa != null) {
-            tgt = sa.getTargetRestrictions();
+        if (!aura.hasKeyword(Keyword.ENCHANT)) {
+            return false;
         }
-
-        return tgt != null && isValid(tgt.getValidTgts(), aura.getController(), aura, sa);
+        for (KeywordInterface ki : aura.getKeywords(Keyword.ENCHANT)) {
+            String k = ki.getOriginal();
+            String m[] = k.split(":");
+            String v = m[1];
+            if (!isValid(v.split(","), aura.getController(), aura, null)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean hasCounters() {

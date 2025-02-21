@@ -1,8 +1,7 @@
 Name:Shadow of the Second Sun
 ManaCost:4 U U
 Types:Enchantment Aura
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player
+K:Enchant:Player
 T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigAddPhase | TriggerDescription$ At the beginning of each of enchanted player's postcombat main phases, there is an additional beginning phase after this phase. (The end step happens after the added untap, upkeep, and draw steps.)
 SVar:TrigAddPhase:DB$ AddPhase | ExtraPhase$ Beginning
 AI:RemoveDeck:Random

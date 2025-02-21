@@ -1,8 +1,8 @@
 Name:Way of the Thief
 ManaCost:3 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 S:Mode$ CantBlockBy | ValidAttacker$ Card.EnchantedBy | IsPresent$ Gate.YouCtrl | Description$ Enchanted creature can't be blocked as long as you control a Gate.
 DeckHints:Type$Gate

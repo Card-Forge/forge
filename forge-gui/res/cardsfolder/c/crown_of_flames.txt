@@ -1,8 +1,8 @@
 Name:Crown of Flames
 ManaCost:R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
 A:AB$ ChangeZone | Cost$ R | Origin$ Battlefield | Destination$ Hand | Defined$ Self | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:NonStackingAttachEffect:True

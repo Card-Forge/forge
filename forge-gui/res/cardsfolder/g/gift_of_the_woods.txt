@@ -1,8 +1,8 @@
 Name:Gift of the Woods
 ManaCost:G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigPump1 | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked, it gets +0/+3 until end of turn and you gain 1 life.
 T:Mode$ AttackerBlocked | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigPump2 | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked, it gets +0/+3 until end of turn and you gain 1 life.
 SVar:TrigPump1:DB$ Pump | Defined$ TriggeredBlockerLKICopy | NumDef$ +3 | SubAbility$ DBGainLife

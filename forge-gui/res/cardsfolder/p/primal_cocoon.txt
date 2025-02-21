@@ -1,8 +1,8 @@
 Name:Primal Cocoon
 ManaCost:G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on enchanted creature.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigSac | TriggerDescription$ When enchanted creature attacks or blocks, sacrifice CARDNAME.

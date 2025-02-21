@@ -1,8 +1,8 @@
 Name:Cloak of Invisibility
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Phasing | Description$ Enchanted creature has phasing and can't be blocked except by Walls.
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.nonWall | Secondary$ True | Description$ Enchanted creature can't be blocked except by Walls.
 Oracle:Enchant creature\nEnchanted creature has phasing and can't be blocked except by Walls. (It phases in or out before its controller untaps during each of their untap steps. While it's phased out, it's treated as though it doesn't exist.)

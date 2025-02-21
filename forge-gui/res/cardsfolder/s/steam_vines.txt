@@ -1,8 +1,8 @@
 Name:Steam Vines
 ManaCost:1 R R
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Curse
+K:Enchant:Land
+SVar:AttachAILogic:Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it and CARDNAME deals 1 damage to that land's controller. That player attaches CARDNAME to a land of their choice.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy | SubAbility$ DBDmg
 SVar:DBDmg:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 1 | SubAbility$ DBAttach

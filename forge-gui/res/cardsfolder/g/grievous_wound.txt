@@ -1,8 +1,8 @@
 Name:Grievous Wound
 ManaCost:3 B B
 Types:Enchantment Aura
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
 S:Mode$ CantGainLife | ValidPlayer$ Player.EnchantedBy | Description$ Enchanted player can't gain life.
 T:Mode$ DamageDoneOnce | Execute$ TrigLoseLife | ValidTarget$ Player.EnchantedBy | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is dealt damage, they lose half their life, rounded up.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X

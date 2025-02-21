@@ -1,8 +1,8 @@
 Name:Epiphany Storm
 ManaCost:R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ UCDraw | Description$ Enchanted creature has "{R}, {T}, Discard a card: Draw a card."
 SVar:UCDraw:AB$ Draw | Cost$ R T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All

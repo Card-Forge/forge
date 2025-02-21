@@ -1,8 +1,8 @@
 Name:Slow Motion
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless they pay {2}.
 SVar:TrigUpkeep:DB$ SacrificeAll | Defined$ Enchanted | UnlessPayer$ EnchantedController | UnlessCost$ 2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.

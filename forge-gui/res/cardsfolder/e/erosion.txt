@@ -1,8 +1,8 @@
 Name:Erosion
 ManaCost:U U U
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Curse
+K:Enchant:Land
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of the upkeep of enchanted land's controller, destroy that land unless that player pays {1} or 1 life.
 SVar:TrigDestroy:DB$ GenericChoice | Choices$ Pay1,Pay1Life | AILogic$ PayUnlessCost | Defined$ TriggeredPlayer
 SVar:Pay1:DB$ Destroy | Defined$ Enchanted | UnlessCost$ 1 | UnlessPayer$ TriggeredPlayer | SpellDescription$ Destroy enchanted land unless you pay {1}.

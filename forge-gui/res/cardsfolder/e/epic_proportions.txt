@@ -2,7 +2,7 @@ Name:Epic Proportions
 ManaCost:4 G G
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 5 | AddToughness$ 5 | AddKeyword$ Trample | Description$ Enchanted creature gets +5/+5 and has trample.
 Oracle:Flash\nEnchant creature\nEnchanted creature gets +5/+5 and has trample.

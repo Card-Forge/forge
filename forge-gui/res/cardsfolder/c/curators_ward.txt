@@ -1,8 +1,8 @@
 Name:Curator's Ward
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant permanent
-A:SP$ Attach | ValidTgts$ Permanent | AILogic$ Pump
+K:Enchant:Permanent
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddKeyword$ Hexproof | Description$ Enchanted permanent has hexproof.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.AttachedBy+Historic | Execute$ TrigDraw | TriggerDescription$ When enchanted permanent leaves the battlefield, if it was historic, draw two cards. (Artifacts, legendaries, and Sagas are historic.)
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2

@@ -1,8 +1,8 @@
 Name:Ephara's Radiance
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABGainLife | Description$ Enchanted creature has "{1}{W}, {T}: You gain 3 life."
 SVar:ABGainLife:AB$ GainLife | Cost$ 1 W T | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 Oracle:Enchant creature\nEnchanted creature has "{1}{W}, {T}: You gain 3 life."

@@ -1,8 +1,8 @@
 Name:Phantom Wings
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Battlefield | Destination$ Hand | Defined$ Enchanted | SpellDescription$ Return enchanted creature to owner's hand.
 Oracle:Enchant creature\nEnchanted creature has flying.\nSacrifice Phantom Wings: Return enchanted creature to its owner's hand.

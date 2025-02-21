@@ -1,8 +1,8 @@
 Name:Eternal Warrior
 ManaCost:R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance.
 DeckHas:Keyword$Vigilance
 Oracle:Enchant creature\nEnchanted creature has vigilance.

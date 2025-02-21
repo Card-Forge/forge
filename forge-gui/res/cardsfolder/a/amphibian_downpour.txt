@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Enchantment Aura
 K:Flash
 K:Storm
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | SetColor$ Blue | RemoveAllAbilities$ True | AddType$ Creature & Frog | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Description$ Enchanted creature loses all abilities and is a blue Frog creature with base power and toughness 1/1.
 DeckHas:Type$Frog
 Oracle:Flash\nStorm\nEnchant creature\nEnchanted creature loses all abilities and is a blue Frog creature with base power and toughness 1/1.

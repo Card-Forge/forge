@@ -1,7 +1,8 @@
 Name:Akki War Paint
 ManaCost:R
 Types:Enchantment Aura
-K:Enchant artifact or creature
-A:SP$ Attach | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AITgts$ Creature | AILogic$ Pump
+K:Enchant:Artifact,Creature:artifact or creature
+SVar:AttachAITgts:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | Description$ As long as enchanted permanent is a creature, it gets +2/+1.
 Oracle:Enchant artifact or creature\nAs long as enchanted permanent is a creature, it gets +2/+1.

@@ -1,8 +1,8 @@
 Name:Unable to Scream
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 2 | RemoveAllAbilities$ True | AddType$ Artifact & Creature & Toy | Description$ Enchanted creature loses all abilities and is a Toy artifact creature with base power and toughness 0/2 in addition to its other types.
 R:Event$ TurnFaceUp | ValidCard$ Card.EnchantedBy+faceDown | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ As long as enchanted creature is face down, it can't be turned face up.
 DeckHas:Type$Toy
