@@ -347,6 +347,9 @@ public class CardCopyService {
         newCopy.setChosenType2(copyFrom.getChosenType2());
         newCopy.setNamedCards(Lists.newArrayList(copyFrom.getNamedCards()));
         newCopy.setChosenColors(Lists.newArrayList(copyFrom.getChosenColors()));
+        if (copyFrom.hasChosenLetter()) {
+            newCopy.setChosenLetters(Lists.newArrayList(copyFrom.getChosenLetters()));
+        }
         if (copyFrom.hasChosenNumber()) {
             newCopy.setChosenNumber(copyFrom.getChosenNumber());
         }
