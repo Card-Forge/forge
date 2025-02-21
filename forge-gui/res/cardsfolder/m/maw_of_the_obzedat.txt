@@ -2,6 +2,6 @@ Name:Maw of the Obzedat
 ManaCost:3 W B
 Types:Creature Thrull
 PT:3/3
-A:AB$ PumpAll | Cost$ Sac<1/Creature> | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+A:AB$ PumpAll | Cost$ Sac<1/Creature> | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 SVar:AIPreference:SacCost$Creature.token+powerLE2,Creature.cmcLE2+powerLE2
 Oracle:Sacrifice a creature: Creatures you control get +1/+1 until end of turn.

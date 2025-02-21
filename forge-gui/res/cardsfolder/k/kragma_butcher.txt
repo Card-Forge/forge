@@ -3,5 +3,5 @@ ManaCost:2 R
 Types:Creature Minotaur Warrior
 PT:2/3
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Inspired — Whenever CARDNAME becomes untapped, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2
 Oracle:Inspired — Whenever Kragma Butcher becomes untapped, it gets +2/+0 until end of turn.
