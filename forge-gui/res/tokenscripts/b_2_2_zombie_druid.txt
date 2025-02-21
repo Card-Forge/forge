@@ -1,0 +1,6 @@
+Name:Zombie Druid Token
+ManaCost:no cost
+Colors:black
+Types:Creature Zombie Druid
+PT:2/2
+Oracle:
