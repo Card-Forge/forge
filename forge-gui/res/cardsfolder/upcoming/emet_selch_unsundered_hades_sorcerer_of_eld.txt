@@ -1,0 +1,29 @@
+Name:Emet-Selch, Unsundered
+ManaCost:1 U B
+Types:Legendary Creature Elder Wizard
+PT:2/4
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME enters or attacks, draw a card, then discard a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME enters or attacks, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE14 | OptionalDecider$ You | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if there are fourteen or more cards in your graveyard, you may transform NICKNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+DeckHas:Ability$Discard|Graveyard
+DeckHints:Ability$Discard|Mill|Sacrifice
+AlternateMode:DoubleFaced
+Oracle:Vigilance\nWhenever Emet-Selch enters or attacks, draw a card, then discard a card.\nAt the beginning of your upkeep, if there are fourteen or more cards in your graveyard, you may transform Emet-Selch.
+
+ALTERNATE
+
+Name:Hades, Sorcerer of Eld
+ManaCost:no cost
+Colors:blue,black
+Types:Legendary Creature Avatar
+PT:6/6
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Graveyard | Condition$ PlayerTurn | MayPlay$ True | Description$ Echo of the Lost — During your turn, you may play cards from your graveyard.
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.YouOwn | ReplaceWith$ Exile | Description$ If a card or token would be put into your graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+SVar:NonStackingEffect:True
+Oracle:Vigilance\nEcho of the Lost — During your turn, you may play cards from your graveyard.\nIf a card or token would be put into your graveyard from anywhere, exile it instead.

@@ -1,7 +1,7 @@
 Name:Bag of Devouring
 ManaCost:B
 Types:Artifact
-T:Mode$ Sacrificed | ValidCard$ Artifact.nonToken+Other,Creature.nonToken+Other | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you sacrifice another nontoken artifact or creature, exile it.
+T:Mode$ Sacrificed | ValidCard$ Artifact.!token+Other,Creature.!token+Other | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you sacrifice another nontoken artifact or creature, exile it.
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
 A:AB$ Draw | Cost$ 2 T Sac<1/Artifact.Other;Creature.Other/another artifact or creature> | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ RollDice | Cost$ 3 T Sac<1/CARDNAME> | Sides$ 10 | ResultSVar$ X | SubAbility$ DBChoose | SpellDescription$ Roll a d10. Return up to X cards from among cards exiled with CARDNAME to their owners' hands, where X is the result.

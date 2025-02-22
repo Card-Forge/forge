@@ -1050,7 +1050,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(dethroneTrigger);
         } else if (keyword.equals("Double team")) {
-            final String trigString = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | TriggerZones$ Battlefield" +
+            final String trigString = "Mode$ Attacks | ValidCard$ Card.Self+!token | TriggerZones$ Battlefield" +
                     " | Secondary$ True | TriggerDescription$ Double team (" + inst.getReminderText() + ")";
             final String maSt = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True | Conjure$ True";
             final String puSt = "DB$ Pump | RememberObjects$ Self";
@@ -3764,6 +3764,8 @@ public class CardFactoryUtil {
                 desc = "Basic land";
             } else if (type.equals("Land.Artifact")) {
                 desc = "Artifact land";
+            } else if (type.startsWith("Card.with")) {
+                desc = type.substring(9);
             }
 
             sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(desc).append("cycling ");
@@ -3784,17 +3786,20 @@ public class CardFactoryUtil {
         if (keyword.startsWith("Affinity")) {
             final String[] k = keyword.split(":");
             final String t = k[1];
-            String d = "";
-            if (k.length > 2) {
-                final StringBuilder s = new StringBuilder();
-                s.append(k[2]).append("s");
-                d = s.toString();
-            }
 
-            String desc = "Artifact".equals(t) ? "artifacts" : CardType.getPluralType(t);
-            if (!d.isEmpty()) {
-                desc = d;
+            String desc;
+            if(k.length > 2) {
+                String typeText = k[2];
+                if(typeText.contains(" with "))
+                    desc = typeText.substring(typeText.indexOf(" with ") + 6);
+                else
+                    desc = typeText + "s";
             }
+            else if ("Artifact".equals(t))
+                desc = "artifacts";
+            else
+                desc = CardType.getPluralType(t);
+
             StringBuilder sb = new StringBuilder();
             sb.append("Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ AffinityX | EffectZone$ All");
             sb.append("| Description$ Affinity for ").append(desc);
@@ -4124,7 +4129,7 @@ public class CardFactoryUtil {
 
         SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
-        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell+nonToken";
+        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell+!token";
         AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
 
         StringBuilder sbPlay = new StringBuilder();

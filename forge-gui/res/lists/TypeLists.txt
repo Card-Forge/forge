@@ -185,6 +185,7 @@ Monger:Mongers
 Mongoose:Mongooses
 Monk:Monks
 Monkey:Monkeys
+Moogle:Moogles
 Moonfolk:Moonfolk
 Mount:Mounts
 Mouse:Mice

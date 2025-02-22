@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Human Cleric
 PT:2/2
 K:Flash
-R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.nonToken+wasNotCast | ReplaceWith$ Exile | Description$ If a nontoken creature would enter and it wasn't cast, exile it instead.
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.!token+wasNotCast | ReplaceWith$ Exile | Description$ If a nontoken creature would enter and it wasn't cast, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 Oracle:Flash\nIf a nontoken creature would enter and it wasn't cast, exile it instead.

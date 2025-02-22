@@ -629,7 +629,7 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 1 Galvanic Blast|SPG
 1 Lord of the Undead|SPG
 1 Pathbreaker Ibex|SPG
-1 Skysoverign, Consul Flagship|SPG
+1 Skysovereign, Consul Flagship|SPG
 1 Thoughtcast|SPG
 1 Whir of Invention|SPG
 

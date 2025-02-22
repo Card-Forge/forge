@@ -203,6 +203,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventPlayerPriority event) {
         needCombatUpdate = true;
+        matchController.updateDependencies();
         return processEvent();
     }
 
@@ -449,12 +450,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         }
 
         return processCards(cards, cardsRefreshDetails);
-    }
-
-    public Void visit(final GameEventSpeedChanged event) {
-        Player p = event.player;
-        processPlayer(p, livesUpdate);
-        return processEvent();
     }
 
     public Void visit(final GameEventLandPlayed event) {

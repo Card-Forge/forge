@@ -6,7 +6,7 @@ K:Bloodthirst:X
 K:Menace
 T:Mode$ DamageDoneOnce | Execute$ TrigChoose | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, choose an opponent at random. NICKNAME deals damage equal to its power to that player unless they sacrifice a nontoken creature.
 SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Random$ True | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X | UnlessCost$ Sac<1/Creature.nonToken/a nontoken creature> | UnlessPayer$ ChosenPlayer | SubAbility$ DBCleanup
+SVar:DBDealDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X | UnlessCost$ Sac<1/Creature.!token/a nontoken creature> | UnlessPayer$ ChosenPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters

@@ -112,6 +112,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int expentThisTurn;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
     private int venturedThisTurn;
+    private int attractionsVisitedThisTurn;
     private int descended;
     private int numRingTemptedYou;
     private int devotionMod;
@@ -2039,14 +2040,12 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean loseConditionMet(final GameLossReason state, final String spellName) {
         if (state != GameLossReason.OpponentWon) {
-            // Replacement effects
             Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             repParams.put(AbilityKey.LoseReason, state);
             if (game.getReplacementHandler().run(ReplacementType.GameLoss, repParams) != ReplacementResult.NotReplaced) {
                 return false;
             }
         }
-        //final String spellName = sa != null ? sa.getHostCard().getName() : null;
         setOutcome(PlayerOutcome.loss(state, spellName));
         return true;
     }
@@ -2589,6 +2588,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setCommitedCrimeThisTurn(0);
         diceRollsThisTurn = Lists.newArrayList();
         setExpentThisTurn(0);
+        attractionsVisitedThisTurn = 0;
 
         damageReceivedThisTurn.clear();
         planeswalkedToThisTurn.clear();
@@ -4008,11 +4008,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void visitAttractions(int light) {
         CardCollection attractions = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isAttractionWithLight(light));
         for (Card c : attractions) {
+            if(!c.wasVisitedThisTurn())
+                this.attractionsVisitedThisTurn++;
             c.visitAttraction(this);
         }
     }
     public void rollToVisitAttractions() {
         this.visitAttractions(RollDiceEffect.rollDiceForPlayerToVisitAttractions(this));
+    }
+    public int getAttractionsVisitedThisTurn() {
+        return this.attractionsVisitedThisTurn;
     }
 
     public int getCrankCounter() {

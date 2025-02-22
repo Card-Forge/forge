@@ -1,7 +1,7 @@
 Name:Become Anonymous
 ManaCost:2 U U
 Types:Instant
-A:SP$ Pump | Origin$ Battlefield | ValidTgts$ Creature.nonToken+YouOwn | TgtPrompt$ Select target nontoken creature you own | RememberTargets$ True | SubAbility$ DBExileTopCard | SpellDescription$ Exile target nontoken creature you own and the top two cards of your library in a face-down pile, shuffle that pile, then cloak those cards. They enter tapped. (To cloak a card, put it onto the battlefield face down as a 2/2 creature with ward {2}. Turn it face up any time for its mana cost if it's a creature card.)
+A:SP$ Pump | Origin$ Battlefield | ValidTgts$ Creature.!token+YouOwn | TgtPrompt$ Select target nontoken creature you own | RememberTargets$ True | SubAbility$ DBExileTopCard | SpellDescription$ Exile target nontoken creature you own and the top two cards of your library in a face-down pile, shuffle that pile, then cloak those cards. They enter tapped. (To cloak a card, put it onto the battlefield face down as a 2/2 creature with ward {2}. Turn it face up any time for its mana cost if it's a creature card.)
 SVar:DBExileTopCard:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | NoReveal$ True | NoLooking$ True | RememberChanged$ True | SubAbility$ ExileAll
 SVar:ExileAll:DB$ ChangeZone | Origin$ Battlefield,Library | Destination$ Exile | Defined$ Remembered | SubAbility$ DBCloak
 SVar:DBCloak:DB$ Cloak | Defined$ Remembered | Tapped$ True | Shuffle$ True | SubAbility$ DBCleanup
