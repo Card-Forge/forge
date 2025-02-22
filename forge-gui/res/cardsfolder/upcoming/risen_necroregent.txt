@@ -1,9 +1,0 @@
-Name:Risen Necroregent
-ManaCost:4 B
-Types:Creature Zombie Cat Knight
-PT:5/4
-K:Start your engines
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigToken | MaxSpeed$ True | TriggerDescription$ Max speed — At the beginning of your end step, create a 2/2 black Zombie creature token.
-SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie
-DeckHas:Ability$Token
-Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — At the beginning of your end step, create a 2/2 black Zombie creature token.

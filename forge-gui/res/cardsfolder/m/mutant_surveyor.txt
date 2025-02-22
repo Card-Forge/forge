@@ -1,0 +1,9 @@
+Name:Mutant Surveyor
+ManaCost:2 B
+Types:Creature Mutant Scout
+PT:2/3
+K:Start your engines
+A:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ This creature gets +1/+1 until end of turn.
+S:Mode$ Continuous | EffectZone$ Graveyard | AffectedZone$ Graveyard | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABDraw | Description$ Max speed — {3}, Exile this card from your graveyard: Draw a card.
+SVar:ABDraw:AB$ Draw | PrecostDesc$ Max speed — | Cost$ 3 ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | Secondary$ True | SpellDescription$ Draw a card.
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{2}: This creature gets +1/+1 until end of turn.\nMax speed — {3}, Exile this card from your graveyard: Draw a card.

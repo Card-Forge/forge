@@ -1,0 +1,11 @@
+Name:Pride of the Road
+ManaCost:3 W
+Types:Creature Zombie Cat Warrior
+PT:2/5
+K:Vigilance
+K:Start your engines
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddTrigger$ PhaseTrig | Description$ Max speed — At the beginning of combat on your turn, target creature or Vehicle you control gains double strike until end of turn.
+SVar:PhaseTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Max speed — At the beginning of combat on your turn, target creature or Vehicle you control gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl,Vehicle.YouCtrl | TgtPrompt$ Select target creature or Vehicle | KW$ Double Strike
+SVar:PlayMain1:TRUE
+Oracle:Vigilance\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — At the beginning of combat on your turn, target creature or Vehicle you control gains double strike until end of turn.

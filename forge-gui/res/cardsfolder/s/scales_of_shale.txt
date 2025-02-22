@@ -1,8 +1,7 @@
 Name:Scales of Shale
 ManaCost:2 B
 Types:Instant
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each Lizard you control.
-SVar:X:Count$Valid Lizard.YouCtrl
+K:Affinity:Lizard
 A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | KW$ Lifelink & Indestructible | SpellDescription$ Target creature gets +2/+0 and gains lifelink and indestructible until end of turn.
 DeckHints:Type$Lizard
-Oracle:This spell costs {1} less to cast for each Lizard you control.\nTarget creature gets +2/+0 and gains lifelink and indestructible until end of turn.
+Oracle:Affinity for Lizards (This spell costs {1} less to cast for each Lizard you control.)\nTarget creature gets +2/+0 and gains lifelink and indestructible until end of turn.

@@ -1,0 +1,11 @@
+Name:Far Fortune, End Boss
+ManaCost:2 B R
+Types:Legendary Creature Human Mercenary
+PT:4/5
+K:Start your engines
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, NICKNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Opponent
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddReplacementEffect$ DamageRep | Description$ Max speed — If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.
+SVar:DamageRep:Event$ DamageDone | MaxSpeed$ True | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl | ValidTarget$ Player.Opponent,Permanent.OppCtrl | ReplaceWith$ DmgPlus | Secondary$ True | Description$ Max speed — If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.
+SVar:DmgPlus:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ ReplaceCount$DamageAmount/Plus.1
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nWhenever you attack, Far Fortune deals 1 damage to each opponent.\nMax speed — If a source you control would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.

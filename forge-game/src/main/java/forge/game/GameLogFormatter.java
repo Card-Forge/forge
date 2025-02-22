@@ -273,8 +273,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             }
 
             String controllerName;
-            if (defender instanceof Card) {
-                Card c = ((Card)defender);
+            if (defender instanceof Card c) {
                 controllerName = c.isBattle() ? c.getProtectingPlayer().getName() : c.getController().getName();
             } else {
                 controllerName = defender.getName();
@@ -305,12 +304,16 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventCardForetold ev) {
-        String sb = TextUtil.concatWithSpace(ev.activatingPlayer.toString(), "has foretold.");
-        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, sb);
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
     }
 
     @Override
     public GameLogEntry visit(GameEventCardPlotted ev) {
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventDoorChanged ev) {
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
     }
 

@@ -1,6 +1,6 @@
 Name:Aether Gust
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | ValidTgts$ Card.inZoneStack+Red,Card.inZoneStack+Green,Permanent.Red,Permanent.Green | TgtZone$ Battlefield,Stack | TgtPrompt$ Select target spell or permanent that's red or green | AlternativeDecider$ TargetedOwner | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ {c:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ Choose target spell or permanent that's red or green. Its owner puts it on the top or bottom of their library.
+A:SP$ ChangeZone | ValidTgts$ Card.inZoneStack+Red,Card.inZoneStack+Green,Permanent.Red,Permanent.Green | TgtZone$ Battlefield,Stack | TgtPrompt$ Select target spell or permanent that's red or green | AlternativeDecider$ TargetedOwner | Origin$ Battlefield,Stack | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ {c:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ Choose target spell or permanent that's red or green. Its owner puts it on the top or bottom of their library.
 AI:RemoveDeck:Random
 Oracle:Choose target spell or permanent that's red or green. Its owner puts it on the top or bottom of their library.

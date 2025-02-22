@@ -113,8 +113,7 @@ public class TriggerDamageDone extends Trigger {
             final Object target = runParams.get(AbilityKey.DamageTarget);
             final Card source = (Card) runParams.get(AbilityKey.DamageSource);
 
-            if (target instanceof Player) {
-                final Player trigTgt = (Player) target;
+            if (target instanceof Player trigTgt) {
                 if (!Expressions.compare(trigTgt.getAssignedDamage(null, source), operator, operand)) {
                     return false;
                 }

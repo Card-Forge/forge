@@ -1,0 +1,13 @@
+Name:Mendicant Core, Guidelight
+ManaCost:W U
+Types:Legendary Artifact Creature Robot
+PT:*/3
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to the number of artifacts you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+K:Start your engines
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddTrigger$ CastTrig | Description$ Max speed — Whenever you cast an artifact spell, you may pay {1}. If you do, copy it. (The copy becomes a token.)
+SVar:CastTrig:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigCopy | OptionalDecider$ You | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Max speed — Whenever you cast an artifact spell, you may pay {1}. If you do, copy it. (The copy becomes a token.)
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 1 | Defined$ TriggeredSpellAbility | Amount$ 1
+DeckHints:Type$Artifact
+DeckHas:Ability$Token
+Oracle:Mendicant Core's power is equal to the number of artifacts you control.\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — Whenever you cast an artifact spell, you may pay {1}. If you do, copy it. (The copy becomes a token.)

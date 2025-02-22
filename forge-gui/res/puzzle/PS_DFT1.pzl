@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Aetherdrift #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/02/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Ensure your solution satisfies all possible blocks. Any cards drawn are irrelevant to the puzzle. Your speed is currently 2.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=13
+p0speed=2
+p0hand=Lightning Strike;Return the Favor;Betrayer's Bargain;Adaptive Automaton;Hazoret, Godseeker
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Hurler Cyclops;The Last Ride;Heartfire Hero;Heartfire Hero;Far Fortune, End Boss;Mountain;Mountain;Mountain;Swamp;Swamp
+p1life=15
+p1speed=0
+p1battlefield=Essence of Orthodoxy;Elesh Norn;Essence of Orthodoxy

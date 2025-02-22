@@ -1,0 +1,10 @@
+Name:Gastal Raider
+ManaCost:2 B
+Types:Creature Vampire Rogue
+PT:2/1
+K:Start your engines
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, target opponent reveals their hand. You choose an instant or sorcery card from it. That player discards that card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ RevealYouChoose | DiscardValid$ Instant,Sorcery
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ MaxSpeedStatic | Description$ Max speed — This creature gets +1/+1 and has menace.
+SVar:MaxSpeedStatic:Mode$ Continuous | Secondary$ True | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Menace | Description$ Max speed — This creature gets +1/+1 and has menace.
+Oracle:Start your engines!\nWhen this creature enters, target opponent reveals their hand. You choose an instant or sorcery card from it. That player discards that card.\nMax speed — This creature gets +1/+1 and has menace.
