@@ -1,8 +1,8 @@
 Name:Carry Away
 ManaCost:U U
 Types:Enchantment Aura
-K:Enchant Equipment
-A:SP$ Attach | ValidTgts$ Equipment | AILogic$ GainControl
+K:Enchant:Equipment
+SVar:AttachAILogic:GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted Equipment.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUnattach | TriggerDescription$ When CARDNAME enters, unattach enchanted Equipment.
 SVar:TrigUnattach:DB$ UnattachAll | Defined$ Valid Card.EquippedByEnchanted | UnattachValid$ Equipment.EnchantedBy

@@ -1,8 +1,8 @@
 Name:Private Research
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPrivateResearchPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a page counter on CARDNAME.
 SVar:TrigPrivateResearchPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPrivateResearchDraw | TriggerDescription$ When enchanted creature dies, draw a card for each page counter on CARDNAME.

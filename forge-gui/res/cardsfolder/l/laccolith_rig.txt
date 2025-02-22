@@ -1,8 +1,9 @@
 Name:Laccolith Rig
 ManaCost:R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAITgts:Card.powerGE1
+SVar:AttachAILogic:Pump
 T:Mode$ AttackerBlocked | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ LaccolithDmg | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature. If you do, the first creature assigns no combat damage this turn.
 SVar:LaccolithDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ RigX | SubAbility$ DBNoCombatDamage | DamageSource$ TriggeredAttacker
 SVar:DBNoCombatDamage:DB$ Effect | RememberObjects$ TriggeredAttackerLKICopy | StaticAbilities$ SNoCombatDamage | ForgetOnMoved$ Battlefield

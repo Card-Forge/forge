@@ -2,8 +2,8 @@ Name:Shardmage's Rescue
 ManaCost:W
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature you control
-A:SP$ Attach | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | IsPresent$ Card.Self+ThisTurnEntered | Affected$ Creature.EnchantedBy | AddKeyword$ Hexproof | Description$ As long as CARDNAME entered this turn, enchanted creature has hexproof.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
 Oracle:Flash\nEnchant creature you control\nAs long as Shardmage's Rescue entered this turn, enchanted creature has hexproof.\nEnchanted creature gets +1/+1.

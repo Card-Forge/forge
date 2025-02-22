@@ -1,7 +1,7 @@
 Name:Vigilance
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance. (Attacking doesn't cause it to tap.)
 Oracle:Enchant creature\nEnchanted creature has vigilance. (Attacking doesn't cause it to tap.)

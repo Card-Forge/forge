@@ -1,8 +1,8 @@
 Name:Pemmin's Aura
 ManaCost:1 U U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 A:AB$ Untap | Cost$ U | Defined$ Enchanted | SpellDescription$ Untap enchanted creature.
 A:AB$ Pump | Cost$ U | Defined$ Enchanted | KW$ Flying | SpellDescription$ Enchanted creature gains flying until end of turn.
 A:AB$ Pump | Cost$ U | Defined$ Enchanted | KW$ Shroud | SpellDescription$ Enchanted creature gains shroud until end of turn.

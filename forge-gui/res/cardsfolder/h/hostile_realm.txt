@@ -1,8 +1,8 @@
 Name:Hostile Realm
 ManaCost:2 R
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ Pump | Description$ Enchanted land has "{T}: Target creature can't block this turn."
 SVar:Pump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Target creature can't block this turn.
 SVar:NonStackingAttachEffect:True

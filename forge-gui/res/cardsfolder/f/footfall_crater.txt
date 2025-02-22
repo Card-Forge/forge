@@ -1,9 +1,9 @@
 Name:Footfall Crater
 ManaCost:R
 Types:Enchantment Aura
-K:Enchant land
+K:Enchant:Land
 K:Cycling:1
-A:SP$ Attach | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Pump
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ DBPump | Description$ Enchanted land has "{T}: Target creature gains trample and haste until end of turn."
 SVar:DBPump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample & Haste | SpellDescription$ Target creature gains trample and haste until end of turn.
 SVar:NonStackingAttachEffect:True

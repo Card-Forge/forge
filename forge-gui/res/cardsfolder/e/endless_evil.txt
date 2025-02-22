@@ -1,8 +1,8 @@
 Name:Endless Evil
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature you control
-A:SP$ Attach | ValidTgts$ Creature.YouCtrl | AILogic$ HighestEvaluation
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:HighestEvaluation
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a 1/1.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Enchanted | SetPower$ 1 | SetToughness$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When enchanted creature dies, if that creature was a Horror, return CARDNAME to its owner's hand.

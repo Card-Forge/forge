@@ -1,8 +1,8 @@
 Name:Twisted Embrace
 ManaCost:2 B B
 Types:Enchantment Aura
-K:Enchant artifact or creature you control
-A:SP$ Attach | ValidTgts$ Creature.YouCtrl,Artifact.YouCtrl | TgtPrompt$ Select target artifact or creature you control | AITgts$ Creature,Vehicle
+K:Enchant:Creature.YouCtrl,Artifact.YouCtrl:artifact or creature you control
+SVar:AttachAITgts:Creature,Vehicle
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target creature or planeswalker an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ As long as enchanted permanent is a creature, it gets +1/+1.

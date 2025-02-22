@@ -1,8 +1,8 @@
 Name:Fruit of the First Tree
 ManaCost:3 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigGainLife | TriggerDescription$ When enchanted creature dies, you gain X life and draw X cards, where X is its toughness.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBTrigDraw
 SVar:DBTrigDraw:DB$ Draw | NumCards$ X

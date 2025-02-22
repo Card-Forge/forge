@@ -1,8 +1,8 @@
 Name:Stonehands
 ManaCost:2 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2.
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
 Oracle:Enchant creature\nEnchanted creature gets +0/+2.\n{R}: Enchanted creature gets +1/+0 until end of turn.

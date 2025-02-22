@@ -1,8 +1,8 @@
 Name:Savage Silhouette
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddAbility$ ABRegen | Description$ Enchanted creature gets +2/+2 and has "{1}{G}: Regenerate this creature."
 SVar:ABRegen:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate this creature.
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has "{1}{G}: Regenerate this creature."

@@ -1,8 +1,8 @@
 Name:In Bolas's Clutches
 ManaCost:4 U U
 Types:Legendary Enchantment Aura
-K:Enchant permanent
-A:SP$ Attach | ValidTgts$ Permanent | AILogic$ GainControl
+K:Enchant:Permanent
+SVar:AttachAILogic:GainControl
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddType$ Legendary | Description$ Enchanted permanent is legendary.
 Oracle:Enchant permanent\nYou control enchanted permanent.\nEnchanted permanent is legendary.

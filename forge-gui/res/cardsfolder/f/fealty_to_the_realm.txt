@@ -1,8 +1,8 @@
 Name:Fealty to the Realm
 ManaCost:4 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ GainControl
+K:Enchant:Creature
+SVar:AttachAILogic:GainControl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ Player.isMonarch | Description$ The monarch controls enchanted creature.
