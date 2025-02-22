@@ -1871,10 +1871,6 @@ public class CardProperty {
             if (!card.isSolved()) {
                 return false;
             }
-        } else if (property.equals("IsUnsolved")) {
-            if (card.isSolved()) {
-                return false;
-            }
         } else if (property.equals("IsSaddled")) {
             if (!card.isSaddled()) {
                 return false;
