@@ -6,6 +6,6 @@ SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ I
 SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Phyrexian
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:X:Sacrificed$CardManaCost/Plus.1
-SVar:AIPreference:SacCost$Creature.!Token
+SVar:AIPreference:SacCost$Creature.!token
 DeckHas:Ability$Sacrifice & Type$Phyrexian
 Oracle:{1}, {T}, Sacrifice a creature: Seek a creature card with mana value equal to 1 plus the sacrificed creature's mana value and put that card onto the battlefield. That creature is a Phyrexian in addition to its other types. Activate only as a sorcery.
