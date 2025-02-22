@@ -648,8 +648,7 @@ public class Combat {
                     missingCombatants.add(c);
                 }
             }
-            if (ee.getKey() instanceof Card) {
-                Card c = (Card) ee.getKey();
+            if (ee.getKey() instanceof Card c) {
                 if (!c.isBattle() && !c.isPlaneswalker()) {
                     missingCombatants.add(c);
                 }

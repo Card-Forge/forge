@@ -161,6 +161,9 @@ public class EffectEffect extends SpellAbilityEffect {
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
+            if (sa.hasParam("Boon")) {
+                eff.setBoon(true);
+            }
 
             // Abilities and triggers work the same as they do for Token
             // Grant abilities

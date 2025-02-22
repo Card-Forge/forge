@@ -1,8 +1,0 @@
-Name:Goblin Surveyor
-ManaCost:2 R
-Types:Creature Goblin Scout
-PT:3/2
-K:Trample
-K:Start your engines
-A:AB$ Draw | Cost$ 3 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Activation$ MaxSpeed | PrecostDesc$ Max speed — | SpellDescription$ Draw a card.
-Oracle:Trample\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — {3}, Exile this card from your graveyard: Draw a card.

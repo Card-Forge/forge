@@ -1,9 +1,0 @@
-Name:Burner Rocket
-ManaCost:1 R
-Types:Artifact Vehicle
-PT:3/1
-K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this Vehicle enters, target creature you control gets +2/+0 and gains trample until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 2 | KW$ Trample
-K:Crew:1
-Oracle:Flash\nWhen this Vehicle enters, target creature you control gets +2/+0 and gains trample until end of turn.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

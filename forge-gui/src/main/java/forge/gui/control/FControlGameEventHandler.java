@@ -203,6 +203,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventPlayerPriority event) {
         needCombatUpdate = true;
+        matchController.updateDependencies();
         return processEvent();
     }
 

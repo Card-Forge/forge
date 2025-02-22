@@ -1,0 +1,10 @@
+Name:Vnwxt, Verbose Host
+ManaCost:1 U
+Types:Legendary Creature Homunculus
+PT:0/4
+K:Start your engines
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddReplacementEffect$ RepDraw | Description$ Max speed — If you would draw a card, draw two cards instead.
+SVar:RepDraw:Event$ Draw | Secondary$ True | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DrawTwo | Description$ Max speed — If you would draw a card, draw two cards instead.
+SVar:DrawTwo:DB$ Draw | Defined$ You | NumCards$ 2
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nYou have no maximum hand size.\nMax speed — If you would draw a card, draw two cards instead.

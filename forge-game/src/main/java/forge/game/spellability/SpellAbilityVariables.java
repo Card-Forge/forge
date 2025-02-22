@@ -96,7 +96,6 @@ public class SpellAbilityVariables implements Cloneable {
     private boolean desert = false;
     private boolean blessing = false;
     private boolean solved = false;
-    private boolean maxSpeed = false;
 
     /** The s is present. */
     private String isPresent = null;
@@ -347,7 +346,6 @@ public class SpellAbilityVariables implements Cloneable {
     public void setDesert(final boolean bDesert) { desert = bDesert; }
     public void setBlessing(final boolean bBlessing) { blessing = bBlessing; }
     public void setSolved(final boolean bSolved) { solved = bSolved; }
-    public void setMaxSpeed(final boolean b) { maxSpeed = b; }
 
     /** Optional Costs */
     protected boolean kicked = false;
@@ -539,8 +537,6 @@ public class SpellAbilityVariables implements Cloneable {
     public final boolean isBlessing() {     return this.blessing;  }
 
     public final boolean isSolved() {     return this.solved;  }
-
-    public final boolean isMaxSpeed() { return this.maxSpeed; }
 
     public String getNoDifferentColors() {
         return noDifferentColors;

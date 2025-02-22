@@ -1,0 +1,13 @@
+Name:Terra, Herald of Hope
+ManaCost:R W B
+Types:Legendary Creature Human Wizard Warrior
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Trance — At the beginning of combat on your turn, mill two cards. NICKNAME gains flying until end of turn.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigPayCost | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may pay {2}. When you do, return target creature card with power 3 or less from your graveyard to the battlefield tapped.
+SVar:TrigPayCost:AB$ ImmediateTrigger | Cost$ 2 | Execute$ TrigChange | TriggerDescription$ When you do, return target creature card with power 3 or less from your graveyard to the battlefield tapped.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+powerLE3 | Tapped$ True | TgtPrompt$ Select target creature card with power 3 or less in your graveyard
+DeckHas:Ability$Mill|Graveyard
+DeckHints:Ability$Mill|Discard|Sacrifice
+Oracle:Trance — At the beginning of combat on your turn, mill two cards. Terra gains flying until end of turn.\nWhenever Terra deals combat damage to a player, you may pay {2}. When you do, return target creature card with power 3 or less from your graveyard to the battlefield tapped.

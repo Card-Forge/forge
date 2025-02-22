@@ -5,9 +5,9 @@ PT:2/4
 K:Reach
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, mill three cards. You may put a land card from among them into your hand.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Land.IsRemembered | Optional$ True | SelectPrompt$ You may select a land milled this way | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Land.IsRemembered | Optional$ True | SelectPrompt$ You may select a land card milled this way | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-S:Mode$ Continuous | AffectedZone$ Graveyard | Affected$ Card.nonLand+Permanent+YouOwn | Condition$ PlayerTurn | AddKeyword$ Retrace | Description$ As long as it's your turn, nonland permanent cards in your graveyard have retrace.
+S:Mode$ Continuous | AffectedZone$ Graveyard | Affected$ Card.nonLand+Permanent+YouOwn | Condition$ PlayerTurn | AddKeyword$ Retrace | Description$ During your turn, nonland permanent cards in your graveyard have retrace.
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Graveyard|Mill
-Oracle:Reach\nWhenever Six attacks, mill three cards. You may put a land card from among them into your hand.\nAs long as it's your turn, nonland permanent cards in your graveyard have retrace.
+Oracle:Reach\nWhenever Six attacks, mill three cards. You may put a land card from among them into your hand.\nDuring your turn, nonland permanent cards in your graveyard have retrace.

@@ -1,0 +1,9 @@
+Name:Aether Syphon
+ManaCost:1 U U
+Types:Artifact
+K:Start your engines
+A:AB$ Draw | Cost$ 2 T | SpellDescription$ Draw a card.
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddTrigger$ DrawTrig | Description$ Max speed — Whenever you draw a card, each opponent mills two cards. (Each opponent puts the top two cards of their library into their graveyard.)
+SVar:DrawTrig:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Max speed — Whenever you draw a card, each opponent mills two cards.
+SVar:TrigMill:DB$ Mill | Defined$ Opponent | NumCards$ 2
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{2}, {T}: Draw a card.\nMax speed — Whenever you draw a card, each opponent mills two cards. (Each opponent puts the top two cards of their library into their graveyard.)

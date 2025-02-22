@@ -1,0 +1,11 @@
+Name:Magmakin Artillerist
+ManaCost:2 R
+Types:Creature Elemental Pirate
+PT:1/4
+T:Mode$ DiscardedAll | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage1 | TriggerDescription$ Whenever you discard one or more cards, this creature deals that much damage to each opponent.
+SVar:TrigDealDamage1:DB$ DealDamage | NumDmg$ X | Defined$ Opponent
+K:Cycling:1 R
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDealDamage2 | TriggerDescription$ When you cycle this card, it deals 1 damage to each opponent.
+SVar:TrigDealDamage2:DB$ DealDamage | NumDmg$ 1 | Defined$ Opponent
+SVar:X:TriggerCount$Amount
+Oracle:Whenever you discard one or more cards, this creature deals that much damage to each opponent.\nCycling {1}{R} ({1}{R}, Discard this card: Draw a card.)\nWhen you cycle this card, it deals 1 damage to each opponent.

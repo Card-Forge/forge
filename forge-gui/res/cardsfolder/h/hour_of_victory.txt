@@ -1,0 +1,10 @@
+Name:Hour of Victory
+ManaCost:2 B
+Types:Enchantment
+K:Start your engines
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABTutor | Description$ Max speed — {1}{B}, Sacrifice this enchantment: Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery.
+SVar:ABTutor:AB$ ChangeZone | PrecostDesc$ Max speed — | Cost$ 1 B Sac<1/CARDNAME/this enchantment> | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | SorcerySpeed$ True | Secondary$ True | SpellDescription$ Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery.
+DeckHas:Ability$Token|Sacrifice
+Oracle:Start your engines!\nWhen this enchantment enters, create a 2/2 black Zombie creature token.\nMax speed — {1}{B}, Sacrifice this enchantment: Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery.

@@ -1,0 +1,14 @@
+Name:Y'shtola, Night's Blessed
+ManaCost:1 W U B
+Types:Legendary Creature Cat Warlock
+PT:2/4
+K:Vigilance
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE4 | Execute$ TrigDraw | TriggerDescription$ At the beginning of each end step, if a player lost 4 or more life this turn, you draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:PlayerCountDefinedRegistered$HighestLifeLostThisTurn
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature+cmcGE3 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a noncreature spell with mana value 3 or greater, NICKNAME deals 2 damage to each opponent and you gain 2 life.
+SVar:TrigDealDamage:DB$ DamageAll | ValidPlayers$ Opponent | NumDmg$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:BuffedBy:Card.nonCreature+cmcGE3
+DeckHas:Ability$LifeGain
+Oracle:Vigilance\nAt the beginning of each end step, if a player lost 4 or more life this turn, you draw a card.\nWhenever you cast a noncreature spell with mana value 3 or greater, Y'shtola deals 2 damage to each opponent and you gain 2 life.

@@ -1,10 +1,9 @@
 Name:Barrin's Spite
 ManaCost:2 U B
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose two target creatures controlled by the same player | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | TargetsWithSameController$ True | RememberTargets$ True | IsCurse$ True | SubAbility$ DBChooseSac | StackDescription$ SpellDescription | SpellDescription$ Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.
-SVar:DBChooseSac:DB$ ChooseCard | Choices$ Card.IsRemembered | Defined$ TargetedController | ChoiceTitle$ Choose one to sacrifice | ForgetChosen$ True | SubAbility$ DBSac | StackDescription$ None | AILogic$ WorstCard
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose two target creatures controlled by the same player | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | TargetsWithSameController$ True | IsCurse$ True | SubAbility$ DBChooseSac | StackDescription$ SpellDescription | SpellDescription$ Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.
+SVar:DBChooseSac:DB$ ChooseCard | DefinedCards$ Targeted | Defined$ TargetedController | ChoiceTitle$ Choose one to sacrifice | SubAbility$ DBSac | StackDescription$ None | AILogic$ WorstCard
 SVar:DBSac:DB$ SacrificeAll | Defined$ ChosenCard | SubAbility$ DBBounce | StackDescription$ None
-SVar:DBBounce:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup | StackDescription$ None
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBBounce:DB$ ChangeZone | Defined$ Targeted.!ChosenCard | Origin$ Battlefield | Destination$ Hand | StackDescription$ None
 DeckHas:Ability$Sacrifice
 Oracle:Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.

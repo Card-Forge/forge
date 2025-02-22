@@ -4,7 +4,7 @@ Types:Enchantment
 R:Event$ Moved | ValidCard$ Land.YouCtrl | Destination$ Battlefield | ReplaceWith$ ETBUntapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Lands you control enter the battlefield untapped.
 SVar:ETBUntapped:DB$ Untap | ETB$ True | Defined$ ReplacedCard
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of your end step, the topmost land card in your library perpetually gains "Whenever this land is tapped for mana, add an additional {G}."
-SVar:TrigAnimate:DB$ Animate | Defined$ ValidLibrary Land.TopLibraryLand+YouCtrl | Triggers$ ManaTap | Duration$ Perpetual
+SVar:TrigAnimate:DB$ Animate | Defined$ ValidLibrary Land.TopLibrary_Land+YouCtrl | Triggers$ ManaTap | Duration$ Perpetual
 SVar:ManaTap:Mode$ TapsForMana | ValidCard$ Card.Self | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever this land is tapped for mana, add an additional {G}.
 SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 1 | Defined$ TriggeredCardController
 Oracle:Lands you control enter the battlefield untapped.\nAt the beginning of your end step, the topmost land card in your library perpetually gains "Whenever this land is tapped for mana, add an additional {G}."

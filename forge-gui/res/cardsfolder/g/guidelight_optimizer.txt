@@ -1,0 +1,7 @@
+Name:Guidelight Optimizer
+ManaCost:1 U
+Types:Artifact Creature Robot
+PT:2/1
+A:AB$ Mana | Cost$ T | Produced$ U | RestrictValid$ Spell.Artifact,Activated | SpellDescription$ Add {U}. Spend this mana only to cast an artifact spell or activate an ability.
+DeckNeeds:Type$Artifact
+Oracle:{T}: Add {U}. Spend this mana only to cast an artifact spell or activate an ability.

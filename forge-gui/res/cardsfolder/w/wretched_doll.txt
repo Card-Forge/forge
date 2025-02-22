@@ -1,0 +1,6 @@
+Name:Wretched Doll
+ManaCost:1 B
+Types:Artifact Creature Toy
+PT:3/1
+A:AB$ Surveil | Cost$ B T | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+Oracle:{B}, {T}: Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

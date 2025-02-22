@@ -3,9 +3,9 @@ ManaCost:5 W W
 Types:Creature Snake
 PT:5/6
 K:Vigilance
-R:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.Self | PlayerTurn$ True | Description$ As long as it's your turn, prevent all damage that would be dealt to CARDNAME.
+R:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.Self | PlayerTurn$ True | Description$ During your turn, prevent all damage that would be dealt to CARDNAME.
 AlternateMode:Adventure
-Oracle:Vigilance\nAs long as it's your turn, prevent all damage that would be dealt to Guardian Naga.
+Oracle:Vigilance\nDuring your turn, prevent all damage that would be dealt to Guardian Naga.
 
 ALTERNATE
 

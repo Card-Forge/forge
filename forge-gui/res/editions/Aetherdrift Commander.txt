@@ -190,3 +190,23 @@ ScryfallCode=DRC
 182 R Unholy Grotto @John Avon
 183 R Vineglimmer Snarl @Sam Burley
 184 R Yavimaya Coast @Jesper Ejsing
+
+[tokens]
+b_0_0_zombie_army
+b_2_2_zombie_decayed
+b_4_4_zombie_warrior_vigilance
+c_3_3_a_golem_flying
+c_3_3_a_golem_trample
+c_3_3_a_golem_vigilance
+c_4_4_a_construct
+c_6_6_a_beast
+g_3_3_beast
+nalaar_aetherjet
+u_2_2_shapeshifter_changeling
+w_1_1_zombie
+
+[other]
+embalm_angel_of_sanctions
+embalm_vizier_of_many_faces
+eternalize_champion_of_wits
+eternalize_timeless_dragon

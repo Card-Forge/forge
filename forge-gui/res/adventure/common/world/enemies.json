@@ -19341,7 +19341,7 @@
 },
 {
 	"name": "Merfolk",
-	"nameOverride": "Merfok Raider",
+	"nameOverride": "Merfolk Raider",
 	"sprite": "sprites/enemy/elemental/waterelemental.atlas",
 	"deck": [
 		"decks/standard/merfolk_bad.json"
