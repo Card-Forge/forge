@@ -122,3 +122,4 @@ jobs:
           prerelease: true
           artifacts: izpack/*
           allowUpdates: true
+          removeArtifacts: true
