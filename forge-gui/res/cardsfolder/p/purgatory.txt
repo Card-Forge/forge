@@ -1,7 +1,7 @@
 Name:Purgatory
 ManaCost:2 W B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouOwn | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature is put into your graveyard from the battlefield, exile that card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.!token+YouOwn | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature is put into your graveyard from the battlefield, exile that card.
 SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, you may pay {4} and 2 life. If you do, return a card exiled with CARDNAME to the battlefield.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 4 PayLife<2> | ChangeType$ Card.ExiledWithSource | Mandatory$ True | Origin$ Exile | Destination$ Battlefield | Hidden$ True
