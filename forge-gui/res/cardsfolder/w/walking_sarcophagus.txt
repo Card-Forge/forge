@@ -1,0 +1,8 @@
+Name:Walking Sarcophagus
+ManaCost:2
+Types:Artifact Creature Zombie Cat
+PT:2/1
+K:Start your engines
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ MaxSpeedStatic | Description$ Max speed — This creature gets +1/+2.
+SVar:MaxSpeedStatic:Mode$ Continuous | Secondary$ True | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | Description$ Max speed — This creature gets +1/+2.
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — This creature gets +1/+2.

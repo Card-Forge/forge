@@ -271,7 +271,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isRevolt() && !activator.hasRevolt()) return false;
         if (this.isDesert() && !activator.hasDesert()) return false;
         if (this.isBlessing() && !activator.hasBlessing()) return false;
-        if (this.isMaxSpeed() && !activator.maxSpeed()) return false;
 
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;

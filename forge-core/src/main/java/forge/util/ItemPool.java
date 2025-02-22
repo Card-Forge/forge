@@ -275,7 +275,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
 
     @Override
     public boolean equals(final Object obj) {
-        return (obj instanceof ItemPool) &&
-                (this.items.equals(((ItemPool)obj).items));
+        return (obj instanceof ItemPool ip) &&
+                (this.items.equals(ip.items));
     }
 }

@@ -1,0 +1,9 @@
+Name:Leonin Surveyor
+ManaCost:1 W
+Types:Creature Cat Scout
+PT:2/2
+K:Start your engines
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, this creature has first strike.
+S:Mode$ Continuous | EffectZone$ Graveyard | AffectedZone$ Graveyard | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABDraw | Description$ Max speed — {3}, Exile this card from your graveyard: Draw a card.
+SVar:ABDraw:AB$ Draw | PrecostDesc$ Max speed — | Cost$ 3 ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | Secondary$ True | SpellDescription$ Draw a card.
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nDuring your turn, this creature has first strike.\nMax speed — {3}, Exile this card from your graveyard: Draw a card.

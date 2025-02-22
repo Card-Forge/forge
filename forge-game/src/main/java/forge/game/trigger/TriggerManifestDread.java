@@ -22,7 +22,7 @@ public class TriggerManifestDread extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObject(AbilityKey.NewCard, runParams.get(AbilityKey.Card));
+        sa.setTriggeringObject(AbilityKey.Cards, runParams.get(AbilityKey.Cards));
 
     }
 

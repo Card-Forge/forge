@@ -23,15 +23,12 @@ package forge.game;
 public enum GameEndReason {
     /** The All opponents lost. */
     AllOpponentsLost,
-    // Noone won
-    /** The Draw. */
-    Draw, // Having little idea how they can reach a draw, so I didn't enumerate
-          // possible reasons here
-    // Special conditions, they force one player to win and thus end the game
 
-    /** The Wins game spell effect. */
-    WinsGameSpellEffect, // ones that could be both hardcoded (felidar) and
-                        // scripted ( such as Mayael's Aria )
+    /** Noone won */
+    Draw,
+
+    /** Special conditions, they force one player to win and thus end the game */
+    WinsGameSpellEffect,
 
     /** Used to end multiplayer games where the all humans have lost or conceded while AIs cannot end match by themselves.*/
     AllHumansLost,

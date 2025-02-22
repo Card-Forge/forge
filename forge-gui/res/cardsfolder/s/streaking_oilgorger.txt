@@ -1,0 +1,11 @@
+Name:Streaking Oilgorger
+ManaCost:4 B
+Types:Creature Vampire
+PT:3/3
+K:Flying
+K:Haste
+K:Start your engines
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ MaxSpeedStatic | Description$ Max speed — This creature has lifelink.
+SVar:MaxSpeedStatic:Mode$ Continuous | Secondary$ True | Affected$ Card.Self | AddKeyword$ Lifelink | Description$ Max speed — This creature has lifelink.
+DeckHas:Ability$LifeGain
+Oracle:Flying, haste\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — This creature has lifelink.

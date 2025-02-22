@@ -1,0 +1,10 @@
+Name:Ticket Tortoise
+ManaCost:2
+Types:Artifact Creature Turtle
+PT:3/1
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ X | SVarCompare$ GTY | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, if an opponent controls more lands than you, you create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
+SVar:Y:Count$Valid Land.YouCtrl
+Oracle:Defender\nWhen this creature enters, if an opponent controls more lands than you, you create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

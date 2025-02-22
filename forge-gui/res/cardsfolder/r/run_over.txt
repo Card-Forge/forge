@@ -1,0 +1,8 @@
+Name:Run Over
+ManaCost:1 G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | ValidTarget$ Mount.YouCtrl,Vehicle.YouCtrl | EffectZone$ All | Description$ This spell costs {1} less to cast if it targets a Mount or Vehicle you control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDealDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature an opponent controls.
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+Oracle:This spell costs {1} less to cast if it targets a Mount or Vehicle you control.\nTarget creature you control deals damage equal to its power to target creature an opponent controls.

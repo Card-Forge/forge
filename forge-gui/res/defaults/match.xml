@@ -4,6 +4,7 @@
 		<doc>REPORT_STACK</doc>
 		<doc>REPORT_COMBAT</doc>
 		<doc>REPORT_LOG</doc>
+		<doc>REPORT_DEPENDENCIES</doc>
 	</cell>
 	<cell x="0.0" y="0.643" w="0.2" h="0.357">
 		<doc>REPORT_MESSAGE</doc>

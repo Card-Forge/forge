@@ -588,11 +588,10 @@ public abstract class SpellAbilityEffect {
 
     // create a basic template for Effect to be used somewhere els
     public static Card createEffect(final SpellAbility sa, final Player controller, final String name, final String image) {
-        return createEffect(sa, controller, name, image, controller.getGame().getNextTimestamp());
+        return createEffect(sa, sa.getHostCard(), controller, name, image, controller.getGame().getNextTimestamp());
     }
-    public static Card createEffect(final SpellAbility sa, final Player controller, final String name, final String image, final long timestamp) {
-        final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+    public static Card createEffect(final SpellAbility sa, final Card hostCard, final Player controller, final String name, final String image, final long timestamp) {
+        final Game game = controller.getGame();
         final Card eff = new Card(game.nextCardId(), game);
 
         eff.setGameTimestamp(timestamp);
@@ -608,12 +607,7 @@ public abstract class SpellAbilityEffect {
             eff.setRarity(hostCard.getRarity());
         }
 
-        if (sa.hasParam("Boon")) {
-            eff.setBoon(true);
-        }
-
         eff.setOwner(controller);
-        eff.setSVars(sa.getSVars());
 
         eff.setSetCode(hostCard.getSetCode());
         if (image != null) {
@@ -621,7 +615,12 @@ public abstract class SpellAbilityEffect {
         }
 
         eff.setGamePieceType(GamePieceType.EFFECT);
-        eff.setEffectSource(sa);
+        if (sa != null) {
+            eff.setEffectSource(sa);
+            eff.setSVars(sa.getSVars());
+        } else {
+            eff.setEffectSource(hostCard);
+        }
 
         return eff;
     }
