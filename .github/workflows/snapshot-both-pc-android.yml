@@ -113,12 +113,14 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Upload snapshot to GitHub Prerelease
-        uses: ncipollo/release-action@v1
+        uses: IsaacShelton/update-existing-release@v1.3.4
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: Daily Snapshot
-          tag: daily-snapshots
+          token: ${{ secrets.GITHUB_TOKEN }}
+          message: Daily Snapshot
+          release: daily-snapshots
           prerelease: true
-          artifacts: izpack/*
+          files: izpack/*
           allowUpdates: true
+          replace: true
