@@ -122,5 +122,4 @@ jobs:
           release: daily-snapshots
           prerelease: true
           files: izpack/*
-          allowUpdates: true
           replace: true
