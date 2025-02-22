@@ -122,7 +122,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             }
         }
 
-        if (validTypes.isEmpty() && sa.hasParam("Note")) {
+        if (validTypes.isEmpty() && sa.hasParam("TypesFromDefined")) {
             // OK to end up with no choices/have nothing new to note
         } else if (!validTypes.isEmpty()) {
             for (final Player p : tgtPlayers) {

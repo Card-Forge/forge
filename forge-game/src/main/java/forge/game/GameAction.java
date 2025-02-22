@@ -1535,7 +1535,7 @@ public class GameAction {
                     }
                 }
 
-                // 704.5z If a player controls a permanent with start your engines! and that player has no speed, that player’s speed becomes 1. See rule 702.179, “Start Your Engines!”
+                // 704.5z If a player controls a permanent with start your engines! and that player has no speed, that player’s speed becomes 1.
                 if (p.getSpeed() == 0 && p.getCardsIn(ZoneType.Battlefield).anyMatch(c -> c.hasKeyword(Keyword.START_YOUR_ENGINES))) {
                     p.increaseSpeed();
                     checkAgain = true;
@@ -1550,6 +1550,7 @@ public class GameAction {
             }
             // 704.5m World rule
             checkAgain |= handleWorldRule(noRegCreats);
+
             // only check static abilities once after destroying all the creatures
             // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);

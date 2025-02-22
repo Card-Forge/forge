@@ -1050,7 +1050,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(dethroneTrigger);
         } else if (keyword.equals("Double team")) {
-            final String trigString = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | TriggerZones$ Battlefield" +
+            final String trigString = "Mode$ Attacks | ValidCard$ Card.Self+!token | TriggerZones$ Battlefield" +
                     " | Secondary$ True | TriggerDescription$ Double team (" + inst.getReminderText() + ")";
             final String maSt = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True | Conjure$ True";
             final String puSt = "DB$ Pump | RememberObjects$ Self";
@@ -4129,7 +4129,7 @@ public class CardFactoryUtil {
 
         SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
-        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell+nonToken";
+        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell+!token";
         AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
 
         StringBuilder sbPlay = new StringBuilder();

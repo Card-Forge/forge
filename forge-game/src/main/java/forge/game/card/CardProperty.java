@@ -1163,7 +1163,7 @@ public class CardProperty {
                 }
                 else if (prop.isEmpty() && dmgSource.equalsWithGameTimestamp(source)) {
                     found = true;
-                } else if (dmgSource.isValid(prop.split(","), sourceController, source, spellAbility)) {
+                } else if (dmgSource.isValid(prop.split(";"), sourceController, source, spellAbility)) {
                     found = true;
                 }
                 if (found) {
@@ -1408,10 +1408,6 @@ public class CardProperty {
             }
             // copied spell don't count
             if (property.contains("Created") && card.getCastSA() != null) {
-                return false;
-            }
-        } else if (property.startsWith("nonToken")) {
-            if (card.isToken() || card.isTokenCard()) {
                 return false;
             }
         } else if (property.startsWith("copiedSpell")) {
