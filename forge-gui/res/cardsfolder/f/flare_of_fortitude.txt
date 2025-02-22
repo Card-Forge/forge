@@ -1,7 +1,7 @@
 Name:Flare of Fortitude
 ManaCost:2 W W
 Types:Instant
-S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ Sac<1/Creature.White+nonToken/a nontoken white creature> | Description$ You may sacrifice a nontoken white creature rather than pay this spell's mana cost.
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ Sac<1/Creature.White+!token/a nontoken white creature> | Description$ You may sacrifice a nontoken white creature rather than pay this spell's mana cost.
 A:SP$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ STCantChange | SubAbility$ DBPumpAll | SpellDescription$ Until end of turn, your life total can't change, and permanents you control gain hexproof and indestructible.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Hexproof & Indestructible
 SVar:STCantChange:Mode$ CantChangeLife | ValidPlayer$ You | Description$ Your life total can't change.
