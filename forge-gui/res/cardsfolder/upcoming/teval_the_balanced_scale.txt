@@ -1,6 +1,6 @@
 Name:Teval, the Balanced Scale
 ManaCost:1 B G U
-Types:Legemdary Creature Spirit Dragon
+Types:Legendary Creature Spirit Dragon
 PT:4/4
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, mill three cards. Then you may return a land card from your graveyard to the battlefield tapped.
