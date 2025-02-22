@@ -1265,10 +1265,6 @@ public class CardProperty {
             if (card.getBlockedByThisTurn().isEmpty()) {
                 return false;
             }
-        } else if (property.startsWith("notAttackedThisTurn")) {
-            if (card.getDamageHistory().getCreatureAttacksThisTurn() > 0) {
-                return false;
-            }
         } else if (property.startsWith("greatestPower")) {
             CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
             if (property.contains("ControlledBy")) {
