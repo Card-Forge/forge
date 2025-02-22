@@ -1,0 +1,7 @@
+Name:Trade the Helm
+ManaCost:4 U
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Choose target artifact or creature you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target artifact or creature you control and target artifact or creature an opponent controls.
+SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl | TgtPrompt$ Choose target artifact or creature an opponent controls
+K:Cycling:2
+Oracle:Exchange control of target artifact or creature you control and target artifact or creature an opponent controls.\nCycling {2} ({2}, Discard this card: Draw a card.)

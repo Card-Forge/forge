@@ -1,0 +1,12 @@
+Name:Tidus, Yuna's Guardian
+ManaCost:G W U
+Types:Legendary Creature Human Warrior
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ At the beginning of combat on your turn, you may move a counter from target creature you control onto a second target creature you control.
+SVar:TrigMoveCounter:DB$ MoveCounter | ValidTgts$ Creature.YouCtrl | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target creatures you control | CounterType$ Any
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+HasCounters | TriggerZones$ Battlefield | ValidTarget$ Player | ResolvedLimit$ 1 | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Cheer — Whenever one or more creatures you control with counters on them deal combat damage to a player, you may draw a card and proliferate. Do this only once each turn.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBProliferate
+SVar:DBProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counters
+Oracle:At the beginning of combat on your turn, you may move a counter from target creature you control onto a second target creature you control.\nCheer — Whenever one or more creatures you control with counters on them deal combat damage to a player, you may draw a card and proliferate. Do this only once each turn.

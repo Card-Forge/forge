@@ -1,0 +1,10 @@
+Name:Burnout Bashtronaut
+ManaCost:R
+Types:Creature Goblin Warrior
+PT:1/1
+K:Menace
+K:Start your engines
+A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ This creature gets +1/+0 until end of turn.
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ MaxSpeedStatic | Description$ Max speed — This creature has double strike.
+SVar:MaxSpeedStatic:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Secondary$ True | Description$ Max speed — This creature has double strike.
+Oracle:Menace\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{2}: This creature gets +1/+0 until end of turn.\nMax speed — This creature has double strike.

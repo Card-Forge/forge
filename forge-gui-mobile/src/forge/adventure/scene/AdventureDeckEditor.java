@@ -151,7 +151,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     if (!cardManager.isInfinite()) {
                         removeCard(card, result);
                     }
-                    AdventurePlayer.current().sellCard(card, result);
+                    AdventurePlayer.current().sellCard(card, result, true);
                     lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
                 }
             });
@@ -601,7 +601,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                                         public void run(Boolean result) {
                                             if (result) {
                                                 for (Map.Entry<PaperCard, Integer> entry : catalogPage.cardManager.getFilteredItems()) {
-                                                    AdventurePlayer.current().sellCard(entry.getKey(), entry.getValue());
+                                                    AdventurePlayer.current().sellCard(entry.getKey(), entry.getValue(), true);
                                                 }
                                                 catalogPage.refresh();
                                                 lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));

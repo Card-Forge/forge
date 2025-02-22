@@ -36,6 +36,7 @@ public enum ApiType {
     Branch (BranchEffect.class),
     Camouflage (CamouflageEffect.class),
     ChangeCombatants (ChangeCombatantsEffect.class),
+    ChangeSpeed (ChangeSpeedEffect.class),
     ChangeTargets (ChangeTargetsEffect.class),
     ChangeText (ChangeTextEffect.class),
     ChangeX (ChangeXEffect.class),

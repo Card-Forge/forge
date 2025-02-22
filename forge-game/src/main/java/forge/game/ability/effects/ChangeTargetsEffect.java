@@ -132,7 +132,6 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                 source = changingTgtSA.getTargetCard();
                             }
                             Predicate<GameObject> filter = sa.hasParam("TargetRestriction") ? GameObjectPredicates.restriction(sa.getParam("TargetRestriction").split(","), activator, source, sa) : null;
-                            // TODO Creature.Other might not work yet as it should
                             TargetChoices newTarget = chooser.getController().chooseNewTargetsFor(changingTgtSA, filter, false);
                             changingTgtSI.updateTarget(newTarget, sa.getHostCard());
                         }

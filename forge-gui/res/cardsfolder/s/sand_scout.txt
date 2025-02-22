@@ -4,7 +4,7 @@ Types:Creature Human Scout
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | CheckSVar$ Y | SVarCompare$ GTX | TriggerDescription$ When CARDNAME enters, if an opponent controls more lands than you, search your library for a Desert card, put it onto the battlefield tapped, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Desert | ChangeNum$ 1
-T:Mode$ ChangesZoneAll | ValidCards$ Land.YouOwn+nonToken | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more land cards are put into your graveyard from anywhere, create a 1/1 red, green, and white Sand Warrior creature token. This ability triggers only once each turn.
+T:Mode$ ChangesZoneAll | ValidCards$ Land.YouOwn+!token | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more land cards are put into your graveyard from anywhere, create a 1/1 red, green, and white Sand Warrior creature token. This ability triggers only once each turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ rgw_1_1_sand_warrior | TokenOwner$ You
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Y:PlayerCountOpponents$HighestValid Land.YouCtrl

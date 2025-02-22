@@ -1,0 +1,8 @@
+Name:Cloudspire Captain
+ManaCost:2 W
+Types:Creature Human Pilot
+PT:2/3
+S:Mode$ Continuous | Affected$ Mount.YouCtrl,Vehicle.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Mounts and Vehicles you control get +1/+1.
+S:Mode$ TapPowerValue | ValidSA$ Activated.Saddle+Mount,Activated.Crew+Vehicle | ValidCard$ Card.Self | Value$ 2 | Description$ This creature saddles Mounts and crews Vehicles as though its power were 2 greater.
+DeckNeeds:Type$Mount|Vehicle
+Oracle:Mounts and Vehicles you control get +1/+1.\nThis creature saddles Mounts and crews Vehicles as though its power were 2 greater.

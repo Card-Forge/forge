@@ -26,9 +26,8 @@ public class QuestEditor extends JComponent {
                 JList list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if(!(value instanceof AdventureQuestData))
+            if(!(value instanceof AdventureQuestData quest))
                 return label;
-            AdventureQuestData quest=(AdventureQuestData) value;
             // Get the renderer component from parent class
 
             label.setText(quest.name);

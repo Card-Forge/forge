@@ -45,17 +45,16 @@ public class BiomeStructureDataMappingEditor extends JComponent {
                 JList list, Object value, int index,
                 boolean isSelected, boolean cellHasFocus) {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            if(!(value instanceof BiomeStructureData.BiomeStructureDataMapping))
+            if(!(value instanceof BiomeStructureData.BiomeStructureDataMapping biomeData))
                 return label;
-            BiomeStructureData.BiomeStructureDataMapping data=(BiomeStructureData.BiomeStructureDataMapping) value;
             // Get the renderer component from parent class
 
-            label.setText(data.name);
+            label.setText(biomeData.name);
             if(editor.data!=null)
             {
                 SwingAtlas itemAtlas=new SwingAtlas(Config.instance().getFile(editor.data.structureAtlasPath));
-                if(itemAtlas.has(data.name))
-                    label.setIcon(itemAtlas.get(data.name));
+                if(itemAtlas.has(biomeData.name))
+                    label.setIcon(itemAtlas.get(biomeData.name));
                 else
                 {
                     ImageIcon img=itemAtlas.getAny();

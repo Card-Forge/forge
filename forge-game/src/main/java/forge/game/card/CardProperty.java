@@ -651,12 +651,14 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("TopLibrary") || property.startsWith("BottomLibrary")) {
-            CardCollection cards = (CardCollection) card.getOwner().getCardsIn(ZoneType.Library);
+            CardCollectionView cards = card.getOwner().getCardsIn(ZoneType.Library);
             if (!property.equals("TopLibrary")) {
-                if (property.equals("TopLibraryLand")) cards = CardLists.filter(cards, CardPredicates.LANDS);
-                else if (property.contains("_")) cards = CardLists.getValidCards(cards, property.split("_")[1],
+                if (property.contains("_")) cards = CardLists.getValidCards(cards, property.split("_")[1],
                         sourceController, source, spellAbility);
-                if (property.startsWith("Bottom")) Collections.reverse(cards);
+                if (property.startsWith("Bottom")) {
+                    cards = new CardCollection(cards);
+                    Collections.reverse((CardCollection) cards);
+                }
             }
             if (cards.isEmpty() || !card.equals(cards.get(0))) return false;
         } else if (property.startsWith("Cloned")) {
@@ -1161,7 +1163,7 @@ public class CardProperty {
                 }
                 else if (prop.isEmpty() && dmgSource.equalsWithGameTimestamp(source)) {
                     found = true;
-                } else if (dmgSource.isValid(prop.split(","), sourceController, source, spellAbility)) {
+                } else if (dmgSource.isValid(prop.split(";"), sourceController, source, spellAbility)) {
                     found = true;
                 }
                 if (found) {
@@ -1406,10 +1408,6 @@ public class CardProperty {
             }
             // copied spell don't count
             if (property.contains("Created") && card.getCastSA() != null) {
-                return false;
-            }
-        } else if (property.startsWith("nonToken")) {
-            if (card.isToken() || card.isTokenCard()) {
                 return false;
             }
         } else if (property.startsWith("copiedSpell")) {
@@ -2187,7 +2185,7 @@ public class CardProperty {
         return true;
     }
 
-    private static boolean hasTimestampMatch(final Card card, final CardCollection coll) {
+    private static boolean hasTimestampMatch(final Card card, final CardCollectionView coll) {
         if (coll == null) {
             return false;
         }

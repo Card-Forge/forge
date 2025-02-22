@@ -4,6 +4,6 @@ Types:Legendary Creature Human Warrior
 PT:3/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return to your hand all creature cards in your graveyard that were put there from anywhere this turn.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ValidGraveyard Creature.YouOwn+nonToken+ThisTurnEntered
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ValidGraveyard Creature.YouOwn+!token+ThisTurnEntered
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Haste | Description$ Other creatures you control have haste.
 Oracle:Flash\nWhen Garna, the Bloodflame enters, return to your hand all creature cards in your graveyard that were put there from anywhere this turn.\nOther creatures you control have haste.

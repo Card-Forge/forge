@@ -378,8 +378,7 @@ public class TextRenderer {
                                 lastPieceIdx = pieces.size() - 1; //don't re-wrap anything if reached previous line
                                 break;
                             }
-                            if (lastPiece instanceof TextPiece) {
-                                TextPiece textPiece = (TextPiece)lastPiece;
+                            if (lastPiece instanceof TextPiece textPiece) {
                                 int index = textPiece.text.lastIndexOf(' ');
                                 if (index != -1) {
                                     if (index == 0) {

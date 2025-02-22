@@ -2,7 +2,7 @@ Name:Shields of Velis Vel
 ManaCost:W
 Types:Kindred Instant Shapeshifter
 K:Changeling
-A:SP$ PumpAll | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ +0 | NumDef$ +1 | SubAbility$ DBAnimate | SpellDescription$ Creatures target player controls get +0/+1 and gain all creature types until end of turn.
+A:SP$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ +0 | NumDef$ +1 | SubAbility$ DBAnimate | SpellDescription$ Creatures target player controls get +0/+1 and gain all creature types until end of turn.
 SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Creature.TargetedPlayerCtrl | AddAllCreatureTypes$ True
 SVar:NeedsToPlay:Creature.YouCtrl
 AI:RemoveDeck:All

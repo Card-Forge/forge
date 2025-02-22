@@ -2,7 +2,7 @@ Name:Life Insurance
 ManaCost:3 W B
 Types:Enchantment
 K:Extort
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nontoken creature dies, you lose 1 life and create a Treasure token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.!token | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nontoken creature dies, you lose 1 life and create a Treasure token.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBTreasure
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
 DeckHas:Ability$LifeGain|Token|Sacrifice & Type$Artifact|Treasure

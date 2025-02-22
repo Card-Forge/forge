@@ -1,0 +1,8 @@
+Name:Boom Scholar
+ManaCost:1 R G
+Types:Creature Goblin Advisor
+PT:3/3
+S:Mode$ ReduceCost | ValidCard$ Permanent.YouCtrl+Other | ValidSpell$ Activated.Exhaust | Amount$ 2 | AffectedZone$ Battlefield | Description$ Exhaust abilities of other permanents you control cost {2} less to activate.
+A:AB$ PumpAll | Cost$ 4 R G | ValidCards$ Creature.YouCtrl,Vehicle.YouCtrl | KW$ Trample | Exhaust$ True | SubAbility$ DBPutCounter | SpellDescription$ Creatures and Vehicles you control gain trample until end of turn. Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+Oracle:Exhaust abilities of other permanents you control cost {2} less to activate.\nExhaust — {4}{R}{G}: Creatures and Vehicles you control gain trample until end of turn. Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)

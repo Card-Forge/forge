@@ -1,0 +1,10 @@
+Name:Scrounging Skyray
+ManaCost:1 U
+Types:Creature Fish Pirate
+PT:1/2
+K:Flying
+T:Mode$ DiscardedAll | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you discard one or more cards, put that many +1/+1 counters on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$Amount
+K:Cycling:2
+Oracle:Flying\nWhenever you discard one or more cards, put that many +1/+1 counters on this creature.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -596,6 +596,7 @@ public class PlayerView extends GameEntityView {
             details.add(Localizer.getInstance().getMessage("lblIsExtraTurn"));
         }
         details.add(Localizer.getInstance().getMessage("lblExtraTurnCountHas", String.valueOf(getExtraTurnCount())));
+
         final String keywords = Lang.joinHomogenous(getDisplayableKeywords());
         if (!keywords.isEmpty()) {
             details.add(keywords);

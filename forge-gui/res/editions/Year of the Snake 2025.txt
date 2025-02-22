@@ -1,0 +1,16 @@
+[metadata]
+Code=PL25
+Date=2025-02-14
+Name=Year of the Snake 2025
+Type=Promo
+ScryfallCode=PL25
+
+[cards]
+1 M Xyris, the Writhing Storm @Song Qijin
+3 R Lotus Cobra @TSWCK
+4 R Sakura-Tribe Elder @Zhang Yongjie
+5 M Kaseto, Orochi Archmage @Ware Lee
+6 L Forest @Ray
+
+[tokens]
+g_1_1_snake

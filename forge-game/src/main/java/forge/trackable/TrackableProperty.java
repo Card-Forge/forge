@@ -85,6 +85,8 @@ public enum TrackableProperty {
     RingLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
     Intensity(TrackableTypes.IntegerType),
+    OverlayText(TrackableTypes.StringType),
+    MarkerText(TrackableTypes.StringListType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringListType),
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
@@ -299,7 +301,8 @@ public enum TrackableProperty {
     GameLog(TrackableTypes.StringType),
     NeedsPhaseRedrawn(TrackableTypes.BooleanType),
     PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
-    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze);
+    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze),
+    Dependencies(TrackableTypes.StringType);
 
     public enum FreezeMode {
         IgnoresFreeze,

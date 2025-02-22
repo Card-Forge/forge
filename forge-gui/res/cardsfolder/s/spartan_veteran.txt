@@ -2,6 +2,6 @@ Name:Spartan Veteran
 ManaCost:R
 Types:Creature Human Soldier
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, CARDNAME has first strike.
 A:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-Oracle:As long as it's your turn, Spartan Veteran has first strike. (It deals combat damage before creatures without first strike.)\n{2}: Spartan Veteran gets +1/+0 until end of turn.
+Oracle:During your turn, Spartan Veteran has first strike. (It deals combat damage before creatures without first strike.)\n{2}: Spartan Veteran gets +1/+0 until end of turn.

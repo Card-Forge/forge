@@ -34,5 +34,10 @@
             <artifactId>sentry-logback</artifactId>
             <version>7.15.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.jgrapht</groupId>
+            <artifactId>jgrapht-core</artifactId>
+            <version>1.5.2</version>
+        </dependency>
     </dependencies>
 </project>

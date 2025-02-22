@@ -1,0 +1,8 @@
+Name:Back on Track
+ManaCost:4 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn,Vehicle.YouOwn | TgtPrompt$ Select target creature or Vehicle card | SubAbility$ DBToken | SpellDescription$ Return target creature or Vehicle card from your graveyard to the battlefield.
+SVar:DBToken:DB$ Token | TokenScript$ c_1_1_pilot_crewsaddlebuff | SpellDescription$ Create a 1/1 colorless Pilot creature token with "This token saddles Mounts and crews Vehicles as though its power were 2 greater."
+DeckHints:Type$Creature|Vehicle|Artifact
+DeckHas:Ability$Graveyard|Counters
+Oracle:Return target creature or Vehicle card from your graveyard to the battlefield. Create a 1/1 colorless Pilot creature token with "This token saddles Mounts and crews Vehicles as though its power were 2 greater."

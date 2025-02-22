@@ -2,7 +2,7 @@ Name:Darksteel Splicer
 ManaCost:6 W
 Types:Creature Phyrexian Artificer
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Phyrexian.nonToken+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken Phyrexian you control enters, create X 3/3 colorless Phyrexian Golem artifact creature tokens, where X is the number of opponents you have.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Phyrexian.!token+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken Phyrexian you control enters, create X 3/3 colorless Phyrexian Golem artifact creature tokens, where X is the number of opponents you have.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Golem.YouCtrl | AddKeyword$ Indestructible | Description$ Golems you control have indestructible.
 SVar:X:PlayerCountOpponents$Amount

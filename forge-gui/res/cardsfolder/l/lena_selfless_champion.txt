@@ -4,7 +4,7 @@ Types:Legendary Creature Human Knight
 PT:3/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 white Soldier creature token for each nontoken creature you control.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ X | TokenScript$ w_1_1_soldier
-SVar:X:Count$Valid Creature.nonToken+YouCtrl
+SVar:X:Count$Valid Creature.!token+YouCtrl
 A:AB$ PumpAll | Cost$ Sac<1/NICKNAME> | ValidCards$ Creature.YouCtrl+powerLTY | KW$ Indestructible | SpellDescription$ Creatures you control with power less than NICKNAME's power gain indestructible until end of turn.
 SVar:Y:Count$CardPower
 DeckHas:Ability$Token

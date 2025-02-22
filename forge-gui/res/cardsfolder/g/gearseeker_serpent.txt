@@ -2,9 +2,8 @@ Name:Gearseeker Serpent
 ManaCost:5 U U
 Types:Creature Serpent
 PT:5/6
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each artifact you control.
+K:Affinity:Artifact
 A:AB$ Effect | Cost$ 5 U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
-SVar:X:Count$Valid Artifact.YouCtrl
 DeckHints:Type$Artifact
-Oracle:This spell costs {1} less to cast for each artifact you control.\n{5}{U}: Gearseeker Serpent can't be blocked this turn.
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\n{5}{U}: Gearseeker Serpent can't be blocked this turn.

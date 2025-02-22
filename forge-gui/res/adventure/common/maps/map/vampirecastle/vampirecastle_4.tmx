@@ -200,7 +200,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;A big gate is blocking the path, through the bars you can see an imposing figure in the room beyond. (you need all five shards from this dungeon to open this gate)&quot;,
+    &quot;text&quot;: &quot;A big gate is blocking the path, through the bars you can see an imposing figure in the room beyond.&quot;,
     &quot;options&quot;: [
       { &quot;name&quot;: &quot;go away&quot; },
       {

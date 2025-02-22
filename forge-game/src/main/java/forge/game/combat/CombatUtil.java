@@ -374,7 +374,6 @@ public class CombatUtil {
         final GameEntity defender = combat.getDefenderByAttacker(c);
         final List<Card> otherAttackers = combat.getAttackers();
 
-        // Run triggers
         if (triggers) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Attacker, c);

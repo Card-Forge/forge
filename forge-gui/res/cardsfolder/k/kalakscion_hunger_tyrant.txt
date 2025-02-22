@@ -1,0 +1,5 @@
+Name:Kalakscion, Hunger Tyrant
+ManaCost:1 B B
+Types:Legendary Creature Crocodile
+PT:7/2
+Oracle:

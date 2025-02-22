@@ -181,7 +181,7 @@ public class CostTapType extends CostPartWithList {
 
         if (totalPower) {
             final int i = Integer.parseInt(totalP);
-            return CardLists.getTotalPower(typeList, true, ability.isCrew()) >= i;
+            return CardLists.getTotalPower(typeList, ability) >= i;
         }
 
         final int amount = this.getAbilityAmount(ability);

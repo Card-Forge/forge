@@ -1,0 +1,9 @@
+Name:Swiftwing Assailant
+ManaCost:3 W
+Types:Creature Bird Warrior
+PT:3/3
+K:Flying
+K:Start your engines
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ MaxSpeedStatic | Description$ Max speed — This creature gets +0/+1 and has vigilance.
+SVar:MaxSpeedStatic:Mode$ Continuous | Secondary$ True | Affected$ Card.Self | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Max speed — This creature gets +0/+1 and has vigilance.
+Oracle:Flying\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — This creature gets +0/+1 and has vigilance.
