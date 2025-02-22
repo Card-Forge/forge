@@ -3,4 +3,6 @@ ManaCost:3 W W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, return up to two target creature cards with power 2 or less from your graveyard to the battlefield. Put a +1/+1 counter on each of those creatures.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.powerLE2+YouCtrl | TargetMin$ 0 | TargetMax$ 2 | WithCountersType$ P1P1 | TgtPrompt$ Select up to two target creature cards with power 2 or less in your graveyard
+DeckHas:Ability$Graveyard|Counters
+DeckHints:Ability$Discard|Mill|Sacrifice
 Oracle:At the beginning of your upkeep, return up to two target creature cards with power 2 or less from your graveyard to the battlefield. Put a +1/+1 counter on each of those creatures.
