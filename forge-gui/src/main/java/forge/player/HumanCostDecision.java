@@ -933,7 +933,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostBehold cost) {
-        InputSelectCardsFromList inp = null;
         int num = cost.getAbilityAmount(ability);
 
         CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
@@ -943,7 +942,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        inp = new InputSelectCardsFromList(controller, num, num, hand, ability);
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, num, num, hand, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectNMoreTypeCardsTpReveal", "%d", cost.getDescriptiveType()));
         inp.setCancelAllowed(!mandatory);
         inp.showAndWait();
