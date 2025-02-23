@@ -558,9 +558,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (count == 1) {
             selectItem(item);
             if (item != null)
-                itemManager.showMenu(false, item.getLeft(), item.getWidth());
+                itemManager.showMenu(true, item.getLeft(), item.getWidth());
             else
-                itemManager.showMenu(false);
+                itemManager.showMenu(true);
         } else if (count == 2) {
             if (item != null && item.selected) {
                 if (!(item.getKey() instanceof DeckProxy))

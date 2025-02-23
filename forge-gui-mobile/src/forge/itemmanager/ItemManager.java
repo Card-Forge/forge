@@ -49,13 +49,9 @@ import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.toolbox.FLabel;
-import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.util.*;
 
@@ -1040,6 +1036,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             float screenWidth = screen.getWidth();
             float screenHeight = screen.getHeight();
 
+            Rectangle scrollerBounds = currentView.getScroller().screenPos;;
+
             paneSize = updateAndGetPaneSize(screenWidth, screenHeight);
             float w = paneSize.getWidth();
             float h = paneSize.getHeight();
@@ -1050,6 +1048,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 //try displaying right of selection if possible
                 float x = bounds.x + bounds.width;
                 float y = bounds.y;
+
+                if(x < scrollerBounds.x)
+                    x = scrollerBounds.x;
+                if(y < scrollerBounds.y)
+                    y = scrollerBounds.y;
+
+                boolean tooNarrow = false;
+
                 if (x + w > screenWidth) {
                     //try displaying left of selection if possible
                     x = bounds.x - w;
@@ -1064,10 +1070,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                             x = screenWidth - w;
                         }
                         y += bounds.height;
+                        tooNarrow = true;
                     }
                 }
                 if (y + h > screenHeight) {
-                    if (y == bounds.y) {
+                    if (tooNarrow) {
                         //if displaying to left or right, move up if not enough room
                         y = screenHeight - h;
                     } else {
@@ -1081,7 +1088,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                         }
                     }
                 }
-                if (Forge.isLandscapeMode() && getSelectedItem() instanceof InventoryItem) {
+                if (Forge.isLandscapeMode() && getSelectedItem() != null) {
                     if (instance instanceof SpellShopManager) {
                         if (instance.currentView == imageView) {
                             x = instance.itemLeft + instance.itemWidth / 2 - this.getWidth() / 2;
