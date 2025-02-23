@@ -400,6 +400,11 @@ public class CardUtil {
             return reward.getCount()*500;
         if(reward.getType()== Reward.Type.Gold)
             return reward.getCount();
+        /*if(reward.getType() == Reward.Type.CardPack)
+            return reward.getDeck().get(DeckSection.Main).countAll()*70;*/
+        //TODO: Heitor - Price by card count and type of boosterPack.
+
+
         return 1000;
     }
 

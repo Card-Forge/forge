@@ -33,7 +33,7 @@
   <object id="38" template="../../obj/entry_up.tx" x="219" y="383" width="28" height="16"/>
   <object id="41" template="../../obj/shop.tx" x="97" y="305">
    <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="commonShopList" value="WhiteBoosterPackShop,BoosterPackShop,White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
     <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
     <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
@@ -41,7 +41,7 @@
   </object>
   <object id="56" template="../../obj/shop.tx" x="208" y="144">
    <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="commonShopList" value="WhiteBoosterPackShop,BoosterPackShop,White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
     <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
     <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
@@ -49,7 +49,7 @@
   </object>
   <object id="57" template="../../obj/shop.tx" x="240" y="144">
    <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="commonShopList" value="WhiteBoosterPackShop,BoosterPackShop,White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
     <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
     <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
@@ -57,7 +57,7 @@
   </object>
   <object id="43" template="../../obj/shop.tx" x="352" y="306">
    <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="commonShopList" value="WhiteBoosterPackShop,BoosterPackShop,White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
     <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
     <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
@@ -74,7 +74,7 @@
   </object>
   <object id="50" template="../../obj/shop.tx" x="256" y="306">
    <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="commonShopList" value="WhiteBoosterPackShop,BoosterPackShop,White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
     <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
     <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
@@ -82,7 +82,7 @@
   </object>
   <object id="51" template="../../obj/shop.tx" x="192" y="306">
    <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="commonShopList" value="WhiteBoosterPackShop,BoosterPackShop,White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
     <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
     <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
@@ -90,7 +90,7 @@
   </object>
   <object id="52" template="../../obj/shop.tx" x="144" y="306">
    <properties>
-    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="commonShopList" value="WhiteBoosterPackShop,BoosterPackShop,White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
     <property name="rareShopList" value="RWG,RWU,RWB,UWG,UWB,GWB,Land4White,Creature6White,Nobles"/>
     <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>

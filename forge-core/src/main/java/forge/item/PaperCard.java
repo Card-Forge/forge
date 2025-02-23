@@ -356,8 +356,8 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     @Override
     public String getImageKey(boolean altState) {
-        String noramlizedName = StringUtils.stripAccents(name);
-        String imageKey = ImageKeys.CARD_PREFIX + noramlizedName + CardDb.NameSetSeparator
+        String normalizedName = StringUtils.stripAccents(name);
+        String imageKey = ImageKeys.CARD_PREFIX + normalizedName + CardDb.NameSetSeparator
                 + edition + CardDb.NameSetSeparator + artIndex;
         if (altState) {
             imageKey += ImageKeys.BACKFACE_POSTFIX;

@@ -3,17 +3,23 @@ package forge.adventure.data;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
-import forge.adventure.util.CardUtil;
-import forge.adventure.util.Config;
-import forge.adventure.util.Current;
-import forge.adventure.util.Reward;
+import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.card.CardEdition;
 import forge.deck.Deck;
+import forge.item.BoosterPack;
 import forge.item.PaperCard;
+import forge.model.CardBlock;
+import forge.model.FModel;
+import forge.util.Aggregates;
 import forge.util.IterableUtil;
+import forge.util.StreamUtil;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Predicate;
+
+import static forge.adventure.data.AdventureEventData.selectSetPool;
 
 /**
  * Data class that will be used to read Json configuration files
@@ -216,6 +222,38 @@ public class RewardData implements Serializable {
                         }
                     }
                     break;
+                case "cardPackShop":
+                {
+                    if(colors == null) {
+                        CardEdition.Collection editions = FModel.getMagicDb().getEditions();
+                        Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER;
+                        List<CardEdition> allEditions = new ArrayList<>();
+                        StreamUtil.stream(editions)
+                                .filter(filter)
+                                .filter(CardEdition::hasBoosterTemplate)
+                                .forEach(allEditions::add);
+                        ConfigData configData = Config.instance().getConfigData();
+                        for (String restricted : configData.restrictedEditions) {
+                            allEditions.removeIf(q -> q.getName().equals(restricted));
+                        }
+                        System.out.println(allEditions);
+                        for(int i=0;i<count+addedCount;i++) {
+                            ret.add(new Reward(AdventureEventController.instance().generateBooster(Aggregates.random(allEditions).getCode())));
+
+                        }
+
+                    }
+                    else
+                    {
+                        for(int i=0;i<count+addedCount;i++) {
+                            ret.add(new Reward(AdventureEventController.instance().generateBoosterByColor(colors[0])));
+
+                        }
+                    }
+
+
+                    break;
+                }
                 case "cardPack":
                     if(cardPack!=null)
                     {
@@ -265,7 +303,7 @@ public class RewardData implements Serializable {
             for (Reward data : dataList) {
                 PaperCard card = data.getCard();
                 if (card.isVeryBasicLand()) {
-                    // ensure that all basid lands share the same edition so the deck doesn't look odd
+                    // ensure that all basic lands share the same edition so the deck doesn't look odd
                     if (basicLandEdition.isEmpty()) {
                         basicLandEdition = card.getEdition();
                     }
