@@ -6,4 +6,5 @@ Type=Commander
 ScryfallCode=TDC
 
 [cards]
+1 M Betor, Ancestor's Voice @Lius Lasahido
 8 M Teval, the Balanced Scale @Chris Rahn
