@@ -1,0 +1,8 @@
+Name:Piggy Bank
+ManaCost:1 R
+Types:Artifact Creature Boar Toy
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:When Piggy Bank dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

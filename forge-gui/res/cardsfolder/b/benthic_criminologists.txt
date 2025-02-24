@@ -5,7 +5,7 @@ PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters or attacks, you may sacrifice an artifact. If you do, draw a card.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, you may sacrifice an artifact. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Artifact>
-DeckHas:Ability$Sacrifice
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice
 DeckHints:Type$Artifact|Treasure|Food|Map|Clue
 Oracle:Whenever Benthic Criminologists enters or attacks, you may sacrifice an artifact. If you do, draw a card.

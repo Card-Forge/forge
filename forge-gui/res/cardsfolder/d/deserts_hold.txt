@@ -2,7 +2,7 @@ Name:Desert's Hold
 ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Desert$ True | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, if you control a Desert or there is a Desert card in your graveyard, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.

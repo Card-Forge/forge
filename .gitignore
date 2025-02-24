@@ -12,6 +12,7 @@
 .settings
 .classpath
 .project
+.checkstyle
 
 # Ignore VS Code config files
 
@@ -24,6 +25,8 @@
 
 nbactions.xml
 
+# Ignore flattened pom
+.flattened-pom.xml
 
 # Ignore binaries, temp files and test output, everywhere
 

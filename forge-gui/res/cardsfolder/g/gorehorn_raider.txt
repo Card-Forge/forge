@@ -1,0 +1,8 @@
+Name:Gorehorn Raider
+ManaCost:4 R
+Types:Creature Minotaur Pirate
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDealDamage | TriggerDescription$ Raid — When this creature enters, if you attacked this turn, this creature deals 2 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Raid — When this creature enters, if you attacked this turn, this creature deals 2 damage to any target.

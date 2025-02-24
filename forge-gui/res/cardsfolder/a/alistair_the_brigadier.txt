@@ -7,7 +7,7 @@ SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever NICKNAME attacks, you may pay {8}. If you do, creatures you control get +X/+X until end of turn, where X is the number of historic permanents you control.
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 8 | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ X
 SVar:X:Count$Valid Permanent.YouCtrl+Historic
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
 DeckHints:Type$Artifact|Legendary|Saga
-SVar:HasAttackEffect:TRUE
 Oracle:Whenever you cast a historic spell, create a 1/1 white Soldier creature token. (Artifacts, legendaries, and Sagas are historic.)\nWhenever Alistair attacks, you may pay {8}. If you do, creatures you control get +X/+X until end of turn, where X is the number of historic permanents you control.

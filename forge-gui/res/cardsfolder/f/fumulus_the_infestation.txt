@@ -1,0 +1,14 @@
+Name:Fumulus, the Infestation
+ManaCost:3 B
+Types:Legendary Creature Vampire Insect
+PT:2/2
+K:Flying
+K:Deathtouch
+T:Mode$ Sacrificed | ValidCard$ Creature.!token | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player sacrifices a nontoken creature, create a 1/1 black Insect creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_insect_flying | TokenOwner$ You
+T:Mode$ Attacks | ValidCard$ Insect.YouCtrl,Leech.YouCtrl,Slug.YouCtrl,Worm.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an Insect, Leech, Slug, or Worm you control attacks, defending player loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:PlayMain1:TRUE
+DeckHints:Type$Insect|Leech|Slug|Worm
+Oracle:Flying, deathtouch\nWhenever a player sacrifices a nontoken creature, create a 1/1 black Insect creature token with flying.\nWhenever an Insect, Leech, Slug, or Worm you control attacks, defending player loses 1 life and you gain 1 life.

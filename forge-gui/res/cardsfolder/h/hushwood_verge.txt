@@ -1,0 +1,6 @@
+Name:Hushwood Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ W | IsPresent$ Forest.YouCtrl,Plains.YouCtrl | SpellDescription$ Add {W}. Activate only if you control a Forest or a Plains.
+Oracle:{T}: Add {G}.\n{T}: Add {W}. Activate only if you control a Forest or a Plains.

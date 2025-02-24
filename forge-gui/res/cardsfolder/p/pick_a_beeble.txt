@@ -1,12 +1,6 @@
 Name:Pick-a-Beeble
 ManaCost:no cost
 Types:Artifact Attraction
-Variant:A:Lights:2 3 6
-Variant:B:Lights:2 4 6
-Variant:C:Lights:2 5 6
-Variant:D:Lights:3 4 6
-Variant:E:Lights:3 5 6
-Variant:F:Lights:4 5 6
 K:Visit:TrigRoll
 K:Prize:TrigPrize
 SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | Sides$ 6 | SubAbility$ DBCounters | SpellDescription$ Roll a six-sided die. Put a number of luck counters on CARDNAME equal to the result and create a Treasure token. Then if there are six or more luck counters on CARDNAME, claim the prize!
@@ -17,3 +11,12 @@ SVar:TrigPrize:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | SubA
 SVar:DBSack:DB$ Sacrifice | SacValid$ Self | SubAbility$ DBOpen
 SVar:DBOpen:DB$ OpenAttraction
 Oracle:Visit — Roll a six-sided die. Put a number of luck counters on Pick-a-Beeble equal to the result and create a Treasure token. Then if there are six or more luck counters on Pick-a-Beeble, claim the prize!\nPrize — Create two Treasure tokens, then sacrifice Pick-a-Beeble and open an Attraction.
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 3 6
+Variant:B:Lights:2 4 6
+Variant:C:Lights:2 5 6
+Variant:D:Lights:3 4 6
+Variant:E:Lights:3 5 6
+Variant:F:Lights:4 5 6

@@ -1,0 +1,8 @@
+Name:Leyline of Resonance
+ManaCost:2 R R
+Types:Enchantment
+K:MayEffectFromOpeningHand:FromHand
+SVar:FromHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SpellDescription$ If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigCopy | ValidActivatingPlayer$ You | IsSingleTarget$ True | TriggerZones$ Battlefield | TargetsValid$ Creature.YouCtrl+inZoneBattlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell that targets only a single creature you control, copy that spell. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Controller$ You
+Oracle:If Leyline of Resonance is in your opening hand, you may begin the game with it on the battlefield.\nWhenever you cast an instant or sorcery spell that targets only a single creature you control, copy that spell. You may choose new targets for the copy.

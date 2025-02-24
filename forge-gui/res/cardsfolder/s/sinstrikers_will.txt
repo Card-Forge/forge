@@ -2,7 +2,7 @@ Name:Sinstriker's Will
 ManaCost:3 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ TapDmg | AddSVar$ SinstrikerCount | Description$ Enchanted creature has "{T}: This creature deals damage equal to its power to target attacking or blocking creature."
 SVar:TapDmg:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ SinstrikerCount | SpellDescription$ This creature deals damage equal to its power to target attacking or blocking creature.
 SVar:SinstrikerCount:Count$CardPower

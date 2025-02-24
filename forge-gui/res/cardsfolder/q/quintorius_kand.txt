@@ -10,7 +10,7 @@ A:AB$ Discover | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Num$ 4 | Spe
 A:AB$ ChangeZone | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ Yard | TgtPrompt$ Select any number of target cards in your graveyard | ValidTgts$ Card.YouOwn | RememberChanged$ True | SubAbility$ DBMana | StackDescription$ SpellDescription | SpellDescription$ Exile any number of target cards from your graveyard. Add {R} for each card exiled this way. You may play those cards this turn.
 SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STMayPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
-SVar:STMayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled cards this turn.
+SVar:STMayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled cards this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Yard:Count$InYourYard
 SVar:X:Remembered$Amount

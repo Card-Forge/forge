@@ -1,6 +1,6 @@
 Name:Spawn Token
 ManaCost:no cost
-Types:Creature Spawn
 Colors:red
+Types:Creature Spawn
 PT:3/3
 Oracle:

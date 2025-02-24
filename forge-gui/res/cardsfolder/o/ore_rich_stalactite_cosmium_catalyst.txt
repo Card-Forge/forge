@@ -4,10 +4,10 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ R | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add {R}. Spend this mana only to cast an instant or sorcery spell.
 K:Craft:3 R R XMin4 ExileFromGrave<X/Instant.Red+Other;Sorcery.Red+Other/red instant and/or sorcery cards>
 SVar:X:Count$xPaid
-DeckHints:Ability$Discard|Mill|Sacrifice
-DeckHas:Ability$Graveyard
-DeckNeeds:Type$Instant|Sorcery
 AI:RemoveDeck:All
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckNeeds:Type$Instant|Sorcery
 AlternateMode:DoubleFaced
 Oracle:{T}: Add {R}. Spend this mana only to cast an instant or sorcery spell.\nCraft with four or more red instant and/or sorcery cards {3}{R}{R} ({3}{R}{R}, Exile this artifact, Exile the four or more from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 

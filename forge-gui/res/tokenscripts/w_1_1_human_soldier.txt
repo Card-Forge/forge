@@ -1,6 +1,6 @@
 Name:Human Soldier Token
 ManaCost:no cost
-Types:Creature Human Soldier
 Colors:white
+Types:Creature Human Soldier
 PT:1/1
 Oracle:

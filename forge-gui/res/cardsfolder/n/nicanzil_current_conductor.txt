@@ -6,6 +6,6 @@ T:Mode$ Explores | ValidCard$ Creature.YouCtrl | ValidExplored$ Land | TriggerZo
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True
 T:Mode$ Explores | ValidCard$ Creature.YouCtrl | ValidExplored$ Card.nonLand | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control explores a nonland card, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
-DeckHas:Ability$Counters
 AI:RemoveDeck:Random
+DeckHas:Ability$Counters
 Oracle:Whenever a creature you control explores a land card, you may put a land card from your hand onto the battlefield tapped.\nWhenever a creature you control explores a nonland card, put a +1/+1 counter on Nicanzil, Current Conductor.

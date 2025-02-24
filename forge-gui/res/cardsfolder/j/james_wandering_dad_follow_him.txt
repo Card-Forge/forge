@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Legendary Creature Human Scientist
 PT:2/4
 A:AB$ Mana | Cost$ T | Produced$ C C | RestrictValid$ Activated | SpellDescription$ Add {C}{C}. Spend this mana only to activate abilities.
-AlternateMode:Adventure
 DeckHas:Ability$Token & Type$Clue
+AlternateMode:Adventure
 Oracle:Add {C}{C}. Spend this mana only to activate abilities.
 
 ALTERNATE

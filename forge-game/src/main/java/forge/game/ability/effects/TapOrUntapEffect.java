@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Maps;
+
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -51,14 +52,21 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            // check if the object is still in game or if it was moved
+            Card gameCard = tapper.getGame().getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
             // If the effected card is controlled by the same controller of the SA, default to untap.
-            boolean tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", CardTranslation.getTranslatedName(tgtC.getName())), PlayerController.BinaryChoiceType.TapOrUntap,
-                    !tgtC.getController().equals(tapper) );
-
+            boolean tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", CardTranslation.getTranslatedName(gameCard.getName())), PlayerController.BinaryChoiceType.TapOrUntap,
+                    !gameCard.getController().equals(tapper));
             if (tap) {
-                if (tgtC.tap(true, sa, tapper)) tapped.add(tgtC);
-            } else if (tgtC.untap(true)) {
-                untapMap.computeIfAbsent(tapper, i -> new CardCollection()).add(tgtC);
+                if (gameCard.tap(true, sa, tapper)) tapped.add(gameCard);
+            } else if (gameCard.untap(true)) {
+                untapMap.computeIfAbsent(tapper, i -> new CardCollection()).add(gameCard);
             }
         }
         if (!untapMap.isEmpty()) {
@@ -72,5 +80,4 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
             tapper.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
         }
     }
-
 }

@@ -46,7 +46,7 @@ ScryfallCode=ME2
 35 C Shield Bearer @Dan Frazier
 36 R Sustaining Spirit @Rebecca Guay
 37 U Swords to Plowshares @Kaja Foglio
-38 C Warning @Pat Morrissey
+38 C Warning @Pat Lewis
 39 U Aether Storm @Mark Tedin
 40 C Balduvian Conjurer @Mark Tedin
 41 R Binding Grasp @Ruth Thompson
@@ -59,7 +59,7 @@ ScryfallCode=ME2
 48 C Essence Flare @Richard Kane Ferguson
 49 U Iceberg @Jeff A. Menges
 50 C Icy Prison @Anson Maddocks
-51 C Krovikan Sorcerer @Pat Morrissey
+51 C Krovikan Sorcerer @Pat Lewis
 52 C Lat-Nam's Legacy @Tom Wänerstrand
 53 R Magus of the Unseen @Kaja Foglio
 54 R Marjhan @Daniel Gelon
@@ -253,7 +253,7 @@ ScryfallCode=ME2
 242 L Snow-Covered Island @Anson Maddocks
 243 L Snow-Covered Swamp @Douglas Shuler
 244 L Snow-Covered Mountain @Tom Wänerstrand
-245 L Snow-Covered Forest @Pat Morrissey
+245 L Snow-Covered Forest @Pat Lewis
 
 [tokens]
 kelp

@@ -1,0 +1,6 @@
+Name:Sap Sucker
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, add {G}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigCrank:DB$ Mana | Produced$ G | PersistentMana$ True
+Oracle:Whenever you crank Sap Sucker, add {G}. Until end of turn, you don't lose this mana as steps and phases end.

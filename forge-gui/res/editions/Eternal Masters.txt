@@ -56,10 +56,10 @@ ScryfallCode=EMA
 44 U Daze @Min Yum
 45 C Deep Analysis @Jesper Ejsing
 46 R Diminishing Returns @Greg Opalinski
-47 C Dream Twist @Dan Scott
+47 C Dream Twist @Dan Murayama Scott
 48 U Fact or Fiction @Terese Nielsen
 49 M Force of Will @Terese Nielsen
-50 R Future Sight @Dan Scott
+50 R Future Sight @Dan Murayama Scott
 51 C Gaseous Form @Roger Raupp
 52 C Giant Tortoise @Richard Wright
 53 C Glacial Wall @Craig Mullins
@@ -214,7 +214,7 @@ ScryfallCode=EMA
 202 R Glare of Subdual @Zoltan Boros & Gabor Szikszai
 203 R Goblin Trenches @Filip Burburan
 204 M Maelstrom Wanderer @Victor Adame Minguez
-205 U Shaman of the Pack @Dan Scott
+205 U Shaman of the Pack @Dan Murayama Scott
 206 R Shardless Agent @Izzy
 207 M Sphinx of the Steel Wind @Kev Walker
 208 U Thunderclap Wyvern @Jason Felix
@@ -238,7 +238,7 @@ ScryfallCode=EMA
 226 U Millikin @Alex Horley-Orlandelli
 227 U Mindless Automaton @Brian Snõddy
 228 R Nevinyrral's Disk @Steve Argyle
-229 C Pilgrim's Eye @Dan Scott
+229 C Pilgrim's Eye @Dan Murayama Scott
 230 U Prismatic Lens @Alan Pollack
 231 U Relic of Progenitus @Jean-Sébastien Rossbach
 232 R Sensei's Divining Top @Rob Alexander

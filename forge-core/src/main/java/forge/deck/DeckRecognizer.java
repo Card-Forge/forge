@@ -153,6 +153,8 @@ public class DeckRecognizer {
                 matchedSection = DeckSection.Planes;
             else if (sectionName.equals("attractions"))
                 matchedSection = DeckSection.Attractions;
+            else if (sectionName.equals("contraptions"))
+                matchedSection = DeckSection.Contraptions;
 
             if (matchedSection == null)  // no match found
                 return null;
@@ -470,7 +472,8 @@ public class DeckRecognizer {
             "side", "sideboard", "sb",
             "main", "card", "mainboard",
             "avatar", "commander", "schemes",
-            "conspiracy", "planes", "deck", "dungeon"};
+            "conspiracy", "planes", "deck", "dungeon",
+            "attractions", "contraptions"};
 
     private static CharSequence[] allCardTypes(){
         List<String> cardTypesList = new ArrayList<>();
@@ -668,6 +671,9 @@ public class DeckRecognizer {
                     // ok so the card has been found - let's see if there's any restriction on the set
                     return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine,
                                                 currentDeckSection, true);
+                // On the off chance we accidentally interpreted part of the card's name as a set code, e.g. "Tyrranax Rex"
+                if (data.isMTGCard(cardName + " " + setCode))
+                    continue;
                 // UNKNOWN card as in the Counterspell|FEM case
                 return Token.UnknownCard(cardName, setCode, cardCount);
             }

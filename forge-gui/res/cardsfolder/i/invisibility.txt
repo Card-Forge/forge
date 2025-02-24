@@ -2,6 +2,6 @@ Name:Invisibility
 ManaCost:U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ U U | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.nonWall | Description$ Enchanted creature can't be blocked except by Walls.
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by Walls.

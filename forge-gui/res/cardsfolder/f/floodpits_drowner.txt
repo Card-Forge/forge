@@ -1,0 +1,11 @@
+Name:Floodpits Drowner
+ManaCost:1 U
+Types:Creature Merfolk
+PT:2/1
+K:Flash
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap target creature an opponent controls and put a stun counter on it.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+A:AB$ ChangeZone | Cost$ 1 U T | ValidTgts$ Creature.counters_GE1_STUN | TgtPrompt$ Select target creature with a stun counter on it | ThisDefinedAndTgts$ Self | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SpellDescription$ Shuffle CARDNAME and target creature with a stun counter on it into their owners' libraries.
+Oracle:Flash\nVigilance\nWhen Floodpits Drowner enters, tap target creature an opponent controls and put a stun counter on it.\n{1}{U}, {T}: Shuffle Floodpits Drowner and target creature with a stun counter on it into their owners' libraries.

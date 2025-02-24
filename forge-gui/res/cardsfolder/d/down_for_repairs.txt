@@ -2,5 +2,5 @@ Name:Down for Repairs
 ManaCost:2 B
 Types:Sorcery
 A:SP$ Discard | ValidTgts$ Player | NumCards$ 1 | DiscardValid$ Card.nonLand | Mode$ RevealYouChoose | SubAbility$ DBDestroy | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. Destroy up to one target Attraction that player controls. (It's put into their junkyard.)
-SVar:DBDestroy:DB$ Destroy | TgtPrompt$ Select up to one target attraction that player controls | TgtPrompt$ Attraction.TargetedPlayerCtrl | TargetMin$ 0 | TargetMax$ 1
+SVar:DBDestroy:DB$ Destroy | TgtPrompt$ Select up to one target attraction that player controls | ValidTgts$ Attraction.TargetedPlayerCtrl | TargetMin$ 0 | TargetMax$ 1
 Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. Destroy up to one target Attraction that player controls. (It's put into their junkyard.)

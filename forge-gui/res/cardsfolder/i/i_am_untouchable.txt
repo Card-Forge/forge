@@ -1,0 +1,8 @@
+Name:I Am Untouchable
+ManaCost:no cost
+Types:Ongoing Scheme
+S:Mode$ Continuous | EffectZone$ Command | Affected$ You,Permanent.YouCtrl | AddKeyword$ Hexproof | Description$ You and permanents you control have hexproof.
+T:Mode$ DamageDoneOnce | ValidTarget$ You | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ When combat damage is dealt to you, create a 4/4 colorless Scarecrow artifact creature token with vigilance, then abandon this scheme.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_4_4_a_scarecrow_vigilance | TokenOwner$ You | SubAbility$ DBAbandon
+SVar:DBAbandon:DB$ Abandon
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nYou and permanents you control have hexproof.\nWhen combat damage is dealt to you, create a 4/4 colorless Scarecrow artifact creature token with vigilance, then abandon this scheme.

@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import forge.GameCommand;
+import forge.card.CardRarity;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -24,10 +25,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
@@ -83,8 +81,8 @@ public abstract class SpellAbilityEffect {
             }
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
-                String rawSDesc = params.get("SpellDescription");
                 if (params.containsKey("SpellDescription")) {
+                    String rawSDesc = params.get("SpellDescription");
                     if (rawSDesc.contains(",,,,,,")) rawSDesc = rawSDesc.replaceAll(",,,,,,", " ");
                     if (rawSDesc.contains(",,,")) rawSDesc = rawSDesc.replaceAll(",,,", " ");
                     String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc, sa.getHostCard());
@@ -237,7 +235,7 @@ public abstract class SpellAbilityEffect {
                 resultUnique = new CardCollection();
                 resultDuplicate = resultUnique;
             }
-            Iterables.addAll(resultDuplicate, sa.getTargets().getTargetCards());
+            sa.getTargets().getTargetCards().forEach(resultDuplicate::add);
         } else {
             String[] def = sa.getParamOrDefault(definedParam, "Self").split(" & ");
             for (String d : def) {
@@ -287,7 +285,7 @@ public abstract class SpellAbilityEffect {
                 resultUnique = new PlayerCollection();
                 resultDuplicate = resultUnique;
             }
-            Iterables.addAll(resultDuplicate, sa.getTargets().getTargetPlayers());
+            sa.getTargets().getTargetPlayers().forEach(resultDuplicate::add);
         } else {
             String[] def = sa.getParamOrDefault(definedParam, "You").split(" & ");
             for (String d : def) {
@@ -588,32 +586,41 @@ public abstract class SpellAbilityEffect {
         eff.addReplacementEffect(re);
     }
 
-    // create a basic template for Effect to be used somewhere else
-    protected static Card createEffect(final SpellAbility sa, final Player controller, final String name,
-            final String image) {
-        final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+    // create a basic template for Effect to be used somewhere els
+    public static Card createEffect(final SpellAbility sa, final Player controller, final String name, final String image) {
+        return createEffect(sa, sa.getHostCard(), controller, name, image, controller.getGame().getNextTimestamp());
+    }
+    public static Card createEffect(final SpellAbility sa, final Card hostCard, final Player controller, final String name, final String image, final long timestamp) {
+        final Game game = controller.getGame();
         final Card eff = new Card(game.nextCardId(), game);
 
-        eff.setGameTimestamp(game.getNextTimestamp());
+        eff.setGameTimestamp(timestamp);
         eff.setName(name);
-        eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
         if (name.startsWith("Emblem")) {
             eff.setEmblem(true);
             // Emblem needs to be colorless
             eff.setColor(MagicColor.COLORLESS);
-        } else if (sa.hasParam("Boon")) {
-            eff.setBoon(true);
+            eff.setRarity(CardRarity.Common);
+        } else {
+            eff.setColor(hostCard.getColor().getColor());
+            eff.setRarity(hostCard.getRarity());
         }
 
         eff.setOwner(controller);
-        eff.setSVars(sa.getSVars());
 
-        eff.setImageKey(image);
+        eff.setSetCode(hostCard.getSetCode());
+        if (image != null) {
+            eff.setImageKey(image);
+        }
 
         eff.setGamePieceType(GamePieceType.EFFECT);
-        eff.setEffectSource(sa);
+        if (sa != null) {
+            eff.setEffectSource(sa);
+            eff.setSVars(sa.getSVars());
+        } else {
+            eff.setEffectSource(hostCard);
+        }
 
         return eff;
     }
@@ -975,7 +982,7 @@ public abstract class SpellAbilityEffect {
         if (("AsLongAsControl".equals(duration) || "AsLongAsInPlay".equals(duration)) && hostCard.isPhasedOut()) {
             return false;
         }
-        if (("UntilLoseControlOfHost".equals(duration) || "ForAsLongAsControl".equals(duration)) && hostCard.getController() != sa.getActivatingPlayer()) {
+        if (("UntilLoseControlOfHost".equals(duration) || "AsLongAsControl".equals(duration)) && hostCard.getController() != sa.getActivatingPlayer()) {
             return false;
         }
         if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
@@ -1033,7 +1040,9 @@ public abstract class SpellAbilityEffect {
             exilingSource = cause.getOriginalHost();
         }
         movedCard.setExiledWith(exilingSource);
-        movedCard.setExiledBy(cause.getActivatingPlayer());
+        Player exiler = cause.hasParam("DefinedExiler") ?
+                getDefinedPlayersOrTargeted(cause, "DefinedExiler").get(0) : cause.getActivatingPlayer();
+        movedCard.setExiledBy(exiler);
     }
 
     public static GameCommand exileEffectCommand(final Game game, final Card effect) {

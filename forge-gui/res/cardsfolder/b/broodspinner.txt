@@ -1,0 +1,11 @@
+Name:Broodspinner
+ManaCost:B G
+Types:Creature Spider
+PT:2/3
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on the top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 2
+A:AB$ Token | Cost$ 4 B G T Sac<1/CARDNAME> | TokenAmount$ X | TokenScript$ bg_1_1_insect_flying | TokenOwner$ You | SpellDescription$ Create a number of 1/1 black and green Insect creature tokens with flying equal to the number of card types among cards in your graveyard.
+SVar:X:Count$ValidGraveyard Card.YouOwn$CardTypes
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Reach\nWhen Broodspinner enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\n{4}{B}{G}, {T}, Sacrifice Broodspinner: Create a number of 1/1 black and green Insect creature tokens with flying equal to the number of card types among cards in your graveyard.

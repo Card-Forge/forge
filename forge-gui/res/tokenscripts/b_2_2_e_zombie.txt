@@ -1,6 +1,6 @@
 Name:Zombie Token
 ManaCost:no cost
-Types:Enchantment Creature Zombie
 Colors:black
+Types:Enchantment Creature Zombie
 PT:2/2
 Oracle:

@@ -1,8 +1,9 @@
 Name:Tome of Gadwick
 ManaCost:U
 Types:Artifact Equipment
-T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, conjure a random card from CARDNAME's spellbook into your hand.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Ward:1 | Description$ Equipped creature gets +1/+0 and has ward {1}.
+T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigConjure | TriggerDescription$ Whenever equipped creature attacks, conjure a random card from CARDNAME's spellbook into your hand.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Brainstorm,Consider,Obsessive Search,Opt,Peek,Piece It Together,Ponder,Preordain,Quicken,Serum Visions,Sleight of Hand,Thought Scour | Zone$ Hand
 K:Equip:1
 DeckHas:Type$Instant|Sorcery & Ability$Graveyard
-Oracle:Whenever equipped creature deals combat damage to a player, conjure a random card from Tome of Gadwick's spellbook into your hand.\nEquip {1}
+Oracle:Equipped creature gets +1/+0 and has ward {1}.\nWhenever equipped creature attacks, conjure a random card from Tome of Gadwick's spellbook into your hand.\nEquip {1}

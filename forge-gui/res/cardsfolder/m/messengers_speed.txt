@@ -2,6 +2,6 @@ Name:Messenger's Speed
 ManaCost:R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample & Haste | Description$ Enchanted creature has trample and haste.
 Oracle:Enchant creature\nEnchanted creature has trample and haste.

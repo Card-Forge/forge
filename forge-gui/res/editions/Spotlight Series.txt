@@ -1,0 +1,9 @@
+[metadata]
+Code=PSPL
+Date=2025-01-03
+Name=Spotlight Series
+Type=Promo
+ScryfallCode=PSPL
+
+[cards]
+1 M Terror of the Peaks @Richard Kane Ferguson

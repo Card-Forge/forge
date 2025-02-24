@@ -1,7 +1,7 @@
 Name:Human Token
 ManaCost:no cost
-Types:Creature Human
 Colors:white
+Types:Creature Human
 PT:1/1
 K:Ward:2
 Oracle:Ward 2 (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 2.)

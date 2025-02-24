@@ -1,5 +1,5 @@
 Name:Spawn Token
 ManaCost:no cost
-PT:2/2
 Types:Artifact Creature Spawn
+PT:2/2
 Oracle:

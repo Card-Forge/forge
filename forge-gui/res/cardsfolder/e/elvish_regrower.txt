@@ -1,0 +1,7 @@
+Name:Elvish Regrower
+ManaCost:2 G G
+Types:Creature Elf Druid
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, return target permanent card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent card in your graveyard
+Oracle:When this creature enters, return target permanent card from your graveyard to your hand.

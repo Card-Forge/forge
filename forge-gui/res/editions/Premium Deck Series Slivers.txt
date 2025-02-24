@@ -40,7 +40,7 @@ ScryfallCode=H09
 31 U Ancient Ziggurat @John Avon
 32 R Rootbound Crag @Matt Stewart
 33 C Rupture Spire @Jaime Jones
-34 C Terramorphic Expanse @Dan Scott
+34 C Terramorphic Expanse @Dan Murayama Scott
 35 U Vivid Creek @Fred Fields
 36 U Vivid Grove @Howard Lyon
 37 L Plains @Terese Nielsen

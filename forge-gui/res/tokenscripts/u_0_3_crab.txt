@@ -1,6 +1,6 @@
 Name:Crab Token
 ManaCost:no cost
-Types:Creature Crab
 Colors:blue
+Types:Creature Crab
 PT:0/3
 Oracle:

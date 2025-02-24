@@ -4,7 +4,7 @@ Types:Artifact
 K:Kicker:3
 K:Indestructible
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigCopyPermanent | TriggerDescription$ When CARDNAME enters, if it was kicked, create two tapped tokens that are copies of CARDNAME.
-SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 2 | TokenTapped$ True
+SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ 2 | TokenTapped$ True
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Token
 Oracle:Kicker {3}\nIndestructible\nWhen Skyclave Relic enters, if it was kicked, create two tapped tokens that are copies of Skyclave Relic.\n{T}: Add one mana of any color.

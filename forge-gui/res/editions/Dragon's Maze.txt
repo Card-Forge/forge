@@ -60,7 +60,7 @@ ScryfallCode=DGM
 46 C Phytoburst @Izzy
 47 R Renegade Krasis @Howard Lyon
 48 C Saruli Gatekeepers @Chris Rahn
-49 R Skylasher @Dan Scott
+49 R Skylasher @Dan Murayama Scott
 50 C Thrashing Mossdog @Ryan Barger
 51 R Advent of the Wurm @Lucas Graciano
 52 C Armored Wolf-Rider @Matt Stewart
@@ -100,7 +100,7 @@ ScryfallCode=DGM
 86 C Morgue Burst @Raymond Swanland
 87 C Nivix Cyclops @Wayne Reynolds
 88 R Notion Thief @Clint Cearley
-89 R Obzedat's Aid @Dan Scott
+89 R Obzedat's Aid @Dan Murayama Scott
 90 C Pilfered Plans @Michael C. Hayes
 91 R Plasm Capture @Chase Stone
 92 M Progenitor Mimic @Daarken

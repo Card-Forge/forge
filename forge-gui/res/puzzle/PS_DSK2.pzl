@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Duskmourn: House of Horror #02
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/09/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Ensure your solution satisfies all possible blocking decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Marvin, Murderous Mimic;Draconic Destiny;Corpses of the Lost;Sporogenic Infection;Gold Pan
+p0battlefield=Kaito, Bane of Nightmares|Counters:LOYALTY=3;Three Tree Mascot;Island;Island;Island;Island;Island
+p1life=7
+p1battlefield=Innkeeper's Talent|ClassLevel:2;Omnivorous Flytrap|Counters:P1P1=1;Cackling Slasher|Counters:P1P1=1

@@ -11,6 +11,7 @@ import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
@@ -137,7 +138,7 @@ public class SplashScreen extends FContainer {
             }
             float hmod = Forge.isLandscapeMode() ? 1f : 1.3f;
             float ymod = 2.6f;
-            g.drawImage(splashTexture, Forge.getScreenWidth()/2 - (w*percentage*hmod)/2 , Forge.getScreenHeight()/2 - (h*percentage*hmod)/ymod, (w*percentage)*hmod, (h*percentage)*hmod);
+            g.drawImage(splashTexture, Forge.getScreenWidth()/2f - (w*percentage*hmod)/2 , Forge.getScreenHeight()/2f - (h*percentage*hmod)/ymod, (w*percentage)*hmod, (h*percentage)*hmod);
 
             y += h * 295f / 450f;
             if (disclaimerFont == null) {
@@ -153,10 +154,10 @@ public class SplashScreen extends FContainer {
             float pbHeight = 57f / 450f * h;
             y += 78f / 450f * h;
 
-            float w2 = Forge.isLandscapeMode() ? Forge.getScreenWidth() / 2 : Forge.getScreenHeight() / 2;
+            float w2 = Forge.isLandscapeMode() ? Forge.getScreenWidth() / 2f : Forge.getScreenHeight() / 2f;
             float h2 = 57f / 450f * (w2/2);
 
-            String version = "v. " + Forge.CURRENT_VERSION;
+            String version = "v." + Forge.getDeviceAdapter().getVersionString();
             g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, Align.center, true);
             progressBar.setBounds((Forge.getScreenWidth() - w2)/2, Forge.getScreenHeight() - h2 * 2f, w2, h2);
             g.draw(progressBar);
@@ -280,7 +281,7 @@ public class SplashScreen extends FContainer {
             float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
             g.drawImage(FSkin.getLogo(), getWidth() / 2 - (FSkin.getLogo().getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.getLogo().getHeight() * xmod) / 1.5f, FSkin.getLogo().getWidth() * xmod, FSkin.getLogo().getHeight() * xmod);
         } else {
-            g.drawImage(splashTexture, x, y, w, h);
+            g.drawImage(FSkinImage.LOGO, getWidth() / 2 - (FSkinImage.LOGO.getWidth() * 2f) / 2, getHeight() / 2 - (FSkinImage.LOGO.getHeight() * 2f) / 1.3f, FSkinImage.LOGO.getWidth() * 2f, FSkinImage.LOGO.getHeight() * 2f);
         }
         y += h * 295f / 450f;
         float padding = 20f / 450f * w;
@@ -380,7 +381,7 @@ public class SplashScreen extends FContainer {
         progressBar.setBounds(x + padding, y, w - 2 * padding, pbHeight);
         g.draw(progressBar);
 
-        String version = "v. " + Forge.CURRENT_VERSION;
+        String version = "v." + Forge.getDeviceAdapter().getVersionString();
         g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, Align.center, true);
     }
 }

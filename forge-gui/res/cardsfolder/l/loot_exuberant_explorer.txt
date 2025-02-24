@@ -1,0 +1,8 @@
+Name:Loot, Exuberant Explorer
+ManaCost:2 G
+Types:Legendary Creature Beast Noble
+PT:1/4
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+A:AB$ Dig | Cost$ 4 G G T | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature.cmcLEX | DestinationZone$ Battlefield | RestRandomOrder$ True | SpellDescription$ Look at the top six cards of your library. You may reveal a creature card with mana value less than or equal to the number of lands you control from among them and put it onto the battlefield. Put the rest on the bottom in a random order.
+SVar:X:Count$Valid Land.YouCtrl
+Oracle:You may play an additional land on each of your turns.\n{4}{G}{G}, {T}: Look at the top six cards of your library. You may reveal a creature card with mana value less than or equal to the number of lands you control from among them and put it onto the battlefield. Put the rest on the bottom in a random order.

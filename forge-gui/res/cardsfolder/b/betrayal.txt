@@ -2,7 +2,7 @@ Name:Betrayal
 ManaCost:U
 Types:Enchantment Aura
 K:Enchant creature an opponent controls
-A:SP$ Attach | Cost$ U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | AILogic$ Pump
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever enchanted creature becomes tapped, you draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Enchant creature an opponent controls\nWhenever enchanted creature becomes tapped, you draw a card.

@@ -1,0 +1,10 @@
+Name:Fear of Surveillance
+ManaCost:1 W
+Types:Enchantment Creature Nightmare
+PT:2/2
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Vigilance\nWhenever Fear of Surveillance attacks, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

@@ -1,0 +1,7 @@
+Name:Shepherding Spirits
+ManaCost:4 W W
+Types:Creature Spirit
+PT:4/5
+K:Flying
+K:TypeCycling:Plains:2
+Oracle:Flying\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)

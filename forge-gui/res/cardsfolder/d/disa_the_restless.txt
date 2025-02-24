@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | ValidCard$ Permanent.Lhurgoyf+YouOwn | Origin$ Library,Han
 SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield
 T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, create a Tarmogoyf token. (It's a {1}{G} Lhurgoyf creature with "Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.")
 SVar:TrigToken:DB$ CopyPermanent | DefinedName$ Tarmogoyf
-DeckNeeds:Type$Lhurgoyf
 DeckHas:Ability$Token & Type$Lhurgoyf
 DeckHints:Ability$Mill
+DeckNeeds:Type$Lhurgoyf
 Oracle:Whenever a Lhurgoyf permanent card is put into your graveyard from anywhere other than the battlefield, put it onto the battlefield.\nWhenever one or more creatures you control deal combat damage to a player, create a Tarmogoyf token. (It's a {1}{G} Lhurgoyf creature with "Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.")

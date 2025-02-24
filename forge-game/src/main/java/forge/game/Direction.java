@@ -27,7 +27,7 @@ import com.google.common.collect.ImmutableList;
 public enum Direction {
 	Left,
 	Right;
-	
+
 	private static final String LEFT = "Left";
 	private static final String RIGHT = "Right";
 	/** Immutable list of all directions (in order, Left and Right). */
@@ -36,15 +36,15 @@ public enum Direction {
 
 	/** @return The default direction. */
 	public static final Direction getDefaultDirection() { return Left; }
-	
+
 	/** @return Immutable list of all directions (in order, Left and Right). */
 	public static List<Direction> getListOfDirections() { return listOfDirections; }
-	
+
 	/** @return True if and only if this is the default direction. */
 	public boolean isDefaultDirection() {
 		return this.equals(getDefaultDirection());
 	}
-	
+
 	/**
 	 * Get the index by which the turn order is shifted, given this Direction.
 	 * @return 1 or -1.
@@ -55,7 +55,7 @@ public enum Direction {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * Give the other Direction.
 	 * @return Right if this is Left, and vice versa.

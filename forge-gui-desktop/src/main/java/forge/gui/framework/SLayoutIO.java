@@ -9,7 +9,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FAbsolutePositioner;
 import forge.toolbox.SaveOpenDialog;
 import forge.toolbox.SaveOpenDialog.Filetypes;
-import forge.util.CollectionSuppliers;
 import forge.util.ThreadUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -23,6 +22,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -513,8 +513,8 @@ public final class SLayoutIO {
         Attribute attribute;
         EDocID selectedId = null;
         double x0 = 0, y0 = 0, w0 = 0, h0 = 0;
-        
-        MapOfLists<LayoutInfo, EDocID> model = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
+
+        MapOfLists<LayoutInfo, EDocID> model = new HashMapOfLists<>(ArrayList::new);
         
         LayoutInfo currentKey = null;
         while (null != reader && reader.hasNext()) {

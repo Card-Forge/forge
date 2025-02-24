@@ -6,5 +6,5 @@ K:First Strike
 S:Mode$ AttackRestrict | IsPresent$ Card.Self+tapped | MaxAttackers$ 1 | ValidDefender$ You | Description$ As long as CARDNAME is tapped, no more than one creature can attack you each combat.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLimitBlock | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, each opponent can't block with more than one creature this combat.
 SVar:TrigLimitBlock:DB$ Effect | StaticAbilities$ STLimitBlock | Duration$ UntilEndOfCombat
-SVar:STLimitBlock:Mode$ BlockRestrict | EffectZone$ Command | MaxBlockers$ 1 | ValidDefender$ Opponent | Description$ Each opponent can't block with more than one creature this combat.
+SVar:STLimitBlock:Mode$ BlockRestrict | MaxBlockers$ 1 | ValidDefender$ Opponent | Description$ Each opponent can't block with more than one creature this combat.
 Oracle:First strike\nWhenever Mirri, Weatherlight Duelist attacks, each opponent can't block with more than one creature this combat.\nAs long as Mirri, Weatherlight Duelist is tapped, no more than one creature can attack you each combat.

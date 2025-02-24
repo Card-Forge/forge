@@ -1,7 +1,7 @@
 Name:Goblin Scout Token
 ManaCost:no cost
-Types:Creature Goblin Scout
 Colors:red
+Types:Creature Goblin Scout
 PT:1/1
 K:Landwalk:Mountain
 Oracle:Mountainwalk

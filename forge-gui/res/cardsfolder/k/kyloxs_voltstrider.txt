@@ -10,6 +10,6 @@ SVar:StaticReplace:Event$ Moved | ValidLKI$ Card.IsRemembered | Origin$ Stack | 
 SVar:MoveLibrary:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Library | LibraryPosition$ -1 | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 K:Crew:2
-DeckHints:Type$Instant|Sorcery & Ability$Graveyard|Mill|Discard|Dredge
 SVar:HasAttackEffect:TRUE
+DeckHints:Type$Instant|Sorcery & Ability$Graveyard|Mill|Discard|Dredge
 Oracle:Collect evidence 6: Kylox's Voltstrider becomes an artifact creature until end of turn.\nWhenever Kylox's Voltstrider attacks, you may cast an instant or sorcery spell from among cards exiled with it. If that spell would be put into a graveyard, put it on the bottom of its owner's library instead.\nCrew 2

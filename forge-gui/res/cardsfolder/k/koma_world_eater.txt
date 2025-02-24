@@ -1,0 +1,11 @@
+Name:Koma, World-Eater
+ManaCost:3 G G U U
+Types:Legendary Creature Serpent
+PT:8/12
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+K:Trample
+K:Ward:4
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, create four 3/3 blue Serpent creature tokens named Koma's Coil.
+SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ komas_coil | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:This spell can't be countered.\nTrample, ward {4}\nWhenever Koma deals combat damage to a player, create four 3/3 blue Serpent creature tokens named Koma's Coil.

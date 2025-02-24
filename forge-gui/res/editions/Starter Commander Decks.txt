@@ -77,7 +77,7 @@ ScryfallCode=SCD
 69 R Bloodgift Demon @Chris Rahn
 70 R Cemetery Reaper @Dave Allsop
 71 R Champion of the Perished @Kekai Kotaki
-72 R Crippling Fear @Nestor Ossandon Leal
+72 R Crippling Fear @Néstor Ossandón Leal
 73 U Cruel Revival @Miles Johnston
 74 U Curse of Disturbance @Kieran Yanner
 75 R Deadly Tempest @Cliff Childs
@@ -174,7 +174,7 @@ ScryfallCode=SCD
 166 U Unleash Fury @Izzy
 167 U Vandalblast @Seb McKinnon
 168 M Verix Bladewing @XiaoDi Jin
-169 R Wild Ricochet @Dan Scott
+169 R Wild Ricochet @Dan Murayama Scott
 170 R Wildfire Devils @Izzy
 171 C Avacyn's Pilgrim @Jana Schirmer & Johannes Voss
 172 U Beast Within @Jesper Ejsing
@@ -192,7 +192,7 @@ ScryfallCode=SCD
 184 R Frontier Siege @James Ryman
 185 U Garruk's Uprising @Wisnu Tan
 186 U Great Oak Guardian @Steven Belledin
-187 U Harmonize @Dan Scott
+187 U Harmonize @Dan Murayama Scott
 188 R Harvest Season @Shreya Shetty
 189 R Hornet Nest @Adam Paquette
 190 R Hornet Queen @Martina Pilcerova
@@ -204,7 +204,7 @@ ScryfallCode=SCD
 196 C Leafkin Druid @Filip Burburan
 197 U Loaming Shaman @Carl Critchlow
 198 U Loyal Guardian @Robbie Trevino
-199 U Nissa's Expedition @Dan Scott
+199 U Nissa's Expedition @Dan Murayama Scott
 200 U Nullmage Shepherd @Campbell White
 201 U Overrun @Carl Critchlow
 202 U Overwhelming Instinct @Ron Spears
@@ -226,7 +226,7 @@ ScryfallCode=SCD
 218 C Breath of Malfegor @Vance Kovacs
 219 R Camaraderie @Sidharth Chaturvedi
 220 R Clan Defiance @Daarken
-221 U Cloudblazer @Dan Scott
+221 U Cloudblazer @Dan Murayama Scott
 222 R Collective Blessing @Svetlin Velinov
 223 R Dauntless Escort @Volkan Baǵa
 224 U Diregraf Captain @Slawomir Maniak
@@ -239,7 +239,7 @@ ScryfallCode=SCD
 231 M Havengul Lich @James Ryman
 232 U Jubilant Skybonder @Jesper Ejsing
 233 R Kaervek the Merciless @Heonhwa Choe
-234 U Kangee, Sky Warden @Dan Scott
+234 U Kangee, Sky Warden @Dan Murayama Scott
 235 U Maja, Bretagard Protector @Lie Setiawan
 236 M March of the Multitudes @Zack Stella
 237 U Migratory Route @Winona Nelson
@@ -262,7 +262,7 @@ ScryfallCode=SCD
 254 R Undermine @Massimilano Frezzato
 255 U Unlicensed Disintegration @Izzy
 256 M Vela the Night-Clad @Allen Williams
-257 C Arcane Signet @Dan Scott
+257 C Arcane Signet @Dan Murayama Scott
 258 U Atarka Monument @Daniel Ljunggren
 259 U Azorius Signet @Raoul Vitale
 260 U Burnished Hart @Yeong-Hao Han
@@ -276,7 +276,7 @@ ScryfallCode=SCD
 268 R Idol of Oblivion @Piotr Dura
 269 U Lightning Greaves @Jeremy Jarvis
 270 C Nihil Spellbomb @Franz Vohwinkel
-271 C Pilgrim's Eye @Dan Scott
+271 C Pilgrim's Eye @Dan Murayama Scott
 272 U Rakdos Signet @Martina Pilcerova
 273 C Sky Diamond @Lindsey Look
 274 C Skyscanner @Adam Paquette

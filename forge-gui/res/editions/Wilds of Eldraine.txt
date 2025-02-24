@@ -21,7 +21,7 @@ ScryfallCode=WOE
 9 U Cursed Courtier @Tuan Duong Chu
 10 U Discerning Financier @Wayne Reynolds
 11 U Dutiful Griffin @Ilse Gort
-12 U Eerie Interference @Chris Rahn
+12 U Eerie Interference @Néstor Ossandón Leal
 13 R Expel the Interlopers @Andreas Zafiratos
 14 C Frostbridge Guard @Paul Scott Canavan
 15 U Gallant Pie-Wielder @Matt Forsyth
@@ -48,7 +48,7 @@ ScryfallCode=WOE
 36 C Tuinvale Guide @Anastasia Ovchinnikova
 37 C Unassuming Sage @Michele Giorgi
 38 M Virtue of Loyalty @Piotr Dura
-39 R Werefox Bodyguard @Nestor Ossandon Leal
+39 R Werefox Bodyguard @Néstor Ossandón Leal
 40 C Aquatic Alchemist @Uriah Voth
 41 U Archive Dragon @Tyler Walpole
 42 M Asinine Antics @Brent Hollowell
@@ -184,7 +184,7 @@ ScryfallCode=WOE
 172 R Gruff Triplets @Fajareka Setiawan
 173 C Hamlet Glutton @Edgar Sánchez Hidalgo
 174 C Hollow Scavenger @Michele Giorgi
-175 U Howling Galefang @Nestor Ossandon Leal
+175 U Howling Galefang @Néstor Ossandón Leal
 176 R The Huntsman's Redemption @Magali Villeneuve
 177 C Leaping Ambush @Vincent Christiaens
 178 U Night of the Sweets' Revenge @Leonardo Santanna
@@ -238,7 +238,7 @@ ScryfallCode=WOE
 226 U Frolicking Familiar @Brian Valeza
 227 U Gingerbread Hunter @Milivoj Ćeran
 228 R Heartflame Duelist @Justyna Dura
-229 U Imodane's Recruiter @Nestor Ossandon Leal
+229 U Imodane's Recruiter @Néstor Ossandón Leal
 230 M Kellan, the Fae-Blooded @Anna Steinbauer
 231 R Mosswood Dreadknight @Ryan Pancoast
 232 U Picnic Ruiner @Edgar Sánchez Hidalgo
@@ -346,7 +346,7 @@ ScryfallCode=WOE
 326 R Regal Bunnicorn @Ilse Gort
 327 R Spellbook Vendor @Scott Murphy
 328 R A Tale for the Ages @Julie Dillon
-329 R Werefox Bodyguard @Nestor Ossandon Leal
+329 R Werefox Bodyguard @Néstor Ossandón Leal
 330 M Asinine Antics @Brent Hollowell
 331 R Extraordinary Journey @Volkan Baǵa
 332 R Farsight Ritual @Randy Gallegos

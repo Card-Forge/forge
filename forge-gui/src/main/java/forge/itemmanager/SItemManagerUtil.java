@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -30,24 +29,24 @@ import forge.util.Localizer;
 public final class SItemManagerUtil {
     /** An enum to encapsulate metadata for the stats/filter objects. */
     public enum StatTypes implements IHasSkinProp {
-        WHITE      (FSkinProp.IMG_MANA_W,         CardRulesPredicates.Presets.IS_WHITE, "lblWhitecards"),
-        BLUE       (FSkinProp.IMG_MANA_U,         CardRulesPredicates.Presets.IS_BLUE, "lblBluecards"),
-        BLACK      (FSkinProp.IMG_MANA_B,         CardRulesPredicates.Presets.IS_BLACK, "lblBlackcards"),
-        RED        (FSkinProp.IMG_MANA_R,         CardRulesPredicates.Presets.IS_RED, "lblRedcards"),
-        GREEN      (FSkinProp.IMG_MANA_G,         CardRulesPredicates.Presets.IS_GREEN, "lblGreencards"),
-        COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS, "lblColorlesscards"),
+        WHITE      (FSkinProp.IMG_MANA_W,         CardRulesPredicates.IS_WHITE, "lblWhitecards"),
+        BLUE       (FSkinProp.IMG_MANA_U,         CardRulesPredicates.IS_BLUE, "lblBluecards"),
+        BLACK      (FSkinProp.IMG_MANA_B,         CardRulesPredicates.IS_BLACK, "lblBlackcards"),
+        RED        (FSkinProp.IMG_MANA_R,         CardRulesPredicates.IS_RED, "lblRedcards"),
+        GREEN      (FSkinProp.IMG_MANA_G,         CardRulesPredicates.IS_GREEN, "lblGreencards"),
+        COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, CardRulesPredicates.IS_COLORLESS, "lblColorlesscards"),
         MULTICOLOR (GuiBase.getInterface().isLibgdxPort() ? FSkinProp.IMG_HDMULTI :
-                    FSkinProp.IMG_MULTI,          CardRulesPredicates.Presets.IS_MULTICOLOR, "lblMulticolorcards"),
+                    FSkinProp.IMG_MULTI,          CardRulesPredicates.IS_MULTICOLOR, "lblMulticolorcards"),
 
         PACK_OR_DECK (FSkinProp.IMG_PACK,         null, "lblPackordeck"),
-        LAND         (FSkinProp.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND, "lblLands"),
-        ARTIFACT     (FSkinProp.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT, "lblArtifacts"),
-        CREATURE     (FSkinProp.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE, "lblCreatures"),
-        ENCHANTMENT  (FSkinProp.IMG_ENCHANTMENT,  CardRulesPredicates.Presets.IS_ENCHANTMENT, "lblEnchantments"),
-        PLANESWALKER (FSkinProp.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER, "lblPlaneswalkers"),
-        INSTANT      (FSkinProp.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT, "lblInstants"),
-        SORCERY      (FSkinProp.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY, "lblSorceries"),
-        BATTLE       (FSkinProp.IMG_BATTLE,       CardRulesPredicates.Presets.IS_BATTLE, "lblBattles"),
+        LAND         (FSkinProp.IMG_LAND,         CardRulesPredicates.IS_LAND, "lblLands"),
+        ARTIFACT     (FSkinProp.IMG_ARTIFACT,     CardRulesPredicates.IS_ARTIFACT, "lblArtifacts"),
+        CREATURE     (FSkinProp.IMG_CREATURE,     CardRulesPredicates.IS_CREATURE, "lblCreatures"),
+        ENCHANTMENT  (FSkinProp.IMG_ENCHANTMENT,  CardRulesPredicates.IS_ENCHANTMENT, "lblEnchantments"),
+        PLANESWALKER (FSkinProp.IMG_PLANESWALKER, CardRulesPredicates.IS_PLANESWALKER, "lblPlaneswalkers"),
+        INSTANT      (FSkinProp.IMG_INSTANT,      CardRulesPredicates.IS_INSTANT, "lblInstants"),
+        SORCERY      (FSkinProp.IMG_SORCERY,      CardRulesPredicates.IS_SORCERY, "lblSorceries"),
+        BATTLE       (FSkinProp.IMG_BATTLE,       CardRulesPredicates.IS_BATTLE, "lblBattles"),
 
         CMC_0 (FSkinProp.IMG_MANA_0, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 0), "lblCCMC0"),
         CMC_1 (FSkinProp.IMG_MANA_1, new CardRulesPredicates.LeafNumber(CardRulesPredicates.LeafNumber.CardField.CMC, ComparableOp.EQUALS, 1), "lblCCMC1"),

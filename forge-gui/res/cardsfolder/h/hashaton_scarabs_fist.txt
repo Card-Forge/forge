@@ -1,0 +1,8 @@
+Name:Hashaton, Scarab's Fist
+ManaCost:W B
+Types:Legendary Creature Zombie Wizard
+PT:1/3
+T:Mode$ Discarded | ValidCard$ Creature.YouOwn | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever you discard a creature card, you may pay {2}{U}. If you do, create a tapped token that's a copy of that card, except it's a 4/4 black Zombie.
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 2 U | Defined$ TriggeredCard | SetPower$ 4 | SetToughness$ 4 | SetColor$ Black | SetCreatureTypes$ Zombie | TokenTapped$ True
+DeckHints:Ability$Discard
+Oracle:Whenever you discard a creature card, you may pay {2}{U}. If you do, create a tapped token that's a copy of that card, except it's a 4/4 black Zombie.

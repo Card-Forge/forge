@@ -3,7 +3,8 @@ ManaCost:2 U U B B R R
 Types:Legendary Creature Elder Dragon
 PT:7/7
 K:Flying
-K:UpkeepCost:U B R
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {U}{B}{R}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ U B R
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player discards their hand.
 SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | Mode$ Hand
 DeckHas:Ability$Discard

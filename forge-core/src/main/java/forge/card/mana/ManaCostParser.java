@@ -1,6 +1,6 @@
 package forge.card.mana;
 
-import org.apache.commons.lang3.StringUtils;
+import com.google.common.primitives.Ints;
 
 
 /**
@@ -65,8 +65,10 @@ public class ManaCostParser implements IParserManaCost {
     @Override
     public final ManaCostShard next() {
         final String unparsed = this.cost[this.nextToken++];
-        if (StringUtils.isNumeric(unparsed)) {
-            this.genericCost += Integer.parseInt(unparsed);
+        // consider negation sign
+        Integer i = Ints.tryParse(unparsed);
+        if (i != null) {
+            this.genericCost += i;
             return null;
         }
 

@@ -1,6 +1,6 @@
 Name:Gremlin Token
 ManaCost:no cost
-PT:2/2
 Colors:red
 Types:Creature Gremlin
+PT:2/2
 Oracle:

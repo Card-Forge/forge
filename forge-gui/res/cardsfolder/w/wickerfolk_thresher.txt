@@ -1,0 +1,10 @@
+Name:Wickerfolk Thresher
+ManaCost:3 G
+Types:Artifact Creature Scarecrow
+PT:5/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Delirium$ True | Execute$ TrigDig | TriggerDescription$ Delirium — Whenever CARDNAME attacks, if there are four or more card types among cards in your graveyard, look at the top card of your library. If it's a land card, you may put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | ChangeValid$ Land | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Hand
+SVar:HasAttackEffect:TRUE
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — Whenever Wickerfolk Thresher attacks, if there are four or more card types among cards in your graveyard, look at the top card of your library. If it's a land card, you may put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand.

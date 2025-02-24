@@ -1,0 +1,17 @@
+Name:Phenomenon Investigators
+ManaCost:2 U B
+Types:Creature Human Detective
+PT:3/4
+K:ETBReplacement:Other:BelieveOrDoubt
+SVar:BelieveOrDoubt:DB$ GenericChoice | Choices$ Believe,Doubt | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Believe or Doubt.
+SVar:Believe:DB$ Pump | SpellDescription$ Believe
+SVar:Doubt:DB$ Pump | SpellDescription$ Doubt
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeBelieve | AddTrigger$ BelieveTrigger | Description$ • Believe — Whenever a nontoken creature you control dies, create a 2/2 black Horror enchantment creature token.
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeDoubt | AddTrigger$ DoubtTrigger | Description$ • Doubt — At the beginning of your end step, you may return a nonland permanent you own to your hand. If you do, draw a card.
+SVar:BelieveTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+!token | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, create a 2/2 black Horror enchantment creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_e_horror | TokenOwner$ You
+SVar:DoubtTrigger:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, you may return a nonland permanent you own to your hand. If you do, draw a card.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Permanent.nonLand+YouOwn | ChoiceOptional$ True | RememberChanged$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:As Phenomenon Investigators enters, choose Believe or Doubt.\n• Believe — Whenever a nontoken creature you control dies, create a 2/2 black Horror enchantment creature token.\n• Doubt — At the beginning of your end step, you may return a nonland permanent you own to your hand. If you do, draw a card.

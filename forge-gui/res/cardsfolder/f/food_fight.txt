@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddAbility$ SacSelf | Description$ Artifacts you control have "{2}, Sacrifice this artifact: It deals damage to any target equal to 1 plus the number of permanents named Food Fight you control."
 SVar:SacSelf:AB$ DealDamage | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ It deals damage to any target equal to 1 plus the number of permanents named Food Fight you control.
-DeckNeeds:Type$Artifact & Name$Food Fight
-DeckHas:Ability$Sacrifice
 SVar:X:Count$Valid Permanent.YouCtrl+namedFood Fight/Plus.1
+DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Artifact & Name$Food Fight
 Oracle:Artifacts you control have "{2}, Sacrifice this artifact: It deals damage to any target equal to 1 plus the number of permanents named Food Fight you control."

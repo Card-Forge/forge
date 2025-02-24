@@ -18,7 +18,6 @@
 package forge.game.cost;
 
 import com.google.common.base.Strings;
-
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.player.Player;

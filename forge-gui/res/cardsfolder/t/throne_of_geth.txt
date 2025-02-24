@@ -1,7 +1,7 @@
 Name:Throne of Geth
 ManaCost:2
 Types:Artifact
-A:AB$ Proliferate | Cost$ T Sac<1/Artifact> | SpellDescription$ Proliferate
+A:AB$ Proliferate | Cost$ T Sac<1/Artifact> | SpellDescription$ Proliferate.
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
 SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcLE2

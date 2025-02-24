@@ -17,14 +17,13 @@
  */
 package forge.card.mana;
 
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Lists;
 
 /**
  * <p>
@@ -92,15 +91,15 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      */
     public ManaCost(final IParserManaCost parser) {
         final List<ManaCostShard> shardsTemp = Lists.newArrayList();
-        this.hasNoCost = false;
         while (parser.hasNext()) {
             final ManaCostShard shard = parser.next();
             if (shard != null && shard != ManaCostShard.GENERIC) {
                 shardsTemp.add(shard);
             } // null is OK - that was generic mana
         }
-        this.genericCost = parser.getTotalGenericCost(); // collect generic mana
-        // here
+        int generic = parser.getTotalGenericCost(); // collect generic mana here
+        this.hasNoCost = generic == -1;
+        this.genericCost = hasNoCost ? 0 : generic;
         sealClass(shardsTemp);
     }
 
@@ -281,6 +280,9 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      * @return
      */
     public String getShortString() {
+        if (isNoCost()) {
+            return "-1";
+        }
     	StringBuilder sb = new StringBuilder();
         int generic = getGenericCost();
         if (this.isZero()) {

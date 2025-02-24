@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
@@ -26,11 +25,13 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class CountersPutAi extends CountersAi {
 
@@ -271,8 +272,9 @@ public class CountersPutAi extends CountersAi {
                 return false;
             }
 
+            Predicate<Card> predicate = CardPredicates.hasCounter(CounterType.getType(type));
             CardCollection oppCreats = CardLists.filter(ai.getOpponents().getCreaturesInPlay(),
-                    Predicates.not(CardPredicates.hasCounter(CounterType.getType(type))),
+                    predicate.negate(),
                             CardPredicates.isTargetableBy(sa));
 
             if (!oppCreats.isEmpty()) {
@@ -379,7 +381,10 @@ public class CountersPutAi extends CountersAi {
                 sa.setXManaCostPaid(amount);
             } else if ("ExiledCreatureFromGraveCMC".equals(logic)) {
                 // e.g. Necropolis
-                amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), Card::getCMC);
+                amount = ai.getCardsIn(ZoneType.Graveyard).stream()
+                        .filter(CardPredicates.CREATURES)
+                        .mapToInt(Card::getCMC)
+                        .max().orElse(0);
                 if (amount > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
                     return true;
                 }
@@ -403,7 +408,7 @@ public class CountersPutAi extends CountersAi {
                 }
 
                 // need to set Activating player
-                oa.setActivatingPlayer(ai, true);
+                oa.setActivatingPlayer(ai);
                 CardCollection targets = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), oa);
 
                 if (!targets.isEmpty()) {
@@ -626,6 +631,11 @@ public class CountersPutAi extends CountersAi {
                     return false; // only if next turn and cost is reusable
                 }
             }
+
+            // Useless since the card already has the keyword (or for another reason)
+            if (ComputerUtil.isUselessCounter(CounterType.get(type), cards.get(0))) {
+                return false;
+            }
         }
 
         boolean immediately = ComputerUtil.playImmediately(ai, sa);
@@ -702,7 +712,7 @@ public class CountersPutAi extends CountersAi {
                 if (sa.isCurse()) {
                     choice = chooseCursedTarget(list, type, amount, ai);
                 } else {
-                    CardCollection lands = CardLists.filter(list, CardPredicates.Presets.LANDS);
+                    CardCollection lands = CardLists.filter(list, CardPredicates.LANDS);
                     SpellAbility animate = sa.findSubAbilityByType(ApiType.Animate);
                     if (!lands.isEmpty() && animate != null) {
                         choice = ComputerUtilCard.getWorstLand(lands);
@@ -787,7 +797,7 @@ public class CountersPutAi extends CountersAi {
             }
         } else if (sa.getTargetRestrictions().canOnlyTgtOpponent() && !sa.getTargetRestrictions().canTgtCreature()) {
             // can only target opponent
-            PlayerCollection playerList = new PlayerCollection(Iterables.filter(
+            PlayerCollection playerList = new PlayerCollection(IterableUtil.filter(
                     sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
 
             if (playerList.isEmpty()) {
@@ -795,7 +805,7 @@ public class CountersPutAi extends CountersAi {
             }
 
             // try to choose player with less creatures
-            Player choice = playerList.min(PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.Presets.CREATURES));
+            Player choice = playerList.min(PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.CREATURES));
 
             if (choice != null) {
                 sa.getTargets().add(choice);
@@ -1192,7 +1202,7 @@ public class CountersPutAi extends CountersAi {
 
     private boolean doChargeToCMCLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
-        CardCollectionView ownLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Creature"));
+        CardCollectionView ownLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.CREATURES);
         int numCtrs = source.getCounters(CounterEnumType.CHARGE);
         int maxCMC = Aggregates.max(ownLib, Card::getCMC);
         int optimalCMC = 0;
@@ -1210,7 +1220,7 @@ public class CountersPutAi extends CountersAi {
 
     private boolean doChargeToOppCtrlCMCLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
-        CardCollectionView oppInPlay = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.NONLAND_PERMANENTS);
+        CardCollectionView oppInPlay = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.NONLAND_PERMANENTS);
         int numCtrs = source.getCounters(CounterEnumType.CHARGE);
         int maxCMC = Aggregates.max(oppInPlay, Card::getCMC);
         int optimalCMC = 0;

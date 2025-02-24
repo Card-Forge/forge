@@ -1,6 +1,6 @@
 Name:Sheep Token
 ManaCost:no cost
-Types:Creature Sheep
 Colors:white
+Types:Creature Sheep
 PT:1/1
 Oracle:

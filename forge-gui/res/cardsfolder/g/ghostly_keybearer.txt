@@ -1,0 +1,8 @@
+Name:Ghostly Keybearer
+ManaCost:3 U
+Types:Creature Spirit
+PT:3/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigUnlock | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, unlock a locked door of up to one target Room you control.
+SVar:TrigUnlock:DB$ UnlockDoor | Mode$ Unlock | ValidTgts$ Room.YouCtrl | TgtPrompt$ Choose target Room you control | TargetMin$ 0 | TargetMax$ 1
+Oracle:Flying\nWhenever Ghostly Keybearer deals combat damage to a player, unlock a locked door of up to one target Room you control.

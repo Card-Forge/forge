@@ -1,6 +1,6 @@
 Name:Zombie Token
 ManaCost:no cost
-Types:Creature Zombie
 Colors:blue
+Types:Creature Zombie
 PT:*/*
 Oracle:

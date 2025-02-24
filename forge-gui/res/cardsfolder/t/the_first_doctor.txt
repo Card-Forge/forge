@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSearch:DB$ ChangeZone | Hidden$ True | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn+namedTARDIS
 T:Mode$ SpellCast | ValidCard$ Card.withCascade | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell with cascade, put a +1/+1 counter on target artifact or creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
 DeckHints:Name$TARDIS
 DeckNeeds:Keyword$Cascade
-DeckHas:Ability$Counters
 Oracle:When The First Doctor enters, search your library and/or graveyard for a card named TARDIS, reveal it, and put it into your hand. If you search your library this way, shuffle.\nWhenever you cast a spell with cascade, put a +1/+1 counter on target artifact or creature.

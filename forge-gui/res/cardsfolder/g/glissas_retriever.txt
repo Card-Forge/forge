@@ -10,7 +10,7 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When you do, return up to X target cards from your graveyard to your hand, where X is the number of opponents who have three or more poison counters. | SubAbility$ DBCleanup
 SVar:TrigChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Card.YouOwn | TgtPrompt$ Select X target cards in your graveyard | Origin$ Graveyard | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountOpponents$HasPropertyIsCorrupted
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Mill|Dredge
-SVar:X:PlayerCountOpponents$HasPropertyIsCorrupted
 Oracle:Haste, toxic 3 (Players dealt combat damage by this creature also get three poison counters.)\nGlissa's Retriever can't be blocked by creatures with power 2 or less.\nCorrupted — When Glissa's Retriever dies, exile it. When you do, return up to X target cards from your graveyard to your hand, where X is the number of opponents who have three or more poison counters.

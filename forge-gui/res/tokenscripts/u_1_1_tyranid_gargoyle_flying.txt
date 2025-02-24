@@ -1,7 +1,7 @@
 Name:Tyranid Gargoyle Token
 ManaCost:no cost
-Types:Creature Tyranid Gargoyle
 Colors:blue
+Types:Creature Tyranid Gargoyle
 PT:1/1
 K:Flying
 Oracle:Flying

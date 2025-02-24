@@ -350,8 +350,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 setColorIdentity(temp);
             else
                 colorIdentity = ColorSet.ALL_COLORS;
-        }
-        else
+        } else
             colorIdentity = ColorSet.ALL_COLORS;
 
         gold = data.readInt("gold");
@@ -467,19 +466,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         if (data.containsKey("newCards")) {
             InventoryItem[] items = (InventoryItem[]) data.readObject("newCards");
-            for (InventoryItem item : items){
-                newCards.add((PaperCard)item);
+            for (InventoryItem item : items) {
+                newCards.add((PaperCard) item);
             }
         }
         if (data.containsKey("noSellCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
-            for (PaperCard item : items){
-                noSellCards.add(item);
+            for (PaperCard item : items) {
+                if (item != null)
+                    noSellCards.add(item.getNoSellVersion());
             }
         }
         if (data.containsKey("autoSellCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("autoSellCards");
-            for (PaperCard item : items){
+            for (PaperCard item : items) {
                 autoSellCards.add(item);
             }
         }
@@ -588,18 +588,19 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public String spriteName() {
-        return HeroListData.getHero(heroRace, isFemale);
+        return HeroListData.instance().getHero(heroRace, isFemale);
     }
 
     public FileHandle sprite() {
-        return Config.instance().getFile(HeroListData.getHero(heroRace, isFemale));
+        return Config.instance().getFile(HeroListData.instance().getHero(heroRace, isFemale));
     }
 
     public TextureRegion avatar() {
-        return HeroListData.getAvatar(heroRace, isFemale, avatarIndex);
+        return HeroListData.instance().getAvatar(heroRace, isFemale, avatarIndex);
     }
+
     public String raceName() {
-        return HeroListData.getRaces().get(Current.player().heroRace);
+        return HeroListData.instance().getRaces().get(Current.player().heroRace);
     }
 
     public GameStage getCurrentGameStage() {
@@ -607,6 +608,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             return MapStage.getInstance();
         return WorldStage.getInstance();
     }
+
     public void addStatusMessage(String iconName, String message, Integer itemCount, float x, float y) {
         String symbol = itemCount == null || itemCount < 0 ? "" : " +";
         String icon = iconName == null ? "" : "[+" + iconName + "]";
@@ -614,12 +616,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         TextraLabel actor = Controls.newTextraLabel("[%95]" + icon + "[WHITE]" + symbol + count + " " + message);
         actor.setPosition(x, y);
         actor.addAction(Actions.sequence(
-            Actions.parallel(Actions.moveBy(0f, 5f, 3f), Actions.fadeIn(2f)),
-            Actions.hide(),
-            Actions.removeActor())
+                Actions.parallel(Actions.moveBy(0f, 5f, 3f), Actions.fadeIn(2f)),
+                Actions.hide(),
+                Actions.removeActor())
         );
         getCurrentGameStage().addActor(actor);
     }
+
     public void addCard(PaperCard card) {
         cards.add(card);
         newCards.add(card);
@@ -631,11 +634,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 cards.add(reward.getCard());
                 newCards.add(reward.getCard());
                 if (reward.isAutoSell()) {
-                  autoSellCards.add(reward.getCard());
-                  refreshEditor();
-                } else if (reward.isNoSell()) {
-                    noSellCards.add(reward.getCard());
+                    autoSellCards.add(reward.getCard());
                     refreshEditor();
+                } else if (reward.isNoSell()) {
+                    if (reward.getCard() != null) {
+                        noSellCards.add(reward.getCard().getNoSellVersion());
+                        refreshEditor();
+                    }
                 }
                 break;
             case Gold:
@@ -847,9 +852,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         for (String name : equippedItems.values()) {
             ItemData data = ItemData.getItem(name);
             if (data != null
-                && ("Boots".equalsIgnoreCase(data.equipmentSlot)
-                || "Body".equalsIgnoreCase(data.equipmentSlot)
-                || "Neck".equalsIgnoreCase(data.equipmentSlot))) {
+                    && ("Boots".equalsIgnoreCase(data.equipmentSlot)
+                    || "Body".equalsIgnoreCase(data.equipmentSlot)
+                    || "Neck".equalsIgnoreCase(data.equipmentSlot))) {
                 armor.add(data);
             }
         }
@@ -903,14 +908,45 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public int cardSellPrice(PaperCard card) {
-        return (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor * (2.0f - currentLocationChanges.getTownPriceModifier()));
+        int valuable = cards.count(card) - noSellCards.count(card);
+        if (valuable == 0) {
+            return 0;
+        }
+
+        int basePrice = (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor);
+
+        float townPriceModifier = currentLocationChanges == null ? 1f : currentLocationChanges.getTownPriceModifier();
+        return (int) (basePrice * (2.0f - townPriceModifier));
     }
 
-    public void sellCard(PaperCard card, Integer result) {
-        float price = CardUtil.getCardPrice(card) * result;
-        price *= difficultyData.sellFactor;
-        cards.remove(card, result);
-        addGold((int) price);
+    public int sellCard(PaperCard card, Integer result, boolean addGold) {
+        // When selling cards, always try to sell cards worth something before selling cards that aren't worth anything
+        if (result == null || result < 1) return 0;
+
+        float earned = 0;
+
+        int valuableCount = cards.count(card) - noSellCards.count(card);
+        int noValueToSell = result - valuableCount;
+        int amountValuableToSell = Math.min(result, valuableCount);
+
+        if (amountValuableToSell > 0) {
+            earned += cardSellPrice(card) * amountValuableToSell;
+            cards.remove(card, amountValuableToSell);
+        }
+        if (noValueToSell > 0) {
+            cards.remove(card, noValueToSell);
+            noSellCards.remove(card, noValueToSell);
+        }
+
+        if (addGold) {
+            addGold((int) earned);
+        }
+
+        return (int) earned;
+    }
+
+    public int sellOneCard(PaperCard card) {
+        return sellCard(card, 1, false);
     }
 
     public void removeItem(String name) {
@@ -1161,8 +1197,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         ItemPool<PaperCard> sellableCards = new ItemPool<>(PaperCard.class);
         sellableCards.addAllFlat(cards.toFlatList());
 
-        // 1. Remove cards you can't sell
-        sellableCards.removeAll(noSellCards);
+        // Nosell cards used to be filtered out here. Instead we're going to replace their value with 0
+
         // 1a. Potentially return here if we want to give config option to sell cards from decks
         // but would need to update the decks on sell, not just the catalog
 
@@ -1170,11 +1206,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         Map<PaperCard, Integer> maxCardCounts = new HashMap<>();
         for (int i = 0; i < NUMBER_OF_DECKS; i++) {
             for (final Map.Entry<PaperCard, Integer> cp : decks[i].getAllCardsInASinglePool()) {
-
-                int count = cp.getValue() - noSellCards.count(cp.getKey());
-
-                if (count <= 0) continue;
-
+                int count = cp.getValue();
                 if (count > maxCardCounts.getOrDefault(cp.getKey(), 0)) {
                     maxCardCounts.put(cp.getKey(), cp.getValue());
                 }
@@ -1208,9 +1240,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void doAutosell() {
         int profit = 0;
         for (PaperCard cardToSell : autoSellCards.toFlatList()) {
-            profit += AdventurePlayer.current().cardSellPrice(cardToSell);
+            profit += AdventurePlayer.current().sellOneCard(cardToSell);
             autoSellCards.remove(cardToSell);
-            cards.remove(cardToSell, 1);
         }
         addGold(profit); //do this as one transaction so as not to get multiple copies of sound effect
     }

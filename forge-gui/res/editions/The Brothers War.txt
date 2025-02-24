@@ -17,7 +17,7 @@ ScryfallCode=BRO
 4 U Calamity's Wake @Slawomir Maniak
 5 C Deadly Riposte @Olena Richards
 6 C Disenchant @Richard Kane Ferguson
-7 U Great Desert Prospector @Nestor Ossandon Leal
+7 U Great Desert Prospector @Néstor Ossandón Leal
 8 M In the Trenches @Daarken
 9 R Kayla's Command @Dominik Mayer
 10 R Kayla's Reconstruction @Nicholas Elias
@@ -99,7 +99,7 @@ ScryfallCode=BRO
 86 U Battlefield Butcher @Lucas Graciano
 87 C Carrion Locust @Nino Is
 88 U Corrupt @Julie Dillon
-89 R Diabolic Intent @Dan Scott
+89 R Diabolic Intent @Dan Murayama Scott
 90 U Disciples of Gix @Peter Polach
 91 C Disfigure @Svetlin Velinov
 92 U Dreams of Steel and Oil @Jeremy Wilson
@@ -134,14 +134,14 @@ ScryfallCode=BRO
 121 M Phyrexian Fleshgorger @Steve Prescott
 122 R Razorlash Transmogrant @Kekai Kotaki
 123 C Scrapwork Rager @Michal Ivan
-124 U Transmogrant Altar @Dan Scott
+124 U Transmogrant Altar @Dan Murayama Scott
 125 R Transmogrant's Crown @Nino Vecia
 126 U Arms Race @Leesha Hannigan
 127 C Bitter Reunion @Jake Murray
 128 R Brotherhood's End @Bryan Sola
 129 C Conscripted Infantry @Noah Thatcher
 130 M Draconic Destiny @Justin Hernandez & Alexis Hernandez
-131 C Dwarven Forge-Chanter @Bartlomiej Gawel
+131 C Dwarven Forge-Chanter @Bartłomiej Gaweł
 132 C Excavation Explosion @Campbell White
 133 U The Fall of Kroog @David Auden Nash
 134 C Fallaji Chaindancer @Filipe Pagliuso
@@ -207,7 +207,7 @@ ScryfallCode=BRO
 194 R Titania's Command @Dominik Mayer
 195 C Tomakul Honor Guard @Francisco Miyara
 196 C Wasteful Harvest @Alex Stone
-197 C Boulderbranch Golem @Dan Scott
+197 C Boulderbranch Golem @Dan Murayama Scott
 198 U Cradle Clearcutter @Daarken
 199 U Haywire Mite @Izzy
 200 U Iron-Craw Crusher @Filip Burburan
@@ -252,7 +252,7 @@ ScryfallCode=BRO
 239 C Mine Worker @Raoul Vitale
 240 M Portal to Phyrexia @Svetlin Velinov
 241 C Power Plant Worker @Aaron Miller
-242 U Reconstructed Thopter @Dan Scott
+242 U Reconstructed Thopter @Dan Murayama Scott
 243 U Slagstone Refinery @Victor Harmatiuk
 244 U Spectrum Sentinel @Olivier Bernard
 245 R The Stasis Coffin @Artur Nakhodkin
@@ -305,11 +305,6 @@ ScryfallCode=BRO
 290 R Terror Ballista @Leon Tukker
 291 R Artificer's Dragon @Leon Tukker
 292 R Woodcaller Automaton @Ryan Pancoast
-373 R Rescue Retriever @Jesper Ejsing
-374 R Geology Enthusiast @Fajareka Setiawan
-375 R Terror Ballista @Leon Tukker
-376 R Artificer's Dragon @Leon Tukker
-377 R Woodcaller Automaton @Ryan Pancoast
 
 [borderless]
 293 M Teferi, Temporal Pilgrim @Cosmin Podar
@@ -345,7 +340,7 @@ ScryfallCode=BRO
 321 R The Temporal Anchor @Kekai Kotaki
 322 R Terisian Mindbreaker @Steve Prescott
 323 R Ashnod, Flesh Mechanist @Howard Lyon
-324 R Diabolic Intent @Dan Scott
+324 R Diabolic Intent @Dan Murayama Scott
 325 R Fateful Handoff @Gaboleps
 326 M Gix, Yawgmoth Praetor @Anna Podedworna
 327 R Gix's Command @Dominik Mayer
@@ -394,6 +389,11 @@ ScryfallCode=BRO
 370 R Fortified Beachhead @Christian Dimitrov
 371 R Hall of Tagsin @Christian Dimitrov
 372 R Mishra's Foundry @Leon Tukker
+373 R Rescue Retriever @Jesper Ejsing
+374 R Geology Enthusiast @Fajareka Setiawan
+375 R Terror Ballista @Leon Tukker
+376 R Artificer's Dragon @Leon Tukker
+377 R Woodcaller Automaton @Ryan Pancoast
 
 [buy a box]
 378 R Mishra's Foundry @Leon Tukker

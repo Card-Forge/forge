@@ -1,0 +1,12 @@
+Name:Boommobile
+ManaCost:2 R R
+Types:Artifact Vehicle
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When this Vehicle enters, add four mana of any one color. Spend this mana only to activate abilities.
+SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ 4 | RestrictValid$ Activated
+A:AB$ DealDamage | Cost$ X 2 R | ValidTgts$ Any | NumDmg$ X | Exhaust$ True | SubAbility$ DBPutCounter | SpellDescription$ This Vehicle deals X damage to any target. Put a +1/+1 counter on this Vehicle. (Activate each exhaust ability only once.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Crew:2
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:When this Vehicle enters, add four mana of any one color. Spend this mana only to activate abilities.\nExhaust — {X}{2}{R}: This Vehicle deals X damage to any target. Put a +1/+1 counter on this Vehicle. (Activate each exhaust ability only once.)\nCrew 2

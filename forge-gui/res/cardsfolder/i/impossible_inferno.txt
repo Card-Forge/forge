@@ -1,0 +1,9 @@
+Name:Impossible Inferno
+ManaCost:4 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 6 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 6 damage to target creature. Delirium — If there are four or more card types among cards in your graveyard, exile the top card of your library. You may play it until the end of your next turn.
+SVar:DBDig:DB$ Dig | Condition$ Delirium | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play it until the end of your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Impossible Inferno deals 6 damage to target creature.\nDelirium — If there are four or more card types among cards in your graveyard, exile the top card of your library. You may play it until the end of your next turn.

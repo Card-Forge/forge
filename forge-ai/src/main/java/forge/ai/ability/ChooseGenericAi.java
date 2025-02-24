@@ -1,11 +1,11 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -18,6 +18,7 @@ import forge.util.collect.FCollection;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class ChooseGenericAi extends SpellAbilityAi {
@@ -28,7 +29,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
             return true;
         } else if ("Pump".equals(aiLogic) || "BestOption".equals(aiLogic)) {
             for (AbilitySub sb : sa.getAdditionalAbilityList("Choices")) {
-                if (SpellApiToAi.Converter.get(sb.getApi()).canPlayAIWithSubs(ai, sb)) {
+                if (SpellApiToAi.Converter.get(sb).canPlayAIWithSubs(ai, sb)) {
                     return true;
                 }
             }
@@ -74,8 +75,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
     }
 
     @Override
-    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells,
-            Map<String, Object> params) {
+    public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells, Map<String, Object> params) {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String logic = sa.getParam("AILogic");
@@ -84,17 +84,17 @@ public class ChooseGenericAi extends SpellAbilityAi {
         } else if ("Random".equals(logic)) {
             return Aggregates.random(spells);
         } else if ("Phasing".equals(logic)) { // Teferi's Realm : keep aggressive
-            List<SpellAbility> filtered = Lists.newArrayList(Iterables.filter(spells, sp -> !sp.getDescription().contains("Creature") && !sp.getDescription().contains("Land")));
+            List<SpellAbility> filtered = spells.stream()
+                    .filter(sp -> !sp.getDescription().contains("Creature") && !sp.getDescription().contains("Land"))
+                    .collect(Collectors.toList());
             return Aggregates.random(filtered);
         } else if ("PayUnlessCost".equals(logic)) {
             for (final SpellAbility sp : spells) {
                 String unlessCost = sp.getParam("UnlessCost");
-                sp.setActivatingPlayer(sa.getActivatingPlayer(), true);
+                sp.setActivatingPlayer(sa.getActivatingPlayer());
                 Cost unless = new Cost(unlessCost, false);
-                SpellAbility paycost = new SpellAbility.EmptySa(sa.getHostCard(), player);
-                paycost.setPayCosts(unless);
-                if (ComputerUtilCost.willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
-                        && ComputerUtilCost.canPayCost(paycost, player, true)) {
+                if (SpellApiToAi.Converter.get(sp).willPayUnlessCost(sp, player, unless, false, new FCollection<>(player))
+                        && ComputerUtilCost.canPayCost(unless, sp, player, true)) {
                     return sp;
                 }
             }
@@ -262,7 +262,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
             List<SpellAbility> filtered = Lists.newArrayList();
             // filter first for the spells which can be done
             for (SpellAbility sp : spells) {
-                if (SpellApiToAi.Converter.get(sp.getApi()).canPlayAIWithSubs(player, sp)) {
+                if (SpellApiToAi.Converter.get(sp).canPlayAIWithSubs(player, sp)) {
                     filtered.add(sp);
                 }
             }

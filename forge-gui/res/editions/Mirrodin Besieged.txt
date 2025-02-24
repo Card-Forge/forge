@@ -38,9 +38,9 @@ ScryfallCode=MBS
 24 R Distant Memories @Karl Kopinski
 25 C Fuel for the Cause @Steven Belledin
 26 C Mirran Spy @Dave Kendall
-27 R Mitotic Manipulation @Dan Scott
+27 R Mitotic Manipulation @Dan Murayama Scott
 28 U Neurok Commando @Matt Stewart
-29 C Oculus @Dan Scott
+29 C Oculus @Dan Murayama Scott
 30 C Quicksilver Geyser @Erica Yang
 31 C Serum Raker @Austin Hsu
 32 C Spire Serpent @Johann Bodin
@@ -86,7 +86,7 @@ ScryfallCode=MBS
 72 C Ogre Resister @Efrem Palacios
 73 C Rally the Forces @Steven Belledin
 74 R Red Sun's Zenith @Svetlin Velinov
-75 R Slagstorm @Dan Scott
+75 R Slagstorm @Dan Murayama Scott
 76 U Spiraling Duelist @Karl Kopinski
 77 C Blightwidow @Daniel Ljunggren
 78 R Creeping Corrosion @Ryan Pancoast
@@ -119,7 +119,7 @@ ScryfallCode=MBS
 105 R Decimator Web @Daniel Ljunggren
 106 C Dross Ripper @David Rapoza
 107 C Flayer Husk @Igor Kieryluk
-108 C Gust-Skimmer @Dan Scott
+108 C Gust-Skimmer @Dan Murayama Scott
 109 C Hexplate Golem @Matt Cavotta
 110 C Ichor Wellspring @Steven Belledin
 111 R Knowledge Pool @Mike Bierek

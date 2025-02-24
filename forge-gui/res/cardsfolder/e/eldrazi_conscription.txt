@@ -2,6 +2,6 @@ Name:Eldrazi Conscription
 ManaCost:8
 Types:Kindred Enchantment Eldrazi Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 8 | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 10 | AddToughness$ 10 | AddKeyword$ Trample & Annihilator:2 | Description$ Enchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defending player sacrifices two permanents.)
 Oracle:Enchant creature\nEnchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defending player sacrifices two permanents.)

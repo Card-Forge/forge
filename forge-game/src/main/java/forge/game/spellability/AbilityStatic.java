@@ -18,12 +18,8 @@
 package forge.game.spellability;
 
 import forge.card.mana.ManaCost;
-import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
-import forge.game.replacement.ReplacementType;
-
-import java.util.Map;
 
 /**
  * <p>
@@ -58,9 +54,8 @@ public abstract class AbilityStatic extends Ability implements Cloneable {
 
         // Check if ability can't be attempted because of replacement effect
         // Initial usage is Karlov Watchdog preventing disguise/morph/cloak/manifest turning face up
-        if (this.isTurnFaceUp()) {
-            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
-            if (c.getGame().getReplacementHandler().cantHappenCheck(ReplacementType.TurnFaceUp, repParams)) return false;
+        if (this.isTurnFaceUp() && !c.canBeTurnedFaceUp()) {
+            return false;
         }
 
         return this.getRestrictions().canPlay(c, this);

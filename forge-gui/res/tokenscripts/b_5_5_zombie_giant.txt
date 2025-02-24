@@ -1,6 +1,6 @@
 Name:Zombie Giant Token
 ManaCost:no cost
-Types:Creature Zombie Giant
 Colors:black
+Types:Creature Zombie Giant
 PT:5/5
 Oracle:

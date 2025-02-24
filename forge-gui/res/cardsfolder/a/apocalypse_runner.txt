@@ -1,0 +1,9 @@
+Name:Apocalypse Runner
+ManaCost:2 B R
+Types:Artifact Vehicle
+PT:6/5
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.powerLE2+YouCtrl | TgtPrompt$ Select target creature you control with power 2 or less | KW$ Lifelink | SubAbility$ DBUnblockable | SpellDescription$ Target creature you control with power 2 or less gains lifelink until end of turn and can't be blocked this turn.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+K:Crew:3
+Oracle:{T}: Target creature you control with power 2 or less gains lifelink until end of turn and can't be blocked this turn.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

@@ -2,7 +2,7 @@ Name:Sage's Reverie
 ManaCost:3 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card for each aura you control that's attached to a creature.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each aura you control that's attached to a creature.

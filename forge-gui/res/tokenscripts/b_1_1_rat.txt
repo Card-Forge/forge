@@ -1,6 +1,6 @@
 Name:Rat Token
 ManaCost:no cost
-Types:Creature Rat
 Colors:black
+Types:Creature Rat
 PT:1/1
 Oracle:

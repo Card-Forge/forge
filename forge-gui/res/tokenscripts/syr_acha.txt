@@ -1,7 +1,7 @@
 Name:Syr Acha
 ManaCost:no cost
-Types:Legendary Artifact Creature Food Knight
 Colors:red
+Types:Legendary Artifact Creature Food Knight
 PT:1/1
 A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SubAbility$ DBEffect | SpellDescription$ You gain 3 life.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ CardDrawn | StackDescription$ Until end of turn, if {p:You} would draw a card, they draw two cards instead. | SpellDescription$ Until end of turn, if you would draw a card, draw two cards instead.

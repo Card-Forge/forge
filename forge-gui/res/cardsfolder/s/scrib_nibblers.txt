@@ -7,6 +7,6 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | ConditionDefined$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Landfall — Whenever a land you control enters, you may untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
-DeckHas:Ability$LifeGain
 SVar:BuffedBy:Land
+DeckHas:Ability$LifeGain
 Oracle:{T}: Exile the top card of target player's library. If it's a land card, you gain 1 life.\nLandfall — Whenever a land you control enters, you may untap Scrib Nibblers.

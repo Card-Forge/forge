@@ -1,7 +1,7 @@
 Name:Antelope Token
 ManaCost:no cost
-Types:Creature Antelope
 Colors:green
+Types:Creature Antelope
 PT:2/3
 K:Landwalk:Forest
 Oracle:Forestwalk

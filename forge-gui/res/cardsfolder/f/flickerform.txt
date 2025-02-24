@@ -2,7 +2,7 @@ Name:Flickerform
 ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AITgts$ Creature.nonToken | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AITgts$ Creature.!token | AILogic$ Pump
 A:AB$ Pump | Cost$ 2 W W | Defined$ Enchanted | ImprintCards$ Enchanted | StackDescription$ SpellDescription | SubAbility$ DBRemAura | SpellDescription$ Exile enchanted creature and all Auras attached to it. At the beginning of the next end step, return that card to the battlefield under its owner's control. If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature.
 SVar:DBRemAura:DB$ PumpAll | ValidCards$ Card.IsImprinted,Aura.AttachedTo Creature.IsImprinted | RememberPumped$ True | StackDescription$ None | SubAbility$ DBChangeZoneAll
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.IsRemembered | SubAbility$ DelayedEffect

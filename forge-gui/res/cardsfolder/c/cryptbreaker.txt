@@ -6,7 +6,7 @@ A:AB$ Token | Cost$ 1 B T Discard<1/Card> | TokenAmount$ 1 | TokenScript$ b_2_2_
 A:AB$ Draw | Cost$ tapXType<3/Zombie> | NumCards$ 1 | AILogic$ AtOppEOT | SpellDescription$ You draw a card and you lose 1 life. | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 SVar:AIPreference:DiscardCost$Card
-DeckNeeds:Type$Zombie
-DeckHas:Ability$Token
 AI:RemoveDeck:Random
+DeckHas:Ability$Token
+DeckNeeds:Type$Zombie
 Oracle:{1}{B}, {T}, Discard a card: Create a 2/2 black Zombie creature token.\nTap three untapped Zombies you control: You draw a card and you lose 1 life.

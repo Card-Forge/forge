@@ -17,13 +17,15 @@
  */
 package forge.game.phase;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
 import forge.game.ability.effects.SkipPhaseEffect;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostEnlist;
@@ -34,11 +36,11 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityNoCleanupDamage;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -179,13 +181,9 @@ public class PhaseHandler implements java.io.Serializable {
                 }
                 playerTurn.incrementTurn();
 
-                game.getAction().resetActivationsPerTurn();
-
-                final int lands = CardLists.count(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
+                final int lands = CardLists.count(playerTurn.getLandsInPlay(), CardPredicates.UNTAPPED);
                 playerTurn.setNumPowerSurgeLands(lands);
             }
-            //update tokens
-            game.fireEvent(new GameEventTokenStateUpdate(playerTurn.getTokensInPlay()));
 
             // Replacement effects
             final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(playerTurn);
@@ -255,6 +253,11 @@ public class PhaseHandler implements java.io.Serializable {
                     nUpkeepsThisGame++;
                     game.getUpkeep().executeUntil(playerTurn);
                     game.getUpkeep().executeAt();
+
+                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
+                        playerTurn.advanceCrankCounter();
+                    }
+
                     break;
 
                 case DRAW:
@@ -281,7 +284,7 @@ public class PhaseHandler implements java.io.Serializable {
                     table.replaceCounterEffect(game, null, false);
 
                     // roll for attractions if we have any
-                    if (Iterables.any(playerTurn.getCardsIn(ZoneType.Battlefield), Presets.ATTRACTIONS)) {
+                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.ATTRACTIONS)) {
                         playerTurn.rollToVisitAttractions();
                     }
 
@@ -391,7 +394,10 @@ public class PhaseHandler implements java.io.Serializable {
                     // Rule 514.2
                     // Reset Damage received map
                     for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
-                        c.onCleanupPhase(playerTurn);
+                        if (!StaticAbilityNoCleanupDamage.damageNotRemoved(c)) {
+                            c.setDamage(0);
+                        }
+                        c.setHasBeenDealtDeathtouchDamage(false);
                     }
 
                     game.getEndOfTurn().executeUntil();
@@ -714,7 +720,7 @@ public class PhaseHandler implements java.io.Serializable {
             // map: defender => (many) attacker => (many) blocker
             Map<GameEntity, MapOfLists<Card, Card>> blockers = Maps.newHashMap();
             for (GameEntity ge : combat.getDefendersControlledBy(p)) {
-                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
+                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<>(ArrayList::new);
                 for (Card att : combat.getAttackersOf(ge)) {
                     protectThisDefender.addAll(att, combat.getBlockers(att));
                 }
@@ -823,7 +829,7 @@ public class PhaseHandler implements java.io.Serializable {
         game.getTriggerHandler().clearThisTurnDelayedTrigger();
 
         Player next = getNextActivePlayer();
-        while (next.hasLost()) {
+        while (!next.isInGame()) {
             next = getNextActivePlayer();
         }
 
@@ -1049,6 +1055,7 @@ public class PhaseHandler implements java.io.Serializable {
                     for (SpellAbility sa : chosenSa) {
                         Card saHost = sa.getHostCard();
                         final Zone originZone = saHost.getZone();
+                        final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
 
                         if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
                             // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
@@ -1064,7 +1071,6 @@ public class PhaseHandler implements java.io.Serializable {
                         // Need to check if Zone did change
                         if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa.isLandAbility())) {
                             // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
-                            final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
                             triggerList.triggerChangesZoneAll(game, sa);
                         }

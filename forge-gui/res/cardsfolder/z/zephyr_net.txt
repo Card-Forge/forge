@@ -2,6 +2,6 @@ Name:Zephyr Net
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Defender & Flying | Description$ Enchanted creature has defender and flying.
 Oracle:Enchant creature\nEnchanted creature has defender and flying.

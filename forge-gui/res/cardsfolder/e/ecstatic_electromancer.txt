@@ -6,6 +6,6 @@ K:Prowess
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters or attacks, you may discard a card. If you do, draw a card.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, you may discard a card. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
-DeckHas:Ability$Discard
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard
 Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever Ecstatic Electromancer enters or attacks, you may discard a card. If you do, draw a card.

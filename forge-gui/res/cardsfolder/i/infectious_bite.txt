@@ -5,5 +5,5 @@ A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you
 SVar:DBFight:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | DamageSource$ ParentTarget | TgtPrompt$ Choose target creature you don't control | NumDmg$ X | SubAbility$ DBPoison
 SVar:DBPoison:DB$ Poison | Defined$ Player.Opponent | Num$ 1
 SVar:X:ParentTargeted$CardPower
-DeckHints:Ability$Proliferate a Keyword$Infect|Toxic
+DeckHints:Ability$Proliferate & Keyword$Infect|Toxic
 Oracle:Target creature you control deals damage equal to its power to target creature you don't control. Each opponent gets a poison counter.

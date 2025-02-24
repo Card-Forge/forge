@@ -13,5 +13,5 @@ ScryfallCode=POGW
 68 R Dread Defiler @Joseph Meehan
 110 R Goblin Dark-Dwellers @Karl Kopinski
 119 R Tyrant of Valakut @Steven Belledin
-132 R Gladehart Cavalry @Dan Scott
+132 R Gladehart Cavalry @Dan Murayama Scott
 155 R Jori En, Ruin Diver @Matt Stewart

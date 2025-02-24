@@ -2,7 +2,7 @@ Name:Vault 87: Forced Evolution
 ManaCost:3 G U
 Types:Enchantment Saga
 K:Chapter:3:DBSteal,DBPutCounter,DBDraw
-SVar:DBSteal:DB$ GainControl | TgtPrompt$ Choose target creature | ValidTgts$ Creature.nonMutant | TgtPrompt$ Select target non-Mutant creature | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of target non-Mutant creature for as long as you control NICKNAME.
+SVar:DBSteal:DB$ GainControl | ValidTgts$ Creature.nonMutant | TgtPrompt$ Select target non-Mutant creature | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of target non-Mutant creature for as long as you control NICKNAME.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBAnimate | SpellDescription$ Put a +1/+1 counter on target creature you control. It becomes a Mutant in addition to its other types.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Mutant | Duration$ Permanent
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SpellDescription$ Draw cards equal to the greatest power among Mutants you control.

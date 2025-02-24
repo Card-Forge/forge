@@ -1,0 +1,12 @@
+Name:Zimone, All-Questioning
+ManaCost:1 G U
+Types:Legendary Creature Human Wizard
+PT:1/1
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigToken | CheckSVar$ X | TriggerDescription$ At the beginning of your end step, if a land entered the battlefield under your control this turn and you control a prime number of lands, create Primo, the Indivisible, a legendary 0/0 green and blue Fractal creature token, then put that many +1/+1 counters on it. (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, and 31 are prime numbers.)
+SVar:TrigToken:DB$ Token | TokenScript$ primo_the_indivisible | RememberTokens$ True | SubAbility$ DBCounters
+SVar:DBCounters:DB$ PutCounter | Defined$ Remembered | CounterNum$ Y | CounterType$ P1P1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$IsPrime Y.Z.0
+SVar:Y:Count$Valid Land.YouCtrl+IsNotRemembered
+SVar:Z:Count$ThisTurnEntered_Battlefield_Land.YouCtrl
+Oracle:At the beginning of your end step, if a land entered the battlefield under your control this turn and you control a prime number of lands, create Primo, the Indivisible, a legendary 0/0 green and blue Fractal creature token, then put that many +1/+1 counters on it. (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, and 31 are prime numbers.)

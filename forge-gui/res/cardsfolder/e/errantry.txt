@@ -2,6 +2,6 @@ Name:Errantry
 ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddHiddenKeyword$ CARDNAME can only attack alone. | Description$ Enchanted creature gets +3/+0 and can only attack alone.
 Oracle:Enchant creature\nEnchanted creature gets +3/+0 and can only attack alone.

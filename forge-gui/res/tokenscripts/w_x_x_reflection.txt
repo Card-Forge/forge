@@ -1,6 +1,6 @@
 Name:Reflection Token
 ManaCost:no cost
-PT:*/*
 Colors:white
 Types:Creature Reflection
+PT:*/*
 Oracle:

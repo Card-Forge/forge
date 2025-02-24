@@ -1,6 +1,6 @@
 Name:Ornithopter
 ManaCost:no cost
-PT:0/2
 Types:Artifact Creature Thopter
+PT:0/2
 K:Flying
 Oracle:Flying

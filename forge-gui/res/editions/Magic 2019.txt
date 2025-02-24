@@ -209,7 +209,7 @@ ScryfallCode=M19
 195 C Rabid Bite @Karl Kopinski
 196 U Reclamation Sage @Christopher Moeller
 197 U Recollect @Pete Venters
-198 C Rhox Oracle @Dan Scott
+198 C Rhox Oracle @Dan Murayama Scott
 199 C Root Snare @Mitchell Malloy
 200 R Runic Armasaur @Randy Vargas
 201 M Scapeshift @Daniel Ljunggren

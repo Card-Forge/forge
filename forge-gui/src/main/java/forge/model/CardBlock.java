@@ -17,22 +17,20 @@
  */
 package forge.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
-
 import forge.card.CardEdition;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.util.TextUtil;
 import forge.util.storage.StorageReaderFile;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.Predicate;
 
 // import forge.deck.Deck;
 
@@ -142,7 +140,7 @@ public final class CardBlock implements Comparable<CardBlock> {
         for (final CardEdition set : this.sets) {
             setCodes.add(set.getCode());
         }
-        return IPaperCard.Predicates.printedInSets(setCodes, true);
+        return PaperCardPredicates.printedInSets(setCodes, true);
     }
 
     /*

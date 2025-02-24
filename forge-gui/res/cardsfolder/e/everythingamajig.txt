@@ -1,11 +1,14 @@
 Name:Everythingamajig
 ManaCost:5
 Types:Artifact
+AI:RemoveDeck:All
+Oracle:<Unsupported Variant>
+
+# --- VARIANT C ---
+
 Variant:C:A:AB$ FlipACoin | Cost$ 1 | WinSubAbility$ DBAddMana | InstantSpeed$ True | SpellDescription$ Flip a coin. If you win the flip, add {C}{C}.
 Variant:C:SVar:DBAddMana:DB$ Mana | Produced$ C | Amount$ 2
 Variant:C:A:AB$ Discard | Cost$ 3 T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | PlayerTurn$ True | SpellDescription$ Target player discards a card.
 Variant:C:A:AB$ Animate | Cost$ X | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Construct | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes an X/X Construct artifact creature until end of turn.
 Variant:C:SVar:X:Count$xPaid
-AI:RemoveDeck:All
-Oracle:<Unsupported Variant>
 Variant:C:Oracle:{1}: Flip a coin. If you win the flip, add {C}{C}. Activate only as an instant.\n{3}, {T}: Target player discards a card. Activate only during your turn.\n{X}: Everythingamajig becomes an X/X Construct artifact creature until end of turn.

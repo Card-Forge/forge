@@ -2,7 +2,7 @@ Name:Fool's Demise
 ManaCost:4 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 4 U | ValidTgts$ Creature | AITgts$ Card.nonToken | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AITgts$ Card.!token | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChange | TriggerDescription$ When enchanted creature dies, return that card to the battlefield under your control.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredNewCardLKICopy
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.

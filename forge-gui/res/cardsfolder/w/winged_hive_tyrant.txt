@@ -6,6 +6,6 @@ K:Flying
 K:Haste
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters+Other | AddKeyword$ Flying & Haste | Description$ The Will of the Hive Mind — Other creatures you control with counters on them have flying and haste.
 SVar:PlayMain1:TRUE
-DeckNeeds:Ability$Counters
 DeckHas:Keyword$Flying|Haste
+DeckNeeds:Ability$Counters
 Oracle:Flying, haste\nThe Will of the Hive Mind — Other creatures you control with counters on them have flying and haste.

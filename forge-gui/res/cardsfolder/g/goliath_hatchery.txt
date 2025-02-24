@@ -8,7 +8,7 @@ SVar:TrigChooseCard:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creatur
 SVar:DBDraw:DB$ Draw | NumCards$ AffectedX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:PlayerCountOpponents$HighestCounters.Poison
-SVar:AffectedX:Count$Valid Card.ChosenCard$TotalValue Toxic
+SVar:AffectedX:ChosenCard$TotalValue Toxic
 DeckHas:Ability$Token & Type$Beast|Phyrexian
 DeckHints:Keyword$Toxic|Infect
 Oracle:When Goliath Hatchery enters, create two 3/3 green Phyrexian Beast creature tokens with toxic 1. (Players dealt combat damage by them also get a poison counter.)\nCorrupted — At the beginning of your upkeep, if an opponent has three or more poison counters, choose a creature you control, then draw cards equal to its total toxic value.

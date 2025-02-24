@@ -1,7 +1,7 @@
 Name:Deal Broker
 ManaCost:3
-PT:2/3
 Types:Artifact Creature Construct
+PT:2/3
 Draft:Draft CARDNAME face up.
 Draft:Immediately after the draft, you may reveal a card in your card pool. Each other player may offer you one card in their card pool in exchange. You may accept any one offer.
 A:AB$ Draw | Cost$ T | Defined$ You | NumCards$ 1 | SubAbility$ Discard | SpellDescription$ Draw a card, then discard a card.

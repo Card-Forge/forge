@@ -1,6 +1,6 @@
 Name:Warrior Token
 ManaCost:no cost
-Types:Creature Warrior
 Colors:black
+Types:Creature Warrior
 PT:2/1
 Oracle:

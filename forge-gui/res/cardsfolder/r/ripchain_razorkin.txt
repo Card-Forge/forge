@@ -1,0 +1,7 @@
+Name:Ripchain Razorkin
+ManaCost:3 R
+Types:Creature Human Berserker
+PT:5/3
+K:Reach
+A:AB$ Draw | Cost$ 2 R Sac<1/Land> | SpellDescription$ Draw a card.
+Oracle:Reach\n{2}{R}, Sacrifice a land: Draw a card.

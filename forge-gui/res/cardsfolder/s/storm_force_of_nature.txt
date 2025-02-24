@@ -1,0 +1,12 @@
+Name:Storm, Force of Nature
+ManaCost:1 G U R
+Types:Legendary Creature Mutant Hero
+PT:3/4
+K:Flying
+K:Vigilance
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigEffect | CombatDamage$ True | TriggerDescription$ Ceaseless Tempest — Whenever NICKNAME deals combat damage to a player, the next instant or sorcery spell you cast this turn has storm. (When you cast it, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ GrantStorm | Triggers$ ExileEffect
+SVar:GrantStorm:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | AddKeyword$ Storm | Description$ The next instant or sorcery spell you cast this turn has storm. (When you cast it, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+Oracle:Flying, vigilance\nCeaseless Tempest — Whenever Storm deals combat damage to a player, the next instant or sorcery spell you cast this turn has storm. (When you cast it, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

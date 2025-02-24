@@ -16,11 +16,10 @@
 
 package forge.lda.lda.inference;
 
-import java.util.List;
-
 import forge.lda.lda.LDA;
-
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
 
 public interface Inference {
     /**

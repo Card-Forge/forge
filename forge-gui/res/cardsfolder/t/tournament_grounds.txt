@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ Combo R W B | RestrictValid$ Spell.Knight,Spell.Equipment | SpellDescription$ Add {R}, {W}, or {B}. Spend this mana only to cast a Knight or Equipment spell.
-DeckNeeds:Type$Knight
 AI:RemoveDeck:Random
+DeckNeeds:Type$Knight
 Oracle:{T}: Add {C}.\n{T}: Add {R}, {W}, or {B}. Spend this mana only to cast a Knight or Equipment spell.

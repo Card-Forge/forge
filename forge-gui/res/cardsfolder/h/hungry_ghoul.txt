@@ -1,0 +1,6 @@
+Name:Hungry Ghoul
+ManaCost:1 B
+Types:Creature Zombie
+PT:2/2
+A:AB$ PutCounter | Cost$ 1 Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on this creature.
+Oracle:{1}, Sacrifice another creature: Put a +1/+1 counter on this creature.

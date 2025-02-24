@@ -2,7 +2,8 @@ Name:Stasis
 ManaCost:1 U
 Types:Enchantment
 R:Event$ BeginPhase | ActiveZones$ Battlefield | Phase$ Untap | Skip$ True | Description$ Players skip their untap steps.
-K:UpkeepCost:U
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {U}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ U
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 Oracle:Players skip their untap steps.\nAt the beginning of your upkeep, sacrifice Stasis unless you pay {U}.

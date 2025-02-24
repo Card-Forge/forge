@@ -1,6 +1,6 @@
 Name:Wasp
 ManaCost:no cost
 Types:Artifact Creature Insect
-K:Flying
 PT:1/1
+K:Flying
 Oracle:Flying

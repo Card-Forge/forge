@@ -1,0 +1,9 @@
+Name:Brightglass Gearhulk
+ManaCost:G G W W
+Types:Artifact Creature Construct
+PT:4/4
+K:First Strike
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may search your library for up to two artifact, creature, and/or enchantment cards with mana value 1 or less, reveal them, put them into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.cmcLE1,Artifact.cmcLE1,Enchantment.cmcLE1 | ChangeTypeDesc$ artifact, creature, and/or enchantment cards with mana value 1 or less | ChangeNum$ 2 | ShuffleNonMandatory$ True
+Oracle:First strike, trample\nWhen this creature enters, you may search your library for up to two artifact, creature, and/or enchantment cards with mana value 1 or less, reveal them, put them into your hand, then shuffle.

@@ -4,8 +4,8 @@ Types:Artifact
 K:Flash
 K:Sunburst
 A:AB$ Pump | Cost$ SubCounter<1/CHARGE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ 1 | NumAtt$ 1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
-AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
+AI:RemoveDeck:Random
 DeckHints:Ability$Proliferate
 Oracle:Flash\nSunburst (This enters with a charge counter on it for each color of mana spent to cast it.)\nRemove a charge counter from Baton of Courage: Target creature gets +1/+1 until end of turn.

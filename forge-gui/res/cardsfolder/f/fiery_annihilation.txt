@@ -1,0 +1,6 @@
+Name:Fiery Annihilation
+ManaCost:2 R
+Types:Instant
+A:SP$ DealDamage | NumDmg$ 5 | ValidTgts$ Creature | TgtPrompt$ Select target creature | ReplaceDyingDefined$ Targeted | SubAbility$ DBChangeZone | SpellDescription$ CARDNAME deals 5 damage to target creature. Exile up to one target Equipment attached to that creature. If that creature would die this turn, exile it instead.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Equipment.AttachedTo ParentTarget | TargetMin$ 0 | TargetMax$ 1
+Oracle:Fiery Annihilation deals 5 damage to target creature. Exile up to one target Equipment attached to that creature. If that creature would die this turn, exile it instead.

@@ -1,0 +1,14 @@
+Name:Black Panther, Wakandan King
+ManaCost:G W
+Types:Legendary Creature Human Noble Hero
+PT:2/2
+K:First Strike
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.YouCtrl+Other | Origin$ Any | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Survey the Realm — Whenever NICKNAME or another creature you control enters, put a +1/+1 counter on target land you control.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control
+A:AB$ Pump | Cost$ 3 | PrecostDesc$ Mine Vibranium — | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | SubAbility$ DBMove | StackDescription$ SpellDescription | SpellDescription$ Move all +1/+1 counters from target land you control onto target creature. If one or more +1/+1 counters are moved this way, you gain that much life and draw a card.
+SVar:DBMove:DB$ MoveCounter | Source$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ All | RememberAmount$ True | SubAbility$ DBGainLife | StackDescription$ None
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBDraw | StackDescription$ None
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
+Oracle:First strike\nSurvey the Realm — Whenever Black Panther or another creature you control enters, put a +1/+1 counter on target land you control.\nMine Vibranium — {3}: Move all +1/+1 counters from target land you control onto target creature. If one or more +1/+1 counters are moved this way, you gain that much life and draw a card.

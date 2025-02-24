@@ -6,6 +6,6 @@ S:Mode$ Continuous | Affected$ Artifact.nonCreature+nonEquipment+YouCtrl | AddTy
 SVar:EquipAB:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
 K:Doctor's companion
 AI:RemoveDeck:Random
-DeckNeeds:Type$Artifact
 DeckHas:Type$Equipment
+DeckNeeds:Type$Artifact
 Oracle:Noncreature, non-Equipment artifacts you control are Equipment in addition to their other types and have "Equipped creature gets +1/+0" and equip {1}.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

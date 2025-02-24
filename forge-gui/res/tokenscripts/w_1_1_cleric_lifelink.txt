@@ -1,7 +1,7 @@
 Name:Cleric Token
 ManaCost:no cost
-Types:Creature Cleric
 Colors:white
+Types:Creature Cleric
 PT:1/1
 K:Lifelink
 Oracle:Lifelink

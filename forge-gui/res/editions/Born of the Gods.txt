@@ -47,12 +47,12 @@ ScryfallCode=BNG
 35 C Deepwater Hypnotist @Christopher Moeller
 36 C Divination @Willian Murai
 37 U Eternity Snare @Min Yum
-38 C Evanescent Intellect @Dan Scott
+38 C Evanescent Intellect @Dan Murayama Scott
 39 R Fated Infatuation @Winona Nelson
 40 U Flitterstep Eidolon @Chase Stone
 41 C Floodtide Serpent @Steven Belledin
 42 U Kraken of the Straits @Richard Wright
-43 U Meletis Astronomer @Dan Scott
+43 U Meletis Astronomer @Dan Murayama Scott
 44 R Mindreaver @Wesley Burt
 45 C Nullify @Adam Paquette
 46 C Nyxborn Triton @Clint Cearley

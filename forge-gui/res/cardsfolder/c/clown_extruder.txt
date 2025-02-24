@@ -1,10 +1,13 @@
 Name:Clown Extruder
 ManaCost:no cost
 Types:Artifact Attraction
+K:Visit:TrigToken
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_a_clown_robot | TokenOwner$ You | SpellDescription$ Create a 1/1 white Clown Robot artifact creature token.
+Oracle:Visit — Create a 1/1 white Clown Robot artifact creature token.
+
+# --- VARIANTS ---
+
 Variant:A:Lights:2 6
 Variant:B:Lights:3 6
 Variant:C:Lights:4 6
 Variant:D:Lights:5 6
-K:Visit:TrigToken
-SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_a_clown_robot | TokenOwner$ You | SpellDescription$ Create a 1/1 white Clown Robot artifact creature token.
-Oracle:Visit — Create a 1/1 white Clown Robot artifact creature token.

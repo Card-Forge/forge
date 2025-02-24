@@ -51,13 +51,13 @@ ScryfallCode=EMN
 35 C Lunarch Mantle @Anastasia Ovchinnikova
 36 U Peace of Mind @Christopher Moeller
 37 R Providence @Zack Stella
-38 U Repel the Abominable @Dan Scott
+38 U Repel the Abominable @Dan Murayama Scott
 39 R Sanctifier of Souls @Jesper Ejsing
 40 R Selfless Spirit @Seb McKinnon
 41 R Sigarda's Aid @Howard Lyon
 42 C Sigardian Priest @Terese Nielsen
 43 C Spectral Reserves @Seb McKinnon
-44 C Steadfast Cathar @Dan Scott
+44 C Steadfast Cathar @Dan Murayama Scott
 45 U Subjugator Angel @Lius Lasahido
 46 R Thalia, Heretic Cathar @Magali Villeneuve
 47 R Thalia's Lancers @David Palumbo
@@ -171,7 +171,7 @@ ScryfallCode=EMN
 155 R Eldritch Evolution @Jason Rainville
 156 R Emrakul's Evangel @Jason Felix
 157 U Emrakul's Influence @Ryan Alexander Lee
-158 U Foul Emissary @Dan Scott
+158 U Foul Emissary @Dan Murayama Scott
 159 U Gnarlwood Dryad @Raymond Swanland
 160 C Grapple with the Past @Howard Lyon
 161 U Hamlet Captain @Wayne Reynolds

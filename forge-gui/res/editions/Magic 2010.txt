@@ -25,7 +25,7 @@ ScryfallCode=M10
 11 C Glorious Charge @Izzy
 12 C Griffin Sentinel @Warren Mahy
 13 R Guardian Seraph @Paul Bonner
-14 U Harm's Way @Dan Scott
+14 U Harm's Way @Dan Murayama Scott
 15 C Holy Strength @Terese Nielsen
 16 R Honor of the Pure @Greg Staples
 17 R Indestructibility @Darrell Riche
@@ -79,7 +79,7 @@ ScryfallCode=M10
 65 C Negate @Jeremy Jarvis
 66 U Phantom Warrior @Greg Staples
 67 R Polymorph @Robert Bliss
-68 C Ponder @Dan Scott
+68 C Ponder @Dan Murayama Scott
 69 C Sage Owl @Cyril Van Der Haegen
 70 C Serpent of the Endless Sea @Kieran Yanner
 71 U Sleep @Chris Rahn
@@ -240,7 +240,7 @@ ScryfallCode=M10
 226 R Glacial Fortress @Franz Vohwinkel
 227 R Rootbound Crag @Matt Stewart
 228 R Sunpetal Grove @Jason Chan
-229 C Terramorphic Expanse @Dan Scott
+229 C Terramorphic Expanse @Dan Murayama Scott
 230 L Plains @Rob Alexander
 231 L Plains @John Avon
 232 L Plains @Don Hazeltine

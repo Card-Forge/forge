@@ -1,11 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Arrays;
-import java.util.List;
-
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
 import forge.ai.*;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -13,12 +7,7 @@ import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitPredicates;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
@@ -32,6 +21,10 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.IterableUtil;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ManaAi extends SpellAbilityAi {
 
@@ -217,7 +210,7 @@ public class ManaAi extends SpellAbilityAi {
             if (testSaNoCost == null) {
                 continue;
             }
-            testSaNoCost.setActivatingPlayer(ai, true);
+            testSaNoCost.setActivatingPlayer(ai);
             if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
                 if (testSa.getHostCard().isPermanent() && !testSa.getHostCard().hasKeyword(Keyword.HASTE)
                     && !ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
@@ -240,7 +233,7 @@ public class ManaAi extends SpellAbilityAi {
                 Arrays.asList(
                         CardPredicates.restriction(restrictValid.split(","), ai, host, sa),
                         CardPredicates.lessCMC(searchCMC),
-                        Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
+                        CardPredicates.isColorless().or(CardPredicates.isColor(producedColor))));
 
         if (logic.startsWith("ManaRitualBattery")) {
             // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
@@ -255,7 +248,7 @@ public class ManaAi extends SpellAbilityAi {
 
     private boolean improvesPosition(Player ai, SpellAbility sa) {
         boolean activateForTrigger = (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) &&
-                Iterables.any(Iterables.filter(sa.getHostCard().getTriggers(), CardTraitPredicates.hasParam("AILogic", "ActivateOnce")),
+                IterableUtil.any(IterableUtil.filter(sa.getHostCard().getTriggers(), CardTraitPredicates.hasParam("AILogic", "ActivateOnce")),
                 t -> sa.getHostCard().getAbilityActivatedThisTurn(t.getOverridingAbility()) == 0);
 
         PhaseHandler ph = ai.getGame().getPhaseHandler();

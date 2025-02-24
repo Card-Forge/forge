@@ -71,7 +71,7 @@ ScryfallCode=DDE
 63 U Allied Strategies @Paolo Parente
 64 U Elfhame Palace @Jerry Tiritilli
 65 U Shivan Oasis @Rob Alexander
-66 C Terramorphic Expanse @Dan Scott
+66 C Terramorphic Expanse @Dan Murayama Scott
 67 L Plains @D. J. Cleland-Hura
 68 L Island @Terese Nielsen
 69 L Mountain @Scott Bailey

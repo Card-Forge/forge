@@ -7,6 +7,6 @@ SVar:DBHand:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | ChangeType$ 
 SVar:DBLibrary:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Library | ChangeType$ Card.IsRemembered+YouOwn | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-DeckNeeds:Type$Instant|Sorcery
 AI:RemoveDeck:Random
+DeckNeeds:Type$Instant|Sorcery
 Oracle:Exile the top X cards of your library. You may cast an instant or sorcery spell with mana value X or less from among them without paying its mana cost. Then put the exiled instant and sorcery cards that weren't cast this way into your hand and the rest on the bottom of your library in a random order.

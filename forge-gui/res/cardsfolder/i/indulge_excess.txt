@@ -17,6 +17,6 @@ Types:Sorcery
 K:Aftermath
 A:SP$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token for each creature you controlled that dealt combat damage to a player this turn.
 SVar:X:Count$NumCombatDamageThisTurn Creature.YouCtrl Player
-DeckHas:Ability$Token|Sacrifice|Graveyard & Type$Artifact|Treasure
 SVar:NeedsToPlayVar:X GE3
+DeckHas:Ability$Token|Sacrifice|Graveyard & Type$Artifact|Treasure
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nCreate a Treasure token for each creature you controlled that dealt combat damage to a player this turn.

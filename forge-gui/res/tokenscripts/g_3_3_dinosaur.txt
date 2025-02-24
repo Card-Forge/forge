@@ -1,6 +1,6 @@
 Name:Dinosaur Token
 ManaCost:no cost
-Types:Creature Dinosaur
 Colors:green
+Types:Creature Dinosaur
 PT:3/3
 Oracle:

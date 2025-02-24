@@ -2,7 +2,7 @@ Name:Curse of the Bloody Tome
 ManaCost:2 U
 Types:Enchantment Aura Curse
 K:Enchant player
-A:SP$ Attach | Cost$ 2 U | ValidTgts$ Player | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of enchanted player's upkeep, that player mills two cards.
 SVar:TrigMill:DB$ Mill | Defined$ Player.EnchantedBy | NumCards$ 2
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player mills two cards.

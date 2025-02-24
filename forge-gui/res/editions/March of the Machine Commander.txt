@@ -9,7 +9,7 @@ ScryfallCode=MOC
 1 M Bright-Palm, Soul Awakener @Mila Pesic
 2 M Brimaz, Blight of Oreskos @Uriah Voth
 3 M Gimbal, Gremlin Prodigy @Fajareka Setiawan
-4 M Kasla, the Broken Halo @Martina Fackova
+4 M Kasla, the Broken Halo @Martina Fačková
 5 M Sidar Jabari of Zhalfir @Simon Dominic
 6 M Elenda and Azor @Randy Vargas
 7 M Moira and Teshar @Josh Hass
@@ -97,7 +97,7 @@ ScryfallCode=MOC
 89 M Brimaz, Blight of Oreskos @Uriah Voth
 90 M Elenda and Azor @Randy Vargas
 91 M Gimbal, Gremlin Prodigy @Fajareka Setiawan
-92 M Kasla, the Broken Halo @Martina Fackova
+92 M Kasla, the Broken Halo @Martina Fačková
 93 M Moira and Teshar @Josh Hass
 94 M Rashmi and Ragavan @Joshua Cairos
 95 M Saint Traft and Rem Karolus @Lucas Graciano
@@ -142,11 +142,11 @@ ScryfallCode=MOC
 134 M Bright-Palm, Soul Awakener @Mila Pesic
 135 M Brimaz, Blight of Oreskos @Uriah Voth
 136 M Gimbal, Gremlin Prodigy @Fajareka Setiawan
-137 M Kasla, the Broken Halo @Martina Fackova
+137 M Kasla, the Broken Halo @Martina Fačková
 138 M Sidar Jabari of Zhalfir @Simon Dominic
 139 C The Aether Flues @Jason A. Engle
 140 C Bloodhill Bastion @Mark Hyzer
-141 C Chaotic Aether @Dan Scott
+141 C Chaotic Aether @Dan Murayama Scott
 142 C Gavony @Dave Kendall
 143 C Glimmervoid Basin @Lars Grant-West
 144 C The Great Forest @Howard Lyon
@@ -160,7 +160,7 @@ ScryfallCode=MOC
 152 C Orochi Colony @Charles Urbach
 153 C Panopticon @John Avon
 154 C Planewide Disaster @Dave Kendall
-155 C Reality Shaping @Dan Scott
+155 C Reality Shaping @Dan Murayama Scott
 156 C Selesnya Loft Gardens @Martina Pilcerova
 157 C Sokenzan @Brian Snõddy
 158 C Spatial Merging @Gabor Szikszai
@@ -227,13 +227,13 @@ ScryfallCode=MOC
 219 C Cloud of Faeries @Iris Compiet
 220 C Distant Melody @Sam Guay
 221 R Echo Storm @Mark Poole
-222 M Ethersworn Adjudicator @Dan Scott
+222 M Ethersworn Adjudicator @Dan Murayama Scott
 223 U Fallowsage @Paolo Parente
 224 R Imprisoned in the Moon @Ryan Alexander Lee
 225 U Junk Winder @Campbell White
 226 R Master of Etherium @Matt Cavotta
 227 R Masterful Replication @Victor Adame Minguez
-228 R Nadir Kraken @Dan Scott
+228 R Nadir Kraken @Dan Murayama Scott
 229 R Perplexing Test @Fariba Khamseh
 230 R Pull from Tomorrow @Sara Winters
 231 U Reality Shift @Howard Lyon
@@ -309,7 +309,7 @@ ScryfallCode=MOC
 301 U Hindervines @Svetlin Velinov
 302 R Incubation Druid @Daniel Ljunggren
 303 R Inscription of Abundance @Zoltan Boros
-304 U Inspiring Call @Dan Scott
+304 U Inspiring Call @Dan Murayama Scott
 305 M Kalonian Hydra @Chris Rahn
 306 C Kodama's Reach @John Avon
 307 R Managorger Hydra @Lucas Graciano
@@ -353,7 +353,7 @@ ScryfallCode=MOC
 345 U Wintermoor Commander @Tyler Jacobson
 346 R Academy Manufactor @Campbell White
 347 R Ancient Stone Idol @Josh Hass
-348 C Arcane Signet @Dan Scott
+348 C Arcane Signet @Dan Murayama Scott
 349 R Bloodforged Battle-Axe @Alayna Danner
 350 U Bloodline Pretender @Slawomir Maniak
 351 U Burnished Hart @Yeong-Hao Han
@@ -444,7 +444,7 @@ ScryfallCode=MOC
 436 R Temple of Silence @Adam Paquette
 437 U Temple of the False God @Brian Snõddy
 438 R Temple of Triumph @Piotr Dura
-439 C Terramorphic Expanse @Dan Scott
+439 C Terramorphic Expanse @Dan Murayama Scott
 440 C Thriving Heath @Alayna Danner
 441 C Thriving Isle @Jonas De Ro
 442 C Thriving Moor @Titus Lunter

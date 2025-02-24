@@ -3,5 +3,5 @@ ManaCost:1 B
 Types:Creature Fungus Snail
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, target opponent exiles a card from their hand.
-SVar:TrigExile:DB$ ChangeZone | Chooser$ Targeted | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ValidTgts$ Opponent | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | IsCurse$ True
+SVar:TrigExile:DB$ ChangeZone | Chooser$ Targeted | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | IsCurse$ True
 Oracle:When Skullcap Snail enters, target opponent exiles a card from their hand.

@@ -2,9 +2,9 @@ package forge.game;
 
 import java.util.EnumSet;
 import java.util.Set;
+import java.util.function.Function;
 
 import com.google.common.base.Enums;
-import com.google.common.base.Function;
 
 import forge.StaticData;
 import forge.deck.CardPool;
@@ -77,7 +77,6 @@ public enum GameType {
     private final Function<RegisteredPlayer, Deck> deckAutoGenerator;
 
     GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0) {
-
         this(deckFormat0, isCardPoolLimited0, canSideboard0, addWonCardsMidgame0, name0, description0, null);
     }
     GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0, Function<RegisteredPlayer, Deck> deckAutoGenerator0) {

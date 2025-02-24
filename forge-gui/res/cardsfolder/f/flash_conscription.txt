@@ -7,6 +7,6 @@ SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ TrigDamage | Conditio
 SVar:TrigDamage:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ GainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage, you gain that much life.
 SVar:GainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
-DeckHints:Color$White
 AI:RemoveDeck:Random
+DeckHints:Color$White
 Oracle:Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. If {W} was spent to cast this spell, the creature gains "Whenever this creature deals combat damage, you gain that much life" until end of turn.

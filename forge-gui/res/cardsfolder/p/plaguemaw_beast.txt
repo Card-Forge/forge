@@ -3,8 +3,8 @@ ManaCost:3 G G
 Types:Creature Phyrexian Beast
 PT:4/3
 A:AB$ Proliferate | Cost$ T Sac<1/Creature> | SpellDescription$ Proliferate.
-AI:RemoveDeck:All
 SVar:AIPreference:SacCost$Creature.token+powerLE3+toughnessLE3,Creature.cmcLE2
+AI:RemoveDeck:All
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
 Oracle:{T}, Sacrifice a creature: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

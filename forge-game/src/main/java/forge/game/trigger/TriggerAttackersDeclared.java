@@ -19,7 +19,6 @@ package forge.game.trigger;
 
 import java.util.*;
 
-import com.google.common.collect.Iterables;
 import forge.game.GameEntity;
 import forge.game.GameObjectPredicates;
 import forge.game.ability.AbilityKey;
@@ -29,6 +28,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
+import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
@@ -91,7 +91,7 @@ public class TriggerAttackersDeclared extends Trigger {
         sa.setTriggeringObject(AbilityKey.Attackers, attackers);
 
         if (hasParam("AttackedTarget")) {
-            attackedTarget = Iterables.filter(attackedTarget, GameObjectPredicates.restriction(getParam("AttackedTarget").split(","), getHostCard().getController(), getHostCard(), this));
+            attackedTarget = IterableUtil.filter(attackedTarget, GameObjectPredicates.restriction(getParam("AttackedTarget").split(","), getHostCard().getController(), getHostCard(), this));
         }
         sa.setTriggeringObject(AbilityKey.AttackedTarget, attackedTarget);
 

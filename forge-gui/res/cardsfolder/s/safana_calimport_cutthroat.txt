@@ -8,6 +8,6 @@ SVar:TrigTreasure:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac
 SVar:X:Count$Compare Y GE1.3.1
 SVar:Y:PlayerCountPropertyYou$DungeonsCompleted
 K:Choose a Background
-DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
 AI:RemoveDeck:Random
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
 Oracle:Menace\nAt the beginning of your end step, if you have the initiative, create a Treasure token. If you've completed a dungeon, create three of those tokens instead.\nChoose a Background (You can have a Background as a second commander.)

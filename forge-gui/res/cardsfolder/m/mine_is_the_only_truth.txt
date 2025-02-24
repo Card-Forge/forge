@@ -1,0 +1,9 @@
+Name:Mine Is the Only Truth
+ManaCost:no cost
+Types:Ongoing Scheme
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Command | Execute$ TrigDrawCard | TriggerDescription$ Whenever a player casts a spell, you draw a card.
+SVar:TrigDrawCard:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ DrewLastTurn | Execute$ DBAbandon | TriggerDescription$ At the beginning of your upkeep, if you drew a card last turn, abandon this scheme.
+SVar:DBAbandon:DB$ Abandon
+SVar:DrewLastTurn:Count$YouDrewLastTurn
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nWhenever a player casts a spell, you draw a card.\nAt the beginning of your upkeep, if you drew a card last turn, abandon this scheme.

@@ -54,7 +54,7 @@ ScryfallCode=BOK
 41 U Minamo Sightbender @Luca Zontini
 42 C Minamo's Meddling @Alex Horley-Orlandelli
 43 C Mistblade Shinobi @Kev Walker
-44 C Ninja of the Deep Hours @Dan Scott
+44 C Ninja of the Deep Hours @Dan Murayama Scott
 45 R Patron of the Moon @Scott M. Fischer
 46 C Phantom Wings @Greg Staples
 47 U Quash @Shishizaru
@@ -92,7 +92,7 @@ ScryfallCode=BOK
 79 U Pus Kami @Dave Allsop
 80 U Scourge of Numai @Arnie Swekel
 81 R Shirei, Shizo's Caretaker @Wayne Reynolds
-82 R Sickening Shoal @Dan Scott
+82 R Sickening Shoal @Dan Murayama Scott
 83 C Skullmane Baku @Tim Hildebrandt
 84 C Skullsnatcher @Matt Cavotta
 85 C Stir the Grave @Jim Nelson
@@ -112,7 +112,7 @@ ScryfallCode=BOK
 99 U Cunning Bandit @Paolo Parente
 100 C First Volley @Glen Angus
 101 U Flames of the Blood Hand @Aleksi Briclot
-102 C Frost Ogre @Dan Scott
+102 C Frost Ogre @Dan Murayama Scott
 103 C Frostling @Carl Critchlow
 104 R Fumiko the Lowblood @Michael Sutfin
 105 U Genju of the Spires @Joel Thomas
@@ -126,7 +126,7 @@ ScryfallCode=BOK
 113 U Ogre Recluse @Jim Murray
 114 U Overblaze @Ron Spencer
 115 R Patron of the Akki @Jim Nelson
-116 U Ronin Cliffrider @Dan Scott
+116 U Ronin Cliffrider @Dan Murayama Scott
 117 C Shinka Gatekeeper @Pete Venters
 118 U Sowing Salt @Hideaki Takamura
 119 C Torrent of Stone @Greg Staples

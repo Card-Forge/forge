@@ -1,7 +1,7 @@
 Name:Dragon Spirit Token
 ManaCost:no cost
-Types:Creature Dragon Spirit
 Colors:red,green
+Types:Creature Dragon Spirit
 PT:5/4
 T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When this creature deals damage, sacrifice it.
 SVar:TrigSac:DB$ Sacrifice

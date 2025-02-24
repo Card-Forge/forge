@@ -1,0 +1,11 @@
+Name:Overlord of the Floodpits
+ManaCost:3 U U
+Types:Enchantment Creature Avatar Horror
+PT:5/3
+K:Impending:4:1 U U
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters or attacks, draw two cards, then discard a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters or attacks, draw two cards, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ TrigDiscard
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Impending 4—{1}{U}{U} (If you cast this spell for its impending cost, it enters with four time counters and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it.)\nFlying\nWhenever Overlord of the Floodpits enters or attacks, draw two cards, then discard a card.

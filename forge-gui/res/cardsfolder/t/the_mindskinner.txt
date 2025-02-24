@@ -1,0 +1,9 @@
+Name:The Mindskinner
+ManaCost:U U U
+Types:Legendary Enchantment Creature Nightmare
+PT:10/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent | ReplaceWith$ Mill | AlwaysReplace$ True | PreventionEffect$ True | ExecuteMode$ PerSource | Description$ If a source you control would deal damage to an opponent, prevent that damage and each opponent mills that many cards.
+SVar:Mill:DB$ Mill | Defined$ Opponent | NumCards$ X
+SVar:X:ReplaceCount$DamageAmount
+Oracle:The Mindskinner can't be blocked.\nIf a source you control would deal damage to an opponent, prevent that damage and each opponent mills that many cards.

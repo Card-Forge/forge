@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -32,6 +31,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
+import forge.util.IterableUtil;
 import forge.util.collect.FCollection;
 
 /**
@@ -52,7 +52,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
 
     public final int getTotalTargetedCMC() {
         int totalCMC = 0;
-        for (Card c : Iterables.filter(targets, Card.class)) {
+        for (Card c : IterableUtil.filter(targets, Card.class)) {
             totalCMC += c.getCMC();
         }
         return totalCMC;
@@ -60,7 +60,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
 
     public final int getTotalTargetedPower() {
         int totalPower = 0;
-        for (Card c : Iterables.filter(targets, Card.class)) {
+        for (Card c : IterableUtil.filter(targets, Card.class)) {
             totalPower += c.getNetPower();
         }
         return totalPower;
@@ -72,8 +72,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
 
     public final boolean add(final GameObject o) {
         if (o instanceof Player || o instanceof Card || o instanceof SpellAbility) {
-            if (o instanceof Card) {
-                Card c = (Card) o;
+            if (o instanceof Card c) {
                 cardControllers.put(c, c.getController());
             }
             return super.add(o);
@@ -102,31 +101,31 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     }
 
     public final CardCollectionView getTargetCards() {
-        return new CardCollection(Iterables.filter(targets, Card.class));
+        return new CardCollection(IterableUtil.filter(targets, Card.class));
     }
 
     public final Iterable<Player> getTargetPlayers() {
-        return Iterables.filter(targets, Player.class);
+        return IterableUtil.filter(targets, Player.class);
     }
 
     public final Iterable<SpellAbility> getTargetSpells() {
-        return Iterables.filter(targets, SpellAbility.class);
+        return IterableUtil.filter(targets, SpellAbility.class);
     }
 
     public final Iterable<GameEntity> getTargetEntities() {
-        return Iterables.filter(targets, GameEntity.class);
+        return IterableUtil.filter(targets, GameEntity.class);
     }
 
     public final boolean isTargetingAnyCard() {
-        return Iterables.any(targets, Predicates.instanceOf(Card.class));
+        return targets.stream().anyMatch(Card.class::isInstance);
     }
 
     public final boolean isTargetingAnyPlayer() {
-        return Iterables.any(targets, Predicates.instanceOf(Player.class));
+        return targets.stream().anyMatch(Player.class::isInstance);
     }
 
     public final boolean isTargetingAnySpell() {
-        return Iterables.any(targets, Predicates.instanceOf(SpellAbility.class));
+        return targets.stream().anyMatch(SpellAbility.class::isInstance);
     }
 
     public final Card getFirstTargetedCard() {
@@ -162,7 +161,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     @Override
     public boolean contains(Object o) {
         if (o instanceof Card) {
-            return Iterables.any(Iterables.filter(targets, Card.class), c -> c.equalsWithGameTimestamp((Card) o));
+            return IterableUtil.any(IterableUtil.filter(targets, Card.class), c -> c.equalsWithGameTimestamp((Card) o));
         }
         return super.contains(o);
     }

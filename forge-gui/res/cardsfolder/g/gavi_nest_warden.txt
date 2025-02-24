@@ -6,7 +6,7 @@ S:Mode$ AlternativeCost | ValidSA$ Activated.Cycling | ValidPlayer$ You | Cost$ 
 SVar:X:Count$ThisTurnActivated_Activated.Cycling+YouCtrl
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create a 2/2 red and white Dinosaur Cat creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_2_2_dinosaur_cat | TokenOwner$ You
-DeckHas:Ability$Token
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
 DeckHints:Type$Dinosaur
 Oracle:You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.\nWhenever you draw your second card each turn, create a 2/2 red and white Dinosaur Cat creature token.

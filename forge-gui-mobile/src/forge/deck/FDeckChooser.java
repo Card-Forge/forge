@@ -532,7 +532,7 @@ public class FDeckChooser extends FScreen {
         }
         needRefreshOnActivate = true;
         /*preload deck to cache*/
-        ImageCache.preloadCache(deck.getDeck());
+        ImageCache.getInstance().preloadCache(deck.getDeck());
         Forge.openScreen(new FDeckEditor(editorType, deck, true));
     }
 

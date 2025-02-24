@@ -2,7 +2,8 @@ Name:Kuro, Pitlord
 ManaCost:6 B B B
 Types:Legendary Creature Demon Spirit
 PT:9/9
-K:UpkeepCost:B B B B
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {B}{B}{B}{B}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ B B B B
 # TODO: the AI can be improved for this, it'll currently only use it to finish off creatures with toughness 1
 A:AB$ Pump | Cost$ PayLife<1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 SVar:NeedsToPlayVar:Z GE4

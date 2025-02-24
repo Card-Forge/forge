@@ -42,9 +42,9 @@ ScryfallCode=GPT
 27 R Hatching Plans @Heather Hudson
 28 C Infiltrator's Magemark @Brandon Kitkouski
 29 R Leyline of Singularity @Zoltan Boros & Gabor Szikszai
-30 R Mimeofacture @Dan Scott
+30 R Mimeofacture @Dan Murayama Scott
 31 R Quicken @Aleksi Briclot
-32 C Repeal @Dan Scott
+32 C Repeal @Dan Murayama Scott
 33 C Runeboggle @Ron Spencer
 34 R Sky Swallower @rk post
 35 C Steamcore Weird @Justin Norman
@@ -117,7 +117,7 @@ ScryfallCode=GPT
 102 C Blind Hunter @Warren Mahy
 103 R Borborygmos @Todd Lockwood
 104 C Burning-Tree Bloodscale @Kev Walker
-105 R Burning-Tree Shaman @Dan Scott
+105 R Burning-Tree Shaman @Dan Murayama Scott
 106 C Castigate @Darrell Riche
 107 R Cerebral Vortex @Jeremy Jarvis
 108 U Conjurer's Ban @Pete Venters
@@ -125,7 +125,7 @@ ScryfallCode=GPT
 110 R Dune-Brood Nephilim @Jim Murray
 111 U Electrolyze @Zoltan Boros & Gabor Szikszai
 112 U Feral Animist @Ron Spears
-113 U Gelectrode @Dan Scott
+113 U Gelectrode @Dan Murayama Scott
 114 R Ghost Council of Orzhova @Greg Staples
 115 R Glint-Eye Nephilim @Mark Zug
 116 U Goblin Flectomancer @Matt Cavotta
@@ -142,7 +142,7 @@ ScryfallCode=GPT
 127 U Savage Twister @Luca Zontini
 128 C Scab-Clan Mauler @Liam Sharp
 129 U Schismotivate @Ron Spencer
-130 U Skarrgan Skybreaker @Dan Scott
+130 U Skarrgan Skybreaker @Dan Murayama Scott
 131 U Souls of the Faultless @Pat Lee
 132 R Stitch in Time @Jon Foster
 133 C Streetbreaker Wurm @Greg Hildebrandt

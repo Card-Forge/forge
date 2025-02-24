@@ -1,0 +1,6 @@
+Name:Jamming Device
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, creatures target player controls get -1/-1 until end of turn.
+SVar:TrigCrank:DB$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+Oracle:Whenever you crank Jamming Device, creatures target player controls get -1/-1 until end of turn.

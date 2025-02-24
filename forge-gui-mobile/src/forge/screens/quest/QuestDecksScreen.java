@@ -119,7 +119,7 @@ public class QuestDecksScreen extends FScreen {
         if (deck == null) { return; }
 
         /*preload deck to cache*/
-        ImageCache.preloadCache(deck.getDeck());
+        ImageCache.getInstance().preloadCache(deck.getDeck());
 
         needRefreshOnActivate = true;
         Forge.openScreen(new QuestDeckEditor(deck, commanderMode));

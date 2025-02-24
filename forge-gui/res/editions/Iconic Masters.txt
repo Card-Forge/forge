@@ -79,7 +79,7 @@ ScryfallCode=IMA
 67 C Mnemonic Wall @Trevor Claxton
 68 C Ojutai's Breath @Kev Walker
 69 C Phantom Monster @Richard Wright
-70 C Repeal @Dan Scott
+70 C Repeal @Dan Murayama Scott
 71 C Riverwheel Aerialists @Jack Wang
 72 C Shriekgeist @Raymond Swanland
 73 U Skywise Teachings @Filip Burburan
@@ -129,7 +129,7 @@ ScryfallCode=IMA
 117 C Battle-Rattle Shaman @Warren Mahy
 118 R Bogardan Hellkite @Scott M. Fischer
 119 C Borderland Marauder @Scott M. Fischer
-120 R Charmbreaker Devils @Dan Scott
+120 R Charmbreaker Devils @Dan Murayama Scott
 121 U Coordinated Assault @John Severin Brassell
 122 R Crucible of Fire @Dominick Domingo
 123 C Draconic Roar @Kev Walker
@@ -178,7 +178,7 @@ ScryfallCode=IMA
 166 U Heroes' Bane @Raymond Swanland
 167 C Hunt the Weak @Lars Grant-West
 168 U Hunting Pack @Jim Nelson
-169 U Inspiring Call @Dan Scott
+169 U Inspiring Call @Dan Murayama Scott
 170 C Ivy Elemental @Ron Spencer
 171 C Jaddi Offshoot @Daarken
 172 R Jugan, the Rising Star @Filip Burburan
@@ -210,7 +210,7 @@ ScryfallCode=IMA
 198 U Electrolyze @Zoltan Boros & Gabor Szikszai
 199 R Firemane Angel @Matt Cavotta
 200 R Glimpse the Unthinkable @Brandon Kitkouski
-201 R Hypersonic Dragon @Dan Scott
+201 R Hypersonic Dragon @Dan Murayama Scott
 202 U Jungle Barrier @Christine Choi
 203 R Knight of the Reliquary @Michael Komarck
 204 U Lightning Helix @Raymond Swanland

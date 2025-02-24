@@ -30,7 +30,7 @@ ScryfallCode=JOU
 18 U Nyx-Fleece Ram @Terese Nielsen
 19 C Oppressive Rays @Mark Zug
 20 C Oreskos Swiftclaw @James Ryman
-21 U Phalanx Formation @Dan Scott
+21 U Phalanx Formation @Dan Murayama Scott
 22 U Quarry Colossus @Todd Lockwood
 23 U Reprisal @Raymond Swanland
 24 U Sightless Brawler @Johann Bodin

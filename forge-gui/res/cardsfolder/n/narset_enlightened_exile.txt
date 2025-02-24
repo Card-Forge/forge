@@ -8,9 +8,9 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTg
 SVar:DBPlay:DB$ Play | Defined$ Remembered | CopyCard$ True | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardPower
-DeckHints:Type$Instant|Sorcery|Artifact|Enchantment|Battle|Planeswalker
-DeckHas:Ability$Graveyard
 SVar:HasAttackEffect:TRUE
 SVar:EquipMe:Multiple
 SVar:EnchantMe:Multiple
+DeckHas:Ability$Graveyard
+DeckHints:Type$Instant|Sorcery|Artifact|Enchantment|Battle|Planeswalker
 Oracle:Creatures you control have prowess.\nWhenever Narset, Enlightened Exile attacks, exile target noncreature, nonland card with mana value less than Narset's power from a graveyard and copy it. You may cast the copy without paying its mana cost.

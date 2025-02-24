@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -10,6 +8,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 public class VoteAi extends SpellAbilityAi {
     /* (non-Javadoc)

@@ -2,7 +2,7 @@ Name:Spectral Prison
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 T:Mode$ BecomesTarget | ValidTarget$ Card.EnchantedBy | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever enchanted creature becomes the target of a spell, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice

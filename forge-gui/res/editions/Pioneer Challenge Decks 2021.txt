@@ -8,7 +8,7 @@ ScryfallCode=Q06
 [cards]
 1 R Approach of the Second Sun @Kev Walker
 2 C Ethereal Armor @Daarken
-3 R Isolate @Adame Minguez
+3 R Isolate @Victor Adame Minguez
 4 U Silkwrap @David Gaillet
 5 C Hidden Strings @Daarken
 6 M Chandra, Torch of Defiance @Magali Villeneuve

@@ -127,7 +127,18 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
 
             putCounter = !Expressions.compare(value, operator, operandValue);
         } else {
-            putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
+            boolean canReceive = tgtCard.canReceiveCounters(ctype);
+            boolean canRemove = tgtCard.canRemoveCounters(ctype);
+            if (!canReceive && !canRemove) {
+                return;
+            }
+            if (canReceive && !canRemove) {
+                putCounter = true;
+            } else if (!canReceive && canRemove) {
+                putCounter = false;
+            } else {
+                putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
+            }
         }
 
         if (putCounter) {

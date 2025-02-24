@@ -35,7 +35,9 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>
@@ -491,6 +493,12 @@ public class Cost implements Serializable {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
             return new CostReveal(splitStr[0], splitStr[1], description, "Hand,Battlefield");
+        }
+
+        if (parse.startsWith("Behold<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostBehold(splitStr[0], splitStr[1], description);
         }
 
         if (parse.startsWith("ExiledMoveToGrave<")) {

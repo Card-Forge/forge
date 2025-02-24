@@ -1,0 +1,11 @@
+Name:Bloodthirsty Conqueror
+ManaCost:3 B B
+Types:Creature Vampire Knight
+PT:5/5
+K:Flying
+K:Deathtouch
+T:Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigLifeGain | TriggerDescription$ Whenever an opponent loses life, you gain that much life. (Damage causes loss of life.)
+SVar:TrigLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggerCount$LifeAmount
+DeckHas:Ability$LifeGain
+Oracle:Flying, deathtouch\nWhenever an opponent loses life, you gain that much life. (Damage causes loss of life.)

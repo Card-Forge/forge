@@ -1,0 +1,6 @@
+Name:Jump Scare
+ManaCost:W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | KW$ Flying | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +2/+2, gains flying, and becomes a Horror enchantment creature in addition to its other types.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Enchantment,Creature,Horror
+Oracle:Until end of turn, target creature gets +2/+2, gains flying, and becomes a Horror enchantment creature in addition to its other types.

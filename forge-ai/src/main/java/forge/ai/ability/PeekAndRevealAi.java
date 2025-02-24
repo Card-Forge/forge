@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.AiAttackController;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.game.card.Card;
@@ -66,6 +67,14 @@ public class PeekAndRevealAi extends SpellAbilityAi {
             return false;
         }
 
+        if ("X".equals(sa.getParam("PeekAmount")) && sa.getSVar("X").equals("Count$xPaid")) {
+            int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
+            if (xPay == 0) {
+                return false;
+            }
+            sa.getRootAbility().setXManaCostPaid(xPay);
+        }
+
         return true;
     }
 
@@ -84,7 +93,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         }
 
         AbilitySub subAb = sa.getSubAbility();
-        return subAb != null && SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(player, subAb);
+        return subAb != null && SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(player, subAb);
     }
 
 }

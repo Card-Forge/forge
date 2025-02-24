@@ -1,0 +1,9 @@
+Name:Metamorphosis Fanatic
+ManaCost:4 B B
+Types:Creature Human Cleric
+PT:4/4
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return up to one target creature card from your graveyard to the battlefield with a lifelink counter on it.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature card in your graveyard | ValidTgts$ Creature.YouOwn | WithCountersType$ Lifelink
+K:Miracle:1 B
+Oracle:Lifelink\nWhen Metamorphosis Fanatic enters, return up to one target creature card from your graveyard to the battlefield with a lifelink counter on it.\nMiracle {1}{B} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

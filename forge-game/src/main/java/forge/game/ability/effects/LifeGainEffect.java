@@ -26,7 +26,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
 
         sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
         if (sb.length() == 0 && spellDesc != null) {
-            return (spellDesc);
+            return spellDesc;
         } else {
             sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ");
             if (!StringUtils.isNumeric(amountStr) && spellDesc != null && spellDesc.contains("life equal to")) {
@@ -48,23 +48,14 @@ public class LifeGainEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        String amount = sa.getParam("LifeAmount");
-        boolean variableAmount = amount.equals("AFNotDrawnNum");
-        if (variableAmount) {
-            amount = "X";
-        }
+        final int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
         final List<Player> tgts = getTargetPlayersWithDuplicates(true, "Defined", sa);
 
         for (final Player p : Sets.newHashSet(tgts)) {
             if (!p.isInGame()) {
                 continue;
             }
-            if (variableAmount) {
-                sa.setSVar("AFNotDrawnNum", sa.getSVar("AFNotDrawnNum_" + p.getId()));
-            }
-            int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
-            lifeAmount *= Collections.frequency(tgts, p);
-            p.gainLife(lifeAmount, sa.getHostCard(), sa);
+            p.gainLife(lifeAmount * Collections.frequency(tgts, p), sa.getHostCard(), sa);
         }
     }
 

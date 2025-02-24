@@ -1,0 +1,10 @@
+Name:You Exist Only to Amuse
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, ABILITY
+SVar:TrigCharm:DB$ Charm | CharmNum$ Count$Compare X GE6.2.1 | Choices$ DBToken,DBAnimateAll | AdditionalDescription$ If you control six or more lands, choose both instead.
+SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_devil_burn | SpellDescription$ Create three 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.OppCtrl | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, creatures your opponents control have base power and toughness 1/1 and lose all abilities.
+SVar:X:Count$Valid Land.YouCtrl
+DeckHas:Ability$Token
+Oracle:When you set this scheme in motion, choose one. If you control six or more lands, choose both instead.\n• Create three 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."\n• Until your next turn, creatures your opponents control have base power and toughness 1/1 and lose all abilities.

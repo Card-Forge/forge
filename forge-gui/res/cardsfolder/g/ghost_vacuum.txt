@@ -1,0 +1,8 @@
+Name:Ghost Vacuum
+ManaCost:1
+Types:Artifact
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:AB$ ChangeZoneAll | Cost$ 6 T Sac<1/CARDNAME> | ChangeType$ Creature.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SorcerySpeed$ True | WithCountersType$ Flying | StaticEffect$ Animate | SpellDescription$ Put each creature card exiled with CARDNAME onto the battlefield under your control with a flying counter on it. Each of them is a 1/1 Spirit in addition to its other types. Activate only as a sorcery.
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Spirit | SetPower$ 1 | SetToughness$ 1
+DeckHas:Ability$Counters
+Oracle:{T}: Exile target card from a graveyard.\n{6}, {T}, Sacrifice Ghost Vacuum: Put each creature card exiled with Ghost Vacuum onto the battlefield under your control with a flying counter on it. Each of them is a 1/1 Spirit in addition to its other types. Activate only as a sorcery.

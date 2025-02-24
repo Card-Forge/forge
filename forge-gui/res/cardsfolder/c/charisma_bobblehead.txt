@@ -4,6 +4,6 @@ Types:Artifact Bobblehead
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ Token | Cost$ 4 T | TokenAmount$ X | TokenScript$ w_1_1_soldier | SorcerySpeed$ True | TokenOwner$ You | SpellDescription$ Create X 1/1 white Soldier creature tokens, where X is the number of Bobbleheads you control. Activate only as a sorcery.
 SVar:X:Count$Valid Bobblehead.YouCtrl
-DeckNeeds:Type$Bobblehead
 DeckHas:Ability$Token & Type$Soldier
+DeckNeeds:Type$Bobblehead
 Oracle:{T}: Add one mana of any color.\n{4}, {T}: Create X 1/1 white Soldier creature tokens, where X is the number of Bobbleheads you control. Activate only as a sorcery.

@@ -1,0 +1,8 @@
+Name:Daggermaw Megalodon
+ManaCost:4 U U
+Types:Creature Shark
+PT:5/7
+K:Vigilance
+K:TypeCycling:Island:2
+DeckHas:Ability$Discard
+Oracle:Vigilance\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)

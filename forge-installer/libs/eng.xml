@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<!-- The English langpack -->
+
+<izpack:langpack version="5.0"
+                 xmlns:izpack="http://izpack.org/schema/langpack"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://izpack.org/schema/langpack http://izpack.org/schema/5.0/izpack-langpack-5.0.xsd">
+
+    <!-- Heading messages START -->
+    <str id="CheckedHelloPanel.headline" txt="Welcome"/>
+    <str id="CompilePanel.headline" txt="Compile Java Sources"/>
+    <str id="ConditionalUserInputPanel.headline" txt="User Data"/>
+    <str id="ExtendedInstallPanel.headline" txt="Installation and Configuration"/>
+    <str id="FinishPanel.headline" txt="Installation Finished"/>
+    <str id="HelloPanel.headline" txt="Welcome"/>
+    <str id="HTMLInfoPanel.headline" txt="Information"/>
+    <str id="HTMLLicencePanel.headline" txt="Licensing Agreements"/>
+    <str id="ImgPacksPanel.headline" txt="Select Installation Packages"/>
+    <str id="InfoPanel.headline" txt="Information"/>
+    <str id="InstallPanel.headline" txt="Installation"/>
+    <str id="JDKPathPanel.headline" txt="JDK Path"/>
+    <str id="LicencePanel.headline" txt="Licensing Agreements"/>
+    <str id="PacksPanel.headline" txt="Select Installation Packages"/>
+    <str id="TreePacksPanel.headline" txt="Select Installation Packages"/>
+    <str id="ProcessPanel.headline" txt="Perform External Processes"/>
+    <str id="ShortcutPanel.headline" txt="Setup Shortcuts"/>
+    <str id="SimpleFinishPanel.headline" txt="Installation Finished"/>
+    <str id="SummaryPanel.headline" txt="Summary Configuration Data"/>
+    <str id="TargetPanel.headline" txt="Target Path"/>
+    <str id="UserInputPanel.headline" txt="User Data"/>
+    <str id="UserPathPanel.headline" txt="Select Path"/>
+    <str id="InstallationGroupPanel.headline" txt="Installation Group"/>
+    <str id="InstallationTypePanel.headline" txt="Installation Type"/>
+
+    <!-- General installer strings -->
+    <str id="installer.title" txt="Installation of "/>
+    <str id="installer.reversetitle" txt="$APP_NAME $APP_VER - Install Wizard"/>
+    <str id="installer.next" txt="Next"/>
+    <str id="installer.prev" txt="Previous"/>
+    <str id="installer.quit" txt="Quit"/>
+    <str id="installer.madewith" txt="DCP Setup Maker/IzPack"/>
+    <str id="installer.quit.title" txt="$APP_NAME $APP_VER"/>
+    <str id="installer.quit.message" txt="Are you sure you want to cancel installation?"/>
+    <str id="installer.warning" txt="Warning!"/>
+    <str id="installer.yes" txt="Yes"/>
+    <str id="installer.no" txt="No"/>
+    <str id="installer.cancel" txt="Cancel"/>
+    <str id="installer.error" txt="Error"/>
+    <str id="installer.help" txt="Help"/>
+    <str id="installer.step" txt="Step"/>
+    <str id="installer.of" txt="of"/>
+    <str id="installer.Message" txt="Message"/>
+
+    <!-- Uninstaller specific strings -->
+    <str id="uninstaller.warning" txt="This will remove the installed application!"/>
+    <str id="uninstaller.destroytarget" txt=" Force the deletion of "/>
+    <str id="uninstaller.uninstall" txt="Uninstall"/>
+
+    <!-- The strings for the 'official' IzPack plugins -->
+    <!-- HelloPanel strings -->
+    <str id="HelloPanel.welcome1" txt="Welcome to the installation of "/>
+    <str id="HelloPanel.welcome2" txt="!"/>
+    <str id="HelloPanel.authors" txt="This software is developed by: "/>
+    <str id="HelloPanel.url" txt="The homepage is at: "/>
+
+    <!-- LicensePanel strings -->
+    <str id="LicencePanel.info" txt="Please read the following license agreement carefully:"/>
+    <str id="LicencePanel.agree" txt="I accept the terms of this license agreement."/>
+    <str id="LicencePanel.notagree" txt="I do not accept the terms of this license agreement."/>
+    <str id="LicencePanel.yes" txt="Yes"/>
+    <str id="LicencePanel.no" txt="No"/>
+
+		<!-- PrinterSelect Panel -->
+		<str id="PrinterSelectPanel.select_printer" txt="Select the printer to use for initial setup and testing."/>
+
+		<!-- InfoPanel strings -->
+		<str id="InfoPanel.info" txt="Please read the following information: "/>
+
+		<!-- PathInputPanel strings -->
+		<str id="PathInputPanel.required" txt="The chosen directory should exist."/>
+    <str id="PathInputPanel.required.forModificationInstallation" txt="The chosen directory should exist."/>
+    <str id="PathInputPanel.notValid" txt="The chosen directory does not contain the required product."/>
+
+		<!-- TargetPanel strings -->
+    <str id="TargetPanel.info" txt="Select the installation path: "/>
+    <str id="TargetPanel.browse" txt="Browse..."/>
+    <str id="TargetPanel.warn" txt="The directory already exists! Are you sure you want to install here and possibly overwrite existing files?"/>
+    <str id="TargetPanel.empty_target" txt="You have not specified a target location! Is this correct?"/>
+    <str id="TargetPanel.createdir" txt="The target directory will be created: "/>
+    <str id="TargetPanel.nodir" txt="This file is not a directory! Please choose a directory!"/>
+    <str id="TargetPanel.notwritable" txt="This directory can not be written! Please choose another directory!"/>
+
+    <!-- JDKPathPanel strings -->
+    <str id="JDKPathPanel.extendedIntro" txt="The installed application needs a JDK between version ${JDKPathPanel.minVersion} and ${JDKPathPanel.maxVersion}. A java runtime environment (JRE) will be not sufficient."/>
+    <str id="JDKPathPanel.intro" txt="The installed application needs a JDK. A java runtime environment (JRE) will be not sufficient."/>
+    <str id="JDKPathPanel.info" txt="Select the JDK path:"/>
+    <str id="JDKPathPanel.badVersion1" txt="The chosen JDK has the wrong version (available: "/>
+    <str id="JDKPathPanel.badVersion2" txt=" required: "/>
+    <str id="JDKPathPanel.badVersion3" txt=") should this JDK be used anyway?"/>
+    <str id="JDKPathPanel.nonValidPathInReg" txt="The Windows registry contains a non-valid path for this JDK. Should this JDK be used anyway?"/>
+
+		<!-- PacksPanel strings -->
+		<str id="PacksPanel.info" txt="Select the packs you want to install:"/>
+    <str id="PacksPanel.tip" txt="Note: Grayed packs are required."/>
+    <str id="PacksPanel.space" txt="Total space Required: "/>
+    <str id="PacksPanel.freespace" txt="Available space: "/>
+    <str id="PacksPanel.description" txt="Description"/>
+    <str id="PacksPanel.dependencyList" txt="The selected package has the following dependencies and/or excludes"/>
+    <str id="PacksPanel.dependencies" txt="Dependencies: "/>
+    <str id="PacksPanel.excludes" txt="Excludes: "/>
+    <str id="PacksPanel.notEnoughSpace" txt="Disk space required for the installation exceeds available disk space."/>
+    <str id="PacksPanel.notAscertainable" txt="not ascertainable"/>
+		
+		<!-- InstallPanel strings -->
+		<str id="InstallPanel.info" txt="Click 'Install!' to begin the installation process"/>
+    <str id="InstallPanel.install" txt="Install!"/>
+    <str id="InstallPanel.tip" txt="Pack installation progress:"/>
+    <str id="InstallPanel.begin" txt=" "/>
+    <str id="InstallPanel.finished" txt="[Finished]"/>
+    <str id="InstallPanel.progress" txt="Overall installation progress:"/>
+    <str id="InstallPanel.overwrite.title" txt="File already exists"/>
+    <str id="InstallPanel.overwrite.question" txt="The following file already exists. Should it be overwritten?"/>
+
+		<!-- InstallationGroupPanel strings -->
+		<str id="InstallationGroupPanel.colNameSelected" txt="Selected"/>
+    <str id="InstallationGroupPanel.colNameInstallType" txt="InstallType"/>
+    <str id="InstallationGroupPanel.colNameSize" txt="Size"/>
+		
+		<!-- InstallationTypePanel strings -->
+    <str id="InstallationTypePanel.info" txt="Please choose the type of installation:"/>
+    <str id="InstallationTypePanel.normal" txt="New installation"/>
+    <str id="InstallationTypePanel.modify" txt="Modify installation"/>
+		
+		<!-- FinishPanel strings -->
+		<str id="FinishPanel.success" txt="Installation has completed successfully."/>
+    <str id="FinishPanel.done" txt="Done"/>
+    <str id="FinishPanel.fail" txt="Installation has failed!"/>
+    <str id="FinishPanel.uninst.info" txt="An uninstaller program has been created in: "/>
+    <str id="FinishPanel.auto" txt="Generate an automatic installation script"/>
+    <str id="FinishPanel.auto.tip" txt="Use this script to repeat this installation on other computers."/>
+    <str id="FinishPanel.auto.dialog.filterdesc" txt="XML Files"/>
+
+		<!-- ImgPacksPanel strings -->
+	<str id="ImgPacksPanel.dependencyList" txt="Dependencies and/or excludes"/>
+    <str id="ImgPacksPanel.packs" txt="The following packs are available:"/>
+    <str id="ImgPacksPanel.snap" txt="Package snapshot:"/>
+    <str id="ImgPacksPanel.checkbox" txt=" Install this pack"/>
+
+    <!-- ShortcutPanel strings -->
+    <str id="ShortcutPanel.regular.list" txt="Select a Program Group for the Shortcuts:"/>
+    <str id="ShortcutPanel.regular.default" txt="Default"/>
+    <str id="ShortcutPanel.regular.desktop" txt="Create additional shortcuts on the desktop"/>
+    <str id="ShortcutPanel.regular.create" txt="Create shortcuts in the StartMenu"/>
+    <str id="ShortcutPanel.regular.userIntro" txt="create shortcut for:"/>
+    <str id="ShortcutPanel.regular.currentUser" txt="current user"/>
+    <str id="ShortcutPanel.regular.allUsers" txt="all users"/>
+    <str id="ShortcutPanel.alternate.apology" txt="We are sorry but IzPack does not support the creation of shortcuts on this operating system. To create the shortcuts, please refer to your operating system manual."/>
+    <str id="ShortcutPanel.alternate.targetsLabel" txt="The following is a list of targets that the manufacturer of this software product wanted you to have access to."/>
+    <str id="ShortcutPanel.alternate.textFileExplanation" txt="You can save detailed information about the application targets in a text file for later reference."/>
+    <str id="ShortcutPanel.alternate.saveButton" txt="Save Text File"/>
+    <str id="ShortcutPanel.textFile.header" txt="Shortcut Information\n====================\n\nThe following is a listing of all relevant information about the intended\nshortcuts. This information should make it possible to create shortcuts manually.\n"/>
+    <str id="ShortcutPanel.textFile.name" txt="Shortcut          : "/>
+    <str id="ShortcutPanel.textFile.location" txt="Intended Location : "/>
+    <str id="ShortcutPanel.textFile.description" txt="Description       : "/>
+    <str id="ShortcutPanel.textFile.target" txt="Shortcut Target   : "/>
+    <str id="ShortcutPanel.textFile.command" txt="Command Line      : "/>
+    <str id="ShortcutPanel.textFile.iconName" txt="Icon File         : "/>
+    <str id="ShortcutPanel.textFile.iconIndex" txt="Icon Index        : "/>
+    <str id="ShortcutPanel.textFile.work" txt="Working Directory : "/>
+    <str id="ShortcutPanel.location.desktop" txt="Desktop"/>
+    <str id="ShortcutPanel.location.applications" txt="Applications Menu"/>
+    <str id="ShortcutPanel.location.startMenu" txt="Start Menu"/>
+    <str id="ShortcutPanel.location.startup" txt="Startup Group"/>
+	<str id="ShortcutPanel.regular.StartMenu:Start-Menu" txt="Start-Menu"/>
+    <str id="ShortcutPanel.regular.StartMenu:K-Menu" txt="XDG-Menu"/>
+    
+    <!-- UserInputPanel strings -->
+    <str id="UserInputPanel.error.caption" txt="Error"/>
+    <str id="UserInputPanel.dir.nodirectory.message" txt="You must select a valid directory."/>
+    <str id="UserInputPanel.dir.nodirectory.caption" txt="No Directory Selected"/>
+    <str id="UserInputPanel.dir.notdirectory.message" txt="The directory you have chosen either does not exist or is not valid."/>
+    <str id="UserInputPanel.dir.notdirectory.caption" txt="Invalid Directory"/>
+    <str id="UserInputPanel.file.nofile.message" txt="You must select a valid file."/>
+    <str id="UserInputPanel.file.nofile.caption" txt="No File Selected"/>
+    <str id="UserInputPanel.file.notfile.message" txt="The file you have chosen either does not exist or is not valid."/>
+    <str id="UserInputPanel.file.notfile.caption" txt="Invalid File"/>
+    <!-- more descriptive error message would be cool, like specifying what file we looked for -->
+    <str id="UserInputPanel.search.autodetect" txt="Autodetect"/>
+    <str id="UserInputPanel.search.autodetect.failed.message" txt="Auto-detection failed."/>
+    <str id="UserInputPanel.search.autodetect.failed.caption" txt="Auto-Detection Failed"/>
+    <str id="UserInputPanel.search.autodetect.tooltip" txt="Check for the file or directory in the paths given above."/>
+    <str id="UserInputPanel.search.location" txt="Enter location of {0}."/>
+    <str id="UserInputPanel.search.location.checkedfile" txt="The existence of {0} is checked."/>
+    <str id="UserInputPanel.search.browse" txt="Browse..."/>
+    <str id="UserInputPanel.search.wrongselection.message" txt="The file or directory you have chosen either does not exist or is not appropriate."/>
+    <str id="UserInputPanel.search.wrongselection.caption" txt="Invalid Selection"/>
+    
+    <!-- UserPathPanel strings -->
+    <str id="UserPathPanel.required" txt="The chosen directory should exist."/>
+    <str id="UserPathPanel.info" txt="Select the path: "/>
+    <str id="UserPathPanel.browse" txt="Browse"/>
+    <str id="UserPathPanel.exists_warn" txt="The directory already exists! Are you sure you want to install here and possibly overwrite existing files?"/>
+    <str id="UserPathPanel.empty_target" txt="You have not specified a target location! Is this correct?"/>
+    <str id="UserPathPanel.createdir" txt="The target directory will be created: "/>
+    <str id="UserPathPanel.nodir" txt="This file is not a directory! Please choose a directory!"/>
+    <str id="UserPathPanel.notwritable" txt="This directory can not be written! Please choose another directory!"/>
+    
+    <!-- CompilePanel strings -->
+    <str id="CompilePanel.heading" txt="Compilation"/>
+    <str id="CompilePanel.tip" txt="Job compilation progress:"/>
+    <str id="CompilePanel.browse" txt="Browse..."/>
+    <str id="CompilePanel.browse.approve" txt="Use as compiler"/>
+    <str id="CompilePanel.start" txt="Start"/>
+    <str id="CompilePanel.progress.initial" txt="[Press Start button]"/>
+    <str id="CompilePanel.progress.finished" txt="[Finished]"/>
+    <str id="CompilePanel.progress.overall" txt="Overall compilation progress:"/>
+    <str id="CompilePanel.error" txt="Compilation failed"/>
+    <str id="CompilePanel.error.reconfigure" txt="Reconfigure"/>
+    <str id="CompilePanel.error.ignore" txt="Ignore"/>
+    <str id="CompilePanel.error.abort" txt="Abort"/>
+    <str id="CompilePanel.error.seebelow" txt="See below for the failed command and its output."/>
+    <str id="CompilePanel.error.nofiles" txt="Error while scanning for files for compilation."/>
+    <str id="CompilePanel.error.compilernotfound" txt="The compiler could not be run."/>
+    <str id="CompilePanel.error.invalidarguments" txt="Invalid arguments provided to the compiler."/>
+    <str id="CompilePanel.error.noclassfile" txt="The compiler did not produce a class file for the source file "/>
+    <str id="CompilePanel.choose_compiler" txt="Compiler to use:"/>
+    <str id="CompilePanel.additional_arguments" txt="Additional compiler arguments:"/>
+
+    <!-- ProcessPanel strings -->
+    <str id="ProcessPanel.heading" txt="Processing"/>
+    
+    <!-- SummaryPanel strings -->
+    <str id="SummaryPanel.info" txt="Installation will proceed with the following settings. Press Next to continue."/>
+    <str id="TargetPanel.summaryCaption" txt="Installation Path"/>
+    <str id="JDKPathPanel.summaryCaption" txt="JDK Path"/>
+    <str id="PacksPanel.summaryCaption" txt="Chosen Installation Packs"/>
+    <str id="ImgPacksPanel.summaryCaption" txt="Chosen Installation Packs"/>
+    <str id="TreePacksPanel.summaryCaption" txt="Chosen Installation Packs"/>
+    <str id="UserPathPanel.summaryCaption" txt="Selected Path"/>
+    <str id="DefaultTargetPanel.summaryCaption" txt="Installation Path"/>
+    
+    <!-- Strings for the Registry -->
+    <str id="functionFailed.RegOpenKeyEx" txt="Cannot open registry key {0}\\{1}."/>
+
+		<!-- CheckedHelloPanel strings -->
+    <str id="CheckedHelloPanel.productAlreadyExist0" txt="This product is already installed on this computer under the path "/>
+    <str id="CheckedHelloPanel.productAlreadyExist1" txt=" . Are you sure you want to install another entity?"/>
+    <str id="CheckedHelloPanel.infoOverUninstallKey" txt="The uninstall key will be named: "/>
+    
+    <!-- Next Media Strings -->
+    <str id="nextmedia.title" txt="Next install media"/>
+    <str id="nextmedia.msg" txt="Choose the next install media."/>
+    <str id="nextmedia.browsebtn" txt="Browse"/>
+    <str id="nextmedia.okbtn" txt="Apply"/>
+    <str id="nextmedia.cancelbtn" txt="Cancel"/>
+    <str id="nextmedia.choosertitle" txt="Choose install media"/>
+    <str id="nextmedia.filedesc" txt="install packs (.pak*)"/>
+
+		<!-- This string defines the time stamp format in the installation report.
+         The format details are documented in java.text.SimpleDateFormat -->
+    <str id="log.timeStamp" txt="MM-dd-yyyy [HH:mm:ss]  zzzz"/>
+    
+    <!-- Strings for various purposes in the logging/reporting system  -->
+    <str id="log.reportHeading" txt="                           IzPack INSTALLATION REPORT"/>
+    <str id="log.installFailed" txt="WARNING!!! The installation did not succeed!"/>
+    <str id="log.partialInstall" txt="WARNING!!! The installation might not have completely succeeded!"/>
+    <str id="log.messageCount" txt="This report contains {0} general message(s), {1} warning(s) and {2} error(s)"/>
+    <str id="log.application" txt="Installation report for : {0} Version {1}"/>
+    <str id="log.timePrefix" txt="Install time            : {0}"/>
+    <str id="log.pathPrefix" txt="Install directory       : {0}"/>
+    <str id="log.messageHeading" txt="                         --- Installation Messages ---"/>
+    <str id="log.warningHeading" txt="                               --- Warnings ---"/>
+    <str id="log.errorHeading" txt="                                --- Errors ---"/>
+    <str id="log.exceptionPrefix" txt="                 >> Exception: {0}"/>
+    <str id="log.messagePrefix" txt="Message  [{0}] - "/>
+    <str id="log.warningPrefix" txt="Warning [{0}] - "/>
+    <str id="log.errorPrefix" txt="Error [{0}] - "/>
+    <str id="log.reportWriteErrorTitle" txt="Error writing report"/>
+    <str id="log.reportWriteError" txt="Unable to write the installation report to ''{0}''"/>
+    <str id="log.informUserTitle" txt="Installation Problems"/>
+    <str id="log.saveLogTitle" txt="Save Log File"/>
+    <str id="log.LogFileName" txt="installLog.txt"/>
+    <str id="log.informUserFail" txt="&lt;html&gt;The installation did not succeed!&lt;br&gt;Would you like to write a log file?&lt;/html&gt;"/>
+    <str id="log.informUserPartial" txt="&lt;html&gt;The installation might not have completely succeeded!&lt;br&gt;Would you like to write a log file?&lt;/html&gt;"/>
+
+    <!-- Strings for individual messages in the logging/reporting system.
+         Numbers for each category (message/warning/error) start at 0  -->
+    <str id="log.message_" txt=""/>
+    <str id="log.warning_" txt=""/>
+    <str id="log.error_0" txt="unable to write ''{0}''"/>
+    <str id="debug.changevariable" txt="modify value"/>
+		
+    <str id="data.validation.error.title" txt="Error" />
+    <str id="data.validation.warning.title" txt="Warning" />
+</izpack:langpack>

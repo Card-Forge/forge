@@ -4,6 +4,6 @@ Types:Artifact
 A:AB$ ChangeZone | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | SorcerySpeed$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Targeted | Hidden$ True | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player exiles a card from their hand. Activate only as a sorcery.
 A:AB$ ChooseCard | Cost$ 1 | ChoiceZone$ Exile | Choices$ Card.ExiledWithSource | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Muse Vessel | SubAbility$ DBEffect | AILogic$ Never | SpellDescription$ Choose a card exiled with CARDNAME. You may play that card this turn.
 SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | StaticAbilities$ STPlay | RememberObjects$ ChosenCard | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 Oracle:{3}, {T}: Target player exiles a card from their hand. Activate only as a sorcery.\n{1}: Choose a card exiled with Muse Vessel. You may play that card this turn.

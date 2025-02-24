@@ -5,6 +5,6 @@ PT:6/7
 K:Trample
 A:AB$ DealDamage | Cost$ 3 R Sac<1/Artifact> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed artifact's mana value to any target.
 SVar:X:Sacrificed$CardManaCost
-DeckNeeds:Color$Red
 AI:RemoveDeck:All
+DeckNeeds:Color$Red
 Oracle:Trample\n{3}{R}, Sacrifice an artifact: Bosh, Iron Golem deals damage equal to the sacrificed artifact's mana value to any target.

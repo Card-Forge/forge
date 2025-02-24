@@ -2,7 +2,7 @@ Name:Imprisoned in the Moon
 ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant creature, land, or planeswalker
-A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature,Land,Planeswalker | AILogic$ Curse | AITgts$ Card.cmcGE3
+A:SP$ Attach | ValidTgts$ Creature,Land,Planeswalker | AILogic$ Curse | AITgts$ Card.cmcGE3
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetColor$ Colorless | AddType$ Land | RemoveCardTypes$ True | RemoveAllAbilities$ True | AddAbility$ ABMana | Description$ Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities.
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 SVar:NonStackingAttachEffect:True

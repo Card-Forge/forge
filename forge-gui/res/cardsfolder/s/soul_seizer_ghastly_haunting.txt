@@ -16,7 +16,7 @@ ManaCost:no cost
 Colors:blue
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 AI:RemoveDeck:All
 Oracle:Enchant creature\nYou control enchanted creature.

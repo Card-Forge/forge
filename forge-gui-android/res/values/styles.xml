@@ -7,5 +7,15 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+    <style name="NormalTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowNoTitle">true</item>
+        <!-- windowOptOutEdgeToEdgeEnforcement -> Flag indicating whether this window would opt-out the
+        edge-to-edge enforcement. If this is false, the edge-to-edge enforcement will be applied to the window if it
+        belongs to an app targeting Android 15 and above. If this is true, the edge-to-edge enforcement
+        won't be applied. However, this attribute will be deprecated and disabled in a future SDK level. -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="android:navigationBarColor">#131313</item>
     </style>
 </resources>

@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCard | GainControl$ True | FaceDown$ True | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | FaceDownSetType$ Artifact & Creature & Cyberman | FaceDownPower$ 2 | FaceDownToughness$ 2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ VillainousChoice | TriggerDescription$ At the beginning of your end step, each opponent faces a villainous choice — Each artifact creature you control deals 1 damage to that opponent, or you draw a card and chaos ensues.
 SVar:VillainousChoice:DB$ VillainousChoice | Defined$ Opponent | Choices$ DBDamage,DBDraw
-SVar:DBDamage:DB$ DealDamage | NumDmg$ 1 | DamageSource$ Valid Artifact.Creature+YouCtrl | Defined$ Remembered | SpellDescription$ Each artifact creature you control deals 1 damage to that opponent
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 1 | DamageSource$ Valid Artifact.Creature+YouCtrl | Defined$ Remembered | SpellDescription$ Each artifact creature you control deals 1 damage to that opponent.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBChaos | SpellDescription$ You draw a card and chaos ensues.
 SVar:DBChaos:DB$ ChaosEnsues
 DeckHints:Type$Artifact

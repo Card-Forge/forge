@@ -8,7 +8,7 @@ ScryfallCode=V10
 
 [cards]
 1 M Aether Vial @Karl Kopinski
-2 M Black Vise @Dan Scott
+2 M Black Vise @Dan Murayama Scott
 3 M Isochron Scepter @Chippy
 4 M Ivory Tower @Jason Chan
 5 M Jester's Cap @D. Alexander Gregory

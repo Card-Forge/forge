@@ -6,6 +6,6 @@ K:Ward:2
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigAnimateAll | TriggerDescription$ At the beginning of each combat, other Clues you control become 6/6 Plant creatures in addition to their other types until end of turn.
 SVar:TrigAnimateAll:DB$ AnimateAll | ValidCards$ Clue.Other+YouCtrl | Power$ 6 | Toughness$ 6 | Types$ Creature,Plant
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
-DeckNeeds:Type$Clue
 DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Clue
 Oracle:Ward {2}\nAt the beginning of each combat, other Clues you control become 6/6 Plant creatures in addition to their other types until end of turn.\n{2}, Sacrifice Tangletrove Kelp: Draw a card.

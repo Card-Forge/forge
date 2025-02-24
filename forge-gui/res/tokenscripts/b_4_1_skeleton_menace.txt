@@ -1,7 +1,7 @@
 Name:Skeleton Token
 ManaCost:no cost
-Types:Creature Skeleton
 Colors:black
+Types:Creature Skeleton
 PT:4/1
 K:Menace
 Oracle:Menace

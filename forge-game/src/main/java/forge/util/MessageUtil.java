@@ -41,6 +41,7 @@ public class MessageUtil {
             case Seek:
                 return value;
             case ChooseColor:
+            case Mana:
                 return sa.hasParam("Random")
                         ? Localizer.getInstance().getMessage("lblRandomColorChosen", value)
                         : Localizer.getInstance().getMessage("lblPlayerPickedChosen", choser, value);

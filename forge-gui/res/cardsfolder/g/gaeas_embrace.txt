@@ -2,7 +2,7 @@ Name:Gaea's Embrace
 ManaCost:2 G G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 G G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Trample | Description$ Enchanted creature gets +3/+3 and has trample.
 A:AB$ Regenerate | Cost$ G | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 Oracle:Enchant creature\nEnchanted creature gets +3/+3 and has trample.\n{G}: Regenerate enchanted creature.

@@ -1,6 +1,6 @@
 Name:Hellion Token
 ManaCost:no cost
-Types:Creature Hellion
 Colors:red
+Types:Creature Hellion
 PT:4/4
 Oracle:

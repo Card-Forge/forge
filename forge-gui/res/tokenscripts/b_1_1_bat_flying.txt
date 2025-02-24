@@ -1,7 +1,7 @@
 Name:Bat Token
 ManaCost:no cost
-Types:Creature Bat
 Colors:black
+Types:Creature Bat
 PT:1/1
 K:Flying
 Oracle:Flying

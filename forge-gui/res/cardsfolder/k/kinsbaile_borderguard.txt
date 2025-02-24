@@ -9,6 +9,6 @@ SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_1_1_kithkin_soldier |
 SVar:Y:TriggeredCard$CardCounters.ALL
 SVar:NeedsToPlayVar:X GE2
 SVar:BuffedBy:Kithkin
-DeckHints:Type$Kithkin
 AI:RemoveDeck:Random
+DeckHints:Type$Kithkin
 Oracle:Kinsbaile Borderguard enters with a +1/+1 counter on it for each other Kithkin you control.\nWhen Kinsbaile Borderguard dies, create a 1/1 white Kithkin Soldier creature token for each counter on it.

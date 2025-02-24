@@ -6,6 +6,5 @@ SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Token | Cost$ 3 R T ExileFromGrave<3/Card/cards> | TokenScript$ c_a_treasure_sac | TokenAmount$ 2 | SpellDescription$ Create two Treasure tokens.
 DeckHas:Ability$Token & Type$Artifact|Treasure
-DeckHints:Ability$Graveyard
-DeckHints:Type$Legendary
+DeckHints:Ability$Graveyard & Type$Legendary
 Oracle:Mines of Moria enters tapped unless you control a legendary creature.\n{T}: Add {R}.\n{3}{R}, {T}, Exile three cards from your graveyard: Create two Treasure tokens.

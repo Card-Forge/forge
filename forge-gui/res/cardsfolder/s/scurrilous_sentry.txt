@@ -6,6 +6,6 @@ K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ Whenever CARDNAME enters or attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
 SVar:TrigConnive:DB$ Connive
-DeckHas:Ability$Counters|Discard
 SVar:HasAttackEffect:True
+DeckHas:Ability$Counters|Discard
 Oracle:Menace\nWhenever Scurrilous Sentry enters or attacks, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)

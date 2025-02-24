@@ -14,7 +14,7 @@ ScryfallCode=DDS
 5 C Peer Through Depths @Anthony S. Waters
 6 R Quicken @Aleksi Briclot
 7 C Reach Through Mists @Anthony S. Waters
-8 R Sage-Eye Avengers @Dan Scott
+8 R Sage-Eye Avengers @Dan Murayama Scott
 9 C Sift Through Sands @Anthony S. Waters
 10 C Snap @Véronique Meignaud
 11 R Talrand, Sky Summoner @Svetlin Velinov
@@ -27,7 +27,7 @@ ScryfallCode=DDS
 18 U Shivan Meteor @Chippy
 19 R Volcanic Vision @Noah Bradley
 20 U Young Pyromancer @Cynthia Sheppard
-21 R Firemind's Foresight @Dan Scott
+21 R Firemind's Foresight @Dan Murayama Scott
 22 C Goblin Electromancer @Svetlin Velinov
 23 R Jori En, Ruin Diver @Igor Kieryluk
 24 C Nivix Cyclops @Wayne Reynolds

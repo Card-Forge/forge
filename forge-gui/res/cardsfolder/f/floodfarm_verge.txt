@@ -1,0 +1,6 @@
+Name:Floodfarm Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Mana | Cost$ T | Produced$ U | IsPresent$ Plains.YouCtrl,Island.YouCtrl | SpellDescription$ Add {U}. Activate only if you control a Plains or an Island.
+Oracle:{T}: Add {W}.\n{T}: Add {U}. Activate only if you control a Plains or an Island.

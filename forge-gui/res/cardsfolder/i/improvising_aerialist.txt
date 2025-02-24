@@ -1,0 +1,7 @@
+Name:Improvising Aerialist
+ManaCost:1 W
+Types:Creature Human Survivor
+PT:3/2
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | Execute$ TrigPerpetual | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, CARDNAME and the top creature card in your library without flying perpetually gain flying.
+SVar:TrigPerpetual:DB$ Pump | PumpZone$ Battlefield,Library | Defined$ Self & ValidLibrary Creature.YouOwn+TopLibrary_Creature.withoutFlying | KW$ Flying | Duration$ Perpetual
+Oracle:Survival — At the beginning of your second main phase, if Improvising Aerialist is tapped, Improvising Aerialist and the top creature card in your library without flying perpetually gain flying.

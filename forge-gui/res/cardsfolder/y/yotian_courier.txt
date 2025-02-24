@@ -8,7 +8,7 @@ SVar:TrigCharm:DB$ Charm | Choices$ Powerstone,Seek | ChoiceRestriction$ YourLas
 SVar:Powerstone:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone | SpellDescription$ Create a tapped Powerstone token.
 SVar:Seek:DB$ Seek | Type$ Card.nonLand+cmcEQX | SpellDescription$ Seek a nonland card with mana value equal to the number of Powerstones you control.
 SVar:X:Count$Valid Powerstone.YouCtrl
-DeckNeeds:Type$Artifact
-DeckHas:Ability$Token & Type$Artifact
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Artifact
+DeckNeeds:Type$Artifact
 Oracle:Flying\nWhenever Yotian Courier attacks, choose one that wasn't chosen during your last combat —\n• Create a tapped Powerstone token.\n• Seek a nonland card with mana value equal to the number of Powerstones you control.

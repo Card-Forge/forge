@@ -1,0 +1,7 @@
+Name:You Will Know True Suffering
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, it deals damage equal to your commander's mana value to each noncommander creature your opponents control.
+SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.!IsCommander+OppCtrl | ValidDescription$ each noncommander creature your opponents control. | NumDmg$ X
+SVar:X:Count$ValidAll Card.IsCommander+YouOwn$SumCMC
+Oracle:When you set this scheme in motion, it deals damage equal to your commander's mana value to each noncommander creature your opponents control.

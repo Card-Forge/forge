@@ -1,0 +1,5 @@
+Name:Clock of DOOOOOOOOOOOOM!
+ManaCost:4
+Types:Artifact
+A:AB$ AdvanceCrank | Cost$ 4 T | AILogic$ AtOppEOT | SpellDescription$ Move the CRANK! counter to your Contraption deck's next sprocket and crank any number of that sprocket's Contraptions.
+Oracle:{4}, {T}: Move the CRANK! counter to your Contraption deck's next sprocket and crank any number of that sprocket's Contraptions.

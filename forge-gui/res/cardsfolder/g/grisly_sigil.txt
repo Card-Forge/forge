@@ -8,6 +8,6 @@ SVar:Damage1:DB$ DealDamage | Defined$ Targeted | NumDmg$ 1 | SubAbility$ DBGain
 SVar:DBGain3Life:DB$ GainLife | LifeAmount$ 3
 SVar:DBGain1Life:DB$ GainLife | LifeAmount$ 1
 SVar:X:Targeted$Valid Card.wasDealtNonCombatDamageThisTurn
-DeckHas:Ability$Sacrifice|LifeGain
 SVar:AINoCasualtyPayment:TRUE
+DeckHas:Ability$Sacrifice|LifeGain
 Oracle:Casualty 1 (As you cast this spell, you may sacrifice a creature with power 1 or greater. When you do, copy this spell and you may choose new targets for the copy.)\nChoose target creature or planeswalker. If it was dealt noncombat damage this turn, Grisly Sigil deals 3 damage to it and you gain 3 life. Otherwise, Grisly Sigil deals 1 damage to it and you gain 1 life.

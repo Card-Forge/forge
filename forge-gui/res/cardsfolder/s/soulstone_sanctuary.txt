@@ -1,0 +1,6 @@
+Name:Soulstone Sanctuary
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Animate | Cost$ 4 | Defined$ Self | Power$ 3 | Toughness$ 3 | Keywords$ Vigilance | Types$ Creature | AddAllCreatureTypes$ True | Duration$ Permanent | SpellDescription$ This land becomes a 3/3 creature with vigilance and all creature types. It's still a land.
+Oracle:{T}: Add {C}.\n{4}: This land becomes a 3/3 creature with vigilance and all creature types. It's still a land.

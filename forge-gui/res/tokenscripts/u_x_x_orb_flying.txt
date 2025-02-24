@@ -1,7 +1,7 @@
 Name:Orb Token
 ManaCost:no cost
-Types:Creature Orb
 Colors:blue
+Types:Creature Orb
 PT:*/*
 K:Flying
 Oracle:Flying

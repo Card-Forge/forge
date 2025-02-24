@@ -1,0 +1,8 @@
+Name:Deadly Poison Sampler
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, until end of turn, target creature gains "Whenever this creature deals combat damage to a player, destroy target creature that player controls."
+SVar:TrigCrank:DB$ Animate | ValidTgts$ Creature | Triggers$ TrigDamage
+SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, destroy target creature that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.ControlledBy TriggeredTarget | TgtPrompt$ Select target creature damaged player controls
+Oracle:Whenever you crank Deadly Poison Sampler, until end of turn, target creature gains "Whenever this creature deals combat damage to a player, destroy target creature that player controls."

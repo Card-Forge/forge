@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Enchantment Aura
 K:Flash
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ KeepTapped
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature gets +3/+3 and doesn't untap during its controller's untap step.
 AI:RemoveDeck:All
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature gets +3/+3 and doesn't untap during its controller's untap step.

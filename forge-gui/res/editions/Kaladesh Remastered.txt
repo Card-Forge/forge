@@ -21,7 +21,7 @@ ScryfallCode=KLR
 11 C Built to Last @Svetlin Velinov
 12 M Cataclysmic Gearhulk @Victor Adame Minguez
 13 C Conviction @John Stanko
-14 C Countless Gears Renegade @Dan Scott
+14 C Countless Gears Renegade @Dan Murayama Scott
 15 C Dawnfeather Eagle @Sidharth Chaturvedi
 16 C Eddytrail Hawk @James Paick
 17 U Fairgrounds Warden @Izzy
@@ -65,7 +65,7 @@ ScryfallCode=KLR
 55 C Malfunction @Izzy
 56 C Metallic Rebuke @Eric Deschamps
 57 M Metallurgic Summonings @Kieran Yanner
-58 U Minister of Inquiries @Dan Scott
+58 U Minister of Inquiries @Dan Murayama Scott
 59 C Nimble Innovator @Slawomir Maniak
 60 R Padeem, Consul of Innovation @Matt Stewart
 61 R Paradoxical Outcome @Nils Hamm
@@ -79,7 +79,7 @@ ScryfallCode=KLR
 69 C Thriving Turtle @Jeff Simpson
 70 M Torrential Gearhulk @Svetlin Velinov
 71 U Trophy Mage @Anna Steinbauer
-72 C Weldfast Wingsmith @Dan Scott
+72 C Weldfast Wingsmith @Dan Murayama Scott
 73 R Whir of Invention @Christine Choi
 74 U Wind-Kin Raiders @Shreya Shetty
 75 C Aether Poisoner @Yongjae Choi
@@ -95,7 +95,7 @@ ScryfallCode=KLR
 85 C Fen Hauler @Sidharth Chaturvedi
 86 C Fortuitous Find @Tomasz Jedruszek
 87 U Foundry Hornet @Christopher Moeller
-88 C Foundry Screecher @Dan Scott
+88 C Foundry Screecher @Dan Murayama Scott
 89 C Fourth Bridge Prowler @John Silva
 90 U Fretwork Colony @Christopher Burdett
 91 U Gifted Aetherborn @Ryan Yee
@@ -113,7 +113,7 @@ ScryfallCode=KLR
 103 C Night Market Lookout @Nils Hamm
 104 M Noxious Gearhulk @Lius Lasahido
 105 C Rush of Vitality @Lindsey Look
-106 U Sly Requisitioner @Dan Scott
+106 U Sly Requisitioner @Dan Murayama Scott
 107 C Subtle Strike @David Palumbo
 108 U Underhanded Designs @Anastasia Ovchinnikova
 109 U Vengeful Rebel @Tomasz Jedruszek
@@ -159,7 +159,7 @@ ScryfallCode=KLR
 149 C Sweatworks Brawler @Zack Stella
 150 C Welding Sparks @Raymond Swanland
 151 C Appetite for the Unnatural @Zoltan Boros
-152 U Arborback Stomper @Dan Scott
+152 U Arborback Stomper @Dan Murayama Scott
 153 U Armorcraft Judge @David Palumbo
 154 C Attune with Aether @Wesley Burt
 155 U Blossoming Defense @Anastasia Ovchinnikova
@@ -196,7 +196,7 @@ ScryfallCode=KLR
 186 C Wild Wanderer @Sidharth Chaturvedi
 187 R Wildest Dreams @Daniel Ljunggren
 188 M Ajani Unyielding @Kieran Yanner
-189 U Cloudblazer @Dan Scott
+189 U Cloudblazer @Dan Murayama Scott
 190 U Contraband Kingpin @Anna Steinbauer
 191 R Dark Intimations @Chase Stone
 192 R Depala, Pilot Exemplar @Greg Opalinski
@@ -215,7 +215,7 @@ ScryfallCode=KLR
 205 U Restoration Gearsmith @John Severin Brassell
 206 U Rogue Refiner @Victor Adame Minguez
 207 M Saheeli Rai @Willian Murai
-208 U Spire Patrol @Dan Scott
+208 U Spire Patrol @Dan Murayama Scott
 209 M Tezzeret the Schemer @Ryan Alexander Lee
 210 U Tezzeret's Touch @Chris Rallis
 211 U Unlicensed Disintegration @Izzy

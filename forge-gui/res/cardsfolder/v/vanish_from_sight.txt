@@ -1,0 +1,7 @@
+Name:Vanish from Sight
+ManaCost:3 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | SubAbility$ DBSurveil | StackDescription$ {p:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ Target nonland permanent's owner puts it on the top or bottom of their library. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:DBSurveil:DB$ Surveil | Amount$ 1
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Target nonland permanent's owner puts it on the top or bottom of their library. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

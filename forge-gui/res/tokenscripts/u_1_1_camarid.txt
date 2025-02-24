@@ -1,6 +1,6 @@
 Name:Camarid Token
 ManaCost:no cost
-Types:Creature Camarid
 Colors:blue
+Types:Creature Camarid
 PT:1/1
 Oracle:

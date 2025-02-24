@@ -5,8 +5,8 @@ PT:5/4
 K:Trample
 T:Mode$ Attacks | CheckSVar$ X | SVarCompare$ GE4 | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Descend 4 — Whenever CARDNAME attacks, if there are four or more permanent cards in your graveyard, put a +1/+1 counter on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1
-DeckHas:Ability$Counters
 SVar:X:Count$ValidGraveyard Permanent.YouOwn
-DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
 Oracle:Trample\nDescend 4 — Whenever Malamet Veteran attacks, if there are four or more permanent cards in your graveyard, put a +1/+1 counter on target creature.

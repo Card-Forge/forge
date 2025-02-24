@@ -3,6 +3,6 @@ ManaCost:W B
 Types:Creature Vampire Knight
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Vampires you control get +1/+1.
-DeckHints:Type$Vampire
 SVar:BuffedBy:Vampire
+DeckHints:Type$Vampire
 Oracle:Other Vampires you control get +1/+1.

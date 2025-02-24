@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Enchantment Aura
 K:Flash
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ First Strike | Description$ Enchanted creature gets +1/+0 and has first strike.
 Oracle:Flash\nEnchant creature\nEnchanted creature gets +1/+0 and has first strike.

@@ -2,7 +2,7 @@ Name:Rousing Read
 ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw two cards, then discard a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose

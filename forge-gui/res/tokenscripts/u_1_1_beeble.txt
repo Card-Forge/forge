@@ -1,6 +1,6 @@
 Name:Beeble Token
 ManaCost:no cost
-Types:Creature Beeble
 Colors:blue
+Types:Creature Beeble
 PT:1/1
 Oracle:

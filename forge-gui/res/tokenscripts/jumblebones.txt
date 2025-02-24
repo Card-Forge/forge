@@ -1,0 +1,9 @@
+Name:Jumblebones
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Skeleton
+PT:2/1
+K:CARDNAME can't block.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature leaves the battlefield, return target card named Ozox, the Clattering King from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target card named Ozox, the Clattering King in your graveyard | ValidTgts$ Card.YouOwn+namedOzox; the Clattering King
+Oracle:This creature can't block.\nWhen this creature leaves the battlefield, return target card named Ozox, the Clattering King from your graveyard to your hand.

@@ -8,6 +8,6 @@ A:AB$ Animate | Cost$ 2 B G | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ C
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigFood | TriggerDescription$ Whenever CARDNAME attacks, create a Food token and exile up to one target card from a graveyard.
 SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target card from a graveyard
-DeckHas:Ability$LifeGain|Token|Graveyard & Type$Horror|Food & Color$Black|Green
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain|Token|Graveyard & Type$Horror|Food & Color$Black|Green
 Oracle:Restless Cottage enters tapped.\n{T}: Add {B} or {G}.\n{2}{B}{G}: Restless Cottage becomes a 4/4 black and green Horror creature until end of turn. It's still a land.\nWhenever Restless Cottage attacks, create a Food token and exile up to one target card from a graveyard.

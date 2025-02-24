@@ -4,6 +4,6 @@ Types:Creature Treefolk Shaman
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target noncreature permanent.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select a noncreature permanent.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent.
 K:Persist
 Oracle:Trample\nWhen Woodfall Primus enters, destroy target noncreature permanent.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

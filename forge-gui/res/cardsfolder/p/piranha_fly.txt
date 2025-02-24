@@ -1,0 +1,8 @@
+Name:Piranha Fly
+ManaCost:1 U
+Types:Creature Fish Insect
+PT:2/1
+K:Flying
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Flying\nPiranha Fly enters tapped.

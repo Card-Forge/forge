@@ -9,5 +9,5 @@ A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | NumCards$ 3 | Su
 SVar:DiscardTwo:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 A:AB$ Draw | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 3 | SubAbility$ WitEmblem | SpellDescription$ Draw three cards. You get an emblem with "Instant and sorcery spells you cast have storm."
 SVar:WitEmblem:DB$ Effect | Name$ Emblem — Ral, Crackling Wit | Image$ emblem_ral_crackling_wit | StaticAbilities$ STWit | Duration$ Permanent
-SVar:STWit:Mode$ Continuous | EffectZone$ Command | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | AddKeyword$ Storm | Description$ Instant and sorcery spells you cast have storm.
+SVar:STWit:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | AddKeyword$ Storm | Description$ Instant and sorcery spells you cast have storm.
 Oracle:Whenever you cast a noncreature spell, put a loyalty counter on Ral, Crackling Wit.\n[+1]: Create a 1/1 blue and red Otter creature token with prowess.\n[-3]: Draw three cards, then discard two cards.\n[-10]: Draw three cards. You get an emblem with "Instant and sorcery spells you cast have storm." (Whenever you cast an instant or sorcery spell, copy it for each spell cast before it this turn.)

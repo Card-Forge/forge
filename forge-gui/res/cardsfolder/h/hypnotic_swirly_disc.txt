@@ -1,0 +1,7 @@
+Name:Hypnotic Swirly Disc
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, target player mills X cards, where X is the number of creatures you control.
+SVar:TrigCrank:DB$ Mill | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Whenever you crank Hypnotic Swirly Disc, target player mills X cards, where X is the number of creatures you control.

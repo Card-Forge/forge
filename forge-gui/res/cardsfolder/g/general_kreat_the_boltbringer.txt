@@ -1,0 +1,10 @@
+Name:General Kreat, the Boltbringer
+ManaCost:2 R
+Types:Legendary Creature Goblin Soldier
+PT:2/2
+T:Mode$ AttackersDeclared | ValidAttackers$ Goblin.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more Goblins you control attack, create a 1/1 red Goblin creature token that's tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever another creature you control enters, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+DeckHints:Type$Goblin
+Oracle:Whenever one or more Goblins you control attack, create a 1/1 red Goblin creature token that's tapped and attacking.\nWhenever another creature you control enters, General Kreat, the Boltbringer deals 1 damage to each opponent.

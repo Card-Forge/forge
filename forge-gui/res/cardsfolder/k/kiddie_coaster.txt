@@ -1,12 +1,15 @@
 Name:Kiddie Coaster
 ManaCost:no cost
 Types:Artifact Attraction
+K:Visit:TrigPump
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+Oracle:Visit — Creatures you control get +1/+0 until end of turn.
+
+# --- VARIANTS ---
+
 Variant:A:Lights:2 3 6
 Variant:B:Lights:2 4 6
 Variant:C:Lights:2 5 6
 Variant:D:Lights:3 4 6
 Variant:E:Lights:3 5 6
 Variant:F:Lights:4 5 6
-K:Visit:TrigPump
-SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
-Oracle:Visit — Creatures you control get +1/+0 until end of turn.

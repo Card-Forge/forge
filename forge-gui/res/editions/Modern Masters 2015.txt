@@ -106,7 +106,7 @@ ScryfallCode=MM2
 93 U Scavenger Drake @Trevor Claxton
 94 C Scuttling Death @Thomas M. Baxa
 95 C Shrivel @Jung Park
-96 C Sickle Ripper @Dan Scott
+96 C Sickle Ripper @Dan Murayama Scott
 97 C Sign in Blood @Howard Lyon
 98 U Spread the Sickness @Jaime Jones
 99 R Surgical Extraction @Steven Belledin
@@ -141,7 +141,7 @@ ScryfallCode=MM2
 128 U Spitebellows @Larry MacDougall
 129 R Splinter Twin @Goran Josic
 130 U Stormblood Berserker @Min Yum
-131 R Thunderblust @Dan Scott
+131 R Thunderblust @Dan Murayama Scott
 132 C Tribal Flames @Zack Stella
 133 C Viashino Slaughtermaster @Raymond Swanland
 134 R Wildfire @Rob Alexander
@@ -155,7 +155,7 @@ ScryfallCode=MM2
 142 C Commune with Nature @Lars Grant-West
 143 U Cytoplast Root-Kin @Thomas M. Baxa
 144 C Gnarlid Pack @Johann Bodin
-145 U Karplusan Strider @Dan Scott
+145 U Karplusan Strider @Dan Murayama Scott
 146 C Kavu Primarch @Kev Walker
 147 C Kozilek's Predator @Steve Argyle
 148 C Matca Rioters @Steve Argyle
@@ -227,7 +227,7 @@ ScryfallCode=MM2
 214 C Flayer Husk @Igor Kieryluk
 215 C Frogmite @Terese Nielsen
 216 C Glint Hawk Idol @Dave Allsop
-217 C Gust-Skimmer @Dan Scott
+217 C Gust-Skimmer @Dan Murayama Scott
 218 C Kitesail @Cyril Van Der Haegen
 219 R Lodestone Golem @Chris Rahn
 220 R Lodestone Myr @Greg Staples

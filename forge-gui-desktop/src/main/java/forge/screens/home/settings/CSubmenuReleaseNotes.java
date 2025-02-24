@@ -20,7 +20,11 @@ package forge.screens.home.settings;
 
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
+import forge.util.BuildInfo;
 import forge.util.FileUtil;
+import forge.util.TextUtil;
+
+import java.io.File;
 
 /**
  * Controller for VSubmenuReleaseNotes submenu in the home UI.
@@ -80,7 +84,8 @@ public enum CSubmenuReleaseNotes implements ICDoc {
         String notes;
 
         if (FileUtil.doesFileExist(filePath)) {
-            notes = filePath + "\n\n" + FileUtil.readFileToString(filePath);
+            // get release notes
+            notes = BuildInfo.getVersionString() +" Changelog:\n\n" + TextUtil.getFormattedChangelog(new File(filePath), ForgeConstants.CHANGES_FILE_NO_RELEASE);
         } else if (FileUtil.doesFileExist(filePathRelease)) {
             notes = filePathRelease + "\n\n" + FileUtil.readFileToString(filePathRelease);
         } else {

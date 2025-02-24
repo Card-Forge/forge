@@ -7,6 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Trig
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.cmcEQX
 SVar:X:TriggeredStackInstance$CardManaCostLKI
 AI:RemoveDeck:All
-DeckHints:Type$Spirit|Arcane
 AI:RemoveDeck:Random
+DeckHints:Type$Spirit|Arcane
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's mana value.

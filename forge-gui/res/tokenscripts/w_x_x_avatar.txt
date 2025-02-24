@@ -1,6 +1,6 @@
 Name:Avatar Token
 ManaCost:no cost
-Types:Creature Avatar
 Colors:white
+Types:Creature Avatar
 PT:*/*
 Oracle:

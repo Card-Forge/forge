@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ Each player may discard their hand and draw cards equal to the greatest mana value of a commander they own on the battlefield or in the command zone.
 SVar:DBDraw:DB$ Draw | UnlessCost$ Discard<1/Hand> | UnlessPayer$ Remembered | UnlessSwitched$ True | Defined$ Remembered | NumCards$ X
 SVar:X:Count$ValidBattlefield,Command Card.IsCommander+RememberedPlayerOwn$GreatestCMC
-DeckHas:Ability$Discard
 AI:RemoveDeck:NonCommander
+DeckHas:Ability$Discard
 Oracle:Each player may discard their hand and draw cards equal to the greatest mana value of a commander they own on the battlefield or in the command zone.

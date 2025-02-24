@@ -8,7 +8,7 @@ ScryfallCode=REX
 [cards]
 1 R Don't Move @Inkognit
 2 R Cresting Mosasaurus @Chris Rallis
-3 R Spitting Dilophosaurus @Francisco Padilla
+3 R Spitting Dilophosaurus @Francisco Badilla
 4 R Hunting Velociraptor @Caio Monteiro
 5 R Life Finds a Way @Inkognit
 6 R Savage Order @Jesper Ejsing
@@ -40,7 +40,7 @@ ScryfallCode=REX
 26b C Command Tower @Xabi Gaztelua
 27 R Don't Move @Inkognit
 28 R Cresting Mosasaurus @Chris Rallis
-29 R Spitting Dilophosaurus @Francisco Padilla
+29 R Spitting Dilophosaurus @Francisco Badilla
 30 R Hunting Velociraptor @Caio Monteiro
 31 R Life Finds a Way @Inkognit
 32 R Savage Order @Jesper Ejsing

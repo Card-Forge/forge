@@ -1,0 +1,10 @@
+Name:Gremlin Tamer
+ManaCost:W U
+Types:Creature Human Scout
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, create a 1/1 red Gremlin creature token.
+T:Mode$ FullyUnlock | ValidCard$ Card.Room | ValidPlayer$ You | Secondary$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, create a 1/1 red Gremlin creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_gremlin | TokenOwner$ You
+DeckHas:Ability$Token
+DeckNeeds:Type$Enchantment
+Oracle:Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, create a 1/1 red Gremlin creature token.

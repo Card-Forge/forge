@@ -13,10 +13,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -255,7 +252,7 @@ public class PlayerProperty {
         } else if (property.equals("NotedDefender")) {
             String tracker = player.getDraftNotes().getOrDefault("Cogwork Tracker", "");
 
-            return Iterables.contains(Arrays.asList(tracker.split(",")), String.valueOf(player));
+            return Arrays.asList(tracker.split(",")).contains(String.valueOf(player));
         } else if (property.startsWith("life")) {
             int life = player.getLife();
             int amount = AbilityUtils.calculateAmount(source, property.substring(6), spellAbility);
@@ -269,6 +266,14 @@ public class PlayerProperty {
             }
         } else if (property.equals("IsCorrupted")) {
             if (player.getPoisonCounters() <= 2) {
+                return false;
+            }
+        } else if (property.equals("NoSpeed")) {
+            if (!player.noSpeed()) {
+                return false;
+            }
+        } else if (property.equals("MaxSpeed")) {
+            if (!player.maxSpeed()) {
                 return false;
             }
         } else if (property.startsWith("controls")) {

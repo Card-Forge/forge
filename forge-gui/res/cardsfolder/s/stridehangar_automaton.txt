@@ -1,0 +1,9 @@
+Name:Stridehangar Automaton
+ManaCost:3
+Types:Artifact Creature Construct
+PT:1/4
+S:Mode$ Continuous | Affected$ Thopter.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Thopters you control get +1/+1.
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Artifact.YouCtrl | ReplaceWith$ DBReplace | Description$ If one or more artifact tokens would be created under your control, those tokens plus an additional 1/1 colorless Thopter artifact creature token with flying are created instead.
+SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | ValidCard$ Artifact.YouCtrl | TokenScript$ c_1_1_a_thopter_flying
+DeckHas:Ability$Token
+Oracle:Thopters you control get +1/+1.\nIf one or more artifact tokens would be created under your control, those tokens plus an additional 1/1 colorless Thopter artifact creature token with flying are created instead.

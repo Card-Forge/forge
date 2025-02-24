@@ -1,12 +1,12 @@
 package forge.itemmanager.filters;
 
-import com.google.common.base.Predicate;
-
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.screens.home.quest.DialogChooseFormats;
+
+import java.util.function.Predicate;
 
 
 public class DeckFormatFilter extends FormatFilter<DeckProxy> {

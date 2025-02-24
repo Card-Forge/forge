@@ -2,12 +2,11 @@ package forge.game.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -133,7 +132,6 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                 source = changingTgtSA.getTargetCard();
                             }
                             Predicate<GameObject> filter = sa.hasParam("TargetRestriction") ? GameObjectPredicates.restriction(sa.getParam("TargetRestriction").split(","), activator, source, sa) : null;
-                            // TODO Creature.Other might not work yet as it should
                             TargetChoices newTarget = chooser.getController().chooseNewTargetsFor(changingTgtSA, filter, false);
                             changingTgtSI.updateTarget(newTarget, sa.getHostCard());
                         }

@@ -1,6 +1,6 @@
 Name:Human Wizard Token
 ManaCost:no cost
-Types:Creature Human Wizard
 Colors:blue
+Types:Creature Human Wizard
 PT:1/1
 Oracle:

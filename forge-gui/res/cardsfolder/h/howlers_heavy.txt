@@ -1,0 +1,8 @@
+Name:Howler's Heavy
+ManaCost:3 U
+Types:Creature Seal Pirate
+PT:3/4
+K:Cycling:1 U
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When you cycle this card, target creature or Vehicle an opponent controls gets -3/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl,Vehicle.OppCtrl | TgtPrompt$ Select target creature or Vehicle an opponent controls | NumAtt$ -3 | IsCurse$ True
+Oracle:Cycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen you cycle this card, target creature or Vehicle an opponent controls gets -3/-0 until end of turn.

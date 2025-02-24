@@ -1,0 +1,7 @@
+Name:Replicating Terror
+ManaCost:1 B
+Types:Instant
+A:SP$ Sacrifice | Defined$ Opponent | SacValid$ Creature.!token | RememberSacrificed$ True | SacMessage$ nontoken creature | SubAbility$ DBConjure | SpellDescription$ Each opponent sacrifices a nontoken creature. For each creature sacrificed this way, conjure a duplicate of it into your graveyard.
+SVar:DBConjure:DB$ MakeCard | DefinedName$ Remembered | Conjure$ True | Zone$ Graveyard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Each opponent sacrifices a nontoken creature. For each creature sacrificed this way, conjure a duplicate of it into your graveyard.

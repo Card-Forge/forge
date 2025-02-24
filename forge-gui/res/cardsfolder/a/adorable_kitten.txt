@@ -5,4 +5,5 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll | Host$ True | TriggerDescription$ When this creature enters, roll a six-sided die. You gain life equal to the result.
 SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBLife
 SVar:DBLife:DB$ GainLife | LifeAmount$ Result
+DeckHas:Ability$LifeGain
 Oracle:When this creature enters, roll a six-sided die. You gain life equal to the result.

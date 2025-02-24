@@ -2,7 +2,7 @@ Name:Savage Hunger
 ManaCost:2 G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Trample | Description$ Enchanted creature gets +1/+0 and has trample.
 K:Cycling:2
 Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has trample.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -28,6 +28,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityLayer;
 
 /**
  * <p>
@@ -52,7 +53,7 @@ public class StaticEffect {
     }
 
     StaticEffect(final StaticAbility ability) {
-    	this(ability.getHostCard());
+        this(ability.getHostCard());
         this.ability = ability;
     }
 
@@ -171,130 +172,149 @@ public class StaticEffect {
      * @return a {@link CardCollectionView} of all affected cards.
      */
     final CardCollectionView remove() {
+        return remove(StaticAbilityLayer.CONTINUOUS_LAYERS);
+    }
+    final CardCollectionView remove(List<StaticAbilityLayer> layers) {
         final CardCollectionView affectedCards = getAffectedCards();
         final List<Player> affectedPlayers = getAffectedPlayers();
 
-        boolean removeMayPlay = false;
-
-        if (hasParam("MayPlay")) {
-            removeMayPlay = true;
-        }
-
-        if (hasParam("IgnoreEffectCost")) {
-            getSource().removeChangedCardTraits(getTimestamp(), ability.getId());
+        if (layers.contains(StaticAbilityLayer.RULES)) {
+            if (hasParam("IgnoreEffectCost")) {
+                getSource().removeChangedCardTraits(getTimestamp(), ability.getId());
+            }
         }
 
         // modify players
         for (final Player p : affectedPlayers) {
-            p.setUnlimitedHandSize(false);
-            p.setMaxHandSize(p.getStartingHandSize());
-            p.removeChangedKeywords(getTimestamp(), ability.getId());
+            if (layers.contains(StaticAbilityLayer.RULES)) {
+                p.setUnlimitedHandSize(false);
+                p.setMaxHandSize(p.getStartingHandSize());
 
-            p.removeMaxLandPlays(getTimestamp());
-            p.removeMaxLandPlaysInfinite(getTimestamp());
+                p.removeMaxLandPlays(getTimestamp());
+                p.removeMaxLandPlaysInfinite(getTimestamp());
 
-            p.removeControlledWhileSearching(getTimestamp());
-            p.removeControlVote(getTimestamp());
-            p.removeAdditionalVote(getTimestamp());
-            p.removeAdditionalOptionalVote(getTimestamp());
-            p.removeAdditionalVillainousChoices(getTimestamp());
+                p.removeControlledWhileSearching(getTimestamp());
+                p.removeControlVote(getTimestamp());
+                p.removeAdditionalVote(getTimestamp());
+                p.removeAdditionalOptionalVote(getTimestamp());
+                p.removeAdditionalVillainousChoices(getTimestamp());
 
-            p.removeDeclaresAttackers(getTimestamp());
-            p.removeDeclaresBlockers(getTimestamp());
+                p.removeDeclaresAttackers(getTimestamp());
+                p.removeDeclaresBlockers(getTimestamp());
+            }
+
+            if (layers.contains(StaticAbilityLayer.ABILITIES)) {
+                p.removeChangedKeywords(getTimestamp(), ability.getId());
+            }
         }
 
         // modify the affected card
         for (final Card affectedCard : affectedCards) {
-            // Gain control
-            if (hasParam("GainControl")) {
-                affectedCard.removeTempController(getTimestamp());
+            if (layers.contains(StaticAbilityLayer.CONTROL)) {
+                if (hasParam("GainControl")) {
+                    affectedCard.removeTempController(getTimestamp());
+                }
             }
 
-            // Revert changed color words
-            affectedCard.removeChangedTextColorWord(getTimestamp(), ability.getId());
+            if (layers.contains(StaticAbilityLayer.TEXT)) {
+                // Revert changed color words
+                if (hasParam("ChangeColorWordsTo")) {
+                    affectedCard.removeChangedTextColorWord(getTimestamp(), ability.getId());
+                }
 
-            // remove set P/T
-            if (hasParam("SetPower") || hasParam("SetToughness")) {
-                affectedCard.removeNewPT(getTimestamp(), ability.getId());
+                // remove changed name
+                if (hasParam("SetName") || hasParam("AddNames")) {
+                    affectedCard.removeChangedName(timestamp, ability.getId());
+                }
+
+                if (hasParam("GainTextOf")) {
+                    affectedCard.removeChangedName(getTimestamp(), ability.getId());
+                    affectedCard.removeChangedManaCost(getTimestamp(), ability.getId());
+                    affectedCard.removeColor(getTimestamp(), ability.getId());
+                    affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId());
+                    affectedCard.removeChangedCardTraits(getTimestamp(), ability.getId());
+                    affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId());
+                    affectedCard.removeNewPT(getTimestamp(), ability.getId());
+
+                    affectedCard.updateChangedText();
+                }
             }
 
-            // remove P/T bonus
-            affectedCard.removePTBoost(getTimestamp(), ability.getId());
-
-            // remove keywords
-            // (Although nothing uses it at this time)
-            if (hasParam("AddKeyword") || hasParam("RemoveKeyword") || hasParam("RemoveLandTypes")
-                    || hasParam("ShareRememberedKeywords") || hasParam("RemoveAllAbilities")) {
-                affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId(), false);
+            if (layers.contains(StaticAbilityLayer.TYPE)) {
+                // remove Types
+                if (hasParam("AddType") || hasParam("AddAllCreatureTypes") || hasParam("RemoveType") || hasParam("RemoveLandTypes")) {
+                    // the view is updated in GameAction#checkStaticAbilities to avoid flickering
+                    affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId(), false);
+                }
             }
 
-            if (hasParam("CantHaveKeyword")) {
-                affectedCard.removeCantHaveKeyword(getTimestamp());
+            if (layers.contains(StaticAbilityLayer.COLOR)) {
+                // remove colors
+                if (hasParam("AddColor") || hasParam("SetColor")) {
+                    affectedCard.removeColor(getTimestamp(), ability.getId());
+                }
             }
 
-            if (hasParam("AddHiddenKeyword")) {
-                affectedCard.removeHiddenExtrinsicKeywords(timestamp, ability.getId());
+            if (layers.contains(StaticAbilityLayer.ABILITIES)) {
+                // remove keywords
+                if (hasParam("AddKeyword") || hasParam("RemoveKeyword") || hasParam("RemoveLandTypes")
+                        || hasParam("ShareRememberedKeywords") || hasParam("RemoveAllAbilities")) {
+                    affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId(), false);
+                }
+
+                // remove abilities
+                if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf")
+                        || hasParam("GainsAbilitiesOfDefined") || hasParam("GainsTriggerAbsOf")
+                        || hasParam("AddTrigger") || hasParam("AddStaticAbility")
+                        || hasParam("AddReplacementEffect") || hasParam("RemoveAllAbilities")
+                        || hasParam("RemoveLandTypes")) {
+                    affectedCard.removeChangedCardTraits(getTimestamp(), ability.getId());
+                }
+
+                if (hasParam("CantHaveKeyword")) {
+                    affectedCard.removeCantHaveKeyword(getTimestamp());
+                }
+
+                affectedCard.removeChangedSVars(getTimestamp(), ability.getId());
+
+                // need update for clean reapply
+                affectedCard.updateKeywordsCache(affectedCard.getCurrentState());
             }
 
-            // remove abilities
-            if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf")
-                    || hasParam("GainsAbilitiesOfDefined") || hasParam("GainsTriggerAbsOf")
-                    || hasParam("AddTrigger") || hasParam("AddStaticAbility")
-                    || hasParam("AddReplacementEffects") || hasParam("RemoveAllAbilities")
-                    || hasParam("RemoveLandTypes")) {
-                affectedCard.removeChangedCardTraits(getTimestamp(), ability.getId());
+            if (layers.contains(StaticAbilityLayer.CHARACTERISTIC) || layers.contains(StaticAbilityLayer.SETPT)) {
+                if (hasParam("SetPower") || hasParam("SetToughness")) {
+                    affectedCard.removeNewPT(getTimestamp(), ability.getId(), false);
+                }
             }
 
-            // remove Types
-            if (hasParam("AddType") || hasParam("AddAllCreatureTypes") || hasParam("RemoveType") || hasParam("RemoveLandTypes")) {
-                // the view is updated in GameAction#checkStaticAbilities to avoid flickering
-                affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId(), false);
+            if (layers.contains(StaticAbilityLayer.MODIFYPT)) {
+                affectedCard.removePTBoost(getTimestamp(), ability.getId());
             }
 
-            // remove colors
-            if (hasParam("AddColor") || hasParam("SetColor")) {
-                affectedCard.removeColor(getTimestamp(), ability.getId());
-            }
+            if (layers.contains(StaticAbilityLayer.RULES)) {
+                if (hasParam("AddHiddenKeyword")) {
+                    affectedCard.removeHiddenExtrinsicKeywords(timestamp, ability.getId());
+                }
 
-            // remove changed name
-            if (hasParam("SetName") || hasParam("AddNames")) {
-                affectedCard.removeChangedName(timestamp, ability.getId());
-            }
+                // remove may look at
+                if (hasParam("MayLookAt")) {
+                    affectedCard.removeMayLookAt(getTimestamp());
+                }
+                if (hasParam("MayPlay")) {
+                    affectedCard.removeMayPlay(ability);
+                }
 
-            // remove may look at
-            if (hasParam("MayLookAt")) {
-                affectedCard.removeMayLookAt(getTimestamp());
-            }
-            if (removeMayPlay) {
-                affectedCard.removeMayPlay(ability);
-            }
+                if (hasParam("Goad")) {
+                    affectedCard.removeGoad(getTimestamp());
+                }
 
-            if (hasParam("GainTextOf")) {
-                affectedCard.removeChangedName(getTimestamp(), ability.getId());
-                affectedCard.removeChangedManaCost(getTimestamp(), ability.getId());
-                affectedCard.removeColor(getTimestamp(), ability.getId());
-                affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId());
-                affectedCard.removeChangedCardTraits(getTimestamp(), ability.getId());
-                affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId());
-                affectedCard.removeNewPT(getTimestamp(), ability.getId());
-
-                affectedCard.updateChangedText();
+                if (hasParam("CanBlockAny")) {
+                    affectedCard.removeCanBlockAny(getTimestamp());
+                }
+                if (hasParam("CanBlockAmount")) {
+                    affectedCard.removeCanBlockAdditional(getTimestamp());
+                }
             }
-
-            if (hasParam("Goad")) {
-                affectedCard.removeGoad(getTimestamp());
-            }
-
-            if (hasParam("CanBlockAny")) {
-                affectedCard.removeCanBlockAny(getTimestamp());
-            }
-            if (hasParam("CanBlockAmount")) {
-                affectedCard.removeCanBlockAdditional(getTimestamp());
-            }
-
-            affectedCard.removeChangedSVars(getTimestamp(), ability.getId());
-
-            affectedCard.updateAbilityTextForView(); // need to update keyword cache for clean reapply
         }
         return affectedCards;
     }

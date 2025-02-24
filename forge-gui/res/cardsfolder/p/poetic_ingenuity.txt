@@ -6,6 +6,6 @@ SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac
 SVar:X:TriggerObjectsAttackers$Amount
 T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | ActivationLimit$ 1 | Execute$ TrigTokenBis | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, create a 3/1 red Dinosaur creature token. This ability triggers only once each turn.
 SVar:TrigTokenBis:DB$ Token | TokenScript$ r_3_1_dinosaur
-DeckNeeds:Type$Dinosaur
 DeckHas:Ability$Token & Type$Treasure|Artifact|Dinosaur
+DeckNeeds:Type$Dinosaur
 Oracle:Whenever one or more Dinosaurs you control attack, create that many Treasure tokens.\nWhenever you cast an artifact spell, create a 3/1 red Dinosaur creature token. This ability triggers only once each turn.

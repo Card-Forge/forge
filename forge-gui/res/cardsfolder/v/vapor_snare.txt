@@ -2,7 +2,8 @@ Name:Vapor Snare
 ManaCost:4 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 4 U | ValidTgts$ Creature | AILogic$ GainControl
-K:UpkeepCost:Return<1/Land>
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ GainControl
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you return a land you control to its owner's hand.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Return<1/Land>
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your upkeep, sacrifice Vapor Snare unless you return a land you control to its owner's hand.

@@ -6,6 +6,6 @@ SVar:TrigStore:DB$ ChooseNumber | Defined$ You | Min$ 0 | Max$ Y | ListTitle$ am
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | UnlessCost$ X | UnlessPayer$ You | UnlessSwitched$ True
 SVar:Y:TriggerCount$LifeAmount
 SVar:X:Count$ChosenNumber
-DeckNeeds:Ability$LifeGain
 AI:RemoveDeck:Random
+DeckNeeds:Ability$LifeGain
 Oracle:Whenever you gain life, you may pay {X}, where X is less than or equal to the amount of life you gained. If you do, draw X cards.

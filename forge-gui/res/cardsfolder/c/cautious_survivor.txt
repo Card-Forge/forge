@@ -1,0 +1,7 @@
+Name:Cautious Survivor
+Types:Creature Elf Survivor
+ManaCost:3 G
+PT:4/4
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Survival — At the beginning of your second main phase, if Cautious Survivor is tapped, you gain 2 life.

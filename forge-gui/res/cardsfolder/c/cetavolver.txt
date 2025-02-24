@@ -10,6 +10,6 @@ SVar:VolverSpeed:DB$ Animate | Defined$ Self | Keywords$ First Strike | Duration
 SVar:VolverPumped:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ETB$ True | SubAbility$ VolverStomp | SpellDescription$ If CARDNAME was kicked with its {G} kicker, it enters with a +1/+1 counter on it and with trample.
 SVar:VolverStomp:DB$ Animate | Defined$ Self | Keywords$ Trample | Duration$ Permanent
 AI:RemoveDeck:Random
-DeckNeeds:Color$Red|Green
 DeckHas:Ability$Counters
+DeckNeeds:Color$Red|Green
 Oracle:Kicker {1}{R} and/or {G} (You may pay an additional {1}{R} and/or {G} as you cast this spell.)\nIf Cetavolver was kicked with its {1}{R} kicker, it enters with two +1/+1 counters on it and with first strike.\nIf Cetavolver was kicked with its {G} kicker, it enters with a +1/+1 counter on it and with trample.

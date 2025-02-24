@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Artifact Creature Phyrexian Warrior
 PT:2/2
 A:AB$ Pump | Cost$ Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Defined$ Self | NumDef$ 2 | NumAtt$ +2 | AILogic$ Aristocrat | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
-DeckHas:Ability$Sacrifice
 SVar:AIPreference:SacCost$Artifact.token,Creature.token,Artifact.cmcEQ0+nonLegendary+notnamedBlack Lotus,Artifact.cmcEQ1,Artifact.cmcEQ2,Artifact.cmcEQ3,Creature.cmcLE3
+DeckHas:Ability$Sacrifice
 Oracle:Sacrifice another artifact or creature: Cutthroat Centurion gets +2/+2 until end of turn. Activate only once each turn.

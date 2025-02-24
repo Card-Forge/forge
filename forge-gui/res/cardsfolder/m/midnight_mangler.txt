@@ -1,0 +1,7 @@
+Name:Midnight Mangler
+ManaCost:1 U
+Types:Artifact Vehicle
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ NotPlayerTurn | AddType$ Artifact & Creature | Description$ During turns other than yours, this Vehicle is an artifact creature.
+K:Crew:2
+Oracle:During turns other than yours, this Vehicle is an artifact creature.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

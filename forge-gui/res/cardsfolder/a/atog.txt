@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Atog
 PT:1/2
 A:AB$ Pump | Cost$ Sac<1/Artifact> | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
-DeckNeeds:Type$Artifact
-DeckHas:Ability$Sacrifice
 SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcEQ0+nonLegendary+notnamedBlack Lotus,Artifact.cmcEQ1,Artifact.cmcEQ2,Artifact.cmcEQ3
+DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Artifact
 Oracle:Sacrifice an artifact: Atog gets +2/+2 until end of turn.

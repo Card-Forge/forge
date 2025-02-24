@@ -1,6 +1,6 @@
 Name:Spike Token
 ManaCost:no cost
-Types:Creature Spike
 Colors:green
+Types:Creature Spike
 PT:1/1
 Oracle:

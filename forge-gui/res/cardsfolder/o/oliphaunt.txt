@@ -6,6 +6,6 @@ K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, another target creature you control gets +2/+0 and gains trample until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Trample | NumAtt$ +2
 K:TypeCycling:Mountain:1
-DeckHas:Ability$Discard
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard
 Oracle:Trample\nWhenever Oliphaunt attacks, another target creature you control gets +2/+0 and gains trample until end of turn.\nMountaincycling {1} ({1}, Discard this card: Search your library for a mountain card, reveal it, put it into your hand, then shuffle.)

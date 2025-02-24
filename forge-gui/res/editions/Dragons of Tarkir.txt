@@ -82,7 +82,7 @@ ScryfallCode=DTK
 69 C Palace Familiar @Kev Walker
 70 R Profaner of the Dead @Vincent Proce
 71 U Qarsi Deceiver @Raymond Swanland
-72 C Reduce in Stature @Dan Scott
+72 C Reduce in Stature @Dan Murayama Scott
 73 M Shorecrasher Elemental @Igor Kieryluk
 74 C Sidisi's Faithful @Lius Lasahido
 75 U Sight Beyond Sight @Anastasia Ovchinnikova
@@ -152,7 +152,7 @@ ScryfallCode=DTK
 139 C Hardened Berserker @Viktor Titov
 140 C Impact Tremors @Lake Hurwitz
 141 R Ire Shaman @Jack Wang
-142 C Kindled Fury @Dan Scott
+142 C Kindled Fury @Dan Murayama Scott
 143 C Kolaghan Aspirant @Aaron Miller
 144 U Kolaghan Forerunners @Jason A. Engle
 145 C Kolaghan Stormsinger @Scott Murphy
@@ -201,7 +201,7 @@ ScryfallCode=DTK
 188 C Glade Watcher @Jesper Ejsing
 189 C Guardian Shield-Bearer @Lindsey Look
 190 U Herdchaser Dragon @Seb McKinnon
-191 U Inspiring Call @Dan Scott
+191 U Inspiring Call @Dan Murayama Scott
 192 U Lurking Arynx @Carl Frank
 193 C Naturalize @James Paick
 194 R Obscuring Aether @Min Yum
@@ -222,7 +222,7 @@ ScryfallCode=DTK
 209 R Sunbringer's Touch @Lucas Graciano
 210 R Surrak, the Hunt Caller @Wesley Burt
 211 C Tread Upon @Efrem Palacios
-212 R Arashin Sovereign @Dan Scott
+212 R Arashin Sovereign @Dan Murayama Scott
 213 R Atarka's Command @Chris Rahn
 214 R Boltwing Marauder @Raymond Swanland
 215 U Cunning Breezedancer @Todd Lockwood

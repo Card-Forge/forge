@@ -4,6 +4,6 @@ Types:Legendary Creature Human Artificer
 PT:3/5
 T:Mode$ SpellCast | TriggerZones$ Battlefield | OptionalDecider$ You | ValidCard$ Creature.Bird,Creature.Beast | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerDescription$ Whenever you cast a Beast or Bird creature spell, you may copy it, except it's an artifact in addition to its other types. (The copy becomes a token.)
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AddTypes$ Artifact
-DeckNeeds:Type$Beast|Bird
 DeckHas:Ability$Token & Type$Artifact
+DeckNeeds:Type$Beast|Bird
 Oracle:Whenever you cast a Beast or Bird creature spell, you may copy it, except it's an artifact in addition to its other types. (The copy becomes a token.)

@@ -6,7 +6,9 @@ Type=Promo
 ScryfallCode=PEWK
 
 [cards]
-1 R Gush @Sam White
-2 R Ponder @Julie Dillon
-2023a R Dragon's Rage Channeler @Patrik Hell
-2023b M Mental Misstep @Kai Carpenter
+2022a R Gush @Sam White
+2022b R Ponder @Julie Dillon
+2023a M Mental Misstep @Kai Carpenter
+2023b R Dragon's Rage Channeler @Patrik Hell
+2024a M Tinker @Jason Rainville
+2024b R Crop Rotation @Samuele Bandini

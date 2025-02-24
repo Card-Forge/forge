@@ -6,6 +6,6 @@ SVar:ReturnU:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$
 SVar:ReturnB:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target black creature card in your graveyard | ValidTgts$ Creature.Black+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnR
 SVar:ReturnR:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target red creature card in your graveyard | ValidTgts$ Creature.Red+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnG
 SVar:ReturnG:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target green creature card in your graveyard | ValidTgts$ Creature.Green+YouOwn | TargetMin$ 0 | LockInText$ True | TargetMax$ 1
-DeckHas:Ability$Graveyard
 AI:RemoveDeck:Random
+DeckHas:Ability$Graveyard
 Oracle:For each color, return up to one target creature card of that color from your graveyard to your hand.

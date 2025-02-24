@@ -12,7 +12,7 @@ SVar:DBPlay:DB$ Play | Valid$ Card.IsImprinted+YouOwn | ValidZone$ Exile | Valid
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:RememberedLKI$CardPower
 SVar:SacX:Count$Valid Creature.Other
+AI:RemoveDeck:All
 DeckHas:Ability$Sacrifice
 DeckHints:Type$Instant|Sorcery
-AI:RemoveDeck:All
 Oracle:Menace, ward {2}, haste\nWhenever Kylox, Visionary Inventor attacks, sacrifice any number of other creatures, then exile the top X cards of your library, where X is their total power. You may cast any number of instant and/or sorcery spells from among the exiled cards without paying their mana costs.

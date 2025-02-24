@@ -2,7 +2,7 @@ Name:Psychic Trance
 ManaCost:2 U U
 Types:Instant
 A:SP$ AnimateAll | Abilities$ Counter | ValidCards$ Card.Wizard+YouCtrl | SpellDescription$ Until end of turn, Wizards you control gain "{T}: Counter target spell."
-SVar:Counter:AB$ Counter | Cost$ T | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell
+SVar:Counter:AB$ Counter | Cost$ T | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Until end of turn, Wizards you control gain "{T}: Counter target spell."

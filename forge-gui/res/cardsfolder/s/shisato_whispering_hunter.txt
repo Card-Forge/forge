@@ -8,7 +8,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigSkipPhase:DB$ SkipPhase | Defined$ TriggeredTarget | Step$ Untap
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.Snake+YouCtrl+cmcLE2
-DeckNeeds:Type$Snake
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
+DeckNeeds:Type$Snake
 Oracle:At the beginning of your upkeep, sacrifice a Snake.\nWhenever Shisato, Whispering Hunter deals combat damage to a player, that player skips their next untap step.

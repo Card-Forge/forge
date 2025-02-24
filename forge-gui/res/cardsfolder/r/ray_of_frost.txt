@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Enchantment Aura
 K:Flash
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ KeepTapped
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | IsPresent$ Creature.EnchantedBy+Red | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, if enchanted creature is red, tap it.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Red | RemoveAllAbilities$ True | Description$ As long as enchanted creature is red, it loses all abilities.

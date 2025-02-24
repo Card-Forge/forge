@@ -2,7 +2,7 @@ Name:Demonic Appetite
 ManaCost:B
 Types:Enchantment Aura
 K:Enchant creature you control
-A:SP$ Attach | Cost$ B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature

@@ -1,11 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.CardCollectionView;
@@ -68,7 +63,7 @@ public class ChooseColorAi extends SpellAbilityAi {
                 // activate in Main 2 hoping that the extra mana surplus will make a difference
                 // if there are some nonland permanents in hand
                 CardCollectionView permanents = CardLists.filter(ai.getCardsIn(ZoneType.Hand), 
-                        CardPredicates.Presets.NONLAND_PERMANENTS);
+                        CardPredicates.NONLAND_PERMANENTS);
 
                 return permanents.size() > 0 && ph.is(PhaseType.MAIN2, ai);
             }

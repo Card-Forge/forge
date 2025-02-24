@@ -1,7 +1,7 @@
 Name:Giant Warrior Token
 ManaCost:no cost
-Types:Creature Giant Warrior
 Colors:red,green
+Types:Creature Giant Warrior
 PT:4/4
 K:Haste
 Oracle:Haste

@@ -7,7 +7,7 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | RememberTokens$ True | TokenScript$ 
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBChangeZone | SubAbility$ DBCleanup
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Aura.YouCtrl+!IsRemembered | DefinedPlayer$ You | AttachedTo$ Imprinted | Optional$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacMe:4
 DeckHas:Ability$Token
 DeckNeeds:Type$Aura
-SVar:SacMe:4
 Oracle:When Liberated Livestock dies, create a 1/1 white Cat creature token with lifelink, a 1/1 white Bird creature token with flying, and a 2/4 white Ox creature token. For each of those tokens, you may put an Aura card from your hand and/or graveyard onto the battlefield attached to it.

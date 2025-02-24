@@ -1,0 +1,12 @@
+Name:High-Society Hunter
+ManaCost:3 B B
+Types:Creature Vampire Noble
+PT:5/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature attacks, you may sacrifice another creature. If you do, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | ValidCard$ Creature.!token+Other | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken creature dies, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters|Sacrifice
+Oracle:Flying\nWhenever this creature attacks, you may sacrifice another creature. If you do, put a +1/+1 counter on this creature.\nWhenever another nontoken creature dies, draw a card.

@@ -1,6 +1,6 @@
 Name:Minion Token
 ManaCost:no cost
-Types:Creature Minion
 Colors:black
+Types:Creature Minion
 PT:1/1
 Oracle:

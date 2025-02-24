@@ -234,6 +234,7 @@ public class FTextField extends FDisplayObject implements ITextField {
 
     public boolean startEdit() {
         if (readOnly) { return false; }
+        Forge.setOnScreenKeyboard(true, isNumeric);
         if (isEditing) { return true; } //do nothing if already editing
 
         selStart = 0; //select all before starting input
@@ -345,7 +346,7 @@ public class FTextField extends FDisplayObject implements ITextField {
             public void onInputEnd() {
                 endEdit();
             }
-        }, isNumeric);
+        });
         isEditing = true;
         return true;
     }

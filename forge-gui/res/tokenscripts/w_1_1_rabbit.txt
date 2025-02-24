@@ -1,6 +1,6 @@
 Name:Rabbit Token
 ManaCost:no cost
-Types:Creature Rabbit
 Colors:white
+Types:Creature Rabbit
 PT:1/1
 Oracle:

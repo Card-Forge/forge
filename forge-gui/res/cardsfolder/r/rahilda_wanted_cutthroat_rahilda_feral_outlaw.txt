@@ -4,9 +4,9 @@ Types:Legendary Creature Human Werewolf
 PT:2/2
 K:First Strike
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigExile | CombatDamage$ True | TriggerDescription$ When CARDNAME deals combat damage to a player, exile a nonland card from their library at random. During any turn you attacked with a Wolf or Werewolf, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TriggeredDefendingPlayer | ChangeType$ Card.nonLand | ChangeNum$ 1 | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:TrigExile:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TriggeredTarget | ChangeType$ Card.nonLand | ChangeNum$ 1 | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile | Duration$ Permanent
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | CheckSVar$ X | Description$ During any turn you attacked with a Wolf or Werewolf, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | CheckSVar$ X | Description$ During any turn you attacked with a Wolf or Werewolf, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CreaturesAttackedThisTurn Creature.Wolf+YouCtrl,Creature.Werewolf+YouCtrl
 K:Daybound
@@ -23,9 +23,9 @@ Types:Legendary Creature Werewolf
 PT:2/2
 K:Double Strike
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigExile | CombatDamage$ True | TriggerDescription$ When CARDNAME deals combat damage to a player, exile a nonland card from their library at random. During any turn you attacked with a Wolf or Werewolf, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TriggeredDefendingPlayer | ChangeType$ Card.nonLand | ChangeNum$ 1 | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:TrigExile:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TriggeredTarget | ChangeType$ Card.nonLand | ChangeNum$ 1 | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile | Duration$ Permanent
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | CheckSVar$ X | Description$ During any turn you attacked with a Wolf or Werewolf, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | CheckSVar$ X | Description$ During any turn you attacked with a Wolf or Werewolf, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CreaturesAttackedThisTurn Creature.Wolf+YouCtrl,Creature.Werewolf+YouCtrl
 K:Nightbound

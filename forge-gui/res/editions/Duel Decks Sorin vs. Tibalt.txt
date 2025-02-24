@@ -74,7 +74,7 @@ ScryfallCode=DDK
 66 U Browbeat @Chris Rahn
 67 R Breaking Point @Matthew D. Wilson
 68 R Sulfuric Vortex @Greg Staples
-69 C Blightning @Dan Scott
+69 C Blightning @Dan Murayama Scott
 70 U Flame Javelin @Trevor Hairsine
 71 U Torrent of Souls @Ian Edward Ameling
 72 R Devil's Play @Austin Hsu

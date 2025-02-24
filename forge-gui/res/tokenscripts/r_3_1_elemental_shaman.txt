@@ -1,6 +1,6 @@
 Name:Elemental Shaman Token
 ManaCost:no cost
-Types:Creature Elemental Shaman
 Colors:red
+Types:Creature Elemental Shaman
 PT:3/1
 Oracle:

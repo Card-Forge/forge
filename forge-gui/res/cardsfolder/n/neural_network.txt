@@ -1,0 +1,6 @@
+Name:Neural Network
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, gain control of target creature an opponent controls with power less than or equal to the number of creature cards in its controller's graveyard until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:TrigCrank:DB$ GainControl | ValidTgts$ Creature | TargetsWithControllerProperty$ powerLECardsInGraveyard | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | TgtPrompt$ Select target creature with power less than or equal to the number of creatures in its controller's graveyard.
+Oracle:Whenever you crank Neural Network, gain control of target creature an opponent controls with power less than or equal to the number of creature cards in its controller's graveyard until end of turn. Untap that creature. It gains haste until end of turn.

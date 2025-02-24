@@ -107,7 +107,7 @@ ScryfallCode=RTR
 93 C Electrickery @Greg Staples
 94 C Explosive Impact @Steve Argyle
 95 U Goblin Rally @Nic Klein
-96 C Gore-House Chainwalker @Dan Scott
+96 C Gore-House Chainwalker @Dan Murayama Scott
 97 R Guild Feud @Karl Kopinski
 98 U Guttersnipe @Steve Prescott
 99 C Lobber Crew @Greg Staples
@@ -134,7 +134,7 @@ ScryfallCode=RTR
 120 R Deadbridge Goliath @Chase Stone
 121 R Death's Presence @Ryan Barger
 122 C Drudge Beetle @Slawomir Maniak
-123 C Druid's Deliverance @Dan Scott
+123 C Druid's Deliverance @Dan Murayama Scott
 124 C Gatecreeper Vine @Trevor Claxton
 125 C Giant Growth @Noah Bradley
 126 U Gobbling Ooze @Johann Bodin
@@ -170,10 +170,10 @@ ScryfallCode=RTR
 156 C Dramatic Rescue @Ryan Pancoast
 157 R Dreadbore @Wayne Reynolds
 158 U Dreg Mangler @Peter Mohrbacher
-159 M Epic Experiment @Dan Scott
+159 M Epic Experiment @Dan Murayama Scott
 160 C Essence Backlash @Jung Park
 161 U Fall of the Gavel @Matt Stewart
-162 R Firemind's Foresight @Dan Scott
+162 R Firemind's Foresight @Dan Murayama Scott
 163 C Goblin Electromancer @Svetlin Velinov
 164 U Golgari Charm @Zoltan Boros
 165 C Grisly Salvage @Dave Kendall
@@ -181,7 +181,7 @@ ScryfallCode=RTR
 167 U Hellhole Flailer @Steve Prescott
 168 U Heroes' Reunion @Howard Lyon
 169 C Hussar Patrol @Seb McKinnon
-170 R Hypersonic Dragon @Dan Scott
+170 R Hypersonic Dragon @Dan Murayama Scott
 171 M Isperia, Supreme Judge @Scott M. Fischer
 172 U Izzet Charm @Zoltan Boros
 173 U Izzet Staticaster @Scott M. Fischer
@@ -222,7 +222,7 @@ ScryfallCode=RTR
 208 M Vraska the Unseen @Aleksi Briclot
 209 R Wayfaring Temple @Peter Mohrbacher
 210 R Azor's Elocutors @Johannes Voss
-211 U Blistercoil Weird @Dan Scott
+211 U Blistercoil Weird @Dan Murayama Scott
 212 R Cryptborn Horror @Richard Wright
 213 R Deathrite Shaman @Steve Argyle
 214 U Dryad Militant @Terese Nielsen
@@ -235,7 +235,7 @@ ScryfallCode=RTR
 221 C Rakdos Shred-Freak @Wayne Reynolds
 222 U Slitherhead @Greg Staples
 223 C Sundering Growth @David Palumbo
-224 C Vassal Soul @Dan Scott
+224 C Vassal Soul @Dan Murayama Scott
 225 U Azorius Keyrune @Daniel Ljunggren
 226 R Chromatic Lantern @Jung Park
 227 U Civic Saber @Jung Park

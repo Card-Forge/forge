@@ -2,6 +2,8 @@ package forge.card;
 
 import forge.card.CardFace.FaceSelectionMethod;
 
+import java.util.EnumSet;
+
 public enum CardSplitType
 {
     None(FaceSelectionMethod.USE_PRIMARY_FACE, null),
@@ -12,6 +14,9 @@ public enum CardSplitType
     Adventure(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Adventure),
     Modal(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Modal),
     Specialize(FaceSelectionMethod.USE_ACTIVE_FACE, null);
+
+    public static final EnumSet<CardSplitType> DUAL_FACED_CARDS = EnumSet.of(
+            CardSplitType.Transform, CardSplitType.Meld, CardSplitType.Modal);
 
     CardSplitType(FaceSelectionMethod calcMode, CardStateName stateName) {
         method = calcMode;

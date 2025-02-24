@@ -187,16 +187,16 @@ ScryfallCode=FEM
 89 R Ring of Renewal @Douglas Shuler
 90 R Spirit Shield @Scott Kirschner
 91 R Zelyon Sword @Scott Kirschner
-92 R Bottomless Vault @Pat Morrissey
-93 R Dwarven Hold @Pat Morrissey
+92 R Bottomless Vault @Pat Lewis
+93 R Dwarven Hold @Pat Lewis
 94 U Dwarven Ruins @Mark Poole
 95 U Ebon Stronghold @Mark Poole
 96 U Havenwood Battleground @Mark Poole
-97 R Hollow Trees @Pat Morrissey
-98 R Icatian Store @Pat Morrissey
+97 R Hollow Trees @Pat Lewis
+98 R Icatian Store @Pat Lewis
 99 R Rainbow Vale @Kaja Foglio
 100 U Ruins of Trokair @Mark Poole
-101 R Sand Silos @Pat Morrissey
+101 R Sand Silos @Pat Lewis
 102 U Svyelunite Temple @Mark Poole
 
 [tokens]

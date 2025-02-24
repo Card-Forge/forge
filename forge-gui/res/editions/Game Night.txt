@@ -61,7 +61,7 @@ ScryfallCode=GNT
 52 U Filigree Familiar @Izzy
 53 U Howling Golem @Grzegorz Rutkowski
 54 C Manalith @Ryan Yee
-55 U Pilgrim's Eye @Dan Scott
+55 U Pilgrim's Eye @Dan Murayama Scott
 56 U Rhonas's Monument @Cliff Childs
 57 U Snare Thopter @John Avon
 58 C Welder Automaton @Victor Adame Minguez

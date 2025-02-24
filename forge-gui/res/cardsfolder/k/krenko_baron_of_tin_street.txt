@@ -6,6 +6,6 @@ K:Haste
 A:AB$ PutCounterAll | Cost$ T Sac<1/Artifact/an artifact> | ValidCards$ Goblin.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each Goblin you control.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an artifact is put into a graveyard from the battlefield, you may pay {R}. If you do, create a 1/1 red Goblin creature token. It gains haste until end of turn.
 SVar:TrigToken:AB$ Token | Cost$ R | TokenScript$ r_1_1_goblin | PumpKeywords$ Haste | PumpDuration$ EOT
-DeckHas:Ability$Token & Type$Goblin|Artifact
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Token & Type$Goblin|Artifact
 Oracle:Haste\n{T}, Sacrifice an artifact: Put a +1/+1 counter on each Goblin you control.\nWhenever an artifact is put into a graveyard from the battlefield, you may pay {R}. If you do, create a 1/1 red Goblin creature token. It gains haste until end of turn.

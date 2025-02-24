@@ -4,8 +4,8 @@ Types:Artifact Creature Myr
 PT:0/0
 K:Sunburst
 SVar:NoZeroToughnessAI:True
-AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
+AI:RemoveDeck:Random
 DeckHints:Ability$Proliferate
 Oracle:Sunburst (This enters with a +1/+1 counter on it for each color of mana spent to cast it.)

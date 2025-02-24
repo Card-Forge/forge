@@ -2,7 +2,7 @@ Name:Trespasser's Curse
 ManaCost:1 B
 Types:Enchantment Aura Curse
 K:Enchant player
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Player | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.EnchantedPlayerCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever a creature enters under enchanted player's control, that player loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1

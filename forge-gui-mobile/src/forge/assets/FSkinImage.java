@@ -27,10 +27,21 @@ public enum FSkinImage implements FSkinImageInterface {
     HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD),
 
     SIDEBOARD   (FSkinProp.IMG_ZONE_SIDEBOARD),
+    HDSIDEBOARD (FSkinProp.IMG_HDZONE_SIDEBOARD),
 
-    HDMANAPOOL   (FSkinProp.IMG_HDZONE_MANAPOOL),
+    HDMANAPOOL  (FSkinProp.IMG_HDZONE_MANAPOOL),
 
-    POISON      (FSkinProp.IMG_ZONE_POISON),
+    COMMAND     (FSkinProp.IMG_ZONE_COMMAND),
+    AVATAR      (FSkinProp.IMG_ZONE_AVATAR),
+    SCHEME      (FSkinProp.IMG_ZONE_SCHEME),
+    PLANAR      (FSkinProp.IMG_ZONE_PLANAR),
+    CONSPIRACY  (FSkinProp.IMG_ZONE_CONSPIRACY),
+    ATTRACTION  (FSkinProp.IMG_ZONE_ATTRACTION),
+    CONTRAPTION (FSkinProp.IMG_ZONE_CONTRAPTION),
+    STICKER     (FSkinProp.IMG_ZONE_STICKER),
+    ANTE        (FSkinProp.IMG_ZONE_ANTE),
+    SCRAPYARD   (FSkinProp.IMG_ZONE_SCRAPYARD),
+    JUNKYARD    (FSkinProp.IMG_ZONE_JUNKYARD),
 
     //CMC ranges
     CMC_LOW        (FSkinProp.IMG_CMC_LOW),
@@ -72,6 +83,7 @@ public enum FSkinImage implements FSkinImageInterface {
     COUNTERS2       (FSkinProp.IMG_COUNTERS2),
     COUNTERS3       (FSkinProp.IMG_COUNTERS3),
     COUNTERS_MULTI  (FSkinProp.IMG_COUNTERS_MULTI),
+    POISON          (FSkinProp.IMG_POISON),
     ENERGY          (FSkinProp.IMG_ENERGY),
     TICKET          (FSkinProp.IMG_TICKET),
     RAD             (FSkinProp.IMG_RAD),
@@ -92,7 +104,6 @@ public enum FSkinImage implements FSkinImageInterface {
 
     //choice-search-misc
     HDCHOICE     (FSkinProp.ICO_HDCHOICE),
-    HDSIDEBOARD  (FSkinProp.ICO_HDSIDEBOARD),
     HDPREFERENCE (FSkinProp.ICO_HDPREFERENCE),
     HDIMPORT     (FSkinProp.ICO_HDIMPORT),
     HDEXPORT     (FSkinProp.ICO_HDEXPORT),
@@ -219,9 +230,11 @@ public enum FSkinImage implements FSkinImageInterface {
 
     UNKNOWN         (FSkinProp.ICO_UNKNOWN),
     LOGO            (FSkinProp.ICO_LOGO),
+    CARDART         (FSkinProp.ICO_CARDART),
+    PADLOCK         (FSkinProp.ICO_PADLOCK),
 
     FLIPCARD        (FSkinProp.ICO_FLIPCARD),
-    HDFLIPCARD        (FSkinProp.ICO_HDFLIPCARD),
+    HDFLIPCARD      (FSkinProp.ICO_HDFLIPCARD),
 
     FAVICON         (FSkinProp.ICO_FAVICON),
     LOCK            (FSkinProp.ICO_LOCK),
@@ -313,15 +326,15 @@ public enum FSkinImage implements FSkinImageInterface {
     HDBTN_DOWN_LEFT       (FSkinProp.IMG_HDBTN_DOWN_LEFT),
     HDBTN_DOWN_CENTER     (FSkinProp.IMG_HDBTN_DOWN_CENTER),
     HDBTN_DOWN_RIGHT      (FSkinProp.IMG_HDBTN_DOWN_RIGHT),
-    HDBTN_FOCUS_LEFT       (FSkinProp.IMG_HDBTN_FOCUS_LEFT),
-    HDBTN_FOCUS_CENTER     (FSkinProp.IMG_HDBTN_FOCUS_CENTER),
-    HDBTN_FOCUS_RIGHT      (FSkinProp.IMG_HDBTN_FOCUS_RIGHT),
-    HDBTN_TOGGLE_LEFT       (FSkinProp.IMG_HDBTN_TOGGLE_LEFT),
-    HDBTN_TOGGLE_CENTER     (FSkinProp.IMG_HDBTN_TOGGLE_CENTER),
-    HDBTN_TOGGLE_RIGHT      (FSkinProp.IMG_HDBTN_TOGGLE_RIGHT),
-    HDBTN_DISABLED_LEFT       (FSkinProp.IMG_HDBTN_DISABLED_LEFT),
-    HDBTN_DISABLED_CENTER     (FSkinProp.IMG_HDBTN_DISABLED_CENTER),
-    HDBTN_DISABLED_RIGHT      (FSkinProp.IMG_HDBTN_DISABLED_RIGHT),
+    HDBTN_FOCUS_LEFT      (FSkinProp.IMG_HDBTN_FOCUS_LEFT),
+    HDBTN_FOCUS_CENTER    (FSkinProp.IMG_HDBTN_FOCUS_CENTER),
+    HDBTN_FOCUS_RIGHT     (FSkinProp.IMG_HDBTN_FOCUS_RIGHT),
+    HDBTN_TOGGLE_LEFT     (FSkinProp.IMG_HDBTN_TOGGLE_LEFT),
+    HDBTN_TOGGLE_CENTER   (FSkinProp.IMG_HDBTN_TOGGLE_CENTER),
+    HDBTN_TOGGLE_RIGHT    (FSkinProp.IMG_HDBTN_TOGGLE_RIGHT),
+    HDBTN_DISABLED_LEFT   (FSkinProp.IMG_HDBTN_DISABLED_LEFT),
+    HDBTN_DISABLED_CENTER (FSkinProp.IMG_HDBTN_DISABLED_CENTER),
+    HDBTN_DISABLED_RIGHT  (FSkinProp.IMG_HDBTN_DISABLED_RIGHT),
 
     //Foils
     FOIL_01     (FSkinProp.FOIL_01),

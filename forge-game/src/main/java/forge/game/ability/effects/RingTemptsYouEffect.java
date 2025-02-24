@@ -34,7 +34,7 @@ public class RingTemptsYouEffect extends EffectEffect {
 
         // Then choose a ring-bearer (You may keep the same one). Auto pick if <2 choices.
         CardCollection creatures = p.getCreaturesInPlay();
-        Card ringBearer = p.getController().chooseSingleEntityForEffect(creatures, sa, Localizer.getInstance().getMessageorUseDefault("lblChooseRingBearer", "Choose your Ring-bearer"), false, null);
+        Card ringBearer = p.getController().chooseSingleEntityForEffect(creatures, sa, Localizer.getInstance().getMessage("lblChooseRingBearer"), false, null);
         p.setRingBearer(ringBearer);
 
         // 701.52a That creature becomes your Ring-bearer until another player gains control of it.
@@ -52,7 +52,6 @@ public class RingTemptsYouEffect extends EffectEffect {
             ringBearer.addLeavesPlayCommand(loseCommand);
         }
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         runParams.put(AbilityKey.Card, ringBearer);
         game.getTriggerHandler().runTrigger(TriggerType.RingTemptsYou, runParams, false);

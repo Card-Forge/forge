@@ -1,31 +1,12 @@
 package forge.ai.ability;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -33,6 +14,11 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
@@ -136,7 +122,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 // TODO: possibly improve the check, currently only checks if the name is the same
                 // Possibly also check if the card is threatened, and then allow to copy (this will, however, require a bit
                 // of a rewrite in canPlayAI to allow a response form of CopyPermanentAi)
-                list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(host.getName())));
+                Predicate<Card> nameEquals = CardPredicates.nameEquals(host.getName());
+                list = CardLists.filter(list, nameEquals.negate());
             }
 
             //Nothing to target
@@ -144,7 +131,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             	return false;
             }
 
-            CardCollection betterList = CardLists.filter(list, Predicates.not(CardPredicates.isRemAIDeck()));
+            CardCollection betterList = CardLists.filter(list, CardPredicates.isRemAIDeck().negate());
             if (betterList.isEmpty()) {
                 if (!mandatory) {
                     return false;
@@ -177,7 +164,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
                 list = CardLists.filter(list, c -> (!c.getType().isLegendary() || canCopyLegendary) || !c.getController().equals(aiPlayer));
                 Card choice;
-                if (Iterables.any(list, Presets.CREATURES)) {
+                if (list.stream().anyMatch(CardPredicates.CREATURES)) {
                     if (sa.hasParam("TargetingPlayer")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {

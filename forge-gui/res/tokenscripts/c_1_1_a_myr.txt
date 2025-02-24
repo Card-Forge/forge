@@ -1,5 +1,5 @@
 Name:Myr Token
 ManaCost:no cost
-PT:1/1
 Types:Artifact Creature Myr
+PT:1/1
 Oracle:

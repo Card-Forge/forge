@@ -1,0 +1,7 @@
+Name:Cogmentor
+ManaCost:1
+Types:Artifact Creature Gnome Rigger
+PT:1/1
+K:Flying
+A:AB$ AssembleContraption | Cost$ 4 | DefinedContraption$ Targeted | Reassemble$ True | ValidTgts$ Contraption.YouCtrl | AILogic$ AtOppEOT | TgtPrompt$ Select target Contraption you control | SpellDescription$ Reassemble target Contraption you control.
+Oracle:Flying\n{4}: Reassemble target Contraption you control. (Move it onto another one of your sprockets.)

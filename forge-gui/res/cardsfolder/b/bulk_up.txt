@@ -1,0 +1,6 @@
+Name:Bulk Up
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ Double | StackDescription$ REP target creature_{c:Targeted} | SpellDescription$ Double target creature's power until end of turn.
+K:Flashback:4 R R
+Oracle:Double target creature's power until end of turn.\nFlashback {4}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

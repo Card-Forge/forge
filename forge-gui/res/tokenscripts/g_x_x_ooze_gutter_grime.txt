@@ -1,7 +1,7 @@
 Name:Ooze Token
 ManaCost:no cost
-Types:Creature Ooze
 Colors:green
+Types:Creature Ooze
 PT:*/*
 S:Mode$ Continuous | SetPower$ GutterGrimePT | SetToughness$ GutterGrimePT | CharacteristicDefining$ True | Description$ This creature's power and toughness are each equal to the number of slime counters on Gutter Grime.
 SVar:GutterGrimePT:Remembered$CardCounters.SLIME

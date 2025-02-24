@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant creature
 K:Fading:1
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | Description$ Enchanted creature gets +3/+2.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME leaves the battlefield, destroy enchanted creature. That creature can't be regenerated.
 SVar:TrigSac:DB$ Destroy | Defined$ AttachedBy TriggeredCardLKICopy | NoRegen$ True

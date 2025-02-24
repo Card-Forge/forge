@@ -1,9 +1,9 @@
 package forge.game;
 
-import com.google.common.base.Predicate;
-
 import forge.game.card.Card;
 import forge.game.keyword.Keyword;
+
+import java.util.function.Predicate;
 
 public class CardTraitPredicates {
 

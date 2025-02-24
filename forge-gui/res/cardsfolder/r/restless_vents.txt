@@ -7,6 +7,6 @@ A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
 A:AB$ Animate | Cost$ 1 B R | Defined$ Self | Power$ 2 | Toughness$ 3 | Types$ Creature,Insect | Keywords$ Menace | Colors$ Black,Red | OverwriteColors$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 2/3 black and red Insect creature with menace. It's still a land.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ Whenever CARDNAME attacks, you may discard a card. If you do, draw a card.
 SVar:TrigLoot:AB$ Draw | Cost$ Discard<1/Card>
-DeckHas:Ability$Discard & Type$Insect & Color$Black|Red
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard & Type$Insect & Color$Black|Red
 Oracle:Restless Vents enters tapped.\n{T}: Add {B} or {R}.\n{1}{B}{R}: Until end of turn, Restless Vents becomes a 2/3 black and red Insect creature with menace. It's still a land.\nWhenever Restless Vents attacks, you may discard a card. If you do, draw a card.

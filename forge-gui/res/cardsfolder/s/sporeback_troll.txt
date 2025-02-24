@@ -4,7 +4,7 @@ Types:Creature Troll Mutant
 PT:0/0
 K:Graft:2
 A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | SpellDescription$ Regenerate target creature with a +1/+1 counter on it.
-DeckNeeds:Ability$Counters
-DeckHas:Ability$Counters
 SVar:AIGraftPreference:DontMoveCounterIfLethal
+DeckHas:Ability$Counters
+DeckNeeds:Ability$Counters
 Oracle:Graft 2 (This creature enters with two +1/+1 counters on it. Whenever another creature enters, you may move a +1/+1 counter from this creature onto it.)\n{1}{G}: Regenerate target creature with a +1/+1 counter on it.

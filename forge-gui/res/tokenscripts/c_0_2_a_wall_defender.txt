@@ -1,6 +1,6 @@
 Name:Wall Token
 ManaCost:no cost
-PT:0/2
 Types:Artifact Creature Wall
+PT:0/2
 K:Defender
 Oracle:Defender

@@ -1,0 +1,9 @@
+Name:Leyline of Transformation
+ManaCost:2 U U
+Types:Enchantment
+K:MayEffectFromOpeningHand:FromHand
+SVar:FromHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SpellDescription$ If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
+K:ETBReplacement:Other:DBChooseCreatureType
+SVar:DBChooseCreatureType:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters, choose a creature type.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ All | AddType$ ChosenType | Description$ Creatures you control are the chosen type in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
+Oracle:If Leyline of Transformation is in your opening hand, you may begin the game with it on the battlefield.\nAs Leyline of Transformation enters, choose a creature type.\nCreatures you control are the chosen type in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.

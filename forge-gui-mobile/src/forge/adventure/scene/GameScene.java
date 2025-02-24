@@ -55,7 +55,10 @@ public class GameScene extends HudScene {
         Forge.clearTransitionScreen();
         Forge.clearCurrentScreen();
         super.enter();
-        WorldStage.getInstance().handlePointsOfInterestCollision();
+        // This causes the inifine load of POI if the two collision point is too close.
+        // IIRC This is used before and the player will start inside the POI.
+        // but we don't allow saving inside the POI anymore.
+        // WorldStage.getInstance().handlePointsOfInterestCollision();
     }
 
     public String getAdventurePlayerLocation(boolean forHeader, boolean skipRoads) {
@@ -84,7 +87,7 @@ public class GameScene extends HudScene {
         World world = Current.world();
         int currentBiome = World.highestBiome(world.getBiomeMapXY((int) position.x / world.getTileSize(), (int) position.y / world.getTileSize()));
         List<BiomeData> biomeData = world.getData().GetBiomes();
-        return biomeData.size() <= currentBiome? "waste" : biomeData.get(currentBiome).name; //shouldn't be the case but default to waste
+        return biomeData.size() <= currentBiome ? "waste" : biomeData.get(currentBiome).name; //shouldn't be the case but default to waste
     }
 
     public PointOfInterest getMapPOI() {

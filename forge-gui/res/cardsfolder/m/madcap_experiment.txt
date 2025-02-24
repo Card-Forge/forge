@@ -5,6 +5,6 @@ A:SP$ DigUntil | Valid$ Artifact | ValidDescription$ artifact | FoundDestination
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-DeckNeeds:Type$Artifact
 AI:RemoveDeck:Random
+DeckNeeds:Type$Artifact
 Oracle:Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. Madcap Experiment deals damage to you equal to the number of cards revealed this way.

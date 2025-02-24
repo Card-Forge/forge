@@ -12,7 +12,7 @@ ScryfallCode=YBRO
 3 U Tawnos Endures @Steven Belledin
 4 U Hurkyl's Prodigy @Artur Nakhodkin
 5 U Piece It Together @Peter Polach
-6 U Lonely End @Piotr Dura
+6 U Lonely End @Piotr Foksowicz
 7 R Penregon Besieged @Artur Treffner
 8 R Fallaji Antiquarian @Ernanda Souza
 9 M Kayla's Kindling @Ernanda Souza

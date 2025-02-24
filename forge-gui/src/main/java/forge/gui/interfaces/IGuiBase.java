@@ -1,13 +1,5 @@
 package forge.gui.interfaces;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Collection;
-import java.util.List;
-
-import com.google.common.base.Function;
-
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.download.GuiDownloadService;
 import forge.item.PaperCard;
@@ -17,6 +9,13 @@ import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
 import forge.util.Callback;
 import forge.util.ImageFetcher;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Function;
 
 public interface IGuiBase {
     boolean isRunningOnDesktop();

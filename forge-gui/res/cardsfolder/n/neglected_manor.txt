@@ -1,0 +1,8 @@
+Name:Neglected Manor
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless a player has 13 or less life.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GT13
+SVar:X:PlayerCountPlayers$LowestLifeTotal
+A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
+Oracle:Neglected Manor enters tapped unless a player has 13 or less life.\n{T}: Add {W} or {B}.

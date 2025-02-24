@@ -2,7 +2,7 @@ Name:All That Glitters
 ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each artifact and/or enchantment you control.
 SVar:X:Count$Valid Artifact.YouCtrl,Enchantment.YouCtrl
 SVar:BuffedBy:Artifact,Enchantment

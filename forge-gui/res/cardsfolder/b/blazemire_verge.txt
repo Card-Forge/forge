@@ -1,0 +1,6 @@
+Name:Blazemire Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ T | Produced$ R | IsPresent$ Swamp.YouCtrl,Mountain.YouCtrl | SpellDescription$ Add {R}. Activate only if you control a Swamp or a Mountain.
+Oracle:{T}: Add {B}.\n{T}: Add {R}. Activate only if you control a Swamp or a Mountain.

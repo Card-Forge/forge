@@ -1,0 +1,8 @@
+Name:You Are Unworthy of Mercy
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigSacEach | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent sacrifices a nonland permanent. If you control six or more lands, each opponent sacrifices three nonland permanents instead.
+SVar:TrigSacEach:DB$ Sacrifice | Amount$ X | Defined$ Player.Opponent | SacValid$ Permanent.nonLand | SacMessage$ nonland permanent
+SVar:X:Count$Compare Y GE6.3.1
+SVar:Y:Count$Valid Land.YouCtrl
+Oracle:When you set this scheme in motion, each opponent sacrifices a nonland permanent. If you control six or more lands, each opponent sacrifices three nonland permanents instead.

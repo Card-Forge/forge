@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Creature Horror
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Devour Intellect — When CARDNAME enters, each opponent exiles a card from their hand until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ Opponent | Mandatory$ True | ChangeType$ Card | Hidden$ True | Duration$ UntilHostLeavesPlay | IsCurse$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ Opponent | Mandatory$ True | Hidden$ True | Duration$ UntilHostLeavesPlay | IsCurse$ True
 S:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | Affected$ Card.ExiledWithSource | AffectedZone$ Exile | Description$ Body Thief — You may play lands and cast spells from among cards exiled with CARDNAME. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.
 Oracle:Devour Intellect — When Intellect Devourer enters, each opponent exiles a card from their hand until Intellect Devourer leaves the battlefield.\nBody Thief — You may play lands and cast spells from among cards exiled with Intellect Devourer. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.

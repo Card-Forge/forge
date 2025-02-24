@@ -1,0 +1,13 @@
+Name:Dreadwing Scavenger
+ManaCost:1 U B
+Types:Creature Nightmare Bird
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature enters or attacks, draw a card, then discard a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature enters or attacks, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ TrigDiscard
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Deathtouch | Condition$ Threshold | Description$ Threshold — This creature gets +1/+1 and has deathtouch as long as there are seven or more cards in your graveyard.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard
+Oracle:Flying\nWhenever this creature enters or attacks, draw a card, then discard a card.\nThreshold — This creature gets +1/+1 and has deathtouch as long as there are seven or more cards in your graveyard.

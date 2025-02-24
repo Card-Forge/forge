@@ -1,0 +1,17 @@
+Name:Derelict Attic
+ManaCost:2 B
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigDraw | TriggerDescription$ When you unlock this door, you draw two cards and you lose 2 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
+AlternateMode:Split
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhen you unlock this door, you draw two cards and you lose 2 life.
+
+ALTERNATE
+
+Name:Widow's Walk
+ManaCost:3 B
+Types:Enchantment Room
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gets +1/+0 and gains deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +1 | KW$ Deathtouch
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhenever a creature you control attacks alone, it gets +1/+0 and gains deathtouch until end of turn.

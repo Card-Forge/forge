@@ -1,0 +1,12 @@
+Name:Gornog, the Red Reaper
+ManaCost:2 R
+Types:Legendary Creature Minotaur Warrior
+PT:2/3
+K:Haste
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Warrior | ValidBlocker$ Creature.Coward | Description$ Cowards can't block Warriors.
+T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Player | ValidAttackers$ Creature.Warrior+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever one or more Warriors you control attack a player, target creature that player controls becomes a Coward.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredAttackedTarget | TgtPrompt$ Select target creature that player controls | Types$ Coward | RemoveCreatureTypes$ True | Duration$ Permanent
+S:Mode$ Continuous | Affected$ Creature.Warrior+attacking+YouCtrl | AddPower$ X | Description$ Attacking Warriors you control get +X/+0, where X is the number of Cowards your opponents control.
+SVar:X:Count$Valid Coward.OppCtrl
+SVar:PlayMain1:TRUE
+Oracle:Haste\nCowards can't block Warriors.\nWhenever one or more Warriors you control attack a player, target creature that player controls becomes a Coward.\nAttacking Warriors you control get +X/+0, where X is the number of Cowards your opponents control.

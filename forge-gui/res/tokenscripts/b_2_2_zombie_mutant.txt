@@ -1,6 +1,6 @@
 Name:Zombie Mutant Token
 ManaCost:no cost
-Types:Creature Zombie Mutant
 Colors:black
+Types:Creature Zombie Mutant
 PT:2/2
 Oracle:

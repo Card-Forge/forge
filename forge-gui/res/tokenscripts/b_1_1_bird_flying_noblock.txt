@@ -1,7 +1,7 @@
 Name:Bird Token
 ManaCost:no cost
-Types:Creature Bird
 Colors:black
+Types:Creature Bird
 PT:1/1
 K:Flying
 S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.

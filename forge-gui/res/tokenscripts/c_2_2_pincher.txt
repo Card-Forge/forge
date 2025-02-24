@@ -1,5 +1,5 @@
 Name:Pincher Token
 ManaCost:no cost
-PT:2/2
 Types:Creature Pincher
+PT:2/2
 Oracle:

@@ -1,7 +1,7 @@
 Name:Alien Insect Token
 ManaCost:no cost
-Types:Creature Alien Insect
 Colors:green,white
+Types:Creature Alien Insect
 PT:1/1
 K:Flying
 Oracle:Flying

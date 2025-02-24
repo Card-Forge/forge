@@ -21,7 +21,7 @@ ScryfallCode=MM3
 8 C Graceful Reprieve @William O'Connor
 9 U Intangible Virtue @Clint Cearley
 10 C Kor Hookmaster @Wayne Reynolds
-11 C Kor Skyfisher @Dan Scott
+11 C Kor Skyfisher @Dan Murayama Scott
 12 U Lingering Souls @John Stanko
 13 M Linvala, Keeper of Silence @Igor Kieryluk
 14 C Lone Missionary @Svetlin Velinov
@@ -134,7 +134,7 @@ ScryfallCode=MM3
 121 R Call of the Herd @Carl Critchlow
 122 M Craterhoof Behemoth @Chris Rahn
 123 C Death-Hood Cobra @Jason Felix
-124 C Druid's Deliverance @Dan Scott
+124 C Druid's Deliverance @Dan Murayama Scott
 125 C Explore @John Avon
 126 C Fists of Ironwood @Glen Angus
 127 U Gaea's Anthem @Greg Staples
@@ -183,7 +183,7 @@ ScryfallCode=MM3
 170 U Gruul War Chant @Dave Kendall
 171 U Izzet Charm @Zoltan Boros
 172 C Kathari Bomber @Carl Critchlow
-173 U Moroii @Dan Scott
+173 U Moroii @Dan Murayama Scott
 174 U Mystic Genesis @Mike Bierek
 175 R Niv-Mizzet, Dracogenius @Todd Lockwood
 176 R Obzedat, Ghost Council @Svetlin Velinov

@@ -1,6 +1,6 @@
 Name:Goat Token
 ManaCost:no cost
-Types:Creature Goat
 Colors:white
+Types:Creature Goat
 PT:0/1
 Oracle:

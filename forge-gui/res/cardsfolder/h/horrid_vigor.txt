@@ -1,0 +1,6 @@
+Name:Horrid Vigor
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | KW$ Deathtouch & Indestructible | SpellDescription$ Target creature gains deathtouch and indestructible until end of turn.
+DeckHas:Keyword$Deathtouch|Indestructible
+Oracle:Target creature gains deathtouch and indestructible until end of turn.

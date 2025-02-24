@@ -1,0 +1,8 @@
+Name:Strangled Cemetery
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless a player has 13 or less life.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GT13
+SVar:X:PlayerCountPlayers$LowestLifeTotal
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
+Oracle:Strangled Cemetery enters tapped unless a player has 13 or less life.\n{T}: Add {B} or {G}.

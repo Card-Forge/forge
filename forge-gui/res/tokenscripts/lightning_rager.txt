@@ -1,7 +1,7 @@
 Name:Lightning Rager
 ManaCost:no cost
-Types:Creature Elemental
 Colors:red
+Types:Creature Elemental
 PT:5/1
 K:Trample
 K:Haste

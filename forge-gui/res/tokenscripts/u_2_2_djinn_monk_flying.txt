@@ -1,7 +1,7 @@
 Name:Djinn Monk Token
 ManaCost:no cost
-Types:Creature Djinn Monk
 Colors:blue
+Types:Creature Djinn Monk
 PT:2/2
 K:Flying
 Oracle:Flying

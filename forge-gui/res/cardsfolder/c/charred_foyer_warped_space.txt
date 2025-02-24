@@ -1,0 +1,18 @@
+Name:Charred Foyer
+ManaCost:3 R
+Types:Enchantment Room
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
+SVar:TrigDig:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MayPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:Split
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nAt the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
+
+ALTERNATE
+
+Name:Warped Space
+ManaCost:4 R R
+Types:Enchantment Room
+S:Mode$ Continuous | MayPlay$ True | MayPlayAltManaCost$ 0 | MayPlayLimit$ 1 | MayPlayDontGrantZonePermissions$ True | Affected$ Card.YouCtrl+nonLand | AffectedZone$ Exile | Description$ Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast from exile.
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nOnce each turn, you may pay {0} rather than pay the mana cost for a spell you cast from exile.

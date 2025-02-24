@@ -453,6 +453,9 @@ GreenLeaf
 GreenLeaf2
   xy: 112, 608
   size: 16, 16
+Dot
+  xy: 464, 48
+  size: 16, 16
 GoldCoin
   xy: 464, 63
   size: 16, 16

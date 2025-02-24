@@ -1,6 +1,6 @@
 Name:Centaur Token
 ManaCost:no cost
-Types:Enchantment Creature Centaur
 Colors:green
+Types:Enchantment Creature Centaur
 PT:3/3
 Oracle:

@@ -2,12 +2,13 @@ Name:The Great Juggernaut
 ManaCost:3 R
 Types:Legendary Artifact Creature Juggernaut
 PT:5/3
-K:UpkeepCost:Discard<1/Card>
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Discard<1/Card>
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigShuffle | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, shuffle your library then exile the top card of your library. You may play that card without paying its mana cost this turn.
 SVar:TrigShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBExile
 SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ DBPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
-SVar:DBPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card without paying its mana cost.
+SVar:DBPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
 Oracle:At the beginning of your upkeep, sacrifice The Great Juggernaut unless you discard a card.\nWhenever The Great Juggernaut attacks, shuffle your library then exile the top card of your library. You may play that card without paying its mana cost this turn.

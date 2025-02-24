@@ -20,7 +20,7 @@ ScryfallCode=WHO
 12 U Atraxi Warden @Slawomir Maniak
 13 U Banish to Another Universe @David Astruga
 14 R Barbara Wright @Irina Nordsol
-15 R The Caves of Androzani @Nestor Ossandon Leal
+15 R The Caves of Androzani @Néstor Ossandón Leal
 16 R Crack in Time @Eliz Roxs
 17 R Crisis of Conscience @Borja Pindado
 18 R Everybody Lives! @Alice Xia Zhang
@@ -39,7 +39,7 @@ ScryfallCode=WHO
 31 R The Wedding of River Song @Mandy Jurgens
 32 R Wilfred Mott @John Di Giovanni
 33 R Adric, Mathematical Genius @Billy Christian
-34 R All of History, All at Once @Nestor Ossandon Leal
+34 R All of History, All at Once @Néstor Ossandón Leal
 35 R An Unearthly Child @Kieran Yanner
 36 R Auton Soldier @Greg Opalinski
 37 R Become the Pilot @Irina Nordsol
@@ -290,7 +290,7 @@ ScryfallCode=WHO
 282 R Frostboil Snarl @Wei Guan
 283 R Furycalm Snarl @Evan Shipard
 284 R Game Trail @Victor Harmatiuk
-285 R Glacial Fortress @Nestor Ossandon Leal
+285 R Glacial Fortress @Néstor Ossandón Leal
 286 R Haunted Ridge @Victor Harmatiuk
 287 R Horizon Canopy @David Sondered
 288 R Irrigated Farmland @Pablo Mendoza
@@ -357,7 +357,7 @@ ScryfallCode=WHO
 349 R The Wedding of River Song @Mandy Jurgens
 350 R Wilfred Mott @John Di Giovanni
 351 R Adric, Mathematical Genius @Billy Christian
-352 R All of History, All at Once @Nestor Ossandon Leal
+352 R All of History, All at Once @Néstor Ossandón Leal
 353 R Auton Soldier @Greg Opalinski
 354 R Become the Pilot @Irina Nordsol
 355 R Cyber Conversion @Eddie Schillo
@@ -506,7 +506,7 @@ ScryfallCode=WHO
 498 R Frostboil Snarl @Wei Guan
 499 R Furycalm Snarl @Evan Shipard
 500 R Game Trail @Victor Harmatiuk
-501 R Glacial Fortress @Nestor Ossandon Leal
+501 R Glacial Fortress @Néstor Ossandón Leal
 502 R Haunted Ridge @Victor Harmatiuk
 503 R Horizon Canopy @David Sondered
 504 R Irrigated Farmland @Pablo Mendoza
@@ -625,7 +625,7 @@ ScryfallCode=WHO
 617 U Atraxi Warden @Slawomir Maniak
 618 U Banish to Another Universe @David Astruga
 619 R Barbara Wright @Irina Nordsol
-620 R The Caves of Androzani @Nestor Ossandon Leal
+620 R The Caves of Androzani @Néstor Ossandón Leal
 621 R Crack in Time @Eliz Roxs
 622 R Crisis of Conscience @Borja Pindado
 623 R Everybody Lives! @Alice Xia Zhang
@@ -644,7 +644,7 @@ ScryfallCode=WHO
 636 R The Wedding of River Song @Mandy Jurgens
 637 R Wilfred Mott @John Di Giovanni
 638 R Adric, Mathematical Genius @Billy Christian
-639 R All of History, All at Once @Nestor Ossandon Leal
+639 R All of History, All at Once @Néstor Ossandón Leal
 640 R An Unearthly Child @Kieran Yanner
 641 R Auton Soldier @Greg Opalinski
 642 R Become the Pilot @Irina Nordsol
@@ -881,7 +881,7 @@ ScryfallCode=WHO
 873 R Frostboil Snarl @Wei Guan
 874 R Furycalm Snarl @Evan Shipard
 875 R Game Trail @Victor Harmatiuk
-876 R Glacial Fortress @Nestor Ossandon Leal
+876 R Glacial Fortress @Néstor Ossandón Leal
 877 R Haunted Ridge @Victor Harmatiuk
 878 R Horizon Canopy @David Sondered
 879 R Irrigated Farmland @Pablo Mendoza
@@ -948,7 +948,7 @@ ScryfallCode=WHO
 940 R The Wedding of River Song @Mandy Jurgens
 941 R Wilfred Mott @John Di Giovanni
 942 R Adric, Mathematical Genius @Billy Christian
-943 R All of History, All at Once @Nestor Ossandon Leal
+943 R All of History, All at Once @Néstor Ossandón Leal
 944 R Auton Soldier @Greg Opalinski
 945 R Become the Pilot @Irina Nordsol
 946 R Cyber Conversion @Eddie Schillo
@@ -1097,7 +1097,7 @@ ScryfallCode=WHO
 1089 R Frostboil Snarl @Wei Guan
 1090 R Furycalm Snarl @Evan Shipard
 1091 R Game Trail @Victor Harmatiuk
-1092 R Glacial Fortress @Nestor Ossandon Leal
+1092 R Glacial Fortress @Néstor Ossandón Leal
 1093 R Haunted Ridge @Victor Harmatiuk
 1094 R Horizon Canopy @David Sondered
 1095 R Irrigated Farmland @Pablo Mendoza

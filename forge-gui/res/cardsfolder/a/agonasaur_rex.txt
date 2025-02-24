@@ -1,0 +1,11 @@
+Name:Agonasaur Rex
+ManaCost:3 G G
+Types:Creature Dinosaur
+PT:8/8
+K:Trample
+K:Cycling:2 G
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When you cycle this card, put two +1/+1 counters on up to one target creature or Vehicle. It gains trample and indestructible until end of turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or Vehicle | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample & Indestructible
+DeckHas:Ability$Counters
+Oracle:Trample\nCycling {2}{G} ({2}{G}, Discard this card: Draw a card.)\nWhen you cycle this card, put two +1/+1 counters on up to one target creature or Vehicle. It gains trample and indestructible until end of turn.

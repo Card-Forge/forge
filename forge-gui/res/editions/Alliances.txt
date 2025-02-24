@@ -11,8 +11,8 @@ Foil=NotSupported
 ScryfallCode=ALL
 
 [cards]
-1a C Carrier Pigeons @Pat Morrissey
-1b C Carrier Pigeons @Pat Morrissey
+1a C Carrier Pigeons @Pat Lewis
+1b C Carrier Pigeons @Pat Lewis
 2a C Errand of Duty @Julie Baroh
 2b C Errand of Duty @Julie Baroh
 3 R Exile @Rob Alexander
@@ -159,13 +159,13 @@ ScryfallCode=ALL
 100a C Taste of Paradise @Lawrence Snelly
 100b C Taste of Paradise @Lawrence Snelly
 101 R Tornado @Susan Van Camp
-102a C Undergrowth @Pat Morrissey
-102b C Undergrowth @Pat Morrissey
+102a C Undergrowth @Pat Lewis
+102b C Undergrowth @Pat Lewis
 103a C Whip Vine @Allen Williams
 103b C Whip Vine @Allen Williams
 104a C Yavimaya Ancients @Quinton Hoover
 104b C Yavimaya Ancients @Quinton Hoover
-105 U Yavimaya Ants @Pat Morrissey
+105 U Yavimaya Ants @Pat Lewis
 106 U Energy Arc @Terese Nielsen
 107 U Lim-Dûl's Vault @Rob Alexander
 108 U Lim-Dûl's Paladin @Christopher Rush
@@ -206,7 +206,7 @@ ScryfallCode=ALL
 138 R Heart of Yavimaya @Pete Venters
 139 R Kjeldoran Outpost @Jeff A. Menges
 140 R Lake of the Dead @Pete Venters
-141 U School of the Unseen @Pat Morrissey
+141 U School of the Unseen @Pat Lewis
 142 R Sheltered Valley @Rob Alexander
 143 R Soldevi Excavations @Liz Danforth
 144 R Thawing Glaciers @Jeff A. Menges

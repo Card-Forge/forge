@@ -1,6 +1,6 @@
 Name:Survivor Token
 ManaCost:no cost
-Types:Creature Survivor
 Colors:red
+Types:Creature Survivor
 PT:1/1
 Oracle:

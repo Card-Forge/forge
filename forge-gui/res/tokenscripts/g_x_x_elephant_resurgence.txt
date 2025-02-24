@@ -1,7 +1,7 @@
 Name:Elephant Token
 ManaCost:no cost
-Types:Creature Elephant
 Colors:green
+Types:Creature Elephant
 PT:*/*
 S:Mode$ Continuous | SetPower$ ResurgenceX | SetToughness$ ResurgenceX | EffectZone$ Battlefield | CharacteristicDefining$ True | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in its controller's graveyard.
 SVar:ResurgenceX:Count$TypeInYourYard.Creature

@@ -5,7 +5,7 @@ K:Equip:1
 A:AB$ Regenerate | Cost$ 2 | Defined$ Equipped | SpellDescription$ Regenerate equipped creature.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ XathridCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.
 SVar:XathridCounter:DB$ PutCounter | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Black | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
-AI:RemoveDeck:Random
 SVar:AttachAi:AITgts$ Creature.Black
+AI:RemoveDeck:Random
 DeckNeeds:Color$Black
 Oracle:{2}: Regenerate equipped creature. (The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

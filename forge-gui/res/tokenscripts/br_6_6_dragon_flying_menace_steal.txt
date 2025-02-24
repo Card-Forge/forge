@@ -1,7 +1,7 @@
 Name:Dragon Token
 ManaCost:no cost
-Types:Creature Dragon
 Colors:red,black
+Types:Creature Dragon
 PT:6/6
 K:Flying
 K:Menace

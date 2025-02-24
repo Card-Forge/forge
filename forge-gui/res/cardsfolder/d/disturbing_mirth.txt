@@ -1,0 +1,9 @@
+Name:Disturbing Mirth
+ManaCost:B R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, you may sacrifice another enchantment or creature. If you do, draw two cards.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Enchantment.Other;Creature.Other/another enchantment or creature> | NumCards$ 2
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self | Execute$ TrigDread | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice CARDNAME, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigDread:DB$ ManifestDread
+DeckHas:Ability$Sacrifice
+Oracle:When Disturbing Mirth enters, you may sacrifice another enchantment or creature. If you do, draw two cards.\nWhen you sacrifice Disturbing Mirth, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)

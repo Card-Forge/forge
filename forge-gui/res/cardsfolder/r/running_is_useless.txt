@@ -1,0 +1,7 @@
+Name:Running Is Useless
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBDestroy | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose any number of creatures with different mana values. Destroy those creatures.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TargetsWithDifferentCMC$ True | TargetMax$ AmountToChoose | TargetMin$ 0 | TgtPrompt$ Choose any number of creatures with different mana values.
+SVar:AmountToChoose:Count$Valid Creature
+Oracle:When you set this scheme in motion, choose any number of creatures with different mana values. Destroy those creatures.

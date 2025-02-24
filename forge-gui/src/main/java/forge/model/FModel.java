@@ -17,8 +17,6 @@
  */
 package forge.model;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
 import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;
@@ -51,6 +49,7 @@ import forge.gui.GuiBase;
 import forge.gui.card.CardPreferences;
 import forge.gui.interfaces.IProgressBar;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.ItemManagerConfig;
 import forge.localinstance.achievements.*;
 import forge.localinstance.properties.ForgeConstants;
@@ -62,7 +61,10 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
 
 /**
  * The default Model implementation for Forge.
@@ -101,7 +103,7 @@ public final class FModel {
     private static GameFormat.Collection formats;
     private static ItemPool<PaperCard> uniqueCardsNoAlt, allCardsNoAlt, planechaseCards, archenemyCards,
             brawlCommander, oathbreakerCommander, tinyLeadersCommander, commanderPool,
-            avatarPool, conspiracyPool, dungeonPool, attractionPool;
+            avatarPool, conspiracyPool, dungeonPool, attractionPool, contraptionPool;
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         //init version to log
@@ -284,6 +286,7 @@ public final class FModel {
         archenemyCards = getArchenemyCards();
         planechaseCards = getPlanechaseCards();
         attractionPool = getAttractionPool();
+        contraptionPool = getContraptionPool();
         if (GuiBase.getInterface().isLibgdxPort()) {
             //preload mobile Itempool
             uniqueCardsNoAlt = getUniqueCardsNoAlt();
@@ -325,65 +328,81 @@ public final class FModel {
 
     public static ItemPool<PaperCard> getArchenemyCards() {
         if (archenemyCards == null)
-            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_SCHEME)), PaperCard.class);
         return archenemyCards;
     }
 
     public static ItemPool<PaperCard> getPlanechaseCards() {
         if (planechaseCards == null)
-            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_PLANE_OR_PHENOMENON)), PaperCard.class);
         return planechaseCards;
     }
 
     public static ItemPool<PaperCard> getBrawlCommander() {
-        if (brawlCommander == null)
-            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.and(
-                    FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER, PaperCard::getRules))), PaperCard.class);
+        if (brawlCommander == null) {
+            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(
+                    FModel.getFormats().get("Brawl").getFilterPrinted()
+                            .and(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER))
+            ), PaperCard.class);
+        }
         return brawlCommander;
     }
 
     public static ItemPool<PaperCard> getOathbreakerCommander() {
         if (oathbreakerCommander == null)
-            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(Predicates.or(
-                    CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL), PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(PaperCardPredicates.fromRules(
+                    CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL))), PaperCard.class);
         return oathbreakerCommander;
     }
 
     public static ItemPool<PaperCard> getTinyLeadersCommander() {
         if (tinyLeadersCommander == null)
-            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER, PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(PaperCardPredicates.fromRules(
+                    CardRulesPredicates.CAN_BE_TINY_LEADERS_COMMANDER)), PaperCard.class);
         return tinyLeadersCommander;
     }
 
     public static ItemPool<PaperCard> getCommanderPool() {
         if (commanderPool == null)
-            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(PaperCardPredicates.CAN_BE_COMMANDER), PaperCard.class);
         return commanderPool;
     }
 
     public static ItemPool<PaperCard> getAvatarPool() {
         if (avatarPool == null)
-            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(
+                    CardRulesPredicates.IS_VANGUARD)), PaperCard.class);
         return avatarPool;
     }
 
     public static ItemPool<PaperCard> getConspiracyPool() {
         if (conspiracyPool == null)
-            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(
+                    CardRulesPredicates.IS_CONSPIRACY)), PaperCard.class);
         return conspiracyPool;
     }
 
     public static ItemPool<PaperCard> getDungeonPool() {
         if (dungeonPool == null)
-            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(
+                    CardRulesPredicates.IS_DUNGEON)), PaperCard.class);
         return dungeonPool;
     }
 
     public static ItemPool<PaperCard> getAttractionPool() {
         if (attractionPool == null)
-            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_ATTRACTION, PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(
+                    CardRulesPredicates.IS_ATTRACTION)), PaperCard.class);
         return attractionPool;
     }
+
+    public static ItemPool<PaperCard> getContraptionPool() {
+        if(contraptionPool == null)
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(
+                    CardRulesPredicates.IS_CONTRAPTION)), PaperCard.class);
+        return contraptionPool;
+    }
+
     private static boolean keywordsLoaded = false;
 
     /**

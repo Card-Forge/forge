@@ -1,7 +1,7 @@
 Name:Lore Seeker
 ManaCost:2
-PT:2/2
 Types:Artifact Creature Construct
+PT:2/2
 Draft:Reveal CARDNAME as you draft it.
 Draft:After you draft CARDNAME, you may add a booster pack to the draft. (Your next pick is from that booster pack. Pass it to the next player and it's drafted this draft round.)
 Oracle:Reveal Lore Seeker as you draft it. After you draft Lore Seeker, you may add a booster pack to the draft. (Your next pick is from that booster pack. Pass it to the next player and it's drafted this draft round.)

@@ -1,0 +1,9 @@
+Name:My Tendrils Run Deep
+ManaCost:no cost
+Types:Ongoing Scheme
+S:Mode$ Continuous | EffectZone$ Command | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Command | IsPresent$ Land.YouCtrl | PresentCompare$ GE6 | TriggerDescription$ At the beginning of your end step, if you control six or more lands, draw two cards, then abandon this scheme.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBAbandon
+SVar:DBAbandon:DB$ Abandon
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nYou may play an additional land on each of your turns.\nAt the beginning of your end step, if you control six or more lands, draw two cards, then abandon this scheme.

@@ -1,0 +1,9 @@
+Name:Cephalid Inkmage
+ManaCost:2 U
+Types:Creature Octopus Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When this creature enters, surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 3
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | Condition$ Threshold | Description$ Threshold — This creature can't be blocked as long as there are seven or more cards in your graveyard.
+DeckHas:Ability$Surveil|Graveyard
+Oracle:When this creature enters, surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nThreshold — This creature can't be blocked as long as there are seven or more cards in your graveyard.

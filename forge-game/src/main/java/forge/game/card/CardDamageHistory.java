@@ -1,18 +1,16 @@
 package forge.game.card;
 
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Lists;
-
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
+import java.util.Map;
 
 /** 
  * TODO: Write javadoc for this type.

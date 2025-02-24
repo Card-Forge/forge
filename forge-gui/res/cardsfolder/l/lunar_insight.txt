@@ -1,0 +1,6 @@
+Name:Lunar Insight
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each different mana value among nonland permanents you control.
+SVar:X:Count$Valid Card.YouCtrl+nonLand$DifferentCMC
+Oracle:Draw a card for each different mana value among nonland permanents you control.

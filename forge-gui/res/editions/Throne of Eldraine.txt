@@ -71,7 +71,7 @@ ScryfallCode=ELD
 56 C Mistford River Turtle @Milivoj Ćeran
 57 C Moonlit Scavengers @Miranda Meeks
 58 U Mystical Dispute @Ekaterina Burmak
-59 C Opt @Dan Scott
+59 C Opt @Dan Murayama Scott
 60 U Overwhelmed Apprentice @Jason Rainville
 61 C Queen of Ice @Eric Deschamps
 62 C Run Away Together @Filip Burburan
@@ -146,7 +146,7 @@ ScryfallCode=ELD
 131 C Merchant of the Vale @David Gaillet
 132 C Ogre Errant @Mitchell Malloy
 133 R Opportunistic Dragon @Chris Rahn
-134 C Raging Redcap @Dan Scott
+134 C Raging Redcap @Dan Murayama Scott
 135 U Redcap Melee @Chris Rallis
 136 C Redcap Raiders @Lie Setiawan
 137 C Rimrock Knight @Chris Rallis
@@ -351,7 +351,7 @@ ScryfallCode=ELD
 328 R Knights' Charge @Paul Scott Canavan
 329 M Korvold, Fae-Cursed King @Wisnu Tan
 330 M Syr Gwyn, Hero of Ashvale @Lie Setiawan
-331 C Arcane Signet @Dan Scott
+331 C Arcane Signet @Dan Murayama Scott
 332 R Tome of Legends @Mila Pesic
 333 C Command Tower @Evan Shipard
 

@@ -53,10 +53,10 @@ ScryfallCode=DDH
 45 U Slavering Nulls @Dave Kendall
 46 C Brackwater Elemental @Thomas M. Baxa
 47 C Morgue Toad @Franz Vohwinkel
-48 U Hellfire Mongrel @Dan Scott
+48 U Hellfire Mongrel @Dan Murayama Scott
 49 R Dimir Cutpurse @Kev Walker
 50 C Steamcore Weird @Justin Norman
-51 U Moroii @Dan Scott
+51 U Moroii @Dan Murayama Scott
 52 R Blazing Specter @Marc Fishman
 53 U Fire-Field Ogre @Mitch Cotie
 54 U Shriekmaw @Steve Prescott
@@ -81,7 +81,7 @@ ScryfallCode=DDH
 73 U Rise // Fall @Pete Venters
 74 U Crumbling Necropolis @Dave Kendall
 75 C Rupture Spire @Jaime Jones
-76 C Terramorphic Expanse @Dan Scott
+76 C Terramorphic Expanse @Dan Murayama Scott
 77 L Swamp @Mark Tedin
 78 L Swamp @Mark Tedin
 79 L Island @Mark Tedin

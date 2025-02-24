@@ -1,0 +1,18 @@
+Name:Roaring Furnace
+ManaCost:1 R
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigDamage | TriggerDescription$ When you unlock this door, this Room deals damage equal to the number of cards in your hand to target creature an opponent controls.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X
+SVar:X:Count$CardsInYourHand
+AlternateMode:Split
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhen you unlock this door, this Room deals damage equal to the number of cards in your hand to target creature an opponent controls.
+
+ALTERNATE
+
+Name:Steaming Sauna
+ManaCost:3 U U
+Types:Enchantment Room
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nYou have no maximum hand size.\nAt the beginning of your end step, draw a card.

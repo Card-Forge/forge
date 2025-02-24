@@ -2,7 +2,7 @@ Name:Grafted Identity
 ManaCost:2 U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 U U Sac<1/Creature/creature> | ValidTgts$ Creature | TgtPrompt$ Select creature to enchant | AILogic$ GainControl
+A:SP$ Attach | Cost$ 2 U U Sac<1/Creature/creature> | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
 DeckHas:Ability$Sacrifice

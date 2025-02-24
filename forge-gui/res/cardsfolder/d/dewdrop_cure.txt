@@ -4,6 +4,6 @@ Types:Sorcery
 K:Gift
 SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 2 or less in your graveyard | ValidTgts$ Creature.YouOwn+cmcLE2 | TargetMin$ 0 | TargetMax$ X | SpellDescription$ Return up to two target creature cards each with mana value 2 or less from your graveyard to the battlefield. If the gift was promised, instead return up to three target creature cards each with mana value 2 or less from your graveyard to the battlefield.
-SVar:X:Count$ValidStack Card.Self+PromisedGift/Plus.2
+SVar:X:Count$PromisedGift.3.2
 DeckHints:Ability$Graveyard|Discard
 Oracle:Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)\nReturn up to two target creature cards each with mana value 2 or less from your graveyard to the battlefield. If the gift was promised, instead return up to three target creature cards each with mana value 2 or less from your graveyard to the battlefield.

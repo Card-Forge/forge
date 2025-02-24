@@ -19,7 +19,7 @@ ScryfallCode=MOR
 6 C Changeling Sentinel @Chuck Lukacs
 7 C Coordinated Barrage @Franz Vohwinkel
 8 U Daily Regimen @Warren Mahy
-9 R Feudkiller's Verdict @Dan Scott
+9 R Feudkiller's Verdict @Dan Murayama Scott
 10 C Forfend @Franz Vohwinkel
 11 U Graceful Reprieve @William O'Connor
 12 R Idyllic Tutor @Howard Lyon
@@ -59,7 +59,7 @@ ScryfallCode=MOR
 46 U Research the Deep @Eric Fortune
 47 U Sage of Fables @Shelly Wan
 48 U Sage's Dousing @Richard Sardinha
-49 R Sigil Tracer @Dan Scott
+49 R Sigil Tracer @Dan Murayama Scott
 50 R Slithermuse @Steven Belledin
 51 C Stonybrook Banneret @Ralph Horsley
 52 C Stream of Unconsciousness @Rebecca Guay
@@ -103,7 +103,7 @@ ScryfallCode=MOR
 90 C Fire Juggler @Thomas Denmark
 91 C Hostile Realm @John Avon
 92 C Kindled Fury @Shelly Wan
-93 R Lightning Crafter @Dan Scott
+93 R Lightning Crafter @Dan Murayama Scott
 94 C Lunk Errant @Warren Mahy
 95 C Mudbutton Clanger @Larry MacDougall
 96 U Pyroclast Consul @Christopher Moeller
@@ -140,7 +140,7 @@ ScryfallCode=MOR
 127 U Hunting Triad @Jim Nelson
 128 R Leaf-Crowned Elder @Wayne Reynolds
 129 C Luminescent Rain @John Avon
-130 C Lys Alana Bowmaster @Dan Scott
+130 C Lys Alana Bowmaster @Dan Murayama Scott
 131 U Orchard Warden @Rebecca Guay
 132 R Reach of Branches @Scott Hampton
 133 U Recross the Paths @Greg Hildebrandt

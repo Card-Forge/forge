@@ -1,31 +1,14 @@
 package forge.ai.ability;
 
-import java.util.*;
-
-import forge.game.card.*;
-import org.apache.commons.lang3.ObjectUtils;
-
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
-import forge.ai.AiAttackController;
-import forge.ai.AiCardMemory;
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -45,6 +28,13 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class AttachAi extends SpellAbilityAi {
 
@@ -117,7 +107,7 @@ public class AttachAi extends SpellAbilityAi {
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
-            effectExile.setActivatingPlayer(ai, true);
+            effectExile.setActivatingPlayer(ai);
             final List<Card> targets = CardUtil.getValidCardsToTarget(effectExile);
             return !targets.isEmpty();
         }
@@ -510,7 +500,7 @@ public class AttachAi extends SpellAbilityAi {
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
-        	evenBetterList = CardLists.filter(betterList, CardPredicates.Presets.UNTAPPED);
+        	evenBetterList = CardLists.filter(betterList, CardPredicates.UNTAPPED);
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
@@ -864,7 +854,7 @@ public class AttachAi extends SpellAbilityAi {
         //some auras aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
             prefList = CardLists.filter(prefList,
-                Predicates.not(CardPredicates.isEnchantedBy(attachSource.getName()))
+                CardPredicates.isEnchantedBy(attachSource.getName()).negate()
             );
         }
 
@@ -1143,10 +1133,10 @@ public class AttachAi extends SpellAbilityAi {
 
         //some auras/equipments aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
-            prefList = CardLists.filter(prefList, Predicates.not(Predicates.or(
-                CardPredicates.isEquippedBy(attachSource.getName()),
-                CardPredicates.isEnchantedBy(attachSource.getName())
-            )));
+            prefList = CardLists.filter(prefList, Predicate.not(
+                    CardPredicates.isEquippedBy(attachSource.getName())
+                            .or(CardPredicates.isEnchantedBy(attachSource.getName()))
+            ));
         }
 
         // Don't pump cards that will die.
@@ -1247,8 +1237,8 @@ public class AttachAi extends SpellAbilityAi {
 
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()),
-                    card -> ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo())));
+            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents())
+                    .or(card -> ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo())));
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {

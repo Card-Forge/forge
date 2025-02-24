@@ -1,0 +1,8 @@
+Name:Reality Is Mine to Control
+ManaCost:no cost
+Types:Ongoing Scheme
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigAbandon | TriggerZones$ Command | TriggerDescription$ Whenever you cast a spell, you may abandon this scheme. If you do, copy that spell, and you may choose new targets for the copy.
+SVar:TrigAbandon:DB$ Abandon | Optional$ True | RememberAbandoned$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nWhenever you cast a spell, you may abandon this scheme. If you do, copy that spell, and you may choose new targets for the copy.

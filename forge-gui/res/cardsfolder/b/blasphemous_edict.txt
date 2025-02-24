@@ -1,0 +1,6 @@
+Name:Blasphemous Edict
+ManaCost:3 B B
+Types:Sorcery
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ B | IsPresent$ Creature | PresentCompare$ GE13 | Description$ You may pay {B} rather than pay this spell's mana cost if there are thirteen or more creatures on the battlefield.
+A:SP$ Sacrifice | Amount$ 13 | SacValid$ Creature | Defined$ Player | SpellDescription$ Each player sacrifices thirteen creatures of their choice.
+Oracle:You may pay {B} rather than pay this spell's mana cost if there are thirteen or more creatures on the battlefield.\nEach player sacrifices thirteen creatures of their choice.

@@ -1,0 +1,6 @@
+Name:I Am Never Alone
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBCopyCommander | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create a token that's a copy of your commander, except it's not legendary.
+SVar:DBCopyCommander:DB$ CopyPermanent | Choices$ Card.IsCommander+YouOwn | Defined$ ValidAll Card.IsCommander+YouOwn | ChoiceTitle$ Choose a commander you own | NonLegendary$ True
+Oracle:When you set this scheme in motion, create a token that's a copy of your commander, except it's not legendary.

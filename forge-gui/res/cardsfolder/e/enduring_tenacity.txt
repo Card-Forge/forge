@@ -1,0 +1,12 @@
+Name:Enduring Tenacity
+ManaCost:2 B B
+Types:Enchantment Creature Snake Glimmer
+PT:4/3
+T:Mode$ LifeGained | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X
+SVar:X:TriggerCount$LifeAmount
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+Creature | Execute$ DBReturn | TriggerDescription$ When CARDNAME dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | StaticEffect$ Animate
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Enchantment | RemoveCardTypes$ True
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, target opponent loses that much life.\nWhen Enduring Tenacity dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)

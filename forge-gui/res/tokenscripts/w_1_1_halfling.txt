@@ -1,6 +1,6 @@
 Name:Halfling Token
 ManaCost:no cost
-Types:Creature Halfling
 Colors:white
+Types:Creature Halfling
 PT:1/1
 Oracle:

@@ -1,7 +1,7 @@
 Name:Squid Token
 ManaCost:no cost
-Types:Creature Squid
 Colors:blue
+Types:Creature Squid
 PT:1/1
 K:Landwalk:Island
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

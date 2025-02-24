@@ -8,7 +8,7 @@ SVar:PlayMain1:TRUE
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, target creature you control gains trample and gets +X/+X, where X is the number of different kinds of counters among permanents you control.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Trample | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$DifferentCounterKinds_Permanent.YouCtrl
-DeckHas:Ability$Counters
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
 DeckHints:Type$Planeswalker & Keyword$Devour|Modular|Fading
 Oracle:When Perrie enters, put a shield counter on target creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nWhenever Perrie attacks, target creature you control gains trample and gets +X/+X, where X is the number of different kinds of counters among permanents you control.

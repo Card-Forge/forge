@@ -6,6 +6,6 @@ T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Tri
 SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X
 SVar:X:TriggerCount$LifeAmount
 A:AB$ PumpAll | Cost$ 3 B B | ValidCards$ Creature.YouCtrl | KW$ Lifelink | SpellDescription$ Creatures you control gain lifelink until end of turn.
-DeckHas:Ability$LifeGain
 SVar:PlayMain1:TRUE
+DeckHas:Ability$LifeGain
 Oracle:Whenever you gain life, target opponent loses that much life.\n{3}{B}{B}: Creatures you control gain lifelink until end of turn.

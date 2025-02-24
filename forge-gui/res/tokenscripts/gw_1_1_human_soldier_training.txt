@@ -1,7 +1,7 @@
 Name:Human Soldier Token
 ManaCost:no cost
-Types:Creature Human Soldier
 Colors:white,green
+Types:Creature Human Soldier
 PT:1/1
 K:Training
 Oracle:Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)

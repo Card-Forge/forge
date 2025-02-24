@@ -8,4 +8,4 @@ SVar:DBReturnCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefi
 SVar:DBRepeatLand:DB$ RepeatEach | RepeatSubAbility$ DBReturnLand | RepeatPlayers$ Player
 SVar:DBReturnLand:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Land.RememberedPlayerCtrl | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeNum$ X | Hidden$ True | Mandatory$ True
 SVar:X:Count$xPaid
-Oracle:Each player gains X life, draws X cards, returns X creatures from their graveyard to the battlefield, then returns X lands from their graveyard to the battlefield. 
+Oracle:Each player gains X life, draws X cards, returns X creatures from their graveyard to the battlefield, then returns X lands from their graveyard to the battlefield.

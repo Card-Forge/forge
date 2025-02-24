@@ -1,0 +1,11 @@
+Name:Norin, Swift Survivalist
+ManaCost:R
+Types:Legendary Creature Human Coward
+PT:2/1
+K:CARDNAME can't block.
+T:Mode$ AttackerBlocked | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control becomes blocked, you may exile it. You may play that card from exile this turn.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ TriggeredAttackerLKICopy | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card from exile this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Norin, Swift Survivalist can't block.\nWhenever a creature you control becomes blocked, you may exile it. You may play that card from exile this turn.

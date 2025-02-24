@@ -1,0 +1,10 @@
+Name:Diversion Specialist
+ManaCost:3 R
+Types:Creature Human Warrior
+PT:4/3
+K:Menace
+A:AB$ Dig | Cost$ 1 Sac<1/Creature.Other;Enchantment.Other/another creature or enchantment> | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play that card this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Menace (This creature can't be blocked except by two or more creatures)\n{1}, Sacrifice another creature or enchantment: Exile the top card of your library. You may play that card this turn.

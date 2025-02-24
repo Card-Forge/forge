@@ -2,6 +2,6 @@ Name:Curse of Exhaustion
 ManaCost:2 W W
 Types:Enchantment Aura Curse
 K:Enchant player
-A:SP$ Attach | Cost$ 2 W W | ValidTgts$ Player | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.EnchantedBy | NumLimitEachTurn$ 1 | Description$ Enchanted player can't cast more than one spell each turn.
 Oracle:Enchant player\nEnchanted player can't cast more than one spell each turn.

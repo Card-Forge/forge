@@ -10,6 +10,6 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_insect | Remembe
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterNum$ X | CounterType$ P1P1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerObjectsCards$GreatestCMC
-DeckHints:Type$Insect & Ability$Graveyard
 DeckHas:Ability$Token & Ability$Graveyard
+DeckHints:Type$Insect & Ability$Graveyard
 Oracle:Flying, menace\nOther Insects you control have menace.\nWhenever one or more cards leave your graveyard, you may create a 1/1 black and green Insect creature token, then put a number of +1/+1 counters on it equal to the greatest mana value among those cards. Do this only once each turn.

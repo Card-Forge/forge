@@ -1,0 +1,10 @@
+Name:Your Own Face Mocks You
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigCopyPermanent | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose up to two target creatures your opponents control. For each one, create a token that's a copy of it. If you created fewer than two tokens this way, create a number of 4/4 colorless Scarecrow artifact creature tokens with vigilance equal to the difference.
+SVar:TrigCopyPermanent:DB$ CopyPermanent | ValidTgts$ Creature.OppCtrl | NumCopies$ 1 | AILogic$ DuplicatePerms | TargetMin$ 0 | TargetMax$ 2 | RememberTokens$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ Difference | TokenScript$ c_4_4_a_scarecrow_vigilance | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:Difference:Number$2/Minus.X
+Oracle:When you set this scheme in motion, choose up to two target creatures your opponents control. For each one, create a token that's a copy of it. If you created fewer than two tokens this way, create a number of 4/4 colorless Scarecrow artifact creature tokens with vigilance equal to the difference.

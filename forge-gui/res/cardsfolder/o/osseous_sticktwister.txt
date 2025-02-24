@@ -1,0 +1,13 @@
+Name:Osseous Sticktwister
+ManaCost:1 B
+Types:Artifact Creature Scarecrow
+PT:2/2
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Delirium$ True | TriggerZones$ Battlefield | Execute$ TrigMaySacorDiscard | TriggerDescription$ Delirium — At the beginning of your end step, if there are four or more card types among cards in your graveyard, each opponent may sacrifice a nonland permanent or discard a card. Then CARDNAME deals damage equal to its power to each opponent who didn't sacrifice a permanent or discard a card this way.
+SVar:TrigMaySacorDiscard:DB$ GenericChoice | Choices$ PaySac,PayDiscard | TempRemember$ Chooser | Defined$ Opponent | AILogic$ PayUnlessCost | DamageMap$ True
+SVar:PaySac:DB$ DealDamage | NumDmg$ X | Defined$ Remembered | UnlessCost$ Sac<1/Permanent.nonLand> | UnlessPayer$ Remembered | SpellDescription$ CARDNAME deals damage equal to its power to you unless you sacrifice a nonland permanent.
+SVar:PayDiscard:DB$ DealDamage | NumDmg$ X | Defined$ Remembered | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered | SpellDescription$ CARDNAME deals damage equal to its power to you unless you discard a card.
+SVar:X:Count$CardPower
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Lifelink\nDelirium — At the beginning of your end step, if there are four or more card types among cards in your graveyard, each opponent may sacrifice a nonland permanent or discard a card. Then Osseous Sticktwister deals damage equal to its power to each opponent who didn't sacrifice a permanent or discard a card this way.

@@ -2,6 +2,6 @@ Name:Imposing Visage
 ManaCost:R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Menace | Description$ Enchanted creature has menace.
 Oracle:Enchant creature\nEnchanted creature has menace. (It can't be blocked except by two or more creatures.)

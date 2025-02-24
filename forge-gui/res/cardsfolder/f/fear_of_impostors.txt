@@ -1,0 +1,9 @@
+Name:Fear of Impostors
+ManaCost:1 U U
+Types:Enchantment Creature Nightmare
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters, counter target spell. Its controller manifests dread. (That player looks at the top two cards of their library, then puts one onto the battlefield face down as a 2/2 creature and the other into their graveyard. If it's a creature card, it can be turned face up any time for its mana cost.)
+SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | SubAbility$ DBDread | TgtPrompt$ Select target spell
+SVar:DBDread:DB$ ManifestDread | DefinedPlayer$ TargetedController
+Oracle:Flash\nWhen Fear of Impostors enters, counter target spell. Its controller manifests dread. (That player looks at the top two cards of their library, then puts one onto the battlefield face down as a 2/2 creature and the other into their graveyard. If it's a creature card, it can be turned face up any time for its mana cost.)

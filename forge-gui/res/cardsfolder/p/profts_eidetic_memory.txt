@@ -8,6 +8,6 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigPutCounters:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ Y
 SVar:X:Count$YouDrewThisTurn
 SVar:Y:SVar$X/Minus.1
-DeckHas:Ability$Counters
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
 Oracle:When Proft's Eidetic Memory enters, draw a card.\nYou have no maximum hand size.\nAt the beginning of combat on your turn, if you've drawn more than one card this turn, put X +1/+1 counters on target creature you control, where X is the number of cards you've drawn this turn minus one.

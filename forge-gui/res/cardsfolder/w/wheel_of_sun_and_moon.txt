@@ -2,8 +2,8 @@ Name:Wheel of Sun and Moon
 ManaCost:GW GW
 Types:Enchantment Aura
 K:Enchant player
-A:SP$ Attach | Cost$ GW GW | ValidTgts$ Player
-R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.nonToken+OwnedBy Player.EnchantedBy | ReplaceWith$ Reveal | Description$ If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.
+A:SP$ Attach | ValidTgts$ Player
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.!token+OwnedBy Player.EnchantedBy | ReplaceWith$ Reveal | Description$ If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.
 SVar:Reveal:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | LibraryPosition$ -1 | Reveal$ True
 AI:RemoveDeck:Random
 Oracle:Enchant player\nIf a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.

@@ -7,7 +7,7 @@ SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Instant.YouOwn+cmcG
 SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | staticAbilities$ ReduceCost | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | Description$ This spell costs {2} less to cast.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-DeckNeeds:Type$Instant|Sorcery
 SVar:NeedsToPlayVar:X GE1
 SVar:X:Count$ValidHand Instant.YouOwn+cmcGE3,Sorcery.YouOwn+cmcGE3
+DeckNeeds:Type$Instant|Sorcery
 Oracle:When Geistchanneler enters, choose an instant or sorcery card in your hand with mana value 3 or greater. It perpetually gains "This spell costs {2} less to cast."

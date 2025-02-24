@@ -3,8 +3,8 @@ ManaCost:5 U B R
 Types:Legendary Planeswalker Bolas
 Loyalty:5
 A:AB$ GenericChoice | Cost$ AddCounter<3/LOYALTY> | Planeswalker$ True | Defined$ Opponent | Choices$ SacNonland,Discard | TempRemember$ Chooser | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost | SpellDescription$ Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.
-SVar:Discard:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered | SpellDescription$ You lose 3 life unless you discard a card
-SVar:SacNonland:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Sac<1/Permanent.nonLand> | UnlessPayer$ Remembered | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent
+SVar:Discard:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered | SpellDescription$ You lose 3 life unless you discard a card.
+SVar:SacNonland:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Sac<1/Permanent.nonLand> | UnlessPayer$ Remembered | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent.
 SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature | Planeswalker$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target creature. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1

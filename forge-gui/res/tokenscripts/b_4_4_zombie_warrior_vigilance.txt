@@ -1,7 +1,7 @@
 Name:Zombie Warrior Token
 ManaCost:no cost
-Types:Creature Zombie Warrior
 Colors:black
+Types:Creature Zombie Warrior
 PT:4/4
 K:Vigilance
 Oracle:Vigilance

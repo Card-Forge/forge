@@ -1,7 +1,7 @@
 Name:Elemental Bird Token
 ManaCost:no cost
-Types:Creature Elemental Bird
 Colors:blue
+Types:Creature Elemental Bird
 PT:4/4
 K:Flying
 Oracle:Flying

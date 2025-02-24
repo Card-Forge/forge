@@ -1,7 +1,7 @@
 Name:Dragon Token
 ManaCost:no cost
-Types:Creature Dragon
 Colors:red
+Types:Creature Dragon
 PT:2/2
 K:Flying
 A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.

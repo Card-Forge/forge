@@ -1,0 +1,9 @@
+Name:Eelectrocute
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | CheckSVar$ Count$YouRolledThisTurn6 | Description$ You may cast CARDNAME from your graveyard as long as you've rolled a 6 this turn. If you cast CARDNAME this way and it would be put into your graveyard, exile it instead.
+R:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
+SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
+DeckHas:Ability$Graveyard
+Oracle:Eelectrocute deals 2 damage to any target.\nYou may cast Eelectrocute from your graveyard as long as you've rolled a 6 this turn. If you cast Eelectrocute this way and it would be put into your graveyard, exile it instead.

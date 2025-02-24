@@ -2,8 +2,7 @@ Name:Thought Shucker
 ManaCost:1 U
 Types:Creature Rat Rogue
 PT:1/3
-A:AB$ PutCounter | Cost$ 1 U | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw | CheckSVar$ X | SVarCompare$ GE7 | GameActivationLimit$ 1 | PrecostDesc$ Threshold — | SpellDescription$ Put a +1/+1 counter on CARDNAME and draw a card. Activate only if seven or more cards are in your graveyard and only once.
+A:AB$ PutCounter | Cost$ 1 U | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw | Activation$ Threshold | GameActivationLimit$ 1 | PrecostDesc$ Threshold — | SpellDescription$ Put a +1/+1 counter on CARDNAME and draw a card. Activate only if seven or more cards are in your graveyard and only once.
 SVar:DBDraw:DB$ Draw
-SVar:X:Count$InYourYard
 DeckHas:Ability$Counters
 Oracle:Threshold — {1}{U}: Put a +1/+1 counter on Thought Shucker and draw a card. Activate only if seven or more cards are in your graveyard and only once.

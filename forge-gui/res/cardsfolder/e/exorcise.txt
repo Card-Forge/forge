@@ -1,0 +1,5 @@
+Name:Exorcise
+ManaCost:1 W
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Artifact,Enchantment,Creature.powerGE4 | TgtPrompt$ Select target artifact, enchantment, or creature with power 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact, enchantment, or creature with power 4 or greater.
+Oracle:Exile target artifact, enchantment, or creature with power 4 or greater.

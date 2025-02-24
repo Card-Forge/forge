@@ -19,7 +19,7 @@ ScryfallCode=DKA
 5 U Curse of Exhaustion @Slawomir Maniak
 6 C Elgaud Inquisitor @Slawomir Maniak
 7 U Faith's Shield @Svetlin Velinov
-8 C Gather the Townsfolk @Dan Scott
+8 C Gather the Townsfolk @Dan Murayama Scott
 9 U Gavony Ironwright @Karl Kopinski
 10 U Hollowhenge Spirit @Lars Grant-West
 11 R Increasing Devotion @Daniel Ljunggren
@@ -52,7 +52,7 @@ ScryfallCode=DKA
 38 C Griptide @Igor Kieryluk
 39 R Havengul Runebinder @Bud Cook
 40 C Headless Skaab @Johann Bodin
-41 R Increasing Confusion @Dan Scott
+41 R Increasing Confusion @Dan Murayama Scott
 42 U Mystic Retrieval @Scott Chou
 43 C Nephalia Seakite @Wayne England
 44 U Niblis of the Breath @Igor Kieryluk
@@ -62,7 +62,7 @@ ScryfallCode=DKA
 48 U Secrets of the Dead @Eytan Zana
 49 C Shriekgeist @Raymond Swanland
 50 U Soul Seizer @Lucas Graciano
-51 C Stormbound Geist @Dan Scott
+51 C Stormbound Geist @Dan Murayama Scott
 52 C Thought Scour @David Rapoza
 53 U Tower Geist @Izzy
 54 C Black Cat @David Palumbo

@@ -1,0 +1,8 @@
+Name:Break Down the Door
+ManaCost:2 G
+Types:Instant
+A:SP$ Charm | CharmNum$ 1 | Choices$ DBExileArtifact,DBExileEnchantment,DBDread
+SVar:DBExileArtifact:DB$ ChangeZone | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact.
+SVar:DBExileEnchantment:DB$ ChangeZone | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
+SVar:DBDread:DB$ ManifestDread | SpellDescription$ Manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+Oracle:Choose one —\n• Exile target artifact.\n• Exile target enchantment.\n• Manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)

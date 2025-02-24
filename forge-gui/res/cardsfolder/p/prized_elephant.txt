@@ -4,6 +4,6 @@ Types:Creature Elephant
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Forest.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Forest.
 A:AB$ Pump | Cost$ G | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gets trample until end of turn.
-DeckNeeds:Color$Green
 SVar:BuffedBy:Forest
+DeckNeeds:Color$Green
 Oracle:Prized Elephant gets +1/+1 as long as you control a Forest.\n{G}: Prized Elephant gains trample until end of turn. (It can deal excess combat damage to the player or planeswalker it's attacking.)

@@ -18,7 +18,7 @@ ScryfallCode=DDQ
 9 C Elder Cathar @Chris Rahn
 10 U Emancipation Angel @Scott Chou
 11 U Fiend Hunter @Wayne Reynolds
-12 C Gather the Townsfolk @Dan Scott
+12 C Gather the Townsfolk @Dan Murayama Scott
 13 U Goldnight Redeemer @Karl Kopinski
 14 R Increasing Devotion @Daniel Ljunggren
 15 C Momentary Blink @Evan Shipard

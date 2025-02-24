@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact Creature Golem
 PT:0/0
 K:Modular:Sunburst
+AI:RemoveDeck:Random
 DeckHas:Ability$Counters
 DeckHints:Ability$Proliferate
-AI:RemoveDeck:Random
 Oracle:Modular—Sunburst (This creature enters with a +1/+1 counter on it for each color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.)

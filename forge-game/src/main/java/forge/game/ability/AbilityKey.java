@@ -30,6 +30,7 @@ public enum AbilityKey {
     Blockers("Blockers"),
     CanReveal("CanReveal"),
     Card("Card"),
+    CardState("CardState"),
     Cards("Cards"),
     CardsFiltered("CardsFiltered"),
     CardLKI("CardLKI"),
@@ -138,7 +139,6 @@ public enum AbilityKey {
     Token("Token"),
     TokenNum("TokenNum"),
     Valiant("Valiant"),
-    Vehicle("Vehicle"),
     Won("Won"),
 
     // below used across different Replacements, don't reuse

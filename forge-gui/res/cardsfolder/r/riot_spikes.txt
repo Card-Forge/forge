@@ -2,6 +2,6 @@ Name:Riot Spikes
 ManaCost:BR
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ BR | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ -1 | Description$ Enchanted creature gets +2/-1.
 Oracle:({B/R} can be paid with either {B} or {R}.)\nEnchant creature\nEnchanted creature gets +2/-1.

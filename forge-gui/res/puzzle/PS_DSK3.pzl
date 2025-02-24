@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Duskmourn: House of Horror #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/10/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Smoky Lounge is unlocked, and you start the puzzle with its ability on the stack. (Misty Salon is locked.) Ensure your solution satisfies all possible blocking decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=DRAW
+activephaseadvance=MAIN1
+p0life=20
+p0hand=Painter's Studio // Defaced Gallery;Song of Totentanz;Ghostly Dancers;Dollmaker's Shop // Porcelain Gallery
+p0battlefield=Marina Vendrell;T:everywhere;T:everywhere;T:everywhere;T:everywhere;T:everywhere;T:everywhere;Smoky Lounge // Misty Salon|UnlockedRoom:LeftSplit
+p1life=12
+p1battlefield=Miasma Demon;Miasma Demon

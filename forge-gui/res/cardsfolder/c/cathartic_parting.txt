@@ -1,0 +1,6 @@
+Name:Cathartic Parting
+ManaCost:1 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Library | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target artifact or enchantment an opponent controls | SubAbility$ DBChangeZone | Shuffle$ True | SpellDescription$ The owner of target artifact or enchantment an opponent controls shuffles it into their library. You may shuffle up to four target cards from your graveyard into your library.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card from your graveyard | TargetMin$ 0 | TargetMax$ 4 | Shuffle$ True | ShuffleNonMandatory$ True
+Oracle:The owner of target artifact or enchantment an opponent controls shuffles it into their library. You may shuffle up to four target cards from your graveyard into your library.

@@ -1,6 +1,6 @@
 Name:Ooze Token
 ManaCost:no cost
-Types:Creature Ooze
 Colors:green
+Types:Creature Ooze
 PT:2/2
 Oracle:

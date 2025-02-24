@@ -5,7 +5,7 @@ PT:2/3
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever CARDNAME attacks, you may collect evidence 3. When you do, put a +1/+1 counter on target creature you control. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ CollectEvidence<3> | Execute$ TrigCounter | SpellDescription$ When you do, put a +1/+1 counter on target creature you control.
 SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1
-DeckHints:Ability$Graveyard|Mill|Discard|Dredge
-DeckHas:Ability$Counters
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
 Oracle:Whenever Sample Collector attacks, you may collect evidence 3. When you do, put a +1/+1 counter on target creature you control. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)

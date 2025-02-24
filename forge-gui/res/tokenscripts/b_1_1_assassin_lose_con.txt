@@ -1,7 +1,7 @@
 Name:Assassin Token
 ManaCost:no cost
-Types:Creature Assassin
 Colors:black
+Types:Creature Assassin
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ Assassination | TriggerDescription$ Whenever this creature deals combat damage to a player, that player loses the game.
 SVar:Assassination:DB$ LosesGame | Defined$ TriggeredTarget

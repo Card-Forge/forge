@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=PAL01
 
 [cards]
-1 R Forest @Pat Morrissey
+1 R Forest @Pat Lewis
 2 R Creeping Mold @David Seeley
 3 R Island @Anson Maddocks
 4 R Dismiss @Donato Giancola

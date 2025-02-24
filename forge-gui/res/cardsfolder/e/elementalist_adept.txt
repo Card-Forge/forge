@@ -1,0 +1,7 @@
+Name:Elementalist Adept
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:2/1
+K:Flash
+K:Prowess
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

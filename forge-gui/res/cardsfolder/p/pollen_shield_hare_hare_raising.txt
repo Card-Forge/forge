@@ -12,6 +12,6 @@ ALTERNATE
 Name:Hare Raising
 ManaCost:G
 Types:Sorcery Adventure
-A:SP$ Pump | ValidTgts$ Creature | NumAtt$ X | NumDef$ X | KW$ Vigilance | SpellDescription$ Target creature you control gains vigilance and gets +X/+X until end of turn, where X is the number of creatures you control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ X | NumDef$ X | KW$ Vigilance | SpellDescription$ Target creature you control gains vigilance and gets +X/+X until end of turn, where X is the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Target creature you control gains vigilance and gets +X/+X until end of turn, where X is the number of creatures you control.

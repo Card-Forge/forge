@@ -2,6 +2,7 @@ Name:Lithophage
 ManaCost:3 R R
 Types:Creature Insect
 PT:7/7
-K:UpkeepCost:Sac<1/Mountain>
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you sacrifice a Mountain.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Sac<1/Mountain>
 SVar:NeedsToPlay:Mountain.YouCtrl
 Oracle:At the beginning of your upkeep, sacrifice Lithophage unless you sacrifice a Mountain.

@@ -8,6 +8,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigTempt:DB$ RingTemptsYou
 T:Mode$ RingTemptsYou | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ Whenever the Ring tempts you, put a +1/+1 counter on each Wraith you control.
 SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.Wraith+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
-DeckNeeds:Name$Nazgûl
 DeckHas:Ability$Token
+DeckNeeds:Name$Nazgûl
 Oracle:Deathtouch\nWhen Nazgûl enters, the Ring tempts you.\nWhenever the Ring tempts you, put a +1/+1 counter on each Wraith you control.\nA deck can have up to nine cards named Nazgûl.

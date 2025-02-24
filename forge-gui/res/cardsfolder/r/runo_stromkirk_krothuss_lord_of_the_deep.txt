@@ -25,6 +25,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$
 SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.Other+attacking | TgtPrompt$ Select another target attacking creature | TokenTapped$ True | TokenAttacking$ True | NumCopies$ X | AITgts$ Kraken.Other+attacking,Leviathan.Other+attacking,Octopus.Other+attacking,Serpent.Other+attacking
 SVar:X:Count$Compare Y GE1.2.1
 SVar:Y:Targeted$Valid Kraken,Leviathan,Octopus,Serpent
-DeckHints:Type$Kraken|Leviathan|Octopus|Serpent
 SVar:HasAttackEffect:TRUE
+DeckHints:Type$Kraken|Leviathan|Octopus|Serpent
 Oracle:Flying\nWhenever Krothuss, Lord of the Deep attacks, create a tapped and attacking token that's a copy of another target attacking creature. If that creature is a Kraken, Leviathan, Octopus, or Serpent, create two of those tokens instead.

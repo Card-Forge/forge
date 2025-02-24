@@ -1,6 +1,6 @@
 Name:Cat Beast Token
 ManaCost:no cost
-Types:Creature Cat Beast
 Colors:white
+Types:Creature Cat Beast
 PT:2/2
 Oracle:

@@ -4,6 +4,6 @@ Types:Legendary Creature Elf Noble
 PT:2/1
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Other+YouCtrl
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Each other creature you control enters with a number of additional +1/+1 counters on it equal to CARDNAME's toughness.
-DeckHas:Ability$Counters
 SVar:X:Count$CardToughness
+DeckHas:Ability$Counters
 Oracle:Each other creature you control enters with a number of additional +1/+1 counters on it equal to Arwen, Weaver of Hope's toughness.

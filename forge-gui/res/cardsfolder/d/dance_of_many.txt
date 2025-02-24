@@ -2,12 +2,13 @@ Name:Dance of Many
 ManaCost:U U
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters, create a token that's a copy of target nontoken creature.
-SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | RememberTokens$ True
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.!token | TgtPrompt$ Select target nontoken creature | RememberTokens$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME leaves the battlefield, exile the token.
 SVar:TrigExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ TrigSac | TriggerDescription$ When the token leaves the battlefield, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | SubAbility$ DBCleanup
-K:UpkeepCost:U U
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {U}{U}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ U U
 DeckHas:Ability$Token|Sacrifice
 Oracle:When Dance of Many enters, create a token that's a copy of target nontoken creature.\nWhen Dance of Many leaves the battlefield, exile the token.\nWhen the token leaves the battlefield, sacrifice Dance of Many.\nAt the beginning of your upkeep, sacrifice Dance of Many unless you pay {U}{U}.

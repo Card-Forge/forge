@@ -7,7 +7,7 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 SVar:TrigCopyTarget:DB$ CopyPermanent | Defined$ TriggeredSpellAbilityTargets | Choices$ Permanent.YouCtrl+Other | ConditionDefined$ TriggeredSpellAbility | ConditionPresent$ Spell.IsTargeting Valid Permanent.YouCtrl~Other
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ SpellAbility.OppCtrl | Execute$ TrigTokenCopy | TriggerDescription$ When a spell or ability an opponent controls causes you to discard this card, create a token that's a copy of target permanent.
 SVar:TrigTokenCopy:DB$ CopyPermanent | ValidTgts$ Permanent
-DeckHints:Type$Instant|Sorcery
-DeckHas:Ability$Token
 SVar:DiscardMeByOpp:1
+DeckHas:Ability$Token
+DeckHints:Type$Instant|Sorcery
 Oracle:Changeling\nWhenever you cast an instant or sorcery spell, if it targets one or more other permanents you control, create a token that's a copy of one of those permanents.\nWhen a spell or ability an opponent controls causes you to discard this card, create a token that's a copy of target permanent.

@@ -1,0 +1,10 @@
+Name:Thurid, Mare of Destiny
+ManaCost:2 W W
+Types:Legendary Creature Pegasus
+PT:2/4
+K:Flying
+K:Lifelink
+T:Mode$ SpellCast | ValidCard$ Creature.Pegasus,Creature.Unicorn,Creature.Horse | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Pegasus, Unicorn, or Horse creature spell, copy it. (The copy becomes a token.)
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+S:Mode$ Continuous | Affected$ Pegasus.Other+YouCtrl,Unicorn.Other+YouCtrl,Horse.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Pegasi, Unicorns, and Horses you control get +1/+1.
+Oracle:Flying, lifelink\nWhenever you cast a Pegasus, Unicorn, or Horse creature spell, copy it. (The copy becomes a token.)\nOther Pegasi, Unicorns, and Horses you control get +1/+1.

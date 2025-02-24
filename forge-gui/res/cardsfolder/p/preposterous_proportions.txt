@@ -1,0 +1,5 @@
+Name:Preposterous Proportions
+ManaCost:5 G G
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +10 | NumDef$ +10 | KW$ Vigilance | SpellDescription$ Creatures you control get +10/+10 and gain vigilance until end of turn.
+Oracle:Creatures you control get +10/+10 and gain vigilance until end of turn.

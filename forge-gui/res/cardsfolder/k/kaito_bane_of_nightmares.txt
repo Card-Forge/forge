@@ -1,0 +1,13 @@
+Name:Kaito, Bane of Nightmares
+ManaCost:2 U B
+Types:Legendary Planeswalker Kaito
+Loyalty:4
+K:Ninjutsu:1 U B
+S:Mode$ Continuous | Affected$ Permanent.Self+counters_GE1_LOYALTY | Condition$ PlayerTurn | AddType$ Creature & Ninja | RemoveCardTypes$ True | SetPower$ 3 | SetToughness$ 4 | AddKeyword$ Hexproof | Description$ During your turn, as long as NICKNAME has one or more loyalty counters on him, he's a 3/4 Ninja creature and has hexproof.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Name$ Emblem — Kaito, Bane of Nightmares | Image$ emblem_kaito_bane_of_nightmares | StaticAbilities$ STNinjaBoost | Planeswalker$ True | Duration$ Permanent | SpellDescription$ You get an emblem with "Ninjas you control get +1/+1."
+SVar:STNinjaBoost:Mode$ Continuous | Affected$ Ninja.YouCtrl | AffectedZone$ Battlefield | AddPower$ 1 | AddToughness$ 1 | Description$ Ninjas you control get +1/+1.
+A:AB$ Surveil | Cost$ AddCounter<0/LOYALTY> | Amount$ 2 | Planeswalker$ True | SubAbility$ DBDraw | SpellDescription$ Surveil 2. Then draw a card for each opponent who lost life this turn.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ PlayerCountRegisteredOpponents$HasPropertyLostLifeThisTurn
+A:AB$ Tap | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Choose target creature to tap. | Planeswalker$ True | SubAbility$ DBPutCounter | SpellDescription$ Tap target creature. Put two stun counters on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 2
+Oracle:Ninjutsu {1}{U}{B} ({1}{U}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nDuring your turn, as long as Kaito has one or more loyalty counters on him, he's a 3/4 Ninja creature and has hexproof.\n[+1]: You get an emblem with "Ninjas you control get +1/+1."\n[0]: Surveil 2. Then draw a card for each opponent who lost life this turn.\n[-2]: Tap target creature. Put two stun counters on it.

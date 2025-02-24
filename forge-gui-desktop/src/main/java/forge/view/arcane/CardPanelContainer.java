@@ -278,7 +278,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
 
     public final CardPanel getCardPanel(final int gameCardID) {
         for (final CardPanel panel : this.getCardPanels()) {
-            if (panel.getCard().getId() == gameCardID) {
+            if (panel.getCard() != null && panel.getCard().getId() == gameCardID) {
                 return panel;
             }
         }

@@ -1,10 +1,13 @@
 Name:Concession Stand
 ManaCost:no cost
 Types:Artifact Attraction
+K:Visit:TrigFood
+SVar:TrigFood:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
+Oracle:Visit — Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+
+# --- VARIANTS ---
+
 Variant:A:Lights:2 6
 Variant:B:Lights:3 6
 Variant:C:Lights:4 6
 Variant:D:Lights:5 6
-K:Visit:TrigFood
-SVar:TrigFood:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
-Oracle:Visit — Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

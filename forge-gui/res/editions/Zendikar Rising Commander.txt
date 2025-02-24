@@ -73,9 +73,9 @@ ScryfallCode=ZNC
 65 U Evolution Sage @Simon Dominic
 66 C Far Wanderings @Darrell Riche
 67 C Fertilid @Nicholas Gregory
-68 U Harmonize @Dan Scott
+68 U Harmonize @Dan Murayama Scott
 69 C Harrow @Izzy
-70 U Inspiring Call @Dan Scott
+70 U Inspiring Call @Dan Murayama Scott
 71 U Keeper of Fables @Alex Konstad
 72 C Khalni Heart Expedition @Jason Chan
 73 C Kodama's Reach @John Avon
@@ -111,7 +111,7 @@ ScryfallCode=ZNC
 103 R Sygg, River Cutthroat @Jeremy Enecio
 104 U Sylvan Reclamation @Seb McKinnon
 105 U Treacherous Terrain @Titus Lunter
-106 C Arcane Signet @Dan Scott
+106 C Arcane Signet @Dan Murayama Scott
 107 R Blackblade Reforged @Chris Rahn
 108 R Bonehoard @Chippy
 109 C Commander's Sphere @Ryan Alexander Lee
@@ -147,7 +147,7 @@ ScryfallCode=ZNC
 139 C Selesnya Guildgate @Howard Lyon
 140 U Selesnya Sanctuary @John Avon
 141 U Submerged Boneyard @Cliff Childs
-142 C Terramorphic Expanse @Dan Scott
+142 C Terramorphic Expanse @Dan Murayama Scott
 
 [tokens]
 w_1_1_bird_flying

@@ -2,5 +2,6 @@ Name:Darba
 ManaCost:3 G
 Types:Creature Bird Beast
 PT:5/4
-K:UpkeepCost:G G
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {G}{G}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ G G
 Oracle:At the beginning of your upkeep, sacrifice Darba unless you pay {G}{G}.

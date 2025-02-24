@@ -7,5 +7,5 @@ SVar:InterrogateThem:DB$ Dig | ValidTgts$ Opponent | TgtPrompt$ Select target op
 SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Exile | ChoiceTitle$ Choose one of the exiled cards | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ ChosenCard | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
-SVar:STMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | EffectZone$ Command | MayPlay$ True | MayPlayIgnoreColor$ True | Description$ You may play the exiled card, and you may spend mana as though it were mana of any color to cast it.
+SVar:STMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | MayPlayIgnoreColor$ True | Description$ You may play the exiled card, and you may spend mana as though it were mana of any color to cast it.
 Oracle:Choose one —\n• Break Their Chains — Destroy target artifact.\n• Interrogate Them — Exile the top three cards of target opponent's library. Choose one of them. Until the end of your next turn, you may play that card, and you may spend mana as though it were mana of any color to cast it.

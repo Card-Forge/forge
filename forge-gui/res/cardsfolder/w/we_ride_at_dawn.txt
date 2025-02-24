@@ -4,6 +4,6 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Card.Creature+Legendary+YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Legendary creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a legendary creature spell pays for {1} or one mana of that creature's color.)
 T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever your commander attacks, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_mercenary_tappump | TokenOwner$ You
-DeckNeeds:Type$Legendary & Type$Creature
 DeckHas:Ability$Token & Type$Mercenary & Color$Red
+DeckNeeds:Type$Legendary & Type$Creature
 Oracle:Legendary creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a legendary creature spell pays for {1} or one mana of that creature's color.)\nWhenever your commander attacks, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."

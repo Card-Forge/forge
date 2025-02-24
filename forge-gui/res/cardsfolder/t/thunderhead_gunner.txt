@@ -1,0 +1,7 @@
+Name:Thunderhead Gunner
+ManaCost:4 R
+Types:Creature Shark Pirate
+PT:4/5
+K:Reach
+A:AB$ Draw | Cost$ Discard<1/Card> | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ Draw a card. Activate only as a sorcery and only once each turn.
+Oracle:Reach\nDiscard a card: Draw a card. Activate only as a sorcery and only once each turn.

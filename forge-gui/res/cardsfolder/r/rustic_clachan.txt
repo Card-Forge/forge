@@ -5,7 +5,7 @@ K:Reinforce:1:1 W
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may reveal a Kithkin card from your hand. If you don't, CARDNAME enters tapped.
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Kithkin> | UnlessPayer$ You | StackDescription$ enters tapped.
-DeckHints:Type$Kithkin
 DeckHas:Ability$Counters
+DeckHints:Type$Kithkin
 DeckNeeds:Type$Creature
 Oracle:As Rustic Clachan enters, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters tapped.\n{T}: Add {W}.\nReinforce 1—{1}{W} ({1}{W}, Discard this card: Put a +1/+1 counter on target creature.)

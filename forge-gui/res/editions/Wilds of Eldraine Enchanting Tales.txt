@@ -65,7 +65,7 @@ ScryfallCode=WOT
 57 R Nature's Will @Matteo Bassini
 58 M Parallel Lives @Lander Strijbol
 59 R Primal Vigor @Maël Ollivier-Henry
-60 R Prismatic Omen @Qianhao Ma
+60 R Prismatic Omen @Qianjiao Ma
 61 U Season of Growth @Maël Ollivier-Henry
 62 R Unnatural Growth @Francoyovich
 63 U Utopia Sprawl @Sylvain Sarrailh

@@ -1,6 +1,6 @@
 Name:Elemental Eruption
-Types:Sorcery
 ManaCost:4 R R
+Types:Sorcery
 A:SP$ Token | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_elemental_flying_prowess | TokenOwner$ You | SpellDescription$ Create a 4/4 red Dragon Elemental creature token with flying and prowess.
 K:Storm
 DeckHas:Ability$Token & Type$Dragon|Elemental

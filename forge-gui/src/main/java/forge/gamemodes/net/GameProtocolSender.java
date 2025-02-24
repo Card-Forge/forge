@@ -1,8 +1,8 @@
 package forge.gamemodes.net;
 
-import java.util.concurrent.TimeoutException;
-
 import forge.gamemodes.net.event.GuiGameEvent;
+
+import java.util.concurrent.TimeoutException;
 
 public final class GameProtocolSender {
 

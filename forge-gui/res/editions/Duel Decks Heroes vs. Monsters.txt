@@ -52,7 +52,7 @@ ScryfallCode=DDL
 43 M Polukranos, World Eater @Karl Kopinski
 44 C Orcish Lumberjack @Steve Prescott
 45 C Deadly Recluse @Warren Mahy
-46 U Kavu Predator @Dan Scott
+46 U Kavu Predator @Dan Murayama Scott
 47 C Satyr Hedonist @Chase Stone
 48 C Zhur-Taa Druid @Mark Winters
 49 C Blood Ogre @Christopher Moeller
@@ -66,11 +66,11 @@ ScryfallCode=DDL
 57 R Skarrgan Firebird @Kev Walker
 58 C Valley Rannet @Dave Allsop
 59 C Krosan Tusker @Kev Walker
-60 U Skarrgan Skybreaker @Dan Scott
+60 U Skarrgan Skybreaker @Dan Murayama Scott
 61 C Shower of Sparks @Christopher Moeller
 62 C Prey Upon @Dave Kendall
 63 U Pyroclasm @John Avon
-64 U Regrowth @Dan Scott
+64 U Regrowth @Dan Murayama Scott
 65 C Terrifying Presence @Jaime Jones
 66 U Destructive Revelry @Kev Walker
 67 U Dragon Blood @Ron Spencer

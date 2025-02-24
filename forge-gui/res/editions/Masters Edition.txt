@@ -139,7 +139,7 @@ ScryfallCode=ME1
 128 C Scryb Sprites @Amy Weber
 129 C Shambling Strider @Douglas Shuler
 130 U Singing Tree @Rob Alexander
-131 U Spectral Bears @Pat Morrissey
+131 U Spectral Bears @Pat Lewis
 132 U Storm Seeker @Mark Poole
 133 R Sylvan Library @Harold McNeill
 134 U Thicket Basilisk @Dan Frazier
@@ -148,7 +148,7 @@ ScryfallCode=ME1
 137 C Wanderlust @Cornelius Brudi
 138 U Winter Blast @Kaja Foglio
 139 C Wyluli Wolf @Susan Van Camp
-140 U Yavimaya Ants @Pat Morrissey
+140 U Yavimaya Ants @Pat Lewis
 141 R Adun Oakenshield @Jeff A. Menges
 142 U Centaur Archer @Melissa A. Benson
 143 R Dakkon Blackblade @Richard Kane Ferguson

@@ -1,8 +1,11 @@
 Name:Hall of Mirrors
 ManaCost:no cost
 Types:Artifact Attraction
-Variant:A:Lights:2 6
-Variant:B:Lights:4 6
 K:Visit:TrigCopyAll
 SVar:TrigCopyAll:DB$ Clone | Defined$ Targeted | NonLegendary$ True | CloneTarget$ Valid Creature.YouCtrl+NotDefinedTargeted | Duration$ UntilEndOfTurn | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SpellDescription$ Choose target creature you control. Each other creature you control becomes a copy of that creature until end of turn, except it isn't legendary.
 Oracle:Visit — Choose target creature you control. Each other creature you control becomes a copy of that creature until end of turn, except it isn't legendary.
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 6
+Variant:B:Lights:4 6

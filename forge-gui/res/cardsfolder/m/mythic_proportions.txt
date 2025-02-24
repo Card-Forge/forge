@@ -2,6 +2,6 @@ Name:Mythic Proportions
 ManaCost:4 G G G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 4 G G G | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 8 | AddToughness$ 8 | AddKeyword$ Trample | Description$ Enchanted creature gets +8/+8 and has trample.
 Oracle:Enchant creature\nEnchanted creature gets +8/+8 and has trample.

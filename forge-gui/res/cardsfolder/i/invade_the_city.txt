@@ -2,9 +2,9 @@ Name:Invade the City
 ManaCost:1 U R
 Types:Sorcery
 A:SP$ Amass | Type$ Zombie | Num$ X | SpellDescription$ Amass Zombies X, where X is the number of instant and sorcery cards in your graveyard. (Put X +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
-DeckNeeds:Type$Instant|Sorcery
-DeckHints:Ability$Amass & Type$Zombie
-DeckHas:Ability$Amass|Counters|Token
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:NeedsToPlayVar:X GE1
+DeckHas:Ability$Amass|Counters|Token
+DeckHints:Ability$Amass & Type$Zombie
+DeckNeeds:Type$Instant|Sorcery
 Oracle:Amass Zombies X, where X is the number of instant and sorcery cards in your graveyard. (Put X +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)

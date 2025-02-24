@@ -1,19 +1,12 @@
 package forge.game.card.token;
 
-import java.util.List;
-import java.util.Map;
-
-import forge.card.GamePieceType;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardType;
+import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -25,6 +18,11 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
 
 public class TokenInfo {
     final String name;
@@ -101,7 +99,7 @@ public class TokenInfo {
         for (CardType.CoreType t : c.getType().getCoreTypes()) {
             relevantTypes.add(t.name());
         }
-        Iterables.addAll(relevantTypes, c.getType().getSubtypes());
+        c.getType().getSubtypes().forEach(relevantTypes::add);
         if (c.getType().isLegendary()) {
             relevantTypes.add("Legendary");
         }

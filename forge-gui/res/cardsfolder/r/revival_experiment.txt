@@ -3,7 +3,7 @@ ManaCost:4 B G
 Types:Sorcery
 A:SP$ ChooseCard | Defined$ You | Choices$ Card.Permanent+YouOwn | ChoiceZone$ Graveyard | ChooseEach$ Artifact & Battle & Creature & Enchantment & Land & Planeswalker | ControlledByPlayer$ Chooser | MinAmount$ 0 | Amount$ 1 | Reveal$ True | RememberChosen$ True | SubAbility$ DBReturn | StackDescription$ REP return_{p:You} returns & from your_from their & You lose_{p:You} loses & Exile_{p:You} exiles | SpellDescription$ For each permanent type, return up to one card of that type from your graveyard to the battlefield. You lose 3 life for each card returned this way. Exile CARDNAME.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Remembered | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBLoseLife | StackDescription$ None
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBChange | SubAbility$ DBExile | StackDescription$ None
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBExile | StackDescription$ None
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:X:Remembered$Amount/Times.3

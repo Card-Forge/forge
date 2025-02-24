@@ -1,0 +1,18 @@
+Name:1996 World Champion
+ManaCost:W U B R G
+Types:Legendary Creature Human Gamer
+PT:*/*
+Text:[Developer's note: Updated and adapted with reference to subsequent Oracle updates and EDH Silver's unofficial errata. This updated rules text is displayed in-game.]
+# EDH Silver unofficial errata found at https://edhsilver.com/cards/uc/occ/1996-world-champion/
+K:MayEffectFromOpeningDeck:DBReveal
+SVar:DBReveal:DB$ Reveal | RevealDefined$ Self | OptionalDecider$ You | SubAbility$ DBEffect | SpellDescription$ Before you shuffle your deck to start the game, you may reveal this card from your deck. If you do, you get an emblem with "Discard your hand: Search your library for a card named 1996 World Champion, reveal it, then shuffle and put that card on top. Activate only during your upkeep and only if a card named 1996 World Champion is in your library."
+SVar:DBEffect:DB$ Effect | Name$ Emblem — 1996 World Champion | Image$ emblem_1996_world_champion | Abilities$ ABRiseToTop | Stackable$ False | Duration$ Permanent | AILogic$ Always
+SVar:ABRiseToTop:AB$ ChangeZone | Cost$ Discard<1/Hand> | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.named1996 World Champion | ActivationPhases$ Upkeep | PlayerTurn$ True | ActivationZone$ Command | IsPresent$ Card.YouOwn+named1996 World Champion | PresentZone$ Library | StackDescription$ REP Search your_{p:You} searches their & reveal_reveals & shuffle and put_{p:You} shuffles and puts & . Activate only during your upkeep and only if a card named 1996 World Champion is in your library._. | SpellDescription$ Search your library for a card named 1996 World Champion, reveal it, then shuffle and put that card on top. Activate only during your upkeep and only if a card named 1996 World Champion is in your library.
+K:ETBReplacement:Other:ChooseP
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | RememberChosen$ True | SpellDescription$ As CARDNAME enters, choose an opponent.
+K:Shroud
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the chosen player's life total.
+SVar:X:PlayerCountRemembered$LifeTotal
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Cannot be the target of spells or effects.\nWorld Champion has power and toughness equal to the life total of target opponent.\n{0}: Discard your hand to search your library for 1996 World Champion and reveal it to all players. Shuffle your library and put 1996 World Champion on top of it. Use this ability only at the beginning of your upkeep, and only if 1996 World Champion is in your library.

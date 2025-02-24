@@ -1,8 +1,5 @@
 package forge.gamemodes.match.input;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.mana.Mana;
@@ -15,6 +12,9 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
 
@@ -83,7 +83,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
             msg.append(messagePrefix).append("\n");
         }
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
-	    if (saPaidFor.isSpell()) {
+            if (saPaidFor.isSpell()) {
                 msg.append(saPaidFor.getStackDescription().replace("(Targeting ERROR)", "")).append("\n\n");
             } else {
                 msg.append(saPaidFor.getHostCard()).append(" - ").append(saPaidFor.toString()).append("\n\n");

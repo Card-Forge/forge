@@ -1,0 +1,9 @@
+Name:Nowhere to Run
+ManaCost:1 B
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature an opponent controls gets -3/-3 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
+S:Mode$ IgnoreHexproof | ValidEntity$ Creature.OppCtrl | Description$ Creatures your opponents control can be the targets of spells and abilities as though they didn't have hexproof. Ward abilities of those creatures don't trigger.
+S:Mode$ DisableTriggers | Secondary$ True | ValidTrigger$ Triggered.Ward | ValidCard$ Creature.OppCtrl+inZoneBattlefield | Description$ Creatures your opponents control can be the targets of spells and abilities as though they didn't have hexproof. Ward abilities of those creatures don't trigger.
+Oracle:Flash\nWhen Nowhere to Run enters, target creature an opponent controls gets -3/-3 until end of turn.\nCreatures your opponents control can be the targets of spells and abilities as though they didn't have hexproof. Ward abilities of those creatures don't trigger.

@@ -66,7 +66,7 @@ ScryfallCode=RIX
 52 C Secrets of the Golden City @Jason Felix
 53 U Silvergill Adept @Magali Villeneuve
 54 U Siren Reaver @Tomasz Jedruszek
-55 U Slippery Scoundrel @Dan Scott
+55 U Slippery Scoundrel @Dan Murayama Scott
 56 C Soul of the Rapids @Anthony Palumbo
 57 C Spire Winder @Titus Lunter
 58 C Sworn Guardian @Sara Winters
@@ -113,7 +113,7 @@ ScryfallCode=RIX
 99 R Dire Fleet Daredevil @Zoltan Boros
 100 R Etali, Primal Storm @Raymond Swanland
 101 C Fanatical Firebrand @Wayne Reynolds
-102 U Forerunner of the Empire @Dan Scott
+102 U Forerunner of the Empire @Dan Murayama Scott
 103 R Form of the Dinosaur @Daarken
 104 C Frilled Deathspitter @Zoltan Boros
 105 C Goblin Trailblazer @Josh Hass

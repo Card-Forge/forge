@@ -1,6 +1,6 @@
 Name:Weird Token
 ManaCost:no cost
-Types:Creature Weird
 Colors:blue,red
+Types:Creature Weird
 PT:*/*
 Oracle:

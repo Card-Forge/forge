@@ -4,8 +4,8 @@ Types:Artifact Creature Golem
 PT:2/2
 K:Sunburst
 A:AB$ Pump | Cost$ SubCounter<1/P1P1> | KWChoice$ Flying,First Strike,Haste | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gains your choice of flying, first strike, or haste until end of turn.
-AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
+AI:RemoveDeck:Random
 DeckHints:Ability$Proliferate
 Oracle:Sunburst (This enters with a +1/+1 counter on it for each color of mana spent to cast it.)\nRemove a +1/+1 counter from Lunar Avenger: Lunar Avenger gains your choice of flying, first strike, or haste until end of turn.

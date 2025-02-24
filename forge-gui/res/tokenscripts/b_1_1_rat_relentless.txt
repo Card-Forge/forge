@@ -1,8 +1,8 @@
 Name:Rat Token
 ManaCost:no cost
+Colors:black
 Types:Creature Rat
 PT:1/1
-Colors:black
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ This creature gets +1/+1 for each other Rat you control.
 SVar:X:Count$Valid Rat.Other+YouCtrl
 Oracle:This creature gets +1/+1 for each other Rat you control.

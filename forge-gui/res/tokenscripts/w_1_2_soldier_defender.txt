@@ -1,7 +1,7 @@
 Name:Soldier Token
 ManaCost:no cost
-Types:Creature Soldier
 Colors:white
+Types:Creature Soldier
 PT:1/2
 K:Defender
 Oracle:Defender

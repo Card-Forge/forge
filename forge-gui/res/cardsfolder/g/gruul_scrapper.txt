@@ -5,7 +5,7 @@ PT:3/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | ManaSpent$ R | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, if {R} was spent to cast it, it gains haste until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Haste
 SVar:ManaNeededToAvoidNegativeEffect:red
-AI:RemoveDeck:Random
 SVar:PlayMain1:ALWAYS
+AI:RemoveDeck:Random
 DeckNeeds:Color$Red
 Oracle:When Gruul Scrapper enters, if {R} was spent to cast it, it gains haste until end of turn.

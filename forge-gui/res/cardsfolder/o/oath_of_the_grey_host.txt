@@ -2,7 +2,7 @@ Name:Oath of the Grey Host
 ManaCost:3 B
 Types:Enchantment Saga
 K:Chapter:3:DBFood,DBLoseLife,DBSpirit
-SVar:DBFood:DB$ Token | TokenAmount$ 1 | ValidTgts$ Opponent | TokenOwner$ TargetedAndYou | TokenAmount$ 1 | TokenScript$ c_a_food_sac | SpellDescription$ You and target opponent each create a Food token.
+SVar:DBFood:DB$ Token | TokenAmount$ 1 | ValidTgts$ Opponent | TokenOwner$ TargetedAndYou | TokenScript$ c_a_food_sac | SpellDescription$ You and target opponent each create a Food token.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Player.Opponent | SubAbility$ DBTreasure | SpellDescription$ Each opponent loses 3 life. Create a Treasure token.
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
 SVar:DBSpirit:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_spirit_flying | TokenTapped$ True | SpellDescription$ Create three tapped 1/1 white Spirit creature tokens with flying.

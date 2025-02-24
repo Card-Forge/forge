@@ -6,7 +6,7 @@ A:AB$ DigUntil | Cost$ T Sac<1/Artifact> | Valid$ Artifact | ValidDescription$ a
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
+AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice
 DeckNeeds:Type$Artifact
-AI:RemoveDeck:Random
 Oracle:{T}, Sacrifice an artifact: Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. Audacious Reshapers deals damage to you equal to the number of cards revealed this way.

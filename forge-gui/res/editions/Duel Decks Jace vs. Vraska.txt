@@ -38,7 +38,7 @@ ScryfallCode=DDM
 30 U Control Magic @Clint Cearley
 31 U Summoner's Bane @Cyril Van Der Haegen
 32 U Jace's Ingenuity @Igor Kieryluk
-33 R Future Sight @Dan Scott
+33 R Future Sight @Dan Murayama Scott
 34 R Spelltwine @Noah Bradley
 35 U Dread Statuary @Jason A. Engle
 36 C Halimar Depths @Volkan Baǵa

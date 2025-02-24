@@ -53,11 +53,11 @@ ScryfallCode=THS
 41 C Benthic Giant @Jaime Jones
 42 R Bident of Thassa @Yeong-Hao Han
 43 C Breaching Hippocamp @Christopher Burdett
-44 C Coastline Chimera @Dan Scott
+44 C Coastline Chimera @Dan Murayama Scott
 45 C Crackling Triton @Greg Staples
 46 R Curse of the Swine @James Ryman
 47 U Dissolve @Wesley Burt
-48 C Fate Foretold @Dan Scott
+48 C Fate Foretold @Dan Murayama Scott
 49 U Gainsay @Clint Cearley
 50 C Griptide @Adam Paquette
 51 U Horizon Scholar @Karl Kopinski
@@ -103,7 +103,7 @@ ScryfallCode=THS
 91 M Hythonia the Cruel @Chris Rahn
 92 U Insatiable Harpy @Matt Stewart
 93 U Keepsake Gorgon @Aaron Miller
-94 C Lash of the Whip @Dan Scott
+94 C Lash of the Whip @Dan Murayama Scott
 95 C Loathsome Catoblepas @Christopher Burdett
 96 C March of the Returned @Mark Zug
 97 U Mogis's Marauder @Chase Stone

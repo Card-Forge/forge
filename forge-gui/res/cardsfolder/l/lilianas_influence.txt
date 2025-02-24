@@ -1,7 +1,7 @@
 Name:Liliana's Influence
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ PutCounterAll | ValidCards$ Creature.YouDontCtrl | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBShuffle | IsCurse$ True | SubAbility$ DBSearch | SpellDescription$ Put a -1/-1 counter on each creature you don't control.
+A:SP$ PutCounterAll | ValidCards$ Creature.YouDontCtrl | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBSearch | SpellDescription$ Put a -1/-1 counter on each creature you don't control.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn+namedLiliana; Death Wielder | Optional$ True | SpellDescription$ You may search your library and/or graveyard for a card named Liliana, Death Wielder, reveal it, and put it into your hand. If you search your library this way, shuffle.
 DeckHints:Name$Liliana, Death Wielder
 Oracle:Put a -1/-1 counter on each creature you don't control. You may search your library and/or graveyard for a card named Liliana, Death Wielder, reveal it, and put it into your hand. If you search your library this way, shuffle.

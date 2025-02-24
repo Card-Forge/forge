@@ -74,12 +74,12 @@ ScryfallCode=EVE
 60 C Puncture Blast @Carl Critchlow
 61 R Rekindled Flame @Zoltan Boros & Gabor Szikszai
 62 R Stigma Lasher @Aleksi Briclot
-63 R Thunderblust @Dan Scott
+63 R Thunderblust @Dan Murayama Scott
 64 U Unwilling Recruit @Dave Allsop
 65 C Aerie Ouphes @Jesper Ejsing
 66 R Bloom Tender @Chippy
 67 U Duskdale Wurm @Dan Dos Santos
-68 R Helix Pinnacle @Dan Scott
+68 R Helix Pinnacle @Dan Murayama Scott
 69 U Marshdrinker Giant @Daarken
 70 C Monstrify @Lars Grant-West
 71 C Nettle Sentinel @Kev Walker
@@ -98,7 +98,7 @@ ScryfallCode=EVE
 84 U Cauldron Haze @Brandon Kitkouski
 85 R Deathbringer Liege @Drew Tucker
 86 R Divinity of Pride @Greg Staples
-87 C Edge of the Divinity @Dan Scott
+87 C Edge of the Divinity @Dan Murayama Scott
 88 R Evershrike @Dan Dos Santos
 89 U Gwyllion Hedge-Mage @Todd Lockwood
 90 C Harvest Gwyllion @Nils Hamm
@@ -112,7 +112,7 @@ ScryfallCode=EVE
 98 R Call the Skybreaker @Randy Gallegos
 99 C Clout of the Dominus @Jaime Jones
 100 R Crackleburr @Mike Dringenberg
-101 U Crag Puca @John Howe (Lorywn)
+101 U Crag Puca @John Franklin Howe
 102 R Dominus of Fealty @Kev Walker
 103 C Inside Out @Zoltan Boros & Gabor Szikszai
 104 R Mindwrack Liege @Richard Whitters
@@ -157,7 +157,7 @@ ScryfallCode=EVE
 143 U Moonhold @Mike Dringenberg
 144 R Nobilis of War @Christopher Moeller
 145 R Rise of the Hobgoblins @Jeff Miracola
-146 C Scourge of the Nobilis @Dan Scott
+146 C Scourge of the Nobilis @Dan Murayama Scott
 147 U Spitemare @Matt Cavotta
 148 R Waves of Aggression @Jim Pavelec
 149 R Cold-Eyed Selkie @Jaime Jones

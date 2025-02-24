@@ -104,10 +104,9 @@ public class VCombat implements IVDoc<CCombat> {
 
     //========= Observer update methods
 
-    /** @param s0 &emsp; {@link java.lang.String} */
     public void updateCombat(final int cntAttackers, final String desc) {
         // No need to update this unless it's showing
-        if (!this.equals(parentCell.getSelected())) { return; }
+        if (parentCell == null || !this.equals(parentCell.getSelected())) { return; }
 
         tab.setText(cntAttackers > 0 ? (Localizer.getInstance().getMessage("lblCombatTab") + " : " + cntAttackers) : Localizer.getInstance().getMessage("lblCombatTab"));
         tar.setText(desc);

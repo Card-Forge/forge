@@ -65,9 +65,9 @@ ScryfallCode=CST
 378 L Mountain @Tom Wänerstrand
 379 L Mountain @Tom Wänerstrand
 380 L Mountain @Tom Wänerstrand
-381 L Forest @Pat Morrissey
-382 L Forest @Pat Morrissey
-383 L Forest @Pat Morrissey
+381 L Forest @Pat Lewis
+382 L Forest @Pat Lewis
+383 L Forest @Pat Lewis
 
 [tokens]
 w_0_1_deserter

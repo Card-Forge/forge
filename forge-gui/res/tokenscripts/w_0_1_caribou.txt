@@ -1,6 +1,6 @@
 Name:Caribou Token
 ManaCost:no cost
-Types:Creature Caribou
 Colors:white
+Types:Creature Caribou
 PT:0/1
 Oracle:

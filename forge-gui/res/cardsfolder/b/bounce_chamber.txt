@@ -1,11 +1,14 @@
 Name:Bounce Chamber
 ManaCost:no cost
 Types:Artifact Attraction
-Variant:A:Lights:2 6
-Variant:B:Lights:3 6
-Variant:C:Lights:4 6
-Variant:D:Lights:5 6
 K:Visit:TrigChoose
 SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.YouDontCtrl+leastToughnessControlledByOpponent | ChoiceTitle$ Choose a creature with the least toughness among creatures your opponents control | Mandatory$ True | SubAbility$ DBBounce | SpellDescription$ Return a creature you don't control with the lowest toughness among creatures you don't control to its owner's hand.
 SVar:DBBounce:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Hand
 Oracle:Visit — Return a creature you don't control with the lowest toughness among creatures you don't control to its owner's hand. (If multiple creatures are tied, choose any one of them.)
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 6
+Variant:B:Lights:3 6
+Variant:C:Lights:4 6
+Variant:D:Lights:5 6

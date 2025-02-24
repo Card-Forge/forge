@@ -5,6 +5,6 @@ PT:1/1
 A:AB$ ChangeZone | Cost$ T Sac<3/Cleric> | Hidden$ True | Origin$ Library | OriginAlternative$ Graveyard,Hand | Destination$ Battlefield | ChangeType$ Card.YouOwn+namedScion of Darkness | SpellDescription$ Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-DeckNeeds:Name$Scion of Darkness & Type$Cleric
 DeckHas:Ability$Sacrifice
+DeckNeeds:Name$Scion of Darkness & Type$Cleric
 Oracle:{T}, Sacrifice three Clerics: Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle.

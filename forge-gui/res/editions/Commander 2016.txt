@@ -96,7 +96,7 @@ ScryfallCode=C16
 87 R Devastation Tide @Raymond Swanland
 88 C Disdainful Stroke @Svetlin Velinov
 89 C Etherium Sculptor @Steven Belledin
-90 M Ethersworn Adjudicator @Dan Scott
+90 M Ethersworn Adjudicator @Dan Murayama Scott
 91 R Evacuation @Franz Vohwinkel
 92 R Master of Etherium @Matt Cavotta
 93 R Minds Aglow @Yeong-Hao Han
@@ -129,7 +129,7 @@ ScryfallCode=C16
 120 R Blasphemous Act @Daarken
 121 R Breath of Fury @Kev Walker
 122 R Chaos Warp @Trevor Claxton
-123 M Daretti, Scrap Savant @Dan Scott
+123 M Daretti, Scrap Savant @Dan Murayama Scott
 124 R Dragon Mage @Matthew D. Wilson
 125 R Godo, Bandit Warlord @Paolo Parente
 126 U Grab the Reins @Michael Sutfin
@@ -159,7 +159,7 @@ ScryfallCode=C16
 150 R Forgotten Ancient @Mark Tedin
 151 U Gamekeeper @Scott Hampton
 152 R Hardened Scales @Mark Winters
-153 U Inspiring Call @Dan Scott
+153 U Inspiring Call @Dan Murayama Scott
 154 M Kalonian Hydra @Chris Rahn
 155 C Kodama's Reach @Heather Hudson
 156 R Lurking Predators @Mike Bierek
@@ -279,7 +279,7 @@ ScryfallCode=C16
 270 C Simic Signet @Mike Sass
 271 U Skullclamp @Daniel Ljunggren
 272 U Sol Ring @Mike Bierek
-273 R Solemn Simulacrum @Dan Scott
+273 R Solemn Simulacrum @Dan Murayama Scott
 274 M Soul of New Phyrexia @Daarken
 275 R Sunforger @Darrell Riche
 276 U Swiftfoot Boots @Svetlin Velinov
@@ -338,7 +338,7 @@ ScryfallCode=C16
 329 R Sunpetal Grove @Jason Chan
 330 C Swiftwater Cliffs @Eytan Zana
 331 U Temple of the False God @James Zapata
-332 C Terramorphic Expanse @Dan Scott
+332 C Terramorphic Expanse @Dan Murayama Scott
 333 C Thornwood Falls @Eytan Zana
 334 C Transguild Promenade @Noah Bradley
 335 R Underground River @Andrew Goldhawk

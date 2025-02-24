@@ -1,0 +1,16 @@
+Name:Grand Entryway
+ManaCost:1 W
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigToken | TriggerDescription$ When you unlock this door, create a 1/1 white Glimmer enchantment creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_e_glimmer | TokenOwner$ You
+AlternateMode:Split
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhen you unlock this door, create a 1/1 white Glimmer enchantment creature token.
+
+ALTERNATE
+
+Name:Elegant Rotunda
+ManaCost:2 W
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigPutCounter | TriggerDescription$ When you unlock this door, put a +1/+1 counter on each of up to two target creatures.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhen you unlock this door, put a +1/+1 counter on each of up to two target creatures.

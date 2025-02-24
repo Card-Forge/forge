@@ -1,0 +1,6 @@
+Name:Deluge of Doom
+ManaCost:2 B
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | SpellDescription$ All creatures get -X/-X until end of turn, where X is the number of card types among cards in your graveyard.
+SVar:X:Count$ValidGraveyard Card.YouOwn$CardTypes
+Oracle:All creatures get -X/-X until end of turn, where X is the number of card types among cards in your graveyard.

@@ -109,7 +109,7 @@ ScryfallCode=STA
 101 R Faithless Looting @Shiro Yayoi
 102 R Grapeshot @Hatori Kyoka
 103 M Increasing Vengeance @D-suzuki
-104 U Infuriate @Yangygan & Xiaji
+104 U Infuriate @Yangyang & Xiaji
 105 R Lightning Bolt @Ezoi
 106 M Mizzix's Mastery @Hiro Suda
 107 U Shock @Ryanroro

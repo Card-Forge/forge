@@ -1,0 +1,7 @@
+Name:Gift Horse
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results.
+SVar:TrigCrank:DB$ RollDice | ResultSVar$ Result | Sides$ 6 | Amount$ 2 | UseDifferenceBetweenRolls$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ r_1_1_goblin | TokenAmount$ Result
+Oracle:Whenever you crank Gift Horse, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results.

@@ -2,7 +2,7 @@ Name:Pendrell Flux
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | AITgts$ Card.cmcGE1 | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AITgts$ Card.cmcGE1 | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddTrigger$ TrigPhase | AddSVar$ TrigPendrellFlux | Description$ Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost."
 SVar:TrigPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPendrellFlux | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost.
 SVar:TrigPendrellFlux:DB$ Sacrifice | UnlessCost$ DefinedCost_Self | UnlessPayer$ You

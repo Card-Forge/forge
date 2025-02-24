@@ -1,12 +1,15 @@
 Name:Trash Bin
 ManaCost:no cost
 Types:Artifact Attraction
-Variant:A:Lights:2 6
-Variant:B:Lights:3 6
-Variant:C:Lights:4 6
-Variant:D:Lights:5 6
 K:Visit:TrigMill
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | SubAbility$ DBReturn | SpellDescription$ Mill two cards, then return a creature card from your graveyard to your hand.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn | AtRandom$ True | Hidden$ True
 DeckHas:Ability$Graveyard|Mill
 Oracle:Visit — Mill two cards, then return a card at random from your graveyard to your hand. (To mill a card, a player puts the top card of their library into their graveyard.)
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 6
+Variant:B:Lights:3 6
+Variant:C:Lights:4 6
+Variant:D:Lights:5 6

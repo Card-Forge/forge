@@ -8,6 +8,6 @@ SVar:TrigPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ La
 SVar:DBPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | CounterType$ EVERYTHING | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Land.counters_GE1_EVERYTHING | AddType$ AllBasicLandType & AllNonBasicLandType | Description$ Each land with an everything counter on it is every land type in addition to its other types.
 S:Mode$ Continuous | Affected$ Creature.nonLand+counters_GE1_EVERYTHING | AddAllCreatureTypes$ True | Description$ Each nonland creature with an everything counter on it is every creature type.
-DeckHas:Ability$Counters
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
 Oracle:Whenever Omo, Queen of Vesuva enters or attacks, put an everything counter on each of up to one target land and up to one target creature.\nEach land with an everything counter on it is every land type in addition to its other types.\nEach nonland creature with an everything counter on it is every creature type.

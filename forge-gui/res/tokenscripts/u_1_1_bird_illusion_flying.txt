@@ -1,7 +1,7 @@
 Name:Bird Illusion Token
 ManaCost:no cost
-Types:Creature Bird Illusion
 Colors:blue
+Types:Creature Bird Illusion
 PT:1/1
 K:Flying
 Oracle:Flying

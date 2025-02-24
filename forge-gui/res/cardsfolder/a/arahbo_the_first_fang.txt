@@ -1,0 +1,10 @@
+Name:Arahbo, the First Fang
+ManaCost:2 W
+Types:Legendary Creature Cat Avatar
+PT:2/2
+S:Mode$ Continuous | Affected$ Cat.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Cats you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Cat.!token+Other+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME or another nontoken Cat you control enters, create a 1/1 white Cat creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_cat
+DeckHas:Ability$Token
+DeckHints:Type$Cat
+Oracle:Other Cats you control get +1/+1.\nWhenever Arahbo or another nontoken Cat you control enters, create a 1/1 white Cat creature token.

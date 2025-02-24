@@ -3,7 +3,7 @@ ManaCost:R
 Types:Enchantment Aura
 K:Enchant creature you control
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
-A:SP$ Attach | Cost$ R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, you may sacrifice CARDNAME. If you do, destroy target artifact.
 SVar:TrigDestroy:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact
 Oracle:Enchant creature you control\nEnchanted creature gets +1/+1.\nWhenever enchanted creature deals combat damage to a player, you may sacrifice Flamespeaker's Will. If you do, destroy target artifact.

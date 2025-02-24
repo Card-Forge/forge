@@ -33,6 +33,7 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
@@ -43,8 +44,11 @@ import forge.item.IPaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -258,6 +262,21 @@ public class CardFactory {
                 final CardState original = card.getState(CardStateName.Original);
                 original.addNonManaAbilities(card.getCurrentState().getNonManaAbilities());
                 original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
+                for (Trigger t : card.getCurrentState().getTriggers()) {
+                    if (t.isIntrinsic()) {
+                        original.addTrigger(t);
+                    }
+                }
+                for (StaticAbility st : card.getCurrentState().getStaticAbilities()) {
+                    if (st.isIntrinsic()) {
+                        original.addStaticAbility(st);
+                    }
+                }
+                for (ReplacementEffect re : card.getCurrentState().getReplacementEffects()) {
+                    if (re.isIntrinsic()) {
+                        original.addReplacementEffect(re);
+                    }
+                }
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
             } else if (state != CardStateName.Original) {
                 CardFactoryUtil.setupKeywordedAbilities(card);
@@ -415,7 +434,11 @@ public class CardFactory {
         c.setAttractionLights(face.getAttractionLights());
 
         // SpellPermanent only for Original State
-        if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal || c.getCurrentStateName().toString().startsWith("Specialize")) {
+        if (c.getCurrentStateName() == CardStateName.Original ||
+                c.getCurrentStateName() == CardStateName.LeftSplit ||
+                c.getCurrentStateName() == CardStateName.RightSplit ||
+                c.getCurrentStateName() == CardStateName.Modal ||
+                c.getCurrentStateName().toString().startsWith("Specialize")) {
             if (c.isLand()) {
                 SpellAbility sa = new LandAbility(c);
                 sa.setCardState(c.getCurrentState());
@@ -445,7 +468,7 @@ public class CardFactory {
             to.setAdditionalAbility(e.getKey(), e.getValue().copy(host, p, lki, keepTextChanges));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
-            to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), input -> (AbilitySub) input.copy(host, p, lki, keepTextChanges)));
+            to.setAdditionalAbilityList(e.getKey(), e.getValue().stream().map(input -> (AbilitySub) input.copy(host, p, lki, keepTextChanges)).collect(Collectors.toList()));
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());
@@ -456,7 +479,7 @@ public class CardFactory {
 
         // do this after other abilities are copied
         if (p != null) {
-            to.setActivatingPlayer(p, lki);
+            to.setActivatingPlayer(p);
         }
     }
 
@@ -764,7 +787,7 @@ public class CardFactory {
 
             // remove some characteristic static abilities
             for (StaticAbility sta : state.getStaticAbilities()) {
-                if (!sta.hasParam("CharacteristicDefining")) {
+                if (!sta.isCharacteristicDefining()) {
                     continue;
                 }
 

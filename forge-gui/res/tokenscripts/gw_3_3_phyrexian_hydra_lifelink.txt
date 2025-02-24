@@ -1,7 +1,7 @@
 Name:Phyrexian Hydra Token
 ManaCost:no cost
-Types:Creature Phyrexian Hydra
 Colors:white,green
+Types:Creature Phyrexian Hydra
 PT:3/3
 K:Lifelink
 Oracle:Lifelink

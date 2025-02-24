@@ -1,0 +1,8 @@
+Name:Homunculus Horde
+ManaCost:3 U
+Types:Creature Homunculus
+PT:2/2
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever you draw your second card each turn, create a token that's a copy of this creature.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
+DeckHas:Ability$Token
+Oracle:Whenever you draw your second card each turn, create a token that's a copy of this creature.

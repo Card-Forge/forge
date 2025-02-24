@@ -144,7 +144,7 @@ A135 U Savage Lands @Vance Kovacs
 A136 U Seaside Citadel @Volkan Baǵa
 A137 U Selesnya Sanctuary @John Avon
 A138 U Simic Growth Chamber @John Avon
-A139 C Terramorphic Expanse @Dan Scott
+A139 C Terramorphic Expanse @Dan Murayama Scott
 A140 C Tranquil Thicket @Heather Hudson
 A141 U Treva's Ruins @Jerry Tiritilli
 A145 L Island @Ku Xueming

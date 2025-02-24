@@ -4,6 +4,6 @@ Types:Land Locus
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mill | Cost$ 3 T | NumCards$ X | ValidTgts$ Player | AILogic$ EndOfOppTurn | SpellDescription$ Target player mills a card for each Locus you control.
 SVar:X:Count$Valid Locus.YouCtrl
-DeckNeeds:Type$Locus
 DeckHas:Ability$Mill
+DeckNeeds:Type$Locus
 Oracle:{T}: Add {C}.\n{3}, {T}: Target player mills a card for each Locus you control.

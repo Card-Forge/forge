@@ -1,0 +1,6 @@
+Name:Withering Torment
+ManaCost:2 B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature or enchantment. You lose 2 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
+Oracle:Destroy target creature or enchantment. You lose 2 life.

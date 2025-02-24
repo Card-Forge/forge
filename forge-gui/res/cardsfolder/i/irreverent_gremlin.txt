@@ -1,0 +1,8 @@
+Name:Irreverent Gremlin
+ManaCost:1 R
+Types:Creature Gremlin
+PT:2/2
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerLE2+Other+YouCtrl | ResolvedLimit$ 1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another creature you control with power 2 or less enters, you may discard a card. If you do, draw a card. Do this only once each turn.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever another creature you control with power 2 or less enters, you may discard a card. If you do, draw a card. Do this only once each turn.

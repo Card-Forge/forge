@@ -3,5 +3,5 @@ ManaCost:4 R
 Types:Creature Ogre
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target land.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land
 Oracle:When Ogre Arsonist enters, destroy target land.

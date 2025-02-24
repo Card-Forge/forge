@@ -1,6 +1,6 @@
 Name:Kor Soldier Token
 ManaCost:no cost
-Types:Creature Kor Soldier
 Colors:white
+Types:Creature Kor Soldier
 PT:1/1
 Oracle:

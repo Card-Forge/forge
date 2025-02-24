@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Human Mercenary
 PT:3/4
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.Legendary+YouCtrl | Description$ CARDNAME has all activated abilities of all legendary creatures you control
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.Legendary+YouCtrl | Description$ CARDNAME has all activated abilities of all legendary creatures you control.
 DeckHints:Type$Legendary
 Oracle:Vigilance\nRobaran Mercenaries has all activated abilities of all legendary creatures you control.

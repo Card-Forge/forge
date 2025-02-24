@@ -1,0 +1,7 @@
+Name:Malevolent Chandelier
+ManaCost:6
+Types:Artifact Creature Construct
+PT:4/4
+K:Flying
+A:AB$ ChangeZone | Cost$ 2 | ValidTgts$ Card | TgtPrompt$ Select target card | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SorcerySpeed$ True | SpellDescription$ Put target card from a graveyard on the bottom of its owner's library. Activate only as a sorcery.
+Oracle:Flying\n{2}: Put target card from a graveyard on the bottom of its owner's library. Activate only as a sorcery.

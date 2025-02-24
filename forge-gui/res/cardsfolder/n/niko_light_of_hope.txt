@@ -1,0 +1,12 @@
+Name:Niko, Light of Hope
+ManaCost:2 W U
+Types:Legendary Creature Human Wizard
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two Shard tokens. (They're enchantments with "2, Sacrifice this enchantment: Scry 1, then draw a card.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_e_shard_draw | TokenOwner$ You
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Creature.nonLegendary+YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target nonlegendary creature you control | SubAbility$ DBClone | RememberLKI$ True | Imprint$ True | SpellDescription$ Exile target nonlegendary creature you control. Shards you control become copies of it until the beginning of the next end step. Return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:DBClone:DB$ Clone | Defined$ RememberedLKI | CloneTarget$ Valid Shard.YouCtrl | Duration$ UntilNextEndStep | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ ImprintedLKI | TriggerDescription$ Return exiled permanent to the battlefield. | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+Oracle:When Niko, Light of Hope enters, create two Shard tokens. (They're enchantments with "2, Sacrifice this enchantment: Scry 1, then draw a card.")\n{2}, {T}: Exile target nonlegendary creature you control. Shards you control become copies of it until the beginning of the next end step. Return it to the battlefield under its owner's control at the beginning of the next end step.

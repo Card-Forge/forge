@@ -1,0 +1,7 @@
+Name:House Cartographer
+Types:Creature Human Scout Survivor
+ManaCost:1 G
+PT:2/2
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigDigUntil | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, reveal cards from the top of your library until you reveal a land card. Put that card into your hand and the rest on the bottom of your library in a random order.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Card.Land | ValidDescription$ land | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | FoundDestination$ Hand
+Oracle:Survival — At the beginning of your second main phase, if House Cartographer is tapped, reveal cards from the top of your library until you reveal a land card. Put that card into your hand and the rest on the bottom of your library in a random order.

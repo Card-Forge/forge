@@ -3,7 +3,7 @@ package forge.game.zone;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -25,13 +25,16 @@ public enum ZoneType {
     PlanarDeck(true, "lblPlanarDeckZone"),
     AttractionDeck(true, "lblAttractionDeckZone"),
     Junkyard(false, "lblJunkyardZone"),
+    ContraptionDeck(true, "lblContraptionDeckZone"),
+    //Scrapyard is like the Junkyard but for contraptions; just going to recycle the Junkyard for this.
     Subgame(true, "lblSubgameZone"),
     // ExtraHand is used for Backup Plan for temporary extra hands
     ExtraHand(true, "lblHandZone"),
     None(true, "lblNoneZone");
 
-    public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command, Stack/*, Hand*/);
-    public static final List<ZoneType> PART_OF_COMMAND_ZONE = Arrays.asList(Command, SchemeDeck, PlanarDeck, AttractionDeck, Junkyard);
+    public static final EnumSet<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = EnumSet.of(Battlefield, Graveyard, Exile, Command, Stack/*, Hand*/);
+    public static final EnumSet<ZoneType> PART_OF_COMMAND_ZONE = EnumSet.of(Command, SchemeDeck, PlanarDeck, AttractionDeck, ContraptionDeck, Junkyard);
+    public static final EnumSet<ZoneType> DECK_ZONES = EnumSet.of(Library, SchemeDeck, PlanarDeck, AttractionDeck, ContraptionDeck);
 
     private final boolean holdsHiddenInfo;
     private final String zoneName;
@@ -57,6 +60,9 @@ public enum ZoneType {
     }
 
     public static List<ZoneType> listValueOf(final String values) {
+        if ("All".equals(values)) {
+            return List.of(Battlefield, Hand, Graveyard, Exile, Stack, Library, Command);
+        }
         final List<ZoneType> result = new ArrayList<>();
         for (final String s : values.split("[, ]+")) {
             ZoneType zt = ZoneType.smartValueOf(s);
@@ -77,6 +83,14 @@ public enum ZoneType {
 
     public boolean isPartOfCommandZone() {
         return PART_OF_COMMAND_ZONE.contains(this);
+    }
+
+    /**
+     * Indicates that this zone behaves as a deck - an ordered pile of face down cards
+     * such as the Library or Planar Deck.
+     */
+    public boolean isDeck() {
+        return DECK_ZONES.contains(this);
     }
 
     public String getTranslatedName() {

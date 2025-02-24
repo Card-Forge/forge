@@ -9,6 +9,6 @@ SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ BecomesTarget | Dur
 SVar:BecomesTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | ActivationLimit$ 1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever this creature becomes the target of a spell or ability, draw a card. This ability triggers only once each turn.
 SVar:TrigDraw:DB$ Draw
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Graveyard
 AI:RemoveDeck:Random
+DeckHas:Ability$Graveyard
 Oracle:Flash\nWhen Niambi, Beloved Protector enters, if you cast it, choose target nonlegendary creature card in your graveyard that was put there from the battlefield this turn. Return it to the battlefield. It perpetually gains "Whenever this creature becomes the target of a spell or ability, draw a card. This ability triggers only once each turn."

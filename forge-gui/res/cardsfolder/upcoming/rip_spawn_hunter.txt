@@ -1,8 +1,0 @@
-Name:Rip, Spawn Hunter
-Types:Legendary Creature Human Survivor
-ManaCost:2 G W
-PT:4/4
-T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, reveal the top X cards of your library, where X is its power. Put any number of creature and/or Vehicle cards with different powers from among them into your hand. Put the rest on the bottom of your library in a random order.
-SVar:TrigDig:DB$ Dig | DigNum$ X | AnyNumber$ True | WithDifferentPowers$ True | ChangeValid$ Creature,Vehicle | RestRandomOrder$ True | ForceRevealToController$ True
-SVar:X:Count$CardPower
-Oracle:Survival — At the beginning of your second main phase, if Rip, Spawn Hunter is tapped, reveal the top X cards of your library, where X is its power. Put any number of creature and/or Vehicle cards with different powers from among them into your hand. Put the rest on the bottom of your library in a random order.

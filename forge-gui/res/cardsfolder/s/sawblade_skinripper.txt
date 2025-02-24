@@ -1,0 +1,12 @@
+Name:Sawblade Skinripper
+ManaCost:1 B R
+Types:Creature Human Assassin
+PT:3/2
+K:Menace
+A:AB$ PutCounter | Cost$ 2 Sac<1/Creature.Other;Enchantment.Other/another creature or enchantment> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GT0 | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, if you sacrificed one or more permanents this turn, CARDNAME deals that much damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any
+SVar:X:PlayerCountPropertyYou$SacrificedThisTurn Permanent
+DeckHints:Ability$Investigate
+DeckHas:Ability$Investigate|Token
+Oracle:Menace\n{2}, Sacrifice another creature or enchantment: Put a +1/+1 counter on Sawblade Skinripper.\nAt the beginning of your end step, if you sacrificed one or more permanents this turn, Sawblade Skinripper deals that much damage to any target.

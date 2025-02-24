@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.CardTraitPredicates;
@@ -10,9 +9,9 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -28,6 +27,7 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +57,8 @@ public class EffectAi extends SpellAbilityAi {
                 for (Player opp : ai.getOpponents()) {
                     boolean worthHolding = false;
                     CardCollectionView oppCreatsLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield),
-                        Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.Presets.CREATURES));
-                    CardCollectionView oppCreatsLandsTapped = CardLists.filter(oppCreatsLands, CardPredicates.Presets.TAPPED);
+                            CardPredicates.LANDS.or(CardPredicates.CREATURES));
+                    CardCollectionView oppCreatsLandsTapped = CardLists.filter(oppCreatsLands, CardPredicates.TAPPED);
 
                     if (oppCreatsLandsTapped.size() >= 3 || oppCreatsLands.size() == oppCreatsLandsTapped.size()) {
                         worthHolding = true;
@@ -84,7 +84,7 @@ public class EffectAi extends SpellAbilityAi {
                 Player opp = ai.getStrongestOpponent();
                 List<Card> possibleAttackers = ai.getCreaturesInPlay();
                 List<Card> possibleBlockers = opp.getCreaturesInPlay();
-                possibleBlockers = CardLists.filter(possibleBlockers, Presets.UNTAPPED);
+                possibleBlockers = CardLists.filter(possibleBlockers, CardPredicates.UNTAPPED);
                 final Combat combat = game.getCombat();
                 int oppLife = opp.getLife();
                 int potentialDmg = 0;
@@ -287,7 +287,7 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("Burn")) {
                 // for DamageDeal sub-abilities (eg. Wild Slash, Skullcrack)
                 SpellAbility burn = sa.getSubAbility();
-                return SpellApiToAi.Converter.get(burn.getApi()).canPlayAIWithSubs(ai, burn);
+                return SpellApiToAi.Converter.get(burn).canPlayAIWithSubs(ai, burn);
             } else if (logic.equals("YawgmothsWill")) {
                 return SpecialCardAi.YawgmothsWill.consider(ai, sa);
             } else if (logic.startsWith("NeedCreatures")) {
@@ -333,12 +333,12 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("CantRegenerate")) {
                 if (sa.usesTargeting()) {
                     CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-                    list = CardLists.filter(list, CardPredicates.Presets.CAN_BE_DESTROYED, input -> {
+                    list = CardLists.filter(list, CardPredicates.CAN_BE_DESTROYED, input -> {
                         Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(input);
                         runParams.put(AbilityKey.Regeneration, true);
-                        List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
+                        List<ReplacementEffect> repDestroyList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
                         // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
-                        if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
+                        if (repDestroyList.isEmpty() || repDestroyList.stream().anyMatch(CardTraitPredicates.hasParam("Regeneration").negate())) {
                             return false;
                         }
 
@@ -367,9 +367,9 @@ public class EffectAi extends SpellAbilityAi {
 
                     Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(sa.getHostCard());
                     runParams.put(AbilityKey.Regeneration, true);
-                    List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
+                    List<ReplacementEffect> repDestroyList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
                     // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
-                    if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
+                    if (repDestroyList.isEmpty() || repDestroyList.stream().anyMatch(CardTraitPredicates.hasParam("Regeneration").negate())) {
                         return false;
                     }
 
@@ -638,5 +638,20 @@ public class EffectAi extends SpellAbilityAi {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final String aiLogic = sa.getParam("UnlessAI");
+        if ("WillAttack".equals(aiLogic)) {
+            // TODO use AiController::getPredictedCombat
+            AiAttackController aiAtk = new AiAttackController(payer);
+            Combat combat = new Combat(payer);
+            aiAtk.declareAttackers(combat);
+            if (combat.getAttackers().isEmpty()) {
+                return false;
+            }
+        }
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }

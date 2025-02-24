@@ -1,0 +1,8 @@
+Name:Midlife Upgrade
+ManaCost:3 W
+Types:Sorcery
+A:SP$ AssembleContraption | Cost$ 3 W Sac<X/Contraption> | CostDesc$ As an additional cost to cast this spell, sacrifice X Contraptions. | Amount$ Y | SpellDescription$ Assemble X plus one Contraptions.
+SVar:Y:Sacrificed$Amount/Plus.1
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, sacrifice X Contraptions.\nAssemble X plus one Contraptions. (To assemble a Contraption, put the top card of your Contraption deck face up onto one of your sprockets.)

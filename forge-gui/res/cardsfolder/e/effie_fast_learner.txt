@@ -1,0 +1,10 @@
+Name:Effie, Fast Learner
+ManaCost:1 G W
+Types:Legendary Creature Human Survivor
+PT:3/3
+K:Enlist
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Survival — At the beginning of your second main phase, if NICKNAME is tapped, put a +1/+1 counter on each tapped creature you control. Then seek a Survivor card with mana value less than or equal to the number of tapped creatures you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.tapped+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBSeek
+SVar:DBSeek:DB$ Seek | Type$ Card.Survivor+cmcLEX
+SVar:X:Count$Valid Creature.tapped+YouCtrl
+Oracle:Enlist\nSurvival — At the beginning of your second main phase, if Effie is tapped, put a +1/+1 counter on each tapped creature you control. Then seek a Survivor card with mana value less than or equal to the number of tapped creatures you control.

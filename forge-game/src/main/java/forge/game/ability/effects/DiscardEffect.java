@@ -23,10 +23,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 
 public class DiscardEffect extends SpellAbilityEffect {
 
@@ -166,14 +163,6 @@ public class DiscardEffect extends SpellAbilityEffect {
                         continue;
                     }
 
-                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-                }
-
-                if (mode.equals("NotRemembered")) {
-                    if (!p.canDiscardBy(sa, true)) {
-                        continue;
-                    }
-                    toBeDiscarded = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source, sa);
                     toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                 }
 

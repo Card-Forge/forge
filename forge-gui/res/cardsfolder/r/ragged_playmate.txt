@@ -1,0 +1,7 @@
+Name:Ragged Playmate
+ManaCost:1 R
+Types:Artifact Creature Toy
+PT:2/2
+A:AB$ Effect | Cost$ 1 T | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature with power 2 or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:{1}, {T}: Target creature with power 2 or less can't be blocked this turn.

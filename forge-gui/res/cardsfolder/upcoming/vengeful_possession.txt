@@ -1,7 +1,0 @@
-Name:Vengeful Possession
-ManaCost:2 R
-Types:Sorcery
-A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBDraw | SpellDescription$ Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. You may discard a card. If you do, draw a card.
-SVar:DBDraw:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You
-SVar:PlayMain1:OPPONENTCREATURES
-Oracle:Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. You may discard a card. If you do, draw a card.

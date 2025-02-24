@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/-5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Execute$ TrigCopyEquip | TriggerDescription$ Whenever a creature you control enters, create a token that's a copy of a random Equipment card with mana value less than that creature's mana value. Attach that Equipment to that creature.
-SVar:TrigCopyEquip:DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 1 | ValidSupportedCopy$ Equipment.cmcLTX | RandomCopied$ True | RandomNum$ 1 | AttachAfter$ True | AttachedTo$ TriggeredCard
+SVar:TrigCopyEquip:DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 1 | ValidSupportedCopy$ Equipment.cmcLTX | RandomCopied$ True | RandomNum$ 1 | AttachAfter$ True | AttachedTo$ TriggeredCardLKICopy
 SVar:X:TriggeredCard$CardManaCost
 Oracle:Hand +1, life -5\nWhenever a creature you control enters, create a token that's a copy of a random Equipment card with mana value less than that creature's mana value. Attach that Equipment to that creature.

@@ -3,7 +3,8 @@ ManaCost:3 U
 Types:Creature Spirit
 PT:4/4
 K:Flying
-K:UpkeepCost:Y:{1} for each card in your hand
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {1} for each card in your hand.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Y
 SVar:Y:Count$InYourHand
 AI:RemoveDeck:All
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Extravagant Spirit unless you pay {1} for each card in your hand.

@@ -1,9 +1,9 @@
 Name:Path of the Schemer
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Mill | NumCards$ 2 | Defined$ Player | SubAbility$ DBChangeZone | SpellDescription$ Each player mills two cards. Then you put a creature card from a graveyard onto the battlefield under your control.
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | Mandatory$ True | GainControl$ True | AnimateSubAbility$ Animate | SubAbility$ DBSpace | SelectPrompt$ Select a creature card to return to the battlefield | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Then you put a creature card from a graveyard onto the battlefield under your control.
-SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Phyrexian | Duration$ Permanent
+A:SP$ Mill | NumCards$ 2 | Defined$ Player | SubAbility$ DBChangeZone | SpellDescription$ Each player mills two cards.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | Mandatory$ True | GainControl$ True | StaticEffect$ Animate | SubAbility$ DBSpace | SelectPrompt$ Select a creature card in a graveyard | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Then you put a creature card from a graveyard onto the battlefield under your control. It's an artifact in addition to its other types.
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Artifact
 SVar:DBSpace:DB$ BlankLine | SubAbility$ DBVote | SpellDescription$ ,,,,,,
 SVar:DBVote:DB$ Vote | Defined$ Player | VoteType$ Planeswalk,Chaos | VotePlaneswalk$ DBPlaneswalk | VoteChaos$ DBChaos | Tied$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
 SVar:DBPlaneswalk:DB$ Planeswalk

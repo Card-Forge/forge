@@ -4,6 +4,6 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ W | RestrictValid$ Spell.Artifact,Activated.Artifact | SpellDescription$ Add {W}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.
 A:AB$ ChangeZone | Cost$ 2 W T Exile<1+/Artifact.Other+withTotalCMCEQX/other artifacts you control with total mana value X> | Announce$ X | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouOwn+cmcLEX | TgtPrompt$ Select target artifact card with mana value X or less | SorcerySpeed$ True | SpellDescription$ Return target artifact card with mana value X or less from your graveyard to the battlefield. Activate only as a sorcery.
 SVar:X:Count$xPaid
-DeckNeeds:Type$Artifact
 AI:RemoveDeck:All
+DeckNeeds:Type$Artifact
 Oracle:{T}: Add {W}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.\n{2}{W}, {T}, Exile one or more other artifacts you control with total mana value X: Return target artifact card with mana value X or less from your graveyard to the battlefield. Activate only as a sorcery.

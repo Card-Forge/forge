@@ -1,0 +1,10 @@
+Name:Mossborn Hydra
+ManaCost:2 G
+Types:Creature Elemental Hydra
+PT:0/0
+K:Trample
+K:etbCounter:P1P1:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDouble | TriggerDescription$ Landfall — Whenever a land you control enters, double the number of +1/+1 counters on this creature.
+SVar:TrigDouble:DB$ MultiplyCounter | Defined$ Self | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nThis creature enters with a +1/+1 counter on it.\nLandfall — Whenever a land you control enters, double the number of +1/+1 counters on this creature.

@@ -27,7 +27,7 @@ public class StartScene extends UIScene {
     private static StartScene object;
     Dialog exitDialog, backupDialog, zipDialog, unzipDialog;
     TextraButton saveButton, resumeButton, continueButton;
-    TypingLabel version = Controls.newTypingLabel("{GRADIENT}[%80]" + Forge.CURRENT_VERSION + "{ENDGRADIENT}");
+    TypingLabel version = Controls.newTypingLabel("{GRADIENT}[%80]v." + Forge.getDeviceAdapter().getVersionString() + "{ENDGRADIENT}");
 
 
     public StartScene() {

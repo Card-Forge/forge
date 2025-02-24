@@ -13,6 +13,6 @@ Name:Stomp
 ManaCost:1 R
 Types:Instant Adventure
 A:SP$ Effect | StaticAbilities$ STCantPrevent | AILogic$ Burn | SubAbility$ DBDamage | SpellDescription$ Damage can't be prevented this turn. CARDNAME deals 2 damage to any target.
-SVar:STCantPrevent:Mode$ CantPreventDamage | EffectZone$ Command | Description$ Damage can't be prevented.
+SVar:STCantPrevent:Mode$ CantPreventDamage | Description$ Damage can't be prevented.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | NoPrevention$ True
 Oracle:Damage can't be prevented this turn. Stomp deals 2 damage to any target.

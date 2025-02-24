@@ -4,6 +4,6 @@ Types:Creature Cat Soldier
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an enchantment you control enters, create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token.
 SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_cat | TokenAmount$ 1 | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Object$ TriggeredCard | Defined$ Remembered | Optional$ True | ConditionDefined$ TriggeredCard | ConditionPresent$ Aura | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBAttach:DB$ Attach | Object$ TriggeredCardLKICopy | Defined$ Remembered | Optional$ True | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Aura | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Whenever an enchantment you control enters, create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token.

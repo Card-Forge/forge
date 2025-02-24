@@ -72,7 +72,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                     validTypes.addAll(CardType.Constant.CREATURE_TYPES);
                     kindOfType = "Creature";
                 }
-                changedTypeWordOriginal = sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, validTypes, Lists.newArrayList());
+                changedTypeWordOriginal = sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, validTypes);
             } else {
                 changedTypeWordOriginal = changedTypeWordsArray[0];
             }
@@ -88,7 +88,8 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                     validTypes.addAll(CardType.Constant.CREATURE_TYPES);
                     kindOfType = "Creature";
                 }
-                changedTypeWordNew = sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, validTypes, forbiddenTypes);
+                validTypes.removeAll(forbiddenTypes);
+                changedTypeWordNew = sa.getActivatingPlayer().getController().chooseSomeType(kindOfType, sa, validTypes);
             } else {
                 changedTypeWordNew = changedTypeWordsArray[1];
             }

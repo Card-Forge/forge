@@ -1,0 +1,11 @@
+Name:Anthropede
+ManaCost:3 G
+Types:Creature Insect
+PT:3/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoice | TriggerDescription$ When CARDNAME enters, you may discard a card or pay {2}. When you do, destroy target Room.
+SVar:TrigChoice:DB$ GenericChoice | Choices$ PayDiscard,Pay2
+SVar:Pay2:DB$ ImmediateTrigger | UnlessCost$ 2 | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDestroy | SpellDescription$ pay {2}: When you do, destroy target Room.
+SVar:PayDiscard:DB$ ImmediateTrigger | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDestroy | SpellDescription$ discard a card: When you do, destroy target Room.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Room | TgtPrompt$ Select target Room
+Oracle:Reach\nWhen Anthropede enters, you may discard a card or pay {2}. When you do, destroy target Room.

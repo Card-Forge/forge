@@ -1,0 +1,8 @@
+Name:Haunted Screen
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Combo G U R | SpellDescription$ Add {G}, {U}, or {R}.
+A:AB$ PutCounter | Cost$ 7 | CounterType$ P1P1 | CounterNum$ 7 | SubAbility$ DBAnimate | GameActivationLimit$ 1 | SpellDescription$ Put seven +1/+1 counters on CARDNAME. It becomes a 0/0 Spirit creature in addition to its other types. Activate only once.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ 0 | Toughness$ 0 | Types$ Creature,Spirit | Duration$ Permanent
+Oracle:{T}: Add {W} or {B}.\n{T}, Pay 1 life: Add {G}, {U}, or {R}.\n{7}: Put seven +1/+1 counters on Haunted Screen. It becomes a 0/0 Spirit creature in addition to its other types. Activate only once.

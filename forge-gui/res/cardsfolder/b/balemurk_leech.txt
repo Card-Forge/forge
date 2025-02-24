@@ -1,0 +1,9 @@
+Name:Balemurk Leech
+ManaCost:1 B
+Types:Creature Leech
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, each opponent loses 1 life.
+T:Mode$ FullyUnlock | ValidCard$ Card.Room | ValidPlayer$ You | Secondary$ True | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+DeckNeeds:Type$Enchantment
+Oracle:Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, each opponent loses 1 life.

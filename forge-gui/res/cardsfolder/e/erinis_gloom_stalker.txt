@@ -6,6 +6,6 @@ K:Deathtouch
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME attacks, return target land card from your graveyard to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouOwn | TgtPrompt$ Select target land card
 K:Choose a Background
-DeckHas:Ability$Graveyard
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard
 Oracle:Deathtouch\nWhenever Erinis, Gloom Stalker attacks, return target land card from your graveyard to the battlefield.\nChoose a Background (You can have a Background as a second commander.)

@@ -1,0 +1,11 @@
+Name:Patchwork Beastie
+ManaCost:G
+Types:Artifact Creature Beast
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | Description$ Delirium — CARDNAME can't attack or block unless there are four or more card types among cards in your graveyard.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may mill a card. (You may put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You | Optional$ True
+SVar:X:Count$Delirium.0.1
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — Patchwork Beastie can't attack or block unless there are four or more card types among cards in your graveyard.\nAt the beginning of your upkeep, you may mill a card. (You may put the top card of your library into your graveyard.)

@@ -7,6 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is CARDNAME's power.
 SVar:X:Count$CardPower
-DeckNeeds:Type$Human
 DeckHas:Ability$Counters
+DeckNeeds:Type$Human
 Oracle:Vigilance\nWhenever another Human you control enters, put a +1/+1 counter on Heronblade Elite.\n{T}: Add X mana of any one color, where X is Heronblade Elite's power.

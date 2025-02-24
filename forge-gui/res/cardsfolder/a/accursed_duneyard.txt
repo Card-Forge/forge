@@ -1,0 +1,6 @@
+Name:Accursed Duneyard
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Regenerate | Cost$ 2 T | ValidTgts$ Shade,Skeleton,Specter,Spirit,Vampire,Wraith,Zombie | TgtPrompt$ Select target Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie | SpellDescription$ Regenerate target Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie. (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)
+Oracle:{T}: Add {C}.\n{2}, {T}: Regenerate target Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie. (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)

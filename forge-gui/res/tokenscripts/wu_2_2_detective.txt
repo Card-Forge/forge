@@ -1,6 +1,6 @@
 Name:Detective Token
 ManaCost:no cost
-Types:Creature Detective
 Colors:white,blue
+Types:Creature Detective
 PT:2/2
 Oracle:

@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You.descended | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if you descended this turn, put a +1/+1 counter on target creature you control. (You descended if a permanent card was put into your graveyard from anywhere.)
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterNum$ 1 | CounterType$ P1P1
-A:AB$ Token | Cost$ 5 B B Sac<1/CARDNAME> | TokenOwner$ You | TokenScript$ wb_4_3_vampire_demon_flying | TokenOwner$ You | SpellDescription$ Create a 4/3 white and black Vampire Demon creature token with flying.
+A:AB$ Token | Cost$ 5 B B Sac<1/CARDNAME> | TokenScript$ wb_4_3_vampire_demon_flying | TokenOwner$ You | SpellDescription$ Create a 4/3 white and black Vampire Demon creature token with flying.
 DeckHas:Ability$Sacrifice|Token|Counters & Type$Vampire|Demon
 DeckHints:Ability$Mill|Sacrifice
 Oracle:At the beginning of your end step, if you descended this turn, put a +1/+1 counter on target creature you control. (You descended if a permanent card was put into your graveyard from anywhere.)\n{5}{B}{B}, Sacrifice Canonized in Blood: Create a 4/3 white and black Vampire Demon creature token with flying.

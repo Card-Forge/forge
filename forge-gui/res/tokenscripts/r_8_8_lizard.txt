@@ -1,6 +1,6 @@
 Name:Lizard Token
 ManaCost:no cost
-Types:Creature Lizard
 Colors:red
+Types:Creature Lizard
 PT:8/8
 Oracle:

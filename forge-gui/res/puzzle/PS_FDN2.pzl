@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Foundations #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/12/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:2
+Difficulty:Mythic
+Description:You're under attack! It's your opponent's declare attackers step. Defend this attack and win next turn! Your opponent has a Bite Down in hand. (You know about this.) Ensure your solution accounts for all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p1
+activephase=COMBAT_DECLARE_ATTACKERS
+p0life=19
+p0hand=Take Up the Shield;Boros Charm;Candy Grapple
+p0battlefield=Elenda, Saint of Dusk;Urdnan, Dromoka Warrior|Counters:P1P1=1;Hero's Heirloom;Mountain|Tapped;Mountain;Scoured Barrens|Tapped;Scoured Barrens
+p0library=Opt
+p1life=17
+p1hand=Bite Down
+p1battlefield=Shroofus Sproutsire;T:g_1_1_saproling|Tapped|Attacking;T:g_1_1_saproling|Tapped|Attacking;Taurean Mauler|Tapped|Attacking|Counters:P1P1=2;Eager Trufflesnout|Tapped|Attacking;Gilded Lotus

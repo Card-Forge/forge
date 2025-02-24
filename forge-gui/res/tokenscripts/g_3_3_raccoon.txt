@@ -1,6 +1,6 @@
 Name:Raccoon Token
 ManaCost:no cost
+Colors:green
 Types:Creature Raccoon
 PT:3/3
-Colors:green
 Oracle:

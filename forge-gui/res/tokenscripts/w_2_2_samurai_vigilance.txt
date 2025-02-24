@@ -1,7 +1,7 @@
 Name:Samurai Token
 ManaCost:no cost
-Types:Creature Samurai
 Colors:white
+Types:Creature Samurai
 PT:2/2
 K:Vigilance
 Oracle:Vigilance

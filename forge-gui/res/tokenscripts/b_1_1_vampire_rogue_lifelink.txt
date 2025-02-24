@@ -1,7 +1,7 @@
 Name:Vampire Rogue Token
 ManaCost:no cost
-Types:Creature Vampire Rogue
 Colors:black
+Types:Creature Vampire Rogue
 PT:1/1
 K:Lifelink
 Oracle:Lifelink

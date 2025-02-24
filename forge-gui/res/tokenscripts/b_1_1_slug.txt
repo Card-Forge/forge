@@ -1,6 +1,6 @@
 Name:Slug Token
 ManaCost:no cost
-Types:Creature Slug
 Colors:black
+Types:Creature Slug
 PT:1/1
 Oracle:

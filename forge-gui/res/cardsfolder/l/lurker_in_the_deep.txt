@@ -1,0 +1,13 @@
+Name:Lurker in the Deep
+ManaCost:3 U U U
+Types:Enchantment Creature Fish Illusion
+PT:7/7
+K:Impending:4:2 U U
+T:Mode$ ChangesZone | Destination$ Battlefield | Origin$ Any | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ Whenever CARDNAME enters or attacks, seek a nonland card.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSeek | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, seek a nonland card.
+SVar:TrigSeek:DB$ Seek | Type$ Card.nonLand
+T:Mode$ SeekAll | PlayerTurn$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever you seek one or more cards during your turn, conjure a duplicate of each of those cards into your hand, then manifest those duplicates.
+SVar:TrigConjure:DB$ MakeCard | DefinedName$ TriggeredCards | RememberMade$ True | Zone$ Hand | Conjure$ True | SubAbility$ DBManifest
+SVar:DBManifest:DB$ Manifest | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Impending 4-{2}{U}{U}\nWhenever Lurker in the Deep enters or attacks, seek a nonland card.\nWhenever you seek one or more cards during your turn, conjure a duplicate of each of those cards into your hand, then manifest those duplicates.

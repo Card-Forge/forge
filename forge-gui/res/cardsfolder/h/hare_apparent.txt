@@ -1,0 +1,11 @@
+Name:Hare Apparent
+ManaCost:1 W
+Types:Creature Rabbit Noble
+PT:2/2
+K:A deck can have any number of cards named CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a number of 1/1 white Rabbit creature tokens equal to the number of other creatures you control named Hare Apparent.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_rabbit | TokenOwner$ You | AILogic$ Always
+SVar:X:Count$Valid Creature.namedHare Apparent+YouCtrl+Other
+SVar:PlayMain1:TRUE
+DeckNeeds:Name$Hare Apparent
+Oracle:When this creature enters, create a number of 1/1 white Rabbit creature tokens equal to the number of other creatures you control named Hare Apparent.\nA deck can have any number of cards named Hare Apparent.

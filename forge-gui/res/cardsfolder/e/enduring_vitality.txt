@@ -1,0 +1,11 @@
+Name:Enduring Vitality
+ManaCost:1 G G
+Types:Enchantment Creature Elk Glimmer
+PT:3/3
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddAbility$ AnyMana | Description$ Creatures you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+Creature | Execute$ DBReturn | TriggerDescription$ When CARDNAME dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | StaticEffect$ Animate
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Enchantment | RemoveCardTypes$ True
+Oracle:Creatures you control have "{T}: Add one mana of any color."\nWhen Enduring Vitality dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)

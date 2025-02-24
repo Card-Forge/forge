@@ -17,16 +17,8 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import forge.game.mana.*;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
@@ -34,8 +26,14 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
+import forge.game.mana.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -99,7 +97,7 @@ public class CostPayment extends ManaConversionMatrix {
             return true;
         }
 
-        cost = CostAdjustment.adjust(cost, ability);
+        cost = CostAdjustment.adjust(cost, ability, effect);
         return cost.canPay(ability, effect);
     }
 
@@ -111,13 +109,7 @@ public class CostPayment extends ManaConversionMatrix {
      * @return a boolean.
      */
     public final boolean isFullyPaid() {
-        for (final CostPart part : adjustedCost.getCostParts()) {
-            if (!this.paidCostParts.contains(part)) {
-                return false;
-            }
-        }
-
-        return true;
+        return paidCostParts.containsAll(adjustedCost.getCostParts());
     }
 
     /**
@@ -137,8 +129,13 @@ public class CostPayment extends ManaConversionMatrix {
     }
 
     public boolean payCost(final CostDecisionMakerBase decisionMaker) {
-        adjustedCost = CostAdjustment.adjust(cost, ability);
-        final List<CostPart> costParts = adjustedCost.getCostPartsWithZeroMana();
+        adjustedCost = CostAdjustment.adjust(cost, ability, decisionMaker.isEffect());
+        List<CostPart> costParts = adjustedCost.getCostPartsWithZeroMana();
+
+        if (adjustedCost.getCostParts().size() > 1) {
+            // if mana part is shown here it wouldn't include reductions, but that's just a minor inconvenience
+            costParts = decisionMaker.getPlayer().getController().orderCosts(costParts);
+        }
 
         final Game game = decisionMaker.getPlayer().getGame();
 
@@ -180,7 +177,7 @@ public class CostPayment extends ManaConversionMatrix {
 
         Map<CostPart, PaymentDecision> decisions = Maps.newHashMap();
         // for Trinisphere make sure to include Zero
-        List<CostPart> parts = CostAdjustment.adjust(cost, ability).getCostPartsWithZeroMana();
+        List<CostPart> parts = CostAdjustment.adjust(cost, ability, decisionMaker.isEffect()).getCostPartsWithZeroMana();
 
         // Set all of the decisions before attempting to pay anything
 

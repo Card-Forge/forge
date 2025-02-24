@@ -1,9 +1,9 @@
 package forge.game.ability.effects;
 
-
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
@@ -25,7 +25,6 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 public class AttachEffect extends SpellAbilityEffect {

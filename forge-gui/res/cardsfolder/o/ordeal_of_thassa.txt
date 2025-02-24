@@ -2,7 +2,7 @@ Name:Ordeal of Thassa
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | ConditionDefined$ TriggeredAttackerLKICopy | ConditionPresent$ Card.counters_GE3_P1P1

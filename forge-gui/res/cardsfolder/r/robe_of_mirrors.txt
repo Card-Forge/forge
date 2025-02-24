@@ -2,6 +2,6 @@ Name:Robe of Mirrors
 ManaCost:U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Description$ Enchanted creature has shroud. (It can't be the target of spells or abilities.)
 Oracle:Enchant creature (Target a creature as you cast this. This card enters attached to that creature.)\nEnchanted creature has shroud. (It can't be the target of spells or abilities.)

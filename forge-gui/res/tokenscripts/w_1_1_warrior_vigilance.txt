@@ -1,7 +1,7 @@
 Name:Warrior Token
 ManaCost:no cost
-Types:Creature Warrior
 Colors:white
+Types:Creature Warrior
 PT:1/1
 K:Vigilance
 Oracle:Vigilance

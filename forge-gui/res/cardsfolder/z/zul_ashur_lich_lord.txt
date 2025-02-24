@@ -1,0 +1,8 @@
+Name:Zul Ashur, Lich Lord
+ManaCost:1 B
+Types:Legendary Creature Zombie Warlock
+PT:2/2
+K:Ward:PayLife<2>
+A:AB$ Effect | Cost$ T | TgtZone$ Graveyard | ValidTgts$ Creature.Zombie+YouOwn | PumpZone$ Graveyard | TgtPrompt$ Select target Zombie creature card in your graveyard | RememberObjects$ Targeted | StaticAbilities$ Play | ExileOnMoved$ Graveyard | SpellDescription$ You may cast target Zombie creature card from your graveyard this turn.
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play remembered card.
+Oracle:Ward—Pay 2 life. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 2 life.)\n{T}: You may cast target Zombie creature card from your graveyard this turn.

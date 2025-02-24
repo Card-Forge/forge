@@ -1,0 +1,7 @@
+Name:Beastie Beatdown
+ManaCost:R G
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | Condition$ Delirium | AILogic$ Fight | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBDealDamage | SpellDescription$ Choose target creature you control and target creature an opponent controls. Delirium — If there are four or more card types among cards in your graveyard, put two +1/+1 counters on the creature you control. The creature you control deals damage equal to its power to the creature an opponent controls.
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+Oracle:Choose target creature you control and target creature an opponent controls.\nDelirium — If there are four or more card types among cards in your graveyard, put two +1/+1 counters on the creature you control.\nThe creature you control deals damage equal to its power to the creature an opponent controls.

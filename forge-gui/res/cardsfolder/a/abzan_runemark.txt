@@ -2,7 +2,7 @@ Name:Abzan Runemark
 ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Vigilance | IsPresent$ Permanent.Black+YouCtrl,Permanent.Green+YouCtrl | Description$ Enchanted creature has vigilance as long as you control a black or green permanent.
 SVar:BuffedBy:Permanent.Black,Permanent.Green

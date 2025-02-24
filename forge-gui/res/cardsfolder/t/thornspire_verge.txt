@@ -1,0 +1,6 @@
+Name:Thornspire Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ G | IsPresent$ Mountain.YouCtrl,Forest.YouCtrl | SpellDescription$ Add {G}. Activate only if you control a Mountain or a Forest.
+Oracle:{T}: Add {R}.\n{T}: Add {G}. Activate only if you control a Mountain or a Forest.

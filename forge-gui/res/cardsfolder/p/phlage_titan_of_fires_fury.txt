@@ -9,6 +9,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerZones$
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 K:Escape:R R W W ExileFromGrave<5/Card.Other/other>
-SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
 DeckHas:Ability$LifeGain
 Oracle:When Phlage enters, sacrifice it unless it escaped.\nWhenever Phlage enters or attacks, it deals 3 damage to any target and you gain 3 life.\nEscape—{R}{R}{W}{W}, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

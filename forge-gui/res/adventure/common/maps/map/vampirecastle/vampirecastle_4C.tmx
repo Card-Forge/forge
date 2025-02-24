@@ -27,7 +27,7 @@
   <object id="66" template="../../obj/door_up.tx" x="35.2402" y="285.749">
    <properties>
     <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4B.tmx"/>
-    <property name="teleportObjectId" value="67"/>
+    <property name="teleportObjectId" value="66"/>
    </properties>
   </object>
   <object id="75" template="../../obj/treasure.tx" x="784.167" y="63.75"/>

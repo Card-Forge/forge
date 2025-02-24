@@ -123,9 +123,21 @@ public class NewGameScene extends MenuScene {
             AdventureModes.Custom.setModes(custom);
         }
         String[] modeNames = new String[modes.size];
-        for (int i = 0; i < modes.size; i++)
+        int constructedIndex = -1;
+
+        for (int i = 0; i < modes.size; i++) {
             modeNames[i] = modes.get(i).getName();
+            if (modes.get(i) == AdventureModes.Constructed) {
+                constructedIndex = i;
+            }
+        }
+
         mode.setTextList(modeNames);
+        mode.setCurrentIndex(constructedIndex != -1 ? constructedIndex : 0);
+
+        AdventureModes initialMode = modes.get(mode.getCurrentIndex());
+        starterEdition.setVisible(initialMode == AdventureModes.Standard);
+        starterEditionLabel.setVisible(initialMode == AdventureModes.Standard);
 
         gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
                 Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
@@ -157,7 +169,7 @@ public class NewGameScene extends MenuScene {
             }
         });
         race.addListener(event -> NewGameScene.this.updateAvatar());
-        race.setTextList(HeroListData.getRaces());
+        race.setTextList(HeroListData.instance().getRaces());
         difficulty = ui.findActor("difficulty");
         difficultyHelp = ui.findActor("difficultyHelp");
 
@@ -254,7 +266,7 @@ public class NewGameScene extends MenuScene {
                     editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
-            WorldStage.getInstance().setDirectlyEnterPOI();
+            WorldStage.getInstance().enterSpawnPOI();
             if (AdventurePlayer.current().getQuests().stream().noneMatch(q -> q.getID() == 28)) {
                 AdventurePlayer.current().addQuest("28"); //Temporary link to Shandalar main questline
             }
@@ -282,7 +294,7 @@ public class NewGameScene extends MenuScene {
     }
 
     private boolean updateAvatar() {
-        avatarImage.setDrawable(new TextureRegionDrawable(HeroListData.getAvatar(race.getCurrentIndex(), gender.getCurrentIndex() != 0, avatarIndex)));
+        avatarImage.setDrawable(new TextureRegionDrawable(HeroListData.instance().getAvatar(race.getCurrentIndex(), gender.getCurrentIndex() != 0, avatarIndex)));
         return false;
     }
 

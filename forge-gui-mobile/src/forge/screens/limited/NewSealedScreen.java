@@ -48,8 +48,7 @@ public class NewSealedScreen extends LaunchScreen {
 
             FThreads.invokeInEdtLater(() -> {
                 DeckPreferences.setSealedDeck(sealed.getName());
-                Forge.openScreen(new FDeckEditor(EditorType.Sealed, sealed.getName(), false));
-                Forge.setBackScreen(new LoadSealedScreen(), false); //ensure pressing back goes to load sealed screen
+                Forge.openScreen(new FDeckEditor(EditorType.Sealed, sealed.getName(), false, e -> Forge.openScreen(new LoadSealedScreen(), false)));
             });
         });
     }

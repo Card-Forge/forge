@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 2 | SubAbility$ DBDestroy | ConditionPresent$ Permanent.Black+YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME deals 2 damage to target creature. If you control a black permanent, destroy the creature instead.
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionPresent$ Permanent.Black+YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a black permanent,
-DeckHints:Color$Black
 AI:RemoveDeck:Random
+DeckHints:Color$Black
 Oracle:Dark Temper deals 2 damage to target creature. If you control a black permanent, destroy the creature instead.

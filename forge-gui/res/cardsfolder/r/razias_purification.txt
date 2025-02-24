@@ -3,6 +3,6 @@ ManaCost:4 R W
 Types:Sorcery
 A:SP$ ChooseCard | Defined$ Player | Choices$ Permanent | ControlledByPlayer$ Chooser | Amount$ 3 | ChoiceTitle$ Choose three permanents to keep | Mandatory$ True | Reveal$ True | SubAbility$ DBSac | StackDescription$ SpellDescription | SpellDescription$ Each player chooses three permanents they control, then sacrifices the rest.
 SVar:DBSac:DB$ SacrificeAll | ValidCards$ Permanent.nonChosenCard
-DeckHas:Ability$Sacrifice
 AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
 Oracle:Each player chooses three permanents they control, then sacrifices the rest.

@@ -60,7 +60,7 @@ ScryfallCode=MH2
 46 C Hard Evidence @Yeong-Hao Han
 47 R Inevitable Betrayal @Franz Vohwinkel
 48 U Junk Winder @Campbell White
-49 C Lose Focus @Martina Fackova
+49 C Lose Focus @Martina Fačková
 50 U Lucid Dreams @Nils Hamm
 51 C Mental Journey @Jim Pavelec
 52 M Murktide Regent @Lucas Graciano
@@ -132,7 +132,7 @@ ScryfallCode=MH2
 118 R Calibrated Blast @Evan Shipard
 119 U Captain Ripley Vance @Mathias Kollros
 120 R Chef's Kiss @Iain McCaig
-121 U Dragon's Rage Channeler @Martina Fackova
+121 U Dragon's Rage Channeler @Martina Fačková
 122 C Faithless Salvaging @Bud Cook
 123 U Fast // Furious @Deruchenko Alexander
 124 U Flame Blitz @Colin Boyer
@@ -222,7 +222,7 @@ ScryfallCode=MH2
 208 R Priest of Fell Rites @Pauline Voss
 209 U Prophetic Titan @Slawomir Maniak
 210 U Rakdos Headliner @Ekaterina Burmak
-211 U Ravenous Squirrel @Dan Scott
+211 U Ravenous Squirrel @Dan Murayama Scott
 212 U Road // Ruin @Johann Bodin
 213 C Storm God's Oracle @Pauline Voss
 214 R Sythis, Harvest's Hand @Ryan Yee
@@ -303,7 +303,7 @@ ScryfallCode=MH2
 287 M Titania, Protector of Argoth @Magali Villeneuve
 288 U Yavimaya Elder @Matt Cavotta
 289 R Chainer, Nightmare Adept @Steve Prescott
-290 R Fire // Ice @Dan Scott
+290 R Fire // Ice @Dan Murayama Scott
 291 M Mirari's Wake @Volkan Baǵa
 292 R Shardless Agent @Izzy
 293 R Sterling Grove @Seb McKinnon
@@ -318,7 +318,7 @@ ScryfallCode=MH2
 302 U Mishra's Factory @Scott Chou
 303 R Riptide Laboratory @John Avon
 
-[alternate art]
+[borderless]
 304 M Dakkon, Shadow Slayer @Jake Murray
 305 M Geyadrone Dihada @Aleksi Briclot
 306 M Grist, the Hunger Tide @Victor Adame Minguez
@@ -392,14 +392,14 @@ ScryfallCode=MH2
 372 R Priest of Fell Rites @Pauline Voss
 373 U Prophetic Titan @Slawomir Maniak
 374 U Rakdos Headliner @Ekaterina Burmak
-375 U Ravenous Squirrel @Dan Scott
+375 U Ravenous Squirrel @Dan Murayama Scott
 376 U Road // Ruin @Johann Bodin
 377 R Sythis, Harvest's Hand @Ryan Yee
 378 R Dermotaxi @Mark Zug
 379 M Kaldra Compleat @Vincent Proce
 380 R Urza's Saga @Titus Lunter
 
-[alternate frame]
+[retro frame]
 381 C Blacksmith's Skill @Jason A. Engle
 382 C Marble Gargoyle @Drew Tucker
 383 R Out of Time @Tobias Kwan
@@ -503,7 +503,7 @@ ScryfallCode=MH2
 479 R Verdant Catacombs @Vance Kovacs
 480 R Yavimaya, Cradle of Growth @Sarah Finnigan
 
-[promo]
+[bundle]
 481 L Plains @Eric Peterson
 482 L Plains @Alan Pollack
 483 L Island @Donato Giancola
@@ -518,7 +518,7 @@ ScryfallCode=MH2
 [buy a box]
 491 M Sanctum Prelate @Michael C. Hayes
 
-[bundle]
+[promo]
 492 R Yusri, Fortune's Flame @Evyn Fong
 
 [Lands]
@@ -609,7 +609,7 @@ g_5_3_elemental
 r_1_1_goblin
 rw_4_4_a_golem
 u_0_3_crab
-u_1_1_bird_flying
+w_1_1_bird_flying
 
 [other]
 eternalize_timeless_dragon

@@ -41,7 +41,6 @@ public class SetInMotionEffect extends SpellAbilityEffect {
 
                 game.getAction().moveToCommand(controller.getActiveScheme(), sa);
 
-                // Run triggers
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Scheme, controller.getActiveScheme());
                 game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);

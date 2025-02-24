@@ -3,7 +3,6 @@ package forge.screens.bazaar;
 import javax.swing.SwingUtilities;
 
 import com.google.common.collect.Iterables;
-
 import forge.gamemodes.quest.bazaar.QuestBazaarManager;
 import forge.gui.framework.ICDoc;
 import forge.toolbox.FLabel;

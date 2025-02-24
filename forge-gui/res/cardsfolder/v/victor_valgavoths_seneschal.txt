@@ -1,0 +1,15 @@
+Name:Victor, Valgavoth's Seneschal
+ManaCost:1 W B
+Types:Legendary Creature Human Warlock
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, surveil 2 if this is the first time this ability has resolved this turn. If it's the second time, each opponent discards a card. If it's the third time, put a creature card from a graveyard onto the battlefield under your control.
+T:Mode$ FullyUnlock | ValidCard$ Card.Room | ValidPlayer$ You | Secondary$ True | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, surveil 2 if this is the first time this ability has resolved this turn. If it's the second time, each opponent discards a card. If it's the third time, put a creature card from a graveyard onto the battlefield under your control.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | Mandatory$ True | GainControl$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ3 | SelectPrompt$ Select a creature card in a graveyard | Hidden$ True | SubAbility$ DBLog
+SVar:DBLog:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1
+SVar:X:Number$1
+T:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1
+DeckNeeds:Type$Enchantment
+Oracle:Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, surveil 2 if this is the first time this ability has resolved this turn. If it's the second time, each opponent discards a card. If it's the third time, put a creature card from a graveyard onto the battlefield under your control.

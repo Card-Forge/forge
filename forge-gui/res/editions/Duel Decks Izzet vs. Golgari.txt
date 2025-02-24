@@ -10,7 +10,7 @@ ScryfallCode=DDJ
 2 C Kiln Fiend @Adi Granov
 3 C Goblin Electromancer @Svetlin Velinov
 4 U Izzet Guildmage @Jim Murray
-5 U Gelectrode @Dan Scott
+5 U Gelectrode @Dan Murayama Scott
 6 C Wee Dragonauts @Greg Staples
 7 C Steamcore Weird @Justin Norman
 8 U Shrewd Hatchling @Carl Frank
@@ -37,7 +37,7 @@ ScryfallCode=DDJ
 29 R Sphinx-Bone Wand @Franz Vohwinkel
 30 U Street Spasm @Raymond Swanland
 31 R Invoke the Firemind @Zoltan Boros & Gabor Szikszai
-32 U Fire // Ice @Dan Scott
+32 U Fire // Ice @Dan Murayama Scott
 33 C Forgotten Cave @Tony Szczudlo
 34 C Izzet Boilerworks @John Avon
 35 C Lonely Sandbar @Heather Hudson
@@ -79,7 +79,7 @@ ScryfallCode=DDJ
 71 U Putrefy @Clint Cearley
 72 C Feast or Famine @Chase Stone
 73 U Nightmare Void @Chippy
-74 U Vigor Mortis @Dan Scott
+74 U Vigor Mortis @Dan Murayama Scott
 75 U Grim Flowering @Adam Paquette
 76 R Twilight's Call @Mark Romanoski
 77 U Life // Death @Ryan Barger

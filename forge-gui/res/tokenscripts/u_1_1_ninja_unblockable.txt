@@ -1,7 +1,7 @@
 Name:Ninja Token
 ManaCost:no cost
-Types:Creature Ninja
 Colors:blue
+Types:Creature Ninja
 PT:1/1
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ This creature can't be blocked.
 Oracle:This creature can't be blocked.

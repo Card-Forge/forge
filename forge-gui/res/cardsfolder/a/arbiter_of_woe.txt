@@ -1,0 +1,14 @@
+Name:Arbiter of Woe
+ManaCost:4 B B
+Types:Creature Demon
+PT:5/4
+A:SP$ PermanentCreature | Cost$ 4 B B Sac<1/Creature>
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, each opponent discards a card and loses 2 life. You draw a card and gain 2 life.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Opponent | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE4
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFlying\nWhen this creature enters, each opponent discards a card and loses 2 life. You draw a card and gain 2 life.

@@ -2,6 +2,6 @@ Name:Shield of Duty and Reason
 ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection from green & Protection from blue | Description$ Enchanted creature has protection from green and from blue.
 Oracle:Enchant creature\nEnchanted creature has protection from green and from blue.

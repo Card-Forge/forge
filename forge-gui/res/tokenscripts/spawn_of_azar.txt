@@ -1,7 +1,7 @@
 Name:Spawn of Azar
 ManaCost:no cost
-Types:Creature Spawn
 Colors:black
+Types:Creature Spawn
 PT:*/*
 K:Landwalk:Swamp
 Oracle:Swampwalk

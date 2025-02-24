@@ -75,7 +75,7 @@ ScryfallCode=IKO
 61 U Ominous Seas @Vincent Proce
 62 C Phase Dolphin @Lie Setiawan
 63 U Pollywog Symbiote @Simon Dominic
-64 U Pouncing Shoreshark @Dan Scott
+64 U Pouncing Shoreshark @Dan Murayama Scott
 65 U Reconnaissance Mission @Johannes Voss
 66 R Sea-Dasher Octopus @Chris Seaman
 67 R Shark Typhoon @Caio Monteiro
@@ -123,7 +123,7 @@ ScryfallCode=IKO
 109 U Blitz of the Thunder-Raptor @Zack Stella
 110 C Cathartic Reunion @Jakub Kasper
 111 U Clash of Titans @Viktor Titov
-112 C Cloudpiercer @Dan Scott
+112 C Cloudpiercer @Dan Murayama Scott
 113 C Drannith Stinger @Denman Rooke
 114 R Everquill Phoenix @Lie Setiawan
 115 C Ferocious Tigorilla @Antonio José Manzanedo
@@ -164,7 +164,7 @@ ScryfallCode=IKO
 150 C Excavation Mole @Lars Grant-West
 151 U Exuberant Wolfbear @Jesper Ejsing
 152 C Fertilid @Nicholas Gregory
-153 C Flycatcher Giraffid @Dan Scott
+153 C Flycatcher Giraffid @Dan Murayama Scott
 154 C Fully Grown @Dmitry Burmak
 155 R Gemrazer @Svetlin Velinov
 156 U Glowstone Recluse @Yeong-Hao Han
@@ -178,7 +178,7 @@ ScryfallCode=IKO
 164 U Migration Path @Grzegorz Rutkowski
 165 C Migratory Greathorn @Filip Burburan
 166 U Monstrous Step @Chris Seaman
-167 C Mosscoat Goriak @Dan Scott
+167 C Mosscoat Goriak @Dan Murayama Scott
 168 R Mythos of Brokkos @Seb McKinnon
 169 C Plummet @Sidharth Chaturvedi
 170 C Ram Through @Zoltan Boros
@@ -236,7 +236,7 @@ ScryfallCode=IKO
 222 R Jegantha, the Wellspring @Chris Rahn
 223 U Jubilant Skybonder @Jesper Ejsing
 224 R Kaheera, the Orphanguard @Ryan Pancoast
-225 R Keruga, the Macrosage @Dan Scott
+225 R Keruga, the Macrosage @Dan Murayama Scott
 226 R Lurrus of the Dream-Den @Slawomir Maniak
 227 R Lutri, the Spellchaser @Lie Setiawan
 228 R Obosh, the Preypiercer @Daarken
@@ -374,7 +374,7 @@ ScryfallCode=IKO
 351 R Gyruda, Doom of Depths @Tyler Jacobson
 352 R Jegantha, the Wellspring @Chris Rahn
 353 R Kaheera, the Orphanguard @Ryan Pancoast
-354 R Keruga, the Macrosage @Dan Scott
+354 R Keruga, the Macrosage @Dan Murayama Scott
 355 R Lurrus of the Dream-Den @Slawomir Maniak
 356 R Lutri, the Spellchaser @Lie Setiawan
 357 R Obosh, the Preypiercer @Daarken
@@ -407,8 +407,8 @@ ScryfallCode=IKO
 382 U Sprite Dragon @Simon Dominic
 383 M Vadrok, Apex of Thunder @Johann Bodin
 384 R Gyruda, Doom of Depths @Jesper Ejsing
-385 C Mysterious Egg @ヨロイコウジ
-386 R Dirge Bat @羽山晃平
+385 C Mysterious Egg @Yoroikoji
+386 R Dirge Bat @Kohei Hayama
 387 R Crystalline Giant @Kotakan
 
 [rebalanced]

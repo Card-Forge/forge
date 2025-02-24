@@ -1,7 +1,7 @@
 Name:Mutant Token
 ManaCost:no cost
-Types:Creature Mutant
 Colors:green
+Types:Creature Mutant
 PT:3/3
 K:Deathtouch
 Oracle:Deathtouch

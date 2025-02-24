@@ -48,9 +48,14 @@ public class EffectData implements Serializable {
                 if(C != null)
                     startCards.add(C);
                 else {
-                    PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
-                    if (T != null) startCards.add(T);
-                    else System.err.print("Can not find card \"" + name + "\"\n");
+                    try {
+                        PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
+                        if (T != null) startCards.add(T);
+                        else System.err.print("Can not find card/token \"" + name + "\"\n");
+                    } catch (Exception e) {
+                        //if it's not found probably the item is using funny cards and the users setting disabled non legal cards
+                        System.err.print("Can not find card/token \"" + name + "\"\n");
+                    }
                 }
             }
         }
@@ -65,9 +70,14 @@ public class EffectData implements Serializable {
                 if(C != null)
                     startCardsInCommandZone.add(C);
                 else {
-                    PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
-                    if (T != null) startCardsInCommandZone.add(T);
-                    else System.err.print("Can not find card \"" + name + "\"\n");
+                    try {
+                        PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
+                        if (T != null) startCardsInCommandZone.add(T);
+                        else System.err.print("Can not find card/token \"" + name + "\"\n");
+                    } catch (Exception e) {
+                        //if it's not found probably the item is using funny cards and the users setting disabled non legal cards
+                        System.err.print("Can not find card/token \"" + name + "\"\n");
+                    }
                 }
             }
         }

@@ -3,6 +3,6 @@ ManaCost:G G
 Types:Enchantment Aura
 K:Enchant modified creature
 K:Umbra armor
-A:SP$ Attach | Cost$ G G | ValidTgts$ Creature.modified | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature.modified | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Vigilance & Reach | Description$ Enchanted creature gets +3/+3 and has vigilance and reach.
 Oracle:Enchant modified creature\nEnchanted creature gets +3/+3 and has vigilance and reach.\nUmbra armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)

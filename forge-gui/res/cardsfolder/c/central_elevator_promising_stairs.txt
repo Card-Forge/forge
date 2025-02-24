@@ -1,0 +1,18 @@
+Name:Central Elevator
+ManaCost:3 U
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigSearch | TriggerDescription$ When you unlock this door, search your library for a Room card that doesn't have the same name as a Room you control, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | ChangeType$ Room.doesNotShareNameWith Room.YouCtrl | ChangeNum$ 1 | Origin$ Library | Destination$ Hand
+AlternateMode:Split
+Oracle:When you unlock this door, search your library for a Room card that doesn't have the same name as a Room you control, reveal it, put it into your hand, then shuffle.
+
+ALTERNATE
+
+Name:Promising Stairs
+ManaCost:2 U
+Types:Enchantment Room
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1. You win the game if there are eight or more different names among unlocked doors of Rooms you control.
+SVar:TrigSurveil:DB$ Surveil | SubAbility$ DBWin
+SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ RoomsUnlocked | ConditionSVarCompare$ GE8
+SVar:RoomsUnlocked:Count$DistinctUnlockedDoors Card.Room+YouCtrl
+Oracle:At the beginning of your upkeep, surveil 1. You win the game if there are eight or more different names among unlocked doors of Rooms you control.

@@ -7,6 +7,6 @@ SVar:TrigVote:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Profit
 SVar:DBVoteProfit:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBVoteSecurity
 SVar:DBVoteSecurity:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ VoteNumSecurity
 SVar:X:SVar$VoteNumProfit/Times.2
-DeckHas:Ability$Counters|Token & Type$Treasure|Artifact
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters|Token & Type$Treasure|Artifact
 Oracle:Whenever Emissary Green attacks, starting with you, each player votes for profit or security. You create a number of Treasure tokens equal to twice the number of profit votes. Put a number of +1/+1 counters on each creature you control equal to the number of security votes.

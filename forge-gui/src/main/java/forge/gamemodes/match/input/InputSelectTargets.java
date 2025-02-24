@@ -1,18 +1,8 @@
 package forge.gamemodes.match.input;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import java.util.List;
-import java.util.Set;
-
-import org.apache.commons.lang3.ObjectUtils;
-
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
@@ -30,6 +20,13 @@ import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.util.*;
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
@@ -90,7 +87,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             // sb.append(sa.getStackDescription().replace("(Targeting ERROR)", "")).append("\n").append(tgt.getVTSelection());
             // Apparently <b>...</b> tags do not work in mobile Forge, so don't include them (for now)
             sb.append(sa.getHostCard().toString()).append(" - ");
-            sb.append(sa.toString()).append("\n");
+            String abilityDescript = sa.toString();
+            if(abilityDescript.isEmpty()) //If this is a sub-ability with no description, inherit from the parent.
+                abilityDescript = sa.getRootAbility().toString();
+            sb.append(abilityDescript).append("\n");
             if(!ForgeConstants.isGdxPortLandscape)
                 sb.append("\n");
             sb.append(tgt.getVTSelection());
@@ -329,7 +329,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
             return;
         }
-        if (filter != null && !filter.apply(player)) {
+        if (filter != null && !filter.test(player)) {
             showMessage(sa.getHostCard() + " - Cannot target this player (Hexproof? Protection? Restrictions?).");
             return;
         }
@@ -396,7 +396,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (ge instanceof Card) {
             getController().getGui().setUsedToPay(CardView.get((Card) ge), false);
             // try to get last selected card
-            lastTarget = Iterables.getLast(Iterables.filter(targets, Card.class), null);
+            lastTarget = Iterables.getLast(IterableUtil.filter(targets, Card.class), null);
         }
         else if (ge instanceof Player) {
             getController().getGui().setHighlighted(PlayerView.get((Player) ge), false);

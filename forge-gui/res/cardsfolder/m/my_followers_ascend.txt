@@ -1,0 +1,11 @@
+Name:My Followers Ascend
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, put five +1/+1 counters on a creature you control and it gains flying and vigilance until end of turn. If you control no creatures, instead create a 4/4 colorless Scarecrow artifact creature token with vigilance.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ DBToken | FalseSubAbility$ DBPutCounter
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_4_4_a_scarecrow_vigilance | TokenOwner$ You
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 5 | RememberChosen$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Flying & Vigilance | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:When you set this scheme in motion, put five +1/+1 counters on a creature you control and it gains flying and vigilance until end of turn. If you control no creatures, instead create a 4/4 colorless Scarecrow artifact creature token with vigilance.

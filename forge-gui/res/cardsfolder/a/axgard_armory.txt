@@ -6,6 +6,6 @@ SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ ChangeZone | Cost$ 1 R R W T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ EACH Aura & Equipment | StackDescription$ {p:You} searches their library for an Aura card and/or an Equipment card, reveals them, puts them into their hand, then shuffles their library. | SpellDescription$ Search your library for an Aura card and/or an Equipment card, reveal them, put them into your hand, then shuffle.
 AI:RemoveDeck:Random
-DeckNeeds:Type$Aura|Equipment
 DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Aura|Equipment
 Oracle:Axgard Armory enters tapped.\n{T}: Add {W}.\n{1}{R}{R}{W}, {T}, Sacrifice Axgard Armory: Search your library for an Aura card and/or an Equipment card, reveal them, put them into your hand, then shuffle.

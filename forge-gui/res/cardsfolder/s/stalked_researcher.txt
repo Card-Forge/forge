@@ -1,0 +1,11 @@
+Name:Stalked Researcher
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:3/3
+K:Defender
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, CARDNAME can attack this turn as though it didn't have defender.
+T:Mode$ FullyUnlock | ValidCard$ Card.Room | ValidPlayer$ You | Secondary$ True | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, CARDNAME can attack this turn as though it didn't have defender.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ CanAttack | ForgetOnMoved$ Battlefield
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
+DeckNeeds:Type$Enchantment
+Oracle:Defender\nEerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, Stalker Researcher can attack this turn as though it didn't have defender.

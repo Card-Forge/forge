@@ -1,0 +1,9 @@
+Name:Scrawling Crawler
+ManaCost:3
+Types:Artifact Creature Phyrexian Construct
+PT:3/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, each player draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ Player | NumCards$ 1
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent draws a card, that player loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 1
+Oracle:At the beginning of your upkeep, each player draws a card.\nWhenever an opponent draws a card, that player loses 1 life.

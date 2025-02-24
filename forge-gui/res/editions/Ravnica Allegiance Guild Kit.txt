@@ -94,7 +94,7 @@ ScryfallCode=GK2
 86 R Wurmweaver Coil @Mitch Cotie
 87 R Borborygmos @Todd Lockwood
 88 U Burning-Tree Emissary @Izzy
-89 R Burning-Tree Shaman @Dan Scott
+89 R Burning-Tree Shaman @Dan Murayama Scott
 90 U Ghor-Clan Rampager @Charles Urbach
 91 R Giant Solifuge @Pat Lee
 92 U Gruul Charm @Zoltan Boros

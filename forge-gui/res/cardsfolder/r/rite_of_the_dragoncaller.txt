@@ -1,0 +1,8 @@
+Name:Rite of the Dragoncaller
+ManaCost:4 R R
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 5/5 red Dragon creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | TokenOwner$ You
+DeckHas:Ability$Token
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, create a 5/5 red Dragon creature token with flying.

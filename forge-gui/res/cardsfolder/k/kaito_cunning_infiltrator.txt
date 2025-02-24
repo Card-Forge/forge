@@ -1,0 +1,16 @@
+Name:Kaito, Cunning Infiltrator
+ManaCost:1 U U
+Types:Legendary Planeswalker Kaito
+Loyalty:3
+T:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigLoyalty | TriggerDescription$ Whenever a creature you control deals combat damage to a player, put a loyalty counter on NICKNAME.
+SVar:TrigLoyalty:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ 1
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | StaticAbilities$ Unblockable | SubAbility$ DBDraw | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StackDescription$ SpellDescription | SpellDescription$ Up to one target creature you control can't be blocked this turn. Draw a card, then discard a card.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ u_2_1_ninja | SpellDescription$ Create a 2/1 blue Ninja creature token.
+A:AB$ Effect | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | Stackable$ False | Name$ Emblem — Kaito, Cunning Infiltrator | Image$ emblem_kaito_cunning_infiltrator | Triggers$ CastTrig | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever a player casts a spell, you create a 2/1 blue Ninja creature token."
+SVar:CastTrig:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever a player casts a spell, you create a 2/1 blue Ninja creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ u_2_1_ninja
+DeckHas:Ability$Token & Type$Ninja
+Oracle:Whenever a creature you control deals combat damage to a player, put a loyalty counter on Kaito.\n[+1]: Up to one target creature you control can't be blocked this turn. Draw a card, then discard a card.\n[-2]: Create a 2/1 blue Ninja creature token.\n[-9]: You get an emblem with "Whenever a player casts a spell, you create a 2/1 blue Ninja creature token."

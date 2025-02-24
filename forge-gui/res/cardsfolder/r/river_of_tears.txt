@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ U | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ ManaB | SpellDescription$ Add {U}. If you played a land this turn, add {B} instead.
 SVar:ManaB:DB$ Mana | Produced$ B | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:PlayerCountPropertyYou$LandsPlayed
 AI:RemoveDeck:Random
 DeckHints:Color$Blue|Black
-SVar:X:PlayerCountPropertyYou$LandsPlayed
 Oracle:{T}: Add {U}. If you played a land this turn, add {B} instead.

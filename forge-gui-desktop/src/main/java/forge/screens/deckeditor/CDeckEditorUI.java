@@ -184,6 +184,10 @@ public enum CDeckEditorUI implements ICDoc {
 
     @SuppressWarnings("unchecked")
     public void addSelectedCards(final boolean toAlternate, final int number) {
+        if (childController == null || childController.getCatalogManager() == null) {
+            return;
+        }
+
         moveSelectedItems(childController.getCatalogManager(), new _MoveAction() {
             @Override public <T extends InventoryItem> void move(final Iterable<Entry<T, Integer>> items) {
                 ((ACEditorBase<T, ?>)childController).addItems(items, toAlternate);

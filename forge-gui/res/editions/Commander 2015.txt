@@ -35,7 +35,7 @@ ScryfallCode=C15
 26 R Fiery Confluence @Kieran Yanner
 27 R Magus of the Wheel @Carl Frank
 28 U Meteor Blast @Mike Sass
-29 R Mizzix's Mastery @Dan Scott
+29 R Mizzix's Mastery @Dan Murayama Scott
 30 U Rite of the Raging Storm @Svetlin Velinov
 31 U Warchief Giant @Slawomir Maniak
 32 R Arachnogenesis @Johannes Voss
@@ -79,7 +79,7 @@ ScryfallCode=C15
 70 U Ghostblade Eidolon @Ryan Yee
 71 R Jareth, Leonine Titan @Daren Bader
 72 R Karmic Justice @Ray Lago
-73 C Kor Sanctifiers @Dan Scott
+73 C Kor Sanctifiers @Dan Murayama Scott
 74 R Marshal's Anthem @Matt Stewart
 75 R Mesa Enchantress @Randy Gallegos
 76 U Monk Idealist @Daren Bader
@@ -105,7 +105,7 @@ ScryfallCode=C15
 96 R Lone Revenant @Jaime Jones
 97 U Mulldrifter @Eric Fortune
 98 U Mystic Retrieval @Scott Chou
-99 C Ninja of the Deep Hours @Dan Scott
+99 C Ninja of the Deep Hours @Dan Murayama Scott
 100 U Plaxmanta @Alan Pollack
 101 C Preordain @Svetlin Velinov
 102 U Rapid Hybridization @Jack Wang
@@ -151,7 +151,7 @@ ScryfallCode=C15
 142 R Borderland Behemoth @Jesper Ejsing
 143 U Breath of Darigaaz @Greg Hildebrandt & Tim Hildebrandt
 144 R Chain Reaction @Trevor Claxton
-145 R Charmbreaker Devils @Dan Scott
+145 R Charmbreaker Devils @Dan Murayama Scott
 146 M Comet Storm @Jung Park
 147 U Curse of the Nightly Hunt @Daarken
 148 R Desolation Giant @Alan Pollack
@@ -222,9 +222,9 @@ ScryfallCode=C15
 213 C Coiling Oracle @Mark Zug
 214 R Counterflux @Scott M. Fischer
 215 R Death Grasp @Raymond Swanland
-216 M Epic Experiment @Dan Scott
+216 M Epic Experiment @Dan Murayama Scott
 217 R Etherium-Horn Sorcerer @Franz Vohwinkel
-218 R Firemind's Foresight @Dan Scott
+218 R Firemind's Foresight @Dan Murayama Scott
 219 M Gisela, Blade of Goldnight @Jason Chan
 220 C Goblin Electromancer @Svetlin Velinov
 221 U Golgari Charm @Zoltan Boros
@@ -245,7 +245,7 @@ ScryfallCode=C15
 236 U Trygon Predator @Jack Wang
 237 U Underworld Coinsmith @Mark Winters
 238 R Vulturous Zombie @Greg Staples
-239 R Biomantic Mastery @Dan Scott
+239 R Biomantic Mastery @Dan Murayama Scott
 240 R Call the Skybreaker @Randy Gallegos
 241 R Cold-Eyed Selkie @Jaime Jones
 242 C Snakeform @Jim Nelson
@@ -275,10 +275,10 @@ ScryfallCode=C15
 266 C Simic Signet @Mike Sass
 267 U Skullclamp @Daniel Ljunggren
 268 U Sol Ring @Mike Bierek
-269 R Solemn Simulacrum @Dan Scott
-270 R Staff of Nin @Dan Scott
+269 R Solemn Simulacrum @Dan Murayama Scott
+270 R Staff of Nin @Dan Murayama Scott
 271 U Swiftfoot Boots @Svetlin Velinov
-272 R Sword of Vengeance @Dan Scott
+272 R Sword of Vengeance @Dan Murayama Scott
 273 R Urza's Incubator @Pete Venters
 274 C Wayfarer's Bauble @Darrell Riche
 275 U Worn Powerstone @Henry G. Higginbotham
@@ -320,7 +320,7 @@ ScryfallCode=C15
 311 U Tainted Field @Don Hazeltine
 312 U Tainted Wood @Rob Alexander
 313 U Temple of the False God @Brian Snõddy
-314 C Terramorphic Expanse @Dan Scott
+314 C Terramorphic Expanse @Dan Murayama Scott
 315 C Thornwood Falls @Eytan Zana
 316 U Vivid Crag @Martina Pilcerova
 317 U Vivid Creek @Fred Fields

@@ -1,7 +1,7 @@
 Name:Knight Token
 ManaCost:no cost
-Types:Creature Knight
 Colors:black
+Types:Creature Knight
 PT:2/2
 K:Flanking
 K:Protection from white

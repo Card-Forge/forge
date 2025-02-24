@@ -2,8 +2,9 @@ Name:Thirst
 ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant creature
-K:UpkeepCost:U
-A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ KeepTapped
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {U}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ U
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted

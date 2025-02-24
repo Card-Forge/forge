@@ -1,24 +1,6 @@
 package forge.gamemodes.match;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import forge.gui.control.PlaybackSpeed;
-import forge.trackable.TrackableCollection;
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
+import com.google.common.collect.*;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -28,6 +10,7 @@ import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
 import forge.interfaces.IGameController;
@@ -36,8 +19,13 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
+import java.util.*;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;
@@ -748,12 +736,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public <T> List<T> many(final String title, final String topCaption, final int min, final int max, final List<T> sourceChoices, final CardView c) {
+        return many(title, topCaption, min, max, sourceChoices, null, c);
+    }
+
+    @Override
+    public <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, List<T> destChoices, CardView c) {
         if (max == 1) {
             return getChoices(title, min, max, sourceChoices);
         }
         final int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         final int m1 = max >= 0 ? sourceChoices.size() - max : -1;
-        return order(title, topCaption, m1, m2, sourceChoices, null, c, false);
+        return order(title, topCaption, m1, m2, sourceChoices, destChoices, c, false);
     }
 
     @Override
@@ -852,6 +845,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             awaitNextInputTimer = null;
         }
         daytime = null;
+    }
+
+    public void updateDependencies() {        
     }
     // End of Choice code
 }

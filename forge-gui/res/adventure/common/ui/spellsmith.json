@@ -170,11 +170,33 @@
       "width": 90,
       "height": 20
     },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "accept",
+      "text": "tr(lblTake)",
+      "binding": "Use",
+      "x": 343,
+      "y": 173,
+      "width": 60,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "decline",
+      "text": "tr(lblRefund)",
+      "binding": "Back",
+      "x": 405,
+      "y": 173,
+      "width": 60,
+      "height": 20
+    },
 	{
       "type": "Label",
       "name": "poolSize", 
       "x": 360,
-      "y": 180,
+      "y": 192,
       "width": 90,
       "height": 20
     },

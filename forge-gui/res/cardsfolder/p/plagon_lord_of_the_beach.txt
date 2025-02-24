@@ -1,0 +1,10 @@
+Name:Plagon, Lord of the Beach
+ManaCost:2 U
+Types:Legendary Creature Starfish Wizard
+PT:0/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card for each creature you control with toughness greater than its power.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+A:AB$ Effect | Cost$ WU | ValidTgts$ Creature.YouCtrl | RememberObjects$ Targeted | StaticAbilities$ CombatDamageToughness | ForgetOnMoved$ Battlefield | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control assigns combat damage equal to its toughness rather than its power this turn.
+SVar:CombatDamageToughness:Mode$ CombatDamageToughness | ValidCard$ Card.IsRemembered | Description$ This creature assigns combat damage equal to its toughness rather than its power.
+SVar:X:Count$Valid Creature.YouCtrl+powerLTtoughness
+Oracle:When Plagon, Lord of the Beach enters, draw a card for each creature you control with toughness greater than its power.\n{W/U}: Target creature you control assigns combat damage equal to its toughness rather than its power this turn.

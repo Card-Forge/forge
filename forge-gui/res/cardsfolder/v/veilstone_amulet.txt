@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn.
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ CantTarget
-SVar:CantTarget:Mode$ CantTarget | EffectZone$ Command | ValidCard$ Creature.YouCtrl | Activator$ Opponent | Description$ Creatures you control can't be the targets of spells or abilities your opponents control.
+SVar:CantTarget:Mode$ CantTarget | ValidCard$ Creature.YouCtrl | Activator$ Opponent | Description$ Creatures you control can't be the targets of spells or abilities your opponents control.
 SVar:BuffedBy:Card
 AI:RemoveDeck:Random
 Oracle:Whenever you cast a spell, creatures you control can't be the targets of spells or abilities your opponents control this turn.

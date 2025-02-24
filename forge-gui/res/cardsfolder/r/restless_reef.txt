@@ -7,6 +7,6 @@ A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
 A:AB$ Animate | Cost$ 2 U B | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Shark | Colors$ Blue,Black | OverwriteColors$ True | Keywords$ Deathtouch | SpellDescription$ CARDNAME becomes a 4/4 blue and black Shark creature with deathtouch until end of turn. It's still a land.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, target player mills 4 cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player
-DeckHas:Ability$Mill|Graveyard & Type$Shark & Color$Blue|Black
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Mill|Graveyard & Type$Shark & Color$Blue|Black
 Oracle:Restless Reef enters tapped.\n{T}: Add {U} or {B}.\n{2}{U}{B}: Restless Reef becomes a 4/4 blue and black Shark creature with deathtouch until end of turn. It's still a land.\nWhenever Restless Reef attacks, target player mills 4 cards.

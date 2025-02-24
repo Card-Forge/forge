@@ -2,7 +2,7 @@ Name:Territorial Kavu
 ManaCost:R G
 Types:Creature Kavu
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Domain — CARDNAME's power and toughness are each equal to the number of basic land types among lands you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Domain — CARDNAME's power and toughness are each equal to the number of basic land types among lands you control.
 SVar:X:Count$Domain
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME attacks, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBDiscard,DBExile

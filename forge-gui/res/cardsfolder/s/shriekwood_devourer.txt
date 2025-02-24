@@ -1,0 +1,9 @@
+Name:Shriekwood Devourer
+ManaCost:5 G G
+Types:Creature Treefolk
+PT:7/5
+K:Trample
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you attack with one or more creatures, untap up to X lands, where X is the greatest power among those creatures.
+SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ X
+SVar:X:TriggerObjectsAttackers$GreatestPower
+Oracle:Trample\nWhenever you attack with one or more creatures, untap up to X lands, where X is the greatest power among those creatures.

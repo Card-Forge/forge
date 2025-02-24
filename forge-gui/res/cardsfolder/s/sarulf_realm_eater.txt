@@ -10,6 +10,6 @@ SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exil
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.P1P1
 SVar:Y:Count$RememberedNumber
-DeckHas:Ability$Counters
 AI:RemoveDeck:All
+DeckHas:Ability$Counters
 Oracle:Whenever a permanent an opponent controls is put into a graveyard from the battlefield, put a +1/+1 counter on Sarulf, Realm Eater.\nAt the beginning of your upkeep, if Sarulf has one or more +1/+1 counters on it, you may remove all of them. If you do, exile each other nonland permanent with mana value less than or equal to the number of counters removed this way.

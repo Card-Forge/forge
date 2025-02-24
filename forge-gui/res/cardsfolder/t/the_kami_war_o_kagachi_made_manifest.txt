@@ -17,7 +17,7 @@ Name:O-Kagachi Made Manifest
 ManaCost:no cost
 Types:Enchantment Creature Dragon Spirit
 PT:6/6
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | SetColor$ All | Description$ CARDNAME is all colors.
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | SetColor$ All | Description$ CARDNAME is all colors.
 K:Flying
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME attacks, defending player chooses a nonland card in your graveyard. Return that card to your hand. CARDNAME gets +X/+0 until end of turn, where X is the mana value of that card.

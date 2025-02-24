@@ -4,6 +4,6 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 A:AB$ Draw | Cost$ SubCounter<3/QUEST> Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
-DeckHas:Ability$Counters
 SVar:MaxQuestEffect:3
+DeckHas:Ability$Counters
 Oracle:Landfall — Whenever a land you control enters, you may put a quest counter on Ior Ruin Expedition.\nRemove three quest counters from Ior Ruin Expedition and sacrifice it: Draw two cards.

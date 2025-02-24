@@ -8,6 +8,6 @@ K:etbCounter:P1P1:X:no Condition:CARDNAME enters with a +1/+1 counter on it for 
 SVar:X:Count$ValidExile Instant.ExiledWithSource,Sorcery.ExiledWithSource
 T:Mode$ ChangesZone | ValidCard$ Instant.YouOwn,Sorcery.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an instant or sorcery card leaves your graveyard, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
-DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Counters
+DeckNeeds:Type$Instant|Sorcery
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFlying\nMurktide Regent enters with a +1/+1 counter on it for each instant and sorcery card exiled with it.\nWhenever an instant or sorcery card leaves your graveyard, put a +1/+1 counter on Murktide Regent.

@@ -32,9 +32,9 @@ PT:4/4
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature, instant, and sorcery cards in your graveyard.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn,Creature.YouOwn
+SVar:BuffedBy:Instant,Sorcery
 DeckHas:Ability$Graveyard
 DeckHints:Type$Instant|Sorcery
-SVar:BuffedBy:Instant,Sorcery
 Oracle:At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature, instant, and sorcery cards in your graveyard.
 
 SPECIALIZE:BLACK

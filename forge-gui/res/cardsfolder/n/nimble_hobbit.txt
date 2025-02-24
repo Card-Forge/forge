@@ -7,7 +7,7 @@ SVar:TrigChoice:DB$ GenericChoice | Choices$ PayW,PaySacFood
 SVar:PayW:DB$ ImmediateTrigger | UnlessCost$ 2 W | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigTap | SpellDescription$ pay {2}{W}: When you do, tap target creature an opponent controls.
 SVar:PaySacFood:DB$ ImmediateTrigger | UnlessCost$ Sac<1/Food> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigTap | SpellDescription$ sacrifice a Food: When you do, tap target creature an opponent controls.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice
 DeckHints:Type$Food
-SVar:HasAttackEffect:TRUE
 Oracle:Whenever Nimble Hobbit attacks, you may sacrifice a Food or pay {2}{W}. When you do, tap target creature an opponent controls.

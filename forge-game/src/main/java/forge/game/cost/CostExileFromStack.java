@@ -17,8 +17,6 @@
  */
 package forge.game.cost;
 
-import java.util.Map;
-
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
@@ -27,6 +25,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 /**
  * The Class CostExile.

@@ -25,7 +25,7 @@ ScryfallCode=MMA
 12 C Dispeller's Capsule @Franz Vohwinkel
 13 M Elspeth, Knight-Errant @Volkan Baǵa
 14 R Ethersworn Canonist @Izzy
-15 U Feudkiller's Verdict @Dan Scott
+15 U Feudkiller's Verdict @Dan Murayama Scott
 16 U Flickerwisp @Jeremy Enecio
 17 C Gleam of Resistance @Matt Stewart
 18 C Hillcomber Giant @Ralph Horsley
@@ -79,7 +79,7 @@ ScryfallCode=MMA
 66 U Take Possession @Michael Phillippi
 67 U Thirst for Knowledge @Anthony Francisco
 68 C Traumatic Visions @Cyril Van Der Haegen
-69 C Vedalken Dismisser @Dan Scott
+69 C Vedalken Dismisser @Dan Murayama Scott
 70 M Vendilion Clique @Michael Sutfin
 71 C Absorb Vis @Brandon Kitkouski
 72 U Auntie's Snitch @Warren Mahy
@@ -111,7 +111,7 @@ ScryfallCode=MMA
 98 C Stinkweed Imp @Nils Hamm
 99 C Street Wraith @Cyril Van Der Haegen
 100 C Syphon Life @Dan Seagrave
-101 C Thieving Sprite @Dan Scott
+101 C Thieving Sprite @Dan Murayama Scott
 102 R Tombstalker @Aleksi Briclot
 103 C Warren Pilferers @Wayne Reynolds
 104 C Warren Weirding @Matt Cavotta
@@ -234,7 +234,7 @@ ScryfallCode=MMA
 221 R City of Brass @Jung Park
 222 U Dakmor Salvage @John Avon
 223 R Glimmervoid @Lars Grant-West
-224 C Terramorphic Expanse @Dan Scott
+224 C Terramorphic Expanse @Dan Murayama Scott
 225 U Vivid Crag @Martina Pilcerova
 226 U Vivid Creek @Fred Fields
 227 U Vivid Grove @Howard Lyon

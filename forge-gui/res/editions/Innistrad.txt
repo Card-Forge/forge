@@ -27,7 +27,7 @@ ScryfallCode=ISD
 13 R Elite Inquisitor @Jana Schirmer & Johannes Voss
 14 C Feeling of Dread @John Stanko
 15 U Fiend Hunter @Wayne Reynolds
-16 U Gallows Warden @Dan Scott
+16 U Gallows Warden @Dan Murayama Scott
 17 R Geist-Honored Monk @Clint Cearley
 18 C Ghostly Possession @Howard Lyon
 19 U Intangible Virtue @Clint Cearley
@@ -65,7 +65,7 @@ ScryfallCode=ISD
 51 C Delver of Secrets @Nils Hamm
 52 C Deranged Assistant @Nils Hamm
 53 U Dissipate @Tomasz Jedruszek
-54 C Dream Twist @Dan Scott
+54 C Dream Twist @Dan Murayama Scott
 55 C Forbidden Alchemy @David Rapoza
 56 C Fortress Crab @Vincent Proce
 57 C Frightful Delusion @Anthony Palumbo
@@ -145,7 +145,7 @@ ScryfallCode=ISD
 131 C Bloodcrazed Neonate @Cynthia Sheppard
 132 C Brimstone Volley @Eytan Zana
 133 U Burning Vengeance @Raymond Swanland
-134 R Charmbreaker Devils @Dan Scott
+134 R Charmbreaker Devils @Dan Murayama Scott
 135 C Crossway Vampire @Mark Evans
 136 R Curse of Stalked Prey @Christopher Moeller
 137 U Curse of the Nightly Hunt @Daarken
@@ -219,7 +219,7 @@ ScryfallCode=ISD
 205 R Splinterfright @Eric Deschamps
 206 C Travel Preparations @Vincent Proce
 207 M Tree of Redemption @Vincent Proce
-208 U Ulvenwald Mystics @Dan Scott
+208 U Ulvenwald Mystics @Dan Murayama Scott
 209 C Villagers of Estwald @Kev Walker
 210 C Woodland Sleuth @Tomasz Jedruszek
 211 U Wreath of Geists @Jason A. Engle

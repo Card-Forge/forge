@@ -2,8 +2,8 @@ Name:Illusory Gains
 ManaCost:3 U U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ GainControl
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever a creature an opponent controls enters, attach CARDNAME to that creature.
-SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
+SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCardLKICopy
 Oracle:Enchant creature\nYou control enchanted creature.\nWhenever a creature an opponent controls enters, attach Illusory Gains to that creature.

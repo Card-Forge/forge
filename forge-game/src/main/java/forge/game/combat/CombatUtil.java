@@ -18,7 +18,6 @@
 package forge.game.combat;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -31,7 +30,6 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityBlockRestrict;
@@ -70,7 +68,7 @@ public class CombatUtil {
 
         // Relevant battles (protected by the attacking player's opponents)
         final Game game = playerWhoAttacks.getGame();
-        final CardCollection battles = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.BATTLES);
+        final CardCollection battles = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.BATTLES);
         for (Card battle : battles) {
             if (battle.getType().hasSubtype("Siege") && battle.getProtectingPlayer().isOpponentOf(playerWhoAttacks)) {
                 defenders.add(battle);
@@ -110,7 +108,7 @@ public class CombatUtil {
         final Map<Card, GameEntity> attackers = new HashMap<>(combat.getAttackersAndDefenders());
         final Game game = attacker.getGame();
 
-        return Iterables.any(getAllPossibleDefenders(attacker.getController()), defender -> {
+        return getAllPossibleDefenders(attacker.getController()).anyMatch(defender -> {
             if (!canAttack(attacker, defender) || getAttackCost(game, attacker, defender) != null) {
                 return false;
             }
@@ -161,7 +159,7 @@ public class CombatUtil {
      * @see #canAttack(Card, GameEntity)
      */
     public static boolean canAttack(final Card attacker) {
-        return Iterables.any(getAllPossibleDefenders(attacker.getController()), defender -> canAttack(attacker, defender));
+        return getAllPossibleDefenders(attacker.getController()).anyMatch(defender -> canAttack(attacker, defender));
     }
 
     /**
@@ -276,8 +274,8 @@ public class CombatUtil {
         fakeSA.setPayCosts(attackCost);
         // prevent recalculating X
         fakeSA.setSVar("X", "0");
-        return attacker.getController().getController().payManaOptional(attacker, attackCost, fakeSA,
-                "Pay additional cost to declare " + attacker + " an attacker", ManaPaymentPurpose.DeclareAttacker);
+        return attacker.getController().getController().payCombatCost(attacker, attackCost, fakeSA,
+                "Pay additional cost to declare " + attacker + " an attacker");
     }
 
     public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
@@ -339,7 +337,7 @@ public class CombatUtil {
         fakeSA.setCardState(blocker.getCurrentState());
         fakeSA.setPayCosts(blockCost);
         fakeSA.setSVar("X", "0");
-        return blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
+        return blocker.getController().getController().payCombatCost(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ");
     }
 
     public static Cost getBlockCost(Game game, Card blocker, Card attacker) {
@@ -376,7 +374,6 @@ public class CombatUtil {
         final GameEntity defender = combat.getDefenderByAttacker(c);
         final List<Card> otherAttackers = combat.getAttackers();
 
-        // Run triggers
         if (triggers) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Attacker, c);

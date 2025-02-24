@@ -21,11 +21,11 @@ ScryfallCode=EA2
 13 C Fiery Impulse @Daarken
 14 U Rending Volley @Lucas Graciano
 15 R Courser of Kruphix @Eric Deschamps
-16 C Nylea's Presence
+16 C Nylea's Presence @Ralph Horsley
 17 C Satyr Wayfinder @Steve Prescott
 18 M World Breaker @Jaime Jones
 19 U Reflector Mage @Willian Murai
-20 U Shaman of the Pack @Dan Scott
+20 U Shaman of the Pack @Dan Murayama Scott
 21 M Sliver Hivelord @Aleksi Briclot
 22 R Mana Confluence @Richard Wright
 23 R Mutavault @Fred Fields

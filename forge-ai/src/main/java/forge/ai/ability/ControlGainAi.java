@@ -17,23 +17,16 @@
  */
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -43,6 +36,10 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.collect.FCollectionView;
+
+import java.util.List;
+import java.util.Map;
 
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
@@ -329,5 +326,23 @@ public class ControlGainAi extends SpellAbilityAi {
         }
         Card chosen = ComputerUtilCard.getBestCreatureAI(cards);
         return chosen != null ? chosen.getController() : Iterables.getFirst(options, null);
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        // Pay to gain Control
+        if (sa.hasParam("UnlessSwitched")) {
+            final Card host = sa.getHostCard();
+
+            final Card gameCard = host.getGame().getCardState(host, null);
+            if (gameCard == null
+                    || !gameCard.isInPlay() // not in play
+                    || payer.equals(gameCard.getController()) // already in control
+                    ) {
+                return false;
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }

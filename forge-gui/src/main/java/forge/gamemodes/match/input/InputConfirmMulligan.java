@@ -17,8 +17,6 @@
  */
 package forge.gamemodes.match.input;
 
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -31,6 +29,8 @@ import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
+
+import java.util.List;
 
 /**
  * <p>

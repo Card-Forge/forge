@@ -1,6 +1,6 @@
 Name:Mouse Token
 ManaCost:no cost
-Types:Creature Mouse
 Colors:white
+Types:Creature Mouse
 PT:1/1
 Oracle:

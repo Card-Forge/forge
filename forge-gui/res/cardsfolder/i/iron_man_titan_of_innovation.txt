@@ -1,0 +1,15 @@
+Name:Iron Man, Titan of Innovation
+ManaCost:3 U R
+Types:Legendary Artifact Creature Human Hero
+PT:4/4
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Genius Industrialist — Whenever NICKNAME attacks, create a Treasure token, then you may sacrifice a noncreature artifact. If you do, search your library for an artifact card with mana value equal to 1 plus the sacrificed artifact's mana value, put it onto the battlefield tapped, then shuffle.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Artifact.nonCreature | SacMessage$ noncreature artifact | Optional$ True | RememberSacrificed$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcEQX | ChangeTypeDesc$ artifact card with mana value equal to 1 plus the sacrificed artifact's mana value | ChangeNum$ 1 | Tapped$ True | AILogic$ SacAndUpgrade | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost/Plus.1
+SVar:AIPreference:SacCost$Artifact
+DeckNeeds:Type$Artifact
+Oracle:Flying, haste\nGenius Industrialist — Whenever Iron Man attacks, create a Treasure token, then you may sacrifice a noncreature artifact. If you do, search your library for an artifact card with mana value equal to 1 plus the sacrificed artifact's mana value, put it onto the battlefield tapped, then shuffle.

@@ -13,6 +13,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you cast a multicolored spell, for each of that spell's colors, each opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ TriggeredCard$CardNumColors | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ TriggeredCard$CardNumColors
-DeckHas:Ability$LifeGain
 SVar:BuffedBy:Card.MultiColor
+DeckHas:Ability$LifeGain
 Oracle:When Lurking Spinecrawler enters, you may choose a nonland card in your hand. If you do, that card perpetually incorporates {1}{B} and gains "When you cast this spell, each opponent sacrifices a creature. Each opponent who can't discards a card."\nWhenever you cast a multicolored spell, for each of that spell's colors, each opponent loses 1 life and you gain 1 life.

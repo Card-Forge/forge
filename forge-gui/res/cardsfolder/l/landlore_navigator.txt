@@ -7,7 +7,7 @@ SVar:TrigToken:DB$ Token | TokenScript$ c_a_map_sac_explore
 T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ ArtifactsEntered | SVarCompare$ GE2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ At the beginning of your end step, if two or more artifacts entered the battlefield under your control this turn, conjure a card named Thieving Magpie onto the battlefield.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Thieving Magpie | Zone$ Battlefield
 SVar:ArtifactsEntered:Count$ThisTurnEntered_Battlefield_Artifact.YouCtrl
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token|Counters|Sacrifice & Type$Artifact|Map|Bird
 DeckHints:Type$Artifact
-SVar:HasAttackEffect:TRUE
 Oracle:Whenever Landlore Navigator attacks, create a Map token.\nAt the beginning of your end step, if two or more artifacts entered the battlefield under your control this turn, conjure a card named Thieving Magpie onto the battlefield.

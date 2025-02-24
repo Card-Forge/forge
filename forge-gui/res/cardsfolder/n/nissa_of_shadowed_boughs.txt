@@ -8,6 +8,6 @@ A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Land
 SVar:Animate:DB$ Animate | Defined$ Targeted | Power$ 3 | Toughness$ 3 | Types$ Creature,Elemental | Keywords$ Haste & Menace | Optional$ True
 A:AB$ ChangeZone | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | ChangeType$ Creature.YouOwn+cmcLEX | ChangeNum$ 1 | Origin$ Hand,Graveyard | Destination$ Battlefield | WithCountersType$ P1P1 | WithCountersAmount$ 2 | StackDescription$ SpellDescription | SpellDescription$ You may put a creature card with mana value less than or equal to the number of lands you control onto the battlefield from your hand or graveyard with two +1/+1 counters on it.
 SVar:X:Count$Valid Land.YouCtrl
-DeckHas:Ability$Counters|Graveyard
 SVar:BuffedBy:Land
+DeckHas:Ability$Counters|Graveyard
 Oracle:Landfall — Whenever a land you control enters, put a loyalty counter on Nissa of Shadowed Boughs.\n[+1]: Untap target land you control. You may have it become a 3/3 Elemental creature with haste and menace until end of turn. It's still a land.\n[-5]: You may put a creature card with mana value less than or equal to the number of lands you control onto the battlefield from your hand or graveyard with two +1/+1 counters on it.

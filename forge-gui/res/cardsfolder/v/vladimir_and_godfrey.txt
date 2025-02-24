@@ -6,6 +6,6 @@ A:AB$ ChangeZone | Cost$ 2 W | Origin$ Graveyard | Destination$ Battlefield | De
 SVar:DBEffect:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | StackDescription$ It perpetually gets +1/+1. | SpellDescription$ It perpetually gets +1/+1. Activate only if you control a 1/1 creature.
 SVar:SacMe:3
 SVar:DiscardMe:3
-DeckHas:Ability$Graveyard
 AI:RemoveDeck:Random
+DeckHas:Ability$Graveyard
 Oracle:Rejuvenation — {2}{W}: Return Vladimir and Godfrey from your graveyard to the battlefield tapped. It perpetually gets +1/+1. Activate only if you control a 1/1 creature.

@@ -117,7 +117,7 @@ ScryfallCode=MKC
 109 M Mechanized Production @Adam Paquette
 110 R Mission Briefing @Matt Stewart
 111 U Mulldrifter @Eric Fortune
-112 R Nadir Kraken @Dan Scott
+112 R Nadir Kraken @Dan Murayama Scott
 113 U Nightveil Sprite @Uriah Voth
 114 U Ongoing Investigation @Bud Cook
 115 C Otherworldly Gaze @Chris Cold
@@ -208,7 +208,7 @@ ScryfallCode=MKC
 200 R Baleful Strix @Nils Hamm
 201 R Boros Reckoner @Howard Lyon
 202 M Chulane, Teller of Tales @Victor Adame Minguez
-203 R Connive // Concoct @Dan Scott
+203 R Connive // Concoct @Dan Murayama Scott
 204 R Decimate @Zoltan Boros
 205 R Deflecting Palm @Eric Deschamps
 206 U Dimir Spybug @James Paick
@@ -228,7 +228,7 @@ ScryfallCode=MKC
 220 C Wavesifter @Nils Hamm
 221 R Academy Manufactor @Campbell White
 222 R Ancient Stone Idol @Josh Hass
-223 C Arcane Signet @Dan Scott
+223 C Arcane Signet @Dan Murayama Scott
 224 U Azorius Signet @Raoul Vitale
 225 U Bloodthirsty Blade @Jason Kang
 226 U Dimir Signet @Raoul Vitale
@@ -243,7 +243,7 @@ ScryfallCode=MKC
 235 R Scroll of Fate @Piotr Dura
 236 U Simic Signet @Mike Sass
 237 U Sol Ring @Mike Bierek
-238 R Solemn Simulacrum @Dan Scott
+238 R Solemn Simulacrum @Dan Murayama Scott
 239 R Steel Hellkite @James Paick
 240 U Talisman of Conviction @Lindsey Look
 241 U Talisman of Curiosity @Lindsey Look

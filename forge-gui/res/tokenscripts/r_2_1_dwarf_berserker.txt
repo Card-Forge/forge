@@ -1,6 +1,6 @@
 Name:Dwarf Berserker Token
 ManaCost:no cost
-Types:Creature Dwarf Berserker
 Colors:red
+Types:Creature Dwarf Berserker
 PT:2/1
 Oracle:

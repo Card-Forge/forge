@@ -1,9 +1,9 @@
 Name:Hymn to the Ages
-ManaCost:4 U
+ManaCost:1 U
 Types:Instant Chorus
-K:Starting intensity:3
+K:Starting intensity:1
 A:SP$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBIntensify | SpellDescription$ Draw a number of cards equal to this spell's intensity.
 SVar:DBIntensify:DB$ Intensify | AllDefined$ Card.YouOwn+Chorus | DefinedDesc$ all Chorus cards you own | SpellDescription$ All Chorus cards you own intensify by 1.
 SVar:X:Count$Intensity
 DeckHints:Type$Chorus
-Oracle:Starting intensity 3\nDraw a number of cards equal to this spell's intensity.\nAll Chorus cards you own intensify by 1.
+Oracle:Starting intensity 1\nDraw a number of cards equal to this spell's intensity.\nAll Chorus cards you own intensify by 1.

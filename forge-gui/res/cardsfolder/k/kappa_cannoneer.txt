@@ -8,7 +8,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifa
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBUnblockable
 SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
-DeckNeeds:Type$Artifact
-DeckHas:Ability$Counters
 SVar:BuffedBy:Artifact
+DeckHas:Ability$Counters
+DeckNeeds:Type$Artifact
 Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nWard {4}\nWhenever an artifact you control enters, put a +1/+1 counter on Kappa Cannoneer and it can't be blocked this turn.

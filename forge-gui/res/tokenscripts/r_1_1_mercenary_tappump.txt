@@ -1,7 +1,7 @@
 Name:Mercenary Token
 ManaCost:no cost
-Types:Creature Mercenary
 Colors:red
+Types:Creature Mercenary
 PT:1/1
 A:AB$ Pump | Cost$ T | NumAtt$ 1 | ValidTgts$ Creature.YouCtrl | SorcerySpeed$ True | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.
 Oracle:{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.

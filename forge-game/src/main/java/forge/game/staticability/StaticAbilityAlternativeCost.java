@@ -1,6 +1,7 @@
 package forge.game.staticability;
 
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
@@ -53,10 +54,11 @@ public class StaticAbilityAlternativeCost {
                     newSA.putParam("ManaRestriction", stAb.getParam("ManaRestriction"));
                 }
 
-                if (stAb.hasParam("AffectedZone")) {
-                    newSA.getRestrictions().setZone(ZoneType.smartValueOf(stAb.getParam("AffectedZone")));
-                } else if (!stAb.getHostCard().isImmutable() && stAb.hasParam("EffectZone") && !"All".equals(stAb.getParam("EffectZone"))) {
-                    newSA.getRestrictions().setZone(ZoneType.smartValueOf(stAb.getParam("EffectZone")));
+                if (!stAb.getHostCard().isImmutable()) {
+                    Set<ZoneType> zones = stAb.getActiveZone();
+                    if (zones != null && zones.size() == 1) {
+                        newSA.getRestrictions().setZone(zones.stream().findFirst().get());
+                    }
                 }
 
                 if (stAb.hasParam("StackDescription")) {

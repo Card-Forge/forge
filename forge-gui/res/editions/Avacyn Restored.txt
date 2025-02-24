@@ -40,7 +40,7 @@ ScryfallCode=AVR
 26 C Leap of Faith @Gabor Szikszai
 27 C Midnight Duelist @Bud Cook
 28 C Midvast Protector @James Ryman
-29 C Moonlight Geist @Dan Scott
+29 C Moonlight Geist @Dan Murayama Scott
 30 C Moorland Inquisitor @David Palumbo
 31 U Nearheath Pilgrim @Erica Yang
 32 R Restoration Angel @Johannes Voss
@@ -66,7 +66,7 @@ ScryfallCode=AVR
 52 U Fettergeist @Izzy
 53 C Fleeting Distraction @Ryan Yee
 54 C Galvanic Alchemist @Svetlin Velinov
-55 C Geist Snatch @Dan Scott
+55 C Geist Snatch @Dan Murayama Scott
 56 C Ghostform @Scott Chou
 57 C Ghostly Flicker @Raymond Swanland
 58 U Ghostly Touch @Jason Felix
@@ -218,11 +218,11 @@ ScryfallCode=AVR
 204 C Wildwood Geist @Lars Grant-West
 205 U Wolfir Avenger @Daniel Ljunggren
 206 R Wolfir Silverheart @Raymond Swanland
-207 U Yew Spirit @Dan Scott
+207 U Yew Spirit @Dan Murayama Scott
 208 M Bruna, Light of Alabaster @Winona Nelson
 209 M Gisela, Blade of Goldnight @Jason Chan
 210 M Sigarda, Host of Herons @Chris Rahn
-211 U Angel's Tomb @Dan Scott
+211 U Angel's Tomb @Dan Murayama Scott
 212 U Angelic Armaments @Daniel Ljunggren
 213 C Bladed Bracers @Ryan Yee
 214 R Conjurer's Closet @Jason Felix
@@ -236,7 +236,7 @@ ScryfallCode=AVR
 222 U Tormentor's Trident @Anthony Palumbo
 223 C Vanguard's Shield @Ryan Pancoast
 224 U Vessel of Endless Rest @John Avon
-225 R Alchemist's Refuge @Dan Scott
+225 R Alchemist's Refuge @Dan Murayama Scott
 226 R Cavern of Souls @Cliff Childs
 227 R Desolate Lighthouse @Scott Chou
 228 C Seraph Sanctuary @David Palumbo

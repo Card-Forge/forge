@@ -6,7 +6,7 @@ A:AB$ DigUntil | Cost$ AddCounter<1/LOYALTY> | Valid$ Card.Artifact | ValidDescr
 A:AB$ LoseLife | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X | SpellDescription$ Target opponent loses life equal to the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 A:AB$ GainControl | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | AllValid$ Artifact,Creature | ControlledByTarget$ True | NewController$ You | SpellDescription$ Gain control of all artifacts and creatures target opponent controls.
-DeckNeeds:Type$Artifact
 AI:RemoveDeck:Random
+DeckNeeds:Type$Artifact
 DeckHints:Name$Tezzeret's Betrayal
 Oracle:[+1]: Reveal cards from the top of your library until you reveal an artifact card. Put that card into your hand and the rest on the bottom of your library in a random order.\n[-3]: Target opponent loses life equal to the number of artifacts you control.\n[-8]: Gain control of all artifacts and creatures target opponent controls.

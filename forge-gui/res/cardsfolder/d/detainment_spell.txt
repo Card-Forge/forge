@@ -2,7 +2,7 @@ Name:Detainment Spell
 ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ CantBeActivated | ValidCard$ Creature.EnchantedBy | ValidSA$ Activated | Description$ Enchanted creature's activated abilities can't be activated.
 A:AB$ Attach | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse | SpellDescription$ Attach CARDNAME to target creature.
 AI:RemoveDeck:All

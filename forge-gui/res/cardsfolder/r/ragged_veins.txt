@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment Aura
 K:Flash
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever enchanted creature is dealt damage, its controller loses that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTargetController | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount

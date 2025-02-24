@@ -1,0 +1,11 @@
+Name:Pia Nalaar, Chief Mechanic
+ManaCost:G U R
+Types:Legendary Creature Human Artificer
+PT:2/4
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Artifact+YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigEnergy | TriggerDescription$ Whenever one or more artifact creatures you control deal combat damage to a player, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseNumber | TriggerDescription$ At the beginning of your end step, you may pay one or more {E}. If you do, create an X/X colorless Vehicle artifact token named Nalaar Aetherjet with flying and crew 2, where X is the amount of {E} spent this way.
+SVar:TrigChooseNumber:DB$ ChooseNumber | Max$ Count$YourCountersEnergy | ListTitle$ amount of energy to pay | SubAbility$ DBToken | StackDescription$ None
+SVar:DBToken:DB$ Token | ConditionCheckSVar$ X | UnlessCost$ Mandatory PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | TokenScript$ nalaar_aetherjet | TokenPower$ X | TokenToughness$ X
+SVar:X:Count$ChosenNumber
+Oracle:Whenever one or more artifact creatures you control deal combat damage to a player, you get {E}{E} (two energy counters).\nAt the beginning of your end step, you may pay one or more {E}. If you do, create an X/X colorless Vehicle artifact token named Nalaar Aetherjet with flying and crew 2, where X is the amount of {E} spent this way.

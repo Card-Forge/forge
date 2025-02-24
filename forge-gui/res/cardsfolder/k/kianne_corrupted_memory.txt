@@ -1,0 +1,9 @@
+Name:Kianne, Corrupted Memory
+ManaCost:2 G U
+Types:Legendary Creature Illusion
+PT:2/2
+S:Mode$ CastWithFlash | ValidCard$ Card.nonCreature | ValidSA$ Spell | Caster$ You | IsPresent$ Card.Self+powerEven | Description$ As long as NICKNAME's power is even, you may cast noncreature spells as though they had flash.
+S:Mode$ CastWithFlash | ValidCard$ Creature | ValidSA$ Spell | Caster$ You | IsPresent$ Card.Self+powerOdd | Description$ As long as NICKNAME's power is odd, you may cast creature spells as though they had flash.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:As long as Kianne's power is even, you may cast noncreature spells as though they had flash.\nAs long as Kianne's power is odd, you may cast creature spells as though they had flash.\nWhenever you draw a card, put a +1/+1 counter on Kianne.

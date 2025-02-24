@@ -1,6 +1,6 @@
 Name:Minotaur Token
 ManaCost:no cost
-Types:Creature Minotaur
 Colors:red
+Types:Creature Minotaur
 PT:2/3
 Oracle:

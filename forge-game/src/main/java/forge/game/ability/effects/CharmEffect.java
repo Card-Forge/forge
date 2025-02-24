@@ -74,7 +74,7 @@ public class CharmEffect extends SpellAbilityEffect {
         } else {
             // fallback needed while ability building
             if (sa.getActivatingPlayer() == null) {
-                sa.setActivatingPlayer(source.getController(), true);
+                sa.setActivatingPlayer(source.getController());
             }
             if (!isX) {
                 num = AbilityUtils.calculateAmount(source, numParam, sa);

@@ -17,9 +17,9 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -61,7 +61,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final Game game = activator.getGame();
         CardCollection allChosen = new CardCollection();
 
-        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
+        final PlayerCollection tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         List<ZoneType> choiceZone = Lists.newArrayList(ZoneType.Battlefield);
         if (sa.hasParam("ChoiceZone")) {
@@ -72,7 +72,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
         }
         if (sa.hasParam("TargetControls")) {
-            choices = CardLists.filterControlledBy(choices, tgtPlayers.get(0));
+            choices = CardLists.filterControlledBy(choices, tgtPlayers);
         }
         if (sa.hasParam("DefinedCards")) {
             choices = AbilityUtils.getDefinedCards(host, sa.getParam("DefinedCards"), sa);
@@ -119,7 +119,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             boolean dontRevealToOwner = true;
             if (sa.hasParam("EachBasicType")) {
                 // Get all lands,
-                List<Card> land = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+                List<Card> land = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS);
                 String eachBasic = sa.getParam("EachBasicType");
                 if (eachBasic.equals("Controlled")) {
                     land = CardLists.filterControlledBy(land, p);

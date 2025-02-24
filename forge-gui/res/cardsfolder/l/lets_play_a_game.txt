@@ -1,0 +1,11 @@
+Name:Let's Play a Game
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Charm | PrecostDesc$ Delirium — | MinCharmNum$ 1 | CharmNum$ Count$Delirium.3.1 | Choices$ DBPumpAll,DBDiscard,DBLoseLife | AdditionalDescription$ . If there are four or more card types among cards in your graveyard, choose one or more instead.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn.
+SVar:DBDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose | NumCards$ 2 | SpellDescription$ Each opponent discards two cards.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 3 life and you gain 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — Choose one. If there are four or more card types among cards in your graveyard, choose one or more instead.\n• Creatures your opponents control get -1/-1 until end of turn.\n• Each opponent discards two cards.\n• Each opponent loses 3 life and you gain 3 life.

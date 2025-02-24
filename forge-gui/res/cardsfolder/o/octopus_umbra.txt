@@ -3,7 +3,7 @@ ManaCost:3 U U
 Types:Enchantment Aura
 K:Umbra armor
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ Animate
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 8 | SetToughness$ 8 | AddTrigger$ AttackTrigger | AddSVar$ TrigTap | Description$ Enchanted creature has base power and toughness 8/8 and has "Whenever this creature attacks, you may tap target creature with power 8 or less."
 SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may tap target creature with power 8 or less.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.powerLE8 | TgtPrompt$ Select target creature

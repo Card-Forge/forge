@@ -1,0 +1,12 @@
+Name:Coalstoke Gearhulk
+ManaCost:1 B B R R
+Types:Artifact Creature Construct
+PT:5/4
+K:Menace
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, put target creature card with mana value 4 or less from a graveyard onto the battlefield under your control with a finality counter on it. That creature gains menace, deathtouch, and haste. At the beginning of your next end step, exile that creature.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.cmcLE4 | TgtPrompt$ Select target creature with mana value 4 or less from a graveyard | RememberChanged$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | WithCountersType$ FINALITY | SubAbility$ DBPump
+SVar:DBPump:DB$ Animate | Keywords$ Menace & Deathtouch & Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ YourExile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+Oracle:Menace, deathtouch\nWhen this creature enters, put target creature card with mana value 4 or less from a graveyard onto the battlefield under your control with a finality counter on it. That creature gains menace, deathtouch, and haste. At the beginning of your next end step, exile that creature.

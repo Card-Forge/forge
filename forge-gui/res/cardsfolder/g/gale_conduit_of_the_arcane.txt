@@ -53,8 +53,8 @@ Types:Legendary Creature Human Wizard
 PT:4/5
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBEffect | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME perpetually gains "Creatures you control get +1/+0."
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | Name$ Gale, Storm Conduit's Perpetual Effect | Duration$ Permanent
-SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.Self | AddStaticAbility$ Pump | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ CARDNAME perpetually gains "Creatures you control get +1/+0."
-SVar:Pump:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | EffectZone$ Command | AffectedZone$ Battlefield
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.EffectSource | AddStaticAbility$ P1Pump | AffectedZone$ All | Description$ EFFECTSOURCE perpetually gains "Creatures you control get +1/+0."
+SVar:P1Pump:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | Description$ Creatures you control get +1/+0.
 SVar:BuffedBy:Creature
 DeckHints:Type$Instant|Sorcery
 Oracle:Whenever you cast an instant or sorcery spell, Gale, Storm Conduit perpetually gains "Creatures you control get +1/+0."

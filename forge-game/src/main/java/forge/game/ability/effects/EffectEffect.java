@@ -5,11 +5,9 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
-import forge.card.CardRarity;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
@@ -26,6 +24,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
@@ -88,7 +87,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("ForgetCounter")) {
                 CounterType cType = CounterType.getType(sa.getParam("ForgetCounter"));
-                rememberList = new FCollection<>(CardLists.filter(Iterables.filter(rememberList, Card.class), CardPredicates.hasCounter(cType)));
+                rememberList = new FCollection<>(CardLists.filter(IterableUtil.filter(rememberList, Card.class), CardPredicates.hasCounter(cType)));
             }
 
             // don't create Effect if there is no remembered Objects
@@ -162,11 +161,8 @@ public class EffectEffect extends SpellAbilityEffect {
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
-            eff.setSetCode(hostCard.getSetCode());
-            if (name.startsWith("Emblem")) {
-                eff.setRarity(CardRarity.Common);
-            } else {
-                eff.setRarity(hostCard.getRarity());
+            if (sa.hasParam("Boon")) {
+                eff.setBoon(true);
             }
 
             // Abilities and triggers work the same as they do for Token
@@ -194,7 +190,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 for (final String s : effectStaticAbilities) {
                     final StaticAbility addedStaticAbility = eff.addStaticAbility(AbilityUtils.getSVar(sa, s));
                     if (addedStaticAbility != null) { //prevent npe casting adventure card spell
-                        addedStaticAbility.putParam("EffectZone", "Command");
+                        addedStaticAbility.setActiveZone(EnumSet.of(ZoneType.Command));
                         addedStaticAbility.setIntrinsic(true);
                     }
                 }

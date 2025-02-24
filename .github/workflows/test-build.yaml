@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '11' ]
+        java: [ '17' ]
     name: Test with Java ${{ matrix.Java }}
     steps:
       - uses: actions/checkout@v3
@@ -26,4 +26,4 @@ jobs:
         run: |
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
-          mvn -U -B clean -P windows-linux test
+          mvn -U -B clean test

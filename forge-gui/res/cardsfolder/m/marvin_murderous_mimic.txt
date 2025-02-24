@@ -1,0 +1,6 @@
+Name:Marvin, Murderous Mimic
+ManaCost:2
+Types:Legendary Artifact Creature Toy
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.YouCtrl+!sharesNameWith Self | Description$ CARDNAME has all activated abilities of creatures you control that don't have the same name as this creature.
+Oracle:Marvin, Murderous Mimic has all activated abilities of creatures you control that don't have the same name as this creature.

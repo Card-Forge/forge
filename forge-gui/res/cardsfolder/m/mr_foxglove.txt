@@ -4,7 +4,7 @@ Types:Legendary Creature Fox Rogue
 PT:3/5
 K:Lifelink
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, draw cards equal to the number of cards in defending player's hand minus the number of cards in your hand. If you didn't draw cards this way, you may put a creature card from your hand onto the battlefield.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | RememberDrawn$ True | SubAbility$ DBChangeZone
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | RememberDrawn$ AllReplaced | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredDefendingPlayer$CardsInHand/Minus.Y

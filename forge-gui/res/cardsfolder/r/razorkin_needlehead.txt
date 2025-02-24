@@ -1,0 +1,8 @@
+Name:Razorkin Needlehead
+ManaCost:R R
+Types:Creature Human Assassin
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ CARDNAME has first strike during your turn.
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent draws a card, CARDNAME deals 1 damage to them.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
+Oracle:Razorkin Needlehead has first strike during your turn.\nWhenever an opponent draws a card, Razorkin Needlehead deals 1 damage to them.

@@ -53,7 +53,7 @@ ScryfallCode=CSP
 40 C Martyr of Frost @Wayne England
 41 U Perilous Research @Dany Orizio
 42 R Rimefeather Owl @Kensuke Okabayashi
-43 U Rimewind Cryomancer @Dan Scott
+43 U Rimewind Cryomancer @Dan Murayama Scott
 44 C Rimewind Taskmage @Ron Spears
 45 C Ronom Serpent @Ron Spencer
 46 C Rune Snag @Dave Dorman
@@ -122,8 +122,8 @@ ScryfallCode=CSP
 109 C Frostweb Spider @Greg Hildebrandt
 110 R Hibernation's End @Steven Belledin
 111 C Into the North @Richard Sardinha
-112 U Karplusan Strider @Dan Scott
-113 C Martyr of Spores @Dan Scott
+112 U Karplusan Strider @Dan Murayama Scott
+113 C Martyr of Spores @Dan Murayama Scott
 114 U Mystic Melting @Chippy
 115 R Ohran Viper @Kev Walker
 116 R Panglacial Wurm @Jim Pavelec

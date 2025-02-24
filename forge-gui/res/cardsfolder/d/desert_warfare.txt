@@ -8,6 +8,6 @@ SVar:TrigReturn:DB$ ChangeZone | Defined$ Spawner>TriggeredCard | GainControl$ T
 T:Mode$ Phase | IsPresent$ Desert.YouCtrl | PresentCompare$ GE5 | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, if you control five or more Deserts, create that many 1/1 red, green, and white Sand Warrior creature tokens. They gain haste.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | PumpKeywords$ Haste | TokenScript$ rgw_1_1_sand_warrior | TokenOwner$ You
 SVar:X:Count$Valid Desert.YouCtrl
-DeckNeeds:Type$Desert
 DeckHas:Ability$Token & Type$Sand|Warrior
+DeckNeeds:Type$Desert
 Oracle:Whenever you sacrifice a Desert and whenever a Desert card is put into your graveyard from your hand or library, put that card onto the battlefield under your control at the beginning of your next end step.\nAt the beginning of combat on your turn, if you control five or more Deserts, create that many 1/1 red, green, and white Sand Warrior creature tokens. They gain haste.

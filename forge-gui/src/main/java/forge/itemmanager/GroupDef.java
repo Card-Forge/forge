@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.card.CardEdition;
@@ -47,7 +47,10 @@ public enum GroupDef {
                     return getSetGroup(((PaperCard) item).getEdition());
                 }
                 else if (item instanceof DeckProxy) {
-                    return getSetGroup(((DeckProxy) item).getEdition().getCode());
+                    CardEdition ed = ((DeckProxy) item).getEdition();
+                    if (ed == null)
+                        return -1;
+                    return getSetGroup(ed.getCode());
                 }
                 return -1;
             }),

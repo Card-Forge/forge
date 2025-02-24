@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature.Eldrazi+cmcGE7 | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Eldrazi creature spell with mana value 7 or greater, draw two cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
-DeckNeeds:Type$Eldrazi
 AI:RemoveDeck:Random
+DeckNeeds:Type$Eldrazi
 Oracle:Whenever you cast an Eldrazi creature spell with mana value 7 or greater, draw two cards.

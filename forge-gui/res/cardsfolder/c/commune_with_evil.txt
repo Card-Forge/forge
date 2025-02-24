@@ -1,0 +1,7 @@
+Name:Commune with Evil
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Dig | DigNum$ 4 | ChangeNum$ 1 | DestinationZone2$ Graveyard | StackDescription$ SpellDescription | SubAbility$ DBGainLife | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+DeckHas:Ability$Graveyard
+Oracle:Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard. You gain 3 life.

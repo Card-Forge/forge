@@ -1,16 +1,12 @@
 package forge.deck.io;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import forge.LobbyPlayer;
 import forge.ai.LobbyPlayerAi;
 import forge.game.GameOutcome;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
+
+import java.util.*;
 
 @SuppressWarnings("unused")
 public class DeckRecords {

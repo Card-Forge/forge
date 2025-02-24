@@ -1,0 +1,6 @@
+Name:Toy Token
+ManaCost:no cost
+Types:Artifact Creature Toy
+Colors:white
+PT:1/1
+Oracle:

@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Land:1 | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, players can't untap more than one land during their untap steps.
 SVar:NonStackingEffect:True
-DeckHints:Type$Artifact
 AI:RemoveDeck:Random
+DeckHints:Type$Artifact
 Oracle:As long as Winter Orb is untapped, players can't untap more than one land during their untap steps.

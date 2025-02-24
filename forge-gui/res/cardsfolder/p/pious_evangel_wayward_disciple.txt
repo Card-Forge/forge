@@ -2,7 +2,7 @@ Name:Pious Evangel
 ManaCost:2 W
 Types:Creature Human Cleric
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | ValidCard$ Card.Self,Creature.Other+YouCtrl | TriggerDescription$ Whenever CARDNAME or another creature you control enters, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | ValidCard$ Card.Self,Creature.Other+YouCtrl | TriggerDescription$ Whenever CARDNAME or another creature you control enters, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 A:AB$ SetState | Cost$ 2 T Sac<1/Permanent.Other/another permanent> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 AlternateMode:DoubleFaced

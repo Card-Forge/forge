@@ -2,10 +2,10 @@ Name:Anax, Hardened in the Forge
 ManaCost:1 R R
 Types:Legendary Enchantment Creature Demigod
 PT:*/3
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to your devotion to red.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to your devotion to red.
 SVar:X:Count$Devotion.Red
 SVar:BuffedBy:Permanent.Red
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+nonToken+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME or another nontoken creature you control dies, create a 1/1 red Satyr creature token with "This creature can't block." If the creature had power 4 or greater, create two of those tokens instead.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+!token+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME or another nontoken creature you control dies, create a 1/1 red Satyr creature token with "This creature can't block." If the creature had power 4 or greater, create two of those tokens instead.
 SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ r_1_1_satyr_noblock
 SVar:Y:Count$Compare Z GE4.2.1
 SVar:Z:TriggeredCard$CardPower

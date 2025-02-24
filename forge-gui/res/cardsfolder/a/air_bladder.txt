@@ -2,7 +2,7 @@ Name:Air Bladder
 ManaCost:U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.EnchantedBy | Description$ Enchanted creature can block only creatures with flying.
 Oracle:Enchant creature\nEnchanted creature has flying.\nEnchanted creature can block only creatures with flying.

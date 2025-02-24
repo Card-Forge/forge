@@ -2,7 +2,7 @@ Name:Relic Bane
 ManaCost:1 B B
 Types:Enchantment Aura
 K:Enchant artifact
-A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Artifact | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Artifact | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddTrigger$ TrigLoseLife | AddSVar$ RelicBaneLoseLife | Description$ Enchanted artifact has "At the beginning of your upkeep, you lose 2 life."
 SVar:TrigLoseLife:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ RelicBaneLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
 SVar:RelicBaneLoseLife:DB$ LoseLife | LifeAmount$ 2

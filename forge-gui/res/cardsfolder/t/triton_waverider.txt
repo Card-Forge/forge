@@ -4,6 +4,6 @@ Types:Creature Merfolk Wizard
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever an enchantment you control enters, CARDNAME gains flying until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
-DeckNeeds:Type$Enchantment
 SVar:BuffedBy:Enchantment
+DeckNeeds:Type$Enchantment
 Oracle:Constellation — Whenever an enchantment you control enters, Triton Waverider gains flying until end of turn.

@@ -1,7 +1,7 @@
 Name:Cat Warrior Token
 ManaCost:no cost
-Types:Creature Cat Warrior
 Colors:green
+Types:Creature Cat Warrior
 PT:2/2
 K:Landwalk:Forest
 Oracle:Forestwalk

@@ -1,7 +1,7 @@
 Name:Graveborn Token
 ManaCost:no cost
-Types:Creature Graveborn
 Colors:black,red
-K:Haste
+Types:Creature Graveborn
 PT:3/1
+K:Haste
 Oracle:Haste

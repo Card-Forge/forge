@@ -11,6 +11,6 @@ SVar:VolverPumped:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNu
 SVar:VolverResilience:DB$ Animate | Defined$ Self | Abilities$ ABRegen | Duration$ Permanent
 SVar:ABRegen:AB$ Regenerate | Cost$ PayLife<3> | SpellDescription$ Regenerate CARDNAME.
 AI:RemoveDeck:Random
-DeckNeeds:Color$Blue|Black
 DeckHas:Ability$Counters
+DeckNeeds:Color$Blue|Black
 Oracle:Kicker {1}{U} and/or {B} (You may pay an additional {1}{U} and/or {B} as you cast this spell.)\nIf Anavolver was kicked with its {1}{U} kicker, it enters with two +1/+1 counters on it and with flying.\nIf Anavolver was kicked with its {B} kicker, it enters with a +1/+1 counter on it and with "Pay 3 life: Regenerate Anavolver."

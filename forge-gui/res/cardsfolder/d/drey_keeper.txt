@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_squirrel | TokenOwner$ You
 A:AB$ PumpAll | Cost$ 3 B | ValidCards$ Squirrel.YouCtrl | NumAtt$ +1 | KW$ Menace | SpellDescription$ Squirrels you control get +1/+0 and gain menace until end of turn.
 SVar:PlayMain1:TRUE
-DeckNeeds:Type$Squirrel
 DeckHas:Ability$Token
+DeckNeeds:Type$Squirrel
 Oracle:When Drey Keeper enters, create two 1/1 green Squirrel creature tokens.\n{3}{B}: Squirrels you control get +1/+0 and gain menace until end of turn.

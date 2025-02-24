@@ -134,6 +134,7 @@ Halfling:Halflings
 Hamster:Hamsters
 Harpy:Harpies
 Hellion:Hellions
+Hero:Heroes
 Hippo:Hippos
 Hippogriff:Hippogriffs
 Homarid:Homarids
@@ -184,6 +185,7 @@ Monger:Mongers
 Mongoose:Mongooses
 Monk:Monks
 Monkey:Monkeys
+Moogle:Moogles
 Moonfolk:Moonfolk
 Mount:Mounts
 Mouse:Mice
@@ -250,6 +252,7 @@ Scion:Scions
 Scorpion:Scorpions
 Scout:Scouts
 Sculpture:Sculptures
+Seal:Seals
 Serf:Serfs
 Serpent:Serpents
 Servo:Servos

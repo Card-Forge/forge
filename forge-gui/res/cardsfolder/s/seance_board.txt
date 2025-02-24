@@ -1,0 +1,9 @@
+Name:Séance Board
+ManaCost:2
+Types:Artifact
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Morbid — At the beginning of each end step, if a creature died this turn, put a soul counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SOUL | CounterNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ Y | RestrictValid$ Spell.Instant,Spell.Sorcery,Spell.Demon,Spell.Spirit | SpellDescription$ Add X mana of any one color, where X is the number of soul counters on CARDNAME. Spend this mana only to cast instant, sorcery, Demon, and Spirit spells.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:Y:Count$CardCounters.SOUL
+Oracle:Morbid — At the beginning of each end step, if a creature died this turn, put a soul counter on Séance Board.\n{T}: Add X mana of any one color, where X is the number of soul counters on Séance Board. Spend this mana only to cast instant, sorcery, Demon, and Spirit spells.

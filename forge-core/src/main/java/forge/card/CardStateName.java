@@ -12,6 +12,7 @@ public enum CardStateName {
     RightSplit,
     Adventure,
     Modal,
+    EmptyRoom,
     SpecializeW,
     SpecializeU,
     SpecializeB,

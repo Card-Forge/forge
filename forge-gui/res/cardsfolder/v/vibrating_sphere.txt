@@ -1,7 +1,7 @@
 Name:Vibrating Sphere
 ManaCost:4
 Types:Artifact
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | Condition$ PlayerTurn | Description$ As long as it's your turn, creatures you control get +2/+0.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ -2 | Condition$ NotPlayerTurn | Description$ As long as it's not your turn, creatures you control get -0/-2.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | Condition$ PlayerTurn | Description$ During your turn, creatures you control get +2/+0.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ -2 | Condition$ NotPlayerTurn | Description$ During turns other than yours, creatures you control get -0/-2.
 AI:RemoveDeck:Random
-Oracle:As long as it's your turn, creatures you control get +2/+0.\nAs long as it's not your turn, creatures you control get -0/-2.
+Oracle:During your turn, creatures you control get +2/+0.\nDuring turns other than yours, creatures you control get -0/-2.

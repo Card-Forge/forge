@@ -1,0 +1,12 @@
+Name:Sire of Seven Deaths
+ManaCost:7
+Types:Creature Eldrazi
+PT:7/7
+K:First Strike
+K:Vigilance
+K:Menace
+K:Trample
+K:Reach
+K:Lifelink
+K:Ward:PayLife<7>
+Oracle:First strike, vigilance\nMenace, trample\nReach, lifelink\nWard—Pay 7 life.

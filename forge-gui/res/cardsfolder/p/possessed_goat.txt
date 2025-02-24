@@ -1,0 +1,7 @@
+Name:Possessed Goat
+ManaCost:W
+Types:Creature Goat
+PT:1/1
+A:AB$ PutCounter | Cost$ 3 Discard<1/Card> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBAnimate | GameActivationLimit$ 1 | SpellDescription$ Put three +1/+1 counters on CARDNAME and it becomes a black Demon in addition to its other colors and types. Activate only once.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Demon | Colors$ Black | Duration$ Permanent
+Oracle:{3}, Discard a card: Put three +1/+1 counters on Possessed Goat and it becomes a black Demon in addition to its other colors and types. Activate only once.

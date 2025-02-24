@@ -42,7 +42,7 @@ ScryfallCode=FUT
 29 C Patrician's Scorn @John Avon
 30 U Ramosian Revivalist @Matt Stewart
 31 R Seht's Tiger @Thomas Gianni
-32 C Aven Augur @Dan Scott
+32 C Aven Augur @Dan Murayama Scott
 33 U Cloudseeder @Tsutomu Kawade
 34 U Cryptic Annelid @Anthony S. Waters
 35 U Delay @Ron Spears
@@ -53,7 +53,7 @@ ScryfallCode=FUT
 40 R Magus of the Future @Anthony Francisco
 41 U Mystic Speculation @Trevor Hairsine
 42 R Pact of Negation @Jason Chan
-43 U Reality Strobe @Dan Scott
+43 U Reality Strobe @Dan Murayama Scott
 44 R Take Possession @Michael Phillippi
 45 C Unblinking Bleb @Shishizaru
 46 R Venser, Shaper Savant @Aleksi Briclot
@@ -119,7 +119,7 @@ ScryfallCode=FUT
 106 C Rift Elemental @Ron Spears
 107 R Scourge of Kher Ridges @Daren Bader
 108 U Shivan Sand-Mage @Dave Kendall
-109 U Sparkspitter @Dan Scott
+109 U Sparkspitter @Dan Murayama Scott
 110 U Bloodshot Trainee @Lucio Parrillo
 111 U Boldwyr Intimidator @Esad Ribic
 112 U Emblem of the Warmind @Paolo Parente
@@ -136,7 +136,7 @@ ScryfallCode=FUT
 123 R Tarox Bladewing @Aleksi Briclot
 124 R Thunderblade Charge @Justin Murray
 125 U Cyclical Evolution @Matt Cavotta
-126 R Force of Savagery @Dan Scott
+126 R Force of Savagery @Dan Murayama Scott
 127 R Heartwood Storyteller @Anthony S. Waters
 128 C Kavu Primarch @Kev Walker
 129 C Llanowar Augur @Tsutomu Kawade
@@ -169,7 +169,7 @@ ScryfallCode=FUT
 156 R Glittering Wish @John Donahue
 157 R Jhoira of the Ghitu @Kev Walker
 158 R Sliver Legion @Ron Spears
-159 R Akroma's Memorial @Dan Scott
+159 R Akroma's Memorial @Dan Murayama Scott
 160 R Cloud Key @Trevor Hairsine
 161 R Coalition Relic @Donato Giancola
 162 R Epochrasite @Michael Bruinsma

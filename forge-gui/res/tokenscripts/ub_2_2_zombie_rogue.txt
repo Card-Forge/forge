@@ -1,6 +1,6 @@
 Name:Zombie Rogue Token
 ManaCost:no cost
-Types:Creature Zombie Rogue
 Colors:blue,black
+Types:Creature Zombie Rogue
 PT:2/2
 Oracle:

@@ -1,0 +1,11 @@
+Name:Glitch Interpreter
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | IsPresent$ Permanent.faceDown+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, if you control no face-down permanents, return CARDNAME to its owner's hand and manifest dread.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDread
+SVar:DBDread:DB$ ManifestDread
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Colorless+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more colorless creatures you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:PlayMain1:TRUE
+Oracle:When Glitch Interpreter enters, if you control no face-down permanents, return Glitch Interpreter to its owner's hand and manifest dread.\nWhenever one or more colorless creatures you control deal combat damage to a player, draw a card.

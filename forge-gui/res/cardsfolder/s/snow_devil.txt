@@ -2,7 +2,7 @@ Name:Snow Devil
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+blocking | AddKeyword$ First Strike | CheckSVar$ X | SVarCompare$ GE1 | Description$ Enchanted creature has first strike as long as it's blocking and you control a snow land.
 SVar:X:Count$Valid Land.Snow+YouCtrl

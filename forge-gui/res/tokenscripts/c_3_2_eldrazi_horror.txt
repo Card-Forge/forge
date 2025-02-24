@@ -1,5 +1,5 @@
 Name:Eldrazi Horror Token
 ManaCost:no cost
-PT:3/2
 Types:Creature Eldrazi Horror
+PT:3/2
 Oracle:

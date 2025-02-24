@@ -8,6 +8,6 @@ S:Mode$ Continuous | Affected$ Creature.Elf+Other+YouCtrl | AddPower$ X | AddTou
 SVar:X:Count$CardCounters.P1P1
 SVar:XKicked:Count$TimesKicked
 AI:RemoveDeck:Random
-DeckNeeds:Type$Elf
 DeckHas:Ability$Counters
+DeckNeeds:Type$Elf
 Oracle:Multikicker {1}{G} (You may pay an additional {1}{G} any number of times as you cast this spell.)\nJoraga Warcaller enters with a +1/+1 counter on it for each time it was kicked.\nOther Elf creatures you control get +1/+1 for each +1/+1 counter on Joraga Warcaller.

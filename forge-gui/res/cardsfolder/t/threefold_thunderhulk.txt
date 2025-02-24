@@ -8,9 +8,9 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | 
 SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_gnome | TokenOwner$ You | TokenAmount$ X
 A:AB$ PutCounter | Cost$ 2 Sac<1/Artifact.Other/an other artifact> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:X:Count$CardPower
-DeckHas:Ability$Counters|Token & Type$Gnome
-DeckHints:Type$Artifact
 SVar:HasAttackEffect:TRUE
 SVar:EnchantMe:Multiple
 SVar:EquipMe:Multiple
+DeckHas:Ability$Counters|Token & Type$Gnome
+DeckHints:Type$Artifact
 Oracle:Threefold Thunderhulk enters with three +1/+1 counters on it.\nWhenever Threefold Thunderhulk enters or attacks, create a number of 1/1 colorless Gnome artifact creature tokens equal to its power.\n{2}, Sacrifice another artifact: Put a +1/+1 counter on Threefold Thunderhulk.

@@ -1,0 +1,6 @@
+Name:Drag to the Roots
+ManaCost:2 B G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | Condition$ Delirium | Description$ Delirium — This spell costs {2} less to cast if there are four or more card types among cards in your graveyard.
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
+Oracle:Delirium — This spell costs {2} less to cast if there are four or more card types among cards in your graveyard.\nDestroy target nonland permanent.

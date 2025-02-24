@@ -1,7 +1,7 @@
 Name:Fish Token
 ManaCost:no cost
-Types:Creature Fish
 Colors:blue
+Types:Creature Fish
 PT:1/1
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ This creature can't be blocked.
 Oracle:This creature can't be blocked.

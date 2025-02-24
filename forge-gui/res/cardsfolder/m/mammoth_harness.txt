@@ -2,7 +2,7 @@ Name:Mammoth Harness
 ManaCost:3 G
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AITgts$ Creature.withFlying | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AITgts$ Creature.withFlying | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.EnchantedBy | Execute$ TrigPumpAttacker | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.EnchantedBy | ValidBlocker$ Creature | Execute$ TrigPumpBlocker | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.

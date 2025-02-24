@@ -2,7 +2,7 @@ Name:Crown of Awe
 ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection from black & Protection from red | Description$ Enchanted creature has protection from black and from red.
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ AttachedBy Sacrificed | KW$ Protection from black & Protection from red | SubAbility$ DBPumpAll | SpellDescription$ Enchanted creature and other creatures that share a creature type with it gain protection from black and from red until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.NotDefinedAttachedBy Sacrificed+sharesCreatureTypeWith AttachedBy Sacrificed | KW$ Protection from black & Protection from red

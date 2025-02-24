@@ -6,6 +6,6 @@ K:Defender
 T:Mode$ Surveil | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you surveil, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 S:Mode$ CanAttackDefender | ValidCard$ Card.Self+counters_GE3_P1P1 | Description$ As long as CARDNAME has three or more +1/+1 counters on it, it can attack as though it didn't have defender.
-DeckNeeds:Ability$Surveil
 DeckHas:Ability$Counters
+DeckNeeds:Ability$Surveil
 Oracle:Defender\nWhenever you surveil, put a +1/+1 counter on Thoughtbound Phantasm.\nAs long as Thoughtbound Phantasm has three or more +1/+1 counters on it, it can attack as though it didn't have defender.

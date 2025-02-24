@@ -52,7 +52,11 @@ public class AudioClip implements IAudioClip {
         catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        clip.play(value);
+        try {
+            clip.play(value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public final void loop() {
@@ -65,13 +69,21 @@ public class AudioClip implements IAudioClip {
         catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        clip.loop();
+        try {
+            clip.loop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void dispose() {
         if (clip != null) {
-            clip.dispose();
+            try {
+                clip.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             clip = null;
         }
     }
@@ -80,7 +92,11 @@ public class AudioClip implements IAudioClip {
         if (clip == null) {
             return;
         }
-        clip.stop();
+        try {
+            clip.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public final boolean isDone() {

@@ -24,6 +24,6 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigRandomPump 
 SVar:TrigRandomPump:DB$ Pump | Defined$ Self | KW$ Flying & Indestructible | RandomKeyword$ True
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigConvert | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, convert it.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform
-DeckHas:Keyword$Flying|Indestructible
 SVar:HasAttackEffect:TRUE
+DeckHas:Keyword$Flying|Indestructible
 Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nAt the beginning of combat on your turn, choose flying or indestructible at random. Blitzwing gains that ability until end of turn.\nWhenever Blitzwing deals combat damage to a player, convert it.

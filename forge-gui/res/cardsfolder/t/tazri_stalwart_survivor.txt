@@ -7,6 +7,6 @@ SVar:Mana:AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color
 A:AB$ Mill | Cost$ W U B R G T | NumCards$ 5 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill five cards.
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered+hasNonManaActivatedAbility | Origin$ Graveyard,Exile | Destination$ Hand | SubAbility$ DBCleanup | SpellDescription$ Put all creature cards with activated abilities that aren't mana abilities from among the milled cards into your hand.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Mill
 AI:RemoveDeck:Random
+DeckHas:Ability$Mill
 Oracle:Each creature you control has "{T}: Add one mana of any of this creature's colors. Spend this mana only to activate an ability of a creature. Activate only if this creature has another activated ability."\n{W}{U}{B}{R}{G}: Mill five cards. Put all creature cards with activated abilities that aren't mana abilities from among the milled cards into your hand.

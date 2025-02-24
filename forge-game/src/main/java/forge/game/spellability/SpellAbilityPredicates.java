@@ -1,12 +1,12 @@
 package forge.game.spellability;
 
-import com.google.common.base.Predicate;
-
 import forge.game.CardTraitBase;
 import forge.game.CardTraitPredicates;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.player.Player;
+
+import java.util.function.Predicate;
 
 public final class SpellAbilityPredicates extends CardTraitPredicates {
     public static Predicate<SpellAbility> isApi(final ApiType type) {

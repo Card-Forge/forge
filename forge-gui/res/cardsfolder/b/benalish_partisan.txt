@@ -8,7 +8,7 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 W | Origin$ Graveyard | Destination$ Ba
 SVar:DBPump:DB$ Pump | Defined$ Remembered | NumAtt$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Cycling:1 W
+SVar:SacMe:2
 DeckHas:Ability$LifeGain|Graveyard
 DeckNeeds:Keyword$Cycling
-SVar:SacMe:2
 Oracle:Lifelink\nWhenever you cycle another card, you may pay {1}{W}. If you do, return Benalish Partisan from your graveyard to the battlefield tapped and it perpetually gets +1/+0.\nCycling {1}{W}

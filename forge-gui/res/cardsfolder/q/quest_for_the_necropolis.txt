@@ -5,6 +5,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 A:AB$ ChangeZone | Cost$ 5 B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SorcerySpeed$ True | ReduceCost$ X | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. This ability costs {1} less to activate for each quest counter on CARDNAME. Activate only as a sorcery.
 SVar:X:Count$CardCounters.QUEST
-DeckHas:Ability$Counters
 SVar:MaxQuestEffect:5
+DeckHas:Ability$Counters
 Oracle:Landfall — Whenever a land you control enters, you may put a quest counter on Quest for the Necropolis.\n{5}{B}, Sacrifice Quest for the Necropolis: Put target creature card from a graveyard onto the battlefield under your control. This ability costs {1} less to activate for each quest counter on Quest for the Necropolis. Activate only as a sorcery.

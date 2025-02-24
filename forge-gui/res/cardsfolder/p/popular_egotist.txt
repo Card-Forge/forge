@@ -1,0 +1,10 @@
+Name:Popular Egotist
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:3/2
+A:AB$ Pump | Cost$ 1 B Sac<1/Creature.Other;Enchantment.Other/another creature or enchantment> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it.)
+SVar:DBTap:DB$ Tap | Defined$ Self
+T:Mode$ Sacrificed | ValidCard$ Permanent.YouCtrl | Execute$ TrigLoseLife | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a permanent, target opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent to lose life | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:{1}{B}, Sacrifice another creature or enchantment: Popular Egotist gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it.)\nWhenever you sacrifice a permanent, target opponent loses 1 life and you gain 1 life.

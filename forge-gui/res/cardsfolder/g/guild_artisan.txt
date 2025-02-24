@@ -4,6 +4,6 @@ Types:Legendary Enchantment Background
 S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ AttacksPlayer | Description$ Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, create two Treasure tokens." (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:AttacksPlayer:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player | Condition$ NoOpponentHasMoreLifeThanAttacked | Execute$ TrigTreasure | TriggerDescription$ Whenever this creature attacks a player, if no opponent has more life than that player, create two Treasure tokens.
 SVar:TrigTreasure:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac
-DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 AI:RemoveDeck:NonCommander
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 Oracle:Commander creatures you own have "Whenever this creature attacks a player, if no other opponent has more life than that player, create two Treasure tokens." (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

@@ -349,7 +349,7 @@ public class ConquestRewardDialog extends FScrollPane {
                     CardRenderer.drawCard(g, reward.getCard(), (w - flipWidth) / 2, 0, flipWidth, h, CardStackPosition.Top);
                 }
                 else {
-                    Texture cardBack = ImageCache.getImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true);
+                    Texture cardBack = ImageCache.getInstance().getImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true);
                     if (cardBack != null) {
                         float flipWidth = w * (halfDuration - progress) / halfDuration;
                         g.drawImage(cardBack, (w - flipWidth) / 2, 0, flipWidth, h);

@@ -4,7 +4,7 @@ Types:Creature Phyrexian Human Cleric
 PT:2/3
 K:Kicker:1 B
 K:Lifelink
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | OptionalDecider$ You | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, if it was kicked, you may return target creature card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, if it was kicked, return target creature card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
 DeckHas:Ability$Graveyard
 DeckHints:Color$Black

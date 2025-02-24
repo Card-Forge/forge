@@ -1,0 +1,10 @@
+Name:Dissection Tools
+ManaCost:5
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDread | TriggerDescription$ When CARDNAME enters, manifest dread, then attach CARDNAME to that creature.
+SVar:TrigDread:DB$ ManifestDread | RememberManifested$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Deathtouch & Lifelink | Description$ Equipped creature has +2/+2 and has deathtouch and lifelink.
+K:Equip:Sac<1/Creature>
+Oracle:When Dissection Tools enters, manifest dread, then attach Dissection Tools to that creature.\nEquipped creature has +2/+2 and has deathtouch and lifelink.\nEquip—Sacrifice a creature.

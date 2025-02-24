@@ -21,7 +21,7 @@ ScryfallCode=DDO
 13 U Gustcloak Skirmisher @Dan Frazier
 14 C Icatian Javelineers @Michael Phillippi
 15 C Kinsbaile Skirmisher @Thomas Denmark
-16 C Kor Skyfisher @Dan Scott
+16 C Kor Skyfisher @Dan Murayama Scott
 17 C Loxodon Partisan @Matt Stewart
 18 C Mighty Leap @rk post
 19 C Mortal's Ardor @Kev Walker

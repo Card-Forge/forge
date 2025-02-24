@@ -1,11 +1,6 @@
 package forge.gamemodes.quest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -27,6 +22,10 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.MyRandom;
 import forge.util.storage.IStorage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class QuestDraftUtils {
     public static boolean TOURNAMENT_TOGGLE = false;
@@ -250,6 +249,7 @@ public class QuestDraftUtils {
         rules.setMatchAnteRarity(false);
         rules.setGamesPerMatch(3);
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        rules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         rules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         return rules;
     }

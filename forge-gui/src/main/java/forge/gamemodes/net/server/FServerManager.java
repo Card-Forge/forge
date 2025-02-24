@@ -1,7 +1,5 @@
 package forge.gamemodes.net.server;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
@@ -12,6 +10,7 @@ import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
+import forge.util.IterableUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -20,10 +19,10 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import org.fourthline.cling.UpnpService;
-import org.fourthline.cling.UpnpServiceImpl;
-import org.fourthline.cling.support.igd.PortMappingListener;
-import org.fourthline.cling.support.model.PortMapping;
+import org.jupnp.UpnpService;
+import org.jupnp.UpnpServiceImpl;
+import org.jupnp.support.igd.PortMappingListener;
+import org.jupnp.support.model.PortMapping;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,16 +32,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public final class FServerManager {
     private static FServerManager instance = null;
-
-    private byte[] externalAddress = new byte[]{8,8,8,8};
+    private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
+    private byte[] externalAddress = new byte[]{8, 8, 8, 8};
     private boolean isHosting = false;
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
     private UpnpService upnpService = null;
-    private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
     private final Thread shutdownHook = new Thread(() -> {
@@ -54,9 +53,11 @@ public final class FServerManager {
     private FServerManager() {
     }
 
+
     RemoteClient getClient(final Channel ch) {
         return clients.get(ch);
     }
+
     IGameController getController(final int index) {
         return localLobby.getController(index);
     }
@@ -85,7 +86,7 @@ public final class FServerManager {
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
                                     new CompatibleObjectEncoder(),
-                                    new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
+                                    new CompatibleObjectDecoder(9766 * 1024, ClassResolvers.cacheDisabled(null)),
                                     new MessageHandler(),
                                     new RegisterClientHandler(),
                                     new LobbyInputHandler(),
@@ -116,6 +117,7 @@ public final class FServerManager {
     public void stopServer() {
         stopServer(true);
     }
+
     private void stopServer(final boolean removeShutdownHook) {
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
@@ -143,17 +145,22 @@ public final class FServerManager {
         }
         broadcastTo(event, clients.values());
     }
+
     public void broadcastExcept(final NetEvent event, final RemoteClient notTo) {
         broadcastExcept(event, Collections.singleton(notTo));
     }
+
     public void broadcastExcept(final NetEvent event, final Collection<RemoteClient> notTo) {
-        broadcastTo(event, Iterables.filter(clients.values(), Predicates.not(Predicates.in(notTo))));
+        Predicate<RemoteClient> filter = Predicate.not(notTo::contains);
+        broadcastTo(event, IterableUtil.filter(clients.values(), filter));
     }
+
     private void broadcastTo(final NetEvent event, final Iterable<RemoteClient> to) {
         for (final RemoteClient client : to) {
             broadcastTo(event, client);
         }
     }
+
     private void broadcastTo(final NetEvent event, final RemoteClient to) {
         event.updateForClient(to);
         to.send(event);
@@ -164,11 +171,9 @@ public final class FServerManager {
     }
 
     public void unsetReady() {
-        if (this.localLobby != null) {
-            if (this.localLobby.getSlot(0) != null) {
+        if (this.localLobby != null && this.localLobby.getSlot(0) != null) {
                 this.localLobby.getSlot(0).setIsReady(false);
                 updateLobbyState();
-            }
         }
     }
 
@@ -234,8 +239,7 @@ public final class FServerManager {
     public String getLocalAddress() {
         try {
             return getRoutableAddress(true, false);
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             return "localhost";
         }
@@ -247,8 +251,7 @@ public final class FServerManager {
             URL whatismyip = new URL("https://checkip.amazonaws.com");
             in = new BufferedReader(new InputStreamReader(
                     whatismyip.openStream()));
-            String ip = in.readLine();
-            return ip;
+            return in.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -266,14 +269,22 @@ public final class FServerManager {
     private void mapNatPort(final int port) {
         final String localAddress = getLocalAddress();
         final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
+
+        // Shutdown existing UPnP service if already running
         if (upnpService != null) {
-            // Safeguard shutdown call, to prevent lingering port mappings
             upnpService.shutdown();
         }
+
         try {
-            upnpService = new UpnpServiceImpl(new PortMappingListener(portMapping));
+            // Create a new UPnP service instance
+            upnpService = new UpnpServiceImpl();
+
+            // Add a PortMappingListener
+            upnpService.getRegistry().addListener(new PortMappingListener(portMapping));
+
+            // Trigger device discovery
             upnpService.getControlPoint().search();
-        }catch (Error e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -315,7 +326,8 @@ public final class FServerManager {
     }
 
     private class LobbyInputHandler extends ChannelInboundHandlerAdapter {
-        @Override public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
+        @Override
+        public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             final RemoteClient client = clients.get(ctx.channel());
             if (msg instanceof LoginEvent) {
                 final LoginEvent event = (LoginEvent) msg;
@@ -348,5 +360,4 @@ public final class FServerManager {
             super.channelInactive(ctx);
         }
     }
-
 }

@@ -1,8 +1,8 @@
 Name:Redrock Sentinel
 ManaCost:3
 Types:Artifact Creature Golem
-K:Defender
 PT:2/4
+K:Defender
 A:AB$ Draw | Cost$ 2 T Sac<1/Land> | NumCards$ 1 | SubAbility$ DBTreasure | SpellDescription$ Draw a card and create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
 Oracle:Defender\n{2}, {T}, Sacrifice a land: Draw a card and create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

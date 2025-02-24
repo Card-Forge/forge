@@ -17,9 +17,8 @@
  */
 package forge.game.cost;
 
-import java.util.List;
-
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -70,27 +69,27 @@ public class CostUnattach extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-        return findCardToUnattach(ability.getHostCard(), payer, ability) != null;
+        return !findCardToUnattach(ability.getHostCard(), payer, ability).isEmpty();
     }
 
-    public Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {
+    public CardCollection findCardToUnattach(final Card source, Player activator, SpellAbility ability) {
+        CardCollection attachees = new CardCollection();
         if (payCostFromSource()) {
             if (source.isEquipping()) {
-                return source;
+                attachees.add(source);
             }
         } else if (getType().equals("OriginalHost")) {
             Card originalEquipment = ability.getOriginalHost();
             if (originalEquipment.isEquipping()) {
-                return originalEquipment;
+                attachees.add(originalEquipment);
             }
         } else {
-            List<Card> attachees = CardLists.getValidCards(source.getEquippedBy(), this.getType(), activator, source, ability);
-            if (attachees.size() > 0) {
-                // Just pick the first one, although maybe give a dialog
-                return attachees.get(0);
+            attachees.addAll(source.getEquippedBy());
+            if (!getType().contains("X") || ability.getXManaCostPaid() != null) {
+                attachees = CardLists.getValidCards(attachees, this.getType(), activator, source, ability);
             }
         }
-        return null;
+        return attachees;
     }
 
     /* (non-Javadoc)

@@ -2,7 +2,7 @@ Name:Gift of Paradise
 ManaCost:2 G
 Types:Enchantment Aura
 K:Enchant land
-A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ AbundantGrowthTap | Description$ Enchanted land has "{T}: Add two mana of any one color."

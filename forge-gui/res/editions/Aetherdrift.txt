@@ -1,0 +1,648 @@
+[metadata]
+Code=DFT
+Date=2025-02-14
+Name=Aetherdrift
+Type=Expansion
+ScryfallCode=DFT
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+# https://mtgscribe.com/2025/01/21/play-booster-fact-sheet-aetherdrift/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 WildcardFoil+
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+
+[Common]
+Base=Common:!fromSheet("DFT gain lands"):fromSheet("DFT cards")
+
+[Common-Guest]
+Base=Common:!fromSheet("DFT gain lands"):fromSheet("DFT cards")
+Replace=.015625F fromSheet("DFT special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("DFT cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("DFT cards")
+#Needs borderless replacements
+
+[AnyLand]
+Base=fromSheet("DFT gain lands")
+Replace=.5F BasicLand:fromSheet("DFT cards"):!fromSheet("DFT gain lands")
+
+[Wildcard]
+Base=Uncommon:fromSheet("DFT cards")
+Replace=.083F Common:fromSheet("DFT cards")
+Replace=.163F Rare:fromSheet("DFT cards")
+Replace=.026F Mythic:fromSheet("DFT cards")
+#Replace=.026F RevvedUp:fromSheet("DFT cards")
+
+[WildcardFoil]
+Base=Common:fromSheet("DFT cards")
+Replace=.30F Uncommon:fromSheet("DFT cards")
+Replace=.064F Rare:fromSheet("DFT cards")
+Replace=.011F Mythic:fromSheet("DFT cards")
+#Needs borderless replacements
+
+[cards]
+1 U Air Response Unit @Brock Grossman
+2 U Alacrian Armory @Artur Nakhodkin
+3 R Basri, Tomorrow's Champion @Kai Carpenter
+4 C Brightfield Glider @Andreia Ugrai
+5 C Brightfield Mustang @Slawomir Maniak
+6 C Broadcast Rambler @Ioannis Fiore
+7 R Bulwark Ox @Brent Hollowell
+8 U Canyon Vaulter @David Astruga
+9 U Cloudspire Captain @Manny Edeko
+10 C Collision Course @Konstantin Porubov
+11 C Daring Mechanic @Elizabeth Peiró
+12 U Detention Chariot @Adrián Rodríguez Pérez
+13 U Gallant Strike @Brent Hollowell
+14 U Gloryheath Lynx @Deruchenko Alexander
+15 R Guardian Sunmare @Christina Kraus
+16 U Guidelight Synergist @Camille Alquier
+17 C Interface Ace @Wonchun Choi
+18 C Leonin Surveyor @Valera Lutfullina
+19 C Lightshield Parry @Leanna Crossan
+20 C Lightwheel Enhancements @Yeong-Hao Han
+21 C Lotusguard Disciple @Josiah "Jo" Cameron
+22 U Nesting Bot @Racrufi
+23 R Perilous Snare @Chris Seaman
+24 U Pride of the Road @Alfonso Santano
+25 C Ride's End @Dmitry Burmak
+26 U Roadside Assistance @Artur Nakhodkin
+27 M Salvation Engine @Ben Wootten
+28 R Skyseer's Chariot @Carl Critchlow
+29 R Spectacular Pileup @Zezhou Chen
+30 C Spotcycle Scouter @Josiah "Jo" Cameron
+31 U Sundial, Dawn Tyrant @Bruce Brenneise
+32 C Swiftwing Assailant @Pig Hands
+33 U Tune Up @Chris Rallis
+34 U Unswerving Sloth @Daren Bader
+35 M Valor's Flagship @Stephan Martiniere
+36 R Voyager Glidecar @Eduardo Francisco
+37 C Voyager Quickwelder @Kenn Yap
+38 U Aether Syphon @Martin de Diego Sádaba
+39 C Bounce Off @Deruchenko Alexander
+40 U Caelorna, Coral Tyrant @Deruchenko Alexander
+41 U Diversion Unit @Xabi Gaztelua
+42 C Flood the Engine @Eric Wilkerson
+43 C Gearseeker Serpent @Jean Pierre Targete
+44 C Glitch Ghost Surveyor @Johan Grenier
+45 C Guidelight Optimizer @Mirko Failoni
+46 C Howler's Heavy @Borja Pindado
+47 C Hulldrifter @Alexandre Honoré
+48 C Keen Buccaneer @Mirko Failoni
+49 U Memory Guardian @Hardy Fowler
+50 C Midnight Mangler @Villarrte
+51 R Mindspring Merfolk @Andreia Ugrai
+52 M Mu Yanling, Wind Rider @Justyna Dura
+53 C Nimble Thopterist @Ioannis Fiore
+54 R Possession Engine @Leroy Steinmann
+55 U Rangers' Refueler @Samuel Perin
+56 R Repurposing Bay @William Tempest
+57 R Riverchurn Monument @Anthony Devine
+58 U Roadside Blowout @Michele Giorgi
+59 U Sabotage Strategist @Darren Tan
+60 U Scrounging Skyray @Ron Spears
+61 C Skystreak Engineer @Elizabeth Peiró
+62 U Slick Imitator @Xabi Gaztelua
+63 C Spectral Interference @Steve Ellis
+64 U Spell Pierce @Maxime Minard
+65 U Spikeshell Harrier @Alfonso Santano
+66 C Stall Out @Inkognit
+67 U Stock Up @Izzy
+68 R Thopter Fabricator @Racrufi
+69 U Trade the Helm @Lius Lasahido
+70 U Transit Mage @Mark Poole
+71 C Trip Up @Josiah "Jo" Cameron
+72 R Unstoppable Plan @Borja Pindado
+73 R Vnwxt, Verbose Host @Izzy
+74 R Waxen Shapethief @Helge C. Balzer
+75 U Ancient Vendetta @Tianxing Xu
+76 U Back on Track @Raoul Vitale
+77 R Bloodghast @Francisco Badilla
+78 U Carrion Cruiser @Mathias Kollros
+79 C Chitin Gravestalker @Slawomir Maniak
+80 R Cryptcaller Chariot @Aaron Miller
+81 R Cursecloth Wrappings @Dominik Mayer
+82 C Deathless Pilot @Justin Cornell
+83 R Demonic Junker @Stephan Martiniere
+84 C Engine Rat @Camille Alquier
+85 R Gas Guzzler @Yohann Schepacz
+86 U Gastal Raider @Lorenzo Mastroianni
+87 R Gonti, Night Minister @Scott M. Fischer
+88 C Grim Bauble @Wero Gallo
+89 C Grim Javelineer @Bartek Fedyczak
+90 U Hellish Sideswipe @Diana Franco
+91 U Hour of Victory @Aaron Miller
+92 U Intimidation Tactics @Cristi Balanescu
+93 U Kalakscion, Hunger Tyrant @John Tedrick
+94 M The Last Ride @Michele Giorgi
+95 U Locust Spray @Caio Monteiro
+96 C Maximum Overdrive @Javier Charro
+97 U Momentum Breaker @Dmitry Burmak
+98 C Mutant Surveyor @Nicholas Gregory
+99 C Pactdoll Terror @David Astruga
+100 R Quag Feast @Loïc Canavaggia
+101 C Ripclaw Wrangler @John Tedrick
+102 U Risen Necroregent @Inkognit
+103 C Risky Shortcut @Ignatius Budi
+104 U Shefet Archfiend @GodMachine
+105 M The Speed Demon @Helge C. Balzer
+106 C Spin Out @Adrián Rodríguez Pérez
+107 C Streaking Oilgorger @Campbell White
+108 C Syphon Fuel @Mathias Kollros
+109 U Wickerfolk Indomitable @Sergio Cosmai
+110 C Wreckage Wickerfolk @Johan Grenier
+111 U Wretched Doll @Loïc Canavaggia
+112 U Adrenaline Jockey @Alfonso Santano
+113 R Boommobile @Alexandr Leskinen
+114 C Burner Rocket @José Parodi
+115 R Burnout Bashtronaut @Andrea Piparo
+116 M Chandra, Spark Hunter @Devin Elle Kurtz
+117 C Clamorous Ironclad @Svetlin Velinov
+118 R Count on Luck @Michal Ivan
+119 C Crash and Burn @Anthony Devine
+120 R Daretti, Rocketeer Engineer @Borja Pindado
+121 R Draconautics Engineer @Artur Nakhodkin
+122 U Dracosaur Auxiliary @Brian Valeza
+123 C Dynamite Diver @Pete Venters
+124 C Endrider Catalyzer @Karl Kopinski
+125 U Endrider Spikespitter @Mila Pesic
+126 U Fuel the Flames @Nicholas Gregory
+127 R Full Throttle @Benjamin Ee
+128 C Gastal Blockbuster @Bryan Sola
+129 R Gastal Thrillroller @Caio Monteiro
+130 C Gilded Ghoda @Alexandre Honoré
+131 C Goblin Surveyor @Pete Venters
+132 U Greasewrench Goblin @Alexandre Honoré
+133 M Hazoret, Godseeker @Chris Rallis
+134 R Howlsquad Heavy @Leonardo Santanna
+135 C Kickoff Celebrations @Evyn Fong
+136 C Lightning Strike @Steve Ellis
+137 C Magmakin Artillerist @Madeline Boni
+138 U Marauding Mako @Alix Branwyn
+139 U Outpace Oblivion @Raymond Swanland
+140 U Pacesetter Paragon @Wonchun Choi
+141 C Pedal to the Metal @Anthony Devine
+142 C Prowcatcher Specialist @Konstantin Porubov
+143 U Push the Limit @Alexander Mokhov
+144 U Reckless Velocitaur @Inkognit
+145 U Road Rage @Javier Charro
+146 U Skycrash @Nicholas Gregory
+147 U Spire Mechcycle @Adam Volker
+148 C Thunderhead Gunner @Mirko Failoni
+149 U Tyrox, Saurid Tyrant @John Tedrick
+150 R Afterburner Expert @April Prime
+151 R Agonasaur Rex @Lucas Graciano
+152 C Alacrian Jaguar @Andrey Kuzinskiy
+153 U Autarch Mammoth @Leonardo Santanna
+154 C Beastrider Vanguard @Andrey Kuzinskiy
+155 C Bestow Greatness @Jeff Carpenter
+156 C Broken Wings @Nils Hamm
+157 U Defend the Rider @Raph Lomotan
+158 R District Mascot @Liiga Smilshkalne
+159 U Dredger's Insight @Bartek Fedyczak
+160 U Earthrumbler @Jean Pierre Targete
+161 U Elvish Refueler @Carly Milligan
+162 U Fang Guardian @Jason A. Engle
+163 U Fang-Druid Summoner @Nino Is
+164 U Greenbelt Guardian @Tianxing Xu
+165 C Hazard of the Dunes @Brent Hollowell
+166 C Jibbirik Omnivore @Jesper Ejsing
+167 C Loxodon Surveyor @Jean Pierre Targete
+168 R Lumbering Worldwagon @Raph Lomotan
+169 M March of the World Ooze @Helge C. Balzer
+170 C Migrating Ketradon @Izzy
+171 U Molt Tender @Filip Burburan
+172 U Ooze Patrol @Forrest Schehl
+173 R Oviya, Automech Artisan @Julia Metzger
+174 U Plow Through @Brian Valeza
+175 U Point the Way @Izzy
+176 C Pothole Mole @Daren Bader
+177 R Regal Imperiosaur @Stephanie Cheung
+178 U Rise from the Wreck @Nino Is
+179 C Run Over @Tuan Duong Chu
+180 C Silken Strength @Olivier Bernard
+181 C Stampeding Scurryfoot @Julia Metzger
+182 U Terrian, World Tyrant @Nicholas Gregory
+183 M Thunderous Velocipede @Adrián Rodríguez Pérez
+184 C Veloheart Bike @Anthony Devine
+185 C Venomsac Lagac @Andrey Kuzinskiy
+186 R Webstrike Elite @Andrew Mar
+187 R Aatchik, Emerald Radian @Loïc Canavaggia
+188 U Apocalypse Runner @Aaron J. Riley
+189 U Boom Scholar @Brian Valeza
+190 U Boosted Sloop @José Parodi
+191 M Brightglass Gearhulk @José Parodi
+192 U Broadside Barrage @Javier Charro
+193 U Broodheart Engine @Rémi Jacquot
+194 R Captain Howler, Sea Scourge @Mirko Failoni
+195 R Caradora, Heart of Alacria @Mirko Failoni
+196 U Cloudspire Coordinator @Eduardo Francisco
+197 U Cloudspire Skycycle @Hardy Fowler
+198 M Coalstoke Gearhulk @Nino Vecia
+199 R Debris Beetle @Julie Dillon
+200 U Dune Drifter @Simon Dominic
+201 U Embalmed Ascendant @Edgar Sánchez Hidalgo
+202 R Explosive Getaway @Caio Monteiro
+203 R Far Fortune, End Boss @Javier Charro
+204 R Fearless Swashbuckler @Konstantin Porubov
+205 U Gastal Thrillseeker @Olivier Bernard
+206 U Guidelight Pathmaker @Stephan Martiniere
+207 U Haunt the Network @Jeff Carpenter
+208 U Haunted Hellride @Olivier Bernard
+209 M Ketramose, the New Dawn @Maaz Ali Khan
+210 R Kolodin, Triumph Caster @Michal Ivan
+211 U Lagorin, Soul of Alacria @Mirko Failoni
+212 M Loot, the Pathfinder @Ernanda Souza
+213 R Mendicant Core, Guidelight @Zezhou Chen
+214 M Mimeoplasm, Revered One @Ron Spencer
+215 M Oildeep Gearhulk @Artur Nakhodkin
+216 M Pyrewood Gearhulk @Martin de Diego Sádaba
+217 U Rangers' Aetherhive @Josiah "Jo" Cameron
+218 R Redshift, Rocketeer Chief @Wayne Reynolds
+219 M Riptide Gearhulk @Artur Nakhodkin
+220 U Rocketeer Boostbuggy @Chris Seaman
+221 M Sab-Sunen, Luxa Embodied @Valera Lutfullina
+222 R Samut, the Driving Force @Chris Rallis
+223 R Sita Varma, Masked Racer @Kai Carpenter
+224 U Skyserpent Seeker @Johan Grenier
+225 U Thundering Broodwagon @Bartek Fedyczak
+226 U Veteran Beastrider @Andreia Ugrai
+227 U Voyage Home @Hardy Fowler
+228 R Winter, Cursed Rider @Daren Bader
+229 R Zahur, Glory's Past @Leroy Steinmann
+230 C Aetherjacket @Domenico Cava
+231 M The Aetherspark @Donato Giancola
+232 C Camera Launcher @Ben Wootten
+233 C Guidelight Matrix @Eli Minaya
+234 R Lifecraft Engine @Mirko Failoni
+235 R Marketback Walker @Svetlin Velinov
+236 U Marshals' Pathcruiser @Javier Charro
+237 R Monument to Endurance @Victor Sales
+238 U Pit Automaton @Villarrte
+239 U Racers' Scoreboard @Konstantin Porubov
+240 M Radiant Lotus @Bruce Brenneise
+241 U Rover Blades @Nathaniel Himawan
+242 C Scrap Compactor @Viko Menezes
+243 C Skybox Ferry @Borja Pindado
+244 C Starting Column @Jakub Kasper
+245 C Ticket Tortoise @Brian Valeza
+246 C Walking Sarcophagus @Julia Metzger
+247 C Wreck Remover @Villarrte
+248 U Amonkhet Raceway @Brian Valeza
+249 C Avishkar Raceway @Julian Kok Joon Wen
+250 R Bleachbone Verge @Mark Tedin
+251 L Bloodfell Caves @Ron Spencer
+252 L Blossoming Sands @Valera Lutfullina
+253 U Country Roads @Mark Poole
+254 L Dismal Backwater @Sam Burley
+255 U Foul Roads @Borja Pindado
+256 L Jungle Hollow @Eddie Mendoza
+257 R Muraganda Raceway @Brian Valeza
+258 C Night Market @David Álvarez
+259 U Reef Roads @David Álvarez
+260 R Riverpyre Verge @Titus Lunter
+261 U Rocky Roads @Arthur Yuan
+262 L Rugged Highlands @Florian de Gesincourt
+263 L Scoured Barrens @Eddie Mendoza
+264 R Sunbillow Verge @Pete Venters
+265 L Swiftwater Cliffs @Mark Poole
+266 L Thornwood Falls @Eddie Mendoza
+267 L Tranquil Cove @Wayne Wu
+268 R Wastewood Verge @Bartek Fedyczak
+269 U Wild Roads @Leanna Crossan
+270 R Willowrush Verge @Aaron Miller
+271 L Wind-Scarred Crag @Svetlin Velinov
+272 L Plains @Adam Paquette
+273 L Island @Maxime Minard
+274 L Swamp @Jonas De Ro
+275 L Mountain @Chris Ostrowski
+276 L Forest @Andreas Rocha
+277 L Plains @Samuele Bandini
+278 L Plains @Titus Lunter
+279 L Plains @Leon Tukker
+280 L Island @Samuele Bandini
+281 L Island @Mark Poole
+282 L Island @Leon Tukker
+283 L Swamp @Samuele Bandini
+284 L Swamp @Ron Spencer
+285 L Swamp @Leon Tukker
+286 L Mountain @Samuele Bandini
+287 L Mountain @Florian de Gesincourt
+288 L Mountain @Leon Tukker
+289 L Forest @Samuele Bandini
+290 L Forest @Yeong-Hao Han
+291 L Forest @Leon Tukker
+
+[borderless]
+292 U Air Response Unit @SchmandrewART
+293 C Broadcast Rambler @Francisco Badilla
+294 U Detention Chariot @Arik Roper
+295 M Salvation Engine @Adam Volker
+296 R Skyseer's Chariot @Douglas P. Lobo
+297 C Spotcycle Scouter @Neo.G
+298 M Valor's Flagship @William Tempest
+299 R Voyager Glidecar @Andrew Griffith
+300 C Hulldrifter @Juan Marquez
+301 C Midnight Mangler @Boneface
+302 R Possession Engine @Douglas P. Lobo
+303 U Rangers' Refueler @Francisco Badilla
+304 R Thopter Fabricator @William Tempest
+305 U Carrion Cruiser @Ian Jepson
+306 R Cryptcaller Chariot @Oliver Barrett
+307 R Demonic Junker @Death Burger
+308 M The Last Ride @Death Burger
+309 C Ripclaw Wrangler @Andrew Griffith
+310 R Boommobile @Ian Jepson
+311 C Burner Rocket @Carl Critchlow
+312 C Clamorous Ironclad @Cosmin Podar
+313 R Gastal Thrillroller @Dan Mumford
+314 U Spire Mechcycle @Neo.G
+315 U Earthrumbler @SchmandrewART
+316 R Lumbering Worldwagon @Francisco Badilla
+317 M Thunderous Velocipede @Eduardo Francisco
+318 C Veloheart Bike @Juan Marquez
+319 U Apocalypse Runner @Arik Roper
+320 U Boosted Sloop @Gabriel Rubio
+321 U Cloudspire Skycycle @Yuko Shimizu
+322 R Debris Beetle @Michal Ivan
+323 U Dune Drifter @Arik Roper
+324 U Guidelight Pathmaker @Dan Mumford
+325 U Haunted Hellride @Death Burger
+326 U Rangers' Aetherhive @Francisco Badilla
+327 U Rocketeer Boostbuggy @Adam Volker
+328 U Thundering Broodwagon @Villarrte
+329 R Lifecraft Engine @Eduardo Francisco
+330 U Marshals' Pathcruiser @Michal Ivan
+331 U Rover Blades @Eduardo Francisco
+332 C Skybox Ferry @SchmandrewART
+333 R Bulwark Ox @Jon Vermilyea
+334 R Guardian Sunmare @Wojtek Łebski
+335 R Mindspring Merfolk @CatDirty
+336 R Waxen Shapethief @CatDirty
+337 R Bloodghast @Wojtek Łebski
+338 R Gas Guzzler @Sam McKenzie
+339 M The Speed Demon @CatDirty
+340 R Burnout Bashtronaut @Jon Vermilyea
+341 R Draconautics Engineer @Ryan Roadkill
+342 R Howlsquad Heavy @Ryan Roadkill
+343 R Agonasaur Rex @Jon Vermilyea
+344 R District Mascot @Ryan Roadkill
+345 R Webstrike Elite @Sam McKenzie
+346 R Fearless Swashbuckler @CatDirty
+347 M Hazoret, Godseeker @Massiveface
+348 M Brightglass Gearhulk @Jorge Gutierrez Garcia
+349 M Coalstoke Gearhulk @Ivan Shavrin
+350 M Ketramose, the New Dawn @Florian Bertmer
+351 M Oildeep Gearhulk @Chun Lo
+352 M Pyrewood Gearhulk @William Tempest
+353 M Riptide Gearhulk @Kudaman
+354 M Sab-Sunen, Luxa Embodied @Benjamin Ee
+355 R Basri, Tomorrow's Champion @Justyna Dura
+356 R Vnwxt, Verbose Host @Chris Seaman
+357 R Gonti, Night Minister @Richard Kane Ferguson
+358 R Daretti, Rocketeer Engineer @Samuel Perin
+359 R Oviya, Automech Artisan @Ron Spears
+360 R Aatchik, Emerald Radian @Erica Williams
+361 R Captain Howler, Sea Scourge @Mark Zug
+362 R Caradora, Heart of Alacria @Yuko Shimizu
+363 R Far Fortune, End Boss @Justine Jones
+364 R Kolodin, Triumph Caster @John Stanko
+365 R Mendicant Core, Guidelight @Dan Mumford
+366 R Redshift, Rocketeer Chief @Xavier Ribeiro
+367 R Samut, the Driving Force @Mark Poole
+368 R Sita Varma, Masked Racer @rk post
+369 R Winter, Cursed Rider @Ovidio Cartagena
+370 R Zahur, Glory's Past @Alex Stone
+371 R Bleachbone Verge @Daren Bader
+372 R Riverpyre Verge @Justin Sweet
+373 R Sunbillow Verge @Darrell Riche
+374 R Wastewood Verge @Kev Walker
+375 R Willowrush Verge @Carl Critchlow
+376 M The Aetherspark @Dominik Mayer
+
+[extended art]
+377 R Perilous Snare @Chris Seaman
+378 R Spectacular Pileup @Zezhou Chen
+379 M Mu Yanling, Wind Rider @Justyna Dura
+380 R Repurposing Bay @William Tempest
+381 R Riverchurn Monument @Anthony Devine
+382 R Unstoppable Plan @Borja Pindado
+383 R Cursecloth Wrappings @Dominik Mayer
+384 R Quag Feast @Loïc Canavaggia
+385 R Count on Luck @Michal Ivan
+386 R Full Throttle @Benjamin Ee
+387 R Afterburner Expert @April Prime
+388 M March of the World Ooze @Helge C. Balzer
+389 R Regal Imperiosaur @Stephanie Cheung
+390 R Explosive Getaway @Caio Monteiro
+391 M Loot, the Pathfinder @Ernanda Souza
+392 M Mimeoplasm, Revered One @Ron Spencer
+393 R Marketback Walker @Svetlin Velinov
+394 R Monument to Endurance @Victor Sales
+395 M Radiant Lotus @Bruce Brenneise
+396 R Muraganda Raceway @Brian Valeza
+424 U Amonkhet Raceway @Titus Lunter
+425 C Avishkar Raceway @Titus Lunter
+426 R Muraganda Raceway @Titus Lunter
+
+[showcase]
+397 M Salvation Engine @Mai Minamiura
+398 M Spectacular Pileup @JIN-E YAMAMOTO
+399 M Mu Yanling, Wind Rider @D-suzuki
+400 M Cursecloth Wrappings @BARON UEDA
+401 M Chandra, Spark Hunter @jbstyle.
+402 M March of the World Ooze @Raimaru
+403 M Explosive Getaway @TSCR
+404 M Loot, the Pathfinder @Tetsu Kurosawa
+405 M Mimeoplasm, Revered One @SH11NA
+406 M Radiant Lotus @Tomoyuki Mizufune
+
+[etched]
+407 M Salvation Engine @Mai Minamiura
+408 M Spectacular Pileup @JIN-E YAMAMOTO
+409 M Mu Yanling, Wind Rider @D-suzuki
+410 M Cursecloth Wrappings @BARON UEDA
+411 M Chandra, Spark Hunter @jbstyle.
+412 M March of the World Ooze @Raimaru
+413 M Explosive Getaway @TSCR
+414 M Loot, the Pathfinder @Tetsu Kurosawa
+415 M Mimeoplasm, Revered One @SH11NA
+416 M Radiant Lotus @Tomoyuki Mizufune
+427 R Basri, Tomorrow's Champion @Kai Carpenter
+428 R Bulwark Ox @Brent Hollowell
+429 R Guardian Sunmare @Christina Kraus
+430 R Perilous Snare @Chris Seaman
+431 M Salvation Engine @Ben Wootten
+432 R Skyseer's Chariot @Carl Critchlow
+433 R Spectacular Pileup @Zezhou Chen
+434 M Valor's Flagship @Stephan Martiniere
+435 R Voyager Glidecar @Eduardo Francisco
+436 R Mindspring Merfolk @Andreia Ugrai
+437 M Mu Yanling, Wind Rider @Justyna Dura
+438 R Possession Engine @Leroy Steinmann
+439 R Repurposing Bay @William Tempest
+440 R Riverchurn Monument @Anthony Devine
+441 R Thopter Fabricator @Racrufi
+442 R Unstoppable Plan @Borja Pindado
+443 R Vnwxt, Verbose Host @Izzy
+444 R Waxen Shapethief @Helge C. Balzer
+445 R Bloodghast @Francisco Badilla
+446 R Cryptcaller Chariot @Aaron Miller
+447 R Cursecloth Wrappings @Dominik Mayer
+448 R Demonic Junker @Stephan Martiniere
+449 R Gas Guzzler @Yohann Schepacz
+450 R Gonti, Night Minister @Scott M. Fischer
+451 M The Last Ride @Michele Giorgi
+452 R Quag Feast @Loïc Canavaggia
+453 M The Speed Demon @Helge C. Balzer
+454 R Boommobile @Alexandr Leskinen
+455 R Burnout Bashtronaut @Andrea Piparo
+456 M Chandra, Spark Hunter @Devin Elle Kurtz
+457 R Count on Luck @Michal Ivan
+458 R Daretti, Rocketeer Engineer @Borja Pindado
+459 R Draconautics Engineer @Artur Nakhodkin
+460 R Full Throttle @Benjamin Ee
+461 R Gastal Thrillroller @Caio Monteiro
+462 M Hazoret, Godseeker @Chris Rallis
+463 R Howlsquad Heavy @Leonardo Santanna
+464 R Afterburner Expert @April Prime
+465 R Agonasaur Rex @Lucas Graciano
+466 R District Mascot @Liiga Smilshkalne
+467 R Lumbering Worldwagon @Raph Lomotan
+468 M March of the World Ooze @Helge C. Balzer
+469 R Oviya, Automech Artisan @Julia Metzger
+470 R Regal Imperiosaur @Stephanie Cheung
+471 M Thunderous Velocipede @Adrián Rodríguez Pérez
+472 R Webstrike Elite @Andrew Mar
+473 R Aatchik, Emerald Radian @Loïc Canavaggia
+474 M Brightglass Gearhulk @José Parodi
+475 R Captain Howler, Sea Scourge @Mirko Failoni
+476 R Caradora, Heart of Alacria @Mirko Failoni
+477 M Coalstoke Gearhulk @Nino Vecia
+478 R Debris Beetle @Julie Dillon
+479 R Explosive Getaway @Caio Monteiro
+480 R Far Fortune, End Boss @Javier Charro
+481 R Fearless Swashbuckler @Konstantin Porubov
+482 M Ketramose, the New Dawn @Maaz Ali Khan
+483 R Kolodin, Triumph Caster @Michal Ivan
+484 M Loot, the Pathfinder @Ernanda Souza
+485 R Mendicant Core, Guidelight @Zezhou Chen
+486 M Mimeoplasm, Revered One @Ron Spencer
+487 M Oildeep Gearhulk @Artur Nakhodkin
+488 M Pyrewood Gearhulk @Martin de Diego Sádaba
+489 R Redshift, Rocketeer Chief @Wayne Reynolds
+490 M Riptide Gearhulk @Artur Nakhodkin
+491 M Sab-Sunen, Luxa Embodied @Valera Lutfullina
+492 R Samut, the Driving Force @Chris Rallis
+493 R Sita Varma, Masked Racer @Kai Carpenter
+494 R Winter, Cursed Rider @Daren Bader
+495 R Zahur, Glory's Past @Leroy Steinmann
+496 M The Aetherspark @Donato Giancola
+497 R Lifecraft Engine @Mirko Failoni
+498 R Marketback Walker @Svetlin Velinov
+499 R Monument to Endurance @Victor Sales
+500 M Radiant Lotus @Bruce Brenneise
+501 R Bleachbone Verge @Mark Tedin
+502 R Muraganda Raceway @Brian Valeza
+503 R Riverpyre Verge @Titus Lunter
+504 R Sunbillow Verge @Pete Venters
+505 R Wastewood Verge @Bartek Fedyczak
+506 R Willowrush Verge @Aaron Miller
+507 L Plains @Adam Paquette
+508 L Island @Maxime Minard
+509 L Swamp @Jonas De Ro
+510 L Mountain @Chris Ostrowski
+511 L Forest @Andreas Rocha
+512 L Plains @Calder Moore
+513 L Island @Calder Moore
+514 L Swamp @Calder Moore
+515 L Mountain @Calder Moore
+516 L Forest @Calder Moore
+517 M Salvation Engine @Adam Volker
+518 R Skyseer's Chariot @Douglas P. Lobo
+519 M Valor's Flagship @William Tempest
+520 R Voyager Glidecar @Andrew Griffith
+521 R Possession Engine @Douglas P. Lobo
+522 R Thopter Fabricator @William Tempest
+523 R Cryptcaller Chariot @Oliver Barrett
+524 R Demonic Junker @Death Burger
+525 M The Last Ride @Death Burger
+526 R Boommobile @Ian Jepson
+527 R Gastal Thrillroller @Dan Mumford
+528 R Lumbering Worldwagon @Francisco Badilla
+529 M Thunderous Velocipede @Eduardo Francisco
+530 R Debris Beetle @Michal Ivan
+531 R Lifecraft Engine @Eduardo Francisco
+532 R Bulwark Ox @Jon Vermilyea
+533 R Guardian Sunmare @Wojtek Łebski
+534 R Mindspring Merfolk @CatDirty
+535 R Waxen Shapethief @CatDirty
+536 R Bloodghast @Wojtek Łebski
+537 R Gas Guzzler @Sam McKenzie
+538 M The Speed Demon @CatDirty
+539 R Burnout Bashtronaut @Jon Vermilyea
+540 R Draconautics Engineer @Ryan Roadkill
+541 R Howlsquad Heavy @Ryan Roadkill
+542 R Agonasaur Rex @Jon Vermilyea
+543 R District Mascot @Ryan Roadkill
+544 R Webstrike Elite @Sam McKenzie
+545 R Fearless Swashbuckler @CatDirty
+546 M Hazoret, Godseeker @Massiveface
+547 M Brightglass Gearhulk @Jorge Gutierrez Garcia
+548 M Coalstoke Gearhulk @Ivan Shavrin
+549 M Ketramose, the New Dawn @Florian Bertmer
+550 M Oildeep Gearhulk @Chun Lo
+551 M Pyrewood Gearhulk @William Tempest
+552 M Riptide Gearhulk @Kudaman
+553 M Sab-Sunen, Luxa Embodied @Benjamin Ee
+
+[promo]
+417 U Tune Up @Chris Rallis
+418 U Gastal Raider @Lorenzo Mastroianni
+419 U Marauding Mako @Alix Branwyn
+420 U Skyserpent Seeker @Johan Grenier
+421 U Voyage Home @Hardy Fowler
+422 R Lumbering Worldwagon @Adam Volker
+423 R Lifecraft Engine @José Parodi
+
+[gain lands]
+1 Bloodfell Caves|DFT
+1 Blossoming Sands|DFT
+1 Dismal Backwater|DFT
+1 Jungle Hollow|DFT
+1 Rugged Highlands|DFT
+1 Scoured Barrens|DFT
+1 Swiftwater Cliffs|DFT
+1 Thornwood Falls|DFT
+1 Tranquil Cove|DFT
+1 Wind-Scarred Crag|DFT
+
+[special guests]
+1 Bone Miser|SPG
+1 Cavalier of Dawn|SPG
+1 Chandra's Ignition|SPG
+1 Chrome Mox|SPG
+1 Galvanic Blast|SPG
+1 Lord of the Undead|SPG
+1 Pathbreaker Ibex|SPG
+1 Skysovereign, Consul Flagship|SPG
+1 Thoughtcast|SPG
+1 Whir of Invention|SPG
+
+[tokens]
+b_2_2_zombie
+c_1_1_a_servo
+c_1_1_a_thopter_flying
+c_1_1_a_thopter_flying
+c_1_1_pilot_crewsaddlebuff
+c_3_2_a_vehicle_crew_1
+c_a_treasure_sac
+g_1_1_insect
+g_3_3_elephant
+r_1_1_goblin
+r_4_4_dinosaur_dragon_flying
+w_1_1_cat_lifelink

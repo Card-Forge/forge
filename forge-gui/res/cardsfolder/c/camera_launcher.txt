@@ -1,0 +1,8 @@
+Name:Camera Launcher
+ManaCost:3
+Types:Artifact Creature Construct
+PT:2/2
+A:AB$ PutCounter | Cost$ 3 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | Exhaust$ True | SubAbility$ DBToken | SpellDescription$ Put a +1/+1 counter on this creature. Create a 1/1 colorless Thopter artifact creature token with flying. (Activate each exhaust ability only once.)
+SVar:DBToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying
+DeckHas:Ability$Counters|Token
+Oracle:Exhaust — {3}: Put a +1/+1 counter on this creature. Create a 1/1 colorless Thopter artifact creature token with flying. (Activate each exhaust ability only once.)

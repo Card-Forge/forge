@@ -177,7 +177,7 @@ public class TextRenderer {
                                     needClip = true;
                                 }
                             }
-                            addPiece(new SymbolPiece(symbol, inReminderTextCount > 0), lineNum, x, y - font.getAscent() + (lineHeight - pieceWidth) / 2, pieceWidth, pieceWidth);
+                            addPiece(new SymbolPiece(symbol, inReminderTextCount > 0), lineNum, x, y - lineHeight / 4, pieceWidth, pieceWidth);
                             x += pieceWidth;
                             pieceWidth = 0;
                             text.setLength(0);
@@ -378,8 +378,7 @@ public class TextRenderer {
                                 lastPieceIdx = pieces.size() - 1; //don't re-wrap anything if reached previous line
                                 break;
                             }
-                            if (lastPiece instanceof TextPiece) {
-                                TextPiece textPiece = (TextPiece)lastPiece;
+                            if (lastPiece instanceof TextPiece textPiece) {
                                 int index = textPiece.text.lastIndexOf(' ');
                                 if (index != -1) {
                                     if (index == 0) {

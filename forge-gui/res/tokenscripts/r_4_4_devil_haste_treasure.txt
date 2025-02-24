@@ -1,7 +1,7 @@
 Name:Devil Token
 ManaCost:no cost
-Types:Creature Devil
 Colors:red
+Types:Creature Devil
 PT:4/4
 K:Haste
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a Treasure token.

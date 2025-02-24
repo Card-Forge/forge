@@ -16,5 +16,5 @@ Types:Legendary Artifact
 A:AB$ Dig | Cost$ Discard<1/Card> | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Exile the top two cards of your library. You may play those cards this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ StaticMayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:StaticMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ You may play those cards this turn.
+SVar:StaticMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Description$ You may play those cards this turn.
 Oracle:Discard a card: Exile the top two cards of your library. You may play those cards this turn.

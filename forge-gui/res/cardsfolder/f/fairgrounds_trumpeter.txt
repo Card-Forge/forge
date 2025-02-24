@@ -4,7 +4,7 @@ Types:Creature Elephant
 PT:2/2
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, if a +1/+1 counter was put on a permanent under your control this turn, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-DeckHints:Ability$Counters
-DeckHas:Ability$Counters
 SVar:X:Count$CountersAddedThisTurn P1P1 Player Permanent.YouCtrl
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 Oracle:At the beginning of each end step, if a +1/+1 counter was put on a permanent under your control this turn, put a +1/+1 counter on Fairgrounds Trumpeter.

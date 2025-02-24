@@ -1,7 +1,7 @@
 Name:Wraith Token
 ManaCost:no cost
-Types:Creature Wraith
 Colors:black
+Types:Creature Wraith
 PT:3/3
 K:Menace
 Oracle:Menace

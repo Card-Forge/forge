@@ -1,0 +1,6 @@
+Name:Violent Urge
+ManaCost:R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | AILogic$ Pump | NumAtt$ +1 | KW$ First Strike | SubAbility$ DBPump | SpellDescription$ Target creature gets +1/+0 and first strike until end of turn. Delirium — If there are four or more card types in your graveyard, that creature gains double strike until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | Condition$ Delirium | KW$ Double Strike
+Oracle:Target creature gets +1/+0 and first strike until end of turn.\nDelirium — If there are four or more card types in your graveyard, that creature gains double strike until end of turn.

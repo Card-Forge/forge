@@ -5,6 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ Attacks
 SVar:AttacksPlayer:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player | Condition$ NoOpponentHasMoreLifeThanAttacked | Execute$ TrigRepeat | TriggerDescription$ Whenever this creature attacks a player, if no opponent has more life than that player, for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that player.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | ChangeZoneTable$ True | RepeatSubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ w_1_1_soldier | TokenTapped$ True | TokenAttacking$ Remembered
-DeckHas:Ability$Token & Type$Soldier
 AI:RemoveDeck:NonCommander
+DeckHas:Ability$Token & Type$Soldier
 Oracle:Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that player."

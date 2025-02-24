@@ -1,7 +1,7 @@
 Name:Triskelavite Token
 ManaCost:no cost
 Types:Artifact Creature Triskelavite
-K:Flying
 PT:1/1
+K:Flying
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ It deals 1 damage to any target.
 Oracle:Flying\nSacrifice this creature: It deals 1 damage to any target.

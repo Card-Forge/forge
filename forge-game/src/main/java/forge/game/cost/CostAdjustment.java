@@ -1,17 +1,7 @@
 package forge.game.cost;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import forge.game.player.PlayerCollection;
-import forge.game.ability.AbilityKey;
-import forge.game.trigger.TriggerType;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
@@ -19,30 +9,32 @@ import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class CostAdjustment {
 
-    public static Cost adjust(final Cost cost, final SpellAbility sa) {
-        if (sa.isTrigger() || cost == null) {
+    public static Cost adjust(final Cost cost, final SpellAbility sa, boolean effect) {
+        if (sa.isTrigger() || cost == null || effect) {
             return cost;
         }
 
@@ -338,11 +330,11 @@ public class CostAdjustment {
 
         final Player activator = sa.getActivatingPlayer();
         CardCollectionView untappedCards = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield),
-                CardPredicates.Presets.CAN_TAP);
+                CardPredicates.CAN_TAP);
         if (improvise) {
-            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.ARTIFACTS);
+            untappedCards = CardLists.filter(untappedCards, CardPredicates.ARTIFACTS);
         } else {
-            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.CREATURES);
+            untappedCards = CardLists.filter(untappedCards, CardPredicates.CREATURES);
         }
 
         Map<Card, ManaCostShard> convokedCards = activator.getController().chooseCardsForConvokeOrImprovise(sa,
@@ -526,64 +518,46 @@ public class CostAdjustment {
         }
 
         if (st.hasParam("Type")) {
-            final String type = st.getParam("Type");
-            if (type.equals("Spell")) {
-                if (!sa.isSpell()) {
-                    return false;
-                }
-                if (st.hasParam("OnlyFirstSpell")) {
-                    if (activator == null ) {
+            switch (st.getParam("Type")) {
+                case "Spell" -> {
+                    if (!sa.isSpell()) {
                         return false;
                     }
-                    List<Card> list;
-                    if (st.hasParam("ValidCard")) {
-                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st, controller);
-                    } else {
-                        list = game.getStack().getSpellsCastThisTurn();
-                    }
-
-                    if (st.hasParam("ValidSpell")) {
-                        list = CardLists.filterAsList(list, CardPredicates.castSA(
-                            SpellAbilityPredicates.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, st))
-                        );
-                    }
-
-                    if (CardLists.filterControlledBy(list, activator).size() > 0) {
-                        return false;
-                    }
-                }
-            } else if (type.equals("Ability")) {
-                if (!sa.isActivatedAbility() || sa.isReplacementAbility()) {
-                    return false;
-                }
-                if (st.hasParam("OnlyFirstActivation")) {
-                    int times = 0;
-                    for (IndividualCostPaymentInstance i : game.costPaymentStack) {
-                        SpellAbility paymentSa = i.getPayment().getAbility();
-                        if (paymentSa.isActivatedAbility() && st.matchesValidParam("ValidCard", paymentSa.getHostCard())) {
-                            times++;
-                            if (times > 1) {
-                                return false;
-                            }
+                    if (st.hasParam("OnlyFirstSpell")) {
+                        if (activator == null) {
+                            return false;
                         }
+                        List<Card> list;
+                        if (st.hasParam("ValidCard")) {
+                            list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st, controller);
+                        } else {
+                            list = game.getStack().getSpellsCastThisTurn();
+                        }
+
+                        if (st.hasParam("ValidSpell")) {
+                            list = CardLists.filterAsList(list, CardPredicates.castSA(
+                                    SpellAbilityPredicates.isValid(st.getParam("ValidSpell").split(","), controller, hostCard, st))
+                            );
+                        }
+
+                        if (!CardLists.filterControlledBy(list, activator).isEmpty()) return false;
                     }
                 }
-            } else if (type.equals("NonManaAbility")) {
-                if (!sa.isActivatedAbility() || sa.isManaAbility() || sa.isReplacementAbility()) {
-                    return false;
+                case "Ability" -> {
+                    if (!sa.isActivatedAbility() || sa.isReplacementAbility()) {
+                        return false;
+                    }
                 }
-            } else if (type.equals("MorphDown")) {
-                if (!sa.isSpell() || !sa.isCastFaceDown()) {
-                    return false;
-                }
-            } else if (type.equals("Foretell")) {
-                if (!sa.isForetelling()) {
-                    return false;
-                }
-                if (st.hasParam("FirstForetell") && activator.getNumForetoldThisTurn() > 0) {
-                    return false;
+                case "Foretell" -> {
+                    if (!sa.isForetelling()) {
+                        return false;
+                    }
+                    if (st.hasParam("FirstForetell") && activator.getNumForetoldThisTurn() > 0) {
+                        return false;
+                    }
                 }
             }
+
         }
         if (st.hasParam("AffectedZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(st.getParam("AffectedZone"));

@@ -84,9 +84,9 @@ ScryfallCode=M12
 70 C Phantasmal Bear @Ryan Yee
 71 U Phantasmal Dragon @Wayne Reynolds
 72 R Phantasmal Image @Nils Hamm
-73 C Ponder @Dan Scott
+73 C Ponder @Dan Murayama Scott
 74 R Redirect @Izzy
-75 C Skywinder Drake @Dan Scott
+75 C Skywinder Drake @Dan Murayama Scott
 76 R Sphinx of Uthuun @Kekai Kotaki
 77 M Time Reversal @Howard Lyon
 78 U Turn to Frog @Warren Mahy
@@ -164,7 +164,7 @@ ScryfallCode=M12
 150 R Manabarbs @Jeff Miracola
 151 C Manic Vandal @Christopher Moeller
 152 R Reverberate @jD
-153 R Scrambleverse @Dan Scott
+153 R Scrambleverse @Dan Murayama Scott
 154 C Shock @Jon Foster
 155 C Slaughter Cry @Matt Cavotta
 156 U Stormblood Berserker @Min Yum
@@ -228,7 +228,7 @@ ScryfallCode=M12
 214 R Quicksilver Amulet @Brad Rigney
 215 U Rusted Sentinel @Jason Felix
 216 U Scepter of Empires @John Avon
-217 R Solemn Simulacrum @Dan Scott
+217 R Solemn Simulacrum @Dan Murayama Scott
 218 R Sundial of the Infinite @Vincent Proce
 219 U Swiftfoot Boots @Svetlin Velinov
 220 U Thran Golem @Ron Spears

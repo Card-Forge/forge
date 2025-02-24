@@ -1,0 +1,11 @@
+Name:Vile Mutilator
+ManaCost:5 B B
+Types:Creature Demon
+PT:6/5
+A:SP$ PermanentCreature | Cost$ 5 B B Sac<1/Creature;Enchantment/creature or enchantment>
+K:Flying
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters, each opponent sacrifices a nontoken enchantment, then sacrifices a nontoken creature.
+SVar:TrigSacrifice:DB$ Sacrifice | Defined$ Opponent | SacValid$ Enchantment.!token | SacMessage$ nontoken enchantment | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature.!token | SacMessage$ nontoken creature
+Oracle:As an additional cost to cast this spell, sacrifice a creature or enchantment.\nFlying, trample\nWhen Vile Mutilator enters, each opponent sacrifices a nontoken enchantment, then sacrifices a nontoken creature.

@@ -283,7 +283,7 @@ ScryfallCode=10E
 269 U Hunted Wumpus @Thomas M. Baxa
 270 R Hurricane @John Howe
 271 R Joiner Adept @Heather Hudson
-272 U Karplusan Strider @Dan Scott
+272 U Karplusan Strider @Dan Murayama Scott
 273 C Kavu Climber @Rob Alexander
 274 C Llanowar Elves @Kev Walker
 275 C Llanowar Sentinel @Randy Gallegos
@@ -334,7 +334,7 @@ ScryfallCode=10E
 320 U Demon's Horn @Alan Pollack
 321 R Doubling Cube @Mark Tedin
 322 U Dragon's Claw @Alan Pollack
-323 U Fountain of Youth @Dan Scott
+323 U Fountain of Youth @Dan Murayama Scott
 324 R The Hive @Ron Spencer
 325 R Howling Mine @Ralph Horsley
 326 U Icy Manipulator @Matt Cavotta
@@ -371,7 +371,7 @@ ScryfallCode=10E
 357 R Shivan Reef @Rob Alexander
 358 U Spawning Pool @Nils Hamm
 359 R Sulfurous Springs @Rob Alexander
-360 C Terramorphic Expanse @Dan Scott
+360 C Terramorphic Expanse @Dan Murayama Scott
 361 U Treetop Village @Rob Alexander
 362 R Underground River @Andrew Goldhawk
 363 R Yavimaya Coast @Anthony S. Waters

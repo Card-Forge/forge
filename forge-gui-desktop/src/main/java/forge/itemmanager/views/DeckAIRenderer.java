@@ -25,13 +25,9 @@ import javax.swing.JTable;
 
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.util.DeckAIUtils;
-import forge.util.Localizer;
 
 
 public class DeckAIRenderer extends ItemCellRenderer {
-
-    private final Localizer localizer = Localizer.getInstance();
 
     @Override
     public boolean alwaysShowTooltip() {
@@ -46,7 +42,7 @@ public class DeckAIRenderer extends ItemCellRenderer {
             final Deck.UnplayableAICards removedUnplayableCards = ((Deck.UnplayableAICards) value);
             for (final DeckSection s: new TreeSet<>(removedUnplayableCards.unplayable.keySet())) {
                 int unplayableSize = removedUnplayableCards.unplayable.get(s).size();
-                tooltip.append("[" + DeckAIUtils.getLocalizedDeckSection(localizer, s) + ":" + unplayableSize + "]");
+                tooltip.append("[" + s.getLocalizedName() + ":" + unplayableSize + "]");
             }
             label.append(removedUnplayableCards.inMainDeck > 0 ? "" + removedUnplayableCards.inMainDeck : "");
         }

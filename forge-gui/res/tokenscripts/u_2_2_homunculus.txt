@@ -1,6 +1,6 @@
 Name:Homunculus Token
 ManaCost:no cost
-Types:Creature Homunculus
 Colors:blue
+Types:Creature Homunculus
 PT:2/2
 Oracle:

@@ -7,5 +7,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigRadiation:DB$ Radiation | Defined$ TriggeredTarget | Num$ 4
 T:Mode$ Milled | ValidPlayer$ Player | ValidCard$ Card.nonLand | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player mills a nonland card, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
-DeckHas:Ability$LifeLink
+DeckHas:Ability$LifeGain
 Oracle:Deathtouch\nWhenever Glowing One deals combat damage to a player, they get four rad counters.\nWhenever a player mills a nonland card, you gain 1 life.

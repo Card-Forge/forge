@@ -1,0 +1,11 @@
+Name:Valgavoth, Terror Eater
+ManaCost:6 B B B
+Types:Legendary Creature Elder Demon
+PT:9/9
+K:Flying
+K:Lifelink
+K:Ward:Sac<3/Permanent.nonLand/nonland permanent>
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidLKI$ Card.!token+YouDontCtrl+OppOwn | ReplaceWith$ Exile | Description$ If a card you didn't control would be put into an opponent's graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+S:Mode$ Continuous | Condition$ PlayerTurn | MayPlay$ True | Affected$ Card.ExiledWithSource | AffectedZone$ Exile | MayPlayAltManaCost$ PayLife<ConvertedManaCost> | Description$ During your turn, you may play cards exiled with NICKNAME. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.
+Oracle:Flying, lifelink\nWard—Sacrifice three nonland permanents.\nIf a card you didn't control would be put into an opponent's graveyard from anywhere, exile it instead.\nDuring your turn, you may play cards exiled with Valgavoth. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.

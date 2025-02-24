@@ -2,6 +2,6 @@ Name:Weight of the Underworld
 ManaCost:3 B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | AddToughness$ -2 | Description$ Enchanted creature gets -3/-2.
 Oracle:Enchant creature\nEnchanted creature gets -3/-2.

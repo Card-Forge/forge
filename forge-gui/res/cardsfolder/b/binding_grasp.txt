@@ -2,8 +2,9 @@ Name:Binding Grasp
 ManaCost:3 U
 Types:Enchantment Aura
 K:Enchant creature
-K:UpkeepCost:1 U
-A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ GainControl
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {1}{U}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ 1 U
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 1 | Description$ Enchanted creature gets +0/+1.
 SVar:PlayMain1:TRUE

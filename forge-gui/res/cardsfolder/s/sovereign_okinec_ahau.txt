@@ -6,7 +6,7 @@ K:Ward:2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, for each creature you control with power greater than that creature's base power, put a number of +1/+1 counters on that creature equal to the difference.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Valid Creature.YouCtrl+powerGTbasePower | CounterType$ P1P1 | CounterNumPerDefined$ X
 SVar:X:Count$CardPower/Minus.Count$CardBasePower
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
 DeckHints:Ability$Counters
-SVar:HasAttackEffect:TRUE
 Oracle:Ward {2}\nWhenever Sovereign Okinec Ahau attacks, for each creature you control with power greater than that creature's base power, put a number of +1/+1 counters on that creature equal to the difference.

@@ -6,7 +6,7 @@ Type=Commander
 ScryfallCode=DMC
 
 [cards]
-1 M Dihada, Binder of Wills @Nestor Ossandon Leal
+1 M Dihada, Binder of Wills @Néstor Ossandón Leal
 2 M Jared Carthalion @Manuel Castañón
 3 M Jenson Carthalion, Druid Exile @Livia Prima
 4 M Shanid, Sleepers' Scourge @Ryan Pancoast
@@ -20,7 +20,7 @@ ScryfallCode=DMC
 12 R Iridian Maelstrom @Justyna Dura
 13 R Primeval Spawn @Filip Burburan
 14 R Two-Headed Hellkite @Fajareka Setiawan
-15 R Unite the Coalition @Nestor Ossandon Leal
+15 R Unite the Coalition @Néstor Ossandón Leal
 16 R Verrak, Warped Sengir @Alix Branwyn
 17 R Gerrard's Hourglass Pendant @Sam Burley
 18 R Obsidian Obelisk @Andrew Mar
@@ -41,7 +41,7 @@ ScryfallCode=DMC
 33 U Jasmine Boreal of the Seven @Bastien L. Deharme
 34 M Jedit Ojanen, Mercenary @Ilse Gort
 35 M The Lady of Otaria @Scott Murphy
-36 R Ohabi Caleria @Nestor Ossandon Leal
+36 R Ohabi Caleria @Néstor Ossandón Leal
 37 R Orca, Siege Demon @Daarken
 38 U Ramirez DePietro, Pillager @Anna Steinbauer
 39 R Ramses, Assassin Lord @Manuel Castañón
@@ -54,7 +54,7 @@ ScryfallCode=DMC
 46 U Tor Wauki the Younger @Karl Kopinski
 47 M Torsten, Founder of Benalia @Volkan Baǵa
 48 R Xira, the Golden Sting @Mila Pesic
-49 M Dihada, Binder of Wills @Nestor Ossandon Leal
+49 M Dihada, Binder of Wills @Néstor Ossandón Leal
 50 M Jared Carthalion @Manuel Castañón
 51 R Ayesha Tanaka, Armorer @Aurore Folny
 52 R The Ever-Changing 'Dane @Campbell White
@@ -63,7 +63,7 @@ ScryfallCode=DMC
 55 U Jasmine Boreal of the Seven @Bastien L. Deharme
 56 M Jedit Ojanen, Mercenary @Ilse Gort
 57 M The Lady of Otaria @Scott Murphy
-58 R Ohabi Caleria @Nestor Ossandon Leal
+58 R Ohabi Caleria @Néstor Ossandón Leal
 59 R Orca, Siege Demon @Daarken
 60 U Ramirez DePietro, Pillager @Anna Steinbauer
 61 R Ramses, Assassin Lord @Manuel Castañón
@@ -96,7 +96,7 @@ ScryfallCode=DMC
 88 R Iridian Maelstrom @Justyna Dura
 89 R Primeval Spawn @Filip Burburan
 90 R Two-Headed Hellkite @Fajareka Setiawan
-91 R Unite the Coalition @Nestor Ossandon Leal
+91 R Unite the Coalition @Néstor Ossandón Leal
 92 R Verrak, Warped Sengir @Alix Branwyn
 93 R Gerrard's Hourglass Pendant @Sam Burley
 94 R Obsidian Obelisk @Andrew Mar
@@ -145,7 +145,7 @@ ScryfallCode=DMC
 137 C Search for Tomorrow @Greg Staples
 138 U Abzan Charm @Mathias Kollros
 139 R Adriana, Captain of the Guard @Chris Rallis
-140 R Archelos, Lagoon Mystic @Dan Scott
+140 R Archelos, Lagoon Mystic @Dan Murayama Scott
 141 U Arvad the Cursed @Lius Lasahido
 142 M Atla Palani, Nest Tender @Ekaterina Burmak
 143 R Baleful Strix @Nils Hamm
@@ -182,7 +182,7 @@ ScryfallCode=DMC
 174 U Wear // Tear @Ryan Pancoast
 175 M Xyris, the Writhing Storm @Filip Burburan
 176 M Zaxara, the Exemplary @Simon Dominic
-177 C Arcane Signet @Dan Scott
+177 C Arcane Signet @Dan Murayama Scott
 178 R Blackblade Reforged @Chris Rahn
 179 U Bontu's Monument @Jonas De Ro
 180 R Coalition Relic @Donato Giancola
@@ -244,7 +244,7 @@ ScryfallCode=DMC
 236 R Temple of Malice @Jonas De Ro
 237 R Temple of Silence @Adam Paquette
 238 R Temple of Triumph @Piotr Dura
-239 C Terramorphic Expanse @Dan Scott
+239 C Terramorphic Expanse @Dan Murayama Scott
 240 R Tyrite Sanctum @Volkan Baǵa
 
 [tokens]

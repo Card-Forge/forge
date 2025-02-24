@@ -11,7 +11,7 @@ ScryfallCode=PW23
 3 R Beast Within @Dave Allsop
 4 R Drown in the Loch @John Stanko
 5 R Syr Konrad, the Grim @Anna Steinbauer
-6 R Cultivate @Nestor Ossandon Leal
+6 R Cultivate @Néstor Ossandón Leal
 7 R Ice Out @Takuma Ebisu
 8 R Pyroblast @Takuma Ebisu
 9 R Rampant Growth @Lorenzo Lanfranconi

@@ -1,0 +1,9 @@
+Name:Demonic Counsel
+ManaCost:1 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Demon | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a Demon card, reveal it, put it into your hand, then shuffle. Delirium — If there are four or more card types among cards in your graveyard, instead search your library for any card, put it into your hand, then shuffle.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
+SVar:X:Count$Delirium.1.0
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Search your library for a Demon card, reveal it, put it into your hand, then shuffle.\nDelirium — If there are four or more card types among cards in your graveyard, instead search your library for any card, put it into your hand, then shuffle.

@@ -4,8 +4,8 @@ Types:Legendary Planeswalker Kaya
 Loyalty:5
 A:AB$ Pump | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | TargetMax$ 1 | TargetMin$ 0 | Planeswalker$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME or up to one target creature. Return that card to the battlefield under its owner's control at the beginning of your next upkeep. You lose 2 life.
 SVar:DBChoose:DB$ GenericChoice | Choices$ DBExileSelf,DBExileTarget | Defined$ You
-SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDelTrig | SpellDescription$ Exile CARDNAME
-SVar:DBExileTarget:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDelTrig | SpellDescription$ Exile up to one target creature
+SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDelTrig | SpellDescription$ Exile CARDNAME.
+SVar:DBExileTarget:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDelTrig | SpellDescription$ Exile up to one target creature.
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBReturn | TriggerDescription$ Return that card to the battlefield under its owner's control at the beginning of your next upkeep. | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup
 SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Defined$ DelayTriggerRememberedLKI | Destination$ Battlefield
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBLoseLife

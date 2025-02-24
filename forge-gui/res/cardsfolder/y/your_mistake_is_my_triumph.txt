@@ -1,0 +1,8 @@
+Name:Your Mistake Is My Triumph
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each player mills three cards. Then you put a permanent card from among the milled cards onto the battlefield under your control.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ Player | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Permanent.IsRemembered | SelectPrompt$ Select a permanent from among the milled cards | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When you set this scheme in motion, each player mills three cards. Then you put a permanent card from among the milled cards onto the battlefield under your control.

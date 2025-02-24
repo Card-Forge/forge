@@ -9,7 +9,7 @@ SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Valid
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ DelayTriggerRememberedLKI
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AICastPreference:NeverCastIfLifeBelow$ 7
-AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
 DeckHints:Ability$LifeGain
 Oracle:Skip your draw step.\nWhenever you discard a card, exile that card from your graveyard.\nPay 1 life: Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step.

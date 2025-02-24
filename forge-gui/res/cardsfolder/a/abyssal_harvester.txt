@@ -1,0 +1,9 @@
+Name:Abyssal Harvester
+ManaCost:1 B B
+Types:Creature Demon Warlock
+PT:3/2
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.ThisTurnEntered | RememberChanged$ True | TgtPrompt$ Select target creature card from a graveyard that was put there this turn | SubAbility$ DBCopy | SpellDescription$ Exile target creature card from a graveyard that was put there this turn. Create a token that's a copy of it, except it's a Nightmare in addition to its other types. Then exile all other Nightmare tokens you control.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | Controller$ You | AddTypes$ Nightmare | RememberTokens$ True | SubAbility$ DBChangeZoneAll
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Nightmare.token+IsNotRemembered+YouCtrl | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{T}: Exile target creature card from a graveyard that was put there this turn. Create a token that's a copy of it, except it's a Nightmare in addition to its other types. Then exile all other Nightmare tokens you control.

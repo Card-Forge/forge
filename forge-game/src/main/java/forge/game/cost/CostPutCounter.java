@@ -17,10 +17,7 @@
  */
 package forge.game.cost;
 
-import java.util.List;
-
 import com.google.common.collect.Sets;
-
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
@@ -30,6 +27,8 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.List;
 
 /**
  * The Class CostPutCounter.

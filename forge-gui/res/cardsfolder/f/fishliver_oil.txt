@@ -2,7 +2,7 @@ Name:Fishliver Oil
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Landwalk:Island | Description$ Enchanted creature has islandwalk. (It can't be blocked as long as defending player controls an Island.)
 DeckHas:Keyword$Islandwalk
 Oracle:Enchant creature (Target a creature as you cast this. This card enters attached to that creature.)\nEnchanted creature has islandwalk. (It can't be blocked as long as defending player controls an Island.)

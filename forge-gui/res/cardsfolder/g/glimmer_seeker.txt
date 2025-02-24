@@ -1,0 +1,10 @@
+Name:Glimmer Seeker
+ManaCost:2 W
+Types:Creature Human Survivor
+PT:3/3
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, draw a card if you control a Glimmer creature. If you don't control a Glimmer creature, create a 1/1 white Glimmer enchantment creature token.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBDraw | FalseSubAbility$ DBToken
+SVar:DBDraw:DB$ Draw
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_e_glimmer | TokenOwner$ You
+SVar:X:Count$Valid Creature.Glimmer+YouCtrl
+Oracle:Survival — At the beginning of your second main phase, if Glimmer Seeker is tapped, draw a card if you control a Glimmer creature. If you don't control a Glimmer creature, create a 1/1 white Glimmer enchantment creature token.

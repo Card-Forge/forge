@@ -55,7 +55,7 @@ ScryfallCode=SIR
 43 R Sigarda's Aid @Howard Lyon
 44 C Sigardian Priest @J.P. Targete
 45 U Spectral Shepherd @Johann Bodin
-46 C Steadfast Cathar @Dan Scott
+46 C Steadfast Cathar @Dan Murayama Scott
 47 C Strength of Arms @John Stanko
 48 U Subjugator Angel @Lius Lasahido
 49 R Thalia, Heretic Cathar @Magali Villeneuve
@@ -125,7 +125,7 @@ ScryfallCode=SIR
 113 C Gisa's Bidding @Jason Felix
 114 U Graf Harvest @Lake Hurwitz
 115 C Graf Rats @Jason Felix
-116 C Grotesque Mutation @Dan Scott
+116 C Grotesque Mutation @Dan Murayama Scott
 117 U Haunted Dead @Lake Hurwitz
 118 U Indulgent Aristocrat @Anna Steinbauer
 119 M Liliana, the Last Hope @Anna Steinbauer
@@ -190,7 +190,7 @@ ScryfallCode=SIR
 178 U Stensia Masquerade @Willian Murai
 179 U Stromkirk Occultist @Magali Villeneuve
 180 U Thermo-Alchemist @Raymond Swanland
-181 C Tormenting Voice @Dan Scott
+181 C Tormenting Voice @Dan Murayama Scott
 182 U Ulrich's Kindred @Josu Hernaiz
 183 U Uncaged Fury @Jason Kang
 184 U Village Messenger @Daarken
@@ -263,7 +263,7 @@ ScryfallCode=SIR
 251 C Field Creeper @Anthony Palumbo
 252 U Harvest Hand @Jason Felix
 253 U Lupine Prototype @Deruchenko Alexander
-254 C Magnifying Glass @Dan Scott
+254 C Magnifying Glass @Dan Murayama Scott
 255 U Murderer's Axe @Winona Nelson
 256 U Neglected Heirloom @Volkan Baǵa
 257 R Slayer's Plate @Ben Maier

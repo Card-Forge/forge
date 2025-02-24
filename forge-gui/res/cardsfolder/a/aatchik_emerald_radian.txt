@@ -1,0 +1,13 @@
+Name:Aatchik, Emerald Radian
+ManaCost:3 B B G
+Types:Legendary Creature Insect Druid
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 1/1 green Insect creature token for each artifact and/or creature card in your graveyard.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_insect
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Insect.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Insect you control dies, put a +1/+1 counter on NICKNAME. Each opponent loses 1 life.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+SVar:X:Count$ValidGraveyard Artifact.YouOwn,Creature.YouOwn
+DeckHas:Ability$Token
+DeckHints:Type$Insect
+Oracle:When Aatchik enters, create a 1/1 green Insect creature token for each artifact and/or creature card in your graveyard.\nWhenever another Insect you control dies, put a +1/+1 counter on Aatchik. Each opponent loses 1 life.

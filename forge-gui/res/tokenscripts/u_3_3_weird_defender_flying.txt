@@ -1,7 +1,7 @@
 Name:Weird Token
 ManaCost:no cost
-Types:Creature Weird
 Colors:blue
+Types:Creature Weird
 PT:3/3
 K:Defender
 K:Flying

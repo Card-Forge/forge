@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
 K:Flash
-A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature enters, enchanted creature gets +2/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Enchanted | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Creature

@@ -11,6 +11,6 @@ A:AB$ DealDamage | Cost$ 1 SubCounter<All/P1P1/NICKNAME> | NumDmg$ X | ValidTgts
 SVar:X:SVar$CostCountersRemoved
 SVar:HasAttackEffect:TRUE
 SVar:EquipMe:Multiple
-DeckNeeds:Type$Equipment
 DeckHas:Ability$Counters
+DeckNeeds:Type$Equipment
 Oracle:First strike, reach\nWhenever Catti-brie of Mithral Hall attacks, put a +1/+1 counter on it for each Equipment attached to it.\n{1}, Remove all +1/+1 counters from Catti-brie: It deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way.

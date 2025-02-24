@@ -17,9 +17,12 @@
  */
 package forge.game;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 import forge.GameCommand;
 import forge.card.CardRarity;
@@ -46,14 +49,13 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.trackable.Tracker;
-import forge.util.Aggregates;
-import forge.util.MyRandom;
-import forge.util.Visitor;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -89,6 +91,8 @@ public class Game {
     private final GameLog gameLog = new GameLog();
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
+    public int AI_TIMEOUT = 5;
+    public boolean AI_CAN_USE_TIMEOUT = true;
 
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
     // While this is false here, its really set by the Match/Preferences
@@ -112,8 +116,8 @@ public class Game {
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer> facedownWhileCasting = Maps.newHashMap();
 
-    private Player monarch;
     private Player initiative;
+    private Player monarch;
     private Player monarchBeginTurn;
     private Player startingPlayer;
 
@@ -256,7 +260,6 @@ public class Game {
         }
         return null;
     }
-
 
     public void addPlayer(int id, Player player) {
         playerCache.put(id, player);
@@ -589,7 +592,7 @@ public class Game {
     }
 
     public Zone getZoneOf(final Card card) {
-        return card.getLastKnownZone();
+        return card == null ? null : card.getLastKnownZone();
     }
 
     public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
@@ -632,11 +635,11 @@ public class Game {
     }
 
     public boolean isCardInPlay(final String cardName) {
-        return Iterables.any(getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
+        return getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals(cardName));
     }
 
     public boolean isCardInCommand(final String cardName) {
-        return Iterables.any(getCardsIn(ZoneType.Command), CardPredicates.nameEquals(cardName));
+        return getCardsIn(ZoneType.Command).anyMatch(CardPredicates.nameEquals(cardName));
     }
 
     public CardCollectionView getColoredCardsInPlay(final String color) {
@@ -902,7 +905,9 @@ public class Game {
                     // return stolen spells
                     if (c.isInZone(ZoneType.Stack)) {
                         SpellAbilityStackInstance si = getStack().getInstanceMatchingSpellAbilityID(c.getCastSA());
-                        si.setActivatingPlayer(c.getController());
+                        if (si != null) {
+                            si.setActivatingPlayer(c.getController());
+                        }
                     }
                     if (c.getController().equals(p) && !(c.isPlane() || c.isPhenomenon())) {
                         getAction().exile(c, null, null);
@@ -973,13 +978,13 @@ public class Game {
         // Remove leftover items from
         getStack().removeInstancesControlledBy(p);
 
-        getTriggerHandler().onPlayerLost(p);
-
         ingamePlayers.remove(p);
         lostPlayers.add(p);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
+
+        getTriggerHandler().onPlayerLost(p);
     }
 
     /**
@@ -1097,8 +1102,8 @@ public class Game {
 
     private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed) {
         final CardCollectionView lib = player.getCardsIn(ZoneType.Library);
-        Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
-        Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
+        Predicate<Card> goodForAnte = CardPredicates.BASIC_LANDS.negate();
+        Card ante = Aggregates.random(IterableUtil.filter(lib, goodForAnte));
         if (ante == null) {
             getGameLog().add(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them");
             ante = Aggregates.random(lib);
@@ -1178,6 +1183,12 @@ public class Game {
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();
+        }
+        for (final Card c : getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+            c.onCleanupPhase(getPhaseHandler().getPlayerTurn());
+        }
+        for (final Card card : getCardsInGame()) {
+            card.resetActivationsPerTurn();
         }
     }
 
@@ -1352,5 +1363,11 @@ public class Game {
         }
         if (!isNeitherDayNorNight())
             fireEvent(new GameEventDayTimeChanged(isDay()));
+    }
+    public int getAITimeout() {
+        return AI_TIMEOUT;
+    }
+    public boolean canUseTimeout() {
+        return AI_CAN_USE_TIMEOUT;
     }
 }

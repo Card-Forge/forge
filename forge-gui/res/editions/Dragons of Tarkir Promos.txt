@@ -14,4 +14,4 @@ ScryfallCode=PDTK
 223 R Harbinger of the Hunt @Chris Rahn
 226 R Necromaster Dragon @Peter Mohrbacher
 227 R Ojutai's Command @Craig J Spearing
-228 R Pristine Skywise @Dan Scott
+228 R Pristine Skywise @Dan Murayama Scott

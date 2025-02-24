@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Sorcery
 A:SP$ DestroyAll | ValidCards$ Creature | SubAbility$ DBNoUntap | SpellDescription$ Destroy all creatures.
 SVar:DBNoUntap:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | SpellDescription$ Lands you control don't untap during your next untap step.
-SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
+SVar:DontUntap:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 Oracle:Destroy all creatures. Lands you control don't untap during your next untap step.

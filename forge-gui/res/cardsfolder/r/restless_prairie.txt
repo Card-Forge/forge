@@ -7,6 +7,6 @@ A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
 A:AB$ Animate | Cost$ 2 G W | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Llama | Colors$ Green,White | OverwriteColors$ True | SpellDescription$ CARDNAME becomes a 3/3 green and white Llama creature until end of turn. It's still a land.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, other creatures you control get +1/+1 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | NumAtt$ +1 | NumDef$ +1
-DeckHas:Type$Llama & Color$Green|White
 SVar:HasAttackEffect:TRUE
+DeckHas:Type$Llama & Color$Green|White
 Oracle:Restless Prairie enters tapped.\n{T}: Add {G} or {W}.\n{2}{G}{W}: Restless Prairie becomes a 3/3 green and white Llama creature until end of turn. It's still a land.\nWhenever Restless Prairie attacks, other creatures you control get +1/+1 until end of turn.

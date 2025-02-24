@@ -5,6 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ CastFro
 SVar:CastFromExile:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from exile, CARDNAME deals damage equal to that spell's mana value to target opponent.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
 SVar:X:TriggeredStackInstance$CardManaCostLKI
-DeckHints:Type$Adventure & Keyword$Foretell
 AI:RemoveDeck:NonCommander
+DeckHints:Type$Adventure & Keyword$Foretell
 Oracle:Commander creatures you own have "Whenever you cast a spell from exile, this creature deals damage equal to that spell's mana value to target opponent."

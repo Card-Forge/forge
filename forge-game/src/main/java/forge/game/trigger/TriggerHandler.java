@@ -19,11 +19,7 @@ package forge.game.trigger;
 
 import java.util.*;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimaps;
+import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
 import forge.game.CardTraitPredicates;
@@ -102,7 +98,7 @@ public class TriggerHandler {
 
     public final void handlePlayerDefinedDelTriggers(final Player player) {
         final List<Trigger> playerTriggers = playerDefinedDelayedTriggers.removeAll(player);
-        Iterables.addAll(thisTurnDelayedTriggers, Iterables.filter(playerTriggers, CardTraitPredicates.hasParam("ThisTurn")));
+        playerTriggers.stream().filter(CardTraitPredicates.hasParam("ThisTurn")).forEach(thisTurnDelayedTriggers::add);
         delayedTriggers.addAll(playerTriggers);
     }
 
@@ -388,15 +384,13 @@ public class TriggerHandler {
             return false; // It's not the right phase to go off.
         }
 
-        if (TriggerType.Always.equals(regtrig.getMode())) {
-            if (game.getStack().hasStateTrigger(regtrig.getId())) {
-                return false; // State triggers that are already on the stack
-                // don't trigger again.
-            }
-        }
-
         if (regtrig.isSuppressed()) {
             return false; // Trigger removed by effect
+        }
+
+        if (TriggerType.Always.equals(regtrig.getMode()) && game.getStack().hasStateTrigger(regtrig.getId())) {
+            return false; // State triggers that are already on the stack
+            // don't trigger again.
         }
 
         // do not check delayed
@@ -419,6 +413,10 @@ public class TriggerHandler {
             return false; // Not the right mode.
         }
 
+        if (regtrig.isSuppressed()) {
+            return false; // Trigger removed by effect
+        }
+
         /* this trigger can only be activated once per turn, verify it hasn't already run */
         if (!regtrig.checkActivationLimit()) {
             return false;
@@ -435,21 +433,17 @@ public class TriggerHandler {
         if (!regtrig.performTest(runParams)) {
             return false; // Test failed.
         }
-        if (regtrig.isSuppressed()) {
-            return false; // Trigger removed by effect
-        }
 
-        if (TriggerType.Always.equals(regtrig.getMode())) {
-            if (game.getStack().hasStateTrigger(regtrig.getId())) {
-                return false; // State triggers that are already on the stack
-                // don't trigger again.
-            }
+        if (TriggerType.Always.equals(regtrig.getMode()) && game.getStack().hasStateTrigger(regtrig.getId())) {
+            return false; // State triggers that are already on the stack
+            // don't trigger again.
         }
 
         // check if any static abilities are disabling the trigger (Torpor Orb and the like)
         if (!regtrig.isStatic() && StaticAbilityDisableTriggers.disabled(game, regtrig, runParams)) {
             return false;
         }
+
         return true;
     }
 

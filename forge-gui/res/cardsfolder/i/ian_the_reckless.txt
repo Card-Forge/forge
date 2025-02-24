@@ -7,6 +7,6 @@ SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | Defined$ You | NumDmg$ X | Dam
 SVar:DBDealDamageSelf:DB$ DealDamage | Defined$ You | NumDmg$ X | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:Count$CardPower
-DeckHints:Type$Aura|Equipment & Ability$Counters
 SVar:HasAttackEffect:TRUE
+DeckHints:Type$Aura|Equipment & Ability$Counters
 Oracle:Whenever Ian the Reckless attacks, if it's modified, you may have it deal damage equal to its power to you and any target. (Equipment, Auras you control, and counters are modifications.)

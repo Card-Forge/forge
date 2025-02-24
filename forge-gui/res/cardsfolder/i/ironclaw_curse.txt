@@ -2,7 +2,7 @@ Name:Ironclaw Curse
 ManaCost:R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ -1 | Description$ Enchanted creature gets -0/-1 and can't block creatures with power equal to or greater than the enchanted creature's toughness.
 S:Mode$ CantBlockBy | ValidAttackerRelative$ Creature.powerGEIronclawX | ValidBlocker$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness.
 SVar:IronclawX:Count$CardToughness

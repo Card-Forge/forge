@@ -6,6 +6,6 @@ T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Yo
 SVar:TrigUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SubAbility$ DBPutCounter
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | ConditionCheckSVar$ TriggeredStackInstance$CardManaCostLKI | ConditionSVarCompare$ GE5
-DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Counters
+DeckNeeds:Type$Instant|Sorcery
 Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, Prismari Apprentice can't be blocked this turn. If that spell has mana value 5 or greater, put a +1/+1 counter on Prismari Apprentice.

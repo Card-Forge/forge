@@ -2,5 +2,5 @@ Name:Frostling
 ManaCost:R
 Types:Creature Spirit
 PT:1/1
-A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | TgtPrompt$ Select target creature | SpellDescription$ It deals 1 damage to target creature.
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | NumDmg$ 1 | SpellDescription$ It deals 1 damage to target creature.
 Oracle:Sacrifice Frostling: It deals 1 damage to target creature.

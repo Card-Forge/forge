@@ -16,10 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.maps.MapOfLists;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
@@ -256,7 +253,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
 
-
     @Override
     public GameLogEntry visit(final GameEventBlockersDeclared ev) {
         final StringBuilder sb = new StringBuilder();
@@ -277,8 +273,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             }
 
             String controllerName;
-            if (defender instanceof Card) {
-                Card c = ((Card)defender);
+            if (defender instanceof Card c) {
                 controllerName = c.isBattle() ? c.getProtectingPlayer().getName() : c.getController().getName();
             } else {
                 controllerName = defender.getName();
@@ -307,6 +302,21 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 
+    @Override
+    public GameLogEntry visit(GameEventCardForetold ev) {
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventCardPlotted ev) {
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventDoorChanged ev) {
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
+    }
+
     @Subscribe
     public void recieve(GameEvent ev) {
         GameLogEntry le = ev.visit(this);
@@ -314,4 +324,4 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             log.add(le);
         }
     }
-} // end class GameLog
+}

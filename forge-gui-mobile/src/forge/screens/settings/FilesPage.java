@@ -19,12 +19,8 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.gui.download.GuiDownloadAchievementImages;
-import forge.gui.download.GuiDownloadPicturesLQ;
 import forge.gui.download.GuiDownloadPrices;
-import forge.gui.download.GuiDownloadQuestImages;
 import forge.gui.download.GuiDownloadService;
-import forge.gui.download.GuiDownloadSetPicturesLQ;
 import forge.gui.download.GuiDownloadSkins;
 import forge.gui.download.GuiDownloadZipService;
 import forge.localinstance.properties.ForgeConstants;
@@ -61,14 +57,6 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     StringBuffer nifSB = new StringBuffer(); // NO IMAGE FOUND BUFFER
                     StringBuffer cniSB = new StringBuffer(); // CARD NOT IMPLEMENTED BUFFER
 
-                    nifSB.append("\n\n-------------------\n");
-                    nifSB.append("NO IMAGE FOUND LIST\n");
-                    nifSB.append("-------------------\n\n");
-
-                    cniSB.append("\n\n-------------------\n");
-                    cniSB.append("UNIMPLEMENTED CARD LIST\n");
-                    cniSB.append("-------------------\n\n");
-
                     Pair<Integer, Integer> totalAudit = StaticData.instance().audit(nifSB, cniSB);
                     String msg = nifSB.toString();
                     String title = "Missing images: " + totalAudit.getLeft() + "\nUnimplemented cards: " + totalAudit.getRight();
@@ -88,34 +76,34 @@ public class FilesPage extends TabPage<SettingsScreen> {
             }
         }, 0);
         //content downloaders
-        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPics"),
-                Forge.getLocalizer().getMessage("lblDownloadPics")) {
-            @Override
-            protected GuiDownloadService createService() {
-                return new GuiDownloadPicturesLQ();
-            }
-        }, 1);
-        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSetPics"),
-                Forge.getLocalizer().getMessage("lblDownloadSetPics")) {
-            @Override
-            protected GuiDownloadService createService() {
-                return new GuiDownloadSetPicturesLQ();
-            }
-        }, 1);
-        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
-                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
-            @Override
-            protected GuiDownloadService createService() {
-                return new GuiDownloadQuestImages();
-            }
-        }, 1);
-        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAchievementImages"),
-                Forge.getLocalizer().getMessage("lblDownloadAchievementImages")) {
-            @Override
-            protected GuiDownloadService createService() {
-                return new GuiDownloadAchievementImages();
-            }
-        }, 1);
+//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPics"),
+//                Forge.getLocalizer().getMessage("lblDownloadPics")) {
+//            @Override
+//            protected GuiDownloadService createService() {
+//                return new GuiDownloadPicturesLQ();
+//            }
+//        }, 1);
+//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSetPics"),
+//                Forge.getLocalizer().getMessage("lblDownloadSetPics")) {
+//            @Override
+//            protected GuiDownloadService createService() {
+//                return new GuiDownloadSetPicturesLQ();
+//            }
+//        }, 1);
+//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
+//                Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
+//            @Override
+//            protected GuiDownloadService createService() {
+//                return new GuiDownloadQuestImages();
+//            }
+//        }, 1);
+//        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAchievementImages"),
+//                Forge.getLocalizer().getMessage("lblDownloadAchievementImages")) {
+//            @Override
+//            protected GuiDownloadService createService() {
+//                return new GuiDownloadAchievementImages();
+//            }
+//        }, 1);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPrices"),
                 Forge.getLocalizer().getMessage("lblDownloadPrices")) {
             @Override

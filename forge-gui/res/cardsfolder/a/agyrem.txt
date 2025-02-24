@@ -12,7 +12,7 @@ SVar:TrigEOT2:Mode$ Phase | Phase$ End of Turn | Execute$ AgyremReturn2 | Trigge
 SVar:AgyremReturn2:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ AgyremCleanup
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, creatures can't attack you until a player planeswalks.
 SVar:RolledChaos:DB$ Effect | Name$ Agyrem's Effect — None Can Attack You | StaticAbilities$ STCantAttack | Triggers$ TrigPlaneswalk | Duration$ Permanent
-SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you until a player planeswalks.
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you until a player planeswalks.
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedTo | Execute$ AgyremCleanup | Static$ True
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step.\nWhenever a nonwhite creature dies, return it to its owner's hand at the beginning of the next end step.\nWhenever chaos ensues, creatures can't attack you until a player planeswalks.

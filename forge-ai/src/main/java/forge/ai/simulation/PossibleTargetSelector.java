@@ -1,11 +1,6 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.google.common.collect.ArrayListMultimap;
-
 import forge.ai.ComputerUtilCard;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -14,6 +9,10 @@ import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class PossibleTargetSelector {
     private final SpellAbility sa;
@@ -63,7 +62,7 @@ public class PossibleTargetSelector {
         if (targetingSa == null) {
             return;
         }
-        sa.setActivatingPlayer(player, true);
+        sa.setActivatingPlayer(player);
         targetingSa.resetTargets();
         TargetRestrictions tgt = targetingSa.getTargetRestrictions();
         maxTargets = tgt.getMaxTargets(sa.getHostCard(), targetingSa);

@@ -5,7 +5,7 @@ PT:2/1
 K:Flying
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 3 | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ When you draw your third card in a turn, return CARDNAME from your graveyard to the battlefield tapped.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
-DeckHas:Ability$Graveyard
 SVar:SacMe:3
 SVar:DiscardMe:3
+DeckHas:Ability$Graveyard
 Oracle:Flying\nWhen you draw your third card in a turn, return Sneaky Snacker from your graveyard to the battlefield tapped.

@@ -1,0 +1,13 @@
+Name:Rendmaw, Creaking Nest
+ManaCost:3 B G
+Types:Legendary Artifact Creature Scarecrow
+PT:5/5
+K:Menace
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBTokens | TriggerDescription$ When CARDNAME enters and whenever you play a card with two or more card types, each player creates a tapped 2/2 black Bird creature token with flying. The tokens are goaded for the rest of the game.
+T:Mode$ SpellCast | ValidCard$ Card.numTypesGE2 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBTokens | Secondary$ True | TriggerDescription$ When CARDNAME enters and whenever you play a card with two or more card types, each player creates a tapped 2/2 black Bird creature token with flying. The tokens are goaded for the rest of the game.
+T:Mode$ LandPlayed | ValidCard$ Land.numTypesGE2+YouCtrl | TriggerZones$ Battlefield | Execute$ DBTokens | Secondary$ True | TriggerDescription$ When CARDNAME enters and whenever you play a card with two or more card types, each player creates a tapped 2/2 black Bird creature token with flying. The tokens are goaded for the rest of the game.
+SVar:DBTokens:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_bird_flying | TokenTapped$ True | TokenOwner$ Player | RememberTokens$ True | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Menace, reach\nWhen Rendmaw, Creaking Nest enters and whenever you play a card with two or more card types, each player creates a tapped 2/2 black Bird creature token with flying. The tokens are goaded for the rest of the game. (They attack each combat if able and attack a player other than you if able.)

@@ -101,8 +101,8 @@ public class InnScene extends UIScene {
     }
 
     private void refreshStatus(){
-
-        tempHealthCost = Math.round(Current.player().falseLifeCost() * changes.getTownPriceModifier());
+        float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
+        tempHealthCost = Math.round(Current.player().falseLifeCost() * townPriceModifier);
         boolean purchaseable = Current.player().getMaxLife() == Current.player().getLife() &&
                 tempHealthCost <= Current.player().getGold();
 

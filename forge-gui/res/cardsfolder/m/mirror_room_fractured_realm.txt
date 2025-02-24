@@ -1,0 +1,15 @@
+Name:Mirror Room
+ManaCost:2 U
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigCopy | TriggerDescription$ When you unlock this door, create a token that's a copy of target creature you control, except it's a Reflection in addition to its other creature types.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Targeted | AddTypes$ Reflection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control
+AlternateMode:Split
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhen you unlock this door, create a token that's a copy of target creature you control, except it's a Reflection in addition to its other creature types.
+
+ALTERNATE
+
+Name:Fractured Realm
+ManaCost:5 U U
+Types:Enchantment Room
+S:Mode$ Panharmonicon | ValidCard$ Permanent.YouCtrl | Description$ If a triggered ability of a permanent you control triggers, that ability triggers an additional time.
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nIf a triggered ability of a permanent you control triggers, that ability triggers an additional time.

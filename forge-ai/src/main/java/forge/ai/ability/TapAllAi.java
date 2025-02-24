@@ -1,9 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-
-import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -20,6 +16,8 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
 
 public class TapAllAi extends SpellAbilityAi {
     @Override
@@ -46,7 +44,7 @@ public class TapAllAi extends SpellAbilityAi {
         }
 
         validTappables = CardLists.getValidCards(validTappables, valid, source.getController(), source, sa);
-        validTappables = CardLists.filter(validTappables, CardPredicates.Presets.UNTAPPED);
+        validTappables = CardLists.filter(validTappables, CardPredicates.UNTAPPED);
 
         if (sa.hasParam("AILogic")) {
             String logic = sa.getParam("AILogic");
@@ -74,7 +72,7 @@ public class TapAllAi extends SpellAbilityAi {
         // in AI's turn, check if there are possible attackers, before tapping blockers
         if (game.getPhaseHandler().isPlayerTurn(ai)) {
             validTappables = ai.getCardsIn(ZoneType.Battlefield);
-            final boolean any = Iterables.any(validTappables, c -> CombatUtil.canAttack(c) && ComputerUtilCombat.canAttackNextTurn(c));
+            final boolean any = validTappables.anyMatch(c -> CombatUtil.canAttack(c) && ComputerUtilCombat.canAttackNextTurn(c));
             return any;
         }
         return true;
@@ -84,7 +82,7 @@ public class TapAllAi extends SpellAbilityAi {
         final Game game = source.getGame();
         CardCollectionView tmpList = game.getCardsIn(ZoneType.Battlefield);
         tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source, sa);
-        tmpList = CardLists.filter(tmpList, CardPredicates.Presets.UNTAPPED);
+        tmpList = CardLists.filter(tmpList, CardPredicates.UNTAPPED);
         return tmpList;
     }
 

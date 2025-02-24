@@ -1,0 +1,7 @@
+Name:Paranormal Analyst
+ManaCost:1 U
+Types:Creature Human Detective
+PT:1/3
+T:Mode$ ManifestDread | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever you manifest dread, put a card you put into your graveyard this way into your hand.
+SVar:TrigReturn:DB$ ChangeZone | ChooseFromDefined$ TriggeredCards | ChangeNum$ 1 | Mandatory$ True | Hidden$ True | Origin$ Graveyard | Destination$ Hand
+Oracle:Whenever you manifest dread, put a card you put into your graveyard this way into your hand.

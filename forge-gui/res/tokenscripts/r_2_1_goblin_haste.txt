@@ -1,7 +1,7 @@
 Name:Goblin Token
 ManaCost:no cost
-Types:Creature Goblin
 Colors:red
+Types:Creature Goblin
 PT:2/1
 K:Haste
 Oracle:Haste

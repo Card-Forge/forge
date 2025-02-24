@@ -1,0 +1,12 @@
+Name:Daretti, Rocketeer Engineer
+ManaCost:4 R
+Types:Legendary Creature Goblin Artificer
+PT:*/5
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to the greatest mana value among artifacts you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whenever NICKNAME enters or attacks, choose target artifact card in your graveyard. You may sacrifice an artifact. If you do, return the chosen card to the battlefield.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, choose target artifact card in your graveyard. You may sacrifice an artifact. If you do, return the chosen card to the battlefield.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ Sac<1/Artifact> | Origin$ Graveyard | Destination$ Battlefield | Defined$ Targeted | ValidTgts$ Artifact.YouCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target artifact card in your graveyard
+SVar:X:Count$Valid Artifact.YouCtrl$GreatestCMC
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard & Type$Artifact
+Oracle:Daretti's power is equal to the greatest mana value among artifacts you control.\nWhenever Daretti enters or attacks, choose target artifact card in your graveyard. You may sacrifice an artifact. If you do, return the chosen card to the battlefield.

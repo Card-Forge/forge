@@ -1,0 +1,16 @@
+Name:Spiked Corridor
+ManaCost:3 R
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigToken | TriggerDescription$ When you unlock this door, create three 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You
+AlternateMode:Split
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhen you unlock this door, create three 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
+
+ALTERNATE
+
+Name:Torture Pit
+ManaCost:3 R
+Types:Enchantment Room
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent | IsCombat$ False | ReplaceWith$ DamageReplace | Description$ If a source you control would deal noncombat damage to an opponent, it deals that much damage plus 2 instead.
+SVar:DamageReplace:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ ReplaceCount$DamageAmount/Plus.2
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nIf a source you control would deal noncombat damage to an opponent, it deals that much damage plus 2 instead.

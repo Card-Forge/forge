@@ -1,6 +1,6 @@
 Name:Unicorn Token
 ManaCost:no cost
-Types:Creature Unicorn
 Colors:white
+Types:Creature Unicorn
 PT:2/2
 Oracle:

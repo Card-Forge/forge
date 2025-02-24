@@ -1,16 +1,7 @@
 package forge.ai.ability;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Lists;
-
-import forge.ai.AiController;
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
@@ -20,6 +11,10 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
@@ -37,13 +32,14 @@ public class CharmAi extends SpellAbilityAi {
         }
 
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
+        boolean choiceForOpp = !ai.equals(sa.getActivatingPlayer());
 
         // Reset the chosen list otherwise it will be locked in forever by earlier calls
         sa.setChosenList(null);
         sa.setSubAbility(null);
         List<AbilitySub> chosenList;
-        
-        if (!ai.equals(sa.getActivatingPlayer())) {
+
+        if (choiceForOpp) {
             // This branch is for "An Opponent chooses" Charm spells from Alliances
             // Current just choose the first available spell, which seem generally less disastrous for the AI.
             chosenList = choices.subList(1, choices.size());
@@ -83,6 +79,11 @@ public class CharmAi extends SpellAbilityAi {
 
         // store the choices so they'll get reused
         sa.setChosenList(chosenList);
+
+        if (choiceForOpp) {
+            return true;
+        }
+
         if (sa.isSpell()) {
             // prebuild chain to improve cost calculation accuracy
             CharmEffect.chainAbilities(sa, chosenList);
@@ -92,8 +93,7 @@ public class CharmAi extends SpellAbilityAi {
         return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num,
-            int min) {
+    private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {
         List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         boolean allowRepeat = sa.hasParam("CanRepeatModes"); // FIXME: unused for now, the AI doesn't know how to effectively handle repeated choices
@@ -107,15 +107,14 @@ public class CharmAi extends SpellAbilityAi {
 
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
-            sub.setActivatingPlayer(ai, true);
+            sub.setActivatingPlayer(ai);
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 if (pawprintLimit > 0) {
                     int curPawprintAmount = AbilityUtils.calculateAmount(sub.getHostCard(), sub.getParamOrDefault("Pawprint", "0"), sub);
                     if (pawprintAmount + curPawprintAmount > pawprintLimit) {
                         continue;
-                    } else {
-                        pawprintAmount += curPawprintAmount;
                     }
+                    pawprintAmount += curPawprintAmount;
                 }
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
@@ -246,13 +245,13 @@ public class CharmAi extends SpellAbilityAi {
         List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
-            sub.setActivatingPlayer(ai, true);
+            sub.setActivatingPlayer(ai);
             // Assign generic good choice to fill up choices if necessary 
             if ("Good".equals(sub.getParam("AILogic")) && aic.doTrigger(sub, false)) {
                 goodChoice = sub;
             } else {
                 // Standard canPlayAi()
-                sub.setActivatingPlayer(ai, true);
+                sub.setActivatingPlayer(ai);
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {

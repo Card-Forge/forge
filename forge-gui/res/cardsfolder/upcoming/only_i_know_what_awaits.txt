@@ -1,9 +1,0 @@
-Name:Only I Know What Awaits
-ManaCost:no cost
-Types:Scheme
-T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigRepeatEach | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, for each card type among permanents your opponents control, you may put a permanent card of that type from your hand onto the battlefield.
-SVar:TrigRepeatEach:DB$ RepeatEach | RepeatTypesFrom$ Permanent.OppCtrl | RepeatSubAbility$ ChooseCard | SubAbility$ DBChangeZoneAll
-SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.YouOwn+ChosenType | ChoiceTitle$ You may choose a card of this type to put onto the battlefield | ChoiceTitleAppend$ ChosenType | ChoiceZone$ Hand
-SVar:DBChangeZoneAll:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Hand | Destination$ Battlefield | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-Oracle:When you set this scheme in motion, for each card type among permanents your opponents control, you may put a permanent card of that type from your hand onto the battlefield.

@@ -1,6 +1,6 @@
 Name:Phyrexian Minion Token
 ManaCost:no cost
+Colors:black
 Types:Creature Phyrexian Minion
 PT:*/*
-Colors:black
 Oracle:

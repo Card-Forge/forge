@@ -1,7 +1,7 @@
 Name:Snake Token
 ManaCost:no cost
-Types:Enchantment Creature Snake
 Colors:black,green
+Types:Enchantment Creature Snake
 PT:1/1
 K:Deathtouch
 Oracle:Deathtouch

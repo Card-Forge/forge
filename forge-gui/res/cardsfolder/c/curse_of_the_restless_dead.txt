@@ -2,7 +2,7 @@ Name:Curse of the Restless Dead
 ManaCost:2 B
 Types:Enchantment Aura Curse
 K:Enchant player
-A:SP$ Attach | Cost$ 2 B | ValidTgts$ Player | AILogic$ Curse
+A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Land.EnchantedPlayerCtrl | Execute$ TrigToken | TriggerDescription$ Whenever a land enchanted player controls enters, you create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie_decayed | TokenOwner$ You
 DeckHas:Ability$Token

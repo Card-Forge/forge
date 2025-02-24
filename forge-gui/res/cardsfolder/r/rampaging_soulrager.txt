@@ -1,0 +1,7 @@
+Name:Rampaging Soulrager
+ManaCost:2 R
+Types:Creature Spirit
+PT:1/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | CheckSVar$ X | SVarCompare$ GE2 | Description$ CARDNAME gets +3/+0 as long as there are two or more unlocked doors among Rooms you control.
+SVar:X:Count$UnlockedDoors Card.Room+YouCtrl
+Oracle:Rampaging Soulrager gets +3/+0 as long as there are two or more unlocked doors among Rooms you control.

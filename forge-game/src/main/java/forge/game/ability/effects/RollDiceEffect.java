@@ -98,8 +98,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
             }
         }
 
-        int total = 0;
-        int countMaxRolls = 0;
         List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
 
         for (int i = 0; i < amount; i++) {
@@ -108,7 +106,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
             player.getGame().fireEvent(new GameEventRollDie());
             player.roll();
             naturalRolls.add(roll);
-            total += roll;
         }
 
         naturalRolls.sort(null);
@@ -117,7 +114,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
         // Ignore lowest rolls
         if (ignore > 0) {
             for (int i = ignore - 1; i >= 0; --i) {
-                total -= naturalRolls.get(i);
                 ignored.add(naturalRolls.get(i));
                 naturalRolls.remove(i);
             }
@@ -126,10 +122,13 @@ public class RollDiceEffect extends SpellAbilityEffect {
         for (Player chooser : ignoreChosenMap.keySet()) {
             for (int ig = 0; ig < ignoreChosenMap.get(chooser); ig++) {
                 Integer ign = chooser.getController().chooseRollToIgnore(naturalRolls);
-                total -= ign;
                 ignored.add(ign);
                 naturalRolls.remove(ign);
             }
+        }
+
+        if (sa != null && sa.hasParam("UseHighestRoll")) {
+            naturalRolls.subList(0, naturalRolls.size() - 1).clear();
         }
 
         //Notify of results
@@ -143,12 +142,14 @@ public class RollDiceEffect extends SpellAbilityEffect {
                         StringUtils.join(ignored, ", ")));
             }
             player.getGame().getAction().notifyOfValue(sa, player, sb.toString(), null);
+            player.addDieRollThisTurn(naturalRolls);
         }
 
         List<Integer> rolls = Lists.newArrayList();
         int oddResults = 0;
         int evenResults = 0;
         int differentResults = 0;
+        int countMaxRolls = 0;
         for (Integer i : naturalRolls) {
             final int modifiedRoll = i + modifier;
             if (!rolls.contains(modifiedRoll)) {
@@ -176,9 +177,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 sa.setSVar("MaxRolls", Integer.toString(countMaxRolls));
             }
         }
-        total += modifier;
 
-        // Run triggers
         int rollNum = 1;
         for (Integer roll : rolls) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
@@ -196,7 +195,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
-        return total;
+        return rolls.stream().reduce(0, Integer::sum);
     }
 
     private static void resolveSub(SpellAbility sa, int num) {
@@ -231,9 +230,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Integer> rolls = new ArrayList<>();
         int total = rollDiceForPlayer(sa, player, amount, sides, ignore, modifier, rolls, sa.hasParam("ToVisitYourAttractions"));
 
-        if (sa.hasParam("UseHighestRoll")) {
-            total = Collections.max(rolls);
-        } else if (sa.hasParam("UseDifferenceBetweenRolls")) {
+        if (sa.hasParam("UseDifferenceBetweenRolls")) {
             total = Collections.max(rolls) - Collections.min(rolls);
         }
 

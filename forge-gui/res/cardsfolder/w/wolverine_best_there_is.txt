@@ -1,0 +1,12 @@
+Name:Wolverine, Best There Is
+ManaCost:1 R G
+Types:Legendary Creature Mutant Berserker Hero
+PT:2/2
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Self | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ Unrivaled Lethality — Double all damage NICKNAME would deal.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ Y | SVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, if NICKNAME dealt damage to another creature this turn, put a +1/+1 counter on him.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:Y:Count$NumDamageThisTurn Card.Self Creature.Other
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate NICKNAME. (The next time he would be destroyed this turn, instead tap him, remove him from combat, and heal all damage on him.)
+Oracle:Unrivaled Lethality — Double all damage Wolverine would deal.\nAt the beginning of each end step, if Wolverine dealt damage to another creature this turn, put a +1/+1 counter on him.\n{1}{G}: Regenerate Wolverine. (The next time he would be destroyed this turn, instead tap him, remove him from combat, and heal all damage on him.)

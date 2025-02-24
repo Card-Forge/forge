@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Iterables;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;

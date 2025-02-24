@@ -1,0 +1,9 @@
+Name:Alacrian Armory
+ManaCost:3 W
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Creatures you control get +0/+1 and have vigilance.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSaddle | TriggerDescription$ At the beginning of combat on your turn, choose up to one target Mount or Vehicle you control. Until end of turn, that permanent becomes saddled if it's a Mount and becomes an artifact creature if it's a Vehicle.
+SVar:TrigSaddle:DB$ AlterAttribute | ValidTgts$ Mount.YouCtrl,Vehicle.YouCtrl | TgtPrompt$ Select target Mount or Vehicle you control | TargetMin$ 0 | TargetMax$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Mount | Attributes$ Saddled | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Vehicle | Types$ Artifact,Creature
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control get +0/+1 and have vigilance.\nAt the beginning of combat on your turn, choose up to one target Mount or Vehicle you control. Until end of turn, that permanent becomes saddled if it's a Mount and becomes an artifact creature if it's a Vehicle.

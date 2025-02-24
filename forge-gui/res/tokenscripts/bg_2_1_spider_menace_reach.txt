@@ -1,7 +1,7 @@
 Name:Spider Token
 ManaCost:no cost
-Types:Creature Spider
 Colors:black,green
+Types:Creature Spider
 PT:2/1
 K:Menace
 K:Reach

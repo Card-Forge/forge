@@ -1,0 +1,8 @@
+Name:Zimone's Hypothesis
+ManaCost:3 U U
+Types:Instant
+A:SP$ PutCounter | Choices$ Creature | ChoiceTitle$ Choose a creature | CounterType$ P1P1 | CounterNum$ 1 | Optional$ True | SubAbility$ DBGenericChoice | SpellDescription$ You may put a +1/+1 counter on a creature. Then choose odd or even. Return each creature with power of the chosen quality to its owner's hand. (Zero is even.)
+SVar:DBGenericChoice:DB$ GenericChoice | Choices$ Odd,Even
+SVar:Odd:DB$ ChangeZoneAll | ChangeType$ Creature.powerOdd | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Odd
+SVar:Even:DB$ ChangeZoneAll | ChangeType$ Creature.powerEven | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Even
+Oracle:You may put a +1/+1 counter on a creature. Then choose odd or even. Return each creature with power of the chosen quality to its owner's hand. (Zero is even.)

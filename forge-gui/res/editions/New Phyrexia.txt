@@ -45,7 +45,7 @@ ScryfallCode=NPH
 31 R Chancellor of the Spires @Nils Hamm
 32 U Corrupted Resolve @Greg Staples
 33 U Deceiver Exarch @Izzy
-34 C Defensive Stance @Dan Scott
+34 C Defensive Stance @Dan Murayama Scott
 35 C Gitaxian Probe @Chippy
 36 C Impaler Shrike @Nils Hamm
 37 M Jin-Gitaxias, Core Augur @Eric Deschamps
@@ -54,7 +54,7 @@ ScryfallCode=NPH
 40 C Numbing Dose @Brad Rigney
 41 R Phyrexian Ingester @Chris Rahn
 42 R Phyrexian Metamorph @Jana Schirmer & Johannes Voss
-43 C Psychic Barrier @Dan Scott
+43 C Psychic Barrier @Dan Murayama Scott
 44 R Psychic Surgery @Anthony Francisco
 45 C Spined Thopter @Pete Venters
 46 C Spire Monitor @Daniel Ljunggren
@@ -118,7 +118,7 @@ ScryfallCode=NPH
 104 R Birthing Pod @Daarken
 105 U Brutalizer Exarch @Mark Zug
 106 R Chancellor of the Tangle @Steve Prescott
-107 U Corrosive Gale @Dan Scott
+107 U Corrosive Gale @Dan Murayama Scott
 108 C Death-Hood Cobra @Jason Felix
 109 R Fresh Meat @Dave Allsop
 110 C Glissa's Scorn @Nils Hamm
@@ -133,7 +133,7 @@ ScryfallCode=NPH
 119 R Phyrexian Swarmlord @Svetlin Velinov
 120 C Rotted Hystrix @Dave Allsop
 121 U Spinebiter @Jaime Jones
-122 C Thundering Tanadon @Dan Scott
+122 C Thundering Tanadon @Dan Murayama Scott
 123 U Triumph of the Hordes @Izzy
 124 C Viridian Betrayers @Karl Kopinski
 125 C Viridian Harvest @Johann Bodin
@@ -149,7 +149,7 @@ ScryfallCode=NPH
 135 M Etched Monstrosity @Steven Belledin
 136 C Gremlin Mine @Matt Stewart
 137 R Hex Parasite @Raymond Swanland
-138 C Hovermyr @Dan Scott
+138 C Hovermyr @Dan Murayama Scott
 139 C Immolating Souleater @Austin Hsu
 140 C Insatiable Souleater @Dave Kendall
 141 U Isolation Cell @Adrian Smith

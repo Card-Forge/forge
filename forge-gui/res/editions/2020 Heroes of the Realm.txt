@@ -9,4 +9,4 @@ ScryfallCode=PH20
 [cards]
 1 M Euroakus @Franz Vohwinkel
 2 M Mountain Mover @Alexander Forssberg
-3 M The Secret Lair @ Wizard of Barge
+3 M The Secret Lair @Wizard of Barge

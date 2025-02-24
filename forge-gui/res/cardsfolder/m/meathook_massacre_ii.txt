@@ -1,0 +1,12 @@
+Name:Meathook Massacre II
+ManaCost:X X B B B B
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, each player sacrifices X creatures.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player | Amount$ X | SacValid$ Creature
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigReturn1 | TriggerDescription$ Whenever a creature you control dies, you may pay 3 life. If you do, return that card under your control with a finality counter on it.
+SVar:TrigReturn1:AB$ ChangeZone | Cost$ PayLife<3> | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredNewCardLKICopy | WithCountersType$ FINALITY
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigReturn2 | TriggerDescription$ Whenever a creature an opponent controls dies, they may pay 3 life. If they don't, return that card under your control with a finality counter on it.
+SVar:TrigReturn2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredNewCardLKICopy | UnlessCost$ PayLife<3> | UnlessPayer$ TriggeredCardController | WithCountersType$ FINALITY
+SVar:X:Count$xPaid
+DeckHas:Ability$Sacrifice
+Oracle:When Meathook Massacre II enters, each player sacrifices X creatures.\nWhenever a creature you control dies, you may pay 3 life. If you do, return that card under your control with a finality counter on it.\nWhenever a creature an opponent controls dies, they may pay 3 life. If they don't, return that card under your control with a finality counter on it.

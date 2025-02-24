@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.StaticData;
@@ -13,6 +12,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
+import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CloneEffect extends SpellAbilityEffect {
-    // TODO update this method
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -144,6 +143,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
             final long ts = game.getNextTimestamp();
             tgtCard.addCloneState(CardFactory.getCloneStates(cardToCopy, tgtCard, sa), ts);
+            tgtCard.updateRooms();
 
             // set ETB tapped of clone
             if (sa.hasParam("IntoPlayTapped")) {
@@ -179,9 +179,9 @@ public class CloneEffect extends SpellAbilityEffect {
                             cloneCard.clearImprintedCards();
                             cloneCard.clearRemembered();
                             // restore original Remembered and Imprinted, ignore cards from players who lost
-                            cloneCard.addImprintedCards(Iterables.filter(clonedImprinted, CardPredicates.ownerLives()));
-                            cloneCard.addRemembered(Iterables.filter(clonedRemembered, Player.class));
-                            cloneCard.addRemembered(Iterables.filter(Iterables.filter(clonedRemembered, Card.class), CardPredicates.ownerLives()));
+                            cloneCard.addImprintedCards(IterableUtil.filter(clonedImprinted, CardPredicates.ownerLives()));
+                            cloneCard.addRemembered(IterableUtil.filter(clonedRemembered, Player.class));
+                            cloneCard.addRemembered(IterableUtil.filter(IterableUtil.filter(clonedRemembered, Card.class), CardPredicates.ownerLives()));
                             cloneCard.updateStateForView();
                             game.fireEvent(new GameEventCardStatsChanged(cloneCard));
                         }
@@ -198,6 +198,8 @@ public class CloneEffect extends SpellAbilityEffect {
             if (sa.hasParam("RememberCloneOrigin")) {
                 tgtCard.addRemembered(cardToCopy);
             }
+            // spire
+            tgtCard.setChosenColorID(cardToCopy.getChosenColorID());
 
             game.fireEvent(new GameEventCardStatsChanged(tgtCard));
         }

@@ -1,12 +1,6 @@
 package forge.ai.simulation;
 
-import java.util.List;
-
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
-
 import com.google.common.collect.Lists;
-
 import forge.ai.ComputerUtilAbility;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
@@ -14,12 +8,19 @@ import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CounterEnumType;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GameSimulationTest extends SimulationTest {
 
@@ -154,7 +155,7 @@ public class GameSimulationTest extends SimulationTest {
     @Test
     public void testEtbTriggers() {
         Game game = initAndCreateGame();
-        Player p0 =  game.getPlayers().get(0);
+        Player p0 = game.getPlayers().get(0);
         Player p = game.getPlayers().get(1);
         addCard("Black Knight", p);
         addCards("Swamp", 5, p);
@@ -1391,7 +1392,7 @@ public class GameSimulationTest extends SimulationTest {
         p.setLife(-1, null);
         game.getAction().checkStateEffects(true);
         assert (deathsShadow.getNetPower() == 13); // on negative life, should
-                                                   // always be 13/13
+        // always be 13/13
     }
 
     @Test
@@ -2548,4 +2549,140 @@ public class GameSimulationTest extends SimulationTest {
         // spell should fizzle so no card was drawn
         AssertJUnit.assertEquals(0, game.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
     }
+
+    @Test
+    public void testControlLayerDependency() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player opp = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card bear = addCard("Bear Cub", p);
+        addCards("Island", 6, p);
+        addCards("Island", 5, opp);
+        addCard("Vedalken Orrery", opp);
+        Card control = addCardToZone("Mind Control", opp, ZoneType.Hand);
+
+        GameSimulator sim = createSimulator(game, opp);
+        game = sim.getSimulatedGameState();
+
+        SpellAbility controlSA = control.getFirstSpellAbility();
+        controlSA.getTargets().add(bear);
+        sim.simulateSpellAbility(controlSA);
+
+        p = game.getPlayers().get(0);
+        Card confiscate = addCardToZone("Confiscate", p, ZoneType.Hand);
+        control = findCardWithName(game, "Mind Control");
+        SpellAbility confiscateSA = confiscate.getFirstSpellAbility();
+        confiscateSA.getTargets().add(control);
+
+        sim = createSimulator(game, p);
+        game = sim.getSimulatedGameState();
+        bear = findCardWithName(game, "Bear Cub");
+
+        AssertJUnit.assertTrue(bear.getController().equals(opp));
+        sim.simulateSpellAbility(confiscateSA);
+        AssertJUnit.assertTrue(bear.getController().equals(p));
+    }
+
+    @Test
+    public void testTypeLayerDependency() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card nonBasicForest = addCard("Breeding Pool", p);
+        addCard("Life and Limb", p);
+        addCard("Blood Moon", p);
+
+        game.getAction().checkStaticAbilities();
+
+        // Blood Moon will be applied first because Life and Limb depends on it
+        AssertJUnit.assertFalse(nonBasicForest.isCreature());
+        AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
+
+        // adding Saproling causes dependency loop, so Life and Limb gets applied first instead
+        addCard("Shroofus Sproutsire", p);
+
+        game.getAction().checkStaticAbilities();
+
+        AssertJUnit.assertTrue(nonBasicForest.isCreature());
+        AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
+    }
+
+    /**
+     * Test for "Volo's Journal" usage by the AI. This test checks if the AI correctly
+     * adds the correct types to the "Volo's Journal" when casting the spells in order
+     * and makes sure the entries are unique.
+     */
+    @Test
+    public void testVoloJournal() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCards("Island", 7, p);
+        addCards("Mountain", 2, p);
+        addCards("Forest", 2, p);
+
+        Card c = addCardToZone("Volo, Itinerant Scholar", p, ZoneType.Hand);
+        Card[] cards = {
+                addCardToZone("Cathartic Adept", p, ZoneType.Hand),
+                addCardToZone("Cathartic Adept", p, ZoneType.Hand),
+                addCardToZone("Drowner Initiate", p, ZoneType.Hand),
+                addCardToZone("Atog", p, ZoneType.Hand),
+                addCardToZone("Atog", p, ZoneType.Hand)
+        };
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility playVoloSA = c.getFirstSpellAbility();
+        playVoloSA.setActivatingPlayer(p);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(playVoloSA);
+        Game simGame = sim.getSimulatedGameState();
+
+        for (Card card : cards) {
+            SpellAbility a1 = card.getSpellAbilities().get(0);
+            a1.setActivatingPlayer(p);
+            sim.simulateSpellAbility(a1);
+        }
+
+        Player simP = simGame.getPlayer(p.getId());
+        CardCollectionView btlf = simP.getCardsIn(ZoneType.Battlefield);
+        List<String> words = List.of(new String[]{"Human", "Wizard", "Atog", "Merfolk"});
+
+        for (Card card : btlf) {
+            if (card.getName().equals("Volo's Journal")) {
+                // All words are present in the iterable
+                AssertJUnit.assertTrue(areWordsInIterable(words, card.getNotedTypes()));
+            }
+        }
+    }
+
+    /**
+     * Helper method to check if all words in the given list are present in the iterable and unique.
+     *
+     * @param words    The list of words to check for.
+     * @param iterable The iterable to check against.
+     * @return true if all words are present in the iterable, false otherwise.
+     */
+    protected boolean areWordsInIterable(List<String> words, Iterable<String> iterable) {
+        // Create a frequency map for the words in the iterable
+        Map<String, Integer> frequencyMap = new HashMap<>();
+        for (String item : iterable) {
+            frequencyMap.put(item, frequencyMap.getOrDefault(item, 0) + 1);
+        }
+
+        // Check if each word in the list appears exactly once
+        for (String word : words) {
+            if (frequencyMap.getOrDefault(word, 0) != 1) {
+                return false;  // If the word doesn't appear exactly once, return false
+            }
+        }
+
+        return true;  // All words appear exactly once
+    }
+
 }

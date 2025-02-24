@@ -1,0 +1,8 @@
+Name:Bedhead Beastie
+ManaCost:4 R R
+Types:Creature Beast
+PT:5/6
+K:Menace
+K:TypeCycling:Mountain:2
+DeckHas:Ability$Discard
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)

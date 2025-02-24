@@ -1,0 +1,6 @@
+Name:Squad Rallier
+ManaCost:3 W
+Types:Creature Human Scout
+PT:3/4
+A:AB$ Dig | Cost$ 2 W | DigNum$ 4 | Optional$ True | ForceRevealToController$ True | ChangeNum$ 1 | ChangeValid$ Creature.powerLE2 | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal a creature card with power 2 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+Oracle:{2}{W}: Look at the top four cards of your library. You may reveal a creature card with power 2 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

@@ -1,0 +1,10 @@
+Name:Fear of Falling
+ManaCost:3 U U
+Types:Enchantment Creature Nightmare
+PT:4/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature defending player controls gets -2/-0 and loses flying until your next turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls | NumAtt$ -2 | IsCurse$ True | SubAbility$ DBDebuff
+SVar:DBDebuff:DB$ Debuff | Defined$ Targeted | Keywords$ Flying | Duration$ UntilYourNextTurn
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Fear of Falling attacks, target creature defending player controls gets -2/-0 and loses flying until your next turn.

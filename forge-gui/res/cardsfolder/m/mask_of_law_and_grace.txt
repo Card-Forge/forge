@@ -2,6 +2,6 @@ Name:Mask of Law and Grace
 ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection from black & Protection from red | Description$ Enchanted creature has protection from black and from red.
 Oracle:Enchant creature\nEnchanted creature has protection from black and from red.

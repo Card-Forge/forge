@@ -8,6 +8,6 @@ SVar:TrigPay:AB$ ImmediateTrigger | Cost$ Mana<2 B\NumTimes> | Announce$ NumTime
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed | TokenAmount$ SVar$X/Twice
 SVar:X:Count$TriggerRememberAmount
-DeckHas:Ability$Token|Counters
 AI:RemoveDeck:All
+DeckHas:Ability$Token|Counters
 Oracle:Deathtouch\nWhen Tainted Adversary enters, you may pay {2}{B} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on Tainted Adversary, then create twice that many black 2/2 Zombie creature tokens with decayed. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)

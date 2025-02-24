@@ -3,7 +3,8 @@ ManaCost:2 U
 Types:Creature Spirit
 PT:3/4
 K:Flying
-K:UpkeepCost:Y:{1} for each other creature you control
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {1} for each other creature you control.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Y
 SVar:Y:Count$Valid Creature.Other+YouCtrl
 AI:RemoveDeck:All
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Fettergeist unless you pay {1} for each other creature you control.

@@ -2,8 +2,8 @@ Name:Grimoire of the Dead
 ManaCost:4
 Types:Legendary Artifact
 A:AB$ PutCounter | Cost$ 1 T Discard<1/Card> | Defined$ Self | CounterType$ STUDY | CounterNum$ 1 | SpellDescription$ Put a study counter on CARDNAME.
-A:AB$ ChangeZoneAll | Cost$ T SubCounter<3/STUDY> Sac<1/CARDNAME> | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | AnimateSubAbility$ DBAnimate | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control. They are black Zombies in addition to their other colors and types.
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Colors$ Black | Types$ Zombie | Duration$ Permanent
+A:AB$ ChangeZoneAll | Cost$ T SubCounter<3/STUDY> Sac<1/CARDNAME> | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | StaticEffect$ Animate | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control. They are black Zombies in addition to their other colors and types.
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Zombie | AddColor$ Black
 AI:RemoveDeck:All
 SVar:IsReanimatorCard:TRUE
 Oracle:{1}, {T}, Discard a card: Put a study counter on Grimoire of the Dead.\n{T}, Remove three study counters from Grimoire of the Dead and sacrifice it: Put all creature cards from all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types.

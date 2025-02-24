@@ -1,0 +1,7 @@
+Name:Scrap Compactor
+ManaCost:1
+Types:Artifact
+A:AB$ DealDamage | Cost$ 3 T Sac<1/CARDNAME/this artifact> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ It deals 3 damage to target creature.
+A:AB$ Destroy | Cost$ 6 T Sac<1/CARDNAME/this artifact> | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or Vehicle | SpellDescription$ Destroy target creature or Vehicle.
+DeckHas:Ability$Sacrifice
+Oracle:{3}, {T}, Sacrifice this artifact: It deals 3 damage to target creature.\n{6}, {T}, Sacrifice this artifact: Destroy target creature or Vehicle.

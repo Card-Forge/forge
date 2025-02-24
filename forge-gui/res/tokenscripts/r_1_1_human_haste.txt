@@ -1,7 +1,7 @@
 Name:Human Token
 ManaCost:no cost
-Types:Creature Human
 Colors:red
+Types:Creature Human
 PT:1/1
 K:Haste
 Oracle:Haste

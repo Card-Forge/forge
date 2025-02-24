@@ -46,7 +46,7 @@ ScryfallCode=J22
 38 R Benevolent Hydra @Eric Deschamps
 39 C Giant Ladybug @Marta Nael
 40 M Kibo, Uktabi Prince @Zoltan Boros
-41 U Mild-Mannered Librarian @Justyna Gil
+41 U Mild-Mannered Librarian @Justyna Dura
 42 U Primeval Herald @Tatiana Kirgetova
 43 U Rampaging Growth @Mike Jordana
 44 R Runadi, Behemoth Caller @Billy Christian
@@ -57,7 +57,7 @@ ScryfallCode=J22
 49 C Infernal Idol @Drew Tucker
 50 U Instruments of War @Drew Tucker
 51 U Planar Atlas @Alexander Forssberg
-52 U Arrest @Katana Canata
+52 U Arrest @Canata Katana
 53 R Balan, Wandering Knight @Mai Okuma
 54 U Eidolon of Rhetoric @Yakotakos
 55 U Emancipation Angel @Hisashi Momose
@@ -67,7 +67,7 @@ ScryfallCode=J22
 59 U Valorous Stance @Susumu Kuroi
 60 U Kasmina, Enigmatic Mentor @Ayuko
 61 U Merrow Reejerey @Penguu
-62 U Mirror Image @Yukie Tajima
+62 U Mirror Image @Yuchi Yuki
 63 C Preordain @Ayuko
 64 U Spectral Sailor @Fuzichoco
 65 C Spellstutter Sprite @Sila
@@ -86,7 +86,7 @@ ScryfallCode=J22
 78 C Drannith Stinger @Daisuke Tatsuma
 79 M Kiki-Jiki, Mirror Breaker @Ishikawa Kenta
 80 U Rapacious Dragon @Yumi Ozuno
-81 U Rigging Runner @Midon
+81 U Rigging Runner @MiDQN
 82 C Spear Spewer @Ryuichi Sakuma
 83 C Thermo-Alchemist @Azutaro
 84 C Thrill of Possibility @Daisuke Tatsuma
@@ -192,7 +192,7 @@ ScryfallCode=J22
 184 R Felidar Retreat @Ralph Horsley
 185 C Forced Worship @Karl Kopinski
 186 C Gallant Cavalry @Craig J Spearing
-187 U Gallows Warden @Dan Scott
+187 U Gallows Warden @Dan Murayama Scott
 188 C Giant Ox @Joe Slucher
 189 M Gideon, Champion of Justice @David Rapoza
 190 C Gideon's Lawkeeper @Steve Prescott
@@ -298,7 +298,7 @@ ScryfallCode=J22
 290 C Elite Instructor @Mike Sass
 291 U Erdwal Illuminator @Seb McKinnon
 292 U Eternity Snare @Min Yum
-293 C Eyekite @Dan Scott
+293 C Eyekite @Dan Murayama Scott
 294 R Faerie Formation @Ryan Yee
 295 C Faerie Seer @Colin Boyer
 296 U Faerie Vandal @Paul Scott Canavan
@@ -337,11 +337,11 @@ ScryfallCode=J22
 329 C Octoprophet @Grzegorz Rutkowski
 330 C One With the Wind @Naomi Baker
 331 U Oneirophage @Martina Pilcerova
-332 C Opt @Dan Scott
+332 C Opt @Dan Murayama Scott
 333 U Overwhelmed Apprentice @Jason Rainville
 334 U Perilous Voyage @Wesley Burt
 335 C Pestermite @Christopher Moeller
-336 C Pilfering Hawk @Dan Scott
+336 C Pilfering Hawk @Dan Murayama Scott
 337 C Press for Answers @Steve Prescott
 338 U Renowned Weaponsmith @Eric Deschamps
 339 U River Sneak @Slawomir Maniak
@@ -377,7 +377,7 @@ ScryfallCode=J22
 369 R Wake Thrasher @Jesper Ejsing
 370 C Watertrap Weaver @Josu Hernaiz
 371 R Wavebreak Hippocamp @Caio Monteiro
-372 C Weldfast Wingsmith @Dan Scott
+372 C Weldfast Wingsmith @Dan Murayama Scott
 373 U Windrider Patrol @Svetlin Velinov
 374 C Winter's Rest @Mila Pesic
 375 C Alley Strangler @Efflam Mercier
@@ -430,7 +430,7 @@ ScryfallCode=J22
 422 R Graveblade Marauder @Jason Rainville
 423 R Gravecrawler @Steven Belledin
 424 U Gravedigger @Dermot Power
-425 C Grotesque Mutation @Dan Scott
+425 C Grotesque Mutation @Dan Murayama Scott
 426 C Hooded Assassin @Matt Stewart
 427 C Ill-Gotten Inheritance @Winona Nelson
 428 U Inner Demon @Mark Behm
@@ -586,7 +586,7 @@ ScryfallCode=J22
 578 C Outnumber @Tyler Jacobson
 579 C Pillar of Flame @Dave Kendall
 580 C Prickly Marmoset @Simon Dominic
-581 R Professional Face-Breaker @Dan Scott
+581 R Professional Face-Breaker @Dan Murayama Scott
 582 U Pyre-Sledge Arsonist @Kekai Kotaki
 583 C Quakefoot Cyclops @Mike Bierek
 584 C Raking Claws @Slawomir Maniak
@@ -701,7 +701,7 @@ ScryfallCode=J22
 693 C Naga Vitalist @James Ryman
 694 U Nantuko Cultivator @Jehan Choo
 695 U Nessian Hornbeetle @Jason Felix
-696 R Nightpack Ambusher @Dan Scott
+696 R Nightpack Ambusher @Dan Murayama Scott
 697 C Oashra Cultivator @Sara Winters
 698 C Ondu Giant @Igor Kieryluk
 699 U Ordeal of Nylea @David Palumbo
@@ -774,7 +774,7 @@ ScryfallCode=J22
 766 C Explorer's Scope @Vincent Proce
 767 C Gearsmith Guardian @Deruchenko Alexander
 768 C Gleaming Barrier @Jason Felix
-769 C Goldvein Pick @Dan Scott
+769 C Goldvein Pick @Dan Murayama Scott
 770 U Golem Artisan @Nic Klein
 771 U Hammer of Ruin @Vincent Proce
 772 R Hangarback Walker @Daarken
@@ -796,11 +796,11 @@ ScryfallCode=J22
 788 R Panharmonicon @Volkan Baǵa
 789 U Phyrexian Ironfoot @Stephan Martiniere
 790 U Pierce Strider @Igor Kieryluk
-791 C Pilgrim's Eye @Dan Scott
+791 C Pilgrim's Eye @Dan Murayama Scott
 792 R Psychosis Crawler @Stephan Martiniere
 793 C Raiders' Karve @Aaron Miller
 794 C Runed Servitor @Mike Bierek
-795 C Self-Assembler @Noah Bradley
+795 C Self-Assembler @Toraji
 796 U Shambling Suit @Nicholas Gregory
 797 R Solemn Simulacrum @Donato Giancola
 798 R Steel Overseer @Chris Rahn

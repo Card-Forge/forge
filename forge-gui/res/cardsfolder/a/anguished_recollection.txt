@@ -1,0 +1,7 @@
+Name:Anguished Recollection
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBSeek | SpellDescription$ Discard a card. If you do, seek two cards that don't share a card type with the discarded card.
+SVar:DBSeek:DB$ Seek | Type$ Card.!sharesCardTypeWith Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Num$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Discard a card. If you do, seek two cards that don't share a card type with the discarded card.

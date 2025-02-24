@@ -1,7 +1,7 @@
 Name:Spirit Token
 ManaCost:no cost
-Types:Creature Spirit
 Colors:blue
+Types:Creature Spirit
 PT:2/2
 K:Vigilance
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on this creature.
