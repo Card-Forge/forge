@@ -1467,7 +1467,6 @@ public class GameAction {
 
                 checkAgainCard |= stateBasedAction_Saga(c, sacrificeList);
                 checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
-                checkAgainCard |= stateBasedAction_Siege(c);
                 checkAgainCard |= stateBasedAction_Role(c, unAttachList);
                 checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
                 checkAgainCard |= stateBasedAction_Contraption(c, noRegCreats);
@@ -1660,13 +1659,19 @@ public class GameAction {
 
     private boolean stateBasedAction_Battle(Card c, CardCollection removeList) {
         boolean checkAgain = false;
-        if (!c.getType().isBattle()) {
+        if (!c.isBattle()) {
             return checkAgain;
         }
-        if ((c.getProtectingPlayer() == null || !c.getProtectingPlayer().isInGame()) &&
-                (game.getCombat() == null || game.getCombat().getAttackersOf(c).isEmpty())) {
+        if (((c.getProtectingPlayer() == null || !c.getProtectingPlayer().isInGame()) &&
+                (game.getCombat() == null || game.getCombat().getAttackersOf(c).isEmpty())) ||
+                (c.getType().hasStringType("Siege") && c.getController().equals(c.getProtectingPlayer()))) {
             Player newProtector = c.getController().getController().chooseSingleEntityForEffect(c.getController().getOpponents(), null, "Choose an opponent to protect this battle", null);
-            c.setProtectingPlayer(newProtector);
+            // seems unlikely unless range of influence gets implemented
+            if (newProtector == null) {
+                removeList.add(c);
+            } else {
+                c.setProtectingPlayer(newProtector);
+            }
             checkAgain = true;
         }
         if (c.getCounters(CounterEnumType.DEFENSE) > 0) {
@@ -1676,19 +1681,6 @@ public class GameAction {
         // it’s put into its owner’s graveyard.
         if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isTrigger())) {
             removeList.add(c);
-            checkAgain = true;
-        }
-        return checkAgain;
-    }
-
-    private boolean stateBasedAction_Siege(Card c) {
-        boolean checkAgain = false;
-        if (!c.getType().hasStringType("Siege")) {
-            return false;
-        }
-        if (c.getController().equals(c.getProtectingPlayer())) {
-            Player newProtector = c.getController().getController().chooseSingleEntityForEffect(c.getController().getOpponents(), null, "Choose an opponent to protect this battle", null);
-            c.setProtectingPlayer(newProtector);
             checkAgain = true;
         }
         return checkAgain;

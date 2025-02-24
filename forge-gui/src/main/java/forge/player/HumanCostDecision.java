@@ -303,7 +303,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
             if (inp.hasCancelled() || 
-                !Expressions.compare(CardFactoryUtil.getCardTypesFromList(list), "GE", nTypes)) {
+                !Expressions.compare(AbilityUtils.countCardTypesFromList(list, false), "GE", nTypes)) {
                     return null;
             }
             return PaymentDecision.card(inp.getSelected());

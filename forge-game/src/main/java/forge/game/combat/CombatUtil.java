@@ -201,6 +201,10 @@ public class CombatUtil {
     private static boolean canAttack(final Card attacker, final GameEntity defender, final boolean forNextTurn) {
         final Game game = attacker.getGame();
 
+        if (attacker.isBattle()) {
+            return false;
+        }
+
         // Basic checks (unless is for next turn)
         if (!forNextTurn && (
                    !attacker.isCreature()
@@ -477,6 +481,10 @@ public class CombatUtil {
      */
     public static boolean canBlock(final Card blocker, final boolean nextTurn) {
         if (blocker == null) {
+            return false;
+        }
+
+        if (blocker.isBattle()) {
             return false;
         }
 
