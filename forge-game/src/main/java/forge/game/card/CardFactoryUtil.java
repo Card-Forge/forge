@@ -519,14 +519,6 @@ public class CardFactoryUtil {
         return filteredkw;
     }
 
-    public static int getCardTypesFromList(final CardCollectionView list) {
-        EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
-        for (Card c1 : list) {
-            c1.getType().getCoreTypes().forEach(types::add);
-        }
-        return types.size();
-    }
-
     /**
      * Adds the ability factory abilities.
      *

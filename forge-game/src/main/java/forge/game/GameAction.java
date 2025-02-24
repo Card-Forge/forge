@@ -1659,11 +1659,23 @@ public class GameAction {
 
     private boolean stateBasedAction_Battle(Card c, CardCollection removeList) {
         boolean checkAgain = false;
-        if (!c.getType().isBattle()) {
-            return false;
+        if (!c.isBattle()) {
+            return checkAgain;
+        }
+        if (((c.getProtectingPlayer() == null || !c.getProtectingPlayer().isInGame()) &&
+                (game.getCombat() == null || game.getCombat().getAttackersOf(c).isEmpty())) ||
+                (c.getType().hasStringType("Siege") && c.getController().equals(c.getProtectingPlayer()))) {
+            Player newProtector = c.getController().getController().chooseSingleEntityForEffect(c.getController().getOpponents(), null, "Choose an opponent to protect this battle", null);
+            // seems unlikely unless range of influence gets implemented
+            if (newProtector == null) {
+                removeList.add(c);
+            } else {
+                c.setProtectingPlayer(newProtector);
+            }
+            checkAgain = true;
         }
         if (c.getCounters(CounterEnumType.DEFENSE) > 0) {
-            return false;
+            return checkAgain;
         }
         // 704.5v If a battle has defense 0 and it isn't the source of an ability that has triggered but not yet left the stack,
         // it’s put into its owner’s graveyard.
