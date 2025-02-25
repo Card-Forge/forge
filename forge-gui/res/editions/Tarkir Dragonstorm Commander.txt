@@ -7,4 +7,6 @@ ScryfallCode=TDC
 
 [cards]
 1 M Betor, Ancestor's Voice @Lius Lasahido
+0 M Elsha, Threefold Master @Irina Nordsol
+6 M Neriv, Crackling Vanguard @Lucas Graciano
 8 M Teval, the Balanced Scale @Chris Rahn
