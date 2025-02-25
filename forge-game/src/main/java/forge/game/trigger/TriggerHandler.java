@@ -19,6 +19,8 @@ package forge.game.trigger;
 
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
@@ -241,7 +243,7 @@ public class TriggerHandler {
                     TriggerType.Destroyed.equals(t.getMode()) ||
                     TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
                     ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
-                            && "Battlefield".equals(t.getParam("Origin")))) { // TODO needs additional logic in case origin=Any
+                            && StringUtils.contains(t.getParam("Origin"), "Battlefield"))) {
                 registerOneTrigger(t);
             }
         }
