@@ -9,4 +9,5 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidde
 SVar:DBSurveil:DB$ Surveil | Defined$ You | Amount$ 1 | ConditionDefined$ RememberedLKI | ConditionPresent$ Desert.Other | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Desert
+SVar:NeedsToPlay:Land.YouCtrl
 Oracle:Arid Archway enters tapped.\nWhen Arid Archway enters, return a land you control to its owner's hand. If another Desert was returned this way, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Add {C}{C}.
