@@ -37,6 +37,7 @@ Aurochs:Aurochs
 Avatar:Avatars
 Azra:Azra
 Badger:Badgers
+Balloon:Balloons
 Barbarian:Barbarians
 Bard:Bards
 Basilisk:Basilisks
