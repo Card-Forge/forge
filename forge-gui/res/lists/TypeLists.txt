@@ -119,6 +119,7 @@ Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
 Gith:Gith
+Glimmer:Glimmers
 Gnoll:Gnolls
 Gnome:Gnomes
 Goat:Goats
