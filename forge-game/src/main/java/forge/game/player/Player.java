@@ -282,10 +282,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void setSchemeInMotion(SpellAbility cause) {
-        if (StaticAbilityCantSetSchemesInMotion.any(getGame())) {
-            return;
-        }
-
+        setSchemeInMotion(cause, getZone(ZoneType.SchemeDeck).get(0));
+    }
+    public void setSchemeInMotion(SpellAbility cause, Card scheme) {
         if (game.getReplacementHandler().run(ReplacementType.SetInMotion, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return;
         }
@@ -294,11 +293,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
 
-        activeScheme = getZone(ZoneType.SchemeDeck).get(0);
-        game.getAction().moveToCommand(activeScheme, cause);
+        game.getAction().moveToCommand(scheme, cause);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Scheme, activeScheme);
+        runParams.put(AbilityKey.Scheme, scheme);
         game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
     }
 
