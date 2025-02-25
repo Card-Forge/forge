@@ -1,0 +1,11 @@
+[metadata]
+Code=YDFT
+Date=2024-03-04
+Name=Alchemy: Aetherdrift
+Type=Online
+ScryfallCode=YDFT
+
+[cards]
+0 R Naktamun Shines Again @Andrew Mar
+0 R Arius, Flyby Trawler @Leonardo Santanna
+0 R Support Skyforge @Joseph Meehan
