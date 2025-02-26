@@ -7,4 +7,5 @@ SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbil
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
 # AFLifeLost will be set by LoseLife
+DeckHas:Ability$LifeGain
 Oracle:At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
