@@ -6,4 +6,3 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl+hasActivatedAbilityWithExhaust |
 T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ Activated.Exhaust+nonManaAbility | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever you activate an exhaust ability that isn't a mana ability, copy it. You may choose new targets for the copy.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 Oracle:Each creature you control with an exhaust ability has haste.\nWhenever you activate an exhaust ability that isn't a mana ability, copy it. You may choose new targets for the copy.
- 
