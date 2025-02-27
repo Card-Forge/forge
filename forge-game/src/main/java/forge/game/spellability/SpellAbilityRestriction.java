@@ -229,11 +229,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
-
-            // A conspiracy with hidden agenda: reveal at any time
-            if (cardZone != null && cardZone.is(ZoneType.Command) && sa.hasParam("HiddenAgenda")) {
-                return true;
-            }
             if (sa.hasParam("AdditionalActivationZone")) {
                 if (cardZone != null && cardZone.is(ZoneType.valueOf(sa.getParam("AdditionalActivationZone")))) {
                     return true;

@@ -3079,9 +3079,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Conspiracies
         for (IPaperCard cp : registeredPlayer.getConspiracies()) {
             Card conspire = Card.fromPaperCard(cp, this);
-            if (conspire.hasKeyword("Hidden agenda") || conspire.hasKeyword("Double agenda")) {
-                if (!CardFactoryUtil.handleHiddenAgenda(this, conspire)) {
-                    continue;
+            boolean addToCommand = true;
+            for (KeywordInterface ki : conspire.getKeywords(Keyword.HIDDEN_AGENDA)) {
+                if (!CardFactoryUtil.handleHiddenAgenda(this, conspire, ki)) {
+                    addToCommand = false;
+                }
+            }
+            for (KeywordInterface ki : conspire.getKeywords(Keyword.DOUBLE_AGENDA)) {
+                if (!CardFactoryUtil.handleHiddenAgenda(this, conspire, ki)) {
+                    addToCommand = false;
                 }
             }
 
@@ -3093,7 +3099,9 @@ public class Player extends GameEntity implements Comparable<Player> {
                 this.extraZones.add(hand);
             }
 
-            com.add(conspire);
+            if (addToCommand) {
+                com.add(conspire);
+            }
         }
 
         // Attractions
