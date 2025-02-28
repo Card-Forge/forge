@@ -1272,12 +1272,11 @@ public class GameAction {
             dependencyGraph.addVertex(stAb);
 
             boolean exists = stAb.getHostCard().getStaticAbilities().contains(stAb);
-            boolean compareAffected = true;
+            boolean compareAffected = false;
             CardCollectionView affectedHere = affectedPerAbility.get(stAb);
             if (affectedHere == null) {
                 affectedHere = StaticAbilityContinuous.getAffectedCards(stAb, preList);
-            } else {
-                compareAffected = false;
+                compareAffected = true;
             }
             List<Object> effectResults = generateStaticAbilityResult(layer, stAb);
 
@@ -1355,7 +1354,7 @@ public class GameAction {
         }
         dependencyGraph.removeAllVertices(toRemove);
 
-        // now the earlist one left is the correct choice
+        // now the earliest one left is the correct choice
         List<StaticAbility> statics = Lists.newArrayList(dependencyGraph.vertexSet());
         statics.sort(Comparator.comparing(s -> s.getHostCard().getLayerTimestamp()));
 

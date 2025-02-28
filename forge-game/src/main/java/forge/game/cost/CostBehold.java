@@ -7,9 +7,9 @@ public class CostBehold extends CostReveal {
     public CostBehold(String amount, String type, String description) {
         super(amount, type, description, "Hand,Battlefield");
     }
+
     @Override
     public String toString() {
-
         final StringBuilder sb = new StringBuilder();
         sb.append("Behold ");
 
