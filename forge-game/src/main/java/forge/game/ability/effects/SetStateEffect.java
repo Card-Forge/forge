@@ -194,14 +194,12 @@ public class SetStateEffect extends SpellAbilityEffect {
                 } else if (sa.isCloakUp()) {
                     String sb = p + " has uncloaked " + gameCard.getName();
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
-                } else if (sa.isKeyword(Keyword.HIDDEN_AGENDA) || sa.isKeyword(Keyword.DOUBLE_AGENDA)) {
-                    if (sa.isKeyword(Keyword.DOUBLE_AGENDA)) {
-                        String sb = p + " has revealed " + gameCard.getName() + " with the chosen names: " + gameCard.getNamedCards();
-                        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
-                    } else {
-                        String sb = p + " has revealed " + gameCard.getName() + " with the chosen name " + gameCard.getNamedCard();
-                        game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
-                    }
+                } else if (sa.isKeyword(Keyword.DOUBLE_AGENDA)) {
+                    String sb = p + " has revealed " + gameCard.getName() + " with the chosen names: " + gameCard.getNamedCards();
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                } else if (sa.isKeyword(Keyword.HIDDEN_AGENDA)) {
+                    String sb = p + " has revealed " + gameCard.getName() + " with the chosen name " + gameCard.getNamedCard();
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 }
                 game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 if (sa.hasParam("Mega")) { // TODO move Megamorph into an Replacement Effect
