@@ -204,6 +204,8 @@ public class ForgeScript {
             return sa.isCraft();
         } else if (property.equals("Crew")) {
             return sa.isCrew();
+        } else if (property.equals("Saddle")) {
+            return sa.isKeyword(Keyword.SADDLE);
         } else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {

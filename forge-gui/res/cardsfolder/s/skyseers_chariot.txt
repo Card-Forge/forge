@@ -1,0 +1,10 @@
+Name:Skyseer's Chariot
+ManaCost:1 W
+Types:Artifact Vehicle
+PT:3/3
+K:Flying
+K:ETBReplacement:Other:DBNameCard
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SpellDescription$ As this Vehicle enters, choose a nonland card name.
+S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | ValidSpell$ Activated | Amount$ 2 | Description$ Activated abilities of sources with the chosen name cost {2} more to activate.
+K:Crew:2
+Oracle:Flying\nAs this Vehicle enters, choose a nonland card name.\nActivated abilities of sources with the chosen name cost {2} more to activate.\nCrew 2

@@ -1,7 +1,7 @@
 Name:Minion Reflector
 ManaCost:5
 Types:Artifact
-T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever a nontoken creature you control enters, you may pay {2}. If you do, create a token that's a copy of that creature, except it has haste and "At the beginning of the end step, sacrifice this permanent."
+T:Mode$ ChangesZone | ValidCard$ Creature.!token+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever a nontoken creature you control enters, you may pay {2}. If you do, create a token that's a copy of that creature, except it has haste and "At the beginning of the end step, sacrifice this permanent."
 SVar:TrigCopy:AB$ CopyPermanent | Cost$ 2 | Defined$ TriggeredCardLKICopy | AddKeywords$ Haste | AtEOTTrig$ Sacrifice
 SVar:BuffedBy:Creature
 Oracle:Whenever a nontoken creature you control enters, you may pay {2}. If you do, create a token that's a copy of that creature, except it has haste and "At the beginning of the end step, sacrifice this permanent."

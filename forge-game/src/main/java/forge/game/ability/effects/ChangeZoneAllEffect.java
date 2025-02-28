@@ -107,10 +107,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             final Zone originZone = game.getZoneOf(c);
 
             // Fizzle spells so that they are removed from stack (e.g. Summary Dismissal)
-            if (sa.hasParam("Fizzle")) {
-                if (originZone.is(ZoneType.Exile) || originZone.is(ZoneType.Hand) || originZone.is(ZoneType.Stack)) {
-                    game.getStack().remove(c);
-                }
+            if (originZone.is(ZoneType.Stack)) {
+                game.getStack().remove(c);
             }
 
             if (remLKI) {
@@ -122,16 +120,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
             if (destination == ZoneType.Battlefield) {
                 moveParams.put(AbilityKey.SimultaneousETB, cards);
-                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
-                    // need LKI before Animate does apply
-                    moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
-
-                    final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
-                    source.addRemembered(c);
-                    AbilityUtils.resolve(animate);
-                    source.removeRemembered(c);
-                    animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
-                }
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
                 }

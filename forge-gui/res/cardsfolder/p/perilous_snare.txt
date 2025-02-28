@@ -1,0 +1,11 @@
+Name:Perilous Snare
+ManaCost:2 W
+Types:Artifact
+K:Start your engines
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABPutCounter | Description$ Max speed — {T}: Put a +1/+1 counter on target creature or Vehicle you control. Activate only as a sorcery.
+SVar:ABPutCounter:AB$ PutCounter | PrecostDesc$ Max speed — | Cost$ T | Secondary$ True | ValidTgts$ Creature.YouCtrl,Vehicle.YouCtrl | TgtPrompt$ Select target creature or Vehicle | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target creature or Vehicle you control. Activate only as a sorcery.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nWhen this artifact enters, exile target nonland permanent an opponent controls until this artifact leaves the battlefield.\nMax speed — {T}: Put a +1/+1 counter on target creature or Vehicle you control. Activate only as a sorcery.

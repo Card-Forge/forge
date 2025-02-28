@@ -1,0 +1,7 @@
+Name:Ride's End
+ManaCost:4 W
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | ValidTarget$ Permanent.tapped | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a tapped permanent.
+A:SP$ ChangeZone | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or Vehicle.
+DeckHints:Type$Vehicle
+Oracle:This spell costs {3} less to cast if it targets a tapped permanent.\nExile target creature or Vehicle.

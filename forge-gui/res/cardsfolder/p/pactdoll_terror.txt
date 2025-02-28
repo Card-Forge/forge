@@ -1,0 +1,10 @@
+Name:Pactdoll Terror
+ManaCost:3 B
+Types:Artifact Creature Toy
+PT:3/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Artifact.Other+YouCtrl | Destination$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever this creature or another artifact you control enters, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:BuffedBy:Artifact
+DeckNeeds:Type$Artifact
+Oracle:Whenever this creature or another artifact you control enters, each opponent loses 1 life and you gain 1 life.

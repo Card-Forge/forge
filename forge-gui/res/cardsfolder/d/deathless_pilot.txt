@@ -1,0 +1,7 @@
+Name:Deathless Pilot
+ManaCost:1 B
+Types:Creature Zombie Pilot
+PT:2/2
+S:Mode$ TapPowerValue | ValidSA$ Activated.Saddle+Mount,Activated.Crew+Vehicle | ValidCard$ Card.Self | Value$ 2 | Description$ This creature saddles Mounts and crews Vehicles as though its power were 2 greater.
+A:AB$ ChangeZone | Cost$ 3 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return this card from your graveyard to your hand.
+Oracle:This creature saddles Mounts and crews Vehicles as though its power were 2 greater.\n{3}{B}: Return this card from your graveyard to your hand.

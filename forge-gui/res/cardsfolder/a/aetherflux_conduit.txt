@@ -1,0 +1,9 @@
+Name:Aetherflux Conduit
+ManaCost:6
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigEnergy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, you get an amount of {E} (energy counters) equal to the amount of mana spent to cast that spell.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
+A:AB$ Draw | Cost$ T PayEnergy<50> | NumCards$ 7 | SubAbility$ DBPlay | SpellDescription$ Draw seven cards. You may cast any number of spells from your hand without paying their mana costs.
+SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell | ValidZone$ Hand | WithoutManaCost$ True | Amount$ All | Controller$ You | Optional$ True
+SVar:X:TriggeredCard$CastTotalManaSpent
+Oracle:Whenever you cast a spell, you get an amount of {E} (energy counters) equal to the amount of mana spent to cast that spell.\n{T}, Pay fifty {E}: Draw seven cards. You may cast any number of spells from your hand without paying their mana costs.

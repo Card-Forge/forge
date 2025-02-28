@@ -322,16 +322,13 @@ public class AbilityManaPart implements java.io.Serializable {
         return this.triggersWhenSpent != null;
     }
 
-    public void addTriggersWhenSpent(SpellAbility saBeingPaid, Card card) {
-        if (this.triggersWhenSpent == null)
-            return;
-
-        TriggerHandler handler = card.getGame().getTriggerHandler();
+    public void addTriggersWhenSpent(SpellAbility saBeingPaid) {
         Trigger trig = TriggerHandler.parseTrigger(sVarHolder.getSVar(this.triggersWhenSpent), sourceCard, false, sVarHolder);
-        if (sVarHolder instanceof SpellAbility) {
-            trig.setSpawningAbility((SpellAbility) sVarHolder);
+        trig.addRemembered(saBeingPaid);
+        if (getSourceSA() != null) {
+            trig.setSpawningAbility(getSourceSA());
         }
-        handler.registerOneTrigger(trig);
+        saBeingPaid.getHostCard().getGame().getTriggerHandler().registerThisTurnDelayedTrigger(trig);
     }
 
     public SpellAbility getSourceSA() {

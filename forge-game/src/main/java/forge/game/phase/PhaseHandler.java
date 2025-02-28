@@ -36,6 +36,7 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityNoCleanupDamage;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -179,8 +180,6 @@ public class PhaseHandler implements java.io.Serializable {
                     }
                 }
                 playerTurn.incrementTurn();
-
-                game.getAction().resetActivationsPerTurn();
 
                 final int lands = CardLists.count(playerTurn.getLandsInPlay(), CardPredicates.UNTAPPED);
                 playerTurn.setNumPowerSurgeLands(lands);
@@ -395,7 +394,10 @@ public class PhaseHandler implements java.io.Serializable {
                     // Rule 514.2
                     // Reset Damage received map
                     for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
-                        c.onCleanupPhase(playerTurn);
+                        if (!StaticAbilityNoCleanupDamage.damageNotRemoved(c)) {
+                            c.setDamage(0);
+                        }
+                        c.setHasBeenDealtDeathtouchDamage(false);
                     }
 
                     game.getEndOfTurn().executeUntil();

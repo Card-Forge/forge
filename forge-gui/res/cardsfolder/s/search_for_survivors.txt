@@ -5,8 +5,7 @@ A:SP$ ReorderZone | Zone$ Graveyard | Defined$ You | Random$ True | SubAbility$ 
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChooseCard | Defined$ ChosenPlayer | Choices$ Card.YouOwn | ChoiceZone$ Graveyard | AtRandom$ True | Amount$ 1 | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ConditionDefined$ ChosenCard | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | Defined$ ChosenCard | SubAbility$ DBExile
-SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ConditionDefined$ ChosenCard | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0 | Defined$ ChosenCard | SubAbility$ DBCleanupChosen
-SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True | ClearChosenCard$ True
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ConditionDefined$ ChosenCard | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0 | Defined$ ChosenCard
 SVar:X:Count$ValidGraveyard Creature.YouCtrl
 SVar:NeedsToPlayVar:X GE2
 AI:RemoveDeck:All

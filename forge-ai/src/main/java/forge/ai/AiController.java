@@ -292,7 +292,7 @@ public class AiController {
             }
 
             // can't fetch partner isn't problematic
-            if (tr.getKeyword() != null && tr.getKeyword().getOriginal().startsWith("Partner")) {
+            if (tr.isKeyword(Keyword.PARTNER)) {
                 continue;
             }
 
@@ -688,7 +688,6 @@ public class AiController {
                             score += 25;
                         }
                     }
-
 
                     // TODO handle fetchlands and what they can fetch for
                     // determine new color pips

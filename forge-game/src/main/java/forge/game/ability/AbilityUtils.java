@@ -14,6 +14,7 @@ import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -535,6 +536,10 @@ public class AbilityUtils {
             val = handlePaid(card.getConvoked(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Emerged")) {
             val = handlePaid(card.getEmerged(), calcX[1], card, ability);
+        } else if (calcX[0].startsWith("Crewed")) {
+            val = handlePaid(card.getCrewedByThisTurn(), calcX[1], card, ability);
+        } else if (calcX[0].startsWith("ChosenCard")) {
+            val = handlePaid(card.getChosenCards(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();
@@ -1360,10 +1365,8 @@ public class AbilityUtils {
         }
 
         // do blessing there before condition checks
-        if (source.hasKeyword(Keyword.ASCEND)) {
-            if (controller.getZone(ZoneType.Battlefield).size() >= 10) {
-                controller.setBlessing(true);
-            }
+        if (source.hasKeyword(Keyword.ASCEND) && controller.getZone(ZoneType.Battlefield).size() >= 10) {
+            controller.setBlessing(true);
         }
 
         if (source.hasKeyword(Keyword.GIFT) && sa.isGiftPromised()) {
@@ -2335,6 +2338,10 @@ public class AbilityUtils {
             return doXMath(player.getSpellsCastThisGame(), expr, c, ctb);
         }
 
+        if (sq[0].equals("YourSpeed")) {
+            return doXMath(player.getSpeed(), expr, c, ctb);
+        }
+
         if (sq[0].equals("Night")) {
             return doXMath(calculateAmount(c, sq[game.isNight() ? 1 : 2], ctb), expr, c, ctb);
         }
@@ -2833,7 +2840,13 @@ public class AbilityUtils {
             final String[] workingCopy = paidparts[0].split("_");
             final String validFilter = workingCopy[1];
             // use objectXCount ?
-            return CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
+            int activated = CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
+            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+                if (i.getPayment().getAbility().isValid(validFilter, player, c, ctb)) {
+                    activated++;
+                }
+            }
+            return activated;
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
@@ -3585,6 +3598,10 @@ public class AbilityUtils {
             return doXMath(player.getLifeStartedThisTurnWith(), m, source, ctb);
         }
 
+        if (value.contains("Speed")) {
+            return doXMath(player.getSpeed(), m, source, ctb);
+        }
+
         if (value.contains("SVarAmount")) {
             return doXMath(calculateAmount(source, ctb.getSVar(player.toString()), ctb), m, source, ctb);
         }
@@ -3687,6 +3704,10 @@ public class AbilityUtils {
                 }
             }
             return doXMath(amount, m, source, ctb);
+        }
+
+        if (value.equals("AttractionsVisitedThisTurn")) {
+            return doXMath(player.getAttractionsVisitedThisTurn(), m, source, ctb);
         }
 
         if (value.startsWith("PlaneswalkedToThisTurn")) {

@@ -1,0 +1,11 @@
+Name:Oviya, Automech Artisan
+ManaCost:3 G
+Types:Legendary Creature Human Artificer
+PT:1/2
+S:Mode$ Continuous | Affected$ Creature.attacking Opponent | AddKeyword$ Trample | Description$ Each creature that's attacking one of your opponents has trample.
+A:AB$ ChangeZone | Cost$ G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature,Vehicle | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPutCounter | SpellDescription$ You may put a creature or Vehicle card from your hand onto the battlefield. If you put an artifact onto the battlefield this way, put two +1/+1 counters on it.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Artifact | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints$:Type$Artifact|Vehicle
+DeckHas:Ability$Counters
+Oracle:Each creature that's attacking one of your opponents has trample.\n{G}, {T}: You may put a creature or Vehicle card from your hand onto the battlefield. If you put an artifact onto the battlefield this way, put two +1/+1 counters on it.

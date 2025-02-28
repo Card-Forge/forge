@@ -15,5 +15,5 @@ Name:Overloaded Mage-Ring
 ManaCost:no cost
 Colors:blue
 Types:Artifact
-A:AB$ CopySpellAbility | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Card.YouCtrl | TargetType$ Spell | SpellDescription$ Copy target spell you control. (A copy of a permanent spell becomes a token.)
-Oracle:{1}, {T}, Sacrifice Overloaded Mage-Ring: Copy target spell you control. (A copy of a permanent spell becomes a token.)
+A:AB$ CopySpellAbility | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Card.YouCtrl | TargetType$ Spell | SpellDescription$ Copy target spell you control. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)
+Oracle:{1}, {T}, Sacrifice Overloaded Mage-Ring: Copy target spell you control. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)

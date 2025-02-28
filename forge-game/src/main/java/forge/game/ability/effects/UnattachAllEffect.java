@@ -32,8 +32,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
 
         // If Cast Targets will be checked on the Stack
         for (GameEntity ge : getTargetEntities(sa)) {
-            if (ge instanceof Card) {
-                Card gc = (Card) ge;
+            if (ge instanceof Card gc) {
                 // check if the object is still in game or if it was moved
                 Card gameCard = game.getCardState(gc, null);
                 // gameCard is LKI in that case, the card is not in game anymore

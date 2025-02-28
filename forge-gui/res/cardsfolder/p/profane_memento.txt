@@ -1,6 +1,6 @@
 Name:Profane Memento
 ManaCost:1
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.nonToken+OppOwn | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature card is put into an opponent's graveyard from anywhere, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.!token+OppOwn | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature card is put into an opponent's graveyard from anywhere, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 Oracle:Whenever a creature card is put into an opponent's graveyard from anywhere, you gain 1 life.

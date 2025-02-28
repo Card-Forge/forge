@@ -1,7 +1,7 @@
 Name:Nyx
 ManaCost:no cost
 Types:Plane Theros
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.nonToken | AddType$ Enchantment | Description$ Nontoken creatures are enchantments in addition to their other types.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.!token | AddType$ Enchantment | Description$ Nontoken creatures are enchantments in addition to their other types.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Constellation — Whenever an enchantment you control enters, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, choose a color. Add an amount of mana of that color equal to your devotion to that color.

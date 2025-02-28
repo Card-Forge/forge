@@ -100,8 +100,6 @@ public class AmassEffect extends TokenEffectBase {
         // 01.44a If it isn’t a [subtype], it becomes a [subtype] in addition to its other types.
         if (!tgt.getType().hasCreatureType(type)) {
             Card eff = createEffect(sa, activator, "Amass Effect", source.getImageKey());
-            eff.setSetCode(source.getSetCode());
-            eff.setRarity(source.getRarity());
             eff.setRenderForUI(false);
             eff.addRemembered(tgt);
 

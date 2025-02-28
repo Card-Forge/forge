@@ -1,0 +1,16 @@
+Name:Howlsquad Heavy
+ManaCost:2 R
+Types:Creature Goblin Mercenary
+PT:2/3
+K:Start your engines
+S:Mode$ Continuous | Affected$ Goblin.YouCtrl+Other | AddKeyword$ Haste | Description$ Other Goblins you control have haste.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_goblin | RememberTokens$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ MustAttack | Duration$ UntilEndOfCombat | SubAbility$ DBCleanup
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this combat if able.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABMana | Description$ Max speed — {T}: Add {R} for each Goblin you control.
+SVar:ABMana:AB$ Mana | PrecostDesc$ Max speed — | Cost$ T | Secondary$ True | Produced$ R | Amount$ Count$Valid Goblin.YouCtrl | SpellDescription$ Add {R} for each Goblin you control.
+DeckHas:Ability$Token
+DeckHints:Type$Goblin
+Oracle:Start your engines!\nOther Goblins you control have haste.\nAt the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able.\nMax speed — {T}: Add {R} for each Goblin you control.

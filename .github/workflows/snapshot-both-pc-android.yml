@@ -8,6 +8,9 @@ on:
         description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
         required: false
         default: false
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '00 18 * * *'
 
 jobs:
   build:
@@ -109,16 +112,21 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Upload snapshot to GitHub Prerelease
+        uses: ncipollo/release-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          server: ftp.cardforge.org
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: izpack/
-          server-dir: downloads/dailysnapshots/
-          state-name: .ftp-deploy-both-sync-state.json
-          exclude: |
-            *.pom
-            *.repositories
-            *.xml
+          name: Daily Snapshot
+          tag: daily-snapshots
+          prerelease: true
+          artifacts: izpack/*
+          allowUpdates: true
+          removeArtifacts: true
+
+      - name: Send failure notification to Discord
+        if: failure() # This step runs only if the job fails
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"🔴 Snapshot Build Failed in branch: \`${{ github.ref_name }}\` by \`${{ github.actor }}\`.\nCheck logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          ${{ secrets.DISCORD_AUTOMATION_WEBHOOK }}

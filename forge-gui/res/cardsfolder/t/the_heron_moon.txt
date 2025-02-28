@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ ChangeZoneAll | Cost$ 1 T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ChangeType$ Card.BottomLibrary | Origin$ Library | Destination$ Exile | SpellDescription$ Exile the bottom card of target opponent's library.
-T:Mode$ ChangesZoneAll | ValidCards$ Card.OppOwn+nonToken+nonCopiedSpell | Destination$ Exile | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more cards an opponent owns are put into exile, put a release counter on CARDNAME. Then if it has thirteen or more release counters on it, sacrifice it and create a copy of Emrakul, the Promised End. Cast it without paying its mana cost.
+T:Mode$ ChangesZoneAll | ValidCards$ Card.OppOwn+!token+nonCopiedSpell | Destination$ Exile | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more cards an opponent owns are put into exile, put a release counter on CARDNAME. Then if it has thirteen or more release counters on it, sacrifice it and create a copy of Emrakul, the Promised End. Cast it without paying its mana cost.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ RELEASE | Defined$ Self | CounterNum$ 1 | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | RememberSacrificed$ True | ConditionPresent$ Card.Self+counters_GE13_RELEASE | SubAbility$ DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ChooseFromList$ Emrakul; the Promised End | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCast | StackDescription$ None

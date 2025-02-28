@@ -1,7 +1,7 @@
 Name:The Dark Barony
 ManaCost:no cost
 Types:Plane Ulgrotha
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.nonToken+nonBlack | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.!token+nonBlack | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nonblack card is put into a player's graveyard from anywhere, that player loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ 1
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, each opponent discards a card.
 SVar:RolledChaos:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent

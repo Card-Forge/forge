@@ -1,0 +1,10 @@
+Name:Cloudspire Coordinator
+ManaCost:R W
+Types:Creature Human Pilot
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When this creature enters, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+A:AB$ Token | Cost$ T | TokenAmount$ Count$ThisTurnEntered_Battlefield_Mount.YouCtrl,Vehicle.YouCtrl | TokenScript$ c_1_1_pilot_crewsaddlebuff | SpellDescription$ Create X 1/1 colorless Pilot creature tokens, where X is the number of Mounts and/or Vehicles that entered the battlefield under your control this turn. The tokens have "This token saddles Mounts and crews Vehicles as though its power were 2 greater."
+DeckHas:Ability$Token
+DeckHints:Type$Mount|Vehicle
+Oracle:When this creature enters, scry 2.\n{T}: Create X 1/1 colorless Pilot creature tokens, where X is the number of Mounts and/or Vehicles that entered the battlefield under your control this turn. The tokens have "This token saddles Mounts and crews Vehicles as though its power were 2 greater."

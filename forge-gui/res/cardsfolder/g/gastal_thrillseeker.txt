@@ -1,0 +1,12 @@
+Name:Gastal Thrillseeker
+ManaCost:B R
+Types:Creature Lizard Berserker
+PT:2/3
+K:Start your engines
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature enters, it deals 1 damage to target opponent and you gain 1 life.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ MaxSpeedStatic | Description$ Max speed — This creature has deathtouch and haste.
+SVar:MaxSpeedStatic:Mode$ Continuous | Secondary$ True | Affected$ Card.Self | AddKeyword$ Deathtouch & Haste | Description$ Max speed — This creature has deathtouch and haste.
+DeckHas:Ability$LifeGain
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nWhen this creature enters, it deals 1 damage to target opponent and you gain 1 life.\nMax speed — This creature has deathtouch and haste.

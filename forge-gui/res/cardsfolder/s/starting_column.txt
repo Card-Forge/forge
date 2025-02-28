@@ -1,0 +1,10 @@
+Name:Starting Column
+ManaCost:3
+Types:Artifact
+K:Start your engines
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABDraw | Description$ Max speed — {T}, Sacrifice this artifact: Draw two cards, then discard a card.
+SVar:ABDraw:AB$ Draw | PrecostDesc$ Max speed — | Cost$ T Sac<1/CARDNAME/this artifact> | NumCards$ 2 | Secondary$ True | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose
+DeckHas:Ability$Sacrifice|Discard
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{T}: Add one mana of any color.\nMax speed — {T}, Sacrifice this artifact: Draw two cards, then discard a card.

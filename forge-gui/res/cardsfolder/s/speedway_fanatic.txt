@@ -4,5 +4,5 @@ Types:Creature Human Pilot
 PT:2/1
 K:Haste
 T:Mode$ Crewed | ValidCrew$ Card.Self | Execute$ TrigSpeedway | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME crews a Vehicle, that Vehicle gains haste until end of turn.
-SVar:TrigSpeedway:DB$ Pump | Defined$ TriggeredVehicle | KW$ Haste
+SVar:TrigSpeedway:DB$ Pump | Defined$ TriggeredCardLKICopy | KW$ Haste
 Oracle:Haste\nWhenever Speedway Fanatic crews a Vehicle, that Vehicle gains haste until end of turn.

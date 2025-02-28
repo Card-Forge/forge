@@ -1,6 +1,6 @@
 Name:Seal of Strength
 ManaCost:G
 Types:Enchantment
-A:AB$ Pump | Cost$ 0 Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:PlayMain1:TRUE
 Oracle:Sacrifice Seal of Strength: Target creature gets +3/+3 until end of turn.

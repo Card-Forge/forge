@@ -1,0 +1,14 @@
+Name:Support Skyforge
+ManaCost:3 W U
+Types:Artifact Vehicle
+PT:4/4
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Vehicle enters, create four 1/1 colorless Servo artifact creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ c_1_1_a_servo
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ Whenever this Vehicle attacks, draft a card from CARDNAME's spellbook. That card perpetually becomes an artifact creature.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Air Response Unit,Skysovereign; Consul Flagship,Sky Skiff,High-Speed Hoverbike,Heart of Kiran,Aethersphere Harvester,Hulldrifter,Smuggler's Copter | RememberDrafted$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Creature,Artifact | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Crew:4
+Oracle:Flying, vigilance\nWhen this Vehicle enters, create four 1/1 colorless Servo artifact creature tokens.\nWhenever this Vehicle attacks, draft a card from Support Skyforge's spellbook. That card perpetually becomes an artifact creature.\nCrew 4

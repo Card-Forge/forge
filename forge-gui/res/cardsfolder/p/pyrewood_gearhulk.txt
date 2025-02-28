@@ -1,0 +1,12 @@
+Name:Pyrewood Gearhulk
+ManaCost:2 R R G G
+Types:Artifact Creature Construct
+PT:7/7
+K:Vigilance
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When this creature enters, other creatures you control get +2/+2 and gain vigilance and menace until end of turn. Damage can't be prevented this turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance & Menace | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantPrevent
+SVar:STCantPrevent:Mode$ CantPreventDamage | Description$ Damage can't be prevented this turn.
+SVar:PlayMain1:TRUE
+Oracle:Vigilance, menace\nWhen this creature enters, other creatures you control get +2/+2 and gain vigilance and menace until end of turn. Damage can't be prevented this turn.

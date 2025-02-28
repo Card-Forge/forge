@@ -1,0 +1,18 @@
+Name:Cloud, Ex-SOLDIER
+ManaCost:2 R G W
+Types:Legendary Creature Human Soldier Mercenary
+PT:4/4
+K:Haste
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever NICKNAME enters, attach up to one target Equipment you control to it.
+SVar:TrigAttach:DB$ Attach | Defined$ Self | Object$ Targeted | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select up to one target Equipment you control | TargetMin$ 0 | TargetMax$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, draw a card for each equipped attacking creature you control. Then if NICKNAME has power 7 or greater, create two Treasure tokens.
+SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBTreasure
+SVar:DBTreasure:DB$ Token | ConditionDefined$ Self | ConditionPresent$ Creature.powerGE7 | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac
+SVar:X:Count$Valid Creature.attacking+equipped
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl+withoutDefender | AddSVar$ EqMe | Secondary$ True
+SVar:EqMe:SVar:EquipMe:Once
+SVar:HasAttackEffect:TRUE
+SVar:EquipMe:Once
+DeckHas:Ability$Token
+DeckNeeds:Type$Equipment
+Oracle:Haste\nWhen Cloud enters, attach up to one target Equipment you control to it.\nWhenever Cloud attacks, draw a card for each equipped attacking creature you control. Then if Cloud has power 7 or greater, create two Treasure tokens.

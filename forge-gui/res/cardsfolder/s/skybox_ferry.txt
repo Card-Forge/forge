@@ -1,0 +1,8 @@
+Name:Skybox Ferry
+ManaCost:5
+Types:Artifact Vehicle
+PT:4/4
+K:Flying
+K:Crew:2
+K:Cycling:2
+Oracle:Flying\nCrew 2 (Tap any number of creatures you control with totla power 2 or more: This Vehicle becomes an artifact creature until end of turn.)\nCycling {2} ({2}, Discard this card: Draw a card.)

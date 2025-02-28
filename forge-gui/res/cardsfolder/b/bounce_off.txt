@@ -1,0 +1,6 @@
+Name:Bounce Off
+ManaCost:U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or Vehicle | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature or Vehicle to its owner's hand.
+DeckHints:Type$Vehicle
+Oracle:Return target creature or Vehicle to its owner's hand.
