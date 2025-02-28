@@ -301,7 +301,8 @@ public enum TrackableProperty {
     GameLog(TrackableTypes.StringType),
     NeedsPhaseRedrawn(TrackableTypes.BooleanType),
     PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
-    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze);
+    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze),
+    Dependencies(TrackableTypes.StringType);
 
     public enum FreezeMode {
         IgnoresFreeze,

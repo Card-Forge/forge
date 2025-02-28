@@ -1,0 +1,11 @@
+Name:Mitotic Ultimus
+ManaCost:7 G G
+Types:Legendary Creature Ooze Giant
+PT:8/8
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the greatest power among creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME dies, conjure two cards named Mitotic Slime onto the battlefield.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mitotic Slime | Amount$ 2 | Zone$ Battlefield
+DeckHas:Ability$Token
+Oracle:This spell costs {X} less to cast, where X is the greatest power among creatures you control.\nTrample\nWhen Mitotic Ultimus dies, conjure two cards named Mitotic Slime onto the battlefield.

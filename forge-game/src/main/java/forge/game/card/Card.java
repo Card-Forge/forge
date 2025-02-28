@@ -1692,12 +1692,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     @Override
     public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
-        // Rules say it is only a SBA, but is it checked there too?
+
         if (counterType.is(CounterEnumType.DREAM) && hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
             addAmount = Math.min(addAmount, 7 - getCounters(CounterEnumType.DREAM));
         }
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
-            // As per rule 107.1b
+            // CR 107.1b
             return;
         }
 
@@ -4799,8 +4799,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 p.get("Timestamp"), (long) 0);
         } else if (category.equals("Keywords")) {
             boolean removeAll = p.containsKey("RemoveAll") && (boolean) p.get("RemoveAll") == true;
-            addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), removeAll,
-                (long) p.get("Timestamp"), null);
+            addChangedCardKeywords((List<String>) p.get("AddKeywords"), (List<String>) p.get("RemoveKeywords"),
+                    removeAll, (long) p.get("Timestamp"), null);
         } else if (category.equals("Types")) {
             addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"),
                 false, (Set<RemoveType>) p.get("RemoveXTypes"),
@@ -7007,15 +7007,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean isInZones(final List<ZoneType> zones) {
-        boolean inZones = false;
         Zone z = this.getLastKnownZone();
-        for (ZoneType okZone : zones) {
-            if (z.is(okZone)) {
-                inZones = true;
-                break;
-            }
-        }
-        return z != null && inZones;
+        return z != null && zones.contains(z.getZoneType());
     }
 
     public boolean canBeDiscardedBy(SpellAbility sa, final boolean effect) {
@@ -7596,6 +7589,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (isFaceDown() && isInZone(ZoneType.Exile)) {
             for (final SpellAbility sa : oState.getSpellAbilities()) {
                 abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
+            }
+        }
+        if (isFaceDown() && isInZone(ZoneType.Command)) {
+            for (KeywordInterface k : oState.getCachedKeyword(Keyword.HIDDEN_AGENDA)) {
+                abilities.addAll(k.getAbilities());
+            }
+            for (KeywordInterface k : oState.getCachedKeyword(Keyword.DOUBLE_AGENDA)) {
+                abilities.addAll(k.getAbilities());
             }
         }
         // Add Modal Spells
@@ -8181,6 +8182,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         updateRooms();
 
+        getGame().fireEvent(new GameEventDoorChanged(p, this, stateName, true));
+
         Map<AbilityKey, Object> unlockParams =  AbilityKey.mapFromPlayer(p);
         unlockParams.put(AbilityKey.Card, this);
         unlockParams.put(AbilityKey.CardState, getState(stateName));
@@ -8204,6 +8207,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         unlockedRooms.remove(stateName);
 
         updateRooms();
+
+        getGame().fireEvent(new GameEventDoorChanged(p, this, stateName, false));
 
         return true;
     }

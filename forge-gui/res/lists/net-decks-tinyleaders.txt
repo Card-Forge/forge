@@ -1,3 +1,3 @@
-Commander VS | https://downloads.cardforge.org/decks/commandervs-tinyleaders.zip
-Dear Azami | https://downloads.cardforge.org/decks/dearazami-tinyleaders.zip
-ReConstructed | https://downloads.cardforge.org/decks/recon-tinyleaders.zip
+Commander VS | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commandervs-tinyleaders.zip
+Dear Azami | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dearazami-tinyleaders.zip
+ReConstructed | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/recon-tinyleaders.zip
