@@ -500,7 +500,7 @@
     }]
 },{                                      
 "name":"White6",                  
-"description":"Strict dogma",
+"description":"Strict Dogma",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"RotatingShop",
 "overlaySprite":"Overlay6White",
@@ -982,7 +982,7 @@
     }]
 },{                                    
 "name":"Creature2Eldrazi",
-"description": "Eldritch Emissaries",
+"description":"Eldritch Emissaries",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"CreatureShop",
 "overlaySprite":"Overlay2Colorless",
@@ -2231,7 +2231,7 @@
 	}]
 },{
   "name":"Sliver4Green",
-  "description":"Venemous Hive",
+  "description":"Venomous Hive",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"SliverShop",
   "overlaySprite":"Overlay4Green",
