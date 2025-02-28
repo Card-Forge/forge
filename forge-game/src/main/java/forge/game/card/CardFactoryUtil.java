@@ -215,7 +215,7 @@ public class CardFactoryUtil {
         return manifestUp;
     }
 
-    public static boolean handleHiddenAgenda(Player player, Card card) {
+    public static boolean handleHiddenAgenda(Player player, Card card, KeywordInterface ki) {
         SpellAbility sa = new SpellAbility.EmptySa(card);
         sa.putParam("AILogic", card.getSVar("AgendaLogic"));
         Predicate<ICardFace> cpp = x -> true;
@@ -228,7 +228,7 @@ public class CardFactoryUtil {
         }
         card.addNamedCard(name);
 
-        if (card.hasKeyword("Double agenda")) {
+        if (ki.getKeyword().equals(Keyword.DOUBLE_AGENDA)) {
             String name2 = player.getController().chooseCardName(sa, cpp, "Card.!NamedCard",
                     "Name a second card for " + card.getName());
             if (name2 == null || name2.isEmpty()) {
@@ -239,14 +239,14 @@ public class CardFactoryUtil {
 
         card.turnFaceDown();
         card.addMayLookAt(player.getGame().getNextTimestamp(), ImmutableList.of(player));
-        card.addSpellAbility(abilityRevealHiddenAgenda(card));
+        ki.addSpellAbility(abilityRevealHiddenAgenda(card));
         return true;
     }
 
     private static SpellAbility abilityRevealHiddenAgenda(final Card sourceCard) {
         String ab = "ST$ SetState | Cost$ 0"
-                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+inZoneCommand"
-                + " | HiddenAgenda$ True"
+                + " | PresentDefined$ Self | IsPresent$ Card.faceDown+inZoneCommand"
+                + " | ActivationZone$ Command | Secondary$ True"
                 + " | Mode$ TurnFaceUp | SpellDescription$ Reveal this Hidden Agenda at any time.";
         return AbilityFactory.getAbility(ab, sourceCard);
     }
