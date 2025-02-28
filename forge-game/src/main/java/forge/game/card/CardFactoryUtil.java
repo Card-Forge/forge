@@ -245,8 +245,8 @@ public class CardFactoryUtil {
 
     private static SpellAbility abilityRevealHiddenAgenda(final Card sourceCard) {
         String ab = "ST$ SetState | Cost$ 0"
-                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+inZoneCommand"
-                + " | ActivationZone$ Command"
+                + " | PresentDefined$ Self | IsPresent$ Card.faceDown+inZoneCommand"
+                + " | ActivationZone$ Command | Secondary$ True"
                 + " | Mode$ TurnFaceUp | SpellDescription$ Reveal this Hidden Agenda at any time.";
         return AbilityFactory.getAbility(ab, sourceCard);
     }

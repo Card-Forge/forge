@@ -7591,6 +7591,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
             }
         }
+        if (isFaceDown() && isInZone(ZoneType.Command)) {
+            for (KeywordInterface k : oState.getCachedKeyword(Keyword.HIDDEN_AGENDA)) {
+                abilities.addAll(k.getAbilities());
+            }
+            for (KeywordInterface k : oState.getCachedKeyword(Keyword.DOUBLE_AGENDA)) {
+                abilities.addAll(k.getAbilities());
+            }
+        }
         // Add Modal Spells
         if (isModal() && hasState(CardStateName.Modal)) {
             for (SpellAbility sa : getState(CardStateName.Modal).getSpellAbilities()) {
