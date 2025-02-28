@@ -202,8 +202,9 @@ public class TokenAi extends SpellAbilityAi {
 
         if (sa.isPwAbility() && alwaysFromPW) {
             return true;
-        } else if (game.getCombat() != null
+        } else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
+                && game.getCombat() != null
                 && !game.getCombat().getAttackers().isEmpty()
                 && alwaysOnOppAttack
                 && actualToken.isCreature()) {
