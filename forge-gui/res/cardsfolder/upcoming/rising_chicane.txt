@@ -1,0 +1,13 @@
+Name:Rising Chicane
+ManaCost:no cost
+Types:Artifact Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ If you were the starting player, this land enters tapped.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
+SVar:X:Count$StartingPlayer.0.1
+K:Start your engines
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+DeckHas:Ability$Mana.Colorless
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddTrigger$ PhaseTrig | Description$ Max speed — At the beginning of combat on your turn, this land becomes a 2/2 Construct creature in addition to its other types until end of turn.
+SVar:PhaseTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | Secondary$ True | TriggerDescription$ Max speed — At the beginning of combat on your turn, this land becomes a 2/2 Construct creature in addition to its other types until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,Construct
+Oracle:If you were the starting player, this land enters tapped.\nStart your engines!\n{T}: Add {C}.\nMax speed — At the beginning of combat on your turn, this land becomes a 2/2 Construct creature in addition to its other types until end of turn.
