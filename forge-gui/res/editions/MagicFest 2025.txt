@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PF25
 
 [cards]
-1 R Avacyn's Pilgrim @Mark Zug
+1F R Avacyn's Pilgrim @Mark Zug
