@@ -6,6 +6,7 @@ K:Vigilance
 K:Menace
 A:AB$ ChangeZone | Cost$ 3 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | RememberChanged$ True | TgtPrompt$ Select target creature card in a graveyard | SubAbility$ DBImmediateTrigger | SpellDescription$ Exile target creature card from a graveyard. When you do, put X +1/+1 counters on target Symbiote, where X is the exiled card's toughness.
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | Execute$ TrigPutCounter | TriggerDescription$ When you do, put X +1/+1 counters on target Symbiote, where X is the exiled card's toughness.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Symbiote | CounterType$ P1P1 | CounterNum$ X
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Symbiote | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardToughness
 Oracle:Vigilance, menace\n{3}: Exile target creature card from a graveyard. When you do, put X +1/+1 counters on target Symbiote, where X is the exiled card's toughness.
