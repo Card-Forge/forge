@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.Timer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -231,8 +232,6 @@ public class AdventureQuestController implements Serializable {
             return;
         }
 
-        stage.showDialog();
-        activeDialog.activate();
         ChangeListener listen = new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
@@ -241,12 +240,22 @@ public class AdventureQuestController implements Serializable {
                 displayNextDialog(stage);
             }
         };
+
         activeDialog.addDialogCompleteListener(listen);
-        // Seems weird that data would be null here, but not null up there. Are we changingi these values inside activate?
-        if (data.options == null || data.options.length == 0) {
-            displayNextDialog(stage);
-        }
+
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                stage.showDialog();
+                activeDialog.activate();
+                // Seems weird that data would be null here, but not null up there. Are we changingi these values inside activate?
+                if (data.options == null || data.options.length == 0) {
+                    displayNextDialog(stage);
+                }
+            }
+        }, 0.25f);
     }
+
     public static class DistanceSort implements Comparator<PointOfInterest>
     {
         //ToDo: Make this more generic, compare PoI, mobs, random points, and player position
