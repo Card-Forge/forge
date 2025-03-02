@@ -681,8 +681,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        boolean infect = source.hasKeyword(Keyword.INFECT)
-                || hasKeyword("All damage is dealt to you as though its source had infect.");
+        boolean infect = source.hasKeyword(Keyword.INFECT) || StaticAbilityInfectDamage.isInfectDamage(this);
 
         int poisonCounters = 0;
         if (infect) {
