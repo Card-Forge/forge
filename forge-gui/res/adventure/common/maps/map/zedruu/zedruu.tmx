@@ -364,10 +364,5 @@
     <property name="teleport" value="../common/maps/map/zedruu/zedruu_f4.tmx"/>
    </properties>
   </object>
-  <object id="265" template="../../obj/door_up.tx" x="340.874" y="585.148" width="28.6667" height="16">
-   <properties>
-    <property name="teleport" value="../common/maps/map/zedruu/zedruu_f0.tmx"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>
