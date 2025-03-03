@@ -8135,10 +8135,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean isWitherDamage() {
-        if (this.hasKeyword(Keyword.WITHER) || this.hasKeyword(Keyword.INFECT)) {
+        if (hasKeyword(Keyword.WITHER) || hasKeyword(Keyword.INFECT)) {
             return true;
         }
         return StaticAbilityWitherDamage.isWitherDamage(this);
+    }
+
+    public boolean isInfectDamage(Player target) {
+        return hasKeyword(Keyword.INFECT) || StaticAbilityInfectDamage.isInfectDamage(target);
     }
 
     public Set<CardStateName> getUnlockedRooms() {

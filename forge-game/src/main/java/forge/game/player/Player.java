@@ -681,7 +681,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        boolean infect = source.hasKeyword(Keyword.INFECT) || StaticAbilityInfectDamage.isInfectDamage(this);
+        boolean infect = source.isInfectDamage(this);
 
         int poisonCounters = 0;
         if (infect) {
@@ -714,7 +714,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.DamageSource, source);
         runParams.put(AbilityKey.DamageTarget, this);

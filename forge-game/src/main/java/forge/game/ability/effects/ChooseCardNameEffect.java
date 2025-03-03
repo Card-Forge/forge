@@ -90,7 +90,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 } else {
                     chosen = p.getController().chooseCardName(sa, faces, message);
                 }
-            }  else {
+            } else {
                 // use CardFace because you might name a alternate names
                 Predicate<ICardFace> cpp = x -> true;
                 if (sa.hasParam("ValidCards")) {
