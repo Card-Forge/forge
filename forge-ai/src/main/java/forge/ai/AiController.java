@@ -542,6 +542,8 @@ public class AiController {
         }
 
         // try to skip lands that enter the battlefield tapped if we might want to play something this turn
+        // TODO figure out a better life level for shocking in lands
+        boolean check_shocks = player.getLife() > 10;
         if (!nonLandsInHand.isEmpty()) {
             CardCollection nonTappedLands = new CardCollection();
             for (Card land : landList) {
@@ -561,6 +563,14 @@ public class AiController {
                     SpellAbility reSA = re.ensureAbility();
                     if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
                         continue;
+                    }
+                    // check unlesscost parameters. At this point, it should be a tapapi ability
+                    if (reSA.hasParam("UnlessCost")) {
+                        String unlessCost = reSA.getParam("UnlessCost").trim();
+                        Cost cost = AbilityUtils.calculateUnlessCost(reSA, unlessCost, true);
+                        if (SpellApiToAi.Converter.get(reSA).willPayUnlessCost(reSA, player, cost, false, new PlayerCollection(player))) {
+                            continue;
+                        }
                     }
                     reSA.setActivatingPlayer(reSA.getHostCard().getController());
                     if (reSA.metConditions()) {
