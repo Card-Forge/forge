@@ -1,0 +1,8 @@
+Name:Motivated Muralist
+ManaCost:1 R
+Types:Creature Dwarf Bard
+PT:2/1
+K:Improvise
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure | TriggerDescription$ When this creature enters, conjure a card named Inspiring Statuary into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Inspiring Statuary | Zone$ Hand
+Oracle:Improvise\nWhen this creature enters, conjure a card named Inspiring Statuary into your hand.
