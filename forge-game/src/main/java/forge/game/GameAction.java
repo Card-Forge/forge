@@ -1470,14 +1470,9 @@ public class GameAction {
                 checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
                 checkAgainCard |= stateBasedAction_Contraption(c, noRegCreats);
 
-                checkAgainCard |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
+                checkAgainCard |= stateBasedAction704_5q(c); // annihilate +1/+1 counters with -1/-1 ones
 
-                final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
-
-                if (c.getCounters(dreamType) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-                    c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7, null);
-                    checkAgainCard = true;
-                }
+                checkAgainCard |= stateBasedAction704_5r(c);
 
                 if (c.hasKeyword("The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.")) {
                     int beeble = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), "Beeble.YouCtrl", c.getController(), c, null);
@@ -1816,13 +1811,17 @@ public class GameAction {
         return false;
     }
 
-    private boolean stateBasedAction704_5r(Card c) {
+    private boolean stateBasedAction704_5q(Card c) {
         boolean checkAgain = false;
         final CounterType p1p1 = CounterType.get(CounterEnumType.P1P1);
         final CounterType m1m1 = CounterType.get(CounterEnumType.M1M1);
         int plusOneCounters = c.getCounters(p1p1);
         int minusOneCounters = c.getCounters(m1m1);
         if (plusOneCounters > 0 && minusOneCounters > 0) {
+            if (!c.canRemoveCounters(p1p1) || !c.canRemoveCounters(m1m1)) {
+                return checkAgain;
+            }
+
             int remove = Math.min(plusOneCounters, minusOneCounters);
             // If a permanent has both a +1/+1 counter and a -1/-1 counter on it,
             // N +1/+1 and N -1/-1 counters are removed from it, where N is the
@@ -1833,6 +1832,26 @@ public class GameAction {
             checkAgain = true;
         }
         return checkAgain;
+    }
+    private boolean stateBasedAction704_5r(Card c) {
+        final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
+
+        int old = c.getCounters(dreamType);
+        if (old <= 0) {
+            return false;
+        }
+        Integer max = c.getCounterMax(dreamType);
+        if (max == null) {
+            return false;
+        }
+        if (old > max) {
+            if (!c.canRemoveCounters(dreamType)) {
+                return false;
+            }
+            c.subtractCounter(dreamType,  old - max, null);
+            return true;
+        }
+        return false;
     }
 
     // If a token is in a zone other than the battlefield, it ceases to exist.

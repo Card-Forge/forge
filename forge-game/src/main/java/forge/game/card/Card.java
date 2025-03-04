@@ -1691,8 +1691,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     @Override
     public Integer getCounterMax(final CounterType counterType) {
-        if (counterType.is(CounterEnumType.DREAM) && hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-            return 7;
+        if (counterType.is(CounterEnumType.DREAM)) {
+            return StaticAbilityMaxCounter.maxCounter(this, counterType);
         }
         return null;
     }
