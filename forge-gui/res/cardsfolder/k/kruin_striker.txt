@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Creature Human Warrior
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control enters, CARDNAME gets +1/+0 and gains trample until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | KW$ Trample
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | KW$ Trample
 SVar:BuffedBy:Creature
 Oracle:Whenever another creature you control enters, Kruin Striker gets +1/+0 and gains trample until end of turn.
