@@ -1690,18 +1690,31 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
+    public Integer getCounterMax(final CounterType counterType) {
+        if (counterType.is(CounterEnumType.DREAM)) {
+            return StaticAbilityMaxCounter.maxCounter(this, counterType);
+        }
+        return null;
+    }
+
+    @Override
     public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
 
-        if (counterType.is(CounterEnumType.DREAM) && hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-            addAmount = Math.min(addAmount, 7 - getCounters(CounterEnumType.DREAM));
-        }
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // CR 107.1b
             return;
         }
-
         final int oldValue = getCounters(counterType);
+
+        Integer max = getCounterMax(counterType);
+        if (max != null) {
+            addAmount = Math.min(addAmount, max - oldValue);
+            if (addAmount <= 0) {
+                return;
+            }
+        }
+
         final int newValue = addAmount + oldValue;
         if (fireEvents) {
             getGame().updateLastStateForCard(this);
