@@ -6,6 +6,7 @@ Type=Expansion
 ScryfallCode=TDM
 
 [cards]
+19 U Rally the Monastery @David Astruga
 24 M Smile at Death @Olivier Bernard
 118 R Sarkhan, Dragon Ascendant @Billy Christian
 123 M Stormscale Scion @Andrew Mar
