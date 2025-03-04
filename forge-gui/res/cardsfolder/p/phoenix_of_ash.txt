@@ -4,7 +4,7 @@ Types:Creature Phoenix
 PT:2/2
 K:Flying
 K:Haste
-A:AB$ Pump | Cost$ 2 R | NumAtt$ 2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+A:AB$ Pump | Cost$ 2 R | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
 K:Escape:2 R R ExileFromGrave<3/Card.Other/other>
 K:etbCounter:P1P1:1:ValidCard$ Card.Self+escaped:CARDNAME escapes with a +1/+1 counter on it.
 DeckHas:Ability$Counters
