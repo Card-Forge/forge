@@ -2,5 +2,5 @@ Name:Gerrard's Command
 ManaCost:G W
 Types:Instant
 A:SP$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +3/+3 until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ 3 | NumDef$ 3 | StackDescription$ It gets +3/+3 until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +3 | NumDef$ +3 | StackDescription$ It gets +3/+3 until end of turn.
 Oracle:Untap target creature. It gets +3/+3 until end of turn.
