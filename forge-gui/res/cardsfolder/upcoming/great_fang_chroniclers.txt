@@ -1,0 +1,8 @@
+Name:Great Fang Chroniclers
+ManaCost:1 G
+Types:Creature Ape Druid
+PT:2/2
+K:Double team
+A:AB$ Animate | Cost$ 3 G | Defined$ Self | Duration$ Permanent | RemoveThisAbility$ True | SorcerySpeed$ True | SubAbility$ DBMakeCard | SpellDescription$ Conjure a card named Muraganda Petroglyphs onto the battlefield, then this creature loses this ability. Activate only as a sorcery.
+SVar:DBMakeCard:DB$ MakeCard | Conjure$ True | Name$ Muraganda Petroglyphs | Zone$ Battlefield
+Oracle:Double team\n{3}{G}: Conjure a card named Muraganda Petroglyphs onto the battlefield, then this creature loses this ability. Activate only as a sorcery.
