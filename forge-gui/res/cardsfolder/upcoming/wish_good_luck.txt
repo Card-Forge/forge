@@ -1,0 +1,8 @@
+Name:Wish Good Luck
+ManaCost:R G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SubAbility$ DBTreasure | SpellDescription$ Create a Food token.
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True | SubAbility$ DBVehicle | SpellDescription$ Create a tapped Treasure token.
+SVar:DBVehicle:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_2_a_vehicle_crew_1 | TokenOwner$ You | SpellDescription$ Create a 3/2 colorless Vehicle artifact token with crew 1.
+DeckHas:Ability$Token
+Oracle:Create a Food token.\nCreate a tapped Treasure token.\nCreate a 3/2 colorless Vehicle artifact token with crew 1.

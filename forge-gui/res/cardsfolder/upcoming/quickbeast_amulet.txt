@@ -1,0 +1,11 @@
+Name:Quickbeast Amulet
+ManaCost:G W
+Types:Artifact Equipment
+K:Starting intensity:0
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +X/+X, where X is this Equipment's intensity.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigIntensify | TriggerDescription$ Whenever a creature you control enters, this Equipment intensifies by X, where X is that creature's power.
+SVar:TrigIntensify:DB$ Intensify | Amount$ Y
+SVar:Y:TriggeredCard$CardPower
+SVar:X:Count$Intensity
+K:Equip:2
+Oracle:Starting intensity 0\nEquipped creature gets +X/+X, where X is this Equipment's intensity.\nWhenever a creature you control enters, this Equipment intensifies by X, where X is that creature's power.\nEquip {2}
