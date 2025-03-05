@@ -275,7 +275,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new SectionLabel(localizer.getMessage("DisplayOptions")), sectionConstraints);
 
         // Cards
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("Cards")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblCards")), dividerConstraints);
 
         pnlPrefs.add(cbLargeCardViewers, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLargeCardViewers")), descriptionConstraints);
@@ -299,7 +299,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), descriptionConstraints);*/
 
         // Other
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("Other")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblOther")), dividerConstraints);
 
         pnlPrefs.add(cbpDisplayCurrentCardColors, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisplayCurrentCardColors")), descriptionConstraints);
@@ -342,7 +342,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloneImgSource")), descriptionConstraints);
 
         // Other
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("Other")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblOther")), dividerConstraints);
 
         pnlPrefs.add(cbRenderBlackCardBorders, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRenderBlackCardBorders")), descriptionConstraints);
@@ -374,7 +374,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRandomFoil")), descriptionConstraints);
 
         // Counters
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("Counters")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblCounters")), dividerConstraints);
 
         pnlPrefs.add(cbpCounterDisplayType, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCounterDisplayType")), descriptionConstraints);
@@ -383,7 +383,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCounterDisplayLocation")), descriptionConstraints);
 
         // Creatures
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("Creatures")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblCreatures")), dividerConstraints);
 
         pnlPrefs.add(cbTokensInSeparateRow, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTokensInSeparateRow")), descriptionConstraints);
@@ -392,7 +392,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackCreatures")), descriptionConstraints);
 
         // Other
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("Other")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblOther")), dividerConstraints);
 
         pnlPrefs.add(cbHideReminderText, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlHideReminderText")), descriptionConstraints);
@@ -487,7 +487,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GamePlay")), sectionConstraints);
 
         // AI
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("AI")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblAI")), dividerConstraints);
 
         pnlPrefs.add(cbpAiProfiles, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpAiProfiles")), descriptionConstraints);
@@ -522,8 +522,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbOrderCombatants, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOrderCombatants")), descriptionConstraints);
 
-        // Notifications
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("Notifications")), dividerConstraints);
+        // Prompts
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblPrompt")), dividerConstraints);
 
         pnlPrefs.add(cbManaLostPrompt, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlManaLostPrompt")), descriptionConstraints);
@@ -538,7 +538,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRemindOnPriority")), descriptionConstraints);
 
         // PlayerHand
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("PlayerHand")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblPlayerHand")), dividerConstraints);
 
         pnlPrefs.add(cbOrderHand, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOrderHand")), descriptionConstraints);
@@ -547,7 +547,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlFilteredHands")), descriptionConstraints);
 
         // Other
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("Other")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblOther")), dividerConstraints);
 
         pnlPrefs.add(cbEnforceDeckLegality, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnforceDeckLegality")), descriptionConstraints);
