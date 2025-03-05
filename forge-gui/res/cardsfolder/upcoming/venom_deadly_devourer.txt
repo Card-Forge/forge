@@ -1,0 +1,12 @@
+Name:Venom, Deadly Devourer
+ManaCost:2 G B
+Types:Legendary Creature Symbiote Villain
+PT:4/4
+K:Vigilance
+K:Menace
+A:AB$ ChangeZone | Cost$ 3 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | RememberChanged$ True | TgtPrompt$ Select target creature card in a graveyard | SubAbility$ DBImmediateTrigger | SpellDescription$ Exile target creature card from a graveyard. When you do, put X +1/+1 counters on target Symbiote, where X is the exiled card's toughness.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ RememberedLKI | ConditionPresent$ Card | RememberObjects$ RememberedLKI | Execute$ TrigPutCounter | SubAbility$ DBCleanup | TriggerDescription$ When you do, put X +1/+1 counters on target Symbiote, where X is the exiled card's toughness.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Symbiote | CounterType$ P1P1 | CounterNum$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerRemembered$CardToughness
+Oracle:Vigilance, menace\n{3}: Exile target creature card from a graveyard. When you do, put X +1/+1 counters on target Symbiote, where X is the exiled card's toughness.

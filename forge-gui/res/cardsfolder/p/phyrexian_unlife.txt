@@ -2,7 +2,7 @@ Name:Phyrexian Unlife
 ManaCost:2 W
 Types:Enchantment
 R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ValidLoseReason$ LifeReachedZero | Layer$ CantHappen | Description$ You don't lose the game for having 0 or less life.
-S:Mode$ Continuous | CheckSVar$ UnlifeCondition | SVarCompare$ LE0 | Affected$ You | AddKeyword$ All damage is dealt to you as though its source had infect. | Description$ As long as you have 0 or less life, all damage is dealt to you as though its source had infect.
+S:Mode$ InfectDamage | ValidTarget$ You | CheckSVar$ UnlifeCondition | SVarCompare$ LE0 | Description$ As long as you have 0 or less life, all damage is dealt to you as though its source had infect.
 SVar:UnlifeCondition:Count$YourLifeTotal
 SVar:NonStackingEffect:True
 Oracle:You don't lose the game for having 0 or less life.\nAs long as you have 0 or less life, all damage is dealt to you as though its source had infect. (Damage is dealt to you in the form of poison counters.)
