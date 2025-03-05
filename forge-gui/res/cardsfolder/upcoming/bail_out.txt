@@ -1,0 +1,9 @@
+Name:Bail Out
+ManaCost:B
+Types:Instant
+A:SP$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Triggers$ BailOutTrigCZ | SpellDescription$ Until end of turn, target creature you control gains "When this creature dies, return it to the battlefield tapped under its owner's control. It deals 1 damage to each opponent."
+SVar:BailOutTrigCZ:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ BailOutChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control. It deals 1 damage to each opponent.
+SVar:BailOutChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredNewCardLKICopy | Tapped$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+K:Overload:2 B B
+Oracle:Until end of turn, target creature you control gains "When this creature dies, return it to the battlefield tapped under its owner's control. It deals 1 damage to each opponent."\nOverload {2}{B}{B}
