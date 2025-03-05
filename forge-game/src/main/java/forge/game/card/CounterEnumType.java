@@ -458,6 +458,8 @@ public enum CounterEnumType {
     WIND("WIND", 0, 236, 255),
 
     WISH("WISH", 255, 85, 206),
+    
+    WRECK("WRECK", 208, 55, 255),
 
     // Player Counters
 
