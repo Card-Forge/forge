@@ -167,10 +167,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         buildPreferencesUI_DeckBuilding();
         buildPreferencesUI_DeckEditor();
         buildPreferencesUI_DraftRanked();
+        buildPreferencesUI_Display();
+        buildPreferencesUI_CardsAppearance();
         buildPreferencesUI_Graphic();
+        buildPreferencesUI_Performance();
         buildPreferencesUI_Sound();
         buildPreferencesUI_Keyboard();
         buildPreferencesUI_Advanced();
+        buildPreferencesUI_Experimental();
         buildPreferencesUI_ResetButtons();
     }
 
@@ -194,20 +198,17 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public void buildPreferencesUI_General() {
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GeneralConfiguration")), sectionConstraints);
 
-        pnlPrefs.add(cbpAutoUpdater, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAutoUpdater")), descriptionConstraints);
-
         pnlPrefs.add(cbpDefaultLanguage, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSelectLanguage")), descriptionConstraints);
 
         pnlPrefs.add(getPlayerNamePanel(), titleConstraints + ", h 26px!");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPlayerName")), descriptionConstraints);
 
-        pnlPrefs.add(cbCompactMainMenu, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCompactMainMenu")), descriptionConstraints);
-
         pnlPrefs.add(cbUseSentry, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlUseSentry")), descriptionConstraints);
+
+        pnlPrefs.add(cbpAutoUpdater, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAutoUpdater")), descriptionConstraints);
 
         if (FControl.instance.isSnapshot()) {
             pnlPrefs.add(cbCheckSnapshot, titleConstraints);
@@ -218,6 +219,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private void buildPreferencesUI_Keyboard() {
         // Keyboard shortcuts
         pnlPrefs.add(new SectionLabel(localizer.getMessage("KeyboardShortcuts")), sectionConstraints);
+
+        pnlPrefs.add(cbEscapeEndsTurn, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEscapeEndsTurn")), descriptionConstraints);
 
         final List<Shortcut> shortcuts = KeyboardShortcuts.getKeyboardShortcuts();
 
@@ -232,7 +236,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     private void buildPreferencesUI_Sound() {
         // Sound options
-        pnlPrefs.add(new SectionLabel(localizer.getMessage("SoundOptions")), sectionConstraints + ", gaptop 2%");
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("SoundOptions")), sectionConstraints);
 
         pnlPrefs.add(cbEnableSounds, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableSounds")), descriptionConstraints);
@@ -252,12 +256,57 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSrOptimize")), descriptionConstraints);
     }
 
-    private void buildPreferencesUI_Graphic() {
-        // Graphic Options
-        pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints + ", gaptop 2%");
+    private void buildPreferencesUI_Performance() {
+        // Performance Options
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("PerformanceOptions")), sectionConstraints);
 
-        pnlPrefs.add(cbpDefaultFontSize, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDefaultFontSize")), descriptionConstraints);
+        pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTimedTargOverlay")), descriptionConstraints);
+
+        pnlPrefs.add(cbPerformanceMode, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPerformanceMode")), descriptionConstraints);
+
+        pnlPrefs.add(cbPauseWhileMinimized, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPauseWhileMinimized")), descriptionConstraints);
+    }
+
+    private void buildPreferencesUI_Display() {
+        // Display Options
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("DisplayOptions")), sectionConstraints);
+
+        pnlPrefs.add(cbCompactMainMenu, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCompactMainMenu")), descriptionConstraints);
+
+        pnlPrefs.add(cbpDisplayCurrentCardColors, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisplayCurrentCardColors")), descriptionConstraints);
+
+        pnlPrefs.add(cbCompactPrompt, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCompactPrompt")), descriptionConstraints);
+
+        pnlPrefs.add(cbUiForTouchScreen, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlUiForTouchScreen")), descriptionConstraints);
+
+        pnlPrefs.add(cbDetailedPaymentDesc, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDetailedPaymentDesc")), descriptionConstraints);
+    }
+
+    private void buildPreferencesUI_Experimental() {
+        // Experimental Options
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("ExperimentalOptions")), sectionConstraints);
+
+        pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalNetworkCompatibility")), descriptionConstraints);
+
+        pnlPrefs.add(cbExperimentalRestore, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalRestore")), descriptionConstraints);
+    }
+
+    private void buildPreferencesUI_CardsAppearance() {
+        // CardsAppearance
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("CardsAppearance")), sectionConstraints);
+
+        // CardArt
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("CardArt")), dividerConstraints);
 
         pnlPrefs.add(cbpCardArtFormat, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCardArtFormat")), descriptionConstraints);
@@ -268,56 +317,46 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbDisableCardImages, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisableCardImages")), descriptionConstraints);
 
+        pnlPrefs.add(cbRandomArtInPools, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRandomArtInPools")), descriptionConstraints);
+
+        pnlPrefs.add(cbCloneImgSource, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloneImgSource")), descriptionConstraints);
+
+        // Other
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Other")), dividerConstraints);
+
+        pnlPrefs.add(cbRenderBlackCardBorders, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRenderBlackCardBorders")), descriptionConstraints);
+
+        pnlPrefs.add(cbScaleLarger, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlScaleLarger")), descriptionConstraints);
+    }
+
+    private void buildPreferencesUI_Graphic() {
+        // Graphic Options
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("GraphicOptions")), sectionConstraints);
+
+        // Font
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Font")), dividerConstraints);
+
+        pnlPrefs.add(cbpDefaultFontSize, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDefaultFontSize")), descriptionConstraints);
+
+        pnlPrefs.add(cbCardTextUseSansSerif, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCardTextUseSansSerif")), descriptionConstraints);
+
+        // Foils
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Foils")), dividerConstraints);
+
         pnlPrefs.add(cbDisplayFoil, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisplayFoil")), descriptionConstraints);
 
         pnlPrefs.add(cbRandomFoil, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRandomFoil")), descriptionConstraints);
 
-        pnlPrefs.add(cbScaleLarger, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlScaleLarger")), descriptionConstraints);
-
-        pnlPrefs.add(cbRenderBlackCardBorders, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRenderBlackCardBorders")), descriptionConstraints);
-
-        pnlPrefs.add(cbLargeCardViewers, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLargeCardViewers")), descriptionConstraints);
-
-        pnlPrefs.add(cbSmallDeckViewer, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmallDeckViewer")), descriptionConstraints);
-
-        pnlPrefs.add(cbRandomArtInPools, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRandomArtInPools")), descriptionConstraints);
-
-        pnlPrefs.add(cbUiForTouchScreen, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlUiForTouchScreen")), descriptionConstraints);
-
-        pnlPrefs.add(cbCompactPrompt, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCompactPrompt")), descriptionConstraints);
-
-        /*pnlPrefs.add(cbStackCardView, titleConstraints); TODO: Show this checkbox when setting can support being enabled
-        pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), descriptionConstraints);*/
-
-        pnlPrefs.add(cbHideReminderText, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlHideReminderText")), descriptionConstraints);
-
-        pnlPrefs.add(cbCardTextUseSansSerif, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCardTextUseSansSerif")), descriptionConstraints);
-
-        pnlPrefs.add(cbCardTextHideReminder, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCardTextHideReminder")), descriptionConstraints);
-
-        pnlPrefs.add(cbOpenPacksIndiv, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOpenPacksIndiv")), descriptionConstraints);
-
-        pnlPrefs.add(cbTokensInSeparateRow, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTokensInSeparateRow")), descriptionConstraints);
-
-        pnlPrefs.add(cbStackCreatures, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackCreatures")), descriptionConstraints);
-
-        pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTimedTargOverlay")), descriptionConstraints);
+        // Counters
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Counters")), dividerConstraints);
 
         pnlPrefs.add(cbpCounterDisplayType, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCounterDisplayType")), descriptionConstraints);
@@ -325,8 +364,38 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbpCounterDisplayLocation, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCounterDisplayLocation")), descriptionConstraints);
 
-        pnlPrefs.add(cbpDisplayCurrentCardColors, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisplayCurrentCardColors")), descriptionConstraints);
+        // Creatures
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Creatures")), dividerConstraints);
+
+        pnlPrefs.add(cbTokensInSeparateRow, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTokensInSeparateRow")), descriptionConstraints);
+
+        pnlPrefs.add(cbStackCreatures, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackCreatures")), descriptionConstraints);
+
+        // Display
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Display")), dividerConstraints);
+
+        pnlPrefs.add(cbLargeCardViewers, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLargeCardViewers")), descriptionConstraints);
+
+        pnlPrefs.add(cbSmallDeckViewer, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmallDeckViewer")), descriptionConstraints);
+
+        /*pnlPrefs.add(cbStackCardView, titleConstraints); TODO: Show this checkbox when setting can support being enabled
+        pnlPrefs.add(new NoteLabel("Show cards and abilities on Stack in card view rather than list view."), descriptionConstraints);*/
+
+        // Other
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Other")), dividerConstraints);
+
+        pnlPrefs.add(cbHideReminderText, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlHideReminderText")), descriptionConstraints);
+
+        pnlPrefs.add(cbCardTextHideReminder, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCardTextHideReminder")), descriptionConstraints);
+
+        pnlPrefs.add(cbOpenPacksIndiv, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOpenPacksIndiv")), descriptionConstraints);
 
         pnlPrefs.add(cbpSwitchStates, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSwitchStates")), descriptionConstraints);
@@ -362,9 +431,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbAllowCustomCardsDeckConformance, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAllowCustomCardsInDecks")), descriptionConstraints);
-
-        pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalNetworkCompatibility")), descriptionConstraints);
     }
 
     private void buildPreferencesUI_DraftRanked() {
@@ -414,11 +480,23 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         // Gameplay Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GamePlay")), sectionConstraints);
 
-        pnlPrefs.add(cbpMulliganRule, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpMulliganRule")), descriptionConstraints);
+        // AI
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("AI")), dividerConstraints);
 
         pnlPrefs.add(cbpAiProfiles, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpAiProfiles")), descriptionConstraints);
+
+        pnlPrefs.add(cbpAiTimeout, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAITimeout")), descriptionConstraints);
+
+        pnlPrefs.add(cbpAiSideboardingMode, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpAiSideboardingMode")), descriptionConstraints);
+
+        pnlPrefs.add(cbEnableAICheats, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableAICheats")), descriptionConstraints);
+
+        // Ante
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Ante")), dividerConstraints);
 
         pnlPrefs.add(cbAnte, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAnte")), descriptionConstraints);
@@ -426,14 +504,20 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbAnteMatchRarity, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAnteMatchRarity")), descriptionConstraints);
 
-        pnlPrefs.add(cbEnableAICheats, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableAICheats")), descriptionConstraints);
+        // Rules
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Rules")), dividerConstraints);
+
+        pnlPrefs.add(cbpMulliganRule, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpMulliganRule")), descriptionConstraints);
 
         pnlPrefs.add(cbManaBurn, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlManaBurn")), descriptionConstraints);
 
         pnlPrefs.add(cbOrderCombatants, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOrderCombatants")), descriptionConstraints);
+
+        // Notifications
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Notifications")), dividerConstraints);
 
         pnlPrefs.add(cbManaLostPrompt, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlManaLostPrompt")), descriptionConstraints);
@@ -444,20 +528,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbpLandPlayed, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpLandPlayed")), descriptionConstraints);
 
-        pnlPrefs.add(cbEnforceDeckLegality, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnforceDeckLegality")), descriptionConstraints);
+        pnlPrefs.add(cbRemindOnPriority, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRemindOnPriority")), descriptionConstraints);
 
-        pnlPrefs.add(cbPerformanceMode, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPerformanceMode")), descriptionConstraints);
-
-        pnlPrefs.add(cbpAiSideboardingMode, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpAiSideboardingMode")), descriptionConstraints);
-
-        pnlPrefs.add(cbExperimentalRestore, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalRestore")), descriptionConstraints);
-
-        pnlPrefs.add(cbpAiTimeout, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAITimeout")), descriptionConstraints);
+        // PlayerHand
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("PlayerHand")), dividerConstraints);
 
         pnlPrefs.add(cbOrderHand, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOrderHand")), descriptionConstraints);
@@ -465,26 +540,17 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbFilteredHands, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlFilteredHands")), descriptionConstraints);
 
-        pnlPrefs.add(cbCloneImgSource, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloneImgSource")), descriptionConstraints);
+        // Other
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("Other")), dividerConstraints);
 
-        pnlPrefs.add(cbPauseWhileMinimized, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPauseWhileMinimized")), descriptionConstraints);
-
-        pnlPrefs.add(cbEscapeEndsTurn, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEscapeEndsTurn")), descriptionConstraints);
-
-        pnlPrefs.add(cbDetailedPaymentDesc, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDetailedPaymentDesc")), descriptionConstraints);
+        pnlPrefs.add(cbEnforceDeckLegality, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnforceDeckLegality")), descriptionConstraints);
 
         pnlPrefs.add(cbGrayText, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlGrayText")), descriptionConstraints);
 
         pnlPrefs.add(cbShowStormCount, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowStormCount")), descriptionConstraints);
-
-        pnlPrefs.add(cbRemindOnPriority, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRemindOnPriority")), descriptionConstraints);
 
         pnlPrefs.add(cbPreselectPrevAbOrder, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPreselectPrevAbOrder")), descriptionConstraints);
