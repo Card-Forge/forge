@@ -149,7 +149,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     // Spacing between components is defined here.
     private final String sectionConstraints = "w 80%!, h 42px!, gap 25px 0 80px 20px, span 2 1";
-    private final String dividerConstraints = "w 40%!, h 22px!, gap 25px 0 0 20px, span 2 1";
+    private final String dividerConstraints = "w 30%!, h 22px!, gap 25px 0 0 20px, span 2 1";
     private final String titleConstraints = "w 80%!, h 22px!, gap 25px 0 0 0px, span 2 1";
     private final String comboBoxConstraints = "w 80%!, h 25px!, gap 25px 0 0 0px, span 2 1";
     private final String descriptionConstraints = "w 80%!, h 22px!, gap 28px 0 0 20px, span 2 1";
@@ -632,10 +632,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final class SectionDivider extends SkinnedLabel {
         private SectionDivider(final String txt0) {
             super(txt0);
-            this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_INACTIVE)));
+            this.setBorder(new FSkin.MatteSkinBorder(0, 0, 1, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS)));
             setHorizontalAlignment(SwingConstants.LEFT);
             this.setFont(FSkin.getRelativeBoldFont(16));
-            this.setForeground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+            this.setForeground(FSkin.getColor(FSkin.Colors.CLR_BORDERS));
         }
     }
 
