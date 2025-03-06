@@ -6,10 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.StaticData;
 import forge.adventure.character.PlayerSprite;
-import forge.adventure.data.BiomeData;
-import forge.adventure.data.EnemyData;
-import forge.adventure.data.PointOfInterestData;
-import forge.adventure.data.WorldData;
+import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
@@ -259,6 +256,36 @@ public class ConsoleCommandInterpreter {
         registerCommand(new String[]{"resetQuests"}, s -> {
             Current.player().resetQuestFlags();
             return "All global quest flags have been reset.";
+        });
+        registerCommand(new String[]{"fixMainQuest"}, s -> {
+            int ID = 0;
+            // Determine if main quest line is in progress.
+
+            for (AdventureQuestData qa : Current.player().getQuests()) {
+                if (qa.storyQuest) {
+                    return "Main quest " + qa.name + " already in progress.";
+                }
+            }
+
+            // If the player doesn't have the amulet, lets assign 44 (skip ahead to the amulet quest)
+            if (!Current.player().hasItem("Sir Donovan's Amulet")) {
+                ID = 44;
+            } else if (Current.player().getQuestFlag("foundLibraryOfVarsilResearch") == 0) {
+                ID = 47;
+            } else if (!Current.player().hasItem("Landscape Sketchbook")) {
+                ID = 48;
+            } else if (Current.player().getQuestFlag("violetFlowerForViv") == 0 || Current.player().getQuestFlag("scarletFlowerForViv") == 0) {
+                ID = 51;
+            } else {
+                ID = 52;
+            }
+
+            if (ID == 0) {
+                return "No main quest found to restore.";
+            }
+
+            Current.player().addQuest(ID);
+            return "Restored main quest";
         });
         registerCommand(new String[]{"resetMapQuests"}, s -> {
             if (!MapStage.getInstance().isInMap()) return "Only supported inside a map.";
