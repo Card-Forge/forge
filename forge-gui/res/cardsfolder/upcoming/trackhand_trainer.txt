@@ -1,0 +1,7 @@
+Name:Trackhand Trainer
+ManaCost:U
+Types:Creature Merfolk
+PT:1/1
+A:AB$ Draw | Cost$ 4 U | SpellDescription$ Draw a card.
+A:AB$ MakeCard | Cost$ U | Conjure$ True | Exhaust$ True | Name$ Training Grounds | Zone$ Battlefield | SpellDescription$ Conjure a card named Training Grounds onto the battlefield.
+Oracle:{4}{U}: Draw a card.\nExhaust — {U}: Conjure a card named Training Grounds onto the battlefield.
