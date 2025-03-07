@@ -1,5 +1,5 @@
 Name:Buxton, Decorated Host
-ManaCost:3 G W
+ManaCost:3 G G W
 Types:Legendary Creature Rabbit Noble
 PT:4/4
 K:Convoke

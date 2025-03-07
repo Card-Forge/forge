@@ -6,7 +6,7 @@ K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, discard a card, then heist target opponent's library.
 SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBHeist
 SVar:DBHeist:DB$ Heist | ValidTgts$ Opponent
-T:Mode$ SpellCast | ValidCard$ Card.YouDontOwn | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell you don't own, create a Treasure token.
-SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+T:Mode$ SpellCast | ValidCard$ Card.YouDontOwn | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell you don't own, create a tapped Treasure token.
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_treasure_sac
 DeckHas:Ability$Discard|Token|Sacrifice & Type$Artifact|Treasure
-Oracle:First strike\nWhen Impetuous Lootmonger enters, discard a card, then heist target opponent's library.\nWhenever you cast a spell you don't own, create a Treasure token.
+Oracle:First strike\nWhen Impetuous Lootmonger enters, discard a card, then heist target opponent's library.\nWhenever you cast a spell you don't own, create a tapped Treasure token.
