@@ -217,11 +217,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     private void buildPreferencesUI_Keyboard() {
-        // Keyboard shortcuts
-        pnlPrefs.add(new SectionLabel(localizer.getMessage("KeyboardShortcuts")), sectionConstraints);
+        // Keyboard
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("Keyboard")), sectionConstraints);
 
         pnlPrefs.add(cbEscapeEndsTurn, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEscapeEndsTurn")), descriptionConstraints);
+
+        // KeyboardShortcuts
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("KeyboardShortcuts")), dividerConstraints);
 
         final List<Shortcut> shortcuts = KeyboardShortcuts.getKeyboardShortcuts();
 
