@@ -538,7 +538,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRemindOnPriority")), descriptionConstraints);
 
         // PlayerHand
-        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblPlayerHand")), dividerConstraints);
+        pnlPrefs.add(new SectionDivider(localizer.getMessage("lblYourHand")), dividerConstraints);
 
         pnlPrefs.add(cbOrderHand, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOrderHand")), descriptionConstraints);
