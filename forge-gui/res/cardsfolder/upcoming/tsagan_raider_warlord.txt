@@ -1,0 +1,13 @@
+Name:Tsagan, Raider Warlord
+ManaCost:R W B
+Types:Legendary Creature Dinosaur Berserker
+PT:1/4
+K:Double Strike
+K:Start your engines
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME attacks, creatures you control get +1/+0 until end of turn for each creature you control with first strike or double strike.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +X
+SVar:X:Count$Valid Creature.YouCtrl+withFirst Strike,Creature.YouCtrl+withDouble Strike
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ SelfDT & WideFS | Description$ Max speed — NICKNAME has deathtouch. Other creatures you control have first strike.
+SVar:SelfDT:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | Secondary$ True
+SVar:WideFS:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddKeyword$ First Strike | Secondary$ True
+Oracle:Double strike\nStart your engines!\nWhenever Tsagan attacks, creatures you control get +1/+0 until end of turn for each creature you control with first strike or double strike.\nMax speed — Tsagan has deathtouch. Other creatures you control have first strike.
