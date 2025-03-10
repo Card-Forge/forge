@@ -4,5 +4,5 @@ Types:Creature Mouse Soldier
 PT:1/2
 K:Offspring:2
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | Valiant$ True | Execute$ TrigPumpAll | TriggerDescription$ Valiant — Whenever this creature becomes the target of a spell or ability you control for the first time each turn, Mice you control get +1/+0 until end of turn.
-SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Mouse.YouCtrl | NumAtt$ 1
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Mouse.YouCtrl | NumAtt$ +1
 Oracle:Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nValiant — Whenever this creature becomes the target of a spell or ability you control for the first time each turn, Mice you control get +1/+0 until end of turn.

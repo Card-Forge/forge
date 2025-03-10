@@ -5,7 +5,7 @@ PT:1/3
 K:Flying
 A:AB$ GenericChoice | Cost$ 1 G G | AtRandom$ True | ShowChoice$ Description | Choices$ Berserk,Twiddle,BloodLust,Green,White,Red,Damage3,Flying,P3P3,Banding,Black,Blue,NoRegen,LilSneak,M2M0,ToHand,Damage1,Nerf,Exile,Orcish | AILogic$ AtOppEOT | StackDescription$ SpellDescription | SpellDescription$ Perform a random action.
 SVar:Berserk:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | RememberChosen$ True | SubAbility$ DBPump1 | SpellDescription$ A creature chosen at random gains trample and gets +X/+0 until end of turn, where X is its power. At the beginning of the next end step, destroy that creature if it attacked this turn.
-SVar:DBPump1:DB$ Pump | Defined$ Remembered | KW$ Trample | NumAtt$ X1 | SubAbility$ DBDelayedTrigger1
+SVar:DBPump1:DB$ Pump | Defined$ Remembered | KW$ Trample | NumAtt$ +X1 | SubAbility$ DBDelayedTrigger1
 SVar:DBDelayedTrigger1:DB$ DelayedTrigger | RememberObjects$ Remembered | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy1 | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, destroy that creature if it attacked this turn.
 SVar:TrigDestroy1:DB$ Destroy | Defined$ DelayTriggerRemembered | ConditionDefined$ DelayTriggerRemembered | ConditionPresent$ Card.attackedThisTurn
 SVar:X1:Remembered$CardPower
@@ -13,7 +13,7 @@ SVar:DBCleanup:DB$ Cleanup | Log$ True | ClearRemembered$ True | ClearChosenCard
 SVar:Twiddle:DB$ ChooseCard | Choices$ Artifact,Creature,Land | AtRandom$ True | SubAbility$ DBTapOrUntap2 | SpellDescription$ You may tap or untap an artifact, creature, or land chosen at random.
 SVar:DBTapOrUntap2:DB$ TapOrUntap | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:BloodLust:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | RememberChosen$ True | SubAbility$ DBPump3 | SpellDescription$ If a creature chosen at random has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1.
-SVar:DBPump3:DB$ Pump | Defined$ Remembered | NumAtt$ 4 | NumDef$ -X3 | SubAbility$ DBCleanup
+SVar:DBPump3:DB$ Pump | Defined$ Remembered | NumAtt$ +4 | NumDef$ -X3 | SubAbility$ DBCleanup
 SVar:X3:Count$Compare T3 GE4.4.T3
 SVar:T3:Remembered$CardToughness/Minus.1
 SVar:Green:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | AtRandom$ True | LockInText$ True | SubAbility$ DBAnimateG | SpellDescription$ A spell or permanent chosen at random becomes green. (Mana symbols on that permanent remain unchanged.)
@@ -26,7 +26,7 @@ SVar:Damage3:DB$ DealDamage | NumDmg$ 3 | Random$ True | CardChoices$ Creature |
 SVar:Flying:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump8 | SpellDescription$ A creature chosen at random gains flying until end of turn.
 SVar:DBPump8:DB$ Pump | Defined$ ChosenCard | KW$ Flying | SubAbility$ DBCleanup
 SVar:P3P3:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump9 | SpellDescription$ A creature chosen at random gets +3/+3 until end of turn.
-SVar:DBPump9:DB$ Pump | Defined$ ChosenCard | NumAtt$ 3 | NumDef$ 3 | SubAbility$ DBCleanup
+SVar:DBPump9:DB$ Pump | Defined$ ChosenCard | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBCleanup
 SVar:Banding:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump10 | SpellDescription$ A creature chosen at random gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
 SVar:DBPump10:DB$ Pump | Defined$ ChosenCard | KW$ Banding | SubAbility$ DBCleanup
 SVar:Black:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | AtRandom$ True | LockInText$ True | SubAbility$ DBAnimateB | SpellDescription$ A spell or permanent chosen at random becomes black. (Mana symbols on that permanent remain unchanged.)
