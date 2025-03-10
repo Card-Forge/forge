@@ -1,7 +1,8 @@
 Name:Unexpected Windfall
 ManaCost:2 R R
 Types:Instant
-A:SP$ Draw | Cost$ 2 R R Discard<1/Card/card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create two Treasure tokens. | StackDescription$ SpellDescription
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Discard<1/Card> | EffectZone$ All | Description$ As an additional cost to cast this spell, discard a card.
+A:SP$ Draw | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create two Treasure tokens. | StackDescription$ SpellDescription
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHints:Keyword$Madness & Ability$Delirium
 DeckHas:Ability$Token|Discard
