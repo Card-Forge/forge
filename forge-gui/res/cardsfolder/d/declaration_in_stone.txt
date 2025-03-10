@@ -5,5 +5,5 @@ A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbilit
 SVar:DBExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | Defined$ TargetedController | ChangeType$ TargetedCard.Self,Creature.NotDefinedTargeted+sharesNameWith Targeted | Shuffle$ True | RememberLKI$ True | AILogic$ Always | SubAbility$ DBInvestigate
 SVar:DBInvestigate:DB$ Investigate | Num$ X | Defined$ RememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:RememberedLKI$Valid Card.nonToken
+SVar:X:RememberedLKI$Valid Card.!token
 Oracle:Exile target creature and all other creatures its controller controls with the same name as that creature. That player investigates for each nontoken creature exiled this way.

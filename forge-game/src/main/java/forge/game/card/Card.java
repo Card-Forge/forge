@@ -1690,18 +1690,31 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
+    public Integer getCounterMax(final CounterType counterType) {
+        if (counterType.is(CounterEnumType.DREAM)) {
+            return StaticAbilityMaxCounter.maxCounter(this, counterType);
+        }
+        return null;
+    }
+
+    @Override
     public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
-        // Rules say it is only a SBA, but is it checked there too?
-        if (counterType.is(CounterEnumType.DREAM) && hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-            addAmount = Math.min(addAmount, 7 - getCounters(CounterEnumType.DREAM));
-        }
+
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
-            // As per rule 107.1b
+            // CR 107.1b
             return;
         }
-
         final int oldValue = getCounters(counterType);
+
+        Integer max = getCounterMax(counterType);
+        if (max != null) {
+            addAmount = Math.min(addAmount, max - oldValue);
+            if (addAmount <= 0) {
+                return;
+            }
+        }
+
         final int newValue = addAmount + oldValue;
         if (fireEvents) {
             getGame().updateLastStateForCard(this);
@@ -7591,6 +7604,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
             }
         }
+        if (isFaceDown() && isInZone(ZoneType.Command)) {
+            for (KeywordInterface k : oState.getCachedKeyword(Keyword.HIDDEN_AGENDA)) {
+                abilities.addAll(k.getAbilities());
+            }
+            for (KeywordInterface k : oState.getCachedKeyword(Keyword.DOUBLE_AGENDA)) {
+                abilities.addAll(k.getAbilities());
+            }
+        }
         // Add Modal Spells
         if (isModal() && hasState(CardStateName.Modal)) {
             for (SpellAbility sa : getState(CardStateName.Modal).getSpellAbilities()) {
@@ -8127,10 +8148,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean isWitherDamage() {
-        if (this.hasKeyword(Keyword.WITHER) || this.hasKeyword(Keyword.INFECT)) {
+        if (hasKeyword(Keyword.WITHER) || hasKeyword(Keyword.INFECT)) {
             return true;
         }
         return StaticAbilityWitherDamage.isWitherDamage(this);
+    }
+
+    public boolean isInfectDamage(Player target) {
+        return hasKeyword(Keyword.INFECT) || StaticAbilityInfectDamage.isInfectDamage(target);
     }
 
     public Set<CardStateName> getUnlockedRooms() {

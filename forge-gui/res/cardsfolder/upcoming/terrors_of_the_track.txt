@@ -1,0 +1,11 @@
+Name:Terrors of the Track
+ManaCost:1 B
+Types:Creature Dinosaur
+PT:2/1
+K:Flying
+K:Double team
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | ActivationLimit$ 1 | TriggerDescription$ Whenever this creature or another creature dies, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Flying\nDouble team\nWhenever this creature or another creature dies, each opponent loses 1 life and you gain 1 life. This ability triggers only once each turn.

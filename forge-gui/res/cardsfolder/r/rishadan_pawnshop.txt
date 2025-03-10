@@ -1,6 +1,6 @@
 Name:Rishadan Pawnshop
 ManaCost:2
 Types:Artifact
-A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent.nonToken+YouCtrl | TgtPrompt$ Select target nontoken permanent you control | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SpellDescription$ Shuffle target nontoken permanent you control into its owner's library.
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent.!token+YouCtrl | TgtPrompt$ Select target nontoken permanent you control | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SpellDescription$ Shuffle target nontoken permanent you control into its owner's library.
 AI:RemoveDeck:Random
 Oracle:{2}, {T}: Shuffle target nontoken permanent you control into its owner's library.

@@ -4,7 +4,7 @@ Types:Legendary Creature Frog Horror
 PT:6/6
 K:Menace
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigSac | IsPresent$ Card.Self+untapped | TriggerDescription$ At the beginning of each combat, if CARDNAME is untapped, any opponent may sacrifice a nontoken creature. If they do, tap CARDNAME, then seek a land card and put it onto the battlefield tapped.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | Amount$ 1 | SacValid$ Creature.nonToken | RememberSacrificed$ True | Optional$ True | AILogic$ DesecrationDemon | SubAbility$ DBBranch
+SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | Amount$ 1 | SacValid$ Creature.!token | RememberSacrificed$ True | Optional$ True | AILogic$ DesecrationDemon | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ DBTap
 SVar:X:Remembered$Amount
 SVar:DBTap:DB$ Tap | SubAbility$ DBSeek

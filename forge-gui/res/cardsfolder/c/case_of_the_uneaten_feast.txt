@@ -3,7 +3,7 @@ ManaCost:W
 Types:Enchantment Case
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control enters, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.Self+IsUnsolved | CheckSVar$ X | SVarCompare$ GE5 | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — You've gained 5 or more life this turn. (If unsolved, solve at the beginning of your end step.)
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.Self+!IsSolved | CheckSVar$ X | SVarCompare$ GE5 | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — You've gained 5 or more life this turn. (If unsolved, solve at the beginning of your end step.)
 SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
 SVar:X:Count$LifeYouGainedThisTurn
 A:AB$ Animate | Cost$ Sac<1/CARDNAME> | PrecostDesc$ Solved — | Activation$ Solved | staticAbilities$ Play | Defined$ ValidGraveyard Creature.YouOwn | SpellDescription$ Creature cards in your graveyard gain "You may cast this card from your graveyard" until end of turn.

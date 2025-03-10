@@ -1163,7 +1163,7 @@ public class CardProperty {
                 }
                 else if (prop.isEmpty() && dmgSource.equalsWithGameTimestamp(source)) {
                     found = true;
-                } else if (dmgSource.isValid(prop.split(","), sourceController, source, spellAbility)) {
+                } else if (dmgSource.isValid(prop.split(";"), sourceController, source, spellAbility)) {
                     found = true;
                 }
                 if (found) {
@@ -1263,10 +1263,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("gotBlockedThisTurn")) {
             if (card.getBlockedByThisTurn().isEmpty()) {
-                return false;
-            }
-        } else if (property.startsWith("notAttackedThisTurn")) {
-            if (card.getDamageHistory().getCreatureAttacksThisTurn() > 0) {
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
@@ -1408,10 +1404,6 @@ public class CardProperty {
             }
             // copied spell don't count
             if (property.contains("Created") && card.getCastSA() != null) {
-                return false;
-            }
-        } else if (property.startsWith("nonToken")) {
-            if (card.isToken() || card.isTokenCard()) {
                 return false;
             }
         } else if (property.startsWith("copiedSpell")) {
@@ -1879,10 +1871,6 @@ public class CardProperty {
             if (!card.isSolved()) {
                 return false;
             }
-        } else if (property.equals("IsUnsolved")) {
-            if (card.isSolved()) {
-                return false;
-            }
         } else if (property.equals("IsSaddled")) {
             if (!card.isSaddled()) {
                 return false;
@@ -2025,10 +2013,6 @@ public class CardProperty {
             }
         } else if (property.equals("IsCommander")) {
             if (!card.isCommander()) {
-                return false;
-            }
-        } else if (property.equals("IsNotCommander")) {
-            if (card.isCommander()) {
                 return false;
             }
         } else if (property.startsWith("NotedFor")) {

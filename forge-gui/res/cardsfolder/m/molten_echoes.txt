@@ -3,6 +3,6 @@ ManaCost:2 R R
 Types:Enchantment
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeckNonToken | SpellDescription$ As CARDNAME enters, choose a creature type.
-T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+ChosenType+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigCopyPermanent | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature you control of the chosen type enters, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
+T:Mode$ ChangesZone | ValidCard$ Creature.!token+ChosenType+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigCopyPermanent | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature you control of the chosen type enters, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.
 SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ 1 | PumpKeywords$ Haste | AtEOT$ Exile
 Oracle:As Molten Echoes enters, choose a creature type.\nWhenever a nontoken creature you control of the chosen type enters, create a token that's a copy of that creature. That token gains haste. Exile it at the beginning of the next end step.

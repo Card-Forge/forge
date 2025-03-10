@@ -3,7 +3,7 @@ ManaCost:2 R W
 Types:Legendary Creature Dwarf Wizard
 PT:4/3
 S:Mode$ IgnoreLegendRule | ValidCard$ Permanent.token+YouCtrl | Description$ The "legend rule" doesn't apply to tokens you control.
-T:Mode$ ChangesZone | ValidCard$ Permanent.nonToken+Legendary+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken legendary permanent you control enters, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
+T:Mode$ ChangesZone | ValidCard$ Permanent.!token+Legendary+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken legendary permanent you control enters, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
 SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 | Defined$ TriggeredCardLKICopy | PumpKeywords$ Haste | AtEOT$ Sacrifice
 SVar:BuffedBy:Legendary
 DeckHas:Ability$Token

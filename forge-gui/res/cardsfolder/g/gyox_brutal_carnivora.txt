@@ -4,7 +4,7 @@ Types:Legendary Creature Phyrexian Warlock
 PT:2/4
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put an oil counter on up to one target creature.
 SVar:TrigPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | CounterType$ OIL
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken+counters_GE1_OIL | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever a nontoken creature you control with one or more oil counters on it dies, conjure X duplicates of it into exile, where X is the number of oil counters on it. Those duplicates perpetually get +X/+X. Then shuffle those duplicates into your library.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+!token+counters_GE1_OIL | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever a nontoken creature you control with one or more oil counters on it dies, conjure X duplicates of it into exile, where X is the number of oil counters on it. Those duplicates perpetually get +X/+X. Then shuffle those duplicates into your library.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCardLKICopy | Amount$ X | Zone$ Exile | RememberMade$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Pump | PumpZone$ Exile | Defined$ Remembered | NumAtt$ X | NumDef$ X | Duration$ Perpetual | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Library | Shuffle$ True | SubAbility$ DBCleanup

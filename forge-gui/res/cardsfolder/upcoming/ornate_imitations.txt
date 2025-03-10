@@ -1,0 +1,11 @@
+Name:Ornate Imitations
+ManaCost:X G U
+Types:Sorcery
+A:SP$ Repeat | Cost$ XMin1 X G U | RepeatSubAbility$ DBNameCard | MaxRepeat$ X | StackDescription$ REP . X can't be 0._. | SpellDescription$ For each number between 1 and X, conjure a duplicate of a random creature card with that mana value onto the battlefield. X can't be 0.
+SVar:DBNameCard:DB$ NameCard | AtRandom$ True | ValidCards$ Creature.cmcEQM | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Conjure$ True | Zone$ Battlefield | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | SubAbility$ DBStore
+SVar:DBStore:DB$ StoreSVar | SVar$ M | Type$ CountSVar | Expression$ M/Plus.1
+SVar:M:Number$1
+SVar:X:Count$xPaid
+Oracle:For each number between 1 and X, conjure a duplicate of a random creature card with that mana value onto the battlefield. X can't be 0.

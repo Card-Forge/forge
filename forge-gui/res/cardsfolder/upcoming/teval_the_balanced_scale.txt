@@ -1,0 +1,13 @@
+Name:Teval, the Balanced Scale
+ManaCost:1 B G U
+Types:Legendary Creature Spirit Dragon
+PT:4/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, mill three cards. Then you may return a land card from your graveyard to the battlefield tapped.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | ChangeType$ Land.YouOwn | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | ChangeNum$ 1 | Tapped$ True
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more cards leave your graveyard, create a 2/2 black Zombie Druid creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie_druid
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Mill
+Oracle:Flying\nWhenever Teval attacks, mill three cards. Then you may return a land card from your graveyard to the battlefield tapped.\nWhenever one or more cards leave your graveyard, create a 2/2 black Zombie Druid creature token.

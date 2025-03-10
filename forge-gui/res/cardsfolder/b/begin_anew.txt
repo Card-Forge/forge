@@ -2,5 +2,5 @@ Name:Begin Anew
 ManaCost:G G W W
 Types:Sorcery
 A:SP$ DestroyAll | ValidCards$ Creature | SubAbility$ DBPumpAll | SpellDescription$ Destroy all creatures.
-SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature | PumpZone$ Hand | Duration$ Perpetual | NumAtt$ 1 | NumDef$ 1 | StackDescription$ REP your_{p:You}'s | SpellDescription$ Creature cards in your hand perpetually get +1/+1.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | PumpZone$ Hand | Duration$ Perpetual | NumAtt$ 1 | NumDef$ 1 | StackDescription$ REP your_{p:You}'s | SpellDescription$ Creature cards in your hand perpetually get +1/+1.
 Oracle:Destroy all creatures. Creature cards in your hand perpetually get +1/+1.
