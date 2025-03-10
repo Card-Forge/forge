@@ -6,7 +6,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigChoice:DB$ GenericChoice | Choices$ DBSacToDraw,DBDiscardToDraw
 SVar:DBSacToDraw:DB$ Draw | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True | SubAbility$ DBPump | SpellDescription$ Sacrifice an artifact.
 SVar:DBDiscardToDraw:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | SubAbility$ DBPump | SpellDescription$ Discard a card.
-SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 2
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +2
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice|Graveyard|Discard
 DeckHints:Type$Artifact|Clue|Treasure
