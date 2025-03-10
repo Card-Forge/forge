@@ -140,7 +140,28 @@ UBShop
   size: 16, 16
 NobleShop
   xy: 320, 944
-  size: 16, 16   
+  size: 16, 16
+CarShop
+  xy: 384,944
+  size:16, 16
+CarShopW
+  xy: 288,960
+  size:16,16
+CarShopU
+  xy: 304,960
+  size:16,16
+CarShopB
+  xy: 320,960
+  size:16,16
+CarShopR
+  xy: 336,960
+  size:16,16
+CarShopG
+  xy: 352,960
+  size:16,16
+CarShopC
+  xy: 368,960
+  size:16,16
 MerfolkShop
   xy: 368, 768
   size: 16, 16
@@ -348,7 +369,7 @@ LegendShop
 ShardTrader  
   xy: 288, 896
   size: 16, 16
-Waypoint  
+Waypoint
   xy: 288, 912
   size: 16, 16
 Overlay8Black

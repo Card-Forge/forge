@@ -33,7 +33,7 @@
   <object id="38" template="../../obj/entry_up.tx" x="208" y="272"/>
   <object id="41" template="../../obj/shop.tx" x="129" y="146">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="commonShopList" value="BlackBoosterPackShop,BoosterPackShop,Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
     <property name="rareShopList" value="RWB,RUB,RGB,UWB,UGB,UWB,Land4Black,Creature6Black"/>
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
@@ -41,7 +41,7 @@
   </object>
   <object id="42" template="../../obj/shop.tx" x="177" y="145">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="commonShopList" value="BlackBoosterPackShop,BoosterPackShop,Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
     <property name="rareShopList" value="RWB,RUB,RGB,UWB,UGB,UWB,Land4Black,Creature6Black"/>
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
@@ -49,7 +49,7 @@
   </object>
   <object id="43" template="../../obj/shop.tx" x="321" y="129">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="commonShopList" value="BlackBoosterPackShop,BoosterPackShop,Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
     <property name="rareShopList" value="RWB,RUB,RGB,UWB,UGB,UWB,Land4Black,Creature6Black"/>
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
@@ -57,7 +57,7 @@
   </object>
   <object id="44" template="../../obj/shop.tx" x="114" y="194">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="commonShopList" value="BlackBoosterPackShop,BoosterPackShop,Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
     <property name="rareShopList" value="RWB,RUB,RGB,UWB,UGB,UWB,Land4Black,Creature6Black"/>
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
@@ -65,7 +65,7 @@
   </object>
   <object id="45" template="../../obj/shop.tx" x="273" y="130">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="commonShopList" value="BlackBoosterPackShop,BoosterPackShop,Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
     <property name="rareShopList" value="RWB,RUB,RGB,UWB,UGB,UWB,Land4Black,Creature6Black"/>
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
@@ -73,7 +73,7 @@
   </object>
   <object id="46" template="../../obj/shop.tx" x="337" y="177">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="commonShopList" value="BlackBoosterPackShop,BoosterPackShop,Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
     <property name="rareShopList" value="RWB,RUB,RGB,UWB,UGB,UWB,Land4Black,Creature6Black"/>
     <property name="uncommonShopList" value="Dimir,Rakdos,Orzhov,Golgari,Dimir,Rakdos,Orzhov,Golgari,Land"/>
@@ -94,7 +94,7 @@
   <object id="50" template="../../obj/shardtrader.tx" x="288" y="82"/>
   <object id="51" template="../../obj/shop.tx" x="201" y="88">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="commonShopList" value="BlackBoosterPackShop,BoosterPackShop,Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Black"/>
     <property name="rareShopList" value="RWB,RUB,RGB,UWB,UGB,UWB,Land4Black,Creature6Black"/>
     <property name="signXOffset" type="float" value="-4"/>
