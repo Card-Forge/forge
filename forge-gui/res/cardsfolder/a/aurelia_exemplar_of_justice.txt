@@ -5,7 +5,7 @@ PT:2/5
 K:Flying
 K:Mentor
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ At the beginning of combat on your turn, choose up to one target creature you control. Until end of turn, that creature gets +2/+0, gains trample if it's red, and gains vigilance if it's white.
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ 2 | SubAbility$ DBPump1
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ DBPump1
 SVar:DBPump1:DB$ Pump | Defined$ Targeted | KW$ Trample | ConditionDefined$ Targeted | ConditionPresent$ Card.Red | SubAbility$ DBPump2
 SVar:DBPump2:DB$ Pump | Defined$ Targeted | KW$ Vigilance | ConditionDefined$ Targeted | ConditionPresent$ Card.White
 DeckHas:Ability$Counters

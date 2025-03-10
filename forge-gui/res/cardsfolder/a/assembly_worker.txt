@@ -2,6 +2,6 @@ Name:Assembly-Worker
 ManaCost:3
 Types:Artifact Creature Assembly-Worker
 PT:2/2
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Assembly-Worker | TgtPrompt$ Select target Assembly-Worker creature | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Target Assembly-Worker creature gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Assembly-Worker | TgtPrompt$ Select target Assembly-Worker creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target Assembly-Worker creature gets +1/+1 until end of turn.
 DeckHints:Type$Assembly-Worker
 Oracle:{T}: Target Assembly-Worker creature gets +1/+1 until end of turn.
