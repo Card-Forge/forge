@@ -1,0 +1,8 @@
+Name:Turbocharged Escape
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature.nonVehicle | SubAbility$ DBChooseCard | StackDescription$ SpellDescription | SpellDescription$ Destroy all non-Vehicle creatures. Then choose a Vehicle you control. It perpetually becomes an artifact creature.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Vehicle | ChoiceTitle$ Choose a Vehicle you control | SubAbility$ DBAnimate | StackDescription$ None
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Types$ Creature,Artifact | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Destroy all non-Vehicle creatures. Then choose a Vehicle you control. It perpetually becomes an artifact creature.
