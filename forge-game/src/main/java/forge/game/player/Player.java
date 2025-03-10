@@ -1981,9 +1981,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         speedEffect.setOwner(this);
         speedEffect.setGamePieceType(GamePieceType.EFFECT);
 
-        speedEffect.addAlternateState(CardStateName.Flipped, false);
+        speedEffect.addAlternateState(CardStateName.Transformed, false);
         CardState speedFront = speedEffect.getState(CardStateName.Original);
-        CardState speedBack = speedEffect.getState(CardStateName.Flipped);
+        CardState speedBack = speedEffect.getState(CardStateName.Transformed);
 
         speedFront.setImageKey("t:speed");
         speedFront.setName("Start Your Engines!");
@@ -2007,7 +2007,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         speedEffect.updateStateForView();
 
         if(this.maxSpeed())
-            speedEffect.setState(CardStateName.Flipped, true);
+            speedEffect.setState(CardStateName.Transformed, true);
 
         final PlayerZone com = getZone(ZoneType.Command);
         com.add(speedEffect);
@@ -2023,8 +2023,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         String label = this.maxSpeed() ? localizer.getMessage("lblMaxSpeed") : localizer.getMessage("lblSpeed", this.speed);
         speedEffect.setOverlayText(label);
         if(maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Original)
-            speedEffect.setState(CardStateName.Flipped, true);
-        else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Flipped)
+            speedEffect.setState(CardStateName.Transformed, true);
+        else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Transformed)
             speedEffect.setState(CardStateName.Original, true);
     }
 
