@@ -23,7 +23,7 @@ Types:Legendary Creature Werewolf
 PT:4/4
 T:Mode$ DamageDone | ValidSource$ Wolf.YouCtrl,Werewolf.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDrawN | TriggerDescription$ Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.
 SVar:TrigDrawN:DB$ Draw | Defined$ You | NumCards$ 1
-A:AB$ Pump | Cost$ X R G | ValidTgts$ Wolf.YouCtrl,Werewolf.YouCtrl | TgtPrompt$ Select target Wolf or Werewolf you control | NumAtt$ X | KW$ Trample | SpellDescription$ Target Wolf or Werewolf you control gets +X/+0 and gains trample until end of turn.
+A:AB$ Pump | Cost$ X R G | ValidTgts$ Wolf.YouCtrl,Werewolf.YouCtrl | TgtPrompt$ Select target Wolf or Werewolf you control | NumAtt$ +X | KW$ Trample | SpellDescription$ Target Wolf or Werewolf you control gets +X/+0 and gains trample until end of turn.
 K:Nightbound
 SVar:X:Count$xPaid
 Oracle:Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.\n{X}{R}{G}: Target Wolf or Werewolf you control gets +X/+0 and gains trample until end of turn.\nNightbound
