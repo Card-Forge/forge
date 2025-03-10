@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -39,7 +39,7 @@ import forge.game.zone.ZoneType;
  * <p>
  * Abstract Spell class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -96,15 +96,19 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             card.setController(activator, 0);
         }
 
-        card = ObjectUtils.firstNonNull(getAlternateHost(card), card);
+        try {
+            card = ObjectUtils.firstNonNull(getAlternateHost(card), card);
 
-        if (!this.getRestrictions().canPlay(card, this)) {
-            return false;
-        }
+            if (!this.getRestrictions().canPlay(card, this)) {
+                return false;
+            }
 
-        if (!activator.getController().isFullControl(FullControlFlag.AllowPaymentStartWithMissingResources) &&
-                !CostPayment.canPayAdditionalCosts(this.getPayCosts(), this, false)) {
-            return false;
+            if (!activator.getController().isFullControl(FullControlFlag.AllowPaymentStartWithMissingResources) &&
+                    !CostPayment.canPayAdditionalCosts(this.getPayCosts(), this, false)) {
+                return false;
+            }
+        } finally {
+            undoAlternateHost(card);
         }
 
         return true;
@@ -165,7 +169,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
                 source = CardCopyService.getLKICopy(source);
             }
 
-            source.animateBestow(false);
+            source.animateBestow();
             lkicheck = true;
         } else if (isCastFaceDown()) {
             // need a copy of the card to turn facedown without trigger anything
@@ -203,6 +207,12 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         return lkicheck ? source : null;
+    }
+
+    public void undoAlternateHost(Card source) {
+        if (isBestow()) {
+            source.unanimateBestow();
+        }
     }
 
     public boolean isCounterableBy(final SpellAbility sa) {
