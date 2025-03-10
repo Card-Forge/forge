@@ -22,6 +22,8 @@ public abstract class ImageFetcher {
     // see https://scryfall.com/docs/api/languages and
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
+    protected static final boolean disableHostedDownload = true;
+    private static final HashSet<String> fetching = new HashSet<>();
 
     static {
         langCodeMap.put("en-US", "en");
@@ -98,6 +100,7 @@ public abstract class ImageFetcher {
             downloadUrls.add("https://downloads.cardforge.org/images/products/boosters/"+ filename);
             System.out.println("Fetching from "+downloadUrls);
 
+
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_BOOSTER_PICS_DIR);
             File destFile = new File(ForgeConstants.CACHE_BOOSTER_PICS_DIR, filename);
             System.out.println("Destination File "+ destFile.getAbsolutePath()+" exists: " + destFile.exists());
@@ -106,9 +109,12 @@ public abstract class ImageFetcher {
             setupObserver(destFile.getAbsolutePath(),callback,downloadUrls);
             return;
         }
+        if (imageKey.equalsIgnoreCase("t:null"))
+            return;
+
         //planechaseBG file...
+        final ArrayList<String> downloadUrls = new ArrayList<>();
         if (imageKey.startsWith("PLANECHASEBG:")) {
-            final ArrayList<String> downloadUrls = new ArrayList<>();
             final String filename = imageKey.substring("PLANECHASEBG:".length());
             downloadUrls.add("https://downloads.cardforge.org/images/planes/" + filename);
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
@@ -119,12 +125,9 @@ public abstract class ImageFetcher {
             setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
             return;
         }
-        if (imageKey.equalsIgnoreCase("t:null"))
-            return;
 
         boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT));
         final String prefix = imageKey.substring(0, 2);
-        final ArrayList<String> downloadUrls = new ArrayList<>();
         File destFile = null;
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
             PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
@@ -280,10 +283,14 @@ public abstract class ImageFetcher {
             // Already in the queue, simply add the new observer.
             observers.add(callback);
             return;
+        } else if (fetching.contains(destPath)) {
+            // Already fetching, but somehow no observers?
+            return;
         }
 
         observers = new HashSet<>();
         observers.add(callback);
+        fetching.add(destPath);
         currentFetches.put(destPath, observers);
 
         final Runnable notifyObservers = () -> {

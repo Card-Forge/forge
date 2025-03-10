@@ -318,11 +318,20 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return canReceiveCounters(CounterType.get(type));
     }
 
-    public final void addCounter(final CounterType counterType, final int n, final Player source, GameEntityCounterTable table) {
+    public final void addCounter(final CounterType counterType, int n, final Player source, GameEntityCounterTable table) {
         if (n <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
             return;
         }
+
+        Integer max = getCounterMax(counterType);
+        if (max != null) {
+            n = Math.min(n, max - getCounters(counterType));
+            if (n <= 0) {
+                return;
+            }
+        }
+
         // doesn't really add counters, but is just a helper to add them to the Table
         // so the Table can handle the Replacement Effect
         table.put(source, this, counterType, n);
@@ -339,6 +348,9 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     abstract public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params);
     public void addCounterInternal(final CounterEnumType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         addCounterInternal(CounterType.get(counterType), n, source, fireEvents, table, params);
+    }
+    public Integer getCounterMax(final CounterType counterType) {
+        return null;
     }
 
     public List<Pair<Integer, Boolean>> getDamageReceivedThisTurn() {

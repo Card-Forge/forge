@@ -2,7 +2,7 @@ Name:Genku, Future Shaper
 ManaCost:2 W U
 Types:Legendary Creature Moonfolk Wizard
 PT:2/5
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Permanent.YouCtrl+Other+nonToken | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever another nontoken permanent you control leaves the battlefield, create a creature token with one of the following characteristics — ABILITY.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Permanent.YouCtrl+Other+!token | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever another nontoken permanent you control leaves the battlefield, create a creature token with one of the following characteristics — ABILITY.
 SVar:TrigCharm:DB$ Charm | ChoiceRestriction$ ThisTurn | Choices$ DBToken1,DBToken2,DBToken3
 SVar:DBToken1:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_fox_vigilance | TokenOwner$ You | SpellDescription$ 2/2 white Fox with vigilance.
 SVar:DBToken2:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_2_moonfolk_flying | TokenOwner$ You | SpellDescription$ 1/2 blue Moonfolk with flying.

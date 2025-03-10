@@ -1,0 +1,28 @@
+Name:Cecil, Dark Knight
+ManaCost:B
+Types:Legendary Creature Human Knight
+PT:2/3
+K:Deathtouch
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Darkness — Whenever NICKNAME deals damage, you lose that much life. Then if your life total is less than or equal to half your starting life total, untap NICKNAME and transform it.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionCheckSVar$ Z | ConditionSVarCompare$ LEY | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionCheckSVar$ Z | ConditionSVarCompare$ LEY | Mode$ Transform
+SVar:X:TriggerCount$DamageAmount
+SVar:Z:Count$YourLifeTotal
+SVar:Y:Count$YourStartingLife/HalfDown
+DeckHas:Ability$LifeGain
+AlternateMode:DoubleFaced
+Oracle:Deathtouch\nDarkness — Whenever Cecil deals damage, you lose that much life. Then if your life total is less than or equal to half your starting life total, untap Cecil and transform it.
+
+ALTERNATE
+
+Name:Cecil, Redeemed Paladin
+ManaCost:no cost
+Colors:white
+Types:Legendary Creature Human Knight
+PT:4/4
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAttack | TriggerDescription$ Protect — Whenever NICKNAME attacks, other attacking creatures gain indestructible until end of turn.
+SVar:HasAttackEffect:TRUE
+SVar:TrigPumpAttack:DB$ PumpAll | ValidCards$ Creature.attacking+Other | KW$ Indestructible
+Oracle:Lifelink\nProtect — Whenever Cecil attacks, other attacking creatures gain indestructible until end of turn.

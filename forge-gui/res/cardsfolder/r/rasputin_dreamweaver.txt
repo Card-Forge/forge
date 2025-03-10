@@ -3,7 +3,7 @@ ManaCost:4 W U
 Types:Legendary Creature Human Wizard
 PT:4/1
 K:etbCounter:DREAM:7
-K:CARDNAME can't have more than seven dream counters on it.
+S:Mode$ MaxCounter | ValidCard$ Card.Self | CounterType$ DREAM | MaxNum$ 7 | Description$ CARDNAME can't have more than seven dream counters on it.
 A:AB$ Mana | Cost$ SubCounter<1/DREAM/NICKNAME> | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ PreventDamage | Cost$ SubCounter<1/DREAM/NICKNAME> | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to NICKNAME this turn.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | IsPresent$ Card.Self+startedTheTurnUntapped | TriggerDescription$ At the beginning of your upkeep, if NICKNAME started the turn untapped, put a dream counter on it.

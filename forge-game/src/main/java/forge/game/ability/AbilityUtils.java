@@ -538,6 +538,8 @@ public class AbilityUtils {
             val = handlePaid(card.getEmerged(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Crewed")) {
             val = handlePaid(card.getCrewedByThisTurn(), calcX[1], card, ability);
+        } else if (calcX[0].startsWith("ChosenCard")) {
+            val = handlePaid(card.getChosenCards(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();

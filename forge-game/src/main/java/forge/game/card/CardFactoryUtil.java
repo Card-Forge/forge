@@ -215,7 +215,7 @@ public class CardFactoryUtil {
         return manifestUp;
     }
 
-    public static boolean handleHiddenAgenda(Player player, Card card) {
+    public static boolean handleHiddenAgenda(Player player, Card card, KeywordInterface ki) {
         SpellAbility sa = new SpellAbility.EmptySa(card);
         sa.putParam("AILogic", card.getSVar("AgendaLogic"));
         Predicate<ICardFace> cpp = x -> true;
@@ -228,7 +228,7 @@ public class CardFactoryUtil {
         }
         card.addNamedCard(name);
 
-        if (card.hasKeyword("Double agenda")) {
+        if (ki.getKeyword().equals(Keyword.DOUBLE_AGENDA)) {
             String name2 = player.getController().chooseCardName(sa, cpp, "Card.!NamedCard",
                     "Name a second card for " + card.getName());
             if (name2 == null || name2.isEmpty()) {
@@ -239,14 +239,14 @@ public class CardFactoryUtil {
 
         card.turnFaceDown();
         card.addMayLookAt(player.getGame().getNextTimestamp(), ImmutableList.of(player));
-        card.addSpellAbility(abilityRevealHiddenAgenda(card));
+        ki.addSpellAbility(abilityRevealHiddenAgenda(card));
         return true;
     }
 
     private static SpellAbility abilityRevealHiddenAgenda(final Card sourceCard) {
         String ab = "ST$ SetState | Cost$ 0"
-                + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+inZoneCommand"
-                + " | HiddenAgenda$ True"
+                + " | PresentDefined$ Self | IsPresent$ Card.faceDown+inZoneCommand"
+                + " | ActivationZone$ Command | Secondary$ True"
                 + " | Mode$ TurnFaceUp | SpellDescription$ Reveal this Hidden Agenda at any time.";
         return AbilityFactory.getAbility(ab, sourceCard);
     }
@@ -517,14 +517,6 @@ public class CardFactoryUtil {
             }
         }
         return filteredkw;
-    }
-
-    public static int getCardTypesFromList(final CardCollectionView list) {
-        EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
-        for (Card c1 : list) {
-            c1.getType().getCoreTypes().forEach(types::add);
-        }
-        return types.size();
     }
 
     /**
@@ -1050,7 +1042,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(dethroneTrigger);
         } else if (keyword.equals("Double team")) {
-            final String trigString = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | TriggerZones$ Battlefield" +
+            final String trigString = "Mode$ Attacks | ValidCard$ Card.Self+!token | TriggerZones$ Battlefield" +
                     " | Secondary$ True | TriggerDescription$ Double team (" + inst.getReminderText() + ")";
             final String maSt = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True | Conjure$ True";
             final String puSt = "DB$ Pump | RememberObjects$ Self";
@@ -4129,7 +4121,7 @@ public class CardFactoryUtil {
 
         SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
-        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell+nonToken";
+        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell+!token";
         AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
 
         StringBuilder sbPlay = new StringBuilder();

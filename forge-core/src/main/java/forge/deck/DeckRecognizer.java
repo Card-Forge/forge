@@ -671,11 +671,9 @@ public class DeckRecognizer {
                     // ok so the card has been found - let's see if there's any restriction on the set
                     return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine,
                                                 currentDeckSection, true);
-                // On the off chance we accidentally interpreted part of the card's name as a set code, e.g. "Tyrranax Rex"
-                if (data.isMTGCard(cardName + " " + setCode))
-                    continue;
                 // UNKNOWN card as in the Counterspell|FEM case
-                return Token.UnknownCard(cardName, setCode, cardCount);
+                unknownCardToken = Token.UnknownCard(cardName, setCode, cardCount);
+                continue;
             }
             // ok so we can simply ignore everything but card name - as set code does not exist
             // At this stage, we know the card name exists in the DB so a Card MUST be found

@@ -707,7 +707,7 @@ public class GameAction {
             // needed for ETB lookahead like Bronzehide Lion
             stAb.putParam("AffectedZone", "All");
             SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Battlefield");
-            game.getAction().moveToCommand(eff, cause);
+            eff.getOwner().getZone(ZoneType.Command).add(eff);
         }
 
         eff.addRemembered(copied);
@@ -1112,6 +1112,10 @@ public class GameAction {
         // search for cards with static abilities
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
         final CardCollection staticList = new CardCollection();
+        Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies = null;
+        if (preList.isEmpty()) {
+            dependencies = HashBasedTable.create();
+        }
 
         game.forEachCardInGame(new Visitor<Card>() {
             @Override
@@ -1146,7 +1150,7 @@ public class GameAction {
                 StaticAbility stAb = staticsForLayer.get(0);
                 // dependency with CDA seems unlikely
                 if (!stAb.isCharacteristicDefining()) {
-                    stAb = findStaticAbilityToApply(layer, staticsForLayer, preList, affectedPerAbility);
+                    stAb = findStaticAbilityToApply(layer, staticsForLayer, preList, affectedPerAbility, dependencies);
                 }
                 staticsForLayer.remove(stAb);
                 final CardCollectionView previouslyAffected = affectedPerAbility.get(stAb);
@@ -1233,6 +1237,8 @@ public class GameAction {
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
             game.getTriggerHandler().runTrigger(TriggerType.Immediate, runParams, false);
+
+            game.getView().setDependencies(dependencies);
         }
 
         // Update P/T and type in the view only once after all the cards have been processed, to avoid flickering
@@ -1251,7 +1257,8 @@ public class GameAction {
         game.getTracker().unfreeze();
     }
 
-    private StaticAbility findStaticAbilityToApply(StaticAbilityLayer layer, List<StaticAbility> staticsForLayer, CardCollectionView preList, Map<StaticAbility, CardCollectionView> affectedPerAbility) {
+    private StaticAbility findStaticAbilityToApply(StaticAbilityLayer layer, List<StaticAbility> staticsForLayer, CardCollectionView preList, Map<StaticAbility, CardCollectionView> affectedPerAbility,
+            Table<StaticAbility, StaticAbility, Set<StaticAbilityLayer>> dependencies) {
         if (staticsForLayer.size() == 1) {
             return staticsForLayer.get(0);
         }
@@ -1265,12 +1272,11 @@ public class GameAction {
             dependencyGraph.addVertex(stAb);
 
             boolean exists = stAb.getHostCard().getStaticAbilities().contains(stAb);
-            boolean compareAffected = true;
+            boolean compareAffected = false;
             CardCollectionView affectedHere = affectedPerAbility.get(stAb);
             if (affectedHere == null) {
                 affectedHere = StaticAbilityContinuous.getAffectedCards(stAb, preList);
-            } else {
-                compareAffected = false;
+                compareAffected = true;
             }
             List<Object> effectResults = generateStaticAbilityResult(layer, stAb);
 
@@ -1309,6 +1315,13 @@ public class GameAction {
                 if (dependency) {
                     dependencyGraph.addVertex(otherStAb);
                     dependencyGraph.addEdge(stAb, otherStAb);
+                    if (dependencies != null) {
+                        if (dependencies.contains(stAb, otherStAb)) {
+                            dependencies.get(stAb, otherStAb).add(layer);
+                        } else {
+                            dependencies.put(stAb, otherStAb, EnumSet.of(layer));
+                        }
+                    }
                 }
 
                 // undo changes and check next pair
@@ -1341,7 +1354,7 @@ public class GameAction {
         }
         dependencyGraph.removeAllVertices(toRemove);
 
-        // now the earlist one left is the correct choice
+        // now the earliest one left is the correct choice
         List<StaticAbility> statics = Lists.newArrayList(dependencyGraph.vertexSet());
         statics.sort(Comparator.comparing(s -> s.getHostCard().getLayerTimestamp()));
 
@@ -1457,14 +1470,9 @@ public class GameAction {
                 checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
                 checkAgainCard |= stateBasedAction_Contraption(c, noRegCreats);
 
-                checkAgainCard |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
+                checkAgainCard |= stateBasedAction704_5q(c); // annihilate +1/+1 counters with -1/-1 ones
 
-                final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
-
-                if (c.getCounters(dreamType) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-                    c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7, null);
-                    checkAgainCard = true;
-                }
+                checkAgainCard |= stateBasedAction704_5r(c);
 
                 if (c.hasKeyword("The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.")) {
                     int beeble = CardLists.getValidCardCount(game.getCardsIn(ZoneType.Battlefield), "Beeble.YouCtrl", c.getController(), c, null);
@@ -1521,7 +1529,7 @@ public class GameAction {
                     }
                 }
 
-                // 704.5z If a player controls a permanent with start your engines! and that player has no speed, that player’s speed becomes 1. See rule 702.179, “Start Your Engines!”
+                // 704.5z If a player controls a permanent with start your engines! and that player has no speed, that player’s speed becomes 1.
                 if (p.getSpeed() == 0 && p.getCardsIn(ZoneType.Battlefield).anyMatch(c -> c.hasKeyword(Keyword.START_YOUR_ENGINES))) {
                     p.increaseSpeed();
                     checkAgain = true;
@@ -1536,6 +1544,7 @@ public class GameAction {
             }
             // 704.5m World rule
             checkAgain |= handleWorldRule(noRegCreats);
+
             // only check static abilities once after destroying all the creatures
             // (e.g. helpful for Erebos's Titan and another creature dealing lethal damage to each other simultaneously)
             setHoldCheckingStaticAbilities(true);
@@ -1644,11 +1653,23 @@ public class GameAction {
 
     private boolean stateBasedAction_Battle(Card c, CardCollection removeList) {
         boolean checkAgain = false;
-        if (!c.getType().isBattle()) {
-            return false;
+        if (!c.isBattle()) {
+            return checkAgain;
+        }
+        if (((c.getProtectingPlayer() == null || !c.getProtectingPlayer().isInGame()) &&
+                (game.getCombat() == null || game.getCombat().getAttackersOf(c).isEmpty())) ||
+                (c.getType().hasStringType("Siege") && c.getController().equals(c.getProtectingPlayer()))) {
+            Player newProtector = c.getController().getController().chooseSingleEntityForEffect(c.getController().getOpponents(), null, "Choose an opponent to protect this battle", null);
+            // seems unlikely unless range of influence gets implemented
+            if (newProtector == null) {
+                removeList.add(c);
+            } else {
+                c.setProtectingPlayer(newProtector);
+            }
+            checkAgain = true;
         }
         if (c.getCounters(CounterEnumType.DEFENSE) > 0) {
-            return false;
+            return checkAgain;
         }
         // 704.5v If a battle has defense 0 and it isn't the source of an ability that has triggered but not yet left the stack,
         // it’s put into its owner’s graveyard.
@@ -1790,13 +1811,17 @@ public class GameAction {
         return false;
     }
 
-    private boolean stateBasedAction704_5r(Card c) {
+    private boolean stateBasedAction704_5q(Card c) {
         boolean checkAgain = false;
         final CounterType p1p1 = CounterType.get(CounterEnumType.P1P1);
         final CounterType m1m1 = CounterType.get(CounterEnumType.M1M1);
         int plusOneCounters = c.getCounters(p1p1);
         int minusOneCounters = c.getCounters(m1m1);
         if (plusOneCounters > 0 && minusOneCounters > 0) {
+            if (!c.canRemoveCounters(p1p1) || !c.canRemoveCounters(m1m1)) {
+                return checkAgain;
+            }
+
             int remove = Math.min(plusOneCounters, minusOneCounters);
             // If a permanent has both a +1/+1 counter and a -1/-1 counter on it,
             // N +1/+1 and N -1/-1 counters are removed from it, where N is the
@@ -1807,6 +1832,26 @@ public class GameAction {
             checkAgain = true;
         }
         return checkAgain;
+    }
+    private boolean stateBasedAction704_5r(Card c) {
+        final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
+
+        int old = c.getCounters(dreamType);
+        if (old <= 0) {
+            return false;
+        }
+        Integer max = c.getCounterMax(dreamType);
+        if (max == null) {
+            return false;
+        }
+        if (old > max) {
+            if (!c.canRemoveCounters(dreamType)) {
+                return false;
+            }
+            c.subtractCounter(dreamType,  old - max, null);
+            return true;
+        }
+        return false;
     }
 
     // If a token is in a zone other than the battlefield, it ceases to exist.
@@ -1830,19 +1875,10 @@ public class GameAction {
 
     public void checkGameOverCondition() {
         // award loses as SBE
-        List<Player> losers = null;
-
-        FCollectionView<Player> allPlayers = game.getPlayers();
-        for (Player p : allPlayers) {
-            if (p.checkLoseCondition()) { // this will set appropriate outcomes
-                if (losers == null) {
-                    losers = Lists.newArrayListWithCapacity(3);
-                }
-                losers.add(p);
-            }
-        }
-
         GameEndReason reason = null;
+        List<Player> losers = null;
+        FCollectionView<Player> allPlayers = game.getPlayers();
+
         // Has anyone won by spelleffect?
         for (Player p : allPlayers) {
             if (!p.hasWon()) {
@@ -1868,24 +1904,17 @@ public class GameAction {
             break;
         }
 
-        // loop through all the non-losing players that can't win
-        // see if all of their opponents are in that "about to lose" collection
-        if (losers != null) {
+        if (reason == null) {
             for (Player p : allPlayers) {
-                if (losers.contains(p)) {
-                    continue;
-                }
-                if (p.cantWin()) {
-                    if (losers.containsAll(p.getOpponents())) {
-                        // what to do here?!?!?!
-                        System.err.println(p.toString() + " is about to win, but can't!");
+                if (p.checkLoseCondition()) { // this will set appropriate outcomes
+                    if (losers == null) {
+                        losers = Lists.newArrayListWithCapacity(3);
                     }
+                    losers.add(p);
                 }
-
             }
         }
 
-        // need a separate loop here, otherwise ConcurrentModificationException is raised
         if (losers != null) {
             for (Player p : losers) {
                 game.onPlayerLost(p);

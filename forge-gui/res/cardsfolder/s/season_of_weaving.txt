@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Charm | Choices$ DBDraw,DBCopy,DBReturn | CharmNum$ 5 | MinCharmNum$ 0 | CanRepeatModes$ True | Pawprint$ 5
 SVar:DBDraw:DB$ Draw | Pawprint$ 1 | SpellDescription$ Draw a card.
 SVar:DBCopy:DB$ CopyPermanent | Pawprint$ 2 | Choices$ Artifact.YouCtrl,Creature.YouCtrl | SpellDescription$ Choose an artifact or creature you control. Create a token that's a copy of it.
-SVar:DBReturn:DB$ ChangeZoneAll | Pawprint$ 3 | ChangeType$ Permanent.nonLand+nonToken | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return each nonland, nontoken permanent to its owner's hand.
+SVar:DBReturn:DB$ ChangeZoneAll | Pawprint$ 3 | ChangeType$ Permanent.nonLand+!token | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return each nonland, nontoken permanent to its owner's hand.
 DeckHas:Ability$Token
 Oracle:Choose up to five {P} worth of modes. You may choose the same mode more than once.\n{P} — Draw a card.\n{P}{P} — Choose an artifact or creature you control. Create a token that's a copy of it.\n{P}{P}{P} — Return each nonland, nontoken permanent to its owner's hand.

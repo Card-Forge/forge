@@ -1,0 +1,27 @@
+[metadata]
+Code=TDM
+Date=2025-04-11
+Name=Tarkir: Dragonstorm
+Type=Expansion
+ScryfallCode=TDM
+
+[cards]
+19 U Rally the Monastery @David Astruga
+24 M Smile at Death @Olivier Bernard
+118 R Sarkhan, Dragon Ascendant @Billy Christian
+123 M Stormscale Scion @Andrew Mar
+171 R Barrensteppe Siege @Tuan Duong Chu
+194 R Inevitable Defeat @Cristi Balanescu
+209 R Narset, Jeskai Waymaster @Randy Vargas
+223 M Shiko, Paragon of the Way @Victor Adame Minguez
+224 U Skirmish Rhino @James Bousema
+246 M Mox Jasper @Steven Belledin
+302 R Sarkhan, Dragon Ascendant @DZO
+303 M Stormscale Scion @Massiveface
+325 M Mox Jasper @DZO
+384 R Barrensteppe Siege @Clint Lockwood
+403 M Sarkhan, Dragon Ascendant @Billy Christian
+408 M Skirmish Rhino @James Bousema
+413 M Sarkhan, Dragon Ascendant @Billy Christian
+418 M Skirmish Rhino @James Bousema
+419 M Mox Jasper @Dan Frazier
