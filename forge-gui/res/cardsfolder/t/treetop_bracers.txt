@@ -1,8 +1,8 @@
 Name:Treetop Bracers
 ManaCost:1 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.withoutFlying | Secondary$ True | Description$ Enchanted creature can't be blocked except by creatures with flying.
 Oracle:Enchant creature (Target a creature as you cast this. This card enters attached to that creature.)\nEnchanted creature gets +1/+1 and can't be blocked except by creatures with flying.

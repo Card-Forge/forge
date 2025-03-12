@@ -1,8 +1,8 @@
 Name:Siege Modification
 ManaCost:1 R R
 Types:Enchantment Aura
-K:Enchant creature or Vehicle
-A:SP$ Attach | ValidTgts$ Creature,Vehicle | AILogic$ Animate
+K:Enchant:Creature,Vehicle:creature or Vehicle
+SVar:AttachAILogic:Animate
 S:Mode$ Continuous | Affected$ Vehicle.AttachedBy | AddType$ Creature | Description$ As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddKeyword$ First Strike | Description$ Enchanted creature gets +3/+0 and has first strike.
 Oracle:Enchant creature or Vehicle\nAs long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.\nEnchanted creature gets +3/+0 and has first strike.

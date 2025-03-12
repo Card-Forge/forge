@@ -1,8 +1,8 @@
 Name:Leafdrake Roost
 ManaCost:3 G U
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.AttachedBy | AddAbility$ Token | Description$ Enchanted land has "{G}{U}, {T}: Create a 2/2 green and blue Drake creature token with flying."
 SVar:Token:AB$ Token | Cost$ G U T | TokenAmount$ 1 | TokenScript$ gu_2_2_drake_flying | TokenOwner$ You | SpellDescription$ Create a 2/2 green and blue Drake creature token with flying.
 SVar:NonStackingAttachEffect:True

@@ -1,8 +1,8 @@
 Name:Curse of the Forsaken
 ManaCost:2 W
 Types:Enchantment Aura Curse
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
 T:Mode$ Attacks | ValidCard$ Creature | Attacked$ Player.EnchantedBy | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacks enchanted player, its controller gains 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredAttackerController | LifeAmount$ 1
 Oracle:Enchant player\nWhenever a creature attacks enchanted player, its controller gains 1 life.

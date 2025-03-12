@@ -1,8 +1,8 @@
 Name:Cruel Reality
 ManaCost:5 B B
 Types:Enchantment Aura Curse
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature,Planeswalker | Defined$ TriggeredPlayer | SubAbility$ DBLoseLife | RememberSacrificed$ True | SpellDescription$ Sacrifice a creature or planeswalker.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 5 | Defined$ TriggeredPlayer | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup

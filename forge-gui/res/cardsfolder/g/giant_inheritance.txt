@@ -1,8 +1,8 @@
 Name:Giant Inheritance
 ManaCost:4 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 5 | AddToughness$ 5 | AddTrigger$ AttackTrigger | Description$ Enchanted creature gets +5/+5 and has "Whenever this creature attacks, create a Monster Role token attached to up to one target attacking creature." (Enchanted creature gets +1/+1 and has trample.)
 SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, create a Monster Role token attached to up to one target attacking creature." (Enchanted creature gets +1/+1 and has trample.
 SVar:TrigToken:DB$ Token | TokenScript$ role_monster | AttachedTo$ Targeted | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target attacking creature | ValidTgts$ Creature.attacking | TokenOwner$ You

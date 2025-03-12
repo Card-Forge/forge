@@ -1,8 +1,8 @@
 Name:Curse of Misfortunes
 ManaCost:4 B
 Types:Enchantment Aura Curse
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMisfortune | TriggerDescription$ At the beginning of your upkeep, you may search your library for a Curse card that doesn't have the same name as a Curse attached to enchanted player, put it onto the battlefield attached to that player, then shuffle you library.
 SVar:TrigMisfortune:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Aura.Curse+NameNotEnchantingEnchantedPlayer | ChangeNum$ 1 | AttachedToPlayer$ EnchantedPlayer | ShuffleNonMandatory$ True | AILogic$ Curse
 Oracle:Enchant player\nAt the beginning of your upkeep, you may search your library for a Curse card that doesn't have the same name as a Curse attached to enchanted player, put it onto the battlefield attached to that player, then shuffle.

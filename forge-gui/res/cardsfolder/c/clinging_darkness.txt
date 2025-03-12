@@ -1,7 +1,7 @@
 Name:Clinging Darkness
 ManaCost:1 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -4 | AddToughness$ -1 | Description$ Enchanted creature gets -4/-1.
 Oracle:Enchant creature\nEnchanted creature gets -4/-1.

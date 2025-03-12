@@ -1,8 +1,8 @@
 Name:Archery Training
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | AILogic$ Pump | ValidTgts$ Creature
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put an arrow counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ ARROW | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ArcheryDamage | Description$ Enchanted creature has "{T}: This creature deals X damage to target attacking or blocking creature, where X is the number of arrow counters on CARDNAME."

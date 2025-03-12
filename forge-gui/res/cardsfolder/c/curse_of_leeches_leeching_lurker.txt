@@ -1,8 +1,8 @@
 Name:Curse of Leeches
 ManaCost:2 B
 Types:Enchantment Aura Curse
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
 R:Event$ Transform | ValidCard$ Card.Self | ReplaceWith$ Attach | Description$ As this permanent transforms into CARDNAME, attach it to a player.
 SVar:Attach:DB$ Attach | Object$ Self | Chooser$ You | PlayerChoices$ Player | ChoiceTitle$ Choose a player to attach this Curse to | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of enchanted player's upkeep, they lose 1 life and you gain 1 life.

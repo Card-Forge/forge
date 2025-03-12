@@ -1,9 +1,9 @@
 Name:Bear Umbra
 ManaCost:2 G G
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 K:Umbra armor
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ TrigUntap | AddSVar$ BearUmbraUntap & HasAttackEffect | Description$ Enchanted creature gets +2/+2 and has "Whenever this creature attacks, untap all lands you control."
 SVar:TrigUntap:Mode$ Attacks | ValidCard$ Card.Self | Execute$ BearUmbraUntap | TriggerDescription$ Whenever this creature attacks, untap all lands you control.
 SVar:BearUmbraUntap:DB$ UntapAll | ValidCards$ Land.YouCtrl

@@ -1,9 +1,9 @@
 Name:Grave Servitude
 ManaCost:1 B
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 K:MayFlashSac
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ -1 | SetColor$ Black | Description$ Enchanted creature gets +3/-1 and is black.
 AI:RemoveDeck:All
 Oracle:You may cast Grave Servitude as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant creature\nEnchanted creature gets +3/-1 and is black.

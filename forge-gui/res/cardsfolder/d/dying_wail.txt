@@ -1,8 +1,8 @@
 Name:Dying Wail
 ManaCost:1 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDiscard | TriggerDescription$ When enchanted creature dies, target player discards two cards.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ TgtChoose
 Oracle:Enchant creature\nWhen enchanted creature dies, target player discards two cards.

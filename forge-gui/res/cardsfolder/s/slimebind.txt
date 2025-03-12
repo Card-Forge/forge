@@ -2,7 +2,7 @@ Name:Slimebind
 ManaCost:1 U
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -4 | Description$ Enchanted creature gets -4/-0.
 Oracle:Flash\nEnchant creature\nEnchanted creature gets -4/-0.

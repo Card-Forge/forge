@@ -1,8 +1,8 @@
 Name:Sisay's Ingenuity
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABChooseColor | AddSVar$ DBAnimate | Description$ Enchanted creature has "{2}{U}: Target creature becomes the color of your choice until end of turn."

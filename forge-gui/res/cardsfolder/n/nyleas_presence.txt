@@ -1,8 +1,8 @@
 Name:Nylea's Presence
 ManaCost:1 G
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddType$ AllBasicLandType | Description$ Enchanted land is every basic land type in addition to its other types.

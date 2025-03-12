@@ -1,7 +1,8 @@
 Name:Grounded
 ManaCost:1 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AITgts$ Creature.withFlying | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAITgts:Creature.withFlying
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 Oracle:Enchant creature\nEnchanted creature loses flying.

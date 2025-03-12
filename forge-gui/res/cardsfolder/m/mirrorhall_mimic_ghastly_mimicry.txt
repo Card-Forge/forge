@@ -15,8 +15,8 @@ Name:Ghastly Mimicry
 ManaCost:no cost
 Colors:blue
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ HighestEvaluation
+K:Enchant:Creature
+SVar:AttachAILogic:HighestEvaluation
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a Spirit in addition to its other types.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Enchanted | AddTypes$ Spirit
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
