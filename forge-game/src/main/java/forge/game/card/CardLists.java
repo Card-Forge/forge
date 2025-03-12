@@ -250,6 +250,12 @@ public class CardLists {
         return result;
     }
 
+    public static CardCollection excludeTargetablesWithSameControllerAsTargets(Iterable<Card> list, SpellAbility source) {
+        List<Player> targetedControllers = source.getTargets().getTargetCards().stream().map(Card::getController).distinct().toList();
+
+        return CardLists.filter(list, CardPredicates.isTargetableBy(source).and(CardPredicates.isControlledBy(targetedControllers).negate()));
+    }
+
     public static CardCollection getKeyword(Iterable<Card> cardList, final String keyword) {
         return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword));
     }
