@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your upkeep, reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process.
 SVar:TrigRepeat:DB$ Repeat | RepeatSubAbility$ DBReset | RepeatDefined$ Remembered | RepeatPresent$ Card | RepeatSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBReset:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBReveal
-SVar:DBReveal:DB$ Dig | DigNum$ 1 | ChangeValid$ Land | ChangeNum$ All | Reveal$ True | DestinationZone$ Graveyard | RememberChanged$ True
+SVar:DBReveal:DB$ Dig | DigNum$ 1 | ChangeValid$ Land | ChangeNum$ All | Reveal$ True | DestinationZone$ Graveyard | LibraryPosition2$ 0 | RememberChanged$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Land.!token+YouOwn | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on CARDNAME.
 SVar:TrigAddCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
