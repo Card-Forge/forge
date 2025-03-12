@@ -1,0 +1,19 @@
+Name:Delphia, Undecided
+ManaCost:W U B R G
+Types:Legendary Creature Elephant
+PT:6/6
+# Developer's note: The Phyrexians won that event. However, in the interest of fun, Forge has the three possible versions of the card implemented.
+SVar:WhoWon:Number$1
+S:Mode$ ReduceCost | ValidCard$ Card.setMRD,Card.setDST,Card.set5DN,Card.setSOM | Type$ Spell | Activator$ You | Amount$ 3 | CheckSVar$ WhoWon | SVarCompare$ EQ2 | Description$ Spells you cast cost {3} less to cast if they were originally printed in the following expansions or associated commander decks, depending on who won the Unknown event on February 18th, 2023:,,,Mirran Victory — Mirrodin, Darksteel, Fifth Dawn, and Scars of Mirrodin.,,,Phyrexian Victory — Mirrodin Besieged, New Phyrexia, All Will be One, and March of the Machine.
+S:Mode$ ReduceCost | ValidCard$ Card.setMBS,Card.setNPH,Card.setONE,Card.setONC,Card.setMOM,Card.setMOC | Type$ Spell | Activator$ You | Amount$ 3 | CheckSVar$ WhoWon | SVarCompare$ EQ1 | Secondary$ True
+Oracle:(Variant: The Phyrexians won the event.)\nSpells you cast cost {3} less to cast if they were originally printed in the following expansions or associated commander decks, depending on who won the Unknown event on February 18th, 2023:\nMirran Victory — Mirrodin, Darksteel, Fifth Dawn, and Scars of Mirrodin.\nPhyrexian Victory — Mirrodin Besieged, New Phyrexia, All Will be One, and March of the Machine.
+
+# --- VARIANT: MirranWin ---
+
+Variant:MirranWin:SVar:WhoWon:Number$2
+Variant:MirranWin:Oracle:(Variant: The Mirrans won the event.)\nSpells you cast cost {3} less to cast if they were originally printed in the following expansions or associated commander decks, depending on who won the Unknown event on February 18th, 2023:\nMirran Victory — Mirrodin, Darksteel, Fifth Dawn, and Scars of Mirrodin.\nPhyrexian Victory — Mirrodin Besieged, New Phyrexia, All Will be One, and March of the Machine.
+
+# --- VARIANT: Unknown ---
+
+Variant:Unknown:SVar:WhoWon:Number$0
+Variant:Unknown:Oracle:(Variant: The outcome of the event isn't yet known.)\nSpells you cast cost {3} less to cast if they were originally printed in the following expansions or associated commander decks, depending on who won the Unknown event on February 18th, 2023:\nMirran Victory — Mirrodin, Darksteel, Fifth Dawn, and Scars of Mirrodin.\nPhyrexian Victory — Mirrodin Besieged, New Phyrexia, All Will be One, and March of the Machine.
