@@ -4,9 +4,9 @@ Types:Creature Lizard Warlock
 PT:4/4
 K:Menace
 K:Ward:PayLife<3>
-T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, conjure a random card from CARDNAME's spellbook into exile. You may play that card this turn.
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, conjure a random card from CARDNAME's spellbook into exile. You may play that card until the end of your next turn.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Blade Juggler,Body Count,Dead Revels,Drill Bit,Hackrobat,Light Up the Stage,Rafter Demon,Rix Maadi Reveler,Skewer the Critics,Spawn of Mayhem,Spikewheel Acrobat | RememberMade$ True | SubAbility$ DBEffect | Zone$ Exile
-SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
-SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card until the end of your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Menace\nWard — Pay 3 life.\nWhenever one or more creatures you control deal combat damage to a player, conjure a random card from Dazzling Flameweaver's spellbook into exile. You may play that card this turn.
+Oracle:Menace\nWard — Pay 3 life.\nWhenever one or more creatures you control deal combat damage to a player, conjure a random card from Dazzling Flameweaver's spellbook into exile. You may play that card until the end of your next turn.

@@ -1,7 +1,7 @@
 Name:Wingbright Thief
-ManaCost:1 W U
+ManaCost:W U
 Types:Enchantment Creature Bird Glimmer
-PT:2/3
+PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters, target opponent reveals each nonland card in their hand. You choose one of them. That card perpetually gains "When you cast this spell, each opponent draws a card and gains 3 life."
 SVar:TrigReveal:DB$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Card.nonLand+TargetedPlayerOwn | SubAbility$ DBChooseCard | RememberRevealed$ True
