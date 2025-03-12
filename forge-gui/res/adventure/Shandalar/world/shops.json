@@ -5597,7 +5597,7 @@
   },
   {
     "name": "ColorlessBoosterPackShop",
-    "description":"Pack to the Future ",
+    "description":"Pack to the Future",
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "sprite": "CarShopC",
     "rewards": [

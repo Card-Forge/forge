@@ -33,7 +33,7 @@
   <object id="38" template="../../obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
   <object id="41" template="../../obj/shop.tx" x="256" y="208">
    <properties>
-    <property name="commonShopList" value="ColorlessBoosterPackShop,,Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="commonShopList" value="ColorlessBoosterPackShop,Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
     <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
     <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
     <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
