@@ -129,6 +129,13 @@ public class ForgeScript {
                 }
             }
             return false;
+        } else if (property.equals("hasActivatedAbilityWithExhaust")) {
+            for (final SpellAbility sa : cardState.getSpellAbilities()) {
+                if (sa.isActivatedAbility() && sa.hasParam("Exhaust")) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("hasActivatedAbility")) {
             for (final SpellAbility sa : cardState.getSpellAbilities()) {
                 if (sa.isActivatedAbility()) {

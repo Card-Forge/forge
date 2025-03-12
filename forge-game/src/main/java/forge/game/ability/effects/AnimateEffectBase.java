@@ -121,6 +121,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             if (perpetual) {
                 Map <String, Object> params = new HashMap<>();
                 params.put("AddKeywords", keywords);
+                params.put("RemoveKeywords", removeKeywords);
                 params.put("RemoveAll", removeAll);
                 params.put("Timestamp", timestamp);
                 params.put("Category", "Keywords");

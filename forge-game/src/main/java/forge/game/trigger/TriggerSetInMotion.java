@@ -19,7 +19,6 @@ package forge.game.trigger;
 
 import java.util.Map;
 
-import forge.card.CardType;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -56,18 +55,6 @@ public class TriggerSetInMotion extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Scheme))) {
             return false;
-        }
-
-        if (hasParam("SchemeType")) {
-            if (getParam("SchemeType").equals("NonOngoing")) {
-                if (((Card) runParams.get(AbilityKey.Scheme)).getType().hasSupertype(CardType.Supertype.Ongoing)) {
-                    return false;
-                }
-            } else if (getParam("SchemeType").equals("Ongoing")) {
-                if (((Card) runParams.get(AbilityKey.Scheme)).getType().hasSupertype(CardType.Supertype.Ongoing)) {
-                    return false;
-                }
-            }
         }
 
         return true;

@@ -1,0 +1,9 @@
+Name:Stormscale Scion
+ManaCost:4 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Storm
+S:Mode$ Continuous | Affected$ Dragon.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Dragons you control get +1/+1.
+DeckHints:Type$Dragon
+Oracle:Flying\nOther Dragons you control get +1/+1.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. Copies become tokens.)

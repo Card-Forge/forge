@@ -2,7 +2,7 @@ Name:Lonis, Cryptozoologist
 ManaCost:G U
 Types:Legendary Creature Snake Elf Scout
 PT:1/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+nonToken+Other | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever another nontoken creature you control enters, investigate.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+!token+Other | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever another nontoken creature you control enters, investigate.
 SVar:TrigInvestigate:DB$ Investigate
 A:AB$ PeekAndReveal | Cost$ T Sac<X/Clue> | ValidTgts$ Opponent | PeekAmount$ X | NoPeek$ True | RememberRevealed$ True | SubAbility$ PickOne | SpellDescription$ Target opponent reveals the top X cards of their library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control. That player puts the rest on the bottom of their library in a random order.
 SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | ChoiceTitle$ Choose a nonland permanent to put on the battlefield under your control | Choices$ Permanent.nonLand+cmcLEX+IsRemembered | ChoiceZone$ Library | SubAbility$ MoveChosen

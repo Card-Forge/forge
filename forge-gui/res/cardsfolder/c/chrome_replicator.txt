@@ -4,6 +4,6 @@ Types:Artifact Creature Construct
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE2 | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, if you control two or more nonland, nontoken permanents with the same name as one another, create a 4/4 colorless Construct artifact creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_4_4_a_construct | TokenOwner$ You
-SVar:X:Count$MostCardName Permanent.nonLand+nonToken+YouCtrl
+SVar:X:Count$MostCardName Permanent.nonLand+!token+YouCtrl
 DeckHas:Ability$Token
 Oracle:When Chrome Replicator enters, if you control two or more nonland, nontoken permanents with the same name as one another, create a 4/4 colorless Construct artifact creature token.

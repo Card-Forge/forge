@@ -1,7 +1,7 @@
 Name:Golgothian Sylex
 ManaCost:4
 Types:Artifact
-A:AB$ SacrificeAll | Cost$ 1 T | ValidCards$ Permanent.nonToken+setATQ | SpellDescription$ Each nontoken permanent with a name originally printed in the Antiquities expansion is sacrificed by its controller.
+A:AB$ SacrificeAll | Cost$ 1 T | ValidCards$ Permanent.!token+setATQ | SpellDescription$ Each nontoken permanent with a name originally printed in the Antiquities expansion is sacrificed by its controller.
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random

@@ -465,7 +465,7 @@
     }]
 },{                                      
 "name":"White6",                  
-"description":"Strict dogma",
+"description":"Strict Dogma",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"RotatingShop",
 "overlaySprite":"Overlay6White",

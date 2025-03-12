@@ -1,35 +1,36 @@
-99 Problems | https://downloads.cardforge.org/decks/99problems.zip
-Brewer's Kitchen | https://downloads.cardforge.org/decks/brewerskitchen-commander.zip
-Budget Commander | https://downloads.cardforge.org/decks/budgetcommander.zip
-Card Preview | https://downloads.cardforge.org/decks/cardpreview-commander.zip
-Command Tower | https://downloads.cardforge.org/decks/commandtower.zip
-Commander Clash | https://downloads.cardforge.org/decks/commanderclash.zip
-Commander On a Budget | https://downloads.cardforge.org/decks/commanderonabudget.zip
-Commander VS | https://downloads.cardforge.org/decks/commandervs.zip
-Community Cup | https://downloads.cardforge.org/decks/communitycup-commander.zip
-Current Commander 1v1 Metagame | https://downloads.cardforge.org/decks/currentcommander1v1metagame.zip
-Current Commander Metagame | https://downloads.cardforge.org/decks/currentcommandermetagame.zip
-Daily Deck List | https://downloads.cardforge.org/decks/dailydecks-commander.zip
-Daily Magic Update | https://downloads.cardforge.org/decks/dailymagicupdate-commander.zip
-Dear Azami | https://downloads.cardforge.org/decks/dearazami.zip
-EDHREC Columns | https://downloads.cardforge.org/decks/edhrec.zip
-Fat Stacks | https://downloads.cardforge.org/decks/fatstacks.zip
-Feature Article | https://downloads.cardforge.org/decks/feature-commander.zip
-From the Lab | https://downloads.cardforge.org/decks/fromthelab-commander.zip
-Going Rogue | https://downloads.cardforge.org/decks/goingrogue-commander.zip
-House of Cards | https://downloads.cardforge.org/decks/houseofcards-commander.zip
-How to Build | https://downloads.cardforge.org/decks/howtobuild-commander.zip
-Instant Deck Tech | https://downloads.cardforge.org/decks/instantdecktech-commander.zip
-Latest Developments | https://downloads.cardforge.org/decks/latestdevelopments-commander.zip
-Much Abrew About Nothing | https://downloads.cardforge.org/decks/muchabrewaboutnothing-commander.zip
-Perilous Research | https://downloads.cardforge.org/decks/perilousresearch-commander.zip
-ReConstructed | https://downloads.cardforge.org/decks/recon-commander.zip
-Rhystic Study | https://downloads.cardforge.org/decks/rhysticstudy.zip
-Serious Fun | https://downloads.cardforge.org/decks/seriousfun-commander.zip
-The Command Center | https://downloads.cardforge.org/decks/commandcenter.zip
-The Command Zone | https://downloads.cardforge.org/decks/commandzone.zip
-The Fish Tank | https://downloads.cardforge.org/decks/fishtank-commander.zip
-The Week That Was | https://downloads.cardforge.org/decks/theweekthatwas-commander.zip
-Top Decks | https://downloads.cardforge.org/decks/topdecks-commander.zip
-Ways to Play | https://downloads.cardforge.org/decks/waystoplay-commander.zip
-WotC Preconstructed | https://downloads.cardforge.org/decks/precon-commander.zip
+99 Problems | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/99problems.zip
+Brewer's Kitchen | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/brewerskitchen-commander.zip
+Budget Commander | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/budgetcommander.zip
+Card Preview | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/cardpreview-commander.zip
+Command Tower | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commandtower.zip
+Commander Clash | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commanderclash.zip
+Commander On a Budget | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commanderonabudget.zip
+Commander Quickie | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commanderquickie.zip
+Commander VS | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commandervs.zip
+Community Cup | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/communitycup-commander.zip
+Current Commander 1v1 Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentcommander1v1metagame.zip
+Current Commander Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentcommandermetagame.zip
+Daily Deck List | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dailydecks-commander.zip
+Daily Magic Update | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dailymagicupdate-commander.zip
+Dear Azami | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dearazami.zip
+EDHREC Columns | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/edhrec.zip
+Fat Stacks | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/fatstacks.zip
+Feature Article | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/feature-commander.zip
+From the Lab | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/fromthelab-commander.zip
+Going Rogue | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/goingrogue-commander.zip
+House of Cards | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/houseofcards-commander.zip
+How to Build | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/howtobuild-commander.zip
+Instant Deck Tech | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/instantdecktech-commander.zip
+Latest Developments | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/latestdevelopments-commander.zip
+Much Abrew About Nothing | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/muchabrewaboutnothing-commander.zip
+Perilous Research | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/perilousresearch-commander.zip
+ReConstructed | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/recon-commander.zip
+Rhystic Study | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/rhysticstudy.zip
+Serious Fun | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/seriousfun-commander.zip
+The Command Center | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commandcenter.zip
+The Command Zone | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commandzone.zip
+The Fish Tank | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/fishtank-commander.zip
+The Week That Was | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/theweekthatwas-commander.zip
+Top Decks | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/topdecks-commander.zip
+Ways to Play | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/waystoplay-commander.zip
+WotC Preconstructed | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/precon-commander.zip

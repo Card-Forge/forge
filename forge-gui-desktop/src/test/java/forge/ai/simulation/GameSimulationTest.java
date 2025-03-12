@@ -75,7 +75,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         game.getAction().checkStateEffects(true);
 
-        AssertJUnit.assertEquals(1, sliver.getAmountOfKeyword("Flanking"));
+        AssertJUnit.assertEquals(1, sliver.getAmountOfKeyword(Keyword.FLANKING));
         AssertJUnit.assertEquals(2, sliver.getNetPower());
         AssertJUnit.assertEquals(2, sliver.getNetToughness());
 
@@ -87,7 +87,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
         Card sliverCopy = findCardWithName(simGame, sliverCardName);
-        AssertJUnit.assertEquals(1, sliverCopy.getAmountOfKeyword("Flanking"));
+        AssertJUnit.assertEquals(1, sliverCopy.getAmountOfKeyword(Keyword.FLANKING));
         AssertJUnit.assertEquals(2, sliver.getNetPower());
         AssertJUnit.assertEquals(2, sliver.getNetToughness());
     }
@@ -103,15 +103,15 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertTrue(lion.isMonstrous());
-        AssertJUnit.assertEquals(1, lion.getAmountOfKeyword("Hexproof"));
-        AssertJUnit.assertEquals(1, lion.getAmountOfKeyword("Indestructible"));
+        AssertJUnit.assertEquals(1, lion.getAmountOfKeyword(Keyword.HEXPROOF));
+        AssertJUnit.assertEquals(1, lion.getAmountOfKeyword(Keyword.INDESTRUCTIBLE));
 
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card lionCopy = findCardWithName(simGame, lionCardName);
         AssertJUnit.assertTrue(lionCopy.isMonstrous());
-        AssertJUnit.assertEquals(1, lionCopy.getAmountOfKeyword("Hexproof"));
-        AssertJUnit.assertEquals(1, lionCopy.getAmountOfKeyword("Indestructible"));
+        AssertJUnit.assertEquals(1, lionCopy.getAmountOfKeyword(Keyword.HEXPROOF));
+        AssertJUnit.assertEquals(1, lionCopy.getAmountOfKeyword(Keyword.INDESTRUCTIBLE));
     }
 
     @Test
@@ -125,12 +125,12 @@ public class GameSimulationTest extends SimulationTest {
         cloak.attachToEntity(bear, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
-        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword("Shroud"));
+        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword(Keyword.SHROUD));
 
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
-        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword("Shroud"));
+        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword(Keyword.SHROUD));
     }
 
     @Test
@@ -144,12 +144,12 @@ public class GameSimulationTest extends SimulationTest {
         lifelink.attachToEntity(bear, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
-        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword("Lifelink"));
+        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword(Keyword.LIFELINK));
 
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
-        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword("Lifelink"));
+        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword(Keyword.LIFELINK));
     }
 
     @Test

@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Merfolk Scout
 PT:2/1
 K:Flying
-A:AB$ SetState | Cost$ 4 GP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ {4}{G/P}: Transform CARDNAME. Activate only as a sorcery. ({G/P} can be paid with either {G} or 2 life.)
+A:AB$ SetState | Cost$ 4 GP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({G/P} can be paid with either {G} or 2 life.)
 AlternateMode:DoubleFaced
 Oracle:{4}{G/P}: Transform Skyclave Aerialist. Activate only as a sorcery. ({G/P} can be paid with either {G} or 2 life.)
 

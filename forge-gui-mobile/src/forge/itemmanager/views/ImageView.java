@@ -869,33 +869,18 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (isCollapsed) {
                     return;
                 }
-
-                float visibleLeft = getScrollLeft();
-                float visibleRight = visibleLeft + getWidth();
-                for (Pile pile : piles) {
-                    if (pile.getRight() < visibleLeft) {
-                        continue;
-                    }
-                    if (pile.getLeft() >= visibleRight) {
-                        break;
-                    }
-                    pile.draw(g);
-                }
-                return;
             }
 
-            final float visibleTop = getScrollValue();
-            final float visibleBottom = visibleTop + getScroller().getHeight();
-            for (ItemInfo itemInfo : items) {
-                if (itemInfo == null)
-                    continue;
-                if (itemInfo.getBottom() < visibleTop) {
+            float visibleLeft = getScrollLeft();
+            float visibleRight = visibleLeft + getWidth();
+            for (Pile pile : piles) {
+                if (pile.getRight() < visibleLeft) {
                     continue;
                 }
-                if (itemInfo.getTop() >= visibleBottom) {
+                if (pile.getLeft() >= visibleRight) {
                     break;
                 }
-                itemInfo.draw(g);
+                pile.draw(g);
             }
         }
 

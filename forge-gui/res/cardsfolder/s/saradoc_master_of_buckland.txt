@@ -2,7 +2,7 @@ Name:Saradoc, Master of Buckland
 ManaCost:3 W
 Types:Legendary Creature Halfling Citizen
 PT:2/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.nonToken+powerLE2+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control with power 2 or less enters, create a 1/1 white Halfling creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.!token+powerLE2+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature you control with power 2 or less enters, create a 1/1 white Halfling creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_halfling
 A:AB$ Pump | Cost$ tapXType<2/Halfling.Other/other halflings> | NumAtt$ 2 | Defined$ Self | KW$ Lifelink | SpellDescription$ NICKNAME gets +2/+0 and gains lifelink until end of turn.
 DeckHints:Type$Halfling

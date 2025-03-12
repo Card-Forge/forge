@@ -1,0 +1,10 @@
+Name:Sarkhan, Dragon Ascendant
+ManaCost:1 R
+Types:Legendary Creature Human Druid
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, you may behold a Dragon. If you do, create a Treasure token. (To behold a Dragon, choose a Dragon you control or reveal a Dragon card from your hand.)
+SVar:TrigToken:AB$ Token | Cost$ Behold<1/Dragon> | TokenScript$ c_a_treasure_sac
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Dragon you control enters, put a +1/+1 counter on NICKNAME. Until end of turn, NICKNAME becomes a Dragon in addition to its other types and gains flying.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Dragon | Keywords$ Flying
+Oracle:When Sarkhan enters, you may behold a Dragon. If you do, create a Treasure token. (To behold a Dragon, choose a Dragon you control or reveal a Dragon card from your hand.)\nWhenever a Dragon you control enters, put a +1/+1 counter on Sarkhan. Until end of turn, Sarkhan becomes a Dragon in addition to its other types and gains flying.

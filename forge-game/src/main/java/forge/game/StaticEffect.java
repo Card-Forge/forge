@@ -206,7 +206,6 @@ public class StaticEffect {
             if (layers.contains(StaticAbilityLayer.ABILITIES)) {
                 p.removeChangedKeywords(getTimestamp(), ability.getId());
             }
-
         }
 
         // modify the affected card

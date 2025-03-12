@@ -60,6 +60,7 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventCardForetold event);
     T visit(GameEventCardPlotted event);
     T visit(GameEventDayTimeChanged event);
+    T visit(GameEventDoorChanged event);
 
     // This is base class for all visitors.
     class Base<T> implements IGameEventVisitor<T>{
@@ -118,5 +119,6 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventCardForetold event) { return null; }
         public T visit(GameEventCardPlotted event) { return null; }
         public T visit(GameEventDayTimeChanged event) { return null; }
+        public T visit(GameEventDoorChanged event) { return null; }
     }
 }

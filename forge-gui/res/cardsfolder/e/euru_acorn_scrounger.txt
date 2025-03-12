@@ -4,7 +4,7 @@ Types:Legendary Creature Squirrel Soldier
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When CARDNAME enters, you may forage. When you do, conjure a card named Chitterspitter onto the battlefield.
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Forage | Execute$ TrigConjure | SpellDescription$ When you do, conjure a card named Chitterspitter onto the battlefield.
-SVar:TrigConjure:DB$ MakeCard | Name$ Chitterspitter | TokenCard$ True | Zone$ Battlefield
+SVar:TrigConjure:DB$ MakeCard | Name$ Chitterspitter | Conjure$ True | Zone$ Battlefield
 T:Mode$ DamageDoneOnce | ValidSource$ Squirrel.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounterAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Squirrels you control deal combat damage to a player, you may sacrifice a token. If you do, put an acorn counter on each permanent you control named Chitterspitter.
 SVar:TrigPutCounterAll:AB$ PutCounterAll | Cost$ Sac<1/Permanent.token/token> | ValidCards$ Permanent.YouCtrl+namedChitterspitter | CounterType$ ACORN | CounterNum$ 1
 Oracle:When Euru, Acorn Scrounger enters, you may forage. When you do, conjure a card named Chitterspitter onto the battlefield.\nWhenever one or more Squirrels you control deal combat damage to a player, you may sacrifice a token. If you do, put an acorn counter on each permanent you control named Chitterspitter.

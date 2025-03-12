@@ -1,0 +1,11 @@
+Name:Elsha, Threefold Master
+ManaCost:U R W
+Types:Legendary Creature Djinn Monk
+PT:1/1
+K:Trample
+K:Prowess
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, create that many 1/1 white Monk creature tokens with prowess.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_monk_prowess | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Token
+Oracle:Trample\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever Elsha deals combat damage to a player, create that many 1/1 white Monk creature tokens with prowess.

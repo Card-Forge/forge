@@ -8,7 +8,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChoose:DB$ Charm | MinCharmNum$ 1 | CharmNum$ MaxUniqueOpponents | Choices$ TrigDrawDiscard,TrigSacrifice,TrigDmg | AdditionalDescription$ or more. Each mode must target a different player.
 SVar:TrigDrawDiscard:DB$ Draw | ValidTgts$ Opponent | TargetUnique$ True | NumCards$ 3 | SubAbility$ Discard3 | SpellDescription$ Target opponent draws three cards, then discards three cards at random.
 SVar:Discard3:DB$ Discard | Defined$ ParentTarget | Mode$ Random | NumCards$ 3
-SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | TargetUnique$ True | SacValid$ Artifact.nonToken | SpellDescription$ Target opponent sacrifices a nontoken artifact. | SacMessage$ nontoken artifact
+SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | TargetUnique$ True | SacValid$ Artifact.!token | SpellDescription$ Target opponent sacrifices a nontoken artifact. | SacMessage$ nontoken artifact
 SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent | TargetUnique$ True | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target opponent equal to the number of cards in their hand.
 SVar:X:TargetedPlayer$CardsInHand
 SVar:MaxUniqueOpponents:PlayerCountOpponents$Amount

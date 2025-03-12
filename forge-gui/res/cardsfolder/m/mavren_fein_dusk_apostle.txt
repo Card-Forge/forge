@@ -2,7 +2,7 @@ Name:Mavren Fein, Dusk Apostle
 ManaCost:2 W
 Types:Legendary Creature Vampire Cleric
 PT:2/2
-T:Mode$ AttackersDeclared | ValidAttackers$ Vampire.nonToken+YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more nontoken Vampires you control attack, create a 1/1 white Vampire creature token with lifelink.
+T:Mode$ AttackersDeclared | ValidAttackers$ Vampire.!token+YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more nontoken Vampires you control attack, create a 1/1 white Vampire creature token with lifelink.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You
 DeckHints:Type$Vampire
 DeckHas:Ability$Token

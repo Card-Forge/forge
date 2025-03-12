@@ -23,7 +23,7 @@ import forge.util.FileUtil;
 
 import static forge.localinstance.properties.ForgeConstants.ADV_TEXTURE_BG_FILE;
 import static forge.localinstance.properties.ForgeConstants.ASSETS_DIR;
-import static forge.localinstance.properties.ForgeConstants.DAILY_SNAPSHOT_URL;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_SNAPSHOT_URL;
 import static forge.localinstance.properties.ForgeConstants.DEFAULT_SKINS_DIR;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_ATOM;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
@@ -51,7 +51,7 @@ public class AssetsDownloader {
         final String apkSize = "12MB";
 
         final boolean isSnapshots = versionString.contains("SNAPSHOT");
-        final String snapsURL = DAILY_SNAPSHOT_URL;
+        final String snapsURL = GITHUB_SNAPSHOT_URL;
         // desktop and mobile-dev share the same package
         final String guiChannel = GuiBase.isAndroid() ? "forge/forge-gui-android/" : "forge/forge-gui-desktop/";
         final String releaseURL = RELEASE_URL +  guiChannel;
@@ -82,7 +82,7 @@ public class AssetsDownloader {
                     //current release on github is tar.bz2, update this to jar installer in the future...
                     filename = isSnapshots ? "forge-installer-" + version + ".jar" : releaseTag.replace("forge-", "forge-gui-desktop-") + ".tar.bz2";
                     String releaseBZ2URL = GITHUB_FORGE_URL + "releases/download/" + releaseTag + "/" + filename;
-                    String snapsBZ2URL = DAILY_SNAPSHOT_URL + filename;
+                    String snapsBZ2URL = GITHUB_SNAPSHOT_URL + filename;
                     installerURL = isSnapshots ? snapsBZ2URL : releaseBZ2URL;
                 }
                 String snapsBuildDate = "", buildDate = "";

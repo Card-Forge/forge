@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddTriggers$ ProgenitorTrig | AddSVars$ ProgenitorCopy,ProgenitorTrig | SpellDescription$ You may have CARDNAME enter as a copy of any creature on the battlefield, except it has "At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature."
-SVar:ProgenitorTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ProgenitorCopy | IsPresent$ Card.Self+nonToken | TriggerDescription$ At the beginning of your upkeep, if CARDNAME isn't a token, create a token that's a copy of CARDNAME."
+SVar:ProgenitorTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ProgenitorCopy | IsPresent$ Card.Self+!token | TriggerDescription$ At the beginning of your upkeep, if CARDNAME isn't a token, create a token that's a copy of CARDNAME."
 SVar:ProgenitorCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 SVar:NeedsToPlay:Creature
 Oracle:You may have Progenitor Mimic enter as a copy of any creature on the battlefield, except it has "At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature."

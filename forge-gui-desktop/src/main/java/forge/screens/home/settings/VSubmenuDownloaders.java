@@ -32,7 +32,6 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.util.FileUtil;
 import forge.util.Localizer;
-import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -81,45 +80,32 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         pnlContent.setOpaque(false);
 
-        if (javaRecentEnough()) {
-            // Github actions now uploading the latest version predictably. So we should be able to use this again.
-            pnlContent.add(btnCheckForUpdates, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
+        pnlContent.add(_makeLabel("Bulk downloaders have been disabled. Please use auto-downloader for now."), constraintsLBL);
 
-            pnlContent.add(btnDownloadPics, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
+        // Github actions now uploading the latest version predictably. So we should be able to use this again.
+        pnlContent.add(btnCheckForUpdates, constraintsBTN);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
 
-            pnlContent.add(btnDownloadPicsHQ, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPicsHQ")), constraintsLBL);
+//        pnlContent.add(btnDownloadPics, constraintsBTN);
+//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
+//
+//        pnlContent.add(btnDownloadPicsHQ, constraintsBTN);
+//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPicsHQ")), constraintsLBL);
+//
+//        pnlContent.add(btnDownloadSetPics, constraintsBTN);
+//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSetPics")), constraintsLBL);
+//
+//        pnlContent.add(btnDownloadQuestImages, constraintsBTN);
+//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadQuestImages")), constraintsLBL);
+//
+//        pnlContent.add(btnDownloadAchievementImages, constraintsBTN);
+//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadAchievementImages")), constraintsLBL);
 
-            pnlContent.add(btnDownloadSetPics, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSetPics")), constraintsLBL);
+        pnlContent.add(btnDownloadPrices, constraintsBTN);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPrices")), constraintsLBL);
 
-            pnlContent.add(btnDownloadQuestImages, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadQuestImages")), constraintsLBL);
-
-            pnlContent.add(btnDownloadAchievementImages, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadAchievementImages")), constraintsLBL);
-
-            pnlContent.add(btnDownloadPrices, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPrices")), constraintsLBL);
-
-            pnlContent.add(btnDownloadSkins, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSkins")), constraintsLBL);
-        } else {
-            String text = localizer.getMessage("lblYourVersionOfJavaIsTooOld");
-            FLabel label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
-            pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 30px 3px");
-
-            text  = localizer.getMessage("lblPleaseUpdateToTheLatestVersionOfJava");
-            label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
-            pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
-
-            text = localizer.getMessage("lblYoureRunning") + " " + System.getProperty("java.version");
-            text = text + " . " + localizer.getMessage("lblYouNeedAtLeastJavaVersion") ;
-            label = new FLabel.Builder().fontAlign(SwingConstants.CENTER).text(text).fontStyle(Font.BOLD).fontSize(18).build();
-            pnlContent.add(label, "w 90%!, h 25px!, center, gap 0 0 0 36px");
-        }
+//        pnlContent.add(btnDownloadSkins, constraintsBTN);
+//        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSkins")), constraintsLBL);
 
         pnlContent.add(btnListImageData, constraintsBTN);
         pnlContent.add(_makeLabel(localizer.getMessage("lblListImageData")), constraintsLBL);
@@ -135,12 +121,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         pnlContent.add(btnLicensing, constraintsBTN);
         pnlContent.add(_makeLabel(localizer.getMessage("lblLicensing")), constraintsLBL);
-    }
-
-    private boolean javaRecentEnough() {
-        RuntimeVersion javaVersion = RuntimeVersion.of(System.getProperty("java.version"));
-
-        return javaVersion.getMajor() >= 9 || (javaVersion.getMajor() >= 1 && (javaVersion.getMinor() > 8 || (javaVersion.getMinor() == 8 && javaVersion.getUpdate() >= 101)));
     }
 
     /* (non-Javadoc)

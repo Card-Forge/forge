@@ -1,0 +1,6 @@
+Name:Grasping Tentacles
+ManaCost:1 U B
+Types:Sorcery
+A:SP$ Mill | NumCards$ 8 | ValidTgts$ Opponent | SubAbility$ DBChangeZone | SpellDescription$ Target opponent mills eight cards. You may put an artifact card from that player's graveyard onto the battlefield under your control.
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | ChangeType$ Artifact.OwnedBy TargetedPlayer | ChangeNum$ 1 | ChangeTypeDesc$ artifact card | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
+Oracle:Target opponent mills eight cards. You may put an artifact card from that player's graveyard onto the battlefield under your control.

@@ -1,7 +1,7 @@
 Name:Failure
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | ValidTgts$ Card | TargetType$ Spell | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Card | TargetType$ Spell | TgtZone$ Stack | Origin$ Stack | Destination$ Hand | SpellDescription$ Return target spell to its owner's hand.
 AlternateMode:Split
 Oracle:Return target spell to its owner's hand.
 

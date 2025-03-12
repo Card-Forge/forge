@@ -8,7 +8,7 @@ SVar:EffSModeContinuous:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay
 SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | RememberObjects$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionZone$ Exile | Phase$ End Of Turn | Execute$ TrigChangeAll | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, if any of those cards remain exiled, put them on the bottom of your library in any order.
 SVar:TrigChangeAll:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Library | LibraryPosition$ 0
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$Valid Attraction.VisitedThisTurn
+SVar:X:PlayerCountPropertyYou$AttractionsVisitedThisTurn
 Oracle:Visit — Exile the top X cards of your library, where X is the number of Attractions you've visited this turn (including this one). You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them on the bottom of your library in any order.
 
 # --- VARIANTS ---

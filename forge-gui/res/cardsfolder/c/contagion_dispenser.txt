@@ -7,4 +7,4 @@ T:Mode$ Proliferate | ValidPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$
 SVar:TrigDraft:DB$ Draft | Spellbook$ Bloom Hulk,Contagion Engine,Contagion Clasp,Evolution Sage,Contentious Plan,Flux Channeler,Inexorable Tide,Merfolk Skydiver,Pollenbright Druid,Roalesk; Apex Hybrid,Sword of Truth and Justice,Thrummingbird,Smell Fear,Cankerbloom,Tezzeret's Gambit
 DeckHas:Ability$Proliferate|Counters
 DeckNeeds:Ability$Counters
-Oracle:When Contagion Dispenser enters, proliferate.\nWhenever you proliferate during your turn, draft a card from Contagion Engine's spellbook. This ability triggers only once each turn.
+Oracle:When Contagion Dispenser enters, proliferate.\nWhenever you proliferate during your turn, draft a card from Contagion Dispenser's spellbook. This ability triggers only once each turn.

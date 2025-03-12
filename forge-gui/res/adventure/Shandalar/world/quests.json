@@ -9071,7 +9071,7 @@
 		"plains_town_tribal",
 		"swamp_town_generic",
 		"swamp_town_identity",
-		"swamo_town_tribal",
+		"swamp_town_tribal",
 		"waste_town_generic",
 		"waste_town_identity",
 		"waste_town_tribal"
@@ -9811,7 +9811,7 @@
 	"offerDialog": {},
 	"prologue": {},
 	"epilogue": {
-		"text": "A slight whistle alerts you to Acirxes' presence. You're not entirely sure if he has impeccible timing or if he watched you complete your most recent job, but it appears that Sir Donovan has more work for you.",
+		"text": "A slight whistle alerts you to Acirxes' presence. You're not entirely sure if he has impeccable timing or if he watched you complete your most recent job, but it appears that Sir Donovan has more work for you.",
 		"options": [
 			{
 				"action": [

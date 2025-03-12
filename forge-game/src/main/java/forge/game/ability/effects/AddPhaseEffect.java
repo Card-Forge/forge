@@ -25,7 +25,7 @@ public class AddPhaseEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        boolean isTopsy = activator.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
+        boolean isTopsy = activator.isPhasesReversed();
         PhaseHandler phaseHandler = activator.getGame().getPhaseHandler();
 
         PhaseType currentPhase = phaseHandler.getPhase();

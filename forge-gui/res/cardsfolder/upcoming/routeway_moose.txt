@@ -1,0 +1,10 @@
+Name:Routeway Moose
+ManaCost:1 G
+Types:Creature Elk Mount
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigSeek | TriggerDescription$ Whenever this creature attacks while saddled, seek a land card and put it onto the battlefield tapped.
+SVar:TrigSeek:DB$ Seek | Type$ Land | RememberFound$ True | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | Tapped$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Saddle:2
+Oracle:Whenever this creature attacks while saddled, seek a land card and put it onto the battlefield tapped.\nSaddle 2

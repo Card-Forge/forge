@@ -5,5 +5,5 @@ PT:3/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature | AILogic$ ExceptSelf
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:NeedsToPlay:Creature.YouCtrl+token+powerLE3+toughnessLE3,Creature.YouCtrl+nonToken+powerLE2+toughnessLE3
+SVar:NeedsToPlay:Creature.YouCtrl+token+powerLE3+toughnessLE3,Creature.YouCtrl+!token+powerLE2+toughnessLE3
 Oracle:When Kjeldoran Dead enters, sacrifice a creature.\n{B}: Regenerate Kjeldoran Dead.

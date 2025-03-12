@@ -1,0 +1,16 @@
+Name:Barrensteppe Siege
+ManaCost:2 W B
+Types:Enchantment
+K:ETBReplacement:Other:SiegeChoice
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Abzan,Mardu | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As this enchantment enters, choose Abzan or Mardu.
+SVar:Abzan:DB$ Pump | SpellDescription$ Abzan
+SVar:Mardu:DB$ Pump | SpellDescription$ Mardu
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeAbzan | AddTrigger$ AbzanTrigger | Description$ • Abzan — At the beginning of your end step, put a +1/+1 counter on each creature you control.
+SVar:AbzanTrigger:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeMardu | AddTrigger$ MarduTrigger | Description$ • Mardu — At the beginning of your end step, if a creature died under your control this turn, each opponent sacrifices a creature of their choice.
+SVar:MarduTrigger:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, if a creature died under your control this turn, each opponent sacrifices a creature of their choice.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player.Opponent
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+DeckHas:Ability$Counters
+Oracle:As this enchantment enters, choose Abzan or Mardu.\n• Abzan — At the beginning of your end step, put a +1/+1 counter on each creature you control.\n• Mardu — At the beginning of your end step, if a creature died under your control this turn, each opponent sacrifices a creature of their choice.

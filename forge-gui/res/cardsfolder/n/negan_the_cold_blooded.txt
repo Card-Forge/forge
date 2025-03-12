@@ -3,14 +3,10 @@ AltName:Malik, Grim Manipulator
 ManaCost:2 R W B
 Types:Legendary Creature Human Rogue
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTgtOpp | TriggerDescription$ When NICKNAME enters, you and target opponent each secretly choose a creature that player controls. Then those choices are revealed, and that player sacrifices those creatures.
-SVar:TrigTgtOpp:DB$ Pump | ValidTgts$ Player | TgtPrompt$ Select target opponent | IsCurse$ True | RememberTargets$ True | SubAbility$ DBYouChoose
-SVar:DBYouChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Mandatory$ True | Choices$ Creature.RememberedPlayerCtrl | RememberChosen$ True | SubAbility$ DBOppChoose
-SVar:DBOppChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Mandatory$ True | Choices$ Creature.RememberedPlayerCtrl | SubAbility$ DBReveal
-SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ Remembered | RememberRevealed$ True | SubAbility$ DBRevealOpp
-SVar:DBRevealOpp:DB$ Reveal | Defined$ Remembered | RevealDefined$ ChosenCard | RememberRevealed$ True | SubAbility$ DBSacrificeAll
-SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When NICKNAME enters, you and target opponent each secretly choose a creature that player controls. Then those choices are revealed, and that player sacrifices those creatures.
+SVar:TrigChoose:DB$ ChooseCard | ValidTgts$ Opponent | Defined$ TargetedAndYou | Amount$ 1 | Mandatory$ True | Choices$ Creature.TargetedPlayerCtrl | Secretly$ True | Reveal$ True | SubAbility$ DBSacrificeAll
+SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Creature.ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 T:Mode$ Sacrificed | ValidCard$ Creature.OppCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a creature, you create a Treasure token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHas:Ability$Token

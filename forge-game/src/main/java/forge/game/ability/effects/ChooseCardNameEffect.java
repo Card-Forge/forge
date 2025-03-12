@@ -90,7 +90,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 } else {
                     chosen = p.getController().chooseCardName(sa, faces, message);
                 }
-            }  else {
+            } else {
                 // use CardFace because you might name a alternate names
                 Predicate<ICardFace> cpp = x -> true;
                 if (sa.hasParam("ValidCards")) {
@@ -112,8 +112,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 }
                 if (randomChoice) {
                     chosen = StaticData.instance().getCommonCards().streamAllFaces()
-                            .filter(cpp).collect(StreamUtil.random()).get()
-                            .getName();
+                            .filter(cpp).collect(StreamUtil.random()).map(ICardFace::getName).orElse("");
                 } else {
                     chosen = p.getController().chooseCardName(sa, cpp, valid, message);
                 }

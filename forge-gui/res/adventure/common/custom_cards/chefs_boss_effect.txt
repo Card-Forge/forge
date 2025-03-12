@@ -2,7 +2,7 @@ Name:Chef's Boss Effect
 ManaCost:no cost
 Colors:blue,green,white
 Types:Enchantment
-S:Mode$ Continuous | AddAbility$ FoodSac | AddType$ Food & Artifact | Affected$ Creature.nonToken | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Nontoken creature are Food artifacts in addition to their other types and gain "{2}, {T}, Sacrifice this creature: You gain 3 life."
+S:Mode$ Continuous | AddAbility$ FoodSac | AddType$ Food & Artifact | Affected$ Creature.!token | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Nontoken creature are Food artifacts in addition to their other types and gain "{2}, {T}, Sacrifice this creature: You gain 3 life."
 SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this creature> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 T:Mode$ Sacrificed | ValidCard$ Food | Origin$ Any | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Whenever a player sacrifices a Food, put a flavor counter on Chef's Boss Effect.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ FLAVOR

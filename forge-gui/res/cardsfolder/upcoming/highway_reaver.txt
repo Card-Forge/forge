@@ -1,0 +1,13 @@
+Name:Highway Reaver
+ManaCost:2 B R
+Types:Creature Scorpion Dragon
+PT:4/4
+K:Flying
+K:Start your engines
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature enters or attacks, target creature card in your graveyard without unearth perpetually gains unearth. The unearth cost is equal to its mana cost.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever this creature enters or attacks, target creature card in your graveyard without unearth perpetually gains unearth. The unearth cost is equal to its mana cost.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+withoutUnearth | TgtPrompt$ Select target creature card in your graveyard without unearth | TgtZone$ Graveyard | PumpZone$ Graveyard | KW$ Unearth:CardManaCost | Duration$ Perpetual
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ FreebieReaving | AddSVar$ ReavingX | Description$ Max speed — You may pay {0} rather than pay the unearth cost of the first unearth ability you activate each turn.
+SVar:FreebieReaving:Mode$ AlternativeCost | ValidSA$ Activated.Unearth | ValidPlayer$ You | Cost$ 0 | CheckSVar$ ReavingX | SVarCompare$ LT1 | AffectedZone$ Graveyard | EffectZone$ Graveyard | Secondary$ True | Description$ Max speed — You may pay {0} rather than pay the unearth cost of the first unearth ability you activate each turn.
+SVar:ReavingX:Count$ThisTurnActivated_Activated.Unearth+YouCtrl
+Oracle:Flying\nStart your engines!\nWhenever this creature enters or attacks, target creature card in your graveyard without unearth perpetually gains unearth. The unearth cost is equal to its mana cost.\nMax speed — You may pay {0} rather than pay the unearth cost of the first unearth ability you activate each turn.

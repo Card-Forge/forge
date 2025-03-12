@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Human Wizard
 PT:3/2
 K:Morph:B
-T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken creature you control dies, draw a card.
+T:Mode$ ChangesZone | ValidCard$ Creature.!token+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken creature you control dies, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Morph {B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhenever another nontoken creature you control dies, draw a card.

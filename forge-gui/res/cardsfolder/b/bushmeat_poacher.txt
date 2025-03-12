@@ -5,6 +5,6 @@ PT:2/4
 A:AB$ GainLife | Cost$ 1 T Sac<1/Creature.Other/another creature> | Defined$ You | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain life equal to the sacrificed creature's toughness. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:Sacrificed$CardToughness
-SVar:AIPreference:SacCost$Creature.Token,Creature.cmcLE3
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
 DeckHas:Ability$LifeGain
 Oracle:{1}, {T}, Sacrifice another creature: You gain life equal to the sacrificed creature's toughness. Draw a card.

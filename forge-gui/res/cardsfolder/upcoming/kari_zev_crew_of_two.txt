@@ -1,0 +1,13 @@
+Name:Kari Zev, Crew of Two
+ManaCost:2 R R
+Types:Legendary Creature Human Pirate
+PT:3/3
+K:Menace
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Monkey.Legendary+YouCtrl | PresentCompare$ EQ0 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever NICKNAME attacks while you don't control a legendary Monkey, conjure a card named Ragavan, Nimble Pilferer onto the battlefield tapped and attacking. At the beginning of the next end step, if that card is on the battlefield, return it to its owner's hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Ragavan, Nimble Pilferer | Zone$ Battlefield | Tapped$ True | RememberMade$ True | SubAbility$ DBSetAttacking
+SVar:DBSetAttacking:DB$ ChangeCombatants | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.YouCtrl | Attacking$ True | SubAbility$ DBDelayTrig
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | ConditionDefined$ RememberedLKI | ConditionPresent$ Card | ConditionZone$ Battlefield | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, if that card is on the battlefield, return it to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Menace, haste\nWhenever Kari Zev attacks while you don't control a legendary Monkey, conjure a card named Ragavan, Nimble Pilferer onto the battlefield tapped and attacking. At the beginning of the next end step, if that card is on the battlefield, return it to its owner's hand.

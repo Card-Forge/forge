@@ -1,7 +1,7 @@
 Name:Collision of Realms
 ManaCost:6 R
 Types:Sorcery
-A:SP$ ChangeZoneAll | ChangeType$ Creature | RememberChanged$ Card.nonToken | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDigUntil | SpellDescription$ Each player shuffles all creatures they own into their library. Each player who shuffled a nontoken creature into their library this way reveals cards from the top of their library until they reveal a creature card, then puts that card onto the battlefield and the rest on the bottom of their library in a random order.
+A:SP$ ChangeZoneAll | ChangeType$ Creature | RememberChanged$ Card.!token | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDigUntil | SpellDescription$ Each player shuffles all creatures they own into their library. Each player who shuffled a nontoken creature into their library this way reveals cards from the top of their library until they reveal a creature card, then puts that card onto the battlefield and the rest on the bottom of their library in a random order.
 SVar:DBDigUntil:DB$ DigUntil | Defined$ RememberedOwner | Amount$ 1 | Valid$ Creature | FoundDestination$ Battlefield | RevealedDestination$ Library | Reveal$ True | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SubAbility$ DBClean
 SVar:DBClean:DB$ Cleanup | ClearRemembered$ True
 Oracle:Each player shuffles all creatures they own into their library. Each player who shuffled a nontoken creature into their library this way reveals cards from the top of their library until they reveal a creature card, then puts that card onto the battlefield and the rest on the bottom of their library in a random order.

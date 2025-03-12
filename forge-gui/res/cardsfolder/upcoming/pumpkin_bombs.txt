@@ -1,0 +1,9 @@
+Name:Pumpkin Bombs
+ManaCost:1 R
+Types:Artifact
+A:AB$ Draw | Cost$ T Discard<2/Card> | Defined$ You | NumCards$ 3 | SubAbility$ DBPutCounter | SpellDescription$ Draw three cards, then put a fuse counter on this artifact. It deals damage equal to the number of fuse counters on it to target opponent. They gain control of this artifact.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ FUSE | CounterNum$ 1 | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X | SubAbility$ BombGainCtrl
+SVar:BombGainCtrl:DB$ GainControl | NewController$ TargetedPlayer | Defined$ Self
+SVar:X:Count$CardCounters.FUSE
+Oracle:{T}, Discard two cards: Draw three cards, then put a fuse counter on this artifact. It deals damage equal to the number of fuse counters on it to target opponent. They gain control of this artifact.

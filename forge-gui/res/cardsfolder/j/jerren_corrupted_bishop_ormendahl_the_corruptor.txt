@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Legendary Creature Human Cleric
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME enters the or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Human.Other+nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Human.Other+!token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Human.YouCtrl | TgtPrompt$ Select target Human you control | KW$ Lifelink | SpellDescription$ Target Human you control gains lifelink until end of turn.

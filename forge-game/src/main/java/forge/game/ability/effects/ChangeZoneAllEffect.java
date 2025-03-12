@@ -107,10 +107,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             final Zone originZone = game.getZoneOf(c);
 
             // Fizzle spells so that they are removed from stack (e.g. Summary Dismissal)
-            if (sa.hasParam("Fizzle")) {
-                if (originZone.is(ZoneType.Exile) || originZone.is(ZoneType.Hand) || originZone.is(ZoneType.Stack)) {
-                    game.getStack().remove(c);
-                }
+            if (originZone.is(ZoneType.Stack)) {
+                game.getStack().remove(c);
             }
 
             if (remLKI) {

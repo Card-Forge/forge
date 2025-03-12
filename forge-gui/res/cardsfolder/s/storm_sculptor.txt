@@ -5,5 +5,5 @@ PT:3/2
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, return a creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | AILogic$ NeverBounceItself
-SVar:NeedsToPlay:Creature.YouCtrl+nonToken
+SVar:NeedsToPlay:Creature.YouCtrl+!token
 Oracle:Storm Sculptor can't be blocked.\nWhen Storm Sculptor enters, return a creature you control to its owner's hand.

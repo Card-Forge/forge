@@ -1,0 +1,8 @@
+Name:Inevitable Defeat
+ManaCost:1 R W B
+Types:Instant
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBLoseLife | SpellDescription$ Exile target nonland permanent. Its controller loses 3 life and you gain 3 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 3 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+Oracle:This spell can't be countered.\nExile target nonland permanent. Its controller loses 3 life and you gain 3 life.

@@ -1,0 +1,12 @@
+[metadata]
+Code=TDC
+Date=2025-04-11
+Name=Tarkir: Dragonstorm Commander
+Type=Commander
+ScryfallCode=TDC
+
+[cards]
+1 M Betor, Ancestor's Voice @Lius Lasahido
+0 M Elsha, Threefold Master @Irina Nordsol
+6 M Neriv, Crackling Vanguard @Lucas Graciano
+8 M Teval, the Balanced Scale @Chris Rahn

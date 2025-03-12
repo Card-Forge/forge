@@ -1,0 +1,10 @@
+Name:Skirmish Rhino
+ManaCost:W B G
+Types:Creature Rhino
+PT:3/4
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When this creature enters, each opponent loses 2 life and you gain 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ GainLife
+SVar:GainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Trample\nWhen this creature enters, each opponent loses 2 life and you gain 2 life.

@@ -303,6 +303,6 @@ public class FlipCoinEffect extends SpellAbilityEffect {
 
     public static int getFlipMultiplier(final Player flipper) {
         String str = "If you would flip a coin, instead flip two coins and ignore one.";
-        return 1 << flipper.getKeywords().getAmount(str);
+        return 1 << flipper.getAmountOfKeyword(str);
     }
 }

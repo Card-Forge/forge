@@ -66,7 +66,6 @@ public class ReplacementHandler {
 
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
         final CardCollection preList = new CardCollection();
-        boolean checkAgain = false;
         Card affectedLKI = null;
         Card affectedCard = null;
 
@@ -92,8 +91,7 @@ public class ReplacementHandler {
             Map<Optional<Player>, Map<CounterType, Integer>> etbCounters = (Map<Optional<Player>, Map<CounterType, Integer>>) runParams.get(AbilityKey.CounterMap);
             affectedLKI.putEtbCounters(etbCounters);
             preList.add(affectedLKI);
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
-            checkAgain = true;
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(), preList);
 
             runParams.put(AbilityKey.Affected, affectedLKI);
         }
@@ -137,23 +135,22 @@ public class ReplacementHandler {
 
         }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
-        if (checkAgain) {
-            if (affectedLKI != null && affectedCard != null) {
-                // need to set the Host Card there so it is not connected to LKI anymore?
-                // need to be done after canReplace check
-                for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
-                    re.setHostCard(affectedCard);
-                }
-                // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
-                affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
-                affectedCard.setStoredReplacements(affectedLKI.getStoredReplacements());
-                if (affectedCard.getCastSA() != null && affectedCard.getCastSA().getKeyword() != null) {
-                   // need to readd the CastSA Keyword into the Card
-                   affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
-                }
-                runParams.put(AbilityKey.Affected, affectedCard);
-                runParams.put(AbilityKey.NewCard, CardCopyService.getLKICopy(affectedLKI));
+        if (affectedLKI != null) {
+            // need to set the Host Card there so it is not connected to LKI anymore?
+            // need to be done after canReplace check
+            for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
+                re.setHostCard(affectedCard);
             }
+            // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
+            affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
+            affectedCard.setStoredReplacements(affectedLKI.getStoredReplacements());
+            if (affectedCard.getCastSA() != null && affectedCard.getCastSA().getKeyword() != null) {
+                // need to readd the CastSA Keyword into the Card
+                affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
+            }
+            runParams.put(AbilityKey.Affected, affectedCard);
+            runParams.put(AbilityKey.NewCard, CardCopyService.getLKICopy(affectedLKI));
+
             game.getAction().checkStaticAbilities(false);
         }
 

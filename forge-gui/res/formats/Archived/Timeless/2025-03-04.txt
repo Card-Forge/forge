@@ -1,0 +1,8 @@
+[format]
+Name:Timeless (YDFT)
+Type:Archived
+Subtype:Vintage
+Effective:2025-03-04
+Sets:KTK, XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, HA6, EA1, DMU, YDMU, BRO, BRR, YBRO, EA2, ONE, YONE, SIR, SIS, MOM, MUL, MAT, LTR, HA7, EA3, WOE, WOT, YWOE, LCI, YLCI, MKM, YMKM, OTJ, OTP, BIG, YOTJ, MH3, BLB, YBLB, DSK, YDSK, FDN, J25, PIO, DFT, YDFT
+Restricted:Channel; Demonic Tutor; Tibalt's Trickery
+Additional:Admiral Brass, Unsinkable; Burden of Guilt; Clavileño, First of the Blessed; Crashing Footfalls; Desert; Desertion; Dismember; Duskmantle, House of Shadow; Endurance; Enlisted Wurm; Evolutionary Leap; Fabricate; Fury; Gamble; Ghostly Prison; Gonti, Canny Acquisitor; Goro-Goro and Satoru; Grief; Ixidor, Reality Sculptor; Katilda and Lier; Kuldotha Rebirth; Leonin Relic-Warder; Magmaw; Mass Hysteria; Metalspinner's Puzzleknot; Mistveil Plains; Molten Psyche; Monologue Tax; Mystery Key; Mystic Snake; Notion Thief; Nyx Weaver; Olivia, Opulent Outlaw; Pantlaza, Sun-Favored; Persist; Port Razer; Possibility Storm; Prismatic Ending; Prismatic Vista; Putrid Warrior; Shard of Broken Glass; Show and Tell; Slimefoot and Squee; Smuggler's Copter; Solitude; Spell Snare; Stella Lee, Wild Card; Stoneforge Mystic; Subtlety; Timeless Dragon; Treacherous Terrain; Victimize; Xolatoyac, the Smiling Flood; Yuma, Proud Protector

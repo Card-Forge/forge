@@ -96,7 +96,7 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Reveal ");
 

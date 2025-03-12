@@ -1,7 +1,7 @@
 Name:Energy Field
 ManaCost:1 U
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.nonToken+YouOwn+Other | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When a card is put into your graveyard from anywhere, sacrifice CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.!token+YouOwn+Other | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When a card is put into your graveyard from anywhere, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ You | ValidSource$ Card.YouDontCtrl,Emblem.YouDontCtrl | Description$ Prevent all damage that would be dealt to you by sources you don't control.
 SVar:NonStackingEffect:True

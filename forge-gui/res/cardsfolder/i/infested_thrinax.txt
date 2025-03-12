@@ -5,7 +5,7 @@ PT:4/4
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters, until end of turn, whenever a nontoken creature you control dies, create a number of 1/1 green Saproling creature tokens equal to that creature's power.
 SVar:TrigEffect:DB$ Effect | Triggers$ DiesTrig
-SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, create a number of 1/1 green Saproling creature tokens equal to that creature's power.
+SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.!token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control dies, create a number of 1/1 green Saproling creature tokens equal to that creature's power.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You
 SVar:X:TriggeredCard$CardPower
 DeckHas:Ability$Token & Type$Saproling

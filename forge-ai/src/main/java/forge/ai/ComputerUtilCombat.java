@@ -214,7 +214,7 @@ public class ComputerUtilCombat {
         int damage = attacker.getNetCombatDamage();
         int poison = 0;
         damage += predictPowerBonusOfAttacker(attacker, null, null, false);
-        if (attacker.hasKeyword(Keyword.INFECT)) {
+        if (attacker.isInfectDamage(attacked)) {
             int pd = predictDamageTo(attacked, damage, attacker, true);
             // opponent can always order it so that he gets 0
             if (pd == 1 && attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
@@ -357,7 +357,7 @@ public class ComputerUtilCombat {
             } else if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                 int trampleDamage = getAttack(attacker) - totalShieldDamage(attacker, blockers);
                 if (trampleDamage > 0) {
-                    if (attacker.hasKeyword(Keyword.INFECT)) {
+                    if (attacker.isInfectDamage(ai)) {
                         poison += trampleDamage;
                     }
                     poison += predictExtraPoisonWithDamage(attacker, ai, trampleDamage);

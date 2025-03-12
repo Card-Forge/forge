@@ -337,6 +337,8 @@ public class AdventureEventData implements Serializable {
         restrictedDrafts.add("LEB");
         restrictedDrafts.add("2ED");
         restrictedDrafts.add("30A");
+        restrictedDrafts.add("CNS");
+        restrictedDrafts.add("CN2");
         allEditions.removeIf(q -> restrictedDrafts.contains(q.getCode()));
 
         List<CardBlock> legalBlocks = new ArrayList<>();

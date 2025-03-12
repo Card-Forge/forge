@@ -2,7 +2,7 @@ Name:Legion of Clay
 ManaCost:3 G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Trample | Description$ Creatures you control have trample.
-T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl+nonToken | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever one or more nontoken artifacts you control enter, creatures you control perpetually get +1/+1.
+T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl+!token | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever one or more nontoken artifacts you control enter, creatures you control perpetually get +1/+1.
 SVar:TrigEffect:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
 DeckHints:Type$Artifact|Golem|Construct|Thopter|Assembly-Worker|Myr|Necron|Juggernaut|Scarecrow
 Oracle:Creatures you control have trample.\nWhenever one or more nontoken artifacts you control enter, creatures you control perpetually get +1/+1.

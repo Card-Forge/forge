@@ -142,7 +142,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     private void advanceToNextPhase() {
         PhaseType oldPhase = phase;
-        boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
+        boolean isTopsy = playerTurn.isPhasesReversed();
         boolean turnEnded = false;
 
         game.getStack().clearUndoStack(); //can't undo action from previous phase
@@ -1165,7 +1165,7 @@ public class PhaseHandler implements java.io.Serializable {
         return devAdvanceToPhase(targetPhase, null);
     }
     public final boolean devAdvanceToPhase(PhaseType targetPhase, Runnable resolver) {
-        boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
+        boolean isTopsy = playerTurn.isPhasesReversed();
         while (phase.isBefore(targetPhase, isTopsy)) {
             if (checkStateBasedEffects()) {
                 return false;

@@ -4,7 +4,7 @@ Types:Enchantment Case
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this Case enters, it deals 1 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
 S:Mode$ NoCleanupDamage | ValidCard$ Creature | Description$ Damage isn't removed from creatures during cleanup steps.
-T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Creature.isDamaged | PresentCompare$ GE3 | ValidPlayer$ You | IsPresent2$ Card.Self+IsUnsolved | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — Three or more creatures are damaged.
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Creature.isDamaged | PresentCompare$ GE3 | ValidPlayer$ You | IsPresent2$ Card.Self+!IsSolved | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — Three or more creatures are damaged.
 SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
 T:Mode$ AttackersDeclared | IsPresent$ Card.Self+IsSolved | ValidAttackers$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Solved — Whenever you attack with one or more creatures, this Case deals that much damage divided as you choose among any number of targets.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any number of targets | DividedAsYouChoose$ TriggerObjectsAttackers$Amount | NumDmg$ TriggerObjectsAttackers$Amount | TargetMin$ 0 | TargetMax$ TriggerObjectsAttackers$Amount

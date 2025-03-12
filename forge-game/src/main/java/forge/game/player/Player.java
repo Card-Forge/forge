@@ -26,6 +26,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.ability.effects.RollDiceEffect;
@@ -112,6 +113,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int expentThisTurn;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
     private int venturedThisTurn;
+    private int attractionsVisitedThisTurn;
     private int descended;
     private int numRingTemptedYou;
     private int devotionMod;
@@ -280,10 +282,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void setSchemeInMotion(SpellAbility cause) {
-        if (StaticAbilityCantSetSchemesInMotion.any(getGame())) {
-            return;
-        }
-
+        setSchemeInMotion(cause, getZone(ZoneType.SchemeDeck).get(0));
+    }
+    public void setSchemeInMotion(SpellAbility cause, Card scheme) {
         if (game.getReplacementHandler().run(ReplacementType.SetInMotion, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return;
         }
@@ -292,11 +293,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
 
-        activeScheme = getZone(ZoneType.SchemeDeck).get(0);
-        game.getAction().moveToCommand(activeScheme, cause);
+        game.getAction().moveToCommand(scheme, cause);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Scheme, activeScheme);
+        runParams.put(AbilityKey.Scheme, scheme);
         game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
     }
 
@@ -681,8 +681,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        boolean infect = source.hasKeyword(Keyword.INFECT)
-                || hasKeyword("All damage is dealt to you as though its source had infect.");
+        boolean infect = source.isInfectDamage(this);
 
         int poisonCounters = 0;
         if (infect) {
@@ -715,7 +714,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.DamageSource, source);
         runParams.put(AbilityKey.DamageTarget, this);
@@ -1983,9 +1981,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         speedEffect.setOwner(this);
         speedEffect.setGamePieceType(GamePieceType.EFFECT);
 
-        speedEffect.addAlternateState(CardStateName.Flipped, false);
+        speedEffect.addAlternateState(CardStateName.Transformed, false);
         CardState speedFront = speedEffect.getState(CardStateName.Original);
-        CardState speedBack = speedEffect.getState(CardStateName.Flipped);
+        CardState speedBack = speedEffect.getState(CardStateName.Transformed);
 
         speedFront.setImageKey("t:speed");
         speedFront.setName("Start Your Engines!");
@@ -2009,7 +2007,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         speedEffect.updateStateForView();
 
         if(this.maxSpeed())
-            speedEffect.setState(CardStateName.Flipped, true);
+            speedEffect.setState(CardStateName.Transformed, true);
 
         final PlayerZone com = getZone(ZoneType.Command);
         com.add(speedEffect);
@@ -2025,8 +2023,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         String label = this.maxSpeed() ? localizer.getMessage("lblMaxSpeed") : localizer.getMessage("lblSpeed", this.speed);
         speedEffect.setOverlayText(label);
         if(maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Original)
-            speedEffect.setState(CardStateName.Flipped, true);
-        else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Flipped)
+            speedEffect.setState(CardStateName.Transformed, true);
+        else if(!maxSpeed() && speedEffect.getCurrentStateName() == CardStateName.Transformed)
             speedEffect.setState(CardStateName.Original, true);
     }
 
@@ -2039,14 +2037,12 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean loseConditionMet(final GameLossReason state, final String spellName) {
         if (state != GameLossReason.OpponentWon) {
-            // Replacement effects
             Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             repParams.put(AbilityKey.LoseReason, state);
             if (game.getReplacementHandler().run(ReplacementType.GameLoss, repParams) != ReplacementResult.NotReplaced) {
                 return false;
             }
         }
-        //final String spellName = sa != null ? sa.getHostCard().getName() : null;
         setOutcome(PlayerOutcome.loss(state, spellName));
         return true;
     }
@@ -2177,7 +2173,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasDelirium() {
-        return CardFactoryUtil.getCardTypesFromList(getCardsIn(ZoneType.Graveyard)) >= 4;
+        return AbilityUtils.countCardTypesFromList(getCardsIn(ZoneType.Graveyard), false) >= 4;
     }
 
     public final boolean hasLandfall() {
@@ -2236,7 +2232,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         numManaConversion = l;
     }
     public final boolean hasManaConversion() {
-        return numManaConversion < keywords.getAmount("You may spend mana as though"
+        return numManaConversion < getAmountOfKeyword("You may spend mana as though"
                 + " it were mana of any type to cast a spell this turn.");
     }
     public final void incNumManaConversion() {
@@ -2551,6 +2547,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         return keywords.getAmount(k);
     }
 
+    public boolean isTurnOrderReversed() {
+        return StaticAbilityTurnPhaseReversed.isTurnReversed(this);
+    }
+    public boolean isPhasesReversed() {
+        return StaticAbilityTurnPhaseReversed.isPhaseReversed(this);
+    }
+
     public void onCleanupPhase() {
         for (Card c : getCardsIn(ZoneType.Hand)) {
             c.setDrawnThisTurn(false);
@@ -2589,6 +2592,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setCommitedCrimeThisTurn(0);
         diceRollsThisTurn = Lists.newArrayList();
         setExpentThisTurn(0);
+        attractionsVisitedThisTurn = 0;
 
         damageReceivedThisTurn.clear();
         planeswalkedToThisTurn.clear();
@@ -3080,9 +3084,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Conspiracies
         for (IPaperCard cp : registeredPlayer.getConspiracies()) {
             Card conspire = Card.fromPaperCard(cp, this);
-            if (conspire.hasKeyword("Hidden agenda") || conspire.hasKeyword("Double agenda")) {
-                if (!CardFactoryUtil.handleHiddenAgenda(this, conspire)) {
-                    continue;
+            boolean addToCommand = true;
+            for (KeywordInterface ki : conspire.getKeywords(Keyword.HIDDEN_AGENDA)) {
+                if (!CardFactoryUtil.handleHiddenAgenda(this, conspire, ki)) {
+                    addToCommand = false;
+                }
+            }
+            for (KeywordInterface ki : conspire.getKeywords(Keyword.DOUBLE_AGENDA)) {
+                if (!CardFactoryUtil.handleHiddenAgenda(this, conspire, ki)) {
+                    addToCommand = false;
                 }
             }
 
@@ -3094,7 +3104,9 @@ public class Player extends GameEntity implements Comparable<Player> {
                 this.extraZones.add(hand);
             }
 
-            com.add(conspire);
+            if (addToCommand) {
+                com.add(conspire);
+            }
         }
 
         // Attractions
@@ -4008,11 +4020,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void visitAttractions(int light) {
         CardCollection attractions = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isAttractionWithLight(light));
         for (Card c : attractions) {
+            if(!c.wasVisitedThisTurn())
+                this.attractionsVisitedThisTurn++;
             c.visitAttraction(this);
         }
     }
     public void rollToVisitAttractions() {
         this.visitAttractions(RollDiceEffect.rollDiceForPlayerToVisitAttractions(this));
+    }
+    public int getAttractionsVisitedThisTurn() {
+        return this.attractionsVisitedThisTurn;
     }
 
     public int getCrankCounter() {

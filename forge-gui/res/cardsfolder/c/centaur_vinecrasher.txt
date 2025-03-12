@@ -4,7 +4,7 @@ Types:Creature Plant Centaur
 PT:1/1
 K:Trample
 K:etbCounter:P1P1:X:no Condition:CARDNAME enters with a +1/+1 counter on it for each land card in all graveyards.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | TriggerZones$ Graveyard | ValidCard$ Card.nonToken+Land | Execute$ TrigReturn | TriggerDescription$ Whenever a land card is put into a graveyard from anywhere, you may pay {G}{G}. If you do, return CARDNAME from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | TriggerZones$ Graveyard | ValidCard$ Card.!token+Land | Execute$ TrigReturn | TriggerDescription$ Whenever a land card is put into a graveyard from anywhere, you may pay {G}{G}. If you do, return CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ G G | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:X:Count$ValidGraveyard Land
 AI:RemoveDeck:Random

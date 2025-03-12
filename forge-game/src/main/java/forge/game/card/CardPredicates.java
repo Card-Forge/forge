@@ -129,7 +129,7 @@ public final class CardPredicates {
     }
 
     public static Predicate<Card> possibleBlockers(final Card attacker) {
-        return c -> c.isCreature() && CombatUtil.canBlock(attacker, c);
+        return c -> CombatUtil.canBlock(attacker, c);
     }
 
     public static Predicate<Card> possibleBlockerForAtLeastOne(final Iterable<Card> attackers) {

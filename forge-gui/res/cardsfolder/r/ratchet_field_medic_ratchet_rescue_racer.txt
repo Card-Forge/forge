@@ -23,7 +23,7 @@ Types:Legendary Artifact Vehicle
 PT:1/4
 K:Living metal
 K:Lifelink
-T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl+nonToken | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigConvert | TriggerDescription$ Whenever one or more nontoken artifacts you control are put into a graveyard from the battlefield, convert NICKNAME. This ability triggers only once each turn.
+T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl+!token | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigConvert | TriggerDescription$ Whenever one or more nontoken artifacts you control are put into a graveyard from the battlefield, convert NICKNAME. This ability triggers only once each turn.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform
 DeckHas:Ability$LifeGain
 DeckHints:Type$Artifact

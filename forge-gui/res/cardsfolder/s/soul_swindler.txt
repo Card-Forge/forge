@@ -5,5 +5,5 @@ PT:5/3
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ X | Description$ As long as you've visited an Attraction this turn, CARDNAME has indestructible. (Damage and effects that say "destroy" don't destroy it.)
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters the battlefield, open an Attraction.
 SVar:TrigOpenAttraction:DB$ OpenAttraction
-SVar:X:Count$Valid Attraction.VisitedThisTurn
+SVar:X:PlayerCountPropertyYou$AttractionsVisitedThisTurn
 Oracle:As long as you've visited an Attraction this turn, Soul Swindler has indestructible. (Damage and effects that say "destroy" don't destroy it.)\nWhen Soul Swindler enters the battlefield, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)

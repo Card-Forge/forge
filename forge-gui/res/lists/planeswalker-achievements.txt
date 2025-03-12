@@ -37,6 +37,7 @@ Chandra, Hope's Beacon|Chandra's Dual Fire|Double the targets, double the fun!
 Chandra, Pyrogenius|Chandra's Warm Embrace|Did I say 'warm'? I meant 'red hot'.
 Chandra, Pyromaster|Chandra's Vengeance|Please file in triplicate!
 Chandra, Roaring Flame|Chandra's Roar|The opponent continues to burn...
+Chandra, Spark Hunter|Chandra's Reckless Driving|Sparks fly when you're having fun.
 Chandra, the Firebrand|Chandra's Hex|When burning five is just not enough.
 Chandra, Torch of Defiance|Chandra's Defiance|Let's torch it!
 Dack Fayden|Dack's Discount|Do you have any evidence it was me?
@@ -205,6 +206,7 @@ Tezzeret, Betrayer of Flesh|Tezzeret's Cycle of Knowledge|From knowledge, machin
 Tezzeret, Cruel Machinist|Tezzeret's Artificial Morph|Ixidor, Ugin... THIS is how you do it!
 Tezzeret, Master of Metal|Tezzeret's Confiscation|Your stuff will serve a grander design - mine.
 Tezzeret, Master of the Bridge|Tezzeret's Mass Transit|Just for today, everyone rides free.
+The Aetherspark|Extraplanar Energy|I'm not sure where it's coming from, but there's a lot of it.
 The Royal Scions|Kenrith Twins' Ultimate Combo|You hit them, I'll tell you where.
 Tibalt, Cosmic Impostor|Tibalt's Heist|Who says crime doesn't pay?
 Tibalt, the Fiend-Blooded|Tibalt's Treason|My side is the winning side!

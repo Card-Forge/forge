@@ -5,7 +5,7 @@ PT:3/5
 K:Menace
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a tapped and attacking token that's a copy of up to one other target nontoken creature you control. You get {E}{E} (two energy counters). At the beginning of the next end step, sacrifice that token unless you pay an amount of {E} equal to its mana value.
-SVar:TrigCopy:DB$ CopyPermanent | RememberTokens$ True | ValidTgts$ Creature.nonToken+YouCtrl+Other | TgtPrompt$ Select up to one other target nontoken you control | TargetMin$ 0 | TargetMax$ 1 | TokenTapped$ True | TokenAttacking$ True | SubAbility$ DBEnergy
+SVar:TrigCopy:DB$ CopyPermanent | RememberTokens$ True | ValidTgts$ Creature.!token+YouCtrl+Other | TgtPrompt$ Select up to one other target nontoken you control | TargetMin$ 0 | TargetMax$ 1 | TokenTapped$ True | TokenAttacking$ True | SubAbility$ DBEnergy
 SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2 | SubAbility$ DBDelayTrig
 SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, sacrifice that token unless you pay an amount of {E} equal to its mana value.
 SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You | UnlessCost$ PayEnergy<X> | UnlessPayer$ You

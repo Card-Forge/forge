@@ -1,0 +1,15 @@
+Name:Sensational Spider-Man
+ManaCost:1 W U
+Types:Legendary Creature Spider Human Hero
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, tap target creature defending player controls and put a stun counter on it. Then you may remove up to three stun counters from among all permanents. Draw cards equal to the number of stun counters removed this way.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | SubAbility$ DBCounter | TgtPrompt$ Select target creature defending player controls
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ STUN | CounterNum$ 1 | SubAbility$ DBRemoveCounters
+SVar:DBRemoveCounters:DB$ RemoveCounter | Choices$ Permanent.counters_GE1_STUN | ChoiceOptional$ True | CounterType$ STUN | CounterNum$ 3 | CounterNumShared$ True | UpTo$ True | RememberAmount$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Whenever Sensational Spider-Man attacks, tap target creature defending player controls and put a stun counter on it. Then you may remove up to three stun counters from among all permanents. Draw cards equal to the number of stun counters removed this way.

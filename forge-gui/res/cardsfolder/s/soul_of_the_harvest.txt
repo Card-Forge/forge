@@ -3,6 +3,6 @@ ManaCost:4 G G
 Types:Creature Elemental
 PT:6/6
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+Other+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another nontoken creature you control enters, you may draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.!token+Other+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another nontoken creature you control enters, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Trample\nWhenever another nontoken creature you control enters, you may draw a card.

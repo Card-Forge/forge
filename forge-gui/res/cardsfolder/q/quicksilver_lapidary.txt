@@ -3,7 +3,7 @@ ManaCost:U R
 Types:Creature Phyrexian Artificer
 PT:1/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters, conjure a card named Mox Opal into your hand.
-SVar:TrigConjure:DB$ MakeCard | Name$ Mox Opal | Zone$ Hand
+SVar:TrigConjure:DB$ MakeCard | Name$ Mox Opal | Conjure$ True | Zone$ Hand
 DeckHas:Type$Artifact
 DeckHints:Type$Artifact
 Oracle:When Quicksilver Lapidary enters, conjure a card named Mox Opal into your hand.

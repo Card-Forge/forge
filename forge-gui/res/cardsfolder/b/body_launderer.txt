@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Ogre Rogue
 PT:3/3
 K:Deathtouch
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken+Other | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ Whenever another nontoken creature you control dies, CARDNAME connives.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+!token+Other | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ Whenever another nontoken creature you control dies, CARDNAME connives.
 SVar:TrigConnive:DB$ Connive
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return another target non-Rogue creature card with equal or lesser power from your graveyard to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.powerLEX+YouOwn+nonRogue+Other | TgtPrompt$ Select target non-Rogue creature card with equal or lesser power | Origin$ Graveyard | Destination$ Battlefield

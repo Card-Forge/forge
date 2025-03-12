@@ -7,6 +7,8 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.phase.ExtraTurn;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -72,11 +74,12 @@ public class AddTurnEffect extends SpellAbilityEffect {
 
         final Card eff = createEffect(sa, sa.getActivatingPlayer(), name, image);
 
-        String stEffect = "Mode$ CantSetSchemesInMotion | EffectZone$ Command | Description$ Schemes can't be set in Motion";
-
-        eff.addStaticAbility(stEffect);
+        String strRe = "Event$ SetInMotion | EffectZone$ Command | Layer$ CantHappen | Description$ Schemes can't be set in Motion";
+        ReplacementEffect re = ReplacementHandler.parseReplacement(strRe, eff, true);
+        eff.addReplacementEffect(re);
 
         game.getAction().moveToCommand(eff, sa);
+        game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
     }
 
 }

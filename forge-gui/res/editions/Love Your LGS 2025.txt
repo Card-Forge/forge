@@ -1,0 +1,9 @@
+[metadata]
+Code=PLG25
+Date=2025-03-26
+Name=Love Your LGS 2025
+Type=Promo
+ScryfallCode=PLG25
+
+[cards]
+1 R Chromatic Lantern @David Álvarez

@@ -2,7 +2,7 @@ Name:Shelob, Dread Weaver
 ManaCost:3 B
 Types:Legendary Creature Spider Demon
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever a nontoken creature an opponent controls dies, exile it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+!token | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever a nontoken creature an opponent controls dies, exile it.
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile
 A:AB$ PutCounter | Cost$ 2 B ExiledMoveToGrave<1/Creature.ExiledWithSource> | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ TrigDraw | SpellDescription$ Put two +1/+1 counters on NICKNAME.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.

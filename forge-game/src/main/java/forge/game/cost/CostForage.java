@@ -21,7 +21,7 @@ public class CostForage extends CostPartWithList {
         if (graveyard.size() >= 3) {
             return true;
         }
-        
+
         CardCollection food = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Food"), CardPredicates.canBeSacrificedBy(ability, effect));
         if (!food.isEmpty()) {
             return true;

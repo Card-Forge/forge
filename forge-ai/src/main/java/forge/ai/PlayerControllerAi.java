@@ -1389,11 +1389,11 @@ public class PlayerControllerAi extends PlayerController {
                 oppLibrary = CardLists.getValidCards(oppLibrary, valid, source.getController(), source, sa);
             }
 
-            if (source != null && source.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
+            if (source != null && source.getState(CardStateName.Original).hasKeyword(Keyword.HIDDEN_AGENDA)) {
                 // If any Conspiracies are present, try not to choose the same name twice
                 // (otherwise the AI will spam the same name)
                 for (Card consp : player.getCardsIn(ZoneType.Command)) {
-                    if (consp.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
+                    if (consp.getState(CardStateName.Original).hasKeyword(Keyword.HIDDEN_AGENDA)) {
                         String chosenName = consp.getNamedCard();
                         if (!chosenName.isEmpty()) {
                             aiLibrary = CardLists.filter(aiLibrary, CardPredicates.nameNotEquals(chosenName));

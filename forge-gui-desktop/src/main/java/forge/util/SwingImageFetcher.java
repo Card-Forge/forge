@@ -28,7 +28,12 @@ public class SwingImageFetcher extends ImageFetcher {
             this.notifyObservers = notifyObservers;
         }
 
-        private void doFetch(String urlToDownload) throws IOException {
+        private boolean doFetch(String urlToDownload) throws IOException {
+            if (disableHostedDownload && urlToDownload.startsWith(ForgeConstants.URL_CARDFORGE) && !urlToDownload.contains("tokens")) {
+                // Don't try to download card images from cardforge servers
+                return false;
+            }
+
             String newdespath = urlToDownload.contains(".fullborder.jpg") || urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) ?
                     TextUtil.fastReplace(destPath, ".full.jpg", ".fullborder.jpg") : destPath;
             if (!newdespath.contains(".full") && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD))
@@ -48,6 +53,7 @@ public class SwingImageFetcher extends ImageFetcher {
                     SwingUtilities.invokeLater(notifyObservers);
                 } else {
                     System.err.println("Failed to rename image to " + newdespath);
+                    return false;
                 }
             } else {
                 System.err.println("Failed to save image from " + url + " as jpeg");
@@ -63,7 +69,10 @@ public class SwingImageFetcher extends ImageFetcher {
                 } else {
                     System.err.println("Failed to save image from " + url + " as png");
                 }
+                return false;
             }
+
+            return true;
         }
 
         private String tofullBorder(String imageurl) {
@@ -85,10 +94,13 @@ public class SwingImageFetcher extends ImageFetcher {
         }
 
         public void run() {
+            boolean success = false;
             for (String urlToDownload : downloadUrls) {
                 try {
-                    doFetch(tofullBorder(urlToDownload));
-                    break;
+                    if (doFetch(tofullBorder(urlToDownload))) {
+                        success = true;
+                        break;
+                    }
                 } catch (IOException e) {
                     System.err.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
                     if (urlToDownload.contains("tokens")) {
@@ -98,14 +110,17 @@ public class SwingImageFetcher extends ImageFetcher {
                         String extension = urlToDownload.substring(typeIndex);
                         urlToDownload = setlessFilename+extension;
                         try {
-                            doFetch(tofullBorder(urlToDownload));
-                            break;
+                            if (doFetch(tofullBorder(urlToDownload))) {
+                                success = true;
+                                break;
+                            }
                         } catch (IOException t) {
                             System.err.println("Failed to download setless token [" + destPath + "]: " + e.getMessage());
                         }
                     }
                 }
             }
+            // If all downloads fail, mark this image as unfetchable so we don't try again.
         }
     }
 

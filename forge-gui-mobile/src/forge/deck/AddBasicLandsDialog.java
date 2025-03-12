@@ -125,20 +125,18 @@ public class AddBasicLandsDialog extends FDialog {
         cbLandSet.setFont(lblLandSet.getFont());
         cbLandSet.setAutoClose(false);
         cbLandSet.setChangedHandler(e -> {
-            landSet = cbLandSet.getSelectedItem();
-            pnlPlains.refreshArtChoices();
-            pnlIsland.refreshArtChoices();
-            pnlSwamp.refreshArtChoices();
-            pnlMountain.refreshArtChoices();
-            pnlForest.refreshArtChoices();
+            onEditionChange();
         });
 
-        if (editionOptions != null && !editionOptions.isEmpty())
-        {
+        if (editionOptions != null && !editionOptions.isEmpty()) {
             cbLandSet.setItems(editionOptions, editionOptions.get(0));
         }
 
-        cbLandSet.setSelectedItem(defaultLandSet);
+        if (cbLandSet.getSelectedItem() == defaultLandSet) {
+            onEditionChange();
+        } else {
+            cbLandSet.setSelectedItem(defaultLandSet);
+        }
 
         initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> {
             CardPool landsToAdd = new CardPool();
@@ -230,6 +228,15 @@ public class AddBasicLandsDialog extends FDialog {
         }
 
         updateDeckInfoLabel();
+    }
+
+    private void onEditionChange() {
+        landSet = cbLandSet.getSelectedItem();
+        pnlPlains.refreshArtChoices();
+        pnlIsland.refreshArtChoices();
+        pnlSwamp.refreshArtChoices();
+        pnlMountain.refreshArtChoices();
+        pnlForest.refreshArtChoices();
     }
 
     @Override

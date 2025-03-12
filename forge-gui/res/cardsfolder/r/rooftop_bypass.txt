@@ -1,7 +1,7 @@
 Name:Rooftop Bypass
 ManaCost:1 U B
 Types:Enchantment
-T:Mode$ DamageDoneOnce | ValidSource$ Creature.nonToken+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken creatures you control deal combat damage to a player, create a 1/1 black Assassin creature token with menace. (It can't be blocked except by two or more creatures.)
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.!token+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken creatures you control deal combat damage to a player, create a 1/1 black Assassin creature token with menace. (It can't be blocked except by two or more creatures.)
 SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_assassin_menace
 DeckHas:Ability$Token
 Oracle:Whenever one or more nontoken creatures you control deal combat damage to a player, create a 1/1 black Assassin creature token with menace. (It can't be blocked except by two or more creatures.)

@@ -6,6 +6,7 @@ import forge.ai.SpellAbilityAi;
 import forge.card.CardStateName;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -142,7 +143,7 @@ public class SetStateAi extends SpellAbilityAi {
                 return false;
             }
             // hidden agenda
-            if (card.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")
+            if (card.getState(CardStateName.Original).hasKeyword(Keyword.HIDDEN_AGENDA)
                     && card.isInZone(ZoneType.Command)) {
                 String chosenName = card.getNamedCard();
                 for (Card cast : ai.getGame().getStack().getSpellsCastThisTurn()) {

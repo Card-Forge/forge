@@ -2,6 +2,6 @@ Name:Fodder Cannon
 ManaCost:4
 Types:Artifact
 A:AB$ DealDamage | Cost$ 4 T Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
-SVar:AIPreference:SacCost$Creature.token+powerLE3+toughnessLE3,Creature.nonToken+cmcLE2+powerLE1+toughnessLE2
+SVar:AIPreference:SacCost$Creature.token+powerLE3+toughnessLE3,Creature.!token+cmcLE2+powerLE1+toughnessLE2
 AI:RemoveDeck:Random
 Oracle:{4}, {T}, Sacrifice a creature: Fodder Cannon deals 4 damage to target creature.

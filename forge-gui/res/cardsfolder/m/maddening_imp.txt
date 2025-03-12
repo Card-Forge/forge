@@ -6,7 +6,7 @@ K:Flying
 A:AB$ Effect | Cost$ T | RememberObjects$ Valid Creature.ActivePlayerCtrl+nonWall | ActivationPhases$ Upkeep->Main1 | ActivationFirstCombat$ True | OpponentTurn$ True | StaticAbilities$ MustAttack | SubAbility$ DelTrig | StackDescription$ None | SpellDescription$ Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate only during an opponent's turn and only before combat.
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ Non-Wall creatures the active player controls attack this turn if able.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy | RememberObjects$ Valid Creature.ActivePlayerCtrl+nonWall | TriggerDescription$ At the beginning of the next end step, destroy each of those creatures that didn't attack this turn.
-SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.IsTriggerRemembered+notAttackedThisTurn
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.IsTriggerRemembered+!attackedThisTurn
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:NonCombatPriority:5

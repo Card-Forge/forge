@@ -1,0 +1,14 @@
+Name:Arius, Flyby Trawler
+ManaCost:U R
+Types:Legendary Creature Shark Pirate
+PT:1/1
+K:Flying
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSeek | TriggerDescription$ Whenever NICKNAME attacks, seek a non-Shark card.
+SVar:TrigSeek:DB$ Seek | Type$ Card.nonShark | RememberFound$ True | SubAbility$ DBDelayTrig
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDiscard | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Discard that card at the beginning of the next end step.
+SVar:TrigDiscard:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ DiscardedAll | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you discard one or more cards, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1
+Oracle:Flying, trample\nWhenever Arius attacks, seek a non-Shark card. Discard that card at the beginning of the next end step.\nWhenever you discard one or more cards, put a +1/+1 counter on Arius.

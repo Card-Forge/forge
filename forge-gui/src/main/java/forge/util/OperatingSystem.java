@@ -1,9 +1,5 @@
 package forge.util;
 
-import forge.gui.FThreads;
-
-import java.awt.event.KeyEvent;
-
 public class OperatingSystem {
     private static String os = System.getProperty("os.name").toLowerCase();
 
@@ -24,10 +20,16 @@ public class OperatingSystem {
     }
 
     //utility for preventing system from sleeping
-    private static boolean preventSleep;
-    private static java.util.concurrent.ScheduledFuture<?> delayedKeepAwakeTask;
+    //private static boolean preventSleep;
+    //private static java.util.concurrent.ScheduledFuture<?> delayedKeepAwakeTask;
 
     public static void preventSystemSleep(boolean preventSleep0) {
+        //Disabling this for now. Mashing a key every 30 seconds has become a problematic solution for preventing sleep
+        //on modern devices which sometimes do handle keys like "F15".
+        //We could possibly implement the mouse-movement based solution here as an alternative: https://stackoverflow.com/a/53419439
+        //It's possible though that we don't actually need it. Supposedly modern OSes can use network traffic as
+        //an indication that the computer shouldn't put the CPU to sleep.
+        /*
         if (preventSleep == preventSleep0) { return; }
         preventSleep = preventSleep0;
 
@@ -38,9 +40,10 @@ public class OperatingSystem {
 
         if (preventSleep) { //ensure task scheduled from EDT thread
             FThreads.invokeInEdtNowOrLater(keepSystemAwake);
-        }
+        }*/
     }
 
+    /*
     private static Runnable keepSystemAwake = new Runnable() {
         @Override
         public void run() {
@@ -63,4 +66,5 @@ public class OperatingSystem {
             }
         }
     };
+     */
 }

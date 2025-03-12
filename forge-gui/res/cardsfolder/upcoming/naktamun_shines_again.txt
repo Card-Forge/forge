@@ -1,0 +1,9 @@
+Name:Naktamun Shines Again
+ManaCost:2 W
+Types:Enchantment Saga
+K:Chapter:3:TrigPumpP1,TrigSeek,TrigPumpFly
+SVar:TrigPumpP1:DB$ PumpAll | ValidCards$ Creature.YouOwn+!token+cmcLE2 | PumpZone$ All | Duration$ Perpetual | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ All creature cards you own with mana value 2 or less perpetually get +1/+1.
+SVar:TrigSeek:DB$ Seek | Type$ Creature.cmcLE2 | RememberFound$ True | SubAbility$ DBPut | SpellDescription$ Seek a creature with mana value 2 or less and put it onto the battlefield.
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered
+SVar:TrigPumpFly:DB$ PumpAll | ValidCards$ Creature.YouCtrl+cmcLE2 | KW$ Flying | SpellDescription$ Creatures you controll with mana value 2 or less gain flying until end of turn.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — All creature cards you own with mana value 2 or less perpetually get +1/+1.\nII — Seek a creature with mana value 2 or less and put it onto the battlefield.\nIII — Creatures you control with mana value 2 or less gain flying until end of turn.

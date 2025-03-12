@@ -1,16 +1,16 @@
-An Uncommon Budget | https://downloads.cardforge.org/decks/uncommonbudget-brawl.zip
-Brewer's Kitchen | https://downloads.cardforge.org/decks/brewerskitchen-brawl.zip
-Budget Magic | https://downloads.cardforge.org/decks/budgetmagic-brawl.zip
-Card Preview | https://downloads.cardforge.org/decks/cardpreview-brawl.zip
-Commander Clash | https://downloads.cardforge.org/decks/commanderclash-brawl.zip
-Commander VS | https://downloads.cardforge.org/decks/commandervs-brawl.zip
-Current Brawl Metagame | https://downloads.cardforge.org/decks/currentbrawlmetagame.zip
-Current Historic Brawl Metagame | https://downloads.cardforge.org/decks/currenthistoricbrawlmetagame.zip
-Dear Azami | https://downloads.cardforge.org/decks/dearazami-brawl.zip
-EDHREC Columns | https://downloads.cardforge.org/decks/edhrec-brawl.zip
-Feature Article | https://downloads.cardforge.org/decks/feature-brawl.zip
-How to Build | https://downloads.cardforge.org/decks/howtobuild-brawl.zip
-Much Abrew About Nothing | https://downloads.cardforge.org/decks/muchabrewaboutnothing-brawl.zip
-Ready to Brawl? | https://downloads.cardforge.org/decks/readytobrawl.zip
-The Command Zone | https://downloads.cardforge.org/decks/commandzone-brawl.zip
-Ways to Play | https://downloads.cardforge.org/decks/waystoplay-brawl.zip
+An Uncommon Budget | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/uncommonbudget-brawl.zip
+Brewer's Kitchen | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/brewerskitchen-brawl.zip
+Budget Magic | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/budgetmagic-brawl.zip
+Card Preview | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/cardpreview-brawl.zip
+Commander Clash | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commanderclash-brawl.zip
+Commander VS | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commandervs-brawl.zip
+Current Brawl Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currentbrawlmetagame.zip
+Current Historic Brawl Metagame | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/currenthistoricbrawlmetagame.zip
+Dear Azami | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/dearazami-brawl.zip
+EDHREC Columns | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/edhrec-brawl.zip
+Feature Article | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/feature-brawl.zip
+How to Build | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/howtobuild-brawl.zip
+Much Abrew About Nothing | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/muchabrewaboutnothing-brawl.zip
+Ready to Brawl? | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/readytobrawl.zip
+The Command Zone | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/commandzone-brawl.zip
+Ways to Play | https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/decks/waystoplay-brawl.zip

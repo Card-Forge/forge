@@ -2,7 +2,7 @@ Name:Arbaaz Mir
 ManaCost:R W
 Types:Legendary Creature Human Assassin
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self,Permanent.nonToken+Historic+Other+YouCtrl | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME or another nontoken historic permanent you control enters, CARDNAME deals 1 damage to each opponent and you gain 1 life. (Artifacts, legendaries, and Sagas are historic.)
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Permanent.!token+Historic+Other+YouCtrl | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME or another nontoken historic permanent you control enters, CARDNAME deals 1 damage to each opponent and you gain 1 life. (Artifacts, legendaries, and Sagas are historic.)
 SVar:TrigDealDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 Oracle:Whenever Arbaaz Mir or another nontoken historic permanent you control enters, Arbaaz Mir deals 1 damage to each opponent and you gain 1 life. (Artifacts, legendaries, and Sagas are historic.)

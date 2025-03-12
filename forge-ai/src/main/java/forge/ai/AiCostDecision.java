@@ -47,6 +47,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostBehold cost) {
+        final String type = cost.getType();
+        CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
+        hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
+        return hand.isEmpty() ? null : PaymentDecision.card(getBestCreatureAI(hand));
+    }
+
+    @Override
     public PaymentDecision visit(CostChooseColor cost) {
         int c = cost.getAbilityAmount(ability);
         List<String> choices = player.getController().chooseColors("Color", ability, c, c,

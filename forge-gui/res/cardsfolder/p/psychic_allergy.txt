@@ -5,7 +5,7 @@ K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters, choose a color. | AILogic$ MostProminentInHumanDeck
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDamageOpp | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control.
 SVar:TrigDamageOpp:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
-SVar:X:Count$Valid Permanent.ActivePlayerCtrl+ChosenColor+nonToken
+SVar:X:Count$Valid Permanent.ActivePlayerCtrl+ChosenColor+!token
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your upkeep, destroy CARDNAME unless you sacrifice two Islands.
 SVar:TrigDestroy:DB$ Destroy | Defined$ Self | UnlessPayer$ You | UnlessCost$ Sac<2/Island>
 AI:RemoveDeck:Random

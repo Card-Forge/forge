@@ -1,0 +1,13 @@
+Name:Shiko, Paragon of the Way
+ManaCost:2 U R W
+Types:Legendary Creature Spirit Dragon
+PT:4/5
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When NICKNAME enters, exile target nonland card with mana value 3 or less from your graveyard. Copy it, then you may cast the copy without paying its mana cost. (A copy of a permanent spell becomes a token.)
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target nonland card with mana value 3 or less in your graveyard | ValidTgts$ Card.YouOwn+nonLand+cmcLE3 | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard|Mill|Sacrifice
+Oracle:Flying, vigilance\nWhen Shiko enters, exile target nonland card with mana value 3 or less from your graveyard. Copy it, then you may cast the copy without paying its mana cost. (A copy of a permanent spell becomes a token.)

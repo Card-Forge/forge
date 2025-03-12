@@ -1099,6 +1099,11 @@ public class ComputerUtil {
             }
         }
 
+        // if AI has no speed, play start your engines on Main1
+        if (ai.noSpeed() && cardState.hasKeyword(Keyword.START_YOUR_ENGINES)) {
+            return true;
+        }
+
         // cast Blitz in main 1 if the creature attacks
         if (sa.isBlitz() && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, card)) {
             return true;

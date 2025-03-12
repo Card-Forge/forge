@@ -7,7 +7,7 @@ K:Lifelink
 K:Ward:Discard<1/Card>
 T:Mode$ Attacks | ValidCard$ Creature.modified+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDoubleCounters | TriggerDescription$ Whenever a modified creature you control attacks, double the number of each kind of counter on it. Then for each nontoken permanent attached to it, create a token that's a copy of that permanent attached to that creature.
 SVar:TrigDoubleCounters:DB$ MultiplyCounter | Defined$ TriggeredAttackerLKICopy | SubAbility$ DBCopyPermanents
-SVar:DBCopyPermanents:DB$ CopyPermanent | Defined$ Valid Permanent.nonToken+AttachedTo TriggeredAttackerLKICopy | NumCopies$ 1 | AttachedTo$ TriggeredAttackerLKICopy
+SVar:DBCopyPermanents:DB$ CopyPermanent | Defined$ Valid Permanent.!token+AttachedTo TriggeredAttackerLKICopy | NumCopies$ 1 | AttachedTo$ TriggeredAttackerLKICopy
 DeckHints:Type$Equipment|Aura|Counters
 DeckHas:Ability$Token|LifeGain
 Oracle:Flying, lifelink\nWard—Discard a card.\nWhenever a modified creature you control attacks, double the number of each kind of counter on it. Then for each nontoken permanent attached to it, create a token that's a copy of that permanent attached to that creature.

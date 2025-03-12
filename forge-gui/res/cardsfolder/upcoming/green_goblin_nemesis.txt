@@ -1,0 +1,10 @@
+Name:Green Goblin, Nemesis
+ManaCost:2 B R
+Types:Legendary Creature Goblin Human Villain
+PT:3/3
+K:Flying
+T:Mode$ Discarded | ValidCard$ Card.nonLand+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you discard a nonland card, put a +1/+1 counter on target Goblin you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Goblin.YouCtrl | TgtPrompt$ Select target Goblin you control | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Discarded | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ When you discard a land card, create a tapped Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True
+Oracle:Flying\nWhenever you discard a nonland card, put a +1/+1 counter on target Goblin you control.\nWhen you discard a land card, create a tapped Treasure token.

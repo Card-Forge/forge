@@ -2,7 +2,6 @@ Name:Marina Vendrell
 ManaCost:W U B R G
 Types:Legendary Creature Human Warlock
 PT:3/5
-K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters, reveal the top seven cards of your library. Put all enchantment cards from among them into your hand and the rest on the bottom of your library in a random order.
 SVar:TrigDig:DB$ Dig | DigNum$ 7 | Reveal$ True | ChangeNum$ All | ChangeValid$ Enchantment | RestRandomOrder$ True
 A:AB$ UnlockDoor | Cost$ T | Mode$ LockOrUnlock | ValidTgts$ Room.YouCtrl | TgtPrompt$ Choose target Room you control | SorcerySpeed$ True | SpellDescription$ Lock or unlock a door of target Room you control. Activate only as a sorcery.

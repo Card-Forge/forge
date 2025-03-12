@@ -54,7 +54,7 @@
   </object>
   <object id="162" template="../../obj/enemy.tx" x="295.842" y="475.772">
    <properties>
-    <property name="enemy" value="Sand Guardian"/>
+    <property name="enemy" value="Sand Golem"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
@@ -85,7 +85,7 @@
   <object id="185" template="../../obj/manashards.tx" x="402.887" y="196.423"/>
   <object id="186" template="../../obj/manashards.tx" x="122.797" y="182.787"/>
   <object id="190" template="../../obj/waypoint.tx" x="317.342" y="262.605"/>
-  <object id="197" template="../../obj/door_up.tx" x="369.675" y="465.438" width="31" height="14.3333">
+  <object id="197" template="../../obj/door_up.tx" x="366.85" y="466.85" width="31" height="14.3333">
    <properties>
     <property name="direction" value="down"/>
     <property name="teleport" value="../common/maps/map/zedruu/zedruu_f1.tmx"/>

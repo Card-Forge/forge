@@ -15,13 +15,13 @@ ScryfallCode=PWCS
 20204 U Mystical Dispute @Ekaterina Burmak
 20205 R Fae of Wishes @Magali Villeneuve
 20206 M Elspeth, Sun's Nemesis @Livia Prima
-20211 M Basri Ket @Toshiaki Takayama
+20211 M Basri Ket @Takayama Toshiaki
 20212 U Seasoned Hallowblade @Keiji Hida
 20213 R Vito, Thorn of the Dusk Rose @Areku Nishiki
 20214 U Saw It Coming @Anato Finnstark
 20215 M Kaya the Inexorable @Jason A. Engle
 20216 R Faceless Haven @Pablo Mendoza
-20221 M Grand Master of Flowers @Toshiaki Takayama
+20221 M Grand Master of Flowers @Takayama Toshiaki
 20222 R Adult Gold Dragon @Kotakan
 20223 U Krydle of Baldur's Gate @Sansyu
 20224 M The Wandering Emperor @Takayuki Futami
@@ -34,3 +34,9 @@ ScryfallCode=PWCS
 20235 U Phyrexian Rager @Brock Grossman
 20241 M Realm-Scorcher Hellkite @Susumu Kuroi
 20242 R Ruby, Daring Tracker @M.Matsumoto
+20243 R Glimpse the Core @Susumu Kuroi
+20245 M Saheeli, the Sun's Brilliance @Ayuko
+20246 M Kaya, Spirits' Justice @Areku Nishiki
+20247 R Lightning Helix @Shiyu
+20248 R Aven Interrupter @TAPIOCA
+20249 M Jace Reawakened @Hozan Shinomaru

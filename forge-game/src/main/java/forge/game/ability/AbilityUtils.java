@@ -538,6 +538,8 @@ public class AbilityUtils {
             val = handlePaid(card.getEmerged(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Crewed")) {
             val = handlePaid(card.getCrewedByThisTurn(), calcX[1], card, ability);
+        } else if (calcX[0].startsWith("ChosenCard")) {
+            val = handlePaid(card.getChosenCards(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();
@@ -3702,6 +3704,10 @@ public class AbilityUtils {
                 }
             }
             return doXMath(amount, m, source, ctb);
+        }
+
+        if (value.equals("AttractionsVisitedThisTurn")) {
+            return doXMath(player.getAttractionsVisitedThisTurn(), m, source, ctb);
         }
 
         if (value.startsWith("PlaneswalkedToThisTurn")) {

@@ -71,3 +71,5 @@ ScryfallCode=PMEI
 20247 R Patchwork Banner @Sarah Finnigan
 20248 M Liliana of the Dark Realms @D. Alexander Gregory
 20251 R Shock @Randy Gallegos
+20252 R Ancestral Mask @Massimilano Frezzato
+20257 R Duress @Lawrence Snelly

@@ -2,5 +2,5 @@ Name:Black Hole
 ManaCost:3 B
 Types:Sorcery
 A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature and up to X other target creatures, where X is the number of Attractions you're visited this turn | TargetMin$ 1 | TargetMax$ X | SpellDescription$ Destroy target creature and up to X other target creatures, where X is the number of Attractions you've visited this turn.
-SVar:X:Count$Valid Attraction.VisitedThisTurn/Plus.1
+SVar:X:PlayerCountPropertyYou$AttractionsVisitedThisTurn/Plus.1
 Oracle:Destroy target creature and up to X other target creatures, where X is the number of Attractions you've visited this turn.

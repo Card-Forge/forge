@@ -5,8 +5,7 @@ PT:1/3
 K:Extort
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ OppRevealX | TriggerDescription$ When CARDNAME enters, pay any amount of life. Target opponent reveals that many cards from their hand. You choose one of them and exile it.
 SVar:OppRevealX:AB$ Reveal | Cost$ PayLife<X> | ValidTgts$ Opponent | NumCards$ X | RememberRevealed$ True | SubAbility$ PickOne
-SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose card to exile | Choices$ Card.IsRemembered | ChoiceZone$ Hand | SubAbility$ MoveChosen
-SVar:MoveChosen:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:PickOne:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Chooser$ You | DefinedPlayer$ Targeted | ChangeType$ Card.IsRemembered | AlreadyRevealed$ True | Mandatory$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nWhen Vizkopa Confessor enters, pay any amount of life. Target opponent reveals that many cards from their hand. You choose one of them and exile it.
