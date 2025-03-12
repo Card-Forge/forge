@@ -2232,7 +2232,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         numManaConversion = l;
     }
     public final boolean hasManaConversion() {
-        return numManaConversion < keywords.getAmount("You may spend mana as though"
+        return numManaConversion < getAmountOfKeyword("You may spend mana as though"
                 + " it were mana of any type to cast a spell this turn.");
     }
     public final void incNumManaConversion() {
@@ -2545,6 +2545,13 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final int getAmountOfKeyword(final String k) {
         return keywords.getAmount(k);
+    }
+
+    public boolean isTurnOrderReversed() {
+        return StaticAbilityTurnPhaseReversed.isTurnReversed(this);
+    }
+    public boolean isPhasesReversed() {
+        return StaticAbilityTurnPhaseReversed.isPhaseReversed(this);
     }
 
     public void onCleanupPhase() {
