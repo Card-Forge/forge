@@ -4,15 +4,11 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.zone.ZoneType;
 
-public class StaticAbilityAssignCombatDamageAsUnblocked {
+public class StaticAbilityBlockTapped {
 
-    static String MODE = "AssignCombatDamageAsUnblocked";
+    static String MODE = "BlockTapped";
 
-    public static boolean assignCombatDamageAsUnblocked(final Card card) {
-        return assignCombatDamageAsUnblocked(card, true);
-    }
-
-    public static boolean assignCombatDamageAsUnblocked(final Card card, final boolean optional)  {
+    public static boolean canBlockTapped(final Card card)  {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
@@ -20,11 +16,7 @@ public class StaticAbilityAssignCombatDamageAsUnblocked {
                     continue;
                 }
 
-                if (stAb.hasParam("Optional") != optional) {
-                    continue;
-                }
-
-                if (applyAssignCombatDamageAsUnblocked(stAb, card)) {
+                if (applyBlockTapped(stAb, card)) {
                     return true;
                 }
             }
@@ -32,10 +24,12 @@ public class StaticAbilityAssignCombatDamageAsUnblocked {
         return false;
     }
 
-    private static boolean applyAssignCombatDamageAsUnblocked(final StaticAbility stAb, final Card card) {
+
+    private static boolean applyBlockTapped(final StaticAbility stAb, final Card card) {
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
         return true;
     }
+
 }

@@ -33,6 +33,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityBlockRestrict;
+import forge.game.staticability.StaticAbilityBlockTapped;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
@@ -480,7 +481,7 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canBlock(final Card blocker, final boolean nextTurn) {
-        if (blocker == null) {
+        if (blocker == null || !blocker.isCreature()) {
             return false;
         }
 
@@ -488,12 +489,15 @@ public class CombatUtil {
             return false;
         }
 
-        if (!nextTurn && blocker.isTapped() && !blocker.hasKeyword("CARDNAME can block as though it were untapped.")) {
+        if (!nextTurn && blocker.isPhasedOut()) {
             return false;
         }
 
-        if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block.")
-                || blocker.isPhasedOut()) {
+        if (!nextTurn && blocker.isTapped() && !StaticAbilityBlockTapped.canBlockTapped(blocker)) {
+            return false;
+        }
+
+        if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block.")) {
             return false;
         }
 
