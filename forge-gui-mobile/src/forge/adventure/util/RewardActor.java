@@ -38,11 +38,9 @@ import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
-import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
-import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.sound.SoundEffectType;
@@ -54,8 +52,6 @@ import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import static forge.localinstance.properties.ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE;

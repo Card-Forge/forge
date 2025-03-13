@@ -7,9 +7,7 @@ import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.CardEdition;
 import forge.deck.Deck;
-import forge.item.BoosterPack;
 import forge.item.PaperCard;
-import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -19,7 +17,6 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.function.Predicate;
 
-import static forge.adventure.data.AdventureEventData.selectSetPool;
 
 /**
  * Data class that will be used to read Json configuration files

@@ -15,7 +15,6 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 
-import java.awt.print.Paper;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
