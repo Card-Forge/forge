@@ -83,8 +83,8 @@ public abstract class SpellAbilityEffect {
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
                 if (params.containsKey("SpellDescription")) {
                     String rawSDesc = params.get("SpellDescription");
-                    if (rawSDesc.contains(",,,,,,")) rawSDesc = rawSDesc.replaceAll(",,,,,,", " ");
-                    if (rawSDesc.contains(",,,")) rawSDesc = rawSDesc.replaceAll(",,,", " ");
+                    if (rawSDesc.contains(",,,,,,")) rawSDesc = rawSDesc.replace(",,,,,,", " ");
+                    if (rawSDesc.contains(",,,")) rawSDesc = rawSDesc.replace(",,,", " ");
                     String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc, sa.getHostCard());
 
                     //trim reminder text from StackDesc

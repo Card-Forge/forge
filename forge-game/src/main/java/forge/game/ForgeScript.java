@@ -122,30 +122,10 @@ public class ForgeScript {
                 }
             }
             return found;
-        } else if (property.equals("hasActivatedAbilityWithTapCost")) {
+        } else if (property.startsWith("hasAbility")) {
+            String valid = property.substring(11);
             for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isActivatedAbility() && sa.getPayCosts().hasTapCost()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.equals("hasActivatedAbilityWithExhaust")) {
-            for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isActivatedAbility() && sa.hasParam("Exhaust")) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.equals("hasActivatedAbility")) {
-            for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isActivatedAbility()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (property.equals("hasOtherActivatedAbility")) {
-            for (final SpellAbility sa : cardState.getSpellAbilities()) {
-                if (sa.isActivatedAbility() && !sa.equals(spellAbility)) {
+                if (sa.isValid(valid, sourceController, source, spellAbility)) {
                     return true;
                 }
             }
@@ -243,6 +223,8 @@ public class ForgeScript {
             return sa.isTurnFaceUp();
         } else if (property.equals("isCastFaceDown")) {
             return sa.isCastFaceDown();
+        } else if (property.equals("Unearth")) {
+            return sa.isKeyword(Keyword.UNEARTH);
         } else if (property.equals("Modular")) {
             return sa.isKeyword(Keyword.MODULAR);
         } else if (property.equals("Equip")) {

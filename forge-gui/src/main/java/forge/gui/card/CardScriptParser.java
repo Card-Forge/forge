@@ -481,8 +481,7 @@ public final class CardScriptParser {
             "kicked", "kicked1", "kicked2", "evoked",
             "HasDevoured", "IsMonstrous",
             "CostsPhyrexianMana", "IsRemembered", "IsNotRemembered",
-            "IsImprinted", "IsNotImprinted", "hasActivatedAbilityWithTapCost",
-            "hasActivatedAbility", "hasManaAbility",
+            "IsImprinted", "IsNotImprinted", "hasManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
             "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
             "IsRenowned");
@@ -498,7 +497,7 @@ public final class CardScriptParser {
                     "greatestPowerControlledBy", "greatestCMCControlledBy",
                     "power", "toughness", "cmc", "totalPT", "counters", "non",
                     "RememberMap", "wasCastFrom", "set",
-                    "inZone", "HasSVar");
+                    "inZone", "HasSVar", "hasAbility");
 
     private static boolean isValidExclusive(String valid) {
         if (valid.charAt(0) == '!') {
