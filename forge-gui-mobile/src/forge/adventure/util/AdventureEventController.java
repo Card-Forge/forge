@@ -6,6 +6,7 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.deck.Deck;
+import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.item.generation.BoosterGenerator;
@@ -136,6 +137,17 @@ public class AdventureEventController implements Serializable {
         String editionName = FModel.getMagicDb().getEditions().get(setCode).getName();
         output.setName(editionName + " Booster");
         output.setComment(setCode);
+        return output;
+    }
+    public Deck generateBoosterByColor(String color)
+    {
+        System.out.println(color);
+        List<PaperCard> cards = BoosterPack.fromColor(color).getCards();
+        Deck output = new Deck();
+        output.getMain().add(cards);
+        String editionName = color + " Booster Pack";
+        output.setName(editionName);
+        output.setComment(color);
         return output;
     }
 

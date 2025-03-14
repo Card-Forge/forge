@@ -365,15 +365,15 @@ public class AdventureEventData implements Serializable {
                 for (PrintSheet ps : c.getPrintSheetsBySection()) {
                     //exclude block with sets containing P9 cards..
                     if (ps.containsCardNamed("Black Lotus", 1)
-                            || ps.containsCardNamed("Mox Emerald", 1)
-                            || ps.containsCardNamed("Mox Pearl", 1)
-                            || ps.containsCardNamed("Mox Ruby", 1)
-                            || ps.containsCardNamed("Mox Sapphire", 1)
-                            || ps.containsCardNamed("Mox Jet", 1)
-                            || ps.containsCardNamed("Ancestral Recall", 1)
-                            || ps.containsCardNamed("Timetwister", 1)
-                            || ps.containsCardNamed("Time Walk", 1)) {
-                        isOkay = false;
+                                || ps.containsCardNamed("Mox Emerald", 1)
+                                || ps.containsCardNamed("Mox Pearl", 1)
+                                || ps.containsCardNamed("Mox Ruby", 1)
+                                || ps.containsCardNamed("Mox Sapphire", 1)
+                                || ps.containsCardNamed("Mox Jet", 1)
+                                || ps.containsCardNamed("Ancestral Recall", 1)
+                                || ps.containsCardNamed("Timetwister", 1)
+                                || ps.containsCardNamed("Time Walk", 1)) {
+                            isOkay = false;
                         break;
                     }
                 }
