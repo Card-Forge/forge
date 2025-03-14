@@ -14,10 +14,12 @@ ScryfallCode=FIC
 186 M Terra, Herald of Hope @Marta Nael
 187 M Tidus, Yuna's Guardian @Nijihayashi
 191 M Y'shtola, Night's Blessed @Magali Villeneuve
+201 M Celes, Rune Knight @ikeda_cpt
 202 M Cloud, Ex-SOLDIER @S. Makimura
 204 M Terra, Herald of Hope @Misei Ito
 205 M Tidus, Yuna's Guardian @Ryanroro
 215 M Y'shtola, Night's Blessed @Nakamura8
+220 M Celes, Rune Knight @Néstor Ossandón Leal
 221 M Cloud, Ex-SOLDIER @Justyna Dura
 223 M Terra, Herald of Hope @Marta Nael
 224 M Tidus, Yuna's Guardian @Nijihayashi
