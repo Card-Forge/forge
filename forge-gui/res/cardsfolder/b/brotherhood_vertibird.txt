@@ -1,7 +1,7 @@
 Name:Brotherhood Vertibird
 ManaCost:3
 Types:Artifact Vehicle
-PT:*/2
+PT:*/4
 K:Flying
 S:Mode$ Continuous | SetPower$ X | CharacteristicDefining$ True | Description$ CARDNAME's power is equal to the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl
