@@ -168,9 +168,6 @@ public class Untap extends Phase {
 
         cardsWithKW.addAll(cardsWithKW2);
         for (final Card cardWithKW : cardsWithKW) {
-            if (!cardWithKW.canUntap(player)) {
-                continue;
-            }
             if (cardWithKW.untap(player)) {
                 untapMap.computeIfAbsent(cardWithKW.getController(),
                         i -> new CardCollection()).add(cardWithKW);
