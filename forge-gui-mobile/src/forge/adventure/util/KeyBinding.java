@@ -7,10 +7,10 @@ import com.badlogic.gdx.controllers.Controllers;
 import forge.gui.GuiBase;
 
 public enum KeyBinding {
-    Left("Left", Input.Keys.LEFT,Input.Keys.DPAD_LEFT),
-    Up("Up", Input.Keys.UP,Input.Keys.DPAD_UP),
-    Right("Right", Input.Keys.RIGHT,Input.Keys.DPAD_RIGHT),
-    Down("Down", Input.Keys.DOWN,Input.Keys.DPAD_DOWN),
+    Left("Left", Input.Keys.LEFT,Input.Keys.DPAD_LEFT, Input.Keys.A),
+    Up("Up", Input.Keys.UP,Input.Keys.DPAD_UP, Input.Keys.W),
+    Right("Right", Input.Keys.RIGHT,Input.Keys.DPAD_RIGHT, Input.Keys.D),
+    Down("Down", Input.Keys.DOWN,Input.Keys.DPAD_DOWN, Input.Keys.S),
     Menu("Menu", Input.Keys.ESCAPE,Input.Keys.BUTTON_START),
     Inventory("Inventory", Input.Keys.I,Input.Keys.BUTTON_X),
     Status("Status", Input.Keys.Q,Input.Keys.BUTTON_Y),
