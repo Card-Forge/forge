@@ -1,0 +1,9 @@
+Name:Surge of Acclaim
+ManaCost:1 U
+Types:Instant
+K:Jump-start
+A:SP$ Charm | CharmNum$ X | Choices$ DBSeekEngines,DBSeekNonLand | AdditionalDescription$ . If you have max speed, choose both instead.
+SVar:DBSeekEngines:DB$ Seek | Type$ Card.withStart your engines | SpellDescription$ Seek a card with start your engines!
+SVar:DBSeekNonLand:DB$ Seek | Type$ Card.nonLand | SpellDescription$ Seek a nonland card.
+SVar:X:Count$MaxSpeed.2.1
+Oracle:Choose one. If you have max speed, choose both instead.\n• Seek a card with start your engines!\n• Seek a nonland card.\nJump-start

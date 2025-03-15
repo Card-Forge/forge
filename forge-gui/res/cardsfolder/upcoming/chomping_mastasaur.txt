@@ -1,0 +1,13 @@
+Name:Chomping Mastasaur
+ManaCost:4 R R
+Types:Creature Dinosaur
+PT:6/6
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever this creature enters or attacks, discard a card, then seek a nonland card. When you discard a card this way, this creature deals damage equal to the discarded card's mana value to any target.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever this creature enters or attacks, discard a card, then seek a nonland card. When you discard a card this way, this creature deals damage equal to the discarded card's mana value to any target.
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBSeek
+SVar:DBSeek:DB$ Seek | Type$ Card.nonLand | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ RememberedLKI | ConditionPresent$ Card | Execute$ TrigDamage | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup | TriggerDescription$ When you discard a card this way, this creature deals damage equal to the discarded card's mana value to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerRemembered$CardManaCost
+Oracle:Whenever this creature enters or attacks, discard a card, then seek a nonland card. When you discard a card this way, this creature deals damage equal to the discarded card's mana value to any target.

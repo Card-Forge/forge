@@ -1,0 +1,14 @@
+Name:Smog Smasher
+ManaCost:4 R
+Types:Creature Mutant Berserker
+PT:4/4
+K:Menace
+K:Start your engines
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigConjure | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, conjure a duplicate of target nontoken creature into exile.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | TgtPrompt$ Select another target nontoken creature | DefinedName$ Targeted | ValidTgts$ Creature.!token | Zone$ Exile | ImprintMade$ True
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddTrigger$ PhaseTrig | Description$ Max speed — At the beginning of combat on your turn, put all cards exiled with this creature onto the battlefield. They gain haste. Sacrifice them at the beginning of the next end step.
+SVar:PhaseTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ Max speed — At the beginning of combat on your turn, put all cards exiled with this creature onto the battlefield. They gain haste. Sacrifice them at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsImprinted | Origin$ Exile | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | AtEOT$ Sacrifice | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
+Oracle:Menace\nStart your engines!\nWhenever one or more creatures you control deal combat damage to a player, conjure a duplicate of target nontoken creature into exile.\nMax speed — At the beginning of combat on your turn, put all cards exiled with this creature onto the battlefield. They gain haste. Sacrifice them at the beginning of the next end step.

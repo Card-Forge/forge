@@ -1,0 +1,9 @@
+Name:Deviant Skytech
+ManaCost:2 U
+Types:Enchantment
+K:Start your engines
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create two 1/1 colorless Thopter artifact creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_thopter_flying
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABToken | Description$ Max speed — {1}{U}, Sacrifice this enchantment: Create two 1/1 colorless Thopter artifact creature tokens with flying.
+SVar:ABToken:AB$ Token | Secondary$ True | PrecostDesc$ Max speed — | Cost$ 1 U Sac<1/CARDNAME/this enchantment> | TokenAmount$ 2 | TokenScript$ c_1_1_a_thopter_flying | SpellDescription$ Create two 1/1 colorless Thopter artifact creature tokens with flying.
+Oracle:Start your engines!\nWhen this enchantment enters, create two 1/1 colorless Thopter artifact creature tokens with flying.\nMax speed — {1}{U}, Sacrifice this enchantment: Create two 1/1 colorless Thopter artifact creature tokens with flying.
