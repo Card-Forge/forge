@@ -141,7 +141,7 @@ public class AdventureEventController implements Serializable {
     }
     public Deck generateBoosterByColor(String color)
     {
-        System.out.println(color);
+
         List<PaperCard> cards = BoosterPack.fromColor(color).getCards();
         Deck output = new Deck();
         output.getMain().add(cards);
