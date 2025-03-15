@@ -2735,7 +2735,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (!inp.hasCancelled()) {
                     CardCollection untapped = new CardCollection();
                     for (final Card c : inp.getSelected()) {
-                        if (c.untap(true)) untapped.add(c);
+                        if (c.untap()) untapped.add(c);
                     }
                     if (!untapped.isEmpty()) {
                         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

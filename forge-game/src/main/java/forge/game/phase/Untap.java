@@ -98,7 +98,7 @@ public class Untap extends Phase {
         //exerted need current player turn
         final Player playerTurn = c.getGame().getPhaseHandler().getPlayerTurn();
 
-        return !c.isExertedBy(playerTurn);
+        return c.canUntap(playerTurn);
     }
 
     public static final Predicate<Card> CANUNTAP = Untap::canUntap;
@@ -152,7 +152,7 @@ public class Untap extends Phase {
         });
 
         for (final Card c : list) {
-            if (optionalUntap(c)) {
+            if (optionalUntap(c, player)) {
                 untapMap.computeIfAbsent(player, i -> new CardCollection()).add(c);
             }
         }
@@ -168,10 +168,10 @@ public class Untap extends Phase {
 
         cardsWithKW.addAll(cardsWithKW2);
         for (final Card cardWithKW : cardsWithKW) {
-            if (cardWithKW.isExertedBy(player)) {
+            if (!cardWithKW.canUntap(player)) {
                 continue;
             }
-            if (cardWithKW.untap(true)) {
+            if (cardWithKW.untap(player)) {
                 untapMap.computeIfAbsent(cardWithKW.getController(),
                         i -> new CardCollection()).add(cardWithKW);
             }
@@ -203,7 +203,7 @@ public class Untap extends Phase {
             }
         }
         for (Card c : restrictUntapped) {
-            if (optionalUntap(c)) {
+            if (optionalUntap(c, player)) {
                 untapMap.computeIfAbsent(player, i -> new CardCollection()).add(c);
             }
         }
@@ -228,7 +228,7 @@ public class Untap extends Phase {
         game.getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
     }
 
-    private static boolean optionalUntap(final Card c) {
+    private static boolean optionalUntap(final Card c, Player phase) {
         boolean untap = true;
 
         if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && c.isTapped()) {
@@ -247,7 +247,7 @@ public class Untap extends Phase {
             untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt.toString(), BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
         }
         if (untap) {
-            if (!c.untap(true)) untap = false;
+            if (!c.untap(phase)) untap = false;
         }
         return untap;
     }

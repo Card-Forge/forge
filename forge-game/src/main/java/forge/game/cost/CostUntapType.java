@@ -94,7 +94,7 @@ public class CostUntapType extends CostPartWithList {
 
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        targetCard.untap(true);
+        targetCard.untap();
         return targetCard;
     }
 
@@ -107,7 +107,7 @@ public class CostUntapType extends CostPartWithList {
     protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
         CardCollection untapped = new CardCollection();
         for (Card c : targetCards) {
-            if (c.untap(true)) untapped.add(c);
+            if (c.untap()) untapped.add(c);
         }
         if (!untapped.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
