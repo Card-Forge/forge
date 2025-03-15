@@ -216,6 +216,11 @@ public class DestroyAi extends SpellAbilityAi {
                 CardCollection originalList = new CardCollection(list);
                 boolean mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(ai, list, sa);
 
+                // Filter out cards TargetsForEachPlayer
+                if (sa.hasParam("TargetsForEachPlayer")) {
+                    list = CardLists.excludeTargetablesWithSameControllerAsTargets(list, sa);
+                }
+
                 if (list.isEmpty()) {
                     if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                         sa.resetTargets();

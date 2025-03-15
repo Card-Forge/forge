@@ -542,6 +542,11 @@ public class PumpAi extends PumpAiBase {
             Card t = null;
             // boolean goodt = false;
 
+            // Filter out cards TargetsForEachPlayer
+            if (sa.hasParam("TargetsForEachPlayer")) {
+                list = CardLists.excludeTargetablesWithSameControllerAsTargets(list, sa);
+            }
+
             if (list.isEmpty()) {
                 if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                     if (mandatory || ComputerUtil.activateForCost(sa, ai)) {

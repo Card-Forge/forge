@@ -31,6 +31,7 @@ import forge.util.PredicateString;
 import forge.util.collect.FCollectionView;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 
@@ -48,6 +49,9 @@ public final class CardPredicates {
         return c -> c.getController().equals(p);
     }
     public static Predicate<Card> isControlledByAnyOf(final FCollectionView<Player> pList) {
+        return c -> pList.contains(c.getController());
+    }
+    public static Predicate<Card> isControlledBy(final List<Player> pList) {
         return c -> pList.contains(c.getController());
     }
     public static Predicate<Card> isOwner(final Player p) {
