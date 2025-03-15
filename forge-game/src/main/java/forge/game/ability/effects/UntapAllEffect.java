@@ -44,7 +44,7 @@ public class UntapAllEffect extends SpellAbilityEffect {
             if (sa.hasParam("ControllerUntaps")) {
                 untapper = c.getController();
             }
-            if (c.untap(true))  {
+            if (c.untap())  {
                 untapMap.computeIfAbsent(untapper, i -> new CardCollection()).add(c);
                 if (sa.hasParam("RememberUntapped")) card.addRemembered(c);
 

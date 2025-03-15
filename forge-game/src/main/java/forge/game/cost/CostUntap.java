@@ -87,7 +87,7 @@ public class CostUntap extends CostPart {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         final Card c = ability.getHostCard();
-        if (c.untap(true)) {
+        if (c.untap()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             final Map<Player, CardCollection> map = Maps.newHashMap();
             map.put(ai, new CardCollection(c));
