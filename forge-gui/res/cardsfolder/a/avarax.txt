@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Beast
 PT:3/3
 K:Haste
-A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, you may search your library for a card named Avarax, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedAvarax | ShuffleNonMandatory$ True
 DeckHints:Name$Avarax
