@@ -66,7 +66,7 @@ public class UntapEffect extends SpellAbilityEffect {
                     if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
                         continue;
                     }
-                    if (gameCard.untap(true)) untapped.add(gameCard);
+                    if (gameCard.untap()) untapped.add(gameCard);
                 }
                 if (etb) {
                     // do not fire triggers
@@ -114,7 +114,7 @@ public class UntapEffect extends SpellAbilityEffect {
             final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory, null);
             if (selected != null) {
                 for (final Card c : selected) {
-                    if (c.untap(true)) untapped.add(c);
+                    if (c.untap()) untapped.add(c);
                 }
             }
             if (!untapped.isEmpty()) {
