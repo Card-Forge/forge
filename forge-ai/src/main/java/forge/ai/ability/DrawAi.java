@@ -515,12 +515,17 @@ public class DrawAi extends SpellAbilityAi {
                 return false;
             }
 
-            if ((computerHandSize + numCards > computerMaxHandSize)
-                    && game.getPhaseHandler().isPlayerTurn(ai)
-                    && !sa.isTrigger()
-                    && !assumeSafeX) {
+            if ((computerHandSize + numCards > computerMaxHandSize)) {
                 // Don't draw too many cards and then risk discarding cards at EOT
-                if (!drawback) {
+                 if (game.getPhaseHandler().isPlayerTurn(ai)
+                        && !sa.isTrigger()
+                        && !assumeSafeX
+                        && !drawback) {
+                     return false;
+                 }
+
+                if (computerHandSize > computerMaxHandSize) {
+                    // Don't make my hand size get too big if already at max
                     return false;
                 }
             }
