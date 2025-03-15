@@ -4,6 +4,6 @@ Types:Creature Vampire Warrior
 PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, CARDNAME gets +2/+0 and gains lifelink until end of turn.
 T:Mode$ FullyUnlock | ValidCard$ Card.Room | ValidPlayer$ You | Secondary$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, CARDNAME gets +2/+0 and gains lifelink until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | KW$ Lifelink
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | KW$ Lifelink
 DeckNeeds:Type$Enchantment
 Oracle:Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, Dashing Bloodsucker gets +2/+0 and gains lifelink until end of turn.
