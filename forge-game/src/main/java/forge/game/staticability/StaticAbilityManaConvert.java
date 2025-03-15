@@ -39,6 +39,15 @@ public class StaticAbilityManaConvert {
         if (!stAb.matchesValidParam("ValidSA", sa)) {
             return false;
         }
+
+        if (stAb.hasParam("Optional")) {
+            stAb.getHostCard().clearRemembered();
+            if (!p.getController().confirmStaticApplication(card, null, "Do you want to spend mana as though it were mana of any type to pay the cost?", null)) {
+                return false;
+            }
+            stAb.getHostCard().addRemembered(sa.getHostCard());
+        }
+
         return true;
     }
 }

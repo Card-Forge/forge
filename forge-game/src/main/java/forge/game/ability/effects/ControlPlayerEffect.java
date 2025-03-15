@@ -26,10 +26,8 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
     @SuppressWarnings("serial")
     @Override
     public void resolve(SpellAbility sa) {
-        final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
-        final Player controller = sa.hasParam("Controller") ? AbilityUtils.getDefinedPlayers(
-                sa.getHostCard(), sa.getParam("Controller"), sa).get(0) : activator;
+        final Player controller = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Controller"), sa).get(0);
+        final Game game = controller.getGame();
 
         for (final Player pTarget: getTargetPlayers(sa)) {
             // before next untap gain control

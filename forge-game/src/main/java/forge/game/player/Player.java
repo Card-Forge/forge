@@ -181,7 +181,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection gainedOwnership = new CardCollection();
 
     private ManaPool manaPool = new ManaPool(this);
-    private int numManaConversion = 0;
     // The SA currently being paid for
     private Deque<SpellAbility> paidForStack = new ArrayDeque<>();
 
@@ -2228,20 +2227,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         numLibrarySearchedOwn++;
     }
 
-    public final void setNumManaConversion(final int l) {
-        numManaConversion = l;
-    }
-    public final boolean hasManaConversion() {
-        return numManaConversion < getAmountOfKeyword("You may spend mana as though"
-                + " it were mana of any type to cast a spell this turn.");
-    }
-    public final void incNumManaConversion() {
-        numManaConversion++;
-    }
-    public final void decNumManaConversion() {
-        numManaConversion--;
-    }
-
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         final String[] incR = restriction.split("\\.", 2);
@@ -2587,7 +2572,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         lifeGainedByTeamThisTurn = 0;
         setLifeStartedThisTurnWith(getLife());
         setLibrarySearched(0);
-        setNumManaConversion(0);
 
         setCommitedCrimeThisTurn(0);
         diceRollsThisTurn = Lists.newArrayList();
