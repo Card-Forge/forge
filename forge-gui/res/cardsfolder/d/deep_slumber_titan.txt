@@ -8,4 +8,4 @@ R:Event$ Untap | ValidCard$ Card.Self | UntapStep$ You | Layer$ CantHappen | Des
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever this creature is dealt damage, untap it.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random
-Oracle:This creature enters tapped.\nDeep-Slumber Titan doesn't untap during your untap step.\nWhenever this creature is dealt damage, untap it.
+Oracle:This creature enters tapped.\nThis creature doesn't untap during your untap step.\nWhenever this creature is dealt damage, untap it.
