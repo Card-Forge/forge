@@ -4916,13 +4916,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (phase != null && isExertedBy(phase)) {
             return false;
         }
-
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        if (phase != null) {
-            repParams.put(AbilityKey.Phase, phase);
-        }
-
-        return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Untap, repParams);
+        return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Untap, AbilityKey.mapFromAffected(this));
     }
 
     public final boolean untap() {
@@ -4934,12 +4928,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
 
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        if (phase != null) {
-            repParams.put(AbilityKey.Phase, phase);
-        }
-
-        if (getGame().getReplacementHandler().run(ReplacementType.Untap, repParams) != ReplacementResult.NotReplaced) {
+        if (getGame().getReplacementHandler().run(ReplacementType.Untap, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return false;
         }
 

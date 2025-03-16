@@ -47,9 +47,6 @@ public class ReplaceUntap extends ReplacementEffect {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }
-        if (!matchesValidParam("UntapStep", runParams.get(AbilityKey.Phase))) {
-            return false;
-        }
         return true;
     }
 
