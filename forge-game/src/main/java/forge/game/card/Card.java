@@ -4918,8 +4918,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         if (phase != null &&
-                (hasKeyword("CARDNAME doesn't untap during your untap step.")
-                        || hasKeyword("This card doesn't untap during your next untap step.")
+                (hasKeyword("This card doesn't untap during your next untap step.")
                         || hasKeyword("This card doesn't untap during your next two untap steps."))) {
             return false;
         }
