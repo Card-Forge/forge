@@ -38,6 +38,7 @@ import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.keyword.*;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.*;
@@ -4911,7 +4912,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public final boolean canUntap(Player phase) {
+    public final boolean canUntap(Player phase, boolean predict) {
         if (!tapped) { return false; }
         if (phase != null && isExertedBy(phase)) {
             return false;
@@ -4922,7 +4923,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || hasKeyword("This card doesn't untap during your next two untap steps."))) {
             return false;
         }
-        return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Untap, AbilityKey.mapFromAffected(this));
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(this);
+        if (predict) {
+            runParams.put(AbilityKey.PlayerTurn, phase);
+            runParams.put(AbilityKey.Phase, PhaseType.UNTAP);
+        }
+        return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Untap, runParams);
     }
 
     public final boolean untap() {

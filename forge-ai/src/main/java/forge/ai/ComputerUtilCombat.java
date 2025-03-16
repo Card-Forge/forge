@@ -31,6 +31,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.Keyword;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
@@ -100,7 +101,7 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        if (attacker.getGame().getReplacementHandler().wouldPhaseBeSkipped(attacker.getController(), "BeginCombat")) {
+        if (attacker.getGame().getReplacementHandler().wouldPhaseBeSkipped(attacker.getController(), PhaseType.COMBAT_BEGIN)) {
             return false;
         }
 
@@ -117,7 +118,7 @@ public class ComputerUtilCombat {
         //        || (attacker.hasKeyword(Keyword.FADING) && attacker.getCounters(CounterEnumType.FADE) == 0)
         //        || attacker.hasSVar("EndOfTurnLeavePlay"));
         // The creature won't untap next turn
-        return !attacker.isTapped() || (attacker.getCounters(CounterEnumType.STUN) == 0 && attacker.canUntap(attacker.getController()));
+        return !attacker.isTapped() || (attacker.getCounters(CounterEnumType.STUN) == 0 && attacker.canUntap(attacker.getController(), true));
     }
 
     /**

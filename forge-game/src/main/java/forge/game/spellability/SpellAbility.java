@@ -2355,7 +2355,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (!costPart.isRenewable()) {
                 score += 3;
             }
-            if (costPart instanceof CostTap && !getHostCard().canUntap(getActivatingPlayer())) {
+            if (costPart instanceof CostTap && !getHostCard().canUntap(getActivatingPlayer(), true)) {
                 score += 10;
             }
             if (costPart instanceof CostSacrifice && !costPart.payCostFromSource()) {

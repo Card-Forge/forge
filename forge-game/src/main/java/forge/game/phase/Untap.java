@@ -115,7 +115,7 @@ public class Untap extends Phase {
             }
         }
 
-        untapList = CardLists.filter(untapList,  c -> c.canUntap(active));
+        untapList = CardLists.filter(untapList,  c -> c.canUntap(active, false));
 
         final String[] restrict = restrictUntap.keySet().toArray(new String[0]);
         final CardCollection restrictList = CardLists.getValidCards(untapList, restrict, active, null, null);

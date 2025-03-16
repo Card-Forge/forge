@@ -21,6 +21,8 @@ import java.util.*;
 
 import com.google.common.base.MoreObjects;
 import forge.game.card.*;
+import forge.game.phase.PhaseType;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -125,7 +127,7 @@ public class ReplacementHandler {
                             && replacementEffect.modeCheck(event, runParams)
                             && !possibleReplacers.contains(replacementEffect)
                             && replacementEffect.zonesCheck(cardZone)
-                            && replacementEffect.requirementsCheck(game)
+                            && replacementEffect.requirementsCheck(game, runParams)
                             && replacementEffect.canReplace(runParams)) {
                         possibleReplacers.add(replacementEffect);
                     }
@@ -852,8 +854,9 @@ public class ReplacementHandler {
     /**
      * Helper function to check if a phase would be skipped for AI.
      */
-    public boolean wouldPhaseBeSkipped(final Player player, final String phase) {
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
+    public boolean wouldPhaseBeSkipped(final Player player, final PhaseType phase) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+        repParams.put(AbilityKey.PlayerTurn, player);
         repParams.put(AbilityKey.Phase, phase);
         List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
         if (list.isEmpty()) {

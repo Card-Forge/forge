@@ -136,7 +136,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return CombatUtil.canBlockAtLeastOne(card, attackers);
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
             return !ph.getPhase().isBefore(PhaseType.MAIN2) && !card.isUntapped() && ph.isPlayerTurn(ai)
-                    && card.canUntap(card.getController());
+                    && card.canUntap(card.getController(), true);
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")
                 || keyword.endsWith("Prevent all damage that would be dealt by CARDNAME.")) {
             if (ph.isPlayerTurn(ai) && (!(CombatUtil.canBlock(card) || combat != null && combat.isBlocking(card))

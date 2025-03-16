@@ -187,7 +187,7 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Replacement effects
             final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(playerTurn);
-            repRunParams.put(AbilityKey.Phase, phase.nameForScripts);
+            repRunParams.put(AbilityKey.Phase, phase);
             ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.BeginPhase, repRunParams);
             if (repres != ReplacementResult.NotReplaced) {
                 // Currently there is no effect to skip entire beginning phase
@@ -432,7 +432,7 @@ public class PhaseHandler implements java.io.Serializable {
         if (!skipped) {
             // Run triggers if phase isn't being skipped
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
-            runParams.put(AbilityKey.Phase, phase.nameForScripts);
+            //runParams.put(AbilityKey.Phase, phase.nameForScripts);
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
         }
 

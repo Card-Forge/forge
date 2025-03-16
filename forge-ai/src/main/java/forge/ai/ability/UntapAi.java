@@ -337,7 +337,7 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         // See if there's anything to untap that is tapped and that doesn't untap during the next untap step by itself
-        CardCollection noAutoUntap = CardLists.filter(untapList, c -> !c.canUntap(c.getController()));
+        CardCollection noAutoUntap = CardLists.filter(untapList, c -> !c.canUntap(c.getController(), true));
         if (!noAutoUntap.isEmpty()) {
             return ComputerUtilCard.getBestAI(noAutoUntap);
         }
