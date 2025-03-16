@@ -4911,8 +4911,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public final boolean untap(boolean untapAnimation) {
+    public final boolean canUntap(Player phase) {
         if (!tapped) { return false; }
+        if (phase != null && isExertedBy(phase)) {
+            return false;
+        }
+        return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Untap, AbilityKey.mapFromAffected(this));
+    }
+
+    public final boolean untap() {
+        return untap(null);
+    }
+    public final boolean untap(Player phase) {
+        if (!tapped) { return false; }
+        if (phase != null && isExertedBy(phase)) {
+            return false;
+        }
 
         if (getGame().getReplacementHandler().run(ReplacementType.Untap, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return false;
@@ -4922,7 +4936,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         runUntapCommands();
         setTapped(false);
-        view.updateNeedsUntapAnimation(untapAnimation);
+        view.updateNeedsUntapAnimation(true);
         getGame().fireEvent(new GameEventCardTapped(this, false));
         return true;
     }
@@ -6563,7 +6577,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public void removeExertedBy(final Player player) {
         exertedByPlayer.remove(player);
-        view.updateExertedThisTurn(this, getExertedThisTurn() > 0);
+        // removeExertedBy is called on Untap phase, where it can't be exerted yet
     }
 
     protected void resetExertedThisTurn() {
