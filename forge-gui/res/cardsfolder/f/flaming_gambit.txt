@@ -5,7 +5,6 @@ K:Flashback:X R R
 A:SP$ Pump | IsCurse$ True | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | SubAbility$ DBChooseCard | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals X damage to target player or planeswalker. That player may choose a creature they control and have CARDNAME deal that damage to it instead.
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Card.Creature | Defined$ TargetedOrController | MinAmount$ 0 | TargetControls$ True | AILogic$ WorstCard | SubAbility$ DBDamagePlayer
 SVar:DBDamagePlayer:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBDamageCreature
-SVar:DBDamageCreature:DB$ DealDamage | Defined$ ChosenCard | NumDmg$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBDamageCreature:DB$ DealDamage | Defined$ ChosenCard | NumDmg$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:X:Count$xPaid
 Oracle:Flaming Gambit deals X damage to target player or planeswalker. That player or that planeswalker's controller may choose a creature they control and have Flaming Gambit deal that damage to it instead.\nFlashback {X}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

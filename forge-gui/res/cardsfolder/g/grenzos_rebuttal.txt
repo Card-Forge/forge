@@ -3,7 +3,6 @@ ManaCost:4 R R
 Types:Sorcery
 A:SP$ Token | TokenScript$ r_4_4_ogre | SubAbility$ DBChoose | SpellDescription$ Create a 4/4 red Ogre creature token.
 SVar:DBChoose:DB$ ChooseCard | Defined$ Player | ChooseEach$ Artifact & Creature & Land | ControlledByPlayer$ Left | Mandatory$ True | SubAbility$ DBDestroy | StackDescription$ REP you_{p:You} | SpellDescription$ Starting with you, each player chooses an artifact, a creature, and a land from among the permanents controlled by the player to their left.
-SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Destroy each permanent chosen this way.
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | StackDescription$ SpellDescription | SpellDescription$ Destroy each permanent chosen this way.
 DeckHas:Ability$Token & Type$Ogre
 Oracle:Create a 4/4 red Ogre creature token. Starting with you, each player chooses an artifact, a creature, and a land from among the permanents controlled by the player to their left. Destroy each permanent chosen this way.
