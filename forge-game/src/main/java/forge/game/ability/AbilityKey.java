@@ -111,7 +111,6 @@ public enum AbilityKey {
     OriginalDefender("OriginalDefender"),
     OriginalParams("OriginalParams"),
     PayingMana("PayingMana"),
-    Phase("Phase"),
     Player("Player"),
     PreventedAmount("PreventedAmount"),
     Produced("Produced"),
@@ -140,6 +139,10 @@ public enum AbilityKey {
     TokenNum("TokenNum"),
     Valiant("Valiant"),
     Won("Won"),
+
+    // for AI prediction
+    Phase("Phase"),
+    PlayerTurn("PlayerTurn"),
 
     // below used across different Replacements, don't reuse
     InternalTriggerTable("InternalTriggerTable"),

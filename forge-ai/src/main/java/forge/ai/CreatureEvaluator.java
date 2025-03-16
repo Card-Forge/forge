@@ -160,12 +160,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(20, "protection");
         }
 
-        for (final SpellAbility sa : c.getSpellAbilities()) {
-            if (sa.isAbility()) {
-                value += addValue(evaluateSpellAbility(sa), "sa: " + sa);
-            }
-        }
-
         // paired creatures are more valuable because they grant a bonus to the other creature
         if (c.isPaired()) {
             value += addValue(14, "paired");
@@ -213,11 +207,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(1, "untapped");
         }
 
-        if (!c.getManaAbilities().isEmpty()) {
-            value += addValue(10, "manadork");
-        }
-
-        if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
+        if (!c.canUntap(c.getController(), true)) {
             if (c.isTapped()) {
                 value = addValue(50 + (c.getCMC() * 5), "tapped-useless"); // reset everything - useless
             } else {
@@ -226,6 +216,17 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         } else {
             value -= subValue(10 * c.getCounters(CounterEnumType.STUN), "stunned");
         }
+
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isAbility()) {
+                value += addValue(evaluateSpellAbility(sa), "sa: " + sa);
+            }
+        }
+
+        if (!c.getManaAbilities().isEmpty()) {
+            value += addValue(10, "manadork");
+        }
+
         // use scaling because the creature is only available halfway
         if (c.hasKeyword(Keyword.PHASING)) {
             value -= subValue(Math.max(20, value / 2), "phasing");

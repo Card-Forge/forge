@@ -265,7 +265,7 @@ public class AiController {
                 }
             }
 
-            if (!re.requirementsCheck(game)) {
+            if (!re.requirementsCheck(game, AbilityKey.newMap())) {
                 continue;
             }
             SpellAbility exSA = re.getOverridingAbility();
