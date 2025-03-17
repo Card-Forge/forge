@@ -1,0 +1,11 @@
+Name:Celes, Rune Knight
+ManaCost:1 R W B
+Types:Legendary Creature Human Wizard Knight
+PT:4/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When NICKNAME enters, discard any number of cards, then draw that many cards plus one.
+SVar:TrigDiscard:DB$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Remembered$Amount/Plus.1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouCtrl+wasCastFromGraveyard,Creature.YouCtrl+ThisTurnEnteredFrom_Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ Whenever one or more creatures you control enter, if one or more of them entered from a graveyard or was cast from a graveyard, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:When Celes enters, discard any number of cards, then draw that many cards plus one.\nWhenever one or more creatures you control enter, if one or more of them entered from a graveyard or was cast from a graveyard, put a +1/+1 counter on each creature you control.

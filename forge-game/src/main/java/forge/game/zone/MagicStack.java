@@ -421,11 +421,25 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 activator.addCycled(sp);
             }
 
-            if (sp.isCrew()) {
-                // Trigger crews!
-                runParams.put(AbilityKey.Vehicle, sp.getHostCard());
-                runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards", true));
-                game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
+            if (sp.isCrew() && sp.getHostCard().getType().hasSubtype("Vehicle")) {
+                Iterable<Card> crews = sp.getPaidList("Tapped", true);
+                if (crews != null) {
+                    for (Card c : crews) {
+                        Map<AbilityKey, Object> crewParams = AbilityKey.mapFromCard(sp.getHostCard());
+                        crewParams.put(AbilityKey.Crew, c);
+                        game.getTriggerHandler().runTrigger(TriggerType.Crewed, crewParams, false);
+                    }
+                }
+            }
+            if (sp.isKeyword(Keyword.SADDLE) && sp.getHostCard().getType().hasSubtype("Mount")) {
+                Iterable<Card> crews = sp.getPaidList("Tapped", true);
+                if (crews != null) {
+                    for (Card c : crews) {
+                        Map<AbilityKey, Object> saddleParams = AbilityKey.mapFromCard(sp.getHostCard());
+                        saddleParams.put(AbilityKey.Crew, c);
+                        game.getTriggerHandler().runTrigger(TriggerType.Saddled, saddleParams, false);
+                    }
+                }
             }
         } else {
             // Run Copy triggers
@@ -828,7 +842,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return false;
         }
 
-        if (playerTurn.hasLost()) {
+        if (!playerTurn.isInGame()) {
             playerTurn = game.getNextPlayerAfter(playerTurn);
         }
 

@@ -1,0 +1,8 @@
+Name:Aetheric Amplifier
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Charm | Cost$ 4 T | Choices$ DBPermanent,DBPlayer | CharmNum$ 1 | SorcerySpeed$ True | AdditionalDescription$ . Activate only as a sorcery.
+SVar:DBPermanent:DB$ MultiplyCounter | ValidTgts$ Permanent | Multiplier$ 2 | SpellDescription$ Double the number of each kind of counter on target permanent.
+SVar:DBPlayer:DB$ MultiplyCounter | Defined$ You | Multiplier$ 2 | SpellDescription$ Double the number of each kind of counter you have.
+Oracle:{T}: Add one mana of any color.\n{4}, {T}: Choose one. Activate only as a sorcery.\n• Double the number of each kind of counter on target permanent.\n• Double the number of each kind of counter you have.

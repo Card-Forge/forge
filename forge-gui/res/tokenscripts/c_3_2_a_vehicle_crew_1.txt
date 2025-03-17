@@ -1,0 +1,6 @@
+Name:Vehicle Token
+ManaCost:no cost
+Types:Artifact Vehicle
+PT:3/2
+K:Crew:1
+Oracle:Crew 1

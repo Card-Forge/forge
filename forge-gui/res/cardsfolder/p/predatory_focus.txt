@@ -2,5 +2,5 @@ Name:Predatory Focus
 ManaCost:3 G G
 Types:Sorcery
 A:SP$ Effect | AILogic$ Evasion | StaticAbilities$ Static | SpellDescription$ You may have creatures you control assign their combat damage this turn as though they weren't blocked.
-SVar:Static:Mode$ AssignCombatDamageAsUnblocked | EffectZone$ Command | ValidCard$ Creature.YouCtrl | Optional$ True | Description$ You may have creatures you control assign their combat damage this turn as though they weren't blocked.
+SVar:Static:Mode$ AssignCombatDamageAsUnblocked | ValidCard$ Creature.YouCtrl | Optional$ True | Description$ You may have creatures you control assign their combat damage this turn as though they weren't blocked.
 Oracle:You may have creatures you control assign their combat damage this turn as though they weren't blocked.

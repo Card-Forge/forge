@@ -11,7 +11,7 @@ SVar:ABRiseToTop:AB$ ChangeZone | Cost$ Discard<1/Hand> | Origin$ Library | Dest
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | RememberChosen$ True | SpellDescription$ As CARDNAME enters, choose an opponent.
 K:Shroud
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the chosen player's life total.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the chosen player's life total.
 SVar:X:PlayerCountRemembered$LifeTotal
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

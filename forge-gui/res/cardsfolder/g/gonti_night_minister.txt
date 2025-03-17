@@ -1,0 +1,13 @@
+Name:Gonti, Night Minister
+ManaCost:2 B B
+Types:Legendary Creature Aetherborn Rogue
+PT:3/4
+T:Mode$ SpellCast | ValidCard$ Card | ValidSAonCard$ Spell.YouDontOwn | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ Whenever a player casts a spell they don't own, that player creates a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ TriggeredActivator
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever a creature deals combat damage to one of your opponents, its controller looks at the top card of that opponent's library and exiles it face down. They may play that card for as long as it remains exiled. Mana of any type can be spent to cast a spell this way.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | Defined$ TriggeredTarget | ForceReveal$ TriggeredSourceController | DefinedExiler$ TriggeredSourceController | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | EffectOwner$ TriggeredSourceController | Duration$ Permanent
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card for as long as it remains exiled, and mana of any type can be spent to cast it.
+DeckHas:Ability$Token
+Oracle:Whenever a player casts a spell they don't own, that player creates a Treasure token.\nWhenever a creature deals combat damage to one of your opponents, its controller looks at the top card of that opponent's library and exiles it face down. They may play that card for as long as it remains exiled. Mana of any type can be spent to cast a spell this way.

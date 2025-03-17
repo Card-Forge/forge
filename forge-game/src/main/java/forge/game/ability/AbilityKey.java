@@ -111,7 +111,6 @@ public enum AbilityKey {
     OriginalDefender("OriginalDefender"),
     OriginalParams("OriginalParams"),
     PayingMana("PayingMana"),
-    Phase("Phase"),
     Player("Player"),
     PreventedAmount("PreventedAmount"),
     Produced("Produced"),
@@ -139,7 +138,6 @@ public enum AbilityKey {
     Token("Token"),
     TokenNum("TokenNum"),
     Valiant("Valiant"),
-    Vehicle("Vehicle"),
     Won("Won"),
 
     // below used across different Replacements, don't reuse

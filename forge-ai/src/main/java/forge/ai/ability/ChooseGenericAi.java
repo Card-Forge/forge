@@ -161,10 +161,10 @@ public class ChooseGenericAi extends SpellAbilityAi {
                 }
             }
             // FatespinnerSkipDraw,FatespinnerSkipMain,FatespinnerSkipCombat
-            if (game.getReplacementHandler().wouldPhaseBeSkipped(player, "Draw")) {
+            if (game.getReplacementHandler().wouldPhaseBeSkipped(player, PhaseType.DRAW)) {
                 return skipDraw;
             }
-            if (game.getReplacementHandler().wouldPhaseBeSkipped(player, "BeginCombat")) {
+            if (game.getReplacementHandler().wouldPhaseBeSkipped(player, PhaseType.COMBAT_BEGIN)) {
                 return skipCombat;
             }
 

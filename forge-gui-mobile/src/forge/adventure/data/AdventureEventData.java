@@ -337,6 +337,8 @@ public class AdventureEventData implements Serializable {
         restrictedDrafts.add("LEB");
         restrictedDrafts.add("2ED");
         restrictedDrafts.add("30A");
+        restrictedDrafts.add("CNS");
+        restrictedDrafts.add("CN2");
         allEditions.removeIf(q -> restrictedDrafts.contains(q.getCode()));
 
         List<CardBlock> legalBlocks = new ArrayList<>();
@@ -363,15 +365,15 @@ public class AdventureEventData implements Serializable {
                 for (PrintSheet ps : c.getPrintSheetsBySection()) {
                     //exclude block with sets containing P9 cards..
                     if (ps.containsCardNamed("Black Lotus", 1)
-                            || ps.containsCardNamed("Mox Emerald", 1)
-                            || ps.containsCardNamed("Mox Pearl", 1)
-                            || ps.containsCardNamed("Mox Ruby", 1)
-                            || ps.containsCardNamed("Mox Sapphire", 1)
-                            || ps.containsCardNamed("Mox Jet", 1)
-                            || ps.containsCardNamed("Ancestral Recall", 1)
-                            || ps.containsCardNamed("Timetwister", 1)
-                            || ps.containsCardNamed("Time Walk", 1)) {
-                        isOkay = false;
+                                || ps.containsCardNamed("Mox Emerald", 1)
+                                || ps.containsCardNamed("Mox Pearl", 1)
+                                || ps.containsCardNamed("Mox Ruby", 1)
+                                || ps.containsCardNamed("Mox Sapphire", 1)
+                                || ps.containsCardNamed("Mox Jet", 1)
+                                || ps.containsCardNamed("Ancestral Recall", 1)
+                                || ps.containsCardNamed("Timetwister", 1)
+                                || ps.containsCardNamed("Time Walk", 1)) {
+                            isOkay = false;
                         break;
                     }
                 }
@@ -606,7 +608,7 @@ public class AdventureEventData implements Serializable {
                 description += "\n";
             }
             description += "Prizes\n3 round wins: 500 gold\n2 round wins: 200 gold\n1 round win: 100 gold\n";
-            description += "Finishing event will award an unsellable copy of each card in your Jumpstart deck.";
+            description += "Participating in this event will award a valueless copy of each card in your Jumpstart deck.";
         }
         return description;
     }

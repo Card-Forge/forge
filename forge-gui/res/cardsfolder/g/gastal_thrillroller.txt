@@ -1,0 +1,13 @@
+Name:Gastal Thrillroller
+ManaCost:2 R
+Types:Artifact Vehicle
+PT:4/2
+K:Trample
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When this Vehicle enters, it becomes an artifact creature until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Types$ Artifact,Creature
+K:Crew:2
+A:AB$ ChangeZone | Cost$ 2 R Discard<1/Card> | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return this card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery.
+DeckHas:Ability$Discard
+DeckHints:Ability$Graveyard|Discard
+Oracle:Trample, haste\nWhen this Vehicle enters, it becomes an artifact creature until end of turn.\nCrew 2\n{2}{R}, Discard a card: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery.

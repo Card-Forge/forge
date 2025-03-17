@@ -1265,8 +1265,7 @@ public class PlayerControllerAi extends PlayerController {
     public boolean playSaFromPlayEffect(SpellAbility tgtSA) {
         boolean optional = !tgtSA.getPayCosts().isMandatory();
         boolean noManaCost = tgtSA.hasParam("WithoutManaCost");
-        if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
-            Spell spell = (Spell) tgtSA;
+        if (tgtSA instanceof Spell spell) { // Isn't it ALWAYS a spell?
             // TODO if mandatory AI is only forced to use mana when it's already in the pool
             if (brains.canPlayFromEffectAI(spell, !optional, noManaCost) == AiPlayDecision.WillPlay || !optional) {
                 return ComputerUtil.playStack(tgtSA, player, getGame());
@@ -1390,11 +1389,11 @@ public class PlayerControllerAi extends PlayerController {
                 oppLibrary = CardLists.getValidCards(oppLibrary, valid, source.getController(), source, sa);
             }
 
-            if (source != null && source.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
+            if (source != null && source.getState(CardStateName.Original).hasKeyword(Keyword.HIDDEN_AGENDA)) {
                 // If any Conspiracies are present, try not to choose the same name twice
                 // (otherwise the AI will spam the same name)
                 for (Card consp : player.getCardsIn(ZoneType.Command)) {
-                    if (consp.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
+                    if (consp.getState(CardStateName.Original).hasKeyword(Keyword.HIDDEN_AGENDA)) {
                         String chosenName = consp.getNamedCard();
                         if (!chosenName.isEmpty()) {
                             aiLibrary = CardLists.filter(aiLibrary, CardPredicates.nameNotEquals(chosenName));

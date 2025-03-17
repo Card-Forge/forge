@@ -2,5 +2,5 @@ Name:Wildwood Geist
 ManaCost:4 G
 Types:Creature Spirit
 PT:3/3
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ PlayerTurn | Description$ CARDNAME gets +2/+2 as long as it's your turn.
-Oracle:Wildwood Geist gets +2/+2 as long as it's your turn.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ PlayerTurn | Description$ During your turn, CARDNAME gets +2/+2.
+Oracle:During your turn, Wildwood Geist gets +2/+2.

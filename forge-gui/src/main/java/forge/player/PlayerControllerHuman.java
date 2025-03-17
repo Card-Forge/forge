@@ -453,7 +453,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList, final SpellAbility sa) {
         //this can be used to stop zone select GUI when certain APIs would reveal illegal zone information
         //initially created for HeistEffect which showed library placement
-        if (ApiType.Heist.equals(sa.getApi())) return false;
+        if (sa != null && ApiType.Heist.equals(sa.getApi())) return false;
         return useSelectCardsInput(sourceList);
     }
 
@@ -2735,7 +2735,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (!inp.hasCancelled()) {
                     CardCollection untapped = new CardCollection();
                     for (final Card c : inp.getSelected()) {
-                        if (c.untap(true)) untapped.add(c);
+                        if (c.untap()) untapped.add(c);
                     }
                     if (!untapped.isEmpty()) {
                         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

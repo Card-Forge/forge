@@ -1,0 +1,8 @@
+Name:Stall Out
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Tap | ValidTgts$ Creature,Vehicle | SubAbility$ DBCounter | TgtPrompt$ Select target creature or Vehicle. | SpellDescription$ Tap target creature or Vehicle, then put three stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 3
+K:Cycling:2
+DeckHas:Ability$Counters
+Oracle:Tap target creature or Vehicle, then put three stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nCycling {2} ({2}, Discard this card: Draw a card.)

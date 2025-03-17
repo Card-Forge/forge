@@ -21,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CloneEffect extends SpellAbilityEffect {
-    // TODO update this method
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

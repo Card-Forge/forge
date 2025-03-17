@@ -1,0 +1,6 @@
+Name:Wastewood Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ B | IsPresent$ Swamp.YouCtrl,Forest.YouCtrl | SpellDescription$ Add {B}. Activate only if you control a Swamp or a Forest.
+Oracle:{T}: Add {G}.\n{T}: Add {B}. Activate only if you control a Swamp or a Forest.

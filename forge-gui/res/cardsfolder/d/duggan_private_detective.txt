@@ -2,7 +2,7 @@ Name:Duggan, Private Detective
 ManaCost:2 G U
 Types:Legendary Creature Human Detective
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ NICKNAME's power and toughness are each equal to the number of cards in your hand.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ NICKNAME's power and toughness are each equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ Whenever NICKNAME enters or attacks, investigate.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInvestigate | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, investigate.

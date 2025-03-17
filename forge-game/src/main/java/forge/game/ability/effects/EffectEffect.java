@@ -8,7 +8,6 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
-import forge.card.CardRarity;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
@@ -162,11 +161,8 @@ public class EffectEffect extends SpellAbilityEffect {
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
-            eff.setSetCode(hostCard.getSetCode());
-            if (name.startsWith("Emblem")) {
-                eff.setRarity(CardRarity.Common);
-            } else {
-                eff.setRarity(hostCard.getRarity());
+            if (sa.hasParam("Boon")) {
+                eff.setBoon(true);
             }
 
             // Abilities and triggers work the same as they do for Token
@@ -194,7 +190,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 for (final String s : effectStaticAbilities) {
                     final StaticAbility addedStaticAbility = eff.addStaticAbility(AbilityUtils.getSVar(sa, s));
                     if (addedStaticAbility != null) { //prevent npe casting adventure card spell
-                        addedStaticAbility.putParam("EffectZone", "Command");
+                        addedStaticAbility.setActiveZone(EnumSet.of(ZoneType.Command));
                         addedStaticAbility.setIntrinsic(true);
                     }
                 }

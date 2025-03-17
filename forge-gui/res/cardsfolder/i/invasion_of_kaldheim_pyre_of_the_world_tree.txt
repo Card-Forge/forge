@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExileHand:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Hand | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play cards exiled this way.
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play cards exiled this way.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$RememberedSize
 AlternateMode:DoubleFaced
@@ -22,7 +22,7 @@ A:AB$ DealDamage | Cost$ Discard<1/Land> | ValidTgts$ Any | NumDmg$ 2 | SpellDes
 T:Mode$ Discarded | ValidCard$ Land.YouOwn | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you discard a land card, exile the top card of your library. You may play that card this turn.
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | AILogic$ ExileAndPlayUntilEOT
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Discard
 DeckHints:Ability$Discard

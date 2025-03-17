@@ -4,7 +4,7 @@ Types:Instant
 K:Strive:G
 A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, any number of target creatures each get +1/+1 and gain "{T}: This creature fights another target creature."
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Abilities$ SetessanFight
-SVar:SetessanFight:AB$ Fight | Cost$ T | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another creature | SpellDescription$ CARDNAME fights another target creature.
+SVar:SetessanFight:AB$ Fight | Cost$ T | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SpellDescription$ CARDNAME fights another target creature.
 SVar:MaxTargets:Count$Valid Creature
 AI:RemoveDeck:All
 Oracle:Strive — This spell costs {G} more to cast for each target beyond the first.\nUntil end of turn, any number of target creatures each get +1/+1 and gain "{T}: This creature fights another target creature."

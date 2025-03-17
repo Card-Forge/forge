@@ -1,0 +1,7 @@
+Name:Dinosaur Dragon Token
+ManaCost:no cost
+Types:Creature Dinosaur Dragon
+Colors:red
+PT:4/4
+K:Flying
+Oracle:Flying

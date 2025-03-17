@@ -190,7 +190,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             String prompt = card + " - " + label + " " + localizer.getMessage("lblHowMany");
             menu.addItem(new FMenuItem(label, SIDEBOARD_ICON, (e) -> {
                 if(sellable == 1) {
-                    AdventurePlayer.current().sellCard(card, 1);
+                    AdventurePlayer.current().sellCard(card, 1, true);
                     return;
                 }
                 GuiChoose.getInteger(prompt, 1, sellable, new Callback<>() {
@@ -199,7 +199,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                         if (result == null || result <= 0) {
                             return;
                         }
-                        AdventurePlayer.current().sellCard(card, result);
+                        AdventurePlayer.current().sellCard(card, result, true);
                         //((AdventureDeckEditor) parentScreen).deckHeader.updateGold(); //TODO: Is this needed?
                     }
                 });
@@ -278,7 +278,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                     public void run(Boolean result) {
                         if (result) {
                             for (Map.Entry<PaperCard, Integer> entry : cardManager.getFilteredItems()) {
-                                AdventurePlayer.current().sellCard(entry.getKey(), entry.getValue());
+                                AdventurePlayer.current().sellCard(entry.getKey(), entry.getValue(), true);
                             }
                             refresh();
                             //parentScreen.deckHeader.updateGold(); //TODO: Is this even needed?

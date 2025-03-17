@@ -1,0 +1,7 @@
+Name:Doc Ock, Evil Inventor
+ManaCost:5 U B
+Types:Legendary Creature Human Scientist Villain
+PT:8/8
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of combat on your turn, target noncreature artifact you control becomes an 8/8 Robot Villain artifact creature in addition to its other types.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature artifact you control | Power$ 8 | Toughness$ 8 | Types$ Artifact,Creature,Robot,Villain | Duration$ Permanent
+Oracle:At the beginning of combat on your turn, target noncreature artifact you control becomes an 8/8 Robot Villain artifact creature in addition to its other types.

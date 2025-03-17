@@ -5,7 +5,7 @@ T:Mode$ TapsForMana | ValidCard$ Permanent | Execute$ TrigMana | TriggerZones$ C
 SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, target player can't cast spells until a player planeswalks.
 SVar:RolledChaos:DB$ Effect | ValidTgts$ Player | IsCurse$ True | StaticAbilities$ STCantCast | Triggers$ TrigPlaneswalk | RememberObjects$ Targeted | Duration$ Permanent
-SVar:STCantCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Target player can't cast spells until a player planeswalks.
+SVar:STCantCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Target player can't cast spells until a player planeswalks.
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedTo | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:AIRollPlanarDieParams:Mode$ Always

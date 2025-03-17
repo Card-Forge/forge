@@ -2,6 +2,6 @@ Name:Grinning Demon Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-1/-2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Command | Execute$ GrinningDiscard | TriggerDescription$ Whenever a nontoken creature you control dies, target opponent discards a card.
-SVar:GrinningDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select an opponent to discard | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+!token | TriggerZones$ Command | Execute$ GrinningDiscard | TriggerDescription$ Whenever a nontoken creature you control dies, target opponent discards a card.
+SVar:GrinningDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
 Oracle:Hand -1, life -2\nWhenever a nontoken creature you control dies, target opponent discards a card.

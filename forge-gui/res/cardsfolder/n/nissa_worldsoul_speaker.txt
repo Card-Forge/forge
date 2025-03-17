@@ -1,0 +1,8 @@
+Name:Nissa, Worldsoul Speaker
+ManaCost:3 G
+Types:Legendary Creature Elf Druid
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigEnergy | TriggerDescription$ Landfall — Whenever a land you control enters, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+S:Mode$ Continuous | Affected$ Card.YouCtrl+Permanent+nonLand | MayPlay$ True | MayPlayAltManaCost$ PayEnergy<8> | MayPlayDontGrantZonePermissions$ True | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may pay eight {E} rather than pay the mana cost for permanent spells you cast.
+Oracle:Landfall — Whenever a land you control enters, you get {E}{E} (two energy counters).\nYou may pay eight {E} rather than pay the mana cost for permanent spells you cast.

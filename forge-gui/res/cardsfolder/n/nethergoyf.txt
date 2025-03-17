@@ -2,7 +2,7 @@ Name:Nethergoyf
 ManaCost:B
 Types:Creature Lhurgoyf
 PT:*/1+*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Count$ValidGraveyard Card.YouOwn$CardTypes | SetToughness$ Count$ValidGraveyard Card.YouOwn$CardTypes/Plus.1 | Description$ CARDNAME's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ Count$ValidGraveyard Card.YouOwn$CardTypes | SetToughness$ Count$ValidGraveyard Card.YouOwn$CardTypes/Plus.1 | Description$ CARDNAME's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
 K:Escape:2 B ExileFromGrave<X/Card.Other+withTypesGE4/other cards from your graveyard with four or more card types among them>
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

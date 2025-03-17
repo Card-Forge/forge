@@ -5,7 +5,7 @@ A:SP$ Shuffle | Defined$ You | SubAbility$ DBExile | SpellDescription$ Shuffle y
 SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+IsRemembered+YouOwn+cmcLE5 | ValidZone$ Exile | ValidSA$ Spell | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ DBNoUntap
 SVar:DBNoUntap:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ Lands you control don't untap during your next untap step.
-SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
+SVar:DontUntap:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

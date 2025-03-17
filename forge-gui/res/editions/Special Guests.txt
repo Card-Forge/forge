@@ -95,3 +95,23 @@ ScryfallCode=SPG
 81 M Akroma's Memorial @Carly Mazur
 82 M Temporal Manipulation @Raita Kazama
 83 M Fiend Artisan @Carl Critchlow
+84 M Cavalier of Dawn @Femke Hiemstra
+85 M Thoughtcast @Lucie Louxor
+86 M Whir of Invention @Brian Chippendale
+87 M Bone Miser @Jay Howell
+88 M Lord of the Undead @Skinner
+89 M Chandra's Ignition @Tsubonari
+90 M Galvanic Blast @Laura Plansker
+91 M Pathbreaker Ibex @Rocodrilo
+92 M Chrome Mox @Princess Hidir
+93 M Skysovereign, Consul Flagship @Imiri Sakabashira
+94 M Cavalier of Dawn @Femke Hiemstra
+95 M Thoughtcast @Lucie Louxor
+96 M Whir of Invention @Brian Chippendale
+97 M Bone Miser @Jay Howell
+98 M Lord of the Undead @Skinner
+99 M Chandra's Ignition @Tsubonari
+100 M Galvanic Blast @Laura Plansker
+101 M Pathbreaker Ibex @Rocodrilo
+102 M Chrome Mox @Princess Hidir
+103 M Skysovereign, Consul Flagship @Imiri Sakabashira

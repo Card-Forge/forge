@@ -1,0 +1,6 @@
+Name:Unstoppable Plan
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap all nonland permanents you control.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Permanent.nonLand+YouCtrl
+Oracle:At the beginning of your end step, untap all nonland permanents you control.

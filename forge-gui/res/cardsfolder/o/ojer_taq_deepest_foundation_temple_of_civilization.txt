@@ -4,7 +4,7 @@ Types:Legendary Creature God
 PT:6/6
 K:Vigilance
 R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Creature.YouCtrl | ReplaceWith$ TripleToken | Description$ If one or more creature tokens would be created under your control, three times that many of those tokens are created instead.
-SVar:TripleToken:DB$ ReplaceToken | Type$ Amount | Amount$ Thrice | ValidCard$ Creature.YouCtrl
+SVar:TripleToken:DB$ ReplaceToken | Type$ Amount | Amount$ Thrice
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTransform | TriggerDescription$ When NICKNAME dies, return it to the battlefield tapped and transformed under its owner's control.
 SVar:TrigTransform:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | Tapped$ True
 DeckNeeds:Ability$Token

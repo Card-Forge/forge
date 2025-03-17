@@ -1,0 +1,6 @@
+Name:Mox Jasper
+ManaCost:0
+Types:Legendary Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | IsPresent$ Dragon.YouCtrl | SpellDescription$ Add one mana of any color. Activate only if you control a Dragon.
+DeckNeeds:Type$Dragon
+Oracle:{T}: Add one mana of any color. Activate only if you control a Dragon.

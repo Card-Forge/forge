@@ -56,9 +56,6 @@ public class TriggerAttackerBlockedByCreature extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final Object a = runParams.get(AbilityKey.Attacker),
                 b = runParams.get(AbilityKey.Blocker);
-        if (!(a instanceof Card && b instanceof Card)) {
-            return false;
-        }
 
         final Card attacker = (Card) a,
                 blocker = (Card) b;

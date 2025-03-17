@@ -466,8 +466,7 @@ public final class CardScriptParser {
             "wasDealtDamageByHostThisTurn", "wasDealtDamageByEquipeeThisTurn",
             "wasDealtDamageByEnchantedThisTurn", "dealtDamageThisTurn",
             "attackedThisTurn", "attackedLastTurn", "blockedThisTurn",
-            "gotBlockedThisTurn", "notAttackedThisTurn",
-            "greatestPower", "yardGreatestPower",
+            "gotBlockedThisTurn", "greatestPower", "yardGreatestPower",
             "leastPower", "leastToughness", "greatestCMC",
             "greatestRememberedCMC", "lowestRememberedCMC", "lowestCMC",
             "enchanted", "unenchanted", "enchanting", "equipped", "unequipped",
@@ -482,11 +481,10 @@ public final class CardScriptParser {
             "kicked", "kicked1", "kicked2", "evoked",
             "HasDevoured", "IsMonstrous",
             "CostsPhyrexianMana", "IsRemembered", "IsNotRemembered",
-            "IsImprinted", "IsNotImprinted", "hasActivatedAbilityWithTapCost",
-            "hasActivatedAbility", "hasManaAbility",
+            "IsImprinted", "IsNotImprinted", "hasManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
             "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
-            "IsNotCommander", "IsRenowned");
+            "IsRenowned");
     private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
             .of("named", "notnamed", "OwnedBy", "ControlledBy",
                     "ControllerControls", "AttachedTo", "EnchantedBy",
@@ -499,7 +497,7 @@ public final class CardScriptParser {
                     "greatestPowerControlledBy", "greatestCMCControlledBy",
                     "power", "toughness", "cmc", "totalPT", "counters", "non",
                     "RememberMap", "wasCastFrom", "set",
-                    "inZone", "HasSVar");
+                    "inZone", "HasSVar", "hasAbility");
 
     private static boolean isValidExclusive(String valid) {
         if (valid.charAt(0) == '!') {

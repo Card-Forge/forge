@@ -2,7 +2,7 @@ Name:Fungal Behemoth
 ManaCost:3 G
 Types:Creature Fungus
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of +1/+1 counters on creatures you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of +1/+1 counters on creatures you control.
 K:Suspend:X:XMin1 X G G
 T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigPut | OptionalDecider$ You | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, you may put a +1/+1 counter on target creature.
 SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1

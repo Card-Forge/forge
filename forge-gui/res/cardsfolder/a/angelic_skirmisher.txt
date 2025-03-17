@@ -4,8 +4,5 @@ Types:Creature Angel
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of each combat, choose first strike, vigilance or lifelink. Creatures you control gain that ability until end of turn.
-SVar:TrigChoose:DB$ GenericChoice | Choices$ PumpFirstStrike,PumpVigilance,PumpLifelink | Defined$ You
-SVar:PumpFirstStrike:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike | SpellDescription$ First strike
-SVar:PumpVigilance:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance | SpellDescription$ Vigilance
-SVar:PumpLifelink:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Lifelink | SpellDescription$ Lifelink
+SVar:TrigChoose:DB$ Pump | Defined$ Valid Creature.YouCtrl | KWChoice$ First Strike,Vigilance,Lifelink
 Oracle:Flying\nAt the beginning of each combat, choose first strike, vigilance, or lifelink. Creatures you control gain that ability until end of turn.

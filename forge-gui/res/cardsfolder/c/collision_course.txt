@@ -1,0 +1,9 @@
+Name:Collision Course
+ManaCost:1 W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDmg,DBDestroy
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature, where X is the number of permanents you control that are creatures and/or Vehicles.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
+SVar:X:Count$Valid Creature.YouCtrl,Vehicle.YouCtrl
+DeckHints:Type$Vehicle
+Oracle:Choose one —\n• Collision Course deals X damage to target creature, where X is the number of permanents you control that are creatures and/or Vehicles.\n• Destroy target artifact.

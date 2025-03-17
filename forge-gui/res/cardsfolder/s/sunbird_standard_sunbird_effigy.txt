@@ -19,7 +19,7 @@ PT:*/*
 K:Flying
 K:Vigilance
 K:Haste
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of colors among the exiled cards used to craft it.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of colors among the exiled cards used to craft it.
 SVar:X:Count$ColorsDefined ExiledWith
 A:AB$ Mana | Cost$ T | Produced$ Special EachColorAmongDefined_ExiledWith | SpellDescription$ For each color among the exiled cards used to craft CARDNAME, add one mana of that color.
 Oracle:Flying, vigilance, haste\nSunbird Effigy's power and toughness are each equal to the number of colors among the exiled cards used to craft it.\n{T}: For each color among the exiled cards used to craft Sunbird Effigy, add one mana of that color.

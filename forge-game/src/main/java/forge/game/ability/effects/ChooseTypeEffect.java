@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -123,7 +122,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             }
         }
 
-        if (validTypes.isEmpty() && sa.hasParam("Note")) {
+        if (validTypes.isEmpty() && sa.hasParam("TypesFromDefined")) {
             // OK to end up with no choices/have nothing new to note
         } else if (!validTypes.isEmpty()) {
             for (final Player p : tgtPlayers) {
@@ -152,7 +151,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 }
             }
         } else {
-            throw new InvalidParameterException(sa.getHostCard() + "'s ability resulted in no types to choose from");
+            throw new RuntimeException(sa.getHostCard() + "'s ability resulted in no types to choose from");
         }
     }
 

@@ -642,24 +642,28 @@ public class ComputerUtilMana {
         List<SpellAbility> paymentList = Lists.newArrayList();
         final ManaPool manapool = ai.getManaPool();
 
-        // Apply the color/type conversion matrix if necessary
-        manapool.restoreColorReplacements();
-        CardPlayOption mayPlay = sa.getMayPlayOption();
-        if (!effect) {
-            if (sa.isSpell() && mayPlay != null) {
-                mayPlay.applyManaConvert(manapool);
-            } else if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
-                AbilityUtils.applyManaColorConversion(manapool, sa.getGrantorStatic().getParam("ManaConversion"));
+        // Apply color/type conversion matrix if necessary (already done via autopay)
+        if (ai.getControllingPlayer() == null) {
+            manapool.restoreColorReplacements();
+            CardPlayOption mayPlay = sa.getMayPlayOption();
+            if (!effect) {
+                if (sa.isSpell() && mayPlay != null) {
+                    mayPlay.applyManaConvert(manapool);
+                } else if (sa.isActivatedAbility() && sa.getGrantorStatic() != null && sa.getGrantorStatic().hasParam("ManaConversion")) {
+                    AbilityUtils.applyManaColorConversion(manapool, sa.getGrantorStatic().getParam("ManaConversion"));
+                }
             }
+            if (sa.hasParam("ManaConversion")) {
+                AbilityUtils.applyManaColorConversion(manapool, sa.getParam("ManaConversion"));
+            }
+            StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), effect && !sa.isCastFromPlayEffect() ? null : sa);
         }
-        if (sa.hasParam("ManaConversion")) {
-            AbilityUtils.applyManaColorConversion(manapool, sa.getParam("ManaConversion"));
-        }
-        StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), effect && !sa.isCastFromPlayEffect() ? null : sa);
 
+        // not worth checking if it makes sense to not spend floating first
         if (manapool.payManaCostFromPool(cost, sa, test, manaSpentToPay)) {
             CostPayment.handleOfferings(sa, test, cost.isPaid());
-            return true;    // paid all from floating mana
+            // paid all from floating mana
+            return true;
         }
 
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
@@ -1326,7 +1330,9 @@ public class ComputerUtilMana {
             }
         }
 
-        CostAdjustment.adjust(manaCost, sa, null, test);
+        if (!effect) {
+            CostAdjustment.adjust(manaCost, sa, null, test);
+        }
 
         if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
             ManaCost mkCost = sa.getPayCosts().getTotalMana();

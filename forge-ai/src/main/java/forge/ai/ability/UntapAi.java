@@ -16,7 +16,6 @@ import forge.game.cost.CostTap;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -319,15 +318,14 @@ public class UntapAi extends SpellAbilityAi {
 
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
-        CardCollection pref = CardLists.filterControlledBy(list, ai.getYourTeam());
-        if (pref.isEmpty()) {
-            if (isOptional) {
-                return null;
-            }
-        } else {
-            list = pref;
+        CardCollection filteredList = CardLists.filterControlledBy(list, ai.getYourTeam());
+        if (!filteredList.isEmpty()) {
+            return ComputerUtilCard.getBestAI(filteredList);
         }
-        return ComputerUtilCard.getBestAI(list);
+        if (isOptional) {
+            return null;
+        }
+        return ComputerUtilCard.getWorstAI(list);
     }
 
     private static Card detectPriorityUntapTargets(final List<Card> untapList) {
@@ -339,7 +337,7 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         // See if there's anything to untap that is tapped and that doesn't untap during the next untap step by itself
-        CardCollection noAutoUntap = CardLists.filter(untapList, Untap.CANUNTAP.negate());
+        CardCollection noAutoUntap = CardLists.filter(untapList, c -> !c.canUntap(c.getController(), true));
         if (!noAutoUntap.isEmpty()) {
             return ComputerUtilCard.getBestAI(noAutoUntap);
         }

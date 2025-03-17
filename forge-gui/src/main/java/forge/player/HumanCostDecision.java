@@ -303,7 +303,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
             if (inp.hasCancelled() || 
-                !Expressions.compare(CardFactoryUtil.getCardTypesFromList(list), "GE", nTypes)) {
+                !Expressions.compare(AbilityUtils.countCardTypesFromList(list, false), "GE", nTypes)) {
                     return null;
             }
             return PaymentDecision.card(inp.getSelected());
@@ -932,6 +932,27 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostBehold cost) {
+        int num = cost.getAbilityAmount(ability);
+
+        CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
+        hand = CardLists.getValidCards(hand, cost.getType().split(";"), player, source, ability);
+
+        if (hand.size() < num) {
+            return null;
+        }
+
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, num, num, hand, ability);
+        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNMoreTypeCardsTpReveal", "%d", cost.getDescriptiveType()));
+        inp.setCancelAllowed(!mandatory);
+        inp.showAndWait();
+        if (inp.hasCancelled()) {
+            return null;
+        }
+        return PaymentDecision.card(inp.getSelected());
+    }
+
+    @Override
     public PaymentDecision visit(final CostRevealChosen cost) {
         return PaymentDecision.number(1);
     }
@@ -1288,7 +1309,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, ability.isCrew()) < i) {
+            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), ability) < i) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());

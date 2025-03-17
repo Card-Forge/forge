@@ -1,0 +1,10 @@
+Name:Zell Dincht
+ManaCost:2 R
+Types:Legendary Creature Human Monk
+PT:0/3
+S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each land you control.
+SVar:X:Count$Valid Land.YouCtrl
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, return a land you control to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Land.YouCtrl | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | SelectPrompt$ Select a land you control to return to its owner's hand
+Oracle:You may play an additional land on each of your turns.\nZell Dincht gets +1/+0 for each land you control.\nAt the beginning of your end step, return a land you control to its owner's hand.

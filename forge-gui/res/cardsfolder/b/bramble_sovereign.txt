@@ -2,6 +2,6 @@ Name:Bramble Sovereign
 ManaCost:2 G G
 Types:Creature Dryad
 PT:4/4
-T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature enters, you may pay {1}{G}. If you do, that creature's controller creates a token that's a copy of that creature.
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 G | Defined$ TriggeredCard | Controller$ TriggeredCardController
+T:Mode$ ChangesZone | ValidCard$ Creature.!token+Other | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature enters, you may pay {1}{G}. If you do, that creature's controller creates a token that's a copy of that creature.
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 G | Defined$ TriggeredCardLKICopy | Controller$ TriggeredCardController
 Oracle:Whenever another nontoken creature enters, you may pay {1}{G}. If you do, that creature's controller creates a token that's a copy of that creature.

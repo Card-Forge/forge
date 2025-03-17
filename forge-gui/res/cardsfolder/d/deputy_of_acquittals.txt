@@ -4,5 +4,5 @@ Types:Creature Human Wizard
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return another target creature you control to its owner's hand.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another creature you control.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control.
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Deputy of Acquittals enters, you may return another target creature you control to its owner's hand.

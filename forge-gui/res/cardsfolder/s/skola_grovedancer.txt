@@ -2,7 +2,7 @@ Name:Skola Grovedancer
 ManaCost:1 G
 Types:Enchantment Creature Satyr Druid
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Land.nonToken+YouOwn | TriggerZones$ Battlefield | Execute$ DBGainLife | TriggerDescription$ Whenever a land card is put into your graveyard from anywhere, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Land.!token+YouOwn | TriggerZones$ Battlefield | Execute$ DBGainLife | TriggerDescription$ Whenever a land card is put into your graveyard from anywhere, you gain 1 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 A:AB$ Mill | Cost$ 2 G | Defined$ You | NumCards$ 1 | SpellDescription$ Mill a card.
 DeckHas:Ability$LifeGain|Graveyard

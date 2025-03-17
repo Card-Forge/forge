@@ -1,0 +1,13 @@
+Name:Fearless Swashbuckler
+ManaCost:1 U R
+Types:Creature Fish Pirate
+PT:3/3
+K:Haste
+S:Mode$ Continuous | Affected$ Vehicle.YouCtrl | AddKeyword$ Haste | Description$ Vehicles you control have haste.
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDraw | CheckSVar$ X | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, if a Pirate and a Vehicle attacked this combat, draw three cards, then discard two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | Defined$ You
+SVar:Y:Count$Valid Creature.Pirate+attacking/LimitMax.1
+SVar:Z:Count$Valid Creature.Vehicle+attacking/LimitMax.1
+SVar:X:SVar$Y/Plus.Z
+Oracle:Haste\nVehicles you control have haste.\nWhenever you attack, if a Pirate and a Vehicle attacked this combat, draw three cards, then discard two cards.

@@ -258,6 +258,7 @@ public class ImageCache {
             }
         }
 
+
         Texture image;
         File imageFile = ImageKeys.getImageFile(imageKey);
         if (useDefaultIfNotFound) {

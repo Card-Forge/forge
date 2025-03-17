@@ -18,9 +18,12 @@
 package forge.game.replacement;
 
 import java.util.*;
+import java.util.concurrent.FutureTask;
 
 import com.google.common.base.MoreObjects;
 import forge.game.card.*;
+import forge.game.phase.PhaseType;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -66,7 +69,6 @@ public class ReplacementHandler {
 
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
         final CardCollection preList = new CardCollection();
-        boolean checkAgain = false;
         Card affectedLKI = null;
         Card affectedCard = null;
 
@@ -92,8 +94,7 @@ public class ReplacementHandler {
             Map<Optional<Player>, Map<CounterType, Integer>> etbCounters = (Map<Optional<Player>, Map<CounterType, Integer>>) runParams.get(AbilityKey.CounterMap);
             affectedLKI.putEtbCounters(etbCounters);
             preList.add(affectedLKI);
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
-            checkAgain = true;
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(), preList);
 
             runParams.put(AbilityKey.Affected, affectedLKI);
         }
@@ -137,23 +138,22 @@ public class ReplacementHandler {
 
         }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
-        if (checkAgain) {
-            if (affectedLKI != null && affectedCard != null) {
-                // need to set the Host Card there so it is not connected to LKI anymore?
-                // need to be done after canReplace check
-                for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
-                    re.setHostCard(affectedCard);
-                }
-                // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
-                affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
-                affectedCard.setStoredReplacements(affectedLKI.getStoredReplacements());
-                if (affectedCard.getCastSA() != null && affectedCard.getCastSA().getKeyword() != null) {
-                   // need to readd the CastSA Keyword into the Card
-                   affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
-                }
-                runParams.put(AbilityKey.Affected, affectedCard);
-                runParams.put(AbilityKey.NewCard, CardCopyService.getLKICopy(affectedLKI));
+        if (affectedLKI != null) {
+            // need to set the Host Card there so it is not connected to LKI anymore?
+            // need to be done after canReplace check
+            for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
+                re.setHostCard(affectedCard);
             }
+            // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
+            affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
+            affectedCard.setStoredReplacements(affectedLKI.getStoredReplacements());
+            if (affectedCard.getCastSA() != null && affectedCard.getCastSA().getKeyword() != null) {
+                // need to readd the CastSA Keyword into the Card
+                affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
+            }
+            runParams.put(AbilityKey.Affected, affectedCard);
+            runParams.put(AbilityKey.NewCard, CardCopyService.getLKICopy(affectedLKI));
+
             game.getAction().checkStaticAbilities(false);
         }
 
@@ -855,15 +855,18 @@ public class ReplacementHandler {
     /**
      * Helper function to check if a phase would be skipped for AI.
      */
-    public boolean wouldPhaseBeSkipped(final Player player, final String phase) {
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
-        repParams.put(AbilityKey.Phase, phase);
-        List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
-        if (list.isEmpty()) {
-            return false;
-        }
-        return true;
+    public boolean wouldPhaseBeSkipped(final Player player, final PhaseType phase) {
+        FutureTask<Boolean> proc = new FutureTask<>(() -> {
+            final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+            List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
+            if (list.isEmpty()) {
+                return false;
+            }
+            return true;
+        });
+        return player.getGame().getPhaseHandler().withContext(proc, player, phase);
     }
+
     /**
      * Helper function to check if an extra turn would be skipped for AI.
      */

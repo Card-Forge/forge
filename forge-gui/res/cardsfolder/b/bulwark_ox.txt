@@ -1,0 +1,10 @@
+Name:Bulwark Ox
+ManaCost:1 W
+Types:Creature Ox Mount
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature attacks while saddled, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl+HasCounters | KW$ Hexproof & Indestructible | SpellDescription$ Creatures you control with counters on them gain hexproof and indestructible until end of turn.
+K:Saddle:1
+DeckHas:Ability$Counters
+Oracle:Whenever this creature attacks while saddled, put a +1/+1 counter on target creature.\nSacrifice this creature: Creatures you control with counters on them gain hexproof and indestructible until end of turn.\nSaddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

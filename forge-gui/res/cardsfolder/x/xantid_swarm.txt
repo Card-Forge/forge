@@ -5,7 +5,7 @@ PT:0/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME attacks, defending player can't cast spells this turn.
 SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredDefendingPlayer | StaticAbilities$ CantBeCast
-SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Defending player can't cast spells.
+SVar:CantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Defending player can't cast spells.
 AI:RemoveDeck:Random
 SVar:HasAttackEffect:TRUE
 Oracle:Flying\nWhenever Xantid Swarm attacks, defending player can't cast spells this turn.

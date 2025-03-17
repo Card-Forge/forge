@@ -6,5 +6,5 @@ SVar:DBShuffle:DB$ ChangeZone | Optional$ True | Defined$ Remembered | Origin$ H
 SVar:DBSeek:DB$ Seek | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | Num$ 2 | SubAbility$ DBCleanup | SpellDescription$ If you do, seek two cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent | SpellDescription$ You have no maximum hand size for the rest of the game.
-SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size for the rest of the game.
+SVar:STHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size for the rest of the game.
 Oracle:Seek two cards. You may shuffle them into your library. If you do, seek two cards.\nYou have no maximum hand size for the rest of the game.

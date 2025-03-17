@@ -1,0 +1,287 @@
+//Rank|Name|Rarity|Set
+#1|Mu Yanling, Wind Rider|M|DFT
+#2|Salvation Engine|M|DFT
+#3|Spectacular Pileup|R|DFT
+#4|Valor's Flagship|M|DFT
+#5|Possession Engine|R|DFT
+#6|Gonti, Night Minister|R|DFT
+#7|Chandra, Spark Hunter|M|DFT
+#8|Pyrewood Gearhulk|M|DFT
+#9|Skysovereign, Consul Flagship|M|SPG
+#10|Draconautics Engineer|R|DFT
+#11|Pathbreaker Ibex|M|SPG
+#12|Guardian Sunmare|R|DFT
+#13|Voyager Glidecar|R|DFT
+#14|Thopter Fabricator|R|DFT
+#15|March of the World Ooze|M|DFT
+#16|Thunderous Velocipede|M|DFT
+#17|Explosive Getaway|R|DFT
+#18|Loot, the Pathfinder|M|DFT
+#19|The Speed Demon|M|DFT
+#20|Agonasaur Rex|R|DFT
+#21|Basri, Tomorrow's Champion|R|DFT
+#22|Bulwark Ox|R|DFT
+#23|Perilous Snare|R|DFT
+#24|Cryptcaller Chariot|R|DFT
+#25|Cursecloth Wrappings|R|DFT
+#26|Lumbering Worldwagon|R|DFT
+#27|Regal Imperiosaur|R|DFT
+#28|Aatchik, Emerald Radian|R|DFT
+#29|Debris Beetle|R|DFT
+#30|Mendicant Core, Guidelight|R|DFT
+#31|Mimeoplasm, Revered One|M|DFT
+#32|Riptide Gearhulk|M|DFT
+#33|Sab-Sunen, Luxa Embodied|M|DFT
+#34|The Aetherspark|M|DFT
+#35|Bone Miser|M|SPG
+#36|Lord of the Undead|M|SPG
+#37|Chandra's Ignition|M|SPG
+#38|Skyseer's Chariot|R|DFT
+#39|Boommobile|R|DFT
+#40|Howlsquad Heavy|R|DFT
+#41|Oildeep Gearhulk|M|DFT
+#42|Samut, the Driving Force|R|DFT
+#43|Zahur, Glory's Past|R|DFT
+#44|Demonic Junker|R|DFT
+#45|District Mascot|R|DFT
+#46|Brightglass Gearhulk|M|DFT
+#47|Caradora, Heart of Alacria|R|DFT
+#48|Coalstoke Gearhulk|M|DFT
+#49|Far Fortune, End Boss|R|DFT
+#50|Kolodin, Triumph Caster|R|DFT
+#51|Redshift, Rocketeer Chief|R|DFT
+#52|Winter, Cursed Rider|R|DFT
+#53|Lifecraft Engine|R|DFT
+#54|Dracosaur Auxiliary|U|DFT
+#55|Gastal Thrillroller|R|DFT
+#56|Haunt the Network|U|DFT
+#57|Rangers' Aetherhive|U|DFT
+#58|Skyserpent Seeker|U|DFT
+#59|Gastal Thrillseeker|U|DFT
+#60|Cavalier of Dawn|M|SPG
+#61|Canyon Vaulter|U|DFT
+#62|Cloudspire Captain|U|DFT
+#63|Nesting Bot|U|DFT
+#64|Roadside Assistance|U|DFT
+#65|Unswerving Sloth|U|DFT
+#66|Mindspring Merfolk|R|DFT
+#67|Transit Mage|U|DFT
+#68|Vnwxt, Verbose Host|R|DFT
+#69|Carrion Cruiser|U|DFT
+#70|Gas Guzzler|R|DFT
+#71|Burnout Bashtronaut|R|DFT
+#72|Full Throttle|R|DFT
+#73|Hazoret, Godseeker|M|DFT
+#74|Reckless Velocitaur|U|DFT
+#75|Spire Mechcycle|U|DFT
+#76|Afterburner Expert|R|DFT
+#77|Autarch Mammoth|U|DFT
+#78|Oviya, Automech Artisan|R|DFT
+#79|Webstrike Elite|R|DFT
+#80|Apocalypse Runner|U|DFT
+#81|Captain Howler, Sea Scourge|R|DFT
+#82|Cloudspire Skycycle|U|DFT
+#83|Embalmed Ascendant|U|DFT
+#84|Fearless Swashbuckler|R|DFT
+#85|Guidelight Pathmaker|U|DFT
+#86|Haunted Hellride|U|DFT
+#87|Ketramose, the New Dawn|M|DFT
+#88|Lagorin, Soul of Alacria|U|DFT
+#89|Sita Varma, Masked Racer|R|DFT
+#90|Veteran Beastrider|U|DFT
+#91|Marketback Walker|R|DFT
+#92|Monument to Endurance|R|DFT
+#93|Plow Through|U|DFT
+#94|Air Response Unit|U|DFT
+#95|Collision Course|C|DFT
+#96|Hulldrifter|C|DFT
+#97|Rangers' Refueler|U|DFT
+#98|Risen Necroregent|U|DFT
+#99|Outpace Oblivion|U|DFT
+#100|Elvish Refueler|U|DFT
+#101|Boom Scholar|U|DFT
+#102|Cloudspire Coordinator|U|DFT
+#103|Rocketeer Boostbuggy|U|DFT
+#104|Voyage Home|U|DFT
+#105|Sabotage Strategist|U|DFT
+#106|Scrounging Skyray|U|DFT
+#107|Thoughtcast|M|SPG
+#108|Galvanic Blast|M|SPG
+#109|Gloryheath Lynx|U|DFT
+#110|Interface Ace|C|DFT
+#111|Spotcycle Scouter|C|DFT
+#112|Flood the Engine|C|DFT
+#113|Spikeshell Harrier|U|DFT
+#114|Waxen Shapethief|R|DFT
+#115|Grim Bauble|C|DFT
+#116|Momentum Breaker|U|DFT
+#117|Endrider Catalyzer|C|DFT
+#118|Gastal Blockbuster|C|DFT
+#119|Greasewrench Goblin|U|DFT
+#120|Lightning Strike|C|DFT
+#121|Marauding Mako|U|DFT
+#122|Dune Drifter|U|DFT
+#123|Thundering Broodwagon|U|DFT
+#124|Road Rage|U|DFT
+#125|Broadside Barrage|U|DFT
+#126|Detention Chariot|U|DFT
+#127|Lightshield Parry|C|DFT
+#128|Diversion Unit|U|DFT
+#129|Bloodghast|R|DFT
+#130|Hour of Victory|U|DFT
+#131|Pactdoll Terror|C|DFT
+#132|Quag Feast|R|DFT
+#133|Count on Luck|R|DFT
+#134|Daretti, Rocketeer Engineer|R|DFT
+#135|Gilded Ghoda|C|DFT
+#136|Tyrox, Saurid Tyrant|U|DFT
+#137|Fang-Druid Summoner|U|DFT
+#138|Ooze Patrol|U|DFT
+#139|Terrian, World Tyrant|U|DFT
+#140|Boosted Sloop|U|DFT
+#141|Leonin Surveyor|C|DFT
+#142|Lotusguard Disciple|C|DFT
+#143|Gearseeker Serpent|C|DFT
+#144|Memory Guardian|U|DFT
+#145|Nimble Thopterist|C|DFT
+#146|Spin Out|C|DFT
+#147|Magmakin Artillerist|C|DFT
+#148|Fang Guardian|U|DFT
+#149|Pothole Mole|C|DFT
+#150|Alacrian Armory|U|DFT
+#151|Pride of the Road|U|DFT
+#152|Adrenaline Jockey|U|DFT
+#153|Defend the Rider|U|DFT
+#154|Broodheart Engine|U|DFT
+#155|Marshals' Pathcruiser|U|DFT
+#156|Bleachbone Verge|R|DFT
+#157|Muraganda Raceway|R|DFT
+#158|Riverpyre Verge|R|DFT
+#159|Sunbillow Verge|R|DFT
+#160|Wastewood Verge|R|DFT
+#161|Willowrush Verge|R|DFT
+#162|Broadcast Rambler|C|DFT
+#163|Guidelight Synergist|U|DFT
+#164|Sundial, Dawn Tyrant|U|DFT
+#165|Chitin Gravestalker|C|DFT
+#166|Dynamite Diver|C|DFT
+#167|Endrider Spikespitter|U|DFT
+#168|Skycrash|U|DFT
+#169|Run Over|C|DFT
+#170|Tune Up|U|DFT
+#171|Howler's Heavy|C|DFT
+#172|Midnight Mangler|C|DFT
+#173|Stock Up|U|DFT
+#174|Trade the Helm|U|DFT
+#175|Back on Track|U|DFT
+#176|Ripclaw Wrangler|C|DFT
+#177|Wickerfolk Indomitable|U|DFT
+#178|Goblin Surveyor|C|DFT
+#179|Pacesetter Paragon|U|DFT
+#180|Prowcatcher Specialist|C|DFT
+#181|Beastrider Vanguard|C|DFT
+#182|Dredger's Insight|U|DFT
+#183|Earthrumbler|U|DFT
+#184|Rise from the Wreck|U|DFT
+#185|Amonkhet Raceway|U|DFT
+#186|Country Roads|U|DFT
+#187|Foul Roads|U|DFT
+#188|Reef Roads|U|DFT
+#189|Rocky Roads|U|DFT
+#190|Wild Roads|U|DFT
+#191|Gallant Strike|U|DFT
+#192|Voyager Quickwelder|C|DFT
+#193|Grim Javelineer|C|DFT
+#194|Locust Spray|U|DFT
+#195|Burner Rocket|C|DFT
+#196|Hazard of the Dunes|C|DFT
+#197|Jibbirik Omnivore|C|DFT
+#198|Migrating Ketradon|C|DFT
+#199|Rover Blades|U|DFT
+#200|Brightfield Glider|C|DFT
+#201|Brightfield Mustang|C|DFT
+#202|Daring Mechanic|C|DFT
+#203|Lightwheel Enhancements|C|DFT
+#204|Bounce Off|C|DFT
+#205|Roadside Blowout|U|DFT
+#206|Gastal Raider|U|DFT
+#207|Maximum Overdrive|C|DFT
+#208|Shefet Archfiend|U|DFT
+#209|Streaking Oilgorger|C|DFT
+#210|Wretched Doll|U|DFT
+#211|Clamorous Ironclad|C|DFT
+#212|Crash and Burn|C|DFT
+#213|Kickoff Celebrations|C|DFT
+#214|Pedal to the Metal|C|DFT
+#215|Bestow Greatness|C|DFT
+#216|Greenbelt Guardian|U|DFT
+#217|Loxodon Surveyor|C|DFT
+#218|Molt Tender|U|DFT
+#219|Stampeding Scurryfoot|C|DFT
+#220|Veloheart Bike|C|DFT
+#221|Venomsac Lagac|C|DFT
+#222|Aetherjacket|C|DFT
+#223|Racers' Scoreboard|U|DFT
+#224|Avishkar Raceway|C|DFT
+#225|Bloodfell Caves|C|DFT
+#226|Blossoming Sands|C|DFT
+#227|Dismal Backwater|C|DFT
+#228|Jungle Hollow|C|DFT
+#229|Night Market|C|DFT
+#230|Rugged Highlands|C|DFT
+#231|Scoured Barrens|C|DFT
+#232|Swiftwater Cliffs|C|DFT
+#233|Thornwood Falls|C|DFT
+#234|Tranquil Cove|C|DFT
+#235|Wind-Scarred Crag|C|DFT
+#236|Skystreak Engineer|C|DFT
+#237|Trip Up|C|DFT
+#238|Hellish Sideswipe|U|DFT
+#239|Wreckage Wickerfolk|C|DFT
+#240|Thunderhead Gunner|C|DFT
+#241|Broken Wings|C|DFT
+#242|Ride's End|C|DFT
+#243|Caelorna, Coral Tyrant|U|DFT
+#244|Slick Imitator|U|DFT
+#245|Deathless Pilot|C|DFT
+#246|Intimidation Tactics|U|DFT
+#247|Kalakscion, Hunger Tyrant|U|DFT
+#248|Pit Automaton|U|DFT
+#249|Scrap Compactor|C|DFT
+#250|Starting Column|C|DFT
+#251|Wreck Remover|C|DFT
+#252|Swiftwing Assailant|C|DFT
+#253|Glitch Ghost Surveyor|C|DFT
+#254|Guidelight Optimizer|C|DFT
+#255|Keen Buccaneer|C|DFT
+#256|Spectral Interference|C|DFT
+#257|Stall Out|C|DFT
+#258|Engine Rat|C|DFT
+#259|Mutant Surveyor|C|DFT
+#260|Risky Shortcut|C|DFT
+#261|Syphon Fuel|C|DFT
+#262|Alacrian Jaguar|C|DFT
+#263|Silken Strength|C|DFT
+#264|Camera Launcher|C|DFT
+#265|Guidelight Matrix|C|DFT
+#266|Skybox Ferry|C|DFT
+#267|Ticket Tortoise|C|DFT
+#268|Walking Sarcophagus|C|DFT
+#269|Fuel the Flames|U|DFT
+#270|Aether Syphon|U|DFT
+#271|Repurposing Bay|R|DFT
+#272|Spell Pierce|U|DFT
+#273|Unstoppable Plan|R|DFT
+#274|The Last Ride|M|DFT
+#275|Push the Limit|U|DFT
+#276|Point the Way|U|DFT
+#277|Chrome Mox|M|SPG
+#278|Riverchurn Monument|R|DFT
+#279|Radiant Lotus|M|DFT
+#280|Ancient Vendetta|U|DFT
+#281|Whir of Invention|M|SPG
+#282|Plains|C|DFT
+#283|Island|C|DFT
+#284|Swamp|C|DFT
+#285|Mountain|C|DFT
+#286|Forest|C|DFT

@@ -1,7 +1,7 @@
 Name:Infernal Tribute
 ManaCost:B B B
 Types:Enchantment
-A:AB$ Draw | Cost$ 2 Sac<1/Permanent.nonToken/nontoken permanent> | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ 2 Sac<1/Permanent.!token/nontoken permanent> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 Oracle:{2}, Sacrifice a nontoken permanent: Draw a card.

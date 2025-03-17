@@ -1,0 +1,11 @@
+Name:Rise from the Wreck
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Pump | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature card in your graveyard | SubAbility$ DBMount | SpellDescription$ Return up to one target creature card, up to one target Mount card, up to one target Vehicle card, and up to one target creature card with no abilities from your graveyard to your hand.
+SVar:DBMount:DB$ Pump | TgtZone$ Graveyard | ValidTgts$ Mount.YouOwn | TgtPrompt$ Select target Mount card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBVehicle
+SVar:DBVehicle:DB$ Pump | TgtZone$ Graveyard | ValidTgts$ Vehicle.YouOwn | TgtPrompt$ Select target Vehicle card in your graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBVanilla
+SVar:DBVanilla:DB$ Pump | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn+NoAbilities | TgtPrompt$ Select target creature card with no abilities in your graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Targeted
+DeckHas:Ability$Graveyard
+DeckHints:Type$Mount|Vehicle
+Oracle:Return up to one target creature card, up to one target Mount card, up to one target Vehicle card, and up to one target creature card with no abilities from your graveyard to your hand.

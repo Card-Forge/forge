@@ -1,0 +1,10 @@
+Name:Carrion Cruiser
+ManaCost:2 B
+Types:Artifact Vehicle
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this Vehicle enters, mill two cards. Then return a creature or Vehicle card from your graveyard to your hand. (To mill two cards, put the top two cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn,Vehicle.YouOwn | ChangeTypeDesc$ creature or Vehicle card | Hidden$ True | Optional$ True
+K:Crew:1
+DeckHas:Ability$Graveyard
+Oracle:When this Vehicle enters, mill two cards. Then return a creature or Vehicle card from your graveyard to your hand. (To mill two cards, put the top two cards of your library into your graveyard.)\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

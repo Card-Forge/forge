@@ -1,0 +1,10 @@
+Name:Draconautics Engineer
+ManaCost:1 R
+Types:Creature Goblin Artificer
+PT:2/2
+A:AB$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl+StrictlyOther | KW$ Haste | SubAbility$ DBPutCounter | Exhaust$ True | SpellDescription$ Other creatures you control gain haste until end of turn. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Token | Cost$ 3 R | TokenAmount$ 1 | TokenScript$ r_4_4_dinosaur_dragon_flying | TokenOwner$ You | Exhaust$ True | SpellDescription$ Create a 4/4 red Dinosaur Dragon creature token with flying.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token|Counters
+Oracle:Exhaust — {R}: Other creatures you control gain haste until end of turn. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)\nExhaust — {3}{R}: Create a 4/4 red Dinosaur Dragon creature token with flying.

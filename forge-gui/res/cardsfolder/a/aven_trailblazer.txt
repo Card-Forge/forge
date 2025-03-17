@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Bird Soldier
 PT:2/*
 K:Flying
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ Domain — CARDNAME's toughness is equal to the number of basic land types among lands you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetToughness$ X | Description$ Domain — CARDNAME's toughness is equal to the number of basic land types among lands you control.
 SVar:X:Count$Domain
 Oracle:Flying\nDomain — Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.

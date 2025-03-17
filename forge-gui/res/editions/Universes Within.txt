@@ -29,3 +29,10 @@ ScryfallCode=SLX
 21 M Gregor, Shrewd Magistrate @Filipe Pagliuso
 22 M Hansk, Slayer Zealot @Michal Ivan
 23 M Malik, Grim Manipulator @Joshua Raphael
+24 R Rashel, Fist of Torm @Chuck Lukacs
+25 R Mathise, Surge Channeler @Michele Giorgi
+26 R Evin, Waterdeep Opportunist @Igor Grechanyi
+27 R Jurin, Leading the Charge @Craig J Spearing
+28 R Themberchaud @Edgar Sánchez Hidalgo
+29 R Casal, Lurkwood Pathfinder @Victor Adame Minguez
+30 R Bohn, Beguiling Balladeer @Alix Branwyn

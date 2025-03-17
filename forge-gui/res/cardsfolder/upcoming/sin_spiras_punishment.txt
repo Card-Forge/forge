@@ -1,0 +1,13 @@
+Name:Sin, Spira's Punishment
+ManaCost:4 B G U
+Types:Legendary Creature Leviathan Avatar
+PT:7/7
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ Whenever NICKNAME enters or attacks, exile a permanent card from your graveyard at random, then create a tapped token that's a copy of that card. If the exiled card is a land card, repeat this process.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, exile a permanent card from your graveyard at random, then create a tapped token that's a copy of that card. If the exiled card is a land card, repeat this process.
+SVar:TrigRepeat:DB$ Repeat | RepeatSubAbility$ DBChange | RepeatDefined$ Remembered | RepeatPresent$ Land | RepeatSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | AtRandom$ True | ChangeType$ Permanent.YouOwn | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | Hidden$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | TokenTapped$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Sin enters or attacks, exile a permanent card from your graveyard at random, then create a tapped token that's a copy of that card. If the exiled card is a land card, repeat this process.

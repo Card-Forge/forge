@@ -1,6 +1,6 @@
 Name:Rise from the Grave
 ManaCost:4 B
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | AnimateSubAbility$ Animate | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.
-SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Duration$ Permanent
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | StaticEffect$ Animate | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Zombie | AddColor$ Black
 Oracle:Put target creature card from a graveyard onto the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.

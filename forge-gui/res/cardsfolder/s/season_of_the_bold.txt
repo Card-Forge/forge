@@ -5,7 +5,7 @@ A:SP$ Charm | Choices$ DBToken,DBExile,DBDamageEffect | CharmNum$ 5 | MinCharmNu
 SVar:DBToken:DB$ Token | Pawprint$ 1 | TokenScript$ c_a_treasure_sac | TokenTapped$ True | SpellDescription$ Create a tapped Treasure token.
 SVar:DBExile:DB$ Dig | Pawprint$ 2 | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. Until the end of your next turn, you may play them.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBDamageEffect:DB$ Effect | Pawprint$ 3 | Duration$ UntilTheEndOfYourNextTurn | Triggers$ TrigSpellCast | SpellDescription$ Until the end of your next turn, whenever you cast a spell, CARDNAME deals 2 damage to up to one target creature.
 SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, CARDNAME deals 2 damage to up to one target creature.

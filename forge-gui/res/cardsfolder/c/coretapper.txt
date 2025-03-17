@@ -2,8 +2,8 @@ Name:Coretapper
 ManaCost:2
 Types:Artifact Creature Myr
 PT:1/1
-A:AB$ PutCounter | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on target artifact.
-A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | CounterType$ CHARGE | CounterNum$ 2 | SpellDescription$ Put two charge counters on target artifact.
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact (1 counter) | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on target artifact.
+A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact (2 counters) | CounterType$ CHARGE | CounterNum$ 2 | SpellDescription$ Put two charge counters on target artifact.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:{T}: Put a charge counter on target artifact.\nSacrifice Coretapper: Put two charge counters on target artifact.

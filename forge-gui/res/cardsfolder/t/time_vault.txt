@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-K:CARDNAME doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ CARDNAME doesn't untap during your untap step.
 R:Event$ BeginTurn | ActiveZones$ Battlefield | ValidPlayer$ You | IsPresent$ Card.Self+tapped | Optional$ True | ReplaceWith$ DBUntap | Description$ If you would begin your turn while CARDNAME is tapped, you may skip that turn instead. If you do, untap CARDNAME.
 SVar:DBUntap:DB$ Untap | Defined$ Self | AILogic$ Never
 A:AB$ AddTurn | Cost$ T | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.

@@ -2,7 +2,7 @@ Name:Robobrain War Mind
 ManaCost:3 U
 Types:Artifact Creature Robot
 PT:*/5
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | Description$ CARDNAME's power is equal to the number of cards in your hand.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ Y | Description$ CARDNAME's power is equal to the number of cards in your hand.
 SVar:Y:Count$InYourHand
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get an amount of {E} (energy counters) equal to the number of artifact creatures you control.
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X

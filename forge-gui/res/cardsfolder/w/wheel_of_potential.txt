@@ -10,7 +10,7 @@ SVar:No:DB$ Pump | SpellDescription$ Keep your hand.
 SVar:Exile:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | Defined$ Player.NotedForExileDraw | RememberChanged$ True | SubAbility$ Draw | StackDescription$ None
 SVar:Draw:DB$ Draw | Defined$ Player.NotedForExileDraw | NumCards$ X | SubAbility$ Effect | StackDescription$ None
 SVar:Effect:DB$ Effect | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | RememberObjects$ Remembered.YouOwn | StaticAbilities$ Play | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup | StackDescription$ REP you may_{p:You} may & you own_they own & your_their | SpellDescription$ If 7 or more {E} was paid this way, you may play cards you own exiled this way until the end of your next turn.
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.YouOwn+IsRemembered | AffectedZone$ Exile | Description$ You may play cards you own exiled this way until the end of your next turn.
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.YouOwn+IsRemembered | AffectedZone$ Exile | Description$ You may play cards you own exiled this way until the end of your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBClearNotes
 SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ ExileDraw | StackDescription$ None
 SVar:X:Count$ChosenNumber

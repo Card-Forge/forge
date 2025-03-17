@@ -4,6 +4,6 @@ Types:Creature Spirit
 PT:0/*
 K:Defender
 K:Reach
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Forests on the battlefield.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Forests on the battlefield.
 SVar:X:Count$Valid Forest
 Oracle:Defender; reach (This creature can block creatures with flying.)\nTraproot Kami's toughness is equal to the number of Forests on the battlefield.

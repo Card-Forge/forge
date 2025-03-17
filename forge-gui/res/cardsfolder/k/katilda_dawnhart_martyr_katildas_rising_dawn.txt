@@ -6,7 +6,7 @@ K:Flying
 K:Lifelink
 K:Protection:Vampire
 K:Disturb:3 W W
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of permanents you control that are Spirits and/or enchantments.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of permanents you control that are Spirits and/or enchantments.
 SVar:X:Count$Valid Spirit.YouCtrl,Enchantment.YouCtrl
 SVar:NeedsToPlayVar:X GE2
 SVar:BuffedBy:Enchantment,Spirit

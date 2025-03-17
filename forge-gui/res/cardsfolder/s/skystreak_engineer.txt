@@ -1,0 +1,7 @@
+Name:Skystreak Engineer
+ManaCost:1 U
+Types:Creature Human Pilot
+PT:1/3
+K:Flying
+A:AB$ PutCounter | Cost$ 4 U | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | Exhaust$ True | SpellDescription$ Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)
+Oracle:Flying\nExhaust — {4}{U}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)

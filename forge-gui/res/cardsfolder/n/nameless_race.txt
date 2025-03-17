@@ -6,10 +6,10 @@ K:Trample
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | ReplacementResult$ Updated | Description$ As CARDNAME enters, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
 SVar:PayLife:AB$ StoreSVar | Cost$ Mandatory PayLife<X> | XMaxLimit$ Limit | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ X
 # Don't use References, when the variable is set by StoreSVar
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered.
 SVar:X:Count$xPaid
 SVar:Limit:SVar$Active/Plus.Buried
-SVar:Active:Count$Valid Permanent.White+nonToken+OppCtrl
+SVar:Active:Count$Valid Permanent.White+!token+OppCtrl
 SVar:Buried:Count$ValidGraveyard Card.White+OppCtrl
 SVar:LifePaidOnETB:Number$0
 AI:RemoveDeck:All

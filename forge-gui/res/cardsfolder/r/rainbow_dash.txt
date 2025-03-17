@@ -6,7 +6,7 @@ K:Flying
 K:Haste
 T:Mode$ Attacks | ValidCard$ Creature.withFlying+YouCtrl,Creature.withHaste+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGetCooler | TriggerDescription$ Whenever a creature you control with flying and/or haste attacks, you get 20% cooler. (You start at 0% coolness.)
 SVar:TrigGetCooler:DB$ Effect | Name$ Coolness Badge | StaticAbilities$ STCoolness | Duration$ Permanent
-SVar:STCoolness:Mode$ Continuous | EffectZone$ Command | Affected$ You | Description$ You get 20% cooler.
+SVar:STCoolness:Mode$ Continuous | Affected$ You | Description$ You get 20% cooler.
 A:AB$ Mana | Cost$ T | ConditionCheckSVar$ RDCoolness | ConditionSVarCompare$ GE5 | Produced$ W U B R G | PrecostDesc$ Sonic Rainboom — | SpellDescription$ If you're at least 100% cool, add {W}{U}{B}{R}{G}, draw a card, and reset your coolness. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ RDCoolness | ConditionSVarCompare$ GE5 | SubAbility$ ResetCoolness
 SVar:ResetCoolness:DB$ ChangeZoneAll | ConditionCheckSVar$ RDCoolness | ConditionSVarCompare$ GE5 | ChangeType$ Effect.YouCtrl+namedCoolness Badge | Origin$ Command | Destination$ Exile

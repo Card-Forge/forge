@@ -75,7 +75,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         game.getAction().checkStateEffects(true);
 
-        AssertJUnit.assertEquals(1, sliver.getAmountOfKeyword("Flanking"));
+        AssertJUnit.assertEquals(1, sliver.getAmountOfKeyword(Keyword.FLANKING));
         AssertJUnit.assertEquals(2, sliver.getNetPower());
         AssertJUnit.assertEquals(2, sliver.getNetToughness());
 
@@ -87,7 +87,7 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(score > 0);
         Game simGame = sim.getSimulatedGameState();
         Card sliverCopy = findCardWithName(simGame, sliverCardName);
-        AssertJUnit.assertEquals(1, sliverCopy.getAmountOfKeyword("Flanking"));
+        AssertJUnit.assertEquals(1, sliverCopy.getAmountOfKeyword(Keyword.FLANKING));
         AssertJUnit.assertEquals(2, sliver.getNetPower());
         AssertJUnit.assertEquals(2, sliver.getNetToughness());
     }
@@ -103,15 +103,15 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertTrue(lion.isMonstrous());
-        AssertJUnit.assertEquals(1, lion.getAmountOfKeyword("Hexproof"));
-        AssertJUnit.assertEquals(1, lion.getAmountOfKeyword("Indestructible"));
+        AssertJUnit.assertEquals(1, lion.getAmountOfKeyword(Keyword.HEXPROOF));
+        AssertJUnit.assertEquals(1, lion.getAmountOfKeyword(Keyword.INDESTRUCTIBLE));
 
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card lionCopy = findCardWithName(simGame, lionCardName);
         AssertJUnit.assertTrue(lionCopy.isMonstrous());
-        AssertJUnit.assertEquals(1, lionCopy.getAmountOfKeyword("Hexproof"));
-        AssertJUnit.assertEquals(1, lionCopy.getAmountOfKeyword("Indestructible"));
+        AssertJUnit.assertEquals(1, lionCopy.getAmountOfKeyword(Keyword.HEXPROOF));
+        AssertJUnit.assertEquals(1, lionCopy.getAmountOfKeyword(Keyword.INDESTRUCTIBLE));
     }
 
     @Test
@@ -125,12 +125,12 @@ public class GameSimulationTest extends SimulationTest {
         cloak.attachToEntity(bear, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
-        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword("Shroud"));
+        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword(Keyword.SHROUD));
 
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
-        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword("Shroud"));
+        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword(Keyword.SHROUD));
     }
 
     @Test
@@ -144,12 +144,12 @@ public class GameSimulationTest extends SimulationTest {
         lifelink.attachToEntity(bear, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
-        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword("Lifelink"));
+        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword(Keyword.LIFELINK));
 
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
-        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword("Lifelink"));
+        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword(Keyword.LIFELINK));
     }
 
     @Test
@@ -2548,6 +2548,66 @@ public class GameSimulationTest extends SimulationTest {
 
         // spell should fizzle so no card was drawn
         AssertJUnit.assertEquals(0, game.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
+    }
+
+    @Test
+    public void testControlLayerDependency() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player opp = game.getPlayers().get(1);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card bear = addCard("Bear Cub", p);
+        addCards("Island", 6, p);
+        addCards("Island", 5, opp);
+        addCard("Vedalken Orrery", opp);
+        Card control = addCardToZone("Mind Control", opp, ZoneType.Hand);
+
+        GameSimulator sim = createSimulator(game, opp);
+        game = sim.getSimulatedGameState();
+
+        SpellAbility controlSA = control.getFirstSpellAbility();
+        controlSA.getTargets().add(bear);
+        sim.simulateSpellAbility(controlSA);
+
+        p = game.getPlayers().get(0);
+        Card confiscate = addCardToZone("Confiscate", p, ZoneType.Hand);
+        control = findCardWithName(game, "Mind Control");
+        SpellAbility confiscateSA = confiscate.getFirstSpellAbility();
+        confiscateSA.getTargets().add(control);
+
+        sim = createSimulator(game, p);
+        game = sim.getSimulatedGameState();
+        bear = findCardWithName(game, "Bear Cub");
+
+        AssertJUnit.assertTrue(bear.getController().equals(opp));
+        sim.simulateSpellAbility(confiscateSA);
+        AssertJUnit.assertTrue(bear.getController().equals(p));
+    }
+
+    @Test
+    public void testTypeLayerDependency() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+
+        Card nonBasicForest = addCard("Breeding Pool", p);
+        addCard("Life and Limb", p);
+        addCard("Blood Moon", p);
+
+        game.getAction().checkStaticAbilities();
+
+        // Blood Moon will be applied first because Life and Limb depends on it
+        AssertJUnit.assertFalse(nonBasicForest.isCreature());
+        AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
+
+        // adding Saproling causes dependency loop, so Life and Limb gets applied first instead
+        addCard("Shroofus Sproutsire", p);
+
+        game.getAction().checkStaticAbilities();
+
+        AssertJUnit.assertTrue(nonBasicForest.isCreature());
+        AssertJUnit.assertTrue(nonBasicForest.getType().hasSubtype("Mountain"));
     }
 
     /**

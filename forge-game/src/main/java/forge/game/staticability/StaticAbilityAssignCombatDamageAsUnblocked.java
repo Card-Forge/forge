@@ -20,14 +20,8 @@ public class StaticAbilityAssignCombatDamageAsUnblocked {
                     continue;
                 }
 
-                if (stAb.hasParam("Optional")) {
-                    if (!optional) {
-                        continue;
-                    }
-                } else {
-                    if (optional) {
-                        continue;
-                    }
+                if (stAb.hasParam("Optional") != optional) {
+                    continue;
                 }
 
                 if (applyAssignCombatDamageAsUnblocked(stAb, card)) {

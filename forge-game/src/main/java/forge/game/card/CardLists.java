@@ -23,7 +23,7 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.staticability.StaticAbilityCrewValue;
+import forge.game.staticability.StaticAbilityTapPowerValue;
 import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
@@ -406,21 +406,17 @@ public class CardLists {
      * Given a list of cards, return their combined power
      * 
      * @param cardList the list of creature cards for which to sum the power
-     * @param ignoreNegativePower if true, treats negative power as 0
      * @param crew for cards that crew with toughness rather than power
      */
-    public static int getTotalPower(Iterable<Card> cardList, boolean ignoreNegativePower, boolean crew) {
+    public static int getTotalPower(Iterable<Card> cardList, SpellAbility sa) {
         int total = 0;
         for (final Card crd : cardList) {
-            if (crew) {
-                if (StaticAbilityCrewValue.crewsWithToughness(crd)) {
-                    total += ignoreNegativePower ? Math.max(0, crd.getNetToughness()) : crd.getNetToughness();
-                } else {
-                    int m = StaticAbilityCrewValue.getCrewMod(crd);
-                    total += ignoreNegativePower ? Math.max(0, crd.getNetPower() + m) : crd.getNetPower() + m;
-                }
+            if (StaticAbilityTapPowerValue.withToughness(crd, sa)) {
+                total += Math.max(0, crd.getNetToughness());
+            } else {
+                int m = StaticAbilityTapPowerValue.getMod(crd, sa);
+                total += Math.max(0, crd.getNetPower() + m);
             }
-            else total += ignoreNegativePower ? Math.max(0, crd.getNetPower()) : crd.getNetPower();
         }
         return total;
     }

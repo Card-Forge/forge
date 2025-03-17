@@ -42,6 +42,9 @@ public class InvestigateEffect extends TokenEffectBase {
             MutableBoolean combatChanged = new MutableBoolean(false);
 
             for (final Player p : getTargetPlayers(sa)) {
+                if (!p.isInGame()) {
+                    continue;
+                }
                 if (sa.hasParam("Optional") && !p.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblWouldYouLikeInvestigate"), null)) {
                     continue;

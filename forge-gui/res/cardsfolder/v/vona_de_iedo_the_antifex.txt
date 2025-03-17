@@ -4,7 +4,7 @@ Types:Legendary Creature Vampire Cleric Knight
 PT:4/2
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target nonland, nontoken permanent an opponent controls. Then you may discard a card. If you do, conjure a duplicate of that permanent into your hand, and the duplicate perpetually gains "Mana of any type can be spent to cast this spell."
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.OppCtrl+nonland+nonToken | TgtPrompt$ Select target nonland, nontoken permanent an opponent controls | RememberTargets$ True | SubAbility$ DBConjure
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.OppCtrl+nonland+!token | TgtPrompt$ Select target nonland, nontoken permanent an opponent controls | RememberTargets$ True | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | Conjure$ True | DefinedName$ Remembered | Zone$ Hand | Amount$ 1 | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ SpendAnyMana | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyType | Description$ Mana of any type can be spent to cast this spell.

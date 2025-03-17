@@ -73,7 +73,7 @@ public class ReplaceDamage extends ReplacementEffect {
         if (hasParam("RelativeToSource")) {
             Card source = (Card) runParams.get(AbilityKey.DamageSource);
             String validRelative = getParam("RelativeToSource");
-            if (!matchesValid(runParams.get(AbilityKey.DamageTarget), validRelative.split(","), source)) {
+            if (!matchesValid(runParams.get(AbilityKey.Affected), validRelative.split(","), source)) {
                 return false;
             }
         }

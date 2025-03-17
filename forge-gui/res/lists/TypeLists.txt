@@ -37,6 +37,7 @@ Aurochs:Aurochs
 Avatar:Avatars
 Azra:Azra
 Badger:Badgers
+Balloon:Balloons
 Barbarian:Barbarians
 Bard:Bards
 Basilisk:Basilisks
@@ -118,6 +119,7 @@ Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
 Gith:Gith
+Glimmer:Glimmers
 Gnoll:Gnolls
 Gnome:Gnomes
 Goat:Goats
@@ -185,6 +187,7 @@ Monger:Mongers
 Mongoose:Mongooses
 Monk:Monks
 Monkey:Monkeys
+Moogle:Moogles
 Moonfolk:Moonfolk
 Mount:Mounts
 Mouse:Mice
@@ -251,6 +254,7 @@ Scion:Scions
 Scorpion:Scorpions
 Scout:Scouts
 Sculpture:Sculptures
+Seal:Seals
 Serf:Serfs
 Serpent:Serpents
 Servo:Servos
@@ -284,6 +288,7 @@ Squid:Squids
 Squirrel:Squirrels
 Starfish:Starfish
 Surrakar:Surrakars
+Symbiote:Symbiotes
 Synth:Synths
 Survivor:Survivors
 Tentacle:Tentacles
@@ -304,6 +309,7 @@ Unicorn:Unicorns
 Vampire:Vampires
 Varmint:Varmints
 Vedalken:Vedalkens
+Villain:Villains
 Volver:Volvers
 Wall:Walls
 Warlock:Warlocks

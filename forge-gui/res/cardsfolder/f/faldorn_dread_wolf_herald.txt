@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Battlefield | ValidCard$ Land
 SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf
 A:AB$ Dig | Cost$ 1 T Discard<1/Card> | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. You may play it this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ You may play that card this turn.
+SVar:STPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token & Type$Wolf
 Oracle:Whenever you cast a spell from exile or a land you control enters from exile, create a 2/2 green Wolf creature token.\n{1}, {T}, Discard a card: Exile the top card of your library. You may play it this turn.

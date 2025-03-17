@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -22,9 +23,21 @@ public class UnattachEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        for (final Card cardToUnattach : getTargetCards(sa)) {
-            if (cardToUnattach.isAttachment() && cardToUnattach.isAttachedToEntity()) {
-                cardToUnattach.unattachFromEntity(cardToUnattach.getEntityAttachedTo());
+        final Game game = sa.getHostCard().getGame();
+        for (final Card tgtC : getTargetCards(sa)) {
+            if (tgtC.isInPlay()) {
+                continue;
+            }
+            // check if the object is still in game or if it was moved
+            Card gameCard = game.getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
+            if (gameCard.isAttachment() && gameCard.isAttachedToEntity()) {
+                gameCard.unattachFromEntity(gameCard.getEntityAttachedTo());
             }
         }
     }

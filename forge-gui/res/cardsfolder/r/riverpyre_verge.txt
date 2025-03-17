@@ -1,0 +1,6 @@
+Name:Riverpyre Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ U | IsPresent$ Island.YouCtrl,Mountain.YouCtrl | SpellDescription$ Add {U}. Activate only if you control an Island or a Mountain.
+Oracle:{T}: Add {R}.\n{T}: Add {U}. Activate only if you control an Island or a Mountain.

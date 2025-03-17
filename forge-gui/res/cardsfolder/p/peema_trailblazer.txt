@@ -1,0 +1,12 @@
+Name:Peema Trailblazer
+ManaCost:2 G
+Types:Creature Elephant Warrior
+PT:3/3
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigEnergy | TriggerDescription$ Whenever this creature deals combat damage to a player, you get that many {E} (energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ TriggerCount$DamageAmount
+A:AB$ PutCounter | Cost$ PayEnergy<6> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | Exhaust$ True | SubAbility$ DBDraw | SpellDescription$ Put two +1/+1 counters on this creature. Then draw cards equal to the greatest power among creatures you control. (Activate each exhaust ability only once.)
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+DeckHas:Ability$Counters
+Oracle:Trample\nWhenever this creature deals combat damage to a player, you get that many {E} (energy counters).\nExhaust — Pay six {E}: Put two +1/+1 counters on this creature. Then draw cards equal to the greatest power among creatures you control. (Activate each exhaust ability only once.)

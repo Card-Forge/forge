@@ -6874,7 +6874,7 @@
 			"probability": 1,
 			"count": 3,
 			"rarity": [
-				"uncomon",
+				"uncommon",
 				"common"
 			],
 			"cardTypes": [
@@ -12193,9 +12193,9 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.5,
+			"probability": 0.3,
 			"count": 1,
-			"cardName": "Elder Gargaroth"
+			"cardName": "Gaea's Cradle"
 		},
 		{
 			"type": "card",
@@ -19341,7 +19341,7 @@
 },
 {
 	"name": "Merfolk",
-	"nameOverride": "Merfok Raider",
+	"nameOverride": "Merfolk Raider",
 	"sprite": "sprites/enemy/elemental/waterelemental.atlas",
 	"deck": [
 		"decks/standard/merfolk_bad.json"
@@ -20929,7 +20929,7 @@
 			"count": 3,
 			"addMaxCount": 6,
 			"rarity": [
-				"uncomon",
+				"uncommon",
 				"common"
 			]
 		},
@@ -20946,7 +20946,7 @@
 			"probability": 1,
 			"count": 3,
 			"rarity": [
-				"uncomon",
+				"uncommon",
 				"common"
 			],
 			"cardTypes": [
@@ -23699,7 +23699,7 @@
 			"probability": 1,
 			"count": 3,
 			"rarity": [
-				"uncomon",
+				"uncommon",
 				"common"
 			],
 			"cardTypes": [
@@ -24664,7 +24664,7 @@
 			"probability": 1,
 			"count": 3,
 			"rarity": [
-				"uncomon",
+				"uncommon",
 				"common"
 			],
 			"cardTypes": [
@@ -25552,7 +25552,7 @@
 			"probability": 1,
 			"count": 3,
 			"rarity": [
-				"uncomon",
+				"uncommon",
 				"common"
 			],
 			"cardTypes": [
@@ -27452,7 +27452,7 @@
 	]
 },
 {
-	"name": "Vulcano Dragon",
+	"name": "Volcano Dragon",
 	"nameOverride": "",
 	"sprite": "sprites/enemy/dragon/dragonlarge.atlas",
 	"deck": [

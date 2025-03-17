@@ -1,0 +1,11 @@
+Name:Monument to Endurance
+ManaCost:3
+Types:Artifact
+T:Mode$ Discarded | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever you discard a card, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBToken,DBLoseLife | ChoiceRestriction$ ThisTurn | CharmNum$ 1
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3 | SpellDescription$ Each opponent loses 3 life.
+DeckNeeds:Ability$Discard
+DeckHas:Ability$Token
+Oracle:Whenever you discard a card, choose one that hasn't been chosen this turn —\n• Draw a card.\n• Create a Treasure token.\n• Each opponent loses 3 life.

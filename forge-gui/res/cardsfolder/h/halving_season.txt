@@ -2,7 +2,7 @@ Name:Halving Season
 ManaCost:4 B
 Types:Enchantment
 R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.OppCtrl | ReplaceWith$ HalveToken | EffectOnly$ True | Description$ If an opponent would create one or more tokens, they create half that many of each of those kinds of tokens instead, rounded down.
-SVar:HalveToken:DB$ ReplaceToken | Type$ Amount | Amount$ HalfDown | ValidCard$ Card.OppCtrl
+SVar:HalveToken:DB$ ReplaceToken | Type$ Amount | Amount$ HalfDown
 R:Event$ AddCounter | ActiveZones$ Battlefield | ValidSource$ Opponent | ValidObject$ Permanent.inZoneBattlefield,Player | ReplaceWith$ HalfCounters | Description$ If an opponent would put one or more counters on a permanent or player, they put half that many of each of those kinds of counters on that permanent or player instead, rounded down.
 SVar:HalfCounters:DB$ ReplaceCounter | ValidSource$ Opponent | Amount$ Y
 SVar:Y:ReplaceCount$CounterNum/HalfDown

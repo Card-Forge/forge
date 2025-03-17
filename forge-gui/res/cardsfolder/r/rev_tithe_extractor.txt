@@ -8,7 +8,7 @@ T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefie
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBDig
 SVar:DBDig:DB$ Dig | DigNum$ 1 | Defined$ TriggeredTarget | ForceRevealToController$ True | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ Permanent
-SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled.
+SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 DeckHints:Ability$Token

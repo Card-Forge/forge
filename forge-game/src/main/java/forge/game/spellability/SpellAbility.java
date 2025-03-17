@@ -61,7 +61,6 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
-import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
@@ -70,6 +69,7 @@ import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 
 //only SpellAbility can go on the stack
@@ -587,6 +587,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isBoast() {
         return this.hasParam("Boast");
     }
+    public boolean isExhaust() {
+        return this.hasParam("Exhaust");
+    }
 
     public boolean isNinjutsu() {
         return this.isKeyword(Keyword.NINJUTSU);
@@ -834,7 +837,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         for (Mana mana : getPayingMana()) {
             if (mana.triggersWhenSpent()) {
-                mana.getManaAbility().addTriggersWhenSpent(this, host);
+                mana.getManaAbility().addTriggersWhenSpent(this);
             }
 
             if (mana.addsCounters(this)) {
@@ -1069,11 +1072,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void rebuiltDescription() {
-
         // SubAbilities don't have Costs or Cost descriptors
 
-        String sb = getCostDescription() +
-                getParam("SpellDescription");
+        String sb = getCostDescription() + getParam("SpellDescription");
         setDescription(sb);
     }
 
@@ -1533,8 +1534,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
-            if (entity instanceof GameEntity) {
-                GameEntity e = (GameEntity)entity;
+            if (entity instanceof GameEntity e) {
                 if (!e.isValid(tr.getValidTgts(), getActivatingPlayer(), getHostCard(), this)) {
                     return false;
                 }
@@ -1543,8 +1543,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
-            if (entity instanceof Card) {
-                final Card c = (Card) entity;
+            if (entity instanceof Card c) {
                 if (c.getZone() != null && !tr.getZone().contains(c.getZone().getZoneType())) {
                     return false;
                 }
@@ -1988,7 +1987,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return targets;
     }
 
-    public boolean canTargetSpellAbility(final SpellAbility topSA) {
+    public boolean canTargetSpellAbility(SpellAbility topSA) {
+        if (topSA.isWrapper()) {
+            topSA = ((WrappedAbility) topSA).getWrappedAbility();
+        }
+
         final TargetRestrictions tgt = getTargetRestrictions();
 
         if (this.equals(topSA)) {
@@ -2352,7 +2355,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (!costPart.isRenewable()) {
                 score += 3;
             }
-            if (costPart instanceof CostTap && !Untap.canUntap(getHostCard())) {
+            if (costPart instanceof CostTap && !getHostCard().canUntap(getActivatingPlayer(), true)) {
                 score += 10;
             }
             if (costPart instanceof CostSacrifice && !costPart.payCostFromSource()) {

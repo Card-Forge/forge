@@ -61,6 +61,7 @@ public abstract class GameState {
         private int landsPlayed = 0;
         private int landsPlayedLastTurn = 0;
         private int numRingTemptedYou = 0;
+        private int speed = 0;
         private String precast = null;
         private String putOnStack = null;
         private final Map<ZoneType, String> cardTexts = new EnumMap<>(ZoneType.class);
@@ -137,6 +138,7 @@ public abstract class GameState {
             sb.append(TextUtil.concatNoSpace(prefix + "landsplayed=", String.valueOf(p.landsPlayed), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "landsplayedlastturn=", String.valueOf(p.landsPlayedLastTurn), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "numringtemptedyou=", String.valueOf(p.numRingTemptedYou), "\n"));
+            sb.append(TextUtil.concatNoSpace(prefix + "speed=", String.valueOf(p.speed), "\n"));
             if (!p.counters.isEmpty()) {
                 sb.append(TextUtil.concatNoSpace(prefix + "counters=", p.counters, "\n"));
             }
@@ -167,6 +169,7 @@ public abstract class GameState {
             p.counters = countersToString(player.getCounters());
             p.manaPool = processManaPool(player.getManaPool());
             p.numRingTemptedYou = player.getNumRingTemptedYou();
+            p.speed = player.getSpeed();
             playerStates.add(p);
         }
 
@@ -542,6 +545,8 @@ public abstract class GameState {
             getPlayerState(categoryName).landsPlayedLastTurn = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("numringtemptedyou")) {
             getPlayerState(categoryName).numRingTemptedYou = Integer.parseInt(categoryValue);
+        } else if (categoryName.endsWith("speed")) {
+            getPlayerState(categoryName).speed = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("play") || categoryName.endsWith("battlefield")) {
             getPlayerState(categoryName).cardTexts.put(ZoneType.Battlefield, categoryValue);
         } else if (categoryName.endsWith("hand")) {
@@ -1146,6 +1151,7 @@ public abstract class GameState {
         p.setLandsPlayedThisTurn(state.landsPlayed);
         p.setLandsPlayedLastTurn(state.landsPlayedLastTurn);
         p.setNumRingTemptedYou(state.numRingTemptedYou);
+        p.setSpeed(state.speed);
 
         p.clearPaidForSA();
 
@@ -1208,6 +1214,7 @@ public abstract class GameState {
                 p.setRingLevel(i);
             }
         }
+        if (state.speed > 0) p.createSpeedEffect();
     }
 
     /**
