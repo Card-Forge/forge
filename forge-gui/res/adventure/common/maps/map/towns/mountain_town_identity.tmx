@@ -32,7 +32,7 @@
   <object id="38" template="../../obj/entry_up.tx" x="208" y="272"/>
   <object id="41" template="../../obj/shop.tx" x="64" y="115">
    <properties>
-    <property name="commonShopList" value="RedBoosterPackShop,BoosterPackShop,Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
     <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>
@@ -40,7 +40,7 @@
   </object>
   <object id="42" template="../../obj/shop.tx" x="113" y="115">
    <properties>
-    <property name="commonShopList" value="RedBoosterPackShop,BoosterPackShop,Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
     <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>
@@ -48,7 +48,7 @@
   </object>
   <object id="43" template="../../obj/shop.tx" x="161" y="163">
    <properties>
-    <property name="commonShopList" value="RedBoosterPackShop,BoosterPackShop,Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
     <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>
@@ -56,7 +56,7 @@
   </object>
   <object id="44" template="../../obj/shop.tx" x="257" y="162">
    <properties>
-    <property name="commonShopList" value="RedBoosterPackShop,BoosterPackShop,Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,RedBoosterPackShop,Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
     <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>
@@ -64,7 +64,7 @@
   </object>
   <object id="45" template="../../obj/shop.tx" x="304" y="162">
    <properties>
-    <property name="commonShopList" value="RedBoosterPackShop,BoosterPackShop,Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
     <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>
@@ -72,7 +72,7 @@
   </object>
   <object id="46" template="../../obj/shop.tx" x="367" y="162">
    <properties>
-    <property name="commonShopList" value="RedBoosterPackShop,BoosterPackShop,Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
     <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>
@@ -104,7 +104,7 @@
   </object>
   <object id="56" template="../../obj/shop.tx" x="304" y="97">
    <properties>
-    <property name="commonShopList" value="RedBoosterPackShop,BoosterPackShop,Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
+    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
     <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>
