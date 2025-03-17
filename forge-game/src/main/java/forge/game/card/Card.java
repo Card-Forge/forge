@@ -4924,7 +4924,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (phase != null && isExertedBy(phase)) {
             return false;
         }
-        if (phase != null && hasKeyword("This card doesn't untap during your next untap step."))) {
+        if (phase != null && hasKeyword("This card doesn't untap during your next untap step.")) {
             return false;
         }
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(this);
