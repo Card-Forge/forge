@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
@@ -164,10 +163,6 @@ public class Untap extends Phase {
         // TODO Replace with Static Abilities
         for (final Card c : active.getCardsIn(ZoneType.Battlefield)) {
             c.removeHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
-            if (c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
-                c.removeHiddenExtrinsicKeyword("This card doesn't untap during your next two untap steps.");
-                c.addHiddenExtrinsicKeywords(game.getNextTimestamp(), 0, Lists.newArrayList("This card doesn't untap during your next untap step."));
-            }
         }
         
         // remove exerted flags from all things in play
