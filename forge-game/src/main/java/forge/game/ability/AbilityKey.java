@@ -140,10 +140,6 @@ public enum AbilityKey {
     Valiant("Valiant"),
     Won("Won"),
 
-    // for AI prediction
-    Phase("Phase"),
-    PlayerTurn("PlayerTurn"),
-
     // below used across different Replacements, don't reuse
     InternalTriggerTable("InternalTriggerTable"),
     SimultaneousETB("SimultaneousETB"); // for CR 614.13c

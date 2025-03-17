@@ -65,6 +65,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.FutureTask;
 
 import static java.lang.Math.max;
 
@@ -4912,22 +4913,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public final boolean canUntap(Player phase, boolean predict) {
-        if (!tapped) { return false; }
+    public final boolean canUntap(Player phase, Boolean predict) {
+        if (predict != null && predict) {
+            FutureTask<Boolean> proc = new FutureTask<>(() -> {
+                return canUntap(phase, null);
+            });
+            return getGame().getPhaseHandler().withContext(proc, phase, PhaseType.UNTAP);
+        }
+        if (predict != null && !tapped) { return false; }
         if (phase != null && isExertedBy(phase)) {
             return false;
         }
         if (phase != null &&
                 (hasKeyword("CARDNAME doesn't untap during your untap step.")
-                        || hasKeyword("This card doesn't untap during your next untap step.")
-                        || hasKeyword("This card doesn't untap during your next two untap steps."))) {
+                        || hasKeyword("This card doesn't untap during your next untap step."))) {
             return false;
         }
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(this);
-        if (predict) {
-            runParams.put(AbilityKey.PlayerTurn, phase);
-            runParams.put(AbilityKey.Phase, PhaseType.UNTAP);
-        }
         return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Untap, runParams);
     }
 

@@ -154,28 +154,26 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      *
      * @return a boolean.
      */
-    public boolean requirementsCheck(Game game, Map<AbilityKey, Object> runParams) {
+    public boolean requirementsCheck(Game game) {
         if (this.isSuppressed()) {
             return false; // Effect removed by effect
         }
 
         if (hasParam("PlayerTurn")) {
-            Player active = (Player) runParams.getOrDefault(AbilityKey.PlayerTurn, game.getPhaseHandler().getPlayerTurn());
             if (getParam("PlayerTurn").equals("True")) {
-                if (!active.equals(getHostCard().getController())) {
+                if (!game.getPhaseHandler().isPlayerTurn(getHostCard().getController())) {
                     return false;
                 }
             } else {
                 List<Player> players = AbilityUtils.getDefinedPlayers(getHostCard(), getParam("PlayerTurn"), this);
-                if (!players.contains(active)) {
+                if (!players.contains(game.getPhaseHandler().getPlayerTurn())) {
                     return false;
                 }
             }
         }
 
         if (hasParam("ActivePhases")) {
-            PhaseType phase = (PhaseType) runParams.getOrDefault(AbilityKey.Phase, game.getPhaseHandler().getPhase());
-            if (!PhaseType.parseRange(getParam("ActivePhases")).contains(phase)) {
+            if (!PhaseType.parseRange(getParam("ActivePhases")).contains(game.getPhaseHandler().getPhase())) {
                 return false;
             }
         }
