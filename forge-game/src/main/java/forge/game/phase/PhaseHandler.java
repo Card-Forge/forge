@@ -49,6 +49,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 
 /**
@@ -135,6 +137,23 @@ public class PhaseHandler implements java.io.Serializable {
     }
     public final void resetPriority() {
         setPriority(playerTurn);
+    }
+
+    public <T> T withContext(FutureTask<T> original, Player active, PhaseType pt) {
+        Player oldTurn = playerTurn;
+        PhaseType oldPhase = phase;
+        playerTurn = active;
+        phase = pt;
+        original.run();
+        try {
+            return original.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            playerTurn = oldTurn;
+            phase = oldPhase;  
+        }
+        return null;
     }
 
     public final boolean inCombat() { return combat != null; }

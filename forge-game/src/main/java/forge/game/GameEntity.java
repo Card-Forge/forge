@@ -96,7 +96,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
                 if (!re.zonesCheck(getGame().getZoneOf(ca))) {
                     continue;
                 }
-                if (!re.requirementsCheck(getGame(), AbilityKey.newMap())) {
+                if (!re.requirementsCheck(getGame())) {
                     continue;
                 }
                 // Immortal Coil prevents the damage but has a similar negative effect

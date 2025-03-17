@@ -65,6 +65,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.FutureTask;
 
 import static java.lang.Math.max;
 
@@ -4912,8 +4913,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public final boolean canUntap(Player phase, boolean predict) {
-        if (!predict && !tapped) { return false; }
+    public final boolean canUntap(Player phase, Boolean predict) {
+        if (predict != null && predict) {
+            FutureTask<Boolean> proc = new FutureTask<>(() -> {
+                return canUntap(phase, null);
+            });
+            return getGame().getPhaseHandler().withContext(proc, phase, PhaseType.UNTAP);
+        }
+        if (predict != null && !tapped) { return false; }
         if (phase != null && isExertedBy(phase)) {
             return false;
         }
