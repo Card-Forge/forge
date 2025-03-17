@@ -185,9 +185,7 @@ public class PhaseHandler implements java.io.Serializable {
                 playerTurn.setNumPowerSurgeLands(lands);
             }
 
-            // Replacement effects
             final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(playerTurn);
-            repRunParams.put(AbilityKey.Phase, phase);
             ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.BeginPhase, repRunParams);
             if (repres != ReplacementResult.NotReplaced) {
                 // Currently there is no effect to skip entire beginning phase

@@ -4913,21 +4913,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean canUntap(Player phase, boolean predict) {
-        if (!tapped) { return false; }
+        if (!predict && !tapped) { return false; }
         if (phase != null && isExertedBy(phase)) {
             return false;
         }
         if (phase != null &&
                 (hasKeyword("CARDNAME doesn't untap during your untap step.")
-                        || hasKeyword("This card doesn't untap during your next untap step.")
-                        || hasKeyword("This card doesn't untap during your next two untap steps."))) {
+                        || hasKeyword("This card doesn't untap during your next untap step."))) {
             return false;
         }
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(this);
-        if (predict) {
-            runParams.put(AbilityKey.PlayerTurn, phase);
-            runParams.put(AbilityKey.Phase, PhaseType.UNTAP);
-        }
         return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Untap, runParams);
     }
 
