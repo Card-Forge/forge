@@ -1526,6 +1526,21 @@ public class CardFactoryUtil {
             triggerDrawn.setOverridingAbility(revealSA);
 
             inst.addTrigger(triggerDrawn);
+        } else if (keyword.startsWith("Mobilize")) {
+            final String[] k = keyword.split(":");
+            final String n = k[1];
+
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True"
+                    + " | TriggerDescription$ Mobilize " + n + " (" + inst.getReminderText() + ")";
+
+            final String effect = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ r_1_1_warrior"
+                    + " | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Sacrifice | SpellDescription$ Mobilize - Create "
+                    + Lang.nounWithNumeral(n, "1/1 red Warrior creature token") + ".";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            inst.addTrigger(trigger);
         } else if (keyword.startsWith("Modular")) {
             final String abStr = "DB$ PutCounter | ValidTgts$ Artifact.Creature | " +
                     "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";
