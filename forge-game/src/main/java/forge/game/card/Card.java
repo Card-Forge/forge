@@ -65,7 +65,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.Callable;
 
 import static java.lang.Math.max;
 
@@ -2605,7 +2605,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
+                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")
+                        || keyword.startsWith("Mobilize")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Crew")) {
@@ -4915,18 +4916,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final boolean canUntap(Player phase, Boolean predict) {
         if (predict != null && predict) {
-            FutureTask<Boolean> proc = new FutureTask<>(() -> {
+            Callable<Boolean> proc = () -> {
                 return canUntap(phase, null);
-            });
+            };
             return getGame().getPhaseHandler().withContext(proc, phase, PhaseType.UNTAP);
         }
         if (predict != null && !tapped) { return false; }
         if (phase != null && isExertedBy(phase)) {
             return false;
         }
-        if (phase != null &&
-                (hasKeyword("CARDNAME doesn't untap during your untap step.")
-                        || hasKeyword("This card doesn't untap during your next untap step."))) {
+        if (phase != null && hasKeyword("This card doesn't untap during your next untap step.")) {
             return false;
         }
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(this);

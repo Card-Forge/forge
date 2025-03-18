@@ -846,24 +846,24 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 final CardView view = CardView.get(card);
                 return confirmAction(cost, Localizer.getInstance().getMessage("lblReturnCardToHandConfirm", CardTranslation.getTranslatedName(view.getName()))) ? PaymentDecision.card(card) : null;
             }
-        } else {
-            final CardCollectionView validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
-                    cost.getType().split(";"), player, source, ability);
-
-            if (validCards.size() < c) {
-                return null;
-            }
-
-            final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, validCards, ability);
-            inp.setCancelAllowed(!mandatory);
-            inp.setMessage(Localizer.getInstance().getMessage("lblNTypeCardsToHand", "%d", cost.getDescriptiveType()));
-            inp.showAndWait();
-            if (inp.hasCancelled()) {
-                return null;
-            }
-            return PaymentDecision.card(inp.getSelected());
+            return null;
         }
-        return null;
+
+        final CardCollectionView validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
+                cost.getType().split(";"), player, source, ability);
+
+        if (validCards.size() < c) {
+            return null;
+        }
+
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, validCards, ability);
+        inp.setCancelAllowed(!mandatory);
+        inp.setMessage(Localizer.getInstance().getMessage("lblNTypeCardsToHand", "%d", cost.getDescriptiveType()));
+        inp.showAndWait();
+        if (inp.hasCancelled()) {
+            return null;
+        }
+        return PaymentDecision.card(inp.getSelected());
     }
 
     @Override
