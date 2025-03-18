@@ -1,0 +1,10 @@
+Name:Felothar, Dawn of the Abzan
+ManaCost:W B G
+Types:Legendary Creature Human Warrior
+PT:3/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever NICKNAME enters or attacks, you may sacrifice a nonland permanent. When you do, put a +1/+1 counter on each creature you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, you may sacrifice a nonland permanent. When you do, put a +1/+1 counter on each creature you control.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Permanent.nonland/nonland permanent> | Execute$ TrigPutCounters | SpellDescription$ When you do, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Trample\nWhenever Felothar enters or attacks, you may sacrifice a nonland permanent. When you do, put a +1/+1 counter on each creature you control.
