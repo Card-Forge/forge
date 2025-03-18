@@ -2594,6 +2594,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
+    public void undoAlternateHost(Card source) {
+
+    }
+
     public boolean hasOptionalKeywordAmount(KeywordInterface kw) {
         long staticId = kw.getStatic() == null ? 0 : kw.getStatic().getId();
         return this.optionalKeywordAmount.contains(kw.getKeyword(), Pair.of(kw.getIdx(), staticId));

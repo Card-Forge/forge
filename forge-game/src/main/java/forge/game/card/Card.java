@@ -252,7 +252,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private int exertThisTurn = 0;
     private PlayerCollection exertedByPlayer = new PlayerCollection();
 
-    private long bestowTimestamp = -1;
+    private Card bestowEffect = null;
     private long transformedTimestamp = 0;
     private long prototypeTimestamp = -1;
     private long mutatedTimestamp = -1;
@@ -3758,7 +3758,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addLeavesPlayCommand(final GameCommand c) {
         leavePlayCommandList.add(c);
     }
- 
+
     public void addStaticCommandList(Object[] objects) {
         staticCommandList.add(objects);
     }
@@ -4774,7 +4774,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void addDraftAction(String s) {
         draftActions.add(s);
     }
- 
+
     private int intensity = 0;
     public final void addIntensity(final int n) {
         intensity += n;
@@ -6879,43 +6879,40 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void animateBestow() {
-        animateBestow(true);
-    }
-    public final void animateBestow(final boolean updateView) {
         if (isBestowed()) {
             return;
         }
 
-        bestowTimestamp = getGame().getNextTimestamp();
-        addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
-                new CardType(Collections.singletonList("Creature"), true),
-                false, EnumSet.of(RemoveType.EnchantmentTypes), bestowTimestamp, 0, updateView, false);
-        addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.newArrayList(),
-                false, bestowTimestamp, null, updateView);
+        bestowEffect = SpellAbilityEffect.createEffect(null, this, this.getController(), "Bestow Effect", getImageKey(), getGame().getNextTimestamp());
+        bestowEffect.setRenderForUI(false);
+        bestowEffect.addRemembered(this);
+
+        String s = "Mode$ Continuous | AffectedDefined$ RememberedCard | EffectZone$ Command "
+                + " | AddType$ Aura | RemoveType$ Creature | RemoveEnchantmentTypes$ True | AddKeyword$ Enchant creature";
+        bestowEffect.addStaticAbility(s);
+
+        GameCommand until = SpellAbilityEffect.exileEffectCommand(getGame(), bestowEffect);
+        addLeavesPlayCommand(until);
+        getGame().getAction().moveToCommand(bestowEffect, null);
     }
 
     public final void unanimateBestow() {
-        unanimateBestow(true);
-    }
-    public final void unanimateBestow(final boolean updateView) {
         if (!isBestowed()) {
             return;
         }
-
-        removeChangedCardKeywords(bestowTimestamp, 0, updateView);
-        removeChangedCardTypes(bestowTimestamp, 0, updateView);
-        bestowTimestamp = -1;
+        getGame().getAction().exileEffect(bestowEffect);
+        bestowEffect = null;
     }
 
     public final boolean isBestowed() {
-        return bestowTimestamp != -1;
+        return bestowEffect != null;
     }
 
-    public final long getBestowTimestamp() {
-        return bestowTimestamp;
+    public final Card getBestowEffect() {
+        return this.bestowEffect;
     }
-    public final void setBestowTimestamp(final long t) {
-        bestowTimestamp = t;
+    public void setBestowEffect(final Card effect) {
+        this.bestowEffect = effect;
     }
 
     public final long getGameTimestamp() {
