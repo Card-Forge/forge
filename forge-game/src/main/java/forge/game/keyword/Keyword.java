@@ -121,6 +121,7 @@ public enum Keyword {
     MENACE("Menace", SimpleKeyword.class, true, "This creature can't be blocked except by two or more creatures."),
     MEGAMORPH("Megamorph", KeywordWithCost.class, false, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its megamorph cost and put a +1/+1 counter on it."),
     MIRACLE("Miracle", KeywordWithCost.class, false, "You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn."),
+    MOBILIZE("Mobilize", KeywordWithAmount.class, false, "When this creature attacks, create {%1$d:tapped and attacking 1/1 red Warrior creature token}. Sacrifice them at the beginning of the next end step."),
     // technically not a keyword but easier this way
     MONSTROSITY("Monstrosity", KeywordWithCostAndAmount.class, false, "If this creature isn't monstrous, put {%2$d:+1/+1 counter} on it and it becomes monstrous."),
     MODULAR("Modular", Modular.class, false, "This creature enters with {%d:+1/+1 counter} on it. When it dies, you may put its +1/+1 counters on target artifact creature."),
