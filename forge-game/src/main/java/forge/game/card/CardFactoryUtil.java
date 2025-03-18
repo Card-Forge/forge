@@ -1534,8 +1534,7 @@ public class CardFactoryUtil {
                     + " | TriggerDescription$ Mobilize " + n + " (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ r_1_1_warrior"
-                    + " | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Sacrifice | SpellDescription$ Mobilize - Create "
-                    + Lang.nounWithNumeral(n, "1/1 red Warrior creature token") + ".";
+                    + " | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Sacrifice";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
