@@ -9,7 +9,6 @@ import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.util.Aggregates;
 import forge.util.IterableUtil;
 import forge.util.StreamUtil;
 
