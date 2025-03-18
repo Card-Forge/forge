@@ -49,8 +49,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.Callable;
 
 
 /**
@@ -139,15 +138,14 @@ public class PhaseHandler implements java.io.Serializable {
         setPriority(playerTurn);
     }
 
-    public <T> T withContext(FutureTask<T> original, Player active, PhaseType pt) {
+    public <T> T withContext(Callable<T> proc, Player active, PhaseType pt) {
         Player oldTurn = playerTurn;
         PhaseType oldPhase = phase;
         playerTurn = active;
         phase = pt;
-        original.run();
         try {
-            return original.get();
-        } catch (ExecutionException | InterruptedException e) {
+            return proc.call();
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             playerTurn = oldTurn;

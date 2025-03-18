@@ -179,7 +179,7 @@ public class Untap extends Phase {
     private static boolean optionalUntap(final Card c, Player phase) {
         boolean untap = true;
 
-        if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && c.isTapped()) {
+        if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.")) {
             StringBuilder prompt = new StringBuilder("Untap " + c.toString() + "?");
             boolean defaultChoice = true;
             if (c.hasGainControlTarget()) {
