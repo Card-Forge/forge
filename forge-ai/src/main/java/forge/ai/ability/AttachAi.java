@@ -1551,8 +1551,6 @@ public class AttachAi extends SpellAbilityAi {
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
                 || keyword.endsWith("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
             return card.getNetCombatDamage() >= 2 && ComputerUtilCombat.canAttackNextTurn(card);
-        } else if (keyword.endsWith("CARDNAME doesn't untap during your untap step.")) {
-            return !card.isUntapped();
         }
         return true;
     }
