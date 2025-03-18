@@ -1,0 +1,9 @@
+Name:Aegis Sculptor
+ManaCost:3 U
+Types:Creature Bird Wizard
+PT:2/3
+K:Flying
+K:Ward:2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may exile two cards from your graveyard. If you do, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ ExileFromGrave<2/Card> | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flying\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nAt the beginning of your upkeep, you may exile two cards from your graveyard. If you do, put a +1/+1 counter on this creature.

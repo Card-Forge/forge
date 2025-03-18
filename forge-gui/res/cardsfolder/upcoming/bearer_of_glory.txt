@@ -1,0 +1,7 @@
+Name:Bearer of Glory
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, this creature has first strike.
+A:AB$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+Oracle:During your turn, this creature has first strike.\n{4}{W}: Creatures you control get +1/+1 until end of turn.

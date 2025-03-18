@@ -1,0 +1,11 @@
+Name:Corroding Dragonstorm
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When this enchantment enters, each opponent loses 2 life and you gain 2 life. Surveil 2 (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBSurveil
+SVar:DBSurveil:DB$ Surveil | Amount$ 2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Dragon.YouCtrl | Execute$ TrigReturn | TriggerDescription$ When a Dragon you control enters, return this enchantment to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+DeckHints:Type$Dragon
+Oracle:When this enchantment enters, each opponent loses 2 life and you gain 2 life. Surveil 2 (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nWhen a Dragon you control enters, return this enchantment to its owner's hand.
