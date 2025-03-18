@@ -18,6 +18,7 @@
 package forge.game.replacement;
 
 import java.util.*;
+import java.util.concurrent.FutureTask;
 
 import com.google.common.base.MoreObjects;
 import forge.game.card.*;
@@ -127,7 +128,7 @@ public class ReplacementHandler {
                             && replacementEffect.modeCheck(event, runParams)
                             && !possibleReplacers.contains(replacementEffect)
                             && replacementEffect.zonesCheck(cardZone)
-                            && replacementEffect.requirementsCheck(game, runParams)
+                            && replacementEffect.requirementsCheck(game)
                             && replacementEffect.canReplace(runParams)) {
                         possibleReplacers.add(replacementEffect);
                     }
@@ -855,15 +856,17 @@ public class ReplacementHandler {
      * Helper function to check if a phase would be skipped for AI.
      */
     public boolean wouldPhaseBeSkipped(final Player player, final PhaseType phase) {
-        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
-        repParams.put(AbilityKey.PlayerTurn, player);
-        repParams.put(AbilityKey.Phase, phase);
-        List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
-        if (list.isEmpty()) {
-            return false;
-        }
-        return true;
+        FutureTask<Boolean> proc = new FutureTask<>(() -> {
+            final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+            List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
+            if (list.isEmpty()) {
+                return false;
+            }
+            return true;
+        });
+        return player.getGame().getPhaseHandler().withContext(proc, player, phase);
     }
+
     /**
      * Helper function to check if an extra turn would be skipped for AI.
      */
