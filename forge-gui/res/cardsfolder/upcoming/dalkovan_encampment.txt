@@ -1,0 +1,10 @@
+Name:Dalkovan Encampment
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control a Swamp or a Mountain.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Swamp.YouCtrl,Mountain.YouCtrl | ConditionCompare$ EQ0
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Effect | Cost$ 2 W T | Triggers$ DalkovanAttack | SpellDescription$ Whenever you attack this turn, create two 1/1 red Warrior creature tokens that are tapped and attacking. Sacrifice them at the beginning of the next end step.
+SVar:DalkovanAttack:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack this turn, create two 1/1 red Warrior creature tokens that are tapped and attacking. Sacrifice them at the beginning of the next end step.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_warrior | TokenTapped$ True | TokenAttacking$ True | TokenOwner$ You | AtEOT$ Sacrifice
+Oracle:This land enters tapped unless you control a Swamp or a Mountain.\n{T}: Add {W}.\n{2}{W}, {T}: Whenever you attack this turn, create two 1/1 red Warrior creature tokens that are tapped and attacking. Sacrifice them at the beginning of the next end step.
