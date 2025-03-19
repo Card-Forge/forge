@@ -208,6 +208,9 @@ public class FDeckChooser extends FScreen {
         case Constructed:
             break; //delay initialize for constructed until saved decks can be reloaded
         case Commander:
+        case CommanderGauntlet:
+            initialize(null, DeckType.COMMANDER_DECK);
+            break;
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
@@ -572,6 +575,11 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_LEGACY_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_VINTAGE_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_BLOCK_DECK);
+
+                break;
+            case CommanderGauntlet:
+                cmbDeckTypes.addItem(DeckType.COMMANDER_DECK);
+                cmbDeckTypes.addItem(DeckType.PRECON_COMMANDER_DECK);
 
                 break;
             case Commander:
