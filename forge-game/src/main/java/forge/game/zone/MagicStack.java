@@ -472,15 +472,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
                     runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.SourceSA, s);
-                    if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
-                        runParams.put(AbilityKey.FirstTime, null);
-                        ((Card) tgt).setBecameTargetThisTurn(true);
-                    }
-                    if (tgt instanceof Card && !((Card) tgt).isValiant() && activator.equals(((Card) tgt).getController())) {
-                        runParams.put(AbilityKey.Valiant, null);
-                        ((Card) tgt).setValiant(true);
-                    }
                     runParams.put(AbilityKey.Target, tgt);
+                    if (tgt instanceof Card c) {
+                        if (!c.hasBecomeTargetThisTurn()) {
+                            runParams.put(AbilityKey.FirstTime, null);
+                        }
+                        if (c.isValiant(activator)) {
+                            runParams.put(AbilityKey.Valiant, null);
+                        }
+                        c.addTargetFromThisTurn(activator);
+                    }
                     game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                 }
             }
