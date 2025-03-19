@@ -56,7 +56,7 @@ public class NewGauntletScreen extends LaunchScreen {
                 Forge.getLocalizer().getMessage("lblQuickGauntlet"),
                 Forge.getLocalizer().getMessage("lblCustomGauntlet"),
                 Forge.getLocalizer().getMessage("lblGauntletContest"),
-                Forge.getLocalizer().getMessage("lblCommanderGauntlet"),
+                Forge.getLocalizer().getMessage("lblQuickCommanderGauntlet"),
         }, new Callback<String>() {
             @Override
             public void run(String result) {
@@ -66,7 +66,7 @@ public class NewGauntletScreen extends LaunchScreen {
                     createQuickGauntlet();
                 } else if(Forge.getLocalizer().getMessage("lblCustomGauntlet").equals(result)) {
                     createCustomGauntlet();
-                } else if(Forge.getLocalizer().getMessage("lblCommanderGauntlet").equals(result)) {
+                } else if(Forge.getLocalizer().getMessage("lblQuickCommanderGauntlet").equals(result)) {
                     createCommandGauntlet();
                 } else {
                     createGauntletContest();
