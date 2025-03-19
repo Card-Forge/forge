@@ -115,3 +115,18 @@ ScryfallCode=SPG
 101 M Pathbreaker Ibex @Rocodrilo
 102 M Chrome Mox @Princess Hidir
 103 M Skysovereign, Consul Flagship @Imiri Sakabashira
+104 M Eerie Ultimatum @Dominik Mayer
+105 M Emergent Ultimatum @Dominik Mayer
+106 M Genesis Ultimatum @Dominik Mayer
+107 M Inspired Ultimatum @Dominik Mayer
+108 M Ruinous Ultimatum @Dominik Mayer
+109 M Arid Mesa @Adam Paquette
+110 M Marsh Flats @Adam Paquette
+111 M Misty Rainforest @Adam Paquette
+112 M Scalding Tarn @Adam Paquette
+113 M Verdant Catacombs @Adam Paquette
+114 M Arid Mesa @Constantin Marin
+115 M Marsh Flats @Valera Lutfullina
+116 M Misty Rainforest @Livia Prima
+117 M Scalding Tarn @Marco Gorlei
+118 M Verdant Catacombs @Johannes Voss
