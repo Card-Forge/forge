@@ -1,0 +1,11 @@
+Name:Teval, Arbiter of Virtue
+ManaCost:2 B G U
+Types:Legendary Creature Spirit Dragon
+PT:6/6
+K:Flying
+K:Lifelink
+S:Mode$ Continuous | Affected$ Card.YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Delve | Description$ Spells you cast have delve. (Each card you exile from your graveyard while casting those spells pays for {1}.)
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever you cast a spell, you lose life equal to its mana value.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+Oracle:Flying, lifelink\nSpells you cast have delve. (Each card you exile from your graveyard while casting those spells pays for {1}.)\nWhenever you cast a spell, you lose life equal to its mana value.

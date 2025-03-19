@@ -7,6 +7,15 @@ ScryfallCode=TDC
 
 [cards]
 1 M Betor, Ancestor's Voice @Lius Lasahido
-0 M Elsha, Threefold Master @Irina Nordsol
+2 M Elsha, Threefold Master @Irina Nordsol
+3 M Eshki, Temur's Roar @Billy Christian
+4 M Felothar the Steadfast @Zoltan Boros
+5 M Kotis, Sibsig Champion @Chris Rallis
 6 M Neriv, Crackling Vanguard @Lucas Graciano
+7 M Shiko and Narset, Unified @Chris Rallis
 8 M Teval, the Balanced Scale @Chris Rahn
+9 M Ureni of the Unwritten @Valera Lutfullina
+10 M Zurgo Stormrender @Lie Setiawan
+105 U Arcane Signet @Racrufi
+106 U Sol Ring @Leon Tukker
+107 C Command Tower @Marina Ortega Lorente

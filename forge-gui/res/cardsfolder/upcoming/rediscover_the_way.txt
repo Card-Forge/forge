@@ -1,0 +1,9 @@
+Name:Rediscover the Way
+ManaCost:U R W
+Types:Enchantment Saga
+K:Chapter:3:TrigDig,TrigDig,TrigEffect
+SVar:TrigDig:DB$ Dig | DigNum$ 3 | Defined$ You | NoReveal$ True | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+SVar:TrigEffect:DB$ Effect | Triggers$ WayPump | SpellDescription$ Whenever you cast a noncreature spell this turn, target creature you control gains double strike until end of turn.
+SVar:WayPump:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Command | TriggerDescription$ Whenever you cast a noncreature spell this turn, target creature you control gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Double Strike
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.\nIII — Whenever you cast a noncreature spell this turn, target creature you control gains double strike until end of turn.
