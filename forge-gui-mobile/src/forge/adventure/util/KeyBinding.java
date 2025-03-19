@@ -43,11 +43,12 @@ public enum KeyBinding {
         this.name=name;
         this.defaultBinding=binding=defaultBinding;
         this.defaultBindingController=bindingController=defaultBindingController;
+        this.alternativeBinding=alternativeBinding;
     }
 
     public boolean isPressed(int key)
     {
-        return key==binding||key==bindingController;
+        return key==binding||key==bindingController||key==alternativeBinding;
     }
 
     static String controllerPrefix="XBox_";
