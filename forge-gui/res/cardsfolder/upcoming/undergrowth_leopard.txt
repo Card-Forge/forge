@@ -1,0 +1,7 @@
+Name:Undergrowth Leopard
+ManaCost:1 G
+Types:Creature Cat
+PT:2/2
+K:Vigilance
+A:AB$ Destroy | Cost$ 1 Sac<1/CARDNAME/this creature> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | AILogic$ AtEOTIfNotAttacking | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:Vigilance\n{1}, Sacrifice this creature: Destroy target artifact or enchantment.
