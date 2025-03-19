@@ -1,0 +1,9 @@
+Name:Surrak, Elusive Hunter
+ManaCost:2 G
+Types:Legendary Creature Human Warrior
+PT:4/3
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+K:Trample
+T:Mode$ BecomesTarget | ValidTarget$ Creature.YouCtrl+inZoneBattlefield,Spell.Creature+YouCtrl | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control or a creature spell you control becomes the target of a spell or ability an opponent controls, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:This spell can't be countered.\nTrample\nWhenever a creature you control or a creature spell you control becomes the target of a spell or ability an opponent controls, draw a card.
