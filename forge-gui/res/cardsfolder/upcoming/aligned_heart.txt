@@ -1,6 +1,6 @@
 Name:Aligned Heart
 ManaCost:2 W
-Types:Enchantmenr
+Types:Enchantment
 K:Flying
 K:Vigilance
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Flurry — Whenever you cast your second spell each turn, copy that spell if it targets a permanent or player, and you may choose new targets for the copy. If you don't copy a spell this way, draw a card.
