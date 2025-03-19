@@ -29,6 +29,7 @@ public enum KeyBinding {
     int defaultBinding;
     int bindingController;
     int defaultBindingController;
+    int alternativeBinding;
 
     KeyBinding(String name, int defaultBinding, int defaultBindingController)
     {
@@ -36,6 +37,14 @@ public enum KeyBinding {
         this.defaultBinding=binding=defaultBinding;
         this.defaultBindingController=bindingController=defaultBindingController;
     }
+
+    KeyBinding(String name, int defaultBinding, int defaultBindingController, int alternativeBinding)
+    {
+        this.name=name;
+        this.defaultBinding=binding=defaultBinding;
+        this.defaultBindingController=bindingController=defaultBindingController;
+    }
+
     public boolean isPressed(int key)
     {
         return key==binding||key==bindingController;
