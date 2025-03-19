@@ -1,0 +1,9 @@
+Name:Magmatic Hellkite
+ManaCost:2 R R
+Types:Creature Dragon
+PT:4/5
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy target nonbasic land an opponent controls. Its controller searches their library for a basic land card, puts it on the battlefield tapped with a stun counter on it, then shuffles. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic+OppCtrl | TgtPrompt$ Select target nonbasic land an opponent controls | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | DefinedPlayer$ TargetedController | Tapped$ True | WithCountersType$ STUN
+Oracle:Flying\nWhen this creature enters, destroy target nonbasic land an opponent controls. Its controller searches their library for a basic land card, puts it on the battlefield tapped with a stun counter on it, then shuffles. (If a permanent with a stun counter would become untapped, remove one from it instead.)

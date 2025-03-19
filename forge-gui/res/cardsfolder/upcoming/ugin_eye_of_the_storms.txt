@@ -1,0 +1,16 @@
+Name:Ugin, Eye of the Storms
+ManaCost:7
+Types:Legendary Planeswalker Ugin
+Loyalty:7
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When you cast this spell, exile up to one target permanent that's one or more colors.
+T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever you cast a colorless spell, exile up to one target permanent that's one or more colors.
+SVar:TrigChange:DB$ ChangeZone | ValidTgts$ Permanent.nonColorless | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target permanent that's one or more colors | Origin$ Battlefield | Destination$ Exile
+A:AB$ GainLife | Cost$ AddCounter<2/LOYALTY> | LifeAmount$ 3 | Planeswalker$ True | SubAbility$ DBDraw | SpellDescription$ You gain 3 life and draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ Mana | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
+A:AB$ ChangeZone | Cost$ SubCounter<11/LOYALTY> | Origin$ Library | Destination$ Exile | ChangeType$ Card.nonLand+Colorless | ChangeNum$ X | Planeswalker$ True | Ultimate$ True | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Search your library for any number of colorless nonland cards, exile them, then shuffle. Until end of turn, you may cast those cards without paying their mana costs.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | MayPlay$ True | MayPlayWithoutManaCost$ True | Description$ Until end of turn, you may cast those cards without paying their mana costs.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidLibrary Card.YouOwn+nonLand+Colorless
+Oracle:When you cast this spell, exile up to one target permanent that's one or more colors.\nWhenever you cast a colorless spell, exile up to one target permanent that's one or more colors.\n[+2]: You gain 3 life and draw a card.\n[0]: Add {C}{C}{C}.\n[-11]: Search your library for any number of colorless nonland cards, exile them, then shuffle. Until end of turn, you may cast those cards without paying their mana costs.

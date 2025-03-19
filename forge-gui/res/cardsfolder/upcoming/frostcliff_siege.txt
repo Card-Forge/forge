@@ -1,0 +1,14 @@
+Name:Frostcliff Siege
+ManaCost:1 U R
+Types:Enchantment
+K:ETBReplacement:Other:SiegeChoice
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Jeskai,Temur | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As this enchantment enters, choose Jeskai or Temur.
+SVar:Jeskai:DB$ Pump | SpellDescription$ Jeskai
+SVar:Temur:DB$ Pump | SpellDescription$ Temur
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeJeskai | AddTrigger$ JeskaiTrigger | Description$ • Jeskai — Whenever one or more creatures you control deal combat damage to a player, draw a card.
+SVar:JeskaiTrigger:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeTemur | AddStaticAbility$ TemurStatic | Description$ • Temur — Creatures you control get +1/+0 and have trample and haste.
+SVar:TemurStatic:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddKeyword$ Trample & Haste | Description$ Creatures you control get +1/+0 and have trample and haste.
+SVar:PlayMain1:TRUE
+Oracle:As this enchantment enters, choose Jeskai or Temur.\n• Jeskai — Whenever one or more creatures you control deal combat damage to a player, draw a card.\n• Temur — Creatures you control get +1/+0 and have trample and haste.
