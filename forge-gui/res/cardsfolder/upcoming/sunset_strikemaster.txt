@@ -1,0 +1,8 @@
+Name:Sunset Strikemaster
+ManaCost:1 R
+Types:Creature Human Monk
+PT:3/1
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ DealDamage | Cost$ 2 R T Sac<1/CARDNAME/this creature> | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 6 | SpellDescription$ It deals 6 damage to target creature with flying.
+DeckHas:Ability$Sacrifice
+Oracle:{T}: Add {R}.\n{2}{R}, {T}, Sacrifice this creature: It deals 6 damage to target creature with flying.

@@ -1,0 +1,8 @@
+Name:The Sibsig Ceremony
+ManaCost:B B B
+Types:Legendary Enchantment
+S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Creature spells you cast cost {2} less to cast.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Creature.wasCastByYou+YouCtrl | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control enters, if you cast it, destroy that creature, then create a 2/2 black Zombie Druid creature token.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie_druid
+Oracle:Creature spells you cast cost {2} less to cast.\nWhenever a creature you control enters, if you cast it, destroy that creature, then create a 2/2 black Zombie Druid creature token.
