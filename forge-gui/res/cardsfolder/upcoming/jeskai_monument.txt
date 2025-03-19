@@ -1,0 +1,8 @@
+Name:Jeskai Monument
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this artifact enters, search your library for a basic Island, Mountain, or Plains card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Island+Basic,Land.Mountain+Basic,Land.Plains+Basic
+A:AB$ Token | Cost$ 1 U R W T Sac<1/CARDNAME> | TokenAmount$ 2 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SorcerySpeed$ True | SpellDescription$ Create two 1/1 white Bird creature tokens with flying. Activate only as a sorcery.
+DeckHas:Ability$Token
+Oracle:When this artifact enters, search your library for a basic Island, Mountain, or Plains card, reveal it, put it into your hand, then shuffle.\n{1}{U}{R}{W}, {T}, Sacrifice this artifact: Create two 1/1 white Bird creature tokens with flying. Activate only as a sorcery.
