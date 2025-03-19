@@ -123,7 +123,7 @@ public enum VSubmenuGauntletCommanderQuick implements IVSubmenu<CSubmenuGauntlet
      */
     @Override
     public EDocID getItemEnum() {
-        return EDocID.HOME_GAUNTLETCOMMANDER;
+        return EDocID.HOME_GAUNTLETCOMMANDERQUICK;
     }
 
     /* (non-Javadoc)
@@ -184,7 +184,7 @@ public enum VSubmenuGauntletCommanderQuick implements IVSubmenu<CSubmenuGauntlet
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.HOME_GAUNTLETCOMMANDER;
+        return EDocID.HOME_GAUNTLETCOMMANDERQUICK;
     }
 
     /* (non-Javadoc)
