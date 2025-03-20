@@ -205,6 +205,9 @@ public class ControlGainAi extends SpellAbilityAi {
             while (t == null) {
                 // filter by MustTarget requirement
                 CardCollection originalList = new CardCollection(list);
+
+                list = CardLists.canSubsequentlyTarget(list, sa);
+
                 boolean mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(ai, list, sa);
 
                 if (planeswalkers > 0) {
