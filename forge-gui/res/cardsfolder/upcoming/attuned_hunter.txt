@@ -1,0 +1,9 @@
+Name:Attuned Hunter
+ManaCost:2 G
+Types:Creature Human Ranger
+PT:3/3
+K:Trample
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more cards leave your graveyard during your turn, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Self | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Trample\nWhenever one or more cards leave your graveyard during your turn, put a +1/+1 counter on this creature.

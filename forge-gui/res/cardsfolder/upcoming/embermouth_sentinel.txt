@@ -1,0 +1,10 @@
+Name:Embermouth Sentinel
+ManaCost:2
+Types:Artifact Creature Chimera
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBranch | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may search your library for a basic land card, reveal it, then shuffle and put that card on top. If you control a Dragon, put that card onto the battlefield tapped instead.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ RampantLand | FalseSubAbility$ GuidedLand
+SVar:GuidedLand:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic | ShuffleNonMandatory$ True
+SVar:RampantLand:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ShuffleNonMandatory$ True
+SVar:X:Count$Valid Dragon.YouCtrl
+Oracle:When this creature enters, you may search your library for a basic land card, reveal it, then shuffle and put that card on top. If you control a Dragon, put that card onto the battlefield tapped instead.
