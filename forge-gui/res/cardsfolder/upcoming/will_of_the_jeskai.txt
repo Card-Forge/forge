@@ -1,0 +1,10 @@
+Name:Will of the Jeskai
+ManaCost:3 R
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare Y GE1.2.1 | Choices$ DBWheel,DBFlames | AdditionalDescription$ . If you control a commander as you cast this spell, you may choose both instead.
+SVar:DBWheel:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ Each player may discard their hand and draw five cards.
+SVar:DBDraw:DB$ Draw | UnlessCost$ Discard<1/Hand> | UnlessPayer$ Remembered | UnlessSwitched$ True | Defined$ Remembered | NumCards$ 5
+SVar:DBFlames:DB$ PumpAll | ValidCards$ Instant.YouCtrl,Sorcery.YouCtrl | KW$ Flashback | PumpZone$ Graveyard | SpellDescription$ Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+SVar:Y:Count$Valid Card.IsCommander+YouCtrl
+DeckHas:Ability$Discard
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Each player may discard their hand and draw five cards.\n• Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.

@@ -1,0 +1,9 @@
+Name:Transforming Flourish
+ManaCost:2 R
+Types:Instant
+K:Demonstrate
+A:SP$ Destroy | ValidTgts$ Artifact.YouDontCtrl,Creature.YouDontCtrl | SubAbility$ DBDig | RememberDestroyed$ True | TgtPrompt$ Select target artifact or creature you don't control | SpellDescription$ Destroy target artifact or creature you don't control. If that permanent is destroyed this way, its controller exiles cards from the top of their library until they exile a nonland card, then they may cast that card without paying its mana cost.
+SVar:DBDig:DB$ DigUntil | Defined$ TargetedController | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | ForgetOtherRemembered$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Controller$ TargetedController | Defined$ Remembered | ValidZone$ Exile | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players may choose new targets for their copies.)\nDestroy target artifact or creature you don't control. If that permanent is destroyed this way, its controller exiles cards from the top of their library until they exile a nonland card, then they may cast that card without paying its mana cost.
