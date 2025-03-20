@@ -1,0 +1,9 @@
+Name:Great Arashin City
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless you control a Forest or a Plains.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Forest.YouCtrl,Plains.YouCtrl | ConditionCompare$ EQ0
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Token | Cost$ 1 B T ExileFromGrave<1/Creature/creature card> | TokenAmount$ 1 | TokenScript$ w_1_1_spirit | TokenOwner$ You | SpellDescription$ Create a 1/1 white Spirit creature token.
+DeckHas:Ability$Token
+Oracle:This land enters tapped unless you control a Forest or a Plains.\n{T}: Add {B}.\n{1}{B}, {T}, Exile a creature card from your graveyard: Create a 1/1 white Spirit creature token.
