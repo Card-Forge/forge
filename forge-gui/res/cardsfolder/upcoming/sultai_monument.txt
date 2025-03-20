@@ -1,0 +1,8 @@
+Name:Sultai Monument
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this artifact enters, search your library for a basic Swamp, Forest, or Island card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Swamp+Basic,Land.Forest+Basic,Land.Island+Basic
+A:AB$ Token | Cost$ 2 B G U T Sac<1/CARDNAME> | TokenAmount$ 2 | TokenScript$ b_2_2_zombie_druid | TokenOwner$ You | SorcerySpeed$ True | SpellDescription$ Create two 2/2 black Zombie Druid creature tokens. Activate only as a sorcery.
+DeckHas:Ability$Token
+Oracle:When this artifact enters, search your library for a basic Swamp, Forest, or Island card, reveal it, put it into your hand, then shuffle.\n{2}{B}{G}{U}, {T}, Sacrifice this artifact: Create two 2/2 black Zombie Druid creature tokens. Activate only as a sorcery.

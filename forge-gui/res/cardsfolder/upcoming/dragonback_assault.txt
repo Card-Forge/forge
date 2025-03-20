@@ -1,0 +1,8 @@
+Name:Dragonback Assault
+ManaCost:3 G U R
+Types:Enchantment
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this enchantment enters, it deals 3 damage to each creature and each planeswalker.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature,Planeswalker | ValidDescription$ each creature and each planeswalker. | NumDmg$ 3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall — Whenever a land you control enters, create a 4/4 red Dragon creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_flying | TokenOwner$ You
+Oracle:When this enchantment enters, it deals 3 damage to each creature and each planeswalker.\nLandfall — Whenever a land you control enters, create a 4/4 red Dragon creature token with flying.
