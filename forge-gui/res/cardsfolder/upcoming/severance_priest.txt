@@ -1,0 +1,12 @@
+Name:Severance Priest
+ManaCost:W B G
+Types:Creature Djinn Cleric
+PT:3/3
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, target opponent reveals their hand. You may choose a nonland card from it. If you do, exile that card.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | Optional$ True | RememberChanged$ True | IsCurse$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature leaves the battlefield, the exiled card's owner creates an X/X white Spirit creature token where X is the mana value of the exiled card.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_x_x_spirit | TokenOwner$ RememberedOwner | ConditionDefined$ Remembered | ConditionPresent$ Card.ExiledWithSource | TokenPower$ X | TokenToughness$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+Oracle:Deathtouch\nWhen this creature enters, target opponent reveals their hand. You may choose a nonland card from it. If you do, exile that card.\nWhen this creature leaves the battlefield, the exiled card's owner creates an X/X white Spirit creature token where X is the mana value of the exiled card.
