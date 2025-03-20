@@ -16,6 +16,84 @@ ScryfallCode=TDC
 8 M Teval, the Balanced Scale @Chris Rahn
 9 M Ureni of the Unwritten @Valera Lutfullina
 10 M Zurgo Stormrender @Lie Setiawan
+12 R Aligned Heart @Aurore Folny
+16 R Tempest Technique @Nino Vecia
+18 R Adaptive Training Post @Ben Maier
+22 R Transcendent Dragon @Diego Gisbert
+23 R Voracious Bibliophile @Camille Alquier
+33 R Caldera Pyremaw @Johann Bodin
+39 R Transforming Flourish @Xavier Ribeiro
+40 R Will of the Jeskai @Jessica Fong
+91 R Vanquish the Horde @Johann Bodin
+92 R Narset's Reversal @Nathaniel Himawan
+95 U Young Pyromancer @Alessandra Pisano
+99 C Goblin Electromancer @Edgar Sánchez Hidalgo
 105 U Arcane Signet @Racrufi
 106 U Sol Ring @Leon Tukker
 107 C Command Tower @Marina Ortega Lorente
+112 R Dismantling Wave @Raoul Vitale
+116 U Ghostly Prison @Wayne England
+124 R Mangara, the Diplomat @Howard Lyon
+125 M Monastery Mentor @Magali Villeneuve
+134 U Swords to Plowshares @Jesper Ejsing
+144 R Ancestral Vision @John Avon
+145 R Archmage Emeritus @Caio Monteiro
+146 R Baral's Expertise @Todd Lockwood
+147 C Compulsive Research @Sara Winters
+148 C Consider @Zezhou Chen
+149 R Curse of the Swine @James Ryman
+150 C Deep Analysis @Jesper Ejsing
+153 C Frantic Search @Mitchell Malloy
+154 R Haughty Djinn @Mike Jordana
+157 M Lier, Disciple of the Drowned @Ekaterina Burmak
+158 C Opt @Craig J Spearing
+159 C Ponder @Dan Murayama Scott
+160 U Pongify @Heather Hudson
+161 C Preordain @Svetlin Velinov
+165 R Rite of Replication @Matt Cavotta
+167 R Sublime Epiphany @Lindsey Look
+168 C Think Twice @Anthony Francisco
+203 U Abrade @Jonas De Ro
+206 C Big Score @Gaboleps
+209 U Curse of Opulence @Kieran Yanner
+212 R Electrodominance @Dmitry Burmak
+213 C Faithless Looting @Gabor Szikszai
+217 U Guttersnipe @Andrey Kuzinskiy
+223 C Mana Geyser @Martina Pilcerova
+224 M Manaform Hellkite @Andrew Mar
+231 C Shiny Impetus @Filipe Pagliuso
+235 U Storm-Kiln Artist @Manuel Castañón
+282 R Baral and Kari Zev @Fariba Khamseh
+288 U Expressive Iteration @Anastasia Ovchinnikova
+296 M Magma Opus @Liiga Smilshkalne
+299 R Prismari Command @Johannes Voss
+307 U Third Path Iconoclast @Manuel Castañón
+308 R Time Wipe @Svetlin Velinov
+309 M Velomachus Lorehold @Raymond Swanland
+310 M Veyran, Voice of Duality @Mathias Kollros
+311 R Whirlwind of Thought @Bram Sels
+312 U Azorius Signet @Raoul Vitale
+314 U Boros Signet @Ron Spears
+318 U Fellwar Stone @John Avon
+320 C Izzet Signet @Raoul Vitale
+333 U Talisman of Progress @Mike Dringenberg
+338 R Adarkar Wastes @Piotr Dura
+339 C Ash Barrens @Jonas De Ro
+340 R Battlefield Forge @Thomas Stoop
+345 R Cascade Bluffs @Brandon Kitkouski
+351 R Clifftop Retreat @Christine Choi
+360 R Exotic Orchard @Steven Belledin
+361 R Ferrous Lake @Grady Frederick
+367 R Glacial Fortress @James Paick
+372 R Irrigated Farmland @Jonas De Ro
+382 C Path of Ancestry @Alayna Danner
+383 C Perilous Landscape @Alayna Danner
+384 R Prairie Stream @Adam Paquette
+386 U Reliquary Tower @Jesper Ejsing
+389 R Rugged Prairie @Fred Fields
+393 R Shivan Reef @Andrew Mar
+394 R Skycloud Expanse @Rob Alexander
+396 R Sulfur Falls @Cliff Childs
+401 R Temple of Enlightenment @Piotr Dura
+402 R Temple of Epiphany @Adam Paquette
+407 R Temple of Triumph @Piotr Dura
