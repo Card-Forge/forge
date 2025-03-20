@@ -180,26 +180,19 @@ public final class AbilityFactory {
     }
 
     public static Cost parseAbilityCost(final CardState state, Map<String, String> mapParams, AbilityRecordType type) {
-        Cost abCost = null;
-        if (type != AbilityRecordType.SubAbility) {
-            String cost = mapParams.get("Cost");
-            if (cost == null) {
-                if (type == AbilityRecordType.Spell) {
-                    SpellAbility firstAbility = state.getFirstAbility();
-                    if (firstAbility != null && firstAbility.isSpell()) {
-                        // TODO might remove when Enchant Keyword is refactored
-                        System.err.println(state.getName() + " already has Spell using mana cost");
-                    }
-                    // for a Spell if no Cost is used, use the card states ManaCost
-                    abCost = new Cost(state.getManaCost(), false);
-                } else {
-                    throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + state.getName());
-                }
-            } else {
-                abCost = new Cost(cost, type == AbilityRecordType.Ability);
-            }
+        if (type == AbilityRecordType.SubAbility) {
+            return null;
         }
-        return abCost;
+        String cost = mapParams.get("Cost");
+        if (cost != null) {
+            return new Cost(cost, type == AbilityRecordType.Ability);
+        }
+        if (type == AbilityRecordType.Spell) {
+            // for a Spell if no Cost is used, use the card states ManaCost
+            return new Cost(state.getManaCost(), false);
+        } else {
+            throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + state.getName());
+        }
     }
 
     public static SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams,
