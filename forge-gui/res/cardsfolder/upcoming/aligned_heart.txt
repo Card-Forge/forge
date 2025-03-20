@@ -9,3 +9,4 @@ SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_monk_prowess | Toke
 SVar:X:Count$CardCounters.RALLY
 SVar:BuffedBy:Card
 Oracle:Flurry — Whenever you cast your second spell each turn, put a rally counter on this enchantment. Then create a 1/1 white Monk creature token with prowess for each rally counter on it. (Whenever you cast a noncreature spell, the token gets +1/+1 until end of turn.)
+
