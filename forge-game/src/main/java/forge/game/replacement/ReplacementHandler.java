@@ -18,9 +18,12 @@
 package forge.game.replacement;
 
 import java.util.*;
+import java.util.concurrent.Callable;
 
 import com.google.common.base.MoreObjects;
 import forge.game.card.*;
+import forge.game.phase.PhaseType;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -852,15 +855,18 @@ public class ReplacementHandler {
     /**
      * Helper function to check if a phase would be skipped for AI.
      */
-    public boolean wouldPhaseBeSkipped(final Player player, final String phase) {
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
-        repParams.put(AbilityKey.Phase, phase);
-        List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
-        if (list.isEmpty()) {
-            return false;
-        }
-        return true;
+    public boolean wouldPhaseBeSkipped(final Player player, final PhaseType phase) {
+        Callable<Boolean> proc = () -> {
+            final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+            List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
+            if (list.isEmpty()) {
+                return false;
+            }
+            return true;
+        };
+        return player.getGame().getPhaseHandler().withContext(proc, player, phase);
     }
+
     /**
      * Helper function to check if an extra turn would be skipped for AI.
      */

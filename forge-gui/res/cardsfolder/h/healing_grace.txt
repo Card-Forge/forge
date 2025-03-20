@@ -5,8 +5,7 @@ A:SP$ ChooseSource | Choices$ Card,Emblem | SubAbility$ DBEffect | StackDescript
 SVar:DBEffect:DB$ Effect | ValidTgts$ Any | TgtPrompt$ Select any target to prevent damage to | ReplacementEffects$ GraceDamage | ForgetOnMoved$ Battlefield | RememberObjects$ Targeted | SubAbility$ DBGainLife
 SVar:GraceDamage:Event$ DamageDone | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ GraceDmg | PreventionEffect$ True | Description$ Prevent the next 3 damage that would be dealt to any target this turn by a source of your choice.
 SVar:GraceDmg:DB$ ReplaceDamage | Amount$ ShieldAmount
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 SVar:ShieldAmount:Number$3
 AI:RemoveDeck:All
 Oracle:Prevent the next 3 damage that would be dealt to any target this turn by a source of your choice. You gain 3 life.

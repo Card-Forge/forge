@@ -1,0 +1,14 @@
+Name:Eshki Dragonclaw
+ManaCost:1 G U R
+Types:Legendary Creature Human Warrior
+PT:4/4
+K:Vigilance
+K:Trample
+K:Ward:1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Z | SVarCompare$ GE2 | Execute$ TrigDraw | TriggerDescription$ At the beginning of combat on your turn, if you've cast both a creature spell and a noncreature spell this turn, draw a card and put two +1/+1 counters on CARDNAME.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+SVar:X:Count$ThisTurnCast_Creature.YouCtrl/LimitMax.1
+SVar:Y:Count$ThisTurnCast_Card.nonCreature+YouCtrl/LimitMax.1
+SVar:Z:SVar$X/Plus.Y
+Oracle:Vigilance, trample, ward {1}\nAt the beginning of combat on your turn, if you've cast both a creature spell and a noncreature spell this turn, draw a card and put two +1/+1 counters on Eshki Dragonclaw.

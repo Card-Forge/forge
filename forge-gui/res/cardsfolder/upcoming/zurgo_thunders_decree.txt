@@ -1,0 +1,8 @@
+Name:Zurgo, Thunder's Decree
+ManaCost:R W B
+Types:Legendary Creature Orc Warrior
+PT:2/4
+K:Mobilize:2
+S:Mode$ Continuous | Affected$ Warrior.YouCtrl+token | AddStaticAbility$ NoSacEOT | Condition$ PlayerTurn | Phases$ End of Turn | Description$ During your end step, Warrior tokens you control have "This token can't be sacrificed."
+SVar:NoSacEOT:Mode$ CantSacrifice | ValidCard$ Card.Self | ActiveZones$ Battlefield | Description$ This token can't be sacrificed.
+Oracle:Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)\nDuring your end step, Warrior tokens you control have "This token can't be sacrificed."

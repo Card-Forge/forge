@@ -659,9 +659,11 @@ public class ComputerUtilMana {
             StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), effect && !sa.isCastFromPlayEffect() ? null : sa);
         }
 
+        // not worth checking if it makes sense to not spend floating first
         if (manapool.payManaCostFromPool(cost, sa, test, manaSpentToPay)) {
             CostPayment.handleOfferings(sa, test, cost.isPaid());
-            return true;    // paid all from floating mana
+            // paid all from floating mana
+            return true;
         }
 
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();

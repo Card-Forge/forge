@@ -1,0 +1,9 @@
+Name:Salt Road Packbeast
+ManaCost:5 W
+Types:Creature Beast
+PT:4/3
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:This spell costs {1} less to cast for each creature you control.\nWhen this creature enters, draw a card.

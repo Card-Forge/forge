@@ -35,6 +35,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
@@ -154,26 +155,30 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @return a boolean.
      */
     public boolean requirementsCheck(Game game) {
-        return this.requirementsCheck(game, this.getMapParams());
-    }
-    public boolean requirementsCheck(Game game, Map<String,String> params) {
         if (this.isSuppressed()) {
             return false; // Effect removed by effect
         }
 
-        if (params.containsKey("PlayerTurn")) {
-            if (params.get("PlayerTurn").equals("True") && !game.getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
+        if (hasParam("PlayerTurn")) {
+            if (getParam("PlayerTurn").equals("True")) {
+                if (!game.getPhaseHandler().isPlayerTurn(getHostCard().getController())) {
+                    return false;
+                }
+            } else {
+                List<Player> players = AbilityUtils.getDefinedPlayers(getHostCard(), getParam("PlayerTurn"), this);
+                if (!players.contains(game.getPhaseHandler().getPlayerTurn())) {
+                    return false;
+                }
+            }
+        }
+
+        if (hasParam("ActivePhases")) {
+            if (!PhaseType.parseRange(getParam("ActivePhases")).contains(game.getPhaseHandler().getPhase())) {
                 return false;
             }
         }
 
-        if (params.containsKey("ActivePhases")) {
-            if (!PhaseType.parseRange(params.get("ActivePhases")).contains(game.getPhaseHandler().getPhase())) {
-                return false;
-            }
-        }
-
-        return meetsCommonRequirements(params);
+        return meetsCommonRequirements(getMapParams());
     }
 
     /**

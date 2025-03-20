@@ -49,6 +49,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.*;
+import java.util.concurrent.Callable;
 
 
 /**
@@ -137,6 +138,22 @@ public class PhaseHandler implements java.io.Serializable {
         setPriority(playerTurn);
     }
 
+    public <T> T withContext(Callable<T> proc, Player active, PhaseType pt) {
+        Player oldTurn = playerTurn;
+        PhaseType oldPhase = phase;
+        playerTurn = active;
+        phase = pt;
+        try {
+            return proc.call();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            playerTurn = oldTurn;
+            phase = oldPhase;  
+        }
+        return null;
+    }
+
     public final boolean inCombat() { return combat != null; }
     public final Combat getCombat() { return combat; }
 
@@ -185,9 +202,7 @@ public class PhaseHandler implements java.io.Serializable {
                 playerTurn.setNumPowerSurgeLands(lands);
             }
 
-            // Replacement effects
             final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(playerTurn);
-            repRunParams.put(AbilityKey.Phase, phase.nameForScripts);
             ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.BeginPhase, repRunParams);
             if (repres != ReplacementResult.NotReplaced) {
                 // Currently there is no effect to skip entire beginning phase
@@ -432,7 +447,7 @@ public class PhaseHandler implements java.io.Serializable {
         if (!skipped) {
             // Run triggers if phase isn't being skipped
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
-            runParams.put(AbilityKey.Phase, phase.nameForScripts);
+            //runParams.put(AbilityKey.Phase, phase.nameForScripts);
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
         }
 

@@ -1,0 +1,7 @@
+Name:Temur Battlecrier
+ManaCost:G U R
+Types:Creature Orc Ranger
+PT:4/3
+S:Mode$ ReduceCost | Condition$ PlayerTurn | Type$ Spell | Activator$ You | Amount$ X | EffectZone$ Battlefield | Description$ During your turn, spells you cast cost {1} less to cast for each creature you control with power 4 or greater.
+SVar:X:Count$Valid Creature.YouCtrl+powerGE4
+Oracle:During your turn, spells you cast cost {1} less to cast for each creature you control with power 4 or greater.

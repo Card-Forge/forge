@@ -1,0 +1,11 @@
+Name:Felothar the Steadfast
+ManaCost:1 W B G
+Types:Legendary Creature Human Warrior
+PT:0/5
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.YouCtrl | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.
+S:Mode$ CanAttackDefender | ValidCard$ Creature.YouCtrl | Description$ Creatures you control can attack as though they didn't have defender.
+A:AB$ Draw | Cost$ 3 T Sac<1/Creature.Other/another creature> | NumCards$ X | SubAbility$ DBDiscard | SpellDescription$ Draw cards equal to the sacrificed creature's toughness, then discard cards equal to its power.
+SVar:DBDiscard:DB$ Discard | NumCards$ Y | Mode$ TgtChoose
+SVar:X:Sacrificed$CardToughness
+SVar:Y:Sacrificed$CardPower
+Oracle:Each creature you control assigns combat damage equal to its toughness rather than its power.\nCreatures you control can attack as though they didn't have defender.\n{3}, {T}, Sacrifice another creature: Draw cards equal to the sacrificed creature's toughness, then discard cards equal to its power.

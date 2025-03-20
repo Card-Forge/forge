@@ -1,0 +1,8 @@
+Name:Mardu Devotee
+ManaCost:W
+Types:Creature Human Scout
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When this creature enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+A:AB$ Mana | Cost$ 1 | Produced$ Combo R W B | ActivationLimit$ 1 | SpellDescription$ Add {R}, {W}, or {B}. Activate only once each turn.
+Oracle:When this creature enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)\n{1}: Add {R}, {W}, or {B}. Activate only once each turn.

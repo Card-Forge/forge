@@ -111,7 +111,6 @@ public enum AbilityKey {
     OriginalDefender("OriginalDefender"),
     OriginalParams("OriginalParams"),
     PayingMana("PayingMana"),
-    Phase("Phase"),
     Player("Player"),
     PreventedAmount("PreventedAmount"),
     Produced("Produced"),

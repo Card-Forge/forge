@@ -1,0 +1,9 @@
+Name:Awaken the Honored Dead
+ManaCost:B G U
+Types:Enchantment Saga
+K:Chapter:3:DBDestroy,DBMill,DBRegrow
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
+SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 3 | SpellDescription$ Mill three cards.
+SVar:DBRegrow:DB$ ImmediateTrigger | Execute$ DBReturn | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may discard a card. When you do, return target creature or land card from your graveyard to your hand.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn,Land.YouOwn | TgtPrompt$ Select a creature or land card in your graveyard.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target nonland permanent.\nII — Mill three cards.\nIII — You may discard a card. When you do, return target creature or land card from your graveyard to your hand.

@@ -21,8 +21,6 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.phase.PhaseType;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 /** 
@@ -49,21 +47,6 @@ public class ReplaceUntap extends ReplacementEffect {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }
-        if (hasParam("UntapStep")) {
-            final Object o = runParams.get(AbilityKey.Affected);
-            //normally should not happen, but protect from possible crash.
-            if (!(o instanceof Card)) {
-                return false;
-            }
-
-            final Card card = (Card) o;
-            // all replace untap with untapStep does have "your untap step"
-            final Player player = card.getController();
-            if (!player.getGame().getPhaseHandler().is(PhaseType.UNTAP, player)) {
-                return false;
-            }
-        }
-
         return true;
     }
 

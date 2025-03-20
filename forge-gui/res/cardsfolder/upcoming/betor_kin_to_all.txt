@@ -1,0 +1,13 @@
+Name:Betor, Kin to All
+ManaCost:2 W B G
+Types:Legendary Creature Spirit Dragon
+PT:5/7
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE10 | TriggerDescription$ At the beginning of your end step, if creatures you control have total toughness 10 or greater, draw a card. Then if creatures you control have total toughness 20 or greater, untap each creature you control. Then if creatures you control have total toughness 40 or greater, each opponent loses half their life, rounded up.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBUntapAll
+SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | ConditionCheckSVar$ X | ConditionSVarCompare$ GE20 | SubAbility$ RepeatLoseLife
+SVar:RepeatLoseLife:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBLoseLife | ConditionCheckSVar$ X | ConditionSVarCompare$ GE40
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ HalfUp
+SVar:HalfUp:PlayerCountRemembered$LifeTotal/HalfUp
+SVar:X:Count$Valid Creature.YouCtrl$SumToughness
+Oracle:Flying\nAt the beginning of your end step, if creatures you control have total toughness 10 or greater, draw a card. Then if creatures you control have total toughness 20 or greater, untap each creature you control. Then if creatures you control have total toughness 40 or greater, each opponent loses half their life, rounded up.

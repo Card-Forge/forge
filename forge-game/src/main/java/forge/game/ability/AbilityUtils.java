@@ -1856,6 +1856,10 @@ public class AbilityUtils {
                     return doXMath(list.size(), expr, c, ctb);
                 }
 
+                if (sq[0].equals("ActivatedThisGame")) {
+                    return doXMath(sa.getActivationsThisGame(), expr, c, ctb);
+                }
+
                 if (sq[0].equals("ResolvedThisTurn")) {
                     return doXMath(sa.getResolvedThisTurn(), expr, c, ctb);
                 }
@@ -2267,6 +2271,9 @@ public class AbilityUtils {
         }
         if (sq[0].equals("Delirium")) {
             return doXMath(calculateAmount(c, sq[player.hasDelirium() ? 1 : 2], ctb), expr, c, ctb);
+        }
+        if (sq[0].equals("MaxSpeed")) {
+            return doXMath(calculateAmount(c, sq[player.maxSpeed() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("FatefulHour")) {
             return doXMath(calculateAmount(c, sq[player.getLife() <= 5 ? 1 : 2], ctb), expr, c, ctb);

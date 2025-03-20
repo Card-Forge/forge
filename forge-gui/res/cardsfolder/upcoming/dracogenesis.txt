@@ -1,0 +1,7 @@
+Name:Dracogenesis
+ManaCost:6 R R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Dragon | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayDontGrantZonePermissions$ True | AffectedZone$ Hand,Graveyard,Library,Exile,Command | Description$ You may cast Dragon spells without paying their mana costs.
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:You may cast Dragon spells without paying their mana costs.

@@ -1,0 +1,6 @@
+Name:Caustic Exhale
+ManaCost:B
+Types:Instant
+K:AlternateAdditionalCost:Behold<1/Dragon>:1
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
+Oracle:As an additional cost to cast this spell, behold a Dragon or pay {1}. (To behold a Dragon, choose a Dragon you control or reveal a Dragon card from your hand.)\nTarget creature gets -3/-3 until end of turn.

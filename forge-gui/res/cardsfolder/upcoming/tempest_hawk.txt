@@ -1,0 +1,9 @@
+Name:Tempest Hawk
+ManaCost:2 W
+Types:Creature Bird
+PT:2/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigSearch | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, you may search your library for a card named Tempest Hawk, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedTempest Hawk | ChangeNum$ 1 | ShuffleNonMandatory$ True
+K:A deck can have any number of cards named CARDNAME.
+Oracle:Flying\nWhenever this creature deals combat damage to a player, you may search your library for a card named Tempest Hawk, reveal it, put it into your hand, then shuffle.\nA deck can have any number of cards named Tempest Hawk.
