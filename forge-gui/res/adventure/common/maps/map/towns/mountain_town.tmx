@@ -32,32 +32,32 @@
   <object id="38" template="../../obj/entry_up.tx" x="208" y="272"/>
   <object id="41" template="../../obj/shop.tx" x="64" y="115">
    <properties>
-    <property name="shopList" value="Instant,RedBoosterPackShop,BoosterPackShop,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="42" template="../../obj/shop.tx" x="113" y="115">
    <properties>
-    <property name="shopList" value="Instant,RedBoosterPackShop,BoosterPackShop,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="43" template="../../obj/shop.tx" x="161" y="163">
    <properties>
-    <property name="shopList" value="Instant,RedBoosterPackShop,BoosterPackShop,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="44" template="../../obj/shop.tx" x="257" y="162">
    <properties>
-    <property name="shopList" value="Instant,RedBoosterPackShop,BoosterPackShop,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,RedBoosterPackShop,Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="45" template="../../obj/shop.tx" x="304" y="162">
    <properties>
-    <property name="shopList" value="Instant,RedBoosterPackShop,BoosterPackShop,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="46" template="../../obj/shop.tx" x="351" y="162">
    <properties>
-    <property name="shopList" value="Instant,RedBoosterPackShop,BoosterPackShop,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="47" template="../../obj/inn.tx" x="214" y="114"/>

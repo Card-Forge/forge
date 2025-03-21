@@ -1,0 +1,10 @@
+Name:Qarsi Revenant
+ManaCost:1 B B
+Types:Creature Vampire
+PT:3/3
+K:Flying
+K:Deathtouch
+K:Lifelink
+A:AB$ PutCounter | PrecostDesc$ Renew — | Cost$ 2 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterTypes$ Flying,Deathtouch,Lifelink | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a flying counter, a deathtouch counter, and a lifelink counter on target creature. Activate only as a sorcery.
+DeckHas:Ability$Counters|Graveyard
+Oracle:Flying, deathtouch, lifelink\nRenew — {2}{B}, Exile this card from your graveyard: Put a flying counter, a deathtouch counter, and a lifelink counter on target creature. Activate only as a sorcery.

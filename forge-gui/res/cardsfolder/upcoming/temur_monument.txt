@@ -1,0 +1,8 @@
+Name:Temur Monument
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this artifact enters, search your library for a basic Forest, Island, or Mountain card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Forest+Basic,Land.Island+Basic,Land.Mountain+Basic
+A:AB$ Token | Cost$ 3 G U R T Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ g_5_5_elephant | TokenOwner$ You | SorcerySpeed$ True | SpellDescription$ Create a 5/5 green Elephant creature token. Activate only as a sorcery.
+DeckHas:Ability$Token
+Oracle:When this artifact enters, search your library for a basic Forest, Island, or Mountain card, reveal it, put it into your hand, then shuffle.\n{3}{G}{U}{R}, {T}, Sacrifice this artifact: Create a 5/5 green Elephant creature token. Activate only as a sorcery.

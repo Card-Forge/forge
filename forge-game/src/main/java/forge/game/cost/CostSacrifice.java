@@ -69,7 +69,9 @@ public class CostSacrifice extends CostPartWithList {
         }
 
         CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
-        typeList = CardLists.getValidCards(typeList, type.split(";"), payer, source, ability);
+        if (!type.contains("X")) {
+            typeList = CardLists.getValidCards(typeList, type.split(";"), payer, source, ability);
+        }
         typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability, effect));
         if (differentNames) {
             // TODO rewrite with sharesName to respect Spy Kit

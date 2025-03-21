@@ -5610,5 +5610,60 @@
         "type": "cardPackShop",
         "count": 4
       }]
+  },
+  {
+    "name": "AlphaBoosterPackShop",
+    "description":"Ancient Archives",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite": "CarShop",
+    "overlaySprite":"Overlay2White",
+    "rewards": [
+      {
+        "type": "cardPackShop",
+        "count": 8,
+        "startDate": 1994,
+        "endDate": 2004
+      }]
+  },
+  {
+    "name": "BetaBoosterPackShop",
+    "description":"The Planar Cache",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite": "CarShop",
+    "overlaySprite":"Overlay4White",
+    "rewards": [
+      {
+        "type": "cardPackShop",
+        "count": 8,
+        "startDate": 2005,
+        "endDate": 2013
+      }]
+  },
+  {
+    "name": "GammaBoosterPackShop",
+    "description":"Ravnica Restocked",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite": "CarShop",
+    "overlaySprite":"Overlay6White",
+    "rewards": [
+      {
+        "type": "cardPackShop",
+        "count": 8,
+        "startDate": 2014,
+        "endDate": 2020
+      }]
+  },
+  {
+    "name": "DeltaBoosterPackShop",
+    "description":"The Modern Vault",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite": "CarShop",
+    "overlaySprite":"Overlay8White",
+    "rewards": [
+      {
+        "type": "cardPackShop",
+        "count": 8,
+        "startDate": 2021
+      }]
   }
-]   
+]

@@ -1,0 +1,10 @@
+Name:Voracious Bibliophile
+ManaCost:3 U
+Types:Creature Dragon
+PT:3/3
+K:Flying
+K:Vigilance
+T:Mode$ SpellCast | ValidSA$ Spell.numTargets GE1 | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with one or more targets, draw that many cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:TriggeredSpellAbility>TargetedObjects$Amount
+Oracle:Flying, vigilance\nWhenever you cast a spell with one or more targets, draw that many cards.
