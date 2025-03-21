@@ -4,6 +4,6 @@ Types:Creature Bird Scout
 PT:3/3
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature you control without flying gets +1/+1 until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.withoutFlying+YouCtrl | TgtPrompt$ Select target creature you control without flying. | NumAtt$ 1 | NumDef$ 1
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.withoutFlying+YouCtrl | TgtPrompt$ Select target creature you control without flying. | NumAtt$ +1 | NumDef$ +1
 SVar:HasAttackEffect:TRUE
 Oracle:Flying\nWhenever Seedpod Squire attacks, target creature you control without flying gets +1/+1 until end of turn.
