@@ -1,0 +1,9 @@
+Name:Ainok Strike Leader
+ManaCost:1 W
+Types:Creature Dog Warrior
+PT:2/2
+T:Mode$ AttackersDeclared | Execute$ TrigRepeat | ValidAttackers$ Card.Self,Card.IsCommander+YouOwn | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ When you attack with this creature and/or your commander, for each opponent, create a 1/1 red Goblin creature token that's tapped and attacking that player.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | ChangeZoneTable$ True | RepeatSubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ r_1_1_goblin | TokenTapped$ True | TokenAttacking$ Remembered
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME/this creature> | ValidCards$ Creature.token+YouCtrl | KW$ Indestructible | SpellDescription$ Creature tokens you control gain indestructible until end of turn.
+Oracle:When you attack with this creature and/or your commander, for each opponent, create a 1/1 red Goblin creature token that's tapped and attacking that player.\nSacrifice this creature: Creature tokens you control gain indestructible until end of turn.
