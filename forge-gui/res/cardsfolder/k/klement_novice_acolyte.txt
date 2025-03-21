@@ -4,7 +4,7 @@ Types:Legendary Creature Tiefling Cleric
 PT:2/2
 K:Specialize:2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, creature cards in your hand perpetually get +1/+1.
-SVar:TrigPump:DB$ PumpAll | PumpZone$ Hand | ValidCards$ Creature.YouOwn | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
+SVar:TrigPump:DB$ PumpAll | PumpZone$ Hand | ValidCards$ Creature.YouOwn | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
 AlternateMode:Specialize
 Oracle:Specialize {2}\nWhen Klement, Novice Acolyte enters, creature cards in your hand perpetually get +1/+1.
 

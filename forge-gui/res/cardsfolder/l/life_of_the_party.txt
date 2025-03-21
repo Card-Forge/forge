@@ -6,7 +6,7 @@ K:First Strike
 K:Trample
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the number of creatures you control.
-SVar:TrigPump:DB$ Pump | NumAtt$ X
+SVar:TrigPump:DB$ Pump | NumAtt$ +X
 SVar:X:Count$Valid Creature.YouCtrl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+!token | Execute$ TrigCopyPermanent | TriggerDescription$ When CARDNAME enters, if it's not a token, each opponent creates a token that's a copy of it. The tokens are goaded for the rest of the game. (They attack each combat if able and attack a player other than you if able.)
 SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | Controller$ Opponent | RememberTokens$ True | SubAbility$ DBGoad
