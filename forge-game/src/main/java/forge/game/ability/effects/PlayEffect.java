@@ -361,7 +361,6 @@ public class PlayEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            boolean unpayableCost = tgtSA.getPayCosts().getCostMana().getMana().isNoCost();
             if (sa.hasParam("WithoutManaCost")) {
                 tgtSA = tgtSA.copyWithNoManaCost();
             } else if (sa.hasParam("PlayCost")) {
@@ -380,7 +379,8 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
 
                 tgtSA = tgtSA.copyWithManaCostReplaced(tgtSA.getActivatingPlayer(), abCost);
-            } else if (unpayableCost) {
+            } else if (tgtSA.getPayCosts().hasManaCost() && tgtSA.getPayCosts().getCostMana().getMana().isNoCost()) {
+                // unpayable
                 continue;
             }
 

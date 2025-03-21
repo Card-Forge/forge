@@ -1,0 +1,9 @@
+Name:Goldlust Triad
+ManaCost:4 R
+Types:Creature Dragon
+PT:4/3
+K:Flying
+K:Myriad
+T:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever this creature deals combat damage to a player, create a Treasure token.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac
+Oracle:Flying, myriad\nWhenever this creature deals combat damage to a player, create a Treasure token.

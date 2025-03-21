@@ -1,0 +1,12 @@
+Name:Zurgo Stormrender
+ManaCost:R W B
+Types:Legendary Creature Orc Warrior
+PT:3/3
+K:Mobilize:1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ Whenever a creature token you control leaves the battlefield, draw a card if it was attacking. Otherwise, each opponent loses 1 life.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBDraw | FalseSubAbility$ DBLoseLife
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+SVar:X:TriggeredCard$Valid Creature.attacking
+SVar:HasAttackEffect:TRUE
+Oracle:Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)\nWhenever a creature token you control leaves the battlefield, draw a card if it was attacking. Otherwise, each opponent loses 1 life.

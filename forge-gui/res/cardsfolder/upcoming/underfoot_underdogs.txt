@@ -1,0 +1,9 @@
+Name:Underfoot Underdogs
+ManaCost:2 R
+Types:Creature Goblin Warrior
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 red Goblin creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_goblin
+A:AB$ Effect | Cost$ 1 T | ValidTgts$ Creature.powerLE2+YouCtrl | TgtPrompt$ Select target creature you control with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature with power 2 or less can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:When this creature enters, create a 1/1 red Goblin creature token.\n{1}, {T}: Target creature you control with power 2 or less can't be blocked this turn.

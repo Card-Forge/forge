@@ -9,14 +9,17 @@ ScryfallCode=TDM
 1 M Ugin, Eye of the Storms @Joshua Raphael
 2 R Anafenza, Unyielding Lineage @Matt Stewart
 4 C Bearer of Glory @Joshua Cairos
+7 U Dalkovan Packbeasts @Constantin Marin
 9 C Dragonback Lancer @Diego Gisbert
 10 U Duty Beyond Death @Kev Fang
 11 M Elspeth, Storm Slayer @Ekaterina Burmak
+12 C Fortress Kin-Guard @Daneen Wilkerson
 16 C Mardu Devotee @Lorenzo Mastroianni
 19 U Rally the Monastery @David Astruga
 23 C Salt Road Packbeast @Ben Wootten
 24 M Smile at Death @Olivier Bernard
 28 C Stormplain Detainment @Livia Prima
+31 C Tempest Hawk @Abz J Harding
 32 R United Battlefront @Darren Tan
 33 R Voice of Victory @Joshua Cairos
 35 U Aegis Sculptor @Michele Giorgi
@@ -28,32 +31,43 @@ ScryfallCode=TDM
 60 M Taigam, Master Opportunist @Joshua Raphael
 61 C Temur Devotee @Marina Ortega Lorente
 63 U Ureni's Rebuff @Sergio Cosmai
+67 R Winternight Stories @Zara Alfonso
 68 C Abzan Devotee @Forrest Imel
 74 C Caustic Exhale @Camille Alquier
 75 U Corroding Dragonstorm @Sergey Glushakov
 76 C Cruel Truths @Fajareka Setiawan
 86 R Qarsi Revenant @Lorenzo Mastroianni
+91 R The Sibsig Ceremony @Eli Minaya
 92 R Sidisi, Regent of the Mire @Diana Franco
 100 U Yathan Tombguard @Xavier Ribeiro
 104 C Devoted Duelist @Nathaniel Himawan
 105 M Dracogenesis @Kai Carpenter
 106 U Equilibrium Adept @Leroy Steinmann
 110 C Jeskai Devotee @Xavier Ribeiro
+111 R Magmatic Hellkite @Tyler Walpole
 118 R Sarkhan, Dragon Ascendant @Billy Christian
 119 C Seize Opportunity @Josiah "Jo" Cameron
+120 C Shock Brigade @Fajareka Setiawan
 123 M Stormscale Scion @Andrew Mar
 125 C Summit Intimidator @Diego Gisbert
 126 U Sunset Strikemaster @Zara Alfonso
+129 C Underfoot Underdogs @Brent Hollowell
 136 R Bloomvine Regent @Johann Bodin
 138 M Craterhoof Behemoth @Magali Villeneuve
 141 C Dusyut Earthcarver @Andrea Piparo
 153 U Rite of Renewal @Gaboleps
 154 C Roamer's Routine @Andrew Mar
+158 C Sarkhan's Resolve @Billy Christian
 160 C Sultai Devotee @Bastien L. Deharme
+161 R Surrak, Elusive Hunter @Dan Murayama Scott
 165 C Undergrowth Leopard @Iris Compiet
 167 M All-Out Assault @Joshua Cairos
+169 U Auroral Procession @Marco Gorlei
+170 R Awaken the Honored Dead @Clint Lockwood
 171 R Barrensteppe Siege @Tuan Duong Chu
 172 M Betor, Kin to All @Alexander Ostrowski
+179 M Dragonback Assault @Ryan Pancoast
+182 R Eshki Dragonclaw @Tran Nguyen
 187 R Frostcliff Siege @Dan Murayama Scott
 190 C Gurmag Nightwatch @Nereida
 194 R Inevitable Defeat @Cristi Balanescu
@@ -61,16 +75,20 @@ ScryfallCode=TDM
 207 U Marshal of the Lost @Andreas Zafiratos
 209 R Narset, Jeskai Waymaster @Randy Vargas
 210 M Neriv, Heart of the Storm @Victor Adame Minguez
+212 M Perennation @Eli Minaya
 213 U Purging Stormbrood @David Astruga
 214 U Rakshasa's Bargain @Yigit Koroglu
 215 R Rediscover the Way @Clint Lockwood
 216 C Reigning Victor @Warren Mahy
+221 U Runescale Stormbrood @Loïc Canavaggia
+222 R Severance Priest @Scott Murphy
 223 M Shiko, Paragon of the Way @Victor Adame Minguez
 224 U Skirmish Rhino @James Bousema
 227 U Stalwart Successor @Bastien L. Deharme
 228 R Temur Battlecrier @Brent Hollowell
 230 M Teval, Arbiter of Virtue @Alexander Ostrowski
 233 M Ureni, the Song Unending @Alexander Ostrowski
+237 R Zurgo, Thunder's Decree @Steve Prescott
 238 U Abzan Monument @Jorge Jacinto
 239 C Boulderborn Dragon @Alexander Ostrowski
 243 C Jade-Cast Sentinel @David Astruga
@@ -83,8 +101,10 @@ ScryfallCode=TDM
 250 C Bloodfell Caves @Piotr Dura
 251 C Blossoming Sands @Piotr Dura
 254 C Dismal Backwater @Alayna Danner
+255 C Evolving Wilds @Leon Tukker
 258 C Jungle Hollow @Cristi Balanescu
 260 R Maelstrom of the Spirit Dragon @Carlos Palma Cruchaga
+262 U Mystic Monastery @Leon Tukker
 265 C Rugged Highlands @Carlos Palma Cruchaga
 267 C Scoured Barrens @Brent Hollowell
 268 C Swiftwater Cliffs @Piotr Dura
@@ -115,6 +135,7 @@ ScryfallCode=TDM
 296 U Roiling Dragonstorm @Dan Mumford
 297 U Corroding Dragonstorm @Cabrol
 300 M Dracogenesis @Rafal Wechterowicz (Too Many Skulls)
+301 R Magmatic Hellkite @Rafal Wechterowicz (Too Many Skulls)
 302 R Sarkhan, Dragon Ascendant @DZO
 303 M Stormscale Scion @Massiveface
 308 M Betor, Kin to All @Dan Mumford
@@ -132,34 +153,47 @@ ScryfallCode=TDM
 338 R Qarsi Revenant @Kevin Glint
 341 R Sidisi, Regent of the Mire @Tomas Duchek
 346 M Craterhoof Behemoth @Tuan Duong Chu
+350 R Surrak, Elusive Hunter @Jose Cabrera
 352 M All-Out Assault @Valera Lutfullina
 353 M Betor, Kin to All @Anna Podedworna
+356 R Eshki Dragonclaw @Valera Lutfullina
 362 R Kotis, the Fangkeeper @Tomas Duchek
 366 M Neriv, Heart of the Storm @Kevin Glint
+369 R Severance Priest @Tomas Duchek
 372 R Temur Battlecrier @Christina Kraus
 373 M Teval, Arbiter of Virtue @Andrey Kuzinskiy
 374 M Ureni, the Song Unending @Andrey Kuzinskiy
+376 R Zurgo, Thunder's Decree @Chuck Lukacs
 378 R Marang River Regent @Brian Valeza
+380 R Magmatic Hellkite @Alison Johnstun
 381 R Bloomvine Regent @Brooklyn Smith
 382 M Ugin, Eye of the Storms @Antonio José Manzanedo
+383 R Awaken the Honored Dead @Flavio Greco Paglia
 384 R Barrensteppe Siege @Clint Lockwood
 385 R Frostcliff Siege @Francesca Baerald
 388 R Rediscover the Way @Justyna Dura
+393 R Cori Mountain Monastery @Constantin Marin
+394 R Dalkovan Encampment @Raymond Bonilla
+395 R Great Arashin City @Constantin Marin
+396 R Kishla Village @Marina Ortega Lorente
+397 R Mistrise Village @Marco Gorlei
 398 M Elspeth, Storm Slayer @Jeremy Wilson
 399 M Ugin, Eye of the Storms @Joshua Raphael
 401 M Elspeth, Storm Slayer @Ekaterina Burmak
+402 M Dracogenesis @Kai Carpenter
 403 M Sarkhan, Dragon Ascendant @Billy Christian
 404 M Craterhoof Behemoth @Magali Villeneuve
 405 M All-Out Assault @Joshua Cairos
 408 M Skirmish Rhino @James Bousema
 409 M Ugin, Eye of the Storms @Joshua Raphael
 411 M Elspeth, Storm Slayer @Ekaterina Burmak
+412 M Dracogenesis @Kai Carpenter
 413 M Sarkhan, Dragon Ascendant @Billy Christian
 414 M Craterhoof Behemoth @Magali Villeneuve
 415 M All-Out Assault @Joshua Cairos
 418 M Skirmish Rhino @James Bousema
 419 M Mox Jasper @Dan Frazier
-420 C Static Snare @Yohann Schepacz
+420 U Static Snare @Yohann Schepacz
 421 U Roiling Dragonstorm @Gaboleps
 422 U Strategic Betrayal @Flavio Greco Paglia
 423 U Channeled Dragonfire @Jorge Jacinto

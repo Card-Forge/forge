@@ -55,18 +55,10 @@ public class TriggerBecomesTarget extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        if (hasParam("ValidSource")) {
-            SpellAbility source = (SpellAbility) runParams.get(AbilityKey.SourceSA);
-            if (source == null) {
-                return false;
-            }
-            String valid[] = getParam("ValidSource").split(",");
-            if (!matchesValid(source, valid)) {
-                if (!matchesValid(source.getHostCard(), valid)) {
-                    return false;
-                }
-            }
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.SourceSA))) {
+            return false;
         }
+
         if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.Target))) {
             return false;
         }

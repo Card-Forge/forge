@@ -1,0 +1,8 @@
+Name:Lie in Wait
+ManaCost:B G U
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBDmg | RememberTargets$ True | SpellDescription$ Return target creature card from your graveyard to your hand. CARDNAME deals damage equal to that card's power to target creature.
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardPower
+Oracle:Return target creature card from your graveyard to your hand. Lie in Wait deals damage equal to that card's power to target creature.

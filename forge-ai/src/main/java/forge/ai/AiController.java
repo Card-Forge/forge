@@ -68,8 +68,10 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -1707,7 +1709,8 @@ public class AiController {
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
-        CompletableFuture<SpellAbility> future = CompletableFuture.supplyAsync(() -> {
+        final ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<SpellAbility> future = executor.submit(() -> {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1787,11 +1790,9 @@ public class AiController {
 
         // instead of computing all available concurrently just add a simple timeout depending on the user prefs
         try {
-            if (game.AI_CAN_USE_TIMEOUT)
-                return future.completeOnTimeout(null, game.getAITimeout(), TimeUnit.SECONDS).get();
-            else
-                return future.get(game.getAITimeout(), TimeUnit.SECONDS);
+            return future.get(game.getAITimeout(), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            future.cancel(true);
             return null;
         }
     }
