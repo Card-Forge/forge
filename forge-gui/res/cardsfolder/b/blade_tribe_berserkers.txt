@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Human Berserker
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Metalcraft$ True | Execute$ TrigPump | TriggerDescription$ Metalcraft — When CARDNAME enters, if you control three or more artifacts, CARDNAME gets +3/+3 and gains haste until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 3 | NumDef$ 3 | KW$ Haste
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | KW$ Haste
 SVar:PlayMain1:ALWAYS
 Oracle:Metalcraft — When Blade-Tribe Berserkers enters, if you control three or more artifacts, Blade-Tribe Berserkers gets +3/+3 and gains haste until end of turn.

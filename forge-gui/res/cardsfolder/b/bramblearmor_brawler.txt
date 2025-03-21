@@ -5,5 +5,5 @@ PT:5/5
 K:Trample
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player.Opponent | Execute$ TrigPerpetualP1P1 | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a noncreature spell, creature cards in your library perpetually get +1/+1.
-SVar:TrigPerpetualP1P1:DB$ PumpAll | ValidCards$ Creature.YouOwn | PumpZone$ Library | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
+SVar:TrigPerpetualP1P1:DB$ PumpAll | ValidCards$ Creature.YouOwn | PumpZone$ Library | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
 Oracle:This spell can't be countered.\nTrample\nWhenever an opponent casts a noncreature spell, creature cards in your library perpetually get +1/+1.
