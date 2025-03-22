@@ -22,9 +22,13 @@ ScryfallCode=TDC
 16 R Tempest Technique @Nino Vecia
 17 R Will of the Mardu @Tuan Duong Chu
 18 R Adaptive Training Post @Ben Maier
+20 R Diviner of Mist @Lorenzo Mastroianni
 22 R Transcendent Dragon @Diego Gisbert
 23 R Voracious Bibliophile @Camille Alquier
+25 R Afterlife from the Loam @Johann Bodin
 26 R Bone Devourer @Diana Franco
+28 R Teval's Judgment @Alix Branwyn
+30 R Welcome the Dead @Ioannis Fiore
 32 R Within Range @Hector Ortiz
 33 R Caldera Pyremaw @Johann Bodin
 34 R Goldlust Triad @Arif Wijaya
@@ -32,17 +36,32 @@ ScryfallCode=TDC
 37 R Redoubled Stormsinger @Filipe Pagliuso
 39 R Transforming Flourish @Xavier Ribeiro
 40 R Will of the Jeskai @Jessica Fong
+46 R Floral Evoker @Monztre
+48 R Steward of the Harvest @Marie Magny
+49 R Will of the Sultai @Cristi Balanescu
+50 R Colossal Grave-Reaver @Bryan Sola
+51 R Ainok Strike Leader @Alexander Mokhov
 52 R Aligned Heart @Aurore Folny
+53 R Ironwill Forger @Konstantin Porubov
 56 R Tempest Technique @Nino Vecia
+57 R Will of the Mardu @Tuan Duong Chu
 58 R Adaptive Training Post @Ben Maier
 62 R Transcendent Dragon @Diego Gisbert
 63 R Voracious Bibliophile @Camille Alquier
+66 R Bone Devourer @Diana Franco
+72 R Within Range @Hector Ortiz
 73 R Caldera Pyremaw @Johann Bodin
+74 R Goldlust Triad @Arif Wijaya
+75 R Infantry Shield @Xabi Gaztelua
+77 R Redoubled Stormsinger @Filipe Pagliuso
 79 R Transforming Flourish @Xavier Ribeiro
 80 R Will of the Jeskai @Jessica Fong
 91 R Vanquish the Horde @Johann Bodin
 92 R Narset's Reversal @Nathaniel Himawan
+93 C Gravecrawler @Danny Schwartz
 95 U Young Pyromancer @Alessandra Pisano
+96 R Life from the Loam @Carlos Palma Cruchaga
+98 R Casualties of War @Nereida
 99 C Goblin Electromancer @Edgar Sánchez Hidalgo
 101 U Shadow Summoning @Nereida
 102 U Lightning Greaves @Michael Komarck
@@ -72,6 +91,7 @@ ScryfallCode=TDC
 134 U Swords to Plowshares @Jesper Ejsing
 135 R Tocasia's Welcome @Johan Grenier
 136 R Twilight Drover @Dave Allsop
+143 R Amphin Mutineer @Nicholas Gregory
 144 R Ancestral Vision @John Avon
 145 R Archmage Emeritus @Caio Monteiro
 146 R Baral's Expertise @Todd Lockwood
@@ -79,26 +99,47 @@ ScryfallCode=TDC
 148 C Consider @Zezhou Chen
 149 R Curse of the Swine @James Ryman
 150 C Deep Analysis @Jesper Ejsing
+152 C Forbidden Alchemy @David Rapoza
 153 C Frantic Search @Mitchell Malloy
 154 R Haughty Djinn @Mike Jordana
+155 U Hedron Crab @Jesper Ejsing
 157 M Lier, Disciple of the Drowned @Ekaterina Burmak
 158 C Opt @Craig J Spearing
 159 C Ponder @Dan Murayama Scott
 160 U Pongify @Heather Hudson
 161 C Preordain @Svetlin Velinov
 165 R Rite of Replication @Matt Cavotta
+166 R River Kelpie @Jeff Easley
 167 R Sublime Epiphany @Lindsey Look
 168 C Think Twice @Anthony Francisco
+169 C Treasure Cruise @Cynthia Sheppard
+170 U Wonder @Rebecca Guay
 171 U Bastion of Remembrance @Volkan Baǵa
 173 U Bitter Triumph @Donato Giancola
 175 R Chittering Witch @Winona Nelson
+176 R Dauthi Voidwalker @Sidharth Chaturvedi
 177 C Deadly Dispute @Irina Nordsol
+178 R Disciple of Bolas @Slawomir Maniak
 179 R Eliminate the Competition @Joseph Meehan
 181 M Gix, Yawgmoth Praetor @Anna Podedworna
+183 M Junji, the Midnight Sky @Chase Stone
+184 R Lethal Scheme @Tuan Duong Chu
+185 R Living Death @Mark Winters
+186 M Lord of the Forsaken @Kekai Kotaki
 187 R Mindblade Render @Mitchell Malloy
 188 U Morbid Opportunist @Tyler Walpole
+189 R Necromantic Selection @Dave Kendall
+190 R Necropolis Fiend @Seb McKinnon
+191 M Noxious Gearhulk @Lius Lasahido
+192 M Ob Nixilis, the Fallen @Jason Felix
 193 R Ophiomancer @John Stanko
+194 U Phyrexian Reclamation @rk post
+195 U Reassembling Skeleton @Austin Hsu
+196 U Stitcher's Supplier @Chris Seaman
+197 R Tasigur, the Golden Fang @Chris Rahn
+198 U Victimize @Craig J Spearing
 199 C Viscera Seer @John Stanko
+201 R Woe Strider @John Thacker
 202 R Yahenni, Undying Partisan @Lius Lasahido
 203 U Abrade @Jonas De Ro
 205 U Beetleback Chief @Lorenzo Mastroianni
@@ -117,13 +158,36 @@ ScryfallCode=TDC
 232 R Siege-Gang Commander @Aaron Miller
 235 U Storm-Kiln Artist @Manuel Castañón
 239 R Tempt with Vengeance @Ryan Barger
+247 M Avenger of Zendikar @Zoltan Boros & Gabor Szikszai
+251 R Conduit of Worlds @Jokubas Uogintas
+252 U Crawling Sensation @Christopher Moeller
+253 C Cultivate @Anthony Palumbo
+255 U Farseek @Martina Pilcerova
+257 C Grapple with the Past @Howard Lyon
+258 C Harrow @Rob Alexander
+263 M Multani, Yavimaya's Avatar @Ryan Yee
+265 C Rampant Growth @Steven Belledin
+266 C Sakura-Tribe Elder @Ted Galaday
+267 C Satyr Wayfinder @Steve Prescott
+270 R Shigeki, Jukai Visionary @Anna Podedworna
+271 C Springbloom Druid @Randy Gallegos
+273 U Tear Asunder @Dave Kendall
+274 U Timeless Witness @Deruchenko Alexander
 280 U Aron, Benalia's Ruin @Mark Winters
 282 R Baral and Kari Zev @Fariba Khamseh
+283 R Consuming Aberration @Karl Kopinski
 287 R Expansion // Explosion @Deruchenko Alexander
 288 U Expressive Iteration @Anastasia Ovchinnikova
+290 C Grisly Salvage @Dave Kendall
+293 M Jarad, Golgari Lich Lord @Eric Deschamps
 294 M Kaya, Geist Hunter @Ryan Pancoast
+295 M Lord of Extinction @Izzy
 296 M Magma Opus @Liiga Smilshkalne
+297 R Meren of Clan Nel Toth @Mark Winters
+298 U Nyx Weaver @Jack Wang
 299 R Prismari Command @Johannes Voss
+300 U Putrefy @Clint Cearley
+304 U Skull Prophet @Nils Hamm
 306 U Thalisse, Reverent Medium @Heonhwa Choe
 307 U Third Path Iconoclast @Manuel Castañón
 308 R Time Wipe @Svetlin Velinov
@@ -136,6 +200,7 @@ ScryfallCode=TDC
 318 U Fellwar Stone @John Avon
 319 R Idol of Oblivion @Piotr Dura
 320 C Izzet Signet @Raoul Vitale
+321 U Millikin @Joe Slucher
 322 R Myr Battlesphere @Franz Vohwinkel
 325 R Solemn Simulacrum @Dan Murayama Scott
 329 U Talisman of Conviction @Lindsey Look
@@ -151,14 +216,29 @@ ScryfallCode=TDC
 346 R Castle Ardenvale @Volkan Baǵa
 347 R Castle Embereth @Jaime Jones
 348 R Caves of Koilos @Julian Kok Joon Wen
+349 U Cephalid Coliseum @John Avon
 351 R Clifftop Retreat @Christine Choi
+352 R Command Beacon @Jonas De Ro
+353 C Contaminated Aquifer @Robin Olausson
+354 R Crypt of Agadeem @Jason Felix
+355 R Darkwater Catacombs @Monte Michael Moore
 357 R Dragonskull Summit @Jon Foster
+358 R Dreamroot Cascade @Sam Burley
+359 R Drownyard Temple @John Avon
 360 R Exotic Orchard @Steven Belledin
 361 R Ferrous Lake @Grady Frederick
 362 R Fetid Heath @Daarken
+363 R Fetid Pools @Jonas De Ro
+365 C Foreboding Landscape @Erikas Perl
 367 R Glacial Fortress @James Paick
+368 U Golgari Rot Farm @John Avon
+369 C Haunted Mire @Bruce Brenneise
+371 R Hinterland Harbor @Daniel Ljunggren
 372 R Irrigated Farmland @Jonas De Ro
 373 R Isolated Chapel @Richard Wright
+376 R Llanowar Wastes @Lucas Graciano
+377 U Memorial to Folly @Sung Choi
+380 U Myriad Landscape @Richard Wright
 382 C Path of Ancestry @Alayna Danner
 383 C Perilous Landscape @Alayna Danner
 384 R Prairie Stream @Adam Paquette
@@ -170,10 +250,13 @@ ScryfallCode=TDC
 394 R Skycloud Expanse @Rob Alexander
 395 R Smoldering Marsh @Adam Paquette
 396 R Sulfur Falls @Cliff Childs
+398 R Sunken Hollow @Adam Paquette
 401 R Temple of Enlightenment @Piotr Dura
 402 R Temple of Epiphany @Adam Paquette
+403 R Temple of Malady @Titus Lunter
 406 R Temple of Silence @Adam Paquette
 407 R Temple of Triumph @Piotr Dura
 408 C Terramorphic Expanse @Sam Burley
 410 R Vault of the Archangel @John Avon
 411 R Windbrisk Heights @Omar Rayyan
+412 R Woodland Cemetery @Christine Choi
