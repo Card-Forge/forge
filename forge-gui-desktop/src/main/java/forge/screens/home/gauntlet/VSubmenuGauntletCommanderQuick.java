@@ -31,18 +31,18 @@ import net.miginfocom.swing.MigLayout;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum VSubmenuGauntletCommander implements IVSubmenu<CSubmenuGauntletCommander> {
+public enum VSubmenuGauntletCommanderQuick implements IVSubmenu<CSubmenuGauntletCommanderQuick> {
     /** */
     SINGLETON_INSTANCE;
     final Localizer localizer = Localizer.getInstance();
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab(localizer.getMessage("lblCommanderGauntlet"));
+    private final DragTab tab = new DragTab(localizer.getMessage("lblQuickCommanderGauntlet"));
 
     // Other fields
     private final FPanel pnlOptions = new FPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final FLabel lblTitle = new FLabel.Builder()
-            .text(localizer.getMessage("lblCommanderGauntletBuilder")).fontAlign(SwingConstants.CENTER)
+            .text(localizer.getMessage("lblQuickCommanderGauntletBuilder")).fontAlign(SwingConstants.CENTER)
             .opaque(true).fontSize(16).build();
 
     private final FLabel lblDecklist = new FLabel.Builder()
@@ -71,7 +71,7 @@ public enum VSubmenuGauntletCommander implements IVSubmenu<CSubmenuGauntletComma
 
     private final StartButton btnStart  = new StartButton();
 
-    VSubmenuGauntletCommander() {
+    VSubmenuGauntletCommanderQuick() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         boxRandomCommanderDecks.setSelected(true);
@@ -115,7 +115,7 @@ public enum VSubmenuGauntletCommander implements IVSubmenu<CSubmenuGauntletComma
      */
     @Override
     public String getMenuTitle() {
-        return localizer.getMessage("lblCommanderGauntlet");
+        return localizer.getMessage("lblQuickCommanderGauntlet");
     }
 
     /* (non-Javadoc)
@@ -123,7 +123,7 @@ public enum VSubmenuGauntletCommander implements IVSubmenu<CSubmenuGauntletComma
      */
     @Override
     public EDocID getItemEnum() {
-        return EDocID.HOME_GAUNTLETCOMMANDER;
+        return EDocID.HOME_GAUNTLETCOMMANDERQUICK;
     }
 
     /* (non-Javadoc)
@@ -184,7 +184,7 @@ public enum VSubmenuGauntletCommander implements IVSubmenu<CSubmenuGauntletComma
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.HOME_GAUNTLETCOMMANDER;
+        return EDocID.HOME_GAUNTLETCOMMANDERQUICK;
     }
 
     /* (non-Javadoc)
@@ -199,8 +199,8 @@ public enum VSubmenuGauntletCommander implements IVSubmenu<CSubmenuGauntletComma
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public CSubmenuGauntletCommander getLayoutControl() {
-        return CSubmenuGauntletCommander.SINGLETON_INSTANCE;
+    public CSubmenuGauntletCommanderQuick getLayoutControl() {
+        return CSubmenuGauntletCommanderQuick.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)

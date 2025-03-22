@@ -63,7 +63,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     //Show dialog to select a deck
     public static Deck promptForDeck(final CDetailPicture cDetailPicture, final String title, final DeckType defaultDeckType, final boolean forAi) {
         FThreads.assertExecutedByEdt(true);
-        final FDeckChooser chooser = new FDeckChooser(cDetailPicture, forAi, GameType.Constructed, false);
+        boolean isForCommander = defaultDeckType.equals(DeckType.COMMANDER_DECK);
+        final FDeckChooser chooser = new FDeckChooser(cDetailPicture, forAi, isForCommander? GameType.Commander : GameType.Constructed, isForCommander);
         chooser.initialize(defaultDeckType);
         chooser.populate();
         final Dimension parentSize = JOptionPane.getRootFrame().getSize();

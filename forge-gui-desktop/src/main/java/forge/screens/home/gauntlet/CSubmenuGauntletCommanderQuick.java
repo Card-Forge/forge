@@ -21,13 +21,13 @@ import forge.player.GamePlayerUtil;
  *
  */
 
-public enum CSubmenuGauntletCommander implements ICDoc {
+public enum CSubmenuGauntletCommanderQuick implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
     private final ActionListener actStartGame = arg0 -> startGame();
 
-    private final VSubmenuGauntletCommander view = VSubmenuGauntletCommander.SINGLETON_INSTANCE;
+    private final VSubmenuGauntletCommanderQuick view = VSubmenuGauntletCommanderQuick.SINGLETON_INSTANCE;
 
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
