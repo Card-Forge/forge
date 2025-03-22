@@ -16,26 +16,62 @@ ScryfallCode=TDC
 8 M Teval, the Balanced Scale @Chris Rahn
 9 M Ureni of the Unwritten @Valera Lutfullina
 10 M Zurgo Stormrender @Lie Setiawan
+11 R Ainok Strike Leader @Alexander Mokhov
 12 R Aligned Heart @Aurore Folny
+13 R Ironwill Forger @Konstantin Porubov
 16 R Tempest Technique @Nino Vecia
+17 R Will of the Mardu @Tuan Duong Chu
 18 R Adaptive Training Post @Ben Maier
 22 R Transcendent Dragon @Diego Gisbert
 23 R Voracious Bibliophile @Camille Alquier
+26 R Bone Devourer @Diana Franco
+32 R Within Range @Hector Ortiz
 33 R Caldera Pyremaw @Johann Bodin
+34 R Goldlust Triad @Arif Wijaya
+35 R Infantry Shield @Xabi Gaztelua
+37 R Redoubled Stormsinger @Filipe Pagliuso
 39 R Transforming Flourish @Xavier Ribeiro
 40 R Will of the Jeskai @Jessica Fong
+52 R Aligned Heart @Aurore Folny
+56 R Tempest Technique @Nino Vecia
+58 R Adaptive Training Post @Ben Maier
+62 R Transcendent Dragon @Diego Gisbert
+63 R Voracious Bibliophile @Camille Alquier
+73 R Caldera Pyremaw @Johann Bodin
+79 R Transforming Flourish @Xavier Ribeiro
+80 R Will of the Jeskai @Jessica Fong
 91 R Vanquish the Horde @Johann Bodin
 92 R Narset's Reversal @Nathaniel Himawan
 95 U Young Pyromancer @Alessandra Pisano
 99 C Goblin Electromancer @Edgar Sánchez Hidalgo
+101 U Shadow Summoning @Nereida
+102 U Lightning Greaves @Michael Komarck
+103 U Skullclamp @Igor Krstic
 105 U Arcane Signet @Racrufi
 106 U Sol Ring @Leon Tukker
 107 C Command Tower @Marina Ortega Lorente
+108 R Adeline, Resplendent Cathar @Bryan Sola
+109 M Angel of Invention @Volkan Baǵa
+111 R Commander's Insignia @Anastasia Ovchinnikova
 112 R Dismantling Wave @Raoul Vitale
+113 M Divine Visitation @Victor Adame Minguez
+114 R Emeria Angel @Jim Murray
 116 U Ghostly Prison @Wayne England
+117 U Goldnight Commander @Chris Rahn
+118 R Grand Crescendo @Raluca Marinescu
+119 M Hero of Bladehold @Steven Belledin
+120 R Hour of Reckoning @Joseph Meehan
+122 M Legion Loyalty @Michal Ivan
+123 U Lingering Souls @John Stanko
 124 R Mangara, the Diplomat @Howard Lyon
 125 M Monastery Mentor @Magali Villeneuve
+127 U Release the Dogs @Jason Kang
+129 R Selfless Spirit @Seb McKinnon
+132 U Stroke of Midnight @Julia Metzger
+133 M Sun Titan @Todd Lockwood
 134 U Swords to Plowshares @Jesper Ejsing
+135 R Tocasia's Welcome @Johan Grenier
+136 R Twilight Drover @Dave Allsop
 144 R Ancestral Vision @John Avon
 145 R Archmage Emeritus @Caio Monteiro
 146 R Baral's Expertise @Todd Lockwood
@@ -53,47 +89,91 @@ ScryfallCode=TDC
 165 R Rite of Replication @Matt Cavotta
 167 R Sublime Epiphany @Lindsey Look
 168 C Think Twice @Anthony Francisco
+171 U Bastion of Remembrance @Volkan Baǵa
+173 U Bitter Triumph @Donato Giancola
+175 R Chittering Witch @Winona Nelson
+177 C Deadly Dispute @Irina Nordsol
+179 R Eliminate the Competition @Joseph Meehan
+181 M Gix, Yawgmoth Praetor @Anna Podedworna
+187 R Mindblade Render @Mitchell Malloy
+188 U Morbid Opportunist @Tyler Walpole
+193 R Ophiomancer @John Stanko
+199 C Viscera Seer @John Stanko
+202 R Yahenni, Undying Partisan @Lius Lasahido
 203 U Abrade @Jonas De Ro
+205 U Beetleback Chief @Lorenzo Mastroianni
 206 C Big Score @Gaboleps
 209 U Curse of Opulence @Kieran Yanner
 212 R Electrodominance @Dmitry Burmak
 213 C Faithless Looting @Gabor Szikszai
+216 R Grenzo, Havoc Raiser @Svetlin Velinov
 217 U Guttersnipe @Andrey Kuzinskiy
+220 R Legion Warboss @Alex Konstad
+222 U Loyal Apprentice @Joe Slucher
 223 C Mana Geyser @Martina Pilcerova
 224 M Manaform Hellkite @Andrew Mar
+227 R Ogre Battledriver @Greg Staples
 231 C Shiny Impetus @Filipe Pagliuso
+232 R Siege-Gang Commander @Aaron Miller
 235 U Storm-Kiln Artist @Manuel Castañón
+239 R Tempt with Vengeance @Ryan Barger
+280 U Aron, Benalia's Ruin @Mark Winters
 282 R Baral and Kari Zev @Fariba Khamseh
+287 R Expansion // Explosion @Deruchenko Alexander
 288 U Expressive Iteration @Anastasia Ovchinnikova
+294 M Kaya, Geist Hunter @Ryan Pancoast
 296 M Magma Opus @Liiga Smilshkalne
 299 R Prismari Command @Johannes Voss
+306 U Thalisse, Reverent Medium @Heonhwa Choe
 307 U Third Path Iconoclast @Manuel Castañón
 308 R Time Wipe @Svetlin Velinov
 309 M Velomachus Lorehold @Raymond Swanland
 310 M Veyran, Voice of Duality @Mathias Kollros
 311 R Whirlwind of Thought @Bram Sels
 312 U Azorius Signet @Raoul Vitale
+313 R Blade of Selves @Lie Setiawan
 314 U Boros Signet @Ron Spears
 318 U Fellwar Stone @John Avon
+319 R Idol of Oblivion @Piotr Dura
 320 C Izzet Signet @Raoul Vitale
+322 R Myr Battlesphere @Franz Vohwinkel
+325 R Solemn Simulacrum @Dan Murayama Scott
+329 U Talisman of Conviction @Lindsey Look
+331 U Talisman of Hierarchy @Lindsey Look
 333 U Talisman of Progress @Mike Dringenberg
+335 C Wayfarer's Bauble @Tomas Duchek
 338 R Adarkar Wastes @Piotr Dura
 339 C Ash Barrens @Jonas De Ro
 340 R Battlefield Forge @Thomas Stoop
+341 C Bojuka Bog @Howard Lyon
+344 R Canyon Slough @Titus Lunter
 345 R Cascade Bluffs @Brandon Kitkouski
+346 R Castle Ardenvale @Volkan Baǵa
+347 R Castle Embereth @Jaime Jones
+348 R Caves of Koilos @Julian Kok Joon Wen
 351 R Clifftop Retreat @Christine Choi
+357 R Dragonskull Summit @Jon Foster
 360 R Exotic Orchard @Steven Belledin
 361 R Ferrous Lake @Grady Frederick
+362 R Fetid Heath @Daarken
 367 R Glacial Fortress @James Paick
 372 R Irrigated Farmland @Jonas De Ro
+373 R Isolated Chapel @Richard Wright
 382 C Path of Ancestry @Alayna Danner
 383 C Perilous Landscape @Alayna Danner
 384 R Prairie Stream @Adam Paquette
 386 U Reliquary Tower @Jesper Ejsing
 389 R Rugged Prairie @Fred Fields
+390 C Shattered Landscape @Erikas Perl
+391 R Shattered Sanctum @Muhammad Firdaus
 393 R Shivan Reef @Andrew Mar
 394 R Skycloud Expanse @Rob Alexander
+395 R Smoldering Marsh @Adam Paquette
 396 R Sulfur Falls @Cliff Childs
 401 R Temple of Enlightenment @Piotr Dura
 402 R Temple of Epiphany @Adam Paquette
+406 R Temple of Silence @Adam Paquette
 407 R Temple of Triumph @Piotr Dura
+408 C Terramorphic Expanse @Sam Burley
+410 R Vault of the Archangel @John Avon
+411 R Windbrisk Heights @Omar Rayyan

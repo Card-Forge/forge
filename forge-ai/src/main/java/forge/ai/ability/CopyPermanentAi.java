@@ -152,6 +152,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
             // target loop
             while (sa.canAddMoreTarget()) {
+                list = CardLists.canSubsequentlyTarget(list, sa);
+
                 if (list.isEmpty()) {
                     if (!sa.isTargetNumberValid() || sa.getTargets().size() == 0) {
                         sa.resetTargets();
