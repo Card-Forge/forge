@@ -2105,7 +2105,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     public void testGetCardFromUnknownSet() {
         String unknownCardName = "Unknown Card Name";
         PaperCard unknownCard = new PaperCard(CardRules.getUnsupportedCardNamed(unknownCardName),
-                CardEdition.UNKNOWN.getCode(), CardRarity.Unknown);
+                CardEdition.UNKNOWN_CODE, CardRarity.Unknown);
         this.cardDb.addCard(unknownCard);
         assertTrue(this.cardDb.getAllCards().contains(unknownCard));
         assertNotNull(this.cardDb.getAllCards(unknownCardName));
@@ -2114,7 +2114,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         PaperCard retrievedPaperCard = this.cardDb.getCard(unknownCardName);
         assertNotNull(retrievedPaperCard);
         assertEquals(retrievedPaperCard.getName(), unknownCardName);
-        assertEquals(retrievedPaperCard.getEdition(), CardEdition.UNKNOWN.getCode());
+        assertEquals(retrievedPaperCard.getEdition(), CardEdition.UNKNOWN_CODE);
     }
 
     @Test
