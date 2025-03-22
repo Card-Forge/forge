@@ -1,0 +1,7 @@
+Name:Bone-Cairn Butcher
+ManaCost:1 R W B
+Types:Creature Demon
+PT:4/4
+K:Mobilize:2
+S:Mode$ Continuous | Affected$ Creature.token+attacking+YouCtrl | AddKeyword$ Deathtouch | Description$ Attacking tokens you control have deathtouch.
+Oracle:Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)\nAttacking tokens you control have deathtouch.

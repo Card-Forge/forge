@@ -1,0 +1,8 @@
+Name:Essence Anchor
+ManaCost:2 U
+Types:Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ b_2_2_zombie_druid | TokenOwner$ You | PlayerTurn$ True | CheckSVar$ X | SpellDescription$ Create a 2/2 black Zombie Druid creature token. Activate only during your turn and only if a card left your graveyard this turn.
+SVar:X:Count$LeftGraveyardThisTurn Card.YouOwn
+Oracle:At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Create a 2/2 black Zombie Druid creature token. Activate only during your turn and only if a card left your graveyard this turn.

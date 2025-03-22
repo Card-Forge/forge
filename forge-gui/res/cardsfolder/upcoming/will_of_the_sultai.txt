@@ -1,0 +1,11 @@
+Name:Will of the Sultai
+ManaCost:4 G
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare Y GE1.2.1 | Choices$ DBLandscaping,DBLeyline | AdditionalDescription$ . If you control a commander as you cast this spell, you may choose both instead.
+SVar:DBLandscaping:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | SubAbility$ DBChangeZoneAll | SpellDescription$ Target player mills three cards. Return all land cards from your graveyard to the battlefield tapped.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+SVar:DBLeyline:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBPump | SpellDescription$ Put X +1/+1 counters on target creature, where X is the number of lands you control. It gains trample until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ TargetedCard | KW$ Trample
+SVar:X:Count$Valid Land.YouCtrl
+SVar:Y:Count$Valid Card.IsCommander+YouCtrl
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Target player mills three cards. Return all land cards from your graveyard to the battlefield tapped.\n• Put X +1/+1 counters on target creature, where X is the number of lands you control. It gains trample until end of turn.
