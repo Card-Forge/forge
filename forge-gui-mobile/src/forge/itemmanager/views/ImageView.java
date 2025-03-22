@@ -12,6 +12,7 @@ import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.adventure.scene.ShopScene;
+import forge.adventure.util.Config;
 import forge.assets.*;
 import forge.assets.FSkinColor.Colors;
 import forge.card.*;
@@ -1081,7 +1082,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             cardPrice = ((ShopScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);
                         drawCardLabel(g, "$" + cardPrice, Color.GOLD, x, y ,w ,h);
                     } else {
-                        if (((PaperCard) item).isNoSell() && itemManager.showNFSWatermark()) {
+                        if (((PaperCard) item).isNoSell() && itemManager.showNFSWatermark() && !Config.instance().getSettingData().disableNotForSale) {
                             Texture nfs = Forge.getAssets().getTexture(getDefaultSkinFile("nfs.png"), false);
                             if (nfs != null)
                                 g.drawImage(nfs, x, y, w, h);
