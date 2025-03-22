@@ -6,7 +6,7 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | Conditio
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ValidTarget$ You | ReplaceWith$ DBImmediateTrigger | PreventionEffect$ True | Description$ The next time a source of your choice would deal damage to you this turn, prevent that damage. When damage is prevented this way, CARDNAME deals that much damage to that source's controller and you draw that many cards.
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDamage | RememberSVarAmount$ X | TriggerDescription$ When damage is prevented this way, CARDNAME deals that much damage to that source's controller and you draw that many cards.
 SVar:TrigDamage:DB$ DealDamage | Defined$ ChosenCardController | NumDmg$ X | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ Cleanup
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:ReplaceCount$DamageAmount
 Oracle:The next time a source of your choice would deal damage to you this turn, prevent that damage. When damage is prevented this way, New Way Forward deals that much damage to that source's controller and you draw that many cards.
