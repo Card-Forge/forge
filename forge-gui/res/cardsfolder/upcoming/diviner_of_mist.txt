@@ -1,0 +1,11 @@
+Name:Diviner of Mist
+ManaCost:4 U
+Types:Creature Dragon
+PT:4/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this creature attacks, mill four cards. You may cast an instant or sorcery spell from your graveyard with mana value 4 or less without paying its mana cost. If that spell would be put into your graveyard, exile it instead.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | ValidZone$ Graveyard | Valid$ Instant.YouOwn+cmcLE4,Sorcery.YouOwn+cmcLE4 | Controller$ You | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ 1 | ReplaceGraveyard$ Exile
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Mill
+Oracle:Flying\nWhenever this creature attacks, mill four cards. You may cast an instant or sorcery spell from your graveyard with mana value 4 or less without paying its mana cost. If that spell would be put into your graveyard, exile it instead.

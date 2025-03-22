@@ -1,0 +1,11 @@
+Name:Welcome the Dead
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card and you lose 2 life. Create X tapped 2/2 black Zombie Druid creature tokens, where X is the number of cards that were put into your graveyard from your hand or library this turn.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ You | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie_druid | TokenOwner$ You | TokenTapped$ True
+K:Flashback:5 B
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Hand_Card.YouOwn/Plus.Y
+SVar:Y:Count$ThisTurnEntered_Graveyard_from_Library_Card.YouOwn
+Oracle:Draw two cards, then discard a card and you lose 2 life. Create X tapped 2/2 black Zombie Druid creature tokens, where X is the number of cards that were put into your graveyard from your hand or library this turn.\nFlashback {5}{B} (You may cast tihs card from your graveyard for its flashback cost. Then exile it.)
