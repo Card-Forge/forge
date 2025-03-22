@@ -1,0 +1,5 @@
+Name:Alesha's Legacy
+ManaCost:1 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Deathtouch & Indestructible | SpellDescription$ Target creature you control gains deathtouch and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+Oracle:Target creature you control gains deathtouch and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

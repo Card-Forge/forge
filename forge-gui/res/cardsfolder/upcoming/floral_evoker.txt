@@ -1,0 +1,10 @@
+Name:Floral Evoker
+ManaCost:2 G
+Types:Creature Snake Druid
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Land
+A:AB$ ChangeZone | Cost$ G Discard<1/Creature> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target land card in your graveyard | ValidTgts$ Land.YouOwn | Tapped$ True | SpellDescription$ Return target land card from your graveyard to the battlefield tapped.
+DeckHas:Ability$Counters
+Oracle:Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature.\n{G}, Discard a creature card: Return target land card from your graveyard to the battlefield tapped.

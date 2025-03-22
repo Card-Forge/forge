@@ -1,0 +1,9 @@
+Name:Cori Mountain Stalwart
+ManaCost:1 R W
+Types:Creature Human Monk
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Flurry — Whenever you cast your second spell each turn, this creature deals 2 damage to each opponent and you gain 2 life.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:BuffedBy:Card
+Oracle:Flurry — Whenever you cast your second spell each turn, this creature deals 2 damage to each opponent and you gain 2 life.
