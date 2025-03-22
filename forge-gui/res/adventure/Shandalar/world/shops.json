@@ -5507,7 +5507,7 @@
     "name": "BoosterPackShop",
     "description":"Pack To Basics",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShop",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
@@ -5518,7 +5518,8 @@
     "name": "WhiteBoosterPackShop",
     "description":"Blessed Boosters",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShopW",
+    "overlaySprite": "Overlay4White",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
@@ -5535,7 +5536,8 @@
     "name": "BlueBoosterPackShop",
     "description":"Counter Packs",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShopU",
+    "overlaySprite": "Overlay4Blue",
+    "sprite": "BoosterShop",
     "rewards": [
       {
             "type": "cardPackShop",
@@ -5551,7 +5553,8 @@
     "name": "BlackBoosterPackShop",
     "description":"Graveyard Goods",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShopB",
+    "overlaySprite": "Overlay4Black",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
@@ -5567,7 +5570,8 @@
     "name": "RedBoosterPackShop",
     "description":"Wildfire Wonders",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShopR",
+    "overlaySprite": "Overlay4Red",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
@@ -5583,7 +5587,8 @@
     "name": "GreenBoosterPackShop",
     "description":"Nature’s Nurture Packs",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShopG",
+    "overlaySprite": "Overlay4Green",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
@@ -5599,7 +5604,8 @@
     "name": "ColorlessBoosterPackShop",
     "description":"Pack to the Future",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShopC",
+    "overlaySprite": "Overlay4Colorless",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
@@ -5615,8 +5621,7 @@
     "name": "AlphaBoosterPackShop",
     "description":"Ancient Archives",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShop",
-    "overlaySprite":"Overlay2White",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
@@ -5629,8 +5634,7 @@
     "name": "BetaBoosterPackShop",
     "description":"The Planar Cache",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShop",
-    "overlaySprite":"Overlay4White",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
@@ -5643,8 +5647,7 @@
     "name": "GammaBoosterPackShop",
     "description":"Ravnica Restocked",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShop",
-    "overlaySprite":"Overlay6White",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
@@ -5657,8 +5660,7 @@
     "name": "DeltaBoosterPackShop",
     "description":"The Modern Vault",
     "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite": "CarShop",
-    "overlaySprite":"Overlay8White",
+    "sprite": "BoosterShop",
     "rewards": [
       {
         "type": "cardPackShop",
