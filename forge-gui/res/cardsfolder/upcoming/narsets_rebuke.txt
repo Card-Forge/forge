@@ -1,0 +1,6 @@
+Name:Narset's Rebuke
+ManaCost:4 R
+Types:Instant
+A:SP$ DealDamage | NumDmg$ 5 | ValidTgts$ Creature | TgtPrompt$ Select target creature | ReplaceDyingDefined$ Targeted | SubAbility$ DBMana | SpellDescription$ CARDNAME deals 5 damage to target creature. Add {U}{R}{W}. If that creature would die this turn, exile it instead.
+SVar:DBMana:DB$ Mana | Produced$ U R W | Defined$ You
+Oracle:Narset's Rebuke deals 5 damage to target creature. Add {U}{R}{W}. If that creature would die this turn, exile it instead.
