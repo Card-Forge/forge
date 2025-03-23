@@ -20,10 +20,8 @@ package forge.screens.deckeditor.controllers;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
