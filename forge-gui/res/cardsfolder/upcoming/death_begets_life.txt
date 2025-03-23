@@ -1,0 +1,8 @@
+Name:Death Begets Life
+ManaCost:5 B G U
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature,Enchantment | RememberDestroyed$ True | SubAbility$ DBDraw | SpellDescription$ Destroy all creatures and enchantments. Draw a card for each permanent destroyed this way.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Destroy all creatures and enchantments. Draw a card for each permanent destroyed this way.
