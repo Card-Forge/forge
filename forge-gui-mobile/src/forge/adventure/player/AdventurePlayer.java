@@ -471,15 +471,41 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (data.containsKey("noSellCards")) {
             //Legacy list of unsellable cards. Now done via CardRequest flags. Convert the corresponding cards.
             PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
-            for (PaperCard item : items) {
+            CardPool noSellPool = new CardPool();
+            noSellPool.addAllFlat(List.of(items));
+            for (Map.Entry<PaperCard, Integer> noSellEntry : noSellPool) {
+                PaperCard item = noSellEntry.getKey();
                 if (item == null)
                     continue;
-                if(!cards.remove(item))
-                    System.err.println("Failed to update noSellValue flag - " + item);
-                else {
-                    cards.add(item.getNoSellVersion());
-                    System.out.println("Converted legacy noSellCards item - " + item);
+                int totalCopies = cards.count(item);
+                int noSellCopies = Math.min(noSellEntry.getValue(), totalCopies);
+                if (!cards.remove(item, noSellCopies)) {
+                    System.err.printf("Failed to update noSellValue flag - %s%n", item);
+                    continue;
                 }
+
+                int remainingSellableCopies = totalCopies - noSellCopies;
+
+                PaperCard noSellVersion = item.getNoSellVersion();
+                cards.add(noSellVersion, noSellCopies);
+
+                System.out.printf("Converted legacy noSellCards item - %s (%d / %d copies)%n", item, noSellCopies, totalCopies);
+
+                //Also go through their decks and update cards there.
+                for (Deck deck : decks) {
+                    int inUse = 0;
+                    for (Map.Entry<DeckSection, CardPool> section : deck) {
+                        CardPool pool = section.getValue();
+                        inUse += pool.count(item);
+                        if(inUse > remainingSellableCopies) {
+                            int toConvert = inUse - remainingSellableCopies;
+                            pool.remove(item, toConvert);
+                            pool.add(noSellVersion, toConvert);
+                            System.out.printf("- Converted %d copies in deck - %s/%s%n", toConvert, deck.getName(), section.getKey());
+                        }
+                    }
+                }
+
             }
         }
         if (data.containsKey("autoSellCards")) {
@@ -1211,7 +1237,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         collectionCards.addAll(cards);
         if (!allCards) {
             collectionCards.removeAll(autoSellCards);
-            collectionCards.removeIf(PaperCard::hasNoSellValue);
         }
 
         return collectionCards;

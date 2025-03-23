@@ -28,6 +28,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectStreamException;
+import java.io.Serial;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -39,6 +41,7 @@ import java.util.stream.Collectors;
  * @author Forge
  */
 public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard {
+    @Serial
     private static final long serialVersionUID = 2942081982620691205L;
 
     // Reference to rules
@@ -55,7 +58,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private String artist;
     private final int artIndex;
     private final boolean foil;
-    private Boolean hasImage;
     private final PaperCardFlags flags;
     private final String sortableName;
     private final String functionalVariant;
@@ -64,6 +66,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private transient CardRarity rarity; // rarity is given in ctor when set is assigned
     // Reference to a new instance of Self, but foiled!
     private transient PaperCard foiledVersion, noSellVersion, flaglessVersion;
+    private transient Boolean hasImage;
 
     @Override
     public String getName() {
@@ -338,6 +341,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return Integer.compare(artIndex, o.getArtIndex());
     }
 
+    @Serial
     private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
         // default deserialization
         ois.defaultReadObject();
@@ -351,6 +355,14 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         }
         rules = pc.getRules();
         rarity = pc.getRarity();
+    }
+
+    @Serial
+    private Object readResolve() throws ObjectStreamException {
+        //If we deserialize an old PaperCard with no flags, reinitialize as a fresh copy to set default flags.
+        if(this.flags == null)
+            return new PaperCard(this, null);
+        return this;
     }
 
     @Override
