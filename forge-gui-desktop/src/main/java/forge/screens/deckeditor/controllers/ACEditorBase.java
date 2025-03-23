@@ -30,6 +30,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -582,9 +583,9 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             int val;
             if ((val = existingCard.getRules().getSetColorID()) > 0) {
                 GuiUtils.addMenuItem(menu, label, null, () -> {
-                    Set<String> colors = new HashSet<>(GuiChoose.getChoices(localizer.getMessage("lblChooseNColors", Lang.getNumeral(val)), val, val, MagicColor.Constant.ONLY_COLORS));
+                    List<String> colors = GuiChoose.getChoices(localizer.getMessage("lblChooseNColors", Lang.getNumeral(val)), val, val, MagicColor.Constant.ONLY_COLORS);
                     // make an updated version
-                    PaperCard updated = existingCard.getColorIDVersion(colors);
+                    PaperCard updated = existingCard.copyWithMarkedColors(ColorSet.fromNames(colors));
                     // remove *quantity* instances of existing card
                     CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
                     // add *quantity* into the deck and set them as selected

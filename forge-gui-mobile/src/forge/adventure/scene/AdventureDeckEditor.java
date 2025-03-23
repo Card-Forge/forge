@@ -211,14 +211,13 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 });
             }
 
-            int noSellCount = Current.player().noSellCards.count(card);
             int autoSellCount = Current.player().autoSellCards.count(card);
             int sellableCount = Current.player().getSellableCards().count(card);
 
-            if (noSellCount > 0) {
-                FMenuItem unsellableCount = new FMenuItem(Forge.getLocalizer().getMessage("lblUnsellableCount", noSellCount), null, null);
-                unsellableCount.setEnabled(false);
-                menu.addItem(unsellableCount);
+            if (card.hasNoSellValue()) {
+                FMenuItem unsellableIndicator = new FMenuItem(Forge.getLocalizer().getMessage("lblUnsellable"), null, null);
+                unsellableIndicator.setEnabled(false);
+                menu.addItem(unsellableIndicator);
             }
 
             if (sellableCount > 0) {
@@ -248,12 +247,9 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             if (showCollectionCards) {
                 collectionPool.addAllFlat(AdventurePlayer.current().getCollectionCards(false).toFlatList());
             }
-            if (showNoSellCards) {
-                collectionPool.addAllFlat(AdventurePlayer.current().getNoSellCards().toFlatList());
-                collectionPool.removeAllFlat(cardsInUse.toFlatList());
-            } else {
-                cardsInUse.removeAllFlat(AdventurePlayer.current().getNoSellCards().toFlatList());
-                collectionPool.removeAllFlat(cardsInUse.toFlatList());
+            collectionPool.removeAllFlat(cardsInUse.toFlatList());
+            if (!showNoSellCards) {
+                collectionPool.removeIf(PaperCard::hasNoSellValue);
             }
             if (showAutoSellCards) {
                 collectionPool.addAllFlat(AdventurePlayer.current().getAutoSellCards().toFlatList());
@@ -1120,12 +1116,9 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             if (showCollectionCards) {
                 adventurePool.addAll(AdventurePlayer.current().getCollectionCards(false));
             }
-            if (showNoSellCards) {
-                adventurePool.addAll(AdventurePlayer.current().getNoSellCards());
-                adventurePool.removeAll(cardsInUse);
-            } else {
-                cardsInUse.removeAll(AdventurePlayer.current().getNoSellCards());
-                adventurePool.removeAll(cardsInUse);
+            adventurePool.removeAll(cardsInUse);
+            if (!showNoSellCards) {
+                adventurePool.removeIf(PaperCard::hasNoSellValue);
             }
             if (showAutoSellCards) {
                 adventurePool.addAll(AdventurePlayer.current().getAutoSellCards());

@@ -153,7 +153,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     }
 
     @Override
-    public Set<String> getColorID() {
+    public ColorSet getMarkedColors() {
         return null;
     }
 
