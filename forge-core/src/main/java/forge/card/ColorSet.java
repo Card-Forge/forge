@@ -293,9 +293,6 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
      */
     @Override
     public String toString() {
-        if (this.orderWeight == -1) {
-            return "C";
-        }
         final ManaCostShard[] orderedShards = getOrderedShards();
         return Arrays.stream(orderedShards).map(ManaCostShard::toShortString).collect(Collectors.joining());
     }
