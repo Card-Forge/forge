@@ -703,18 +703,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         cardName = cardNameRequest.cardName;
         isFoil = isFoil || cardNameRequest.isFoil;
 
-        List<PaperCard> candidates = getAllCards(cardName, c -> {
-            boolean artIndexFilter = true;
-            boolean collectorNumberFilter = true;
-            boolean setFilter = c.getEdition().equalsIgnoreCase(edition.getCode()) ||
-                    c.getEdition().equalsIgnoreCase(edition.getCode2());
-            if (artIndex > 0)
-                artIndexFilter = (c.getArtIndex() == artIndex);
-            if ((collectorNumber != null) && (collectorNumber.length() > 0)
-                    && !(collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)))
-                collectorNumberFilter = (c.getCollectorNumber().equals(collectorNumber));
-            return setFilter && artIndexFilter && collectorNumberFilter;
-        });
+        String code1 = edition.getCode(), code2 = edition.getCode2();
+
+        Predicate<PaperCard> filter = (c) -> {
+            String ed = c.getEdition();
+            return ed.equalsIgnoreCase(code1) || ed.equalsIgnoreCase(code2);
+        };
+        if (artIndex > 0)
+            filter = filter.and((c) -> artIndex == c.getArtIndex());
+        if (collectorNumber != null && !collectorNumber.isEmpty() && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER))
+            filter = filter.and((c) -> collectorNumber.equals(c.getCollectorNumber()));
+
+        List<PaperCard> candidates = getAllCards(cardName, filter);
         if (candidates.isEmpty())
             return null;
 
