@@ -1,0 +1,7 @@
+Name:Voice of Victory
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/3
+K:Mobilize:2
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Your opponents can't cast spells during your turn.
+Oracle:Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)\nYour opponents can't cast spells during your turn.

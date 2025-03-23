@@ -1,0 +1,11 @@
+Name:Ureni, the Song Unending
+ManaCost:5 G U R
+Types:Legendary Creature Spirit Dragon
+PT:10/10
+K:Flying
+K:Protection from white
+K:Protection from black
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When NICKNAME enters, it deals X damage divided as you choose among any number of target creatures and/or planeswalkers your opponents control, where X is the number of lands you control.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select any number of target creatures and/or planeswalkers an opponent controls | NumDmg$ X | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X
+SVar:X:Count$Valid Land.YouCtrl
+Oracle:Flying, protection from white and from black\nWhen Ureni enters, it deals X damage divided as you choose among any number of target creatures and/or planeswalkers your opponents control, where X is the number of lands you control.

@@ -1,0 +1,10 @@
+Name:Flamehold Grappler
+ManaCost:U R W
+Types:Creature Human Monk
+PT:3/3
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When this creature enters, copy the next spell you cast this turn when you cast it. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)
+SVar:TrigEffect:DB$ DelayedTrigger | AILogic$ SpellCopy | Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ TrigCopy | TriggerDescription$ Copy the next spell you cast this turn when you cast it. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | Amount$ 1 | MayChooseTarget$ True
+SVar:PlayMain1:TRUE
+Oracle:First strike\nWhen this creature enters, copy the next spell you cast this turn when you cast it. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)

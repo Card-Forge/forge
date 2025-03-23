@@ -1,0 +1,12 @@
+Name:Will of the Mardu
+ManaCost:2 W
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare X GE1.2.1 | Choices$ DBPump,DBDamage | AdditionalDescription$ . If you control a commander as you cast this spell, you may choose both.
+SVar:DBPump:DB$ Pump | ValidTgts$ Player | SubAbility$ DBToken | SpellDescription$ Create a number of 1/1 red Warrior creature tokens equal to the number of creatures target player controls.
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ r_1_1_warrior | TokenOwner$ You
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ Z | SpellDescription$ CARDNAME deals damage to target creature equal to the number of creatures you control.
+SVar:X:Count$Valid Card.IsCommander+YouCtrl
+SVar:Y:Count$Valid Creature.TargetedPlayerCtrl
+SVar:Z:Count$Valid Creature.YouCtrl
+DeckHas:Ability$Token
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both.\n• Create a number of 1/1 red Warrior creature tokens equal to the number of creatures target player controls.\n• Will of the Mardu deals damage to target creature equal to the number of creatures you control.

@@ -914,6 +914,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (sa.isSpell()) {
             list.remove(source); // spells can't target their own source, because it's actually in the stack zone
         }
+
+        // list = CardLists.canSubsequentlyTarget(list, sa);
+
         if (sa.hasParam("AttachedTo")) {
             list = CardLists.filter(list, c -> {
                 for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
@@ -1447,6 +1450,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
         while (!sa.isMinTargetChosen()) {
             // AI Targeting
             Card choice = null;
+
+            // Filter out cards TargetsForEachPlayer
+            list = CardLists.canSubsequentlyTarget(list, sa);
 
             if (!list.isEmpty()) {
                 Card mostExpensivePermanent = ComputerUtilCard.getMostExpensivePermanentAI(list);

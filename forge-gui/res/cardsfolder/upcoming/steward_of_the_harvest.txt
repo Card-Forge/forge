@@ -1,0 +1,9 @@
+Name:Steward of the Harvest
+ManaCost:3 G
+Types:Creature Human Druid
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile up to three target land cards from your graveyard.
+SVar:TrigExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Land.YouOwn | TgtPrompt$ Select up to three target land cards from your graveyad | Origin$ Graveyard | Destination$ Exile
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Battlefield | GainsAbilitiesOf$ Land.ExiledWithSource | GainsAbilitiesOfZones$ Exile | Description$ Creatures you control have all activated abilities of all land cards exiled with this creature.
+DeckHas:Ability$Graveyard
+Oracle:When this creature enters, exile up to three target land cards from your graveyard.\nCreatures you control have all activated abilities of all land cards exiled with this creature.

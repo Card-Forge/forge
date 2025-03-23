@@ -1,0 +1,9 @@
+Name:Devoted Duelist
+ManaCost:1 R
+Types:Creature Goblin Monk
+PT:2/1
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Flurry — Whenever you cast your second spell each turn, this creature deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+SVar:BuffedBy:Card
+Oracle:Haste\nFlurry — Whenever you cast your second spell each turn, this creature deals 1 damage to each opponent.

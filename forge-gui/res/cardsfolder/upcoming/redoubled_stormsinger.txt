@@ -1,0 +1,8 @@
+Name:Redoubled Stormsinger
+ManaCost:2 R
+Types:Creature Orc Wizard
+PT:3/3
+K:First Strike
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopyPermanent | TriggerDescription$ Whenever this creature attacks, for each creature token you control that entered this turn, create a tapped and attacking token that's a copy of that token. At the beginning of the next end step, sacrifice those tokens.
+SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ Valid Creature.token+YouCtrl+ThisTurnEntered | NumCopies$ 1 | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Sacrifice
+Oracle:First strike\nWhenever this creature attacks, for each creature token you control that entered this turn, create a tapped and attacking token that's a copy of that token. At the beginning of the next end step, sacrifice those tokens.

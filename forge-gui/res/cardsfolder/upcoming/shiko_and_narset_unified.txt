@@ -1,0 +1,12 @@
+Name:Shiko and Narset, Unified
+ManaCost:1 U R W
+Types:Legendary Creature Human Spirit Dragon
+PT:4/4
+K:Flying
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Flurry — Whenever you cast your second spell each turn, copy that spell if it targets a permanent or player, and you may choose new targets for the copy. If you don't copy a spell this way, draw a card.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | ConditionDefined$ TriggeredSpellAbility | ConditionPresent$ Spell.IsTargeting Valid Permanent,Spell.IsTargeting Player | RememberCopies$ True | MayChooseTarget$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Spell | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:BuffedBy:Card
+Oracle:Flying, vigilance\nFlurry — Whenever you cast your second spell each turn, copy that spell if it targets a permanent or player, and you may choose new targets for the copy. If you don't copy a spell this way, draw a card.

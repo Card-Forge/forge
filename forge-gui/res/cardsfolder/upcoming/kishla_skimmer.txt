@@ -1,0 +1,8 @@
+Name:Kishla Skimmer
+ManaCost:G U
+Types:Creature Bird Scout
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | ValidCard$ Card | Execute$ TrigDraw | PlayerTurn$ True | ActivationLimit$ 1 | TriggerDescription$ Whenever a card leaves your graveyard during your turn, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+Oracle:Flying\nWhenever a card leaves your graveyard during your turn, draw a card. This ability triggers only once each turn.

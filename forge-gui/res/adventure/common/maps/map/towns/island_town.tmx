@@ -32,32 +32,32 @@
   <object id="38" template="../../obj/entry_up.tx" x="256" y="271"/>
   <object id="41" template="../../obj/shop.tx" x="304" y="98">
    <properties>
-    <property name="shopList" value="Instant,Creature,BlueBoosterPackShop,BoosterPackShop,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,BlueBoosterPackShop,Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="42" template="../../obj/shop.tx" x="368" y="162">
    <properties>
-    <property name="shopList" value="Instant,Creature,BlueBoosterPackShop,BoosterPackShop,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="43" template="../../obj/shop.tx" x="353" y="98">
    <properties>
-    <property name="shopList" value="Instant,Creature,BlueBoosterPackShop,BoosterPackShop,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="44" template="../../obj/shop.tx" x="208" y="162">
    <properties>
-    <property name="shopList" value="Instant,Creature,BlueBoosterPackShop,BoosterPackShop,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="45" template="../../obj/shop.tx" x="304" y="162">
    <properties>
-    <property name="shopList" value="Instant,Creature,BlueBoosterPackShop,BoosterPackShop,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="46" template="../../obj/shop.tx" x="336" y="162">
    <properties>
-    <property name="shopList" value="Instant,Creature,BlueBoosterPackShop,BoosterPackShop,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="47" template="../../obj/inn.tx" x="215" y="82"/>

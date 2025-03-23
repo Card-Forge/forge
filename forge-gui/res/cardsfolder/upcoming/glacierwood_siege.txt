@@ -1,0 +1,15 @@
+Name:Glacierwood Siege
+ManaCost:1 G U
+Types:Enchantment
+K:ETBReplacement:Other:SiegeChoice
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Temur,Sultai | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As this enchantment enters, choose Temur or Sultai.
+SVar:Temur:DB$ Pump | SpellDescription$ Temur
+SVar:Sultai:DB$ Pump | SpellDescription$ Sultai
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeTemur | AddTrigger$ TemurTrigger | Description$ • Temur — Whenever you cast an instant or sorcery spell, target player mills four cards.
+SVar:TemurTrigger:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you cast an instant or sorcery spell, target player mills four cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeSultai | AddStaticAbility$ SultaiStatic | Description$ • Sultai — You may play lands from your graveyard.
+SVar:SultaiStatic:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
+DeckHas:Ability$Graveyard
+DeckHints:Type$Instant|Sorcery
+Oracle:As this enchantment enters, choose Temur or Sultai.\n• Temur — Whenever you cast an instant or sorcery spell, target player mills four cards.\n• Sultai — You may play lands from your graveyard.

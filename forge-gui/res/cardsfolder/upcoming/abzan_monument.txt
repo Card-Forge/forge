@@ -1,0 +1,9 @@
+Name:Abzan Monument
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this artifact enters, search your library for a basic Plains, Swamp, or Forest card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Plains+Basic,Land.Swamp+Basic,Land.Forest+Basic
+A:AB$ Token | Cost$ 1 W B G T Sac<1/CARDNAME> | TokenAmount$ 1 | TokenPower$ X | TokenToughness$ X | TokenScript$ w_x_x_spirit | TokenOwner$ You | SorcerySpeed$ True | SpellDescription$ Create an X/X white Spirit creature token, where X is the greatest toughness among creatures you control. Activate only as a sorcery.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestToughness
+DeckHas:Ability$Token
+Oracle:When this artifact enters, search your library for a basic Plains, Swamp, or Forest card, reveal it, put it into your hand, then shuffle.\n{1}{W}{B}{G}, {T}, Sacrifice this artifact: Create an X/X white Spirit creature token, where X is the greatest toughness among creatures you control. Activate only as a sorcery.

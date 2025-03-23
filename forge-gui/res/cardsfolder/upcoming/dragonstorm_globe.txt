@@ -1,0 +1,7 @@
+Name:Dragonstorm Globe
+ManaCost:3
+Types:Artifact
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Dragon+YouCtrl
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Each Dragon you control enters with an additional +1/+1 counter on it.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Each Dragon you control enters with an additional +1/+1 counter on it.\n{T}: Add one mana of any color.

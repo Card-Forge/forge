@@ -65,7 +65,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.Callable;
 
 import static java.lang.Math.max;
 
@@ -190,7 +190,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
     private boolean foughtThisTurn = false;
-    private boolean becameTargetThisTurn, valiant = false;
     private boolean enlistedThisCombat = false;
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
@@ -251,6 +250,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     private int exertThisTurn = 0;
     private PlayerCollection exertedByPlayer = new PlayerCollection();
+
+    private PlayerCollection targetedFromThisTurn = new PlayerCollection();
 
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
@@ -2605,7 +2606,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
+                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")
+                        || keyword.startsWith("Mobilize")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Crew")) {
@@ -3835,16 +3837,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean hasBecomeTargetThisTurn() {
-        return becameTargetThisTurn;
+        return !targetedFromThisTurn.isEmpty();
     }
-    public void setBecameTargetThisTurn(boolean becameTargetThisTurn0) {
-        becameTargetThisTurn = becameTargetThisTurn0;
+    public void addTargetFromThisTurn(Player p) {
+        targetedFromThisTurn.add(p);
     }
-    public boolean isValiant() {
-        return valiant;
-    }
-    public void setValiant(boolean v) {
-        valiant = v;
+    public boolean isValiant(Player p) {
+        return getController().equals(p) && !targetedFromThisTurn.contains(p);
     }
 
     public boolean hasStartedTheTurnUntapped() {
@@ -4915,9 +4914,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final boolean canUntap(Player phase, Boolean predict) {
         if (predict != null && predict) {
-            FutureTask<Boolean> proc = new FutureTask<>(() -> {
+            Callable<Boolean> proc = () -> {
                 return canUntap(phase, null);
-            });
+            };
             return getGame().getPhaseHandler().withContext(proc, phase, PhaseType.UNTAP);
         }
         if (predict != null && !tapped) { return false; }
@@ -7394,8 +7393,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         resetExcessDamage();
         setRegeneratedThisTurn(0);
         resetShieldCount();
-        setBecameTargetThisTurn(false);
-        setValiant(false);
+        targetedFromThisTurn.clear();
         setFoughtThisTurn(false);
         turnedFaceUpThisTurn = false;
         clearMustBlockCards();

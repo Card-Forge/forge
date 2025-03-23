@@ -1,0 +1,7 @@
+Name:Sarkhan's Resolve
+ManaCost:1 G
+Types:Instant
+A:SP$ Charm | CharmNum$ 1 | Choices$ DBPump,DBDestroy
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
+Oracle:Choose one —\n• Target creature gets +3/+3 until end of turn.\n• Destroy target creature with flying.
