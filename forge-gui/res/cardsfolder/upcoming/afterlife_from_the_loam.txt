@@ -1,0 +1,8 @@
+Name:Afterlife from the Loam
+ManaCost:5 B B B
+Types:Sorcery
+K:Delve
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | GainControl$ True | TgtPrompt$ For each player, choose up to one target creature card in that player's graveyard | StaticEffect$ Animate | StackDescription$ SpellDescription | SpellDescription$ For each player, choose up to one target creature card in that player's graveyard. Put those cards onto the battlefield under your control. They're Zombies in addition to their other types.
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Zombie
+SVar:OneEach:PlayerCountPlayers$Amount
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nFor each player, choose up to one target creature card in that player's graveyard. Put those cards onto the battlefield under your control. They're Zombies in addition to their other types.

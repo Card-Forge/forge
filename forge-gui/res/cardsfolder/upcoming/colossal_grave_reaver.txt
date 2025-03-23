@@ -1,0 +1,11 @@
+Name:Colossal Grave-Reaver
+ManaCost:6 B G
+Types:Creature Dragon
+PT:7/6
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this creature enters or attacks, mill three cards.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature enters or attacks, mill three cards.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn | Origin$ Library | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever one or more creature cards are put into your graveyard from your library, put one of them onto the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | ChooseFromDefined$ TriggeredCards | ChangeNum$ 1 | Mandatory$ True | Hidden$ True | Origin$ Graveyard | Destination$ Battlefield
+Oracle:Flying\nWhenever this creature enters or attacks, mill three cards.\nWhenever one or more creature cards are put into your graveyard from your library, put one of them onto the battlefield.

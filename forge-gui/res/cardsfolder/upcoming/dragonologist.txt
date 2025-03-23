@@ -1,0 +1,8 @@
+Name:Dragonologist
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When this creature enters, look at the top six cards of your library. You may reveal an instant, sorcery, or Dragon card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Instant,Sorcery,Dragon | RestRandomOrder$ True
+S:Mode$ Continuous | Affected$ Dragon.untapped+YouCtrl | AddKeyword$ Hexproof | Description$ Untapped Dragons you control have hexproof.
+Oracle:When this creature enters, look at the top six cards of your library. You may reveal an instant, sorcery, or Dragon card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nUntapped Dragons you control have hexproof.
