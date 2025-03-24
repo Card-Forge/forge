@@ -1,7 +1,6 @@
 package forge.game;
 
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -18,7 +17,6 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.Aggregates;
 
 public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, GameEntity, Map<CounterType, Integer>> {
 
@@ -119,21 +117,6 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             runParams.put(AbilityKey.CounterMap, c.getValue());
             game.getTriggerHandler().runTrigger(TriggerType.CounterPlayerAddedAll, runParams, false);
         }
-        for (Entry<GameEntity, Map<Optional<Player>, Map<CounterType, Integer>>> e : columnMap().entrySet()) {
-            if (e.getValue().isEmpty()) {
-                continue;
-            }
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Object, e.getKey());
-            if (e.getKey() instanceof Card c) {
-                int added = 0;
-                for (Map<CounterType, Integer> map : e.getValue().values()) {
-                    added += Aggregates.sum(map.values());
-                }
-                runParams.put(AbilityKey.FirstTime, game.getCounterAddedThisTurn(null, c) - added == 0);
-            }
-            game.getTriggerHandler().runTrigger(TriggerType.CounterTypeAddedAll, runParams, false);
-        }
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Objects, this);
         game.getTriggerHandler().runTrigger(TriggerType.CounterAddedAll, runParams, false);
@@ -176,10 +159,15 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             }
 
             // Add ETB flag
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cause, cause);
             if (params != null) {
                 runParams.putAll(params);
+            }
+
+            boolean firstTime = false;
+            if (gm.getKey() instanceof Card c) {
+                firstTime = game.getCounterAddedThisTurn(null, c) == 0;
             }
 
             // Apply counter after replacement effect
@@ -198,6 +186,13 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
                         cause.getHostCard().addRemembered(gm.getKey());
                     }
                 }
+            }
+
+            if (result.containsColumn(gm.getKey())) {
+                runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Object, gm.getKey());
+                runParams.put(AbilityKey.FirstTime, firstTime);
+                game.getTriggerHandler().runTrigger(TriggerType.CounterTypeAddedAll, runParams, false);
             }
         }
 
