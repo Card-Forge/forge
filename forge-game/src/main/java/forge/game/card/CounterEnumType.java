@@ -491,6 +491,7 @@ public enum CounterEnumType {
     VIGILANCE("Vigilance")
     SHADOW("Shadow")
     EXALTED("Exalted")
+    DECAYED("Decayed"),
 //*/
     ;
 

@@ -18,7 +18,7 @@ public class CounterType implements Comparable<CounterType>, Serializable {
 
     // Rule 122.1b
     static ImmutableList<String> keywordCounter = ImmutableList.of(
-            "Flying", "First Strike", "Double Strike", "Deathtouch", "Exalted", "Haste", "Hexproof",
+            "Flying", "First Strike", "Double Strike", "Deathtouch", "Decayed", "Exalted", "Haste", "Hexproof",
             "Indestructible", "Lifelink", "Menace", "Reach", "Shadow", "Trample", "Vigilance");
 
     private static Map<CounterEnumType, CounterType> eMap = Maps.newEnumMap(CounterEnumType.class);
