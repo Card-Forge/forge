@@ -22,6 +22,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 import forge.GameCommand;
@@ -1222,13 +1223,20 @@ public class Game {
     }
     public int getCounterAddedThisTurn(CounterType cType, Card card) {
         int result = 0;
-        if (!countersAddedThisTurn.containsRow(cType)) {
+        Set<CounterType> types = null;
+        if (cType == null) {
+            types = countersAddedThisTurn.rowKeySet();
+        } else if (!countersAddedThisTurn.containsRow(cType)) {
             return result;
+        } else {
+            types = Sets.newHashSet(cType);
         }
-        for (List<Pair<Card, Integer>> l : countersAddedThisTurn.row(cType).values()) {
-            for (Pair<Card, Integer> p : l) {
-                if (p.getKey().equalsWithGameTimestamp(card)) {
-                    result += p.getValue();
+        for (CounterType type : types) {
+            for (List<Pair<Card, Integer>> l : countersAddedThisTurn.row(type).values()) {
+                for (Pair<Card, Integer> p : l) {
+                    if (p.getKey().equalsWithGameTimestamp(card)) {
+                        result += p.getValue();
+                    }
                 }
             }
         }
