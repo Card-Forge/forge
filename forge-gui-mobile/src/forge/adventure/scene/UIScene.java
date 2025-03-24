@@ -343,7 +343,7 @@ public class UIScene extends Scene {
     public boolean keyPressed(int keycode) {
         Selectable selection = getSelected();
 
-        if (KeyBinding.Use.isPressed(keycode) && !textboxOpen) {
+        if (KeyBinding.Use.isPressed(keycode)) {
             if (selection != null) {
                 selection.onPressDown(this);
                 return true;
@@ -354,7 +354,7 @@ public class UIScene extends Scene {
         if (stage.getKeyboardFocus() instanceof SelectBox) {
             SelectBox box = (SelectBox) stage.getKeyboardFocus();
             if (box.getScrollPane().hasParent()) {
-                if (KeyBinding.Use.isPressed(keycode) && !textboxOpen) {
+                if (KeyBinding.Use.isPressed(keycode)) {
                     box.getSelection().choose(box.getList().getSelected());
                     box.getScrollPane().hide();
                 }
