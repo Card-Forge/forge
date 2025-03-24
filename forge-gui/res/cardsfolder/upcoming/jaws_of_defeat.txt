@@ -1,0 +1,9 @@
+Name:Jaws of Defeat
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control enters, target opponent loses life equal to the difference between that creature's power and its toughness.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+SVar:X:SVar$Y/Abs
+SVar:Y:TriggeredCard$CardPower/Minus.Z
+SVar:Z:TriggeredCard$CardToughness
+Oracle:Whenever a creature you control enters, target opponent loses life equal to the difference between that creature's power and its toughness.

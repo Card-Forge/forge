@@ -1,0 +1,7 @@
+Name:Clarion Conqueror
+ManaCost:2 W
+Types:Creature Dragon
+PT:3/3
+K:Flying
+S:Mode$ CantBeActivated | AffectedZone$ Battlefield | ValidCard$ Artifact,Creature,Planeswalker | ValidSA$ Activated | Description$ Activated abilities of artifacts, creatures, and planeswalkers can't be activated.
+Oracle:Flying\nActivated abilities of artifacts, creatures, and planeswalkers can't be activated.

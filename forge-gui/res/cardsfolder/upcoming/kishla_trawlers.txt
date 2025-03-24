@@ -1,0 +1,9 @@
+Name:Kishla Trawlers
+ManaCost:2 U
+Types:Creature Human Citizen
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When this creature enters, you may exile a creature card from your graveyard. When you do, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ ExileFromGrave<1/Creature/creature card> | Execute$ TrigReturn | SpellDescription$ When you do, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtPrompt$ Select target instant or sorcery to return from your graveyard
+DeckHas:Ability$Graveyard
+Oracle:When this creature enters, you may exile a creature card from your graveyard. When you do, return target instant or sorcery card from your graveyard to your hand.
