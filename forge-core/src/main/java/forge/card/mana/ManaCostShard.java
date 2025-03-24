@@ -94,6 +94,7 @@ public enum ManaCostShard {
     /** The cmpc. */
     private final float cmpc;
     private final String stringValue;
+    private final String shortStringValue;
 
     /** The image key. */
     private final String imageKey;
@@ -125,6 +126,7 @@ public enum ManaCostShard {
         this.cmc = this.getCMC();
         this.cmpc = this.getCmpCost();
         this.stringValue = "{" + sValue + "}";
+        this.shortStringValue = sValue;
         this.imageKey = imgKey;
     }
 
@@ -232,14 +234,19 @@ public enum ManaCostShard {
         return ManaCostShard.valueOf(atoms);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
+    /**
+     * @return the string representation of this shard - e.g. "{W}" "{2/U}" "{G/P}"
      */
     @Override
     public final String toString() {
         return this.stringValue;
+    }
+
+    /**
+     * @return The string representation of this shard without brackets - e.g. "W" "2/U" "G/P"
+     */
+    public final String toShortString() {
+        return this.shortStringValue;
     }
 
     /**

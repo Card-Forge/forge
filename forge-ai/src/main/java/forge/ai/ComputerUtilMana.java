@@ -158,7 +158,7 @@ public class ComputerUtilMana {
                 }
 
                 // Mana abilities on the same card
-                String shardMana = shard.toString().replaceAll("\\{", "").replaceAll("\\}", "");
+                String shardMana = shard.toShortString();
 
                 boolean payWithAb1 = ability1.getManaPart().mana(ability1).contains(shardMana);
                 boolean payWithAb2 = ability2.getManaPart().mana(ability2).contains(shardMana);

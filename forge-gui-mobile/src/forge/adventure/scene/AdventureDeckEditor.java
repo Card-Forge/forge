@@ -235,14 +235,13 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
             super.buildMenu(menu, card);
 
-            int noSellCount = Current.player().noSellCards.count(card);
             int autoSellCount = Current.player().autoSellCards.count(card);
             int sellableCount = Current.player().getSellableCards().count(card);
 
-            if (noSellCount > 0) {
-                FMenuItem unsellableCount = new FMenuItem(Forge.getLocalizer().getMessage("lblUnsellableCount", noSellCount), null, null);
-                unsellableCount.setEnabled(false);
-                menu.addItem(unsellableCount);
+            if (card.hasNoSellValue()) {
+                FMenuItem unsellableIndicator = new FMenuItem(Forge.getLocalizer().getMessage("lblUnsellable"), null, null);
+                unsellableIndicator.setEnabled(false);
+                menu.addItem(unsellableIndicator);
             }
 
             if (sellableCount > 0) {

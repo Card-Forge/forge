@@ -314,7 +314,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
             }
         }
         // spire
-        copy.setChosenColorID(original.getChosenColorID());
+        copy.setMarkedColors(original.getMarkedColors());
 
         copy.setTokenSpawningAbility(sa);
         copy.setGamePieceType(GamePieceType.TOKEN);

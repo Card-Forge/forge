@@ -223,7 +223,6 @@ public class ConsoleCommandInterpreter {
             PaperCard card = StaticData.instance().getCommonCards().getCard(s[0]);
             if (card == null) return "Cannot find card: " + s[0];
             Current.player().addCard(card.getNoSellVersion());
-            Current.player().noSellCards.add(card.getNoSellVersion());
             return "Added card: " + s[0];
         });
         registerCommand(new String[]{"give", "item"}, s -> {
