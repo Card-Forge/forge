@@ -1,0 +1,8 @@
+Name:Spectral Denial
+ManaCost:X U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you control with power 4 or greater.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays {X}.
+SVar:X:Count$xPaid
+SVar:Y:Count$Valid Creature.YouCtrl+powerGE4
+Oracle:This spell costs {1} less to cast for each creature you control with power 4 or greater.\nCounter target spell unless its controller pays {X}.

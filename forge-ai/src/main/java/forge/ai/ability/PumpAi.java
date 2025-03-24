@@ -542,6 +542,8 @@ public class PumpAi extends PumpAiBase {
             Card t = null;
             // boolean goodt = false;
 
+            list = CardLists.canSubsequentlyTarget(list, sa);
+
             if (list.isEmpty()) {
                 if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                     if (mandatory || ComputerUtil.activateForCost(sa, ai)) {

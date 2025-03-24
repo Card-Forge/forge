@@ -1,0 +1,10 @@
+Name:Yathan Roadwatcher
+ManaCost:1 W B G
+Types:Creature Human Scout
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigMill | TriggerDescription$ When this creature enters, if you cast it, mill four cards. When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | RememberMilled$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigChange | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ4 | SubAbility$ DBCleanup | TriggerDescription$ When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE3 | TgtPrompt$ Select target creature card with mana value 3 or less in your graveyard
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When this creature enters, if you cast it, mill four cards. When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.

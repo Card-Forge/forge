@@ -1,0 +1,7 @@
+Name:Agent of Kotis
+ManaCost:1 U
+Types:Creature Human Rogue
+PT:2/1
+A:AB$ PutCounter | PrecostDesc$ Renew — | Cost$ 3 U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on target creature. Activate only as a sorcery.
+DeckHas:Ability$Counters|Graveyard
+Oracle:Renew — {3}{U}, Exile this card from your graveyard: Put two +1/+1 counters on target creature. Activate only as a sorcery.

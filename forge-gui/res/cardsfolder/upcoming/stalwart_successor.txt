@@ -1,0 +1,10 @@
+Name:Stalwart Successor
+ManaCost:1 B G
+Types:Creature Human Warrior
+PT:3/2
+K:Menace
+T:Mode$ CounterTypeAddedAll | ValidObject$ Creature.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more counters are put on a creature you control, if it's the first time counters have been put on that creature this turn, put a +1/+1 counter on that creature.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ TriggeredObjectLKICopy
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever one or more counters are put on a creature you control, if it's the first time counters have been put on that creature this turn, put a +1/+1 counter on that creature.

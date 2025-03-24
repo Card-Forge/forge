@@ -1,0 +1,7 @@
+Name:Ironwill Forger
+ManaCost:3 W
+Types:Creature Orc Artificer
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Execute$ TrigPump | TriggerDescription$ Lieutenant — At the beginning of combat on your turn, if your control your commander, target nonlegendary creature you control gains myriad until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+nonLegendary | TgtPrompt$ Select target nonlegendary creature you control | KW$ Myriad
+Oracle:Lieutenant — At the beginning of combat on your turn, if your control your commander, target nonlegendary creature you control gains myriad until end of turn.

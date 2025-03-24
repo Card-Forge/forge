@@ -1,0 +1,9 @@
+Name:Summit Intimidator
+ManaCost:3 R
+Types:Creature Yeti
+PT:4/3
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCanNotBlock | TriggerDescription$ When this creature enters, target creature can't block this turn.
+SVar:TrigCanNotBlock:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
+SVar:PlayMain1:TRUE
+Oracle:Reach\nWhen this creature enters, target creature can't block this turn.

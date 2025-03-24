@@ -1,0 +1,8 @@
+Name:Rescue Leopard
+ManaCost:2 R
+Types:Creature Cat
+PT:4/2
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature becomes tapped, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+DeckHas:Ability$Discard
+Oracle:Whenever this creature becomes tapped, you may discard a card. If you do, draw a card.

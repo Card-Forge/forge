@@ -1,0 +1,8 @@
+Name:Watcher of the Wayside
+ManaCost:3
+Types:Artifact Creature Golem
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, target player mills two cards. You gain 2 life. (To mill two cards, a player puts the top two cards of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:When this creature enters, target player mills two cards. You gain 2 life. (To mill two cards, a player puts the top two cards of their library into their graveyard.)

@@ -1,0 +1,6 @@
+Name:Strategic Betrayal
+ManaCost:1 B
+Types:Sorcery
+A:SP$ ChooseCard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Mandatory$ True | Choices$ Creature.TargetedPlayerCtrl | SubAbility$ DBChangeZoneAll | SpellDescription$ Target opponent exiles a creature they control and their graveyard.
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield,Graveyard | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.ChosenCard,Card.TargetedPlayerOwn+inZoneGraveyard
+Oracle:Target opponent exiles a creature they control and their graveyard.

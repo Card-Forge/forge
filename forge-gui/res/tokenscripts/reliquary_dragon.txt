@@ -1,0 +1,11 @@
+Name:Reliquary Dragon
+ManaCost:no cost
+Colors:all
+Types:Creature Dragon
+PT:4/4
+Text:CARDNAME is all colors.
+K:Flying
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this token enters, it deals 3 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+Oracle:This token is all colors.\nFlying, lifelink\nWhen this token enters, it deals 3 damage to any target.

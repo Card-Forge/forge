@@ -1,0 +1,7 @@
+Name:Dragonback Lancer
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:3/3
+K:Flying
+K:Mobilize:1
+Oracle:Flying\nMobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)

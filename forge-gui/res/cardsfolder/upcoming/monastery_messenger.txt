@@ -1,0 +1,9 @@
+Name: Monastery Messenger
+ManaCost:2U 2R 2W
+Types:Creature Bird Scout
+PT:2/3
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, put up to one target noncreature, nonland card from your graveyard on top of your library.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouOwn+nonCreature+nonLand | TgtPrompt$ Select target noncreature, nonland card from your graveyard | TargetMin$ 0 | TargetMax$ 1
+Oracle:Flying, vigilance\nWhen this creature enters, put up to one target noncreature, nonland card from your graveyard on top of your library.

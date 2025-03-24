@@ -11,6 +11,7 @@ ScryfallCode=FIN
 78 U Summon: Shiva @Fajareka Setiawan
 91 R Cecil, Dark Knight @Josu Hernaiz
 122 U Tonberry @Leonardo Santanna
+170 R Zell Dincht @Kevin Sidharta
 191 R Jumbo Cactuar @Jason Kiantoro
 200 U Sazh's Chocobo @Domenico Cava
 218 M Emet-Selch, Unsundered @Néstor Ossandón Leal

@@ -1,0 +1,5 @@
+Name:United Battlefront
+ManaCost:3 W
+Types:Sorcery
+A:SP$ Dig | DigNum$ 7 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Permanent.nonCreature+nonLand+cmcLE3 | DestinationZone$ Battlefield | RestRandomOrder$ True | SpellDescription$ Look at the top seven cards of your library. Put up to two noncreature, nonland permanent cards with mana value 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+Oracle:Look at the top seven cards of your library. Put up to two noncreature, nonland permanent cards with mana value 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

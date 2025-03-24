@@ -355,6 +355,8 @@ public enum CounterEnumType {
 
     QUEST("QUEST", 251, 189, 0),
 
+    RALLY("RALLY", 25, 230, 225),
+
     RELEASE("RELEASE", 200, 210, 50),
 
     REPRIEVE("REPR", 240, 120, 50),
@@ -479,6 +481,7 @@ public enum CounterEnumType {
     FIRSTSTRIKE("First Strike"),
     DOUBLESTRIKE("Double Strike"),
     DEATHTOUCH("Deathtouch"),
+    DECAYED("Decayed"),
     HASTE("Haste"),
     HEXPROOF("Hexproof"),
     INDESTRUCTIBLE("Indestructible"),
@@ -486,8 +489,8 @@ public enum CounterEnumType {
     MENACE("Menace"),
     REACH("Reach"),
     TRAMPLE("Trample"),
-    VIGILANCE("Vigilance")
-    SHADOW("Shadow")
+    VIGILANCE("Vigilance"),
+    SHADOW("Shadow"),
     EXALTED("Exalted")
 //*/
     ;

@@ -32,7 +32,7 @@
   <object id="38" template="../../obj/entry_up.tx" x="240" y="272"/>
   <object id="41" template="../../obj/shop.tx" x="129" y="82">
    <properties>
-    <property name="commonShopList" value="Green,Green,GreenBoosterPackShop,BoosterPackShop,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
     <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
@@ -40,7 +40,7 @@
   </object>
   <object id="42" template="../../obj/shop.tx" x="304" y="114">
    <properties>
-    <property name="commonShopList" value="Green,Green,GreenBoosterPackShop,BoosterPackShop,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
     <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
@@ -48,7 +48,7 @@
   </object>
   <object id="43" template="../../obj/shop.tx" x="352" y="162">
    <properties>
-    <property name="commonShopList" value="Green,Green,GreenBoosterPackShop,BoosterPackShop,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
     <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
@@ -56,7 +56,7 @@
   </object>
   <object id="44" template="../../obj/shop.tx" x="177" y="81">
    <properties>
-    <property name="commonShopList" value="Green,Green,GreenBoosterPackShop,BoosterPackShop,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
     <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
@@ -64,7 +64,7 @@
   </object>
   <object id="45" template="../../obj/shop.tx" x="240" y="129">
    <properties>
-    <property name="commonShopList" value="Green,Green,GreenBoosterPackShop,BoosterPackShop,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
     <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
@@ -72,7 +72,7 @@
   </object>
   <object id="46" template="../../obj/shop.tx" x="368" y="226">
    <properties>
-    <property name="commonShopList" value="Green,Green,GreenBoosterPackShop,BoosterPackShop,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,GreenBoosterPackShop,Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
     <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>
@@ -93,7 +93,7 @@
   <object id="50" template="../../obj/shardtrader.tx" x="98" y="98"/>
   <object id="52" template="../../obj/shop.tx" x="272" y="98">
    <properties>
-    <property name="commonShopList" value="Green,Green,GreenBoosterPackShop,BoosterPackShop,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="RGU,UWG,UGB,RWG,RGB,GWB,Land4Green,Creature6Green"/>
     <property name="uncommonShopList" value="Simic,Golgari,Gruul,Selesnya,Simic,Golgari,Gruul,Selesnya,Land"/>

@@ -1,0 +1,13 @@
+Name:Equilibrium Adept
+ManaCost:3 R
+Types:Creature Dog Monk
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Flurry — Whenever you cast your second spell each turn, this creature gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Double Strike
+SVar:BuffedBy:Card
+Oracle:When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.\nFlurry — Whenever you cast your second spell each turn, this creature gains double strike until end of turn.

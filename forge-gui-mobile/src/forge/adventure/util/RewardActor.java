@@ -892,7 +892,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         resetTransform(batch);
         batch.setProjectionMatrix(oldProjectionTransform);
 
-        if (showOverlay && Config.instance().getSettingData().showShopOverlay) {
+        if (showOverlay && Config.instance().getSettingData().showShopOverlay && reward.getType() != Reward.Type.CardPack) {
             if (overlayLabel == null) {
                 setOverlayLabel();
             }
