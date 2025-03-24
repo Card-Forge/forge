@@ -1,7 +1,5 @@
 package forge.deck;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 import forge.Forge;
