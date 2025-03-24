@@ -1,5 +1,7 @@
 package forge.deck;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map.Entry;
 
 import forge.Forge;
@@ -7,6 +9,7 @@ import forge.assets.FImage;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
@@ -57,8 +60,15 @@ public class FDeckViewer extends FScreen {
             }
             deckList.append(s.toString()).append(": ");
             deckList.append(nl);
+            int count = 0;
             for (final Entry<PaperCard, Integer> ev : cp) {
-                deckList.append(ev.getValue()).append(" ").append(ev.getKey().getCardName()).append(nl);
+                count = cp.countByName(ev.getKey());
+                deckList.append(count).append(" ").append(ev.getKey().getCardName()).append(nl);
+                if(count != ev.getValue())
+                {
+                    cp.removeAll(cp.getFilteredPool(PaperCardPredicates.name(ev.getKey().getCardName())));
+                }
+
             }
             deckList.append(nl);
         }
