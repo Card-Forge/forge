@@ -58,7 +58,7 @@ ScryfallCode=TDC
 80 R Will of the Jeskai @Jessica Fong
 91 R Vanquish the Horde @Johann Bodin
 92 R Narset's Reversal @Nathaniel Himawan
-93 C Gravecrawler @Danny Schwartz
+93 R Gravecrawler @Danny Schwartz
 95 U Young Pyromancer @Alessandra Pisano
 96 R Life from the Loam @Carlos Palma Cruchaga
 98 R Casualties of War @Nereida
@@ -162,7 +162,7 @@ ScryfallCode=TDC
 251 R Conduit of Worlds @Jokubas Uogintas
 252 U Crawling Sensation @Christopher Moeller
 253 C Cultivate @Anthony Palumbo
-255 U Farseek @Martina Pilcerova
+255 C Farseek @Martina Pilcerova
 257 C Grapple with the Past @Howard Lyon
 258 C Harrow @Rob Alexander
 263 M Multani, Yavimaya's Avatar @Ryan Yee
@@ -183,7 +183,7 @@ ScryfallCode=TDC
 294 M Kaya, Geist Hunter @Ryan Pancoast
 295 M Lord of Extinction @Izzy
 296 M Magma Opus @Liiga Smilshkalne
-297 R Meren of Clan Nel Toth @Mark Winters
+297 M Meren of Clan Nel Toth @Mark Winters
 298 U Nyx Weaver @Jack Wang
 299 R Prismari Command @Johannes Voss
 300 U Putrefy @Clint Cearley
