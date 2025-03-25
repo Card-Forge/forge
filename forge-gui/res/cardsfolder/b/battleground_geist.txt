@@ -3,6 +3,6 @@ ManaCost:4 U
 Types:Creature Spirit
 PT:3/3
 K:Flying
-S:Mode$ Continuous | Affected$ Creature.Spirit+Other+YouCtrl | AddPower$ 1 | AddToughness$ 0 | Description$ Other Spirit creatures you control get +1/+0.
+S:Mode$ Continuous | Affected$ Creature.Spirit+Other+YouCtrl | AddPower$ 1 | Description$ Other Spirit creatures you control get +1/+0.
 SVar:PlayMain1:TRUE
 Oracle:Flying\nOther Spirit creatures you control get +1/+0.
