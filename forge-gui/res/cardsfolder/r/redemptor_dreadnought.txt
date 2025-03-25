@@ -5,7 +5,7 @@ PT:4/4
 K:Trample
 S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ ExileFromGrave<1/Creature> | Description$ Fallen Warrior — As an additional cost to cast this spell, you may exile a creature card from your graveyard.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | IsPresent$ Card.ExiledWithSource | PresentZone$ Exile | TriggerDescription$ Plasma Incinerator — Whenever CARDNAME attacks, if a card is exiled with it, it gets +X/+X until end of turn, where X is the power of the exiled card.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumDef$ Y | NumAtt$ Y
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumDef$ +Y | NumAtt$ +Y
 SVar:X:Count$xPaid
 SVar:Y:Count$ValidExile Card.ExiledWithSource$CardPower
 SVar:HasAttackEffect:TRUE
