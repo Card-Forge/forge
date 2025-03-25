@@ -1,0 +1,10 @@
+Name:Sage of the Skies
+ManaCost:2 W
+Types:Creature Human Monk
+PT:2/3
+K:Flying
+K:Lifelink
+T:Mode$ SpellCast | CheckSVar$ X | SVarCompare$ GE1 | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, if you've cast another spell this turn, copy this spell. (The copy becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+SVar:X:Count$ThisTurnCast_Card.YouCtrl+!CastSaSource
+Oracle:When you cast this spell, if you've cast another spell this turn, copy this spell. (The copy becomes a token.)\nFlying, lifelink

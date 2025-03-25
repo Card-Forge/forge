@@ -1,0 +1,9 @@
+Name:Jeskai Revelation
+ManaCost:4 U R W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent,Card.inZoneStack | TgtZone$ Stack,Battlefield | TgtPrompt$ Select target spell or permanent | Origin$ Battlefield,Stack | Destination$ Hand | SubAbility$ DBDealDmg | SpellDescription$ Return target spell or permanent to its owner's hand.
+SVar:DBDealDmg:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 4 damage to any target.
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_monk_prowess | TokenOwner$ You | SubAbility$ DBDraw | SpellDescription$ Create two 1/1 white Monk creature tokens with prowess.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBGainLife | SpellDescription$ Draw two cards.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+Oracle:Return target spell or permanent to its owner's hand. Jeskai Revelation deals 4 damage to any target. Create two 1/1 white Monk creature tokens with prowess. Draw two cards. You gain 4 life.
