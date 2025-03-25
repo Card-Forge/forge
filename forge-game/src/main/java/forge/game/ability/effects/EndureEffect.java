@@ -54,7 +54,7 @@ public class EndureEffect extends TokenEffectBase {
         TokenCreateTable tokenTable = new TokenCreateTable();
         for (final Card c : GameActionUtil.orderCardsByTheirOwners(game, getTargetCards(sa), ZoneType.Battlefield, sa)) {
             final Player pl = c.getController();
-            
+
             Card gamec = game.getCardState(c, null);
 
             Map<String, Object> params = Maps.newHashMap();
