@@ -1,0 +1,10 @@
+Name:Lasyd Prowler
+ManaCost:2 G G
+Types:Creature Snake Ranger
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When this creature enters, you may mill cards equal to the number of lands you control.
+SVar:TrigMill:DB$ Mill | NumCards$ X | Defined$ You | Optional$ True
+SVar:X:Count$Valid Land.YouCtrl
+A:AB$ PutCounter | Cost$ 1 G ExileFromGrave<1/CARDNAME/this card> | PrecostDesc$ Renew — | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ Y | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Put X +1/+1 counters on target creature, where X is the number of land cards in your graveyard. Activate only as a sorcery.
+SVar:Y:Count$ValidGraveyard Land.YouOwn
+Oracle:When this creature enters, you may mill cards equal to the number of lands you control.\nRenew — {1}{G}, Exile this card from your graveyard: Put X +1/+1 counters on target creature, where X is the number of land cards in your graveyard. Activate only as a sorcery.
