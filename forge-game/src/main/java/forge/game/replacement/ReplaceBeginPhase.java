@@ -4,6 +4,7 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
 
 public class ReplaceBeginPhase extends ReplacementEffect {
@@ -18,6 +19,14 @@ public class ReplaceBeginPhase extends ReplacementEffect {
 
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
+        }
+
+        if (hasParam("Phase") && !PhaseType.parseRange(getParam("Phase")).contains(runParams.get(AbilityKey.Phase))) {
+            return false;
+        }
+
         return true;
     }
 

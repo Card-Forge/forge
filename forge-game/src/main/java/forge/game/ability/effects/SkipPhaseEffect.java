@@ -58,7 +58,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
         final Card eff = createEffect(sa, player, name, image);
 
         final StringBuilder sb = new StringBuilder();
-        sb.append("Event$ BeginPhase | ActiveZones$ Command | PlayerTurn$ You | ActivePhases$ ");
+        sb.append("Event$ BeginPhase | ActiveZones$ Command | ValidPlayer$ You | Phase$ ");
         sb.append(phase != null ? phase : step);
         if (duration != null && !isNextThisTurn) {
             sb.append(" | Skip$ True");

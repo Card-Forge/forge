@@ -1,7 +1,7 @@
 Name:The Eon Fog
 ManaCost:no cost
 Types:Plane Equilor
-R:Event$ BeginPhase | ActiveZones$ Command | ActivePhases$ Untap | Skip$ True | Description$ Players skip their untap steps.
+R:Event$ BeginPhase | ActiveZones$ Command | Phase$ Untap | Skip$ True | Description$ Players skip their untap steps.
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, untap all permanents you control.
 SVar:RolledChaos:DB$ UntapAll | ValidCards$ Permanent.YouCtrl
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9

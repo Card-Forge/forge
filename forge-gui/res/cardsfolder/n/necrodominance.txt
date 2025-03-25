@@ -1,7 +1,7 @@
 Name:Necrodominance
 ManaCost:B B B
 Types:Legendary Enchantment
-R:Event$ BeginPhase | ActiveZones$ Battlefield | PlayerTurn$ You | ActivePhases$ Draw | Skip$ True | Description$ Skip your draw step.
+R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you may pay any amount of life. If you do, draw that many cards.
 SVar:TrigDraw:AB$ Draw | Cost$ PayLife<X> | NumCards$ X
 SVar:X:Count$xPaid
