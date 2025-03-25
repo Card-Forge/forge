@@ -19,6 +19,8 @@ ScryfallCode=TDC
 11 R Ainok Strike Leader @Alexander Mokhov
 12 R Aligned Heart @Aurore Folny
 13 R Ironwill Forger @Konstantin Porubov
+14 R Protector of the Wastes @Zezhou Chen
+15 R Reunion of the House @Quintin Gleim
 16 R Tempest Technique @Nino Vecia
 17 R Will of the Mardu @Tuan Duong Chu
 18 R Adaptive Training Post @Ben Maier
@@ -27,8 +29,11 @@ ScryfallCode=TDC
 23 R Voracious Bibliophile @Camille Alquier
 25 R Afterlife from the Loam @Johann Bodin
 26 R Bone Devourer @Diana Franco
+27 R Jaws of Defeat @Andreas Zafiratos
 28 R Teval's Judgment @Alix Branwyn
+29 R Tip the Scales @Volkan Baǵa
 30 R Welcome the Dead @Ioannis Fiore
+31 R Will of the Abzan @Yigit Koroglu
 32 R Within Range @Hector Ortiz
 33 R Caldera Pyremaw @Johann Bodin
 34 R Goldlust Triad @Arif Wijaya
@@ -36,7 +41,10 @@ ScryfallCode=TDC
 37 R Redoubled Stormsinger @Filipe Pagliuso
 39 R Transforming Flourish @Xavier Ribeiro
 40 R Will of the Jeskai @Jessica Fong
+42 R Arbor Adherent @Christina Kraus
+45 R Canopy Gargantuan @John Tedrick
 46 R Floral Evoker @Monztre
+47 R Rampart Architect @Eelis Kyttanen
 48 R Steward of the Harvest @Marie Magny
 49 R Will of the Sultai @Cristi Balanescu
 50 R Colossal Grave-Reaver @Bryan Sola
