@@ -1,0 +1,7 @@
+Name:Unsparing Boltcaster
+ManaCost:2 R
+Types:Creature Ogre Wizard
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ When this creature enters, it deals 5 damage to target creature an opponent controls that was dealt damage this turn.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl+wasDealtDamageThisTurn | TgtPrompt$ Select target creature an opponent controls that was dealt damage this turn | NumDmg$ 5
+Oracle:When this creature enters, it deals 5 damage to target creature an opponent controls that was dealt damage this turn.
