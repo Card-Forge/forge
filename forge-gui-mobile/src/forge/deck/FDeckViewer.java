@@ -58,7 +58,7 @@ public class FDeckViewer extends FScreen {
             deckList.append(s.toString()).append(": ");
             deckList.append(nl);
             int count = 0;
-                ArrayList<String> accounted = new ArrayList<>();
+            ArrayList<String> accounted = new ArrayList<>();
             for (final Entry<PaperCard, Integer> ev : cp) {
                 if(!accounted.contains(ev.getKey().getCardName()))
                 {
