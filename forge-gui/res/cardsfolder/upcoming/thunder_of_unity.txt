@@ -1,0 +1,11 @@
+Name:Thunder of Unity
+ManaCost:R W B
+Types:Enchantment Saga
+K:Chapter:3:DBDraw,DBEffect,DBEffect
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ You draw two cards and you lose 2 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
+SVar:DBEffect:DB$ Effect | Triggers$ CreatureETB | SpellDescription$ Whenever a creature you control enters this turn, each opponent loses 1 life and you gain 1 life.
+SVar:CreatureETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control enters this turn, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — You draw two cards and you lose 2 life.\nII,III — Whenever a creature you control enters this turn, each opponent loses 1 life and you gain 1 life.
