@@ -1,6 +1,7 @@
 package forge.deck;
 
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Map.Entry;
 import forge.Forge;
 import forge.assets.FImage;
@@ -50,20 +51,17 @@ public class FDeckViewer extends FScreen {
             dName = "";
         deckList.append(dName == null ? "" : "Deck: "+dName + nl + nl);
 
-        for (DeckSection s : DeckSection.values()){
+        for (DeckSection s : DeckSection.values()) {
             CardPool cp = deck.get(s);
             if (cp == null || cp.isEmpty()) {
                 continue;
             }
             deckList.append(s.toString()).append(": ");
             deckList.append(nl);
-            int count = 0;
-            ArrayList<String> accounted = new ArrayList<>();
+            Set<String> accounted = new HashSet<>();
             for (final Entry<PaperCard, Integer> ev : cp) {
-                if(!accounted.contains(ev.getKey().getCardName()))
-                {
-                    count = cp.countByName(ev.getKey());
-                    deckList.append(count).append(" ").append(ev.getKey().getCardName()).append(nl);
+                if (!accounted.contains(ev.getKey().getCardName())) {
+                    deckList.append(cp.countByName(ev.getKey())).append(" ").append(ev.getKey().getCardName()).append(nl);
                     accounted.add(ev.getKey().getCardName());
                 }
             }
