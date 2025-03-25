@@ -16,6 +16,7 @@ ScryfallCode=TDM
 10 U Duty Beyond Death @Kev Fang
 11 M Elspeth, Storm Slayer @Ekaterina Burmak
 12 C Fortress Kin-Guard @Daneen Wilkerson
+15 U Loxodon Battle Priest @Yeong-Hao Han
 16 C Mardu Devotee @Lorenzo Mastroianni
 19 U Rally the Monastery @David Astruga
 20 C Rebellious Strike @Evyn Fong
@@ -36,6 +37,7 @@ ScryfallCode=TDM
 44 U Essence Anchor @David Astruga
 46 U Fresh Start @Joe Slucher
 51 R Marang River Regent @John Tedrick
+52 R Naga Fleshcrafter @Valera Lutfullina
 53 C Ringing Strike Mastery @Alexandre Honoré
 55 U Roiling Dragonstorm @Gaboleps
 57 C Snowmelt Stag @Lorenzo Mastroianni
@@ -51,14 +53,17 @@ ScryfallCode=TDM
 75 U Corroding Dragonstorm @Sergey Glushakov
 76 C Cruel Truths @Fajareka Setiawan
 78 U Desperate Measures @Gaboleps
+80 C Feral Deathgorger @Loïc Canavaggia
 84 U Krumar Initiate @Josu Solano
 86 R Qarsi Revenant @Lorenzo Mastroianni
+87 M Rot-Curse Rakshasa @Chris Rahn
 91 R The Sibsig Ceremony @Eli Minaya
 92 R Sidisi, Regent of the Mire @Diana Franco
 96 U Unrooted Ancestor @Elizabeth Peiró
 97 U Venerated Stormsinger @Elizabeth Peiró
 100 U Yathan Tombguard @Xavier Ribeiro
 101 U Breaching Dragonstorm @Danny Schwartz
+103 R Cori-Steel Cutter @Xabi Gaztelua
 104 C Devoted Duelist @Nathaniel Himawan
 105 M Dracogenesis @Kai Carpenter
 106 U Equilibrium Adept @Leroy Steinmann
@@ -95,6 +100,7 @@ ScryfallCode=TDM
 171 R Barrensteppe Siege @Tuan Duong Chu
 172 M Betor, Kin to All @Alexander Ostrowski
 173 U Bone-Cairn Butcher @David Palumbo
+174 M Call the Spirit Dragons @Liiga Smilshkalne
 175 U Cori Mountain Stalwart @Josiah "Jo" Cameron
 176 M Death Begets Life @Justin Hernandez & Alexis Hernandez
 178 U Disruptive Stormbrood @Edgar Sánchez Hidalgo
@@ -200,6 +206,7 @@ ScryfallCode=TDM
 303 M Stormscale Scion @Massiveface
 306 C Sagu Wildling @Justine Jones
 308 M Betor, Kin to All @Dan Mumford
+309 M Call the Spirit Dragons @Dibujante Nocturno
 310 U Disruptive Stormbrood @Dan Mumford
 314 M Neriv, Heart of the Storm @Michael Walsh
 315 U Purging Stormbrood @WolfSkullJack
@@ -215,10 +222,12 @@ ScryfallCode=TDM
 327 R Anafenza, Unyielding Lineage @Martina Fačková
 330 R United Battlefront @Aaron J. Riley
 331 R Voice of Victory @Kevin Glint
+333 R Naga Fleshcrafter @Tuan Duong Chu
 335 M Taigam, Master Opportunist @Jeremy Chong
 336 R Winternight Stories @Tomas Duchek
 337 R Avenger of the Fallen @Tomas Duchek
 338 R Qarsi Revenant @Kevin Glint
+339 M Rot-Curse Rakshasa @Tomas Duchek
 340 R The Sibsig Ceremony @Tomas Duchek
 341 R Sidisi, Regent of the Mire @Tomas Duchek
 345 R Tersa Lightshatter @Tomas Duchek

@@ -1,0 +1,9 @@
+Name:Loxodon Battle Priest
+ManaCost:4 W
+Types:Creature Elephant Cleric
+PT:3/5
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a +1/+1 counter on another target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:At the beginning of combat on your turn, put a +1/+1 counter on another target creature you control.

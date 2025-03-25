@@ -159,10 +159,15 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             }
 
             // Add ETB flag
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cause, cause);
             if (params != null) {
                 runParams.putAll(params);
+            }
+
+            boolean firstTime = false;
+            if (gm.getKey() instanceof Card c) {
+                firstTime = game.getCounterAddedThisTurn(null, c) == 0;
             }
 
             // Apply counter after replacement effect
@@ -181,6 +186,13 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
                         cause.getHostCard().addRemembered(gm.getKey());
                     }
                 }
+            }
+
+            if (result.containsColumn(gm.getKey())) {
+                runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Object, gm.getKey());
+                runParams.put(AbilityKey.FirstTime, firstTime);
+                game.getTriggerHandler().runTrigger(TriggerType.CounterTypeAddedAll, runParams, false);
             }
         }
 

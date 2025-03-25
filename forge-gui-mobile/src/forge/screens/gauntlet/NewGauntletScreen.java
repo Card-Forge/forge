@@ -56,7 +56,8 @@ public class NewGauntletScreen extends LaunchScreen {
                 Forge.getLocalizer().getMessage("lblQuickGauntlet"),
                 Forge.getLocalizer().getMessage("lblCustomGauntlet"),
                 Forge.getLocalizer().getMessage("lblGauntletContest"),
-                Forge.getLocalizer().getMessage("lblCommanderGauntlet"),
+                Forge.getLocalizer().getMessage("lblQuickCommanderGauntlet"),
+                Forge.getLocalizer().getMessage("lblCustomCommanderGauntlet"),
         }, new Callback<String>() {
             @Override
             public void run(String result) {
@@ -66,8 +67,10 @@ public class NewGauntletScreen extends LaunchScreen {
                     createQuickGauntlet();
                 } else if(Forge.getLocalizer().getMessage("lblCustomGauntlet").equals(result)) {
                     createCustomGauntlet();
-                } else if(Forge.getLocalizer().getMessage("lblCommanderGauntlet").equals(result)) {
-                    createCommandGauntlet();
+                } else if(Forge.getLocalizer().getMessage("lblQuickCommanderGauntlet").equals(result)) {
+                    createQuickCommandGauntlet();
+                } else if(Forge.getLocalizer().getMessage("lblCustomCommanderGauntlet").equals(result)) {
+                    createCustomCommanderGauntlet();
                 } else {
                     createGauntletContest();
                 }
@@ -75,7 +78,7 @@ public class NewGauntletScreen extends LaunchScreen {
         });
     }
 
-    private void createCommandGauntlet() {
+    private void createQuickCommandGauntlet() {
         GuiChoose.getInteger(Forge.getLocalizer().getMessage("lblHowManyOpponents"), 3, 50, new Callback<Integer>() {
             @Override
             public void run(final Integer numOpponents) {
@@ -167,9 +170,23 @@ public class NewGauntletScreen extends LaunchScreen {
         });
     }
 
+    private void createCustomCommanderGauntlet() {
+        GuiChoose.getInteger(Forge.getLocalizer().getMessage("lblHowManyOpponents"), 3, 50, new Callback<Integer>() {
+            @Override
+            public void run(final Integer numOpponents) {
+                if (numOpponents == null) { return; }
+
+                GauntletData gauntlet = new GauntletData(true);
+                gauntlet.setDecks(new ArrayList<>());
+                promptForAiDeck(gauntlet, numOpponents);
+            }
+        });
+    }
+
     private void promptForAiDeck(final GauntletData gauntlet, final int numOpponents) {
         final int opponentNum = gauntlet.getDecks().size() + 1;
-        FDeckChooser.promptForDeck(Forge.getLocalizer().getMessage("lblSelectDeckForOpponent") + " " + opponentNum + " / " + numOpponents, GameType.Gauntlet, true, new Callback<Deck>() {
+        final GameType gameType = gauntlet.isCommanderGauntlet() ? GameType.CommanderGauntlet : GameType.Gauntlet;
+        FDeckChooser.promptForDeck(Forge.getLocalizer().getMessage("lblSelectDeckForOpponent") + " " + opponentNum + " / " + numOpponents, gameType, true, new Callback<Deck>() {
             @Override
             public void run(Deck aiDeck) {
                 if (aiDeck == null) { return; }
@@ -182,7 +199,7 @@ public class NewGauntletScreen extends LaunchScreen {
                 }
                 else {
                     //once all ai decks have been selected, prompt for user deck
-                    FDeckChooser.promptForDeck(Forge.getLocalizer().getMessage("lblSelectYourDeck"), GameType.Gauntlet, false, new Callback<Deck>() {
+                    FDeckChooser.promptForDeck(Forge.getLocalizer().getMessage("lblSelectYourDeck"), gameType, false, new Callback<Deck>() {
                         @Override
                         public void run(Deck userDeck) {
                             if (userDeck == null) { return; }
