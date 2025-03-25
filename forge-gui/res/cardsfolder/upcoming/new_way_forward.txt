@@ -1,0 +1,13 @@
+Name:New Way Forward
+ManaCost:2 U R W
+Types:Instant
+A:SP$ ChooseSource | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent that damage. When damage is prevented this way, CARDNAME deals that much damage to that source's controller and you draw that many cards.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ValidTarget$ You | ReplaceWith$ DBImmediateTrigger | PreventionEffect$ True | Description$ The next time a source of your choice would deal damage to you this turn, prevent that damage. When damage is prevented this way, CARDNAME deals that much damage to that source's controller and you draw that many cards.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDamage | RememberSVarAmount$ X | SubAbility$ ExileEffect | TriggerDescription$ When damage is prevented this way, CARDNAME deals that much damage to that source's controller and you draw that many cards.
+SVar:TrigDamage:DB$ DealDamage | Defined$ ChosenCardController | NumDmg$ Y | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ Y
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:X:ReplaceCount$DamageAmount
+SVar:Y:Count$TriggerRememberAmount
+Oracle:The next time a source of your choice would deal damage to you this turn, prevent that damage. When damage is prevented this way, New Way Forward deals that much damage to that source's controller and you draw that many cards.

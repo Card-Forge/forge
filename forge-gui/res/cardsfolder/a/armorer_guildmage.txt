@@ -2,6 +2,6 @@ Name:Armorer Guildmage
 ManaCost:R
 Types:Creature Human Wizard
 PT:1/1
-A:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | SpellDescription$ Target creature gets +1/+0 until end of turn.
-A:AB$ Pump | Cost$ G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ 1 | SpellDescription$ Target creature gets +0/+1 until end of turn.
+A:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SpellDescription$ Target creature gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +1 | SpellDescription$ Target creature gets +0/+1 until end of turn.
 Oracle:{B}, {T}: Target creature gets +1/+0 until end of turn.\n{G}, {T}: Target creature gets +0/+1 until end of turn.

@@ -1,6 +1,6 @@
 Name:Mogg Cannon
 ManaCost:2
 Types:Artifact
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | NumDef$ +0 | KW$ Flying | AtEOT$ Destroy | SpellDescription$ Target creature you control gets +1/+0 and gains flying until end of turn. Destroy that creature at the beginning of the next end step.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | KW$ Flying | AtEOT$ Destroy | SpellDescription$ Target creature you control gets +1/+0 and gains flying until end of turn. Destroy that creature at the beginning of the next end step.
 AI:RemoveDeck:All
 Oracle:{T}: Target creature you control gets +1/+0 and gains flying until end of turn. Destroy that creature at the beginning of the next end step.

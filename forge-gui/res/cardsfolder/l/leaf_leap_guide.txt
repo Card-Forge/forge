@@ -4,6 +4,6 @@ Types:Creature Frog Scout
 PT:1/1
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control enters, CARDNAME and that creature perpetually get +1/+1.
-SVar:TrigPump:DB$ Pump | Defined$ Self & TriggeredCardLKICopy | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
+SVar:TrigPump:DB$ Pump | Defined$ Self & TriggeredCardLKICopy | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
 A:AB$ ChangeZone | Cost$ 1 T | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return another target creature you control to its owner's hand.
 Oracle:Vigilance\nWhenever another creature you control enters, Leaf-Leap Guide and that creature perpetually get +1/+1.\n{1}, {T}: Return another target creature you control to its owner's hand.
