@@ -1,0 +1,9 @@
+Name:Broodcaller Scourge
+ManaCost:5 G G
+Types:Creature Dragon
+PT:5/7
+K:Flying
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Dragon+YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever one or more Dragons you control deal combat damage to a player, you may put a permanent card with mana value less than or equal to that damage from your hand onto the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChoiceZone$ Hand | Amount$ 1 | ChangeType$ Permanent.cmcLEX+YouCtrl | ChangeNum$ 1 | AILogic$ BestCard
+SVar:X:TriggerCount$DamageAmount
+Oracle:Flying\nWhenever one or more Dragons you control deal combat damage to a player, you may put a permanent card with mana value less than or equal to that damage from your hand onto the battlefield.

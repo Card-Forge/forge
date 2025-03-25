@@ -1,0 +1,10 @@
+Name:Thundermane Dragon
+ManaCost:3 R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouOwn | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouOwn+nonLand | ValidAfterStack$ Spell.Creature+powerGE4 | AffectedZone$ Library | MayPlay$ True | Description$ You may cast creature spells with power 4 or greater from the top of your library. If you cast a creature spell this way, it gains haste until end of turn.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidSA$ Spell.MayPlaySource | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | Secondary$ True | Static$ True | TriggerDescription$ If you cast a creature spell this way, it gains haste until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCardLKICopy | Keywords$ Haste
+Oracle:Flying\nYou may look at the top card of your library any time.\nYou may cast creature spells with power 4 or greater from the top of your library. If you cast a creature spell this way, it gains haste until end of turn.
