@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment Saga
 K:Chapter:3:DBCharm,DBCharm,DBTransform
 SVar:DBCharm:DB$ Charm | Choices$ P2P2,M1M1,GainLife | CharmNum$ 1 | SpellDescription$ ABILITY
-SVar:P2P2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | AILogic$ Pump | SpellDescription$ Target creature gets +2/+2 until end of turn.
+SVar:P2P2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | AILogic$ Pump | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:M1M1:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | AILogic$ Curse | SpellDescription$ Target creature gets -1/-1 until end of turn.
 SVar:GainLife:DB$ GainLife | LifeAmount$ 2 | Defined$ You | SpellDescription$ You gain 2 life.
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
