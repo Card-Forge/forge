@@ -21,7 +21,9 @@ import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 public class EndureEffect extends TokenEffectBase {
 
@@ -59,8 +61,11 @@ public class EndureEffect extends TokenEffectBase {
 
             Map<String, Object> params = Maps.newHashMap();
             params.put("RevealedCard", c);
+            params.put("Amount", amount);
             if (gamec != null && gamec.isInPlay() && gamec.equalsWithGameTimestamp(c) && gamec.canReceiveCounters(CounterEnumType.P1P1)
-                    && pl.getController().confirmAction(sa, null, "P1P1 instead of Spirit Token", gamec, params)) {
+                    && pl.getController().confirmAction(sa, null,
+                            Localizer.getInstance().getMessage("lblEndureAction", CardTranslation.getTranslatedName(c.getName()), amount, amount, amount),
+                            gamec, params)) {
                 gamec.addCounter(CounterEnumType.P1P1, amount, pl, table);
             } else {
                 final Card result = TokenInfo.getProtoType("w_x_x_spirit", sa, pl, false);
