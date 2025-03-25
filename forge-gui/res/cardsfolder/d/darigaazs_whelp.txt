@@ -5,10 +5,10 @@ PT:2/1
 K:Kicker:1 R
 K:Flying
 T:Mode$ Drawn | ValidCard$ Card.YouOwn+Dragon | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ Whenever you draw a Dragon card, it perpetually gets +1/+1.
-SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ TriggeredCard | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
+SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ TriggeredCard | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigSeek | TriggerDescription$ When this creature enters, if it was kicked, seek a Dragon card. CARDNAME and that Dragon card each perpetually get +1/+1.
 SVar:TrigSeek:DB$ Seek | RememberFound$ True | Type$ Card.Dragon | SubAbility$ DBPump2
-SVar:DBPump2:DB$ Pump | PumpZone$ Hand,Battlefield | Defined$ RememberedAndSelf | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBPump2:DB$ Pump | PumpZone$ Hand,Battlefield | Defined$ RememberedAndSelf | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckNeeds:Type$Dragon
 DeckHints:Color$Red

@@ -5,7 +5,7 @@ PT:7/7
 K:Flying
 K:Trample
 K:Rampage:2
-A:AB$ PumpAll | Cost$ W U B R G | ValidCards$ Dragon.Elder+YouCtrl | NumAtt$ 7 | NumDef$ 7 | SpellDescription$ Elder Dragons you control get +7/+7 until end of turn.
+A:AB$ PumpAll | Cost$ W U B R G | ValidCards$ Dragon.Elder+YouCtrl | NumAtt$ +7 | NumDef$ +7 | SpellDescription$ Elder Dragons you control get +7/+7 until end of turn.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {W}{U}{B}{R}{G}.
 SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ W U B R G
 Oracle:Flying, trample, rampage 2\n{W}{U}{B}{R}{G}: Elder Dragons you control get +7/+7 until end of turn.\nAt the beginning of your upkeep, sacrifice Eldest Dragon Highlander unless you pay {W}{U}{B}{R}{G}.
