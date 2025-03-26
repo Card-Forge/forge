@@ -1,0 +1,9 @@
+Name:Hammerhead Tyrant
+ManaCost:4 U U
+Types:Creature Dragon
+PT:6/6
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever you cast a spell, return up to one target nonland permanent an opponent controls with mana value less than or equal to that spell's mana value to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl+cmcLEX | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target permanent nonland permanent an opponent controls with mana value less than or equal to that spell's mana value | Origin$ Battlefield | Destination$ Hand
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+Oracle:Flying\nWhenever you cast a spell, return up to one target nonland permanent an opponent controls with mana value less than or equal to that spell's mana value to its owner's hand.

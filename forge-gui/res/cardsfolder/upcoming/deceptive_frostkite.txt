@@ -1,0 +1,8 @@
+Name:Deceptive Frostkite
+ManaCost:U U
+Types:Creature Dragon
+PT:1/1
+K:Flying
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.YouCtrl+powerGE4 | AddTypes$ Dragon | AddKeywords$ Flying | SpellDescription$ You may have this creature enter as a copy of a creature you control with power 4 or greater, except it's a Dragon in addition to its other types and it has flying.
+Oracle:Flying\nYou may have this creature enter as a copy of a creature you control with power 4 or greater, except it's a Dragon in addition to its other types and it has flying.

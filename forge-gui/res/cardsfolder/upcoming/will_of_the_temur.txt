@@ -1,0 +1,10 @@
+Name:Will of the Temur
+ManaCost:5 U
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare Y GE1.2.1 | Choices$ DBProjection,DBFruition | AdditionalDescription$ . If you control a commander as you cast this spell, you may choose both instead.
+SVar:DBProjection:DB$ CopyPermanent | ValidTgts$ Permanent | NumCopies$ 1 | SetPower$ 4 | SetToughness$ 4 | AddTypes$ Dragon & Creature | AddKeywords$ Flying | SpellDescription$ Create a token that's a copy of target permanent, except it's a 4/4 Dragon creature with flying in addition to its other types.
+SVar:DBFruition:DB$ Draw | ValidTgts$ Player | NumCards$ X | SpellDescription$ Target player draws cards equal to the greatest mana value among permanents you control.
+SVar:X:Count$Valid Permanent.YouCtrl$GreatestCMC
+SVar:Y:Count$Valid Card.IsCommander+YouCtrl
+DeckHas:Ability$Token
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Create a token that's a copy of target permanent, except it's a 4/4 Dragon creature with flying in addition to its other types.\n• Target player draws cards equal to the greatest mana value among permanents you control.
