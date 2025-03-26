@@ -153,6 +153,10 @@
                             <token>$mandatory.java.args$</token>
                             <value>${mandatory.java.args}</value>
                         </replacement>
+                        <replacement>
+                            <token>$addopen.java.args$</token>
+                            <value>${addopen.java.args}</value>
+                        </replacement>
                     </replacements>
                 </configuration>
             </plugin>
