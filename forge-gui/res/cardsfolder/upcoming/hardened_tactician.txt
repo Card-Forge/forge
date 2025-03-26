@@ -1,0 +1,6 @@
+Name:Hardened Tactician
+ManaCost:1 W B
+Types:Creature Human Warrior
+PT:2/4
+A:AB$ Draw | Cost$ 1 Sac<1/Permanent.token/token> | SpellDescription$ Draw a card.
+Oracle:{1}, Sacrifice a token: Draw a card.
