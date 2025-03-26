@@ -4,6 +4,7 @@ package forge.ai.ability;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
+import forge.game.Game;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
@@ -38,6 +39,7 @@ public class EndureAi extends SpellAbilityAi {
     public static boolean shouldPutCounters(Player ai, SpellAbility sa) {
         // TODO: adapted from Fabricate AI in TokenAi, maybe can be refactored to a single method
         final Card source = sa.getHostCard();
+        final Game game = source.getGame();
         final String num = sa.getParamOrDefault("Num", "1");
         final int amount = AbilityUtils.calculateAmount(source, num, sa);
 
@@ -79,19 +81,37 @@ public class EndureAi extends SpellAbilityAi {
         // spawn the token so it's possible to evaluate it
         final Card token = TokenInfo.getProtoType("w_x_x_spirit", sa, ai, false);
 
-        // token would not survive
-        if (!token.isCreature() || token.getNetToughness() < 1) {
-            return true;
-        }
+        token.setController(ai, 0);
+        token.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
+        token.setTokenSpawningAbility(sa);
 
         // evaluate the generated token
         token.setBasePowerString(num);
         token.setBasePower(amount);
         token.setBaseToughnessString(num);
         token.setBaseToughness(amount);
-        int evalToken = ComputerUtilCard.evaluateCreature(token);
 
-        return evalToken < evalCounter;
+        boolean result = true;
+
+        // need to check what the cards would be on the battlefield
+        // do not attach yet, that would cause Events
+        CardCollection preList = new CardCollection(token);
+        game.getAction().checkStaticAbilities(false, Sets.newHashSet(token), preList);
+
+        // token would not survive
+        if (!token.isCreature() || token.getNetToughness() < 1) {
+            result = false;
+        }
+
+        if (result) {
+            int evalToken = ComputerUtilCard.evaluateCreature(token);
+            result = evalToken < evalCounter;
+        }
+
+        //reset static abilities
+        game.getAction().checkStaticAbilities(false);
+
+        return result;
     }
 
     @Override
