@@ -8,5 +8,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBUnattach
 SVar:DBUnattach:DB$ Unattach | Defined$ Enchanted | ConditionDefined$ Enchanted | ConditionPresent$ Equipment
 S:Mode$ Continuous | Affected$ Permanent.AttachedBy | RemoveAllAbilities$ True | Description$ Enchanted permanent loses all abilities and doesn't untap during its controller's untap step.
-R:Event$ Untap | ValidCard$ Permanent.AttachedBy+ActivePlayerCtrl | ActivePhases$ Untap | Layer$ CantHappen | Secondary$ True | Description$ Enchanted permanent doesn't untap during its controller's untap step.
+R:Event$ Untap | ValidCard$ Permanent.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Secondary$ True | Description$ Enchanted permanent doesn't untap during its controller's untap step.
 Oracle:Flash\nEnchant artifact, creature, or planeswalker\nWhen Tamiyo's Compleation enters, tap enchanted permanent. If it's an Equipment, unattach it.\nEnchanted permanent loses all abilities and doesn't untap during its controller's untap step.

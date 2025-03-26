@@ -7,7 +7,7 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementRe
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When this creature enters, sacrifice it unless you sacrifice five lands.
 SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Sac<5/Land> | UnlessPayer$ You
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 T:Mode$ LandPlayed | ValidCard$ Island.YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you play an Island, you may untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:NeedsToPlayVar:Y GE5

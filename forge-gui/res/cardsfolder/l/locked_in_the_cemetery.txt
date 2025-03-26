@@ -5,6 +5,6 @@ K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | IsPresent$ Card.YouCtrl | PresentCompare$ GE5 | PresentZone$ Graveyard | TriggerDescription$ When CARDNAME enters, if there are five or more cards in your graveyard, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
-R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.AttachedBy+ActivePlayerCtrl | ActivePhases$ Untap | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
 DeckHas:Ability$Graveyard
 Oracle:Enchant creature\nWhen Locked in the Cemetery enters, if there are five or more cards in your graveyard, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.

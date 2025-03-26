@@ -3,6 +3,6 @@ ManaCost:9
 Types:Artifact Creature Golem
 PT:9/9
 K:Trample
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 9 | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Untap this creature. Activate only during your upkeep.
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nThis creature doesn't untap during your untap step.\n{9}: Untap this creature. Activate only during your upkeep.
