@@ -59,10 +59,10 @@ public class FDeckViewer extends FScreen {
             deckList.append(s.toString()).append(": ");
             deckList.append(nl);
             Set<String> accounted = new HashSet<>();
-            for (final Entry<PaperCard, Integer> ev : cp) {
-                if (!accounted.contains(ev.getKey().getCardName())) {
-                    deckList.append(cp.countByName(ev.getKey())).append(" ").append(ev.getKey().getCardName()).append(nl);
-                    accounted.add(ev.getKey().getCardName());
+            for (final PaperCard ev : cp.toFlatList()) {
+                if (!accounted.contains(ev.getCardName())) {
+                    deckList.append(cp.countByName(ev.getCardName())).append(" ").append(ev.getCardName()).append(nl); //search for all  instances of that name in the list.
+                    accounted.add(ev.getCardName()); //add the name to the list so it ignores the next time it appears
                 }
             }
             deckList.append(nl);
