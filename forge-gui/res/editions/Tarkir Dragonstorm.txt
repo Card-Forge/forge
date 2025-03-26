@@ -20,13 +20,17 @@ ScryfallCode=TDM
 14 C Lightfoot Technique @Craig J Spearing
 15 U Loxodon Battle Priest @Yeong-Hao Han
 16 C Mardu Devotee @Lorenzo Mastroianni
+17 C Osseous Exhale @Camille Alquier
 19 U Rally the Monastery @David Astruga
 20 C Rebellious Strike @Evyn Fong
 21 C Riling Dawnbreaker @Tuan Duong Chu
+22 R Sage of the Skies @Justyna Dura
 23 C Salt Road Packbeast @Ben Wootten
 24 M Smile at Death @Olivier Bernard
+25 U Starry-Eyed Skyrider @Lindsey Look
 26 U Static Snare @Yohann Schepacz
 28 C Stormplain Detainment @Livia Prima
+29 U Sunpearl Kirin @Allen Morris
 30 U Teeming Dragonstorm @Leon Tukker
 31 C Tempest Hawk @Abz J Harding
 32 R United Battlefront @Darren Tan
@@ -35,10 +39,12 @@ ScryfallCode=TDM
 36 C Agent of Kotis @Matt Stewart
 38 U Bewildering Blizzard @Milivoj Ćeran
 40 C Dirgur Island Dragon @Daniel Ljunggren
+41 C Dispelling Exhale @David Auden Nash
 42 R Dragonologist @Mila Pesic
 43 U Dragonstorm Forecaster @Kev Fang
 44 U Essence Anchor @David Astruga
 46 U Fresh Start @Joe Slucher
+48 C Humbling Elder @Yohann Schepacz
 50 U Kishla Trawlers @Iris Compiet
 51 R Marang River Regent @John Tedrick
 52 R Naga Fleshcrafter @Valera Lutfullina
@@ -47,9 +53,12 @@ ScryfallCode=TDM
 55 U Roiling Dragonstorm @Gaboleps
 57 C Snowmelt Stag @Lorenzo Mastroianni
 58 U Spectral Denial @Xabi Gaztelua
+59 R Stillness in Motion @Kai Carpenter
 60 M Taigam, Master Opportunist @Joshua Raphael
 61 C Temur Devotee @Marina Ortega Lorente
+62 C Unending Whisper @Danny Schwartz
 63 U Ureni's Rebuff @Sergio Cosmai
+66 C Wingspan Stride @Jake Murray
 67 R Winternight Stories @Zara Alfonso
 68 C Abzan Devotee @Forrest Imel
 72 C Alesha's Legacy @Craig J Spearing
@@ -66,18 +75,26 @@ ScryfallCode=TDM
 90 R Scavenger Regent @John Tedrick
 91 R The Sibsig Ceremony @Eli Minaya
 92 R Sidisi, Regent of the Mire @Diana Franco
+93 R Sinkhole Surveyor @Warren Mahy
 96 U Unrooted Ancestor @Elizabeth Peiró
 97 U Venerated Stormsinger @Elizabeth Peiró
+98 U Wail of War @Izzy
+99 C Worthy Cost @Andrew Mar
 100 U Yathan Tombguard @Xavier Ribeiro
 101 U Breaching Dragonstorm @Danny Schwartz
+102 U Channeled Dragonfire @Jorge Jacinto
 103 R Cori-Steel Cutter @Xabi Gaztelua
 104 C Devoted Duelist @Nathaniel Himawan
 105 M Dracogenesis @Kai Carpenter
 106 U Equilibrium Adept @Leroy Steinmann
+107 C Fire-Rim Form @Filipe Pagliuso
 110 C Jeskai Devotee @Xavier Ribeiro
 111 R Magmatic Hellkite @Tyler Walpole
+112 C Meticulous Artisan @Anna Pavleeva
+113 C Molten Exhale @Nathaniel Himawan
 114 C Narset's Rebuke @Diego Gisbert
 116 C Rescue Leopard @Hector Ortiz
+117 U Reverberating Summons @Marco Gorlei
 118 R Sarkhan, Dragon Ascendant @Billy Christian
 119 C Seize Opportunity @Josiah "Jo" Cameron
 120 C Shock Brigade @Fajareka Setiawan
@@ -94,10 +111,13 @@ ScryfallCode=TDM
 138 M Craterhoof Behemoth @Magali Villeneuve
 140 U Dragonbroods' Relic @Racrufi
 141 C Dusyut Earthcarver @Andrea Piparo
+142 U Encroaching Dragonstorm @Marco Gorlei
 144 R Herd Heirloom @Allen Morris
 145 C Heritage Reclamation @Konstantin Porubov
+148 C Krotiq Nestguard @Loïc Canavaggia
 149 R Lasyd Prowler @Anna Pavleeva
 150 R Nature's Rhythm @Liiga Smilshkalne
+151 C Piercing Exhale @Jorge Jacinto
 153 U Rite of Renewal @Gaboleps
 154 C Roamer's Routine @Andrew Mar
 157 C Sagu Wildling @Gaboleps
@@ -105,8 +125,11 @@ ScryfallCode=TDM
 159 C Snakeskin Veil @Monztre
 160 C Sultai Devotee @Bastien L. Deharme
 161 R Surrak, Elusive Hunter @Dan Murayama Scott
+162 U Synchronized Charge @Johan Grenier
 165 C Undergrowth Leopard @Iris Compiet
+166 R Warden of the Grove @Alexander Ostrowski
 167 M All-Out Assault @Joshua Cairos
+168 U Armament Dragon @Maxime Minard
 169 U Auroral Procession @Marco Gorlei
 170 R Awaken the Honored Dead @Clint Lockwood
 171 R Barrensteppe Siege @Tuan Duong Chu
@@ -120,14 +143,23 @@ ScryfallCode=TDM
 181 U Effortless Master @Lie Setiawan
 182 R Eshki Dragonclaw @Tran Nguyen
 183 R Fangkeeper's Familiar @David Szabo
+184 R Felothar, Dawn of the Abzan @Victor Adame Minguez
 185 R Flamehold Grappler @Wayne Wu
+186 U Frontline Rush @Filipe Pagliuso
 187 R Frostcliff Siege @Dan Murayama Scott
 188 U Glacial Dragonhunt @Igor Grechanyi
 189 R Glacierwood Siege @Andreas Zafiratos
 190 C Gurmag Nightwatch @Nereida
+191 U Hardened Tactician @Milivoj Ćeran
 192 R Hollowmurk Siege @Antonio José Manzanedo
 193 U Host of the Hereafter @Annie Stegg
 194 R Inevitable Defeat @Cristi Balanescu
+195 U Jeskai Brushmaster @Nino Vecia
+196 M Jeskai Revelation @Igor Grechanyi
+197 U Jeskai Shrinekeeper @Andrew Mar
+198 U Karakyk Guardian @Joe Slucher
+199 U Kheru Goldkeeper @Randy Vargas
+200 U Kin-Tree Severance @Zack Stella
 201 U Kishla Skimmer @James Ryman
 202 R Kotis, the Fangkeeper @Evyn Fong
 203 U Lie in Wait @Diana Franco
@@ -143,6 +175,7 @@ ScryfallCode=TDM
 216 C Reigning Victor @Warren Mahy
 218 R Revival of the Ancestors @Clint Lockwood
 219 U Riverwheel Sweep @Wayne Wu
+220 R Roar of Endless Song @Clint Lockwood
 221 U Runescale Stormbrood @Loïc Canavaggia
 222 R Severance Priest @Scott Murphy
 223 M Shiko, Paragon of the Way @Victor Adame Minguez
@@ -153,6 +186,7 @@ ScryfallCode=TDM
 228 R Temur Battlecrier @Brent Hollowell
 229 C Temur Tawnyback @Brian Valeza
 230 M Teval, Arbiter of Virtue @Alexander Ostrowski
+231 R Thunder of Unity @Clint Lockwood
 232 U Twinmaw Stormbrood @Tuan Duong Chu
 233 M Ureni, the Song Unending @Alexander Ostrowski
 234 U Whirlwing Stormbrood @Fajareka Setiawan
@@ -218,14 +252,18 @@ ScryfallCode=TDM
 295 R Dragonologist @Jarel Threat
 296 U Roiling Dragonstorm @Dan Mumford
 297 U Corroding Dragonstorm @Cabrol
+299 U Breaching Dragonstorm @Justine Jones
 300 M Dracogenesis @Rafal Wechterowicz (Too Many Skulls)
 301 R Magmatic Hellkite @Rafal Wechterowicz (Too Many Skulls)
 302 R Sarkhan, Dragon Ascendant @DZO
 303 M Stormscale Scion @Massiveface
+304 C Stormshriek Feral @Justine Jones
+305 U Encroaching Dragonstorm @Rafal Wechterowicz (Too Many Skulls)
 306 C Sagu Wildling @Justine Jones
 308 M Betor, Kin to All @Dan Mumford
 309 M Call the Spirit Dragons @Dibujante Nocturno
 310 U Disruptive Stormbrood @Dan Mumford
+311 U Jeskai Shrinekeeper @Justine Jones
 314 M Neriv, Heart of the Storm @Michael Walsh
 315 U Purging Stormbrood @WolfSkullJack
 316 U Runescale Stormbrood @Massiveface
@@ -239,9 +277,11 @@ ScryfallCode=TDM
 325 M Mox Jasper @DZO
 326 R Maelstrom of the Spirit Dragon @Cabrol
 327 R Anafenza, Unyielding Lineage @Martina Fačková
+328 R Sage of the Skies @Wayne Wu
 330 R United Battlefront @Aaron J. Riley
 331 R Voice of Victory @Kevin Glint
 333 R Naga Fleshcrafter @Tuan Duong Chu
+334 R Stillness in Motion @Kevin Glint
 335 M Taigam, Master Opportunist @Jeremy Chong
 336 R Winternight Stories @Tomas Duchek
 337 R Avenger of the Fallen @Tomas Duchek
@@ -249,18 +289,24 @@ ScryfallCode=TDM
 339 M Rot-Curse Rakshasa @Tomas Duchek
 340 R The Sibsig Ceremony @Tomas Duchek
 341 R Sidisi, Regent of the Mire @Tomas Duchek
+342 R Sinkhole Surveyor @Kevin Glint
+343 R Cori-Steel Cutter @Tomas Duchek
 345 R Tersa Lightshatter @Tomas Duchek
 346 M Craterhoof Behemoth @Tuan Duong Chu
+347 R Herd Heirloom @Clint Lockwood
 348 R Lasyd Prowler @Wonchun Choi
 349 R Nature's Rhythm @Valera Lutfullina
 350 R Surrak, Elusive Hunter @Jose Cabrera
+351 R Warden of the Grove @Kevin Glint
 352 M All-Out Assault @Valera Lutfullina
 353 M Betor, Kin to All @Anna Podedworna
 354 M Death Begets Life @Joshua Raphael
 355 M Dragonback Assault @Anastasia Ovchinnikova
 356 R Eshki Dragonclaw @Valera Lutfullina
 357 R Fangkeeper's Familiar @Kevin Glint
+358 R Felothar, Dawn of the Abzan @Wayne Wu
 359 R Flamehold Grappler @Wayne Wu
+361 M Jeskai Revelation @Francis Tneh
 362 R Kotis, the Fangkeeper @Tomas Duchek
 366 M Neriv, Heart of the Storm @Kevin Glint
 367 R New Way Forward @Wayne Wu
@@ -272,6 +318,7 @@ ScryfallCode=TDM
 374 M Ureni, the Song Unending @Andrey Kuzinskiy
 375 R Yathan Roadwatcher @Kevin Glint
 376 R Zurgo, Thunder's Decree @Chuck Lukacs
+377 R Clarion Conqueror @Crystal Sully
 378 R Marang River Regent @Brian Valeza
 379 R Scavenger Regent @Allen Douglas
 380 R Magmatic Hellkite @Alison Johnstun
@@ -281,7 +328,11 @@ ScryfallCode=TDM
 384 R Barrensteppe Siege @Clint Lockwood
 385 R Frostcliff Siege @Francesca Baerald
 386 R Glacierwood Siege @Clint Lockwood
+387 R Hollowmurk Siege @Raymond Bonilla
 388 R Rediscover the Way @Justyna Dura
+389 R Revival of the Ancestors @Miklós Ligeti
+391 R Thunder of Unity @Lie Setiawan
+392 R Windcrag Siege @Francesca Baerald
 393 R Cori Mountain Monastery @Constantin Marin
 394 R Dalkovan Encampment @Raymond Bonilla
 395 R Great Arashin City @Constantin Marin
@@ -295,13 +346,16 @@ ScryfallCode=TDM
 403 M Sarkhan, Dragon Ascendant @Billy Christian
 404 M Craterhoof Behemoth @Magali Villeneuve
 405 M All-Out Assault @Joshua Cairos
+406 M Death Begets Life @Justin Hernandez & Alexis Hernandez
 408 M Skirmish Rhino @James Bousema
 409 M Ugin, Eye of the Storms @Joshua Raphael
+410 M Clarion Conqueror @Nathaniel Himawan
 411 M Elspeth, Storm Slayer @Ekaterina Burmak
 412 M Dracogenesis @Kai Carpenter
 413 M Sarkhan, Dragon Ascendant @Billy Christian
 414 M Craterhoof Behemoth @Magali Villeneuve
 415 M All-Out Assault @Joshua Cairos
+416 M Death Begets Life @Justin Hernandez & Alexis Hernandez
 418 M Skirmish Rhino @James Bousema
 419 M Mox Jasper @Dan Frazier
 420 U Static Snare @Yohann Schepacz
