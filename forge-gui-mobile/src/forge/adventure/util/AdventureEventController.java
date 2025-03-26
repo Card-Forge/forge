@@ -129,6 +129,16 @@ public class AdventureEventController implements Serializable {
         nextEventDate.put(pointID, LocalDate.now().toEpochDay() + new Random().nextInt(2)); //next local event availability date
         return e;
     }
+    public Deck generateBooster(String setCode, String[] restrictedCards) {
+        List<PaperCard> cards = BoosterGenerator.getBoosterPack(StaticData.instance().getBoosters().get(setCode),
+                restrictedCards);
+        Deck output = new Deck();
+        output.getMain().add(cards);
+        String editionName = FModel.getMagicDb().getEditions().get(setCode).getName();
+        output.setName(editionName + " Booster");
+        output.setComment(setCode);
+        return output;
+    }
 
     public Deck generateBooster(String setCode) {
         List<PaperCard> cards = BoosterGenerator.getBoosterPack(StaticData.instance().getBoosters().get(setCode));

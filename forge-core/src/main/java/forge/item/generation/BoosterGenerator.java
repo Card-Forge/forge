@@ -441,6 +441,337 @@ public class BoosterGenerator {
         return result;
     }
 
+    public static List<PaperCard> getBoosterPack(SealedTemplate template, String[] restrictedCards) {
+        if (template instanceof SealedTemplateWithSlots slots) {
+            return BoosterGenerator.getBoosterPack(slots);
+        }
+
+        List<PaperCard> result = new ArrayList<>();
+
+        CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
+
+        boolean hasFoil = edition != null
+                && !template.getSlots().isEmpty()
+                && MyRandom.getRandom().nextDouble() < edition.getFoilChanceInBooster()
+                && edition.getFoilType() != FoilType.NOT_SUPPORTED;
+        boolean foilAtEndOfPack = hasFoil && edition.getFoilAlwaysInCommonSlot();
+
+        // Foil chances
+        // 1 Rare or Mythic rare (distribution ratio same as nonfoils)
+        // 2-3 Uncommons
+        // 4-6 Commons or Basic Lands
+        // 7 Time Shifted
+        // 8 VMA Special
+        // 9 DFC
+        // 10 Planeshift alternate art foil
+        // if result not valid for pack, reroll
+        // Other special types of foil slots, add here
+        CardRarity foilCard = CardRarity.Unknown;
+        while (foilCard == CardRarity.Unknown) {
+            int randomNum = MyRandom.getRandom().nextInt(10) + 1;
+            switch (randomNum) {
+                case 1:
+                    // Rare or Mythic
+                    foilCard = CardRarity.Rare;
+                    break;
+                case 2:
+                case 3:
+                    // Uncommon
+                    foilCard = CardRarity.Uncommon;
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    // Common or Basic Land
+                    foilCard = CardRarity.Common;
+                    break;
+                case 7:
+                    // Time Spiral
+                    if (edition != null) {
+                        if (edition.getName().equals("Time Spiral")) {
+                            foilCard = CardRarity.Special;
+                        }
+                    }
+                    break;
+                case 8:
+                    if (edition != null) {
+                        if (edition.getName().equals("Vintage Masters")) {
+                            // 1 in 53 packs, with 7 possibilities for the slot itself in VMA
+                            // (1 RareMythic, 2 Uncommon, 3 Common, 1 Special)
+                            if (MyRandom.getRandom().nextInt(53) <= 7) {
+                                foilCard = CardRarity.Special;
+                            }
+                        }
+                    }
+                    break;
+                case 9:
+                    if (edition != null) {
+                        // every sixth foil - same as rares
+                        if (template.hasSlot("dfc")) {
+                            foilCard = CardRarity.Special;
+                        }
+                    }
+                    break;
+                case 10:
+                    if (edition != null) {
+                        if (edition.getName().equals("Planeshift")) {
+                            // Chance equals chance of getting the same card as non-alter foil rare.
+                            // so 3 out of the 53 rares in the set.
+                            // while information cannot be found, my personal (subjective) experience from that time was
+                            // that they were indeed similar chance, at least not significantly less.
+                            if (MyRandom.getRandom().nextInt(53) <= 3) {
+                                foilCard = CardRarity.Special;
+                            }
+                        }
+                    }
+                    break;
+                // Insert any additional special rarities/slot types for special
+                // sets here, for 11 and up
+                default:
+                    foilCard = CardRarity.Common;
+                    // otherwise, default is Common or Basic Land
+                    break;
+            }
+        }
+
+        String extraFoilSheetKey = edition != null ? edition.getAdditionalSheetForFoils() : "";
+        boolean replaceCommon = edition != null && !template.getSlots().isEmpty()
+                && MyRandom.getRandom().nextDouble() < edition.getChanceReplaceCommonWith();
+
+        String foilSlot = "";
+
+        if (hasFoil) {
+            // Default, if no matching slot type is found : equal chance for each slot
+            // should not have effect unless new sets that do not match existing
+            // rarities are added
+            foilSlot = Aggregates.random(template.getSlots()).getLeft().split("[ :!]")[0];
+
+            switch (foilCard) {
+                case Rare:
+                    // Take whichever rare slot the pack has.
+                    // Not the "MYTHIC" slot, no pack has that AFAIK
+                    // and chance was for rare/mythic.
+                    if (template.hasSlot(BoosterSlots.RARE_MYTHIC)) {
+                        foilSlot = BoosterSlots.RARE_MYTHIC;
+                    } else if (template.hasSlot(BoosterSlots.RARE)) {
+                        foilSlot = BoosterSlots.RARE;
+                    } else if (template.hasSlot(BoosterSlots.UNCOMMON_RARE)) {
+                        foilSlot = BoosterSlots.UNCOMMON_RARE;
+                    }
+                    break;
+                case Uncommon:
+                    if (template.hasSlot(BoosterSlots.UNCOMMON)) {
+                        foilSlot = BoosterSlots.UNCOMMON;
+                    } else if (template.hasSlot(BoosterSlots.UNCOMMON_RARE)) {
+                        foilSlot = BoosterSlots.UNCOMMON_RARE;
+                    }
+                    break;
+                case Common:
+                    foilSlot = BoosterSlots.COMMON;
+                    if (template.hasSlot(BoosterSlots.BASIC_LAND)) {
+                        // According to information I found, Basic Lands
+                        // are on the common foil sheet, each type appearing once.
+                        // Large Sets usually have 110 commons and 20 lands.
+                        if (MyRandom.getRandom().nextInt(130) <= 20) {
+                            foilSlot = BoosterSlots.BASIC_LAND;
+                        }
+                    }
+                    break;
+                case Special:
+                    if (template.hasSlot(BoosterSlots.TIME_SHIFTED)) {
+                        foilSlot = BoosterSlots.TIME_SHIFTED;
+                    } else if (template.hasSlot(BoosterSlots.DUAL_FACED_CARD)) {
+                        foilSlot = BoosterSlots.DUAL_FACED_CARD;
+                    } else if (template.hasSlot(BoosterSlots.SPECIAL)) {
+                        foilSlot = BoosterSlots.SPECIAL;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        List<PaperCard> foilCardGeneratedAndHeld = new ArrayList<>();
+
+        for (Pair<String, Integer> slot : template.getSlots()) {
+            String slotType = slot.getLeft(); // add expansion symbol here?
+            int numCards = slot.getRight();
+
+            boolean convertCardFoil = slotType.endsWith("+");
+            if (convertCardFoil) {
+                slotType = slotType.substring(0, slotType.length() - 1);
+            }
+
+            String[] sType = TextUtil.splitWithParenthesis(slotType, ' ');
+            String setCode = sType.length == 1 && template.getEdition() != null ? template.getEdition() : null;
+            String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode
+                    : slotType.trim();
+
+            if (sheetKey.startsWith("wholeSheet")) {
+                PrintSheet ps = getPrintSheet(sheetKey);
+                result.addAll(ps.all());
+                continue;
+            }
+
+            slotType = slotType.split("[ :!]")[0]; // add expansion symbol here?
+
+            boolean foilInThisSlot = hasFoil && (slotType.equals(foilSlot));
+
+            if ((!foilAtEndOfPack && foilInThisSlot)
+                    || (foilAtEndOfPack && hasFoil && slotType.startsWith(BoosterSlots.COMMON))) {
+                numCards--;
+            }
+
+            // Planeshift foil alternate art replaces rare slot even though it comes from the
+            // special slot that normally has no cards!
+            if (edition != null) {
+                if ((edition.getName().equals("Planeshift")) &&
+                        (slotType.startsWith(BoosterSlots.RARE))
+                        && (foilSlot.startsWith(BoosterSlots.SPECIAL))
+                ) {
+                    numCards--;
+                }
+            }
+
+            if (replaceCommon && slotType.startsWith(BoosterSlots.COMMON)) {
+                numCards--;
+                String replaceKey = StaticData.instance().getEditions().contains(setCode)
+                        ? edition.getSlotReplaceCommonWith().trim() + " " + setCode
+                        : edition.getSlotReplaceCommonWith().trim();
+                PrintSheet replaceSheet = getPrintSheet(replaceKey);
+                result.addAll(replaceSheet.random(1, true));
+                System.out.println("Common was replaced with something from the replace sheet...");
+                replaceCommon = false;
+            }
+
+            PrintSheet ps = getPrintSheet(sheetKey);
+            for(String name : restrictedCards)
+            {
+                if(ps.removeByName(name))
+                    System.out.println(name + " removed from pool in the "+ template.getEdition() +" set.");
+            }
+
+            List<PaperCard> paperCards;
+
+            // For cards that end in '+', attempt to convert this card to foil.
+            if (convertCardFoil) {
+                paperCards = Lists.newArrayList();
+                for(PaperCard pc : ps.random(numCards, true)) {
+                    paperCards.add(pc.getFoiled());
+                }
+            } else {
+                paperCards = ps.random(numCards, true);
+            }
+
+            result.addAll(paperCards);
+
+            if (foilInThisSlot) {
+                if (!foilAtEndOfPack) {
+                    hasFoil = false;
+                    if (!extraFoilSheetKey.isEmpty()) {
+                        // TODO: extra foil sheets are currently reliably supported
+                        // only for boosters with FoilAlwaysInCommonSlot=True.
+                        // If FoilAlwaysInCommonSlot is false, a card from the extra
+                        // sheet may still replace a card in any slot.
+                        List<PaperCard> foilCards = new ArrayList<>();
+                        for (PaperCard card : ps.toFlatList()) {
+                            if (!foilCards.contains(card)) {
+                                foilCards.add(card);
+                            }
+                        }
+                        addCardsFromExtraSheet(foilCards, extraFoilSheetKey);
+                        result.add(generateFoilCard(foilCards));
+                    } else {
+                        result.add(generateFoilCard(ps));
+                    }
+                } else { // foilAtEndOfPack
+                    if (!extraFoilSheetKey.isEmpty()) {
+                        // TODO: extra foil sheets are currently reliably supported
+                        // only for boosters with FoilAlwaysInCommonSlot=True.
+                        // If FoilAlwaysInCommonSlot is false, a card from the extra
+                        // sheet may still replace a card in any slot.
+                        List<PaperCard> foilCards = new ArrayList<>();
+                        for (PaperCard card : ps.toFlatList()) {
+                            if (!foilCards.contains(card)) {
+                                foilCards.add(card);
+                            }
+                        }
+                        addCardsFromExtraSheet(foilCards, extraFoilSheetKey);
+                        foilCardGeneratedAndHeld.add(generateFoilCard(foilCards));
+                    } else {
+                        if (edition != null) {
+                            if (edition.getName().equals("Vintage Masters")) {
+                                // Vintage Masters foil slot
+                                // If "Special" was picked here, either foil or
+                                // nonfoil P9 needs to be generated
+                                // 1 out of ~30 normal and mythic rares are foil,
+                                // match that.
+                                // If not special card, make it always foil.
+                                if ((MyRandom.getRandom().nextInt(30) == 1) || (!foilSlot.equals(BoosterSlots.SPECIAL))) {
+                                    foilCardGeneratedAndHeld.add(generateFoilCard(ps));
+                                } else {
+                                    // Otherwise it's not foil (even though this is the
+                                    // foil slot!)
+                                    result.addAll(ps.random(1, true));
+                                }
+                            } else {
+                                foilCardGeneratedAndHeld.add(generateFoilCard(ps));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (hasFoil && foilAtEndOfPack) {
+            result.addAll(foilCardGeneratedAndHeld);
+        }
+
+        // Guaranteed cards, e.g. Dominaria guaranteed legendary creatures
+        if (edition != null) {
+            String boosterMustContain = edition.getBoosterMustContain();
+            if (!boosterMustContain.isEmpty()) {
+                ensureGuaranteedCardInBooster(result, template, boosterMustContain);
+            }
+
+            String boosterReplaceSlotFromPrintSheet = edition.getBoosterReplaceSlotFromPrintSheet();
+            if (!boosterReplaceSlotFromPrintSheet.isEmpty()) {
+                replaceCardFromExtraSheet(result, boosterReplaceSlotFromPrintSheet);
+            }
+
+            String sheetReplaceCardFromSheet = edition.getSheetReplaceCardFromSheet();
+            if (!sheetReplaceCardFromSheet.isEmpty()) {
+                String[] split = sheetReplaceCardFromSheet.split("_");
+                PrintSheet replaceThis = StaticData.instance().getPrintSheets().get(split[0]);
+                List<PaperCard> candidates = Lists.newArrayList();
+                for (PaperCard p : result) {
+                    if (replaceThis.all().contains(p)) {
+                        candidates.add(candidates.size(), p);
+                    }
+                }
+                result.removeAll(candidates);
+                replaceCardFromExtraSheet(candidates, split[1]);
+                result.addAll(candidates);
+            }
+            String sheetReplaceCardFromSheet2 = edition.getSheetReplaceCardFromSheet2();
+            if (!sheetReplaceCardFromSheet2.isEmpty()) {
+                String[] split = sheetReplaceCardFromSheet2.split("_");
+                PrintSheet replaceThis = StaticData.instance().getPrintSheets().get(split[0]);
+                List<PaperCard> candidates = Lists.newArrayList();
+                for (PaperCard p : result) {
+                    if (replaceThis.all().contains(p)) {
+                        candidates.add(candidates.size(), p);
+                    }
+                }
+                result.removeAll(candidates);
+                replaceCardFromExtraSheet(candidates, split[1]);
+                result.addAll(candidates);
+            }
+        }
+
+        return result;
+    }
+
     private static void ensureGuaranteedCardInBooster(List<PaperCard> result, SealedTemplate template, String boosterMustContain) {
         // First, see if there's already a card of the given type
         String[] types = TextUtil.split(boosterMustContain, ' ');

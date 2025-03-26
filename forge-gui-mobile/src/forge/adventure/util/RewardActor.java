@@ -423,15 +423,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     Texture t = ImageCache.getInstance().getImage(imageKey, false, true);
                     isBooster = true;
                     if (t != null) {
-
                         item = new Sprite(new TextureRegion(t));
-
-
                         //setCardImage(t);
                         onImageFetched();
                     }
                     else {
-                        fetcher.fetchImage(imageKey, this);
+                        //fetcher.fetchImage(imageKey, this);
                         item = Config.instance().getItemSprite("Deck");
                         setItemTooltips(item, backSprite, isBooster);
                     }

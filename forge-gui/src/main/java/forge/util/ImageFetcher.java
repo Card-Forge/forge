@@ -95,18 +95,16 @@ public abstract class ImageFetcher {
             return;
         if (imageKey.startsWith(ImageKeys.BOOSTER_PREFIX))
         {
-            final ArrayList<String> downloadUrls = new ArrayList<>();
+            //final ArrayList<String> downloadUrls = new ArrayList<>();
             final String filename = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
-            downloadUrls.add("https://downloads.cardforge.org/images/products/boosters/"+ filename);
-            System.out.println("Fetching from "+downloadUrls);
-
+            //downloadUrls.add("https://downloads.cardforge.org/images/products/boosters/"+ filename);
+            //System.out.println("Fetching from "+downloadUrls);
 
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_BOOSTER_PICS_DIR);
             File destFile = new File(ForgeConstants.CACHE_BOOSTER_PICS_DIR, filename);
-            System.out.println("Destination File "+ destFile.getAbsolutePath()+" exists: " + destFile.exists());
+            //System.out.println("Destination File "+ destFile.getAbsolutePath()+" exists: " + destFile.exists());
             if(destFile.exists())
                 return;
-            setupObserver(destFile.getAbsolutePath(),callback,downloadUrls);
             return;
         }
         if (imageKey.equalsIgnoreCase("t:null"))
