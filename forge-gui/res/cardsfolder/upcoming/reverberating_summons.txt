@@ -1,0 +1,8 @@
+Name:Reverberating Summons
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ DBAnimate | CheckSVar$ X | SVarCompare$ GE2 | TriggerDescription$ At the beginning of each combat, if you've cast two or more spells this turn, this enchantment becomes a 3/3 Monk creature with haste in addition to its other types until end of turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Monk | Keywords$ Haste
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+A:AB$ Draw | NumCards$ 2 | Cost$ 1 R Discard<1/Hand> Sac<1/CARDNAME/this enchantment> | SpellDescription$ Draw two cards.
+Oracle:At the beginning of each combat, if you've cast two or more spells this turn, this enchantment becomes a 3/3 Monk creature with haste in addition to its other types until end of turn.\n{1}{R}, Discard your hand, Sacrifice this enchantment: Draw two cards.
