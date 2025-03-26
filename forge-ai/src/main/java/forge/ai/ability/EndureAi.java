@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Sets;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
