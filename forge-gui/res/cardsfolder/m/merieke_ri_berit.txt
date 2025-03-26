@@ -2,7 +2,7 @@ Name:Merieke Ri Berit
 ManaCost:W U B
 Types:Legendary Creature Human
 PT:1/1
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ CARDNAME doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ CARDNAME doesn't untap during your untap step.
 A:AB$ GainControl | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ LeavesPlay,LoseControl | SubAbility$ DBEffect | SpellDescription$ Gain control of target creature for as long as you control CARDNAME. When CARDNAME leaves the battlefield or becomes untapped, destroy that creature. It can't be regenerated.
 SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | ForgetOnMoved$ Battlefield | Triggers$ LeavesPlay,Untap | Duration$ UntilHostLeavesPlay
 SVar:LeavesPlay:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.EffectSource | Execute$ DBDestroy | TriggerDescription$ When EFFECTSOURCE leaves the battlefield, or becomes untapped, destroy that creature. It can't be regenerated.

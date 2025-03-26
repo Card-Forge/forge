@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Creature Illusion
 PT:3/3
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ This creature can't be blocked.
-R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | CheckSVar$ X | SVarCompare$ GE2 | Description$ This creature doesn't untap during your untap step if an opponent controls two or more creatures.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | CheckSVar$ X | SVarCompare$ GE2 | Description$ This creature doesn't untap during your untap step if an opponent controls two or more creatures.
 SVar:X:PlayerCountOpponents$HighestValid Creature.YouCtrl
 Oracle:This creature can't be blocked.\nThis creature doesn't untap during your untap step if an opponent controls two or more creatures.

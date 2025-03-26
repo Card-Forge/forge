@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Instant
 A:SP$ Tap | ValidTgts$ Creature | IsCurse$ True | SubAbility$ DBAnimate | SpellDescription$ Tap target creature.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Duration$ Perpetual | Replacements$ EtherealGrasp | Abilities$ Untap | StackDescription$ SpellDescription | SpellDescription$ That creature perpetually gains "This creature doesn't untap during your untap step" and "{8}: Untap this creature."
-SVar:EtherealGrasp:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+SVar:EtherealGrasp:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 SVar:Untap:AB$ Untap | Cost$ 8 | SpellDescription$ Untap this creature.
 Oracle:Tap target creature. That creature perpetually gains "This creature doesn't untap during your untap step" and "{8}: Untap this creature."

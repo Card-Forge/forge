@@ -6,6 +6,6 @@ K:Monstrosity:4:6 U U
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this creature becomes monstrous, tap up to four target creatures. Those creatures don't untap during their controllers' untap steps for as long as you control this creature.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 4 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | ReplacementEffects$ DontUntap | Duration$ AsLongAsControl
-SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered+ActivePlayerCtrl | ActivePhases$ Untap | Layer$ CantHappen | Description$ That creature doesn't untap during its controller's untap step for as long as you control EFFECTSOURCE.
+SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ That creature doesn't untap during its controller's untap step for as long as you control EFFECTSOURCE.
 DeckHas:Ability$Counters
 Oracle:{6}{U}{U}: Monstrosity 4. (If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)\nWhen this creature becomes monstrous, tap up to four target creatures. Those creatures don't untap during their controllers' untap steps for as long as you control this creature.

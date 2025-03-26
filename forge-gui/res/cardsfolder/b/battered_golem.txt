@@ -2,7 +2,7 @@ Name:Battered Golem
 ManaCost:3
 Types:Artifact Creature Golem
 PT:3/2
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever an artifact enters, you may untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 Oracle:This creature doesn't untap during your untap step.\nWhenever an artifact enters, you may untap this creature.

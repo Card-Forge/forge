@@ -38,7 +38,6 @@ import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.keyword.*;
 import forge.game.mana.ManaCostBeingPaid;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.*;
@@ -65,7 +64,6 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.Callable;
 
 import static java.lang.Math.max;
 
@@ -4912,14 +4910,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public final boolean canUntap(Player phase, Boolean predict) {
-        if (predict != null && predict) {
-            Callable<Boolean> proc = () -> {
-                return canUntap(phase, null);
-            };
-            return getGame().getPhaseHandler().withContext(proc, phase, PhaseType.UNTAP);
-        }
-        if (predict != null && !tapped) { return false; }
+    public final boolean canUntap(Player phase, boolean predict) {
+        if (!predict && !tapped) { return false; }
         if (phase != null && isExertedBy(phase)) {
             return false;
         }
@@ -4927,6 +4919,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(this);
+        runParams.put(AbilityKey.Player, phase);
         return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Untap, runParams);
     }
 
@@ -4939,7 +4932,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
 
-        if (getGame().getReplacementHandler().run(ReplacementType.Untap, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(this);
+        runParams.put(AbilityKey.Player, phase);
+        if (getGame().getReplacementHandler().run(ReplacementType.Untap, runParams) != ReplacementResult.NotReplaced) {
             return false;
         }
 

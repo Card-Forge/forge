@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | DamageSource$ Enchanted
 SVar:X:Enchanted$CardPower
-R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy+ActivePlayerCtrl | ActivePhases$ Untap | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
 Oracle:Enchant creature\nWhen Bind the Monster enters, tap enchanted creature. It deals damage to you equal to its power.\nEnchanted creature doesn't untap during its controller's untap step.

@@ -5,7 +5,7 @@ PT:10/10
 K:Trample
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice two Islands. If you do, untap this creature.
 SVar:TrigUntap:AB$ Untap | Cost$ Sac<2/Island>
 S:Mode$ CantAttackUnless | ValidCard$ Creature.Self | Cost$ Sac<2/Island> | Description$ This creature can't attack unless you sacrifice two islands. (This cost is paid as attackers are declared.)

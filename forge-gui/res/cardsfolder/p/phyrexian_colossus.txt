@@ -2,7 +2,7 @@ Name:Phyrexian Colossus
 ManaCost:7
 Types:Artifact Creature Phyrexian Golem
 PT:8/8
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 A:AB$ Untap | Cost$ PayLife<8> | SpellDescription$ Untap this creature.
 S:Mode$ MinMaxBlocker | ValidCard$ Creature.Self | Min$ 3 | Description$ This creature can't be blocked except by three or more creatures.
 AI:RemoveDeck:All

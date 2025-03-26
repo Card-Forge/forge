@@ -5,7 +5,7 @@ A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBEffect | SpellDescription$ Tap t
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBPump | SpellDescription$ Prevent all combat damage that would be dealt by that creature this turn.
 SVar:DBPump:DB$ Effect | ReplacementEffects$ RUntap | Triggers$ ExileEff | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | Duration$ Permanent | StackDescription$ SpellDescription
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by that creature this turn.
-SVar:RUntap:Event$ Untap | ValidCard$ Creature.IsRemembered+ActivePlayerCtrl | Layer$ CantHappen | ActivePhases$ Untap | Description$ It doesn't untap during its controller's next two untap steps.
+SVar:RUntap:Event$ Untap | ValidCard$ Creature.IsRemembered | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ It doesn't untap during its controller's next two untap steps.
 SVar:ExileEff:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.controlsCard.IsRemembered | Execute$ Exile | Static$ True
 SVar:Exile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | ConditionCheckSVar$ Count$ActivatedThisGame
 Oracle:Tap target creature. Prevent all combat damage that would be dealt by that creature this turn. It doesn't untap during its controller's next two untap steps.
