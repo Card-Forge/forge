@@ -32,7 +32,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
-import forge.game.cost.Cost;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -184,20 +183,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             candidates.removeAll(targetedSA.getTargets().getTargetCards());
             String valid = getParam("CanTargetOtherCondition");
             if (CardLists.getValidCards(candidates, valid, spellAbility.getActivatingPlayer(), spellAbility.getHostCard(), spellAbility).isEmpty()) {
-                return false;
-            }
-        }
-
-        if (hasParam("NonTapCost")) {
-            final Cost cost = (Cost) (runParams.get(AbilityKey.Cost));
-            if (cost.hasTapCost()) {
-                return false;
-            }
-        }
-
-        if (hasParam("HasTapCost")) {
-            final Cost cost = (Cost) (runParams.get(AbilityKey.Cost));
-            if (!cost.hasTapCost()) {
                 return false;
             }
         }

@@ -268,7 +268,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
 
             Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(source.getController());
-            runParams.put(AbilityKey.Cost, sp.getPayCosts());
             runParams.put(AbilityKey.Activator, activator);
             runParams.put(AbilityKey.SpellAbility, sp);
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
@@ -389,7 +388,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
-        runParams.put(AbilityKey.Cost, sp.getPayCosts());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
         runParams.put(AbilityKey.SpellAbility, si.getSpellAbility());
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());

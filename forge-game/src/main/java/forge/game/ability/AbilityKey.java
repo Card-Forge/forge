@@ -38,7 +38,6 @@ public enum AbilityKey {
     Causer("Causer"),
     Championed("Championed"),
     ClassLevel("ClassLevel"),
-    Cost("Cost"),
     CostStack("CostStack"),
     CounterAmount("CounterAmount"),
     CounteredSA("CounteredSA"),

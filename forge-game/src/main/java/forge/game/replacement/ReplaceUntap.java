@@ -49,6 +49,8 @@ public class ReplaceUntap extends ReplacementEffect {
             return false;
         }
 
+        // compares based on AP in Unstap step:
+        // this allows AI to predict ahead of time
         if (hasParam("ValidStepTurnToController") &&
                 !matchesValid(runParams.get(AbilityKey.Player), getParam("ValidStepTurnToController").split(","), getHostCard(), c.getController())) {
             return false;
