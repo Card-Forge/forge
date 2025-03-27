@@ -35,8 +35,10 @@ ScryfallCode=TDM
 31 C Tempest Hawk @Abz J Harding
 32 R United Battlefront @Darren Tan
 33 R Voice of Victory @Joshua Cairos
+34 U Wayspeaker Bodyguard @Inkognit
 35 U Aegis Sculptor @Michele Giorgi
 36 C Agent of Kotis @Matt Stewart
+37 R Ambling Stormshell @Carlos Palma Cruchaga
 38 U Bewildering Blizzard @Milivoj Ćeran
 40 C Dirgur Island Dragon @Daniel Ljunggren
 41 C Dispelling Exhale @David Auden Nash
@@ -44,6 +46,7 @@ ScryfallCode=TDM
 43 U Dragonstorm Forecaster @Kev Fang
 44 U Essence Anchor @David Astruga
 46 U Fresh Start @Joe Slucher
+47 C Highspire Bell-Ringer @Zoltan Boros
 48 C Humbling Elder @Yohann Schepacz
 50 U Kishla Trawlers @Iris Compiet
 51 R Marang River Regent @John Tedrick
@@ -66,6 +69,7 @@ ScryfallCode=TDM
 74 C Caustic Exhale @Camille Alquier
 75 U Corroding Dragonstorm @Sergey Glushakov
 76 C Cruel Truths @Fajareka Setiawan
+77 C Delta Bloodflies @Inkognit
 78 U Desperate Measures @Gaboleps
 79 C Dragon's Prey @Johann Bodin
 80 C Feral Deathgorger @Loïc Canavaggia
@@ -98,6 +102,7 @@ ScryfallCode=TDM
 118 R Sarkhan, Dragon Ascendant @Billy Christian
 119 C Seize Opportunity @Josiah "Jo" Cameron
 120 C Shock Brigade @Fajareka Setiawan
+121 U Shocking Sharpshooter @Warren Mahy
 123 M Stormscale Scion @Andrew Mar
 124 C Stormshriek Feral @Joshua Raphael
 125 C Summit Intimidator @Diego Gisbert
@@ -106,6 +111,7 @@ ScryfallCode=TDM
 129 C Underfoot Underdogs @Brent Hollowell
 130 U Unsparing Boltcaster @Gaboleps
 131 U War Effort @Ioannis Fiore
+133 U Zurgo's Vanguard @Michele Giorgi
 135 U Attuned Hunter @Scott Murphy
 136 R Bloomvine Regent @Johann Bodin
 138 M Craterhoof Behemoth @Magali Villeneuve
@@ -126,6 +132,7 @@ ScryfallCode=TDM
 160 C Sultai Devotee @Bastien L. Deharme
 161 R Surrak, Elusive Hunter @Dan Murayama Scott
 162 U Synchronized Charge @Johan Grenier
+164 U Traveling Botanist @Daneen Wilkerson
 165 C Undergrowth Leopard @Iris Compiet
 166 R Warden of the Grove @Alexander Ostrowski
 167 M All-Out Assault @Joshua Cairos
@@ -138,6 +145,7 @@ ScryfallCode=TDM
 174 M Call the Spirit Dragons @Liiga Smilshkalne
 175 U Cori Mountain Stalwart @Josiah "Jo" Cameron
 176 M Death Begets Life @Justin Hernandez & Alexis Hernandez
+177 U Defibrillating Current @Isis
 178 U Disruptive Stormbrood @Edgar Sánchez Hidalgo
 179 M Dragonback Assault @Ryan Pancoast
 181 U Effortless Master @Lie Setiawan
@@ -163,6 +171,8 @@ ScryfallCode=TDM
 201 U Kishla Skimmer @James Ryman
 202 R Kotis, the Fangkeeper @Evyn Fong
 203 U Lie in Wait @Diana Franco
+204 R Lotuslight Dancers @Jodie Muir
+205 U Mammoth Bellow @Xavier Ribeiro
 207 U Marshal of the Lost @Andreas Zafiratos
 208 C Monastery Messenger @Forrest Imel
 209 R Narset, Jeskai Waymaster @Randy Vargas
@@ -308,6 +318,7 @@ ScryfallCode=TDM
 359 R Flamehold Grappler @Wayne Wu
 361 M Jeskai Revelation @Francis Tneh
 362 R Kotis, the Fangkeeper @Tomas Duchek
+363 R Lotuslight Dancers @Fajareka Setiawan
 366 M Neriv, Heart of the Storm @Kevin Glint
 367 R New Way Forward @Wayne Wu
 368 M Perennation @Martina Fačková
