@@ -9,4 +9,4 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3
 SVar:X:Count$Devotion.Black
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Mill
-Oracle:When Grim Servant enters, search your library for a card with mana value less than or equal to your devotion to black, reveal it, put it into your hand, then shuffle. You lose 3 life. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)
+Oracle:Menace\nWhen Grim Servant enters, search your library for a card with mana value less than or equal to your devotion to black, reveal it, put it into your hand, then shuffle. You lose 3 life. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)
