@@ -68,7 +68,7 @@ public class PrintSheet {
         for(PaperCard card : cards)
             cardsWithWeights.remove(card);
     }
-    public boolean removeByName(String name)
+    public PaperCard removeByName(String name)
     {
         PaperCard toBeRemoved = null;
         for(PaperCard card : cardsWithWeights.toFlatList())
@@ -79,7 +79,7 @@ public class PrintSheet {
             }
         }
 
-        return toBeRemoved != null && cardsWithWeights.remove(toBeRemoved);
+        return toBeRemoved;
     }
 
 

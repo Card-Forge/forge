@@ -26,10 +26,7 @@ import forge.card.CardRarity;
 import forge.card.CardSplitType;
 import forge.card.PrintSheet;
 import forge.item.*;
-import forge.util.Aggregates;
-import forge.util.IterableUtil;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -592,7 +589,6 @@ public class BoosterGenerator {
         }
 
         List<PaperCard> foilCardGeneratedAndHeld = new ArrayList<>();
-
         for (Pair<String, Integer> slot : template.getSlots()) {
             String slotType = slot.getLeft(); // add expansion symbol here?
             int numCards = slot.getRight();
@@ -645,10 +641,14 @@ public class BoosterGenerator {
             }
 
             PrintSheet ps = getPrintSheet(sheetKey);
+            List<PaperCard> removedCards = Lists.newArrayList();
             for(String name : restrictedCards)
             {
-                if(ps.removeByName(name))
-                    System.out.println(name + " removed from pool in the "+ template.getEdition() +" set.");
+                PaperCard pc = ps.removeByName(name);
+                if(pc != null) {
+                    removedCards.add(pc);
+                    System.out.println(name + " removed from pool in the " + template.getEdition() + " set.");
+                }
             }
 
             List<PaperCard> paperCards;
@@ -721,6 +721,13 @@ public class BoosterGenerator {
                     }
                 }
             }
+            if(!removedCards.isEmpty())
+            {
+                for(PaperCard card :removedCards)
+                {
+                    ps.add(card);
+                }
+            }
         }
 
         if (hasFoil && foilAtEndOfPack) {
@@ -768,7 +775,6 @@ public class BoosterGenerator {
                 result.addAll(candidates);
             }
         }
-
         return result;
     }
 
