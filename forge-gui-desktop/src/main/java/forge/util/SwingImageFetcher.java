@@ -110,7 +110,7 @@ public class SwingImageFetcher extends ImageFetcher {
                         String extension = urlToDownload.substring(typeIndex);
                         urlToDownload = setlessFilename+extension;
                         try {
-                            if (doFetch(tofullBorder(urlToDownload))) {
+                            if (doFetch(urlToDownload)) {
                                 success = true;
                                 break;
                             }

@@ -103,7 +103,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                             String extension = urlToDownload.substring(typeIndex);
                             urlToDownload = setlessFilename + extension;
                             try {
-                                success = doFetch(tofullBorder(urlToDownload));
+                                success = doFetch(urlToDownload);
                                 if (success) {
                                     break;
                                 }
