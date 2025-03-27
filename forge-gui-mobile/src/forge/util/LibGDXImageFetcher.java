@@ -85,11 +85,9 @@ public class LibGDXImageFetcher extends ImageFetcher {
             for (String urlToDownload : downloadUrls) {
                 boolean isPlanechaseBG = urlToDownload.startsWith("https://downloads.cardforge.org/images/planes/");
                 try {
-                    if (isPlanechaseBG) {
-                        success = doFetch(urlToDownload);
-                    } else {
-                        success = doFetch(tofullBorder(urlToDownload));
-                    }
+
+                    success = doFetch(urlToDownload);
+
                     if (success) {
                         break;
                     }

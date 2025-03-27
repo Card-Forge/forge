@@ -29,6 +29,7 @@ public class SwingImageFetcher extends ImageFetcher {
         }
 
         private boolean doFetch(String urlToDownload) throws IOException {
+            System.out.println(urlToDownload);
             if (disableHostedDownload && urlToDownload.startsWith(ForgeConstants.URL_CARDFORGE) && !urlToDownload.contains("tokens")) {
                 // Don't try to download card images from cardforge servers
                 return false;
@@ -97,7 +98,7 @@ public class SwingImageFetcher extends ImageFetcher {
             boolean success = false;
             for (String urlToDownload : downloadUrls) {
                 try {
-                    if (doFetch(tofullBorder(urlToDownload))) {
+                    if (doFetch(urlToDownload)) {
                         success = true;
                         break;
                     }
