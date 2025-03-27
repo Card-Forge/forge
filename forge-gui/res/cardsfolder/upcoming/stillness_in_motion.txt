@@ -1,0 +1,8 @@
+Name:Stillness in Motion
+ManaCost:1 U
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill three cards. Then if you have no cards in your library, exile this enchantment and put five cards from your graveyard on top of your library in any order.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ConditionPresent$ Card.YouOwn | ConditionZone$ Library | ConditionCompare$ EQ0 | SubAbility$ DBChangeZone | StackDescription$ None
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Card.YouOwn | ChangeNum$ 5 | Origin$ Graveyard | Destination$ Library | Hidden$ True | Reorder$ True | Mandatory$ True | ConditionPresent$ Card.YouOwn | ConditionZone$ Library | ConditionCompare$ EQ0 | StackDescription$ None
+Oracle:At the beginning of your upkeep, mill three cards. Then if you have no cards in your library, exile this enchantment and put five cards from your graveyard on top of your library in any order.

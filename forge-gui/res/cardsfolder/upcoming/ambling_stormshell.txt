@@ -1,0 +1,11 @@
+Name:Ambling Stormshell
+ManaCost:3 U U
+Types:Creature Turtle
+PT:5/9
+K:Ward:2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature attacks, put three stun counters on it and draw three cards. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ STUN | CounterNum$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 3
+T:Mode$ SpellCast | ValidCard$ Turtle | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a Turtle spell, untap this creature.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:Ward {2}\nWhenever this creature attacks, put three stun counters on it and draw three cards. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nWhenever you cast a Turtle spell, untap this creature.
