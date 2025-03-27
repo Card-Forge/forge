@@ -8253,9 +8253,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!isRoom()) {
             return;
         }
-        if (!isInPlay()) {
-            return;
-        }
         if (isFaceDown()) {
             return;
         }
