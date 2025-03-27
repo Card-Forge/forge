@@ -1,0 +1,9 @@
+Name:Starry-Eyed Skyrider
+ManaCost:2 W
+Types:Creature Human Scout
+PT:1/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.token+attacking+YouCtrl | AddKeyword$ Flying | Description$ Attacking tokens you control have flying.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, another target creature you control gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Flying
+Oracle:Flying\nWhenever this creature attacks, another target creature you control gains flying until end of turn.\nAttacking tokens you control have flying.

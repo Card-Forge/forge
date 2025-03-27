@@ -1,0 +1,7 @@
+Name:Jeskai Brushmaster
+ManaCost:1 U R W
+Types:Creature Orc Monk
+PT:2/4
+K:Double Strike
+K:Prowess
+Oracle:Double strike\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
