@@ -1,0 +1,7 @@
+Name:Descendant of Storms
+ManaCost:W
+Types:Creature Human Soldier
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEndure | TriggerDescription$ Whenever this creature attacks, you may pay {1}{W}. If you do, it endures 1. (Put a +1/+1 counter on it or create a 1/1 white Spirit creature token.)
+SVar:TrigEndure:AB$ Endure | Cost$ 1 W | Num$ 1
+Oracle:Whenever this creature attacks, you may pay {1}{W}. If you do, it endures 1. (Put a +1/+1 counter on it or create a 1/1 white Spirit creature token.)

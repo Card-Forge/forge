@@ -1,0 +1,7 @@
+Name:Fortress Kin-Guard
+ManaCost:1 W
+Types:Creature Dog Soldier
+PT:1/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigEndure | TriggerZones$ Battlefield | TriggerDescription$ When this creature enters, it endures 1. (Put a +1/+1 counter on it or create a 1/1 white Spirit creature token.)
+SVar:TrigEndure:DB$ Endure | Num$ 1
+Oracle:When this creature enters, it endures 1. (Put a +1/+1 counter on it or create a 1/1 white Spirit creature token.)
