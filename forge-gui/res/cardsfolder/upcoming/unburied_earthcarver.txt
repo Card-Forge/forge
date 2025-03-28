@@ -1,0 +1,8 @@
+Name:Unburied Earthcarver
+ManaCost:1 B
+Types:Creature Human Warrior
+PT:2/2
+A:AB$ PutCounter | Cost$ 2 Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AristocratCounters | SpellDescription$ Put a +1/+1 counter on this creature.
+SVar:AIPreference:SacCost$Creature.Other
+DeckHas:Ability$Counters|Sacrifice
+Oracle:{2}, Sacrifice another creature: Put a +1/+1 counter on this creature.
