@@ -1,0 +1,9 @@
+Name:Focus the Mind
+ManaCost:4 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ This spell costs {2} less to cast if you've cast another spell this turn.
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Draw three cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+DeckHas:Ability$Discard
+Oracle:This spell costs {2} less to cast if you've cast another spell this turn.\nDraw three cards, then discard a card.
