@@ -2077,7 +2077,7 @@
 								"addMaxCount": 3
 							}
 						],
-						"addMapReputation": 3,
+						"addMapReputation": 3
 					}
 				],
 				"name": "(Complete Quest)"
@@ -11218,7 +11218,6 @@
 			"name": "Rescue the Red Captive",
 			"description": "Free the wizard being held captive inside the Red Castle.",
 			"mapFlag": "Ch1RedCastleComplete",
-			"mapFlagValue": 1,
 			"POITags": [
 				"BiomeRed",
 				"Chapter1Boss"
