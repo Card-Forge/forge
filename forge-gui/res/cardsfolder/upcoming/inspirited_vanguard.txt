@@ -1,0 +1,8 @@
+Name:Inspirited Vanguard
+ManaCost:4 G
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEndure | TriggerDescription$ Whenever this creature enters or attacks, it endures 2. (Put two +1/+1 counters on it or create a 2/2 white Spirit creature token.)
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEndure | Secondary$ True | TriggerDescription$ Whenever this creature enters or attacks, it endures 2. (Put two +1/+1 counters on it or create a 2/2 white Spirit creature token.)
+SVar:TrigEndure:DB$ Endure | Num$ 2
+Oracle:Whenever this creature enters or attacks, it endures 2. (Put two +1/+1 counters on it or create a 2/2 white Spirit creature token.)
