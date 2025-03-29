@@ -161,8 +161,8 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.DoubleFaced);
     }
 
-    public boolean isAdventureCard() {
-        return get(TrackableProperty.Adventure);
+    public boolean hasSecondaryState() {
+        return get(TrackableProperty.Secondary);
     }
 
     public boolean isModalCard() {
@@ -1029,7 +1029,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Foretold, c.isForetold());
         set(TrackableProperty.Manifested, c.isManifested());
         set(TrackableProperty.Cloaked, c.isCloaked());
-        set(TrackableProperty.Adventure, c.isAdventureCard());
+        set(TrackableProperty.Secondary, c.hasState(CardStateName.Secondary));
         set(TrackableProperty.DoubleFaced, c.isDoubleFaced());
         set(TrackableProperty.Modal, c.isModal());
         set(TrackableProperty.Room, c.isRoom());

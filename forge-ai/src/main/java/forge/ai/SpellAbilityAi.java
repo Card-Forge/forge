@@ -258,7 +258,7 @@ public abstract class SpellAbilityAi {
     protected static boolean isSorcerySpeed(final SpellAbility sa, Player ai) {
         return (sa.getRootAbility().isSpell() && sa.getHostCard().isSorcery())
             || (sa.getRootAbility().isActivatedAbility() && sa.getRootAbility().getRestrictions().isSorcerySpeed())
-            || (sa.getRootAbility().isAdventure() && sa.getHostCard().getState(CardStateName.Adventure).getType().isSorcery())
+            || (sa.getRootAbility().isAdventure() && sa.getHostCard().getState(CardStateName.Secondary).getType().isSorcery())
             || (sa.isPwAbility() && !sa.withFlash(sa.getHostCard(), ai));
     }
 

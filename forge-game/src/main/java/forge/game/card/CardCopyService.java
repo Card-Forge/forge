@@ -252,10 +252,10 @@ public class CardCopyService {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.Transformed, false);
             newCopy.getState(CardStateName.Transformed).copyFrom(copyFrom.getState(CardStateName.Transformed), true);
-        } else if (copyFrom.isAdventureCard()) {
+        } else if (copyFrom.hasState(CardStateName.Secondary)) {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
-            newCopy.addAlternateState(CardStateName.Adventure, false);
-            newCopy.getState(CardStateName.Adventure).copyFrom(copyFrom.getState(CardStateName.Adventure), true);
+            newCopy.addAlternateState(CardStateName.Secondary, false);
+            newCopy.getState(CardStateName.Secondary).copyFrom(copyFrom.getState(CardStateName.Secondary), true);
         } else if (copyFrom.isSplitCard()) {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.LeftSplit, false);

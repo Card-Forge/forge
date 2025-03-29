@@ -237,7 +237,7 @@ public class CardZoom extends FOverlay {
         }
         if (flipIconBounds != null && flipIconBounds.contains(x, y)) {
             if (currentCard.isFaceDown() && currentCard.getBackup() != null) {
-                if (currentCard.getBackup().hasBackSide() || currentCard.getBackup().isFlipCard() || currentCard.getBackup().isAdventureCard()) {
+                if (currentCard.getBackup().hasBackSide() || currentCard.getBackup().isFlipCard() || currentCard.getBackup().hasSecondaryState()) {
                     show(currentCard.getBackup());
                     return true;
                 }

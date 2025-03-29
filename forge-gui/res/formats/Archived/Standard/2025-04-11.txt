@@ -1,6 +1,6 @@
 [format]
-Name:Standard
-Order:101
+Name:Standard (TDM)
+Type:Archived
 Subtype:Standard
-Type:Sanctioned
+Effective:2025-04-11
 Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM

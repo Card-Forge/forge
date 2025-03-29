@@ -333,6 +333,7 @@ Adventure
 Arcane
 Chorus
 Lesson
+Omen
 Trap
 [EnchantmentTypes]
 Aura:Auras
