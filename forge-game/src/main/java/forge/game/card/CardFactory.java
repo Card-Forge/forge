@@ -211,7 +211,7 @@ public class CardFactory {
                 c.setRarity(cp.getRarity());
                 c.setState(CardStateName.RightSplit, false);
                 c.setImageKey(originalPicture);
-            } else if (c.isAdventureCard()) {
+            } else if (c.hasState(CardStateName.Secondary)) {
                 c.setState(CardStateName.Secondary, false);
                 c.setImageKey(originalPicture);
             } else if (c.canSpecialize()) {
@@ -568,7 +568,7 @@ public class CardFactory {
             final CardState ret2 = new CardState(out, CardStateName.Flipped);
             ret2.copyFrom(in.getState(CardStateName.Flipped), false, sa);
             result.put(CardStateName.Flipped, ret2);
-        } else if (in.isAdventureCard()) {
+        } else if (in.hasState(CardStateName.Secondary)) {
             final CardState ret1 = new CardState(out, CardStateName.Original);
             ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
             result.put(CardStateName.Original, ret1);
