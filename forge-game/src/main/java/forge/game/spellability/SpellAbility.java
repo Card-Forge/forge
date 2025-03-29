@@ -30,7 +30,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.GameCommand;
-import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -745,7 +744,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isAdventure() {
-        return this.getCardStateName() == CardStateName.Adventure;
+        return getCardState().getType().hasSubtype("Adventure");
+    }
+    public boolean isOmen() {
+        return getCardState().getType().hasSubtype("Omen");
     }
 
     public final boolean isCurse() {

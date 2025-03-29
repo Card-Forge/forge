@@ -212,7 +212,7 @@ public class CardFactory {
                 c.setState(CardStateName.RightSplit, false);
                 c.setImageKey(originalPicture);
             } else if (c.isAdventureCard()) {
-                c.setState(CardStateName.Adventure, false);
+                c.setState(CardStateName.Secondary, false);
                 c.setImageKey(originalPicture);
             } else if (c.canSpecialize()) {
                 c.setState(CardStateName.SpecializeW, false);
@@ -281,8 +281,12 @@ public class CardFactory {
             } else if (state != CardStateName.Original) {
                 CardFactoryUtil.setupKeywordedAbilities(card);
             }
-            if (state == CardStateName.Adventure) {
-                CardFactoryUtil.setupAdventureAbility(card);
+            if (state == CardStateName.Secondary) {
+                if (card.getState(state).getType().hasSubtype("Adventure")) {
+                    CardFactoryUtil.setupAdventureAbility(card);
+                } else if (card.getState(state).getType().hasSubtype("Omen")) {
+                    CardFactoryUtil.setupOmenAbility(card);
+                }
             }
         }
 
@@ -569,9 +573,9 @@ public class CardFactory {
             ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
             result.put(CardStateName.Original, ret1);
 
-            final CardState ret2 = new CardState(out, CardStateName.Adventure);
-            ret2.copyFrom(in.getState(CardStateName.Adventure), false, sa);
-            result.put(CardStateName.Adventure, ret2);
+            final CardState ret2 = new CardState(out, CardStateName.Secondary);
+            ret2.copyFrom(in.getState(CardStateName.Secondary), false, sa);
+            result.put(CardStateName.Secondary, ret2);
         } else if (in.isTransformable() && sa instanceof SpellAbility && (
                 ApiType.CopyPermanent.equals(((SpellAbility)sa).getApi()) ||
                 ApiType.CopySpellAbility.equals(((SpellAbility)sa).getApi()) ||
