@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (TDM)
+Type:Archived
+Subtype:Arena
+Effective:2025-04-08
+Sets:ANA, ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM
+Banned:Monstrous Rage
