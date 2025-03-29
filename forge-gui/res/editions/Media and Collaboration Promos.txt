@@ -73,3 +73,4 @@ ScryfallCode=PMEI
 20251 R Shock @Randy Gallegos
 20252 R Ancestral Mask @Massimilano Frezzato
 20257 R Duress @Lawrence Snelly
+202510 M Nicol Bolas, Planeswalker @D. Alexander Gregory
