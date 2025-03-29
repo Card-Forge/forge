@@ -7,3 +7,4 @@ ScryfallCode=PF24
 
 [cards]
 1 R Counterspell @Ryan Valle
+F2 R Convention Maro @Mark Rosewater

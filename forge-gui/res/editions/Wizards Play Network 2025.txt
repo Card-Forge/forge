@@ -7,3 +7,5 @@ ScryfallCode=PW25
 
 [cards]
 1 R Rishkar's Expertise @Magali Villeneuve
+2 R Dragon's Hoard @Adam Paquette
+3 R Dragonspeaker Shaman @Yigit Koroglu
