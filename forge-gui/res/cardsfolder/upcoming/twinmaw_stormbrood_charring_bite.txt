@@ -1,0 +1,17 @@
+Name:Twinmaw Stormbrood
+ManaCost:5 W
+Types:Creature Dragon
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 5 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 5
+AlternateMode:Omen
+Oracle:Flying\nWhen this creature enters, you gain 5 life.
+
+ALTERNATE
+
+Name:Charring Bite
+ManaCost:1 R
+Types:Sorcery Omen
+A:SP$ DealDamage | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature without flying. (Then shuffle this card into its owner's library.)
+Oracle:Charring Bite deals 5 damage to target creature without flying. (Then shuffle this card into its owner's library.)

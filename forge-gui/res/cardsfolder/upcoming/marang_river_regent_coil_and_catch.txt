@@ -1,0 +1,18 @@
+Name:Marang River Regent
+ManaCost:4 U U
+Types:Creature Dragon
+PT:6/7
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature enters, return up to two other target nonland permanents to their owners' hands.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.Other+nonLand | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to two other target nonland permanents
+AlternateMode:Omen
+Oracle:Flying\nWhen this creature enters, return up to two other target nonland permanents to their owners' hands.
+
+ALTERNATE
+
+Name:Coil and Catch
+ManaCost:3 U
+Types:Instant Omen
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Draw three cards, then discard a card. (Then shuffle this card into its owner's library.)
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Draw three cards, then discard a card. (Then shuffle this card into its owner's library.)
