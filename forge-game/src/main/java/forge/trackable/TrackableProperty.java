@@ -67,7 +67,6 @@ public enum TrackableProperty {
     ChosenType2(TrackableTypes.StringType),
     NotedTypes(TrackableTypes.StringListType),
     ChosenColors(TrackableTypes.StringListType),
-    ChosenColorID(TrackableTypes.StringSetType),
     ChosenCards(TrackableTypes.CardViewCollectionType),
     ChosenNumber(TrackableTypes.StringType),
     StoredRolls(TrackableTypes.StringListType),
@@ -102,6 +101,7 @@ public enum TrackableProperty {
     NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     NeedsUntapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
+    MarkedColors(TrackableTypes.ColorSetType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     ExiledCards(TrackableTypes.CardViewCollectionType),

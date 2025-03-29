@@ -262,7 +262,11 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "???", "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
+    /**
+     * Equivalent to the set code of CardEdition.UNKNOWN
+     */
+    public static final String UNKNOWN_CODE = "???";
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", UNKNOWN_CODE, "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
     private Date date;
     private String code;
     private String code2;

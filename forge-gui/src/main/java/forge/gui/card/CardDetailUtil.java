@@ -129,7 +129,7 @@ public class CardDetailUtil {
     }
 
     public static String getCurrentColors(final CardStateView c) {
-        return c.getColors().toEnumSet().stream().map(MagicColor.Color::getSymbol).collect(Collectors.joining());
+        return c.getColors().stream().map(MagicColor.Color::getSymbol).collect(Collectors.joining());
     }
 
     public static DetailColors getRarityColor(final CardRarity rarity) {
@@ -450,10 +450,10 @@ public class CardDetailUtil {
         }
 
         // chosen spire
-        if (card.getChosenColorID() != null && !card.getChosenColorID().isEmpty()) {
+        if (card.getMarkedColors() != null && !card.getMarkedColors().isColorless()) {
             area.append("\n");
             area.append("(").append(Localizer.getInstance().getMessage("lblSelected")).append(": ");
-            area.append(Lang.joinHomogenous(card.getChosenColorID().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
+            area.append(Lang.joinHomogenous(card.getMarkedColors().stream().map(MagicColor.Color::getLocalizedName).collect(Collectors.toList())));
             area.append(")");
         }
 

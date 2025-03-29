@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -510,11 +511,11 @@ public class QuestWinLoseController {
             final List<GameFormat> formats = new ArrayList<>();
             final String preferredFormat = FModel.getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
-            GameFormat pref = null;
+            Collection<GameFormat> pref = null;
             for (final GameFormat f : FModel.getFormats().getSanctionedList()) {
                 formats.add(f);
                 if (f.toString().equals(preferredFormat)) {
-                    pref = f;
+                    pref = List.of(f);
                 }
             }
 

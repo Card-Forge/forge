@@ -44,6 +44,8 @@ public class Reward {
         this.card = card;
         count = 0;
         this.isNoSell = isNoSell;
+        if(isNoSell)
+            this.card = card.getNoSellVersion();
     }
 
     public Reward(Type type, int count) {
@@ -60,6 +62,10 @@ public class Reward {
         this.deck = deck;
         count = 0;
         this.isNoSell = isNoSell;
+        if(isNoSell)
+            deck.getTags().add("noSell");
+        //Could go through the deck and replace everything in it with the noSellValue version but the tag should
+        //handle that later.
     }
 
     public PaperCard getCard() {

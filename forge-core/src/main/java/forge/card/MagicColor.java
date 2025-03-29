@@ -1,6 +1,7 @@
 package forge.card;
 
 import com.google.common.collect.ImmutableList;
+import forge.deck.DeckRecognizer;
 
 /**
  * Holds byte values for each color magic has.
@@ -187,6 +188,12 @@ public final class MagicColor {
         public String getName() {
             return name;
         }
+
+        public String getLocalizedName() {
+            //Should probably move some of this logic back here, or at least to a more general location.
+            return DeckRecognizer.getLocalisedMagicColorName(getName());
+        }
+
         public byte getColormask() {
             return colormask;
         }
