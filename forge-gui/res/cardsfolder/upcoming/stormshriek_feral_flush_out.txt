@@ -1,0 +1,17 @@
+Name:Stormshriek Feral
+ManaCost:4 R
+Types:Creature Dragon
+PT:3/3
+K:Flying
+K:Haste
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | SpellDescription$ This creature gets +1/+0 until end of turn.
+AlternateMode:Omen
+Oracle:Flying, haste\n{1}{R}: This creature gets +1/+0 until end of turn.
+
+ALTERNATE
+
+Name:Flush Out
+ManaCost:1 R
+Types:Sorcery Omen
+A:SP$ Draw | UnlessCost$ Discard<1/Card> | NumCards$ 2 | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Discard a card. If you do, draw two cards. (Then shuffle this card into its owner's library.)
+Oracle:Discard a card. If you do, draw two cards. (Then shuffle this card into its owner's library.)

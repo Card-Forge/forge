@@ -1,0 +1,17 @@
+Name:Sagu Wildling
+ManaCost:4 G
+Types:Creature Dragon
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+AlternateMode:Omen
+Oracle:Flying\nWhen this creature enters, you gain 3 life.
+
+ALTERNATE
+
+Name:Roost Seek
+ManaCost:G
+Types:Sorcery Omen
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle. (Also shuffle this card.)
+Oracle:Search your library for a basic land card, reveal it, put it into your hand, then shuffle. (Also shuffle this card.)

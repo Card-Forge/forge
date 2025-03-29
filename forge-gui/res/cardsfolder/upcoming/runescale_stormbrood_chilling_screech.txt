@@ -1,0 +1,17 @@
+Name:Runescale Stormbrood
+ManaCost:3 R
+Types:Creature Dragon
+PT:2/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature,Dragon | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a noncreature spell or a Dragon spell, this creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2
+AlternateMode:Omen
+Oracle:Flying\nWhenever you cast a noncreature spell or a Dragon spell, this creature gets +2/+0 until end of turn.
+
+ALTERNATE
+
+Name:Chilling Screech
+ManaCost:1 U
+Types:Instant Omen
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 2 or less | ValidTgts$ Card.cmcLE2 | SpellDescription$ Counter target spell with mana value 2 or less. (Then shuffle this card into its owner's library.)
+Oracle:Counter target spell with mana value 2 or less. (Then shuffle this card into its owner's library.)
