@@ -36,7 +36,7 @@ public enum TrackableProperty {
     Manifested(TrackableTypes.BooleanType),
     Cloaked(TrackableTypes.BooleanType),
     Modal(TrackableTypes.BooleanType),
-    Adventure(TrackableTypes.BooleanType),
+    Secondary(TrackableTypes.BooleanType),
     DoubleFaced(TrackableTypes.BooleanType),
 
     //TODO?

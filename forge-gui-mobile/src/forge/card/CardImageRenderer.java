@@ -499,7 +499,7 @@ public class CardImageRenderer {
     private static final TextRenderer cardTextRenderer = new TextRenderer(true);
 
     private static void drawTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop, boolean useCardBGTexture, boolean noText, boolean altstate, boolean isFacedown, boolean canShow, boolean isChoiceList) {
-        if (card.isAdventureCard()) {
+        if (card.hasSecondaryState()) {
             Color[] altcolors = FSkinColor.tintColors(Color.WHITE, fillColorBackground(g, CardDetailUtil.getBorderColors(card.getState(true), canShow) , x, y, w, h), CardRenderer.NAME_BOX_TINT);
             if ((isFacedown && !altstate) || card.getZone() == ZoneType.Stack || isChoiceList || altstate) {
                 setTextBox(g, card, state, colors, x, y, w, h, onTop, useCardBGTexture, noText, 0f, 0f, false, altstate, isFacedown);
@@ -671,7 +671,7 @@ public class CardImageRenderer {
                 // draw left textbox text
                 if (noText)
                     return;
-                if (card.isAdventureCard()) {
+                if (card.hasSecondaryState()) {
                     CardView cv = card.getBackup();
                     if (cv == null || isFaceDown)
                         cv = card;
@@ -686,7 +686,7 @@ public class CardImageRenderer {
             } else {
                 if (noText)
                     return;
-                if (card.isAdventureCard()) {
+                if (card.hasSecondaryState()) {
                     CardView cv = card.getBackup();
                     if (cv == null || isFaceDown)
                         cv = card;
