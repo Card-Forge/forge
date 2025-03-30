@@ -7,7 +7,7 @@ T:Mode$ ChangesZoneAll | ValidCards$ Land.YouOwn+!token | Origin$ Any | Destinat
 SVar:TrigLifegain:DB$ GainLife | LifeAmount$ 2
 T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | SVarCompare$ GE4 | IsPresent$ Card.Self+YouOwn | IsPresent2$ Land.YouCtrl+YouOwn+namedArgoth; Sanctum of Nature | ValidPlayer$ You | Execute$ Meld | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if there are four or more land cards in your graveyard and you both own and control CARDNAME and a land named Argoth, Sanctum of Nature, exile them, then meld them into Titania, Gaea Incarnate.
 SVar:Meld:DB$ Meld | Name$ Titania, Gaea Incarnate | Primary$ Titania, Voice of Gaea | Secondary$ Argoth, Sanctum of Nature | SecondaryType$ Land
-SVar:X:Count$TypeInYourYard.Land
+SVar:X:Count$ValidGraveyard Land.YouOwn
 DeckHas:Ability$Graveyard|Counters|LifeGain
 DeckHints:Ability$Discard|Mill|Graveyard|Dredge & Name$Argoth, Sanctum of Nature
 MeldPair:Argoth, Sanctum of Nature

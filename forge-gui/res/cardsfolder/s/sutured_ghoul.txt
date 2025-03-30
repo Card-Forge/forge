@@ -11,6 +11,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | SetPower$ TotalPower | SetToughness$ TotalToughness | Description$ CARDNAME's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
 SVar:TotalPower:Remembered$CardPower
 SVar:TotalToughness:Remembered$CardToughness
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 AI:RemoveDeck:Random
 Oracle:Trample\nAs Sutured Ghoul enters, exile any number of creature cards from your graveyard.\nSutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
