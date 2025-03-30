@@ -3,7 +3,7 @@ ManaCost:2 BG BG BG
 Types:Sorcery
 K:Retrace
 A:SP$ Token | TokenAmount$ X | TokenScript$ bg_1_1_worm | TokenOwner$ You | SpellDescription$ Create a 1/1 black and green Worm creature token for each land card in your graveyard.
-SVar:X:Count$TypeInYourYard.Land
+SVar:X:Count$ValidGraveyard Land.YouOwn
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$ValidGraveyard Land.YouOwn
 Oracle:Create a 1/1 black and green Worm creature token for each land card in your graveyard.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
