@@ -3,7 +3,7 @@ ManaCost:5 R R
 Types:Creature Dragon
 PT:4/4
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each land card in your graveyard.
-SVar:X:Count$TypeInYourYard.Land
+SVar:X:Count$ValidGraveyard Land.YouOwn
 K:Flying
 K:Haste
 Oracle:This spell costs {1} less to cast for each land card in your graveyard.\nFlying, haste

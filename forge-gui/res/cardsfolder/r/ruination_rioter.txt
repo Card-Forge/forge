@@ -4,5 +4,5 @@ Types:Creature Human Berserker
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When CARDNAME dies, you may have it deal damage to any target equal to the number of land cards in your graveyard.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
-SVar:X:Count$TypeInYourYard.Land
+SVar:X:Count$ValidGraveyard Land.YouOwn
 Oracle:When Ruination Rioter dies, you may have it deal damage to any target equal to the number of land cards in your graveyard.

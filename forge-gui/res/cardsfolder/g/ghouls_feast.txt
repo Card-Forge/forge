@@ -2,5 +2,5 @@ Name:Ghoul's Feast
 ManaCost:1 B
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 Oracle:Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.

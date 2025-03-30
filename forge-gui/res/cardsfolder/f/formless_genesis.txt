@@ -4,6 +4,6 @@ Types:Kindred Sorcery Shapeshifter
 K:Changeling
 A:SP$ Token | TokenAmount$ 1 | TokenScript$ c_x_x_shapeshifter_changeling_deathtouch | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X colorless Shapeshifter creature token with changeling and deathtouch, where X is the number of land cards in your graveyard.
 K:Retrace
-SVar:X:Count$TypeInYourYard.Land
+SVar:X:Count$ValidGraveyard Land.YouOwn
 DeckHas:Ability$Token
 Oracle:Changeling (This card is every creature type.)\nCreate an X/X colorless Shapeshifter creature token with changeling and deathtouch, where X is the number of land cards in your graveyard.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

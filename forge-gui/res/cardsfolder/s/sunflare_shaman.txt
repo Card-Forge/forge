@@ -5,6 +5,6 @@ PT:2/1
 A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Any | NumDmg$ X | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard.
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | Defined$ Self | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
-SVar:X:Count$TypeInYourYard.Elemental
+SVar:X:Count$ValidGraveyard Elemental.YouOwn
 AI:RemoveDeck:Random
 Oracle:{1}{R}, {T}: Sunflare Shaman deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard.
