@@ -565,8 +565,8 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     }
 
     protected IHasSVars getSVarFallback() {
-        if (this.getKeyword() != null && this.getKeyword().getStatic() != null) {
-            return this.getKeyword().getStatic();
+        if (this.getKeyword() != null) {
+            return this.getKeyword();
         }
         if (getCardState() != null)
             return getCardState();

@@ -2,11 +2,14 @@ package forge.game.keyword;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
+import forge.game.IHasSVars;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
@@ -22,6 +25,7 @@ import io.sentry.Sentry;
 public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
     private Card hostCard = null;
     private boolean intrinsic = false;
+    protected Map<String, String> sVars = Maps.newTreeMap();
 
     private Keyword keyword;
     private String original;
@@ -381,4 +385,51 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         idx = i;
     }
 
+    protected IHasSVars getSVarFallback() {
+        if (getStatic() != null) {
+            return getStatic();
+        }
+        return getHostCard();
+    }
+
+    @Override
+    public String getSVar(final String name) {
+        if (sVars.containsKey(name)) {
+            return sVars.get(name);
+        }
+        return getSVarFallback().getSVar(name);
+    }
+
+    @Override
+    public boolean hasSVar(final String name) {
+        return sVars.containsKey(name) || getSVarFallback().hasSVar(name);
+    }
+
+    @Override
+    public final void setSVar(final String name, final String value) {
+        sVars.put(name, value);
+    }
+
+    @Override
+    public Map<String, String> getSVars() {
+        Map<String, String> res = Maps.newHashMap(getSVarFallback().getSVars());
+        res.putAll(sVars);
+        return res;
+    }
+
+    @Override
+    public Map<String, String> getDirectSVars() {
+        return sVars;
+    }
+
+    @Override
+    public void setSVars(Map<String, String> newSVars) {
+        sVars = Maps.newTreeMap();
+        sVars.putAll(newSVars);
+    }
+
+    @Override
+    public void removeSVar(String var) {
+        sVars.remove(var);
+    }
 }

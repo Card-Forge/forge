@@ -1,0 +1,7 @@
+Name:Infantry Shield
+ManaCost:2 R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Menace & Mobilize:X | Description$ Equipped creature has menace and mobilize X, where X is its power. (Whenever this creature attacks, create X tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)
+SVar:X:Count$CardPower
+K:Equip:2
+Oracle:Equipped creature has menace and mobilize X, where X is its power. (Whenever this creature attacks, create X tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)\nEquip {2}

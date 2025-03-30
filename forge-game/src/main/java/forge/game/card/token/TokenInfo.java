@@ -281,7 +281,11 @@ public class TokenInfo {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
 
-        String edition = ObjectUtils.firstNonNull(sa.getOriginalHost(), host).getSetCode();
+        Card editionHost = sa.getOriginalHost();
+        if (sa.getKeyword() != null && sa.getKeyword().getStatic() != null) {
+            editionHost = sa.getKeyword().getStatic().getHostCard();
+        }
+        String edition = ObjectUtils.firstNonNull(editionHost, host).getSetCode();
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
 
         if (token == null) {
