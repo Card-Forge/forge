@@ -3,6 +3,7 @@ Code=YMKM
 Date=2024-03-05
 Name=Alchemy: Karlov Manor
 Type=Online
+Booster=1 UncommonRareMythic,8 Common:fromsheet("MKM cards"), 3 Uncommon:fromSheet("MKM cards"), 1 UncommonRareMythic:fromSheet("MKM cards"), 1 RareMythic:fromSheet("MKM cards"), 1 BasicLand:fromSheet("MKM cards")
 ScryfallCode=YMKM
 
 [cards]

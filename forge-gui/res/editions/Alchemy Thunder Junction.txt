@@ -3,6 +3,7 @@ Code=YOTJ
 Date=2024-05-07
 Name=Alchemy: Thunder Junction
 Type=Online
+Booster=1 UncommonRareMythic,8 Common:fromsheet("OTJ cards"), 3 Uncommon:fromSheet("OTJ cards"), 1 UncommonRareMythic:fromSheet("OTJ cards"), 1 RareMythic:fromSheet("OTJ cards"), 1 BasicLand:fromSheet("OTJ cards")
 ScryfallCode=YOTJ
 
 [cards]
