@@ -2,6 +2,7 @@ package forge.game.keyword;
 
 import java.util.Collection;
 
+import forge.game.IHasSVars;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -9,7 +10,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 
-public interface KeywordInterface extends Cloneable {
+public interface KeywordInterface extends Cloneable, IHasSVars {
 
     Card getHostCard();
     void setHostCard(final Card host);

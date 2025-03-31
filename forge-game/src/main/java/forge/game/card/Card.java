@@ -5575,10 +5575,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (StringUtils.isNumeric(s)) {
                count += Integer.parseInt(s);
             } else {
-                StaticAbility st = inst.getStatic();
                 // TODO make keywordinterface inherit from CardTrait somehow, or invent new interface
-                if (st != null && st.hasSVar(s)) {
-                    count += AbilityUtils.calculateAmount(this, st.getSVar(s), null);
+                if (inst.hasSVar(s)) {
+                    count += AbilityUtils.calculateAmount(this, inst.getSVar(s), null);
                 } else {
                     String svar = StringUtils.join(parse);
                     if (state.hasSVar(svar)) {
