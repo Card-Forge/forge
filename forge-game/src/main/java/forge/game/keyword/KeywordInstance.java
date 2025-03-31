@@ -24,7 +24,6 @@ import io.sentry.Sentry;
 public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
     private Card hostCard = null;
     private boolean intrinsic = false;
-    protected Map<String, String> sVars = Maps.newTreeMap();
 
     private Keyword keyword;
     private String original;
