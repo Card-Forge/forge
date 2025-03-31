@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import forge.game.IHasSVars;
 import forge.game.card.Card;
@@ -394,42 +393,34 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
 
     @Override
     public String getSVar(final String name) {
-        if (sVars.containsKey(name)) {
-            return sVars.get(name);
-        }
         return getSVarFallback().getSVar(name);
     }
 
     @Override
     public boolean hasSVar(final String name) {
-        return sVars.containsKey(name) || getSVarFallback().hasSVar(name);
+        return getSVarFallback().hasSVar(name);
     }
 
     @Override
     public final void setSVar(final String name, final String value) {
-        sVars.put(name, value);
+        
     }
 
     @Override
     public Map<String, String> getSVars() {
-        Map<String, String> res = Maps.newHashMap(getSVarFallback().getSVars());
-        res.putAll(sVars);
-        return res;
+        return getSVarFallback().getSVars();
     }
 
     @Override
     public Map<String, String> getDirectSVars() {
-        return sVars;
+        return null;
     }
 
     @Override
     public void setSVars(Map<String, String> newSVars) {
-        sVars = Maps.newTreeMap();
-        sVars.putAll(newSVars);
     }
 
     @Override
     public void removeSVar(String var) {
-        sVars.remove(var);
     }
 }
