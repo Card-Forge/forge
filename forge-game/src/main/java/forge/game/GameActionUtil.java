@@ -183,6 +183,38 @@ public final class GameActionUtil {
                         flashback.setKeyword(inst);
                         flashback.setIntrinsic(inst.isIntrinsic());
                         alternatives.add(flashback);
+                    } else if (keyword.startsWith("Harmonize")) {
+                        if (!source.isInZone(ZoneType.Graveyard)) {
+                            continue;
+                        }
+
+                        // if source has No Mana cost, and flashback doesn't have own one,
+                        // flashback can't work
+                        if (keyword.equals("Harmonize") && source.getManaCost().isNoCost()) {
+                            continue;
+                        }
+
+                        SpellAbility flashback = null;
+
+                        // there is a flashback cost (and not the cards cost)
+                        if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
+                            final String[] k = keyword.split(":");
+                            flashback = sa.copyWithManaCostReplaced(activator, new Cost(k[1], false));
+                            String extraParams =  k.length > 2 ? k[2] : "";
+                            if (!extraParams.isEmpty()) {
+                                for (Map.Entry<String, String> param : AbilityFactory.getMapParams(extraParams).entrySet()) {
+                                    flashback.putParam(param.getKey(), param.getValue());
+                                }
+                            }
+                        } else { // same cost as original (e.g. Otaria plane)
+                            flashback = sa.copy(activator);
+                        }
+                        flashback.addAnnounceVar("Harmonize");
+                        flashback.setAlternativeCost(AlternativeCost.Harmonize);
+                        flashback.getRestrictions().setZone(ZoneType.Graveyard);
+                        flashback.setKeyword(inst);
+                        flashback.setIntrinsic(inst.isIntrinsic());
+                        alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
                         if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.enteredThisTurn() ||
