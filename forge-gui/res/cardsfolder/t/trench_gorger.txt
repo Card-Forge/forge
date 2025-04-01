@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Land | ChangeNum$ X | RememberChanged$ True | SubAbility$ TrenchAnimate | ShuffleNonMandatory$ True
 SVar:TrenchAnimate:DB$ Animate | Power$ Y | Toughness$ Y | Duration$ Permanent | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$TypeInYourLibrary.Land
+SVar:X:Count$ValidLibrary Land.YouCtrl
 SVar:Y:Remembered$Amount
 AI:RemoveDeck:All
 Oracle:Trample\nWhen Trench Gorger enters, you may search your library for any number of land cards, exile them, then shuffle. If you do, Trench Gorger has base power and base toughness each equal to the number of cards exiled this way.

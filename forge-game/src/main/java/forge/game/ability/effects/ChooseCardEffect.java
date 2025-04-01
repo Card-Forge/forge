@@ -131,7 +131,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 }
             } else if (sa.hasParam("ChooseEach")) {
                 final String s = sa.getParam("ChooseEach");
-                final String[] types = s.equals("Party") ? new String[]{"Cleric","Thief","Warrior","Wizard"}
+                final String[] types = s.equals("Party") ? new String[]{"Cleric","Rogue","Warrior","Wizard"}
                      : s.split(" & ");
                 for (final String type : types) {
                     CardCollection valids = CardLists.filter(pChoices, CardPredicates.isType(type));

@@ -71,7 +71,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         else if (sa.hasParam("DefinedCards")) {
             repeatCards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
         }
-        boolean loopOverCards = repeatCards != null && !repeatCards.isEmpty();
 
         if (sa.hasParam("ClearRemembered")) {
             source.clearRemembered();
@@ -89,7 +88,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             sa.setLoseLifeMap(Maps.newHashMap());
         }
 
-        if (loopOverCards) {
+        if (repeatCards != null && !repeatCards.isEmpty()) {
             if (sa.hasParam("ChooseOrder") && repeatCards.size() > 1) {
                 final Player chooser = sa.getParam("ChooseOrder").equals("True") ? activator :
                         AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);

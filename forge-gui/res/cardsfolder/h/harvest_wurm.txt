@@ -8,5 +8,5 @@ SVar:DBSac:DB$ Sacrifice | SubAbility$ DBCleanup | ConditionCheckSVar$ X | Condi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE1
-SVar:Y:Count$TypeInYourYard.Basic
+SVar:Y:Count$ValidGraveyard Land.Basic+YouOwn
 Oracle:When Harvest Wurm enters, sacrifice it unless you return a basic land card from your graveyard to your hand.

@@ -7,7 +7,7 @@ SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ ExileFromGrave<2/card> | Exe
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature to return from your graveyard
 SVar:NeedsToPlayVar:Z EQ3
 SVar:X:Count$InYourYard/LimitMax.3
-SVar:Y:Count$TypeInYourYard.Creature/LimitMax.1
+SVar:Y:Count$ValidGraveyard Creature.YouOwn/LimitMax.1
 SVar:Z:SVar$X/Times.Y
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Discard

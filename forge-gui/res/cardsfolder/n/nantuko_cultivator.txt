@@ -7,7 +7,7 @@ SVar:TrigNantukoDiscardLand:DB$ Discard | DiscardValid$ Land | NumCards$ Nantuko
 SVar:DBNantukoPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ NantukoY | SubAbility$ DBNantukoDraw
 SVar:DBNantukoDraw:DB$ Draw | NumCards$ NantukoY | SubAbility$ DBNantukoCleanup
 SVar:DBNantukoCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:NantukoX:Count$TypeInYourHand.Land
+SVar:NantukoX:Count$ValidHand Land.YouOwn
 SVar:NantukoY:Remembered$Amount
 AI:RemoveDeck:All
 DeckHas:Ability$Counters

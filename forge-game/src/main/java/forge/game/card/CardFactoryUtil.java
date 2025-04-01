@@ -1067,8 +1067,7 @@ public class CardFactoryUtil {
                     " | IsPresent$ Card.Self+cameUnderControlSinceLastUpkeep | Secondary$ True | " +
                     "TriggerDescription$ " + inst.getReminderText();
 
-            String effect = "DB$ Sacrifice | SacValid$ Self | "
-                    + "Echo$ " + cost;
+            String effect = "DB$ Sacrifice | SacValid$ Self | Echo$ " + cost;
 
             final Trigger trigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
