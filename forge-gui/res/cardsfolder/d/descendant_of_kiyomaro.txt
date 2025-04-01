@@ -5,6 +5,6 @@ PT:2/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | AddTrigger$ TriggerGainLife | AddSVar$ KiyomaroGainLife | CheckSVar$ X | SVarCompare$ GTY | Description$ As long as you have more cards in hand than each opponent, CARDNAME gets +1/+2 and has "Whenever this creature deals combat damage, you gain 3 life."
 SVar:TriggerGainLife:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ KiyomaroGainLife | TriggerDescription$ Whenever this creature deals combat damage, you gain 3 life.
 SVar:KiyomaroGainLife:DB$ GainLife | LifeAmount$ 3
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 SVar:Y:PlayerCountOpponents$HighestCardsInHand
 Oracle:As long as you have more cards in hand than each opponent, Descendant of Kiyomaro gets +1/+2 and has "Whenever this creature deals combat damage, you gain 3 life."

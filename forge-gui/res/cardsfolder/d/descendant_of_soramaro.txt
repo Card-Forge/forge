@@ -3,5 +3,5 @@ ManaCost:3 U
 Types:Creature Human Wizard
 PT:2/3
 A:AB$ RearrangeTopOfLibrary | Cost$ 1 U | Defined$ You | NumCards$ X | SpellDescription$ Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 Oracle:{1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.

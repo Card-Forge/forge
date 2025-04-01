@@ -9,8 +9,8 @@ SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPla
 SVar:DBChooseSb:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Card.Creature+YouOwn | ChoiceZone$ Sideboard | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Hand | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
-SVar:NumInLib:Count$InYourLibrary
-SVar:NumInHand:Count$InYourHand
+SVar:NumInLib:Count$ValidLibrary Card.YouOwn+sharesNameWith Remembered
+SVar:NumInHand:Count$ValidHand Card.YouOwn+sharesNameWith Remembered
 SVar:X:Count$RememberedSize/Plus.Y
 SVar:Y:Count$ImprintedSize
 Oracle:When Grizzled Huntmaster enters, you may exile a creature card from your hand. If you do, search your hand and library for any number of cards with the same name, exile them, then shuffle. Choose a creature card you own from outside the game. Conjure a duplicate of that card into your hand for each card exiled from your hand this way.

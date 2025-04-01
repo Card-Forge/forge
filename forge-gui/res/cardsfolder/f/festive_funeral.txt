@@ -2,5 +2,5 @@ Name:Festive Funeral
 ManaCost:4 B
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard.
-SVar:X:Count$InYourYard
+SVar:X:Count$ValidGraveyard Card.YouOwn
 Oracle:Target creature gets -X/-X until end of turn, where X is the number of cards in your graveyard.

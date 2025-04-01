@@ -8,5 +8,5 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ DBDraw | FalseSubAbility$ DBDiscard
 SVar:DBDraw:DB$ Draw
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 Oracle:You may play an additional land on each of your turns.\nWhenever you play a land or cast a spell, draw a card if you have no cards in hand. Otherwise, discard a card.

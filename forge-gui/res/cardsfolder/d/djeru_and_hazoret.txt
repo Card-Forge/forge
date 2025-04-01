@@ -8,7 +8,7 @@ SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ChangeValid$ 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast this card without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 SVar:PlayMain1:TRUE
 SVar:HasAttackEffect:TRUE
 DeckNeeds:Type$Legendary

@@ -8,5 +8,5 @@ SVar:DoNothing:DB$ Cleanup | SpellDescription$ No
 SVar:DBDraw:DB$ Draw | NumCards$ 3 | ConditionDefined$ Imprinted | ConditionZone$ Exile | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:NeedsToPlayVar:X LE4
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 Oracle:Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.

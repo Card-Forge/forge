@@ -8,6 +8,6 @@ SVar:DBKhorne:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 8 | SubAbility
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:NeedsToPlayVar:Y LE3
-SVar:Y:Count$InYourHand
+SVar:Y:Count$ValidHand Card.YouOwn
 DeckHas:Ability$Discard
 Oracle:This spell costs {1} less to cast for each creature that died this turn.\nDiscard your hand, then draw eight cards. Blood for the Blood God! deals 8 damage to each opponent. Exile Blood for the Blood God!.

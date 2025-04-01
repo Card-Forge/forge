@@ -3,5 +3,5 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each card in your hand.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 Oracle:Equipped creature gets +1/+1 for each card in your hand.\nEquip {2}
