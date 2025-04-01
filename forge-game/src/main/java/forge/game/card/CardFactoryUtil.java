@@ -1711,8 +1711,7 @@ public class CardFactoryUtil {
                     + " | IsPresent$ Card.Self+!IsRenowned | CombatDamage$ True | Secondary$ True"
                     + " | TriggerDescription$ Renown " + k[1] +" (" + inst.getReminderText() + ")";
 
-            final String effect = "DB$ PutCounter | Defined$ Self | "
-                    + "CounterType$ P1P1 | CounterNum$ " + k[1];
+            final String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + k[1];
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(renownTrig, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -3635,8 +3634,7 @@ public class CardFactoryUtil {
 
             newSA.setAlternativeCost(AlternativeCost.Surge);
 
-            String desc = "Surge " + surgeCost.toSimpleString() + " (" + inst.getReminderText()
-                    + ")";
+            String desc = "Surge " + surgeCost.toSimpleString() + " (" + inst.getReminderText() + ")";
             newSA.setDescription(desc);
 
             newSA.setIntrinsic(intrinsic);
@@ -4004,7 +4002,7 @@ public class CardFactoryUtil {
                     + " | Description$ Harmonize (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(raiseEffect, state.getCard(), state, intrinsic));
             String reduceEffect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell.Harmonize | Secondary$ True"
-                    + " | Amount$ Harmonize | EffectZone$ All | CheckSVar$ Count$OptionalGenericCostPaid.1.0"
+                    + " | Amount$ Harmonize | EffectZone$ All | CheckSVar$ Harmonize"
                     + " | Description$ Harmonize (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(reduceEffect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Hexproof")) {
