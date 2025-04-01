@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Instant
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Put any number of target creature cards from your graveyard on top of your library. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 AI:RemoveDeck:All
 Oracle:Put any number of target creature cards from your graveyard on top of your library.\nDraw a card.

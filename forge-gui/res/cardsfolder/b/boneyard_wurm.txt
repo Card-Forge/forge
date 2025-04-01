@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Wurm
 PT:*/*
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 SVar:NeedsToPlayVar:X GE1
 Oracle:Boneyard Wurm's power and toughness are each equal to the number of creature cards in your graveyard.

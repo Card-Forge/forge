@@ -2,6 +2,6 @@ Name:Scrapyard Salvo
 ManaCost:1 R R
 Types:Sorcery
 A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player or planeswalker equal to the number of artifact cards in your graveyard.
-SVar:X:Count$TypeInYourYard.Artifact
+SVar:X:Count$ValidGraveyard Artifact.YouOwn
 AI:RemoveDeck:Random
 Oracle:Scrapyard Salvo deals damage to target player or planeswalker equal to the number of artifact cards in your graveyard.

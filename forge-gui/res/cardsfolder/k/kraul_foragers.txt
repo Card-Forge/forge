@@ -4,5 +4,5 @@ Types:Creature Insect Scout
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Undergrowth — When CARDNAME enters, you gain 1 life for each creature card in your graveyard.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 Oracle:Undergrowth — When Kraul Foragers enters, you gain 1 life for each creature card in your graveyard.

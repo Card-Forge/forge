@@ -5,5 +5,5 @@ PT:5/7
 K:Reach
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Undergrowth — When you cast this spell, reveal the top X cards of your library, where X is the number of creature cards in your graveyard. You may put a green permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
 SVar:TrigDig:DB$ Dig | DigNum$ X | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Permanent.Green+cmcLEX | DestinationZone$ Battlefield | AILogic$ AtOppEOT | Optional$ True | RestRandomOrder$ True
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 Oracle:Reach\nUndergrowth — When you cast this spell, reveal the top X cards of your library, where X is the number of creature cards in your graveyard. You may put a green permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

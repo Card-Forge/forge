@@ -6,7 +6,7 @@ K:Vigilance
 K:Menace
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Elves you control plus the number of Elf cards in your graveyard.
 SVar:X:Count$Valid Elf.YouCtrl/Plus.Y
-SVar:Y:Count$TypeInYourYard.Elf
+SVar:Y:Count$ValidGraveyard Elf.YouOwn
 SVar:NeedsToPlayVar:X GE1
 SVar:BuffedBy:Elf
 DeckNeeds:Type$Elf

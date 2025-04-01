@@ -4,6 +4,6 @@ Types:Creature Human Wizard
 PT:1/2
 A:AB$ Pump | Cost$ B T | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent with at least two fewer creature cards in their graveyard than you | CheckSVar$ X | SVarCompare$ GEY | SubAbility$ DeadKeepersDestroy | StackDescription$ None | SpellDescription$ Choose target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability. Destroy target nonblack creature that player controls.
 SVar:DeadKeepersDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack+TargetedPlayerCtrl | TgtPrompt$ Select target nonblack creature targeted player controls
-SVar:X:Count$TypeInYourYard.Creature/Minus.2
-SVar:Y:Count$TypeInOppYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn/Minus.2
+SVar:Y:Count$ValidGraveyard Creature.OppOwn
 Oracle:{B}, {T}: Choose target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability. Destroy target nonblack creature that player controls.

@@ -19,7 +19,7 @@ Colors:black
 Types:Creature Vampire Knight
 PT:*/*
 S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 A:AB$ Pump | Cost$ 1 B Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn.
 SVar:DBTap:DB$ Tap | Defined$ Self | StackDescription$ SpellDescription | SpellDescription$ Tap it.
 SVar:AIPreference:DiscardCost$Creature
