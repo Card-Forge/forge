@@ -206,6 +206,7 @@ public final class GameActionUtil {
                         } else {
                             harmonize = sa.copy(activator);
                         }
+                        harmonize.getDirectSVars().put("Harmonize", "0");
                         harmonize.setAlternativeCost(AlternativeCost.Harmonize);
                         harmonize.getRestrictions().setZone(ZoneType.Graveyard);
                         harmonize.setKeyword(inst);

@@ -4002,7 +4002,7 @@ public class CardFactoryUtil {
                     + " | Description$ Harmonize (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(raiseEffect, state.getCard(), state, intrinsic));
             String reduceEffect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell.Harmonize | Secondary$ True"
-                    + " | Amount$ Harmonize | EffectZone$ All | CheckSVar$ Harmonize"
+                    + " | Amount$ Harmonize | EffectZone$ All | Relative$ True"
                     + " | Description$ Harmonize (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(reduceEffect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Hexproof")) {
