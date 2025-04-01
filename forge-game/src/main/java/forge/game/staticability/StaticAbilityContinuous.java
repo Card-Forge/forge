@@ -299,7 +299,6 @@ public final class StaticAbilityContinuous {
                 if (params.containsKey("FromDraftNotes")) {
                     addKeywords = Lists.newArrayList(hostCard.getController().getDraftNotes().getOrDefault(params.get("FromDraftNotes"), "").split(","));
                 }
-
             } else if (params.containsKey("ShareRememberedKeywords")) {
                 List<String> kwToShare = Lists.newArrayList();
                 for (final Object o : hostCard.getRemembered()) {
