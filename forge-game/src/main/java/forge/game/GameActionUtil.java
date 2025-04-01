@@ -188,33 +188,29 @@ public final class GameActionUtil {
                             continue;
                         }
 
-                        // if source has No Mana cost, and flashback doesn't have own one,
-                        // flashback can't work
                         if (keyword.equals("Harmonize") && source.getManaCost().isNoCost()) {
                             continue;
                         }
 
-                        SpellAbility flashback = null;
+                        SpellAbility harmonize = null;
 
-                        // there is a flashback cost (and not the cards cost)
-                        if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
+                        if (keyword.contains(":")) {
                             final String[] k = keyword.split(":");
-                            flashback = sa.copyWithManaCostReplaced(activator, new Cost(k[1], false));
+                            harmonize = sa.copyWithManaCostReplaced(activator, new Cost(k[1], false));
                             String extraParams =  k.length > 2 ? k[2] : "";
                             if (!extraParams.isEmpty()) {
                                 for (Map.Entry<String, String> param : AbilityFactory.getMapParams(extraParams).entrySet()) {
-                                    flashback.putParam(param.getKey(), param.getValue());
+                                    harmonize.putParam(param.getKey(), param.getValue());
                                 }
                             }
-                        } else { // same cost as original (e.g. Otaria plane)
-                            flashback = sa.copy(activator);
+                        } else {
+                            harmonize = sa.copy(activator);
                         }
-                        flashback.addAnnounceVar("Harmonize");
-                        flashback.setAlternativeCost(AlternativeCost.Harmonize);
-                        flashback.getRestrictions().setZone(ZoneType.Graveyard);
-                        flashback.setKeyword(inst);
-                        flashback.setIntrinsic(inst.isIntrinsic());
-                        alternatives.add(flashback);
+                        harmonize.setAlternativeCost(AlternativeCost.Harmonize);
+                        harmonize.getRestrictions().setZone(ZoneType.Graveyard);
+                        harmonize.setKeyword(inst);
+                        harmonize.setIntrinsic(inst.isIntrinsic());
+                        alternatives.add(harmonize);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
                         if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.enteredThisTurn() ||
@@ -533,6 +529,13 @@ public final class GameActionUtil {
                 break;
             case Flash:
                 result.getRestrictions().setInstantSpeed(true);
+                break;
+            case Generic:
+                if (sa.isHarmonize()) {
+                    result.addAnnounceVar("Harmonize");
+                    result.getMapParams().put("AnnounceTitle", "power of creature to tap");
+                    result.getDirectSVars().put("Harmonize", "Count$Valid Creature.YouCtrl$GreatestPower");
+                }
                 break;
             default:
                 break;
