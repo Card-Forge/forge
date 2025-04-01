@@ -2,5 +2,5 @@ Name:Blossoming Wreath
 ManaCost:G
 Types:Instant
 A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain life equal to the number of creature cards in your graveyard.
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 Oracle:You gain life equal to the number of creature cards in your graveyard.

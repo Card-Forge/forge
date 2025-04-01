@@ -183,6 +183,34 @@ public final class GameActionUtil {
                         flashback.setKeyword(inst);
                         flashback.setIntrinsic(inst.isIntrinsic());
                         alternatives.add(flashback);
+                    } else if (keyword.startsWith("Harmonize")) {
+                        if (!source.isInZone(ZoneType.Graveyard)) {
+                            continue;
+                        }
+
+                        if (keyword.equals("Harmonize") && source.getManaCost().isNoCost()) {
+                            continue;
+                        }
+
+                        SpellAbility harmonize = null;
+
+                        if (keyword.contains(":")) {
+                            final String[] k = keyword.split(":");
+                            harmonize = sa.copyWithManaCostReplaced(activator, new Cost(k[1], false));
+                            String extraParams =  k.length > 2 ? k[2] : "";
+                            if (!extraParams.isEmpty()) {
+                                for (Map.Entry<String, String> param : AbilityFactory.getMapParams(extraParams).entrySet()) {
+                                    harmonize.putParam(param.getKey(), param.getValue());
+                                }
+                            }
+                        } else {
+                            harmonize = sa.copy(activator);
+                        }
+                        harmonize.setAlternativeCost(AlternativeCost.Harmonize);
+                        harmonize.getRestrictions().setZone(ZoneType.Graveyard);
+                        harmonize.setKeyword(inst);
+                        harmonize.setIntrinsic(inst.isIntrinsic());
+                        alternatives.add(harmonize);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
                         if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.enteredThisTurn() ||
@@ -418,7 +446,8 @@ public final class GameActionUtil {
                         costs.add(new OptionalCostValue(OptionalCost.ReduceG, cost));
                     }
                 } else {
-                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost));
+                    boolean addType = sa.getKeyword() == null || sa.getKeyword() != stAb.getKeyword();
+                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost, addType));
                 }
             }
         }
@@ -491,7 +520,6 @@ public final class GameActionUtil {
         }
         for (OptionalCostValue v : list) {
             result.getPayCosts().add(v.getCost());
-            result.addOptionalCost(v.getType());
 
             // add some extra logic, try to move it to other parts
             switch (v.getType()) {
@@ -502,9 +530,20 @@ public final class GameActionUtil {
             case Flash:
                 result.getRestrictions().setInstantSpeed(true);
                 break;
+            case Generic:
+                if (sa.isHarmonize() && !v.addsType()) {
+                    result.addAnnounceVar("Harmonize");
+                    result.getMapParams().put("AnnounceTitle", "power of creature to tap");
+                    result.getDirectSVars().put("Harmonize", "Count$Valid Creature.YouCtrl$GreatestPower");
+                    // avoid collision from extrinsic
+                    continue;
+                }
+                break;
             default:
                 break;
             }
+
+            result.addOptionalCost(v.getType());
         }
         return result;
     }

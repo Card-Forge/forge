@@ -1711,8 +1711,7 @@ public class CardFactoryUtil {
                     + " | IsPresent$ Card.Self+!IsRenowned | CombatDamage$ True | Secondary$ True"
                     + " | TriggerDescription$ Renown " + k[1] +" (" + inst.getReminderText() + ")";
 
-            final String effect = "DB$ PutCounter | Defined$ Self | "
-                    + "CounterType$ P1P1 | CounterNum$ " + k[1];
+            final String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + k[1];
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(renownTrig, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -2286,6 +2285,40 @@ public class CardFactoryUtil {
             sb.append("| ValidStackSa$ Spell.Flashback+castKeyword | Description$ Flashback");
 
             if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
+                final String[] k = keyword.split(":");
+                final Cost cost = new Cost(k[1], false);
+                sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
+                sb.append(cost.isOnlyManaCost() ? "" : ".");
+
+                String extraDesc =  k.length > 3 ? k[3] : "";
+                if (!extraDesc.isEmpty()) { // extra params added in GameActionUtil, desc added here
+                    sb.append(cost.isOnlyManaCost() ? ". " : " ").append(extraDesc);
+                }
+            }
+
+            sb.append(" (").append(inst.getReminderText()).append(")");
+
+            String repeffstr = sb.toString();
+
+            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
+
+            SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
+
+            if (!intrinsic) {
+                saExile.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
+
+            re.setOverridingAbility(saExile);
+
+            inst.addReplacement(re);
+        } else if (keyword.startsWith("Harmonize")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
+            sb.append("| ValidStackSa$ Spell.Harmonize+castKeyword | Description$ Harmonize");
+
+            if (keyword.contains(":")) {
                 final String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
@@ -3601,8 +3634,7 @@ public class CardFactoryUtil {
 
             newSA.setAlternativeCost(AlternativeCost.Surge);
 
-            String desc = "Surge " + surgeCost.toSimpleString() + " (" + inst.getReminderText()
-                    + ")";
+            String desc = "Surge " + surgeCost.toSimpleString() + " (" + inst.getReminderText() + ")";
             newSA.setDescription(desc);
 
             newSA.setIntrinsic(intrinsic);
@@ -3964,6 +3996,15 @@ public class CardFactoryUtil {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying+withoutReach | Secondary$ True" +
                     " | Description$ Flying (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.startsWith("Harmonize")) {
+            String raiseEffect = "Mode$ OptionalCost | ValidCard$ Card.Self | ValidSA$ Spell.Harmonize | Secondary$ True"
+                    + " | Cost$ tapXType<1/Creature.powerEQHarmonize/creature for Harmonize> | EffectZone$ All "
+                    + " | Description$ Harmonize (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(raiseEffect, state.getCard(), state, intrinsic));
+            String reduceEffect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell.Harmonize | Secondary$ True"
+                    + " | Amount$ Harmonize | EffectZone$ All | CheckSVar$ Harmonize"
+                    + " | Description$ Harmonize (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(reduceEffect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Hexproof")) {
             final StringBuilder sbDesc = new StringBuilder("Hexproof");
             final StringBuilder sbValid = new StringBuilder();

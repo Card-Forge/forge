@@ -8,5 +8,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Creature.RememberedPlayerCtrl
 AI:RemoveDeck:All
 SVar:NeedsToPlayVar:Z GE1
-SVar:Z:Count$TypeInYourHand.Creature
+SVar:Z:Count$ValidHand Creature.YouOwn
 Oracle:Each player discards a card. Then each player who didn't discard a creature card this way loses 4 life.

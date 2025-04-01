@@ -3,7 +3,7 @@ ManaCost:2 B G
 Types:Creature Fungus Zombie
 PT:2/2
 K:etbCounter:P1P1:X:no Condition:Undergrowth — CARDNAME enters with a number of +1/+1 counters on it equal to the number of creature cards in your graveyard.
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 SVar:NeedsToPlayVar:X GE1
 DeckHas:Ability$Counters
 Oracle:Undergrowth — Rhizome Lurcher enters with a number of +1/+1 counters on it equal to the number of creature cards in your graveyard.

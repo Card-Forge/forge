@@ -6,7 +6,7 @@ K:Trample
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill two cards.
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 SVar:NeedsToPlayVar:X GE1
 DeckHas:Ability$Graveyard
 Oracle:Trample\nSplinterfright's power and toughness are each equal to the number of creature cards in your graveyard.\nAt the beginning of your upkeep, mill two cards.

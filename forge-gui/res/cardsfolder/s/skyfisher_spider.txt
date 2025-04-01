@@ -9,7 +9,7 @@ SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select 
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigGainLife | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may gain 1 life for each creature card in your graveyard. If you do, exile CARDNAME from your graveyard.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ TrigExile
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 DeckHints:Ability$Graveyard|Mill|Dredge|Sacrifice
 DeckHas:Ability$Sacrifice|LifeGain|Graveyard
 Oracle:Reach\nWhen Skyfisher Spider enters, you may sacrifice another creature. When you do, destroy target nonland permanent.\nWhen Skyfisher Spider dies, you may gain 1 life for each creature card in your graveyard. If you do, exile Skyfisher Spider from your graveyard.

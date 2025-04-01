@@ -687,6 +687,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isFlashback() {
         return this.isAlternativeCost(AlternativeCost.Flashback);
     }
+    public boolean isHarmonize() {
+        return this.isAlternativeCost(AlternativeCost.Harmonize);
+    }
 
     public boolean isForetelling() {
         return false;
