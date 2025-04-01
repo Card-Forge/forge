@@ -446,7 +446,8 @@ public final class GameActionUtil {
                         costs.add(new OptionalCostValue(OptionalCost.ReduceG, cost));
                     }
                 } else {
-                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost));
+                    boolean addType = sa.getKeyword() == null || sa.getKeyword() != stAb.getKeyword();
+                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost, addType));
                 }
             }
         }
@@ -519,7 +520,6 @@ public final class GameActionUtil {
         }
         for (OptionalCostValue v : list) {
             result.getPayCosts().add(v.getCost());
-            result.addOptionalCost(v.getType());
 
             // add some extra logic, try to move it to other parts
             switch (v.getType()) {
@@ -531,15 +531,19 @@ public final class GameActionUtil {
                 result.getRestrictions().setInstantSpeed(true);
                 break;
             case Generic:
-                if (sa.isHarmonize()) {
+                if (sa.isHarmonize() && !v.addsType()) {
                     result.addAnnounceVar("Harmonize");
                     result.getMapParams().put("AnnounceTitle", "power of creature to tap");
                     result.getDirectSVars().put("Harmonize", "Count$Valid Creature.YouCtrl$GreatestPower");
+                    // avoid collision from extrinsic
+                    continue;
                 }
                 break;
             default:
                 break;
             }
+
+            result.addOptionalCost(v.getType());
         }
         return result;
     }
