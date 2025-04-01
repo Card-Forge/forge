@@ -4000,12 +4000,13 @@ public class CardFactoryUtil {
                     " | Description$ Flying (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Harmonize")) {
-            String raiseEffect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
-                    + " | Cost$ TapXType<1/Creature.powerGEHarmonize> | EffectZone$ All "
-                    + " | CheckSVar$ Harmonize | Description$ Harmonize (" + inst.getReminderText() + ")";
+            String raiseEffect = "Mode$ OptionalCost | ValidCard$ Card.Self | ValidSA$ Spell.Harmonize | Secondary$ True"
+                    + " | Cost$ tapXType<1/Creature.powerEQHarmonize/creature for Harmonize> | EffectZone$ All "
+                    + " | Description$ Harmonize (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(raiseEffect, state.getCard(), state, intrinsic));
-            String reduceEffect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
-                    + "| Amount$ Harmonize | EffectZone$ All | CheckSVar$ Harmonize | Description$ Harmonize (" + inst.getReminderText() + ")";
+            String reduceEffect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell.Harmonize | Secondary$ True"
+                    + " | Amount$ Harmonize | EffectZone$ All | CheckSVar$ Count$OptionalGenericCostPaid.1.0"
+                    + " | Description$ Harmonize (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(reduceEffect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Hexproof")) {
             final StringBuilder sbDesc = new StringBuilder("Hexproof");
