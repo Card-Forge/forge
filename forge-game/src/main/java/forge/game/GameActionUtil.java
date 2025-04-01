@@ -447,8 +447,7 @@ public final class GameActionUtil {
                         costs.add(new OptionalCostValue(OptionalCost.ReduceG, cost));
                     }
                 } else {
-                    boolean addType = sa.getKeyword() == null || sa.getKeyword() != stAb.getKeyword();
-                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost, addType));
+                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost, stAb.getKeyword() == null));
                 }
             }
         }
