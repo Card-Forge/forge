@@ -5,6 +5,6 @@ A:AB$ PeekAndReveal | Cost$ 3 | ValidTgts$ Opponent | Defined$ You | PeekAmount$
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Targeted | FaceDown$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | ChosenPile$ DBHand | UnchosenPile$ DBExile
 SVar:DBHand:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | ChooseFromDefined$ Remembered | Mandatory$ True | Shuffle$ True
 SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Exile
-SVar:X:Count$InYourLibrary
+SVar:X:Count$ValidLibrary Card.YouOwn
 AI:RemoveDeck:All
 Oracle:{3}: If your library has ten or more cards in it, target opponent looks at the top ten cards of your library and separates them into two face-down piles. Exile one of those piles. Search the other pile for a card, put it into your hand, then shuffle the rest of that pile into your library.

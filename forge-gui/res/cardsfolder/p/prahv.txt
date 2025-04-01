@@ -5,6 +5,6 @@ S:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.ControlledBy You.
 S:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ You.attackedWithCreaturesThisTurn | Description$ If you attacked with creatures this turn, you can't cast spells.
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, you gain life equal to the number of cards in your hand.
 SVar:RolledChaos:DB$ GainLife | LifeAmount$ PrahvX | Defined$ You
-SVar:PrahvX:Count$InYourHand
+SVar:PrahvX:Count$ValidHand Card.YouOwn
 SVar:AIRollPlanarDieParams:Mode$ Always | CardsInHandGE$ 2
 Oracle:If you cast a spell this turn, you can't attack with creatures.\nIf you attacked with creatures this turn, you can't cast spells.\nWhenever chaos ensues, you gain life equal to the number of cards in your hand.

@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Charm | Choices$ Exile1,Exile2
 SVar:Exile1:DB$ ChangeZoneAll | ChangeType$ Creature.powerGTX | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile each creature with power greater than the number of cards in your hand.
 SVar:Exile2:DB$ ChangeZoneAll | ChangeType$ Creature.powerLTX | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile each creature with power less than the number of cards in your hand.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:All
 Oracle:Choose one —\n• Exile each creature with power greater than the number of cards in your hand.\n• Exile each creature with power less than the number of cards in your hand.

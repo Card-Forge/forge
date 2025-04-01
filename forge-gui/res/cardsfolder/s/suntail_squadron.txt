@@ -4,5 +4,5 @@ Types:Instant
 A:SP$ MakeCard | Conjure$ True | Name$ Suntail Hawk | Zone$ Hand | SubAbility$ DBRepeat | StackDescription$ Conjure a card named Suntail Hawk into your hand. | SpellDescription$ Conjure a card named Suntail Hawk into your hand. If you have fewer than 7 cards in hand, repeat this process.
 SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBConjure | RepeatCheckSVar$ X | RepeatSVarCompare$ LT7 | StackDescription$ If you have fewer than 7 cards in hand, repeat this process.
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Suntail Hawk | Zone$ Hand
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 Oracle:Conjure a card named Suntail Hawk into your hand. If you have fewer than 7 cards in hand, repeat this process.

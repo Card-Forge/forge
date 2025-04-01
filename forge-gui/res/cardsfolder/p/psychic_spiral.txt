@@ -6,5 +6,5 @@ SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player to mi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:SpiralYet GE6
-SVar:SpiralYet:Count$InYourYard
+SVar:SpiralYet:Count$ValidGraveyard Card.YouOwn
 Oracle:Shuffle all cards from your graveyard into your library. Target player mills that many cards.

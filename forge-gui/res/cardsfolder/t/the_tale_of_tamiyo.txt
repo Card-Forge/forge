@@ -6,10 +6,10 @@ SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBCleanAndGrind | MaxRepeat$ MaxRep
 SVar:DBCleanAndGrind:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBGrind
 SVar:DBGrind:DB$ Mill | NumCards$ 2 | NoReveal$ True | RememberMilled$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ MilledSharesType | ConditionSVarCompare$ GE2
-SVar:MaxRepeats:Count$InYourLibrary
+SVar:MaxRepeats:Count$ValidLibrary Card.YouOwn
 SVar:MilledSharesType:Remembered$Valid Card.sharesCardTypeWithOther Remembered
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ Yard | TgtPrompt$ Select any number of target instant, sorcery, and/or Tamiyo planeswalker cards in your graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn,Planeswalker.Tamiyo+YouOwn | RememberChanged$ True | SubAbility$ DBPlay | StackDescription$ SpellDescription | SpellDescription$ Exile any number of target instant, sorcery, and/or Tamiyo planeswalker cards from your graveyard. Copy them. You may cast any number of the copies.
 SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | ValidSA$ Spell | Optional$ True | Amount$ All | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Yard:Count$InYourYard
+SVar:Yard:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn,Planeswalker.Tamiyo+YouOwn
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Mill two cards. If two cards that share a card type were milled this way, draw a card and repeat this process.\nIV — Exile any number of target instant, sorcery, and/or Tamiyo planeswalker cards from your graveyard. Copy them. You may cast any number of the copies.

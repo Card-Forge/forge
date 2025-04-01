@@ -5,7 +5,7 @@ A:SP$ ChooseNumber | Defined$ You | Min$ 0 | Max$ MaxChoice | ListTitle$ Discard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ ChosenInitiation | Mode$ Random | RememberDiscarded$ True | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:MaxChoice:Count$InYourHand
+SVar:MaxChoice:Count$ValidHand Card.YouOwn
 SVar:ChosenInitiation:Count$ChosenNumber
 SVar:Y:Remembered$Amount
 AI:RemoveDeck:All
