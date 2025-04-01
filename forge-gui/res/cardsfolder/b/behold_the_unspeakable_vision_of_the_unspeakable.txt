@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Chapter:3:DBPump,DBDrawBranch,DBTransform
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouDontCtrl | NumAtt$ -2 | Duration$ UntilYourNextTurn | SpellDescription$ Creatures you don't control get -2/-0 until your next turn.
 SVar:DBDrawBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ LE1 | TrueSubAbility$ Draw4 | FalseSubAbility$ Scry2 | SpellDescription$ If you have one or fewer cards in hand, draw four cards. Otherwise, scry 2, then draw two cards.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 SVar:Draw4:DB$ Draw | NumCards$ 4
 SVar:Scry2:DB$ Scry | ScryNum$ 2 | SubAbility$ Draw2
 SVar:Draw2:DB$ Draw | NumCards$ 2
@@ -25,5 +25,5 @@ PT:0/0
 K:Flying
 K:Trample
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each card in your hand.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 Oracle:Flying, trample\nVision of the Unspeakable gets +1/+1 for each card in your hand.

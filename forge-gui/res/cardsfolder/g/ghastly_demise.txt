@@ -3,5 +3,5 @@ ManaCost:B
 Types:Instant
 A:SP$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX | StackDescription$ SpellDescription | SpellDescription$ Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.
 SVar:Y:Targeted$CardToughness
-SVar:X:Count$InYourYard
+SVar:X:Count$ValidGraveyard Card.YouOwn
 Oracle:Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.

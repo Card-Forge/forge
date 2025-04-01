@@ -7,6 +7,6 @@ K:Suspend:X:XMin1 X 3 U
 T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigDraw | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You
 SVar:X:Count$xPaid
-SVar:Y:Count$InYourHand
+SVar:Y:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:All
 Oracle:Aeon Chronicler's power and toughness are each equal to the number of cards in your hand.\nSuspend X—{X}{3}{U}. X can't be 0.\nWhenever a time counter is removed from Aeon Chronicler while it's exiled, draw a card.

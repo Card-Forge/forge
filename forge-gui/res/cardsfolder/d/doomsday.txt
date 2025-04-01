@@ -6,7 +6,7 @@ SVar:DBChangeZone:DB$ ChangeZoneAll | Defined$ You | Origin$ Graveyard,Library |
 SVar:DBDig:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$InYourLibrary
+SVar:X:Count$ValidLibrary Card.YouOwn
 SVar:Y:Count$YourLifeTotal/HalfUp
 AI:RemoveDeck:All
 Oracle:Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.

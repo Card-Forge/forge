@@ -5,5 +5,5 @@ K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ CantAttackUnless | ValidCard$ Creature.AttachedBy | Cost$ Y | Description$ Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand.
 S:Mode$ CantBlockUnless | ValidCard$ Creature.AttachedBy | Cost$ Y
-SVar:Y:Count$InYourHand
+SVar:Y:Count$ValidHand Card.YouOwn
 Oracle:Enchant creature\nEnchanted creature can't attack or block unless its controller pays {1} for each card in your hand.
