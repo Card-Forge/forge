@@ -1129,7 +1129,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
-
                     // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
                     boolean shouldReveal = (i == 0);
                     Card c = null;

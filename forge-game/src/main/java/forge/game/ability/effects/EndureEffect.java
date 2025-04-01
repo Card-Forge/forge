@@ -45,6 +45,7 @@ public class EndureEffect extends TokenEffectBase {
 
         return sb.toString();
     }
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
