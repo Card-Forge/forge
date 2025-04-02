@@ -535,6 +535,7 @@ public final class GameActionUtil {
                     result.addAnnounceVar("Harmonize");
                     result.getMapParams().put("AnnounceTitle", "power of creature to tap");
                     result.getDirectSVars().put("Harmonize", "Count$Valid Creature.YouCtrl$GreatestPower");
+                    result.setOptionalKeywordAmount(sa.getKeyword(), 1);
                     // avoid collision from extrinsic
                     continue;
                 }

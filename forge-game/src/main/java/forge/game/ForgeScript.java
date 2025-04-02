@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class ForgeScript {
@@ -378,6 +379,8 @@ public class ForgeScript {
                 }
             }
             return found;
+        }  else if (property.equals("sameKeyword")) {
+            return Objects.equals(sa.getKeyword(), spellAbility.getKeyword()) || sa.hasOptionalKeywordAmount(spellAbility.getKeyword());
         } else if (property.equals("otherAbility")) {
             if (sa.equals(spellAbility)) {
                 return false;
