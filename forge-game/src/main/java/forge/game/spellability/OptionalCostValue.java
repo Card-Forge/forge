@@ -11,23 +11,10 @@ public class OptionalCostValue implements Serializable {
     private static final long serialVersionUID = 1L;
     private OptionalCost type;
     private Cost cost;
-    private boolean addType = true;
 
     public OptionalCostValue(OptionalCost type, Cost cost) {
         this.type = type;
         this.cost = cost;
-    }
-    public OptionalCostValue(OptionalCost type, Cost cost, boolean addType) {
-        this.type = type;
-        this.cost = cost;
-        this.addType = addType;
-    }
-
-    /**
-     * @return the type
-     */
-    public boolean addsType() {
-        return addType;
     }
 
     /**

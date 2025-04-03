@@ -206,7 +206,6 @@ public final class GameActionUtil {
                         } else {
                             harmonize = sa.copy(activator);
                         }
-                        harmonize.getDirectSVars().put("Harmonize", "0");
                         harmonize.setAlternativeCost(AlternativeCost.Harmonize);
                         harmonize.getRestrictions().setZone(ZoneType.Graveyard);
                         harmonize.setKeyword(inst);
@@ -447,7 +446,7 @@ public final class GameActionUtil {
                         costs.add(new OptionalCostValue(OptionalCost.ReduceG, cost));
                     }
                 } else {
-                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost, stAb.getKeyword() == null));
+                    costs.add(new OptionalCostValue(OptionalCost.Generic, cost));
                 }
             }
         }
@@ -520,6 +519,7 @@ public final class GameActionUtil {
         }
         for (OptionalCostValue v : list) {
             result.getPayCosts().add(v.getCost());
+            result.addOptionalCost(v.getType());
 
             // add some extra logic, try to move it to other parts
             switch (v.getType()) {
@@ -530,21 +530,9 @@ public final class GameActionUtil {
             case Flash:
                 result.getRestrictions().setInstantSpeed(true);
                 break;
-            case Generic:
-                if (sa.isHarmonize() && !v.addsType()) {
-                    result.addAnnounceVar("Harmonize");
-                    result.getMapParams().put("AnnounceTitle", "power of creature to tap");
-                    result.getDirectSVars().put("Harmonize", "Count$Valid Creature.YouCtrl$GreatestPower");
-                    result.setOptionalKeywordAmount(sa.getKeyword(), 1);
-                    // avoid collision from extrinsic
-                    continue;
-                }
-                break;
             default:
                 break;
             }
-
-            result.addOptionalCost(v.getType());
         }
         return result;
     }
@@ -622,9 +610,8 @@ public final class GameActionUtil {
                         " or greater>";
                 final Cost cost = new Cost(casualtyCost, false);
                 String str = "Pay for Casualty? " + cost.toSimpleString();
-                boolean v = pc.addKeywordCost(sa, cost, ki, str);
 
-                if (v) {
+                if (pc.addKeywordCost(sa, cost, ki, str)) {
                     if (result == null) {
                         result = sa.copy();
                     }
@@ -670,9 +657,7 @@ public final class GameActionUtil {
                 final Cost cost = new Cost(k[1], false);
                 String str = "Pay for Offspring? " + cost.toSimpleString();
 
-                boolean v = pc.addKeywordCost(sa, cost, ki, str);
-
-                if (v) {
+                if (pc.addKeywordCost(sa, cost, ki, str)) {
                     if (result == null) {
                         result = sa.copy();
                     }
@@ -715,6 +700,25 @@ public final class GameActionUtil {
                 }
                 if (result != null) {
                     result.setOptionalKeywordAmount(ki, v);
+                }
+            }
+        }
+
+        if (sa.isHarmonize()) {
+            CardCollectionView creatures = activator.getCreaturesInPlay();
+            if (!creatures.isEmpty()) {
+                int max = Aggregates.max(creatures, Card::getNetPower);
+                int n = pc.chooseNumber(sa, "Choose power of creature to tap", 0, max);
+                final String harmonizeCost = "tapXType<1/Creature.powerEQ" + n + "/creature for Harmonize>";
+                final Cost cost = new Cost(harmonizeCost, false);
+
+                if (pc.addKeywordCost(sa, cost, sa.getKeyword(), "Tap creature?")) {
+                    if (result == null) {
+                        result = sa.copy();
+                    }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                    result.setOptionalKeywordAmount(sa.getKeyword(), n);
                 }
             }
         }

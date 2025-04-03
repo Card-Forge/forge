@@ -378,8 +378,6 @@ public class ForgeScript {
                 }
             }
             return found;
-        }  else if (property.equals("sameStatic")) {
-            return sa.getKeyword().getStaticAbilities().contains(spellAbility) || sa.hasOptionalKeywordAmount(spellAbility.getKeyword());
         } else if (property.equals("otherAbility")) {
             if (sa.equals(spellAbility)) {
                 return false;
