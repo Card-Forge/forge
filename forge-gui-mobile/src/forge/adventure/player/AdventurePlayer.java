@@ -1027,6 +1027,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return true;
     }
 
+    public void removeAllQuestItems(){
+        for (String s : inventoryItems) {
+            ItemData data = ItemData.getItem(s);
+            if(data != null){
+                if(data.questItem){
+                    removeItem(data.name);
+                }
+            }
+        }
+    }
+
     public boolean addBooster(Deck booster) {
         if (booster == null || booster.isEmpty())
             return false;
