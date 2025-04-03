@@ -146,17 +146,20 @@
   {
     "name": "Landscape Sketchbook - Mirage",
     "description": "A leather bound notebook containing sketches of tropical locations",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
   },
   {
     "name": "Landscape Sketchbook - Urza's Saga",
     "description": "A leather bound notebook containing many different angles of the same terrain features",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
   },
   {
     "name": "Landscape Sketchbook - Coldsnap",
     "description": "A leather bound notebook containing sketches of frost covered vistas",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
   },
   {
     "name": "Chandra's Tome",
@@ -1188,7 +1191,6 @@
     "description": "Teleports you to the plains",
     "commandOnUse": "teleport to poi \"Plains Capital\"",
     "iconName": "WhiteRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },
@@ -1202,7 +1204,6 @@
     "description": "Teleports you to the swamp",
     "commandOnUse": "teleport to poi \"Swamp Capital\"",
     "iconName": "BlackRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },
@@ -1216,7 +1217,6 @@
     "description": "Teleports you to the island",
     "commandOnUse": "teleport to poi \"Island Capital\"",
     "iconName": "BlueRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },
@@ -1230,7 +1230,6 @@
     "description": "Teleports you to the mountain",
     "commandOnUse": "teleport to poi \"Mountain Capital\"",
     "iconName": "RedRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },
@@ -1244,7 +1243,6 @@
     "description": "Teleports you to the forest",
     "commandOnUse": "teleport to poi \"Forest Capital\"",
     "iconName": "GreenRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },
