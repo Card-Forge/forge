@@ -1030,10 +1030,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void removeAllQuestItems(){
         for (String s : inventoryItems) {
             ItemData data = ItemData.getItem(s);
-            if(data != null){
-                if(data.questItem){
-                    removeItem(data.name);
-                }
+            if(data != null && data.questItem){
+                removeItem(data.name);
             }
         }
     }
