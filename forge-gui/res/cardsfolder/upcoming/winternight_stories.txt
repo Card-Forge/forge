@@ -1,0 +1,7 @@
+Name:Winternight Stories
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Draw three cards.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Creature | StackDescription$ SpellDescription | SpellDescription$ Then discard two cards unless you discard a creature card.
+K:Harmonize:4 U
+Oracle:Draw three cards. Then discard two cards unless you discard a creature card.\nHarmonize {4}{U} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)
