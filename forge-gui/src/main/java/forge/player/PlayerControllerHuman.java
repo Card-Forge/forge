@@ -1130,10 +1130,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         GameEntityViewMap<Card, CardView> gameCacheMove = GameEntityView.getMap(cards);
         List<CardView> choices = gameCacheMove.getTrackableKeys();
 
-        boolean topOfDeck = destinationZone.isDeck()
-                && (source == null
-                    || !source.hasParam("LibraryPosition")
-                    || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0);
+        String libraryPosition = null;
+
+        if (source == null) {
+            // noop
+        } else if (source.hasParam("LibraryPosition")) {
+            libraryPosition = source.getParam("LibraryPosition");
+        } else if (source.hasParam("RevealedLibraryPosition")) {
+            libraryPosition = source.getParam("RevealedLibraryPosition");
+        }
+
+        boolean topOfDeck = destinationZone.isDeck() && (source == null || libraryPosition == null || AbilityUtils.calculateAmount(source.getHostCard(), libraryPosition, source) >= 0);
 
         switch (destinationZone) {
             case Library:
@@ -1169,8 +1176,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return cards;
         }
         endTempShowCards();
-        if(topOfDeck)
-            Collections.reverse(choices);
+        Collections.reverse(choices);
+
         CardCollection result = new CardCollection();
         gameCacheMove.addToList(choices, result);
         return result;
