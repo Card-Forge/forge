@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Effect | StaticAbilities$ BloomingLand | AILogic$ Always | SpellDescription$ You may play up to three additional lands this turn.
 SVar:BloomingLand:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 3 | Description$ You may play up to three additional lands this turn.
 SVar:NeedsToPlayVar:LandInHand GE1
-SVar:LandInHand:Count$InYourHand.Land
+SVar:LandInHand:Count$ValidHand Land.YouOwn
 SVar:PlayMain1:TRUE
 Oracle:You may play up to three additional lands this turn.

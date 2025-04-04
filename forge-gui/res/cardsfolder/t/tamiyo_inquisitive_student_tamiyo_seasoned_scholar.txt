@@ -30,5 +30,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Draw | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ X | SubAbility$ DBEmblem | SpellDescription$ Draw cards equal to half the number of cards in your library, rounded up. You get an emblem with "You have no maximum hand size."
 SVar:DBEmblem:DB$ Effect | Name$ Emblem — Tamiyo, Seasoned Scholar | Image$ emblem_tamiyo_seasoned_scholar | StaticAbilities$ UnlimitedHand | Stackable$ False | Duration$ Permanent | AILogic$ Always
 SVar:UnlimitedHand:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
-SVar:X:Count$InYourLibrary/HalfUp
+SVar:X:Count$ValidLibrary Card.YouOwn/HalfUp
 Oracle:[+2]: Until your next turn, whenever a creature an opponent controls attacks you or a planeswalker you control, it gets -1/-0 until end of turn.\n[-3]: Return target instant or sorcery card from your graveyard to your hand. If it's a green card, add one mana of any color.\n[-7]: Draw cards equal to half the number of cards in your library, rounded up. You get an emblem with "You have no maximum hand size."

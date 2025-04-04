@@ -8,6 +8,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:DB$ Draw | NumCards$ XLKI
 SVar:XLKI:TriggeredCard$CardCounters.AGE
 SVar:NeedsToPlayVar:Z GE3
-SVar:Z:Count$InYourHand
+SVar:Z:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:Random
 Oracle:Flying\nCumulative upkeep—Discard a card. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Vexing Sphinx dies, draw a card for each age counter on it.

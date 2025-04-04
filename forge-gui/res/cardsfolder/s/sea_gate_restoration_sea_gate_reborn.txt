@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ Draw | NumCards$ X | SubAbility$ DBEffect | SpellDescription$ Draw cards equal to the number of cards in your hand plus one. You have no maximum hand size for the rest of the game.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent | SpellDescription$ You have no maximum hand size for the rest of the game.
 SVar:STHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size for the rest of the game.
-SVar:X:Count$InYourHand/Plus.1
+SVar:X:Count$ValidHand Card.YouOwn/Plus.1
 AlternateMode:Modal
 Oracle:Draw cards equal to the number of cards in your hand plus one. You have no maximum hand size for the rest of the game.
 

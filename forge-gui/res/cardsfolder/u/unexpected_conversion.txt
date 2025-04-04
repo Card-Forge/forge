@@ -8,8 +8,8 @@ SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlaye
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ You | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ SpellDescription | SubAbility$ DBSeek | SpellDescription$ and library for any number of cards with the same name, exile them, then shuffle.
 SVar:DBSeek:DB$ Seek | Num$ X | Type$ Card.Instant,Card.Sorcery | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Seek an instant or sorcery card for each card exiled from your hand this way.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:NumInLib:Count$InYourLibrary
-SVar:NumInHand:Count$InYourHand
+SVar:NumInLib:Count$ValidLibrary Card.YouOwn+sharesNameWith Remembered
+SVar:NumInHand:Count$ValidHand Card.YouOwn+sharesNameWith Remembered
 SVar:X:Count$RememberedSize/Plus.Y
 SVar:Y:Count$ImprintedSize
 DeckHints:Type$Instant|Sorcery
