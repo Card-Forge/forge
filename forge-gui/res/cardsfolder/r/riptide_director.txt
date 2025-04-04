@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Creature Human Wizard
 PT:2/3
 A:AB$ Draw | Cost$ 2 U U T | NumCards$ X | SpellDescription$ Draw a card for each Wizard you control.
-SVar:X:Count$TypeYouCtrl.Wizard
+SVar:X:Count$Valid Wizard.YouCtrl
 AI:RemoveDeck:Random
 SVar:NonCombatPriority:3
 Oracle:{2}{U}{U}, {T}: Draw a card for each Wizard you control.

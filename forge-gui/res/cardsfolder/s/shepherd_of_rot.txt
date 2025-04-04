@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Zombie Cleric
 PT:1/1
 A:AB$ LoseLife | Cost$ T | Defined$ Player | LifeAmount$ X | SpellDescription$ Each player loses 1 life for each Zombie on the battlefield.
-SVar:X:Count$TypeOnBattlefield.Zombie
+SVar:X:Count$Valid Zombie
 AI:RemoveDeck:Random
 Oracle:{T}: Each player loses 1 life for each Zombie on the battlefield.

@@ -5,6 +5,6 @@ PT:2/3
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may have it deal damage to target creature equal to the number of artifacts you control.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X
-SVar:X:Count$TypeYouCtrl.Artifact
+SVar:X:Count$Valid Artifact.YouCtrl
 SVar:PlayMain1:TRUE
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nWhen Reclusive Artificer enters, you may have it deal damage to target creature equal to the number of artifacts you control.
