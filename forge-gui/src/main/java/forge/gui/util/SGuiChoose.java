@@ -43,7 +43,7 @@ public class SGuiChoose {
         if ((choices == null) || choices.isEmpty()) {
             return null;
         }
-        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices, selected, display);
+        final List<T> choice = SGuiChoose.getChoices(message, 0, 1, choices, selected == null ? null : List.of(selected), display);
         return choice.isEmpty() ? null : choice.get(0);
     }
 
@@ -147,12 +147,12 @@ public class SGuiChoose {
         return getChoices(message, min, max, Arrays.asList(choices), null, null);
     }
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices, final T selected, final Function<T, String> display) {
-        return getChoices(message, min, max, Arrays.asList(choices), selected, display);
+        return getChoices(message, min, max, Arrays.asList(choices), selected == null ? null : List.of(selected), display);
     }
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
         return getChoices(message, min, max, choices, null, null);
     }
-    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+    public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final Function<T, String> display) {
         return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
     }
 

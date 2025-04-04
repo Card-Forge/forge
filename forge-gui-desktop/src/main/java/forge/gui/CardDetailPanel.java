@@ -214,7 +214,7 @@ public class CardDetailPanel extends SkinnedPanel {
             set = state.getSetCode();
             rarity = state.getRarity();
         } else {
-            set = CardEdition.UNKNOWN.getCode();
+            set = CardEdition.UNKNOWN_CODE;
             rarity = CardRarity.Unknown;
         }
         setInfoLabel.setText(set);

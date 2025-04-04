@@ -660,7 +660,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final T selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final Function<T, String> display) {
         return GuiBase.getInterface().getChoices(message, min, max, choices, selected, display);
     }
 

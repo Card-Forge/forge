@@ -3,6 +3,7 @@ package forge.toolbox;
 import static forge.card.CardRenderer.MANA_SYMBOL_SIZE;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -269,6 +270,14 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
     public void setSelectedItem(T choice) {
         setSelectedIndex(getIndexOf(choice));
+    }
+
+    public void setSelectedItems(Collection<T> items) {
+        selectedIndices.clear();
+        items.stream().mapToInt(this::getIndexOf).filter(i -> i >= 0).forEach(selectedIndices::add);
+        if(!items.isEmpty())
+            scrollIntoView(getIndexOf(items.iterator().next()));
+        onSelectionChange();
     }
 
     protected String getChoiceText(T choice) {

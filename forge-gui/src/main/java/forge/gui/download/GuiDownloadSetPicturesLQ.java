@@ -55,7 +55,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
             }
             final String setCode2 = setMapping.get(setCode3);
 
-            if (StringUtils.isBlank(setCode3) || CardEdition.UNKNOWN.getCode().equals(setCode3)) {
+            if (StringUtils.isBlank(setCode3) || CardEdition.UNKNOWN_CODE.equals(setCode3)) {
                 // we don't want cards from unknown sets
                 continue;
             }

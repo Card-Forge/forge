@@ -150,7 +150,7 @@ public interface IGuiGame {
 
     <T> List<T> getChoices(String message, int min, int max, List<T> choices);
 
-    <T> List<T> getChoices(String message, int min, int max, List<T> choices, T selected, Function<T, String> display);
+    <T> List<T> getChoices(String message, int min, int max, List<T> choices, List<T> selected, Function<T, String> display);
 
     // Get Integer in range
     Integer getInteger(String message, int min);

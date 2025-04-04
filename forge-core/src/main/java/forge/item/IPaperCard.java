@@ -2,10 +2,10 @@ package forge.item;
 
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.ColorSet;
 import forge.card.ICardFace;
 
 import java.io.Serializable;
-import java.util.Set;
 
 public interface IPaperCard extends InventoryItem, Serializable {
 
@@ -20,7 +20,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
     String getEdition();
     String getCollectorNumber();
     String getFunctionalVariant();
-    Set<String> getColorID();
+    ColorSet getMarkedColors();
     int getArtIndex();
     boolean isFoil();
     boolean isToken();

@@ -152,16 +152,13 @@ public class ListChooser<T> {
 
     /** @return boolean */
     public boolean show() {
-        return show(list.get(0));
+        return show(null);
     }
 
     /**
      * Shows the dialog and returns after the dialog was closed.
-     *
-     * @param index0 index to select when shown
-     * @return a boolean.
      */
-    public boolean show(final T item) {
+    public boolean show(final Collection<T> item) {
         if (this.called) {
             throw new IllegalStateException("Already shown");
         }
@@ -169,8 +166,12 @@ public class ListChooser<T> {
         do {
             //invoke later so selected item not set until dialog open
             SwingUtilities.invokeLater(() -> {
-                if (list.contains(item)) {
-                    lstChoices.setSelectedValue(item, true);
+                if (item != null) {
+                    int[] indices = item.stream()
+                            .mapToInt(list::indexOf)
+                            .filter(i -> i >= 0)
+                            .toArray();
+                    lstChoices.setSelectedIndices(indices);
                 }
                 else {
                     lstChoices.setSelectedIndex(0);
