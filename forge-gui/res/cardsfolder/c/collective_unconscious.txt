@@ -2,5 +2,5 @@ Name:Collective Unconscious
 ManaCost:4 G G
 Types:Sorcery
 A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each creature you control.
-SVar:X:Count$TypeYouCtrl.Creature
+SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Draw a card for each creature you control.
