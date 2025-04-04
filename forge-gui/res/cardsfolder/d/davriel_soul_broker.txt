@@ -40,7 +40,7 @@ SVar:DrawTrig:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Command | Ex
 SVar:TrigDig:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile
 SVar:EmblemUpkeepLose:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Condition 8) | Triggers$ UpkeepLoseTrig | Duration$ Permanent | SpellDescription$ You get an emblem with "At the beginning of your upkeep, you lose 1 life for each creature you control."
 SVar:UpkeepLoseTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLose | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, you lose 1 life for each creature you control.
-SVar:TrigLose:DB$ LoseLife | Defined$ You | LifeAmount$ Count$TypeYouCtrl.Creature
+SVar:TrigLose:DB$ LoseLife | Defined$ You | LifeAmount$ Count$Valid Creature.YouCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | NumAtt$ -3 | NumDef$ -3 | Duration$ Perpetual | StackDescription$ REP Target creature an opponent controls_{c:Targeted} | SpellDescription$ Target creature an opponent controls perpetually gets -3/-3.
 DeckHas:Ability$LifeGain|Graveyard|Sacrifice

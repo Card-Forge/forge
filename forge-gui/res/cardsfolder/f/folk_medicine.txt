@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Instant
 K:Flashback:1 W
 A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 1 life for each creature you control.
-SVar:X:Count$TypeYouCtrl.Creature
+SVar:X:Count$Valid Creature.YouCtrl
 AI:RemoveDeck:Random
 DeckNeeds:Color$White
 Oracle:You gain 1 life for each creature you control.\nFlashback {1}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

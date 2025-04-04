@@ -5,5 +5,5 @@ PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDiscard | TriggerDescription$ When CARDNAME enters, target player reveals X cards from their hand, where X is the number of Faeries you control. You choose one of those cards. That player discards that card.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | RevealNumber$ X | Mode$ RevealYouChoose | DiscardValid$ Card
-SVar:X:Count$TypeYouCtrl.Faerie
+SVar:X:Count$Valid Faerie.YouCtrl
 Oracle:Flying\nWhen Thieving Sprite enters, target player reveals X cards from their hand, where X is the number of Faeries you control. You choose one of those cards. That player discards that card.

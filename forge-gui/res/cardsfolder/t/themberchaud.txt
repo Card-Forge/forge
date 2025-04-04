@@ -7,6 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDamageAllNonFlyers:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.Other+withoutFlying | ValidPlayers$ Player | ValidDescription$ each other creature without flying and each player
 S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigPump | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, he gains flying until end of turn. (An exerted creature won't untap during your next untap step.)
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying | SpellDescription$ When you do, he gains flying until end of turn.
-SVar:X:Count$TypeYouCtrl.Mountain
+SVar:X:Count$Valid Mountain.YouCtrl
 DeckHints:Type$Dragon & Keyword$Flying
 Oracle:Trample\nWhen Themberchaud enters, he deals X damage to each other creature without flying and each player, where X is the number of Mountains you control.\nYou may exert Themberchaud as he attacks. When you do, he gains flying until end of turn. (An exerted creature won't untap during your next untap step.)

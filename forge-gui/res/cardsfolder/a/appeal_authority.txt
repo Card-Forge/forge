@@ -2,7 +2,7 @@ Name:Appeal
 ManaCost:G
 Types:Sorcery
 A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+X, where X is the number of creatures you control.
-SVar:X:Count$TypeYouCtrl.Creature
+SVar:X:Count$Valid Creature.YouCtrl
 AlternateMode:Split
 Oracle:Until end of turn, target creature gains trample and gets +X/+X, where X is the number of creatures you control.
 

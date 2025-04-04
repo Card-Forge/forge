@@ -4,6 +4,6 @@ Types:Creature Lhurgoyf
 PT:*/*
 K:Flying
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of instant cards in all graveyards.
-SVar:X:Count$TypeInAllYards.Instant
+SVar:X:Count$ValidGraveyard Instant
 AI:RemoveDeck:Random
 Oracle:Flying\nCognivore's power and toughness are each equal to the number of instant cards in all graveyards.

@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddKeyword$ First Strike | Description$ Enchanted creature gets +1/+0 for each Mountain you control and has first strike.
-SVar:X:Count$TypeYouCtrl.Mountain
+SVar:X:Count$Valid Mountain.YouCtrl
 SVar:BuffedBy:Mountain
 Oracle:Enchant creature\nEnchanted creature gets +1/+0 for each Mountain you control and has first strike.
