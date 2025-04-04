@@ -1,0 +1,7 @@
+Name:Iceridge Serpent
+ManaCost:4 U
+Types:Creature Serpent
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, return target creature an opponent controls to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand
+Oracle:When this creature enters, return target creature an opponent controls to its owner's hand.

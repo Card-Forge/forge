@@ -205,6 +205,8 @@ public class ForgeScript {
             return sa.isEternalize();
         } else if (property.equals("Flashback")) {
             return sa.isFlashback();
+        } else if (property.equals("Harmonize")) {
+            return sa.isHarmonize();
         } else if (property.equals("Jumpstart")) {
             return sa.isJumpstart();
         } else if (property.equals("Kicked")) {

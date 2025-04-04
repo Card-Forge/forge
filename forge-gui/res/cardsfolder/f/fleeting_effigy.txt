@@ -1,0 +1,9 @@
+Name:Fleeting Effigy
+ManaCost:R
+Types:Creature Elemental
+PT:2/2
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, return this creature to its owner's hand. (Return it only if it's on the battlefield.)
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+A:AB$ Pump | Cost$ 2 R | NumAtt$ +2 | SpellDescription$ This creature gets +2/+0 until end of turn.
+Oracle:Haste\nAt the beginning of your end step, return this creature to its owner's hand. (Return it only if it's on the battlefield.)\n{2}{R}: This creature gets +2/+0 until end of turn.

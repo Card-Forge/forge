@@ -1,0 +1,6 @@
+Name:Defibrillating Current
+ManaCost:2R 2W 2B
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:Defibrillating Current deals 4 damage to target creature or planeswalker and you gain 2 life.

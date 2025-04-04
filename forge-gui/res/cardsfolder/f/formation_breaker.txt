@@ -1,0 +1,8 @@
+Name:Formation Breaker
+ManaCost:1 G
+Types:Creature Beast
+PT:2/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTX | Description$ Creatures with power less than this creature's power can't block it.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | IsPresent$ Creature.YouCtrl+HasCounters | Description$ As long as you control a creature with a counter on it, this creature gets +1/+2.
+SVar:X:Count$CardPower
+Oracle:Creatures with power less than this creature's power can't block it.\nAs long as you control a creature with a counter on it, this creature gets +1/+2.

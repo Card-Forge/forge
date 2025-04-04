@@ -253,6 +253,7 @@ public class SaveLoadScene extends UIScene {
                                 Current.player().getQuests().clear();
                                 Current.player().resetQuestFlags();
                                 Current.player().setCharacterFlag("newGamePlus", 1);
+                                Current.player().removeAllQuestItems();
                                 AdventurePlayer.current().addQuest("28");
                                 WorldSave.getCurrentSave().clearBookmarks();
                                 WorldStage.getInstance().enterSpawnPOI();

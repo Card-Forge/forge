@@ -53,6 +53,10 @@ public class EndureEffect extends TokenEffectBase {
         String num = sa.getParamOrDefault("Num", "1");
         int amount = AbilityUtils.calculateAmount(host, num, sa);
 
+        if (amount < 1) {
+            return;
+        }
+
         GameEntityCounterTable table = new GameEntityCounterTable();
         TokenCreateTable tokenTable = new TokenCreateTable();
         for (final Card c : GameActionUtil.orderCardsByTheirOwners(game, getTargetCards(sa), ZoneType.Battlefield, sa)) {

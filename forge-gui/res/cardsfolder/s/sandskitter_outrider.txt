@@ -1,0 +1,8 @@
+Name:Sandskitter Outrider
+ManaCost:3 B
+Types:Creature Goblin Soldier
+PT:2/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEndure | TriggerDescription$ When this creature enters, it endures 2. (Put two +1/+1 counters on it or create a 2/2 white Spirit creature token.)
+SVar:TrigEndure:DB$ Endure | Num$ 2
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen this creature enters, it endures 2. (Put two +1/+1 counters on it or create a 2/2 white Spirit creature token.)

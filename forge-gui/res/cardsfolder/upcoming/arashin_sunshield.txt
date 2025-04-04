@@ -1,9 +1,0 @@
-Name:Arashin Sunshield
-ManaCost:3 W
-Types:Creature Human Warrior
-PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature enters, exile up to two target cards from a single graveyard.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 2 | TargetsFromSingleZone$ True | ValidTgts$ Card | TgtPrompt$ Select up to two target cards from a single graveyard
-A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
-DeckHas:Ability$Graveyard
-Oracle:When this creature enters, exile up to two target cards from a single graveyard.\n{W}, {T}: Tap target creature.

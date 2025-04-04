@@ -1,0 +1,8 @@
+Name:Delta Bloodflies
+ManaCost:1 B
+Types:Creature Insect
+PT:1/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+HasCounters | Execute$ TrigLoseLife | TriggerDescription$ Whenever this creature attacks, if you control a creature with a counter on it, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
+Oracle:Flying\nWhenever this creature attacks, if you control a creature with a counter on it, each opponent loses 1 life.

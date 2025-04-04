@@ -1,0 +1,7 @@
+Name:Dragonclaw Strike
+ManaCost:2G 2U 2R
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ Double | NumDef$ Double | SubAbility$ DBFight | SpellDescription$ Double the power and toughness of target creature you control until end of turn. Then it fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature an opponent controls
+SVar:PlayMain1:TRUE
+Oracle:Double the power and toughness of target creature you control until end of turn. Then it fights up to one target creature an opponent controls. (Each deals damage equal to its power to the other.)

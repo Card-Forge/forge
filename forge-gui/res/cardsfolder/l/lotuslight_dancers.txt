@@ -1,0 +1,9 @@
+Name:Lotuslight Dancers
+ManaCost:2 B G U
+Types:Creature Zombie Bard
+PT:3/6
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSearch | TriggerDescription$ When this creature enters, search your library for a black card, a green card, and a blue card. Put those cards into your graveyard, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ EACH Card.Black & Card.Green & Card.Blue | ChangeNum$ 1
+DeckHas:Ability$Graveyard
+Oracle:Lifelink\nWhen this creature enters, search your library for a black card, a green card, and a blue card. Put those cards into your graveyard, then shuffle.
