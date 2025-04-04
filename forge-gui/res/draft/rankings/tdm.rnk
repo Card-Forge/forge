@@ -1,12 +1,12 @@
 //Rank|Name|Rarity|Set
-#1|Eerie Ultimatum|M|TDM
-#2|Ruinous Ultimatum|M|TDM
+#1|Eerie Ultimatum|M|SPG
+#2|Ruinous Ultimatum|M|SPG
 #3|Elspeth, Storm Slayer|M|TDM
 #4|Dragonback Assault|M|TDM
 #5|Jeskai Revelation|M|TDM
 #6|Ureni, the Song Unending|M|TDM
-#7|Inspired Ultimatum|M|TDM
-#8|Genesis Ultimatum|M|TDM
+#7|Inspired Ultimatum|M|SPG
+#8|Genesis Ultimatum|M|SPG
 #9|Ugin, Eye of the Storms|M|TDM
 #10|Marang River Regent|R|TDM
 #11|Death Begets Life|M|TDM
@@ -179,11 +179,11 @@
 #178|Veteran Ice Climber|U|TDM
 #179|Delta Bloodflies|C|TDM
 #180|Fleeting Effigy|U|TDM
-#181|Arid Mesa|M|TDM
-#182|Marsh Flats|M|TDM
-#183|Misty Rainforest|M|TDM
-#184|Scalding Tarn|M|TDM
-#185|Verdant Catacombs|M|TDM
+#181|Arid Mesa|M|SPG
+#182|Marsh Flats|M|SPG
+#183|Misty Rainforest|M|SPG
+#184|Scalding Tarn|M|SPG
+#185|Verdant Catacombs|M|SPG
 #186|Bearer of Glory|C|TDM
 #187|Coordinated Maneuver|C|TDM
 #188|Rally the Monastery|U|TDM
@@ -270,7 +270,7 @@
 #269|Nature's Rhythm|R|TDM
 #270|Call the Spirit Dragons|M|TDM
 #271|Jade-Cast Sentinel|C|TDM
-#272|Emergent Ultimatum|M|TDM
+#272|Emergent Ultimatum|M|SPG
 #273|United Battlefront|R|TDM
 #274|Dragonstorm Forecaster|U|TDM
 #275|Essence Anchor|U|TDM
