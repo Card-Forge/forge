@@ -68,6 +68,20 @@ public class PrintSheet {
         for(PaperCard card : cards)
             cardsWithWeights.remove(card);
     }
+    public PaperCard removeByName(String name)
+    {
+        PaperCard toBeRemoved = null;
+        for(PaperCard card : cardsWithWeights.toFlatList())
+        {
+            if(card.getCardName().equals(name))
+            {
+                toBeRemoved = card;
+            }
+        }
+
+        return toBeRemoved;
+    }
+
 
     private PaperCard fetchRoulette(int start, int roulette, Collection<PaperCard> toSkip) {
         int sum = start;
