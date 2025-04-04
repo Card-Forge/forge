@@ -12,7 +12,7 @@ SVar:TrigCreate:DB$ Token | TokenAmount$ Amt | TokenScript$ u_1_1_beeble
 SVar:Loy:Count$CardCounters.LOYALTY
 SVar:Beeb:Count$Valid Beeble.YouCtrl
 K:The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.
-SVar:NHand:Count$InYourHand
+SVar:NHand:Count$ValidHand Card.YouOwn
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Beeble | TgtPrompt$ Select up to X target Beebles | TargetMin$ 0 | TargetMax$ NHand | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | StackDescription$ SpellDescription | SpellDescription$ Up to X target Beebles can't be blocked this turn, where X is the number of cards in your hand.
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ These creatures can't be blocked this turn.
 A:AB$ Draw | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | SpellDescription$ Draw a card.

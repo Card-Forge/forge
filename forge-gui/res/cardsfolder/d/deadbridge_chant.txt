@@ -7,7 +7,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChoose | Trigger
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Graveyard | AtRandom$ True | Choices$ Card.YouOwn | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBChange2
 SVar:DBChange2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ EQ0
-SVar:Y:Count$InYourLibrary
+SVar:Y:Count$ValidLibrary Card.YouOwn
 SVar:NeedsToPlayVar:Y GE15
 DeckHas:Ability$Graveyard
 Oracle:When Deadbridge Chant enters, mill ten cards.\nAt the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.

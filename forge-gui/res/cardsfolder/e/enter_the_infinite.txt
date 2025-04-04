@@ -5,6 +5,6 @@ A:SP$ Draw | NumCards$ X | SubAbility$ DBTop | SpellDescription$ Draw cards equa
 SVar:DBTop:DB$ ChangeZone | Origin$ Hand | Destination$ Library | Hidden$ True | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ UntilYourNextTurn
 SVar:STHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
-SVar:X:Count$InYourLibrary
+SVar:X:Count$ValidLibrary Card.YouOwn
 AI:RemoveDeck:Random
 Oracle:Draw cards equal to the number of cards in your library, then put a card from your hand on top of your library. You have no maximum hand size until your next turn.

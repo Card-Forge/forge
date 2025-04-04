@@ -6,5 +6,5 @@ SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SpellDescription$ As CARDNAME enters
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:NeedsToPlayVar:Y LE2
-SVar:Y:Count$InYourHand
+SVar:Y:Count$ValidHand Card.YouOwn
 Oracle:As Heightened Awareness enters, discard your hand.\nAt the beginning of your draw step, draw an additional card.

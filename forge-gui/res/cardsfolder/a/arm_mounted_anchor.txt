@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Equipment
 K:Equip:2:::ReduceCost$ Y:This ability costs {2} less to activate if you have one or fewer cards in hand
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ Equipped creature gets +2/+2 and has menace.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 SVar:Y:Count$Compare X LE1.2.0
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoot | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, draw two cards. Then discard two cards unless you discard a Pirate card.
 SVar:TrigLoot:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
