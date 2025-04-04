@@ -5,5 +5,5 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target player shuffles any number of target cards from their graveyard into their library.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Player | SubAbility$ DBChangeZone | IsCurse$ True
 SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefinedController$ ParentTarget | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Choose target card | ValidTgts$ Card
-SVar:X:Count$InAllYards
+SVar:X:Count$ValidGraveyard Card.OwnedBy TargetedPlayer
 Oracle:When Loaming Shaman enters, target player shuffles any number of target cards from their graveyard into their library.

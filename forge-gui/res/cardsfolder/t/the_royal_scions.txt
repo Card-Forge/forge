@@ -10,5 +10,5 @@ A:AB$ Draw | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True |
 SVar:DBTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE4 | Execute$ DBDamage | SpellDescription$ When you do, CARDNAME deals damage to any target equal to the number of cards in your hand. | SubAbility$ DBCleanup
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 Oracle:[+1]: Draw a card, then discard a card.\n[+1]: Target creature gets +2/+0 and gains first strike and trample until end of turn.\n[-8]: Draw four cards. When you do, The Royal Scions deals damage to any target equal to the number of cards in your hand.

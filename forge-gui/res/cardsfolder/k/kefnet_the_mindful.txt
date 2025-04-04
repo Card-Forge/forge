@@ -5,7 +5,7 @@ PT:5/5
 K:Flying
 K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ LE6 | Description$ CARDNAME can't attack or block unless you have seven or more cards in hand.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | SubAbility$ DBChooseCard | SpellDescription$ Draw a card, then you may return a land you control to its owner's hand.
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Land.YouCtrl | ChoiceZone$ Battlefield | Amount$ 1 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ ChosenCard | SubAbility$ DBCleanup

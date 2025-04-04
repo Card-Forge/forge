@@ -6,5 +6,5 @@ SVar:DBDraw:DB$ Draw | NumCards$ X | SpellDescription$ 1—14 VERT Draw X cards.
 SVar:DBScry:DB$ Scry | ScryNum$ X | SubAbility$ DBDraw2 | SpellDescription$ 15+ VERT Scry X, then draw X cards.
 SVar:DBDraw2:DB$ Draw | NumCards$ X
 SVar:X:Count$xPaid
-SVar:Y:Count$InYourHand
+SVar:Y:Count$ValidHand Card.YouOwn
 Oracle:Roll a d20 and add the number of cards in your hand.\n1—14 | Draw X cards.\n15+ | Scry X, then draw X cards.

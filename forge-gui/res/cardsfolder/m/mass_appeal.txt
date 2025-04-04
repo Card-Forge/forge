@@ -2,6 +2,6 @@ Name:Mass Appeal
 ManaCost:2 U
 Types:Sorcery
 A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each Human you control.
-SVar:X:Count$TypeYouCtrl.Human
+SVar:X:Count$Valid Human.YouCtrl
 AI:RemoveDeck:Random
 Oracle:Draw a card for each Human you control.

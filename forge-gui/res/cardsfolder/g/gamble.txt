@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Origin$ Library | NoShuffle$ True | Destination$ Hand | Chang
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ You
 SVar:NeedsToPlayVar:Z GE2
-SVar:Z:Count$InYourHand
+SVar:Z:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:Random
 DeckHas:Ability$Discard
 Oracle:Search your library for a card, put that card into your hand, discard a card at random, then shuffle.

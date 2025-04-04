@@ -3,6 +3,6 @@ ManaCost:1
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus 4.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
-SVar:X:Count$InYourHand/Minus.4
+SVar:X:Count$ValidHand Card.YouOwn/Minus.4
 DeckHas:Ability$LifeGain
 Oracle:At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus 4.

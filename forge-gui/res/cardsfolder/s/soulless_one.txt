@@ -3,8 +3,8 @@ ManaCost:3 B
 Types:Creature Zombie Avatar
 PT:*/*
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards.
-SVar:X:Count$TypeOnBattlefield.Zombie/Plus.Y
-SVar:Y:Count$TypeInAllYards.Zombie
+SVar:X:Count$Valid Zombie/Plus.Y
+SVar:Y:Count$ValidGraveyard Zombie
 AI:RemoveDeck:Random
 SVar:NoZeroToughnessAI:True
 Oracle:Soulless One's power and toughness are each equal to the number of Zombies on the battlefield plus the number of Zombie cards in all graveyards.

@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Artifact Contraption
 T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, target creature gets +X/+0 until end of turn, where X is the number of creatures you control.
 SVar:TrigCrank:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X
-SVar:X:Count$TypeYouCtrl.Creature
+SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Whenever you crank Accessories to Murder, target creature gets +X/+0 until end of turn, where X is the number of creatures you control.

@@ -6,6 +6,6 @@ K:etbCounter:DIVINITY:1:CheckSVar$ FromHand:CARDNAME enters with a divinity coun
 SVar:FromHand:Count$wasCastFromYourHandByYou.1.0
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as it has a divinity counter on it.
 A:AB$ ChangeZone | Cost$ SubCounter<1/DIVINITY> | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ X | SpellDescription$ Put any number of creature cards from your hand onto the battlefield.
-SVar:X:Count$InYourHand.Creature
+SVar:X:Count$ValidHand Creature.YouOwn
 AI:RemoveDeck:All
 Oracle:Myojin of Life's Web enters with a divinity counter on it if you cast it from your hand.\nMyojin of Life's Web has indestructible as long as it has a divinity counter on it.\nRemove a divinity counter from Myojin of Life's Web: Put any number of creature cards from your hand onto the battlefield.

@@ -5,6 +5,6 @@ A:SP$ Reveal | RememberRevealed$ True | Defined$ You | SubAbility$ DBChangeZone 
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Remembered.sameName | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:All
 Oracle:Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle.\nHellbent — If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle.

@@ -4,7 +4,7 @@ Types:Enchantment
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ CheckLoseCondition | Description$ If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game.
 SVar:CheckLoseCondition:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ CardsInGrave | ConditionSVarCompare$ EQ0 | SubAbility$ ForbiddenPractice
 SVar:ForbiddenPractice:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand
-SVar:CardsInGrave:Count$InYourYard
+SVar:CardsInGrave:Count$ValidGraveyard Card.YouOwn
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.!token+YouOwn | ReplaceWith$ CryptExile | Description$ If a card would be put into your graveyard from anywhere, exile that card instead.
 SVar:CryptExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:NonStackingEffect:True

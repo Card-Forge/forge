@@ -4,6 +4,6 @@ Types:Creature Lhurgoyf
 PT:*/*
 K:Vigilance
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of enchantment cards in all graveyards.
-SVar:X:Count$TypeInAllYards.Enchantment
+SVar:X:Count$ValidGraveyard Enchantment
 AI:RemoveDeck:Random
 Oracle:Vigilance\nCantivore's power and toughness are each equal to the number of enchantment cards in all graveyards.
