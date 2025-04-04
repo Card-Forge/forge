@@ -140,3 +140,4 @@ Jumpstart 2025, -/2/J25, Meta-Choose(S(J25 Prideful)Prideful;S(J25 Giddyap)Giddy
 Pioneer Masters, 3/6/PIO, PIO
 Innistrad Remastered, 3/6/INR, INR
 Aetherdrift, 3/6/DFT, DFT
+Tarkir Dragonstorm, 3/6/TDM, TDM

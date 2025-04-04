@@ -4,6 +4,46 @@ Date=2025-04-11
 Name=Tarkir: Dragonstorm
 Type=Expansion
 ScryfallCode=TDM
+# https://mtgscribe.com/2025/03/20/play-booster-fact-sheet-dragonstorm/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,FoilWildcard
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 FoilWildcard
+Prerelease=6 Boosters, 1 RareMythic+
+# TDM Prereleases are actually 5 + a seeded faction booster. We'll figure that out later
+#FactionBooster=8 Common, 2 Uncommon, 1 UncommonTriland, 1 FactionLand, 1 Wildcard, 1 MythicRare
+BoosterBox=30
+
+[Common]
+Base=Common:!fromSheet("TDM gain lands"):fromSheet("TDM cards")
+
+[Common-Guest]
+Base=Common:!fromSheet("TDM gain lands"):fromSheet("TDM cards")
+Replace=.015625F fromSheet("TDM special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("TDM cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("TDM cards")
+Replace=.077F Rare:fromSheet("TDM borderless")
+Replace=.015F Mythic:fromSheet("TDM borderless")
+
+[AnyLand]
+Base=fromSheet("TDM gain lands")
+Replace=.174F fromSheet("TDM gain lands")+
+Replace=.105F BasicLand:fromSheet("TDM cards"):!fromSheet("TDM gain lands")
+Replace=.026F BasicLand:fromSheet("TDM cards"):!fromSheet("TDM gain lands")+
+
+[Wildcard]
+Base=Uncommon:fromSheet("TDM cards")
+Replace=.171F Common:fromSheet("TDM cards")
+Replace=.179F Rare:fromSheet("TDM cards")
+Replace=.028F Mythic:fromSheet("TDM cards")
+
+[FoilWildcard]
+Base=Common:fromSheet("TDM cards")+
+Replace=.334F Uncommon:fromSheet("TDM cards")
+Replace=.072F Rare:fromSheet("TDM cards")
+Replace=.012F Mythic:fromSheet("TDM cards")
 
 [cards]
 1 M Ugin, Eye of the Storms @Joshua Raphael
@@ -255,28 +295,28 @@ ScryfallCode=TDM
 247 U Sultai Monument @Julian Kok Joon Wen
 248 U Temur Monument @Sam Burley
 249 C Watcher of the Wayside @Brian Valeza
-250 C Bloodfell Caves @Piotr Dura
-251 C Blossoming Sands @Piotr Dura
+250 L Bloodfell Caves @Piotr Dura
+251 L Blossoming Sands @Piotr Dura
 252 R Cori Mountain Monastery @Arthur Yuan
 253 R Dalkovan Encampment @Marina Ortega Lorente
-254 C Dismal Backwater @Alayna Danner
+254 L Dismal Backwater @Alayna Danner
 255 C Evolving Wilds @Leon Tukker
 256 U Frontier Bivouac @Andrea Piparo
 257 R Great Arashin City @Josu Solano
-258 C Jungle Hollow @Cristi Balanescu
+258 L Jungle Hollow @Cristi Balanescu
 259 R Kishla Village @Bruce Brenneise
 260 R Maelstrom of the Spirit Dragon @Carlos Palma Cruchaga
 261 R Mistrise Village @Constantin Marin
 262 U Mystic Monastery @Leon Tukker
 263 U Nomad Outpost @Alayna Danner
 264 U Opulent Palace @Sergey Glushakov
-265 C Rugged Highlands @Carlos Palma Cruchaga
+265 L Rugged Highlands @Carlos Palma Cruchaga
 266 U Sandsteppe Citadel @Diego Gisbert
-267 C Scoured Barrens @Brent Hollowell
-268 C Swiftwater Cliffs @Piotr Dura
-269 C Thornwood Falls @Alexander Ostrowski
-270 C Tranquil Cove @Kevin Sidharta
-271 C Wind-Scarred Crag @Filip Burburan
+267 L Scoured Barrens @Brent Hollowell
+268 L Swiftwater Cliffs @Piotr Dura
+269 L Thornwood Falls @Alexander Ostrowski
+270 L Tranquil Cove @Kevin Sidharta
+271 L Wind-Scarred Crag @Filip Burburan
 272 L Plains @Sergey Glushakov
 273 L Island @Sergey Glushakov
 274 L Swamp @Sergey Glushakov
@@ -448,6 +488,30 @@ ScryfallCode=TDM
 424 U Encroaching Dragonstorm @Marco Gorlei
 425 R Temur Battlecrier @Valera Lutfullina
 426 R Qarsi Revenant @Diana Franco
+
+[gain lands]
+1 Bloodfell Caves|TDM
+1 Blossoming Sands|TDM
+1 Dismal Backwater|TDM
+1 Jungle Hollow|TDM
+1 Rugged Highlands|TDM
+1 Scoured Barrens|TDM
+1 Swiftwater Cliffs|TDM
+1 Thornwood Falls|TDM
+1 Tranquil Cove|TDM
+1 Wind-Scarred Crag|TDM
+
+[special guests]
+1 Verdant Catacombs|SPG
+1 Scalding Tarn|SPG
+1 Misty Rainforest|SPG
+1 Marsh Flats|SPG
+1 Arid Mesa|SPG
+1 Ruinous Ultimatum|SPG
+1 Inspired Ultimatum|SPG
+1 Genesis Ultimatum|SPG
+1 Emergent Ultimatum|SPG
+1 Eerie Ultimatum|SPG
 
 [tokens]
 b_2_2_zombie_druid
