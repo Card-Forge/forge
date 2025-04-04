@@ -2,5 +2,5 @@ Name:Peach Garden Oath
 ManaCost:W
 Types:Sorcery
 A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 2 life for each creature you control.
-SVar:X:Count$TypeYouCtrl.Creature/Times.2
+SVar:X:Count$Valid Creature.YouCtrl/Times.2
 Oracle:You gain 2 life for each creature you control.

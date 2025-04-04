@@ -3,7 +3,7 @@ ManaCost:U
 Types:Sorcery
 A:SP$ Pump | ValidTgts$ Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Put any number of target artifact cards from target player's graveyard on top of their library in any order.
 SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefinedController$ ParentTarget | Origin$ Graveyard | Destination$ Library | TgtPrompt$ Choose target artifact card | ValidTgts$ Artifact | Chooser$ You
-SVar:X:Count$InAllYards
+SVar:X:Count$ValidGraveyard Artifact.OwnedBy TargetedPlayer
 AI:RemoveDeck:All
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Mill

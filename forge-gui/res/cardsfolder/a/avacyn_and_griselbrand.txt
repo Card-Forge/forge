@@ -7,5 +7,5 @@ K:Vigilance
 K:Lifelink
 A:AB$ PumpAll | Cost$ PayLife<8> | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ DBDraw | SpellDescription$ Each creature you control gains indestructible until end of turn. Then, draw a card for each creature you control.
 SVar:DBDraw:DB$ Draw | NumCards$ X
-SVar:X:Count$TypeYouCtrl.Creature
+SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Flying, vigilance, lifelink\nPay 8 life: Each creature you control gains indestructible until end of turn. Then, draw a card for each creature you control.

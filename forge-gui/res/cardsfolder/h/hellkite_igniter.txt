@@ -5,6 +5,6 @@ PT:5/5
 K:Flying
 K:Haste
 A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +X | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is the number of artifacts you control.
-SVar:X:Count$TypeYouCtrl.Artifact
+SVar:X:Count$Valid Artifact.YouCtrl
 DeckHints:Type$Artifact
 Oracle:Flying, haste\n{1}{R}: Hellkite Igniter gets +X/+0 until end of turn, where X is the number of artifacts you control.

@@ -4,7 +4,7 @@ Types:Creature Lhurgoyf
 PT:*/*
 K:Haste
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of sorcery cards in all graveyards.
-SVar:X:Count$TypeInAllYards.Sorcery
+SVar:X:Count$ValidGraveyard Sorcery
 SVar:NeedsToPlayVar:X GE2
 AI:RemoveDeck:Random
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nMagnivore's power and toughness are each equal to the number of sorcery cards in all graveyards.
