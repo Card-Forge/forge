@@ -7466,6 +7466,11 @@
 			"mixedEnemies": true,
 			"worldMapOK": true,
 			"objective": "Defeat",
+			"enemyExcludeTags": [
+				"Boss",
+				"Leader",
+				"Large"
+			],
 			"prerequisiteIDs": [ 3 ],
 			"prologue": {
 				"text": "Many quests you undertake in your adventure will send you to one or more dungeons just like this one. Dungeons are filled with enemies, but also treasure like gold, mana shards, and cards.",
