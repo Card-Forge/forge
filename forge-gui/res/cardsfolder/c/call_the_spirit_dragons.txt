@@ -7,7 +7,9 @@ SVar:PutCounter:DB$ PutCounter | Choices$ Dragon.ChosenColor+YouCtrl | ChoiceTit
 SVar:WinGame:DB$ WinsGame | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ5 | SubAbility$ DBCleanup | SpellDescription$ If you put +1/+1 counters on five Dragons this way, you win the game.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
+DeckNeeds:Type$Dragon
 DeckHas:Ability$Counters
 AI:RemoveDeck:Random
+SVar:NeedsToPlay:Creature.Dragon+YouCtrl
 Oracle:Dragons you control have indestructible.\nAt the beginning of your upkeep, for each color, put a +1/+1 counter on a Dragon you control of that color. If you put +1/+1 counters on five Dragons this way, you win the game.
 
