@@ -3,6 +3,6 @@ ManaCost:B
 Types:Sorcery
 A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature and you gain X life, where X is 1 plus the number of cards named Feast of Flesh in all graveyards.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
-SVar:X:Count$NamedInAllYards.Feast of Flesh/Plus.1
+SVar:X:Count$ValidGraveyard Card.namedFeast of Flesh/Plus.1
 DeckHints:Name$Feast of Flesh
 Oracle:Feast of Flesh deals X damage to target creature and you gain X life, where X is 1 plus the number of cards named Feast of Flesh in all graveyards.
