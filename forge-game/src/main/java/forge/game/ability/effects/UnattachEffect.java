@@ -25,7 +25,7 @@ public class UnattachEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Game game = sa.getHostCard().getGame();
         for (final Card tgtC : getTargetCards(sa)) {
-            if (tgtC.isInPlay()) {
+            if (!tgtC.isInPlay()) {
                 continue;
             }
             // check if the object is still in game or if it was moved
