@@ -630,6 +630,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
             for (String color : MagicColor.Constant.ONLY_COLORS) {
                 card.setChosenColors(Lists.newArrayList(color));
+                if (sa.getOriginalParam("ChoiceTitle") != null) {
+                    sa.getMapParams().put("ChoiceTitle", sa.getOriginalParam("ChoiceTitle").replace("chosenColor", color));
+                }
                 resolvePerType(sa, placer, counterType, counterAmount, table, true);
             }
             card.setChosenColors(Lists.newArrayList(oldColors));
