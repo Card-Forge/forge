@@ -2,6 +2,6 @@ Name:Irradiate
 ManaCost:3 B
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn for each artifact you control.
-SVar:X:Count$NumTypeYouCtrl.Artifact
+SVar:X:Count$Valid Artifact.YouCtrl
 AI:RemoveDeck:Random
 Oracle:Target creature gets -1/-1 until end of turn for each artifact you control.
