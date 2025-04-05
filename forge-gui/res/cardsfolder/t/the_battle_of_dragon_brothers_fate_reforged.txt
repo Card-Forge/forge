@@ -11,7 +11,7 @@ SVar:DBManifestThree:DB$ Manifest | Amount$ 3 | SubAbility$ DBClearBolas | Spell
 SVar:DBClearBolas:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ BattleBolas | SubAbility$ DBNoteUgin
 SVar:DBNoteUgin:DB$ Pump | NoteCards$ Self | NoteCardsFor$ BattleUgin
 AlternateMode:DoubleFaced
-Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it’s defeated, exile it, then cast it transformed.)\nWhen The Battle of Dragon Brothers enters, choose Bolas or Ugin.\n• Bolas — Destroy all creatures.\n• Ugin — Manifest the top three cards of your library.
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen The Battle of Dragon Brothers enters, choose Bolas or Ugin.\n• Bolas — Destroy all creatures.\n• Ugin — Manifest the top three cards of your library.
 
 ALTERNATE
 
