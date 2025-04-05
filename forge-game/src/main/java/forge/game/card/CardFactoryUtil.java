@@ -4152,16 +4152,7 @@ public class CardFactoryUtil {
         card.addTrigger(defeatedTrigger);
     }
 
-    public static void setupAdventureAbility(Card card) {
-        if (!card.getType().hasSubtype("Adventure")) {
-            return;
-        }
-        SpellAbility sa = card.getFirstSpellAbility();
-        if (sa == null) {
-            return;
-        }
-        sa.setCardState(card.getCurrentState());
-
+    public static ReplacementEffect setupAdventureAbility(CardState card) {
         StringBuilder sb = new StringBuilder();
         sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
         sb.append("| ValidStackSa$ Spell.Adventure | Fizzle$ False | Secondary$ True | Description$ Adventure");
@@ -4176,30 +4167,33 @@ public class CardFactoryUtil {
         AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
 
         StringBuilder sbPlay = new StringBuilder();
-        sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
+        sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+!Adventure");
         sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
         saEffect.setSVar("Play", sbPlay.toString());
 
         saExile.setSubAbility(saEffect);
 
-        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), true);
 
         re.setOverridingAbility(saExile);
-        card.addReplacementEffect(re);
+        return re;
     }
-    public static void setupOmenAbility(Card card) {
-        if (!card.getType().hasSubtype("Omen")) {
-            return;
-        }
-        SpellAbility sa = card.getFirstSpellAbility();
-        if (sa == null) {
-            return;
-        }
-        sa.setCardState(card.getCurrentState());
 
-        String abEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Library | Shuffle$ True | StackDescription$ None";
-        AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
-        sa.appendSubAbility(saEffect);
+    public static ReplacementEffect setupOmenAbility(CardState card) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack ");
+        sb.append("| ValidStackSa$ Spell.Omen | Fizzle$ False | Secondary$ True | Description$ Omen");
+
+        String repeffstr = sb.toString();
+
+        String abShuffle = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Library | Shuffle$ True | StackDescription$ None";
+        AbilitySub saShuffle = (AbilitySub)AbilityFactory.getAbility(abShuffle, card);
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), true);
+
+        re.setOverridingAbility(saShuffle);
+
+        return re;
     }
 
     public static void setFaceDownState(Card c, SpellAbility sa) {
