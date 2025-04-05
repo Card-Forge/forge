@@ -281,13 +281,6 @@ public class CardFactory {
             } else if (state != CardStateName.Original) {
                 CardFactoryUtil.setupKeywordedAbilities(card);
             }
-            if (state == CardStateName.Secondary) {
-                if (card.getState(state).getType().hasSubtype("Adventure")) {
-                    CardFactoryUtil.setupAdventureAbility(card);
-                } else if (card.getState(state).getType().hasSubtype("Omen")) {
-                    CardFactoryUtil.setupOmenAbility(card);
-                }
-            }
         }
 
         card.setState(CardStateName.Original, false);
