@@ -2,6 +2,8 @@ package forge.game.card;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.Game;
@@ -173,14 +175,18 @@ public class CardCopyService {
 
     // ========================================================
     // LKI functions
-
-    public static List<Card> getLKICopyList(final Iterable<Card> in, Map<Integer, Card> cachedMap) {
+    @SuppressWarnings("unchecked")
+    public static <T>  List<T> getLKICopyList(final Iterable<T> in, Map<Integer, Card> cachedMap) {
         if (in == null) {
             return null;
         }
-        List<Card> result = Lists.newArrayList();
-        for (final Card c : in) {
-            result.add(new CardCopyService(c).getLKICopy(cachedMap));
+        List<T> result = Lists.newArrayList();
+        for (final T o : in) {
+            if (o instanceof Card c) {
+                result.add((T)new CardCopyService(c).getLKICopy(cachedMap));
+            } else {
+                result.add(o);
+            }
         }
         return result;
     }
@@ -277,6 +283,7 @@ public class CardCopyService {
             newCopy.turnFaceDownNoUpdate();
             newCopy.setType(new CardType(copyFrom.getFaceDownState().getType()));
         }
+        newCopy.setRenderForUI(copyFrom.getRenderForUI());
         // prevent StackDescription from revealing face
         newCopy.updateStateForView();
 
@@ -339,9 +346,15 @@ public class CardCopyService {
         newCopy.setIntensity(copyFrom.getIntensity(false));
         newCopy.setPerpetual(copyFrom);
 
-        newCopy.addRemembered(copyFrom.getRemembered());
-        newCopy.addImprintedCards(copyFrom.getImprintedCards());
-        newCopy.setChosenCards(copyFrom.getChosenCards());
+        Map<Card, GameCommand> extraEffects = Maps.newHashMap();
+        for (Card e : copyFrom.getExtraEffects()) { // should not need to run the game commands for LKI
+            extraEffects.put(getLKICopy(e,  cachedMap), null);
+        }
+        newCopy.setExtraEffects(extraEffects);
+
+        newCopy.addRemembered(getLKICopyList(copyFrom.getRemembered(), cachedMap));
+        newCopy.addImprintedCards(getLKICopyList(copyFrom.getImprintedCards(), cachedMap));
+        newCopy.setChosenCards(getLKICopyList(copyFrom.getChosenCards(), cachedMap));
 
         newCopy.setChosenType(copyFrom.getChosenType());
         newCopy.setChosenType2(copyFrom.getChosenType2());
