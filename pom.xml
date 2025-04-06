@@ -80,12 +80,12 @@
         <repository>
             <id>cardforge-repo</id>
             <name>Forge Releases</name>
-            <url>ftp://ftp.cardforge.org/maven/releases/</url>
+            <url>file:///${project.build.directory}/tmp</url>
         </repository>
         <snapshotRepository>
             <id>cardforge-snapshot-repo</id>
             <name>Forge Snapshots</name>
-            <url>ftp://ftp.cardforge.org/maven/snapshots/</url>
+            <url>file:///${project.build.directory}/tmp</url>
         </snapshotRepository>
     </distributionManagement>
 
