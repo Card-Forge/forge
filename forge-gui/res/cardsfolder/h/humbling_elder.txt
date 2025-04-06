@@ -1,0 +1,9 @@
+Name:Humbling Elder
+ManaCost:U
+Types:Creature Human Monk
+PT:1/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, target creature an opponent controls gets -2/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | NumAtt$ -2 | IsCurse$ True
+SVar:PlayMain1:TRUE
+Oracle:Flash\nWhen this creature enters, target creature an opponent controls gets -2/-0 until end of turn.
