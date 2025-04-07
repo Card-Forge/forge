@@ -32,6 +32,7 @@ import forge.StaticData;
 import forge.adventure.data.ItemData;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
+import forge.adventure.scene.ShopScene;
 import forge.adventure.scene.UIScene;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
@@ -64,11 +65,21 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     HoldTooltip holdTooltip;
     Reward reward;
     public TextraButton autoSell;
+    public TextraLabel collectionCount;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
     ShaderProgram shaderRoundRect = Forge.getGraphics().getShaderRoundedRect();
 
     final int preview_w = 488; //Width and height for generated images.
     final int preview_h = 680;
+
+    private static Texture whitePixel;
+    static {
+        Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+        pixmap.setColor(1, 1, 1, 1);
+        pixmap.fill();
+        whitePixel = new Texture(pixmap);
+        pixmap.dispose();
+    }
 
     TextureRegion backTexture;
     Texture image, T, Talt;
@@ -235,10 +246,18 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         switch (reward.type) {
             case Card: {
+                // Add collection count label for cards
+                int ownedCopies = Current.player().getCollectionCards(true).countByName(reward.getCard().getName());
+                String color = ownedCopies > 4 ? "[RED]" : ownedCopies == 4 ? "[GREEN]" : ownedCopies >= 1 ? "[WHITE]" : "[GRAY]";
+                String text = String.format("%d of 4", ownedCopies);
+                collectionCount = Controls.newTextraLabel(color + "[B]" + text + "[/B]");
+                float scale = collectionCount.getWidth();
+                collectionCount.setSize(scale * 1.2f, scale * 1.2f);
+
                 if (!reward.isNoSell) {
                     autoSell = Controls.newTextButton("[%85][GRAY]\uFF04");
-                    float scale = autoSell.getWidth();
-                    autoSell.setSize(scale, scale * 1.2f);
+                    float scale2 = autoSell.getWidth();
+                    autoSell.setSize(scale2, scale2 * 1.2f);
                     autoSell.addListener(new ClickListener() {
                         public void clicked(InputEvent event, float x, float y) {
                             updateAutoSell();
@@ -746,6 +765,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             preview_w - 64,
                             Align.center, true);
                 }
+                else if (reward.getType().equals(Reward.Type.Card) && Forge.getCurrentScene() instanceof RewardScene) {
+                    // Add collection count for cards
+                    int copiesInCollection = Current.player().getCollectionCards(true).countByName(reward.getCard().getName());
+                    String color = copiesInCollection > 4 ? "[RED]" : copiesInCollection == 4 ? "[GREEN]" : copiesInCollection >= 1 && copiesInCollection < 4 ? "[WHITE]" : "[GRAY]";
+                    layout.setText(font, reward.getCard().getName() + "\n" + color + "Owned: " + copiesInCollection + " of 4",
+                            Color.WHITE,
+                            preview_w - 64,
+                            com.badlogic.gdx.utils.Align.right, false);
+                }
                 else
                     layout.setText(font, itemExists ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
                 getGraphics().drawText(font, layout, 32, preview_h - 70);
@@ -820,6 +848,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         if (autoSell != null)
             autoSell.remove();
+        if (collectionCount != null)
+            collectionCount.remove();
     }
 
     public void flip() {
@@ -832,6 +862,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             autoSell.setPosition(this.getX(), this.getY());
             getStage().addActor(autoSell);
             autoSell.setVisible(false);
+        }
+        if (collectionCount != null) {
+            getStage().addActor(collectionCount);
+            collectionCount.setVisible(false);
         }
     }
 
@@ -863,9 +897,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             }
             if (autoSell != null && !autoSell.isVisible() && flipProcess == 1)
                 autoSell.setVisible(true);
-            // flipProcess=(float)Gdx.input.getX()/ (float)Gdx.graphics.getWidth();
+            if (collectionCount != null && !collectionCount.isVisible() && flipProcess == 1)
+                collectionCount.setVisible(true);
         }
-
     }
 
     @Override
@@ -886,6 +920,49 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             }
         } else {
             drawFrontSide(batch);
+            
+            // Draw collection count if it exists and card is face up - only in loot scene
+            if (Forge.getCurrentScene() instanceof RewardScene && reward.type.equals(Reward.Type.Card) && isLoot) {
+                int ownedCopies = Current.player().getCollectionCards(true).countByName(reward.getCard().getName());
+                Color textColor;
+                if (ownedCopies > 4) textColor = Color.RED;
+                else if (ownedCopies == 4) textColor = Color.GREEN;
+                else if (ownedCopies <= 3 && ownedCopies >= 1) textColor = Color.WHITE;
+                else textColor = Color.DARK_GRAY;
+                
+                String text = String.valueOf(ownedCopies);
+                
+                // Get card dimensions
+                float cardWidth = getWidth();
+                float cardHeight = getHeight();
+                
+                // Setup font and measure text
+                BitmapFont font = Controls.getBitmapFont("default");
+                font.getData().setScale(-0.8f, 0.8f);
+                GlyphLayout layout = new GlyphLayout(font, text);
+                
+                // Fixed box dimensions
+                float boxWidth = -(cardWidth/6.5f);
+                float boxHeight = (cardHeight/-9.5f);
+                
+                // Position at bottom right, accounting for flipped coordinates
+                float boxX = (cardWidth/-3f);  // Start from left edge (appears as right due to negative scale)
+                float boxY = -(cardHeight/2.5f); // Bottom edge
+                
+                // Draw black background
+                batch.setColor(0, 0, 0, 1);
+                batch.draw(whitePixel, boxX, boxY, boxWidth, boxHeight);
+                
+                // Draw text aligned to right edge
+                batch.setColor(1, 1, 1, 1);
+                font.setColor(textColor);
+                float textX = (cardWidth/-2.7f);  // Start from left edge (appears as right due to negative scale)
+                float textY = -(cardHeight/2.4f);
+                font.draw(batch, text, textX, textY);
+                
+                // Reset font
+                font.getData().setScale(1.0f);
+            }
         }
 
         batch.setColor(1, 1, 1, 1);
