@@ -1,6 +1,6 @@
 Name:Savior of the Sleeping
 ManaCost:2 W
-Types:Creature Human Warrior
+Types:Creature Human Knight
 PT:2/3
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on CARDNAME.
