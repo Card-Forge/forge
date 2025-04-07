@@ -32,7 +32,6 @@ import forge.StaticData;
 import forge.adventure.data.ItemData;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
-import forge.adventure.scene.ShopScene;
 import forge.adventure.scene.UIScene;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
