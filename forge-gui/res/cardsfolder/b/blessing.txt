@@ -1,8 +1,8 @@
 Name:Blessing
 ManaCost:W W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 A:AB$ Pump | Cost$ W | Defined$ Enchanted | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Enchanted creature gets +1/+1 until end of turn.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\n{W}: Enchanted creature gets +1/+1 until end of turn.

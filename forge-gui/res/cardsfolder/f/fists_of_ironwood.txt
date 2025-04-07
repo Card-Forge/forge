@@ -1,8 +1,8 @@
 Name:Fists of Ironwood
 ManaCost:1 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample | Description$ Enchanted creature has trample.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 1/1 green Saproling creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_saproling | TokenOwner$ You

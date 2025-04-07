@@ -2,7 +2,7 @@ Name:Bubble Snare
 ManaCost:U
 Types:Enchantment Aura
 K:Kicker:2 U
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
+SVar:AttachAILogic:KeepTapped
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, if it was kicked, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.

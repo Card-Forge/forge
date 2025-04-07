@@ -1,8 +1,8 @@
 Name:Controlled Instincts
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant red or green creature
-A:SP$ Attach | ValidTgts$ Creature.Green,Creature.Red | TgtPrompt$ Select target red or green creature | AILogic$ KeepTapped
+K:Enchant:Creature.Green,Creature.Red:red or green creature
+SVar:AttachAILogic:KeepTapped
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
 AI:RemoveDeck:Random
 Oracle:Enchant red or green creature\nEnchanted creature doesn't untap during its controller's untap step.

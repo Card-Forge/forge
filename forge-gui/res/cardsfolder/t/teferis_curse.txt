@@ -1,7 +1,7 @@
 Name:Teferi's Curse
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant artifact or creature
-A:SP$ Attach | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AILogic$ Curse
+K:Enchant:Creature,Artifact:artifact or creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Phasing | Description$ Enchanted permanent has phasing.
 Oracle:Enchant artifact or creature\nEnchanted permanent has phasing. (It phases in or out before its controller untaps during each of their untap steps. While it's phased out, it's treated as though it doesn't exist.)

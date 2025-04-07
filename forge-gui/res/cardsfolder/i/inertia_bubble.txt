@@ -1,7 +1,7 @@
 Name:Inertia Bubble
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant artifact
-A:SP$ Attach | ValidTgts$ Artifact | AILogic$ KeepTapped
+K:Enchant:Artifact
+SVar:AttachAILogic:KeepTapped
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted artifact doesn't untap during its controller's untap step.
 Oracle:Enchant artifact\nEnchanted artifact doesn't untap during its controller's untap step.

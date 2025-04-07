@@ -1,8 +1,8 @@
 Name:Sinking Feeling
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
+K:Enchant:Creature
+SVar:AttachAILogic:KeepTapped
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Untap | Description$ Enchanted creature has "{1}, Put a -1/-1 counter on this creature: Untap this creature."
 SVar:Untap:AB$ Untap | Cost$ 1 AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.

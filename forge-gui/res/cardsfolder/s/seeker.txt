@@ -1,7 +1,7 @@
 Name:Seeker
 ManaCost:2 W W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.nonArtifact+nonWhite | Description$ Enchanted creature can't be blocked except by artifact creatures and/or white creatures.
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by artifact creatures and/or white creatures.

@@ -1,8 +1,8 @@
 Name:Immobilizing Ink
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
+K:Enchant:Creature
+SVar:AttachAILogic:KeepTapped
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Untap | Description$ Enchanted creature has "{1}, Discard a card: Untap this creature."
 SVar:Untap:AB$ Untap | Cost$ 1 Discard<1/Card> | Defined$ Self | SpellDescription$ Untap CARDNAME.

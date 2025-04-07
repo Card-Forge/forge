@@ -1,8 +1,8 @@
 Name:Noxious Field
 ManaCost:1 B B
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ DamageAll | Description$ Enchanted land has "{T}: This land deals 1 damage to each creature and player."
 SVar:DamageAll:AB$ DamageAll | Cost$ T | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
 SVar:NonStackingAttachEffect:True

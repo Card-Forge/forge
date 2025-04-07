@@ -1,8 +1,8 @@
 Name:Aspect of Wolf
 ManaCost:1 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.AttachedBy | AddPower$ X | AddToughness$ Y | Description$ Enchanted creature gets +X/+Y, where X is half the number of Forests you control, rounded down, and Y is half the number of Forests you control, rounded up.
 SVar:X:Count$Valid Forest.YouCtrl/HalfDown
 SVar:Y:Count$Valid Forest.YouCtrl/HalfUp

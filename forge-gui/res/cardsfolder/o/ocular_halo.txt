@@ -1,8 +1,8 @@
 Name:Ocular Halo
 ManaCost:3 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Draw | Description$ Enchanted creature has "{T}: Draw a card."
 A:AB$ Pump | Cost$ W | Defined$ Enchanted | KW$ Vigilance | SpellDescription$ Enchanted creature gains vigilance until end of turn.
 SVar:Draw:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.

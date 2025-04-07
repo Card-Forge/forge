@@ -1,8 +1,8 @@
 Name:Narcolepsy
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | IsPresent$ Creature.AttachedBy+untapped | PresentCompare$ EQ1 | IsCurse$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of each upkeep, if enchanted creature is untapped, tap it.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 SVar:NonStackingAttachEffect:True

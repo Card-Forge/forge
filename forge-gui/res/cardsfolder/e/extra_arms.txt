@@ -1,8 +1,8 @@
 Name:Extra Arms
 ManaCost:4 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, it deals 2 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | DamageSource$ TriggeredAttackerLKICopy | NumDmg$ 2
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE

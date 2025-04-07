@@ -1,8 +1,9 @@
 Name:Writ of Passage
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AITgts$ Creature.powerLE2 | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAITgts:Creature.powerLE2
+SVar:AttachAILogic:Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy+powerLE2 | Execute$ TrigUnblockable | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, if its power is 2 or less, it can't be blocked this turn.
 SVar:TrigUnblockable:DB$ Effect | RememberObjects$ TriggeredAttackerLKICopy | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | ConditionCheckSVar$ TriggeredAttacker$Valid Card.powerLE2
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.

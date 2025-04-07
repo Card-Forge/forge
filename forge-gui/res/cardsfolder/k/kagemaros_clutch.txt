@@ -1,8 +1,8 @@
 Name:Kagemaro's Clutch
 ManaCost:3 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | Description$ Enchanted creature gets -X/-X, where X is the number of cards in your hand.
 SVar:X:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:All

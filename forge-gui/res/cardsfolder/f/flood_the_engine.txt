@@ -1,8 +1,8 @@
 Name:Flood the Engine
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature or Vehicle
-A:SP$ Attach | ValidTgts$ Creature,Vehicle | AILogic$ KeepTapped
+K:Enchant:Creature,Vehicle:creature or Vehicle
+SVar:AttachAILogic:KeepTapped
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted permanent.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 S:Mode$ Continuous | Affected$ Permanent.AttachedBy | RemoveAllAbilities$ True | Description$ Enchanted permanent loses all abilities and doesn't untap during its controller's untap step.

@@ -1,8 +1,9 @@
 Name:Fall from Favor
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped | AITgts$ Card.cmcGE2
+K:Enchant:Creature
+SVar:AttachAITgts:Card.cmcGE2
+SVar:AttachAILogic:KeepTapped
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature and you become the monarch.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBMonarch
 SVar:DBMonarch:DB$ BecomeMonarch | Defined$ You

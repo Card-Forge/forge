@@ -1,8 +1,8 @@
 Name:Curse of Surveillance
 ManaCost:4 U
 Types:Enchantment Aura Curse
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of enchanted player's upkeep, any number of target players other than that player each draw cards equal to the number of Curses attached to that player.
 SVar:TrigDraw:DB$ Draw | ValidTgts$ Player.!EnchantedBy | TgtPrompt$ Select any number of target players other than the enchanted player | TargetMin$ 0 | TargetMax$ MaxTgts | NumCards$ X
 SVar:MaxTgts:PlayerCountPlayers$Amount/Minus.1

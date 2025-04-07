@@ -1,8 +1,8 @@
 Name:Craving of Yeenoghu
 ManaCost:2 R
 Types:Enchantment Aura
-K:Enchant creature you control
-A:SP$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Enchanted creature gets +3/+2, has haste, and attacks each combat if able.
 S:Mode$ MustAttack | ValidCreature$ Creature.EnchantedBy
 A:AB$ Pump | Cost$ R | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | SorcerySpeed$ True | TgtPrompt$ Select target creature you control | SubAbility$ DBChange | StackDescription$ REP Return_{p:You} returns & your_their & target creature you control_{c:Targeted} & ." Activate only as a sorcery._." | SpellDescription$ Return CARDNAME from your graveyard to the battlefield attached to target creature you control. CARDNAME perpetually gains "Enchanted creature gets -1/-1." Activate only as a sorcery.
