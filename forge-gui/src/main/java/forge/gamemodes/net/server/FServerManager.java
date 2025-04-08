@@ -1,6 +1,8 @@
 package forge.gamemodes.net.server;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.simtechdata.waifupnp.UPnP;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
@@ -8,9 +10,14 @@ import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.event.*;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
+import forge.gui.util.SOptionPane;
 import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
+import forge.model.FModel;
 import forge.util.IterableUtil;
+import forge.util.Localizer;
+import forge.localinstance.properties.ForgeNetPreferences;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -19,10 +26,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import org.jupnp.UpnpService;
-import org.jupnp.UpnpServiceImpl;
-import org.jupnp.support.igd.PortMappingListener;
-import org.jupnp.support.model.PortMapping;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,15 +40,18 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public final class FServerManager {
+    static Logger logger = LogManager.getLogger(FServerManager.class);
     private static FServerManager instance = null;
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
     private byte[] externalAddress = new byte[]{8, 8, 8, 8};
     private boolean isHosting = false;
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
-    private UpnpService upnpService = null;
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
+    private boolean UPnPMapped = false;
+    private int port;
+    private static final Localizer localizer = Localizer.getInstance();
     private final Thread shutdownHook = new Thread(() -> {
         if (isHosting()) {
             stopServer(false);
@@ -75,6 +83,35 @@ public final class FServerManager {
     }
 
     public void startServer(final int port) {
+        this.port = port;
+        String UPnPOption = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.UPnP);
+        boolean startUPnP;
+        if(UPnPOption.equalsIgnoreCase("ASK")) {
+            switch (SOptionPane.showOptionDialog(localizer.getMessageorUseDefault("lblUPnPQuestion", String.format("Attempt to open port %d automatically?", port), port),
+                    localizer.getMessageorUseDefault("lblUPnPTitle", "UPnP option"),
+                    null,
+                    ImmutableList.of(localizer.getMessageorUseDefault("lblUPnPJustOnce", "Just Once"),
+                            localizer.getMessageorUseDefault("lblUPnPNotNow", "Not Now"),
+                            localizer.getMessageorUseDefault("lblUPnPAlways", "Always"),
+                            localizer.getMessageorUseDefault("lblUPnPNever", "Never")), 0)) {
+                case 2:
+                    FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "ALWAYS");
+                    FModel.getNetPreferences().save();
+                case 0:
+                    //case 2 falls in here
+                    startUPnP = true;
+                    break;
+
+                case 3:
+                    FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
+                    FModel.getNetPreferences().save();
+                default:
+                    //case 1 defaults to here
+                    startUPnP = false;
+                    break;
+            }
+        } else startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
+        logger.info("Starting Multiplayer Server");
         try {
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
@@ -101,16 +138,18 @@ public final class FServerManager {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage(),e);
                 } finally {
                     stopServer();
                 }
             }).start();
-            mapNatPort(port);
+            if(startUPnP) {
+                mapNatPort();
+            }
             Runtime.getRuntime().addShutdownHook(shutdownHook);
             isHosting = true;
         } catch (final InterruptedException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
     }
 
@@ -121,10 +160,7 @@ public final class FServerManager {
     private void stopServer(final boolean removeShutdownHook) {
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
-        if (upnpService != null) {
-            upnpService.shutdown();
-            upnpService = null;
-        }
+        unMapNatPort();
         if (removeShutdownHook) {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
@@ -213,34 +249,34 @@ public final class FServerManager {
     //  https://stackoverflow.com/a/34873630
     //  https://stackoverflow.com/a/901943
     private String getRoutableAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException, UnknownHostException {
-        try (DatagramSocket s = new DatagramSocket()) {
-            s.connect(InetAddress.getByAddress(this.externalAddress), 0);
-            NetworkInterface n = NetworkInterface.getByInetAddress(s.getLocalAddress());
-            Enumeration<InetAddress> en = n.getInetAddresses();
-            while (en.hasMoreElements()) {
-                InetAddress addr = en.nextElement();
-                if (addr instanceof Inet4Address) {
-                    if (preferIPv6) {
-                        continue;
+        try (DatagramSocket socket = new DatagramSocket()) {
+            // Connect to a well-known external address (Google's public DNS server)
+            socket.connect(InetAddress.getByName("8.8.8.8"), 12345); // Use a valid port instead of 0
+            InetAddress localAddress = socket.getLocalAddress();
+
+            // Check if the local address belongs to a valid network interface
+            NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localAddress);
+            if (networkInterface != null && networkInterface.isUp()) {
+                Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    InetAddress addr = addresses.nextElement();
+                    if (addr instanceof Inet4Address && preferIpv4) {
+                        return addr.getHostAddress();
                     }
-                    return addr.getHostAddress();
-                }
-                if (addr instanceof Inet6Address) {
-                    if (preferIpv4) {
-                        continue;
+                    if (addr instanceof Inet6Address && preferIPv6) {
+                        return addr.getHostAddress();
                     }
-                    return addr.getHostAddress();
                 }
             }
         }
-        return null;
+        return "localhost";
     }
 
     public String getLocalAddress() {
         try {
             return getRoutableAddress(true, false);
         } catch (final Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
             return "localhost";
         }
     }
@@ -253,41 +289,37 @@ public final class FServerManager {
                     whatismyip.openStream()));
             return in.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         } finally {
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage(),e);
                 }
             }
         }
         return null;
     }
 
-    private void mapNatPort(final int port) {
-        final String localAddress = getLocalAddress();
-        final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
-
-        // Shutdown existing UPnP service if already running
-        if (upnpService != null) {
-            upnpService.shutdown();
-        }
-
-        try {
-            // Create a new UPnP service instance
-            upnpService = new UpnpServiceImpl();
-
-            // Add a PortMappingListener
-            upnpService.getRegistry().addListener(new PortMappingListener(portMapping));
-
-            // Trigger device discovery
-            upnpService.getControlPoint().search();
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void mapNatPort() {
+        boolean success = UPnP.openPortTCP(port);
+        if(!success) {
+            logger.error("Failed to open port");
+            SOptionPane.showErrorDialog(localizer.getMessageorUseDefault("lblUPnPFailed", String.format("UPnP failed to open port %d", port), port));
+        } else {
+            UPnPMapped = true;
         }
     }
+    private void unMapNatPort() {
+        if(UPnPMapped) {
+            UPnP.closePortTCP(port);
+            UPnPMapped = false;
+        }
+    }
+
+
+
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
         @Override

@@ -221,7 +221,6 @@ public final class ForgeConstants {
     public static final String CACHE_DIR;
     public static final String CACHE_CARD_PICS_DIR;
     public static final Map<String, String> CACHE_CARD_PICS_SUBDIR;
-    public static final int SERVER_PORT_NUMBER;
     public static final String DECK_BASE_DIR;
     public static final String DECK_CONSTRUCTED_DIR;
     static {
@@ -232,7 +231,6 @@ public final class ForgeConstants {
         CACHE_CARD_PICS_SUBDIR = Collections.unmodifiableMap(ForgeProfileProperties.getCardPicsSubDirs());
         DECK_BASE_DIR          = ForgeProfileProperties.getDecksDir();
         DECK_CONSTRUCTED_DIR   = ForgeProfileProperties.getDecksConstructedDir();
-        SERVER_PORT_NUMBER     = ForgeProfileProperties.getServerPort();
     }
 
     // data that is only in the profile dirs
@@ -266,6 +264,7 @@ public final class ForgeConstants {
     public static final String DECK_TINY_LEADERS_DIR= DECK_BASE_DIR + "tiny_leaders" + PATH_SEPARATOR;
     public static final String DECK_BRAWL_DIR       = DECK_BASE_DIR + "brawl" + PATH_SEPARATOR;
     public static final String MAIN_PREFS_FILE      = USER_PREFS_DIR + "forge.preferences";
+    public static final String SERVER_PREFS_FILE    = USER_PREFS_DIR + "server.preferences";
     public static final String CARD_PREFS_FILE      = USER_PREFS_DIR + "card.preferences";
     public static final String DECK_PREFS_FILE      = USER_PREFS_DIR + "deck.preferences";
     public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
