@@ -375,7 +375,7 @@ public class AttachAi extends SpellAbilityAi {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
 
         // check for ETB Trigger
-        boolean tapETB = attachSource.getTriggers().anyMatch(t -> {
+        boolean tapETB = isAuraSpell(sa) && attachSource.getTriggers().anyMatch(t -> {
             if (t.getMode() != TriggerType.ChangesZone) {
                 return false;
             }
