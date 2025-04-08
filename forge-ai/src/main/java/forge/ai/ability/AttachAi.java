@@ -19,6 +19,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
@@ -371,9 +373,39 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Card attachAIKeepTappedPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
+
+        // check for ETB Trigger
+        boolean tapETB = attachSource.getTriggers().anyMatch(t -> {
+            if (t.getMode() != TriggerType.ChangesZone) {
+                return false;
+            }
+
+            if (!ZoneType.Battlefield.toString().equals(t.getParam("Destination"))) {
+                return false;
+            }
+
+            if (t.hasParam("ValidCard") && !t.getParam("ValidCard").contains("Self")) {
+                return false;
+            }
+
+            SpellAbility tSa = t.ensureAbility();
+            if (tSa == null) {
+                return false;
+            }
+
+            if (!ApiType.Tap.equals(tSa.getApi())) {
+                return false;
+            }
+            if (!"Enchanted".equals(tSa.getParam("Defined"))) {
+                return false;
+            }
+
+            return true;
+        });
+
         final List<Card> prefList = CardLists.filter(list, c -> {
             // Don't do Untapped Vigilance cards
-            if (c.isCreature() && c.hasKeyword(Keyword.VIGILANCE) && c.isUntapped()) {
+            if (!tapETB && c.isCreature() && c.hasKeyword(Keyword.VIGILANCE) && c.isUntapped()) {
                 return false;
             }
 
@@ -388,20 +420,9 @@ public class AttachAi extends SpellAbilityAi {
                     return false;
                 }
             }
-
-            if (!c.isEnchanted()) {
-                return true;
-            }
-
-            final Iterable<Card> auras = c.getEnchantedBy();
-            for (Card aura : auras) {
-                SpellAbility auraSA = aura.getSpells().get(0);
-                if (auraSA.getApi() == ApiType.Attach) {
-                    if ("KeepTapped".equals(auraSA.getParam("AILogic"))) {
-                        // Don't attach multiple KeepTapped Auras to one card
-                        return false;
-                    }
-                }
+            // already affected
+            if (!c.canUntap(c.getController(), true)) {
+                return false;
             }
 
             return true;
@@ -925,6 +946,10 @@ public class AttachAi extends SpellAbilityAi {
         return true;
     }
 
+    private static boolean isAuraSpell(final SpellAbility sa) {
+        return sa.isSpell() && sa.getHostCard().isAura();
+    }
+
     /**
      * Attach preference.
      *
@@ -1387,8 +1412,6 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAICuriosityPreference(sa, prefList, mandatory, attachSource);
         } else if ("ChangeType".equals(logic)) {
             c = attachAIChangeTypePreference(sa, prefList, mandatory, attachSource);
-        } else if ("KeepTapped".equals(logic)) {
-            c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
         } else if ("Animate".equals(logic)) {
             c = attachAIAnimatePreference(sa, prefList, mandatory, attachSource);
         } else if ("Reanimate".equals(logic)) {
@@ -1397,6 +1420,12 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAISpecificCardPreference(sa, prefList, mandatory, attachSource);
         } else if ("HighestEvaluation".equals(logic)) {
             c = attachAIHighestEvaluationPreference(prefList);
+        }
+
+        if (isAuraSpell(sa)) {
+            if (attachSource.getReplacementEffects().anyMatch(re -> re.getMode().equals(ReplacementType.Untap) && re.getLayer().equals(ReplacementLayer.CantHappen))) {
+                c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
+            }
         }
 
         // Consider exceptional cases which break the normal evaluation rules
