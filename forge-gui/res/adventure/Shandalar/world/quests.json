@@ -7095,6 +7095,21 @@
 							}
 						],
 						"isDisabled": true
+					},
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setMapFlag": {
+									"key": ""
+								},
+								"POIReference": ""
+							}
+						],
+						"name": "I want to do my own thing (Disables main quest)"
 					}
 				]
 			},
