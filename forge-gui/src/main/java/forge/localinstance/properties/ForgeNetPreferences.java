@@ -43,7 +43,7 @@ public class ForgeNetPreferences extends PreferencesStore<ForgeNetPreferences.FN
 
     /** Instantiates a ForgePreferences object. */
     public ForgeNetPreferences() {
-        super(ForgeConstants.MAIN_PREFS_FILE, FNetPref.class);
+        super(ForgeConstants.SERVER_PREFS_FILE, FNetPref.class);
     }
 
     @Override
