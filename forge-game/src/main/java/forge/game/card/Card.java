@@ -205,6 +205,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean tributed;
     private Card suspectedEffect = null;
 
+    private Map<Card, GameCommand> extraEffects = Maps.newHashMap();
+
     private boolean manifested;
     private boolean cloaked;
 
@@ -3782,7 +3784,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addLeavesPlayCommand(final GameCommand c) {
         leavePlayCommandList.add(c);
     }
- 
+
     public void addStaticCommandList(Object[] objects) {
         staticCommandList.add(objects);
     }
@@ -4174,6 +4176,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             eff.addStaticAbility(s);
 
             GameCommand until = SpellAbilityEffect.exileEffectCommand(game, eff);
+
+            extraEffects.put(eff, until);
+
             addLeavesPlayCommand(until);
             addUnattachCommand(until);
             game.getAction().moveToCommand(eff, sa);
@@ -4795,7 +4800,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void addDraftAction(String s) {
         draftActions.add(s);
     }
- 
+
     private int intensity = 0;
     public final void addIntensity(final int n) {
         intensity += n;
@@ -6562,6 +6567,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return (c != null ? c.getImageKey() : "");
     }
 
+    public Set<Card> getExtraEffects() {
+        return this.extraEffects.keySet();
+    }
+
+    public void setExtraEffects(Map<Card, GameCommand> map) {
+        this.extraEffects = map;
+    }
+
     public final boolean isTributed() { return tributed; }
     public final void setTributed(final boolean b) {
         tributed = b;
@@ -6750,11 +6763,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             suspectedStatic.setSVar("SuspectedCantBlockBy", effect);
 
             GameCommand until = SpellAbilityEffect.exileEffectCommand(getGame(), suspectedEffect);
+            extraEffects.put(suspectedEffect, until);
             addLeavesPlayCommand(until);
             getGame().getAction().moveToCommand(suspectedEffect, null);
         } else {
             if (isSuspected()) {
-                getGame().getAction().exileEffect(suspectedEffect);
+                extraEffects.get(suspectedEffect).run();
+                extraEffects.remove(suspectedEffect);
                 suspectedEffect = null;
             }
         }
