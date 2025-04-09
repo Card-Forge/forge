@@ -211,6 +211,7 @@ The Royal Scions|Kenrith Twins' Ultimate Combo|You hit them, I'll tell you where
 Tibalt, Cosmic Impostor|Tibalt's Heist|Who says crime doesn't pay?
 Tibalt, the Fiend-Blooded|Tibalt's Treason|My side is the winning side!
 Tyvar Kell|Tyvar's Charge|To arms! To arms! And remember -- look fabulous!
+Ugin, Eye of the Storms|Ugin's Dragonstorm|The skies seem gray today... too gray.
 Ugin, the Spirit Dragon|Ugin's Anti-Ultimatum|A ragtag band of misfits, brought from the future...
 Urza, Planeswalker|Urza's Ruinous Blast|Thousands of years... of this?
 Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...
