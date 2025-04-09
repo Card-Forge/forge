@@ -10,6 +10,10 @@
     <artifactId>forge-gui</artifactId>
     <name>Forge Gui</name>
 
+    <properties>
+        <jetty.version>9.4.53.v20231009</jetty.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>forge</groupId>
@@ -62,6 +66,21 @@
             <groupId>org.lz4</groupId>
             <artifactId>lz4-java</artifactId>
             <version>1.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-client</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jetty.version}</version>
         </dependency>
     </dependencies>
 
