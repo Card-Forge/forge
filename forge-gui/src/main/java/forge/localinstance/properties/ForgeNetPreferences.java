@@ -17,8 +17,7 @@
  */
 package forge.localinstance.properties;
 
-import forge.MulliganDefs;
-import forge.game.GameLogEntryType;
+
 
 public class ForgeNetPreferences extends PreferencesStore<ForgeNetPreferences.FNetPref> {
 

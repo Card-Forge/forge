@@ -49,20 +49,49 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.jupnp</groupId>
-            <artifactId>org.jupnp</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jupnp</groupId>
-            <artifactId>org.jupnp.support</artifactId>
-            <version>3.0.2</version>
+            <groupId>com.simtechdata</groupId>
+            <artifactId>WaifUPnP</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.lz4</groupId>
             <artifactId>lz4-java</artifactId>
             <version>1.8.0</version>
         </dependency>
+
+        <!-- Logging Dependencies -->
+
+        <!-- Log4j API -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+
+        <!-- Log4j Core -->
+        <!-- Exclude conflicting SLF4J bindings -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.1</version>
+            <exclusions>
+                <!-- Exclude SLF4J bindings that conflict with Log4j -->
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- SLF4J to Log4j Bridge -->
+        <!-- Allows libraries using SLF4J to log through Log4j -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.17.1</version></dependency>
+
     </dependencies>
+
+
 
 </project>

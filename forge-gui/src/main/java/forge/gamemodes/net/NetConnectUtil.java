@@ -18,7 +18,6 @@ import forge.interfaces.ILobbyListener;
 import forge.interfaces.IUpdateable;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.properties.ForgeProfileProperties;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
