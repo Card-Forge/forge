@@ -125,10 +125,16 @@ public class NetConnectUtil {
     public static ChatMessage join(final String url, final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         String hostname;
+        //todo Should forge have a default port defined in Forge.Constants?
+        // Current implementation would mean the users preferred hosting port is their
+        //  default connection port
         int port = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
 
         try {
-            URI uri = new URI("http://" + url); // Prepend "http://" to ensure valid URI format
+            // Check if the URL already has a protocol
+            String formattedUrl = url.matches("^[a-zA-Z][a-zA-Z0-9+.-]*://.*") ? url : "http://" + url;
+            // Parse the URI
+            URI uri = new URI(formattedUrl);
             hostname = uri.getHost();
             if (uri.getPort() != -1) { // If a port is specified in the URL
                 port = uri.getPort();
