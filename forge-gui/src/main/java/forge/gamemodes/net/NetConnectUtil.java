@@ -23,6 +23,8 @@ import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
+import java.net.URI;
+
 public class NetConnectUtil {
     private NetConnectUtil() { }
 
@@ -100,8 +102,8 @@ public class NetConnectUtil {
     }
 
     public static void copyHostedServerUrl() {
-        String internalAddress = FServerManager.getInstance().getLocalAddress();
-        String externalAddress = FServerManager.getInstance().getExternalAddress();
+        String internalAddress = FServerManager.getLocalAddress();
+        String externalAddress = FServerManager.getExternalAddress();
         String internalUrl = internalAddress + ":" + FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
         String externalUrl = null;
         if (externalAddress != null) {
@@ -122,18 +124,17 @@ public class NetConnectUtil {
 
     public static ChatMessage join(final String url, final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
-        String hostname = url;
+        String hostname;
         int port = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
 
-        //see if port specified in URL
-        int urlSeparatorIndex = url.indexOf(':');
-        if (urlSeparatorIndex >= 0) {
-            hostname = url.substring(0, urlSeparatorIndex);
-            String portStr = url.substring(urlSeparatorIndex + 1);
-            try {
-                port = Integer.parseInt(portStr);
+        try {
+            URI uri = new URI("http://" + url); // Prepend "http://" to ensure valid URI format
+            hostname = uri.getHost();
+            if (uri.getPort() != -1) { // If a port is specified in the URL
+                port = uri.getPort();
             }
-            catch (Exception ex) {}
+        } catch (Exception ex) {
+            hostname = url; // Fallback to original URL if parsing fails
         }
 
 

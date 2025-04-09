@@ -43,7 +43,6 @@ public final class FServerManager {
     static Logger logger = LogManager.getLogger(FServerManager.class);
     private static FServerManager instance = null;
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
-    private byte[] externalAddress = new byte[]{8, 8, 8, 8};
     private boolean isHosting = false;
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -87,30 +86,10 @@ public final class FServerManager {
         String UPnPOption = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.UPnP);
         boolean startUPnP;
         if(UPnPOption.equalsIgnoreCase("ASK")) {
-            switch (SOptionPane.showOptionDialog(localizer.getMessageorUseDefault("lblUPnPQuestion", String.format("Attempt to open port %d automatically?", port), port),
-                    localizer.getMessageorUseDefault("lblUPnPTitle", "UPnP option"),
-                    null,
-                    ImmutableList.of(localizer.getMessageorUseDefault("lblUPnPJustOnce", "Just Once"),
-                            localizer.getMessageorUseDefault("lblUPnPNotNow", "Not Now"),
-                            localizer.getMessageorUseDefault("lblUPnPAlways", "Always"),
-                            localizer.getMessageorUseDefault("lblUPnPNever", "Never")), 0)) {
-                case 2:
-                    FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "ALWAYS");
-                    FModel.getNetPreferences().save();
-                case 0:
-                    //case 2 falls in here
-                    startUPnP = true;
-                    break;
-
-                case 3:
-                    FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
-                    FModel.getNetPreferences().save();
-                default:
-                    //case 1 defaults to here
-                    startUPnP = false;
-                    break;
-            }
-        } else startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
+            startUPnP = callUPnPDialog();
+        } else {
+            startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
+        }
         logger.info("Starting Multiplayer Server");
         try {
             final ServerBootstrap b = new ServerBootstrap()
@@ -150,6 +129,29 @@ public final class FServerManager {
             isHosting = true;
         } catch (final InterruptedException e) {
             logger.error(e.getMessage(),e);
+        }
+    }
+
+    private boolean callUPnPDialog() {
+        switch (SOptionPane.showOptionDialog(localizer.getMessageorUseDefault("lblUPnPQuestion", String.format("Attempt to open port %d automatically?", port), port),
+                localizer.getMessageorUseDefault("lblUPnPTitle", "UPnP option"),
+                null,
+                ImmutableList.of(localizer.getMessageorUseDefault("lblUPnPJustOnce", "Just Once"),
+                        localizer.getMessageorUseDefault("lblUPnPNotNow", "Not Now"),
+                        localizer.getMessageorUseDefault("lblUPnPAlways", "Always"),
+                        localizer.getMessageorUseDefault("lblUPnPNever", "Never")), 0)) {
+            case 2:
+                FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "ALWAYS");
+                FModel.getNetPreferences().save();
+            case 0:
+                //case 2 falls in here
+                return true;
+            case 3:
+                FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
+                FModel.getNetPreferences().save();
+            default:
+                //case 1 defaults to here
+                return false;
         }
     }
 
@@ -248,7 +250,7 @@ public final class FServerManager {
     // inspired by:
     //  https://stackoverflow.com/a/34873630
     //  https://stackoverflow.com/a/901943
-    private String getRoutableAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException, UnknownHostException {
+    private static String getRoutableAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException, UnknownHostException {
         try (DatagramSocket socket = new DatagramSocket()) {
             // Connect to a well-known external address (Google's public DNS server)
             socket.connect(InetAddress.getByName("8.8.8.8"), 12345); // Use a valid port instead of 0
@@ -272,7 +274,7 @@ public final class FServerManager {
         return "localhost";
     }
 
-    public String getLocalAddress() {
+    public static String getLocalAddress() {
         try {
             return getRoutableAddress(true, false);
         } catch (final Exception e) {
