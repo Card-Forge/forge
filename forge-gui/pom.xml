@@ -82,7 +82,6 @@
             <artifactId>jetty-servlet</artifactId>
             <version>${jetty.version}</version>
         </dependency>
-
     </dependencies>
 
 </project>

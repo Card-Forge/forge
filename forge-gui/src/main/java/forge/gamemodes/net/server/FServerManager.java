@@ -323,7 +323,6 @@ public final class FServerManager {
 
         try {
             // Create a new UPnP service instance
-            upnpService = new UpnpServiceImpl();
             upnpService = new UpnpServiceImpl(new DefaultUpnpServiceConfiguration());
             upnpService.startup();
 
