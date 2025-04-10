@@ -51,7 +51,7 @@ public class EndureAi extends SpellAbilityAi {
 
         // need a copy for one with extra +1/+1 counter boost,
         // without causing triggers to run
-        final Card copy = CardCopyService.getLKICopy(source);
+        final Card copy = CardCopyService.copyStats(source, ai, true);
         copy.setCounters(CounterEnumType.P1P1, copy.getCounters(CounterEnumType.P1P1) + amount);
         copy.setZone(source.getZone());
 
