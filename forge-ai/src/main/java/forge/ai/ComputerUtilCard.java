@@ -691,6 +691,8 @@ public class ComputerUtilCard {
     public static boolean canBeBlockedProfitably(final Player ai, Card attacker, boolean checkingOther) {
         AiBlockController aiBlk = new AiBlockController(ai, checkingOther);
         Combat combat = new Combat(ai);
+        // avoid removing original attacker
+        attacker.setCombatLKI(null);
         combat.addAttacker(attacker, ai);
         final List<Card> attackers = Lists.newArrayList(attacker);
         aiBlk.assignBlockersGivenAttackers(combat, attackers);
