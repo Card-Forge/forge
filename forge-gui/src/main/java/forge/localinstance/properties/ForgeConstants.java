@@ -25,15 +25,16 @@ import java.util.Collections;
 import java.util.Map;
 
 public final class ForgeConstants {
-    public static final String GITHUB_FORGE_URL             = "https://github.com/Card-Forge/forge/";
-    public static final String GITHUB_RELEASES_ATOM         = GITHUB_FORGE_URL + "releases.atom";
-    public static final String GITHUB_COMMITS_ATOM          = GITHUB_FORGE_URL + "commits/master.atom";
-    public static final String GITHUB_SNAPSHOT_URL          = GITHUB_FORGE_URL + "releases/download/daily-snapshots/";
-    public static final String RELEASE_URL                  = "https://releases.cardforge.org/";
-    public static final String PATH_SEPARATOR               = File.separator;
-    public static final String ASSETS_DIR                   = GuiBase.getInterface().getAssetsDir();
-    public static final String PROFILE_FILE                 = ASSETS_DIR + "forge.profile.properties";
-    public static final String PROFILE_TEMPLATE_FILE        = PROFILE_FILE + ".example";
+    public static final String GITHUB_FORGE_URL                 = "https://github.com/Card-Forge/forge/";
+    public static final String GITHUB_RELEASES_ATOM             = GITHUB_FORGE_URL + "releases.atom";
+    public static final String GITHUB_COMMITS_ATOM              = GITHUB_FORGE_URL + "commits/master.atom";
+    public static final String GITHUB_SNAPSHOT_URL              = GITHUB_FORGE_URL + "releases/download/daily-snapshots/";
+    public static final String RELEASE_URL                      = "https://releases.cardforge.org/";
+    public static final String PATH_SEPARATOR                   = File.separator;
+    public static final String ASSETS_DIR                       = GuiBase.getInterface().getAssetsDir();
+    public static final String PROFILE_FILE                     = ASSETS_DIR + "forge.profile.properties";
+    public static final String PROFILE_TEMPLATE_FILE            = PROFILE_FILE + ".example";
+    public static final Integer DEFAULT_SERVER_CONNECTION_PORT  = 36743;
 
     public static final String RES_DIR                      = ASSETS_DIR + "res" + PATH_SEPARATOR;
     public static final String ADVENTURE_DIR                = RES_DIR + "adventure" + PATH_SEPARATOR;

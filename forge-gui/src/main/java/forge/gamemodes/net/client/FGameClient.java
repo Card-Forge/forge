@@ -17,14 +17,12 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 public class FGameClient implements IToServer {
-    private static Logger logger = LogManager.getLogger(FGameClient.class);
     private final IGuiGame clientGui;
     private final String hostname;
     private final Integer port;
@@ -71,13 +69,15 @@ public class FGameClient implements IToServer {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    logger.error(e.getMessage(),e);
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
                 } finally {
                     group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {
-            logger.error(e.getMessage(),e);
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

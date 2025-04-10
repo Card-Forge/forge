@@ -2,7 +2,6 @@ package forge.gamemodes.net.server;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
-import com.simtechdata.waifupnp.UPnP;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
@@ -26,26 +25,28 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import org.jupnp.DefaultUpnpServiceConfiguration;
+import org.jupnp.UpnpService;
+import org.jupnp.UpnpServiceImpl;
+import org.jupnp.support.igd.PortMappingListener;
+import org.jupnp.support.model.PortMapping;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public final class FServerManager {
-    static Logger logger = LogManager.getLogger(FServerManager.class);
     private static FServerManager instance = null;
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
     private boolean isHosting = false;
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
+    private UpnpService upnpService = null;
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
     private boolean UPnPMapped = false;
@@ -90,7 +91,7 @@ public final class FServerManager {
         } else {
             startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
         }
-        logger.info("Starting Multiplayer Server");
+        System.out.println("Starting Multiplayer Server");
         try {
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
@@ -117,7 +118,8 @@ public final class FServerManager {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    logger.error(e.getMessage(),e);
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
                 } finally {
                     stopServer();
                 }
@@ -128,7 +130,8 @@ public final class FServerManager {
             Runtime.getRuntime().addShutdownHook(shutdownHook);
             isHosting = true;
         } catch (final InterruptedException e) {
-            logger.error(e.getMessage(),e);
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -136,10 +139,10 @@ public final class FServerManager {
         switch (SOptionPane.showOptionDialog(localizer.getMessageorUseDefault("lblUPnPQuestion", String.format("Attempt to open port %d automatically?", port), port),
                 localizer.getMessageorUseDefault("lblUPnPTitle", "UPnP option"),
                 null,
-                ImmutableList.of(localizer.getMessageorUseDefault("lblUPnPJustOnce", "Just Once"),
-                        localizer.getMessageorUseDefault("lblUPnPNotNow", "Not Now"),
-                        localizer.getMessageorUseDefault("lblUPnPAlways", "Always"),
-                        localizer.getMessageorUseDefault("lblUPnPNever", "Never")), 0)) {
+                ImmutableList.of(localizer.getMessageorUseDefault("lblJustOnce", "Just Once"),
+                        localizer.getMessageorUseDefault("lblNotNow", "Not Now"),
+                        localizer.getMessageorUseDefault("lblAlways", "Always"),
+                        localizer.getMessageorUseDefault("lblNever", "Never")), 0)) {
             case 2:
                 FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "ALWAYS");
                 FModel.getNetPreferences().save();
@@ -162,7 +165,10 @@ public final class FServerManager {
     private void stopServer(final boolean removeShutdownHook) {
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
-        unMapNatPort();
+        if (upnpService != null) {
+            upnpService.shutdown();
+            upnpService = null;
+        }
         if (removeShutdownHook) {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
@@ -278,7 +284,8 @@ public final class FServerManager {
         try {
             return getRoutableAddress(true, false);
         } catch (final Exception e) {
-            logger.error(e.getMessage(),e);
+            System.out.println(e.getMessage());
+            e.printStackTrace();
             return "localhost";
         }
     }
@@ -291,13 +298,15 @@ public final class FServerManager {
                     whatismyip.openStream()));
             return in.readLine();
         } catch (IOException e) {
-            logger.error(e.getMessage(),e);
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    logger.error(e.getMessage(),e);
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
                 }
             }
         }
@@ -305,23 +314,28 @@ public final class FServerManager {
     }
 
     private void mapNatPort() {
-        boolean success = UPnP.openPortTCP(port);
-        if(!success) {
-            logger.error("Failed to open port");
-            SOptionPane.showErrorDialog(localizer.getMessageorUseDefault("lblUPnPFailed", String.format("UPnP failed to open port %d", port), port));
-        } else {
-            UPnPMapped = true;
+        final String localAddress = getLocalAddress();
+        final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
+        // Shutdown existing UPnP service if already running
+        if (upnpService != null) {
+            upnpService.shutdown();
+        }
+
+        try {
+            // Create a new UPnP service instance
+            upnpService = new UpnpServiceImpl();
+            upnpService = new UpnpServiceImpl(new DefaultUpnpServiceConfiguration());
+            upnpService.startup();
+
+            // Add a PortMappingListener
+            upnpService.getRegistry().addListener(new PortMappingListener(portMapping));
+            // Trigger device discovery
+            upnpService.getControlPoint().search();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
-    private void unMapNatPort() {
-        if(UPnPMapped) {
-            UPnP.closePortTCP(port);
-            UPnPMapped = false;
-        }
-    }
-
-
-
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
         @Override

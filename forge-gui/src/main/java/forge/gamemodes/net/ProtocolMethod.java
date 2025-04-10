@@ -17,8 +17,7 @@ import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -110,7 +109,7 @@ public enum ProtocolMethod {
             this.toInvoke = toInvoke;
         }
     }
-    private final static Logger logger = LogManager.getLogger(ProtocolMethod.class);
+
     private final ProtocolMethod.Mode mode;
     private final Class<?> returnType;
     private final Class<?>[] args;
@@ -173,7 +172,8 @@ public enum ProtocolMethod {
                 }
             }
         } catch (Exception e) {
-            logger.error(e.getMessage(),e);
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
