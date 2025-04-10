@@ -19,12 +19,14 @@ package forge.localinstance.properties;
 
 import forge.gui.GuiBase;
 import forge.util.FileUtil;
+import forge.util.Localizer;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.Map;
 
 public final class ForgeConstants {
+    private static final Localizer localizer = Localizer.getInstance();
     public static final String GITHUB_FORGE_URL                 = "https://github.com/Card-Forge/forge/";
     public static final String GITHUB_RELEASES_ATOM             = GITHUB_FORGE_URL + "releases.atom";
     public static final String GITHUB_COMMITS_ATOM              = GITHUB_FORGE_URL + "commits/master.atom";
@@ -374,6 +376,14 @@ public final class ForgeConstants {
 
     // Supported video mode names and dimensions (currently used in Adventure Mode)
     public static final String[] VIDEO_MODES = {"720p", "768p", "900p", "1080p", "1440p", "2160p"};
+
+    public static Map<String, String> getUPnPPreferenceMapping() {
+        return Map.of(
+                localizer.getMessage("lblAsk"), "ASK",
+                localizer.getMessage("lblAlways"), "ALWAYS",
+                localizer.getMessage("lblNever"), "NEVER"
+        );
+    }
 
     public enum CounterDisplayLocation {
 

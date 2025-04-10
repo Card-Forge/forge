@@ -24,7 +24,7 @@ public class ForgeNetPreferences extends PreferencesStore<ForgeNetPreferences.FN
     /**
      * Preference identifiers and their default values.
      */
-    public enum FNetPref {
+    public enum FNetPref implements IPref {
         NET_PORT("36743"),
         UPnP("ASK");
 
@@ -34,6 +34,7 @@ public class ForgeNetPreferences extends PreferencesStore<ForgeNetPreferences.FN
             this.strDefaultVal = s0;
         }
 
+        @Override
         public String getDefault() {
             return strDefaultVal;
         }
