@@ -99,7 +99,8 @@
 							}
 						},
 						{
-                            &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
+                            &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;,
+                            &quot;not&quot;: true
                         }
 					],
 					&quot;text&quot;: &quot;Suddently, the gate dissapears right in front of your eyes, You are now free to pass.&quot;,

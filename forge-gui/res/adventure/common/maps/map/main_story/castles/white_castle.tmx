@@ -92,7 +92,8 @@
 							}
 						},
 						{
-                            &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
+                            &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;,
+                            &quot;not&quot;: true
                         }
 					],
 					&quot;text&quot;: &quot;With an extremely loud blast, the gate burst open, leaving only ashes in your path. You are now free to pass.&quot;,

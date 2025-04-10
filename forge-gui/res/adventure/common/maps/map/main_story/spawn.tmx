@@ -37,8 +37,7 @@
                 &quot;name&quot;: &quot;Why am I here?&quot;,
                 &quot;condition&quot;: [
                     {
-                        &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;,
-                        &quot;not&quot;: true
+                        &quot;checkQuestFlag&quot;: &quot;exploreShand1&quot;,
                     }
                 ],
                 &quot;text&quot;: &quot;This... is Shandalar. A plane where mana is so prevalent and used by all that is sentient. Even the common people use spells daily.&quot;,
