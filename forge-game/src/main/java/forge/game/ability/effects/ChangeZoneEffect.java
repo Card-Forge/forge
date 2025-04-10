@@ -675,8 +675,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     eff.addRemembered(movedCard);
 
-                    // Add forgot trigger
-                    addExileOnMovedTrigger(eff, "Battlefield");
                     movedCard.addLeavesPlayCommand(exileEffectCommand(game, eff));
 
                     game.getAction().moveToCommand(eff, sa);
