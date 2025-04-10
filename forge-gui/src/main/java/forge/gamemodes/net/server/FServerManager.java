@@ -19,6 +19,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+
+import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.UpnpService;
 import org.jupnp.UpnpServiceImpl;
 import org.jupnp.support.igd.PortMappingListener;
@@ -277,7 +279,8 @@ public final class FServerManager {
 
         try {
             // Create a new UPnP service instance
-            upnpService = new UpnpServiceImpl();
+            upnpService = new UpnpServiceImpl(new DefaultUpnpServiceConfiguration());
+            upnpService.startup();
 
             // Add a PortMappingListener
             upnpService.getRegistry().addListener(new PortMappingListener(portMapping));
