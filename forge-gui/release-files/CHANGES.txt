@@ -1,2 +1,1 @@
-- Bug fixes -
-As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
+Added current number of collected cards to reward screen and packs screen. Once you have 4 of a card the number will turn red so you can easily figure out which ones to sell for gold instead of just hanging on to them. 
