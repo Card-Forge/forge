@@ -263,7 +263,9 @@ public enum CSubmenuPreferences implements ICDoc {
         if (FOptionPane.showConfirmDialog(userPrompt, localizer.getMessage("TresetForgeSettingsToDefault"))) {
             final ForgePreferences prefs = FModel.getPreferences();
             prefs.reset();
+            netPrefs.reset();
             prefs.save();
+            netPrefs.save();
             update();
             Singletons.getControl().restartForge();
         }
