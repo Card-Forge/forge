@@ -725,6 +725,10 @@ public final class StaticAbilityContinuous {
                     }).collect(Collectors.toList());
                 }
 
+                if (newKeywords != null && !newKeywords.isEmpty() && params.containsKey("KeywordMultiplier")) {
+                    newKeywords = newKeywords.stream().flatMap(s -> Collections.nCopies(Integer.valueOf(params.get("KeywordMultiplier")), s).stream()).collect(Collectors.toList());
+                }
+
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
                         removeAllAbilities, se.getTimestamp(), stAb, false);
                 affectedCard.updateKeywordsCache(affectedCard.getCurrentState());
