@@ -301,6 +301,7 @@ public class CardCopyService {
         // extra copy PT boost
         newCopy.setPTBoost(copyFrom.getPTBoostTable());
 
+        newCopy.copyFrom(copyFrom);
         newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()));
 
         newCopy.setColor(copyFrom.getColor());
@@ -351,8 +352,6 @@ public class CardCopyService {
             newCopy.setChosenNumber(copyFrom.getChosenNumber());
         }
         newCopy.setChosenEvenOdd(copyFrom.getChosenEvenOdd());
-
-        newCopy.copyFrom(copyFrom);
 
         // for getReplacementList (run after setChangedCardKeywords for caching)
         newCopy.setStoredKeywords(copyFrom.getStoredKeywords(), true);
