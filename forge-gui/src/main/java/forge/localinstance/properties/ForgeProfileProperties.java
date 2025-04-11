@@ -43,7 +43,6 @@ public class ForgeProfileProperties {
     private static Map<String, String> cardPicsSubDirs;
     private static String decksDir;
     private static String decksConstructedDir;
-    private static int serverPort;
 
     private static final String USER_DIR_KEY      = "userDir";
     private static final String CACHE_DIR_KEY     = "cacheDir";
@@ -51,7 +50,7 @@ public class ForgeProfileProperties {
     private static final String CARD_PICS_SUB_DIRS_KEY = "cardPicsSubDirs";
     private static final String DECKS_DIR_KEY      = "decksDir";
     private static final String DECKS_CONSTRUCTED_DIR_KEY = "decksConstructedDir";
-    private static final String SERVER_PORT_KEY = "serverPort";
+
 
     private ForgeProfileProperties() {
         //prevent initializing static class
@@ -75,7 +74,7 @@ public class ForgeProfileProperties {
         cardPicsSubDirs = getMap(props, CARD_PICS_SUB_DIRS_KEY);
         decksDir    = getDir(props, DECKS_DIR_KEY, userDir + "decks" + File.separator);
         decksConstructedDir = getDir(props, DECKS_CONSTRUCTED_DIR_KEY, decksDir + "constructed" + File.separator);
-        serverPort = getInt(props, SERVER_PORT_KEY, 36743); // "Forge" using phone keypad
+
 
         //ensure directories exist
         FileUtil.ensureDirectoryExists(userDir);
@@ -125,10 +124,6 @@ public class ForgeProfileProperties {
     public static void setDecksConstructedDir(final String decksConstructedDir0) {
         decksConstructedDir = decksConstructedDir0;
         save();
-    }
-
-    public static int getServerPort() {
-        return serverPort;
     }
 
     private static Map<String, String> getMap(final Properties props, final String propertyKey) {
@@ -233,9 +228,6 @@ public class ForgeProfileProperties {
                 sb.append(entry.getKey()).append("->").append(entry.getValue());
             }
             sb.append("\n");
-        }
-        if (serverPort != 0) {
-            sb.append(SERVER_PORT_KEY + "=").append(serverPort);
         }
         if (sb.length() > 0) {
             FileUtil.writeFile(ForgeConstants.PROFILE_FILE, sb.toString());

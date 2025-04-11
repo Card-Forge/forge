@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="ALL">
+<Configuration status="WARN">
+    <!-- Define Appenders -->
     <Appenders>
-        <Console name="A1">
-            <PatternLayout pattern="%-4r [%t] %-5p %c %x - %m%n" />
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
         </Console>
 
-        <!--Sentry name="Sentry" /-->
+        <!-- File Appender with Rolling Policy -->
+        <RollingFile name="FileLogger" fileName="logs/app.log" filePattern="logs/app-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- Roll over when the file size reaches 10 MB -->
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
     </Appenders>
 
+    <!-- Define Loggers -->
     <Loggers>
-        <Root level="ALL">
-            <AppenderRef ref="A1" />
-            <!-- Note that the Sentry logging threshold is overridden to the WARN level -->
-            <!--AppenderRef ref="Sentry" level="WARN" /-->
+        <!-- Root Logger -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
         </Root>
     </Loggers>
 </Configuration>

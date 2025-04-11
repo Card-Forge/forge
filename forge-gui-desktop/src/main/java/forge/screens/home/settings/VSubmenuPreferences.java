@@ -60,6 +60,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnTokenPreviewer = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnTokenPreviewer")).build();
 
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
+    private final FLabel btnServerPort = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox(localizer.getMessage("cbRemoveSmall"));
     private final JCheckBox cbCardBased = new OptionsCheckBox(localizer.getMessage("cbCardBased"));
@@ -146,6 +147,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpDefaultLanguage = new FComboBoxPanel<>(localizer.getMessage("cbpSelectLanguage")+":");
     private final FComboBoxPanel<String> cbpAutoUpdater = new FComboBoxPanel<>(localizer.getMessage("cbpAutoUpdater")+":");
     private final FComboBoxPanel<String> cbpSwitchStates = new FComboBoxPanel<>(localizer.getMessage("cbpSwitchStates")+":");
+    private final FComboBoxPanel<String> cbpServerUPnPOption = new FComboBoxPanel<>(localizer.getMessage("cbpServerUPnPOption")+":");
 
     /**
      * Constructor.
@@ -280,6 +282,15 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpAutoYieldMode, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpAutoYieldMode")), descriptionConstraints);
+
+        //Server Preferences
+        pnlPrefs.add(new SectionLabel(localizer.getMessage("ServerPreferences")), sectionConstraints);
+
+        pnlPrefs.add(cbpServerUPnPOption, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlServerUPnPOptions")), descriptionConstraints);
+
+        pnlPrefs.add(getServerPortPanel(), titleConstraints + ", h 26px!");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlServerPort")), descriptionConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("RandomDeckGeneration")), sectionConstraints);
@@ -618,6 +629,17 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             this.setText(StringUtils.join(displayText, ' '));
         }
     }
+
+    //Server Preference Panel Components
+    //###################################################################
+    public final FComboBoxPanel<String> getCbpServerUPnPOption() {
+        return cbpServerUPnPOption;
+    }
+
+    public FLabel getBtnServerPort() {
+        return btnServerPort;
+    }
+    //###################################################################
 
     public final FComboBoxPanel<String> getCbpAutoUpdater() {
         return cbpAutoUpdater;
@@ -1051,6 +1073,15 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblPlayerName") +": ").fontSize(12).fontStyle(Font.BOLD).build();
         p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
         p.add(btnPlayerName, "aligny top, h 100%, w 200px!");
+        return p;
+    }
+
+    private JPanel getServerPortPanel() {
+        JPanel p = new JPanel(new MigLayout("insets 0, gap 0!"));
+        p.setOpaque(false);
+        FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblServerPort") +": ").fontSize(12).fontStyle(Font.BOLD).build();
+        p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
+        p.add(btnServerPort, "aligny top, h 100%, w 200px!");
         return p;
     }
 }
