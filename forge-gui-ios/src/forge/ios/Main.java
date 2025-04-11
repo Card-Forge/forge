@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.jupnp.UpnpServiceConfiguration;
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 import org.robovm.apple.uikit.UIPasteboard;
@@ -137,6 +138,12 @@ public class Main extends IOSApplication.Delegate {
         @Override
         public ArrayList<String> getGamepads() {
             return new ArrayList<>();
+        }
+
+        @Override
+        public UpnpServiceConfiguration getUpnpPlatformService() {
+            // not used
+            return null;
         }
     }
 }

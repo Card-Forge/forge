@@ -22,6 +22,8 @@ import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jupnp.DefaultUpnpServiceConfiguration;
+import org.jupnp.UpnpServiceConfiguration;
 
 import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;
@@ -59,6 +61,11 @@ import forge.util.SwingImageFetcher;
 
 public class GuiDesktop implements IGuiBase {
     private ImageFetcher imageFetcher = new SwingImageFetcher();
+
+    @Override
+    public UpnpServiceConfiguration getUpnpPlatformService() {
+        return new DefaultUpnpServiceConfiguration();
+    }
 
     @Override
     public boolean isRunningOnDesktop() {

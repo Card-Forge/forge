@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jupnp.UpnpServiceConfiguration;
 
 import javax.imageio.ImageIO;
 import java.awt.Desktop;
@@ -145,6 +146,12 @@ public class Main {
         @Override
         public ArrayList<String> getGamepads() {
             return new ArrayList<>();
+        }
+
+        @Override
+        public UpnpServiceConfiguration getUpnpPlatformService() {
+            // shouldn't be reached
+            return null;
         }
     }
 }

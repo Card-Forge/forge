@@ -64,6 +64,8 @@ import forge.interfaces.IDeviceAdapter;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jupnp.DefaultUpnpServiceConfiguration;
+import org.jupnp.android.AndroidUpnpServiceConfiguration;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -616,6 +618,11 @@ public class Main extends AndroidApplication {
                 }
             }
             return result;
+        }
+
+        @Override
+        public DefaultUpnpServiceConfiguration getUpnpPlatformService() {
+            return new AndroidUpnpServiceConfiguration();
         }
 
         @Override
