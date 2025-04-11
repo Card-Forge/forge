@@ -2,12 +2,14 @@ package forge.game;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 import forge.card.CardStateName;
 import forge.card.MagicColor;
@@ -564,13 +566,20 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return CardView.get(hostCard);
     }
 
-    protected IHasSVars getSVarFallback() {
+    protected List<IHasSVars> getSVarFallback() {
+        List<IHasSVars> result = Lists.newArrayList();
+
         if (this.getKeyword() != null && this.getKeyword().getStatic() != null) {
-            return this.getKeyword().getStatic();
+            // TODO try to add the keyword instead if possible?
+            result.add(this.getKeyword().getStatic());
         }
         if (getCardState() != null)
-            return getCardState();
-        return getHostCard();
+            result.add(getCardState());
+        result.add(getHostCard());
+        return result;
+    }
+    protected Optional<IHasSVars> findSVar(final String name) {
+        return getSVarFallback().stream().filter(f -> f.hasSVar(name)).findFirst();
     }
 
     @Override
@@ -578,12 +587,12 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         if (sVars.containsKey(name)) {
             return sVars.get(name);
         }
-        return getSVarFallback().getSVar(name);
+        return findSVar(name).map(o -> o.getSVar(name)).orElse(null);
     }
 
     @Override
     public boolean hasSVar(final String name) {
-        return sVars.containsKey(name) || getSVarFallback().hasSVar(name);
+        return sVars.containsKey(name) || findSVar(name).isPresent();
     }
 
     public Integer getSVarInt(final String name) {
@@ -604,7 +613,11 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
     @Override
     public Map<String, String> getSVars() {
-        Map<String, String> res = Maps.newHashMap(getSVarFallback().getSVars());
+        Map<String, String> res = Maps.newHashMap();
+        // TODO reverse the order
+        for (IHasSVars s : getSVarFallback()) {
+            res.putAll(s.getSVars());
+        }
         res.putAll(sVars);
         return res;
     }
