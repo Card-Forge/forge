@@ -18,6 +18,7 @@
 package forge.game.spellability;
 
 import java.util.Map;
+import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.game.IHasSVars;
