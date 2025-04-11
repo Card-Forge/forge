@@ -47,6 +47,12 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.115.Final</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.jupnp</groupId>
             <artifactId>org.jupnp</artifactId>
             <version>3.0.2</version>
@@ -57,10 +63,9 @@
             <version>3.0.2</version>
         </dependency>
         <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.115.Final</version>
-            <scope>compile</scope>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp.android</artifactId>
+            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.lz4</groupId>

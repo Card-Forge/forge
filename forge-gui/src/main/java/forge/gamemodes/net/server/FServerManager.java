@@ -28,7 +28,9 @@ import io.netty.handler.logging.LoggingHandler;
 
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.UpnpService;
+import org.jupnp.UpnpServiceConfiguration;
 import org.jupnp.UpnpServiceImpl;
+import org.jupnp.android.AndroidUpnpServiceConfiguration;
 import org.jupnp.support.igd.PortMappingListener;
 import org.jupnp.support.model.PortMapping;
 
@@ -322,7 +324,13 @@ public final class FServerManager {
 
         try {
             // Create a new UPnP service instance
-            upnpService = new UpnpServiceImpl(new DefaultUpnpServiceConfiguration());
+            UpnpServiceConfiguration service;
+            if (GuiBase.isAndroid()) {
+                service = new AndroidUpnpServiceConfiguration();
+            } else {
+                service = new DefaultUpnpServiceConfiguration();
+            }
+            upnpService = new UpnpServiceImpl(service);
             upnpService.startup();
 
             // Add a PortMappingListener
