@@ -2706,24 +2706,6 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[res.size() > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
 
-        if (sq[0].startsWith("CreatureType")) {
-            String[] sqparts = l[0].split(" ", 2);
-            final String[] rest = sqparts[1].split(",");
-
-            final CardCollectionView cardsInZones = sqparts[0].length() > 12
-                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(12)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
-            final Set<String> creatTypes = Sets.newHashSet();
-
-            for (Card card : cards) {
-                creatTypes.addAll(card.getType().getCreatureTypes());
-            }
-            // filter out fun types?
-            return doXMath(creatTypes.size(), expr, c, ctb);
-        }
-
         // Count$Chroma.<color name>
         if (sq[0].startsWith("Chroma")) {
             final CardCollectionView cards;
@@ -3826,6 +3808,15 @@ public class AbilityUtils {
 
         if (string.startsWith("CardTypes")) {
             return doXMath(countCardTypesFromList(paidList, string.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(string), source, ctb);
+        }
+
+        if (string.startsWith("CreatureType")) {
+            final Set<String> creatTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                creatTypes.addAll(card.getType().getCreatureTypes());
+            }
+            // filter out fun types?
+            return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(string), source, ctb);
         }
 
         String filteredString = string;

@@ -619,23 +619,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
             for (String k : keywords) {
                 resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table, false);
             }
-        } else if (sa.hasParam("ForColor")) {
-            Iterable<String> oldColors = card.getChosenColors();
-            CounterType counterType = null;
-            try {
-                counterType = chooseTypeFromList(sa, sa.getParam("CounterType"), null, placer.getController());
-            } catch (Exception e) {
-                System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
-                return;
-            }
-            for (String color : MagicColor.Constant.ONLY_COLORS) {
-                card.setChosenColors(Lists.newArrayList(color));
-                if (sa.getOriginalParam("ChoiceTitle") != null) {
-                    sa.getMapParams().put("ChoiceTitle", sa.getOriginalParam("ChoiceTitle").replace("chosenColor", color));
-                }
-                resolvePerType(sa, placer, counterType, counterAmount, table, true);
-            }
-            card.setChosenColors(Lists.newArrayList(oldColors));
         } else {
             CounterType counterType = null;
             if (!sa.hasParam("EachExistingCounter") && !sa.hasParam("EachFromSource")
@@ -649,7 +632,19 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     return;
                 }
             }
-            resolvePerType(sa, placer, counterType, counterAmount, table, true);
+            if (sa.hasParam("ForColor")) {
+                Iterable<String> oldColors = card.getChosenColors();
+                for (String color : MagicColor.Constant.ONLY_COLORS) {
+                    card.setChosenColors(Lists.newArrayList(color));
+                    if (sa.getOriginalParam("ChoiceTitle") != null) {
+                        sa.getMapParams().put("ChoiceTitle", sa.getOriginalParam("ChoiceTitle").replace("chosenColor", color));
+                    }
+                    resolvePerType(sa, placer, counterType, counterAmount, table, true);
+                }
+                card.setChosenColors(Lists.newArrayList(oldColors));
+            } else {
+                resolvePerType(sa, placer, counterType, counterAmount, table, true);
+            }
         }
 
         table.replaceCounterEffect(game, sa, true);
