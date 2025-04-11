@@ -587,7 +587,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         if (sVars.containsKey(name)) {
             return sVars.get(name);
         }
-        return findSVar(name).map(o -> o.getSVar(name)).orElse(null);
+        return findSVar(name).map(o -> o.getSVar(name)).orElse("");
     }
 
     @Override
