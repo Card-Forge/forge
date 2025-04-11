@@ -18,6 +18,8 @@
 package forge.game.spellability;
 
 import java.util.Map;
+import java.util.List;
+import com.google.common.collect.Lists;
 
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
@@ -105,10 +107,10 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     }
 
     @Override
-    protected IHasSVars getSVarFallback() {
+    protected List<IHasSVars> getSVarFallback() {
         // fused or spliced
         if (getRootAbility().getCardState() != getCardState()) {
-            return getCardState();
+            return Lists.newArrayList(getCardState());
         }
         return super.getSVarFallback();
     }
