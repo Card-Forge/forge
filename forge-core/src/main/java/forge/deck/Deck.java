@@ -247,7 +247,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         Map<String, List<String>> referenceDeckLoadingMap;
         if (deferredSections != null) {
-            this.validateDeferredSections();
+            this.normalizeDeferredSections();
             referenceDeckLoadingMap = new HashMap<>(this.deferredSections);
         } else
             referenceDeckLoadingMap = new HashMap<>(loadedSections);
@@ -267,7 +267,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 continue;
             final List<String> cardsInSection = s.getValue();
             ArrayList<String> cardNamesWithNoEdition = getAllCardNamesWithNoSpecifiedEdition(cardsInSection);
-            if (cardNamesWithNoEdition.size() > 0) {
+            if (!cardNamesWithNoEdition.isEmpty()) {
                 includeCardsFromUnspecifiedSet = true;
                 if (smartCardArtSelection)
                     cardsWithNoEdition.put(sec, cardNamesWithNoEdition);
@@ -281,10 +281,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             optimiseCardArtSelectionInDeckSections(cardsWithNoEdition);
     }
 
-    private void validateDeferredSections() {
+    private void normalizeDeferredSections() {
         /*
          Construct a temporary (DeckSection, CardPool) Maps, to be sanitised and finalised
-         before copying into `this.parts`. This sanitisation is applied because of the
+         before copying into `this.parts`. This sanitization is applied because of the
          validation schema introduced in DeckSections.
          */
         Map<String, List<String>> validatedSections = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -296,61 +296,33 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
 
             final List<String> cardsInSection = s.getValue();
-            List<Pair<String, Integer>> originalCardRequests = CardPool.processCardList(cardsInSection);
             CardPool pool = CardPool.fromCardList(cardsInSection);
             if (pool.countDistinct() == 0)
                 continue;  // pool empty, no card has been found!
 
-            // Filter pool by applying DeckSection Validation schema for Card Types (to avoid inconsistencies)
-            CardPool filteredPool = pool.getFilteredPoolWithCardsCount(deckSection::validate);
-            // Add all the cards from ValidPool anyway!
-            List<String> whiteList = validatedSections.getOrDefault(s.getKey(), null);
-            if (whiteList == null)
-                whiteList = new ArrayList<>();
-            for (Entry<PaperCard, Integer> entry : filteredPool) {
-                String poolRequest = getPoolRequest(entry, originalCardRequests);
-                whiteList.add(poolRequest);
+            List<String> validatedSection = validatedSections.computeIfAbsent(s.getKey(), (k) -> new ArrayList<>());
+            for (Entry<PaperCard, Integer> entry : pool) {
+                PaperCard card = entry.getKey();
+                String normalizedRequest = getPoolRequest(entry);
+                if(deckSection.validate(card))
+                    validatedSection.add(normalizedRequest);
+                else {
+                    // Card was in the wrong section. Move it to the right section.
+                    DeckSection cardSection = DeckSection.matchingSection(card);
+                    assert(cardSection.validate(card)); //Card doesn't fit in the matchingSection?
+                    List<String> sectionCardList = validatedSections.computeIfAbsent(cardSection.name(), (k) -> new ArrayList<>());
+                    sectionCardList.add(normalizedRequest);
+                }
             }
-            validatedSections.put(s.getKey(), whiteList);
-
-            if (filteredPool.countDistinct() != pool.countDistinct()) {
-                CardPool blackList = pool.getFilteredPoolWithCardsCount(input -> !(deckSection.validate(input)));
-
-                for (Entry<PaperCard, Integer> entry : blackList) {
-                    DeckSection cardSection = DeckSection.matchingSection(entry.getKey());
-                    String poolRequest = getPoolRequest(entry, originalCardRequests);
-                    List<String> sectionCardList = validatedSections.getOrDefault(cardSection.name(), null);
-                    if (sectionCardList == null)
-                        sectionCardList = new ArrayList<>();
-                    sectionCardList.add(poolRequest);
-                    validatedSections.put(cardSection.name(), sectionCardList);
-                } // end for blacklist
-            } // end if
         } // end main for on deferredSections
 
         // Overwrite deferredSections
         this.deferredSections = validatedSections;
     }
 
-    private String getPoolRequest(Entry<PaperCard, Integer> entry, List<Pair<String, Integer>> originalCardRequests) {
-        PaperCard card = entry.getKey();
+    private String getPoolRequest(Entry<PaperCard, Integer> entry) {
         int amount = entry.getValue();
-        String poolCardRequest = CardDb.CardRequest.compose(
-                card.isFoil() ? CardDb.CardRequest.compose(card.getName(), true) : card.getName(),
-                card.getEdition(), card.getArtIndex(), card.getColorID());
-        String originalRequestCandidate = null;
-        for (Pair<String, Integer> originalRequest : originalCardRequests){
-            String cardRequest = originalRequest.getLeft();
-            if (!StringUtils.startsWithIgnoreCase(poolCardRequest, cardRequest))
-                continue;
-            originalRequestCandidate = cardRequest;
-            int cardAmount = originalRequest.getRight();
-            if (amount == cardAmount)
-                return String.format("%d %s", cardAmount, cardRequest);
-        }
-        // This is just in case, it should never happen as we're
-        if (originalRequestCandidate != null)
-            return String.format("%d %s", amount, originalRequestCandidate);
+        String poolCardRequest = CardDb.CardRequest.compose(entry.getKey());
         return String.format("%d %s", amount, poolCardRequest);
     }
 

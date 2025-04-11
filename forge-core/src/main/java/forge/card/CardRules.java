@@ -396,6 +396,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public int getSetColorID() {
+        //Could someday generalize this to support other kinds of markings.
         return setColorID;
     }
 

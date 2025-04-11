@@ -278,21 +278,6 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     }
 
     @Test
-    public void testGetCardByNameSetArtIndexAndCollectorNumber() {
-        // MultiArt Card
-        PaperCard card;
-        for (int i = 0; i < 4; i++) {
-            int artIndex = i + 1;
-            card = this.cardDb.getCard(cardNameHymnToTourach, editionHymnToTourach, artIndex,
-                    collectorNumbersHymnToTourach[i]);
-            assertEquals(card.getName(), cardNameHymnToTourach);
-            assertEquals(card.getEdition(), editionHymnToTourach);
-            assertEquals(card.getCollectorNumber(), collectorNumbersHymnToTourach[i]);
-            assertEquals(card.getArtIndex(), artIndex);
-        }
-    }
-
-    @Test
     public void testNullIsReturnedWithWrongInfo() {
         String wrongEditionCode = "M11";
         PaperCard legacyCard = this.legacyCardDb.getCard(cardNameShivanDragon, wrongEditionCode);
@@ -306,11 +291,6 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         assertNull(card);
         // Wrong collector number
         card = this.cardDb.getCard(cardNameShivanDragon, editionShivanDragon, "wrongCN");
-        assertNull(card);
-        // wrong artIndex or collector number in getCard Full Info
-        card = this.cardDb.getCard(cardNameShivanDragon, editionShivanDragon, 3, collNrShivanDragon);
-        assertNull(card);
-        card = this.cardDb.getCard(cardNameShivanDragon, editionShivanDragon, 1, "wrongCN");
         assertNull(card);
     }
 
@@ -2105,7 +2085,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     public void testGetCardFromUnknownSet() {
         String unknownCardName = "Unknown Card Name";
         PaperCard unknownCard = new PaperCard(CardRules.getUnsupportedCardNamed(unknownCardName),
-                CardEdition.UNKNOWN.getCode(), CardRarity.Unknown);
+                CardEdition.UNKNOWN_CODE, CardRarity.Unknown);
         this.cardDb.addCard(unknownCard);
         assertTrue(this.cardDb.getAllCards().contains(unknownCard));
         assertNotNull(this.cardDb.getAllCards(unknownCardName));
@@ -2114,7 +2094,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         PaperCard retrievedPaperCard = this.cardDb.getCard(unknownCardName);
         assertNotNull(retrievedPaperCard);
         assertEquals(retrievedPaperCard.getName(), unknownCardName);
-        assertEquals(retrievedPaperCard.getEdition(), CardEdition.UNKNOWN.getCode());
+        assertEquals(retrievedPaperCard.getEdition(), CardEdition.UNKNOWN_CODE);
     }
 
     @Test

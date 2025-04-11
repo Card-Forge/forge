@@ -1143,7 +1143,7 @@ public class CardImageRenderer {
         String set = state.getSetCode();
         CardRarity rarity = state.getRarity();
         if (!canShow) {
-            set = CardEdition.UNKNOWN.getCode();
+            set = CardEdition.UNKNOWN_CODE;
             rarity = CardRarity.Unknown;
         }
         if (!StringUtils.isEmpty(set)) {

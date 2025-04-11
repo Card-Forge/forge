@@ -230,7 +230,7 @@ public class GuiChoose {
         getChoices(message, min, max, choices, null, null, callback);
     }
 
-    public static <T> void getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display, final Callback<List<T>> callback) {
+    public static <T> void getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final Function<T, String> display, final Callback<List<T>> callback) {
         if (choices == null || choices.isEmpty()) {
             if (min == 0) {
                 callback.run(new ArrayList<>());

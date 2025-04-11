@@ -356,7 +356,7 @@ public class Config {
                 final List<String> lines = FileUtil.readAllLines(new InputStreamReader(fileInputStream, Charset.forName(CardStorageReader.DEFAULT_CHARSET_NAME)), true);
                 CardRules rules = rulesReader.readCard(lines, com.google.common.io.Files.getNameWithoutExtension(cardFile.getName()));
                 rules.setCustom();
-                PaperCard card = new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special) {
+                PaperCard card = new PaperCard(rules, CardEdition.UNKNOWN_CODE, CardRarity.Special) {
                     @Override
                     public String getImageKey(boolean altState) {
                         return ImageKeys.ADVENTURECARD_PREFIX + getName();
