@@ -1786,11 +1786,10 @@ public class AbilityUtils {
                 }
                 // Count$NumTimesChoseMode
                 if (sq[0].startsWith("NumTimesChoseMode")) {
-                    SpellAbility sub = sa.getRootAbility();
                     int amount = 0;
-                    while (sub != null) {
-                        if (sub.getDirectSVars().containsKey("CharmOrder")) amount++;
-                        sub = sub.getSubAbility();
+                    SpellAbility tail = sa.getTailAbility();
+                    if (tail.hasSVar("CharmOrder")) {
+                        amount = tail.getSVarInt("CharmOrder");
                     }
                     return doXMath(amount, expr, c, ctb);
                 }

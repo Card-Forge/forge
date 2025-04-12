@@ -607,7 +607,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     }
 
     @Override
-    public final void setSVar(final String name, final String value) {
+    public void setSVar(final String name, final String value) {
         sVars.put(name, value);
     }
 
@@ -620,11 +620,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
         res.putAll(sVars);
         return res;
-    }
-
-    @Override
-    public Map<String, String> getDirectSVars() {
-        return sVars;
     }
 
     @Override
