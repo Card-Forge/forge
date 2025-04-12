@@ -111,7 +111,11 @@
                 			}
                 		},
                 		{
-                               &quot;checkQuestFlag&quot;: &quot;Ch1GreenCastleComplete&quot;
+                               &quot;checkQuestFlag&quot;: &quot;Ch1GreenCastleComplete&quot;,
+                               &quot;not&quot;: true
+                        },
+                        {
+                            &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
                         }
                 	],
                 	&quot;text&quot;: &quot;With an extremely loud roar, the gate burst open, leaving only ashes in your path. You are now free to pass.&quot;,

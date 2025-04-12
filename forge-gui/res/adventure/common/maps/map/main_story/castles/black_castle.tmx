@@ -105,7 +105,11 @@
                 		}
                 	},
                     {
-                        &quot;checkQuestFlag&quot;: &quot;Ch1BlackCastleComplete&quot;
+                        &quot;checkQuestFlag&quot;: &quot;Ch1BlackCastleComplete&quot;,
+                        &quot;not&quot;: true
+                    },
+                    {
+                        &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
                     }
                 	],
                 		&quot;text&quot;: &quot;With a gust of black wind, the door scatters into thousands of pieces. You are now free to pass.&quot;,

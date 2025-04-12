@@ -118,7 +118,11 @@
                 			}
                 		},
                 		{
-                             &quot;checkQuestFlag&quot;: &quot;Ch1BlueCastleComplete&quot;
+                             &quot;checkQuestFlag&quot;: &quot;Ch1BlueCastleComplete&quot;,
+                             &quot;not&quot;: true
+                        },
+                        {
+                             &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
                         }
                 	],
                 		&quot;text&quot;: &quot;Suddently, the gate dissapears right in front of your eyes, You are now free to pass.&quot;,
