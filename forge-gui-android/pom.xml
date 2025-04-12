@@ -228,7 +228,7 @@
         <dependency>
             <groupId>org.jupnp</groupId>
             <artifactId>org.jupnp.android</artifactId>
-            <version>3.0.2</version>
+            <version>3.0.3</version>
         </dependency>
     </dependencies>
 
