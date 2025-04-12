@@ -15,7 +15,6 @@ public interface IHasSVars {
     //public Set<String> getSVars();
 
     public Map<String, String> getSVars();
-    public Map<String, String> getDirectSVars();
 
     public void removeSVar(final String var);
 }

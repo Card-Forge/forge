@@ -45,7 +45,7 @@ public class CharmEffect extends SpellAbilityEffect {
             choices.removeAll(toRemove);
         }
 
-        int indx = 0;
+        int indx = 1;
         // set CharmOrder
         for (AbilitySub sub : choices) {
             sub.setSVar("CharmOrder", Integer.toString(indx));

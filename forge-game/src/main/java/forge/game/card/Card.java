@@ -2017,11 +2017,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return currentState.getSVars();
     }
 
-    @Override
-    public Map<String, String> getDirectSVars() {
-        return ImmutableMap.of();
-    }
-
     public final void setSVars(final Map<String, String> newSVars) {
         currentState.setSVars(newSVars);
     }

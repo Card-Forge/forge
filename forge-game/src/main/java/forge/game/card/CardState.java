@@ -570,11 +570,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     @Override
-    public Map<String, String> getDirectSVars() {
-        return sVars;
-    }
-
-    @Override
     public final String getSVar(final String var) {
         if (sVars.containsKey(var)) {
             return sVars.get(var);
