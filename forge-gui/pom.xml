@@ -11,7 +11,7 @@
     <name>Forge Gui</name>
 
     <properties>
-        <jetty.version>9.4.53.v20231009</jetty.version>
+        <jetty.version>9.4.57.v20241219</jetty.version>
     </properties>
 
     <dependencies>
@@ -55,12 +55,12 @@
         <dependency>
             <groupId>org.jupnp</groupId>
             <artifactId>org.jupnp</artifactId>
-            <version>3.0.2</version>
+            <version>3.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.jupnp</groupId>
             <artifactId>org.jupnp.support</artifactId>
-            <version>3.0.2</version>
+            <version>3.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.lz4</groupId>
