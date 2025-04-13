@@ -2,7 +2,7 @@ Name:Greel's Caress
 ManaCost:1 B
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | Description$ Enchanted creature gets -3/-0.
 Oracle:Flash\nEnchant creature\nEnchanted creature gets -3/-0.

@@ -1,8 +1,8 @@
 Name:Lush Growth
 ManaCost:G
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Mountain & Forest & Plains | RemoveLandTypes$ True | Description$ Enchanted land is a Mountain, Forest, and Plains.
 AI:RemoveDeck:Random
 Oracle:Enchant land\nEnchanted land is a Mountain, Forest, and Plains.

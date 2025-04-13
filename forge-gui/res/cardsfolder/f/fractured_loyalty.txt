@@ -1,8 +1,8 @@
 Name:Fractured Loyalty
 ManaCost:1 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ BecomesTarget | ValidTarget$ Card.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature. (This effect lasts indefinitely.)
 SVar:TrigGainControl:DB$ GainControl | Defined$ TriggeredTargetLKICopy | NewController$ TriggeredSourceController
 AI:RemoveDeck:Random

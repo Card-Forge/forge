@@ -1,8 +1,7 @@
 Name:Malfunction
 ManaCost:3 U
 Types:Enchantment Aura
-K:Enchant artifact or creature
-A:SP$ Attach | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature
+K:Enchant:Artifact,Creature:artifact or creature
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted permanent.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Permanent.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted permanent doesn't untap during its controller's untap step.

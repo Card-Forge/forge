@@ -1,7 +1,7 @@
 Name:Annex
 ManaCost:2 U U
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ GainControl
+K:Enchant:Land
+SVar:AttachAILogic:GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted land.
 Oracle:Enchant land (Target a land as you cast this. This card enters attached to that land.)\nYou control enchanted land.

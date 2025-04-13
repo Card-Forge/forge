@@ -15,6 +15,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -570,28 +571,46 @@ public class AttachAi extends SpellAbilityAi {
             final Card attachSource) {
         // AI For choosing a Card to Animate.
         final Player ai = sa.getActivatingPlayer();
-        final Card attachSourceLki = CardCopyService.getLKICopy(attachSource);
+        Card attachSourceLki = null;
+        for (Trigger t : attachSource.getTriggers()) {
+            if (!t.getMode().equals(TriggerType.ChangesZone)) {
+                continue;
+            }
+            if (!"Battlefield".equals(t.getParam("Destination"))) {
+                continue;
+            }
+            if (!"Card.Self".equals(t.getParam("ValidCard"))) {
+                continue;
+            }
+            SpellAbility trigSa = t.ensureAbility();
+            SpellAbility animateSa = trigSa.findSubAbilityByType(ApiType.Animate);
+            if (animateSa == null) {
+                continue;
+            }
+            animateSa.setActivatingPlayer(sa.getActivatingPlayer());
+            attachSourceLki = AnimateAi.becomeAnimated(attachSource, animateSa);
+        }
+        if (attachSourceLki == null) {
+            return null;
+        }
         attachSourceLki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
-        // Suppress original attach Spell to replace it with another
-        attachSourceLki.getFirstAttachSpell().setSuppressed(true);
+        final Card finalAttachSourceLki = attachSourceLki;
 
-        //TODO for Reanimate Auras i need the new Attach Spell, in later versions it might be part of the Enchant Keyword
-        attachSourceLki.addSpellAbility(AbilityFactory.getAbility(attachSourceLki, "NewAttach"));
         List<Card> betterList = CardLists.filter(list, c -> {
             final Card lki = CardCopyService.getLKICopy(c);
             // need to fake it as if lki would be on the battlefield
             lki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
             // Reanimate Auras use "Enchant creature put onto the battlefield with CARDNAME" with Remembered
-            attachSourceLki.clearRemembered();
-            attachSourceLki.addRemembered(lki);
+            finalAttachSourceLki.clearRemembered();
+            finalAttachSourceLki.addRemembered(lki);
 
             // need to check what the cards would be on the battlefield
             // do not attach yet, that would cause Events
             CardCollection preList = new CardCollection(lki);
-            preList.add(attachSourceLki);
+            preList.add(finalAttachSourceLki);
             c.getGame().getAction().checkStaticAbilities(false, Sets.newHashSet(preList), preList);
-            boolean result = lki.canBeAttached(attachSourceLki, null);
+            boolean result = lki.canBeAttached(finalAttachSourceLki, null);
 
             //reset static abilities
             c.getGame().getAction().checkStaticAbilities(false);
@@ -965,7 +984,23 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static boolean attachPreference(final SpellAbility sa, final TargetRestrictions tgt, final boolean mandatory) {
         GameObject o;
-        if (tgt.canTgtPlayer()) {
+        boolean spellCanTargetPlayer = false;
+        if (isAuraSpell(sa)) {
+            Card source = sa.getHostCard();
+            if (!source.hasKeyword(Keyword.ENCHANT)) {
+                return false;
+            }
+            for (KeywordInterface ki : source.getKeywords(Keyword.ENCHANT)) {
+                String ko = ki.getOriginal();
+                String m[] = ko.split(":");
+                String v = m[1];
+                if (v.contains("Player") || v.contains("Opponent")) {
+                    spellCanTargetPlayer = true;
+                    break;
+                }
+            }
+        }
+        if (tgt.canTgtPlayer() && (!isAuraSpell(sa) || spellCanTargetPlayer)) {
             List<Player> targetable = new ArrayList<>();
             for (final Player player : sa.getHostCard().getGame().getPlayers()) {
                 if (sa.canTarget(player)) {

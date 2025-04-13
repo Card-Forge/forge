@@ -1,8 +1,7 @@
 Name:Paradox Haze
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player
+K:Enchant:Player
 T:Mode$ Phase | FirstUpkeep$ True | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ AddUpkeep | TriggerDescription$ At the beginning of enchanted player's first upkeep each turn, that player gets an additional upkeep step after this step.
 SVar:AddUpkeep:DB$ AddPhase | ExtraPhase$ Upkeep
 AI:RemoveDeck:Random

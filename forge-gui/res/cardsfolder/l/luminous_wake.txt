@@ -1,8 +1,8 @@
 Name:Luminous Wake
 ManaCost:2 W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever enchanted creature attacks or blocks, you gain 4 life.
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigGainLife | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, you gain 4 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4 | Defined$ You

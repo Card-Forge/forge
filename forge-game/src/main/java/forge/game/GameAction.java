@@ -43,7 +43,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityContinuous;
@@ -2778,16 +2777,33 @@ public class GameAction {
         // When an Aura ETB without being cast you can choose a valid card to
         // attach it to
         final SpellAbility aura = source.getFirstAttachSpell();
+        if (!source.hasKeyword(Keyword.ENCHANT)) {
+            return false;
+        }
 
         if (aura == null) {
             return false;
         }
         aura.setActivatingPlayer(source.getController());
         final Game game = source.getGame();
-        final TargetRestrictions tgt = aura.getTargetRestrictions();
 
+        Set<ZoneType> zones = EnumSet.noneOf(ZoneType.class);
+        boolean canTargetPlayer = false;
+        for (KeywordInterface ki : source.getKeywords(Keyword.ENCHANT)) {
+            String o = ki.getOriginal();
+            String m[] = o.split(":");
+            String v = m[1];
+            if (v.contains("inZone")) { // currently the only other zone is Graveyard
+                zones.add(ZoneType.Graveyard);
+            } else {
+                zones.add(ZoneType.Battlefield);
+            }
+            if (v.startsWith("Player") || v.startsWith("Opponent")) {
+                canTargetPlayer = true;
+            }
+        }
         Player p = source.getController();
-        if (tgt.canTgtPlayer()) {
+        if (canTargetPlayer) {
             final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, aura));
 
             final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
@@ -2797,9 +2813,7 @@ public class GameAction {
                 return true;
             }
         } else {
-            List<ZoneType> zones = Lists.newArrayList(tgt.getZone());
             CardCollection list = new CardCollection();
-
             if (params != null) {
                 if (zones.contains(ZoneType.Battlefield)) {
                     list.addAll((CardCollectionView) params.get(AbilityKey.LastStateBattlefield));

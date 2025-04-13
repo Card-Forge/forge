@@ -1,8 +1,8 @@
 Name:Barbed Field
 ManaCost:2 R R
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ Damage | Description$ Enchanted land has "{T}: This land deals 1 damage to any target."
 SVar:Damage:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:NonStackingAttachEffect:True

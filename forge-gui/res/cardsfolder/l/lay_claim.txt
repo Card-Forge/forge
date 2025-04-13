@@ -1,8 +1,8 @@
 Name:Lay Claim
 ManaCost:5 U U
 Types:Enchantment Aura
-K:Enchant permanent
-A:SP$ Attach | ValidTgts$ Permanent | AILogic$ GainControl
+K:Enchant:Permanent
+SVar:AttachAILogic:GainControl
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
 K:Cycling:2
 Oracle:Enchant permanent\nYou control enchanted permanent.\nCycling {2} ({2}, Discard this card: Draw a card.)
