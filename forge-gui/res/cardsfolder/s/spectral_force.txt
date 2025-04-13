@@ -3,6 +3,9 @@ ManaCost:3 G G
 Types:Creature Elemental Spirit
 PT:8/8
 K:Trample
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ StayTapped | IsPresent$ Permanent.Black+!token+DefenderCtrl | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if defending player controls no black nontoken permanents, it doesn't untap during your next untap step.
-SVar:StayTapped:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Duration$ Permanent
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ StayTapped | IsPresent$ Permanent.Black+DefenderCtrl | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if defending player controls no black nontoken permanents, it doesn't untap during your next untap step.
+SVar:StayTapped:DB$ Effect | ReplacementEffects$ DontUntap | Triggers$ ExileEff | RememberObjects$ Self | ExileOnMoved$ Battlefield | Duration$ Permanent
+SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ Player.Activator | Layer$ CantHappen | Description$ EFFECTSOURCE doesn't untap during your next untap step.
+SVar:ExileEff:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | Execute$ Exile | Static$ True
+SVar:Exile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 Oracle:Trample\nWhenever Spectral Force attacks, if defending player controls no black permanents, it doesn't untap during your next untap step.
