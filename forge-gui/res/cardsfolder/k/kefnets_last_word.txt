@@ -2,8 +2,6 @@ Name:Kefnet's Last Word
 ManaCost:2 U U
 Types:Sorcery
 A:SP$ GainControl | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | SubAbility$ DBNoUntap | SpellDescription$ Gain control of target artifact, creature or enchantment.
-SVar:DBNoUntap:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | SpellDescription$ Lands you control don't untap during your next untap step.
-SVar:DontUntap:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
-SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBNoUntap:DB$ Effect | ReplacementEffects$ DontUntap | Duration$ UntilTheEndOfYourNextUntap | SpellDescription$ Lands you control don't untap during your next untap step.
+SVar:DontUntap:Event$ Untap | ValidCard$ Land.YouCtrl | ValidStepTurnToController$ Player.Activator | Layer$ CantHappen | Description$ Lands you control don't untap during your next untap step.
 Oracle:Gain control of target artifact, creature, or enchantment. Lands you control don't untap during your next untap step.

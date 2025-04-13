@@ -4,5 +4,6 @@ Types:Creature Human Cleric
 PT:0/2
 A:AB$ PreventDamage | Cost$ W W T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Amount$ 4 | SubAbility$ DBTap | SpellDescription$ Prevent the next 4 damage that would be dealt this turn to target creature you control. Tap that creature. It doesn't untap during your next untap step.
 SVar:DBTap:DB$ Tap | Defined$ Targeted | SubAbility$ DBStayTapped
-SVar:DBStayTapped:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Targeted | Duration$ Permanent | IsCurse$ True
+SVar:DBStayTapped:DB$ Effect | ReplacementEffects$ DontUntap | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | Duration$ UntilTheEndOfYourNextUntap
+SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ Player.Activator | Layer$ CantHappen | Description$ It doesn't untap during your next untap step.
 Oracle:{W}{W}, {T}: Prevent the next 4 damage that would be dealt this turn to target creature you control. Tap that creature. It doesn't untap during your next untap step.
