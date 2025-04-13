@@ -6899,7 +6899,7 @@
 {
 	"id": 28,
 	"isTemplate": true,
-	"name": "Welcome to Shandalar",
+	"name": "Entering Shandalar",
 	"description": "Learn about your surroundings.",
 	"offerDialog": {},
 	"prologue": {
@@ -6914,6 +6914,7 @@
 							{
 								"removeItem": "",
 								"setColorIdentity": "",
+								"activateMapObject": 78,
 								"advanceQuestFlag": "",
 								"advanceMapFlag": "",
 								"setQuestFlag": {
@@ -7037,12 +7038,12 @@
 						"action": [
 							{
 								"removeItem": "",
-								"activateMapObject": 78,
 								"setColorIdentity": "",
 								"advanceQuestFlag": "",
 								"advanceMapFlag": "",
-								"setMapFlag": {
-									"key": ""
+								"setCharacterFlag": {
+									"key": "noQuest",
+									"val": "1"
 								},
 								"issueQuest": "",
 								"POIReference": ""
@@ -11278,7 +11279,7 @@
 									"setMapFlag": {
 										"key": ""
 									},
-									"issueQuest": "52",
+									"issueQuest": "30",
 									"POIReference": ""
 								}
 							]
