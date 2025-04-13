@@ -128,14 +128,10 @@ public class CostAdjustment {
         } else if (st.hasParam("Amount")) {
             String amount = st.getParam("Amount");
             if ("Escalate".equals(amount)) {
-                SpellAbility sub = sa;
-                while (sub != null) {
-                    if (sub.getDirectSVars().containsKey("CharmOrder")) {
-                        count++;
-                    }
-                    sub = sub.getSubAbility();
+                SpellAbility tail = sa.getTailAbility();
+                if (tail.hasSVar("CharmOrder")) {
+                    count = tail.getSVarInt("CharmOrder") - 1;
                 }
-                --count;
             } else if ("Strive".equals(amount)) {
                 for (TargetChoices tc : sa.getAllTargetChoices()) {
                     count += tc.size();
