@@ -6,9 +6,7 @@ K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you mill two cards.
 SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ Mill<2>
 A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Shroud | SubAbility$ DBStayTapped | SpellDescription$ CARDNAME gains shroud until end of turn and doesn't untap during your next untap step. Tap CARDNAME. (A permanent with shroud can't be the target of spells or abilities.)
-SVar:DBStayTapped:DB$ Effect | ReplacementEffects$ DontUntap | Triggers$ ExileEff | RememberObjects$ Self | ExileOnMoved$ Battlefield | Duration$ Permanent | SubAbility$ DBTap
+SVar:DBStayTapped:DB$ Effect | ReplacementEffects$ DontUntap | RememberObjects$ Self | ExileOnMoved$ Battlefield | Duration$ UntilTheEndOfYourNextUntap | SubAbility$ DBTap
 SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ Player.Activator | Layer$ CantHappen | Description$ EFFECTSOURCE doesn't untap during your next untap step.
-SVar:ExileEff:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | Execute$ Exile | Static$ True
-SVar:Exile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBTap:DB$ Tap | Defined$ Self
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice Deep Spawn unless you mill two cards.\n{U}: Deep Spawn gains shroud until end of turn and doesn't untap during your next untap step. Tap Deep Spawn. (A creature with shroud can't be the target of spells or abilities.)
