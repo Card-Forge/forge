@@ -165,9 +165,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         // remove abilities
         final List<SpellAbility> removedAbilities = Lists.newArrayList();
-
         if (sa.hasParam("RemoveThisAbility")) {
-            removedAbilities.add(sa);
+            removedAbilities.add(sa.getOriginalAbility());
         }
 
         // give abilities
