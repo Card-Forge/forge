@@ -571,8 +571,30 @@ public class AttachAi extends SpellAbilityAi {
             final Card attachSource) {
         // AI For choosing a Card to Animate.
         final Player ai = sa.getActivatingPlayer();
-        final Card attachSourceLki = CardCopyService.getLKICopy(attachSource);
+        Card attachSourceLki = null;
+        for (Trigger t : attachSource.getTriggers()) {
+            if (!t.getMode().equals(TriggerType.ChangesZone)) {
+                continue;
+            }
+            if (!"Battlefield".equals(t.getParam("Destination"))) {
+                continue;
+            }
+            if (!"Card.Self".equals(t.getParam("ValidCard"))) {
+                continue;
+            }
+            SpellAbility trigSa = t.ensureAbility();
+            SpellAbility animateSa = trigSa.findSubAbilityByType(ApiType.Animate);
+            if (animateSa == null) {
+                continue;
+            }
+            animateSa.setActivatingPlayer(sa.getActivatingPlayer());
+            attachSourceLki = AnimateAi.becomeAnimated(attachSource, animateSa);
+        }
+        if (attachSourceLki == null) {
+            return null;
+        }
         attachSourceLki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
+        final Card finalAttachSourceLki = attachSourceLki;
 
         List<Card> betterList = CardLists.filter(list, c -> {
             final Card lki = CardCopyService.getLKICopy(c);
@@ -580,15 +602,15 @@ public class AttachAi extends SpellAbilityAi {
             lki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
             // Reanimate Auras use "Enchant creature put onto the battlefield with CARDNAME" with Remembered
-            attachSourceLki.clearRemembered();
-            attachSourceLki.addRemembered(lki);
+            finalAttachSourceLki.clearRemembered();
+            finalAttachSourceLki.addRemembered(lki);
 
             // need to check what the cards would be on the battlefield
             // do not attach yet, that would cause Events
             CardCollection preList = new CardCollection(lki);
-            preList.add(attachSourceLki);
+            preList.add(finalAttachSourceLki);
             c.getGame().getAction().checkStaticAbilities(false, Sets.newHashSet(preList), preList);
-            boolean result = lki.canBeAttached(attachSourceLki, null);
+            boolean result = lki.canBeAttached(finalAttachSourceLki, null);
 
             //reset static abilities
             c.getGame().getAction().checkStaticAbilities(false);
