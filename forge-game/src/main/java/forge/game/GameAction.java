@@ -2777,19 +2777,15 @@ public class GameAction {
             return false;
         }
 
-        SpellAbility aura = source.getFirstAttachSpell();
-        if (aura == null) {
-            // if it's not normally an aura
-            aura = new SpellAbility.EmptySa(ApiType.Attach, source);
-            if (source.hasSVar("AttachAITgts")) {
-                aura.putParam("AITgts", source.getSVar("AttachAITgts"));
-            }
-            if (source.hasSVar("AttachAILogic")) {
-                aura.putParam("AILogic", source.getSVar("AttachAILogic"));
-            }
-            if (source.hasSVar("AttachAIValid")) {
-                aura.putParam("AIValid", source.getSVar("AttachAIValid"));
-            }
+        SpellAbility aura = new SpellAbility.EmptySa(ApiType.Attach, source);
+        if (source.hasSVar("AttachAITgts")) {
+            aura.putParam("AITgts", source.getSVar("AttachAITgts"));
+        }
+        if (source.hasSVar("AttachAILogic")) {
+            aura.putParam("AILogic", source.getSVar("AttachAILogic"));
+        }
+        if (source.hasSVar("AttachAIValid")) {
+            aura.putParam("AIValid", source.getSVar("AttachAIValid"));
         }
         aura.setActivatingPlayer(source.getController());
 
@@ -2810,7 +2806,7 @@ public class GameAction {
         }
         Player p = source.getController();
         if (canTargetPlayer) {
-            final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, aura));
+            final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, null));
 
             final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
                     Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
@@ -2832,7 +2828,7 @@ public class GameAction {
             }
             list.addAll(game.getCardsIn(zones));
 
-            list = CardLists.filter(list, CardPredicates.canBeAttached(source, aura));
+            list = CardLists.filter(list, CardPredicates.canBeAttached(source, null));
             if (list.isEmpty()) {
                 return false;
             }
