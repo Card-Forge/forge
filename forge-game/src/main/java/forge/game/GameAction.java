@@ -2024,7 +2024,7 @@ public class GameAction {
     }
 
     private boolean handleWorldRule(CardCollection noRegCreats) {
-        final List<Card> worlds = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "World");
+        final List<Card> worlds = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), c -> c.getType().hasSupertype(Supertype.World));
         if (worlds.size() <= 1) {
             return false;
         }
@@ -2033,7 +2033,7 @@ public class GameAction {
         long ts = 0;
 
         for (final Card crd : worlds) {
-            long crdTs = crd.getGameTimestamp();
+            long crdTs = crd.getWorldTimestamp();
             if (crdTs > ts) {
                 ts = crdTs;
                 toKeep.clear();

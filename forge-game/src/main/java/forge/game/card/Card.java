@@ -23,6 +23,7 @@ import forge.GameCommand;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.CardDb.CardArtPreference;
+import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.*;
@@ -251,6 +252,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     private PlayerCollection targetedFromThisTurn = new PlayerCollection();
 
+    private long worldTimestamp = -1;
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
     private long prototypeTimestamp = -1;
@@ -4484,11 +4486,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addCloneState(CardCloneStates states, final long timestamp) {
         clonedStates.put(timestamp, states);
         updateCloneState(true);
+        updateWorldTimestamp(timestamp);
     }
 
     public final boolean removeCloneState(final long timestamp) {
         if (clonedStates.remove(timestamp) != null) {
             updateCloneState(true);
+            updateWorldTimestamp(timestamp);
             return true;
         }
         return false;
@@ -6956,6 +6960,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public boolean equalsWithGameTimestamp(Card c) {
         return equals(c) && c.getGameTimestamp() == gameTimestamp;
+    }
+
+    public long getWorldTimestamp() {
+        return worldTimestamp;
+    }
+    public void updateWorldTimestamp(long ts) {
+        if (!getType().hasSupertype(Supertype.World)) {
+            worldTimestamp = -1;
+        } else if (worldTimestamp == -1) {
+            worldTimestamp = ts;
+        }
     }
 
     public String getProtectionKey() {
