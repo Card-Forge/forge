@@ -2033,7 +2033,7 @@ public class GameAction {
         long ts = 0;
 
         for (final Card crd : worlds) {
-            long crdTs = crd.getGameTimestamp();
+            long crdTs = crd.getWorldTimestamp();
             if (crdTs > ts) {
                 ts = crdTs;
                 toKeep.clear();
