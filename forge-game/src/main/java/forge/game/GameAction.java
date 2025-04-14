@@ -385,7 +385,7 @@ public class GameAction {
                     return moveToGraveyard(copied, cause, params);
                 }
             }
-            attachAuraOnIndirectEnterBattlefield(copied, params);
+            attachAuraOnIndirectETB(copied, params);
         }
 
         // Handle merged permanent here so all replacement effects are already applied.
@@ -1466,7 +1466,7 @@ public class GameAction {
                 checkAgainCard |= stateBasedAction_Saga(c, sacrificeList);
                 checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
                 checkAgainCard |= stateBasedAction_Role(c, unAttachList);
-                checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
+                checkAgainCard |= stateBasedAction704_attach(c, unAttachList);
                 checkAgainCard |= stateBasedAction_Contraption(c, noRegCreats);
 
                 checkAgainCard |= stateBasedAction704_5q(c); // annihilate +1/+1 counters with -1/-1 ones
@@ -1513,9 +1513,7 @@ public class GameAction {
                 if (!spaceSculptors.isEmpty() && !spaceSculptors.contains(p)) {
                     checkAgain |= stateBasedAction704_5u(p);
                 }
-                if (handleLegendRule(p, noRegCreats)) {
-                    checkAgain = true;
-                }
+                checkAgain |= handleLegendRule(p, noRegCreats);
 
                 if ((game.getRules().hasAppliedVariant(GameType.Commander)
                         || game.getRules().hasAppliedVariant(GameType.Brawl)
@@ -1534,13 +1532,12 @@ public class GameAction {
                     checkAgain = true;
                 }
 
-                if (handlePlaneswalkerRule(p, noRegCreats)) {
-                    checkAgain = true;
-                }
+                checkAgain |= handlePlaneswalkerRule(p, noRegCreats);
             }
             for (Player p : spaceSculptors) {
                 checkAgain |= stateBasedAction704_5u(p);
             }
+
             // 704.5m World rule
             checkAgain |= handleWorldRule(noRegCreats);
 
@@ -1575,6 +1572,7 @@ public class GameAction {
                 orderedSacrificeList = true;
             }
             sacrifice(sacrificeList, null, true, mapParams);
+
             setHoldCheckingStaticAbilities(false);
 
             table.triggerChangesZoneAll(game, null);
@@ -1744,12 +1742,12 @@ public class GameAction {
     }
 
     private boolean stateBasedAction_Contraption(Card c, CardCollection removeList) {
-        if(!c.isContraption())
+        if (!c.isContraption())
             return false;
         int currentSprocket = c.getSprocket();
 
         //A contraption that is in the battlefield without being assembled is put into the graveyard or junkyard.
-        if(currentSprocket == 0) {
+        if (currentSprocket == 0) {
             removeList.add(c);
             return true;
         }
@@ -1758,7 +1756,7 @@ public class GameAction {
         //A reassemble effect can handle that on its own. But if it changed controller due to some other effect,
         //we assign it here. A contraption uses sprocket -1 to signify it has been assembled previously but now needs
         //a new sprocket.
-        if(currentSprocket > 0 && currentSprocket <= 3)
+        if (currentSprocket > 0 && currentSprocket <= 3)
             return false;
 
         int sprocket = c.getController().getController().chooseSprocket(c);
@@ -2773,19 +2771,18 @@ public class GameAction {
      *            the source
      * @return true, if successful
      */
-    public static boolean attachAuraOnIndirectEnterBattlefield(final Card source, Map<AbilityKey, Object> params) {
-        // When an Aura ETB without being cast you can choose a valid card to
-        // attach it to
-        final SpellAbility aura = source.getFirstAttachSpell();
+    private boolean attachAuraOnIndirectETB(final Card source, Map<AbilityKey, Object> params) {
+        // When an Aura ETB without being cast you can choose a valid card to attach it to
         if (!source.hasKeyword(Keyword.ENCHANT)) {
             return false;
         }
 
+        SpellAbility aura = source.getFirstAttachSpell();
         if (aura == null) {
-            return false;
+            // if it's not normally an aura
+            aura = new SpellAbility.EmptySa(ApiType.Attach, source);
         }
         aura.setActivatingPlayer(source.getController());
-        final Game game = source.getGame();
 
         Set<ZoneType> zones = EnumSet.noneOf(ZoneType.class);
         boolean canTargetPlayer = false;
