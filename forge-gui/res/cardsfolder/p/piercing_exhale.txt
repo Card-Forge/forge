@@ -1,0 +1,10 @@
+Name:Piercing Exhale
+ManaCost:1 G
+Types:Instant
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Behold<1/Dragon> | Description$ As an additional cost to cast this spell, you may behold a Dragon. (You may choose a Dragon you control or reveal a Dragon card from your hand.)
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature or planeswalker. If a Dragon was beheld, surveil 2.
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | AILogic$ PowerDmg | NumDmg$ X | DamageSource$ ParentTarget | SubAbility$ DBSurveil
+SVar:DBSurveil:DB$ Surveil | Condition$ OptionalCost | ConditionOptionalPaid$ True | Amount$ 2
+SVar:X:ParentTargeted$CardPower
+DeckHas:Ability$Graveyard
+Oracle:As an additional cost to cast this spell, you may behold a Dragon. (You may choose a Dragon you control or reveal a Dragon card from your hand.)\nTarget creature you control deals damage equal to its power to target creature or planeswalker. If a Dragon was beheld, surveil 2.

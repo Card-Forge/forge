@@ -8,7 +8,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 

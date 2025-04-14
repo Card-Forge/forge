@@ -1,0 +1,17 @@
+Name:Scavenger Regent
+ManaCost:3 B
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Ward:Discard<1/Card>
+AlternateMode:Omen
+Oracle:Flying\nWard—Discard a card.
+
+ALTERNATE
+
+Name:Exude Toxin
+ManaCost:X B B
+Types:Sorcery Omen
+A:SP$ PumpAll | ValidCards$ Creature.nonDragon | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Each non-Dragon creature gets -X/-X until end of turn. (Then shuffle this card into its owner's library.)
+SVar:X:Count$xPaid
+Oracle:Each non-Dragon creature gets -X/-X until end of turn. (Then shuffle this card into its owner's library.)

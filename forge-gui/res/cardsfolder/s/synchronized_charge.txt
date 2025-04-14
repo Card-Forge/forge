@@ -1,0 +1,7 @@
+Name:Synchronized Charge
+ManaCost:1 G
+Types:Sorcery
+A:SP$ PutCounter | CounterNum$ 2 | CounterType$ P1P1 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select one or two target creatures you control | SubAbility$ DBPumpAll | SpellDescription$ Distribute two +1/+1 counters among one or two target creatures you control. Creatures you control with counters on them gain vigilance and trample until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+HasCounters | KW$ Vigilance & Trample | StackDescription$ None
+K:Harmonize:4 G
+Oracle:Distribute two +1/+1 counters among one or two target creatures you control. Creatures you control with counters on them gain vigilance and trample until end of turn.\nHarmonize {4}{G} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)

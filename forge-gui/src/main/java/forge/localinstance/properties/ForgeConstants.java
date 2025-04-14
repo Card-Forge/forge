@@ -28,7 +28,7 @@ public final class ForgeConstants {
     public static final String GITHUB_FORGE_URL             = "https://github.com/Card-Forge/forge/";
     public static final String GITHUB_RELEASES_ATOM         = GITHUB_FORGE_URL + "releases.atom";
     public static final String GITHUB_COMMITS_ATOM          = GITHUB_FORGE_URL + "commits/master.atom";
-    public static final String DAILY_SNAPSHOT_URL           = "https://downloads.cardforge.org/dailysnapshots/";
+    public static final String GITHUB_SNAPSHOT_URL          = GITHUB_FORGE_URL + "releases/download/daily-snapshots/";
     public static final String RELEASE_URL                  = "https://releases.cardforge.org/";
     public static final String PATH_SEPARATOR               = File.separator;
     public static final String ASSETS_DIR                   = GuiBase.getInterface().getAssetsDir();
@@ -142,6 +142,7 @@ public final class ForgeConstants {
     public static final String SPRITE_ADVENTURE_FILE         = "sprite_adventure.png";
     public static final String SPRITE_SETLOGO_FILE           = "sprite_setlogo.png";
     public static final String SPRITE_WATERMARK_FILE         = "sprite_watermark.png";
+    public static final String SPRITE_ZONE_FILE              = "sprite_zone.png";
     public static final String SPRITE_DRAFTRANKS_FILE        = "sprite_draftranks.png";
 
     public static final String FONT_FILE                    = "font1.ttf";
@@ -327,10 +328,12 @@ public final class ForgeConstants {
             CACHE_PLANECHASE_PICS_DIR };
 
     // URLs
-    private static final String URL_CARDFORGE = "https://downloads.cardforge.org";
+    public static final String URL_CARDFORGE = "https://downloads.cardforge.org";
+    private static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
+
     public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
     public static final String URL_TOKEN_DOWNLOAD = URL_CARDFORGE + "/images/tokens/";
-    public static final String URL_PRICE_DOWNLOAD = URL_CARDFORGE + "/all-prices.txt";
+    public static final String URL_PRICE_DOWNLOAD = GITHUB_ASSETS_BASE + "all-prices.txt";
     private static final String URL_SCRYFALL = "https://api.scryfall.com";
     public static final String URL_PIC_SCRYFALL_DOWNLOAD = URL_SCRYFALL + "/cards/";
 

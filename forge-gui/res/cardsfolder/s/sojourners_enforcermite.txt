@@ -1,0 +1,7 @@
+Name:Sojourner's Enforcermite
+ManaCost:6
+Types:Artifact Creature Frog Myr Salamander
+PT:6/6
+K:Affinity:Permanent.withAffinity:permanent with affinity
+K:TypeCycling:Card.withAffinity:2
+Oracle:Affinity for Affinity (This card costs {1} less to cast for each permanent you control with affinity.)\nAffinitycycling {2} ({2}, Discard this card: Search your library for a card with affinity, reveal it, put it into your hand, then shuffle.)

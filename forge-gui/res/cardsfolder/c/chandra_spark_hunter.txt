@@ -1,0 +1,17 @@
+Name:Chandra, Spark Hunter
+ManaCost:3 R
+Types:Legendary Planeswalker Chandra
+Loyalty:4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of combat on your turn, choose up to one target Vehicle you control. Until end of turn, it becomes an artifact creature and gains haste.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Vehicle | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target Vehicle | Types$ Artifact,Creature | Keywords$ Haste
+A:AB$ GenericChoice | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Choices$ DBSacToDraw,DBDiscardToDraw | SpellDescription$ You may sacrifice an artifact or discard a card. If you do, draw a card.
+SVar:DBSacToDraw:DB$ Draw | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Sacrifice an artifact.
+SVar:DBDiscardToDraw:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Discard a card.
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ c_3_2_a_vehicle_crew_1 | TokenOwner$ You | SpellDescription$ Create a 3/2 colorless Vehicle token with crew 1.
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Emblem — Chandra, Spark Hunter | Image$ emblem_chandra_spark_hunter | Triggers$ TrigChangesZone | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever an artifact you control enters, this emblem deals 3 damage to any target."
+SVar:TrigChangesZone:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ EffDealDamage | TriggerDescription$ Whenever an artifact you control enters, this emblem deals 3 damage to any target.
+SVar:EffDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Sacrifice|Discard|Token
+DeckHints:Type$Artifact|Vehicle
+Oracle:At the beginning of combat on your turn, choose up to one target Vehicle you control. Until end of turn, it becomes an artifact creature and gains haste.\n[+2]: You may sacrifice an artifact or discard a card. If you do, draw a card.\n[0]: Create a 3/2 colorless Vehicle token with crew 1.\n[-7]: You get an emblem with "Whenever an artifact you control enters, this emblem deals 3 damage to any target."

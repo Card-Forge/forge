@@ -1,0 +1,5 @@
+Name:Work a Double
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ AssembleContraption | Amount$ 2 | SpellDescription$ Assemble two Contraptions.
+Oracle:Assemble two Contraptions. (Put the top card of your Contraption deck face up onto one of your sprockets. Then repeat this process.)

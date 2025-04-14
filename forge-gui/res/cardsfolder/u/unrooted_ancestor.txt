@@ -1,0 +1,9 @@
+Name:Unrooted Ancestor
+ManaCost:2 B
+Types:Creature Spirit Cleric
+PT:3/2
+K:Flash
+A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | StackDescription$ SpellDescription | SpellDescription$ This creature gains indestructible until end of turn.
+SVar:DBTap:DB$ Tap | Defined$ Self | StackDescription$ SpellDescription | SpellDescription$ Tap it.
+DeckHas:Ability$Sacrifice
+Oracle:Flash\n{1}, Sacrifice another creature: This creature gains indestructible until end of turn. Tap it.

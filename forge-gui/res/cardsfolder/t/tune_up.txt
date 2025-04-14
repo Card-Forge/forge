@@ -1,0 +1,7 @@
+Name:Tune Up
+ManaCost:3 W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouOwn | TgtPrompt$ Choose target artifact card in your graveyard | SubAbility$ DBAnimate | SpellDescription$ Return target artifact card from your graveyard to the battlefield. If it's a Vehicle, it becomes an artifact creature.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Vehicle | Types$ Artifact,Creature | Duration$ Permanent
+DeckHas:Ability$Graveyard
+Oracle:Return target artifact card from your graveyard to the battlefield. If it's a Vehicle, it becomes an artifact creature.

@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each creature you control with base power or toughness 1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Hamster.YouCtrl,Mouse.YouCtrl,Rat.YouCtrl,Squirrel.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Hamster, Mouse, Rat, or Squirrel you control enters, you may attach CARDNAME to that creature.
-SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
+SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCardLKICopy
 K:Equip:2
 SVar:X:Count$Valid Creature.basePowerEQ1+YouCtrl,Creature.baseToughnessEQ1+YouCtrl
 Oracle:Equipped creature gets +1/+1 for each creature you control with base power or toughness 1.\nWhenever a Hamster, Mouse, Rat, or Squirrel you control enters, you may attach Sword of the Squeak to that creature.\nEquip {2}

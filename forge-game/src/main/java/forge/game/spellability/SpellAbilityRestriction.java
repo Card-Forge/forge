@@ -19,9 +19,8 @@ package forge.game.spellability;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.game.Game;
@@ -35,6 +34,7 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.staticability.StaticAbilityExhaust;
 import forge.game.staticability.StaticAbilityNumLoyaltyAct;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -229,11 +229,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (cardZone == null || this.getZone() == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
-
-            // A conspiracy with hidden agenda: reveal at any time
-            if (cardZone != null && cardZone.is(ZoneType.Command) && sa.hasParam("HiddenAgenda")) {
-                return true;
-            }
             if (sa.hasParam("AdditionalActivationZone")) {
                 if (cardZone != null && cardZone.is(ZoneType.valueOf(sa.getParam("AdditionalActivationZone")))) {
                     return true;
@@ -468,7 +463,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 list = new FCollection<>(game.getCardsIn(getPresentZone()));
             }
 
-            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa)));
+            Predicate<GameObject> restriction = GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa);
+            final int left = (int) list.stream().filter(restriction).count();
 
             final String rightString = this.getPresentCompare().substring(2);
             int right = AbilityUtils.calculateAmount(c, rightString, sa);
@@ -542,6 +538,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (limit <= sa.getActivationsThisTurn()) {
                 return false;
             }
+        } else if (sa.isExhaust()) {
+            if (sa.getActivationsThisGame() > 0 && !StaticAbilityExhaust.anyWithExhaust(activator)) {
+                return false;
+            }
         }
 
         // Rule 605.3c about Mana Abilities
@@ -573,7 +573,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (this.getGameTypes().size() > 0) {
             Predicate<GameType> pgt = type -> game.getRules().hasAppliedVariant(type);
-            if (!Iterables.any(getGameTypes(), pgt)) {
+            if (getGameTypes().stream().noneMatch(pgt)) {
                 return false;
             }
         }

@@ -1,0 +1,12 @@
+Name:Ivora, Insatiable Heir
+ManaCost:1 R
+Types:Legendary Creature Vampire Warrior
+PT:1/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters and whenever it deals combat damage to a player, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, sacrifice this artifact: Draw a card.")
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigToken | CombatDamage$ True | Secondary$ True | TriggerDescription$ When CARDNAME enters and whenever it deals combat damage to a player, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw
+T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you discard a card, put a +1/+1 counter on NICKNAME.
+DeckHas:Ability$Counters
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Trample\nWhen Ivora, Insatiable Heir enters and whenever it deals combat damage to a player, create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, sacrifice this artifact: Draw a card.")\nWhenever you discard a card, put a +1/+1 counter on Ivora.

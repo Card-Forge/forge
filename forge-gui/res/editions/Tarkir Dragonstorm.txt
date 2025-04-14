@@ -1,0 +1,531 @@
+[metadata]
+Code=TDM
+Date=2025-04-11
+Name=Tarkir: Dragonstorm
+Type=Expansion
+ScryfallCode=TDM
+# https://mtgscribe.com/2025/03/20/play-booster-fact-sheet-dragonstorm/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,FoilWildcard
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 FoilWildcard
+Prerelease=6 Boosters, 1 RareMythic+
+# TDM Prereleases are actually 5 + a seeded faction booster. We'll figure that out later
+#FactionBooster=8 Common, 2 Uncommon, 1 UncommonTriland, 1 FactionLand, 1 Wildcard, 1 MythicRare
+BoosterBox=30
+
+[Common]
+Base=Common:!fromSheet("TDM gain lands"):fromSheet("TDM cards")
+
+[Common-Guest]
+Base=Common:!fromSheet("TDM gain lands"):fromSheet("TDM cards")
+Replace=.015625F fromSheet("TDM special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("TDM cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("TDM cards")
+Replace=.077F Rare:fromSheet("TDM borderless")
+Replace=.015F Mythic:fromSheet("TDM borderless")
+
+[AnyLand]
+Base=fromSheet("TDM gain lands")
+Replace=.174F fromSheet("TDM gain lands")+
+Replace=.105F BasicLand:fromSheet("TDM cards"):!fromSheet("TDM gain lands")
+Replace=.026F BasicLand:fromSheet("TDM cards"):!fromSheet("TDM gain lands")+
+
+[Wildcard]
+Base=Uncommon:fromSheet("TDM cards")
+Replace=.171F Common:fromSheet("TDM cards")
+Replace=.179F Rare:fromSheet("TDM cards")
+Replace=.028F Mythic:fromSheet("TDM cards")
+
+[FoilWildcard]
+Base=Common:fromSheet("TDM cards")+
+Replace=.334F Uncommon:fromSheet("TDM cards")
+Replace=.072F Rare:fromSheet("TDM cards")
+Replace=.012F Mythic:fromSheet("TDM cards")
+
+[cards]
+1 M Ugin, Eye of the Storms @Joshua Raphael
+2 R Anafenza, Unyielding Lineage @Matt Stewart
+3 C Arashin Sunshield @Inkognit
+4 C Bearer of Glory @Joshua Cairos
+5 R Clarion Conqueror @Nathaniel Himawan
+6 C Coordinated Maneuver @Wisnu Tan
+7 U Dalkovan Packbeasts @Constantin Marin
+8 U Descendant of Storms @Lie Setiawan
+9 C Dragonback Lancer @Diego Gisbert
+10 U Duty Beyond Death @Kev Fang
+11 M Elspeth, Storm Slayer @Ekaterina Burmak
+12 C Fortress Kin-Guard @Daneen Wilkerson
+13 U Furious Forebear @Izzy
+14 C Lightfoot Technique @Craig J Spearing
+15 U Loxodon Battle Priest @Yeong-Hao Han
+16 C Mardu Devotee @Lorenzo Mastroianni
+17 C Osseous Exhale @Camille Alquier
+18 C Poised Practitioner @Alessandra Pisano
+19 U Rally the Monastery @David Astruga
+20 C Rebellious Strike @Evyn Fong
+21 C Riling Dawnbreaker @Tuan Duong Chu
+22 R Sage of the Skies @Justyna Dura
+23 C Salt Road Packbeast @Ben Wootten
+24 M Smile at Death @Olivier Bernard
+25 U Starry-Eyed Skyrider @Lindsey Look
+26 U Static Snare @Yohann Schepacz
+27 U Stormbeacon Blade @Jorge Jacinto
+28 C Stormplain Detainment @Livia Prima
+29 U Sunpearl Kirin @Allen Morris
+30 U Teeming Dragonstorm @Leon Tukker
+31 C Tempest Hawk @Abz J Harding
+32 R United Battlefront @Darren Tan
+33 R Voice of Victory @Joshua Cairos
+34 U Wayspeaker Bodyguard @Inkognit
+35 U Aegis Sculptor @Michele Giorgi
+36 C Agent of Kotis @Matt Stewart
+37 R Ambling Stormshell @Carlos Palma Cruchaga
+38 U Bewildering Blizzard @Milivoj Ćeran
+39 U Constrictor Sage @Nereida
+40 C Dirgur Island Dragon @Daniel Ljunggren
+41 C Dispelling Exhale @David Auden Nash
+42 R Dragonologist @Mila Pesic
+43 U Dragonstorm Forecaster @Kev Fang
+44 U Essence Anchor @David Astruga
+45 C Focus the Mind @Fariba Khamseh
+46 U Fresh Start @Joe Slucher
+47 C Highspire Bell-Ringer @Zoltan Boros
+48 C Humbling Elder @Yohann Schepacz
+49 C Iceridge Serpent @Brian Valeza
+50 U Kishla Trawlers @Iris Compiet
+51 R Marang River Regent @John Tedrick
+52 R Naga Fleshcrafter @Valera Lutfullina
+53 C Ringing Strike Mastery @Alexandre Honoré
+54 C Riverwalk Technique @Julia Metzger
+55 U Roiling Dragonstorm @Gaboleps
+56 C Sibsig Appraiser @Ina Wong
+57 C Snowmelt Stag @Lorenzo Mastroianni
+58 U Spectral Denial @Xabi Gaztelua
+59 R Stillness in Motion @Kai Carpenter
+60 M Taigam, Master Opportunist @Joshua Raphael
+61 C Temur Devotee @Marina Ortega Lorente
+62 C Unending Whisper @Danny Schwartz
+63 U Ureni's Rebuff @Sergio Cosmai
+64 U Veteran Ice Climber @Néstor Ossandón Leal
+65 U Wingblade Disciple @Julian Kok Joon Wen
+66 C Wingspan Stride @Jake Murray
+67 R Winternight Stories @Zara Alfonso
+68 C Abzan Devotee @Forrest Imel
+69 C Adorned Crocodile @Nathaniel Himawan
+70 C Aggressive Negotiations @Ovidio Cartagena
+71 U Alchemist's Assistant @Eelis Kyttanen
+72 C Alesha's Legacy @Craig J Spearing
+73 R Avenger of the Fallen @Winona Nelson
+74 C Caustic Exhale @Camille Alquier
+75 U Corroding Dragonstorm @Sergey Glushakov
+76 C Cruel Truths @Fajareka Setiawan
+77 C Delta Bloodflies @Inkognit
+78 U Desperate Measures @Gaboleps
+79 C Dragon's Prey @Johann Bodin
+80 C Feral Deathgorger @Loïc Canavaggia
+81 U Gurmag Rakshasa @Johan Grenier
+82 U Hundred-Battle Veteran @Wayne Wu
+83 C Kin-Tree Nurturer @Loïc Canavaggia
+84 U Krumar Initiate @Josu Solano
+85 C Nightblade Brigade @Gary Laib
+86 R Qarsi Revenant @Lorenzo Mastroianni
+87 M Rot-Curse Rakshasa @Chris Rahn
+88 U Salt Road Skirmish @Arif Wijaya
+89 C Sandskitter Outrider @Arif Wijaya
+90 R Scavenger Regent @John Tedrick
+91 R The Sibsig Ceremony @Eli Minaya
+92 R Sidisi, Regent of the Mire @Diana Franco
+93 R Sinkhole Surveyor @Warren Mahy
+94 U Strategic Betrayal @Flavio Greco Paglia
+95 C Unburied Earthcarver @Inkognit
+96 U Unrooted Ancestor @Elizabeth Peiró
+97 U Venerated Stormsinger @Elizabeth Peiró
+98 U Wail of War @Izzy
+99 C Worthy Cost @Andrew Mar
+100 U Yathan Tombguard @Xavier Ribeiro
+101 U Breaching Dragonstorm @Danny Schwartz
+102 U Channeled Dragonfire @Jorge Jacinto
+103 R Cori-Steel Cutter @Xabi Gaztelua
+104 C Devoted Duelist @Nathaniel Himawan
+105 M Dracogenesis @Kai Carpenter
+106 U Equilibrium Adept @Leroy Steinmann
+107 C Fire-Rim Form @Filipe Pagliuso
+108 U Fleeting Effigy @Darren Tan
+109 U Iridescent Tiger @Fajareka Setiawan
+110 C Jeskai Devotee @Xavier Ribeiro
+111 R Magmatic Hellkite @Tyler Walpole
+112 C Meticulous Artisan @Anna Pavleeva
+113 C Molten Exhale @Nathaniel Himawan
+114 C Narset's Rebuke @Diego Gisbert
+115 U Overwhelming Surge @Gaboleps
+116 C Rescue Leopard @Hector Ortiz
+117 U Reverberating Summons @Marco Gorlei
+118 R Sarkhan, Dragon Ascendant @Billy Christian
+119 C Seize Opportunity @Josiah "Jo" Cameron
+120 C Shock Brigade @Fajareka Setiawan
+121 U Shocking Sharpshooter @Warren Mahy
+122 R Stadium Headliner @Ralph Horsley
+123 M Stormscale Scion @Andrew Mar
+124 C Stormshriek Feral @Joshua Raphael
+125 C Summit Intimidator @Diego Gisbert
+126 U Sunset Strikemaster @Zara Alfonso
+127 R Tersa Lightshatter @Olivier Bernard
+128 C Twin Bolt @Craig J Spearing
+129 C Underfoot Underdogs @Brent Hollowell
+130 U Unsparing Boltcaster @Gaboleps
+131 U War Effort @Ioannis Fiore
+132 C Wild Ride @Filipe Pagliuso
+133 U Zurgo's Vanguard @Michele Giorgi
+134 C Ainok Wayfarer @Filipe Pagliuso
+135 U Attuned Hunter @Scott Murphy
+136 R Bloomvine Regent @Johann Bodin
+137 C Champion of Dusan @Bastien L. Deharme
+138 M Craterhoof Behemoth @Magali Villeneuve
+139 U Dragon Sniper @David Auden Nash
+140 U Dragonbroods' Relic @Racrufi
+141 C Dusyut Earthcarver @Andrea Piparo
+142 U Encroaching Dragonstorm @Marco Gorlei
+143 U Formation Breaker @Eelis Kyttanen
+144 R Herd Heirloom @Allen Morris
+145 C Heritage Reclamation @Konstantin Porubov
+146 U Inspirited Vanguard @Carlos Palma Cruchaga
+147 U Knockout Maneuver @Aaron J. Riley
+148 C Krotiq Nestguard @Loïc Canavaggia
+149 R Lasyd Prowler @Anna Pavleeva
+150 R Nature's Rhythm @Liiga Smilshkalne
+151 C Piercing Exhale @Jorge Jacinto
+152 U Rainveil Rejuvenator @Michele Giorgi
+153 U Rite of Renewal @Gaboleps
+154 C Roamer's Routine @Andrew Mar
+155 U Sage of the Fang @Ioannis Fiore
+156 C Sagu Pummeler @Francisco Badilla
+157 C Sagu Wildling @Gaboleps
+158 C Sarkhan's Resolve @Billy Christian
+159 C Snakeskin Veil @Monztre
+160 C Sultai Devotee @Bastien L. Deharme
+161 R Surrak, Elusive Hunter @Dan Murayama Scott
+162 U Synchronized Charge @Johan Grenier
+163 C Trade Route Envoy @Gaboleps
+164 U Traveling Botanist @Daneen Wilkerson
+165 C Undergrowth Leopard @Iris Compiet
+166 R Warden of the Grove @Alexander Ostrowski
+167 M All-Out Assault @Joshua Cairos
+168 U Armament Dragon @Maxime Minard
+169 U Auroral Procession @Marco Gorlei
+170 R Awaken the Honored Dead @Clint Lockwood
+171 R Barrensteppe Siege @Tuan Duong Chu
+172 M Betor, Kin to All @Alexander Ostrowski
+173 U Bone-Cairn Butcher @David Palumbo
+174 M Call the Spirit Dragons @Liiga Smilshkalne
+175 U Cori Mountain Stalwart @Josiah "Jo" Cameron
+176 M Death Begets Life @Justin Hernandez & Alexis Hernandez
+177 U Defibrillating Current @Isis
+178 U Disruptive Stormbrood @Edgar Sánchez Hidalgo
+179 M Dragonback Assault @Ryan Pancoast
+180 U Dragonclaw Strike @Yeong-Hao Han
+181 U Effortless Master @Lie Setiawan
+182 R Eshki Dragonclaw @Tran Nguyen
+183 R Fangkeeper's Familiar @David Szabo
+184 R Felothar, Dawn of the Abzan @Victor Adame Minguez
+185 R Flamehold Grappler @Wayne Wu
+186 U Frontline Rush @Filipe Pagliuso
+187 R Frostcliff Siege @Dan Murayama Scott
+188 U Glacial Dragonhunt @Igor Grechanyi
+189 R Glacierwood Siege @Andreas Zafiratos
+190 C Gurmag Nightwatch @Nereida
+191 U Hardened Tactician @Milivoj Ćeran
+192 R Hollowmurk Siege @Antonio José Manzanedo
+193 U Host of the Hereafter @Annie Stegg
+194 R Inevitable Defeat @Cristi Balanescu
+195 U Jeskai Brushmaster @Nino Vecia
+196 M Jeskai Revelation @Igor Grechanyi
+197 U Jeskai Shrinekeeper @Andrew Mar
+198 U Karakyk Guardian @Joe Slucher
+199 U Kheru Goldkeeper @Randy Vargas
+200 U Kin-Tree Severance @Zack Stella
+201 U Kishla Skimmer @James Ryman
+202 R Kotis, the Fangkeeper @Evyn Fong
+203 U Lie in Wait @Diana Franco
+204 R Lotuslight Dancers @Jodie Muir
+205 U Mammoth Bellow @Xavier Ribeiro
+206 R Mardu Siegebreaker @Chris Seaman
+207 U Marshal of the Lost @Andreas Zafiratos
+208 C Monastery Messenger @Forrest Imel
+209 R Narset, Jeskai Waymaster @Randy Vargas
+210 M Neriv, Heart of the Storm @Victor Adame Minguez
+211 R New Way Forward @Eli Minaya
+212 M Perennation @Eli Minaya
+213 U Purging Stormbrood @David Astruga
+214 U Rakshasa's Bargain @Yigit Koroglu
+215 R Rediscover the Way @Clint Lockwood
+216 C Reigning Victor @Warren Mahy
+217 C Reputable Merchant @Craig J Spearing
+218 R Revival of the Ancestors @Clint Lockwood
+219 U Riverwheel Sweep @Wayne Wu
+220 R Roar of Endless Song @Clint Lockwood
+221 U Runescale Stormbrood @Loïc Canavaggia
+222 R Severance Priest @Scott Murphy
+223 M Shiko, Paragon of the Way @Victor Adame Minguez
+224 U Skirmish Rhino @James Bousema
+225 R Songcrafter Mage @Irina Nordsol
+226 U Sonic Shrieker @Jason A. Engle
+227 U Stalwart Successor @Bastien L. Deharme
+228 R Temur Battlecrier @Brent Hollowell
+229 C Temur Tawnyback @Brian Valeza
+230 M Teval, Arbiter of Virtue @Alexander Ostrowski
+231 R Thunder of Unity @Clint Lockwood
+232 U Twinmaw Stormbrood @Tuan Duong Chu
+233 M Ureni, the Song Unending @Alexander Ostrowski
+234 U Whirlwing Stormbrood @Fajareka Setiawan
+235 R Windcrag Siege @Néstor Ossandón Leal
+236 R Yathan Roadwatcher @Inkognit
+237 R Zurgo, Thunder's Decree @Steve Prescott
+238 U Abzan Monument @Jorge Jacinto
+239 C Boulderborn Dragon @Alexander Ostrowski
+240 R Dragonfire Blade @Clint Lockwood
+241 C Dragonstorm Globe @Adrián Rodríguez Pérez
+242 C Embermouth Sentinel @Stephanie Cheung
+243 C Jade-Cast Sentinel @David Astruga
+244 U Jeskai Monument @Julian Kok Joon Wen
+245 U Mardu Monument @Salvatorre Zee Yazzie
+246 M Mox Jasper @Steven Belledin
+247 U Sultai Monument @Julian Kok Joon Wen
+248 U Temur Monument @Sam Burley
+249 C Watcher of the Wayside @Brian Valeza
+250 L Bloodfell Caves @Piotr Dura
+251 L Blossoming Sands @Piotr Dura
+252 R Cori Mountain Monastery @Arthur Yuan
+253 R Dalkovan Encampment @Marina Ortega Lorente
+254 L Dismal Backwater @Alayna Danner
+255 C Evolving Wilds @Leon Tukker
+256 U Frontier Bivouac @Andrea Piparo
+257 R Great Arashin City @Josu Solano
+258 L Jungle Hollow @Cristi Balanescu
+259 R Kishla Village @Bruce Brenneise
+260 R Maelstrom of the Spirit Dragon @Carlos Palma Cruchaga
+261 R Mistrise Village @Constantin Marin
+262 U Mystic Monastery @Leon Tukker
+263 U Nomad Outpost @Alayna Danner
+264 U Opulent Palace @Sergey Glushakov
+265 L Rugged Highlands @Carlos Palma Cruchaga
+266 U Sandsteppe Citadel @Diego Gisbert
+267 L Scoured Barrens @Brent Hollowell
+268 L Swiftwater Cliffs @Piotr Dura
+269 L Thornwood Falls @Alexander Ostrowski
+270 L Tranquil Cove @Kevin Sidharta
+271 L Wind-Scarred Crag @Filip Burburan
+272 L Plains @Sergey Glushakov
+273 L Island @Sergey Glushakov
+274 L Swamp @Sergey Glushakov
+275 L Mountain @Sergey Glushakov
+276 L Forest @Sergey Glushakov
+277 L Plains @John Avon
+278 L Plains @Valera Lutfullina
+279 L Island @Sam Burley
+280 L Island @Constantin Marin
+281 L Swamp @Alexander Ostrowski
+282 L Swamp @Arthur Yuan
+283 L Mountain @Ralph Horsley
+284 L Mountain @Josu Solano
+285 L Forest @Jesper Ejsing
+286 L Forest @Valera Lutfullina
+
+[full art]
+287 L Plains @Ron Spencer
+288 L Island @Ron Spencer
+289 L Swamp @Ron Spencer
+290 L Mountain @Ron Spencer
+291 L Forest @Ron Spencer
+
+[showcase]
+292 C Riling Dawnbreaker @Jarel Threat
+293 U Teeming Dragonstorm @Dibujante Nocturno
+294 C Dirgur Island Dragon @Dibujante Nocturno
+295 R Dragonologist @Jarel Threat
+296 U Roiling Dragonstorm @Dan Mumford
+297 U Corroding Dragonstorm @Cabrol
+298 C Feral Deathgorger @DZO
+299 U Breaching Dragonstorm @Justine Jones
+300 M Dracogenesis @Rafal Wechterowicz (Too Many Skulls)
+301 R Magmatic Hellkite @Rafal Wechterowicz (Too Many Skulls)
+302 R Sarkhan, Dragon Ascendant @DZO
+303 M Stormscale Scion @Massiveface
+304 C Stormshriek Feral @Justine Jones
+305 U Encroaching Dragonstorm @Rafal Wechterowicz (Too Many Skulls)
+306 C Sagu Wildling @Justine Jones
+307 U Armament Dragon @Jarel Threat
+308 M Betor, Kin to All @Dan Mumford
+309 M Call the Spirit Dragons @Dibujante Nocturno
+310 U Disruptive Stormbrood @Dan Mumford
+311 U Jeskai Shrinekeeper @Justine Jones
+312 U Karakyk Guardian @Dibujante Nocturno
+313 U Kheru Goldkeeper @Jarel Threat
+314 M Neriv, Heart of the Storm @Michael Walsh
+315 U Purging Stormbrood @WolfSkullJack
+316 U Runescale Stormbrood @Massiveface
+317 M Shiko, Paragon of the Way @Dibujante Nocturno
+318 U Sonic Shrieker @Jarel Threat
+319 M Teval, Arbiter of Virtue @Rafal Wechterowicz (Too Many Skulls)
+320 U Twinmaw Stormbrood @Michael Walsh
+321 M Ureni, the Song Unending @Rafal Wechterowicz (Too Many Skulls)
+322 U Whirlwing Stormbrood @Dan Mumford
+323 C Boulderborn Dragon @Cabrol
+324 R Dragonfire Blade @WolfSkullJack
+325 M Mox Jasper @DZO
+326 R Maelstrom of the Spirit Dragon @Cabrol
+327 R Anafenza, Unyielding Lineage @Martina Fačková
+328 R Sage of the Skies @Wayne Wu
+329 M Smile at Death @Billy Christian
+330 R United Battlefront @Aaron J. Riley
+331 R Voice of Victory @Kevin Glint
+332 R Ambling Stormshell @Tomas Duchek
+333 R Naga Fleshcrafter @Tuan Duong Chu
+334 R Stillness in Motion @Kevin Glint
+335 M Taigam, Master Opportunist @Jeremy Chong
+336 R Winternight Stories @Tomas Duchek
+337 R Avenger of the Fallen @Tomas Duchek
+338 R Qarsi Revenant @Kevin Glint
+339 M Rot-Curse Rakshasa @Tomas Duchek
+340 R The Sibsig Ceremony @Tomas Duchek
+341 R Sidisi, Regent of the Mire @Tomas Duchek
+342 R Sinkhole Surveyor @Kevin Glint
+343 R Cori-Steel Cutter @Tomas Duchek
+344 R Stadium Headliner @Tomas Duchek
+345 R Tersa Lightshatter @Tomas Duchek
+346 M Craterhoof Behemoth @Tuan Duong Chu
+347 R Herd Heirloom @Clint Lockwood
+348 R Lasyd Prowler @Wonchun Choi
+349 R Nature's Rhythm @Valera Lutfullina
+350 R Surrak, Elusive Hunter @Jose Cabrera
+351 R Warden of the Grove @Kevin Glint
+352 M All-Out Assault @Valera Lutfullina
+353 M Betor, Kin to All @Anna Podedworna
+354 M Death Begets Life @Joshua Raphael
+355 M Dragonback Assault @Anastasia Ovchinnikova
+356 R Eshki Dragonclaw @Valera Lutfullina
+357 R Fangkeeper's Familiar @Kevin Glint
+358 R Felothar, Dawn of the Abzan @Wayne Wu
+359 R Flamehold Grappler @Wayne Wu
+360 R Inevitable Defeat @Tomas Duchek
+361 M Jeskai Revelation @Francis Tneh
+362 R Kotis, the Fangkeeper @Tomas Duchek
+363 R Lotuslight Dancers @Fajareka Setiawan
+364 R Mardu Siegebreaker @Joshua Cairos
+365 R Narset, Jeskai Waymaster @Kevin Glint
+366 M Neriv, Heart of the Storm @Kevin Glint
+367 R New Way Forward @Wayne Wu
+368 M Perennation @Martina Fačková
+369 R Severance Priest @Tomas Duchek
+370 M Shiko, Paragon of the Way @Anastasia Ovchinnikova
+371 R Songcrafter Mage @Jeremy Chong
+372 R Temur Battlecrier @Christina Kraus
+373 M Teval, Arbiter of Virtue @Andrey Kuzinskiy
+374 M Ureni, the Song Unending @Andrey Kuzinskiy
+375 R Yathan Roadwatcher @Kevin Glint
+376 R Zurgo, Thunder's Decree @Chuck Lukacs
+377 R Clarion Conqueror @Crystal Sully
+377b R Clarion Conqueror @Crystal Sully
+378 R Marang River Regent @Brian Valeza
+378b R Marang River Regent @Brian Valeza
+379 R Scavenger Regent @Allen Douglas
+379b R Scavenger Regent @Allen Douglas
+380 R Magmatic Hellkite @Alison Johnstun
+380b R Magmatic Hellkite @Alison Johnstun
+381 R Bloomvine Regent @Brooklyn Smith
+381b R Bloomvine Regent @Brooklyn Smith
+382 M Ugin, Eye of the Storms @Antonio José Manzanedo
+382b M Ugin, Eye of the Storms @Antonio José Manzanedo
+399 M Ugin, Eye of the Storms @Joshua Raphael
+400 M Clarion Conqueror @Nathaniel Himawan
+401 M Elspeth, Storm Slayer @Ekaterina Burmak
+402 M Dracogenesis @Kai Carpenter
+403 M Sarkhan, Dragon Ascendant @Billy Christian
+404 M Craterhoof Behemoth @Magali Villeneuve
+405 M All-Out Assault @Joshua Cairos
+406 M Death Begets Life @Justin Hernandez & Alexis Hernandez
+407 M Narset, Jeskai Waymaster @Randy Vargas
+408 M Skirmish Rhino @James Bousema
+
+[borderless]
+383 R Awaken the Honored Dead @Flavio Greco Paglia
+384 R Barrensteppe Siege @Clint Lockwood
+385 R Frostcliff Siege @Francesca Baerald
+386 R Glacierwood Siege @Clint Lockwood
+387 R Hollowmurk Siege @Raymond Bonilla
+388 R Rediscover the Way @Justyna Dura
+389 R Revival of the Ancestors @Miklós Ligeti
+390 R Roar of Endless Song @Miklós Ligeti
+391 R Thunder of Unity @Lie Setiawan
+392 R Windcrag Siege @Francesca Baerald
+393 R Cori Mountain Monastery @Constantin Marin
+394 R Dalkovan Encampment @Raymond Bonilla
+395 R Great Arashin City @Constantin Marin
+396 R Kishla Village @Marina Ortega Lorente
+397 R Mistrise Village @Marco Gorlei
+398 M Elspeth, Storm Slayer @Jeremy Wilson
+
+[etched]
+409 M Ugin, Eye of the Storms @Joshua Raphael
+410 M Clarion Conqueror @Nathaniel Himawan
+411 M Elspeth, Storm Slayer @Ekaterina Burmak
+412 M Dracogenesis @Kai Carpenter
+413 M Sarkhan, Dragon Ascendant @Billy Christian
+414 M Craterhoof Behemoth @Magali Villeneuve
+415 M All-Out Assault @Joshua Cairos
+416 M Death Begets Life @Justin Hernandez & Alexis Hernandez
+417 M Narset, Jeskai Waymaster @Randy Vargas
+418 M Skirmish Rhino @James Bousema
+
+[promo]
+419 M Mox Jasper @Dan Frazier
+420 U Static Snare @Yohann Schepacz
+421 U Roiling Dragonstorm @Gaboleps
+422 U Strategic Betrayal @Flavio Greco Paglia
+423 U Channeled Dragonfire @Jorge Jacinto
+424 U Encroaching Dragonstorm @Marco Gorlei
+425 R Temur Battlecrier @Valera Lutfullina
+426 R Qarsi Revenant @Diana Franco
+
+[gain lands]
+1 Bloodfell Caves|TDM
+1 Blossoming Sands|TDM
+1 Dismal Backwater|TDM
+1 Jungle Hollow|TDM
+1 Rugged Highlands|TDM
+1 Scoured Barrens|TDM
+1 Swiftwater Cliffs|TDM
+1 Thornwood Falls|TDM
+1 Tranquil Cove|TDM
+1 Wind-Scarred Crag|TDM
+
+[special guests]
+1 Verdant Catacombs|SPG
+1 Scalding Tarn|SPG
+1 Misty Rainforest|SPG
+1 Marsh Flats|SPG
+1 Arid Mesa|SPG
+1 Ruinous Ultimatum|SPG
+1 Inspired Ultimatum|SPG
+1 Genesis Ultimatum|SPG
+1 Emergent Ultimatum|SPG
+1 Eerie Ultimatum|SPG
+
+[tokens]
+b_2_2_zombie_druid
+c_a_treasure_sac
+g_5_5_elephant
+r_1_1_goblin
+r_1_1_warrior
+r_4_4_dragon_flying
+reliquary_dragon
+w_1_1_bird_flying
+w_1_1_monk_prowess
+w_1_1_soldier
+w_1_1_spirit
+w_2_2_soldier
+w_2_2_spirit
+w_3_3_spirit
+w_x_x_spirit

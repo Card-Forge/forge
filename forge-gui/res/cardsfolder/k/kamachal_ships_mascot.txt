@@ -9,7 +9,7 @@ SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBChoo
 SVar:DBChoose:DB$ ChooseCard | Choices$ Card.cmcEQX+ControlledBy TriggeredTarget | ChoiceZone$ Library | Amount$ 1 | AtRandom$ True | SubAbility$ DBChangeZoneAll
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Library | Destination$ Exile | ChangeType$ Card.ChosenCard | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | SubAbility$ DBCleanup
-SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ You may cast that card this turn.
+SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | MayPlay$ True | Description$ You may cast that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Ability$Token & Type$Treasure

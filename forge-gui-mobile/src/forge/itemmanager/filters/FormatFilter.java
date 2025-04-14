@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.adventure.scene.AdventureDeckEditor;
+import forge.adventure.scene.DeckEditScene;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.card.CardEdition;
@@ -34,6 +36,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     private String selectedFormat;
     private boolean preventHandling = false;
     private FComboBox<Object> cbxFormats = new FComboBox<>();
+    private FComboBox<Object> catalogDisplay = new FComboBox<>();
 
     public FormatFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
@@ -46,20 +49,30 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         cbxFormats.addItem(Forge.getLocalizer().getMessage("lblOtherFormats"));
         cbxFormats.addItem(Forge.getLocalizer().getMessage("lblChooseSets"));
         cbxFormats.setEnabled(!Forge.isMobileAdventureMode);
+        cbxFormats.setVisible(!Forge.isMobileAdventureMode);
+
+        catalogDisplay.setFont(FSkinFont.get(12));
+        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblCollection"));
+        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblSellable"));
+        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblAutoSellable"));
+        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblNonSellable"));
+        catalogDisplay.setEnabled(Forge.isMobileAdventureMode);
+        catalogDisplay.setVisible(Forge.isMobileAdventureMode);
+
         selectedFormat = cbxFormats.getText();
 
         cbxFormats.setChangedHandler(e -> {
-            if (preventHandling) { return; }
+            if (preventHandling) {
+                return;
+            }
 
             int index = cbxFormats.getSelectedIndex();
             if (index == -1) {
                 //Do nothing when index set to -1
-            }
-            else if (index == 0) {
+            } else if (index == 0) {
                 format = null;
                 applyChange();
-            }
-            else if (index == cbxFormats.getItemCount() - 2) {
+            } else if (index == cbxFormats.getItemCount() - 2) {
                 preventHandling = true;
                 cbxFormats.setText(selectedFormat); //restore previous selection by default
                 preventHandling = false;
@@ -70,16 +83,28 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                     applyChange();
                 });
                 Forge.openScreen(archivedFormatSelect);
-            }
-            else if (index == cbxFormats.getItemCount() - 1) {
+            } else if (index == cbxFormats.getItemCount() - 1) {
                 preventHandling = true;
                 cbxFormats.setText(selectedFormat); //restore previous selection by default
                 preventHandling = false;
                 Forge.openScreen(new MultiSetSelect());
-            }
-            else {
-                format = (GameFormat)cbxFormats.getSelectedItem();
+            } else {
+                format = (GameFormat) cbxFormats.getSelectedItem();
                 applyChange();
+            }
+        });
+        catalogDisplay.setChangedHandler(e -> {
+            if (preventHandling)
+                return;
+            int index = catalogDisplay.getSelectedIndex();
+            if (index == -1) {
+                //Do nothing when index set to -1
+            }
+            switch (index) {
+                case 0 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showDefault();
+                case 1 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showCollection();
+                case 2 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showAutoSell();
+                case 3 -> ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen()).showNoSell();
             }
         });
     }
@@ -94,12 +119,15 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     public void reset() {
         preventHandling = true;
         cbxFormats.setSelectedIndex(0);
+        catalogDisplay.setSelectedIndex(0);
         preventHandling = false;
         format = null;
     }
 
     @Override
     public FDisplayObject getMainComponent() {
+        if (Forge.isMobileAdventureMode)
+            return catalogDisplay;
         return cbxFormats;
     }
 
@@ -110,11 +138,12 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
 
     @Override
     protected void buildWidget(Widget widget) {
-        widget.add(cbxFormats);
+        widget.add(Forge.isMobileAdventureMode ? catalogDisplay : cbxFormats);
     }
 
     @Override
     protected void doWidgetLayout(float width, float height) {
+        catalogDisplay.setSize(width, height);
         cbxFormats.setSize(width, height);
     }
 
@@ -137,7 +166,6 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
             lstSets.addGroup("Digital Sets");
 
             lstSets.addGroup("Draft Innovation Sets");
-
 
 
             lstSets.addGroup("Commander Sets");
@@ -163,7 +191,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                         lstSets.addItem(set, 3);
                         break;
                     case BOXED_SET:
-                        lstSets.addItem(set,4);
+                        lstSets.addItem(set, 4);
                         break;
                     case COLLECTOR_EDITION:
                         lstSets.addItem(set, 5);
@@ -233,12 +261,10 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                 if (selectedSets.contains(value)) {
                     if (count == 2) {
                         Forge.back(); //support double tap to confirm selection without unselecting double tapped item
-                    }
-                    else {
+                    } else {
                         selectedSets.remove(value);
                     }
-                }
-                else {
+                } else {
                     selectedSets.add(value);
                     if (count == 2) {
                         Forge.back(); //support double tap to confirm selection after selecting double tapped item

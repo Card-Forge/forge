@@ -26,13 +26,13 @@ Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 
 ### 📥 Desktop Installation
 1. **Latest Releases:** Download the latest version [here](https://github.com/Card-Forge/forge/releases/latest).
-2. **Snapshot Build:** For the latest development version, grab the `forge-gui-desktop` tarball from our [Snapshot Build](https://downloads.cardforge.org/dailysnapshots/).
+2. **Snapshot Build:** For the latest development version, grab the `forge-gui-desktop` tarball from our [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots).
    - **Tip:** Extract to a new folder to prevent version conflicts.
 3. **User Data Management:** Previous players’ data is preserved during upgrades.
 4. **Java Requirement:** Ensure you have **Java 17 or later** installed.
 
 ### 📱 Android Installation
-- Download the **APK** from the [Snapshot Build](https://downloads.cardforge.org/dailysnapshots/). On the first launch, Forge will automatically download all necessary assets.
+- Download the **APK** from the [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots). On the first launch, Forge will automatically download all necessary assets.
 
 ---
 
@@ -91,3 +91,10 @@ Forge aims to deliver an immersive and customizable Magic: The Gathering experie
 ---
 
 **📄 License:** [GPL-3.0](LICENSE)
+<div align="center" style="display: flex; align-items: center; justify-content: center;">
+    <div style="margin-left: auto;">
+        <a href="#top">
+            <img src="https://img.shields.io/badge/Back%20to%20Top-000000?style=for-the-badge&logo=github&logoColor=white" alt="Back to Top">
+        </a>
+    </div>
+</div>

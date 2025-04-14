@@ -2,7 +2,7 @@ Name:Riptide Mangler
 ManaCost:1 U
 Types:Creature Beast
 PT:0/3
-A:AB$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SubAbility$ DBChangePower | StackDescription$ None | SpellDescription$ Change CARDNAME's base power to target creature's power. (This effect lasts indefinitely.)
+A:AB$ Pump | Cost$ 1 U | ValidTgts$ Creature | SubAbility$ DBChangePower | StackDescription$ None | SpellDescription$ Change CARDNAME's base power to target creature's power. (This effect lasts indefinitely.)
 SVar:DBChangePower:DB$ Animate | Defined$ Self | Power$ X | Duration$ Permanent
 SVar:X:Targeted$CardPower
 AI:RemoveDeck:All

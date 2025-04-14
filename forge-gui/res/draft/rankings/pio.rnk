@@ -1,0 +1,399 @@
+//Rank|Name|Rarity|Set
+#1|Tragic Arrogance|M|PIO
+#2|Mizzium Mortars|M|PIO
+#3|Chromanticore|R|PIO
+#4|Nylea, God of the Hunt|M|PIO
+#5|Dragonlord Silumgar|M|PIO
+#6|Pia and Kiran Nalaar|R|PIO
+#7|Xenagos, God of Revels|M|PIO
+#8|Elspeth, Sun's Champion|M|PIO
+#9|Archangel of Thune|M|PIO
+#10|Dragonlord Atarka|M|PIO
+#11|Gideon, Ally of Zendikar|M|PIO
+#12|Abhorrent Overlord|U|PIO
+#13|Iroas, God of Victory|M|PIO
+#14|Dragonlord Ojutai|M|PIO
+#15|Nissa, Vastwood Seer|M|PIO
+#16|Chandra, Flamecaller|M|PIO
+#17|Aetherling|R|PIO
+#18|Goblin Rabblemaster|R|PIO
+#19|Stormbreath Dragon|M|PIO
+#20|Aurelia's Fury|R|PIO
+#21|Purphoros, God of the Forge|M|PIO
+#22|Athreos, God of Passage|M|PIO
+#23|Erebos, God of the Dead|M|PIO
+#24|Fanatic of Mogis|U|PIO
+#25|Ephara, God of the Polis|M|PIO
+#26|Keranos, God of Storms|M|PIO
+#27|Mogis, God of Slaughter|M|PIO
+#28|Rakdos's Return|R|PIO
+#29|Gate Colossus|U|PIO
+#30|Bloodtithe Harvester|U|PIO
+#31|Dreadbore|C|PIO
+#32|Ob Nixilis's Cruelty|C|PIO
+#33|Dictate of Heliod|R|PIO
+#34|Karametra, God of Harvests|M|PIO
+#35|Radiant Flames|R|PIO
+#36|Chained to the Rocks|R|PIO
+#37|Jace, Vryn's Prodigy|M|PIO
+#38|Ob Nixilis Reignited|M|PIO
+#39|Keepsake Gorgon|U|PIO
+#40|Reverent Hunter|U|PIO
+#41|Nightveil Specter|U|PIO
+#42|Ultimate Price|U|PIO
+#43|Gates Ablaze|U|PIO
+#44|Shambling Vent|R|PIO
+#45|Gatebreaker Ram|U|PIO
+#46|Whip of Erebos|R|PIO
+#47|Garruk, Apex Predator|M|PIO
+#48|Kruphix, God of Horizons|M|PIO
+#49|Ashiok, Nightmare Weaver|M|PIO
+#50|Tenth District Legionnaire|U|PIO
+#51|Tomebound Lich|U|PIO
+#52|Witch's Mark|C|PIO
+#53|Kytheon, Hero of Akros|M|PIO
+#54|Niblis of Frost|R|PIO
+#55|Whisperwood Elemental|M|PIO
+#56|Dinrova Horror|U|PIO
+#57|Master of Waves|R|PIO
+#58|Xenagos, the Reveler|M|PIO
+#59|Nighthowler|U|PIO
+#60|Blood Baron of Vizkopa|M|PIO
+#61|Scourge of Valkas|R|PIO
+#62|Lifebane Zombie|R|PIO
+#63|Legion Loyalist|R|PIO
+#64|Anax and Cymede|U|PIO
+#65|Ash Zealot|U|PIO
+#66|Stoneshock Giant|C|PIO
+#67|Pharika, God of Affliction|M|PIO
+#68|Phenax, God of Deception|M|PIO
+#69|Rubblebelt Raiders|U|PIO
+#70|Goblin Heelcutter|C|PIO
+#71|Bile Blight|C|PIO
+#72|Hunter's Prowess|R|PIO
+#73|Far Away|U|PIO
+#74|Jarad's Orders|R|PIO
+#75|Rimrock Knight|C|PIO
+#76|Monastery Swiftspear|U|PIO
+#77|Thopter Engineer|U|PIO
+#78|Cartel Aristocrat|U|PIO
+#79|Anchor to the Aether|U|PIO
+#80|Zurgo Bellstriker|R|PIO
+#81|Imperious Oligarch|C|PIO
+#82|Ghirapur Gearcrafter|C|PIO
+#83|Thunderclap Wyvern|U|PIO
+#84|Progenitor Mimic|M|PIO
+#85|Liliana, Heretical Healer|M|PIO
+#86|Woodland Wanderer|R|PIO
+#87|Ubul Sar Gatekeepers|U|PIO
+#88|Jace, Memory Adept|M|PIO
+#89|Ruinous Path|U|PIO
+#90|Akroan Crusader|C|PIO
+#91|Makindi Sliderunner|C|PIO
+#92|Cloudfin Raptor|C|PIO
+#93|Gust of Wind|C|PIO
+#94|Fallaji Archaeologist|C|PIO
+#95|Lyev Skyknight|C|PIO
+#96|District Guide|C|PIO
+#97|Scytheclaw Raptor|U|PIO
+#98|Catacomb Sifter|U|PIO
+#99|Murmuring Mystic|U|PIO
+#100|Stasis Snare|U|PIO
+#101|Nissa, Voice of Zendikar|M|PIO
+#102|Polukranos, World Eater|R|PIO
+#103|Avatar of the Resolute|U|PIO
+#104|Ajani, Mentor of Heroes|M|PIO
+#105|Sarkhan Unbroken|M|PIO
+#106|Pilgrim's Eye|C|PIO
+#107|Dragon Mantle|C|PIO
+#108|Rogue's Passage|U|PIO
+#109|Kraul Harpooner|U|PIO
+#110|Unflinching Courage|U|PIO
+#111|Fell Stinger|U|PIO
+#112|Ghor-Clan Rampager|U|PIO
+#113|Wild Slash|C|PIO
+#114|Boros Reckoner|R|PIO
+#115|Assemble the Legion|M|PIO
+#116|Heart-Piercer Manticore|U|PIO
+#117|Secure the Wastes|R|PIO
+#118|Dragonlord Kolaghan|M|PIO
+#119|Draconic Roar|U|PIO
+#120|Xathrid Necromancer|R|PIO
+#121|Sight Beyond Sight|U|PIO
+#122|Nylea's Disciple|C|PIO
+#123|Armed Dangerous|U|PIO
+#124|Guild Summit|U|PIO
+#125|Izzet Guildgate|C|PIO
+#126|Courier's Briefcase|C|PIO
+#127|Burning Anger|R|PIO
+#128|Lotleth Troll|R|PIO
+#129|Archway Angel|U|PIO
+#130|Steward of Solidarity|U|PIO
+#131|Undead Butler|C|PIO
+#132|Hornet Nest|R|PIO
+#133|Clear Shot|U|PIO
+#134|Fight with Fire|U|PIO
+#135|Linvala, the Preserver|R|PIO
+#136|Boon Satyr|U|PIO
+#137|Fleecemane Lion|R|PIO
+#138|Rakdos Guildgate|C|PIO
+#139|Hero of Iroas|C|PIO
+#140|Consider|C|PIO
+#141|Goreclaw, Terror of Qal Sisma|U|PIO
+#142|Conclave Naturalists|U|PIO
+#143|Experiment One|U|PIO
+#144|Zulaport Cutthroat|U|PIO
+#145|Azorius Charm|U|PIO
+#146|Stormchaser Mage|U|PIO
+#147|Needle Spires|R|PIO
+#148|Swift Warkite|U|PIO
+#149|Imposing Sovereign|U|PIO
+#150|Triplicate Spirits|U|PIO
+#151|Basilica Screecher|C|PIO
+#152|Aspect of Hydra|U|PIO
+#153|Selesnya Charm|C|PIO
+#154|Zephyr Winder|U|PIO
+#155|Heliod, God of the Sun|M|PIO
+#156|Frostburn Weird|U|PIO
+#157|Thassa, God of the Sea|M|PIO
+#158|Jace, Architect of Thought|M|PIO
+#159|Liliana Vess|M|PIO
+#160|Turn Burn|U|PIO
+#161|Martial Glory|C|PIO
+#162|Heliod's Pilgrim|C|PIO
+#163|Sin Collector|U|PIO
+#164|Jwari Disruption|U|PIO
+#165|Gnarlback Rhino|C|PIO
+#166|Essence Scatter|C|PIO
+#167|Audacity|C|PIO
+#168|Ardenvale Tactician|C|PIO
+#169|Fall of the Hammer|C|PIO
+#170|Cruel Revival|U|PIO
+#171|Exquisite Firecraft|R|PIO
+#172|Dragonlord Dromoka|M|PIO
+#173|Sidisi, Undead Vizier|R|PIO
+#174|Quicken|U|PIO
+#175|Bounding Krasis|U|PIO
+#176|Sphinx of Magosi|U|PIO
+#177|Supernatural Stamina|C|PIO
+#178|Coordinated Assault|U|PIO
+#179|Bring to Light|R|PIO
+#180|Dimir Guildgate|C|PIO
+#181|Golgari Guildgate|C|PIO
+#182|Gruul Guildgate|C|PIO
+#183|Simic Guildgate|C|PIO
+#184|Pulse of Murasa|U|PIO
+#185|Nantuko Husk|C|PIO
+#186|Phalanx Leader|U|PIO
+#187|Sejiri Shelter|C|PIO
+#188|Boundary Lands Ranger|C|PIO
+#189|Kabira Takedown|U|PIO
+#190|Celestial Archon|U|PIO
+#191|Blackbloom Rogue|U|PIO
+#192|Possessed Skaab|C|PIO
+#193|Tasigur, the Golden Fang|R|PIO
+#194|Tormented Hero|U|PIO
+#195|Mistcutter Hydra|R|PIO
+#196|Skylasher|R|PIO
+#197|Sylvan Primordial|R|PIO
+#198|Loxodon Smiter|U|PIO
+#199|Scatter to the Winds|U|PIO
+#200|Silundi Vision|C|PIO
+#201|Treasure Cruise|C|PIO
+#202|Disciple of Phenax|C|PIO
+#203|Ajani Steadfast|M|PIO
+#204|Reckless Bushwhacker|U|PIO
+#205|Unexpected Results|R|PIO
+#206|Reprisal|U|PIO
+#207|Render Silent|R|PIO
+#208|Boros Guildgate|C|PIO
+#209|Selesnya Guildgate|C|PIO
+#210|Gurmag Angler|C|PIO
+#211|Dreadhound|U|PIO
+#212|Ashen Rider|R|PIO
+#213|Silkwrap|U|PIO
+#214|Bident of Thassa|R|PIO
+#215|Seed Guardian|U|PIO
+#216|Skyrider Elf|C|PIO
+#217|Oath of Chandra|R|PIO
+#218|Mogis's Warhound|U|PIO
+#219|Evangel of Heliod|U|PIO
+#220|Gateway Plaza|C|PIO
+#221|Brineborn Cutthroat|U|PIO
+#222|Azorius Guildgate|C|PIO
+#223|Orzhov Guildgate|C|PIO
+#224|Urborg, Tomb of Yawgmoth|R|PIO
+#225|Illusory Angel|U|PIO
+#226|Dreg Mangler|C|PIO
+#227|Pelakka Predation|C|PIO
+#228|Priest of the Blood Rite|U|PIO
+#229|Savage Punch|C|PIO
+#230|Urban Evolution|U|PIO
+#231|Chasm Skulker|R|PIO
+#232|Evolving Wilds|C|PIO
+#233|Boulder Salvo|C|PIO
+#234|Compulsory Rest|C|PIO
+#235|Bala Ged Recovery|U|PIO
+#236|Wandering Fumarole|R|PIO
+#237|Honored Hydra|U|PIO
+#238|Opal Lake Gatekeepers|C|PIO
+#239|Devour Flesh|C|PIO
+#240|Leafcrown Dryad|C|PIO
+#241|Sylvan Caryatid|R|PIO
+#242|Shipbreaker Kraken|U|PIO
+#243|Fiendslayer Paladin|U|PIO
+#244|Wingsteed Rider|C|PIO
+#245|Gift of Orzhova|U|PIO
+#246|Silumgar Sorcerer|U|PIO
+#247|Brood Monitor|U|PIO
+#248|Clutch of Currents|C|PIO
+#249|Hopeful Eidolon|U|PIO
+#250|Keening Apparition|C|PIO
+#251|Valakut Awakening|U|PIO
+#252|Voyaging Satyr|C|PIO
+#253|Medomai the Ageless|R|PIO
+#254|Give Take|U|PIO
+#255|Protect Serve|U|PIO
+#256|Artful Maneuver|C|PIO
+#257|Syndicate Messenger|C|PIO
+#258|Darksteel Ingot|C|PIO
+#259|Read the Bones|C|PIO
+#260|Oath of Nissa|R|PIO
+#261|Swift Reckoning|C|PIO
+#262|Hissing Quagmire|R|PIO
+#263|Scab-Clan Berserker|U|PIO
+#264|Khalni Ambush|C|PIO
+#265|Nimbus Naiad|C|PIO
+#266|Blood Scrivener|U|PIO
+#267|Ordeal of Purphoros|U|PIO
+#268|Tah-Crop Skirmisher|C|PIO
+#269|Sungrace Pegasus|C|PIO
+#270|Shoulder to Shoulder|C|PIO
+#271|Void Shatter|C|PIO
+#272|Phalanx Tactics|U|PIO
+#273|Sanitarium Skeleton|C|PIO
+#274|Humble Defector|U|PIO
+#275|Halo Scarab|C|PIO
+#276|Kiora's Follower|U|PIO
+#277|Ingenious Skaab|C|PIO
+#278|Ruric Thar, the Unbowed|R|PIO
+#279|Extricator of Sin|U|PIO
+#280|Lumbering Falls|R|PIO
+#281|Jhessian Thief|U|PIO
+#282|Zendikar Incarnate|C|PIO
+#283|Outpost Siege|R|PIO
+#284|Tidebinder Mage|R|PIO
+#285|Archaeomancer|C|PIO
+#286|Kiora, the Crashing Wave|M|PIO
+#287|Sage's Reverie|U|PIO
+#288|Toil Trouble|U|PIO
+#289|Knightly Valor|C|PIO
+#290|Hero of Leina Tower|U|PIO
+#291|Mentor of the Meek|U|PIO
+#292|Bloodfire Enforcers|C|PIO
+#293|Silumgar Butcher|C|PIO
+#294|Spawning Bed|U|PIO
+#295|Hushwing Gryff|U|PIO
+#296|Oath of Gideon|U|PIO
+#297|Profit Loss|U|PIO
+#298|Steam Augury|U|PIO
+#299|Akoum Warrior|C|PIO
+#300|Lagonna-Band Trailblazer|C|PIO
+#301|Nessian Asp|C|PIO
+#302|Nivix Cyclops|C|PIO
+#303|Eidolon of Rhetoric|U|PIO
+#304|Part the Waterveil|R|PIO
+#305|Limits of Solidarity|U|PIO
+#306|Wear Tear|U|PIO
+#307|Nyx Weaver|U|PIO
+#308|Knight of the White Orchid|R|PIO
+#309|Windrider Patrol|C|PIO
+#310|Growing Ranks|U|PIO
+#311|Sphinx's Tutelage|U|PIO
+#312|Expedite|C|PIO
+#313|Seismic Stomp|U|PIO
+#314|Miming Slime|C|PIO
+#315|Worst Fears|M|PIO
+#316|Down Dirty|U|PIO
+#317|Lotus-Eye Mystics|C|PIO
+#318|Commune with the Gods|C|PIO
+#319|Ghostblade Eidolon|C|PIO
+#320|Stab Wound|U|PIO
+#321|Stampeding Elk Herd|C|PIO
+#322|Soulflayer|R|PIO
+#323|Crush of Tentacles|R|PIO
+#324|Baleful Eidolon|C|PIO
+#325|Stormtide Leviathan|R|PIO
+#326|Oath of Liliana|U|PIO
+#327|Touch of Moonglove|U|PIO
+#328|Open the Armory|U|PIO
+#329|Dark Betrayal|U|PIO
+#330|Pyromancer's Assault|U|PIO
+#331|Dragon-Style Twins|U|PIO
+#332|Labyrinth Champion|U|PIO
+#333|Painful Truths|R|PIO
+#334|Spirit of the Labyrinth|R|PIO
+#335|Bassara Tower Archer|U|PIO
+#336|Nemesis of Mortals|C|PIO
+#337|Retraction Helix|U|PIO
+#338|Dark Petition|R|PIO
+#339|Gather the Pack|U|PIO
+#340|Notion Thief|R|PIO
+#341|Aqueous Form|U|PIO
+#342|Returned Centaur|C|PIO
+#343|Rescue from the Underworld|U|PIO
+#344|Furious Rise|U|PIO
+#345|Shamanic Revelation|R|PIO
+#346|Purphoros's Emissary|C|PIO
+#347|Bane of Bala Ged|U|PIO
+#348|War Oracle|U|PIO
+#349|Dictate of Erebos|R|PIO
+#350|Sphere of Safety|U|PIO
+#351|Artisan of Forms|U|PIO
+#352|Mizzium Skin|C|PIO
+#353|Alpha Authority|U|PIO
+#354|Gladecover Scout|C|PIO
+#355|Rapid Hybridization|U|PIO
+#356|Cavern Lampad|C|PIO
+#357|Flitterstep Eidolon|U|PIO
+#358|Oath of Jace|U|PIO
+#359|The Chain Veil|M|PIO
+#360|Enter the Infinite|M|PIO
+#361|Alive Well|U|PIO
+#362|Dramatic Reversal|U|PIO
+#363|Natural State|U|PIO
+#364|Starfield of Nyx|R|PIO
+#365|Dark Deal|U|PIO
+#366|Maze's End|M|PIO
+#367|Behold the Beyond|M|PIO
+#368|Crackdown Construct|U|PIO
+#369|Silence|R|PIO
+#370|Void Winnower|M|PIO
+#371|Haven of the Spirit Dragon|R|PIO
+#372|Scion of Ugin|C|PIO
+#373|Epic Experiment|M|PIO
+#374|Sire of Insanity|R|PIO
+#375|Day's Undoing|M|PIO
+#376|Kozilek's Return|M|PIO
+#377|Crypt Incursion|U|PIO
+#378|Unravel the Aether|C|PIO
+#379|Counterflux|R|PIO
+#380|Destructive Revelry|U|PIO
+#381|Temporal Trespass|M|PIO
+#382|Call the Gatewatch|U|PIO
+#383|Crumble to Dust|U|PIO
+#384|Domri Rade|M|PIO
+#385|Fog|U|PIO
+#386|Garruk, Caller of Beasts|M|PIO
+#387|Hidden Strings|U|PIO
+#388|Liliana of the Dark Realms|M|PIO
+#389|Narset Transcendent|M|PIO
+#390|Nissa's Pilgrimage|U|PIO
+#391|Ovalchase Daredevil|U|PIO
+#392|Skyreaping|U|PIO
+#393|Smash to Smithereens|U|PIO
+#394|Stain the Mind|U|PIO
+#395|Tome Scour|U|PIO
+#396|Hallowed Moonlight|R|PIO
+#397|Illness in the Ranks|U|PIO
+#398|The Great Aurora|M|PIO

@@ -1,334 +1,334 @@
 //Rank|Name|Rarity|Set
 #1|Bonny Pall, Clearcutter|R|OTJ
-#2|Overwhelming Forces|M|OTJ
-#3|Bristly Bill, Spine Sower|M|OTJ
-#4|Railway Brawler|M|OTJ
-#5|Roxanne, Starfall Savant|R|OTJ
-#6|Seraphic Steed|R|OTJ
-#7|Vaultborn Tyrant|M|BIG
-#8|Bristlebud Farmer|M|BIG
-#9|Ornery Tumblewagg|R|OTJ
-#10|Rakdos, the Muscle|M|OTJ
-#11|Fractured Identity|M|OTP
-#12|Oko, Thief of Crowns|M|OTP
-#13|Hostile Investigator|M|BIG
-#14|Collector's Cage|M|BIG
-#15|Final Showdown|M|OTJ
-#16|Gisa, the Hellraiser|M|OTJ
-#17|Outcaster Greenblade|U|OTJ
-#18|Lassoed by the Law|U|OTJ
-#19|Colossal Rattlewurm|R|OTJ
-#20|Selvala, Eager Trailblazer|M|OTJ
-#21|Sandstorm Salvager|M|BIG
-#22|Hellspur Posse Boss|R|OTJ
+#2|Railway Brawler|M|OTJ
+#3|Overwhelming Forces|M|OTP
+#4|Vaultborn Tyrant|M|BIG
+#5|Bristly Bill, Spine Sower|M|OTJ
+#6|Rakdos, the Muscle|M|OTJ
+#7|Roxanne, Starfall Savant|R|OTJ
+#8|Seraphic Steed|R|OTJ
+#9|Oko, Thief of Crowns|M|OTP
+#10|Bristlebud Farmer|M|BIG
+#11|Ornery Tumblewagg|R|OTJ
+#12|Fractured Identity|M|OTP
+#13|Collector's Cage|M|BIG
+#14|Hostile Investigator|M|BIG
+#15|Gisa, the Hellraiser|M|OTJ
+#16|Outcaster Greenblade|U|OTJ
+#17|Selvala, Eager Trailblazer|M|OTJ
+#18|Hellspur Posse Boss|R|OTJ
+#19|Sandstorm Salvager|M|BIG
+#20|Harvester of Misery|M|BIG
+#21|Lassoed by the Law|U|OTJ
+#22|Colossal Rattlewurm|R|OTJ
 #23|Spinewoods Armadillo|U|OTJ
-#24|Wylie Duke, Atiin Hero|R|OTJ
+#24|Bruse Tarl, Roving Rancher|R|OTJ
 #25|Dust Animus|R|OTJ
-#26|Pest Infestation|R|OTJ
-#27|Harvester of Misery|M|BIG
-#28|Hollow Marauder|U|OTJ
-#29|Bruse Tarl, Roving Rancher|R|OTJ
-#30|Buried in the Garden|U|OTP
-#31|Rush of Dread|R|OTJ
-#32|The Gitrog, Ravenous Ride|M|OTJ
-#33|Miriam, Herd Whisperer|U|OTJ
-#34|Throw from the Saddle|C|OTJ
+#26|Pest Infestation|R|OTP
+#27|Cruel Ultimatum|R|OTP
+#28|Final Showdown|M|OTJ
+#29|The Gitrog, Ravenous Ride|M|OTJ
+#30|Stoic Sphinx|R|OTJ
+#31|Hollow Marauder|U|OTJ
+#32|Rush of Dread|R|OTJ
+#33|Wylie Duke, Atiin Hero|R|OTJ
+#34|Buried in the Garden|U|OTP
 #35|Shepherd of the Clouds|U|OTJ
-#36|Goldvein Hydra|M|OTJ
+#36|Terror of the Peaks|M|OTJ
 #37|Outcaster Trailblazer|R|OTJ
 #38|Annie Flash, the Veteran|M|OTJ
-#39|Honest Rutstein|U|OTJ
-#40|Morbid Opportunist|M|OTJ
-#41|Primal Might|R|OTP
+#39|Miriam, Herd Whisperer|U|OTJ
+#40|Throw from the Saddle|C|OTJ
+#41|Mana Drain|M|OTP
 #42|Vanishing Verse|R|OTP
-#43|Vadmir, New Blood|R|OTJ
-#44|Terror of the Peaks|M|OTJ
-#45|Beastbond Outcaster|U|OTJ
-#46|Trash the Town|U|OTJ
-#47|Congregation Gryff|U|OTJ
-#48|Laughing Jasper Flint|R|OTJ
-#49|Ruthless Lawbringer|U|OTJ
-#50|Cruel Ultimatum|R|OTP
-#51|Getaway Glamer|U|OTJ
-#52|Stoic Sphinx|R|OTJ
-#53|Caustic Bronco|R|OTJ
-#54|Stingerback Terror|R|OTJ
-#55|Stubborn Burrowfiend|U|OTJ
-#56|Oko, the Ringleader|M|OTJ
-#57|Journey to Nowhere|U|OTJ
-#58|Mana Drain|M|OTP
-#59|Clear Shot|U|OTP
-#60|Fortune, Loyal Steed|R|OTJ
-#61|Frontier Seeker|U|OTJ
-#62|Prosperity Tycoon|U|OTJ
-#63|Shoot the Sheriff|U|OTJ
-#64|Aloe Alchemist|U|OTJ
-#65|Take Up the Shield|C|OTJ
-#66|Consuming Ashes|C|OTJ
-#67|Snakeskin Veil|C|OTJ
-#68|Brazen Borrower|M|SPG
-#69|Leyline Binding|M|OTJ
-#70|Primal Command|R|OTJ
-#71|Back for More|U|OTJ
-#72|Oltec Matterweaver|M|BIG
-#73|Generous Plunderer|M|BIG
-#74|Aven Interrupter|R|OTJ
+#43|Getaway Glamer|U|OTJ
+#44|Caustic Bronco|R|OTJ
+#45|Stingerback Terror|R|OTJ
+#46|Beastbond Outcaster|U|OTJ
+#47|Goldvein Hydra|M|OTJ
+#48|Honest Rutstein|U|OTJ
+#49|Laughing Jasper Flint|R|OTJ
+#50|Oko, the Ringleader|M|OTJ
+#51|Brazen Borrower|M|SPG
+#52|Primal Might|R|OTP
+#53|Vadmir, New Blood|R|OTJ
+#54|Trash the Town|U|OTJ
+#55|Congregation Gryff|U|OTJ
+#56|Ruthless Lawbringer|U|OTJ
+#57|Journey to Nowhere|U|OTP
+#58|Generous Plunderer|M|BIG
+#59|Fortune, Loyal Steed|R|OTJ
+#60|Prosperity Tycoon|U|OTJ
+#61|Duelist of the Mind|R|OTJ
+#62|Shoot the Sheriff|U|OTJ
+#63|Aloe Alchemist|U|OTJ
+#64|Stubborn Burrowfiend|U|OTJ
+#65|Assimilation Aegis|M|OTJ
+#66|Cactusfolk Sureshot|U|OTJ
+#67|Take Up the Shield|C|OTJ
+#68|Consuming Ashes|C|OTJ
+#69|Clear Shot|U|OTP
+#70|Humiliate|U|OTP
+#71|Primal Command|R|OTP
+#72|Outlaws' Merriment|R|OTP
+#73|Aven Interrupter|R|OTJ
+#74|Frontier Seeker|U|OTJ
 #75|Trained Arynx|C|OTJ
-#76|Cactarantula|C|OTJ
-#77|Intrepid Stablemaster|U|OTJ
-#78|Assimilation Aegis|M|OTJ
-#79|Cactusfolk Sureshot|U|OTJ
-#80|Bucolic Ranch|U|OTJ
-#81|Desert's Due|C|OTJ
-#82|Spinewoods Paladin|C|OTJ
-#83|Port Razer|M|OTJ
-#84|Humiliate|U|OTJ
-#85|Nexus of Becoming|M|OTJ
-#86|Holy Cow|C|OTJ
-#87|Mystical Tether|C|OTJ
-#88|Prairie Dog|U|OTJ
-#89|Marauding Sphinx|U|OTJ
-#90|Desperate Bloodseeker|C|OTJ
-#91|Unfortunate Accident|U|OTJ
-#92|Betrayal at the Vault|U|OTJ
-#93|Dance of the Tumbleweeds|C|OTJ
-#94|Patient Naturalist|C|OTJ
-#95|Smuggler's Surprise|R|OTJ
-#96|Badlands Revival|U|OTJ
-#97|Vault Plunderer|C|OTJ
-#98|Creosote Heath|C|OTJ
-#99|Festering Gulch|C|OTJ
-#100|Abrupt Decay|R|OTJ
-#101|Outlaws' Merriment|R|OTP
-#102|Tyrant's Scorn|U|OTJ
-#103|Lotus Ring|M|OTJ
-#104|Duelist of the Mind|R|OTJ
-#105|Three Steps Ahead|R|OTJ
-#106|Lively Dirge|U|OTJ
-#107|Servant of the Stinger|U|OTJ
-#108|Jolene, Plundering Pugilist|U|OTJ
-#109|Mobile Homestead|U|OTJ
-#110|Sterling Supplier|C|OTJ
-#111|Mourner's Surprise|C|OTJ
-#112|Giant Beaver|C|OTJ
-#113|Path to Exile|R|OTJ
-#114|Archive Trap|R|OTJ
-#115|Repulse|U|OTJ
-#116|Murder|U|OTJ
-#117|Crackle with Power|M|OTP
-#118|Crime Punishment|M|OTP
-#119|Void Rend|R|OTJ
-#120|Sterling Keykeeper|C|OTJ
-#121|Blood Hustler|U|OTJ
-#122|Longhorn Sharpshooter|U|OTJ
-#123|Bristlepack Sentry|C|OTJ
-#124|Freestrider Lookout|R|OTJ
-#125|Tumbleweed Rising|C|OTJ
-#126|Ertha Jo, Frontier Mentor|U|OTJ
-#127|Pillage the Bog|R|OTJ
-#128|Ambush Gigapede|C|OTJ
-#129|Drover Grizzly|C|OTJ
-#130|Conduit Pylons|C|OTJ
-#131|Forlorn Flats|C|OTJ
-#132|Mystic Snake|M|OTJ
-#133|Archangel of Tithes|M|OTJ
-#134|Bounding Felidar|U|OTJ
-#135|Geralf, the Fleshwright|M|OTJ
-#136|Fake Your Own Death|C|OTJ
-#137|Rooftop Assassin|C|OTJ
-#138|Hardbristle Bandit|C|OTJ
-#139|Rambling Possum|U|OTJ
-#140|Kambal, Profiteering Mayor|R|OTJ
-#141|Kellan, the Kid|M|OTJ
-#142|Concealed Courtyard|R|OTJ
-#143|Stagecoach Security|C|OTJ
-#144|Bristling Backwoods|C|OTJ
-#145|Lush Oasis|C|OTJ
-#146|Soured Springs|C|OTJ
-#147|Fell the Mighty|R|OTP
-#148|One Last Job|R|OTJ
-#149|Metamorphic Blast|U|OTJ
-#150|Rictus Robber|U|OTJ
-#151|Tinybones, the Pickpocket|M|OTJ
-#152|Calamity, Galloping Inferno|R|OTJ
-#153|Scalestorm Summoner|U|OTJ
-#154|Reach for the Sky|C|OTJ
-#155|Voracious Varmint|C|OTJ
-#156|Make Your Own Luck|U|OTJ
-#157|Malcolm, the Eyes|R|OTJ
-#158|Vraska, the Silencer|M|OTJ
-#159|Sandstorm Verge|U|OTJ
-#160|Outlaw Medic|C|OTJ
-#161|Phantom Interference|C|OTJ
-#162|Desertion|M|OTJ
-#163|Essence Capture|U|OTJ
+#76|Marauding Sphinx|U|OTJ
+#77|Three Steps Ahead|R|OTJ
+#78|Dance of the Tumbleweeds|C|OTJ
+#79|Smuggler's Surprise|R|OTJ
+#80|Desert's Due|C|OTJ
+#81|Vault Plunderer|C|OTJ
+#82|Snakeskin Veil|C|OTJ
+#83|Spinewoods Paladin|C|OTJ
+#84|Morbid Opportunist|M|SPG
+#85|Archive Trap|R|OTP
+#86|Crackle with Power|M|OTP
+#87|Back for More|U|OTP
+#88|Tyrant's Scorn|U|OTP
+#89|Nexus of Becoming|M|BIG
+#90|Oltec Matterweaver|M|BIG
+#91|Holy Cow|C|OTJ
+#92|Mystical Tether|C|OTJ
+#93|Prairie Dog|U|OTJ
+#94|Desperate Bloodseeker|C|OTJ
+#95|Servant of the Stinger|U|OTJ
+#96|Unfortunate Accident|U|OTJ
+#97|Longhorn Sharpshooter|U|OTJ
+#98|Betrayal at the Vault|U|OTJ
+#99|Cactarantula|C|OTJ
+#100|Intrepid Stablemaster|U|OTJ
+#101|Patient Naturalist|C|OTJ
+#102|Badlands Revival|U|OTJ
+#103|Bucolic Ranch|U|OTJ
+#104|Sterling Supplier|C|OTJ
+#105|Festering Gulch|C|OTJ
+#106|Desertion|M|SPG
+#107|Leyline Binding|M|OTP
+#108|Repulse|U|OTP
+#109|Abrupt Decay|R|OTP
+#110|Lotus Ring|M|BIG
+#111|Geralf, the Fleshwright|M|OTJ
+#112|Plan the Heist|U|OTJ
+#113|Blood Hustler|U|OTJ
+#114|Freestrider Lookout|R|OTJ
+#115|Ertha Jo, Frontier Mentor|U|OTJ
+#116|Jolene, Plundering Pugilist|U|OTJ
+#117|Malcolm, the Eyes|R|OTJ
+#118|Ambush Gigapede|C|OTJ
+#119|Mourner's Surprise|C|OTJ
+#120|Creosote Heath|C|OTJ
+#121|Desert|M|SPG
+#122|Path to Exile|R|OTP
+#123|Murder|U|OTP
+#124|Sterling Keykeeper|C|OTJ
+#125|Lively Dirge|U|OTJ
+#126|Hardbristle Bandit|C|OTJ
+#127|Tumbleweed Rising|C|OTJ
+#128|Mobile Homestead|U|OTJ
+#129|Stagecoach Security|C|OTJ
+#130|Phantom Interference|C|OTJ
+#131|Giant Beaver|C|OTJ
+#132|Conduit Pylons|C|OTJ
+#133|Forlorn Flats|C|OTJ
+#134|Lush Oasis|C|OTJ
+#135|Soured Springs|C|OTJ
+#136|Void Rend|R|OTP
+#137|Archangel of Tithes|M|OTJ
+#138|Bounding Felidar|U|OTJ
+#139|Metamorphic Blast|U|OTJ
+#140|Slickshot Lockpicker|U|OTJ
+#141|Fake Your Own Death|C|OTJ
+#142|Rooftop Assassin|C|OTJ
+#143|Calamity, Galloping Inferno|R|OTJ
+#144|Magda, the Hoardmaster|R|OTJ
+#145|Scalestorm Summoner|U|OTJ
+#146|Bristlepack Sentry|C|OTJ
+#147|Reach for the Sky|C|OTJ
+#148|Kambal, Profiteering Mayor|R|OTJ
+#149|Kellan, the Kid|M|OTJ
+#150|Make Your Own Luck|U|OTJ
+#151|Pillage the Bog|R|OTJ
+#152|Slick Sequence|U|OTJ
+#153|Jailbreak Scheme|C|OTJ
+#154|Take the Fall|C|OTJ
+#155|Drover Grizzly|C|OTJ
+#156|Bristling Backwoods|C|OTJ
+#157|Mystic Snake|M|SPG
+#158|Endless Detour|R|OTP
+#159|Siphon Insight|R|OTP
+#160|Fell the Mighty|R|OTP
+#161|Archmage's Charm|R|OTP
+#162|Essence Capture|U|OTP
+#163|Collective Defiance|R|OTP
 #164|Lost Jitte|M|BIG
-#165|Bridled Bighorn|C|OTJ
-#166|Vengeful Townsfolk|C|OTJ
+#165|Nurturing Pixie|U|OTJ
+#166|One Last Job|R|OTJ
 #167|Wanted Griffin|C|OTJ
-#168|Double Down|M|OTJ
-#169|Plan the Heist|U|OTJ
-#170|Slickshot Lockpicker|U|OTJ
-#171|Binding Negotiation|U|OTJ
-#172|Magda, the Hoardmaster|R|OTJ
-#173|Scorching Shot|U|OTJ
-#174|Rise of the Varmints|U|OTJ
-#175|Slick Sequence|U|OTJ
-#176|Redrock Sentinel|U|OTJ
-#177|Jailbreak Scheme|C|OTJ
-#178|Take the Fall|C|OTJ
-#179|Nezumi Linkbreaker|C|OTJ
-#180|Mirage Mesa|C|OTJ
-#181|Abraded Bluffs|C|OTJ
-#182|Jagged Barrens|C|OTJ
-#183|Endless Detour|R|OTP
-#184|Villainous Wealth|R|OTP
-#185|Fierce Retribution|U|OTJ
-#186|Archmage's Charm|R|OTJ
-#187|Reanimate|R|OTJ
-#188|Collective Defiance|R|OTP
-#189|Detention Sphere|R|OTJ
-#190|Claim Jumper|R|OTJ
-#191|Nurturing Pixie|U|OTJ
-#192|Forsaken Miner|U|OTJ
-#193|Unscrupulous Contractor|U|OTJ
-#194|Explosive Derailment|C|OTJ
-#195|Great Train Heist|R|OTJ
-#196|Full Steam Ahead|U|OTJ
-#197|Baron Bertram Graywater|U|OTJ
-#198|Form a Posse|U|OTJ
-#199|Intimidation Campaign|U|OTJ
-#200|Blooming Marsh|R|OTJ
-#201|Ankle Biter|C|OTJ
-#202|Akul the Unrepentant|R|OTJ
-#203|Lonely Arroyo|C|OTJ
-#204|Heartless Pillage|U|OTP
-#205|Siphon Insight|R|OTP
-#206|Contagion Engine|M|OTP
-#207|Omenport Vigilante|U|OTJ
-#208|Requisition Raid|U|OTJ
-#209|Steer Clear|C|OTJ
-#210|Thunder Lasso|U|OTJ
-#211|Outlaw Stitcher|U|OTJ
-#212|This Town Ain't Big Enough|U|OTJ
-#213|Rattleback Apothecary|U|OTJ
-#214|Raven of Fell Omens|C|OTJ
-#215|Treasure Dredger|U|OTJ
-#216|Cunning Coyote|U|OTJ
-#217|Discerning Peddler|C|OTJ
-#218|Hellspur Brute|U|OTJ
-#219|Raucous Entertainer|U|OTJ
-#220|Annie Joins Up|R|OTJ
-#221|Eriette, the Beguiler|R|OTJ
-#222|Ghired, Mirror of the Wilds|M|OTJ
-#223|Kraum, Violent Cacophony|U|OTJ
-#224|Marchesa, Dealer of Death|R|OTJ
-#225|Satoru, the Infiltrator|R|OTJ
-#226|Vial Smasher, Gleeful Grenadier|U|OTJ
-#227|Oasis Gardener|C|OTJ
-#228|Skulduggery|C|OTJ
-#229|Prickly Pair|C|OTJ
-#230|Freestrider Commando|C|OTJ
-#231|Eroded Canyon|C|OTJ
-#232|Decisive Denial|U|OTP
-#233|Savage Smash|U|OTP
-#234|Loot, the Key to Everything|M|BIG
-#235|Legion Extruder|M|OTJ
-#236|Eriette's Lullaby|C|OTJ
-#237|Canyon Crab|U|OTJ
-#238|Loan Shark|C|OTJ
-#239|Peerless Ropemaster|C|OTJ
-#240|Insatiable Avarice|R|OTJ
-#241|Neutralize the Guards|U|OTJ
-#242|Gold Rush|U|OTJ
-#243|Doc Aurlock, Grizzled Genius|U|OTJ
-#244|Lazav, Familiar Stranger|U|OTJ
-#245|Rakdos Joins Up|R|OTJ
-#246|Bandit's Haul|U|OTJ
-#247|Botanical Sanctum|R|OTJ
-#248|Sterling Hound|C|OTJ
-#249|Notion Thief|M|OTJ
-#250|Electrodominance|R|OTP
-#251|Skewer the Critics|U|OTJ
-#252|Anguished Unmaking|M|OTP
-#253|Bedevil|R|OTJ
-#254|Terminal Agony|U|OTJ
-#255|Sword of Wealth and Power|M|OTJ
-#256|Tarnation Vista|M|OTJ
-#257|Sheriff of Safe Passage|U|OTJ
-#258|Archmage's Newt|R|OTJ
-#259|Nimble Brigand|U|OTJ
-#260|Visage Bandit|U|OTJ
-#261|Demonic Ruckus|U|OTJ
-#262|Gila Courser|U|OTJ
-#263|Resilient Roadrunner|U|OTJ
-#264|Gold Pan|C|OTJ
-#265|Inspiring Vantage|R|OTJ
-#266|Stop Cold|C|OTJ
-#267|Corrupted Conviction|C|OTJ
-#268|Thunder Salvo|C|OTJ
-#269|Thoughtseize|M|OTJ
-#270|Ride Down|U|OTJ
-#271|Ionize|R|OTJ
-#272|Rustler Rampage|U|OTJ
-#273|Emergent Haunting|U|OTJ
-#274|Failed Fording|C|OTJ
-#275|Irascible Wolverine|C|OTJ
-#276|Outlaws' Fury|C|OTJ
-#277|Reckless Lackey|C|OTJ
-#278|Seize the Secrets|C|OTJ
-#279|Trick Shot|C|OTJ
-#280|Stoneforge Mystic|M|OTJ
-#281|Hypothesizzle|U|OTP
-#282|Unlicensed Hearse|R|OTP
-#283|Deepmuck Desperado|U|OTJ
-#284|Quilled Charger|C|OTJ
+#168|Binding Negotiation|U|OTJ
+#169|Rictus Robber|U|OTJ
+#170|Tinybones, the Pickpocket|M|OTJ
+#171|Rambling Possum|U|OTJ
+#172|Voracious Varmint|C|OTJ
+#173|Vraska, the Silencer|M|OTJ
+#174|Redrock Sentinel|U|OTJ
+#175|Outlaw Medic|C|OTJ
+#176|Nezumi Linkbreaker|C|OTJ
+#177|Jagged Barrens|C|OTJ
+#178|Crime Punishment|M|OTP
+#179|Fierce Retribution|U|OTP
+#180|Detention Sphere|R|OTP
+#181|Claim Jumper|R|OTJ
+#182|Omenport Vigilante|U|OTJ
+#183|Vengeful Townsfolk|C|OTJ
+#184|Double Down|M|OTJ
+#185|Forsaken Miner|U|OTJ
+#186|Cunning Coyote|U|OTJ
+#187|Explosive Derailment|C|OTJ
+#188|Scorching Shot|U|OTJ
+#189|Rise of the Varmints|U|OTJ
+#190|Form a Posse|U|OTJ
+#191|Intimidation Campaign|U|OTJ
+#192|Vial Smasher, Gleeful Grenadier|U|OTJ
+#193|Sandstorm Verge|U|OTJ
+#194|Concealed Courtyard|R|OTJ
+#195|Mirage Mesa|C|OTJ
+#196|Abraded Bluffs|C|OTJ
+#197|Eroded Canyon|C|OTJ
+#198|Lonely Arroyo|C|OTJ
+#199|Villainous Wealth|R|OTP
+#200|Ionize|R|OTP
+#201|Bridled Bighorn|C|OTJ
+#202|Requisition Raid|U|OTJ
+#203|Canyon Crab|U|OTJ
+#204|Loan Shark|C|OTJ
+#205|Nimble Brigand|U|OTJ
+#206|Peerless Ropemaster|C|OTJ
+#207|This Town Ain't Big Enough|U|OTJ
+#208|Rattleback Apothecary|U|OTJ
+#209|Raven of Fell Omens|C|OTJ
+#210|Unscrupulous Contractor|U|OTJ
+#211|Great Train Heist|R|OTJ
+#212|Hellspur Brute|U|OTJ
+#213|Full Steam Ahead|U|OTJ
+#214|Annie Joins Up|R|OTJ
+#215|Baron Bertram Graywater|U|OTJ
+#216|Ghired, Mirror of the Wilds|M|OTJ
+#217|Kraum, Violent Cacophony|U|OTJ
+#218|Lazav, Familiar Stranger|U|OTJ
+#219|Rakdos Joins Up|R|OTJ
+#220|Satoru, the Infiltrator|R|OTJ
+#221|Oasis Gardener|C|OTJ
+#222|Blooming Marsh|R|OTJ
+#223|Botanical Sanctum|R|OTJ
+#224|Prickly Pair|C|OTJ
+#225|Ankle Biter|C|OTJ
+#226|Akul the Unrepentant|R|OTJ
+#227|Heartless Pillage|U|OTP
+#228|Anguished Unmaking|M|OTP
+#229|Decisive Denial|U|OTP
+#230|Reanimate|R|OTP
+#231|Contagion Engine|M|OTP
+#232|Loot, the Key to Everything|M|BIG
+#233|Legion Extruder|M|BIG
+#234|Steer Clear|C|OTJ
+#235|Thunder Lasso|U|OTJ
+#236|Outlaw Stitcher|U|OTJ
+#237|Treasure Dredger|U|OTJ
+#238|Discerning Peddler|C|OTJ
+#239|Gila Courser|U|OTJ
+#240|Resilient Roadrunner|U|OTJ
+#241|Marchesa, Dealer of Death|R|OTJ
+#242|Bandit's Haul|U|OTJ
+#243|Skulduggery|C|OTJ
+#244|Freestrider Commando|C|OTJ
+#245|Sterling Hound|C|OTJ
+#246|Thoughtseize|M|OTP
+#247|Skewer the Critics|U|OTP
+#248|Bedevil|R|OTP
+#249|Hypothesizzle|U|OTP
+#250|Terminal Agony|U|OTP
+#251|Tarnation Vista|M|BIG
+#252|Eriette's Lullaby|C|OTJ
+#253|Failed Fording|C|OTJ
+#254|Visage Bandit|U|OTJ
+#255|Insatiable Avarice|R|OTJ
+#256|Demonic Ruckus|U|OTJ
+#257|Gold Rush|U|OTJ
+#258|Raucous Entertainer|U|OTJ
+#259|Doc Aurlock, Grizzled Genius|U|OTJ
+#260|Eriette, the Beguiler|R|OTJ
+#261|Lilah, Undefeated Slickshot|R|OTJ
+#262|Taii Wakeen, Perfect Shot|R|OTJ
+#263|Inspiring Vantage|R|OTJ
+#264|Seize the Secrets|C|OTJ
+#265|Stop Cold|C|OTJ
+#266|Thunder Salvo|C|OTJ
+#267|Electrodominance|R|OTP
+#268|Ride Down|U|OTP
+#269|Savage Smash|U|OTP
+#270|Sheriff of Safe Passage|U|OTJ
+#271|Neutralize the Guards|U|OTJ
+#272|Reckless Lackey|C|OTJ
+#273|Gold Pan|C|OTJ
+#274|Harrier Strix|C|OTJ
+#275|Corrupted Conviction|C|OTJ
+#276|Trick Shot|C|OTJ
+#277|Prismatic Vista|M|SPG
+#278|Unlicensed Hearse|R|OTP
+#279|Sword of Wealth and Power|M|BIG
+#280|Archmage's Newt|R|OTJ
+#281|Deepmuck Desperado|U|OTJ
+#282|Emergent Haunting|U|OTJ
+#283|Irascible Wolverine|C|OTJ
+#284|Outlaws' Fury|C|OTJ
 #285|Slickshot Show-Off|R|OTJ
-#286|Take for a Ride|U|OTJ
-#287|Arid Archway|U|OTJ
-#288|Harrier Strix|C|OTJ
-#289|Highway Robbery|C|OTJ
-#290|Prismatic Vista|M|SPG
-#291|Desert|M|OTJ
-#292|Ancient Cornucopia|M|OTJ
-#293|Armored Armadillo|C|OTJ
-#294|Blacksnag Buzzard|C|OTJ
-#295|Boneyard Desecrator|C|OTJ
-#296|Kaervek, the Punisher|R|OTJ
-#297|Rakish Crew|U|OTJ
-#298|Hell to Pay|R|OTJ
-#299|Mine Raider|C|OTJ
-#300|Jem Lightfoote, Sky Explorer|U|OTJ
-#301|Lilah, Undefeated Slickshot|R|OTJ
-#302|Taii Wakeen, Perfect Shot|R|OTJ
-#303|Wrangler of the Damned|U|OTJ
-#304|Geyser Drake|C|OTJ
-#305|Deadeye Duelist|C|OTJ
-#306|Iron-Fist Pulverizer|C|OTJ
-#307|Thornado|U|OTP
-#308|Inventive Wingsmith|C|OTJ
-#309|At Knifepoint|U|OTJ
-#310|Jace Reawakened|M|OTJ
-#311|Voidslime|R|OTJ
-#312|Transmutation Font|M|OTJ
-#313|Map the Frontier|U|OTJ
-#314|Boom Box|U|OTJ
-#315|Daring Thunder-Thief|C|OTJ
-#316|Silver Deputy|C|OTJ
-#317|Fling|U|OTP
-#318|Mindslaver|M|OTP
-#319|Greed's Gambit|M|OTJ
-#320|Bovine Intervention|U|OTJ
-#321|High Noon|R|OTJ
-#322|Djinn of Fool's Fall|C|OTJ
-#323|Fblthp, Lost on the Range|R|OTJ
-#324|Fleeting Reflection|U|OTJ
-#325|The Key to the Vault|R|OTJ
-#326|Razzle-Dazzler|C|OTJ
-#327|Shackle Slinger|U|OTJ
-#328|Shifting Grift|U|OTJ
-#329|Slickshot Vault-Buster|C|OTJ
-#330|Spring Splasher|C|OTJ
+#286|Spirebluff Canal|R|OTJ
+#287|Highway Robbery|C|OTJ
+#288|Iron-Fist Pulverizer|C|OTJ
+#289|Rustler Rampage|U|OTJ
+#290|Boneyard Desecrator|C|OTJ
+#291|Kaervek, the Punisher|R|OTJ
+#292|Rakish Crew|U|OTJ
+#293|Hell to Pay|R|OTJ
+#294|Mine Raider|C|OTJ
+#295|Quilled Charger|C|OTJ
+#296|Jem Lightfoote, Sky Explorer|U|OTJ
+#297|Boom Box|U|OTJ
+#298|Lavaspur Boots|U|OTJ
+#299|Arid Archway|U|OTJ
+#300|Geyser Drake|C|OTJ
+#301|Armored Armadillo|C|OTJ
+#302|Inventive Wingsmith|C|OTJ
+#303|Blacksnag Buzzard|C|OTJ
+#304|Take for a Ride|U|OTJ
+#305|Wrangler of the Damned|U|OTJ
+#306|Jace Reawakened|M|OTJ
+#307|Deadeye Duelist|C|OTJ
+#308|Fling|U|OTP
+#309|Mindslaver|M|OTP
+#310|Grand Abolisher|M|BIG
+#311|Razzle-Dazzler|C|OTJ
+#312|Map the Frontier|U|OTJ
+#313|At Knifepoint|U|OTJ
+#314|Daring Thunder-Thief|C|OTJ
+#315|Thornado|U|OTP
+#316|Transmutation Font|M|BIG
+#317|Ancient Cornucopia|M|BIG
+#318|Another Round|R|OTJ
+#319|Bovine Intervention|U|OTJ
+#320|High Noon|R|OTJ
+#321|Djinn of Fool's Fall|C|OTJ
+#322|Fblthp, Lost on the Range|R|OTJ
+#323|Fleeting Reflection|U|OTJ
+#324|The Key to the Vault|R|OTJ
+#325|Shackle Slinger|U|OTJ
+#326|Shifting Grift|U|OTJ
+#327|Slickshot Vault-Buster|C|OTJ
+#328|Spring Splasher|C|OTJ
+#329|Step Between Worlds|R|OTJ
+#330|Pitiless Carnage|R|OTJ
 #331|Tinybones Joins Up|R|OTJ
 #332|Brimstone Roundup|U|OTJ
 #333|Caught in the Crossfire|U|OTJ
@@ -337,43 +337,43 @@
 #336|Return the Favor|U|OTJ
 #337|Rodeo Pyromancers|C|OTJ
 #338|Breeches, the Blastmaker|R|OTJ
-#339|Riku of Many Paths|R|OTJ
-#340|Vraska Joins Up|R|OTJ
-#341|Lavaspur Boots|U|OTJ
+#339|Kellan Joins Up|R|OTJ
+#340|Riku of Many Paths|R|OTJ
+#341|Vraska Joins Up|R|OTJ
 #342|Luxurious Locomotive|U|OTJ
 #343|Tomb Trawler|U|OTJ
-#344|Spirebluff Canal|R|OTJ
-#345|Overzealous Muscle|C|OTJ
-#346|Quick Draw|C|OTJ
-#347|Pariah|R|OTJ
-#348|Imp's Mischief|R|OTJ
-#349|Skullcrack|R|OTJ
-#350|Hindering Light|U|OTJ
-#351|Grand Abolisher|M|OTJ
-#352|Omenpath Journey|M|BIG
-#353|Another Round|R|OTJ
-#354|Step Between Worlds|R|OTJ
-#355|Pitiless Carnage|R|OTJ
-#356|Kellan Joins Up|R|OTJ
-#357|Obeka, Splitter of Seconds|R|OTJ
-#358|Scapeshift|M|OTJ
-#359|Mindbreak Trap|M|OTP
-#360|Surgical Extraction|R|OTJ
-#361|Decimate|R|OTJ
-#362|Grindstone|M|OTP
-#363|Dust Bowl|R|OTJ
-#364|Commandeer|R|OTJ
-#365|Indomitable Creativity|M|OTJ
+#344|Overzealous Muscle|C|OTJ
+#345|Quick Draw|C|OTJ
+#346|Silver Deputy|C|OTJ
+#347|Notion Thief|M|SPG
+#348|Voidslime|R|OTP
+#349|Grindstone|M|OTP
+#350|Pariah|R|OTP
+#351|Imp's Mischief|R|OTP
+#352|Skullcrack|R|OTP
+#353|Hindering Light|U|OTP
+#354|Greed's Gambit|M|BIG
+#355|Omenpath Journey|M|BIG
+#356|Obeka, Splitter of Seconds|R|OTJ
+#357|Stoneforge Mystic|M|SPG
+#358|Scapeshift|M|SPG
+#359|Port Razer|M|SPG
+#360|Mindbreak Trap|M|OTP
+#361|Surgical Extraction|R|OTP
+#362|Decimate|R|OTP
+#363|Dust Bowl|R|OTP
+#364|Commandeer|R|OTP
+#365|Indomitable Creativity|M|OTP
 #366|Force of Vigor|M|OTP
 #367|Torpor Orb|M|BIG
-#368|Simulacrum Synthesizer|M|OTJ
-#369|Rest in Peace|M|OTJ
-#370|Esoteric Duplicator|M|OTJ
+#368|Simulacrum Synthesizer|M|BIG
+#369|Rest in Peace|M|BIG
+#370|Esoteric Duplicator|M|BIG
 #371|Worldwalker Helm|M|BIG
-#372|Memory Vessel|M|OTJ
+#372|Memory Vessel|M|BIG
 #373|Molten Duplication|M|BIG
-#374|Pest Control|M|OTJ
-#375|Fomori Vault|M|OTJ
+#374|Pest Control|M|BIG
+#375|Fomori Vault|M|BIG
 #376|Territory Forge|M|BIG
 #377|Plains|C|OTJ
 #378|Island|C|OTJ

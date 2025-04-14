@@ -2,5 +2,5 @@ Name:Welding Sparks
 ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature, where X is 3 plus the number of artifacts you control.
-SVar:X:Count$TypeYouCtrl.Artifact/Plus.3
+SVar:X:Count$Valid Artifact.YouCtrl/Plus.3
 Oracle:Welding Sparks deals X damage to target creature, where X is 3 plus the number of artifacts you control.

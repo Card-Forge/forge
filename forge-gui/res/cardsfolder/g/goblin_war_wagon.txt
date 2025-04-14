@@ -2,7 +2,7 @@ Name:Goblin War Wagon
 ManaCost:4
 Types:Artifact Creature Juggernaut
 PT:3/3
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay {2}. If you do, untap CARDNAME.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay {2}. If you do, untap this creature.
 SVar:TrigUntap:AB$ Untap | Cost$ 2 | Defined$ Self
-Oracle:Goblin War Wagon doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {2}. If you do, untap Goblin War Wagon.
+Oracle:This creature doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {2}. If you do, untap this creature.

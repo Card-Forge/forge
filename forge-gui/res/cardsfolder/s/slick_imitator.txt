@@ -1,0 +1,9 @@
+Name:Slick Imitator
+ManaCost:1 U
+Types:Creature Ooze
+PT:1/3
+K:Start your engines
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABCopySpell | Description$ Max speed — {1}, Sacrifice this creature: Copy target spell you control. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)
+SVar:ABCopySpell:AB$ CopySpellAbility | PrecostDesc$ Max speed — | Cost$ 1 Sac<1/CARDNAME/this creature> | TgtPrompt$ Select target spell you control | ValidTgts$ Card.YouCtrl | TargetType$ Spell | Secondary$ True | MayChooseTarget$ True | SpellDescription$ Copy target spell you control. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)
+DeckHas:Ability$Sacrifice|Token
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — {1}, Sacrifice this creature: Copy target spell you control. You may choose new targets for the copy. (A copy of a permanent spell becomes a token.)

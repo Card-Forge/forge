@@ -4,7 +4,7 @@ Types:Creature Spirit Knight
 PT:6/6
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ BehemothPump | TriggerDescription$ When CARDNAME enters, creatures you control gain flying and get +X/+X until end of turn, where X is the number of creatures you control.
-SVar:BehemothPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying | NumAtt$ X | NumDef$ X
+SVar:BehemothPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:PlayMain1:TRUE
 Oracle:Flying\nWhen Moonshaker Cavalry enters, creatures you control gain flying and get +X/+X until end of turn, where X is the number of creatures you control.

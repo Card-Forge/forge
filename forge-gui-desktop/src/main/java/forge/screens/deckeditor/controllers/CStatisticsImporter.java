@@ -1,7 +1,5 @@
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
@@ -9,6 +7,7 @@ import forge.deck.CardPool;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.SItemManagerUtil;
 import forge.screens.deckeditor.views.VStatisticsImporter;
 import forge.util.ItemPool;
@@ -19,6 +18,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class CStatisticsImporter {
 
@@ -57,16 +57,16 @@ public class CStatisticsImporter {
         // Hack-ish: avoid /0 cases, but still populate labels :)
         if (total == 0) { total = 1; }
 
-        setLabelValue(this.view.getLblCreature(), deck, CardRulesPredicates.Presets.IS_CREATURE, total);
-        setLabelValue(this.view.getLblLand(), deck, CardRulesPredicates.Presets.IS_LAND, total);
-        setLabelValue(this.view.getLblEnchantment(), deck, CardRulesPredicates.Presets.IS_ENCHANTMENT, total);
-        setLabelValue(this.view.getLblArtifact(), deck, CardRulesPredicates.Presets.IS_ARTIFACT, total);
-        setLabelValue(this.view.getLblInstant(), deck, CardRulesPredicates.Presets.IS_INSTANT, total);
-        setLabelValue(this.view.getLblSorcery(), deck, CardRulesPredicates.Presets.IS_SORCERY, total);
-        setLabelValue(this.view.getLblPlaneswalker(), deck, CardRulesPredicates.Presets.IS_PLANESWALKER, total);
+        setLabelValue(this.view.getLblCreature(), deck, CardRulesPredicates.IS_CREATURE, total);
+        setLabelValue(this.view.getLblLand(), deck, CardRulesPredicates.IS_LAND, total);
+        setLabelValue(this.view.getLblEnchantment(), deck, CardRulesPredicates.IS_ENCHANTMENT, total);
+        setLabelValue(this.view.getLblArtifact(), deck, CardRulesPredicates.IS_ARTIFACT, total);
+        setLabelValue(this.view.getLblInstant(), deck, CardRulesPredicates.IS_INSTANT, total);
+        setLabelValue(this.view.getLblSorcery(), deck, CardRulesPredicates.IS_SORCERY, total);
+        setLabelValue(this.view.getLblPlaneswalker(), deck, CardRulesPredicates.IS_PLANESWALKER, total);
 
-        setLabelValue(this.view.getLblMulti(), deck, CardRulesPredicates.Presets.IS_MULTICOLOR, total);
-        setLabelValue(this.view.getLblColorless(), deck, CardRulesPredicates.Presets.IS_COLORLESS, total);
+        setLabelValue(this.view.getLblMulti(), deck, CardRulesPredicates.IS_MULTICOLOR, total);
+        setLabelValue(this.view.getLblColorless(), deck, CardRulesPredicates.IS_COLORLESS, total);
         setLabelValue(this.view.getLblBlack(), deck, CardRulesPredicates.isMonoColor(MagicColor.BLACK), total);
         setLabelValue(this.view.getLblBlue(), deck, CardRulesPredicates.isMonoColor(MagicColor.BLUE), total);
         setLabelValue(this.view.getLblGreen(), deck, CardRulesPredicates.isMonoColor(MagicColor.GREEN), total);
@@ -100,7 +100,7 @@ public class CStatisticsImporter {
     }
 
     private void setLabelValue(final JLabel label, final ItemPool<PaperCard> deck, final Predicate<CardRules> predicate, final int total) {
-        final int tmp = deck.countAll(Predicates.compose(predicate, PaperCard::getRules));
+        final int tmp = deck.countAll(PaperCardPredicates.fromRules(predicate));
         label.setText(tmp + " (" + calculatePercentage(tmp, total) + "%)");
     }
 

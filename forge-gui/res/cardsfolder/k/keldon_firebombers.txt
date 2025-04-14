@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Human Soldier
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseThree | TriggerDescription$ When CARDNAME enters, each player sacrifices all lands they control except for three.
-SVar:TrigChooseThree:DB$ ChooseCard | Defined$ Player | Choices$ Land | ControlledByPlayer$ Chooser | Amount$ 3 | ChoiceTitle$ Choose three lands to keep | Mandatory$ True | Reveal$ True | SubAbility$ SacAllOthers
+SVar:TrigChooseThree:DB$ ChooseCard | Defined$ Player | Choices$ Land | ControlledByPlayer$ Chooser | Amount$ 3 | ChoiceTitle$ Choose three lands to keep | Mandatory$ True | Reveal$ True | SubAbility$ DBAllOthers
 SVar:DBAllOthers:DB$ SacrificeAll | ValidCards$ Land.nonChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 DeckHas:Ability$Sacrifice

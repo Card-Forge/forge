@@ -1,9 +1,0 @@
-Name:Ozox, the Clattering King
-ManaCost:2 B
-Types:Legendary Creature Skeleton Noble
-PT:3/2
-K:CARDNAME can't block.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When NICKNAME dies, create Jumblebones, a legendary 2/1 black Skeleton creature token with "This creature can't block" and "When this creature leaves the battlefield, return target card named Ozox, the Clattering King from your graveyard to your hand."
-SVar:TrigToken:DB$ Token | TokenScript$ jumblebones | TokenAmount$ 1
-DeckHas:Ability$Token
-Oracle:Ozox, the Clattering King can't block.\nWhen Ozox dies, create Jumblebones, a legendary 2/1 black Skeleton creature token with "This creature can't block" and "When this creature leaves the battlefield, return target card named Ozox, the Clattering King from your graveyard to your hand."

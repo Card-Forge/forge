@@ -44,9 +44,13 @@ public class WorldStage extends GameStage implements SaveFileContent {
     protected ArrayList<Pair<Float, EnemySprite>> enemies = new ArrayList<>();
     private final static Float dieTimer = 20f;//todo config
     private Float globalTimer = 0f;
-    private transient boolean directlyEnterPOI = false;
+    private transient boolean enterSpawnPOI = false;
 
     NavArrowActor navArrow;
+    final Rectangle tempBoundingRect = new Rectangle();
+    final Vector2 enemyMoveVector = new Vector2();
+    boolean collided = false;
+
     public WorldStage() {
         super();
         background = new WorldBackground(this);
@@ -61,10 +65,6 @@ public class WorldStage extends GameStage implements SaveFileContent {
         return instance == null ? instance = new WorldStage() : instance;
     }
 
-    final Rectangle tempBoundingRect = new Rectangle();
-    final Vector2 enemyMoveVector = new Vector2();
-
-    boolean collided = false;
     @Override
     protected void onActing(float delta) {
         if (isPaused() || MapStage.getInstance().isDialogOnlyInput() || Forge.advFreezePlayerControls)
@@ -72,7 +72,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         drawNavigationArrow();
         if (player.isMoving()) {
             handleMonsterSpawn(delta);
-            handlePointsOfInterestCollision();
+            collided = collided || handlePointsOfInterestCollision();
             globalTimer += delta;
             Iterator<Pair<Float, EnemySprite>> it = enemies.iterator();
             while (it.hasNext()) {
@@ -146,6 +146,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 pair.getValue().setAnimation(CharacterSprite.AnimationTypes.Idle);
             }
         }
+        collided = false;
     }
 
     private void removeEnemy(EnemySprite currentMob) {
@@ -200,7 +201,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
     }
 
-    public void handlePointsOfInterestCollision() {
+    public boolean handlePointsOfInterestCollision() {
         for (Actor actor : foregroundSprites.getChildren()) {
             if (actor.getClass() == PointOfInterestMapSprite.class) {
                 PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
@@ -215,6 +216,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     WorldSave.getCurrentSave().autoSave();
                     loadPOI(point.getPointOfInterest());
                     point.getMapSprite().checkOut();
+                    return true;
                 } else {
                     if (point == collidingPoint) {
                         collidingPoint = null;
@@ -222,6 +224,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 }
             }
         }
+        return false;
     }
 
     public void loadPOI(PointOfInterest poi) {
@@ -372,8 +375,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
     }
 
-    public void setDirectlyEnterPOI(){
-        directlyEnterPOI = true; //On a new game, we want to automatically enter any POI the player overlaps with.
+    public void enterSpawnPOI(){
+        enterSpawnPOI = true; //On a new game, we want to automatically enter spawn POI the player overlaps with.
     }
 
     public PointOfInterestMapSprite getMapSprite(PointOfInterest poi) {
@@ -393,8 +396,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
     public void enter() {
         getPlayerSprite().LoadPos();
         getPlayerSprite().setMovementDirection(Vector2.Zero);
-        if (directlyEnterPOI) {
-            directlyEnterPOI = false;
+        if (enterSpawnPOI) {
+            enterSpawnPOI = false;
+            PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
+            if (poi != null) { //shouldn't be null
+                WorldStage.getInstance().loadPOI(poi);
+            }
         }
         else {
             for (Actor actor : foregroundSprites.getChildren()) {

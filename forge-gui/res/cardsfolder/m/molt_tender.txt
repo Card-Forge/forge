@@ -1,0 +1,8 @@
+Name:Molt Tender
+ManaCost:G
+Types:Creature Insect Druid
+PT:1/1
+A:AB$ Mill | Cost$ T | SpellDescription$ Mill a card.
+A:AB$ Mana | Cost$ T ExileFromGrave<1/Card> | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$Mill
+Oracle:{T}: Mill a card. (Put the top card of your library into your graveyard.)\n{T}, Exile a card from your graveyard: Add one mana of any color.

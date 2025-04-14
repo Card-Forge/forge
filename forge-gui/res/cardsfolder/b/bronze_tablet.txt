@@ -4,7 +4,7 @@ Types:Artifact
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-A:AB$ Pump | Cost$ 4 T | ValidTgts$ Permanent.nonToken+OppOwn | TgtPrompt$ Select target nontoken permanent an opponent owns | RememberObjects$ TargetedController | SubAbility$ Choice1 | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME and target nontoken permanent an opponent owns. That player may pay 10 life. If they do, put CARDNAME into its owner's graveyard. Otherwise, that player owns CARDNAME and you own the other exiled card.
+A:AB$ Pump | Cost$ 4 T | ValidTgts$ Permanent.!token+OppOwn | TgtPrompt$ Select target nontoken permanent an opponent owns | RememberObjects$ TargetedController | SubAbility$ Choice1 | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME and target nontoken permanent an opponent owns. That player may pay 10 life. If they do, put CARDNAME into its owner's graveyard. Otherwise, that player owns CARDNAME and you own the other exiled card.
 SVar:Choice1:DB$ GenericChoice | Choices$ ExchangeOwnership,Concede | Defined$ TargetedOwner | ConditionCheckSVar$ X | ConditionSVarCompare$ LT10 | SubAbility$ Choice2 | StackDescription$ None
 SVar:Choice2:DB$ GenericChoice | Choices$ PayLife,ExchangeOwnership,Concede | Defined$ TargetedOwner | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | StackDescription$ None
 SVar:X:PlayerCountRemembered$LifeTotal

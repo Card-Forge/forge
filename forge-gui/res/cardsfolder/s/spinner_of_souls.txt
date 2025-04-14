@@ -1,0 +1,8 @@
+Name:Spinner of Souls
+ManaCost:2 G
+Types:Creature Spider Spirit
+PT:4/3
+K:Reach
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.!token+YouCtrl+Other | Execute$ TrigDigUntil | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature you control dies, you may reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature that shares a creature type | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+Oracle:Reach\nWhenever another nontoken creature you control dies, you may reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.

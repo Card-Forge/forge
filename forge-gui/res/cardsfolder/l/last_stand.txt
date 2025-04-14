@@ -7,10 +7,10 @@ SVar:DBTokenForest:DB$ Token | TokenAmount$ ForestsYouControl | TokenScript$ g_1
 SVar:DBGainLifePlains:DB$ GainLife | Defined$ You | LifeAmount$ PlainsYouControl | SubAbility$ DBDrawCardIsland
 SVar:DBDrawCardIsland:DB$ Draw | Defined$ You | NumCards$ IslandsYouControl | SubAbility$ DBDiscardJustAsMany
 SVar:DBDiscardJustAsMany:DB$ Discard | Defined$ You | NumCards$ IslandsYouControl | Mode$ TgtChoose
-SVar:SwampsYouControl:Count$TypeYouCtrl.Swamp/Times.2
-SVar:MountainsYouControl:Count$TypeYouCtrl.Mountain
-SVar:ForestsYouControl:Count$TypeYouCtrl.Forest
-SVar:PlainsYouControl:Count$TypeYouCtrl.Plains/Times.2
-SVar:IslandsYouControl:Count$TypeYouCtrl.Island
+SVar:SwampsYouControl:Count$Valid Swamp.YouCtrl/Times.2
+SVar:MountainsYouControl:Count$Valid Mountain.YouCtrl
+SVar:ForestsYouControl:Count$Valid Forest.YouCtrl
+SVar:PlainsYouControl:Count$Valid Plains.YouCtrl/Times.2
+SVar:IslandsYouControl:Count$Valid Island.YouCtrl
 AI:RemoveDeck:Random
 Oracle:Target opponent loses 2 life for each Swamp you control. Last Stand deals damage to target creature equal to the number of Mountains you control. Create a 1/1 green Saproling creature token for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.

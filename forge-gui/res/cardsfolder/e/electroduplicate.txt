@@ -1,0 +1,6 @@
+Name:Electroduplicate
+ManaCost:2 R
+Types:Sorcery
+K:Flashback:2 R R
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AddKeywords$ Haste | AtEOTTrig$ Sacrifice | SpellDescription$ Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."
+Oracle:Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."\nFlashback {2}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

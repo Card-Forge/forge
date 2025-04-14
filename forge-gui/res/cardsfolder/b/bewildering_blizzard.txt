@@ -1,0 +1,6 @@
+Name:Bewildering Blizzard
+ManaCost:4 U U
+Types:Instant
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBPumpAll | SpellDescription$ Draw three cards. Creatures your opponents control get -3/-0 until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | NumAtt$ -3 | ValidCards$ Creature.OppCtrl | IsCurse$ True
+Oracle:Draw three cards. Creatures your opponents control get -3/-0 until end of turn.

@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
@@ -27,8 +26,9 @@ import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -42,7 +42,7 @@ public class DamageDealAi extends DamageAiBase {
         final SpellAbility root = sa.getRootAbility();
         final String damage = sa.getParam("NumDmg");
         Card source = sa.getHostCard();
-        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
+        int dmg = calculateDamageAmount(sa, source, damage);
         final String logic = sa.getParam("AILogic");
 
         if ("MadSarkhanDigDmg".equals(logic)) {
@@ -93,7 +93,7 @@ public class DamageDealAi extends DamageAiBase {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
+        int dmg = calculateDamageAmount(sa, source, damage);
 
         if (damage.equals("X") || source.getSVar("X").equals("Count$xPaid")) {
             if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid")) {
@@ -163,8 +163,10 @@ public class DamageDealAi extends DamageAiBase {
             }
         } else if ("WildHunt".equals(logic)) {
             // This dummy ability will just deal 0 damage, but holds the logic for the AI for Master of Wild Hunt
-            List<Card> wolves = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.Wolf+untapped+YouCtrl+Other", ai, source, sa);
-            dmg = Aggregates.sum(wolves, Card::getNetPower);
+            dmg = ai.getCardsIn(ZoneType.Battlefield).stream()
+                    .filter(CardPredicates.restriction("Creature.Wolf+untapped+YouCtrl+Other", ai, source, sa))
+                    .mapToInt(Card::getNetPower)
+                    .sum();
         } else if ("Triskelion".equals(logic)) {
             final int n = source.getCounters(CounterEnumType.P1P1);
             if (n > 0) {
@@ -400,7 +402,7 @@ public class DamageDealAi extends DamageAiBase {
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.Presets.PLANESWALKERS);
+        List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.PLANESWALKERS);
 
         CardCollection killables = CardLists.filter(hPlay, c -> c.getSVar("Targeting").equals("Dies")
                 || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
@@ -885,7 +887,10 @@ public class DamageDealAi extends DamageAiBase {
 
             // See if there's an indestructible target that can be used
             CardCollection indestructible = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.Presets.PLANESWALKERS, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE), CardPredicates.isTargetableBy(sa)));
+                    (CardPredicates.CREATURES.or(CardPredicates.PLANESWALKERS))
+                            .and(CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE))
+                            .and(CardPredicates.isTargetableBy(sa))
+            );
 
             if (!indestructible.isEmpty()) {
                 Card c = ComputerUtilCard.getWorstPermanentAI(indestructible, false, false, false, false);
@@ -898,7 +903,7 @@ public class DamageDealAi extends DamageAiBase {
             }
             else if (tgt.canTgtPlaneswalker()) {
                 // Second pass for planeswalkers: choose AI's worst planeswalker
-                final Card c = ComputerUtilCard.getWorstPlaneswalkerToDamage(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.PLANESWALKERS), CardPredicates.isTargetableBy(sa)));
+                final Card c = ComputerUtilCard.getWorstPlaneswalkerToDamage(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.PLANESWALKERS, CardPredicates.isTargetableBy(sa)));
                 if (c != null) {
                     sa.getTargets().add(c);
                     if (divided) {
@@ -930,7 +935,7 @@ public class DamageDealAi extends DamageAiBase {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
+        int dmg = calculateDamageAmount(sa, source, damage);
 
         // Remove all damage
         if (sa.hasParam("Remove")) {
@@ -972,6 +977,17 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return true;
+    }
+
+    private static int calculateDamageAmount(SpellAbility sa, Card source, String damage) {
+        if(damage == null)
+            return 0;
+
+        //Used when the value isn't yet known when making decisions, e.g. dice rolls.
+        if(sa.hasParam("AIExpectAmount"))
+            return AbilityUtils.calculateAmount(source, sa.getParam("AIExpectAmount"), sa);
+
+        return AbilityUtils.calculateAmount(source, damage, sa);
     }
 
     private boolean doXLifeDrainLogic(Player ai, SpellAbility sa) {
@@ -1119,5 +1135,29 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid,
+            FCollectionView<Player> payers) {
+        if (!payer.canLoseLife() || payer.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+
+        final Card hostCard = sa.getHostCard();
+
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(hostCard, sa.getParam("DamageSource"), sa);
+        if (definedSources == null || definedSources.isEmpty()) {
+            return false;
+        }
+        int dmg = AbilityUtils.calculateAmount(hostCard, sa.getParam("NumDmg"), sa);
+        for (Card source : definedSources) {
+            int predictedDamage = ComputerUtilCombat.predictDamageTo(payer, dmg, source, false);
+            if (payer.getLife() < predictedDamage * 1.5) {
+                return true;
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }

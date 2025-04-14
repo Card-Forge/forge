@@ -1,0 +1,12 @@
+Name:Speedbrood Stalker
+ManaCost:3 B B
+Types:Creature Insect Assassin
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters choose target opponent. Secretly choose a creature or planeswalker that player controls. That player sacrifices a creature or planeswalker of their choice, then sacrifices the chosen permanent.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Opponent | SubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Creature.ControlledBy TargetedPlayer,Planeswalker.ControlledBy TargetedPlayer | Secretly$ True | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Secretly choose a creature or planeswalker targeted player controls | SubAbility$ DBSac1
+SVar:DBSac1:DB$ Sacrifice | Defined$ Targeted | SacValid$ Creature,Planeswalker | SacMessage$ creature or planeswalker | SubAbility$ DBSac2
+SVar:DBSac2:DB$ Sacrifice | Defined$ Targeted | SacValid$ Permanent.ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Flying\nWhen this creature enters choose target opponent. Secretly choose a creature or planeswalker that player controls. That player sacrifices a creature or planeswalker of their choice, then sacrifices the chosen permanent.

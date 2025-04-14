@@ -1,0 +1,11 @@
+Name:Dionus, Elvish Archdruid
+ManaCost:3 G
+Types:Legendary Creature Elf Druid
+PT:2/3
+S:Mode$ Continuous | Affected$ Elf.YouCtrl | AddTrigger$ TrigTapped | Description$ Elves you control have "Whenever this creature becomes tapped during your turn, untap it and put a +1/+1 counter on it. This ability triggers only once each turn."
+SVar:TrigTapped:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | ActivationLimit$ 1 | PlayerTurn$ True | Execute$ TrigUntap | TriggerDescription$ Whenever this creature becomes tapped during your turn, untap it and put a +1/+1 counter on it. This ability triggers only once each turn.
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Type$Elf
+Oracle:Elves you control have "Whenever this creature becomes tapped during your turn, untap it and put a +1/+1 counter on it. This ability triggers only once each turn."

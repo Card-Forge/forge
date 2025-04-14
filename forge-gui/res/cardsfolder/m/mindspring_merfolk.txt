@@ -1,0 +1,9 @@
+Name:Mindspring Merfolk
+ManaCost:U
+Types:Creature Merfolk Wizard
+PT:1/1
+A:AB$ Draw | Cost$ X U U T | NumCards$ X | Exhaust$ True | SubAbility$ DBPutCounterAll | SpellDescription$ Draw X cards. Put a +1/+1 counter on each Merfolk creature you control. (Activate each exhaust ability only once.)
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Merfolk+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:Exhaust — {X}{U}{U}, {T}: Draw X cards. Put a +1/+1 counter on each Merfolk creature you control. (Activate each exhaust ability only once.)

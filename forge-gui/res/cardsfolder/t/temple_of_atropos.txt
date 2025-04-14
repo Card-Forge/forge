@@ -1,9 +1,9 @@
 Name:Temple of Atropos
 ManaCost:no cost
 Types:Plane Time
-T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigAddPhase | TriggerDescription$ At the beginning of your postcombat main phase, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
+T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigAddPhase | TriggerDescription$ At the beginning of each of your postcombat main phases, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
 SVar:TrigAddPhase:DB$ AddPhase | ExtraPhase$ Beginning
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigReverseOrder | TriggerDescription$ When chaos ensues, reverse the game's turn order. Then planeswalk. (For example, if play had proceeded clockwise around the table, it now goes counterclockwise.)
 SVar:TrigReverseOrder:DB$ ReverseTurnOrder | SubAbility$ DBPlaneswalk
 SVar:DBPlaneswalk:DB$ Planeswalk
-Oracle:At the beginning of your postcombat main phase, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)\nWhen chaos ensues, reverse the game's turn order. Then planeswalk. (For example, if play had proceeded clockwise around the table, it now goes counterclockwise.)
+Oracle:At the beginning of each of your postcombat main phases, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)\nWhen chaos ensues, reverse the game's turn order. Then planeswalk. (For example, if play had proceeded clockwise around the table, it now goes counterclockwise.)

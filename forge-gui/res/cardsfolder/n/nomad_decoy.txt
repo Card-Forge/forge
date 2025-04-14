@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Creature Human Nomad
 PT:1/2
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
-A:AB$ Tap | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | CheckSVar$ X | SVarCompare$ GE7 | PrecostDesc$ Threshold — | SpellDescription$ Tap two target creatures. Activate only if seven or more cards are in your graveyard.
-SVar:X:Count$InYourYard
+A:AB$ Tap | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ Tap two target creatures. Activate only if seven or more cards are in your graveyard.
 SVar:NonCombatPriority:1
 Oracle:{W}, {T}: Tap target creature.\nThreshold — {W}{W}, {T}: Tap two target creatures. Activate only if seven or more cards are in your graveyard.

@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Legendary Enchantment Shrine
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your first main phase, add X mana of any one color, where X is the number of Shrines you control.
 SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ X
-SVar:X:Count$TypeYouCtrl.Shrine
+SVar:X:Count$Valid Shrine.YouCtrl
 DeckHints:Type$Shrine
 Oracle:At the beginning of your first main phase, add X mana of any one color, where X is the number of Shrines you control.

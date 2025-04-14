@@ -1,0 +1,13 @@
+Name:Temmet, Naktamun's Will
+ManaCost:2 W U B
+Types:Legendary Creature Zombie Wizard
+PT:4/4
+K:Vigilance
+K:Menace
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you draw a card, Zombies you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Zombie.YouCtrl | NumAtt$ +1 | NumDef$ +1
+SVar:PlayMain1:TRUE
+Oracle:Vigilance, menace\nWhenever you attack, draw a card, then discard a card.\nWhenever you draw a card, Zombies you control get +1/+1 until end of turn.

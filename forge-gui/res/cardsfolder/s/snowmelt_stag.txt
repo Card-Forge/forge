@@ -1,0 +1,9 @@
+Name:Snowmelt Stag
+ManaCost:3 U
+Types:Creature Elemental Elk
+PT:2/5
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 5 | SetToughness$ 2 | Condition$ PlayerTurn | Description$ During your turn, this creature has base power and toughness 5/2.
+A:AB$ Effect | Cost$ 5 U U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ This creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:Vigilance\nDuring your turn, this creature has base power and toughness 5/2.\n{5}{U}{U}: This creature can't be blocked this turn.

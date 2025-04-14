@@ -1,0 +1,7 @@
+Name:Dogsnail Engine
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, target player gains life equal to the greatest power among creatures you control.
+SVar:TrigCrank:DB$ GainLife | ValidTgts$ Player | LifeAmount$ X
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+Oracle:Whenever you crank Dogsnail Engine, target player gains life equal to the greatest power among creatures you control.

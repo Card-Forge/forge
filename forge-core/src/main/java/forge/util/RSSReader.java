@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RSSReader {
     public static String getCommitLog(String commitsAtom, Date buildDateOriginal, Date maxDate) {
@@ -19,7 +20,7 @@ public class RSSReader {
             RssReader reader = new RssReader();
             URL url = new URL(commitsAtom);
             InputStream inputStream = url.openStream();
-            List<Item> items = reader.read(inputStream).toList();
+            List<Item> items = reader.read(inputStream).collect(Collectors.toList());
             StringBuilder logs = new StringBuilder();
             int c = 0;
             for (Item i : items) {
@@ -55,7 +56,7 @@ public class RSSReader {
             RssReader reader = new RssReader();
             URL url = new URL(releaseAtom);
             InputStream inputStream = url.openStream();
-            List<Item> items = reader.read(inputStream).toList();
+            List<Item> items = reader.read(inputStream).collect(Collectors.toList());
             for (Item i : items) {
                 if (i.getLink().isPresent()) {
                     try {

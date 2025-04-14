@@ -1,8 +1,8 @@
 Name:Curse of Silence
 ManaCost:W
 Types:Enchantment Aura Curse
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
 K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters, choose a card name.
 S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ Spell | Activator$ Player.EnchantedBy | Amount$ 2 | Description$ Spells with the chosen name enchanted player casts cost {2} more to cast.

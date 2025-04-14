@@ -1,0 +1,9 @@
+Name:Wriggling Grub
+ManaCost:1 B
+Types:Creature Worm
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create two 1/1 black and green Worm creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ bg_1_1_worm
+SVar:SacMe:4
+DeckHas:Ability$Token
+Oracle:When Wriggling Grub dies, create two 1/1 black and green Worm creature tokens.

@@ -1,0 +1,11 @@
+Name:Renewed Solidarity
+ManaCost:2 W
+Types:Enchantment
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As this enchantment enters, choose a creature type. | AILogic$ MostProminentInComputerDeck
+S:Mode$ Continuous | Affected$ Creature.ChosenType+YouCtrl | AddPower$ 1 | Description$ Creatures you control of the chosen type get +1/+0.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ At the beginning of your end step, for each token you control of the chosen type that entered this turn, create a token that's a copy of it.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Valid Permanent.token+YouCtrl+ChosenType+ThisTurnEntered | NumCopies$ 1
+AI:RemoveDeck:Random
+SVar:PlayMain1:TRUE
+Oracle:As this enchantment enters, choose a creature type.\nCreatures you control of the chosen type get +1/+0.\nAt the beginning of your end step, for each token you control of the chosen type that entered this turn, create a token that's a copy of it.

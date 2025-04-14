@@ -8,12 +8,12 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.event.GameEventCardPlotted;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.Lang;
 import forge.util.TextUtil;
-
 
 public class AlterAttributeEffect extends SpellAbilityEffect {
     @Override
@@ -34,55 +34,64 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
         }
 
         for (Card c : defined) {
+            final Card gameCard = c.getGame().getCardState(c, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !c.equalsWithGameTimestamp(gameCard) || gameCard.isPhasedOut()) {
+                continue;
+            }
+
             for (String attr : attributes) {
                 boolean altered = false;
 
                 switch (attr.trim()) {
                     case "Plotted":
-                        altered = c.setPlotted(activate);
+                        altered = gameCard.setPlotted(activate);
+
+                        c.getGame().fireEvent(new GameEventCardPlotted(c, sa.getActivatingPlayer()));
                         break;
                     case "Solve":
                     case "Solved":
-                        altered = c.setSolved(activate);
+                        altered = gameCard.setSolved(activate);
                         if (altered) {
-                            Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+                            Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                             runParams.put(AbilityKey.Player, sa.getActivatingPlayer());
                             c.getGame().getTriggerHandler().runTrigger(TriggerType.CaseSolved, runParams, false);
                         }
                         break;
                     case "Suspect":
                     case "Suspected":
-                        altered = c.setSuspected(activate);
+                        altered = gameCard.setSuspected(activate);
                         break;
                     case "Saddle":
                     case "Saddled":
                         // currently clean up in Card manually
-                        altered = c.setSaddled(activate);
+                        altered = gameCard.setSaddled(activate);
                         if (altered) {
-                            CardCollection saddlers = (CardCollection) sa.getPaidList("TappedCards", true);
-                            c.addSaddledByThisTurn(saddlers);
-                            Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+                            CardCollection saddlers = sa.getPaidList("TappedCards", true);
+                            gameCard.addSaddledByThisTurn(saddlers);
+                            Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                             runParams.put(AbilityKey.Crew, saddlers);
                             c.getGame().getTriggerHandler().runTrigger(TriggerType.BecomesSaddled, runParams, false);
                         }
                         break;
                     case "Commander":
                         //This implementation doesn't let a card make someone else's creature your commander. But that's an edge case among edge cases.
-                        Player p = c.getOwner();
-                        if (c.isCommander() == activate || p.getCommanders().contains(c) == activate)
+                        Player p = gameCard.getOwner();
+                        if (gameCard.isCommander() == activate || p.getCommanders().contains(gameCard) == activate)
                             break; //Isn't changing status.
                         if (activate) {
-                            if(!c.getGame().getRules().hasCommander()) {
+                            if (!gameCard.getGame().getRules().hasCommander()) {
                                 System.out.println("Commander status applied in non-commander format. Applying Commander variant.");
-                                c.getGame().getRules().addAppliedVariant(GameType.Commander);
+                                gameCard.getGame().getRules().addAppliedVariant(GameType.Commander);
                             }
-                            p.addCommander(c);
+                            p.addCommander(gameCard);
                             //Seems important enough to mention in the game log.
-                            c.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is now %s's commander.", c.getPaperCard().getName(), p));
-                        }
-                        else {
-                            p.removeCommander(c);
-                            c.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is no longer %s's commander.", c.getPaperCard().getName(), p));
+                            gameCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is now %s's commander.", gameCard.getPaperCard().getName(), p));
+                        } else {
+                            p.removeCommander(gameCard);
+                            gameCard.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, String.format("%s is no longer %s's commander.", gameCard.getPaperCard().getName(), p));
                         }
                         altered = true;
                         break;
@@ -94,10 +103,10 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                 }
 
                 if (altered && sa.hasParam("RememberAltered")) {
-                    sa.getHostCard().addRemembered(c);
+                    sa.getHostCard().addRemembered(gameCard);
                 }
             }
-            c.updateAbilityTextForView();
+            gameCard.updateAbilityTextForView();
         }
     }
 }

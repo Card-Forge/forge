@@ -1,0 +1,7 @@
+Name:Fuel the Flames
+ManaCost:2 R
+Types:Instant
+A:SP$ DamageAll | NumDmg$ 2 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 2 damage to each creature.
+K:Cycling:2
+DeckHas:Ability$Discard
+Oracle:Fuel the Flames deals 2 damage to each creature.\nCycling {2} ({2}, Discard this card: Draw a card.)

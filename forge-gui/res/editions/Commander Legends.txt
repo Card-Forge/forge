@@ -527,7 +527,7 @@ ScryfallCode=CMR
 512 M Tevesh Szat, Doom of Fools @Chris Rallis
 513 M Jeska, Thrice Reborn @Chris Rallis
 
-[showcase]
+[etched]
 514 M Najeela, the Blade-Blossom @Matt Stewart
 515 M Akiri, Line-Slinger @David Gaillet
 516 M Brago, King Eternal @Karla Ortiz

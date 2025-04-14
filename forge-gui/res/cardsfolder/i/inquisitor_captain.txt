@@ -5,7 +5,7 @@ PT:3/3
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.wasCast+Self | CheckSVar$ X | SVarCompare$ GE20 | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters, if you cast it and there are twenty or more creature cards with mana value 3 or less among cards in your graveyard, hand, and library, seek two creature cards with mana value 3 or less. Put one of them onto the battlefield and shuffle the other into your library.
 SVar:TrigSeek:DB$ Seek | Type$ Creature.YouOwn+cmcLE3 | Num$ 2 | RememberFound$ True | SubAbility$ DBChangeZone1
-SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Select a card for the battlefield | SubAbility$ DBChangeZone2
+SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Select a card to put onto the battlefield | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Creature.IsRemembered | Mandatory$ True | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidGraveyard,Library,Hand Creature.YouOwn+cmcLE3

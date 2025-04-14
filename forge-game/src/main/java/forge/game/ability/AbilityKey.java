@@ -38,7 +38,6 @@ public enum AbilityKey {
     Causer("Causer"),
     Championed("Championed"),
     ClassLevel("ClassLevel"),
-    Cost("Cost"),
     CostStack("CostStack"),
     CounterAmount("CounterAmount"),
     CounteredSA("CounteredSA"),
@@ -72,7 +71,6 @@ public enum AbilityKey {
     Explored("Explored"),
     Explorer("Explorer"),
     ExtraTurn("ExtraTurn"),
-    Event("Event"),
     ETB("ETB"),
     Fighter("Fighter"),
     Fighters("Fighters"),
@@ -140,7 +138,6 @@ public enum AbilityKey {
     Token("Token"),
     TokenNum("TokenNum"),
     Valiant("Valiant"),
-    Vehicle("Vehicle"),
     Won("Won"),
 
     // below used across different Replacements, don't reuse

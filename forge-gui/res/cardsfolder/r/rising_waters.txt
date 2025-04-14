@@ -1,8 +1,8 @@
 Name:Rising Waters
 ManaCost:3 U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Land | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Lands don't untap during their controller's untap steps.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self | Execute$ TrigUntap | TriggerDescription$ At the beginning of each player's upkeep, that player untaps a land they control.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Land | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Lands don't untap during their controller's untap steps.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of each player's upkeep, that player untaps a land they control.
 SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land.ActivePlayerCtrl | Amount$ 1 | Defined$ TriggeredPlayer
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True

@@ -1,0 +1,8 @@
+Name:Veteran Beastrider
+ManaCost:1 G W
+Types:Creature Human Knight
+PT:3/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap each creature you control.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl
+A:AB$ PumpAll | Cost$ 2 G W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+Oracle:At the beginning of your end step, untap each creature you control.\n{2}{G}{W}: Creatures you control get +1/+1 until end of turn.

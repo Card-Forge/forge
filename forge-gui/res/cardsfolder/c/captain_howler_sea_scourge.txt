@@ -1,0 +1,13 @@
+Name:Captain Howler, Sea Scourge
+ManaCost:2 U R
+Types:Legendary Creature Shark Pirate
+PT:5/4
+K:Ward:2 PayLife<2>
+T:Mode$ DiscardedAll | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you discard one or more cards, target creature gets +2/+0 until end of turn for each card discarded this way. Whenever that creature deals combat damage to a player this turn, you draw a card.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | Triggers$ TrigDamage
+SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever that creature deals combat damage to a player this turn, you draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:TriggerCount$Amount/Twice
+DeckHints:Ability$Discard
+Oracle:Ward—{2}, Pay 2 life.\nWhenever you discard one or more cards, target creature gets +2/+0 until end of turn for each card discarded this way. Whenever that creature deals combat damage to a player this turn, you draw a card.

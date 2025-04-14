@@ -2,17 +2,17 @@ package forge.itemmanager.filters;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.swing.JPanel;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import forge.card.CardRules;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.itemmanager.SpellShopManager;
+import forge.util.IterableUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -56,6 +56,6 @@ public class CardCMCFilter extends StatTypeFilter<PaperCard> {
             //use custom return true delegate to validate the item is a card
             return card -> true;
         }
-        return Predicates.compose(Predicates.or(cmcs), PaperCard::getRules);
+        return PaperCardPredicates.fromRules(IterableUtil.or(cmcs));
     }
 }

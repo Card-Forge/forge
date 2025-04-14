@@ -1,0 +1,8 @@
+Name:Quag Feast
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Mill | NumCards$ 2 | SubAbility$ DBDestroy | SpellDescription$ Choose target creature, planeswalker, or Vehicle. Mill two cards, then destroy the chosen permanent if its mana value is less than or equal to the number of cards in your graveyard.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature,Planeswalker,Vehicle | TgtPrompt$ Select target creature, planeswalker, or Vehicle | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX
+SVar:Y:Targeted$CardManaCost
+SVar:X:Count$ValidGraveyard Card.YouOwn
+Oracle:Choose target creature, planeswalker, or Vehicle. Mill two cards, then destroy the chosen permanent if its mana value is less than or equal to the number of cards in your graveyard.

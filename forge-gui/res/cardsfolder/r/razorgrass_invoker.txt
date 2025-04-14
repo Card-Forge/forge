@@ -1,0 +1,7 @@
+Name:Razorgrass Invoker
+ManaCost:3 G
+Types:Creature Elf Scout
+PT:4/3
+K:Vigilance
+A:AB$ Pump | Cost$ 8 | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | TargetMin$ 0 | TargetMax$ 1 | ThisDefinedAndTgts$ Self | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME and up to one other target creature each get +3/+3 until end of turn.
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\n{8}: Razorgrass Invoker and up to one other target creature each get +3/+3 until end of turn.

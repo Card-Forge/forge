@@ -4,11 +4,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
@@ -27,10 +28,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
 
 public class PumpEffect extends SpellAbilityEffect {
 
@@ -82,13 +79,12 @@ public class PumpEffect extends SpellAbilityEffect {
                 gameCard.addPerpetual(params);
             }
             gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, null);
-            
         }
         if (!hiddenKws.isEmpty()) {
             gameCard.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
         }
         if (redrawPT) {
-            gameCard.updatePowerToughnessForView();
+            gameCard.updatePTforView();
         }
 
         if (sa.hasParam("CanBlockAny")) {
@@ -124,7 +120,7 @@ public class PumpEffect extends SpellAbilityEffect {
                         gameCard.removeHiddenExtrinsicKeywords(timestamp, 0);
                         gameCard.removeChangedCardKeywords(timestamp, 0);
                     }
-                    gameCard.updatePowerToughnessForView();
+                    gameCard.updatePTforView();
                     if (updateText) {
                         gameCard.updateAbilityTextForView();
                     }
@@ -359,7 +355,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
                 if (players.isEmpty()) return;
                 List<String> newKeywords = Lists.newArrayList();
-                Iterables.removeIf(keywords, input -> {
+                keywords.removeIf(input -> {
                     if (!input.contains("ChosenPlayerUID") && !input.contains("ChosenPlayerName")) {
                         return false;
                     }
@@ -474,7 +470,7 @@ public class PumpEffect extends SpellAbilityEffect {
             List<String> affectedKeywords = Lists.newArrayList(keywords);
 
             if (!affectedKeywords.isEmpty()) {
-                affectedKeywords = Lists.transform(affectedKeywords, input -> {
+                affectedKeywords = affectedKeywords.stream().map(input -> {
                     if (input.contains("CardManaCost")) {
                         input = input.replace("CardManaCost", tgtC.getManaCost().getShortString());
                     } else if (input.contains("ConvertedManaCost")) {
@@ -482,7 +478,7 @@ public class PumpEffect extends SpellAbilityEffect {
                         input = input.replace("ConvertedManaCost", costcmc);
                     }
                     return input;
-                });
+                }).collect(Collectors.toList());
             }
 
             if (sa.hasParam("NumAtt") && sa.getParam("NumAtt").equals("Double")) {

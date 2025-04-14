@@ -2,8 +2,8 @@ Name:Famished Paladin
 ManaCost:1 W
 Types:Creature Vampire Knight
 PT:3/3
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you gain life, untap CARDNAME.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you gain life, untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random
-Oracle:Famished Paladin doesn't untap during your untap step.\nWhenever you gain life, untap Famished Paladin.
+Oracle:This creature doesn't untap during your untap step.\nWhenever you gain life, untap this creature.

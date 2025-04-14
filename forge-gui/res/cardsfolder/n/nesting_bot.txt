@@ -1,0 +1,11 @@
+Name:Nesting Bot
+ManaCost:W
+Types:Artifact Creature Robot
+PT:1/1
+K:Start your engines
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a 1/1 colorless Servo artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_servo
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ MaxSpeedStatic | Description$ Max speed — This creature gets +1/+0.
+SVar:MaxSpeedStatic:Mode$ Continuous | Secondary$ True | Affected$ Card.Self | AddPower$ 1 | Description$ Max speed — This creature gets +1/+0.
+DeckHas:Ability$Token
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nWhen this creature dies, create a 1/1 colorless Servo artifact creature token.\nMax speed — This creature gets +1/+0.

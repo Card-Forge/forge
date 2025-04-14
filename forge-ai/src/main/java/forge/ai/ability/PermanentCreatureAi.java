@@ -1,19 +1,11 @@
 package forge.ai.ability;
 
-import forge.game.card.CardCopyService;
-import org.apache.commons.lang3.StringUtils;
-
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
+import forge.ai.*;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
@@ -24,6 +16,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * AbilityFactory for Creature Spells.
@@ -54,7 +47,7 @@ public class PermanentCreatureAi extends PermanentAi {
         if (sa.isDash()) {
             //only checks that the dashed creature will attack
             if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-                if (game.getReplacementHandler().wouldPhaseBeSkipped(ai, "BeginCombat"))
+                if (game.getReplacementHandler().wouldPhaseBeSkipped(ai, PhaseType.COMBAT_BEGIN))
                     return false;
                 if (ComputerUtilCost.canPayCost(sa.getHostCard().getSpellPermanent(), ai, false)) {
                     //do not dash if creature can be played normally
@@ -77,7 +70,7 @@ public class PermanentCreatureAi extends PermanentAi {
         // after attacking
         if (card.hasSVar("EndOfTurnLeavePlay")
                 && (!ph.isPlayerTurn(ai) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                || game.getReplacementHandler().wouldPhaseBeSkipped(ai, "BeginCombat"))) {
+                || game.getReplacementHandler().wouldPhaseBeSkipped(ai, PhaseType.COMBAT_BEGIN))) {
             // AiPlayDecision.AnotherTime
             return false;
         }

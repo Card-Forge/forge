@@ -3,9 +3,9 @@ ManaCost:1 U U
 Types:Creature Jellyfish
 PT:5/5
 K:Flying
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ BecomesTarget | ValidTarget$ You | ValidSource$ Spell | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you become the target of a spell, you may untap CARDNAME.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ BecomesTarget | ValidTarget$ You | ValidSource$ Spell | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you become the target of a spell, you may untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
-Oracle:Flying\nDormant Gomazoa enters tapped.\nDormant Gomazoa doesn't untap during your untap step.\nWhenever you become the target of a spell, you may untap Dormant Gomazoa.
+Oracle:Flying\nThis creature enters tapped.\nThis creature doesn't untap during your untap step.\nWhenever you become the target of a spell, you may untap this creature.

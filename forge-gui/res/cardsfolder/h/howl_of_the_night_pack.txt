@@ -2,5 +2,5 @@ Name:Howl of the Night Pack
 ManaCost:6 G
 Types:Sorcery
 A:SP$ Token | TokenAmount$ X | TokenScript$ g_2_2_wolf | TokenOwner$ You | SpellDescription$ Create a 2/2 green Wolf creature token for each Forest you control.
-SVar:X:Count$TypeYouCtrl.Forest
+SVar:X:Count$Valid Forest.YouCtrl
 Oracle:Create a 2/2 green Wolf creature token for each Forest you control.

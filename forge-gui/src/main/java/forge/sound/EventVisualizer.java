@@ -1,8 +1,5 @@
 package forge.sound;
 
-import java.io.File;
-import java.util.Collection;
-
 import forge.LobbyPlayer;
 import forge.game.card.Card;
 import forge.game.event.*;
@@ -15,6 +12,9 @@ import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.events.UiEventNextGameDecision;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
+
+import java.io.File;
+import java.util.Collection;
 
 /**
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
@@ -80,7 +80,15 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     @Override
     public SoundEffectType visit(final GameEventShuffle event) { return SoundEffectType.Shuffle; }
     @Override
+    public SoundEffectType visit(final GameEventSpeedChanged event) { return event.newValue > event.oldValue ? SoundEffectType.SpeedUp : null; }
+    @Override
     public SoundEffectType visit(final GameEventTokenCreated event) { return SoundEffectType.Token; }
+    @Override
+    public SoundEffectType visit(final GameEventSprocketUpdate event) {
+        if(event.oldSprocket == event.sprocket || event.sprocket <= 0)
+            return null;
+        return SoundEffectType.Sprocket;
+    }
     @Override
     public SoundEffectType visit(final GameEventDayTimeChanged event) {
         return event.daytime ? SoundEffectType.Daytime : SoundEffectType.Nighttime;

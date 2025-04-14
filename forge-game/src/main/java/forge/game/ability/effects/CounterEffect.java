@@ -56,6 +56,11 @@ public class CounterEffect extends SpellAbilityEffect {
         final CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
+            if (sa.hasParam("Optional") && !sa.getActivatingPlayer().getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + sa.getHostCard() + "?", null)) {
+                return;
+            }
+
             final Card tgtSACard = tgtSA.getHostCard();
             // should remember even that spell cannot be countered
             // currently all effects using this are targeted in case the spell gets countered before
@@ -252,10 +257,10 @@ public class CounterEffect extends SpellAbilityEffect {
 
         params.put(AbilityKey.StackSa, tgtSA);
 
-        String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : tgtSA.isAftermath() ? "Exile" : "Graveyard";
+        String destination = srcSA.getParamOrDefault("Destination", "Graveyard");
         if (srcSA.hasParam("DestinationChoice")) { //Hinder
             List<String> pos = Arrays.asList(srcSA.getParam("DestinationChoice").split(","));
-            destination = srcSA.getActivatingPlayer().getController().chooseSomeType(Localizer.getInstance().getMessage("lblRemoveDestination"), tgtSA, pos, null);
+            destination = srcSA.getActivatingPlayer().getController().chooseSomeType(Localizer.getInstance().getMessage("lblRemoveDestination"), tgtSA, pos);
         }
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,

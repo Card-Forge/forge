@@ -399,6 +399,8 @@ ScryfallCode=ZNR
 377 R Skyclave Relic @Daniel Ljunggren
 378 R Crawling Barrens @Jonas De Ro
 379 R Throne of Makindi @Igor Kieryluk
+
+[precon product]
 380 L Plains @Adam Paquette
 381 L Island @Tianhua X
 382 L Swamp @Adam Paquette

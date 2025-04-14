@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseDirection | TriggerDescription$ When CARDNAME enters or at the beginning of your upkeep, choose left or right.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseDirection | Secondary$ True | TriggerDescription$ When CARDNAME enters or at the beginning of your upkeep, choose left or right.
-SVar:TrigChooseDirection:AB$ ChooseDirection | Cost$ 0
+SVar:TrigChooseDirection:DB$ ChooseDirection
 S:Mode$ CantAttack | DefenderNotNearestToYouInChosenDirection$ True | Description$ Each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent.
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True

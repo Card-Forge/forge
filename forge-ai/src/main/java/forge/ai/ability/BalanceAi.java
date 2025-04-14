@@ -25,10 +25,10 @@ public class BalanceAi extends SpellAbilityAi {
         
         if ("BalanceCreaturesAndLands".equals(logic)) {
             // TODO Copied over from hardcoded Balance. We should be checking value of the lands/creatures for each opponent, not just counting
-            diff += CardLists.filter(humPerms, CardPredicates.Presets.LANDS).size() - 
-                    CardLists.filter(compPerms, CardPredicates.Presets.LANDS).size();
-            diff += 1.5 * (CardLists.filter(humPerms, CardPredicates.Presets.CREATURES).size() - 
-                    CardLists.filter(compPerms, CardPredicates.Presets.CREATURES).size());
+            diff += CardLists.filter(humPerms, CardPredicates.LANDS).size() -
+                    CardLists.filter(compPerms, CardPredicates.LANDS).size();
+            diff += 1.5 * (CardLists.filter(humPerms, CardPredicates.CREATURES).size() -
+                    CardLists.filter(compPerms, CardPredicates.CREATURES).size());
         }
         else if ("BalancePermanents".equals(logic)) {
             // Don't cast if you have to sacrifice permanents

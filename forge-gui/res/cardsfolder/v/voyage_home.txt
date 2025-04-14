@@ -1,0 +1,7 @@
+Name:Voyage Home
+ManaCost:5 W U
+Types:Sorcery
+K:Affinity:Artifact
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBGainLife | SpellDescription$ You draw three cards and gain 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nYou draw three cards and gain 3 life.

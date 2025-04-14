@@ -1,0 +1,7 @@
+Name:Goblin Surprise
+ManaCost:2 R
+Types:Instant
+A:SP$ Charm | Choices$ DBPumpAll,DBToken | CharmNum$ 1
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | SpellDescription$ Create two 1/1 red Goblin creature tokens.
+Oracle:Choose one —\n• Creatures you control get +2/+0 until end of turn.\n• Create two 1/1 red Goblin creature tokens.

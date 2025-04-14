@@ -4,10 +4,36 @@ Date=2024-04-19
 Name=Outlaws of Thunder Junction
 Type=Expansion
 ScryfallCode=OTJ
-Booster=6 Common, 3 Uncommon, 1 RareMythic, 1 Land, 1 Any, 1 Any OTP, 1 Any+
-ChanceReplaceCommonWith=.20F fromsheet("OTJ outlaw list")
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,Land,Wildcard,WildcardOTP
+Booster=5 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 Land, 1 Wildcard, 1 Wildcard+, 1 WildcardOTP
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
+
+#Numbers from https://mtgscribe.com/2024/04/05/outlaws-of-thunder-junction-play-booster-fact-sheet/
+[Common]
+Base=Common:fromSheet("OTJ cards")
+
+[Common-Guest]
+Base=Common:fromSheet("OTJ cards")
+Replace=.20F fromSheet("OTJ outlaw list")
+
+[Uncommon]
+Base=Uncommon:fromSheet("OTJ cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("OTJ cards")
+Replace=.025F RareMythic:!fromSheet("OTJ outlaw list")
+
+[Wildcard]
+Base=Any:!fromSheet("OTJ outlaw list")
+Replace=.0833F RareMythic:fromSheet("OTJ cards")
+
+[WildcardOTP]
+Base=Uncommon:fromSheet("OTP cards")
+Replace=.3333F RareMythic:fromSheet("OTP cards")
+
+[Land]
+Base=Land:fromSheet("OTJ cards")
 
 [cards]
 1 R Another Round @Darrell Riche

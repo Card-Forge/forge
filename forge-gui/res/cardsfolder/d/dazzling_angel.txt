@@ -1,0 +1,10 @@
+Name:Dazzling Angel
+ManaCost:2 W
+Types:Creature Angel
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control enters, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+SVar:BuffedBy:Creature
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhenever another creature you control enters, you gain 1 life.

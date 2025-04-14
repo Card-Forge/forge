@@ -1,0 +1,10 @@
+Name:Tonberry
+ManaCost:B
+Types:Creature Salamander Horror
+PT:2/1
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ EntersTapped | ReplacementResult$ Updated | Description$ This creature enters tapped with a stun counter on it. (If it would become untapped, remove a stun counter from it instad.)
+SVar:EntersTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ STUN | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike & Deathtouch | Condition$ PlayerTurn | Description$ Chef's Knife — During your turn, this creature has first strike and deathtouch.
+DeckHas:Ability$Counters
+Oracle:This creature enters tapped with a stun counter on it. (If it would become untapped, remove a stun counter from it instad.)\nChef's Knife — During your turn, this creature has first strike and deathtouch.

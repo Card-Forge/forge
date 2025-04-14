@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Creature Human Cleric
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$Valid Cleric
 Oracle:Whenever Vile Deacon attacks, it gets +X/+X until end of turn, where X is the number of Clerics on the battlefield.

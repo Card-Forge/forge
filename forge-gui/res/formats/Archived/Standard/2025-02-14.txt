@@ -1,0 +1,6 @@
+[format]
+Name:Standard (DFT)
+Type:Archived
+Subtype:Standard
+Effective:2025-02-14
+Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT

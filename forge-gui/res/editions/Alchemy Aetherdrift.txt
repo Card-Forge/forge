@@ -1,0 +1,39 @@
+[metadata]
+Code=YDFT
+Date=2025-03-04
+Name=Alchemy: Aetherdrift
+Type=Online
+Booster=1 UncommonRareMythic,8 Common:fromsheet("DFT cards"), 3 Uncommon:fromSheet("DFT cards"), 1 UncommonRareMythic:fromSheet("DFT cards"), 1 RareMythic:fromSheet("DFT cards"), 1 BasicLand:fromSheet("DFT cards")
+ScryfallCode=YDFT
+
+[cards]
+1 R Hangarback Assembler @Aaron J. Riley
+2 R Naktamun Shines Again @Andrew Mar
+3 R Turbocharged Escape @Josiah "Jo" Cameron
+4 U Deviant Skytech @Julia Metzger
+5 U Surge of Acclaim @Julian Kok Joon Wen
+6 R Trackhand Trainer @Maxime Minard
+7 U Bail Out @Daren Bader
+8 R Spectacle of Destruction @Loïc Canavaggia
+9 M Speedbrood Stalker @Yohann Schepacz
+10 R Terrors of the Track @John Tedrick
+11 U Unforgiving Overtake @Javier Charro
+12 R Chomping Mastasaur @Borja Pindado
+13 U Goblin Crash Pilot @Anthony Devine
+14 M Kari Zev, Crew of Two @Fariba Khamseh
+15 U Motivated Muralist @Alexandre Honoré
+16 R Smog Smasher @Helge C. Balzer
+17 U Fuel Tank Feaster @Arif Wijaya
+18 U Great Fang Chroniclers @Lius Lasahido
+19 M Mitotic Ultimus @Vincent Proce
+20 R Routeway Moose @Andreia Ugrai
+21 R Arius, Flyby Trawler @Leonardo Santanna
+22 R Highway Reaver @Konstantin Porubov
+23 M Ornate Imitations @Daniel Ljunggren
+24 R Quickbeast Amulet @Mark Poole
+25 R Sala, Deck Boss @Mirko Failoni
+26 R Support Skyforge @Joseph Meehan
+27 R Tsagan, Raider Warlord @Brian Valeza
+28 U Wish Good Luck @Raymond Swanland
+29 M Masterpiece Vault @Henry Peters
+30 U Rising Chicane @Samuele Bandini

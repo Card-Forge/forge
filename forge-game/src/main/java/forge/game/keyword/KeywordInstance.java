@@ -2,11 +2,13 @@ package forge.game.keyword;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.google.common.collect.Lists;
 
+import forge.game.IHasSVars;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
@@ -381,4 +383,38 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         idx = i;
     }
 
+    protected IHasSVars getSVarFallback() {
+        if (getStatic() != null) {
+            return getStatic();
+        }
+        return getHostCard();
+    }
+
+    @Override
+    public String getSVar(final String name) {
+        return getSVarFallback().getSVar(name);
+    }
+
+    @Override
+    public boolean hasSVar(final String name) {
+        return getSVarFallback().hasSVar(name);
+    }
+
+    @Override
+    public final void setSVar(final String name, final String value) {
+        
+    }
+
+    @Override
+    public Map<String, String> getSVars() {
+        return getSVarFallback().getSVars();
+    }
+
+    @Override
+    public void setSVars(Map<String, String> newSVars) {
+    }
+
+    @Override
+    public void removeSVar(String var) {
+    }
 }

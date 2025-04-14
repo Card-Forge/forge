@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Wall
 PT:0/5
 K:Defender
-A:AB$ LoseLife | Cost$ 1 B T | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Each Opponent Loses 1 life.
+A:AB$ LoseLife | Cost$ 1 B T | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Each opponent loses 1 life.
 Oracle:Defender\n{1}{B}, {T}: Each opponent loses 1 life.

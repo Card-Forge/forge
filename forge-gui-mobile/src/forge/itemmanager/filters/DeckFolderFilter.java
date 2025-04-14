@@ -2,8 +2,7 @@ package forge.itemmanager.filters;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.deck.DeckProxy;
 import forge.itemmanager.ItemManager;

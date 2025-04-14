@@ -1,0 +1,6 @@
+Name:Roamer's Routine
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | SpellDescription$ Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
+K:Harmonize:4 G
+Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nHarmonize {4}{G} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)

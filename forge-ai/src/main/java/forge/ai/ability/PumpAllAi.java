@@ -1,11 +1,5 @@
 package forge.ai.ability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -24,6 +18,10 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PumpAllAi extends PumpAiBase {
 
@@ -135,7 +133,7 @@ public class PumpAllAi extends PumpAiBase {
             return pumpAgainstRemoval(ai, sa, comp);
         }
 
-        return Iterables.any(ai.getCreaturesInPlay(), c -> c.isValid(valid, source.getController(), source, sa)
+        return ai.getCreaturesInPlay().anyMatch(c -> c.isValid(valid, source.getController(), source, sa)
                 && ComputerUtilCard.shouldPumpCard(ai, sa, c, defense, power, keywords));
     } // pumpAllCanPlayAI()
 

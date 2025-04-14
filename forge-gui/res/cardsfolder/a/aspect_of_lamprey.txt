@@ -1,10 +1,10 @@
 Name:Aspect of Lamprey
 ManaCost:3 B
 Types:Enchantment Aura
-K:Enchant creature you control
-A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, target opponent discards two cards.
-SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 2 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Lifelink | Description$ Enchanted creature has lifelink.
 SVar:NonStackingAttachEffect:True
 DeckHas:Ability$Graveyard

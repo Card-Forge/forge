@@ -3,7 +3,7 @@ ManaCost:0
 Types:Artifact
 A:AB$ ChangeZone | Cost$ T | ChangeType$ Card | ChangeNum$ 1 | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | Mandatory$ True | SubAbility$ DBEffect | SpellDescription$ Exile a card from your hand face down. You may look at it for as long as it remains exiled.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STLook | Duration$ Permanent | ForgetOnMoved$ Exile
-SVar:STLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at it for as long as it remains exiled.
+SVar:STLook:Mode$ Continuous | MayLookAt$ You | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at it for as long as it remains exiled.
 A:AB$ ChangeZone | Cost$ T | Hidden$ True | ChangeType$ Card.IsRemembered+YouOwn+ExiledWithSource | Mandatory$ True | Origin$ Exile | Destination$ Hand | ForgetChanged$ True | SpellDescription$ Return a card you own exiled with CARDNAME to your hand.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard

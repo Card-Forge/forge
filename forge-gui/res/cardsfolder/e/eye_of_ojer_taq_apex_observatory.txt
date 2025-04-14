@@ -19,7 +19,7 @@ SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:ETBReplacement:Other:DBChooseType
 SVar:DBChooseType:DB$ ChooseType | Type$ Shared | TypesFromDefined$ ExiledWith | AILogic$ MostProminentComputerControlsOrOwns | SpellDescription$ As CARDNAME enters, choose a card type shared among two exiled cards used to craft it.
 A:AB$ Effect | Cost$ T | StaticAbilities$ Play | Triggers$ CastTrig | SpellDescription$ The next spell you cast this turn of the chosen type can be cast without paying its mana cost.
-SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayDontGrantZonePermissions$ True | EffectZone$ Command | Affected$ Card.ChosenType | AffectedZone$ Hand,Graveyard,Library,Exile,Command | Description$ The next spell you cast this turn of the chosen type can be cast without paying its mana cost.
+SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayDontGrantZonePermissions$ True | Affected$ Card.ChosenType | AffectedZone$ Hand,Graveyard,Library,Exile,Command | Description$ The next spell you cast this turn of the chosen type can be cast without paying its mana cost.
 SVar:CastTrig:Mode$ SpellCast | ValidCard$ Card.ChosenType | ValidActivatingPlayer$ You | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 Oracle:Apex Observatory enters tapped. As it enters, choose a card type shared among two exiled cards used to craft it.\n{T}: The next spell you cast this turn of the chosen type can be cast without paying its mana cost.

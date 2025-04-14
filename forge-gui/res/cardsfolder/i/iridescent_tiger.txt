@@ -1,0 +1,7 @@
+Name:Iridescent Tiger
+ManaCost:4 R
+Types:Creature Cat
+PT:3/4
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigMana | TriggerDescription$ When this creature enters, if you cast it, add {W}{U}{B}{R}{G}.
+SVar:TrigMana:DB$ Mana | Produced$ W U B R G
+Oracle:When this creature enters, if you cast it, add {W}{U}{B}{R}{G}.

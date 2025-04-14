@@ -760,7 +760,13 @@ public class FSkin {
     public static SkinIcon getIcon(final FSkinProp s0) {
         final SkinIcon icon = SkinIcon.icons.get(s0);
         if (icon == null) {
-            throw new NullPointerException("Can't find an icon for FSkinProp " + s0);
+            final SkinIcon blank = SkinIcon.icons.get(FSkinProp.ICO_BLANK);
+            if (blank == null) // if blank is null at this point then the skin is bugged or GC?
+                throw new NullPointerException("Can't find an icon for FSkinProp " + s0);
+            else { // this should be 2 or less unless a new required image icon is needed.
+                System.err.println("Missing image icon for FSkinProp " + s0 + ". Blank image will be used instead.");
+                return blank;
+            }
         }
         return icon;
     }
@@ -1116,7 +1122,8 @@ public class FSkin {
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck, bimOldFoils,
     bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimPhyrexian, bimColorlessHybrid, bimDefaultSleeve,
-            bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark, bimDefaultDraftRank, bimAttractionLights;
+            bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark, bimDefaultDraftRank, bimAttractionLights,
+            bimZoneIcons;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int defaultFontSize = 12;
     private static boolean loaded = false;
@@ -1235,7 +1242,7 @@ public class FSkin {
         }
 
         final Localizer localizer = Localizer.getInstance();
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("splash.loading.processingimagesprites") + ": ", 20);
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("splash.loading.processingimagesprites") + ": ", 21);
 
         // Grab and test various sprite files.
         final String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;
@@ -1260,6 +1267,7 @@ public class FSkin {
         final File f19 = new File(defaultDir + ForgeConstants.SPRITE_COLORLESS_HYBRID_FILE);
         final File f20 = new File(defaultDir + ForgeConstants.SPRITE_DRAFTRANKS_FILE);
         final File f21 = new File(defaultDir + ForgeConstants.SPRITE_ATTRACTION_LIGHTS_FILE);
+        final File f22 = new File(defaultDir + ForgeConstants.SPRITE_ZONE_FILE);
 
         try {
             int p = 0;
@@ -1294,6 +1302,8 @@ public class FSkin {
             bimPrefferedSetLogo = f16.exists() ? ImageIO.read(f16) : ImageIO.read(f15);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimDefaultWatermark = ImageIO.read(f17);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimZoneIcons = ImageIO.read(f22);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimTrophies = ImageIO.read(f7);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1377,6 +1387,9 @@ public class FSkin {
                 case WATERMARKS:
                     setImage(prop, bimDefaultWatermark);
                     break;
+                case ZONES:
+                    setImage(prop, bimZoneIcons);
+                    break;
                 default:
                     break;
             }
@@ -1410,6 +1423,7 @@ public class FSkin {
         bimColorlessHybrid.flush();
         bimManaIcons.flush();
         bimAttractionLights.flush();
+        bimZoneIcons.flush();
 
         if (bimPreferredAvatars != null) { bimPreferredAvatars.flush(); }
 
@@ -1432,6 +1446,7 @@ public class FSkin {
         bimColorlessHybrid = null;
         bimManaIcons = null;
         bimAttractionLights = null;
+        bimZoneIcons = null;
 
         //establish encoding symbols
         final File dir = new File(ForgeConstants.CACHE_SYMBOLS_DIR);

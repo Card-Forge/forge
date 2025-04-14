@@ -1,7 +1,7 @@
 Name:Dream Tides
 ManaCost:2 U U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Creatures don't untap during their controllers' untap steps.
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of each player's upkeep, that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.
 SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | Amount$ X | Choices$ Creature.tapped+nonGreen | TargetControls$ True | ChoiceTitle$ Choose any number of tapped nongreen creatures you control | ChoiceZone$ Battlefield | SubAbility$ DBUntap
 SVar:DBUntap:DB$ RepeatEach | DefinedCards$ ChosenCard | RepeatSubAbility$ UntapEach

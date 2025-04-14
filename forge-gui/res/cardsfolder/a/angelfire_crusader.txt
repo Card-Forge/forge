@@ -2,5 +2,5 @@ Name:Angelfire Crusader
 ManaCost:3 W
 Types:Creature Human Soldier Knight
 PT:2/3
-A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 Oracle:{R}: Angelfire Crusader gets +1/+0 until end of turn.

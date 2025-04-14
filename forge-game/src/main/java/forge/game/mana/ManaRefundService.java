@@ -1,9 +1,9 @@
 package forge.game.mana;
 
-import com.google.common.collect.Lists;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -20,7 +20,7 @@ public class ManaRefundService {
     }
 
     public void refundManaPaid() {
-        List<Player> payers = Lists.newArrayList();
+        PlayerCollection payers = new PlayerCollection(activator);
 
         // move non-undoable paying mana back to floating
         for (Mana mana : sa.getPayingMana()) {
@@ -29,9 +29,7 @@ public class ManaRefundService {
                 : mana.getManaAbility().getSourceSA().getActivatingPlayer();
 
             pl.getManaPool().addMana(mana);
-            if (!payers.contains(pl)) {
-                payers.add(pl);
-            }
+            payers.add(pl);
         }
 
         sa.getPayingMana().clear();

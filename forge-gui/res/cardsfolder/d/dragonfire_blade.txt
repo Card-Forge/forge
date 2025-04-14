@@ -1,0 +1,7 @@
+Name:Dragonfire Blade
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Hexproof:Card.MonoColor:monocolored | Description$ Equipped creature gets +2/+2 and has hexproof from monocolored.
+K:Equip:4:::ReduceCost$ X:This ability costs {1} less to activate for each color of the creature it targets
+SVar:X:Targeted$CardNumColors
+Oracle:Equipped creature gets +2/+2 and has hexproof from monocolored.\nEquip {4}. This ability costs {1} less to activate for each color of the creature it targets.

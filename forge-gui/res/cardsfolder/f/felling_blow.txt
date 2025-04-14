@@ -1,0 +1,8 @@
+Name:Felling Blow
+ManaCost:2 G
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | TgtPrompt$ Select target creature you control to put a +1/+1 counter | SubAbility$ DBDamage | AILogic$ PowerDmg | SpellDescription$ Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature an opponent controls.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | DamageSource$ ParentTarget | AILogic$ PowerDmg
+SVar:X:ParentTargeted$CardPower
+DeckHas:Ability$Counters
+Oracle:Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature an opponent controls.

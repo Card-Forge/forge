@@ -1,14 +1,14 @@
 package forge.gamemodes.net.event;
 
-import java.util.Collections;
-import java.util.Set;
-
 import forge.ai.AIOption;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.server.RemoteClient;
+
+import java.util.Collections;
+import java.util.Set;
 
 public final class UpdateLobbyPlayerEvent implements NetEvent {
     private static final long serialVersionUID = -7354695008599789571L;

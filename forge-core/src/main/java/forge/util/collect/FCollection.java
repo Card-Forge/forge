@@ -1,17 +1,9 @@
 package forge.util.collect;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -19,7 +11,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
-import com.google.common.collect.Sets;
 
 /**
  * Collection with unique elements ({@link Set}) that maintains the order in
@@ -43,12 +34,12 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * The {@link Set} representation of this collection.
      */
-    private final Set<T> set = Sets.newHashSet();
+    private final Set<T> set = new HashSet<>();
 
     /**
      * The {@link List} representation of this collection.
      */
-    private final LinkedList<T> list = Lists.newLinkedList();
+    private final List<T> list = new ArrayList<>();
 
     /**
      * Create an empty {@link FCollection}.
@@ -59,8 +50,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Create an {@link FCollection} containing a single element.
      *
-     * @param e
-     *            the single element the new collection contains.
+     * @param e the single element the new collection contains.
      */
     public FCollection(final T e) {
         add(e);
@@ -70,8 +60,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Create an {@link FCollection} from an array. The order of the elements in
      * the array is preserved in the new collection.
      *
-     * @param c
-     *            an array, whose elements will be in the collection upon its
+     * @param c an array, whose elements will be in the collection upon its
      *            creation.
      */
     public FCollection(final T[] c) {
@@ -82,8 +71,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Create an {@link FCollection} from an {@link Iterable}. The order of the
      * elements in the iterable is preserved in the new collection.
      *
-     * @param i
-     *            an iterable, whose elements will be in the collection upon its
+     * @param i an iterable, whose elements will be in the collection upon its
      *            creation.
      */
     public FCollection(final Iterable<? extends T> i) {
@@ -93,8 +81,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Create an {@link FCollection} from an {@link FCollectionReader}.
      *
-     * @param reader
-     *            a reader used to populate collection
+     * @param reader a reader used to populate collection
      */
     public FCollection(final FCollectionReader<T> reader) {
         reader.readAll(this);
@@ -104,8 +91,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Check whether an {@link Iterable} contains any iterable, silently
      * returning {@code false} when {@code null} is passed as an argument.
      *
-     * @param iterable
-     *            a card collection.
+     * @param iterable a card collection.
      */
     public static boolean hasElements(final Iterable<?> iterable) {
         return iterable != null && !Iterables.isEmpty(iterable);
@@ -115,10 +101,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Check whether a {@link Collection} contains a particular element, silently
      * returning {@code false} when {@code null} is passed as the first argument.
      *
-     * @param collection
-     *            a collection.
-     * @param element
-     *            a possible element of the collection.
+     * @param collection a collection.
+     * @param element a possible element of the collection.
      */
     public static <T> boolean hasElement(final Collection<T> collection, final T element) {
         return collection != null && collection.contains(element);
@@ -163,24 +147,24 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
 
     /**
      * Get the first object in this {@link FCollection}.
-     *
-     * @throws NoSuchElementException
-     *             if the collection is empty.
      */
     @Override
     public T getFirst() {
-        return list.getFirst();
+        if (list.isEmpty())
+            return null;
+        return list.get(0);
+        //return list.getFirst();
     }
 
     /**
      * Get the last object in this {@link FCollection}.
-     *
-     * @throws NoSuchElementException
-     *             if the collection is empty.
      */
     @Override
     public T getLast() {
-        return list.getLast();
+        if (list.isEmpty())
+            return null;
+        return list.get(list.size() - 1);
+        //return list.getLast();
     }
 
     /**
@@ -198,7 +182,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     public boolean isEmpty() {
         return set.isEmpty();
     }
-    
+
     public Set<T> asSet() {
         return set;
     }
@@ -206,11 +190,12 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Check whether this collection contains a particular object.
      *
-     * @param o
-     *            an object.
+     * @param o an object.
      */
     @Override
     public boolean contains(final Object o) {
+        if (o == null)
+            return false;
         return set.contains(o);
     }
 
@@ -242,12 +227,14 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Add an element to this collection, if it isn't already present.
      *
-     * @param e
-     *            the object to add.
+     * @param e the object to add.
+     *
      * @return whether the collection changed as a result of this method call.
      */
     @Override
     public boolean add(final T e) {
+        if (e == null)
+            return false;
         if (set.add(e)) {
             list.add(e);
             return true;
@@ -258,12 +245,14 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Remove an element from this collection.
      *
-     * @param o
-     *            the object to remove.
+     * @param o the object to remove.
+     *
      * @return whether the collection changed as a result of this method call.
      */
     @Override
     public boolean remove(final Object o) {
+        if (o == null)
+            return false;
         if (set.remove(o)) {
             list.remove(o);
             return true;
@@ -300,13 +289,15 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Add all the elements in the specified {@link Iterator} to this
      * collection, in the order in which they appear.
      *
-     * @param i
-     *            an iterator.
+     * @param i an iterator.
+     *
      * @return whether this collection changed as a result of this method call.
      * @see #addAll(Collection)
      */
     public boolean addAll(final Iterable<? extends T> i) {
         boolean changed = false;
+        if (i == null)
+            return false;
         for (final T e : i) {
             changed |= add(e);
         }
@@ -317,8 +308,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * Add all the elements in the specified array to this collection,
      * respecting the ordering.
      *
-     * @param c
-     *            an array.
+     * @param c an array.
+     *
      * @return whether this collection changed as a result of this method call.
      */
     public boolean addAll(final T[] c) {
@@ -364,12 +355,14 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Remove all objects appearing in an {@link Iterable}.
      *
-     * @param c
-     *            an iterable.
+     * @param c an iterable.
+     *
      * @return whether this collection changed as a result of this method call.
      */
     public boolean removeAll(final Iterable<?> c) {
         boolean changed = false;
+        if (c == null)
+            return false;
         for (final Object o : c) {
             changed |= remove(o);
         }
@@ -427,10 +420,10 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * Helper method to insert an element at a particular index.
      *
-     * @param index
-     *            the index to insert the element at.
-     * @param element
-     *            the element to insert.
+     * @param index the index to insert the element at.
+     *
+     * @param element the element to insert.
+     *
      * @return whether this collection changed as a result of this method call.
      */
     private boolean insert(int index, final T element) {
@@ -525,7 +518,11 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * {@inheritDoc}
      */
     public void sort(final Comparator<? super T> comparator) {
-        list.sort(comparator);
+        try {
+            list.sort(comparator);
+        } catch (Exception e) {
+            System.err.println("FCollection failed to sort: \n" + comparator + "\n" + e.getMessage());
+        }
     }
 
     /**
@@ -533,8 +530,8 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      */
     @Override
     public Iterable<T> threadSafeIterable() {
-        //create a new linked list for iterating to make it thread safe and avoid concurrent modification exceptions
-        return Iterables.unmodifiableIterable(new LinkedList<>(list));
+        //create a new list for iterating to make it thread safe and avoid concurrent modification exceptions
+        return Iterables.unmodifiableIterable(new ArrayList<>(list));
     }
 
     @Override
@@ -549,6 +546,22 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
         }
         return obj;
     }
+
+    @Override
+    public Stream<T> stream() {
+        return list.stream();
+    }
+
+    @Override
+    public boolean anyMatch(Predicate<? super T> test) {
+        return set.stream().anyMatch(test);
+    }
+
+    @Override
+    public boolean allMatch(Predicate<? super T> test) {
+        return set.stream().allMatch(test);
+    }
+
     /**
      * An unmodifiable, empty {@link FCollection}. Overrides all methods with
      * default implementations suitable for an empty collection, to improve
@@ -654,7 +667,13 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
             }
             return a;
         }
-        @Override public final String toString() {
+
+        @Override public Stream<T> stream() {return Stream.empty();}
+        @Override public boolean anyMatch(Predicate<? super T> test) {return false;}
+        @Override public boolean allMatch(Predicate<? super T> test) {return true;}
+
+        @Override
+        public final String toString() {
             return "[]";
         }
     }

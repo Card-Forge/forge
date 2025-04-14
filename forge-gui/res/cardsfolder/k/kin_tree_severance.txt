@@ -1,0 +1,5 @@
+Name:Kin-Tree Severance
+ManaCost:2W 2B 2G
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.cmcGE3 | TgtPrompt$ Select target permanent with mana value 3 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target permanent with mana value 3 or greater.
+Oracle:Exile target permanent with mana value 3 or greater.

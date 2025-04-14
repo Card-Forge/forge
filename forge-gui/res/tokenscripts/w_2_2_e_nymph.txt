@@ -1,0 +1,6 @@
+Name:Nymph Token
+ManaCost:no cost
+Colors:white
+Types:Enchantment Creature Nymph
+PT:2/2
+Oracle:

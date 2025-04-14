@@ -4,5 +4,5 @@ Types:Sorcery
 K:Gift
 SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
 A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment. If the gift was promised, instead destroy two target artifacts and/or enchantments.
-SVar:X:Count$ValidStack Card.Self+PromisedGift/Plus.1
+SVar:X:Count$PromisedGift.2.1
 Oracle:Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)\nDestroy target artifact or enchantment. If the gift was promised, instead destroy two target artifacts and/or enchantments.

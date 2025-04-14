@@ -89,6 +89,9 @@ public class TransitionScreen extends FContainer {
         layout = new GlyphLayout();
     }
 
+    public TransitionScreen() {
+    }
+
     public FProgressBar getProgressBar() {
         return progressBar;
     }

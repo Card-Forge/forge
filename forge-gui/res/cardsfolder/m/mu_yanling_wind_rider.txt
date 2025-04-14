@@ -1,0 +1,10 @@
+Name:Mu Yanling, Wind Rider
+ManaCost:2 U U
+Types:Legendary Creature Human Wizard Pilot
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 3/2 colorless Vehicle artifact token with crew 1.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_2_a_vehicle_crew_1 | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Vehicle.YouCtrl | AddKeyword$ Flying | Description$ Vehicles you control have flying.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+withFlying | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures you control with flying deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:When this creature enters, create a 3/2 colorless Vehicle artifact token with crew 1.\nVehicles you control have flying.\nWhenever one or more creatures you control with flying deal combat damage to a player, draw a card.

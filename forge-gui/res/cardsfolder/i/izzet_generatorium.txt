@@ -4,6 +4,4 @@ Types:Artifact
 R:Event$ AddCounter | ActiveZones$ Battlefield | ValidPlayer$ You | ValidCounterType$ ENERGY | ReplaceWith$ OneMore | Description$ If you would get one or more {E} (energy counters), you get that many plus one {E} instead.
 SVar:OneMore:DB$ ReplaceCounter | ValidCounterType$ ENERGY | ChooseCounter$ True | Amount$ ReplaceCount$CounterNum/Plus.1
 A:AB$ Draw | Cost$ T | CheckSVar$ Count$CountersRemovedThisTurn ENERGY You | SVarCompare$ GE4 | SpellDescription$ Draw a card. Activate only if you've paid or lost four or more {E} this turn.
-DeckHints:Ability$Energy
-DeckHas:Ability$Counters
 Oracle:If you would get one or more {E} (energy counters), you get that many plus one {E} instead.\n{T}: Draw a card. Activate only if you've paid or lost four or more {E} this turn.

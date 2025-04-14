@@ -4,5 +4,6 @@ Types:Land
 Text:As you create your deck, circle two of the colors below.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-A:AB$ Mana | Cost$ T | Produced$ Combo Chosen | SpellDescription$ Add one mana of either of the circled colors.
+A:AB$ Mana | Cost$ T | Produced$ Combo ColorID | SpellDescription$ Add one mana of either of the circled colors.
 Oracle:As you create your deck, circle two of the colors below.\nCryptic Spires enters tapped.\n{T}: Add one mana of either of the circled colors.
+SETCOLORID:2

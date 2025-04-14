@@ -1,0 +1,14 @@
+[metadata]
+Code=SPE
+Date=2025-09-26
+Name=Marvel's Spider-Man Eternal
+Type=Expansion
+ScryfallCode=SPE
+
+[cards]
+21 R Grasping Tentacles @Dan Dos Santos
+22 R Venom, Deadly Devourer @Dan Dos Santos
+23 R Green Goblin, Nemesis @Dan Dos Santos
+24 R Doc Ock, Evil Inventor @Dan Dos Santos
+25 R Sensational Spider-Man @Dan Dos Santos
+26 R Pumpkin Bombs @Dan Dos Santos

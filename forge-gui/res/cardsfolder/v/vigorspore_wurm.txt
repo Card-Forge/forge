@@ -4,7 +4,7 @@ Types:Creature Wurm
 PT:6/4
 S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Undergrowth — When CARDNAME enters, target creature gains vigilance and gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | KW$ Vigilance
-SVar:X:Count$TypeInYourYard.Creature
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | KW$ Vigilance
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 SVar:PlayMain1:TRUE
 Oracle:Undergrowth — When Vigorspore Wurm enters, target creature gains vigilance and gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.\nVigorspore Wurm can't be blocked by more than one creature.

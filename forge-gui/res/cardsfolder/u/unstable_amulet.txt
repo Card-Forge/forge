@@ -12,5 +12,5 @@ SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZo
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Play | Duration$ Permanent | ForgetOnMoved$ Exile | ImprintOnHost$ True | StackDescription$ SpellDescription | SpellDescription$ You may play it until you exile another card with CARDNAME.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup2
 SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card until you exile another card with EFFECTSOURCE.
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card until you exile another card with EFFECTSOURCE.
 Oracle:When Unstable Amulet enters, you get {E}{E} (two energy counters).\nWhenever you cast a spell from anywhere other than your hand, Unstable Amulet deals 1 damage to each opponent.\n{T}, Pay {E}{E}: Exile the top card of your library. You may play it until you exile another card with Unstable Amulet.

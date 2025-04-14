@@ -1,0 +1,11 @@
+Name:Saheeli, Radiant Creator
+ManaCost:1 G U R
+Types:Legendary Creature Human Artificer
+PT:4/4
+T:Mode$ SpellCast | ValidCard$ Artificer,Artifact | ValidActivatingPlayer$ You | Execute$ TrigEnergy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Artificer or artifact spell, you get {E} (an energy counter).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of combat on your turn, you may pay {E}{E}{E}. When you do, create a token that's a copy of target permanent you control, except it's a 5/5 artifact creature in addition to its other types and has haste. Sacrifice it at the beginning of the next end step.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ PayEnergy<3> | Execute$ TrigCopy | TriggerDescription$ When you do, create a token that's a copy of target permanent you control, except it's a 5/5 artifact creature in addition to its other types and has haste. Sacrifice it at the beginning of the next end step.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SetPower$ 5 | SetToughness$ 5 | AddTypes$ Artifact & Creature | AddKeywords$ Haste | AtEOT$ Sacrifice
+DeckNeeds:Type$Artifact
+Oracle:Whenever you cast an Artificer or artifact spell, you get {E} (an energy counter).\nAt the beginning of combat on your turn, you may pay {E}{E}{E}. When you do, create a token that's a copy of target permanent you control, except it's a 5/5 artifact creature in addition to its other types and has haste. Sacrifice it at the beginning of the next end step.

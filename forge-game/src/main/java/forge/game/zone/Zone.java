@@ -17,16 +17,11 @@
  */
 package forge.game.zone;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
@@ -35,7 +30,6 @@ import forge.game.card.*;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
-import forge.util.CollectionSuppliers;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -55,8 +49,18 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     protected final ZoneType zoneType;
     protected final Game game;
 
-    protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
-    protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
+    protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
+    protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
+
+    // might support different order via preference later
+    private static final Comparator<Card> COMPARATOR = Comparator.comparingInt((Card c) -> c.getCMC())
+            .thenComparing(c -> c.getColor())
+            .thenComparing(Comparator.comparing(Card::getName))
+            .thenComparing(Card::hasPerpetual);
+
+    protected void sort() {
+        cardList.sort(COMPARATOR);
+    }
 
     public Zone(final ZoneType zone0, Game game0) {
         zoneType = zone0;
@@ -146,7 +150,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public final boolean contains(final Predicate<Card> condition) {
-        return Iterables.any(cardList, condition);
+        return cardList.anyMatch(condition);
     }
 
     public void remove(final Card c) {

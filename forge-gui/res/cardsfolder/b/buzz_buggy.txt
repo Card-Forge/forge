@@ -1,0 +1,6 @@
+Name:Buzz Buggy
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, target creature gets +2/+0 and gains trample until end of turn.
+SVar:TrigCrank:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ Trample
+Oracle:Whenever you crank Buzz Buggy, target creature gets +2/+0 and gains trample until end of turn.

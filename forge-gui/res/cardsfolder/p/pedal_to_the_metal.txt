@@ -1,0 +1,6 @@
+Name:Pedal to the Metal
+ManaCost:X R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | KW$ First Strike | StackDescription$ {c:Targeted} gets +X/+0 and gains first strike until end of turn. | SpellDescription$ Target creature gets +X/+0 and gains first strike until end of turn.
+SVar:X:Count$xPaid
+Oracle:Target creature gets +X/+0 and gains first strike until end of turn.

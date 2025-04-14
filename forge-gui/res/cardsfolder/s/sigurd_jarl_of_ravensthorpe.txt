@@ -5,7 +5,7 @@ PT:3/3
 K:Vigilance
 K:Trample
 K:Lifelink
-A:AB$ AddOrRemoveCounter | Cost$ 1 | Boast$ True | ValidTgts$ Saga.YouCtrl | TgtPrompt$ Select target Saga you control | CounterType$ LORE | CounterNum$ 1
+A:AB$ AddOrRemoveCounter | Cost$ 1 | Boast$ True | ValidTgts$ Saga.YouCtrl | TgtPrompt$ Select target Saga you control | CounterType$ LORE | CounterNum$ 1 | SpellDescription$ Put a lore counter on target Saga you control or remove one from it. (Activate only if this creature attacked this turn and only once each turn.)
 T:Mode$ CounterAdded | ValidCard$ Saga.YouCtrl | ValidSource$ You | TriggerZones$ Battlefield | CounterType$ LORE | Execute$ TrigPutCounter | TriggerDescription$ Whenever you put a lore counter on a Saga you control, put a +1/+1 counter on up to one other target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select another target creature | CounterType$ P1P1 | CounterNum$ 1
 Oracle:Vigilance, trample, lifelink\nBoast — {1}: Put a lore counter on target Saga you control or remove one from it. (Activate only if this creature attacked this turn and only once each turn.)\nWhenever you put a lore counter on a Saga you control, put a +1/+1 counter on up to one other target creature.

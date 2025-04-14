@@ -2,6 +2,6 @@ Name:Viashino Weaponsmith
 ManaCost:3 R
 Types:Creature Lizard
 PT:2/2
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME get +2/+2 until end of turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME gets +2/+2 until end of turn.
 SVar:TrigBlockedPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
 Oracle:Whenever Viashino Weaponsmith becomes blocked by a creature, Viashino Weaponsmith gets +2/+2 until end of turn.

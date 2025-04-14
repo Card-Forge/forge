@@ -1,7 +1,7 @@
 Name:Thelon's Curse
 ManaCost:G G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.Blue | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Blue creatures don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.Blue | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Blue creatures don't untap during their controllers' untap steps.
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of each player's upkeep, that player may choose any number of tapped blue creatures they control and pay {U} for each creature chosen this way. If the player does, untap those creatures.
 SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | Amount$ X | Choices$ Creature.tapped+Blue | TargetControls$ True | ChoiceTitle$ Choose any number of tapped nongreen creatures you control | ChoiceZone$ Battlefield | SubAbility$ DBUntap
 SVar:DBUntap:DB$ RepeatEach | DefinedCards$ ChosenCard | RepeatSubAbility$ UntapEach

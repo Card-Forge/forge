@@ -2,10 +2,10 @@ Name:Alirios, Enraptured
 ManaCost:2 U
 Types:Legendary Creature Human
 PT:2/3
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ NICKNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | IsPresent$ Reflection.YouCtrl | Description$ NICKNAME doesn't untap during your untap step if you control a Reflection.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | IsPresent$ Reflection.YouCtrl | Description$ NICKNAME doesn't untap during your untap step if you control a Reflection.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 3/2 blue Reflection creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_3_2_reflection | TokenOwner$ You
 DeckHas:Ability$Token
-Oracle:Alirios, Enraptured enters tapped.\nAlirios doesn't untap during your untap step if you control a Reflection.\nWhen Alirios enters, create a 3/2 blue Reflection creature token.
+Oracle:Alirios enters tapped.\nAlirios doesn't untap during your untap step if you control a Reflection.\nWhen Alirios enters, create a 3/2 blue Reflection creature token.

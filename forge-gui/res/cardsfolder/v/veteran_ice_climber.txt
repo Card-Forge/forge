@@ -1,0 +1,10 @@
+Name:Veteran Ice Climber
+ManaCost:1 U
+Types:Creature Human Scout
+PT:1/3
+K:Vigilance
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ This creature can't be blocked.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever this creature attacks, up to one target player mills cards equal to this creature's power. (They put that many cards from the top of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ X | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target player
+SVar:X:Count$CardPower
+Oracle:Vigilance\nThis creature can't be blocked.\nWhenever this creature attacks, up to one target player mills cards equal to this creature's power. (They put that many cards from the top of their library into their graveyard.)

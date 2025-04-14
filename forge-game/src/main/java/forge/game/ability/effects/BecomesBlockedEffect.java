@@ -29,6 +29,9 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Game game = sa.getActivatingPlayer().getGame();
+        if (game.getCombat() == null) {
+            return;
+        }
         List<Card> blocked = Lists.newArrayList();
         for (final Card c : getTargetCards(sa)) {
             game.getCombat().setBlocked(c, true);

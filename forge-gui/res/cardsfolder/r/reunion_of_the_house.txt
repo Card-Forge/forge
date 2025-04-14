@@ -1,0 +1,7 @@
+Name:Reunion of the House
+ManaCost:5 W W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.YouOwn | MaxTotalTargetPower$ 10 | TgtPrompt$ Select any number of creature cards with total power 10 or less | SubAbility$ DBExile | SpellDescription$ Return any number of target creature cards with total power 10 or less from your graveyard to the battlefield. Exile CARDNAME.
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+Oracle:Return any number of target creature cards with total power 10 or less from your graveyard to the battlefield. Exile Reunion of the House.

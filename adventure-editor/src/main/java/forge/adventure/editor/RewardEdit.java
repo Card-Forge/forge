@@ -25,10 +25,10 @@ public class RewardEdit extends FormPanel {
     TextListEdit colors =new TextListEdit(new String[] { "White", "Blue", "Black", "Red", "Green" });
     TextListEdit rarity =new TextListEdit(new String[] { "Basic Land", "Common", "Uncommon", "Rare", "Mythic Rare" });
     TextListEdit subTypes =new TextListEdit();
-    TextListEdit cardTypes =new TextListEdit(Arrays.asList(CardType.CoreType.values()).stream().map(CardType.CoreType::toString).toArray(String[]::new));
-    TextListEdit superTypes =new TextListEdit(Arrays.asList(CardType.Supertype.values()).stream().map(CardType.Supertype::toString).toArray(String[]::new));
+    TextListEdit cardTypes =new TextListEdit(Arrays.stream(CardType.CoreType.values()).map(CardType.CoreType::toString).toArray(String[]::new));
+    TextListEdit superTypes =new TextListEdit(Arrays.stream(CardType.Supertype.values()).map(CardType.Supertype::toString).toArray(String[]::new));
     TextListEdit manaCosts =new TextListEdit();
-    TextListEdit keyWords =new TextListEdit(Arrays.asList(Keyword.values()).stream().map(Keyword::toString).toArray(String[]::new));
+    TextListEdit keyWords =new TextListEdit(Arrays.stream(Keyword.values()).map(Keyword::toString).toArray(String[]::new));
     JComboBox colorType =new JComboBox(new String[] { "Any", "Colorless", "MultiColor", "MonoColor"});
     JTextField cardText =new JTextField();
     private boolean updating=false;

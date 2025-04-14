@@ -1,325 +1,325 @@
 //Rank|Name|Rarity|Set
 #1|Guide of Souls|R|MH3
 #2|Ocelot Pride|M|MH3
-#3|Writhing Chrysalis|C|MH3
-#4|Crabomination|R|MH3
-#5|Amped Raptor|U|MH3
-#6|Phlage, Titan of Fire's Fury|M|MH3
+#3|Amped Raptor|U|MH3
+#4|Phlage, Titan of Fire's Fury|M|MH3
+#5|Crabomination|R|MH3
+#6|Writhing Chrysalis|C|MH3
 #7|Ajani, Nacatl Pariah|M|MH3
-#8|Fury|M|MH3
+#8|Fury|M|SPG
 #9|Tamiyo, Inquisitive Student|M|MH3
-#10|Satya, Aetherflux Genius|M|MH3
+#10|Satya, Aetherflux Genius|M|M3C
 #11|Psychic Frog|R|MH3
-#12|Solitude|M|MH3
-#13|Path of Annihilation|U|MH3
-#14|Scurry of Gremlins|U|MH3
-#15|Laelia, the Blade Reforged|R|MH3
-#16|Galvanic Discharge|C|MH3
-#17|Fanatic of Rhonas|R|MH3
-#18|Nadu, Winged Wisdom|R|MH3
-#19|Malevolent Rumble|C|MH3
-#20|Grief|M|MH3
+#12|Path of Annihilation|U|MH3
+#13|Scurry of Gremlins|U|MH3
+#14|Solitude|M|SPG
+#15|Galvanic Discharge|C|MH3
+#16|Fanatic of Rhonas|R|MH3
+#17|Nadu, Winged Wisdom|R|MH3
+#18|Malevolent Rumble|C|MH3
+#19|Laelia, the Blade Reforged|R|MH3
+#20|Kozilek's Command|R|MH3
 #21|Phelia, Exuberant Shepherd|R|MH3
 #22|Marionette Apprentice|U|MH3
 #23|Eldrazi Repurposer|C|MH3
 #24|Ugin's Binding|M|MH3
-#25|Dismember|M|MH3
-#26|Kozilek's Command|R|MH3
+#25|Dismember|M|SPG
+#26|Spawn-Gang Commander|U|MH3
 #27|Signature Slam|U|MH3
 #28|Depth Defiler|U|MH3
-#29|Ophiomancer|R|MH3
-#30|Static Prison|U|MH3
-#31|Detective's Phoenix|R|MH3
-#32|Spawn-Gang Commander|U|MH3
+#29|Titans' Vanguard|U|MH3
+#30|Ophiomancer|R|MH3
+#31|Grief|M|SPG
+#32|Static Prison|U|MH3
 #33|Horrific Assault|C|MH3
 #34|Sowing Mycospawn|R|MH3
 #35|Conduit Goblin|C|MH3
 #36|Aerie Auxiliary|C|MH3
-#37|Nightshade Dryad|C|MH3
-#38|Titans' Vanguard|U|MH3
-#39|Riddle Gate Gargoyle|C|MH3
-#40|Toxic Deluge|R|MH3
-#41|Mandibular Kite|C|MH3
-#42|Roil Cartographer|U|MH3
-#43|Serum Visionary|C|MH3
-#44|Six|R|MH3
-#45|Genku, Future Shaper|R|MH3
-#46|Glyph Elemental|U|MH3
-#47|Springheart Nantuko|R|MH3
-#48|Party Thrasher|R|MH3
-#49|Eldrazi Linebreaker|R|MH3
-#50|Ral and the Implicit Maze|U|MH3
-#51|Sneaky Snacker|C|MH3
-#52|Emrakul, the World Anew|M|MH3
-#53|Shadow of the Second Sun|M|MH3
-#54|Unfathomable Truths|C|MH3
-#55|Volatile Stormdrake|R|MH3
+#37|Springheart Nantuko|R|MH3
+#38|Party Thrasher|R|MH3
+#39|Nightshade Dryad|C|MH3
+#40|Sneaky Snacker|C|MH3
+#41|Riddle Gate Gargoyle|C|MH3
+#42|Toxic Deluge|R|MH3
+#43|Roil Cartographer|U|MH3
+#44|Serum Visionary|C|MH3
+#45|Detective's Phoenix|R|MH3
+#46|Six|R|MH3
+#47|Mindless Conscription|U|MH3
+#48|Eldrazi Linebreaker|R|MH3
+#49|Ral and the Implicit Maze|U|MH3
+#50|Mandibular Kite|C|MH3
+#51|Brainsurge|U|MH3
+#52|Shadow of the Second Sun|M|MH3
+#53|Unfathomable Truths|C|MH3
+#54|Volatile Stormdrake|R|MH3
+#55|Emperor of Bones|R|MH3
 #56|Collective Resistance|U|MH3
-#57|Wastescape Battlemage|U|MH3
-#58|Mindless Conscription|U|MH3
-#59|Deem Inferior|C|MH3
-#60|Brainsurge|U|MH3
-#61|Hope-Ender Coatl|U|MH3
-#62|Emperor of Bones|R|MH3
+#57|Genku, Future Shaper|R|MH3
+#58|Wastescape Battlemage|U|MH3
+#59|Glyph Elemental|U|MH3
+#60|Deem Inferior|C|MH3
+#61|Emrakul, the World Anew|M|MH3
+#62|Hope-Ender Coatl|U|MH3
 #63|Wither and Bloom|C|MH3
 #64|Glimpse the Impossible|C|MH3
 #65|Ajani Fells the Godsire|U|MH3
 #66|Horrid Shadowspinner|U|MH3
-#67|Nulldrifter|R|MH3
-#68|Metastatic Evangel|U|MH3
-#69|Proud Pack-Rhino|U|MH3
-#70|Thraben Charm|C|MH3
-#71|Voltstorm Angel|U|MH3
-#72|Flare of Malice|R|MH3
-#73|Refurbished Familiar|C|MH3
-#74|Basking Broodscale|C|MH3
-#75|Witch Enchanter|U|MH3
-#76|Unstable Amulet|U|MH3
-#77|Abstruse Appropriation|R|MH3
-#78|Territory Culler|U|MH3
-#79|Solar Transformer|U|MH3
-#80|Kozilek, the Broken Reality|M|MH3
-#81|Twisted Riddlekeeper|U|MH3
+#67|Thraben Charm|C|MH3
+#68|Voltstorm Angel|U|MH3
+#69|Flare of Malice|R|MH3
+#70|Refurbished Familiar|C|MH3
+#71|Basking Broodscale|C|MH3
+#72|Witch Enchanter|U|MH3
+#73|Unstable Amulet|U|MH3
+#74|Abstruse Appropriation|R|MH3
+#75|Recruiter of the Guard|M|MH3
+#76|Devourer of Destiny|R|MH3
+#77|Kozilek, the Broken Reality|M|MH3
+#78|Nulldrifter|R|MH3
+#79|Twisted Riddlekeeper|U|MH3
+#80|Metastatic Evangel|U|MH3
+#81|Proud Pack-Rhino|U|MH3
 #82|Solstice Zealot|C|MH3
 #83|Accursed Marauder|C|MH3
-#84|Reckless Pyrosurfer|U|MH3
-#85|Smelted Chargebug|C|MH3
-#86|Wumpus Aberration|U|MH3
-#87|Bridgeworks Battle|U|MH3
-#88|Legion Leadership|U|MH3
-#89|Revitalizing Repast|U|MH3
-#90|Ghostfire Slice|U|MH3
-#91|Propagator Drone|U|MH3
-#92|Bountiful Landscape|C|MH3
-#93|Sheltering Landscape|C|MH3
-#94|Annoyed Altisaur|U|MH3
-#95|Devourer of Destiny|R|MH3
-#96|Glaring Fleshraker|U|MH3
-#97|Aether Spike|C|MH3
-#98|Petrifying Meddler|C|MH3
-#99|Breathe Your Last|C|MH3
-#100|Chthonian Nightmare|R|MH3
-#101|Scurrilous Sentry|C|MH3
-#102|Wurmcoil Larva|U|MH3
-#103|Fanged Flames|C|MH3
-#104|Cranial Ram|C|MH3
-#105|Sundering Eruption|U|MH3
-#106|Disciple of Freyalise|U|MH3
-#107|Drowner of Truth|U|MH3
-#108|Stump Stomp|U|MH3
-#109|Emrakul's Messenger|U|MH3
-#110|Nyxborn Hydra|C|MH3
-#111|Invert Polarity|R|MH3
-#112|Etherium Pteramander|U|MH3
-#113|Perilous Landscape|C|MH3
-#114|Pinnacle Monk|U|MH3
-#115|Faithful Watchdog|C|MH3
-#116|Recruiter of the Guard|M|MH3
+#84|Chthonian Nightmare|R|MH3
+#85|Wurmcoil Larva|U|MH3
+#86|Reckless Pyrosurfer|U|MH3
+#87|Smelted Chargebug|C|MH3
+#88|Wumpus Aberration|U|MH3
+#89|Legion Leadership|U|MH3
+#90|Revitalizing Repast|U|MH3
+#91|Ghostfire Slice|U|MH3
+#92|Propagator Drone|U|MH3
+#93|Territory Culler|U|MH3
+#94|Solar Transformer|U|MH3
+#95|Bountiful Landscape|C|MH3
+#96|Sheltering Landscape|C|MH3
+#97|Annoyed Altisaur|U|MH3
+#98|Glaring Fleshraker|U|MH3
+#99|Dog Umbra|C|MH3
+#100|Pearl-Ear, Imperial Advisor|R|MH3
+#101|Aether Spike|C|MH3
+#102|Breathe Your Last|C|MH3
+#103|Scurrilous Sentry|C|MH3
+#104|Fanged Flames|C|MH3
+#105|Cranial Ram|C|MH3
+#106|Spymaster's Vault|R|MH3
+#107|Sorin of House Markov|M|MH3
+#108|Bridgeworks Battle|U|MH3
+#109|Disciple of Freyalise|U|MH3
+#110|Stump Stomp|U|MH3
+#111|Emrakul's Messenger|U|MH3
+#112|Nyxborn Hydra|C|MH3
+#113|Invert Polarity|R|MH3
+#114|Etherium Pteramander|U|MH3
+#115|Perilous Landscape|C|MH3
+#116|Faithful Watchdog|C|MH3
 #117|Deep Analysis|U|MH3
-#118|Sylvan Safekeeper|R|MH3
-#119|Thought-Knot Seer|M|MH3
-#120|Breaker of Creation|U|MH3
-#121|Warped Tusker|C|MH3
-#122|Dog Umbra|C|MH3
-#123|Hexgold Slith|C|MH3
-#124|Pearl-Ear, Imperial Advisor|R|MH3
-#125|Wrath of the Skies|R|MH3
-#126|Tune the Narrative|C|MH3
-#127|Mogg Mob|U|MH3
+#118|Expressive Iteration|M|SPG
+#119|Breaker of Creation|U|MH3
+#120|Warped Tusker|C|MH3
+#121|Hexgold Slith|C|MH3
+#122|Petrifying Meddler|C|MH3
+#123|Tempest Harvester|C|MH3
+#124|Tune the Narrative|C|MH3
+#125|Kami of Jealous Thirst|C|MH3
+#126|Nethergoyf|M|MH3
+#127|Inventor's Axe|C|MH3
 #128|Siege Smash|C|MH3
-#129|Shifting Woodland|R|MH3
-#130|Spymaster's Vault|R|MH3
-#131|Wooded Foothills|R|MH3
-#132|Fell the Profane|U|MH3
-#133|Sorin of House Markov|M|MH3
-#134|Glasswing Grace|U|MH3
-#135|Rush of Inspiration|U|MH3
-#136|Strength of the Harvest|U|MH3
-#137|Suppression Ray|U|MH3
-#138|Reiterating Bolt|U|MH3
-#139|Skittering Precursor|U|MH3
-#140|Foreboding Landscape|C|MH3
-#141|Seething Landscape|C|MH3
-#142|Tranquil Landscape|C|MH3
-#143|Twisted Landscape|C|MH3
-#144|Arena of Glory|R|MH3
+#129|Arna Kennerüd, Skycaptain|M|MH3
+#130|Fell the Profane|U|MH3
+#131|Sundering Eruption|U|MH3
+#132|Drowner of Truth|U|MH3
+#133|Glasswing Grace|U|MH3
+#134|Rush of Inspiration|U|MH3
+#135|Strength of the Harvest|U|MH3
+#136|Eviscerator's Insight|C|MH3
+#137|Skittering Precursor|U|MH3
+#138|Foreboding Landscape|C|MH3
+#139|Seething Landscape|C|MH3
+#140|Tranquil Landscape|C|MH3
+#141|Twisted Landscape|C|MH3
+#142|Pinnacle Monk|U|MH3
+#143|Arena of Glory|R|MH3
+#144|Sylvan Safekeeper|R|MH3
 #145|Sevinne's Reclamation|R|MH3
-#146|Cayth, Famed Mechanist|M|MH3
+#146|Thought-Knot Seer|M|SPG
 #147|Jolted Awake|C|MH3
-#148|Amphibian Downpour|R|MH3
-#149|Flare of Denial|R|MH3
-#150|Tempest Harvester|C|MH3
-#151|Kami of Jealous Thirst|C|MH3
-#152|Inventor's Axe|C|MH3
-#153|Skoa, Embermage|C|MH3
-#154|Gift of the Viper|C|MH3
-#155|Arna Kennerüd, Skycaptain|M|MH3
-#156|Wight of the Reliquary|R|MH3
-#157|Eviscerator's Insight|C|MH3
-#158|Dreamtide Whale|R|MH3
-#159|Cursed Wombat|U|MH3
-#160|Cyclops Superconductor|C|MH3
-#161|Contaminated Landscape|C|MH3
-#162|Shattered Landscape|C|MH3
-#163|Breya, Etherium Shaper|M|MH3
-#164|Endurance|M|MH3
-#165|Drownyard Lurker|C|MH3
+#148|Wrath of the Skies|R|MH3
+#149|Amphibian Downpour|R|MH3
+#150|Flare of Denial|R|MH3
+#151|Mogg Mob|U|MH3
+#152|Skoa, Embermage|C|MH3
+#153|Gift of the Viper|C|MH3
+#154|Wight of the Reliquary|R|MH3
+#155|Wooded Foothills|R|MH3
+#156|Suppression Ray|U|MH3
+#157|Reiterating Bolt|U|MH3
+#158|Lethal Throwdown|U|MH3
+#159|Consuming Corruption|U|MH3
+#160|Dreamtide Whale|R|MH3
+#161|Shilgengar, Sire of Famine|R|MH3
+#162|Contaminated Landscape|C|MH3
+#163|Shattered Landscape|C|MH3
+#164|Cayth, Famed Mechanist|M|M3C
+#165|Endurance|M|SPG
 #166|It That Heralds the End|U|MH3
-#167|Envoy of the Ancestors|U|MH3
-#168|Indebted Spirit|U|MH3
-#169|Inspired Inventor|C|MH3
-#170|Wing It|C|MH3
-#171|Bespoke Battlewagon|U|MH3
-#172|Molten Gatekeeper|C|MH3
-#173|Evolution Witness|C|MH3
-#174|Temperamental Oozewagg|C|MH3
-#175|Bloodstained Mire|R|MH3
-#176|Flooded Strand|R|MH3
-#177|Ugin's Labyrinth|M|MH3
-#178|Sink into Stupor|U|MH3
+#167|Indebted Spirit|U|MH3
+#168|Inspired Inventor|C|MH3
+#169|Wing It|C|MH3
+#170|Bespoke Battlewagon|U|MH3
+#171|Molten Gatekeeper|C|MH3
+#172|Temperamental Oozewagg|C|MH3
+#173|Bloodstained Mire|R|MH3
+#174|Flooded Strand|R|MH3
+#175|Shifting Woodland|R|MH3
+#176|Ugin's Labyrinth|M|MH3
+#177|Sink into Stupor|U|MH3
+#178|Waterlogged Teachings|U|MH3
 #179|Nyxborn Unicorn|C|MH3
 #180|Aether Revolt|R|MH3
-#181|Lethal Throwdown|U|MH3
-#182|Colossal Dreadmask|C|MH3
-#183|Utter Insignificance|C|MH3
-#184|Consuming Corruption|U|MH3
-#185|Shilgengar, Sire of Famine|R|MH3
-#186|Deceptive Landscape|C|MH3
-#187|Emissary of Soulfire|U|MH3
-#188|Nethergoyf|M|MH3
-#189|Retrofitted Transmogrant|C|MH3
-#190|Infernal Captor|C|MH3
+#181|Colossal Dreadmask|C|MH3
+#182|Utter Insignificance|C|MH3
+#183|Cursed Wombat|U|MH3
+#184|Cyclops Superconductor|C|MH3
+#185|Emissary of Soulfire|U|MH3
+#186|Kappa Cannoneer|R|MH3
+#187|Breya, Etherium Shaper|M|MH3
+#188|Drownyard Lurker|C|MH3
+#189|Envoy of the Ancestors|U|MH3
+#190|Retrofitted Transmogrant|C|MH3
 #191|Sarpadian Simulacrum|C|MH3
 #192|Voidpouncer|C|MH3
-#193|Bloodsoaked Insight|U|MH3
-#194|Waterlogged Teachings|U|MH3
+#193|Evolution Witness|C|MH3
+#194|Bloodsoaked Insight|U|MH3
 #195|Guardian of the Forgotten|U|MH3
-#196|Kappa Cannoneer|R|MH3
+#196|Deceptive Landscape|C|MH3
 #197|Priest of Titania|U|MH3
-#198|Herigast, Erupting Nullkite|M|MH3
-#199|White Orchid Phantom|R|MH3
-#200|Dreamdrinker Vampire|C|MH3
-#201|Razorgrass Ambush|U|MH3
-#202|Monumental Henge|R|MH3
-#203|Electrozoa|C|MH3
-#204|Snapping Voidcraw|C|MH3
-#205|Subtlety|M|MH3
-#206|Copycrook|U|MH3
-#207|Kozilek's Unsealing|U|MH3
-#208|Grim Servant|U|MH3
-#209|Phyrexian Ironworks|U|MH3
-#210|Thriving Skyclaw|C|MH3
-#211|Kudo, King Among Bears|R|MH3
-#212|Polluted Delta|R|MH3
-#213|Windswept Heath|R|MH3
-#214|Grist, Voracious Larva|M|MH3
-#215|Pyretic Rebirth|U|MH3
-#216|Hydroelectric Specimen|U|MH3
-#217|Barbarian Ring|U|MH3
-#218|Muster the Departed|U|MH3
-#219|Rosecot Knight|C|MH3
-#220|Rosheen, Roaring Prophet|R|MH3
-#221|Birthing Ritual|M|MH3
-#222|Planar Genesis|U|MH3
-#223|Boggart Trawler|U|MH3
-#224|Etched Slith|U|MH3
-#225|Fowl Strike|C|MH3
-#226|Lion Umbra|U|MH3
+#198|Subtlety|M|SPG
+#199|Herigast, Erupting Nullkite|M|MH3
+#200|White Orchid Phantom|R|MH3
+#201|Copycrook|U|MH3
+#202|Dreamdrinker Vampire|C|MH3
+#203|Infernal Captor|C|MH3
+#204|Thriving Skyclaw|C|MH3
+#205|Rosheen, Roaring Prophet|R|MH3
+#206|Windswept Heath|R|MH3
+#207|Razorgrass Ambush|U|MH3
+#208|Grist, Voracious Larva|M|MH3
+#209|Monumental Henge|R|MH3
+#210|Electrozoa|C|MH3
+#211|Snapping Voidcraw|C|MH3
+#212|Barbarian Ring|U|MH3
+#213|Grim Servant|U|MH3
+#214|Kudo, King Among Bears|R|MH3
+#215|Polluted Delta|R|MH3
+#216|Pyretic Rebirth|U|MH3
+#217|Planar Genesis|U|MH3
+#218|Boggart Trawler|U|MH3
+#219|Hydroelectric Specimen|U|MH3
+#220|Muster the Departed|U|MH3
+#221|Rosecot Knight|C|MH3
+#222|Kozilek's Unsealing|U|MH3
+#223|Phyrexian Ironworks|U|MH3
+#224|Eladamri, Korvecdal|M|MH3
+#225|Etched Slith|U|MH3
+#226|Fowl Strike|C|MH3
 #227|Angel of the Ruins|U|MH3
 #228|Reef Worm|U|MH3
 #229|Ulamog, the Defiler|M|MH3
 #230|Expel the Unworthy|C|MH3
-#231|Drossclaw|C|MH3
-#232|Eladamri, Korvecdal|M|MH3
-#233|Fangs of Kalonia|U|MH3
-#234|Worn Powerstone|U|MH3
-#235|Cephalid Coliseum|U|MH3
-#236|Decree of Justice|U|MH3
-#237|Echoes of Eternity|R|MH3
-#238|Eldrazi Ravager|U|MH3
-#239|Flare of Fortitude|R|MH3
-#240|Sage of the Unknowable|C|MH3
-#241|Arcbound Condor|U|MH3
-#242|Warren Soultrader|R|MH3
-#243|Thief of Existence|R|MH3
-#244|Trickster's Elk|U|MH3
-#245|Fetid Gargantua|C|MH3
-#246|Ashling, Flame Dancer|M|MH3
-#247|Nesting Grounds|U|MH3
-#248|Disa the Restless|M|MH3
-#249|Expanding Ooze|C|MH3
-#250|Ral, Monsoon Mage|M|MH3
-#251|Furnace Hellkite|U|MH3
-#252|Buried Alive|U|MH3
-#253|Victimize|U|MH3
-#254|Omo, Queen of Vesuva|M|MH3
-#255|Essence Reliquary|U|MH3
-#256|Ondu Knotmaster|U|MH3
-#257|Obstinate Gargoyle|C|MH3
-#258|Null Elemental Blast|U|MH3
-#259|Argent Dais|R|MH3
-#260|Corrupted Shapeshifter|C|MH3
-#261|Strix Serenade|R|MH3
-#262|Tamiyo Meets the Story Circle|U|MH3
-#263|Triton Wavebreaker|U|MH3
-#264|Dreadmobile|U|MH3
-#265|Flare of Duplication|R|MH3
-#266|Frogmyr Enforcer|U|MH3
-#267|Wheel of Potential|R|MH3
-#268|Flare of Cultivation|R|MH3
-#269|Izzet Generatorium|U|MH3
-#270|The Necrobloom|R|MH3
-#271|Snow-Covered Wastes|U|MH3
-#272|Urza's Cave|U|MH3
-#273|The Hunger Tide Rises|U|MH3
-#274|Hydra Trainer|U|MH3
-#275|Golden-Tail Trainer|U|MH3
-#276|Imskir Iron-Eater|R|MH3
-#277|Archway of Innovation|R|MH3
-#278|Quest for the Necropolis|U|MH3
-#279|Vexing Bauble|U|MH3
-#280|Gravedig|C|MH3
-#281|Idol of False Gods|U|MH3
-#282|The Creation of Avacyn|U|MH3
-#283|Consign to Memory|U|MH3
-#284|Monstrous Vortex|U|MH3
-#285|Urza's Incubator|R|MH3
-#286|Branching Evolution|R|MH3
-#287|Meteoric Mace|U|MH3
-#288|Fledgling Dragon|U|MH3
-#289|Nadier's Nightblade|U|MH3
-#290|Shrieking Drake|U|MH3
-#291|Distinguished Conjurer|U|MH3
-#292|Phyrexian Tower|M|MH3
-#293|K'rrik, Son of Yawgmoth|R|MH3
-#294|Cursed Mirror|R|MH3
-#295|Deserted Temple|R|MH3
-#296|Junk Diver|U|MH3
-#297|Ulalek, Fused Atrocity|M|MH3
-#298|Coram, the Undertaker|M|MH3
-#299|Harbinger of the Seas|R|MH3
-#300|Powerbalance|R|MH3
-#301|Disruptor Flute|R|MH3
-#302|Winter Moon|R|MH3
-#303|Charitable Levy|U|MH3
-#304|Necrodominance|M|MH3
-#305|Ripples of Undeath|R|MH3
-#306|Primal Prayers|R|MH3
-#307|Orim's Chant|R|MH3
-#308|Estrid's Invocation|R|MH3
-#309|Meltdown|U|MH3
-#310|Wirewood Symbiote|U|MH3
-#311|Kaalia of the Vast|M|MH3
-#312|Emerald Medallion|R|MH3
-#313|Jet Medallion|R|MH3
-#314|Pearl Medallion|R|MH3
-#315|Ruby Medallion|R|MH3
-#316|Sapphire Medallion|R|MH3
-#317|Jyoti, Moag Ancient|M|MH3
-#318|Azlask, the Swelling Scourge|M|MH3
-#319|Prismatic Ending|M|MH3
-#320|Persist|M|MH3
-#321|Expressive Iteration|M|MH3
+#231|Flare of Fortitude|R|MH3
+#232|Drossclaw|C|MH3
+#233|Fetid Gargantua|C|MH3
+#234|Birthing Ritual|M|MH3
+#235|Fangs of Kalonia|U|MH3
+#236|Ashling, Flame Dancer|M|MH3
+#237|Lion Umbra|U|MH3
+#238|Nesting Grounds|U|MH3
+#239|Worn Powerstone|U|MH3
+#240|Cephalid Coliseum|U|MH3
+#241|Decree of Justice|U|MH3
+#242|Disa the Restless|M|M3C
+#243|Echoes of Eternity|R|MH3
+#244|Eldrazi Ravager|U|MH3
+#245|Sage of the Unknowable|C|MH3
+#246|Arcbound Condor|U|MH3
+#247|Warren Soultrader|R|MH3
+#248|Thief of Existence|R|MH3
+#249|Trickster's Elk|U|MH3
+#250|Expanding Ooze|C|MH3
+#251|Ral, Monsoon Mage|M|MH3
+#252|Phyrexian Tower|M|MH3
+#253|Essence Reliquary|U|MH3
+#254|The Hunger Tide Rises|U|MH3
+#255|Ondu Knotmaster|U|MH3
+#256|Gravedig|C|MH3
+#257|Furnace Hellkite|U|MH3
+#258|Consign to Memory|U|MH3
+#259|Obstinate Gargoyle|C|MH3
+#260|Victimize|U|MH3
+#261|Null Elemental Blast|U|MH3
+#262|Argent Dais|R|MH3
+#263|Corrupted Shapeshifter|C|MH3
+#264|Strix Serenade|R|MH3
+#265|Tamiyo Meets the Story Circle|U|MH3
+#266|Triton Wavebreaker|U|MH3
+#267|Dreadmobile|U|MH3
+#268|Flare of Duplication|R|MH3
+#269|Frogmyr Enforcer|U|MH3
+#270|Wheel of Potential|R|MH3
+#271|Flare of Cultivation|R|MH3
+#272|Izzet Generatorium|U|MH3
+#273|The Necrobloom|R|MH3
+#274|Snow-Covered Wastes|U|MH3
+#275|Urza's Cave|U|MH3
+#276|Necrodominance|M|MH3
+#277|Ripples of Undeath|R|MH3
+#278|Hydra Trainer|U|MH3
+#279|Golden-Tail Trainer|U|MH3
+#280|Imskir Iron-Eater|R|MH3
+#281|Archway of Innovation|R|MH3
+#282|Quest for the Necropolis|U|MH3
+#283|Vexing Bauble|U|MH3
+#284|Idol of False Gods|U|MH3
+#285|The Creation of Avacyn|U|MH3
+#286|Monstrous Vortex|U|MH3
+#287|Urza's Incubator|R|MH3
+#288|Branching Evolution|R|MH3
+#289|Meteoric Mace|U|MH3
+#290|Fledgling Dragon|U|MH3
+#291|Nadier's Nightblade|U|MH3
+#292|Shrieking Drake|U|MH3
+#293|Distinguished Conjurer|U|MH3
+#294|Buried Alive|U|MH3
+#295|K'rrik, Son of Yawgmoth|R|MH3
+#296|Cursed Mirror|R|MH3
+#297|Deserted Temple|R|MH3
+#298|Junk Diver|U|MH3
+#299|Ulalek, Fused Atrocity|M|M3C
+#300|Omo, Queen of Vesuva|M|M3C
+#301|Coram, the Undertaker|M|M3C
+#302|Azlask, the Swelling Scourge|M|M3C
+#303|Harbinger of the Seas|R|MH3
+#304|Powerbalance|R|MH3
+#305|Disruptor Flute|R|MH3
+#306|Winter Moon|R|MH3
+#307|Charitable Levy|U|MH3
+#308|Primal Prayers|R|MH3
+#309|Orim's Chant|R|MH3
+#310|Estrid's Invocation|R|MH3
+#311|Meltdown|U|MH3
+#312|Wirewood Symbiote|U|MH3
+#313|Kaalia of the Vast|M|MH3
+#314|Emerald Medallion|R|MH3
+#315|Jet Medallion|R|MH3
+#316|Pearl Medallion|R|MH3
+#317|Ruby Medallion|R|MH3
+#318|Sapphire Medallion|R|MH3
+#319|Jyoti, Moag Ancient|M|M3C
+#320|Prismatic Ending|M|SPG
+#321|Persist|M|SPG
 #322|Plains|C|MH3
 #323|Island|C|MH3
 #324|Swamp|C|MH3

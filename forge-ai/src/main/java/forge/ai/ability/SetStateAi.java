@@ -1,21 +1,21 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardStateName;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.List;
+import java.util.Map;
 
 public class SetStateAi extends SpellAbilityAi {
     @Override
@@ -73,7 +73,7 @@ public class SetStateAi extends SpellAbilityAi {
                 sa.resetTargets();
 
                 // select only the ones that can transform
-                CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), CardPredicates.Presets.CREATURES, c -> c.canTransform(sa));
+                CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), CardPredicates.CREATURES, c -> c.canTransform(sa));
 
                 if (list.isEmpty()) {
                     return false;
@@ -143,7 +143,7 @@ public class SetStateAi extends SpellAbilityAi {
                 return false;
             }
             // hidden agenda
-            if (card.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")
+            if (card.getState(CardStateName.Original).hasKeyword(Keyword.HIDDEN_AGENDA)
                     && card.isInZone(ZoneType.Command)) {
                 String chosenName = card.getNamedCard();
                 for (Card cast : ai.getGame().getStack().getSpellsCastThisTurn()) {

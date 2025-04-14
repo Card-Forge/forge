@@ -15,8 +15,8 @@ Name:A-Catlike Curiosity
 ManaCost:no cost
 Colors:blue
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ TrigDamageDone | Description$ Enchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, draw a card."
 SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
 SVar:TrigDraw:DB$ Draw

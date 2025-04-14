@@ -213,6 +213,14 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
+        addSettingField(Forge.getLocalizer().getMessage("lblDisableNotForSaleOverlay"),
+                Config.instance().getSettingData().disableNotForSale, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().disableNotForSale = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
         addSettingField(Forge.getLocalizer().getMessage("lblShowShopOverlay"), Config.instance().getSettingData().showShopOverlay, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -234,6 +242,7 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
+        addCheckBox(Forge.getLocalizer().getMessage("lblPromptAutoSell"), ForgePreferences.FPref.PROMPT_FOR_AUTOSELL);
         addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);

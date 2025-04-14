@@ -37,11 +37,6 @@ public class LandAbility extends AbilityStatic {
         getRestrictions().setZone(ZoneType.Hand);
     }
 
-    public boolean canPlay(Card newHost) {
-        final Player p = getActivatingPlayer();
-        return p.canPlayLand(newHost, false, this);
-    }
-
     @Override
     public boolean isLandAbility() { return true; }
 
@@ -57,22 +52,8 @@ public class LandAbility extends AbilityStatic {
         if (p == null || land.isInZone(ZoneType.Battlefield)) {
             return false;
         }
-        if (this.getCardState() != null && land.getCurrentStateName() != this.getCardStateName()) {
-            if (!land.isLKI()) {
-                land = CardCopyService.getLKICopy(land);
-            }
-            CardStateName stateName = getCardStateName();
-            if (!land.hasState(stateName)) {
-                land.addAlternateState(stateName, false);
-                land.getState(stateName).copyFrom(getHostCard().getState(stateName), true);
-            }
-
-            land.setState(stateName, false);
-
-            // need to reset CMC
-            land.setLKICMC(-1);
-            land.setLKICMC(land.getCMC());
-        }
+ 
+        land = ObjectUtils.firstNonNull(getAlternateHost(land), land);
 
         return p.canPlayLand(land, false, this);
     }
@@ -123,7 +104,6 @@ public class LandAbility extends AbilityStatic {
     public Card getAlternateHost(Card source) {
         boolean lkicheck = false;
 
-        // need to be done before so it works with Vivien and Zoetic Cavern
         if (source.isFaceDown() && source.isInZone(ZoneType.Exile)) {
             if (!source.isLKI()) {
                 source = CardCopyService.getLKICopy(source);

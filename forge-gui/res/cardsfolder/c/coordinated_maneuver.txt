@@ -1,0 +1,8 @@
+Name:Coordinated Maneuver
+ManaCost:1 W
+Types:Instant
+A:SP$ Charm | Choices$ DBDamage,DBDestroy
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of creatures you control to target creature or planeswalker.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Choose one —\n• Coordinated Maneuver deals damage equal to the number of creatures you control to target creature or planeswalker.\n• Destroy target enchantment.

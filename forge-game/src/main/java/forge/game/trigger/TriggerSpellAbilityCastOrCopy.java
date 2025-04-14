@@ -32,7 +32,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
-import forge.game.cost.Cost;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -188,20 +187,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
         }
 
-        if (hasParam("NonTapCost")) {
-            final Cost cost = (Cost) (runParams.get(AbilityKey.Cost));
-            if (cost.hasTapCost()) {
-                return false;
-            }
-        }
-
-        if (hasParam("HasTapCost")) {
-            final Cost cost = (Cost) (runParams.get(AbilityKey.Cost));
-            if (!cost.hasTapCost()) {
-                return false;
-            }
-        }
-
         if (hasParam("HasXManaCost")) {
             final int numX;
             if (spellAbility.isActivatedAbility()) {
@@ -251,6 +236,13 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 return false;
             }
         }
+
+        if (getSpawningAbility() != null && getSpawningAbility().hasParam("TriggersWhenSpent")) {
+            if (!getTriggerRemembered().contains(spellAbility)) {
+                return false;
+            }
+        }
+
         return true;
     }
 

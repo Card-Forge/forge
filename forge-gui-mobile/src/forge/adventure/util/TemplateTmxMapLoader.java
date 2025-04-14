@@ -51,7 +51,7 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
         Array<FileHandle> fileHandles = new Array<FileHandle>();
 
         // TileSet descriptors
-        for (XmlReader.Element tileset : root.getChildrenByName("tileset")) {
+        for (XmlReader.Element tileset : root.getChildrenByNameRecursively("tileset")) {
             String source = tileset.getAttribute("source", null);
             if (source != null) {
                 FileHandle tsxFile = getRelativeFileHandle(tmxFile, source);
@@ -85,7 +85,7 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
         }
 
         // ImageLayer descriptors
-        for (XmlReader.Element imageLayer : root.getChildrenByName("imagelayer")) {
+        for (XmlReader.Element imageLayer : root.getChildrenByNameRecursively("imagelayer")) {
             XmlReader.Element image = imageLayer.getChildByName("image");
             String source = image.getAttribute("source", null);
 

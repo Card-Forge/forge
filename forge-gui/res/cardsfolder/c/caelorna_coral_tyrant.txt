@@ -1,0 +1,5 @@
+Name:Caelorna, Coral Tyrant
+ManaCost:1 U
+Types:Legendary Creature Octopus
+PT:0/8
+Oracle:

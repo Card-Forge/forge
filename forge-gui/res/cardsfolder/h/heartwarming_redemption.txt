@@ -6,7 +6,7 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBGainLife
 SVar:X:Remembered$Amount/Plus.1
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Y:Count$InYourHand
+SVar:Y:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:All
 DeckHas:Ability$LifeGain
 Oracle:Discard all the cards in your hand, then draw that many cards plus one. You gain life equal to the number of cards in your hand.

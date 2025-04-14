@@ -33,7 +33,7 @@
   <object id="38" template="../../obj/entry_up.tx" x="208" y="272"/>
   <object id="41" template="../../obj/shop.tx" x="129" y="146">
    <properties>
-    <property name="commonShopList" value="Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,BlackBoosterPackShop,Black,Black,Enchantment4Black,Creature2Black,Instant4Black"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,PhyrexianBlack"/>
     <property name="rareShopList" value="Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle,Colorless"/>
     <property name="uncommonShopList" value="Artifact,Vampire,Zombie,Skeleton,Demon,Knight4Black,Rogue4Black,Sliver2Black,Wand,Equip,Multicolor"/>

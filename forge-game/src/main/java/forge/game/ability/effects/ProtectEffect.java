@@ -18,6 +18,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
+import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
@@ -152,8 +153,14 @@ public class ProtectEffect extends SpellAbilityEffect {
             if (tgtC.isPhasedOut()) {
                 continue;
             }
+            // do Game Check there in case of LKI
+            final Card gameCard = game.getCardState(tgtC, null);
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
 
-            tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, null, true);
+            gameCard.addChangedCardKeywords(gainsKWList, null, false, timestamp, null);
+            game.fireEvent(new GameEventCardStatsChanged(gameCard));
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove protection at EOT
@@ -162,8 +169,9 @@ public class ProtectEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        if (tgtC.isInPlay()) {
-                            tgtC.removeChangedCardKeywords(timestamp, 0, true);
+                        if (gameCard.isInPlay()) {
+                            gameCard.removeChangedCardKeywords(timestamp, 0, true);
+                            game.fireEvent(new GameEventCardStatsChanged(gameCard));
                         }
                     }
                 };

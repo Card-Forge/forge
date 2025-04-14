@@ -1,0 +1,13 @@
+Name:Chandra, Flameshaper
+ManaCost:5 R R
+Types:Legendary Planeswalker Chandra
+Loyalty:6
+A:AB$ Mana | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 3 | AILogic$ Always | SubAbility$ DBExile | SpellDescription$ Add {R}{R}{R}.
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top three cards of your library. Choose one. You may play that card this turn.
+SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Exile | Mandatory$ True | ForgetOtherRemembered$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ ChosenCard | StaticAbilities$ Play | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.ChosenCard | AffectedZone$ Exile | Description$ You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+A:AB$ CopyPermanent | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AddKeywords$ Haste | AtEOTTrig$ Sacrifice | SpellDescription$ Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."
+A:AB$ DealDamage | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumDmg$ 8 | TargetMin$ 0 | TargetMax$ 8 | DividedAsYouChoose$ 8 | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select any number of target creatures and planeswalkers to distribute damage to | SpellDescription$ NICKNAME deals 8 damage divided as you choose among any number of target creatures and/or planeswalkers.
+Oracle:[+2]: Add {R}{R}{R}. Exile the top three cards of your library. Choose one. You may play that card this turn.\n[+1]: Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."\n[-4]: Chandra deals 8 damage divided as you choose among any number of target creatures and/or planeswalkers.

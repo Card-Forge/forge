@@ -1,0 +1,212 @@
+[metadata]
+Code=DRC
+Date=2025-02-14
+Name=Aetherdrift Commander
+Type=Commander
+ScryfallCode=DRC
+
+[cards]
+1 M Hashaton, Scarab's Fist @Wisnu Tan
+2 M Pia Nalaar, Chief Mechanic @Bram Sels
+3 M Saheeli, Radiant Creator @Ernanda Souza
+4 M Temmet, Naktamun's Will @Douglas Shuler
+5 R On Wings of Gold @Danny Schwartz
+6 R Priest of the Crossing @Edgar Sánchez Hidalgo
+7 R Renewed Solidarity @Julie Dillon
+8 R Wizened Mentor @Bruno Biazotto
+9 R Prophet of the Scarab @Cristi Balanescu
+10 R Rhet-Tomb Mystic @Irina Nordsol
+11 R Lost Monarch of Ifnir @Piotr Dura
+12 R Territorial Aetherkite @Lars Grant-West
+13 R Nissa, Worldsoul Speaker @Magali Villeneuve
+14 R Peema Trailblazer @Michele Giorgi
+15 R Rampaging Aetherhood @Ron Spencer
+16 R Adaptive Omnitool @Adrián Rodríguez Pérez
+17 R Aetherflux Conduit @Michael Phillippi
+18 R Aetheric Amplifier @Victor Sales
+19 R Stridehangar Automaton @Aaron J. Riley
+20 R Accursed Duneyard @Maxime Minard
+21 R On Wings of Gold @Danny Schwartz
+22 R Priest of the Crossing @Edgar Sánchez Hidalgo
+23 R Renewed Solidarity @Julie Dillon
+24 R Wizened Mentor @Bruno Biazotto
+25 R Prophet of the Scarab @Cristi Balanescu
+26 R Rhet-Tomb Mystic @Irina Nordsol
+27 R Lost Monarch of Ifnir @Piotr Dura
+28 R Territorial Aetherkite @Lars Grant-West
+29 R Nissa, Worldsoul Speaker @Magali Villeneuve
+30 R Peema Trailblazer @Michele Giorgi
+31 R Rampaging Aetherhood @Ron Spencer
+32 R Adaptive Omnitool @Adrián Rodríguez Pérez
+33 R Aetherflux Conduit @Michael Phillippi
+34 R Aetheric Amplifier @Victor Sales
+35 R Stridehangar Automaton @Aaron J. Riley
+36 R Accursed Duneyard @Maxime Minard
+37 U Swords to Plowshares @Piotr Dura
+38 R Commence the Endgame @Helge C. Balzer
+39 U Reality Shift @Villarrte
+40 U Corpse Augur @Ryan Pancoast
+41 R Cryptbreaker @Slawomir Maniak
+42 M Grave Titan @Loïc Canavaggia
+43 R Gravecrawler @Josh Hass
+44 R Midnight Reaper @Josh Hass
+45 R Murderous Rider @Raluca Marinescu
+46 R Zombie Master @Yohann Schepacz
+47 R Chain Reaction @Maxime Minard
+48 R Chaos Warp @Mathias Kollros
+49 R Druid of Purification @Volkan Baǵa
+50 U Corpse Knight @Filip Burburan
+51 C Arcane Signet @Michael Phillippi
+52 C Arcane Signet @Ernanda Souza
+53 R Chromatic Lantern @Julie Dillon
+54 R Duplicant @Hardy Fowler
+55 U Lightning Greaves @Brigitte Roka & Clifton Stommel
+56 U Sol Ring @Rémi Jacquot
+57 U Sol Ring @Piotr Dura
+58 R Academy Ruins @Josu Solano
+59 C Command Tower @Leon Tukker
+60 C Command Tower @Alayna Danner
+61 C Path of Ancestry @Wisnu Tan
+62 M Angel of Sanctions @Min Yum
+63 C Binding Mummy @Shreya Shetty
+64 U Cast Out @Magali Villeneuve
+65 R Dusk // Dawn @Kasia 'Kafis' Zielińska
+66 M God-Eternal Oketra @Grzegorz Rutkowski
+67 R Timeless Dragon @Anastasia Ovchinnikova
+68 R Aethersquall Ancient @Sam Burley
+69 R Aethertide Whale @Steven Belledin
+70 C Arcane Denial @Xi Zhang
+71 U Bespoke Battlewagon @Zoltan Boros
+72 R Champion of Wits @Even Amundsen
+73 R Confiscation Coup @Joseph Meehan
+74 R Disallow @Min Yum
+75 U Era of Innovation @Jason Rainville
+76 U Eternal Skylord @Johan Grenier
+77 R Forgotten Creation @Izzy
+78 U Glimmer of Genius @Tommy Arnold
+79 R Midnight Clock @Alexander Forssberg
+80 R One with the Machine @Chase Stone
+81 R Pull from Tomorrow @Sara Winters
+82 R Sai, Master Thopterist @Adam Paquette
+83 R Thopter Spy Network @Jung Park
+84 R Vizier of Many Faces @Ryan Yee
+85 U Whirler Rogue @Winona Nelson
+86 R Archfiend of Ifnir @Seb McKinnon
+87 R Cemetery Reaper @Dave Allsop
+88 R Crowded Crypt @Jarel Threat
+89 R Damn @Lucas Graciano
+90 R Dread Summons @Izzy
+91 R Dreadhorde Invasion @Stanton Feng
+92 U Fleshbag Marauder @Mark Zug
+93 C Gempalm Polluter @Dany Orizio
+94 M Liliana, Death's Majesty @Chris Rallis
+95 U Lord of the Accursed @Grzegorz Rutkowski
+96 R Never // Return @Daarken
+97 R Plague Belcher @Izzy
+98 M Rot Hulk @Grzegorz Rutkowski
+99 C Twisted Abomination @Daren Bader
+100 U Undead Augur @Sara Winters
+101 R Blasphemous Act @Daarken
+102 M Combustible Gearhulk @Daarken
+103 M Lightning Runner @Raymond Swanland
+104 U Loyal Apprentice @Joe Slucher
+105 R Pia and Kiran Nalaar @Eric Deschamps
+106 C Reckless Fireweaver @Deruchenko Alexander
+107 M Aetherwind Basker @Svetlin Velinov
+108 R Architect of the Untamed @Sara Winters
+109 C Attune with Aether @Wesley Burt
+110 M Bootleggers' Stash @Anastasia Ovchinnikova
+111 M Elder Gargaroth @Nicholas Gregory
+112 U Explosive Vegetation @John Avon
+113 U Peema Aether-Seer @Howard Lyon
+114 U Servant of the Conduit @Magali Villeneuve
+115 U Despark @Slawomir Maniak
+116 U Gleaming Overseer @Volkan Baǵa
+117 U Lazotep Chancellor @Josu Hernaiz
+118 U Rogue Refiner @Victor Adame Minguez
+119 U Saheeli, Sublime Artificer @Wesley Burt
+120 M The Scarab God @Lius Lasahido
+121 U Wayward Servant @Anthony Palumbo
+122 U Whirler Virtuoso @Lake Hurwitz
+123 M Aetherworks Marvel @James Paick
+124 U Bontu's Monument @Jonas De Ro
+125 C Commander's Sphere @Ryan Alexander Lee
+126 R Conjurer's Closet @Jason Felix
+127 R Cultivator's Caravan @Mark Zug
+128 U Decoction Module @Aaron Miller
+129 U Dimir Signet @Greg Hildebrandt
+130 U Gate to the Afterlife @Christine Choi
+131 R God-Pharaoh's Gift @Titus Lunter
+132 R Maskwood Nexus @Jason A. Engle
+133 C Ornithopter of Paradise @Raoul Vitale
+134 U Orzhov Signet @Greg Hildebrandt
+135 R Panharmonicon @Volkan Baǵa
+136 R Retrofitter Foundry @Dmitry Burmak
+137 U Solar Transformer @Mike Bierek
+138 R Solemn Simulacrum @Dan Murayama Scott
+139 U Soul-Guide Lantern @Cliff Childs
+140 U Talisman of Curiosity @Lindsey Look
+141 U Talisman of Dominance @Mike Dringenberg
+142 U Talisman of Hierarchy @Lindsey Look
+143 R Triplicate Titan @Andrew Mar
+144 R Adarkar Wastes @Gary Leach
+145 U Aether Hub @Sam Burley
+146 U Arcane Sanctum @Anthony Francisco
+147 C Ash Barrens @Jonas De Ro
+148 R Caves of Koilos @Jim Nelson
+149 C Desert of the Glorified @Jonas De Ro
+150 C Desert of the Mindful @Christine Choi
+151 C Desert of the True @Jung Park
+152 R Drowned Catacomb @Dave Kendall
+153 C Evolving Wilds @Christine Choi
+154 C Evolving Wilds @Andreas Rocha
+155 R Exotic Orchard @Steven Belledin
+156 R Fetid Pools @Jonas De Ro
+157 U Frontier Bivouac @Titus Lunter
+158 R Frostboil Snarl @Sam Burley
+159 R Glacial Fortress @James Paick
+160 R Hinterland Harbor @Daniel Ljunggren
+161 R Irrigated Farmland @Jonas De Ro
+162 R Isolated Chapel @Cliff Childs
+163 R Karplusan Forest @Sam Burley
+164 U Orzhov Basilica @John Avon
+165 R Overflowing Basin @Sarah Finnigan
+166 C Path of Ancestry @Alayna Danner
+167 R Prairie Stream @Adam Paquette
+168 R Rootbound Crag @Grzegorz Rutkowski
+169 R Sheltered Thicket @Sung Choi
+170 R Shivan Reef @Andrew Mar
+171 C Slagwoods Bridge @Lucas Graciano
+172 R Spire of Industry @John Avon
+173 R Sulfur Falls @Cliff Childs
+174 R Sunken Hollow @Adam Paquette
+175 C Tanglepool Bridge @Randy Gallegos
+176 R Temple of Deceit @Raymond Swanland
+177 R Temple of Epiphany @Yeong-Hao Han
+178 R Temple of Silence @Adam Paquette
+179 C Terramorphic Expanse @Andreas Rocha
+180 R Treasure Vault @Johannes Voss
+181 R Underground River @Andrew Goldhawk
+182 R Unholy Grotto @John Avon
+183 R Vineglimmer Snarl @Sam Burley
+184 R Yavimaya Coast @Jesper Ejsing
+
+[tokens]
+b_0_0_zombie_army
+b_2_2_zombie_decayed
+b_4_4_zombie_warrior_vigilance
+c_3_3_a_golem_flying
+c_3_3_a_golem_trample
+c_3_3_a_golem_vigilance
+c_4_4_a_construct
+c_6_6_a_beast
+g_3_3_beast
+nalaar_aetherjet
+u_2_2_shapeshifter_changeling
+w_1_1_zombie
+
+[other]
+embalm_angel_of_sanctions
+embalm_vizier_of_many_faces
+eternalize_champion_of_wits
+eternalize_timeless_dragon

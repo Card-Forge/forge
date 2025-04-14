@@ -153,6 +153,8 @@ public class DeckRecognizer {
                 matchedSection = DeckSection.Planes;
             else if (sectionName.equals("attractions"))
                 matchedSection = DeckSection.Attractions;
+            else if (sectionName.equals("contraptions"))
+                matchedSection = DeckSection.Contraptions;
 
             if (matchedSection == null)  // no match found
                 return null;
@@ -470,7 +472,8 @@ public class DeckRecognizer {
             "side", "sideboard", "sb",
             "main", "card", "mainboard",
             "avatar", "commander", "schemes",
-            "conspiracy", "planes", "deck", "dungeon"};
+            "conspiracy", "planes", "deck", "dungeon",
+            "attractions", "contraptions"};
 
     private static CharSequence[] allCardTypes(){
         List<String> cardTypesList = new ArrayList<>();
@@ -669,7 +672,8 @@ public class DeckRecognizer {
                     return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine,
                                                 currentDeckSection, true);
                 // UNKNOWN card as in the Counterspell|FEM case
-                return Token.UnknownCard(cardName, setCode, cardCount);
+                unknownCardToken = Token.UnknownCard(cardName, setCode, cardCount);
+                continue;
             }
             // ok so we can simply ignore everything but card name - as set code does not exist
             // At this stage, we know the card name exists in the DB so a Card MUST be found

@@ -1,0 +1,10 @@
+Name:Slimy Piper
+ManaCost:1 G
+Types:Creature Fungus Bard
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn. If you control four or more creatures, it gets +2/+2 and gains indestructible until end of turn instead. (Damage and effects that say "destroy" don't destroy it.)
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$GE4 | TrueSubAbility$ DBPump1 | FalseSubAbility$ DBPump2
+SVar:DBPump1:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Indestructible
+SVar:DBPump2:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Whenever Slimy Piper attacks, it gets +1/+1 until end of turn. If you control four or more creatures, it gets +2/+2 and gains indestructible until end of turn instead. (Damage and effects that say "destroy" don't destroy it.)

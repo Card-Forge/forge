@@ -5,9 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import java.util.function.Predicate;
 
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -21,10 +19,12 @@ import forge.gamemodes.quest.data.StarRating;
 import forge.gui.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.BinaryUtil;
+import forge.util.IterableUtil;
 import forge.util.PredicateString.StringOp;
 
 /** 
@@ -42,7 +42,7 @@ public class SFilterUtil {
         text = text.trim();
         
         if (text.isEmpty()) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
 
         if (BooleanExpression.isExpression(text)) {
@@ -51,7 +51,7 @@ public class SFilterUtil {
             try {
                 Predicate<CardRules> filter = expression.evaluate();
                 if (filter != null) {
-                    return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard::getRules);
+                    return PaperCardPredicates.fromRules(invert ? filter.negate() : filter);
                 }
             }
             catch (Exception ignored) {
@@ -70,11 +70,12 @@ public class SFilterUtil {
             if (inText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS_IC, s));      }
             if (inCost) { subands.add(CardRulesPredicates.cost(StringOp.CONTAINS_IC, s));       }
 
-            terms.add(Predicates.or(subands));
+            terms.add(IterableUtil.or(subands));
         }
-        Predicate<CardRules> textFilter = invert ? Predicates.not(Predicates.or(terms)) : Predicates.and(terms);
+        Predicate<CardRules> textFilter;
+        textFilter = invert ? IterableUtil.or(terms).negate() : IterableUtil.and(terms);
 
-        return Predicates.compose(textFilter, PaperCard::getRules);
+        return PaperCardPredicates.fromRules(textFilter);
     }
 
     private static List<String> getSplitText(String text) {
@@ -118,7 +119,7 @@ public class SFilterUtil {
 
     public static <T extends InventoryItem> Predicate<T> buildItemTextFilter(String text) {
         if (text.trim().isEmpty()) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
 
         return new ItemTextPredicate<>(text);
@@ -132,7 +133,7 @@ public class SFilterUtil {
         }
 
         @Override
-        public boolean apply(T input) {
+        public boolean test(T input) {
             String name = input.getName().toLowerCase();
             for (String s : splitText) {
                 if (name.contains(s)) {
@@ -380,10 +381,10 @@ public class SFilterUtil {
         for (GameFormat f : formats) {
             predicates.add(allowReprints ? f.getFilterRules() : f.getFilterPrinted());
         }
-        return Predicates.or(predicates);
+        return IterableUtil.or(predicates);
     }
 
     public static <T> Predicate<T> optimizedAnd(Predicate<T> p1, Predicate<T> p2) {
-        return p1 == null ? p2 : (p2 == null ? p1 : Predicates.and(p1, p2));
+        return p1 == null ? p2 : (p2 == null ? p1 : p1.and(p2));
     }
 }

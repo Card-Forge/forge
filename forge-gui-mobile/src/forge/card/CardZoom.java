@@ -237,7 +237,7 @@ public class CardZoom extends FOverlay {
         }
         if (flipIconBounds != null && flipIconBounds.contains(x, y)) {
             if (currentCard.isFaceDown() && currentCard.getBackup() != null) {
-                if (currentCard.getBackup().hasBackSide() || currentCard.getBackup().isFlipCard() || currentCard.getBackup().isAdventureCard()) {
+                if (currentCard.getBackup().hasBackSide() || currentCard.getBackup().isFlipCard() || currentCard.getBackup().hasSecondaryState()) {
                     show(currentCard.getBackup());
                     return true;
                 }
@@ -377,9 +377,11 @@ public class CardZoom extends FOverlay {
         float x = (w - cardWidth) / 2;
         y = (h - cardHeight) / 2;
         if (zoomMode) {
-            CardImageRenderer.drawZoom(g, currentCard, gameView, showBackSide? showBackSide : showAltState, x, y, cardWidth, cardHeight, getWidth(), getHeight(), true);
+            if (currentCard != null)
+                CardImageRenderer.drawZoom(g, currentCard, gameView, showBackSide? showBackSide : showAltState, x, y, cardWidth, cardHeight, getWidth(), getHeight(), true);
         } else {
-            CardImageRenderer.drawDetails(g, currentCard, gameView, showBackSide ? showBackSide : showAltState, x, y, cardWidth, cardHeight);
+            if (currentCard != null)
+                CardImageRenderer.drawDetails(g, currentCard, gameView, showBackSide ? showBackSide : showAltState, x, y, cardWidth, cardHeight);
         }
 
         if (!showMerged) {

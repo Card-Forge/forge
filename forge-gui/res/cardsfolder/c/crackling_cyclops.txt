@@ -1,0 +1,8 @@
+Name:Crackling Cyclops
+ManaCost:2 R
+Types:Creature Cyclops Wizard
+PT:0/4
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, this creature gets +3/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +3
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Whenever you cast a noncreature spell, this creature gets +3/+0 until end of turn.

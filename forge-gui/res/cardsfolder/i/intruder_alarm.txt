@@ -1,7 +1,7 @@
 Name:Intruder Alarm
 ManaCost:2 U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Creature:0 | Description$ Creatures don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Creatures don't untap during their controllers' untap steps.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigUntapAll | TriggerDescription$ Whenever a creature enters, untap all creatures.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature | SpellDescription$ untap all creatures.
 AI:RemoveDeck:Random

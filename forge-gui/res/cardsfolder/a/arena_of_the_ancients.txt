@@ -1,7 +1,7 @@
 Name:Arena of the Ancients
 ManaCost:3
 Types:Artifact
-S:Mode$ Continuous | Affected$ Creature.Legendary | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Legendary creatures don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.Legendary | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Legendary creatures don't untap during their controllers' untap steps.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters, tap all legendary creatures.
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.Legendary
 SVar:NonStackingEffect:True

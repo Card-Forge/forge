@@ -1,0 +1,11 @@
+Name:Elspeth, Storm Slayer
+ManaCost:3 W W
+Types:Legendary Planeswalker Elspeth
+Loyalty:5
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created under your control, twice that many of those tokens are created instead.
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ w_1_1_soldier | SpellDescription$ Create a 1/1 white Soldier creature token.
+A:AB$ PutCounterAll | Cost$ AddCounter<0/LOYALTY> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | Planeswalker$ True | SubAbility$ DBPumpAll | SpellDescription$ Put a +1/+1 counter on each creature you control. Those creatures gain flying until your next turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying | Duration$ UntilYourNextTurn
+A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature.OppCtrl+cmcGE3 | TgtPrompt$ Select target creature an opponent controls with mana value 3 or greater | SpellDescription$ Destroy target creature an opponent controls with mana value 3 or greater
+Oracle:If one or more tokens would be created under your control, twice that many of those tokens are created instead.\n[+1]: Create a 1/1 white Soldier creature token.\n[0]: Put a +1/+1 counter on each creature you control. Those creatures gain flying until your next turn.\n[-3]: Destroy target creature an opponent controls with mana value 3 or greater.

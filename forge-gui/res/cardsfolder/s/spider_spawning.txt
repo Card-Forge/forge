@@ -3,5 +3,5 @@ ManaCost:4 G
 Types:Sorcery
 K:Flashback:6 B
 A:SP$ Token | TokenAmount$ X | TokenScript$ g_1_2_spider_reach | TokenOwner$ You | SpellDescription$ Create a 1/2 green Spider creature token with reach for each creature card in your graveyard.
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 Oracle:Create a 1/2 green Spider creature token with reach for each creature card in your graveyard.\nFlashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

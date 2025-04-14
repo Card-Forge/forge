@@ -1,7 +1,7 @@
 Name:Embargo
 ManaCost:3 U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Permanent.nonLand | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Nonland permanents don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Permanent.nonLand | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Nonland permanents don't untap during their controllers' untap steps.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
 AI:RemoveDeck:Random

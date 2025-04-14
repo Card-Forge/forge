@@ -2,7 +2,7 @@ Name:Hammer of Nazahn
 ManaCost:4
 Types:Legendary Artifact Equipment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Card.Equipment+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME or another Equipment you control enters, you may attach that Equipment to target creature you control.
-SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Target creature you control | Object$ TriggeredCard
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Target creature you control | Object$ TriggeredCardLKICopy
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Indestructible | Description$ Equipped creature gets +2/+0 and has indestructible.
 K:Equip:4
 DeckHints:Name$Nazahn, Revered Bladesmith & Type$Equipment

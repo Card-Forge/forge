@@ -1,0 +1,8 @@
+Name:Arbor Adherent
+ManaCost:3 G
+Types:Creature Dog Druid
+PT:2/4
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the greatest toughness among other creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl+Other$GreatestToughness
+Oracle:{T}: Add one mana of any color.\n{T}: Add X mana of any one color, where X is the greatest toughness among other creatures you control.

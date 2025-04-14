@@ -1,0 +1,12 @@
+Name:Mothlight Processionist
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Enchantment+YouCtrl | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Enchantment spells you cast have convoke.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, conjure a card named Mothlight Processionist into your hand. Discard that card at the beginning of the next end step.
+T:Mode$ FullyUnlock | ValidCard$ Card.Room | ValidPlayer$ You | Secondary$ True | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, conjure a card named Mothlight Processionist into your hand. Discard that card at the beginning of the next end step.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mothlight Processionist | Zone$ Hand | RememberMade$ True | SubAbility$ DBDelayTrig
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDiscard | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Discard that card at the beginning of the next end step.
+SVar:TrigDiscard:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Enchantment spells you cast have convoke.\nEerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, conjure a card named Mothlight Processionist into your hand. Discard that card at the beginning of the next end step.

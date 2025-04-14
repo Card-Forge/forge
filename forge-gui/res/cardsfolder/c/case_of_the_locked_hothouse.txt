@@ -2,7 +2,7 @@ Name:Case of the Locked Hothouse
 ManaCost:3 G
 Types:Enchantment Case
 S:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE7 | IsPresent$ Card.Self+IsUnsolved | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — You control seven or more lands. (If unsolved, solve at the beginning of your end step.)
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE7 | IsPresent$ Card.Self+!IsSolved | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — You control seven or more lands. (If unsolved, solve at the beginning of your end step.)
 SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
 SVar:X:Count$Valid Land.YouCtrl
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | IsPresent$ Card.Self+IsSolved | Secondary$ True | Description$ You may look at the top card of your library any time.

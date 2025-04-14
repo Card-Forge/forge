@@ -1,0 +1,7 @@
+Name:Wail of War
+ManaCost:2 B
+Types:Instant
+A:SP$ Charm | Choices$ DBPumpAll,DBReturn | CharmNum$ 1
+SVar:DBPumpAll:DB$ PumpAll | ValidTgts$ Opponent | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Creatures target opponent controls get -1/-1 until end of turn.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creature cards in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
+Oracle:Choose one —\n• Creatures target opponent controls get -1/-1 until end of turn.\n• Return up to two target creature cards from your graveyard to your hand.

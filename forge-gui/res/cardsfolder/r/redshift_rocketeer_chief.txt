@@ -1,0 +1,10 @@
+Name:Redshift, Rocketeer Chief
+ManaCost:R G
+Types:Legendary Creature Goblin Pilot
+PT:2/3
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | RestrictValid$ Activated | SpellDescription$ Add X mana of any one color, where X is NICKNAME's power. Spend this mana only to activate abilities.
+A:AB$ ChangeZone | Cost$ 10 R G | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent | ChangeNum$ Y | Exhaust$ True | SpellDescription$ Put any number of permanent cards from your hand onto the battlefield. (Activate each exhaust ability only once.)
+SVar:X:Count$CardPower
+SVar:Y:Count$ValidHand Permanent.YouOwn
+Oracle:Vigilance\n{T}: Add X mana of any one color, where X is Redshift's power. Spend this mana only to activate abilities.\nExhaust — {10}{R}{G}: Put any number of permanent cards from your hand onto the battlefield. (Activate each exhaust ability only once.)

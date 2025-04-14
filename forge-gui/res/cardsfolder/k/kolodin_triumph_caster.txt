@@ -1,0 +1,12 @@
+Name:Kolodin, Triumph Caster
+ManaCost:R W
+Types:Legendary Creature Human Pilot
+PT:2/3
+S:Mode$ Continuous | Affected$ Mount.YouCtrl,Vehicle.YouCtrl | AddKeyword$ Haste | Description$ Mounts and Vehicles you control have haste.
+T:Mode$ ChangesZone | ValidCard$ Mount.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigSaddle | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Mount you control enters, it becomes saddled until end of turn.
+SVar:TrigSaddle:DB$ AlterAttribute | Defined$ TriggeredCard | Attributes$ Saddled
+T:Mode$ ChangesZone | ValidCard$ Vehicle.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Vehicle you control enters, it becomes an artifact creature until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Artifact,Creature
+SVar:PlayMain1:TRUE
+DeckHints:Type$Mount|Vehicle
+Oracle:Mounts and Vehicles you control have haste.\nWhenever a Mount you control enters, it becomes saddled until end of turn.\nWhenever a Vehicle you control enters, it becomes an artifact creature until end of turn.

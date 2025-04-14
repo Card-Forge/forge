@@ -4,7 +4,7 @@ Types:Instant
 K:Gift
 SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
 A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature spell | ValidTgts$ Creature | TargetMin$ X | TargetMax$ X | SubAbility$ DBCounter | SpellDescription$ Counter target creature spell. If the gift was promised, instead counter target spell.
-SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetMin$ Y | TargetMax$ Y
-SVar:X:Count$Compare Y EQ1.0.1
-SVar:Y:Count$ValidStack Card.Self+PromisedGift
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetMin$ Y | TargetMax$ Y | AITgts$ !Creature
+SVar:X:Count$PromisedGift.0.1
+SVar:Y:Count$PromisedGift.1.0
 Oracle:Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)\nCounter target creature spell. If the gift was promised, instead counter target spell.

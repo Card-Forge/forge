@@ -2,6 +2,7 @@ Name:Molting Harpy
 ManaCost:B
 Types:Creature Harpy Mercenary
 PT:2/1
-K:UpkeepCost:2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {2}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ 2
 K:Flying
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Molting Harpy unless you pay {2}.

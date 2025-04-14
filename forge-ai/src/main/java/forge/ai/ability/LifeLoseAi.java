@@ -1,9 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-
-import com.google.common.base.Predicates;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -17,6 +13,9 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
+
+import java.util.List;
 
 public class LifeLoseAi extends SpellAbilityAi {
 
@@ -129,7 +128,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
          // TODO: check against the amount we could obtain when multiple activations are possible
         PlayerCollection filteredPlayer = tgtPlayers
-                .filter(Predicates.and(PlayerPredicates.isOpponentOf(ai), PlayerPredicates.lifeLessOrEqualTo(amount)));
+                .filter(PlayerPredicates.isOpponentOf(ai).and(PlayerPredicates.lifeLessOrEqualTo(amount)));
         // killing opponents asap
         if (!filteredPlayer.isEmpty()) {
             return true;
@@ -193,6 +192,34 @@ public class LifeLoseAi extends SpellAbilityAi {
 
         // For cards like Foul Imp, ETB you lose life
         return mandatory || !tgtPlayers.contains(ai) || amount <= 0 || amount + 3 <= ai.getLife();
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid,
+            FCollectionView<Player> payers) {
+        if (!payer.canLoseLife() || payer.cantLoseForZeroOrLessLife()) {
+            return false;
+        }
+
+        final Card source = sa.getHostCard();
+
+        // Withercrown should be sacrificed early?
+        if (source.canBeSacrificedBy(sa, true) && cost.hasOnlySpecificCostType(CostSacrifice.class)) {
+            CostSacrifice costSac = cost.getCostPartByType(CostSacrifice.class);
+            if (costSac.payCostFromSource()) {
+                return true;
+            }
+        }
+        int n = AbilityUtils.calculateAmount(source, sa.getParam("LifeAmount"), sa);
+        // what should be the limit where AI stops letting it lose life?
+        // TODO predict lose life modifier
+        // also check if life loss would trigger life gain for Activating Player
+        // and that resulting in another life loss
+        if (payer.getLife() < 2 * n) {
+            return true;
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 
     protected boolean doTgt(Player ai, SpellAbility sa, boolean mandatory) {

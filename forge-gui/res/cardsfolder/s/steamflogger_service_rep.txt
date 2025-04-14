@@ -1,0 +1,7 @@
+Name:Steamflogger Service Rep
+ManaCost:2 G
+Types:Creature Goblin Rigger
+PT:1/1
+T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Any | Destination$ Battlefield | ValidCard$ Goblin.Other+YouCtrl | Execute$ TrigAssemble | TriggerDescription$ Whenever another Goblin you control enters, you may pay {1}. If you do, CARDNAME assembles a Contraption.
+SVar:TrigAssemble:AB$ AssembleContraption | Cost$ 1
+Oracle:Whenever another Goblin you control enters, you may pay {1}. If you do, Steamflogger Service Rep assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)

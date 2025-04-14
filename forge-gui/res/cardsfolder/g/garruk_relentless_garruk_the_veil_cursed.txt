@@ -20,6 +20,6 @@ Types:Legendary Planeswalker Garruk
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_1_1_wolf_deathtouch | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 1/1 black Wolf creature token with deathtouch.
 A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | UnlessCost$ Sac<1/Creature> | UnlessSwitched$ True | UnlessPayer$ You | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | Planeswalker$ True | SpellDescription$ Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.
-A:AB$ PumpAll | Cost$ SubCounter<3/LOYALTY> | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ X | NumDef$ X | Planeswalker$ True | Ultimate$ True | SpellDescription$ Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
-SVar:X:Count$TypeInYourYard.Creature
+A:AB$ PumpAll | Cost$ SubCounter<3/LOYALTY> | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ +X | NumDef$ +X | Planeswalker$ True | Ultimate$ True | SpellDescription$ Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 Oracle:[+1]: Create a 1/1 black Wolf creature token with deathtouch.\n[-1]: Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.\n[-3]: Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.

@@ -2,8 +2,8 @@ Name:Galvanic Juggernaut
 ManaCost:4
 Types:Artifact Creature Juggernaut
 PT:5/5
-S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another creature dies, untap CARDNAME.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks each combat if able.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another creature dies, untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
-Oracle:Galvanic Juggernaut attacks each combat if able.\nGalvanic Juggernaut doesn't untap during your untap step.\nWhenever another creature dies, untap Galvanic Juggernaut.
+Oracle:This creature attacks each combat if able.\nThis creature doesn't untap during your untap step.\nWhenever another creature dies, untap this creature.

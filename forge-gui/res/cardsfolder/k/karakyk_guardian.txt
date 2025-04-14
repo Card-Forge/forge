@@ -1,0 +1,9 @@
+Name:Karakyk Guardian
+ManaCost:3 G U R
+Types:Creature Dragon
+PT:6/5
+K:Flying
+K:Vigilance
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self+!dealtDamagetoAny | AddKeyword$ Hexproof | Description$ This creature has hexproof if it hasn't dealt damage yet.
+Oracle:Flying, vigilance, trample\nThis creature has hexproof if it hasn't dealt damage yet. (It can't be the target of spells or abilities your opponents control.)

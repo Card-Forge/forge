@@ -338,10 +338,16 @@ public class CardStorageReader {
             final int from = iPart * filesPerPart;
             final int till = iPart == maxParts - 1 ? totalFiles : from + filesPerPart;
             tasks.add(() -> {
-                final List<CardRules> res = loadCardsInRange(allFiles, from, till);
-                cdl.countDown();
-                progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
-                return res;
+                try {
+                    final List<CardRules> res = loadCardsInRange(allFiles, from, till);
+                    return res;
+                } catch (Exception ex) {
+                    throw ex;
+                } finally {
+                    // make sure to continue loading when using multiple threads
+                    cdl.countDown();
+                    progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
+                }
             });
         }
         return tasks;

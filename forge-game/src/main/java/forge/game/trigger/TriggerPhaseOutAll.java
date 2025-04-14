@@ -1,10 +1,10 @@
 package forge.game.trigger;
 
-import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.util.IterableUtil;
 import forge.util.Localizer;
 
 import java.util.Map;
@@ -28,7 +28,7 @@ public class TriggerPhaseOutAll extends Trigger {
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
         Iterable<Card> cards = (Iterable<Card>) runParams.get(AbilityKey.Cards);
         if (hasParam("ValidCards")) {
-            cards = Iterables.filter(cards, CardPredicates.restriction(getParam("ValidCards").split(","),
+            cards = IterableUtil.filter(cards, CardPredicates.restriction(getParam("ValidCards").split(","),
                     getHostCard().getController(), getHostCard(), this));
         }
 

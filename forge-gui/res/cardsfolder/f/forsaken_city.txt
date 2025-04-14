@@ -1,9 +1,9 @@
 Name:Forsaken City
 ManaCost:no cost
 Types:Land
-K:CARDNAME doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This land doesn't untap during your untap step.
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may exile a card from your hand. If you do, untap CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may exile a card from your hand. If you do, untap this land.
 SVar:TrigUntap:AB$ Untap | Cost$ ExileFromHand<1/Card> | Defined$ Self
 AI:RemoveDeck:All
-Oracle:Forsaken City doesn't untap during your untap step.\nAt the beginning of your upkeep, you may exile a card from your hand. If you do, untap Forsaken City.\n{T}: Add one mana of any color.
+Oracle:This land doesn't untap during your untap step.\nAt the beginning of your upkeep, you may exile a card from your hand. If you do, untap this land.\n{T}: Add one mana of any color.

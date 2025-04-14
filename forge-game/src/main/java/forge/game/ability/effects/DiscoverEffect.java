@@ -92,7 +92,7 @@ public class DiscoverEffect extends SpellAbilityEffect {
                     List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(found, p);
 
                     // filter out land abilities due to MDFC or similar
-                    sas.removeIf(sp -> sp.isLandAbility());
+                    sas.removeIf(SpellAbility::isLandAbility);
                     // the spell must also have a mana value equal to or less than the discover number
                     sas.removeIf(sp -> sp.getPayCosts().getTotalMana().getCMC() > num);
 

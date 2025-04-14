@@ -1,0 +1,8 @@
+Name:Needletooth Pack
+ManaCost:3 G G
+Types:Creature Dinosaur
+PT:4/5
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ Morbid | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Morbid — At the beginning of your end step, if a creature died this turn, put two +1/+1 counters on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2
+SVar:Morbid:Count$Morbid.1.0
+Oracle:Morbid — At the beginning of your end step, if a creature died this turn, put two +1/+1 counters on target creature you control.

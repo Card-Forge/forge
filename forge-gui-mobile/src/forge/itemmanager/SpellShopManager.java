@@ -1,10 +1,10 @@
 package forge.itemmanager;
 
 import java.util.Map.Entry;
+import java.util.function.Function;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Function;
 
 import forge.Forge;
 import forge.Graphics;

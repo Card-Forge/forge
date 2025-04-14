@@ -21,6 +21,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
+import com.thoughtworks.xstream.converters.enums.EnumMapConverter;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.security.NoTypePermission;
@@ -105,6 +106,7 @@ public class QuestDataIO {
         xStream.registerConverter(new DraftTournamentToXml());
         xStream.registerConverter(new GameFormatQuestToXml());
         xStream.registerConverter(new QuestModeToXml());
+        xStream.registerConverter(new EnumMapConverter(xStream.getMapper()));
         xStream.autodetectAnnotations(true);
         xStream.alias("CardPool", ItemPool.class);
         xStream.alias("DeckSection", CardPool.class);

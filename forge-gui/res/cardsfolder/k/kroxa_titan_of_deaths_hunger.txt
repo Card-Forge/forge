@@ -12,5 +12,4 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | ConditionCheckSVar$ X | Condition
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand+RememberedPlayerOwn
 K:Escape:B B R R ExileFromGrave<5/Card.Other/other>
-SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
 Oracle:When Kroxa enters, sacrifice it unless it escaped.\nWhenever Kroxa enters or attacks, each opponent discards a card, then each opponent who didn't discard a nonland card this way loses 3 life.\nEscape—{B}{B}{R}{R}, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

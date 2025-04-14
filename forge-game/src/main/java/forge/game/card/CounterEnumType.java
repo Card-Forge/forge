@@ -18,9 +18,9 @@
 
 package forge.game.card;
 
-import java.util.Locale;
-
 import com.google.common.collect.ImmutableList;
+
+import java.util.Locale;
 
 /**
  * The class Counters.
@@ -48,6 +48,8 @@ public enum CounterEnumType {
     ARROWHEAD("ARWHD", 230, 191, 167),
 
     AWAKENING("AWAKE", 0, 231, 79),
+
+    BAIT("BAIT", 120, 100, 60),
 
     BLAZE("BLAZE", 255, 124, 82),
 
@@ -155,6 +157,10 @@ public enum CounterEnumType {
 
     FEATHER("FTHR", 195, 202, 165),
 
+    FEEDING("FEED", 245, 21, 5),
+
+    FELLOWSHIP("FLWS", 255, 255, 255),
+
     FETCH("FETCH", 180, 235, 52),
 
     FILIBUSTER("FLBTR", 255, 179, 119),
@@ -216,6 +222,8 @@ public enum CounterEnumType {
     IMPOSTOR("IMPO", 173, 194, 255),
 
     INCARNATION("INCRN", 247, 206, 64),
+
+    INCUBATION("INCBT", 40, 210, 25),
 
     INGREDIENT("INGRD", 180, 50, 145),
     
@@ -347,6 +355,8 @@ public enum CounterEnumType {
 
     QUEST("QUEST", 251, 189, 0),
 
+    RALLY("RALLY", 25, 230, 225),
+
     RELEASE("RELEASE", 200, 210, 50),
 
     REPRIEVE("REPR", 240, 120, 50),
@@ -450,6 +460,8 @@ public enum CounterEnumType {
     WIND("WIND", 0, 236, 255),
 
     WISH("WISH", 255, 85, 206),
+    
+    WRECK("WRECK", 208, 55, 255),
 
     // Player Counters
 
@@ -469,6 +481,7 @@ public enum CounterEnumType {
     FIRSTSTRIKE("First Strike"),
     DOUBLESTRIKE("Double Strike"),
     DEATHTOUCH("Deathtouch"),
+    DECAYED("Decayed"),
     HASTE("Haste"),
     HEXPROOF("Hexproof"),
     INDESTRUCTIBLE("Indestructible"),
@@ -476,8 +489,8 @@ public enum CounterEnumType {
     MENACE("Menace"),
     REACH("Reach"),
     TRAMPLE("Trample"),
-    VIGILANCE("Vigilance")
-    SHADOW("Shadow")
+    VIGILANCE("Vigilance"),
+    SHADOW("Shadow"),
     EXALTED("Exalted")
 //*/
     ;

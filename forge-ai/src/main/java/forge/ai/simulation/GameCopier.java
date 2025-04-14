@@ -1,16 +1,6 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.common.collect.Table;
-
+import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
@@ -18,7 +8,10 @@ import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.game.*;
 import forge.game.ability.effects.DetachedCardEffect;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCloneStates;
+import forge.game.card.CardCopyService;
+import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.mana.Mana;
@@ -33,6 +26,10 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class GameCopier {
     private static final ZoneType[] ZONES = new ZoneType[] {
@@ -84,6 +81,7 @@ public class GameCopier {
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
         Game newGame = new Game(newPlayers, currentRules, newMatch);
+        newGame.dangerouslySetTimestamp(origGame.getTimestamp());
 
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
             Player origPlayer = origGame.getPlayers().get(i);
@@ -95,9 +93,9 @@ public class GameCopier {
             newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommittedCrimeThisTurn());
             newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
             newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
-            newPlayer.setActivateLoyaltyAbilityThisTurn(origPlayer.getActivateLoyaltyAbilityThisTurn());
             newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
             newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
+            newPlayer.setSpeed(origPlayer.getSpeed());
             newPlayer.setBlessing(origPlayer.hasBlessing());
             newPlayer.setRevolt(origPlayer.hasRevolt());
             newPlayer.setDescended(origPlayer.getDescended());
@@ -108,6 +106,7 @@ public class GameCopier {
             }
             newPlayer.setMaxHandSize(origPlayer.getMaxHandSize());
             newPlayer.setUnlimitedHandSize(origPlayer.isUnlimitedHandSize());
+            newPlayer.setCrankCounter(origPlayer.getCrankCounter());
             // TODO creatureAttackedThisTurn
             for (Mana m : origPlayer.getManaPool()) {
                 newPlayer.getManaPool().addMana(m, false);
@@ -153,7 +152,7 @@ public class GameCopier {
             for (SpellAbility sa : c.getSpellAbilities()) {
                 Player activatingPlayer = sa.getActivatingPlayer();
                 if (activatingPlayer != null && activatingPlayer.getGame() != newGame) {
-                    sa.setActivatingPlayer(gameObjectMap.map(activatingPlayer), true);
+                    sa.setActivatingPlayer(gameObjectMap.map(activatingPlayer));
                 }
             }
         }
@@ -192,7 +191,7 @@ public class GameCopier {
                 newSa = findSAInCard(origSa, newCard);
             }
             if (newSa != null) {
-                newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()), true);
+                newSa.setActivatingPlayer(map.map(origSa.getActivatingPlayer()));
                 if (origSa.usesTargeting()) {
                     for (GameObject o : origSa.getTargets()) {
                         newSa.getTargets().add(map.map(o));
@@ -216,6 +215,8 @@ public class GameCopier {
 
     private void copyGameState(Game newGame, Player aiPlayer) {
         newGame.EXPERIMENTAL_RESTORE_SNAPSHOT = origGame.EXPERIMENTAL_RESTORE_SNAPSHOT;
+        newGame.AI_TIMEOUT = origGame.AI_TIMEOUT;
+        newGame.AI_CAN_USE_TIMEOUT = origGame.AI_CAN_USE_TIMEOUT;
         newGame.setAge(origGame.getAge());
 
         // TODO countersAddedThisTurn
@@ -359,13 +360,7 @@ public class GameCopier {
             newCard.setDamage(c.getDamage());
             newCard.setDamageReceivedThisTurn(c.getDamageReceivedThisTurn());
 
-            newCard.setChangedCardColors(c.getChangedCardColorsTable());
-            newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
-
-            newCard.setChangedCardTypes(c.getChangedCardTypesTable());
-            newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
-            newCard.setChangedCardKeywords(c.getChangedCardKeywords());
-            newCard.setChangedCardNames(c.getChangedCardNames());
+            newCard.copyFrom(c);
 
             for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {
                 newCard.addHiddenExtrinsicKeywords(kw.getRowKey(), kw.getColumnKey(), kw.getValue());
@@ -437,6 +432,9 @@ public class GameCopier {
             if (c.hasNamedCard()) {
                 newCard.setNamedCards(Lists.newArrayList(c.getNamedCards()));
             }
+
+            newCard.setSprocket(c.getSprocket());
+
             newCard.setSVars(c.getSVars());
             newCard.copyChangedSVarsFrom(c);
         }

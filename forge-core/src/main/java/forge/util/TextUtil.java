@@ -1,5 +1,12 @@
 package forge.util;
 
+import com.google.common.collect.ImmutableSortedMap;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
+
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.Normalizer;
@@ -13,15 +20,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TimeZone;
-
-import forge.item.IPaperCard;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.text.StringEscapeUtils;
-
-import com.google.common.collect.ImmutableSortedMap;
-
-import forge.item.PaperCard;
 
 /** 
  * TODO: Write javadoc for this type.

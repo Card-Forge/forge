@@ -1,0 +1,8 @@
+Name:Searslicer Goblin
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerDescription$ Raid — At the beginning of your end step, if you attacked this turn, create a 1/1 red Goblin creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Raid — At the beginning of your end step, if you attacked this turn, create a 1/1 red Goblin creature token.

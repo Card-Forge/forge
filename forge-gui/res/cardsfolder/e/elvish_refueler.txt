@@ -1,0 +1,8 @@
+Name:Elvish Refueler
+ManaCost:2 G
+Types:Creature Elf Druid
+PT:2/3
+S:Mode$ CanExhaust | ValidPlayer$ You | PlayerTurn$ You | CheckSVar$ X | SVarCompare$ LT1 | Description$ During your turn, as long as you haven't activated an exhaust ability this turn, you may activate exhaust abilities as though they haven't been activated.
+SVar:X:Count$ThisTurnActivated_Activated.Exhaust+YouCtrl
+A:AB$ PutCounter | Cost$ 1 G | CounterType$ P1P1 | CounterNum$ 1 | Exhaust$ True | SpellDescription$ Put a +1/+1 counter on this creature.
+Oracle:During your turn, as long as you haven't activated an exhaust ability this turn, you may activate exhaust abilities as though they haven't been activated.\nExhaust — {1}{G}: Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)

@@ -2,8 +2,8 @@ Name:Dwarven Patrol
 ManaCost:2 R
 Types:Creature Dwarf
 PT:4/2
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ SpellCast | ValidCard$ Card.nonRed | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a nonred spell, untap CARDNAME.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ SpellCast | ValidCard$ Card.nonRed | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a nonred spell, untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random
-Oracle:Dwarven Patrol doesn't untap during your untap step.\nWhenever you cast a nonred spell, untap Dwarven Patrol.
+Oracle:This creature doesn't untap during your untap step.\nWhenever you cast a nonred spell, untap this creature.

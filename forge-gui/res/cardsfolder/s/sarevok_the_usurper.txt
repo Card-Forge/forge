@@ -4,8 +4,8 @@ Types:Legendary Creature Human Knight
 PT:3/3
 K:Specialize:3
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X
-SVar:X:Count$TypeInYourYard.Creature
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 DeckHas:Ability$Graveyard
 AlternateMode:Specialize
 Oracle:Specialize {3}\nAt the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
@@ -18,8 +18,8 @@ Types:Legendary Creature Human Knight
 PT:4/4
 K:First Strike
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gains first strike and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ First Strike
-SVar:X:Count$TypeInYourYard.Creature
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | KW$ First Strike
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 DeckHas:Ability$Graveyard & Keyword$FirstStrike
 Oracle:First strike\nAt the beginning of combat on your turn, target creature you control gains first strike and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 
@@ -30,7 +30,7 @@ ManaCost:3 U B
 Types:Legendary Creature Human Knight
 PT:4/4
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature, instant, and sorcery cards in your graveyard.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn,Creature.YouOwn
 SVar:BuffedBy:Instant,Sorcery
 DeckHas:Ability$Graveyard
@@ -49,8 +49,8 @@ SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Graveyard | Defined$ Rem
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ Remembered | Zone$ Graveyard | Amount$ 2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X
-SVar:X:Count$TypeInYourYard.Creature
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 DeckHas:Ability$Graveyard
 Oracle:When this creature specializes, seek a creature card and put it into your graveyard, then conjure two duplicates of it into your graveyard.\nAt the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 
@@ -62,8 +62,8 @@ Types:Legendary Creature Human Knight
 PT:4/4
 K:Menace
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gains menace and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ Menace
-SVar:X:Count$TypeInYourYard.Creature
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | KW$ Menace
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 DeckHas:Ability$Graveyard & Keyword$Menace
 Oracle:Menace\nAt the beginning of combat on your turn, target creature you control gains menace and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
 
@@ -75,7 +75,7 @@ Types:Legendary Creature Human Knight
 PT:4/4
 K:Trample
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gains trample and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ Trample
-SVar:X:Count$TypeInYourYard.Creature
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | KW$ Trample
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 DeckHas:Ability$Graveyard & Keyword$Trample
 Oracle:Trample\nAt the beginning of combat on your turn, target creature you control gains trample and gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.

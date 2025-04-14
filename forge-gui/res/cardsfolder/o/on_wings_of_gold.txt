@@ -1,0 +1,8 @@
+Name:On Wings of Gold
+ManaCost:3 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Zombie+YouCtrl,Creature.token+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | Description$ Creatures you control that are Zombies and/or tokens get +1/+1 and have flying.
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more cards leave your graveyard, create a 1/1 white Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_zombie
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control that are Zombies and/or tokens get +1/+1 and have flying.\nWhenever one or more cards leave your graveyard, create a 1/1 white Zombie creature token.

@@ -1,0 +1,10 @@
+Name:Silken Strength
+ManaCost:1 G
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature,Vehicle:creature or Vehicle
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When this Aura enters, untap enchanted permanent.
+SVar:TrigUntap:DB$ Untap | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Reach | Description$ Enchanted permanent gets +1/+2 and has reach.
+Oracle:Flash\nEnchant creature or Vehicle\nWhen this Aura enters, untap enchanted permanent.\nEnchanted permanent gets +1/+2 and has reach.

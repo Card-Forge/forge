@@ -1,0 +1,12 @@
+Name:Golden Sidekick
+ManaCost:W B
+Types:Enchantment Creature Bat Glimmer
+PT:1/3
+K:Flying
+K:Lifelink
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever you gain life, a random creature card in your hand perpetually gets +X/+X, where X is the amount of life you gained.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn | AtRandom$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | PumpZone$ Hand | NumAtt$ +X | NumDef$ +X | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:X:TriggerCount$LifeAmount
+Oracle:Flying, lifelink\nWhenever you gain life, a random creature card in your hand perpetually gets +X/+X, where X is the amount of life you gained.

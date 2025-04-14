@@ -1,0 +1,9 @@
+Name:Vampire Soulcaller
+ManaCost:4 B
+Types:Creature Vampire Warlock
+PT:3/2
+K:Flying
+K:CARDNAME can't block.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, return target creature card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn
+Oracle:Flying\nThis creature can't block.\nWhen this creature enters, return target creature card from your graveyard to your hand.

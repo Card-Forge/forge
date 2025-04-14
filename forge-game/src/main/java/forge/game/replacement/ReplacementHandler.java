@@ -17,20 +17,15 @@
  */
 package forge.game.replacement;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.google.common.base.MoreObjects;
 import forge.game.card.*;
+import forge.game.phase.PhaseType;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -71,11 +66,8 @@ public class ReplacementHandler {
         game = gameState;
     }
 
-    //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
-
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
         final CardCollection preList = new CardCollection();
-        boolean checkAgain = false;
         Card affectedLKI = null;
         Card affectedCard = null;
 
@@ -101,20 +93,12 @@ public class ReplacementHandler {
             Map<Optional<Player>, Map<CounterType, Integer>> etbCounters = (Map<Optional<Player>, Map<CounterType, Integer>>) runParams.get(AbilityKey.CounterMap);
             affectedLKI.putEtbCounters(etbCounters);
             preList.add(affectedLKI);
-            game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
-            checkAgain = true;
+            game.getAction().checkStaticAbilities(false, Sets.newHashSet(), preList);
 
             runParams.put(AbilityKey.Affected, affectedLKI);
         }
 
         final List<ReplacementEffect> possibleReplacers = Lists.newArrayList();
-        // Round up Non-static replacement effects ("Until EOT," or
-        // "The next time you would..." etc)
-        /*for (final ReplacementEffect replacementEffect : this.tmpEffects) {
-            if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams) && replacementEffect.getLayer() == layer) {
-                possibleReplacers.add(replacementEffect);
-            }
-        }*/
 
         // Round up Static replacement effects
         game.forEachCardInGame(new Visitor<Card>() {
@@ -153,23 +137,22 @@ public class ReplacementHandler {
 
         }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
-        if (checkAgain) {
-            if (affectedLKI != null && affectedCard != null) {
-                // need to set the Host Card there so it is not connected to LKI anymore?
-                // need to be done after canReplace check
-                for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
-                    re.setHostCard(affectedCard);
-                }
-                // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
-                affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
-                affectedCard.setStoredReplacements(affectedLKI.getStoredReplacements());
-                if (affectedCard.getCastSA() != null && affectedCard.getCastSA().getKeyword() != null) {
-                   // need to readd the CastSA Keyword into the Card
-                   affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
-                }
-                runParams.put(AbilityKey.Affected, affectedCard);
-                runParams.put(AbilityKey.NewCard, CardCopyService.getLKICopy(affectedLKI));
+        if (affectedLKI != null) {
+            // need to set the Host Card there so it is not connected to LKI anymore?
+            // need to be done after canReplace check
+            for (final ReplacementEffect re : affectedLKI.getReplacementEffects()) {
+                re.setHostCard(affectedCard);
             }
+            // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
+            affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
+            affectedCard.setStoredReplacements(affectedLKI.getStoredReplacements());
+            if (affectedCard.getCastSA() != null && affectedCard.getCastSA().getKeyword() != null) {
+                // need to readd the CastSA Keyword into the Card
+                affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
+            }
+            runParams.put(AbilityKey.Affected, affectedCard);
+            runParams.put(AbilityKey.NewCard, CardCopyService.getLKICopy(affectedLKI));
+
             game.getAction().checkStaticAbilities(false);
         }
 
@@ -334,7 +317,7 @@ public class ReplacementHandler {
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            String name = CardTranslation.getTranslatedName(MoreObjects.firstNonNull(host.getCardForUi(), host).getName());
+            String name = CardTranslation.getTranslatedName(MoreObjects.firstNonNull(host.getRenderForUI() ? host.getCardForUi() : null, host).getName());
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)
@@ -665,6 +648,7 @@ public class ReplacementHandler {
             }
 
             List<ReplacementEffect> possibleReplacers = new ArrayList<>(replaceCandidateMap.keySet());
+            // TODO should be able to choose different order for each entity
             ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(possibleReplacers);
             List<Map<AbilityKey, Object>> runParamList = replaceCandidateMap.get(chosenRE);
 
@@ -870,7 +854,7 @@ public class ReplacementHandler {
     /**
      * Helper function to check if a phase would be skipped for AI.
      */
-    public boolean wouldPhaseBeSkipped(final Player player, final String phase) {
+    public boolean wouldPhaseBeSkipped(final Player player, final PhaseType phase) {
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
         repParams.put(AbilityKey.Phase, phase);
         List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
@@ -879,6 +863,7 @@ public class ReplacementHandler {
         }
         return true;
     }
+
     /**
      * Helper function to check if an extra turn would be skipped for AI.
      */

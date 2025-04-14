@@ -4,7 +4,7 @@ Types:Legendary Creature Spirit Artificer
 PT:1/3
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Select target creature card in your graveyard | Types$ Artifact | Duration$ Perpetual | RemoveCardTypes$ True | SubAbility$ DBEffect | StackDescription$ REP Target creature card in your graveyard_{c:Targeted} | SpellDescription$ Target creature card in your graveyard perpetually becomes an artifact.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ MayPlay | StackDescription$ SpellDescription | SpellDescription$ You may cast that card this turn. (It loses all other card types.)
-SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may cast that card this turn.
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may cast that card this turn.
 DeckHints:Ability$Graveyard & Type$Artifact
 DeckHas:Ability$Graveyard & Type$Artifact
 Oracle:{T}: Target creature card in your graveyard perpetually becomes an artifact. You may cast that card this turn. (It loses all other card types.)

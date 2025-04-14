@@ -68,10 +68,10 @@ public class GameHUD extends Stage {
     static public GameHUD instance;
     private final GameStage gameStage;
     private final Image avatar, miniMapPlayer;
+    private final TypingLabel keyCollection;
     private final TypingLabel lifePoints;
     private final TypingLabel money;
     private final TypingLabel shards;
-    private final TextraLabel keys;
     private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
@@ -87,9 +87,7 @@ public class GameHUD extends Stage {
     private boolean dialogOnlyInput;
     private final Array<TextraButton> dialogButtonMap = new Array<>();
     private final Array<TextraButton> abilityButtonMap = new Array<>();
-    private final Array<String> questKeys = new Array<>();
     private String lifepointsTextColor = "";
-    private final ScrollPane scrollPane;
     private final ScrollPane notificationPane;
     private final Group mapGroup = new Group();
     private final Group hudGroup = new Group();
@@ -153,6 +151,8 @@ public class GameHUD extends Stage {
         ui.onButtonPress("deck", this::openDeck);
         ui.onButtonPress("exittoworldmap", this::exitToWorldMap);
         ui.onButtonPress("bookmark", this::bookmark);
+        keyCollection = ui.findActor("keyCollection");
+        keyCollection.skipToTheEnd();
         lifePoints = ui.findActor("lifePoints");
         lifePoints.skipToTheEnd();
         shards = ui.findActor("shards");
@@ -162,11 +162,6 @@ public class GameHUD extends Stage {
         shards.setText("[%95][+Shards]");
         money.setText("[%95][+Gold]");
         lifePoints.setText("[%95][+Life]");
-        keys = Controls.newTextraLabel("");
-        scrollPane = new ScrollPane(keys);
-        scrollPane.setPosition(2, 2);
-        scrollPane.setStyle(Controls.getSkin().get("translucent", ScrollPane.ScrollPaneStyle.class));
-        addActor(scrollPane);
         AdventurePlayer.current().onLifeChange(() -> {
             String effect = "{EMERGE}";
             String effectEnd = "{ENDEMERGE}";
@@ -222,6 +217,7 @@ public class GameHUD extends Stage {
         ui.addActor(mapGroup);
         //HUD
         hudGroup.addActor(gamehud);
+        hudGroup.addActor(keyCollection);
         hudGroup.addActor(lifePoints);
         hudGroup.addActor(shards);
         hudGroup.addActor(money);
@@ -361,7 +357,7 @@ public class GameHUD extends Stage {
     public boolean fromWorldMap = false;
 
     public void enter() {
-        questKeys.clear();
+        updateKeys();
         if (miniMapTexture != null)
             miniMapTexture.dispose();
         miniMapTexture = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
@@ -375,28 +371,6 @@ public class GameHUD extends Stage {
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         Deck deck = AdventurePlayer.current().getSelectedDeck();
-        if (AdventurePlayer.current().hasItem("Red Key"))
-            questKeys.add("[+RedKey]");
-        if (AdventurePlayer.current().hasItem("Green Key"))
-            questKeys.add("[+GreenKey]");
-        if (AdventurePlayer.current().hasItem("Blue Key"))
-            questKeys.add("[+BlueKey]");
-        if (AdventurePlayer.current().hasItem("Black Key"))
-            questKeys.add("[+BlackKey]");
-        if (AdventurePlayer.current().hasItem("White Key"))
-            questKeys.add("[+WhiteKey]");
-        if (AdventurePlayer.current().hasItem("Strange Key"))
-            questKeys.add("[+StrangeKey]");
-        if (!questKeys.isEmpty()) {
-            keys.setText(String.join("\n", questKeys));
-            scrollPane.setSize(keys.getWidth() + 8, keys.getHeight() + 5);
-            scrollPane.layout();
-            keys.layout();
-            scrollPane.getColor().a = opacity;
-        } else {
-            keys.setText("");
-            scrollPane.getColor().a = 0;
-        }
 
         switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
             case "capital":
@@ -451,6 +425,17 @@ public class GameHUD extends Stage {
         if (MapStage.getInstance().isInMap())
             updateBookmarkActor(MapStage.getInstance().getChanges().isBookmarked());
         avatarGroup.setZIndex(ui.getChildren().size);
+    }
+
+    void updateKeys() {
+        String keys = "";
+        keys += AdventurePlayer.current().hasItem("Red Key") ? "[+RedKey]\n" : "[+Dot]\n";
+        keys += AdventurePlayer.current().hasItem("Green Key") ? "[+GreenKey]\n" : "[+Dot]\n";
+        keys += AdventurePlayer.current().hasItem("Blue Key") ? "[+BlueKey]\n" : "[+Dot]\n";
+        keys += AdventurePlayer.current().hasItem("Black Key") ? "[+BlackKey]\n" : "[+Dot]\n";
+        keys += AdventurePlayer.current().hasItem("White Key") ? "[+WhiteKey]\n" : "[+Dot]\n";
+        keys += AdventurePlayer.current().hasItem("Strange Key") ? "[+StrangeKey]" : "[+Dot]";
+        keyCollection.setText(keys);
     }
 
     void clearAbility() {
@@ -853,6 +838,10 @@ public class GameHUD extends Stage {
 
     public void setDebug(boolean b) {
         debugMap = b;
+    }
+
+    public boolean isDebugMap() {
+        return debugMap;
     }
 
     public void playerIdle() {

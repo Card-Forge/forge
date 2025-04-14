@@ -1,0 +1,11 @@
+Name:Loot, the Pathfinder
+ManaCost:2 G U R
+Types:Legendary Creature Beast Noble
+PT:2/4
+K:Double Strike
+K:Vigilance
+K:Haste
+A:AB$ Mana | Cost$ G T | Produced$ Any | Amount$ 3 | Exhaust$ True | SpellDescription$ Add three mana of any one color. (Activate each exhaust ability only once.)
+A:AB$ Draw | Cost$ U T | NumCards$ 3 | Exhaust$ True | SpellDescription$ Draw three cards.
+A:AB$ DealDamage | Cost$ R T | ValidTgts$ Any | NumDmg$ 3 | Exhaust$ True | SpellDescription$ NICKNAME deals 3 damage to any target.
+Oracle:Double strike, vigilance, haste\nExhaust — {G}, {T}: Add three mana of any one color. (Activate each exhaust ability only once.)\nExhaust — {U}, {T}: Draw three cards.\nExhaust — {R}, {T}: Loot deals 3 damage to any target.

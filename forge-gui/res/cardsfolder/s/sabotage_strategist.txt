@@ -1,0 +1,10 @@
+Name:Sabotage Strategist
+ManaCost:2 U U
+Types:Creature Vedalken Ranger
+PT:2/2
+K:Flying
+K:Vigilance
+T:Mode$ AttackersDeclared | AttackedTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever one or more creatures attack you, those creatures get -1/-0 until end of turn.
+SVar:TrigPumpAll:DB$ Pump | Defined$ TriggeredAttackers | NumAtt$ -1 | IsCurse$ True
+A:AB$ PutCounter | Cost$ 5 U U | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | Exhaust$ True | SpellDescription$ Put three +1/+1 counters on this creature. (Activate each exhaust ability only once.)
+Oracle:Flying, vigilance\nWhenever one or more creatures attack you, those creatures get -1/-0 until end of turn.\nExhaust — {5}{U}{U}: Put three +1/+1 counters on this creature. (Activate each exhaust ability only once.)

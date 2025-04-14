@@ -1,0 +1,8 @@
+Name:Seeker's Folly
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDiscard,DBDebuff
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
+SVar:DBDebuff:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn.
+DeckHas:Ability$Discard
+Oracle:Choose one —\n• Target opponent discards two cards.\n• Creatures your opponents control get -1/-1 until end of turn.

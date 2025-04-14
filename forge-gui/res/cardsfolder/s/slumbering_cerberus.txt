@@ -1,0 +1,9 @@
+Name:Slumbering Cerberus
+ManaCost:1 R
+Types:Creature Dog
+PT:4/2
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Morbid — At the beginning of each end step, if a creature died this turn, untap this creature.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+Oracle:This creature doesn't untap during your untap step.\nMorbid — At the beginning of each end step, if a creature died this turn, untap this creature.

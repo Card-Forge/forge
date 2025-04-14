@@ -1,0 +1,9 @@
+Name:Waxen Shapethief
+ManaCost:3 U
+Types:Creature Shapeshifter
+PT:0/0
+K:Flash
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Artifact.YouCtrl+Other,Creature.YouCtrl+Other | SpellDescription$ You may have this creature enter as a copy of an artifact or creature you control.
+K:Cycling:2
+Oracle:Flash\nYou may have this creature enter as a copy of an artifact or creature you control.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -1,0 +1,9 @@
+Name:Crypt Feaster
+ManaCost:3 B
+Types:Creature Zombie
+PT:3/4
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | Threshold$ True | TriggerDescription$ Threshold — Whenever this creature attacks, if there are seven or more cards in your graveyard, this creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2
+DeckHints:Ability$Graveyard
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nThreshold — Whenever this creature attacks, if there are seven or more cards in your graveyard, this creature gets +2/+0 until end of turn.

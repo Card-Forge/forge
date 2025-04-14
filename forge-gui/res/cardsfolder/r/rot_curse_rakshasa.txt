@@ -1,0 +1,9 @@
+Name:Rot-Curse Rakshasa
+ManaCost:1 B
+Types:Creature Demon
+PT:5/5
+K:Trample
+K:Decayed
+A:AB$ PutCounter | Cost$ X B B ExileFromGrave<1/CARDNAME/this card> | PrecostDesc$ Renew — | ValidTgts$ Creature | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select X target creatures | CounterType$ Decayed | CounterNum$ 1 | ActivationZone$ Graveyard | SorcerySpeed$ True | IsCurse$ True | SpellDescription$ Put a decayed counter on each of X target creatures. Activate only as a sorcery.
+SVar:X:Count$xPaid
+Oracle:Trample\nDecayed (This creature can't block. When it attacks, sacrifice it at end of combat.)\nRenew — {X}{B}{B}, Exile this card from your graveyard: Put a decayed counter on each of X target creatures. Activate only as a sorcery.

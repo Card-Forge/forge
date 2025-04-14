@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (DFT)
+Type:Archived
+Subtype:Arena
+Effective:2025-02-11
+Sets:ANA, ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB, YBLB, DSK, YDSK, FDN, DFT
+Banned:Monstrous Rage

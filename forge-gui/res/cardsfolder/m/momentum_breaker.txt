@@ -1,0 +1,10 @@
+Name:Momentum Breaker
+ManaCost:1 B
+Types:Enchantment
+K:Start your engines
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacrifice | TriggerDescription$ When CARDNAME enters, each opponent sacrifices a creature or vehicle of their choice. Each opponent who can't discards a card.
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature,Vehicle | SacMessage$ creature or Vehicle | RememberSacrificed$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ OppNonRememberedController | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ GainLife | Cost$ 2 Sac<1/CARDNAME/this enchantment> | LifeAmount$ Count$YourSpeed | StackDescription$ SpellDescription | SpellDescription$ You gain life equal to your speed.
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nWhen this enchantment enters, each opponent sacrifices a creature or Vehicle of their choice. Each opponent who can't discards a card.\n{2}, Sacrifice this enchantment: You gain life equal to your speed.

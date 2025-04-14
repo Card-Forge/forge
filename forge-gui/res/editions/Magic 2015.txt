@@ -5,7 +5,7 @@ Name=Magic 2015
 Code2=M15
 Type=Core
 BoosterCovers=5
-Booster=10 Common:!fromSheet("M15 Sample Cards"), 3 Uncommon:!fromSheet("M15 Sample Cards"), 1 RareMythic:!fromSheet("M15 Sample Cards"), 1 BasicLand
+Booster=10 Common:fromSheet("M15 cards"), 3 Uncommon:fromSheet("M15 cards"), 1 RareMythic:fromSheet("M15 cards"), 1 BasicLand
 FatPack=9
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=CORE_SET
@@ -281,6 +281,8 @@ ScryfallCode=M15
 267 L Forest @Steven Belledin
 268 L Forest @Noah Bradley
 269 L Forest @Jonas De Ro
+
+[precon product]
 270 R Aegis Angel @Aleksi Briclot
 271 C Divine Verdict @Kev Walker
 272 C Inspired Charge @Wayne Reynolds

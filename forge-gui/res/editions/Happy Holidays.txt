@@ -25,6 +25,7 @@ ScryfallCode=HHO
 21 M Last-Minute Chopping @Marta Nael
 22 M Chaos Wrap @Zoltan Boros
 23 M Seasonal Sequels @Adrián Rodríguez Pérez
+24 M Eggnogger's 'Stache @Arif Wijaya
 
 [tokens]
 c_a_treasure_sac

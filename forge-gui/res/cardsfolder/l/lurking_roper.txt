@@ -2,9 +2,9 @@ Name:Lurking Roper
 ManaCost:2 G
 Types:Creature Horror
 PT:4/5
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you gain life, untap CARDNAME.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you gain life, untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random
 DeckNeeds:Ability$LifeGain
-Oracle:Lurking Roper doesn't untap during your untap step.\nWhenever you gain life, untap Lurking Roper.
+Oracle:This creature doesn't untap during your untap step.\nWhenever you gain life, untap this creature.

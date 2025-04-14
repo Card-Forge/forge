@@ -2,9 +2,9 @@ Name:Abstruse Appropriation
 ManaCost:2 W B
 Types:Instant
 K:Devoid
-A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | RememberChanged$ True | TgtPromt$ Select target nonland permanent | SubAbility$ DBEffect | SpellDescription$ Exile target nonland permanent.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | RememberChanged$ True | TgtPrompt$ Select target nonland permanent | SubAbility$ DBEffect | SpellDescription$ Exile target nonland permanent.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ MayPlay,ManaConvert | SubAbility$ DBCleanup | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ You may cast that card for as long as it remains exiled, and you may spend colorless mana as though it were mana of any color to cast that spell.
-SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled.
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled.
 SVar:ManaConvert:Mode$ ManaConvert | ValidPlayer$ You | ValidCard$ Card.IsRemembered | ValidSA$ Spell.MayPlaySource | ManaConversion$ C->AnyColor | AffectedZone$ Exile | Description$ You may spend colorless mana as though it were mana of any color to cast that spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Devoid\nExile target nonland permanent. You may cast that card for as long as it remains exiled, and you may spend colorless mana as though it were mana of any color to cast that spell.

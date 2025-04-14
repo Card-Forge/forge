@@ -2,5 +2,6 @@ Name:Vulshok Gauntlets
 ManaCost:2
 Types:Artifact Equipment
 K:Equip:3
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$ 2 | Description$ Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
+R:Event$ Untap | ValidCard$ Creature.EquippedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Secondary$ True | Description$ Equipped creature doesn't untap during its controller's untap step.
 Oracle:Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery. This card enters unattached and stays on the battlefield if the creature leaves.)

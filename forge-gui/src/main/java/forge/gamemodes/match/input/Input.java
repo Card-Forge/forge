@@ -1,12 +1,12 @@
 package forge.gamemodes.match.input;
 
-import java.util.List;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.util.ITriggerEvent;
+
+import java.util.List;
 
 public interface Input {
     PlayerView getOwner();

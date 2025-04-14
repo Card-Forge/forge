@@ -1,0 +1,11 @@
+Name:Protector of the Wastes
+ManaCost:4 W W
+Types:Creature Dragon
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters or becomes monstrous, exile up to two target artifacts and/or enchantments controlled by different players.
+T:Mode$ BecomeMonstrous | Secondary$ True | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ When this creature enters or becomes monstrous, exile up to two target artifacts and/or enchantments controlled by different players.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | TargetMin$ 0 | TargetMax$ 2 | TargetsWithDifferentControllers$ True | Origin$ Battlefield | Destination$ Exile
+K:Monstrosity:3:4 W
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen this creature enters or becomes monstrous, exile up to two target artifacts and/or enchantments controlled by different players.\n{4}{W}: Monstrosity 3. (If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)

@@ -1,0 +1,11 @@
+Name:Anep, Vizier of Hazoret
+ManaCost:2 R
+Types:Legendary Creature Jackal Warrior
+PT:4/2
+K:Trample
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigExile | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, exile the top two cards of your library. Until the end of your next turn, you may play those cards. (An exerted creature won't untap during your next untap step.)
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ When you do, exile the top two cards of your library. Until the end of your next turn, you may play those cards.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play the exiled cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Trample\nYou may exert Anep, Vizier of Hazoret as it attacks. When you do, exile the top two cards of your library. Until the end of your next turn, you may play those cards. (An exerted creature won't untap during your next untap step.)

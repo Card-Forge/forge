@@ -3,15 +3,13 @@ package forge.deck;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.assets.*;
 import forge.card.CardEdition;
+import forge.card.MagicColor;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.planarconquest.ConquestUtil;
@@ -41,6 +39,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
@@ -94,12 +94,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
             else if (additionalFilter != null) {
-                filter = Predicates.and(filter, additionalFilter);
+                filter = filter.and(additionalFilter);
             }
 
             ItemPool<PaperCard> filteredPool = new ItemPool<>(PaperCard.class);
             for (Entry<PaperCard, Integer> entry : cardPool) {
-                if (filter.apply(entry.getKey())) {
+                if (filter.test(entry.getKey())) {
                     filteredPool.add(entry.getKey(), entry.getValue());
                 }
             }
@@ -218,13 +218,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Constructed:
             case Commander:
                 return new DeckSection[]{
-                        DeckSection.Avatar, DeckSection.Schemes, DeckSection.Planes, DeckSection.Conspiracy, DeckSection.Attractions
+                        DeckSection.Avatar, DeckSection.Schemes, DeckSection.Planes, DeckSection.Conspiracy,
+                        DeckSection.Attractions, DeckSection.Contraptions
                 };
             case Draft:
             case Sealed:
-                return new DeckSection[]{DeckSection.Conspiracy, DeckSection.Attractions};
+                return new DeckSection[]{DeckSection.Conspiracy, DeckSection.Attractions, DeckSection.Contraptions};
         }
-        return new DeckSection[]{DeckSection.Attractions};
+        return new DeckSection[]{DeckSection.Attractions, DeckSection.Contraptions};
     }
 
     private static DeckSectionPage createPageForExtraSection(DeckSection deckSection, EditorType editorType) {
@@ -244,28 +245,29 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if(editorType.isLimitedType())
                     return new DeckSectionPage(deckSection, ItemManagerConfig.ATTRACTION_DECK_EDITOR_LIMITED);
                 return new DeckSectionPage(deckSection, ItemManagerConfig.ATTRACTION_DECK_EDITOR);
+            case Contraptions:
+                if(editorType.isLimitedType())
+                    return new DeckSectionPage(deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR_LIMITED);
+                return new DeckSectionPage(deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR);
             default:
                 System.out.printf("Editor (%s) added an unsupported extra deck section - %s%n", deckSection, editorType);
                 return new DeckSectionPage(deckSection);
         }
     }
 
-    private static String labelFromDeckSection(DeckSection deckSection) {
-        String label = null;
+    public static FImage iconFromDeckSection(DeckSection deckSection) {
         switch (deckSection) {
-            case Main: label = "lblMain"; break;
-            case Sideboard: label = "lblSide"; break;
-            case Commander: label = "lblCommander"; break;
-            case Planes: label = "lblPlanes"; break;
-            case Schemes: label = "lblSchemes"; break;
-            case Avatar: label = "lblAvatar"; break;
-            case Conspiracy: label = "lblConspiracies"; break;
-            case Attractions: label = "lblAttractions"; break;
+            case Main: return MAIN_DECK_ICON;
+            case Sideboard: return SIDEBOARD_ICON;
+            case Commander: return FSkinImage.COMMAND;
+            case Avatar: return FSkinImage.AVATAR;
+            case Conspiracy: return FSkinImage.CONSPIRACY;
+            case Planes: return FSkinImage.PLANAR;
+            case Schemes: return FSkinImage.SCHEME;
+            case Attractions: return FSkinImage.ATTRACTION;
+            case Contraptions: return FSkinImage.CONTRAPTION;
+            default: return FSkinImage.HDSIDEBOARD;
         }
-        String text = Localizer.getInstance().getMessage(label);
-        if(text == null)
-            return deckSection.toString();
-        return text;
     }
 
     private final EditorType editorType;
@@ -285,18 +287,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.getBtnPressedColor()).build());
 
     public FDeckEditor(EditorType editorType0, DeckProxy editDeck, boolean showMainDeck) {
-        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck,null);
+        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck, null);
     }
-    public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck,FEventHandler backButton) {
-        this(editorType0, editDeckName, "", null, showMainDeck,backButton);
+    public FDeckEditor(EditorType editorType0, DeckProxy editDeck, boolean showMainDeck, FEventHandler backButton) {
+        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck, backButton);
+    }
+    public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck, FEventHandler backButton) {
+        this(editorType0, editDeckName, "", null, showMainDeck, backButton);
     }
     public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck) {
-        this(editorType0, editDeckName, "", null, showMainDeck,null);
+        this(editorType0, editDeckName, "", null, showMainDeck, null);
     }
     public FDeckEditor(EditorType editorType0, Deck newDeck, boolean showMainDeck) {
-        this(editorType0, "", "", newDeck, showMainDeck,null);
+        this(editorType0, "", "", newDeck, showMainDeck, null);
     }
-    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck,FEventHandler backButton) {
+    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck, FEventHandler backButton) {
         super(backButton, getPages(editorType0));
 
         editorType = editorType0;
@@ -426,7 +431,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             }));
                         if (allowsAddExtraSection()) {
                             addItem(new FMenuItem(localizer.getMessage("lblAddDeckSection"), FSkinImage.CHAOS, e -> {
-                                List<String> options = hiddenExtraSections.stream().map(FDeckEditor::labelFromDeckSection).collect(Collectors.toList());
+                                List<String> options = hiddenExtraSections.stream().map(DeckSection::getLocalizedName).collect(Collectors.toList());
                                 GuiChoose.oneOrNone(localizer.getMessage("lblAddDeckSectionSelect"), options, new Callback<String>() {
                                     @Override
                                     public void run(String result) {
@@ -623,10 +628,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Conspiracy:
                 return Integer.MAX_VALUE;
             case Attractions:
-                if(isLimitedEditor())
-                    return Integer.MAX_VALUE;
-                else
-                    return 1;
+            case Contraptions:
+                return isLimitedEditor() ? Integer.MAX_VALUE : 1;
             default:
                 return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
         }
@@ -751,6 +754,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.applyAdvancedSearchFilter(new String[]{
                         "CARD_TYPE CONTAINS_ALL Artifact",
                         "CARD_SUB_TYPE CONTAINS_ALL Attraction"
+                }, true);
+                break;
+            case Contraptions:
+                cardManager.applyAdvancedSearchFilter(new String[]{
+                        "CARD_TYPE CONTAINS_ALL Artifact",
+                        "CARD_SUB_TYPE CONTAINS_ALL Contraption"
                 }, true);
                 break;
             default:
@@ -1200,6 +1209,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 case Conspiracy: return from ? "lblfromconspiracydeck" : "lbltoconspiracydeck";
                 case Dungeon: return from ? "lblfromdungeondeck" : "lbltodungeondeck";
                 case Attractions: return from ? "lblfromattractiondeck" : "lbltoattractiondeck";
+                case Contraptions: return from ? "lblfromcontraptiondeck" : "lbltocontraptiondeck";
                 case Avatar: return "lblasavatar";
                 case Commander:
                     if (parentScreen.editorType == EditorType.Oathbreaker) {
@@ -1531,6 +1541,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             case Schemes: cardPool.addAll(FModel.getArchenemyCards()); break;
                             case Dungeon: cardPool.addAll(FModel.getDungeonPool()); break;
                             case Attractions: cardPool.addAll(FModel.getAttractionPool()); break;
+                            case Contraptions: cardPool.addAll(FModel.getContraptionPool()); break;
                         }
                     }
                     cardManager.setPool(editorType.applyCardFilter(cardPool, additionalFilter), true);
@@ -1658,60 +1669,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected static class DeckSectionPage extends CardManagerPage {
-        private String captionPrefix;
+        private final String captionPrefix;
         private final DeckSection deckSection;
 
         protected DeckSectionPage(DeckSection deckSection0) {
             this(deckSection0, ItemManagerConfig.DECK_EDITOR);
         }
-        protected DeckSectionPage(DeckSection deckSection0, ItemManagerConfig config) {
+        protected DeckSectionPage(DeckSection deckSection, ItemManagerConfig config) {
             super(config, null, null);
 
-            deckSection = deckSection0;
-            final Localizer localizer = Forge.getLocalizer();
-            switch (deckSection) {
-            default:
-            case Main:
-                captionPrefix = localizer.getMessage("lblMain");
-                cardManager.setCaption(localizer.getMessage("ttMain"));
-                icon = MAIN_DECK_ICON;
-                break;
-            case Sideboard:
-                captionPrefix = localizer.getMessage("lblSide");
-                cardManager.setCaption(localizer.getMessage("lblSideboard"));
-                icon = SIDEBOARD_ICON;
-                break;
-            case Commander:
-                captionPrefix = localizer.getMessage("lblCommander");
-                cardManager.setCaption(localizer.getMessage("lblCommander"));
-                icon = FSkinImage.COMMANDER;
-                break;
-            case Avatar:
-                captionPrefix = localizer.getMessage("lblAvatar");
-                cardManager.setCaption(localizer.getMessage("lblAvatar"));
-                icon = new FTextureRegionImage(FSkin.getAvatars().get(0));
-                break;
-            case Conspiracy:
-                captionPrefix = localizer.getMessage("lblConspiracies");
-                cardManager.setCaption(localizer.getMessage("lblConspiracies"));
-                icon = FSkinImage.UNKNOWN; //TODO: This and the other extra sections definitely need better icons.
-                break;
-            case Planes:
-                captionPrefix = localizer.getMessage("lblPlanes");
-                cardManager.setCaption(localizer.getMessage("lblPlanes"));
-                icon = FSkinImage.CHAOS;
-                break;
-            case Schemes:
-                captionPrefix = localizer.getMessage("lblSchemes");
-                cardManager.setCaption(localizer.getMessage("lblSchemes"));
-                icon = FSkinImage.POISON;
-                break;
-            case Attractions:
-                captionPrefix = localizer.getMessage("lblAttractions");
-                cardManager.setCaption(localizer.getMessage("lblAttractions"));
-                icon = FSkinImage.TICKET;
-                break;
-            }
+            this.deckSection = deckSection;
+            captionPrefix = this.deckSection.getLocalizedShortName();
+            cardManager.setCaption(this.deckSection.getLocalizedName());
+            icon = iconFromDeckSection(deckSection);
         }
         protected DeckSectionPage(DeckSection deckSection0, ItemManagerConfig config, String caption0, FImage icon0) {
             super(config, null, icon0);
@@ -1764,6 +1734,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Planes:
             case Schemes:
             case Attractions:
+            case Contraptions:
                 removeCard(card);
                 switch (parentScreen.getEditorType()) {
                 case Draft:
@@ -1796,6 +1767,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             CardManagerPage cardSourceSection;
             DeckSection destination = DeckSection.matchingSection(card);
             final DeckSectionPage destinationPage = parentScreen.getPageForSection(destination);
+            // val for colorID setup
+            int val;
             switch (deckSection) {
             default:
             case Main:
@@ -1838,6 +1811,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 }
                 addCommanderItems(menu, card);
+                if ((val = card.getRules().getSetColorID()) > 0) {
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                        //sort options so current option is on top and selected by default
+                        Set<String> colorChoices = new HashSet<>(MagicColor.Constant.ONLY_COLORS);
+                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(val)), val, val, colorChoices, new Callback<>() {
+                            @Override
+                            public void run(List<String> result) {
+                                addCard(card.getColorIDVersion(new HashSet<>(result)));
+                                removeCard(card);
+                            }
+                        });
+                    }));
+                }
                 break;
             case Sideboard:
                 cardSourceSection = parentScreen.isLimitedEditor() ? parentScreen.getMainDeckPage() : parentScreen.getCatalogPage();
@@ -1877,6 +1863,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 }
                 addCommanderItems(menu, card);
+                if ((val = card.getRules().getSetColorID()) > 0) {
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                        //sort options so current option is on top and selected by default
+                        Set<String> colorChoices = new HashSet<>(MagicColor.Constant.ONLY_COLORS);
+                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(val)), val, val, colorChoices, new Callback<>() {
+                            @Override
+                            public void run(List<String> result) {
+                                addCard(card.getColorIDVersion(new HashSet<>(result)));
+                                removeCard(card);
+                            }
+                        });
+                    }));
+                }
                 break;
             case Commander:
                 if (parentScreen.editorType != EditorType.PlanarConquest || isPartnerCommander(card)) {
@@ -1930,6 +1929,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Planes:
             case Attractions:
+            case Contraptions:
                 addMoveCardMenuItem(menu, this, parentScreen.getCatalogPage(), new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {

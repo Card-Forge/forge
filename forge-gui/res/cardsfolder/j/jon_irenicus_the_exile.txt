@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigBranch:DB$ Branch | ValidTgts$ Opponent | BranchConditionSVar$ X | BranchConditionSVarCompare$ GEY | TrueSubAbility$ Draw | FalseSubAbility$ Mill
 SVar:Draw:DB$ Draw
 SVar:Mill:DB$ Mill | Defined$ Opponent | NumCards$ 5
-SVar:X:Count$InYourLibrary
-SVar:Y:Count$InTargetedLibrary
+SVar:X:Count$ValidLibrary Card.YouOwn
+SVar:Y:Count$ValidLibrary Card.TargetedPlayerOwn
 DeckHas:Ability$Mill
 Oracle:At the beginning of your end step, draw a card if your library has more cards in it than target opponent's library. Otherwise, each opponent mills five cards.

@@ -1,7 +1,7 @@
 Name:Wrath of Marit Lage
 ManaCost:3 U U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.Red | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Red creatures don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.Red | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Red creatures don't untap during their controllers' untap steps.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters, tap all red creatures.
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.Red
 SVar:NonStackingEffect:True

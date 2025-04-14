@@ -183,7 +183,7 @@ public class FCardImageRenderer {
             int w = width;
             boolean hasPTBox = false;
             if (!card.isSplitCard() && !card.isFlipCard()) {
-                final CardStateView state = card.getState(card.isAdventureCard() ? false : altState);
+                final CardStateView state = card.getState(card.hasSecondaryState() ? false : altState);
                 if ((state.isCreature() && !state.getKeywordKey().contains("Level up"))
                         || state.isPlaneswalker() || state.isBattle() || state.isVehicle())
                     hasPTBox = true;
@@ -207,10 +207,9 @@ public class FCardImageRenderer {
             final String leftText = needTranslation ? CardTranslation.getTranslatedOracle(leftState) : leftState.getOracleText();
             final CardStateView rightState = card.getRightSplitState();
             String rightText = needTranslation ? CardTranslation.getTranslatedOracle(rightState) : rightState.getOracleText();
-            boolean isAftermath = (rightState.getKeywordKey().contains("Aftermath"));
             BufferedImage leftArt = null;
             BufferedImage rightArt = null;
-            if (isAftermath) {
+            if (rightState.hasAftermath()) {
                 if (art != null) {
                     int leftWidth = Math.round(art.getWidth() * 0.61328125f);
                     leftArt = art.getSubimage(0, 0, leftWidth, art.getHeight());
@@ -259,7 +258,7 @@ public class FCardImageRenderer {
                 g.rotate(Math.PI);
             }
             drawFlipCardImage(g, state, text, flipState, flipText, width, height - heightAdjust, art);
-        } else if (card.isAdventureCard()) {
+        } else if (card.hasSecondaryState()) {
             boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
             final CardStateView state = card.getState(false);
             final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state) : null);

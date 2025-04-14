@@ -3,10 +3,10 @@ ManaCost:4
 Types:Legendary Artifact Creature Construct
 PT:7/7
 K:Trample
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ NICKNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-K:CARDNAME doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ NICKNAME doesn't untap during your untap step.
 T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, untap NICKNAME. (Artifacts, legendaries, and Sagas are historic.)
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:BuffedBy:Card.Historic
-Oracle:Trample\nTraxos, Scourge of Kroog enters tapped and doesn't untap during your untap step.\nWhenever you cast a historic spell, untap Traxos. (Artifacts, legendaries, and Sagas are historic.)
+Oracle:Trample\nTraxos enters tapped and doesn't untap during your untap step.\nWhenever you cast a historic spell, untap Traxos. (Artifacts, legendaries, and Sagas are historic.)

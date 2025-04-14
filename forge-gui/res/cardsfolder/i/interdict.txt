@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Counter | TargetType$ Activated | TgtPrompt$ Select target activated ability from an artifact, creature, enchantment, or land. | RememberCountered$ True | ValidTgts$ Artifact,Creature,Enchantment,Land | SubAbility$ DBEffect | SpellDescription$ Counter target activated ability from an artifact, creature, enchantment, or land. That permanent's activated abilities can't be activated this turn. (Mana abilities can't be targeted.)
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeActivated | RememberObjects$ Remembered | SubAbility$ DBDraw
-SVar:STCantBeActivated:Mode$ CantBeActivated | EffectZone$ Command | ValidCard$ Permanent.IsRemembered
+SVar:STCantBeActivated:Mode$ CantBeActivated | ValidCard$ Permanent.IsRemembered
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 Oracle:Counter target activated ability from an artifact, creature, enchantment, or land. That permanent's activated abilities can't be activated this turn. (Mana abilities can't be targeted.)\nDraw a card.

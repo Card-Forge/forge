@@ -146,17 +146,20 @@
   {
     "name": "Landscape Sketchbook - Mirage",
     "description": "A leather bound notebook containing sketches of tropical locations",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
   },
   {
     "name": "Landscape Sketchbook - Urza's Saga",
     "description": "A leather bound notebook containing many different angles of the same terrain features",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
   },
   {
     "name": "Landscape Sketchbook - Coldsnap",
     "description": "A leather bound notebook containing sketches of frost covered vistas",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
   },
   {
     "name": "Chandra's Tome",
@@ -217,7 +220,7 @@
     "name": "Piper's Charm",
     "equipmentSlot": "Neck",
     "iconName": "PipersCharm",
-    "cost": 4000,
+    "cost": 1500,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Piper's Charm"
@@ -227,7 +230,7 @@
   {
     "name": "Sleep Wand",
     "equipmentSlot": "Left",
-    "cost": 4000,
+    "cost": 1500,
     "iconName": "SleepWand",
     "effect": {
       "startBattleWithCardInCommandZone": [
@@ -238,7 +241,7 @@
   {
     "name": "Hill Giant Club",
     "equipmentSlot": "Right",
-    "cost": 2000,
+    "cost": 2500,
     "iconName": "HillGiantClub",
     "effect": {
       "startBattleWithCardInCommandZone": [
@@ -250,7 +253,7 @@
     "name": "Cursed Treasure",
     "equipmentSlot": "Right",
     "iconName": "CursedTreasure",
-    "cost": 4000,
+    "cost": 6000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Cursed Treasure"
@@ -478,7 +481,7 @@
     "name": "Iron Shield",
     "equipmentSlot": "Right",
     "iconName": "IronShield",
-    "cost": 3500,
+    "cost": 6500,
     "effect": {
       "lifeModifier": 2
     }
@@ -554,7 +557,7 @@
     "name": "Jungle Shield",
     "equipmentSlot": "Right",
     "iconName": "JungleShield",
-    "cost": 2500,
+    "cost": 4500,
     "effect": {
       "startBattleWithCard": [
         "g_0_1_plant"
@@ -576,7 +579,7 @@
     "name": "Dagger",
     "equipmentSlot": "Left",
     "iconName": "Dagger",
-    "cost": 2500,
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Spare Dagger"
@@ -598,7 +601,7 @@
   {
     "name": "Aladdin's Ring",
     "equipmentSlot": "Right",
-    "cost": 3000,
+    "cost": 1500,
     "iconName": "AladdinsRing",
     "effect": {
       "startBattleWithCard": [
@@ -610,7 +613,7 @@
     "name": "Spell Book",
     "iconName": "SpellBook",
     "equipmentSlot": "Left",
-    "cost": 3000,
+    "cost": 8000,
     "effect": {
       "changeStartCards": 1
     }
@@ -641,7 +644,7 @@
     "name": "Mithril Shield",
     "equipmentSlot": "Right",
     "iconName": "MithrilShield",
-    "cost": 4500,
+    "cost": 6500,
     "effect": {
       "startBattleWithCard": [
         "c_0_4_a_wall_defender"
@@ -673,6 +676,7 @@
     "name": "Death Ring",
     "equipmentSlot": "Right",
     "iconName": "DeathRing",
+    "cost": 3500,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Death Ring"
@@ -682,6 +686,7 @@
   {
     "name": "Flame Sword",
     "equipmentSlot": "Left",
+    "cost": 6000,
     "iconName": "FlameSword",
     "effect": {
       "startBattleWithCardInCommandZone": [
@@ -692,6 +697,7 @@
   {
     "name": "Mirror Shield",
     "equipmentSlot": "Right",
+    "cost": 2500,
     "iconName": "MirrorShield",
     "effect": {
       "startBattleWithCard": [
@@ -703,6 +709,7 @@
     "name": "Dungeon Map",
     "equipmentSlot": "Right",
     "iconName": "DungeonMap",
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Dungeon Map"
@@ -713,6 +720,7 @@
     "name": "Aladdin's Lamp",
     "equipmentSlot": "Right",
     "iconName": "AladdinsLamp",
+    "cost": 1000,
     "effect": {
       "startBattleWithCard": [
         "Aladdin's Lamp"
@@ -723,6 +731,7 @@
     "name": "Heart-Piercer",
     "equipmentSlot": "Left",
     "iconName": "CompositeBow",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Heart-Piercer Bow"
@@ -733,6 +742,7 @@
     "name": "Wood Bow",
     "equipmentSlot": "Left",
     "iconName": "WoodBow",
+    "cost": 1000,
     "effect": {
       "startBattleWithCard": [ "Fyndhorn Bow" ]
     }
@@ -749,6 +759,7 @@
     "name": "Gold Boots",
     "equipmentSlot": "Boots",
     "iconName": "GoldBoots",
+    "cost": 10000,
     "effect": {
       "lifeModifier": 2,
       "moveSpeed": 1.3
@@ -758,6 +769,7 @@
     "name": "Gold Shield",
     "equipmentSlot": "Right",
     "iconName": "GoldShield",
+    "cost": 13000,
     "effect": {
       "lifeModifier": 3
     }
@@ -766,6 +778,7 @@
     "name": "Gold Armor",
     "equipmentSlot": "Body",
     "iconName": "GoldArmor",
+    "cost": 15000,
     "effect": {
       "lifeModifier": 4
     }
@@ -811,6 +824,7 @@
     "name": "Blood Vial",
     "equipmentSlot": "Right",
     "iconName": "Blood",
+    "cost": 1000,
     "effect": {
       "startBattleWithCard": [
         "c_a_blood_draw"
@@ -821,6 +835,7 @@
     "name": "Charm",
     "equipmentSlot": "Right",
     "iconName": "Clue",
+    "cost": 3000,
     "effect": {
       "startBattleWithCard": [
         "c_a_clue_draw"
@@ -831,6 +846,7 @@
     "name": "Snack",
     "equipmentSlot": "Right",
     "iconName": "Cheese",
+    "cost": 1000,
     "effect": {
       "startBattleWithCard": [
         "c_a_food_sac"
@@ -841,6 +857,7 @@
     "name": "Change",
     "equipmentSlot": "Right",
     "iconName": "GoldStack",
+    "cost": 5000,
     "effect": {
       "startBattleWithCard": [
         "c_a_gold_draw"
@@ -851,6 +868,7 @@
     "name": "Treasure",
     "equipmentSlot": "Right",
     "iconName": "Treasure",
+    "cost": 5000,
     "effect": {
       "startBattleWithCard": [
         "c_a_treasure_sac"
@@ -861,6 +879,7 @@
     "name": "Magic Shard",
     "equipmentSlot": "Right",
     "iconName": "Shard",
+    "cost": 3500,
     "effect": {
       "startBattleWithCard": [
         "c_e_shard_draw"
@@ -892,6 +911,7 @@
     "name": "Pandora's Box",
     "equipmentSlot": "Right",
     "iconName": "PandorasBox",
+    "cost": 1500,
     "effect": {
       "startBattleWithCard": [
         "Pandora's Box"
@@ -902,6 +922,7 @@
     "name": "Disrupting Scepter",
     "equipmentSlot": "Left",
     "iconName": "DisruptingScepter",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Disrupting Scepter"
@@ -922,6 +943,7 @@
     "name": "Heavy Arbalest",
     "equipmentSlot": "Left",
     "iconName": "HeavyArbalest",
+    "cost": 1500,
     "effect": {
       "startBattleWithCard": [
         "Heavy Arbalest"
@@ -932,6 +954,7 @@
     "name": "Ring of Three Wishes",
     "equipmentSlot": "Right",
     "iconName": "RingofThreeWishes",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Ring of Three Wishes"
@@ -942,6 +965,7 @@
     "name": "The Blackstaff of Waterdeep",
     "equipmentSlot": "Left",
     "iconName": "TheBlackstaffofWaterdeep",
+    "cost": 3500,
     "effect": {
       "startBattleWithCard": [
         "The Blackstaff of Waterdeep"
@@ -952,6 +976,7 @@
     "name": "Unerring Sling",
     "equipmentSlot": "Left",
     "iconName": "UnerringSling",
+    "cost": 4000,
     "effect": {
       "startBattleWithCard": [
         "Unerring Sling"
@@ -961,6 +986,7 @@
   {
     "name": "Jeweled Amulet",
     "equipmentSlot": "Neck",
+    "cost": 5000,
     "iconName": "JeweledAmulet",
     "effect": {
       "startBattleWithCard": [
@@ -972,6 +998,7 @@
     "name": "Traveler's Amulet",
     "equipmentSlot": "Neck",
     "iconName": "TravelersAmulet",
+    "cost": 5000,
     "effect": {
       "startBattleWithCard": [
         "Traveler's Amulet"
@@ -982,6 +1009,7 @@
     "name": "Relic Amulet",
     "equipmentSlot": "Neck",
     "iconName": "RelicAmulet",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Relic Amulet"
@@ -1002,6 +1030,7 @@
     "name": "Amulet of Vigor",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofVigor",
+    "cost": 7000,
     "effect": {
       "startBattleWithCard": [
         "Amulet of Vigor"
@@ -1012,6 +1041,7 @@
     "name": "Veilstone Amulet",
     "equipmentSlot": "Neck",
     "iconName": "VeilstoneAmulet",
+    "cost": 5000,
     "effect": {
       "startBattleWithCard": [
         "Veilstone Amulet"
@@ -1022,6 +1052,7 @@
     "name": "Jandor's Ring",
     "equipmentSlot": "Right",
     "iconName": "JandorsRing",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Jandor's Ring"
@@ -1064,6 +1095,7 @@
     "name": "Prism Ring",
     "equipmentSlot": "Right",
     "iconName": "PrismRing",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Prism Ring"
@@ -1084,6 +1116,7 @@
     "name": "Kite Shield",
     "equipmentSlot": "Right",
     "iconName": "KiteShield",
+    "cost": 1500,
     "effect": {
       "startBattleWithCard": [
         "Kite Shield"
@@ -1093,6 +1126,7 @@
   {
     "name": "Shell Wand",
     "equipmentSlot": "Left",
+    "cost": 4000,
     "effect": {
       "opponent": {
         "lifeModifier": -2
@@ -1113,6 +1147,7 @@
   {
     "name": "Lightbringers Boots",
     "equipmentSlot": "Boots",
+    "cost": 8000,
     "effect": {
       "opponent": {
         "lifeModifier": 5
@@ -1156,7 +1191,6 @@
     "description": "Teleports you to the plains",
     "commandOnUse": "teleport to poi \"Plains Capital\"",
     "iconName": "WhiteRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },
@@ -1170,7 +1204,6 @@
     "description": "Teleports you to the swamp",
     "commandOnUse": "teleport to poi \"Swamp Capital\"",
     "iconName": "BlackRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },
@@ -1184,7 +1217,6 @@
     "description": "Teleports you to the island",
     "commandOnUse": "teleport to poi \"Island Capital\"",
     "iconName": "BlueRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },
@@ -1198,7 +1230,6 @@
     "description": "Teleports you to the mountain",
     "commandOnUse": "teleport to poi \"Mountain Capital\"",
     "iconName": "RedRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },
@@ -1212,7 +1243,6 @@
     "description": "Teleports you to the forest",
     "commandOnUse": "teleport to poi \"Forest Capital\"",
     "iconName": "GreenRune",
-    "questItem": true,
     "shardsNeeded": 1,
     "cost": 100
   },

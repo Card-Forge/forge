@@ -1,0 +1,287 @@
+//Rank|Name|Rarity|Set
+#1|Eerie Ultimatum|M|SPG
+#2|Ruinous Ultimatum|M|SPG
+#3|Elspeth, Storm Slayer|M|TDM
+#4|Dragonback Assault|M|TDM
+#5|Jeskai Revelation|M|TDM
+#6|Ureni, the Song Unending|M|TDM
+#7|Inspired Ultimatum|M|SPG
+#8|Genesis Ultimatum|M|SPG
+#9|Ugin, Eye of the Storms|M|TDM
+#10|Marang River Regent|R|TDM
+#11|Death Begets Life|M|TDM
+#12|Roar of Endless Song|R|TDM
+#13|Sinkhole Surveyor|R|TDM
+#14|Stormscale Scion|M|TDM
+#15|Barrensteppe Siege|R|TDM
+#16|Neriv, Heart of the Storm|M|TDM
+#17|Revival of the Ancestors|R|TDM
+#18|Shiko, Paragon of the Way|M|TDM
+#19|Mardu Siegebreaker|R|TDM
+#20|Anafenza, Unyielding Lineage|R|TDM
+#21|Clarion Conqueror|R|TDM
+#22|Avenger of the Fallen|R|TDM
+#23|Qarsi Revenant|R|TDM
+#24|Scavenger Regent|R|TDM
+#25|Bloomvine Regent|R|TDM
+#26|Warden of the Grove|R|TDM
+#27|All-Out Assault|M|TDM
+#28|Betor, Kin to All|M|TDM
+#29|Perennation|M|TDM
+#30|Twinmaw Stormbrood|U|TDM
+#31|Zurgo, Thunder's Decree|R|TDM
+#32|Wayspeaker Bodyguard|U|TDM
+#33|Ambling Stormshell|R|TDM
+#34|Magmatic Hellkite|R|TDM
+#35|Kishla Skimmer|U|TDM
+#36|Sonic Shrieker|U|TDM
+#37|Yathan Roadwatcher|R|TDM
+#38|Sage of the Fang|U|TDM
+#39|Lotuslight Dancers|R|TDM
+#40|Sage of the Skies|R|TDM
+#41|Teeming Dragonstorm|U|TDM
+#42|Frostcliff Siege|R|TDM
+#43|Hollowmurk Siege|R|TDM
+#44|Rediscover the Way|R|TDM
+#45|Severance Priest|R|TDM
+#46|Skirmish Rhino|U|TDM
+#47|Windcrag Siege|R|TDM
+#48|Gurmag Rakshasa|U|TDM
+#49|Strategic Betrayal|U|TDM
+#50|Unsparing Boltcaster|U|TDM
+#51|Zurgo's Vanguard|U|TDM
+#52|Knockout Maneuver|U|TDM
+#53|Defibrillating Current|U|TDM
+#54|Herd Heirloom|R|TDM
+#55|Lasyd Prowler|R|TDM
+#56|Surrak, Elusive Hunter|R|TDM
+#57|Bone-Cairn Butcher|U|TDM
+#58|Disruptive Stormbrood|U|TDM
+#59|Inevitable Defeat|R|TDM
+#60|Hundred-Battle Veteran|U|TDM
+#61|Salt Road Skirmish|U|TDM
+#62|Stadium Headliner|R|TDM
+#63|Traveling Botanist|U|TDM
+#64|Dragonclaw Strike|U|TDM
+#65|Loxodon Battle Priest|U|TDM
+#66|Smile at Death|M|TDM
+#67|Roiling Dragonstorm|U|TDM
+#68|Taigam, Master Opportunist|M|TDM
+#69|Cori-Steel Cutter|R|TDM
+#70|Sunset Strikemaster|U|TDM
+#71|Tersa Lightshatter|R|TDM
+#72|Craterhoof Behemoth|M|TDM
+#73|Cori Mountain Stalwart|U|TDM
+#74|Fangkeeper's Familiar|R|TDM
+#75|Felothar, Dawn of the Abzan|R|TDM
+#76|Flamehold Grappler|R|TDM
+#77|Jeskai Shrinekeeper|U|TDM
+#78|Narset, Jeskai Waymaster|R|TDM
+#79|Stalwart Successor|U|TDM
+#80|Thunder of Unity|R|TDM
+#81|Dragonfire Blade|R|TDM
+#82|Stormbeacon Blade|U|TDM
+#83|Focus the Mind|C|TDM
+#84|Wingblade Disciple|U|TDM
+#85|Alchemist's Assistant|U|TDM
+#86|Sandskitter Outrider|C|TDM
+#87|Overwhelming Surge|U|TDM
+#88|Formation Breaker|U|TDM
+#89|Trade Route Envoy|C|TDM
+#90|Mammoth Bellow|U|TDM
+#91|Mardu Devotee|C|TDM
+#92|Sunpearl Kirin|U|TDM
+#93|Voice of Victory|R|TDM
+#94|Venerated Stormsinger|U|TDM
+#95|Sarkhan, Dragon Ascendant|R|TDM
+#96|Attuned Hunter|U|TDM
+#97|Eshki Dragonclaw|R|TDM
+#98|Frontline Rush|U|TDM
+#99|Hardened Tactician|U|TDM
+#100|Kheru Goldkeeper|U|TDM
+#101|Marshal of the Lost|U|TDM
+#102|Purging Stormbrood|U|TDM
+#103|Temur Battlecrier|R|TDM
+#104|Furious Forebear|U|TDM
+#105|Constrictor Sage|U|TDM
+#106|Adorned Crocodile|C|TDM
+#107|Twin Bolt|C|TDM
+#108|Inspirited Vanguard|U|TDM
+#109|Sagu Pummeler|C|TDM
+#110|Starry-Eyed Skyrider|U|TDM
+#111|Static Snare|U|TDM
+#112|Bewildering Blizzard|U|TDM
+#113|Dragonologist|R|TDM
+#114|Fresh Start|U|TDM
+#115|Caustic Exhale|C|TDM
+#116|Sidisi, Regent of the Mire|R|TDM
+#117|Sagu Wildling|C|TDM
+#118|Armament Dragon|U|TDM
+#119|Awaken the Honored Dead|R|TDM
+#120|Glacial Dragonhunt|U|TDM
+#121|Karakyk Guardian|U|TDM
+#122|Lie in Wait|U|TDM
+#123|Runescale Stormbrood|U|TDM
+#124|Teval, Arbiter of Virtue|M|TDM
+#125|Poised Practitioner|C|TDM
+#126|Iceridge Serpent|C|TDM
+#127|Riverwalk Technique|C|TDM
+#128|Aggressive Negotiations|C|TDM
+#129|Nightblade Brigade|C|TDM
+#130|Unburied Earthcarver|C|TDM
+#131|Iridescent Tiger|U|TDM
+#132|Shocking Sharpshooter|U|TDM
+#133|Champion of Dusan|C|TDM
+#134|Rainveil Rejuvenator|U|TDM
+#135|Dalkovan Packbeasts|U|TDM
+#136|Descendant of Storms|U|TDM
+#137|Stormplain Detainment|C|TDM
+#138|Kishla Trawlers|U|TDM
+#139|Naga Fleshcrafter|R|TDM
+#140|Molten Exhale|C|TDM
+#141|War Effort|U|TDM
+#142|Snakeskin Veil|C|TDM
+#143|Jeskai Brushmaster|U|TDM
+#144|Kin-Tree Severance|U|TDM
+#145|Monastery Messenger|C|TDM
+#146|New Way Forward|R|TDM
+#147|Songcrafter Mage|R|TDM
+#148|Great Arashin City|R|TDM
+#149|Dalkovan Encampment|R|TDM
+#150|Arashin Sunshield|C|TDM
+#151|Kin-Tree Nurturer|C|TDM
+#152|Rescue Leopard|C|TDM
+#153|Ainok Wayfarer|C|TDM
+#154|Dragon Sniper|U|TDM
+#155|Duty Beyond Death|U|TDM
+#156|Fortress Kin-Guard|C|TDM
+#157|Riling Dawnbreaker|C|TDM
+#158|Salt Road Packbeast|C|TDM
+#159|Dirgur Island Dragon|C|TDM
+#160|Ringing Strike Mastery|C|TDM
+#161|Abzan Devotee|C|TDM
+#162|Corroding Dragonstorm|U|TDM
+#163|Dragon's Prey|C|TDM
+#164|Channeled Dragonfire|U|TDM
+#165|Dragonbroods' Relic|U|TDM
+#166|Piercing Exhale|C|TDM
+#167|Synchronized Charge|U|TDM
+#168|Auroral Procession|U|TDM
+#169|Glacierwood Siege|R|TDM
+#170|Kotis, the Fangkeeper|R|TDM
+#171|Abzan Monument|U|TDM
+#172|Jeskai Monument|U|TDM
+#173|Mardu Monument|U|TDM
+#174|Sultai Monument|U|TDM
+#175|Temur Monument|U|TDM
+#176|Highspire Bell-Ringer|C|TDM
+#177|Sibsig Appraiser|C|TDM
+#178|Veteran Ice Climber|U|TDM
+#179|Delta Bloodflies|C|TDM
+#180|Fleeting Effigy|U|TDM
+#181|Arid Mesa|M|SPG
+#182|Marsh Flats|M|SPG
+#183|Misty Rainforest|M|SPG
+#184|Scalding Tarn|M|SPG
+#185|Verdant Catacombs|M|SPG
+#186|Bearer of Glory|C|TDM
+#187|Coordinated Maneuver|C|TDM
+#188|Rally the Monastery|U|TDM
+#189|Ureni's Rebuff|U|TDM
+#190|Alesha's Legacy|C|TDM
+#191|Unrooted Ancestor|U|TDM
+#192|Yathan Tombguard|U|TDM
+#193|Equilibrium Adept|U|TDM
+#194|Encroaching Dragonstorm|U|TDM
+#195|Rite of Renewal|U|TDM
+#196|Sarkhan's Resolve|C|TDM
+#197|Effortless Master|U|TDM
+#198|Host of the Hereafter|U|TDM
+#199|Rakshasa's Bargain|U|TDM
+#200|Riverwheel Sweep|U|TDM
+#201|Whirlwing Stormbrood|U|TDM
+#202|Cori Mountain Monastery|R|TDM
+#203|Frontier Bivouac|U|TDM
+#204|Kishla Village|R|TDM
+#205|Mystic Monastery|U|TDM
+#206|Nomad Outpost|U|TDM
+#207|Opulent Palace|U|TDM
+#208|Sandsteppe Citadel|U|TDM
+#209|Wild Ride|C|TDM
+#210|Jungle Hollow|C|TDM
+#211|Dragonback Lancer|C|TDM
+#212|Rebellious Strike|C|TDM
+#213|Aegis Sculptor|U|TDM
+#214|Agent of Kotis|C|TDM
+#215|Snowmelt Stag|C|TDM
+#216|Unending Whisper|C|TDM
+#217|Winternight Stories|R|TDM
+#218|Feral Deathgorger|C|TDM
+#219|Shock Brigade|C|TDM
+#220|Stormshriek Feral|C|TDM
+#221|Sultai Devotee|C|TDM
+#222|Undergrowth Leopard|C|TDM
+#223|Gurmag Nightwatch|C|TDM
+#224|Reigning Victor|C|TDM
+#225|Temur Tawnyback|C|TDM
+#226|Watcher of the Wayside|C|TDM
+#227|Evolving Wilds|C|TDM
+#228|Mistrise Village|R|TDM
+#229|Bloodfell Caves|C|TDM
+#230|Blossoming Sands|C|TDM
+#231|Dismal Backwater|C|TDM
+#232|Rugged Highlands|C|TDM
+#233|Scoured Barrens|C|TDM
+#234|Swiftwater Cliffs|C|TDM
+#235|Thornwood Falls|C|TDM
+#236|Tranquil Cove|C|TDM
+#237|Wind-Scarred Crag|C|TDM
+#238|Lightfoot Technique|C|TDM
+#239|Osseous Exhale|C|TDM
+#240|Tempest Hawk|C|TDM
+#241|Humbling Elder|C|TDM
+#242|Spectral Denial|U|TDM
+#243|Temur Devotee|C|TDM
+#244|Cruel Truths|C|TDM
+#245|Desperate Measures|U|TDM
+#246|Krumar Initiate|U|TDM
+#247|Wail of War|U|TDM
+#248|Worthy Cost|C|TDM
+#249|Devoted Duelist|C|TDM
+#250|Fire-Rim Form|C|TDM
+#251|Jeskai Devotee|C|TDM
+#252|Meticulous Artisan|C|TDM
+#253|Narset's Rebuke|C|TDM
+#254|Seize Opportunity|C|TDM
+#255|Summit Intimidator|C|TDM
+#256|Underfoot Underdogs|C|TDM
+#257|Dusyut Earthcarver|C|TDM
+#258|Krotiq Nestguard|C|TDM
+#259|Roamer's Routine|C|TDM
+#260|Boulderborn Dragon|C|TDM
+#261|Dragonstorm Globe|C|TDM
+#262|Embermouth Sentinel|C|TDM
+#263|Reputable Merchant|C|TDM
+#264|Dispelling Exhale|C|TDM
+#265|Wingspan Stride|C|TDM
+#266|Rot-Curse Rakshasa|M|TDM
+#267|Reverberating Summons|U|TDM
+#268|Heritage Reclamation|C|TDM
+#269|Nature's Rhythm|R|TDM
+#270|Call the Spirit Dragons|M|TDM
+#271|Jade-Cast Sentinel|C|TDM
+#272|Emergent Ultimatum|M|SPG
+#273|United Battlefront|R|TDM
+#274|Dragonstorm Forecaster|U|TDM
+#275|Essence Anchor|U|TDM
+#276|Maelstrom of the Spirit Dragon|R|TDM
+#277|Stillness in Motion|R|TDM
+#278|The Sibsig Ceremony|R|TDM
+#279|Breaching Dragonstorm|U|TDM
+#280|Dracogenesis|M|TDM
+#281|Mox Jasper|M|TDM
+#282|Plains|C|TDM
+#283|Island|C|TDM
+#284|Swamp|C|TDM
+#285|Mountain|C|TDM
+#286|Forest|C|TDM

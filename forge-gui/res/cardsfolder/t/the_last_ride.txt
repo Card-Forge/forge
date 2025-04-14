@@ -1,0 +1,9 @@
+Name:The Last Ride
+ManaCost:B
+Types:Legendary Artifact Vehicle
+PT:13/13
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -X/-X, where X is your life total.
+A:AB$ Draw | Cost$ 2 B PayLife<2> | SpellDescription$ Draw a card.
+SVar:X:Count$YourLifeTotal
+K:Crew:2
+Oracle:The Last Ride gets -X/-X, where X is your life total.\n{2}{B}, Pay 2 life: Draw a card.\nCrew 2

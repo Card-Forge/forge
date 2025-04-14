@@ -1,0 +1,8 @@
+Name:Air Response Unit
+ManaCost:2 W
+Types:Artifact Vehicle
+PT:3/3
+K:Flying
+K:Vigilance
+K:Crew:1
+Oracle:Flying, vigilance\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

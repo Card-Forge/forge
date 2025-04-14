@@ -3,13 +3,13 @@ ManaCost:4 U U U
 Types:Creature Leviathan
 PT:12/12
 K:Trample
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters, sacrifice it unless you sacrifice five lands.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When this creature enters, sacrifice it unless you sacrifice five lands.
 SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Sac<5/Land> | UnlessPayer$ You
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ LandPlayed | ValidCard$ Island.YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you play an Island, you may untap CARDNAME.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ LandPlayed | ValidCard$ Island.YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you play an Island, you may untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:NeedsToPlayVar:Y GE5
 SVar:Y:Count$Valid Land.YouCtrl
-Oracle:Trample\nJokulmorder enters tapped.\nWhen Jokulmorder enters, sacrifice it unless you sacrifice five lands.\nJokulmorder doesn't untap during your untap step.\nWhenever you play an Island, you may untap Jokulmorder.
+Oracle:Trample\nThis creature enters tapped.\nWhen this creature enters, sacrifice it unless you sacrifice five lands.\nThis creature doesn't untap during your untap step.\nWhenever you play an Island, you may untap this creature.

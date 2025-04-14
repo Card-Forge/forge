@@ -337,7 +337,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         int amount = entry.getValue();
         String poolCardRequest = CardDb.CardRequest.compose(
                 card.isFoil() ? CardDb.CardRequest.compose(card.getName(), true) : card.getName(),
-                card.getEdition(), card.getArtIndex());
+                card.getEdition(), card.getArtIndex(), card.getColorID());
         String originalRequestCandidate = null;
         for (Pair<String, Integer> originalRequest : originalCardRequests){
             String cardRequest = originalRequest.getLeft();
@@ -645,9 +645,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     /** {@inheritDoc} */
     @Override
     public boolean equals(final Object o) {
-        if (o instanceof Deck) {
-            final DeckBase dbase = (DeckBase) o;
-            boolean deckBaseEquals = super.equals(dbase);
+        if (o instanceof DeckBase deckBase) {
+            boolean deckBaseEquals = super.equals(deckBase);
             if (!deckBaseEquals)
                 return false;
             // ok so far we made sure they do have the same name. Now onto comparing parts

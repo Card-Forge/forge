@@ -1,0 +1,7 @@
+Name:Overwhelming Surge
+ManaCost:2 R
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBDmg,DBDestroy
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Destroy target noncreature artifact.
+Oracle:Choose one or both —\n• Overwhelming Surge deals 3 damage to target creature.\n• Destroy target noncreature artifact.

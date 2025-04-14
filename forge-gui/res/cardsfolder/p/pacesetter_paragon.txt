@@ -1,0 +1,8 @@
+Name:Pacesetter Paragon
+ManaCost:2 R
+Types:Creature Human Pilot
+PT:2/3
+A:AB$ PutCounter | Cost$ 2 R | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | Exhaust$ True | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on this creature. It gains double strike until end of turn. (Activate each exhaust ability only once.)
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Double Strike
+DeckHas:Ability$Counters
+Oracle:Exhaust — {2}{R}: Put a +1/+1 counter on this creature. It gains double strike until end of turn. (Activate each exhaust ability only once.)

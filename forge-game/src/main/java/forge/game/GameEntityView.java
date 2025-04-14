@@ -1,12 +1,12 @@
 package forge.game;
 
 import com.google.common.collect.Iterables;
-
 import forge.game.card.CardView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
+import forge.util.IterableUtil;
 
 public abstract class GameEntityView extends TrackableObject {
     private static final long serialVersionUID = -5129089945124455670L;
@@ -52,7 +52,7 @@ public abstract class GameEntityView extends TrackableObject {
 
     public Iterable<CardView> getAttachedCards() {
         if (hasAnyCardAttachments()) {
-            Iterable<CardView> active = Iterables.filter(get(TrackableProperty.AttachedCards), c -> !c.isPhasedOut());
+            Iterable<CardView> active = IterableUtil.filter(get(TrackableProperty.AttachedCards), c -> !c.isPhasedOut());
             if (!Iterables.isEmpty(active)) {
                 return active;
             }

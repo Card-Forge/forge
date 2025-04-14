@@ -17,23 +17,21 @@
  */
 package forge.game.card;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.game.CardTraitBase;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.staticability.StaticAbilityCrewValue;
+import forge.game.staticability.StaticAbilityTapPowerValue;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -64,7 +62,7 @@ public class CardLists {
     public static CardCollection filterLEPower(final Iterable<Card> in, final int lessthanPower) {
         return CardLists.filter(in, c -> c.getNetPower() <= lessthanPower);
     }
-  
+
     public static final Comparator<Card> ToughnessComparator = Comparator.comparingInt(Card::getNetToughness);
     public static final Comparator<Card> ToughnessComparatorInv = Comparator.comparingInt(Card::getNetToughness).reversed();
     public static final Comparator<Card> PowerComparator = Comparator.comparingInt(Card::getNetCombatDamage);
@@ -252,6 +250,19 @@ public class CardLists {
         return result;
     }
 
+    public static CardCollection canSubsequentlyTarget(Iterable<Card> list, SpellAbility source) {
+        if (source.getTargets().isEmpty()) {
+            return (CardCollection) list;
+        }
+
+        return CardLists.filter(list, new Predicate<Card>() {
+            @Override
+            public boolean test(Card card) {
+                return source.canTarget(card);
+            }
+        });
+    }
+
     public static CardCollection getKeyword(Iterable<Card> cardList, final String keyword) {
         return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword));
     }
@@ -261,11 +272,11 @@ public class CardLists {
     }
 
     public static CardCollection getNotKeyword(Iterable<Card> cardList, String keyword) {
-        return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
+        return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword).negate());
     }
 
     public static CardCollection getNotKeyword(Iterable<Card> cardList, final Keyword keyword) {
-        return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
+        return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword).negate());
     }
 
     public static int getAmountOfKeyword(final Iterable<Card> cardList, final String keyword) {
@@ -285,7 +296,7 @@ public class CardLists {
     // cardType is like "Land" or "Goblin", returns a new CardCollection that is a
     // subset of current CardList
     public static CardCollection getNotType(Iterable<Card> cardList, String cardType) {
-        return CardLists.filter(cardList, Predicates.not(CardPredicates.isType(cardType)));
+        return CardLists.filter(cardList, CardPredicates.isType(cardType).negate());
     }
 
     public static CardCollection getType(Iterable<Card> cardList, String cardType) {
@@ -293,7 +304,7 @@ public class CardLists {
     }
 
     public static CardCollection getNotColor(Iterable<Card> cardList, byte color) {
-        return CardLists.filter(cardList, Predicates.not(CardPredicates.isColor(color)));
+        return CardLists.filter(cardList, CardPredicates.isColor(color).negate());
     }
 
     public static CardCollection getColor(Iterable<Card> cardList, byte color) {
@@ -310,15 +321,15 @@ public class CardLists {
      *         criteria; may be empty, but never null.
      */
     public static CardCollection filter(Iterable<Card> cardList, Predicate<Card> filt) {
-        return new CardCollection(Iterables.filter(cardList, filt));
+        return new CardCollection(IterableUtil.filter(cardList, filt));
     }
 
     public static CardCollection filter(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
-        return new CardCollection(Iterables.filter(cardList, Predicates.and(f1, f2)));
+        return new CardCollection(IterableUtil.filter(cardList, f1.and(f2)));
     }
 
     public static CardCollection filter(Iterable<Card> cardList, Iterable<Predicate<Card>> filt) {
-        return new CardCollection(Iterables.filter(cardList, Predicates.and(filt)));
+        return new CardCollection(IterableUtil.filter(cardList, IterableUtil.and(filt)));
     }
 
     /**
@@ -333,15 +344,15 @@ public class CardLists {
      *         criteria; may be empty, but never null.
      */
     public static List<Card> filterAsList(Iterable<Card> cardList, Predicate<Card> filt) {
-        return Lists.newArrayList(Iterables.filter(cardList, filt));
+        return Lists.newArrayList(IterableUtil.filter(cardList, filt));
     }
 
     public static List<Card> filterAsList(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
-        return Lists.newArrayList(Iterables.filter(cardList, Predicates.and(f1, f2)));
+        return Lists.newArrayList(IterableUtil.filter(cardList, f1.and(f2)));
     }
 
     public static List<Card> filterAsList(Iterable<Card> cardList, Iterable<Predicate<Card>> filt) {
-        return Lists.newArrayList(Iterables.filter(cardList, Predicates.and(filt)));
+        return Lists.newArrayList(IterableUtil.filter(cardList, IterableUtil.and(filt)));
     }
 
     public static int count(Iterable<Card> cardList, Predicate<Card> filt) {
@@ -349,7 +360,7 @@ public class CardLists {
 
         int count = 0;
         for (Card c : cardList) {
-            if (filt.apply(c)) {
+            if (filt.test(c)) {
                 count++;
             }
         }
@@ -408,21 +419,17 @@ public class CardLists {
      * Given a list of cards, return their combined power
      * 
      * @param cardList the list of creature cards for which to sum the power
-     * @param ignoreNegativePower if true, treats negative power as 0
      * @param crew for cards that crew with toughness rather than power
      */
-    public static int getTotalPower(Iterable<Card> cardList, boolean ignoreNegativePower, boolean crew) {
+    public static int getTotalPower(Iterable<Card> cardList, SpellAbility sa) {
         int total = 0;
         for (final Card crd : cardList) {
-            if (crew) {
-                if (StaticAbilityCrewValue.crewsWithToughness(crd)) {
-                    total += ignoreNegativePower ? Math.max(0, crd.getNetToughness()) : crd.getNetToughness();
-                } else {
-                    int m = StaticAbilityCrewValue.getCrewMod(crd);
-                    total += ignoreNegativePower ? Math.max(0, crd.getNetPower() + m) : crd.getNetPower() + m;
-                }
+            if (StaticAbilityTapPowerValue.withToughness(crd, sa)) {
+                total += Math.max(0, crd.getNetToughness());
+            } else {
+                int m = StaticAbilityTapPowerValue.getMod(crd, sa);
+                total += Math.max(0, crd.getNetPower() + m);
             }
-            else total += ignoreNegativePower ? Math.max(0, crd.getNetPower()) : crd.getNetPower();
         }
         return total;
     }

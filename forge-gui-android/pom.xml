@@ -16,6 +16,8 @@
         <cardforge.user>user</cardforge.user>
         <cardforge.pass>pass</cardforge.pass>
         <cardforge.server>ftp.cardforge.org</cardforge.server>
+        <androidBuildTools>35.0.0</androidBuildTools>
+        <androidPlatform>35</androidPlatform>
     </properties>
 
     <parent>
@@ -217,6 +219,17 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>26.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp.android</artifactId>
+            <version>3.0.3</version>
+        </dependency>
     </dependencies>
 
     <profiles>
@@ -256,8 +269,8 @@
                                 <debug>true</debug>
                             </sign>
                             <sdk>
-                                <platform>35</platform>
-                                <buildTools>35.0.0</buildTools>
+                                <platform>${androidPlatform}</platform>
+                                <buildTools>${androidBuildTools}</buildTools>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
                             <assetsDirectory>${project.basedir}/assets</assetsDirectory>
@@ -293,6 +306,24 @@
                                 <goals>
                                     <goal>manifest-merger</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>se.bjurr.gitchangelog</groupId>
+                        <artifactId>git-changelog-maven-plugin</artifactId>
+                        <version>2.2.0</version>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <id>GenerateGitChangelog</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>git-changelog</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>true</skip>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -368,8 +399,8 @@
                                 <debug>false</debug>
                             </sign>
                             <sdk>
-                                <platform>35</platform>
-                                <buildTools>35.0.0</buildTools>
+                                <platform>${androidPlatform}</platform>
+                                <buildTools>${androidBuildTools}</buildTools>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
@@ -446,7 +477,7 @@
                                             </fileset>
                                         </copy>
                                         <copy todir="${project.build.directory}/res/res">
-                                            <fileset dir="${project.build.directory}/classes">
+                                            <fileset dir="${project.build.directory}/classes/assets">
                                                 <include name="build.txt" />
                                             </fileset>
                                         </copy>
@@ -507,7 +538,7 @@
                                             </fileset>
                                         </ftp>
                                         <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/">
-                                            <fileset dir="${project.build.directory}/classes">
+                                            <fileset dir="${project.build.directory}/classes/assets">
                                                 <include name="version.txt" />
                                                 <include name="build.txt" />
                                             </fileset>
@@ -585,8 +616,8 @@
                                 <debug>false</debug>
                             </sign>
                             <sdk>
-                                <platform>35</platform>
-                                <buildTools>35.0.0</buildTools>
+                                <platform>${androidPlatform}</platform>
+                                <buildTools>${androidBuildTools}</buildTools>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
@@ -627,6 +658,24 @@
                                 </goals>
                                 <configuration>
                                     <manifestVersionName>${snapshot-version}</manifestVersionName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>se.bjurr.gitchangelog</groupId>
+                        <artifactId>git-changelog-maven-plugin</artifactId>
+                        <version>2.2.0</version>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <id>GenerateGitChangelog</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>git-changelog</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>true</skip>
                                 </configuration>
                             </execution>
                         </executions>

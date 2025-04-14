@@ -17,18 +17,14 @@
  */
 package forge.game.cost;
 
-import java.util.Arrays;
-import java.util.List;
-
 import forge.game.GameLogEntryType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The Class CostReveal.
@@ -100,7 +96,7 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Reveal ");
 

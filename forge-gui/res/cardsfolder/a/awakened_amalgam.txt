@@ -2,6 +2,6 @@ Name:Awakened Amalgam
 ManaCost:4
 Types:Artifact Creature Golem
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of differently named lands you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of differently named lands you control.
 SVar:X:Count$DifferentCardNames_Land.YouCtrl+inZoneBattlefield
 Oracle:Awakened Amalgam's power and toughness are each equal to the number of differently named lands you control.

@@ -1,8 +1,0 @@
-Name:Housemeld
-ManaCost:2 U U
-Types:Sorcery
-A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature. | RememberTargets$ True | SubAbility$ DBAnimate | SpellDescription$ Exile target creature. The exiled card perpetually becomes an enchantment. Then put it onto the battlefield under your control. (It loses all other card types.)
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered | RemoveCardTypes$ True | Types$ Enchantment | Duration$ Perpetual | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Exile target creature. The exiled card perpetually becomes an enchantment. Then put it onto the battlefield under your control. (It loses all other card types.)

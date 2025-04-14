@@ -1,0 +1,9 @@
+Name:Sylvan Scavenging
+ManaCost:1 G G
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ At the beginning of your end step, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPutCounter,DBToken | CharmNum$ 1
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | SpellDescription$ Put a +1/+1 counter on target creature you control.
+SVar:DBToken:DB$ Token | TokenScript$ g_3_3_raccoon | ConditionPresent$ Creature.powerGE4+YouCtrl | SpellDescription$ Create a 3/3 green Raccoon creature token if you control a creature with power 4 or greater.
+DeckHas:Ability$Counters|Token
+Oracle:At the beginning of your end step, choose one —\n• Put a +1/+1 counter on target creature you control.\n• Create a 3/3 green Raccoon creature token if you control a creature with power 4 or greater.

@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Elemental
 PT:*/1
 K:First Strike
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:First strike\nSoulsurge Elemental's power is equal to the number of creatures you control.

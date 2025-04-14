@@ -2,12 +2,12 @@ Name:Eluge, the Shoreless Sea
 ManaCost:1 U U U
 Types:Legendary Creature Elemental Fish
 PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ NICKNAME's power and toughness are each equal to the number of Islands you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ NICKNAME's power and toughness are each equal to the number of Islands you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME enters or attacks, put a flood counter on target land. It's an Island in addition to its other types for as long as it has a flood counter on it.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, put a flood counter on target land. It's an Island in addition to its other types for as long as it has a flood counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Land | TgtPrompt$ Select target land | CounterType$ FLOOD | CounterNum$ 1 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ FountainStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ FLOOD | Duration$ Permanent
-SVar:FountainStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddType$ Island | Description$ It's an Island in addition to its other types for as long as it has a flood counter on it.
+SVar:FountainStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Island | Description$ It's an Island in addition to its other types for as long as it has a flood counter on it.
 S:Mode$ ReduceCost | EffectZone$ Battlefield | ValidCard$ Instant,Sorcery | Activator$ You | Type$ Spell | OnlyFirstSpell$ True | Color$ U | Amount$ Y | Description$ The first instant or sorcery spell you cast each turn costs {U} (or {1}) less to cast for each land you control with a flood counter on it.
 SVar:X:Count$Valid Island.YouCtrl
 SVar:Y:Count$Valid Land.YouCtrl+counters_GE1_FLOOD

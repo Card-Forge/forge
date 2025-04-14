@@ -2,9 +2,9 @@ Name:Soldevi Golem
 ManaCost:4
 Types:Artifact Creature Golem
 PT:5/3
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap CARDNAME.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap this creature.
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.OppCtrl+tapped | TgtPrompt$ Select target tapped creature an opponent controls | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:All
-Oracle:Soldevi Golem doesn't untap during your untap step.\nAt the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap Soldevi Golem.
+Oracle:This creature doesn't untap during your untap step.\nAt the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap this creature.

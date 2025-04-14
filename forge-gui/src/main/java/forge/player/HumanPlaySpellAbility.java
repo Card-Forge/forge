@@ -17,14 +17,8 @@
  */
 package forge.player;
 
-import java.util.Collections;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
-
 import forge.card.CardType;
-import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameObject;
@@ -42,6 +36,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.zone.Zone;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * <p>
@@ -64,10 +59,13 @@ public class HumanPlaySpellAbility {
     public final boolean playAbility(final boolean mayChooseTargets, final boolean isFree, final boolean skipStack) {
         final Player human = ability.getActivatingPlayer();
         final Game game = human.getGame();
+        boolean refreeze = game.getStack().isFrozen();
 
         if (!skipStack) {
-            // CR 401.5: freeze top library cards until cast/activated so player can't cheat and see the next
-            game.setTopLibsCast();
+            if (!refreeze) {
+                // CR 401.5: freeze top library cards until cast/activated so player can't cheat and see the next
+                game.setTopLibsCast();
+            }
 
             if (ability.getApi() == ApiType.Charm) {
                 if (ability.isAnnouncing("X")) {
@@ -96,9 +94,6 @@ public class HumanPlaySpellAbility {
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(ability.getMayPlay());
 
-        // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
-        boolean refreeze = game.getStack().isFrozen();
-
         if (ability.isSpell() && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
             if (fromZone != null) {
@@ -113,13 +108,13 @@ public class HumanPlaySpellAbility {
             ability.setPaidLife(0);
         }
 
-        ability = GameActionUtil.addExtraKeywordCost(ability);
+        if (ability.isSpell() && !c.isCopiedSpell()) {
+            ability = GameActionUtil.addExtraKeywordCost(ability);
+        }
 
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
 
-        final boolean playerManaConversion = human.hasManaConversion()
-                && human.getController().confirmStaticApplication(c, null, "Do you want to spend mana as though it were mana of any type to pay the cost?", null);
         boolean manaColorConversion = false;
 
         if (!ability.isCopied()) {
@@ -143,14 +138,9 @@ public class HumanPlaySpellAbility {
             }
 
             if (ability.hasParam("ManaConversion")) {
-                AbilityUtils.applyManaColorConversion(manapool, ability.getParam("ManaConversion"));
+                AbilityUtils.applyManaColorConversion(payment, ability.getParam("ManaConversion"));
                 manaColorConversion = true;
             }
-        }
-
-        if (playerManaConversion) {
-            AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_TYPE_CONVERSION);
-            human.incNumManaConversion();
         }
 
         // reset is also done early here, because if an ability is canceled from targeting it might otherwise lead to refunding mana from earlier cast
@@ -197,10 +187,7 @@ public class HumanPlaySpellAbility {
             if (manaColorConversion) {
                 manapool.restoreColorReplacements();
             }
-            if (playerManaConversion) {
-                manapool.restoreColorReplacements();
-                human.decNumManaConversion();
-            }
+
             return false;
         }
 
@@ -283,7 +270,7 @@ public class HumanPlaySpellAbility {
             for (final String aVar : announce.split(",")) {
                 final String varName = aVar.trim();
                 if ("CreatureType".equals(varName)) {
-                    final String choice = pc.chooseSomeType("Creature", ability, CardType.Constant.CREATURE_TYPES, Collections.emptyList());
+                    final String choice = pc.chooseSomeType("Creature", ability, CardType.getAllCreatureTypes());
                     ability.getHostCard().setChosenType(choice);
                 }
                 if ("ChooseNumber".equals(varName)) {

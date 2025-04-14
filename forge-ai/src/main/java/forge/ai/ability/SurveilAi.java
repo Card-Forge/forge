@@ -1,12 +1,6 @@
 package forge.ai.ability;
 
-import java.util.Map;
-
-import forge.ai.AiCardMemory;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayLife;
@@ -17,6 +11,8 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.Map;
 
 public class SurveilAi extends SpellAbilityAi {
 

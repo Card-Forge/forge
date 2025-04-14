@@ -2,6 +2,6 @@ Name:Bargaining Table
 ManaCost:5
 Types:Artifact
 A:AB$ Draw | Cost$ X T | NumCards$ 1 | AnnounceType$ Opponent | SpellDescription$ Draw a card. X is the number of cards in an opponent's hand.
-SVar:X:Count$InChosenHand
+SVar:X:Count$ValidHand Card.ChosenCtrl
 AI:RemoveDeck:All
 Oracle:{X}, {T}: Draw a card. X is the number of cards in an opponent's hand.

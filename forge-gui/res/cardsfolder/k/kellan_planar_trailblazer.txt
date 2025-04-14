@@ -1,0 +1,12 @@
+Name:Kellan, Planar Trailblazer
+ManaCost:R
+Types:Legendary Creature Human Faerie Scout
+PT:2/1
+A:AB$ Animate | Cost$ 1 R | ConditionPresent$ Card.Self+Scout | Types$ Human,Faerie,Detective | RemoveCreatureTypes$ True | Triggers$ KellanCombat | Duration$ Permanent | SpellDescription$ If NICKNAME is a Scout, it becomes a Human Faerie Detective and gains "Whenever NICKNAME deals combat damage to a player, exile the top card of your library. You may play that card this turn."
+SVar:KellanCombat:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, exile the top card of your library. You may play that card this turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Animate | Cost$ 2 R | ConditionPresent$ Card.Self+Detective | Types$ Human,Faerie,Rogue | RemoveCreatureTypes$ True | Duration$ Permanent | Power$ 3 | Toughness$ 2 | Keywords$ Double Strike | SpellDescription$ If NICKNAME is a Detective, it becomes a 3/2 Human Faerie Rogue and gains double strike.
+Oracle:{1}{R}: If Kellan is a Scout, it becomes a Human Faerie Detective and gains "Whenever Kellan deals combat damage to a player, exile the top card of your library. You may play that card this turn."\n{2}{R}: If Kellan is a Detective, it becomes a 3/2 Human Faerie Rogue and gains double strike.

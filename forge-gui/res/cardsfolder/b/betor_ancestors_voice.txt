@@ -1,0 +1,14 @@
+Name:Betor, Ancestor's Voice
+ManaCost:2 W B G
+Types:Legendary Creature Spirit Dragon
+PT:3/5
+K:Flying
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a number of +1/+1 counters on up to one other target creature you control equal to the amount of life you gained this turn. Return up to one target creature card with mana value less than or equal to the amount of life you lost this turn from your graveyard to the battlefield.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature you control | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | ValidTgts$ Creature.cmcLEY+YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature card with mana value less than or equal to the amount of life you lost | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$LifeYouGainedThisTurn
+SVar:Y:Count$LifeYouLostThisTurn
+DeckHas:Ability$LifeGain|Graveyard
+DeckHints:Ability$LifeGain
+Oracle:Flying, lifelink\nAt the beginning of your end step, put a number of +1/+1 counters on up to one other target creature you control equal to the amount of life you gained this turn. Return up to one target creature card with mana value less than or equal to the amount of life you lost this turn from your graveyard to the battlefield.

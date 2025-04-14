@@ -1,0 +1,10 @@
+Name:Wary Zone Guard
+ManaCost:2 G
+Types:Creature Human Survivor
+PT:3/3
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, return up to one target land card from your graveyard to the battlefield. CARDNAME perpetually gets +1/+1.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouCtrl | TargetMin$ 0 | TgtPrompt$ Select up to one target land card from your graveyard | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | PumpZone$ Battlefield | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Wary Zone Guard enters tapped.\nSurvival — At the beginning of your second main phase, if Wary Zone Guard is tapped, return up to one target land card from your graveyard to the battlefield. Wary Zone Guard perpetually gets +1/+1.

@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 A:AB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land. | Cost$ T | SpellDescription$ Destroy target land.
 SVar:DBTap:DB$ Tap | Defined$ Self | UnlessCost$ B B B | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBChooseOpponent
 SVar:DBChooseOpponent:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBChooseLand
-SVar:DBChooseLand:DB$ ChooseCard | Defined$ ChosenPlayer | Choices$ Land.YouCtrl | Mandatory$ True | Reveal$ True | ChoiceTitle$ Select a land for opponent to sacrifice | SubAbility$ DBSacLand
+SVar:DBChooseLand:DB$ ChooseCard | Defined$ ChosenPlayer | Choices$ Land.YouCtrl | Mandatory$ True | Reveal$ True | ChoiceTitle$ Choose a land for CARDNAME's controller to sacrifice | SubAbility$ DBSacLand
 SVar:DBSacLand:DB$ SacrificeAll | Defined$ ChosenCard
 SVar:PlayMain1:FALSE
 DeckHas:Ability$Sacrifice

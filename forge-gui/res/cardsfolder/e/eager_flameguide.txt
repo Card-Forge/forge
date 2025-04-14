@@ -1,0 +1,12 @@
+Name:Eager Flameguide
+ManaCost:2 R
+Types:Enchantment Creature Raccoon Glimmer
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigAddMana | TriggerDescription$ When CARDNAME enters, add {C}{C}{C}. Spend this mana only to cast creature spells.
+SVar:TrigAddMana:DB$ Mana | Produced$ C | Amount$ 3 | RestrictValid$ Spell.Creature
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDig | TriggerDescription$ When CARDNAME dies, exile the top two cards of your library. Until the end of your next turn, you may cast creature spells from among the exiled cards.
+SVar:TrigDig:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.Creature+IsRemembered+nonLand | AffectedZone$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Eager Flameguide enters, add {C}{C}{C}. Spend this mana only to cast creature spells.\nWhen Eager Flameguide dies, exile the top two cards of your library. Until the end of your next turn, you may cast creature spells from among the exiled cards.

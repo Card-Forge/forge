@@ -1,11 +1,11 @@
 package forge.itemmanager.filters;
 
-import com.google.common.base.Predicate;
-
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
+
+import java.util.function.Predicate;
 
 
 public class CardSearchFilter extends TextSearchFilter<PaperCard> {
@@ -45,6 +45,6 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     @Override
     protected <U extends InventoryItem> boolean showUnsupportedItem(U item) {
         //fallback to regular item text filter if item not PaperCard
-        return SFilterUtil.buildItemTextFilter(txtSearch.getText()).apply(item);
+        return SFilterUtil.buildItemTextFilter(txtSearch.getText()).test(item);
     }
 }

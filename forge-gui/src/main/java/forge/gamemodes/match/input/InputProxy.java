@@ -17,12 +17,6 @@
  */
 package forge.gamemodes.match.input;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.concurrent.atomic.AtomicReference;
-
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.Player;
@@ -31,6 +25,12 @@ import forge.game.spellability.SpellAbility;
 import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <p>

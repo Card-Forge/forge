@@ -1,0 +1,8 @@
+Name:Delightful Discovery
+ManaCost:4 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each spell your opponents have cast this turn.
+A:SP$ Scry | ScryNum$ 2 | SubAbility$ DBDraw | SpellDescription$ Scry 2, then draw two cards. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:DBDraw:DB$ Draw | NumCards$ 2
+SVar:X:Count$ThisTurnCast_Card.OppCtrl
+Oracle:This spell costs {1} less to cast for each spell your opponents have cast this turn.\nScry 2, then draw two cards. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)

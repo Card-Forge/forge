@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
-
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.SpellAbilityEffect;
@@ -64,8 +63,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                 // Expand this area as it becomes needed
                 // Use "DefinedExchange" to Reference Object that is Exchanging the other direction
                 GameObject obj = Iterables.getFirst(getDefinedOrTargeted(sa, "DefinedExchange"), null);
-                if (obj instanceof Card) {
-                    Card c = (Card)obj;
+                if (obj instanceof Card c) {
                     if (!c.isInPlay() || si == null) {
                         // Exchanging object isn't available, continue
                         continue;

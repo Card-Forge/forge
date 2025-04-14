@@ -1,19 +1,15 @@
 package forge.game.cost;
 
-import java.util.Map;
-
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 public class CostForage extends CostPartWithList {
 
@@ -25,7 +21,7 @@ public class CostForage extends CostPartWithList {
         if (graveyard.size() >= 3) {
             return true;
         }
-        
+
         CardCollection food = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Food"), CardPredicates.canBeSacrificedBy(ability, effect));
         if (!food.isEmpty()) {
             return true;

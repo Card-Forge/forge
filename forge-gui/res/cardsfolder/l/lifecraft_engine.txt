@@ -1,0 +1,11 @@
+Name:Lifecraft Engine
+ManaCost:3
+Types:Artifact Vehicle
+PT:4/4
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As this Vehicle enters, choose a creature type.
+S:Mode$ Continuous | Affected$ Creature.Vehicle+YouCtrl | AddType$ ChosenType | Description$ Vehicle creatures you control are the chosen creature type in addition to their other types.
+S:Mode$ Continuous | Affected$ Creature.ChosenType+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Each creature you control of the chosen type other than this Vehicle gets +1/+1.
+K:Crew:3
+SVar:PlayMain1:TRUE
+Oracle:As this Vehicle enters, choose a creature type.\nVehicle creatures you control are the chosen creature type in addition to their other types.\nEach creature you control of the chosen type other than this Vehicle gets +1/+1.\nCrew 3

@@ -2,7 +2,7 @@ Name:War Cadence
 ManaCost:2 R
 Types:Enchantment
 A:AB$ Effect | Cost$ X R | StaticAbilities$ CadenceStaticAb | Stackable$ False | SetChosenNumber$ X | AILogic$ RestrictBlocking | SpellDescription$ This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
-SVar:CadenceStaticAb:Mode$ CantBlockUnless | Cost$ XChosen | EffectZone$ Command | Description$ This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
+SVar:CadenceStaticAb:Mode$ CantBlockUnless | Cost$ XChosen | Description$ This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
 SVar:X:Count$xPaid
 SVar:XChosen:Count$ChosenNumber
 SVar:NonStackingEffect:True

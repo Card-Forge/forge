@@ -1,0 +1,9 @@
+Name:Teval's Judgment
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever one or more cards leave your graveyard, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBTreasure,DBSibsig | ChoiceRestriction$ ThisTurn | CharmNum$ 1
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+SVar:DBSibsig:DB$ Token | TokenScript$ b_2_2_zombie_druid | SpellDescription$ Create a 2/2 black Zombie Druid creature token.
+Oracle:Whenever one or more cards leave your graveyard, choose one that hasn't been chosen this turn —\n• Draw a card.\n• Create a Treasure token.\n• Create a 2/2 black Zombie Druid creature token.

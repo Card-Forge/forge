@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks, you may pay {2}. If you do, CARDNAME can't be blocked this turn and it perpetually gets +2/+0.
 SVar:TrigUnblockable:AB$ Effect | Cost$ 2 | StaticAbilities$ Unblockable | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | NumAtt$ 2 | Duration$ Perpetual
+SVar:DBPump:DB$ Pump | NumAtt$ +2 | Duration$ Perpetual
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.EffectSource | Description$ EFFECTSOURCE can't be blocked this turn.
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token & Type$Artifact|Powerstone

@@ -1,11 +1,10 @@
 Name:Sleep with the Fishes
 ManaCost:2 U U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
+K:Enchant:Creature
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature and you create a 1/1 blue Fish creature token with "This creature can't be blocked."
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ u_1_1_fish_unblockable
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
 DeckHas:Ability$Token & Type$Fish
 Oracle:Enchant creature\nWhen Sleep with the Fishes enters, tap enchanted creature and you create a 1/1 blue Fish creature token with "This creature can't be blocked."\nEnchanted creature doesn't untap during its controller's untap step.

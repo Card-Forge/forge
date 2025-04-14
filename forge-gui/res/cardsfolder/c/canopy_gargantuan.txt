@@ -1,0 +1,11 @@
+Name:Canopy Gargantuan
+ManaCost:5 G G
+Types:Creature Dragon
+PT:7/7
+K:Flying
+K:Ward:2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a number of +1/+1 counters on each other creature you control equal to that creature's toughness.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Valid Creature.YouCtrl+Other | CounterType$ P1P1 | CounterNumPerDefined$ X
+SVar:X:Count$CardToughness
+DeckHas:Ability$Counters
+Oracle:Flying, ward {2}\nAt the beginning of your upkeep, put a number of +1/+1 counters on each other creature you control equal to that creature's toughness.

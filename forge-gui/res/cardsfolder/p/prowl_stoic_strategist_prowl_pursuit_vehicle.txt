@@ -6,7 +6,7 @@ K:More Than Meets the Eye:2 W
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever NICKNAME attacks, exile up to one other target tapped creature or Vehicle. For as long as that card remains exiled, its owner may play it.
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.Other+tapped,Vehicle.Other+tapped | TgtPrompt$ Select up to one other target tapped creature or Vehicle | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ Play | ForgetOnMoved$ Exile | EffectOwner$ TargetedOwner | Duration$ Permanent
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as that card remains exiled, its owner may play it.
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as that card remains exiled, its owner may play it.
 T:Mode$ SpellCast | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a player plays a card exiled with NICKNAME, you draw a card and convert NICKNAME.
 T:Mode$ LandPlayed | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever a player plays a card exiled with NICKNAME, you draw a card and convert NICKNAME.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBConvert

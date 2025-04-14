@@ -29,9 +29,9 @@ public class GitLogs {
                 if (entry.updated == null)
                     continue;
                 Date feedDate = atomDate.parse(entry.updated);
-                if (buildDateOriginal != null && feedDate.before(buildDateOriginal))
+                if (buildDateOriginal != null && feedDate.toInstant().isBefore(buildDateOriginal.toInstant()))
                     continue;
-                if (maxDate != null && feedDate.after(maxDate))
+                if (maxDate != null && feedDate.toInstant().isAfter(maxDate.toInstant()))
                     continue;
                 logs.append(simpleDate.format(feedDate)).append(" | ").append(StringEscapeUtils.unescapeXml(title).replace("\n", "").replace("        ", "")).append("\n\n");
                 if (c >= 15)

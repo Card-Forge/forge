@@ -3,14 +3,12 @@ ManaCost:2 U U
 Types:Creature Oyster
 PT:0/3
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | IsCurse$ True | RememberObjects$ Targeted | SpellDescription$ For as long as CARDNAME remains tapped, target tapped creature doesn't untap during its controller's untap step.
-T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | IsPresent$ Creature.IsRemembered | TriggerDescription$ At the beginning of each of your draw steps, put a -1/-1 counter on that creature.
-SVar:TrigCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
-S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
-T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ClearRemembered | Static$ True
-T:Mode$ Untaps | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ RemoveCounters | TriggerDescription$ When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
-T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ RemoveCounters | Secondary$ True | TriggerDescription$ When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
-SVar:RemoveCounters:DB$ RemoveCounter | Defined$ Remembered | CounterType$ M1M1 | CounterNum$ All | SubAbility$ ClearRemembered
-SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | ReplacementEffects$ DontUntap | Triggers$ TrigDraw,TrigUntap,TrigZone | Duration$ UntilUntaps | IsCurse$ True | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ For as long as CARDNAME remains tapped, target tapped creature doesn't untap during its controller's untap step, and at the beginning of each of your draw steps, put a -1/-1 counter on that creature. When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
+SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ That permanent doesn't untap during its controller's untap step for as long as EFFECTSOURCE remains tapped.
+SVar:TrigDraw:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | Execute$ TrigCounter | TriggerDescription$ At the beginning of each of your draw steps, put a -1/-1 counter on that creature.
+SVar:TrigCounter:DB$ PutCounter | Defined$ RememberedLKI | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
+SVar:TrigUntap:Mode$ Untaps | ValidCard$ Card.EffectSource | Execute$ RemoveCounters | TriggerDescription$ When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
+SVar:TrigZone:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.EffectSource | Execute$ RemoveCounters | Secondary$ True | TriggerDescription$ When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
+SVar:RemoveCounters:DB$ RemoveCounter | Defined$ RememberedLKI | CounterType$ M1M1 | CounterNum$ All
 AI:RemoveDeck:All
 Oracle:You may choose not to untap Giant Oyster during your untap step.\n{T}: For as long as Giant Oyster remains tapped, target tapped creature doesn't untap during its controller's untap step, and at the beginning of each of your draw steps, put a -1/-1 counter on that creature. When Giant Oyster leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.

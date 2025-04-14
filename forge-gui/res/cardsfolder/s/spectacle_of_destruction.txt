@@ -1,0 +1,9 @@
+Name:Spectacle of Destruction
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more creatures die, put a wreck counter on this enchantment.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ WRECK
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_WRECK | Execute$ TrigRemoveCounter | TriggerDescription$ At the beginning of your upkeep, if this enchantment has one or more wreck counters on it, remove a wreck counter from it and seek a nonland card.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | CounterType$ WRECK | SubAbility$ DBSeek
+SVar:DBSeek:DB$ Seek | Type$ Card.nonLand
+Oracle:Whenever one or more creatures die, put a wreck counter on this enchantment.\nAt the beginning of your upkeep, if this enchantment has one or more wreck counters on it, remove a wreck counter from it and seek a nonland card.

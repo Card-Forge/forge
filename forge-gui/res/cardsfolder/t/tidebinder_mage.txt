@@ -2,8 +2,9 @@ Name:Tidebinder Mage
 ManaCost:U U
 Types:Creature Merfolk Wizard
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap target red or green creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control CARDNAME.
-SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.Red+OppCtrl,Creature.Green+OppCtrl | TgtPrompt$ Choose target red or green creature an opponent controls. | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | Duration$ UntilHostLeavesPlay
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When this creature enters, tap target red or green creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control this creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.Red+OppCtrl,Creature.Green+OppCtrl | TgtPrompt$ Choose target red or green creature an opponent controls. | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | ReplacementEffects$ DontUntap | Duration$ AsLongAsInPlay
+SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ That creature doesn't untap during its controller's untap step for as long as EFFECTSOURCE remains on the battlefield.
 SVar:PlayMain1:TRUE
-Oracle:When Tidebinder Mage enters, tap target red or green creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control Tidebinder Mage.
+Oracle:When this creature enters, tap target red or green creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control this creature.

@@ -1,0 +1,9 @@
+Name:Naga Fleshcrafter
+ManaCost:3 U
+Types:Creature Snake Shapeshifter
+PT:0/0
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | SpellDescription$ You may have this creature enter as a copy of any creature on the battlefield.
+A:AB$ PutCounter | Cost$ 2 U ExileFromGrave<1/CARDNAME/this card> | PrecostDesc$ Renew — | ValidTgts$ Creature.nonLegendary+YouCtrl | TgtPrompt$ Select target nonlegendary creature you control | CounterType$ P1P1 | CounterNum$ 1 | ActivationZone$ Graveyard | SorcerySpeed$ True | SubAbility$ DBClone | SpellDescription$ Put a +1/+1 counter on target nonlegendary creature you control. Each other creature you control becomes a copy of that creature until end of turn. Activate only as a sorcery.
+SVar:DBClone:DB$ Clone | Defined$ Targeted | CloneTarget$ Valid Creature.YouCtrl+NotDefinedTargeted | Duration$ UntilEndOfTurn
+Oracle:You may have this creature enter as a copy of any creature on the battlefield.\nRenew — {2}{U}, Exile this card from your graveyard: Put a +1/+1 counter on target nonlegendary creature you control. Each other creature you control becomes a copy of that creature until end of turn. Activate only as a sorcery.

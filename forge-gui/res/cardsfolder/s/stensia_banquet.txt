@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Sorcery
 A:SP$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals damage to target opponent or planeswalker equal to the number of Vampires you control. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-SVar:X:Count$TypeYouCtrl.Vampire
+SVar:X:Count$Valid Vampire.YouCtrl
 AI:RemoveDeck:Random
 DeckHints:Type$Vampire
 Oracle:Stensia Banquet deals damage to target opponent or planeswalker equal to the number of Vampires you control.\nDraw a card.

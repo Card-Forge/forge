@@ -2,7 +2,7 @@ Name:Farmstead Gleaner
 ManaCost:3
 Types:Artifact Creature Scarecrow
 PT:2/2
-K:CARDNAME doesn't untap during your untap step.
-A:AB$ PutCounter | Cost$ 2 Q | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+A:AB$ PutCounter | Cost$ 2 Q | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on this creature.
 DeckHas:Ability$Counters
-Oracle:Farmstead Gleaner doesn't untap during your untap step.\n{2}, {Q}: Put a +1/+1 counter on Farmstead Gleaner. ({Q} is the untap symbol.)
+Oracle:This creature doesn't untap during your untap step.\n{2}, {Q}: Put a +1/+1 counter on this creature. ({Q} is the untap symbol.)

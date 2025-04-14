@@ -85,5 +85,48 @@ ScryfallCode=SPG
 71 M Unholy Heat @Josh Hass
 72 M Collected Company @Borja Pindado
 73 M Noxious Revival @Javier Charro
+74 M Condemn @Rovina Cai
+75 M Sphinx's Tutelage @Jason A. Engle
+76 M Grim Tutor @DZO
 77 M Embercleave @Wylie Beckert
+78 M Goblin Bushwhacker @Dominik Mayer
+79 M Bloom Tender @Julie Dillon
+80 M Paradise Druid @Alex Dos Diaz
+81 M Akroma's Memorial @Carly Mazur
 82 M Temporal Manipulation @Raita Kazama
+83 M Fiend Artisan @Carl Critchlow
+84 M Cavalier of Dawn @Femke Hiemstra
+85 M Thoughtcast @Lucie Louxor
+86 M Whir of Invention @Brian Chippendale
+87 M Bone Miser @Jay Howell
+88 M Lord of the Undead @Skinner
+89 M Chandra's Ignition @Tsubonari
+90 M Galvanic Blast @Laura Plansker
+91 M Pathbreaker Ibex @Rocodrilo
+92 M Chrome Mox @Princess Hidir
+93 M Skysovereign, Consul Flagship @Imiri Sakabashira
+94 M Cavalier of Dawn @Femke Hiemstra
+95 M Thoughtcast @Lucie Louxor
+96 M Whir of Invention @Brian Chippendale
+97 M Bone Miser @Jay Howell
+98 M Lord of the Undead @Skinner
+99 M Chandra's Ignition @Tsubonari
+100 M Galvanic Blast @Laura Plansker
+101 M Pathbreaker Ibex @Rocodrilo
+102 M Chrome Mox @Princess Hidir
+103 M Skysovereign, Consul Flagship @Imiri Sakabashira
+104 M Eerie Ultimatum @Dominik Mayer
+105 M Emergent Ultimatum @Dominik Mayer
+106 M Genesis Ultimatum @Dominik Mayer
+107 M Inspired Ultimatum @Dominik Mayer
+108 M Ruinous Ultimatum @Dominik Mayer
+109 M Arid Mesa @Adam Paquette
+110 M Marsh Flats @Adam Paquette
+111 M Misty Rainforest @Adam Paquette
+112 M Scalding Tarn @Adam Paquette
+113 M Verdant Catacombs @Adam Paquette
+114 M Arid Mesa @Constantin Marin
+115 M Marsh Flats @Valera Lutfullina
+116 M Misty Rainforest @Livia Prima
+117 M Scalding Tarn @Marco Gorlei
+118 M Verdant Catacombs @Johannes Voss

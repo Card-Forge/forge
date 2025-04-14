@@ -1,0 +1,9 @@
+Name:Sagu Pummeler
+ManaCost:3 G
+Types:Creature Beast
+PT:4/4
+K:Reach
+A:AB$ Pump | PrecostDesc$ Renew — | Cost$ 4 G ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | ValidTgts$ Creature | SorcerySpeed$ True | SubAbility$ DBCounter | SpellDescription$ Put two +1/+1 counters and a reach counter on target creature. Activate only as a sorcery.
+SVar:DBCounter:DB$ PutCounterAll | ValidCards$ Creature.targetedBy | CounterType$ P1P1 | CounterNum$ 2 | CounterType2$ Reach | CounterNum2$ 1
+DeckHas:Ability$Graveyard|Counters
+Oracle:Reach\nRenew — {4}{G}, Exile this card from your graveyard: Put two +1/+1 counters and a reach counter on target creature. Activate only as a sorcery.

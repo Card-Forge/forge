@@ -591,10 +591,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 Map<Comparable<?>, Pile> piles = new TreeMap<>();
                 for (ItemInfo itemInfo : group.items) {
                     Comparable<?> key = groupPileBy.fnSort.apply(itemInfo);
-                    if (!piles.containsKey(key)) {
+                    if (key != null && !piles.containsKey(key)) {
                         piles.put(key, new Pile());
                     }
-                    piles.get(key).items.add(itemInfo);
+                    Pile p = key == null ? null : piles.getOrDefault(key, null);
+                    if (p != null)
+                        p.items.add(itemInfo);
                 }
                 group.piles.clear();
                 group.piles.addAll(piles.values());

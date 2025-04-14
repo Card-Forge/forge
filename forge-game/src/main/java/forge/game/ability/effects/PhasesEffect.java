@@ -72,30 +72,44 @@ public class PhasesEffect extends SpellAbilityEffect {
                 toPhase.add(tgtC);
             }
             for (final Card tgtC : toPhase) {
-                tgtC.phase(false);
-                if (tgtC.isPhasedOut()) {
-                    phasedOut.add(tgtC);
-                    tgtC.setWontPhaseInNormal(wontPhaseInNormal);
+                Card gameCard = game.getCardState(tgtC, null);
+                // gameCard is LKI in that case, the card is not in game anymore
+                // or the timestamp did change
+                // this should check Self too
+                if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                    continue;
+                }
+                gameCard.phase(false);
+                if (gameCard.isPhasedOut()) {
+                    phasedOut.add(gameCard);
+                    gameCard.setWontPhaseInNormal(wontPhaseInNormal);
                 } else {
                     // won't trigger tap or untap triggers when phase in
                     if (sa.hasParam("Tapped")) {
-                        tgtC.setTapped(true);
+                        gameCard.setTapped(true);
                     } else if (sa.hasParam("Untapped")) {
-                        tgtC.setTapped(false);
+                        gameCard.setTapped(false);
                     }
-                    tgtC.setWontPhaseInNormal(false);
+                    gameCard.setWontPhaseInNormal(false);
                 }
             }
         } else { // just phase out
             for (final Card tgtC : tgtCards) {
-                if (!tgtC.isPhasedOut() && !StaticAbilityCantPhase.cantPhaseOut(tgtC)) {
-                    tgtC.phase(false);
-                    if (tgtC.isPhasedOut()) {
+                Card gameCard = game.getCardState(tgtC, null);
+                // gameCard is LKI in that case, the card is not in game anymore
+                // or the timestamp did change
+                // this should check Self too
+                if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                    continue;
+                }
+                if (!gameCard.isPhasedOut() && !StaticAbilityCantPhase.cantPhaseOut(gameCard)) {
+                    gameCard.phase(false);
+                    if (gameCard.isPhasedOut()) {
                         if (sa.hasParam("RememberAffected")) {
-                            source.addRemembered(tgtC);
+                            source.addRemembered(gameCard);
                         }
-                        phasedOut.add(tgtC);
-                        tgtC.setWontPhaseInNormal(wontPhaseInNormal);
+                        phasedOut.add(gameCard);
+                        gameCard.setWontPhaseInNormal(wontPhaseInNormal);
                     }
                 }
             }

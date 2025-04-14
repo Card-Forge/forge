@@ -1,0 +1,9 @@
+Name:Dynamite Diver
+ManaCost:R
+Types:Creature Goblin Pilot
+PT:1/1
+S:Mode$ TapPowerValue | ValidSA$ Activated.Saddle+Mount,Activated.Crew+Vehicle | ValidCard$ Card.Self | Value$ 2 | Description$ This creature saddles Mounts and crews Vehicles as though its power were 2 greater.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature dies, it deals 1 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
+DeckHints:Type$Vehicle|Mount
+Oracle:This creature saddles Mounts and crews Vehicles as though its power were 2 greater.\nWhen this creature dies, it deals 1 damage to any target.

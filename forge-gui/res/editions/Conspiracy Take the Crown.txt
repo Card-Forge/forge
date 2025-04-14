@@ -5,7 +5,7 @@ Name=Conspiracy: Take the Crown
 Code2=CN2
 Type=Draft
 BoosterCovers=3
-Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Draft Matters"), 1 RareMythic:!fromSheet("CN2 Draft Matters"), 1 fromSheet("CN2 Draft Matters")
+Booster=10 Common:!fromSheet("CN2 Draft Matters"), 3 Uncommon:!fromSheet("CN2 Draft Matters"), 1 RareMythic:!fromSheet("CN2 Draft Matters"):fromSheet("CN2 cards"), 1 fromSheet("CN2 Draft Matters")
 AdditionalSheetForFoils=fromSheet("CN2 Foil Kaya")
 ScryfallCode=CN2
 
@@ -162,7 +162,7 @@ ScryfallCode=CN2
 150 C Unnerve @Terese Nielsen
 151 U Burn Away @Vincent Proce
 152 R Burning Wish @Scott M. Fischer
-153 R Charmbreaker Devils @Dan Scott
+153 R Charmbreaker Devils @Dan Murayama Scott
 154 U Coordinated Assault @John Severin Brassell
 155 C Ember Beast @David Rapoza
 156 C Fiery Fall @Daarken

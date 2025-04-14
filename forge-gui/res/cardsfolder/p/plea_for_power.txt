@@ -5,6 +5,6 @@ A:SP$ Vote | Defined$ Player | VoteTime$ DBAddTurn | VoteKnowledge$ DBDrawThree 
 SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1 | Defined$ You
 SVar:DBDrawThree:DB$ Draw | Defined$ You | NumCards$ 3
 SVar:NeedsToPlayVar:Z LE6
-SVar:Z:Count$InYourHand
+SVar:Z:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:Random
 Oracle:Will of the council — Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards.

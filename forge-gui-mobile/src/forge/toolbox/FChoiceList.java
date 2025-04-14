@@ -441,14 +441,18 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         if (cardView.hasAlternateState()) {
             if (cardView.hasBackSide())
                 showAlt = value.contains(cardView.getBackSideName()) || cardView.getAlternateState().getAbilityText().contains(value);
-            else if (cardView.isAdventureCard())
+            else if (cardView.hasSecondaryState())
                 showAlt = value.equals(cardView.getAlternateState().getAbilityText());
             else if (cardView.isSplitCard()) {
                 //special case if aftermath cards can be cast from graveyard like yawgmoths will, you will have choices
                 if (cardView.getAlternateState().getOracleText().contains("Aftermath"))
                     showAlt = cardView.getAlternateState().getOracleText().contains(value);
-                else
-                    showAlt = value.equals(cardView.getAlternateState().getAbilityText());
+                else {
+                    if (cardView.isRoom()) // special case for room cards
+                        showAlt = cardView.getAlternateState().getName().equalsIgnoreCase(value);
+                    else
+                        showAlt = value.equals(cardView.getAlternateState().getAbilityText());
+                }
             }
         }
         return showAlt;

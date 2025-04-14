@@ -1,0 +1,8 @@
+Name:Dusyut Earthcarver
+ManaCost:5 G
+Types:Creature Elephant Druid
+PT:4/4
+K:Reach
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigEndure | TriggerZones$ Battlefield | TriggerDescription$ When this creature enters, it endures 3. (Put three +1/+1 counters on it or create a 3/3 white Spirit creature token.)
+SVar:TrigEndure:DB$ Endure | Num$ 3
+Oracle:Reach\nWhen this creature enters, it endures 3. (Put three +1/+1 counters on it or create a 3/3 white Spirit creature token.)

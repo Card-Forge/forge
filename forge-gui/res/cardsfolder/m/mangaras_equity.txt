@@ -1,7 +1,8 @@
 Name:Mangara's Equity
 ManaCost:1 W W
 Types:Enchantment
-K:UpkeepCost:1 W
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {1}{W}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ 1 W
 K:ETBReplacement:Other:ChooseBlackOrRed
 SVar:ChooseBlackOrRed:DB$ ChooseColor | Defined$ You | Choices$ black,red | AILogic$ MostProminentHumanCreatures | SpellDescription$ As CARDNAME enters, choose black or red.
 T:Mode$ DamageDone | ValidSource$ Creature.ChosenColor+inZoneBattlefield | ValidTarget$ Creature.White+YouCtrl,You | TriggerZones$ Battlefield | Execute$ MangarasRetribution | TriggerDescription$ Whenever a creature of the chosen color deals damage to you or a white creature you control, CARDNAME deals that much damage to that creature.

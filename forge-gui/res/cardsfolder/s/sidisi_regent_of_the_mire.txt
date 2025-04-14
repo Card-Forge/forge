@@ -1,0 +1,7 @@
+Name:Sidisi, Regent of the Mire
+ManaCost:1 B
+Types:Legendary Creature Zombie Snake Warlock
+PT:1/3
+A:AB$ ChangeZone | Cost$ T Sac<1/Creature.Other+cmcEQX/a creature you control with mana value X other than NICKNAME> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value X plus 1 in your graveyard | ValidTgts$ Creature.YouOwn | SorcerySpeed$ True | SpellDescription$ Return target creature card with mana value X plus 1 from your graveyard to the battlefield. Activate only as a sorcery.
+SVar:X:Targeted$CardManaCost/Minus.1
+Oracle:{T}, Sacrifice a creature you control with mana value X other than Sidisi: Return target creature card with mana value X plus 1 from your graveyard to the battlefield. Activate only as a sorcery.

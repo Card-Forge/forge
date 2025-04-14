@@ -2,6 +2,7 @@ Name:Vec Townships
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Duration$ Permanent
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBStayTapped
+SVar:DBStayTapped:DB$ Effect | ReplacementEffects$ DontUntap | RememberObjects$ Self | ExileOnMoved$ Battlefield | Duration$ UntilTheEndOfYourNextUntap
+SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ Player.Activator | Layer$ CantHappen | Description$ EFFECTSOURCE doesn't untap during your next untap step.
 Oracle:{T}: Add {C}.\n{T}: Add {G} or {W}. Vec Townships doesn't untap during your next untap step.

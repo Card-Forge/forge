@@ -159,7 +159,9 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
-        FThreads.invokeInEdtLater(() -> getDeviceAdapter().closeSplashScreen());
+        // closeSplashScreen() is called early on non-Windows OS so it will not crash, LWJGL3 bug on AWT Splash.
+        if (OperatingSystem.isWindows())
+            getDeviceAdapter().closeSplashScreen();
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
@@ -1092,7 +1094,7 @@ public class Forge implements ApplicationListener {
         System.out.println(message);
     }
 
-    public static void startKeyInput(KeyInputAdapter adapter, boolean numeric) {
+    public static void startKeyInput(KeyInputAdapter adapter) {
         if (keyInputAdapter == adapter) {
             return;
         }
@@ -1100,7 +1102,9 @@ public class Forge implements ApplicationListener {
             keyInputAdapter.onInputEnd(); //make sure previous adapter is ended
         }
         keyInputAdapter = adapter;
-        Gdx.input.setOnscreenKeyboardVisible(true, numeric ? Input.OnscreenKeyboardType.NumberPad : Input.OnscreenKeyboardType.Default);
+    }
+    public static void setOnScreenKeyboard(boolean val, boolean numeric) {
+        Gdx.input.setOnscreenKeyboardVisible(val, numeric ? Input.OnscreenKeyboardType.NumberPad : Input.OnscreenKeyboardType.Default);
     }
 
     public static boolean endKeyInput() {

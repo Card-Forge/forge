@@ -1,0 +1,9 @@
+Name:Stadium Headliner
+ManaCost:R
+Types:Creature Goblin Warrior
+PT:1/1
+K:Mobilize:1
+A:AB$ DealDamage | Cost$ 1 R Sac<1/CARDNAME/this creature> | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ It deals damage equal to the number of creatures you control to target creature.
+SVar:X:Count$Valid Creature.YouCtrl
+DeckHas:Ability$Sacrifice
+Oracle:Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)\n{1}{R}, Sacrifice this creature: It deals damage equal to the number of creatures you control to target creature.

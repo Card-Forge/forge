@@ -1,0 +1,14 @@
+Name:Wingbright Thief
+ManaCost:W U
+Types:Enchantment Creature Bird Glimmer
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters, target opponent reveals each nonland card in their hand. You choose one of them. That card perpetually gains "When you cast this spell, each opponent draws a card and gains 3 life."
+SVar:TrigReveal:DB$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Card.nonLand+TargetedPlayerOwn | SubAbility$ DBChooseCard | RememberRevealed$ True
+SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.IsRemembered | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Duration$ Perpetual | Defined$ ChosenCard | Triggers$ CastSpellDrawGainLife | SubAbility$ DBCleanup
+SVar:CastSpellDrawGainLife:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When you cast this spell, each opponent draws a card and gains 3 life.
+SVar:TrigDraw:DB$ Draw | Defined$ Opponent | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ Opponent | LifeAmount$ 3
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+Oracle:Flying\nWhen Wingbright Thief enters, target opponent reveals each nonland card in their hand. You choose one of them. That card perpetually gains "When you cast this spell, each opponent draws a card and gains 3 life."

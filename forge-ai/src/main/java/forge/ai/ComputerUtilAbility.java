@@ -21,6 +21,7 @@ import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.OptionalCost;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -89,7 +90,7 @@ public class ComputerUtilAbility {
         List<SpellAbility> originListWithAddCosts = Lists.newArrayList();
         for (SpellAbility sa : originList) {
             // If this spell has alternative additional costs, add them instead of the unmodified SA itself
-            sa.setActivatingPlayer(player, true);
+            sa.setActivatingPlayer(player);
             originListWithAddCosts.addAll(GameActionUtil.getAdditionalCostSpell(sa));
         }
 
@@ -116,12 +117,16 @@ public class ComputerUtilAbility {
 
         final List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : newAbilities) {
-            sa.setActivatingPlayer(player, true);
+            sa.setActivatingPlayer(player);
 
             // Optional cost selection through the AI controller
             boolean choseOptCost = false;
             List<OptionalCostValue> list = GameActionUtil.getOptionalCostValues(sa);
             if (!list.isEmpty()) {
+                // still add base spell in case of Promise Gift
+                if (list.stream().anyMatch(ocv -> ocv.getType().equals(OptionalCost.PromiseGift))) {
+                    result.add(sa);
+                }
                 list = player.getController().chooseOptionalCosts(sa, list);
                 if (!list.isEmpty()) {
                     choseOptCost = true;

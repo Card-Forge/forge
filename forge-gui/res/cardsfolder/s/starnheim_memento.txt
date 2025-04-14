@@ -1,0 +1,6 @@
+Name:Starnheim Memento
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Pump | Cost$ 1 W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Flying | SorcerySpeed$ True | SpellDescription$ Target creature gets +1/+1 and gains flying until end of turn. Activate only as a sorcery.
+Oracle:{T}: Add {W}.\n{1}{W}, {T}: Target creature gets +1/+1 and gains flying until end of turn. Activate only as a sorcery.

@@ -1,0 +1,8 @@
+Name:Frontline Rush
+ManaCost:R W
+Types:Instant
+A:SP$ Charm | Choices$ DBToken,DBPump | CharmNum$ 1
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create two 1/1 red Goblin creature tokens.
+SVar:DBPump:DB$ Pump | NumAtt$ +X | NumDef$ +X | ValidTgts$ Creature | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Choose one —\n• Create two 1/1 red Goblin creature tokens.\n• Target creature gets +X/+X until end of turn, where X is the number of creatures you control.

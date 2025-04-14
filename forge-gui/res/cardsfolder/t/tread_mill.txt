@@ -1,0 +1,7 @@
+Name:Tread Mill
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, until end of turn, target creature gets +1/+2, gains vigilance, and becomes an artifact in addition to its other types.
+SVar:TrigCrank:DB$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +2 | KW$ Vigilance | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Artifact
+Oracle:Whenever you crank Tread Mill, until end of turn, target creature gets +1/+2, gains vigilance, and becomes an artifact in addition to its other types.

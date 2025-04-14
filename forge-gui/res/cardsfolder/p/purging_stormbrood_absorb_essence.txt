@@ -1,0 +1,18 @@
+Name:Purging Stormbrood
+ManaCost:4 B
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Ward:PayLife<2>
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerDescription$ When this creature enters, remove all counters from up to one target creature.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | CounterType$ All | CounterNum$ All
+AlternateMode:Omen
+Oracle:Flying\nWard—Pay 2 life.\nWhen this creature enters, remove all counters from up to one target creature.
+
+ALTERNATE
+
+Name:Absorb Essence
+ManaCost:1 W
+Types:Instant Omen
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | KW$ Lifelink & Hexproof | SpellDescription$ Target creature gets +2/+2 and gains lifelink and hexproof until end of turn. (Then shuffle this card into its owner's library.)
+Oracle:Target creature gets +2/+2 and gains lifelink and hexproof until end of turn. (Then shuffle this card into its owner's library.)

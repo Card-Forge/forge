@@ -1,0 +1,10 @@
+Name:Sphinx of Forgotten Lore
+ManaCost:2 U U
+Types:Creature Sphinx
+PT:3/3
+K:Flash
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigFlashback | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to that card's mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)
+SVar:TrigFlashback:DB$ Pump | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card in your graveyard | KW$ Flashback | PumpZone$ Graveyard | AILogic$ ReplaySpell
+SVar:HasAttackEffect:TRUE
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhenever this creature attacks, target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to that card's mana cost. (You may cast that card from your graveyard for its flashback cost. Then exile it.)

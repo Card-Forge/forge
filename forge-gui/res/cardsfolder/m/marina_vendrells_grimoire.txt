@@ -11,5 +11,5 @@ T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigD
 SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose | SubAbility$ DBLosesGame
 SVar:DBLosesGame:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0
 SVar:X:TriggerCount$LifeAmount
-SVar:Y:Count$InYourHand
+SVar:Y:Count$ValidHand Card.YouOwn
 Oracle:When Marine Vendrell's Grimoire enters, if you cast it, draw five cards.\nYou have no maximum hand size and don't lose the game for having 0 or less life.\nWhenever you gain life, draw that many cards.\nWhenever you lose life, discard that many cards. Then if you have no cards in hand, you lose the game.

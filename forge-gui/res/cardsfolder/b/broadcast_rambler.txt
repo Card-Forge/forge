@@ -1,0 +1,9 @@
+Name:Broadcast Rambler
+ManaCost:4 W
+Types:Artifact Vehicle
+PT:5/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Vehicle enters, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying
+K:Crew:1
+DeckHas:Ability$Token
+Oracle:When this Vehicle enters, create a 1/1 colorless Thopter artifact creature token with flying.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

@@ -3,9 +3,8 @@ package forge.gamesimulationtests.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class SpecificationHandler<TYPE, SPECIFICATION extends Specification<TYPE>> {
     public final TYPE find(Iterable<TYPE> items, final SPECIFICATION specification) {

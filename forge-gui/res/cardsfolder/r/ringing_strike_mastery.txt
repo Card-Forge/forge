@@ -1,0 +1,10 @@
+Name:Ringing Strike Mastery
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant:Creature
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted creature.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Untap | Description$ Enchanted creature has "{5}: Untap this creature."
+SVar:Untap:AB$ Untap | Cost$ 5 | Defined$ Self | SpellDescription$ Untap this creature.
+Oracle:Enchant creature\nWhen this Aura enters, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nEnchanted creature has "{5}: Untap this creature."

@@ -1,0 +1,8 @@
+Name:Faebloom Trick
+ManaCost:2 U
+Types:Instant
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_faerie_flying | TokenOwner$ You | RememberOriginalTokens$ True | SubAbility$ DBImmediateTrig | SpellDescription$ Create two 1/1 blue Faerie creature tokens with flying. When you do, tap target creature an opponent controls.
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | TriggerAmount$ Remembered$Amount/DivideEvenlyDown.2 | Execute$ TrigTap | SubAbility$ DBCleanup | TriggerDescription$ When you do, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Create two 1/1 blue Faerie creature tokens with flying. When you do, tap target creature an opponent controls.

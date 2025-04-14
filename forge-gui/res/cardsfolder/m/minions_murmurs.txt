@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Sorcery
 A:SP$ Draw | NumCards$ X | SpellDescription$ You draw X cards and you lose X life, where X is the number of creatures you control. | SubAbility$ DB1
 SVar:DB1:DB$ LoseLife | LifeAmount$ X
-SVar:X:Count$TypeYouCtrl.Creature
+SVar:X:Count$Valid Creature.YouCtrl
 AI:RemoveDeck:All
 Oracle:You draw X cards and you lose X life, where X is the number of creatures you control.

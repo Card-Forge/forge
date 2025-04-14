@@ -1,7 +1,7 @@
 Name:Bloodbraid Challenger
 ManaCost:3 R G
 Types:Creature Elf Berserker
-PT:3/2
+PT:4/3
 K:Cascade
 K:Haste
 K:Escape:3 R G ExileFromGrave<3/Card.Other/other>

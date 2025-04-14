@@ -6,48 +6,51 @@ Type=Promo
 ScryfallCode=PRES
 
 [cards]
-1 R Llanowar Elves @Chris Rahn
-2 M Lathril, Blade of the Elves @Caroline Gariba
-2b M Jace, Memory Adept @D. Alexander Gregory
-9 M Ajani, Mentor of Heroes @Aaron Miller
-13★ U Loam Lion @Daniel Ljunggren
-26 R Felidar Sovereign @Zoltan Boros & Gabor Szikszai
-46 R Welcoming Vampire @Lorenzo Mastroianni
-47 R Thalia's Lancers @David Palumbo
-49 R Curator of Mysteries @Christine Choi
-52 R Cyclone Summoner @Andrey Kuzinskiy
-69 R Patrician Geist @Marta Nael
-100 R Etali, Primal Storm @Raymond Swanland
-118 R Headless Rider @E. M. Gist
-123 R Beast Whisperer @Matt Stewart
-124 R End-Raze Forerunners @Mathias Kollros
-125 R Calamity Bearer @Simon Dominic
-127 R Vito, Thorn of the Dusk Rose @Lie Setiawan
-133 R Opportunistic Dragon @Chris Rahn
-140 R Neheb, Dreadhorde Champion @Igor Kieryluk
-141★ R Goblin Chieftain @Sam Wood
-147 R Bristling Hydra @Chris Rahn
-149 R Atarka, World Render @Karl Kopinski
-149★ R Lathliss, Dragon Queen @Alex Konstad
-162 R Kogla, the Titan Ape @Chris Rahn
-172 R Gargos, Vicious Watcher @Mathias Kollros
-176 R Genesis Hydra @Peter Mohrbacher
-193 R Outland Colossus @Ryan Pancoast
-203 R Scute Swarm @Alex Konstad
-221★ R Oran-Rief, the Vastwood @Mike Bierek
-235 R Stonecoil Serpent @Mark Poole
-235★ R Nyx Lotus @Raoul Vitale
-374 R Valkyrie Harbinger @Tran Nguyen
-376 R Cleaving Reaper @Victor Adame Minguez
-A1 R Jaya Ballard, Task Mage @Matt Cavotta
-A2 R Brion Stoutarm @Zoltan Boros & Gabor Szikszai
-A3 R Broodmate Dragon @Vance Kovacs
-A4 R Retaliator Griffin @Jesper Ejsing
-A5 R Terra Stomper @Goran Josic
-A6 R Terastodon @Lars Grant-West
-A7 R Knight Exemplar @Jason Chan
-A8 R Sunblast Angel @Jason Chan
-A9 R Angel of Glory's Rise @James Ryman
-A10 R Hamletback Goliath @Paolo Parente & Brian Snõddy
-A11 R Angelic Skirmisher @David Rapoza
-A12 R Xathrid Necromancer @Maciej Kuciara
+1 R Angel of Glory's Rise @James Ryman
+2 R Angelic Skirmisher @David Rapoza
+3 R Felidar Sovereign @Zoltan Boros & Gabor Szikszai
+4 R Knight Exemplar @Jason Chan
+5 U Loam Lion @Daniel Ljunggren
+6 R Sunblast Angel @Jason Chan
+7 R Thalia's Lancers @David Palumbo
+8 R Valkyrie Harbinger @Tran Nguyen
+9 R Welcoming Vampire @Lorenzo Mastroianni
+10 R Curator of Mysteries @Christine Choi
+11 R Cyclone Summoner @Andrey Kuzinskiy
+12 R Patrician Geist @Marta Nael
+13 R Cleaving Reaper @Victor Adame Minguez
+14 R Headless Rider @E. M. Gist
+15 R Vito, Thorn of the Dusk Rose @Lie Setiawan
+16 R Xathrid Necromancer @Maciej Kuciara
+17 R Calamity Bearer @Simon Dominic
+18 R Etali, Primal Storm @Raymond Swanland
+19 R Goblin Chieftain @Sam Wood
+20 R Goro-Goro, Disciple of Ryusei @Mike Jordana
+21 R Hamletback Goliath @Paolo Parente & Brian Snõddy
+22 R Jaya Ballard, Task Mage @Matt Cavotta
+23 R Lathliss, Dragon Queen @Alex Konstad
+24 R Neheb, Dreadhorde Champion @Igor Kieryluk
+25 R Opportunistic Dragon @Chris Rahn
+26 R Beast Whisperer @Matt Stewart
+27 R Bristling Hydra @Chris Rahn
+28 R End-Raze Forerunners @Mathias Kollros
+29 R Gargos, Vicious Watcher @Mathias Kollros
+30 R Genesis Hydra @Peter Mohrbacher
+31 R Kogla, the Titan Ape @Chris Rahn
+32 R Llanowar Elves @Chris Rahn
+33 R Outland Colossus @Ryan Pancoast
+34 R Saryth, the Viper's Fang @Igor Kieryluk
+35 R Scute Swarm @Alex Konstad
+36 R Terastodon @Lars Grant-West
+37 R Terra Stomper @Goran Josic
+38 R Atarka, World Render @Karl Kopinski
+39 R Brion Stoutarm @Zoltan Boros & Gabor Szikszai
+40 R Broodmate Dragon @Vance Kovacs
+41 M Lathril, Blade of the Elves @Caroline Gariba
+42 R Liesa, Forgotten Archangel @Dmitry Burmak
+43 R Park Heights Pegasus @Randy Gallegos
+44 R Raiyuu, Storm's Edge @Heonhwa Choe
+45 R Retaliator Griffin @Jesper Ejsing
+46 R Nyx Lotus @Raoul Vitale
+47 R Stonecoil Serpent @Mark Poole
+48 R Oran-Rief, the Vastwood @Mike Bierek

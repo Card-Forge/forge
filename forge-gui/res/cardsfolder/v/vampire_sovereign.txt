@@ -4,6 +4,6 @@ Types:Creature Vampire Noble
 PT:3/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBite | TriggerDescription$ When CARDNAME enters, target opponent loses 3 life and you gain 3 life.
-SVar:TrigBite:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 3 life and you gain 3 life.
+SVar:TrigBite:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 3 life and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 Oracle:Flying\nWhen Vampire Sovereign enters, target opponent loses 3 life and you gain 3 life.

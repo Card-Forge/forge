@@ -1,0 +1,12 @@
+Name:Ketramose, the New Dawn
+ManaCost:1 W B
+Types:Legendary Creature God
+PT:4/4
+K:Menace
+K:Lifelink
+K:Indestructible
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | IsPresent$ Card | PresentZone$ Exile | PresentCompare$ LT7 | Description$ NICKNAME can't attack or block unless there are seven or more cards in exile.
+T:Mode$ ChangesZoneAll | ValidCards$ Card.!token | Origin$ Battlefield,Graveyard | Destination$ Exile | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigDraw | TriggerDescription$ Whenever one or more cards are put into exile from graveyards and/or the battlefield during your turn, you draw a card and lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:Menace, lifelink, indestructible\nKetramose can't attack or block unless there are seven or more cards in exile.\nWhenever one or more cards are put into exile from graveyards and/or the battlefield during your turn, you draw a card and lose 1 life.

@@ -2,14 +2,11 @@ Name:Whispering Madness
 ManaCost:2 U B
 Types:Sorcery
 K:Cipher
-A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ MadnessDiscard | SubAbility$ MadnessDraw | SpellDescription$ Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
-SVar:MadnessDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ MadnessSaveAmount
-SVar:MadnessSaveAmount:DB$ StoreSVar | SVar$ MaxDiscard | Type$ CountSVar | Expression$ NumDiscard | ConditionCheckSVar$ NumDiscard | ConditionSVarCompare$ GTMaxDiscard | SubAbility$ MadnessCleanUp
-SVar:MadnessCleanUp:DB$ Cleanup | ClearRemembered$ True
-SVar:MadnessDraw:DB$ Draw | Defined$ Player | NumCards$ MaxDiscard | SubAbility$ MadnessReset
-SVar:MadnessReset:DB$ StoreSVar | SVar$ MaxDiscard | Type$ Number | Expression$ 0
-SVar:NumDiscard:Count$RememberedSize/Minus.1
-SVar:MaxDiscard:Number$0
+A:SP$ Discard | Defined$ Player | Mode$ Hand | RememberDiscarded$ True | SubAbility$ WindfallDraw | SpellDescription$ Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
+SVar:WindfallDraw:DB$ Draw | Defined$ Player | NumCards$ X | SubAbility$ WindfallCleanup
+SVar:WindfallCleanup:DB$ Cleanup | ClearRemembered$ True
+# Some cards may allow you to discard to other zones
+SVar:X:PlayerCountPlayers$HighestValidGraveyard,Library,Exile Card.IsRemembered+YouOwn
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckNeeds:Type$Creature

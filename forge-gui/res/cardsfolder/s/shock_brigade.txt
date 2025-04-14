@@ -1,0 +1,7 @@
+Name:Shock Brigade
+ManaCost:1 R
+Types:Creature Goblin Soldier
+PT:1/3
+K:Menace
+K:Mobilize:1
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nMobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)

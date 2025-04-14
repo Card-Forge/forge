@@ -1,0 +1,9 @@
+Name:Flood the Engine
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant:Creature,Vehicle:creature or Vehicle
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted permanent.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Permanent.AttachedBy | RemoveAllAbilities$ True | Description$ Enchanted permanent loses all abilities and doesn't untap during its controller's untap step.
+R:Event$ Untap | ValidCard$ Permanent.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Secondary$ True | Description$ Enchanted permanent doesn't untap during its controller's untap step.
+Oracle:Enchant creature or Vehicle\nWhen this Aura enters, tap enchanted permanent.\nEnchanted permanent loses all abilities and doesn't untap during its controller's untap step.

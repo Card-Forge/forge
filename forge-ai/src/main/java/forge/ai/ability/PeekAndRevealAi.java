@@ -93,7 +93,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         }
 
         AbilitySub subAb = sa.getSubAbility();
-        return subAb != null && SpellApiToAi.Converter.get(subAb.getApi()).chkDrawbackWithSubs(player, subAb);
+        return subAb != null && SpellApiToAi.Converter.get(subAb).chkDrawbackWithSubs(player, subAb);
     }
 
 }

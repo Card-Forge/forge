@@ -1,0 +1,9 @@
+Name:Captain America, First Avenger
+ManaCost:R W U
+Types:Legendary Creature Human Soldier Hero
+PT:4/4
+A:AB$ DealDamage | Cost$ 3 Unattach<Equipment.Attached+cmcEQX/an Equipment attached to NICKNAME> | Announce$ X | XAnnounceTitle$ mana value of Equipment to unattach | PrecostDesc$ Throw . . . — | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ X | SpellDescription$ He deals damage equal to that Equipment's mana value divided as you choose among one, two, or three targets.
+SVar:X:Count$xPaid
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBAttach | TriggerDescription$ . . . Catch — At the beginning of combat on your turn, attach up one target Equipment you control to NICKNAME.
+SVar:DBAttach:DB$ Attach | ValidTgts$ Equipment.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target Equipment you control | Object$ Targeted | Defined$ Self
+Oracle:Throw . . . — {3}, Unattach an Equipment from Captain America: He deals damage equal to that Equipment's mana value divided as you choose among one, two, or three targets.\n. . . Catch — At the beginning of combat on your turn, attach up one target Equipment you control to Captain America.

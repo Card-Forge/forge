@@ -1,0 +1,17 @@
+Name:Whirlwing Stormbrood
+ManaCost:4 U
+Types:Creature Dragon
+PT:4/3
+K:Flash
+K:Flying
+S:Mode$ CastWithFlash | ValidCard$ Sorcery,Dragon | ValidSA$ Spell | EffectZone$ Battlefield | Caster$ You | Description$ You may cast sorcery spells and Dragon spells as though they had flash.
+AlternateMode:Omen
+Oracle:Flash\nFlying\nYou may cast sorcery spells and Dragon spells as though they had flash.
+
+ALTERNATE
+
+Name:Dynamic Soar
+ManaCost:2 G
+Types:Sorcery Omen
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on target creature you control. (Then shuffle this card into its owner's library.)
+Oracle:Put three +1/+1 counters on target creature you control. (Then shuffle this card into its owner's library.)

@@ -1,7 +1,7 @@
 Name:Meekstone
 ManaCost:1
 Types:Artifact
-S:Mode$ Continuous | Affected$ Creature.powerGE3 | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures with power 3 or greater don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.powerGE3 | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Creatures with power 3 or greater don't untap during their controllers' untap steps.
 SVar:NonStackingEffect:True
 SVar:NeedsToPlayVar:CountOpps GTCountMe
 SVar:CountOpps:Count$Valid Creature.OppCtrl+PowerGE3/LimitMax.5

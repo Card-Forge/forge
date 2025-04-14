@@ -9,6 +9,7 @@ import java.util.List;
 import com.badlogic.gdx.files.FileHandle;
 import forge.gui.GuiBase;
 import forge.util.BuildInfo;
+import forge.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -22,7 +23,7 @@ import forge.util.FileUtil;
 
 import static forge.localinstance.properties.ForgeConstants.ADV_TEXTURE_BG_FILE;
 import static forge.localinstance.properties.ForgeConstants.ASSETS_DIR;
-import static forge.localinstance.properties.ForgeConstants.DAILY_SNAPSHOT_URL;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_SNAPSHOT_URL;
 import static forge.localinstance.properties.ForgeConstants.DEFAULT_SKINS_DIR;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_ATOM;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
@@ -50,7 +51,7 @@ public class AssetsDownloader {
         final String apkSize = "12MB";
 
         final boolean isSnapshots = versionString.contains("SNAPSHOT");
-        final String snapsURL = DAILY_SNAPSHOT_URL;
+        final String snapsURL = GITHUB_SNAPSHOT_URL;
         // desktop and mobile-dev share the same package
         final String guiChannel = GuiBase.isAndroid() ? "forge/forge-gui-android/" : "forge/forge-gui-desktop/";
         final String releaseURL = RELEASE_URL +  guiChannel;
@@ -62,7 +63,7 @@ public class AssetsDownloader {
         final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         boolean verifyUpdatable = false;
         boolean mandatory = false;
-        Date snapsTimestamp = null, buildTimeStamp;
+        Date snapsTimestamp = null, buildTimeStamp = null;
 
         String message;
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
@@ -71,11 +72,7 @@ public class AssetsDownloader {
             final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_ATOM);
             try {
                 URL versionUrl = new URL(versionText);
-                String version = "";
-                if (GuiBase.isAndroid())
-                    version = FileUtil.readFileToString(versionUrl);
-                else //instead of parsing xml from earlier releases, get the latest github release tag
-                    version = releaseTag.replace("forge-", "");
+                String version = isSnapshots ? FileUtil.readFileToString(versionUrl) : releaseTag.replace("forge-", "");
                 String filename = "";
                 String installerURL = "";
                 if (GuiBase.isAndroid()) {
@@ -85,7 +82,7 @@ public class AssetsDownloader {
                     //current release on github is tar.bz2, update this to jar installer in the future...
                     filename = isSnapshots ? "forge-installer-" + version + ".jar" : releaseTag.replace("forge-", "forge-gui-desktop-") + ".tar.bz2";
                     String releaseBZ2URL = GITHUB_FORGE_URL + "releases/download/" + releaseTag + "/" + filename;
-                    String snapsBZ2URL = DAILY_SNAPSHOT_URL + filename;
+                    String snapsBZ2URL = GITHUB_SNAPSHOT_URL + filename;
                     installerURL = isSnapshots ? snapsBZ2URL : releaseBZ2URL;
                 }
                 String snapsBuildDate = "", buildDate = "";
@@ -100,7 +97,8 @@ public class AssetsDownloader {
                         if (buildTxtFileHandle.exists()) {
                             buildTimeStamp = format.parse(buildTxtFileHandle.readString());
                             buildDate = buildTimeStamp.toString();
-                            verifyUpdatable = snapsTimestamp.after(buildTimeStamp);
+                            // if morethan 23 hours the difference, then allow to update..
+                            verifyUpdatable = DateUtil.getElapsedHours(buildTimeStamp, snapsTimestamp) > 23;
                         } else {
                             //fallback to old version comparison
                             verifyUpdatable = !StringUtils.isEmpty(version) && !versionString.equals(version);
@@ -119,9 +117,8 @@ public class AssetsDownloader {
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
                     }
-                    if (!GuiBase.isAndroid()) {
-                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, null, null);
-                    }
+                    if (isSnapshots) // this is for snaps initial info
+                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, buildTimeStamp, snapsTimestamp);
                     //failed to grab latest github tag
                     if (!isSnapshots && releaseTag.isEmpty()) {
                         if (!GuiBase.isAndroid())
@@ -171,7 +168,6 @@ public class AssetsDownloader {
         }
         // Android assets fallback
         String build = "";
-        String log = "";
 
         //see if assets need updating
         FileHandle advBG = Gdx.files.absolute(DEFAULT_SKINS_DIR).child(ADV_TEXTURE_BG_FILE);
@@ -212,8 +208,7 @@ public class AssetsDownloader {
                     return;
                 }
                 mandatory = true;
-                build += "\nInstalled resources date:\n" + target + "\n";
-                log = Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, buildDate, snapsTimestamp);
+                build += "\nInstalled resources date: " + target + "\n";
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -261,7 +256,7 @@ public class AssetsDownloader {
             options = downloadExit;
         }
 
-        switch (SOptionPane.showOptionDialog(message + build + log, "", null, options)) {
+        switch (SOptionPane.showOptionDialog(message + build, "", null, options)) {
             case 1:
                 if (!canIgnoreDownload) {
                     Forge.isMobileAdventureMode = Forge.advStartup;

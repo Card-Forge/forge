@@ -1,0 +1,13 @@
+Name:Lightwheel Enhancements
+ManaCost:W
+Types:Enchantment Aura
+K:Enchant:Creature,Vehicle:creature or Vehicle
+SVar:AttachAILogic:Pump
+K:Start your engines
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Enchanted permanent gets +1/+1 and has vigilance.
+S:Mode$ Continuous | EffectZone$ Graveyard | AffectedZone$ Graveyard | Affected$ Card.Self | Condition$ MaxSpeed | AddStaticAbility$ MaxSpeedStatic | Description$ Max speed — You may cast this card from your graveyard.
+SVar:MaxSpeedStatic:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | Secondary$ True | Description$ Max speed — You may cast this card from your graveyard.
+SVar:DiscardMe:2
+DeckHints:Ability$Discard
+DeckHas:Ability$Graveyard
+Oracle:Enchant creature or Vehicle\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nEnchanted permanent gets +1/+1 and has vigilance.\nMax speed — You may cast this card from your graveyard.

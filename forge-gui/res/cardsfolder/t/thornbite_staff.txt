@@ -7,6 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:Damage:AB$ DealDamage | Cost$ 2 T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:TrigChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ ThornbiteTrigUntap | TriggerDescription$ Whenever a creature dies, untap equipped creature.
 SVar:ThornbiteTrigUntap:DB$ Untap
-SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
+SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCardLKICopy
 SVar:NonStackingAttachEffect:True
 Oracle:Equipped creature has "{2}, {T}: This creature deals 1 damage to any target" and "Whenever a creature dies, untap this creature."\nWhenever a Shaman creature enters, you may attach Thornbite Staff to it.\nEquip {4}

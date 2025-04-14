@@ -1,12 +1,12 @@
 package forge.itemmanager.filters;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.ItemManager;
+
+import java.util.function.Predicate;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -31,8 +31,8 @@ public class CardCMCRangeFilter extends ValueRangeFilter<PaperCard> {
     protected Predicate<PaperCard> buildPredicate() {
         Predicate<CardRules> predicate = getCardRulesFieldPredicate(CardRulesPredicates.LeafNumber.CardField.CMC);
         if (predicate == null) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
-        return Predicates.compose(predicate, PaperCard::getRules);
+        return PaperCardPredicates.fromRules(predicate);
     }
 }

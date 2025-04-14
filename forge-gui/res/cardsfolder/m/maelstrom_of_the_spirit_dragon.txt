@@ -1,0 +1,7 @@
+Name:Maelstrom of the Spirit Dragon
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.Dragon,Spell.Omen | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Dragon or Omen spell.
+A:AB$ ChangeZone | Cost$ 4 T Sac<1/CARDNAME/this land> | Origin$ Library | Destination$ Hand | ChangeType$ Dragon | SpellDescription$ Search your library for a Dragon card, reveal it, put it into your hand, then shuffle.
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Dragon spell or an Omen spell.\n{4}, {T}, Sacrifice this land: Search your library for a Dragon card, reveal it, put it into your hand, then shuffle.

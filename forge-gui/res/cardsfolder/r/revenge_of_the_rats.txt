@@ -1,0 +1,7 @@
+Name:Revenge of the Rats
+ManaCost:2 B B
+Types:Sorcery
+K:Flashback:2 B B
+A:SP$ Token | TokenAmount$ X | TokenScript$ b_1_1_rat | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create a tapped 1/1 black Rat creature token for each creature card in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+Oracle:Create a tapped 1/1 black Rat creature token for each creature card in your graveyard.\nFlashback {2}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

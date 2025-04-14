@@ -38,3 +38,9 @@ ScryfallCode=SCH
 30 R Chromatic Sphere @Lorenzo Lanfranconi
 31 R Reality Smasher @Michal Ivan
 32 R Void Winnower @Joshua Raphael
+33 R Deep-Cavern Bat @Maxime Minard
+34 R Preacher of the Schism @Zara Alfonso
+35 M Virtue of Persistence @Lorenzo Lanfranconi
+36 R Gleeful Demolition @Vincent Proce
+37 R Charming Scoundrel @Fabira Khamesh
+38 R Goddric, Cloaked Reveler @Irvin Rodriguez

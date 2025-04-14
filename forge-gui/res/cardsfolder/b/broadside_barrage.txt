@@ -1,0 +1,8 @@
+Name:Broadside Barrage
+ManaCost:1 U R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker. | NumDmg$ 5 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker. Draw a card, then discard a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:Broadside Barrage deals 5 damage to target creature or planeswalker. Draw a card, then discard a card.

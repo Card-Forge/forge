@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Foundations #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/11/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Ensure your solution satisfies all possible blocking decisions. You have exactly 26 cards remaining in your library. Assume that any of the cards you or your opponent could draw are irrelevant to the puzzle. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Molten Duplication;Lightning Strike;Boltwave;Twinflame Tyrant;Warleader's Call
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0graveyard=Electroduplicate
+p0battlefield=Stormsplitter;Fear of Missing Out;Ghired, Mirror of the Wilds;Mountain;Mountain;Mountain;Forgotten Monument;Forgotten Monument;Forgotten Monument
+p1life=27
+p1library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p1battlefield=Tomik, Wielder of Law;Soul Warden;Soul Warden

@@ -104,10 +104,10 @@
   </object>
   <object id="58" template="../../obj/shop.tx" x="97" y="209">
    <properties>
-    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
-    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
-    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
-    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,Creature,Creature2Blue,Creature2Red,Creature2Black,Creature2White,Creature2Green,Creature2Colorless,Sliver,Wall,Assembly,Human"/>
+        <property name="mythicShopList" value="Assassin,Squirrel,Dragon,Vampire,Minotaur,Dwarf,Devil,Soldier,Demon,Druid,Bird,Wolf,Knight,Skeleton,Shaman,Wizard,Pirate,Rogue,Dinosaur,Ogre,Planeswalker,Legend,WUBRG"/>
+        <property name="rareShopList" value="Human,Zombie,Goblin,Elf,Merfolk,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,PhyrexianColorless"/>
+        <property name="uncommonShopList" value="Land,Vehicle,Equip,Wand,Artifact,Multicolor,Golem,Colorless,Enchantment,Instant"/>
    </properties>
   </object>
   <object id="61" template="../../obj/shardtrader.tx" x="400" y="288"/>

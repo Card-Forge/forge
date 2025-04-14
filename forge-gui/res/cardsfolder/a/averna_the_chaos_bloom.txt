@@ -2,5 +2,6 @@ Name:Averna, the Chaos Bloom
 ManaCost:G U R
 Types:Legendary Creature Elemental Shaman
 PT:4/2
-S:Mode$ Continuous | Affected$ You | AddKeyword$ As you cascade, you may put a land card from among the exiled cards onto the battlefield tapped. | Description$ As you cascade, you may put a land card from among the exiled cards onto the battlefield tapped. (Do this after the last card is exiled but before deciding whether to cast a nonland card.)
+R:Event$ Cascade | ValidPlayer$ You | ActiveZones$ Battlefield | ReplaceWith$ DBLand | ReplacementResult$ Updated | Description$ As you cascade, you may put a land card from among the exiled cards onto the battlefield tapped. (Do this after the last card is exiled but before deciding whether to cast a nonland card.)
+SVar:DBLand:DB$ ChangeZone | Hidden$ True | Origin$ Exile | ChooseFromDefined$ ReplacedCards.Land | ChangeNum$ 1 | Destination$ Battlefield | Tapped$ True
 Oracle:As you cascade, you may put a land card from among the exiled cards onto the battlefield tapped. (Do this after the last card is exiled but before deciding whether to cast a nonland card.)

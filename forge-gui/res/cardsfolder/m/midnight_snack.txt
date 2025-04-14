@@ -1,0 +1,10 @@
+Name:Midnight Snack
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ RaidTest | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Raid — At the beginning of your end step, if you attacked this turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac
+A:AB$ LoseLife | Cost$ 2 B Sac<1/CARDNAME> | ValidTgts$ Opponent | LifeAmount$ X | SpellDescription$ Target opponent loses X life, where X is the amount of life you gained this turn.
+SVar:RaidTest:Count$AttackersDeclared
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain|Token
+Oracle:Raid — At the beginning of your end step, if you attacked this turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")\n{2}{B}, Sacrifice this enchantment: Target opponent loses X life, where X is the amount of life you gained this turn.

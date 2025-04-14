@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jupnp.UpnpServiceConfiguration;
 
 import javax.imageio.ImageIO;
 import java.awt.Desktop;
@@ -20,9 +21,21 @@ import java.util.Optional;
 public class Main {
     private static final String versionString = BuildInfo.getVersionString();
     public static void main(String[] args) {
+        if (!OperatingSystem.isWindows()) {
+            /* Prevents crash on non Windows OS before creating the LWJGL3 window.
+               It seems it defeats the purpose of having a splash image since
+               this is an indicator if the LWJGL3 has booted up succesfully. */
+            closeSplash();
+        }
         new GameLauncher(versionString);
     }
-
+    public static void closeSplash() {
+        try {
+            Optional.ofNullable(SplashScreen.getSplashScreen()).ifPresent(SplashScreen::close);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static class DesktopAdapter implements IDeviceAdapter {
         private final String switchOrientationFile;
 
@@ -96,12 +109,7 @@ public class Main {
 
         @Override
         public void closeSplashScreen() {
-            //could throw exception..
-            try {
-                Optional.ofNullable(SplashScreen.getSplashScreen()).ifPresent(SplashScreen::close);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            closeSplash();
         }
 
         @Override
@@ -138,6 +146,12 @@ public class Main {
         @Override
         public ArrayList<String> getGamepads() {
             return new ArrayList<>();
+        }
+
+        @Override
+        public UpnpServiceConfiguration getUpnpPlatformService() {
+            // shouldn't be reached
+            return null;
         }
     }
 }

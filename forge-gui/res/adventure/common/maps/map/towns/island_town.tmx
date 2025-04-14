@@ -32,7 +32,7 @@
   <object id="38" template="../../obj/entry_up.tx" x="256" y="271"/>
   <object id="41" template="../../obj/shop.tx" x="304" y="98">
    <properties>
-    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
+    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,BlueBoosterPackShop,Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="42" template="../../obj/shop.tx" x="368" y="162">

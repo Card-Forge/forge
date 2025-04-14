@@ -1,0 +1,9 @@
+Name:Vampire Gourmand
+ManaCost:1 B
+Types:Creature Vampire
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature attacks, you may sacrifice another creature. If you do, draw a card and this creature can't be blocked this turn.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Creature.Other/another creature> | Defined$ You | SubAbility$ DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:Whenever this creature attacks, you may sacrifice another creature. If you do, draw a card and this creature can't be blocked this turn.

@@ -1,0 +1,9 @@
+Name:Mischievous Mystic
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:2/1
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create a 1/1 blue Faerie token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_faerie_flying
+DeckHas:Ability$Token
+Oracle:Flying\nWhenever you draw your second card each turn, create a 1/1 blue Faerie token with flying.

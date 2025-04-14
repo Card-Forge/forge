@@ -2,12 +2,11 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.CardTranslation;
@@ -23,9 +22,9 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
-        List<Card> tgts = null;
+        CardCollectionView tgts = null;
         if (sa.usesTargeting()) {
-            tgts = Lists.newArrayList(sa.getTargets().getTargetCards());
+            tgts = sa.getTargets().getTargetCards();
             if (tgts.size() > 0) {
                 object1 = tgts.get(0);
             }
@@ -57,9 +56,9 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
         Card object1 = null;
         Card object2 = null;
 
-        List<Card> tgts = null;
+        CardCollectionView tgts = null;
         if (sa.usesTargeting()) {
-            tgts = Lists.newArrayList(sa.getTargets().getTargetCards());
+            tgts = sa.getTargets().getTargetCards();
             if (tgts.size() > 0) {
                 object1 = tgts.get(0);
             }

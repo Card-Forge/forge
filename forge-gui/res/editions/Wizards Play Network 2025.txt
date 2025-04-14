@@ -1,0 +1,11 @@
+[metadata]
+Code=PW25
+Date=2025-01-01
+Name=Wizards Play Network 2025
+Type=Promo
+ScryfallCode=PW25
+
+[cards]
+1 R Rishkar's Expertise @Magali Villeneuve
+2 R Dragon's Hoard @Adam Paquette
+3 R Dragonspeaker Shaman @Yigit Koroglu

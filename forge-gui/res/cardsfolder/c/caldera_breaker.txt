@@ -6,7 +6,7 @@ K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, exile all Mountain cards from your library. When you do, CARDNAME deals that much damage to target creature or planeswalker an opponent controls.
 SVar:TrigChangeZone:DB$ ChangeZoneAll | Origin$ Library | Destination$ Exile | ChangeType$ Mountain.YouOwn | RememberChanged$ True | SubAbility$ DBImmediateTrig
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigDamage | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ When you do, CARDNAME deals that much damage to target creature or planeswalker an opponent controls.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select a creature or planeswalker an opponent controls | NumDmg$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME dies, put all cards exiled with it onto the battlefield under their owner's control. Conjure four cards named Volcanic Geyser into your library, then shuffle.
 SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBConjure

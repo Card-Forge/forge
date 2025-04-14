@@ -1,7 +1,7 @@
 Name:Crackdown
 ManaCost:2 W
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.powerGE3+nonWhite | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Nonwhite creatures with power 3 or greater don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.powerGE3+nonWhite | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Nonwhite creatures with power 3 or greater don't untap during their controllers' untap steps.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:Nonwhite creatures with power 3 or greater don't untap during their controllers' untap steps.

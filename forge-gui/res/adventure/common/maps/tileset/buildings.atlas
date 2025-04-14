@@ -140,7 +140,10 @@ UBShop
   size: 16, 16
 NobleShop
   xy: 320, 944
-  size: 16, 16   
+  size: 16, 16
+BoosterShop
+  xy: 384,944
+  size:16, 16
 MerfolkShop
   xy: 368, 768
   size: 16, 16
@@ -348,7 +351,7 @@ LegendShop
 ShardTrader  
   xy: 288, 896
   size: 16, 16
-Waypoint  
+Waypoint
   xy: 288, 912
   size: 16, 16
 Overlay8Black

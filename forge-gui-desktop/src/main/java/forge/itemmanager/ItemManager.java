@@ -17,9 +17,6 @@
  */
 package forge.itemmanager;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
@@ -37,10 +34,7 @@ import forge.toolbox.*;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.util.Aggregates;
-import forge.util.ItemPool;
-import forge.util.Localizer;
-import forge.util.ReflectionUtil;
+import forge.util.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -54,6 +48,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 /**
  * ItemManager.
@@ -906,7 +901,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             predicates.add(mainSearchFilter.buildPredicate(this.genericType));
         }
 
-        final Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
+        final Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : IterableUtil.and(predicates);
         if (this.filterPredicate == newFilterPredicate) { return false; }
 
         this.filterPredicate = newFilterPredicate;
@@ -1007,13 +1002,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
 
         if (useFilter && this.wantUnique) {
-            final Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filterPredicate, Entry::getKey);
-            final Iterable<Entry<T, Integer>> items = getUnique(Iterables.filter(this.pool, filterForPool));
+            final Predicate<Entry<T, Integer>> filterForPool = x -> this.filterPredicate.test(x.getKey());
+            final Iterable<Entry<T, Integer>> items = getUnique(IterableUtil.filter(this.pool, filterForPool));
             this.model.addItems(items);
         }
         else if (useFilter) {
-            final Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filterPredicate, Entry::getKey);
-            this.model.addItems(Iterables.filter(this.pool, pred));
+            final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());
+            this.model.addItems(IterableUtil.filter(this.pool, pred));
         }
         else if (this.wantUnique) {
             final Iterable<Entry<T, Integer>> items = getUnique(this.pool);

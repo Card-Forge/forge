@@ -1,0 +1,11 @@
+Name:Fire-Rim Form
+ManaCost:1 R
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, enchanted creature gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ First Strike
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Description$ Enchanted creature gets +2/+0.
+SVar:PlayMain1:TRUE
+Oracle:Flash\nEnchant creature\nWhen this Aura enters, enchanted creature gains first strike until end of turn.\nEnchanted creature gets +2/+0.

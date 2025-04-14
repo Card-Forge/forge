@@ -1,0 +1,17 @@
+Name:Hollowmurk Siege
+ManaCost:B G
+Types:Enchantment
+K:ETBReplacement:Other:SiegeChoice
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Sultai,Abzan | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As this enchantment enters, choose Sultai or Abzan.
+SVar:Sultai:DB$ Pump | SpellDescription$ Sultai
+SVar:Abzan:DB$ Pump | SpellDescription$ Abzan
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeSultai | AddTrigger$ SultaiTrigger | Description$ • Sultai — Whenever a counter is put on a creature you control, draw a card. This ability triggers only once each turn.
+SVar:SultaiTrigger:Mode$ CounterAdded | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ DBDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever a counter is put on a creature you control, draw a card. This ability triggers only once each turn.
+SVar:DBDraw:DB$ Draw
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeAbzan | AddTrigger$ AbzanTrigger | Description$ • Abzan — Whenever you attack, put a +1/+1 counter on target attacking creature. It gains menace until end of turn.
+SVar:AbzanTrigger:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounterAttacker | TriggerDescription$ Whenever you attack, put a +1/+1 counter on target attacking creature. It gains menace until end of turn.
+SVar:TrigCounterAttacker:DB$ PutCounter | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Menace
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:As this enchantment enters, choose Sultai or Abzan.\n• Sultai — Whenever a counter is put on a creature you control, draw a card. This ability triggers only once each turn.\n• Abzan — Whenever you attack, put a +1/+1 counter on target attacking creature. It gains menace until end of turn.

@@ -1,0 +1,10 @@
+Name:Jeskai Shrinekeeper
+ManaCost:2 U R W
+Types:Creature Dragon
+PT:3/3
+K:Flying
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature deals combat damage to a player, you gain 1 life and draw a card.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+Oracle:Flying, haste\nWhenever this creature deals combat damage to a player, you gain 1 life and draw a card.

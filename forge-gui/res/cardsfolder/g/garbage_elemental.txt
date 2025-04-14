@@ -3,7 +3,16 @@ ManaCost:4 R
 Types:Creature Elemental
 Oracle:<Unsupported Variant>
 
-# --- VARIANT C --- 
+# --- VARIANT B ---
+
+Variant:B:Types:Creature Elemental Rigger
+Variant:B:PT:3/1
+Variant:B:K:Undying
+Variant:B:T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigAssemble | TriggerDescription$ When CARDNAME enters, it assembles a Contraption.
+Variant:B:SVar:TrigAssemble:DB$ AssembleContraption
+Variant:B:Oracle:When Garbage Elemental enters, it assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+
+# --- VARIANT C ---
 
 Variant:C:PT:3/2
 Variant:C:K:Battle cry
@@ -18,5 +27,5 @@ Variant:D:PT:3/3
 Variant:D:K:Cascade
 Variant:D:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll | TriggerDescription$ When CARDNAME enters, roll a six-sided die. CARDNAME deals damage equal to the result to target opponent or planeswalker.
 Variant:D:SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBDamage
-Variant:D:SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ Result
+Variant:D:SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ Result | AIExpectAmount$ 2
 Variant:D:Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nWhen Garbage Elemental enters, roll a six-sided die. Garbage Elemental deals damage equal to the result to target opponent or planeswalker.

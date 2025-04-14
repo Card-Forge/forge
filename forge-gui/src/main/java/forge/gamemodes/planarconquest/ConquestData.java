@@ -26,8 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import forge.card.CardDb;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;

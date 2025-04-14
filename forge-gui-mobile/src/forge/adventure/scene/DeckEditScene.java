@@ -2,8 +2,6 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import forge.adventure.data.AdventureEventData;
-import forge.adventure.player.AdventurePlayer;
-import forge.item.PaperCard;
 import forge.screens.FScreen;
 
 /**
@@ -60,13 +58,5 @@ public class DeckEditScene extends ForgeScene {
             }
         }
         return screen;
-    }
-
-    public boolean isAutoSell(PaperCard pc) {
-        return AdventurePlayer.current().getAutoSellCards().contains(pc);
-    }
-
-    public boolean isNoSell(PaperCard pc) {
-        return AdventurePlayer.current().getNoSellCards().contains(pc);
     }
 }

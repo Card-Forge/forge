@@ -222,7 +222,7 @@ public class CostExile extends CostPartWithList {
         int amount = this.getAbilityAmount(ability);
 
         if (nTypes > -1) {
-            if (CardFactoryUtil.getCardTypesFromList(list) < nTypes) return false;
+            if (AbilityUtils.countCardTypesFromList(list, false) < nTypes) return false;
         }
         
         if (sharedType) { // will need more logic if cost ever wants more than 2 that share a type

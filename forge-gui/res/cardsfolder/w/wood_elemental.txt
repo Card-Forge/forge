@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:*/*
 K:ETBReplacement:Other:TrigSac
 SVar:TrigSac:DB$ Sacrifice | Amount$ SacX | SacValid$ Forest.untapped | Defined$ You | RememberSacrificed$ True | Optional$ True | SpellDescription$ As CARDNAME enters, sacrifice any number of untapped Forests.
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests sacrificed as it entered.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests sacrificed as it entered.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Forest.YouCtrl+untapped

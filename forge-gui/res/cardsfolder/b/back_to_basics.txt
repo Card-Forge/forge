@@ -1,7 +1,7 @@
 Name:Back to Basics
 ManaCost:2 U
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Land.nonBasic | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Nonbasic lands don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Land.nonBasic | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Nonbasic lands don't untap during their controllers' untap steps.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:Nonbasic lands don't untap during their controllers' untap steps.

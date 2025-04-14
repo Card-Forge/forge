@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -33,7 +34,7 @@ public class Graphics {
     private static final int GL_BLEND = GL20.GL_BLEND;
     private static final int GL_LINE_SMOOTH = 2848; //create constant here since not in GL20
 
-    private final SpriteBatch batch = new SpriteBatch();
+    private final Batch batch = new SpriteBatch();
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     private final Deque<Matrix4> Dtransforms = new ArrayDeque<>();
     private final Vector3 tmp = new Vector3();
@@ -114,7 +115,7 @@ public class Graphics {
         if (dummyTexture != null) dummyTexture.dispose();
     }
 
-    public SpriteBatch getBatch() {
+    public Batch getBatch() {
         return batch;
     }
 
@@ -317,24 +318,14 @@ public class Graphics {
     }
 
     public void drawLineArrow(float arrowThickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
-        fillCircle(skinColor.getColor(), x2, y2, arrowThickness);
         drawLineArrow(arrowThickness, skinColor.getColor(), x1, y1, x2, y2);
-        fillCircle(Color.WHITE, x2, y2, arrowThickness / 2);
-        drawLineArrow(arrowThickness / 3, Color.WHITE, x1, y1, x2, y2);
-        //drawLine(arrowThickness / 3, Color.WHITE, x1, y1, x2, y2);
     }
 
     public void drawLineArrow(float thickness, Color color, float x1, float y1, float x2, float y2) {
         batch.end(); //must pause batch while rendering shapes
+        float ct = thickness / 2;
+        float lt = thickness / 3;
 
-        /*float angle = new Vector2(x1 - x2, y1 - y2).angleRad();
-        float arrowHeadRotation = (float) (Math.PI * 0.8f);
-        Vector2 arrowCorner3 = new Vector2(x2 + (thickness / 3) * (float) Math.cos(angle + arrowHeadRotation), y2 + (thickness / 3) * (float) Math.sin(angle + arrowHeadRotation));
-        Vector2 arrowCorner4 = new Vector2(x2 + (thickness / 3) * (float) Math.cos(angle - arrowHeadRotation), y2 + (thickness / 3) * (float) Math.sin(angle - arrowHeadRotation));*/
-
-        if (thickness > 1) {
-            Gdx.gl.glLineWidth(thickness);
-        }
         if (alphaComposite < 1) {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
         }
@@ -345,9 +336,26 @@ public class Graphics {
         if (needSmoothing) {
             Gdx.gl.glEnable(GL_LINE_SMOOTH);
         }
+        startShape(ShapeType.Filled);
+        shapeRenderer.setColor(color);
+        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), thickness);
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.circle(adjustX(x2), adjustY(y2, 0), ct);
+        endShape();
 
+        if (thickness > 1) {
+            Gdx.gl.glLineWidth(thickness);
+        }
         startShape(ShapeType.Line);
         shapeRenderer.setColor(color);
+        shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+        endShape();
+
+        if (lt > 1) {
+            Gdx.gl.glLineWidth(lt);
+        }
+        startShape(ShapeType.Line);
+        shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
         endShape();
 

@@ -1,0 +1,14 @@
+Name:Windcrag Siege
+ManaCost:1 R W
+Types:Enchantment
+K:ETBReplacement:Other:SiegeChoice
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Mardu,Jeskai | Defined$ You | SetChosenMode$ True | AILogic$ Dragons | ShowChoice$ ExceptSelf | SpellDescription$ As this enchantment enters, choose Mardu or Jeskai.
+SVar:Mardu:DB$ Pump | SpellDescription$ Mardu
+SVar:Jeskai:DB$ Pump | SpellDescription$ Jeskai
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeMardu | AddStaticAbility$ MarduHarmonicon | Description$ • Mardu — If a creature attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+S:Mode$ Continuous | Affected$ Card.Self+ChosenModeJeskai | AddTrigger$ JeskaiTrigger | Description$ • Jeskai — At the beginning of your upkeep, create a 1/1 red Goblin creature token. It gains lifelink and haste until end of turn.
+SVar:MarduHarmonicon:Mode$ Panharmonicon | ValidMode$ Attacks,AttackersDeclared,AttackersDeclaredOneTarget | ValidCard$ Permanent.YouCtrl | ValidCause$ Creature | Secondary$ True | Description$ If a creature attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+SVar:JeskaiTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, create a 1/1 red Goblin creature token. It gains lifelink and haste until end of turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | PumpKeywords$ Lifelink & Haste | PumpDuration$ EOT
+DeckHas:Ability$Token
+Oracle:As this enchantment enters, choose Mardu or Jeskai.\n• Mardu — If a creature attacking causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.\n• Jeskai — At the beginning of your upkeep, create a 1/1 red Goblin creature token. It gains lifelink and haste until end of turn.

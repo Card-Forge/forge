@@ -31,7 +31,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.Keyword;
-import forge.game.phase.Untap;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
@@ -43,6 +43,7 @@ import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -78,7 +79,7 @@ public class ComputerUtilCombat {
      */
     public static boolean canAttackNextTurn(final Card attacker) {
         final Iterable<GameEntity> defenders = CombatUtil.getAllPossibleDefenders(attacker.getController());
-        return Iterables.any(defenders, input -> canAttackNextTurn(attacker, input));
+        return IterableUtil.any(defenders, input -> canAttackNextTurn(attacker, input));
     }
 
     /**
@@ -100,7 +101,7 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        if (attacker.getGame().getReplacementHandler().wouldPhaseBeSkipped(attacker.getController(), "BeginCombat")) {
+        if (attacker.getGame().getReplacementHandler().wouldPhaseBeSkipped(attacker.getController(), PhaseType.COMBAT_BEGIN)) {
             return false;
         }
 
@@ -117,7 +118,7 @@ public class ComputerUtilCombat {
         //        || (attacker.hasKeyword(Keyword.FADING) && attacker.getCounters(CounterEnumType.FADE) == 0)
         //        || attacker.hasSVar("EndOfTurnLeavePlay"));
         // The creature won't untap next turn
-        return !attacker.isTapped() || (attacker.getCounters(CounterEnumType.STUN) == 0 && Untap.canUntap(attacker));
+        return !attacker.isTapped() || (attacker.getCounters(CounterEnumType.STUN) == 0 && attacker.canUntap(attacker.getController(), true));
     }
 
     /**
@@ -175,7 +176,7 @@ public class ComputerUtilCombat {
     public static int damageIfUnblocked(final Card attacker, final GameEntity attacked, final Combat combat, boolean withoutAbilities) {
         int damage = attacker.getNetCombatDamage();
         int sum = 0;
-        if (attacked instanceof Player && !((Player) attacked).canLoseLife()) {
+        if (attacked instanceof Player player && !player.canLoseLife()) {
             return 0;
         }
 
@@ -213,10 +214,10 @@ public class ComputerUtilCombat {
         int damage = attacker.getNetCombatDamage();
         int poison = 0;
         damage += predictPowerBonusOfAttacker(attacker, null, null, false);
-        if (attacker.hasKeyword(Keyword.INFECT)) {
+        if (attacker.isInfectDamage(attacked)) {
             int pd = predictDamageTo(attacked, damage, attacker, true);
             // opponent can always order it so that he gets 0
-            if (pd == 1 && Iterables.any(attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
+            if (pd == 1 && attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
                 pd = 0;
             }
             poison += pd;
@@ -356,7 +357,7 @@ public class ComputerUtilCombat {
             } else if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                 int trampleDamage = getAttack(attacker) - totalShieldDamage(attacker, blockers);
                 if (trampleDamage > 0) {
-                    if (attacker.hasKeyword(Keyword.INFECT)) {
+                    if (attacker.isInfectDamage(ai)) {
                         poison += trampleDamage;
                     }
                     poison += predictExtraPoisonWithDamage(attacker, ai, trampleDamage);
@@ -404,11 +405,11 @@ public class ComputerUtilCombat {
         CardCollectionView otb = ai.getCardsIn(ZoneType.Battlefield);
         // Special cases:
         // AI can't lose in combat in presence of Worship (with creatures)
-        if (Iterables.any(otb, CardPredicates.nameEquals("Worship")) && !ai.getCreaturesInPlay().isEmpty()) {
+        if (otb.anyMatch(CardPredicates.nameEquals("Worship")) && !ai.getCreaturesInPlay().isEmpty()) {
             return false;
         }
         // AI can't lose in combat in presence of Elderscale Wurm (at 7 life or more)
-        if (Iterables.any(otb, CardPredicates.nameEquals("Elderscale Wurm")) && ai.getLife() >= 7) {
+        if (otb.anyMatch(CardPredicates.nameEquals("Elderscale Wurm")) && ai.getLife() >= 7) {
             return false;
         }
 
@@ -456,11 +457,11 @@ public class ComputerUtilCombat {
             maxTreshold--;
         }
 
-        if (!ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife())) {
+        if (resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters())) {
             return true;
         }
 
-        return resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters());
+        return !ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < Math.min(threshold, ai.getLife());
     }
 
     /**
@@ -499,11 +500,11 @@ public class ComputerUtilCombat {
             }
         }
 
-        if (!ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < 1) {
+        if (resultingPoison(ai, combat) >= ai.getGame().getRules().getPoisonCountersToLose()) {
             return true;
         }
 
-        return resultingPoison(ai, combat) >= ai.getGame().getRules().getPoisonCountersToLose();
+        return !ai.cantLoseForZeroOrLessLife() && lifeThatWouldRemain(ai, combat) - payment < 1;
     }
 
     // This calculates the amount of damage a blockgang can deal to the attacker
@@ -1243,7 +1244,7 @@ public class ComputerUtilCombat {
                 continue;
             }
 
-            sa.setActivatingPlayer(source.getController(), true);
+            sa.setActivatingPlayer(source.getController());
 
             if (sa.hasParam("Cost")) {
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, true)) {
@@ -1427,11 +1428,12 @@ public class ComputerUtilCombat {
             if (sa == null) {
                 continue;
             }
-            sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.usesTargeting()) {
                 continue; // targeted pumping not supported
             }
+
+            sa.setActivatingPlayer(source.getController());
 
             // DealDamage triggers
             if (ApiType.DealDamage.equals(sa.getApi())) {
@@ -2537,20 +2539,20 @@ public class ComputerUtilCombat {
         if (combat != null) {
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
             // 1. If the card that spawned the attacker was sent at a card, attack the same. Consider improving.
-            if (def instanceof Card && Iterables.contains(defenders, def)) {
-                if (((Card)def).isPlaneswalker()) {
+            if (def instanceof Card card && Iterables.contains(defenders, def)) {
+                if (card.isPlaneswalker()) {
                     return def;
                 }
-                if (((Card)def).isBattle()) {
+                if (card.isBattle()) {
                     return def;
                 }
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.
             for (GameEntity p : defenders) {
-                if (p instanceof Player && !ComputerUtilCard.canBeBlockedProfitably((Player)p, attacker, true)) {
+                if (p instanceof Player p1 && !ComputerUtilCard.canBeBlockedProfitably(p1, attacker, true)) {
                     return p;
                 }
-                if (p instanceof Card && !ComputerUtilCard.canBeBlockedProfitably(((Card)p).getController(), attacker, true)) {
+                if (p instanceof Card card && !ComputerUtilCard.canBeBlockedProfitably(card.getController(), attacker, true)) {
                     return p;
                 }
             }

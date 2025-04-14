@@ -6,52 +6,55 @@ import com.badlogic.gdx.controllers.ControllerMapping;
 import com.badlogic.gdx.controllers.Controllers;
 import forge.gui.GuiBase;
 
+// The standard button has index 0, controller binding is 1. Others can be added if needed.
 public enum KeyBinding {
-    Left("Left", Input.Keys.LEFT,Input.Keys.DPAD_LEFT),
-    Up("Up", Input.Keys.UP,Input.Keys.DPAD_UP),
-    Right("Right", Input.Keys.RIGHT,Input.Keys.DPAD_RIGHT),
-    Down("Down", Input.Keys.DOWN,Input.Keys.DPAD_DOWN),
-    Menu("Menu", Input.Keys.ESCAPE,Input.Keys.BUTTON_START),
-    Inventory("Inventory", Input.Keys.I,Input.Keys.BUTTON_X),
-    Status("Status", Input.Keys.Q,Input.Keys.BUTTON_Y),
-    Deck("Deck", Input.Keys.E,Input.Keys.BUTTON_A),
-    Map("Map", Input.Keys.M,Input.Keys.BUTTON_SELECT),
-    Equip("Equip", Input.Keys.E,Input.Keys.BUTTON_X),
-    ExitToWorldMap("ExitToWorldMap", Input.Keys.F4,Input.Keys.BUTTON_L2),
-    Bookmark("Bookmark", Input.Keys.B, Input.Keys.BUTTON_R2),
-    Use("Use", Input.Keys.ENTER,Input.Keys.BUTTON_A),
-    Back("Back", Input.Keys.ESCAPE,Input.Keys.BUTTON_B),
-    ScrollUp("ScrollUp", Input.Keys.PAGE_UP,Input.Keys.BUTTON_L1),
-    ScrollDown("ScrollDown", Input.Keys.PAGE_DOWN,Input.Keys.BUTTON_R1),
+    Left("Left", new int[]{Input.Keys.LEFT,Input.Keys.DPAD_LEFT, Input.Keys.A}),
+    Up("Up", new int[] {Input.Keys.UP,Input.Keys.DPAD_UP, Input.Keys.W}),
+    Right("Right", new int[] {Input.Keys.RIGHT,Input.Keys.DPAD_RIGHT, Input.Keys.D}),
+    Down("Down", new int[] {Input.Keys.DOWN,Input.Keys.DPAD_DOWN, Input.Keys.S}),
+    Menu("Menu", new int[] {Input.Keys.ESCAPE,Input.Keys.BUTTON_START}),
+    Inventory("Inventory", new int[] {Input.Keys.I,Input.Keys.BUTTON_X}),
+    Status("Status", new int[] {Input.Keys.Q,Input.Keys.BUTTON_Y}),
+    Deck("Deck", new int[] {Input.Keys.E,Input.Keys.BUTTON_A}),
+    Map("Map", new int[] {Input.Keys.M,Input.Keys.BUTTON_SELECT}),
+    Equip("Equip", new int[] {Input.Keys.E,Input.Keys.BUTTON_X}),
+    ExitToWorldMap("ExitToWorldMap",new int[] {Input.Keys.F4,Input.Keys.BUTTON_L2}),
+    Bookmark("Bookmark",new int[] {Input.Keys.B, Input.Keys.BUTTON_R2}),
+    Use("Use", new int[] {Input.Keys.ENTER,Input.Keys.BUTTON_A}),
+    Back("Back", new int[] {Input.Keys.ESCAPE,Input.Keys.BUTTON_B}),
+    ScrollUp("ScrollUp", new int[] {Input.Keys.PAGE_UP,Input.Keys.BUTTON_L1}),
+    ScrollDown("ScrollDown", new int[] {Input.Keys.PAGE_DOWN,Input.Keys.BUTTON_R1}),
     ;
     String name;
-    int binding;
-    int defaultBinding;
-    int bindingController;
-    int defaultBindingController;
+    int [] bindings;
 
-    KeyBinding(String name, int defaultBinding, int defaultBindingController)
+    KeyBinding(String name, int [] bindings)
     {
         this.name=name;
-        this.defaultBinding=binding=defaultBinding;
-        this.defaultBindingController=bindingController=defaultBindingController;
+        this.bindings = bindings;
     }
     public boolean isPressed(int key)
     {
-        return key==binding||key==bindingController;
+        for(int i = 0; i < bindings.length; i++){
+            if(key == bindings[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    // The controller binding always has index 1.
     static String controllerPrefix="XBox_";
     public String getLabelText(boolean pressed) {
         if(Controllers.getCurrent()!=null)
         {
-            return "[%120][+"+controllerPrefix+Input.Keys.toString(bindingController).replace(" Button","")+(pressed?"_pressed]":"]");
+            return "[%120][+"+controllerPrefix+Input.Keys.toString(bindings[1]).replace(" Button","")+(pressed?"_pressed]":"]");
         }
         else
         {
             if(GuiBase.isAndroid())
                 return "";
-            return "[%120][+"+Input.Keys.toString(binding)+(pressed?"_pressed]":"]");
+            return "[%120][+"+Input.Keys.toString(bindings[0])+(pressed?"_pressed]":"]");
         }
 
     }

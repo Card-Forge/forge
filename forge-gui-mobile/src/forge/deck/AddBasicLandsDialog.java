@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.Iterables;
 
 import forge.Forge;
 import forge.Graphics;
@@ -47,9 +46,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
-import forge.util.Callback;
-import forge.util.MyRandom;
-import forge.util.Utils;
+import forge.util.*;
 
 
 public class AddBasicLandsDialog extends FDialog {
@@ -61,7 +58,7 @@ public class AddBasicLandsDialog extends FDialog {
     private final Callback<CardPool> callback;
 
     private final FLabel lblLandSet = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblLandSet") + ":").font(FSkinFont.get(12)).textColor(FLabel.getInlineLabelColor()).build());
-    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<>(Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands)));
+    private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<>(IterableUtil.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands)));
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override
@@ -128,20 +125,18 @@ public class AddBasicLandsDialog extends FDialog {
         cbLandSet.setFont(lblLandSet.getFont());
         cbLandSet.setAutoClose(false);
         cbLandSet.setChangedHandler(e -> {
-            landSet = cbLandSet.getSelectedItem();
-            pnlPlains.refreshArtChoices();
-            pnlIsland.refreshArtChoices();
-            pnlSwamp.refreshArtChoices();
-            pnlMountain.refreshArtChoices();
-            pnlForest.refreshArtChoices();
+            onEditionChange();
         });
 
-        if (editionOptions != null && !editionOptions.isEmpty())
-        {
+        if (editionOptions != null && !editionOptions.isEmpty()) {
             cbLandSet.setItems(editionOptions, editionOptions.get(0));
         }
 
-        cbLandSet.setSelectedItem(defaultLandSet);
+        if (cbLandSet.getSelectedItem() == defaultLandSet) {
+            onEditionChange();
+        } else {
+            cbLandSet.setSelectedItem(defaultLandSet);
+        }
 
         initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> {
             CardPool landsToAdd = new CardPool();
@@ -233,6 +228,15 @@ public class AddBasicLandsDialog extends FDialog {
         }
 
         updateDeckInfoLabel();
+    }
+
+    private void onEditionChange() {
+        landSet = cbLandSet.getSelectedItem();
+        pnlPlains.refreshArtChoices();
+        pnlIsland.refreshArtChoices();
+        pnlSwamp.refreshArtChoices();
+        pnlMountain.refreshArtChoices();
+        pnlForest.refreshArtChoices();
     }
 
     @Override

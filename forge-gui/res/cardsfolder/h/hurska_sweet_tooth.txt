@@ -1,0 +1,11 @@
+Name:Hurska Sweet-Tooth
+ManaCost:2 G
+Types:Legendary Creature Bear
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac
+T:Mode$ LifeGained | ValidPlayer$ You | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you gain life, you may pay {G/W}. When you do, target creature gets +X/+X until end of turn, where X is the amount of life you gained.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ GW | Execute$ TrigPump | TriggerDescription$ When you do, target creature gets +X/+X until end of turn, where X is the amount of life you gained.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +Spawner>TriggerCount$LifeAmount | NumDef$ +Spawner>TriggerCount$LifeAmount
+DeckHas:Ability$Sacrifice|Token & Type$Food|Artifact
+Oracle:Whenever Hurska Sweet-Tooth attacks, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nWhenever you gain life, you may pay {G/W}. When you do, target creature gets +X/+X until end of turn, where X is the amount of life you gained.

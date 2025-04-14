@@ -19,7 +19,7 @@ package forge.util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 /**
  * Special predicate class to perform string operations.
@@ -87,7 +87,7 @@ public abstract class PredicateString<T> implements Predicate<T> {
     public static PredicateString<String> contains(final String what) {
         return new PredicateString<String>(StringOp.CONTAINS) {
             @Override
-            public boolean apply(String subject) {
+            public boolean test(String subject) {
                 return op(subject, what);
             }
         };
@@ -95,7 +95,7 @@ public abstract class PredicateString<T> implements Predicate<T> {
     public static PredicateString<String> containsIgnoreCase(final String what) {
         return new PredicateString<String>(StringOp.CONTAINS_IC) {
             @Override
-            public boolean apply(String subject) {
+            public boolean test(String subject) {
                 return op(subject, what);
             }
         };
@@ -103,7 +103,7 @@ public abstract class PredicateString<T> implements Predicate<T> {
     public static PredicateString<String> equals(final String what) {
         return new PredicateString<String>(StringOp.EQUALS) {
             @Override
-            public boolean apply(String subject) {
+            public boolean test(String subject) {
                 return op(subject, what);
             }
         };

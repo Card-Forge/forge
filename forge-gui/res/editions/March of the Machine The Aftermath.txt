@@ -57,6 +57,8 @@ BoosterBox=0
 48 M Tyvar the Bellicose @Jarel Threat
 49 M Karn, Legacy Reforged @Grzegorz Rutkowski
 50 R Drannith Ruins @Martin de Diego Sádaba
+
+[showcase]
 51 U Coppercoat Vanguard @Steve Ellis
 52 R Deification @Jason A. Engle
 53 U Harnessed Snubhorn @Jody Clark
@@ -107,6 +109,8 @@ BoosterBox=0
 98 M Tyvar the Bellicose @Richard Luong
 99 M Karn, Legacy Reforged @Daren Bader
 100 R Drannith Ruins @Steve Ellis
+
+[etched]
 101 U Coppercoat Vanguard @Bruno Biazotto
 102 R Deification @Maxime Minard
 103 U Harnessed Snubhorn @Quintin Gleim
@@ -157,6 +161,8 @@ BoosterBox=0
 148 M Tyvar the Bellicose @Jarel Threat
 149 M Karn, Legacy Reforged @Grzegorz Rutkowski
 150 R Drannith Ruins @Martin de Diego Sádaba
+
+[extended art]
 151 R Deification @Maxime Minard
 152 R Metropolis Reformer @Ryan Pancoast
 153 R Spark Rupture @Viko Menezes
@@ -192,6 +198,8 @@ BoosterBox=0
 183 M Tyvar the Bellicose @Jarel Threat
 184 M Karn, Legacy Reforged @Grzegorz Rutkowski
 185 R Drannith Ruins @Martin de Diego Sádaba
+
+[etched]
 186 U Coppercoat Vanguard @Steve Ellis
 187 R Deification @Jason A. Engle
 188 U Harnessed Snubhorn @Jody Clark
@@ -235,5 +243,9 @@ BoosterBox=0
 226 R Sigarda, Font of Blessings @Sami Makkonen
 227 M Tyvar the Bellicose @Richard Luong
 228 R Drannith Ruins @Steve Ellis
+
+[promo]
 229 R Spark Rupture @Scott M. Fischer
+
+[buy a box]
 230 R Jolrael, Voice of Zhalfir @Ernanda Souza

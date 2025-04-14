@@ -5,7 +5,7 @@ A:AB$ ChangeZoneAll | Cost$ T PayLife<4> Sac<1/CARDNAME> | SorcerySpeed$ True | 
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Triggers$ DrawTrig,DrawTrigLand | StaticAbilities$ MayPlay | ForgetOnMoved$ Exile | SubAbility$ DelTrigReturn
 SVar:DelTrigReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ DBReturn | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Return the exiled cards to its owner's hand at the beginning of the next end step.
 SVar:DBReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Hand
-SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn, and mana of any type can be spent to cast them.
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn, and mana of any type can be spent to cast them.
 SVar:DrawTrig:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerDescription$ Until end of turn, whenever you play a land or cast a spell this way, its owner draws a card.
 SVar:DrawTrigLand:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | Execute$ TrigDraw | TriggerDescription$ Until end of turn, whenever you play a land or cast a spell this way, its owner draws a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardOwner

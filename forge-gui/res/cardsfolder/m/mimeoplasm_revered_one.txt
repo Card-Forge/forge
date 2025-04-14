@@ -1,0 +1,14 @@
+Name:Mimeoplasm, Revered One
+ManaCost:X B G U
+Types:Legendary Creature Ooze
+PT:0/0
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBChangeZone | ReplacementResult$ Updated | Description$ As NICKNAME enters, exile up to X creature cards from your graveyard. It enters with three +1/+1 counters on it for each creature card exiled this way.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Creature.YouOwn | SelectPrompt$ Select up to X creature cards from your graveyard to exile | ChangeNum$ X | Hidden$ True | RememberChanged$ True | ETB$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ Y | ETB$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Clone | Cost$ 2 | ValidTgts$ Creature.ExiledWithSource | TgtZone$ Exile | TgtPrompt$ Select target creature card exiled with CARDNAME | GainThisAbility$ True | SetPower$ 0 | SetToughness$ 0 | SpellDescription$ NICKNAME becomes a copy of target creature card exiled with it, except it's 0/0 and has this ability.
+SVar:X:Count$xPaid
+SVar:Y:Remembered$Amount/Times.3
+DeckHas:Ability$Graveyard|Counters
+DeckHints:Ability$Mill|Graveyard
+Oracle:As Mimeoplasm enters, exile up to X creature cards from your graveyard. It enters with three +1/+1 counters on it for each creature card exiled this way.\n{2}: Mimeoplasm becomes a copy of target creature card exiled with it, except it's 0/0 and has this ability.

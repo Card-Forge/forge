@@ -135,7 +135,7 @@ public class VLog implements IVDoc<CLog> {
     }
 
     private boolean isGameLogConsoleVisible() {
-        return parentCell.getSelected().equals(this);
+        return parentCell != null && parentCell.getSelected().equals(this);
     }
 
     private void resetDisplayIfNewGame(final GameView model) {

@@ -1,7 +1,7 @@
 Name:Land Cap
 ManaCost:no cost
 Types:Land
-S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DEPLETION | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ CARDNAME doesn't untap during your untap step if it has a depletion counter on it.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.Self+counters_GE1_DEPLETION | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ CARDNAME doesn't untap during your untap step if it has a depletion counter on it.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At the beginning of your upkeep, remove a depletion counter from CARDNAME.
 SVar:TrigSubCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ Combo W U | Amount$ 1 | SubAbility$ AddCounter | SpellDescription$ Add {W} or {U}. Put a depletion counter on CARDNAME.

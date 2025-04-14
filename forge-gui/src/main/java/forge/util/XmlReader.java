@@ -1,21 +1,19 @@
 package forge.util;
 
-import java.io.File;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
+import forge.card.CardDb;
+import forge.item.PaperCard;
+import forge.util.XmlWriter.IXmlWritable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import forge.card.CardDb;
-import forge.item.PaperCard;
-import forge.util.XmlWriter.IXmlWritable;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class XmlReader {
     private Element currentElement;

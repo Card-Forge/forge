@@ -3,6 +3,6 @@ ManaCost:R
 Types:Sorcery
 A:SP$ Mana | Produced$ R | Amount$ 2 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SubAbility$ SubMana | SpellDescription$ Add {R}{R}, then add {R} for each card named Rite of Flame in each graveyard.
 SVar:SubMana:DB$ Mana | Produced$ R | Amount$ X
-SVar:X:Count$NamedInAllYards.Rite of Flame
+SVar:X:Count$ValidGraveyard Card.namedRite of Flame
 DeckHints:Name$Rite of Flame
 Oracle:Add {R}{R}, then add {R} for each card named Rite of Flame in each graveyard.

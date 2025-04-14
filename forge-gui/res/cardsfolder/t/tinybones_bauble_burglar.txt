@@ -1,0 +1,9 @@
+Name:Tinybones, Bauble Burglar
+ManaCost:1 B
+Types:Legendary Creature Skeleton Rogue
+PT:1/3
+T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever an opponent discards a card, exile it from their graveyard with a stash counter on it.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | WithCountersType$ STASH
+S:Mode$ Continuous | Condition$ PlayerTurn | MayPlay$ True | Affected$ Card.YouDontOwn+counters_GE1_STASH | AffectedZone$ Exile | MayPlayIgnoreType$ True | Description$ During your turn, you may play cards you don't own with stash counters on them from exile, and mana of any type can be spent to cast those spells.
+A:AB$ Discard | Cost$ 3 B T | Defined$ Opponent | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Each opponent discards a card. Activate only as a sorcery.
+Oracle:Whenever an opponent discards a card, exile it from their graveyard with a stash counter on it.\nDuring your turn, you may play cards you don't own with stash counters on them from exile, and mana of any type can be spent to cast those spells.\n{3}{B}, {T}: Each opponent discards a card. Activate only as a sorcery.

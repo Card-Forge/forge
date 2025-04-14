@@ -1,0 +1,12 @@
+Name:Shroofus Sproutsire
+ManaCost:2 G
+Types:Legendary Creature Saproling
+PT:1/1
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Saproling.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever a Saproling you control deals combat damage to a player, create that many 1/1 green Saproling creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You
+SVar:PlayMain1:TRUE
+SVar:X:TriggerCount$DamageAmount
+DeckHints:Type$Saproling
+DeckHas:Ability$Token
+Oracle:Trample\nWhenever a Saproling you control deals combat damage to a player, create that many 1/1 green Saproling creature tokens.

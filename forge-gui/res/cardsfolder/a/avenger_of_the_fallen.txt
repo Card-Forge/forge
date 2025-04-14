@@ -1,0 +1,8 @@
+Name:Avenger of the Fallen
+ManaCost:2 B
+Types:Creature Human Warrior
+PT:2/4
+K:Deathtouch
+K:Mobilize:X
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+Oracle:Deathtouch\nMobilize X, where X is the number of creature cards in your graveyard. (Whenever this creature attacks, create X tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)

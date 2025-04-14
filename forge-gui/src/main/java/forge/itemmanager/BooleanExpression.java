@@ -4,12 +4,11 @@ package forge.itemmanager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import java.util.function.Predicate;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.util.IterableUtil;
 import forge.util.PredicateString.StringOp;
 
 public class BooleanExpression {
@@ -123,18 +122,18 @@ public class BooleanExpression {
                 operators.pop();
                 right = operands.pop();
                 left = operands.pop();
-                operands.push(Predicates.and(left, right));
+                operands.push(left.and(right));
                 break;
             case OR:
                 operators.pop();
                 right = operands.pop();
                 left = operands.pop();
-                operands.push(Predicates.or(left, right));
+                operands.push(left.or(right));
                 break;
             case NOT:
                 operators.pop();
                 left = operands.pop();
-                operands.push(Predicates.not(left));
+                operands.push(left.negate());
                 break;
             default:
                 if (alwaysPopOperator) {
@@ -161,9 +160,9 @@ public class BooleanExpression {
             predicates.add(CardRulesPredicates.cost(StringOp.CONTAINS_IC, value));
         }
         if (!predicates.isEmpty()) {
-            return Predicates.or(predicates);
+            return IterableUtil.or(predicates);
         }
-        return Predicates.alwaysTrue();
+        return x -> true;
 
     }
 

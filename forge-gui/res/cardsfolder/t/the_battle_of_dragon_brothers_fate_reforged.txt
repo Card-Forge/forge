@@ -1,0 +1,36 @@
+Name:The Battle of Dragon Brothers
+ManaCost:7
+Types:Battle Siege
+Defense:6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDestroyAll,DBManifestThree | AdditionalDescription$ and note the choice: Bolas or Ugin.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | SubAbility$ DBClearUgin | SpellDescription$ Bolas — Destroy all creatures.
+SVar:DBClearUgin:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ BattleUgin | SubAbility$ DBNoteBolas
+SVar:DBNoteBolas:DB$ Pump | NoteCards$ Self | NoteCardsFor$ BattleBolas
+SVar:DBManifestThree:DB$ Manifest | Amount$ 3 | SubAbility$ DBClearBolas | SpellDescription$ Ugin — Manifest the top three cards of your library.
+SVar:DBClearBolas:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ BattleBolas | SubAbility$ DBNoteUgin
+SVar:DBNoteUgin:DB$ Pump | NoteCards$ Self | NoteCardsFor$ BattleUgin
+AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen The Battle of Dragon Brothers enters, choose Bolas or Ugin.\n• Bolas — Destroy all creatures.\n• Ugin — Manifest the top three cards of your library.
+
+ALTERNATE
+
+Name:Fate Reforged
+ManaCost:no cost
+Types:Enchantment Saga
+K:Chapter:3:DBCharm,DBCopyToken,DBReforge
+SVar:DBCharm:DB$ Branch | BranchConditionSVar$ PlayerCountPropertyYou$HasPropertyNotedForBattleBolas | BranchConditionSVarCompare$ EQ1 | TrueSubAbility$ DBDiscardAll | FalseSubAbility$ DBBranchTwo | SpellDescription$ Choose one that was last noted for a card named The Battle of Dragon Brothers,,,Bolas — Each opponent discards their hand. You draw seven cards.,,,Ugin — Manifest your hand, then draw seven cards.
+SVar:DBDiscardAll:DB$ Discard | Defined$ Player.Opponent | Mode$ Hand | SubAbility$ DBDrawSeven
+SVar:DBBranchTwo:DB$ Branch | BranchConditionSVar$ PlayerCountPropertyYou$HasPropertyNotedForBattleUgin | BranchConditionSVarCompare$ EQ1 | TrueSubAbility$ DBManifestHand | FalseSubAbility$ DBFizzle
+SVar:DBManifestHand:DB$ Manifest | Amount$ X | Defined$ ValidHand Card.YouOwn | SubAbility$ DBDrawSeven
+SVar:DBFizzle:DB$ Pump
+SVar:DBDrawSeven:DB$ Draw | NumCards$ 7
+SVar:X:Count$ValidHand Card.YouOwn
+SVar:DBCopyToken:DB$ NameCard | Defined$ You | ChooseFromList$ Arcades Sabboth,Chromium,Nicol Bolas,Palladia-Mors,Vaevictis Asmadi | SubAbility$ DBMake | SpellDescription$ Create a token that's a copy of any Elder Dragon from the Legends expansion.
+SVar:DBMake:DB$ MakeCard | Name$ ChosenName | Zone$ None | RememberMade$ True | SubAbility$ DBCopyPerm
+SVar:DBCopyPerm:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBClearNamed
+SVar:DBClearNamed:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+SVar:DBReforge:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturnSelf | RememberChanged$ True | SpellDescription$ Exile CARDNAME, then return it to the battlefield (front face up).
+SVar:DBReturnSelf:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:I (Bolas) — Each opponent discards their hand. You draw seven cards.\n(Ugin) — Manifest your hand, then draw seven cards.\nII (Both) — Create a token that's a copy of any Elder Dragon from the Legends expansion.\nIII (Both) — Exile Fate Reforged, then return it to the battlefield (front face up).

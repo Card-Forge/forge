@@ -3,7 +3,7 @@ ManaCost:U
 Types:Sorcery
 A:SP$ DelayedTrigger | ValidTgts$ Player | Mode$ Phase | Phase$ Upkeep-> | DelayedTriggerDefinedPlayer$ Targeted | RememberObjects$ Targeted | Execute$ TrigEffect | Static$ True | SpellDescription$ During target player's next turn, creatures that player controls attack you if able.
 SVar:TrigEffect:DB$ Effect | RememberObjects$ DelayTriggerRemembered | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
-SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ You | Description$ During target player's next turn, creatures that player controls attack you if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ You | Description$ During target player's next turn, creatures that player controls attack you if able.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:During target player's next turn, creatures that player controls attack you if able.

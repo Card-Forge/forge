@@ -1,0 +1,7 @@
+Name:Krumar Initiate
+ManaCost:1 B
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ Endure | Cost$ X B T PayLife<X> | Num$ X | SorcerySpeed$ True | SpellDescription$ This creature endures X. Activate only as a sorcery. (Put X +1/+1 counters on it or create an X/X white Spirit creature token.)
+SVar:X:Count$xPaid
+Oracle:{X}{B}, {T}, Pay X life: This creature endures X. Activate only as a sorcery. (Put X +1/+1 counters on it or create an X/X white Spirit creature token.)

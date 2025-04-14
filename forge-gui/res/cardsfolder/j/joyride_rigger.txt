@@ -1,0 +1,7 @@
+Name:Joyride Rigger
+ManaCost:3 G
+Types:Creature Goblin Rigger
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigAssemble | TriggerDescription$ When CARDNAME enters, it assembles a Contraption.
+SVar:TrigAssemble:DB$ AssembleContraption
+Oracle:When Joyride Rigger enters, it assembles a Contraption. (Put the top card of your Contraption deck face up onto one of your sprockets.)

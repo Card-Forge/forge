@@ -56,7 +56,7 @@
   </object>
   <object id="44" template="../../obj/shop.tx" x="257" y="162">
    <properties>
-    <property name="commonShopList" value="Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,RedBoosterPackShop,Red,Red,Enchantment4Red,Creature2Red,Instant4Red"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Red"/>
     <property name="rareShopList" value="RGU,RWG,RWU,RUB,RWB,RGB,Land4Red,Creature6Red"/>
     <property name="uncommonShopList" value="Gruul,Izzet,Rakdos,Boros,Gruul,Izzet,Rakdos,Boros,Land"/>

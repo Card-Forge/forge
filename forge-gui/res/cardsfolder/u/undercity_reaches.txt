@@ -5,6 +5,6 @@ T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Player | OptionalDecid
 SVar:TrigDraw:DB$ Draw | Defined$ TriggeredSourceController | NumCards$ 1
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, you have no maximum hand size for the rest of the game.
 SVar:RolledChaos:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent
-SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+SVar:STHandSize:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
 Oracle:Whenever a creature deals combat damage to a player, its controller may draw a card.\nWhenever chaos ensues, you have no maximum hand size for the rest of the game.

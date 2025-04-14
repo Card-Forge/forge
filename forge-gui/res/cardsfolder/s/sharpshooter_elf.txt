@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Elf Ranger
 PT:*/2
 K:Reach
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters, it deals damage equal to its power to target creature with flying an opponent controls.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl+withFlying | TgtPrompt$ Select target creature with flying an opponent controls | NumDmg$ Y

@@ -1,0 +1,7 @@
+Name:Roadside Blowout
+ManaCost:2 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Permanent.cmcEQ1 | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a permanent with mana value 1.
+A:SP$ ChangeZone | ValidTgts$ Creature.OppCtrl,Vehicle.OppCtrl | TgtPrompt$ Select target creature or Vehicle an opponent controls | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature or Vehicle an opponent controls to its owner's hand. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:This spell costs {2} less to cast if it targets a permanent with mana value 1.\nReturn target creature or Vehicle an opponent controls to its owner's hand.\nDraw a card.

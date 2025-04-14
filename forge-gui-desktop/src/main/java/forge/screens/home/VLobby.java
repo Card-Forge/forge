@@ -51,10 +51,7 @@ import forge.toolbox.FScrollPanel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FTextField;
-import forge.util.Aggregates;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.NameGenerator;
+import forge.util.*;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -606,7 +603,7 @@ public class VLobby implements ILobbyView {
     public JPanel getConstructedFrame() { return constructedFrame; }
     public JPanel getPanelStart() { return pnlStart; }
     public List<FDeckChooser> getDeckChoosers() {
-        List<FDeckChooser> choosers = new ArrayList<>(playerPanels.size());
+        List<FDeckChooser> choosers = Lists.newArrayList();
         for (final PlayerPanel playerPanel : playerPanels) {
             choosers.add(playerPanel.getDeckChooser());
         }

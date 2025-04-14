@@ -19,7 +19,7 @@ K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualStatic | Duration$ Permanent
-SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ It perpetually gains "This creature can't block."
+SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | AffectedZone$ All | Description$ It perpetually gains "This creature can't block."
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this card specializes from any zone, create a 2/2 white Knight creature token. Creatures you control get +1/+1 and gain haste until end of turn.
 SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_knight | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Haste
@@ -37,11 +37,11 @@ K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualStatic | Duration$ Permanent
-SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ It perpetually gains "This creature can't block."
+SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | AffectedZone$ All | Description$ It perpetually gains "This creature can't block."
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When this card specializes from any zone, seek an instant or sorcery card with mana value 3 or less. Until end of turn, you may cast that card without paying its mana cost.
 SVar:TrigSeek:DB$ Seek | Type$ Instant.cmcLE3,Sorcery.cmcLE3 | RememberFound$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Hand | SubAbility$ DBCleanup
-SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | MayPlayWithoutManaCost$ True | EffectZone$ Command | AffectedZone$ Hand
+SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | MayPlayWithoutManaCost$ True | AffectedZone$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Instant|Sorcery
 Oracle:First strike, haste\nWhen this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."\nWhen this card specializes from any zone, seek an instant or sorcery card with mana value 3 or less. Until end of turn, you may cast that card without paying its mana cost.
@@ -57,7 +57,7 @@ K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualStatic | Duration$ Permanent
-SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ It perpetually gains "This creature can't block."
+SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | AffectedZone$ All | Description$ It perpetually gains "This creature can't block."
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this card specializes from any zone, you may sacrifice a creature. If you do, you draw two cards and each opponent loses 2 life.
 SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Creature> | NumCards$ 2 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 2
@@ -75,7 +75,7 @@ K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualStatic | Duration$ Permanent
-SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ It perpetually gains "This creature can't block."
+SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | AffectedZone$ All | Description$ It perpetually gains "This creature can't block."
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this card specializes from any zone, target creature an opponent controls can't block this turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True
 Oracle:First strike, haste\nWhen this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."\nWhen this card specializes from any zone, target creature an opponent controls can't block this turn.
@@ -91,7 +91,7 @@ K:Haste
 T:Mode$ Specializes | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCard | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualStatic | Duration$ Permanent
-SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ It perpetually gains "This creature can't block."
+SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ CARDNAME can't block. | AffectedZone$ All | Description$ It perpetually gains "This creature can't block."
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this card specializes from any zone, another target creature you control gets +4/+4 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | NumAtt$ +4 | NumDef$ +4
 Oracle:First strike, haste\nWhen this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."\nWhen this card specializes from any zone, another target creature you control gets +4/+4 until end of turn.

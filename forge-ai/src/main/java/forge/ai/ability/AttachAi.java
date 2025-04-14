@@ -1,41 +1,27 @@
 package forge.ai.ability;
 
-import java.util.*;
-
-import forge.game.card.*;
-import org.apache.commons.lang3.ObjectUtils;
-
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
-import forge.ai.AiAttackController;
-import forge.ai.AiCardMemory;
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
@@ -45,6 +31,13 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class AttachAi extends SpellAbilityAi {
 
@@ -117,7 +110,7 @@ public class AttachAi extends SpellAbilityAi {
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
-            effectExile.setActivatingPlayer(ai, true);
+            effectExile.setActivatingPlayer(ai);
             final List<Card> targets = CardUtil.getValidCardsToTarget(effectExile);
             return !targets.isEmpty();
         }
@@ -381,9 +374,39 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Card attachAIKeepTappedPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
+
+        // check for ETB Trigger
+        boolean tapETB = isAuraSpell(sa) && attachSource.getTriggers().anyMatch(t -> {
+            if (t.getMode() != TriggerType.ChangesZone) {
+                return false;
+            }
+
+            if (!ZoneType.Battlefield.toString().equals(t.getParam("Destination"))) {
+                return false;
+            }
+
+            if (t.hasParam("ValidCard") && !t.getParam("ValidCard").contains("Self")) {
+                return false;
+            }
+
+            SpellAbility tSa = t.ensureAbility();
+            if (tSa == null) {
+                return false;
+            }
+
+            if (!ApiType.Tap.equals(tSa.getApi())) {
+                return false;
+            }
+            if (!"Enchanted".equals(tSa.getParam("Defined"))) {
+                return false;
+            }
+
+            return true;
+        });
+
         final List<Card> prefList = CardLists.filter(list, c -> {
             // Don't do Untapped Vigilance cards
-            if (c.isCreature() && c.hasKeyword(Keyword.VIGILANCE) && c.isUntapped()) {
+            if (!tapETB && c.isCreature() && c.hasKeyword(Keyword.VIGILANCE) && c.isUntapped()) {
                 return false;
             }
 
@@ -398,20 +421,9 @@ public class AttachAi extends SpellAbilityAi {
                     return false;
                 }
             }
-
-            if (!c.isEnchanted()) {
-                return true;
-            }
-
-            final Iterable<Card> auras = c.getEnchantedBy();
-            for (Card aura : auras) {
-                SpellAbility auraSA = aura.getSpells().get(0);
-                if (auraSA.getApi() == ApiType.Attach) {
-                    if ("KeepTapped".equals(auraSA.getParam("AILogic"))) {
-                        // Don't attach multiple KeepTapped Auras to one card
-                        return false;
-                    }
-                }
+            // already affected
+            if (!c.canUntap(c.getController(), true)) {
+                return false;
             }
 
             return true;
@@ -510,7 +522,7 @@ public class AttachAi extends SpellAbilityAi {
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
-        	evenBetterList = CardLists.filter(betterList, CardPredicates.Presets.UNTAPPED);
+        	evenBetterList = CardLists.filter(betterList, CardPredicates.UNTAPPED);
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
@@ -559,28 +571,46 @@ public class AttachAi extends SpellAbilityAi {
             final Card attachSource) {
         // AI For choosing a Card to Animate.
         final Player ai = sa.getActivatingPlayer();
-        final Card attachSourceLki = CardCopyService.getLKICopy(attachSource);
+        Card attachSourceLki = null;
+        for (Trigger t : attachSource.getTriggers()) {
+            if (!t.getMode().equals(TriggerType.ChangesZone)) {
+                continue;
+            }
+            if (!"Battlefield".equals(t.getParam("Destination"))) {
+                continue;
+            }
+            if (!"Card.Self".equals(t.getParam("ValidCard"))) {
+                continue;
+            }
+            SpellAbility trigSa = t.ensureAbility();
+            SpellAbility animateSa = trigSa.findSubAbilityByType(ApiType.Animate);
+            if (animateSa == null) {
+                continue;
+            }
+            animateSa.setActivatingPlayer(sa.getActivatingPlayer());
+            attachSourceLki = AnimateAi.becomeAnimated(attachSource, animateSa);
+        }
+        if (attachSourceLki == null) {
+            return null;
+        }
         attachSourceLki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
-        // Suppress original attach Spell to replace it with another
-        attachSourceLki.getFirstAttachSpell().setSuppressed(true);
+        final Card finalAttachSourceLki = attachSourceLki;
 
-        //TODO for Reanimate Auras i need the new Attach Spell, in later versions it might be part of the Enchant Keyword
-        attachSourceLki.addSpellAbility(AbilityFactory.getAbility(attachSourceLki, "NewAttach"));
         List<Card> betterList = CardLists.filter(list, c -> {
             final Card lki = CardCopyService.getLKICopy(c);
             // need to fake it as if lki would be on the battlefield
             lki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
             // Reanimate Auras use "Enchant creature put onto the battlefield with CARDNAME" with Remembered
-            attachSourceLki.clearRemembered();
-            attachSourceLki.addRemembered(lki);
+            finalAttachSourceLki.clearRemembered();
+            finalAttachSourceLki.addRemembered(lki);
 
             // need to check what the cards would be on the battlefield
             // do not attach yet, that would cause Events
             CardCollection preList = new CardCollection(lki);
-            preList.add(attachSourceLki);
+            preList.add(finalAttachSourceLki);
             c.getGame().getAction().checkStaticAbilities(false, Sets.newHashSet(preList), preList);
-            boolean result = lki.canBeAttached(attachSourceLki, null);
+            boolean result = lki.canBeAttached(finalAttachSourceLki, null);
 
             //reset static abilities
             c.getGame().getAction().checkStaticAbilities(false);
@@ -864,7 +894,7 @@ public class AttachAi extends SpellAbilityAi {
         //some auras aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
             prefList = CardLists.filter(prefList,
-                Predicates.not(CardPredicates.isEnchantedBy(attachSource.getName()))
+                CardPredicates.isEnchantedBy(attachSource.getName()).negate()
             );
         }
 
@@ -935,6 +965,10 @@ public class AttachAi extends SpellAbilityAi {
         return true;
     }
 
+    private static boolean isAuraSpell(final SpellAbility sa) {
+        return sa.isSpell() && sa.getHostCard().isAura();
+    }
+
     /**
      * Attach preference.
      *
@@ -950,7 +984,23 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static boolean attachPreference(final SpellAbility sa, final TargetRestrictions tgt, final boolean mandatory) {
         GameObject o;
-        if (tgt.canTgtPlayer()) {
+        boolean spellCanTargetPlayer = false;
+        if (isAuraSpell(sa)) {
+            Card source = sa.getHostCard();
+            if (!source.hasKeyword(Keyword.ENCHANT)) {
+                return false;
+            }
+            for (KeywordInterface ki : source.getKeywords(Keyword.ENCHANT)) {
+                String ko = ki.getOriginal();
+                String m[] = ko.split(":");
+                String v = m[1];
+                if (v.contains("Player") || v.contains("Opponent")) {
+                    spellCanTargetPlayer = true;
+                    break;
+                }
+            }
+        }
+        if (tgt.canTgtPlayer() && (!isAuraSpell(sa) || spellCanTargetPlayer)) {
             List<Player> targetable = new ArrayList<>();
             for (final Player player : sa.getHostCard().getGame().getPlayers()) {
                 if (sa.canTarget(player)) {
@@ -1143,10 +1193,10 @@ public class AttachAi extends SpellAbilityAi {
 
         //some auras/equipments aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
-            prefList = CardLists.filter(prefList, Predicates.not(Predicates.or(
-                CardPredicates.isEquippedBy(attachSource.getName()),
-                CardPredicates.isEnchantedBy(attachSource.getName())
-            )));
+            prefList = CardLists.filter(prefList, Predicate.not(
+                    CardPredicates.isEquippedBy(attachSource.getName())
+                            .or(CardPredicates.isEnchantedBy(attachSource.getName()))
+            ));
         }
 
         // Don't pump cards that will die.
@@ -1247,8 +1297,8 @@ public class AttachAi extends SpellAbilityAi {
 
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()),
-                    card -> ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo())));
+            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents())
+                    .or(card -> ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo())));
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {
@@ -1397,8 +1447,6 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAICuriosityPreference(sa, prefList, mandatory, attachSource);
         } else if ("ChangeType".equals(logic)) {
             c = attachAIChangeTypePreference(sa, prefList, mandatory, attachSource);
-        } else if ("KeepTapped".equals(logic)) {
-            c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
         } else if ("Animate".equals(logic)) {
             c = attachAIAnimatePreference(sa, prefList, mandatory, attachSource);
         } else if ("Reanimate".equals(logic)) {
@@ -1407,6 +1455,12 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAISpecificCardPreference(sa, prefList, mandatory, attachSource);
         } else if ("HighestEvaluation".equals(logic)) {
             c = attachAIHighestEvaluationPreference(prefList);
+        }
+
+        if (isAuraSpell(sa)) {
+            if (attachSource.getReplacementEffects().anyMatch(re -> re.getMode().equals(ReplacementType.Untap) && re.getLayer().equals(ReplacementLayer.CantHappen))) {
+                c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
+            }
         }
 
         // Consider exceptional cases which break the normal evaluation rules
@@ -1561,8 +1615,6 @@ public class AttachAi extends SpellAbilityAi {
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
                 || keyword.endsWith("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
             return card.getNetCombatDamage() >= 2 && ComputerUtilCombat.canAttackNextTurn(card);
-        } else if (keyword.endsWith("CARDNAME doesn't untap during your untap step.")) {
-            return !card.isUntapped();
         }
         return true;
     }

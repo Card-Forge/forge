@@ -47,7 +47,7 @@
   </object>
   <object id="44" template="../../obj/shop.tx" x="257" y="162">
    <properties>
-    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+    <property name="shopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,RedBoosterPackShop,Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="45" template="../../obj/shop.tx" x="304" y="162">

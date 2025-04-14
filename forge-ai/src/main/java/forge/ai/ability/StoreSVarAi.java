@@ -1,9 +1,11 @@
 package forge.ai.ability;
 
 import forge.ai.SpellAbilityAi;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.WrappedAbility;
+import forge.util.collect.FCollectionView;
 
 public class StoreSVarAi extends SpellAbilityAi {
 
@@ -24,4 +26,17 @@ public class StoreSVarAi extends SpellAbilityAi {
         return true;
     }
 
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        // Join Forces cards
+        if (sa.hasParam("UnlessSwitched") && payers.size() > 1) {
+            final Player p = sa.getActivatingPlayer();
+            // not me or team mate
+            if (!p.sameTeam(payer)) {
+                return false;
+            }
+        }
+
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+    }
 }

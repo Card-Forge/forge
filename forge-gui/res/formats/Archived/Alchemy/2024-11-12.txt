@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (FDN)
+Type:Archived
+Subtype:Arena
+Effective:2024-11-12
+Sets:ANA, ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB, YBLB, DSK, YDSK, FDN
+Banned:Monstrous Rage

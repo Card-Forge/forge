@@ -1,10 +1,10 @@
 package forge.game;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.lang3.ObjectUtils;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
@@ -39,7 +39,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
     }
 
     public Integer put(Player putter, GameEntity object, CounterType type, Integer value) {
-        Optional<Player> o = Optional.fromNullable(putter);
+        Optional<Player> o = Optional.ofNullable(putter);
         Map<CounterType, Integer> map = get(o, object);
         if (map == null) {
             map = Maps.newHashMap();
@@ -49,7 +49,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
     }
 
     public int get(Player putter, GameEntity object, CounterType type) {
-        Optional<Player> o = Optional.fromNullable(putter);
+        Optional<Player> o = Optional.ofNullable(putter);
         Map<CounterType, Integer> map = get(o, object);
         if (map == null || !map.containsKey(type)) {
             return 0;
@@ -76,7 +76,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             result.putAll(ge.getCounters());
             return result;
         }
-        Map<CounterType, Integer> alreadyRemoved = column(ge).get(Optional.absent());
+        Map<CounterType, Integer> alreadyRemoved = column(ge).get(Optional.<Player>empty());
         for (Map.Entry<CounterType, Integer> e : ge.getCounters().entrySet()) {
             int rest = e.getValue() - (alreadyRemoved.getOrDefault(e.getKey(), 0));
             if (rest > 0) {
@@ -159,10 +159,15 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             }
 
             // Add ETB flag
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cause, cause);
             if (params != null) {
                 runParams.putAll(params);
+            }
+
+            boolean firstTime = false;
+            if (gm.getKey() instanceof Card c) {
+                firstTime = game.getCounterAddedThisTurn(null, c) == 0;
             }
 
             // Apply counter after replacement effect
@@ -176,11 +181,18 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
                     if (cause != null && cause.hasParam("MaxFromEffect")) {
                         value = Math.min(value, Integer.parseInt(cause.getParam("MaxFromEffect")) - gm.getKey().getCounters(ec.getKey()));
                     }
-                    gm.getKey().addCounterInternal(ec.getKey(), value, e.getKey().orNull(), true, result, runParams);
+                    gm.getKey().addCounterInternal(ec.getKey(), value, e.getKey().orElse(null), true, result, runParams);
                     if (remember && ec.getValue() > 0) {
                         cause.getHostCard().addRemembered(gm.getKey());
                     }
                 }
+            }
+
+            if (result.containsColumn(gm.getKey())) {
+                runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Object, gm.getKey());
+                runParams.put(AbilityKey.FirstTime, firstTime);
+                game.getTriggerHandler().runTrigger(TriggerType.CounterTypeAddedAll, runParams, false);
             }
         }
 

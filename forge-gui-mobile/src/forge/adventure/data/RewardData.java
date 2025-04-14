@@ -3,16 +3,19 @@ package forge.adventure.data;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
-import forge.adventure.util.CardUtil;
-import forge.adventure.util.Config;
-import forge.adventure.util.Current;
-import forge.adventure.util.Reward;
+import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.model.FModel;
+import forge.util.IterableUtil;
+import forge.util.StreamUtil;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.function.Predicate;
+
 
 /**
  * Data class that will be used to read Json configuration files
@@ -32,6 +35,8 @@ public class RewardData implements Serializable {
     public String[] itemNames;
     public String[] editions;
     public String[] colors;
+    public int startDate;
+    public int endDate;
     public String[] rarity;
     public String[] subTypes;
     public String[] cardTypes;
@@ -61,6 +66,8 @@ public class RewardData implements Serializable {
         addMaxCount =rewardData.addMaxCount;
         cardName    =rewardData.cardName;
         itemName    =rewardData.itemName;
+        startDate   =rewardData.startDate;
+        endDate     =rewardData.endDate;
         itemNames    =rewardData.itemNames==null?null:rewardData.itemNames.clone();
         editions    =rewardData.editions==null?null:rewardData.editions.clone();
         colors      =rewardData.colors==null?null:rewardData.colors.clone();
@@ -92,13 +99,13 @@ public class RewardData implements Serializable {
         if(legals==null)
             allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
         else
-            allCards = Iterables.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
+            allCards = IterableUtil.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
         //Filter out specific cards.
-        allCards = Iterables.filter(allCards, input -> {
+        allCards = IterableUtil.filter(allCards, input -> {
             if(input == null)
                 return false;
             if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
-               return false;
+                return false;
             if(input.getRules().getAiHints().getRemNonCommanderDecks())
                 return false;
             if(configData.allowedEditions != null) {
@@ -111,7 +118,7 @@ public class RewardData implements Serializable {
             return !Arrays.asList(configData.restrictedCards).contains(input.getName());
         });
         //Filter AI cards for enemies.
-        allEnemyCards=Iterables.filter(allCards, input -> {
+        allEnemyCards= IterableUtil.filter(allCards, input -> {
             if (input == null) return false;
             return !input.getRules().getAiHints().getRemAIDecks();
         });
@@ -215,6 +222,46 @@ public class RewardData implements Serializable {
                         }
                     }
                     break;
+                case "cardPackShop":
+                {
+                    if(colors == null) {
+                        CardEdition.Collection editions = FModel.getMagicDb().getEditions();
+                        Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER;
+                        List<CardEdition> allEditions = new ArrayList<>();
+                        StreamUtil.stream(editions)
+                                .filter(filter)
+                                .filter(CardEdition::hasBoosterTemplate)
+                                .forEach(allEditions::add);
+                        ConfigData configData = Config.instance().getConfigData();
+
+                        for (String restricted : configData.restrictedEditions) {
+                            allEditions.removeIf(q -> q.getCode().equals(restricted));
+                        }
+                        for(String restrictedCard: configData.restrictedCards)
+                        {
+                            allEditions.removeIf(
+                                    cardEdition -> cardEdition.getAllCardsInSet().stream().anyMatch(
+                                            o -> o.name.equals(restrictedCard))
+                            );
+                        }
+
+                        endDate = endDate == 0 ? 9999 : endDate;
+                        allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
+                        for(int i=0;i<count+addedCount;i++) {
+                            ret.add(new Reward(AdventureEventController.instance().generateBooster(allEditions.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allEditions.size())).getCode())));
+                        }
+                    }
+                    else
+                    {
+                        for(int i=0;i<count+addedCount;i++) {
+                            ret.add(new Reward(AdventureEventController.instance().generateBoosterByColor(colors[0])));
+
+                        }
+                    }
+
+
+                    break;
+                }
                 case "cardPack":
                     if(cardPack!=null)
                     {
@@ -264,7 +311,7 @@ public class RewardData implements Serializable {
             for (Reward data : dataList) {
                 PaperCard card = data.getCard();
                 if (card.isVeryBasicLand()) {
-                    // ensure that all basid lands share the same edition so the deck doesn't look odd
+                    // ensure that all basic lands share the same edition so the deck doesn't look odd
                     if (basicLandEdition.isEmpty()) {
                         basicLandEdition = card.getEdition();
                     }

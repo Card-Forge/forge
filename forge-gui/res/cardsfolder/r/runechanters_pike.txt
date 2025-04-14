@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddKeyword$ First Strike | Description$ Equipped creature has first strike and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.
-SVar:X:Count$TypeInYourYard.Instant/Plus.Y
-SVar:Y:Count$TypeInYourYard.Sorcery
+SVar:X:Count$ValidGraveyard Instant.YouOwn/Plus.Y
+SVar:Y:Count$ValidGraveyard Sorcery.YouOwn
 Oracle:Equipped creature has first strike and gets +X/+0, where X is the number of instant and sorcery cards in your graveyard.\nEquip {2}

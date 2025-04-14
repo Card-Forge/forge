@@ -6,7 +6,6 @@ K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to white and black is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.White.Black
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouOwn+Other | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.
-SVar:TrigReturn:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBReturn
-SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand | UnlessCost$ PayLife<3> | UnlessPayer$ Targeted | UnlessAI$ nonToken
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand | UnlessCost$ PayLife<3> | UnlessPayer$ Targeted | ValidTgts$ Opponent | IsCurse$ True | Hidden$ True
 SVar:BuffedBy:Permanent.White,Permanent.Black
 Oracle:Indestructible\nAs long as your devotion to white and black is less than seven, Athreos isn't a creature.\nWhenever another creature you own dies, return it to your hand unless target opponent pays 3 life.

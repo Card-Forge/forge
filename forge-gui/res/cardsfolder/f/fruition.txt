@@ -2,5 +2,5 @@ Name:Fruition
 ManaCost:G
 Types:Sorcery
 A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 1 life for each Forest on the battlefield.
-SVar:X:Count$TypeOnBattlefield.Forest
+SVar:X:Count$Valid Forest
 Oracle:You gain 1 life for each Forest on the battlefield.

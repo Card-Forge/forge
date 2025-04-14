@@ -7,7 +7,7 @@ SVar:TrigCharm:DB$ Charm | AdditionalDescription$ where X is the number of times
 SVar:X:TriggeredSpellAbility$NumTimesChoseMode
 SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. Until the end of your next turn, you may play it.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play it.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play it.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME. It gains trample until end of turn.
 SVar:DBPump:DB$ Pump | KW$ Trample | StackDescription$ It gains trample until end of turn.

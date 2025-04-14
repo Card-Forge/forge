@@ -93,7 +93,7 @@
   <object id="53" template="../../obj/shardtrader.tx" x="398" y="178"/>
   <object id="54" template="../../obj/shop.tx" x="256" y="66">
    <properties>
-    <property name="commonShopList" value="Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,BlueBoosterPackShop,Blue,Blue,Enchantment4Blue,Creature2Blue,Instant4Blue"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Blue"/>
     <property name="rareShopList" value="RWU,RGU,UWG,RUB,UWB,UGB,Land4Blue,Creature6Blue"/>
     <property name="uncommonShopList" value="Azorius,Izzet,Simic,Dimir,Azorius,Izzet,Simic,Dimir,Land"/>

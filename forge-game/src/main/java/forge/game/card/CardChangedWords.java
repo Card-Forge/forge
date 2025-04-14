@@ -1,11 +1,11 @@
 package forge.game.card;
 
-import java.util.Map;
-
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import com.google.common.collect.TreeBasedTable;
+
+import java.util.Map;
 
 public final class CardChangedWords extends ForwardingMap<String, String> {
 

@@ -2,6 +2,6 @@ Name:Seismic Stomp
 ManaCost:1 R
 Types:Sorcery
 A:SP$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Creatures without flying can't block this turn.
-SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying can't block this turn.
+SVar:KWPump:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying can't block this turn.
 AI:RemoveDeck:All
 Oracle:Creatures without flying can't block this turn.

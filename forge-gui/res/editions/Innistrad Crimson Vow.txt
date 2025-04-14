@@ -412,6 +412,8 @@ Prerelease=6 Boosters, 1 RareMythic+
 395 R Dollhouse of Horrors @Muhammad Firdaus
 396 R Investigator's Journal @Yeong-Hao Han
 397 R Voldaren Estate @Richard Wright
+
+[bundle]
 398 L Plains @Sam White
 399 L Island @Sam White
 400 L Swamp @Sam White

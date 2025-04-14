@@ -2,7 +2,7 @@ Name:Signature Slam
 ManaCost:2 G
 Types:Instant
 A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | SubAbility$ DBEachDamage | SpellDescription$ Put a +1/+1 counter on target creature you control,
-SVar:DBEachDamage:DB$ EachDamage | DefinedDamagers$ Valid Creature.modified+YouCtrl | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ Count$CardPower | ValidDesc$ modified creature you control | DamageDesc$ damage equal to its power | SpellDescription$ then each modified creature you control deals damage equal to its power to target creature you don't control. (Equipment, Auras you control, and counters are modifications.)
+SVar:DBEachDamage:DB$ EachDamage | DefinedDamagers$ Valid Creature.modified+YouCtrl | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ Count$CardPower | ValidDescription$ modified creature you control | DamageDesc$ damage equal to its power | SpellDescription$ then each modified creature you control deals damage equal to its power to target creature you don't control. (Equipment, Auras you control, and counters are modifications.)
 DeckHas:Ability$Counters
 DeckHints:Type$Aura|Equipment & Ability$Counters
 Oracle:Put a +1/+1 counter on target creature you control, then each modified creature you control deals damage equal to its power to target creature you don't control. (Equipment, Auras you control, and counters are modifications.)

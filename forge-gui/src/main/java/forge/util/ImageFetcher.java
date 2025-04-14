@@ -22,6 +22,8 @@ public abstract class ImageFetcher {
     // see https://scryfall.com/docs/api/languages and
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
+    protected static final boolean disableHostedDownload = true;
+    private static final HashSet<String> fetching = new HashSet<>();
 
     static {
         langCodeMap.put("en-US", "en");
@@ -91,10 +93,28 @@ public abstract class ImageFetcher {
         // Fake card (like the ante prompt) trying to be "fetched"
         if (imageKey.length() < 2)
             return;
+        if (imageKey.startsWith(ImageKeys.BOOSTER_PREFIX))
+        {
+            final ArrayList<String> downloadUrls = new ArrayList<>();
+            final String filename = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
+            downloadUrls.add("https://downloads.cardforge.org/images/products/boosters/"+ filename);
+            System.out.println("Fetching from "+downloadUrls);
+
+
+            FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_BOOSTER_PICS_DIR);
+            File destFile = new File(ForgeConstants.CACHE_BOOSTER_PICS_DIR, filename);
+            System.out.println("Destination File "+ destFile.getAbsolutePath()+" exists: " + destFile.exists());
+            if(destFile.exists())
+                return;
+            setupObserver(destFile.getAbsolutePath(),callback,downloadUrls);
+            return;
+        }
+        if (imageKey.equalsIgnoreCase("t:null"))
+            return;
 
         //planechaseBG file...
+        final ArrayList<String> downloadUrls = new ArrayList<>();
         if (imageKey.startsWith("PLANECHASEBG:")) {
-            final ArrayList<String> downloadUrls = new ArrayList<>();
             final String filename = imageKey.substring("PLANECHASEBG:".length());
             downloadUrls.add("https://downloads.cardforge.org/images/planes/" + filename);
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
@@ -108,7 +128,6 @@ public abstract class ImageFetcher {
 
         boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT));
         final String prefix = imageKey.substring(0, 2);
-        final ArrayList<String> downloadUrls = new ArrayList<>();
         File destFile = null;
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
             PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
@@ -195,14 +214,10 @@ public abstract class ImageFetcher {
                     for (PaperCard pc : clones) {
                         if (clones.size() > 1) {//clones only
                             if (!paperCard.getEdition().equalsIgnoreCase(pc.getEdition())) {
-                                StringBuilder set = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-                                set.append(ImageUtil.getDownloadUrl(pc, face));
-                                downloadUrls.add(set.toString());
+                                downloadUrls.add(ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(pc, face));
                             }
                         } else {// original from set
-                            StringBuilder set = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-                            set.append(ImageUtil.getDownloadUrl(pc, face));
-                            downloadUrls.add(set.toString());
+                            downloadUrls.add(ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(pc, face));
                         }
                     }
                 }
@@ -228,6 +243,13 @@ public abstract class ImageFetcher {
                     CardEdition E = StaticData.instance().getEditions().get(tempdata[1]);
                     if (E != null && E.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
                 }
+                if (filename.equalsIgnoreCase("null.jpg"))
+                    return;
+
+                if (ImageKeys.missingCards.contains(filename))
+                    return;
+
+                ImageKeys.missingCards.add(filename);
                 System.err.println("No specified file for '" + filename + "'.. Attempting to download from default Url");
                 tokenUrl = String.format("%s%s", ForgeConstants.URL_TOKEN_DOWNLOAD, filename);
             }
@@ -261,10 +283,14 @@ public abstract class ImageFetcher {
             // Already in the queue, simply add the new observer.
             observers.add(callback);
             return;
+        } else if (fetching.contains(destPath)) {
+            // Already fetching, but somehow no observers?
+            return;
         }
 
         observers = new HashSet<>();
         observers.add(callback);
+        fetching.add(destPath);
         currentFetches.put(destPath, observers);
 
         final Runnable notifyObservers = () -> {

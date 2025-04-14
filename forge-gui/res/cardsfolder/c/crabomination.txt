@@ -4,7 +4,7 @@ Types:Creature Crab Demon
 PT:5/5
 K:Emerge:5 B B:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ExileTop | TriggerDescription$ When CARDNAME enters, target opponent exiles the top card of their library, a card at random from their graveyard, and a card at random from their hand. You may cast a spell from among cards exiled this way without paying its mana cost.
-SVar:ExileTop:DB$ Dig | ValidTgts$ Opponent | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | SubAbility$ RandomGraveyard
+SVar:ExileTop:DB$ Dig | ValidTgts$ Opponent | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ RandomGraveyard
 SVar:RandomGraveyard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ Targeted | Mandatory$ True | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | AtRandom$ True | RememberChanged$ True | SubAbility$ RandomHand
 SVar:RandomHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Mandatory$ True | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | AtRandom$ True | RememberChanged$ True | SubAbility$ CastOneExiled
 SVar:CastOneExiled:DB$ Play | Valid$ Card.IsRemembered | ValidSA$ Spell | ValidZone$ Exile | Amount$ 1 | Optional$ True | WithoutManaCost$ True | SubAbility$ DBCleanup

@@ -2,8 +2,8 @@ package forge.screens.planarconquest;
 
 import java.util.Collection;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
 import forge.Forge;

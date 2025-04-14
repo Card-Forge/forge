@@ -3,6 +3,6 @@ ManaCost:2 R R
 Types:Enchantment
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentOppControls | SpellDescription$ As CARDNAME enters, choose a creature type.
-S:Mode$ Continuous | Affected$ Creature.ChosenType | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures of the chosen type don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.ChosenType | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Creatures of the chosen type don't untap during their controllers' untap steps.
 AI:RemoveDeck:Random
 Oracle:As An-Zerrin Ruins enters, choose a creature type.\nCreatures of the chosen type don't untap during their controllers' untap steps.

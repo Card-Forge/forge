@@ -1,0 +1,10 @@
+Name:Psemilla, Meletian Poet
+ManaCost:2 W
+Types:Legendary Creature Human Bard
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first enchantment spell each turn, create a 2/2 white Nymph enchantment creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_e_nymph
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPump | IsPresent$ Enchantment.YouCtrl | PresentCompare$ GE5 | TriggerDescription$ At the beginning of each combat, if you control five or more enchantments, CARDNAME gets +4/+4 and gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)
+SVar:TrigPump:DB$ Pump | NumAtt$ +4 | NumDef$ +4 | KW$ Lifelink | Defined$ Self
+DeckHints:Type$Enchantment
+Oracle:Whenever you cast your first enchantment spell each turn, create a 2/2 white Nymph enchantment creature token.\nAt the beginning of each combat, if you control five or more enchantments, Psemilla, Meletian Poet gets +4/+4 and gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)

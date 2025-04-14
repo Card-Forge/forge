@@ -1,0 +1,10 @@
+Name:Soul Shredder
+ManaCost:2
+Types:Artifact Vehicle
+PT:2/2
+K:Haste
+K:Crew:1
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield,Graveyard | ValidCards$ Creature.Other | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerDescription$ Whenever one or more other creatures die, CARDNAME perpetually gets +1/+1. This ability also triggers if CARDNAME is in your graveyard.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
+A:AB$ ChangeZone | Cost$ 1 Sac<2/Creature> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield.
+Oracle:Haste\nWhenever one or more other creatures die, Soul Shredder perpetually gets +1/+1. This ability also triggers if Sould Shredder is in your graveyard.\nCrew 1\n{1}, Sacrifice two creatures: Return Soul Shredder from your graveyard to the battlefield. Activate only as a sorcery.

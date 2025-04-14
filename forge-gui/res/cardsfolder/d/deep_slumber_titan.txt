@@ -2,10 +2,10 @@ Name:Deep-Slumber Titan
 ManaCost:2 R R
 Types:Creature Giant Warrior
 PT:7/7
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME is dealt damage, untap it.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever this creature is dealt damage, untap it.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random
-Oracle:Deep-Slumber Titan enters tapped.\nDeep-Slumber Titan doesn't untap during your untap step.\nWhenever Deep-Slumber Titan is dealt damage, untap it.
+Oracle:This creature enters tapped.\nThis creature doesn't untap during your untap step.\nWhenever this creature is dealt damage, untap it.

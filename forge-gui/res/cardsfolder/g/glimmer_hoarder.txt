@@ -1,0 +1,9 @@
+Name:Glimmer Hoarder
+ManaCost:1 B
+Types:Creature Human Survivor
+PT:2/2
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, you lose 1 life and draft a card from CARDNAME's spellbook. That card perpetually becomes an enchantment in addition to its other types.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBDraft
+SVar:DBDraft:DB$ Draft | Defined$ You | Spellbook$ Angel of Suffering,Aphemia; the Cacophony,Balemurk Leech,Chitinous Crawler,Defiler of Flesh,Gravebreaker Lamia,Mindwrack Harpy,Puppet Raiser,Starving Revenant | RememberDrafted$ True | Zone$ Hand | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Enchantment | Duration$ Perpetual
+Oracle:Survival — At the beginning of your second main phase, if Glimmer Hoarder is tapped, you lose 1 life and draft a card from Glimmer Hoarder's spellbook. That card perpetually becomes an enchantment in addition to its other types.

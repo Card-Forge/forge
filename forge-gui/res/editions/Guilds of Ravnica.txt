@@ -5,7 +5,7 @@ Name=Guilds of Ravnica
 Code2=GRN
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Secret Cards"), 1 RareMythic:!fromSheet("GRN Secret Cards"), 1 fromSheet("GRN Lands")
+Booster=10 Common:!fromSheet("GRN lands"):fromSheet("GRN cards"), 3 Uncommon:fromSheet("GRN cards"), 1 RareMythic:fromSheet("GRN cards"), 1 fromSheet("GRN lands")
 AdditionalSetUnlockedInQuest=GK1
 FatPack=10
 FatPackExtraSlots=80 BasicLands
@@ -272,6 +272,8 @@ ScryfallCode=GRN
 257 R Steam Vents @Jonas De Ro
 258 R Temple Garden @Titus Lunter
 259 R Watery Grave @Cliff Childs
+
+[precon product]
 260 L Plains @Richard Wright
 261 L Island @Richard Wright
 262 L Swamp @Richard Wright
@@ -285,7 +287,21 @@ ScryfallCode=GRN
 270 C Kraul Raider @Ben Wootten
 271 U Attendant of Vraska @Magali Villeneuve
 272 R Vraska's Stoneglare @Yongjae Choi
+
+[buy a box]
 273 M Impervious Greatwurm @Simon Dominic
+
+[lands]
+Golgari Guildgate|GRN|1
+Golgari Guildgate|GRN|2
+Izzet Guildgate|GRN|1
+Izzet Guildgate|GRN|2
+Selesnya Guildgate|GRN|1
+Selesnya Guildgate|GRN|2
+Dimir Guildgate|GRN|1
+Dimir Guildgate|GRN|2
+Boros Guildgate|GRN|1
+Boros Guildgate|GRN|2
 
 [tokens]
 w_4_4_angel_flying_vigilance

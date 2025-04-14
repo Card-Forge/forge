@@ -4,5 +4,5 @@ Types:Creature Elf Citizen
 PT:1/4
 K:Reach
 T:Mode$ AttackerBlocked | ValidCard$ Creature.withFlying | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature with flying, CARDNAME gets +3/+0 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 3
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +3
 Oracle:Reach\nWhenever High-Rise Sawjack blocks a creature with flying, High-Rise Sawjack gets +3/+0 until end of turn.

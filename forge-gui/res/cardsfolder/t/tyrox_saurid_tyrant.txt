@@ -1,0 +1,5 @@
+Name:Tyrox, Saurid Tyrant
+ManaCost:1 R
+Types:Legendary Creature Dinosaur Warrior
+PT:4/1
+Oracle:

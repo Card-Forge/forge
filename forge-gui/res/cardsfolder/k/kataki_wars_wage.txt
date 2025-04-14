@@ -2,6 +2,8 @@ Name:Kataki, War's Wage
 ManaCost:1 W
 Types:Legendary Creature Spirit
 PT:2/1
-S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ UpkeepCost:1 | Description$ All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {1}."
+S:Mode$ Continuous | Affected$ Artifact | AddTrigger$ UpkeepCostTrigger | Description$ All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {1}."
+SVar:UpkeepCostTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {1}.
+SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ 1
 AI:RemoveDeck:Random
 Oracle:All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {1}."

@@ -2,6 +2,6 @@ Name:Marble Titan
 ManaCost:3 W
 Types:Creature Giant
 PT:3/3
-S:Mode$ Continuous | Affected$ Creature.powerGE3 | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures with power 3 or greater don't untap during their controllers' untap steps.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.powerGE3 | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Creatures with power 3 or greater don't untap during their controllers' untap steps.
 AI:RemoveDeck:Random
 Oracle:Creatures with power 3 or greater don't untap during their controllers' untap steps.

@@ -5,7 +5,7 @@ PT:1/4
 K:Flying
 K:Lifelink
 T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks while saddled, it gets +X/+X until end of turn, where X is the number of Mounts you control.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$Valid Mount.YouCtrl
 K:Saddle:3
 DeckHints:Type$Mount

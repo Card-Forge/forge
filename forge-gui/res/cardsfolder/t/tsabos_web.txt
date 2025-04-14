@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
-S:Mode$ Continuous | Affected$ Land.hasNonManaActivatedAbility | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Each land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Land.hasNonManaActivatedAbility | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Each land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step.
 AI:RemoveDeck:Random
 Oracle:When Tsabo's Web enters, draw a card.\nEach land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step.

@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Hand | Destination$ Library | Shuffle$ True | ChangeType$ Card | ChangeNum$ X | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Shuffle any number of cards from your hand into your library, then draw that many cards.
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 SVar:Y:Remembered$Amount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random

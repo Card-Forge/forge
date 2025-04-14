@@ -17,16 +17,15 @@
  */
 package forge.game.zone;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
-import forge.card.CardStateName;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -46,7 +45,7 @@ public class PlayerZone extends Zone {
 
     private final class OwnCardsActivationFilter implements Predicate<Card> {
         @Override
-        public boolean apply(final Card c) {
+        public boolean test(final Card c) {
             if (c.mayPlayerLook(c.getController())) {
                 return true;
             }
@@ -58,7 +57,7 @@ public class PlayerZone extends Zone {
             boolean graveyardCastable = c.hasKeyword(Keyword.FLASHBACK) ||
                     c.hasKeyword(Keyword.RETRACE) || c.hasKeyword(Keyword.JUMP_START) || c.hasKeyword(Keyword.ESCAPE) ||
                     c.hasKeyword(Keyword.DISTURB);
-            boolean exileCastable = c.isForetold() || isOnAdventure(c);
+            boolean exileCastable = c.isForetold() || c.isOnAdventure();
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 final ZoneType restrictZone = sa.getRestrictions().getZone();
 
@@ -87,15 +86,6 @@ public class PlayerZone extends Zone {
             return false;
         }
     }
-    private boolean isOnAdventure(Card c) {
-        if (!c.isAdventureCard())
-            return false;
-        if (c.getExiledWith() == null)
-            return false;
-        if (!CardStateName.Adventure.equals(c.getExiledWith().getCurrentStateName()))
-            return false;
-        return true;
-    }
 
     private final Player player;
 
@@ -106,6 +96,9 @@ public class PlayerZone extends Zone {
 
     @Override
     protected void onChanged() {
+        if (getZoneType() == ZoneType.Hand && player.getController().isOrderedZone()) {
+            sort();
+        }
         player.updateZoneForView(this);
     }
 

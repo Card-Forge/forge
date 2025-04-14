@@ -2,9 +2,8 @@ Name:Amber Prison
 ManaCost:4
 Types:Artifact
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Tap | Cost$ 4 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | RememberTapped$ True | AlwaysRemember$ True | SpellDescription$ Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
-S:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
-SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Tap | Cost$ 4 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SubAbility$ DBEffect | SpellDescription$ Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
+SVar:DBEffect:DB$ Effect | IsCurse$ True | ReplacementEffects$ DontUntap | Duration$ UntilUntaps | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
+SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ That permanent doesn't untap during its controller's untap step for as long as EFFECTSOURCE remains tapped.
 AI:RemoveDeck:All
 Oracle:You may choose not to untap Amber Prison during your untap step.\n{4}, {T}: Tap target artifact, creature, or land. That permanent doesn't untap during its controller's untap step for as long as Amber Prison remains tapped.

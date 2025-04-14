@@ -17,22 +17,15 @@
  */
 package forge.card;
 
-import java.util.*;
-
+import com.google.common.collect.*;
+import forge.util.IterableUtil;
+import forge.util.Settable;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
-import forge.util.Settable;
+import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -261,7 +254,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (!isCreature() && !isKindred()) {
             return false;
         }
-        boolean changed = Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
+        boolean changed = subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
         // need to remove AllCreatureTypes too when setting Creature Type
         if (allCreatureTypes) {
             changed = true;
@@ -304,9 +297,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             creatureTypes.addAll(getAllCreatureTypes());
             creatureTypes.removeAll(this.excludedCreatureSubtypes);
         } else {
-            for (final String t : Iterables.filter(subtypes, Predicates.IS_CREATURE_TYPE)) {
-                creatureTypes.add(t);
-            }
+            subtypes.stream().filter(Predicates.IS_CREATURE_TYPE).forEach(creatureTypes::add);
         }
         return creatureTypes;
     }
@@ -403,7 +394,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public boolean hasABasicLandType() {
-        return Iterables.any(this.subtypes, Predicates.IS_BASIC_LAND_TYPE);
+        return this.subtypes.stream().anyMatch(Predicates.IS_BASIC_LAND_TYPE);
     }
     @Override
     public boolean hasANonBasicLandType() {
@@ -527,6 +518,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return hasSubtype("Attraction");
     }
 
+    public boolean isContraption() {
+        return hasSubtype("Contraption");
+    }
+
     @Override
     public boolean isSaga() {
         return hasSubtype("Saga");
@@ -605,18 +600,18 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             }
             else if (!newType.subtypes.isEmpty()) {
                 if (ct.isRemoveLandTypes()) {
-                    Iterables.removeIf(newType.subtypes, Predicates.IS_LAND_TYPE);
+                    newType.subtypes.removeIf(Predicates.IS_LAND_TYPE);
                 }
                 if (ct.isRemoveCreatureTypes()) {
-                    Iterables.removeIf(newType.subtypes, Predicates.IS_CREATURE_TYPE);
+                    newType.subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
                     // need to remove AllCreatureTypes too when removing creature Types
                     newType.allCreatureTypes = false;
                 }
                 if (ct.isRemoveArtifactTypes()) {
-                    Iterables.removeIf(newType.subtypes, Predicates.IS_ARTIFACT_TYPE);
+                    newType.subtypes.removeIf(Predicates.IS_ARTIFACT_TYPE);
                 }
                 if (ct.isRemoveEnchantmentTypes()) {
-                    Iterables.removeIf(newType.subtypes, Predicates.IS_ENCHANTMENT_TYPE);
+                    newType.subtypes.removeIf(Predicates.IS_ENCHANTMENT_TYPE);
                 }
             }
             if (ct.getRemoveType() != null) {
@@ -633,7 +628,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             }
             // remove specific creature types from all creature types
             if (ct.getRemoveType() != null && newType.allCreatureTypes) {
-                newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(Iterables.filter(ct.getRemoveType(), Predicates.IS_CREATURE_TYPE)));
+                newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(ct.getRemoveType(), Predicates.IS_CREATURE_TYPE)));
             }
         }
         // sanisfy subtypes
@@ -655,31 +650,31 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             return;
         }
         if (!isCreature() && !isKindred()) {
-            Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
+            subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
         }
         if (!isLand()) {
-            Iterables.removeIf(subtypes, Predicates.IS_LAND_TYPE);
+            subtypes.removeIf(Predicates.IS_LAND_TYPE);
         }
         if (!isArtifact()) {
-            Iterables.removeIf(subtypes, Predicates.IS_ARTIFACT_TYPE);
+            subtypes.removeIf(Predicates.IS_ARTIFACT_TYPE);
         }
         if (!isEnchantment()) {
-            Iterables.removeIf(subtypes, Predicates.IS_ENCHANTMENT_TYPE);
+            subtypes.removeIf(Predicates.IS_ENCHANTMENT_TYPE);
         }
         if (!isInstant() && !isSorcery()) {
-            Iterables.removeIf(subtypes, Predicates.IS_SPELL_TYPE);
+            subtypes.removeIf(Predicates.IS_SPELL_TYPE);
         }
         if (!isPlaneswalker()) {
-            Iterables.removeIf(subtypes, Predicates.IS_WALKER_TYPE);
+            subtypes.removeIf(Predicates.IS_WALKER_TYPE);
         }
         if (!isDungeon()) {
-            Iterables.removeIf(subtypes, Predicates.IS_DUNGEON_TYPE);
+            subtypes.removeIf(Predicates.IS_DUNGEON_TYPE);
         }
         if (!isBattle()) {
-            Iterables.removeIf(subtypes, Predicates.IS_BATTLE_TYPE);
+            subtypes.removeIf(Predicates.IS_BATTLE_TYPE);
         }
         if (!isPlane()) {
-            Iterables.removeIf(subtypes, Predicates.IS_PLANAR_TYPE);
+            subtypes.removeIf(Predicates.IS_PLANAR_TYPE);
         }
     }
 
@@ -822,6 +817,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public GamePieceType getGamePieceType() {
         if(this.isAttraction())
             return GamePieceType.ATTRACTION;
+        if(this.isContraption())
+            return GamePieceType.CONTRAPTION;
         for(CoreType type : coreTypes) {
             GamePieceType r = type.toGamePieceType();
             if(r != GamePieceType.CARD)

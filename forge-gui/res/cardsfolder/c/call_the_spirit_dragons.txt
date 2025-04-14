@@ -1,0 +1,14 @@
+Name:Call the Spirit Dragons
+ManaCost:W U B R G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Dragon.YouCtrl | AddKeyword$ Indestructible | Description$ Dragons you control have indestructible.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ PutCounter | TriggerDescription$ At the beginning of your upkeep, for each color, put a +1/+1 counter on a Dragon you control of that color. If you put +1/+1 counters on five Dragons this way, you win the game.
+SVar:PutCounter:DB$ PutCounter | Choices$ Dragon.ChosenColor+YouCtrl | ChoiceTitle$ Choose a Dragon for chosenColor | CounterType$ P1P1 | CounterNum$ 1 | RememberPut$ True | ForColor$ True | SubAbility$ WinGame
+SVar:WinGame:DB$ WinsGame | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ5 | SubAbility$ DBCleanup | SpellDescription$ If you put +1/+1 counters on five Dragons this way, you win the game.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+DeckNeeds:Type$Dragon
+DeckHas:Ability$Counters
+AI:RemoveDeck:Random
+SVar:NeedsToPlay:Creature.Dragon+YouCtrl
+Oracle:Dragons you control have indestructible.\nAt the beginning of your upkeep, for each color, put a +1/+1 counter on a Dragon you control of that color. If you put +1/+1 counters on five Dragons this way, you win the game.

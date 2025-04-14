@@ -1,0 +1,32 @@
+[metadata]
+Code=FIN
+Date=2025-06-13
+Name=Final Fantasy
+Type=Expansion
+ScryfallCode=FIN
+
+[cards]
+31 U Sidequest: Catch a Fish @Gal Or
+34 R Stiltzkin, Moogle Merchant @Hendry Iwanaga
+78 U Summon: Shiva @Fajareka Setiawan
+91 R Cecil, Dark Knight @Josu Hernaiz
+122 U Tonberry @Leonardo Santanna
+170 R Zell Dincht @Kevin Sidharta
+191 R Jumbo Cactuar @Jason Kiantoro
+200 U Sazh's Chocobo @Domenico Cava
+218 M Emet-Selch, Unsundered @Néstor Ossandón Leal
+221 U Garland, Knight of Cornelia @Billy Christian
+224 U Gladiolus Amicitia @Gal Or
+242 R Sin, Spira's Punishment @John Tedrick
+327 R Stiltzkin, Moogle Merchant @Yumeko
+343 R Jumbo Cactuar @Yumeko
+348 R Sin, Spira's Punishment @Ayami Nakashima
+362 U Summon: Shiva @Taku Haruno
+380 R Cecil, Dark Knight @Misei Ito
+394 M Emet-Selch, Unsundered @Rorubei
+445 R Cecil, Dark Knight @Josu Hernaiz
+483 M Emet-Selch, Unsundered @Néstor Ossandón Leal
+486 U Garland, Knight of Cornelia @Billy Christian
+508 R Sin, Spira's Punishment @John Tedrick
+552 M Cloud, Planet's Champion @Magali Villeneuve
+553 M Sephiroth, Planet's Heir @Magali Villeneuve

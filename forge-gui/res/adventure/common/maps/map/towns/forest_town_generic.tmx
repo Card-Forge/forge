@@ -73,7 +73,7 @@
   </object>
   <object id="46" template="../../obj/shop.tx" x="368" y="226">
    <properties>
-    <property name="commonShopList" value="Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,GreenBoosterPackShop,Green,Green,Enchantment4Green,Creature2Green,Instant4Green"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,PhyrexianGreen"/>
     <property name="rareShopList" value="Land4Green,Simic,Golgari,Gruul,Selesnya,Vehicle,Colorless"/>
     <property name="uncommonShopList" value="Artifact,Elf,Wolf4Green,Druid,Squirrel,Sliver2Green,Wand,Equip,Multicolor"/>

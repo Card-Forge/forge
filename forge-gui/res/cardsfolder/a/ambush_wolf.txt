@@ -1,0 +1,8 @@
+Name:Ambush Wolf
+ManaCost:2 G
+Types:Creature Wolf
+PT:4/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, exile up to one target card from a graveyard.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target card in a graveyard to exile
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen this creature enters, exile up to one target card from a graveyard.

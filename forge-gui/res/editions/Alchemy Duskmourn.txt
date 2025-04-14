@@ -3,6 +3,7 @@ Code=YDSK
 Date=2024-10-15
 Name=Alchemy: Duskmourn
 Type=Online
+Booster=1 UncommonRareMythic,8 Common:fromsheet("DSK cards"), 3 Uncommon:fromSheet("DSK cards"), 1 UncommonRareMythic:fromSheet("DSK cards"), 1 RareMythic:fromSheet("DSK cards"), 1 BasicLand:fromSheet("DSK cards")
 ScryfallCode=YDSK
 
 [cards]

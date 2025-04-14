@@ -17,11 +17,6 @@
  */
 package forge.game.card;
 
-import java.util.Comparator;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.combat.CombatUtil;
@@ -31,8 +26,12 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.PredicateString;
 import forge.util.collect.FCollectionView;
+
+import java.util.Comparator;
+import java.util.function.Predicate;
 
 
 /**
@@ -56,7 +55,7 @@ public final class CardPredicates {
     }
 
     public static Predicate<Card> ownerLives() {
-        return c -> !c.getOwner().hasLost();
+        return c -> c.getOwner().isInGame();
     }
 
     public static Predicate<Card> isType(final String cardType) {
@@ -73,7 +72,7 @@ public final class CardPredicates {
 
     public static Predicate<Card> containsKeyword(final String keyword) {
         return c -> {
-            if (Iterables.any(c.getHiddenExtrinsicKeywords(), PredicateString.contains(keyword))) {
+            if (IterableUtil.any(c.getHiddenExtrinsicKeywords(), PredicateString.contains(keyword))) {
                 return true;
             }
 
@@ -92,6 +91,9 @@ public final class CardPredicates {
 
     public static Predicate<Card> nameEquals(final String name) {
         return c -> c.getName().equals(name);
+    }
+    public static Predicate<Card> nameNotEquals(final String name) {
+        return c -> !c.getName().equals(name);
     }
 
     public static Predicate<Card> sharesNameWith(final Card name) {
@@ -127,7 +129,7 @@ public final class CardPredicates {
     }
 
     public static Predicate<Card> possibleBlockers(final Card attacker) {
-        return c -> c.isCreature() && CombatUtil.canBlock(attacker, c);
+        return c -> CombatUtil.canBlock(attacker, c);
     }
 
     public static Predicate<Card> possibleBlockerForAtLeastOne(final Iterable<Card> attackers) {
@@ -292,7 +294,7 @@ public final class CardPredicates {
             if (c.getCastSA() == null) {
                 return false;
             }
-            return predSA.apply(c.getCastSA());
+            return predSA.test(c.getCastSA());
         };
     }
 
@@ -304,105 +306,46 @@ public final class CardPredicates {
         return c -> c.isAttraction() && c.getAttractionLights().contains(light);
     }
 
-    public static class Presets {
-
-        /**
-         * a Predicate<Card> to get all cards that are tapped.
-         */
-        public static final Predicate<Card> TAPPED = Card::isTapped;
-
-        public static final Predicate<Card> FACE_DOWN = Card::isFaceDown;
-
-        /**
-         * a Predicate<Card> to get all cards that are untapped.
-         */
-        public static final Predicate<Card> UNTAPPED = Card::isUntapped;
-
-        public static final Predicate<Card> CAN_TAP = Card::canTap;
-
-        public static final Predicate<Card> CAN_CREW = Card::canCrew;
-        /**
-         * a Predicate<Card> to get all creatures.
-         */
-        public static final Predicate<Card> CREATURES = Card::isCreature;
-
-        /**
-         * a Predicate<Card> to get all enchantments.
-         */
-        public static final Predicate<Card> ENCHANTMENTS = Card::isEnchantment;
-        /**
-         * a Predicate<Card> to get all aura.
-         */
-        public static final Predicate<Card> AURA = Card::isAura;
-        /**
-         * a Predicate<Card> to get all equipment.
-         */
-        public static final Predicate<Card> EQUIPMENT = Card::isEquipment;
-        /**
-         * a Predicate<Card> to get all fortification.
-         */
-        public static final Predicate<Card> FORTIFICATION = Card::isFortification;
-
-        /**
-         * a Predicate<Card> to get all curse.
-         */
-        public static final Predicate<Card> CURSE = Card::isCurse;
-
-        /**
-         * a Predicate<Card> to get all unenchanted cards in a list.
-         */
-        public static final Predicate<Card> UNENCHANTED = c -> !c.isEnchanted();
-        /**
-         * a Predicate<Card> to get all enchanted cards in a list.
-         */
-        public static final Predicate<Card> ENCHANTED = GameEntity::isEnchanted;
-        /**
-         * a Predicate<Card> to get all nontoken cards.
-         */
-        public static final Predicate<Card> NON_TOKEN = c -> !(c.isToken() || c.isTokenCard());
-        /**
-         * a Predicate<Card> to get all token cards.
-         */
-        public static final Predicate<Card> TOKEN = c -> c.isToken() || c.isTokenCard();
-        /**
-         * a Predicate<Card> to get all basicLands.
-         */
-        public static final Predicate<Card> BASIC_LANDS = c -> {
-            // the isBasicLand() check here may be sufficient...
-            return c.isLand() && c.isBasicLand();
-        };
-        /**
-         * a Predicate<Card> to get all artifacts.
-         */
-        public static final Predicate<Card> ARTIFACTS = Card::isArtifact;
-        /**
-         * a Predicate<Card> to get all nonartifacts.
-         */
-        public static final Predicate<Card> NON_ARTIFACTS = c -> !c.isArtifact();
-        /**
-         * a Predicate<Card> to get all lands.
-         */
-        public static final Predicate<Card> LANDS = c -> c.isLand();
-        /**
-         * a Predicate<Card> to get all mana-producing lands.
-         */
-        public static final Predicate<Card> LANDS_PRODUCING_MANA = c -> c.isBasicLand() || (c.isLand() && !c.getManaAbilities().isEmpty());
-        /**
-         * a Predicate<Card> to get all permanents.
-         */
-        public static final Predicate<Card> PERMANENTS = Card::isPermanent;
-        /**
-         * a Predicate<Card> to get all nonland permanents.
-         */
-        public static final Predicate<Card> NONLAND_PERMANENTS = c -> c.isPermanent() && !c.isLand();
-
-        public static final Predicate<Card> hasFirstStrike = c -> c.isCreature() && (c.hasFirstStrike() || c.hasDoubleStrike());
-        public static final Predicate<Card> hasSecondStrike = c -> c.isCreature() && (!c.hasFirstStrike() || c.hasDoubleStrike());
-        public static final Predicate<Card> SNOW_LANDS = c -> c.isLand() && c.isSnow();
-        public static final Predicate<Card> PLANESWALKERS = Card::isPlaneswalker;
-        public static final Predicate<Card> BATTLES = Card::isBattle;
-        public static final Predicate<Card> CAN_BE_DESTROYED = Card::canBeDestroyed;
-        public static final Predicate<Card> ATTRACTIONS = Card::isAttraction;
+    public static Predicate<Card> isContraptionOnSprocket(int sprocket) {
+        return c -> c.getSprocket() == sprocket && c.isContraption();
     }
 
+    public static final Predicate<Card> TAPPED = Card::isTapped;
+    public static final Predicate<Card> FACE_DOWN = Card::isFaceDown;
+    public static final Predicate<Card> UNTAPPED = Card::isUntapped;
+    public static final Predicate<Card> CAN_TAP = Card::canTap;
+    public static final Predicate<Card> CAN_CREW = Card::canCrew;
+    public static final Predicate<Card> CREATURES = Card::isCreature;
+    public static final Predicate<Card> NON_CREATURES = c -> !c.isCreature();
+    public static final Predicate<Card> ENCHANTMENTS = Card::isEnchantment;
+    public static final Predicate<Card> AURA = Card::isAura;
+    public static final Predicate<Card> EQUIPMENT = Card::isEquipment;
+    public static final Predicate<Card> FORTIFICATION = Card::isFortification;
+    public static final Predicate<Card> CURSE = Card::isCurse;
+    public static final Predicate<Card> UNENCHANTED = c -> !c.isEnchanted();
+    public static final Predicate<Card> ENCHANTED = GameEntity::isEnchanted;
+    public static final Predicate<Card> NON_TOKEN = c -> !(c.isToken() || c.isTokenCard());
+    public static final Predicate<Card> TOKEN = c -> c.isToken() || c.isTokenCard();
+    public static final Predicate<Card> BASIC_LANDS = c -> {
+        // the isBasicLand() check here may be sufficient...
+        return c.isLand() && c.isBasicLand();
+    };
+    public static final Predicate<Card> NONBASIC_LANDS = c -> c.isLand() && !c.isBasicLand();
+
+    public static final Predicate<Card> ARTIFACTS = Card::isArtifact;
+    public static final Predicate<Card> INSTANTS_AND_SORCERIES = Card::isInstantOrSorcery;
+
+    public static final Predicate<Card> LANDS = Card::isLand;
+    public static final Predicate<Card> NON_LANDS = c -> !c.isLand();
+    public static final Predicate<Card> LANDS_PRODUCING_MANA = c -> c.isBasicLand() || (c.isLand() && !c.getManaAbilities().isEmpty());
+    public static final Predicate<Card> PERMANENTS = Card::isPermanent;
+    public static final Predicate<Card> NONLAND_PERMANENTS = c -> c.isPermanent() && !c.isLand();
+    public static final Predicate<Card> hasFirstStrike = c -> c.isCreature() && (c.hasFirstStrike() || c.hasDoubleStrike());
+    public static final Predicate<Card> hasSecondStrike = c -> c.isCreature() && (!c.hasFirstStrike() || c.hasDoubleStrike());
+    public static final Predicate<Card> SNOW_LANDS = c -> c.isLand() && c.isSnow();
+    public static final Predicate<Card> PLANESWALKERS = Card::isPlaneswalker;
+    public static final Predicate<Card> BATTLES = Card::isBattle;
+    public static final Predicate<Card> CAN_BE_DESTROYED = Card::canBeDestroyed;
+    public static final Predicate<Card> ATTRACTIONS = Card::isAttraction;
+    public static final Predicate<Card> CONTRAPTIONS = Card::isContraption;
 }

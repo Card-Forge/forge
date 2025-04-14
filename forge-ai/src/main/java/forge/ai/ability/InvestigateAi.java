@@ -1,14 +1,14 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Map;
 
 public class InvestigateAi extends SpellAbilityAi {
     /* (non-Javadoc)

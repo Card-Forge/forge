@@ -37,7 +37,7 @@
  <objectgroup id="4" name="Objects">
   <object id="41" template="../../obj/shop.tx" x="249" y="370">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-4"/>
@@ -46,7 +46,7 @@
   </object>
   <object id="56" template="../../obj/shop.tx" x="152" y="370">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-4"/>
@@ -55,7 +55,7 @@
   </object>
   <object id="57" template="../../obj/shop.tx" x="200" y="418">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-4"/>
@@ -64,7 +64,7 @@
   </object>
   <object id="43" template="../../obj/shop.tx" x="104" y="370">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-4"/>
@@ -74,7 +74,7 @@
   <object id="47" template="../../obj/inn.tx" x="376" y="370"/>
   <object id="49" template="../../obj/shop.tx" x="104" y="418">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-4"/>
@@ -83,7 +83,7 @@
   </object>
   <object id="50" template="../../obj/shop.tx" x="152" y="418">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-4"/>
@@ -92,7 +92,7 @@
   </object>
   <object id="51" template="../../obj/shop.tx" x="248" y="418">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-4"/>
@@ -199,7 +199,7 @@
   </object>
   <object id="65" template="../../obj/shop.tx" x="200" y="370">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red,PhyrexianRed"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-4"/>
@@ -219,7 +219,7 @@
   </object>
   <object id="68" template="../../obj/shop.tx" x="400" y="337">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-2"/>
@@ -228,7 +228,7 @@
   </object>
   <object id="69" template="../../obj/shop.tx" x="464" y="337">
    <properties>
-    <property name="commonShopList" value="Enchantment6Red,Creature6Red,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
+    <property name="commonShopList" value="Enchantment6Red,Creature6Red,RedBoosterPackShop,Instant6Red,Goblin,Devil,Dwarf,Dragon,Minotaur,Shaman"/>
     <property name="mythicShopList" value="Planeswalker4Red,WUBRG,RGU,RWG,RWU,RUB,RWB,RGB,Legend4Red"/>
     <property name="rareShopList" value="Artifact4Red,Land4Red,Gruul,Izzet,Rakdos,Boros,Vehicle2Red,Wand4Red"/>
     <property name="signYOffset" type="float" value="-4"/>

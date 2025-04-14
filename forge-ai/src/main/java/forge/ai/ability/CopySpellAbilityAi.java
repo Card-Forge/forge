@@ -1,22 +1,18 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
-import forge.ai.AiCardMemory;
-import forge.ai.AiPlayDecision;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtilCard;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpecialCardAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.ApiType;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
+
+import java.util.List;
+import java.util.Map;
 
 public class CopySpellAbilityAi extends SpellAbilityAi {
 
@@ -28,7 +24,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         String logic = sa.getParamOrDefault("AILogic", "");
 
         if (game.getStack().isEmpty()) {
-            return sa.isMandatory();
+            return sa.isMandatory() || "Always".equals(logic);
         }
 
         final SpellAbility top = game.getStack().peekAbility();
@@ -148,4 +144,23 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
         return true;
     }
 
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        final String aiLogic = sa.getParam("UnlessAI");
+        if ("Never".equals(aiLogic)) { return false; }
+
+        if (sa.hasParam("UnlessSwitched")) {
+            // TODO try without AI Logic flag
+            if ("ChainOfVapor".equals(aiLogic)) {
+                if (payer.getLandsInPlay().size() < 3) {
+                    return false;
+                }
+                // TODO make better logic in to pick which opponent
+                if (payer.getOpponents().getCreaturesInPlay().size() < 0) {
+                    return false;
+                }
+            }
+        }
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+    }
 }

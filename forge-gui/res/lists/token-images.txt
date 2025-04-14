@@ -2496,7 +2496,11 @@ monarch_lcc.jpg https://downloads.cardforge.org/images/tokens/monarch_lcc.jpg
 monarch_moc.jpg https://downloads.cardforge.org/images/tokens/monarch_moc.jpg
 morph.jpg https://downloads.cardforge.org/images/tokens/morph.jpg
 night_mid.jpg https://downloads.cardforge.org/images/tokens/night_mid.jpg
+radiation.jpg https://downloads.cardforge.org/images/tokens/radiation.jpg
+sprockets.jpg https://downloads.cardforge.org/images/tokens/sprockets.jpg
 the_ring.jpg https://downloads.cardforge.org/images/tokens/the_ring.jpg
+speed.jpg https://downloads.cardforge.org/images/tokens/speed.jpg
+max_speed.jpg https://downloads.cardforge.org/images/tokens/max_speed.jpg
 
 #Pets
 

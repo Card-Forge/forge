@@ -1,0 +1,5 @@
+Name:Perennation
+ManaCost:3 W B G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn | WithCountersType$ Hexproof,Indestructible | SpellDescription$ Return target permanent card from your graveyard to the battlefield with a hexproof counter and an indestructible counter on it.
+Oracle:Return target permanent card from your graveyard to the battlefield with a hexproof counter and an indestructible counter on it.

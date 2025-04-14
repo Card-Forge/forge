@@ -1,9 +1,6 @@
 package forge.ai.ability;
 
-import java.util.Map;
-
-import com.google.common.base.Predicates;
-
+import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
@@ -18,6 +15,8 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.Map;
 
 public class ScryAi extends SpellAbilityAi {
 
@@ -48,6 +47,15 @@ public class ScryAi extends SpellAbilityAi {
                     }
                 }
             }
+
+            if ("X".equals(sa.getParam("ScryNum")) && sa.getSVar("X").equals("Count$xPaid")) {
+                int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                if (xPay == 0) {
+                    return false;
+                }
+                sa.getRootAbility().setXManaCostPaid(xPay);
+            }
+
             return mandatory || sa.isTargetNumberValid();
         }
 
@@ -101,7 +109,7 @@ public class ScryAi extends SpellAbilityAi {
     private boolean doBestOpportunityLogic(Player ai, SpellAbility sa, PhaseHandler ph) {
         // Check to see if there are any cards in hand that may be worth casting
         boolean hasSomethingElse = false;
-        for (Card c : CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS))) {
+        for (Card c : CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS)) {
             for (SpellAbility ab : c.getAllSpellAbilities()) {
                 if (ab.getPayCosts().hasManaCost()
                         && ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
@@ -163,6 +171,14 @@ public class ScryAi extends SpellAbilityAi {
                 }
             }
             randomReturn = sa.isTargetNumberValid();
+        }
+
+        if ("X".equals(sa.getParam("ScryNum")) && sa.getSVar("X").equals("Count$xPaid")) {
+            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            if (xPay == 0) {
+                return false;
+            }
+            sa.getRootAbility().setXManaCostPaid(xPay);
         }
 
         return randomReturn;

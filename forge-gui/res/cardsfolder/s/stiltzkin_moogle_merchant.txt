@@ -1,0 +1,11 @@
+Name:Stiltzkin, Moogle Merchant
+ManaCost:W
+Types:Legendary Creature Moogle
+PT:1/2
+K:Lifelink
+A:AB$ Pump | Cost$ 2 T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGainControl | AILogic$ DonateTargetPerm | SpellDescription$ Target opponent gains control of another target permanent you control. If they do, you draw a card.
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Permanent.Other+YouCtrl | TgtPrompt$ Select another target permanent you control | NewController$ ParentTarget | RememberControlled$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$LifeGain
+Oracle:Lifelink\n{2}, {T}: Target opponent gains control of another target permanent you control. If they do, you draw a card.

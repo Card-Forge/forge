@@ -4,7 +4,7 @@ Types:Creature Fox Samurai
 PT:1/3
 S:Mode$ ReduceCost | ValidCard$ Aura,Equipment | Type$ Spell | Activator$ You | Amount$ X | Description$ Aura and equipment spells you cast cost {X} less to cast, where X is CARDNAME's power.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAttack | TriggerDescription$ Whenever CARDNAME attacks, other modified creatures you control get +X/+X until end of turn, where X is CARDNAME's power.
-SVar:TrigPumpAttack:DB$ PumpAll | ValidCards$ Creature.modified+YouCtrl+StrictlyOther | NumAtt$ X | NumDef$ X
+SVar:TrigPumpAttack:DB$ PumpAll | ValidCards$ Creature.modified+YouCtrl+StrictlyOther | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$CardPower
 DeckHints:Type$Aura|Equipment
 Oracle:Aura and equipment spells you cast cost {X} less to cast, where X is Golden-Tail Trainer's power.\nWhenever Golden-Tail Trainer attacks, other modified creatures you control get +X/+X until end of turn, where X is Golden-Tail Trainer's power.

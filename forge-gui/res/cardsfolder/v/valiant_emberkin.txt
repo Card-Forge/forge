@@ -1,0 +1,10 @@
+Name:Valiant Emberkin
+ManaCost:1 R W
+Types:Enchantment Creature Mouse Glimmer
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME enters or attacks, target creature you control perpetually gets +1/+0.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, target creature you control perpetually gets +1/+0.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | Duration$ Perpetual
+S:Mode$ Panharmonicon | ValidMode$ BecomesTarget,BecomesTargetOnce | ValidCard$ Permanent.YouCtrl | ValidTarget$ Creature.YouCtrl | Description$ If a creature you control becoming the target of a spell or ability causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+Oracle:Haste\Whenever Valiant Emberkin enters or attacks, target creature you control perpetually gets +1/+0.\nIf a creature you control becoming the target of a spell or ability causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

@@ -1,0 +1,9 @@
+Name:Ethrimik, Imagined Fiend
+ManaCost:2 W W
+Types:Legendary Creature Illusion Beast
+PT:5/5
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Origin$ Any | Execute$ TrigManifest | TriggerDescription$ When NICKNAME enters, manifest dread.
+SVar:TrigManifest:DB$ ManifestDread
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control get +1/+1.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | IsPresent$ Creature.Other+YouCtrl | PresentCompare$ GE1 | Description$ As long as you control another creature, NICKNAME can't attack or block.
+Oracle:When Ethrimik enters, manifest dread.\nOther creatures you control get +1/+1.\nAs long as you control another creature, Ethrimik can't attack or block.

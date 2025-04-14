@@ -781,23 +781,12 @@ public class CardRenderer {
 
         }
 
-        if (card.getCurrentRoom() != null && !card.getCurrentRoom().isEmpty()) {
-            List<String> markers = new ArrayList<>();
-            markers.add("In Room:");
-            markers.add(card.getCurrentRoom());
-            drawMarkersTabs(markers, g, x, y, w, h, false);
-        }
-        //Class level
-        if (card.getCurrentState().getType().hasStringType("Class") && ZoneType.Battlefield.equals(card.getZone())) {
-            List<String> markers = new ArrayList<>();
-            markers.add("CL:" + card.getClassLevel());
-            drawMarkersTabs(markers, g, x, y - markersHeight, w, h, true);
-        }
-        //Ring level
-        if (card.getRingLevel() > 0) {
-            List<String> markers = new ArrayList<>();
-            markers.add("RL:" + card.getRingLevel());
-            drawMarkersTabs(markers, g, x, y - markersHeight, w, h, true);
+        if(card.getMarkerText() != null) {
+            List<String> markers = card.getMarkerText();
+            if(markers.size() > 1) //Use smaller text for multi-line strings.
+                drawMarkersTabs(markers, g, x, y, w, h, false);
+            else
+                drawMarkersTabs(markers, g, x, y - markersHeight, w, h, true);
         }
 
         float otherSymbolsSize = w / 4f;
@@ -869,10 +858,7 @@ public class CardRenderer {
                 float manaSymbolSize = w / 4.5f;
                 if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield) {
                     if (isChoiceList) {
-                        if (card.getRightSplitState().getName().equals(details.getName()))
-                            drawManaCost(g, card.getRightSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
-                        else
-                            drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                        drawManaCost(g, details.getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
                     } else {
                         ManaCost leftManaCost = card.getLeftSplitState().getManaCost();
                         ManaCost rightManaCost = card.getRightSplitState().getManaCost();
@@ -1531,7 +1517,7 @@ public class CardRenderer {
         int pageSize = 128;
 
         //only generate images for characters that could be used by Forge
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890/-+:'";
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890/-+:'!—";
 
         final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
         final FreeTypeFontParameter parameter = new FreeTypeFontParameter();

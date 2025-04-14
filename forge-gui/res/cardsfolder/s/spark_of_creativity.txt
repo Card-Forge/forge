@@ -6,7 +6,7 @@ SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZo
 SVar:DBChoice:DB$ GenericChoice | Defined$ You | Choices$ SparkDamage,SparkPlay | SubAbility$ DBCleanup | AILogic$ CreativitySpark
 SVar:SparkDamage:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature.
 SVar:SparkPlay:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SpellDescription$ You may play exiled card until end of turn.
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:Play:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 AI:RemoveDeck:All

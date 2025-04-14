@@ -1,0 +1,6 @@
+Name:Wild Ride
+ManaCost:R
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +3 | KW$ Haste | SpellDescription$ Target creature gets +3/+0 and gains haste until end of turn.
+K:Harmonize:4 R
+Oracle:Target creature gets +3/+0 and gains haste until end of turn.\nHarmonize {4}{R} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)

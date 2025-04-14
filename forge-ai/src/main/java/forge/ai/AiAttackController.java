@@ -17,8 +17,6 @@
  */
 package forge.ai;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
@@ -42,14 +40,17 @@ import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.Expressions;
-import forge.util.MyRandom;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -74,6 +75,9 @@ public class AiAttackController {
 
     private int aiAggression = 0; // how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn; // include creature that can only attack/block next turn
+    private final int timeOut;
+    private final boolean canUseTimeout;
+    private List<CompletableFuture<Integer>> futures = new ArrayList<>();
 
     /**
      * <p>
@@ -91,6 +95,8 @@ public class AiAttackController {
         myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
         refreshCombatants(defendingOpponent);
+        this.timeOut = ai.getGame().getAITimeout();
+        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -104,11 +110,13 @@ public class AiAttackController {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
+        this.timeOut = ai.getGame().getAITimeout();
+        this.canUseTimeout = ai.getGame().canUseTimeout();
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {
-        if (defender instanceof Card && ((Card) defender).isBattle()) {
-            this.oppList = getOpponentCreatures(((Card) defender).getProtectingPlayer());
+        if (defender instanceof Card card && card.isBattle()) {
+            this.oppList = getOpponentCreatures(card.getProtectingPlayer());
         } else {
             this.oppList = getOpponentCreatures(defendingOpponent);
         }
@@ -129,7 +137,7 @@ public class AiAttackController {
 
         CardCollection tappedDefenders = new CardCollection();
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
-            for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
+            for (SpellAbility sa : IterableUtil.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
                 if (sa.usesTargeting() || !sa.getParamOrDefault("Defined", "Self").equals("Self")) {
                     continue;
                 }
@@ -153,7 +161,7 @@ public class AiAttackController {
             defenders.removeAll(tappedDefenders);
 
             // Transform (e.g. Incubator tokens)
-            for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
+            for (SpellAbility sa : IterableUtil.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
                 Card transformedCopy = ComputerUtilCombat.canTransform(c);
                 if (transformedCopy.isCreature()) {
                     int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
@@ -169,7 +177,7 @@ public class AiAttackController {
     }
 
     public void removeBlocker(Card blocker) {
-    	this.oppList.remove(blocker);
+        this.oppList.remove(blocker);
         this.blockers.remove(blocker);
     }
 
@@ -286,7 +294,7 @@ public class AiAttackController {
         }
 
         if ("TRUE".equals(attacker.getSVar("HasAttackEffect"))) {
-        	return true;
+            return true;
         }
 
         // Damage opponent if unblocked
@@ -304,7 +312,8 @@ public class AiAttackController {
             }
         }
         // Poison opponent if unblocked
-        if (defender instanceof Player && ComputerUtilCombat.poisonIfUnblocked(attacker, (Player) defender) > 0) {
+        if (defender instanceof Player player
+                && ComputerUtilCombat.poisonIfUnblocked(attacker, player) > 0) {
             return true;
         }
 
@@ -388,7 +397,7 @@ public class AiAttackController {
         // reduce the search space
         final List<Card> opponentsAttackers = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), c -> !c.hasSVar("EndOfTurnLeavePlay")
                 && (c.toughnessAssignsDamage() || c.getNetCombatDamage() > 0 // performance shortcuts
-                        || c.getNetCombatDamage() + ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) > 0)
+                || c.getNetCombatDamage() + ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) > 0)
                 && ComputerUtilCombat.canAttackNextTurn(c));
 
         // don't hold back creatures that can't block any of the human creatures
@@ -615,9 +624,9 @@ public class AiAttackController {
             // TODO: the AI should ideally predict how many times it can activate
             // for now, unless the opponent is tapped out, break at this point
             // and do not predict the blocker limit (which is safer)
-            if (Iterables.any(defendingOpponent.getLandsInPlay(), CardPredicates.Presets.UNTAPPED)) {
+            if (defendingOpponent.getLandsInPlay().anyMatch(CardPredicates.UNTAPPED)) {
                 maxBlockersAfterCrew += CardLists.count(CardLists.getNotType(defendingOpponent.getCardsIn(ZoneType.Battlefield), "Creature"),
-                        Predicates.and(CardPredicates.isType("Vehicle"), CardPredicates.Presets.UNTAPPED));
+                        CardPredicates.isType("Vehicle").and(CardPredicates.UNTAPPED));
             }
         }
 
@@ -841,10 +850,9 @@ public class AiAttackController {
         // decided to attack another defender so related lists need to be updated
         // (though usually rather try to avoid this situation for performance reasons)
         if (defender != defendingOpponent) {
-            if (defender instanceof Player) {
-                defendingOpponent = (Player) defender;
-            } else if (defender instanceof Card) {
-                Card defCard = (Card) defender;
+            if (defender instanceof Player p) {
+                defendingOpponent = p;
+            } else if (defender instanceof Card defCard) {
                 if (defCard.isBattle()) {
                     defendingOpponent = defCard.getProtectingPlayer();
                 } else {
@@ -884,7 +892,7 @@ public class AiAttackController {
         // TODO: detect Season of the Witch by presence of a card with a specific trigger
         final boolean seasonOfTheWitch = ai.getGame().isCardInPlay("Season of the Witch");
 
-        List<Card> attackersLeft = new ArrayList<>(this.attackers);
+        final Queue<Card> attackersLeft = new ConcurrentLinkedQueue<>(this.attackers);
 
         // TODO probably use AttackConstraints instead of only GlobalAttackRestrictions?
         GlobalAttackRestrictions restrict = GlobalAttackRestrictions.getGlobalRestrictions(ai, combat.getDefenders());
@@ -900,63 +908,76 @@ public class AiAttackController {
         }
 
         // Attackers that don't really have a choice
-        int numForcedAttackers = 0;
+        final AtomicInteger numForcedAttackers = new AtomicInteger(0);
         // nextTurn is now only used by effect from Oracle en-Vec, which can skip check must attack,
         // because creatures not chosen can't attack.
         if (!nextTurn) {
             for (final Card attacker : this.attackers) {
-                GameEntity mustAttackDef = null;
-                if (attacker.getSVar("MustAttack").equals("True")) {
-                    mustAttackDef = defender;
-                } else if (attacker.hasSVar("EndOfTurnLeavePlay")
-                        && isEffectiveAttacker(ai, attacker, combat, defender)) {
-                    mustAttackDef = defender;
-                } else if (seasonOfTheWitch) {
-                    //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
-                    mustAttackDef = defender;
-                } else {
-                    if (combat.getAttackConstraints().getRequirements().get(attacker) == null) continue;
-                    // check defenders in order of maximum requirements
-                    List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
-                    final GameEntity def = defender;
-                    reqs.sort((r1, r2) -> {
-                        if (r1.getValue() == r2.getValue()) {
-                            // try to attack the designated defender
-                            if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
-                                return -1;
+                final GameEntity finalDefender = defender;
+                futures.add(CompletableFuture.supplyAsync(()-> {
+                    GameEntity mustAttackDef = null;
+                    if (attacker.getSVar("MustAttack").equals("True")) {
+                        mustAttackDef = finalDefender;
+                    } else if (attacker.hasSVar("EndOfTurnLeavePlay")
+                            && isEffectiveAttacker(ai, attacker, combat, finalDefender)) {
+                        mustAttackDef = finalDefender;
+                    } else if (seasonOfTheWitch) {
+                        //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
+                        mustAttackDef = finalDefender;
+                    } else {
+                        if (combat.getAttackConstraints().getRequirements().get(attacker) == null) return 0;
+                        // check defenders in order of maximum requirements
+                        List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                        final GameEntity def = finalDefender;
+                        reqs.sort((r1, r2) -> {
+                            if (r1.getValue() == r2.getValue()) {
+                                // try to attack the designated defender
+                                if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
+                                    return -1;
+                                }
+                                if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
+                                    return 1;
+                                }
+                                // otherwise PW
+                                if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
+                                    return -1;
+                                }
+                                if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
+                                    return 1;
+                                }
+                                // or weakest player
+                                if (r1.getKey() instanceof Player p1 && r2.getKey() instanceof Player p2) {
+                                    return p1.getLife() - p2.getLife();
+                                }
                             }
-                            if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
-                                return 1;
+                            return r2.getValue() - r1.getValue();
+                        });
+                        for (Pair<GameEntity, Integer> e : reqs) {
+                            if (e.getRight() == 0) continue;
+                            GameEntity mustAttackDefMaybe = e.getLeft();
+                            if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
+                                mustAttackDef = mustAttackDefMaybe;
+                                break;
                             }
-                            // otherwise PW
-                            if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
-                                return -1;
-                            }
-                            if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
-                                return 1;
-                            }
-                            // or weakest player
-                            if (r1.getKey() instanceof Player && r2.getKey() instanceof Player) {
-                                return ((Player) r1.getKey()).getLife() - ((Player) r2.getKey()).getLife();
-                            }
-                        }
-                        return r2.getValue() - r1.getValue();
-                    });
-                    for (Pair<GameEntity, Integer> e : reqs) {
-                        if (e.getRight() == 0) continue;
-                        GameEntity mustAttackDefMaybe = e.getLeft();
-                        if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
-                            mustAttackDef = mustAttackDefMaybe;
-                            break;
                         }
                     }
-                }
-                if (mustAttackDef != null) {
-                    combat.addAttacker(attacker, mustAttackDef);
-                    attackersLeft.remove(attacker);
-                    numForcedAttackers++;
-                }
+                    if (mustAttackDef != null) {
+                        combat.addAttacker(attacker, mustAttackDef);
+                        attackersLeft.remove(attacker);
+                        numForcedAttackers.incrementAndGet();
+                    }
+                    return 0;
+                }).exceptionally(ex -> {
+                    ex.printStackTrace();
+                    return 0;
+                }));
             }
+            CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
+            if (canUseTimeout)
+                CompletableFuture.allOf(futuresArray).completeOnTimeout(null, timeOut, TimeUnit.SECONDS).join();
+            else
+                CompletableFuture.allOf(futuresArray).join();
+            futures.clear();
             if (attackersLeft.isEmpty()) {
                 return aiAggression;
             }
@@ -964,18 +985,19 @@ public class AiAttackController {
 
         // Lightmine Field: make sure the AI doesn't wipe out its own creatures
         if (lightmineField) {
-            doLightmineFieldAttackLogic(attackersLeft, numForcedAttackers, playAggro);
+            doLightmineFieldAttackLogic(attackersLeft, numForcedAttackers.get(), playAggro);
         }
         // Revenge of Ravens: make sure the AI doesn't kill itself and doesn't damage itself unnecessarily
-        if (!doRevengeOfRavensAttackLogic(defender, attackersLeft, numForcedAttackers, attackMax)) {
+        if (!doRevengeOfRavensAttackLogic(defender, attackersLeft, numForcedAttackers.get(), attackMax)) {
             return aiAggression;
         }
 
         if (bAssault && defender == defendingOpponent) { // in case we are forced to attack someone else
             if (LOG_AI_ATTACKS)
                 System.out.println("Assault");
-            CardLists.sortByPowerDesc(attackersLeft);
-            for (Card attacker : attackersLeft) {
+            List<Card> left = new ArrayList<>(attackersLeft);
+            CardLists.sortByPowerDesc(left);
+            for (Card attacker : left) {
                 // reached max, breakup
                 if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
@@ -1227,7 +1249,7 @@ public class AiAttackController {
         if (ratioDiff > 0 && doAttritionalAttack) {
             aiAggression = 5; // attack at all costs
         } else if ((ratioDiff >= 1 && this.attackers.size() > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0))
-        		|| (playAggro && MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1)) {
+                || (playAggro && MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1)) {
             aiAggression = 4; // attack expecting to trade or damage player.
         } else if (MyRandom.percentTrue(chanceToAttackToTrade) && humanLifeToDamageRatio > 1
                 && defendingOpponent != null
@@ -1237,7 +1259,7 @@ public class AiAttackController {
                 && (ComputerUtilMana.getAvailableManaEstimate(ai) > 0) || tradeIfTappedOut
                 && (ComputerUtilMana.getAvailableManaEstimate(defendingOpponent) == 0) || MyRandom.percentTrue(extraChanceIfOppHasMana)
                 && (!tradeIfLowerLifePressure || (ai.getLifeLostLastTurn() + ai.getLifeLostThisTurn() <
-                        defendingOpponent.getLifeLostThisTurn() + defendingOpponent.getLifeLostThisTurn()))) {
+                defendingOpponent.getLifeLostThisTurn() + defendingOpponent.getLifeLostThisTurn()))) {
             aiAggression = 4; // random (chance-based) attack expecting to trade or damage player.
         } else if (ratioDiff >= 0 && this.attackers.size() > 1) {
             aiAggression = 3; // attack expecting to make good trades or damage player.
@@ -1265,19 +1287,20 @@ public class AiAttackController {
         if ( LOG_AI_ATTACKS )
             System.out.println("Normal attack");
 
-        attackersLeft = notNeededAsBlockers(combat.getAttackers(), attackersLeft);
-        attackersLeft = sortAttackers(attackersLeft);
+        List<Card> left = new ArrayList<>(attackersLeft);
+        left = notNeededAsBlockers(combat.getAttackers(), left);
+        left = sortAttackers(left);
 
         if ( LOG_AI_ATTACKS )
-            System.out.println("attackersLeft = " + attackersLeft);
+            System.out.println("attackersLeft = " + left);
 
         FCollection<GameEntity> possibleDefenders = new FCollection<>(defendingOpponent);
         possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
 
-        while (!attackersLeft.isEmpty()) {
+        while (!left.isEmpty()) {
             CardCollection attackersAssigned = new CardCollection();
-            for (int i = 0; i < attackersLeft.size(); i++) {
-                final Card attacker = attackersLeft.get(i);
+            for (int i = 0; i < left.size(); i++) {
+                final Card attacker = left.get(i);
                 if (aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
                         && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, defendingOpponent)
                         >= ComputerUtilCombat.getDamageToKill(attacker, false)) {
@@ -1291,7 +1314,7 @@ public class AiAttackController {
                     attackersAssigned.add(attacker);
 
                     // check if attackers are enough to finish the attacked planeswalker
-                    if (i < attackersLeft.size() - 1 && defender instanceof Card) {
+                    if (i < left.size() - 1 && defender instanceof Card card) {
                         final int blockNum = this.blockers.size();
                         int attackNum = 0;
                         int damage = 0;
@@ -1305,19 +1328,19 @@ public class AiAttackController {
                             }
                         }
                         // if enough damage: switch to next planeswalker
-                        if (damage >= ComputerUtilCombat.getDamageToKill((Card) defender, true)) {
+                        if (damage >= ComputerUtilCombat.getDamageToKill(card, true)) {
                             break;
                         }
                     }
                 }
             }
 
-            attackersLeft.removeAll(attackersAssigned);
+            left.removeAll(attackersAssigned);
             possibleDefenders.remove(defender);
-            if (attackersLeft.isEmpty() || possibleDefenders.isEmpty()) {
+            if (left.isEmpty() || possibleDefenders.isEmpty()) {
                 break;
             }
-            CardCollection pwDefending = new CardCollection(Iterables.filter(possibleDefenders, Card.class));
+            CardCollection pwDefending = new CardCollection(IterableUtil.filter(possibleDefenders, Card.class));
             if (pwDefending.isEmpty()) {
                 // TODO for now only looks at same player as we'd have to check the others from start too
                 //defender = new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)).min(PlayerPredicates.compareByLife());
@@ -1367,12 +1390,13 @@ public class AiAttackController {
             canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, Card::getNetToughness);
 
             // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
-            dangerousBlockersPresent = Iterables.any(validBlockers, Predicates.or(
-                    CardPredicates.hasKeyword(Keyword.WITHER), CardPredicates.hasKeyword(Keyword.INFECT),
-                    CardPredicates.hasKeyword(Keyword.LIFELINK)));
+            dangerousBlockersPresent = validBlockers.anyMatch(
+                    CardPredicates.hasKeyword(Keyword.LIFELINK)
+                    .or(Card::isWitherDamage)
+            );
 
             // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
-            defPower = CardLists.getTotalPower(validBlockers, true, false);
+            defPower = CardLists.getTotalPower(validBlockers, null);
 
             // look at the attacker in relation to the blockers to establish a
             // number of factors about the attacking context that will be relevant
@@ -1397,7 +1421,7 @@ public class AiAttackController {
                         canKillAll = false;
 
                         if (blocker.getSVar("HasCombatEffect").equals("TRUE") || blocker.getSVar("HasBlockEffect").equals("TRUE")
-                                || blocker.hasKeyword(Keyword.WITHER) || blocker.hasKeyword(Keyword.INFECT) || blocker.hasKeyword(Keyword.LIFELINK)) {
+                                || blocker.isWitherDamage() || blocker.hasKeyword(Keyword.LIFELINK)) {
                             canKillAllDangerous = false;
                             // there is a creature that can survive an attack from this creature
                             // and combat will have negative effects
@@ -1496,51 +1520,51 @@ public class AiAttackController {
 
         // decide if the creature should attack based on the prevailing strategy choice in aiAggression
         switch (aiAggression) {
-        case 6: // Exalted: expecting to at least kill a creature of equal value or not be blocked
-            if ((saf.canKillAll && saf.isWorthLessThanAllKillers) || !saf.canBeBlocked()) {
+            case 6: // Exalted: expecting to at least kill a creature of equal value or not be blocked
+                if ((saf.canKillAll && saf.isWorthLessThanAllKillers) || !saf.canBeBlocked()) {
+                    if (LOG_AI_ATTACKS)
+                        System.out.println(attacker.getName() + " = attacking expecting to kill creature, or is unblockable");
+                    return true;
+                }
+                break;
+            case 5: // all out attacking
                 if (LOG_AI_ATTACKS)
-                    System.out.println(attacker.getName() + " = attacking expecting to kill creature, or is unblockable");
+                    System.out.println(attacker.getName() + " = all out attacking");
                 return true;
-            }
-            break;
-        case 5: // all out attacking
-            if (LOG_AI_ATTACKS)
-                System.out.println(attacker.getName() + " = all out attacking");
-            return true;
-        case 4: // expecting to at least trade with something, or can attack "for free", expecting no counterattack
-            if (saf.canKillAll || (saf.dangerousBlockersPresent && saf.canKillAllDangerous && !saf.canBeKilledByOne) || !saf.canBeBlocked()
-                    || saf.defPower == 0) {
-                if (LOG_AI_ATTACKS)
-                    System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
-                return true;
-            }
-            break;
-        case 3: // expecting to at least kill a creature of equal value or not be blocked
-            if ((saf.canKillAll && saf.isWorthLessThanAllKillers)
-                    || (((saf.dangerousBlockersPresent && saf.canKillAllDangerous) || saf.hasAttackEffect || saf.hasCombatEffect) && !saf.canBeKilledByOne)
-                    || !saf.canBeBlocked()) {
-                if (LOG_AI_ATTACKS)
-                    System.out.println(attacker.getName() + " = attacking expecting to kill creature or cause damage, or is unblockable");
-                return true;
-            }
-            break;
-        case 2: // attack expecting to attract a group block or destroying a single blocker and surviving
-            if (!saf.canBeBlocked() || ((saf.canKillAll || saf.hasAttackEffect || saf.hasCombatEffect) && !saf.canBeKilledByOne &&
-                    ((saf.dangerousBlockersPresent && saf.canKillAllDangerous) || !saf.canBeKilled))) {
-                if (LOG_AI_ATTACKS)
-                    System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
-                return true;
-            }
-            break;
-        case 1: // unblockable creatures only
-            if (!saf.canBeBlocked() || (saf.numberOfPossibleBlockers == 1 && saf.canKillAll && !saf.canBeKilledByOne)) {
-                if (LOG_AI_ATTACKS)
-                    System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
-                return true;
-            }
-            break;
-        default:
-            break;
+            case 4: // expecting to at least trade with something, or can attack "for free", expecting no counterattack
+                if (saf.canKillAll || (saf.dangerousBlockersPresent && saf.canKillAllDangerous && !saf.canBeKilledByOne) || !saf.canBeBlocked()
+                        || saf.defPower == 0) {
+                    if (LOG_AI_ATTACKS)
+                        System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
+                    return true;
+                }
+                break;
+            case 3: // expecting to at least kill a creature of equal value or not be blocked
+                if ((saf.canKillAll && saf.isWorthLessThanAllKillers)
+                        || (((saf.dangerousBlockersPresent && saf.canKillAllDangerous) || saf.hasAttackEffect || saf.hasCombatEffect) && !saf.canBeKilledByOne)
+                        || !saf.canBeBlocked()) {
+                    if (LOG_AI_ATTACKS)
+                        System.out.println(attacker.getName() + " = attacking expecting to kill creature or cause damage, or is unblockable");
+                    return true;
+                }
+                break;
+            case 2: // attack expecting to attract a group block or destroying a single blocker and surviving
+                if (!saf.canBeBlocked() || ((saf.canKillAll || saf.hasAttackEffect || saf.hasCombatEffect) && !saf.canBeKilledByOne &&
+                        ((saf.dangerousBlockersPresent && saf.canKillAllDangerous) || !saf.canBeKilled))) {
+                    if (LOG_AI_ATTACKS)
+                        System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
+                    return true;
+                }
+                break;
+            case 1: // unblockable creatures only
+                if (!saf.canBeBlocked() || (saf.numberOfPossibleBlockers == 1 && saf.canKillAll && !saf.canBeKilledByOne)) {
+                    if (LOG_AI_ATTACKS)
+                        System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
+                    return true;
+                }
+                break;
+            default:
+                break;
         }
         return false; // don't attack
     }
@@ -1585,12 +1609,12 @@ public class AiAttackController {
                     break;
                 }
                 if (sa.usesTargeting()) {
-                    sa.setActivatingPlayer(c.getController(), true);
+                    sa.setActivatingPlayer(c.getController());
                     List<Card> validTargets = CardUtil.getValidCardsToTarget(sa);
                     if (validTargets.isEmpty()) {
                         missTarget = true;
                         break;
-                    } else if (sa.isCurse() && !Iterables.any(validTargets,
+                    } else if (sa.isCurse() && validTargets.stream().noneMatch(
                             CardPredicates.isControlledByAnyOf(c.getController().getOpponents()))) {
                         // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
                         missTarget = true;
@@ -1657,31 +1681,31 @@ public class AiAttackController {
             }
             if (color != null) {
                 switch (color) {
-                case "black":
-                    if (!c.isBlack()) {
-                        color = null;
-                    }
-                    break;
-                case "blue":
-                    if (!c.isBlue()) {
-                        color = null;
-                    }
-                    break;
-                case "green":
-                    if (!c.isGreen()) {
-                        color = null;
-                    }
-                    break;
-                case "red":
-                    if (!c.isRed()) {
-                        color = null;
-                    }
-                    break;
-                case "white":
-                    if (!c.isWhite()) {
-                        color = null;
-                    }
-                    break;
+                    case "black":
+                        if (!c.isBlack()) {
+                            color = null;
+                        }
+                        break;
+                    case "blue":
+                        if (!c.isBlue()) {
+                            color = null;
+                        }
+                        break;
+                    case "green":
+                        if (!c.isGreen()) {
+                            color = null;
+                        }
+                        break;
+                    case "red":
+                        if (!c.isRed()) {
+                            color = null;
+                        }
+                        break;
+                    case "white":
+                        if (!c.isWhite()) {
+                            color = null;
+                        }
+                        break;
                 }
             }
             if (color == null && artifact == null) { //nothing can make the attacker unblockable
@@ -1697,7 +1721,7 @@ public class AiAttackController {
         return null; //should never get here
     }
 
-    private void doLightmineFieldAttackLogic(final List<Card> attackersLeft, int numForcedAttackers, boolean playAggro) {
+    private void doLightmineFieldAttackLogic(final Queue<Card> attackersLeft, int numForcedAttackers, boolean playAggro) {
         CardCollection attSorted = new CardCollection(attackersLeft);
         CardCollection attUnsafe = new CardCollection();
         CardLists.sortByToughnessDesc(attSorted);
@@ -1727,13 +1751,15 @@ public class AiAttackController {
         attackersLeft.removeAll(attUnsafe);
     }
 
-    private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final List<Card> attackersLeft, int numForcedAttackers, int maxAttack) {
+    private boolean doRevengeOfRavensAttackLogic(final GameEntity defender, final Queue<Card> attackersLeft, int numForcedAttackers, int maxAttack) {
         // TODO: detect Revenge of Ravens by the trigger instead of by name
         boolean revengeOfRavens = false;
-        if (defender instanceof Player) {
-            revengeOfRavens = !CardLists.filter(((Player)defender).getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
-        } else if (defender instanceof Card) {
-            revengeOfRavens = !CardLists.filter(((Card)defender).getController().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
+        if (defender instanceof Player player) {
+            revengeOfRavens = !CardLists.filter(player.getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
+        } else if (defender instanceof Card card) {
+            revengeOfRavens = !CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.nameEquals("Revenge of Ravens")).isEmpty();
         }
 
         if (!revengeOfRavens) {

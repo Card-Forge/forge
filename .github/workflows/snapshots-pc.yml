@@ -8,9 +8,6 @@ on:
         description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
         required: false
         default: false
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '30 18 * * *'
 
 jobs:
   build:
@@ -89,3 +86,10 @@ jobs:
             *.pom
             *.repositories
             *.xml
+
+      - name: Send failure notification to Discord
+        if: failure() # This step runs only if the job fails
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"🔴 Desktop Snapshot Build Failed in branch: \`${{ github.ref_name }}\` by \`${{ github.actor }}\`.\nCheck logs: ${{ github.run_url }}\"}" \
+          ${{ secrets.DISCORD_AUTOMATION_WEBHOOK }}

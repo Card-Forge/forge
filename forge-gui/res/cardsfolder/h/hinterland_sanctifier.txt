@@ -1,0 +1,9 @@
+Name:Hinterland Sanctifier
+ManaCost:W
+Types:Creature Rabbit Cleric
+PT:1/2
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control enters, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+SVar:BuffedBy:Creature
+DeckHas:Ability$LifeGain
+Oracle:Whenever another creature you control enters, you gain 1 life.

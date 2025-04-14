@@ -1,0 +1,6 @@
+Name:Duplication Device
+ManaCost:no cost
+Types:Artifact Contraption
+T:Mode$ CrankContraption | ValidCard$ Card.Self | Execute$ TrigCrank | TriggerDescription$ Whenever you crank CARDNAME, until end of turn, target creature becomes a copy of any creature on the battlefield, except it's an artifact in addition to its other types.
+SVar:TrigCrank:DB$ Clone | Choices$ Creature | ChoiceTitle$ Choose a creature to copy | ValidTgts$ Creature | TgtPrompt$ Choose target creature to become a copy | Duration$ UntilEndOfTurn | AddTypes$ Artifact
+Oracle:Whenever you crank Duplication Device, until end of turn, target creature becomes a copy of any creature on the battlefield, except it's an artifact in addition to its other types.

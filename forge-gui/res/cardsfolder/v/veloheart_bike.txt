@@ -1,0 +1,10 @@
+Name:Veloheart Bike
+ManaCost:2 G
+Types:Artifact Vehicle
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this Vehicle enters, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+K:Crew:2
+DeckHas:Ability$LifeGain
+Oracle:When this Vehicle enters, you gain 2 life.\n{T}: Add one mana of any color.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

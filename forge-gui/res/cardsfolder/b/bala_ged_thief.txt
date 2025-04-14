@@ -4,6 +4,6 @@ Types:Creature Human Rogue Ally
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | Execute$ DBDiscard | TriggerDescription$ Whenever CARDNAME or another Ally you control enters, target player reveals a number of cards from their hand equal to the number of Allies you control. You choose one of them. That player discards that card.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | RevealNumber$ X | Mode$ RevealYouChoose | DiscardValid$ Card
-SVar:X:Count$TypeYouCtrl.Ally
+SVar:X:Count$Valid Ally.YouCtrl
 SVar:BuffedBy:Ally
 Oracle:Whenever Bala Ged Thief or another Ally you control enters, target player reveals a number of cards from their hand equal to the number of Allies you control. You choose one of them. That player discards that card.

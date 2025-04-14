@@ -1,8 +1,8 @@
 Name:Radiant Grace
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +1/+0 and has vigilance.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EnchantedBy | Execute$ TrigCurse | TriggerDescription$ When enchanted creature dies, return CARDNAME to the battlefield transformed under your control attached to target opponent.
 SVar:TrigCurse:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | IsCurse$ True | SubAbility$ DBChangeZone
@@ -16,8 +16,8 @@ Name:Radiant Restraints
 ManaCost:no cost
 Colors:white
 Types:Enchantment Aura Curse
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
 R:Event$ Moved | ValidCard$ Creature.EnchantedPlayerCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Creatures enchanted player controls enter tapped.
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 Oracle:Creatures enchanted player controls enter tapped.

@@ -1,8 +1,8 @@
 Name:Loose in the Park
 ManaCost:1 G
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters, draw a card, then draft a card from CARDNAME's spellbook and exile it.
 SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ TrigDraft
 SVar:TrigDraft:DB$ Draft | TriggerZones$ Battlefield | Spellbook$ Bristling Boar,Enraged Ceratok,Exuberant Wolfbear,Gaea's Protector,Master Symmetrist,Ornery Dilophosaur,Overgrown Armasaur,Predatory Wurm,Prized Unicorn,Sabertooth Mauler,Spike-Tailed Ceratops,Spore Crawler,Thrashing Brontodon,Wardscale Crocodile,World Shaper | Zone$ Exile | RememberDrafted$ True

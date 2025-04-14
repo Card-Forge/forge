@@ -3,12 +3,11 @@ ManaCost:3 WU WU
 Types:Sorcery
 A:SP$ TapAll | ValidCards$ Creature | ValidTgts$ Player | RememberTapped$ True | SubAbility$ DBChooseNumber | StackDescription$ REP target player_{p:Targeted} | SpellDescription$ Tap all creatures target player controls.
 SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ amount of energy to pay | SubAbility$ DBStun | StackDescription$ None
-SVar:DBStun:DB$ PutCounter | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | Choices$ Creature.IsRemembered | ChoiceAmount$ X | ChoiceTitle$ Choose up to X creatures tapped this way | CounterType$ Stun | StackDescription$ SpellDescription | SpellDescription$ You may pay X {E}, then choose up to X creatures tapped this way. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBStun:DB$ PutCounter | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | Choices$ Creature.IsRemembered | ChoiceAmount$ X | MinChoiceAmount$ 0 | ChoiceTitle$ Choose up to that many creatures tapped this way | CounterType$ Stun | StackDescription$ SpellDescription | SpellDescription$ You may pay any amount of {E}. If you do, choose up to that many creatures tapped this way. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 SVar:Max:Count$YourCountersEnergy
 SVar:X:Count$ChosenNumber
-DeckHints:Ability$Energy
 AlternateMode:Modal
-Oracle:Tap all creatures target player controls. You may pay X {E}, then choose up to X creatures tapped this way. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+Oracle:Tap all creatures target player controls. You may pay any amount of {E}. If you do, choose up to that many creatures tapped this way. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 
 ALTERNATE
 

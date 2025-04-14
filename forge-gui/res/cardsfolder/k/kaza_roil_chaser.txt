@@ -5,7 +5,7 @@ PT:1/2
 K:Flying
 K:Haste
 A:AB$ Effect | Cost$ T | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | SetChosenNumber$ X | SpellDescription$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you control as this ability resolves.
-SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCard$ Instant,Sorcery | Activator$ You | Amount$ Count$ChosenNumber | Description$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you controlled at the time EFFECTSOURCE's ability resolved.
+SVar:ReduceCost:Mode$ ReduceCost | Type$ Spell | ValidCard$ Instant,Sorcery | Activator$ You | Amount$ Count$ChosenNumber | Description$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you controlled at the time EFFECTSOURCE's ability resolved.
 SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:X:Count$Valid Wizard.YouCtrl

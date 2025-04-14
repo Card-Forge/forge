@@ -1,0 +1,14 @@
+Name:Will of the Abzan
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare Y GE1.2.1 | Choices$ DBReap,DBRevive | AdditionalDescription$ . If you control a commander as you cast this spell, you may choose both instead.
+SVar:DBReap:DB$ RepeatEach | ValidTgts$ Opponent | TargetMin$ 0 | TargetMax$ MaxTgt | RepeatTargeted$ TargetedPlayer | RepeatSubAbility$ DBChooseCard | SubAbility$ DBSac | SpellDescription$ Any number of target opponents each sacrifice a creature with the greatest power among creatures that player controls and lose 3 life.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | Reveal$ True | RememberChosen$ True
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBDrain | StackDescription$ None
+SVar:DBDrain:DB$ LoseLife | Defined$ TargetedPlayer | LifeAmount$ 3 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBRevive:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+SVar:MaxTgt:PlayerCountOpponents$Amount
+SVar:Y:Count$Valid Card.IsCommander+YouCtrl
+SVar:NeedsToPlay:Creature.OppCtrl
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Any number of target opponents each sacrifice a creature with the greatest power among creatures that player controls and lose 3 life.\n• Return target creature card from your graveyard to the battlefield.

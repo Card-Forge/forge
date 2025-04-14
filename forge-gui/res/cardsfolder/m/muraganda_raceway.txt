@@ -1,0 +1,8 @@
+Name:Muraganda Raceway
+ManaCost:no cost
+Types:Land
+K:Start your engines
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddAbility$ ABMana | Description$ Max speed — {T}: Add {C}{C}.
+SVar:ABMana:AB$ Mana | PrecostDesc$ Max speed — | Cost$ T | Produced$ C | Amount$ 2 | Secondary$ True | SpellDescription$ Add {C}{C}.
+Oracle:Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\n{T}: Add {C}.\nMax speed — {T}: Add {C}{C}.

@@ -77,9 +77,41 @@
     "male":"sprites/heroes/leonin_m.atlas",      
     "femaleAvatar":"Leonin_f",      
     "maleAvatar":"Leonin_m" 
-  }  
-  
-  
+  },
+  {
+    "name":"Red Dragon",
+    "female":"sprites/heroes/dragonplayer_r.atlas",      
+    "male":"sprites/heroes/dragonplayer_r.atlas",      
+    "femaleAvatar":"Dragon_r",      
+    "maleAvatar":"Dragon_r" 
+  },
+  {
+    "name":"White Dragon",
+    "female":"sprites/heroes/dragonplayer_w.atlas",      
+    "male":"sprites/heroes/dragonplayer_w.atlas",      
+    "femaleAvatar":"Dragon_w",      
+    "maleAvatar":"Dragon_w"  
+  },
+  {
+    "name":"Blue Dragon",
+    "female":"sprites/heroes/dragonplayer_u.atlas",      
+    "male":"sprites/heroes/dragonplayer_u.atlas",      
+    "femaleAvatar":"Dragon_u",      
+    "maleAvatar":"Dragon_u" 
+  },
+  {
+    "name":"Green Dragon",
+    "female":"sprites/heroes/dragonplayer_g.atlas",      
+    "male":"sprites/heroes/dragonplayer_g.atlas",      
+    "femaleAvatar":"Dragon_g",      
+    "maleAvatar":"Dragon_g"  
+  },
+  {
+    "name":"Black Dragon",
+    "female":"sprites/heroes/dragonplayer_b.atlas",      
+    "male":"sprites/heroes/dragonplayer_b.atlas",      
+    "femaleAvatar":"Dragon_b",      
+    "maleAvatar":"Dragon_b" 
+   }
   ]
-
 }

@@ -1,0 +1,6 @@
+Name:Mammoth Bellow
+ManaCost:2 G U R
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_5_5_elephant | TokenOwner$ You | SpellDescription$ Create a 5/5 green Elephant creature token.
+K:Harmonize:5 G U R
+Oracle:Create a 5/5 green Elephant creature token.\nHarmonize {5}{G}{U}{R} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)

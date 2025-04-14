@@ -163,41 +163,49 @@ public class AnimateEffect extends AnimateEffectBase {
             }
         }
 
-        for (final Card c : tgts) {
+        for (final Card tgtC : tgts) {
             // CR 702.26e
-            if (c.isPhasedOut()) {
+            if (tgtC.isPhasedOut()) {
                 continue;
             }
 
-            doAnimate(c, sa, power, toughness, types, removeTypes, finalColors,
+            final Card gameCard = game.getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard) || gameCard.isPhasedOut()) {
+                continue;
+            }
+
+            doAnimate(gameCard, sa, power, toughness, types, removeTypes, finalColors,
                     keywords, removeKeywords, hiddenKeywords,
                     abilities, triggers, replacements, stAbs, timestamp, duration);
 
             if (sa.hasParam("Name")) {
-                c.addChangedName(sa.getParam("Name"), false, timestamp, 0);
+                gameCard.addChangedName(sa.getParam("Name"), false, timestamp, 0);
             }
 
             // give sVars
             if (!sVarsMap.isEmpty()) {
-                c.addChangedSVars(sVarsMap, timestamp, 0);
+                gameCard.addChangedSVars(sVarsMap, timestamp, 0);
             }
 
             // give Remembered
             if (animateRemembered != null) {
-                c.addRemembered(AbilityUtils.getDefinedObjects(source, animateRemembered, sa));
+                gameCard.addRemembered(AbilityUtils.getDefinedObjects(source, animateRemembered, sa));
             }
 
             // give Imprinted
             if (animateImprinted != null) {
-                c.addImprintedCards(AbilityUtils.getDefinedCards(source, animateImprinted, sa));
+                gameCard.addImprintedCards(AbilityUtils.getDefinedCards(source, animateImprinted, sa));
             }
 
             if (sa.isCrew()) {
-                c.becomesCrewed(sa);
-                c.updatePowerToughnessForView();
+                gameCard.becomesCrewed(sa);
+                gameCard.updatePTforView();
             }
 
-            game.fireEvent(new GameEventCardStatsChanged(c));
+            game.fireEvent(new GameEventCardStatsChanged(gameCard));
         }
 
         if (sa.hasParam("AtEOT") && !tgts.isEmpty()) {

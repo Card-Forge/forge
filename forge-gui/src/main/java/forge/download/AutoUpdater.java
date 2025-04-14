@@ -1,14 +1,19 @@
 package forge.download;
 
-import java.awt.Desktop;
+import com.google.common.collect.ImmutableList;
+import forge.gui.GuiBase;
+import forge.gui.download.GuiDownloadZipService;
+import forge.gui.util.SOptionPane;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import forge.util.*;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.Socket;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -17,24 +22,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.ImmutableList;
-
-import forge.gui.GuiBase;
-import forge.gui.download.GuiDownloadZipService;
-import forge.gui.util.SOptionPane;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
-import forge.util.BuildInfo;
-import forge.util.FileUtil;
-import forge.util.Localizer;
-import forge.util.TextUtil;
-import forge.util.WaitCallback;
-
-import static forge.localinstance.properties.ForgeConstants.DAILY_SNAPSHOT_URL;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_SNAPSHOT_URL;
 import static forge.localinstance.properties.ForgeConstants.RELEASE_URL;
 
 public class AutoUpdater {
@@ -108,7 +96,7 @@ public class AutoUpdater {
                 return false;
             }
 
-            versionUrlString = DAILY_SNAPSHOT_URL + "version.txt";
+            versionUrlString = GITHUB_SNAPSHOT_URL + "version.txt";
         } else {
             if (!updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
                 System.out.println("Release build versions must use release update channel to work");
@@ -140,7 +128,7 @@ public class AutoUpdater {
         try {
             retrieveVersion();
             if (buildVersion.contains("SNAPSHOT")) {
-                URL url = new URL(DAILY_SNAPSHOT_URL + "build.txt");
+                URL url = new URL(GITHUB_SNAPSHOT_URL + "build.txt");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
                 snapsBuildDate = snapsTimestamp.toString();
@@ -173,7 +161,7 @@ public class AutoUpdater {
         if (updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
             packageUrl = RELEASE_URL + "forge/forge-gui-desktop/" + version + "/forge-gui-desktop-" + version + ".tar.bz2";
         } else {
-            packageUrl = DAILY_SNAPSHOT_URL + "forge-installer-" + version + ".jar";
+            packageUrl = GITHUB_SNAPSHOT_URL + "forge-installer-" + version + ".jar";
         }
     }
 
@@ -228,7 +216,7 @@ public class AutoUpdater {
                 GuiBase.getInterface().download(new GuiDownloadZipService("Auto Updater", localizer.getMessage("lblNewVersionDownloading"), packageUrl, System.getProperty("user.home") + "/Downloads/", null, null) {
                     @Override
                     public void downloadAndUnzip() {
-                        packagePath = download(version + "-upgrade.tar.bz2");
+                        packagePath = download(version + "-upgrade.jar");
                         if (packagePath != null) {
                             restartAndUpdate(packagePath);
                         }

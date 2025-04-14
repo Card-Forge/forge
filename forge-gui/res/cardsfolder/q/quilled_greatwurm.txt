@@ -1,0 +1,10 @@
+Name:Quilled Greatwurm
+ManaCost:4 G G
+Types:Creature Wurm
+PT:7/7
+K:Trample
+T:Mode$ DamageDealtOnce | CombatDamage$ True | PlayerTurn$ True | TriggerZones$ Battlefield | ValidSource$ Creature.YouCtrl | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control deals combat damage during your turn, put that many +1/+1 counters on it. (It must survive to get the counters.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ X
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Graveyard | RaiseCost$ RemoveAnyCounter<6/Any/Creature.YouCtrl/among creatures you control> | Description$ You may cast this card from your graveyard by removing six counters from among creatures you control in addition to paying its other costs.
+SVar:X:TriggerCount$DamageAmount
+Oracle:Trample\nWhenever a creature you control deals combat damage during your turn, put that many +1/+1 counters on it. (It must survive to get the counters.)\nYou may cast this card from your graveyard by removing six counters from among creatures you control in addition to paying its other costs.

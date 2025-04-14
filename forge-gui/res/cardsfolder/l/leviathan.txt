@@ -3,13 +3,13 @@ ManaCost:5 U U U U
 Types:Creature Leviathan
 PT:10/10
 K:Trample
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This creature enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-K:CARDNAME doesn't untap during your untap step.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice two Islands. If you do, untap CARDNAME.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice two Islands. If you do, untap this creature.
 SVar:TrigUntap:AB$ Untap | Cost$ Sac<2/Island>
-S:Mode$ CantAttackUnless | ValidCard$ Creature.Self | Cost$ Sac<2/Island> | Description$ CARDNAME can't attack unless you sacrifice two islands. (This cost is paid as attackers are declared.)
+S:Mode$ CantAttackUnless | ValidCard$ Creature.Self | Cost$ Sac<2/Island> | Description$ This creature can't attack unless you sacrifice two islands. (This cost is paid as attackers are declared.)
 SVar:NeedsToPlayVar:Y GE4
 SVar:Y:Count$Valid Island.YouCtrl
 AI:RemoveDeck:All
-Oracle:Trample\nLeviathan enters tapped and doesn't untap during your untap step.\nAt the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.\nLeviathan can't attack unless you sacrifice two Islands. (This cost is paid as attackers are declared.)
+Oracle:Trample\nThis creature enters tapped and doesn't untap during your untap step.\nAt the beginning of your upkeep, you may sacrifice two Islands. If you do, untap this creature.\nThis creature can't attack unless you sacrifice two Islands. (This cost is paid as attackers are declared.)

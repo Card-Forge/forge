@@ -16,7 +16,7 @@ if %jver% LEQ 16 (
 )
 
 if %jver% GEQ 17 (
-  java -Xmx4096m $mandatory.java.args$ -jar $project.build.finalName$
+  java $mandatory.java.args$ -jar $project.build.finalName$
   popd
   exit /b 0
 )

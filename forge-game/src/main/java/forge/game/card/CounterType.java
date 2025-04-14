@@ -1,15 +1,14 @@
 package forge.game.card;
 
-import java.io.Serializable;
-import java.util.Map;
-import java.util.Objects;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
+import java.io.Serializable;
+import java.util.Map;
+import java.util.Objects;
 
 public class CounterType implements Comparable<CounterType>, Serializable {
     private static final long serialVersionUID = -7575835723159144478L;
@@ -19,7 +18,7 @@ public class CounterType implements Comparable<CounterType>, Serializable {
 
     // Rule 122.1b
     static ImmutableList<String> keywordCounter = ImmutableList.of(
-            "Flying", "First Strike", "Double Strike", "Deathtouch", "Exalted", "Haste", "Hexproof",
+            "Flying", "First Strike", "Double Strike", "Deathtouch", "Decayed", "Exalted", "Haste", "Hexproof",
             "Indestructible", "Lifelink", "Menace", "Reach", "Shadow", "Trample", "Vigilance");
 
     private static Map<CounterEnumType, CounterType> eMap = Maps.newEnumMap(CounterEnumType.class);

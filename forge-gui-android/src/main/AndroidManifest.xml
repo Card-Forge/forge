@@ -58,7 +58,7 @@
             android:label="@string/app_name"
             android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
             android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:theme="@style/NormalTheme"
             android:exported="false">
         </activity>
         <meta-data android:name="io.sentry.dsn" android:value="https://a0b8dbad9b8a49cfa51bf65d462e8dae:b3f27d7461224cb8836eb5c6050c666c@sentry.cardforge.org/2?buffer.enabled=false" />

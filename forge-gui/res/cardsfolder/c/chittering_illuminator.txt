@@ -1,0 +1,7 @@
+Name:Chittering Illuminator
+ManaCost:G G
+Types:Enchantment Creature Squirrel Glimmer
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self+TopLibrary | AffectedZone$ Library | EffectZone$ All | MayPlay$ True | MayLookAt$ You | Description$ As long as CARDNAME is at the top of your library, you may look at it any time and you may cast it.
+S:Mode$ Continuous | Affected$ Creature.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | EffectZone$ Battlefield | MayPlay$ True | MayLookAt$ You | Description$ As long as the top card of your library is a creature card, you may look at it any time and you may cast it.
+Oracle:As long as Chittering Illuminator is at the top of your library, you may look at it any time and you may cast it.\nAs long as the top card of your library is a creature card, you may look at it any time and you may cast it.

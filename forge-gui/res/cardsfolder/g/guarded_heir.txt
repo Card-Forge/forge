@@ -1,0 +1,8 @@
+Name:Guarded Heir
+ManaCost:5 W
+Types:Creature Human Noble
+PT:1/1
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create two 3/3 white Knight creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_3_3_knight | TokenOwner$ You
+Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nWhen this creature enters, create two 3/3 white Knight creature tokens.

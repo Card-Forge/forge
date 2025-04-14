@@ -1,0 +1,8 @@
+Name:Twinblade Blessing
+ManaCost:1 W W
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Double Strike | Description$ Enchanted creature has double strike. (It deals both first-strike and regular combat damage.)
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature has double strike. (It deals both first-strike and regular combat damage.)

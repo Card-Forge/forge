@@ -22,26 +22,10 @@ public class ImageUtil {
         }
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX))
             key = imageKey.substring(ImageKeys.CARD_PREFIX.length());
-        else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
-            key = imageKey.substring(ImageKeys.TOKEN_PREFIX.length());
-        else if (imageKey.startsWith(ImageKeys.ICON_PREFIX))
-            key = imageKey.substring(ImageKeys.ICON_PREFIX.length());
-        else if (imageKey.startsWith(ImageKeys.BOOSTER_PREFIX))
-            key = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
-        else if (imageKey.startsWith(ImageKeys.FATPACK_PREFIX))
-            key = imageKey.substring(ImageKeys.FATPACK_PREFIX.length());
-        else if (imageKey.startsWith(ImageKeys.BOOSTERBOX_PREFIX))
-            key = imageKey.substring(ImageKeys.BOOSTERBOX_PREFIX.length());
-        else if (imageKey.startsWith(ImageKeys.PRECON_PREFIX))
-            key = imageKey.substring(ImageKeys.PRECON_PREFIX.length());
-        else if (imageKey.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX))
-            key = imageKey.substring(ImageKeys.TOURNAMENTPACK_PREFIX.length());
-        else if (imageKey.startsWith(ImageKeys.ADVENTURECARD_PREFIX))
-            key = imageKey.substring(ImageKeys.ADVENTURECARD_PREFIX.length());
-        else if (imageKey.contains(".full")) {//no prefix found, construct a valid key if imageKey is art imagekey.
-            key = transformKey(imageKey);
-        } else //try anyway...
-            key = imageKey;
+        else
+            return null;
+        if (key.isEmpty())
+            return null;
 
         CardDb db = StaticData.instance().getCommonCards();
         PaperCard cp = null;

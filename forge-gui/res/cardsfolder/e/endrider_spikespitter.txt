@@ -1,0 +1,13 @@
+Name:Endrider Spikespitter
+ManaCost:3 R
+Types:Creature Human Mercenary
+PT:3/4
+K:Reach
+K:Start your engines
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ MaxSpeed | AddTrigger$ PhaseTrig | Description$ Max speed — At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
+SVar:PhaseTrig:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Secondary$ True | Execute$ TrigExile | TriggerDescription$ Max speed — At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Reach\nStart your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)\nMax speed — At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.

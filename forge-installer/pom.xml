@@ -285,6 +285,10 @@
                                             <file>${basedir}/target/${project.build.finalName}.jar</file>
                                             <type>jar</type>
                                         </artifact>
+                                        <artifact>
+                                            <file>${basedir}/target/${project.build.finalName}.tar.bz2</file>
+                                            <type>tar.bz2</type>
+                                        </artifact>
                                     </artifacts>
                                 </configuration>
                             </execution>

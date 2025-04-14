@@ -1,0 +1,8 @@
+Name:Kin-Tree Nurturer
+ManaCost:2 B
+Types:Creature Human Druid
+PT:2/1
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEndure | TriggerDescription$ When this creature enters, it endures 1. (Put a +1/+1 counter on it or create a 1/1 white Spirit creature token.)
+SVar:TrigEndure:DB$ Endure | Num$ 1
+Oracle:Lifelink\nWhen this creature enters, it endures 1. (Put a +1/+1 counter on it or create a 1/1 white Spirit creature token.)

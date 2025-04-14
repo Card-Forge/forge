@@ -1,8 +1,8 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import forge.ai.*;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -13,7 +13,9 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.AnimateEffectBase;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.cost.Cost;
 import forge.game.cost.CostPutCounter;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -24,6 +26,7 @@ import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import forge.util.collect.FCollectionView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +36,7 @@ import java.util.Map;
  * <p>
  * AbilityFactoryAnimate class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id: AbilityFactoryAnimate.java 17608 2012-10-20 22:27:27Z Max mtg $
  */
@@ -70,7 +73,7 @@ public class AnimateAi extends SpellAbilityAi {
             }
 
             // check for duplicate static ability
-            if (Iterables.any(host.getStaticAbilities(), CardTraitPredicates.hasParam("Description", map.get("Description")))) {
+            if (host.getStaticAbilities().anyMatch(CardTraitPredicates.hasParam("Description", map.get("Description")))) {
                 return false;
             }
             // TODO check if Bone Man would deal damage to something that otherwise would regenerate
@@ -130,7 +133,7 @@ public class AnimateAi extends SpellAbilityAi {
                 && game.getPhaseHandler().getNextTurn() != ai
                 && source.isPermanent();
         if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
-                && opponent.getZone(ZoneType.Battlefield).contains(CardPredicates.Presets.CREATURES)
+                && opponent.getZone(ZoneType.Battlefield).contains(CardPredicates.CREATURES)
                 && !sa.hasParam("AILogic") && !"Permanent".equals(sa.getParam("Duration")) && !activateAsPotentialBlocker) {
             return false;
         }
@@ -170,7 +173,7 @@ public class AnimateAi extends SpellAbilityAi {
                 bFlag |= !c.isCreature() && !c.isTapped()
                         && (!c.hasSickness() || givesHaste || !ph.isPlayerTurn(aiPlayer))
                         && !c.isEquipping();
-                
+
                 // for creatures that could be improved (like Figure of Destiny)
                 if (!bFlag && c.isCreature() && ("Permanent".equals(sa.getParam("Duration")) || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
@@ -244,18 +247,22 @@ public class AnimateAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        if (sa.usesTargeting() && !animateTgtAI(sa) && !mandatory) {
-            return false;
-        } else if (sa.usesTargeting() && mandatory) {
-            // fallback if animate is mandatory
-            sa.resetTargets();
-            List<Card> list = CardUtil.getValidCardsToTarget(sa);
-            if (list.isEmpty()) {
+        if (sa.usesTargeting()) {
+            if(animateTgtAI(sa))
+                return true;
+            else if (!mandatory)
                 return false;
+            else {
+                // fallback if animate is mandatory
+                sa.resetTargets();
+                List<Card> list = CardUtil.getValidCardsToTarget(sa);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                Card toAnimate = ComputerUtilCard.getWorstAI(list);
+                rememberAnimatedThisTurn(aiPlayer, toAnimate);
+                sa.getTargets().add(toAnimate);
             }
-            Card toAnimate = ComputerUtilCard.getWorstAI(list);
-            rememberAnimatedThisTurn(aiPlayer, toAnimate);
-            sa.getTargets().add(toAnimate);
         }
         return true;
     }
@@ -264,7 +271,7 @@ public class AnimateAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         return player.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2);
     }
-    
+
     private boolean animateTgtAI(final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
@@ -273,25 +280,25 @@ public class AnimateAi extends SpellAbilityAi {
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
                 && sa.usesTargeting()
                 && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
-        
+
         final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
+        final Game game = ai.getGame();
+        CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+
+        // Filter AI-specific targets if provided
+        list = ComputerUtil.filterAITgts(sa, ai, list, false);
+
+        // list is empty, no possible targets
+        if (list.isEmpty() && !alwaysActivatePWAbility) {
+            return false;
+        }
+
         // something is used for animate into creature
         if (types.isCreature()) {
-            final Game game = ai.getGame();
-            CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
-
-            // Filter AI-specific targets if provided
-            list = ComputerUtil.filterAITgts(sa, ai, list, false);
-
-            // list is empty, no possible targets
-            if (list.isEmpty() && !alwaysActivatePWAbility) {
-                return false;
-            }
-
             Map<Card, Integer> data = Maps.newHashMap();
             for (final Card c : list) {
                 // don't use Permanent animate on something that would leave the field
@@ -357,11 +364,11 @@ public class AnimateAi extends SpellAbilityAi {
                 return false;
             }
 
-            // get the best creature to be animated 
+            // get the best creature to be animated
             List<Card> maxList = Lists.newArrayList();
             int maxValue = 0;
             for (final Map.Entry<Card, Integer> e : data.entrySet()) {
-                int v = e.getValue(); 
+                int v = e.getValue();
                 if (v > maxValue) {
                     maxValue = v;
                     maxList.clear();
@@ -402,7 +409,6 @@ public class AnimateAi extends SpellAbilityAi {
         if (logic.equals("ValuableAttackerOrBlocker")) {
             if (ph.inCombat()) {
                 final Combat combat = ph.getCombat();
-                CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
                 for (Card c : list) {
                     Card animated = becomeAnimated(c, sa);
                     boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
@@ -412,6 +418,26 @@ public class AnimateAi extends SpellAbilityAi {
                 }
             }
         }
+
+        if (logic.equals("Worst")) {
+            Card worst = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
+            if(worst != null) {
+                sa.getTargets().add(worst);
+                rememberAnimatedThisTurn(ai, worst);
+                return true;
+            }
+        }
+
+        if (sa.hasParam("AITgts") && !list.isEmpty()) {
+            //No logic, but we do have preferences. Pick the best among those?
+            Card best = ComputerUtilCard.getBestAI(list);
+            if(best != null) {
+                sa.getTargets().add(best);
+                rememberAnimatedThisTurn(ai, best);
+                return true;
+            }
+        }
+
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that animate a target. Those can just use AI:RemoveDeck:All until
@@ -576,5 +602,13 @@ public class AnimateAi extends SpellAbilityAi {
 
     private void releaseHeldTillMain2(Player ai, Card c) {
         AiCardMemory.forgetCard(ai, c, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
+    }
+
+    @Override
+    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+        if (sa.isKeyword(Keyword.RIOT)) {
+            return !SpecialAiLogic.preferHasteForRiot(sa, payer);
+        }
+        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
     }
 }

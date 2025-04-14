@@ -1,6 +1,6 @@
 Name:Mirrorworks
 ManaCost:5
 Types:Artifact
-T:Mode$ ChangesZone | ValidCard$ Artifact.nonToken+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken artifact you control enters, you may pay {2}. If you do, create a token that's a copy of that artifact.
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ 2 | Defined$ TriggeredCard
+T:Mode$ ChangesZone | ValidCard$ Artifact.!token+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken artifact you control enters, you may pay {2}. If you do, create a token that's a copy of that artifact.
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 2 | Defined$ TriggeredCardLKICopy
 Oracle:Whenever another nontoken artifact you control enters, you may pay {2}. If you do, create a token that's a copy of that artifact.

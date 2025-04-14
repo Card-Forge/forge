@@ -1,0 +1,10 @@
+Name:Prophet of the Scarab
+ManaCost:4 U
+Types:Creature Zombie Wizard
+PT:3/4
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw cards equal to the number of Zombies you control or the number of Zombie cards in your graveyard, whichever is greater.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$Valid Zombie.YouCtrl/LimitMin.Y
+SVar:Y:Count$ValidGraveyard Zombie.YouOwn
+Oracle:Vigilance\nWhen this creature enters, draw cards equal to the number of Zombies you control or the number of Zombie cards in your graveyard, whichever is greater.

@@ -1,0 +1,7 @@
+Name:Sibsig Appraiser
+ManaCost:2 U
+Types:Creature Zombie Advisor
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When this creature enters, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | NoReveal$ True
+Oracle:When this creature enters, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.

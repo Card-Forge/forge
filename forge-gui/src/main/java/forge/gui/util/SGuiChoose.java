@@ -1,16 +1,14 @@
 package forge.gui.util;
 
+import com.google.common.collect.Iterables;
+import forge.gui.GuiBase;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-
-import forge.gui.GuiBase;
+import java.util.function.Function;
 
 public class SGuiChoose {
 

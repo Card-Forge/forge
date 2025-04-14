@@ -1,14 +1,13 @@
 package forge.game.card;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+
+import java.util.Collection;
+import java.util.List;
 
 public class CardTraitChanges implements Cloneable {
 

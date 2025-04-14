@@ -1,0 +1,13 @@
+[metadata]
+Code=PF25
+Date=2025-02-03
+Name=MagicFest 2025
+Type=Promo
+ScryfallCode=PF25
+
+[cards]
+1 M Serra the Benevolent @Matthew D. Wilson
+1F R Avacyn's Pilgrim @Mark Zug
+2 R Ponder @Mark Zug
+3 M The First Sliver @Svetlin Velinov
+F6 R Second City @Mark Rosewater

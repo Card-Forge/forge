@@ -1,0 +1,7 @@
+Name:Goblin Boarders
+ManaCost:2 R
+Types:Creature Goblin Pirate
+PT:3/2
+K:etbCounter:P1P1:1:CheckSVar$ RaidTest:Raid — CARDNAME enters with a +1/+1 counter on it if you attacked this turn.
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Raid — This creature enters with a +1/+1 counter on it if you attacked this turn.

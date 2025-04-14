@@ -1,11 +1,5 @@
 package forge.gui.interfaces;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.base.Function;
-
 import forge.LobbyPlayer;
 import forge.ai.GameState;
 import forge.deck.CardPool;
@@ -29,6 +23,11 @@ import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);
@@ -105,6 +104,8 @@ public interface IGuiGame {
 
     void updateLives(Iterable<PlayerView> livesUpdate);
     void updateShards(Iterable<PlayerView> shardsUpdate);
+
+    void updateDependencies();
 
     void setPanelSelection(CardView hostCard);
 
@@ -189,6 +190,8 @@ public interface IGuiGame {
     <T> List<T> many(String title, String topCaption, int cnt, List<T> sourceChoices, CardView c);
 
     <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, CardView c);
+
+    <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, List<T> destChoices, CardView c);
 
     <T> List<T> order(String title, String top, List<T> sourceChoices, CardView c);
 

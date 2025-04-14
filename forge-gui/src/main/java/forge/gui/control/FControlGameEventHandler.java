@@ -1,12 +1,8 @@
 package forge.gui.control;
 
-import java.util.*;
-import java.util.Map.Entry;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
-
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -25,6 +21,9 @@ import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.util.Lang;
 import forge.util.maps.MapOfLists;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final PlayerControllerHuman humanController;
@@ -191,16 +190,20 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventTurnPhase ev) {
         needPhaseUpdate = true;
-        if (ev.phaseDesc == "dev")
-            needSaveState = false;
-        else
-            needSaveState = true;
+        needSaveState = !"dev".equals(ev.phaseDesc);
+
+        Player ap = ev.playerTurn;
+        boolean refreshField = !ap.getTokensInPlay().isEmpty() || (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && !ap.getCreaturesInPlay().isEmpty());
+        if (refreshField) {
+            updateZone(ap, ZoneType.Battlefield);
+        }
         return processEvent();
     }
 
     @Override
     public Void visit(final GameEventPlayerPriority event) {
         needCombatUpdate = true;
+        matchController.updateDependencies();
         return processEvent();
     }
 
@@ -208,10 +211,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventTurnBegan event) {
         turnUpdate = event.turnOwner.getView();
         processPlayer(event.turnOwner, livesUpdate);
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && event.turnOwner != null) {
-            // anything except stack will get here
-            updateZone(event.turnOwner, ZoneType.Battlefield);
-        }
         return processEvent();
     }
 
@@ -409,7 +408,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardChangeZone event) {
-        if(GuiBase.getInterface().isLibgdxPort()) {
+        if (GuiBase.getInterface().isLibgdxPort()) {
             updateZone(event.from);
             return updateZone(event.to);
         } else {
@@ -426,6 +425,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardForetold event) {
+        showExileUpdate = true;
+        activatingPlayer = event.activatingPlayer.getView();
+        playersWithValidTargets.put(activatingPlayer, null);
+        return processEvent();
+    }
+
+    @Override
+    public Void visit(final GameEventCardPlotted event) {
         showExileUpdate = true;
         activatingPlayer = event.activatingPlayer.getView();
         playersWithValidTargets.put(activatingPlayer, null);
@@ -452,13 +459,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
-    public Void visit(final GameEventTokenStateUpdate event) {
-        refreshFieldUpdate = true;
-        processCards(event.cards, cardsRefreshDetails);
-        return processCards(event.cards, cardsUpdate);
-    }
-
-    @Override
     public Void visit(final GameEventCardRegenerated event) {
         refreshFieldUpdate = true;
         processCards(event.cards, cardsRefreshDetails);
@@ -477,6 +477,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventDayTimeChanged event) {
         matchController.updateDayTime(event.daytime ? "Day" : "Night");
+        return processEvent();
+    }
+
+    @Override
+    public Void visit(GameEventSprocketUpdate event) {
+        updateZone(event.contraption.getZone());
         return processEvent();
     }
 

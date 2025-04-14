@@ -5,8 +5,9 @@ K:Cumulative upkeep:1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, put a growth counter on CARDNAME.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Opponent | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's draw step, that player draws an additional card for each growth counter on CARDNAME, then CARDNAME deals damage to the player equal to the number of cards they drew this way.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ GROWTH | CounterNum$ 1
-SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ X | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ X | RememberDrawn$ AllReplaced | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ Remembered$Amount | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.GROWTH
 AI:RemoveDeck:Random
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your upkeep, put a growth counter on Malignant Growth.\nAt the beginning of each opponent's draw step, that player draws an additional card for each growth counter on Malignant Growth, then Malignant Growth deals damage to the player equal to the number of cards they drew this way.
