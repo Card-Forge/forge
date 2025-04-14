@@ -2781,6 +2781,15 @@ public class GameAction {
         if (aura == null) {
             // if it's not normally an aura
             aura = new SpellAbility.EmptySa(ApiType.Attach, source);
+            if (source.hasSVar("AttachAITgts")) {
+                aura.setSVar("AITgts", source.getSVar("AttachAITgts");
+            }
+            if (source.hasSVar("AttachAILogic")) {
+                aura.setSVar("AILogic", source.getSVar("AttachAILogic");
+            }
+            if (source.hasSVar("AttachAIValid")) { // TODO combine with AttachAITgts
+                aura.setSVar("AIValid", source.getSVar("AttachAIValid");
+            } 
         }
         aura.setActivatingPlayer(source.getController());
 
