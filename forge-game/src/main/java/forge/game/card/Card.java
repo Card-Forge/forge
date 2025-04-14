@@ -7092,12 +7092,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return true;
         }
 
-        // CantTarget static abilities
+        if (isPhasedOut()) {
+            return false;
+        }
+
         if (StaticAbilityCantTarget.cantTarget(this, sa)) {
             return false;
         }
 
-        return !isInPlay() || !isPhasedOut();
+        return true;
     }
 
     public final boolean canBeControlledBy(final Player newController) {
