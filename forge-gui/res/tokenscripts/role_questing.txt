@@ -1,8 +1,8 @@
 Name:Questing
 ManaCost:no cost
 Types:Enchantment Aura Role
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance & Deathtouch & Haste | AddTrigger$ TrigChomp | AddStaticAbility$ StaticNoBlock & StaticNoFog | Description$ Enchanted creature has vigilance, deathtouch, and haste, and has "This creature can't be blocked by creatures with power 2 or less.", "Combat damage that would be dealt by creatures you control can't be prevented.", and "Whenever this creature deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls."
 SVar:StaticNoBlock:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ This creature can't be blocked by creatures with power 2 or less.
 SVar:StaticNoFog:Mode$ CantPreventDamage | IsCombat$ True | ValidSource$ Creature.YouCtrl | Description$ Combat damage that would be dealt by creatures you control can't be prevented.

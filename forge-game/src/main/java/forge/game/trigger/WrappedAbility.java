@@ -297,6 +297,11 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
+    public void setSVar(final String name, final String value) {
+        sa.setSVar(name, value);
+    }
+
+    @Override
     public Map<String, String> getSVars() {
         return sa.getSVars();
     }

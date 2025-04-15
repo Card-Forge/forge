@@ -1,8 +1,8 @@
 Name:Field of Reality
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.Spirit | Description$ Enchanted creature can't be blocked by Spirits.
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 AI:RemoveDeck:Random

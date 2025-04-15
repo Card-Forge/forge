@@ -1,8 +1,8 @@
 Name:Druid's Call
 ManaCost:1 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever enchanted creature is dealt damage, its controller creates that many 1/1 green Squirrel creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_squirrel | TokenOwner$ TriggeredTargetController
 SVar:X:TriggerCount$DamageAmount

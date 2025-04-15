@@ -225,6 +225,11 @@
             <version>26.0.1</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jupnp</groupId>
+            <artifactId>org.jupnp.android</artifactId>
+            <version>3.0.3</version>
+        </dependency>
     </dependencies>
 
     <profiles>

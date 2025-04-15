@@ -1,7 +1,7 @@
 Name:Cave Sense
 ManaCost:1 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Landwalk:Mountain | Description$ Enchanted creature gets +1/+1 and has mountainwalk.
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has mountainwalk. (It can't be blocked as long as defending player controls a Mountain.)

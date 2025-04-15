@@ -1,8 +1,9 @@
 Name:Kaya's Ghostform
 ManaCost:B
 Types:Enchantment Aura
-K:Enchant creature or planeswalker you control
-A:SP$ Attach | ValidTgts$ Creature.YouCtrl,Planeswalker.YouCtrl | TgtPrompt$ Select target creature or planeswalker you control | AITgts$ Card.!token | AILogic$ Pump
+K:Enchant:Creature.YouCtrl,Planeswalker.YouCtrl:creature or planeswalker you control
+SVar:AttachAITgts:Card.!token
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Exile | ValidCard$ Card.AttachedBy | Execute$ TrigReturn | TriggerDescription$ When enchanted permanent dies or is put into exile, return that card to the battlefield under your control.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Destination$ Battlefield | GainControl$ True
 SVar:PlayMain1:TRUE

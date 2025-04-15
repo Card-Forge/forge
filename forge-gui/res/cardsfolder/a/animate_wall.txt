@@ -1,8 +1,8 @@
 Name:Animate Wall
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant Wall
-A:SP$ Attach | ValidTgts$ Wall | AILogic$ Pump
+K:Enchant:Wall
+SVar:AttachAILogic:Pump
 S:Mode$ CanAttackDefender | ValidCard$ Card.EnchantedBy | Description$ Enchanted Wall can attack as though it didn't have defender.
 DeckNeeds:Type$Wall
 Oracle:Enchant Wall\nEnchanted Wall can attack as though it didn't have defender.

@@ -1180,11 +1180,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         view.updateDescription(this);
     }
     public void appendSubAbility(final AbilitySub toAdd) {
-        SpellAbility tailend = this;
-        while (tailend.getSubAbility() != null) {
-            tailend = tailend.getSubAbility();
-        }
-        tailend.setSubAbility(toAdd);
+        getTailAbility().setSubAbility(toAdd);
     }
 
     public boolean isBasicSpell() {
@@ -1642,13 +1638,25 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         return parent;
     }
+    public SpellAbility getTailAbility() {
+        SpellAbility tailend = this;
+        while (tailend.getSubAbility() != null) {
+            tailend = tailend.getSubAbility();
+        }
+        return tailend;
+    }
 
     public SpellAbility getParent() {
         return null;
     }
 
-    protected IHasSVars getSVarFallback() {
-        return ObjectUtils.firstNonNull(this.getParent(), super.getSVarFallback());
+    protected List<IHasSVars> getSVarFallback() {
+        List<IHasSVars> result = Lists.newArrayList();
+        if (getParent() != null) {
+            result.add(getParent());
+        }
+        result.addAll(super.getSVarFallback());
+        return result;
     }
 
     public boolean isUndoable() {

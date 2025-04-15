@@ -1,8 +1,8 @@
 Name:Feedback
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant enchantment
-A:SP$ Attach | ValidTgts$ Enchantment | AILogic$ Curse
+K:Enchant:Enchantment
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted enchantment's controller, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
 Oracle:Enchant enchantment\nAt the beginning of the upkeep of enchanted enchantment's controller, Feedback deals 1 damage to that player.

@@ -1,8 +1,8 @@
 Name:Keldon Mantle
 ManaCost:1 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 A:AB$ Regenerate | Cost$ B | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
 A:AB$ Pump | Cost$ G | Defined$ Enchanted | KW$ Trample | SpellDescription$ Enchanted creature gains Trample until end of turn.

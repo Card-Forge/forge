@@ -1,8 +1,8 @@
 Name:A-Find the Path
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBVenture | TriggerDescription$ When CARDNAME enters, venture into the dungeon.
 SVar:DBVenture:DB$ Venture | Defined$ You
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ ABMana | Description$ Enchanted land has "{T}: Add two mana of any one color."

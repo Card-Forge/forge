@@ -1,8 +1,8 @@
 Name:Sunken Field
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ Counter | Description$ Enchanted land has "{T}: Counter target spell unless its controller pays {1}."
 SVar:Counter:AB$ Counter | Cost$ T | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays {1}
 Oracle:Enchant land\nEnchanted land has "{T}: Counter target spell unless its controller pays {1}."

@@ -367,8 +367,7 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     private boolean tgtRoleAura(final Player ai, final SpellAbility sa, final Card tok, final boolean mandatory) {
-        boolean isCurse = "Curse".equals(sa.getParam("AILogic")) ||
-                tok.getFirstAttachSpell().getParamOrDefault("AILogic", "").equals("Curse");
+        boolean isCurse = "Curse".equals(sa.getParam("AILogic")) || "Curse".equals(tok.getSVar("AttachAILogic"));
         List<Card> tgts = CardUtil.getValidCardsToTarget(sa);
 
         // look for card without role from ai

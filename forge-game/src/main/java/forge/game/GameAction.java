@@ -43,7 +43,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityContinuous;
@@ -386,7 +385,7 @@ public class GameAction {
                     return moveToGraveyard(copied, cause, params);
                 }
             }
-            attachAuraOnIndirectEnterBattlefield(copied, params);
+            attachAuraOnIndirectETB(copied, params);
         }
 
         // Handle merged permanent here so all replacement effects are already applied.
@@ -1467,7 +1466,7 @@ public class GameAction {
                 checkAgainCard |= stateBasedAction_Saga(c, sacrificeList);
                 checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
                 checkAgainCard |= stateBasedAction_Role(c, unAttachList);
-                checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
+                checkAgainCard |= stateBasedAction704_attach(c, unAttachList);
                 checkAgainCard |= stateBasedAction_Contraption(c, noRegCreats);
 
                 checkAgainCard |= stateBasedAction704_5q(c); // annihilate +1/+1 counters with -1/-1 ones
@@ -1514,9 +1513,7 @@ public class GameAction {
                 if (!spaceSculptors.isEmpty() && !spaceSculptors.contains(p)) {
                     checkAgain |= stateBasedAction704_5u(p);
                 }
-                if (handleLegendRule(p, noRegCreats)) {
-                    checkAgain = true;
-                }
+                checkAgain |= handleLegendRule(p, noRegCreats);
 
                 if ((game.getRules().hasAppliedVariant(GameType.Commander)
                         || game.getRules().hasAppliedVariant(GameType.Brawl)
@@ -1535,13 +1532,12 @@ public class GameAction {
                     checkAgain = true;
                 }
 
-                if (handlePlaneswalkerRule(p, noRegCreats)) {
-                    checkAgain = true;
-                }
+                checkAgain |= handlePlaneswalkerRule(p, noRegCreats);
             }
             for (Player p : spaceSculptors) {
                 checkAgain |= stateBasedAction704_5u(p);
             }
+
             // 704.5m World rule
             checkAgain |= handleWorldRule(noRegCreats);
 
@@ -1576,6 +1572,7 @@ public class GameAction {
                 orderedSacrificeList = true;
             }
             sacrifice(sacrificeList, null, true, mapParams);
+
             setHoldCheckingStaticAbilities(false);
 
             table.triggerChangesZoneAll(game, null);
@@ -1745,12 +1742,12 @@ public class GameAction {
     }
 
     private boolean stateBasedAction_Contraption(Card c, CardCollection removeList) {
-        if(!c.isContraption())
+        if (!c.isContraption())
             return false;
         int currentSprocket = c.getSprocket();
 
         //A contraption that is in the battlefield without being assembled is put into the graveyard or junkyard.
-        if(currentSprocket == 0) {
+        if (currentSprocket == 0) {
             removeList.add(c);
             return true;
         }
@@ -1759,7 +1756,7 @@ public class GameAction {
         //A reassemble effect can handle that on its own. But if it changed controller due to some other effect,
         //we assign it here. A contraption uses sprocket -1 to signify it has been assembled previously but now needs
         //a new sprocket.
-        if(currentSprocket > 0 && currentSprocket <= 3)
+        if (currentSprocket > 0 && currentSprocket <= 3)
             return false;
 
         int sprocket = c.getController().getController().chooseSprocket(c);
@@ -2027,7 +2024,7 @@ public class GameAction {
     }
 
     private boolean handleWorldRule(CardCollection noRegCreats) {
-        final List<Card> worlds = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "World");
+        final List<Card> worlds = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), c -> c.getType().hasSupertype(Supertype.World));
         if (worlds.size() <= 1) {
             return false;
         }
@@ -2036,7 +2033,7 @@ public class GameAction {
         long ts = 0;
 
         for (final Card crd : worlds) {
-            long crdTs = crd.getGameTimestamp();
+            long crdTs = crd.getWorldTimestamp();
             if (crdTs > ts) {
                 ts = crdTs;
                 toKeep.clear();
@@ -2774,20 +2771,45 @@ public class GameAction {
      *            the source
      * @return true, if successful
      */
-    public static boolean attachAuraOnIndirectEnterBattlefield(final Card source, Map<AbilityKey, Object> params) {
-        // When an Aura ETB without being cast you can choose a valid card to
-        // attach it to
-        final SpellAbility aura = source.getFirstAttachSpell();
-
-        if (aura == null) {
+    private boolean attachAuraOnIndirectETB(final Card source, Map<AbilityKey, Object> params) {
+        // When an Aura ETB without being cast you can choose a valid card to attach it to
+        if (!source.hasKeyword(Keyword.ENCHANT)) {
             return false;
         }
-        aura.setActivatingPlayer(source.getController());
-        final Game game = source.getGame();
-        final TargetRestrictions tgt = aura.getTargetRestrictions();
 
+        SpellAbility aura = source.getFirstAttachSpell();
+        if (aura == null) {
+            // if it's not normally an aura
+            aura = new SpellAbility.EmptySa(ApiType.Attach, source);
+            if (source.hasSVar("AttachAITgts")) {
+                aura.putParam("AITgts", source.getSVar("AttachAITgts"));
+            }
+            if (source.hasSVar("AttachAILogic")) {
+                aura.putParam("AILogic", source.getSVar("AttachAILogic"));
+            }
+            if (source.hasSVar("AttachAIValid")) {
+                aura.putParam("AIValid", source.getSVar("AttachAIValid"));
+            }
+        }
+        aura.setActivatingPlayer(source.getController());
+
+        Set<ZoneType> zones = EnumSet.noneOf(ZoneType.class);
+        boolean canTargetPlayer = false;
+        for (KeywordInterface ki : source.getKeywords(Keyword.ENCHANT)) {
+            String o = ki.getOriginal();
+            String m[] = o.split(":");
+            String v = m[1];
+            if (v.contains("inZone")) { // currently the only other zone is Graveyard
+                zones.add(ZoneType.Graveyard);
+            } else {
+                zones.add(ZoneType.Battlefield);
+            }
+            if (v.startsWith("Player") || v.startsWith("Opponent")) {
+                canTargetPlayer = true;
+            }
+        }
         Player p = source.getController();
-        if (tgt.canTgtPlayer()) {
+        if (canTargetPlayer) {
             final FCollection<Player> players = game.getPlayers().filter(PlayerPredicates.canBeAttached(source, aura));
 
             final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
@@ -2797,9 +2819,7 @@ public class GameAction {
                 return true;
             }
         } else {
-            List<ZoneType> zones = Lists.newArrayList(tgt.getZone());
             CardCollection list = new CardCollection();
-
             if (params != null) {
                 if (zones.contains(ZoneType.Battlefield)) {
                     list.addAll((CardCollectionView) params.get(AbilityKey.LastStateBattlefield));

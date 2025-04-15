@@ -1,8 +1,8 @@
 Name:Venomous Fangs
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever enchanted creature deals damage to a creature, destroy the other creature.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
 SVar:NonStackingAttachEffect:True

@@ -1,8 +1,8 @@
 Name:Takklemaggot
 ManaCost:2 B B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self+nonAura | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.
@@ -10,7 +10,7 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ M0M1 | Co
 T:Mode$ ChangesZone | ValidCard$ Card.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChoose | TriggerDescription$ When enchanted creature dies, that creature's controller chooses a creature that CARDNAME could enchant. If the player does, return CARDNAME to the battlefield under your control attached to that creature. If they don't, return CARDNAME to the battlefield under your control as a non-Aura enchantment. It loses "enchant creature" and gains "At the beginning of that player's upkeep, CARDNAME deals 1 damage to that player."
 SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredCardController | Choices$ Creature.CanBeEnchantedBy | Mandatory$ True | AILogic$ OppPreferred | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | AttachedTo$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Enchantment | RemoveEnchantmentTypes$ True | RemoveKeywords$ Enchant creature | Triggers$ TrigUpkeep | RememberObjects$ TriggeredCardController | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBChangeZone2 | Duration$ Permanent
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Enchantment | RemoveEnchantmentTypes$ True | RemoveKeywords$ Enchant:Creature | Triggers$ TrigUpkeep | RememberObjects$ TriggeredCardController | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBChangeZone2 | Duration$ Permanent
 SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ConditionDefined$ ChosenCard | ConditionPresent$ Creature | ConditionCompare$ EQ0
 SVar:TrigUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | Execute$ TrigDmg | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of that player's upkeep, CARDNAME deals 1 damage to them.
 SVar:TrigDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ 1

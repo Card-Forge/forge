@@ -164,7 +164,7 @@ public class Untap extends Phase {
         for (final Card c : active.getCardsIn(ZoneType.Battlefield)) {
             c.removeHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
         }
-        
+
         // remove exerted flags from all things in play
         // even if they are not creatures
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {

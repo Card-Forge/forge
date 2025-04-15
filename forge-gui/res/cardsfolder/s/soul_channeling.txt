@@ -1,8 +1,8 @@
 Name:Soul Channeling
 ManaCost:2 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 A:AB$ Regenerate | Cost$ PayLife<2> | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 SVar:NonStackingAttachEffect:True
 AI:RemoveDeck:All

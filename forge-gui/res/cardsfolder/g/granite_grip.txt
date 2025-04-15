@@ -1,8 +1,8 @@
 Name:Granite Grip
 ManaCost:2 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | Description$ Enchanted creature gets +1/+0 for each Mountain you control.
 SVar:X:Count$Valid Mountain.YouCtrl/Times.1
 SVar:BuffedBy:Mountain

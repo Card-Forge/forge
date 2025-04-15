@@ -1,8 +1,8 @@
 Name:Samite Blessing
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | AILogic$ Pump | ValidTgts$ Creature
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ChooseSource | AddSVar$ DBEffectSB & RPreventNextFromSourceSB & ExileEffectSB & DBCleanupSB | Description$ Enchanted creature has "{T}: The next time a source of your choice would deal damage to target creature this turn, prevent that damage."
 SVar:ChooseSource:AB$ ChooseSource | Cost$ T | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffectSB | SpellDescription$ The next time a source of your choice would deal damage to target creature this turn, prevent that damage.
 SVar:DBEffectSB:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to prevent damage to | ReplacementEffects$ RPreventNextFromSourceSB | ImprintCards$ Targeted | SubAbility$ DBCleanupSB | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem
