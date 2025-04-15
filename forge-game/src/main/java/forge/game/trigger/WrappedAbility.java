@@ -287,6 +287,11 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
+    public boolean hasSVar(String name) {
+        return sa.hasSVar(name);
+    }
+
+    @Override
     public String getSVar(String name) {
         return sa.getSVar(name);
     }
