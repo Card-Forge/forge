@@ -2787,7 +2787,6 @@ public class GameAction {
         if (source.hasSVar("AttachAIValid")) {
             aura.putParam("AIValid", source.getSVar("AttachAIValid"));
         }
-        aura.setActivatingPlayer(source.getController());
 
         Set<ZoneType> zones = EnumSet.noneOf(ZoneType.class);
         boolean canTargetPlayer = false;
