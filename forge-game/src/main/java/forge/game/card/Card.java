@@ -3480,21 +3480,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return Iterables.getFirst(currentState.getNonManaAbilities(), null);
     }
 
-    /**
-     * @return the first {@link SpellAbility} marked as a Spell with API type
-     * {@link ApiType#Attach} in this {@link Card}, or {@code null} if no such
-     * object exists.
-     * @see SpellAbility#isSpell()
-     */
-    public final SpellAbility getFirstAttachSpell() {
-        for (final SpellAbility sa : getSpells()) {
-            if (sa.getApi() == ApiType.Attach && !sa.isSuppressed()) {
-                return sa;
-            }
-        }
-        return null;
-    }
-
     public final SpellPermanent getSpellPermanent() {
         for (final SpellAbility sa : currentState.getNonManaAbilities()) {
             if (sa instanceof SpellPermanent) {
