@@ -1,8 +1,8 @@
 Name:Red Ward
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.Red:red:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from red. This effect doesn't remove CARDNAME.
 AI:RemoveDeck:Random
 Oracle:Enchant creature\nEnchanted creature has protection from red. This effect doesn't remove Red Ward.

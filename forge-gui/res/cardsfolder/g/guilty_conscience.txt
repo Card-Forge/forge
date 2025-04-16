@@ -1,8 +1,8 @@
 Name:Guilty Conscience
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ SpecificCard
+K:Enchant:Creature
+SVar:AttachAILogic:SpecificCard
 T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, CARDNAME deals that much damage to that creature.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceLKICopy | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount

@@ -1,8 +1,8 @@
 Name:Timely Ward
 ManaCost:2 W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell.IsTargeting Valid Card.IsCommander | EffectZone$ All | Caster$ You | Description$ You may cast this spell as though it had flash if it targets a commander.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Indestructible | Description$ Enchanted creature has indestructible.
 AI:RemoveDeck:All

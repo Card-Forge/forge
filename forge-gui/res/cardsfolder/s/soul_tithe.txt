@@ -1,8 +1,9 @@
 Name:Soul Tithe
 ManaCost:1 W
 Types:Enchantment Aura
-K:Enchant nonland permanent
-A:SP$ Attach | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AITgts$ Card.cmcGE2 | AILogic$ Curse
+K:Enchant:Permanent.nonLand:nonland permanent
+SVar:AttachAITgts:Card.cmcGE2
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless they pay {X}, where X is its mana value.
 SVar:TrigSac:DB$ SacrificeAll | Defined$ Enchanted | UnlessCost$ X | UnlessPayer$ EnchantedController
 SVar:X:Enchanted$CardManaCost

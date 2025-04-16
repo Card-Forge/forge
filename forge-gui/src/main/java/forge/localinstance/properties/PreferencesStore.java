@@ -35,7 +35,7 @@ import forge.util.TextUtil;
  * Loads preferred values when instantiated.
  * If a requested value is not present, default is returned.
  */
-public abstract class PreferencesStore<T extends Enum<T>> {
+public abstract class PreferencesStore<T extends Enum<T> & PreferencesStore.IPref> {
     private final Map<T, String> preferenceValues;
     private final String filename;
 
@@ -173,5 +173,9 @@ public abstract class PreferencesStore<T extends Enum<T>> {
             result.add(GameType.Archenemy);
         else if (gameType.equals("Archenemy Rumble"))
             result.add(GameType.ArchenemyRumble);
+    }
+
+    public interface IPref  {
+        String getDefault(); // Common method for getting the default value
     }
 }

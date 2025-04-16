@@ -1,8 +1,9 @@
 Name:Edge of the Divinity
 ManaCost:WB
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AITgts$ Card.White,Card.Black | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAITgts:Card.White,Card.Black
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddToughness$ 2 | Description$ As long as enchanted creature is white, it gets +1/+2.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Black | AddPower$ 2 | AddToughness$ 1 | Description$ As long as enchanted creature is black, it gets +2/+1.
 Oracle:Enchant creature\nAs long as enchanted creature is white, it gets +1/+2.\nAs long as enchanted creature is black, it gets +2/+1.

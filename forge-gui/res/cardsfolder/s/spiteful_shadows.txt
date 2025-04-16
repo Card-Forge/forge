@@ -1,8 +1,8 @@
 Name:Spiteful Shadows
 ManaCost:1 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredTargetController | NumDmg$ X | DamageSource$ TriggeredTarget
 SVar:X:TriggerCount$DamageAmount

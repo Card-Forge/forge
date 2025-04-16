@@ -1,8 +1,8 @@
 Name:Huntsman
 ManaCost:no cost
 Types:Enchantment Aura Role
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddAbility$ Mana | Description$ Enchanted creature gets +1/+1 and has "{T}: Add {G}."
 SVar:Mana:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 Oracle:Enchant Creature\nEnchanted creature gets +1/+1 and has "{T}: Add {G}."

@@ -1,7 +1,7 @@
 Name:Asha's Favor
 ManaCost:2 W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying & First Strike & Vigilance | Description$ Enchanted creature has flying, first strike, and vigilance.
 Oracle:Enchant creature\nEnchanted creature has flying, first strike, and vigilance.

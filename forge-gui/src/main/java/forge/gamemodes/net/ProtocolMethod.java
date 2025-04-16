@@ -18,6 +18,7 @@ import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
 
+
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
@@ -171,6 +172,7 @@ public enum ProtocolMethod {
                 }
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }

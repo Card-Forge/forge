@@ -1,7 +1,7 @@
 Name:Feast of the Unicorn
 ManaCost:3 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 4 | Description$ Enchanted creature gets +4/+0.
 Oracle:Enchant creature\nEnchanted creature gets +4/+0.

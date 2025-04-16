@@ -1,8 +1,8 @@
 Name:Steal Enchantment
 ManaCost:U U
 Types:Enchantment Aura
-K:Enchant enchantment
-A:SP$ Attach | ValidTgts$ Enchantment | AILogic$ GainControl
+K:Enchant:Enchantment
+SVar:AttachAILogic:GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted enchantment.
 AI:RemoveDeck:All
 Oracle:Enchant enchantment\nYou control enchanted enchantment.

@@ -1,8 +1,7 @@
 Name:Awakened Awareness
 ManaCost:X U U
 Types:Enchantment Aura
-K:Enchant artifact or creature
-A:SP$ Attach | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature
+K:Enchant:Artifact,Creature:artifact or creature
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters, put X +1/+1 counters on enchanted permanent.
 SVar:TrigPutCounters:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$xPaid

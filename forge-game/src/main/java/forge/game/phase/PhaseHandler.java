@@ -481,6 +481,9 @@ public class PhaseHandler implements java.io.Serializable {
                 game.getUpkeep().registerUntilEndCommand(playerTurn);
                 break;
 
+            case UNTAP:
+                game.getUntap().executeUntilEndOfPhase(playerTurn);
+
             case COMBAT_END:
                 GameEventCombatEnded eventEndCombat = null;
                 if (inCombat()) {

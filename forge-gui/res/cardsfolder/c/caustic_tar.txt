@@ -1,8 +1,8 @@
 Name:Caustic Tar
 ManaCost:4 B B
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ LoseLife | Description$ Enchanted land has "{T}: Target player loses 3 life."
 SVar:LoseLife:AB$ LoseLife | Cost$ T | ValidTgts$ Player | LifeAmount$ 3 | SpellDescription$ Target player loses 3 life.
 SVar:NonStackingAttachEffect:True

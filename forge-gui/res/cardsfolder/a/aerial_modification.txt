@@ -1,8 +1,8 @@
 Name:Aerial Modification
 ManaCost:4 W
 Types:Enchantment Aura
-K:Enchant creature or Vehicle
-A:SP$ Attach | ValidTgts$ Creature,Vehicle | AILogic$ Animate
+K:Enchant:Creature,Vehicle:creature or Vehicle
+SVar:AttachAILogic:Animate
 S:Mode$ Continuous | Affected$ Vehicle.AttachedBy | AddType$ Creature | Description$ As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+2 and has flying.
 Oracle:Enchant creature or Vehicle\nAs long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.\nEnchanted creature gets +2/+2 and has flying.

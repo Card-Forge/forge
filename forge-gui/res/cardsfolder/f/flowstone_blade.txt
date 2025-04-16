@@ -1,9 +1,10 @@
 Name:Flowstone Blade
 ManaCost:R
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 # TODO: The AI can only use this as a form of buff. Maybe teach the AI to also use it to kill opposing creatures?
-A:SP$ Attach | ValidTgts$ Creature | AITgts$ Creature.toughnessGE2 | AILogic$ Pump
+SVar:AttachAITgts:Creature.toughnessGE2
+SVar:AttachAILogic:Pump
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Enchanted creature gets +1/-1 until end of turn.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\n{R}: Enchanted creature gets +1/-1 until end of turn.

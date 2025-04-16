@@ -1,8 +1,9 @@
 Name:Pollenbright Wings
 ManaCost:4 G W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAITgts:Card.powerGE1
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, create that many 1/1 green Saproling creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You

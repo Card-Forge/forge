@@ -1,8 +1,8 @@
 Name:Traveler's Cloak
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 K:ETBReplacement:Other:ChooseLT
 SVar:ChooseLT:DB$ ChooseType | Defined$ You | Type$ Land | AILogic$ ChosenLandwalk | SpellDescription$ As CARDNAME enters, choose a land type.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
