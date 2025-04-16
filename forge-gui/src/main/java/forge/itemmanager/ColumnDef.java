@@ -54,7 +54,7 @@ public enum ColumnDef {
     NAME("lblName", "lblName", 180, false, SortState.ASC,
             from -> {
                 if (from.getKey() instanceof PaperCard) {
-                    String spire = ((PaperCard) from.getKey()).getColorID() == null ? "" : ((PaperCard) from.getKey()).getColorID().toString();
+                    String spire = ((PaperCard) from.getKey()).getMarkedColors() == null ? "" : ((PaperCard) from.getKey()).getMarkedColors().toString();
                     String sortableName = ((PaperCard)from.getKey()).getSortableName();
                     return sortableName == null ? TextUtil.toSortableName(from.getKey().getName() + spire) : sortableName + spire;
                 }

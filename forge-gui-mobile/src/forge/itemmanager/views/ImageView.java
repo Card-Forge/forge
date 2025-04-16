@@ -17,6 +17,7 @@ import forge.assets.*;
 import forge.assets.FSkinColor.Colors;
 import forge.card.*;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.mana.ManaCostShard;
 import forge.deck.*;
 import forge.deck.io.DeckPreferences;
 import forge.game.card.CardView;
@@ -34,11 +35,8 @@ import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -980,7 +978,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private boolean selected, deckSelectMode, showRanking;
         private final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
         private DeckProxy deckProxy = null;
-        private String colorID = null;
+        private String markedColors = null;
         private FImageComplex deckCover = null;
         private Texture dpImg = null;
         //private TextureRegion tr;
@@ -1007,8 +1005,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         draftRankImage = FSkinImage.DRAFTRANK_C;
                     }
                 }
-                if (((PaperCard) item).getColorID() != null) {
-                    colorID = ((PaperCard) item).getColorID().stream().map(MagicColor::toSymbol).collect(Collectors.joining());
+                if (((PaperCard) item).getMarkedColors() != null) {
+                    markedColors = Arrays.stream(((PaperCard) item).getMarkedColors().getOrderedShards())
+                            .map(ManaCostShard::toString)
+                            .collect(Collectors.joining());
                 }
             }
         }
@@ -1082,7 +1082,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             cardPrice = ((ShopScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);
                         drawCardLabel(g, "$" + cardPrice, Color.GOLD, x, y ,w ,h);
                     } else {
-                        if (((PaperCard) item).isNoSell() && itemManager.showNFSWatermark() && !Config.instance().getSettingData().disableNotForSale) {
+                        if (((PaperCard) item).hasNoSellValue() && itemManager.showNFSWatermark() && !Config.instance().getSettingData().disableNotForSale) {
                             Texture nfs = Forge.getAssets().getTexture(getDefaultSkinFile("nfs.png"), false);
                             if (nfs != null)
                                 g.drawImage(nfs, x, y, w, h);
@@ -1092,8 +1092,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     }
                 }
                 // spire colors
-                if (colorID != null && !colorID.isEmpty()) {
-                    textRenderer.drawText(g, colorID, FSkinFont.forHeight(w / 5), Color.WHITE, x, y + h / 4, w, h, y, h, false, Align.center, true);
+                if (markedColors != null && !markedColors.isEmpty()) {
+                    textRenderer.drawText(g, markedColors, FSkinFont.forHeight(w / 5), Color.WHITE, x, y + h / 4, w, h, y, h, false, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);

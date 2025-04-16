@@ -88,7 +88,7 @@ public enum DeckSection {
             CardType t = card.getRules().getType();
             // NOTE: Same rules applies to both Deck and Side, despite "Conspiracy cards" are allowed
             // in the SideBoard (see Rule 313.2)
-            // Those will be matched later, in case (see `Deck::validateDeferredSections`)
+            // Those will be matched later, in case (see `Deck::normalizeDeferredSections`)
             return !t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane() && !t.isScheme() && !t.isVanguard();
         };
 
