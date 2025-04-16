@@ -1,8 +1,8 @@
 Name:Red Scarab
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.Red | Description$ Enchanted creature can't be blocked by red creatures.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Permanent.Red+OppCtrl | Description$ Enchanted creature gets +2/+2 as long as an opponent controls a red permanent.
 AI:RemoveDeck:Random

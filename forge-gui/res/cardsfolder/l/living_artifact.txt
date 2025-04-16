@@ -1,8 +1,8 @@
 Name:Living Artifact
 ManaCost:G
 Types:Enchantment Aura
-K:Enchant artifact
-A:SP$ Attach | ValidTgts$ Artifact | AILogic$ Pump
+K:Enchant:Artifact
+SVar:AttachAILogic:Pump
 T:Mode$ DamageDoneOnce | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you're dealt damage, put that many vitality counters on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ VITALITY | CounterNum$ X
 SVar:X:TriggerCount$DamageAmount

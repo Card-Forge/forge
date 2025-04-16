@@ -1,7 +1,7 @@
 Name:Tightening Coils
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -6 | RemoveKeyword$ Flying | Description$ Enchanted creature gets -6/-0 and loses flying.
 Oracle:Enchant creature\nEnchanted creature gets -6/-0 and loses flying.

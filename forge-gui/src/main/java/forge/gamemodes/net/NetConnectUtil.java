@@ -9,6 +9,7 @@ import forge.gamemodes.net.event.MessageEvent;
 import forge.gamemodes.net.event.NetEvent;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
+import forge.localinstance.properties.ForgeNetPreferences;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.ILobbyView;
@@ -17,11 +18,12 @@ import forge.interfaces.ILobbyListener;
 import forge.interfaces.IUpdateable;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.properties.ForgeProfileProperties;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
+
+import java.net.URI;
 
 public class NetConnectUtil {
     private NetConnectUtil() { }
@@ -38,7 +40,7 @@ public class NetConnectUtil {
     }
 
     public static ChatMessage host(final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
-        final int port = ForgeProfileProperties.getServerPort();
+        final int port = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
         final FServerManager server = FServerManager.getInstance();
         final ServerGameLobby lobby = new ServerGameLobby();
         final ILobbyView view = onlineLobby.setLobby(lobby);
@@ -100,12 +102,12 @@ public class NetConnectUtil {
     }
 
     public static void copyHostedServerUrl() {
-        String internalAddress = FServerManager.getInstance().getLocalAddress();
-        String externalAddress = FServerManager.getInstance().getExternalAddress();
-        String internalUrl = internalAddress + ":" + ForgeProfileProperties.getServerPort();
+        String internalAddress = FServerManager.getLocalAddress();
+        String externalAddress = FServerManager.getExternalAddress();
+        String internalUrl = internalAddress + ":" + FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
         String externalUrl = null;
         if (externalAddress != null) {
-            externalUrl = externalAddress + ":" + ForgeProfileProperties.getServerPort();
+            externalUrl = externalAddress + ":" + FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
             GuiBase.getInterface().copyToClipboard(externalUrl);
         } else {
             GuiBase.getInterface().copyToClipboard(internalAddress);
@@ -122,7 +124,24 @@ public class NetConnectUtil {
 
     public static ChatMessage join(final String url, final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
-        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui);
+        String hostname;
+        int port = ForgeConstants.DEFAULT_SERVER_CONNECTION_PORT;
+
+        try {
+            // Check if the URL already has a protocol
+            String formattedUrl = url.matches("^[a-zA-Z][a-zA-Z0-9+.-]*://.*") ? url : "http://" + url;
+            // Parse the URI
+            URI uri = new URI(formattedUrl);
+            hostname = uri.getHost();
+            if (uri.getPort() != -1) { // If a port is specified in the URL
+                port = uri.getPort();
+            }
+        } catch (Exception ex) {
+            hostname = url; // Fallback to original URL if parsing fails
+        }
+
+
+        final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui, hostname, port);
         onlineLobby.setClient(client);
         chatInterface.setGameClient(client);
         final ClientGameLobby lobby = new ClientGameLobby();
@@ -150,22 +169,10 @@ public class NetConnectUtil {
         });
         view.setPlayerChangeListener((index, event) -> client.send(event));
 
-        String hostname = url;
-        int port = ForgeProfileProperties.getServerPort();
 
-        //see if port specified in URL
-        int index = url.indexOf(':');
-        if (index >= 0) {
-            hostname = url.substring(0, index);
-            String portStr = url.substring(index + 1);
-            try {
-                port = Integer.parseInt(portStr);
-            }
-            catch (Exception ex) {}
-        }
 
         try {
-            client.connect(hostname, port);
+            client.connect();
         }
         catch (Exception ex) {
             //return a message to close the connection so we will not crash...

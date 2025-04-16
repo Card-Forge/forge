@@ -1,8 +1,8 @@
 Name:Weirding Wood
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
+K:Enchant:Land
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ WeirdingWoodTap | Description$ Enchanted land has "{T}: Add two mana of any one color."

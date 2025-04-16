@@ -62,7 +62,7 @@ public class CardLists {
     public static CardCollection filterLEPower(final Iterable<Card> in, final int lessthanPower) {
         return CardLists.filter(in, c -> c.getNetPower() <= lessthanPower);
     }
-  
+
     public static final Comparator<Card> ToughnessComparator = Comparator.comparingInt(Card::getNetToughness);
     public static final Comparator<Card> ToughnessComparatorInv = Comparator.comparingInt(Card::getNetToughness).reversed();
     public static final Comparator<Card> PowerComparator = Comparator.comparingInt(Card::getNetCombatDamage);

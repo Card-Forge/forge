@@ -104,6 +104,12 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
             return;
         }
         if (!isEmpty()) {
+            for (Card c : allCards()) {
+                if (c.isInPlay()) {
+                    c.updateWorldTimestamp(game.getTimestamp());
+                }
+            }
+
             // this should still refresh for empty battlefield
             if (lastStateBattlefield != CardCollection.EMPTY) {
                 game.getTriggerHandler().resetActiveTriggers(false);

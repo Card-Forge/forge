@@ -165,14 +165,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         // remove abilities
         final List<SpellAbility> removedAbilities = Lists.newArrayList();
-        boolean clearSpells = sa.hasParam("OverwriteSpells");
-
-        if (clearSpells) {
-            removedAbilities.addAll(Lists.newArrayList(c.getSpells()));
-        }
-
-        if (sa.hasParam("RemoveThisAbility") && !removedAbilities.contains(sa)) {
-            removedAbilities.add(sa);
+        if (sa.hasParam("RemoveThisAbility")) {
+            removedAbilities.add(sa.getOriginalAbility());
         }
 
         // give abilities
@@ -252,9 +246,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         if (!"Permanent".equals(duration) && !perpetual) {
-            if ("UntilControllerNextUntap".equals(duration)) {
-                game.getUntap().addUntil(c.getController(), unanimate);
-            } else if ("UntilAnimatedFaceup".equals(duration)) {
+            if ("UntilAnimatedFaceup".equals(duration)) {
                 c.addFaceupCommand(unanimate);
             } else {
                 addUntilCommand(sa, unanimate);

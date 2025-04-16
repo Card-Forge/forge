@@ -1,8 +1,8 @@
 Name:Stamina
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance.
 A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 Oracle:Enchant creature\nEnchanted creature has vigilance.\nSacrifice Stamina: Regenerate enchanted creature.

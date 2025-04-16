@@ -1,0 +1,37 @@
+[metadata]
+Name:Possibility Storm - Aetherdrift #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/03/latest-4-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Ensure your solution satisfies all possible blocks. Any cards drawn are irrelevant to the puzzle.
+[state]
+turn=1
+activeplayer=p0
+activephase=UPKEEP
+p0life=20
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0numringtemptedyou=0
+p0speed=0
+p0hand=Terror Tide;Locust Spray;Atraxa's Skitterfang;Violent Urge;Overrun
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0graveyard=Flamewake Phoenix;Simian Simulacrum
+p0battlefield=Aatchik, Emerald Radian;T:g_1_1_insect;T:g_1_1_insect;Molt Tender;Forest;Forest;Restless Vents;Restless Vents;Restless Vents
+p0exile=
+p0command=
+p0sideboard=
+p1life=10
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1numringtemptedyou=0
+p1speed=0
+p1hand=
+p1library=
+p1graveyard=
+p1battlefield=Mabel, Heir to Cragflame;Enduring Bondwarden;Manifold Mouse
+p1exile=
+p1command=
+p1sideboard=
+p1precast=Manifold Mouse:CustomScript:DB$ CopyPermanent|Defined$ Self|NumCopies$ 1|SetPower$ 1|SetToughness$ 1
+removesummoningsickness=true

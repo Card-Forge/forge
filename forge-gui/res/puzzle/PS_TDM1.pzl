@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Tarkir: Dragonstorm #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/03/latest-6-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Ensure your solution satisfies all possible blocks. Any cards drawn are irrelevant to the puzzle.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Magmakin Artillerist;Waxen Shapethief;Return the Favor;Lightning Strike;Shiko, Paragon of the Way;Combat Courier
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Narset, Jeskai Waymaster;Whiskerquill Scribe;Sarkhan, Dragon Ascendant;Radiant Lotus;Plains;Plains;Island;Island;Mountain;Mountain
+p1life=13
+p1battlefield=Broodspinner;Flesh Burrower

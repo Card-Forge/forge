@@ -71,7 +71,6 @@ public enum AbilityKey {
     Explored("Explored"),
     Explorer("Explorer"),
     ExtraTurn("ExtraTurn"),
-    Event("Event"),
     ETB("ETB"),
     Fighter("Fighter"),
     Fighters("Fighters"),

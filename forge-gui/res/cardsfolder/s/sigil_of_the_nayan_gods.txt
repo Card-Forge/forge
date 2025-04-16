@@ -1,9 +1,9 @@
 Name:Sigil of the Nayan Gods
 ManaCost:1 G W
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 K:Cycling:GW
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature

@@ -21,8 +21,8 @@ Name:Katilda's Rising Dawn
 ManaCost:no cost
 Colors:white
 Types:Legendary Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Flying & Lifelink & Protection:Vampire | Description$ Enchanted creature has flying, lifelink, and protection from Vampires, and it gets +X/+X, where X is the number of permanents you control that are Spirits and/or enchantments.
 SVar:X:Count$Valid Spirit.YouCtrl,Enchantment.YouCtrl
 SVar:BuffedBy:Enchantment,Spirit

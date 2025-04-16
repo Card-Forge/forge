@@ -1,7 +1,7 @@
 Name:Serra's Embrace
 ManaCost:2 W W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying & Vigilance | Description$ Enchanted creature gets +2/+2 and has flying and vigilance.
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying and vigilance.

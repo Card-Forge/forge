@@ -1,8 +1,8 @@
 Name:Nerd Rage
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters, draw two cards.
 SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 2
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddStaticAbility$ NoMaxHandSize | AddTrigger$ AttackTrig | Description$ Enchanted creature has "You have no maximum hand size" and "Whenever this creature attacks, if you have ten or more cards in hand, it gets +10/+10 until end of turn."

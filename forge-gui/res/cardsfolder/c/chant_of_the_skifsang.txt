@@ -1,7 +1,7 @@
 Name:Chant of the Skifsang
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -13 | Description$ Enchanted creature gets -13/-0.
 Oracle:Enchant creature\nEnchanted creature gets -13/-0.

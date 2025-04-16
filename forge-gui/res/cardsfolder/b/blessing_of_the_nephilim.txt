@@ -1,8 +1,9 @@
 Name:Blessing of the Nephilim
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AITgts$ Card.nonColorless | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAITgts:Card.nonColorless
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Enchanted creature gets +1/+1 for each of its colors.
 SVar:AffectedX:Count$CardNumColors
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each of its colors.

@@ -1,7 +1,7 @@
 Name:Leshrac's Rite
 ManaCost:B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Landwalk:Swamp | Description$ Enchanted creature has swampwalk. (It can't be blocked as long as defending player controls a Swamp.)
 Oracle:Enchant creature\nEnchanted creature has swampwalk. (It can't be blocked as long as defending player controls a Swamp.)
