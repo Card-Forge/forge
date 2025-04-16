@@ -443,6 +443,7 @@ public class CardFactory {
             } else if (c.isAura()) {
                 String desc = "";
                 String extra = "";
+                boolean grave = false;
                 for (KeywordInterface ki : c.getKeywords(Keyword.ENCHANT)) {
                     String o = ki.getOriginal();
                     String m[] = o.split(":");
@@ -453,6 +454,9 @@ public class CardFactory {
                         if (CardType.isACardType(desc) || "Permanent".equals(desc) || "Player".equals(desc) || "Opponent".equals(desc)) {
                             desc = desc.toLowerCase();
                         }
+                    }
+                    if (m[1].contains("inZoneGraveyard")) {
+                        grave = true;
                     }
                     break;
                 }
@@ -465,8 +469,13 @@ public class CardFactory {
                 if (c.hasSVar("AttachAIValid")) { // TODO combine with AttachAITgts
                     extra += " | AIValid$ " + c.getSVar("AttachAIValid");
                 }
-                String st = "SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield,Graveyard | TgtPrompt$ Select target " + desc + extra;
-                SpellAbility sa = AbilityFactory.getAbility(st, c);
+                StringBuilder sb = new StringBuilder();
+                sb.append("SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield");
+                if (grave) {
+                    sb.append(",Graveyard");
+                }
+                sb.append(" | TgtPrompt$ Select target ").append(desc).append(extra);
+                SpellAbility sa = AbilityFactory.getAbility(sb.toString(), c);
                 sa.setIntrinsic(true);
                 sa.setCardState(c.getCurrentState());
                 c.addSpellAbility(sa);
