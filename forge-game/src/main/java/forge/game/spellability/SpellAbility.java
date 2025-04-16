@@ -23,6 +23,7 @@ import com.google.common.collect.*;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import forge.game.card.*;
 import forge.game.cost.CostSacrifice;
 import forge.util.*;
 import org.apache.commons.lang3.ObjectUtils;
@@ -46,13 +47,6 @@ import forge.game.IIdentifiable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardFactory;
-import forge.game.card.CardPlayOption;
-import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostTap;
@@ -2221,6 +2215,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     // Takes arguments like Blue or withFlying
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
+        if (property.startsWith("!")) {
+            return !ForgeScript.spellAbilityHasProperty(this, property.substring(1), sourceController, source, spellAbility);
+        }
         return ForgeScript.spellAbilityHasProperty(this, property, sourceController, source, spellAbility);
     }
 
