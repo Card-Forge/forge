@@ -9,6 +9,7 @@ import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.assets.*;
 import forge.card.CardEdition;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
@@ -1767,8 +1768,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             CardManagerPage cardSourceSection;
             DeckSection destination = DeckSection.matchingSection(card);
             final DeckSectionPage destinationPage = parentScreen.getPageForSection(destination);
-            // val for colorID setup
-            int val;
+            int markedColorCount = card.getRules().getSetColorID();
             switch (deckSection) {
             default:
             case Main:
@@ -1811,14 +1811,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 }
                 addCommanderItems(menu, card);
-                if ((val = card.getRules().getSetColorID()) > 0) {
+                if (markedColorCount > 0) {
                     menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
-                        //sort options so current option is on top and selected by default
-                        Set<String> colorChoices = new HashSet<>(MagicColor.Constant.ONLY_COLORS);
-                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(val)), val, val, colorChoices, new Callback<>() {
+                        Set<String> currentColors;
+                        if(card.getMarkedColors() != null)
+                            currentColors = card.getMarkedColors().stream().map(MagicColor.Color::getName).collect(Collectors.toSet());
+                        else
+                            currentColors = null;
+                        String prompt = Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(markedColorCount));
+                        GuiChoose.getChoices(prompt, markedColorCount, markedColorCount, MagicColor.Constant.ONLY_COLORS, currentColors, null, new Callback<>() {
                             @Override
                             public void run(List<String> result) {
-                                addCard(card.getColorIDVersion(new HashSet<>(result)));
+                                addCard(card.copyWithMarkedColors(ColorSet.fromNames(result)));
                                 removeCard(card);
                             }
                         });
@@ -1863,14 +1867,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     }
                 }
                 addCommanderItems(menu, card);
-                if ((val = card.getRules().getSetColorID()) > 0) {
+                if (markedColorCount > 0) {
                     menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
-                        //sort options so current option is on top and selected by default
-                        Set<String> colorChoices = new HashSet<>(MagicColor.Constant.ONLY_COLORS);
-                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(val)), val, val, colorChoices, new Callback<>() {
+                        Set<String> currentColors;
+                        if(card.getMarkedColors() != null)
+                            currentColors = card.getMarkedColors().stream().map(MagicColor.Color::getName).collect(Collectors.toSet());
+                        else
+                            currentColors = null;
+                        String prompt = Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(markedColorCount));
+                        GuiChoose.getChoices(prompt, markedColorCount, markedColorCount, MagicColor.Constant.ONLY_COLORS, currentColors, null, new Callback<>() {
                             @Override
                             public void run(List<String> result) {
-                                addCard(card.getColorIDVersion(new HashSet<>(result)));
+                                addCard(card.copyWithMarkedColors(ColorSet.fromNames(result)));
                                 removeCard(card);
                             }
                         });

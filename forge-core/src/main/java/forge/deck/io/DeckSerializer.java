@@ -61,6 +61,8 @@ public class DeckSerializer {
         }
     
         for(Entry<DeckSection, CardPool> s : d) {
+            if(s.getValue().isEmpty())
+                continue;
             out.add(TextUtil.enclosedBracket(s.getKey().toString()));
             out.add(s.getValue().toCardList(System.lineSeparator()));
         }
