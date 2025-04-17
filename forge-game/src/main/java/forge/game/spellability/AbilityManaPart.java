@@ -703,10 +703,10 @@ public class AbilityManaPart implements java.io.Serializable {
             return "";
         }
         Card card = sa.getHostCard();
-        if (card != null && card.hasChosenColorSpire()) {
+        if (card != null && card.hasMarkedColor()) {
             StringBuilder values = new StringBuilder();
-            for (String s : card.getChosenColorID()) {
-                values.append(MagicColor.toShortString(MagicColor.fromName(s))).append(" ");
+            for (byte c : card.getMarkedColors()) {
+                values.append(MagicColor.toShortString(c)).append(" ");
             }
             return values.toString();
         }

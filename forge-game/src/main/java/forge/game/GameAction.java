@@ -22,6 +22,7 @@ import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
+import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.deck.DeckSection;
@@ -541,8 +542,8 @@ public class GameAction {
             game.addLeftGraveyardThisTurn(lastKnownInfo);
         }
 
-        if (c.hasChosenColorSpire()) {
-            copied.setChosenColorID(ImmutableSet.copyOf(c.getChosenColorID()));
+        if (c.hasMarkedColor()) {
+            copied.setMarkedColors(c.getMarkedColors());
         }
 
         copied.updateStateForView();
@@ -2414,15 +2415,14 @@ public class GameAction {
             for (Card c : spires) {
                 // TODO: only do this for the AI, for the player part, get the encoded color from the deck file and pass
                 //  it to either player or the papercard object so it feels like rule based for the player side..
-                if (!c.hasChosenColorSpire()) {
+                if (!c.hasMarkedColor()) {
                     if (takesAction.isAI()) {
-                        List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
                         String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
                                 Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
                         SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
                         sa.putParam("AILogic", "MostProminentInComputerDeck");
-                        Set<String> chosenColors = new HashSet<>(takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices));
-                        c.setChosenColorID(chosenColors);
+                        ColorSet chosenColors = ColorSet.fromNames(takesAction.getController().chooseColors(prompt, sa, 2, 2, MagicColor.Constant.ONLY_COLORS));
+                        c.setMarkedColors(chosenColors);
                     }
                 }
             }
