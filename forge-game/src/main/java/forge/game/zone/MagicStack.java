@@ -277,12 +277,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
             AbilityUtils.resolve(sp);
 
-            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(source);
-            runParams2.put(AbilityKey.SpellAbility, sp);
-            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams2, false);
+            runParams = AbilityKey.mapFromCard(source);
+            runParams.put(AbilityKey.SpellAbility, sp);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
 
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp);
             sp.resetOnceResolved();
+
+            // parts are paid sequentially, so collect directly or some trigger might get lost
+            if (game.costPaymentStack.peek() != null) {
+                game.getTriggerHandler().collectTriggerForWaiting();
+            }
             return;
         }
 
