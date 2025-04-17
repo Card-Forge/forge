@@ -750,7 +750,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new LocalizedSelectSetting(
                 ForgeNetPreferences.FNetPref.UPnP,
                 Forge.getLocalizer().getMessage("lblUPnPTitle"),
-                Forge.getLocalizer().getMessage("lblUPnPQuestion"),
+                Forge.getLocalizer().getMessage("nlServerUPnPOptions"),
                 ForgeConstants.getUPnPPreferenceMapping()
         ), 8);
 
