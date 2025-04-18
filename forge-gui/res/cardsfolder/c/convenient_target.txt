@@ -1,6 +1,7 @@
 Name:Convenient Target
 ManaCost:R
 Types:Enchantment Aura
+K:Enchant:Creature
 SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSuspect | TriggerDescription$ When CARDNAME enters, suspect enchanted creature. (It has menace and can't block.)
 SVar:TrigSuspect:DB$ AlterAttribute | Defined$ Enchanted | Attributes$ Suspected
