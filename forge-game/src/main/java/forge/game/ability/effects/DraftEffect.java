@@ -58,7 +58,7 @@ import java.util.*;
                  name = name.replace(";", ",");
                  Card cardOption = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), player);
                  if (sa.hasParam("TokenCard"))
-                     cardOption.setTokenCard(true);
+                     cardOption.setTokenCard(sa.hasParam("TokenCard"));
                  draftOptions.add(cardOption);
              }
 
