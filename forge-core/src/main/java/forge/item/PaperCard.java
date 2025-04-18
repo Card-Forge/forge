@@ -26,10 +26,7 @@ import forge.util.Localizer;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectStreamException;
-import java.io.Serial;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -510,7 +507,10 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
      * name, edition, and collector number. Examples include permanent markings on the card, and flags for Adventure
      * mode.
      */
-    public static class PaperCardFlags {
+    public static class PaperCardFlags implements Serializable {
+        @Serial
+        private static final long serialVersionUID = -3924720485840169336L;
+
         /**
          * Chosen colors, for cards like Cryptic Spires.
          */
