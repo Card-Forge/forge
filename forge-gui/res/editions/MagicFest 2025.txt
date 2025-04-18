@@ -10,4 +10,5 @@ ScryfallCode=PF25
 1F R Avacyn's Pilgrim @Mark Zug
 2 R Ponder @Mark Zug
 3 M The First Sliver @Svetlin Velinov
+4 M Yoshimaru, Ever Faithful @Kazuya Takahashi
 F6 R Second City @Mark Rosewater
