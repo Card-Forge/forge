@@ -7,7 +7,7 @@ SVar:DmgAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.ControlledBy Target
 SVar:DBDamageResolve:DB$ DamageResolve
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Pirate+YouCtrl | TgtPrompt$ Select target Pirate card in your graveyard | SpellDescription$ Return target Pirate card from your graveyard to the battlefield.
 A:AB$ DestroyAll | Cost$ SubCounter<11/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Creature | ValidDescription$ all creatures targeted opponent controls | RememberAllObjects$ True | SubAbility$ DBDealDamage | SpellDescription$ Destroy all creatures target opponent controls. CARDNAME deals damage to that player equal to their total power.
-SVar:DBDealDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SVar$ DBCleanup
+SVar:DBDealDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 DeckHints:Type$Pirate
