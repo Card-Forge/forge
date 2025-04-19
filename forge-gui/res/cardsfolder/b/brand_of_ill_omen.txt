@@ -1,6 +1,7 @@
 Name:Brand of Ill Omen
 ManaCost:3 R
 Types:Enchantment Aura
+K:Enchant:Creature
 K:Cumulative upkeep:R
 SVar:AttachAILogic:Curse
 S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ Player.EnchantedController | Description$ Enchanted creature's controller can't cast creature spells.

@@ -39,6 +39,10 @@
                     {
                         &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;,
                         &quot;not&quot;: true
+                    },
+                    {
+                        &quot;checkCharacterFlag&quot;: &quot;noQuest&quot;,
+                        &quot;not&quot;: true
                     }
                 ],
                 &quot;text&quot;: &quot;This... is Shandalar. A plane where mana is so prevalent and used by all that is sentient. Even the common people use spells daily.&quot;,
@@ -262,8 +266,7 @@
   </object>
   <object id="78" template="../../obj/portal.tx" x="192" y="144">
    <properties>
-    <property name="activeQuestFlag" value="mainQuest"/>
-    <property name="portalState" value="closed"/>
+    <property name="portalState" value="active"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
     <property name="teleport" value=""/>
    </properties>

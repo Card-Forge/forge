@@ -57,7 +57,7 @@ import java.util.*;
                  // Cardnames that include "," must use ";" instead in Spellbook$ (i.e. Tovolar; Dire Overlord)
                  name = name.replace(";", ",");
                  Card cardOption = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), player);
-                 cardOption.setTokenCard(true);
+                 cardOption.setTokenCard(sa.hasParam("TokenCard"));
                  draftOptions.add(cardOption);
              }
 
