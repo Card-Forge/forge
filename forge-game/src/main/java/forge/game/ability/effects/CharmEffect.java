@@ -271,9 +271,13 @@ public class CharmEffect extends SpellAbilityEffect {
         // Sort Chosen by SA order
         chosen.sort(Comparator.comparingInt(o -> o.getSVarInt("CharmOrder")));
 
+        int indx = 1;
         for (AbilitySub sub : chosen) {
             // Clone the chosen, just in case the same subAb gets chosen multiple times
             AbilitySub clone = (AbilitySub)sub.copy(sa.getActivatingPlayer());
+
+            clone.setSVar("CharmOrder", Integer.toString(indx));
+            indx++;
 
             // make StackDescription be the SpellDescription if it doesn't already have one
             if (!clone.hasParam("StackDescription")) {
