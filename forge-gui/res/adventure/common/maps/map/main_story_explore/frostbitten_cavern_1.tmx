@@ -142,10 +142,19 @@
   <object id="24" template="../../obj/dialog.tx" x="206" y="80" width="19" height="16">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Not all of the plants are in good health, this one appears to have been chewed on by an animal. You're not even sure what color this flower used to be.&quot;,
-   &quot;options&quot;: [{&quot;name&quot;: &quot;(Continue)&quot;}, &quot;action&quot;: [{&quot;deleteMapObject&quot;: -1}]]
-}
+    {
+        &quot;text&quot;: &quot;Not all of the plants are in good health, this one appears to have been chewed on by an animal. You're not even sure what color this flower used to be.&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;(Continue)&quot;
+                &quot;action&quot;: [
+                    {
+                        &quot;deleteMapObject&quot;: -1
+                    }
+                ]
+            }
+        ]
+    }
 ]</property>
    </properties>
   </object>
