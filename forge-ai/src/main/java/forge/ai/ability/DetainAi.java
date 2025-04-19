@@ -74,8 +74,7 @@ public class DetainAi extends SpellAbilityAi {
                     attackers = CardLists.filter(ai.getCreaturesInPlay(), c -> CombatUtil.canAttack(c, opp));
                     attackers.remove(source);
                 }
-                Predicate<Card> findBlockers = CardPredicates.possibleBlockerForAtLeastOne(attackers);
-                List<Card> creatureList = CardLists.filter(list, findBlockers);
+                List<Card> creatureList = CardLists.filter(list, CardPredicates.possibleBlockerForAtLeastOne(attackers));
 
                 // TODO check if own creature would be forced to attack and we want to keep it alive
 
