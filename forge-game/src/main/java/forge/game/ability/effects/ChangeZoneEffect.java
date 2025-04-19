@@ -832,9 +832,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
         }
-        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
-            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
-        }
+
+        changeZoneUntilCommand(triggerList, sa);
 
         // might set after card is moved again if something has changed
         if (destination.equals(ZoneType.Exile)) {
@@ -1475,9 +1474,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         triggerList.triggerChangesZoneAll(game, sa);
 
-        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
-            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
-        }
+        changeZoneUntilCommand(triggerList, sa);
     }
 
     private void handleCastWhileSearching(final CardCollection fetchList, final Player decider) {
