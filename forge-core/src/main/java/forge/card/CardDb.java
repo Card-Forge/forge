@@ -636,6 +636,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return tryGetCard(request);
     }
 
+    @Override
+    public PaperCard getCard(final String cardName, String setCode, String collectorNumber, Map<String, String> flags) {
+        String reqInfo = CardRequest.compose(cardName, setCode, collectorNumber, flags);
+        CardRequest request = CardRequest.fromString(reqInfo);
+        return tryGetCard(request);
+    }
+
     private PaperCard tryGetCard(CardRequest request) {
         // Before doing anything, check that a non-null request has been provided
         if (request == null)
