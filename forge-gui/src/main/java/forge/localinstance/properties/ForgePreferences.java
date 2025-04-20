@@ -25,7 +25,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /**
      * Preference identifiers and their default values.
      */
-    public enum FPref implements IPref {
+    public enum FPref implements PreferencesStore.IPref {
         PLAYER_NAME (""),
         CONSTRUCTED_P1_DECK_STATE(""),
         CONSTRUCTED_P2_DECK_STATE(""),
