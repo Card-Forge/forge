@@ -70,13 +70,16 @@ public abstract class ImageFetcher {
         } else {
             String setCode = edition.getScryfallCode();
             String langCode = edition.getCardsLangCode();
-            // It seems like the scryfall lookup might be better if we didn't include the language code at all?
             String primaryUrl = ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop);
             downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + primaryUrl);
+
+            // It seems like the scryfall lookup might be better if we didn't include the language code at all?
+            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(c, face, setCode, "", useArtCrop));
 
             String alternateUrl = ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop, true);
             if (alternateUrl != null && !alternateUrl.equals(primaryUrl)) {
                 downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + alternateUrl);
+                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(c, face, setCode, "", useArtCrop, true));
             }
         }
         return null;
