@@ -4,6 +4,7 @@ Types:Enchantment Aura
 K:Enchant:Artifact
 SVar:AttachAITgts:Creature,Card.hasAbility Activated
 SVar:AttachAILogic:Curse
+S:Mode$ CantAttack | ValidCard$ Card.EnchantedBy | Description$ Enchanted artifact can't attack or block, and its activated abilities can't be activated.
+S:Mode$ CantBlock | ValidCard$ Card.EnchantedBy | Secondary$ True | Enchanted artifact can't attack or block, and its activated abilities can't be activated.
 S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | Description$ Enchanted artifact can't attack or block, and its activated abilities can't be activated.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block.
 Oracle:Enchant artifact\nEnchanted artifact can't attack or block, and its activated abilities can't be activated.
