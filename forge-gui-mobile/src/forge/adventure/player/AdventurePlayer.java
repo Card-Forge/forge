@@ -654,8 +654,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void addCard(PaperCard card) {
-        cards.add(card);
-        newCards.add(card);
+        addCard(card, 1);
+    }
+
+    public void addCard(PaperCard card, int amount) {
+        cards.add(card, amount);
+        newCards.add(card, amount);
     }
 
     public void addReward(Reward reward) {

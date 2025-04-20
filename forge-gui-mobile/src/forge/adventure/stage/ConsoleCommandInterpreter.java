@@ -14,6 +14,7 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
+import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -59,7 +60,7 @@ public class ConsoleCommandInterpreter {
     }
 
     private String[] splitOnSpace(String text) {
-        List<String> matchList = new ArrayList<String>();
+        List<String> matchList = new ArrayList<>();
         Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
         Matcher regexMatcher = regex.matcher(text);
         while (regexMatcher.find()) {
@@ -210,20 +211,56 @@ public class ConsoleCommandInterpreter {
             return "Got out";
         });
         registerCommand(new String[]{"give", "card"}, s -> {
-            //TODO: Specify optional amount.
             if (s.length < 1) return "Command needs 1 parameter: Card name.";
-            PaperCard card = StaticData.instance().getCommonCards().getCard(s[0]);
+            PaperCard card = StaticData.instance().fetchCard(s[0]);
             if (card == null) return "Cannot find card: " + s[0];
+            if(s.length >= 2) {
+                try {
+                    int amount = Integer.parseInt(s[1]);
+                    Current.player().addCard(card, amount);
+                    return String.format("Added %d cards: %s", amount, card.getName());
+                }
+                catch(NumberFormatException ignored) {}
+            }
             Current.player().addCard(card);
-            return "Added card: " + s[0];
+            return "Added card: " + card.getName();
         });
         registerCommand(new String[]{"give", "nosell", "card"}, s -> {
-            //TODO: Specify optional amount.
             if (s.length < 1) return "Command needs 1 parameter: Card name.";
-            PaperCard card = StaticData.instance().getCommonCards().getCard(s[0]);
+            PaperCard card = StaticData.instance().fetchCard(s[0]);
             if (card == null) return "Cannot find card: " + s[0];
+            if(s.length >= 2) {
+                try {
+                    int amount = Integer.parseInt(s[1]);
+                    Current.player().addCard(card.getNoSellVersion(), amount);
+                    return String.format("Added %d cards: %s", amount, card.getName());
+                }
+                catch(NumberFormatException ignored) {}
+            }
             Current.player().addCard(card.getNoSellVersion());
-            return "Added card: " + s[0];
+            return "Added card: " + card.getName();
+        });
+        registerCommand(new String[]{"give", "print"}, s -> {
+            if (s.length < 2) return "Command needs 2 parameters: Set code, collector number.";
+            CardEdition edition = StaticData.instance().getCardEdition(s[0]);
+            if (edition == null) return "Cannot find edition: " + s[0];
+            CardEdition.CardInSet cis = edition.getCardFromCollectorNumber(s[1]);
+            if (cis == null) return String.format("Set '%s' does not have a card with collector number '%s'.", edition.getName(), s[1]);
+            PaperCard card = StaticData.instance().fetchCard(cis.name, edition.getCode(), cis.collectorNumber);
+            if(card == null) {
+                //Found in the set, not supported.
+                return String.format("Failed to fetch (%s, %s, %s) - Not currently supported.", cis.name, edition.getCode(), cis.collectorNumber);
+            }
+            if(s.length >= 3) {
+                try {
+                    int amount = Integer.parseInt(s[2]);
+                    Current.player().addCard(card, amount);
+                    return String.format("Added %d cards: %s", amount, card.getName());
+                }
+                catch(NumberFormatException ignored) {}
+            }
+            Current.player().addCard(card);
+            return "Added card: "+ card.getName();
         });
         registerCommand(new String[]{"give", "item"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Item name.";
