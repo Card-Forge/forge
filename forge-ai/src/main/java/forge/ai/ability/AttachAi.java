@@ -834,7 +834,27 @@ public class AttachAi extends SpellAbilityAi {
         int totPower = 0;
         final List<String> keywords = new ArrayList<>();
 
+        boolean cantAttack = false;
+        boolean cantBlock = false;
+
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
+            if (stAbility.checkMode(StaticAbilityMode.CantAttack)) {
+                String valid = stAbility.getParam("ValidCard");
+                if (valid.contains(stCheck) || valid.contains("AttachedBy")) {
+                    cantAttack = true;
+                }
+            } else if (stAbility.checkMode(StaticAbilityMode.CantBlock)) {
+                String valid = stAbility.getParam("ValidCard");
+                if (valid.contains(stCheck) || valid.contains("AttachedBy")) {
+                    cantBlock = true;
+                }
+            } else if (stAbility.checkMode(StaticAbilityMode.CantBlockBy)) {
+                String valid = stAbility.getParam("ValidBlocker");
+                if (valid.contains(stCheck) || valid.contains("AttachedBy")) {
+                    cantBlock = true;
+                }
+            }
+
             if (!stAbility.checkMode(StaticAbilityMode.Continuous)) {
                 continue;
             }
@@ -886,6 +906,12 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList, c -> containsUsefulCurseKeyword(keywords, c, sa));
         } else if (totPower < 0) {
             prefList = CardLists.filter(prefList, c -> c.getNetPower() > 0 && ComputerUtilCombat.canAttackNextTurn(c));
+        }
+
+        if (cantAttack) {
+            prefList = CardLists.filter(prefList, c -> c.isCreature() && ComputerUtilCombat.canAttackNextTurn(c));
+        } else if (cantBlock) { // TODO better can block filter?
+            prefList = CardLists.filter(prefList, c -> c.isCreature() && !ComputerUtilCard.isUselessCreature(ai, c));
         }
 
         //some auras aren't useful in multiples
