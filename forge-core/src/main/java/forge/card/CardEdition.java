@@ -566,7 +566,6 @@ public final class CardEdition implements Comparable<CardEdition> {
             it should also match the Un-set and older alternate art cards
             like Merseine from FEM.
              */
-            // Collector numbers now should allow hyphens for Planeswalker Championship Promos
             //"(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
             /*  Ideally we'd use the named group above, but Android 6 and
                 earlier don't appear to support named groups.
@@ -580,7 +579,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                     * functional variant name - grouping #9
              */
 //                "(^(.?[0-9A-Z]+.?))?(([SCURML]) )?(.*)$"
-                    "(^(.?[0-9A-Z-]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@\\$]*)( @([^\\$]*))?( \\$(.+))?$"
+                    "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@\\$]*)( @([^\\$]*))?( \\$(.+))?$"
             );
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
