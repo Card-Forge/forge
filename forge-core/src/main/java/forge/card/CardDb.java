@@ -138,8 +138,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         public static String compose(String cardName, String setCode, String collectorNumber) {
             String requestInfo = compose(cardName, setCode);
-            if(collectorNumber == null || collectorNumber.isEmpty())
-                return requestInfo;
             // CollectorNumber will be wrapped in square brackets
             collectorNumber = preprocessCollectorNumber(collectorNumber);
             return requestInfo + NameSetSeparator + collectorNumber;
