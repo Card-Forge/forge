@@ -417,6 +417,17 @@ public final class CardEdition implements Comparable<CardEdition> {
         return this.cardsInSetLookupMap.get(cardName);
     }
 
+    public CardInSet getCardFromCollectorNumber(String collectorNumber) {
+        if(collectorNumber == null || collectorNumber.isEmpty())
+            return null;
+        for(CardInSet c : this.cardsInSet) {
+            //Could build a map for this one too if it's used for more than one-offs.
+            if (c.collectorNumber.equalsIgnoreCase(collectorNumber))
+                return c;
+        }
+        return null;
+    }
+
     public boolean isRebalanced(String cardName) {
         for (CardInSet cis : getRebalancedCards()) {
             if (cis.name.equals(cardName)) {

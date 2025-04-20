@@ -249,6 +249,15 @@ public class StaticData {
     }
 
     /**
+     * Retrieve a PaperCard by looking at all available card databases for any matching print.
+     * @param cardName The name of the card
+     * @return PaperCard instance found in one of the available CardDb databases, or <code>null</code> if not found.
+     */
+    public PaperCard fetchCard(final String cardName) {
+        return fetchCard(cardName, null, null);
+    }
+
+    /**
      * Retrieve a PaperCard by looking at all available card databases;
      * @param cardName The name of the card
      * @param setCode The card Edition code
