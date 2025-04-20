@@ -3,40 +3,41 @@ Code=PWCS
 Date=2019-10-01
 Name=Planeswalker Championship Promos
 Type=Promo
+CardLang=ja
 ScryfallCode=PWCS
 
 [cards]
-20191 U Pteramander @Simon Dominic
-20192 R Experimental Frenzy @Simon Dominic
-20193 M Vraska, Golgari Queen @Magali Villeneuve
-20201 U Narset, Parter of Veils @Magali Villeneuve
-20202 R Nissa, Who Shakes the World @Chris Rallis
-20203 M Liliana, Dreadhorde General @Chris Rallis
-20204 U Mystical Dispute @Ekaterina Burmak
-20205 R Fae of Wishes @Magali Villeneuve
-20206 M Elspeth, Sun's Nemesis @Livia Prima
-20211 M Basri Ket @Takayama Toshiaki
-20212 U Seasoned Hallowblade @Keiji Hida
-20213 R Vito, Thorn of the Dusk Rose @Areku Nishiki
-20214 U Saw It Coming @Anato Finnstark
-20215 M Kaya the Inexorable @Jason A. Engle
-20216 R Faceless Haven @Pablo Mendoza
-20221 M Grand Master of Flowers @Takayama Toshiaki
-20222 R Adult Gold Dragon @Kotakan
-20223 U Krydle of Baldur's Gate @Sansyu
-20224 M The Wandering Emperor @Takayuki Futami
-20225 R Farewell @SOFT_MEN
-20226 U Banishing Slash @Ruiko Nakamura
-20231 M Elspeth Resplendent @Areku Nishiki
-20232 R Giada, Font of Hope @Umiu Geso
-20233 M Liliana of the Veil @Yuichi Murakami
-20234 R Braids, Arisen Nightmare @Daisuke Tatsuma
-20235 U Phyrexian Rager @Brock Grossman
-20241 M Realm-Scorcher Hellkite @Susumu Kuroi
-20242 R Ruby, Daring Tracker @M.Matsumoto
-20243 R Glimpse the Core @Susumu Kuroi
-20245 M Saheeli, the Sun's Brilliance @Ayuko
-20246 M Kaya, Spirits' Justice @Areku Nishiki
-20247 R Lightning Helix @Shiyu
-20248 R Aven Interrupter @TAPIOCA
-20249 M Jace Reawakened @Hozan Shinomaru
+2019-1 U Pteramander @Simon Dominic
+2019-2 R Experimental Frenzy @Simon Dominic
+2019-3 M Vraska, Golgari Queen @Magali Villeneuve
+2020-1 U Narset, Parter of Veils @Magali Villeneuve
+2020-2 R Nissa, Who Shakes the World @Chris Rallis
+2020-3 M Liliana, Dreadhorde General @Chris Rallis
+2020-4 U Mystical Dispute @Ekaterina Burmak
+2020-5 R Fae of Wishes @Magali Villeneuve
+2020-6 M Elspeth, Sun's Nemesis @Livia Prima
+2021-1 M Basri Ket @Takayama Toshiaki
+2021-2 U Seasoned Hallowblade @Keiji Hida
+2021-3 R Vito, Thorn of the Dusk Rose @Areku Nishiki
+2021-4 U Saw It Coming @Anato Finnstark
+2021-5 M Kaya the Inexorable @Jason A. Engle
+2021-6 R Faceless Haven @Pablo Mendoza
+2022-1 M Grand Master of Flowers @Takayama Toshiaki
+2022-2 R Adult Gold Dragon @Kotakan
+2022-3 U Krydle of Baldur's Gate @Sansyu
+2022-4 M The Wandering Emperor @Takayuki Futami
+2022-5 R Farewell @SOFT_MEN
+2022-6 U Banishing Slash @Ruiko Nakamura
+2023-1 M Elspeth Resplendent @Areku Nishiki
+2023-2 R Giada, Font of Hope @Umiu Geso
+2023-3 M Liliana of the Veil @Yuichi Murakami
+2023-4 R Braids, Arisen Nightmare @Daisuke Tatsuma
+2023-5 U Phyrexian Rager @Brock Grossman
+2024-1 M Realm-Scorcher Hellkite @Susumu Kuroi
+2024-2 R Ruby, Daring Tracker @M.Matsumoto
+2024-3 R Glimpse the Core @Susumu Kuroi
+2024-5 M Saheeli, the Sun's Brilliance @Ayuko
+2024-6 M Kaya, Spirits' Justice @Areku Nishiki
+2024-7 R Lightning Helix @Shiyu
+2024-8 R Aven Interrupter @TAPIOCA
+2024-9 M Jace Reawakened @Hozan Shinomaru
