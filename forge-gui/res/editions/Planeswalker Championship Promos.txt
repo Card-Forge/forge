@@ -33,11 +33,13 @@ ScryfallCode=PWCS
 2023-3 M Liliana of the Veil @Yuichi Murakami
 2023-4 R Braids, Arisen Nightmare @Daisuke Tatsuma
 2023-5 U Phyrexian Rager @Brock Grossman
-2024-1 M Realm-Scorcher Hellkite @Susumu Kuroi
-2024-2 R Ruby, Daring Tracker @M.Matsumoto
-2024-3 R Glimpse the Core @Susumu Kuroi
-2024-5 M Saheeli, the Sun's Brilliance @Ayuko
-2024-6 M Kaya, Spirits' Justice @Areku Nishiki
-2024-7 R Lightning Helix @Shiyu
-2024-8 R Aven Interrupter @TAPIOCA
-2024-9 M Jace Reawakened @Hozan Shinomaru
+2024-01 M Realm-Scorcher Hellkite @Susumu Kuroi
+2024-02 R Ruby, Daring Tracker @M.Matsumoto
+2024-03 R Glimpse the Core @Susumu Kuroi
+2024-05 M Saheeli, the Sun's Brilliance @Ayuko
+2024-06 M Kaya, Spirits' Justice @Areku Nishiki
+2024-07 R Lightning Helix @Shiyu
+2024-08 R Aven Interrupter @TAPIOCA
+2024-09 M Jace Reawakened @Hozan Shinomaru
+2025-1 R Get Lost @Oka Yuka
+2025-2 M Nissa, Resurgent Animist @Hitowa
