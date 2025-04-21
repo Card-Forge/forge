@@ -844,9 +844,9 @@ public class StaticData {
             futures.clear();
 
             // TODO: Audit token images here...
-            for(Map.Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
+            for(Map.Entry<String, Collection<CardEdition.TokenInSet>> tokenEntry : e.getTokens().asMap().entrySet()) {
                 final String name = tokenEntry.getKey();
-                final int artIndex = tokenEntry.getValue();
+                final int artIndex = tokenEntry.getValue().size();
                 try {
                     PaperToken token = getAllTokens().getToken(name, e.getCode());
                     if (token == null) {

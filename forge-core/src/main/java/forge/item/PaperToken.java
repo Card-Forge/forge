@@ -109,7 +109,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
         this.edition = edition0;
 
         if (edition != null && edition.getTokens().containsKey(imageFileName)) {
-            this.artIndex = edition.getTokens().get(imageFileName);
+            this.artIndex = edition.getTokens().get(imageFileName).size();
         }
 
         if (imageFileName == null) {
