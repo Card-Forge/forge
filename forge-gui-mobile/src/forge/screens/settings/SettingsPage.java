@@ -807,9 +807,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             w = h;
             boolean checked = false;
             if(pref instanceof FPref) {
-                FModel.getPreferences().getPrefBoolean((FPref) pref);
+                checked = FModel.getPreferences().getPrefBoolean((FPref) pref);
             } else if(pref instanceof ForgeNetPreferences.FNetPref) {
-                FModel.getNetPreferences().getPrefBoolean((ForgeNetPreferences.FNetPref) pref);
+                checked = FModel.getNetPreferences().getPrefBoolean((ForgeNetPreferences.FNetPref) pref);
             }
             FCheckBox.drawCheckBox(g, SettingsScreen.DESC_COLOR, color, checked, x, y, w, h);
         }
