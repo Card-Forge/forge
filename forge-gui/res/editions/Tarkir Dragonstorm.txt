@@ -514,18 +514,18 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 1 Eerie Ultimatum|SPG
 
 [tokens]
-b_2_2_zombie_druid
-c_a_treasure_sac
-g_5_5_elephant
-r_1_1_goblin
-r_1_1_warrior
-r_4_4_dragon_flying
-reliquary_dragon
-w_1_1_bird_flying
-w_1_1_monk_prowess
-w_1_1_soldier
-w_1_1_spirit
-w_2_2_soldier
-w_2_2_spirit
-w_3_3_spirit
-w_x_x_spirit
+2 w_1_1_bird_flying @Camille Alquier
+3 w_1_1_monk_prowess @Elizabeth Peiró
+4 w_1_1_soldier @Eelis Kyttanen
+5 w_2_2_soldier @Nathaniel Himawan
+6 w_1_1_spirit @Julie Dillon
+7 w_2_2_spirit @Josiah "Jo" Cameron
+8 w_3_3_spirit @Elizabeth Peiró
+9 w_x_x_spirit @Zara Alfonso
+10 b_2_2_zombie_druid @Andrea Piparo
+11 r_4_4_dragon_flying @Lars Grant-West
+12 r_1_1_goblin @Paolo Parente
+13 r_1_1_warrior @Forrest Imel
+14 g_5_5_elephant @Deruchenko Alexander
+15 reliquary_dragon @Andrew Mar
+16 c_a_treasure_sac @Gaboleps

@@ -306,7 +306,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         String collectorNumber = collectorNumber0;
         if (collectorNumber.equals(NO_COLLECTOR_NUMBER))
             collectorNumber = null;
-        return CardEdition.CardInSet.getSortableCollectorNumber(collectorNumber);
+        return CardEdition.getSortableCollectorNumber(collectorNumber);
     }
 
     private String sortableCNKey = null;
