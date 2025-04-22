@@ -1,8 +1,13 @@
 Name:Imposing Grandeur
 ManaCost:4 R
 Types:Sorcery
-A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ Each player may discard their hand and draw cards equal to the greatest mana value of a commander they own on the battlefield or in the command zone.
-SVar:DBDraw:DB$ Draw | UnlessCost$ Discard<1/Hand> | UnlessPayer$ Remembered | UnlessSwitched$ True | Defined$ Remembered | NumCards$ X
+A:SP$ GenericChoice | TempRemember$ Chooser | ShowChoice$ ExceptSelf | Defined$ Player | Choices$ Discard,No | SubAbility$ DBGrandWheel | StackDescription$ REP Each player may_{p:Player} may each & they own_that player owns | SpellDescription$ Each player may discard their hand and draw cards equal to the greatest mana value of a commander they own on the battlefield or in the command zone.
+SVar:Discard:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Discard | SpellDescription$ I will discard my hand.
+SVar:No:DB$ Pump | SpellDescription$ I will NOT discard my hand.
+SVar:DBGrandWheel:DB$ RepeatEach | RepeatPlayers$ Player.NotedForDiscard | RepeatSubAbility$ DBWheelDiscard | SubAbility$ DBClearNotes
+SVar:DBWheelDiscard:DB$ Discard | Mode$ Hand | Defined$ Player.IsRemembered | SubAbility$ DBWheelDraw
+SVar:DBWheelDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered
+SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Discard | StackDescription$ None
 SVar:X:Count$ValidBattlefield,Command Card.IsCommander+RememberedPlayerOwn$GreatestCMC
 AI:RemoveDeck:NonCommander
 DeckHas:Ability$Discard
