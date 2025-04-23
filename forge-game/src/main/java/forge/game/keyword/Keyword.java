@@ -114,7 +114,7 @@ public enum Keyword {
     LANDWALK("Landwalk", KeywordWithType.class, true, "This creature is unblockable as long as defending player controls {1:%s}."),
     LEVEL_UP("Level up", KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK("Lifelink", SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
-    LIVING_METAL("Living metal", SimpleKeyword.class, true, "As long as it's your turn, this Vehicle is also a creature."),
+    LIVING_METAL("Living metal", SimpleKeyword.class, true, "During your turn, this Vehicle is also a creature."),
     LIVING_WEAPON("Living Weapon", SimpleKeyword.class, true, "When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it."),
     MADNESS("Madness", KeywordWithCost.class, false, "If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard."),
     MELEE("Melee", SimpleKeyword.class, false, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat."),
