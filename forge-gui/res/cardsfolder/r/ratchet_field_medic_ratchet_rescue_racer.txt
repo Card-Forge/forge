@@ -27,4 +27,4 @@ T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl+!token | Origin$ Battlefie
 SVar:TrigConvert:DB$ SetState | Mode$ Transform
 DeckHas:Ability$LifeGain
 DeckHints:Type$Artifact
-Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nLifelink\nWhenever one or more nontoken artifacts you control are put into a graveyard from the battlefield, convert Ratchet. This ability triggers only once each turn.
+Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nLifelink\nWhenever one or more nontoken artifacts you control are put into a graveyard from the battlefield, convert Ratchet. This ability triggers only once each turn.
