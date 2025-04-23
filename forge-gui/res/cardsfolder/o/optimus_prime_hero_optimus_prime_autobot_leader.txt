@@ -26,4 +26,4 @@ SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Trample | SubAbility$ DBDelayed
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ DamageDone | RememberObjects$ Remembered | ValidSource$ Card.IsTriggerRemembered | ValidTarget$ Player | CombatDamage$ True | ThisTurn$ True | Execute$ TrigConvert | TriggerDescription$ When that creature deals combat damage to a player this turn, convert NICKNAME.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nTrample\nWhenever you attack, bolster 2. The chosen creature gains trample until end of turn. When that creature deals combat damage to a player this turn, convert Optimus Prime.
+Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nTrample\nWhenever you attack, bolster 2. The chosen creature gains trample until end of turn. When that creature deals combat damage to a player this turn, convert Optimus Prime.
