@@ -165,18 +165,60 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
     }
 
+    private static final Map<String, String> sortableCollNumberLookup = new HashMap<>();
+    /**
+     * This method implements the main strategy to allow for natural ordering of collectorNumber
+     * (i.e. "1" < "10"), overloading the default lexicographic order (i.e. "10" < "1").
+     * Any non-numerical parts in the input collectorNumber will be also accounted for, and attached to the
+     * resulting sorting key, accordingly.
+     *
+     * @param collectorNumber: Input collectorNumber tro transform in a Sorting Key
+     * @return A 5-digits zero-padded collector number + any non-numerical parts attached.
+     */
+    public static String getSortableCollectorNumber(final String collectorNumber){
+        String inputCollNumber = collectorNumber;
+        if (collectorNumber == null || collectorNumber.isEmpty())
+            inputCollNumber = "50000";  // very big number of 5 digits to have them in last positions
+
+        String matchedCollNr = sortableCollNumberLookup.getOrDefault(inputCollNumber, null);
+        if (matchedCollNr != null)
+            return  matchedCollNr;
+
+        // Now, for proper sorting, let's zero-pad the collector number (if integer)
+        int collNr;
+        String sortableCollNr;
+        try {
+            collNr = Integer.parseInt(inputCollNumber);
+            sortableCollNr = String.format("%05d", collNr);
+        } catch (NumberFormatException ex) {
+            String nonNumSub = inputCollNumber.replaceAll("[0-9]", "");
+            String onlyNumSub = inputCollNumber.replaceAll("[^0-9]", "");
+            try {
+                collNr = Integer.parseInt(onlyNumSub);
+            } catch (NumberFormatException exon) {
+                collNr = 0; // this is the case of ONLY-letters collector numbers
+            }
+            if ((collNr > 0) && (inputCollNumber.startsWith(onlyNumSub))) // e.g. 12a, 37+, 2018f,
+                sortableCollNr = String.format("%05d", collNr) + nonNumSub;
+            else // e.g. WS6, S1
+                sortableCollNr = nonNumSub + String.format("%05d", collNr);
+        }
+        sortableCollNumberLookup.put(inputCollNumber, sortableCollNr);
+        return sortableCollNr;
+    }
+
     public static class CardInSet implements Comparable<CardInSet> {
-        public final CardRarity rarity;
         public final String collectorNumber;
         public final String name;
         public final String artistName;
+        public final CardRarity rarity;
         public final String functionalVariantName;
 
         public CardInSet(final String name, final String collectorNumber, final CardRarity rarity, final String artistName, final String functionalVariantName) {
             this.name = name;
             this.collectorNumber = collectorNumber;
-            this.rarity = rarity;
             this.artistName = artistName;
+            this.rarity = rarity;
             this.functionalVariantName = functionalVariantName;
         }
 
@@ -202,48 +244,6 @@ public final class CardEdition implements Comparable<CardEdition> {
             return sb.toString();
         }
 
-        private static final Map<String, String> sortableCollNumberLookup = new HashMap<>();
-        /**
-         * This method implements the main strategy to allow for natural ordering of collectorNumber
-         * (i.e. "1" < "10"), overloading the default lexicographic order (i.e. "10" < "1").
-         * Any non-numerical parts in the input collectorNumber will be also accounted for, and attached to the
-         * resulting sorting key, accordingly.
-         *
-         * @param collectorNumber: Input collectorNumber tro transform in a Sorting Key
-         * @return A 5-digits zero-padded collector number + any non-numerical parts attached.
-         */
-        public static String getSortableCollectorNumber(final String collectorNumber){
-            String inputCollNumber = collectorNumber;
-            if (collectorNumber == null || collectorNumber.isEmpty())
-                inputCollNumber = "50000";  // very big number of 5 digits to have them in last positions
-
-            String matchedCollNr = sortableCollNumberLookup.getOrDefault(inputCollNumber, null);
-            if (matchedCollNr != null)
-                return  matchedCollNr;
-
-            // Now, for proper sorting, let's zero-pad the collector number (if integer)
-            int collNr;
-            String sortableCollNr;
-            try {
-                collNr = Integer.parseInt(inputCollNumber);
-                sortableCollNr = String.format("%05d", collNr);
-            } catch (NumberFormatException ex) {
-                String nonNumSub = inputCollNumber.replaceAll("[0-9]", "");
-                String onlyNumSub = inputCollNumber.replaceAll("[^0-9]", "");
-                try {
-                    collNr = Integer.parseInt(onlyNumSub);
-                } catch (NumberFormatException exon) {
-                    collNr = 0; // this is the case of ONLY-letters collector numbers
-                }
-                if ((collNr > 0) && (inputCollNumber.startsWith(onlyNumSub))) // e.g. 12a, 37+, 2018f,
-                    sortableCollNr = String.format("%05d", collNr) + nonNumSub;
-                else // e.g. WS6, S1
-                    sortableCollNr = nonNumSub + String.format("%05d", collNr);
-            }
-            sortableCollNumberLookup.put(inputCollNumber, sortableCollNr);
-            return sortableCollNr;
-        }
-
         @Override
         public int compareTo(CardInSet o) {
             final int nameCmp = name.compareToIgnoreCase(o.name);
@@ -259,6 +259,44 @@ public final class CardEdition implements Comparable<CardEdition> {
             return rarity.compareTo(o.rarity);
         }
     }
+
+    public static class TokenInSet implements Comparable<TokenInSet> {
+        public final String collectorNumber;
+        public final String name;
+        public final String artistName;
+
+        public TokenInSet(final String name, final String collectorNumber, final String artistName) {
+            this.name = name;
+            this.collectorNumber = collectorNumber;
+            this.artistName = artistName;
+        }
+
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            if (collectorNumber != null) {
+                sb.append(collectorNumber);
+                sb.append(' ');
+            }
+            sb.append(name);
+            if (artistName != null) {
+                sb.append(" @");
+                sb.append(artistName);
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int compareTo(TokenInSet o) {
+            final int nameCmp = name.compareToIgnoreCase(o.name);
+            if (0 != nameCmp) {
+                return nameCmp;
+            }
+            String thisCollNr = getSortableCollectorNumber(collectorNumber);
+            String othrCollNr = getSortableCollectorNumber(o.collectorNumber);
+            return thisCollNr.compareTo(othrCollNr);
+        }
+    }
+
 
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -302,7 +340,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     private final ListMultimap<String, CardInSet> cardMap;
     private final List<CardInSet> cardsInSet;
-    private final Map<String, Integer> tokenNormalized;
+    private final ListMultimap<String, TokenInSet> tokenMap;
     // custom print sheets that will be loaded lazily
     private final Map<String, List<String>> customPrintSheetsToParse;
 
@@ -310,21 +348,21 @@ public final class CardEdition implements Comparable<CardEdition> {
     private SealedTemplate boosterTpl = null;
     private final Map<String, SealedTemplate> boosterTemplates = new HashMap<>();
 
-    private CardEdition(ListMultimap<String, CardInSet> cardMap, Map<String, Integer> tokens, Map<String, List<String>> customPrintSheetsToParse) {
+    private CardEdition(ListMultimap<String, CardInSet> cardMap, ListMultimap<String, TokenInSet> tokens, Map<String, List<String>> customPrintSheetsToParse) {
         this.cardMap = cardMap;
         this.cardsInSet = new ArrayList<>(cardMap.values());
         Collections.sort(cardsInSet);
-        this.tokenNormalized = tokens;
+        this.tokenMap = tokens;
         this.customPrintSheetsToParse = customPrintSheetsToParse;
     }
 
-    private CardEdition(CardInSet[] cards, Map<String, Integer> tokens) {
+    private CardEdition(CardInSet[] cards, ListMultimap<String, TokenInSet> tokens) {
         List<CardInSet> cardsList = Arrays.asList(cards);
         this.cardMap = ArrayListMultimap.create();
         this.cardMap.replaceValues("cards", cardsList);
         this.cardsInSet = new ArrayList<>(cardsList);
         Collections.sort(cardsInSet);
-        this.tokenNormalized = tokens;
+        this.tokenMap = tokens;
         this.customPrintSheetsToParse = new HashMap<>();
     }
 
@@ -342,7 +380,7 @@ public final class CardEdition implements Comparable<CardEdition> {
      * @param cards the cards in the set
      */
     private CardEdition(String date, String code, String code2, Type type, String name, FoilType foil, CardInSet[] cards) {
-        this(cards, new HashMap<>());
+        this(cards, ArrayListMultimap.create());
         this.code  = code;
         this.code2 = code2;
         this.type  = type;
@@ -417,6 +455,17 @@ public final class CardEdition implements Comparable<CardEdition> {
         return this.cardsInSetLookupMap.get(cardName);
     }
 
+    public CardInSet getCardFromCollectorNumber(String collectorNumber) {
+        if(collectorNumber == null || collectorNumber.isEmpty())
+            return null;
+        for(CardInSet c : this.cardsInSet) {
+            //Could build a map for this one too if it's used for more than one-offs.
+            if (c.collectorNumber.equalsIgnoreCase(collectorNumber))
+                return c;
+        }
+        return null;
+    }
+
     public boolean isRebalanced(String cardName) {
         for (CardInSet cis : getRebalancedCards()) {
             if (cis.name.equals(cardName)) {
@@ -428,7 +477,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
-    public Map<String, Integer> getTokens() { return tokenNormalized; }
+    public Multimap<String, TokenInSet> getTokens() { return tokenMap; }
 
     @Override
     public int compareTo(final CardEdition o) {
@@ -583,9 +632,17 @@ public final class CardEdition implements Comparable<CardEdition> {
                     "(^(.?[0-9A-Z-]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@\\$]*)( @([^\\$]*))?( \\$(.+))?$"
             );
 
+            final Pattern tokenPattern = Pattern.compile(
+                    /*
+                     * cnum - grouping #2
+                     * name - grouping #3
+                     * artist name - grouping #5
+                     */
+                    "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?([^@]*)( @(.*))?$"
+            );
+
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
             List<BoosterSlot> boosterSlots = null;
-            Map<String, Integer> tokenNormalized = new HashMap<>();
             Map<String, List<String>> customPrintSheetsToParse = new HashMap<>();
             List<String> editionSectionsWithCollectorNumbers = EditionSectionWithCollectorNumbers.getNames();
 
@@ -630,21 +687,27 @@ public final class CardEdition implements Comparable<CardEdition> {
                 }
             }
 
+            ListMultimap<String, TokenInSet> tokenMap = ArrayListMultimap.create();
             // parse tokens section
             if (contents.containsKey("tokens")) {
                 for (String line : contents.get("tokens")) {
                     if (StringUtils.isBlank(line))
                         continue;
+                    Matcher matcher = tokenPattern.matcher(line);
 
-                    if (!tokenNormalized.containsKey(line)) {
-                        tokenNormalized.put(line, 1);
-                    } else {
-                        tokenNormalized.put(line, tokenNormalized.get(line) + 1);
+                    if (!matcher.matches()) {
+                        continue;
                     }
+
+                    String collectorNumber = matcher.group(2);
+                    String cardName = matcher.group(3);
+                    String artistName = matcher.group(5);
+                    TokenInSet tis = new TokenInSet(cardName, collectorNumber, artistName);
+                    tokenMap.put(cardName, tis);
                 }
             }
 
-            CardEdition res = new CardEdition(cardMap, tokenNormalized, customPrintSheetsToParse);
+            CardEdition res = new CardEdition(cardMap, tokenMap, customPrintSheetsToParse);
             res.boosterSlots = boosterSlots;
             // parse metadata section
             res.name  = metadata.get("name");

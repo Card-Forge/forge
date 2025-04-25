@@ -28,4 +28,4 @@ K:Haste
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigDelTrig | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, convert it at end of combat.
 SVar:TrigDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigConvert | TriggerDescription$ Convert NICKNAME at end of combat.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform
-Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nFirst strike, haste\nWhenever Slicer deals combat damage to a player, convert it at end of combat.
+Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nFirst strike, haste\nWhenever Slicer deals combat damage to a player, convert it at end of combat.
