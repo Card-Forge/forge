@@ -500,7 +500,7 @@ public class CombatUtil {
         if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block.")) {
             return false;
         }
-        if (!StaticAbilityCantAttackBlock.cantBlock(blocker)) {
+        if (StaticAbilityCantAttackBlock.cantBlock(blocker)) {
             return false;
         }
 
