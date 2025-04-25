@@ -6765,7 +6765,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
             String s = "Mode$ Continuous | AffectedDefined$ RememberedCard | EffectZone$ Command | AddKeyword$ Menace | AddStaticAbility$ SuspectedCantBlockBy";
             StaticAbility suspectedStatic = suspectedEffect.addStaticAbility(s);
-            String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.";
+            String effect = "Mode$ CantBlock | ValidCard$ Creature.Self | Description$ CARDNAME can't block.";
             suspectedStatic.setSVar("SuspectedCantBlockBy", effect);
 
             GameCommand until = SpellAbilityEffect.exileEffectCommand(getGame(), suspectedEffect);

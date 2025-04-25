@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Insect Mutant
 PT:2/2
 K:Flying
-S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Creature.Self | Description$ CARDNAME can't block.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigRadiation | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, they get that many rad counters.
 SVar:TrigRadiation:DB$ Radiation | Defined$ TriggeredTarget | Num$ X
 SVar:X:TriggerCount$DamageAmount

@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Human
 PT:3/1
 K:Squad:2
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 A:AB$ Pump | PrecostDesc$ Endurant — | Cost$ PayLife<3> | KW$ Indestructible | Defined$ Self | SpellDescription$ CARDNAME gains indestructible until end of turn.
 DeckHas:Ability$Token
 Oracle:Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters, create that many tokens that are copies of it.)\nArco-Flagellant can't block.\nEndurant — Pay 3 life: Arco-Flagellant gains indestructible until end of turn.

@@ -2,7 +2,7 @@ Name:Vengeful Strangler
 ManaCost:1 B
 Types:Creature Human Rogue
 PT:2/1
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control attached to target creature or planeswalker an opponent controls.
 SVar:TrigChoose:DB$ Pump | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | IsCurse$ True | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ParentTarget | Transformed$ True | GainControl$ True | AILogic$ Curse

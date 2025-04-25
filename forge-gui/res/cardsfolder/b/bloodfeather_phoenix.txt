@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Phoenix
 PT:2/2
 K:Flying
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 T:Mode$ DamageDone | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | ValidTarget$ Opponent,Battle | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever an instant or sorcery spell you control deals damage to an opponent or battle, you may pay {R}. If you do, return CARDNAME from your graveyard to the battlefield. It gains haste until end of turn.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ R | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Defined$ Self
