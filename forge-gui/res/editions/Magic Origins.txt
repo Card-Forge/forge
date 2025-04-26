@@ -304,14 +304,14 @@ ScryfallCode=ORI
 288 R Terra Stomper @Goran Josic
 
 [tokens]
-ashaya_the_awoken_world
-w_4_4_angel_flying
-w_2_2_knight_vigilance
-w_1_1_soldier
-b_5_5_demon_flying
-b_2_2_zombie
-r_1_1_goblin
-g_2_2_elemental
-g_1_1_elf_warrior
-c_1_1_a_thopter_flying
-c_1_1_a_thopter_flying
+1 w_4_4_angel_flying @Cyril Van Der Haegen
+2 w_2_2_knight_vigilance @Matt Stewart
+3 w_1_1_soldier @Steve Prescott
+4 b_5_5_demon_flying @Kev Walker
+5 b_2_2_zombie @Lucas Graciano
+6 r_1_1_goblin @Brandon Kitkouski
+7 ashaya_the_awoken_world @Unknown
+8 g_2_2_elemental @Marco Nelor
+9 g_1_1_elf_warrior @William O'Connor
+10 c_1_1_a_thopter_flying @Adam Paquette
+11 c_1_1_a_thopter_flying @Adam Paquette

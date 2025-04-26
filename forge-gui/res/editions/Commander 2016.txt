@@ -360,23 +360,23 @@ ScryfallCode=C16
 351 L Forest @Kev Walker
 
 [tokens]
-c_1_1_spirit
-w_1_1_bird_flying
-w_4_4_elemental_flying
-w_0_1_goat
-w_1_1_soldier
-w_1_1_spirit_flying
-u_2_2_bird_flying
-u_1_1_squid_islandwalk
-u_1_1_a_thopter_flying
-b_0_0_phyrexian_germ
-b_2_2_zombie
-r_1_1_goblin_all_attack
-r_3_3_ogre
-g_3_3_beast
-g_1_1_elf_warrior
-g_1_1_saproling
-g_1_1_saproling
-bg_1_1_worm
-c_x_x_a_phyrexian_horror
-c_1_1_a_myr
+1 c_1_1_spirit @Daniel Ljunggren
+2 w_1_1_bird_flying @Winona Nelson
+3 w_4_4_elemental_flying @Anthony S. Waters
+4 w_0_1_goat @Adam Paquette
+5 w_1_1_soldier @Seb McKinnon
+6 w_1_1_spirit_flying @Mike Sass
+7 u_2_2_bird_flying @Peter Mohrbacher
+8 u_1_1_squid_islandwalk @Jack Wang
+9 u_1_1_a_thopter_flying @Andrew Murray
+10 b_0_0_phyrexian_germ @Igor Kieryluk
+11 b_2_2_zombie @Lucas Graciano
+12 r_1_1_goblin_all_attack @Wayne Reynolds
+13 r_3_3_ogre @Paul Bonner
+14 g_3_3_beast @Jesper Ejsing
+15 g_1_1_elf_warrior @William O'Connor
+16 g_1_1_saproling @Brad Rigney
+16 g_1_1_saproling @Brad Rigney
+18 bg_1_1_worm @Chuck Lukacs
+19 c_x_x_a_phyrexian_horror @Scott Chou
+20 c_1_1_a_myr @Ryan Pancoast

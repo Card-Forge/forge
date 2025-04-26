@@ -591,20 +591,20 @@ A242 U A-Circuit Mender @Hector Ortiz
 1 Wind-Scarred Crag|NEO
 
 [tokens]
-b_1_1_rat_rogue
-c_1_1_a_construct
-c_1_1_pilot_crewbuff
-c_1_1_spirit
-c_a_treasure_sac
-g_1_1_human_monk_g
-g_4_5_spirit
-g_x_x_spirit
-keimi
-mechtitan
-r_2_2_goblin_shaman_treasure
-r_2_2_spirit_menace
-r_3_1_a_construct_haste
-r_5_5_dragon_spirit_flying
-tamiyos_notebook
-u_1_1_ninja_unblockable
-w_2_2_samurai_vigilance
+1 c_1_1_pilot_crewbuff @Mila Pesic
+2 c_1_1_spirit @Brent Hollowell
+3 w_2_2_samurai_vigilance @Gaboleps
+4 u_1_1_ninja_unblockable @Manuel Castañón
+5 b_1_1_rat_rogue @Tomasz Jedruszek
+6 r_3_1_a_construct_haste @Craig J Spearing
+7 r_5_5_dragon_spirit_flying @Andrey Kuzinskiy
+8 r_2_2_goblin_shaman_treasure @Jason Kang
+9 r_2_2_spirit_menace @Helge C. Balzer
+10 g_1_1_human_monk_g @Anastasia Ovchinnikova
+11 g_4_5_spirit @Nicholas Gregory
+12 g_x_x_spirit @Peter Polach
+13 keimi @Milivoj Ćeran
+14 mechtitan @Victor Adame Minguez
+15 c_1_1_a_construct @Sean Murray
+16 tamiyos_notebook @Unknown
+17 c_a_treasure_sac @Yeong-Hao Han

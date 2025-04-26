@@ -314,14 +314,14 @@ ScryfallCode=BFZ
 274a L Forest @Tianhua X
 
 [tokens]
-c_10_10_eldrazi
-c_1_1_eldrazi_scion_sac
-c_1_1_eldrazi_scion_sac
-c_1_1_eldrazi_scion_sac
-w_2_2_knight_ally
-w_1_1_kor_ally
-u_8_8_octopus
-r_5_5_dragon_flying
-r_3_1_elemental_trample_haste
-g_1_1_plant
-rg_5_5_elemental
+1 c_10_10_eldrazi @Jack Wang
+2 c_1_1_eldrazi_scion_sac @Izzy
+3 c_1_1_eldrazi_scion_sac @Izzy
+4 c_1_1_eldrazi_scion_sac @Izzy
+5 w_2_2_knight_ally @Josu Hernaiz
+6 w_1_1_kor_ally @Jeremy Wilson
+7 u_8_8_octopus @Craig J Spearing
+8 r_5_5_dragon_flying @Raymond Swanland
+9 r_3_1_elemental_trample_haste @Victor Adame Minguez
+10 g_1_1_plant @Sam Burley
+11 rg_5_5_elemental @Brad Rigney

@@ -449,21 +449,21 @@ A247 U A-Sigardian Paladin @Slawomir Maniak
 A248 U A-Skull Skaab @Nicholas Gregory
 
 [tokens]
-b_1_1_slug
-b_2_2_zombie
-b_2_3_vampire_flying_lifelink
-c_a_blood_draw
-c_a_treasure_sac
-g_1_1_insect
-g_2_2_wolf
-g_3_1_boar
-gw_1_1_human_soldier_training
-r_1_1_human
-r_3_2_wolf
-r_x_x_dragon_illusion_flying_haste
-u_x_x_zombie
-w_1_1_human
-w_1_1_spirit_flying
-w_4_4_spirit_flying
-w_x_x_spirit_cleric_total_spirits
-wb_1_1_vampire_lifelink
+1 w_1_1_human @Miguel Mercado
+2 w_1_1_spirit_flying @Kim Sokol
+3 w_4_4_spirit_flying @Eelis Kyttanen
+4 w_x_x_spirit_cleric_total_spirits @Jarel Threat
+5 u_x_x_zombie @Dave Kendall
+6 b_1_1_slug @Joe Slucher
+7 b_2_3_vampire_flying_lifelink @Néstor Ossandón Leal
+8 b_2_2_zombie @Chris Cold
+9 r_x_x_dragon_illusion_flying_haste @Andrew Mar
+10 r_1_1_human @Dan Murayama Scott
+11 r_3_2_wolf @Antonio José Manzanedo
+12 g_3_1_boar @Nicholas Gregory
+13 g_1_1_insect @Joe Slucher
+14 g_2_2_wolf @Andrea Radeck
+15 gw_1_1_human_soldier_training @Unknown
+16 wb_1_1_vampire_lifelink @Zoltan Boros
+17 c_a_blood_draw @Miranda Meeks
+18 c_a_treasure_sac @Josu Hernaiz

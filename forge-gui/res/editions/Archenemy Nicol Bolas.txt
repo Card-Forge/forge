@@ -135,9 +135,8 @@ ScryfallCode=E01
 20 C When Will You Learn?
 
 [tokens]
-w_1_1_soldier
-w_1_1_spirit_flying
-b_3_3_horror
-b_2_2_zombie
-g_3_3_beast
-g_4_4_beast
+1 w_1_1_soldier @Steve Prescott
+2 w_1_1_spirit_flying @Ryan Yee
+3 b_3_3_horror @Grzegorz Rutkowski
+4 g_3_3_beast @John Donahue
+5 g_4_4_beast @Steve Prescott

@@ -1076,22 +1076,22 @@ ScryfallCode=PIP
 1068 R War Room @Desmuncubic
 
 [tokens]
-b_2_2_zombie_mutant
-c_1_1_a_thopter_flying
-c_3_3_a_robot
-c_a_clue_draw
-c_a_food_sac
-c_a_food_sac
-c_a_food_sac
-c_a_junk_sac_exileplay
-c_a_treasure_sac
-c_a_treasure_sac
-g_1_1_squirrel
-rw_1_1_soldier_haste
-settlement
-u_0_0_alien
-w_1_1_human_soldier
-w_1_1_soldier
-w_1_1_warrior
-w_2_2_human_knight_artifact_pump
-wasteland_survival_guide
+2 w_2_2_human_knight_artifact_pump @Wayne Wu
+3 w_1_1_human_soldier @Viko Menezes
+4 w_1_1_soldier @Wayne Wu
+5 w_1_1_warrior @Andreia Ugrai
+6 u_0_0_alien @Tomasz Zarucki
+7 b_2_2_zombie_mutant @Bartek Fedyczak
+8 settlement @Mathias Kollros
+9 g_1_1_squirrel @Dan Watson
+10 rw_1_1_soldier_haste @Justine Cruz
+11 c_a_clue_draw @Ashley Mackenzie
+12 c_a_food_sac @David Astruga
+13 c_a_food_sac @David Astruga
+14 c_a_food_sac @David Astruga
+15 c_a_junk_sac_exileplay @Justine Cruz
+16 c_3_3_a_robot @Sergio Cosmai
+17 c_1_1_a_thopter_flying @Victor Harmatiuk
+18 c_a_treasure_sac @Rafater
+19 c_a_treasure_sac @Rafater
+20 wasteland_survival_guide @Sergio Cosmai

@@ -277,9 +277,9 @@ ScryfallCode=DTK
 264 L Forest @Titus Lunter
 
 [tokens]
-w_1_1_warrior
-u_2_2_djinn_monk_flying
-b_2_2_zombie
-b_x_x_zombie_horror
-r_4_4_dragon_flying
-r_1_1_goblin
+1 w_1_1_warrior @Aaron Miller
+2 u_2_2_djinn_monk_flying @Izzy
+3 b_2_2_zombie @Vincent Proce
+4 b_x_x_zombie_horror @Nils Hamm
+5 r_4_4_dragon_flying @Gabor Szikszai
+6 r_1_1_goblin @Mike Bierek

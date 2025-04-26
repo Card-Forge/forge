@@ -479,22 +479,22 @@ A387 U A-Thornmantle Striker @Magali Villeneuve
 2 Woodland Chasm|KHM
 
 [tokens]
-b_2_2_zombie_berserker
-c_a_treasure_sac
-c_e_shard_draw
-g_1_1_elf_warrior
-g_2_2_bear
-g_2_2_cat
-g_4_4_troll_warrior_trample
-icy_manalith
-komas_coil
-r_2_1_dwarf_berserker
-r_2_3_demon_berserker_menace
-r_5_5_dragon_flying
-replicated_ring
-u_1_1_bird_flying
-u_2_2_shapeshifter_changeling
-u_4_4_giant_wizard
-w_1_1_human_warrior
-w_1_1_spirit_flying
-w_4_4_angel_warrior_flying_vigilance
+1 c_e_shard_draw @Aaron Miller
+2 w_4_4_angel_warrior_flying_vigilance @Alexander Mokhov
+3 w_1_1_human_warrior @Gabor Szikszai
+4 w_1_1_spirit_flying @Anastasia Ovchinnikova
+5 u_1_1_bird_flying @Jason A. Engle
+6 u_4_4_giant_wizard @Andrew Mar
+7 komas_coil @Unknown
+8 u_2_2_shapeshifter_changeling @Filip Burburan
+9 b_2_2_zombie_berserker @Igor Kieryluk
+10 r_2_3_demon_berserker_menace @Grzegorz Rutkowski
+11 r_5_5_dragon_flying @Svetlin Velinov
+12 r_2_1_dwarf_berserker @Olivier Bernard
+13 g_2_2_bear @Slawomir Maniak
+14 g_2_2_cat @Raoul Vitale
+15 g_1_1_elf_warrior @Randy Vargas
+16 g_4_4_troll_warrior_trample @Caio Monteiro
+17 icy_manalith @Andrew Mar
+18 replicated_ring @Olena Richards
+19 c_a_treasure_sac @Olena Richards
