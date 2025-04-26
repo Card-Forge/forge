@@ -234,3 +234,14 @@ ScryfallCode=HOU
 10 w_5_5_horse @Lucas Graciano
 11 g_5_4_snake @Winona Nelson
 12 ur_1_1_insect_flying_haste @Lius Lasahido
+
+[other]
+eternalize_adorned_pouncer
+eternalize_champion_of_wits
+eternalize_dreamstealer
+eternalize_earthshaker_khenra
+eternalize_proven_combatant
+eternalize_resilient_khenra
+eternalize_sinuous_striker
+eternalize_steadfast_sentinel
+eternalize_sunscourge_champion

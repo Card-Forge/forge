@@ -445,3 +445,6 @@ ScryfallCode=C21
 29 c_1_1_a_thopter_flying @Svetlin Velinov
 30 c_3_3_a_golem_trample @Andrew Mar
 31 c_3_3_a_golem_vigilance @Andrew Mar
+
+[other]
+eternalize_champion_of_wits

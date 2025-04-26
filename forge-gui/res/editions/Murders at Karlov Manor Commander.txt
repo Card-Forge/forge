@@ -393,3 +393,6 @@ ScryfallCode=MKC
 24 c_a_food_sac @Steven Belledin
 25 c_a_gold_sac @Richard Wright
 26 c_a_treasure_sac @Florian de Gesincourt
+
+[other]
+embalm_vizier_of_many_faces

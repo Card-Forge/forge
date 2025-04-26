@@ -455,3 +455,6 @@ ScryfallCode=TDC
 31 c_1_1_a_servo @Victor Adame Minguez
 32 c_1_1_a_soldier @Kev Walker
 33 c_1_1_a_thopter_flying @Svetlin Velinov
+
+[other]
+eternalize_timeless_witness

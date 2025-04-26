@@ -334,3 +334,7 @@ ScryfallCode=C19
 24 c_x_x_a_sculpture_total_sculptures @Victor Adame Minguez
 25 c_a_treasure_sac @Alayna Danner
 26 c_10_10_eldrazi @Jack Wang
+
+[other]
+embalm_angel_of_sanctions
+embalm_heart-piercer_manticore
