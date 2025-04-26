@@ -16,5 +16,5 @@ WS7 M Nahiri, the Harbinger @Kieran Yanner
 WS8 M Sarkhan Unbroken @Eric Deschamps
 
 [tokens]
-b_3_3_beast_deathtouch
-r_4_4_dragon_flying
+W1 b_3_3_beast_deathtouch @Dave Kendall
+W2 r_4_4_dragon_flying @Raymond Swanland

@@ -288,17 +288,17 @@ ScryfallCode=RTR
 274 L Forest @Richard Wright
 
 [tokens]
-w_1_1_bird_flying
-w_2_2_knight_vigilance
-w_2_2_knight_vigilance
-w_1_1_soldier
-b_1_1_assassin_lose_con
-r_6_6_dragon_flying
-r_1_1_goblin
-g_3_3_centaur
-g_3_3_centaur
-g_x_x_ooze
-g_4_4_rhino_trample
-g_1_1_saproling
-g_5_5_wurm_trample
-gw_8_8_elemental_vigilance
+0 gw_8_8_elemental_vigilance @Unknown
+1 w_1_1_bird_flying @James Ryman
+2 w_2_2_knight_vigilance @Matt Stewart
+3 w_2_2_knight_vigilance @Matt Stewart
+3 w_1_1_soldier @Steve Prescott
+4 b_1_1_assassin_lose_con @Svetlin Velinov
+5 r_6_6_dragon_flying @Mark Zug
+6 r_1_1_goblin @Christopher Moeller
+7 g_3_3_centaur @Slawomir Maniak
+7 g_3_3_centaur @Slawomir Maniak
+8 g_x_x_ooze @Marco Nelor
+9 g_4_4_rhino_trample @Tomasz Jedruszek
+10 g_1_1_saproling @Raoul Vitale
+11 g_5_5_wurm_trample @Anthony Palumbo

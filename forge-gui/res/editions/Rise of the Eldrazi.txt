@@ -261,13 +261,13 @@ ScryfallCode=ROE
 248 L Forest @Jung Park
 
 [tokens]
-tuktuk_the_returned
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-w_1_1_kor_soldier
-r_5_5_dragon_flying
-r_x_x_elemental
-r_4_4_hellion
-g_3_3_elephant
-g_x_x_ooze
+0 w_1_1_kor_soldier @Unknown
+0 r_5_5_dragon_flying @Unknown
+0 g_3_3_elephant @Unknown
+1a c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+1a c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+1a c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+2 r_x_x_elemental @Jung Park
+3 r_4_4_hellion @Anthony Francisco
+4 g_x_x_ooze @Daniel Ljunggren
+5 tuktuk_the_returned @Franz Vohwinkel

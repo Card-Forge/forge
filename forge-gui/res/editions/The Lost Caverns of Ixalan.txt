@@ -473,20 +473,20 @@ A150 U A-Geological Appraiser @Alix Branwyn
 5 Promising Vein|LCI
 
 [tokens]
-b_1_1_bat_flying
-b_1_1_fungus_noblock
-b_2_2_skeleton_pirate
-c_1_1_a_gnome
-c_a_map_sac_explore
-c_a_treasure_sac
-g_0_1_dinosaur_egg
-g_3_3_dinosaur
-g_x_x_fungus_dinosaur
-r_3_1_dinosaur
-rw_3_2_spirit
-u_1_1_merfolk_hexproof
-w_1_1_vampire_lifelink
-w_4_4_angel_flying_vigilance
-w_x_x_a_gnome_soldier_total_artifacts_creatures
-wb_4_3_vampire_demon_flying
-wu_4_4_a_golem
+0 rw_3_2_spirit @Unknown
+2 w_4_4_angel_flying_vigilance @Zoltan Boros
+3 w_x_x_a_gnome_soldier_total_artifacts_creatures @Steve Ellis
+4 w_1_1_vampire_lifelink @Bruno Biazotto
+5 u_1_1_merfolk_hexproof @Julio Reyna
+6 b_1_1_bat_flying @Steven Russell Black
+7 b_1_1_fungus_noblock @Domenico Cava
+8 b_2_2_skeleton_pirate @Izzy
+9 r_3_1_dinosaur @Francisco Miyara
+10 g_3_3_dinosaur @Loïc Canavaggia
+11 g_0_1_dinosaur_egg @Muhammad Firdaus
+12 g_x_x_fungus_dinosaur @Dave Kendall
+13 wu_4_4_a_golem @Racrufi
+15 wb_4_3_vampire_demon_flying @Nino Vecia
+16 c_1_1_a_gnome @Racrufi
+17 c_a_map_sac_explore @Francesca Baerald
+18 c_a_treasure_sac @Wero Gallo

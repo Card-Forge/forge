@@ -507,15 +507,15 @@ ScryfallCode=ONE
 283 R Phyrexian Arena @Martina Fačková
 
 [tokens]
-c_1_1_a_phyrexian_mite_toxic_noblock
-c_1_1_a_phyrexian_mite_toxic_noblock
-c_2_2_a_drone_deathtouch_leavedrain
-c_3_3_a_phyrexian_golem
-g_3_3_phyrexian_beast_toxic
-g_x_x_phyrexian_horror
-r_1_1_phyrexian_goblin
-r_2_2_rebel
-r_x_1_phyrexian_horror_trample_haste
-the_hollow_sentinel
-w_2_2_cat
-w_2_2_samurai_double_strike
+1 w_2_2_cat @April Prime
+2 w_2_2_samurai_double_strike @Gaboleps
+3 r_1_1_phyrexian_goblin @Jokubas Uogintas
+4 r_x_1_phyrexian_horror_trample_haste @Camille Alquier
+5 r_2_2_rebel @Bram Sels
+6 g_3_3_phyrexian_beast_toxic @Uriah Voth
+7 g_x_x_phyrexian_horror @Allen Williams
+8 c_2_2_a_drone_deathtouch_leavedrain @Steve Argyle
+9 the_hollow_sentinel @Igor Kieryluk
+10 c_3_3_a_phyrexian_golem @Samuel Araya
+11 c_1_1_a_phyrexian_mite_toxic_noblock @Oriana Menendez
+12 c_1_1_a_phyrexian_mite_toxic_noblock @Oriana Menendez

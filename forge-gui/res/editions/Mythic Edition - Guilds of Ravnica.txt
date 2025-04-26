@@ -16,6 +16,6 @@ GR7 M Tezzeret, Agent of Bolas @Aleksi Briclot
 GR8 M Vraska, Golgari Queen @Livia Prima
 
 [tokens]
-w_1_1_soldier
-b_2_2_zombie
-c_1_1_a_construct_defender
+G1 w_1_1_soldier @Goran Josic
+G2 b_2_2_zombie @Anna Steinbauer
+G3 c_1_1_a_construct_defender @Victor Adame Minguez

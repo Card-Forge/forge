@@ -150,15 +150,15 @@ ScryfallCode=ZNC
 142 C Terramorphic Expanse @Dan Murayama Scott
 
 [tokens]
-w_1_1_bird_flying
-w_1_1_kor_ally
-g_1_1_saproling
-g_2_2_elemental
-g_4_4_beast
-b_0_0_phyrexian_germ
-b_1_1_faerie_rogue_flying
-b_1_1_goblin_rogue
-b_1_1_rat
-rg_5_5_elemental
-c_1_1_a_thopter_flying
-ub_1_1_faerie_rogue_flying
+0 b_0_0_phyrexian_germ @Unknown
+0 ub_1_1_faerie_rogue_flying @Unknown
+1 w_1_1_bird_flying @Howard Lyon
+2 w_1_1_kor_ally @Jeremy Wilson
+3 b_1_1_faerie_rogue_flying @Dave Allsop
+5 b_1_1_goblin_rogue @Dave Kendall
+6 b_1_1_rat @Mike Bierek
+7 g_4_4_beast @Steve Prescott
+8 g_2_2_elemental @Marco Nelor
+9 g_1_1_saproling @Brad Rigney
+10 rg_5_5_elemental @Brad Rigney
+11 c_1_1_a_thopter_flying @Richard Wright

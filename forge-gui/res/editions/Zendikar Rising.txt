@@ -476,14 +476,14 @@ A257 U A-Base Camp @Jokubas Uogintas
 6 Zof Consumption|ZNR
 
 [tokens]
-w_4_4_angel_warrior_flying
-w_1_1_cat
-w_2_2_cat_beast
-w_1_1_kor_warrior
-u_2_2_drake_flying
-u_x_x_illusion
-g_1_1_insect
-g_0_1_plant
-bg_x_x_hydra
-c_1_1_a_construct
-c_0_1_a_goblin_construct_noblock_ping
+1 w_4_4_angel_warrior_flying @Zoltan Boros
+2 w_1_1_cat @Ilse Gort
+3 w_2_2_cat_beast @Bayard Wu
+4 w_1_1_kor_warrior @Randy Vargas
+5 u_2_2_drake_flying @Bayard Wu
+6 u_x_x_illusion @Jason A. Engle
+7 g_1_1_insect @Jakub Kasper
+8 g_0_1_plant @Jakub Kasper
+9 bg_x_x_hydra @Filip Burburan
+10 c_1_1_a_construct @Jokubas Uogintas
+11 c_0_1_a_goblin_construct_noblock_ping @Johan Grenier
