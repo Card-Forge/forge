@@ -457,20 +457,20 @@ ScryfallCode=M21
 3 Forest|M21|3
 
 [tokens]
-b_2_2_zombie
-b_5_5_demon_flying
-c_a_treasure_sac
-c_4_4_a_construct
-g_1_1_cat
-g_1_1_saproling
-g_2_2_cat
-g_3_3_beast
-r_1_1_goblin_wizard_prowess
-r_1_1_pirate_noblock_all_attack
-ur_x_x_weird
-w_1_1_bird_flying
-w_1_1_dog
-w_1_1_soldier
-w_2_2_griffin_flying
-w_2_2_knight_vigilance
-w_4_4_angel_flying
+1 w_4_4_angel_flying @Magali Villeneuve
+2 w_1_1_bird_flying @James Ryman
+3 w_2_2_griffin_flying @Johann Bodin
+4 w_2_2_knight_vigilance @Dan Murayama Scott
+5 w_1_1_soldier @Jakub Kasper
+6 b_5_5_demon_flying @Sidharth Chaturvedi
+7 b_2_2_zombie @Anna Steinbauer
+8 r_1_1_goblin_wizard_prowess @Izzy
+9 r_1_1_pirate_noblock_all_attack @Jonathan Kuo
+10 g_3_3_beast @John Donahue
+11 g_2_2_cat @Izzy
+12 g_1_1_saproling @Brad Rigney
+13 ur_x_x_weird @Lie Setiawan
+14 c_4_4_a_construct @Craig J Spearing
+15 c_a_treasure_sac @Alayna Danner
+19 w_1_1_dog @Manuel Castañón
+20 g_1_1_cat @Leesha Hannigan

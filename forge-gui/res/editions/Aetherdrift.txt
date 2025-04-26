@@ -634,15 +634,15 @@ Replace=.011F Mythic:fromSheet("DFT cards")
 1 Whir of Invention|SPG
 
 [tokens]
-b_2_2_zombie
-c_1_1_a_servo
-c_1_1_a_thopter_flying
-c_1_1_a_thopter_flying
-c_1_1_pilot_crewsaddlebuff
-c_3_2_a_vehicle_crew_1
-c_a_treasure_sac
-g_1_1_insect
-g_3_3_elephant
-r_1_1_goblin
-r_4_4_dinosaur_dragon_flying
-w_1_1_cat_lifelink
+1 c_1_1_pilot_crewsaddlebuff @Julia Metzger
+2 w_1_1_cat_lifelink @Monztre
+3 b_2_2_zombie @Leroy Steinmann
+4 r_4_4_dinosaur_dragon_flying @Alex Stone
+5 r_1_1_goblin @Anthony Devine
+6 g_3_3_elephant @Milivoj Ćeran
+7 g_1_1_insect @Chris Seaman
+8 c_1_1_a_servo @Adrián Rodríguez Pérez
+9 c_1_1_a_thopter_flying @Kev Fang
+10 c_1_1_a_thopter_flying @Kev Fang
+11 c_a_treasure_sac @Racrufi
+12 c_3_2_a_vehicle_crew_1 @Devin Elle Kurtz

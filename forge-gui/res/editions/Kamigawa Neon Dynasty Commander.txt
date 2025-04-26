@@ -188,15 +188,15 @@ ScryfallCode=NEC
 180 R Temple of Enlightenment @Piotr Dura
 
 [tokens]
-b_0_0_phyrexian_germ
-c_1_1_a_myr
-c_1_1_a_thopter_flying
-c_1_1_e_shrine
-g_0_1_plant
-g_1_1_saproling
-g_3_3_beast
-g_3_3_elephant
-r_1_1_elemental
-r_1_1_goblin
-smoke_blessing
-w_4_4_angel_flying_vigilance
+1 c_1_1_e_shrine @Alexander Mokhov
+2 w_4_4_angel_flying_vigilance @Volkan Baǵa
+3 b_0_0_phyrexian_germ @Igor Kieryluk
+4 r_1_1_elemental @Winona Nelson
+5 r_1_1_goblin @Mark Behm
+6 smoke_blessing @Uriah Voth
+7 g_3_3_beast @Dave Allsop
+8 g_3_3_elephant @Lars Grant-West
+9 g_0_1_plant @Jakub Kasper
+10 g_1_1_saproling @Warren Mahy
+11 c_1_1_a_myr @Ryan Pancoast
+12 c_1_1_a_thopter_flying @Johan Grenier

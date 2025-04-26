@@ -503,21 +503,21 @@ ScryfallCode=MOM
 1 Vorinclex|MOM
 
 [tokens]
-b_2_2_zombie
-c_1_1_a_thopter_flying
-c_a_treasure_sac
-c_a_treasure_sac
-first_mate_ragavan
-g_1_1_phyrexian_saproling
-g_x_x_dinosaur_trample
-gw_3_3_phyrexian_hydra_lifelink
-gw_3_3_phyrexian_hydra_reach
-rw_3_2_spirit
-rw_3_2_warrior_symbiotic_attack
-u_1_1_kraken_trample
-ur_1_1_elemental
-w_1_1_monk_prowess
-w_1_1_soldier_lifelink
-w_1_1_vampire_lifelink
-wb_1_1_spirit_flying
-wu_2_2_knight_vigilance
+1 w_1_1_monk_prowess @Aaron J. Riley
+2 w_1_1_soldier_lifelink @Arash Radkia
+3 w_1_1_vampire_lifelink @Edgar Sánchez Hidalgo
+4 u_1_1_kraken_trample @Edgar Sánchez Hidalgo
+5 b_2_2_zombie @Domenico Cava
+6 first_mate_ragavan @Maxime Minard
+7 g_x_x_dinosaur_trample @Carlos Palma Cruchaga
+8 g_1_1_phyrexian_saproling @Maxime Minard
+9 ur_1_1_elemental @Ryan Valle
+10 wu_2_2_knight_vigilance @Ernanda Souza
+11 gw_3_3_phyrexian_hydra_lifelink @Unknown
+12 gw_3_3_phyrexian_hydra_reach @Unknown
+13 rw_3_2_spirit @Unknown
+14 wb_1_1_spirit_flying @Bruno Biazotto
+15 rw_3_2_warrior_symbiotic_attack @Unknown
+19 c_1_1_a_thopter_flying @David Astruga
+20 c_a_treasure_sac @David Astruga
+21 c_a_treasure_sac @David Astruga

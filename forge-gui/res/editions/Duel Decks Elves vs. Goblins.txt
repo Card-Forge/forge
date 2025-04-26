@@ -70,6 +70,6 @@ ScryfallCode=DD1
 62 L Mountain @Sam Wood
 
 [tokens]
-r_1_1_goblin
-g_7_7_elemental_trample
-g_1_1_elf_warrior
+T1 g_7_7_elemental_trample @Anthony S. Waters
+T2 g_1_1_elf_warrior @Dominick Domingo
+T3 r_1_1_goblin @Dave Kendall
