@@ -282,14 +282,14 @@ ScryfallCode=ZEN
 249a L Forest @Vincent Proce
 
 [tokens]
-w_4_4_angel_flying
-w_1_1_bird_flying
-w_1_1_kor_soldier
-u_2_2_illusion
-u_1_1_merfolk
-b_x_x_vampire
-b_5_5_zombie_giant
-r_7_1_elemental_trample_haste
-g_4_4_beast
-g_1_1_snake
-g_2_2_wolf
+1 w_4_4_angel_flying @Adi Granov
+2 w_1_1_bird_flying @Howard Lyon
+3 w_1_1_kor_soldier @Daren Bader
+4 u_2_2_illusion @Cyril Van Der Haegen
+5 u_1_1_merfolk @Warren Mahy
+6 b_x_x_vampire @Kekai Kotaki
+7 b_5_5_zombie_giant @Igor Kieryluk
+8 r_7_1_elemental_trample_haste @Anthony Francisco
+9 g_4_4_beast @Steve Prescott
+10 g_1_1_snake @Austin Hsu
+11 g_2_2_wolf @Daren Bader

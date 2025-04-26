@@ -564,19 +564,19 @@ A242 C A-Paragon of Modernity @Volkan Baǵa
 1 Forest|SNC|4
 
 [tokens]
-b_2_2_rogue
-b_4_3_ogre_warrior
-c_a_treasure_sac
-c_a_treasure_sac
-c_a_treasure_sac
-c_a_treasure_sac
-c_a_treasure_sac
-g_2_2_cat_haste
-g_3_1_dog_vigilance
-g_4_4_rhino_warrior
-gw_1_1_citizen
-r_1_1_devil_burn
-u_1_1_fish_unblockable
-u_1_1_wizard_countersac
-w_2_2_spirit_flying
-w_3_3_angel_flying
+0 gw_1_1_citizen @Unknown
+2 w_3_3_angel_flying @Julia Metzger
+3 w_2_2_spirit_flying @Miranda Meeks
+4 u_1_1_fish_unblockable @Stella Spente
+5 u_1_1_wizard_countersac @Denys Tsiperko
+6 b_4_3_ogre_warrior @Dallas Williams
+7 b_2_2_rogue @Maria Poliakova
+8 r_1_1_devil_burn @Mike Jordana
+9 g_2_2_cat_haste @David Gaillet
+10 g_3_1_dog_vigilance @David Gaillet
+11 g_4_4_rhino_warrior @Zoltan Boros
+13 c_a_treasure_sac @Nadia Hurianova
+14 c_a_treasure_sac @Nadia Hurianova
+15 c_a_treasure_sac @Nadia Hurianova
+16 c_a_treasure_sac @Nadia Hurianova
+17 c_a_treasure_sac @Nadia Hurianova

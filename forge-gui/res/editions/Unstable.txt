@@ -277,40 +277,40 @@ ScryfallCode=UST
 216 L Forest @John Avon
 
 [tokens]
-storm_crow
-c_4_4_dragon_flying
-w_2_2_cat
-w_0_1_goat
-w_1_1_spirit_flying
-w_1_1_spirit_flying
-w_4_4_angel_flying
-w_4_4_angel_flying
-w_1_1_soldier
-u_1_1_faerie_spy_flying_haste_draw
-u_8_8_octopus
-u_1_1_a_thopter_flying
-u_1_1_a_thopter_flying
-b_1_1_assassin_lose_con
-b_3_3_beast_deathtouch
-b_5_5_demon_flying
-b_2_2_rogue_menace
-b_2_2_vampire_flying
-b_2_2_vampire_flying
-b_2_2_zombie
-b_2_2_zombie
-r_1_1_brainiac
-r_1_1_elemental
-r_1_1_elemental
-r_1_1_goblin
-g_3_3_beast
-g_3_3_beast
-g_1_1_saproling
-g_1_1_saproling
-g_1_1_squirrel
-g_6_6_wurm
-gw_x_x_elemental_total_creatures
-gw_x_x_elemental_total_creatures
-c_a_clue_draw
-c_a_clue_draw
-c_x_x_a_construct
-c_1_1_a_gnome
+0 w_2_2_cat @Unknown
+0 w_1_1_spirit_flying @Unknown
+0 w_1_1_spirit_flying @Unknown
+0 w_4_4_angel_flying @Unknown
+0 w_4_4_angel_flying @Unknown
+0 w_1_1_soldier @Unknown
+0 u_8_8_octopus @Unknown
+0 u_1_1_a_thopter_flying @Unknown
+0 u_1_1_a_thopter_flying @Unknown
+0 b_1_1_assassin_lose_con @Unknown
+0 b_3_3_beast_deathtouch @Unknown
+0 b_5_5_demon_flying @Unknown
+0 b_2_2_vampire_flying @Unknown
+0 b_2_2_vampire_flying @Unknown
+0 b_2_2_zombie @Unknown
+0 b_2_2_zombie @Unknown
+0 r_1_1_elemental @Unknown
+0 r_1_1_elemental @Unknown
+0 g_3_3_beast @Unknown
+0 g_3_3_beast @Unknown
+0 g_1_1_saproling @Unknown
+0 g_1_1_saproling @Unknown
+0 g_6_6_wurm @Unknown
+0 gw_x_x_elemental_total_creatures @Unknown
+0 gw_x_x_elemental_total_creatures @Unknown
+0 c_a_clue_draw @Unknown
+0 c_a_clue_draw @Unknown
+2 w_0_1_goat @Carl Critchlow
+4 u_1_1_faerie_spy_flying_haste_draw @Dmitry Burmak
+5 storm_crow @McLean Kendree
+7 b_2_2_rogue_menace @Emrah Elmasli
+10 r_1_1_brainiac @Matt Dixon
+12 r_1_1_goblin @Dave Allsop
+15 g_1_1_squirrel @John Thacker
+16 c_4_4_dragon_flying @Autumn Rain Turkel
+19 c_x_x_a_construct @Matt Gaser
+20 c_1_1_a_gnome @Dmitry Burmak

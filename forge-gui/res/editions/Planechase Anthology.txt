@@ -251,22 +251,22 @@ OPCA85 C Windriddle Palaces @Kekai Kotaki
 OPCA86 C The Zephyr Maze @rk post
 
 [tokens]
-c_7_7_eldrazi_annihilator
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-w_4_4_angel_flying
-w_0_1_goat
-b_0_0_phyrexian_germ
-b_2_4_spider_reach
-b_2_2_zombie
-r_5_5_dragon_flying
-r_1_1_goblin
-r_4_4_hellion
-g_3_3_beast
-g_3_3_boar
-g_1_1_insect
-g_1_1_ooze
-g_2_2_ooze_mitotic
-g_0_1_plant
-g_1_1_saproling
+0 b_0_0_phyrexian_germ @Unknown
+1 c_7_7_eldrazi_annihilator @Vincent Proce
+2 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+3 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+4 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+5 w_4_4_angel_flying @Cyril Van Der Haegen
+6 w_0_1_goat @Terese Nielsen
+8 b_2_4_spider_reach @Lars Grant-West
+9 b_2_2_zombie @Dave Kendall
+10 r_5_5_dragon_flying @Jim Pavelec
+11 r_1_1_goblin @Brandon Kitkouski
+12 r_4_4_hellion @Anthony Francisco
+13 g_3_3_beast @Dave Allsop
+14 g_3_3_boar @Jesper Ejsing
+15 g_1_1_insect @Carl Critchlow
+16 g_1_1_ooze @Raymond Swanland
+17 g_2_2_ooze_mitotic @Raymond Swanland
+18 g_0_1_plant @Daren Bader
+19 g_1_1_saproling @Brad Rigney

@@ -591,26 +591,25 @@ ScryfallCode=MH2
 6 Zuran Orb|MH2|1
 
 [tokens]
-b_0_0_phyrexian_germ
-b_0_0_zombie_army
-b_2_2_zombie
-bg_1_1_insect
-c_0_0_a_construct_total_artifacts
-c_1_1_a_thopter_flying
-c_a_clue_draw
-c_a_clue_draw
-c_a_food_sac
-c_a_food_sac
-c_a_treasure_sac
-c_a_treasure_sac
-g_1_1_squirrel
-g_4_4_beast
-g_5_3_elemental
-r_1_1_goblin
-rw_4_4_a_golem
-u_0_3_crab
-w_1_1_bird_flying
-
-[other]
-eternalize_timeless_dragon
-eternalize_timeless_witness
+0 rw_4_4_a_golem @Unknown
+0 [other] @Unknown
+0 eternalize_timeless_dragon @Unknown
+0 eternalize_timeless_witness @Unknown
+1 w_1_1_bird_flying @Howard Lyon
+2 u_0_3_crab @Yeong-Hao Han
+3 b_0_0_phyrexian_germ @Igor Kieryluk
+6 b_2_2_zombie @Paul Scott Canavan
+7 b_0_0_zombie_army @Tomasz Jedruszek
+8 r_1_1_goblin @Karl Kopinski
+9 g_4_4_beast @Lucas Graciano
+10 g_5_3_elemental @Nils Hamm
+11 g_1_1_squirrel @Daniel Ljunggren
+13 bg_1_1_insect @Kim Sokol
+14 c_a_clue_draw @John Avon
+15 c_a_clue_draw @John Avon
+16 c_0_0_a_construct_total_artifacts @Mark Behm
+17 c_a_food_sac @Steven Belledin
+18 c_a_food_sac @Steven Belledin
+19 c_1_1_a_thopter_flying @Richard Wright
+20 c_a_treasure_sac @Alayna Danner
+21 c_a_treasure_sac @Alayna Danner

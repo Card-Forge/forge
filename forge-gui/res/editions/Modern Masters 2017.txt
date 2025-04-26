@@ -262,24 +262,24 @@ ScryfallCode=MM3
 249 R Verdant Catacombs @Vance Kovacs
 
 [tokens]
-w_4_4_angel_flying
-w_1_1_bird_flying
-w_1_1_soldier
-w_1_1_spirit_flying
-b_2_4_spider_reach
-b_2_2_zombie
-r_4_4_dragon_flying
-r_1_1_goblin
-r_1_1_goblin_haste
-g_3_3_beast
-g_4_4_beast
-g_3_3_centaur
-g_3_3_elephant
-g_x_x_ooze
-g_1_1_saproling
-g_5_5_wurm_trample
-gw_x_x_elemental_total_creatures
-rg_4_4_giant_warrior_haste
-rg_1_1_goblin_warrior
-rw_1_1_soldier_haste
-c_3_3_a_phyrexian_golem
+0 gw_x_x_elemental_total_creatures @Unknown
+0 rw_1_1_soldier_haste @Unknown
+0 c_3_3_a_phyrexian_golem @Unknown
+1 w_4_4_angel_flying @Anthony Palumbo
+2 w_1_1_bird_flying @James Ryman
+3 w_1_1_soldier @Magali Villeneuve
+4 w_1_1_spirit_flying @Ryan Yee
+5 b_2_4_spider_reach @Lars Grant-West
+6 b_2_2_zombie @Lucas Graciano
+7 r_4_4_dragon_flying @Vance Kovacs
+8 r_1_1_goblin @Brandon Kitkouski
+9 r_1_1_goblin_haste @Brandon Kitkouski
+9 g_3_3_beast @John Donahue
+10 g_4_4_beast @Steve Prescott
+11 g_3_3_centaur @Slawomir Maniak
+12 g_3_3_elephant @Lars Grant-West
+13 g_x_x_ooze @Marco Nelor
+14 g_1_1_saproling @Brad Rigney
+15 g_5_5_wurm_trample @Anthony Palumbo
+17 rg_4_4_giant_warrior_haste @Trevor Hairsine
+18 rg_1_1_goblin_warrior @Dave Allsop
