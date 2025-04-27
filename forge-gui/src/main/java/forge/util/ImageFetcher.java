@@ -264,7 +264,7 @@ public abstract class ImageFetcher {
                     tis = it.next();
                     String tokenCode = edition.getTokensCode();
                     String langCode = edition.getCardsLangCode();
-                    if (tis.collectorNumber.isEmpty()) {
+                    if (tis.collectorNumber == null || tis.collectorNumber.isEmpty()) {
                         continue;
                     }
 
