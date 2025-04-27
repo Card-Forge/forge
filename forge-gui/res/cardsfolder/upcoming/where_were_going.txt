@@ -1,0 +1,6 @@
+Name:Where We're Going...
+ManaCost:U
+Types:Instant
+A:SP$ PutCounter | CounterType$ Flying | CounterNum$ 1 | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or Vehicle | SubAbility$ DBDraw | SpellDescription$ Put a flying counter on target creature or Vehicle.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Put a flying counter on target creature or Vehicle.\nDraw a card.
