@@ -99,8 +99,6 @@ public class HumanPlay {
                 } else if (flippedToCast) {
                     // need to get the changed card if able
                     rollback.turnFaceDown(true);
-                    //need to set correct imagekey when forcing facedown
-                    rollback.setImageKey(ImageKeys.getTokenKey(isforetold ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
                     if (rollback.isInZone(ZoneType.Exile)) {
                         rollback.addMayLookTemp(p);
                     }
