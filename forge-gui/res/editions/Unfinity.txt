@@ -648,13 +648,13 @@ F538 R Water Gun Balloon Game @Ralph Horsley
 537 R Breeding Pool @Bruce Brenneise
 
 [tokens]
-b_2_2_zombie_employee
-c_a_food_sac
-c_a_food_sac
-c_a_treasure_sac
-c_a_treasure_sac
-g_1_1_squirrel
-r_1_1_balloon_flying
-storm_crow
-w_1_1_a_clown_robot
-w_1_1_a_clown_robot
+2 w_1_1_a_clown_robot @Ralph Horsley
+2 w_1_1_a_clown_robot @Ralph Horsley
+5 storm_crow @Greg Staples
+6 b_2_2_zombie_employee @Sebastian Giacobino
+7 r_1_1_balloon_flying @Greg Bobrowski
+8 g_1_1_squirrel @Dave Greco
+10 c_a_food_sac @Matt Gaser
+11 c_a_food_sac @Matt Gaser
+12 c_a_treasure_sac @Ben Maier
+13 c_a_treasure_sac @Ben Maier

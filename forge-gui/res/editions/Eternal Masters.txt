@@ -261,18 +261,18 @@ ScryfallCode=EMA
 249 C Wind-Scarred Crag @Eytan Zana
 
 [tokens]
-carnivore
-c_1_1_spirit
-w_1_1_soldier
-w_1_1_spirit_flying
-u_5_5_wall_defender
-b_0_1_serf
-b_2_2_zombie
-r_2_2_dragon_flying_firebreathing
-r_1_1_elemental
-r_1_1_goblin
-g_3_3_elephant
-g_1_1_elf_warrior
-g_6_6_wurm
-ur_5_5_elemental_flying
-rw_1_1_goblin_soldier
+1 c_1_1_spirit @Daniel Ljunggren
+2 w_1_1_soldier @Greg Staples
+3 w_1_1_spirit_flying @Ryan Yee
+4 u_5_5_wall_defender @Brian Snõddy
+5 b_0_1_serf @Aaron Miller
+6 b_2_2_zombie @Lucas Graciano
+7 carnivore @Johann Bodin
+8 r_2_2_dragon_flying_firebreathing @Jack Wang
+9 r_1_1_elemental @Winona Nelson
+10 r_1_1_goblin @Dave Kendall
+11 g_3_3_elephant @Lars Grant-West
+12 g_1_1_elf_warrior @William O'Connor
+13 g_6_6_wurm @Anthony Francisco
+14 ur_5_5_elemental_flying @Randy Gallegos
+15 rw_1_1_goblin_soldier @Filip Burburan

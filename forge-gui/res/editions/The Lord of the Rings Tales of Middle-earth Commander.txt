@@ -566,17 +566,17 @@ ScryfallCode=LTC
 558 R Minas Morgul, Dark Fortress @Campbell White
 
 [tokens]
-b_3_3_wraith_menace
-br_6_6_dragon_flying_menace_steal
-g_1_1_elf_warrior
-g_1_1_insect_flying_deathtouch
-g_3_3_beast
-g_x_x_treefolk
-r_1_1_goblin
-r_2_2_human_knight_trample_haste
-u_2_2_bird_flying
-w_0_1_goat
-w_1_1_halfling
-w_1_1_human
-w_1_1_soldier_lifelink
-w_3_3_bird_flying_attacks
+1 w_3_3_bird_flying_attacks @Pablo Mendoza
+2 w_0_1_goat @Uriah Voth
+3 w_1_1_halfling @Wangjie Li
+4 w_1_1_human @Tyukina Tatiana
+5 w_1_1_soldier_lifelink @Lixin Yin
+6 u_2_2_bird_flying @Audrey Benjaminsen
+7 b_3_3_wraith_menace @Wonchun Choi
+8 r_1_1_goblin @Zoltan Boros
+9 r_2_2_human_knight_trample_haste @Inka Schulz
+10 g_3_3_beast @Warren Mahy
+11 g_1_1_elf_warrior @Daniel Correia
+12 g_1_1_insect_flying_deathtouch @Oleg Bulakh
+13 g_x_x_treefolk @Audrey Benjaminsen
+14 br_6_6_dragon_flying_menace_steal @Crystal Sully

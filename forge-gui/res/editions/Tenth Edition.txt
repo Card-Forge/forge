@@ -397,9 +397,9 @@ ScryfallCode=10E
 383 L Forest @Stephan Martiniere
 
 [tokens]
-wasp
-w_1_1_soldier
-b_2_2_zombie
-r_5_5_dragon_flying
-r_1_1_goblin
-g_1_1_saproling
+1 w_1_1_soldier @Paolo Parente
+2 b_2_2_zombie @Carl Critchlow
+3 r_5_5_dragon_flying @Jim Pavelec
+4 r_1_1_goblin @Dave Kendall
+5 g_1_1_saproling @Cyril Van Der Haegen
+6 wasp @Ron Spencer

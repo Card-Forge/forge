@@ -248,11 +248,11 @@ ScryfallCode=CNS
 1 Worldknit|CNS
 
 [tokens]
-w_1_1_spirit_flying
-b_x_x_demon_flying
-b_2_2_zombie
-r_4_4_ogre
-g_3_3_elephant
-g_1_1_squirrel
-g_2_2_wolf
-c_1_1_a_construct_defender
+1 w_1_1_spirit_flying @Jeff Simpson
+2 b_x_x_demon_flying @Evan Shipard
+3 b_2_2_zombie @Lucas Graciano
+4 r_4_4_ogre @Dave Kendall
+5 g_3_3_elephant @Lars Grant-West
+6 g_1_1_squirrel @Daniel Ljunggren
+7 g_2_2_wolf @Raoul Vitale
+8 c_1_1_a_construct_defender @Adam Paquette

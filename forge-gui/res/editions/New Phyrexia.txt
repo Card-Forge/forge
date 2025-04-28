@@ -189,9 +189,9 @@ ScryfallCode=NPH
 175 L Forest @Mark Tedin
 
 [tokens]
-b_0_0_phyrexian_germ
-r_1_1_phyrexian_goblin_haste
-g_3_3_beast
-g_1_1_phyrexian_insect_infect
-c_3_3_a_phyrexian_golem
-c_1_1_a_phyrexian_myr
+0 b_0_0_phyrexian_germ @Unknown
+0 r_1_1_phyrexian_goblin_haste @Unknown
+0 g_1_1_phyrexian_insect_infect @Unknown
+0 c_3_3_a_phyrexian_golem @Unknown
+0 c_1_1_a_phyrexian_myr @Unknown
+1 g_3_3_beast @Dave Allsop

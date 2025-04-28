@@ -90,5 +90,5 @@ ScryfallCode=DDL
 81 L Forest @Ryan Pancoast
 
 [tokens]
-w_2_2_griffin_flying
-g_3_3_beast
+1 w_2_2_griffin_flying @Johann Bodin
+2 g_3_3_beast @Jesper Ejsing

@@ -88,5 +88,5 @@ ScryfallCode=DDH
 80 L Mountain @Mark Tedin
 
 [tokens]
-w_2_2_griffin_flying
-g_1_1_saproling
+1 w_2_2_griffin_flying @Jim Nelson
+2 g_1_1_saproling @Cyril Van Der Haegen

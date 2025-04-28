@@ -158,12 +158,7 @@ ScryfallCode=ARB
 145 U Messenger Falcons @David Palumbo
 
 [tokens]
-w_1_1_bird_soldier_flying
-w_1_1_soldier
-u_1_1_a_thopter_flying
-b_2_2_zombie
-r_1_1_goblin
-g_2_2_lizard
-g_1_1_saproling
-rg_1_1_dragon_flying_devour
-ub_1_1_zombie_wizard
+1 w_1_1_bird_soldier_flying @Matt Cavotta
+2 g_2_2_lizard @Anthony S. Waters
+3 rg_1_1_dragon_flying_devour @Jaime Jones
+4 ub_1_1_zombie_wizard @Dave Allsop

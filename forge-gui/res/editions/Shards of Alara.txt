@@ -265,14 +265,14 @@ ScryfallCode=ALA
 250 M Rafiq of the Many @Meel Tamphanon
 
 [tokens]
-w_1_1_soldier
-u_0_1_a_homunculus
-u_1_1_a_thopter_flying
-b_1_1_skeleton_regenerate
-b_2_2_zombie
-r_4_4_dragon_flying
-r_1_1_goblin
-r_1_1_goblin_haste
-g_x_x_ooze
-g_1_1_saproling
-rgw_8_8_beast
+0 rgw_8_8_beast @Unknown
+1 w_1_1_soldier @Alan Pollack
+2 u_0_1_a_homunculus @Howard Lyon
+3 u_1_1_a_thopter_flying @Andrew Murray
+4 b_1_1_skeleton_regenerate @Thomas M. Baxa
+5 b_2_2_zombie @Dave Kendall
+6 r_4_4_dragon_flying @Vance Kovacs
+7 r_1_1_goblin @Brandon Kitkouski
+8 r_1_1_goblin_haste @Brandon Kitkouski
+8 g_x_x_ooze @Anthony S. Waters
+9 g_1_1_saproling @Trevor Claxton

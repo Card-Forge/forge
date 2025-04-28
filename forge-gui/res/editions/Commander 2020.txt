@@ -330,22 +330,22 @@ ScryfallCode=C20
 322 R Yavimaya Coast @Anthony S. Waters
 
 [tokens]
-b_2_2_zombie
-c_a_treasure_sac
-g_0_0_hydra
-g_1_1_insect_flying_deathtouch
-g_1_1_saproling
-g_1_1_snake
-g_4_4_beast
-r_3_1_elemental
-rg_1_1_goblin_warrior
-rw_2_2_dinosaur_cat
-ur_1_1_insect_flying_haste
-u_1_1_bird_illusion_flying
-u_2_2_drake_flying
-w_1_1_bird_flying
-w_1_1_human
-w_1_1_soldier
-w_1_1_spirit_flying
-w_4_4_elemental_flying
-w_4_4_angel_flying
+1 w_4_4_angel_flying @Magali Villeneuve
+2 w_1_1_bird_flying @Howard Lyon
+3 w_4_4_elemental_flying @Svetlin Velinov
+4 w_1_1_human @Bram Sels
+5 w_1_1_soldier @Jakub Kasper
+6 w_1_1_spirit_flying @Jason A. Engle
+7 u_1_1_bird_illusion_flying @James Paick
+8 u_2_2_drake_flying @Svetlin Velinov
+9 b_2_2_zombie @Anna Steinbauer
+10 r_3_1_elemental @Raymond Swanland
+11 g_4_4_beast @Steve Prescott
+12 g_0_0_hydra @Simon Dominic
+13 g_1_1_insect_flying_deathtouch @Martina Pilcerova
+14 g_1_1_saproling @Brad Rigney
+15 g_1_1_snake @Lars Grant-West
+16 rw_2_2_dinosaur_cat @Brian Valeza
+17 rg_1_1_goblin_warrior @Dave Allsop
+18 ur_1_1_insect_flying_haste @Lius Lasahido
+19 c_a_treasure_sac @Alayna Danner

@@ -442,14 +442,14 @@ A216 M A-Winota, Joiner of Forces @Magali Villeneuve
 7 Forest|IKO|3
 
 [tokens]
-feather
-g_3_3_beast
-g_x_x_dinosaur_beast_trample
-r_1_1_dinosaur_haste
-u_8_8_kraken
-u_x_x_shark_flying
-w_1_1_cat_bird_flying
-w_1_1_cat_lifelink
-w_1_1_human_soldier
-w_1_1_human_soldier
-w_1_1_human_soldier
+1 w_1_1_cat_bird_flying @Kekai Kotaki
+2 w_1_1_cat_lifelink @Kekai Kotaki
+3 w_1_1_human_soldier @Manuel Castañón
+4 w_1_1_human_soldier @Manuel Castañón
+5 w_1_1_human_soldier @Manuel Castañón
+6 u_8_8_kraken @Vincent Proce
+7 u_x_x_shark_flying @Caio Monteiro
+8 r_1_1_dinosaur_haste @Jakub Kasper
+9 feather @Lie Setiawan
+10 g_3_3_beast @Aaron Miller
+11 g_x_x_dinosaur_beast_trample @Svetlin Velinov

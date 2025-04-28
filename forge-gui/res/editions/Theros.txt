@@ -261,14 +261,14 @@ ScryfallCode=THS
 249 L Forest @Raoul Vitale
 
 [tokens]
-w_2_1_e_cleric
-w_1_1_soldier
-w_1_1_soldier
-w_1_1_soldier
-u_2_2_bird_flying
-u_1_0_elemental
-b_1_1_harpy_flying
-r_1_1_soldier_haste
-g_2_2_boar
-rg_2_2_satyr_haste
-c_3_3_e_a_golem
+0 c_3_3_e_a_golem @Unknown
+1 w_2_1_e_cleric @Johann Bodin
+2 w_1_1_soldier @Seb McKinnon
+2 w_1_1_soldier @Seb McKinnon
+2 w_1_1_soldier @Seb McKinnon
+4 u_2_2_bird_flying @Peter Mohrbacher
+5 u_1_0_elemental @Karl Kopinski
+6 b_1_1_harpy_flying @Nils Hamm
+7 r_1_1_soldier_haste @Johann Bodin
+8 g_2_2_boar @James Ryman
+9 rg_2_2_satyr_haste @Johann Bodin

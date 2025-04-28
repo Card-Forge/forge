@@ -262,17 +262,17 @@ ScryfallCode=A25
 249 U Zoetic Cavern @Lars Grant-West
 
 [tokens]
-kobolds_of_kher_keep
-stangg_twin
-c_1_1_spirit
-w_4_4_angel_flying
-w_1_1_soldier
-w_1_1_spirit_flying
-u_3_3_fish_hatches_whale
-u_9_9_kraken
-u_6_6_whale_hatches_kraken
-b_1_1_skeleton_regenerate
-r_1_1_goblin
-g_1_1_elf_warrior
-g_1_1_insect
-g_2_2_wolf
+1 c_1_1_spirit @Daniel Ljunggren
+2 w_4_4_angel_flying @Anthony Palumbo
+3 w_1_1_soldier @Greg Staples
+4 w_1_1_spirit_flying @Ryan Yee
+5 u_3_3_fish_hatches_whale @Dan Murayama Scott
+6 u_9_9_kraken @Dan Murayama Scott
+7 u_6_6_whale_hatches_kraken @Dan Murayama Scott
+8 b_1_1_skeleton_regenerate @Thomas M. Baxa
+9 r_1_1_goblin @Mike Bierek
+10 kobolds_of_kher_keep @Paolo Parente
+11 g_1_1_elf_warrior @William O'Connor
+12 g_1_1_insect @Ron Spencer
+13 g_2_2_wolf @Daren Bader
+14 stangg_twin @Izzy

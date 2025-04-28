@@ -172,11 +172,10 @@ ScryfallCode=DKA
 158 R Vault of the Archangel @John Avon
 
 [tokens]
-w_1_1_human
-w_1_1_human
-w_1_1_spirit_flying
-b_1_1_vampire_lifelink
-b_2_2_zombie
-b_2_2_zombie
-b_2_2_zombie
-g_2_2_wolf
+0 w_1_1_spirit_flying @Unknown
+0 b_2_2_zombie @Unknown
+0 b_2_2_zombie @Unknown
+0 b_2_2_zombie @Unknown
+0 g_2_2_wolf @Unknown
+1 w_1_1_human @John Stanko
+2 b_1_1_vampire_lifelink @Peter Mohrbacher

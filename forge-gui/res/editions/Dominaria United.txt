@@ -503,15 +503,15 @@ A286 R A-Briar Hydra @Caio Monteiro
 1 Forest|DMU|4
 
 [tokens]
-b_1_1_bird_flying_noblock
-b_2_2_phyrexian
-c_a_powerstone
-g_1_1_saproling
-g_3_3_beast
-ornithopter
-r_1_1_goblin
-r_1_1_monk_prowess
-r_2_1_elemental_trample_haste
-r_4_4_dragon_flying
-w_1_1_bird_flying
-w_1_1_soldier
+2 w_1_1_bird_flying @Allen Douglas
+4 w_1_1_soldier @Justine Cruz
+6 b_1_1_bird_flying_noblock @Allen Douglas
+8 b_2_2_phyrexian @David Auden Nash
+10 r_4_4_dragon_flying @Alexander Ostrowski
+11 r_2_1_elemental_trample_haste @Tuan Duong Chu
+12 r_1_1_goblin @Néstor Ossandón Leal
+14 r_1_1_monk_prowess @Irina Nordsol
+16 g_3_3_beast @Eric Deschamps
+18 g_1_1_saproling @Sam White
+22 ornithopter @Fariba Khamseh
+23 c_a_powerstone @David Auden Nash

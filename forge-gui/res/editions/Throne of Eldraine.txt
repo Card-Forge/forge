@@ -428,21 +428,21 @@ A81 U A-Cauldron Familiar @Milivoj Ćeran
 A125 R A-Fires of Invention @Stanton Feng
 
 [tokens]
-w_0_1_goat
-w_1_1_human
-w_2_2_knight_vigilance
-w_1_1_mouse
-u_1_1_faerie_flying
-b_1_1_rat
-r_1_1_dwarf
-g_2_2_bear
-g_1_1_boar_food
-g_7_7_giant
-rw_2_1_human_cleric_lifelink_haste
-rw_1_2_human_rogue_haste_damage
-rw_3_1_human_warrior_trample_haste
-bg_2_2_wolf_garruk
-c_a_food_sac
-c_a_food_sac
-c_a_food_sac
-c_a_food_sac
+0 rw_2_1_human_cleric_lifelink_haste @Unknown
+0 rw_1_2_human_rogue_haste_damage @Unknown
+0 rw_3_1_human_warrior_trample_haste @Unknown
+1 w_0_1_goat @Forrest Imel
+2 w_1_1_human @Ben Maier
+3 w_2_2_knight_vigilance @Dan Murayama Scott
+4 w_1_1_mouse @Stacie Pitt
+5 u_1_1_faerie_flying @Irina Nordsol
+6 b_1_1_rat @Mike Bierek
+7 r_1_1_dwarf @Kari Christensen
+8 g_2_2_bear @Forrest Imel
+9 g_1_1_boar_food @Stacie Pitt
+10 g_7_7_giant @YW Tang
+14 bg_2_2_wolf_garruk @David Gaillet
+15 c_a_food_sac @Steven Belledin
+16 c_a_food_sac @Steven Belledin
+17 c_a_food_sac @Steven Belledin
+18 c_a_food_sac @Steven Belledin

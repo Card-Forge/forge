@@ -261,10 +261,10 @@ ScryfallCode=IMA
 249 U Simic Growth Chamber @John Avon
 
 [tokens]
-w_4_4_angel_flying
-w_1_1_bird_flying
-w_1_1_spirit_flying
-u_2_2_djinn_monk_flying
-r_2_2_dragon_flying_firebreathing
-r_5_5_dragon_flying
-g_4_4_beast
+1 w_4_4_angel_flying @Magali Villeneuve
+2 w_1_1_bird_flying @Howard Lyon
+3 w_1_1_spirit_flying @Ryan Yee
+4 u_2_2_djinn_monk_flying @Izzy
+5 r_2_2_dragon_flying_firebreathing @Jack Wang
+6 r_5_5_dragon_flying @Jim Pavelec
+7 g_4_4_beast @Steve Prescott

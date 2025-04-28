@@ -159,8 +159,8 @@ ScryfallCode=CON
 145 U Unstable Frontier @John Avon
 
 [tokens]
-w_4_4_angel_flying
-w_1_1_soldier
-b_2_2_zombie
-r_3_1_elemental_haste
-g_1_1_saproling
+0 w_1_1_soldier @Unknown
+0 b_2_2_zombie @Unknown
+0 g_1_1_saproling @Unknown
+1 w_4_4_angel_flying @Cyril Van Der Haegen
+2 r_3_1_elemental_haste @Vance Kovacs

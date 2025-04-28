@@ -263,14 +263,14 @@ ScryfallCode=M13
 249 L Forest @Jim Nelson
 
 [tokens]
-w_2_2_cat
-w_0_1_goat
-w_1_1_soldier
-u_2_2_drake_flying
-b_2_2_zombie
-r_1_1_goblin
-r_1_1_goblin
-r_4_4_hellion_haste
-g_3_3_beast
-g_1_1_saproling
-g_6_6_wurm
+1 w_2_2_cat @Jesper Ejsing
+2 w_0_1_goat @Adam Paquette
+3 w_1_1_soldier @Greg Staples
+4 u_2_2_drake_flying @Svetlin Velinov
+5 b_2_2_zombie @Lucas Graciano
+6 r_1_1_goblin @Karl Kopinski
+6 r_1_1_goblin @Karl Kopinski
+7 r_4_4_hellion_haste @Anthony Francisco
+8 g_3_3_beast @John Donahue
+9 g_1_1_saproling @Brad Rigney
+10 g_6_6_wurm @Anthony Francisco

@@ -443,14 +443,14 @@ A289 R A-Geology Enthusiast @Fajareka Setiawan
 1 Forest|BRO|4
 
 [tokens]
-c_0_0_a_construct_total_artifacts
-c_1_1_a_soldier
-c_1_1_a_soldier
-c_1_1_a_thopter_flying
-c_2_2_a_construct
-c_3_3_a_zombie
-c_a_powerstone
-c_x_x_a_golem
-g_1_1_forest_dryad
-g_2_2_bear
-u_2_2_spirit_vigilance_drawcounter
+1 u_2_2_spirit_vigilance_drawcounter @Tony Foti
+2 g_2_2_bear @Alexandre Honoré
+3 g_1_1_forest_dryad @Donato Giancola
+4 c_2_2_a_construct @Deruchenko Alexander
+5 c_0_0_a_construct_total_artifacts @Scott Murphy
+6 c_x_x_a_golem @Olivier Bernard
+7 c_a_powerstone @Karl Kopinski
+8 c_1_1_a_soldier @Gabor Szikszai
+8 c_1_1_a_soldier @Gabor Szikszai
+10 c_1_1_a_thopter_flying @Samuel Perin
+11 c_3_3_a_zombie @Kieran Yanner

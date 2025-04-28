@@ -163,12 +163,12 @@ ScryfallCode=MOR
 150 R Rustic Clachan @Fred Fields
 
 [tokens]
-w_5_5_giant_warrior
-w_1_1_kithkin_soldier
-u_1_1_merfolk_wizard
-b_1_1_faerie_rogue_flying
-b_1_1_goblin_rogue
-g_4_4_elemental
-g_1_1_elf_warrior
-g_2_5_treefolk_shaman
-g_2_2_wolf
+0 w_1_1_kithkin_soldier @Unknown
+0 u_1_1_merfolk_wizard @Unknown
+0 b_1_1_goblin_rogue @Unknown
+0 g_4_4_elemental @Unknown
+0 g_1_1_elf_warrior @Unknown
+0 g_2_2_wolf @Unknown
+1 w_5_5_giant_warrior @Steve Ellis
+2 b_1_1_faerie_rogue_flying @Jim Nelson
+3 g_2_5_treefolk_shaman @Richard Sardinha

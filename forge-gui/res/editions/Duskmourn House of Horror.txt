@@ -502,18 +502,21 @@ A143 R A-Leyline of Resonance @Sergey Glushakov
 1 Strangled Cemetery|DSK
 
 [tokens]
-b_2_2_e_horror
-b_6_6_demon_flying
-bg_1_1_insect_flying
-c_a_treasure_sac
-c_e_shard_draw
-everywhere
-g_2_2_spider_reach
-primo_the_indivisible
-r_1_1_gremlin
-u_x_x_spirit_flying
-w_1_1_a_toy
-w_1_1_e_glimmer
-w_2_1_insect_flying
-w_3_1_spirit_flying
-w_4_4_beast_lonely
+#1 copy @Michele Giorgi
+2 c_e_shard_draw @Brian Valeza
+3 w_4_4_beast_lonely @Aaron Miller
+4 w_1_1_e_glimmer @Michele Giorgi
+5 w_2_1_insect_flying @Michele Giorgi
+6 w_3_1_spirit_flying @Elizabeth Peiró
+7 w_1_1_a_toy @Brian Valeza
+8 u_x_x_spirit_flying @Marie Magny
+9 b_6_6_demon_flying @Josu Solano
+10 b_2_2_e_horror @Carlos Palma Cruchaga
+11 r_1_1_gremlin @Joseph Weston
+12 g_2_2_spider_reach @Igor Krstic
+13 bg_1_1_insect_flying @Helge C. Balzer
+14 primo_the_indivisible @Michele Giorgi
+15 c_a_treasure_sac @Michele Giorgi
+16 everywhere @Chris Ostrowski
+#17 emblem_kaito_bane_of_nightmares @Joshua Raphael
+#18 manifest @Diana Franco

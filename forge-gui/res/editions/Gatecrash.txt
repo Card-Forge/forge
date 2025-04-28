@@ -263,15 +263,15 @@ ScryfallCode=GTC
 249 R Watery Grave @Raymond Swanland
 
 [tokens]
-w_4_4_angel_flying
-w_2_2_knight_vigilance
-w_2_2_knight_vigilance
-w_1_1_soldier
-b_1_1_rat
-g_3_3_frog_lizard
-g_x_x_ooze
-wb_1_1_cleric_deathpact
-ub_1_1_horror_flying
-rw_1_1_soldier_haste
-rw_1_1_soldier_haste
-wb_1_1_spirit_flying
+0 w_2_2_knight_vigilance @Unknown
+0 w_2_2_knight_vigilance @Unknown
+0 w_1_1_soldier @Unknown
+0 g_x_x_ooze @Unknown
+0 rw_1_1_soldier_haste @Unknown
+1 w_4_4_angel_flying @Steve Argyle
+2 b_1_1_rat @Nils Hamm
+3 g_3_3_frog_lizard @Jack Wang
+4 wb_1_1_cleric_deathpact @Jason Chan
+5 ub_1_1_horror_flying @Adam Paquette
+6 rw_1_1_soldier_haste @David Palumbo
+7 wb_1_1_spirit_flying @Cliff Childs

@@ -304,9 +304,9 @@ Boros Guildgate|GRN|1
 Boros Guildgate|GRN|2
 
 [tokens]
-w_4_4_angel_flying_vigilance
-w_1_1_soldier_lifelink
-u_1_1_bird_illusion_flying
-r_1_1_goblin
-gw_2_2_elf_knight_vigilance
-bg_1_1_insect
+1 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
+2 w_1_1_soldier_lifelink @John Severin Brassell
+3 u_1_1_bird_illusion_flying @James Paick
+4 r_1_1_goblin @Mark Zug
+5 bg_1_1_insect @Ben Wootten
+6 gw_2_2_elf_knight_vigilance @Tomasz Jedruszek

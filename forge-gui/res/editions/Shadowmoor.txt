@@ -314,15 +314,15 @@ ScryfallCode=SHM
 301 L Forest @Steve Prescott
 
 [tokens]
-w_1_1_kithkin_soldier
-w_1_1_spirit_flying
-b_1_1_rat
-r_1_1_elemental_haste
-g_1_1_elf_warrior
-g_1_2_spider_reach
-g_2_2_wolf
-br_5_5_elemental
-gw_1_1_elf_warrior
-ub_1_1_faerie_rogue_flying
-rg_4_4_giant_warrior_haste
-rg_1_1_goblin_warrior
+0 gw_1_1_elf_warrior @Unknown
+1 w_1_1_kithkin_soldier @Randy Gallegos
+2 w_1_1_spirit_flying @Jeremy Enecio
+3 b_1_1_rat @Carl Critchlow
+4 r_1_1_elemental_haste @Cyril Van Der Haegen
+5 g_1_1_elf_warrior @William O'Connor
+6 g_1_2_spider_reach @Thomas M. Baxa
+7 g_2_2_wolf @Lars Grant-West
+8 ub_1_1_faerie_rogue_flying @E. M. Gist
+9 br_5_5_elemental @Dave Dorman
+10 rg_4_4_giant_warrior_haste @Trevor Hairsine
+11 rg_1_1_goblin_warrior @Dave Allsop

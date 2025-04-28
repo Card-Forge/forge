@@ -657,34 +657,34 @@ A193 R A-Nadu, Winged Wisdom @Daren Bader
 1 Jyoti, Moag Ancient|M3C
 
 [tokens]
-b_0_0_phyrexian_germ
-b_0_0_zombie_army
-b_1_1_rat_lifelink
-b_1_1_snake_deathtouch
-b_1_2_a_phyrexian_wurm_deathtouch
-b_2_1_a_phyrexian_wurm_lifelink
-b_2_2_zombie
-bg_1_1_insect
-c_0_1_eldrazi_spawn_sac
-c_1_1_a_servo
-c_3_3_a_phyrexian_golem
-c_a_blood_draw
-c_a_clue_draw
-c_a_food_sac
-c_a_treasure_sac
-g_0_1_plant
-g_1_1_insect
-r_1_1_gremlin
-u_1_1_a_thopter_flying
-u_1_2_moonfolk_flying
-u_2_2_bird_flying
-u_3_3_fish_hatches_whale
-u_6_6_whale_hatches_kraken
-u_9_9_kraken
-w_1_1_cat
-w_1_1_soldier
-w_1_1_spirit_flying
-w_2_1_cat_warrior
-w_2_2_fox_vigilance
-w_4_4_angel_flying
-wb_1_1_spirit_flying
+2 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+3 w_4_4_angel_flying @Magali Villeneuve
+4 w_1_1_cat @Maxime Minard
+5 w_2_1_cat_warrior @Ben Wootten
+6 w_2_2_fox_vigilance @Chuck Lukacs
+7 w_1_1_soldier @Paolo Parente
+8 w_1_1_spirit_flying @Wayne Wu
+9 u_2_2_bird_flying @Carlos Palma Cruchaga
+10 u_3_3_fish_hatches_whale @Dan Murayama Scott
+11 u_9_9_kraken @Dan Murayama Scott
+12 u_1_2_moonfolk_flying @Chuck Lukacs
+13 u_1_1_a_thopter_flying @Andrew Murray
+14 u_6_6_whale_hatches_kraken @Dan Murayama Scott
+16 b_0_0_phyrexian_germ @Igor Kieryluk
+17 b_1_2_a_phyrexian_wurm_deathtouch @David Astruga
+18 b_2_1_a_phyrexian_wurm_lifelink @David Astruga
+19 b_1_1_rat_lifelink @Carlos Palma Cruchaga
+20 b_1_1_snake_deathtouch @Caroline Gariba
+21 b_2_2_zombie @Anna Steinbauer
+22 b_0_0_zombie_army @Warren Mahy
+23 r_1_1_gremlin @Tony Foti
+25 g_1_1_insect @Madeline Boni
+26 g_0_1_plant @Daren Bader
+27 bg_1_1_insect @Kim Sokol
+28 wb_1_1_spirit_flying @Christina Kraus
+29 c_a_blood_draw @Miranda Meeks
+30 c_a_clue_draw @Michele Giorgi
+31 c_a_food_sac @Leanna Crossan
+32 c_3_3_a_phyrexian_golem @Volkan Baǵa
+33 c_1_1_a_servo @Jung Park
+34 c_a_treasure_sac @Nino Vecia

@@ -9,13 +9,9 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.RejectedExecutionException;
 
 public abstract class ImageFetcher {
@@ -232,33 +228,52 @@ public abstract class ImageFetcher {
                 this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
-            if (tokenImages == null) {
-                tokenImages = new HashMap<>();
-                for (Pair<String, String> nameUrlPair : FileUtil
-                        .readNameUrlFile(ForgeConstants.IMAGE_LIST_TOKENS_FILE)) {
-                    tokenImages.put(nameUrlPair.getLeft(), nameUrlPair.getRight());
-                }
-            }
             final String filename = imageKey.substring(2) + ".jpg";
-            String tokenUrl = tokenImages.get(filename);
-            if (tokenUrl == null) {
-                String[] tempdata = imageKey.split("[_](?=[^_]*$)"); //We want to check the edition first.
-                if (tempdata.length == 2) {
-                    CardEdition E = StaticData.instance().getEditions().get(tempdata[1]);
-                    if (E != null && E.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
-                }
-                if (filename.equalsIgnoreCase("null.jpg"))
-                    return;
+            if (ImageKeys.missingCards.contains(filename))
+                return;
 
-                if (ImageKeys.missingCards.contains(filename))
-                    return;
+            if (filename.equalsIgnoreCase("null.jpg"))
+                return;
 
-                ImageKeys.missingCards.add(filename);
-                System.err.println("No specified file for '" + filename + "'.. Attempting to download from default Url");
-                tokenUrl = String.format("%s%s", ForgeConstants.URL_TOKEN_DOWNLOAD, filename);
+            String[] tempdata = imageKey.substring(2).split("[_](?=[^_]*$)"); //We want to check the edition first.
+            if (tempdata.length < 2) {
+                System.err.println("Token image key is malformed: " + imageKey);
+                return;
             }
+
+            String tokenName = tempdata[0];
+            String setCode = tempdata[1];
+
+            // Load the paper token from filename + edition
+            CardEdition edition = StaticData.instance().getEditions().get(setCode);
+            if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
+
+            //PaperToken pt = StaticData.instance().getAllTokens().getToken(tokenName, setCode);
+            Collection<CardEdition.TokenInSet> allTokens = edition.getTokens().get(tokenName);
+
+            if (!allTokens.isEmpty()) {
+                // This loop is going to try to download all the arts until it finds one
+                // This is a bit wrong since it _should_ just be trying to get the one with the appropriate collector number
+                // Since we don't have that for tokens, we'll just take the first one
+                // Ideally we would have some mapping for generating card to determine which art indexed/collector number to try to fetch
+                // Token art we're downloading and which location we're storing it in.
+                // Once we're pulling from PaperTokens this section will change a bit
+                Iterator <CardEdition.TokenInSet> it = allTokens.iterator();
+                CardEdition.TokenInSet tis;
+                while(it.hasNext()) {
+                    tis = it.next();
+                    String tokenCode = edition.getTokensCode();
+                    String langCode = edition.getCardsLangCode();
+                    if (tis.collectorNumber == null || tis.collectorNumber.isEmpty()) {
+                        continue;
+                    }
+
+                    downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber, tokenCode, langCode));
+                }
+            }
+
+            ImageKeys.missingCards.add(filename);
             destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
-            downloadUrls.add(tokenUrl);
         }
 
         if (downloadUrls.isEmpty()) {

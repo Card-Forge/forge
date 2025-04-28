@@ -610,19 +610,19 @@ ScryfallCode=30A
 594 L Forest @Christopher Rush
 
 [tokens]
-b_1_1_skeleton
-b_5_5_demon_flying
-c_a_clue_draw
-c_a_clue_draw
-c_a_treasure_sac
-c_a_treasure_sac
-c_a_treasure_sac
-g_2_2_wolf
-g_3_3_beast
-u_1_1_bird_flying
-u_1_1_human_wizard
-w_1_1_human
-w_1_1_human_warrior
-w_1_1_soldier
-wasp
-wb_1_1_human_cleric
+1 w_1_1_human @Jeff A. Menges
+2 w_1_1_human_warrior @Melissa A. Benson
+3 w_1_1_soldier @Douglas Shuler
+4 u_1_1_bird_flying @Sandra Everingham
+5 u_1_1_human_wizard @Mark Poole
+6 b_5_5_demon_flying @Mark Poole
+7 b_1_1_skeleton @Jeff A. Menges
+8 g_3_3_beast @Mark Poole
+9 g_2_2_wolf @Jeff A. Menges
+10 wb_1_1_human_cleric @Jeff A. Menges
+11 c_a_clue_draw @Mark Tedin
+12 c_a_clue_draw @Mark Tedin
+13 c_a_treasure_sac @Dan Frazier
+14 c_a_treasure_sac @Dan Frazier
+15 c_a_treasure_sac @Dan Frazier
+16 wasp @Sandra Everingham

@@ -939,24 +939,24 @@ ScryfallCode=2X2
 1 Wrenn and Six+|2X2
 
 [tokens]
-c_1_1_eldrazi_scion_sac
-c_1_1_spirit
-w_4_4_angel_flying_vigilance
-w_2_2_knight_vigilance
-w_1_1_monk_prowess
-w_1_1_soldier
-w_1_1_spirit_flying
-w_1_1_vampire_lifelink
-u_2_2_drake_flying
-b_1_1_faerie_rogue_flying
-b_2_2_zombie
-r_1_1_elemental
-g_4_4_bear
-g_3_3_boar
-g_0_1_egg_defender
-g_1_1_saproling
-g_1_2_spider_reach
-brg_3_3_cat_dragon_flying
-bg_1_1_worm
-c_3_3_a_phyrexian_golem
-c_a_treasure_sac
+1 c_1_1_eldrazi_scion_sac @Izzy
+2 c_1_1_spirit @Daniel Ljunggren
+3 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
+5 w_2_2_knight_vigilance @Matt Stewart
+6 w_1_1_monk_prowess @Steven Belledin
+7 w_1_1_soldier @Magali Villeneuve
+8 w_1_1_spirit_flying @Mike Sass
+9 w_1_1_vampire_lifelink @John Severin Brassell
+10 u_2_2_drake_flying @Svetlin Velinov
+11 b_1_1_faerie_rogue_flying @Dave Allsop
+12 b_2_2_zombie @Anna Steinbauer
+13 r_1_1_elemental @Winona Nelson
+14 g_4_4_bear @Kev Walker
+15 g_3_3_boar @Jesper Ejsing
+16 g_0_1_egg_defender @Christopher Burdett
+17 g_1_1_saproling @Brad Rigney
+18 g_1_2_spider_reach @Slawomir Maniak
+19 brg_3_3_cat_dragon_flying @Cynthia Sheppard
+20 bg_1_1_worm @Chuck Lukacs
+21 c_3_3_a_phyrexian_golem @Volkan Baǵa
+22 c_a_treasure_sac @Alayna Danner

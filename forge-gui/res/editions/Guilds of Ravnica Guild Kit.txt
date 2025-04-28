@@ -136,17 +136,16 @@ ScryfallCode=GK1
 127 L Forest @Alayna Danner
 
 [tokens]
-voja
-w_1_1_soldier_lifelink
-u_3_3_weird_defender_flying
-r_1_1_goblin
-r_1_1_goblin
-g_3_3_centaur
-g_1_1_saproling
-g_1_1_saproling
-g_5_5_wurm_trample
-gw_8_8_elemental_vigilance
-gw_2_2_elf_knight_vigilance
-ub_1_1_horror_flying
-bg_1_1_insect
-rw_1_1_soldier_haste
+0 gw_2_2_elf_knight_vigilance @Unknown
+0 ub_1_1_horror_flying @Unknown
+0 bg_1_1_insect @Unknown
+0 g_3_3_centaur @Unknown
+2 w_1_1_soldier_lifelink @Unknown
+3 u_3_3_weird_defender_flying @Unknown
+4 r_1_1_goblin @Unknown
+6 rw_1_1_soldier_haste @Unknown
+5 g_1_1_saproling @Unknown
+8 g_1_1_saproling @Unknown
+9 g_5_5_wurm_trample @Unknown
+10 gw_8_8_elemental_vigilance @Unknown
+11 voja @Unknown

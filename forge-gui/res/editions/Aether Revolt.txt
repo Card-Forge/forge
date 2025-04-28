@@ -237,12 +237,6 @@ Vedalken Shackles|MPS_KLD
 Wurmcoil Engine|MPS_KLD
 
 [tokens]
-etherium_cell
-ragavan
-r_2_2_gremlin
-c_1_1_a_servo
-c_1_1_a_servo
-c_1_1_a_servo
-c_1_1_a_thopter_flying
-c_1_1_a_thopter_flying
-c_1_1_a_thopter_flying
+1 r_2_2_gremlin @Jason Rainville
+2 ragavan @Daniel Ljunggren
+3 etherium_cell @Craig J Spearing
