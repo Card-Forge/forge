@@ -332,7 +332,7 @@ ScryfallCode=CMA
 1 w_1_1_kithkin_soldier @Randy Gallegos
 2 w_2_2_knight_vigilance @Matt Stewart
 3 w_1_1_spirit_flying @Ryan Yee
-4 b_0_0_phyrexian_germ @
+4 b_0_0_phyrexian_germ @Igor Kieryluk
 5 b_2_2_zombie @Lucas Graciano
 6 r_5_5_dragon_flying @Jim Pavelec
 7 g_3_3_beast @Dave Allsop
@@ -343,7 +343,8 @@ ScryfallCode=CMA
 12 g_1_1_elf_warrior @William O'Connor
 13 g_1_1_saproling @Brad Rigney
 14 g_1_2_spider_reach @Daniel Ljunggren
+15 g_x_x_treefolk @Filip Burburan
 16 g_2_2_wolf @Daren Bader
-17 g_x_x_treefolk @
-18 gu_2_2_drake_flying @
+17 g_2_2_wolf @David Palumbo
+18 gu_2_2_drake_flying @ Nick Percival
 19 c_3_4_a_gargoyle_flying @Paul Bonner
