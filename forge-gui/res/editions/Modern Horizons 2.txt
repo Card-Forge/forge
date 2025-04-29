@@ -591,10 +591,7 @@ ScryfallCode=MH2
 6 Zuran Orb|MH2|1
 
 [tokens]
-0 rw_4_4_a_golem @Unknown
-0 [other] @Unknown
-0 eternalize_timeless_dragon @Unknown
-0 eternalize_timeless_witness @Unknown
+0 rw_4_4_a_golem @
 1 w_1_1_bird_flying @Howard Lyon
 2 u_0_3_crab @Yeong-Hao Han
 3 b_0_0_phyrexian_germ @Igor Kieryluk
@@ -613,3 +610,9 @@ ScryfallCode=MH2
 19 c_1_1_a_thopter_flying @Richard Wright
 20 c_a_treasure_sac @Alayna Danner
 21 c_a_treasure_sac @Alayna Danner
+
+[other]
+embalm_angel_of_sanctions
+embalm_vizier_of_many_faces
+eternalize_champion_of_wits
+eternalize_timeless_dragon

@@ -366,9 +366,7 @@ ScryfallCode=MKC
 358 R Ransom Note @Gaboleps
 
 [tokens]
-0 komas_coil @Unknown
-0 [other] @Unknown
-0 embalm_vizier_of_many_faces @Unknown
+0 komas_coil @
 1 c_10_10_eldrazi @Jack Wang
 2 w_1_1_human_soldier @Deruchenko Alexander
 3 w_1_1_soldier @Greg Staples
