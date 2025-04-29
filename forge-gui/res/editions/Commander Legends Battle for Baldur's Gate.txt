@@ -1164,7 +1164,7 @@ Zevlor, Elturel Exile|CLB
 15 g_1_1_squirrel @Daniel Ljunggren
 16 c_1_1_a_construct @Jakub Kasper
 17 c_a_treasure_sac @Dan Murayama Scott
-18 volos_journal @
+18 volos_journal @Zoltan Boros
 21 c_3_2_eldrazi_horror @Jason Felix
 22 c_1_1_shapeshifter_changeling @Steve Prescott
 23 c_2_2_shapeshifter_changeling @Johann Bodin
