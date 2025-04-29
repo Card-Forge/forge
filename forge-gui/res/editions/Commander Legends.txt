@@ -1337,8 +1337,8 @@ Guildless Commons|CMR
 6 b_2_2_zombie @Paul Scott Canavan
 7 r_2_2_dragon_flying_firebreathing @Lars Grant-West
 8 g_1_1_elf_warrior @William O'Connor
-9 c_3_3_a_phyrexian_golem @
-10 c_x_x_a_horror @
+9 c_3_3_a_phyrexian_golem @Volkan Baǵa
+10 c_x_x_a_horror @Scott Chou
 11 rock @Tomasz Jedruszek
 12 c_a_treasure_sac @Alayna Danner
 15 w_2_2_cat @Scott Chou
@@ -1348,3 +1348,8 @@ Guildless Commons|CMR
 20 g_3_3_elephant @Lars Grant-West
 21 g_0_1_plant @Daren Bader
 22 g_1_1_saproling @Mike Burns
+
+[other]
+13 copy @David Palumbo
+14 monarch @Volkan Baǵa
+23 copy @David Palumbo
