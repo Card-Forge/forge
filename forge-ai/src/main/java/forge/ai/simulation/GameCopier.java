@@ -373,10 +373,10 @@ public class GameCopier {
             if (c.isFaceDown()) {
                 newCard.turnFaceDown(true);
                 if (c.isManifested()) {
-                    newCard.setManifested(true);
+                    newCard.setManifested(c.getManifestedSA());
                 }
                 if (c.isCloaked()) {
-                    newCard.setCloaked(true);
+                    newCard.setCloaked(c.getCloakedSA());
                 }
             }
             if (c.isMonstrous()) {

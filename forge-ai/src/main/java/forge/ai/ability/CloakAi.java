@@ -14,7 +14,7 @@ public class CloakAi extends ManifestBaseAi {
         // (e.g. Grafdigger's Cage)
         Card topCopy = CardCopyService.getLKICopy(card);
         topCopy.turnFaceDownNoUpdate();
-        topCopy.setCloaked(true);
+        topCopy.setCloaked(sa);
 
         if (ComputerUtil.isETBprevented(topCopy)) {
             return false;

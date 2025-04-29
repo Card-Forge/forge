@@ -33,11 +33,10 @@ public enum TrackableProperty {
     Flipped(TrackableTypes.BooleanType),
     Facedown(TrackableTypes.BooleanType),
     Foretold(TrackableTypes.BooleanType),
-    Manifested(TrackableTypes.BooleanType),
-    Cloaked(TrackableTypes.BooleanType),
     Modal(TrackableTypes.BooleanType),
     Secondary(TrackableTypes.BooleanType),
     DoubleFaced(TrackableTypes.BooleanType),
+    FacedownImageKey(TrackableTypes.StringType),
 
     //TODO?
     Cloner(TrackableTypes.StringType),

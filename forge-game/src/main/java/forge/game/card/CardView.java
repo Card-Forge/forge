@@ -138,13 +138,6 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Foretold);
     }
 
-    public boolean isManifested() {
-        return get(TrackableProperty.Manifested);
-    }
-    public boolean isCloaked() {
-        return get(TrackableProperty.Cloaked);
-    }
-
     public boolean isFlipCard() {
         return get(TrackableProperty.FlipCard);
     }
@@ -171,6 +164,10 @@ public class CardView extends GameEntityView {
 
     public boolean isRoom() {
         return get(TrackableProperty.Room);
+    }
+
+    public String getFacedownImageKey() {
+        return get(TrackableProperty.FacedownImageKey);
     }
 
     /*
@@ -1027,12 +1024,11 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.FlipCard, c.isFlipCard());
         set(TrackableProperty.Facedown, c.isFaceDown());
         set(TrackableProperty.Foretold, c.isForetold());
-        set(TrackableProperty.Manifested, c.isManifested());
-        set(TrackableProperty.Cloaked, c.isCloaked());
         set(TrackableProperty.Secondary, c.hasState(CardStateName.Secondary));
         set(TrackableProperty.DoubleFaced, c.isDoubleFaced());
         set(TrackableProperty.Modal, c.isModal());
         set(TrackableProperty.Room, c.isRoom());
+        set(TrackableProperty.FacedownImageKey, c.getFacedownImageKey());
 
         //backside
         if (c.getAlternateState() != null)
@@ -1317,17 +1313,7 @@ public class CardView extends GameEntityView {
         }
         public String getImageKey(Iterable<PlayerView> viewers) {
             if (getState() == CardStateName.FaceDown) {
-                if (getCard().getZone() == ZoneType.Exile) {
-                    return ImageKeys.getTokenKey(getCard().isForeTold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD);
-                }
-                if (getCard().isManifested()) {
-                    return ImageKeys.getTokenKey(ImageKeys.MANIFEST_IMAGE);
-                } else if (getCard().isCloaked()) {
-                    return ImageKeys.getTokenKey(ImageKeys.CLOAKED_IMAGE);
-                }
-
-                return ImageKeys.getTokenKey(getType().getCreatureTypes().isEmpty() ? isCreature() ? ImageKeys.MORPH_IMAGE : ImageKeys.HIDDEN_CARD
-                        : getType().getCreatureTypes().toString().toLowerCase().replace(" ", "_").replace("[", "").replace("]",""));
+                return ImageKeys.getTokenKey(getCard().getFacedownImageKey());
             }
             if (canBeShownToAny(viewers)) {
                 if (isCloned() && StaticData.instance().useSourceImageForClone()) {

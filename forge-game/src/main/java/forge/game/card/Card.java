@@ -20,6 +20,7 @@ package forge.game.card;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.*;
 import forge.GameCommand;
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.CardDb.CardArtPreference;
@@ -206,8 +207,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean tributed;
     private Card suspectedEffect = null;
 
-    private boolean manifested;
-    private boolean cloaked;
+    private SpellAbility manifestedSA;
+    private SpellAbility cloakedSA;
 
     private boolean foretold;
     private boolean foretoldCostByEffect;
@@ -576,8 +577,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // Cleared tests, about to change states
         if (currentStateName.equals(CardStateName.FaceDown) && state.equals(CardStateName.Original)) {
-            this.setManifested(false);
-            this.setCloaked(false);
+            this.setManifested(null);
+            this.setCloaked(null);
         }
 
         currentStateName = state;
@@ -766,12 +767,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         setController(p, game.getNextTimestamp());
 
         // Mark this card as "manifested"
-        setManifested(true);
+        setManifested(sa);
 
         // Move to p's battlefield
         Card c = game.getAction().moveToPlay(this, p, sa, params);
         if (c.isInPlay()) {
-            c.setManifested(true);
+            c.setManifested(sa);
             c.turnFaceDown(true);
             c.updateStateForView();
         }
@@ -790,14 +791,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         setController(p, game.getNextTimestamp());
 
         // Mark this card as "cloaked"
-        setCloaked(true);
+        setCloaked(sa);
         // give it Ward:2
         getFaceDownState().addIntrinsicKeyword("Ward:2", true);
 
         // Move to p's battlefield
         Card c = game.getAction().moveToPlay(this, p, sa, params);
         if (c.isInPlay()) {
-            c.setCloaked(true);
+            c.setCloaked(sa);
             c.turnFaceDown(true);
             c.updateStateForView();
         }
@@ -2953,10 +2954,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (isSuspected()) {
             sb.append("Suspected\r\n");
         }
-        if (manifested) {
+        if (isManifested()) {
             sb.append("Manifested\r\n");
         }
-        if (cloaked) {
+        if (isCloaked()) {
             sb.append("Cloaked\r\n");
         }
         String keywordText = keywordsToText(getUnhiddenKeywords(state));
@@ -6554,6 +6555,32 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return (c != null ? c.getImageKey() : "");
     }
 
+    public final String getFacedownImageKey() {
+        if (isInZone(ZoneType.Exile)) {
+            return isForetold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD;
+        }
+
+        if (isManifested()) {
+            String set = getManifestedSA().getCardState().getSetCode();
+            return ImageKeys.MANIFEST_IMAGE + "_" + set;
+        }
+        if (isCloaked()) {
+            String set = getCloakedSA().getCardState().getSetCode();
+            return ImageKeys.CLOAKED_IMAGE + "_" + set;
+        }
+        if (getCastSA() != null) {
+            String set = getCastSA().getCardState().getSetCode();
+            if (getCastSA().isKeyword(Keyword.DISGUISE)) {
+                return ImageKeys.CLOAKED_IMAGE + "_" + set;
+            } else if (getCastSA().isKeyword(Keyword.MORPH) || getCastSA().isKeyword(Keyword.MEGAMORPH)) {
+                return ImageKeys.MORPH_IMAGE + "_" + set;
+            }
+        }
+        // TODO add face-down SA to key
+
+        return ImageKeys.HIDDEN_CARD;
+    }
+
     public final boolean isTributed() { return tributed; }
     public final void setTributed(final boolean b) {
         tributed = b;
@@ -6754,17 +6781,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean isManifested() {
-        return manifested;
+        return manifestedSA != null;
     }
-    public final void setManifested(final boolean manifested) {
-        this.manifested = manifested;
+    public final SpellAbility getManifestedSA() {
+        return manifestedSA;
+    }
+    public final void setManifested(final SpellAbility sa) {
+        this.manifestedSA = sa;
     }
 
     public final boolean isCloaked() {
-        return cloaked;
+        return cloakedSA != null;
     }
-    public final void setCloaked(final boolean cloaked) {
-        this.cloaked = cloaked;
+    public final SpellAbility getCloakedSA() {
+        return cloakedSA;
+    }
+    public final void setCloaked(final SpellAbility sa) {
+        this.cloakedSA = sa;
     }
 
     public final boolean isForetold() {
