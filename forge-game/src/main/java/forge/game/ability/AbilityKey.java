@@ -94,6 +94,7 @@ public enum AbilityKey {
     Mode("Mode"),
     Modifier("Modifier"),
     MonstrosityAmount("MonstrosityAmount"),
+    NaturalResult("NaturalResult"),
     NewCard("NewCard"),
     NewCounterAmount("NewCounterAmount"),
     NoPreventDamage("NoPreventDamage"),

@@ -746,7 +746,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<Integer> chooseDiceToReroll(List<Integer> rolls) {
+    public List<Integer> chooseDiceToReroll(List<Integer> rolls, String cardName, int cardID, CardView cardView) {
         //TODO create AI logic for this
         return new ArrayList<>();
     }

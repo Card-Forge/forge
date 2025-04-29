@@ -5,9 +5,7 @@ import com.google.common.collect.Maps;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.event.GameEventRollDie;
 import forge.game.keyword.Keyword;
@@ -41,6 +39,54 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         return sb.toString();
+    }
+
+    public static class DieRollResult {
+        private int naturalValue;
+        private int modifiedValue;
+
+        public DieRollResult(int naturalValue, int modifiedValue) {
+            this.naturalValue = naturalValue;
+            this.modifiedValue = modifiedValue;
+        }
+        // Getters
+        public int getNaturalValue() {
+            return naturalValue;
+        }
+        public int getModifiedValue() {
+            return modifiedValue;
+        }
+        // Setters
+        public void setNaturalValue(int naturalValue) {
+            this.naturalValue = naturalValue;
+        }
+        public void setModifiedValue(int modifiedValue) {
+            this.modifiedValue = modifiedValue;
+        }
+    }
+
+    public static List<DieRollResult> getResultsList(List<Integer> naturalResults) {
+        List<DieRollResult> results = new ArrayList<>();
+        for (int r : naturalResults) {
+            results.add(new DieRollResult(r, r));
+        }
+        return results;
+    }
+
+    public static List<Integer> getNaturalResults(List<DieRollResult> results) {
+        List<Integer> naturalResults = new ArrayList<>();
+        for (DieRollResult r : results) {
+            naturalResults.add(r.getNaturalValue());
+        }
+        return naturalResults;
+    }
+
+    public static List<Integer> getFinalResults(List<DieRollResult> results) {
+        List<Integer> naturalResults = new ArrayList<>();
+        for (DieRollResult r : results) {
+            naturalResults.add(r.getModifiedValue());
+        }
+        return naturalResults;
     }
 
     /* (non-Javadoc)
@@ -96,39 +142,45 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         // Reroll Phase:
-
-        CardCollection canRerollDice = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), "RerollDieRoll");
+        String monitorKeyword = "Once each turn, you may pay {1} to reroll one or more dice you rolled.";
+        List<Card> canRerollDice = getRerollCards(player, monitorKeyword);
 
         for (Card c : canRerollDice) {
-            List<Integer> diceToReroll = player.getController().chooseDiceToReroll(naturalRolls);
+            List<Integer> diceToReroll = player.getController().chooseDiceToReroll(naturalRolls, c.getName(), c.getId(), c.getView());
             if (!diceToReroll.isEmpty()) {
+                String[] parts = c.getSVar("ModsThisTurn").split("\\$");
+                int activationsThisTurn = Integer.parseInt(parts[1]);
                 SpellAbility modifierSA = c.getFirstSpellAbility();
                 Cost cost = new Cost(c.getSVar("RollRerollCost"), false);
-                boolean paid = player.getController().payCostToPreventEffect(cost, modifierSA, false, null); //change to payCostDuringRoll
+                boolean paid = player.getController().payCostDuringRoll(cost, modifierSA, null);
                 if (paid) {
                     naturalRolls.removeAll(diceToReroll);
                     int amountToReroll = diceToReroll.size();
                     List<Integer> rerolls = rollAction(amountToReroll, sides, 0, null, ignored, Maps.newHashMap(), player, repParams);
                     naturalRolls.addAll(rerolls);
+                    activationsThisTurn += 1;
+                    c.setSVar("ModsThisTurn", "Number$" + activationsThisTurn);
                 }
-            } else {break;}
+            }
         }
 
         // Modification Phase:
         List<Integer> unmodifiedRolls = new ArrayList<>(naturalRolls);
         List<Integer> modifiedRolls = new ArrayList<>();
         List<Integer> finalResults = new ArrayList<>();
+        List<DieRollResult> resultsList = new ArrayList<>();
         Integer rollToModify;
         String xenoKeyword = "After you roll a die, you may remove a +1/+1 counter from Xenosquirrels. If you do, increase or decrease the result by 1.";
         String nightShiftKeyword = "After you roll a die, you may pay 1 life. If you do, increase or decrease the result by 1. Do this only once each turn.";
         List<Card> canIncrementDice = getIncrementCards(player, xenoKeyword, nightShiftKeyword);
+        boolean hasBeenModified = false;
 
         if (!canIncrementDice.isEmpty()) {
             do {
                 rollToModify = player.getController().chooseRollToModify(unmodifiedRolls);
                 if (rollToModify != null) {
-                    canIncrementDice = getIncrementCards(player, xenoKeyword, nightShiftKeyword);
                     boolean modified = false;
+                    DieRollResult dieResult = new DieRollResult(rollToModify, rollToModify);
                     for (Card c : canIncrementDice) {
                         String[] parts = c.getSVar("ModsThisTurn").split("\\$");
                         int activationsThisTurn = Integer.parseInt(parts[1]);
@@ -136,7 +188,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                         String costString = c.getSVar("RollModifyCost");
                         System.out.println(costString);
                         Cost cost = new Cost(costString, false);
-                        boolean paid = player.getController().payCostDuringRoll(cost, modifierSA,  null); //change to payCostDuringRoll
+                        boolean paid = player.getController().payCostDuringRoll(cost, modifierSA,  null);
                         if (paid) {
                             Integer increment = player.getController().chooseRollIncrement(List.of(1, -1), rollToModify);
                             if (!modified) {unmodifiedRolls.remove(rollToModify); modified = true;}
@@ -148,27 +200,44 @@ public class RollDiceEffect extends SpellAbilityEffect {
                             System.out.println("modified:" + modifiedRolls);
                         }
                     }
-                    if (modified) {modifiedRolls.add(rollToModify);}
+                    if (modified) {
+                        modifiedRolls.add(rollToModify);
+                        dieResult.setModifiedValue(rollToModify);
+                        resultsList.add(dieResult);
+                        hasBeenModified = true;
+                    }
+                    canIncrementDice = getIncrementCards(player, xenoKeyword, nightShiftKeyword);
                 }
-            } while (rollToModify != null && !unmodifiedRolls.isEmpty());
-            finalResults.addAll(modifiedRolls);
-            finalResults.addAll(unmodifiedRolls);
-            //TODO this does not work with critical hit, we need to make sure to treat natural rolls differently just for that card
-            naturalRolls = finalResults;
+            } while (rollToModify != null && !unmodifiedRolls.isEmpty() && !canIncrementDice.isEmpty());
         }
+        finalResults.addAll(modifiedRolls);
+        finalResults.addAll(unmodifiedRolls);
+        for (Integer unmodified : unmodifiedRolls) {
+            resultsList.add(new DieRollResult(unmodified, unmodified));
+        }
+        //TODO this does not work with critical hit, we need to make sure to treat natural rolls differently just for that card
+        System.out.println("modified: " + modifiedRolls);
+        System.out.println("unmodified: " + unmodifiedRolls);
+        System.out.println("FinalList: " + finalResults);
+        System.out.println("NaturalList: " + naturalRolls);
+        System.out.println("ResultsList: " + resultsList);
 
         //Notify of results
         if (amount > 0) {
             StringBuilder sb = new StringBuilder();
-            String rollResults = StringUtils.join(naturalRolls, ", ");
+            String rollResults = StringUtils.join(getFinalResults(resultsList), ", ");
             String resultMessage = toVisitAttractions ? "lblAttractionRollResult" : "lblPlayerRolledResult";
             sb.append(Localizer.getInstance().getMessage(resultMessage, player, rollResults));
             if (!ignored.isEmpty()) {
                 sb.append("\r\n").append(Localizer.getInstance().getMessage("lblIgnoredRolls",
                         StringUtils.join(ignored, ", ")));
             }
+            if (hasBeenModified) {
+                sb.append("\r\n").append(Localizer.getInstance().getMessage("lblNaturalRolls",
+                        StringUtils.join(getNaturalResults(resultsList), ", ")));
+            }
             player.getGame().getAction().notifyOfValue(sa, player, sb.toString(), null);
-            player.addDieRollThisTurn(naturalRolls);
+            player.addDieRollThisTurn(getFinalResults(resultsList));
         }
 
         List<Integer> rolls = Lists.newArrayList();
@@ -176,8 +245,12 @@ public class RollDiceEffect extends SpellAbilityEffect {
         int evenResults = 0;
         int differentResults = 0;
         int countMaxRolls = 0;
-        for (Integer i : naturalRolls) {
-            final int modifiedRoll = i + modifier;
+        for (DieRollResult i : resultsList) {
+            int naturalRoll = i.getNaturalValue();
+            final int modifiedRoll = i.getModifiedValue() + modifier;
+
+            i.setModifiedValue(modifiedRoll);
+
             if (!rolls.contains(modifiedRoll)) {
                 differentResults++;
             }
@@ -187,7 +260,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             } else {
                 oddResults++;
             }
-            if (i == sides) {
+            if (naturalRoll == sides) {
                 countMaxRolls++;
             }
         }
@@ -205,11 +278,12 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         int rollNum = 1;
-        for (Integer roll : rolls) {
+        for (DieRollResult roll : resultsList) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
             runParams.put(AbilityKey.Sides, sides);
             runParams.put(AbilityKey.Modifier, modifier);
-            runParams.put(AbilityKey.Result, roll);
+            runParams.put(AbilityKey.Result, roll.getModifiedValue());
+            runParams.put(AbilityKey.NaturalResult, roll.getNaturalValue());
             runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
             runParams.put(AbilityKey.Number, player.getNumRollsThisTurn() - amount + rollNum);
             player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
@@ -217,30 +291,86 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
         runParams.put(AbilityKey.Sides, sides);
-        runParams.put(AbilityKey.Result, rolls);
+        runParams.put(AbilityKey.Result, getFinalResults(resultsList));
         runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
-        return rolls.stream().reduce(0, Integer::sum);
+        return getFinalResults(resultsList).stream().reduce(0, Integer::sum);
     }
 
-    public static List<Card> getIncrementCards(Player player, String xenoKeyword, String nightShiftKeyword) {
-        CardCollection xenosquirrels = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), xenoKeyword);
-        CardCollection nightShifts = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), nightShiftKeyword);
-        List<Card> canIncrementDice = new ArrayList<>(xenosquirrels);
-        for (Card c : nightShifts) {
+    /**
+     * Gets a list of cards that can reroll dice roll results for a given player.
+     * This is currently only Monitor Monitor
+     *
+     * @param player            The player whose battlefield is being checked for cards that can modify dice rolls
+     * @param monitorKeyword       The keyword text identifying Monitor Monitor cards
+     * @return A list of cards that are currently able to reroll dice
+     */
+    public static List<Card> getRerollCards(Player player, String monitorKeyword) {
+        CardCollection monitors = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), monitorKeyword);
+        List<Card> canRerollDice = new ArrayList<>();
+        for (Card c : monitors) {
+            // Monitor Monitor has a limit of once per turn
             String activationLimit = c.getSVar("RollModificationsLimit");
             String[] parts = c.getSVar("ModsThisTurn").split("\\$");
             int activationsThisTurn = Integer.parseInt(parts[1]);
             System.out.println("LIMIT: " + activationLimit);
             System.out.println("CURRENT: " + activationsThisTurn);
             if (activationLimit.equals("None") || activationsThisTurn < Integer.parseInt(activationLimit)) {
+                canRerollDice.add(c);
+            }
+        }
+        return canRerollDice;
+    }
+
+    /**
+     * Gets a list of cards that can modify dice roll results for a given player.
+     * This includes both Xenosquirrels (which can remove +1/+1 counters to modify rolls)
+     * and Night Shift cards (which can pay life to modify rolls once per turn).
+     *
+     * @param player            The player whose battlefield is being checked for cards that can modify dice rolls
+     * @param xenoKeyword       The keyword text identifying Xenosquirrel cards
+     * @param nightShiftKeyword The keyword text identifying Night Shift cards
+     * @return A list of cards that are currently able to modify dice roll results
+     */
+    public static List<Card> getIncrementCards(Player player, String xenoKeyword, String nightShiftKeyword) {
+        CardCollection xenosquirrels = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), xenoKeyword);
+        CardCollection nightShifts = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), nightShiftKeyword);
+        List<Card> canIncrementDice = new ArrayList<>();
+        for (Card c : xenosquirrels) {
+            // Xenosquirrels must have a P1P1 counter on it to remove in order to modify
+            System.out.println("Xenosquierrle Counters: " + c.getCounters());
+            Integer P1P1Counters = c.getCounters().get(CounterType.get(CounterEnumType.P1P1));
+            if (P1P1Counters != null && P1P1Counters > 0 && c.canRemoveCounters(CounterType.get(CounterEnumType.P1P1))) {
+                canIncrementDice.add(c);
+            }
+        }
+        for (Card c : nightShifts) {
+            // Night Shift of the Living Dead has a limit of once per turn, player must be able to pay the 1 life cost
+            String activationLimit = c.getSVar("RollModificationsLimit");
+            String[] parts = c.getSVar("ModsThisTurn").split("\\$");
+            int activationsThisTurn = Integer.parseInt(parts[1]);
+            System.out.println("Night Shift MODS: " + activationsThisTurn + " / " + activationLimit);
+            if ((activationLimit.equals("None") || activationsThisTurn < Integer.parseInt(activationLimit)) && player.canPayLife(1, true, c.getFirstSpellAbility())) {
                 canIncrementDice.add(c);
             }
         }
         return canIncrementDice;
     }
 
+    /**
+     * Performs the dice rolling action with support for replacements, ignoring rolls, and tracking results.
+     *
+     * @param amount          number of dice to roll
+     * @param sides           number of sides on each die
+     * @param ignore          number of lowest rolls to automatically ignore
+     * @param rollsResult     optional list to store roll results, if null a new list will be created
+     * @param ignored         list to store ignored roll results
+     * @param ignoreChosenMap mapping of players to number of rolls they can choose to ignore
+     * @param player          the player performing the roll
+     * @param repParams       replacement effect parameters
+     * @return list of final roll results after applying ignores and replacements, sorted in ascending order
+     */
     private static List<Integer> rollAction(int amount, int sides, int ignore, List<Integer> rollsResult, List<Integer> ignored, Map<Player, Integer> ignoreChosenMap, Player player, Map<AbilityKey, Object> repParams) {
 
         repParams.put(AbilityKey.Number, amount);

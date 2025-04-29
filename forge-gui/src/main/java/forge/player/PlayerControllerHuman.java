@@ -1439,8 +1439,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public List<Integer> chooseDiceToReroll(List<Integer> rolls) {
-        return getGui().getChoices(Localizer.getInstance().getMessage("lblChooseDiceToReroll"), 0, rolls.size(), rolls);
+    public List<Integer> chooseDiceToReroll(List<Integer> rolls, String cardName, int cardID, CardView cardView) {
+        return getGui().many(Localizer.getInstance().getMessage("lblChooseDiceToRerollTitle", cardName ,cardID),
+                Localizer.getInstance().getMessage("lblChooseDiceToRerollCaption", cardName ,cardID),0, rolls.size(), rolls, cardView);
     }
 
     @Override

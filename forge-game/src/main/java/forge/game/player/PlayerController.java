@@ -229,7 +229,7 @@ public abstract class PlayerController {
 
     public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);
     public abstract Integer chooseRollToIgnore(List<Integer> rolls);
-    public abstract List<Integer> chooseDiceToReroll(List<Integer> rolls);
+    public abstract List<Integer> chooseDiceToReroll(List<Integer> rolls, String cardName, int cardID, CardView cardView);
     public abstract Integer chooseRollToModify(List<Integer> rolls);
     public abstract Integer chooseRollModifyEffect(List<Integer> modifiers);
     public abstract Integer chooseRollIncrement(List<Integer> increments, Integer currentResult);
