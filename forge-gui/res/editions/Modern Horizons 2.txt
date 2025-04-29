@@ -591,7 +591,6 @@ ScryfallCode=MH2
 6 Zuran Orb|MH2|1
 
 [tokens]
-0 rw_4_4_a_golem @
 1 w_1_1_bird_flying @Howard Lyon
 2 u_0_3_crab @Yeong-Hao Han
 3 b_0_0_phyrexian_germ @Igor Kieryluk
@@ -601,6 +600,7 @@ ScryfallCode=MH2
 9 g_4_4_beast @Lucas Graciano
 10 g_5_3_elemental @Nils Hamm
 11 g_1_1_squirrel @Daniel Ljunggren
+12 rw_4_4_a_golem @Matt Stewart
 13 bg_1_1_insect @Kim Sokol
 14 c_a_clue_draw @John Avon
 15 c_a_clue_draw @John Avon
@@ -612,7 +612,5 @@ ScryfallCode=MH2
 21 c_a_treasure_sac @Alayna Danner
 
 [other]
-embalm_angel_of_sanctions
-embalm_vizier_of_many_faces
-eternalize_champion_of_wits
-eternalize_timeless_dragon
+4 eternalize_timeless_dragon @Anastasia Ovchinnikova
+5 eternalize_champion_of_wits @Deruchenko Alexander
