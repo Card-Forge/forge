@@ -421,9 +421,7 @@ ScryfallCode=TDC
 413 R Yavimaya Coast @Jesper Ejsing
 
 [tokens]
-0 gw_1_1_citizen @Unknown
-0 [other] @Unknown
-0 eternalize_timeless_witness @Unknown
+0 gw_1_1_citizen @
 1 c_10_10_eldrazi @Jack Wang
 2 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
 3 w_1_1_dog @Manuel Castañón
