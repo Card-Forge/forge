@@ -1087,7 +1087,7 @@ ScryfallCode=CMM
 10 w_1_1_spirit_flying @Ryan Yee
 11 u_1_1_bird_illusion_flying @James Paick
 12 u_2_2_drake_flying @Svetlin Velinov
-13 u_x_x_zombie @
+13 u_x_x_zombie @Dave Kendall
 14 b_1_1_assassin_deathtouch_haste @Josu Hernaiz
 15 b_5_5_demon_flying @Sidharth Chaturvedi
 16 b_0_0_phyrexian_germ @Igor Kieryluk
@@ -1116,7 +1116,7 @@ ScryfallCode=CMM
 39 wb_1_1_spirit_flying @Josh Hass
 40 c_a_clue_draw @John Avon
 41 c_0_0_a_construct_total_artifacts @Victor Adame Minguez
-42 c_x_x_a_construct @
+42 c_x_x_a_construct @Magali Villeneuve
 43 c_1_1_a_myr @Ryan Pancoast
 44 c_1_1_a_phyrexian_myr @Matt Stewart
 45 c_1_1_a_servo @Igor Kieryluk
@@ -1143,3 +1143,18 @@ ScryfallCode=CMM
 74 c_1_1_a_construct @Jakub Kasper
 75 c_6_12_a_construct_trample @Jung Park
 76 c_3_3_a_phyrexian_golem @Volkan Baǵa
+
+[other]
+49 blessing @Yeong-Hao Han
+50 monarch @Volkan Baǵa
+51 Emblem_daretti_scrap_savant @Dan Murayama Scott
+52 emblem_ob_nixilis_of_the_black_oath @Daarken
+53 emblem_teferi_temporal_archmage @Tyler Jacobson
+54 copy @David Palumbo
+55 copy @Jason Rainville
+56 manifest @Raymond Swanland
+77 emblem_ajani_steadfast @Chris Rahn
+78 emblem_chandra_awakened_inferno @Chris Rahn
+79 emblem_chandra_torch_of_defiance @Magali Villeneuve
+80 emblem_elspeth_suns_champion @Tyler Jacobson
+81 emblem_narset_of_the_ancient_way @Yongjae Choi
