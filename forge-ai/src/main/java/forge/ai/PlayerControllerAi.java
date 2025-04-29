@@ -758,7 +758,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Integer chooseRollIncrement(List<Integer> increments) {
+    public Integer chooseRollModifyEffect(List<Integer> modifiers) {
+        //TODO create AI logic for this
+        return Aggregates.random(modifiers);
+    }
+
+    @Override
+    public Integer chooseRollIncrement(List<Integer> increments, Integer currentResult) {
         //TODO create AI logic for this
         return Aggregates.random(increments);
     }

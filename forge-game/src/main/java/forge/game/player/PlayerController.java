@@ -231,7 +231,8 @@ public abstract class PlayerController {
     public abstract Integer chooseRollToIgnore(List<Integer> rolls);
     public abstract List<Integer> chooseDiceToReroll(List<Integer> rolls);
     public abstract Integer chooseRollToModify(List<Integer> rolls);
-    public abstract Integer chooseRollIncrement(List<Integer> increments);
+    public abstract Integer chooseRollModifyEffect(List<Integer> modifiers);
+    public abstract Integer chooseRollIncrement(List<Integer> increments, Integer currentResult);
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional);
 
