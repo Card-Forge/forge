@@ -6,12 +6,17 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.cost.Cost;
 import forge.game.event.GameEventRollDie;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
@@ -80,55 +85,66 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         Map<Player, Integer> ignoreChosenMap = Maps.newHashMap();
+        Card squirrelWhacker = null;
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
-        repParams.put(AbilityKey.Number, amount);
-        repParams.put(AbilityKey.Ignore, ignore);
-        repParams.put(AbilityKey.IgnoreChosen, ignoreChosenMap);
-
-        switch (player.getGame().getReplacementHandler().run(ReplacementType.RollDice, repParams)) {
-            case NotReplaced:
-                break;
-            case Updated: {
-                amount = (int) repParams.get(AbilityKey.Number);
-                ignore = (int) repParams.get(AbilityKey.Ignore);
-                //noinspection unchecked
-                ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
-                break;
-            }
-        }
-
-        List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
-
-        for (int i = 0; i < amount; i++) {
-            int roll = MyRandom.getRandom().nextInt(sides) + 1;
-            // Play the die roll sound
-            player.getGame().fireEvent(new GameEventRollDie());
-            player.roll();
-            naturalRolls.add(roll);
-        }
-
-        naturalRolls.sort(null);
-
         List<Integer> ignored = new ArrayList<>();
-        // Ignore lowest rolls
-        if (ignore > 0) {
-            for (int i = ignore - 1; i >= 0; --i) {
-                ignored.add(naturalRolls.get(i));
-                naturalRolls.remove(i);
-            }
-        }
-        // Player chooses to ignore rolls
-        for (Player chooser : ignoreChosenMap.keySet()) {
-            for (int ig = 0; ig < ignoreChosenMap.get(chooser); ig++) {
-                Integer ign = chooser.getController().chooseRollToIgnore(naturalRolls);
-                ignored.add(ign);
-                naturalRolls.remove(ign);
-            }
-        }
+        List<Integer> naturalRolls = rollAction(amount, sides, ignore, rollsResult, ignored, ignoreChosenMap, player, repParams);
 
         if (sa != null && sa.hasParam("UseHighestRoll")) {
             naturalRolls.subList(0, naturalRolls.size() - 1).clear();
+        }
+
+        // Reroll Phase:
+
+        CardCollection canRerollDice = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), "RerollDieRoll");
+
+        for (Card c : canRerollDice) {
+            List<Integer> diceToReroll = player.getController().chooseDiceToReroll(naturalRolls);
+            if (!diceToReroll.isEmpty()) {
+                SpellAbility modifierSA = c.getFirstSpellAbility();
+                Cost cost = new Cost(c.getSVar("RollRerollCost"), false);
+                boolean paid = player.getController().payCostToPreventEffect(cost, modifierSA, false, null); //change to payCostDuringRoll
+                if (paid) {
+                    naturalRolls.removeAll(diceToReroll);
+                    int amountToReroll = diceToReroll.size();
+                    List<Integer> rerolls = rollAction(amountToReroll, sides, 0, null, ignored, Maps.newHashMap(), player, repParams);
+                    naturalRolls.addAll(rerolls);
+                }
+            } else {break;}
+        }
+
+        // Modification Phase:
+        List<Integer> unmodifiedRolls = new ArrayList<>(naturalRolls);
+        List<Integer> modifiedRolls = new ArrayList<>();
+        List<Integer> finalResults = new ArrayList<>();
+        Integer rollToModify;
+        CardCollection canIncrementDice = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), "incrementDieRoll");
+
+        if (!canIncrementDice.isEmpty()) {
+            do {
+                rollToModify = player.getController().chooseRollToModify(unmodifiedRolls);
+                if (rollToModify != null) {
+                    boolean modified = false;
+                    canIncrementDice = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), "incrementDieRoll");
+                    for (Card c : canIncrementDice) {
+                        SpellAbility modifierSA = c.getFirstSpellAbility();
+                        Cost cost = new Cost(c.getSVar("RollModifyCost"), false);
+                        boolean paid = player.getController().payCostToPreventEffect(cost, modifierSA, false, null); //change to payCostDuringRoll
+                        if (paid) {
+                            int increment = player.getController().chooseRollIncrement(List.of(1, -1));
+                            rollToModify += increment;
+                            modified = true;
+                        }
+                    }
+                    if (modified) {
+                        modifiedRolls.add(rollToModify);
+                        unmodifiedRolls.remove(rollToModify);
+                    }
+                }
+            } while (rollToModify != null);
+            finalResults.addAll(modifiedRolls);
+            finalResults.addAll(unmodifiedRolls);
         }
 
         //Notify of results
@@ -196,6 +212,54 @@ public class RollDiceEffect extends SpellAbilityEffect {
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
         return rolls.stream().reduce(0, Integer::sum);
+    }
+
+    private static List<Integer> rollAction(int amount, int sides, int ignore, List<Integer> rollsResult, List<Integer> ignored, Map<Player, Integer> ignoreChosenMap, Player player, Map<AbilityKey, Object> repParams) {
+
+        repParams.put(AbilityKey.Number, amount);
+        repParams.put(AbilityKey.Ignore, ignore);
+        repParams.put(AbilityKey.IgnoreChosen, ignoreChosenMap);
+        switch (player.getGame().getReplacementHandler().run(ReplacementType.RollDice, repParams)) {
+            case NotReplaced:
+                break;
+            case Updated: {
+                amount = (int) repParams.get(AbilityKey.Number);
+                ignore = (int) repParams.get(AbilityKey.Ignore);
+                //noinspection unchecked
+                ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
+                break;
+            }
+        }
+
+        List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
+
+        for (int i = 0; i < amount; i++) {
+            int roll = MyRandom.getRandom().nextInt(sides) + 1;
+            // Play the die roll sound
+            player.getGame().fireEvent(new GameEventRollDie());
+            player.roll();
+            naturalRolls.add(roll);
+        }
+
+        naturalRolls.sort(null);
+
+        // Ignore lowest rolls
+        if (ignore > 0) {
+            for (int i = ignore - 1; i >= 0; --i) {
+                ignored.add(naturalRolls.get(i));
+                naturalRolls.remove(i);
+            }
+        }
+        // Player chooses to ignore rolls
+        for (Player chooser : ignoreChosenMap.keySet()) {
+            for (int ig = 0; ig < ignoreChosenMap.get(chooser); ig++) {
+                Integer ign = chooser.getController().chooseRollToIgnore(naturalRolls);
+                ignored.add(ign);
+                naturalRolls.remove(ign);
+            }
+        }
+
+        return naturalRolls;
     }
 
     private static void resolveSub(SpellAbility sa, int num) {

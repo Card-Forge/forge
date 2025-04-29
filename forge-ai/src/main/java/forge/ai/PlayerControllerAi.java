@@ -746,6 +746,24 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public List<Integer> chooseDiceToReroll(List<Integer> rolls) {
+        //TODO create AI logic for this
+        return new ArrayList<>();
+    }
+
+    @Override
+    public Integer chooseRollToModify(List<Integer> rolls) {
+        //TODO create AI logic for this
+        return Aggregates.random(rolls);
+    }
+
+    @Override
+    public Integer chooseRollIncrement(List<Integer> increments) {
+        //TODO create AI logic for this
+        return Aggregates.random(increments);
+    }
+
+    @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
         return !ComputerUtil.wantMulligan(player, cardsToReturn);
     }
@@ -1204,6 +1222,11 @@ public class PlayerControllerAi extends PlayerController {
             final CostPayment pay = new CostPayment(cost, sa);
             return pay.payComputerCosts(new AiCostDecision(player, sa, true));
         }
+        return false;
+    }
+
+    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa, final FCollectionView<Player> allPayers) {
+        // TODO logic for AI to pay rerolls and modification costs
         return false;
     }
 

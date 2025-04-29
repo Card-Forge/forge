@@ -229,6 +229,9 @@ public abstract class PlayerController {
 
     public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);
     public abstract Integer chooseRollToIgnore(List<Integer> rolls);
+    public abstract List<Integer> chooseDiceToReroll(List<Integer> rolls);
+    public abstract Integer chooseRollToModify(List<Integer> rolls);
+    public abstract Integer chooseRollIncrement(List<Integer> increments);
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional);
 
@@ -292,6 +295,7 @@ public abstract class PlayerController {
     public abstract List<CostPart> orderCosts(List<CostPart> costs);
 
     public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers);
+    public abstract boolean payCostDuringRoll(Cost cost, SpellAbility sa, FCollectionView<Player> allPayers);
 
     public abstract boolean payCombatCost(Card card, Cost cost, SpellAbility sa, String prompt);
 

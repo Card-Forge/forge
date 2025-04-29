@@ -1439,6 +1439,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public List<Integer> chooseDiceToReroll(List<Integer> rolls) {
+        return getGui().getChoices(Localizer.getInstance().getMessage("lblChooseDiceReroll"), 0, rolls.size(), rolls);
+    }
+
+    @Override
+    public Integer chooseRollToModify(List<Integer> rolls) {
+        return getGui().oneOrNone(Localizer.getInstance().getMessage("lblChooseRollModify"), rolls);
+    }
+
+    @Override
+    public Integer chooseRollIncrement(List<Integer> increments) {
+        return getGui().oneOrNone(Localizer.getInstance().getMessage("lblChooseRollIncrement"), increments);
+    }
+
+
+    @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
                        final ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
         if (optional) {
@@ -1980,6 +1996,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             prompt = "Cumulative upkeep for " + sa.getHostCard();
         }
         return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, prompt);
+    }
+
+    @Override
+    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa, final FCollectionView<Player> allPayers) {
+        // if it's paid by the AI already the human can pay, but it won't change anything
+        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
     }
 
     // stores saved order for different sets of SpellAbilities
