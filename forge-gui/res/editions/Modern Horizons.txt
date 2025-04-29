@@ -270,22 +270,22 @@ ScryfallCode=MH1
 255 R Flusterstorm @Chris Rallis
 
 [tokens]
-b_2_2_zombie
-c_0_0_a_construct_total_artifacts
-c_1_1_a_myr
-c_2_2_shapeshifter_changeling
-c_3_3_a_phyrexian_golem
-g_1_1_squirrel
-g_1_2_spider_reach
-g_2_2_bear
-g_3_3_elephant
-g_4_4_rhino_trample
-marit_lage
-r_1_1_elemental
-r_1_1_goblin
-r_3_1_elemental_trample_haste
-u_1_1_illusion_flying
-w_1_1_bird_flying
-w_1_1_soldier
-w_4_4_angel_flying_vigilance
-wb_1_1_spirit_flying
+0 c_3_3_a_phyrexian_golem @Unknown
+1 c_2_2_shapeshifter_changeling @Johann Bodin
+2 w_4_4_angel_flying_vigilance @Winona Nelson
+3 w_1_1_bird_flying @James Ryman
+4 w_1_1_soldier @Greg Staples
+5 u_1_1_illusion_flying @Véronique Meignaud
+6 marit_lage @Stephan Martiniere
+7 b_2_2_zombie @Anna Steinbauer
+8 r_1_1_elemental @Winona Nelson
+9 r_3_1_elemental_trample_haste @Victor Adame Minguez
+10 r_1_1_goblin @Kev Walker
+11 g_2_2_bear @Heather Hudson
+12 g_3_3_elephant @Lars Grant-West
+13 g_4_4_rhino_trample @Tomasz Jedruszek
+14 g_1_2_spider_reach @Daniel Ljunggren
+15 g_1_1_squirrel @Daniel Ljunggren
+16 wb_1_1_spirit_flying @Josh Hass
+17 c_0_0_a_construct_total_artifacts @Victor Adame Minguez
+19 c_1_1_a_myr @Ryan Pancoast

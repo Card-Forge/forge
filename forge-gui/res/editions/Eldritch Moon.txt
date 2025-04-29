@@ -221,16 +221,16 @@ ScryfallCode=EMN
 205 U Nephalia Academy @Adam Paquette
 
 [tokens]
-c_3_2_eldrazi_horror
-w_1_1_human_soldier
-w_1_1_spirit_flying
-u_1_1_human_wizard
-b_2_2_zombie
-b_2_2_zombie
-b_2_2_zombie
-b_x_x_zombie
-r_1_1_devil_burn
-r_1_1_human
-g_1_1_insect
-g_1_2_spider_reach
-g_2_2_wolf
+0 w_1_1_human_soldier @Unknown
+0 w_1_1_spirit_flying @Unknown
+0 r_1_1_devil_burn @Unknown
+0 g_1_1_insect @Unknown
+0 g_2_2_wolf @Unknown
+1 c_3_2_eldrazi_horror @Jason Felix
+2 u_1_1_human_wizard @Nils Hamm
+3 b_2_2_zombie @Tomasz Jedruszek
+3 b_2_2_zombie @Tomasz Jedruszek
+3 b_2_2_zombie @Tomasz Jedruszek
+6 b_x_x_zombie @Daarken
+7 r_1_1_human @Kieran Yanner
+8 g_1_2_spider_reach @Christine Choi

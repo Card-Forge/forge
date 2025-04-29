@@ -13,6 +13,7 @@ import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
@@ -1305,10 +1306,10 @@ public abstract class GameState {
                 } else if (info.startsWith("FaceDown")) {
                     c.turnFaceDown(true);
                     if (info.endsWith("Manifested")) {
-                        c.setManifested(true);
+                        c.setManifested(new SpellAbility.EmptySa(ApiType.Manifest, c));
                     }
                     if (info.endsWith("Cloaked")) {
-                        c.setCloaked(true);
+                        c.setCloaked(new SpellAbility.EmptySa(ApiType.Cloak, c));
                     }
                 } else if (info.startsWith("Transformed")) {
                     c.setState(CardStateName.Transformed, true);

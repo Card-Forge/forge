@@ -278,15 +278,15 @@ ScryfallCode=ISD
 264 L Forest @Eytan Zana
 
 [tokens]
-w_4_4_angel_flying
-w_1_1_spirit_flying
-u_2_2_homunculus
-b_5_5_demon_flying
-b_2_2_vampire_flying
-b_1_1_wolf_deathtouch
-b_2_2_zombie
-b_2_2_zombie
-b_2_2_zombie
-g_x_x_ooze_gutter_grime
-g_1_2_spider_reach
-g_2_2_wolf
+1 w_4_4_angel_flying @Winona Nelson
+2 w_1_1_spirit_flying @Kev Walker
+3 u_2_2_homunculus @Johann Bodin
+4 b_5_5_demon_flying @Kev Walker
+5 b_2_2_vampire_flying @Svetlin Velinov
+6 b_1_1_wolf_deathtouch @Daniel Ljunggren
+7 b_2_2_zombie @Lucas Graciano
+7 b_2_2_zombie @Lucas Graciano
+7 b_2_2_zombie @Lucas Graciano
+10 g_x_x_ooze_gutter_grime @Erica Yang
+11 g_1_2_spider_reach @Daniel Ljunggren
+12 g_2_2_wolf @David Palumbo

@@ -421,38 +421,40 @@ ScryfallCode=TDC
 413 R Yavimaya Coast @Jesper Ejsing
 
 [tokens]
-b_1_1_rat
-b_1_1_snake_deathtouch
-c_10_10_eldrazi
-c_1_1_a_myr
-c_1_1_a_servo
-c_1_1_a_soldier
-c_1_1_a_thopter_flying
-c_a_gold_sac
-first_mate_ragavan
-g_0_1_plant
-g_1_1_insect
-g_1_1_insect_flying_deathtouch
-g_1_2_spider_reach
-g_3_3_beast
-g_3_3_frog_lizard
-gw_1_1_citizen
-karox_bladewing
-r_0_2_dragon_egg_defender_hatches_dragon
-r_1_1_elemental
-r_1_1_elemental_haste
-r_2_2_dragon_flying_firebreathing
-r_5_5_dragon_flying
-r_x_x_dragon_illusion_flying_haste
-u_4_3_salamander_warrior
-ur_4_4_elemental
-w_0_1_goat
-w_1_1_dog
-w_1_1_human
-w_1_1_spirit_flying
-w_1_3_wall_defender
-w_4_4_angel_flying_vigilance
-wb_2_1_inkling_flying
+0 gw_1_1_citizen @Unknown
+0 [other] @Unknown
+0 eternalize_timeless_witness @Unknown
+1 c_10_10_eldrazi @Jack Wang
+2 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
+3 w_1_1_dog @Manuel Castañón
+4 w_0_1_goat @Adam Paquette
+5 w_1_1_human @Ben Maier
+6 w_1_1_spirit_flying @Jason A. Engle
+7 w_1_3_wall_defender @Gaboleps
+8 u_4_3_salamander_warrior @J.P. Targete
+9 b_1_1_rat @Mike Bierek
+10 b_1_1_snake_deathtouch @Caroline Gariba
+12 r_0_2_dragon_egg_defender_hatches_dragon @Jehan Choo
+13 r_2_2_dragon_flying_firebreathing @Lars Grant-West
+14 r_5_5_dragon_flying @Raymond Swanland
+15 r_x_x_dragon_illusion_flying_haste @Andrew Mar
+17 r_1_1_elemental @Cyril Van Der Haegen
+18 first_mate_ragavan @Maxime Minard
+19 karox_bladewing @XiaoDi Jin
+20 g_3_3_beast @John Donahue
+21 g_3_3_frog_lizard @Jack Wang
+22 r_1_1_elemental_haste @Cyril Van Der Haegen
+23 g_1_1_insect @
+24 g_0_1_plant @Daren Bader
+25 g_1_1_insect_flying_deathtouch @
+26 g_1_2_spider_reach @
+27 ur_4_4_elemental @Alayna Danner
+28 wb_2_1_inkling_flying @
+29 c_a_gold_sac @Yeong-Hao Han
+30 c_1_1_a_myr @Ryan Pancoast
+31 c_1_1_a_servo @Victor Adame Minguez
+32 c_1_1_a_soldier @Kev Walker
+33 c_1_1_a_thopter_flying @Svetlin Velinov
 
 [other]
 eternalize_timeless_witness

@@ -201,17 +201,17 @@ ScryfallCode=OGW
 184a C Wastes @Raymond Swanland
 
 [tokens]
-c_1_1_eldrazi_scion_sac
-c_1_1_eldrazi_scion_sac
-c_1_1_eldrazi_scion_sac
-c_1_1_eldrazi_scion_sac
-c_1_1_eldrazi_scion_sac
-c_1_1_eldrazi_scion_sac
-w_3_3_angel_flying
-w_2_2_knight_ally
-w_1_1_kor_ally
-u_8_8_octopus
-b_2_2_zombie
-r_3_1_elemental_haste
-g_x_x_elemental
-g_0_1_plant
+0 w_2_2_knight_ally @Unknown
+0 w_1_1_kor_ally @Unknown
+0 u_8_8_octopus @Unknown
+1 c_1_1_eldrazi_scion_sac @Izzy
+2 c_1_1_eldrazi_scion_sac @Izzy
+3 c_1_1_eldrazi_scion_sac @Izzy
+4 c_1_1_eldrazi_scion_sac @Izzy
+5 c_1_1_eldrazi_scion_sac @Izzy
+6 c_1_1_eldrazi_scion_sac @Izzy
+7 w_3_3_angel_flying @Anastasia Ovchinnikova
+8 b_2_2_zombie @Kev Walker
+9 r_3_1_elemental_haste @Raymond Swanland
+10 g_x_x_elemental @Vincent Proce
+11 g_0_1_plant @Daren Bader

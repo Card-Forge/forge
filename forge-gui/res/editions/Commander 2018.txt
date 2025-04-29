@@ -316,28 +316,28 @@ ScryfallCode=C18
 307 L Forest @Min Yum
 
 [tokens]
-mask
-c_1_1_shapeshifter_changeling
-w_4_4_angel_flying
-w_2_2_cat
-w_1_1_soldier
-u_2_1_a_phyrexian_myr
-u_1_1_a_thopter_flying
-b_2_2_zombie
-r_0_2_dragon_egg_defender_hatches_dragon
-r_2_2_dragon_flying_firebreathing
-r_1_1_survivor
-g_4_4_beast
-g_5_5_beast_trample
-g_2_2_cat_warrior_forestwalk
-g_x_x_elemental
-g_0_1_plant
-bg_1_1_worm
-c_a_clue_draw
-c_4_4_a_construct
-c_6_12_a_construct_trample
-c_x_x_a_phyrexian_horror
-c_1_1_a_myr
-c_1_1_a_servo
-c_1_1_a_thopter_flying
-c_1_1_a_thopter_flying
+2 c_1_1_shapeshifter_changeling @Franz Vohwinkel
+3 w_4_4_angel_flying @Magali Villeneuve
+4 mask @Johannes Voss
+5 w_2_2_cat @Jesper Ejsing
+6 w_1_1_soldier @Alan Pollack
+7 u_2_1_a_phyrexian_myr @Daarken
+8 u_1_1_a_thopter_flying @Andrew Murray
+9 b_2_2_zombie @Anna Steinbauer
+10 r_0_2_dragon_egg_defender_hatches_dragon @Jehan Choo
+11 r_2_2_dragon_flying_firebreathing @Lars Grant-West
+12 r_1_1_survivor @Johannes Voss
+13 g_4_4_beast @Steve Prescott
+14 g_5_5_beast_trample @Vincent Proce
+15 g_2_2_cat_warrior_forestwalk @Michael Sutfin
+16 g_x_x_elemental @Kev Walker
+17 g_0_1_plant @Daren Bader
+18 bg_1_1_worm @Chuck Lukacs
+19 c_a_clue_draw @Zezhou Chen
+20 c_4_4_a_construct @Craig J Spearing
+21 c_6_12_a_construct_trample @Jung Park
+22 c_x_x_a_phyrexian_horror @Scott Chou
+23 c_1_1_a_myr @Ryan Pancoast
+24 c_1_1_a_servo @Igor Kieryluk
+25 c_1_1_a_thopter_flying @Richard Wright
+26 c_1_1_a_thopter_flying @Richard Wright

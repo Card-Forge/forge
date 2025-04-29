@@ -443,10 +443,10 @@ A258 U A-Spell Satchel @YW Tang
 2 Spirit Summoning
 
 [tokens]
-bg_1_1_pest_lifegain
-br_3_6_avatar_haste_bolt
-c_a_treasure_sac
-gu_0_0_fractal
-rw_3_2_spirit
-ur_4_4_elemental
-wb_2_1_inkling_flying
+0 gu_0_0_fractal @Unknown
+0 rw_3_2_spirit @Unknown
+1 br_3_6_avatar_haste_bolt @Bryan Sola
+2 ur_4_4_elemental @Alayna Danner
+4 wb_2_1_inkling_flying @Scott Murphy
+5 bg_1_1_pest_lifegain @Ilse Gort
+7 c_a_treasure_sac @Andrew Mar

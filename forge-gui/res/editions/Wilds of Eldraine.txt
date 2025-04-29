@@ -405,23 +405,23 @@ ScryfallCode=WOE
 381 R Expel the Interlopers @Awanqi (Angela Wang)
 
 [tokens]
-b_1_1_nightmare_exile_counter
-b_1_1_rat_noblock
-c_a_food_sac
-c_a_food_sac
-c_a_food_sac
-c_a_food_sac
-c_a_treasure_sac
-g_3_3_beast
-role_cursed
-role_monster
-role_royal
-role_sorcerer
-role_wicked
-role_young_hero
-u_1_1_faerie_flying_blockflying
-w_1_1_bird_flying
-w_1_1_human
-w_1_1_mouse
-w_2_2_knight_vigilance
-wu_4_4_elemental
+0 role_cursed @Unknown
+0 role_monster @Unknown
+0 role_royal @Unknown
+0 role_sorcerer @Unknown
+0 role_wicked @Unknown
+0 role_young_hero @Unknown
+1 w_1_1_bird_flying @Kisung Koh
+2 w_1_1_human @Julia Griffin
+3 w_2_2_knight_vigilance @Dominik Mayer
+4 w_1_1_mouse @Kisung Koh
+5 u_1_1_faerie_flying_blockflying @Alessandra Pisano
+6 b_1_1_nightmare_exile_counter @Raymond Swanland
+7 b_1_1_rat_noblock @Kim Sokol
+8 g_3_3_beast @Vincent Christiaens
+9 wu_4_4_elemental @Camille Alquier
+10 c_a_food_sac @Ovidio Cartagena
+11 c_a_food_sac @Ovidio Cartagena
+12 c_a_food_sac @Ovidio Cartagena
+13 c_a_food_sac @Ovidio Cartagena
+14 c_a_treasure_sac @Zezhou Chen

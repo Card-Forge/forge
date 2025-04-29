@@ -364,17 +364,17 @@ ScryfallCode=M19
 3 Forest|M19|3
 
 [tokens]
-w_4_4_angel_flying_vigilance
-w_4_4_avatar_flying
-w_1_1_cat_lifelink
-w_2_2_knight_vigilance
-w_2_4_ox
-w_1_1_soldier
-b_1_1_bat_flying
-b_2_2_zombie
-r_2_2_dragon_flying_firebreathing
-r_5_5_dragon_flying
-r_1_1_goblin
-g_3_3_beast
-g_1_1_elf_warrior
-c_1_1_a_thopter_flying
+1 w_4_4_angel_flying_vigilance @Winona Nelson
+2 w_4_4_avatar_flying @Slawomir Maniak
+3 w_1_1_cat_lifelink @Aaron Miller
+4 w_2_2_knight_vigilance @Matt Stewart
+5 w_2_4_ox @Aaron Miller
+6 w_1_1_soldier @Magali Villeneuve
+7 b_1_1_bat_flying @Wayne Reynolds
+8 b_2_2_zombie @Paul Scott Canavan
+9 r_2_2_dragon_flying_firebreathing @Jack Wang
+10 r_5_5_dragon_flying @Alex Konstad
+11 r_1_1_goblin @Filip Burburan
+12 g_3_3_beast @Jason Felix
+13 g_1_1_elf_warrior @William O'Connor
+14 c_1_1_a_thopter_flying @Svetlin Velinov

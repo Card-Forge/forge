@@ -228,12 +228,12 @@ ScryfallCode=HOU
 209 C Cinder Barrens @Titus Lunter
 
 [tokens]
-w_1_1_cat_lifelink
-w_5_5_horse
-w_1_1_warrior_vigilance
-b_2_2_zombie
-g_5_4_snake
-ur_1_1_insect_flying_haste
+0 w_1_1_cat_lifelink @Unknown
+0 w_1_1_warrior_vigilance @Unknown
+0 b_2_2_zombie @Unknown
+10 w_5_5_horse @Lucas Graciano
+11 g_5_4_snake @Winona Nelson
+12 ur_1_1_insect_flying_haste @Lius Lasahido
 
 [other]
 eternalize_adorned_pouncer

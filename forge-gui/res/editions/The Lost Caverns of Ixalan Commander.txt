@@ -378,18 +378,18 @@ ScryfallCode=LCC
 370 R Windbrisk Heights @Omar Rayyan
 
 [tokens]
-b_1_1_vampire_lifelink
-b_2_2_pirate_menace
-c_3_2_shapeshifter_changeling
-c_a_blood_draw
-g_2_2_boar
-g_3_3_beast
-g_3_3_dinosaur_trample
-g_3_3_elephant
-g_3_3_frog_lizard
-g_x_x_dinosaur_beast_trample
-ragavan
-u_1_1_bird_flying
-u_1_1_merfolk
-u_4_3_salamander_warrior
-wb_1_1_vampire_lifelink
+1 c_3_2_shapeshifter_changeling @Ryan Valle
+2 u_1_1_bird_flying @Jason A. Engle
+3 u_1_1_merfolk @PINDURSKI
+4 u_4_3_salamander_warrior @J.P. Targete
+5 b_2_2_pirate_menace @Matt Stewart
+6 b_1_1_vampire_lifelink @Lake Hurwitz
+7 ragavan @Daniel Ljunggren
+8 g_3_3_beast @Jesper Ejsing
+9 g_2_2_boar @James Ryman
+10 g_3_3_dinosaur_trample @Kitt Lapeña
+11 g_x_x_dinosaur_beast_trample @Svetlin Velinov
+12 g_3_3_elephant @Lars Grant-West
+13 g_3_3_frog_lizard @Jack Wang
+14 wb_1_1_vampire_lifelink @Zoltan Boros
+15 c_a_blood_draw @Miranda Meeks

@@ -480,18 +480,18 @@ A138 U A-Heartfire Hero @Jakub Kasper
 1 Forest|BLB|4
 
 [tokens]
-b_1_1_bat_flying
-b_1_1_rat_relentless
-b_1_1_snail
-c_a_food_sac
-c_a_treasure_sac
-cragflame
-g_1_1_squirrel
-sword
-u_1_1_fish
-ur_1_1_otter_prowess
-w_0_4_wall_defender
-w_1_1_rabbit
+3 w_1_1_rabbit @Gina Matarazzo
+4 w_0_4_wall_defender @Alexander Forssberg
+7 u_1_1_fish @Rhonda Libbey
+10 b_1_1_bat_flying @Josh Hass
+13 b_1_1_rat_relentless @Raph Lomotan
+14 b_1_1_snail @Steven Russell Black
+23 g_1_1_squirrel @Daria Aksenova
+25 ur_1_1_otter_prowess @Julia Griffin
+26 cragflame @Ioannis Fiore
+27 c_a_food_sac @David Frasheski
+28 sword @Vincent Christiaens
+29 c_a_treasure_sac @Aaron Miller
 
 [other]
 offspring_bushy_bodyguard

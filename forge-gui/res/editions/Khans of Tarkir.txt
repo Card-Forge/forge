@@ -309,15 +309,15 @@ ScryfallCode=KTK
 237y U Nomad Outpost @Kamila Szutenberg
 
 [tokens]
-w_3_4_bird_flying
-w_1_1_spirit_flying
-w_1_1_warrior
-w_1_1_warrior
-w_1_1_warrior
-b_2_2_vampire_flying
-b_2_2_zombie
-r_1_1_goblin
-r_1_1_goblin_haste
-g_4_4_bear
-g_1_1_snake
-bg_x_x_spirit_warrior
+1 w_3_4_bird_flying @Mark Zug
+2 w_1_1_spirit_flying @Mike Sass
+3 w_1_1_warrior @Ryan Barger
+3 w_1_1_warrior @Ryan Barger
+3 w_1_1_warrior @Ryan Barger
+5 b_2_2_vampire_flying @Cynthia Sheppard
+6 b_2_2_zombie @Wayne Reynolds
+7 r_1_1_goblin @Kev Walker
+8 r_1_1_goblin_haste @Kev Walker
+8 g_4_4_bear @Kev Walker
+9 g_1_1_snake @Lars Grant-West
+10 bg_x_x_spirit_warrior @Ryan Alexander Lee

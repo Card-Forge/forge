@@ -305,15 +305,15 @@ ScryfallCode=AKH
 287 C Woodland Stream @Efflam Mercier
 
 [tokens]
-w_1_1_cat_lifelink
-w_1_1_warrior_vigilance
-u_2_2_drake_flying
-b_1_1_insect
-b_2_2_zombie
-g_4_2_beast
-g_3_3_hippo
-g_1_1_snake_deathtouch
-g_5_5_wurm
+16 w_1_1_cat_lifelink @Filip Burburan
+17 w_1_1_warrior_vigilance @Magali Villeneuve
+18 u_2_2_drake_flying @John Severin Brassell
+19 b_1_1_insect @Jason A. Engle
+20 b_2_2_zombie @Igor Kieryluk
+21 g_4_2_beast @Kieran Yanner
+22 g_3_3_hippo @Zack Stella
+23 g_1_1_snake_deathtouch @Tyler Jacobson
+24 g_5_5_wurm @Slawomir Maniak
 
 [other]
 embalm_angel_of_sanctions

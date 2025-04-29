@@ -194,12 +194,12 @@ ScryfallCode=EVE
 180 R Twilight Mire @Rob Alexander
 
 [tokens]
-w_0_1_goat
-w_1_1_kithkin_soldier
-u_1_1_bird_flying
-g_3_3_beast
-g_2_2_wolf
-ur_5_5_elemental_flying
-rw_1_1_goblin_soldier
-wb_1_1_spirit_flying
-bg_1_1_worm
+0 w_1_1_kithkin_soldier @Unknown
+0 g_2_2_wolf @Unknown
+1 w_0_1_goat @Terese Nielsen
+2 u_1_1_bird_flying @Heather Hudson
+3 g_3_3_beast @William O'Connor
+4 wb_1_1_spirit_flying @Larry MacDougall
+5 ur_5_5_elemental_flying @Randy Gallegos
+6 bg_1_1_worm @Chuck Lukacs
+7 rw_1_1_goblin_soldier @Jeff Miracola

@@ -106,6 +106,6 @@ ScryfallCode=UND
 96 L Forest @Adam Paquette
 
 [tokens]
-u_1_1_beeble
-r_1_1_goblin
-g_1_1_squirrel
+1 u_1_1_beeble @Jeff Miracola
+2 r_1_1_goblin @Dave Allsop
+3 g_1_1_squirrel @Daniel Ljunggren

@@ -809,33 +809,34 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 1 Temporal Manipulation|SPG
 
 [tokens]
-b_1_1_rat
-b_1_1_rat_noblock
-b_2_2_zombie
-bg_1_1_insect_flying
-c_a_food_sac
-c_a_treasure_sac
-g_1_1_elf_warrior
-g_3_3_beast
-g_3_3_raccoon
-g_4_4_beast
-komas_coil
-r_1_1_goblin
-r_1_1_phyrexian_goblin
-r_4_4_dragon_flying
-r_5_5_dragon_flying
-scion_of_the_deep
-u_1_1_faerie_flying
-u_1_1_fish
-u_2_1_ninja
-u_2_2_drake_flying
-w_1_1_cat
-w_1_1_cat_lifelink
-w_1_1_dog
-w_1_1_human
-w_1_1_rabbit
-w_1_1_soldier
-w_1_1_spirit_flying
-w_2_2_cat
-w_2_2_cat_beast
-w_3_3_knight
+1 w_1_1_cat @Leonardo Santanna
+2 w_2_2_cat @Jesper Ejsing
+3 w_1_1_human @Julia Griffin
+4 w_3_3_knight @Daneen Wilkerson
+5 w_1_1_rabbit @Gina Matarazzo
+6 w_1_1_soldier @Greg Staples
+7 w_1_1_spirit_flying @Ryan Yee
+8 u_2_2_drake_flying @Bayard Wu
+9 u_1_1_faerie_flying @Irina Nordsol
+10 u_1_1_fish @Rhonda Libbey
+11 komas_coil @Simon Dominic
+12 u_2_1_ninja @Diana Cearley
+13 scion_of_the_deep @Brent Hollowell
+15 b_2_2_zombie @Anna Steinbauer
+16 r_4_4_dragon_flying @Alexander Ostrowski
+17 r_5_5_dragon_flying @Raymond Swanland
+18 r_1_1_goblin @Kev Walker
+19 g_1_1_elf_warrior @Randy Vargas
+20 g_3_3_raccoon @Mark Poole
+21 bg_1_1_insect_flying @Helge C. Balzer
+22 c_a_food_sac @Alexander Mokhov
+23 c_a_treasure_sac @Alayna Danner
+27 w_1_1_cat @Filip Burburan
+28 w_1_1_cat_lifelink @Filip Burburan
+28 w_2_2_cat_beast @Bayard Wu
+29 w_1_1_dog @Manuel Castañón
+30 b_1_1_rat @Kim Sokol
+31 b_1_1_rat_noblock @Kim Sokol
+31 r_1_1_phyrexian_goblin @Jokubas Uogintas
+32 g_3_3_beast @John Donahue
+33 g_4_4_beast @Steve Prescott

@@ -542,25 +542,25 @@ Replace=.04 Mythic:fromSheet("INR cards")
 492 R Deadeye Navigator @Lie Setiawan
 
 [tokens]
-b_1_1_vampire
-b_1_1_wolf_deathtouch
-b_2_2_vampire_flying
-b_2_2_zombie
-b_2_2_zombie_decayed
-b_5_5_demon_flying
-b_x_x_zombie
-c_3_2_eldrazi_horror
-c_a_blood_draw
-c_a_clue_draw
-g_1_1_insect
-g_1_2_spider_reach
-g_2_2_wolf
-g_x_x_treefolk_reach_total_lands
-gw_1_1_human_soldier_training
-r_1_1_human
-r_x_x_elemental_trample_grave_exile
-u_1_1_human_wizard
-w_1_1_human
-w_1_1_human_soldier
-w_1_1_spirit_flying
-wb_1_1_human_cleric
+1 c_3_2_eldrazi_horror @Jason Felix
+2 w_1_1_human @John Stanko
+3 w_1_1_human_soldier @Deruchenko Alexander
+4 w_1_1_spirit_flying @Jason A. Engle
+5 u_1_1_human_wizard @Nils Hamm
+6 b_5_5_demon_flying @Kev Walker
+7 b_1_1_vampire @Volkan Baǵa
+8 b_2_2_vampire_flying @Svetlin Velinov
+9 b_1_1_wolf_deathtouch @Daniel Ljunggren
+11 b_2_2_zombie @Sam White
+12 b_2_2_zombie_decayed @Sam White
+12 b_x_x_zombie @Daarken
+13 r_x_x_elemental_trample_grave_exile @Deruchenko Alexander
+14 r_1_1_human @Kieran Yanner
+15 g_1_1_insect @Joe Slucher
+16 g_1_2_spider_reach @Slawomir Maniak
+17 g_x_x_treefolk_reach_total_lands @Yeong-Hao Han
+18 g_2_2_wolf @David Palumbo
+19 wb_1_1_human_cleric @Min Yum
+20 gw_1_1_human_soldier_training @Unknown
+21 c_a_blood_draw @Miranda Meeks
+22 c_a_clue_draw @John Avon

@@ -262,19 +262,19 @@ ScryfallCode=MM2
 249 U Simic Growth Chamber @John Avon
 
 [tokens]
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-w_1_1_soldier
-w_1_1_spirit_flying
-b_1_1_faerie_rogue_flying
-b_0_0_phyrexian_germ
-b_1_1_thrull
-g_3_3_elephant
-g_1_1_insect
-g_1_1_saproling
-g_1_1_snake
-g_2_2_wolf
-bg_1_1_worm
-c_3_3_a_golem
-c_1_1_a_myr
+0 b_0_0_phyrexian_germ @Unknown
+1 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+2 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+3 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+4 w_1_1_soldier @Greg Staples
+5 w_1_1_spirit_flying @Mike Sass
+6 b_1_1_faerie_rogue_flying @Dave Allsop
+8 b_1_1_thrull @Mark Tedin
+9 g_3_3_elephant @Lars Grant-West
+10 g_1_1_insect @Ron Spencer
+11 g_1_1_saproling @Warren Mahy
+12 g_1_1_snake @Austin Hsu
+13 g_2_2_wolf @Daren Bader
+14 bg_1_1_worm @Chuck Lukacs
+15 c_3_3_a_golem @Nic Klein
+16 c_1_1_a_myr @Ryan Pancoast

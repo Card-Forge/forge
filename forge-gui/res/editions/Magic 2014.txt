@@ -263,15 +263,14 @@ ScryfallCode=M14
 249 L Forest @Andreas Rocha
 
 [tokens]
-c_1_1_sliver
-c_1_1_sliver
-w_4_4_angel_flying
-w_2_2_cat
-w_0_1_goat
-b_2_2_zombie
-r_2_2_dragon_flying_firebreathing
-r_1_1_elemental
-r_1_1_elemental
-g_3_3_beast
-g_1_1_saproling
-g_2_2_wolf
+1 c_1_1_sliver @Igor Kieryluk
+2 w_4_4_angel_flying @James Ryman
+3 w_2_2_cat @Jesper Ejsing
+4 w_0_1_goat @Adam Paquette
+5 b_2_2_zombie @Lucas Graciano
+6 r_2_2_dragon_flying_firebreathing @Jack Wang
+7 r_1_1_elemental @Jaime Jones
+8 r_1_1_elemental @Jaime Jones
+9 g_3_3_beast @John Donahue
+10 g_1_1_saproling @Brad Rigney
+11 g_2_2_wolf @Lars Grant-West
