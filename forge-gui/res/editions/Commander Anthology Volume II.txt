@@ -325,7 +325,7 @@ ScryfallCode=CM2
 3 w_0_1_goat @Adam Paquette
 4 w_2_2_knight_first_strike @Hideaki Takamura
 5 w_1_1_spirit_flying @Mike Sass
-6 b_0_0_phyrexian_germ @
+6 b_0_0_phyrexian_germ @Igor Kieryluk
 7 b_2_2_zombie @Bud Cook
 8 r_3_1_elemental_shaman_haste @Jim Pavelec
 9 r_1_1_goblin @Dave Kendall
@@ -335,5 +335,5 @@ ScryfallCode=CM2
 13 c_1_1_a_pentavite_flying @Greg Staples
 14 c_1_1_a_triskelavite_flying_ammo @Mark Zug
 15 tuktuk_the_returned @Franz Vohwinkel
-16 c_3_3_a_phyrexian_wurm_deathtouch @
-17 c_3_3_a_phyrexian_wurm_lifelink @
+16 c_3_3_a_phyrexian_wurm_deathtouch @Raymond Swanland
+17 c_3_3_a_phyrexian_wurm_lifelink @Raymond Swanland
