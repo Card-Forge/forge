@@ -1,0 +1,12 @@
+Name:Thunderbond Vanguard
+ManaCost:2 W
+Types:Creature Human Warrior
+PT:*/*
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+K:ETBReplacement:Copy:EssenceClone:Mandatory:Battlefield:Creature.token+YouCtrl
+SVar:EssenceClone:DB$ Clone | Defined$ Self | CloneTarget$ ReplacedCard | SpellDescription$ Each creature token you control enters as a copy of this creature.
+SVar:BuffedBy:Creature
+SVar:NoZeroToughnessAI:True
+DeckNeeds:Ability$Token
+Oracle:Thunderbond Vanguard's power and toughness are each equal to the number of creatures you control.\nEach creature token you control enters as a copy of this creature.
