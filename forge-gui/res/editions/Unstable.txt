@@ -277,40 +277,23 @@ ScryfallCode=UST
 216 L Forest @John Avon
 
 [tokens]
-0 w_2_2_cat @Unknown
-0 w_1_1_spirit_flying @Unknown
-0 w_1_1_spirit_flying @Unknown
-0 w_4_4_angel_flying @Unknown
-0 w_4_4_angel_flying @Unknown
-0 w_1_1_soldier @Unknown
-0 u_8_8_octopus @Unknown
-0 u_1_1_a_thopter_flying @Unknown
-0 u_1_1_a_thopter_flying @Unknown
-0 b_1_1_assassin_lose_con @Unknown
-0 b_3_3_beast_deathtouch @Unknown
-0 b_5_5_demon_flying @Unknown
-0 b_2_2_vampire_flying @Unknown
-0 b_2_2_vampire_flying @Unknown
-0 b_2_2_zombie @Unknown
-0 b_2_2_zombie @Unknown
-0 r_1_1_elemental @Unknown
-0 r_1_1_elemental @Unknown
-0 g_3_3_beast @Unknown
-0 g_3_3_beast @Unknown
-0 g_1_1_saproling @Unknown
-0 g_1_1_saproling @Unknown
-0 g_6_6_wurm @Unknown
-0 gw_x_x_elemental_total_creatures @Unknown
-0 gw_x_x_elemental_total_creatures @Unknown
-0 c_a_clue_draw @Unknown
-0 c_a_clue_draw @Unknown
+1 w_4_4_angel_flying @Magali Villeneuve
 2 w_0_1_goat @Carl Critchlow
+3 w_1_1_spirit_flying @Jason A. Engle
 4 u_1_1_faerie_spy_flying_haste_draw @Dmitry Burmak
 5 storm_crow @McLean Kendree
+6 u_1_1_a_thopter_flying @Andrew Murray
 7 b_2_2_rogue_menace @Emrah Elmasli
+8 b_2_2_vampire_flying @Svetlin Velinov
+9 b_2_2_zombie @Craig J Spearing
 10 r_1_1_brainiac @Matt Dixon
+11 r_1_1_elemental @Winona Nelson
 12 r_1_1_goblin @Dave Allsop
+13 g_3_3_beast @John Donahue
+14 g_1_1_saproling @Brad Rigney
 15 g_1_1_squirrel @John Thacker
 16 c_4_4_dragon_flying @Autumn Rain Turkel
+17 gw_x_x_elemental_total_creatures @Mark Winters
+18 c_a_clue_draw @John Avon
 19 c_x_x_a_construct @Matt Gaser
 20 c_1_1_a_gnome @Dmitry Burmak

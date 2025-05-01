@@ -350,7 +350,6 @@ ScryfallCode=OTC
 342 R Yavimaya Coast @Jesper Ejsing
 
 [tokens]
-0 rgw_1_1_sand_warrior @Unknown
 1 c_10_10_eldrazi @Jack Wang
 2 c_1_1_eldrazi_scion_sac @Izzy
 3 w_4_4_angel_flying @Magali Villeneuve
@@ -373,7 +372,12 @@ ScryfallCode=OTC
 20 g_4_2_plant_warrior_reach @Xabi Gaztelua
 21 rg_5_5_elemental @Brad Rigney
 22 wb_2_1_inkling_flying @Scott Murphy
+23 rgw_1_1_sand_warrior @Piotr Foksowicz
 24 c_a_blood_draw @Miranda Meeks
 25 c_a_food_sac @Lucas Graciano
 26 c_1_1_a_soldier @Kev Walker
 27 c_1_1_a_thopter_flying @Svetlin Velinov
+
+[other]
+28 manifest @Jason A. Engle
+29 monarch @Volkan Baǵa

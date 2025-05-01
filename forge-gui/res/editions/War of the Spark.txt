@@ -335,8 +335,6 @@ ScryfallCode=WAR
 A221 R A-Teferi, Time Raveler @Chris Rallis
 
 [tokens]
-0 all_2_2_citizen @Unknown
-0 voja_friend_to_elves @Unknown
 1 c_2_2_spirit @Johann Bodin
 2 w_4_4_angel_flying_vigilance @Volkan Baǵa
 3 w_2_2_soldier_vigilance @Johan Grenier
@@ -345,11 +343,16 @@ A221 R A-Teferi, Time Raveler @Chris Rallis
 6 b_1_1_assassin_deathtouch_pwdestroy @Zezhou Chen
 7 b_2_2_zombie @Simon Dominic
 8 b_0_0_zombie_army @Tomasz Jedruszek
-8 b_0_0_zombie_army @Tomasz Jedruszek
-8 b_0_0_zombie_army @Tomasz Jedruszek
+9 b_0_0_zombie_army @Tomasz Jedruszek
+10 b_0_0_zombie_army @Tomasz Jedruszek
 11 b_4_4_zombie_warrior_vigilance @Mike Bierek
 12 r_1_1_devil_burn @Kev Walker
 13 r_4_4_dragon_flying @Kieran Yanner
 14 r_1_1_goblin @Mark Behm
 15 g_2_2_wolf @Lars Grant-West
+16 all_2_2_citizen @Winona Nelson
+17 voja_friend_to_elves @Chris Seaman
 18 c_1_1_a_servo @Victor Adame Minguez
+
+[other]
+19 emblem_nissa_who_shakes_the_world @Chris Rallis

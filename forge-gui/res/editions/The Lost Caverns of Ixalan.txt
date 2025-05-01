@@ -473,7 +473,6 @@ A150 U A-Geological Appraiser @Alix Branwyn
 5 Promising Vein|LCI
 
 [tokens]
-0 rw_3_2_spirit @Unknown
 2 w_4_4_angel_flying_vigilance @Zoltan Boros
 3 w_x_x_a_gnome_soldier_total_artifacts_creatures @Steve Ellis
 4 w_1_1_vampire_lifelink @Bruno Biazotto
@@ -486,7 +485,11 @@ A150 U A-Geological Appraiser @Alix Branwyn
 11 g_0_1_dinosaur_egg @Muhammad Firdaus
 12 g_x_x_fungus_dinosaur @Dave Kendall
 13 wu_4_4_a_golem @Racrufi
+14 rw_3_2_spirit @Milivoj Ćeran
 15 wb_4_3_vampire_demon_flying @Nino Vecia
 16 c_1_1_a_gnome @Racrufi
 17 c_a_map_sac_explore @Francesca Baerald
 18 c_a_treasure_sac @Wero Gallo
+
+[other]
+1 copy @Henry Peters

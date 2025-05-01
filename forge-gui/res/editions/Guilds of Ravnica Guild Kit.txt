@@ -5,6 +5,7 @@ Name=Guilds of Ravnica Guild Kit
 Code2=GK1
 Type=Boxed_Set
 ScryfallCode=GK1
+TokenFallbackCode=GRN
 
 [cards]
 1 R Etrata, the Silencer @Igor Kieryluk
@@ -136,16 +137,16 @@ ScryfallCode=GK1
 127 L Forest @Alayna Danner
 
 [tokens]
-0 gw_2_2_elf_knight_vigilance @Unknown
-0 ub_1_1_horror_flying @Unknown
-0 bg_1_1_insect @Unknown
-0 g_3_3_centaur @Unknown
-2 w_1_1_soldier_lifelink @Unknown
-3 u_3_3_weird_defender_flying @Unknown
-4 r_1_1_goblin @Unknown
-6 rw_1_1_soldier_haste @Unknown
-5 g_1_1_saproling @Unknown
-8 g_1_1_saproling @Unknown
-9 g_5_5_wurm_trample @Unknown
-10 gw_8_8_elemental_vigilance @Unknown
-11 voja @Unknown
+2 ub_1_1_horror_flying @Adam Paquette
+3 u_3_3_weird_defender_flying @Hideaki Takamura
+4 r_1_1_goblin @Karl Kopinski
+5 g_1_1_saproling @Raoul Vitale
+6 rw_1_1_soldier_haste @David Palumbo
+7 g_3_3_centaur @Slawomir Maniak
+8 g_1_1_saproling @Brad Rigney
+9 g_5_5_wurm_trample @Anthony Palumbo
+10 gw_8_8_elemental_vigilance @Yeong-Hao Han
+11 voja @Richard Sardinha
+
+[other]
+1 copy @Clint Cearley

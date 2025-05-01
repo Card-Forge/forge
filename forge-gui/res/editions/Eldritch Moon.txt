@@ -12,6 +12,7 @@ ChanceReplaceCommonWith=.125F dfc:RareMythic
 TreatAsSmallSet=true
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=EMN
+TokenFallbackCode=SOI
 
 [cards]
 1 U Abundant Maw @Greg Staples
@@ -221,16 +222,15 @@ ScryfallCode=EMN
 205 U Nephalia Academy @Adam Paquette
 
 [tokens]
-0 w_1_1_human_soldier @Unknown
-0 w_1_1_spirit_flying @Unknown
-0 r_1_1_devil_burn @Unknown
-0 g_1_1_insect @Unknown
-0 g_2_2_wolf @Unknown
 1 c_3_2_eldrazi_horror @Jason Felix
 2 u_1_1_human_wizard @Nils Hamm
 3 b_2_2_zombie @Tomasz Jedruszek
-3 b_2_2_zombie @Tomasz Jedruszek
-3 b_2_2_zombie @Tomasz Jedruszek
+4 b_2_2_zombie @Seb McKinnon
+5 b_2_2_zombie @Anna Steinbauer
 6 b_x_x_zombie @Daarken
 7 r_1_1_human @Kieran Yanner
 8 g_1_2_spider_reach @Christine Choi
+
+[other]
+9 emblem_liliana_the_last_hope @Anna Steinbauer
+10 emblem_tamiyo_field_researcher @Tianhua X
