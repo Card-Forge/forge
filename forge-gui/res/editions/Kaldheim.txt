@@ -485,7 +485,7 @@ A387 U A-Thornmantle Striker @Magali Villeneuve
 4 w_1_1_spirit_flying @Anastasia Ovchinnikova
 5 u_1_1_bird_flying @Jason A. Engle
 6 u_4_4_giant_wizard @Andrew Mar
-7 komas_coil @Unknown
+7 komas_coil @Simon Dominic
 8 u_2_2_shapeshifter_changeling @Filip Burburan
 9 b_2_2_zombie_berserker @Igor Kieryluk
 10 r_2_3_demon_berserker_menace @Grzegorz Rutkowski
@@ -498,3 +498,9 @@ A387 U A-Thornmantle Striker @Magali Villeneuve
 17 icy_manalith @Andrew Mar
 18 replicated_ring @Olena Richards
 19 c_a_treasure_sac @Olena Richards
+
+[other]
+20 emblem_kaya_the_inexorable @Tyler Jacobson
+21 emblem_tibalt_cosmic_impostor @Yongjae Choi
+22 emblem_tyvar_kell @Chris Rallis
+23 foretell

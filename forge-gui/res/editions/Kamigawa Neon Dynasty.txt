@@ -606,5 +606,9 @@ A242 U A-Circuit Mender @Hector Ortiz
 13 keimi @Milivoj Ćeran
 14 mechtitan @Victor Adame Minguez
 15 c_1_1_a_construct @Sean Murray
-16 tamiyos_notebook @Unknown
+16 tamiyos_notebook @Randy Vargas
 17 c_a_treasure_sac @Yeong-Hao Han
+
+[other]
+18 emblem_kaito_shizuki @Yongjae Choi
+19 emblem_tezzeret_betrayer_of_flesh @Bryan Sola
