@@ -513,11 +513,18 @@ ScryfallCode=MOM
 8 g_1_1_phyrexian_saproling @Maxime Minard
 9 ur_1_1_elemental @Ryan Valle
 10 wu_2_2_knight_vigilance @Ernanda Souza
-11 gw_3_3_phyrexian_hydra_lifelink @Unknown
-12 gw_3_3_phyrexian_hydra_reach @Unknown
-13 rw_3_2_spirit @Unknown
+11 gw_3_3_phyrexian_hydra_lifelink @Néstor Ossandón Leal
+12 gw_3_3_phyrexian_hydra_reach @Néstor Ossandón Leal
+13 rw_3_2_spirit @Michael Walsh
 14 wb_1_1_spirit_flying @Bruno Biazotto
-15 rw_3_2_warrior_symbiotic_attack @Unknown
+15 rw_3_2_warrior_symbiotic_attack @Viko Menezes
+16 incubator_c_0_0_a_phyrexian @Johann Bodin
+17 incubator_c_0_0_a_phyrexian @Johann Bodin
+18 incubator_c_0_0_a_phyrexian @Johann Bodin
 19 c_1_1_a_thopter_flying @David Astruga
 20 c_a_treasure_sac @David Astruga
 21 c_a_treasure_sac @David Astruga
+
+[other]
+22 emblem_teferi_akosa_of_zhalfir @Chris Rallis
+23 emblem_wrenn_and_realmbreaker @Cristi Balanescu
