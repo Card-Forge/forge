@@ -310,6 +310,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     private String code2;
     private String scryfallCode;
     private String tokensCode;
+    private String tokenFallbackCode;
     private String cardsLanguage;
     private Type   type;
     private String name;
@@ -480,6 +481,16 @@ public final class CardEdition implements Comparable<CardEdition> {
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
     public Multimap<String, TokenInSet> getTokens() { return tokenMap; }
+
+    public String getTokenSet(String token) {
+        if (tokenMap.containsKey(token)) {
+            return this.getCode();
+        }
+        if (this.tokenFallbackCode != null) {
+            return StaticData.instance().getCardEdition(this.tokenFallbackCode).getTokenSet(token);
+        }
+        return null;
+    }
 
     @Override
     public int compareTo(final CardEdition o) {
@@ -718,6 +729,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.code2 = metadata.get("code2", res.code);
             res.scryfallCode = metadata.get("ScryfallCode", res.code);
             res.tokensCode = metadata.get("TokensCode", "T" + res.scryfallCode);
+            res.tokenFallbackCode = metadata.get("TokenFallbackCode");
             res.cardsLanguage = metadata.get("CardLang", "en");
             res.boosterArts = metadata.getInt("BoosterCovers", 1);
 
