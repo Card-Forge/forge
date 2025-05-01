@@ -127,9 +127,6 @@ ScryfallCode=KHC
 119 C Tranquil Cove @John Avon
 
 [tokens]
-0 g_1_1_elf_warrior @Unknown
-0 r_5_5_dragon_flying @Unknown
-0 w_1_1_spirit_flying @Unknown
 1 w_1_1_bird_flying @Howard Lyon
 2 w_1_1_kithkin_soldier @Randy Gallegos
 3 w_1_1_pegasus_flying @Greg Hildebrandt

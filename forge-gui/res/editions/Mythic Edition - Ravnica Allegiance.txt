@@ -16,5 +16,4 @@ RA7 M Domri, Chaos Bringer @Jason Rainville
 RA8 M Kaya, Orzhov Usurper @Chris Rallis
 
 [tokens]
-0 rg_4_4_beast_trample @Unknown
 R1 c_0_0_a_construct_total_artifacts @Victor Adame Minguez

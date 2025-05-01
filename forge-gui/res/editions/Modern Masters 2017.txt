@@ -262,9 +262,6 @@ ScryfallCode=MM3
 249 R Verdant Catacombs @Vance Kovacs
 
 [tokens]
-0 gw_x_x_elemental_total_creatures @Unknown
-0 rw_1_1_soldier_haste @Unknown
-0 c_3_3_a_phyrexian_golem @Unknown
 1 w_4_4_angel_flying @Anthony Palumbo
 2 w_1_1_bird_flying @James Ryman
 3 w_1_1_soldier @Magali Villeneuve
@@ -281,5 +278,11 @@ ScryfallCode=MM3
 13 g_x_x_ooze @Marco Nelor
 14 g_1_1_saproling @Brad Rigney
 15 g_5_5_wurm_trample @Anthony Palumbo
+16 gw_x_x_elemental_total_creatures @Mark Winters
 17 rg_4_4_giant_warrior_haste @Trevor Hairsine
 18 rg_1_1_goblin_warrior @Dave Allsop
+19 rw_1_1_soldier_haste @David Palumbo
+20 c_3_3_a_phyrexian_golem @Volkan Baǵa
+
+[other]
+21 emblem_domri_rade @Tyler Jacobson

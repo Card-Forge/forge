@@ -11,6 +11,7 @@ FatPackExtraSlots=66 BasicLands BFZ, 14 name("Wastes")
 AdditionalSheetForFoils=fromSheet("EXP special slot")
 AdditionalSetUnlockedInQuest=EXP
 ScryfallCode=OGW
+TokenFallbackCode=BFZ
 
 [cards]
 1 R Deceiver of Form @Viktor Titov
@@ -201,9 +202,6 @@ ScryfallCode=OGW
 184a C Wastes @Raymond Swanland
 
 [tokens]
-0 w_2_2_knight_ally @Unknown
-0 w_1_1_kor_ally @Unknown
-0 u_8_8_octopus @Unknown
 1 c_1_1_eldrazi_scion_sac @Izzy
 2 c_1_1_eldrazi_scion_sac @Izzy
 3 c_1_1_eldrazi_scion_sac @Izzy

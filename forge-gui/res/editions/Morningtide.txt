@@ -9,6 +9,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 FatPackExtraSlots=40 BasicLands LRW
 ScryfallCode=MOR
+TokenFallbackCode=LRW
 
 [cards]
 1 C Ballyrush Banneret @Ralph Horsley
@@ -163,12 +164,6 @@ ScryfallCode=MOR
 150 R Rustic Clachan @Fred Fields
 
 [tokens]
-0 w_1_1_kithkin_soldier @Unknown
-0 u_1_1_merfolk_wizard @Unknown
-0 b_1_1_goblin_rogue @Unknown
-0 g_4_4_elemental @Unknown
-0 g_1_1_elf_warrior @Unknown
-0 g_2_2_wolf @Unknown
 1 w_5_5_giant_warrior @Steve Ellis
 2 b_1_1_faerie_rogue_flying @Jim Nelson
 3 g_2_5_treefolk_shaman @Richard Sardinha

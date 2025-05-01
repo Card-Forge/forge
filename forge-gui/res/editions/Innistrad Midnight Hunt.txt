@@ -436,10 +436,16 @@ A218 U A-Devoted Grafkeeper @Raoul Vitale
 7 r_x_x_elemental_trample_grave_exile @Deruchenko Alexander
 8 g_4_4_beast @Piotr Foksowicz
 9 g_3_3_insect @Nicholas Gregory
-10 g_x_y_ooze_types_graveyard @Unknown
+10 g_x_y_ooze_types_graveyard @Izzy
 11 g_1_2_spider_reach @Slawomir Maniak
 12 g_x_x_treefolk_reach_total_lands @Yeong-Hao Han
 13 g_2_2_wolf @Andrea Radeck
 14 br_3_1_vampire_trample_lifelink_haste @Bastien L. Deharme
 15 ub_x_x_zombie_menace @Ravenna Tran
 16 c_a_clue_draw @Campbell White
+
+[other]
+17 emblem_teferi_who_slows_the_sunset @Heonhwa Choe
+18 emblem_wrenn_and_seven @Heonhwa Choe
+19 day @Johan Grenier
+19 night @Johan Grenier

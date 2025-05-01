@@ -251,13 +251,13 @@ OPCA85 C Windriddle Palaces @Kekai Kotaki
 OPCA86 C The Zephyr Maze @rk post
 
 [tokens]
-0 b_0_0_phyrexian_germ @Unknown
 1 c_7_7_eldrazi_annihilator @Vincent Proce
 2 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
 3 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
 4 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
 5 w_4_4_angel_flying @Cyril Van Der Haegen
 6 w_0_1_goat @Terese Nielsen
+7 b_0_0_phyrexian_germ @Igor Kieryluk
 8 b_2_4_spider_reach @Lars Grant-West
 9 b_2_2_zombie @Dave Kendall
 10 r_5_5_dragon_flying @Jim Pavelec

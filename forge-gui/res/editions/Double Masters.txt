@@ -739,16 +739,16 @@ ScryfallCode=2XM
 1 Dark Depths+|2XM
 
 [tokens]
-0 u_2_1_a_phyrexian_myr @Unknown
 1 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
 2 c_1_1_shapeshifter_changeling @Steve Prescott
 3 w_4_4_angel_flying @Magali Villeneuve
 4 w_2_2_cat @Jesper Ejsing
 5 w_1_1_human_soldier @Deruchenko Alexander
 6 w_1_1_soldier @Jakub Kasper
+7 u_2_1_a_phyrexian_myr @Daarken
 8 u_1_1_a_thopter_flying @Andrew Murray
 9 b_5_5_demon_flying @Sidharth Chaturvedi
-10 b_0_0_phyrexian_germ @Unknown
+10 b_0_0_phyrexian_germ @Igor Kieryluk
 11 marit_lage @Stephan Martiniere
 12 g_3_3_ape @Lars Grant-West
 13 g_3_3_beast @Jason Felix
@@ -769,3 +769,6 @@ ScryfallCode=2XM
 28 tuktuk_the_returned @Franz Vohwinkel
 29 c_3_3_a_phyrexian_wurm_deathtouch @Raymond Swanland
 30 c_3_3_a_phyrexian_wurm_lifelink @Raymond Swanland
+
+[other]
+31 copy @David Palumbo
