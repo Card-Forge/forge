@@ -16,6 +16,7 @@ public interface CardTypeView extends Iterable<String>, Serializable {
 
     Set<String> getCreatureTypes();
     Set<String> getLandTypes();
+    Set<String> getBattleTypes();
 
     boolean hasStringType(String t);
     boolean hasType(CoreType type);
