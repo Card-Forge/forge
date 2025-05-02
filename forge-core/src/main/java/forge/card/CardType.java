@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -313,6 +314,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             }
         }
         return landTypes;
+    }
+
+    public Set<String> getBattleTypes() {
+        if(!isBattle())
+            return Set.of();
+        return subtypes.stream().filter(CardType::isABattleType).collect(Collectors.toSet());
     }
 
     @Override
