@@ -228,21 +228,29 @@ public abstract class ImageFetcher {
                 this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
-            final String filename = imageKey.substring(2) + ".jpg";
+            String[] tempdata = imageKey.substring(2).split("\\|"); //We want to check the edition first.
+            String tokenName = tempdata[0];
+            String setCode = tempdata[1];
+
+            StringBuilder sb = new StringBuilder(tokenName);
+            sb.append("_").append(setCode);
+            if (tempdata.length > 2) {
+                sb.append("_").append(tempdata[2]);
+            }
+            sb.append(".jpg");
+
+            final String filename = sb.toString();
             if (ImageKeys.missingCards.contains(filename))
                 return;
 
             if (filename.equalsIgnoreCase("null.jpg"))
                 return;
 
-            String[] tempdata = imageKey.substring(2).split("[_](?=[^_]*$)"); //We want to check the edition first.
             if (tempdata.length < 2) {
                 System.err.println("Token image key is malformed: " + imageKey);
                 return;
             }
 
-            String tokenName = tempdata[0];
-            String setCode = tempdata[1];
 
             // Load the paper token from filename + edition
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
@@ -251,7 +259,12 @@ public abstract class ImageFetcher {
             //PaperToken pt = StaticData.instance().getAllTokens().getToken(tokenName, setCode);
             Collection<CardEdition.EditionEntry> allTokens = edition.getTokens().get(tokenName);
 
-            if (!allTokens.isEmpty()) {
+            if (tempdata.length > 2) {
+                String tokenCode = edition.getTokensCode();
+                String langCode = edition.getCardsLangCode();
+                // just assume the CNr from the token image is valid
+                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tempdata[2], tokenCode, langCode));
+            } else if (!allTokens.isEmpty()) {
                 // This loop is going to try to download all the arts until it finds one
                 // This is a bit wrong since it _should_ just be trying to get the one with the appropriate collector number
                 // Since we don't have that for tokens, we'll just take the first one
