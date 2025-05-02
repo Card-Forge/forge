@@ -308,19 +308,6 @@ public class CardFactory {
             CardFactoryUtil.setupSiegeAbilities(card);
         }
         else if (card.getType().getBattleTypes().isEmpty()) {
-            if (!Iterables.isEmpty(card.getType().getSubtypes())) {
-                //Custom battle type? Or wizards printed a Battle Artifact or something.
-                for (ReplacementEffect re : card.getReplacementEffects()) {
-                    //Do a rough search to see if there's anything that looks like a protector assignment ability in place.
-                    //Iterate over replacement effects, then recurse through their overriding abilities and sub-abilities
-                    SpellAbility sub = re.getOverridingAbility();
-                    while(sub != null) {
-                        if(sub.hasParam("Protect"))
-                            return; //Has the Protect$ Parameter. No need to add one then. Probably.
-                        sub = sub.getSubAbility();
-                    }
-                }
-            }
             //Battles with no battle type enter protected by their controller.
             String abProtector = "DB$ ChoosePlayer | Choices$ You | Protect$ True | DontNotify$ True";
             String reText = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated"
