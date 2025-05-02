@@ -307,10 +307,13 @@ public class CardFactory {
             CardFactoryUtil.setupSiegeAbilities(card);
         }
         else if (card.getType().getBattleTypes().isEmpty()) {
+            //Probably a custom card? Check if it already has an RE for designating a protector.
+            if(card.getReplacementEffects().stream().anyMatch((re) -> re.hasParam("BattleProtector")))
+                return;
             //Battles with no battle type enter protected by their controller.
             String abProtector = "DB$ ChoosePlayer | Choices$ You | Protect$ True | DontNotify$ True";
             String reText = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated"
-                    + " | Description$ (As this Battle enters, its controller becomes its protector.)";
+                    + " | BattleProtector$ True | Description$ (As this Battle enters, its controller becomes its protector.)";
             ReplacementEffect re = ReplacementHandler.parseReplacement(reText, card, true);
             re.setOverridingAbility(AbilityFactory.getAbility(abProtector, card));
             card.addReplacementEffect(re);
