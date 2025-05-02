@@ -62,29 +62,24 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
         this.collectorNumber = collectorNumber;
         this.artist = artist;
 
-        if (edition != null && edition.getTokens().containsKey(imageFileName)) {
-            if (collectorNumber != null && !collectorNumber.isEmpty()) {
-                int idx = 0;
-                // count the one with the same collectorNumber
-                for (CardEdition.TokenInSet t : edition.getTokens().get(imageFileName)) {
-                    ++idx;
-                    if (!t.collectorNumber.equals(collectorNumber)) {
-                        continue;
-                    }
-                    // TODO make better image file names when collector number is known
-                    // for the right index, we need to count the ones with wrong collector number too
-                    this.imageFileName.add(String.format("%s|%s|%s|%d", imageFileName, edition.getCode().toLowerCase(), collectorNumber, idx));
+        if (collectorNumber != null && !collectorNumber.isEmpty() && edition != null && edition.getTokens().containsKey(imageFileName)) {
+            int idx = 0;
+            // count the one with the same collectorNumber
+            for (CardEdition.TokenInSet t : edition.getTokens().get(imageFileName)) {
+                ++idx;
+                if (!t.collectorNumber.equals(collectorNumber)) {
+                    continue;
                 }
-                this.artIndex = this.imageFileName.size();
+                // TODO make better image file names when collector number is known
+                // for the right index, we need to count the ones with wrong collector number too
+                this.imageFileName.add(String.format("%s|%s|%s|%d", imageFileName, edition.getCode().toLowerCase(), collectorNumber, idx));
             }
-        } else if (imageFileName != null) {
-            String formatEdition = null == edition || CardEdition.UNKNOWN == edition ? "" : "_" + edition.getCode().toLowerCase();
-
-            if (null == edition || CardEdition.UNKNOWN == edition) {
-                this.imageFileName.add(imageFileName);
-            }
-            // Fallback for if the Edition doesn't know about the Token
-            this.imageFileName.add(String.format("%s|%s", imageFileName, formatEdition));
+            this.artIndex = this.imageFileName.size();
+        } else if (null == edition || CardEdition.UNKNOWN == edition) {
+            this.imageFileName.add(imageFileName);
+        } else {
+            // Fallback if CollectorNumber is not used
+            this.imageFileName.add(String.format("%s|%s", imageFileName, edition.getCode().toLowerCase()));
         }
     }
 
