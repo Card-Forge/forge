@@ -286,6 +286,7 @@ public class TokenInfo {
             editionHost = sa.getKeyword().getStatic().getHostCard();
         }
         String edition = ObjectUtils.firstNonNull(editionHost, host).getSetCode();
+        edition = ObjectUtils.firstNonNull(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
 
         if (token == null) {

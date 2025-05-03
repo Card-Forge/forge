@@ -13,6 +13,7 @@ ScryfallCode=FIC
 168 M Cloud, Ex-SOLDIER @Justyna Dura
 186 M Terra, Herald of Hope @Marta Nael
 187 M Tidus, Yuna's Guardian @Nijihayashi
+188 M Tifa, Martial Artist @Yumi Yaoshida
 191 M Y'shtola, Night's Blessed @Magali Villeneuve
 201 M Celes, Rune Knight @ikeda_cpt
 202 M Cloud, Ex-SOLDIER @S. Makimura

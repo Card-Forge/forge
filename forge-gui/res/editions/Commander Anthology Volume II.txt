@@ -1,7 +1,7 @@
 [metadata]
 Code=CM2
 Date=2018-06-08
-Name=Commander Anthology Vol. II
+Name=Commander Anthology Volume II
 Type=Commander
 ScryfallCode=CM2
 
@@ -320,20 +320,20 @@ ScryfallCode=CM2
 312 L Forest @Anthony S. Waters
 
 [tokens]
-0 1 c_1_1_shapeshifter_changeling @Franz Vohwinkel @Unknown
-0 2 w_1_1_bird_flying @Winona Nelson @Unknown
-0 3 w_0_1_goat @Adam Paquette @Unknown
-0 4 w_2_2_knight_first_strike @Hideaki Takamura @Unknown
-0 5 w_1_1_spirit_flying @Mike Sass @Unknown
-0 6 b_0_0_phyrexian_germ @Unknown @Unknown
-0 7 b_2_2_zombie @Bud Cook @Unknown
-0 8 r_3_1_elemental_shaman_haste @Jim Pavelec @Unknown
-0 9 r_1_1_goblin @Dave Kendall @Unknown
-0 10 lightning_rager @Svetlin Velinov @Unknown
-0 11 g_1_1_saproling @Brad Rigney @Unknown
-0 12 c_1_1_a_myr @Ryan Pancoast @Unknown
-0 13 c_1_1_a_pentavite_flying @Greg Staples @Unknown
-0 14 c_1_1_a_triskelavite_flying_ammo @Mark Zug @Unknown
-0 15 tuktuk_the_returned @Franz Vohwinkel @Unknown
-0 16 c_3_3_a_phyrexian_wurm_deathtouch @Unknown @Unknown
-0 17 c_3_3_a_phyrexian_wurm_lifelink @Unknown @Unknown
+1 c_1_1_shapeshifter_changeling @Franz Vohwinkel
+2 w_1_1_bird_flying @Winona Nelson
+3 w_0_1_goat @Adam Paquette
+4 w_2_2_knight_first_strike @Hideaki Takamura
+5 w_1_1_spirit_flying @Mike Sass
+6 b_0_0_phyrexian_germ @Igor Kieryluk
+7 b_2_2_zombie @Bud Cook
+8 r_3_1_elemental_shaman_haste @Jim Pavelec
+9 r_1_1_goblin @Dave Kendall
+10 lightning_rager @Svetlin Velinov
+11 g_1_1_saproling @Brad Rigney
+12 c_1_1_a_myr @Ryan Pancoast
+13 c_1_1_a_pentavite_flying @Greg Staples
+14 c_1_1_a_triskelavite_flying_ammo @Mark Zug
+15 tuktuk_the_returned @Franz Vohwinkel
+16 c_3_3_a_phyrexian_wurm_deathtouch @Raymond Swanland
+17 c_3_3_a_phyrexian_wurm_lifelink @Raymond Swanland

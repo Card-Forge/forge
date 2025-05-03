@@ -561,6 +561,13 @@ Replace=.04 Mythic:fromSheet("INR cards")
 17 g_x_x_treefolk_reach_total_lands @Yeong-Hao Han
 18 g_2_2_wolf @David Palumbo
 19 wb_1_1_human_cleric @Min Yum
-20 gw_1_1_human_soldier_training @Unknown
+20 gw_1_1_human_soldier_training @Campbell White
 21 c_a_blood_draw @Miranda Meeks
 22 c_a_clue_draw @John Avon
+
+[other]
+23 emblem_arlinn_embraced_by_the_moon @Winona Nelson
+24 emblem_chandra_dressed_to_kill @Viktor Titov
+25 emblem_jace_unraveler_of_secrets @Tyler Jacobson
+26 emblem_tamiyo_field_researcher @Kieran Yanner
+27 emblem_wrenn_and_seven @Heonhwa Choe

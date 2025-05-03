@@ -84,7 +84,6 @@ ScryfallCode=DDU
 76 L Mountain @Eytan Zana
 
 [tokens]
-0 c_1_1_a_phyrexian_myr @Unknown
 1 g_1_1_elf_warrior @William O'Connor
 2 c_1_1_a_myr @Ryan Pancoast
 3 c_1_1_a_thopter_flying @Svetlin Velinov

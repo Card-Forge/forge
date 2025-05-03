@@ -10,6 +10,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=8
 FatPackExtraSlots=40 BasicLands SHM
 ScryfallCode=EVE
+TokenFallbackCode=SHM
 
 [cards]
 1 R Archon of Justice @Jason Chan
@@ -194,8 +195,6 @@ ScryfallCode=EVE
 180 R Twilight Mire @Rob Alexander
 
 [tokens]
-0 w_1_1_kithkin_soldier @Unknown
-0 g_2_2_wolf @Unknown
 1 w_0_1_goat @Terese Nielsen
 2 u_1_1_bird_flying @Heather Hudson
 3 g_3_3_beast @William O'Connor

@@ -10,6 +10,7 @@ FatPack=10
 FatPackExtraSlots=80 BasicLands
 TreatAsSmallSet=true
 ScryfallCode=RIX
+TokenFallbackCode=XLN
 
 [cards]
 1 U Baffling End @Mathias Kollros
@@ -233,15 +234,11 @@ ScryfallCode=RIX
 1 Forest|RIX
 
 [tokens]
-0 w_1_1_vampire_lifelink @Unknown
-0 u_1_1_merfolk_hexproof @Unknown
-0 g_3_3_dinosaur_trample @Unknown
-0 c_a_treasure_sac @Unknown
-0 c_a_treasure_sac @Unknown
-0 c_a_treasure_sac @Unknown
-0 c_a_treasure_sac @Unknown
-0 c_a_treasure_sac @Unknown
 1 r_0_1_elemental_rekindling_phoenix @Jason Rainville
 2 r_1_1_elemental @Lius Lasahido
 3 g_1_1_saproling @Joseph Meehan
 4 c_4_4_a_golem @Svetlin Velinov
+
+[other]
+5 emblem_huatli_radiant_champion @Chris Rahn
+6 blessing @Yeong-Hao Han

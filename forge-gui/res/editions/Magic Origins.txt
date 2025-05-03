@@ -310,8 +310,13 @@ ScryfallCode=ORI
 4 b_5_5_demon_flying @Kev Walker
 5 b_2_2_zombie @Lucas Graciano
 6 r_1_1_goblin @Brandon Kitkouski
-7 ashaya_the_awoken_world @Unknown
+7 ashaya_the_awoken_world @Raymond Swanland
 8 g_2_2_elemental @Marco Nelor
 9 g_1_1_elf_warrior @William O'Connor
 10 c_1_1_a_thopter_flying @Adam Paquette
 11 c_1_1_a_thopter_flying @Adam Paquette
+
+[other]
+12 emblem_jace_telepath_unbound @Jaime Jones
+13 emblem_liliana_defiant_necromancer @Karla Ortiz
+14 emblem_chandra_roaring_flame @Eric Deschamps

@@ -5,7 +5,7 @@ PT:3/3
 K:Haste
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters, creatures target player controls can't block this turn.
 SVar:TrigEffect:DB$ Effect | ValidTgts$ Player | TgtPrompt$ Select target player | AILogic$ Evasion | StaticAbilities$ OppCantBlock | RememberObjects$ Targeted
-SVar:OppCantBlock:Mode$ CantBlockBy | ValidBlocker$ Creature.RememberedPlayerCtrl | Description$ Creatures targeted player controls can't block this turn.
+SVar:OppCantBlock:Mode$ CantBlock | ValidCard$ Creature.RememberedPlayerCtrl | Description$ Creatures targeted player controls can't block this turn.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library face down. You may look at and play that card this turn.
 SVar:TrigExile:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | RememberChanged$ True | Destination$ Exile | ExileFaceDown$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | SubAbility$ DBCleanup

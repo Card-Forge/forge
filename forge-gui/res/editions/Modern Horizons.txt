@@ -270,7 +270,6 @@ ScryfallCode=MH1
 255 R Flusterstorm @Chris Rallis
 
 [tokens]
-0 c_3_3_a_phyrexian_golem @Unknown
 1 c_2_2_shapeshifter_changeling @Johann Bodin
 2 w_4_4_angel_flying_vigilance @Winona Nelson
 3 w_1_1_bird_flying @James Ryman
@@ -288,4 +287,9 @@ ScryfallCode=MH1
 15 g_1_1_squirrel @Daniel Ljunggren
 16 wb_1_1_spirit_flying @Josh Hass
 17 c_0_0_a_construct_total_artifacts @Victor Adame Minguez
+18 c_3_3_a_phyrexian_golem @Volkan Baǵa
 19 c_1_1_a_myr @Ryan Pancoast
+
+[other]
+20 emblem_serra_the_benevolent @Magali Villeneuve
+21 emblem_wrenn_and_six @Chase Stone

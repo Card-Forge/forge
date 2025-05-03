@@ -2,7 +2,7 @@ Name:Bog Hoodlums
 ManaCost:5 B
 Types:Creature Goblin Warrior
 PT:4/1
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigClash | TriggerDescription$ When CARDNAME enters, clash with an opponent. If you win, put a +1/+1 counter on CARDNAME.
 SVar:TrigClash:DB$ Clash | WinSubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1

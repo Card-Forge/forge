@@ -359,7 +359,7 @@ ScryfallCode=C14
 11 u_x_x_zombie @Dave Kendall
 12 b_x_x_demon_flying @Pete Venters
 13 b_5_5_demon_flying @Kev Walker
-14 b_0_0_phyrexian_germ @Unknown
+14 b_0_0_phyrexian_germ @Igor Kieryluk
 15 b_x_x_horror @Jason Felix
 16 b_2_2_zombie @Lucas Graciano
 17 r_1_1_goblin @Dave Kendall
@@ -379,3 +379,8 @@ ScryfallCode=C14
 31 tuktuk_the_returned @Franz Vohwinkel
 32 c_3_3_a_phyrexian_wurm_deathtouch @Raymond Swanland
 33 c_3_3_a_phyrexian_wurm_lifelink @Raymond Swanland
+
+[other]
+34 emblem_teferi_temporal_archmage @Tyler Jacobson
+35 emblem_ob_nixilis_of_the_black_oath @Daarken
+36 Emblem_daretti_scrap_savant @Dan Murayama Scott

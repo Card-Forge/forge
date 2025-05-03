@@ -425,7 +425,6 @@ ScryfallCode=TSR
 411 R Lotus Bloom @Christopher Rush
 
 [tokens]
-0 c_2_2_a_assembly_worker @Unknown
 1 w_2_2_griffin_flying @Jim Nelson
 2 w_1_1_soldier @Alex Horley-Orlandelli
 3 cloud_sprite @Mark Zug
@@ -439,4 +438,5 @@ ScryfallCode=TSR
 11 g_6_1_insect_shroud @E. M. Gist
 12 llanowar_elves @Paolo Parente
 13 g_1_1_saproling @Warren Mahy
+14 c_2_2_a_assembly_worker @Mark Tedin
 15 metallic_sliver @Carl Critchlow

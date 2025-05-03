@@ -32,7 +32,6 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.PredicateString.StringOp;
 
 public class CopyPermanentEffect extends TokenEffectBase {
 
@@ -185,19 +184,15 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     System.err.println("Copying random permanent(s): " + tgtCards.toString());
                 }
             } else if (sa.hasParam("DefinedName")) {
-                List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
                 String name = sa.getParam("DefinedName");
                 if (name.equals("NamedCard")) {
                     if (!host.getNamedCard().isEmpty()) {
                         name = host.getNamedCard();
                     }
                 }
-
-                Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.name(StringOp.EQUALS, name));
-                cards = Lists.newArrayList(IterableUtil.filter(cards, cpp));
-
-                if (!cards.isEmpty()) {
-                    tgtCards.add(Card.fromPaperCard(cards.get(0), controller));
+                PaperCard pc = StaticData.instance().getCommonCards().getUniqueByName(name);
+                if (pc != null) {
+                    tgtCards.add(Card.fromPaperCard(pc, controller));
                 }
             } else if (sa.hasParam("Choices")) {
                 Player chooser = activator;
