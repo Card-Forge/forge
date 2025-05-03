@@ -2368,7 +2368,7 @@ public class AiController {
 
     // TODO move to more common place
     public static <T extends TriggerReplacementBase> List<T> filterList(List<T> input, Function<SpellAbility, Object> pred, Object value) {
-        return filterList(input, trb -> pred.apply(trb.ensureAbility()) == value);
+        return filterList(input, trb -> trb.ensureAbility() != null && pred.apply(trb.ensureAbility()) == value);
     }
 
     public static List<SpellAbility> filterListByApi(List<SpellAbility> input, ApiType type) {

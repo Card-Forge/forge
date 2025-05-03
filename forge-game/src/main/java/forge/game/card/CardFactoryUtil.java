@@ -3825,9 +3825,9 @@ public class CardFactoryUtil {
             final String t = k[1];
 
             String desc;
-            if(k.length > 2) {
+            if (k.length > 2) {
                 String typeText = k[2];
-                if(typeText.contains(" with "))
+                if (typeText.contains(" with "))
                     desc = typeText.substring(typeText.indexOf(" with ") + 6);
                 else
                     desc = typeText + "s";
