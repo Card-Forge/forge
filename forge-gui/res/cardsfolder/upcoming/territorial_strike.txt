@@ -2,6 +2,6 @@ Name:Territorial Strike
 ManaCost:1 B G
 Types:Sorcery
 S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Behold<1/Creature.Dragon> | Description$ As an additional cost to cast this spell, you may behold a Dragon. (You may choose a Dragon you control or reveal a Dragon card from your hand.)
-A:SP$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SubAbility$ DBPump | SpellDescription$ Destroy target nonland permanent.
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SubAbility$ DBPump | SpellDescription$ Destroy target nonland permanent. If a Dragon creature was beheld, it perpetually gets +2/+2.
 SVar:DBPump:DB$ Pump | Defined$ Beheld | NumAtt$ +2 | NumDef$ +2 | Duration$ Perpetual
 Oracle:As an additional cost to cast this spell, you may behold a Dragon creature.\nDestroy target nonland permanent. If a Dragon creature was beheld, it perpetually gets +2/+2.
