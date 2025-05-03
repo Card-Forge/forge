@@ -15,6 +15,7 @@ import forge.game.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
+import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -758,15 +759,27 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Integer chooseRollModifyEffect(List<Integer> modifiers) {
+    public RollDiceEffect.DieRollResult chooseRollToSwap(List<RollDiceEffect.DieRollResult> rolls) {
         //TODO create AI logic for this
-        return Aggregates.random(modifiers);
+        return Aggregates.random(rolls);
     }
 
     @Override
     public Integer chooseRollIncrement(List<Integer> increments, Integer currentResult) {
         //TODO create AI logic for this
         return Aggregates.random(increments);
+    }
+
+    @Override
+    public Card chooseCardToDiceSwap(List<Card> candidates, int result) {
+        //TODO create AI logic for this
+        return Aggregates.random(candidates);
+    }
+
+    @Override
+    public String chooseRollSwapValue(List<String> swapChoices, Integer currentResult, int power, int toughness) {
+        //TODO create AI logic for this
+        return Aggregates.random(swapChoices);
     }
 
     @Override

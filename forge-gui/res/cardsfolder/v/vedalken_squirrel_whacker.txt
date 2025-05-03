@@ -1,7 +1,6 @@
-Name:Elvish Impersonators
-ManaCost:3 G
-Types:Creature Elf
-# Departure from the letter of Oracle necessary so this card gets/gains bonuses/maluses predicated on creature type.
+Name:Vedalken Squirrel-Whacker
+ManaCost:3 U
+Types:Creature Vedalken Guest
 PT:*/*
 K:ETBReplacement:Other:TrigRoll
 SVar:TrigRoll:DB$ RollDice | ResultSVar$ diePwr | SubAbility$ RollTough | SpellDescription$ As CARDNAME enters, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.
@@ -9,6 +8,9 @@ SVar:RollTough:DB$ RollDice | ResultSVar$ dieTgn | SubAbility$ StorePower
 SVar:StorePower:DB$ StoreSVar | SVar$ CurrentPower | Type$ CountSVar | Expression$ CurrentPower/Plus.diePwr | SubAbility$ StoreToughness
 SVar:StoreToughness:DB$ StoreSVar | SVar$ CurrentToughness | Type$ CountSVar | Expression$ CurrentToughness/Plus.dieTgn
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ CurrentPower | SetToughness$ CurrentToughness
+R:Event$ RollDice | ActiveZones$ Battlefield | ValidPlayer$ You | ValidSides$ 6 | ReplaceWith$ SwapRoll | Description$ If you would roll one or more six-sided dice, instead roll them and you may exchange one result with this creature’s base power or base toughness.
+SVar:SwapRoll:DB$ ReplaceEffect | VarName$ DicePTExchanges | VarType$ CardSet | VarValue$ Self
 SVar:CurrentPower:Number$0
 SVar:CurrentToughness:Number$0
-Oracle:As Elvish Impersonators enters, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.
+AI:RemoveDeck:All
+Oracle:As this creature enters, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.\nIf you would roll one or more six-sided dice, instead roll them and you may exchange one result with this creature’s base power or base toughness.

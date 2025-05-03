@@ -16,6 +16,7 @@ import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.token.TokenInfo;
@@ -1450,8 +1451,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public Integer chooseRollModifyEffect(List<Integer> modifiers) {
-        return getGui().oneOrNone(Localizer.getInstance().getMessage("lblChooseRollModifier"), modifiers);
+    public RollDiceEffect.DieRollResult chooseRollToSwap(List<RollDiceEffect.DieRollResult> rolls) {
+        return getGui().oneOrNone(Localizer.getInstance().getMessage("lblChooseRollToSwap"), rolls);
+    }
+
+    @Override
+    public Card chooseCardToDiceSwap(List<Card> candidates, int result) {
+        return getGui().one(Localizer.getInstance().getMessage("lblChooseCardToDiceSwap", result), candidates);
+    }
+
+    @Override
+    public String chooseRollSwapValue(List<String> swapChoices, Integer currentResult, int power, int toughness) {
+        return getGui().oneOrNone(Localizer.getInstance().getMessage("lblChooseSwapPT", currentResult, power, toughness), swapChoices);
     }
 
     @Override

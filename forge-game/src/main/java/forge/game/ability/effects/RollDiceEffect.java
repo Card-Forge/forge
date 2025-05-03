@@ -63,6 +63,11 @@ public class RollDiceEffect extends SpellAbilityEffect {
         public void setModifiedValue(int modifiedValue) {
             this.modifiedValue = modifiedValue;
         }
+
+        @Override
+        public String toString() {
+            return String.valueOf(modifiedValue);
+        }
     }
 
     public static List<DieRollResult> getResultsList(List<Integer> naturalResults) {
@@ -131,11 +136,11 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         Map<Player, Integer> ignoreChosenMap = Maps.newHashMap();
-        Card squirrelWhacker = null;
+        Set<Card> dicePTExchanges = new HashSet<>();
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
         List<Integer> ignored = new ArrayList<>();
-        List<Integer> naturalRolls = rollAction(amount, sides, ignore, rollsResult, ignored, ignoreChosenMap, player, repParams);
+        List<Integer> naturalRolls = rollAction(amount, sides, ignore, rollsResult, ignored, ignoreChosenMap, dicePTExchanges, player, repParams);
 
         if (sa != null && sa.hasParam("UseHighestRoll")) {
             naturalRolls.subList(0, naturalRolls.size() - 1).clear();
@@ -154,9 +159,11 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 Cost cost = new Cost(c.getSVar("RollRerollCost"), false);
                 boolean paid = player.getController().payCostDuringRoll(cost, modifierSA, null);
                 if (paid) {
-                    naturalRolls.removeAll(diceToReroll);
+                    for (Integer roll : diceToReroll) {
+                        naturalRolls.remove(roll);
+                    }
                     int amountToReroll = diceToReroll.size();
-                    List<Integer> rerolls = rollAction(amountToReroll, sides, 0, null, ignored, Maps.newHashMap(), player, repParams);
+                    List<Integer> rerolls = rollAction(amountToReroll, sides, 0, null, ignored, Maps.newHashMap(), dicePTExchanges, player, repParams);
                     naturalRolls.addAll(rerolls);
                     activationsThisTurn += 1;
                     c.setSVar("ModsThisTurn", "Number$" + activationsThisTurn);
@@ -165,9 +172,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         // Modification Phase:
-        List<Integer> unmodifiedRolls = new ArrayList<>(naturalRolls);
-        List<Integer> modifiedRolls = new ArrayList<>();
-        List<Integer> finalResults = new ArrayList<>();
         List<DieRollResult> resultsList = new ArrayList<>();
         Integer rollToModify;
         String xenoKeyword = "After you roll a die, you may remove a +1/+1 counter from Xenosquirrels. If you do, increase or decrease the result by 1.";
@@ -177,7 +181,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
 
         if (!canIncrementDice.isEmpty()) {
             do {
-                rollToModify = player.getController().chooseRollToModify(unmodifiedRolls);
+                rollToModify = player.getController().chooseRollToModify(naturalRolls);
                 if (rollToModify != null) {
                     boolean modified = false;
                     DieRollResult dieResult = new DieRollResult(rollToModify, rollToModify);
@@ -186,41 +190,65 @@ public class RollDiceEffect extends SpellAbilityEffect {
                         int activationsThisTurn = Integer.parseInt(parts[1]);
                         SpellAbility modifierSA = c.getFirstSpellAbility();
                         String costString = c.getSVar("RollModifyCost");
-                        System.out.println(costString);
                         Cost cost = new Cost(costString, false);
                         boolean paid = player.getController().payCostDuringRoll(cost, modifierSA,  null);
                         if (paid) {
                             Integer increment = player.getController().chooseRollIncrement(List.of(1, -1), rollToModify);
-                            if (!modified) {unmodifiedRolls.remove(rollToModify); modified = true;}
+                            if (!modified) {naturalRolls.remove(rollToModify); modified = true;}
                             rollToModify += increment;
                             activationsThisTurn += 1;
                             c.setSVar("ModsThisTurn", "Number$" + activationsThisTurn);
-                            System.out.println("paid cost for modification");
-                            System.out.println("unmodified:" + unmodifiedRolls);
-                            System.out.println("modified:" + modifiedRolls);
                         }
                     }
                     if (modified) {
-                        modifiedRolls.add(rollToModify);
                         dieResult.setModifiedValue(rollToModify);
                         resultsList.add(dieResult);
                         hasBeenModified = true;
                     }
                     canIncrementDice = getIncrementCards(player, xenoKeyword, nightShiftKeyword);
                 }
-            } while (rollToModify != null && !unmodifiedRolls.isEmpty() && !canIncrementDice.isEmpty());
+            } while (rollToModify != null && !naturalRolls.isEmpty() && !canIncrementDice.isEmpty());
         }
-        finalResults.addAll(modifiedRolls);
-        finalResults.addAll(unmodifiedRolls);
-        for (Integer unmodified : unmodifiedRolls) {
+
+        // finish roll list
+        for (Integer unmodified : naturalRolls) {
+            // Add all the unmodified rolls into the results
             resultsList.add(new DieRollResult(unmodified, unmodified));
         }
-        //TODO this does not work with critical hit, we need to make sure to treat natural rolls differently just for that card
-        System.out.println("modified: " + modifiedRolls);
-        System.out.println("unmodified: " + unmodifiedRolls);
-        System.out.println("FinalList: " + finalResults);
-        System.out.println("NaturalList: " + naturalRolls);
-        System.out.println("ResultsList: " + resultsList);
+
+        // Vedalken Exchange
+        List<Card> vedalkenSwaps = new ArrayList<>(dicePTExchanges);
+        if (!vedalkenSwaps.isEmpty()) {
+            DieRollResult rollToSwap;
+            do {
+                rollToSwap = player.getController().chooseRollToSwap(resultsList);
+                if (rollToSwap != null) {
+                    Card c = player.getController().chooseCardToDiceSwap(vedalkenSwaps, rollToSwap.getModifiedValue());
+                    String[] parts = c.getSVar("CurrentPower").split("\\$");
+                    int cPower = Integer.parseInt(parts[1]);
+                    parts = c.getSVar("CurrentToughness").split("\\$");
+                    int cToughness = Integer.parseInt(parts[1]);
+                    List<String> choices = Arrays.asList("Power", "Toughness");
+                    String powerOrToughness = player.getController().chooseRollSwapValue(choices, rollToSwap.getModifiedValue(), cPower, cToughness);
+                    if (powerOrToughness != null) {
+                        int tempRollValue = rollToSwap.getModifiedValue();
+                        switch (powerOrToughness) {
+                            case "Power":
+                                rollToSwap.setModifiedValue(cPower);
+                                c.setSVar("CurrentPower", "Number$" + tempRollValue);
+                                break;
+                            case "Toughness":
+                                rollToSwap.setModifiedValue(cToughness);
+                                c.setSVar("CurrentToughness", "Number$" + tempRollValue);
+                                break;
+                            default:
+                                throw new IllegalStateException("Unexpected value: " + powerOrToughness);
+                        }
+                        vedalkenSwaps.remove(c);
+                    }
+                }
+            } while (!vedalkenSwaps.isEmpty() && rollToSwap != null);
+        }
 
         //Notify of results
         if (amount > 0) {
@@ -314,8 +342,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
             String activationLimit = c.getSVar("RollModificationsLimit");
             String[] parts = c.getSVar("ModsThisTurn").split("\\$");
             int activationsThisTurn = Integer.parseInt(parts[1]);
-            System.out.println("LIMIT: " + activationLimit);
-            System.out.println("CURRENT: " + activationsThisTurn);
             if (activationLimit.equals("None") || activationsThisTurn < Integer.parseInt(activationLimit)) {
                 canRerollDice.add(c);
             }
@@ -339,7 +365,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Card> canIncrementDice = new ArrayList<>();
         for (Card c : xenosquirrels) {
             // Xenosquirrels must have a P1P1 counter on it to remove in order to modify
-            System.out.println("Xenosquierrle Counters: " + c.getCounters());
             Integer P1P1Counters = c.getCounters().get(CounterType.get(CounterEnumType.P1P1));
             if (P1P1Counters != null && P1P1Counters > 0 && c.canRemoveCounters(CounterType.get(CounterEnumType.P1P1))) {
                 canIncrementDice.add(c);
@@ -350,7 +375,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
             String activationLimit = c.getSVar("RollModificationsLimit");
             String[] parts = c.getSVar("ModsThisTurn").split("\\$");
             int activationsThisTurn = Integer.parseInt(parts[1]);
-            System.out.println("Night Shift MODS: " + activationsThisTurn + " / " + activationLimit);
             if ((activationLimit.equals("None") || activationsThisTurn < Integer.parseInt(activationLimit)) && player.canPayLife(1, true, c.getFirstSpellAbility())) {
                 canIncrementDice.add(c);
             }
@@ -371,10 +395,12 @@ public class RollDiceEffect extends SpellAbilityEffect {
      * @param repParams       replacement effect parameters
      * @return list of final roll results after applying ignores and replacements, sorted in ascending order
      */
-    private static List<Integer> rollAction(int amount, int sides, int ignore, List<Integer> rollsResult, List<Integer> ignored, Map<Player, Integer> ignoreChosenMap, Player player, Map<AbilityKey, Object> repParams) {
+    private static List<Integer> rollAction(int amount, int sides, int ignore, List<Integer> rollsResult, List<Integer> ignored, Map<Player, Integer> ignoreChosenMap, Set<Card> dicePTExchanges, Player player, Map<AbilityKey, Object> repParams) {
 
+        repParams.put(AbilityKey.Sides, sides);
         repParams.put(AbilityKey.Number, amount);
         repParams.put(AbilityKey.Ignore, ignore);
+        repParams.put(AbilityKey.DicePTExchanges, dicePTExchanges);
         repParams.put(AbilityKey.IgnoreChosen, ignoreChosenMap);
         switch (player.getGame().getReplacementHandler().run(ReplacementType.RollDice, repParams)) {
             case NotReplaced:
@@ -384,6 +410,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 ignore = (int) repParams.get(AbilityKey.Ignore);
                 //noinspection unchecked
                 ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
+                //noinspection unchecked
+                dicePTExchanges.addAll((Set<Card>) repParams.get(AbilityKey.DicePTExchanges));
                 break;
             }
         }

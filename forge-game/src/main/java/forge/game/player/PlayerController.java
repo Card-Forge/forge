@@ -12,6 +12,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.*;
 import forge.game.GameOutcome.AnteResult;
+import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -231,8 +232,10 @@ public abstract class PlayerController {
     public abstract Integer chooseRollToIgnore(List<Integer> rolls);
     public abstract List<Integer> chooseDiceToReroll(List<Integer> rolls, String cardName, int cardID, CardView cardView);
     public abstract Integer chooseRollToModify(List<Integer> rolls);
-    public abstract Integer chooseRollModifyEffect(List<Integer> modifiers);
+    public abstract RollDiceEffect.DieRollResult chooseRollToSwap(List<RollDiceEffect.DieRollResult> rolls);
     public abstract Integer chooseRollIncrement(List<Integer> increments, Integer currentResult);
+    public abstract Card chooseCardToDiceSwap(List<Card> candidates, int result);
+    public abstract String chooseRollSwapValue(List<String> swapChoices, Integer currentResult, int power, int toughness);
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional);
 
