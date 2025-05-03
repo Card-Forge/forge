@@ -140,7 +140,6 @@ public enum AbilityKey {
     TokenNum("TokenNum"),
     Valiant("Valiant"),
     Won("Won"),
-    XenoModifications("XenoModifications"),
 
     // below used across different Replacements, don't reuse
     InternalTriggerTable("InternalTriggerTable"),
