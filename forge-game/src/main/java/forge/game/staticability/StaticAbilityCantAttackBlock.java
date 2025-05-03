@@ -37,6 +37,7 @@ import forge.game.zone.ZoneType;
  */
 public class StaticAbilityCantAttackBlock {
     public static String CantAttackMode = "CantAttack";
+    public static String CantBlockMode = "CantBlock";
     public static String CantBlockByMode = "CantBlockBy";
     public static String CanAttackIfHasteMode = "CanAttackIfHaste";
     public static String CanBlockIfReachMode = "CanBlockIfReach";
@@ -139,6 +140,30 @@ public class StaticAbilityCantAttackBlock {
             }
         }
 
+        return true;
+    }
+
+    public static boolean cantBlock(final Card blocker) {
+        CardCollection list = new CardCollection(blocker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
+        // add blocker in case of LKI
+        list.add(blocker);
+        for (final Card ca : list) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.checkConditions(CantBlockMode)) {
+                    continue;
+                }
+                if (applyCantBlockAbility(stAb, blocker)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean applyCantBlockAbility(final StaticAbility stAb, final Card blocker) {
+        if (!stAb.matchesValidParam("ValidCard", blocker)) {
+            return false;
+        }
         return true;
     }
 
