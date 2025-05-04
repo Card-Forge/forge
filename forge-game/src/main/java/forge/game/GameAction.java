@@ -1105,10 +1105,6 @@ public class GameAction {
         // remove old effects
         game.getStaticEffects().clearStaticEffects(affectedCards);
 
-        for (final Player p : game.getPlayers()) {
-            p.clearStaticAbilities();
-        }
-
         // search for cards with static abilities
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
         final CardCollection staticList = new CardCollection();
