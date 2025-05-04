@@ -4,6 +4,6 @@ Types:Legendary Artifact
 S:Mode$ ManaConvert | ValidPlayer$ You | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color.
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 5 | SpellDescription$ Add {C}{C}{C}{C}{C}.
 A:AB$ Draw | Cost$ 5 T | NumCards$ X | SpellDescription$ Draw a card for each color among permanents you control.
-SVar:X:Count$ColorsCtrl Permanent
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
 SVar:NonStackingEffect:True
 Oracle:You may spend mana as though it were mana of any color.\n{T}: Add {C}{C}{C}{C}{C}.\n{5}, {T}: Draw a card for each color among permanents you control.

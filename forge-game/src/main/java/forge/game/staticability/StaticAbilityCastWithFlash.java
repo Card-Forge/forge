@@ -9,8 +9,6 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCastWithFlash {
 
-    static String MODE = "CastWithFlash";
-
     public static boolean anyWithFlashNeedsInfo(final SpellAbility sa, final Card card, final Player activator) {
         final Game game = activator.getGame();
         final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));

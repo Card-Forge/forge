@@ -8,8 +8,6 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityAttackRestrict {
 
-    static String MODE = "AttackRestrict";
-
     static public int globalAttackRestrict(Game game) {
         int max = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
