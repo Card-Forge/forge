@@ -2,6 +2,5 @@ Name:Paper Tiger
 ManaCost:4
 Types:Artifact Creature Cat
 PT:4/3
-S:Mode$ CantAttack | ValidCard$ Creature.namedRock Lobster | Description$ Creatures named Rock Lobster can't attack or block.
-S:Mode$ CantBlock | ValidCard$ Creature.namedRock Lobster | Secondary$ True | Description$ Creatures named Rock Lobster can't attack or block.
+S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.namedRock Lobster | Description$ Creatures named Rock Lobster can't attack or block.
 Oracle:Creatures named Rock Lobster can't attack or block.

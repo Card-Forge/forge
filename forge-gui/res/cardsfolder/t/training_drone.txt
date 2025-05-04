@@ -2,8 +2,7 @@ Name:Training Drone
 ManaCost:3
 Types:Artifact Creature Drone
 PT:4/4
-S:Mode$ CantAttack | ValidCard$ Card.Self+unequipped | Description$ CARDNAME can't attack or block unless it's equipped.
-S:Mode$ CantBlock | ValidCard$ Card.Self+unequipped | Secondary$ True | Description$ CARDNAME can't attack or block unless it's equipped.
+S:Mode$ CantAttack,CantBlock | ValidCard$ Card.Self+unequipped | Description$ CARDNAME can't attack or block unless it's equipped.
 SVar:BuffedBy:Artifact.Equipment
 SVar:EquipMe:Once
 AI:RemoveDeck:Random

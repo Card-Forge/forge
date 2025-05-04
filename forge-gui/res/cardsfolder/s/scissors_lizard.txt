@@ -2,6 +2,5 @@ Name:Scissors Lizard
 ManaCost:4
 Types:Artifact Creature Lizard
 PT:4/3
-S:Mode$ CantAttack | ValidCard$ Creature.namedPaper Tiger | Description$ Creatures named Paper Tiger can't attack or block.
-S:Mode$ CantBlock | ValidCard$ Creature.namedPaper Tiger | Secondary$ True | Description$ Creatures named Paper Tiger can't attack or block.
+S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.namedPaper Tiger | Description$ Creatures named Paper Tiger can't attack or block.
 Oracle:Creatures named Paper Tiger can't attack or block.

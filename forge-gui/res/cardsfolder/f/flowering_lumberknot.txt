@@ -2,7 +2,6 @@ Name:Flowering Lumberknot
 ManaCost:3 G
 Types:Creature Treefolk
 PT:5/5
-S:Mode$ CantAttack | ValidCard$ Creature.Self | IsPresent$ Creature.PairedWith+withSoulbond | PresentCompare$ EQ0 | Description$ CARDNAME can't attack or block unless it's paired with a creature with soulbond.
-S:Mode$ CantBlock | ValidCard$ Creature.Self | IsPresent$ Creature.PairedWith+withSoulbond | PresentCompare$ EQ0 | Secondary$ True | Description$ CARDNAME can't attack or block unless it's paired with a creature with soulbond.
+S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.Self | IsPresent$ Creature.PairedWith+withSoulbond | PresentCompare$ EQ0 | Description$ CARDNAME can't attack or block unless it's paired with a creature with soulbond.
 AI:RemoveDeck:Random
 Oracle:Flowering Lumberknot can't attack or block unless it's paired with a creature with soulbond.

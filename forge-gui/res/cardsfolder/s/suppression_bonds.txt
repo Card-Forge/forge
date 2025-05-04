@@ -3,7 +3,5 @@ ManaCost:3 W
 Types:Enchantment Aura
 K:Enchant:Permanent.nonLand:nonland permanent
 SVar:AttachAILogic:Curse
-S:Mode$ CantAttack | ValidCard$ Card.EnchantedBy | Description$ Enchanted permanent can't attack or block and its activated abilities can't be activated.
-S:Mode$ CantBlock | ValidCard$ Card.EnchantedBy | Secondary$ True | Description$ Enchanted permanent can't attack or block and its activated abilities can't be activated.
-S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | Secondary$ True | Description$ Enchanted permanent can't attack or block and its activated abilities can't be activated.
+S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.EnchantedBy | Description$ Enchanted permanent can't attack or block and its activated abilities can't be activated.
 Oracle:Enchant nonland permanent\nEnchanted permanent can't attack or block, and its activated abilities can't be activated.
