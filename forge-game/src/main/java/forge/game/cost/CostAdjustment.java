@@ -21,6 +21,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -71,7 +72,7 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.checkMode("RaiseCost")) {
+                if (stAb.checkMode(StaticAbilityMode.RaiseCost)) {
                     raiseAbilities.add(stAb);
                 }
             }
@@ -199,10 +200,10 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.checkMode("ReduceCost") && checkRequirement(sa, stAb)) {
+                if (stAb.checkMode(StaticAbilityMode.ReduceCost) && checkRequirement(sa, stAb)) {
                     reduceAbilities.add(stAb);
                 }
-                else if (stAb.checkMode("SetCost")) {
+                else if (stAb.checkMode(StaticAbilityMode.SetCost)) {
                     setAbilities.add(stAb);
                 }
             }

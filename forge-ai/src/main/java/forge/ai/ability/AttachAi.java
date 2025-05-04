@@ -26,6 +26,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -132,7 +133,7 @@ public class AttachAi extends SpellAbilityAi {
         int power = 0, toughness = 0;
         List<String> keywords = Lists.newArrayList();
         for (StaticAbility stAb : source.getStaticAbilities()) {
-            if ("Continuous".equals(stAb.getParam("Mode"))) {
+            if (stAb.checkMode(StaticAbilityMode.Continuous)) {
                 if (stAb.hasParam("AddPower")) {
                     power += AbilityUtils.calculateAmount(source, stAb.getParam("AddPower"), stAb);
                 }
@@ -309,7 +310,7 @@ public class AttachAi extends SpellAbilityAi {
         String type = "";
 
         for (final StaticAbility stAb : attachSource.getStaticAbilities()) {
-            if (stAb.getParam("Mode").equals("Continuous") && stAb.hasParam("AddType")) {
+            if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.hasParam("AddType")) {
                 type = stAb.getParam("AddType");
             }
         }
@@ -834,7 +835,7 @@ public class AttachAi extends SpellAbilityAi {
         final List<String> keywords = new ArrayList<>();
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
-            if (!stAbility.getParam("Mode").equals("Continuous")) {
+            if (!stAbility.checkMode(StaticAbilityMode.Continuous)) {
                 continue;
             }
 
@@ -1122,7 +1123,7 @@ public class AttachAi extends SpellAbilityAi {
         boolean grantingExtraBlock = false;
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
-            if (!"Continuous".equals(stAbility.getParam("Mode"))) {
+            if (!stAbility.checkMode(StaticAbilityMode.Continuous)) {
                 continue;
             }
 

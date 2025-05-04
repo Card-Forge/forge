@@ -7,13 +7,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityInfectDamage {
 
-    static String MODE = "InfectDamage";
-
     static public boolean isInfectDamage(Player target) {
         final Game game = target.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.InfectDamage)) {
                     continue;
                 }
                 if (applyInfectDamageAbility(stAb, target)) {
