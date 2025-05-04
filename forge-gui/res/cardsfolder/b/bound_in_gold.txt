@@ -3,8 +3,5 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant:Permanent
 SVar:AttachAILogic:Curse
-S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Description$ Enchanted permanent can't attack, block, or crew Vehicles, and its activated abilities can't be activated unless they're mana abilities.
-S:Mode$ CantBlock | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted permanent can't attack, block, or crew Vehicles, and its activated abilities can't be activated unless they're mana abilities.
-S:Mode$ CantCrew | ValidCard$ Permanent.EnchantedBy | Secondary$ True | Description$ Enchanted permanent can't crew Vehicles.
-S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | ValidSA$ Activated.nonManaAbility | Secondary$ True | Description$ Enchanted permanent's activated abilities can't be activated unless they're mana abilities.
+S:Mode$ CantAttack,CantBlock,CantCrew,CantBeActivated | ValidCard$ Card.EnchantedBy | ValidSA$ Activated.nonManaAbility | Description$ Enchanted permanent can't attack, block, or crew Vehicles, and its activated abilities can't be activated unless they're mana abilities.
 Oracle:Enchant permanent\nEnchanted permanent can't attack, block, or crew Vehicles, and its activated abilities can't be activated unless they're mana abilities.
