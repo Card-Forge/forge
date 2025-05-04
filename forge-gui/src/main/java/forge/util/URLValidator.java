@@ -33,9 +33,9 @@ public class URLValidator {
             if (host == null) return null;
             HostPort hostPort;
             if (parseIP(host) != null) {
-                hostPort = new HostPort(host, port == -1 ? null : port);
+                hostPort = new HostPort(host, port);
             } else if (DOMAIN_NAME_PATTERN.matcher(host).matches()) {
-                hostPort = new HostPort(host, port == -1 ? null : port);
+                hostPort = new HostPort(host, port);
             } else {
                 return null;
             }
