@@ -3,6 +3,5 @@ ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack, block, or crew Vehicles.
-S:Mode$ CantCrew | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature can't crew Vehicles.
+S:Mode$ CantAttack,CantBlock,CantCrew | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack or block, or crew Vehicles.
 Oracle:Enchant creature\nEnchanted creature can't attack, block, or crew Vehicles.

@@ -6,14 +6,12 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantPreventDamage {
 
-    static String MODE = "CantPreventDamage";
-
     public static boolean cantPreventDamage(final Card source, final boolean isCombat) {
         CardCollection list = new CardCollection(source.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         list.add(source);
         for (final Card ca : list) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantPreventDamage)) {
                     continue;
                 }
                 if (applyCantPreventDamage(stAb, source, isCombat)) {

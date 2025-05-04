@@ -2763,16 +2763,6 @@ public class AbilityUtils {
             return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
         }
 
-        if (sq[0].equals("AllTypes")) {
-            List<Card> cards = getDefinedCards(c, sq[1], ctb);
-
-            int amount = countCardTypesFromList(cards, false) +
-                    countSuperTypesFromList(cards) +
-                    countSubTypesFromList(cards);
-
-            return doXMath(amount, expr, c, ctb);
-        }
-
         if (sq[0].equals("TotalTurns")) {
             return doXMath(game.getPhaseHandler().getTurn(), expr, c, ctb);
         }
@@ -2916,18 +2906,6 @@ public class AbilityUtils {
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
             int[] colorSize = CardFactoryUtil.SortColorsFromList(list);
             return doXMath(colorSize[colorSize.length - 2], expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("ColorsCtrl")) {
-            final String restriction = l[0].substring(11);
-            final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            return doXMath(CardUtil.getColorsFromCards(list).countColors(), expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("ColorsDefined")) {
-            final String restriction = l[0].substring(14);
-            final CardCollection list = getDefinedCards(c, restriction, ctb);
-            return doXMath(CardUtil.getColorsFromCards(list).countColors(), expr, c, ctb);
         }
 
         // TODO move below to handlePaid
@@ -3776,6 +3754,10 @@ public class AbilityUtils {
             return Aggregates.max(paidList, Card::getCMC);
         }
 
+        if (string.equals("Colors")) {
+            return CardUtil.getColorsFromCards(paidList).countColors();
+        }
+
         if (string.equals("DifferentColorPair")) {
             final Set<ColorSet> diffPair = new HashSet<>();
             for (final Card card : paidList) {
@@ -3803,6 +3785,12 @@ public class AbilityUtils {
             String valid = splitString[0].substring(6);
             final int num = CardLists.getValidCardCount(paidList, valid, source.getController(), source, ctb);
             return doXMath(num, splitString.length > 1 ? splitString[1] : null, source, ctb);
+        }
+
+        if (string.startsWith("AllTypes")) {
+            return countCardTypesFromList(paidList, false) +
+                    countSuperTypesFromList(paidList) +
+                    countSubTypesFromList(paidList);
         }
 
         if (string.startsWith("CardTypes")) {
