@@ -104,6 +104,9 @@ public class StaticAbilityCantBeCast {
         if (!stAb.matchesValidParam("Caster", activator)) {
             return false;
         }
+        if (stAb.getIgnoreEffectPlayers().contains(activator)) {
+            return false;
+        }
 
         if (stAb.hasParam("OnlySorcerySpeed") && activator != null && activator.canCastSorcery()) {
             return false;
@@ -154,6 +157,9 @@ public class StaticAbilityCantBeCast {
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
+        if (stAb.getIgnoreEffectCards().contains(card)) {
+            return false;
+        }
 
         if (!stAb.matchesValidParam("ValidSA", spellAbility)) {
             return false;
@@ -195,6 +201,9 @@ public class StaticAbilityCantBeCast {
         }
 
         if (!stAb.matchesValidParam("Player", player)) {
+            return false;
+        }
+        if (stAb.getIgnoreEffectPlayers().contains(player)) {
             return false;
         }
 
