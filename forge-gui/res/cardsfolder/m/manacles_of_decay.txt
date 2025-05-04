@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
+S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack.
 A:AB$ Pump | Cost$ B | Defined$ Enchanted | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Enchanted creature gets -1/-1 until end of turn.
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Enchanted creature can't block this turn.
 SVar:NonStackingAttachEffect:True

@@ -26,6 +26,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -132,7 +133,7 @@ public class AttachAi extends SpellAbilityAi {
         int power = 0, toughness = 0;
         List<String> keywords = Lists.newArrayList();
         for (StaticAbility stAb : source.getStaticAbilities()) {
-            if ("Continuous".equals(stAb.getParam("Mode"))) {
+            if (stAb.checkMode(StaticAbilityMode.Continuous)) {
                 if (stAb.hasParam("AddPower")) {
                     power += AbilityUtils.calculateAmount(source, stAb.getParam("AddPower"), stAb);
                 }
@@ -309,7 +310,7 @@ public class AttachAi extends SpellAbilityAi {
         String type = "";
 
         for (final StaticAbility stAb : attachSource.getStaticAbilities()) {
-            if (stAb.getParam("Mode").equals("Continuous") && stAb.hasParam("AddType")) {
+            if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.hasParam("AddType")) {
                 type = stAb.getParam("AddType");
             }
         }
@@ -833,8 +834,28 @@ public class AttachAi extends SpellAbilityAi {
         int totPower = 0;
         final List<String> keywords = new ArrayList<>();
 
+        boolean cantAttack = false;
+        boolean cantBlock = false;
+
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
-            if (!stAbility.getParam("Mode").equals("Continuous")) {
+            if (stAbility.checkMode(StaticAbilityMode.CantAttack)) {
+                String valid = stAbility.getParam("ValidCard");
+                if (valid.contains(stCheck) || valid.contains("AttachedBy")) {
+                    cantAttack = true;
+                }
+            } else if (stAbility.checkMode(StaticAbilityMode.CantBlock)) {
+                String valid = stAbility.getParam("ValidCard");
+                if (valid.contains(stCheck) || valid.contains("AttachedBy")) {
+                    cantBlock = true;
+                }
+            } else if (stAbility.checkMode(StaticAbilityMode.CantBlockBy)) {
+                String valid = stAbility.getParam("ValidBlocker");
+                if (valid.contains(stCheck) || valid.contains("AttachedBy")) {
+                    cantBlock = true;
+                }
+            }
+
+            if (!stAbility.checkMode(StaticAbilityMode.Continuous)) {
                 continue;
             }
 
@@ -885,6 +906,12 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList, c -> containsUsefulCurseKeyword(keywords, c, sa));
         } else if (totPower < 0) {
             prefList = CardLists.filter(prefList, c -> c.getNetPower() > 0 && ComputerUtilCombat.canAttackNextTurn(c));
+        }
+
+        if (cantAttack) {
+            prefList = CardLists.filter(prefList, c -> c.isCreature() && ComputerUtilCombat.canAttackNextTurn(c));
+        } else if (cantBlock) { // TODO better can block filter?
+            prefList = CardLists.filter(prefList, c -> c.isCreature() && !ComputerUtilCard.isUselessCreature(ai, c));
         }
 
         //some auras aren't useful in multiples
@@ -1122,7 +1149,7 @@ public class AttachAi extends SpellAbilityAi {
         boolean grantingExtraBlock = false;
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
-            if (!"Continuous".equals(stAbility.getParam("Mode"))) {
+            if (!stAbility.checkMode(StaticAbilityMode.Continuous)) {
                 continue;
             }
 

@@ -7,13 +7,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityTapPowerValue {
 
-    static String MODE = "TapPowerValue";
-
     public static boolean withToughness(final Card card, final SpellAbility sa) {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.TapPowerValue)) {
                     continue;
                 }
                 if (withToughness(stAb, card, sa)) {
@@ -42,7 +40,7 @@ public class StaticAbilityTapPowerValue {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.TapPowerValue)) {
                     continue;
                 }
                 if (!stAb.matchesValidParam("ValidCard", card)) {

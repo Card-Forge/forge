@@ -7,13 +7,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantVenture {
 
-    static String MODE = "CantVenture";
-
     static public boolean cantVenture(Player player) {
         final Game game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantVenture)) {
                     continue;
                 }
                 if (applyCantVentureAbility(stAb, player)) {

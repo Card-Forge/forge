@@ -56,7 +56,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
-import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -143,8 +142,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     // stores the keywords created by static abilities
     private final Table<Long, String, KeywordInterface> storedKeywords = TreeBasedTable.create();
     private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
-
-    private Map<Card, DetachedCardEffect> staticAbilities = Maps.newHashMap();
 
     private Map<GameEntity, List<Card>> attackedThisTurn = new HashMap<>();
     private List<Player> attackedPlayersLastTurn = new ArrayList<>();
@@ -1068,40 +1065,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final KeywordCollectionView getKeywords() {
         return keywords.getView();
-    }
-
-    public final FCollectionView<StaticAbility> getStaticAbilities() {
-        FCollection<StaticAbility> result = new FCollection<>();
-        for (DetachedCardEffect eff : staticAbilities.values()) {
-            result.addAll(eff.getStaticAbilities());
-        }
-        return result;
-    }
-
-    public final StaticAbility addStaticAbility(final Card host, final String s) {
-        PlayerZone com = getZone(ZoneType.Command);
-
-        if (!staticAbilities.containsKey(host)) {
-            DetachedCardEffect effect = new DetachedCardEffect(host, host.getName() + "'s Effect");
-            effect.setOwner(this);
-            staticAbilities.put(host, effect);
-        }
-
-        if (!com.contains(staticAbilities.get(host))) {
-            com.add(staticAbilities.get(host));
-            this.updateZoneForView(com);
-        }
-
-        return staticAbilities.get(host).addStaticAbility(s);
-    }
-
-    public final void clearStaticAbilities() {
-        PlayerZone com = getZone(ZoneType.Command);
-        for (DetachedCardEffect eff : staticAbilities.values()) {
-            com.remove(eff);
-            eff.setStaticAbilities(Lists.newArrayList());
-        }
-        this.updateZoneForView(com);
     }
 
     @Override

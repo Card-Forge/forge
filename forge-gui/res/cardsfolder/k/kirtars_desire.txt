@@ -3,6 +3,6 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | Condition$ Threshold | Description$ Threshold — Enchanted creature can't block as long as seven or more cards are in your graveyard.
+S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack.
+S:Mode$ CantBlock | ValidCard$ Creature.EnchantedBy | Condition$ Threshold | Description$ Threshold — Enchanted creature can't block as long as seven or more cards are in your graveyard.
 Oracle:Enchant creature\nEnchanted creature can't attack.\nThreshold — Enchanted creature can't block as long as seven or more cards are in your graveyard.

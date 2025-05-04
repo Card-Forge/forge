@@ -2,7 +2,7 @@ Name:Island Fish Jasconius
 ManaCost:4 U U U
 Types:Creature Fish
 PT:6/8
-S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ This creature can't attack unless defending player controls an Island.
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ controlsIsland | Description$ This creature can't attack unless defending player controls an Island.
 R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice this creature.
 SVar:TrigSac:DB$ Sacrifice

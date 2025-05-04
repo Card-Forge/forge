@@ -500,14 +500,6 @@ public final class StaticAbilityContinuous {
                 p.addChangedKeywords(addKeywords, removeKeywords, se.getTimestamp(), stAb.getId());
             }
 
-            // add static abilities
-            if (addStatics != null) {
-                for (String s : addStatics) {
-                    StaticAbility stat = p.addStaticAbility(hostCard, s);
-                    stat.setIntrinsic(false);
-                }
-            }
-
             if (layer == StaticAbilityLayer.RULES) {
                 if (params.containsKey("SetMaxHandSize")) {
                     String mhs = params.get("SetMaxHandSize");
