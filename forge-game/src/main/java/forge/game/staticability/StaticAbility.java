@@ -247,7 +247,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         this.id = nextId();
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
-        this.layers = this.generateLayer();
         this.hostCard = host;
         this.setCardState(state);
         if (hasParam("EffectZone")) {
@@ -256,6 +255,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("Mode")) {
             setMode(EnumSet.copyOf(StaticAbilityMode.listValueOf(getParam("Mode"))));
         }
+        this.layers = this.generateLayer();
     }
 
     public StaticAbilityView getView() {

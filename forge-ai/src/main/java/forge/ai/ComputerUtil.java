@@ -1459,15 +1459,14 @@ public class ComputerUtil {
         // check for Continuous abilities that grant Haste
         for (final Card c : all) {
             for (StaticAbility stAb : c.getStaticAbilities()) {
-                Map<String, String> params = stAb.getMapParams();
-                if ("Continuous".equals(params.get("Mode")) && params.containsKey("AddKeyword")
-                        && params.get("AddKeyword").contains("Haste")) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.hasParam("AddKeyword")
+                        && stAb.getParam("AddKeyword").contains("Haste")) {
 
                     if (c.isEquipment() && c.getEquipping() == null) {
                         return true;
                     }
 
-                    final String affected = params.get("Affected");
+                    final String affected = stAb.getParam("Affected");
                     if (affected.contains("Creature.YouCtrl")
                             || affected.contains("Other+YouCtrl")) {
                         return true;
@@ -1520,11 +1519,10 @@ public class ComputerUtil {
 
             for (final Card c : opp) {
                 for (StaticAbility stAb : c.getStaticAbilities()) {
-                    Map<String, String> params = stAb.getMapParams();
-                    if ("Continuous".equals(params.get("Mode")) && params.containsKey("AddKeyword")
-                            && params.get("AddKeyword").contains("Haste")) {
+                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.hasParam("AddKeyword")
+                            && stAb.getParam("AddKeyword").contains("Haste")) {
 
-                        final ArrayList<String> affected = Lists.newArrayList(params.get("Affected").split(","));
+                        final ArrayList<String> affected = Lists.newArrayList(stAb.getParam("Affected").split(","));
                         if (affected.contains("Creature")) {
                             return true;
                         }
