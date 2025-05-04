@@ -2,7 +2,7 @@ Name:Sealock Monster
 ManaCost:3 U U
 Types:Creature Octopus
 PT:5/5
-S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ controlsIsland | Description$ CARDNAME can't attack unless defending player controls an Island.
 K:Monstrosity:3:5 U U
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME becomes monstrous, target land becomes an Island in addition to its other types.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land | AITgts$ Land.OppCtrl | Types$ Island | Duration$ Permanent | IsCurse$ True

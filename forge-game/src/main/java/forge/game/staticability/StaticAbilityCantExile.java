@@ -7,8 +7,6 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantExile {
 
-    static String MODE = "CantExile";
-
     public static boolean cantExile(final Card card, final SpellAbility cause, final boolean effect)  {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {

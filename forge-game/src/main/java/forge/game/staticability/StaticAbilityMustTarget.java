@@ -14,7 +14,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityMustTarget {
-    static String MODE = "MustTarget";
 
     public static boolean filterMustTargetCards(Player targetingPlayer, List<Card> targets, final SpellAbility spellAbility) {
         //Only applied when the targeting player and controller are the same

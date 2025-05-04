@@ -8,8 +8,6 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantPutCounter {
 
-    static String MODE = "CantPutCounter";
-
     public static boolean anyCantPutCounter(final Card card, final CounterType type) {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
