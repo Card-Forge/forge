@@ -3788,9 +3788,9 @@ public class AbilityUtils {
         }
 
         if (string.startsWith("AllTypes")) {
-            return countCardTypesFromList(cards, false) +
-                    countSuperTypesFromList(cards) +
-                    countSubTypesFromList(cards);
+            return countCardTypesFromList(paidList, false) +
+                    countSuperTypesFromList(paidList) +
+                    countSubTypesFromList(paidList);
         }
 
         if (string.startsWith("CardTypes")) {
