@@ -4,11 +4,7 @@ Types:Creature Elf
 # Departure from the letter of Oracle necessary so this card gets/gains bonuses/maluses predicated on creature type.
 PT:*/*
 K:ETBReplacement:Other:TrigRoll
-SVar:TrigRoll:DB$ RollDice | ResultSVar$ diePwr | SubAbility$ RollTough | SpellDescription$ As CARDNAME enters, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.
-SVar:RollTough:DB$ RollDice | ResultSVar$ dieTgn | SubAbility$ StorePower
-SVar:StorePower:DB$ StoreSVar | SVar$ CurrentPower | Type$ CountSVar | Expression$ CurrentPower/Plus.diePwr | SubAbility$ StoreToughness
-SVar:StoreToughness:DB$ StoreSVar | SVar$ CurrentToughness | Type$ CountSVar | Expression$ CurrentToughness/Plus.dieTgn
-S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ CurrentPower | SetToughness$ CurrentToughness
-SVar:CurrentPower:Number$0
-SVar:CurrentToughness:Number$0
+SVar:TrigRoll:DB$ RollDice | ResultSVar$ SetPwr | SubAbility$ RollTough | SpellDescription$ As CARDNAME enters, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.
+SVar:RollTough:DB$ RollDice | ResultSVar$ SetTgn | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ SetPwr | Toughness$ SetTgn | Duration$ Permanent
 Oracle:As Elvish Impersonators enters, roll a six-sided die twice. Its base power becomes the first result and its base toughness becomes the second result.

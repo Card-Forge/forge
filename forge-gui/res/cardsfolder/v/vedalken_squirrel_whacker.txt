@@ -7,7 +7,7 @@ SVar:TrigRoll:DB$ RollDice | ResultSVar$ diePwr | SubAbility$ RollTough | SpellD
 SVar:RollTough:DB$ RollDice | ResultSVar$ dieTgn | SubAbility$ StorePower
 SVar:StorePower:DB$ StoreSVar | SVar$ CurrentPower | Type$ CountSVar | Expression$ CurrentPower/Plus.diePwr | SubAbility$ StoreToughness
 SVar:StoreToughness:DB$ StoreSVar | SVar$ CurrentToughness | Type$ CountSVar | Expression$ CurrentToughness/Plus.dieTgn
-S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ CurrentPower | SetToughness$ CurrentToughness
+S:Mode$ Continuous | SetPower$ CurrentPower | SetToughness$ CurrentToughness
 R:Event$ RollDice | ActiveZones$ Battlefield | ValidPlayer$ You | ValidSides$ 6 | ReplaceWith$ SwapRoll | Description$ If you would roll one or more six-sided dice, instead roll them and you may exchange one result with this creature’s base power or base toughness.
 SVar:SwapRoll:DB$ ReplaceEffect | VarName$ DicePTExchanges | VarType$ CardSet | VarValue$ Self
 SVar:CurrentPower:Number$0
