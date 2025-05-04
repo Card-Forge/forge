@@ -20,6 +20,7 @@ public class DraftingProcessScreen extends FDeckEditor {
     private boolean isDraftSaved;
     private final BoosterDraft draft;
     private final QuestTournamentController questDraftController;
+    protected FDraftLog draftLog;
 
     public DraftingProcessScreen(BoosterDraft draft, DeckEditorConfig editorConfig) {
         this(draft, editorConfig, null);
@@ -29,12 +30,21 @@ public class DraftingProcessScreen extends FDeckEditor {
         super(editorConfig, "");
         this.draft = draft;
         this.questDraftController = questDraftController;
-        getCatalogPage().refresh(); //must refresh after draft set
+        getCatalogPage().scheduleRefresh(); //must refresh after draft set
+
+        this.draftLog = new FDraftLog();
+        draft.setLogEntry(this.draftLog);
+        deckHeader.initDraftLog(this.draftLog, this);
     }
 
     @Override
     public BoosterDraft getDraft() {
         return draft;
+    }
+
+    @Override
+    public boolean isDrafting() {
+        return !isDraftSaved;
     }
 
     protected boolean isQuestDraft() {

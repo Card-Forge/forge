@@ -10,6 +10,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.TextUtil;
 
@@ -373,7 +374,7 @@ public class LimitedPlayer {
         if (this.draft.getDraftLog() != null) {
             this.draft.getDraftLog().addLogEntry(message);
         }
-        // Mobile doesnt have a draft log yet
+        System.out.println("[DRAFT] " + message);
     }
 
     public DraftPack nextChoice() {

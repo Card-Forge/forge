@@ -144,9 +144,10 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getAdventureCollectionDefaultColumns() {
-        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.QUANTITY, false, false, false, true, false);
+        Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.QUANTITY, false, false, true, true, false);
         columns.get(ColumnDef.NEW).setSortPriority(1);
         columns.get(ColumnDef.NAME).setSortPriority(2);
+        columns.get(ColumnDef.PRICE).setSortPriority(3);
         return columns;
     }
 

@@ -205,7 +205,7 @@ public enum DeckFormat {
         if(this == Vanguard)
             return EnumSet.of(DeckSection.Avatar);
         EnumSet<DeckSection> out = EnumSet.of(DeckSection.Main);
-        if(sideRange.getMaximum() > 0)
+        if(sideRange == null || sideRange.getMaximum() > 0)
             out.add(DeckSection.Sideboard);
         if(hasCommander())
             out.add(DeckSection.Commander);

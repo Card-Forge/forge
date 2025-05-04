@@ -79,7 +79,7 @@ public class ShopScene extends ForgeScene {
     }
 
     private void doAutosell() {
-        AdventurePlayer.current().doAutosell();
+        AdventurePlayer.current().doBulkSell(AdventurePlayer.current().autoSellCards);
         if (screen != null)
             screen.refresh();
     }

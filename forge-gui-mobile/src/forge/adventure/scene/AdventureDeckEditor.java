@@ -49,7 +49,8 @@ public class AdventureDeckEditor extends FDeckEditor {
             return new DeckEditorPage[]{
                     new CollectionCatalogPage(),
                     new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
-                    new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD)
+                    new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD),
+                    new CollectionAutoSellPage()
             };
         }
 
@@ -67,7 +68,10 @@ public class AdventureDeckEditor extends FDeckEditor {
     protected static class ShopConfig extends AdventureEditorConfig {
         @Override
         protected DeckEditorPage[] getInitialPages() {
-            return new DeckEditorPage[]{new StoreCatalogPage()};
+            return new DeckEditorPage[]{
+                    new StoreCatalogPage(),
+                    new CollectionAutoSellPage()
+            };
         }
     }
 
@@ -120,15 +124,14 @@ public class AdventureDeckEditor extends FDeckEditor {
                                 new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)
                         };
                     case Entered:
-                        return new DeckEditorPage[]{
-                                event.getDraft() != null ? (new DraftPackPage()) :
-                                        new AdventureCatalogPage(ItemManagerConfig.DRAFT_PACK, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
+                        if (event.getDraft() != null)
+                            return new DeckEditorPage[]{
+                                new DraftPackPage(new AdventureCardManager()),
                                 new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
                                 new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)
-                        };
+                            };
                     default:
                         return new DeckEditorPage[]{
-                                new AdventureCatalogPage(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
                                 new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
                                 new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD)
                         };
@@ -145,19 +148,22 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     private static class ContentPreviewPage extends CatalogPage {
-
         Deck contents = new Deck();
 
         protected ContentPreviewPage(Deck cardsToShow) {
-            super(ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(new AdventureCardManager(), ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             contents = cardsToShow;
             cardManager.setBtnAdvancedSearchOptions(false);
-            refresh();
         }
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
             //No menus to show here, this page is only to be used for previewing the known contents of a sealed pack
+        }
+
+        @Override
+        protected ItemPool<PaperCard> getCardPool() {
+            return contents.getAllCardsInASinglePool();
         }
 
         @Override
@@ -174,10 +180,17 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     private static class StoreCatalogPage extends CatalogPage {
         protected StoreCatalogPage() {
-            super(ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(new AdventureCardManager(), ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            //cardManager.setBtnAdvancedSearchOptions(false); //TODO: Sort by sell value?
+            scheduleRefresh();
+        }
+
+        @Override
+        protected void initialize() {
+            super.initialize();
             Current.player().onGoldChange(() -> ((AdventureDeckEditor) parentScreen).deckHeader.updateGold());
-            cardManager.setBtnAdvancedSearchOptions(false);
-            refresh();
+            cardManager.setPool(AdventurePlayer.current().getSellableCards());
+            cardManager.setShowNFSWatermark(true);
         }
 
         @Override
@@ -188,22 +201,20 @@ public class AdventureDeckEditor extends FDeckEditor {
             if(sellable <= 0)
                 return;
             String prompt = card + " - " + label + " " + localizer.getMessage("lblHowMany");
-            menu.addItem(new FMenuItem(label, SIDEBOARD_ICON, (e) -> {
-                if(sellable == 1) {
-                    AdventurePlayer.current().sellCard(card, 1, true);
-                    return;
-                }
-                GuiChoose.getInteger(prompt, 1, sellable, new Callback<>() {
-                    @Override
-                    public void run(Integer result) {
-                        if (result == null || result <= 0) {
-                            return;
-                        }
-                        AdventurePlayer.current().sellCard(card, result, true);
-                        //((AdventureDeckEditor) parentScreen).deckHeader.updateGold(); //TODO: Is this needed?
-                    }
-                });
-            }));
+
+            menu.addItem(new FMenuItem(label, SIDEBOARD_ICON, new MoveQuantityPrompt(prompt, sellable, result -> {
+                    int sold = AdventurePlayer.current().sellCard(card, result);
+                    removeCard(card, sold);
+                })
+            ));
+        }
+
+        @Override
+        public void buildDeckMenu(FPopupMenu menu) {
+            super.buildDeckMenu(menu);
+            FMenuItem sellCurrentFilters = new FMenuItem(Forge.getLocalizer().getMessage("lblSellCurrentFilters"), FSkinImage.QUEST_COINSTACK, e1 -> sellAllByFilter());
+            sellCurrentFilters.setTextColor(255, 0, 0);
+            menu.addItem(sellCurrentFilters);
         }
 
         @Override
@@ -212,82 +223,165 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         @Override
-        protected boolean canAddCards() {
-            return false;
-        }
-
-        @Override
         public void refresh() {
             cardManager.setPool(AdventurePlayer.current().getSellableCards());
+        }
+
+        public void sellAllByFilter() {
+            int value = 0;
+
+            CardPool toSell = new CardPool();
+
+            for (Map.Entry<PaperCard, Integer> entry : cardManager.getFilteredItems()) {
+                toSell.add(entry.getKey(), entry.getValue());
+                value += AdventurePlayer.current().cardSellPrice(entry.getKey()) * entry.getValue();
+            }
+
+            if(toSell.isEmpty())
+                return;
+
+            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", toSell.countAll(), value), Forge.getLocalizer().getMessage("lblSellCurrentFilters"), Forge.getLocalizer().getMessage("lblSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<>() {
+                @Override
+                public void run(Boolean result) {
+                    if (result) {
+                        AdventurePlayer.current().doBulkSell(toSell);
+                        refresh();
+                        //parentScreen.deckHeader.updateGold(); //TODO: Is this even needed?
+                    }
+                }
+            });
         }
     }
 
     private static class CollectionCatalogPage extends CatalogPage {
         protected CollectionCatalogPage() {
-            super(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(new AdventureCardManager(), ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+        }
+
+        @Override
+        protected void initialize() {
+            super.initialize();
             cardManager.setBtnAdvancedSearchOptions(true);
             cardManager.setCatalogDisplay(true);
             cardManager.setShowNFSWatermark(true);
-            refresh();
+            scheduleRefresh();
         }
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
             super.buildMenu(menu, card);
 
-            int autoSellCount = Current.player().autoSellCards.count(card);
-            int sellableCount = Current.player().getSellableCards().count(card);
+            int amountOwned = cardManager.getItemCount(card);
+
+            Localizer localizer = Forge.getLocalizer();
+            String lblHowMany = localizer.getMessage("lblHowMany");
 
             if (card.hasNoSellValue()) {
-                FMenuItem unsellableIndicator = new FMenuItem(Forge.getLocalizer().getMessage("lblUnsellable"), null, null);
-                unsellableIndicator.setEnabled(false);
-                menu.addItem(unsellableIndicator);
+                String prompt = String.format("%s - %s %s", card, localizer.getMessage("lblRemove"), lblHowMany);
+                FMenuItem removeItem = new FMenuItem(localizer.getMessage("lblRemove"), FSkinImage.HDDELETE, new MoveQuantityPrompt(prompt, amountOwned, amount -> {
+                    int sold = Current.player().sellCard(card, amount);
+                    removeCard(card, sold);
+                }));
+                menu.addItem(removeItem);
+                return;
             }
 
-            if (sellableCount > 0) {
-                FMenuItem moveToAutosell = new FMenuItem(Forge.getLocalizer().getMessage("lbltoSell", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> {
-                    Current.player().autoSellCards.add(card);
-                    refresh();
-                });
-                moveToAutosell.setEnabled(sellableCount - autoSellCount > 0);
-                menu.addItem(moveToAutosell);
+            if(parentScreen instanceof AdventureDeckEditor adventureEditor && adventureEditor.getAutoSellPage() != null) {
+                CollectionAutoSellPage autoSellPage = adventureEditor.getAutoSellPage();
+                int sellableCount = amountOwned - Current.player().getCopiesUsedInDecks(card);
+                int autoSellCount = Current.player().autoSellCards.count(card);
 
-                FMenuItem moveToCatalog = new FMenuItem(Forge.getLocalizer().getMessage("lbltoInventory", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> {
-                    Current.player().autoSellCards.remove(card);
-                    refresh();
-                });
-                moveToCatalog.setEnabled(autoSellCount > 0);
-                menu.addItem(moveToCatalog);
+                if (sellableCount > 0) {
+                    String action = localizer.getMessage("lbltoSell", autoSellCount, sellableCount);
+                    String prompt = String.format("%s - %s %s", card, action, lblHowMany);
+                    FMenuItem moveToAutosell = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, new MoveQuantityPrompt(prompt, sellableCount, amount -> {
+                        //Auto-sell page adds to and removes from the player's auto-sell pool.
+                        //The auto-sell pool is part of the overall pool so there's no need to edit anything on our end either.
+                        autoSellPage.addCard(card, amount);
+                        removeCard(card, amount);
+                    }));
+                    menu.addItem(moveToAutosell);
+                }
+
+                if (autoSellCount > 0) {
+                    String action = localizer.getMessage("lbltoInventory", autoSellCount, sellableCount);
+                    String prompt = String.format("%s - %s %s", card, action, lblHowMany);
+                    FMenuItem moveToCatalog = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new MoveQuantityPrompt(prompt, sellableCount, amount -> {
+                        autoSellPage.removeCard(card, amount);
+                        addCard(card, amount);
+                    }));
+                    menu.addItem(moveToCatalog);
+                }
+            }
+        }
+    }
+
+    protected static class CollectionAutoSellPage extends CatalogPage {
+        protected CollectionAutoSellPage() {
+            super(new AdventureCardManager(), ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblAutoSell"), AUTO_SELL_ICON);
+        }
+
+        @Override
+        protected void initialize() {
+            super.initialize();
+            cardManager.setBtnAdvancedSearchOptions(true);
+            cardManager.setCatalogDisplay(true);
+            scheduleRefresh();
+        }
+
+        @Override
+        protected ItemPool<PaperCard> getCardPool() {
+            return AdventurePlayer.current().getAutoSellCards();
+        }
+
+        @Override
+        public void addCard(PaperCard card, int qty) {
+            Current.player().autoSellCards.add(card, qty);
+            super.addCard(card, qty);
+        }
+
+        @Override
+        public void addCards(Iterable<Map.Entry<PaperCard, Integer>> cards) {
+            Current.player().autoSellCards.addAll(cards);
+            super.addCards(cards);
+        }
+
+        @Override
+        public void removeCard(PaperCard card, int qty) {
+            Current.player().autoSellCards.remove(card, qty);
+            super.removeCard(card, qty);
+        }
+
+        protected boolean isShop() {
+            return parentScreen.getEditorConfig() instanceof ShopConfig;
+        }
+
+        @Override
+        protected void buildMenu(FDropDownMenu menu, PaperCard card) {
+            super.buildMenu(menu, card);
+            Localizer localizer = Forge.getLocalizer();
+            if(isShop()) {
+                String label = localizer.getMessage("lblSellFor") + " " + AdventurePlayer.current().cardSellPrice(card);
+                int sellable = cardManager.getItemCount(card);
+                if(sellable <= 0)
+                    return;
+                String prompt = card + " - " + label + " " + localizer.getMessage("lblHowMany");
+
+                menu.addItem(new FMenuItem(label, SIDEBOARD_ICON, new MoveQuantityPrompt(prompt, sellable, result -> {
+                        int sold = AdventurePlayer.current().sellCard(card, result);
+                        removeCard(card, sold);
+                    })
+                ));
             }
         }
 
-        public void sellAllByFilter() {
-            // allow selling on catalog page only
-            if (((AdventureCardManager) cardManager).getCatalogFilter() == CatalogFilterOption.SELLABLE) {
-                int count = 0;
-                int value = 0;
-
-                for (Map.Entry<PaperCard, Integer> entry : cardManager.getFilteredItems()) {
-                    value += AdventurePlayer.current().cardSellPrice(entry.getKey()) * entry.getValue();
-                    count += entry.getValue();
-                }
-
-                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", count, value), Forge.getLocalizer().getMessage("lblSellCurrentFilters"), Forge.getLocalizer().getMessage("lblSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<>() {
-                    @Override
-                    public void run(Boolean result) {
-                        if (result) {
-                            for (Map.Entry<PaperCard, Integer> entry : cardManager.getFilteredItems()) {
-                                AdventurePlayer.current().sellCard(entry.getKey(), entry.getValue(), true);
-                            }
-                            refresh();
-                            //parentScreen.deckHeader.updateGold(); //TODO: Is this even needed?
-                        }
-                    }
-                });
-            } else {
-                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblChoose") + " " +
-                        Forge.getLocalizer().getMessage("lblSellable"));
+        @Override
+        protected void onCardActivated(PaperCard card) {
+            if(isShop()) {
+                Current.player().sellCard(card, 1);
+                removeCard(card, 1);
             }
+            //Move to deck? Back to catalog? Unclear.
         }
     }
 
@@ -298,6 +392,11 @@ public class AdventureDeckEditor extends FDeckEditor {
         return currentEvent.getDraft();
     }
 
+    @Override
+    public boolean isDrafting() {
+        return currentEvent != null && !currentEvent.isDraftComplete;
+    }
+
     public static AdventureEventData currentEvent;
 
     public void setEvent(AdventureEventData event) {
@@ -306,6 +405,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     @Override
     public void completeDraft() {
+        super.completeDraft();
         currentEvent.isDraftComplete = true;
         Deck[] opponentDecks = currentEvent.getDraft().getDecks();
         for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
@@ -375,6 +475,8 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
     } : FSkinImage.QUEST_BOX;
 
+    private static final FImage AUTO_SELL_ICON = FSkinImage.HDEXILE; //to-maybe-do: Custom adventure icon for this? Adventure should really just have its own skin.
+
     public static FImage iconFromDeckSection(DeckSection deckSection) {
         if(deckSection == DeckSection.Main)
             return MAIN_DECK_ICON;
@@ -434,7 +536,9 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     public void refresh() {
         for (TabPage<FDeckEditor> page : tabPages) {
-            if (page instanceof CardManagerPage)
+            if (page instanceof CatalogPage)
+                ((CatalogPage) page).scheduleRefresh();
+            else if (page instanceof CardManagerPage)
                 ((CardManagerPage) page).refresh();
         }
     }
@@ -459,15 +563,25 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     boolean isShop;
     protected AdventureDeckHeader deckHeader;
+    protected FDraftLog draftLog;
+    protected CollectionAutoSellPage autoSellPage;
 
     public AdventureDeckEditor(boolean createAsShop) {
-        super(createAsShop ? new ShopConfig() : new AdventureEditorConfig(), e -> leave());
+        super(createAsShop ? new ShopConfig() : new AdventureEditorConfig(),
+                createAsShop ? null : AdventurePlayer.current().getSelectedDeck(),
+                e -> leave());
         isShop = createAsShop;
     }
 
     public AdventureDeckEditor(AdventureEventData event) {
         super(new AdventureEventEditorConfig(event), e -> leave());
         currentEvent = event;
+
+        if(event.getDraft() != null) {
+            this.draftLog = new FDraftLog();
+            event.getDraft().setLogEntry(this.draftLog);
+            deckHeader.initDraftLog(this.draftLog, this);
+        }
     }
 
     public AdventureDeckEditor(Deck deckToPreview) {
@@ -476,7 +590,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     @Override
     protected DeckHeader initDeckHeader() {
-        this.deckHeader = new AdventureDeckHeader();
+        this.deckHeader = add(new AdventureDeckHeader());
         return this.deckHeader;
     }
 
@@ -490,13 +604,18 @@ public class AdventureDeckEditor extends FDeckEditor {
                     FMenuItem addBasic = new FMenuItem(Forge.getLocalizer().getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> showAddBasicLandsDialog());
                     addItem(addBasic);
                 }
-                if (!isShop && catalogPage != null && catalogPage instanceof CollectionCatalogPage && !(getEditorConfig() instanceof AdventureEventEditorConfig)) {
-                    // Add bulk sell menu option. This will sell all cards in the current filter.
-                    addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSellCurrentFilters"), FSkinImage.QUEST_COINSTACK, e1 -> ((CollectionCatalogPage) catalogPage).sellAllByFilter()));
-                }
                 ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
             }
         };
+    }
+
+    @Override
+    protected void cacheTabPages() {
+        super.cacheTabPages();
+        for(TabPage<FDeckEditor> page : tabPages) {
+            if(page instanceof CollectionAutoSellPage)
+                this.autoSellPage = (CollectionAutoSellPage) page;
+        }
     }
 
     @Override
@@ -505,21 +624,28 @@ public class AdventureDeckEditor extends FDeckEditor {
             return true;
         if (!currentEvent.eventRules.allowsAddBasicLands)
             return false;
-        if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered && currentEvent.isDraftComplete)
+        if (isDrafting())
+            return false;
+        if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered
+                || currentEvent.eventStatus == AdventureEventController.EventStatus.Ready)
             return true;
-        else return currentEvent.eventStatus == AdventureEventController.EventStatus.Ready;
+        return false;
     }
 
-    private final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> AdventurePlayer.current().getNewCards().contains((PaperCard) from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-    private final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> AdventurePlayer.current().getNewCards().contains((PaperCard) from.getKey()) ? "NEW" : "";
-    public static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = from -> decksUsingMyCards.count(from.getKey());
-    public static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = from -> Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
+    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> AdventurePlayer.current().getNewCards().contains((PaperCard) from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> AdventurePlayer.current().getNewCards().contains((PaperCard) from.getKey()) ? "NEW" : "";
+    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = from -> decksUsingMyCards.count(from.getKey());
+    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = from -> Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
+    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnPriceCompare = from -> AdventurePlayer.current().cardSellPrice((PaperCard) from.getKey());
+    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnPriceGet = from -> AdventurePlayer.current().cardSellPrice((PaperCard) from.getKey());
 
     @Override
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
         Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
+        //TODO: Feel like one InventoryItem entry to Comparable function should be sufficient for each of these. Maybe tinker with the signatures in ItemColumn...
         ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, fnNewCompare, fnNewGet);
         ItemColumn.addColOverride(config, colOverrides, ColumnDef.DECKS, fnDeckCompare, fnDeckGet);
+        ItemColumn.addColOverride(config, colOverrides, ColumnDef.PRICE, fnPriceCompare, fnPriceGet);
         return colOverrides;
     }
 
@@ -531,13 +657,8 @@ public class AdventureDeckEditor extends FDeckEditor {
             return currentEvent.registeredDeck;
     }
 
-    protected AdventureCatalogPage getCatalogPage() {
-        return (AdventureCatalogPage) catalogPage;
-    }
-
-    @Override
-    protected CardManager createCardManager() {
-        return new AdventureCardManager();
+    private CollectionAutoSellPage getAutoSellPage() {
+        return autoSellPage;
     }
 
     @Override
@@ -634,7 +755,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override
         protected void addDefaultFilters() {
             this.addFilter(new CardColorFilter(this));
-            this.addFilter(new AdventureCatalogFilter(this));
+            //this.addFilter(new AdventureCatalogFilter(this));
             this.addFilter(new CardTypeFilter(this));
         }
 
@@ -675,18 +796,37 @@ public class AdventureDeckEditor extends FDeckEditor {
             if(showCollectionCards) {
                 pool = super.getFilteredItems();
                 if(!showNoSellCards)
-                    pool.removeAll(player.getNoSellCards());
+                    pool.removeIf(PaperCard::hasNoSellValue);
                 if(!showAutoSellCards)
                     pool.removeAll(player.getAutoSellCards());
             }
             else {
                 pool = new CardPool();
-                if(showNoSellCards)
-                    pool.addAll(player.getNoSellCards());
+                if(showNoSellCards) {
+                    pool.addAll(super.getFilteredItems());
+                    pool.retainIf(PaperCard::hasNoSellValue);
+                }
                 if(showAutoSellCards)
                     pool.addAll(player.getAutoSellCards());
             }
             return pool;
+        }
+
+        @Override
+        protected String getItemSuffix(Map.Entry<PaperCard, Integer> item) {
+            String valueText;
+            PaperCard card = item.getKey();
+            int sellValue = AdventurePlayer.current().cardSellPrice(card);
+            if(card.hasNoSellValue())
+                valueText = " [NO VALUE]";
+            else if(item.getValue() > 1)
+                valueText = String.format(" [$%d] / [$%d]", sellValue, sellValue * item.getValue());
+            else
+                valueText = String.format(" [$%d]", sellValue);
+            String parentSuffix = super.getItemSuffix(item);
+            if(parentSuffix == null)
+                return valueText;
+            return String.join(" ", valueText, parentSuffix);
         }
     }
 
@@ -714,16 +854,17 @@ public class AdventureDeckEditor extends FDeckEditor {
                         }
                     }
             ).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
+            this.add(lblGold);
         }
 
         @Override
-        @SuppressWarnings("SuspiciousNameCombination")
-        protected void doLayout(float width, float height) {
-            float x = 0;
-            lblName.setBounds(0, 0, width - height, height);
-            x += lblName.getWidth();
-            btnMoreOptions.setBounds(x, 0, height, height);
-            lblGold.setBounds(0, 0, width, height); //TODO: How did this work...?
+        protected List<FDisplayObject> layoutHeaderElements(float height, float availableWidth) {
+            List<FDisplayObject> out = super.layoutHeaderElements(height, availableWidth);
+            float remainingWidth = availableWidth - (float) out.stream().mapToDouble(FDisplayObject::getWidth).sum();
+            float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth)); // Will push out name label if it has to.
+            lblGold.setSize(width, height);
+            out.add(lblGold);
+            return out;
         }
 
         public void updateGold() {
@@ -731,25 +872,11 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
     }
 
-
-    protected static class AdventureCatalogPage extends CatalogPage {
-        protected final AdventureCardManager cardManager;
-
-        protected AdventureCatalogPage(ItemManagerConfig config, String caption, FImage icon) {
-            super(config, caption, icon);
-            this.cardManager = (AdventureCardManager) super.cardManager;
-            refresh();
-        }
-
-        //TODO: buildMenu had an isShop check in it. Ensure that wasn't really needed.
-    }
-
     protected static class AdventureDeckSectionPage extends DeckSectionPage {
         protected AdventureDeckSectionPage(DeckSection deckSection, ItemManagerConfig config) {
-            super(deckSection, config, deckSection.getLocalizedShortName(), iconFromDeckSection(deckSection));
+            super(new AdventureCardManager(), deckSection, config, deckSection.getLocalizedShortName(), iconFromDeckSection(deckSection));
             cardManager.setBtnAdvancedSearchOptions(deckSection == DeckSection.Main);
             cardManager.setCatalogDisplay(false);
-            refresh();
         }
     }
 
@@ -770,10 +897,12 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override public void setDeck(Deck deck) {
             this.currentDeck = deck;
             if(editor != null)
-                editor.setDeck(deck);
+                editor.notifyNewControllerModel();
         }
         @Override public Deck getDeck() { return currentDeck; }
-        @Override public void newDeck() { this.currentDeck = new Deck("Adventure Deck"); }
+        @Override public void newDeck() {
+            setDeck(new Deck("Adventure Deck"));
+        }
 
         @Override
         public String getDeckDisplayName() {

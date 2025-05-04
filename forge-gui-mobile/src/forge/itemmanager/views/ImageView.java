@@ -372,6 +372,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             otherItems = new Group(Forge.getLocalizer().getMessage("lblOther"));
                             otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
                             groups.get().add(otherItems);
+                            getScroller().add(otherItems);
                         }
                     }
                     group = otherItems;
@@ -1077,18 +1078,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
 
                 if (Forge.isMobileAdventureMode) {
+                    if (((PaperCard) item).hasNoSellValue() && itemManager.showNFSWatermark() && !Config.instance().getSettingData().disableNotForSale) {
+                        Texture nfs = Forge.getAssets().getTexture(getDefaultSkinFile("nfs.png"), false);
+                        if (nfs != null)
+                            g.drawImage(nfs, x, y, w, h);
+                        else
+                            drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
+                    }
                     if (Forge.getCurrentScene() instanceof ShopScene) {
                         if (cardPrice == null)
                             cardPrice = ((ShopScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);
                         drawCardLabel(g, "$" + cardPrice, Color.GOLD, x, y ,w ,h);
-                    } else {
-                        if (((PaperCard) item).hasNoSellValue() && itemManager.showNFSWatermark() && !Config.instance().getSettingData().disableNotForSale) {
-                            Texture nfs = Forge.getAssets().getTexture(getDefaultSkinFile("nfs.png"), false);
-                            if (nfs != null)
-                                g.drawImage(nfs, x, y, w, h);
-                            else
-                                drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
-                        }
                     }
                 }
                 // spire colors

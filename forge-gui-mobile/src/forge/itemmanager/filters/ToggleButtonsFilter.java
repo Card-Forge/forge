@@ -90,5 +90,15 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
             }
             return false;
         }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (count == 2 && longPressHandler != null) {
+                setSelected(true);
+                longPressHandler.handleEvent(new FEvent(this, FEventType.LONG_PRESS));
+                return true;
+            }
+            return super.tap(x, y, count);
+        }
     }
 }
