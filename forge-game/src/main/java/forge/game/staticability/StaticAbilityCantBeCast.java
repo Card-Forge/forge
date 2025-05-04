@@ -154,6 +154,9 @@ public class StaticAbilityCantBeCast {
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
+        if (stAb.getIgnoreEffectCards().contains(card)) {
+            return false;
+        }
 
         if (!stAb.matchesValidParam("ValidSA", spellAbility)) {
             return false;

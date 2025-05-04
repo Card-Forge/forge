@@ -70,6 +70,9 @@ public class StaticAbilityCantAttackBlock {
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
+        if (stAb.getIgnoreEffectCards().contains(card)) {
+            return false;
+        }
 
         if (!stAb.matchesValidParam("Target", target)) {
             return false;
@@ -164,6 +167,9 @@ public class StaticAbilityCantAttackBlock {
 
     public static boolean applyCantBlockAbility(final StaticAbility stAb, final Card blocker) {
         if (!stAb.matchesValidParam("ValidCard", blocker)) {
+            return false;
+        }
+        if (stAb.getIgnoreEffectCards().contains(blocker)) {
             return false;
         }
         return true;
