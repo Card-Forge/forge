@@ -8,9 +8,9 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.event.GameEventRollDie;
-import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -148,26 +148,30 @@ public class RollDiceEffect extends SpellAbilityEffect {
 
         // Reroll Phase:
         String monitorKeyword = "Once each turn, you may pay {1} to reroll one or more dice you rolled.";
-        List<Card> canRerollDice = getRerollCards(player, monitorKeyword);
+        CardCollection canRerollDice = new CardCollection(getRerollCards(player, monitorKeyword));
 
-        for (Card c : canRerollDice) {
-            List<Integer> diceToReroll = player.getController().chooseDiceToReroll(naturalRolls, c.getName(), c.getId(), c.getView());
-            if (!diceToReroll.isEmpty()) {
-                String[] parts = c.getSVar("ModsThisTurn").split("\\$");
-                int activationsThisTurn = Integer.parseInt(parts[1]);
-                SpellAbility modifierSA = c.getFirstSpellAbility();
-                Cost cost = new Cost(c.getSVar("RollRerollCost"), false);
-                boolean paid = player.getController().payCostDuringRoll(cost, modifierSA, null);
-                if (paid) {
-                    for (Integer roll : diceToReroll) {
-                        naturalRolls.remove(roll);
-                    }
-                    int amountToReroll = diceToReroll.size();
-                    List<Integer> rerolls = rollAction(amountToReroll, sides, 0, null, ignored, Maps.newHashMap(), dicePTExchanges, player, repParams);
-                    naturalRolls.addAll(rerolls);
-                    activationsThisTurn += 1;
-                    c.setSVar("ModsThisTurn", "Number$" + activationsThisTurn);
+        while (!canRerollDice.isEmpty()) {
+            List<Integer> diceToReroll = player.getController().chooseDiceToReroll(naturalRolls);
+            if (diceToReroll.isEmpty()) {break;}
+
+            String message = Localizer.getInstance().getMessage("lblChooseRerollCard");
+            Card c = player.getController().chooseSingleEntityForEffect(canRerollDice, sa, message, null);
+
+            String[] parts = c.getSVar("ModsThisTurn").split("\\$");
+            int activationsThisTurn = Integer.parseInt(parts[1]);
+            SpellAbility modifierSA = c.getFirstSpellAbility();
+            Cost cost = new Cost(c.getSVar("RollRerollCost"), false);
+            boolean paid = player.getController().payCostDuringRoll(cost, modifierSA, null);
+            if (paid) {
+                for (Integer roll : diceToReroll) {
+                    naturalRolls.remove(roll);
                 }
+                int amountToReroll = diceToReroll.size();
+                List<Integer> rerolls = rollAction(amountToReroll, sides, 0, null, ignored, Maps.newHashMap(), dicePTExchanges, player, repParams);
+                naturalRolls.addAll(rerolls);
+                activationsThisTurn += 1;
+                c.setSVar("ModsThisTurn", "Number$" + activationsThisTurn);
+                canRerollDice.remove(c);
             }
         }
 
@@ -182,32 +186,41 @@ public class RollDiceEffect extends SpellAbilityEffect {
         if (!canIncrementDice.isEmpty()) {
             do {
                 rollToModify = player.getController().chooseRollToModify(naturalRolls);
-                if (rollToModify != null) {
-                    boolean modified = false;
-                    DieRollResult dieResult = new DieRollResult(rollToModify, rollToModify);
-                    for (Card c : canIncrementDice) {
-                        String[] parts = c.getSVar("ModsThisTurn").split("\\$");
-                        int activationsThisTurn = Integer.parseInt(parts[1]);
-                        SpellAbility modifierSA = c.getFirstSpellAbility();
-                        String costString = c.getSVar("RollModifyCost");
-                        Cost cost = new Cost(costString, false);
-                        boolean paid = player.getController().payCostDuringRoll(cost, modifierSA,  null);
-                        if (paid) {
-                            Integer increment = player.getController().chooseRollIncrement(List.of(1, -1), rollToModify);
-                            if (!modified) {naturalRolls.remove(rollToModify); modified = true;}
-                            rollToModify += increment;
-                            activationsThisTurn += 1;
-                            c.setSVar("ModsThisTurn", "Number$" + activationsThisTurn);
-                        }
+                if (rollToModify == null) {break;}
+
+                boolean modified = false;
+                DieRollResult dieResult = new DieRollResult(rollToModify, rollToModify);
+                // canIncrementThisRoll won't be empty the first iteration because canIncrementDice wasn't empty
+                CardCollection canIncrementThisRoll = new CardCollection(canIncrementDice);
+                Card c;
+                do {
+                    String message = Localizer.getInstance().getMessage("lblChooseRollIncrementCard", rollToModify);
+                    c = player.getController().chooseSingleEntityForEffect(canIncrementThisRoll, sa, message, null);
+
+                    String[] parts = c.getSVar("ModsThisTurn").split("\\$");
+                    int activationsThisTurn = Integer.parseInt(parts[1]);
+                    SpellAbility modifierSA = c.getFirstSpellAbility();
+                    String costString = c.getSVar("RollModifyCost");
+                    Cost cost = new Cost(costString, false);
+                    boolean paid = player.getController().payCostDuringRoll(cost, modifierSA,  null);
+                    if (paid) {
+                        message = Localizer.getInstance().getMessage("lblChooseRollIncrement", rollToModify);
+                        boolean isPositive = player.getController().chooseBinary(sa, message, PlayerController.BinaryChoiceType.IncreaseOrDecrease);
+                        int increment = isPositive ? 1 : -1;
+                        if (!modified) {naturalRolls.remove(rollToModify); modified = true;}
+                        rollToModify += increment;
+                        activationsThisTurn += 1;
+                        c.setSVar("ModsThisTurn", "Number$" + activationsThisTurn);
+                        canIncrementThisRoll.remove(c);
                     }
-                    if (modified) {
-                        dieResult.setModifiedValue(rollToModify);
-                        resultsList.add(dieResult);
-                        hasBeenModified = true;
-                    }
-                    canIncrementDice = getIncrementCards(player, xenoKeyword, nightShiftKeyword);
+                } while (!canIncrementThisRoll.isEmpty());
+                if (modified) {
+                    dieResult.setModifiedValue(rollToModify);
+                    resultsList.add(dieResult);
+                    hasBeenModified = true;
                 }
-            } while (rollToModify != null && !naturalRolls.isEmpty() && !canIncrementDice.isEmpty());
+                canIncrementDice = getIncrementCards(player, xenoKeyword, nightShiftKeyword);
+            } while (!naturalRolls.isEmpty() && !canIncrementDice.isEmpty());
         }
 
         // finish roll list
@@ -217,37 +230,38 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         // Vedalken Exchange
-        List<Card> vedalkenSwaps = new ArrayList<>(dicePTExchanges);
+        CardCollection vedalkenSwaps = new CardCollection(dicePTExchanges);
         if (!vedalkenSwaps.isEmpty()) {
             DieRollResult rollToSwap;
             do {
                 rollToSwap = player.getController().chooseRollToSwap(resultsList);
-                if (rollToSwap != null) {
-                    Card c = player.getController().chooseCardToDiceSwap(vedalkenSwaps, rollToSwap.getModifiedValue());
-                    String[] parts = c.getSVar("CurrentPower").split("\\$");
-                    int cPower = Integer.parseInt(parts[1]);
-                    parts = c.getSVar("CurrentToughness").split("\\$");
-                    int cToughness = Integer.parseInt(parts[1]);
-                    List<String> choices = Arrays.asList("Power", "Toughness");
-                    String powerOrToughness = player.getController().chooseRollSwapValue(choices, rollToSwap.getModifiedValue(), cPower, cToughness);
-                    if (powerOrToughness != null) {
-                        int tempRollValue = rollToSwap.getModifiedValue();
-                        switch (powerOrToughness) {
-                            case "Power":
-                                rollToSwap.setModifiedValue(cPower);
-                                c.setSVar("CurrentPower", "Number$" + tempRollValue);
-                                break;
-                            case "Toughness":
-                                rollToSwap.setModifiedValue(cToughness);
-                                c.setSVar("CurrentToughness", "Number$" + tempRollValue);
-                                break;
-                            default:
-                                throw new IllegalStateException("Unexpected value: " + powerOrToughness);
-                        }
-                        vedalkenSwaps.remove(c);
+                if (rollToSwap == null) {break;}
+
+                String message = Localizer.getInstance().getMessage("lblChooseCardToDiceSwap", rollToSwap.getModifiedValue());
+                Card c = player.getController().chooseSingleEntityForEffect(vedalkenSwaps, sa, message, null);
+                String[] parts = c.getSVar("CurrentPower").split("\\$");
+                int cPower = Integer.parseInt(parts[1]);
+                parts = c.getSVar("CurrentToughness").split("\\$");
+                int cToughness = Integer.parseInt(parts[1]);
+                List<String> choices = Arrays.asList("Power", "Toughness");
+                String powerOrToughness = player.getController().chooseRollSwapValue(choices, rollToSwap.getModifiedValue(), cPower, cToughness);
+                if (powerOrToughness != null) {
+                    int tempRollValue = rollToSwap.getModifiedValue();
+                    switch (powerOrToughness) {
+                        case "Power":
+                            rollToSwap.setModifiedValue(cPower);
+                            c.setSVar("CurrentPower", "Number$" + tempRollValue);
+                            break;
+                        case "Toughness":
+                            rollToSwap.setModifiedValue(cToughness);
+                            c.setSVar("CurrentToughness", "Number$" + tempRollValue);
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + powerOrToughness);
                     }
+                    vedalkenSwaps.remove(c);
                 }
-            } while (!vedalkenSwaps.isEmpty() && rollToSwap != null);
+            } while (!vedalkenSwaps.isEmpty());
         }
 
         //Notify of results

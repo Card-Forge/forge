@@ -747,7 +747,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<Integer> chooseDiceToReroll(List<Integer> rolls, String cardName, int cardID, CardView cardView) {
+    public List<Integer> chooseDiceToReroll(List<Integer> rolls) {
         //TODO create AI logic for this
         return new ArrayList<>();
     }
@@ -762,18 +762,6 @@ public class PlayerControllerAi extends PlayerController {
     public RollDiceEffect.DieRollResult chooseRollToSwap(List<RollDiceEffect.DieRollResult> rolls) {
         //TODO create AI logic for this
         return Aggregates.random(rolls);
-    }
-
-    @Override
-    public Integer chooseRollIncrement(List<Integer> increments, Integer currentResult) {
-        //TODO create AI logic for this
-        return Aggregates.random(increments);
-    }
-
-    @Override
-    public Card chooseCardToDiceSwap(List<Card> candidates, int result) {
-        //TODO create AI logic for this
-        return Aggregates.random(candidates);
     }
 
     @Override

@@ -1440,9 +1440,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public List<Integer> chooseDiceToReroll(List<Integer> rolls, String cardName, int cardID, CardView cardView) {
-        return getGui().many(Localizer.getInstance().getMessage("lblChooseDiceToRerollTitle", cardName ,cardID),
-                Localizer.getInstance().getMessage("lblChooseDiceToRerollCaption", cardName ,cardID),0, rolls.size(), rolls, cardView);
+    public List<Integer> chooseDiceToReroll(List<Integer> rolls) {
+        return getGui().many(Localizer.getInstance().getMessage("lblChooseDiceToRerollTitle"),
+                Localizer.getInstance().getMessage("lblChooseDiceToRerollCaption"),0, rolls.size(), rolls, null);
     }
 
     @Override
@@ -1456,20 +1456,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public Card chooseCardToDiceSwap(List<Card> candidates, int result) {
-        return getGui().one(Localizer.getInstance().getMessage("lblChooseCardToDiceSwap", result), candidates);
-    }
-
-    @Override
     public String chooseRollSwapValue(List<String> swapChoices, Integer currentResult, int power, int toughness) {
         return getGui().oneOrNone(Localizer.getInstance().getMessage("lblChooseSwapPT", currentResult, power, toughness), swapChoices);
     }
-
-    @Override
-    public Integer chooseRollIncrement(List<Integer> increments, Integer currentResult) {
-        return getGui().one(Localizer.getInstance().getMessage("lblChooseRollIncrement", currentResult), increments);
-    }
-
 
     @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
@@ -1719,6 +1708,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 break;
             case AddOrRemove:
                 labels = ImmutableList.of(localizer.getMessage("lblAddCounter"), localizer.getMessage("lblRemoveCounter"));
+                break;
+            case IncreaseOrDecrease:
+                labels = ImmutableList.of(localizer.getMessage("lblIncrease"), localizer.getMessage("lblDecrease"));
                 break;
             default:
                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));

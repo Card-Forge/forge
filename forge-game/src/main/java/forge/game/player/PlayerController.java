@@ -56,7 +56,8 @@ public abstract class PlayerController {
         OddsOrEvens,
         UntapOrLeaveTapped,
         LeftOrRight,
-        AddOrRemove
+        AddOrRemove,
+        IncreaseOrDecrease
     }
 
     public enum FullControlFlag {
@@ -230,11 +231,9 @@ public abstract class PlayerController {
 
     public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);
     public abstract Integer chooseRollToIgnore(List<Integer> rolls);
-    public abstract List<Integer> chooseDiceToReroll(List<Integer> rolls, String cardName, int cardID, CardView cardView);
+    public abstract List<Integer> chooseDiceToReroll(List<Integer> rolls);
     public abstract Integer chooseRollToModify(List<Integer> rolls);
     public abstract RollDiceEffect.DieRollResult chooseRollToSwap(List<RollDiceEffect.DieRollResult> rolls);
-    public abstract Integer chooseRollIncrement(List<Integer> increments, Integer currentResult);
-    public abstract Card chooseCardToDiceSwap(List<Card> candidates, int result);
     public abstract String chooseRollSwapValue(List<String> swapChoices, Integer currentResult, int power, int toughness);
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional);
