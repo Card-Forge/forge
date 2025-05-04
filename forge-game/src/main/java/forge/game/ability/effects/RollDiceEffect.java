@@ -415,8 +415,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 ignore = (int) repParams.get(AbilityKey.Ignore);
                 //noinspection unchecked
                 ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
-                //noinspection unchecked
-                dicePTExchanges.addAll((Set<Card>) repParams.get(AbilityKey.DicePTExchanges));
                 break;
             }
         }

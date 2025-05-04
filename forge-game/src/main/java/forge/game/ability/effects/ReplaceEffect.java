@@ -54,7 +54,6 @@ public class ReplaceEffect extends SpellAbilityEffect {
             List<Card> list = AbilityUtils.getDefinedCards(card, varValue, sa);
             if (!list.isEmpty()) {
                 cards.add(list.get(0));
-                params.put(varName, cards);
             }
         } else if (varName != null) {
             params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
