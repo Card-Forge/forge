@@ -5,6 +5,5 @@ K:Enchant:Creature
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUpkeep | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay {W}{W}.
 SVar:TrigUpkeep:DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ W W
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.
-S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | ValidSA$ Activated.hasTapCost
+S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Creature.EnchantedBy | ValidSA$ Activated.hasTapCost | Description$ Enchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.
 Oracle:Enchant creature\nAt the beginning of your upkeep, sacrifice Serra Bestiary unless you pay {W}{W}.\nEnchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.
