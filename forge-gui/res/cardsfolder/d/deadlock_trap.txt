@@ -6,5 +6,6 @@ SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 A:AB$ Tap | Cost$ T PayEnergy<1> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBPump | SpellDescription$ Tap target creature or planeswalker. Its activated abilities can't be activated this turn.
-SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ HIDDEN CARDNAME's activated abilities can't be activated.
+SVar:DBPump:DB$ Effect | RememberObjects$ ParentTarget | StaticAbilities$ DBCantBeActivated | ForgetOnMoved$ Battlefield
+SVar:DBCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card.IsRemembered | Description$ Remembered activated abilities can't be activated.
 Oracle:Deadlock Trap enters tapped.\nWhen Deadlock Trap enters, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Tap target creature or planeswalker. Its activated abilities can't be activated this turn.
