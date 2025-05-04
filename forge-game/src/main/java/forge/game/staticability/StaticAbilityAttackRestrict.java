@@ -8,13 +8,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityAttackRestrict {
 
-    static String MODE = "AttackRestrict";
-
     static public int globalAttackRestrict(Game game) {
         int max = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)
+                if (!stAb.checkConditions(StaticAbilityMode.AttackRestrict)
                         || stAb.hasParam("ValidDefender")) {
                     continue;
                 }
@@ -33,7 +31,7 @@ public class StaticAbilityAttackRestrict {
         int num = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)
+                if (!stAb.checkConditions(StaticAbilityMode.AttackRestrict)
                         || !stAb.hasParam("ValidDefender")) {
                     continue;
                 }

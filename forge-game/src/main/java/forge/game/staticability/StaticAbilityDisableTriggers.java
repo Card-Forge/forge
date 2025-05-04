@@ -15,8 +15,6 @@ import java.util.function.Predicate;
 
 public class StaticAbilityDisableTriggers {
 
-    static String MODE = "DisableTriggers";
-
     public static boolean disabled(final Game game, final Trigger regtrig, final Map<AbilityKey, Object> runParams)  {
         CardCollectionView cardList = null;
         // if LTB look back
@@ -33,7 +31,7 @@ public class StaticAbilityDisableTriggers {
 
         for (final Card ca : cardList) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.DisableTriggers)) {
                     continue;
                 }
 

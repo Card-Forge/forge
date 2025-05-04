@@ -1374,20 +1374,12 @@ public class CardProperty {
             if (!card.isEnchanted()) {
                 return false;
             }
-        } else if (property.startsWith("unenchanted")) {
-            if (card.isEnchanted()) {
-                return false;
-            }
         } else if (property.startsWith("enchanting")) {
             if (!card.isEnchanting()) {
                 return false;
             }
         } else if (property.startsWith("equipped")) {
             if (!card.isEquipped()) {
-                return false;
-            }
-        } else if (property.startsWith("unequipped")) {
-            if (card.isEquipped()) {
                 return false;
             }
         } else if (property.startsWith("equipping")) {

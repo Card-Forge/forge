@@ -7,7 +7,6 @@ import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityMaxCounter {
-    static String MODE = "MaxCounter";
 
     public static Integer maxCounter(final Card c, final CounterType type) {
         final Game game = c.getGame();
@@ -15,7 +14,7 @@ public class StaticAbilityMaxCounter {
         Integer result = null;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.MaxCounter)) {
                     continue;
                 }
                 if (applyMaxCounter(stAb, c, type)) {

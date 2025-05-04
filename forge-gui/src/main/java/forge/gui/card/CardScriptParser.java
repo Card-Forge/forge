@@ -469,7 +469,7 @@ public final class CardScriptParser {
             "gotBlockedThisTurn", "greatestPower", "yardGreatestPower",
             "leastPower", "leastToughness", "greatestCMC",
             "greatestRememberedCMC", "lowestRememberedCMC", "lowestCMC",
-            "enchanted", "unenchanted", "enchanting", "equipped", "unequipped",
+            "enchanted", "enchanting", "equipped",
             "equipping", "modified", "token", "nonToken", "hasXCost", "suspended",
             "delved", "attacking", "attackingYou", "notattacking",
             "attackedBySourceThisCombat", "blocking", "blockingSource",

@@ -39,6 +39,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -900,7 +901,7 @@ public class ComputerUtilCombat {
         final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                if (!stAb.checkMode("Continuous")) {
+                if (!stAb.checkMode(StaticAbilityMode.Continuous)) {
                     continue;
                 }
                 if (!stAb.hasParam("Affected") || !stAb.getParam("Affected").contains("blocking")) {
@@ -1196,7 +1197,7 @@ public class ComputerUtilCombat {
             final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
             for (final Card card : cardList) {
                 for (final StaticAbility stAb : card.getStaticAbilities()) {
-                    if (!stAb.checkMode("Continuous")) {
+                    if (!stAb.checkMode(StaticAbilityMode.Continuous)) {
                         continue;
                     }
                     if (!stAb.hasParam("Affected") || !stAb.getParam("Affected").contains("attacking")) {
@@ -1387,7 +1388,7 @@ public class ComputerUtilCombat {
             final CardCollectionView cardList = game.getCardsIn(ZoneType.Battlefield);
             for (final Card card : cardList) {
                 for (final StaticAbility stAb : card.getStaticAbilities()) {
-                    if (!"Continuous".equals(stAb.getParam("Mode"))) {
+                    if (!stAb.checkMode(StaticAbilityMode.Continuous)) {
                         continue;
                     }
                     if (!stAb.hasParam("Affected")) {

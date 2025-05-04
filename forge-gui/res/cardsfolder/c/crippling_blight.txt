@@ -3,5 +3,6 @@ ManaCost:B
 Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature gets -1/-1 and can't block.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | Description$ Enchanted creature gets -1/-1 and can't block.
+S:Mode$ CantBlock | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature gets -1/-1 and can't block.
 Oracle:Enchant creature\nEnchanted creature gets -1/-1 and can't block.

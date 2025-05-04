@@ -4,7 +4,7 @@ Types:Legendary Creature God
 PT:5/5
 K:Flying
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ LE6 | Description$ CARDNAME can't attack or block unless you have seven or more cards in hand.
+S:Mode$ CantAttack,CantBlock | ValidCard$ Card.Self | IsPresent$ Card.YouOwn | PresentZone$ Hand | PresentCompare$ LE6 | Description$ NICKNAME can't attack or block unless you have seven or more cards in hand.
 SVar:X:Count$ValidHand Card.YouOwn
 A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | SubAbility$ DBChooseCard | SpellDescription$ Draw a card, then you may return a land you control to its owner's hand.
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Land.YouCtrl | ChoiceZone$ Battlefield | Amount$ 1 | SubAbility$ DBChangeZone
