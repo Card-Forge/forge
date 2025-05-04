@@ -148,8 +148,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
 
         // Reroll Phase:
         String monitorKeyword = "Once each turn, you may pay {1} to reroll one or more dice you rolled.";
-        CardCollection canRerollDice = new CardCollection(getRerollCards(player, monitorKeyword));
-
+        CardCollection canRerollDice = getRerollCards(player, monitorKeyword);
         while (!canRerollDice.isEmpty()) {
             List<Integer> diceToReroll = player.getController().chooseDiceToReroll(naturalRolls);
             if (diceToReroll.isEmpty()) {break;}
@@ -239,25 +238,22 @@ public class RollDiceEffect extends SpellAbilityEffect {
 
                 String message = Localizer.getInstance().getMessage("lblChooseCardToDiceSwap", rollToSwap.getModifiedValue());
                 Card c = player.getController().chooseSingleEntityForEffect(vedalkenSwaps, sa, message, null);
-                String[] parts = c.getSVar("CurrentPower").split("\\$");
-                int cPower = Integer.parseInt(parts[1]);
-                parts = c.getSVar("CurrentToughness").split("\\$");
-                int cToughness = Integer.parseInt(parts[1]);
-                List<String> choices = Arrays.asList("Power", "Toughness");
+                int cPower = c.getCurrentPower();
+                int cToughness = c.getCurrentToughness();
+                String labelPower = Localizer.getInstance().getMessage("lblPower");
+                String labelToughness = Localizer.getInstance().getMessage("lblToughness");
+                List<String> choices = Arrays.asList(labelPower, labelToughness);
                 String powerOrToughness = player.getController().chooseRollSwapValue(choices, rollToSwap.getModifiedValue(), cPower, cToughness);
                 if (powerOrToughness != null) {
                     int tempRollValue = rollToSwap.getModifiedValue();
-                    switch (powerOrToughness) {
-                        case "Power":
-                            rollToSwap.setModifiedValue(cPower);
-                            c.setSVar("CurrentPower", "Number$" + tempRollValue);
-                            break;
-                        case "Toughness":
-                            rollToSwap.setModifiedValue(cToughness);
-                            c.setSVar("CurrentToughness", "Number$" + tempRollValue);
-                            break;
-                        default:
-                            throw new IllegalStateException("Unexpected value: " + powerOrToughness);
+                    if (powerOrToughness.equals(labelPower)) {
+                        rollToSwap.setModifiedValue(cPower);
+                        c.addNewPT(tempRollValue, cToughness, player.getGame().getNextTimestamp(), 0);
+                    } else if (powerOrToughness.equals(labelToughness)) {
+                        rollToSwap.setModifiedValue(cToughness);
+                        c.addNewPT(cPower, tempRollValue, player.getGame().getNextTimestamp(), 0);
+                    } else {
+                        throw new IllegalStateException("Unexpected value: " + powerOrToughness);
                     }
                     vedalkenSwaps.remove(c);
                 }
@@ -348,19 +344,14 @@ public class RollDiceEffect extends SpellAbilityEffect {
      * @param monitorKeyword       The keyword text identifying Monitor Monitor cards
      * @return A list of cards that are currently able to reroll dice
      */
-    public static List<Card> getRerollCards(Player player, String monitorKeyword) {
+    public static CardCollection getRerollCards(Player player, String monitorKeyword) {
         CardCollection monitors = CardLists.getKeyword(player.getCardsIn(ZoneType.Battlefield), monitorKeyword);
-        List<Card> canRerollDice = new ArrayList<>();
-        for (Card c : monitors) {
-            // Monitor Monitor has a limit of once per turn
-            String activationLimit = c.getSVar("RollModificationsLimit");
-            String[] parts = c.getSVar("ModsThisTurn").split("\\$");
+        return monitors.filter(card -> {
+            String activationLimit = card.getSVar("RollModificationsLimit");
+            String[] parts = card.getSVar("ModsThisTurn").split("\\$");
             int activationsThisTurn = Integer.parseInt(parts[1]);
-            if (activationLimit.equals("None") || activationsThisTurn < Integer.parseInt(activationLimit)) {
-                canRerollDice.add(c);
-            }
-        }
-        return canRerollDice;
+            return (activationLimit.equals("None") || activationsThisTurn < Integer.parseInt(activationLimit));
+        });
     }
 
     /**
