@@ -48,6 +48,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
@@ -1786,7 +1787,7 @@ public class ComputerUtilCard {
             // remove old boost that might be copied
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 vCard.removePTBoost(c.getLayerTimestamp(), stAb.getId());
-                if (!stAb.checkMode("Continuous")) {
+                if (!stAb.checkMode(StaticAbilityMode.Continuous)) {
                     continue;
                 }
                 if (!stAb.hasParam("Affected")) {

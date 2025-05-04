@@ -48,6 +48,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -2429,7 +2430,7 @@ public class ComputerUtil {
                 // Are we picking a type to reduce costs for that type?
                 boolean reducingCost = false;
                 for (StaticAbility s : sa.getHostCard().getStaticAbilities()) {
-                    if ("ReduceCost".equals(s.getParam("Mode")) && "Card.ChosenType".equals(s.getParam("ValidCard"))) {
+                    if (s.checkMode(StaticAbilityMode.ReduceCost) && "Card.ChosenType".equals(s.getParam("ValidCard"))) {
                         reducingCost = true;
                         break;
                     }

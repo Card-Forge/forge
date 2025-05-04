@@ -7,14 +7,12 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilitySurveilNum {
 
-    static String MODE = "SurveilNum";
-
     public static int surveilNumMod(Player p) {
         final Game game = p.getGame();
         int mod = 0;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.SurveilNum)) {
                     continue;
                 }
                 mod += getSurveilMod(stAb, p);

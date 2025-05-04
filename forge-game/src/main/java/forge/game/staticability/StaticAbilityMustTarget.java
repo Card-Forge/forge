@@ -61,7 +61,7 @@ public class StaticAbilityMustTarget {
 
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE) || !stAb.matchesValidParam("ValidSA", spellAbility)) {
+                if (!stAb.checkConditions(StaticAbilityMode.MustTarget) || !stAb.matchesValidParam("ValidSA", spellAbility)) {
                     continue;
                 }
                 Pair<String, ZoneType> newRestriction = Pair.of(stAb.getParam("ValidTarget"), ZoneType.smartValueOf(stAb.getParam("ValidZone")));

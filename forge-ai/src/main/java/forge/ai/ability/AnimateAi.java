@@ -24,6 +24,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.collect.FCollectionView;
@@ -562,7 +563,7 @@ public class AnimateAi extends SpellAbilityAi {
         CardTraitChanges traits = card.getChangedCardTraits().get(timestamp, 0);
         if (traits != null) {
             for (StaticAbility stAb : traits.getStaticAbilities()) {
-                if ("Continuous".equals(stAb.getParam("Mode"))) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous)) {
                     for (final StaticAbilityLayer layer : stAb.getLayers()) {
                         StaticAbilityContinuous.applyContinuousAbility(stAb, new CardCollection(card), layer);
                     }
