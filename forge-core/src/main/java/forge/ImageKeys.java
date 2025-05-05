@@ -102,8 +102,9 @@ public final class ImageKeys {
 
         final String dir;
         final String filename;
+        String[] tempdata = null;
         if (key.startsWith(ImageKeys.TOKEN_PREFIX)) {
-            String[] tempdata = key.substring(ImageKeys.TOKEN_PREFIX.length()).split("\\|");
+            tempdata = key.substring(ImageKeys.TOKEN_PREFIX.length()).split("\\|");
             String tokenname = tempdata[0] + "_" + tempdata[1];
             if (tempdata.length > 2) {
                 tokenname += "_" + tempdata[2];
@@ -149,6 +150,29 @@ public final class ImageKeys {
             if (file != null) {
                 cachedCards.put(filename, file);
                 return file;
+            }
+            if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
+                String setlessFilename = tempdata[0];
+                String setCode = tempdata[1];
+                String collectorNumber = tempdata.length > 2 ? tempdata[2] : "";
+
+                if (!collectorNumber.isEmpty()) {
+                    file = findFile(dir, setCode + "/" + collectorNumber + "_" + setlessFilename);
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                }
+                file = findFile(dir, setCode + "/" + setlessFilename);
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+                file = findFile(dir, setlessFilename);
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
             }
 
             // AE -> Ae and Ae -> AE for older cards with different file names
@@ -231,30 +255,7 @@ public final class ImageKeys {
                     return file;
                 }
             }
-            if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
-                String[] tempdata = key.substring(ImageKeys.TOKEN_PREFIX.length()).split("\\|");
-                String setlessFilename = tempdata[0];
-                String setCode = tempdata[1];
-                String collectorNumber = tempdata.length > 2 ? tempdata[2] : "";
-
-                if (!collectorNumber.isEmpty()) {
-                    file = findFile(dir, setlessFilename + "_" + setCode + "_" + collectorNumber);
-                    if (file != null) {
-                        cachedCards.put(filename, file);
-                        return file;
-                    }
-                }
-                file = findFile(dir, setlessFilename + "_" + setCode);
-                if (file != null) {
-                    cachedCards.put(filename, file);
-                    return file;
-                }
-                file = findFile(dir, setlessFilename);
-                if (file != null) {
-                    cachedCards.put(filename, file);
-                    return file;
-                }
-            } else if (filename.contains("/")) {
+            if (filename.contains("/")) {
                 String setlessFilename = filename.substring(filename.indexOf('/') + 1);
                 file = findFile(dir, setlessFilename);
                 if (file != null) {
