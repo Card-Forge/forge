@@ -75,6 +75,17 @@ public class TokenDb implements ITokenDatabase {
         return new PaperToken(rulesByName.get(name), edition, name, t.collectorNumber, t.artistName);
     }
 
+    // try all editions to find token
+    protected PaperToken fallbackToken(String name) {
+        for (CardEdition edition : this.editions) {
+            String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+            if (loadTokenFromSet(edition, name)) {
+                return Aggregates.random(allTokenByName.get(fullName));
+            }
+        }
+        return null;
+    }
+
     @Override
     public PaperToken getToken(String tokenName) {
         return getToken(tokenName, CardEdition.UNKNOWN.getCode());
@@ -88,6 +99,10 @@ public class TokenDb implements ITokenDatabase {
         // token exist in Set, return one at random
         if (loadTokenFromSet(realEdition, tokenName)) {
             return Aggregates.random(allTokenByName.get(fullName));
+        }
+        PaperToken fallback = this.fallbackToken(tokenName);
+        if (fallback != null) {
+            return fallback;
         }
 
         if (!extraTokensByName.containsKey(fullName)) {
