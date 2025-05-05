@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
-import java.util.regex.Pattern;
 
 public class URLValidator {
 
