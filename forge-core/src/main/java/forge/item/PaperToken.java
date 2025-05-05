@@ -72,14 +72,14 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
                 }
                 // TODO make better image file names when collector number is known
                 // for the right index, we need to count the ones with wrong collector number too
-                this.imageFileName.add(String.format("%s|%s|%s|%d", imageFileName, edition.getCode().toLowerCase(), collectorNumber, idx));
+                this.imageFileName.add(String.format("%s|%s|%s|%d", imageFileName, edition.getCode(), collectorNumber, idx));
             }
             this.artIndex = this.imageFileName.size();
         } else if (null == edition || CardEdition.UNKNOWN == edition) {
             this.imageFileName.add(imageFileName);
         } else {
             // Fallback if CollectorNumber is not used
-            this.imageFileName.add(String.format("%s|%s", imageFileName, edition.getCode().toLowerCase()));
+            this.imageFileName.add(String.format("%s|%s", imageFileName, edition.getCode()));
         }
     }
 
