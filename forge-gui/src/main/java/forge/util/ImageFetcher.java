@@ -232,11 +232,12 @@ public abstract class ImageFetcher {
             String tokenName = tempdata[0];
             String setCode = tempdata[1];
 
-            StringBuilder sb = new StringBuilder(tokenName);
-            sb.append("_").append(setCode);
+            StringBuilder sb = new StringBuilder(setCode);
+            sb.append("/");
             if (tempdata.length > 2) {
-                sb.append("_").append(tempdata[2]);
+                sb.append(tempdata[2]).append("_");
             }
+            sb.append(tokenName);
             sb.append(".jpg");
 
             final String filename = sb.toString();
