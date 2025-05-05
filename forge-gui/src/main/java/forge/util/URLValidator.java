@@ -1,28 +1,14 @@
 package forge.util;
 
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.regex.Pattern;
+import java.net.UnknownHostException;
 
 public class URLValidator {
 
-    private static final Pattern DOMAIN_NAME_PATTERN = Pattern.compile("^(?!-)[A-Za-z0-9-]{1,63}(?<!-)(\\.[A-Za-z]{2,})+$");
-
-    public static HostPort parseIP(String ip) {
-        String[] parts = ip.split("\\.");
-        if (parts.length != 4) return null;
-        for (String part : parts) {
-            try {
-                int num = Integer.parseInt(part);
-                if (num < 0 || num > 255) return null;
-            } catch (NumberFormatException e) {
-                return null;
-            }
-        }
-        return new HostPort(ip, null); // No port for raw IP
-    }
-
-
+    //no more need for URL regex as we are now passing any non conforming url to the inetAddressLookup function
+    //Removed manual ip parsing as the URI parsing will also take care of validating ip addresses as well
     public static HostPort parseURL(String url) {
         try {
             //prepend http:// if a protocol is missing so URI parsing does not fail
@@ -30,20 +16,32 @@ public class URLValidator {
             URI uri = new URI(formattedUrl);
             String host = uri.getHost();
             int port = uri.getPort(); // Returns -1 if port is not specified
-            if (host == null) return null;
-            HostPort hostPort;
-            if (parseIP(host) != null) {
-                hostPort = new HostPort(host, port == -1 ? null : port);
-            } else if (DOMAIN_NAME_PATTERN.matcher(host).matches()) {
-                hostPort = new HostPort(host, port == -1 ? null : port);
-            } else {
-                return null;
+            if (host == null) {
+               return inetAddressLookup(url);
             }
-            return hostPort;
+            return new HostPort(host, port);
         } catch (URISyntaxException e) {
-            return null;
+            return inetAddressLookup(url);
         }
     }
+
+    // Attempt to resolve as hostname
+    private static HostPort inetAddressLookup(String url) {
+        try {
+            // Split input to handle cases like "localhost:36743"
+            String[] parts = url.split(":");
+            String host = parts[0];
+            // if no port exists, default to -1 just like URI parsing
+            // invalid port number will throw NumberFormatException caught below
+            int port = parts.length > 1 ? Integer.parseInt(parts[1]) : -1;
+            // address isn't needed but its presence suppresses an intelij warning
+            InetAddress address = InetAddress.getByName(host);
+            return new HostPort(host, port);
+        } catch (NumberFormatException | UnknownHostException ex) {
+            return null; // Invalid port or hostname does not resolve
+        }
+    }
+
 
     //This is fine, Records were introduced in Java 16, its essentially a DTO class with implicit getters and constructors
     public record HostPort(String host, Integer port) {
