@@ -6,7 +6,7 @@ K:Flying
 K:Vigilance
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When NICKNAME enters, the next noncreature spell you cast costs {1} less to cast.
-SVar:TrigEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | Duration$ Permanent
 SVar:ReduceCost:Mode$ ReduceCost | Type$ Spell | ValidCard$ Card.nonCreature | Activator$ You | Amount$ 1 | Description$ The next noncreature spell you cast costs {1} less to cast.
 SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
