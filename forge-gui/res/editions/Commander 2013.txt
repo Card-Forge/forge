@@ -363,30 +363,3 @@ ScryfallCode=C13
 354 L Forest @Jung Park
 355 L Forest @Jung Park
 356 L Forest @Eytan Zana
-
-[tokens]
-carnivore
-kobolds_of_kher_keep
-w_0_1_goat
-w_2_2_knight_vigilance
-w_1_1_spirit_flying
-u_1_1_faerie_flying
-u_1_1_a_thopter_flying
-b_1_1_snake_deathtouch
-b_1_1_thrull
-b_2_2_zombie
-r_1_1_elemental_haste
-g_4_4_beast
-g_5_5_beast
-g_5_5_beast_trample
-g_4_4_elemental
-g_x_x_elemental
-g_3_3_elephant
-g_1_1_elf_warrior
-g_1_1_insect
-g_0_1_plant
-g_1_1_saproling
-gu_2_2_drake_flying
-br_3_1_graveborn_haste
-c_2_2_a_assembly_worker
-c_1_1_a_myr
