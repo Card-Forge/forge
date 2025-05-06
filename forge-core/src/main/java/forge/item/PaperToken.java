@@ -213,20 +213,17 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     // InventoryItem
     @Override
     public String getImageKey(boolean altState) {
-        if (hasBackFace()) {
-            String edCode = edition != null ? "_" + edition.getCode().toLowerCase() : "";
-            if (altState) {
-                String name = ImageKeys.getTokenKey(cardRules.getOtherPart().getName().toLowerCase().replace(" token", ""));
-                name.replace(" ", "_");
-                return name + edCode;
+        String suffix = "";
+        if (hasBackFace() && altState) {
+            if (collectorNumber != null && !collectorNumber.isEmpty() && edition != null) {
+                String name = cardRules.getOtherPart().getName().toLowerCase().replace(" token", "").replace(" ", "_");
+                return ImageKeys.getTokenKey(String.format("%s|%s|%s%s", name, edition.getCode(), collectorNumber, ImageKeys.BACKFACE_POSTFIX));
             } else {
-                String name = ImageKeys.getTokenKey(cardRules.getMainPart().getName().toLowerCase().replace(" token", ""));
-                name.replace(" ", "_");
-                return name + edCode;
+                suffix = ImageKeys.BACKFACE_POSTFIX;
             }
         }
         int idx = MyRandom.getRandom().nextInt(artIndex);
-        return getImageKey(idx);
+        return getImageKey(idx) + suffix;
     }
 
     public String getImageKey(int artIndex) {
