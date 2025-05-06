@@ -1736,6 +1736,11 @@ public class ComputerUtilCard {
         pumped.setPTBoost(c.getPTBoostTable());
         pumped.addPTBoost(power + berserkPower, toughness, timestamp, 0);
 
+        pumped.setSwitchPTTable(c.getSwitchPTTable());
+        if (sa.hasParam("SwitchPT")) {
+            pumped.addSwitchPT(timestamp, 0);
+        }
+
         if (!kws.isEmpty()) {
             pumped.addChangedCardKeywords(kws, null, false, timestamp, null, false);
         }
