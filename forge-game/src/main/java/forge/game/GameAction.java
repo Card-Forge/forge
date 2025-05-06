@@ -166,10 +166,28 @@ public class GameAction {
             }
         }
 
+        // currently only matters for ETB
+        // still rather just cover remaining cases with quick default
+        Player putter = c.getController();
+
         // Don't copy Tokens, copy only cards leaving the battlefield
         // and returning to hand (to recreate their spell ability information)
         if (toBattlefield || (suppress && zoneTo.getZoneType().isHidden())) {
             copied = c;
+
+            // in some cases it's always affected that puts them in play (initially)
+            String defPutter;
+            if (cause == null || (!cause.hasParam("Putter") && (c.isToken() ||
+                    cause.getApi() == ApiType.Cloak || cause.getApi() == ApiType.Manifest || cause.getApi() == ApiType.ManifestDread))) {
+                defPutter = "Owner";
+            } else {
+                defPutter = cause.getParamOrDefault("Putter", "You");
+            }
+            if ("Owner".equals(defPutter)) {
+                putter = c.getOwner();
+            } else {
+                putter = AbilityUtils.getDefinedPlayers(cause.getHostCard(), defPutter, cause).getFirst();
+            }
 
             if (lastKnownInfo == null) {
                 lastKnownInfo = CardCopyService.getLKICopy(c);
@@ -319,6 +337,7 @@ public class GameAction {
                 repParams.put(AbilityKey.EffectOnly, true);
                 repParams.put(AbilityKey.CounterTable, table);
                 repParams.put(AbilityKey.CounterMap, table.column(copied));
+                repParams.put(AbilityKey.Putter, putter);
             }
             if (params != null) {
                 repParams.putAll(params);
@@ -600,6 +619,7 @@ public class GameAction {
             runParams.put(AbilityKey.Destination, zoneTo.getZoneType().name());
             runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
             runParams.put(AbilityKey.MergedCards, mergedCards);
+            runParams.put(AbilityKey.Putter, putter);
             if (params != null) {
                 runParams.putAll(params);
             }
