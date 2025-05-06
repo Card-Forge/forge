@@ -2,6 +2,7 @@ Name:Whirlwing Stormbrood
 ManaCost:4 U
 Types:Creature Dragon
 PT:4/3
+K:Flash
 K:Flying
 S:Mode$ CastWithFlash | ValidCard$ Sorcery,Dragon | ValidSA$ Spell | EffectZone$ Battlefield | Caster$ You | Description$ You may cast sorcery spells and Dragon spells as though they had flash.
 AlternateMode:Omen

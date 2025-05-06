@@ -1,7 +1,7 @@
 Name:Domineer
 ManaCost:1 U U
 Types:Enchantment Aura
-K:Enchant artifact creature
-A:SP$ Attach | ValidTgts$ Creature.Artifact | AILogic$ GainControl | SpellDescription$ You control enchanted artifact creature.
+K:Enchant:Creature.Artifact:artifact creature
+SVar:AttachAILogic:GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted artifact creature.
 Oracle:Enchant artifact creature\nYou control enchanted artifact creature.

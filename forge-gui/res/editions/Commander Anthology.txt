@@ -329,22 +329,22 @@ ScryfallCode=CMA
 320 L Forest @Eytan Zana
 
 [tokens]
-w_1_1_kithkin_soldier
-w_2_2_knight_vigilance
-w_1_1_spirit_flying
-b_0_0_phyrexian_germ
-b_2_2_zombie
-r_5_5_dragon_flying
-g_3_3_beast
-g_4_4_beast
-g_5_3_elemental
-g_3_3_elephant
-g_1_1_elf_druid_g
-g_1_1_elf_warrior
-g_1_1_saproling
-g_1_2_spider_reach
-g_x_x_treefolk
-g_2_2_wolf
-g_2_2_wolf
-gu_2_2_drake_flying
-c_3_4_a_gargoyle_flying
+1 w_1_1_kithkin_soldier @Randy Gallegos
+2 w_2_2_knight_vigilance @Matt Stewart
+3 w_1_1_spirit_flying @Ryan Yee
+4 b_0_0_phyrexian_germ @Igor Kieryluk
+5 b_2_2_zombie @Lucas Graciano
+6 r_5_5_dragon_flying @Jim Pavelec
+7 g_3_3_beast @Dave Allsop
+8 g_4_4_beast @Steve Prescott
+9 g_5_3_elemental @Nils Hamm
+10 g_3_3_elephant @Lars Grant-West
+11 g_1_1_elf_druid_g @Raymond Swanland
+12 g_1_1_elf_warrior @William O'Connor
+13 g_1_1_saproling @Brad Rigney
+14 g_1_2_spider_reach @Daniel Ljunggren
+15 g_x_x_treefolk @Filip Burburan
+16 g_2_2_wolf @Daren Bader
+17 g_2_2_wolf @David Palumbo
+18 gu_2_2_drake_flying @ Nick Percival
+19 c_3_4_a_gargoyle_flying @Paul Bonner

@@ -323,12 +323,12 @@ Sword of Fire and Ice|MPS_KLD
 Sword of Light and Shadow|MPS_KLD
 
 [tokens]
-c_6_6_a_beast
-c_x_x_a_construct
-c_x_x_a_construct
-c_1_1_a_servo
-c_1_1_a_servo
-c_1_1_a_servo
-c_1_1_a_thopter_flying
-c_1_1_a_thopter_flying
-c_1_1_a_thopter_flying
+1 c_6_6_a_beast @Sara Winters
+2 c_x_x_a_construct @Magali Villeneuve
+2 c_x_x_a_construct @Magali Villeneuve
+4 c_1_1_a_servo @Igor Kieryluk
+4 c_1_1_a_servo @Igor Kieryluk
+4 c_1_1_a_servo @Igor Kieryluk
+7 c_1_1_a_thopter_flying @Adam Paquette
+8 c_1_1_a_thopter_flying @Adam Paquette
+9 c_1_1_a_thopter_flying @Adam Paquette

@@ -1,7 +1,7 @@
 Name:Battle Mastery
 ManaCost:2 W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Double Strike | Description$ Enchanted creature has double strike. (It deals both first-strike and regular combat damage.)
 Oracle:Enchant creature\nEnchanted creature has double strike. (It deals both first-strike and regular combat damage.)

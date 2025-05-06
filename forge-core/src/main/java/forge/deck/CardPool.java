@@ -52,7 +52,10 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public void add(final String cardRequest, final int amount) {
         CardDb.CardRequest request = CardDb.CardRequest.fromString(cardRequest);
-        this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.artIndex, amount, false, request.colorID);
+        if(request.collectorNumber != null && !request.collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER))
+            this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.collectorNumber, amount, false, request.flags);
+        else
+            this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.artIndex, amount, false, request.flags);
     }
 
     public void add(final String cardName, final String setCode) {
@@ -71,7 +74,20 @@ public class CardPool extends ItemPool<PaperCard> {
     public void add(String cardName, String setCode, int artIndex, final int amount) {
         this.add(cardName, setCode, artIndex, amount, false, null);
     }
-    public void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny, Set<String> colorID) {
+    private void add(String cardName, String setCode, String collectorNumber, final int amount, boolean addAny, Map<String, String> flags) {
+        Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
+        for (Map.Entry<String, CardDb> entry: dbs.entrySet()){
+            CardDb db = entry.getValue();
+            PaperCard paperCard = db.getCard(cardName, setCode, collectorNumber, flags);
+            if (paperCard != null) {
+                this.add(paperCard, amount);
+                return;
+            }
+        }
+        //Failed to find it. Fall back accordingly?
+        this.add(cardName, setCode, IPaperCard.NO_ART_INDEX, amount, addAny, flags);
+    }
+    private void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny, Map<String, String> flags) {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
         PaperCard paperCard = null;
         String selectedDbName = "";
@@ -81,7 +97,7 @@ public class CardPool extends ItemPool<PaperCard> {
             for (Map.Entry<String, CardDb> entry: dbs.entrySet()){
                 String dbName = entry.getKey();
                 CardDb db = entry.getValue();
-                paperCard = db.getCard(cardName, setCode, artIndex, colorID);
+                paperCard = db.getCard(cardName, setCode, artIndex, flags);
                 if (paperCard != null) {
                     selectedDbName = dbName;
                     break;
@@ -123,7 +139,7 @@ public class CardPool extends ItemPool<PaperCard> {
                 int cnt = artGroups[i - 1];
                 if (cnt <= 0)
                     continue;
-                PaperCard randomCard = cardDb.getCard(cardName, setCode, i, colorID);
+                PaperCard randomCard = cardDb.getCard(cardName, setCode, i, flags);
                 this.add(randomCard, cnt);
             }
         }
@@ -430,7 +446,6 @@ public class CardPool extends ItemPool<PaperCard> {
     public String toCardList(String separator) {
         List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(this);
         main2sort.sort(ItemPoolSorter.BY_NAME_THEN_SET);
-        final CardDb commonDb = StaticData.instance().getCommonCards();
         StringBuilder sb = new StringBuilder();
 
         boolean isFirst = true;
@@ -441,10 +456,8 @@ public class CardPool extends ItemPool<PaperCard> {
             else
                 isFirst = false;
 
-            CardDb db = !e.getKey().getRules().isVariant() ? commonDb : StaticData.instance().getVariantCards();
             sb.append(e.getValue()).append(" ");
-            db.appendCardToStringBuilder(e.getKey(), sb);
-
+            sb.append(CardDb.CardRequest.compose(e.getKey()));
         }
         return sb.toString();
     }
@@ -460,22 +473,6 @@ public class CardPool extends ItemPool<PaperCard> {
         for (PaperCard c : this.items.keySet()) {
             if (predicate.test(c))
                 filteredPool.add(c, this.items.get(c));
-        }
-        return filteredPool;
-    }
-
-    /**
-     * Applies a predicate to this CardPool's cards.
-     * @param predicate the Predicate to apply to this CardPool
-     * @return a new CardPool made from this CardPool with only the cards that agree with the provided Predicate
-     */
-    public CardPool getFilteredPoolWithCardsCount(Predicate<PaperCard> predicate) {
-        CardPool filteredPool = new CardPool();
-        for (Entry<PaperCard, Integer> entry : this.items.entrySet()) {
-            PaperCard pc = entry.getKey();
-            int count = entry.getValue();
-            if (predicate.test(pc))
-                filteredPool.add(pc, count);
         }
         return filteredPool;
     }

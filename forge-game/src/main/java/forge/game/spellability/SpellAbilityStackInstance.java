@@ -31,7 +31,6 @@ import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.Player;
 import forge.game.trigger.TriggerType;
-import forge.game.trigger.WrappedAbility;
 import forge.util.TextUtil;
 
 /**
@@ -75,10 +74,9 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
 
         subInstance = ability.getSubAbility() == null ? null : new SpellAbilityStackInstance(ability.getSubAbility());
 
-        final Map<String, String> sVars = (ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability).getDirectSVars();
-        if (ApiType.SetState == sa.getApi() && !sVars.containsKey("StoredTransform")) {
+        if (ApiType.SetState == sa.getApi() && !ability.hasSVar("StoredTransform")) {
             // Record current state of Transformation if the ability might change state
-            sVars.put("StoredTransform", String.valueOf(ability.getHostCard().getTransformedTimestamp()));
+            ability.setSVar("StoredTransform", String.valueOf(ability.getHostCard().getTransformedTimestamp()));
         }
 
         if (sa.getApi() == ApiType.Charm && sa.hasParam("ChoiceRestriction")) {

@@ -513,22 +513,25 @@ ScryfallCode=RVR
 1 Chromatic Lantern|RVR
 
 [tokens]
-b_2_2_zombie
-g_1_1_saproling
-g_3_3_centaur
-g_4_4_rhino_trample
-g_6_6_wurm
-gw_2_2_elf_knight_vigilance
-r_1_1_goblin
-r_2_1_goblin_haste
-r_6_6_dragon_flying
-rg_4_4_beast_trample
-rw_1_1_soldier_haste
-u_1_1_bird_illusion_flying
-voja
-w_1_1_bird_flying
-w_1_1_spirit_flying
-w_4_4_angel_flying
-w_4_4_angel_flying_vigilance
-wb_1_1_spirit_flying
-wu_4_4_sphinx_flying_vigilance
+1 w_1_1_bird_flying @James Ryman
+2 w_4_4_angel_flying @Steve Argyle
+3 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
+4 w_1_1_spirit_flying @Dave Allsop
+5 u_1_1_bird_illusion_flying @James Paick
+6 b_2_2_zombie @Simon Dominic
+7 r_6_6_dragon_flying @Mark Zug
+8 r_1_1_goblin @Mark Zug
+9 r_2_1_goblin_haste @Carl Critchlow
+10 g_3_3_centaur @Slawomir Maniak
+11 g_4_4_rhino_trample @Aaron Miller
+12 g_1_1_saproling @Dana Knutson
+13 g_6_6_wurm @Mitch Cotie
+14 rg_4_4_beast_trample @Winona Nelson
+15 gw_2_2_elf_knight_vigilance @Hristo D. Chukov
+16 rw_1_1_soldier_haste @David Palumbo
+17 wu_4_4_sphinx_flying_vigilance @Scott Murphy
+18 wb_1_1_spirit_flying @Cliff Childs
+19 voja @Richard Sardinha
+
+[other]
+20 emblem_domri_rade @Tyler Jacobson

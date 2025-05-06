@@ -411,11 +411,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     }
 
     @Override
-    public Map<String, String> getDirectSVars() {
-        return null;
-    }
-
-    @Override
     public void setSVars(Map<String, String> newSVars) {
     }
 

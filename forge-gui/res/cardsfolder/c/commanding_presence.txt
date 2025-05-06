@@ -1,8 +1,8 @@
 Name:Commanding Presence
 ManaCost:3 W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ First Strike | AddTrigger$ TriggerDamageDone | Description$ Enchanted creature gets +2/+2 and has first strike and "Whenever this creature deals combat damage to a player, create a 1/1 white Human Soldier creature token."
 SVar:TriggerDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever this creature deals combat damage to a player, create a 1/1 white Human Soldier token.
 SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ w_1_1_human_soldier | TokenAmount$ 1

@@ -11,6 +11,7 @@ import forge.deck.FDeckViewer;
 import forge.error.BugReportDialog;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.gui.download.GuiDownloadService;
 import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -33,6 +34,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
+import org.jupnp.DefaultUpnpServiceConfiguration;
+import org.jupnp.UpnpServiceConfiguration;
+
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
     private final ImageFetcher imageFetcher = new LibGDXImageFetcher();
@@ -40,6 +44,14 @@ public class GuiMobile implements IGuiBase {
 
     public GuiMobile(final String assetsDir0) {
         assetsDir = assetsDir0;
+    }
+
+    @Override
+    public UpnpServiceConfiguration getUpnpPlatformService() {
+        if (GuiBase.isAndroid()) {
+            return Forge.getDeviceAdapter().getUpnpPlatformService();
+        }
+        return new DefaultUpnpServiceConfiguration();
     }
 
     @Override
@@ -185,7 +197,7 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final Function<T, String> display) {
         return new WaitCallback<List<T>>() {
             @Override
             public void run() {

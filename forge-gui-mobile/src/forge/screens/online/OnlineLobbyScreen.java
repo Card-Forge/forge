@@ -91,31 +91,39 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             setGameLobby(getLobby());
             //prompt to connect to server when offline lobby activated
             FThreads.invokeInBackgroundThread(() -> {
+                //Not in gui thread
                 final String url = NetConnectUtil.getServerUrl();
                 FThreads.invokeInEdtLater(() -> {
+                    //In GUI thread
                     if (url == null) {
                         closeConn(""); //go back to previous screen if user cancels connection
                         return;
                     }
-
                     final boolean joinServer = url.length() > 0;
                     final String caption = joinServer ?  Forge.getLocalizer().getMessage("lblConnectingToServer") : Forge.getLocalizer().getMessage("lblStartingServer");
                     LoadingOverlay.show(caption, true, () -> {
-                        final ChatMessage result;
+                        //in GUI thread due to above LoadingOverlay.show call executing ThreadUtil.invokeInGameThread(() -> FThreads.invokeInEdtLater(() -> { runnable.run(); ...
+                        final ChatMessage[] result = new ChatMessage[1];
                         final IOnlineChatInterface chatInterface = (IOnlineChatInterface)OnlineScreen.Chat.getScreen();
                         if (joinServer) {
-                            result = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
-                            if (result.getMessage() == ForgeConstants.CLOSE_CONN_COMMAND) { //this message is returned via netconnectutil on exception
+                            result[0] = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
+                            if (result[0].getMessage() == ForgeConstants.CLOSE_CONN_COMMAND) { //this message is returned via netconnectutil on exception
+                                closeConn(Forge.getLocalizer().getMessage("UnableConnectToServer", url));
+                                return;
+                            } else if (result[0].getMessage() == ForgeConstants.INVALID_HOST_COMMAND) {
                                 closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
                                 return;
                             }
+                            chatInterface.addMessage(result[0]);
                         }
                         else {
-                            result = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
-                        }
-                        chatInterface.addMessage(result);
-                        if (!joinServer) {
-                            FThreads.invokeInBackgroundThread(NetConnectUtil::copyHostedServerUrl);
+                            FThreads.invokeInBackgroundThread(
+                                    () -> {
+                                        result[0] = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
+                                        chatInterface.addMessage(result[0]);
+                                        NetConnectUtil.copyHostedServerUrl();
+                                    }
+                            );
                         }
                         //update menu buttons
                         OnlineScreen.Lobby.update();

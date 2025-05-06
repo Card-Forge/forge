@@ -1,9 +1,10 @@
 Name:Flowstone Embrace
 ManaCost:1 R
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 # TODO: The AI can only use this as a form of buff. Maybe teach the AI to also use it to kill opposing creatures?
-A:SP$ Attach | ValidTgts$ Creature | AITgts$ Creature.toughnessGE3 | AILogic$ Pump
+SVar:AttachAITgts:Creature.toughnessGE3
+SVar:AttachAILogic:Pump
 A:AB$ Pump | Cost$ T | Defined$ Enchanted | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ Enchanted creature gets +2/-2 until end of turn.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\n{T}: Enchanted creature gets +2/-2 until end of turn.

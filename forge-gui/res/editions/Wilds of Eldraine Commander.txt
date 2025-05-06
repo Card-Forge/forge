@@ -181,22 +181,22 @@ ScryfallCode=WOC
 173 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
 
 [tokens]
-b_1_1_faerie_rogue_flying
-g_1_1_human_monk_g
-g_1_1_saproling
-g_3_3_elephant
-r_4_2_pirate_noblock
-role_monster
-role_royal
-role_sorcerer
-role_virtuous
-role_virtuous
-role_virtuous
-u_1_1_faerie_flying
-ub_1_1_faerie_rogue_flying
-w_1_1_cat_lifelink
-w_1_1_human_soldier
-w_2_2_pegasus_flying
-w_2_2_cat
-w_2_4_ox
-wb_1_1_spirit_flying
+0 role_monster @Unknown
+0 role_royal @Unknown
+0 role_sorcerer @Unknown
+0 role_virtuous @Unknown
+0 role_virtuous @Unknown
+0 role_virtuous @Unknown
+5 w_2_2_cat @April Prime
+6 w_1_1_cat_lifelink @Filip Burburan
+7 w_1_1_human_soldier @Kimonas Theodossiou
+8 w_2_4_ox @Aaron Miller
+9 w_2_2_pegasus_flying @Lars Grant-West
+10 u_1_1_faerie_flying @Irina Nordsol
+11 b_1_1_faerie_rogue_flying @Dave Allsop
+12 r_4_2_pirate_noblock @Igor Krstic
+13 g_3_3_elephant @Lars Grant-West
+14 g_1_1_human_monk_g @Anastasia Ovchinnikova
+15 g_1_1_saproling @Joseph Meehan
+16 ub_1_1_faerie_rogue_flying @E. M. Gist
+17 wb_1_1_spirit_flying @Josh Hass

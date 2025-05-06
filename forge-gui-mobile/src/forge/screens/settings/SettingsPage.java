@@ -12,8 +12,10 @@ import forge.assets.*;
 import forge.game.GameLogEntryType;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.properties.PreferencesStore;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
@@ -29,9 +31,7 @@ import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 import forge.util.Utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
@@ -51,6 +51,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addGroup(Forge.getLocalizer().getMessage("lblCardOverlays"));
         lstSettings.addGroup(Forge.getLocalizer().getMessage("lblVibrationOptions"));
         lstSettings.addGroup(Forge.getLocalizer().getMessage("SoundOptions"));
+        lstSettings.addGroup(Forge.getLocalizer().getMessage("ServerPreferences"));
 
         //General Settings
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_LANGUAGE, Forge.getLocalizer().getMessage("cbpSelectLanguage"),
@@ -117,8 +118,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(settingCJKFonts, 0);
         if (GuiBase.isAndroid()) {
             lstSettings.addItem(new BooleanSetting(FPref.UI_LANDSCAPE_MODE,
-                Forge.getLocalizer().getMessage("lblLandscapeMode"),
-                Forge.getLocalizer().getMessage("nlLandscapeMode")) {
+                    Forge.getLocalizer().getMessage("lblLandscapeMode"),
+                    Forge.getLocalizer().getMessage("nlLandscapeMode")) {
                 @Override
                 public void select() {
                     super.select();
@@ -143,8 +144,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         } else {
             //fullscreen
             lstSettings.addItem(new BooleanSetting(FPref.UI_FULLSCREEN_MODE,
-                Forge.getLocalizer().getMessage("lblFullScreenMode"),
-                Forge.getLocalizer().getMessage("nlFullScreenMode")){
+                    Forge.getLocalizer().getMessage("lblFullScreenMode"),
+                    Forge.getLocalizer().getMessage("nlFullScreenMode")){
                 @Override
                 public void select() {
                     super.select();
@@ -153,9 +154,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 }
             },0);
             lstSettings.addItem(new CustomSelectSetting(FPref.UI_VIDEO_MODE,
-                Forge.getLocalizer().getMessage("lblVideoMode"),
-                Forge.getLocalizer().getMessage("nlVideoMode"),
-                ForgeConstants.VIDEO_MODES) {
+                    Forge.getLocalizer().getMessage("lblVideoMode"),
+                    Forge.getLocalizer().getMessage("nlVideoMode"),
+                    ForgeConstants.VIDEO_MODES) {
                 @Override
                 public void valueChanged(String newValue) {
                     super.valueChanged(newValue);
@@ -175,44 +176,44 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             }
         }, 0);
         lstSettings.addItem(new BooleanSetting(FPref.USE_SENTRY,
-                Forge.getLocalizer().getMessage("lblAutomaticBugReports"),
-                Forge.getLocalizer().getMessage("nlAutomaticBugReports")),
+                        Forge.getLocalizer().getMessage("lblAutomaticBugReports"),
+                        Forge.getLocalizer().getMessage("nlAutomaticBugReports")),
                 0);
 
         //Gameplay Options
         lstSettings.addItem(new CustomSelectSetting(FPref.MULLIGAN_RULE, Forge.getLocalizer().getMessage("cbpMulliganRule"),
-                 Forge.getLocalizer().getMessage("nlpMulliganRule"),
-                 MulliganDefs.getMulliganRuleNames()) {
-                    @Override
-                    public void valueChanged(String newValue) {
-                        super.valueChanged(newValue);
-                        StaticData.instance().setMulliganRule(MulliganDefs.GetRuleByName(FModel.getPreferences().getPref(FPref.MULLIGAN_RULE)));
-                    }
+                Forge.getLocalizer().getMessage("nlpMulliganRule"),
+                MulliganDefs.getMulliganRuleNames()) {
+            @Override
+            public void valueChanged(String newValue) {
+                super.valueChanged(newValue);
+                StaticData.instance().setMulliganRule(MulliganDefs.GetRuleByName(FModel.getPreferences().getPref(FPref.MULLIGAN_RULE)));
+            }
         }, 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_AI_PROFILE,
-                Forge.getLocalizer().getMessage("cbpAiProfiles"),
-                Forge.getLocalizer().getMessage("nlpAiProfiles"),
-                AiProfileUtil.getProfilesArray()),
+                        Forge.getLocalizer().getMessage("cbpAiProfiles"),
+                        Forge.getLocalizer().getMessage("nlpAiProfiles"),
+                        AiProfileUtil.getProfilesArray()),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE,
-                Forge.getLocalizer().getMessage("cbAnte"),
-                Forge.getLocalizer().getMessage("nlAnte")),
+                        Forge.getLocalizer().getMessage("cbAnte"),
+                        Forge.getLocalizer().getMessage("nlAnte")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE_MATCH_RARITY,
-                Forge.getLocalizer().getMessage("cbAnteMatchRarity"),
-                Forge.getLocalizer().getMessage("nlAnteMatchRarity")),
+                        Forge.getLocalizer().getMessage("cbAnteMatchRarity"),
+                        Forge.getLocalizer().getMessage("nlAnteMatchRarity")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_HOT_SEAT_MODE,
-                Forge.getLocalizer().getMessage("lblHotSeatMode"),
-                Forge.getLocalizer().getMessage("nlHotSeatMode")),
+                        Forge.getLocalizer().getMessage("lblHotSeatMode"),
+                        Forge.getLocalizer().getMessage("nlHotSeatMode")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
-                Forge.getLocalizer().getMessage("cbEnableAICheats"),
-                Forge.getLocalizer().getMessage("nlEnableAICheats")),
+                        Forge.getLocalizer().getMessage("cbEnableAICheats"),
+                        Forge.getLocalizer().getMessage("nlEnableAICheats")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_MANABURN,
-                Forge.getLocalizer().getMessage("cbManaBurn"),
-                Forge.getLocalizer().getMessage("nlManaBurn")),
+                        Forge.getLocalizer().getMessage("cbManaBurn"),
+                        Forge.getLocalizer().getMessage("nlManaBurn")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.LEGACY_ORDER_COMBATANTS,
                         Forge.getLocalizer().getMessage("cbOrderCombatants"),
@@ -220,16 +221,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 1);
 
         lstSettings.addItem(new BooleanSetting(FPref.UI_MANA_LOST_PROMPT,
-                Forge.getLocalizer().getMessage("cbManaLostPrompt"),
-                Forge.getLocalizer().getMessage("nlManaLostPrompt")),
+                        Forge.getLocalizer().getMessage("cbManaLostPrompt"),
+                        Forge.getLocalizer().getMessage("nlManaLostPrompt")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.ENFORCE_DECK_LEGALITY,
-                Forge.getLocalizer().getMessage("cbEnforceDeckLegality"),
-                Forge.getLocalizer().getMessage("nlEnforceDeckLegality")),
+                        Forge.getLocalizer().getMessage("cbEnforceDeckLegality"),
+                        Forge.getLocalizer().getMessage("nlEnforceDeckLegality")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.PERFORMANCE_MODE,
-                Forge.getLocalizer().getMessage("cbPerformanceMode"),
-                Forge.getLocalizer().getMessage("nlPerformanceMode")),
+                        Forge.getLocalizer().getMessage("cbPerformanceMode"),
+                        Forge.getLocalizer().getMessage("nlPerformanceMode")),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.MATCH_AI_SIDEBOARDING_MODE, Forge.getLocalizer().getMessage("cbpAiSideboardingMode"),
                 Forge.getLocalizer().getMessage("nlpAiSideboardingMode"),
@@ -241,69 +242,69 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             }
         }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_RESTORE,
-                Forge.getLocalizer().getMessage("cbExperimentalRestore"),
-                Forge.getLocalizer().getMessage("nlExperimentalRestore")),
+                        Forge.getLocalizer().getMessage("cbExperimentalRestore"),
+                        Forge.getLocalizer().getMessage("nlExperimentalRestore")),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.MATCH_AI_TIMEOUT, Forge.getLocalizer().getMessage("cbAITimeout"),
-                Forge.getLocalizer().getMessage("nlAITimeout"),
-                Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")),
+                        Forge.getLocalizer().getMessage("nlAITimeout"),
+                        Lists.newArrayList("5", "10", "60", "120", "240", "300", "600")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ORDER_HAND,
-                Forge.getLocalizer().getMessage("cbOrderHand"),
-                Forge.getLocalizer().getMessage("nlOrderHand")),
-        1);
+                        Forge.getLocalizer().getMessage("cbOrderHand"),
+                        Forge.getLocalizer().getMessage("nlOrderHand")),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
-                Forge.getLocalizer().getMessage("cbFilteredHands"),
-                Forge.getLocalizer().getMessage("nlFilteredHands")),
+                        Forge.getLocalizer().getMessage("cbFilteredHands"),
+                        Forge.getLocalizer().getMessage("nlFilteredHands")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_CLONE_MODE_SOURCE,
-                Forge.getLocalizer().getMessage("cbCloneImgSource"),
-                Forge.getLocalizer().getMessage("nlCloneImgSource")),
+                        Forge.getLocalizer().getMessage("cbCloneImgSource"),
+                        Forge.getLocalizer().getMessage("nlCloneImgSource")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DETAILED_SPELLDESC_IN_PROMPT,
-                Forge.getLocalizer().getMessage("cbDetailedPaymentDesc"),
-                Forge.getLocalizer().getMessage("nlDetailedPaymentDesc")),
+                        Forge.getLocalizer().getMessage("cbDetailedPaymentDesc"),
+                        Forge.getLocalizer().getMessage("nlDetailedPaymentDesc")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_GRAY_INACTIVE_TEXT,
-                Forge.getLocalizer().getMessage("cbGrayText"),
-                Forge.getLocalizer().getMessage("nlGrayText")),
+                        Forge.getLocalizer().getMessage("cbGrayText"),
+                        Forge.getLocalizer().getMessage("nlGrayText")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
-                Forge.getLocalizer().getMessage("cbShowStormCount"),
-                Forge.getLocalizer().getMessage("nlShowStormCount")),
+                        Forge.getLocalizer().getMessage("cbShowStormCount"),
+                        Forge.getLocalizer().getMessage("nlShowStormCount")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER,
-                Forge.getLocalizer().getMessage("cbPreselectPrevAbOrder"),
-                Forge.getLocalizer().getMessage("nlPreselectPrevAbOrder")),
+                        Forge.getLocalizer().getMessage("cbPreselectPrevAbOrder"),
+                        Forge.getLocalizer().getMessage("nlPreselectPrevAbOrder")),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
-                Forge.getLocalizer().getMessage("lblOrderGraveyard"),
-                Forge.getLocalizer().getMessage("nlOrderGraveyard"),
+                        Forge.getLocalizer().getMessage("lblOrderGraveyard"),
+                        Forge.getLocalizer().getMessage("nlOrderGraveyard"),
                         new String[]{
                                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
                                 ForgeConstants.GRAVEYARD_ORDERING_ALWAYS}),
                 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
-                Forge.getLocalizer().getMessage("lblAutoYields"),
-                Forge.getLocalizer().getMessage("nlpAutoYieldMode"),
-                new String[]{ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD}),
+                        Forge.getLocalizer().getMessage("lblAutoYields"),
+                        Forge.getLocalizer().getMessage("nlpAutoYieldMode"),
+                        new String[]{ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD}),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ESC_TO_END_TURN,
-                Forge.getLocalizer().getMessage("cbEscapeEndsTurn"),
-                Forge.getLocalizer().getMessage("nlEscapeEndsTurn")),
+                        Forge.getLocalizer().getMessage("cbEscapeEndsTurn"),
+                        Forge.getLocalizer().getMessage("nlEscapeEndsTurn")),
                 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_PLAYERINFOLAYOUT,
                 Forge.getLocalizer().getMessage("lblAltLifeDisplay"),
                 Forge.getLocalizer().getMessage("nlAltLifeDisplay")){
-                @Override
-                public void select() {
-                    super.select();
-                    //update
-                    Forge.altPlayerLayout = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
-                    if (MatchController.instance != null)
-                        MatchController.instance.resetPlayerPanels();
-                }
-            },1);
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.altPlayerLayout = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
+                if (MatchController.instance != null)
+                    MatchController.instance.resetPlayerPanels();
+            }
+        },1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_PLAYERZONETABS,
                 Forge.getLocalizer().getMessage("lblAltZoneTabs"),
                 Forge.getLocalizer().getMessage("nlAltZoneTabs")){
@@ -333,89 +334,89 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,
-                Forge.getLocalizer().getMessage("cbRemoveSmall"),
-                Forge.getLocalizer().getMessage("nlRemoveSmall")),
+                        Forge.getLocalizer().getMessage("cbRemoveSmall"),
+                        Forge.getLocalizer().getMessage("nlRemoveSmall")),
                 2);
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_CARDBASED,
-                Forge.getLocalizer().getMessage("cbCardBased"),
-                Forge.getLocalizer().getMessage("nlCardBased")),
+                        Forge.getLocalizer().getMessage("cbCardBased"),
+                        Forge.getLocalizer().getMessage("nlCardBased")),
                 2);
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_SINGLETONS,
-                Forge.getLocalizer().getMessage("cbSingletons"),
-                Forge.getLocalizer().getMessage("nlSingletons")),
+                        Forge.getLocalizer().getMessage("cbSingletons"),
+                        Forge.getLocalizer().getMessage("nlSingletons")),
                 2);
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_ARTIFACTS,
-                Forge.getLocalizer().getMessage("cbRemoveArtifacts"),
-                Forge.getLocalizer().getMessage("nlRemoveArtifacts")),
+                        Forge.getLocalizer().getMessage("cbRemoveArtifacts"),
+                        Forge.getLocalizer().getMessage("nlRemoveArtifacts")),
                 2);
 
         //Advanced Settings
         lstSettings.addItem(new BooleanSetting(FPref.DEV_MODE_ENABLED,
                 Forge.getLocalizer().getMessage("cbDevMode"),
                 Forge.getLocalizer().getMessage("nlDevMode")) {
-                    @Override
-                    public void select() {
-                        super.select();
-                        //update DEV_MODE flag when preference changes
-                        ForgePreferences.DEV_MODE = FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED);
-                    }
-                }, 3);
+            @Override
+            public void select() {
+                super.select();
+                //update DEV_MODE flag when preference changes
+                ForgePreferences.DEV_MODE = FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED);
+            }
+        }, 3);
         lstSettings.addItem(new CustomSelectSetting(FPref.DEV_LOG_ENTRY_TYPE,
-                Forge.getLocalizer().getMessage("cbpGameLogEntryType"),
-                Forge.getLocalizer().getMessage("nlGameLogEntryType"),
-                GameLogEntryType.class),
+                        Forge.getLocalizer().getMessage("cbpGameLogEntryType"),
+                        Forge.getLocalizer().getMessage("nlGameLogEntryType"),
+                        GameLogEntryType.class),
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_CARD_SCRIPTS_LAZILY,
-                Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
-                Forge.getLocalizer().getMessage("nlLoadCardsLazily")),
+                        Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
+                        Forge.getLocalizer().getMessage("nlLoadCardsLazily")),
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVED_FORMATS,
-                Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
-                Forge.getLocalizer().getMessage("nlLoadArchivedFormats")),
+                        Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
+                        Forge.getLocalizer().getMessage("nlLoadArchivedFormats")),
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
-                Forge.getLocalizer().getMessage("lblEnableUnknownCards"),
-                Forge.getLocalizer().getMessage("nlEnableUnknownCards")) {
-                    @Override
-                    public void select() {
-                        super.select();
-                        FOptionPane.showConfirmDialog(
-                            Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
-                            Forge.getLocalizer().getMessage("lblRestartForge"),
-                            Forge.getLocalizer().getMessage("lblRestart"),
-                            Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
+                                    Forge.getLocalizer().getMessage("lblEnableUnknownCards"),
+                                    Forge.getLocalizer().getMessage("nlEnableUnknownCards")) {
                                 @Override
-                                public void run(Boolean result) {
-                                if (result) {
-                                    Forge.restart(true);
-                                    }
+                                public void select() {
+                                    super.select();
+                                    FOptionPane.showConfirmDialog(
+                                            Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
+                                            Forge.getLocalizer().getMessage("lblRestartForge"),
+                                            Forge.getLocalizer().getMessage("lblRestart"),
+                                            Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
+                                                @Override
+                                                public void run(Boolean result) {
+                                                    if (result) {
+                                                        Forge.restart(true);
+                                                    }
+                                                }
+                                            }
+                                    );
                                 }
-                            }
-                        );
-                    }
-                },
-               3);
+                            },
+                3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_NONLEGAL_CARDS,
-                Forge.getLocalizer().getMessage("lblEnableNonLegalCards"),
-                Forge.getLocalizer().getMessage("nlEnableNonLegalCards")) {
-                    @Override
-                    public void select() {
-                        super.select();
-                        FOptionPane.showConfirmDialog(
-                            Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
-                            Forge.getLocalizer().getMessage("lblRestartForge"),
-                            Forge.getLocalizer().getMessage("lblRestart"),
-                            Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
+                                    Forge.getLocalizer().getMessage("lblEnableNonLegalCards"),
+                                    Forge.getLocalizer().getMessage("nlEnableNonLegalCards")) {
                                 @Override
-                                public void run(Boolean result) {
-                                    if (result) {
-                                        Forge.restart(true);
-                                        }
-                                    }
+                                public void select() {
+                                    super.select();
+                                    FOptionPane.showConfirmDialog(
+                                            Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
+                                            Forge.getLocalizer().getMessage("lblRestartForge"),
+                                            Forge.getLocalizer().getMessage("lblRestart"),
+                                            Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
+                                                @Override
+                                                public void run(Boolean result) {
+                                                    if (result) {
+                                                        Forge.restart(true);
+                                                    }
+                                                }
+                                            }
+                                    );
                                 }
-                            );
-                        }
-                    },
+                            },
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE,
                                     Forge.getLocalizer().getMessage("lblAllowCustomCardsInDecks"),
@@ -440,86 +441,86 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                             },
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
-                Forge.getLocalizer().getMessage("lblExperimentalNetworkCompatibility"),
-                Forge.getLocalizer().getMessage("nlExperimentalNetworkCompatibility")) {
-                    @Override
-                    public void select() {
-                        super.select();
-                            GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
-                    }
-                },
-               3);
+                                    Forge.getLocalizer().getMessage("lblExperimentalNetworkCompatibility"),
+                                    Forge.getLocalizer().getMessage("nlExperimentalNetworkCompatibility")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
+                                }
+                            },
+                3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_DISPOSE_TEXTURES,
-                 Forge.getLocalizer().getMessage("lblDisposeTextures"),
-                 Forge.getLocalizer().getMessage("nlDisposeTextures")) {
-                     @Override
-                     public void select() {
-                         super.select();
-                             Forge.disposeTextures = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
-                     }
-                 },
+                                    Forge.getLocalizer().getMessage("lblDisposeTextures"),
+                                    Forge.getLocalizer().getMessage("nlDisposeTextures")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    Forge.disposeTextures = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_DISPOSE_TEXTURES);
+                                }
+                            },
                 3);
         if (GuiBase.isAndroid()) { //this option does nothing except on Android
             lstSettings.addItem(new BooleanSetting(FPref.UI_AUTO_CACHE_SIZE,
-                  Forge.getLocalizer().getMessage("lblAutoCacheSize"),
-                  Forge.getLocalizer().getMessage("nlAutoCacheSize")) {
-                      @Override
-                      public void select() {
-                          super.select();
-                          FOptionPane.showConfirmDialog (
-                              Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
-                              Forge.getLocalizer().getMessage("lblRestartForge"),
-                              Forge.getLocalizer().getMessage("lblRestart"),
-                              Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
-                                  @Override
-                                  public void run(Boolean result) {
-                                      if (result) {
-                                          Forge.restart(true);
-                                      }
-                                  }
-                              }
-                          );
-                      }
-                  },
-                 3);
+                                        Forge.getLocalizer().getMessage("lblAutoCacheSize"),
+                                        Forge.getLocalizer().getMessage("nlAutoCacheSize")) {
+                                    @Override
+                                    public void select() {
+                                        super.select();
+                                        FOptionPane.showConfirmDialog (
+                                                Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
+                                                Forge.getLocalizer().getMessage("lblRestartForge"),
+                                                Forge.getLocalizer().getMessage("lblRestart"),
+                                                Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
+                                                    @Override
+                                                    public void run(Boolean result) {
+                                                        if (result) {
+                                                            Forge.restart(true);
+                                                        }
+                                                    }
+                                                }
+                                        );
+                                    }
+                                },
+                    3);
         }
         //Graphic Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_CARD_IMAGES,
-                Forge.getLocalizer().getMessage("lblDisableCardImages"),
-                Forge.getLocalizer().getMessage("nlDisableCardImages")) {
-                    @Override
-                    public void select() {
-                        super.select();
-                        ImageCache.getInstance().disposeTextures();
-                    }
-                },
+                                    Forge.getLocalizer().getMessage("lblDisableCardImages"),
+                                    Forge.getLocalizer().getMessage("nlDisableCardImages")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    ImageCache.getInstance().disposeTextures();
+                                }
+                            },
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
-                Forge.getLocalizer().getMessage("cbImageFetcher"),
-                Forge.getLocalizer().getMessage("nlImageFetcher")),
+                        Forge.getLocalizer().getMessage("cbImageFetcher"),
+                        Forge.getLocalizer().getMessage("nlImageFetcher")),
                 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_PREFERRED_ART,
-                Forge.getLocalizer().getMessage("lblPreferredArt"),
-                Forge.getLocalizer().getMessage("nlPreferredArt"),
-                FModel.getMagicDb().getCardArtAvailablePreferences()) {
-                    @Override
-                    public void valueChanged(String newValue) {
-                        super.valueChanged(newValue);
-                        FOptionPane.showConfirmDialog (
-                                Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
-                                Forge.getLocalizer().getMessage("lblRestartForge"),
-                                Forge.getLocalizer().getMessage("lblRestart"),
-                                Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
-                                    @Override
-                                    public void run(Boolean result) {
-                                        if (result) {
-                                            Forge.restart(true);
-                                        }
-                                    }
+                                    Forge.getLocalizer().getMessage("lblPreferredArt"),
+                                    Forge.getLocalizer().getMessage("nlPreferredArt"),
+                                    FModel.getMagicDb().getCardArtAvailablePreferences()) {
+                                @Override
+                                public void valueChanged(String newValue) {
+                                    super.valueChanged(newValue);
+                                    FOptionPane.showConfirmDialog (
+                                            Forge.getLocalizer().getMessage("lblRestartForgeDescription"),
+                                            Forge.getLocalizer().getMessage("lblRestartForge"),
+                                            Forge.getLocalizer().getMessage("lblRestart"),
+                                            Forge.getLocalizer().getMessage("lblLater"), new Callback<Boolean>() {
+                                                @Override
+                                                public void run(Boolean result) {
+                                                    if (result) {
+                                                        Forge.restart(true);
+                                                    }
+                                                }
+                                            }
+                                    );
                                 }
-                        );
-                    }
-                },
+                            },
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SMART_CARD_ART,
                         Forge.getLocalizer().getMessage("lblSmartCardArtOpt"),
@@ -527,63 +528,63 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                                 + Forge.getLocalizer().getMessage("nlSmartCardArtOptNote")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
-                Forge.getLocalizer().getMessage("cbDisplayFoil"),
-                Forge.getLocalizer().getMessage("nlDisplayFoil")),
+                        Forge.getLocalizer().getMessage("cbDisplayFoil"),
+                        Forge.getLocalizer().getMessage("nlDisplayFoil")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_RANDOM_FOIL,
-                Forge.getLocalizer().getMessage("cbRandomFoil"),
-                Forge.getLocalizer().getMessage("nlRandomFoil")),
+                        Forge.getLocalizer().getMessage("cbRandomFoil"),
+                        Forge.getLocalizer().getMessage("nlRandomFoil")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_RANDOM_ART_IN_POOLS,
-                Forge.getLocalizer().getMessage("cbRandomArtInPools"),
-                Forge.getLocalizer().getMessage("nlRandomArtInPools")),
+                        Forge.getLocalizer().getMessage("cbRandomArtInPools"),
+                        Forge.getLocalizer().getMessage("nlRandomArtInPools")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_TABS,
                 Forge.getLocalizer().getMessage("lblCompactTabs"),
                 Forge.getLocalizer().getMessage("nlCompactTabs")) {
-                    @Override
-                    public void select() {
-                        super.select();
-                        //update layout of screen when this setting changes
-                        TabPageScreen.COMPACT_TABS = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_TABS);
-                        parentScreen.revalidate();
-                    }
-                },4);
+            @Override
+            public void select() {
+                super.select();
+                //update layout of screen when this setting changes
+                TabPageScreen.COMPACT_TABS = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_TABS);
+                parentScreen.revalidate();
+            }
+        },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_COMPACT_LIST_ITEMS,
-                Forge.getLocalizer().getMessage("lblCompactListItems"),
-                Forge.getLocalizer().getMessage("nlCompactListItems")),
+                        Forge.getLocalizer().getMessage("lblCompactListItems"),
+                        Forge.getLocalizer().getMessage("nlCompactListItems")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_HIDE_REMINDER_TEXT,
-                Forge.getLocalizer().getMessage("cbHideReminderText"),
-                Forge.getLocalizer().getMessage("nlHideReminderText")),
+                        Forge.getLocalizer().getMessage("cbHideReminderText"),
+                        Forge.getLocalizer().getMessage("nlHideReminderText")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_MATCH_IMAGE_VISIBLE,
-                Forge.getLocalizer().getMessage("lblShowMatchBackground"),
-                Forge.getLocalizer().getMessage("nlShowMatchBackground")),
+                        Forge.getLocalizer().getMessage("lblShowMatchBackground"),
+                        Forge.getLocalizer().getMessage("nlShowMatchBackground")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LIBGDX_TEXTURE_FILTERING,
-                Forge.getLocalizer().getMessage("lblBattlefieldTextureFiltering"),
-                Forge.getLocalizer().getMessage("nlBattlefieldTextureFiltering")),
+                        Forge.getLocalizer().getMessage("lblBattlefieldTextureFiltering"),
+                        Forge.getLocalizer().getMessage("nlBattlefieldTextureFiltering")),
                 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_DISPLAY_CURRENT_COLORS,
-                Forge.getLocalizer().getMessage("cbpDisplayCurrentCardColors"),
-                Forge.getLocalizer().getMessage("nlDisplayCurrentCardColors"),
-                new String[]{
-                    ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR,
-                    ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
-                    ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}),
+                        Forge.getLocalizer().getMessage("cbpDisplayCurrentCardColors"),
+                        Forge.getLocalizer().getMessage("nlDisplayCurrentCardColors"),
+                        new String[]{
+                                ForgeConstants.DISP_CURRENT_COLORS_NEVER, ForgeConstants.DISP_CURRENT_COLORS_MULTICOLOR,
+                                ForgeConstants.DISP_CURRENT_COLORS_CHANGED, ForgeConstants.DISP_CURRENT_COLORS_MULTI_OR_CHANGED,
+                                ForgeConstants.DISP_CURRENT_COLORS_ALWAYS}),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_SPLIT_CARDS,
-                Forge.getLocalizer().getMessage("lblRotateZoomSplit"),
-                Forge.getLocalizer().getMessage("nlRotateZoomSplit")),
+                        Forge.getLocalizer().getMessage("lblRotateZoomSplit"),
+                        Forge.getLocalizer().getMessage("nlRotateZoomSplit")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ROTATE_PLANE_OR_PHENOMENON,
-                Forge.getLocalizer().getMessage("lblRotateZoomPlanesPhenomena"),
-                Forge.getLocalizer().getMessage("nlRotateZoomPlanesPhenomena")),
+                        Forge.getLocalizer().getMessage("lblRotateZoomPlanesPhenomena"),
+                        Forge.getLocalizer().getMessage("nlRotateZoomPlanesPhenomena")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_IMAGES_EFFECT_CARDS,
-                Forge.getLocalizer().getMessage("lblDisableCardEffect"),
-                Forge.getLocalizer().getMessage("nlDisableCardEffect")),
+                        Forge.getLocalizer().getMessage("lblDisableCardEffect"),
+                        Forge.getLocalizer().getMessage("nlDisableCardEffect")),
                 4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ENABLE_BORDER_MASKING,
                 Forge.getLocalizer().getMessage("lblBorderMaskOption"),
@@ -599,28 +600,28 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,
                 Forge.getLocalizer().getMessage("lblPreloadExtendedArtCards"),
                 Forge.getLocalizer().getMessage("nlPreloadExtendedArtCards")){
-                @Override
-                    public void select() {
-                        super.select();
-                        //update
-                        Forge.enablePreloadExtendedArt = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
-                    }
-                },4);
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.enablePreloadExtendedArt = FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
+            }
+        },4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MATCH_SCROLL_INDICATOR,
-                Forge.getLocalizer().getMessage("lblMatchScrollIndicator"),
-                Forge.getLocalizer().getMessage("nlMatchScrollIndicator")),
+                        Forge.getLocalizer().getMessage("lblMatchScrollIndicator"),
+                        Forge.getLocalizer().getMessage("nlMatchScrollIndicator")),
                 4);
         if (!GuiBase.isAndroid()) {
             lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_MAGNIFIER,
                     Forge.getLocalizer().getMessage("lblEnableMagnifier"),
                     Forge.getLocalizer().getMessage("nlEnableMagnifier")){
-                    @Override
-                    public void select() {
-                        super.select();
-                        //set default
-                        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER)) {
-                            Forge.setCursor(FSkin.getCursor().get(0), "0");
-                        }
+                @Override
+                public void select() {
+                    super.select();
+                    //set default
+                    if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_MAGNIFIER)) {
+                        Forge.setCursor(FSkin.getCursor().get(0), "0");
+                    }
                 }
             },4);
         }
@@ -637,73 +638,73 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_FPS,
                 Forge.getLocalizer().getMessage("lblShowFPSDisplay"),
                 Forge.getLocalizer().getMessage("nlShowFPSDisplay")){
-                @Override
-                    public void select() {
-                        super.select();
-                        //update
-                        Forge.showFPS = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_FPS);
-                    }
-                },4);
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.showFPS = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_FPS);
+            }
+        },4);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CARD_COUNTER_DISPLAY_TYPE,
-                Forge.getLocalizer().getMessage("cbpCounterDisplayType"),
-                Forge.getLocalizer().getMessage("nlCounterDisplayType"),
-                new String[]{
-                    ForgeConstants.CounterDisplayType.TEXT.getName(), ForgeConstants.CounterDisplayType.IMAGE.getName(),
-                    ForgeConstants.CounterDisplayType.HYBRID.getName(), ForgeConstants.CounterDisplayType.OLD_WHEN_SMALL.getName()}),
+                        Forge.getLocalizer().getMessage("cbpCounterDisplayType"),
+                        Forge.getLocalizer().getMessage("nlCounterDisplayType"),
+                        new String[]{
+                                ForgeConstants.CounterDisplayType.TEXT.getName(), ForgeConstants.CounterDisplayType.IMAGE.getName(),
+                                ForgeConstants.CounterDisplayType.HYBRID.getName(), ForgeConstants.CounterDisplayType.OLD_WHEN_SMALL.getName()}),
                 4);
         //Card Overlays
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_CARD_OVERLAYS,
-                Forge.getLocalizer().getMessage("lblShowCardOverlays"),
-                Forge.getLocalizer().getMessage("nlShowCardOverlays")),
+                        Forge.getLocalizer().getMessage("lblShowCardOverlays"),
+                        Forge.getLocalizer().getMessage("nlShowCardOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_NAME,
-                Forge.getLocalizer().getMessage("lblShowCardNameOverlays"),
-                Forge.getLocalizer().getMessage("nlShowCardNameOverlays")),
+                        Forge.getLocalizer().getMessage("lblShowCardNameOverlays"),
+                        Forge.getLocalizer().getMessage("nlShowCardNameOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_MANA_COST,
-                Forge.getLocalizer().getMessage("lblShowCardManaCostOverlays"),
-                Forge.getLocalizer().getMessage("nlShowCardManaCostOverlays")),
+                        Forge.getLocalizer().getMessage("lblShowCardManaCostOverlays"),
+                        Forge.getLocalizer().getMessage("nlShowCardManaCostOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_POWER,
-                Forge.getLocalizer().getMessage("lblShowCardPTOverlays"),
-                Forge.getLocalizer().getMessage("nlShowCardPTOverlays")),
+                        Forge.getLocalizer().getMessage("lblShowCardPTOverlays"),
+                        Forge.getLocalizer().getMessage("nlShowCardPTOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_CARD_ID,
-                Forge.getLocalizer().getMessage("lblShowCardIDOverlays"),
-                Forge.getLocalizer().getMessage("nlShowCardIDOverlays")),
+                        Forge.getLocalizer().getMessage("lblShowCardIDOverlays"),
+                        Forge.getLocalizer().getMessage("nlShowCardIDOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_DRAFT_RANKING,
-                Forge.getLocalizer().getMessage("lblShowDraftRankingOverlay"),
-                Forge.getLocalizer().getMessage("nlShowDraftRankingOverlay")),
+                        Forge.getLocalizer().getMessage("lblShowDraftRankingOverlay"),
+                        Forge.getLocalizer().getMessage("nlShowDraftRankingOverlay")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
-                Forge.getLocalizer().getMessage("lblShowAbilityIconsOverlays"),
-                Forge.getLocalizer().getMessage("nlShowAbilityIconsOverlays")),
+                        Forge.getLocalizer().getMessage("lblShowAbilityIconsOverlays"),
+                        Forge.getLocalizer().getMessage("nlShowAbilityIconsOverlays")),
                 5);
         lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
-                Forge.getLocalizer().getMessage("lblUseLaserArrows"),
-                Forge.getLocalizer().getMessage("nlUseLaserArrows")),
+                        Forge.getLocalizer().getMessage("lblUseLaserArrows"),
+                        Forge.getLocalizer().getMessage("nlUseLaserArrows")),
                 5);
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
-                Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"),
-                Forge.getLocalizer().getMessage("nlVibrateWhenLosingLife")),
+                        Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"),
+                        Forge.getLocalizer().getMessage("nlVibrateWhenLosingLife")),
                 6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LONG_PRESS,
-                Forge.getLocalizer().getMessage("lblVibrateAfterLongPress"),
-                Forge.getLocalizer().getMessage("nlVibrateAfterLongPress")),
+                        Forge.getLocalizer().getMessage("lblVibrateAfterLongPress"),
+                        Forge.getLocalizer().getMessage("nlVibrateAfterLongPress")),
                 6);
         //Sound Options
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_SOUND_SET,
-                        Forge.getLocalizer().getMessage("cbpSoundSets"),
-                        Forge.getLocalizer().getMessage("nlpSoundSets"),
-                        SoundSystem.instance.getAvailableSoundSets()) {
-                            @Override
-                            public void valueChanged(String newValue) {
-                                super.valueChanged(newValue);
-                                SoundSystem.instance.invalidateSoundCache();
-                            }
-                        },
+                                    Forge.getLocalizer().getMessage("cbpSoundSets"),
+                                    Forge.getLocalizer().getMessage("nlpSoundSets"),
+                                    SoundSystem.instance.getAvailableSoundSets()) {
+                                @Override
+                                public void valueChanged(String newValue) {
+                                    super.valueChanged(newValue);
+                                    SoundSystem.instance.invalidateSoundCache();
+                                }
+                            },
                 7);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_MUSIC_SET,
                                     Forge.getLocalizer().getMessage("cbpMusicSets"),
@@ -718,25 +719,42 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                             },
                 7);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_SOUNDS,
-                Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"),
-                Forge.getLocalizer().getMessage("nlAdjustSoundsVolume"),
-                new String[]{"0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"}),
+                        Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"),
+                        Forge.getLocalizer().getMessage("nlAdjustSoundsVolume"),
+                        new String[]{"0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"}),
                 7);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_VOL_MUSIC,
                 Forge.getLocalizer().getMessage("cbAdjustMusicVolume"),
                 Forge.getLocalizer().getMessage("nlAdjustMusicVolume"),
                 new String[]{"0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"}) {
-                    @Override
-                        public void valueChanged(String newValue) {
-                            super.valueChanged(newValue);
-                            //update background music when this setting changes
-                            SoundSystem.instance.changeBackgroundTrack();
-                        }
-                }, 7);
+            @Override
+            public void valueChanged(String newValue) {
+                super.valueChanged(newValue);
+                //update background music when this setting changes
+                SoundSystem.instance.changeBackgroundTrack();
+            }
+        }, 7);
         /*lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_SOUND_SYSTEM,
                 "Use Alternate Sound System",
                 "Use the alternate sound system (only use if you have issues with sound not playing or disappearing)."),
                 7);*/
+        lstSettings.addItem(
+                new IntegerSelectSetting(
+                        ForgeNetPreferences.FNetPref.NET_PORT,
+                        Forge.getLocalizer().getMessage("lblServerPort"),
+                        Forge.getLocalizer().getMessage("nlServerPort"),
+                        1024, 65535 // min and max port values
+                ),
+                8
+        );
+        lstSettings.addItem(new LocalizedSelectSetting(
+                ForgeNetPreferences.FNetPref.UPnP,
+                Forge.getLocalizer().getMessage("lblUPnPTitle"),
+                Forge.getLocalizer().getMessage("nlServerUPnPOptions"),
+                ForgeConstants.getUPnPPreferenceMapping()
+        ), 8);
+
+
     }
 
     public void refreshSkinsList() {
@@ -755,9 +773,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
     private abstract class Setting {
         protected String label;
         protected String description;
-        protected FPref pref;
+        protected PreferencesStore.IPref pref;
 
-        public Setting(FPref pref0, String label0, String description0) {
+        public Setting(PreferencesStore.IPref pref0, String label0, String description0) {
             label = label0;
             description = description0;
             pref = pref0;
@@ -774,22 +792,33 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         @Override
         public void select() {
-            FModel.getPreferences().setPref(pref, !FModel.getPreferences().getPrefBoolean(pref));
-            FModel.getPreferences().save();
+            if(pref instanceof FPref) {
+                FModel.getPreferences().setPref((FPref)pref, !FModel.getPreferences().getPrefBoolean((FPref)pref));
+                FModel.getPreferences().save();
+            } else if(pref instanceof ForgeNetPreferences.FNetPref) {
+                FModel.getNetPreferences().setPref((ForgeNetPreferences.FNetPref)pref, !FModel.getNetPreferences().getPrefBoolean((ForgeNetPreferences.FNetPref)pref));
+                FModel.getNetPreferences().save();
+            }
         }
 
         @Override
         public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
             x += w - h;
             w = h;
-            FCheckBox.drawCheckBox(g, SettingsScreen.DESC_COLOR, color, FModel.getPreferences().getPrefBoolean(pref), x, y, w, h);
+            boolean checked = false;
+            if(pref instanceof FPref) {
+                checked = FModel.getPreferences().getPrefBoolean((FPref) pref);
+            } else if(pref instanceof ForgeNetPreferences.FNetPref) {
+                checked = FModel.getNetPreferences().getPrefBoolean((ForgeNetPreferences.FNetPref) pref);
+            }
+            FCheckBox.drawCheckBox(g, SettingsScreen.DESC_COLOR, color, checked, x, y, w, h);
         }
     }
 
     private class CustomSelectSetting extends Setting {
         private final List<String> options = new ArrayList<>();
 
-        public CustomSelectSetting(FPref pref0, String label0, String description0, String[] options0) {
+        public CustomSelectSetting(PreferencesStore.IPref pref0, String label0, String description0, String[] options0) {
             super(pref0, label0 + ":", description0);
 
             options.addAll(Arrays.asList(options0));
@@ -812,8 +841,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         }
 
         public void valueChanged(String newValue) {
-            FModel.getPreferences().setPref(pref, newValue);
-            FModel.getPreferences().save();
+            if(pref instanceof FPref) {
+                FModel.getPreferences().setPref((FPref)pref, newValue);
+                FModel.getPreferences().save();
+            } else if(pref instanceof ForgeNetPreferences.FNetPref) {
+                FModel.getNetPreferences().setPref((ForgeNetPreferences.FNetPref)pref, newValue);
+                FModel.getNetPreferences().save();
+            }
+
         }
 
         public void updateOptions(Iterable<String> options0) {
@@ -832,10 +867,17 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         private class CustomSelectScreen extends FScreen {
             private final FList<String> lstOptions;
-            private final String currentValue = FModel.getPreferences().getPref(pref);
+            private final String currentValue;
 
             private CustomSelectScreen() {
                 super("Select " + label.substring(0, label.length() - 1));
+                if(pref instanceof FPref) {
+                    currentValue = FModel.getPreferences().getPref((FPref) pref);
+                } else if(pref instanceof ForgeNetPreferences.FNetPref) {
+                    currentValue = FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref) pref);
+                } else {
+                    currentValue = null;
+                }
                 lstOptions = add(new FList<>(options));
                 lstOptions.setListItemRenderer(new FList.DefaultListItemRenderer<String>() {
                     @Override
@@ -884,9 +926,140 @@ public class SettingsPage extends TabPage<SettingsScreen> {
 
         @Override
         public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
-            g.drawText(FModel.getPreferences().getPref(pref), font, color, x, y, w, h, false, Align.right, false);
+            String value;
+            if(pref instanceof FPref) {
+                value = FModel.getPreferences().getPref((FPref)pref);
+            } else if(pref instanceof ForgeNetPreferences.FNetPref) {
+                value = FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref)pref);
+            } else {
+                value = "";
+            }
+            g.drawText(value, font, color, x, y, w, h, false, Align.right, false);
         }
     }
+
+    private class LocalizedSelectSetting extends CustomSelectSetting {
+        private final Map<String, String> localizedToBackingMap;
+        private final Map<String, String> backingToLocalizedMap = new HashMap<>();
+
+        public LocalizedSelectSetting(PreferencesStore.IPref pref0,
+                                      String label0,
+                                      String description0,
+                                      Map<String, String> localizationMap) {
+            super(pref0, label0, description0, localizationMap.keySet().toArray(new String[0]));
+            this.localizedToBackingMap = localizationMap;
+
+            // Create reverse lookup map
+            for (Map.Entry<String, String> entry : localizationMap.entrySet()) {
+                backingToLocalizedMap.put(entry.getValue(), entry.getKey());
+            }
+        }
+
+        @Override
+        public void valueChanged(String newLocalizedValue) {
+            String backingValue = localizedToBackingMap.get(newLocalizedValue);
+            if (backingValue == null) return;
+
+            if (pref instanceof FPref) {
+                FModel.getPreferences().setPref((FPref) pref, backingValue);
+                FModel.getPreferences().save();
+            } else if (pref instanceof ForgeNetPreferences.FNetPref) {
+                FModel.getNetPreferences().setPref((ForgeNetPreferences.FNetPref) pref, backingValue);
+                FModel.getNetPreferences().save();
+            }
+        }
+
+
+        @Override
+        public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color,
+                                  float x, float y, float w, float h) {
+            String currentBackingValue;
+            if (pref instanceof FPref) {
+                currentBackingValue = FModel.getPreferences().getPref((FPref) pref);
+            } else if (pref instanceof ForgeNetPreferences.FNetPref) {
+                currentBackingValue = FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref) pref);
+            } else {
+                currentBackingValue = "";
+            }
+
+            String displayValue = backingToLocalizedMap.get(currentBackingValue);
+            g.drawText(displayValue, font, color, x, y, w, h, false, Align.right, false);
+        }
+    }
+
+
+    private class IntegerSelectSetting extends Setting {
+        private final int minValue;
+        private final int maxValue;
+
+        public IntegerSelectSetting(PreferencesStore.IPref pref0, String label0, String description0, int minValue, int maxValue) {
+            super(pref0, label0 + ":", description0);
+            this.minValue = minValue;
+            this.maxValue = maxValue;
+        }
+
+        public void valueChanged(String newValue) {
+            if (pref instanceof FPref) {
+                FModel.getPreferences().setPref((FPref) pref, newValue);
+                FModel.getPreferences().save();
+            } else if (pref instanceof ForgeNetPreferences.FNetPref) {
+                FModel.getNetPreferences().setPref((ForgeNetPreferences.FNetPref) pref, newValue);
+                FModel.getNetPreferences().save();
+            }
+        }
+
+        @Override
+        public void select() {
+            String currentValue;
+            if (pref instanceof FPref) {
+                currentValue = FModel.getPreferences().getPref((FPref) pref);
+            } else if (pref instanceof ForgeNetPreferences.FNetPref) {
+                currentValue = FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref) pref);
+            } else {
+                currentValue = "";
+            }
+            if (currentValue == null || currentValue.isEmpty()) {
+                currentValue = String.valueOf(minValue);
+            }
+            FOptionPane.showInputDialog(
+                    label,
+                    description,
+                    currentValue,
+                    null,
+                    new Callback<String>() {
+                        @Override
+                        public void run(String input) {
+                            if (input == null) return; // cancelled
+                            if (!input.matches("\\d+")) {
+                                FOptionPane.showMessageDialog("Please enter a valid number.", "Invalid Input");
+                                return;
+                            }
+                            int value = Integer.parseInt(input);
+                            if (value < minValue || value > maxValue) {
+                                FOptionPane.showMessageDialog("Value must be between " + minValue + " and " + maxValue + ".", "Invalid Input");
+                                return;
+                            }
+                            valueChanged(input);
+                        }
+                    },
+                    true // isNumeric
+            );
+        }
+
+        @Override
+        public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
+            String value;
+            if (pref instanceof FPref) {
+                value = FModel.getPreferences().getPref((FPref) pref);
+            } else if (pref instanceof ForgeNetPreferences.FNetPref) {
+                value = FModel.getNetPreferences().getPref((ForgeNetPreferences.FNetPref) pref);
+            } else {
+                value = "";
+            }
+            g.drawText(value, font, color, x, y, w, h, false, Align.right, false);
+        }
+    }
+
 
     private class SettingRenderer extends FList.ListItemRenderer<Setting> {
         @Override

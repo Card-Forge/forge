@@ -767,7 +767,11 @@ public abstract class SpellAbilityEffect {
         return combatChanged;
     }
 
-    protected static GameCommand untilHostLeavesPlayCommand(final CardZoneTable triggerList, final SpellAbility sa) {
+    protected static void changeZoneUntilCommand(final CardZoneTable triggerList, final SpellAbility sa) {
+        if (!sa.hasParam("Duration")) {
+            return;
+        }
+
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         hostCard.addUntilLeavesBattlefield(triggerList.allCards());
@@ -782,7 +786,7 @@ public abstract class SpellAbilityEffect {
             lki = null;
         }
 
-        return new GameCommand() {
+        GameCommand gc = new GameCommand() {
 
             private static final long serialVersionUID = 1L;
 
@@ -837,6 +841,13 @@ public abstract class SpellAbilityEffect {
             }
 
         };
+
+        // corner case can lead to host exiling itself during the effect
+        if (sa.getParam("Duration").contains("UntilHostLeavesPlay") && !hostCard.isInPlay()) {
+            gc.run();
+        } else {
+            addUntilCommand(sa, gc);
+        }
     }
 
     protected static void discard(SpellAbility sa, final boolean effect, Map<Player, CardCollectionView> discardedMap, Map<AbilityKey, Object> params) {
@@ -897,6 +908,8 @@ public abstract class SpellAbilityEffect {
             } else {
                 game.getUpkeep().addUntilEnd(controller, until);
             }
+        } else if ("UntilTheEndOfYourNextUntap".equals(duration)) {
+            game.getUntap().addUntilEnd(controller, until);
         } else if ("UntilNextEndStep".equals(duration)) {
             game.getEndOfTurn().addAt(until);
         } else if ("UntilYourNextEndStep".equals(duration)) {

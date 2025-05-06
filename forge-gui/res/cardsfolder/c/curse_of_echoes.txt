@@ -1,8 +1,8 @@
 Name:Curse of Echoes
 ManaCost:4 U
 Types:Enchantment Aura Curse
-K:Enchant player
-A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+K:Enchant:Player
+SVar:AttachAILogic:Curse
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Player.EnchantedBy | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy they control.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ NonTriggeredCardController | Optional$ True | MayChooseTarget$ True
 AI:RemoveDeck:All

@@ -417,34 +417,34 @@ ScryfallCode=C21
 409 R Yavimaya Coast @Anthony S. Waters
 
 [tokens]
-b_2_2_zombie
-wb_1_1_spirit_flying
-b_4_4_horror
-u_2_2_drake_flying
-c_x_x_a_construct
-ur_5_5_elemental_flying
-c_a_food_sac
-g_1_1_saproling
-b_x_x_demon_flying
-c_1_1_a_myr
-c_0_0_a_construct_total_artifacts
-c_1_1_a_thopter_flying
-c_3_3_a_golem_flying
-c_3_3_a_golem_trample
-c_3_3_a_golem_vigilance
-g_3_3_beast
-u_3_3_fish_hatches_whale
-u_6_6_whale_hatches_kraken
-g_6_6_wurm
-u_9_9_kraken
-g_1_1_insect_flying_deathtouch
-g_4_4_beast
-g_4_4_fungus_beast_trample
-g_x_x_hydra
-g_2_2_boar
-g_3_3_frog_lizard
-g_3_3_elephant
-c_10_10_eldrazi
+1 c_10_10_eldrazi @Jack Wang
+2 u_2_2_drake_flying @Svetlin Velinov
+3 u_3_3_fish_hatches_whale @Dan Murayama Scott
+4 u_9_9_kraken @Dan Murayama Scott
+5 u_6_6_whale_hatches_kraken @Dan Murayama Scott
+7 b_x_x_demon_flying @Kieran Yanner
+8 b_4_4_horror @Pete Venters
+9 b_2_2_zombie @Anna Steinbauer
+10 g_3_3_beast @Dave Allsop
+11 g_4_4_beast @Steve Prescott
+12 g_2_2_boar @James Ryman
+13 g_3_3_elephant @Lars Grant-West
+14 g_3_3_frog_lizard @Jack Wang
+15 g_4_4_fungus_beast_trample @Adam Paquette
+16 g_x_x_hydra @Steve Prescott
+17 g_1_1_insect_flying_deathtouch @Martina Pilcerova
+18 g_1_1_saproling @Brad Rigney
+19 g_6_6_wurm @Anthony Francisco
+20 ur_5_5_elemental_flying @Randy Gallegos
+21 wb_1_1_spirit_flying @Cliff Childs
+22 c_x_x_a_construct @Kieran Yanner
+23 c_0_0_a_construct_total_artifacts @Zoltan Boros
+24 c_a_food_sac @Steve Prescott
+27 c_3_3_a_golem_flying @Andrew Mar
+28 c_1_1_a_myr @Ryan Pancoast
+29 c_1_1_a_thopter_flying @Svetlin Velinov
+30 c_3_3_a_golem_trample @Andrew Mar
+31 c_3_3_a_golem_vigilance @Andrew Mar
 
 [other]
 eternalize_champion_of_wits

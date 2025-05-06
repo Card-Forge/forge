@@ -143,13 +143,13 @@ ScryfallCode=GN3
 136 L Forest @Kev Walker
 
 [tokens]
-b_2_2_zombie
-b_5_5_demon_flying
-c_a_treasure_sac
-g_1_1_elf_warrior
-r_2_2_dragon_flying_firebreathing
-u_1_1_bird_illusion_flying
-u_2_2_drake_flying
-w_1_1_human_soldier
-w_1_1_soldier
-w_4_4_angel_flying
+1 w_4_4_angel_flying @Magali Villeneuve
+2 w_1_1_human_soldier @Deruchenko Alexander
+3 w_1_1_soldier @Svetlin Velinov
+4 u_1_1_bird_illusion_flying @James Paick
+5 u_2_2_drake_flying @Svetlin Velinov
+6 b_5_5_demon_flying @Sidharth Chaturvedi
+7 b_2_2_zombie @Anna Steinbauer
+8 r_2_2_dragon_flying_firebreathing @Lars Grant-West
+9 g_1_1_elf_warrior @William O'Connor
+10 c_a_treasure_sac @Alayna Danner

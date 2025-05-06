@@ -2,9 +2,9 @@ Name:Visions of Brutality
 ManaCost:1 B
 Types:Enchantment Aura
 K:Devoid
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature can't block.
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ CantBlock | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't block.
 T:Mode$ DamageDealtOnce | ValidSource$ Card.AttachedBy | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, its controller loses that much life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredSourceController | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount

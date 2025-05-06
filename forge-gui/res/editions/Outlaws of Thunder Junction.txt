@@ -464,20 +464,20 @@ Base=Land:fromSheet("OTJ cards")
 1 Tarnation Vista|BIG
 
 [tokens]
-b_1_1_vampire_rogue_lifelink
-beau
-c_a_clue_draw
-c_a_treasure_sac
-g_2_1_varmint
-g_3_3_elk
-g_x_x_elemental
-meteorite
-r_1_1_mercenary_tappump
-r_3_1_dinosaur
-r_4_4_scorpion_dragon_flying_haste
-u_1_1_bird_flying
-ub_2_2_zombie_rogue
-w_1_1_sheep
-w_2_2_ox
-w_2_2_spirit_flying
-w_3_3_angel_flying
+2 w_3_3_angel_flying @Leonardo Santanna
+3 w_2_2_ox @Fiona Hsieh
+4 w_1_1_sheep @Edgar Sánchez Hidalgo
+5 w_2_2_spirit_flying @Domenico Cava
+6 beau @Loïc Canavaggia
+7 u_1_1_bird_flying @Eduardo Francisco
+8 b_1_1_vampire_rogue_lifelink @Robin Olausson
+9 r_3_1_dinosaur @Xabi Gaztelua
+10 r_1_1_mercenary_tappump @Eduardo Francisco
+11 r_4_4_scorpion_dragon_flying_haste @Diego Gisbert
+12 g_x_x_elemental @Jason Smith
+13 g_3_3_elk @Lie Setiawan
+14 g_2_1_varmint @Ralph Horsley
+15 ub_2_2_zombie_rogue @Caio E Santos
+16 c_a_clue_draw @Clint Lockwood
+17 meteorite @Ina Wong
+18 c_a_treasure_sac @Monztre

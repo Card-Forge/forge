@@ -338,9 +338,9 @@ ScryfallCode=BBD
 1 Mycosynth Lattice
 
 [tokens]
-w_1_1_spirit_flying
-w_1_1_warrior
-b_2_2_zombie
-b_5_5_zombie_giant
-g_3_3_beast
-c_1_1_a_myr
+1 w_1_1_spirit_flying @Ryan Yee
+2 w_1_1_warrior @Ryan Barger
+3 b_2_2_zombie @Igor Kieryluk
+4 b_5_5_zombie_giant @Igor Kieryluk
+5 g_3_3_beast @Jesper Ejsing
+6 c_1_1_a_myr @Ryan Pancoast

@@ -88,5 +88,4 @@ ScryfallCode=DDK
 80 L Swamp @Jung Park
 
 [tokens]
-w_1_1_spirit_flying
-b_1_1_vampire_lifelink
+1 w_1_1_spirit_flying @Ryan Yee

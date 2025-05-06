@@ -30,7 +30,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
     /**
      * Preference identifiers, and their default values.
      */
-    public enum QPref {
+    public enum QPref implements PreferencesStore.IPref {
 
         // if enabled, player must follow world rules in duels (allowed sets only, banned/restricted cards etc.)
         WORLD_RULES_CONFORMANCE("0"),
@@ -211,6 +211,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
          *
          * @return {@link java.lang.String}
          */
+        @Override
         public String getDefault() {
             return this.strDefaultVal;
         }

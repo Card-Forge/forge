@@ -1,8 +1,8 @@
 Name:Crown of Suspicion
 ManaCost:1 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ -1 | Description$ Enchanted creature gets +2/-1.
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ AttachedBy Sacrificed | NumAtt$ +2 | NumDef$ -1 | SubAbility$ DBPumpAll | SpellDescription$ Enchanted creature and other creatures that share a creature type with it get +2/-1 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.NotDefinedAttachedBy Sacrificed+sharesCreatureTypeWith AttachedBy Sacrificed | NumAtt$ +2 | NumDef$ -1

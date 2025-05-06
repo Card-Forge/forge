@@ -186,9 +186,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         triggerList.triggerChangesZoneAll(game, sa);
 
-        if (sa.hasParam("Duration")) {
-            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
-        }
+        changeZoneUntilCommand(triggerList, sa);
 
         // CR 701.20d If an effect would cause a player to shuffle a set of objects into a library,
         // that library is shuffled even if there are no objects in that set. 

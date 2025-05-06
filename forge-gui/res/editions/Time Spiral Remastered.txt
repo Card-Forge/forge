@@ -425,18 +425,18 @@ ScryfallCode=TSR
 411 R Lotus Bloom @Christopher Rush
 
 [tokens]
-w_2_2_griffin_flying
-w_1_1_soldier
-cloud_sprite
-b_1_2_bat_flying_nosferatu
-b_2_2_knight_flanking_pro_white_haste
-b_2_4_spider_reach
-r_4_4_giant
-r_1_1_goblin
-kobolds_of_kher_keep
-g_3_3_ape
-g_6_1_insect_shroud
-llanowar_elves
-g_1_1_saproling
-c_2_2_a_assembly_worker
-metallic_sliver
+1 w_2_2_griffin_flying @Jim Nelson
+2 w_1_1_soldier @Alex Horley-Orlandelli
+3 cloud_sprite @Mark Zug
+4 b_1_2_bat_flying_nosferatu @Mark Poole
+5 b_2_2_knight_flanking_pro_white_haste @William O'Connor
+6 b_2_4_spider_reach @Lars Grant-West
+7 r_4_4_giant @Raymond Swanland
+8 r_1_1_goblin @Thomas M. Baxa
+9 kobolds_of_kher_keep @Paolo Parente
+10 g_3_3_ape @Lars Grant-West
+11 g_6_1_insect_shroud @E. M. Gist
+12 llanowar_elves @Paolo Parente
+13 g_1_1_saproling @Warren Mahy
+14 c_2_2_a_assembly_worker @Mark Tedin
+15 metallic_sliver @Carl Critchlow

@@ -263,10 +263,10 @@ ScryfallCode=M12
 249 L Forest @Ryan Pancoast
 
 [tokens]
-w_3_3_bird_flying
-w_1_1_soldier
-b_2_2_zombie
-g_3_3_beast
-g_1_1_saproling
-g_6_6_wurm
-c_1_1_a_pentavite_flying
+1 w_3_3_bird_flying @Paul Bonner
+2 w_1_1_soldier @Paolo Parente
+3 b_2_2_zombie @Carl Critchlow
+4 g_3_3_beast @John Donahue
+5 g_1_1_saproling @Cyril Van Der Haegen
+6 g_6_6_wurm @Anthony Francisco
+7 c_1_1_a_pentavite_flying @Greg Staples

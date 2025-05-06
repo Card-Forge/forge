@@ -1,7 +1,7 @@
 Name:Suppression Bonds
 ManaCost:3 W
 Types:Enchantment Aura
-K:Enchant nonland permanent
-A:SP$ Attach | ValidTgts$ Permanent.nonLand | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted permanent can't attack or block and its activated abilities can't be activated.
+K:Enchant:Permanent.nonLand:nonland permanent
+SVar:AttachAILogic:Curse
+S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.EnchantedBy | Description$ Enchanted permanent can't attack or block and its activated abilities can't be activated.
 Oracle:Enchant nonland permanent\nEnchanted permanent can't attack or block, and its activated abilities can't be activated.

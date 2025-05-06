@@ -1329,23 +1329,27 @@ Guildless Commons|CMR
 1 Scroll Rack|CMR
 
 [tokens]
-w_4_4_angel_flying
-w_1_1_soldier
-w_1_1_spirit_flying
-u_4_3_salamander_warrior
-b_0_1_thrull
-b_2_2_zombie
-r_2_2_dragon_flying_firebreathing
-g_1_1_elf_warrior
-c_3_3_a_phyrexian_golem
-c_x_x_a_horror
-rock
-c_a_treasure_sac
-w_2_2_cat
-w_1_1_soldier
-u_1_1_illusion_flying
-g_3_3_beast
-g_4_4_beast
-g_3_3_elephant
-g_0_1_plant
-g_1_1_saproling
+1 w_4_4_angel_flying @Magali Villeneuve
+2 w_1_1_soldier @Svetlin Velinov
+3 w_1_1_spirit_flying @Jason A. Engle
+4 u_4_3_salamander_warrior @J.P. Targete
+5 b_0_1_thrull @Véronique Meignaud
+6 b_2_2_zombie @Paul Scott Canavan
+7 r_2_2_dragon_flying_firebreathing @Lars Grant-West
+8 g_1_1_elf_warrior @William O'Connor
+9 c_3_3_a_phyrexian_golem @Volkan Baǵa
+10 c_x_x_a_horror @Scott Chou
+11 rock @Tomasz Jedruszek
+12 c_a_treasure_sac @Alayna Danner
+15 w_2_2_cat @Scott Chou
+17 u_1_1_illusion_flying @Véronique Meignaud
+18 g_3_3_beast @Jesper Ejsing
+19 g_4_4_beast @Steve Prescott
+20 g_3_3_elephant @Lars Grant-West
+21 g_0_1_plant @Daren Bader
+22 g_1_1_saproling @Mike Burns
+
+[other]
+13 copy @David Palumbo
+14 monarch @Volkan Baǵa
+23 copy @David Palumbo

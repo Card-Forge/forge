@@ -74,10 +74,10 @@ ScryfallCode=DDS
 65 L Forest @Stephen Tappin
 
 [tokens]
-u_2_2_drake_flying
-r_1_1_elemental
-r_1_1_goblin
-g_4_4_beast
-g_3_3_elephant
-g_1_1_elf_warrior
-g_6_6_wurm
+1 u_2_2_drake_flying @Svetlin Velinov
+2 r_1_1_elemental @Winona Nelson
+3 r_1_1_goblin @Dave Kendall
+4 g_4_4_beast @Steve Prescott
+5 g_3_3_elephant @Lars Grant-West
+6 g_1_1_elf_warrior @William O'Connor
+7 g_6_6_wurm @Anthony Francisco

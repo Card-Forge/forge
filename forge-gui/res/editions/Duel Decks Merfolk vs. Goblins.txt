@@ -72,7 +72,7 @@ ScryfallCode=DDT
 63 L Mountain @Raoul Vitale
 
 [tokens]
-u_1_0_elemental
-u_5_5_wall_defender
-r_1_1_goblin
-r_1_1_goblin_haste
+1 u_1_0_elemental @Svetlin Velinov
+2 u_5_5_wall_defender @Brian Snõddy
+3 r_1_1_goblin @Karl Kopinski
+4 r_1_1_goblin_haste @Karl Kopinski

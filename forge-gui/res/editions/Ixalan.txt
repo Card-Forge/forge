@@ -304,14 +304,14 @@ ScryfallCode=XLN
 289 C Stone Quarry @Noah Bradley
 
 [tokens]
-w_1_1_vampire_lifelink
-u_2_2_illusion_illusory
-u_1_1_merfolk_hexproof
-b_2_2_pirate_menace
-g_3_3_dinosaur_trample
-g_0_2_plant_defender
-c_a_treasure_sac
-c_a_treasure_sac
-c_a_treasure_sac
-c_a_treasure_sac
-c_a_treasure_sac
+1 w_1_1_vampire_lifelink @John Severin Brassell
+2 u_2_2_illusion_illusory @Noah Bradley
+3 u_1_1_merfolk_hexproof @Randy Gallegos
+4 b_2_2_pirate_menace @Matt Stewart
+5 g_3_3_dinosaur_trample @Filip Burburan
+6 g_0_2_plant_defender @Florian de Gesincourt
+7 c_a_treasure_sac @Florian de Gesincourt
+8 c_a_treasure_sac @Florian de Gesincourt
+9 c_a_treasure_sac @Florian de Gesincourt
+10 c_a_treasure_sac @Florian de Gesincourt
+11 c_a_treasure_sac @Florian de Gesincourt

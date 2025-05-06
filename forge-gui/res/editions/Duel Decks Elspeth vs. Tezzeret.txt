@@ -87,5 +87,4 @@ ScryfallCode=DDF
 79 L Island @Chippy
 
 [tokens]
-w_1_1_soldier
-c_1_1_a_pentavite_flying
+1 w_1_1_soldier @Paolo Parente

@@ -455,37 +455,37 @@ ScryfallCode=NCC
 447 R Windbrisk Heights @Omar Rayyan
 
 [tokens]
-b_2_2_zombie
-b_x_x_demon_flying
-c_0_1_eldrazi_spawn_sac
-c_10_10_eldrazi
-c_1_1_a_thopter_flying
-c_a_clue_draw
-c_a_food_sac
-g_0_1_plant
-g_1_1_elf_warrior
-g_1_1_insect
-g_1_1_ooze
-g_1_1_saproling
-g_1_2_spider_reach
-g_2_2_ooze_mitotic
-g_3_3_beast
-g_3_3_elephant
-g_5_5_wurm
-g_x_x_treefolk
-lightning_rager
-r_0_1_elemental_rekindling_phoenix
-r_1_1_devil_burn
-r_3_3_ogre
-rw_1_1_soldier_haste
-u_1_1_faerie_flying
-u_1_1_squid_islandwalk
-u_1_1_tentacle
-u_2_2_drake_flying
-ur_5_5_elemental_flying
-w_0_1_goat
-w_1_1_human
-w_1_1_human_soldier
-w_1_1_soldier_lifelink
-w_2_2_cat_beast
-w_4_4_elemental_flying
+1 c_10_10_eldrazi @Jack Wang
+2 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+4 w_2_2_cat_beast @Bayard Wu
+5 w_4_4_elemental_flying @Svetlin Velinov
+6 w_0_1_goat @John Thacker
+7 w_1_1_human @Ben Maier
+8 w_1_1_human_soldier @Eric Deschamps
+9 w_1_1_soldier_lifelink @John Severin Brassell
+10 u_2_2_drake_flying @Svetlin Velinov
+11 u_1_1_faerie_flying @Irina Nordsol
+12 u_1_1_squid_islandwalk @Jack Wang
+13 u_1_1_tentacle @Dan Murayama Scott
+15 b_x_x_demon_flying @Evan Shipard
+16 b_2_2_zombie @Paul Scott Canavan
+17 r_1_1_devil_burn @Kev Walker
+18 r_0_1_elemental_rekindling_phoenix @Jason Rainville
+19 lightning_rager @Svetlin Velinov
+20 r_3_3_ogre @Paul Bonner
+21 g_3_3_beast @Jesper Ejsing
+22 g_3_3_elephant @Lars Grant-West
+23 g_1_1_elf_warrior @William O'Connor
+24 g_1_1_insect @Jakub Kasper
+25 g_1_1_ooze @Raymond Swanland
+26 g_2_2_ooze_mitotic @Raymond Swanland
+27 g_0_1_plant @Daren Bader
+28 g_1_1_saproling @Joseph Meehan
+29 g_1_2_spider_reach @Sam Rowan
+30 g_x_x_treefolk @Filip Burburan
+31 g_5_5_wurm @Slawomir Maniak
+32 ur_5_5_elemental_flying @Randy Gallegos
+33 rw_1_1_soldier_haste @David Palumbo
+34 c_a_clue_draw @Randy Vargas
+35 c_a_food_sac @Steve Prescott
+36 c_1_1_a_thopter_flying @Richard Wright

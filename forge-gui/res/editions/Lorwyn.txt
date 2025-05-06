@@ -314,15 +314,15 @@ ScryfallCode=LRW
 301 L Forest @Darrell Riche
 
 [tokens]
-c_1_1_shapeshifter_changeling
-w_x_x_avatar_life_total
-w_4_4_elemental_flying
-w_1_1_kithkin_soldier
-u_1_1_merfolk_wizard
-b_1_1_goblin_rogue
-r_3_1_elemental_shaman
-r_3_1_elemental_shaman_haste
-g_3_3_beast
-g_4_4_elemental
-g_1_1_elf_warrior
-g_2_2_wolf
+1 w_x_x_avatar_life_total @Vance Kovacs
+2 w_4_4_elemental_flying @Anthony S. Waters
+3 w_1_1_kithkin_soldier @Greg Hildebrandt
+4 u_1_1_merfolk_wizard @Mark Poole
+5 b_1_1_goblin_rogue @Richard Sardinha
+6 r_3_1_elemental_shaman @Jim Pavelec
+7 r_3_1_elemental_shaman_haste @Jim Pavelec
+7 g_3_3_beast @John Donahue
+8 g_4_4_elemental @Brandon Kitkouski
+9 g_1_1_elf_warrior @Dominick Domingo
+10 g_2_2_wolf @Pete Venters
+11 c_1_1_shapeshifter_changeling @Franz Vohwinkel

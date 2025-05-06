@@ -1,7 +1,7 @@
 [metadata]
 Code=CM2
 Date=2018-06-08
-Name=Commander Anthology Vol. II
+Name=Commander Anthology Volume II
 Type=Commander
 ScryfallCode=CM2
 
@@ -320,20 +320,20 @@ ScryfallCode=CM2
 312 L Forest @Anthony S. Waters
 
 [tokens]
-tuktuk_the_returned
-c_1_1_shapeshifter_changeling
-w_1_1_bird_flying
-w_0_1_goat
-w_2_2_knight_first_strike
-w_1_1_spirit_flying
-b_0_0_phyrexian_germ
-b_2_2_zombie
-r_3_1_elemental_shaman_haste
-r_1_1_goblin
-g_1_1_saproling
-c_1_1_a_myr
-c_1_1_a_phyrexian_myr
-c_1_1_a_pentavite_flying
-c_1_1_a_triskelavite_flying_ammo
-c_3_3_a_phyrexian_wurm_deathtouch
-c_3_3_a_phyrexian_wurm_lifelink
+1 c_1_1_shapeshifter_changeling @Franz Vohwinkel
+2 w_1_1_bird_flying @Winona Nelson
+3 w_0_1_goat @Adam Paquette
+4 w_2_2_knight_first_strike @Hideaki Takamura
+5 w_1_1_spirit_flying @Mike Sass
+6 b_0_0_phyrexian_germ @Igor Kieryluk
+7 b_2_2_zombie @Bud Cook
+8 r_3_1_elemental_shaman_haste @Jim Pavelec
+9 r_1_1_goblin @Dave Kendall
+10 lightning_rager @Svetlin Velinov
+11 g_1_1_saproling @Brad Rigney
+12 c_1_1_a_myr @Ryan Pancoast
+13 c_1_1_a_pentavite_flying @Greg Staples
+14 c_1_1_a_triskelavite_flying_ammo @Mark Zug
+15 tuktuk_the_returned @Franz Vohwinkel
+16 c_3_3_a_phyrexian_wurm_deathtouch @Raymond Swanland
+17 c_3_3_a_phyrexian_wurm_lifelink @Raymond Swanland

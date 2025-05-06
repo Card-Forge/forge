@@ -1,8 +1,8 @@
 Name:Harmonious Emergence
 ManaCost:3 G
 Types:Enchantment Aura
-K:Enchant land you control
-A:SP$ Attach | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | AILogic$ Animate
+K:Enchant:Land.YouCtrl:Land you control
+SVar:AttachAILogic:Animate
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddType$ Creature & Spirit | SetColor$ Green | SetPower$ 4 | SetToughness$ 5 | AddKeyword$ Vigilance & Haste | Description$ Enchanted land is a 4/5 green Spirit creature with vigilance and haste. It's still a land.
 R:Event$ Destroy | ValidCard$ Card.EnchantedBy | ReplaceWith$ HarmoniousEgress | Description$ If enchanted land would be destroyed, instead sacrifice CARDNAME and that land gains indestructible until end of turn.
 SVar:HarmoniousEgress:DB$ Sacrifice | SubAbility$ DBPump

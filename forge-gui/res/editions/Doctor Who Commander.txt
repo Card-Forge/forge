@@ -1173,32 +1173,32 @@ ScryfallCode=WHO
 1165 L Forest @Svetlin Velinov
 
 [tokens]
-b_2_2_a_alien_angel_firststrike_vigilance
-b_2_2_human_rogue
-b_3_3_a_dalek_menace
-c_a_clue_draw
-c_a_clue_draw
-c_a_clue_draw
-c_a_food_sac
-c_a_food_sac
-c_a_food_sac
-c_a_treasure_sac
-c_a_treasure_sac
-c_a_treasure_sac
-c_a_treasure_sac
-g_2_2_alien_salamander_islandwalk
-g_3_3_beast
-g_3_3_mutant_deathtouch
-gw_1_1_alien_insect_flying
-mark_of_the_rani
-r_2_2_alien_warrior
-rw_2_2_dinosaur_flying_haste
-u_1_1_fish
-w_1_1_human_doctor_reduce
-w_1_1_human_noble_vanishing_prevention
-w_1_1_human_ward
-w_1_1_soldier
-w_1_1_warrior
-w_2_2_alien
-w_2_2_horse_horsemanship
-w_4_4_alien_rhino
+2 w_2_2_alien @John Tedrick
+3 w_4_4_alien_rhino @Svetlin Velinov
+4 w_2_2_horse_horsemanship @Anton Solovianchyk
+6 w_1_1_human_doctor_reduce @Ekaterina Burmak
+7 w_1_1_human_noble_vanishing_prevention @Ekaterina Burmak
+8 w_1_1_human_ward @Ekaterina Burmak
+8 w_1_1_soldier @Thanh Tuấn
+9 w_1_1_warrior @Kieran Yanner
+10 u_1_1_fish @Svetlin Velinov
+11 b_2_2_a_alien_angel_firststrike_vigilance @Yuliya Litvinova
+12 b_3_3_a_dalek_menace @David Astruga
+13 b_2_2_human_rogue @David Astruga
+14 r_2_2_alien_warrior @Nino Is
+15 mark_of_the_rani @Colin Boyer
+16 g_2_2_alien_salamander_islandwalk @Miklós Ligeti
+17 g_3_3_beast @Helge C. Balzer
+18 g_3_3_mutant_deathtouch @Helge C. Balzer
+19 gw_1_1_alien_insect_flying @Ivan Dedov
+20 rw_2_2_dinosaur_flying_haste @Narendra Bintara Adi
+21 c_a_clue_draw @Pavel Kolomeyets
+22 c_a_clue_draw @Pavel Kolomeyets
+23 c_a_clue_draw @Pavel Kolomeyets
+25 c_a_food_sac @David Auden Nash
+26 c_a_food_sac @David Auden Nash
+27 c_a_food_sac @David Auden Nash
+28 c_a_treasure_sac @Justyna Dura
+29 c_a_treasure_sac @Justyna Dura
+30 c_a_treasure_sac @Justyna Dura
+31 c_a_treasure_sac @Justyna Dura

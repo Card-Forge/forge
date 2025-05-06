@@ -10,6 +10,7 @@ FatPack=9
 FatPackExtraSlots=40 BasicLands
 ChaosDraftThemes=MIRRODIN
 ScryfallCode=MBS
+TokenFallbackCode=SOM
 
 [cards]
 1 U Accorder Paladin @Kekai Kotaki
@@ -169,12 +170,8 @@ ScryfallCode=MBS
 155 L Forest @Mark Tedin
 
 [tokens]
-w_2_2_cat
-w_1_1_soldier
-b_0_0_phyrexian_germ
-b_2_2_phyrexian_zombie
-c_9_9_a_golem
-c_x_x_a_phyrexian_horror
-c_1_1_a_myr
-c_1_1_a_phyrexian_myr
-c_1_1_a_thopter_flying
+1 b_0_0_phyrexian_germ @Igor Kieryluk
+2 b_2_2_phyrexian_zombie @Dave Kendall
+3 c_9_9_a_golem @Svetlin Velinov
+4 c_x_x_a_phyrexian_horror @Scott Chou
+5 c_1_1_a_thopter_flying @Volkan Baǵa

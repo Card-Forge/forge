@@ -297,17 +297,17 @@ ScryfallCode=DOM
 280 R Firesong and Sunspeaker @Zoltan Boros
 
 [tokens]
-karox_bladewing
-w_2_2_knight_vigilance
-w_2_2_knight_vigilance
-w_1_1_soldier
-b_0_1_cleric
-b_6_6_demon_flying_trample_aristocrat
-b_x_x_nightmare_horror
-b_2_2_zombie_knight_menace
-r_3_1_elemental_trample_haste
-r_1_1_goblin
-g_1_1_saproling
-g_1_1_saproling
-g_1_1_saproling
-c_0_0_a_construct_total_artifacts
+1 w_2_2_knight_vigilance @Dan Murayama Scott
+2 w_2_2_knight_vigilance @Dan Murayama Scott
+3 w_1_1_soldier @Jakub Kasper
+4 b_0_1_cleric @Seb McKinnon
+5 b_2_2_zombie_knight_menace @Even Amundsen
+6 b_x_x_nightmare_horror @Aaron Miller
+7 b_6_6_demon_flying_trample_aristocrat @Seb McKinnon
+8 r_3_1_elemental_trample_haste @Victor Adame Minguez
+9 r_1_1_goblin @Kev Walker
+10 karox_bladewing @XiaoDi Jin
+11 g_1_1_saproling @Mike Burns
+11 g_1_1_saproling @Mike Burns
+11 g_1_1_saproling @Mike Burns
+14 c_0_0_a_construct_total_artifacts @Victor Adame Minguez

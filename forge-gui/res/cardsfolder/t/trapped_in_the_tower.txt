@@ -1,7 +1,7 @@
 Name:Trapped in the Tower
 ManaCost:1 W
 Types:Enchantment Aura
-K:Enchant creature without flying
-A:SP$ Attach | ValidTgts$ Creature.withoutFlying | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
+K:Enchant:Creature.withoutFlying:creature without flying
+SVar:AttachAILogic:Curse
+S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
 Oracle:Enchant creature without flying\nEnchanted creature can't attack or block, and its activated abilities can't be activated.

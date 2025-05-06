@@ -15,15 +15,12 @@ import java.util.Set;
 
 public class StaticAbilityMustAttack {
 
-    static String MODE_Creature = "MustAttack";
-    static String MODE_Player = "PlayerMustAttack";
-
     public static List<GameEntity> entitiesMustAttack(final Card attacker) {
         final List<GameEntity> entityList = new ArrayList<>();
         final Game game = attacker.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE_Creature)) {
+                if (!stAb.checkConditions(StaticAbilityMode.MustAttack)) {
                     continue;
                 }
                 if (stAb.matchesValidParam("ValidCreature", attacker)) {
@@ -53,7 +50,7 @@ public class StaticAbilityMustAttack {
         List<Set<GameEntity>> defToAtt = new ArrayList<>();
         for (final Card ca : attackingPlayer.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE_Player)) {
+                if (!stAb.checkConditions(StaticAbilityMode.PlayerMustAttack)) {
                     continue;
                 }
                 if (!stAb.matchesValidParam("ValidPlayer", attackingPlayer)) {

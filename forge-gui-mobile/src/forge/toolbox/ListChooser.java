@@ -201,11 +201,8 @@ public class ListChooser<T> extends FContainer {
 
     /**
      * Shows the dialog and returns after the dialog was closed.
-     *
-     * @param index0 index to select when shown
-     * @return a boolean.
      */
-    public void show(final T item, final boolean selectMax) {
+    public void show(final Collection<T> item, final boolean selectMax) {
         if (called) {
             throw new IllegalStateException("Already shown");
         }
@@ -226,7 +223,7 @@ public class ListChooser<T> extends FContainer {
             }
         }
         else {
-            lstChoices.setSelectedItem(item);
+            lstChoices.setSelectedItems(item);
         }
         optionPane.show();
     }

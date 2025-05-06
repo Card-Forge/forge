@@ -270,5 +270,5 @@ ScryfallCode=MUL
 2 Zirda, the Dawnwaker|MUL
 
 [tokens]
-r_3_1_elemental_trample_haste
-u_2_1_a_phyrexian_myr
+1 u_2_1_a_phyrexian_myr @Samuel Perin
+2 r_3_1_elemental_trample_haste @Victor Adame Minguez

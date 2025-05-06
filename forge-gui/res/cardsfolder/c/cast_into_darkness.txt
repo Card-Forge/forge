@@ -1,7 +1,8 @@
 Name:Cast into Darkness
 ManaCost:1 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature gets -2/-0 and can't block.
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | Description$ Enchanted creature gets -2/-0 and can't block.
+S:Mode$ CantBlock | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature gets -2/-0 and can't block.
 Oracle:Enchant creature\nEnchanted creature gets -2/-0 and can't block.

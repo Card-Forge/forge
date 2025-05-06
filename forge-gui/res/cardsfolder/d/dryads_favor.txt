@@ -1,7 +1,7 @@
 Name:Dryad's Favor
 ManaCost:G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Landwalk:Forest | Description$ Enchanted creature has forestwalk. (It can't be blocked as long as defending player controls a Forest.)
 Oracle:Enchant creature\nEnchanted creature has forestwalk. (It can't be blocked as long as defending player controls a Forest.)

@@ -77,7 +77,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     private KeywordCollection cachedKeywords = new KeywordCollection();
 
     private CardRarity rarity = CardRarity.Unknown;
-    private String setCode = CardEdition.UNKNOWN.getCode();
+    private String setCode = CardEdition.UNKNOWN_CODE;
 
     private final CardStateView view;
     private final Card card;
@@ -566,11 +566,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
     @Override
     public final Map<String, String> getSVars() {
-        return sVars;
-    }
-
-    @Override
-    public Map<String, String> getDirectSVars() {
         return sVars;
     }
 

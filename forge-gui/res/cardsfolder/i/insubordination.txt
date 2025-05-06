@@ -1,8 +1,8 @@
 Name:Insubordination
 ManaCost:B B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the end step of enchanted creature's controller, CARDNAME deals 2 damage to that player unless that creature attacked this turn.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionPresent$ Card.EnchantedBy+!attackedThisTurn
 Oracle:Enchant creature\nAt the beginning of the end step of enchanted creature's controller, Insubordination deals 2 damage to that player unless that creature attacked this turn.

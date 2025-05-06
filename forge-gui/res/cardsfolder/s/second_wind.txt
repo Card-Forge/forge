@@ -1,8 +1,8 @@
 Name:Second Wind
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 A:AB$ Tap | Cost$ T | Defined$ Enchanted | SpellDescription$ Tap enchanted creature.
 A:AB$ Untap | Cost$ T | Defined$ Enchanted | SpellDescription$ Untap enchanted creature.
 AI:RemoveDeck:All

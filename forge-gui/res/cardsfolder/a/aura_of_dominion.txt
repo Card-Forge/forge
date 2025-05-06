@@ -1,7 +1,7 @@
 Name:Aura of Dominion
 ManaCost:U U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 A:AB$ Untap | Cost$ 1 tapXType<1/Creature> | Defined$ Enchanted | CostDesc$ {1}, Tap an untapped creature you control: | SpellDescription$ Untap enchanted creature.
 Oracle:Enchant creature\n{1}, Tap an untapped creature you control: Untap enchanted creature.

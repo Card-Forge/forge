@@ -339,17 +339,17 @@ ScryfallCode=AFC
 331 U Lightning Greaves @Jeremy Jarvis
 
 [tokens]
-b_1_1_rat
-c_1_1_a_servo
-c_1_1_a_thopter_flying
-c_a_clue_draw
-g_1_1_saproling
-g_3_3_beast
-r_5_5_dragon_flying
-rg_5_4_dragon_spirit_damagesac
-u_1_1_illusion_other_illusions
-w_2_2_knight_vigilance
-w_4_4_angel_flying
+1 w_4_4_angel_flying @Magali Villeneuve
+2 w_2_2_knight_vigilance @Dan Murayama Scott
+3 u_1_1_illusion_other_illusions @Ilse Gort
+5 b_1_1_rat @Mike Bierek
+6 r_5_5_dragon_flying @Alex Konstad
+7 g_3_3_beast @John Donahue
+8 g_1_1_saproling @Mike Burns
+9 rg_5_4_dragon_spirit_damagesac @Milivoj Ćeran
+10 c_a_clue_draw @Raoul Vitale
+11 c_1_1_a_servo @Igor Kieryluk
+12 c_1_1_a_thopter_flying @Richard Wright
 
 [other]
 eternalize_champion_of_wits

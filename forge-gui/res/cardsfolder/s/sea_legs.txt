@@ -2,8 +2,9 @@ Name:Sea Legs
 ManaCost:U
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ SpecificCard | AIValid$ Pirate
+K:Enchant:Creature
+SVar:AttachAILogic:SpecificCard
+SVar:AttachAIValid:Pirate
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Pirate | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2 as long as it's a Pirate. Otherwise, it gets -2/-0.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonPirate | AddPower$ -2
 DeckNeeds:Type$Pirate

@@ -1,8 +1,8 @@
 Name:Pooling Venom
 ManaCost:1 B
 Types:Enchantment Aura
-K:Enchant land
-A:SP$ Attach | ValidTgts$ Land | AILogic$ Curse
+K:Enchant:Land
+SVar:AttachAILogic:Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ Whenever enchanted land becomes tapped, its controller loses 2 life.
 SVar:TrigLose:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2
 A:AB$ Destroy | Cost$ 3 B | Defined$ Enchanted | SpellDescription$ Destroy enchanted land.

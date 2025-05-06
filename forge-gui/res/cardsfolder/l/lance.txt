@@ -1,8 +1,8 @@
 Name:Lance
 ManaCost:W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
 DeckHas:Keyword$FirstStrike
 Oracle:Enchant creature\nEnchanted creature has first strike.

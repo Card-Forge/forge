@@ -866,15 +866,15 @@ A103 R A-Orcish Bowmasters @Maxim Kostin
 A246 M A-The One Ring @Veli Nyström
 
 [tokens]
-b_0_0_orc_army
-b_0_0_orc_army
-ballistic_boulder
-c_a_food_sac
-c_a_food_sac
-c_a_food_sac
-c_a_treasure_sac
-smaug
-u_1_1_tentacle
-w_1_1_human_soldier
-w_1_1_human_soldier
-w_1_1_spirit_flying
+1 w_1_1_human_soldier @Anastasia Balakchina
+1 w_1_1_human_soldier @Anastasia Balakchina
+3 w_1_1_spirit_flying @Nino Is
+4 u_1_1_tentacle @Chris Cold
+5 b_0_0_orc_army @Veli Nyström
+5 b_0_0_orc_army @Veli Nyström
+7 smaug @Jarel Threat
+8 ballistic_boulder @Alexander Forssberg
+9 c_a_food_sac @Randy Gallegos
+10 c_a_food_sac @Randy Gallegos
+11 c_a_food_sac @Randy Gallegos
+12 c_a_treasure_sac @Valera Lutfullina

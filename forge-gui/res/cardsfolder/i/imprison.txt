@@ -1,8 +1,8 @@
 Name:Imprison
 ManaCost:B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ AbilityCast | ValidCard$ Creature.EnchantedBy | ValidSA$ SpellAbility.nonManaAbility+hasTapCost | TriggerZones$ Battlefield | Execute$ TrigDestroy1 | TriggerDescription$ Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, you may pay {1}. If you do, counter that ability. If you don't, destroy CARDNAME.
 SVar:TrigDestroy1:DB$ Destroy | Defined$ Self | UnlessCost$ 1 | UnlessPayer$ You | UnlessResolveSubs$ WhenPaid | SubAbility$ DBCounter
 SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility

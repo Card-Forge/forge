@@ -42,7 +42,8 @@ import java.util.stream.Stream;
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
     public final static char NameSetSeparator = '|';
-    public final static String colorIDPrefix = "#";
+    public final static String FlagPrefix = "#";
+    public static final String FlagSeparator = "\t";
     private final String exlcudedCardName = "Concentrate";
     private final String exlcudedCardSet = "DS0";
 
@@ -93,19 +94,19 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public int artIndex;
         public boolean isFoil;
         public String collectorNumber;
-        public Set<String> colorID;
+        public Map<String, String> flags;
 
         private CardRequest(String name, String edition, int artIndex, boolean isFoil, String collectorNumber) {
             this(name, edition, artIndex, isFoil, collectorNumber, null);
         }
 
-        private CardRequest(String name, String edition, int artIndex, boolean isFoil, String collectorNumber, Set<String> colorID) {
+        private CardRequest(String name, String edition, int artIndex, boolean isFoil, String collectorNumber, Map<String, String> flags) {
             cardName = name;
             this.edition = edition;
             this.artIndex = artIndex;
             this.isFoil = isFoil;
             this.collectorNumber = collectorNumber;
-            this.colorID = colorID;
+            this.flags = flags;
         }
 
         public static boolean isFoilCardName(final String cardName){
@@ -120,7 +121,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         public static String compose(String cardName, String setCode) {
-            setCode = setCode != null ? setCode : "";
+            if(setCode == null || StringUtils.isBlank(setCode) || setCode.equals(CardEdition.UNKNOWN_CODE))
+                setCode = "";
             cardName = cardName != null ? cardName : "";
             if (cardName.indexOf(NameSetSeparator) != -1)
                 // If cardName is another RequestString, just get card name and forget about the rest.
@@ -134,16 +136,36 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return requestInfo + NameSetSeparator + artIndex;
         }
 
-        public static String compose(String cardName, String setCode, int artIndex, Set<String> colorID) {
-            String requestInfo = compose(cardName, setCode);
-            artIndex = Math.max(artIndex, IPaperCard.DEFAULT_ART_INDEX);
-            String cid = colorID == null ? "" : NameSetSeparator +
-                colorID.toString().replace("[", colorIDPrefix).replace(", ", colorIDPrefix).replace("]", "");
-            return requestInfo + NameSetSeparator + artIndex + cid;
-        }
-
         public static String compose(String cardName, String setCode, String collectorNumber) {
             String requestInfo = compose(cardName, setCode);
+            // CollectorNumber will be wrapped in square brackets
+            collectorNumber = preprocessCollectorNumber(collectorNumber);
+            return requestInfo + NameSetSeparator + collectorNumber;
+        }
+
+        public static String compose(String cardName, String setCode, int artIndex, Map<String, String> flags) {
+            String requestInfo = compose(cardName, setCode);
+            artIndex = Math.max(artIndex, IPaperCard.DEFAULT_ART_INDEX);
+            if(flags == null)
+                return requestInfo + NameSetSeparator + artIndex;
+            return requestInfo + NameSetSeparator + artIndex + getFlagSegment(flags);
+        }
+
+        public static String compose(String cardName, String setCode, String collectorNumber, Map<String, String> flags) {
+            String requestInfo = compose(cardName, setCode);
+            collectorNumber = preprocessCollectorNumber(collectorNumber);
+            if(flags == null || flags.isEmpty())
+                return requestInfo + NameSetSeparator + collectorNumber;
+            return requestInfo + NameSetSeparator + collectorNumber + getFlagSegment(flags);
+        }
+
+        public static String compose(PaperCard card) {
+            String name = compose(card.getName(), card.isFoil());
+            return compose(name, card.getEdition(), card.getCollectorNumber(), card.getMarkedFlags().toMap());
+        }
+
+        public static String compose(String cardName, String setCode, int artIndex, String collectorNumber) {
+            String requestInfo = compose(cardName, setCode, artIndex);
             // CollectorNumber will be wrapped in square brackets
             collectorNumber = preprocessCollectorNumber(collectorNumber);
             return requestInfo + NameSetSeparator + collectorNumber;
@@ -160,19 +182,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return collectorNumber;
         }
 
-        public static String compose(String cardName, String setCode, int artIndex, String collectorNumber) {
-            String requestInfo = compose(cardName, setCode, artIndex);
-            // CollectorNumber will be wrapped in square brackets
-            collectorNumber = preprocessCollectorNumber(collectorNumber);
-            return requestInfo + NameSetSeparator + collectorNumber;
+        private static String getFlagSegment(Map<String, String> flags) {
+            if(flags == null)
+                return "";
+            String flagText = flags.entrySet().stream()
+                    .map(e -> e.getKey() + "=" + e.getValue())
+                    .collect(Collectors.joining(FlagSeparator));
+            return NameSetSeparator + FlagPrefix + "{" + flagText + "}";
         }
 
         private static boolean isCollectorNumber(String s) {
             return s.startsWith("[") && s.endsWith("]");
         }
 
-        private static boolean isColorIDString(String s) {
-            return s.startsWith(colorIDPrefix);
+        private static boolean isFlagSegment(String s) {
+            return s.startsWith(FlagPrefix);
         }
 
         private static boolean isArtIndex(String s) {
@@ -201,44 +225,36 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return null;
 
             String[] info = TextUtil.split(reqInfo, NameSetSeparator);
-            int setPos;
-            int artPos;
-            int cNrPos;
-            int clrPos;
-            if (info.length >= 4) { // name|set|artIndex|[collNr]
-                setPos = isSetCode(info[1]) ? 1 : -1;
-                artPos = isArtIndex(info[2]) ? 2 : -1;
-                cNrPos = isCollectorNumber(info[3]) ? 3 : -1;
-                int pos = cNrPos > 0 ? -1 : 3;
-                clrPos = pos > 0 ? isColorIDString(info[pos]) ? pos : -1 : -1;
-            } else if (info.length == 3) { // name|set|artIndex (or CollNr)
-                setPos = isSetCode(info[1]) ? 1 : -1;
-                artPos = isArtIndex(info[2]) ? 2 : -1;
-                cNrPos = isCollectorNumber(info[2]) ? 2 : -1;
-                int pos = cNrPos > 0 ? -1 : 2;
-                clrPos = pos > 0 ? isColorIDString(info[pos]) ? pos : -1 : -1;
-            } else if (info.length == 2) { // name|set (or artIndex, even if not possible via compose)
-                setPos = isSetCode(info[1]) ? 1 : -1;
-                artPos = isArtIndex(info[1]) ? 1 : -1;
-                cNrPos = -1;
-                clrPos = -1;
-            } else {
-                setPos = -1;
-                artPos = -1;
-                cNrPos = -1;
-                clrPos = -1;
-            }
+            int index = 1;
             String cardName = info[0];
             boolean isFoil = false;
+            int artIndex = IPaperCard.NO_ART_INDEX;
+            String setCode = null;
+            String collectorNumber = IPaperCard.NO_COLLECTOR_NUMBER;
+            Map<String, String> flags = null;
             if (isFoilCardName(cardName)) {
                 cardName = cardName.substring(0, cardName.length() - foilSuffix.length());
                 isFoil = true;
             }
-            int artIndex = artPos > 0 ? Integer.parseInt(info[artPos]) : IPaperCard.NO_ART_INDEX;  // default: no art index
-            String collectorNumber = cNrPos > 0 ? info[cNrPos].substring(1, info[cNrPos].length() - 1) : IPaperCard.NO_COLLECTOR_NUMBER;
-            String setCode = setPos > 0 ? info[setPos] : null;
-            Set<String> colorID = clrPos > 0 ? Arrays.stream(info[clrPos].substring(1).split(colorIDPrefix)).collect(Collectors.toSet()) : null;
-            if (setCode != null && setCode.equals(CardEdition.UNKNOWN.getCode())) {  // ???
+
+            if(info.length > index && isSetCode(info[index])) {
+                setCode = info[index];
+                index++;
+            }
+            if(info.length > index && isArtIndex(info[index])) {
+                artIndex = Integer.parseInt(info[index]);
+                index++;
+            }
+            if(info.length > index && isCollectorNumber(info[index])) {
+                collectorNumber = info[index].substring(1, info[index].length() - 1);
+                index++;
+            }
+            if (info.length > index && isFlagSegment(info[index])) {
+                String flagText = info[index].substring(FlagPrefix.length());
+                flags = parseRequestFlags(flagText);
+            }
+
+            if (CardEdition.UNKNOWN_CODE.equals(setCode)) {  // ???
                 setCode = null;
             }
             if (setCode == null) {
@@ -253,7 +269,29 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             // finally, check whether any between artIndex and CollectorNumber has been set
             if (collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) && artIndex == IPaperCard.NO_ART_INDEX)
                 artIndex = IPaperCard.DEFAULT_ART_INDEX;
-            return new CardRequest(cardName, setCode, artIndex, isFoil, collectorNumber, colorID);
+            return new CardRequest(cardName, setCode, artIndex, isFoil, collectorNumber, flags);
+        }
+
+        private static Map<String, String> parseRequestFlags(String flagText) {
+            flagText = flagText.trim();
+            if(flagText.isEmpty())
+                return null;
+            if(!flagText.startsWith("{")) {
+                //Legacy form for marked colors. They'll be of the form "W#B#R"
+                Map<String, String> flags = new HashMap<>();
+                String normalizedColorString = ColorSet.fromNames(flagText.split(FlagPrefix)).toString();
+                flags.put("markedColors", String.join("", normalizedColorString));
+                return flags;
+            }
+            flagText = flagText.substring(1, flagText.length() - 1); //Trim the braces.
+            //List of flags, a series of "key=value" text broken up by tabs.
+            return Arrays.stream(flagText.split(FlagSeparator))
+                    .map(f -> f.split("=", 2))
+                    .filter(f -> f.length > 0)
+                    .collect(Collectors.toMap(
+                            entry -> entry[0],
+                            entry -> entry.length > 1 ? entry[1] : "true" //If there's no '=' in the entry, treat it as a boolean flag.
+                    ));
         }
     }
 
@@ -406,7 +444,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                         addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
                     } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
                         System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
-                        addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
+                        addCard(new PaperCard(cr, CardEdition.UNKNOWN_CODE, CardRarity.Special));
                     }
                 } else {
                     System.err.println("The custom card " + cr.getName() + " was not assigned to any set. Adding it to custom USER set, and will try to load custom art from USER edition.");
@@ -592,15 +630,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
-    public PaperCard getCard(final String cardName, String setCode, int artIndex, String collectorNumber) {
-        String reqInfo = CardRequest.compose(cardName, setCode, artIndex, collectorNumber);
+    public PaperCard getCard(final String cardName, String setCode, int artIndex, Map<String, String> flags) {
+        String reqInfo = CardRequest.compose(cardName, setCode, artIndex, flags);
         CardRequest request = CardRequest.fromString(reqInfo);
         return tryGetCard(request);
     }
 
     @Override
-    public PaperCard getCard(final String cardName, String setCode, int artIndex, Set<String> colorID) {
-        String reqInfo = CardRequest.compose(cardName, setCode, artIndex, colorID);
+    public PaperCard getCard(final String cardName, String setCode, String collectorNumber, Map<String, String> flags) {
+        String reqInfo = CardRequest.compose(cardName, setCode, collectorNumber, flags);
         CardRequest request = CardRequest.fromString(reqInfo);
         return tryGetCard(request);
     }
@@ -611,14 +649,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return null;
         // 1. First off, try using all possible search parameters, to narrow down the actual cards looked for.
         String reqEditionCode = request.edition;
-        if (reqEditionCode != null && reqEditionCode.length() > 0) {
+        if (reqEditionCode != null && !reqEditionCode.isEmpty()) {
             // This get is robust even against expansion aliases (e.g. TE and TMP both valid for Tempest) -
             // MOST of the extensions have two short codes, 141 out of 221 (so far)
             // ALSO: Set Code are always UpperCase
             CardEdition edition = editions.get(reqEditionCode.toUpperCase());
 
-            return this.getCardFromSet(request.cardName, edition, request.artIndex,
-                    request.collectorNumber, request.isFoil, request.colorID);
+            PaperCard cardFromSet = this.getCardFromSet(request.cardName, edition, request.artIndex, request.collectorNumber, request.isFoil);
+            if(cardFromSet != null && request.flags != null)
+                cardFromSet = cardFromSet.copyWithFlags(request.flags);
+
+            return cardFromSet;
         }
 
         // 2. Card lookup in edition with specified filter didn't work.
@@ -661,11 +702,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, String collectorNumber, boolean isFoil) {
-        return getCardFromSet(cardName, edition, artIndex, collectorNumber, isFoil, null);
-    }
-
-    @Override
-    public PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, String collectorNumber, boolean isFoil, Set<String> colorID) {
         if (edition == null || cardName == null)  // preview cards
             return null;  // No cards will be returned
 
@@ -674,18 +710,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         cardName = cardNameRequest.cardName;
         isFoil = isFoil || cardNameRequest.isFoil;
 
-        List<PaperCard> candidates = getAllCards(cardName, c -> {
-            boolean artIndexFilter = true;
-            boolean collectorNumberFilter = true;
-            boolean setFilter = c.getEdition().equalsIgnoreCase(edition.getCode()) ||
-                    c.getEdition().equalsIgnoreCase(edition.getCode2());
-            if (artIndex > 0)
-                artIndexFilter = (c.getArtIndex() == artIndex);
-            if ((collectorNumber != null) && (collectorNumber.length() > 0)
-                    && !(collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)))
-                collectorNumberFilter = (c.getCollectorNumber().equals(collectorNumber));
-            return setFilter && artIndexFilter && collectorNumberFilter;
-        });
+        String code1 = edition.getCode(), code2 = edition.getCode2();
+
+        Predicate<PaperCard> filter = (c) -> {
+            String ed = c.getEdition();
+            return ed.equalsIgnoreCase(code1) || ed.equalsIgnoreCase(code2);
+        };
+        if (artIndex > 0)
+            filter = filter.and((c) -> artIndex == c.getArtIndex());
+        if (collectorNumber != null && !collectorNumber.isEmpty() && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER))
+            filter = filter.and((c) -> collectorNumber.equals(c.getCollectorNumber()));
+
+        List<PaperCard> candidates = getAllCards(cardName, filter);
         if (candidates.isEmpty())
             return null;
 
@@ -699,7 +735,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         while (!candidate.hasImage() && candidatesIterator.hasNext())
             candidate = candidatesIterator.next();
         candidate = candidate.hasImage() ? candidate : firstCandidate;
-        return isFoil ? candidate.getFoiled().getColorIDVersion(colorID) : candidate.getColorIDVersion(colorID);
+        return isFoil ? candidate.getFoiled() : candidate;
     }
 
     /*
@@ -740,11 +776,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public PaperCard getCardFromEditions(final String cardInfo, final CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter) {
         return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditions(final String cardInfo, final CardArtPreference artPreference, int artIndex, Set<String> colorID) {
-        return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, null, false, null, colorID);
     }
 
     /*
@@ -820,12 +851,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     private PaperCard tryToGetCardFromEditions(String cardInfo, CardArtPreference artPreference, int artIndex,
-                                               Date releaseDate, boolean releasedBeforeFlag, Predicate<PaperCard> filter){
-        return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, releaseDate, releasedBeforeFlag, filter, null);
-    }
-
-    private PaperCard tryToGetCardFromEditions(String cardInfo, CardArtPreference artPreference, int artIndex,
-                                               Date releaseDate, boolean releasedBeforeFlag, Predicate<PaperCard> filter, Set<String> colorID){
+                                               Date releaseDate, boolean releasedBeforeFlag, Predicate<PaperCard> filter) {
         if (cardInfo == null)
             return null;
         final CardRequest cr = CardRequest.fromString(cardInfo);
@@ -865,7 +891,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (PaperCard card : cards) {
             String setCode = card.getEdition();
             CardEdition ed;
-            if (setCode.equals(CardEdition.UNKNOWN.getCode()))
+            if (setCode.equals(CardEdition.UNKNOWN_CODE))
                 ed = CardEdition.UNKNOWN;
             else
                 ed = editions.get(card.getEdition());
@@ -906,7 +932,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
         candidate = candidate.hasImage() ? candidate : firstCandidate;
         //If any, we're sure that at least one candidate is always returned despite it having any image
-        return cr.isFoil ? candidate.getFoiled().getColorIDVersion(colorID) : candidate.getColorIDVersion(colorID);
+        return cr.isFoil ? candidate.getFoiled() : candidate;
     }
 
     @Override
@@ -1126,29 +1152,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 .anyMatch(rarity::equals);
     }
 
-    public StringBuilder appendCardToStringBuilder(PaperCard card, StringBuilder sb) {
-        final boolean hasBadSetInfo = card.getEdition().equals(CardEdition.UNKNOWN.getCode()) || StringUtils.isBlank(card.getEdition());
-        sb.append(card.getName());
-        if (card.isFoil()) {
-            sb.append(CardDb.foilSuffix);
-        }
-
-        if (!hasBadSetInfo) {
-            int artCount = getArtCount(card.getName(), card.getEdition(), card.getFunctionalVariant());
-            sb.append(CardDb.NameSetSeparator).append(card.getEdition());
-            if (artCount >= IPaperCard.DEFAULT_ART_INDEX) {
-                sb.append(CardDb.NameSetSeparator).append(card.getArtIndex()); // indexes start at 1 to match image file name conventions
-            }
-            if (card.getColorID() != null) {
-                sb.append(CardDb.NameSetSeparator);
-                for (String color : card.getColorID())
-                    sb.append(CardDb.colorIDPrefix).append(color);
-            }
-        }
-
-        return sb;
-    }
-
     public PaperCard createUnsupportedCard(String cardRequest) {
         CardRequest request = CardRequest.fromString(cardRequest);
         CardEdition cardEdition = CardEdition.UNKNOWN;
@@ -1250,7 +1253,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             }
             if (paperCards.isEmpty()) {
-                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
+                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN_CODE, CardRarity.Special));
             }
             // 2. add them to db
             for (PaperCard paperCard : paperCards) {

@@ -5,8 +5,8 @@ PT:7/4
 K:Menace
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChoose | TriggerDescription$ When CARDNAME dies, each player may discard their hand and draw seven cards.
 SVar:TrigChoose:DB$ GenericChoice | TempRemember$ Chooser | ShowChoice$ ExceptSelf | Defined$ Player | Choices$ Discard,No | SubAbility$ DBDiscard
-SVar:Discard:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Discard | SpellDescription$ Discard a card.
-SVar:No:DB$ Pump | SpellDescription$ Do not discard a card.
+SVar:Discard:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Discard | SpellDescription$ I will discard my hand.
+SVar:No:DB$ Pump | SpellDescription$ I will NOT discard my hand.
 SVar:DBDiscard:DB$ Discard | Mode$ Hand | Defined$ Player.NotedForDiscard | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player.NotedForDiscard | NumCards$ 7 | SubAbility$ DBClearNotes
 SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Discard

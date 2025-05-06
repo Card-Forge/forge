@@ -477,17 +477,17 @@ ScryfallCode=DMR
 457 R Counterspell @Mark Poole
 
 [tokens]
-b_2_1_cat
-b_2_2_zombie
-c_0_0_a_construct_total_artifacts
-g_0_1_sheep
-g_1_1_insect
-g_1_1_saproling
-g_1_1_squirrel
-g_2_2_cat
-g_3_3_elephant
-marit_lage
-r_1_1_goblin
-r_3_1_elemental_trample_haste
-w_1_1_bird_flying
-w_2_2_griffin_flying
+1 w_1_1_bird_flying @Allen Douglas
+2 w_2_2_griffin_flying @Johann Bodin
+3 b_2_1_cat @Daren Bader
+4 marit_lage @Leon Tukker
+5 b_2_2_zombie @Antonio José Manzanedo
+6 r_3_1_elemental_trample_haste @Victor Adame Minguez
+7 r_1_1_goblin @Thomas M. Baxa
+8 g_2_2_cat @Izzy
+9 g_3_3_elephant @Lars Grant-West
+10 g_1_1_insect @Anthony S. Waters
+11 g_1_1_saproling @Jeff Laubenstein
+12 g_0_1_sheep @Mark Brill
+13 g_1_1_squirrel @Daniel Ljunggren
+14 c_0_0_a_construct_total_artifacts @Victor Adame Minguez

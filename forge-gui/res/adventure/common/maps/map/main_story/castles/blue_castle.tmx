@@ -80,7 +80,7 @@
     <property name="dialog">[
 	{
 		&quot;name&quot;: &quot;&quot;,
-		&quot;text&quot;: &quot;You enter the gate.&quot;,
+		&quot;text&quot;: &quot;You come upon a gate.&quot;,
 		&quot;loctext&quot;: &quot;&quot;,
 		&quot;action&quot;: [
 			{ &quot;advanceMapFlag&quot;: &quot;intro&quot; }
@@ -97,11 +97,37 @@
 								&quot;op&quot;: &quot;&gt;=&quot;,
 								&quot;val&quot;: 4
 							}
-						}
+						},
+						{
+                            &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;,
+                            &quot;not&quot;: true
+                        }
 					],
 					&quot;text&quot;: &quot;Suddently, the gate dissapears right in front of your eyes, You are now free to pass.&quot;,
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(continue)&quot; } ]
 				},
+				{
+                	&quot;name&quot;: &quot;Lorthos, I've done as you asked ! It's time to end this !&quot;,
+                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
+                	&quot;condition&quot;: [
+                		{
+                			&quot;getMapFlag&quot;: {
+                				&quot;key&quot;: &quot;enemiesDefeated&quot;,
+                				&quot;op&quot;: &quot;&gt;=&quot;,
+                				&quot;val&quot;: 4
+                			}
+                		},
+                		{
+                             &quot;checkQuestFlag&quot;: &quot;Ch1BlueCastleComplete&quot;,
+                             &quot;not&quot;: true
+                        },
+                        {
+                             &quot;checkQuestFlag&quot;: &quot;mainQuest&quot;
+                        }
+                	],
+                		&quot;text&quot;: &quot;Suddently, the gate dissapears right in front of your eyes, You are now free to pass.&quot;,
+                		&quot;options&quot;: [ { &quot;name&quot;: &quot;(continue)&quot; } ]
+                },
 				{
 					&quot;name&quot;: &quot;You knock on the door&quot;,
 					&quot;condition&quot;: [ { &quot;checkMapFlag&quot;: &quot;intro&quot; } ],

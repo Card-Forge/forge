@@ -24,4 +24,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ 
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Transform
 DeckNeeds:Type$Human
-Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nHuman spells you control can't be countered\nWhenever Goldbug and at least one Human attack, draw a card and convert Goldbug.
+Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nHuman spells you control can't be countered\nWhenever Goldbug and at least one Human attack, draw a card and convert Goldbug.

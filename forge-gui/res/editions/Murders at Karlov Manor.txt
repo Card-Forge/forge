@@ -531,23 +531,23 @@ Base=Any:fromsheet("MKM prerelease promo")
 1 Field of the Dead|SPG
 
 [tokens]
-b_1_1_bat_flying
-b_2_1_skeleton
-bg_2_1_spider_menace_reach
-c_0_0_a_thopter_flying
-c_1_1_a_thopter_flying
-c_a_clue_draw
-c_a_clue_draw
-c_a_clue_draw
-c_a_clue_draw
-c_a_clue_draw
-g_0_0_ooze_trample
-g_0_1_plant
-r_1_1_goblin
-r_2_2_imp_burn_opp
-u_1_1_merfolk
-voja_fenstalker
-w_1_1_dog
-w_1_1_human
-wb_1_1_spirit_flying
-wu_2_2_detective
+1 w_1_1_dog @Alayna Danner
+2 w_1_1_human @Leesha Hannigan
+3 u_1_1_merfolk @Leesha Hannigan
+4 b_1_1_bat_flying @Tony Foti
+5 b_2_1_skeleton @Camille Alquier
+6 r_1_1_goblin @J.P. Targete
+7 r_2_2_imp_burn_opp @Caroline Gariba
+8 g_0_0_ooze_trample @Raph Lomotan
+9 g_0_1_plant @Madeline Boni
+10 wu_2_2_detective @Fay Dalton
+11 bg_2_1_spider_menace_reach @Helge C. Balzer
+12 wb_1_1_spirit_flying @Christina Kraus
+13 voja_fenstalker @Samuel Perin
+14 c_a_clue_draw @Mike Burns
+15 c_a_clue_draw @Mike Burns
+16 c_a_clue_draw @Mike Burns
+17 c_a_clue_draw @Mike Burns
+18 c_a_clue_draw @Mike Burns
+19 c_0_0_a_thopter_flying @David Sondered
+20 c_1_1_a_thopter_flying @Samuel Perin

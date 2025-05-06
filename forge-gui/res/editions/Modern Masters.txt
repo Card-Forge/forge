@@ -242,18 +242,18 @@ ScryfallCode=MMA
 229 U Vivid Meadow @Rob Alexander
 
 [tokens]
-w_5_5_giant_warrior
-w_1_1_kithkin_soldier
-w_1_1_soldier
-u_1_1_illusion_flying
-b_1_1_bat_flying
-b_1_1_goblin_rogue
-b_2_4_spider_reach
-b_2_2_zombie
-r_4_4_dragon_flying
-r_1_1_goblin
-g_4_4_elemental
-g_1_1_saproling
-g_2_5_treefolk_shaman
-ub_1_1_faerie_rogue_flying
-bg_1_1_worm
+1 w_5_5_giant_warrior @Svetlin Velinov
+2 w_1_1_kithkin_soldier @Randy Gallegos
+3 w_1_1_soldier @Goran Josic
+4 u_1_1_illusion_flying @Véronique Meignaud
+5 b_1_1_bat_flying @Wayne Reynolds
+6 b_1_1_goblin_rogue @Dave Kendall
+7 b_2_4_spider_reach @Lars Grant-West
+8 b_2_2_zombie @Bud Cook
+9 r_4_4_dragon_flying @Vance Kovacs
+10 r_1_1_goblin @Dave Kendall
+11 g_4_4_elemental @Brandon Kitkouski
+12 g_1_1_saproling @Warren Mahy
+13 g_2_5_treefolk_shaman @Zack Stella
+14 ub_1_1_faerie_rogue_flying @E. M. Gist
+15 bg_1_1_worm @Chuck Lukacs

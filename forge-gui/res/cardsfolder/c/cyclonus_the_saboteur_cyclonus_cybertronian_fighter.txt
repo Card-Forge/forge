@@ -26,4 +26,4 @@ SVar:TrigConvert:DB$ SetState | Mode$ Transform | SubAbility$ ExtraBeginningPhas
 SVar:ExtraBeginningPhase:DB$ AddPhase | ExtraPhase$ Beginning | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
-Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nFlying\nWhenever Cyclonus deals combat damage to a player, convert it. If you do, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
+Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nFlying\nWhenever Cyclonus deals combat damage to a player, convert it. If you do, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)

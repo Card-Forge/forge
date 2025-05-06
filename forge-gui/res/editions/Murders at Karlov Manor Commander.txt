@@ -366,31 +366,36 @@ ScryfallCode=MKC
 358 R Ransom Note @Gaboleps
 
 [tokens]
-b_0_0_phyrexian_germ
-b_2_2_zombie
-c_10_10_eldrazi
-c_6_12_a_construct_trample
-c_a_clue_draw
-c_a_food_sac
-c_a_gold_sac
-c_a_treasure_sac
-g_1_1_insect
-g_1_1_insect_flying_deathtouch
-g_1_1_saproling
-g_1_1_snake
-g_2_2_cat
-g_4_4_rhino_warrior
-kobolds_of_kher_keep
-komas_coil
-lightning_rager
-r_3_3_ogre
-tiny
-u_1_1_tentacle
-u_2_2_drake_flying
-u_4_3_salamander_warrior
-w_1_1_human_soldier
-w_1_1_soldier
-w_1_1_spirit_flying
+1 c_10_10_eldrazi @Jack Wang
+2 w_1_1_human_soldier @Deruchenko Alexander
+3 w_1_1_soldier @Greg Staples
+4 w_1_1_spirit_flying @Kim Sokol
+6 u_2_2_drake_flying @Svetlin Velinov
+7 komas_coil @Simon Dominic
+8 u_4_3_salamander_warrior @J.P. Targete
+9 u_1_1_tentacle @Dan Murayama Scott
+10 b_0_0_phyrexian_germ @Igor Kieryluk
+11 b_2_2_zombie @Jason A. Engle
+12 kobolds_of_kher_keep @Paolo Parente
+13 lightning_rager @Svetlin Velinov
+14 r_3_3_ogre @Paul Bonner
+15 g_2_2_cat @Raoul Vitale
+17 g_1_1_insect @Martina Pilcerova
+18 g_1_1_insect_flying_deathtouch @Martina Pilcerova
+18 g_4_4_rhino_warrior @Zoltan Boros
+19 g_1_1_saproling @Sam White
+20 g_1_1_snake @Lars Grant-West
+21 tiny @Campbell White
+22 c_a_clue_draw @Daneen Wilkerson
+23 c_6_12_a_construct_trample @Jung Park
+24 c_a_food_sac @Steven Belledin
+25 c_a_gold_sac @Richard Wright
+26 c_a_treasure_sac @Florian de Gesincourt
 
 [other]
-embalm_vizier_of_many_faces
+5 embalm_vizier_of_many_faces @Ryan Yee
+27 copy @David Palumbo
+28 blessing @Carlos Palma Cruchaga
+29 manifest @Jason A. Engle
+30 morph @Raymond Swanland
+31 monarch @Volkan Baǵa

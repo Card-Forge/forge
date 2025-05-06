@@ -300,16 +300,16 @@ ScryfallCode=M15
 284 R Terra Stomper @Goran Josic
 
 [tokens]
-land_mine
-c_1_1_sliver
-w_1_1_soldier
-w_1_1_spirit_flying
-u_1_1_squid_islandwalk
-u_1_1_squid_islandwalk
-b_3_3_beast_deathtouch
-b_2_2_zombie
-r_2_2_dragon_flying_firebreathing
-r_1_1_goblin_haste
-g_3_3_beast
-g_1_1_insect_flying_deathtouch
-g_x_x_treefolk_warrior_total_forests
+1 c_1_1_sliver @Igor Kieryluk
+2 w_1_1_soldier @Greg Staples
+3 w_1_1_spirit_flying @Mike Sass
+4 u_1_1_squid_islandwalk @Jack Wang
+5 u_1_1_squid_islandwalk @Jack Wang
+6 b_3_3_beast_deathtouch @Dave Kendall
+6 b_2_2_zombie @Lucas Graciano
+7 r_2_2_dragon_flying_firebreathing @Jack Wang
+8 r_1_1_goblin_haste @Karl Kopinski
+9 g_3_3_beast @John Donahue
+10 g_1_1_insect_flying_deathtouch @Martina Pilcerova
+11 g_x_x_treefolk_warrior_total_forests @Todd Lockwood
+12 land_mine @Kev Walker

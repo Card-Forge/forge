@@ -22,6 +22,8 @@ import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jupnp.DefaultUpnpServiceConfiguration;
+import org.jupnp.UpnpServiceConfiguration;
 
 import forge.download.GuiDownloader;
 import forge.error.BugReportDialog;
@@ -59,6 +61,11 @@ import forge.util.SwingImageFetcher;
 
 public class GuiDesktop implements IGuiBase {
     private ImageFetcher imageFetcher = new SwingImageFetcher();
+
+    @Override
+    public UpnpServiceConfiguration getUpnpPlatformService() {
+        return new DefaultUpnpServiceConfiguration();
+    }
 
     @Override
     public boolean isRunningOnDesktop() {
@@ -175,7 +182,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final T selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final Function<T, String> display) {
         /*if ((choices != null && !choices.isEmpty() && choices.iterator().next() instanceof GameObject) || selected instanceof GameObject) {
             System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
             Thread.dumpStack();

@@ -1,8 +1,8 @@
 Name:Shielded by Faith
 ManaCost:1 W W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Indestructible | Description$ Enchanted creature has indestructible.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a creature enters, you may attach CARDNAME to that creature.
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCardLKICopy

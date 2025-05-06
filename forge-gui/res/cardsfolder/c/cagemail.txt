@@ -1,8 +1,9 @@
 Name:Cagemail
 ManaCost:1 W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature gets +2/+2 and can't attack.
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2 and can't attack.
+S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature gets +2/+2 and can't attack.
 AI:RemoveDeck:All
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and can't attack.

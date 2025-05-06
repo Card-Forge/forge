@@ -458,45 +458,45 @@ ScryfallCode=MOC
 450 M Slimefoot and Squee @Ivan Shavrin
 
 [tokens]
-b_0_0_phyrexian_germ
-b_1_1_assassin_deathtouch_haste
-b_1_1_vampire_knight_lifelink
-b_2_2_zombie_knight_menace
-b_6_6_demon_flying_trample_aristocrat
-butterfly
-c_1_1_a_myr
-c_1_1_a_servo
-c_1_1_sliver
-c_3_3_a_golem
-c_3_3_a_phyrexian_golem
-c_6_12_a_construct_trample
-c_7_7_eldrazi_annihilator
-c_a_blood_draw
-c_a_clue_draw
-c_a_food_sac
-c_a_gold_sac
-c_x_x_a_phyrexian_horror
-feather
-g_3_3_elephant
-g_4_4_beast
-kobolds_of_kher_keep
-r_0_0_a_gremlin
-r_1_1_elemental_ping
-r_1_1_goblin
-r_1_1_human
-replicated_ring
-u_1_1_a_thopter_flying
-u_1_1_faerie_flying
-u_1_1_spirit_flying
-u_1_1_squid_islandwalk
-u_1_1_tentacle
-u_2_2_shapeshifter_changeling
-ur_1_1_insect_flying_haste
-w_1_1_bird_flying
-w_1_1_human
-w_1_1_soldier
-w_1_1_spirit_flying
-w_1_1_warrior
-w_2_2_knight_vigilance
-w_3_3_angel_flying
-w_4_4_angel_flying
+1 c_7_7_eldrazi_annihilator @Vincent Proce
+2 c_1_1_sliver @Tony Szczudlo
+3 w_3_3_angel_flying @Anastasia Ovchinnikova
+4 w_4_4_angel_flying @Magali Villeneuve
+5 w_1_1_bird_flying @Howard Lyon
+6 w_1_1_human @Ben Maier
+7 w_2_2_knight_vigilance @Dan Murayama Scott
+8 w_1_1_soldier @Svetlin Velinov
+9 w_1_1_spirit_flying @Ryan Yee
+10 w_1_1_warrior @Ryan Barger
+11 u_1_1_faerie_flying @Irina Nordsol
+12 u_2_2_shapeshifter_changeling @Filip Burburan
+13 u_1_1_spirit_flying @Dan Murayama Scott
+14 u_1_1_squid_islandwalk @Jack Wang
+15 u_1_1_tentacle @Dan Murayama Scott
+16 u_1_1_a_thopter_flying @Andrew Murray
+17 b_1_1_assassin_deathtouch_haste @Josu Hernaiz
+18 b_6_6_demon_flying_trample_aristocrat @Seb McKinnon
+19 b_0_0_phyrexian_germ @Igor Kieryluk
+20 b_1_1_vampire_knight_lifelink @Lake Hurwitz
+21 b_2_2_zombie_knight_menace @Even Amundsen
+22 r_1_1_elemental_ping @Alexandre Honoré
+23 feather @Lie Setiawan
+24 r_1_1_goblin @Kev Walker
+25 r_0_0_a_gremlin @Michele Giorgi
+26 r_1_1_human @Dan Murayama Scott
+27 kobolds_of_kher_keep @Paolo Parente
+28 g_4_4_beast @Steve Prescott
+29 butterfly @Darrell Riche
+30 g_3_3_elephant @Lars Grant-West
+31 ur_1_1_insect_flying_haste @Lius Lasahido
+32 c_a_blood_draw @Miranda Meeks
+33 c_a_clue_draw @Randy Vargas
+34 c_6_12_a_construct_trample @Jung Park
+35 c_a_food_sac @Alexander Mokhov
+36 c_a_gold_sac @Richard Wright
+37 c_3_3_a_golem @Daarken
+38 c_1_1_a_myr @Ryan Pancoast
+39 c_3_3_a_phyrexian_golem @Volkan Baǵa
+40 c_x_x_a_phyrexian_horror @Scott Chou
+41 replicated_ring @Olena Richards
+42 c_1_1_a_servo @Victor Adame Minguez

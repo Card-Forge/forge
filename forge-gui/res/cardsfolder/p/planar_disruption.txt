@@ -1,8 +1,7 @@
 Name:Planar Disruption
 ManaCost:1 W
 Types:Enchantment Aura
-K:Enchant artifact, creature, or planeswalker
-A:SP$ Attach | ValidTgts$ Artifact,Creature,Planeswalker | TgtPrompt$ Select target artifact, creature, or planeswalker | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated.
-S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | ValidSA$ Activated
+K:Enchant:Artifact,Creature,Planeswalker:artifact, creature, or planeswalker
+SVar:AttachAILogic:Curse
+S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.EnchantedBy | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated.
 Oracle:Enchant artifact, creature, or planeswalker\nEnchanted permanent can't attack or block, and its activated abilities can't be activated.

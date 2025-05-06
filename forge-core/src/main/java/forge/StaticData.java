@@ -217,6 +217,9 @@ public class StaticData {
     }
 
     public CardEdition getCardEdition(String setCode) {
+        if (CardEdition.UNKNOWN_CODE.equals(setCode)) {
+            return CardEdition.UNKNOWN;
+        }
         CardEdition edition = this.editions.get(setCode);
         return edition;
     }
@@ -246,6 +249,15 @@ public class StaticData {
                 commonCards.loadCard(cardName, setCode, rules);
             }
         }
+    }
+
+    /**
+     * Retrieve a PaperCard by looking at all available card databases for any matching print.
+     * @param cardName The name of the card
+     * @return PaperCard instance found in one of the available CardDb databases, or <code>null</code> if not found.
+     */
+    public PaperCard fetchCard(final String cardName) {
+        return fetchCard(cardName, null, null);
     }
 
     /**
@@ -844,9 +856,9 @@ public class StaticData {
             futures.clear();
 
             // TODO: Audit token images here...
-            for(Map.Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
+            for(Map.Entry<String, Collection<CardEdition.TokenInSet>> tokenEntry : e.getTokens().asMap().entrySet()) {
                 final String name = tokenEntry.getKey();
-                final int artIndex = tokenEntry.getValue();
+                final int artIndex = tokenEntry.getValue().size();
                 try {
                     PaperToken token = getAllTokens().getToken(name, e.getCode());
                     if (token == null) {

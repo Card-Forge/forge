@@ -1,7 +1,7 @@
 Name:Nahiri's Binding
 ManaCost:1 W W
 Types:Enchantment Aura
-K:Enchant creature or planeswalker
-A:SP$ Attach | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated.
+K:Enchant:Creature,Planeswalker:creature or planeswalker
+SVar:AttachAILogic:Curse
+S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Card.EnchantedBy | Description$ Enchanted permanent can't attack or block, and its activated abilities can't be activated.
 Oracle:Enchant creature or planeswalker\nEnchanted permanent can't attack or block, and its activated abilities can't be activated.

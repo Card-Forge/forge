@@ -71,7 +71,6 @@ ScryfallCode=DDD
 63 L Swamp @Richard Wright
 
 [tokens]
-b_1_1_bat_flying
-g_3_3_beast
-g_4_4_beast
-g_3_3_elephant
+T1 g_3_3_beast @John Donahue
+T2 g_4_4_beast @Steve Prescott
+T3 g_3_3_elephant @Arnie Swekel

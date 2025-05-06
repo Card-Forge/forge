@@ -277,6 +277,7 @@ public class DestroyAi extends SpellAbilityAi {
                                 choice = aura;
                             }
                         }
+                        // TODO What about stolen permanents we're getting back at the end of the turn?
                     }
                 }
 
@@ -286,7 +287,9 @@ public class DestroyAi extends SpellAbilityAi {
                 }
 
                 list.remove(choice);
-                sa.getTargets().add(choice);
+                if (sa.canTarget(choice)) {
+                    sa.getTargets().add(choice);
+                }
             }
         } else if (sa.hasParam("Defined")) {
             list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
@@ -363,7 +366,10 @@ public class DestroyAi extends SpellAbilityAi {
                     }
                 } else {
                     Card c = ComputerUtilCard.getBestAI(preferred);
-                    sa.getTargets().add(c);
+
+                    if (sa.canTarget(c)) {
+                        sa.getTargets().add(c);
+                    }
                     preferred.remove(c);
                 }
             }
@@ -384,7 +390,9 @@ public class DestroyAi extends SpellAbilityAi {
                     } else {
                         c = ComputerUtilCard.getCheapestPermanentAI(list, sa, false);
                     }
-                    sa.getTargets().add(c);
+                    if (sa.canTarget(c)) {
+                        sa.getTargets().add(c);
+                    }
                     list.remove(c);
                 }
             }

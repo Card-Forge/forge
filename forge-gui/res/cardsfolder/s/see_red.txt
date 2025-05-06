@@ -1,8 +1,8 @@
 Name:See Red
 ManaCost:1 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ First Strike | Description$ Enchanted creature gets +2/+1 and has first strike.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self

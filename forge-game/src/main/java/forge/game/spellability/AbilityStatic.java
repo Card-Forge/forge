@@ -48,6 +48,7 @@ public abstract class AbilityStatic extends Ability implements Cloneable {
         super(sourceCard, abCost);
         this.setTargetRestrictions(tgt);
     }
+
     @Override
     public boolean canPlay() {
         final Card c = this.getHostCard();
