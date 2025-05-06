@@ -1,0 +1,14 @@
+Name:Night Shift of the Living Dead
+ManaCost:3 B
+Types:Enchantment
+K:After you roll a die, you may pay 1 life. If you do, increase or decrease the result by 1. Do this only once each turn.
+T:Mode$ TurnBegin | Execute$ ResetTurnCount | Static$ True
+SVar:ResetTurnCount:DB$ StoreSVar | SVar$ ModsThisTurn | Type$ Number | Expression$ 0
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Execute$ TrigToken | ValidPlayer$ You | ValidResult$ EQ6 | TriggerDescription$ Whenever you roll a 6, create a 2/2 black Zombie Employee creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie_employee
+SVar:RollModificationsLimit:1
+SVar:ModsThisTurn:Number$0
+SVar:RollModifyCost:PayLife<1>
+DeckHas:Ability$Token
+AI:RemoveDeck:All
+Oracle:After you roll a die, you may pay 1 life. If you do, increase or decrease the result by 1. Do this only once each turn.\nWhenever you roll a 6, create a 2/2 black Zombie Employee creature token.
