@@ -1,0 +1,22 @@
+Name:Stonehide Ancient
+ManaCost:3 G U R
+Types:Creature Dragon
+PT:6/6
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature enters, return all non-Dragon creatures to their owners' hands.
+SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Creature.nonDragon | Origin$ Battlefield | Destination$ Hand
+AlternateMode:Omen
+Oracle:Flying, vigilance\nWhen this creature enters, return all non-Dragon creatures to their owners' hands.
+
+ALTERNATE
+
+Name:Warning Tremor
+ManaCost:2 R
+Types:Sorcery Omen
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | Duration$ Permanent | SpellDescription$ The next Dragon spell you cast costs {2} less to cast.
+SVar:ReduceCost:Mode$ ReduceCost | Type$ Spell | Activator$ You | ValidCard$ Dragon | Amount$ 2 | Description$ The next Dragon spell you cast costs {2} less to cast.
+SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Dragon | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+Oracle:Warning Tremor deals 2 damage to any target.\nThe next Dragon spell you cast costs {2} less to cast.
