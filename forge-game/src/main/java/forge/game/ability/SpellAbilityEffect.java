@@ -370,6 +370,8 @@ public abstract class SpellAbilityEffect {
             StringBuilder sb = new StringBuilder();
             if (location.equals("Hand")) {
                 sb.append("Return ");
+            } else if (location.equals("Library")) {
+                sb.append("Shuffle ");
             } else if (location.equals("SacrificeCtrl")) {
                 sb.append("Its controller sacrifices ");
             } else {
@@ -378,6 +380,8 @@ public abstract class SpellAbilityEffect {
             sb.append(Lang.joinHomogenous(crds));
             if (location.equals("Hand")) {
                 sb.append(" to your hand");
+            } else if (location.equals("Library")) {
+                sb.append(" into your library");
             }
             sb.append(" at the ");
             if (combat) {
@@ -410,6 +414,8 @@ public abstract class SpellAbilityEffect {
         String trigSA = "";
         if (location.equals("Hand")) {
             trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand";
+        } else if (location.equals("Library")) {
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Library | Shuffle$ True";
         } else if (location.equals("SacrificeCtrl")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI";
         } else if (location.equals("Sacrifice")) {

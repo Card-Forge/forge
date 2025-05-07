@@ -69,7 +69,7 @@
   <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
   <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
   <object id="5" template="../../obj/waypoint.tx" name="5" x="80" y="200"/>
-  <object id="7" template="../../obj/entry_up.tx" x="48" y="320" width="100" height="16"/>
+  <object id="7" template="../../obj/entry_up.tx" x="54.3422" y="319.154" width="83.5102" height="10.9262"/>
   <object id="11" template="../../obj/waypoint.tx" name="11" x="160" y="208"/>
   <object id="12" template="../../obj/waypoint.tx" name="12" x="144" y="112"/>
   <object id="13" template="../../obj/waypoint.tx" name="13" x="48" y="64"/>
