@@ -18,6 +18,7 @@
 package forge.card;
 
 import com.google.common.collect.*;
+
 import forge.StaticData;
 import forge.card.CardDb.CardArtPreference;
 import forge.deck.CardPool;
@@ -296,6 +297,42 @@ public final class CardEdition implements Comparable<CardEdition> {
             return thisCollNr.compareTo(othrCollNr);
         }
     }
+    public static class OtherInSet implements Comparable<OtherInSet> {
+        public final String collectorNumber;
+        public final String name;
+        public final String artistName;
+
+        public OtherInSet(final String name, final String collectorNumber, final String artistName) {
+            this.name = name;
+            this.collectorNumber = collectorNumber;
+            this.artistName = artistName;
+        }
+
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            if (collectorNumber != null) {
+                sb.append(collectorNumber);
+                sb.append(' ');
+            }
+            sb.append(name);
+            if (artistName != null) {
+                sb.append(" @");
+                sb.append(artistName);
+            }
+            return sb.toString();
+        }
+
+        @Override
+        public int compareTo(OtherInSet o) {
+            final int nameCmp = name.compareToIgnoreCase(o.name);
+            if (0 != nameCmp) {
+                return nameCmp;
+            }
+            String thisCollNr = getSortableCollectorNumber(collectorNumber);
+            String othrCollNr = getSortableCollectorNumber(o.collectorNumber);
+            return thisCollNr.compareTo(othrCollNr);
+        }
+    }
 
 
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -345,6 +382,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     private final ListMultimap<String, TokenInSet> tokenMap;
     // custom print sheets that will be loaded lazily
     private final Map<String, List<String>> customPrintSheetsToParse;
+    private ListMultimap<String, OtherInSet> otherMap = ArrayListMultimap.create();
 
     private int boosterArts = 1;
     private SealedTemplate boosterTpl = null;
@@ -600,6 +638,15 @@ public final class CardEdition implements Comparable<CardEdition> {
         return sheets;
     }
 
+    public OtherInSet findOther(String name) {
+        for (OtherInSet o : this.otherMap.values()) {
+            if (name.equals(o.name)) {
+                return o;
+            }
+        }
+        return null;
+    }
+
     public static class Reader extends StorageReaderFolder<CardEdition> {
         private final boolean isCustomEditions;
 
@@ -701,6 +748,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
 
             ListMultimap<String, TokenInSet> tokenMap = ArrayListMultimap.create();
+            ListMultimap<String, OtherInSet> otherMap = ArrayListMultimap.create();
             // parse tokens section
             if (contents.containsKey("tokens")) {
                 for (String line : contents.get("tokens")) {
@@ -719,6 +767,22 @@ public final class CardEdition implements Comparable<CardEdition> {
                     tokenMap.put(cardName, tis);
                 }
             }
+            if (contents.containsKey("other")) {
+                for (String line : contents.get("tokens")) {
+                    if (StringUtils.isBlank(line))
+                        continue;
+                    Matcher matcher = tokenPattern.matcher(line);
+
+                    if (!matcher.matches()) {
+                        continue;
+                    }
+                    String collectorNumber = matcher.group(2);
+                    String cardName = matcher.group(3);
+                    String artistName = matcher.group(5);
+                    OtherInSet tis = new OtherInSet(cardName, collectorNumber, artistName);
+                    otherMap.put(cardName, tis);
+                }
+            }
 
             CardEdition res = new CardEdition(cardMap, tokenMap, customPrintSheetsToParse);
             res.boosterSlots = boosterSlots;
@@ -732,6 +796,8 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.tokenFallbackCode = metadata.get("TokenFallbackCode");
             res.cardsLanguage = metadata.get("CardLang", "en");
             res.boosterArts = metadata.getInt("BoosterCovers", 1);
+
+            res.otherMap = otherMap;
 
             String boosterDesc = metadata.get("Booster");
 
