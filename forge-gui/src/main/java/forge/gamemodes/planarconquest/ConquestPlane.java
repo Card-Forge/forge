@@ -25,7 +25,7 @@ import java.util.Set;
 
 import forge.card.CardDb;
 import forge.card.CardEdition;
-import forge.card.CardEdition.CardInSet;
+import forge.card.CardEdition.EditionEntry;
 import forge.deck.generation.DeckGenPool;
 import forge.game.GameType;
 import forge.item.PaperCard;
@@ -192,9 +192,9 @@ public class ConquestPlane {
         for (String setCode : setCodes) {
             CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
             if (edition != null) {
-                for (CardInSet card : edition.getAllCardsInSet()) {
-                    if (bannedCardSet == null || !bannedCardSet.contains(card.name)) {
-                        addCard(commonCards.getCard(card.name, setCode));
+                for (EditionEntry card : edition.getAllCardsInSet()) {
+                    if (bannedCardSet == null || !bannedCardSet.contains(card.name())) {
+                        addCard(commonCards.getCard(card.name(), setCode));
                     }
                 }
             }
