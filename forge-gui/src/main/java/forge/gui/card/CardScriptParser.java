@@ -449,8 +449,7 @@ public final class CardScriptParser {
             "AttachedBy", "Attached", "NameNotEnchantingEnchantedPlayer",
             "Enchanted", "CanEnchantRemembered",
             "CanEnchantSource", "CanBeEnchantedBy", "CanBeEnchantedByTargeted",
-            "CanBeEnchantedByAllRemembered", "EquippedBy",
-            "EquippedByTargeted", "EquippedByEnchanted", "FortifiedBy",
+            "EquippedBy", "EquippedByTargeted", "EquippedByEnchanted", "FortifiedBy",
             "CanBeEquippedBy", "Equipped", "Fortified", "HauntedBy",
             "notTributed", "madness", "Paired", "PairedWith",
             "Above", "DirectlyAbove", "TopGraveyardCreature",
@@ -488,7 +487,7 @@ public final class CardScriptParser {
     private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
             .of("named", "notnamed", "OwnedBy", "ControlledBy",
                     "ControllerControls", "AttachedTo", "EnchantedBy",
-                    "NotEnchantedBy", "TopGraveyard", "SharesColorWith",
+                    "TopGraveyard", "SharesColorWith",
                     "MostProminentColor", "notSharesColorWith",
                     "sharesCreatureTypeWith", "sharesCardTypeWith", "sharesLandTypeWith",
                     "sharesNameWith", "doesNotShareNameWith",

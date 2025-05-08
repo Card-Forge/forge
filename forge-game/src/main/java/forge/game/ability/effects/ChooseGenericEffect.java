@@ -116,7 +116,6 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                     } else if (secretly) {
                         if (record.length() > 0) record.append("\r\n");
                         record.append(Localizer.getInstance().getMessage("lblPlayerChooseValue", p, chosenValue));
-
                     }
                     if (sa.hasParam("SetChosenMode")) {
                         sa.getHostCard().setChosenMode(chosenValue);
