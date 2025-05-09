@@ -190,20 +190,21 @@ public class AdventureDeckEditor extends FDeckEditor {
             super.initialize();
             Current.player().onGoldChange(() -> ((AdventureDeckEditor) parentScreen).deckHeader.updateGold());
             cardManager.setPool(AdventurePlayer.current().getSellableCards());
+            cardManager.setPool(Current.player().getSellableCards());
             cardManager.setShowNFSWatermark(true);
         }
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
             Localizer localizer = Forge.getLocalizer();
-            String label = localizer.getMessage("lblSellFor") + " " + AdventurePlayer.current().cardSellPrice(card);
+            String label = localizer.getMessage("lblSellFor") + " " + Current.player().cardSellPrice(card);
             int sellable = cardManager.getItemCount(card);
             if(sellable <= 0)
                 return;
             String prompt = card + " - " + label + " " + localizer.getMessage("lblHowMany");
 
             menu.addItem(new FMenuItem(label, SIDEBOARD_ICON, new MoveQuantityPrompt(prompt, sellable, result -> {
-                    int sold = AdventurePlayer.current().sellCard(card, result);
+                    int sold = Current.player().sellCard(card, result);
                     removeCard(card, sold);
                 })
             ));
@@ -224,7 +225,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public void refresh() {
-            cardManager.setPool(AdventurePlayer.current().getSellableCards());
+            cardManager.setPool(Current.player().getSellableCards());
         }
 
         public void sellAllByFilter() {
@@ -234,7 +235,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
             for (Map.Entry<PaperCard, Integer> entry : cardManager.getFilteredItems()) {
                 toSell.add(entry.getKey(), entry.getValue());
-                value += AdventurePlayer.current().cardSellPrice(entry.getKey()) * entry.getValue();
+                value += Current.player().cardSellPrice(entry.getKey()) * entry.getValue();
             }
 
             if(toSell.isEmpty())
@@ -244,7 +245,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                 @Override
                 public void run(Boolean result) {
                     if (result) {
-                        AdventurePlayer.current().doBulkSell(toSell);
+                        Current.player().doBulkSell(toSell);
                         refresh();
                         //parentScreen.deckHeader.updateGold(); //TODO: Is this even needed?
                     }
@@ -331,7 +332,9 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         protected ItemPool<PaperCard> getCardPool() {
-            return AdventurePlayer.current().getAutoSellCards();
+            //No need to override addCard and removeCard, because autoSellCards IS the card pool here.
+            //It'll be updated automatically as cards are added and removed from this page.
+            return Current.player().getAutoSellCards();
         }
 
         @Override
@@ -360,15 +363,16 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void buildMenu(FDropDownMenu menu, PaperCard card) {
             super.buildMenu(menu, card);
             Localizer localizer = Forge.getLocalizer();
+            AdventurePlayer player = Current.player();
             if(isShop()) {
-                String label = localizer.getMessage("lblSellFor") + " " + AdventurePlayer.current().cardSellPrice(card);
+                String label = localizer.getMessage("lblSellFor") + " " + player.cardSellPrice(card);
                 int sellable = cardManager.getItemCount(card);
                 if(sellable <= 0)
                     return;
                 String prompt = card + " - " + label + " " + localizer.getMessage("lblHowMany");
 
                 menu.addItem(new FMenuItem(label, SIDEBOARD_ICON, new MoveQuantityPrompt(prompt, sellable, result -> {
-                        int sold = AdventurePlayer.current().sellCard(card, result);
+                        int sold = player.sellCard(card, result);
                         removeCard(card, sold);
                     })
                 ));
@@ -496,14 +500,14 @@ public class AdventureDeckEditor extends FDeckEditor {
                 public void run(Boolean result) {
                     if (result) {
                         currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
-                        AdventurePlayer.current().getNewCards().clear();
+                        Current.player().getNewCards().clear();
                         Forge.clearCurrentScreen();
                         Forge.switchToLast();
                     }
                 }
             });
         } else {
-            AdventurePlayer.current().getNewCards().clear();
+            Current.player().getNewCards().clear();
             Forge.clearCurrentScreen();
             Forge.switchToLast();
         }
@@ -513,7 +517,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     public void onActivate() {
         decksUsingMyCards = new ItemPool<>(InventoryItem.class);
         for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++) {
-            final Deck deck = AdventurePlayer.current().getDeck(i);
+            final Deck deck = Current.player().getDeck(i);
             CardPool main = deck.getMain();
             for (final Map.Entry<PaperCard, Integer> e : main) {
                 decksUsingMyCards.add(e.getKey());
@@ -568,7 +572,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     public AdventureDeckEditor(boolean createAsShop) {
         super(createAsShop ? new ShopConfig() : new AdventureEditorConfig(),
-                createAsShop ? null : AdventurePlayer.current().getSelectedDeck(),
+                createAsShop ? null : Current.player().getSelectedDeck(),
                 e -> leave());
         isShop = createAsShop;
     }
@@ -632,12 +636,12 @@ public class AdventureDeckEditor extends FDeckEditor {
         return false;
     }
 
-    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> AdventurePlayer.current().getNewCards().contains((PaperCard) from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> AdventurePlayer.current().getNewCards().contains((PaperCard) from.getKey()) ? "NEW" : "";
+    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> Current.player().getNewCards().contains((PaperCard) from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> Current.player().getNewCards().contains((PaperCard) from.getKey()) ? "NEW" : "";
     private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = from -> decksUsingMyCards.count(from.getKey());
     private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = from -> Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
-    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnPriceCompare = from -> AdventurePlayer.current().cardSellPrice((PaperCard) from.getKey());
-    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnPriceGet = from -> AdventurePlayer.current().cardSellPrice((PaperCard) from.getKey());
+    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnPriceCompare = from -> Current.player().cardSellPrice((PaperCard) from.getKey());
+    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnPriceGet = from -> Current.player().cardSellPrice((PaperCard) from.getKey());
 
     @Override
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
@@ -652,7 +656,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     @Override
     public Deck getDeck() {
         if (currentEvent == null)
-            return AdventurePlayer.current().getSelectedDeck();
+            return Current.player().getSelectedDeck();
         else
             return currentEvent.registeredDeck;
     }
@@ -816,7 +820,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected String getItemSuffix(Map.Entry<PaperCard, Integer> item) {
             String valueText;
             PaperCard card = item.getKey();
-            int sellValue = AdventurePlayer.current().cardSellPrice(card);
+            int sellValue = Current.player().cardSellPrice(card);
             if(card.hasNoSellValue())
                 valueText = " [NO VALUE]";
             else if(item.getValue() > 1)
@@ -868,7 +872,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         public void updateGold() {
-            lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
+            lblGold.setText(String.valueOf(Current.player().getGold()));
         }
     }
 
