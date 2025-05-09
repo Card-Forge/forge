@@ -560,15 +560,6 @@ public final class CardEdition implements Comparable<CardEdition> {
         return sheets;
     }
 
-    public EditionEntry findOther(String name) {
-        for (EditionEntry o : this.otherMap.values()) {
-            if (name.equals(o.name)) {
-                return o;
-            }
-        }
-        return null;
-    }
-
     public static class Reader extends StorageReaderFolder<CardEdition> {
         private final boolean isCustomEditions;
 
