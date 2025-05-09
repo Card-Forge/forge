@@ -958,9 +958,9 @@ public class Game {
             // if the player who lost was the Monarch, someone else will be the monarch
             // TODO need to check rules if it should try the next player if able
             if (p.equals(getPhaseHandler().getPlayerTurn())) {
-                getAction().becomeMonarch(getNextPlayerAfter(p), null);
+                getAction().becomeMonarch(getNextPlayerAfter(p), p.getMonarchSet());
             } else {
-                getAction().becomeMonarch(getPhaseHandler().getPlayerTurn(), null);
+                getAction().becomeMonarch(getPhaseHandler().getPlayerTurn(), p.getMonarchSet());
             }
         }
 
@@ -970,9 +970,9 @@ public class Game {
             // If the player who has the initiative leaves the game on their own turn,
             // or the active player left the game at the same time, the next player in turn order takes the initiative.
             if (p.equals(getPhaseHandler().getPlayerTurn())) {
-                getAction().takeInitiative(getNextPlayerAfter(p), null);
+                getAction().takeInitiative(getNextPlayerAfter(p), p.getInitiativeSet());
             } else {
-                getAction().takeInitiative(getPhaseHandler().getPlayerTurn(), null);
+                getAction().takeInitiative(getPhaseHandler().getPlayerTurn(), p.getInitiativeSet());
             }
         }
 

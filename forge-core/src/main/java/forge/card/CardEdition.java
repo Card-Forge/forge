@@ -442,6 +442,15 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
         return null;
     }
+    public String getOtherSet(String token) {
+        if (otherMap.containsKey(token)) {
+            return this.getCode();
+        }
+        if (this.tokenFallbackCode != null) {
+            return StaticData.instance().getCardEdition(this.tokenFallbackCode).getOtherSet(token);
+        }
+        return null;
+    }
 
     @Override
     public int compareTo(final CardEdition o) {
