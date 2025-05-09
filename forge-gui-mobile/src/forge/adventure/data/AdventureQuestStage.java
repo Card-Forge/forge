@@ -330,7 +330,7 @@ public class AdventureQuestStage implements Serializable {
                         status = ++progress1 >= count1 ? COMPLETE : status;
                 }
                 else if (event.type == AdventureQuestEventType.USEITEM) {
-                    if ((itemNames.isEmpty()) || itemNames.contains(event.item.name))
+                    if ((itemNames.isEmpty()) || (event.item != null && itemNames.contains(event.item.name)))
                         status = ++progress3 >= count3 ? COMPLETE : status;
                 }
                 break;
