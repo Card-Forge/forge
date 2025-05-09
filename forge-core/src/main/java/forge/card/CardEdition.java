@@ -452,6 +452,13 @@ public final class CardEdition implements Comparable<CardEdition> {
         return null;
     }
 
+    public EditionEntry findOther(String name) {
+        if (otherMap.containsKey(name)) {
+            return Aggregates.random(otherMap.get(name));
+        }
+        return null;
+    }
+
     @Override
     public int compareTo(final CardEdition o) {
         if (o == null) {
