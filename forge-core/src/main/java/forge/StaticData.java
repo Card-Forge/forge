@@ -996,14 +996,13 @@ public class StaticData {
         return false;
     }
     public String getOtherImageKey(String name, String set) {
-        if (set == null || set.equals(CardEdition.UNKNOWN_CODE) || !this.editions.contains(set)) {
-            return ImageKeys.getTokenKey(name);
-        }
-        String realSetCode = this.editions.get(set).getOtherSet(name);
-        if (realSetCode != null) {
-            CardEdition.EditionEntry ee = this.editions.get(realSetCode).findOther(name);
-            if (ee != null) { // TODO add collector Number and new ImageKey format
-                return ImageKeys.getTokenKey(name + "_" + realSetCode);
+        if (this.editions.get(set) != null) {
+            String realSetCode = this.editions.get(set).getOtherSet(name);
+            if (realSetCode != null) {
+                CardEdition.EditionEntry ee = this.editions.get(realSetCode).findOther(name);
+                if (ee != null) { // TODO add collector Number and new ImageKey format
+                    return ImageKeys.getTokenKey(name + "_" + realSetCode.toLowerCase());
+                }
             }
         }
         for (CardEdition e : this.editions) {
