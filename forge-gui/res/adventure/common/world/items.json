@@ -141,7 +141,16 @@
     "name": "Landscape Sketchbook",
     "description": "A leather bound notebook containing sketches of various landscapes across Shandalar",
     "iconName": "LandscapeSketchbook",
-    "questItem": true
+    "questItem": true,
+    "usableInPoi": true,
+    "dialogOnUse": {
+      "text": "You found this sketchbook at the dig site.",
+      "options": [
+        {
+          "name": "You can't quite make heads nor tails of the sketches inside, but you better hold onto it..."
+        }
+      ]
+    }
   },
   {
     "name": "Landscape Sketchbook - Mirage",
@@ -173,7 +182,6 @@
     }
   },
   {
-
     "name": "Phoenix Charm",
     "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
     "equipmentSlot": "Neck",
