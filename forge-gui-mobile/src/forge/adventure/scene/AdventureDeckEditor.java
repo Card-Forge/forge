@@ -56,7 +56,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public ItemPool<PaperCard> getCardPool(boolean wantUnique) {
-            return AdventurePlayer.current().getCards();
+            return Current.player().getCards();
         }
 
         @Override
@@ -189,7 +189,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void initialize() {
             super.initialize();
             Current.player().onGoldChange(() -> ((AdventureDeckEditor) parentScreen).deckHeader.updateGold());
-            cardManager.setPool(AdventurePlayer.current().getSellableCards());
+            setItemManagerCaption("lblSell");
             cardManager.setPool(Current.player().getSellableCards());
             cardManager.setShowNFSWatermark(true);
         }
