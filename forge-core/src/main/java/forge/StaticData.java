@@ -995,4 +995,24 @@ public class StaticData {
         }
         return false;
     }
+    public String getOtherImageKey(String name, String set) {
+        if (set == null || set.equals(CardEdition.UNKNOWN_CODE) || !this.editions.contains(set)) {
+            return ImageKeys.getTokenKey(name);
+        }
+        String realSetCode = this.editions.get(set).getOtherSet(name);
+        if (realSetCode != null) {
+            CardEdition.EditionEntry ee = this.editions.get(realSetCode).findOther(name);
+            if (ee != null) { // TODO add collector Number and new ImageKey format
+                return ImageKeys.getTokenKey(name + "_" + realSetCode);
+            }
+        }
+        for (CardEdition e : this.editions) {
+            CardEdition.EditionEntry ee = e.findOther(name);
+            if (ee != null) { // TODO add collector Number and new ImageKey format
+                return ImageKeys.getTokenKey(name + "_" + e.getCode().toLowerCase());
+            }
+        }
+        // final fallback
+        return ImageKeys.getTokenKey(name);
+    }
 }

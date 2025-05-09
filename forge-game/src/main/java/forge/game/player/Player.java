@@ -20,6 +20,7 @@ package forge.game.player;
 import com.google.common.collect.*;
 import forge.ImageKeys;
 import forge.LobbyPlayer;
+import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -3444,18 +3445,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         return equals(game.getMonarch());
     }
 
+    public String getMonarchSet() {
+        return monarchEffect == null ? monarchEffect.getSetCode() : null;
+    }
+
     public void createMonarchEffect(final String set) {
         final PlayerZone com = getZone(ZoneType.Command);
         if (monarchEffect == null) {
             monarchEffect = new Card(game.nextCardId(), null, game);
             monarchEffect.setOwner(this);
             monarchEffect.setGamePieceType(GamePieceType.EFFECT);
-            if (set != null) {
-                monarchEffect.setImageKey("t:monarch_" + set.toLowerCase());
-                monarchEffect.setSetCode(set);
-            } else {
-                monarchEffect.setImageKey("t:monarch");
-            }
+            monarchEffect.setImageKey(StaticData.instance().getOtherImageKey("monarch", set));
+            monarchEffect.setSetCode(set);
             monarchEffect.setName("The Monarch");
 
             {
@@ -3496,18 +3497,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !StaticAbilityCantBecomeMonarch.anyCantBecomeMonarch(this);
     }
 
+    public String getInitiativeSet() {
+        return initiativeEffect != null ? initiativeEffect.getSetCode() : null;
+    }
+
     public void createInitiativeEffect(final String set) {
         final PlayerZone com = getZone(ZoneType.Command);
         if (initiativeEffect == null) {
             initiativeEffect = new Card(game.nextCardId(), null, game);
             initiativeEffect.setOwner(this);
             initiativeEffect.setGamePieceType(GamePieceType.EFFECT);
-            if (set != null) {
-                initiativeEffect.setImageKey("t:initiative_" + set.toLowerCase());
-                initiativeEffect.setSetCode(set);
-            } else {
-                initiativeEffect.setImageKey("t:initiative");
-            }
+            initiativeEffect.setImageKey(StaticData.instance().getOtherImageKey("initiative", set));
+            initiativeEffect.setSetCode(set);
             initiativeEffect.setName("The Initiative");
 
             //Set up damage trigger
