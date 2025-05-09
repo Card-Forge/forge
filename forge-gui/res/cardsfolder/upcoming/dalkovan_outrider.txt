@@ -1,0 +1,9 @@
+Name:Dalkovan Outrider
+ManaCost:1 B R
+Types:Creature Orc Warrior
+PT:3/4
+K:Mobilize:2
+T:Mode$ Sacrificed | ValidCard$ Permanent.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a permanent, the topmost creature card in your library perpetually gets +1/+1.
+SVar:TrigPump:DB$ Pump | Defined$ ValidLibrary Creature.TopLibrary_Creature+YouCtrl | PumpZone$ Library | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
+DeckNeeds:Ability$Sacrifice
+Oracle:Mobilize 2\nWhenever you sacrifice a permanent, the topmost creature card in your library perpetually gets +1/+1.

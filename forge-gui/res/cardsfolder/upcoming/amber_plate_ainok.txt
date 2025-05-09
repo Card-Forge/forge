@@ -1,0 +1,9 @@
+Name:Amber-Plate Ainok
+ManaCost:1 G
+Types:Creature Dog Mercenary
+PT:2/2
+K:Double team
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigEndure | TriggerDescription$ At the beginning of your second main phase, if this creature is tapped, it endures 1.
+SVar:TrigEndure:DB$ Endure | Num$ 1
+DeckHas:Ability$Counters
+Oracle:Double team\nAt the beginning of your second main phase, if this creature is tapped, it endures 1.

@@ -1,0 +1,8 @@
+Name:Lam, Storm Crane Elder
+ManaCost:2 W W
+Types:Legendary Creature Human Monk
+PT:3/3
+K:Prowess
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, conjure a card named Monastery Mentor onto the battlefield.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Monastery Mentor | Zone$ Battlefield
+Oracle:Prowess\nWhenever you cast a noncreature spell, conjure a card named Monastery Mentor onto the battlefield.
