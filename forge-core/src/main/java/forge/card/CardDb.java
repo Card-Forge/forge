@@ -1043,7 +1043,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public static final Predicate<PaperCard> EDITION_NON_PROMO = paperCard -> {
         String code = paperCard.getEdition();
         CardEdition edition = StaticData.instance().getCardEdition(code);
-        if(edition == null && code.equals("???"))
+        if(edition == null && code.equals(CardEdition.UNKNOWN_CODE))
             return true;
         return edition != null && edition.getType() != Type.PROMO;
     };
@@ -1051,7 +1051,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public static final Predicate<PaperCard> EDITION_NON_REPRINT = paperCard -> {
         String code = paperCard.getEdition();
         CardEdition edition = StaticData.instance().getCardEdition(code);
-        if(edition == null && code.equals("???"))
+        if(edition == null && code.equals(CardEdition.UNKNOWN_CODE))
             return true;
         return edition != null && Type.REPRINT_SET_TYPES.contains(edition.getType());
     };
