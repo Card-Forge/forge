@@ -246,8 +246,9 @@ public class AdventureQuestData implements Serializable {
         }
 
         EnemyData target = stage.getTargetEnemyData();
-        if (target != null)
-            enemyTokens.put("$(enemy_" + stage.id +")", target);
+        if (target != null) {
+            enemyTokens.put("$(enemy_" + stage.id + ")", target);
+        }
 
         otherTokens.put("$(playername)", Current.player().getName());
         otherTokens.put("$(currentbiome)", GameScene.instance().getAdventurePlayerLocation(false,true));
@@ -339,8 +340,18 @@ public class AdventureQuestData implements Serializable {
     }
 
     private EnemySprite generateTargetEnemySprite(AdventureQuestStage stage){
+        return generateTargetEnemySprite(stage, true);
+    }
+
+    private EnemySprite generateTargetEnemySprite(AdventureQuestStage stage, boolean genNewData){
         if (stage.objective == AdventureQuestController.ObjectiveTypes.Hunt){
-            EnemyData toUse = generateTargetEnemyData(stage);
+            EnemyData toUse = null;
+            if (genNewData) {
+                toUse = generateTargetEnemyData(stage);
+            } else {
+                toUse = enemyTokens.get("$(enemy_" + stage.id +")");
+            }
+
             toUse.lifetime = stage.count3;
             EnemySprite toReturn =  new EnemySprite(toUse);
             toReturn.questStageID = stage.stageID.toString();
@@ -445,7 +456,6 @@ public class AdventureQuestData implements Serializable {
             }
             GameHUD.getInstance().addNotification(description.toString());
         }
-
     }
 
     public PointOfInterest getClosestValidPOI(Vector2 pos) {
@@ -457,7 +467,25 @@ public class AdventureQuestData implements Serializable {
             return null;
         validPOIs.sort(Comparator.comparingInt(a -> (int) a.getPosition().dst(pos)));
         return validPOIs.get(0);
+    }
 
+    /* Check if the player created an On the Hunt quest, left the city,
+     * saved, and then reloaded, such that the sprite for the enemy was never generated or failed to
+     * be added to save data properly
+     * @param AdventureQuestStage stage The specific step to check if it meets the criteria that defines this use case
+     * @param boolean Whether the quest meets the detach criteria
+     */
+    public boolean qualifiesForDetachedQuest(AdventureQuestStage stage) {
+        return (stage.objective == AdventureQuestController.ObjectiveTypes.Hunt
+        && enemyTokens.size() > 0
+        && targetEnemySprite == null);
+    }
+
+    /* If the player is in fact detached, fix that specific case
+     * @param AdventureQuestStage stage The stage whose state should be fixed
+     */
+    public void fixOrphanedHuntQuest(AdventureQuestStage stage) {
+        EnemySprite toSet = generateTargetEnemySprite(stage, false);
+        stage.setTargetSprite(toSet);
     }
 }
-
