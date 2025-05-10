@@ -169,7 +169,7 @@ public class GameSnapshot {
         newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
         newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
         newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
-        newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
+        newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()), false);
         newPlayer.setBlessing(origPlayer.hasBlessing());
         newPlayer.setRevolt(origPlayer.hasRevolt());
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());

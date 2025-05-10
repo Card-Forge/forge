@@ -94,7 +94,7 @@ public class GameCopier {
             newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
             newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
             newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
-            newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
+            newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()), false);
             newPlayer.setSpeed(origPlayer.getSpeed());
             newPlayer.setBlessing(origPlayer.hasBlessing());
             newPlayer.setRevolt(origPlayer.hasRevolt());
@@ -415,7 +415,7 @@ public class GameCopier {
 
             Map<CounterType, Integer> counters = c.getCounters();
             if (!counters.isEmpty()) {
-                newCard.setCounters(Maps.newHashMap(counters));
+                newCard.setCounters(Maps.newHashMap(counters), true);
             }
             if (c.hasChosenPlayer()) {
                 newCard.setChosenPlayer(playerMap.get(c.getChosenPlayer()));

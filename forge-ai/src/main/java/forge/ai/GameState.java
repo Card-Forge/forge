@@ -1122,7 +1122,7 @@ public abstract class GameState {
     }
 
     private void applyCountersToGameEntity(GameEntity entity, String counterString) {
-        entity.setCounters(Maps.newHashMap());
+        entity.setCounters(Maps.newHashMap(), false);
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
@@ -1174,7 +1174,7 @@ public abstract class GameState {
                     boolean sickness = c.hasSickness();
                     Map<CounterType, Integer> counters = c.getCounters();
                     // Note: Not clearCounters() since we want to keep the counters var as-is.
-                    c.setCounters(Maps.newHashMap());
+                    c.setCounters(Maps.newHashMap(), false);
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere
                         // (will be overridden later, so the actual value shouldn't matter)
@@ -1192,7 +1192,7 @@ public abstract class GameState {
 
                     c.setTapped(tapped);
                     c.setSickness(sickness);
-                    c.setCounters(counters);
+                    c.setCounters(counters, false);
                 }
             } else {
                 zone.setCards(kv.getValue());

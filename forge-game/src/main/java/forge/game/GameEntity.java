@@ -309,7 +309,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         setCounters(CounterType.get(counterType), num);
     }
 
-    abstract public void setCounters(final Map<CounterType, Integer> allCounters);
+    abstract public void setCounters(final Map<CounterType, Integer> allCounters, boolean lki);
 
     abstract public boolean canRemoveCounters(final CounterType type);
 

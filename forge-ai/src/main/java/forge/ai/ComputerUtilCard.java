@@ -1742,7 +1742,7 @@ public class ComputerUtilCard {
         if (!hiddenKws.isEmpty()) {
             pumped.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
         }
-        pumped.setCounters(c.getCounters());
+        pumped.setCounters(c.getCounters(), true);
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {
             pumped.setTapped(true);

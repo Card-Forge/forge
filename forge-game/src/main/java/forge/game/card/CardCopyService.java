@@ -302,7 +302,7 @@ public class CardCopyService {
         // extra copy PT boost
         newCopy.setPTBoost(copyFrom.getPTBoostTable());
 
-        newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()));
+        newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()), true);
 
         newCopy.setColor(copyFrom.getColor().getColor());
         newCopy.setPhasedOut(copyFrom.getPhasedOut());

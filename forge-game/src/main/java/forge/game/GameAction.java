@@ -249,7 +249,7 @@ public class GameAction {
             // need to copy counters when card enters another zone than hand or library
             if (lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.") &&
                     !(zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library))) {
-                copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()));
+                copied.setCounters(Maps.newHashMap(lastKnownInfo.getCounters()), false);
             }
 
             // perpetual stuff
