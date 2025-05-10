@@ -2229,6 +2229,11 @@ public class AbilityUtils {
             return doXMath(game.getPhaseHandler().getNumUpkeep() - (game.getPhaseHandler().is(PhaseType.UPKEEP) ? 1 : 0), expr, c, ctb);
         }
 
+        // Count$FinishedEndOfTurnsThisTurn
+        if (sq[0].startsWith("FinishedEndOfTurnsThisTurn")) {
+            return doXMath(game.getPhaseHandler().getNumEndOfTurn() - (game.getPhaseHandler().is(PhaseType.END_OF_TURN) ? 1 : 0), expr, c, ctb);
+        }
+
         // Count$AttachedTo <restriction>
         if (sq[0].startsWith("AttachedTo")) {
             final String[] k = l[0].split(" ");

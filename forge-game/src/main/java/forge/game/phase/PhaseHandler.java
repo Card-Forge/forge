@@ -73,6 +73,7 @@ public class PhaseHandler implements java.io.Serializable {
     private int nUpkeepsThisGame = 0;
     private int nCombatsThisTurn = 0;
     private int nMainsThisTurn = 0;
+    private int nEndOfTurnsThisTurn = 0;
     private int planarDiceSpecialActionThisTurn = 0;
 
     private transient Player playerTurn = null;
@@ -352,6 +353,7 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case END_OF_TURN:
+                    nEndOfTurnsThisTurn++;
                     game.getEndOfTurn().executeUntil(playerTurn);
                     if (playerTurn.getController().isAI()) {
                         playerTurn.getController().resetAtEndOfTurn();
@@ -411,6 +413,7 @@ public class PhaseHandler implements java.io.Serializable {
                     nUpkeepsThisTurn = 0;
                     nCombatsThisTurn = 0;
                     nMainsThisTurn = 0;
+                    nEndOfTurnsThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
 
                     // Rule 514.3
@@ -992,6 +995,10 @@ public class PhaseHandler implements java.io.Serializable {
 
     public final boolean skippedDeclareBlockers() {
         return skipDamageSteps;
+    }
+
+    public final int getNumEndOfTurn() {
+        return nEndOfTurnsThisTurn;
     }
 
     private final static boolean DEBUG_PHASES = false;
