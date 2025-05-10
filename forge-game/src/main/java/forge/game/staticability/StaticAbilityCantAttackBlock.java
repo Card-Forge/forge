@@ -175,7 +175,6 @@ public class StaticAbilityCantAttackBlock {
         return true;
     }
 
-
     public static boolean canBlockTapped(final Card card)  {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
@@ -191,7 +190,6 @@ public class StaticAbilityCantAttackBlock {
         }
         return false;
     }
-
 
     private static boolean applyBlockTapped(final StaticAbility stAb, final Card card) {
         if (!stAb.matchesValidParam("ValidCard", card)) {

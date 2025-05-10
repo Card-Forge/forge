@@ -17,6 +17,8 @@
  */
 package forge.game.spellability;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
@@ -48,6 +50,7 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -513,7 +516,7 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         String produced = this.getOrigProduced();
         if (produced.contains("Chosen")) {
-            produced = produced.replace("Chosen", this.getChosenColor(sa));
+            produced = produced.replace("Chosen", getChosenColor(sa, sa.getHostCard().getChosenColors()));
         }
         return produced;
     }
@@ -649,11 +652,18 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         // replace Chosen for Combo colors
         if (origProduced.contains("Chosen")) {
-            origProduced = origProduced.replace("Chosen", getChosenColor(sa));
+            origProduced = origProduced.replace("Chosen", getChosenColor(sa, sa.getHostCard().getChosenColors()));
         }
         // replace Chosen for Spire colors
         if (origProduced.contains("ColorID")) {
-            origProduced = origProduced.replace("ColorID", getChosenColorID(sa));
+            Iterator<String> colors = Iterators.transform(sa.getHostCard().getMarkedColors().iterator(),
+                    new Function<>() {
+                        @Override
+                        public String apply(Byte b) {
+                            return MagicColor.toLongString(b);
+                        }
+                    });
+            origProduced = origProduced.replace("ColorID", getChosenColor(sa, () -> colors));
         }
         if (origProduced.contains("NotedColors")) {
             // Should only be used for Paliano, the High City
@@ -698,28 +708,17 @@ public class AbilityManaPart implements java.io.Serializable {
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
     }
 
-    public String getChosenColorID(SpellAbility sa) {
+    public String getChosenColor(SpellAbility sa, Iterable<String> colors) {
         if (sa == null) {
             return "";
         }
         Card card = sa.getHostCard();
-        if (card != null && card.hasMarkedColor()) {
+        if (card != null) {
             StringBuilder values = new StringBuilder();
-            for (byte c : card.getMarkedColors()) {
+            for (String c : colors) {
                 values.append(MagicColor.toShortString(c)).append(" ");
             }
             return values.toString();
-        }
-        return "";
-    }
-
-    public String getChosenColor(SpellAbility sa) {
-        if (sa == null) {
-            return "";
-        }
-        Card card = sa.getHostCard();
-        if (card != null && card.hasChosenColor()) {
-            return MagicColor.toShortString(card.getChosenColor());
         }
         return "";
     }

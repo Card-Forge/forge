@@ -319,7 +319,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
         for (DieRollResult roll : resultsList) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
             runParams.put(AbilityKey.Sides, sides);
-            runParams.put(AbilityKey.Modifier, modifier);
             runParams.put(AbilityKey.Result, roll.getModifiedValue());
             runParams.put(AbilityKey.NaturalResult, roll.getNaturalValue());
             runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);

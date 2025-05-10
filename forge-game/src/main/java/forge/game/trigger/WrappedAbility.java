@@ -450,7 +450,7 @@ public class WrappedAbility extends Ability {
 
         if (decider != null) {
             if (!decider.isInGame()) {
-                decider = SpellAbilityEffect.getNewChooser(sa, getActivatingPlayer(), decider);
+                decider = SpellAbilityEffect.getNewChooser(sa, decider);
             }
             if (!decider.getController().confirmTrigger(this)) {
                 return;

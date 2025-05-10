@@ -1,9 +1,12 @@
 package forge.game.ability.effects;
 
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.deck.DeckRecognizer;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
@@ -41,6 +44,13 @@ public class ChooseColorEffect extends SpellAbilityEffect {
             String[] restrictedChoices = sa.getParam("Choices").split(",");
             colorChoices = Arrays.asList(restrictedChoices);
         }
+        if (sa.hasParam("ColorsFrom")) {
+            ColorSet cs = CardUtil.getColorsFromCards(AbilityUtils.getDefinedCards(card, sa.getParam("ColorsFrom"), sa));
+            if (cs.isColorless()) {
+                return;
+            }
+            colorChoices = cs.stream().map(Object::toString).collect(Collectors.toCollection(ArrayList::new));
+        }
         if (sa.hasParam("Exclude")) {
             for (String s : sa.getParam("Exclude").split(",")) {
                 colorChoices.remove(s);
@@ -49,24 +59,22 @@ public class ChooseColorEffect extends SpellAbilityEffect {
 
         for (Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
-                p = getNewChooser(sa, sa.getActivatingPlayer(), p);
+                p = getNewChooser(sa, p);
             }
             List<String> chosenColors = new ArrayList<>();
-            int cntMin = sa.hasParam("TwoColors") ? 2 : 1;
+            int cntMin = sa.hasParam("UpTo") ? 0 : sa.hasParam("TwoColors") ? 2 : 1;
             int cntMax = sa.hasParam("TwoColors") ? 2 : sa.hasParam("OrColors") ? colorChoices.size() : 1;
             String prompt = null;
             if (cntMax == 1) {
                 prompt = Localizer.getInstance().getMessage("lblChooseAColor");
-            } else {
-                if (cntMax > cntMin) {
-                    if (cntMax >= MagicColor.NUMBER_OR_COLORS) {
-                        prompt = Localizer.getInstance().getMessage("lblAtLastChooseNumColors", Lang.getNumeral(cntMin));
-                    } else {
-                        prompt = Localizer.getInstance().getMessage("lblChooseSpecifiedRangeColors", Lang.getNumeral(cntMin), Lang.getNumeral(cntMax));
-                    }
+            } else if (cntMax > cntMin) {
+                if (cntMax >= MagicColor.NUMBER_OR_COLORS) {
+                    prompt = Localizer.getInstance().getMessage("lblAtLastChooseNumColors", Lang.getNumeral(cntMin));
                 } else {
-                    prompt = Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(cntMax));
+                    prompt = Localizer.getInstance().getMessage("lblChooseSpecifiedRangeColors", Lang.getNumeral(cntMin), Lang.getNumeral(cntMax));
                 }
+            } else {
+                prompt = Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(cntMax));
             }
             Player noNotify = p;
             if (sa.hasParam("Random")) {
