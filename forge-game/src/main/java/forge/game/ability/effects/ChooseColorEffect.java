@@ -46,6 +46,9 @@ public class ChooseColorEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("ColorsFrom")) {
             ColorSet cs = CardUtil.getColorsFromCards(AbilityUtils.getDefinedCards(card, sa.getParam("ColorsFrom"), sa));
+            if (cs.isColorless()) {
+                return;
+            }
             colorChoices = cs.stream().map(Object::toString).collect(Collectors.toCollection(ArrayList::new));
         }
         if (sa.hasParam("Exclude")) {
@@ -56,7 +59,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
 
         for (Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
-                p = getNewChooser(sa, sa.getActivatingPlayer(), p);
+                p = getNewChooser(sa, p);
             }
             List<String> chosenColors = new ArrayList<>();
             int cntMin = sa.hasParam("UpTo") ? 0 : sa.hasParam("TwoColors") ? 2 : 1;

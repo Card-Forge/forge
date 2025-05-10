@@ -4817,29 +4817,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         perpetual.add(p);
     }
 
-    @SuppressWarnings("unchecked")
-    public final void executePerpetual(Map<String, Object> p) {
-        final String category = (String) p.get("Category");
-        if (category.equals("NewPT")) {
-            addNewPT((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long)
-                p.get("Timestamp"), (long) 0);
-        } else if (category.equals("PTBoost")) {
-            addPTBoost((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long)
-                p.get("Timestamp"), (long) 0);
-        } else if (category.equals("Keywords")) {
-            boolean removeAll = p.containsKey("RemoveAll") && (boolean) p.get("RemoveAll") == true;
-            addChangedCardKeywords((List<String>) p.get("AddKeywords"), (List<String>) p.get("RemoveKeywords"),
-                    removeAll, (long) p.get("Timestamp"), null);
-        } else if (category.equals("Types")) {
-            addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"),
-                false, (Set<RemoveType>) p.get("RemoveXTypes"),
-                (long) p.get("Timestamp"), (long) 0, true, false);
-        } else if (category.equals("Colors")) {
-            addColor((ColorSet) p.get("Colors"), !(boolean) p.get("Overwrite"), (long) p.get("Timestamp"),
-                (long) 0, false);
-        }
-    }
-
     public final void removePerpetual(final long timestamp) {
         Map<String, Object> toRemove = Maps.newHashMap();
         for (Map<String, Object> p : perpetual) {
@@ -4852,14 +4829,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void setPerpetual(final Card oldCard) {
-        final List<Map<String, Object>> perp = oldCard.getPerpetual();
-        perpetual = perp;
-        for (Map<String, Object> p : perp) {
-            if (p.get("Category").equals("Abilities")) {
+        perpetual = oldCard.getPerpetual();
+        for (Map<String, Object> p : perpetual) {
+            final String category = (String) p.get("Category");
+            if (category.equals("Abilities")) {
                 long timestamp = (long) p.get("Timestamp");
                 CardTraitChanges ctc = oldCard.getChangedCardTraits().get(timestamp, (long) 0).copy(this, false);
                 addChangedCardTraits(ctc, timestamp, (long) 0);
-            } else if (p.get("Category").equals("Incorporate")) {
+            } else if (category.equals("Incorporate")) {
                 long ts = (long) p.get("Timestamp");
                 final ManaCost cCMC = oldCard.changedCardManaCost.get(ts, (long) 0);
                 addChangedManaCost(cCMC, ts, (long) 0);
@@ -4868,7 +4845,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 if (getFirstSpellAbility() != null) {
                     getFirstSpellAbility().getPayCosts().add(new Cost((String) p.get("Incorporate"), false));
                 }
-            } else executePerpetual(p);
+            } else if (category.equals("NewPT")) {
+                addNewPT((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long)
+                        p.get("Timestamp"), (long) 0);
+            } else if (category.equals("PTBoost")) {
+                addPTBoost((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long)
+                        p.get("Timestamp"), (long) 0);
+            } else if (category.equals("Keywords")) {
+                boolean removeAll = p.containsKey("RemoveAll") && (boolean) p.get("RemoveAll") == true;
+                addChangedCardKeywords((List<String>) p.get("AddKeywords"), (List<String>) p.get("RemoveKeywords"),
+                        removeAll, (long) p.get("Timestamp"), null);
+            } else if (category.equals("Types")) {
+                addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"),
+                        false, (Set<RemoveType>) p.get("RemoveXTypes"),
+                        (long) p.get("Timestamp"), (long) 0, true, false);
+            } else if (category.equals("Colors")) {
+                addColor((ColorSet) p.get("Colors"), !(boolean) p.get("Overwrite"), (long) p.get("Timestamp"),
+                        (long) 0, false);
+            }
         }
     }
 

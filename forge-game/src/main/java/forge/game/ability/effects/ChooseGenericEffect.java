@@ -62,7 +62,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
 
         for (Player p : getDefinedPlayersOrTargeted(sa)) {
             if (!p.isInGame()) {
-                p = getNewChooser(sa, sa.getActivatingPlayer(), p);
+                p = getNewChooser(sa, p);
             }
 
             // determine if any of the choices are not valid
