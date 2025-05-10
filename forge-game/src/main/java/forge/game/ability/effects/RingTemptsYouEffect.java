@@ -23,10 +23,9 @@ public class RingTemptsYouEffect extends EffectEffect {
     public void resolve(SpellAbility sa) {
         Player p = sa.getActivatingPlayer();
         Game game = p.getGame();
-        Card card = sa.getHostCard();
 
         if (p.getTheRing() == null)
-            p.createTheRing(card);
+            p.createTheRing(sa.getOriginalHost().getSetCode());
 
         //increment ring tempted you for property
         p.incrementRingTemptedYou();

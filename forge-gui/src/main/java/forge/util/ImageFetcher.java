@@ -249,7 +249,7 @@ public abstract class ImageFetcher {
             if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
 
             //PaperToken pt = StaticData.instance().getAllTokens().getToken(tokenName, setCode);
-            Collection<CardEdition.TokenInSet> allTokens = edition.getTokens().get(tokenName);
+            Collection<CardEdition.EditionEntry> allTokens = edition.getTokens().get(tokenName);
 
             if (!allTokens.isEmpty()) {
                 // This loop is going to try to download all the arts until it finds one
@@ -258,17 +258,17 @@ public abstract class ImageFetcher {
                 // Ideally we would have some mapping for generating card to determine which art indexed/collector number to try to fetch
                 // Token art we're downloading and which location we're storing it in.
                 // Once we're pulling from PaperTokens this section will change a bit
-                Iterator <CardEdition.TokenInSet> it = allTokens.iterator();
-                CardEdition.TokenInSet tis;
+                Iterator <CardEdition.EditionEntry> it = allTokens.iterator();
+                CardEdition.EditionEntry tis;
                 while(it.hasNext()) {
                     tis = it.next();
                     String tokenCode = edition.getTokensCode();
                     String langCode = edition.getCardsLangCode();
-                    if (tis.collectorNumber == null || tis.collectorNumber.isEmpty()) {
+                    if (tis.collectorNumber() == null || tis.collectorNumber().isEmpty()) {
                         continue;
                     }
 
-                    downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber, tokenCode, langCode));
+                    downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber(), tokenCode, langCode));
                 }
             }
 

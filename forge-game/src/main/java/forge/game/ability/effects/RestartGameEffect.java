@@ -71,7 +71,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.resetRingTemptedYou();
             p.clearRingBearer();
             p.clearTheRing();
-            p.setBlessing(false);
+            p.setBlessing(false, null);
             p.clearController();
 
             CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones, false));

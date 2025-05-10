@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Set;
 
 import forge.card.CardEdition;
-import forge.card.CardEdition.CardInSet;
+import forge.card.CardEdition.EditionEntry;
 import forge.card.CardRarity;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -445,9 +445,9 @@ public class QuestEventDraft implements IQuestEvent {
         final List<String> cardNames = new ArrayList<>();
 
         for (final CardEdition edition : getAllEditions()) {
-            for (final CardInSet card : edition.getAllCardsInSet()) {
-                if (card.rarity == CardRarity.Rare || card.rarity == CardRarity.MythicRare) {
-                    final PaperCard cardToAdd = FModel.getMagicDb().getCommonCards().getCard(card.name, edition.getCode());
+            for (final EditionEntry card : edition.getAllCardsInSet()) {
+                if (card.rarity() == CardRarity.Rare || card.rarity() == CardRarity.MythicRare) {
+                    final PaperCard cardToAdd = FModel.getMagicDb().getCommonCards().getCard(card.name(), edition.getCode());
                     if (cardToAdd != null && !cardNames.contains(cardToAdd.getName())) {
                         possibleCards.add(cardToAdd);
                         cardNames.add(cardToAdd.getName());
@@ -468,26 +468,26 @@ public class QuestEventDraft implements IQuestEvent {
     private PaperCard getPromoCard() {
 
         final CardEdition randomEdition = getRandomEdition();
-        final List<CardInSet> cardsInEdition = new ArrayList<>();
+        final List<EditionEntry> cardsInEdition = new ArrayList<>();
         final List<String> cardNames = new ArrayList<>();
 
-        for (final CardInSet card : randomEdition.getAllCardsInSet()) {
-            if (card.rarity == CardRarity.Rare || card.rarity == CardRarity.MythicRare) {
-                if (!cardNames.contains(card.name)) {
+        for (final EditionEntry card : randomEdition.getAllCardsInSet()) {
+            if (card.rarity() == CardRarity.Rare || card.rarity() == CardRarity.MythicRare) {
+                if (!cardNames.contains(card.name())) {
                     cardsInEdition.add(card);
-                    cardNames.add(card.name);
+                    cardNames.add(card.name());
                 }
             }
         }
 
-        CardInSet randomCard;
+        EditionEntry randomCard;
         PaperCard promo = null;
 
         int attempts = 25;
 
         while (promo == null && attempts-- > 0) {
             randomCard = cardsInEdition.get((int) (MyRandom.getRandom().nextDouble() * cardsInEdition.size()));
-            promo = FModel.getMagicDb().getCommonCards().getCard(randomCard.name, randomEdition.getCode());
+            promo = FModel.getMagicDb().getCommonCards().getCard(randomCard.name(), randomEdition.getCode());
         }
 
         if (promo == null) {

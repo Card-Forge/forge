@@ -24,7 +24,7 @@ public class BecomeMonarchEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         // TODO: improve ai and fix corner cases
-        final String set = sa.getHostCard().getSetCode();
+        final String set = sa.getOriginalHost().getSetCode();
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {

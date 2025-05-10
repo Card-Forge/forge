@@ -170,7 +170,7 @@ public class GameSnapshot {
         newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
         newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
         newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
-        newPlayer.setBlessing(origPlayer.hasBlessing());
+        newPlayer.setBlessing(origPlayer.hasBlessing(), null);
         newPlayer.setRevolt(origPlayer.hasRevolt());
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
         newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());

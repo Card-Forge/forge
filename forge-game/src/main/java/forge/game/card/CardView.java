@@ -1313,7 +1313,7 @@ public class CardView extends GameEntityView {
         }
         public String getImageKey(Iterable<PlayerView> viewers) {
             if (getState() == CardStateName.FaceDown) {
-                return ImageKeys.getTokenKey(getCard().getFacedownImageKey());
+                return getCard().getFacedownImageKey();
             }
             if (canBeShownToAny(viewers)) {
                 if (isCloned() && StaticData.instance().useSourceImageForClone()) {

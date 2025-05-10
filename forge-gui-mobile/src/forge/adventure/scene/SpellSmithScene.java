@@ -16,7 +16,7 @@ import forge.adventure.data.RewardData;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
-import forge.card.CardEdition.CardInSet;
+import forge.card.CardEdition.EditionEntry;
 import forge.card.CardRarity;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -356,9 +356,9 @@ public class SpellSmithScene extends UIScene {
             // Use the rarity of the card from the filtered set.
             CardRarity inputRarity = input.getRarity();
             if (cardEdition != null)  {
-                List<CardInSet> cardsInSet = cardEdition.getCardInSet(input.getName());
+                List<EditionEntry> cardsInSet = cardEdition.getCardInSet(input.getName());
             	if (cardsInSet.size() == 0) return false;
-            	inputRarity = cardsInSet.get(0).rarity;
+            	inputRarity = cardsInSet.get(0).rarity();
             }
             if (!rarity.isEmpty()) if (!inputRarity.toString().equals(rarity)) return false;
             if (colorFilter.size() > 0)
