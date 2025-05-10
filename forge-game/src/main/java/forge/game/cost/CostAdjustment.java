@@ -147,6 +147,15 @@ public class CostAdjustment {
                     }
                     sub = sub.getSubAbility();
                 }
+            } else if ("Tiered".equals(amount)) {
+                SpellAbility sub = sa;
+                while (sub != null) { // there should only be one
+                    if (sub.hasParam("TieredCost")) {
+                        Cost part = new Cost(sub.getParam("TieredCost"), sa.isAbility(), sa.getHostCard().equals(hostCard));
+                        cost.mergeTo(part, count, sa);
+                    }
+                    sub = sub.getSubAbility();
+                }
             } else {
                 if (StringUtils.isNumeric(amount)) {
                     count = Integer.parseInt(amount);
