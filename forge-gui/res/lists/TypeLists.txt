@@ -15,6 +15,7 @@ Omenpath
 Power-Plant
 Sphere:Spheres
 Tower
+Town:Towns
 Urza's
 [CreatureTypes]
 Advisor:Advisors

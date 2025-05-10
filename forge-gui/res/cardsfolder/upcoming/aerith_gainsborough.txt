@@ -1,0 +1,13 @@
+Name:Aerith Gainsborough
+ManaCost:2 W
+Types:Legendary Creature Human Cleric
+PT:2/2
+K:Lifelink
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME dies, put X +1/+1 counters on each legendary creature you control, where X is the number of +1/+1 counters on CARDNAME.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Legendary+YouCtrl | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggeredCard$CardCounters.P1P1
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:Lifelink\nWhenever you gain life, put a +1/+1 counter on Aerith Gainsborough.\nWhen Aerith Gainsborough dies, put X +1/+1 counters on each legendary creature you control, where X is the number of +1/+1 counters on Aerith Gainsborough.

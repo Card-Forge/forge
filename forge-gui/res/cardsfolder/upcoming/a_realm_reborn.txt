@@ -1,0 +1,6 @@
+Name:A Realm Reborn
+ManaCost:4 G G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddAbility$ AnyMana | Description$ Other permanents you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+Oracle:Other permanents you control have "{T}: Add one mana of any color."
