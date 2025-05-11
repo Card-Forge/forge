@@ -138,11 +138,11 @@ public class CostAdjustment {
                     count += tc.size();
                 }
                 --count;
-            } else if ("Spree".equals(amount)) {
+            } else if ("Spree".equals(amount) || "Tiered".equals(amount)) {
                 SpellAbility sub = sa;
                 while (sub != null) {
-                    if (sub.hasParam("SpreeCost")) {
-                        Cost part = new Cost(sub.getParam("SpreeCost"), sa.isAbility(), sa.getHostCard().equals(hostCard));
+                    if (sub.hasParam("ModeCost")) {
+                        Cost part = new Cost(sub.getParam("ModeCost"), sa.isAbility(), sa.getHostCard().equals(hostCard));
                         cost.mergeTo(part, count, sa);
                     }
                     sub = sub.getSubAbility();

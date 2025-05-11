@@ -4104,6 +4104,10 @@ public class CardFactoryUtil {
             String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
                     " | Description$ Strive - " + inst.getReminderText();
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.equals("Tiered")) {
+            String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True | Amount$ Tiered | EffectZone$ All"
+                    + " | Description$ Tiered (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Unleash")) {
             String effect = "Mode$ CantBlock | ValidCard$ Creature.Self+counters_GE1_P1P1 | Secondary$ True | Description$ CARDNAME can't block.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
