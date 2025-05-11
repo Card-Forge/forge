@@ -2625,8 +2625,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")
-                        || keyword.startsWith("Mobilize")) {
+                        || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Crew")) {
@@ -2667,14 +2666,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     final String[] k = keyword.split(":");
                     String desc = k.length > 2 ? k[2] : CardType.getPluralType(k[1]);
                     sbLong.append(k[0]).append(" ").append(desc).append(" (").append(inst.getReminderText()).append(")");
-                } else if (keyword.equals("Convoke") || keyword.equals("Dethrone")|| keyword.equals("Fear")
-                         || keyword.equals("Melee") || keyword.equals("Improvise")|| keyword.equals("Shroud")
-                         || keyword.equals("Banding") || keyword.equals("Intimidate")|| keyword.equals("Evolve")
-                         || keyword.equals("Exalted") || keyword.equals("Extort")|| keyword.equals("Flanking")
-                         || keyword.equals("Horsemanship") || keyword.equals("Infect")|| keyword.equals("Persist")
-                         || keyword.equals("Phasing") || keyword.equals("Shadow")|| keyword.equals("Skulk")
-                         || keyword.equals("Undying") || keyword.equals("Wither")
-                         || keyword.equals("Bargain")
+                } else if (keyword.equals("Convoke") || keyword.equals("Dethrone") || keyword.equals("Fear")
+                         || keyword.equals("Melee") || keyword.equals("Improvise") || keyword.equals("Shroud")
+                         || keyword.equals("Banding") || keyword.equals("Intimidate") || keyword.equals("Evolve")
+                         || keyword.equals("Exalted") || keyword.equals("Extort") || keyword.equals("Flanking")
+                         || keyword.equals("Horsemanship") || keyword.equals("Infect") || keyword.equals("Persist")
+                         || keyword.equals("Phasing") || keyword.equals("Shadow") || keyword.equals("Skulk")
+                         || keyword.equals("Undying") || keyword.equals("Wither") || keyword.equals("Bargain")
                          || keyword.equals("Mentor") || keyword.equals("Training")) {
                     if (sb.length() != 0) {
                         sb.append("\r\n");
@@ -2738,7 +2736,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
-                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")) {
+                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
