@@ -1,0 +1,8 @@
+Name:Zurgo's Vanguard
+ManaCost:2 R
+Types:Creature Dog Soldier
+PT:*/3
+K:Mobilize:1
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ This creature's power is equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)\nThis creature's power is equal to the number of creatures you control.

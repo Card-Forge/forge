@@ -1,11 +1,10 @@
 Name:Singing Bell Strike
 ManaCost:1 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
+K:Enchant:Creature
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
-R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.AttachedBy+ActivePlayerCtrl | ActivePhases$ Untap | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Untap | Description$ Enchanted creature has "{6}: Untap this creature."
 SVar:Untap:AB$ Untap | Cost$ 6 | Defined$ Self | SpellDescription$ Untap CARDNAME.
 Oracle:Enchant creature\nWhen Singing Bell Strike enters, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nEnchanted creature has "{6}: Untap this creature."

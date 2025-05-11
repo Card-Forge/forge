@@ -4,6 +4,6 @@ Types:Creature Moonfolk Wizard
 PT:1/3
 K:Flying
 A:AB$ Pump | Cost$ 2 Return<1/Land> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-0 until end of turn, where X is the number of cards in your hand.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:All
 Oracle:Flying\n{2}, Return a land you control to its owner's hand: Target creature gets -X/-0 until end of turn, where X is the number of cards in your hand.

@@ -1,0 +1,6 @@
+Name:Dragon's Prey
+ManaCost:2 B
+Types:Instant
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Dragon | EffectZone$ All | Description$ This spell costs {2} more to cast if it targets a Dragon.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+Oracle:This spell costs {2} more to cast if it targets a Dragon.\nDestroy target creature.

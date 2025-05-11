@@ -1,0 +1,9 @@
+Name:Host of the Hereafter
+ManaCost:2 B G
+Types:Creature Zombie Warlock
+PT:2/2
+K:etbCounter:P1P1:2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+HasCounters,Creature.Other+YouCtrl+HasCounters | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature or another creature you control dies, if it had counters on it, put its counters on up to one target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | TargetMin$ 0 | TargetMax$ 1 | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+DeckHints:Ability$Counters
+Oracle:This creature enters with two +1/+1 counters on it.\nWhenever this creature or another creature you control dies, if it had counters on it, put its counters on up to one target creature you control.

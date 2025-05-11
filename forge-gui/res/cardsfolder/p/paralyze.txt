@@ -1,11 +1,11 @@
 Name:Paralyze
 ManaCost:B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
-R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy+ActivePlayerCtrl | ActivePhases$ Untap | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If the player does, untap the creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Enchanted | UnlessCost$ 4 | UnlessPayer$ EnchantedController | UnlessSwitched$ True
 Oracle:Enchant creature\nWhen Paralyze enters, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nAt the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If the player does, untap the creature.

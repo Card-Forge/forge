@@ -1,10 +1,10 @@
 Name:Artifact Possession
 ManaCost:2 B
 Types:Enchantment Aura
-K:Enchant artifact
-A:SP$ Attach | ValidTgts$ Artifact | AILogic$ Curse
+K:Enchant:Artifact:artifact
+SVar:AttachAILogic:Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {T} in its activation cost, CARDNAME deals 2 damage to that artifact's controller.
-T:Mode$ AbilityCast | NonTapCost$ True | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever an artifact becomes tapped or a player activates an artifact's ability without {T} in its activation cost, CARDNAME deals 1 damage to that artifact's controller.
+T:Mode$ AbilityCast | ValidCard$ Card.AttachedBy | ValidSA$ Activated.!hasTapCost | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever an artifact becomes tapped or a player activates an ability of enchanted artifact without {T} in its activation cost, CARDNAME deals 2 damage to that artifact's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
 AI:RemoveDeck:Random
 Oracle:Enchant artifact\nWhenever enchanted artifact becomes tapped or a player activates an ability of enchanted artifact without {T} in its activation cost, Artifact Possession deals 2 damage to that artifact's controller.

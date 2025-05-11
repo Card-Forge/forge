@@ -7,7 +7,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battle
 SVar:TrigTap:DB$ Tap | CardChoices$ Human.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Human.YouCtrl+untapped | RememberTapped$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 SVar:Y:Remembered$Amount
 SVar:HasAttackEffect:TRUE
 DeckHints:Type$Human

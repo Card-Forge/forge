@@ -1285,7 +1285,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             list.remove(choice);
-            sa.getTargets().add(choice);
+            if (sa.canTarget(choice)) {
+                sa.getTargets().add(choice);
+            }
         }
 
         // Honor the Single Zone restriction. For now, simply remove targets that do not belong to the same zone as the first targeted card.

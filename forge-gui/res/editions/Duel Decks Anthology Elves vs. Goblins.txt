@@ -70,6 +70,6 @@ ScryfallCode=EVG
 62 L Mountain @Sam Wood
 
 [tokens]
-r_1_1_goblin
-g_7_7_elemental_trample
-g_1_1_elf_warrior
+1 g_7_7_elemental_trample @Anthony S. Waters
+2 g_1_1_elf_warrior @Dominick Domingo
+3 r_1_1_goblin @Dave Kendall

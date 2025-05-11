@@ -312,19 +312,19 @@ ScryfallCode=SOI
 297 L Forest @Andreas Rocha
 
 [tokens]
-w_4_4_angel_flying
-w_1_1_human_soldier
-w_1_1_spirit_flying
-b_1_1_vampire_knight_lifelink
-b_2_2_zombie
-r_1_1_devil_burn
-g_1_1_insect
-g_3_3_ooze
-g_2_2_wolf
-wb_1_1_human_cleric
-c_a_clue_draw
-c_a_clue_draw
-c_a_clue_draw
-c_a_clue_draw
-c_a_clue_draw
-c_a_clue_draw
+1 w_4_4_angel_flying @Magali Villeneuve
+2 w_1_1_human_soldier @Deruchenko Alexander
+3 w_1_1_spirit_flying @Jason A. Engle
+4 b_1_1_vampire_knight_lifelink @Lake Hurwitz
+5 b_2_2_zombie @Craig J Spearing
+6 r_1_1_devil_burn @Wayne England
+7 g_1_1_insect @Christopher Moeller
+8 g_3_3_ooze @Nils Hamm
+9 g_2_2_wolf @Aaron Miller
+10 wb_1_1_human_cleric @Min Yum
+11 c_a_clue_draw @John Avon
+12 c_a_clue_draw @John Avon
+13 c_a_clue_draw @John Avon
+14 c_a_clue_draw @John Avon
+15 c_a_clue_draw @John Avon
+16 c_a_clue_draw @John Avon

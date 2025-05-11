@@ -1,0 +1,14 @@
+Name:Parapet Thrasher
+ManaCost:2 R R
+Types:Creature Dragon
+PT:4/3
+K:Flying
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Dragon.YouCtrl | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever one or more Dragons you control deal combat damage to an opponent, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBSmash,DBStrafe,DBSwoop | ChoiceRestriction$ ThisTurn | CharmNum$ 1
+SVar:DBSmash:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact or enchantment damaged player controls | SpellDescription$ Destroy target artifact that opponent controls.
+SVar:DBStrafe:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ 4 | SpellDescription$ This creature deals 4 damage to each other opponent.
+SVar:DBSwoop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play it this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nWhenever one or more Dragons you control deal combat damage to an opponent, choose one that hasn't been chosen this turn —\n• Destroy target artifact that opponent controls.\n• This creature deals 4 damage to each other opponent.\n• Exile the top card of your library. You may play it this turn.

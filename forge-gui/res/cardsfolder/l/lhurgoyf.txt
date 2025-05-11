@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Creature Lhurgoyf
 PT:*/1+*
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ CARDNAME's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1.
-SVar:X:Count$TypeInAllYards.Creature
-SVar:Y:Count$TypeInAllYards.Creature/Plus.1
+SVar:X:Count$ValidGraveyard Creature
+SVar:Y:Count$ValidGraveyard Creature/Plus.1
 Oracle:Lhurgoyf's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1.

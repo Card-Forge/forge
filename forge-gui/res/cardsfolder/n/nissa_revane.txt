@@ -5,8 +5,8 @@ Loyalty:2
 A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.namedNissa's Chosen | ChangeNum$ 1 | Planeswalker$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card named Nissa's Chosen, put it onto the battlefield, then shuffle.
 A:AB$ GainLife | Cost$ AddCounter<1/LOYALTY> | LifeAmount$ XLife | Planeswalker$ True | SpellDescription$ You gain 2 life for each Elf you control.
 A:AB$ ChangeZone | Cost$ SubCounter<7/LOYALTY> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Elf | ChangeNum$ XFetch | Planeswalker$ True | Ultimate$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for any number of Elf creature cards, put them onto the battlefield, then shuffle.
-SVar:XLife:Count$TypeYouCtrl.Elf/Times.2
-SVar:XFetch:Count$TypeInYourLibrary.Elf
+SVar:XLife:Count$Valid Elf.YouCtrl/Times.2
+SVar:XFetch:Count$ValidLibrary Creature.Elf+YouCtrl
 AI:RemoveDeck:Random
 DeckHints:Type$Elf & Name$Nissa's Chosen
 Oracle:[+1]: Search your library for a card named Nissa's Chosen, put it onto the battlefield, then shuffle.\n[+1]: You gain 2 life for each Elf you control.\n[-7]: Search your library for any number of Elf creature cards, put them onto the battlefield, then shuffle.

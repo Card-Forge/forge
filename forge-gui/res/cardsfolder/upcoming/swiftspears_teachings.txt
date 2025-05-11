@@ -1,0 +1,8 @@
+Name:Swiftspear's Teachings
+ManaCost:R
+Types:Sorcery
+A:SP$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast | SubAbility$ DBDraw | SpellDescription$ You get a one-time boon with "When you cast a creature spell, it gains prowess and haste."
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast a creature spell, it gains prowess and haste.
+SVar:TrigEffect:DB$ Pump | PumpZone$ Stack | Defined$ TriggeredCard | KW$ Haste & Prowess | Duration$ Permanent
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:You get a one-time boon with "When you cast a creature spell, it gains prowess and haste."\nDraw a card.

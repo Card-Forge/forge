@@ -1,0 +1,8 @@
+Name:Stormbeacon Blade
+ManaCost:1 W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
+T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature attacks, draw a card if you control three or more attacking creatures.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionPresent$ Creature.attacking+YouCtrl | ConditionCompare$ GE3
+K:Equip:2
+Oracle:Equipped creature gets +3/+0.\nWhenever equipped creature attacks, draw a card if you control three or more attacking creatures.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

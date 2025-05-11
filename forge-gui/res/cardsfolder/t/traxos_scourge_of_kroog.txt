@@ -5,7 +5,7 @@ PT:7/7
 K:Trample
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ NICKNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ NICKNAME doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ NICKNAME doesn't untap during your untap step.
 T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, untap NICKNAME. (Artifacts, legendaries, and Sagas are historic.)
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:BuffedBy:Card.Historic

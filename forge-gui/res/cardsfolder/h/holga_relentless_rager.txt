@@ -7,7 +7,7 @@ K:Haste
 K:CARDNAME must be blocked if able.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, each creature you control attacking a player gets +1/+0 until end of turn for each creature that player controls.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatCards$ Creature.attacking Player | RepeatSubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Remembered | NumAtt$ X
+SVar:DBPump:DB$ Pump | Defined$ Remembered | NumAtt$ +X
 SVar:X:Count$Valid Creature.DefenderCtrlForRemembered
 SVar:HasAttackEffect:TRUE
 Oracle:Haste\nHolga, Relentless Rager must be blocked if able.\nWhenever Holga attacks, each creature you control attacking a player gets +1/+0 until end of turn for each creature that player controls.

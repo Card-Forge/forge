@@ -5,7 +5,7 @@ K:Equip:2
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Creature | Execute$ TrigNekoTeTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals damage to a creature, tap that creature. That creature doesn't untap during its controller's untap step for as long as this artifact remains on the battlefield.
 SVar:TrigNekoTeTap:DB$ Tap | Defined$ TriggeredTargetLKICopy | SubAbility$ DBNekoTe
 SVar:DBNekoTe:DB$ Effect | RememberObjects$ TriggeredTargetLKICopy | ForgetOnMoved$ Battlefield | ReplacementEffects$ DontUntap | Duration$ UntilHostLeavesPlay
-SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered+ActivePlayerCtrl | ActivePhases$ Untap | Layer$ CantHappen | Description$ That creature doesn't untap during its controller's untap step for as long as EFFECTSOURCE remains on the battlefield.
+SVar:DontUntap:Event$ Untap | ValidCard$ Card.IsRemembered | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ That creature doesn't untap during its controller's untap step for as long as EFFECTSOURCE remains on the battlefield.
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Player | Execute$ TrigNekoTeLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals damage to a player, that player loses 1 life.
 SVar:TrigNekoTeLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ TriggeredTarget
 Oracle:Whenever equipped creature deals damage to a creature, tap that creature. That creature doesn't untap during its controller's untap step for as long as this artifact remains on the battlefield.\nWhenever equipped creature deals damage to a player, that player loses 1 life.\nEquip {2}

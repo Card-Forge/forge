@@ -268,7 +268,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
 
             Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(source.getController());
-            runParams.put(AbilityKey.Cost, sp.getPayCosts());
             runParams.put(AbilityKey.Activator, activator);
             runParams.put(AbilityKey.SpellAbility, sp);
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
@@ -278,12 +277,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
             AbilityUtils.resolve(sp);
 
-            final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(source);
-            runParams2.put(AbilityKey.SpellAbility, sp);
-            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams2, false);
+            runParams = AbilityKey.mapFromCard(source);
+            runParams.put(AbilityKey.SpellAbility, sp);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
 
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp);
             sp.resetOnceResolved();
+
+            // parts are paid sequentially, so collect directly or some trigger might get lost
+            if (game.costPaymentStack.peek() != null) {
+                game.getTriggerHandler().collectTriggerForWaiting();
+            }
             return;
         }
 
@@ -389,7 +393,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
-        runParams.put(AbilityKey.Cost, sp.getPayCosts());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
         runParams.put(AbilityKey.SpellAbility, si.getSpellAbility());
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());

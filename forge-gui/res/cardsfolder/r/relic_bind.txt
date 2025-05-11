@@ -1,8 +1,8 @@
 Name:Relic Bind
 ManaCost:2 U
 Types:Enchantment Aura
-K:Enchant artifact an opponent controls
-A:SP$ Attach | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact an opponent controls | AILogic$ Curse
+K:Enchant:Artifact.OppCtrl:artifact an opponent controls
+SVar:AttachAILogic:Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever enchanted artifact becomes tapped, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBDamage,DBGain
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.

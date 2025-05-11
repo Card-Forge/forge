@@ -1,10 +1,10 @@
 Name:Mantle of Leadership
 ManaCost:1 W
 Types:Enchantment Aura
-K:Enchant creature
+K:Enchant:Creature
 K:Flash
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature enters, enchanted creature gets +2/+2 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Enchanted | NumAtt$ 2 | NumDef$ 2
+SVar:TrigPump:DB$ Pump | Defined$ Enchanted | NumAtt$ +2 | NumDef$ +2
 SVar:BuffedBy:Creature
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nWhenever a creature enters, enchanted creature gets +2/+2 until end of turn.

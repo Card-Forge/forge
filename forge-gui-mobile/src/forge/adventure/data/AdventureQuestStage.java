@@ -325,9 +325,14 @@ public class AdventureQuestStage implements Serializable {
                 }
                 break;
             case Fetch:
-                status = event.type == AdventureQuestEventType.RECEIVEITEM
-                        && (itemNames.isEmpty()) || (event.item != null && itemNames.contains(event.item.name))
-                        && ++progress1 >= count1 ? COMPLETE : status;
+                if (event.type == AdventureQuestEventType.RECEIVEITEM) {
+                    if ((itemNames.isEmpty()) || (event.item != null && itemNames.contains(event.item.name)))
+                        status = ++progress1 >= count1 ? COMPLETE : status;
+                }
+                else if (event.type == AdventureQuestEventType.USEITEM) {
+                    if ((itemNames.isEmpty()) || (event.item != null && itemNames.contains(event.item.name)))
+                        status = ++progress3 >= count3 ? COMPLETE : status;
+                }
                 break;
             case Hunt:
                 if (event.type == AdventureQuestEventType.DESPAWN) {

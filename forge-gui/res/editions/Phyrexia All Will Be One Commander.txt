@@ -182,25 +182,28 @@ ScryfallCode=ONC
 174 R Windbrisk Heights @Omar Rayyan
 
 [tokens]
-b_0_0_phyrexian_germ
-c_10_10_eldrazi
-c_1_1_a_myr
-c_1_1_a_thopter_flying
-c_x_x_a_golem_haste
-c_x_x_a_phyrexian_horror
-g_1_1_phyrexian_insect_infect
-g_3_3_beast
-g_3_3_elephant
-g_x_x_phyrexian_wurm_trample_toxic
-kobolds_of_kher_keep
-r_1_1_goblin
-r_5_5_dragon_flying
-rw_1_1_soldier_haste
-w_1_1_bird_flying
-w_1_1_human
-w_1_1_human_soldier
-w_1_1_soldier
-w_1_1_spirit_flying
-w_2_2_soldier_vigilance
-w_4_4_angel_flying
-w_4_4_angel_flying_vigilance
+1 c_10_10_eldrazi @Jack Wang
+2 w_4_4_angel_flying @Magali Villeneuve
+3 w_4_4_angel_flying_vigilance @Volkan Baǵa
+4 w_1_1_bird_flying @Howard Lyon
+5 w_1_1_human @Ben Maier
+6 w_1_1_human_soldier @Deruchenko Alexander
+7 w_1_1_soldier @Magali Villeneuve
+8 w_2_2_soldier_vigilance @Johan Grenier
+9 w_1_1_spirit_flying @Jason A. Engle
+10 r_5_5_dragon_flying @Raymond Swanland
+11 r_1_1_goblin @Goran Josic
+12 kobolds_of_kher_keep @Paolo Parente
+13 g_3_3_beast @Jesper Ejsing
+14 g_3_3_elephant @Lars Grant-West
+15 g_1_1_phyrexian_insect_infect @Adrian Smith
+16 g_x_x_phyrexian_wurm_trample_toxic @Nicholas Gregory
+17 rw_1_1_soldier_haste @David Palumbo
+18 c_x_x_a_golem_haste @José Parodi
+19 c_1_1_a_myr @Ryan Pancoast
+20 c_x_x_a_phyrexian_horror @Scott Chou
+21 c_1_1_a_thopter_flying @Richard Wright
+23 b_0_0_phyrexian_germ @Igor Kieryluk
+
+[other]
+22 monarch @Volkan Baǵa

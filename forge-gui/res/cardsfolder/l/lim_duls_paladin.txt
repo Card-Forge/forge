@@ -9,7 +9,7 @@ SVar:DBSacrifice:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ E
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME becomes blocked, CARDNAME gets +6/+3 until end of turn.
-SVar:TrigBlockedPump:DB$ Pump | Defined$ Self | NumAtt$ 6 | NumDef$ 3
+SVar:TrigBlockedPump:DB$ Pump | Defined$ Self | NumAtt$ +6 | NumDef$ +3
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ DBNoCombatDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 4 life.
 SVar:DBNoCombatDamage:DB$ Effect | StaticAbilities$ SNoCombatDamage | Duration$ UntilHostLeavesPlayOrEOT | SubAbility$ DBLoseLife
 SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE assigns no combat damage this turn.

@@ -2077,7 +2077,7 @@
 								"addMaxCount": 3
 							}
 						],
-						"addMapReputation": 3,
+						"addMapReputation": 3
 					}
 				],
 				"name": "(Complete Quest)"
@@ -6210,7 +6210,7 @@
 							}
 						],
 						"addMapReputation": 3,
-						"POIReference": "$(poi_1)"
+						"POIReference": "$(poi_2)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -6416,7 +6416,7 @@
 							}
 						],
 						"addMapReputation": 3,
-						"POIReference": "$(poi_1)"
+						"POIReference": "$(poi_2)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -6820,7 +6820,7 @@
 							}
 						],
 						"addMapReputation": 3,
-						"POIReference": "$(poi_1)"
+						"POIReference": "$(poi_2)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -6899,21 +6899,131 @@
 {
 	"id": 28,
 	"isTemplate": true,
-	"name": "Welcome to Shandalar",
+	"name": "Entering Shandalar",
 	"description": "Learn about your surroundings.",
 	"offerDialog": {},
 	"prologue": {
 		"text": "Darkness and silence surrounds you. A vague sense of falling slows second by second.",
 		"options": [
 			{
-				"name": "Where am I? What am I? What is going on?",
+				"name": "Where am I? What am I? What is going on? (Tutorial and main quest)",
 				"text": "A flash of light brighter than anything you remember precedes a fall to a stone floor. This is almost as jarring as realizing that you actually don't remember much of anything at all.",
 				"options": [
 					{
-						"name": "(Continue)",
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"activateMapObject": 78,
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": "exploreShand1",
+									"val": 1
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "53",
+								"POIReference": ""
+							}
+						],
+						"name": "Let's talk to the mage over there.",
 						"text": "A quiet crackling sound draws your eyes to the flickering light of a fire within the cave you now occupy. A hooded figure stands by the fire, facing you as if expecting your arrival."
 					}
 				]
+			},
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": "shandWalkers1",
+							"val": 1
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"name": "I want to find the planeswalkers (Future release)",
+				"text": "Well, shouting \"Planeswalkers, where are you?\" into the wastes won't do much. Travel to the nearest settlement and ask around for information.",
+				"options": [
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "29",
+								"POIReference": ""
+							}
+						],
+						"name": "(Continue)",
+						"text": "New Quest: A Chat with the Locals - Objective: Travel to any town in the wasteland.",
+						"options": [
+							{
+								"name": "(Dismiss)"
+							}
+						]
+					}
+				],
+				"isDisabled": true
+			},
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": "shandRep1",
+							"val": 1
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"name": "I want to make a name for myself (Future release)",
+				"text": "Then let's go impress some people. But first, you need some impressive spells. Build your collection to begin your quest.",
+				"options": [
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "31",
+								"POIReference": ""
+							}
+						],
+						"name": "(Dismiss)"
+					}
+				],
+				"isDisabled": true
 			},
 			{
 				"condition": [
@@ -6928,16 +7038,12 @@
 						"action": [
 							{
 								"removeItem": "",
-								"activateMapObject": 78,
 								"setColorIdentity": "",
 								"advanceQuestFlag": "",
 								"advanceMapFlag": "",
-								"setQuestFlag": {
-									"key": "mainQuest",
-									"val": 1
-								},
-								"setMapFlag": {
-									"key": ""
+								"setCharacterFlag": {
+									"key": "noQuest",
+									"val": "1"
 								},
 								"issueQuest": "",
 								"POIReference": ""
@@ -6959,148 +7065,6 @@
 			}
 		]
 	},
-	"stages": [
-		{
-			"id": 1,
-			"name": "Talk to the nearby mage",
-			"description": "There's not a lot to do in here other than talk to him, and any information is more than you have right now.",
-			"mapFlag": "mainQuest",
-			"mapFlagValue": 1,
-			"objective": "QuestFlag",
-			"prologue": {},
-			"epilogue": {},
-			"POIToken": ""
-		},
-		{
-			"id": 2,
-			"name": "Exit the cave",
-			"description": "The portal is open and you can leave now.",
-			"anyPOI": true,
-			"mapFlag": "",
-			"mapFlagValue": 1,
-			"objective": "Leave",
-			"prerequisiteIDs": [ 1 ],
-			"prologue": {},
-			"epilogue": {
-				"text": "So, you have a quest of sorts now: Find and free the planeswalkers. But is that really what you want to do? Despite the fog covering your memory, you are certain that you are powerful enough to take care of yourself.",
-				"options": [
-					{
-						"action": [
-							{
-								"removeItem": "",
-								"setColorIdentity": "",
-								"advanceQuestFlag": "",
-								"advanceMapFlag": "",
-								"setQuestFlag": {
-									"key": "shandWalkers1",
-									"val": 1
-								},
-								"setMapFlag": {
-									"key": ""
-								},
-								"issueQuest": "",
-								"POIReference": ""
-							}
-						],
-						"name": "I want to find the planeswalkers (Future release)",
-						"text": "Well, shouting \"Planeswalkers, where are you?\" into the wastes won't do much. Travel to the nearest settlement and ask around for information.",
-						"options": [
-							{
-								"action": [
-									{
-										"removeItem": "",
-										"setColorIdentity": "",
-										"advanceQuestFlag": "",
-										"advanceMapFlag": "",
-										"setQuestFlag": {
-											"key": ""
-										},
-										"setMapFlag": {
-											"key": ""
-										},
-										"issueQuest": "29",
-										"POIReference": ""
-									}
-								],
-								"name": "(Continue)",
-								"text": "New Quest: A Chat with the Locals - Objective: Travel to any town in the wasteland.",
-								"options": [
-									{
-										"name": "(Dismiss)"
-									}
-								]
-							}
-						],
-						"isDisabled": true
-					},
-					{
-						"action": [
-							{
-								"removeItem": "",
-								"setColorIdentity": "",
-								"advanceQuestFlag": "",
-								"advanceMapFlag": "",
-								"setQuestFlag": {
-									"key": "exploreShand1",
-									"val": 1
-								},
-								"setMapFlag": {
-									"key": ""
-								},
-								"issueQuest": "30",
-								"POIReference": ""
-							}
-						],
-						"name": "I want to explore Shandalar ((Has a brief tutorial))"
-					},
-					{
-						"action": [
-							{
-								"removeItem": "",
-								"setColorIdentity": "",
-								"advanceQuestFlag": "",
-								"advanceMapFlag": "",
-								"setQuestFlag": {
-									"key": "shandRep1",
-									"val": 1
-								},
-								"setMapFlag": {
-									"key": ""
-								},
-								"issueQuest": "",
-								"POIReference": ""
-							}
-						],
-						"name": "I want to make a name for myself (Future release)",
-						"text": "Then let's go impress some people. But first, you need some impressive spells. Build your collection to begin your quest.",
-						"options": [
-							{
-								"action": [
-									{
-										"removeItem": "",
-										"setColorIdentity": "",
-										"advanceQuestFlag": "",
-										"advanceMapFlag": "",
-										"setQuestFlag": {
-											"key": ""
-										},
-										"setMapFlag": {
-											"key": ""
-										},
-										"issueQuest": "31",
-										"POIReference": ""
-									}
-								],
-								"name": "(Dismiss)"
-							}
-						],
-						"isDisabled": true
-					}
-				]
-			},
-			"POIToken": ""
-		}
-	],
 	"storyQuest": true
 },
 {
@@ -7466,6 +7430,11 @@
 			"mixedEnemies": true,
 			"worldMapOK": true,
 			"objective": "Defeat",
+			"enemyExcludeTags": [
+				"Boss",
+				"Leader",
+				"Large"
+			],
 			"prerequisiteIDs": [ 3 ],
 			"prologue": {
 				"text": "Many quests you undertake in your adventure will send you to one or more dungeons just like this one. Dungeons are filled with enemies, but also treasure like gold, mana shards, and cards.",
@@ -7848,7 +7817,7 @@
 							}
 						],
 						"addMapReputation": 3,
-						"POIReference": "$(poi_1)"
+						"POIReference": "$(poi_2)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -11218,7 +11187,6 @@
 			"name": "Rescue the Red Captive",
 			"description": "Free the wizard being held captive inside the Red Castle.",
 			"mapFlag": "Ch1RedCastleComplete",
-			"mapFlagValue": 1,
 			"POITags": [
 				"BiomeRed",
 				"Chapter1Boss"
@@ -11260,5 +11228,67 @@
 		}
 	],
 	"storyQuest": true
-}
+},
+	{
+		"id": 53,
+		"isTemplate": true,
+		"name": "Welcome to Shandalar",
+		"description": "Learn about your surroundings.",
+		"offerDialog": {},
+		"prologue": {},
+		"epilogue": {},
+		"failureDialog": {},
+		"declinedDialog": {},
+		"stages": [
+			{
+				"id": 1,
+				"name": "Talk to the nearby mage",
+				"description": "There's not a lot to do in here other than talk to him, and any information is more than you have right now.",
+				"mapFlag": "mainQuest",
+				"mapFlagValue": 1,
+				"objective": "QuestFlag",
+				"prologue": {},
+				"epilogue": {},
+				"POIToken": ""
+			},
+			{
+				"id": 2,
+				"name": "Exit the cave",
+				"description": "The portal is open and you can leave now.",
+				"anyPOI": true,
+				"mapFlag": "",
+				"mapFlagValue": 1,
+				"objective": "Leave",
+				"prerequisiteIDs": [ 1 ],
+				"prologue": {},
+				"epilogue": {
+					"text": "You find yourself stranded on an unknown plane. It's time to get your bearings.",
+					"options": [
+						{
+							"name": "(Continue)",
+							"action": [
+								{
+									"removeItem": "",
+									"setColorIdentity": "",
+									"advanceQuestFlag": "",
+									"advanceMapFlag": "",
+									"setQuestFlag": {
+										"key": "shandRep1",
+										"val": 1
+									},
+									"setMapFlag": {
+										"key": ""
+									},
+									"issueQuest": "30",
+									"POIReference": ""
+								}
+							]
+						}
+					]
+				},
+				"POIToken": ""
+			}
+		],
+		"storyQuest": true
+	}
 ]

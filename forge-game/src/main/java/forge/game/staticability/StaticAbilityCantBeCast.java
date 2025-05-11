@@ -33,10 +33,6 @@ import forge.game.zone.ZoneType;
  */
 public class StaticAbilityCantBeCast {
 
-    static String CantBeCast = "CantBeCast";
-    static String CantBeActivated = "CantBeActivated";
-    static String CantPlayLand = "CantPlayLand";
-
     public static boolean cantBeCastAbility(final SpellAbility spell, final Card card, final Player activator) {
         card.setCastSA(spell);
 
@@ -45,7 +41,7 @@ public class StaticAbilityCantBeCast {
         allp.add(card);
         for (final Card ca : allp) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(CantBeCast)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantBeCast)) {
                     continue;
                 }
                 if (applyCantBeCastAbility(stAb, spell, card, activator)) {
@@ -63,7 +59,7 @@ public class StaticAbilityCantBeCast {
         final Game game = activator.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(CantBeActivated)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantBeActivated)) {
                     continue;
                 }
                 if (applyCantBeActivatedAbility(stAb, spell, card, activator)) {
@@ -78,7 +74,7 @@ public class StaticAbilityCantBeCast {
         final Game game = activator.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(CantPlayLand)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantPlayLand)) {
                     continue;
                 }
                 if (applyCantPlayLandAbility(stAb, card, activator)) {
@@ -106,6 +102,9 @@ public class StaticAbilityCantBeCast {
         }
 
         if (!stAb.matchesValidParam("Caster", activator)) {
+            return false;
+        }
+        if (stAb.getIgnoreEffectPlayers().contains(activator)) {
             return false;
         }
 
@@ -158,6 +157,9 @@ public class StaticAbilityCantBeCast {
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
+        if (stAb.getIgnoreEffectCards().contains(card)) {
+            return false;
+        }
 
         if (!stAb.matchesValidParam("ValidSA", spellAbility)) {
             return false;
@@ -199,6 +201,9 @@ public class StaticAbilityCantBeCast {
         }
 
         if (!stAb.matchesValidParam("Player", player)) {
+            return false;
+        }
+        if (stAb.getIgnoreEffectPlayers().contains(player)) {
             return false;
         }
 

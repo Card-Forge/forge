@@ -2,7 +2,7 @@ Name:The Deck of Many Things
 ManaCost:5
 Types:Legendary Artifact
 A:AB$ RollDice | Cost$ 2 T | Sides$ 20 | Modifier$ CardsInHand | ResultSubAbilities$ Else:DBDiscard,1-9:DBReturn,10-19:DBDrawTwo,20:DBReanimate | SpellDescription$ Roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand.
-SVar:CardsInHand:Count$InYourHand/Negative
+SVar:CardsInHand:Count$ValidHand Card.YouOwn/Negative
 SVar:DBDiscard:DB$ Discard | Mode$ Hand
 SVar:DBReturn:DB$ ChangeZone | ChangeType$ Card.YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Hand | SpellDescription$ 1—9 VERT Return a card at random from your graveyard to your hand.
 SVar:DBDrawTwo:DB$ Draw | NumCards$ 2 | SpellDescription$ 10—19 VERT Draw two cards.

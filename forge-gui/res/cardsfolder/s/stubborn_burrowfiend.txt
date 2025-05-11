@@ -4,7 +4,7 @@ Types:Creature Badger Beast Mount
 PT:2/2
 T:Mode$ BecomesSaddled | ValidSaddled$ Card.Self | FirstTimeSaddled$ True | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes saddled for the first time each turn, mill two cards, then CARDNAME gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | NumAtt$ Count$TypeInYourYard.Creature | NumDef$ Count$TypeInYourYard.Creature
+SVar:DBPump:DB$ Pump | NumAtt$ +Count$ValidGraveyard Creature.YouOwn | NumDef$ +Count$ValidGraveyard Creature.YouOwn
 K:Saddle:2
 DeckHas:Ability$Mill
 DeckHints:Ability$Sacrifice|Mill|Dredge|Discard

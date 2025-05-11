@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Phyrexian Construct
 PT:*/*
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifact cards in all graveyards.
-SVar:X:Count$TypeInAllYards.Artifact
+SVar:X:Count$ValidGraveyard Artifact
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:X GE1
 Oracle:Slag Fiend's power and toughness are each equal to the number of artifact cards in all graveyards.

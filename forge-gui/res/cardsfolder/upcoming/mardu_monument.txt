@@ -1,8 +1,0 @@
-Name:Mardu Monument
-ManaCost:2
-Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this artifact enters, search your library for a basic Mountain, Plains, or Swamp card, reveal it, put it into your hand, then shuffle.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Mountain+Basic,Land.Plains+Basic,Land.Swamp+Basic
-A:AB$ Token | Cost$ 2 R W B T Sac<1/CARDNAME> | TokenAmount$ 3 | TokenScript$ r_1_1_warrior | TokenOwner$ You | PumpKeywords$ Menace & Haste | PumpDuration$ EOT | SorcerySpeed$ True | SpellDescription$ Create three 1/1 red Warrior creature tokens. They gain menace and haste until end of turn. Activate only as a sorcery. (A creature with menace can't be blocked except by two or more creatures.)
-DeckHas:Ability$Token
-Oracle:When this artifact enters, search your library for a basic Mountain, Plains, or Swamp card, reveal it, put it into your hand, then shuffle.\n{2}{R}{W}{B}, {T}, Sacrifice this artifact: Create three 1/1 red Warrior creature tokens. They gain menace and haste until end of turn. Activate only as a sorcery. (A creature with menace can't be blocked except by two or more creatures.)

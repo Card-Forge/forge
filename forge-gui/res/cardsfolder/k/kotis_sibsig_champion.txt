@@ -1,0 +1,10 @@
+Name:Kotis, Sibsig Champion
+ManaCost:B G U
+Types:Legendary Creature Zombie Warrior
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.YouOwn | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | RaiseCost$ ExileFromGrave<3/Card/other cards> | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ Once during each of your turns, you may cast a creature spell from your graveyard by exiling three other cards from your graveyard in addition to paying its other costs.
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouCtrl+ThisTurnEnteredFrom_Graveyard,Creature.YouCtrl+wasCastFromGraveyard | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more creatures you control enter, if one or more of them entered from a graveyard or was cast from a graveyard, put two +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+DeckHas:Ability$Counters|Graveyard
+DeckHints:Ability$Graveyard|Mill
+Oracle:Once during each of your turns, you may cast a creature spell from your graveyard by exiling three other cards from your graveyard in addition to paying its other costs.\nWhenever one or more creatures you control enter, if one or more of them entered from a graveyard or was cast from a graveyard, put two +1/+1 counters on Kotis.

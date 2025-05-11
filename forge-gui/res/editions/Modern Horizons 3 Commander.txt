@@ -406,28 +406,33 @@ ScryfallCode=M3C
 411 R Rishkar's Expertise @Magali Villeneuve
 
 [tokens]
-b_3_3_beast_deathtouch
-b_x_x_aetherborn
-c_10_10_eldrazi
-c_1_1_a_myr
-c_1_1_a_thopter_flying
-c_1_1_eldrazi_scion_sac
-c_1_1_shapeshifter_changeling
-c_2_2_spirit
-c_4_4_eldrazi_angel_flying_vigilance
-c_6_12_a_construct_trample
-g_1_1_forest_dryad
-g_1_1_saproling
-g_2_2_boar
-g_3_3_ape
-g_3_3_beast
-g_3_3_elephant
-g_4_4_beast
-g_x_x_hydra
-marit_lage
-r_1_1_goblin
-r_5_5_dragon_flying
-rgw_1_1_sand_warrior
-u_2_1_a_phyrexian_myr
-u_2_2_shapeshifter_changeling
-u_x_x_illusion
+1 c_10_10_eldrazi @Jack Wang
+2 c_4_4_eldrazi_angel_flying_vigilance @Nino Is
+3 c_1_1_eldrazi_scion_sac @Izzy
+4 c_1_1_shapeshifter_changeling @Steve Prescott
+5 c_2_2_spirit @Johann Bodin
+6 u_x_x_illusion @Jason A. Engle
+7 u_2_1_a_phyrexian_myr @Daarken
+8 u_2_2_shapeshifter_changeling @Filip Burburan
+9 b_x_x_aetherborn @Yeong-Hao Han
+10 b_3_3_beast_deathtouch @Dave Kendall
+11 marit_lage @Stephan Martiniere
+12 r_5_5_dragon_flying @Loïc Canavaggia
+13 r_1_1_goblin @Kev Walker
+14 g_3_3_ape @Lars Grant-West
+15 g_3_3_beast @Jesper Ejsing
+16 g_4_4_beast @Steve Prescott
+17 g_2_2_boar @James Ryman
+18 g_3_3_elephant @Lars Grant-West
+19 g_1_1_forest_dryad @Donato Giancola
+20 g_x_x_hydra @Simon Dominic
+21 g_1_1_saproling @Trevor Claxton
+23 rgw_1_1_sand_warrior @Piotr Foksowicz
+24 c_6_12_a_construct_trample @Jung Park
+25 c_1_1_a_myr @Ryan Pancoast
+26 c_1_1_a_thopter_flying @Adam Paquette
+
+[other]
+22 tarmogoyf @Camille Alquier
+27 emblem_garruk_apex_predator @Tyler Jacobson
+28 emblem_vivien_reid @Anna Steinbauer

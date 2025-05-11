@@ -23,6 +23,7 @@ import com.google.common.collect.*;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import forge.game.card.*;
 import forge.game.cost.CostSacrifice;
 import forge.util.*;
 import org.apache.commons.lang3.ObjectUtils;
@@ -46,13 +47,6 @@ import forge.game.IIdentifiable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardFactory;
-import forge.game.card.CardPlayOption;
-import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostTap;
@@ -687,6 +681,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isFlashback() {
         return this.isAlternativeCost(AlternativeCost.Flashback);
     }
+    public boolean isHarmonize() {
+        return this.isAlternativeCost(AlternativeCost.Harmonize);
+    }
 
     public boolean isForetelling() {
         return false;
@@ -745,7 +742,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isAdventure() {
-        return this.getCardStateName() == CardStateName.Adventure;
+        return getCardStateName() == CardStateName.Secondary && getCardState().getType().hasSubtype("Adventure");
+    }
+    public boolean isOmen() {
+        return getCardStateName() == CardStateName.Secondary && getCardState().getType().hasSubtype("Omen");
     }
 
     public final boolean isCurse() {
@@ -1174,11 +1174,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         view.updateDescription(this);
     }
     public void appendSubAbility(final AbilitySub toAdd) {
-        SpellAbility tailend = this;
-        while (tailend.getSubAbility() != null) {
-            tailend = tailend.getSubAbility();
-        }
-        tailend.setSubAbility(toAdd);
+        getTailAbility().setSubAbility(toAdd);
     }
 
     public boolean isBasicSpell() {
@@ -1636,13 +1632,25 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         return parent;
     }
+    public SpellAbility getTailAbility() {
+        SpellAbility tailend = this;
+        while (tailend.getSubAbility() != null) {
+            tailend = tailend.getSubAbility();
+        }
+        return tailend;
+    }
 
     public SpellAbility getParent() {
         return null;
     }
 
-    protected IHasSVars getSVarFallback() {
-        return ObjectUtils.firstNonNull(this.getParent(), super.getSVarFallback());
+    protected List<IHasSVars> getSVarFallback() {
+        List<IHasSVars> result = Lists.newArrayList();
+        if (getParent() != null) {
+            result.add(getParent());
+        }
+        result.addAll(super.getSVarFallback());
+        return result;
     }
 
     public boolean isUndoable() {
@@ -2207,6 +2215,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     // Takes arguments like Blue or withFlying
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
+        if (property.startsWith("!")) {
+            return !ForgeScript.spellAbilityHasProperty(this, property.substring(1), sourceController, source, spellAbility);
+        }
         return ForgeScript.spellAbilityHasProperty(this, property, sourceController, source, spellAbility);
     }
 

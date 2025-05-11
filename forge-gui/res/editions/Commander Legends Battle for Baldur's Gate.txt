@@ -1147,49 +1147,49 @@ Wyll, Blade of Frontiers|CLB
 Zevlor, Elturel Exile|CLB
 
 [tokens]
-b_1_1_horror
-b_2_1_warrior
-b_3_3_demon
-b_4_1_skeleton_menace
-boo
-c_1_1_a_construct
-c_1_1_shapeshifter_changeling
-c_2_2_shapeshifter_changeling
-c_3_2_eldrazi_horror
-c_3_2_shapeshifter_changeling
-c_a_clue_draw
-c_a_gold_sac
-c_a_treasure_sac
-g_1_1_insect_flying_deathtouch
-g_1_1_saproling
-g_1_1_squirrel
-g_1_2_spider_reach
-g_2_2_boar
-g_2_2_wolf
-g_3_3_beast
-g_3_3_centaur_pro_black
-g_4_4_ox
-g_4_4_phyrexian_beast
-g_5_5_wurm
-kobolds_of_kher_keep
-r_1_1_devil_burn
-r_1_1_goblin_all_attack
-r_1_1_pirate_noblock_all_attack
-r_3_3_ogre
-r_4_4_dragon_flying
-r_5_5_dragon_flying
-rg_2_2_satyr_haste
-u_1_1_faerie_dragon_flying
-u_1_1_squid_islandwalk
-u_1_1_wizard_countersac
-u_2_2_shapeshifter_changeling
-volos_journal
-w_0_1_goat
-w_1_1_human
-w_1_1_kor_warrior
-w_1_1_pegasus_flying
-w_1_1_rabbit
-w_1_1_soldier
-w_2_2_knight
-w_4_4_angel_flying_vigilance
-wb_2_1_inkling_flying
+1 w_0_1_goat @Forrest Imel
+2 w_2_2_knight @Paolo Puggioni
+3 w_1_1_pegasus_flying @Greg Hildebrandt
+4 w_1_1_rabbit @Andrea Radeck
+5 w_1_1_soldier @Magali Villeneuve
+6 u_1_1_faerie_dragon_flying @Iris Compiet
+7 b_3_3_demon @Dave Kendall
+8 b_4_1_skeleton_menace @David Astruga
+9 boo @Zoltan Boros
+10 r_1_1_devil_burn @Josh Hass
+11 r_4_4_dragon_flying @Kieran Yanner
+12 g_2_2_boar @Tomek Larek
+13 g_4_4_ox @Tomek Larek
+14 g_1_1_saproling @David Szabo
+15 g_1_1_squirrel @Daniel Ljunggren
+16 c_1_1_a_construct @Jakub Kasper
+17 c_a_treasure_sac @Dan Murayama Scott
+18 volos_journal @Zoltan Boros
+21 c_3_2_eldrazi_horror @Jason Felix
+22 c_1_1_shapeshifter_changeling @Steve Prescott
+23 c_2_2_shapeshifter_changeling @Johann Bodin
+24 c_3_2_shapeshifter_changeling @Igor Grechanyi
+25 w_4_4_angel_flying_vigilance @
+26 w_1_1_human @Ben Maier
+27 w_1_1_kor_warrior @Randy Vargas
+28 u_2_2_shapeshifter_changeling @Filip Burburan
+29 u_1_1_squid_islandwalk @Jack Wang
+30 u_1_1_wizard_countersac @Denys Tsiperko
+31 b_1_1_horror @Nino Is
+32 b_2_1_warrior @Zoltan Boros
+33 r_5_5_dragon_flying @Alex Konstad
+34 r_1_1_goblin_all_attack @Wayne Reynolds
+35 kobolds_of_kher_keep @Paolo Parente
+36 r_3_3_ogre @Paul Bonner
+37 r_1_1_pirate_noblock_all_attack @Jonathan Kuo
+38 g_3_3_beast @Jesper Ejsing
+39 g_3_3_centaur_pro_black @Martina Pilcerova
+40 g_1_1_insect_flying_deathtouch @Martina Pilcerova
+41 g_4_4_phyrexian_beast @Svetlin Velinov
+42 g_1_2_spider_reach @Slawomir Maniak
+43 g_2_2_wolf @Andrea Radeck
+44 g_5_5_wurm @Slawomir Maniak
+45 wb_2_1_inkling_flying @Scott Murphy
+46 rg_2_2_satyr_haste @Johann Bodin
+47 c_a_clue_draw @Campbell White
+48 c_a_gold_sac @Yeong-Hao Han

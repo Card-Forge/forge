@@ -265,14 +265,14 @@ Weight Advantage
 Kaya, Ghost Assassin|CN2|2
 
 [tokens]
-w_1_1_soldier
-w_1_2_soldier_defender
-w_1_1_spirit_flying
-b_1_1_assassin_deathtouch_haste
-b_2_2_zombie
-r_5_5_dragon_flying
-r_1_1_goblin_noblock
-r_8_8_lizard
-g_3_3_beast
-g_1_1_insect
-c_1_1_a_construct_defender
+2 w_1_1_soldier @Greg Staples
+3 w_1_2_soldier_defender @Jason A. Engle
+4 w_1_1_spirit_flying @Jeff Simpson
+5 b_1_1_assassin_deathtouch_haste @Josu Hernaiz
+6 b_2_2_zombie @Seb McKinnon
+7 r_5_5_dragon_flying @Raymond Swanland
+8 r_1_1_goblin_noblock @Jason A. Engle
+9 r_8_8_lizard @Filip Burburan
+10 g_3_3_beast @Jesper Ejsing
+11 g_1_1_insect @Carl Critchlow
+12 c_1_1_a_construct_defender @Victor Adame Minguez

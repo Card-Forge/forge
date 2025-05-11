@@ -5,7 +5,7 @@ PT:1/1
 K:Deathtouch
 K:Lifelink
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield,Graveyard | CheckSVar$ X | Execute$ TrigPump | TriggerDescription$ At the beginning of your end step, if a creature died this turn, CARDNAME perpetually gets +X/+X where X is the number of creatures that died this turn. This ability also triggers if NICKNAME is in your graveyard.
-SVar:TrigPump:DB$ Pump | Defined$ Self | PumpZone$ Battlefield,Graveyard | NumAtt$ X | NumDef$ X | Duration$ Perpetual
+SVar:TrigPump:DB$ Pump | Defined$ Self | PumpZone$ Battlefield,Graveyard | NumAtt$ +X | NumDef$ +X | Duration$ Perpetual
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 DeckHas:Ability$Graveyard|LifeGain
 DeckHints:Ability$Sacrifice|Graveyard

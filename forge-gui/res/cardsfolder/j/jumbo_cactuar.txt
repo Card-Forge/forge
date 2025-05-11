@@ -1,0 +1,7 @@
+Name:Jumbo Cactuar
+ManaCost:5 G G
+Types:Creature Plant
+PT:1/7
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ 10,000 Needles — Whenever this creature attacks, it gets +9999/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +9999
+Oracle:10,000 Needles — Whenever this creature attacks, it gets +9999/+0 until end of turn.

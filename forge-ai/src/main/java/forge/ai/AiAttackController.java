@@ -37,6 +37,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -1587,7 +1588,7 @@ public class AiAttackController {
             // but there are no creatures it can target, no need to exert with it
             boolean missTarget = false;
             for (StaticAbility st : c.getStaticAbilities()) {
-                if (!"OptionalAttackCost".equals(st.getParam("Mode"))) {
+                if (!st.checkMode(StaticAbilityMode.OptionalAttackCost)) {
                     continue;
                 }
                 SpellAbility sa = st.getPayingTrigSA();

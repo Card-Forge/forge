@@ -4,6 +4,6 @@ Types:Artifact Creature Illusion
 PT:0/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another artifact you control enters, CARDNAME gets +2/+2 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
 SVar:BuffedBy:Artifact
 Oracle:Flying\nWhenever another artifact you control enters, Glaze Fiend gets +2/+2 until end of turn.

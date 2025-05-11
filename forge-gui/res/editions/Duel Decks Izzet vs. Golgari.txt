@@ -98,6 +98,4 @@ ScryfallCode=DDJ
 90 L Forest @Richard Wright
 
 [tokens]
-u_3_3_weird_defender_flying
-b_2_2_zombie
-g_1_1_saproling
+1 g_1_1_saproling @Brad Rigney

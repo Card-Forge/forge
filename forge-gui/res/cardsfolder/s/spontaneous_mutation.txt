@@ -2,8 +2,8 @@ Name:Spontaneous Mutation
 ManaCost:U
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | Description$ Enchanted creature gets -X/-0, where X is the number of cards in your graveyard.
-SVar:X:Count$InYourYard
+SVar:X:Count$ValidGraveyard Card.YouOwn
 Oracle:Flash\nEnchant creature\nEnchanted creature gets -X/-0, where X is the number of cards in your graveyard.

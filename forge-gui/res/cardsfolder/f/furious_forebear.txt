@@ -1,0 +1,7 @@
+Name:Furious Forebear
+ManaCost:1 W
+Types:Creature Spirit Warrior
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Graveyard | Execute$ TrigChangeZone | TriggerDescription$ Whenever a creature you control dies while this card is in your graveyard, you may pay {1}{W}. If you do, return this card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 1 W | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+Oracle:Whenever a creature you control dies while this card is in your graveyard, you may pay {1}{W}. If you do, return this card from your graveyard to your hand.

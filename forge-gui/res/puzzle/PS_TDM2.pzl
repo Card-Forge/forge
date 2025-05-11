@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Tarkir: Dragonstorm #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/04/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Ensure your solution satisfies all possible blocks. Any cards drawn are irrelevant to the puzzle.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Getaway Glamer;Channeled Dragonfire;Razorkin Needlehead;Elspeth, Storm Slayer;Reverberating Summons;Mishra's Domination
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Voice of Victory;Fear of Burning Alive;Rescue Leopard|Counters:P1P1=1;Plains;Plains;Mountain;Mountain;Mountain;Mountain
+p1life=13
+p1battlefield=Altanak, the Thrice-Called;Sage of the Skies|Counters:P1P1=3;Sage of the Skies|Counters:P1P1=3

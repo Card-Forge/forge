@@ -452,18 +452,18 @@ S Lost Mine of Phandelver
 S Tomb of Annihilation
 
 [tokens]
-b_1_1_skeleton
-b_2_1_spider_menace_reach
-b_2_2_zombie
-the_atropal
-boo
-c_a_treasure_sac
-g_2_2_wolf
-guenhwyvar
-icingdeath_frost_tongue
-r_1_1_devil_burn
-r_1_1_goblin
-u_1_1_faerie_dragon_flying
-u_x_x_dog_illusion_cardsinhand
-vecna
-w_3_3_angel_flying
+1 w_3_3_angel_flying @Irina Nordsol
+2 icingdeath_frost_tongue @Kieran Yanner
+3 u_x_x_dog_illusion_cardsinhand @Mark Behm
+4 u_1_1_faerie_dragon_flying @Iris Compiet
+5 the_atropal @Nicholas Gregory
+6 b_1_1_skeleton @Svetlin Velinov
+7 b_2_1_spider_menace_reach @Joe Slucher
+8 vecna @Irina Nordsol
+9 b_2_2_zombie @Artur Treffner
+10 boo @Zoltan Boros
+11 r_1_1_devil_burn @Josh Hass
+12 r_1_1_goblin @Oriana Menendez
+13 guenhwyvar @Brian Valeza
+14 g_2_2_wolf @Daren Bader
+15 c_a_treasure_sac @Dan Murayama Scott

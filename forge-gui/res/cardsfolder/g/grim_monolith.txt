@@ -1,7 +1,7 @@
 Name:Grim Monolith
 ManaCost:2
 Types:Artifact
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This artifact doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This artifact doesn't untap during your untap step.
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
 A:AB$ Untap | Cost$ 4 | AILogic$ EOT | SpellDescription$ Untap this artifact.
 AI:RemoveDeck:Random

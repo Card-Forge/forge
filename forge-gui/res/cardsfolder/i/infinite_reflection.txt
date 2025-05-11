@@ -1,8 +1,8 @@
 Name:Infinite Reflection
 ManaCost:5 U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ HighestEvaluation
+K:Enchant:Creature
+SVar:AttachAILogic:HighestEvaluation
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+AttachedTo Card | Execute$ RememberInitialAttach | Static$ True
 SVar:RememberInitialAttach:DB$ Pump | RememberObjects$ Valid Card.AttachedBy
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+AttachedTo Card | Execute$ TrigClone | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters attached to a creature, each other nontoken creature you control becomes a copy of that creature.

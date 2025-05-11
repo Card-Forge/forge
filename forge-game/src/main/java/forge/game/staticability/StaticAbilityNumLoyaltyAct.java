@@ -11,12 +11,10 @@ import forge.game.zone.ZoneType;
  */
 public class StaticAbilityNumLoyaltyAct {
 
-    static String MODE = "NumLoyaltyAct";
-
     public static boolean limitIncrease(final Card card) {
         for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.NumLoyaltyAct)) {
                     continue;
                 }
 
@@ -44,7 +42,7 @@ public class StaticAbilityNumLoyaltyAct {
         int addl = 0;
         for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.NumLoyaltyAct)) {
                     continue;
                 }
                 if (!stAb.matchesValidParam("ValidCard", card)) {

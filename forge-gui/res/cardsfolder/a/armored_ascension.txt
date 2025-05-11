@@ -1,9 +1,9 @@
 Name:Armored Ascension
 ManaCost:3 W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Flying | Description$ Enchanted creature gets +1/+1 for each Plains you control and has flying.
-SVar:X:Count$TypeYouCtrl.Plains
+SVar:X:Count$Valid Plains.YouCtrl
 SVar:BuffedBy:Plains
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each Plains you control and has flying.

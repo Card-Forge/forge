@@ -299,7 +299,6 @@ public final class StaticAbilityContinuous {
                 if (params.containsKey("FromDraftNotes")) {
                     addKeywords = Lists.newArrayList(hostCard.getController().getDraftNotes().getOrDefault(params.get("FromDraftNotes"), "").split(","));
                 }
-
             } else if (params.containsKey("ShareRememberedKeywords")) {
                 List<String> kwToShare = Lists.newArrayList();
                 for (final Object o : hostCard.getRemembered()) {
@@ -499,14 +498,6 @@ public final class StaticAbilityContinuous {
             // add keywords
             if (addKeywords != null && !addKeywords.isEmpty()) {
                 p.addChangedKeywords(addKeywords, removeKeywords, se.getTimestamp(), stAb.getId());
-            }
-
-            // add static abilities
-            if (addStatics != null) {
-                for (String s : addStatics) {
-                    StaticAbility stat = p.addStaticAbility(hostCard, s);
-                    stat.setIntrinsic(false);
-                }
             }
 
             if (layer == StaticAbilityLayer.RULES) {

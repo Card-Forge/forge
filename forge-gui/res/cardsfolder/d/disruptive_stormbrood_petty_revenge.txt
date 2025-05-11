@@ -1,0 +1,17 @@
+Name:Disruptive Stormbrood
+ManaCost:4 G
+Types:Creature Dragon
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy up to one target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment
+AlternateMode:Omen
+Oracle:Flying\nWhen this creature enters, destroy up to one target artifact or enchantment.
+
+ALTERNATE
+
+Name:Petty Revenge
+ManaCost:1 B
+Types:Sorcery Omen
+A:SP$ Destroy | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less. | SpellDescription$ Destroy target creature with power 3 or less. (Then shuffle this card into its owner's library.)
+Oracle:Destroy target creature with power 3 or less. (Then shuffle this card into its owner's library.)

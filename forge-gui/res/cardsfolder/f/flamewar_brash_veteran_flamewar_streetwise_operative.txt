@@ -26,4 +26,4 @@ SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | Exi
 SVar:DBConvert:DB$ SetState | Mode$ Transform
 SVar:X:TriggerCount$DamageAmount
 SVar:HasAttackEffect:TRUE
-Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nMenace, deathtouch\nWhenever Flamewar deals combat damage to a player, exile that many cards from the top of your library face down. Put an intel counter on each of them. Convert Flamewar.
+Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nMenace, deathtouch\nWhenever Flamewar deals combat damage to a player, exile that many cards from the top of your library face down. Put an intel counter on each of them. Convert Flamewar.

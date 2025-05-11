@@ -3,6 +3,6 @@ ManaCost:4 G G
 Types:Creature Beast
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land you control enters, CARDNAME gets +4/+4 and gains trample until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 4 | NumDef$ 4 | KW$ Trample
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +4 | NumDef$ +4 | KW$ Trample
 SVar:BuffedBy:Land
 Oracle:Landfall — Whenever a land you control enters, Baloth Woodcrasher gets +4/+4 and gains trample until end of turn.

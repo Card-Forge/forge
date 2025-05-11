@@ -12,6 +12,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.*;
 import forge.game.GameOutcome.AnteResult;
+import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -55,7 +56,8 @@ public abstract class PlayerController {
         OddsOrEvens,
         UntapOrLeaveTapped,
         LeftOrRight,
-        AddOrRemove
+        AddOrRemove,
+        IncreaseOrDecrease
     }
 
     public enum FullControlFlag {
@@ -229,6 +231,10 @@ public abstract class PlayerController {
 
     public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);
     public abstract Integer chooseRollToIgnore(List<Integer> rolls);
+    public abstract List<Integer> chooseDiceToReroll(List<Integer> rolls);
+    public abstract Integer chooseRollToModify(List<Integer> rolls);
+    public abstract RollDiceEffect.DieRollResult chooseRollToSwap(List<RollDiceEffect.DieRollResult> rolls);
+    public abstract String chooseRollSwapValue(List<String> swapChoices, Integer currentResult, int power, int toughness);
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional);
 
@@ -292,6 +298,7 @@ public abstract class PlayerController {
     public abstract List<CostPart> orderCosts(List<CostPart> costs);
 
     public abstract boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers);
+    public abstract boolean payCostDuringRoll(Cost cost, SpellAbility sa, FCollectionView<Player> allPayers);
 
     public abstract boolean payCombatCost(Card card, Cost cost, SpellAbility sa, String prompt);
 

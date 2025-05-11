@@ -2,7 +2,8 @@ Name:Stunning Strike
 ManaCost:2 U
 Types:Enchantment Aura
 K:Flash
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature and remove it from combat.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ RemCombat
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Enchanted

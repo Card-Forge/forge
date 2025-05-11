@@ -1,8 +1,9 @@
 Name:Maniacal Rage
 ManaCost:1 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature gets +2/+2 and can't block.
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2 and can't block.
+S:Mode$ CantBlock | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature gets +2/+2 and can't block.
 AI:RemoveDeck:Random
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and can't block.

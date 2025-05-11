@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBInvestigate
 SVar:DBInvestigate:DB$ Investigate | Num$ 4
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | CheckSVar$ X | SVarCompare$ LE1 | Description$ As long as you have one or fewer cards in hand, CARDNAME gets +2/+2 and has menace.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 DeckHas:Ability$Discard|Token & Type$Clue|Artifact
 DeckHints:Ability$Discard
 Oracle:When Carnage Interpreter enters, discard your hand, then investigate four times. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nAs long as you have one or fewer cards in hand, Carnage Interpreter gets +2/+2 and has menace.

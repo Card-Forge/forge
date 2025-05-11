@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Elemental
 PT:*/*
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
-SVar:X:Count$InYourHand
+SVar:X:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:All
 SVar:NeedsToPlayVar:X GE2
 Oracle:Maro's power and toughness are each equal to the number of cards in your hand.

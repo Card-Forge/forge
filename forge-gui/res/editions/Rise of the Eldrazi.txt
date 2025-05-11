@@ -9,6 +9,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 FatPack=8
 FatPackExtraSlots=40 BasicLands
 ScryfallCode=ROE
+TokenFallbackCode=WWK
 
 [cards]
 1 M All Is Dust @Jason Felix
@@ -261,13 +262,10 @@ ScryfallCode=ROE
 248 L Forest @Jung Park
 
 [tokens]
-tuktuk_the_returned
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-c_0_1_eldrazi_spawn_sac
-w_1_1_kor_soldier
-r_5_5_dragon_flying
-r_x_x_elemental
-r_4_4_hellion
-g_3_3_elephant
-g_x_x_ooze
+1a c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+1a c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+1a c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+2 r_x_x_elemental @Jung Park
+3 r_4_4_hellion @Anthony Francisco
+4 g_x_x_ooze @Daniel Ljunggren
+5 tuktuk_the_returned @Franz Vohwinkel

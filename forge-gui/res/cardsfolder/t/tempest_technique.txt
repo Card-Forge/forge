@@ -1,0 +1,9 @@
+Name:Tempest Technique
+ManaCost:3 W
+Types:Enchantment Aura
+K:Storm
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each enchantment you control.
+SVar:X:Count$Valid Enchantment.YouCtrl
+Oracle:Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies. Copies become tokens.)\nEnchant creature you control\nEnchanted creature gets +1/+1 for each enchantment you control.

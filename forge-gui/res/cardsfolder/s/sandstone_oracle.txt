@@ -6,6 +6,6 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseOpp | TriggerDescription$ When CARDNAME enters, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
 SVar:TrigChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ MostCardsInHand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
-SVar:Y:Count$InYourHand
-SVar:X:Count$InChosenHand/Minus.Y
+SVar:Y:Count$ValidHand Card.YouOwn
+SVar:X:Count$ValidHand Card.ChosenCtrl/Minus.Y
 Oracle:Flying\nWhen Sandstone Oracle enters, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.

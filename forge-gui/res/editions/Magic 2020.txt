@@ -392,14 +392,13 @@ ScryfallCode=M20
 3 Forest|M20|3
 
 [tokens]
-ajanis_pridemate
-b_5_5_demon_flying
-r_1_1_elemental
-u_4_4_elemental_bird_flying
-c_3_3_a_golem
-c_3_3_a_phyrexian_golem
-w_1_1_soldier
-w_1_1_spirit_flying
-c_a_treasure_sac
-g_2_2_wolf
-b_2_2_zombie
+1 ajanis_pridemate @Howard Lyon
+2 w_1_1_soldier @Jakub Kasper
+3 w_1_1_spirit_flying @Jason A. Engle
+4 u_4_4_elemental_bird_flying @Jana Schirmer
+5 b_5_5_demon_flying @Sidharth Chaturvedi
+6 b_2_2_zombie @Anna Steinbauer
+7 r_1_1_elemental @Winona Nelson
+8 g_2_2_wolf @Aaron Miller
+9 c_3_3_a_phyrexian_golem @Daarken
+10 c_a_treasure_sac @Alayna Danner

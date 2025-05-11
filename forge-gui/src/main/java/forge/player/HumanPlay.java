@@ -1,7 +1,6 @@
 package forge.player;
 
 import com.google.common.collect.Iterables;
-import forge.ImageKeys;
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -65,7 +64,6 @@ public class HumanPlay {
             return true;
         }
 
-        boolean isforetold = source.isForetold();
         boolean castFaceDown = sa.isCastFaceDown();
         boolean flippedToCast = sa.isSpell() && source.isFaceDown();
 
@@ -96,11 +94,10 @@ public class HumanPlay {
                 Card rollback = p.getGame().getCardState(source);
                 if (castFaceDown) {
                     rollback.setFaceDown(false);
+                    rollback.updateStateForView();
                 } else if (flippedToCast) {
                     // need to get the changed card if able
                     rollback.turnFaceDown(true);
-                    //need to set correct imagekey when forcing facedown
-                    rollback.setImageKey(ImageKeys.getTokenKey(isforetold ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
                     if (rollback.isInZone(ZoneType.Exile)) {
                         rollback.addMayLookTemp(p);
                     }

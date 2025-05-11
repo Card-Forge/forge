@@ -1067,8 +1067,7 @@ public class CardFactoryUtil {
                     " | IsPresent$ Card.Self+cameUnderControlSinceLastUpkeep | Secondary$ True | " +
                     "TriggerDescription$ " + inst.getReminderText();
 
-            String effect = "DB$ Sacrifice | SacValid$ Self | "
-                    + "Echo$ " + cost;
+            String effect = "DB$ Sacrifice | SacValid$ Self | Echo$ " + cost;
 
             final Trigger trigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -1712,8 +1711,7 @@ public class CardFactoryUtil {
                     + " | IsPresent$ Card.Self+!IsRenowned | CombatDamage$ True | Secondary$ True"
                     + " | TriggerDescription$ Renown " + k[1] +" (" + inst.getReminderText() + ")";
 
-            final String effect = "DB$ PutCounter | Defined$ Self | "
-                    + "CounterType$ P1P1 | CounterNum$ " + k[1];
+            final String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + k[1];
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(renownTrig, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -2287,6 +2285,40 @@ public class CardFactoryUtil {
             sb.append("| ValidStackSa$ Spell.Flashback+castKeyword | Description$ Flashback");
 
             if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
+                final String[] k = keyword.split(":");
+                final Cost cost = new Cost(k[1], false);
+                sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
+                sb.append(cost.isOnlyManaCost() ? "" : ".");
+
+                String extraDesc =  k.length > 3 ? k[3] : "";
+                if (!extraDesc.isEmpty()) { // extra params added in GameActionUtil, desc added here
+                    sb.append(cost.isOnlyManaCost() ? ". " : " ").append(extraDesc);
+                }
+            }
+
+            sb.append(" (").append(inst.getReminderText()).append(")");
+
+            String repeffstr = sb.toString();
+
+            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
+
+            SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
+
+            if (!intrinsic) {
+                saExile.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
+
+            re.setOverridingAbility(saExile);
+
+            inst.addReplacement(re);
+        } else if (keyword.startsWith("Harmonize")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
+            sb.append("| ValidStackSa$ Spell.Harmonize+castKeyword | Description$ Harmonize");
+
+            if (keyword.contains(":")) {
                 final String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
@@ -3602,8 +3634,7 @@ public class CardFactoryUtil {
 
             newSA.setAlternativeCost(AlternativeCost.Surge);
 
-            String desc = "Surge " + surgeCost.toSimpleString() + " (" + inst.getReminderText()
-                    + ")";
+            String desc = "Surge " + surgeCost.toSimpleString() + " (" + inst.getReminderText() + ")";
             newSA.setDescription(desc);
 
             newSA.setIntrinsic(intrinsic);
@@ -3794,9 +3825,9 @@ public class CardFactoryUtil {
             final String t = k[1];
 
             String desc;
-            if(k.length > 2) {
+            if (k.length > 2) {
                 String typeText = k[2];
-                if(typeText.contains(" with "))
+                if (typeText.contains(" with "))
                     desc = typeText.substring(typeText.indexOf(" with ") + 6);
                 else
                     desc = typeText + "s";
@@ -3922,7 +3953,7 @@ public class CardFactoryUtil {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can't be transformed except by its daybound ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Decayed")) {
-            String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Secondary$ True | Description$ CARDNAME can't block.";
+            String effect = "Mode$ CantBlock | ValidCard$ Creature.Self | Secondary$ True | Description$ CARDNAME can't block.";
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
             inst.addStaticAbility(st);
         } else if (keyword.equals("Defender")) {
@@ -3965,6 +3996,12 @@ public class CardFactoryUtil {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying+withoutReach | Secondary$ True" +
                     " | Description$ Flying (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.startsWith("Harmonize")) {
+            String reduceEffect = "Mode$ ReduceCost | ValidCard$ Card.Self | ValidSpell$ Spell.Harmonize | Secondary$ True"
+                    + " | Amount$ AffectedX | EffectZone$ All | Description$ Harmonize (" + inst.getReminderText() + ")";
+            StaticAbility stAb = StaticAbility.create(reduceEffect, state.getCard(), state, intrinsic);
+            stAb.setSVar("AffectedX", "Count$OptionalKeywordAmount");
+            inst.addStaticAbility(stAb);
         } else if (keyword.startsWith("Hexproof")) {
             final StringBuilder sbDesc = new StringBuilder("Hexproof");
             final StringBuilder sbValid = new StringBuilder();
@@ -4068,7 +4105,7 @@ public class CardFactoryUtil {
                     " | Description$ Strive - " + inst.getReminderText();
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Unleash")) {
-            String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self+counters_GE1_P1P1 | Secondary$ True | Description$ CARDNAME can't block.";
+            String effect = "Mode$ CantBlock | ValidCard$ Creature.Self+counters_GE1_P1P1 | Secondary$ True | Description$ CARDNAME can't block.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Undaunted")) {
             String effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
@@ -4087,7 +4124,7 @@ public class CardFactoryUtil {
 
     public static void setupSiegeAbilities(Card card) {
         StringBuilder chooseSB = new StringBuilder();
-        chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated");
+        chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | BattleProtector$ True");
         chooseSB.append(" | Description$ (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)");
         String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle";
 
@@ -4115,16 +4152,7 @@ public class CardFactoryUtil {
         card.addTrigger(defeatedTrigger);
     }
 
-    public static void setupAdventureAbility(Card card) {
-        if (card.getCurrentStateName() != CardStateName.Adventure) {
-            return;
-        }
-        SpellAbility sa = card.getFirstSpellAbility();
-        if (sa == null) {
-            return;
-        }
-        sa.setCardState(card.getCurrentState());
-
+    public static ReplacementEffect setupAdventureAbility(CardState card) {
         StringBuilder sb = new StringBuilder();
         sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
         sb.append("| ValidStackSa$ Spell.Adventure | Fizzle$ False | Secondary$ True | Description$ Adventure");
@@ -4139,16 +4167,33 @@ public class CardFactoryUtil {
         AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
 
         StringBuilder sbPlay = new StringBuilder();
-        sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
+        sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+!Adventure");
         sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
         saEffect.setSVar("Play", sbPlay.toString());
 
         saExile.setSubAbility(saEffect);
 
-        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card, true);
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), true);
 
         re.setOverridingAbility(saExile);
-        card.addReplacementEffect(re);
+        return re;
+    }
+
+    public static ReplacementEffect setupOmenAbility(CardState card) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack ");
+        sb.append("| ValidStackSa$ Spell.Omen | Fizzle$ False | Secondary$ True | Description$ Omen");
+
+        String repeffstr = sb.toString();
+
+        String abShuffle = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Library | Shuffle$ True | StackDescription$ None";
+        AbilitySub saShuffle = (AbilitySub)AbilityFactory.getAbility(abShuffle, card);
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), true);
+
+        re.setOverridingAbility(saShuffle);
+
+        return re;
     }
 
     public static void setFaceDownState(Card c, SpellAbility sa) {

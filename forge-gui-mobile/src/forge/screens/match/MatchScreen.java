@@ -1,5 +1,8 @@
 package forge.screens.match;
 
+import static forge.Forge.getLocalizer;
+
+import forge.toolbox.FOptionPane;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -651,7 +654,7 @@ public class MatchScreen extends FScreen {
                 break;
             case Keys.Q: //concede game on Ctrl+Q
                 if (KeyInputAdapter.isCtrlKeyDown()) {
-                    MatchController.instance.concede();
+                    confirmUserConcedes();
                     return true;
                 }
                 break;
@@ -1175,6 +1178,22 @@ public class MatchScreen extends FScreen {
                 return !MatchController.instance.getGameView().getPlanarPlayer().getCurrentPlaneName().isEmpty();
             }
         return false;
+    }
+
+    private void confirmUserConcedes() {
+        final Callback<Boolean> callback = new Callback<>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    getGameController().concede();
+                }
+            }
+        };
+
+        FOptionPane.showConfirmDialog(getLocalizer().getMessage("lblConcedeCurrentGame"),
+            getLocalizer().getMessage("lblConcedeTitle"),
+            getLocalizer().getMessage("lblConcede"),
+            getLocalizer().getMessage("lblCancel"), callback);
     }
 
     @Override

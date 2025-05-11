@@ -1,0 +1,8 @@
+Name:Become the Avalanche
+ManaCost:4 G G
+Types:Sorcery
+A:SP$ Draw | NumCards$ X | SubAbility$ DBPumpAll | SpellDescription$ Draw a card for each creature you control with power 4 or greater. Then creatures you control get +X/+X until end of turn, where X is the number of cards in your hand.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +Y | NumDef$ +Y
+SVar:X:Count$Valid Creature.powerGE4+YouCtrl
+SVar:Y:Count$ValidHand Card.YouOwn
+Oracle:Draw a card for each creature you control with power 4 or greater. Then creatures you control get +X/+X until end of turn, where X is the number of cards in your hand.

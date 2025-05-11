@@ -25,24 +25,10 @@ public class OptionalCostValue implements Serializable {
     }
 
     /**
-     * @param type the type to set
-     */
-    public void setType(OptionalCost type) {
-        this.type = type;
-    }
-
-    /**
      * @return the cost
      */
     public Cost getCost() {
         return cost;
-    }
-
-    /**
-     * @param cost the cost to set
-     */
-    public void setCost(Cost cost) {
-        this.cost = cost;
     }
 
     /* (non-Javadoc)

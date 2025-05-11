@@ -2,5 +2,5 @@ Name:Congregate
 ManaCost:3 W
 Types:Instant
 A:SP$ GainLife | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 2 life for each creature on the battlefield.
-SVar:X:Count$TypeOnBattlefield.Creature/Times.2
+SVar:X:Count$Valid Creature/Times.2
 Oracle:Target player gains 2 life for each creature on the battlefield.

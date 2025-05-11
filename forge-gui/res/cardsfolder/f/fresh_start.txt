@@ -1,0 +1,8 @@
+Name:Fresh Start
+ManaCost:1 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -5 | RemoveAllAbilities$ True | Description$ Enchanted creature gets -5/-0 and loses all abilities.
+Oracle:Flash\nEnchant creature\nEnchanted creature gets -5/-0 and loses all abilities.

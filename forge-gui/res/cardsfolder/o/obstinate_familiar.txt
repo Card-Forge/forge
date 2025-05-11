@@ -3,5 +3,5 @@ ManaCost:R
 Types:Creature Lizard
 PT:1/1
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | Optional$ True | Prevent$ True | AICheckSVar$ AIHandling | AISVarCompare$ EQ0 | Description$ If you would draw a card, you may skip that draw instead.
-SVar:AIHandling:Count$InYourLibrary
+SVar:AIHandling:Count$ValidLibrary Card.YouOwn
 Oracle:If you would draw a card, you may skip that draw instead.

@@ -1,0 +1,7 @@
+Name:Salt Road Skirmish
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBToken | SpellDescription$ Destroy target creature. Create two 1/1 red Warrior creature tokens. They gain haste until end of turn. Sacrifice them at the beginning of the next end step.
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_warrior | TokenOwner$ You | PumpKeywords$ Haste | PumpDuration$ EOT | AtEOT$ Sacrifice
+SVar:PlayMain1:TRUE
+Oracle:Destroy target creature. Create two 1/1 red Warrior creature tokens. They gain haste until end of turn. Sacrifice them at the beginning of the next end step.

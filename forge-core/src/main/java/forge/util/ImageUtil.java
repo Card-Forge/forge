@@ -197,6 +197,13 @@ public class ImageUtil {
                 langCode, versionParam, faceParam);
     }
 
+    public static String getScryfallTokenDownloadUrl(String collectorNumber, String setCode, String langCode) {
+        String versionParam = "normal";
+        String faceParam = "";
+        return String.format("%s/%s/%s?format=image&version=%s%s", setCode, collectorNumber,
+                langCode, versionParam, faceParam);
+    }
+
     public static String toMWSFilename(String in) {
         in = StringUtils.stripAccents(in);
         final StringBuilder out = new StringBuilder();

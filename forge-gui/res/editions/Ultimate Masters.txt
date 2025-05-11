@@ -268,19 +268,19 @@ ScryfallCode=UMA
 254 R Urborg, Tomb of Yawgmoth @Jung Park
 
 [tokens]
-marit_lage
-spark_elemental
-w_1_1_citizen
-w_1_1_spirit_flying
-u_2_2_drake_flying
-u_2_2_homunculus
-b_1_1_faerie_rogue_flying
-b_6_6_wurm_trample
-b_2_2_zombie
-r_1_1_elemental
-r_1_1_elemental
-r_1_1_soldier_haste
-g_4_4_elemental
-g_x_x_ooze
-g_1_2_spider_reach
-wb_1_1_spirit_flying
+1 w_1_1_citizen @Michael Phillippi
+2 w_1_1_spirit_flying @Jeff Simpson
+3 u_2_2_drake_flying @Svetlin Velinov
+4 u_2_2_homunculus @Johann Bodin
+5 b_1_1_faerie_rogue_flying @Dave Allsop
+6 marit_lage @Stephan Martiniere
+7 b_6_6_wurm_trample @Daarken
+8 b_2_2_zombie @Anna Steinbauer
+9 r_1_1_elemental @Jaime Jones
+9 r_1_1_elemental @Jaime Jones
+11 r_1_1_soldier_haste @Johann Bodin
+12 spark_elemental @John Avon
+13 g_4_4_elemental @Brandon Kitkouski
+14 g_x_x_ooze @Marco Nelor
+15 g_1_2_spider_reach @Daniel Ljunggren
+16 wb_1_1_spirit_flying @Cliff Childs

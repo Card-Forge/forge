@@ -1,8 +1,8 @@
 Name:Wreath of Geists
 ManaCost:G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +X/+X, where X is the number of creature cards in your graveyard.
-SVar:X:Count$TypeInYourYard.Creature
+SVar:X:Count$ValidGraveyard Creature.YouOwn
 Oracle:Enchant creature\nEnchanted creature gets +X/+X, where X is the number of creature cards in your graveyard.

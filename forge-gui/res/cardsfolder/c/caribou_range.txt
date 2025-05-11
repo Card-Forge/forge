@@ -1,8 +1,8 @@
 Name:Caribou Range
 ManaCost:2 W W
 Types:Enchantment Aura
-K:Enchant land you control
-A:SP$ Attach | ValidTgts$ Land.YouCtrl | AILogic$ Pump
+K:Enchant:Land.YouCtrl:land you control
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ Token | Description$ Enchanted land has "{W}{W}, {T}: Create a 0/1 white Caribou creature token."
 SVar:Token:AB$ Token | Cost$ W W T | TokenAmount$ 1 | TokenScript$ w_0_1_caribou | TokenOwner$ You | SpellDescription$ Create a 0/1 white Caribou creature token.
 A:AB$ GainLife | Cost$ Sac<1/Caribou.token/Caribou token> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.

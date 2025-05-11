@@ -364,43 +364,45 @@ ScryfallCode=BLC
 356 M Flubs, the Fool @Adam Rex
 
 [tokens]
-b_1_1_rat
-bg_1_1_pest_lifegain
-bg_2_2_wolf_garruk
-c_10_10_eldrazi
-c_1_1_a_thopter_flying
-c_3_3_a_phyrexian_golem
-c_a_blood_draw
-c_a_clue_draw
-g_1_1_saproling
-g_1_2_spider_reach
-g_2_2_cat
-g_2_2_wolf
-g_3_3_beast
-g_3_3_elephant
-g_3_3_frog_lizard
-g_3_3_raccoon
-g_4_4_beast
-gw_1_1_citizen
-r_1_1_goblin
-r_1_1_hamster
-storm_crow
-u_1_1_faerie_flying
-u_1_1_squid_islandwalk
-u_2_2_bird_flying
-u_2_2_shapeshifter_changeling
-u_3_3_shark
-u_8_8_octopus
-u_x_x_illusion
-w_0_1_goat
-w_1_1_bird_flying
-w_1_1_human
-w_1_1_human_soldier
-w_1_1_soldier
-w_1_1_spirit_flying
-w_4_4_elemental_flying
+2 c_10_10_eldrazi @Jack Wang
+3 w_1_1_bird_flying @Allen Douglas
+4 w_4_4_elemental_flying @Svetlin Velinov
+5 w_0_1_goat @Forrest Imel
+6 w_1_1_human @Ben Maier
+7 w_1_1_human_soldier @Eric Deschamps
+8 w_1_1_soldier @Jakub Kasper
+9 w_1_1_spirit_flying @Jason A. Engle
+11 u_2_2_bird_flying @Tuan Duong Chu
+12 u_1_1_faerie_flying @Irina Nordsol
+13 u_x_x_illusion @Jason A. Engle
+14 u_8_8_octopus @Craig J Spearing
+15 u_2_2_shapeshifter_changeling @Filip Burburan
+16 u_3_3_shark @Edgar Sánchez Hidalgo
+17 u_1_1_squid_islandwalk @Jack Wang
+18 storm_crow @Yangtian Li
+19 b_1_1_rat @Mike Bierek
+21 r_1_1_goblin @Kev Walker
+22 r_1_1_hamster @Andrea Radeck
+24 g_3_3_beast @Jesper Ejsing
+25 g_4_4_beast @Steve Prescott
+26 g_2_2_cat @Raoul Vitale
+27 g_3_3_elephant @Lars Grant-West
+28 g_3_3_frog_lizard @Jack Wang
+29 g_3_3_raccoon @Mark Poole
+30 g_1_1_saproling @Brad Rigney
+31 g_1_2_spider_reach @Sam Rowan
+32 g_2_2_wolf @Jakub Kasper
+33 gw_1_1_citizen @Maria Poliakova
+34 bg_1_1_pest_lifegain @Ilse Gort
+35 bg_2_2_wolf_garruk @David Gaillet
+36 c_a_blood_draw @Miranda Meeks
+37 c_a_clue_draw @Xabi Gaztelua
+38 c_3_3_a_phyrexian_golem @Volkan Baǵa
+39 c_1_1_a_thopter_flying @Svetlin Velinov
 
 [other]
-offspring_agate_instigator
-offspring_prosperous_bandit
-offspring_steelburr_champion
+1 copy @David Palumbo
+10 offspring_steelburr_champion @Josiah "Jo" Cameron
+20 offspring_agate_instigator @Quintin Gleim
+23 offspring_prosperous_bandit @Mark Behm
+40 blessing @Yeong-Hao Han

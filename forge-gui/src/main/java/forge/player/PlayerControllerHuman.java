@@ -16,6 +16,7 @@ import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.token.TokenInfo;
@@ -1439,6 +1440,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public List<Integer> chooseDiceToReroll(List<Integer> rolls) {
+        return getGui().many(Localizer.getInstance().getMessage("lblChooseDiceToRerollTitle"),
+                Localizer.getInstance().getMessage("lblChooseDiceToRerollCaption"),0, rolls.size(), rolls, null);
+    }
+
+    @Override
+    public Integer chooseRollToModify(List<Integer> rolls) {
+        return getGui().oneOrNone(Localizer.getInstance().getMessage("lblChooseRollToModify"), rolls);
+    }
+
+    @Override
+    public RollDiceEffect.DieRollResult chooseRollToSwap(List<RollDiceEffect.DieRollResult> rolls) {
+        return getGui().oneOrNone(Localizer.getInstance().getMessage("lblChooseRollToSwap"), rolls);
+    }
+
+    @Override
+    public String chooseRollSwapValue(List<String> swapChoices, Integer currentResult, int power, int toughness) {
+        return getGui().oneOrNone(Localizer.getInstance().getMessage("lblChooseSwapPT", currentResult, power, toughness), swapChoices);
+    }
+
+    @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
                        final ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
         if (optional) {
@@ -1686,6 +1708,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 break;
             case AddOrRemove:
                 labels = ImmutableList.of(localizer.getMessage("lblAddCounter"), localizer.getMessage("lblRemoveCounter"));
+                break;
+            case IncreaseOrDecrease:
+                labels = ImmutableList.of(localizer.getMessage("lblIncrease"), localizer.getMessage("lblDecrease"));
                 break;
             default:
                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
@@ -1980,6 +2005,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             prompt = "Cumulative upkeep for " + sa.getHostCard();
         }
         return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, prompt);
+    }
+
+    @Override
+    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa, final FCollectionView<Player> allPayers) {
+        // if it's paid by the AI already the human can pay, but it won't change anything
+        return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
     }
 
     // stores saved order for different sets of SpellAbilities

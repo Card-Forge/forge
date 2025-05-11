@@ -6,13 +6,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityColorlessDamageSource {
 
-    static String MODE = "ColorlessDamageSource";
-
     public static boolean colorlessDamageSource(final CardState state) {
         final Card card = state.getCard();
         for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.ColorlessDamageSource)) {
                     continue;
                 }
                 if (applyColorlessDamageSource(stAb, card)) {

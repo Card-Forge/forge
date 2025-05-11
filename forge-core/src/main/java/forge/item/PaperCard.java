@@ -26,8 +26,7 @@ import forge.util.Localizer;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.io.ObjectStreamException;
 import java.io.Serial;
 import java.util.*;
@@ -309,7 +308,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         String collectorNumber = collectorNumber0;
         if (collectorNumber.equals(NO_COLLECTOR_NUMBER))
             collectorNumber = null;
-        return CardEdition.CardInSet.getSortableCollectorNumber(collectorNumber);
+        return CardEdition.getSortableCollectorNumber(collectorNumber);
     }
 
     private String sortableCNKey = null;
@@ -510,7 +509,10 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
      * name, edition, and collector number. Examples include permanent markings on the card, and flags for Adventure
      * mode.
      */
-    public static class PaperCardFlags {
+    public static class PaperCardFlags implements Serializable {
+        @Serial
+        private static final long serialVersionUID = -3924720485840169336L;
+
         /**
          * Chosen colors, for cards like Cryptic Spires.
          */

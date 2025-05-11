@@ -52,7 +52,10 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public void add(final String cardRequest, final int amount) {
         CardDb.CardRequest request = CardDb.CardRequest.fromString(cardRequest);
-        this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.artIndex, amount, false, request.flags);
+        if(request.collectorNumber != null && !request.collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER))
+            this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.collectorNumber, amount, false, request.flags);
+        else
+            this.add(CardDb.CardRequest.compose(request.cardName, request.isFoil), request.edition, request.artIndex, amount, false, request.flags);
     }
 
     public void add(final String cardName, final String setCode) {
@@ -71,7 +74,20 @@ public class CardPool extends ItemPool<PaperCard> {
     public void add(String cardName, String setCode, int artIndex, final int amount) {
         this.add(cardName, setCode, artIndex, amount, false, null);
     }
-    public void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny, Map<String, String> flags) {
+    private void add(String cardName, String setCode, String collectorNumber, final int amount, boolean addAny, Map<String, String> flags) {
+        Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
+        for (Map.Entry<String, CardDb> entry: dbs.entrySet()){
+            CardDb db = entry.getValue();
+            PaperCard paperCard = db.getCard(cardName, setCode, collectorNumber, flags);
+            if (paperCard != null) {
+                this.add(paperCard, amount);
+                return;
+            }
+        }
+        //Failed to find it. Fall back accordingly?
+        this.add(cardName, setCode, IPaperCard.NO_ART_INDEX, amount, addAny, flags);
+    }
+    private void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny, Map<String, String> flags) {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
         PaperCard paperCard = null;
         String selectedDbName = "";

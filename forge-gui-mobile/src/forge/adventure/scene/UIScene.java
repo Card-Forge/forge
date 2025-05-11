@@ -28,7 +28,7 @@ import java.time.LocalTime;
  */
 public class UIScene extends Scene {
     protected UIActor ui;
-
+    private boolean textboxOpen;
 
     public static class Selectable<T extends Actor> {
         public T actor;
@@ -192,6 +192,7 @@ public class UIScene extends Scene {
     }
 
     public UIScene(String uiFilePath) {
+        textboxOpen = false;
         uiFile = uiFilePath;
         stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight())) {
             @Override
@@ -223,7 +224,7 @@ public class UIScene extends Scene {
     }
 
     public void removeDialog() {
-
+        textboxOpen = false;
         if (!dialogs.isEmpty()) {
             dialogs.get(dialogs.size - 1).remove();
             dialogs.removeIndex(dialogs.size - 1);
@@ -243,6 +244,7 @@ public class UIScene extends Scene {
     }
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo, boolean cancelButton, String stringCancel) {
         Dialog dialog = new Dialog(title == null ? "" : title, Controls.getSkin());
+        textboxOpen = true;
         if (label != null)
             dialog.text(label);
         TextraButton yes = Controls.newTextButton(stringYes, runnableYes);
@@ -359,7 +361,6 @@ public class UIScene extends Scene {
             }
         }
 
-
         if (KeyBinding.Back.isPressed(keycode) && selection != null) {
             selection.onDeSelect();
             stage.setKeyboardFocus(null);
@@ -378,15 +379,17 @@ public class UIScene extends Scene {
                 scroll.setScrollY(scroll.getScrollY() + 20);
             }
         }
-        if (KeyBinding.Down.isPressed(keycode))
-            selectNextDown();
-        if (KeyBinding.Up.isPressed(keycode))
-            selectNextUp();
-        if (!(stage.getKeyboardFocus() instanceof Selector) && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)) {
-            if (KeyBinding.Right.isPressed(keycode))
-                selectNextRight();
-            if (KeyBinding.Left.isPressed(keycode))
-                selectNextLeft();
+        if(!textboxOpen){
+            if (KeyBinding.Down.isPressed(keycode))
+                selectNextDown();
+            if (KeyBinding.Up.isPressed(keycode))
+                selectNextUp();
+            if (!(stage.getKeyboardFocus() instanceof Selector) && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)) {
+                if (KeyBinding.Right.isPressed(keycode))
+                    selectNextRight();
+                if (KeyBinding.Left.isPressed(keycode))
+                    selectNextLeft();
+            }
         }
         if (!dialogShowing()) {
             Button pressedButton = ui.buttonPressed(keycode);

@@ -73,8 +73,6 @@ ScryfallCode=GN2
 64 L Forest @Dimitar Marinski
 
 [tokens]
-w_1_1_soldier
-g_3_3_dinosaur_trample
-b_2_2_zombie
-r_5_5_dragon_flying
-g_2_2_wolf
+1 r_2_2_dragon_flying_firebreathing @Lars Grant-West
+2 r_5_5_dragon_flying @Alex Konstad
+3 g_3_3_dinosaur_trample @Filip Burburan

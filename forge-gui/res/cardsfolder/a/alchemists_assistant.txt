@@ -1,0 +1,7 @@
+Name:Alchemist's Assistant
+ManaCost:1 B
+Types:Creature Monkey
+PT:2/1
+K:Lifelink
+A:AB$ PutCounter | PrecostDesc$ Renew — | Cost$ 1 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ Lifelink | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a lifelink counter on target creature. Activate only as a sorcery.
+Oracle:Lifelink\nRenew — {1}{B}, Exile this card from your graveyard: Put a lifelink counter on target creature. Activate only as a sorcery.

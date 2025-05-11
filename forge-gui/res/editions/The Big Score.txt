@@ -107,10 +107,10 @@ ScryfallCode=BIG
 95 M Tarnation Vista @Alayna Danner
 
 [tokens]
-b_2_1_bat_flying
-c_0_0_a_construct_total_artifacts
-c_1_1_a_gnome
-c_3_3_a_golem
-c_a_blood_draw
-c_a_food_sac
-c_a_map_sac_explore
+1 b_2_1_bat_flying @Inkognit
+2 c_a_blood_draw @Mark Poole
+3 c_0_0_a_construct_total_artifacts @Matteo Bassini
+4 c_a_food_sac @Patrik Hell
+5 c_1_1_a_gnome @Villarrte
+6 c_3_3_a_golem @Brian Valeza
+7 c_a_map_sac_explore @Camille Alquier

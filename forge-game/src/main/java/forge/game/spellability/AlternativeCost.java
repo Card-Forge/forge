@@ -10,6 +10,7 @@ public enum AlternativeCost {
     Escape,
     Evoke,
     Flashback,
+    Harmonize,
     Foretold,
     Freerunning,
     Impending,

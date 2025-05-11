@@ -22,5 +22,5 @@ A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 2 | Sp
 A:AB$ DealDamage | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 10 | SpellDescription$ CARDNAME deals 10 damage to target creature or planeswalker.
 A:AB$ ChangeZone | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker card in a graveyard | SpellDescription$ Put target creature or planeswalker card from a graveyard onto the battlefield under your control.
 A:AB$ Dig | Cost$ SubCounter<12/LOYALTY> | Planeswalker$ True | Ultimate$ True | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Exile all but the bottom card of target player's library.
-SVar:X:Count$InTargetedLibrary.Card/Minus.1
+SVar:X:Count$ValidLibrary Card.TargetedPlayerOwn/Minus.1
 Oracle:[+2]: Draw two cards.\n[-3]: Nicol Bolas, the Arisen deals 10 damage to target creature or planeswalker.\n[-4]: Put target creature or planeswalker card from a graveyard onto the battlefield under your control.\n[-12]: Exile all but the bottom card of target player's library.

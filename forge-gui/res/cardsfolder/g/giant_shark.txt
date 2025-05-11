@@ -4,8 +4,8 @@ Types:Creature Shark
 PT:4/4
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.wasDealtDamageThisTurn | ValidBlocker$ Card.Self | Execute$ TrigPumpShark | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature that has been dealt damage this turn, CARDNAME gets +2/+0 and gains trample until end of turn.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.wasDealtDamageThisTurn | Execute$ TrigPumpShark | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature that has been dealt damage this turn, CARDNAME gets +2/+0 and gains trample until end of turn.
-SVar:TrigPumpShark:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 0 | KW$ Trample
-S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
+SVar:TrigPumpShark:DB$ Pump | Defined$ Self | NumAtt$ +2 | KW$ Trample
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefender$ controlsIsland | Description$ CARDNAME can't attack unless defending player controls an Island.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice
 SVar:NeedsToPlay:Island.YouCtrl

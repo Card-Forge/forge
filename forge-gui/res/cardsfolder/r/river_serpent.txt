@@ -2,8 +2,8 @@ Name:River Serpent
 ManaCost:5 U
 Types:Creature Serpent
 PT:5/5
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ LE4 | Description$ CARDNAME can't attack unless there are five or more cards in your graveyard.
+S:Mode$ CantAttack | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ LE4 | Description$ CARDNAME can't attack unless there are five or more cards in your graveyard.
 K:Cycling:U
-SVar:X:Count$InYourYard
+SVar:X:Count$ValidGraveyard Card.YouOwn
 SVar:BuffedBy:Instant,Sorcery
 Oracle:River Serpent can't attack unless there are five or more cards in your graveyard.\nCycling {U} ({U}, Discard this card: Draw a card.)

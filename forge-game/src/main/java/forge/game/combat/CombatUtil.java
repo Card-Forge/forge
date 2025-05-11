@@ -33,7 +33,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityBlockRestrict;
-import forge.game.staticability.StaticAbilityBlockTapped;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
@@ -71,7 +70,7 @@ public class CombatUtil {
         final Game game = playerWhoAttacks.getGame();
         final CardCollection battles = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.BATTLES);
         for (Card battle : battles) {
-            if (battle.getType().hasSubtype("Siege") && battle.getProtectingPlayer().isOpponentOf(playerWhoAttacks)) {
+            if (battle.getProtectingPlayer().isOpponentOf(playerWhoAttacks)) {
                 defenders.add(battle);
             }
         }
@@ -493,11 +492,14 @@ public class CombatUtil {
             return false;
         }
 
-        if (!nextTurn && blocker.isTapped() && !StaticAbilityBlockTapped.canBlockTapped(blocker)) {
+        if (!nextTurn && blocker.isTapped() && !StaticAbilityCantAttackBlock.canBlockTapped(blocker)) {
             return false;
         }
 
         if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block.")) {
+            return false;
+        }
+        if (StaticAbilityCantAttackBlock.cantBlock(blocker)) {
             return false;
         }
 

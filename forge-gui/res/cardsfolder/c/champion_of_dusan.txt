@@ -1,0 +1,7 @@
+Name:Champion of Dusan
+ManaCost:2 G
+Types:Creature Human Warrior
+PT:4/2
+K:Trample
+A:AB$ PutCounter | PrecostDesc$ Renew — | Cost$ 1 G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterTypes$ P1P1,Trample | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter and a trample counter on target creature. Activate only as a sorcery.
+Oracle:Trample\nRenew — {1}{G}, Exile this card from your graveyard: Put a +1/+1 counter and a trample counter on target creature. Activate only as a sorcery.

@@ -1,0 +1,9 @@
+Name:Aligned Heart
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Flurry — Whenever you cast your second spell each turn, put a rally counter on this enchantment. Then create a 1/1 white Monk creature token with prowess for each rally counter on it. (Whenever you cast a noncreature spell, the token gets +1/+1 until end of turn.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ RALLY | CounterNum$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_monk_prowess | TokenOwner$ You
+SVar:X:Count$CardCounters.RALLY
+SVar:BuffedBy:Card
+Oracle:Flurry — Whenever you cast your second spell each turn, put a rally counter on this enchantment. Then create a 1/1 white Monk creature token with prowess for each rally counter on it. (Whenever you cast a noncreature spell, the token gets +1/+1 until end of turn.)

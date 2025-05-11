@@ -3,5 +3,5 @@ ManaCost:1 B
 Types:Artifact Creature Human Rogue
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact card in your graveyard.
-SVar:X:Count$TypeInYourYard.Artifact
+SVar:X:Count$ValidGraveyard Artifact.YouOwn
 Oracle:Salvage Slasher gets +1/+0 for each artifact card in your graveyard.

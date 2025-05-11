@@ -10,6 +10,7 @@ FatPack=9
 FatPackExtraSlots=70 BasicLands ISD
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=DKA
+TokenFallbackCode=ISD
 
 [cards]
 1 M Archangel's Light @Volkan Baǵa
@@ -172,11 +173,8 @@ ScryfallCode=DKA
 158 R Vault of the Archangel @John Avon
 
 [tokens]
-w_1_1_human
-w_1_1_human
-w_1_1_spirit_flying
-b_1_1_vampire_lifelink
-b_2_2_zombie
-b_2_2_zombie
-b_2_2_zombie
-g_2_2_wolf
+1 w_1_1_human @John Stanko
+2 b_1_1_vampire_lifelink @Peter Mohrbacher
+
+[other]
+3 emblem_sorin_lord_of_innistrad @Michael Komarck

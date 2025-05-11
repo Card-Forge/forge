@@ -1,13 +1,13 @@
 Name:Tourach's Gate
 ManaCost:1 B B
 Types:Enchantment Aura
-K:Enchant land you control
-A:SP$ Attach | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | AILogic$ Pump
+K:Enchant:Land.YouCtrl:land you control
+SVar:AttachAILogic:Pump
 A:AB$ PutCounter | Cost$ Sac<1/Thrull> | Defined$ Self | CounterType$ TIME | CounterNum$ 3 | SpellDescription$ Put three time counters on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At the beginning of your upkeep, remove a time counter from CARDNAME. If there are no time counters on CARDNAME, sacrifice it.
 SVar:TrigSubCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | SubAbility$ Sac
 SVar:Sac:DB$ Sacrifice | ConditionPresent$ Card.Self+counters_EQ0_TIME
-A:AB$ PumpAll | Cost$ tapXType<1/Land.EnchantedBy/Enchanted Land> | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ 2 | NumDef$ -1 | SpellDescription$ Attacking creatures you control get +2/-1 until end of turn.
+A:AB$ PumpAll | Cost$ tapXType<1/Land.EnchantedBy/Enchanted Land> | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ Attacking creatures you control get +2/-1 until end of turn.
 AI:RemoveDeck:Random
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant land you control\nSacrifice a Thrull: Put three time counters on Tourach's Gate.\nAt the beginning of your upkeep, remove a time counter from Tourach's Gate. If there are no time counters on Tourach's Gate, sacrifice it.\nTap enchanted land: Attacking creatures you control get +2/-1 until end of turn. Activate only if enchanted land is untapped.

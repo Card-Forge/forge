@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ GainLife | Cost$ 3 W T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 2 life for each creature you control.
-SVar:X:Count$TypeYouCtrl.Creature/Times.2
+SVar:X:Count$Valid Creature.YouCtrl/Times.2
 DeckHas:Ability$Mana.Colorless
 DeckNeeds:Color$White
 Oracle:{T}: Add {C}.\n{3}{W}, {T}, Sacrifice Blighted Steppe: You gain 2 life for each creature you control.

@@ -1,0 +1,8 @@
+Name:Roar of Endless Song
+ManaCost:2 G U R
+Types:Enchantment Saga
+K:Chapter:3:DBToken,DBToken,DBDouble
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_5_elephant | TokenOwner$ You | SpellDescription$ Create a 5/5 green Elephant creature token.
+SVar:DBDouble:DB$ Pump | Defined$ Valid Creature.YouCtrl | NumAtt$ Double | NumDef$ Double | SpellDescription$ Double the power and toughness of each creature you control until end of turn.
+DeckHas:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Create a 5/5 green Elephant creature token.\nIII — Double the power and toughness of each creature you control until end of turn.

@@ -37,5 +37,5 @@ ScryfallCode=BOT
 29 M Ultra Magnus, Tactician @Volta Creation
 
 [tokens]
-laserbeak
-ravage
+1 laserbeak @Volta Creation
+2 ravage @Volta Creation

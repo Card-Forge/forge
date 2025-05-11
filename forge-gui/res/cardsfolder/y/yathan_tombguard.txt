@@ -1,0 +1,9 @@
+Name:Yathan Tombguard
+ManaCost:2 B
+Types:Creature Human Warrior
+PT:2/3
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+HasCounters | Execute$ TrigDraw | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with a counter on it deals combat damage to a player, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever a creature you control with a counter on it deals combat damage to a player, you draw a card and you lose 1 life.

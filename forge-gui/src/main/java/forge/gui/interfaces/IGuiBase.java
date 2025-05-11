@@ -17,6 +17,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
+import org.jupnp.UpnpServiceConfiguration;
+
 public interface IGuiBase {
     boolean isRunningOnDesktop();
     boolean isLibgdxPort();
@@ -61,4 +63,5 @@ public interface IGuiBase {
     String encodeSymbols(String str, boolean formatReminderText);
     void preventSystemSleep(boolean preventSleep);
     float getScreenScale();
+    UpnpServiceConfiguration getUpnpPlatformService();
 }

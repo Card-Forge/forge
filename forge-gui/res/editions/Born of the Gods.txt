@@ -8,6 +8,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand THS
 FatPack=9
 FatPackExtraSlots=80 BasicLands THS
 ScryfallCode=BNG
+TokenFallbackCode=THS
 
 [cards]
 1 U Acolyte's Reward @Slawomir Maniak
@@ -177,14 +178,17 @@ ScryfallCode=BNG
 165 R Temple of Plenty @Noah Bradley
 
 [tokens]
-b_2_2_e_zombie
-c_a_gold_sac
-g_2_2_wolf
-g_3_3_e_centaur
-r_3_1_e_elemental_haste
-u_2_2_e_bird_flying
-u_9_9_kraken
-w_1_1_bird_flying
-w_1_1_cat_soldier_vigilance
-w_1_1_e_soldier
-w_1_1_e_soldier
+1 w_1_1_bird_flying @Clint Cearley
+2 w_1_1_cat_soldier_vigilance @Scott Chou
+3 w_1_1_e_soldier @David Palumbo
+3 w_1_1_e_soldier @David Palumbo
+4 u_2_2_e_bird_flying @Mike Sass
+5 u_9_9_kraken @Dan Murayama Scott
+6 b_2_2_e_zombie @Winona Nelson
+7 r_3_1_e_elemental_haste @Greg Staples
+8 g_3_3_e_centaur @Ryan Barger
+9 g_2_2_wolf @Raoul Vitale
+10 c_a_gold_sac @Richard Wright
+
+[other]
+11 emblem_kiora_the_crashing_wave @Scott M. Fischer

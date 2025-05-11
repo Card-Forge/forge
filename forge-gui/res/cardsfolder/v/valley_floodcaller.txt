@@ -5,7 +5,7 @@ PT:2/2
 K:Flash
 S:Mode$ CastWithFlash | ValidCard$ Card.nonCreature | ValidSA$ Spell | Caster$ You | Description$ You may cast noncreature spells as though they had flash.
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you cast a noncreature spell, Birds, Frogs, Otters, and Rats you control get +1/+1 until end of turn. Untap them.
-SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Bird.YouCtrl,Frog.YouCtrl,Otter.YouCtrl,Rat.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SubAbility$ TrigUntapAll
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Bird.YouCtrl,Frog.YouCtrl,Otter.YouCtrl,Rat.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SubAbility$ TrigUntapAll
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Bird.YouCtrl,Frog.YouCtrl,Otter.YouCtrl,Rat.YouCtrl
 SVar:BuffedBy:Card.nonCreature+nonLand
 Oracle:Flash\nYou may cast noncreature spells as though they had flash.\nWhenever you cast a noncreature spell, Birds, Frogs, Otters, and Rats you control get +1/+1 until end of turn. Untap them.

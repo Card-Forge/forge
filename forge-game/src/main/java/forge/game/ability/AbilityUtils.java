@@ -1786,11 +1786,10 @@ public class AbilityUtils {
                 }
                 // Count$NumTimesChoseMode
                 if (sq[0].startsWith("NumTimesChoseMode")) {
-                    SpellAbility sub = sa.getRootAbility();
                     int amount = 0;
-                    while (sub != null) {
-                        if (sub.getDirectSVars().containsKey("CharmOrder")) amount++;
-                        sub = sub.getSubAbility();
+                    SpellAbility tail = sa.getTailAbility();
+                    if (tail.hasSVar("CharmOrder")) {
+                        amount = tail.getSVarInt("CharmOrder");
                     }
                     return doXMath(amount, expr, c, ctb);
                 }
@@ -2228,6 +2227,11 @@ public class AbilityUtils {
         // Count$FinishedUpkeepsThisTurn
         if (sq[0].startsWith("FinishedUpkeepsThisTurn")) {
             return doXMath(game.getPhaseHandler().getNumUpkeep() - (game.getPhaseHandler().is(PhaseType.UPKEEP) ? 1 : 0), expr, c, ctb);
+        }
+
+        // Count$FinishedEndOfTurnsThisTurn
+        if (sq[0].startsWith("FinishedEndOfTurnsThisTurn")) {
+            return doXMath(game.getPhaseHandler().getNumEndOfTurn() - (game.getPhaseHandler().is(PhaseType.END_OF_TURN) ? 1 : 0), expr, c, ctb);
         }
 
         // Count$AttachedTo <restriction>
@@ -2706,24 +2710,6 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[res.size() > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
 
-        if (sq[0].startsWith("CreatureType")) {
-            String[] sqparts = l[0].split(" ", 2);
-            final String[] rest = sqparts[1].split(",");
-
-            final CardCollectionView cardsInZones = sqparts[0].length() > 12
-                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(12)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
-            final Set<String> creatTypes = Sets.newHashSet();
-
-            for (Card card : cards) {
-                creatTypes.addAll(card.getType().getCreatureTypes());
-            }
-            // filter out fun types?
-            return doXMath(creatTypes.size(), expr, c, ctb);
-        }
-
         // Count$Chroma.<color name>
         if (sq[0].startsWith("Chroma")) {
             final CardCollectionView cards;
@@ -2780,16 +2766,6 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("PlanarDiceSpecialActionThisTurn")) {
             return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
-        }
-
-        if (sq[0].equals("AllTypes")) {
-            List<Card> cards = getDefinedCards(c, sq[1], ctb);
-
-            int amount = countCardTypesFromList(cards, false) +
-                    countSuperTypesFromList(cards) +
-                    countSubTypesFromList(cards);
-
-            return doXMath(amount, expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -2935,18 +2911,6 @@ public class AbilityUtils {
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
             int[] colorSize = CardFactoryUtil.SortColorsFromList(list);
             return doXMath(colorSize[colorSize.length - 2], expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("ColorsCtrl")) {
-            final String restriction = l[0].substring(11);
-            final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            return doXMath(CardUtil.getColorsFromCards(list).countColors(), expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("ColorsDefined")) {
-            final String restriction = l[0].substring(14);
-            final CardCollection list = getDefinedCards(c, restriction, ctb);
-            return doXMath(CardUtil.getColorsFromCards(list).countColors(), expr, c, ctb);
         }
 
         // TODO move below to handlePaid
@@ -3795,6 +3759,10 @@ public class AbilityUtils {
             return Aggregates.max(paidList, Card::getCMC);
         }
 
+        if (string.equals("Colors")) {
+            return CardUtil.getColorsFromCards(paidList).countColors();
+        }
+
         if (string.equals("DifferentColorPair")) {
             final Set<ColorSet> diffPair = new HashSet<>();
             for (final Card card : paidList) {
@@ -3824,8 +3792,23 @@ public class AbilityUtils {
             return doXMath(num, splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
+        if (string.startsWith("AllTypes")) {
+            return countCardTypesFromList(paidList, false) +
+                    countSuperTypesFromList(paidList) +
+                    countSubTypesFromList(paidList);
+        }
+
         if (string.startsWith("CardTypes")) {
             return doXMath(countCardTypesFromList(paidList, string.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(string), source, ctb);
+        }
+
+        if (string.startsWith("CreatureType")) {
+            final Set<String> creatTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                creatTypes.addAll(card.getType().getCreatureTypes());
+            }
+            // filter out fun types?
+            return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(string), source, ctb);
         }
 
         String filteredString = string;

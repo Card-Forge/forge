@@ -4,6 +4,7 @@ Date=2019-02-15
 Name=Ravnica Allegiance Guild Kit
 Type=Boxed_Set
 ScryfallCode=GK2
+TokenFallbackCode=RNA
 
 [cards]
 1 M Isperia, Supreme Judge @Lucas Graciano
@@ -141,13 +142,12 @@ ScryfallCode=GK2
 133 L Forest @Yeong-Hao Han
 
 [tokens]
-w_1_1_spirit_flying
-b_1_1_bat_flying
-r_6_6_dragon_flying
-r_2_1_goblin_haste
-g_3_3_frog_lizard
-g_x_x_ooze
-g_1_1_saproling
-g_6_6_wurm
-wu_1_1_bird_flying
-wb_1_1_cleric_deathpact
+1 wu_1_1_bird_flying @Shishizaru
+2 w_1_1_spirit_flying @Dave Allsop
+3 b_1_1_bat_flying @Wayne Reynolds
+4 wb_1_1_cleric_deathpact @Jason Chan
+5 r_6_6_dragon_flying @Mark Zug
+6 r_2_1_goblin_haste @Carl Critchlow
+7 g_1_1_saproling @Warren Mahy
+8 g_6_6_wurm @Mitch Cotie
+9 g_x_x_ooze @Marco Nelor

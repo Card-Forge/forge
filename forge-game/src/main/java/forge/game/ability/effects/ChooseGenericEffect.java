@@ -64,21 +64,20 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 p = getNewChooser(sa, sa.getActivatingPlayer(), p);
             }
-            // determine if any of the choices are not valid
-            List<SpellAbility> saToRemove = Lists.newArrayList();
 
+            // determine if any of the choices are not valid
+            List<SpellAbility> availableSA = Lists.newArrayList(abilities);
             for (SpellAbility saChoice : abilities) {
                 if (saChoice.getRestrictions() != null && !saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer())) {
-                    saToRemove.add(saChoice);
+                    availableSA.remove(saChoice);
                 } else if (saChoice.hasParam("UnlessCost")) {
                     // generic check for if the cost can be paid
                     Cost unlessCost = new Cost(saChoice.getParam("UnlessCost"), false);
                     if (!unlessCost.canPay(sa, p, true)) {
-                        saToRemove.add(saChoice);
+                        availableSA.remove(saChoice);
                     }
                 }
             }
-            abilities.removeAll(saToRemove);
 
             List<SpellAbility> chosenSAs = Lists.newArrayList();
             String prompt = sa.getParamOrDefault("ChoicePrompt", "Choose");
@@ -86,7 +85,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("AtRandom")) {
                 random = true;
-                chosenSAs = Aggregates.random(abilities, amount);
+                chosenSAs = Aggregates.random(availableSA, amount);
 
                 int i = 0;
                 while (sa.getParam("AtRandom").equals("Urza") && i < chosenSAs.size()) {
@@ -99,8 +98,8 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                         chosenSAs.set(i, Aggregates.random(abilities));
                     }
                 }
-            } else if (!abilities.isEmpty()) {
-                chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
+            } else if (!availableSA.isEmpty()) {
+                chosenSAs = p.getController().chooseSpellAbilitiesForEffect(availableSA, sa, prompt, amount, ImmutableMap.of());
             }
 
             List<Object> oldRem = Lists.newArrayList(IterableUtil.filter(host.getRemembered(), Player.class));

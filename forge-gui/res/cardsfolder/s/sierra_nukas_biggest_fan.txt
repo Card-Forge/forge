@@ -6,7 +6,7 @@ T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefie
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Food | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you sacrifice a Food, target creature you control gets +X/+X until end of turn, where X is the number of quest counters on NICKNAME.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | NumDef$ X
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$CardCounters.QUEST
 DeckHas:Ability$Token|Counters & Type$Food
 DeckHints:Type$Food

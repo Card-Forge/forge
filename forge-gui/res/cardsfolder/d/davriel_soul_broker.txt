@@ -10,7 +10,7 @@ A:AB$ GenericChoice | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ChoiceP
 SVar:Draw3:DB$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:Conjure:DB$ MakeCard | Conjure$ True | Name$ Manor Guardian | Zone$ Hand | SpellDescription$ Conjure a Manor Guardian card into your hand.
 SVar:Return2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | AtRandom$ True | SubAbility$ DBEffect | SpellDescription$ Return two random creature cards from your graveyard to your hand. They perpetually gain +1/+1.
-SVar:DBEffect:DB$ Pump | PumpZone$ Hand | Defined$ Remembered | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Pump | PumpZone$ Hand | Defined$ Remembered | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:ReturnBig:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.cmcEQV | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | AtRandom$ True | SpellDescription$ Return a random creature card with the highest mana value from among cards in your graveyard to the battlefield.
 SVar:V:Count$ValidGraveyard Creature.YouOwn$GreatestCMC
 SVar:EmblemBuff:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 5) | StaticAbilities$ YoursP2Pow | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +2/+0."
@@ -30,7 +30,7 @@ SVar:DBDraw:DB$ Draw | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVar
 SVar:X:Remembered$Amount
 SVar:Y:Number$2/Minus.X
 SVar:Sac2:DB$ Sacrifice | Amount$ 2 | SacValid$ Permanent | Defined$ You | SpellDescription$ Sacrifice two permanents.
-SVar:PerpetualBuffTheirs:DB$ PumpAll | ValidCards$ Creature.YouDontCtrl | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SpellDescription$ Each creature you don't control perpetually gains +1/+1.
+SVar:PerpetualBuffTheirs:DB$ PumpAll | ValidCards$ Creature.YouDontCtrl | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual | SpellDescription$ Each creature you don't control perpetually gains +1/+1.
 SVar:EmblemDebuff:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Condition 5) | StaticAbilities$ YoursM1Pow | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get -1/-0."
 SVar:YoursM1Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ -1 | AffectedZone$ Battlefield | Description$ Creatures you control get -1/-0.
 SVar:EmblemRaiseCost:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Condition 6) | StaticAbilities$ CostBMore | Duration$ Permanent | SpellDescription$ You get an emblem with "Spells you cast cost {B} more to cast."
@@ -40,7 +40,7 @@ SVar:DrawTrig:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Command | Ex
 SVar:TrigDig:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile
 SVar:EmblemUpkeepLose:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Condition 8) | Triggers$ UpkeepLoseTrig | Duration$ Permanent | SpellDescription$ You get an emblem with "At the beginning of your upkeep, you lose 1 life for each creature you control."
 SVar:UpkeepLoseTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLose | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, you lose 1 life for each creature you control.
-SVar:TrigLose:DB$ LoseLife | Defined$ You | LifeAmount$ Count$TypeYouCtrl.Creature
+SVar:TrigLose:DB$ LoseLife | Defined$ You | LifeAmount$ Count$Valid Creature.YouCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | NumAtt$ -3 | NumDef$ -3 | Duration$ Perpetual | StackDescription$ REP Target creature an opponent controls_{c:Targeted} | SpellDescription$ Target creature an opponent controls perpetually gets -3/-3.
 DeckHas:Ability$LifeGain|Graveyard|Sacrifice

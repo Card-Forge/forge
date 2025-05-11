@@ -24,4 +24,4 @@ SVar:TrigPutCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbi
 SVar:DBConvert:DB$ SetState | Mode$ Transform
 SVar:X:TriggerObjectsSpellAbilityTargets$Valid Creature.YouCtrl,Vehicle.YouCtrl
 DeckHas:Ability$Counters
-Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nWhenever you cast a spell that targets one or more creatures or Vehicles you control, put that many +1/+1 counters on Arcee. Convert Arcee.
+Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nWhenever you cast a spell that targets one or more creatures or Vehicles you control, put that many +1/+1 counters on Arcee. Convert Arcee.

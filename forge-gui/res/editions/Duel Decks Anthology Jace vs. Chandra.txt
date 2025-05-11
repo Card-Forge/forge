@@ -70,4 +70,4 @@ ScryfallCode=JVC
 62 L Mountain @Mark Tedin
 
 [tokens]
-r_3_1_elemental_shaman_haste
+4 r_3_1_elemental_shaman_haste @Jim Pavelec

@@ -1,0 +1,9 @@
+Name:Constrictor Sage
+ManaCost:4 U
+Types:Creature Snake Wizard
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When this creature enters, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPutCounter
+A:AB$ Tap | PrecostDesc$ Renew — | Cost$ 2 U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SorcerySpeed$ True | SubAbility$ DBPutCounter | SpellDescription$ Tap target creature an opponent controls and put a stun counter on it. Activate only as a sorcery.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+Oracle:When this creature enters, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nRenew — {2}{U}, Exile this card from your graveyard: Tap target creature an opponent controls and put a stun counter on it. Activate only as a sorcery.

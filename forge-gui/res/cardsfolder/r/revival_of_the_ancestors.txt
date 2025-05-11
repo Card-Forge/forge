@@ -1,0 +1,8 @@
+Name:Revival of the Ancestors
+ManaCost:1 W B G
+Types:Enchantment Saga
+K:Chapter:3:TrigToken,TrigPutCounter,TrigPumpAll
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_spirit | TokenAmount$ 3 | TokenOwner$ You | SpellDescription$ Create three 1/1 white Spirit creature tokens.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select one, two, or three target creatures you contro | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures you control.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample & Lifelink | SpellDescription$ Creatures you control gain trample and lifelink until end of turn.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create three 1/1 white Spirit creature tokens.\nII — Distribute three +1/+1 counters among one, two, or three target creatures you control.\nIII — Creatures you control gain trample and lifelink until end of turn.

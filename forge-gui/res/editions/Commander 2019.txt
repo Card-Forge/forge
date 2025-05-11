@@ -311,29 +311,29 @@ ScryfallCode=C19
 302 L Forest @Richard Wright
 
 [tokens]
-b_1_1_assassin_lose_con
-b_2_2_zombie
-c_3_4_a_gargoyle_flying
-c_10_10_eldrazi
-c_a_treasure_sac
-c_x_x_a_phyrexian_horror
-c_x_x_a_sculpture_total_sculptures
-g_0_1_egg_defender
-g_1_1_plant
-g_1_1_saproling
-g_1_1_snake
-g_3_3_beast
-g_3_3_centaur
-g_4_4_beast
-g_4_4_rhino_trample
-g_6_6_wurm
-r_5_5_dragon_flying
-w_1_1_human
-w_1_1_pegasus_flying
-w_1_1_spirit_flying
-w_3_3_bird_flying
-w_3_4_bird_flying
-u_2_2_drake_flying
+1 w_3_4_bird_flying @Mark Zug
+2 w_3_3_bird_flying @Jana Schirmer
+3 w_1_1_human @Michael C. Hayes
+4 w_1_1_pegasus_flying @Greg Hildebrandt
+5 w_1_1_spirit_flying @Jason A. Engle
+8 u_2_2_drake_flying @Svetlin Velinov
+9 b_1_1_assassin_lose_con @Svetlin Velinov
+10 b_2_2_zombie @Anna Steinbauer
+12 r_5_5_dragon_flying @Raymond Swanland
+13 g_3_3_beast @Dave Allsop
+14 g_4_4_beast @Steve Prescott
+15 g_3_3_centaur @Slawomir Maniak
+16 g_0_1_egg_defender @Christopher Burdett
+17 g_1_1_plant @Sam Burley
+18 g_4_4_rhino_trample @Aaron Miller
+19 g_1_1_saproling @Brad Rigney
+20 g_1_1_snake @Lars Grant-West
+21 g_6_6_wurm @Anthony Francisco
+22 c_x_x_a_phyrexian_horror @Scott Chou
+22 c_3_4_a_gargoyle_flying @Paul Bonner
+24 c_x_x_a_sculpture_total_sculptures @Victor Adame Minguez
+25 c_a_treasure_sac @Alayna Danner
+26 c_10_10_eldrazi @Jack Wang
 
 [other]
 embalm_angel_of_sanctions

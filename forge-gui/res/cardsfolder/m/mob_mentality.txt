@@ -1,10 +1,10 @@
 Name:Mob Mentality
 ManaCost:R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Trample | Description$ Enchanted creature has trample.
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | IsPresent$ Creature.YouCtrl+attacking+nonWall | PresentCompare$ EQX | TriggerDescription$ Whenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.
-SVar:TrigPump:DB$ Pump | Defined$ Enchanted | NumAtt$ X
+SVar:TrigPump:DB$ Pump | Defined$ Enchanted | NumAtt$ +X
 SVar:X:Count$Valid Creature.YouCtrl+nonWall
 Oracle:Enchant creature\nEnchanted creature has trample.\nWhenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.

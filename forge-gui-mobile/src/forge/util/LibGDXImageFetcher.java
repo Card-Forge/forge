@@ -30,7 +30,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
         }
 
         private boolean doFetch(String urlToDownload) throws IOException {
-            if (disableHostedDownload && urlToDownload.startsWith(ForgeConstants.URL_CARDFORGE) && !urlToDownload.contains("tokens")) {
+            if (disableHostedDownload && urlToDownload.startsWith(ForgeConstants.URL_CARDFORGE)) {
                 // Don't try to download card images from cardforge servers
                 return false;
             }
@@ -85,11 +85,9 @@ public class LibGDXImageFetcher extends ImageFetcher {
             for (String urlToDownload : downloadUrls) {
                 boolean isPlanechaseBG = urlToDownload.startsWith("https://downloads.cardforge.org/images/planes/");
                 try {
-                    if (isPlanechaseBG) {
-                        success = doFetch(urlToDownload);
-                    } else {
-                        success = doFetch(tofullBorder(urlToDownload));
-                    }
+
+                    success = doFetch(urlToDownload);
+
                     if (success) {
                         break;
                     }
@@ -105,7 +103,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                             String extension = urlToDownload.substring(typeIndex);
                             urlToDownload = setlessFilename + extension;
                             try {
-                                success = doFetch(tofullBorder(urlToDownload));
+                                success = doFetch(urlToDownload);
                                 if (success) {
                                     break;
                                 }

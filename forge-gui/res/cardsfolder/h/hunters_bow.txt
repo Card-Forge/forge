@@ -2,8 +2,8 @@ Name:Hunter's Bow
 ManaCost:1 G
 Types:Artifact Equipment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to target creature you control. That creature deals damage equal to its power to up to one target creature you don't control.
-SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget | AILogic$ PowerDmg
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ PowerDmg | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Reach & Ward:2 | Description$ Equipped creature has reach and ward {2}.
 K:Equip:1
 SVar:X:ParentTargeted$CardPower

@@ -263,11 +263,11 @@ ScryfallCode=M10
 249 L Forest @Jim Nelson
 
 [tokens]
-w_x_x_avatar_life_total
-w_1_1_soldier
-b_2_2_zombie
-r_1_1_goblin
-g_3_3_beast
-g_1_1_insect
-g_2_2_wolf
-c_3_4_a_gargoyle_flying
+1 w_x_x_avatar_life_total @Vance Kovacs
+2 w_1_1_soldier @Paolo Parente
+3 b_2_2_zombie @Bud Cook
+4 r_1_1_goblin @Dave Kendall
+5 g_3_3_beast @John Donahue
+6 g_1_1_insect @Ron Spencer
+7 g_2_2_wolf @Lars Grant-West
+8 c_3_4_a_gargoyle_flying @Paul Bonner

@@ -71,7 +71,7 @@ ScryfallCode=GVL
 63 L Swamp @Richard Wright
 
 [tokens]
-b_1_1_bat_flying
-g_3_3_beast
-g_4_4_beast
-g_3_3_elephant
+8 g_3_3_beast @John Donahue
+9 g_4_4_beast @Steve Prescott
+10 g_3_3_elephant @Arnie Swekel
+11 b_1_1_bat_flying @Wayne Reynolds

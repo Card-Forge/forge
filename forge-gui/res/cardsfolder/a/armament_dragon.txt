@@ -1,0 +1,9 @@
+Name:Armament Dragon
+ManaCost:3 W B G
+Types:Creature Dragon
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature enters, distribute three +1/+1 counters among one, two, or three target creatures you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select one, two, or three target creatures you control | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen this creature enters, distribute three +1/+1 counters among one, two, or three target creatures you control.

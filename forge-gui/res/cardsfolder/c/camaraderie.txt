@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards, where X is the number of creatures you control.
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
-SVar:X:Count$TypeYouCtrl.Creature
+SVar:X:Count$Valid Creature.YouCtrl
 SVar:PlayMain1:TRUE
 Oracle:You gain X life and draw X cards, where X is the number of creatures you control. Creatures you control get +1/+1 until end of turn.

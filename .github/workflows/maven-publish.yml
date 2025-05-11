@@ -2,10 +2,21 @@ name: Publish Desktop Forge
 
 on:
   workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+      release_android:
+        type: boolean
+        description: 'Also try to release android build'
+        required: false
+        default: false
 
 jobs:
   build:
-
+    if: github.repository_owner == 'Card-Forge'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -32,10 +43,94 @@ jobs:
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-      - name: Build/Install/Publish to GitHub Packages Apache Maven
+
+      - name: Install old maven (3.8.1)
+        run: |
+          curl -o apache-maven-3.8.1-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
+          tar xf apache-maven-3.8.1-bin.tar.gz
+          export PATH=$PWD/apache-maven-3.8.1/bin:$PATH
+          export MAVEN_HOME=$PWD/apache-maven-3.8.1
+          mvn --version    
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+
+      - name: Setup android requirements
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_android }}
+        run: |
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;35.0.0" "platform-tools" "platforms;android-35"
+          cd forge-gui-android
+          echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore.asc
+          gpg -d --passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
+          cd -
+          mkdir  -p ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
+          cd ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
+          curl -L -o android-maven-plugin-4.6.2.jar https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.jar
+          curl -L -o android-maven-plugin-4.6.2.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.pom
+          cd -
+          mvn install -Dmaven.test.skip=true
+          mvn dependency:tree
+          
+
+      - name: Build/Install/Publish Desktop to GitHub Packages Apache Maven
+        if: ${{ github.event_name == 'workflow_dispatch' && !inputs.release_android }}
         run: |
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
-          mvn -U -B clean -P windows-linux install release:clean release:prepare release:perform -T 1C -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }}
+          export _JAVA_OPTIONS="-Xmx2g"
+          d=$(date +%m.%d)
+          # build only desktop and only try to move desktop files
+          mvn -U -B clean -P windows-linux install -e -T 1C release:clean release:prepare release:perform -DskipTests
+          mkdir izpack
+          # move bz2 and jar from work dir to izpack dir
+          mv /home/runner/work/forge/forge/forge-installer/*/*.{bz2,jar} izpack/
+          # move desktop build.txt and version.txt to izpack
+          mv /home/runner/work/forge/forge/forge-gui-desktop/target/classes/*.txt izpack/
+          cd izpack
+          ls
+          echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Build/Install/Publish Desktop+Android to GitHub Packages Apache Maven
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_android }}
+        run: |
+          export DISPLAY=":1"
+          Xvfb :1 -screen 0 800x600x8 &
+          export _JAVA_OPTIONS="-Xmx2g"
+          d=$(date +%m.%d)
+          # build both desktop and android
+          mvn -U -B clean -P windows-linux,android-release-build install -e -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=35.0.0
+          mkdir izpack
+          # move bz2 and jar from work dir to izpack dir
+          mv /home/runner/work/forge/forge/forge-installer/*/*.{bz2,jar} izpack/
+          # move desktop build.txt and version.txt to izpack
+          mv /home/runner/work/forge/forge/forge-gui-desktop/target/classes/*.txt izpack/
+          # move android apk and assets.zip
+          mv /home/runner/work/forge/forge/forge-gui-android/target/*-signed-aligned.apk izpack/
+          mv /home/runner/work/forge/forge/forge-gui-android/target/assets.zip izpack/
+          cd izpack
+          ls
+          echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload snapshot to GitHub Prerelease
+        uses: ncipollo/release-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Release ${{ env.GIT_TAG }}
+          tag: ${{ env.GIT_TAG }}
+          artifacts: izpack/*
+          allowUpdates: true
+          removeArtifacts: true
+          makeLatest: true
+
+      - name: Send failure notification to Discord
+        if: failure() # This step runs only if the job fails
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"🔴 Release Build Failed in branch: \`${{ github.ref_name }}\` by \`${{ github.actor }}\`.\nCheck logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          ${{ secrets.DISCORD_AUTOMATION_WEBHOOK }}

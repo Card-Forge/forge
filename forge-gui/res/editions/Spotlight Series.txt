@@ -6,4 +6,6 @@ Type=Promo
 ScryfallCode=PSPL
 
 [cards]
-1 M Terror of the Peaks @Richard Kane Ferguson
+1 R Terror of the Peaks @Richard Kane Ferguson
+2a M Kaldra Compleat @Monztre
+2b M Sword of Forge and Frontier @Sam Guay

@@ -2,5 +2,5 @@ Name:Joyous Respite
 ManaCost:3 G
 Types:Sorcery Arcane
 A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 1 life for each land you control.
-SVar:X:Count$TypeYouCtrl.Land
+SVar:X:Count$Valid Land.YouCtrl
 Oracle:You gain 1 life for each land you control.

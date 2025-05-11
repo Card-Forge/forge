@@ -7,13 +7,11 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantSacrifice {
 
-    static String MODE = "CantSacrifice";
-
     public static boolean cantSacrifice(final Card card, final SpellAbility cause, final boolean effect)  {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
+                if (!stAb.checkConditions(StaticAbilityMode.CantSacrifice)) {
                     continue;
                 }
 

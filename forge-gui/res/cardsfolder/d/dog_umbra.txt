@@ -2,8 +2,7 @@ Name:Dog Umbra
 ManaCost:1 W
 Types:Enchantment Aura
 K:Flash
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+ControlledBy Player.Other | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ As long as another player controls enchanted creature, it can't attack or block. Otherwise, CARDNAME has umbra armor. (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
+K:Enchant:Creature
+S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.EnchantedBy+ControlledBy Player.Other | Description$ As long as another player controls enchanted creature, it can't attack or block. Otherwise, CARDNAME has umbra armor. (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
 S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Creature.YouCtrl+EnchantedBy | AddKeyword$ Umbra armor | Secondary$ True | Description$ As long as another player controls enchanted creature, it can't attack or block. Otherwise, CARDNAME has umbra armor. (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
 Oracle:Flash\nEnchant creature\nAs long as another player controls enchanted creature, it can't attack or block. Otherwise, Dog Umbra has umbra armor. (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)

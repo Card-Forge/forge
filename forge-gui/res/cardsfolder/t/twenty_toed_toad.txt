@@ -10,7 +10,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigWinGame | TriggerZones$ Ba
 SVar:TrigWinGame:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ Win | ConditionSVarCompare$ GE20
 SVar:Win:Count$Compare Y GE20.20.Z
 SVar:Y:Count$CardCounters.ALL
-SVar:Z:Count$InYourHand
+SVar:Z:Count$ValidHand Card.YouOwn
 SVar:HasAttackEffect:TRUE
 SVar:PlayMain1:TRUE
 Oracle:Your maximum hand size is twenty.\nWhenever you attack with two or more creatures, put a +1/+1 counter on Twenty-Toed Toad and draw a card.\nWhenever Twenty-Toed Toad attacks, you win the game if there are twenty or more counters on it or you have twenty or more cards in hand.

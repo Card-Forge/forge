@@ -1,8 +1,8 @@
 Name:The Sound of Drums
 ManaCost:2 R
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | Goad$ True | Description$ Enchanted creature is goaded.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.EnchantedBy | ValidTarget$ Permanent,Player | IsCombat$ True | ReplaceWith$ DmgTwice | Description$ If enchanted creature would deal combat damage to a permanent or player, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ ReplaceCount$DamageAmount/Twice

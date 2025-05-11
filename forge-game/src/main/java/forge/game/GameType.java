@@ -22,7 +22,7 @@ public enum GameType {
     Winston             (DeckFormat.Limited, true, true, true, "lblWinston", ""),
     Gauntlet            (DeckFormat.Constructed, false, true, true, "lblGauntlet", ""),
     Tournament          (DeckFormat.Constructed, false, true, true, "lblTournament", ""),
-    CommanderGauntlet   (DeckFormat.Commander, false, false, false, "lblCommander", "lblCommanderDesc"),
+    CommanderGauntlet   (DeckFormat.Commander, false, false, false, "lblCommanderGauntlet", "lblCommanderDesc"),
     Quest               (DeckFormat.QuestDeck, true, true, false, "lblQuest", ""),
     QuestCommander      (DeckFormat.Commander, true, true, false, "lblQuestCommander", ""),
     QuestDraft          (DeckFormat.Limited, true, true, true, "lblQuestDraft", ""),

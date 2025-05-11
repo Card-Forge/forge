@@ -26,13 +26,13 @@ public enum KeyBinding {
     ScrollDown("ScrollDown", new int[] {Input.Keys.PAGE_DOWN,Input.Keys.BUTTON_R1}),
     ;
     String name;
-    int[] bindings;
+    int [] bindings;
 
-    KeyBinding(String name, int[] bindings){
+    KeyBinding(String name, int [] bindings)
+    {
         this.name=name;
-        this.bindings=bindings;
+        this.bindings = bindings;
     }
-
     public boolean isPressed(int key)
     {
         for(int i = 0; i < bindings.length; i++){

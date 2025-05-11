@@ -1,0 +1,17 @@
+Name:Dirgur Island Dragon
+ManaCost:5 U
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Ward:2
+AlternateMode:Omen
+Oracle:Flying\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+
+ALTERNATE
+
+Name:Skimming Strike
+ManaCost:1 U
+Types:Instant Omen
+A:SP$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | SubAbility$ DBDraw | SpellDescription$ Tap up to one target creature. Draw a card. (Then shuffle this card into its owner's library.)
+SVar:DBDraw:DB$ Draw
+Oracle:Tap up to one target creature. Draw a card. (Then shuffle this card into its owner's library.)

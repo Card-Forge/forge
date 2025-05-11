@@ -57,6 +57,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     private int id;
 
     protected EnumSet<ZoneType> validHostZones;
+    private Set<StaticAbilityMode> modes;
     private Set<StaticAbilityLayer> layers;
     private CardCollectionView ignoreEffectCards = new CardCollection();
     private final List<Player> ignoreEffectPlayers = Lists.newArrayList();
@@ -85,6 +86,13 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
     public void setActiveZone(EnumSet<ZoneType> zones) {
         validHostZones = zones;
+    }
+
+    public Set<StaticAbilityMode> getMode() {
+        return this.modes;
+    }
+    public void setMode(Set<StaticAbilityMode> modes) {
+        this.modes = modes;
     }
 
     public SpellAbility getPayingTrigSA() {
@@ -123,7 +131,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      * @return the applicable layers.
      */
     private Set<StaticAbilityLayer> generateLayer() {
-        if (!checkMode("Continuous")) {
+        if (!checkMode(StaticAbilityMode.Continuous)) {
             return EnumSet.noneOf(StaticAbilityLayer.class);
         }
 
@@ -239,12 +247,15 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         this.id = nextId();
         this.originalMapParams.putAll(params);
         this.mapParams.putAll(params);
-        this.layers = this.generateLayer();
         this.hostCard = host;
         this.setCardState(state);
         if (hasParam("EffectZone")) {
             setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(getParam("EffectZone"))));
         }
+        if (hasParam("Mode")) {
+            setMode(EnumSet.copyOf(StaticAbilityMode.listValueOf(getParam("Mode"))));
+        }
+        this.layers = this.generateLayer();
     }
 
     public StaticAbilityView getView() {
@@ -286,11 +297,11 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      *         conditions are fulfilled.
      */
     private boolean shouldApplyContinuousAbility(final StaticAbilityLayer layer, final boolean previousRun) {
-        return layers.contains(layer) && checkConditions("Continuous") && (previousRun || getHostCard().getStaticAbilities().contains(this));
+        return layers.contains(layer) && checkConditions(StaticAbilityMode.Continuous) && (previousRun || getHostCard().getStaticAbilities().contains(this));
     }
 
     public final Cost getAttackCost(final Card attacker, final GameEntity target, final List<Card> attackersWithOptionalCost) {
-        if (!checkMode("CantAttackUnless") && (!checkMode("OptionalAttackCost") || !attackersWithOptionalCost.contains(attacker))) {
+        if (!checkMode(StaticAbilityMode.CantAttackUnless) && (!checkMode(StaticAbilityMode.OptionalAttackCost) || !attackersWithOptionalCost.contains(attacker))) {
             return null;
         }
         if (!checkConditions()) {
@@ -300,24 +311,24 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     public final boolean hasAttackCost(final Card attacker, Class<? extends CostPart> costType) {
-        if (!checkConditions("OptionalAttackCost")) {
+        if (!checkConditions(StaticAbilityMode.OptionalAttackCost)) {
             return false;
         }
         return StaticAbilityCantAttackBlock.getAttackCost(this, attacker, null).hasSpecificCostType(costType);
     }
 
     public final Cost getBlockCost(final Card blocker, final Card attacker) {
-        if (!checkConditions("CantBlockUnless")) {
+        if (!checkConditions(StaticAbilityMode.CantBlockUnless)) {
             return null;
         }
         return StaticAbilityCantAttackBlock.getBlockCost(this, blocker, attacker);
     }
 
-    public final boolean checkMode(String mode) {
-        return getParam("Mode").equals(mode);
+    public final boolean checkMode(StaticAbilityMode mode) {
+        return this.modes.contains(mode);
     }
 
-    public final boolean checkConditions(String mode) {
+    public final boolean checkConditions(StaticAbilityMode mode) {
         return checkMode(mode) && checkConditions();
     }
 
@@ -598,6 +609,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             clone.layers = this.generateLayer();
             if (validHostZones != null) {
                 clone.setActiveZone(EnumSet.copyOf(validHostZones));
+            }
+            if (modes != null) {
+                clone.setMode(EnumSet.copyOf(modes));
             }
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);

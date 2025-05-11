@@ -3,6 +3,7 @@ Code=YDFT
 Date=2025-03-04
 Name=Alchemy: Aetherdrift
 Type=Online
+Booster=1 UncommonRareMythic,8 Common:fromsheet("DFT cards"), 3 Uncommon:fromSheet("DFT cards"), 1 UncommonRareMythic:fromSheet("DFT cards"), 1 RareMythic:fromSheet("DFT cards"), 1 BasicLand:fromSheet("DFT cards")
 ScryfallCode=YDFT
 
 [cards]

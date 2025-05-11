@@ -1,0 +1,9 @@
+Name:Dragonsoul Prodigy
+ManaCost:2 R
+Types:Creature Human Monk
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Omen | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first Omen spell each turn, conjure a duplicate of that card onto the battlefield. It gains haste. At the beginning of the next end step, shuffle it into its owner's library.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCard | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | AtEOT$ Library | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever you cast your first Omen spell each turn, conjure a duplicate of that card onto the battlefield. It gains haste. At the beginning of the next end step, shuffle it into its owner's library.

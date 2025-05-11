@@ -4,7 +4,7 @@ Types:Creature Lhurgoyf
 PT:*/*
 K:Trample
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of land cards in all graveyards.
-SVar:X:Count$TypeInAllYards.Land
+SVar:X:Count$ValidGraveyard Land
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:X GE1
 Oracle:Trample\nTerravore's power and toughness are each equal to the number of land cards in all graveyards.

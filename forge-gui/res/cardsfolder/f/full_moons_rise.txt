@@ -1,7 +1,7 @@
 Name:Full Moon's Rise
 ManaCost:1 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.Werewolf+YouCtrl | AddPower$ 1 | AddToughness$ 0 | AddKeyword$ Trample | Description$ Werewolf creatures you control get +1/+0 and have trample.
+S:Mode$ Continuous | Affected$ Creature.Werewolf+YouCtrl | AddPower$ 1 | AddKeyword$ Trample | Description$ Werewolf creatures you control get +1/+0 and have trample.
 A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | Defined$ Valid Creature.Werewolf+YouCtrl | SpellDescription$ Regenerate all Werewolf creatures you control.
 AI:RemoveDeck:Random
 Oracle:Werewolf creatures you control get +1/+0 and have trample.\nSacrifice Full Moon's Rise: Regenerate all Werewolf creatures you control.

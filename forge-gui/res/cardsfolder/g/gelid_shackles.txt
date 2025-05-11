@@ -1,9 +1,10 @@
 Name:Gelid Shackles
 ManaCost:W
 Types:Snow Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't block and its activated abilities can't be activated.
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ CantBlock | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't block, and its activated abilities can't be activated.
+S:Mode$ CantBeActivated | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature can't block, and its activated abilities can't be activated.
 A:AB$ Pump | Cost$ S | Defined$ Enchanted | KW$ Defender | IsCurse$ True | SpellDescription$ Enchanted creature gains defender until end of turn.
 # AI can now use snow mana to pay for activated abilities.
 AI:RemoveDeck:Random

@@ -1,7 +1,7 @@
 Name:Mana Vault
 ManaCost:1
 Types:Artifact
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This artifact doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This artifact doesn't untap during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay {4}. If you do, untap this artifact.
 SVar:TrigUntap:AB$ Untap | Cost$ 4 | Defined$ Self
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | Execute$ TrigDamage | TriggerDescription$ At the beginning of your draw step, if this artifact is tapped, it deals 1 damage to you.

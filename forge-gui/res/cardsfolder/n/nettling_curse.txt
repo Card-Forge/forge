@@ -1,8 +1,8 @@
 Name:Nettling Curse
 ManaCost:2 B
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 A:AB$ Effect | Cost$ 1 R | IsCurse$ True | StaticAbilities$ MustAttack | ExileOnMoved$ Battlefield | RememberObjects$ Enchanted | SpellDescription$ Enchanted creature attacks this turn if able.
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Creature.IsRemembered | Description$ This creature attacks this turn if able.
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLifeAttack | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.

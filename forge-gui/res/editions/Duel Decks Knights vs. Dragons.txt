@@ -89,5 +89,4 @@ ScryfallCode=DDG
 81 L Mountain @Matt Cavotta
 
 [tokens]
-w_2_2_griffin_flying
-r_1_1_goblin
+1 r_1_1_goblin @Brandon Kitkouski

@@ -1,7 +1,7 @@
 Name:Awesome Presence
 ManaCost:U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 S:Mode$ CantBlockUnless | Attacker$ Creature.AttachedBy | Cost$ 3 | Description$ Enchanted creature can't be blocked unless defending player pays {3} for each creature they control that's blocking it.
 Oracle:Enchant creature\nEnchanted creature can't be blocked unless defending player pays {3} for each creature they control that's blocking it.

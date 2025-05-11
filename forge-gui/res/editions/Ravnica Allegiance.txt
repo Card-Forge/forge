@@ -298,15 +298,15 @@ Rakdos Guildgate|RNA
 Simic Guildgate|RNA
 
 [tokens]
-rg_4_4_beast_trample
-g_3_3_centaur
-g_3_3_frog_lizard
-r_1_1_goblin
-w_1_1_human
-u_0_2_illusion_mesmerize
-g_2_2_ooze
-wu_4_4_sphinx_flying_vigilance
-wb_1_1_spirit_flying
-c_1_1_a_thopter_flying
-c_a_treasure_sac
-b_2_2_zombie
+1 w_1_1_human @Bram Sels
+2 u_0_2_illusion_mesmerize @Kev Walker
+3 b_2_2_zombie @Jason A. Engle
+4 r_1_1_goblin @Svetlin Velinov
+5 g_3_3_centaur @Sidharth Chaturvedi
+6 g_3_3_frog_lizard @Jack Wang
+7 g_2_2_ooze @Lake Hurwitz
+8 rg_4_4_beast_trample @Winona Nelson
+9 wu_4_4_sphinx_flying_vigilance @Scott Murphy
+10 wb_1_1_spirit_flying @Josh Hass
+11 c_1_1_a_thopter_flying @Darren Tan
+12 c_a_treasure_sac @Mark Behm

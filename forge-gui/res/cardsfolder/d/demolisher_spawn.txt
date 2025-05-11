@@ -5,7 +5,7 @@ PT:7/7
 K:Trample
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Delirium$ True | Execute$ TrigPumpAll | TriggerDescription$ Delirium — Whenever CARDNAME attacks, if there are four or more card types among cards in your graveyard, other attacking creatures get +4/+4 until end of turn.
-SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking+Other | NumAtt$ 4 | NumDef$ 4
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking+Other | NumAtt$ +4 | NumDef$ +4
 SVar:HasAttackEffect:TRUE
 DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium

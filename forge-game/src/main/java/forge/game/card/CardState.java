@@ -84,8 +84,9 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
     private ReplacementEffect loyaltyRep;
     private ReplacementEffect defenseRep;
-    private ReplacementEffect battleTypeRep;
     private ReplacementEffect sagaRep;
+    private ReplacementEffect adventureRep;
+    private ReplacementEffect omenRep;
 
     private SpellAbility manifestUp;
     private SpellAbility cloakUp;
@@ -513,19 +514,25 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             }
             result.add(defenseRep);
 
-            if (battleTypeRep == null) {
-                if(type.hasSubtype("Siege")) {
-                    // battleTypeRep; // - Choose a player to protect it
-                }
-            }
-            //result.add(battleTypeRep);
-
+            // TODO add Siege "Choose a player to protect it"
         }
         if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
             if (sagaRep == null) {
                 sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
             }
             result.add(sagaRep);
+        }
+        if (type.hasSubtype("Adventure")) {
+            if (this.adventureRep == null) {
+                adventureRep = CardFactoryUtil.setupAdventureAbility(this);
+            }
+            result.add(adventureRep);
+        }
+        if (type.hasSubtype("Omen")) {
+            if (this.omenRep == null) {
+                omenRep = CardFactoryUtil.setupOmenAbility(this);
+            }
+            result.add(omenRep);
         }
 
         card.updateReplacementEffects(result, this);
@@ -559,11 +566,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
     @Override
     public final Map<String, String> getSVars() {
-        return sVars;
-    }
-
-    @Override
-    public Map<String, String> getDirectSVars() {
         return sVars;
     }
 
@@ -686,6 +688,12 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             }
             if (source.sagaRep != null) {
                 sagaRep = source.sagaRep.copy(card, true);
+            }
+            if (source.adventureRep != null) {
+                adventureRep = source.adventureRep.copy(card, true);
+            }
+            if (source.omenRep != null) {
+                omenRep = source.omenRep.copy(card, true);
             }
         }
     }

@@ -1,8 +1,9 @@
 Name:Fists of the Demigod
 ManaCost:1 BR
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AITgts$ Card.Black,Card.Red | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAITgts:Card.Black,Card.Red
+SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Black | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Wither | Description$ As long as enchanted creature is black, it gets +1/+1 and has wither. (It deals damage to creatures in the form of -1/-1 counters.)
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Red | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | Description$ As long as enchanted creature is red, it gets +1/+1 and has first strike.
 Oracle:Enchant creature\nAs long as enchanted creature is black, it gets +1/+1 and has wither. (It deals damage to creatures in the form of -1/-1 counters.)\nAs long as enchanted creature is red, it gets +1/+1 and has first strike.

@@ -360,28 +360,28 @@ ScryfallCode=SCD
 352 L Forest @Titus Lunter
 
 [tokens]
-b_0_0_zombie_army
-b_2_2_zombie
-b_2_2_zombie_knight_menace
-b_x_x_demon_flying
-c_10_10_eldrazi
-c_1_1_a_thopter_flying
-c_a_treasure_sac
-g_1_1_elf_warrior
-g_1_1_insect_flying_deathtouch
-g_1_1_saproling
-g_3_3_beast
-g_3_3_elephant
-karox_bladewing
-r_3_3_ogre
-r_5_5_dragon_flying
-u_1_1_a_thopter_flying
-u_1_1_faerie_flying
-w_1_1_bird_flying
-w_1_1_cat_bird_flying
-w_1_1_human_warrior
-w_1_1_pegasus_flying
-w_1_1_soldier_lifelink
-w_1_1_spirit_flying
-w_2_2_cat
-w_2_2_cat_beast
+1 c_10_10_eldrazi @Jack Wang
+2 w_1_1_bird_flying @Allen Douglas
+3 w_2_2_cat @Jesper Ejsing
+4 w_2_2_cat_beast @Bayard Wu
+5 w_1_1_cat_bird_flying @Leesha Hannigan
+6 w_1_1_human_warrior @Gabor Szikszai
+7 w_1_1_pegasus_flying @Greg Hildebrandt
+8 w_1_1_soldier_lifelink @John Severin Brassell
+9 w_1_1_spirit_flying @Jason A. Engle
+10 u_1_1_faerie_flying @Irina Nordsol
+11 u_1_1_a_thopter_flying @Andrew Murray
+12 b_x_x_demon_flying @Evan Shipard
+13 b_2_2_zombie @Lucas Graciano
+14 b_0_0_zombie_army @David Astruga
+15 b_2_2_zombie_knight_menace @Lucas Graciano
+16 r_5_5_dragon_flying @Alex Konstad
+17 karox_bladewing @XiaoDi Jin
+18 r_3_3_ogre @Paul Bonner
+19 g_3_3_beast @Jesper Ejsing
+20 g_3_3_elephant @Lars Grant-West
+21 g_1_1_elf_warrior @William O'Connor
+22 g_1_1_insect_flying_deathtouch @Martina Pilcerova
+23 g_1_1_saproling @Joseph Meehan
+24 c_1_1_a_thopter_flying @Richard Wright
+25 c_a_treasure_sac @Alayna Danner

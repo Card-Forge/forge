@@ -1,11 +1,10 @@
 Name:Psychic Overload
 ManaCost:3 U
 Types:Enchantment Aura
-K:Enchant permanent
-A:SP$ Attach | ValidTgts$ Permanent | AILogic$ KeepTapped
+K:Enchant:Permanent
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted permanent.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
-R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy+ActivePlayerCtrl | ActivePhases$ Untap | Layer$ CantHappen | Description$ Enchanted permanent doesn't untap during its controller's untap step. 
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted permanent doesn't untap during its controller's untap step.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ Untap | Description$ Enchanted permanent has "Discard two artifact cards: Untap this permanent."
 SVar:Untap:AB$ Untap | Cost$ Discard<2/Artifact> | Defined$ Self | SpellDescription$ Untap CARDNAME.
 Oracle:Enchant permanent\nWhen this Aura enters, tap enchanted permanent.\nEnchanted permanent doesn't untap during its controller's untap step.\nEnchanted permanent has "Discard two artifact cards: Untap this permanent."

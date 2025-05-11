@@ -1,10 +1,9 @@
 Name:Bound by Moonsilver
 ManaCost:2 W
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack, block, or transform.
-S:Mode$ CantTransform | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature can't transform.
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ CantAttack,CantBlock,CantTransform | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack or block, or transform.
 A:AB$ Attach | Cost$ Sac<1/Permanent.Other/another permanent> | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ Attach CARDNAME to target creature. Activate only as a sorcery and only once each turn.
 SVar:AIPreference:SacCost$Card.token,Permanent.nonLand+cmcLE2,Land.Basic
 Oracle:Enchant creature\nEnchanted creature can't attack, block, or transform.\nSacrifice another permanent: Attach Bound by Moonsilver to target creature. Activate only as a sorcery and only once each turn.

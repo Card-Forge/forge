@@ -1,8 +1,8 @@
 Name:Snowblind
 ManaCost:3 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Card.AttachedBy | CheckSVar$ CheckAttacking | AddPower$ -AttackingX | AddToughness$ -AttackingY | Description$ Enchanted creature gets -X/-Y. If that creature is attacking, X is the number of snow lands defending player controls. Otherwise, X is the number of snow lands its controller controls. Y is equal to X or to enchanted creature's toughness minus 1, whichever is smaller.
 S:Mode$ Continuous | Affected$ Card.AttachedBy | CheckSVar$ CheckAttacking | SVarCompare$ EQ0 | AddPower$ -NotAttackingX | AddToughness$ -NotAttackingY
 SVar:CheckAttacking:Count$Valid Card.AttachedBy+attacking

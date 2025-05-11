@@ -70,6 +70,6 @@ ScryfallCode=DVD
 62 L Swamp @Vance Kovacs
 
 [tokens]
-w_1_1_spirit_flying
-b_x_x_demon_flying
-b_0_1_thrull
+5 w_1_1_spirit_flying @Luca Zontini
+6 b_x_x_demon_flying @Pete Venters
+7 b_0_1_thrull @Véronique Meignaud

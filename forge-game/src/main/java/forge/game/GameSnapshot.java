@@ -322,7 +322,7 @@ public class GameSnapshot {
             newCard.setLayerTimestamp(fromCard.getLayerTimestamp());
             newCard.setTapped(fromCard.isTapped());
             newCard.setFaceDown(fromCard.isFaceDown());
-            newCard.setManifested(fromCard.isManifested());
+            newCard.setManifested(fromCard.getManifestedSA());
             newCard.setSickness(fromCard.hasSickness());
             newCard.setState(fromCard.getCurrentStateName(), false);
         }

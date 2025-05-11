@@ -4,10 +4,11 @@ Types:Creature Insect
 PT:3/2
 K:Kicker:B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target card from your graveyard to your hand. If this spell was kicked, conjure a duplicate of target card in an opponent's graveyard into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card from your graveyard | SubAbility$ DBConjure
-SVar:DBConjure:DB$ MakeCard | Condition$ Kicked | Conjure$ True | TgtPrompt$ Select target creature card in an opponent's graveyard | ValidTgts$ Creature.OppOwn | TgtZone$ Graveyard | DefinedName$ ThisTargetedCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBAnimate
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card in your graveyard | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | TgtPrompt$ Select target card in an opponent's graveyard | ValidTgts$ Card.OppOwn | TargetMin$ Y | TargetMax$ Y | TgtZone$ Graveyard | DefinedName$ ThisTargetedCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ SpendAnyMana | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast this spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$Kicked.1.0
 DeckHas:Ability$Graveyard
 Oracle:Kicker{B}\nWhen Nantuko Slicer enters, return target card from your graveyard to your hand. If this spell was kicked, conjure a duplicate of target card in an opponent's graveyard into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."

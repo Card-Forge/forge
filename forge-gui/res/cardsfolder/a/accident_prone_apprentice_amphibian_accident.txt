@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Otter Wizard
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield,Exile | Execute$ TrigPump | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME perpetually gets +1/+1. This ability also triggers if CARDNAME is in exile.
-SVar:TrigPump:DB$ Pump | PumpZone$ Battlefield,Exile | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
+SVar:TrigPump:DB$ Pump | PumpZone$ Battlefield,Exile | NumAtt$ +1 | NumDef$ +1 | Duration$ Perpetual
 AlternateMode:Adventure
 Oracle:Whenever you cast a noncreature spell, Accident-Prone Apprentice perpetually gets +1/+1. This ability also triggers if Accident-Prone Apprentice is in exile.
 

@@ -1,13 +1,10 @@
 Name:Krasis Incubation
 ManaCost:2 G U
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
-T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigRemember | Static$ True
-SVar:TrigRemember:DB$ Cleanup | ClearRemembered$ True | SubAbility$ RememberNew
-SVar:RememberNew:DB$ Pump | RememberObjects$ Enchanted
-A:AB$ PutCounter | Cost$ 1 G U Return<1/CARDNAME> | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on enchanted creature.
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+S:Mode$ CantAttack,CantBlock,CantBeActivated | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
+A:AB$ PutCounter | Cost$ 1 G U Return<1/CARDNAME> | Defined$ AttachedBy Returned | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on enchanted creature.
 AI:RemoveDeck:All
 DeckHas:Ability$Counters
 Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.\n{1}{G}{U}, Return Krasis Incubation to its owner's hand: Put two +1/+1 counters on enchanted creature.

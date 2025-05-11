@@ -2,5 +2,5 @@ Name:Hardy Veteran
 ManaCost:1 G
 Types:Creature Human Warrior
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 0 | AddToughness$ 2 | Condition$ PlayerTurn | Description$ During your turn, CARDNAME gets +0/+2.
+S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ 2 | Condition$ PlayerTurn | Description$ During your turn, CARDNAME gets +0/+2.
 Oracle:During your turn, Hardy Veteran gets +0/+2.

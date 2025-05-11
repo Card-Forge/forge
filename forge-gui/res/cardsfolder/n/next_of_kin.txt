@@ -1,8 +1,8 @@
 Name:Next of Kin
 ManaCost:2 G
 Types:Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
 T:Mode$ ChangesZone | ValidCard$ Card.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When enchanted creature dies, you may put a creature card you own with lesser mana value from your hand or from the command zone onto the battlefield. If you do, return CARDNAME to the battlefield attached to that creature at the beginning of the next end step.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand,Command | Destination$ Battlefield | ChangeType$ Creature.cmcLTX+YouOwn | RememberChanged$ True | SubAbility$ DBDelayedTrigger
 SVar:X:TriggeredCard$CardManaCost

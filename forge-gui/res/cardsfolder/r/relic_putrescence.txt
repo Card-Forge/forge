@@ -1,8 +1,8 @@
 Name:Relic Putrescence
 ManaCost:2 B
 Types:Enchantment Aura
-K:Enchant artifact
-A:SP$ Attach | ValidTgts$ Artifact | AILogic$ Curse
+K:Enchant:Artifact
+SVar:AttachAILogic:Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever enchanted artifact becomes tapped, its controller gets a poison counter.
 SVar:TrigPoison:DB$ Poison | Defined$ TriggeredCardController | Num$ 1
 AI:RemoveDeck:Random

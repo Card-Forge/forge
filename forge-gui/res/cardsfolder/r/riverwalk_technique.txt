@@ -1,0 +1,7 @@
+Name:Riverwalk Technique
+ManaCost:3 U
+Types:Instant
+A:SP$ Charm | Choices$ DBChangeZone,DBCounter | Defined$ You | CharmNum$ 1
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent for its owner to put on the top or bottom of their library | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | SpellDescription$ The owner of target nonland permanent puts it on their choice of the top or bottom of their library.
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+Oracle:Choose one —\n• The owner of target nonland permanent puts it on their choice of the top or bottom of their library.\n• Counter target noncreature spell.

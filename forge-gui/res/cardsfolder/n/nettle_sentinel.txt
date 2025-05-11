@@ -2,7 +2,7 @@ Name:Nettle Sentinel
 ManaCost:G
 Types:Creature Elf Warrior
 PT:2/2
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a green spell, you may untap this creature.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 Oracle:This creature doesn't untap during your untap step.\nWhenever you cast a green spell, you may untap this creature.

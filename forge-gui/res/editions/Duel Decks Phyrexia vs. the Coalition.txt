@@ -79,6 +79,6 @@ ScryfallCode=DDE
 71 L Forest @Alan Pollack
 
 [tokens]
-hornet
-b_x_x_phyrexian_minion
-g_1_1_saproling
+1 hornet @Ron Spencer
+2 b_x_x_phyrexian_minion @Dave Kendall
+3 g_1_1_saproling @Warren Mahy

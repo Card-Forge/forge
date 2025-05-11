@@ -3,6 +3,6 @@ ManaCost:3 B G
 Types:Creature Elemental
 PT:*/*
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in all graveyards.
-SVar:X:Count$InAllYards
+SVar:X:Count$ValidGraveyard Card
 SVar:NeedsToPlayVar:X GE4
 Oracle:Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards.

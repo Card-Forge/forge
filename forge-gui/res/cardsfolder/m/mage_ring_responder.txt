@@ -2,7 +2,7 @@ Name:Mage-Ring Responder
 ManaCost:7
 Types:Artifact Creature Golem
 PT:7/7
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 7 | SpellDescription$ Untap this creature.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever this creature attacks, it deals 7 damage to target creature defending player controls.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumDmg$ 7

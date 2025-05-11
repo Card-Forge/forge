@@ -14,6 +14,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
@@ -154,7 +155,7 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean canCastAtOppTurn = true;
         for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
             for (StaticAbility s : c.getStaticAbilities()) {
-                if ("CantBeCast".equals(s.getParam("Mode")) && StringUtils.contains(s.getParam("Activator"), "NonActive")
+                if (s.checkMode(StaticAbilityMode.CantBeCast) && StringUtils.contains(s.getParam("Activator"), "NonActive")
                         && (!s.getParam("Activator").startsWith("You") || c.getController().equals(ai))) {
                     canCastAtOppTurn = false;
                     break;

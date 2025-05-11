@@ -16,6 +16,7 @@ ScryfallCode=FIN
 200 U Sazh's Chocobo @Domenico Cava
 218 M Emet-Selch, Unsundered @Néstor Ossandón Leal
 221 U Garland, Knight of Cornelia @Billy Christian
+224 U Gladiolus Amicitia @Gal Or
 242 R Sin, Spira's Punishment @John Tedrick
 327 R Stiltzkin, Moogle Merchant @Yumeko
 343 R Jumbo Cactuar @Yumeko

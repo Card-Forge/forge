@@ -5,6 +5,6 @@ PT:4/4
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, sacrifice it unless you pay {1} for each card in your hand.
 SVar:TrigSac:DB$ Sacrifice | UnlessCost$ Y | UnlessPayer$ You
-SVar:Y:Count$InYourHand
+SVar:Y:Count$ValidHand Card.YouOwn
 AI:RemoveDeck:All
 Oracle:Trample\nWhen Megatherium enters, sacrifice it unless you pay {1} for each card in your hand.

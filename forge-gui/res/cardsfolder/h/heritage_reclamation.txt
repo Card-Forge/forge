@@ -1,0 +1,9 @@
+Name:Heritage Reclamation
+ManaCost:1 G
+Types:Instant
+A:SP$ Charm | Choices$ DBDestroyArtifact,DBDestroyEnchantment,DBExile
+SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+SVar:DBDestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard. | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDraw | SpellDescription$ Exile up to one target card from a graveyard. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:Choose one —\n• Destroy target artifact.\n• Destroy target enchantment.\n• Exile up to one target card from a graveyard. Draw a card.

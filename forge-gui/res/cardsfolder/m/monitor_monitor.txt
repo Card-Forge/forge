@@ -1,0 +1,15 @@
+Name:Monitor Monitor
+ManaCost:2 U U
+Types:Creature Human Employee
+PT:2/5
+# The reroll effect does not work with planar dice currently
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters the battlefield, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+T:Mode$ TurnBegin | Execute$ ResetTurnCount | Static$ True
+SVar:ResetTurnCount:DB$ StoreSVar | SVar$ ModsThisTurn | Type$ Number | Expression$ 0
+K:Once each turn, you may pay {1} to reroll one or more dice you rolled.
+SVar:RollModificationsLimit:1
+SVar:ModsThisTurn:Number$0
+SVar:RollRerollCost:1
+AI:RemoveDeck:All
+Oracle:When this creature enters, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)\nOnce each turn, you may pay {1} to reroll one or more dice you rolled.

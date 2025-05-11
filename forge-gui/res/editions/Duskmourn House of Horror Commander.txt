@@ -381,26 +381,26 @@ ScryfallCode=DSC
 373 M Living Death @Josh Newton
 
 [tokens]
-b_2_2_bird_flying
-b_5_5_demon_flying
-bg_1_1_insect
-c_4_4_a_scarecrow_vigilance
-c_x_x_shapeshifter_changeling_deathtouch
-g_1_1_insect
-g_1_1_insect
-g_1_1_insect_flying_deathtouch
-g_1_2_spider_reach
-g_2_2_ooze
-g_3_3_beast
-g_4_4_phyrexian_beast
-g_5_3_elemental
-g_5_5_wurm
-g_5_5_wurm_trample
-g_x_x_ooze
-g_x_x_treefolk_reach_total_lands
-gu_0_0_fractal
-r_1_1_devil_burn
-u_x_x_shark_flying
-w_1_1_human_soldier
-w_4_4_angel_flying
-wb_2_1_inkling_flying
+1 c_x_x_shapeshifter_changeling_deathtouch @Carlos Palma Cruchaga
+2 w_4_4_angel_flying @Magali Villeneuve
+3 w_1_1_human_soldier @Eric Deschamps
+4 u_x_x_shark_flying @Caio Monteiro
+5 b_2_2_bird_flying @Maxime Minard
+6 b_5_5_demon_flying @Sidharth Chaturvedi
+7 r_1_1_devil_burn @Maxime Minard
+8 g_3_3_beast @Johan Grenier
+9 g_5_3_elemental @Nils Hamm
+12 g_1_1_insect @Martina Pilcerova
+12 g_1_1_insect @Martina Pilcerova
+13 g_1_1_insect_flying_deathtouch @Martina Pilcerova
+13 g_2_2_ooze @Lake Hurwitz
+14 g_x_x_ooze @Daniel Ljunggren
+15 g_4_4_phyrexian_beast @Svetlin Velinov
+16 g_1_2_spider_reach @Slawomir Maniak
+17 g_x_x_treefolk_reach_total_lands @Yeong-Hao Han
+18 gu_0_0_fractal @Livia Prima
+19 g_5_5_wurm @Diana Franco
+20 g_5_5_wurm_trample @Diana Franco
+21 wb_2_1_inkling_flying @Scott Murphy
+22 bg_1_1_insect @Kim Sokol
+23 c_4_4_a_scarecrow_vigilance @Johan Grenier

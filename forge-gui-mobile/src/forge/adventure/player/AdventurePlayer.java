@@ -655,8 +655,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void addCard(PaperCard card) {
-        cards.add(card);
-        newCards.add(card);
+        addCard(card, 1);
+    }
+
+    public void addCard(PaperCard card, int amount) {
+        cards.add(card, amount);
+        newCards.add(card, amount);
     }
 
     public void addReward(Reward reward) {
@@ -1060,6 +1064,15 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         inventoryItems.add(name);
         AdventureQuestController.instance().updateItemReceived(item);
         return true;
+    }
+
+    public void removeAllQuestItems(){
+        for (String s : inventoryItems) {
+            ItemData data = ItemData.getItem(s);
+            if(data != null && data.questItem){
+                removeItem(data.name);
+            }
+        }
     }
 
     public boolean addBooster(Deck booster) {

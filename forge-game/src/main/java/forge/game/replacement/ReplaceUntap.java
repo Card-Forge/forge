@@ -44,9 +44,18 @@ public class ReplaceUntap extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
+        Card c = (Card) runParams.get(AbilityKey.Affected);
+        if (!matchesValidParam("ValidCard", c)) {
             return false;
         }
+
+        // compares based on AP in Unstap step:
+        // this allows AI to predict ahead of time
+        if (hasParam("ValidStepTurnToController") &&
+                !matchesValid(runParams.get(AbilityKey.Player), getParam("ValidStepTurnToController").split(","), getHostCard(), c.getController())) {
+            return false;
+        }
+
         return true;
     }
 

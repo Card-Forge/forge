@@ -1,11 +1,10 @@
 Name:Winter's Rest
 ManaCost:1 U
 Types:Snow Enchantment Aura
-K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ KeepTapped
+K:Enchant:Creature
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
-R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy+ActivePlayerCtrl | ActivePhases$ Untap | Layer$ CantHappen | IsPresent$ Permanent.Snow+Other+YouCtrl | Description$ As long as you control another snow permanent, enchanted creature doesn't untap during its controller's untap step.
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.EnchantedBy | ValidStepTurnToController$ You | Layer$ CantHappen | IsPresent$ Permanent.Snow+Other+YouCtrl | Description$ As long as you control another snow permanent, enchanted creature doesn't untap during its controller's untap step.
 SVar:NeedsToPlay:Permanent.Snow+YouCtrl
 DeckNeeds:Type$Snow
 Oracle:Enchant creature\nWhen this Aura enters, tap enchanted creature.\nAs long as you control another snow permanent, enchanted creature doesn't untap during its controller's untap step.

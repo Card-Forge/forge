@@ -1,0 +1,18 @@
+Name:Riling Dawnbreaker
+ManaCost:4 W
+Types:Creature Dragon
+PT:3/4
+K:Flying
+K:Vigilance
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, another target creature you control gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | NumAtt$ +1
+AlternateMode:Omen
+Oracle:Flying, vigilance\nAt the beginning of combat on your turn, another target creature you control gets +1/+0 until end of turn.
+
+ALTERNATE
+
+Name:Signaling Roar
+ManaCost:1 W
+Types:Sorcery Omen
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_soldier | TokenOwner$ You | SpellDescription$ Create a 2/2 white Soldier creature token. (Then shuffle this card into its owner's library.)
+Oracle:Create a 2/2 white Soldier creature token. (Then shuffle this card into its owner's library.)

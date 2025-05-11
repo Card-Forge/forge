@@ -1,0 +1,15 @@
+Name:Mardu Siegebreaker
+ManaCost:1 R W B
+Types:Creature Human Warrior
+PT:4/4
+K:Deathtouch
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters, exile up to one other target creature you control until this creature leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.Other+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature you control | Duration$ UntilHostLeavesPlay
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, for each opponent, create a tapped token that's a copy of the exiled card attacking that opponent. At the beginning of your end step, sacrifice those tokens.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | ChangeZoneTable$ True | RepeatSubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ ValidExile Card.ExiledWithSource | TokenTapped$ True | TokenAttacking$ RememberedPlayer | AtEOT$ YourSacrifice
+SVar:PlayMain1:TRUE
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice
+Oracle:Deathtouch, haste\nWhen this creature enters, exile up to one other target creature you control until this creature leaves the battlefield.\nWhenever this creature attacks, for each opponent, create a tapped token that's a copy of the exiled card attacking that opponent. At the beginning of your end step, sacrifice those tokens.

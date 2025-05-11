@@ -2,7 +2,7 @@ Name:Sunstrike Legionnaire
 ManaCost:1 W
 Types:Creature Human Soldier
 PT:1/2
-R:Event$ Untap | ValidCard$ Card.Self | ActivePhases$ Untap | PlayerTurn$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
+R:Event$ Untap | ValidCard$ Card.Self | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ This creature doesn't untap during your untap step.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another creature enters, untap this creature.
 A:AB$ Tap | Cost$ T | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less | SpellDescription$ Tap target creature with mana value 3 or less.
 SVar:TrigUntap:DB$ Untap | Defined$ Self

@@ -1,7 +1,8 @@
 package forge.deck;
 
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Map.Entry;
-
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
@@ -50,15 +51,19 @@ public class FDeckViewer extends FScreen {
             dName = "";
         deckList.append(dName == null ? "" : "Deck: "+dName + nl + nl);
 
-        for (DeckSection s : DeckSection.values()){
+        for (DeckSection s : DeckSection.values()) {
             CardPool cp = deck.get(s);
             if (cp == null || cp.isEmpty()) {
                 continue;
             }
             deckList.append(s.toString()).append(": ");
             deckList.append(nl);
-            for (final Entry<PaperCard, Integer> ev : cp) {
-                deckList.append(ev.getValue()).append(" ").append(ev.getKey().getCardName()).append(nl);
+            Set<String> accounted = new HashSet<>();
+            for (final PaperCard ev : cp.toFlatList()) {
+                if (!accounted.contains(ev.getCardName())) {
+                    deckList.append(cp.countByName(ev.getCardName())).append(" ").append(ev.getCardName()).append(nl); //search for all  instances of that name in the list.
+                    accounted.add(ev.getCardName()); //add the name to the list so it ignores the next time it appears
+                }
             }
             deckList.append(nl);
         }
