@@ -29,15 +29,13 @@ import forge.item.InventoryItem;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
-import forge.util.CardTranslation;
 import forge.util.Localizer;
 
 /**
  * Displays favorite icons
  */
-@SuppressWarnings("serial")
 public class StarRenderer extends ItemCellRenderer {
-    private IPaperCard card;
+    private int favorite;
     private SkinImage skinImage;
 
     @Override
@@ -55,11 +53,11 @@ public class StarRenderer extends ItemCellRenderer {
     @Override
     public final Component getTableCellRendererComponent(final JTable table, final Object value,
             final boolean isSelected, final boolean hasFocus, final int row, final int column) {
-        if (value instanceof IPaperCard) {
-            card = (IPaperCard) value;
+        if (value instanceof Integer) {
+            favorite = (int) value;
         }
         else {
-            card = null;
+            favorite = 0;
         }
         update();
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
@@ -68,8 +66,7 @@ public class StarRenderer extends ItemCellRenderer {
     @Override
     public <T extends InventoryItem> void processMouseEvent(final MouseEvent e, final ItemListView<T> listView, final Object value, final int row, final int column) {
         if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1 && value instanceof IPaperCard) {
-            card = (IPaperCard) value;
-            CardPreferences prefs = CardPreferences.getPrefs(card);
+            CardPreferences prefs = CardPreferences.getPrefs((IPaperCard) value);
             prefs.setStarCount((prefs.getStarCount() + 1) % 2); //TODO: consider supporting more than 1 star
             CardPreferences.save();
             update();
@@ -81,16 +78,12 @@ public class StarRenderer extends ItemCellRenderer {
     
     private void update() {
         final Localizer localizer = Localizer.getInstance();
-        if (card == null) {
-            this.setToolTipText(null);
-            skinImage = null;
-        }
-        else if (CardPreferences.getPrefs(card).getStarCount() == 0) {
-            this.setToolTipText(localizer.getMessage("lblClickToAddTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
+        if (favorite == 0) {
+            this.setToolTipText(localizer.getMessage("lblAddFavorites"));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTLINE);
         }
         else { //TODO: consider supporting more than 1 star
-            this.setToolTipText(localizer.getMessage("lblClickToRemoveTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
+            this.setToolTipText(localizer.getMessage("lblRemove"));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_FILLED);
         }
     }

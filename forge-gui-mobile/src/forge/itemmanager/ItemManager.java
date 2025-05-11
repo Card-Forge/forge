@@ -67,14 +67,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean hideFilters = false;
     private boolean wantUnique = false;
     private boolean showRanking = false;
-    private boolean showNFSWatermark = false;
+    private boolean showPriceInfo = false;
     private boolean multiSelectMode = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
     private ContextMenu contextMenu;
     private final Class<T> genericType;
     private ItemManagerConfig config;
-    private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet;
+    private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet, fnFavoriteGet;
     private boolean viewUpdating, needSecondUpdate;
     private Supplier<List<ItemColumn>> sortCols = Suppliers.memoize(ArrayList::new);
     private final TextSearchFilter<? extends T> searchFilter;
@@ -267,10 +267,20 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         setViewIndex(config0.getViewIndex());
         setHideFilters(config0.getHideFilters());
 
-        if (colOverrides == null || !colOverrides.containsKey(ColumnDef.NEW)) {
+        if(colOverrides == null) {
             fnNewGet = null;
-        } else {
-            fnNewGet = colOverrides.get(ColumnDef.NEW).getFnDisplay();
+            fnFavoriteGet = ColumnDef.FAVORITE.fnDisplay;
+        }
+        else {
+            if (!colOverrides.containsKey(ColumnDef.NEW))
+                fnNewGet = null;
+            else
+                fnNewGet = colOverrides.get(ColumnDef.NEW).getFnDisplay();
+
+            if (!colOverrides.containsKey(ColumnDef.FAVORITE))
+                fnFavoriteGet = ColumnDef.FAVORITE.fnDisplay;
+            else
+                fnFavoriteGet = colOverrides.get(ColumnDef.FAVORITE).getFnDisplay();
         }
     }
 
@@ -286,6 +296,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             }
         }
         return null;
+    }
+
+    public boolean itemIsFavorite(Entry<? extends InventoryItem, Integer> item) {
+        if(fnFavoriteGet == null)
+            return false;
+        Integer favorite = (Integer) fnFavoriteGet.apply(item);
+        return favorite != null && favorite != 0;
     }
 
     public abstract class ItemRenderer {
@@ -888,8 +905,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return showRanking;
     }
 
-    public boolean showNFSWatermark() {
-        return showNFSWatermark;
+    public boolean showPriceInfo() {
+        ItemColumn currentSort = cbxSortOptions.getSelectedItem();
+        if(currentSort != null && currentSort.getConfig().getDef() == ColumnDef.PRICE)
+            return true;
+        return showPriceInfo;
     }
 
     public void setWantUnique(boolean unique) {
@@ -900,8 +920,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         showRanking = showRanking0;
     }
 
-    public void setShowNFSWatermark(boolean val) {
-        showNFSWatermark = val;
+    public void setShowPriceInfo(boolean val) {
+        showPriceInfo = val;
     }
 
     public void setSelectionSupport(int minSelections0, int maxSelections0) {

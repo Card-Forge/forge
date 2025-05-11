@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.AdventureEventData;
@@ -10,9 +11,11 @@ import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FImage;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardEdition;
+import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.deck.*;
 import forge.game.GameType;
@@ -181,7 +184,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     private static class StoreCatalogPage extends CatalogPage {
         protected StoreCatalogPage() {
             super(new AdventureCardManager(), ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
-            //cardManager.setBtnAdvancedSearchOptions(false); //TODO: Sort by sell value?
+            cardManager.setBtnAdvancedSearchOptions(true);
             scheduleRefresh();
         }
 
@@ -191,7 +194,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             Current.player().onGoldChange(() -> ((AdventureDeckEditor) parentScreen).deckHeader.updateGold());
             setItemManagerCaption("lblSell");
             cardManager.setPool(Current.player().getSellableCards());
-            cardManager.setShowNFSWatermark(true);
+            cardManager.setShowPriceInfo(true);
         }
 
         @Override
@@ -264,7 +267,6 @@ public class AdventureDeckEditor extends FDeckEditor {
             super.initialize();
             cardManager.setBtnAdvancedSearchOptions(true);
             cardManager.setCatalogDisplay(true);
-            cardManager.setShowNFSWatermark(true);
             scheduleRefresh();
         }
 
@@ -314,7 +316,16 @@ public class AdventureDeckEditor extends FDeckEditor {
                     menu.addItem(moveToCatalog);
                 }
             }
+        @Override
+        public void setCardFavorited(PaperCard card, boolean isFavorite) {
+            AdventurePlayer player = Current.player();
+            if(isFavorite)
+                player.favoriteCards.add(card);
+            else
+                player.favoriteCards.remove(card);
         }
+        @Override protected boolean cardIsFavorite(PaperCard card) { return Current.player().favoriteCards.contains(card); }
+        @Override protected boolean allowFavoriteCards() { return true; }
     }
 
     protected static class CollectionAutoSellPage extends CatalogPage {
@@ -500,14 +511,14 @@ public class AdventureDeckEditor extends FDeckEditor {
                 public void run(Boolean result) {
                     if (result) {
                         currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
-                        Current.player().getNewCards().clear();
+                        Current.player().newCards.clear();
                         Forge.clearCurrentScreen();
                         Forge.switchToLast();
                     }
                 }
             });
         } else {
-            Current.player().getNewCards().clear();
+            Current.player().newCards.clear();
             Forge.clearCurrentScreen();
             Forge.switchToLast();
         }
@@ -636,12 +647,14 @@ public class AdventureDeckEditor extends FDeckEditor {
         return false;
     }
 
-    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> Current.player().getNewCards().contains((PaperCard) from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> Current.player().getNewCards().contains((PaperCard) from.getKey()) ? "NEW" : "";
+    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> Current.player().newCards.contains((PaperCard) from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> Current.player().newCards.contains((PaperCard) from.getKey()) ? "NEW" : "";
     private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = from -> decksUsingMyCards.count(from.getKey());
     private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = from -> Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
     private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnPriceCompare = from -> Current.player().cardSellPrice((PaperCard) from.getKey());
     private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnPriceGet = from -> Current.player().cardSellPrice((PaperCard) from.getKey());
+    private static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnFavoriteCompare = from -> Current.player().favoriteCards.contains((PaperCard) from.getKey());
+    private static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnFavoriteGet = from -> Current.player().favoriteCards.contains((PaperCard) from.getKey()) ? 1 : 0;
 
     @Override
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
@@ -650,6 +663,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, fnNewCompare, fnNewGet);
         ItemColumn.addColOverride(config, colOverrides, ColumnDef.DECKS, fnDeckCompare, fnDeckGet);
         ItemColumn.addColOverride(config, colOverrides, ColumnDef.PRICE, fnPriceCompare, fnPriceGet);
+        ItemColumn.addColOverride(config, colOverrides, ColumnDef.FAVORITE, fnFavoriteCompare, fnFavoriteGet);
         return colOverrides;
     }
 
@@ -818,19 +832,38 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         protected String getItemSuffix(Map.Entry<PaperCard, Integer> item) {
-            String valueText;
             PaperCard card = item.getKey();
-            int sellValue = Current.player().cardSellPrice(card);
-            if(card.hasNoSellValue())
-                valueText = " [NO VALUE]";
-            else if(item.getValue() > 1)
-                valueText = String.format(" [$%d] / [$%d]", sellValue, sellValue * item.getValue());
-            else
-                valueText = String.format(" [$%d]", sellValue);
             String parentSuffix = super.getItemSuffix(item);
-            if(parentSuffix == null)
-                return valueText;
-            return String.join(" ", valueText, parentSuffix);
+            if(card.hasNoSellValue()) {
+                String valueText = " [NO VALUE]";
+                if(parentSuffix == null)
+                    return valueText;
+                return String.join(" ", valueText, parentSuffix);
+            }
+            return parentSuffix;
+        }
+
+        @Override
+        public ItemManager<PaperCard>.ItemRenderer getListItemRenderer(FList.CompactModeHandler compactModeHandler) {
+            return new CardListItemRenderer(compactModeHandler) {
+                @Override
+                public void drawValue(Graphics g, Map.Entry<PaperCard, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
+                    super.drawValue(g, value, font, foreColor, backColor, pressed, x, y, w, h);
+
+                    if(showPriceInfo()) {
+                        float totalHeight = h + 2 * FList.PADDING;
+                        float cardArtWidth = totalHeight * CardRenderer.CARD_ART_RATIO;
+
+                        String price = String.valueOf(Current.player().cardSellPrice(value.getKey()));
+                        float priceHeight = font.getLineHeight();
+                        y += totalHeight - priceHeight - FList.PADDING;
+                        g.fillRect(backColor, x - FList.PADDING, y, cardArtWidth, priceHeight);
+                        g.drawImage(FSkinImage.QUEST_COINSTACK, x, y, priceHeight, priceHeight);
+                        float offset = priceHeight * 1.1f;
+                        g.drawText(price, font, foreColor, x + offset, y, cardArtWidth - offset - 2 * FList.PADDING, priceHeight, false, Align.left, true);
+                    }
+                }
+            };
         }
     }
 

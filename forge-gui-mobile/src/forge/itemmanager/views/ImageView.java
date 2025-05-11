@@ -37,6 +37,7 @@ import forge.util.Utils;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -76,6 +77,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private float totalZoomAmount;
     private Supplier<List<ItemInfo>> orderedItems = Suppliers.memoize(ArrayList::new);
     private Supplier<List<Group>> groups = Suppliers.memoize(ArrayList::new);
+    private Function<Entry<? extends InventoryItem, Integer>, ?> fnIsFavorite = ColumnDef.FAVORITE.fnDisplay, fnPrice = null;
 
     private class ExpandCollapseButton extends FLabel {
         private boolean isAllCollapsed;
@@ -184,6 +186,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         setGroupBy(config.getGroupBy(), true);
         setPileBy(config.getPileBy(), true);
         setColumnCount(config.getImageColumnCount(), true);
+
+        if (colOverrides != null) {
+            if (colOverrides.containsKey(ColumnDef.FAVORITE) && colOverrides.get(ColumnDef.FAVORITE).getFnDisplay() != null) {
+                this.fnIsFavorite = colOverrides.get(ColumnDef.FAVORITE).getFnDisplay();
+            }
+            if (colOverrides.containsKey(ColumnDef.PRICE) && colOverrides.get(ColumnDef.PRICE).getFnDisplay() != null) {
+                this.fnPrice = colOverrides.get(ColumnDef.PRICE).getFnDisplay();
+            }
+        }
     }
 
     public GroupDef getGroupBy() {
@@ -1012,6 +1023,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             .collect(Collectors.joining());
                 }
             }
+            if(fnPrice != null) {
+                cardPrice = (Integer) fnPrice.apply(this);
+            }
         }
 
         @Override
@@ -1036,13 +1050,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         private void drawCardLabel(Graphics g, String message, Color bgColor, float x, float y, float w, float h) {
             FSkinFont skinFont = FSkinFont.forHeight(w / 7);
-            float fontheight = skinFont.getLineHeight();
-            float ymod = h / 2 - fontheight / 2;
+            float fontHeight = skinFont.getLineHeight();
+            float ymod = h * 0.7f - fontHeight / 2;
             float oldAlpha = g.getfloatAlphaComposite();
-            g.setAlphaComposite(0.4f);
-            g.fillRect(bgColor, x, y + ymod, w, fontheight);
+            g.setAlphaComposite(0.6f);
+            g.fillRect(bgColor, x, y + ymod, w, fontHeight);
             g.setAlphaComposite(oldAlpha);
-            g.drawText(message, skinFont, Color.WHITE, x, y, w, h, false, Align.center, true);
+            textRenderer.drawText(g, message, skinFont, Color.BLACK, x, y + ymod, w, fontHeight, y + ymod, fontHeight, false, Align.center, true);
         }
 
         @Override
@@ -1067,8 +1081,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
             }
 
-            if (item instanceof PaperCard) {
-                CardRenderer.drawCard(g, (PaperCard) item, x, y, w, h, pos);
+            if (item instanceof PaperCard pc) {
+                CardRenderer.drawCard(g, pc, x, y, w, h, pos);
                 if (showRanking) {
                     float rankSize = w / 2;
                     float y2 = y + (rankSize - (rankSize * 0.1f));
@@ -1077,18 +1091,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     g.drawText(String.valueOf(draftRank), FSkinFont.forHeight(rankSize / 4), Color.WHITE, x, y, w, h, true, Align.center, true);
                 }
 
-                if (Forge.isMobileAdventureMode) {
-                    if (((PaperCard) item).hasNoSellValue() && itemManager.showNFSWatermark() && !Config.instance().getSettingData().disableNotForSale) {
+                if (itemManager.showPriceInfo()) {
+                    if (pc.hasNoSellValue() && !(Forge.isMobileAdventureMode || Config.instance().getSettingData().disableNotForSale)) {
                         Texture nfs = Forge.getAssets().getTexture(getDefaultSkinFile("nfs.png"), false);
                         if (nfs != null)
                             g.drawImage(nfs, x, y, w, h);
                         else
                             drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                     }
-                    if (Forge.getCurrentScene() instanceof ShopScene) {
-                        if (cardPrice == null)
-                            cardPrice = ((ShopScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);
-                        drawCardLabel(g, "$" + cardPrice, Color.GOLD, x, y ,w ,h);
+                    else {
+                        if (cardPrice != null)
+                            drawCardLabel(g, "{CS} " + cardPrice, Color.GOLD, x, y, w, h);
                     }
                 }
                 // spire colors
@@ -1213,6 +1226,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     g.fillRect(Color.BLACK, x, y, w, h);
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                 }
+            }
+
+            if (itemManager.itemIsFavorite(this)) {
+                float offset = w * 0.05f;
+                float size = w * 0.15f;
+                g.drawImage(FSkinImage.HDSTAR_FILLED, x + offset, y + h - offset - size, size, size);
             }
         }
 

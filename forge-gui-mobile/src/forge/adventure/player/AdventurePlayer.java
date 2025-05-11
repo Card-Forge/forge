@@ -120,6 +120,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         statistic.clear();
         newCards.clear();
         autoSellCards.clear();
+        favoriteCards.clear();
         AdventureEventController.clear();
         AdventureQuestController.clear();
     }
@@ -131,8 +132,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     private final CardPool cards = new CardPool();
 
-    private final ItemPool<PaperCard> newCards = new ItemPool<>(PaperCard.class);
+    public final ItemPool<PaperCard> newCards = new ItemPool<>(PaperCard.class);
     public final ItemPool<PaperCard> autoSellCards = new ItemPool<>(PaperCard.class);
+    public final Set<PaperCard> favoriteCards = new HashSet<>();
 
     public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, boolean isUsingCustomDeck, DifficultyData difficultyData) {
         clear();
@@ -259,10 +261,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public Collection<String> getEquippedItems() {
         return equippedItems.values();
-    }
-
-    public ItemPool<PaperCard> getNewCards() {
-        return newCards;
     }
 
     public ColorSet getColorIdentity() {
@@ -510,9 +508,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
         if (data.containsKey("autoSellCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("autoSellCards");
-            for (PaperCard item : items) {
-                autoSellCards.add(item);
-            }
+            autoSellCards.addAllFlat(Arrays.asList(items));
+        }
+        if (data.containsKey("favoriteCards")) {
+            PaperCard[] items = (PaperCard[]) data.readObject("favoriteCards");
+            favoriteCards.addAll(Arrays.asList(items));
         }
 
         fantasyMode = data.containsKey("fantasyMode") && data.readBool("fantasyMode");
@@ -613,6 +613,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         data.storeObject("newCards", newCards.toFlatList().toArray(new PaperCard[0]));
         data.storeObject("autoSellCards", autoSellCards.toFlatList().toArray(new PaperCard[0]));
+        data.storeObject("favoriteCards", favoriteCards.toArray(new PaperCard[0]));
 
         return data;
     }

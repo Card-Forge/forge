@@ -1703,20 +1703,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             addCommanderItems(menu, card);
 
-            if (parentScreen.getEditorConfig().hasInfiniteCardPool()) {
+            if(this.allowFavoriteCards()) {
                 //add option to add or remove card from favorites
-                final CardPreferences prefs = CardPreferences.getPrefs(card);
-                if (prefs.getStarCount() == 0) {
+                if (!this.cardIsFavorite(card)) {
                     menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED, e -> {
-                        prefs.setStarCount(1);
-                        CardPreferences.save();
+                        this.setCardFavorited(card, true);
                     }));
                 } else {
                     menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRemoveFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_OUTLINE : FSkinImage.STAR_OUTLINE, e -> {
-                        prefs.setStarCount(0);
-                        CardPreferences.save();
+                        this.setCardFavorited(card, false);
                     }));
                 }
+            }
 
                 //if card has more than one art option, add item to change user's preferred art
                 final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
@@ -1757,6 +1755,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     cardManager.getConfig().setUniqueCardsOnly(wantUnique);
                 }));
             }
+        }
+
+        public void setCardFavorited(PaperCard card, boolean isFavorite) {
+            final CardPreferences prefs = CardPreferences.getPrefs(card);
+            prefs.setStarCount(isFavorite ? 1 : 0);
+            CardPreferences.save();
+        }
+
+        protected boolean allowFavoriteCards() {
+            return parentScreen.getEditorConfig().hasInfiniteCardPool();
+        }
+
+        protected boolean cardIsFavorite(PaperCard card) {
+            return CardPreferences.getPrefs(card).getStarCount() > 0;
         }
     }
 
