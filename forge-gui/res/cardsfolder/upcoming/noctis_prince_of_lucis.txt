@@ -9,5 +9,4 @@ SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ Trig
 SVar:ReMoved:Event$ Moved | Origin$ Stack | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBCounter
 SVar:ETBCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ FINALITY | CounterNum$ 1 | SubAbility$ RemoveSelf
 SVar:RemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | ValidSA$ Spell | TgtPrompt$ Choose target instant or sorcery card from your graveyard | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
 Oracle:Lifelink\nYou may cast artifact spells from your graveyard by paying 3 life in addition to paying their other costs. If you cast a spell this way, that artifact enters with a finality counter on it.
