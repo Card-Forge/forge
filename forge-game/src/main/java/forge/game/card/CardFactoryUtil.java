@@ -1529,7 +1529,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String n = k[1];
 
-            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True"
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self"
                     + " | TriggerDescription$ Mobilize " + n + " (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ r_1_1_warrior"

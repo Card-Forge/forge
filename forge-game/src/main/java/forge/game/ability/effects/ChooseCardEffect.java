@@ -103,7 +103,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             CardCollectionView pChoices = choices;
             CardCollection chosen = new CardCollection();
             if (!p.isInGame()) {
-                p = getNewChooser(sa, activator, p);
+                p = getNewChooser(sa, p);
             }
             if (sa.hasParam("ControlledByPlayer")) {
                 final String param = sa.getParam("ControlledByPlayer");
