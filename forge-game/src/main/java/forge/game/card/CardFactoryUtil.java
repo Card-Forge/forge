@@ -1409,6 +1409,29 @@ public class CardFactoryUtil {
             parsedEndTrig.setOverridingAbility(AbilityFactory.getAbility(remove, card));
 
             inst.addTrigger(parsedEndTrig);
+        } else if (keyword.equals("Job select")) {
+            final StringBuilder sbTrig = new StringBuilder();
+            sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
+            sbTrig.append("ValidCard$ Card.Self | TriggerDescription$ ");
+            sbTrig.append("Job select (").append(inst.getReminderText()).append(")");
+
+            final String sbHero = "DB$ Token | TokenScript$ c_1_1_hero | TokenOwner$ You | RememberTokens$ True";
+            final SpellAbility saHero= AbilityFactory.getAbility(sbHero, card);
+
+            final String sbAttach = "DB$ Attach | Defined$ Remembered";
+            final AbilitySub saAttach = (AbilitySub) AbilityFactory.getAbility(sbAttach, card);
+            saHero.setSubAbility(saAttach);
+
+            final String sbClear = "DB$ Cleanup | ClearRemembered$ True";
+            final AbilitySub saClear = (AbilitySub) AbilityFactory.getAbility(sbClear, card);
+            saAttach.setSubAbility(saClear);
+
+            final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, intrinsic);
+
+            etbTrigger.setOverridingAbility(saHero);
+
+            saHero.setIntrinsic(intrinsic);
+            inst.addTrigger(etbTrigger);
         } else if (keyword.equals("Living Weapon")) {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
