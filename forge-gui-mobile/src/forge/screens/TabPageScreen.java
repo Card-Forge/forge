@@ -332,6 +332,9 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         public void hideTab() {
             tab.setVisible(false);
         }
+        public boolean isTabVisible() {
+            return tab.isVisible();
+        }
 
         public String getCaption() {
             return caption;

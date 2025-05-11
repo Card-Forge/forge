@@ -962,7 +962,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     return true;
                 break;
             case Keys.S: //save deck on Ctrl+S
-                if (KeyInputAdapter.isCtrlKeyDown()) {
+                if (KeyInputAdapter.isCtrlKeyDown() && allowSave()) {
                     save(null);
                     return true;
                 }
@@ -1031,7 +1031,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
      * @param amount amount of tabs to move the selection by; 1 for next, -1 for previous, etc.
      */
     protected void controllerCycleTabs(int amount) {
-        List<TabPage<FDeckEditor>> visiblePages = tabPages.stream().filter(FDisplayObject::isVisible).collect(Collectors.toList());
+        List<TabPage<FDeckEditor>> visiblePages = tabPages.stream().filter(TabPage::isTabVisible).collect(Collectors.toList());
         if(visiblePages.isEmpty())
             return;
         int current = visiblePages.indexOf(getSelectedPage());

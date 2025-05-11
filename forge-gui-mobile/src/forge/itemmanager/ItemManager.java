@@ -544,7 +544,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         else if(current >= size - 1 && indexOffset > 0)
             setSelectedIndex(0);
         else
-            setSelectedIndex(Math.max(0, Math.max(current + indexOffset, size - 1)));
+            setSelectedIndex(Math.max(0, Math.min(current + indexOffset, size - 1)));
     }
 
     public void addItem(final T item, int qty) {
@@ -1035,6 +1035,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private class ContextMenu extends FDropDownMenu {
         @Override
         protected void buildMenu() {
+            if(getSelectedItem() == null)
+                return;
             contextMenuBuilder.buildMenu(this, getSelectedItem());
         }
 
