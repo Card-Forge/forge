@@ -481,7 +481,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     protected void cacheTabPages() {
         //cache specific pages
         for (TabPage<FDeckEditor> tabPage : tabPages) {
-            if (tabPage instanceof CatalogPage) {
+            if (tabPage instanceof CatalogPage && catalogPage == null) {
                 catalogPage = (CatalogPage) tabPage;
             }
             else if (tabPage instanceof DeckSectionPage deckSectionPage) {
@@ -1579,7 +1579,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected ItemPool<PaperCard> getCardPool() {
-            return parentScreen.getEditorConfig().getCardPool(cardManager.getWantUnique());
+            //Clone the pool to ensure we don't mutate it by adding to or removing from this page.
+            //Can override this if that behavior is desired.
+            return CardPool.createFrom(parentScreen.getEditorConfig().getCardPool(cardManager.getWantUnique()), PaperCard.class);
         }
 
         public void scheduleRefresh() {
@@ -1716,6 +1718,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
 
+            if (parentScreen.getEditorConfig().hasInfiniteCardPool()) {
+                final CardPreferences prefs = CardPreferences.getPrefs(card);
                 //if card has more than one art option, add item to change user's preferred art
                 final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
                 if (artOptions.size() > 1) {

@@ -274,14 +274,20 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
             super.buildMenu(menu, card);
 
-            int amountOwned = cardManager.getItemCount(card);
+            if (!(parentScreen instanceof AdventureDeckEditor adventureEditor) || adventureEditor.getAutoSellPage() == null)
+                return;
 
             Localizer localizer = Forge.getLocalizer();
             String lblHowMany = localizer.getMessage("lblHowMany");
 
+            int amountInCollection = cardManager.getItemCount(card);
+            CollectionAutoSellPage autoSellPage = adventureEditor.getAutoSellPage();
+            int sellableCount = amountInCollection - Current.player().getCopiesUsedInDecks(card);
+            int autoSellCount = Current.player().autoSellCards.count(card);
+
             if (card.hasNoSellValue()) {
                 String prompt = String.format("%s - %s %s", card, localizer.getMessage("lblRemove"), lblHowMany);
-                FMenuItem removeItem = new FMenuItem(localizer.getMessage("lblRemove"), FSkinImage.HDDELETE, new MoveQuantityPrompt(prompt, amountOwned, amount -> {
+                FMenuItem removeItem = new FMenuItem(localizer.getMessage("lblRemove"), FSkinImage.HDDELETE, new MoveQuantityPrompt(prompt, sellableCount, amount -> {
                     int sold = Current.player().sellCard(card, amount);
                     removeCard(card, sold);
                 }));
@@ -289,33 +295,29 @@ public class AdventureDeckEditor extends FDeckEditor {
                 return;
             }
 
-            if(parentScreen instanceof AdventureDeckEditor adventureEditor && adventureEditor.getAutoSellPage() != null) {
-                CollectionAutoSellPage autoSellPage = adventureEditor.getAutoSellPage();
-                int sellableCount = amountOwned - Current.player().getCopiesUsedInDecks(card);
-                int autoSellCount = Current.player().autoSellCards.count(card);
-
-                if (sellableCount > 0) {
-                    String action = localizer.getMessage("lbltoSell", autoSellCount, sellableCount);
-                    String prompt = String.format("%s - %s %s", card, action, lblHowMany);
-                    FMenuItem moveToAutosell = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, new MoveQuantityPrompt(prompt, sellableCount, amount -> {
-                        //Auto-sell page adds to and removes from the player's auto-sell pool.
-                        //The auto-sell pool is part of the overall pool so there's no need to edit anything on our end either.
-                        autoSellPage.addCard(card, amount);
-                        removeCard(card, amount);
-                    }));
-                    menu.addItem(moveToAutosell);
-                }
-
-                if (autoSellCount > 0) {
-                    String action = localizer.getMessage("lbltoInventory", autoSellCount, sellableCount);
-                    String prompt = String.format("%s - %s %s", card, action, lblHowMany);
-                    FMenuItem moveToCatalog = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new MoveQuantityPrompt(prompt, sellableCount, amount -> {
-                        autoSellPage.removeCard(card, amount);
-                        addCard(card, amount);
-                    }));
-                    menu.addItem(moveToCatalog);
-                }
+            if (sellableCount > 0) {
+                String action = localizer.getMessage("lbltoSell", sellableCount, autoSellCount);
+                String prompt = String.format("%s - %s %s", card, action, lblHowMany);
+                FMenuItem moveToAutosell = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, new MoveQuantityPrompt(prompt, sellableCount, amount -> {
+                    //Auto-sell page adds to and removes from the player's auto-sell pool.
+                    //The auto-sell pool is part of the overall pool so there's no need to edit anything on our end either.
+                    autoSellPage.addCard(card, amount);
+                    removeCard(card, amount);
+                }));
+                menu.addItem(moveToAutosell);
             }
+
+            if (autoSellCount > 0) {
+                String action = localizer.getMessage("lbltoInventory", sellableCount, autoSellCount);
+                String prompt = String.format("%s - %s %s", card, action, lblHowMany);
+                FMenuItem moveToCatalog = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
+                    autoSellPage.removeCard(card, amount);
+                    addCard(card, amount);
+                }));
+                menu.addItem(moveToCatalog);
+            }
+        }
+
         @Override
         public void setCardFavorited(PaperCard card, boolean isFavorite) {
             AdventurePlayer player = Current.player();
@@ -348,23 +350,6 @@ public class AdventureDeckEditor extends FDeckEditor {
             return Current.player().getAutoSellCards();
         }
 
-        @Override
-        public void addCard(PaperCard card, int qty) {
-            Current.player().autoSellCards.add(card, qty);
-            super.addCard(card, qty);
-        }
-
-        @Override
-        public void addCards(Iterable<Map.Entry<PaperCard, Integer>> cards) {
-            Current.player().autoSellCards.addAll(cards);
-            super.addCards(cards);
-        }
-
-        @Override
-        public void removeCard(PaperCard card, int qty) {
-            Current.player().autoSellCards.remove(card, qty);
-            super.removeCard(card, qty);
-        }
 
         protected boolean isShop() {
             return parentScreen.getEditorConfig() instanceof ShopConfig;
@@ -388,6 +373,21 @@ public class AdventureDeckEditor extends FDeckEditor {
                     })
                 ));
             }
+            if(parentScreen instanceof AdventureDeckEditor adventureEditor && adventureEditor.getCatalogPage() != null) {
+                CollectionCatalogPage catalogPage = (CollectionCatalogPage) adventureEditor.getCatalogPage();
+                int autoSellCount = cardManager.getItemCount(card);
+                int amountInCollection = player.getCards().count(card) - autoSellCount;
+                int sellableCount = amountInCollection - player.getCopiesUsedInDecks(card);
+
+                String action = localizer.getMessage("lbltoInventory", sellableCount, autoSellCount);
+                String prompt = String.format("%s - %s %s", card, action, localizer.getMessage("lblHowMany"));
+                FMenuItem moveToCatalog = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
+                    removeCard(card, amount);
+                    catalogPage.addCard(card, amount);
+                }));
+                menu.addItem(moveToCatalog);
+            }
+
         }
 
         @Override
@@ -929,6 +929,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override
         public void setEditor(FDeckEditor editor) {
             this.editor = editor;
+            editor.notifyNewControllerModel();
         }
 
         @Override public void setDeck(Deck deck) {
