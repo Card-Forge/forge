@@ -10,8 +10,6 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
-import forge.adventure.scene.AdventureDeckEditor;
-import forge.adventure.scene.DeckEditScene;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.card.CardEdition;

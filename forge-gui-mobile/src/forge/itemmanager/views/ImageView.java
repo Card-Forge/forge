@@ -11,7 +11,6 @@ import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.ImageKeys;
-import forge.adventure.scene.ShopScene;
 import forge.adventure.util.Config;
 import forge.assets.*;
 import forge.assets.FSkinColor.Colors;

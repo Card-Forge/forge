@@ -10,7 +10,6 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
-import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.TextUtil;
 

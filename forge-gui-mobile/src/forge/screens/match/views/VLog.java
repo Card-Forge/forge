@@ -18,7 +18,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDown;
 import forge.menu.FMenuTab;
 import forge.model.FModel;
-import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
