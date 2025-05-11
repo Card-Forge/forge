@@ -192,7 +192,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         protected void initialize() {
             super.initialize();
             Current.player().onGoldChange(() -> ((AdventureDeckEditor) parentScreen).deckHeader.updateGold());
-            setItemManagerCaption("lblSell");
             cardManager.setPool(Current.player().getSellableCards());
             cardManager.setShowPriceInfo(true);
         }
@@ -331,8 +330,16 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     protected static class CollectionAutoSellPage extends CatalogPage {
+        private final String captionPrefix;
+
         protected CollectionAutoSellPage() {
             super(new AdventureCardManager(), ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblAutoSell"), AUTO_SELL_ICON);
+            this.captionPrefix = Forge.getLocalizer().getMessage("lblAutoSell");
+        }
+
+        @Override
+        protected void updateCaption() {
+            caption = captionPrefix + " (" + cardManager.getItemCount() + ")";
         }
 
         @Override
@@ -586,6 +593,8 @@ public class AdventureDeckEditor extends FDeckEditor {
                 createAsShop ? null : Current.player().getSelectedDeck(),
                 e -> leave());
         isShop = createAsShop;
+        if(createAsShop)
+            setHeaderText(Forge.getLocalizer().getMessage("lblSell"));
     }
 
     public AdventureDeckEditor(AdventureEventData event) {

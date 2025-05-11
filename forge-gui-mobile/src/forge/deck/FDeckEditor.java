@@ -527,6 +527,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         deckHeader.btnSave.setVisible(allowSave);
     }
 
+    public void setHeaderText(String headerText) {
+        this.deckHeader.lblName.setText(headerText);
+    }
+
     protected FPopupMenu createMoreOptionsMenu() {
         IDeckController deckController = this.getDeckController();
         return new FPopupMenu() {
@@ -560,7 +564,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             public void run(Deck importedDeck) {
                                 if (deck != null && importedDeck.hasName()) {
                                     deck.setName(importedDeck.getName());
-                                    deckHeader.lblName.setText(importedDeck.getName());
+                                    setHeaderText(importedDeck.getName());
                                 }
                                 if (dialog.createNewDeck()) {
                                     for (Entry<DeckSection, CardPool> section : importedDeck) {
@@ -659,7 +663,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private void setDeck(Deck deck) {
         if (this.deck == deck) { return; }
         this.deck = deck;
-        this.deckHeader.lblName.setText(getDeckController().getDeckDisplayName());
+        setHeaderText(getDeckController().getDeckDisplayName());
         if (deck == null || !tabsInitialized) { return; }
 
         //reinitialize tab pages when deck changes
@@ -1543,7 +1547,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         protected void initialize() {
             super.initialize();
-            cardManager.setCaption(Localizer.getInstance().getMessage("lblCards"));
+            cardManager.setCaption(this.caption);
             isInitialized = true;
             if(needRefreshWhenShown)
                 scheduleRefresh();
@@ -2328,7 +2332,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             if (editor != null) {
                 editor.deckHeader.btnSave.setEnabled(!saved);
-                editor.deckHeader.lblName.setText(getDeckDisplayName());
+                editor.setHeaderText(getDeckDisplayName());
             }
         }
 
