@@ -576,6 +576,9 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void finishRound() {
+        // TODO: Handle the scenario where a 3-match duel includes a draw. 
+        // Currently, the system does not account for draws, which may lead to incorrect behavior.
+        // Consider adding logic to track and resolve draw matches, ensuring the overall match outcome is determined correctly.
         if (currentEvent.currentRound == currentEvent.rounds) {
             finishEvent();
         } else currentEvent.currentRound += 1;
