@@ -8,4 +8,4 @@ SVar:DBBounce:DB$ ChangeZoneAll | ChangeType$ Creature.nonKraken+nonLeviathan+no
 SVar:DBDraw:DB$ Effect | Triggers$ AttackTrig | SpellDescription$ Until end of turn, whenever a Merfolk, Octopus, or Serpent attacks, draw a card.
 SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Merfolk,Card.Serpent,Card.Octopus | TriggerDescription$ Whenever a Merfolk, Octopus, or Serpent attacks, draw a card.
 DeckHints:Type$Kraken|Leviathan|Merfolk|Octopus|Serpent
-Oracle:I — Return each creature that isn't a Kraken, Leviathan, Merfolk, Octopus, or Serpent to its owner's hand.\nII, III — Until end of turn, whenever Merfolk, Octopus, or Serpent attacks, draw a card.\nWard {2}
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Return each creature that isn't a Kraken, Leviathan, Merfolk, Octopus, or Serpent to its owner's hand.\nII, III — Until end of turn, whenever a Merfolk, Octopus, or Serpent attacks, draw a card.\nWard {2}
