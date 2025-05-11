@@ -25,7 +25,6 @@ import forge.item.PaperCard;
 import forge.itemmanager.*;
 import forge.itemmanager.filters.CardColorFilter;
 import forge.itemmanager.filters.CardTypeFilter;
-import forge.itemmanager.filters.ItemFilter;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
@@ -38,7 +37,6 @@ import forge.util.Utils;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class AdventureDeckEditor extends FDeckEditor {
     protected static class AdventureEditorConfig extends DeckEditorConfig {
@@ -706,74 +704,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
 
-
-    private static class AdventureCatalogFilter extends ItemFilter<PaperCard> {
-        private boolean preventHandling = false;
-        private final FComboBox<CatalogFilterOption> catalogDisplay = new FComboBox<>();
-
-        public AdventureCatalogFilter(AdventureCardManager itemManager) {
-            super(itemManager);
-            catalogDisplay.setFont(FSkinFont.get(12));
-            catalogDisplay.addItem(CatalogFilterOption.COLLECTION);
-            catalogDisplay.addItem(CatalogFilterOption.SELLABLE);
-            catalogDisplay.addItem(CatalogFilterOption.AUTO_SELLABLE);
-            catalogDisplay.addItem(CatalogFilterOption.NON_SELLABLE);
-
-            catalogDisplay.setChangedHandler(e -> {
-                if (preventHandling)
-                    return;
-                //Need to either pipe this over to the deck editor or handle the filtering within the card manager.Latter sounds promising.
-                itemManager.setCatalogFilter(catalogDisplay.getSelectedItem());
-                itemManager.refresh();
-            });
-        }
-
-        @Override
-        public void reset() {
-            preventHandling = true;
-            catalogDisplay.setSelectedIndex(0);
-            preventHandling = false;
-        }
-
-        @Override
-        public FDisplayObject getMainComponent() {
-            return catalogDisplay;
-        }
-
-        @Override
-        public ItemFilter<PaperCard> createCopy() {
-            AdventureCatalogFilter copy = new AdventureCatalogFilter((AdventureCardManager) itemManager);
-            copy.preventHandling = true;
-            copy.catalogDisplay.setSelectedIndex(catalogDisplay.getSelectedIndex());
-            copy.preventHandling = false;
-            return copy;
-        }
-
-        @Override
-        protected void buildWidget(ItemFilter<PaperCard>.Widget widget) {
-            widget.add(catalogDisplay);
-        }
-
-        @Override
-        protected void doWidgetLayout(float width, float height) {
-            catalogDisplay.setSize(width, height);
-        }
-
-        @Override
-        protected Predicate<PaperCard> buildPredicate() {
-            //Predicate won't suffice for this. We need to be able to remove specific quantities from the pool.
-            return x -> true;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-    }
-
     protected static class AdventureCardManager extends CardManager {
-        private boolean showCollectionCards = true, showAutoSellCards = false, showNoSellCards = true;
-        private CatalogFilterOption filterOption;
 
         public AdventureCardManager() {
             super(false);
@@ -782,61 +713,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override
         protected void addDefaultFilters() {
             this.addFilter(new CardColorFilter(this));
-            //this.addFilter(new AdventureCatalogFilter(this));
             this.addFilter(new CardTypeFilter(this));
-        }
-
-        protected void setCatalogFilter(CatalogFilterOption filter) {
-            this.filterOption = filter;
-            switch (filter) {
-                case COLLECTION:
-                    showCollectionCards = true;
-                    showAutoSellCards = false;
-                    showNoSellCards = true;
-                    break;
-                case SELLABLE:
-                    showCollectionCards = true;
-                    showAutoSellCards = false;
-                    showNoSellCards = false;
-                    break;
-                case AUTO_SELLABLE:
-                    showCollectionCards = false;
-                    showAutoSellCards = true;
-                    showNoSellCards = false;
-                    break;
-                case NON_SELLABLE:
-                    showCollectionCards = false;
-                    showAutoSellCards = false;
-                    showNoSellCards = true;
-                    break;
-            }
-        }
-
-        public CatalogFilterOption getCatalogFilter() {
-            return filterOption;
-        }
-
-        @Override
-        public ItemPool<PaperCard> getFilteredItems() {
-            ItemPool<PaperCard> pool;
-            AdventurePlayer player = AdventurePlayer.current();
-            if(showCollectionCards) {
-                pool = super.getFilteredItems();
-                if(!showNoSellCards)
-                    pool.removeIf(PaperCard::hasNoSellValue);
-                if(!showAutoSellCards)
-                    pool.removeAll(player.getAutoSellCards());
-            }
-            else {
-                pool = new CardPool();
-                if(showNoSellCards) {
-                    pool.addAll(super.getFilteredItems());
-                    pool.retainIf(PaperCard::hasNoSellValue);
-                }
-                if(showAutoSellCards)
-                    pool.addAll(player.getAutoSellCards());
-            }
-            return pool;
         }
 
         @Override
