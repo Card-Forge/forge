@@ -9,4 +9,5 @@ SVar:DBChangeOne:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defi
 SVar:DBChangeTwo:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Card.nonEnchantment | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 K:Equip:3
+DeckHas:Ability$Token & Type$Shaman
 Oracle:Job select\nEquipped creature is a Shaman in addition to its other types and has "Whenever this creature attacks, you may put a creature card from your hand onto the battlefield. If that card is an enchantment card, it enters tapped and attacking."\nAbraxas — Equip {3}
