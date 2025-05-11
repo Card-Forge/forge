@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | Amount$ Y | SacValid$ Creature.nonGod | Defined$ Remembered
 SVar:Y:Count$Valid Creature.nonGod+RememberedPlayerCtrl/HalfDown
-SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player.Opponent
 T:Mode$ Sacrificed | ValidCard$ Creature.Other | ValidPlayer$ Player | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player sacrifices another creature, put a +1/+1 counter on NICKNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Sacrifice|Counters
