@@ -2737,7 +2737,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
-                        || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
+                        || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
