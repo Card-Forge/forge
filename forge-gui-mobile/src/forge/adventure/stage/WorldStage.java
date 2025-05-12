@@ -516,6 +516,17 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     break;
                 }
 
+                if(adq.getTargetEnemySprite() == null
+                        && adq.getActiveStages().size() > 0
+                        && adq.qualifiesForDetachedQuest(adq.getActiveStages().get(0))) {
+                    AdventureQuestStage brokenStage = adq.getActiveStages().get(0);
+                    adq.fixOrphanedHuntQuest(brokenStage);
+                    AdventureQuestController.instance().addQuestSprites(brokenStage);
+                    // When we first load, we will not do this in time to actually spawn the sprite
+                    // until the next loop, but as soon as the player moves, if the On the Hunt quest
+                    // is tracked, we will immediately point to that sprite
+                }
+
                 if (adq.getTargetEnemySprite() != null) {
                     EnemySprite target = adq.getTargetEnemySprite();
                     for (Pair<Float, EnemySprite> active :enemies)
