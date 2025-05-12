@@ -2,7 +2,6 @@ Name:Esper Origins
 ManaCost:1 G
 Types:Sorcery
 A:SP$ Surveil | Amount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Surveil 2. You gain 2 life. If this spell was cast from a graveyard, exile it, then put it onto the battlefield transformed under its owner's control with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
-SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | RememberChanged$ True | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromGraveyard | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | WithCountersType$ FINALITY | SubAbility$ DBCleanup
