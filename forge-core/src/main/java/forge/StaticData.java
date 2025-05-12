@@ -95,12 +95,12 @@ public class StaticData {
             if (!loadNonLegalCards) {
                 for (CardEdition e : editions) {
                     if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
-                        List<CardEdition.CardInSet> eternalCards = e.getFunnyEternalCards();
+                        List<CardEdition.EditionEntry> eternalCards = e.getFunnyEternalCards();
 
-                        for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
+                        for (CardEdition.EditionEntry cis : e.getAllCardsInSet()) {
                             if (eternalCards.contains(cis))
                                 continue;
-                            funnyCards.add(cis.name);
+                            funnyCards.add(cis.name());
                         }
                     }
                 }
@@ -790,11 +790,11 @@ public class StaticData {
 
             Map<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
             List<CompletableFuture<?>> futures = new ArrayList<>();
-            for (CardEdition.CardInSet c : e.getAllCardsInSet()) {
-                if (cardCount.containsKey(c.name)) {
-                    cardCount.put(c.name, Pair.of(c.collectorNumber != null && c.collectorNumber.startsWith("F"), cardCount.get(c.name).getRight() + 1));
+            for (CardEdition.EditionEntry c : e.getAllCardsInSet()) {
+                if (cardCount.containsKey(c.name())) {
+                    cardCount.put(c.name(), Pair.of(c.collectorNumber() != null && c.collectorNumber().startsWith("F"), cardCount.get(c.name()).getRight() + 1));
                 } else {
-                    cardCount.put(c.name, Pair.of(c.collectorNumber != null && c.collectorNumber.startsWith("F"), 1));
+                    cardCount.put(c.name(), Pair.of(c.collectorNumber() != null && c.collectorNumber().startsWith("F"), 1));
                 }
             }
 
@@ -856,7 +856,7 @@ public class StaticData {
             futures.clear();
 
             // TODO: Audit token images here...
-            for(Map.Entry<String, Collection<CardEdition.TokenInSet>> tokenEntry : e.getTokens().asMap().entrySet()) {
+            for(Map.Entry<String, Collection<CardEdition.EditionEntry>> tokenEntry : e.getTokens().asMap().entrySet()) {
                 final String name = tokenEntry.getKey();
                 final int artIndex = tokenEntry.getValue().size();
                 try {
@@ -994,5 +994,24 @@ public class StaticData {
             }
         }
         return false;
+    }
+    public String getOtherImageKey(String name, String set) {
+        if (this.editions.get(set) != null) {
+            String realSetCode = this.editions.get(set).getOtherSet(name);
+            if (realSetCode != null) {
+                CardEdition.EditionEntry ee = this.editions.get(realSetCode).findOther(name);
+                if (ee != null) { // TODO add collector Number and new ImageKey format
+                    return ImageKeys.getTokenKey(name + "_" + realSetCode.toLowerCase());
+                }
+            }
+        }
+        for (CardEdition e : this.editions) {
+            CardEdition.EditionEntry ee = e.findOther(name);
+            if (ee != null) { // TODO add collector Number and new ImageKey format
+                return ImageKeys.getTokenKey(name + "_" + e.getCode().toLowerCase());
+            }
+        }
+        // final fallback
+        return ImageKeys.getTokenKey(name);
     }
 }

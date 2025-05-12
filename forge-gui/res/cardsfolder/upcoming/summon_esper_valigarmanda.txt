@@ -1,0 +1,15 @@
+Name:Summon: Esper Valigarmanda
+ManaCost:3 R
+Types:Enchantment Creature Saga Drake
+PT:3/3
+K:Chapter:4:DBRepeatEach,DBMana,DBMana,DBMana
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SubAbility$ DBExile | SpellDescription$ Exile an instant or sorcery card from each graveyard.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Instant.RememberedPlayerOwn,Sorcery.RememberedPlayerOwn | ChoiceZone$ Graveyard | ChoiceTitle$ Choose an instant or sorcery card in a graveyard | Mandatory$ True | RememberChosen$ True
+SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | SubAbility$ DBPlay | SpellDescription$ Add {R} for each lore counter on this Saga. You may cast an instant or sorcery card exiled with this Saga, and mana of any type can be spent to cast that spell.
+SVar:DBPlay:DB$ Play | Valid$ Instant.ExiledWithSource,Sorcery.ExiledWithSource | ValidSA$ Spell | ManaConversion$ AnyType->AnyType | ValidZone$ Exile | Optional$ True
+K:Flying
+K:Haste
+SVar:X:Count$CardCounters.LORE
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Exile an instant or sorcery card from each graveyard.\nII, III, IV — Add {R} for each lore counter on this Saga. You may cast an instant or sorcery card exiled with this Saga, and mana of any type can be spent to cast that spell.\nFlying, haste

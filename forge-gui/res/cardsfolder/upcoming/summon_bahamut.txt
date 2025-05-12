@@ -1,0 +1,11 @@
+Name:Summon: Bahamut
+ManaCost:9
+Types:Enchantment Creature Saga Dragon
+PT:9/9
+K:Chapter:4:DBDestroy,DBDestroy,DBDraw,DBDamage
+K:Flying
+SVar:DBDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select up to one target nonland permanent | SpellDescription$ Destroy up to one target nonland permanent.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SpellDescription$ Draw two cards.
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ X | SpellDescription$ Mega Flare — This creature deals damage equal to the total mana value of other permanents you control to each opponent.
+SVar:X:Count$Valid Permanent.YouCtrl+Other$SumCMC
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II — Destroy up to one target nonland permanent.\nIII — Draw two cards.\nIV — Mega Flare — This creature deals damage equal to the total mana value of other permanents you control to each opponent.\nFlying

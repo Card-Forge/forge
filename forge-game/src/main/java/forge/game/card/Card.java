@@ -2735,7 +2735,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
-                        || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
+                        || keyword.equals("For Mirrodin") || keyword.equals("Job select") || keyword.startsWith("Craft")
                         || keyword.startsWith("Landwalk") || keyword.startsWith("Visit") || keyword.startsWith("Mobilize")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
@@ -6549,28 +6549,31 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final String getFacedownImageKey() {
         if (isInZone(ZoneType.Exile)) {
-            return isForetold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD;
+            if (isForetold()) {
+                return StaticData.instance().getOtherImageKey(ImageKeys.FORETELL_IMAGE, null);
+            }
+            return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);
         }
 
         if (isManifested()) {
             String set = getManifestedSA().getCardState().getSetCode();
-            return ImageKeys.MANIFEST_IMAGE + "_" + set;
+            return StaticData.instance().getOtherImageKey(ImageKeys.MANIFEST_IMAGE, set);
         }
         if (isCloaked()) {
             String set = getCloakedSA().getCardState().getSetCode();
-            return ImageKeys.CLOAKED_IMAGE + "_" + set;
+            return StaticData.instance().getOtherImageKey(ImageKeys.CLOAKED_IMAGE, set);
         }
         if (getCastSA() != null) {
             String set = getCastSA().getCardState().getSetCode();
             if (getCastSA().isKeyword(Keyword.DISGUISE)) {
-                return ImageKeys.CLOAKED_IMAGE + "_" + set;
+                return StaticData.instance().getOtherImageKey(ImageKeys.CLOAKED_IMAGE, set);
             } else if (getCastSA().isKeyword(Keyword.MORPH) || getCastSA().isKeyword(Keyword.MEGAMORPH)) {
-                return ImageKeys.MORPH_IMAGE + "_" + set;
+                return StaticData.instance().getOtherImageKey(ImageKeys.MORPH_IMAGE, set);
             }
         }
         // TODO add face-down SA to key
 
-        return ImageKeys.HIDDEN_CARD;
+        return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);
     }
 
     public final boolean isTributed() { return tributed; }
