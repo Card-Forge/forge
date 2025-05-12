@@ -1003,6 +1003,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private class ContextMenu extends FDropDownMenu {
         @Override
         protected void buildMenu() {
+            if (getSelectedItem() == null)
+                return;
             contextMenuBuilder.buildMenu(this, getSelectedItem());
         }
 

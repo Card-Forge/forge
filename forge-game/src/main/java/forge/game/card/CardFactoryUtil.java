@@ -1529,7 +1529,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String n = k[1];
 
-            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True"
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self"
                     + " | TriggerDescription$ Mobilize " + n + " (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ r_1_1_warrior"
@@ -4103,6 +4103,10 @@ public class CardFactoryUtil {
 
             String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
                     " | Description$ Strive - " + inst.getReminderText();
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.equals("Tiered")) {
+            String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True | Amount$ Tiered | EffectZone$ All"
+                    + " | Description$ Tiered (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Unleash")) {
             String effect = "Mode$ CantBlock | ValidCard$ Creature.Self+counters_GE1_P1P1 | Secondary$ True | Description$ CARDNAME can't block.";

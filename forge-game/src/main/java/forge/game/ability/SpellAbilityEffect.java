@@ -1016,8 +1016,9 @@ public abstract class SpellAbilityEffect {
         return true;
     }
 
-    public static Player getNewChooser(final SpellAbility sa, final Player activator, final Player loser) {
+    public static Player getNewChooser(final SpellAbility sa, final Player loser) {
         // CR 800.4g
+        final Player activator = sa.getActivatingPlayer();
         final PlayerCollection options;
         if (loser.isOpponentOf(activator)) {
             options = activator.getOpponents();

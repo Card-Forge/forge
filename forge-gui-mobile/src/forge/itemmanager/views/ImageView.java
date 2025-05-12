@@ -601,7 +601,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         for (int i = groups.get().size() - 1; i >= 0; i--) {
             Group group = groups.get().get(i);
-            if (!group.isCollapsed) {
+            if (!group.isCollapsed && !group.items.isEmpty()) {
                 for (int j = group.piles.size() - 1; j >= 0; j--) {
                     float relX = x + group.getScrollLeft() - group.getLeft();
                     float relY = y + getScrollValue();
