@@ -46,10 +46,10 @@ public class TokenDb implements ITokenDatabase {
 
     public void preloadTokens() {
         for (CardEdition edition : this.editions) {
-            for (Map.Entry<String, Collection<CardEdition.TokenInSet>> inSet : edition.getTokens().asMap().entrySet()) {
+            for (Map.Entry<String, Collection<CardEdition.EditionEntry>> inSet : edition.getTokens().asMap().entrySet()) {
                 String name = inSet.getKey();
                 String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
-                for (CardEdition.TokenInSet t : inSet.getValue()) {
+                for (CardEdition.EditionEntry t : inSet.getValue()) {
                     allTokenByName.put(fullName, addTokenInSet(edition, name, t));
                 }
             }
@@ -65,14 +65,14 @@ public class TokenDb implements ITokenDatabase {
             return false;
         }
 
-        for (CardEdition.TokenInSet t : edition.getTokens().get(name)) {
+        for (CardEdition.EditionEntry t : edition.getTokens().get(name)) {
             allTokenByName.put(fullName, addTokenInSet(edition, name, t));
         }
         return true;
     }
 
-    protected PaperToken addTokenInSet(CardEdition edition, String name, CardEdition.TokenInSet t) {
-        return new PaperToken(rulesByName.get(name), edition, name, t.collectorNumber, t.artistName);
+    protected PaperToken addTokenInSet(CardEdition edition, String name, CardEdition.EditionEntry t) {
+        return new PaperToken(rulesByName.get(name), edition, name, t.collectorNumber(), t.artistName());
     }
 
     // try all editions to find token

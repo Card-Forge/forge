@@ -65,9 +65,9 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
         if (collectorNumber != null && !collectorNumber.isEmpty() && edition != null && edition.getTokens().containsKey(imageFileName)) {
             int idx = 0;
             // count the one with the same collectorNumber
-            for (CardEdition.TokenInSet t : edition.getTokens().get(imageFileName)) {
+            for (CardEdition.EditionEntry t : edition.getTokens().get(imageFileName)) {
                 ++idx;
-                if (!t.collectorNumber.equals(collectorNumber)) {
+                if (!t.collectorNumber().equals(collectorNumber)) {
                     continue;
                 }
                 // TODO make better image file names when collector number is known
