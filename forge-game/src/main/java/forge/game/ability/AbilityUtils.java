@@ -1366,7 +1366,7 @@ public class AbilityUtils {
 
         // do blessing there before condition checks
         if (source.hasKeyword(Keyword.ASCEND) && controller.getZone(ZoneType.Battlefield).size() >= 10) {
-            controller.setBlessing(true);
+            controller.setBlessing(true, source.getSetCode());
         }
 
         if (source.hasKeyword(Keyword.GIFT) && sa.isGiftPromised()) {

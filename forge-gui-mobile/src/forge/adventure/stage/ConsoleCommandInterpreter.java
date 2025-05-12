@@ -244,12 +244,12 @@ public class ConsoleCommandInterpreter {
             if (s.length < 2) return "Command needs 2 parameters: Set code, collector number.";
             CardEdition edition = StaticData.instance().getCardEdition(s[0]);
             if (edition == null) return "Cannot find edition: " + s[0];
-            CardEdition.CardInSet cis = edition.getCardFromCollectorNumber(s[1]);
+            CardEdition.EditionEntry cis = edition.getCardFromCollectorNumber(s[1]);
             if (cis == null) return String.format("Set '%s' does not have a card with collector number '%s'.", edition.getName(), s[1]);
-            PaperCard card = StaticData.instance().fetchCard(cis.name, edition.getCode(), cis.collectorNumber);
+            PaperCard card = StaticData.instance().fetchCard(cis.name(), edition.getCode(), cis.collectorNumber());
             if(card == null) {
                 //Found in the set, not supported.
-                return String.format("Failed to fetch (%s, %s, %s) - Not currently supported.", cis.name, edition.getCode(), cis.collectorNumber);
+                return String.format("Failed to fetch (%s, %s, %s) - Not currently supported.", cis.name(), edition.getCode(), cis.collectorNumber());
             }
             if(s.length >= 3) {
                 try {

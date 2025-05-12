@@ -23,10 +23,14 @@ public final class ImageKeys {
 
     public static final String HIDDEN_CARD           = "hidden";
     public static final String MORPH_IMAGE           = "morph";
-    public static final String DISGUISED_IMAGE       = "disguised";
     public static final String MANIFEST_IMAGE        = "manifest";
     public static final String CLOAKED_IMAGE         = "cloaked";
     public static final String FORETELL_IMAGE        = "foretell";
+    public static final String BLESSING_IMAGE        = "blessing";
+    public static final String INITIATIVE_IMAGE      = "initiative";
+    public static final String MONARCH_IMAGE         = "monarch";
+    public static final String THE_RING_IMAGE        = "the_ring";
+    public static final String RADIATION_IMAGE       = "radiation";
 
     public static final String BACKFACE_POSTFIX  = "$alt";
     public static final String SPECFACE_W = "$wspec";
