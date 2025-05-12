@@ -6,27 +6,219 @@ Type=Expansion
 ScryfallCode=FIN
 
 [cards]
+1 M Summon: Bahamut @Arif Wijaya
+4 R Aerith Gainsborough @Nakamura8
+10 M Cloud, Midgar Mercenary @Kazto Furuya
+14 U The Crystal's Chosen @Kotetsu Kinoshita
+17 U Dragoon's Lance @Josephine Chang
 31 U Sidequest: Catch a Fish @Gal Or
 34 R Stiltzkin, Moogle Merchant @Hendry Iwanaga
+42 C White Mage's Staff @Kim Dingwall
+49 C Dragoon's Wyvern @Jason Kiantoro
+56 C Ice Magic @Masateru Ikeda
+58 R Jill, Shiva's Dominant @Arif Wijaya
 78 U Summon: Shiva @Fajareka Setiawan
+86 M Y'shtola Rhul @Immanuela Crovius
+89 R Ardyn, the Usurper @Russell Lu
+90 C Black Mage's Rod @Nino Is
 91 R Cecil, Dark Knight @Josu Hernaiz
+94 M Dark Confidant @Immanuela Crovius
+96 R The Darkness Crystal @Pablo Mendoza
+99 U Fang, Fearless l'Cie @Simon Dominic
+99b U Ragnarok, Divine Deliverance @Simon Dominic
+105 R Kain, Traitorous Dragoon @Russell Dongjun Lu
+106 C Malboro @Dan Watson
+115 M Sephiroth, Fabled SOLDIER @Wisnu Tan
+121 R Summon: Primal Odin @Nino Is
 122 U Tonberry @Leonardo Santanna
+127 R Zenos yae Galvus @Alexander Mokhov
+128 R Zodiark, Umbral God @AKAGI
+133 M Clive, Ifrit's Dominant @Nino Is
+136 U Fire Magic @Toni Infante
+137 R Firion, Wild Rose Warrior @Elizabeth Peiró
+139 R Gilgamesh, Master-at-Arms @Lorenzo Mastroianni
 170 R Zell Dincht @Kevin Sidharta
+175 R Bartz and Boko @Ryuichi Sakuma
+182 C Commune with Beavers @hippo
 191 R Jumbo Cactuar @Jason Kiantoro
+196 R A Realm Reborn @Anna Podedworna
 200 U Sazh's Chocobo @Domenico Cava
+203 U Summon: Fenrir @Chun Lo
+205 R Summoner's Grimoire @Daniel Correia
+206 R Tifa Lockhart @Laurel Austin
+209 C Town Greeter @Hayaken-Sarena
+210 M Traveling Chocobo @Ashley Mackenzie
+211 U Vanille, Cheerful l'Cie @Simon Dominic
+212 M Absolute Virtue @Toni Infante
+213 R Balthier and Fran @Arif Wijaya
+216 U Cid, Timeless Artificer @Lius Lasahido
 218 M Emet-Selch, Unsundered @Néstor Ossandón Leal
+219 U The Emperor of Palamecia @Heonhwa Choe
 221 U Garland, Knight of Cornelia @Billy Christian
 224 U Gladiolus Amicitia @Gal Or
+231 M Kefka, Court Mage @Xui Ton
+232 R Kuja, Genome Sorcerer @Joshua Raphael
+233 M Lightning, Army of One @Shiyu
+235 R Noctis, Prince of Lucis @Jeremy Chong
+237 U Rinoa Heartilly @Francesca Resta
+241 U Shantotto, Tactician Magician @Joshua Raphael
 242 R Sin, Spira's Punishment @John Tedrick
+243 R Squall, SeeD Mercenary @Yuu Fujiki
+245 M Terra, Magical Adept @Clare Wong
+247 U Ultimecia, Time Sorceress @Mikio Masuda
+248 M Vivi Ornitier @Toni Infante
+250 M Yuna, Hope of Spira @NINNIN
+271 C Adventurer's Inn @Allen Morris
+284 R Jidoor, Aristocratic Capital @Erikas Perl
+289 R Starting Town @Hristo D. Chukov
+293 R Zanarkand, Ancient Metropolis @Erikas Perl
+294 L Plains @Shahab Alizadeh
+295 L Plains @Jonas De Ro
+296 L Plains @Eddie Mendoza
+297 L Island @Fabira Khamesh
+298 L Island @Eddie Mendoza
+299 L Island @Jeremy Paillotin
+300 L Swamp @Domenico Cava
+301 L Swamp @Fang Xinyu
+302 L Swamp @Sean Vo
+303 L Mountain @Domenico Cava
+304 L Mountain @Randy Gallegos
+305 L Mountain @Sean Vo
+306 L Forest @Alayna Danner
+307 L Forest @Leon Tukker
+308 L Forest @Sean Vo
+309 L Wastes @Eddie Mendoza
+311 R Jidoor, Aristocratic Capital @Craig Elliott
+314 R Zanarkand, Ancient Metropolis @Jonas De Ro
+315 R Ardyn, the Usurper @Roberto Ferrari
+317 M Sephiroth, Fabled SOLDIER @Tetsuya Nomura
+318 M Clive, Ifrit's Dominant @Kazuya Takahashi
+319 R Balthier and Fran @Akihiko Yoshida
+320 M Lightning, Army of One @ISAMU KAMIKOKURYO
+322 M Kefka, Court Mage @Yoshitaka Amano
+323 M Terra, Magical Adept @Yoshitaka Amano
 327 R Stiltzkin, Moogle Merchant @Yumeko
+334 M Dark Confidant @Ezoi
+335 R The Darkness Crystal
+336 R Zodiark, Umbral God @Hisashi Momose
+338 R Gilgamesh, Master-at-Arms @Ezoi
 343 R Jumbo Cactuar @Yumeko
+344 R A Realm Reborn @Ono Tako
 348 R Sin, Spira's Punishment @Ayami Nakashima
+356 M Summon: Bahamut @Kota Nakatsubo
+361 R Summon: Leviathan @Kota Nakatsubo
 362 U Summon: Shiva @Taku Haruno
+365 R Summon: Primal Odin @Tomohito
+372 U Summon: Fenrir @Maiko Aoji
+374 R Aerith Gainsborough @Syutsuri
+375 M Cloud, Midgar Mercenary @Maji
+378 R Jill, Shiva's Dominant @Rika Suzuki
+379 R Ardyn, the Usurper @Rorubei
 380 R Cecil, Dark Knight @Misei Ito
+381 U Fang, Fearless l'Cie @ikeda_cpt
+381b U Ragnarok, Divine Deliverance @ikeda_cpt
+382 M Sephiroth, Fabled SOLDIER @Maji
+384 R Zenos yae Galvus @Susumu Kuroi
+385 M Clive, Ifrit's Dominant @Murakami Hisashi
+386 R Firion, Wild Rose Warrior @Kato Ayaka
+391 R Tifa Lockhart @Yoshiro Ambe
+392 U Vanille, Cheerful l'Cie @ikeda_cpt
+393 R Balthier and Fran @S. Makimura
 394 M Emet-Selch, Unsundered @Rorubei
+398 M Kefka, Court Mage @Rorubei
+399 R Kuja, Genome Sorcerer @Masateru Ikeda & Robert Cornelius
+400 M Lightning, Army of One @Koji Nishino
+401 R Noctis, Prince of Lucis @Kato Ayaka
+402 R Squall, SeeD Mercenary @Kato Ayaka
+404 M Yuna, Hope of Spira @osamu
+406 M Traveling Chocobo @Toni Infante
+407 U Cid, Timeless Artificer @Gal Or
+408 U Cid, Timeless Artificer @Lee Woo-chul
+409 U Cid, Timeless Artificer @Narendra Bintara Adi
+410 U Cid, Timeless Artificer @Alexander Mokhov
+411 U Cid, Timeless Artificer @Nijihayashi
+412 U Cid, Timeless Artificer @David Astruga
+413 U Cid, Timeless Artificer @David Astruga
+414 U Cid, Timeless Artificer @Kevin Glint
+415 U Cid, Timeless Artificer @Nurikabe
+416 U Cid, Timeless Artificer @David Astruga
+417 U Cid, Timeless Artificer @Arif Wijaya
+418 U Cid, Timeless Artificer @Russell Lu
+419 U Cid, Timeless Artificer @Jason Kiantoro
+420 U Cid, Timeless Artificer @Magali Villeneuve
+423 R Aerith Gainsborough @Nakamura8
+427 M Cloud, Midgar Mercenary @Kazto Furuya
+433 R Stiltzkin, Moogle Merchant @Hendry Iwanaga
+438 R Jill, Shiva's Dominant @Arif Wijaya
+443 M Y'shtola Rhul @Immanuela Crovius
+444 R Ardyn, the Usurper @Russell Lu
 445 R Cecil, Dark Knight @Josu Hernaiz
+446 U Fang, Fearless l'Cie @Simon Dominic
+446b U Ragnarok, Divine Deliverance @Simon Dominic
+449 R Kain, Traitorous Dragoon @Russell Dongjun Lu
+451 M Sephiroth, Fabled SOLDIER @Wisnu Tan
+455 R Zenos yae Galvus @Alexander Mokhov
+456 R Zodiark, Umbral God @AKAGI
+458 M Clive, Ifrit's Dominant @Nino Is
+459 R Firion, Wild Rose Warrior @Elizabeth Peiró
+461 R Gilgamesh, Master-at-Arms @Lorenzo Mastroianni
+468 R Zell Dincht @Kevin Sidharta
+469 R Bartz and Boko @Ryuichi Sakuma
+473 R Tifa Lockhart @Laurel Austin
+475 U Vanille, Cheerful l'Cie @Simon Dominic
+476 M Absolute Virtue @Toni Infante
+477 R Balthier and Fran @Arif Wijaya
+480 U Cid, Timeless Artificer @Lius Lasahido
+482 M Cloud, Planet's Champion @Magali Villeneuve
 483 M Emet-Selch, Unsundered @Néstor Ossandón Leal
+484 U The Emperor of Palamecia @Heonhwa Choe
 486 U Garland, Knight of Cornelia @Billy Christian
+489 U Gladiolus Amicitia @Gal Or
+496 M Kefka, Court Mage @Xui Ton
+497 R Kuja, Genome Sorcerer @Joshua Raphael
+498 M Lightning, Army of One @Shiyu
+500 R Noctis, Prince of Lucis @Jeremy Chong
+502 U Rinoa Heartilly @Francesca Resta
+505 M Sephiroth, Planet's Heir @Magali Villeneuve
+507 U Shantotto, Tactician Magician @Joshua Raphael
 508 R Sin, Spira's Punishment @John Tedrick
+509 R Squall, SeeD Mercenary @Yuu Fujiki
+511 M Terra, Magical Adept @Clare Wong
+513 U Ultimecia, Time Sorceress @Mikio Masuda
+514 M Vivi Ornitier @Toni Infante
+517 M Yuna, Hope of Spira @NINNIN
+519 R Aerith Gainsborough @Syutsuri
+520 M Cloud, Midgar Mercenary @Maji
+523 R Jill, Shiva's Dominant @Rika Suzuki
+524 R Ardyn, the Usurper @Rorubei
+525 R Cecil, Dark Knight @Misei Ito
+526 U Fang, Fearless l'Cie @ikeda_cpt
+526b U Ragnarok, Divine Deliverance @ikeda_cpt
+527 M Sephiroth, Fabled SOLDIER @Maji
+529 R Zenos yae Galvus @Susumu Kuroi
+530 M Clive, Ifrit's Dominant @Murakami Hisashi
+531 R Firion, Wild Rose Warrior @Kato Ayaka
+536 R Tifa Lockhart @Yoshiro Ambe
+537 U Vanille, Cheerful l'Cie @ikeda_cpt
+538 R Balthier and Fran @S. Makimura
+539 M Emet-Selch, Unsundered @Rorubei
+543 M Kefka, Court Mage @Rorubei
+544 R Kuja, Genome Sorcerer @Masateru Ikeda & Robert Cornelius
+545 M Lightning, Army of One @Koji Nishino
+546 R Noctis, Prince of Lucis @Kato Ayaka
+547 R Squall, SeeD Mercenary @Kato Ayaka
+549 M Yuna, Hope of Spira @osamu
+551 M Traveling Chocobo @Toni Infante
+551a M Traveling Chocobo @Toni Infante
+551b M Traveling Chocobo @Toni Infante
+551c M Traveling Chocobo @Toni Infante
+551d M Traveling Chocobo @Toni Infante
+551f M Traveling Chocobo @Toni Infante
 552 M Cloud, Planet's Champion @Magali Villeneuve
 553 M Sephiroth, Planet's Heir @Magali Villeneuve
+572 L Plains @Jonas De Ro
+573 L Island @Eddie Mendoza
+574 L Swamp @Domenico Cava
+575 L Mountain @Domenico Cava
+576 L Forest @Leon Tukker
+577 M Y'shtola Rhul @Yusuke Mogi

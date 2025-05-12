@@ -60,18 +60,21 @@ public class ManaEffect extends SpellAbilityEffect {
 
             if (abMana.isComboMana()) {
                 int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa) : 1;
-                if(amount <= 0)
+                if (amount <= 0)
                     continue;
 
-                String express = abMana.getExpressChoice();
-                String[] colorsProduced = abMana.getComboColors(sa).split(" ");
-
-                final StringBuilder choiceString = new StringBuilder();
-                final StringBuilder choiceSymbols = new StringBuilder();
+                String combo = abMana.getComboColors(sa);
+                if (combo.isBlank()) {
+                    return;
+                }
+                String[] colorsProduced = combo.split(" ");
                 ColorSet colorOptions = ColorSet.fromNames(colorsProduced);
+                String express = abMana.getExpressChoice();
                 String[] colorsNeeded = express.isEmpty() ? null : express.split(" ");
                 boolean differentChoice = abMana.getOrigProduced().contains("Different");
                 ColorSet fullOptions = colorOptions;
+                final StringBuilder choiceString = new StringBuilder();
+                final StringBuilder choiceSymbols = new StringBuilder();
                 // Use specifyManaCombo if possible
                 if (colorsNeeded == null && amount > 1 && !sa.hasParam("TwoEach")) {
                     Map<Byte, Integer> choices = chooser.getController().specifyManaCombo(sa, colorOptions, amount, differentChoice);

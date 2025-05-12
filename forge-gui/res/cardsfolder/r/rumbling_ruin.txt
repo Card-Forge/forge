@@ -2,10 +2,9 @@ Name:Rumbling Ruin
 ManaCost:5 R
 Types:Creature Elemental
 PT:6/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigStore | TriggerDescription$ When CARDNAME enters, count the number of +1/+1 counters on creatures you control. Creatures your opponents control with power less than or equal to that number can't block this turn.
-SVar:TrigStore:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ Y | SubAbility$ TrigEffect
-SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures your opponents control with power less than or equal to that number can't block this turn.
-SVar:KWPump:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.OppCtrl+powerLEX | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures your opponents control with power less than or equal to that number can't block this turn.
-SVar:X:Number$0
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters, count the number of +1/+1 counters on creatures you control. Creatures your opponents control with power less than or equal to that number can't block this turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump | SetChosenNumber$ Y | SpellDescription$ Creatures your opponents control with power less than or equal to that number can't block this turn.
+SVar:KWPump:Mode$ CantBlock | ValidCard$ Creature.OppCtrl+powerLEX | Description$ Creatures your opponents control with power less than or equal to that number can't block this turn.
+SVar:X:Count$ChosenNumber
 SVar:Y:Count$Valid Creature.YouCtrl$CardCounters.P1P1
 Oracle:When Rumbling Ruin enters, count the number of +1/+1 counters on creatures you control. Creatures your opponents control with power less than or equal to that number can't block this turn.
