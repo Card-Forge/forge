@@ -1843,6 +1843,8 @@ public class CardProperty {
             }
         } else if (property.equals("CrewedThisTurn")) {
             if (!hasTimestampMatch(card, source.getCrewedByThisTurn())) return false;
+        } else if (property.equals("CrewedBySourceThisTurn")) {
+            if (!hasTimestampMatch(source, card.getCrewedByThisTurn())) return false;
         } else if (property.equals("HasDevoured")) {
             if (card.getDevouredCards().isEmpty()) {
                 return false;
