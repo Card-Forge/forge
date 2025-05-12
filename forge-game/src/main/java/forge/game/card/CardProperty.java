@@ -504,18 +504,6 @@ public class CardProperty {
                         return false;
                 }
             }
-        } else if (property.startsWith("NotEnchantedBy")) {
-            if (property.substring(14).equals("Targeted")) {
-                for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
-                    if (card.isEnchantedBy(c)) {
-                        return false;
-                    }
-                }
-            } else {
-                if (card.isEnchantedBy(source)) {
-                    return false;
-                }
-            }
         } else if (property.startsWith("Enchanted")) {
             if (!source.equals(card.getEntityAttachedTo())) {
                 return false;
@@ -540,15 +528,6 @@ public class CardProperty {
                         return false;
                     }
                 }
-            } else if (property.substring(16).equals("AllRemembered")) {
-                for (final Object rem : source.getRemembered()) {
-                    if (rem instanceof Card) {
-                        final Card c = (Card) rem;
-                        if (!card.canBeAttached(c, null)) {
-                            return false;
-                        }
-                    }
-                }
             } else {
                 if (!card.canBeAttached(source, null)) {
                     return false;
@@ -556,12 +535,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("EquippedBy") || property.startsWith("AttachedBy")) {
             String prop = property.substring(10);
-            if (prop.equals("Enchanted")) {
-                if (source.getEnchantingCard() == null ||
-                        !card.hasCardAttachment(source.getEnchantingCard())) {
-                    return false;
-                }
-            } else if (!StringUtils.isBlank(prop)) {
+            if (!StringUtils.isBlank(prop)) {
                 boolean found = false;
                 for (final Card c : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
                     if (card.hasCardAttachment(c)) {

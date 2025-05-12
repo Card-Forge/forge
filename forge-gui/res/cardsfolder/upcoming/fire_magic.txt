@@ -1,0 +1,9 @@
+Name:Fire Magic
+ManaCost:R
+Types:Instant
+K:Tiered
+A:SP$ Charm | Choices$ DBFire,DBFira,DBFiraga
+SVar:DBFire:DB$ DamageAll | PrecostDesc$ Fire | ModeCost$ 0 | NumDmg$ 1 | ValidCards$ Creature | SpellDescription$ CARDNAME deals 1 damage to each creature.
+SVar:DBFira:DB$ DamageAll | PrecostDesc$ Fira | ModeCost$ 2 | NumDmg$ 2 | ValidCards$ Creature | SpellDescription$ CARDNAME deals 2 damage to each creature.
+SVar:DBFiraga:DB$ DamageAll | PrecostDesc$ Firaga | ModeCost$ 5 | NumDmg$ 3 | ValidCards$ Creature | SpellDescription$ CARDNAME deals 3 damage to each creature.
+Oracle:Tiered (Choose one additional cost.)\n• Fire — {0} — Fire Magic deals 1 damage to each creature.\n• Fira — {2} — Fire Magic deals 2 damage to each creature.\n• Firaga — {3} — Fire Magic deals 3 damage to each creature.
