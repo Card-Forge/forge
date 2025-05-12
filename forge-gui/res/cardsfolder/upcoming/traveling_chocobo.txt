@@ -1,0 +1,9 @@
+Name:Traveling Chocobo
+ManaCost:2 G
+Types:Creature Bird
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl+Bird,Card.TopLibrary+YouCtrl+Land | AffectedZone$ Library | MayPlay$ True | Description$ You may play lands and cast Bird spells from the top of your library.
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Land.YouCtrl,Bird.YouCtrl | Destination$ Battlefield | Description$ If a land or Bird you control entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+DeckNeeds:Type$Bird
+Oracle:You may look at the top card of your library any time.\nYou may play lands and cast Bird spells from the top of your library.\nIf a land or Bird you control entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
