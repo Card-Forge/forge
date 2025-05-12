@@ -203,11 +203,13 @@ public class AdventureDeckEditor extends FDeckEditor {
                 return;
             String prompt = card + " - " + label + " " + localizer.getMessage("lblHowMany");
 
-            menu.addItem(new FMenuItem(label, SIDEBOARD_ICON, new MoveQuantityPrompt(prompt, sellable, result -> {
-                    int sold = Current.player().sellCard(card, result);
-                    removeCard(card, sold);
-                })
-            ));
+            FMenuItem sellItem = new FMenuItem(label, SIDEBOARD_ICON, new MoveQuantityPrompt(prompt, sellable, result -> {
+                int sold = Current.player().sellCard(card, result);
+                removeCard(card, sold);
+            }));
+            if(cardIsFavorite(card))
+                sellItem.setTextColor(255, 0, 0);
+            menu.addItem(sellItem);
         }
 
         @Override
@@ -234,6 +236,8 @@ public class AdventureDeckEditor extends FDeckEditor {
             CardPool toSell = new CardPool();
 
             for (Map.Entry<PaperCard, Integer> entry : cardManager.getFilteredItems()) {
+                if (cardIsFavorite(entry.getKey()))
+                    continue;
                 toSell.add(entry.getKey(), entry.getValue());
                 value += Current.player().cardSellPrice(entry.getKey()) * entry.getValue();
             }
@@ -252,6 +256,17 @@ public class AdventureDeckEditor extends FDeckEditor {
                 }
             });
         }
+
+        @Override
+        public void setCardFavorited(PaperCard card, boolean isFavorite) {
+            AdventurePlayer player = Current.player();
+            if(isFavorite)
+                player.favoriteCards.add(card);
+            else
+                player.favoriteCards.remove(card);
+        }
+        @Override protected boolean cardIsFavorite(PaperCard card) { return Current.player().favoriteCards.contains(card); }
+        @Override protected boolean allowFavoriteCards() { return true; }
     }
 
     private static class CollectionCatalogPage extends CatalogPage {
@@ -325,6 +340,38 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
         @Override protected boolean cardIsFavorite(PaperCard card) { return Current.player().favoriteCards.contains(card); }
         @Override protected boolean allowFavoriteCards() { return true; }
+
+        @Override
+        public void buildDeckMenu(FPopupMenu menu) {
+            super.buildDeckMenu(menu);
+            if (!(parentScreen instanceof AdventureDeckEditor adventureEditor) || adventureEditor.getAutoSellPage() == null)
+                return;
+            FMenuItem sellCurrentFilters = new FMenuItem(Forge.getLocalizer().getMessage("lblAutoSellCurrentFilters"), FSkinImage.QUEST_COINSTACK, e1 -> autoSellAllByFilter(adventureEditor.getAutoSellPage()));
+            sellCurrentFilters.setTextColor(255, 0, 0);
+            menu.addItem(sellCurrentFilters);
+        }
+
+        private void autoSellAllByFilter(CollectionAutoSellPage autoSellPage) {
+            CardPool toMove = new CardPool();
+
+            for (Map.Entry<PaperCard, Integer> entry : cardManager.getFilteredItems()) {
+                if (cardIsFavorite(entry.getKey()))
+                    continue;
+                toMove.add(entry.getKey(), entry.getValue());
+            }
+            if(toMove.isEmpty())
+                return;
+
+            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblAutoSellCurrentFiltersConfirm", toMove.countAll()), Forge.getLocalizer().getMessage("lblAutoSellCurrentFilters"), Forge.getLocalizer().getMessage("lblAutoSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<>() {
+                @Override
+                public void run(Boolean result) {
+                    if (result) {
+                        removeCards(toMove);
+                        autoSellPage.addCards(toMove);
+                    }
+                }
+            });
+        }
     }
 
     protected static class CollectionAutoSellPage extends CatalogPage {
@@ -337,7 +384,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         protected void updateCaption() {
-            caption = captionPrefix + " (" + cardManager.getItemCount() + ")";
+            caption = captionPrefix + " (" + cardManager.getPool().countAll() + ")";
         }
 
         @Override
@@ -560,23 +607,6 @@ public class AdventureDeckEditor extends FDeckEditor {
                 ((CatalogPage) page).scheduleRefresh();
             else if (page instanceof CardManagerPage)
                 ((CardManagerPage) page).refresh();
-        }
-    }
-
-    protected enum CatalogFilterOption {
-        COLLECTION("lblCollection"),
-        SELLABLE("lblSellable"),
-        AUTO_SELLABLE("lblAutoSellable"),
-        NON_SELLABLE("lblNonSellable");
-
-        private final String label;
-        CatalogFilterOption(String label) {
-            this.label = label;
-        }
-
-        @Override
-        public String toString() {
-            return Forge.getLocalizer().getMessage(label);
         }
     }
 

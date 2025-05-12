@@ -1217,6 +1217,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             updateCaption();
         }
 
+        public void removeCards(Iterable<Entry<PaperCard, Integer>> cards) {
+            if (cardManager.isInfinite())
+                return;
+            cardManager.removeItems(cards);
+            parentScreen.getDeckController().notifyModelChanged();
+            updateCaption();
+        }
+
         public void setCards(CardPool cards) {
             cardManager.setItems(cards);
             parentScreen.getDeckController().notifyModelChanged();
