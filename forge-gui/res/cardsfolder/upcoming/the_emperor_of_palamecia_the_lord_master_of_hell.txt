@@ -1,0 +1,23 @@
+Name:The Emperor of Palamecia
+ManaCost:U R
+Types:Legendary Creature Human Noble Wizard
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Combo U R | RestrictValid$ Spell.nonCreature | SpellDescription$ Add {U} or {R}. Spend this mana only to cast a noncreature spell.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidSA$ Spell.ManaSpent GE4 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a noncreature spell, if at least four mana was spent to cast it, put a +1/+1 counter on CARDNAME. Then if it has three or more +1/+1 counters on it, transform it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3
+SVar:X:Count$CardCounters.P1P1
+AlternateMode:DoubleFaced
+Oracle:{T}: Add {U} or {R}. Spend this mana only to cast a noncreature spell.\nWhenever you cast a noncreature spell, if at least four mana was spent to cast it, put a +1/+1 counter on The Emperor of Palamecia. Then if it has three or more +1/+1 counters on it, transform it.
+
+ALTERNATE
+
+Name:The Lord Master of Hell
+ManaCost:no cost
+Colors:blue,red
+Types:Legendary Creature Demon Noble Wizard
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ Starfall — Whenever CARDNAME attacks, it deals X damage to each opponent, where X is the number of noncreature, nonland cards in your graveyard.
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ X
+SVar:X:Count$ValidGraveyard Card.YouOwn+nonCreature+nonLand
+Oracle:Starfall — Whenever The Lord Master of Hell attacks, it deals X damage to each opponent, where X is the number of noncreature, nonland cards in your graveyard.
