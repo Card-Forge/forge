@@ -1,0 +1,9 @@
+Name:Eye of Nidhogg
+ManaCost:2 B
+Types:Legendary Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetColor$ Black | AddType$ Dragon | RemoveCreatureTypes$ True | SetPower$ 4 | SetToughness$ 2 | AddKeyword$ Flying & Deathtouch | Goad$ True | Description$ Enchanted creature is a black Dragon with base power and toughness 4/2, has flying and deathtouch, and is goaded. (It attacks each combat if able and attacks a player other than you if able.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return it to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
+Oracle:Enchant creature\nEnchanted creature is a black Dragon with base power and toughness 4/2, has flying and deathtouch, and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhen Eye of Nidhogg is put into a graveyard from the battlefield, return it to its owner's hand.
