@@ -1,0 +1,9 @@
+Name:Tifa Lockhart
+ManaCost:1 G
+Types:Legendary Creature Human Monk
+PT:1/2
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land you control enters, double CARDNAME's power until end of turn.
+SVar:TrigPump:DB$ Pump | NumAtt$ Double
+SVar:BuffedBy:Land
+Oracle:Trample\nLandfall — Whenever a land you control enters, double Tifa Lockhart's power until end of turn.

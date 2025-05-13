@@ -39,7 +39,7 @@ public class AscendEffect extends SpellAbilityEffect {
             }
             // Player need 10+ permanents on the battlefield
             if (p.getZone(ZoneType.Battlefield).size() >= 10) {
-                p.setBlessing(true);
+                p.setBlessing(true, sa.getOriginalHost().getSetCode());
             }
         }
     }

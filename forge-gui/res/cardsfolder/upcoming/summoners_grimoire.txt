@@ -1,0 +1,13 @@
+Name:Summoner's Grimoire
+ManaCost:3 G
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddType$ Shaman | AddTrigger$ TrigAttack | Description$ Equipped creature is a Shaman in addition to its other types and has "Whenever this creature attacks, you may put a creature card from your hand onto the battlefield. If that card is an enchantment card, it enters tapped and attacking."
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever this creature attacks, you may put a creature card from your hand onto the battlefield. If that card is an enchantment card, it enters tapped and attacking.
+SVar:TrigChoose:DB$ ChooseCard | Mandatory$ True | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ Choose a creature card in your hand | SubAbility$ DBChangeOne
+SVar:DBChangeOne:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Card.Enchantment | Tapped$ True | Attacking$ True | SubAbility$ DBChangeTwo
+SVar:DBChangeTwo:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Card.nonEnchantment | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+K:Equip:3
+DeckHas:Ability$Token & Type$Shaman
+Oracle:Job select\nEquipped creature is a Shaman in addition to its other types and has "Whenever this creature attacks, you may put a creature card from your hand onto the battlefield. If that card is an enchantment card, it enters tapped and attacking."\nAbraxas — Equip {3}

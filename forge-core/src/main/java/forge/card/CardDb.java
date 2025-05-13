@@ -22,7 +22,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 import forge.StaticData;
-import forge.card.CardEdition.CardInSet;
+import forge.card.CardEdition.EditionEntry;
 import forge.card.CardEdition.Type;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
@@ -332,27 +332,27 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
+    private void addSetCard(CardEdition e, EditionEntry cis, CardRules cr) {
         int artIdx = IPaperCard.DEFAULT_ART_INDEX;
-        String key = e.getCode() + "/" + cis.name;
+        String key = e.getCode() + "/" + cis.name();
         if (artIds.containsKey(key)) {
             artIdx = artIds.get(key) + 1;
         }
 
         artIds.put(key, artIdx);
-        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx, false, cis.collectorNumber, cis.artistName, cis.functionalVariantName));
+        addCard(new PaperCard(cr, e.getCode(), cis.rarity(), artIdx, false, cis.collectorNumber(), cis.artistName(), cis.functionalVariantName()));
     }
 
     private boolean addFromSetByName(String cardName, CardEdition ed, CardRules cr) {
-        List<CardInSet> cardsInSet = ed.getCardInSet(cardName);  // empty collection if not present
+        List<EditionEntry> cardsInSet = ed.getCardInSet(cardName);  // empty collection if not present
         if (cr.hasFunctionalVariants()) {
-            cardsInSet = cardsInSet.stream().filter(c -> StringUtils.isEmpty(c.functionalVariantName)
-                    || cr.getSupportedFunctionalVariants().contains(c.functionalVariantName)
+            cardsInSet = cardsInSet.stream().filter(c -> StringUtils.isEmpty(c.functionalVariantName())
+                    || cr.getSupportedFunctionalVariants().contains(c.functionalVariantName())
             ).collect(Collectors.toList());
         }
         if (cardsInSet.isEmpty())
             return false;
-        for (CardInSet cis : cardsInSet) {
+        for (EditionEntry cis : cardsInSet) {
             addSetCard(ed, cis, cr);
         }
         return true;
@@ -397,15 +397,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 upcomingSet = e;
             }
 
-            for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
-                CardRules cr = rulesByName.get(cis.name);
+            for (CardEdition.EditionEntry cis : e.getAllCardsInSet()) {
+                CardRules cr = rulesByName.get(cis.name());
                 if (cr == null) {
-                    missingCards.add(cis.name);
+                    missingCards.add(cis.name());
                     continue;
                 }
                 if (cr.hasFunctionalVariants()) {
-                    if (StringUtils.isNotEmpty(cis.functionalVariantName)
-                        && !cr.getSupportedFunctionalVariants().contains(cis.functionalVariantName)) {
+                    if (StringUtils.isNotEmpty(cis.functionalVariantName())
+                        && !cr.getSupportedFunctionalVariants().contains(cis.functionalVariantName())) {
                         //Supported card, unsupported variant.
                         //Could note the card as missing but since these are often un-cards,
                         //it's likely absent because it does something out of scope.
@@ -463,8 +463,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             lang = new LangEnglish();
         }
         // for now just check Universes Within
-        for (CardInSet cis : editions.get("SLX").getCards()) {
-            String orgName = alternateName.get(cis.name);
+        for (EditionEntry cis : editions.get("SLX").getCards()) {
+            String orgName = alternateName.get(cis.name());
             if (orgName != null) {
                 // found original (beyond) print
                 CardRules org = getRules(orgName);
@@ -494,7 +494,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 CardRules within = new CardRules(new ICardFace[] { renamedMain, renamedOther, null, null, null, null, null }, org.getSplitType(), org.getAiHints());
                 // so workshop can edit same script
                 within.setNormalizedName(org.getNormalizedName());
-                rulesByName.put(cis.name, within);
+                rulesByName.put(cis.name(), within);
             }
         }
     }
@@ -1107,8 +1107,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public Collection<PaperCard> getAllCards(CardEdition edition) {
         List<PaperCard> cards = Lists.newArrayList();
 
-        for (CardInSet cis : edition.getAllCardsInSet()) {
-            PaperCard card = this.getCard(cis.name, edition.getCode());
+        for (EditionEntry cis : edition.getAllCardsInSet()) {
+            PaperCard card = this.getCard(cis.name(), edition.getCode());
             if (card == null) {
                 // Just in case the card is listed in the edition file but Forge doesn't support it
                 continue;
@@ -1160,10 +1160,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         // May iterate over editions and find out if there is any card named 'cardRequest' but not implemented with Forge script.
         if (StringUtils.isBlank(request.edition)) {
             for (CardEdition edition : editions) {
-                for (CardInSet cardInSet : edition.getAllCardsInSet()) {
-                    if (cardInSet.name.equals(request.cardName)) {
+                for (EditionEntry cardInSet : edition.getAllCardsInSet()) {
+                    if (cardInSet.name().equals(request.cardName)) {
                         cardEdition = edition;
-                        cardRarity = cardInSet.rarity;
+                        cardRarity = cardInSet.rarity();
                         break;
                     }
                 }
@@ -1174,9 +1174,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         } else {
             cardEdition = editions.get(request.edition);
             if (cardEdition != null) {
-                for (CardInSet cardInSet : cardEdition.getAllCardsInSet()) {
-                    if (cardInSet.name.equals(request.cardName)) {
-                        cardRarity = cardInSet.rarity;
+                for (EditionEntry cardInSet : cardEdition.getAllCardsInSet()) {
+                    if (cardInSet.name().equals(request.cardName)) {
+                        cardRarity = cardInSet.rarity();
                         break;
                     }
                 }
@@ -1227,9 +1227,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 // @leriomaggio: DONE! re-using here the same strategy implemented for lazy-loading!
                 for (CardEdition e : editions.getOrderedEditions()) {
                     int artIdx = IPaperCard.DEFAULT_ART_INDEX;
-                    for (CardInSet cis : e.getCardInSet(cardName))
-                        paperCards.add(new PaperCard(rules, e.getCode(), cis.rarity, artIdx++, false,
-                                                     cis.collectorNumber, cis.artistName, cis.functionalVariantName));
+                    for (EditionEntry cis : e.getCardInSet(cardName))
+                        paperCards.add(new PaperCard(rules, e.getCode(), cis.rarity(), artIdx++, false,
+                                                     cis.collectorNumber(), cis.artistName(), cis.functionalVariantName()));
                 }
             } else {
                 String lastEdition = null;
@@ -1243,13 +1243,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     if (ed == null) {
                         continue;
                     }
-                    List<CardInSet> cardsInSet = ed.getCardInSet(cardName);
+                    List<EditionEntry> cardsInSet = ed.getCardInSet(cardName);
                     if (cardsInSet.isEmpty())
                         continue;
                     int cardInSetIndex = Math.max(artIdx-1, 0); // make sure doesn't go below zero
-                    CardInSet cds = cardsInSet.get(cardInSetIndex);  // use ArtIndex to get the right Coll. Number
+                    EditionEntry cds = cardsInSet.get(cardInSetIndex);  // use ArtIndex to get the right Coll. Number
                     paperCards.add(new PaperCard(rules, lastEdition, tuple.getValue(), artIdx++, false,
-                                                 cds.collectorNumber, cds.artistName, cds.functionalVariantName));
+                                                 cds.collectorNumber(), cds.artistName(), cds.functionalVariantName()));
                 }
             }
             if (paperCards.isEmpty()) {
