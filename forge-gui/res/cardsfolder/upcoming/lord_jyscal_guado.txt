@@ -6,4 +6,5 @@ K:Flying
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigInvestigate | TriggerDescription$ At the beginning of each end step, if you put a counter on a creature this turn, investigate. (Create a Clue token. It’s an artifact with “{2}, Sacrifice this token: Draw a card.”)
 SVar:TrigInvestigate:DB$ Investigate
 SVar:X:Count$CountersAddedThisTurn ALL You Creature
+DeckHints:Ability$Counters
 Oracle:Flying\nAt the beginning of each end step, if you put a counter on a creature this turn, investigate. (Create a Clue token. It’s an artifact with “{2}, Sacrifice this token: Draw a card.”)
