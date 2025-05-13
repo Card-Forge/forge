@@ -1366,7 +1366,7 @@ public class AbilityUtils {
 
         // do blessing there before condition checks
         if (source.hasKeyword(Keyword.ASCEND) && controller.getZone(ZoneType.Battlefield).size() >= 10) {
-            controller.setBlessing(true);
+            controller.setBlessing(true, source.getSetCode());
         }
 
         if (source.hasKeyword(Keyword.GIFT) && sa.isGiftPromised()) {
@@ -2220,13 +2220,18 @@ public class AbilityUtils {
         // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfCastInOwnMainPhase")) {
             final PhaseHandler cPhase = game.getPhaseHandler();
-            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) && c.getCastFrom() != null;
+            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) && c.wasCast();
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
         }
 
         // Count$FinishedUpkeepsThisTurn
         if (sq[0].startsWith("FinishedUpkeepsThisTurn")) {
             return doXMath(game.getPhaseHandler().getNumUpkeep() - (game.getPhaseHandler().is(PhaseType.UPKEEP) ? 1 : 0), expr, c, ctb);
+        }
+
+        // Count$FinishedEndOfTurnsThisTurn
+        if (sq[0].startsWith("FinishedEndOfTurnsThisTurn")) {
+            return doXMath(game.getPhaseHandler().getNumEndOfTurn() - (game.getPhaseHandler().is(PhaseType.END_OF_TURN) ? 1 : 0), expr, c, ctb);
         }
 
         // Count$AttachedTo <restriction>
@@ -2474,7 +2479,6 @@ public class AbilityUtils {
             // Other draft notes include: Names, Colors, Players, Creature Type.
             // But these aren't really things you count so they'll show up in properties most likely
         }
-
 
         //Count$TypesSharedWith [defined]
         if (sq[0].startsWith("TypesSharedWith")) {

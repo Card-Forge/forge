@@ -20,6 +20,7 @@ package forge.game.player;
 import com.google.common.collect.*;
 import forge.ImageKeys;
 import forge.LobbyPlayer;
+import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -3303,18 +3304,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         this.updateZoneForView(com);
     }
 
-    public void createTheRing(Card host) {
+    public void createTheRing(String set) {
         final PlayerZone com = getZone(ZoneType.Command);
         if (theRing == null) {
             theRing = new Card(game.nextCardId(), null, game);
             theRing.setOwner(this);
             theRing.setGamePieceType(GamePieceType.EFFECT);
-            String image = ImageKeys.getTokenKey("the_ring");
-            if (host != null) {
-                theRing.setImageKey("t:the_ring_" + host.getSetCode().toLowerCase());
-                theRing.setSetCode(host.getSetCode());
-            } else {
-                theRing.setImageKey(image);
+            theRing.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.THE_RING_IMAGE, set));
+            if (set != null) {
+                theRing.setSetCode(set);
             }
             theRing.setName("The Ring");
             theRing.updateStateForView();
@@ -3444,18 +3442,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         return equals(game.getMonarch());
     }
 
+    public String getMonarchSet() {
+        return monarchEffect == null ? monarchEffect.getSetCode() : null;
+    }
+
     public void createMonarchEffect(final String set) {
         final PlayerZone com = getZone(ZoneType.Command);
         if (monarchEffect == null) {
             monarchEffect = new Card(game.nextCardId(), null, game);
             monarchEffect.setOwner(this);
             monarchEffect.setGamePieceType(GamePieceType.EFFECT);
-            if (set != null) {
-                monarchEffect.setImageKey("t:monarch_" + set.toLowerCase());
-                monarchEffect.setSetCode(set);
-            } else {
-                monarchEffect.setImageKey("t:monarch");
-            }
+            monarchEffect.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.MONARCH_IMAGE, set));
+            monarchEffect.setSetCode(set);
             monarchEffect.setName("The Monarch");
 
             {
@@ -3496,18 +3494,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !StaticAbilityCantBecomeMonarch.anyCantBecomeMonarch(this);
     }
 
+    public String getInitiativeSet() {
+        return initiativeEffect != null ? initiativeEffect.getSetCode() : null;
+    }
+
     public void createInitiativeEffect(final String set) {
         final PlayerZone com = getZone(ZoneType.Command);
         if (initiativeEffect == null) {
             initiativeEffect = new Card(game.nextCardId(), null, game);
             initiativeEffect.setOwner(this);
             initiativeEffect.setGamePieceType(GamePieceType.EFFECT);
-            if (set != null) {
-                initiativeEffect.setImageKey("t:initiative_" + set.toLowerCase());
-                initiativeEffect.setSetCode(set);
-            } else {
-                initiativeEffect.setImageKey("t:initiative");
-            }
+            initiativeEffect.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.INITIATIVE_IMAGE, set));
+            initiativeEffect.setSetCode(set);
             initiativeEffect.setName("The Initiative");
 
             //Set up damage trigger
@@ -3574,7 +3572,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             radiationEffect = new Card(game.nextCardId(), null, game);
             radiationEffect.setOwner(this);
             radiationEffect.setGamePieceType(GamePieceType.EFFECT);
-            radiationEffect.setImageKey("t:radiation");
+            radiationEffect.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.RADIATION_IMAGE, setCode));
             radiationEffect.setName("Radiation");
             if (setCode != null) {
                 radiationEffect.setSetCode(setCode);
@@ -3684,7 +3682,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public boolean hasBlessing() {
         return blessingEffect != null;
     }
-    public void setBlessing(boolean bless) {
+    public void setBlessing(boolean bless, String setCode) {
         // no need to to change
         if ((blessingEffect != null) == bless) {
             return;
@@ -3695,9 +3693,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (bless) {
             blessingEffect = new Card(game.nextCardId(), null, game);
             blessingEffect.setOwner(this);
-            blessingEffect.setImageKey("t:blessing");
+            blessingEffect.setImageKey(StaticData.instance().getOtherImageKey(ImageKeys.BLESSING_IMAGE, setCode));
             blessingEffect.setName("City's Blessing");
             blessingEffect.setGamePieceType(GamePieceType.EFFECT);
+            if (setCode != null) {
+                blessingEffect.setSetCode(setCode);
+            }
 
             blessingEffect.updateStateForView();
 
