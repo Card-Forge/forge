@@ -155,7 +155,7 @@ public class TileMapScene extends HudScene {
 
     @Override
     public boolean isInHudOnlyMode() {
-        return MapStage.getInstance().getDialogOnlyInput();
+        return MapStage.getInstance().isDialogOnlyInput();
     }
 
     public void loadNext(String targetMap, int entryTargetObject) {
