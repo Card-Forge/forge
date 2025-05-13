@@ -4,7 +4,6 @@ Types:Legendary Creature Elf Wizard
 PT:3/2
 K:Partner:Alisaie Leveilleur
 K:Vigilance
-S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 2 | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ1 | Description$ Dualcast — The second spell you cast each turn costs {2} less to cast.
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Eukrasia — Whenever you cast your second spell each turn, draw a card.
 SVar:TrigDraw:DB$ Draw
 Oracle:Partner with Alisaie Leveilleur (When this creature enters, target player may put Alisaie Leveilleur into their hand from their library, then shuffle.)\nVigilance\nEukrasia — Whenever you cast your second spell each turn, draw a card.
