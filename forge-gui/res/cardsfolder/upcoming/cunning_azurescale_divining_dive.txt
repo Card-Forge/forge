@@ -13,7 +13,7 @@ Oracle:Flash\nFlying\nWhen this creature enters, secretly choose land or nonland
 
 ALTERNATE
 
-Name:Skimming Strike
+Name:Divining Dive
 ManaCost:1 U
 Types:Instant Omen
 A:SP$ GenericChoice | Defined$ You | Secretly$ True | Choices$ LandOne,NonlandOne | SpellDescription$ Secretly choose land or nonland. Seek a card of the chosen kind.
