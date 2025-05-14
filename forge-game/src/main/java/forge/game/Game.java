@@ -1207,17 +1207,24 @@ public class Game {
 
     public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
         int result = 0;
-        if (!countersAddedThisTurn.containsRow(cType)) {
+        Set<CounterType> types = null;
+        if (cType == null) {
+            types = countersAddedThisTurn.rowKeySet();
+        } else if (!countersAddedThisTurn.containsRow(cType)) {
             return result;
+        } else {
+            types = Sets.newHashSet(cType);
         }
-        for (Map.Entry<Player, List<Pair<Card, Integer>>> e : countersAddedThisTurn.row(cType).entrySet()) {
-           if (e.getKey().isValid(validPlayer.split(","), sourceController, source, ctb)) {
-               for (Pair<Card, Integer> p : e.getValue()) {
-                   if (p.getKey().isValid(validCard.split(","), sourceController, source, ctb)) {
-                       result += p.getValue();
-                   }
-               }
-           }
+        for (CounterType type : types) {
+            for (Map.Entry<Player, List<Pair<Card, Integer>>> e : countersAddedThisTurn.row(type).entrySet()) {
+                if (e.getKey().isValid(validPlayer.split(","), sourceController, source, ctb)) {
+                    for (Pair<Card, Integer> p : e.getValue()) {
+                        if (p.getKey().isValid(validCard.split(","), sourceController, source, ctb)) {
+                            result += p.getValue();
+                        }
+                    }
+                }
+            }
         }
         return result;
     }
