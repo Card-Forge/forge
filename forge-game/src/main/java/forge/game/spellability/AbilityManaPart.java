@@ -718,7 +718,7 @@ public class AbilityManaPart implements java.io.Serializable {
             for (String c : colors) {
                 values.append(MagicColor.toShortString(c)).append(" ");
             }
-            return values.toString();
+            return values.toString().trim();
         }
         return "";
     }
