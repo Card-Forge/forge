@@ -9,9 +9,11 @@ ScryfallCode=FCA
 P1 R Force of Negation @Ittoku
 P2 R Arcane Denial @Mikio Masuda
 3 R Sram, Senior Edificer @Yoshitaka Amano
+10 U Syr Konrad, the Grim @Yoshitaka Amano
 12 M Ancient Copper Dragon @Yoshitaka Amano
 16 M Nyxbloom Ancient @Yoshitaka Amano
 27 U Wall of Omens @ISAMU KAMIKOKURYO
+28 U Brainstorm @Akihiko Yoshida
 43 M Ragavan, Nimble Pilferer @SHUKO MURASE
 49 M Atraxa, Grand Unifier @Tetsuya Nomura
 60 R Yuriko, the Tiger's Shadow @Tetsuya Nomura
