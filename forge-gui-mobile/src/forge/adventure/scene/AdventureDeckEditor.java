@@ -92,7 +92,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
     }
 
-    protected static class AdventureEventEditorConfig extends DeckEditorConfig{
+    protected static class AdventureEventEditorConfig extends DeckEditorConfig {
         protected AdventureEventData event;
 
         public AdventureEventEditorConfig(AdventureEventData event) {
@@ -292,14 +292,15 @@ public class AdventureDeckEditor extends FDeckEditor {
             Localizer localizer = Forge.getLocalizer();
             String lblHowMany = localizer.getMessage("lblHowMany");
 
-            int amountInCollection = cardManager.getItemCount(card);
             CollectionAutoSellPage autoSellPage = adventureEditor.getAutoSellPage();
-            int sellableCount = amountInCollection - Current.player().getCopiesUsedInDecks(card);
-            int autoSellCount = Current.player().autoSellCards.count(card);
+            int amountInCollection = Current.player().getCards().count(card); //Number we have, including ones in auto-sell and ones used in decks
+            int safeToSellCount = amountInCollection - Current.player().getCopiesUsedInDecks(card); //Number we can sell without losing cards from a deck.
+            int autoSellCount = Current.player().autoSellCards.count(card); //Number currently in auto-sell.
+            int canMoveToAutoSell = safeToSellCount - autoSellCount; //Number that can be moved to auto-sell from here.
 
             if (card.hasNoSellValue()) {
                 String prompt = String.format("%s - %s %s", card, localizer.getMessage("lblRemove"), lblHowMany);
-                FMenuItem removeItem = new FMenuItem(localizer.getMessage("lblRemove"), FSkinImage.HDDELETE, new MoveQuantityPrompt(prompt, sellableCount, amount -> {
+                FMenuItem removeItem = new FMenuItem(localizer.getMessage("lblRemove"), FSkinImage.HDDELETE, new MoveQuantityPrompt(prompt, safeToSellCount, amount -> {
                     int sold = Current.player().sellCard(card, amount);
                     removeCard(card, sold);
                 }));
@@ -307,10 +308,10 @@ public class AdventureDeckEditor extends FDeckEditor {
                 return;
             }
 
-            if (sellableCount > 0) {
-                String action = localizer.getMessage("lbltoSell", sellableCount, autoSellCount);
+            if (canMoveToAutoSell > 0) {
+                String action = localizer.getMessage("lbltoSell", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, lblHowMany);
-                FMenuItem moveToAutosell = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, new MoveQuantityPrompt(prompt, sellableCount, amount -> {
+                FMenuItem moveToAutosell = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, new MoveQuantityPrompt(prompt, canMoveToAutoSell, amount -> {
                     //Auto-sell page adds to and removes from the player's auto-sell pool.
                     //The auto-sell pool is part of the overall pool so there's no need to edit anything on our end either.
                     autoSellPage.addCard(card, amount);
@@ -320,7 +321,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             }
 
             if (autoSellCount > 0) {
-                String action = localizer.getMessage("lbltoInventory", sellableCount, autoSellCount);
+                String action = localizer.getMessage("lbltoInventory", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, lblHowMany);
                 FMenuItem moveToCatalog = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
                     autoSellPage.removeCard(card, amount);
@@ -428,12 +429,12 @@ public class AdventureDeckEditor extends FDeckEditor {
             if(parentScreen instanceof AdventureDeckEditor adventureEditor && adventureEditor.getCatalogPage() != null) {
                 CollectionCatalogPage catalogPage = (CollectionCatalogPage) adventureEditor.getCatalogPage();
                 int autoSellCount = cardManager.getItemCount(card);
-                int amountInCollection = player.getCards().count(card) - autoSellCount;
-                int sellableCount = amountInCollection - player.getCopiesUsedInDecks(card);
+                int amountInCollection = player.getCards().count(card);
+                int safeToSellCount = amountInCollection - player.getCopiesUsedInDecks(card);
 
-                String action = localizer.getMessage("lbltoInventory", sellableCount, autoSellCount);
+                String action = localizer.getMessage("lbltoInventory", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, localizer.getMessage("lblHowMany"));
-                FMenuItem moveToCatalog = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
+                FMenuItem moveToCatalog = new FMenuItem(action, CATALOG_ICON, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
                     removeCard(card, amount);
                     catalogPage.addCard(card, amount);
                 }));
