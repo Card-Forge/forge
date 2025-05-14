@@ -86,22 +86,22 @@ ScryfallCode=FIN
 284 R Jidoor, Aristocratic Capital @Erikas Perl
 289 R Starting Town @Hristo D. Chukov
 293 R Zanarkand, Ancient Metropolis @Erikas Perl
-294 C Plains @Shahab Alizadeh
-295 C Plains @Jonas De Ro
-296 C Plains @Eddie Mendoza
-297 C Island @Fabira Khamesh
-298 C Island @Eddie Mendoza
-299 C Island @Jeremy Paillotin
-300 C Swamp @Domenico Cava
-301 C Swamp @Fang Xinyu
-302 C Swamp @Sean Vo
-303 C Mountain @Domenico Cava
-304 C Mountain @Randy Gallegos
-305 C Mountain @Sean Vo
-306 C Forest @Alayna Danner
-307 C Forest @Leon Tukker
-308 C Forest @Sean Vo
-309 C Wastes @Eddie Mendoza
+294 L Plains @Shahab Alizadeh
+295 L Plains @Jonas De Ro
+296 L Plains @Eddie Mendoza
+297 L Island @Fabira Khamesh
+298 L Island @Eddie Mendoza
+299 L Island @Jeremy Paillotin
+300 L Swamp @Domenico Cava
+301 L Swamp @Fang Xinyu
+302 L Swamp @Sean Vo
+303 L Mountain @Domenico Cava
+304 L Mountain @Randy Gallegos
+305 L Mountain @Sean Vo
+306 L Forest @Alayna Danner
+307 L Forest @Leon Tukker
+308 L Forest @Sean Vo
+309 L Wastes @Eddie Mendoza
 310 R Ishgard, the Holy See @David Frasheski
 311 R Jidoor, Aristocratic Capital @Craig Elliott
 314 R Zanarkand, Ancient Metropolis @Jonas De Ro
@@ -251,11 +251,11 @@ ScryfallCode=FIN
 561 R Xande, Dark Mage @Joseph Weston
 562 R Magitek Scythe @Thanh Tuấn
 563 R Ultima Weapon @Fariba Khamseh
-572 C Plains @Jonas De Ro
-573 C Island @Eddie Mendoza
-574 C Swamp @Domenico Cava
-575 C Mountain @Domenico Cava
-576 C Forest @Leon Tukker
+572 L Plains @Jonas De Ro
+573 L Island @Eddie Mendoza
+574 L Swamp @Domenico Cava
+575 L Mountain @Domenico Cava
+576 L Forest @Leon Tukker
 577 M Y'shtola Rhul @Yusuke Mogi
 578 U Phoenix Down @John Severin Brassell
 579 C White Auracite @Magali Villeneuve
