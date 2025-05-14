@@ -270,7 +270,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     public void removeIf(Predicate<T> filter) {
-        items.keySet().removeIf(filter.negate());
+        items.keySet().removeIf(filter);
     }
 
     public void retainIf(Predicate<T> filter) {
