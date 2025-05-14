@@ -313,7 +313,7 @@ public class GameHUD extends Stage {
             return true;
         }
         //auto follow touchpad
-        if (GuiBase.isAndroid() && !MapStage.getInstance().getDialogOnlyInput() && !console.isVisible()) {
+        if (GuiBase.isAndroid() && !MapStage.getInstance().isDialogOnlyInput() && !console.isVisible()) {
             if (!(Controls.actorContainsVector(avatar, touch)) // not inside avatar bounds
                     && !(Controls.actorContainsVector(miniMap, touch)) // not inside map bounds
                     && !(Controls.actorContainsVector(gamehud, touch)) //not inside gamehud bounds
@@ -687,6 +687,7 @@ public class GameHUD extends Stage {
     }
 
     private void exitDungeonCallback() {
+        MapStage.getInstance().onBeginLeavingDungeon();
         hideDialog(true);
     }
 
@@ -874,6 +875,8 @@ public class GameHUD extends Stage {
         dialog.show(this, Actions.show());
         dialog.setPosition((this.getWidth() - dialog.getWidth()) / 2, (this.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
+        gameStage.hudIsShowingDialog(true);
+        MapStage.getInstance().hudIsShowingDialog(true);
         if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
             this.setKeyboardFocus(dialogButtonMap.first());
     }
@@ -891,7 +894,10 @@ public class GameHUD extends Stage {
                 return true;
             }
         }));
+
         dialogOnlyInput = false;
+        gameStage.hudIsShowingDialog(false);
+        MapStage.getInstance().hudIsShowingDialog(false);
     }
 
     private void selectNextDialogButton() {

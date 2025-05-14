@@ -1,0 +1,10 @@
+Name:Cyan, Vengeful Samurai
+ManaCost:6 W
+Types:Legendary Creature Human Samurai
+PT:3/3
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
+K:Double Strike
+T:Mode$ ChangesZoneAll | Origin$ Graveyard | Destination$ Any | ValidCards$ Creature.YouOwn | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creature cards leave your graveyard, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+Oracle:This spell costs {1} less to cast for each creature card in your graveyard.\nDouble strike\nWhenever one or more creature cards leave your graveyard, put a +1/+1 counter on Cyan.

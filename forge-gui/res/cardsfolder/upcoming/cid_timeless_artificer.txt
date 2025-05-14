@@ -1,0 +1,11 @@
+Name:Cid, Timeless Artificer
+ManaCost:2 W U
+Types:Legendary Creature Human Artificer
+PT:4/4
+K:Cycling:W U
+K:A deck can have any number of cards named CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl,Creature.Hero+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Artifact creatures and Heroes you control get +1/+1 for each Artificer you control and each Artificer card in your graveyard.
+SVar:X:Count$ValidBattlefield,Graveyard Artificer.YouCtrl
+DeckHas:Ability$Discard
+DeckHints:Ability$Mill|Discard|Sacrifice & Name$Cid, Timeless Artificer
+Oracle:Artifact creatures and Heroes you control get +1/+1 for each Artificer you control and each Artificer card in your graveyard.\nA deck can have any number of cards named Cid, Timeless Artificer.\nCycling {W}{U} ({W}{U}, Discard this card: Draw a card.)

@@ -2,11 +2,11 @@ Name:Great Train Heist
 ManaCost:R
 Types:Instant
 K:Spree
-A:SP$ Charm | Choices$ DBUntapAll,DBPumpAll,DBCombatTrig | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
-SVar:DBUntapAll:DB$ UntapAll | SpreeCost$ 2 R | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat | SpellDescription$ Untap all creatures you control. If it's your combat phase, there is an additional combat phase after this phase.
+A:SP$ Charm | Choices$ DBUntapAll,DBPumpAll,DBCombatTrig | MinCharmNum$ 1 | CharmNum$ 3
+SVar:DBUntapAll:DB$ UntapAll | ModeCost$ 2 R | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat | SpellDescription$ Untap all creatures you control. If it's your combat phase, there is an additional combat phase after this phase.
 SVar:DBAddCombat:DB$ AddPhase | ConditionPhases$ BeginCombat->EndCombat | ConditionPlayerTurn$ True | AfterPhase$ EndCombat | ExtraPhase$ Combat
-SVar:DBPumpAll:DB$ PumpAll | SpreeCost$ 2 | NumAtt$ +1 | ValidCards$ Creature.YouCtrl | KW$ First Strike | SpellDescription$ Creatures you control get +1/+0 and gain first strike until end of turn.
-SVar:DBCombatTrig:DB$ Effect | SpreeCost$ R | ValidTgts$ Opponent | Triggers$ TrigDamage | RememberObjects$ TargetedPlayer | SpellDescription$ Choose target opponent. Whenever a creature you control deals combat damage to that player this turn, create a tapped Treasure token.
+SVar:DBPumpAll:DB$ PumpAll | ModeCost$ 2 | NumAtt$ +1 | ValidCards$ Creature.YouCtrl | KW$ First Strike | SpellDescription$ Creatures you control get +1/+0 and gain first strike until end of turn.
+SVar:DBCombatTrig:DB$ Effect | ModeCost$ R | ValidTgts$ Opponent | Triggers$ TrigDamage | RememberObjects$ TargetedPlayer | SpellDescription$ Choose target opponent. Whenever a creature you control deals combat damage to that player this turn, create a tapped Treasure token.
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player.IsRemembered | Execute$ TrigToken | CombatDamage$ True | TriggerDescription$ Whenever a creature you control deals combat damage to that player this turn, create a tapped Treasure token.
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True
 DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
