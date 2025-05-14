@@ -74,7 +74,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             DeckFormat deckFormat = getDeckFormat();
             return deckFormat != null && deckFormat.hasCommander();
         }
-        public boolean allowsCardReplacement() {return hasInfiniteCardPool();}
+        public boolean allowsCardReplacement() { return hasInfiniteCardPool(); }
 
         protected abstract IDeckController getController();
         protected abstract DeckEditorPage[] getInitialPages();
@@ -1017,6 +1017,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return editorConfig.isDraft();
     }
 
+    /**
+     * @return true if DeckSectionPages are allowed to quick-swap cards with alternate prints taken from the card source page.
+     */
     protected boolean isAllowedReplacement() {
         return editorConfig.allowsCardReplacement();
     }
@@ -1720,13 +1723,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if(this.allowFavoriteCards()) {
                 //add option to add or remove card from favorites
                 if (!this.cardIsFavorite(card)) {
-                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED, e -> {
-                        this.setCardFavorited(card, true);
-                    }));
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED,
+                            e -> this.setCardFavorited(card, true)));
                 } else {
-                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRemoveFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_OUTLINE : FSkinImage.STAR_OUTLINE, e -> {
-                        this.setCardFavorited(card, false);
-                    }));
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRemoveFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_OUTLINE : FSkinImage.STAR_OUTLINE,
+                            e -> this.setCardFavorited(card, false)));
                 }
             }
 
@@ -1896,8 +1897,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
             FSkinImage iconReplaceCard = Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST;
-            final Localizer localizer = Forge.getLocalizer();
-            String lblReplaceCard = localizer.getMessage("lblReplaceCard");
 
             CardManagerPage cardSourcePage = getCardSourcePage();
             DeckSectionPage sideboardPage = parentScreen.getSideboardPage();
@@ -1914,12 +1913,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if(cardSourcePage != sideboardPage && canSideboard(card))
                     addMoveCardMenuItem(menu, card, this, sideboardPage);
 
-                if (parentScreen.isAllowedReplacement()) {
-                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
-                    if (cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(card, cardOptions)));
-                    }
-                }
+                addReplaceVariantItem(menu, card, iconReplaceCard);
                 addCommanderItems(menu, card);
                 break;
             case Sideboard:
@@ -1933,12 +1927,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         addMoveCardMenuItem(menu, card, this, cardSourcePage);
                 }
 
-                if (parentScreen.isAllowedReplacement()) {
-                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
-                    if (cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(card, cardOptions)));
-                    }
-                }
+                addReplaceVariantItem(menu, card, iconReplaceCard);
                 addCommanderItems(menu, card);
                 break;
             case Commander:
@@ -1953,12 +1942,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
-                if (parentScreen.isAllowedReplacement()) {
-                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
-                    if (cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(card, cardOptions)));
-                    }
-                }
+                addReplaceVariantItem(menu, card, iconReplaceCard);
                 break;
             case Avatar:
                 addMoveCardMenuItem(menu, card, this, cardSourcePage);
@@ -1969,12 +1953,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Contraptions:
                 addMoveCardMenuItem(menu, card, cardSourcePage, this);
                 addMoveCardMenuItem(menu, card, this, cardSourcePage);
-                if (parentScreen.isAllowedReplacement()) {
-                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
-                    if (cardOptions.size() > 1) {
-                        menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(card, cardOptions)));
-                    }
-                }
+                addReplaceVariantItem(menu, card, iconReplaceCard);
                 break;
             }
 
@@ -2002,25 +1981,48 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
         }
 
-        private void handleReplaceCard(PaperCard card, List<PaperCard> cardOptions) {
+        private void addReplaceVariantItem(FDropDownMenu menu, PaperCard card, FSkinImage iconReplaceCard) {
+            //Determine if we're allowed to replace cards, and if there are any cards to substitute in.
+            if (!parentScreen.isAllowedReplacement())
+                return;
+            final Localizer localizer = Forge.getLocalizer();
+            String lblReplaceCard = localizer.getMessage("lblReplaceCard");
+            final ItemPool<PaperCard> cardOptions = parentScreen.getCardSourcePage().cardManager.getPool().getFilteredPool((c) -> c.getName().equals(card.getName()));
+            if (cardOptions.countDistinct() <= 1)
+                return;
+
+            menu.addItem(new FMenuItem(lblReplaceCard, iconReplaceCard, e -> handleReplaceCard(e, card, cardOptions)));
+        }
+
+        private void handleReplaceCard(FEvent e, PaperCard card, ItemPool<PaperCard> cardOptions) {
             //sort options so current option is on top and selected by default
             List<PaperCard> sortedOptions = new ArrayList<>();
             sortedOptions.add(card);
-            for (PaperCard option : cardOptions) {
+            for (Entry<PaperCard, Integer> option : cardOptions) {
                 if (option != card) {
-                    sortedOptions.add(option);
+                    sortedOptions.add(option.getKey());
                 }
             }
-            String prompt = Forge.getLocalizer().getMessage("lblSelectReplacementCard") + " " + card.getName();
+            final Localizer localizer = Forge.getLocalizer();
+            String lblReplaceCard = localizer.getMessage("lblReplaceCard");
+            String prompt = localizer.getMessage("lblSelectReplacementCard") + " " + card.getName();
+            String promptQuantity = String.format("%s - %s %s", card, lblReplaceCard, localizer.getMessage("lblHowMany"));
+            //First have the player choose which card to swap in.
             GuiChoose.oneOrNone(prompt, sortedOptions, new Callback<>() {
                 @Override
-                public void run(PaperCard result) {
-                    if (result != null) {
-                        if (result != card) {
-                            addCard(result);
-                            removeCard(card);
-                        }
-                    }
+                public void run(PaperCard replacement) {
+                    if (replacement == null || replacement == card)
+                        return;
+                    //Next, ask how many copies they'd like to swap, taking into account the number available.
+                    int maxMovable = Math.min(cardOptions.count(replacement), cardManager.getItemCount(card));
+                    new MoveQuantityPrompt(promptQuantity, maxMovable, (amount) -> {
+                        CardManagerPage sourcePage = parentScreen.getCardSourcePage();
+                        //Finally, swap the cards.
+                        addCard(replacement, amount);
+                        removeCard(card, amount);
+                        sourcePage.removeCard(replacement, amount);
+                        sourcePage.addCard(card, amount);
+                    }).handleEvent(e);
                 }
             });
         }

@@ -286,4 +286,19 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return (obj instanceof ItemPool ip) &&
                 (this.items.equals(ip.items));
     }
+
+    /**
+     * Applies a predicate to this ItemPool's entries.
+     *
+     * @param predicate the Predicate to apply to this ItemPool
+     * @return a new ItemPool made from this ItemPool with only the items that agree with the provided Predicate
+     */
+    public ItemPool<T> getFilteredPool(Predicate<T> predicate) {
+        ItemPool<T> filteredPool = new ItemPool<>(myClass);
+        for (T c : this.items.keySet()) {
+            if (predicate.test(c))
+                filteredPool.add(c, this.items.get(c));
+        }
+        return filteredPool;
+    }
 }

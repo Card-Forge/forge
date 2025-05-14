@@ -44,6 +44,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override public DeckFormat getDeckFormat() { return DeckFormat.Adventure; }
         @Override protected IDeckController getController() { return ADVENTURE_DECK_CONTROLLER; }
         @Override public boolean usePlayerInventory() { return true; }
+        @Override public boolean allowsCardReplacement() { return true; }
 
         @Override
         protected DeckEditorPage[] getInitialPages() {
@@ -85,6 +86,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override public boolean usePlayerInventory() { return false; }
         @Override public boolean isLimited() { return true; }
         @Override public ItemPool<PaperCard> getCardPool(boolean wantUnique) { return deckToPreview.getAllCardsInASinglePool(); }
+        @Override public boolean allowsCardReplacement() { return false; }
 
         @Override
         protected DeckEditorPage[] getInitialPages() {
