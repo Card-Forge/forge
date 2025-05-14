@@ -1,0 +1,17 @@
+Name:Value Town
+ManaCost:no cost
+Types:Land Town
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
+AlternateMode:Adventure
+Oracle:Value Town enters the battlefield tapped.\n{T}: Add {U} or {R}.
+
+ALTERNATE
+
+Name:Take a Trip to...
+ManaCost:4 U R
+Types:Sorcery Adventure
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDamage | SpellDescription$ Draw two cards. This spell deals 2 damage to each opponent. (Then exile this card. You may play the land later from exile.)
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2
+Oracle:Draw two cards. This spell deals 2 damage to each opponent. (Then exile this card. You may play the land later from exile.)

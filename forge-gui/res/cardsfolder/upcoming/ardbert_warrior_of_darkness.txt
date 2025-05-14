@@ -1,0 +1,11 @@
+Name:Ardbert, Warrior of Darkness
+ManaCost:1 W B
+Types:Legendary Creature Spirit Warrior
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCountersAll1 | TriggerDescription$ Whenever you cast a white spell, put a +1/+1 counter on each legendary creature you control. They gain vigilance until end of turn.
+SVar:TrigPutCountersAll1:DB$ PutCounterAll | ValidCards$ Creature.Legendary+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll1
+SVar:DBPumpAll1:DB$ PumpAll | ValidCards$ Creature.Legendary+YouCtrl | KW$ Vigilance
+T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCountersAll2 | TriggerDescription$ Whenever you cast a black spell, put a +1/+1 counter on each legendary creature you control. They gain menace until end of turn.
+SVar:TrigPutCountersAll2:DB$ PutCounterAll | ValidCards$ Creature.Legendary+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll2
+SVar:DBPumpAll2:DB$ PumpAll | ValidCards$ Creature.Legendary+YouCtrl | KW$ Menace
+Oracle:Whenever you cast a white spell, put a +1/+1 counter on each legendary creature you control. They gain vigilance until end of turn.\nWhenever you cast a black spell, put a +1/+1 counter on each legendary creature you control. They gain menace until end of turn.
