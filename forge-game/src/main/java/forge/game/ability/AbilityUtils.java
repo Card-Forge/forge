@@ -1621,7 +1621,8 @@ public class AbilityUtils {
 
         final String[] sq;
         sq = l[0].split("\\.");
-
+        String[] paidparts = l[0].split("\\$", 2);
+        Iterable<Card> someCards = null;
         final Game game = c.getGame();
 
         if (ctb != null) {
@@ -1808,27 +1809,25 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].startsWith("LastStateBattlefield")) {
-                    final String[] k = l[0].split(" ");
-                    CardCollectionView list;
+                    final String[] k = paidparts[0].split(" ");
                     // this is only for spells that were cast
                     if (sq[0].contains("WithFallback")) {
                         if (!sa.getHostCard().wasCast()) {
                             return doXMath(0, expr, c, ctb);
                         }
-                        list = sa.getHostCard().getCastSA().getLastStateBattlefield();
+                        someCards = sa.getHostCard().getCastSA().getLastStateBattlefield();
                     } else {
-                        list = sa.getLastStateBattlefield();
+                        someCards = sa.getLastStateBattlefield();
                     }
-                    if (list == null || list.isEmpty()) {
+                    if (someCards == null || Iterables.isEmpty(someCards)) {
                         // LastState is Empty
                         if (sq[0].contains("WithFallback")) {
-                            list = game.getCardsIn(ZoneType.Battlefield);
+                            someCards = game.getCardsIn(ZoneType.Battlefield);
                         } else {
                             return doXMath(0, expr, c, ctb);
                         }
                     }
-                    list = CardLists.getValidCards(list, k[1], player, c, sa);
-                    return doXMath(list.size(), expr, c, ctb);
+                    someCards = CardLists.getValidCards(someCards, k[1], player, c, sa);
                 }
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
@@ -1958,9 +1957,6 @@ public class AbilityUtils {
             }
             return doXMath(sum, expr, c, ctb);
         }
-
-        String[] paidparts = l[0].split("\\$", 2);
-        Iterable<Card> someCards = null;
 
         // count valid cards in any specified zone/s
         if (sq[0].startsWith("Valid")) {
