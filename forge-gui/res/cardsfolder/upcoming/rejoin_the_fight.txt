@@ -1,0 +1,9 @@
+Name:Rejoin the Fight
+ManaCost:5 B
+Types:Sorcery
+A:SP$ Mill | NumCards$ 3 | SubAbility$ DBRepeatEach | SpellDescription$ Mill three cards. Then starting with the next opponent in turn order, each opponent chooses a creature card in your graveyard that hasn't been chosen. Return each card chosen this way to the battlefield under your control.
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | StartingWith$ Opponent | RepeatSubAbility$ OpponentsChoose | SubAbility$ DBChangeZoneAll
+SVar:OpponentsChoose:DB$ ChooseCard | ChoiceZone$ Graveyard | Choices$ Creature.YouOwn+IsNotRemembered | Defined$ Player.IsRemembered | RememberChosen$ True
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+Oracle:Mill three cards. Then starting with the next opponent in turn order, each opponent chooses a creature card in your graveyard that hasn't been chosen. Return each card chosen this way to the battlefield under your control.
