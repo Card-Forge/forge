@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Legendary Creature Human Warrior
 PT:4/3
 K:Menace
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile it, then return it to the battlefield transformed under its owner's control.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile it, then return it to the battlefield transformed under its owner's control.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
