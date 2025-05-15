@@ -1,0 +1,13 @@
+Name:Wakka, Devoted Guardian
+ManaCost:2 G W
+Types:Legendary Creature Human Warrior
+PT:4/4
+K:Reach
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, destroy target artifact that player controls and put a +1/+1 counter on NICKNAME.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact damaged player controls | SubAbility$ TrigPutCounter
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigPutCounterAll | TriggerDescription$ Blitzball Captain — At the beginning of your end step, if a counter was put on NICKNAME this turn, put a +1/+1 counter on each other creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$CountersAddedThisTurn Any Player Card.Self
+Oracle:Reach, trample\nWhenever Wakka deals combat damage to a player, destroy up to one target artifact that player controls and put a +1/+1 counter on Wakka.\nBlitzball Captain — At the beginning of your end step, if a counter was put on Wakka this turn, put a +1/+1 counter on each other creature you control.
