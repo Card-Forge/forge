@@ -1,0 +1,5 @@
+Name:Relm's Sketching
+ManaCost:2 U U
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ Create a token that's a copy of target artifact, creature, or land.
+Oracle:Create a token that's a copy of target artifact, creature, or land.
