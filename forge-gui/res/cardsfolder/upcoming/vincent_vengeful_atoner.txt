@@ -1,0 +1,12 @@
+Name:Vincent, Vengeful Atoner
+ManaCost:2 R
+Types:Legendary Creature Assassin
+PT:3/3
+K:Menace
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigPutCounter | SubAbility$ TrigPutCounter | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDmg | TriggerDescription$ Chaos — Whenever NICKNAME deals combat damage to an opponent, it deals that much damage to each other opponent if NICKNAME's power is 7 or greater.
+SVar:TrigDmg:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | NumDmg$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE7
+SVar:X:TriggerCount$DamageAmount
+SVar:Y:Count$CardPower
+Oracle:Menace\nWhenever one or more creatures you control deal combat damage to a player, put a +1/+1 counter on Vincent.\nChaos — Whenever Vincent deals combat damage to an opponent, it deals that much damage to each other opponent if Vincent's power is 7 or greater.
