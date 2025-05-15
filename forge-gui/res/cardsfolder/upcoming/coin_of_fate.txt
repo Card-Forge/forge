@@ -1,0 +1,10 @@
+Name:Coin of Fate
+ManaCost:1 W
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When this artifact enters, surveil 1.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+A:AB$ ChangeZone | Cost$ 3 W T ExileFromGrave<2/Creature/creature cards> Sac<1/CARDNAME> | Hidden$ True | Origin$ Exile | ChangeNum$ 1 | ChangeType$ Card.ExiledWithSource | Destination$ Library | LibraryPosition$ -1 | Chooser$ Opponent | Mandatory$ True | SubAbility$ DBChangeZone | SpellDescription$ An opponent chooses one of the exiled cards. You put that card on the bottom of your library and return the other to the battlefield tapped. You become the monarch.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Defined$ ExiledWith | Destination$ Battlefield | Tapped$ True | SubAbility$ DBMonarch
+SVar:DBMonarch:DB$ BecomeMonarch | Defined$ You
+DeckHas:Ability$Surveil|Graveyard
+Oracle:When this artifact enters, surveil 1.\n{3}{W}, {T}, Exile two creature cards from your graveyard, Sacrifice this artifact: An opponent chooses one of the exiled cards. You put that card on the bottom of your library and return the other to the battlefield tapped. You become the monarch.
