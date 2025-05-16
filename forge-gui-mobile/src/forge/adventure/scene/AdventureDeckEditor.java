@@ -313,22 +313,18 @@ public class AdventureDeckEditor extends FDeckEditor {
             if (canMoveToAutoSell > 0) {
                 String action = localizer.getMessage("lblToAutoSell", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, lblHowMany);
-                FMenuItem moveToAutosell = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, new MoveQuantityPrompt(prompt, canMoveToAutoSell, amount -> {
-                    //Auto-sell page adds to and removes from the player's auto-sell pool.
-                    //The auto-sell pool is part of the overall pool so there's no need to edit anything on our end either.
-                    autoSellPage.addCard(card, amount);
-                    removeCard(card, amount);
-                }));
+                //Auto-sell page adds to and removes from the player's auto-sell pool.
+                //The auto-sell pool is part of the overall pool so there's no need to edit anything on our end either.
+                FMenuItem moveToAutosell = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS,
+                        new MoveQuantityPrompt(prompt, canMoveToAutoSell, amount -> moveCard(card, autoSellPage, amount)));
                 menu.addItem(moveToAutosell);
             }
 
             if (autoSellCount > 0) {
                 String action = localizer.getMessage("lblFromAutoSell", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, lblHowMany);
-                FMenuItem moveToCatalog = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
-                    autoSellPage.removeCard(card, amount);
-                    addCard(card, amount);
-                }));
+                FMenuItem moveToCatalog = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS,
+                        new MoveQuantityPrompt(prompt, autoSellCount, amount -> autoSellPage.moveCard(card, this, amount)));
                 menu.addItem(moveToCatalog);
             }
         }
@@ -369,8 +365,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                 @Override
                 public void run(Boolean result) {
                     if (result) {
-                        removeCards(toMove);
-                        autoSellPage.addCards(toMove);
+                        moveCards(toMove, autoSellPage);
                     }
                 }
             });
@@ -437,8 +432,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                 String action = localizer.getMessage("lblFromAutoSell", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, localizer.getMessage("lblHowMany"));
                 FMenuItem moveToCatalog = new FMenuItem(action, CATALOG_ICON, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
-                    removeCard(card, amount);
-                    catalogPage.addCard(card, amount);
+                    moveCard(card, catalogPage, amount);
                 }));
                 menu.addItem(moveToCatalog);
             }

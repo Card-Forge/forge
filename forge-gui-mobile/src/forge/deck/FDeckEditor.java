@@ -1232,6 +1232,50 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             updateCaption();
         }
 
+        /**
+         * Moves a single copy of `card` from here to `destination`. Will not work if there are no copies of the card here.
+         */
+        public void moveCard(PaperCard card, CardManagerPage destination) {
+            moveCard(card, destination, 1);
+        }
+
+        /**
+         * Moves `qty` copies of `card` from here to `destination`. Will not move more copies than are available here.
+         */
+        public void moveCard(PaperCard card, CardManagerPage destination, int qty) {
+            int amountToMove = Math.min(cardManager.getItemCount(card), qty);
+            if(!this.cardManager.isInfinite())
+                this.cardManager.removeItem(card, amountToMove);
+            if(!destination.cardManager.isInfinite())
+                destination.cardManager.addItem(card, amountToMove);
+            parentScreen.getDeckController().notifyModelChanged();
+            this.updateCaption();
+            destination.updateCaption();
+        }
+
+        /**
+         * Moves a pool of `cards` from here to `destination`. Cannot move more copies of a card than are available here.
+         */
+        public void moveCards(Iterable<Entry<PaperCard, Integer>> cards, CardManagerPage destination) {
+            if(cardManager.isInfinite()) {
+                destination.addCards(cards);
+                return;
+            }
+            CardPool moveable = new CardPool();
+            for (Entry<PaperCard, Integer> entry : cards) {
+                int amountToMove = Math.min(entry.getValue(), this.cardManager.getItemCount(entry.getKey()));
+                if(amountToMove <= 0)
+                    continue;
+                moveable.add(entry.getKey(), amountToMove);
+            }
+            this.cardManager.removeItems(moveable);
+            if(!destination.cardManager.isInfinite())
+                destination.cardManager.addItems(moveable);
+            parentScreen.getDeckController().notifyModelChanged();
+            this.updateCaption();
+            destination.updateCaption();
+        }
+
         protected void updateCaption() {}
 
         protected abstract void onCardActivated(PaperCard card);
@@ -1337,9 +1381,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             public void run(Integer result) {
                 if(result == null || result == 0)
                     return;
-
-                from.removeCard(card, result);
-                to.addCard(card, result);
+                from.moveCard(card, to, result);
             }
         }
 
@@ -1492,33 +1534,29 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void setVanguard(PaperCard card) {
-            removeCard(card);
             DeckSectionPage avatarPage = parentScreen.getPageForSection(DeckSection.Avatar, true);
             avatarPage.ejectCards();
-            avatarPage.addCard(card);
+            moveCard(card, avatarPage);
         }
 
         protected void setCommander(PaperCard card) {
-            removeCard(card);
             DeckSectionPage commanderPage = parentScreen.getCommanderPage();
             commanderPage.ejectCards();
-            commanderPage.addCard(card);
+            moveCard(card, commanderPage);
             refresh(); //refresh so cards shown that match commander's color identity
         }
 
         protected void setPartnerCommander(PaperCard card) {
-            removeCard(card);
-            parentScreen.getCommanderPage().addCard(card);
+            moveCard(card, parentScreen.getCommanderPage());
             refresh(); //refresh so cards shown that match commander's color identity
         }
 
         protected void setSignatureSpell(PaperCard card) {
-            removeCard(card);
             PaperCard signatureSpell = parentScreen.getDeck().getSignatureSpell();
             if (signatureSpell != null) {
                 parentScreen.getCommanderPage().ejectCard(signatureSpell); //remove existing signature spell if any
             }
-            parentScreen.getCommanderPage().addCard(card);
+            moveCard(card, parentScreen.getCommanderPage());
             //refreshing isn't needed since color identity won't change from signature spell
         }
 
@@ -1698,8 +1736,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return; //don't auto-change commander unexpectedly
             }
 
-            removeCard(card);
-            destinationPage.addCard(card);
+            moveCard(card, destinationPage);
         }
 
         @Override
@@ -1865,8 +1902,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             CardManagerPage destination = getCardSourcePage();
             if(destination == null)
                 return;
-            destination.addCard(card, 1);
-            removeCard(card, 1);
+            moveCard(card, destination);
         }
 
         public CardManagerPage getCardSourcePage() {
@@ -1932,8 +1968,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     addMoveCardMenuItem(menu, this, cardSourcePage, new Callback<>() {
                         @Override
                         public void run(Integer result) {
-                            removeCard(card, result);
-                            cardSourcePage.addCard(card, result);
+                            moveCard(card, cardSourcePage, result);
                             parentScreen.getCatalogPage().refresh(); //refresh so commander options shown again
                             parentScreen.setSelectedPage(parentScreen.getCatalogPage());
                         }
@@ -2015,10 +2050,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     new MoveQuantityPrompt(promptQuantity, maxMovable, (amount) -> {
                         CardManagerPage sourcePage = parentScreen.getCardSourcePage();
                         //Finally, swap the cards.
-                        addCard(replacement, amount);
-                        removeCard(card, amount);
-                        sourcePage.removeCard(replacement, amount);
-                        sourcePage.addCard(card, amount);
+                        DeckSectionPage.this.moveCard(card, sourcePage, amount);
+                        sourcePage.moveCard(replacement, DeckSectionPage.this, amount);
                     }).handleEvent(e);
                 }
             });
@@ -2102,8 +2135,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 System.err.println("Unable to quick-move card (no page for destination) - " + card + " -> " + destination);
                 return; //Shouldn't happen?
             }
-            removeCard(card);
-            destinationPage.addCard(card);
+            moveCard(card, destinationPage);
             afterCardPicked(card);
         }
 
@@ -2151,8 +2183,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     @Override
                     public void run(Integer result) { //ignore quantity
                         PaperCard realCard = getDraftPlayer().pickFromArchdemonCurse(getDraftPlayer().nextChoice());
-                        removeCard(realCard);
-                        parentScreen.getSideboardPage().addCard(realCard);
+                        moveCard(realCard, parentScreen.getSideboardPage());
                         afterCardPicked(realCard);
                     }
                 });
@@ -2163,16 +2194,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             addMoveCardMenuItem(menu, this, destinationPage, new Callback<>() {
                 @Override
                 public void run(Integer result) { //ignore quantity
-                    removeCard(card);
-                    destinationPage.addCard(card);
+                    moveCard(card, destinationPage);
                     afterCardPicked(card);
                 }
             });
             addMoveCardMenuItem(menu, this, parentScreen.getSideboardPage(), new Callback<>() {
                 @Override
                 public void run(Integer result) { //ignore quantity
-                    removeCard(card);
-                    parentScreen.getSideboardPage().addCard(card);
+                    moveCard(card, parentScreen.getSideboardPage());
                     afterCardPicked(card);
                 }
             });
