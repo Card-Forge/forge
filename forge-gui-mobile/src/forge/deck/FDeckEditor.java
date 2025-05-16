@@ -345,45 +345,43 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected static DeckSectionPage createPageForExtraSection(DeckSection deckSection, DeckEditorConfig editorConfig) {
         CardManager cm = new CardManager(false);
-        switch (deckSection) {
-            case Avatar:
-            case Commander:
-                return new DeckSectionPage(cm, deckSection, ItemManagerConfig.COMMANDER_SECTION);
-            case Schemes:
-                return new DeckSectionPage(cm, deckSection, ItemManagerConfig.SCHEME_DECK_EDITOR);
-            case Planes:
-                return new DeckSectionPage(cm, deckSection, ItemManagerConfig.PLANAR_DECK_EDITOR);
-            case Conspiracy:
-                return new DeckSectionPage(cm, deckSection, editorConfig.isLimited() ? ItemManagerConfig.DRAFT_CONSPIRACY : ItemManagerConfig.CONSPIRACY_DECKS);
-            case Dungeon:
-                return new DeckSectionPage(cm, deckSection, ItemManagerConfig.DUNGEON_DECKS);
-            case Attractions:
-                if(editorConfig.isLimited())
-                    return new DeckSectionPage(cm, deckSection, ItemManagerConfig.ATTRACTION_DECK_EDITOR_LIMITED);
-                return new DeckSectionPage(cm, deckSection, ItemManagerConfig.ATTRACTION_DECK_EDITOR);
-            case Contraptions:
-                if(editorConfig.isLimited())
-                    return new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR_LIMITED);
-                return new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR);
-            default:
+        return switch (deckSection) {
+            case Avatar, Commander -> new DeckSectionPage(cm, deckSection, ItemManagerConfig.COMMANDER_SECTION);
+            case Schemes -> new DeckSectionPage(cm, deckSection, ItemManagerConfig.SCHEME_DECK_EDITOR);
+            case Planes -> new DeckSectionPage(cm, deckSection, ItemManagerConfig.PLANAR_DECK_EDITOR);
+            case Conspiracy ->
+                    new DeckSectionPage(cm, deckSection, editorConfig.isLimited() ? ItemManagerConfig.DRAFT_CONSPIRACY : ItemManagerConfig.CONSPIRACY_DECKS);
+            case Dungeon -> new DeckSectionPage(cm, deckSection, ItemManagerConfig.DUNGEON_DECKS);
+            case Attractions -> {
+                if (editorConfig.isLimited())
+                    yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.ATTRACTION_DECK_EDITOR_LIMITED);
+                yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.ATTRACTION_DECK_EDITOR);
+            }
+            case Contraptions -> {
+                if (editorConfig.isLimited())
+                    yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR_LIMITED);
+                yield new DeckSectionPage(cm, deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR);
+            }
+            default -> {
                 System.out.printf("Editor (%s) added an unsupported extra deck section - %s%n", deckSection, editorConfig.getGameType());
-                return new DeckSectionPage(cm, deckSection);
-        }
+                yield new DeckSectionPage(cm, deckSection);
+            }
+        };
     }
 
     public static FImage iconFromDeckSection(DeckSection deckSection) {
-        switch (deckSection) {
-            case Main: return MAIN_DECK_ICON;
-            case Sideboard: return SIDEBOARD_ICON;
-            case Commander: return FSkinImage.COMMAND;
-            case Avatar: return FSkinImage.AVATAR;
-            case Conspiracy: return FSkinImage.CONSPIRACY;
-            case Planes: return FSkinImage.PLANAR;
-            case Schemes: return FSkinImage.SCHEME;
-            case Attractions: return FSkinImage.ATTRACTION;
-            case Contraptions: return FSkinImage.CONTRAPTION;
-            default: return FSkinImage.HDSIDEBOARD;
-        }
+        return switch (deckSection) {
+            case Main -> MAIN_DECK_ICON;
+            case Sideboard -> SIDEBOARD_ICON;
+            case Commander -> FSkinImage.COMMAND;
+            case Avatar -> FSkinImage.AVATAR;
+            case Conspiracy -> FSkinImage.CONSPIRACY;
+            case Planes -> FSkinImage.PLANAR;
+            case Schemes -> FSkinImage.SCHEME;
+            case Attractions -> FSkinImage.ATTRACTION;
+            case Contraptions -> FSkinImage.CONTRAPTION;
+            default -> FSkinImage.HDSIDEBOARD;
+        };
     }
 
     private final DeckEditorConfig editorConfig;
@@ -1873,8 +1871,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public CardManagerPage getCardSourcePage() {
             if(parentScreen.isLimitedEditor() && deckSection == DeckSection.Sideboard)
                 return parentScreen.getMainDeckPage();
-            //if(deckSection == DeckSection.Commander)
-            //    return parentScreen.getMainDeckPage();
             return parentScreen.getCardSourcePage();
         }
 
