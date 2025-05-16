@@ -311,7 +311,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             }
 
             if (canMoveToAutoSell > 0) {
-                String action = localizer.getMessage("lbltoSell", autoSellCount, safeToSellCount);
+                String action = localizer.getMessage("lblToAutoSell", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, lblHowMany);
                 FMenuItem moveToAutosell = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, new MoveQuantityPrompt(prompt, canMoveToAutoSell, amount -> {
                     //Auto-sell page adds to and removes from the player's auto-sell pool.
@@ -323,7 +323,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             }
 
             if (autoSellCount > 0) {
-                String action = localizer.getMessage("lbltoInventory", autoSellCount, safeToSellCount);
+                String action = localizer.getMessage("lblFromAutoSell", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, lblHowMany);
                 FMenuItem moveToCatalog = new FMenuItem(action, Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
                     autoSellPage.removeCard(card, amount);
@@ -434,7 +434,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                 int amountInCollection = player.getCards().count(card);
                 int safeToSellCount = amountInCollection - player.getCopiesUsedInDecks(card);
 
-                String action = localizer.getMessage("lbltoInventory", autoSellCount, safeToSellCount);
+                String action = localizer.getMessage("lblFromAutoSell", autoSellCount, safeToSellCount);
                 String prompt = String.format("%s - %s %s", card, action, localizer.getMessage("lblHowMany"));
                 FMenuItem moveToCatalog = new FMenuItem(action, CATALOG_ICON, new MoveQuantityPrompt(prompt, autoSellCount, amount -> {
                     removeCard(card, amount);

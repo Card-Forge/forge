@@ -1371,7 +1371,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         private String getMoveLabel(DeckSectionPage page, PaperCard selectedCard, boolean from) {
-            //This might make more sense in the DeckSection class itself, and shared with the desktop editor.
+            //TODO: This might make more sense in the DeckSection class itself, and shared with the desktop editor.
+            //It also might be better to arrange strings as "Add to {zone}" rather than "Add" + "to zone".
             switch (page.deckSection) {
                 default:
                 case Main: return from ? "lblfromdeck" : "lbltodeck";
