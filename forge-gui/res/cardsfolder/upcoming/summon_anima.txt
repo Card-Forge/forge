@@ -1,0 +1,11 @@
+Name:Summon: Anima
+ManaCost:4 B B
+Types:Enchantment Creature Saga Horror
+PT:4/4
+K:Chapter:4:DBPain,DBPain,DBPain,DBOblivion
+SVar:DBPain:DB$ Draw | SubAbility$ DBLoseLife1 | SpellDescription$ Pain — You draw a card and you lose 1 life.
+SVar:DBLoseLife1:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+SVar:DBOblivion:DB$ Sacrifice | SacValid$ Creature | Defined$ Player.Opponent | SubAbility$ DBLoseLife2 | SpellDescription$ Oblivion — Each opponent sacrifices a creature of their choice and loses 3 life.
+SVar:DBLoseLife2:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3
+K:Menace
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Pain — You draw a card and you lose 1 life.\nIV — Oblivion — Each opponent sacrifices a creature of their choice and loses 3 life.\nMenace
