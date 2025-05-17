@@ -1,0 +1,11 @@
+Name:The Falcon, Airship Restored
+ManaCost:2 B
+Types:Legendary Artifact Vehicle
+PT:4/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigImmediateTrigger | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may sacrifice it. When you do, return target creature card from your graveyard to the battlefield.
+SVar:TrigImmediateTrigger:AB$ ImmediateTrigger | Cost$ Sac<1/CARDNAME> | Execute$ TrigChangeZone | TriggerDescription$ When you do, return target creature card from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn
+A:AB$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+K:Crew:2
+Oracle:Flying\nWhenever The Falcon deals combat damage to a player, you may sacrifice it. When you do, return target creature card from your graveyard to the battlefield.\n{4}{B}: Return this card from your graveyard to the battlefield tapped.\nCrew 2
