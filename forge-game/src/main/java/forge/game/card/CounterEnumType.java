@@ -79,6 +79,8 @@ public enum CounterEnumType {
 
     CARRION("CRRON", 255, 163, 222),
 
+    CELL ("CELL", 90, 10, 95),
+
     CHARGE("CHARG", 246, 192, 0),
 
     CHORUS("CHRUS", 0, 192, 246),

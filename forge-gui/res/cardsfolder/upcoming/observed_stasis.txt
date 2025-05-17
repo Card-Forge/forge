@@ -1,0 +1,13 @@
+Name:Observed Stasis
+ManaCost:3 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant:Creature.OppCtrl:creature an opponent controls
+SVar:AttachAILogic:Curse
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRemoveFromCombat | TriggerDescription$ When this Aura enters, remove enchanted creature from combat. Then draw a card for each tapped creature its controller controls.
+SVar:TrigRemoveFromCombat:DB$ RemoveFromCombat | Defined$ Enchanted | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | RemoveAllAbilities$ True | Description$ Enchanted creature loses all abilities and can't attack or block.
+S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature loses all abilities and can't attack or block.
+SVar:X:Count$Valid Creature.tapped+ControlledBy Player.EnchantedController
+Oracle:Flash\nEnchant creature an opponent controls\nWhen this Aura enters, remove enchanted creature from combat. Then draw a card for each tapped creature its controller controls.\nEnchanted creature loses all abilities and can't attack or block.

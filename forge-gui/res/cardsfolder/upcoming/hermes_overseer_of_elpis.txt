@@ -1,0 +1,11 @@
+Name:Hermes, Overseer of Elpis
+ManaCost:3 U
+Types:Legendary Creature Elder Wizard
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 blue Bird creature token with flying and vigilance.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_bird_flying_vigilance | TokenOwner$ You
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.Bird+YouCtrl | Execute$ TrigScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more Birds, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+DeckHas:Ability$Token
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast a noncreature spell, create a 1/1 blue Bird creature token with flying and vigilance.\nWhenever you attack with one or more Birds, scry 2.

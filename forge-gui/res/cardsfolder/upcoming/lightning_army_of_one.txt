@@ -1,0 +1,13 @@
+Name:Lightning, Army of One
+ManaCost:1 R W
+Types:Legendary Creature Human Soldier
+PT:3/2
+K:First Strike
+K:Trample
+K:Lifelink
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigEffect | CombatDamage$ True | TriggerDescription$ Stagger — Whenever NICKNAME deals combat damage to a player, until your next turn, if a source would deal damage to that player or a permanent that player controls, it deals double that damage instead.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ Stagger | RememberObjects$ TriggeredTarget | Duration$ UntilYourNextTurn
+SVar:Stagger:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card,Emblem | ValidTarget$ Player.IsRemembered,Permanent.ControlledBy Player.IsRemembered | ReplaceWith$ DmgTwice | Description$ Until your next turn, if a source would deal damage to that player or a permanent that player controls, it deals double that damage instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ StaggerX
+SVar:StaggerX:ReplaceCount$DamageAmount/Twice
+Oracle:First strike, trample, lifelink\nStagger — Whenever Lightning deals combat damage to a player, until your next turn, if a source would deal damage to that player or a permanent that player controls, it deals double that damage instead.

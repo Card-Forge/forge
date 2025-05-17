@@ -1,0 +1,6 @@
+Name:Auron's Inspiration
+ManaCost:2 W
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ +2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn.
+K:Flashback:2 W W
+Oracle:Attacking creatures get +2/+0 until end of turn.\nFlashback {2}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

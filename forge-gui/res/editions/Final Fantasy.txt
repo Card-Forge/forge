@@ -7,39 +7,52 @@ ScryfallCode=FIN
 
 [cards]
 1 M Summon: Bahamut @Arif Wijaya
+2 R Ultima, Origin of Oblivion @Russell Lu
 4 R Aerith Gainsborough @Nakamura8
 10 M Cloud, Midgar Mercenary @Kazto Furuya
 14 U The Crystal's Chosen @Kotetsu Kinoshita
 17 U Dragoon's Lance @Josephine Chang
+29 U Phoenix Down @John Severin Brassell
 31 U Sidequest: Catch a Fish @Gal Or
 34 R Stiltzkin, Moogle Merchant @Hendry Iwanaga
+41 C White Auracite @Magali Villeneuve
 42 C White Mage's Staff @Kim Dingwall
+45 U Zack Fair @Yoshio Sugiura
+46 R Astrologian's Planisphere @Josephine Chang
 49 C Dragoon's Wyvern @Jason Kiantoro
 56 C Ice Magic @Masateru Ikeda
 58 R Jill, Shiva's Dominant @Arif Wijaya
+62 R Matoya, Archon Elder @Luisa J. Preissler
+70 C Sage's Nouliths @Justyna Dura
 78 U Summon: Shiva @Fajareka Setiawan
+84 U Valkyrie Aerial Unit @hippo
 86 M Y'shtola Rhul @Immanuela Crovius
 89 R Ardyn, the Usurper @Russell Lu
 90 C Black Mage's Rod @Nino Is
 91 R Cecil, Dark Knight @Josu Hernaiz
+92 U Circle of Power @Josephine Chang
 94 M Dark Confidant @Immanuela Crovius
 96 R The Darkness Crystal @Pablo Mendoza
 99 U Fang, Fearless l'Cie @Simon Dominic
 99b U Ragnarok, Divine Deliverance @Simon Dominic
 105 R Kain, Traitorous Dragoon @Russell Dongjun Lu
 106 C Malboro @Dan Watson
+107 C Namazu Trader @Andrea Montalto
 115 M Sephiroth, Fabled SOLDIER @Wisnu Tan
 121 R Summon: Primal Odin @Nino Is
 122 U Tonberry @Leonardo Santanna
 127 R Zenos yae Galvus @Alexander Mokhov
 128 R Zodiark, Umbral God @AKAGI
+129 U Barret Wallace @Patrik Hell
 133 M Clive, Ifrit's Dominant @Nino Is
 136 U Fire Magic @Toni Infante
 137 R Firion, Wild Rose Warrior @Elizabeth Peiró
 139 R Gilgamesh, Master-at-Arms @Lorenzo Mastroianni
+143 C Laughing Mad @RARE ENGINE
 170 R Zell Dincht @Kevin Sidharta
 175 R Bartz and Boko @Ryuichi Sakuma
 182 C Commune with Beavers @hippo
+185 R Esper Origins @Solan & Danciao
 191 R Jumbo Cactuar @Jason Kiantoro
 196 R A Realm Reborn @Anna Podedworna
 200 U Sazh's Chocobo @Domenico Cava
@@ -69,6 +82,7 @@ ScryfallCode=FIN
 248 M Vivi Ornitier @Toni Infante
 250 M Yuna, Hope of Spira @NINNIN
 271 C Adventurer's Inn @Allen Morris
+283 R Ishgard, the Holy See @KOHEI YAMADA
 284 R Jidoor, Aristocratic Capital @Erikas Perl
 289 R Starting Town @Hristo D. Chukov
 293 R Zanarkand, Ancient Metropolis @Erikas Perl
@@ -88,6 +102,7 @@ ScryfallCode=FIN
 307 L Forest @Leon Tukker
 308 L Forest @Sean Vo
 309 L Wastes @Eddie Mendoza
+310 R Ishgard, the Holy See @David Frasheski
 311 R Jidoor, Aristocratic Capital @Craig Elliott
 314 R Zanarkand, Ancient Metropolis @Jonas De Ro
 315 R Ardyn, the Usurper @Roberto Ferrari
@@ -97,9 +112,10 @@ ScryfallCode=FIN
 320 M Lightning, Army of One @ISAMU KAMIKOKURYO
 322 M Kefka, Court Mage @Yoshitaka Amano
 323 M Terra, Magical Adept @Yoshitaka Amano
+324 R Ultima, Origin of Oblivion @Ono Tako
 327 R Stiltzkin, Moogle Merchant @Yumeko
 334 M Dark Confidant @Ezoi
-335 R The Darkness Crystal
+335 R The Darkness Crystal @Kei Satsuki
 336 R Zodiark, Umbral God @Hisashi Momose
 338 R Gilgamesh, Master-at-Arms @Ezoi
 343 R Jumbo Cactuar @Yumeko
@@ -109,6 +125,7 @@ ScryfallCode=FIN
 361 R Summon: Leviathan @Kota Nakatsubo
 362 U Summon: Shiva @Taku Haruno
 365 R Summon: Primal Odin @Tomohito
+370 R Esper Origins @Tokima
 372 U Summon: Fenrir @Maiko Aoji
 374 R Aerith Gainsborough @Syutsuri
 375 M Cloud, Midgar Mercenary @Maji
@@ -146,10 +163,15 @@ ScryfallCode=FIN
 418 U Cid, Timeless Artificer @Russell Lu
 419 U Cid, Timeless Artificer @Jason Kiantoro
 420 U Cid, Timeless Artificer @Magali Villeneuve
+421 R Ultima, Origin of Oblivion @Russell Lu
 423 R Aerith Gainsborough @Nakamura8
+426 R Beatrix, Loyal General @Bachzim
 427 M Cloud, Midgar Mercenary @Kazto Furuya
+431 R Rosa, Resolute White Mage @Christian Angel
 433 R Stiltzkin, Moogle Merchant @Hendry Iwanaga
 438 R Jill, Shiva's Dominant @Arif Wijaya
+439 R Matoya, Archon Elder @Luisa J. Preissler
+441 R Ultimecia, Temporal Threat @Bachzim
 443 M Y'shtola Rhul @Immanuela Crovius
 444 R Ardyn, the Usurper @Russell Lu
 445 R Cecil, Dark Knight @Josu Hernaiz
@@ -157,11 +179,13 @@ ScryfallCode=FIN
 446b U Ragnarok, Divine Deliverance @Simon Dominic
 449 R Kain, Traitorous Dragoon @Russell Dongjun Lu
 451 M Sephiroth, Fabled SOLDIER @Wisnu Tan
+452 R Seymour Flux @K-SUWABE
 455 R Zenos yae Galvus @Alexander Mokhov
 456 R Zodiark, Umbral God @AKAGI
 458 M Clive, Ifrit's Dominant @Nino Is
 459 R Firion, Wild Rose Warrior @Elizabeth Peiró
 461 R Gilgamesh, Master-at-Arms @Lorenzo Mastroianni
+462 R Lightning, Security Sergeant @Ramza Psyru
 468 R Zell Dincht @Kevin Sidharta
 469 R Bartz and Boko @Ryuichi Sakuma
 473 R Tifa Lockhart @Laurel Austin
@@ -186,6 +210,7 @@ ScryfallCode=FIN
 511 M Terra, Magical Adept @Clare Wong
 513 U Ultimecia, Time Sorceress @Mikio Masuda
 514 M Vivi Ornitier @Toni Infante
+516 R Xande, Dark Mage @Joseph Weston
 517 M Yuna, Hope of Spira @NINNIN
 519 R Aerith Gainsborough @Syutsuri
 520 M Cloud, Midgar Mercenary @Maji
@@ -216,9 +241,27 @@ ScryfallCode=FIN
 551f M Traveling Chocobo @Toni Infante
 552 M Cloud, Planet's Champion @Magali Villeneuve
 553 M Sephiroth, Planet's Heir @Magali Villeneuve
+554 R Beatrix, Loyal General @Bachzim
+555 R Rosa, Resolute White Mage @Christian Angel
+556 R Ultimecia, Temporal Threat @Bachzim
+557 R Deadly Embrace @Lius Lasahido
+558 R Seymour Flux @K-SUWABE
+559 R Judgment Bolt @Billy Christian
+560 R Lightning, Security Sergeant @Ramza Psyru
+561 R Xande, Dark Mage @Joseph Weston
+562 R Magitek Scythe @Thanh Tuấn
+563 R Ultima Weapon @Fariba Khamseh
 572 L Plains @Jonas De Ro
 573 L Island @Eddie Mendoza
 574 L Swamp @Domenico Cava
 575 L Mountain @Domenico Cava
 576 L Forest @Leon Tukker
 577 M Y'shtola Rhul @Yusuke Mogi
+578 U Phoenix Down @John Severin Brassell
+579 C White Auracite @Magali Villeneuve
+580 U Zack Fair @
+581 R Astrologian's Planisphere @Josephine Chang
+582 C Sage's Nouliths @Justyna Dura
+583 U Circle of Power @Josephine Chang
+584 U Barret Wallace @Patrik Hell
+585 C Laughing Mad @

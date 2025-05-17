@@ -1,0 +1,34 @@
+Name:Sephiroth, Fabled SOLDIER
+ManaCost:2 B
+Types:Legendary Creature Human Avatar Soldier
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw1 | TriggerDescription$ Whenever NICKNAME enters or attacks, you may sacrifice another creature. If you do, draw a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw1 | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, you may sacrifice another creature. If you do, draw a card.
+SVar:TrigDraw1:AB$ Draw | Cost$ Sac<1/Creature.Other/another creature>
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another creature dies, target opponent loses 1 life and you gain 1 life. If this is the fourth time this ability has resolved this turn, transform Sephiroth.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ4 | Mode$ Transform
+SVar:X:Count$ResolvedThisTurn
+AlternateMode:DoubleFaced
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice
+Oracle:Whenever Sephiroth enters or attacks, you may sacrifice another creature. If you do, draw a card.\nWhenever another creature dies, target opponent loses 1 life and you gain 1 life. If this is the fourth time this ability has resolved this turn, transform Sephiroth.
+
+ALTERNATE
+
+Name:Sephiroth, One-Winged Angel
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Angel Nightmare Avatar
+PT:5/5
+K:Flying
+R:Event$ Transform | ValidCard$ Card.Self | ReplaceWith$ DBEffect | Description$ Super Nova — As this creature transforms into CARDNAME, you get an emblem with "Whenever a creature dies, target opponent loses 1 life and you gain 1 life."
+SVar:DBEffect:DB$ Effect | Name$ Emblem — Sephiroth, One-Winged Angel | Image$ emblem_sephiroth_one_winged_angel | Triggers$ TrigChangesZone | Duration$ Permanent
+SVar:TrigChangesZone:Mode$ ChangesZone | ValidCard$ Creature | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLoseLifeEmblem | TriggerZones$ Command | TriggerDescription$ Whenever a creature dies, target opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLifeEmblem:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLifeEmblem
+SVar:DBGainLifeEmblem:DB$ GainLife | Defined$ You | LifeAmount$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw2 | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, you may sacrifice any number of other creatures. If you do, draw that many cards.
+SVar:TrigDraw2:AB$ Draw | Cost$ Sac<X/Creature.Other/another creature> | NumCards$ X
+SVar:X:Count$xPaid
+Oracle:Flying\nSuper Nova — As this creature transforms into Sephiroth, One-Winged Angel, you get an emblem with "Whenever a creature dies, target opponent loses 1 life and you gain 1 life."\nWhenever Sephiroth attacks, you may sacrifice any number of other creatures. If you do, draw that many cards.

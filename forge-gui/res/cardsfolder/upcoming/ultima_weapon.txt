@@ -1,0 +1,9 @@
+Name:Ultima Weapon
+ManaCost:7
+Types:Legendary Artifact Equipment
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature attacks, destroy target creature an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 7 | AddToughness$ 7 | AddSVar$ AE | Description$ Equipped creature gets +7/+7.
+K:Equip:7
+SVar:AE:SVar:HasAttackEffect:TRUE
+Oracle:Whenever equipped creature attacks, destroy target creature an opponent controls.\nEquipped creature gets +7/+7.\nEquip {7}

@@ -1,0 +1,9 @@
+Name:Sabin, Master Monk
+ManaCost:4 R
+Types:Legendary Creature Human Noble Monk
+PT:4/3
+K:Double Strike
+K:Blitz:2 R R Discard<1/Card>
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | ValidSA$ Spell.Blitz | AffectedZone$ Graveyard | EffectZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard using its blitz ability.
+DeckHas:Ability$Sacrifice|Graveyard
+Oracle:Double strike\nBlitz—{2}{R}{R}, Discard a card. (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)\nYou may cast this card from your graveyard using its blitz ability.

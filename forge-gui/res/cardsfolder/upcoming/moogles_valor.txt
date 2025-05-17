@@ -1,0 +1,7 @@
+Name:Moogles' Valor
+ManaCost:3 W W
+Types:Instant
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_2_moogle_lifelink | TokenOwner$ You | SubAbility$ DBPumpAll | SpellDescription$ For each creature you control, create a 1/2 white Moogle creature token with lifelink. Then creatures you control gain indestructible until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:For each creature you control, create a 1/2 white Moogle creature token with lifelink. Then creatures you control gain indestructible until end of turn.

@@ -1,0 +1,10 @@
+Name:Rinoa Heartilly
+ManaCost:3 G W
+Types:Legendary Creature Human Rebel Warlock
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create Angelo, a legendary 1/1 green and white Dog creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ angelo | TokenOwner$ You
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature you control gets +1/+1 until end of turn for each creature you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:When Rinoa Heartilly enters, create Angelo, a legendary 1/1 green and white Dog creature token.\nAngelo Cannon — Whenever Rinoa Heartilly attacks, another target creature you control gets +1/+1 until end of turn for each creature you control.

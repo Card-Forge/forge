@@ -1,0 +1,11 @@
+Name:Ultimate Magic: Meteor
+ManaCost:5 R
+Types:Sorcery
+K:Foretell:5 R
+A:SP$ DamageAll | ValidCards$ Creature | NumDmg$ 7 | SubAbility$ DBRepeat | SpellDescription$ CARDNAME deals 7 damage to each creature. If this spell was cast from exile, for each opponent, choose an artifact or land that player controls. Destroy the chosen permanents.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBDestroy
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Artifact.ControlledBy Remembered,Land.ControlledBy Remembered | Mandatory$ True | RememberChosen$ True
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Permanent.IsRemembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:X:Count$wasCastFromExile.1.0
+Oracle:Ultimate Magic: Meteor deals 7 damage to each creature. If this spell was cast from exile, for each opponent, choose an artifact or land that player controls. Destroy the chosen permanents.\nForetell {5}{R} (During your turn, you may pay 2 and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
