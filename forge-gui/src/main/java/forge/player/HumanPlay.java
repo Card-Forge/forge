@@ -99,7 +99,7 @@ public class HumanPlay {
                     // need to get the changed card if able
                     rollback.turnFaceDown(true);
                     if (rollback.isInZone(ZoneType.Exile)) {
-                        rollback.addMayLookTemp(p);
+                        rollback.addMayLookFaceDownExile(p);
                     }
                 }
             }
