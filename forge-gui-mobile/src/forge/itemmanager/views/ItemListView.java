@@ -276,6 +276,10 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         w -= padding;
                     }
                     renderer.drawValue(g, value, font, foreColor, backColor, pressed, x + 1, y, w - 2, h); //x + 1 and w - 2 to account for left and right borders
+                    if(itemManager.itemIsFavorite(value)) {
+                        float starSize = h * 0.35f;
+                        g.drawImage(FSkinImage.HDSTAR_FILLED, x + 1, y, starSize, starSize);
+                    }
                 }
             });
             setFont(FSkinFont.get(14));

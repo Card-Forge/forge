@@ -36,18 +36,18 @@ public class LimitedPlayerAI extends LimitedPlayer {
         }
 
         DraftPack chooseFrom = packQueue.peek();
+        debugPrint("Pack: " + chooseFrom);
         if (chooseFrom.isEmpty()) {
+            debugPrint("Skipped (Empty pack)");
             return null;
         }
 
         CardPool pool = deck.getOrCreate(DeckSection.Sideboard);
-        if (ForgePreferences.DEV_MODE) {
-            System.out.println("Player[" + order + "] pack: " + chooseFrom);
-        }
 
         PaperCard bestPick;
         if (hasArchdemonCurse()) {
             bestPick = pickFromArchdemonCurse(chooseFrom);
+            debugPrint("Pick forced by Archdemon Curse.");
         } else {
             final ColorSet chosenColors = deckCols.getChosenColors();
             final boolean canAddMoreColors = deckCols.canChoseMoreColors();
@@ -60,9 +60,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
             }
         }
 
-        if (ForgePreferences.DEV_MODE) {
-            System.out.println("Player[" + order + "] picked: " + bestPick);
-        }
+        debugPrint("Picked: " + bestPick);
 
         return bestPick;
     }
@@ -312,5 +310,11 @@ public class LimitedPlayerAI extends LimitedPlayer {
         }
 
         return null;
+    }
+
+    private void debugPrint(String text) {
+        if(!ForgePreferences.DEV_MODE)
+            return;
+        System.out.println("Player[" + order + "] - " + text);
     }
 }

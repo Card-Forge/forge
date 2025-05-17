@@ -23,6 +23,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 
@@ -48,13 +49,9 @@ import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.toolbox.FLabel;
-import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.util.*;
 
@@ -70,14 +67,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean hideFilters = false;
     private boolean wantUnique = false;
     private boolean showRanking = false;
-    private boolean showNFSWatermark = false;
+    private boolean showPriceInfo = false;
     private boolean multiSelectMode = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
     private ContextMenu contextMenu;
     private final Class<T> genericType;
     private ItemManagerConfig config;
-    private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet;
+    private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet, fnFavoriteGet;
     private boolean viewUpdating, needSecondUpdate;
     private Supplier<List<ItemColumn>> sortCols = Suppliers.memoize(ArrayList::new);
     private final TextSearchFilter<? extends T> searchFilter;
@@ -270,10 +267,20 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         setViewIndex(config0.getViewIndex());
         setHideFilters(config0.getHideFilters());
 
-        if (colOverrides == null || !colOverrides.containsKey(ColumnDef.NEW)) {
+        if(colOverrides == null) {
             fnNewGet = null;
-        } else {
-            fnNewGet = colOverrides.get(ColumnDef.NEW).getFnDisplay();
+            fnFavoriteGet = ColumnDef.FAVORITE.fnDisplay;
+        }
+        else {
+            if (!colOverrides.containsKey(ColumnDef.NEW))
+                fnNewGet = null;
+            else
+                fnNewGet = colOverrides.get(ColumnDef.NEW).getFnDisplay();
+
+            if (!colOverrides.containsKey(ColumnDef.FAVORITE))
+                fnFavoriteGet = ColumnDef.FAVORITE.fnDisplay;
+            else
+                fnFavoriteGet = colOverrides.get(ColumnDef.FAVORITE).getFnDisplay();
         }
     }
 
@@ -289,6 +296,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             }
         }
         return null;
+    }
+
+    public boolean itemIsFavorite(Entry<? extends InventoryItem, Integer> item) {
+        if(fnFavoriteGet == null)
+            return false;
+        Integer favorite = (Integer) fnFavoriteGet.apply(item);
+        return favorite != null && favorite != 0;
     }
 
     public abstract class ItemRenderer {
@@ -516,6 +530,21 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void setSelectedIndices(Iterable<Integer> indices) {
         currentView.setSelectedIndices(indices);
+    }
+
+    public void setSelectedIndexRelative(int indexOffset) {
+        int current = getSelectedIndex();
+        int size = getItemCount();
+        if(size == 0)
+            return;
+        //Desired behavior: if we're on item 8 out of 10, and we move the selection by 5, stop at item 10 first.
+        //A second input will wrap the selection around to item 1 again.
+        if(current <= 0 && indexOffset < 0)
+            setSelectedIndex(size - 1);
+        else if(current >= size - 1 && indexOffset > 0)
+            setSelectedIndex(0);
+        else
+            setSelectedIndex(Math.max(0, Math.min(current + indexOffset, size - 1)));
     }
 
     public void addItem(final T item, int qty) {
@@ -876,8 +905,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return showRanking;
     }
 
-    public boolean showNFSWatermark() {
-        return showNFSWatermark;
+    public boolean showPriceInfo() {
+        ItemColumn currentSort = cbxSortOptions.getSelectedItem();
+        if(currentSort != null && currentSort.getConfig().getDef() == ColumnDef.PRICE)
+            return true;
+        return showPriceInfo;
     }
 
     public void setWantUnique(boolean unique) {
@@ -888,8 +920,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         showRanking = showRanking0;
     }
 
-    public void setShowNFSWatermark(boolean val) {
-        showNFSWatermark = val;
+    public void setShowPriceInfo(boolean val) {
+        showPriceInfo = val;
     }
 
     public void setSelectionSupport(int minSelections0, int maxSelections0) {
@@ -1003,7 +1035,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private class ContextMenu extends FDropDownMenu {
         @Override
         protected void buildMenu() {
-            if (getSelectedItem() == null)
+            if(getSelectedItem() == null)
                 return;
             contextMenuBuilder.buildMenu(this, getSelectedItem());
         }
@@ -1026,6 +1058,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             float screenWidth = screen.getWidth();
             float screenHeight = screen.getHeight();
 
+            Rectangle scrollerBounds = currentView.getScroller().screenPos;;
+
             paneSize = updateAndGetPaneSize(screenWidth, screenHeight);
             float w = paneSize.getWidth();
             float h = paneSize.getHeight();
@@ -1036,6 +1070,14 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 //try displaying right of selection if possible
                 float x = bounds.x + bounds.width;
                 float y = bounds.y;
+
+                if(x < scrollerBounds.x)
+                    x = scrollerBounds.x;
+                if(y < scrollerBounds.y)
+                    y = scrollerBounds.y;
+
+                boolean tooNarrow = false;
+
                 if (x + w > screenWidth) {
                     //try displaying left of selection if possible
                     x = bounds.x - w;
@@ -1050,10 +1092,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                             x = screenWidth - w;
                         }
                         y += bounds.height;
+                        tooNarrow = true;
                     }
                 }
                 if (y + h > screenHeight) {
-                    if (y == bounds.y) {
+                    if (tooNarrow) {
                         //if displaying to left or right, move up if not enough room
                         y = screenHeight - h;
                     } else {
@@ -1067,7 +1110,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                         }
                     }
                 }
-                if (Forge.isLandscapeMode() && getSelectedItem() instanceof InventoryItem) {
+                if (Forge.isLandscapeMode() && getSelectedItem() != null) {
                     if (instance instanceof SpellShopManager) {
                         if (instance.currentView == imageView) {
                             x = instance.itemLeft + instance.itemWidth / 2 - this.getWidth() / 2;
@@ -1103,5 +1146,61 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             return 0f;
         }
         return filters.get().get(filters.get().size() - 1).getWidget().getWidth();
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if(isContextMenuOpen()) {
+            switch (keyCode) {
+                case Input.Keys.DPAD_UP:
+                    selectPreviousContext();
+                    return true;
+                case Input.Keys.DPAD_DOWN:
+                    selectNextContext();
+                    return true;
+                case Input.Keys.BUTTON_A:
+                    activateSelectedContext();
+                    return true;
+                case Input.Keys.BUTTON_B:
+                    closeMenu();
+                    return true;
+                case Input.Keys.BUTTON_Y:
+                case Input.Keys.BUTTON_L1:
+                    closeMenu();
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        boolean usingListView = currentView == listView;
+        switch(keyCode) {
+            case(Input.Keys.DPAD_RIGHT):
+                setSelectedIndexRelative(usingListView ? 10 : 1);
+                return true;
+            case Input.Keys.DPAD_LEFT:
+                setSelectedIndexRelative(usingListView ? -10 : -1);
+                return true;
+            case Input.Keys.DPAD_DOWN:
+                setSelectedIndexRelative(usingListView ? 1 : getConfig().getImageColumnCount());
+                return true;
+            case Input.Keys.DPAD_UP:
+                setSelectedIndexRelative(usingListView ? -1 : -getConfig().getImageColumnCount());
+                return true;
+            case Input.Keys.BUTTON_A:
+                showMenu(true);
+                return true;
+            case Input.Keys.BUTTON_Y:
+                if(getCurrentView().getSelectionCount() > 0) {
+                    getCurrentView().zoomSelected();
+                    return true;
+                }
+                break;
+            case Input.Keys.BUTTON_L1:
+                setViewIndex(config.getViewIndex() == 1 ? 0 : 1);
+                return true;
+        }
+
+        return false;
     }
 }
