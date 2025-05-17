@@ -1,10 +1,15 @@
 package forge.token;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
+import forge.item.IPaperCard;
 import forge.item.PaperToken;
+import forge.util.Aggregates;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -23,8 +28,8 @@ public class TokenDb implements ITokenDatabase {
 
     // The image names should be the same as the script name + _set
     // If that isn't found, consider falling back to the original token
-
-    private final Map<String, PaperToken> tokensByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
+    private final Multimap<String, PaperToken> allTokenByName = HashMultimap.create();
+    private final Map<String, PaperToken> extraTokensByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
 
     private final CardEdition.Collection editions;
     private final Map<String, CardRules> rulesByName;
@@ -38,38 +43,79 @@ public class TokenDb implements ITokenDatabase {
         return this.rulesByName.containsKey(rule);
 
     }
-    @Override
-    public PaperToken getToken(String tokenName) {
-        return getToken(tokenName, CardEdition.UNKNOWN.getName());
-    }
 
     public void preloadTokens() {
         for (CardEdition edition : this.editions) {
-            for (String name : edition.getTokens().keySet()) {
-                try {
-                    getToken(name, edition.getCode());
-                } catch(Exception e) {
-                    System.out.println(name + "_" + edition.getCode() + " defined in Edition file, but not defined as a token script.");
+            for (Map.Entry<String, Collection<CardEdition.EditionEntry>> inSet : edition.getTokens().asMap().entrySet()) {
+                String name = inSet.getKey();
+                String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+                for (CardEdition.EditionEntry t : inSet.getValue()) {
+                    allTokenByName.put(fullName, addTokenInSet(edition, name, t));
                 }
             }
         }
     }
 
+    protected boolean loadTokenFromSet(CardEdition edition, String name) {
+        String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+        if (allTokenByName.containsKey(fullName)) {
+            return true;
+        }
+        if (!edition.getTokens().containsKey(name)) {
+            return false;
+        }
+
+        for (CardEdition.EditionEntry t : edition.getTokens().get(name)) {
+            allTokenByName.put(fullName, addTokenInSet(edition, name, t));
+        }
+        return true;
+    }
+
+    protected PaperToken addTokenInSet(CardEdition edition, String name, CardEdition.EditionEntry t) {
+        return new PaperToken(rulesByName.get(name), edition, name, t.collectorNumber(), t.artistName());
+    }
+
+    // try all editions to find token
+    protected PaperToken fallbackToken(String name) {
+        for (CardEdition edition : this.editions) {
+            String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+            if (loadTokenFromSet(edition, name)) {
+                return Aggregates.random(allTokenByName.get(fullName));
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public PaperToken getToken(String tokenName) {
+        return getToken(tokenName, CardEdition.UNKNOWN.getCode());
+    }
+
     @Override
     public PaperToken getToken(String tokenName, String edition) {
-        String fullName = String.format("%s_%s", tokenName, edition.toLowerCase());
+        CardEdition realEdition = editions.getEditionByCodeOrThrow(edition);
+        String fullName = String.format("%s_%s", tokenName, realEdition.getCode().toLowerCase());
 
-        if (!tokensByName.containsKey(fullName)) {
+        // token exist in Set, return one at random
+        if (loadTokenFromSet(realEdition, tokenName)) {
+            return Aggregates.random(allTokenByName.get(fullName));
+        }
+        PaperToken fallback = this.fallbackToken(tokenName);
+        if (fallback != null) {
+            return fallback;
+        }
+
+        if (!extraTokensByName.containsKey(fullName)) {
             try {
-                PaperToken pt = new PaperToken(rulesByName.get(tokenName), editions.get(edition), tokenName);
-                tokensByName.put(fullName, pt);
+                PaperToken pt = new PaperToken(rulesByName.get(tokenName), realEdition, tokenName, "", IPaperCard.NO_ARTIST_NAME);
+                extraTokensByName.put(fullName, pt);
                 return pt;
             } catch(Exception e) {
                 throw e;
             }
         }
 
-        return tokensByName.get(fullName);
+        return extraTokensByName.get(fullName);
     }
 
     @Override
@@ -119,7 +165,7 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public List<PaperToken> getAllTokens() {
-        return new ArrayList<>(tokensByName.values());
+        return new ArrayList<>(allTokenByName.values());
     }
 
     @Override
@@ -139,6 +185,6 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public Iterator<PaperToken> iterator() {
-        return tokensByName.values().iterator();
+        return allTokenByName.values().iterator();
     }
 }

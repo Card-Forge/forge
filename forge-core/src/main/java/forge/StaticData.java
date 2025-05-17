@@ -1001,14 +1001,14 @@ public class StaticData {
             if (realSetCode != null) {
                 CardEdition.EditionEntry ee = this.editions.get(realSetCode).findOther(name);
                 if (ee != null) { // TODO add collector Number and new ImageKey format
-                    return ImageKeys.getTokenKey(name + "_" + realSetCode.toLowerCase());
+                    return ImageKeys.getTokenKey(String.format("%s|%s|%s", name, realSetCode, ee.collectorNumber()));
                 }
             }
         }
         for (CardEdition e : this.editions) {
             CardEdition.EditionEntry ee = e.findOther(name);
             if (ee != null) { // TODO add collector Number and new ImageKey format
-                return ImageKeys.getTokenKey(name + "_" + e.getCode().toLowerCase());
+                return ImageKeys.getTokenKey(String.format("%s|%s|%s", name, e.getCode(), ee.collectorNumber()));
             }
         }
         // final fallback
