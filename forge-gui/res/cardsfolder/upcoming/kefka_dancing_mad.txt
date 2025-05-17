@@ -10,6 +10,6 @@ SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Change
 SVar:DBPlayThem:DB$ Play | Valid$ Card.IsRemembered+nonLand | ValidZone$ Exile | ValidSA$ Spell | Controller$ You | WithoutManaCost$ True | Amount$ All | ImprintPlayed$ True | Optional$ True | SubAbility$ DBRepeatTwo
 SVar:DBRepeatTwo:DB$ RepeatEach | RepeatPlayers$ ImprintedOwner | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True| ClearImprinted$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True | ClearImprinted$ True
 SVar:X:Count$ValidAll Card.IsImprinted+OwnedBy Remembered$CardManaCost
 Oracle:During your turn, Kefka has indestructible.\nAt the beginning of your end step, exile a card at random from each opponent's graveyard. You may cast any number of spells from among cards exiled this way without paying their mana costs. Then each player who owns a spell you cast this way loses life equal to its mana value.
