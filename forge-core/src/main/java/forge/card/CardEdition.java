@@ -1001,4 +1001,12 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
         return 0;
     }
+
+    public boolean hasBasicLands() {
+        for(String landName : MagicColor.Constant.BASIC_LANDS) {
+            if (null == StaticData.instance().getCommonCards().getCard(landName, this.getCode(), 0))
+                return false;
+        }
+        return true;
+    }
 }

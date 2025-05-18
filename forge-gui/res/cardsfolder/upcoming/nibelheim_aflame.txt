@@ -1,0 +1,11 @@
+Name:Nibelheim Aflame
+ManaCost:2 R R
+Types:Sorcery
+K:Flashback:5 R R
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ IgnitionDamage | StackDescription$ SpellDescription | SpellDescription$ Choose target creature you control. It deals damage equal to its power to each other creature. If this spell was cast from a graveyard, discard your hand and draw four cards.
+SVar:IgnitionDamage:DB$ DamageAll | ValidCards$ Creature.NotDefinedTargeted | DamageSource$ ParentTarget | NumDmg$ X | SubAbility$ DBDiscard | StackDescription$ None
+SVar:DBDiscard:DB$ Discard | Mode$ Hand | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | SubAbility$ DBDraw | StackDescription$ None
+SVar:DBDraw:DB$ Draw | NumCards$ 4 | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | StackDescription$ None
+SVar:X:ParentTargeted$CardPower
+SVar:Y:Count$wasCastFromGraveyard.1.0
+Oracle:Choose target creature you control. It deals damage equal to its power to each other creature. If this spell was cast from a graveyard, discard your hand and draw four cards.\nFlashback {5}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

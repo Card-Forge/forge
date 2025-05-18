@@ -1409,7 +1409,7 @@ public abstract class GameState {
                 } else if (info.equals("Foretold")) {
                     c.setForetold(true);
                     c.turnFaceDown(true);
-                    c.addMayLookTemp(c.getOwner());
+                    c.addMayLookFaceDownExile(c.getOwner());
                 } else if (info.equals("ForetoldThisTurn")) {
                     c.setTurnInZone(turn);
                 } else if (info.equals("IsToken")) {

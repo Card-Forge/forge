@@ -3135,7 +3135,7 @@ public class CardFactoryUtil {
                     c.setForetold(true);
                     c.turnFaceDown(true);
                     // look at the exiled card
-                    c.addMayLookTemp(getActivatingPlayer());
+                    c.addMayLookFaceDownExile(getActivatingPlayer());
 
                     // only done when the card is foretold by the static ability
                     getActivatingPlayer().addForetoldThisTurn();

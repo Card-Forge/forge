@@ -83,7 +83,7 @@ ScryfallCode=FIC
 75 R Yuna's Whistle @Norikatsu Miyoshi
 76 R Aerith, Last Ancient @Marta Nael
 77 R Ardbert, Warrior of Darkness @Thanh Tuấn
-78 R Banon, the Returners' Leader @
+78 R Banon, the Returners' Leader @Daniel Landerman
 79 R Barret, Avalanche Leader @J. Schirmer & M. Verhasselt
 80 R Edgar, Master Machinist @Immanuela Crovius
 81 R Emet-Selch of the Third Seat @Magali Villeneuve
@@ -94,12 +94,12 @@ ScryfallCode=FIC
 86 R Krile Baldesion @Jason Kiantoro
 87 R Locke, Treasure Hunter @AKAGI
 88 R Lyse Hext @Ramza Psyru
-89 R Mog, Moogle Warrior @
+89 R Mog, Moogle Warrior @otumami
 90 R Papalymo Totolymo @Immanuela Crovius
 91 R Red XIII, Proud Warrior @Anna Podedworna
 92 R Sephiroth, Fallen Hero @Ittoku
-93 R Setzer, Wandering Gambler @
-94 R Shelinda, Yevon Acolyte @
+93 R Setzer, Wandering Gambler @Norikatsu Miyoshi
+94 R Shelinda, Yevon Acolyte @Shiren
 95 R Sin, Unending Cataclysm @Aldo Domínguez
 96 R Urianger Augurelt @Vilhelmas Banys
 97 R Wakka, Devoted Guardian @Kieran Yanner
@@ -170,7 +170,7 @@ ScryfallCode=FIC
 162 R Tromell, Seymour's Butler @Kotetsu Kinoshita
 163 R Aerith, Last Ancient @Marta Nael
 164 R Ardbert, Warrior of Darkness @Thanh Tuấn
-165 R Banon, the Returners' Leader @
+165 R Banon, the Returners' Leader @Daniel Landerman
 166 R Barret, Avalanche Leader @J. Schirmer & M. Verhasselt
 167 M Celes, Rune Knight @Néstor Ossandón Leal
 168 M Cloud, Ex-SOLDIER @Justyna Dura
@@ -184,12 +184,12 @@ ScryfallCode=FIC
 176 R Krile Baldesion @Jason Kiantoro
 177 R Locke, Treasure Hunter @AKAGI
 178 R Lyse Hext @Ramza Psyru
-179 R Mog, Moogle Warrior @
+179 R Mog, Moogle Warrior @otumami
 180 R Papalymo Totolymo @Immanuela Crovius
 181 R Red XIII, Proud Warrior @Anna Podedworna
 182 R Sephiroth, Fallen Hero @Ittoku
-183 R Setzer, Wandering Gambler @
-184 R Shelinda, Yevon Acolyte @
+183 R Setzer, Wandering Gambler @Norikatsu Miyoshi
+184 R Shelinda, Yevon Acolyte @Shiren
 185 R Sin, Unending Cataclysm @Aldo Domínguez
 186 M Terra, Herald of Hope @Marta Nael
 187 M Tidus, Yuna's Guardian @Nijihayashi

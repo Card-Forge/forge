@@ -1,0 +1,7 @@
+Name:Poison the Waters
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBPumpAll,DBDiscard | CharmNum$ 1
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn.
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Artifact,Creature | SpellDescription$ Target player reveals their hand. You choose an artifact or creature card from it. That player discards that card.
+Oracle:Choose one —\n• All creatures get -1/-1 until end of turn.\n• Target player reveals their hand. You choose an artifact or creature card from it. That player discards that card.

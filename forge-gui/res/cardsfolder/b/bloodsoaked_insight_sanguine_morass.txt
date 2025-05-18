@@ -5,7 +5,7 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Activator$ You | Amoun
 SVar:X:Count$LifeOppsLostThisTurn
 A:SP$ Dig | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Target opponent exiles the top three cards of their library. Until the end of your next turn, you may play those cards. If you cast a spell this way, mana of any type can be spent to cast it.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STLookPlay | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:STLookPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any type to cast spells this way.
+SVar:STLookPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any type to cast spells this way.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:Modal
 Oracle:This spell costs 1 less to cast for each 1 life your opponents have lost this turn.\nTarget opponent exiles the top three cards of their library. Until the end of your next turn, you may play those cards. If you cast a spell this way, mana of any type can be spent to cast it.
