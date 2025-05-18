@@ -566,12 +566,15 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return CardView.get(hostCard);
     }
 
-    protected List<IHasSVars> getSVarFallback() {
+    protected List<IHasSVars> getSVarFallback(final String name) {
         List<IHasSVars> result = Lists.newArrayList();
 
         if (this.getKeyword() != null && this.getKeyword().getStatic() != null) {
-            // TODO try to add the keyword instead if possible?
-            result.add(this.getKeyword().getStatic());
+            // only do when the keyword has part of the SVar in ins original string
+            if (name == null || this.getKeyword().getOriginal().contains(name)) {
+                // TODO try to add the keyword instead if possible?
+                result.add(this.getKeyword().getStatic());
+            }
         }
         if (getCardState() != null)
             result.add(getCardState());
@@ -579,7 +582,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return result;
     }
     protected Optional<IHasSVars> findSVar(final String name) {
-        return getSVarFallback().stream().filter(f -> f.hasSVar(name)).findFirst();
+        return getSVarFallback(name).stream().filter(f -> f.hasSVar(name)).findFirst();
     }
 
     @Override
@@ -615,7 +618,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     public Map<String, String> getSVars() {
         Map<String, String> res = Maps.newHashMap();
         // TODO reverse the order
-        for (IHasSVars s : getSVarFallback()) {
+        for (IHasSVars s : getSVarFallback(null)) {
             res.putAll(s.getSVars());
         }
         res.putAll(sVars);
