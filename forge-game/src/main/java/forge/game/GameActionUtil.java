@@ -947,14 +947,16 @@ public final class GameActionUtil {
         }
 
         if (fromZone != null && !fromZone.is(ZoneType.None)) { // and not a copy
+            // add back to where it came from, hopefully old state
+            // skip GameAction
+            oldCard.getZone().remove(oldCard);
+
             // might have been an alternative lki host
             oldCard = ability.getCardState().getCard();
 
             oldCard.setCastSA(null);
             oldCard.setCastFrom(null);
-            // add back to where it came from, hopefully old state
-            // skip GameAction
-            oldCard.getZone().remove(oldCard);
+
             // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
             Integer newPosition = zonePosition >= 0 ? Math.min(zonePosition, fromZone.size()) : null;
             fromZone.add(oldCard, newPosition, null, true);
