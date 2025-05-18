@@ -1,0 +1,10 @@
+Name:Zidane, Tantalus Thief
+ManaCost:3 R W
+Types:Legendary Creature Human Mutant Scout
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When NICKNAME enters, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains lifelink and haste until end of turn.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target creature an opponent controls | ValidTgts$ Creature.OppCtrl | LoseControl$ EOT | Untap$ True | AddKWs$ Lifelink & Haste
+T:Mode$ ChangesController | ValidCard$ Card.OppCtrl | ValidOriginalController$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent gains control of a permanent from you, you create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:PlayMain1:OPPONENTCREATURES
+Oracle:When Zidane enters, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains lifelink and haste until end of turn.\nWhenever an opponent gains control of a permanent from you, you create a Treasure token.

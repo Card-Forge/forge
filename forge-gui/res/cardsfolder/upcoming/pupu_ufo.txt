@@ -1,0 +1,10 @@
+Name:PuPu UFO
+ManaCost:2
+Types:Artifact Creature Construct Alien
+PT:0/4
+K:Flying
+A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ You | AILogic$ AtOppEOT | SpellDescription$ You may put a land card from your hand onto the battlefield.
+A:AB$ Animate | Cost$ 3 | Power$ X | SpellDescription$ Until end of turn, this creature's base power becomes equal to the number of Towns you control.
+SVar:X:Count$Valid Town.YouCtrl
+DeckHints:Type$Town
+Oracle:Flying\n{T}: You may put a land card from your hand onto the battlefield.\n{3}: Until end of turn, this creature's base power becomes equal to the number of Towns you control.
