@@ -646,24 +646,24 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
         // Loop through Landscapes and add them to unlockedEditions
         if (currentEvent == null) {
+            Map<String, CardEdition> editionsByName = new HashMap<>();
+            for (CardEdition e : FModel.getMagicDb().getEditions()) {
+                editionsByName.put(e.getName().toLowerCase(), e);
+            }
+
             String sketchbookPrefix = "landscape sketchbook - ";
             for (String itemName : AdventurePlayer.current().getItems()) {
-                if (itemName.toLowerCase().startsWith(sketchbookPrefix)) {
-                    // Extract the set name after the prefix
-                    String setName = itemName.substring(sketchbookPrefix.length()).trim();
+                if (!itemName.toLowerCase().startsWith(sketchbookPrefix)) {
+                    continue;
+                }
 
-                    // Find the matching set code in the editions database
-                    CardEdition edition = null;
-                    for (CardEdition e : FModel.getMagicDb().getEditions()) {
-                        if (e.getName().equalsIgnoreCase(setName)) {
-                            edition = e;
-                            break;
-                        }
-                    }
+                // Extract the set name after the prefix
+                String setName = itemName.substring(sketchbookPrefix.length()).trim();
+                CardEdition edition = editionsByName.get(setName.toLowerCase());
 
-                    if (edition != null && edition.hasBasicLands()) {
-                        unlockedEditions.add(edition);
-                    }
+                // Add the edition if found and it has basic lands
+                if (edition != null && edition.hasBasicLands()) {
+                    unlockedEditions.add(edition);
                 }
             }
         }
