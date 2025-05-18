@@ -6,14 +6,36 @@ Type=Collector_Edition
 ScryfallCode=FCA
 
 [cards]
-P1 R Force of Negation @Ittoku
-P2 R Arcane Denial @Mikio Masuda
 3 R Sram, Senior Edificer @Yoshitaka Amano
+5 M Urza, Lord High Artificer @Yoshitaka Amano
+6 R Venser, Shaper Savant @Yoshitaka Amano
 10 U Syr Konrad, the Grim @Yoshitaka Amano
+11 M Yawgmoth, Thran Physician @Yoshitaka Amano
 12 M Ancient Copper Dragon @Yoshitaka Amano
 16 M Nyxbloom Ancient @Yoshitaka Amano
+17 R Jodah, the Unifier @Yoshitaka Amano
+18 R Tymna the Weaver @Yoshitaka Amano
+19 R Winota, Joiner of Forces @Yoshitaka Amano
+22 U Danitha Capashen, Paragon @Square Enix
+25 R Mangara, the Diplomat @Toshitaka Matsuda
 27 U Wall of Omens @ISAMU KAMIKOKURYO
 28 U Brainstorm @Akihiko Yoshida
+31 M Rhystic Study @Square Enix
+33 U Deadly Dispute @Airi Yoshioka
+36 R K'rrik, Son of Yawgmoth @Yusuke Mogi
+40 U Lightning Bolt @Toshitaka Matsuda
+41 R Mizzix's Mastery @Toshitaka Matsuda
+42 M Najeela, the Blade-Blossom @Tetsuya Nomura
 43 M Ragavan, Nimble Pilferer @SHUKO MURASE
+46 U Fynn, the Fangbearer @Square Enix
+47 U Nature's Claim @Square Enix
 49 M Atraxa, Grand Unifier @Tetsuya Nomura
+50 R Bruse Tarl, Boorish Herder @Square Enix
+51 U Dovin's Veto @Akihiko Yoshida
+54 R Isshin, Two Heavens as One @Tetsuya Nomura
+57 R Muldrotha, the Gravetide @Chikako Nakano
+58 M Thrasios, Triton Hero @Square Enix
 60 R Yuriko, the Tiger's Shadow @Tetsuya Nomura
+62 R Smuggler's Copter @Square Enix
+63 U Strixhaven Stadium @Square Enix
+64 R Command Beacon @Square Enix

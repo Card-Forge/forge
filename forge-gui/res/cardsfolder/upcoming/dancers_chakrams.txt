@@ -1,4 +1,4 @@
-Name:Dancer's Chakram
+Name:Dancer's Chakrams
 ManaCost:3 W
 Types:Artifact Equipment
 K:Job select
