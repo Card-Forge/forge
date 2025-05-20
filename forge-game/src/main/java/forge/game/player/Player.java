@@ -844,6 +844,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         return Aggregates.max(getRegisteredOpponents(), GameEntity::getAssignedDamage);
     }
 
+    /**
+     * Get the greatest amount of combat damage assigned to a single player this turn.
+     */
+    public final int getMaxAssignedCombatDamage() {
+        return Aggregates.max(getRegisteredPlayers(), GameEntity::getAssignedCombatDamage);
+    }
+
     public final boolean canReceiveCounters(final CounterType type) {
         if (!isInGame()) {
             return false;
