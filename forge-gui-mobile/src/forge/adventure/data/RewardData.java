@@ -268,7 +268,7 @@ public class RewardData implements Serializable {
                     sketchbookItems.removeIf(new Predicate<ItemData>() {
                         @Override
                         public boolean test(ItemData itemData) {
-                            return !itemData.getName().contains("Landscape Sketchbook");
+                            return itemData.questItem || !itemData.getName().contains("Landscape Sketchbook");
                         }
                     });
 
