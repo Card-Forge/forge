@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Legendary Creature Human Knight
 PT:2/1
 K:Lifelink
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each land you control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Equipment you control.
 SVar:X:Count$Valid Equipment.YouCtrl
 Oracle:Lifelink\nAdelbert Steiner gets +1/+1 for each Equipment you control.
