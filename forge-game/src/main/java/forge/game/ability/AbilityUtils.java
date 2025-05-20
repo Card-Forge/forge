@@ -2409,6 +2409,10 @@ public class AbilityUtils {
             return doXMath(player.getMaxOpponentAssignedDamage(), expr, c, ctb);
         }
 
+        if (sq[0].equals("MaxCombatDamageThisTurn")) {
+            return doXMath(player.getMaxAssignedCombatDamage(), expr, c, ctb);
+        }
+
         if (sq[0].contains("TotalDamageThisTurn")) {
             String[] props = l[0].split(" ");
             int sum = 0;
