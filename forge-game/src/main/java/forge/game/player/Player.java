@@ -297,6 +297,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
     }
 
+    /**
+     * returns all players.
+     */
     public final PlayerCollection getRegisteredPlayers() {
         return game.getRegisteredPlayers();
     }
