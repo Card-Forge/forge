@@ -1,0 +1,7 @@
+Name:From Father to Son
+ManaCost:1 W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | DestinationAlternative$ Battlefield | DestAltSVar$ MANDATORY X | ChangeType$ Vehicle | SpellDescription$ Search your library for a Vehicle card, reveal it, and put it into your hand. If this spell was cast from a graveyard, put that card onto the battlefield instead. Then shuffle.
+K:Flashback:4 W W W
+SVar:X:Count$wasCastFromGraveyard.1.0
+Oracle:Search your library for a Vehicle card, reveal it, and put it into your hand. If this spell was cast from a graveyard, put that card onto the battlefield instead. Then shuffle.\nFlashback {4}{W}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
