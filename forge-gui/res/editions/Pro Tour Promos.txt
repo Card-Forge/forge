@@ -16,7 +16,8 @@ ScryfallCode=PPRO
 2017 M Emrakul, the Aeons Torn @Vincent Proce
 2018 R Noble Hierarch @Matt Stewart
 2019 R Arcbound Ravager @Chase Stone
-20201 R Cryptic Command @Jason Rainville
+2020-1 R Cryptic Command @Jason Rainville
+2020-2 R Surgical Extraction @Steven Belledin
 2020-3 R Aether Vial @Billy Christian
 2022-1 R Lava Spike @Igor Kieryluk
 2022-2 M Teferi, Hero of Dominaria @Chris Rallis
