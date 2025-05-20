@@ -1,0 +1,9 @@
+Name:The Earth Crystal
+ManaCost:2 G G
+Types:Legendary Artifact
+S:Mode$ ReduceCost | ValidCard$ Card.Green | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Green spells you cast cost {1} less to cast.
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ DoubleCounters | Description$ If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead.
+SVar:DoubleCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | Amount$ X
+A:AB$ PutCounter | Cost$ 4 G G T | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ Distribute two +1/+1 counters among one or two target creatures.
+SVar:X:ReplaceCount$CounterNum/Twice
+Oracle:Green spells you cast cost {1} less to cast.\nIf one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead.\n{4}{G}{G}, {T}: Distribute two +1/+1 counters among one or two target creatures you control.
