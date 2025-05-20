@@ -173,7 +173,7 @@ public class ListChooser<T> extends FContainer {
             lstChoices.setListData(list);
         }
         else {
-            lstChoices.setListData(IterableUtil.filter(list, IterableUtil.and(predicates)));
+            lstChoices.setListData(IterableUtil.filter(list, IterableUtil.<T>and(predicates)));
         }
 
         if (!lstChoices.isEmpty() && lstChoices.getMaxChoices() > 0) {
