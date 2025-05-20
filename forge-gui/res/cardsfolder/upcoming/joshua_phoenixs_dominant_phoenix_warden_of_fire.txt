@@ -22,7 +22,7 @@ Types:Legendary Enchantment Creature Saga Phoenix
 PT:4/4
 K:Chapter:3:DBRisingFlames,DBRisingFlames,DBFlamesOfRebirth
 SVar:DBRisingFlames:DB$ DealDamage | NumDmg$ 2 | Defined$ Player.Opponent | SpellDescription$ Rising Flames — NICKNAME deals 2 damage to each opponent.
-SVar:DBFlamesOfRebirth:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.YouOwn | MaxTotalTargetPower$ 6 | SubAbility$ DBExile | TgtPrompt$ Select any number of creature cards with total power 6 or less | SpellDescription$ Return any number of target creature cards with total mana value 6 or less from your graveyard to the battlefield. Exile NICKNAME, then return it to the battlefield (front face up).
+SVar:DBFlamesOfRebirth:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.YouOwn | MaxTotalTargetCMC$ 6 | SubAbility$ DBExile | TgtPrompt$ Select any number of creature cards with total mana value 6 or less | SpellDescription$ Return any number of target creature cards with total mana value 6 or less from your graveyard to the battlefield. Exile NICKNAME, then return it to the battlefield (front face up).
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | RememberChanged$ True
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
