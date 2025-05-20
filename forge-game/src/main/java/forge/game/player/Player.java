@@ -297,6 +297,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
     }
 
+    public final PlayerCollection getRegisteredPlayers() {
+        return game.getRegisteredPlayers();
+    }
+
     /**
      * returns all opponents.
      * Should keep player relations somewhere in the match structure
