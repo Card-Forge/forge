@@ -738,7 +738,7 @@
   "rewards": [
     {
       "count":4,
-      "cardName":"Forest"
+      "type": "landSketchbookShop"
     },
 	{
       "count":4,
