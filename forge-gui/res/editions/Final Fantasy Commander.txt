@@ -94,7 +94,7 @@ ScryfallCode=FIC
 86 R Krile Baldesion @Jason Kiantoro
 87 R Locke, Treasure Hunter @AKAGI
 88 R Lyse Hext @Ramza Psyru
-89 R Mog, Moogle Warrior @otumami
+89 R Mog, Moogle Warrior @OTUMAMI
 90 R Papalymo Totolymo @Immanuela Crovius
 91 R Red XIII, Proud Warrior @Anna Podedworna
 92 R Sephiroth, Fallen Hero @Ittoku
@@ -184,7 +184,7 @@ ScryfallCode=FIC
 176 R Krile Baldesion @Jason Kiantoro
 177 R Locke, Treasure Hunter @AKAGI
 178 R Lyse Hext @Ramza Psyru
-179 R Mog, Moogle Warrior @otumami
+179 R Mog, Moogle Warrior @OTUMAMI
 180 R Papalymo Totolymo @Immanuela Crovius
 181 R Red XIII, Proud Warrior @Anna Podedworna
 182 R Sephiroth, Fallen Hero @Ittoku
