@@ -16,3 +16,4 @@ F4 R Second City @Mark Rosewater
 6 M Ugin, the Spirit Dragon @Raymond Swanland
 7 R Sliver Hive @Igor Kieryluk
 F8 R All-You-Can-Eat Buffet @Mark Rosewater
+9 R Tifa Lockhart @Nijihayashi

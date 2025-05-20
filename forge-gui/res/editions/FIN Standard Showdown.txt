@@ -1,0 +1,10 @@
+[metadata]
+Code=PSS5
+Date=2025-06-13
+Name=FIN Standard Showdown
+Type=Promo
+ScryfallCode=PSS5
+
+[cards]
+1 R Ultima @Kotakan
+2 R Squall, SeeD Mercenary @Yuu Fujiki

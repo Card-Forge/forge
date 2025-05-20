@@ -28,7 +28,7 @@ ScryfallCode=SCH
 20 R Lier, Disciple of the Drowned @Heonhwa Choe
 21 R Mortify @Andreia Ugrai
 22 R Angel of Despair @Andreia Ugrai
-23 R Dauthi Voidwalker @Andreia Ugrai
+23e R Dauthi Voidwalker @Andreia Ugrai
 24 R Blazing Rootwalla @Brian Valeza
 25 R Hollow One @Adam Volker
 26 R Vengevine @Brian Valeza
@@ -44,3 +44,6 @@ ScryfallCode=SCH
 36 R Gleeful Demolition @Vincent Proce
 37 R Charming Scoundrel @Fabira Khamesh
 38 R Goddric, Cloaked Reveler @Irvin Rodriguez
+39 R Preordain @Toshiaki Takayama
+40 R Death's Shadow @Nottsuo
+41 R City of Brass @Yo Shimizu
