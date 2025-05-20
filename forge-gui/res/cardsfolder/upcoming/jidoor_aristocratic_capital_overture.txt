@@ -12,6 +12,6 @@ ALTERNATE
 Name:Overture
 ManaCost:4 U U
 Types:Sorcery Adventure
-A:SP$ Mill | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ X | SpellDescription$ Target player mills half their library, rounded down.
+A:SP$ Mill | ValidTgts$ Opponent | NumCards$ X | SpellDescription$ Target player mills half their library, rounded down.
 SVar:X:TargetedPlayer$CardsInLibrary/HalfDown
 Oracle:Target opponent mills half their library, rounded down.
