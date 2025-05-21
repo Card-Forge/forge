@@ -1,0 +1,12 @@
+Name:The Water Crystal
+ManaCost:2 U U
+Types:Legendary Artifact
+S:Mode$ ReduceCost | ValidCard$ Card.Blue | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Blue spells you cast cost {1} less to cast.
+R:Event$ Mill | ActiveZones$ Battlefield | ValidPlayer$ Player.Opponent | ReplaceWith$ MillPlus4 | Description$ If an opponent would mill one or more cards, they mill that many cards plus four instead.
+SVar:MillPlus4:DB$ ReplaceEffect | VarName$ Number | VarValue$ X
+A:AB$ Mill | Cost$ 4 U U T | Defined$ Opponent | NumCards$ Y | SpellDescription$ Each opponent mills cards equal to the number of cards in your hand.
+SVar:X:ReplaceCount$Number/Plus.4
+SVar:Y:Count$ValidHand Card.YouOwn
+DeckHas:Ability$Mill
+DeckHints:Ability$Mill
+Oracle:Blue spells you cast cost {1} less to cast.\nIf an opponent would mill one or more cards, they mill that many cards plus four instead.\n{4}{U}{U}, {T}: Each opponent mills cards equal to the number of cards in your hand.
