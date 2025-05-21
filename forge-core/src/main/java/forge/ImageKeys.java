@@ -23,10 +23,14 @@ public final class ImageKeys {
 
     public static final String HIDDEN_CARD           = "hidden";
     public static final String MORPH_IMAGE           = "morph";
-    public static final String DISGUISED_IMAGE       = "disguised";
     public static final String MANIFEST_IMAGE        = "manifest";
     public static final String CLOAKED_IMAGE         = "cloaked";
     public static final String FORETELL_IMAGE        = "foretell";
+    public static final String BLESSING_IMAGE        = "blessing";
+    public static final String INITIATIVE_IMAGE      = "initiative";
+    public static final String MONARCH_IMAGE         = "monarch";
+    public static final String THE_RING_IMAGE        = "the_ring";
+    public static final String RADIATION_IMAGE       = "radiation";
 
     public static final String BACKFACE_POSTFIX  = "$alt";
     public static final String SPECFACE_W = "$wspec";
@@ -98,8 +102,15 @@ public final class ImageKeys {
 
         final String dir;
         final String filename;
+        String[] tempdata = null;
         if (key.startsWith(ImageKeys.TOKEN_PREFIX)) {
-            filename = key.substring(ImageKeys.TOKEN_PREFIX.length());
+            tempdata = key.substring(ImageKeys.TOKEN_PREFIX.length()).split("\\|");
+            String tokenname = tempdata[0] + "_" + tempdata[1];
+            if (tempdata.length > 2) {
+                tokenname += "_" + tempdata[2];
+            }
+            filename = tokenname;
+
             dir = CACHE_TOKEN_PICS_DIR;
         } else if (key.startsWith(ImageKeys.ICON_PREFIX)) {
             filename = key.substring(ImageKeys.ICON_PREFIX.length());
@@ -139,6 +150,29 @@ public final class ImageKeys {
             if (file != null) {
                 cachedCards.put(filename, file);
                 return file;
+            }
+            if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
+                String setlessFilename = tempdata[0];
+                String setCode = tempdata[1];
+                String collectorNumber = tempdata.length > 2 ? tempdata[2] : "";
+
+                if (!collectorNumber.isEmpty()) {
+                    file = findFile(dir, setCode + "/" + collectorNumber + "_" + setlessFilename);
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                }
+                file = findFile(dir, setCode + "/" + setlessFilename);
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+                file = findFile(dir, setlessFilename);
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
             }
 
             // AE -> Ae and Ae -> AE for older cards with different file names
@@ -221,39 +255,7 @@ public final class ImageKeys {
                     return file;
                 }
             }
-            if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
-                int index = filename.lastIndexOf('_');
-                if (index != -1) {
-                    String setlessFilename = filename.substring(0, index);
-                    String setCode = filename.substring(index + 1);
-                    // try with upper case set
-                    file = findFile(dir, setlessFilename + "_" + setCode.toUpperCase());
-                    if (file != null) {
-                        cachedCards.put(filename, file);
-                        return file;
-                    }
-                    // try with lower case set
-                    file = findFile(dir, setlessFilename + "_" + setCode.toLowerCase());
-                    if (file != null) {
-                        cachedCards.put(filename, file);
-                        return file;
-                    }
-                    // try without set name
-                    file = findFile(dir, setlessFilename);
-                    if (file != null) {
-                        cachedCards.put(filename, file);
-                        return file;
-                    }
-                    // if there's an art variant try without it
-                    if (setlessFilename.matches(".*[0-9]*$")) {
-                        file = findFile(dir, setlessFilename.replaceAll("[0-9]*$", ""));
-                        if (file != null) {
-                            cachedCards.put(filename, file);
-                            return file;
-                        }
-                    }
-                }
-            } else if (filename.contains("/")) {
+            if (filename.contains("/")) {
                 String setlessFilename = filename.substring(filename.indexOf('/') + 1);
                 file = findFile(dir, setlessFilename);
                 if (file != null) {

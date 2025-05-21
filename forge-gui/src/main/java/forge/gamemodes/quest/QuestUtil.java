@@ -156,7 +156,7 @@ public class QuestUtil {
         script.add("Types:" + properties[5].replace(';', ' '));
         script.add("Oracle:"); // tokens don't have texts yet
         final String fileName = PaperToken.makeTokenFileName(properties[1], properties[2], properties[3], properties[4]);
-        return new PaperToken(CardRules.fromScript(script), CardEdition.UNKNOWN, fileName);
+        return new PaperToken(CardRules.fromScript(script), CardEdition.UNKNOWN, fileName, "", IPaperCard.NO_ARTIST_NAME);
     }
 
     /**

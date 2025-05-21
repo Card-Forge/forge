@@ -463,7 +463,13 @@ A248 U A-Skull Skaab @Nicholas Gregory
 12 g_3_1_boar @Nicholas Gregory
 13 g_1_1_insect @Joe Slucher
 14 g_2_2_wolf @Andrea Radeck
-15 gw_1_1_human_soldier_training @Unknown
+15 gw_1_1_human_soldier_training @Campbell White
 16 wb_1_1_vampire_lifelink @Zoltan Boros
 17 c_a_blood_draw @Miranda Meeks
 18 c_a_treasure_sac @Josu Hernaiz
+
+[other]
+19 copy @Brian Valeza
+20 emblem_chandra_dressed_to_kill @Viktor Titov
+21 day @Johan Grenier
+21 night @Johan Grenier

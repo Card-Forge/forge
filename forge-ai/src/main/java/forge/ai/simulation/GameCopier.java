@@ -96,7 +96,7 @@ public class GameCopier {
             newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
             newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
             newPlayer.setSpeed(origPlayer.getSpeed());
-            newPlayer.setBlessing(origPlayer.hasBlessing());
+            newPlayer.setBlessing(origPlayer.hasBlessing(), null);
             newPlayer.setRevolt(origPlayer.hasRevolt());
             newPlayer.setDescended(origPlayer.getDescended());
             newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
@@ -373,10 +373,10 @@ public class GameCopier {
             if (c.isFaceDown()) {
                 newCard.turnFaceDown(true);
                 if (c.isManifested()) {
-                    newCard.setManifested(true);
+                    newCard.setManifested(c.getManifestedSA());
                 }
                 if (c.isCloaked()) {
-                    newCard.setCloaked(true);
+                    newCard.setCloaked(c.getCloakedSA());
                 }
             }
             if (c.isMonstrous()) {

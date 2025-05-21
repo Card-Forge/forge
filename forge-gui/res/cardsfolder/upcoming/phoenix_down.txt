@@ -1,0 +1,7 @@
+Name:Phoenix Down
+ManaCost:W
+Types:Artifact
+A:AB$ Charm | Cost$ 1 W T Exile<1/CARDNAME> | Choices$ DBReturn,DBExile | CharmNum$ 1
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 4 or less in your graveyard | ValidTgts$ Creature.cmcLE4+YouOwn | Tapped$ True | SpellDescription$ Return target creature card with mana value 4 or less from your graveyard to the battlefield tapped.
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Skeleton,Spirit,Zombie | TgtPrompt$ Choose target Skeleton, Spirit, or Zombie | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target Skeleton, Spirit, or Zombie.
+Oracle:{1}{W},{T}, Exile this artifact: Choose one —\n• Return target creature card with mana value 4 or less from your graveyard to the battlefield tapped.\n• Exile target Skeleton, Spirit, or Zombie.

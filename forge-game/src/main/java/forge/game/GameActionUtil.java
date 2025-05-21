@@ -43,6 +43,7 @@ import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAlternativeCost;
 import forge.game.staticability.StaticAbilityLayer;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -418,7 +419,7 @@ public final class GameActionUtil {
         costSources.addAll(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         for (final Card ca : costSources) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions("OptionalCost")) {
+                if (!stAb.checkConditions(StaticAbilityMode.OptionalCost)) {
                     continue;
                 }
 
@@ -946,14 +947,16 @@ public final class GameActionUtil {
         }
 
         if (fromZone != null && !fromZone.is(ZoneType.None)) { // and not a copy
+            // add back to where it came from, hopefully old state
+            // skip GameAction
+            oldCard.getZone().remove(oldCard);
+
             // might have been an alternative lki host
             oldCard = ability.getCardState().getCard();
 
             oldCard.setCastSA(null);
             oldCard.setCastFrom(null);
-            // add back to where it came from, hopefully old state
-            // skip GameAction
-            oldCard.getZone().remove(oldCard);
+
             // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
             Integer newPosition = zonePosition >= 0 ? Math.min(zonePosition, fromZone.size()) : null;
             fromZone.add(oldCard, newPosition, null, true);

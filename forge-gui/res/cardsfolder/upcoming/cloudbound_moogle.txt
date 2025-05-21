@@ -1,0 +1,11 @@
+Name:Cloudbound Moogle
+ManaCost:3 W W
+Types:Creature Moogle
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature enters, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1
+K:TypeCycling:Plains:2
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen this creature enters, put a +1/+1 counter on target creature.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)

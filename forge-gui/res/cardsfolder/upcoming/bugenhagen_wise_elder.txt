@@ -1,0 +1,9 @@
+Name:Bugenhagen, Wise Elder
+ManaCost:1 G
+Types:Legendary Creature Human Shaman
+PT:1/3
+K:Reach
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+powerGE7 | PresentCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you control a creature with power 7 or greater, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Reach\nAt the beginning of your upkeep, if you control a creature with power 7 or greater, draw a card.\n{T}: Add one mana of any color.

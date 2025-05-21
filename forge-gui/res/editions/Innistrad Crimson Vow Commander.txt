@@ -196,11 +196,6 @@ ScryfallCode=VOC
 188 U Unclaimed Territory @Dimitar Marinski
 
 [tokens]
-0 c_a_blood_draw @Unknown
-0 c_a_treasure_sac @Unknown
-0 g_2_2_wolf @Unknown
-0 w_1_1_spirit_flying @Unknown
-0 wb_1_1_vampire_lifelink @Unknown
 1 c_1_1_spirit @Daniel Ljunggren
 2 w_4_4_angel_flying @Magali Villeneuve
 3 w_3_3_spirit_flying @Matt Thompson

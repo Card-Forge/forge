@@ -1,0 +1,6 @@
+Name:Ultima
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Artifact,Creature | SubAbility$ DBEndTurn | SpellDescription$ Destroy all artifacts and creatures. End the turn.
+SVar:DBEndTurn:DB$ EndTurn
+Oracle:Destroy all artifacts and creatures. End the turn.

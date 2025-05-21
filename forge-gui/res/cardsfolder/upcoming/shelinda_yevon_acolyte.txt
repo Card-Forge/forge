@@ -1,0 +1,12 @@
+Name:Shelinda, Yevon Acolyte
+ManaCost:G W
+Types:Legendary Creature Human Cleric
+PT:2/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ Whenever another creature you control enters, put a +1/+1 counter on that creature if its power is less than NICKNAME's power. Otherwise, put a +1/+1 counter on NICKNAME.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ LTY | TrueSubAbility$ PutCounterOne | FalseSubAbility$ PutCounterTwo
+SVar:PutCounterOne:DB$ PutCounter | Defined$ TriggeredCard | CounterType$ P1P1
+SVar:PutCounterTwo:DB$ PutCounter | Defined$ Self | CounterType$ P1P1
+SVar:X:TriggeredCard$CardPower
+SVar:Y:Count$CardPower
+Oracle:Lifelink\nWhenever another creature you control enters, put a +1/+1 counter on that creature if its power is less than Shelinda's power. Otherwise, put a +1/+1 counter on Shelinda.

@@ -35,6 +35,9 @@ ScryfallCode=MD1
 26 U Ghost Quarter @Peter Mohrbacher
 
 [tokens]
-0 c_1_1_a_phyrexian_myr @Unknown
 1 w_1_1_soldier @Goran Josic
 2 w_1_1_spirit_flying @Kev Walker
+3 c_1_1_a_phyrexian_myr @Matt Stewart
+
+[other]
+4 emblem_elspeth_knight_errant @Volkan Baǵa

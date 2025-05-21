@@ -182,9 +182,9 @@ ScryfallCode=ONC
 174 R Windbrisk Heights @Omar Rayyan
 
 [tokens]
-0 rw_1_1_soldier_haste @Unknown
 1 c_10_10_eldrazi @Jack Wang
-3 w_4_4_angel_flying @Volkan Baǵa
+2 w_4_4_angel_flying @Magali Villeneuve
+3 w_4_4_angel_flying_vigilance @Volkan Baǵa
 4 w_1_1_bird_flying @Howard Lyon
 5 w_1_1_human @Ben Maier
 6 w_1_1_human_soldier @Deruchenko Alexander
@@ -198,9 +198,12 @@ ScryfallCode=ONC
 14 g_3_3_elephant @Lars Grant-West
 15 g_1_1_phyrexian_insect_infect @Adrian Smith
 16 g_x_x_phyrexian_wurm_trample_toxic @Nicholas Gregory
-17 w_4_4_angel_flying_vigilance @Volkan Baǵa
+17 rw_1_1_soldier_haste @David Palumbo
 18 c_x_x_a_golem_haste @José Parodi
 19 c_1_1_a_myr @Ryan Pancoast
 20 c_x_x_a_phyrexian_horror @Scott Chou
 21 c_1_1_a_thopter_flying @Richard Wright
 23 b_0_0_phyrexian_germ @Igor Kieryluk
+
+[other]
+22 monarch @Volkan Baǵa

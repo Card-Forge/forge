@@ -1,0 +1,10 @@
+Name:Cloud's Limit Break
+ManaCost:1 W
+Types:Instant
+K:Tiered
+A:SP$ Charm | Choices$ DBCrossSlash,DBBladeBeam,DBOmnislash
+SVar:DBCrossSlash:DB$ Destroy | PrecostDesc$ Cross-Slash | ModeCost$ 0 | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
+SVar:DBBladeBeam:DB$ Destroy | PrecostDesc$ Blade Beam | ModeCost$ 1 | ValidTgts$ Creature.tapped | TargetMin$ 0 | TargetMax$ MaxTgt | TargetsWithDifferentControllers$ True | TgtPrompt$ Select any number of target tapped creatures with different controllers | SpellDescription$ Destroy any number of target tapped creatures with different controllers.
+SVar:DBOmnislash:DB$ DestroyAll | PrecostDesc$ Omnislash | ModeCost$ 3 W | ValidCards$ Creature.tapped | SpellDescription$ Destroy all tapped creatures.
+SVar:MaxTgt:PlayerCountPlayers$Amount
+Oracle:Tiered (Choose one additional cost.)\n• Cross-Slash — {0} — Destroy target tapped creature.\n• Blade Beam — {1} — Destroy any number of target tapped creatures with different controllers.\n• Omnislash — {3}{W} — Destroy all tapped creatures.

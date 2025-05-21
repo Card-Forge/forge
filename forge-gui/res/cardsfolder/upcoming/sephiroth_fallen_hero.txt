@@ -1,0 +1,10 @@
+Name:Sephiroth, Fallen Hero
+ManaCost:3 R W
+Types:Legendary Creature Human Avatar Soldier
+PT:7/5
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Jenova Cells — Whenever NICKNAME attacks, you may put a cell counter on target creature. Until end of turn, each modified creature you control has base power and toughness 7/5. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ CELL | CounterNum$ 1 | Optional$ True | SubAbility$ DBAnimateAll
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.modified+YouCtrl | Power$ 7 | Toughness$ 5
+A:AB$ ChangeZone | PrecostDesc$ The Reunion | Cost$ 3 Sac<1/Creature.modified/a modified creature> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return this card from your graveyard to the battlefield tapped.
+SVar:HasAttackEffect:TRUE
+Oracle:Jenova Cells — Whenever Sephiroth attacks, you may put a cell counter on target creature. Until end of turn, each modified creature you control has base power and toughness 7/5. (Equipment, Auras you control, and counters are modifications.)\nThe Reunion — {3}, Sacrifice a modified creature: Return this card from your graveyard to the battlefield tapped.

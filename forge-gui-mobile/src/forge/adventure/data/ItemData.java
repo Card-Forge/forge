@@ -88,4 +88,8 @@ public class ItemData {
         return result;
     }
 
+    public String getName() {
+        return name;
+    }
+
 }

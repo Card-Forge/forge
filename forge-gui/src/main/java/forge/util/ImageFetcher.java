@@ -129,6 +129,7 @@ public abstract class ImageFetcher {
         boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT));
         final String prefix = imageKey.substring(0, 2);
         File destFile = null;
+        String face = "";
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
             PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
             if (paperCard == null) {
@@ -144,7 +145,6 @@ public abstract class ImageFetcher {
                 return;
             String imagePath = ImageUtil.getImageRelativePath(paperCard, "", true, false);
             final boolean hasSetLookup = ImageKeys.hasSetLookup(imagePath);
-            String face = "";
             if (imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
                 face = "back";
             } else if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
@@ -228,47 +228,69 @@ public abstract class ImageFetcher {
                 this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
-            final String filename = imageKey.substring(2) + ".jpg";
+            String tmp = imageKey;
+            if (tmp.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
+                face = "back";
+                tmp = tmp.substring(0, tmp.length() - ImageKeys.BACKFACE_POSTFIX.length());
+            }
+            String[] tempdata = tmp.substring(2).split("\\|"); //We want to check the edition first.
+            String tokenName = tempdata[0];
+            String setCode = tempdata[1];
+
+            StringBuilder sb = new StringBuilder(setCode);
+            sb.append("/");
+            if (tempdata.length > 2) {
+                sb.append(tempdata[2]).append("_");
+            }
+            sb.append(tokenName);
+            if (tempdata.length <= 2 && !face.isEmpty()) {
+                sb.append("_").append(face);
+            }
+            sb.append(".jpg");
+
+            final String filename = sb.toString();
             if (ImageKeys.missingCards.contains(filename))
                 return;
 
             if (filename.equalsIgnoreCase("null.jpg"))
                 return;
 
-            String[] tempdata = imageKey.substring(2).split("[_](?=[^_]*$)"); //We want to check the edition first.
             if (tempdata.length < 2) {
                 System.err.println("Token image key is malformed: " + imageKey);
                 return;
             }
 
-            String tokenName = tempdata[0];
-            String setCode = tempdata[1];
 
             // Load the paper token from filename + edition
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
             if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
 
             //PaperToken pt = StaticData.instance().getAllTokens().getToken(tokenName, setCode);
-            Collection<CardEdition.TokenInSet> allTokens = edition.getTokens().get(tokenName);
+            Collection<CardEdition.EditionEntry> allTokens = edition.getTokens().get(tokenName);
 
-            if (!allTokens.isEmpty()) {
+            if (tempdata.length > 2) {
+                String tokenCode = edition.getTokensCode();
+                String langCode = edition.getCardsLangCode();
+                // just assume the CNr from the token image is valid
+                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tempdata[2], tokenCode, langCode, face));
+            } else if (!allTokens.isEmpty()) {
                 // This loop is going to try to download all the arts until it finds one
                 // This is a bit wrong since it _should_ just be trying to get the one with the appropriate collector number
                 // Since we don't have that for tokens, we'll just take the first one
                 // Ideally we would have some mapping for generating card to determine which art indexed/collector number to try to fetch
                 // Token art we're downloading and which location we're storing it in.
                 // Once we're pulling from PaperTokens this section will change a bit
-                Iterator <CardEdition.TokenInSet> it = allTokens.iterator();
-                CardEdition.TokenInSet tis;
+                Iterator <CardEdition.EditionEntry> it = allTokens.iterator();
+                CardEdition.EditionEntry tis;
                 while(it.hasNext()) {
                     tis = it.next();
                     String tokenCode = edition.getTokensCode();
                     String langCode = edition.getCardsLangCode();
-                    if (tis.collectorNumber == null || tis.collectorNumber.isEmpty()) {
+                    if (tis.collectorNumber() == null || tis.collectorNumber().isEmpty()) {
                         continue;
                     }
 
-                    downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber, tokenCode, langCode));
+                    downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(tis.collectorNumber(), tokenCode, langCode, face));
                 }
             }
 

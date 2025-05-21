@@ -1147,49 +1147,49 @@ Wyll, Blade of Frontiers|CLB
 Zevlor, Elturel Exile|CLB
 
 [tokens]
-0 1 w_0_1_goat @Forrest Imel @Unknown
-0 2 w_2_2_knight @Paolo Puggioni @Unknown
-0 3 w_1_1_pegasus_flying @Greg Hildebrandt @Unknown
-0 4 w_1_1_rabbit @Andrea Radeck @Unknown
-0 5 w_1_1_soldier @Magali Villeneuve @Unknown
-0 6 u_1_1_faerie_dragon_flying @Iris Compiet @Unknown
-0 7 b_3_3_demon @Dave Kendall @Unknown
-0 8 b_4_1_skeleton_menace @David Astruga @Unknown
-0 9 boo @Zoltan Boros @Unknown
-0 10 r_1_1_devil_burn @Josh Hass @Unknown
-0 11 r_4_4_dragon_flying @Kieran Yanner @Unknown
-0 12 g_2_2_boar @Tomek Larek @Unknown
-0 13 g_4_4_ox @Tomek Larek @Unknown
-0 14 g_1_1_saproling @David Szabo @Unknown
-0 15 g_1_1_squirrel @Daniel Ljunggren @Unknown
-0 16 c_1_1_a_construct @Jakub Kasper @Unknown
-0 17 c_a_treasure_sac @Dan Murayama Scott @Unknown
-0 18 volos_journal @Unknown @Unknown
-0 21 c_3_2_eldrazi_horror @Jason Felix @Unknown
-0 22 c_1_1_shapeshifter_changeling @Steve Prescott @Unknown
-0 23 c_2_2_shapeshifter_changeling @Johann Bodin @Unknown
-0 24 c_3_2_shapeshifter_changeling @Igor Grechanyi @Unknown
-0 25 w_4_4_angel_flying_vigilance @Unknown @Unknown
-0 26 w_1_1_human @Ben Maier @Unknown
-0 27 w_1_1_kor_warrior @Randy Vargas @Unknown
-0 28 u_2_2_shapeshifter_changeling @Filip Burburan @Unknown
-0 29 u_1_1_squid_islandwalk @Jack Wang @Unknown
-0 30 u_1_1_wizard_countersac @Denys Tsiperko @Unknown
-0 31 b_1_1_horror @Nino Is @Unknown
-0 32 b_2_1_warrior @Zoltan Boros @Unknown
-0 33 r_5_5_dragon_flying @Alex Konstad @Unknown
-0 34 r_1_1_goblin_all_attack @Wayne Reynolds @Unknown
-0 35 kobolds_of_kher_keep @Paolo Parente @Unknown
-0 36 r_3_3_ogre @Paul Bonner @Unknown
-0 37 r_1_1_pirate_noblock_all_attack @Jonathan Kuo @Unknown
-0 38 g_3_3_beast @Jesper Ejsing @Unknown
-0 39 g_3_3_centaur_pro_black @Martina Pilcerova @Unknown
-0 40 g_1_1_insect_flying_deathtouch @Martina Pilcerova @Unknown
-0 41 g_4_4_phyrexian_beast @Svetlin Velinov @Unknown
-0 42 g_1_2_spider_reach @Slawomir Maniak @Unknown
-0 43 g_2_2_wolf @Andrea Radeck @Unknown
-0 44 g_5_5_wurm @Slawomir Maniak @Unknown
-0 45 wb_2_1_inkling_flying @Scott Murphy @Unknown
-0 46 rg_2_2_satyr_haste @Johann Bodin @Unknown
-0 47 c_a_clue_draw @Campbell White @Unknown
-0 48 c_a_gold_sac @Yeong-Hao Han @Unknown
+1 w_0_1_goat @Forrest Imel
+2 w_2_2_knight @Paolo Puggioni
+3 w_1_1_pegasus_flying @Greg Hildebrandt
+4 w_1_1_rabbit @Andrea Radeck
+5 w_1_1_soldier @Magali Villeneuve
+6 u_1_1_faerie_dragon_flying @Iris Compiet
+7 b_3_3_demon @Dave Kendall
+8 b_4_1_skeleton_menace @David Astruga
+9 boo @Zoltan Boros
+10 r_1_1_devil_burn @Josh Hass
+11 r_4_4_dragon_flying @Kieran Yanner
+12 g_2_2_boar @Tomek Larek
+13 g_4_4_ox @Tomek Larek
+14 g_1_1_saproling @David Szabo
+15 g_1_1_squirrel @Daniel Ljunggren
+16 c_1_1_a_construct @Jakub Kasper
+17 c_a_treasure_sac @Dan Murayama Scott
+18 volos_journal @Zoltan Boros
+21 c_3_2_eldrazi_horror @Jason Felix
+22 c_1_1_shapeshifter_changeling @Steve Prescott
+23 c_2_2_shapeshifter_changeling @Johann Bodin
+24 c_3_2_shapeshifter_changeling @Igor Grechanyi
+25 w_4_4_angel_flying_vigilance @
+26 w_1_1_human @Ben Maier
+27 w_1_1_kor_warrior @Randy Vargas
+28 u_2_2_shapeshifter_changeling @Filip Burburan
+29 u_1_1_squid_islandwalk @Jack Wang
+30 u_1_1_wizard_countersac @Denys Tsiperko
+31 b_1_1_horror @Nino Is
+32 b_2_1_warrior @Zoltan Boros
+33 r_5_5_dragon_flying @Alex Konstad
+34 r_1_1_goblin_all_attack @Wayne Reynolds
+35 kobolds_of_kher_keep @Paolo Parente
+36 r_3_3_ogre @Paul Bonner
+37 r_1_1_pirate_noblock_all_attack @Jonathan Kuo
+38 g_3_3_beast @Jesper Ejsing
+39 g_3_3_centaur_pro_black @Martina Pilcerova
+40 g_1_1_insect_flying_deathtouch @Martina Pilcerova
+41 g_4_4_phyrexian_beast @Svetlin Velinov
+42 g_1_2_spider_reach @Slawomir Maniak
+43 g_2_2_wolf @Andrea Radeck
+44 g_5_5_wurm @Slawomir Maniak
+45 wb_2_1_inkling_flying @Scott Murphy
+46 rg_2_2_satyr_haste @Johann Bodin
+47 c_a_clue_draw @Campbell White
+48 c_a_gold_sac @Yeong-Hao Han

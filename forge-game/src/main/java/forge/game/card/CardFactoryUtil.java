@@ -1409,6 +1409,29 @@ public class CardFactoryUtil {
             parsedEndTrig.setOverridingAbility(AbilityFactory.getAbility(remove, card));
 
             inst.addTrigger(parsedEndTrig);
+        } else if (keyword.equals("Job select")) {
+            final StringBuilder sbTrig = new StringBuilder();
+            sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
+            sbTrig.append("ValidCard$ Card.Self | TriggerDescription$ ");
+            sbTrig.append("Job select (").append(inst.getReminderText()).append(")");
+
+            final String sbHero = "DB$ Token | TokenScript$ c_1_1_hero | TokenOwner$ You | RememberTokens$ True";
+            final SpellAbility saHero= AbilityFactory.getAbility(sbHero, card);
+
+            final String sbAttach = "DB$ Attach | Defined$ Remembered";
+            final AbilitySub saAttach = (AbilitySub) AbilityFactory.getAbility(sbAttach, card);
+            saHero.setSubAbility(saAttach);
+
+            final String sbClear = "DB$ Cleanup | ClearRemembered$ True";
+            final AbilitySub saClear = (AbilitySub) AbilityFactory.getAbility(sbClear, card);
+            saAttach.setSubAbility(saClear);
+
+            final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, intrinsic);
+
+            etbTrigger.setOverridingAbility(saHero);
+
+            saHero.setIntrinsic(intrinsic);
+            inst.addTrigger(etbTrigger);
         } else if (keyword.equals("Living Weapon")) {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
@@ -1529,7 +1552,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String n = k[1];
 
-            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True"
+            final String trigStr = "Mode$ Attacks | ValidCard$ Card.Self"
                     + " | TriggerDescription$ Mobilize " + n + " (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ r_1_1_warrior"
@@ -3112,7 +3135,7 @@ public class CardFactoryUtil {
                     c.setForetold(true);
                     c.turnFaceDown(true);
                     // look at the exiled card
-                    c.addMayLookTemp(getActivatingPlayer());
+                    c.addMayLookFaceDownExile(getActivatingPlayer());
 
                     // only done when the card is foretold by the static ability
                     getActivatingPlayer().addForetoldThisTurn();
@@ -3825,9 +3848,9 @@ public class CardFactoryUtil {
             final String t = k[1];
 
             String desc;
-            if(k.length > 2) {
+            if (k.length > 2) {
                 String typeText = k[2];
-                if(typeText.contains(" with "))
+                if (typeText.contains(" with "))
                     desc = typeText.substring(typeText.indexOf(" with ") + 6);
                 else
                     desc = typeText + "s";
@@ -3953,7 +3976,7 @@ public class CardFactoryUtil {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can't be transformed except by its daybound ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Decayed")) {
-            String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Secondary$ True | Description$ CARDNAME can't block.";
+            String effect = "Mode$ CantBlock | ValidCard$ Creature.Self | Secondary$ True | Description$ CARDNAME can't block.";
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
             inst.addStaticAbility(st);
         } else if (keyword.equals("Defender")) {
@@ -4104,8 +4127,12 @@ public class CardFactoryUtil {
             String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Strive | Cost$ "+ manacost +" | EffectZone$ All" +
                     " | Description$ Strive - " + inst.getReminderText();
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.equals("Tiered")) {
+            String effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True | Amount$ Tiered | EffectZone$ All"
+                    + " | Description$ Tiered (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Unleash")) {
-            String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self+counters_GE1_P1P1 | Secondary$ True | Description$ CARDNAME can't block.";
+            String effect = "Mode$ CantBlock | ValidCard$ Creature.Self+counters_GE1_P1P1 | Secondary$ True | Description$ CARDNAME can't block.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Undaunted")) {
             String effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
@@ -4124,7 +4151,7 @@ public class CardFactoryUtil {
 
     public static void setupSiegeAbilities(Card card) {
         StringBuilder chooseSB = new StringBuilder();
-        chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated");
+        chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | BattleProtector$ True");
         chooseSB.append(" | Description$ (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)");
         String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle";
 

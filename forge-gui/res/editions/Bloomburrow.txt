@@ -494,20 +494,21 @@ A138 U A-Heartfire Hero @Jakub Kasper
 29 c_a_treasure_sac @Aaron Miller
 
 [other]
-offspring_bushy_bodyguard
-offspring_coruscation_mage
-offspring_darkstar_augur
-offspring_finch_formation
-offspring_flowerfoot_swordmaster
-offspring_intrepid_rabbit
-offspring_iridescent_vinelasher
-offspring_manifold_mouse
-offspring_pawpatch_recruit
-offspring_rust_shield_rampager
-offspring_splash_lasher
-offspring_starscape_cleric
-offspring_steampath_charger
-offspring_tender_wildguide
-offspring_thornplate_intimidator
-offspring_thundertrap_trainer
-offspring_warren_warleader
+1 offspring_flowerfoot_swordmaster @Vincent Christiaens
+2 offspring_intrepid_rabbit @Artur Treffner
+5 offspring_warren_warleader @Justin Gerard
+6 offspring_finch_formation @Rhonda Libbey
+8 offspring_splash_lasher @Izzy
+9 offspring_thundertrap_trainer @Borja Pindado
+11 offspring_darkstar_augur @Irina Nordsol
+12 offspring_iridescent_vinelasher @Ron Spears
+15 offspring_starscape_cleric @Danny Schwartz
+16 offspring_thornplate_intimidator @Filip Burburan
+17 offspring_coruscation_mage @Gaboleps
+18 offspring_manifold_mouse @Serena Malyon
+19 offspring_steampath_charger @Alex Stone
+20 offspring_bushy_bodyguard @Jakub Kasper
+21 offspring_pawpatch_recruit @Johan Grenier
+22 offspring_rust_shield_rampager @Steve Ellis
+24 offspring_tender_wildguide @Jakob Eirich
+30 emblem_ral_crackling_wit @Rudy Siswanto

@@ -15,6 +15,7 @@ Omenpath
 Power-Plant
 Sphere:Spheres
 Tower
+Town:Towns
 Urza's
 [CreatureTypes]
 Advisor:Advisors
@@ -232,6 +233,7 @@ Praetor:Praetors
 Primarch:Primarchs
 Prism:Prisms
 Processor:Processors
+Qu:Qu
 Raccoon:Raccoons
 Rabbit:Rabbits
 Ranger:Rangers

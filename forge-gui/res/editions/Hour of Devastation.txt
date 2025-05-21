@@ -13,6 +13,7 @@ AdditionalSetUnlockedInQuest=MPS_AKH
 TreatAsSmallSet=true
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=HOU
+TokenFallbackCode=AKH
 
 [cards]
 1 C Act of Heroism @Magali Villeneuve
@@ -228,20 +229,17 @@ ScryfallCode=HOU
 209 C Cinder Barrens @Titus Lunter
 
 [tokens]
-0 w_1_1_cat_lifelink @Unknown
-0 w_1_1_warrior_vigilance @Unknown
-0 b_2_2_zombie @Unknown
 10 w_5_5_horse @Lucas Graciano
 11 g_5_4_snake @Winona Nelson
 12 ur_1_1_insect_flying_haste @Lius Lasahido
 
 [other]
-eternalize_adorned_pouncer
-eternalize_champion_of_wits
-eternalize_dreamstealer
-eternalize_earthshaker_khenra
-eternalize_proven_combatant
-eternalize_resilient_khenra
-eternalize_sinuous_striker
-eternalize_steadfast_sentinel
-eternalize_sunscourge_champion
+1 eternalize_adorned_pouncer @Slawomir Maniak
+2 eternalize_champion_of_wits @Even Amundsen
+3 eternalize_dreamstealer @Yongjae Choi
+4 eternalize_earthshaker_khenra @Jason A. Engle
+5 eternalize_proven_combatant @Clint Cearley
+6 eternalize_resilient_khenra @Svetlin Velinov
+7 eternalize_sinuous_striker @Svetlin Velinov
+8 eternalize_steadfast_sentinel @ Karl Kopinski
+9 eternalize_sunscourge_champion @Josu Hernaiz

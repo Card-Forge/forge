@@ -1,0 +1,8 @@
+Name:Draconic Fealty
+ManaCost:B
+Types:Sorcery
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Behold<1/Dragon> | Description$ As an additional cost to cast this spell, you may behold a Dragon. (You may choose a Dragon you control or reveal a Dragon card from your hand.)
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Card.cmcEQX | Mode$ TgtChoose | SubAbility$ DBExileGraveyard | SpellDescription$ Target player discards a card with the greatest mana value among cards in their hand.
+SVar:DBExileGraveyard:DB$ ChangeZoneAll | Condition$ OptionalCost | ConditionOptionalPaid$ True | Defined$ ParentTarget | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SpellDescription$ If a Dragon was beheld, exile that player's graveyard.
+SVar:X:Count$ValidHand Card.TargetedPlayerOwn$GreatestCMC
+Oracle:As an additional cost to cast this spell, you may behold a Dragon.\nTarget player discards a card with the greatest mana value among cards in their hand. If a Dragon was beheld, exile that player's graveyard.

@@ -85,10 +85,6 @@ public abstract class GameStage extends Stage {
     protected final Array<TextraButton> dialogButtonMap = new Array<>();
     TextraButton selectedKey;
 
-    public boolean getDialogOnlyInput() {
-        return dialogOnlyInput;
-    }
-
     public Dialog getDialog() {
         return dialog;
     }
@@ -113,6 +109,7 @@ public abstract class GameStage extends Stage {
         dialog.show(dialogStage, Actions.show());
         dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
+
         if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
     }
@@ -122,6 +119,14 @@ public abstract class GameStage extends Stage {
         dialogOnlyInput = false;
         selectedKey = null;
         dialog.clearListeners();
+    }
+
+    /**
+     * Triggered when the hud is showing a dialog, which is tracked separately
+     * @param isShowing Whether a dialog is currently showing
+     */
+    public void hudIsShowingDialog(boolean isShowing) {
+        dialogOnlyInput = isShowing;
     }
 
     public void effectDialog(EffectData effectData) {

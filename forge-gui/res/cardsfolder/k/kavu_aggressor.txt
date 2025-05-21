@@ -2,7 +2,7 @@ Name:Kavu Aggressor
 ManaCost:2 R
 Types:Creature Kavu
 PT:3/2
-K:CARDNAME can't block.
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
 K:Kicker:4
 K:etbCounter:P1P1:1:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters with a +1/+1 counter on it.
 SVar:WasKicked:Count$Kicked.1.0

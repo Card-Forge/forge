@@ -279,9 +279,11 @@ public class GameHUD extends Stage {
         //map bounds
         if (Controls.actorContainsVector(miniMap, c)) {
             touchpad.setVisible(false);
-
-            if (debugMap)
+            if (mapGroup.isVisible() && debugMap) {
                 WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            } else if (!mapGroup.isVisible()) {
+                return false;
+            }
 
             return true;
         }
@@ -302,12 +304,16 @@ public class GameHUD extends Stage {
             return true;
         }
         if (Controls.actorContainsVector(miniMap, c)) {
-            if (debugMap)
+            if (mapGroup.isVisible() && debugMap) {
                 WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            } else if (!mapGroup.isVisible()) {
+                // in this case, we want to send an action to the scene, which happens in the caller
+                return false;
+            }
             return true;
         }
         //auto follow touchpad
-        if (GuiBase.isAndroid() && !MapStage.getInstance().getDialogOnlyInput() && !console.isVisible()) {
+        if (GuiBase.isAndroid() && !MapStage.getInstance().isDialogOnlyInput() && !console.isVisible()) {
             if (!(Controls.actorContainsVector(avatar, touch)) // not inside avatar bounds
                     && !(Controls.actorContainsVector(miniMap, touch)) // not inside map bounds
                     && !(Controls.actorContainsVector(gamehud, touch)) //not inside gamehud bounds
@@ -681,6 +687,7 @@ public class GameHUD extends Stage {
     }
 
     private void exitDungeonCallback() {
+        MapStage.getInstance().onBeginLeavingDungeon();
         hideDialog(true);
     }
 
@@ -715,6 +722,7 @@ public class GameHUD extends Stage {
     public void showHideMap(boolean visible) {
         transluscent = !visible;
         setAlpha(mapGroup, visible);
+        mapGroup.setVisible(visible);
         setAlpha(hudGroup, visible);
         setAlpha(menuGroup, visible);
         setAlpha(avatarGroup, visible);
@@ -754,8 +762,10 @@ public class GameHUD extends Stage {
         if (hide) {
             hudGroup.addAction(Actions.fadeOut(0.5f));
             menuGroup.addAction(Actions.fadeOut(0.5f));
-            if (!MapStage.getInstance().isInMap())
+            if (!MapStage.getInstance().isInMap()) {
                 mapGroup.addAction(Actions.fadeOut(0.5f));
+                mapGroup.addAction(Actions.visible(false));
+            }
             if (MapStage.getInstance().isInMap())
                 avatarGroup.addAction(Actions.alpha(0.4f, 0.5f));
             hidden = true;
@@ -764,8 +774,10 @@ public class GameHUD extends Stage {
             avatarGroup.addAction(Actions.alpha(alpha, 0.5f));
             hudGroup.addAction(Actions.alpha(alpha, 0.5f));
             menuGroup.addAction(Actions.alpha(alpha, 0.5f));
-            if (!MapStage.getInstance().isInMap())
+            if (!MapStage.getInstance().isInMap()) {
                 mapGroup.addAction(Actions.fadeIn(0.5f));
+                mapGroup.addAction(Actions.visible(true));
+            }
             hidden = false;
         }
     }
@@ -863,6 +875,8 @@ public class GameHUD extends Stage {
         dialog.show(this, Actions.show());
         dialog.setPosition((this.getWidth() - dialog.getWidth()) / 2, (this.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
+        gameStage.hudIsShowingDialog(true);
+        MapStage.getInstance().hudIsShowingDialog(true);
         if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
             this.setKeyboardFocus(dialogButtonMap.first());
     }
@@ -880,7 +894,10 @@ public class GameHUD extends Stage {
                 return true;
             }
         }));
+
         dialogOnlyInput = false;
+        gameStage.hudIsShowingDialog(false);
+        MapStage.getInstance().hudIsShowingDialog(false);
     }
 
     private void selectNextDialogButton() {

@@ -100,9 +100,6 @@ ScryfallCode=UGL
 88 L Forest @Terese Nielsen
 
 [tokens]
-0 rabid_sheep @Unknown
-0 r_4_4_giant_chicken @Unknown
-0 g_0_1_sheep @Unknown
 1 w_1_1_pegasus_flying @Mark Zug
 2 w_1_1_soldier @Daren Bader
 3 b_2_2_zombie @Christopher Rush

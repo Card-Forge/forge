@@ -13,4 +13,4 @@ SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | Cou
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard | SubAbility$ DBExileSelf
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 DeckHas:Ability$Counters
-Oracle:Loch Larent enters tapped.\n{T}: Add {U}.{1}{U}, {T}: Scry 3.\nTarget opponent gets a one-time boon with "When you cast a creature spell, that creature enters tapped and with a stun counter on it." Activate only during your turn and only once.
+Oracle:Loch Larent enters tapped.\n{T}: Add {U}.{1}{U}, {T}: Scry 3. Target opponent gets a one-time boon with "When you cast a creature spell, that creature enters tapped and with a stun counter on it." Activate only during your turn and only once.

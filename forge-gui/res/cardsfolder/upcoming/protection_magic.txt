@@ -1,0 +1,6 @@
+Name:Protection Magic
+ManaCost:1 W
+Types:Instant
+A:SP$ PutCounter | CounterType$ SHIELD | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature | TgtPrompt$ Select up to three target creatures | SpellDescription$ Put a shield counter on each of up to three target creatures. (If a creature with a shield counter would be dealt damage or destroyed, remove a shield counter from it instead.)
+DeckHas:Ability$Counters
+Oracle:Put a shield counter on each of up to three target creatures. (If a creature with a shield counter would be dealt damage or destroyed, remove a shield counter from it instead.)

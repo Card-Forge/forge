@@ -748,7 +748,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             predicates.add(advancedSearchFilter.buildPredicate(genericType));
         }
 
-        Predicate<? super T> newFilterPredicate = predicates.isEmpty() ? null : IterableUtil.and(predicates);
+        Predicate<? super T> newFilterPredicate = predicates.isEmpty() ? null : IterableUtil.<T>and(predicates);
         if (filterPredicate == newFilterPredicate) {
             return false;
         }
@@ -1003,6 +1003,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private class ContextMenu extends FDropDownMenu {
         @Override
         protected void buildMenu() {
+            if (getSelectedItem() == null)
+                return;
             contextMenuBuilder.buildMenu(this, getSelectedItem());
         }
 

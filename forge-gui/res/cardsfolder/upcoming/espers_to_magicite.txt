@@ -1,0 +1,8 @@
+Name:Espers to Magicite
+ManaCost:3 B
+Types:Instant
+A:SP$ ChangeZoneAll | ChangeType$ Card.OppOwn | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBImmediateTrigger | SpellDescription$ Exile each opponent's graveyard. When you do, choose up to one target creature card exiled this way. Create a token that's a copy of that card, except it's an artifact and it loses all other card types.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | RememberObjects$ Remembered | Execute$ TrigCopy | SubAbility$ DBCleanup | TriggerDescription$ When you do, choose up to one target creature card exiled this way. Create a token that's a copy of that card, except it's an artifact and it loses all other card types.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.IsTriggerRemembered | TgtZone$ Exile | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature card exiled with CARDNAME | NumCopies$ 1 | AddTypes$ Artifact | RemoveCardTypes$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile each opponent's graveyard. When you do, choose up to one target creature card exiled this way. Create a token that's a copy of that card, except it's an artifact and it loses all other card types.

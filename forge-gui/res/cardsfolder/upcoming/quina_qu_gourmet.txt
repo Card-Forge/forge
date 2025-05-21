@@ -1,0 +1,10 @@
+Name:Quina, Qu Gourmet
+ManaCost:2 G
+Types:Legendary Creature Qu
+PT:2/3
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DBReplace | Description$ If one or more tokens would be created under your control, those tokens plus a 1/1 green Frog creature token are created instead.
+SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | TokenScript$ g_1_1_frog
+A:AB$ PutCounter | Cost$ 2 Sac<1/Frog> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on NICKNAME.
+DeckHas:Ability$Token
+DeckHints:Ability$Token & Type$Frog
+Oracle:If one or more tokens would be created under your control, those tokens plus a 1/1 green Frog creature token are created instead.\n{2}, Sacrifice a Frog: Put a +1/+1 counter on Quina.

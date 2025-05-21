@@ -1,0 +1,10 @@
+Name:Tataru Taru
+ManaCost:1 W
+Types:Legendary Creature Dwarf Advisor
+PT:0/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, you draw a card and target opponent may draw a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Opponent | OptionalDecider$ Opponent
+T:Mode$ Drawn | ValidCard$ Card.OwnedBy Opponent.NonActive | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Scions' Secretary — Whenever an opponent draws a card, if it isn't that player's turn, create a tapped Treasure token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenTapped$ True
+Oracle:When Tataru Taru enters, you draw a card and target opponent may draw a card.\nScions' Secretary — Whenever an opponent draws a card, if it isn't that player's turn, create a tapped Treasure token. This ability triggers only once each turn.

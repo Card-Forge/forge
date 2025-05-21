@@ -21,9 +21,10 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
+import forge.util.URLValidator;
 import org.apache.commons.lang3.StringUtils;
 
-import java.net.URI;
+import static forge.util.URLValidator.parseURL;
 
 public class NetConnectUtil {
     private NetConnectUtil() { }
@@ -125,20 +126,16 @@ public class NetConnectUtil {
     public static ChatMessage join(final String url, final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         String hostname;
-        int port = ForgeConstants.DEFAULT_SERVER_CONNECTION_PORT;
+        int port;
 
-        try {
-            // Check if the URL already has a protocol
-            String formattedUrl = url.matches("^[a-zA-Z][a-zA-Z0-9+.-]*://.*") ? url : "http://" + url;
-            // Parse the URI
-            URI uri = new URI(formattedUrl);
-            hostname = uri.getHost();
-            if (uri.getPort() != -1) { // If a port is specified in the URL
-                port = uri.getPort();
-            }
-        } catch (Exception ex) {
-            hostname = url; // Fallback to original URL if parsing fails
+        URLValidator.HostPort hostPort = parseURL(url);
+        if(hostPort == null) {
+            return new ChatMessage(null, ForgeConstants.INVALID_HOST_COMMAND);
         }
+
+        hostname = hostPort.host();
+        port = hostPort.port();
+        if(port == -1) port = ForgeConstants.DEFAULT_SERVER_CONNECTION_PORT;
 
 
         final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui, hostname, port);

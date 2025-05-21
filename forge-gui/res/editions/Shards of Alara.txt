@@ -265,7 +265,6 @@ ScryfallCode=ALA
 250 M Rafiq of the Many @Meel Tamphanon
 
 [tokens]
-0 rgw_8_8_beast @Unknown
 1 w_1_1_soldier @Alan Pollack
 2 u_0_1_a_homunculus @Howard Lyon
 3 u_1_1_a_thopter_flying @Andrew Murray
@@ -276,3 +275,4 @@ ScryfallCode=ALA
 8 r_1_1_goblin_haste @Brandon Kitkouski
 8 g_x_x_ooze @Anthony S. Waters
 9 g_1_1_saproling @Trevor Claxton
+10 rgw_8_8_beast @Paolo Parente

@@ -54,6 +54,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityDisableTriggers;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -1129,7 +1130,7 @@ public class AiController {
         // Memory Crystal-like effects need special handling
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             for (StaticAbility s : c.getStaticAbilities()) {
-                if ("ReduceCost".equals(s.getParam("Mode"))
+                if (s.checkMode(StaticAbilityMode.ReduceCost)
                         && "Spell.Buyback".equals(s.getParam("ValidSpell"))) {
                     neededMana -= AbilityUtils.calculateAmount(c, s.getParam("Amount"), s);
                 }
@@ -2368,7 +2369,7 @@ public class AiController {
 
     // TODO move to more common place
     public static <T extends TriggerReplacementBase> List<T> filterList(List<T> input, Function<SpellAbility, Object> pred, Object value) {
-        return filterList(input, trb -> pred.apply(trb.ensureAbility()) == value);
+        return filterList(input, trb -> trb.ensureAbility() != null && pred.apply(trb.ensureAbility()) == value);
     }
 
     public static List<SpellAbility> filterListByApi(List<SpellAbility> input, ApiType type) {

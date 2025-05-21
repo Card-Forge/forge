@@ -421,9 +421,6 @@ ScryfallCode=TDC
 413 R Yavimaya Coast @Jesper Ejsing
 
 [tokens]
-0 gw_1_1_citizen @Unknown
-0 [other] @Unknown
-0 eternalize_timeless_witness @Unknown
 1 c_10_10_eldrazi @Jack Wang
 2 w_4_4_angel_flying_vigilance @Grzegorz Rutkowski
 3 w_1_1_dog @Manuel Castañón
@@ -438,18 +435,19 @@ ScryfallCode=TDC
 13 r_2_2_dragon_flying_firebreathing @Lars Grant-West
 14 r_5_5_dragon_flying @Raymond Swanland
 15 r_x_x_dragon_illusion_flying_haste @Andrew Mar
-17 r_1_1_elemental @Cyril Van Der Haegen
+16 r_1_1_elemental @Jaime Jones
+17 r_1_1_elemental_haste @Cyril Van Der Haegen
 18 first_mate_ragavan @Maxime Minard
-19 karox_bladewing @XiaoDi Jin
-20 g_3_3_beast @John Donahue
+18 karox_bladewing @XiaoDi Jin
+19 g_3_3_beast @John Donahue
 21 g_3_3_frog_lizard @Jack Wang
-22 r_1_1_elemental_haste @Cyril Van Der Haegen
-23 g_1_1_insect @
+22 g_1_1_insect @Christopher Moeller
+23 g_1_1_insect_flying_deathtouch @Martina Pilcerova
 24 g_0_1_plant @Daren Bader
-25 g_1_1_insect_flying_deathtouch @
-26 g_1_2_spider_reach @
+25 g_1_2_spider_reach @Sam Rowan
+26 gw_1_1_citizen @Maria Poliakova
 27 ur_4_4_elemental @Alayna Danner
-28 wb_2_1_inkling_flying @
+28 wb_2_1_inkling_flying @Scott Murphy
 29 c_a_gold_sac @Yeong-Hao Han
 30 c_1_1_a_myr @Ryan Pancoast
 31 c_1_1_a_servo @Victor Adame Minguez
@@ -457,4 +455,4 @@ ScryfallCode=TDC
 33 c_1_1_a_thopter_flying @Svetlin Velinov
 
 [other]
-eternalize_timeless_witness
+11 eternalize_timeless_witness @Deruchenko Alexander

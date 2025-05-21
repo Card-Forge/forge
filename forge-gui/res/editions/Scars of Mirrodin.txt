@@ -263,12 +263,12 @@ ScryfallCode=SOM
 249 L Forest @Mark Tedin
 
 [tokens]
-0 g_1_1_phyrexian_insect_infect @Unknown
-0 c_3_3_a_phyrexian_wurm_deathtouch @Unknown
-0 c_3_3_a_phyrexian_wurm_lifelink @Unknown
 1 w_2_2_cat @Scott Chou
 2 w_1_1_soldier @Goran Josic
 3 r_1_1_goblin @Goran Josic
+4 g_1_1_phyrexian_insect_infect @Adrian Smith
 5 g_2_2_wolf @Chris Rahn
 6 c_3_3_a_golem @Nic Klein
 7 c_1_1_a_myr @Ryan Pancoast
+8 c_3_3_a_phyrexian_wurm_deathtouch @Raymond Swanland
+9 c_3_3_a_phyrexian_wurm_lifelink @Raymond Swanland

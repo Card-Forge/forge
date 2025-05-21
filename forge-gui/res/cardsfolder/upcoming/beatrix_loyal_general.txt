@@ -1,0 +1,9 @@
+Name:Beatrix, Loyal General
+ManaCost:4 W W
+Types:Legendary Creature Human Soldier
+PT:4/4
+K:Vigilance
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigAttach | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of combat on your turn, you may attach any number of Equipment you control to target creature you control.
+SVar:TrigAttach:DB$ Attach | Defined$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Object$ Valid Equipment.YouCtrl | Optional$ True
+DeckHints:Type$Equipment
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nAt the beginning of combat on your turn, you may attach any number of Equipment you control to target creature you control.

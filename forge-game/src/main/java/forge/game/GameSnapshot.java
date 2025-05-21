@@ -170,7 +170,7 @@ public class GameSnapshot {
         newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
         newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
         newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
-        newPlayer.setBlessing(origPlayer.hasBlessing());
+        newPlayer.setBlessing(origPlayer.hasBlessing(), null);
         newPlayer.setRevolt(origPlayer.hasRevolt());
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
         newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
@@ -322,7 +322,7 @@ public class GameSnapshot {
             newCard.setLayerTimestamp(fromCard.getLayerTimestamp());
             newCard.setTapped(fromCard.isTapped());
             newCard.setFaceDown(fromCard.isFaceDown());
-            newCard.setManifested(fromCard.isManifested());
+            newCard.setManifested(fromCard.getManifestedSA());
             newCard.setSickness(fromCard.hasSickness());
             newCard.setState(fromCard.getCurrentStateName(), false);
         }

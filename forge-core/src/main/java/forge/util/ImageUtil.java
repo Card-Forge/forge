@@ -197,9 +197,11 @@ public class ImageUtil {
                 langCode, versionParam, faceParam);
     }
 
-    public static String getScryfallTokenDownloadUrl(String collectorNumber, String setCode, String langCode) {
+    public static String getScryfallTokenDownloadUrl(String collectorNumber, String setCode, String langCode, String faceParam) {
         String versionParam = "normal";
-        String faceParam = "";
+        if (!faceParam.isEmpty()) {
+            faceParam = (faceParam.equals("back") ? "&face=back" : "&face=front");
+        }
         return String.format("%s/%s/%s?format=image&version=%s%s", setCode, collectorNumber,
                 langCode, versionParam, faceParam);
     }

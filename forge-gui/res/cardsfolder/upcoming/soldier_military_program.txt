@@ -1,0 +1,9 @@
+Name:SOLDIER Military Program
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPutCounters | MinCharmNum$ 1 | CharmNum$ Count$Compare Y GE1.2.1 | AdditionalDescription$ . If you control a commander, you may choose both instead.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ w_1_1_soldier | SpellDescription$ Create a 1/1 white Soldier creature token.
+SVar:DBPutCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ChoiceAmount$ 2 | MinChoiceAmount$ 0 | Choices$ Soldier.YouCtrl | ChoiceTitle$ Choose up to two Soldiers you control | SpellDescription$ Put a +1/+1 counter on each of up to two Soldiers you control.
+SVar:Y:Count$Valid Card.IsCommander+YouCtrl
+Oracle:At the beginning of combat on your turn, choose one. If you control a commander, you may choose both instead.\n• Create a 1/1 white Soldier creature token.\n• Put a +1/+1 counter on each of up to two Soldiers you control.

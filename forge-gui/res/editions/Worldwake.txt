@@ -9,6 +9,7 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ZEN
 FatPack=8
 FatPackExtraSlots=40 BasicLands ZEN
 ScryfallCode=WWK
+TokenFallbackCode=ZEN
 
 [cards]
 1 M Admonition Angel @Steve Argyle
@@ -158,8 +159,6 @@ ScryfallCode=WWK
 145 U Tectonic Edge @Vincent Proce
 
 [tokens]
-0 g_1_1_snake @Unknown
-0 g_2_2_wolf @Unknown
 1 w_1_1_soldier_ally @Kekai Kotaki
 2 r_5_5_dragon_flying @Raymond Swanland
 3 r_3_3_ogre @Paul Bonner

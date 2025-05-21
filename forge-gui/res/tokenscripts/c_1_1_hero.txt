@@ -1,0 +1,5 @@
+Name:Hero Token
+ManaCost:no cost
+Types:Creature Hero
+PT:1/1
+Oracle:

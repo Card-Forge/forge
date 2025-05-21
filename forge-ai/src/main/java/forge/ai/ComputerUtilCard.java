@@ -48,6 +48,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
@@ -1213,8 +1214,7 @@ public class ComputerUtilCard {
                 // if this thing is both owned and controlled by an opponent and it has a continuous ability,
                 // assume it either benefits the player or disrupts the opponent
                 for (final StaticAbility stAb : c.getStaticAbilities()) {
-                    final Map<String, String> params = stAb.getMapParams();
-                    if (params.get("Mode").equals("Continuous") && stAb.isIntrinsic()) {
+                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.isIntrinsic()) {
                         priority = true;
                         break;
                     }
@@ -1245,17 +1245,16 @@ public class ComputerUtilCard {
             }
         } else {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                final Map<String, String> params = stAb.getMapParams();
                 //continuous buffs
-                if (params.get("Mode").equals("Continuous") && "Creature.YouCtrl".equals(params.get("Affected"))) {
+                if (stAb.checkMode(StaticAbilityMode.Continuous) && "Creature.YouCtrl".equals(stAb.getParam("Affected"))) {
                     int bonusPT = 0;
-                    if (params.containsKey("AddPower")) {
-                        bonusPT += AbilityUtils.calculateAmount(c, params.get("AddPower"), stAb);
+                    if (stAb.hasParam("AddPower")) {
+                        bonusPT += AbilityUtils.calculateAmount(c, stAb.getParam("AddPower"), stAb);
                     }
-                    if (params.containsKey("AddToughness")) {
-                        bonusPT += AbilityUtils.calculateAmount(c, params.get("AddPower"), stAb);
+                    if (stAb.hasParam("AddToughness")) {
+                        bonusPT += AbilityUtils.calculateAmount(c, stAb.getParam("AddPower"), stAb);
                     }
-                    String kws = params.get("AddKeyword");
+                    String kws = stAb.getParam("AddKeyword");
                     if (kws != null) {
                         bonusPT += 4 * (1 + StringUtils.countMatches(kws, "&")); //treat each added keyword as a +2/+2 for now
                     }
@@ -1786,7 +1785,7 @@ public class ComputerUtilCard {
             // remove old boost that might be copied
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 vCard.removePTBoost(c.getLayerTimestamp(), stAb.getId());
-                if (!stAb.checkMode("Continuous")) {
+                if (!stAb.checkMode(StaticAbilityMode.Continuous)) {
                     continue;
                 }
                 if (!stAb.hasParam("Affected")) {

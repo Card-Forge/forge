@@ -4,7 +4,8 @@ Types:Enchantment Aura
 K:Enchant:Creature
 K:etbCounter:TASK:4
 SVar:AttachAILogic:Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | RemoveAllAbilities$ True | AddAbility$ ABRemoveCounter | AddSVar$ DBHeliodsPunishment | Description$ Enchanted creature can't attack or block. It loses all abilities and has "{T}: Remove a task counter from CARDNAME. Then if it has no task counters on it, destroy CARDNAME."
+S:Mode$ CantAttack,CantBlock | ValidCard$ Creature.EnchantedBy | Description$ Enchanted creature can't attack or block.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | RemoveAllAbilities$ True | AddAbility$ ABRemoveCounter | AddSVar$ DBHeliodsPunishment | Description$ It loses all abilities and has "{T}: Remove a task counter from CARDNAME. Then if it has no task counters on it, destroy CARDNAME."
 SVar:ABRemoveCounter:AB$ RemoveCounter | Cost$ T | CounterType$ TASK | CounterNum$ 1 | AILogic$ Always | Defined$ OriginalHost | StackDescription$ Remove a task counter from {c:OriginalHost}. Then if it has no task counters on it, destroy {c:OriginalHost}. | SpellDescription$ Remove a task counter from ORIGINALHOST. Then if it has no task counters on it, destroy ORIGINALHOST. | SubAbility$ DBHeliodsPunishment
 SVar:DBHeliodsPunishment:DB$ Destroy | Defined$ OriginalHost | ConditionDefined$ OriginalHost | ConditionPresent$ Card.counters_EQ0_TASK | StackDescription$ None
 DeckHas:Ability$Counters

@@ -1366,7 +1366,7 @@ public class AbilityUtils {
 
         // do blessing there before condition checks
         if (source.hasKeyword(Keyword.ASCEND) && controller.getZone(ZoneType.Battlefield).size() >= 10) {
-            controller.setBlessing(true);
+            controller.setBlessing(true, source.getSetCode());
         }
 
         if (source.hasKeyword(Keyword.GIFT) && sa.isGiftPromised()) {
@@ -1621,7 +1621,8 @@ public class AbilityUtils {
 
         final String[] sq;
         sq = l[0].split("\\.");
-
+        String[] paidparts = l[0].split("\\$", 2);
+        Iterable<Card> someCards = null;
         final Game game = c.getGame();
 
         if (ctb != null) {
@@ -1808,27 +1809,25 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].startsWith("LastStateBattlefield")) {
-                    final String[] k = l[0].split(" ");
-                    CardCollectionView list;
+                    final String[] k = paidparts[0].split(" ");
                     // this is only for spells that were cast
                     if (sq[0].contains("WithFallback")) {
                         if (!sa.getHostCard().wasCast()) {
                             return doXMath(0, expr, c, ctb);
                         }
-                        list = sa.getHostCard().getCastSA().getLastStateBattlefield();
+                        someCards = sa.getHostCard().getCastSA().getLastStateBattlefield();
                     } else {
-                        list = sa.getLastStateBattlefield();
+                        someCards = sa.getLastStateBattlefield();
                     }
-                    if (list == null || list.isEmpty()) {
+                    if (someCards == null || Iterables.isEmpty(someCards)) {
                         // LastState is Empty
                         if (sq[0].contains("WithFallback")) {
-                            list = game.getCardsIn(ZoneType.Battlefield);
+                            someCards = game.getCardsIn(ZoneType.Battlefield);
                         } else {
                             return doXMath(0, expr, c, ctb);
                         }
                     }
-                    list = CardLists.getValidCards(list, k[1], player, c, sa);
-                    return doXMath(list.size(), expr, c, ctb);
+                    someCards = CardLists.getValidCards(someCards, k[1], player, c, sa);
                 }
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
@@ -1958,9 +1957,6 @@ public class AbilityUtils {
             }
             return doXMath(sum, expr, c, ctb);
         }
-
-        String[] paidparts = l[0].split("\\$", 2);
-        Iterable<Card> someCards = null;
 
         // count valid cards in any specified zone/s
         if (sq[0].startsWith("Valid")) {
@@ -2220,13 +2216,18 @@ public class AbilityUtils {
         // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfCastInOwnMainPhase")) {
             final PhaseHandler cPhase = game.getPhaseHandler();
-            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) && c.getCastFrom() != null;
+            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) && c.wasCast();
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
         }
 
         // Count$FinishedUpkeepsThisTurn
         if (sq[0].startsWith("FinishedUpkeepsThisTurn")) {
             return doXMath(game.getPhaseHandler().getNumUpkeep() - (game.getPhaseHandler().is(PhaseType.UPKEEP) ? 1 : 0), expr, c, ctb);
+        }
+
+        // Count$FinishedEndOfTurnsThisTurn
+        if (sq[0].startsWith("FinishedEndOfTurnsThisTurn")) {
+            return doXMath(game.getPhaseHandler().getNumEndOfTurn() - (game.getPhaseHandler().is(PhaseType.END_OF_TURN) ? 1 : 0), expr, c, ctb);
         }
 
         // Count$AttachedTo <restriction>
@@ -2474,7 +2475,6 @@ public class AbilityUtils {
             // Other draft notes include: Names, Colors, Players, Creature Type.
             // But these aren't really things you count so they'll show up in properties most likely
         }
-
 
         //Count$TypesSharedWith [defined]
         if (sq[0].startsWith("TypesSharedWith")) {
@@ -2763,16 +2763,6 @@ public class AbilityUtils {
             return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
         }
 
-        if (sq[0].equals("AllTypes")) {
-            List<Card> cards = getDefinedCards(c, sq[1], ctb);
-
-            int amount = countCardTypesFromList(cards, false) +
-                    countSuperTypesFromList(cards) +
-                    countSubTypesFromList(cards);
-
-            return doXMath(amount, expr, c, ctb);
-        }
-
         if (sq[0].equals("TotalTurns")) {
             return doXMath(game.getPhaseHandler().getTurn(), expr, c, ctb);
         }
@@ -2916,18 +2906,6 @@ public class AbilityUtils {
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
             int[] colorSize = CardFactoryUtil.SortColorsFromList(list);
             return doXMath(colorSize[colorSize.length - 2], expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("ColorsCtrl")) {
-            final String restriction = l[0].substring(11);
-            final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            return doXMath(CardUtil.getColorsFromCards(list).countColors(), expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("ColorsDefined")) {
-            final String restriction = l[0].substring(14);
-            final CardCollection list = getDefinedCards(c, restriction, ctb);
-            return doXMath(CardUtil.getColorsFromCards(list).countColors(), expr, c, ctb);
         }
 
         // TODO move below to handlePaid
@@ -3776,6 +3754,10 @@ public class AbilityUtils {
             return Aggregates.max(paidList, Card::getCMC);
         }
 
+        if (string.equals("Colors")) {
+            return CardUtil.getColorsFromCards(paidList).countColors();
+        }
+
         if (string.equals("DifferentColorPair")) {
             final Set<ColorSet> diffPair = new HashSet<>();
             for (final Card card : paidList) {
@@ -3803,6 +3785,12 @@ public class AbilityUtils {
             String valid = splitString[0].substring(6);
             final int num = CardLists.getValidCardCount(paidList, valid, source.getController(), source, ctb);
             return doXMath(num, splitString.length > 1 ? splitString[1] : null, source, ctb);
+        }
+
+        if (string.startsWith("AllTypes")) {
+            return countCardTypesFromList(paidList, false) +
+                    countSuperTypesFromList(paidList) +
+                    countSubTypesFromList(paidList);
         }
 
         if (string.startsWith("CardTypes")) {

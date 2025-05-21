@@ -288,7 +288,6 @@ ScryfallCode=RTR
 274 L Forest @Richard Wright
 
 [tokens]
-0 gw_8_8_elemental_vigilance @Unknown
 1 w_1_1_bird_flying @James Ryman
 2 w_2_2_knight_vigilance @Matt Stewart
 3 w_2_2_knight_vigilance @Matt Stewart
@@ -302,3 +301,4 @@ ScryfallCode=RTR
 9 g_4_4_rhino_trample @Tomasz Jedruszek
 10 g_1_1_saproling @Raoul Vitale
 11 g_5_5_wurm_trample @Anthony Palumbo
+12 gw_8_8_elemental_vigilance @Yeong-Hao Han

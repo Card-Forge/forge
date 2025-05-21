@@ -1,0 +1,13 @@
+Name:Interceptor, Shadow's Hound
+ManaCost:2 B B
+Types:Legendary Creature Dog
+PT:4/3
+K:Menace
+S:Mode$ Continuous | Affected$ Assassin.YouCtrl | AddKeyword$ Menace | Description$ Assassins you control have menace.
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.Legendary+YouCtrl | Execute$ TrigChangeZone | TriggerZones$ Graveyard | TriggerDescription$ Whenever you attack with one or more legendary creatures, you may pay {2}{B}. If you do, return this card from your graveyard to the battlefield tapped and attacking.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Attacking$ True
+SVar:PlayMain1:TRUE
+SVar:SacMe:3
+SVar:DiscardMe:3
+DeckHints:Type$Assassin|Legendary
+Oracle:Menace\nAssassins you control have menace.\nWhenever you attack with one or more legendary creatures, you may pay {2}{B}. If you do, return this card from your graveyard to the battlefield tapped and attacking.

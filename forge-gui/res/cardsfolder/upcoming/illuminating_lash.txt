@@ -1,0 +1,8 @@
+Name:Illuminating Lash
+ManaCost:U R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBBoon | SpellDescription$ CARDNAME deals 3 damage to any target.
+SVar:DBBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ Boon | SpellDescription$ You get a one-time boon with "When you cast a noncreature spell, draw a card."
+SVar:Boon:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerDescription$ When you cast a noncreature spell, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Illuminating Lash deals 3 damage to any target.\nYou get a one-time boon with "When you cast a noncreature spell, draw a card."

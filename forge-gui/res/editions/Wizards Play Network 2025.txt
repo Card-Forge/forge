@@ -9,3 +9,5 @@ ScryfallCode=PW25
 1 R Rishkar's Expertise @Magali Villeneuve
 2 R Dragon's Hoard @Adam Paquette
 3 R Dragonspeaker Shaman @Yigit Koroglu
+4 R Culling Ritual @AKAGI
+5 U Despark @Maji

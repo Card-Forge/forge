@@ -127,8 +127,8 @@ public class DigEffect extends SpellAbilityEffect {
         final boolean skipReorder = sa.hasParam("SkipReorder");
 
         // A hack for cards like Explorer's Scope that need to ensure that a card is revealed to the player activating the ability
-        final boolean forceReveal = sa.hasParam("ForceRevealToController") ||
-                sa.hasParam("ForceReveal");
+        final boolean forceReveal = sa.hasParam("ForceRevealToController")
+                || sa.hasParam("ForceReveal") || sa.hasParam("WithMayLook");
 
         // These parameters are used to indicate that a dialog box must be show to the player asking if the player wants to proceed
         // with an optional ability, otherwise the optional ability is skipped.

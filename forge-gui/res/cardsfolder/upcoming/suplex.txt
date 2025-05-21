@@ -1,0 +1,7 @@
+Name:Suplex
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Charm | CharmNum$ 1 | Choices$ DBDealDamage,DBExile
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 3 damage to target creature. If that creature would die this turn, exile it instead.
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact.
+Oracle:Choose one —\n• Suplex deals 3 damage to target creature. If that creature would die this turn, exile it instead.\n• Exile target artifact.

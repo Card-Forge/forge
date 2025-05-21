@@ -45,9 +45,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -797,7 +797,7 @@ public class GameAction {
                 continue;
             }
 
-            if (stAb.checkMode("CantBlockBy")) {
+            if (stAb.checkMode(StaticAbilityMode.CantBlockBy)) {
                 if (!stAb.hasParam("ValidAttacker") || (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
                     continue;
                 }
@@ -807,7 +807,7 @@ public class GameAction {
                     }
                 }
             }
-            if (stAb.checkMode(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
+            if (stAb.checkMode(StaticAbilityMode.MinMaxBlocker)) {
                 for (Card creature : IterableUtil.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES)) {
                     if (stAb.matchesValidParam("ValidCard", creature)) {
                         creature.updateAbilityTextForView();
@@ -1073,7 +1073,7 @@ public class GameAction {
     public boolean hasStaticAbilityAffectingZone(ZoneType zone, StaticAbilityLayer layer) {
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions("Continuous")) {
+                if (!stAb.checkConditions(StaticAbilityMode.Continuous)) {
                     continue;
                 }
                 if (layer != null && !stAb.getLayers().contains(layer)) {
@@ -1105,10 +1105,6 @@ public class GameAction {
         // remove old effects
         game.getStaticEffects().clearStaticEffects(affectedCards);
 
-        for (final Player p : game.getPlayers()) {
-            p.clearStaticAbilities();
-        }
-
         // search for cards with static abilities
         final FCollection<StaticAbility> staticAbilities = new FCollection<>();
         final CardCollection staticList = new CardCollection();
@@ -1123,7 +1119,7 @@ public class GameAction {
                 // need to get Card from preList if able
                 final Card co = preList.get(c);
                 for (StaticAbility stAb : co.getStaticAbilities()) {
-                    if (stAb.checkMode("Continuous") && stAb.zonesCheck()) {
+                    if (stAb.checkMode(StaticAbilityMode.Continuous) && stAb.zonesCheck()) {
                         staticAbilities.add(stAb);
                     }
                  }
@@ -1170,7 +1166,7 @@ public class GameAction {
                 if (affectedHere != null) {
                     for (final Card c : affectedHere) {
                         for (final StaticAbility st2 : c.getStaticAbilities()) {
-                            if (!staticAbilities.contains(st2) && st2.checkMode("Continuous") && st2.zonesCheck()) {
+                            if (!staticAbilities.contains(st2) && st2.checkMode(StaticAbilityMode.Continuous) && st2.zonesCheck()) {
                                 toAdd.add(st2);
                                 st2.applyContinuousAbilityBefore(layer, preList);
                             }
@@ -1654,10 +1650,27 @@ public class GameAction {
         if (!c.isBattle()) {
             return checkAgain;
         }
-        if (((c.getProtectingPlayer() == null || !c.getProtectingPlayer().isInGame()) &&
+        Player battleController = c.getController();
+        Player battleProtector = c.getProtectingPlayer();
+        /*
+         704.5w If a battle has no player in the game designated as its protector and no attacking creatures are currently
+         attacking that battle, that battle’s controller chooses an appropriate player to be its protector based on its
+         battle type. If no player can be chosen this way, the battle is put into its owner’s graveyard.
+
+         704.5x If a Siege’s controller is also its designated protector, that player chooses an opponent to become its
+         protector. If no player can be chosen this way, the battle is put into its owner’s graveyard.
+         */
+        if (((battleProtector == null || !battleProtector.isInGame()) &&
                 (game.getCombat() == null || game.getCombat().getAttackersOf(c).isEmpty())) ||
-                (c.getType().hasStringType("Siege") && c.getController().equals(c.getProtectingPlayer()))) {
-            Player newProtector = c.getController().getController().chooseSingleEntityForEffect(c.getController().getOpponents(), new SpellAbility.EmptySa(ApiType.ChoosePlayer, c), "Choose an opponent to protect this battle", null);
+                (c.getType().hasStringType("Siege") && battleController.equals(battleProtector))) {
+            Player newProtector;
+            if (c.getType().getBattleTypes().contains("Siege"))
+                newProtector = battleController.getController().chooseSingleEntityForEffect(battleController.getOpponents(), new SpellAbility.EmptySa(ApiType.ChoosePlayer, c), "Choose an opponent to protect this battle", null);
+            else {
+                // Fall back to the controller. Technically should fall back to null per the above rules, but no official
+                // cards should use this branch. For now this better supports custom cards. May need to revise this later.
+                newProtector = battleController;
+            }
             // seems unlikely unless range of influence gets implemented
             if (newProtector == null) {
                 removeList.add(c);
