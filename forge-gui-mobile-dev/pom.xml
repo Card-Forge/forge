@@ -202,18 +202,18 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-lwjgl3</artifactId>
-            <version>1.13.0</version>
+            <version>1.13.5</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-platform</artifactId>
-            <version>1.13.0</version>
+            <version>1.13.5</version>
             <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype-platform</artifactId>
-            <version>1.13.0</version>
+            <version>1.13.5</version>
             <classifier>natives-desktop</classifier>
         </dependency>
         <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
@@ -236,7 +236,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-box2d-platform</artifactId>
-            <version>1.13.0</version>
+            <version>1.13.5</version>
             <classifier>natives-desktop</classifier>
         </dependency>
     </dependencies>
