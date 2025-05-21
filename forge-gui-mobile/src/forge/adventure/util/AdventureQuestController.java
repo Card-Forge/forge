@@ -248,7 +248,7 @@ public class AdventureQuestController implements Serializable {
             public void run() {
                 stage.showDialog();
                 activeDialog.activate();
-                // Seems weird that data would be null here, but not null up there. Are we changingi these values inside activate?
+                // Seems weird that data would be null here, but not null up there. Are we changing these values inside activate?
                 if (data.options == null || data.options.length == 0) {
                     displayNextDialog(stage);
                 }

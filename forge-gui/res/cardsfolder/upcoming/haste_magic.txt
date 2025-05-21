@@ -1,0 +1,9 @@
+Name:Haste Magic
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +1 | KW$ Haste | SubAbility$ DBExileTop | SpellDescription$ Target creature gets +3/+1 and gains haste until end of turn. Exile the top card of your library. You may play it until your next end step.
+SVar:DBExileTop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ UntilYourNextEndStep | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card until your next end step.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Target creature gets +3/+1 and gains haste until end of turn. Exile the top card of your library. You may play it until your next end step.

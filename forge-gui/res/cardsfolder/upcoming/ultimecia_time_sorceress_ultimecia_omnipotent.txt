@@ -18,6 +18,6 @@ Colors:blue,black
 Types:Legendary Creature Nightmare Warlock
 PT:7/7
 K:Menace
-T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigAddTurn| TriggerDescription$ Time Compression — When this creature transforms into CARDNAME, take an extra turn after this one.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigAddTurn | TriggerDescription$ Time Compression — When this creature transforms into CARDNAME, take an extra turn after this one.
 SVar:TrigAddTurn:DB$ AddTurn | NumTurns$ 1
-Oracle:Menace (This creature can’t be blocked except by two or more creatures.)\nTime Compression — When this creature transforms into Ultimecia, Omnipotent, take an extra turn after this one.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nTime Compression — When this creature transforms into Ultimecia, Omnipotent, take an extra turn after this one.

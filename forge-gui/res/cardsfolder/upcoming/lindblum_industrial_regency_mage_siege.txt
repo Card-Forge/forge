@@ -1,0 +1,16 @@
+Name:Linblum, Industrial Regency
+ManaCost:no cost
+Types:Land Town
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+AlternateMode:Adventure
+Oracle:This land enters tapped.\n{T}: Add {R}.
+
+ALTERNATE
+
+Name:Mage Siege
+ManaCost:2 R
+Types:Instant Adventure
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ b_0_1_wizard_snipe | TokenOwner$ You | SpellDescription$ Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+Oracle:Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."

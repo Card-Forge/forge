@@ -156,7 +156,7 @@ public class GameFormat implements Comparable<GameFormat> {
             for (CardRarity cr: this.getAllowedRarities()) {
                 crp.add(StaticData.instance().getCommonCards().wasPrintedAtRarity(cr));
             }
-            p = p.and(IterableUtil.or(crp));
+            p = p.and(IterableUtil.<PaperCard>or(crp));
         }
         if (!this.getAdditionalCards().isEmpty()) {
             p = p.or(PaperCardPredicates.names(this.getAdditionalCards()));

@@ -26,10 +26,12 @@ ScryfallCode=FIN
 37 U Summon: Primal Garuda @Madeline Boni
 41 C White Auracite @Magali Villeneuve
 42 C White Mage's Staff @Kim Dingwall
+44 C You're Not Alone @Ignatius Budi
 45 U Zack Fair @Yoshio Sugiura
 46 R Astrologian's Planisphere @Josephine Chang
 49 C Dragoon's Wyvern @Jason Kiantoro
 50 C Dreams of Laguna @Josu Solano
+55 C Ice Flan @SHOSUKE
 56 C Ice Magic @Masateru Ikeda
 58 R Jill, Shiva's Dominant @Arif Wijaya
 62 R Matoya, Archon Elder @Luisa J. Preissler
@@ -41,6 +43,7 @@ ScryfallCode=FIN
 71 C Sahagin @Nino Is
 77 R Summon: Leviathan @OTUMAMI
 78 U Summon: Shiva @Fajareka Setiawan
+80 C Syncopate @Nijihayashi
 84 U Valkyrie Aerial Unit @hippo
 86 M Y'shtola Rhul @Immanuela Crovius
 88 U Al Bhed Salvagers @Masateru Ikeda
@@ -72,25 +75,31 @@ ScryfallCode=FIN
 128 R Zodiark, Umbral God @AKAGI
 129 U Barret Wallace @Patrik Hell
 133 M Clive, Ifrit's Dominant @Nino Is
+134 U Coral Sword @Jason Kiantoro
 136 U Fire Magic @Toni Infante
 137 R Firion, Wild Rose Warrior @Elizabeth Peiró
 138 U Freya Crescent @Nereida
 139 R Gilgamesh, Master-at-Arms @Lorenzo Mastroianni
+140 C Haste Magic @David Astruga
 142 C Item Shopkeep @IWAO
 143 C Laughing Mad @RARE ENGINE
 146 M Nibelheim Aflame @Arou
+149 U Queen Brahne @Lorenzo Mastroianni
 154 U Samurai's Katana @Smirtouille
 157 U Self-Destruct @Liiga Smilshkalne
+158 U Sidequest: Play Blitzball @Ittoku
 161 U Summon: Esper Ramuh @Justyna Dura
 164 C Suplex @Fang Xinyu
 166 R Triple Triad @Ben Wootten
 169 C Warrior's Sword @Andrea Tentori Montalto
 170 R Zell Dincht @Kevin Sidharta
 175 R Bartz and Boko @Ryuichi Sakuma
+176 C Blitzball Shot @JUGEMT
 182 C Commune with Beavers @hippo
 185 R Esper Origins @Solan & Danciao
 186 U Galuf's Final Act @Nijihayashi
 191 R Jumbo Cactuar @Jason Kiantoro
+194 U Quina, Qu Gourmet @Fajareka Setiawan
 196 R A Realm Reborn @Anna Podedworna
 199 R Sazh Katzroy @Colin Boyer
 200 U Sazh's Chocobo @Domenico Cava
@@ -124,10 +133,12 @@ ScryfallCode=FIN
 251 U Zidane, Tantalus Thief @Eiji Kaneda
 255 M Buster Sword @Douzen
 259 C Instant Ramen @David Astruga
+266 U PuPu UFO @Racrufi
 271 C Adventurer's Inn @Allen Morris
 274 U Capital City @Wei Guan
 283 R Ishgard, the Holy See @KOHEI YAMADA
 284 R Jidoor, Aristocratic Capital @Erikas Perl
+285 R Lindblum, Industrial Regency @Piotr Dura
 287 C Rabanastre, Royal City @Shahab Alizadeh
 289 R Starting Town @Hristo D. Chukov
 293 R Zanarkand, Ancient Metropolis @Erikas Perl
@@ -149,6 +160,7 @@ ScryfallCode=FIN
 309 L Wastes @Eddie Mendoza
 310 R Ishgard, the Holy See @David Frasheski
 311 R Jidoor, Aristocratic Capital @Craig Elliott
+312 R Lindblum, Industrial Regency @Enora Mercier
 314 R Zanarkand, Ancient Metropolis @Jonas De Ro
 315 R Ardyn, the Usurper @Roberto Ferrari
 316 R Kain, Traitorous Dragoon @Toshitaka Matsuda
@@ -221,6 +233,7 @@ ScryfallCode=FIN
 419 U Cid, Timeless Artificer @Jason Kiantoro
 420 U Cid, Timeless Artificer @Magali Villeneuve
 421 R Ultima, Origin of Oblivion @Russell Lu
+422 U Adelbert Steiner @Lorenzo Mastroianni
 423 R Aerith Gainsborough @Nakamura8
 426 R Beatrix, Loyal General @Bachzim
 427 M Cloud, Midgar Mercenary @Kazto Furuya
@@ -236,6 +249,7 @@ ScryfallCode=FIN
 446 U Fang, Fearless l'Cie @Simon Dominic
 448 R Jecht, Reluctant Guardian @Michael MacRae
 449 R Kain, Traitorous Dragoon @Russell Dongjun Lu
+450 U Reno and Rude @Maji
 451 M Sephiroth, Fabled SOLDIER @Wisnu Tan
 452 R Seymour Flux @K-SUWABE
 454 R Vincent Valentine @Norikatsu Miyoshi
@@ -246,8 +260,10 @@ ScryfallCode=FIN
 460 U Freya Crescent @Nereida
 461 R Gilgamesh, Master-at-Arms @Lorenzo Mastroianni
 462 R Lightning, Security Sergeant @Ramza Psyru
+464 U Queen Brahne @Lorenzo Mastroianni
 468 R Zell Dincht @Kevin Sidharta
 469 R Bartz and Boko @Ryuichi Sakuma
+471 U Quina, Qu Gourmet @Fajareka Setiawan
 472 R Sazh Katzroy @Colin Boyer
 473 R Tifa Lockhart @Laurel Austin
 475 U Vanille, Cheerful l'Cie @Simon Dominic
@@ -271,6 +287,7 @@ ScryfallCode=FIN
 508 R Sin, Spira's Punishment @John Tedrick
 509 R Squall, SeeD Mercenary @Yuu Fujiki
 511 M Terra, Magical Adept @Clare Wong
+512 U Tidus, Blitzball Star @Nakamura8
 513 U Ultimecia, Time Sorceress @Mikio Masuda
 514 M Vivi Ornitier @Toni Infante
 516 R Xande, Dark Mage @Joseph Weston

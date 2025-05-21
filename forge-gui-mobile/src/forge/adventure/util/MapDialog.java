@@ -22,6 +22,7 @@ import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.stage.MapStage;
@@ -336,8 +337,23 @@ public class MapDialog {
                 else Current.player().takeGold(-E.addShards);
             }
             if (E.addMapReputation != 0) {
-                if (E.POIReference != null && !E.POIReference.isEmpty() && !E.POIReference.contains("$")) {
-                    WorldSave.getCurrentSave().getPointOfInterestChanges(E.POIReference).addMapReputation(E.addMapReputation);
+                if (E.POIReference != null && !E.POIReference.isEmpty()) {
+                    if(E.POIReference.contains("$")) {
+                        // When this happens, we have a quest with a poi reference that failed to store the target in saved poi tokens
+                        if(TileMapScene.instance().rootPoint == null) {
+                            // This previously caused an exception because the rootPoint reflects the last POI visited.
+                            // If the save file was loaded and the quest is completed, and we don't have the poi token,
+                            // getting the changes assumes the root point as where to apply the reputation. In
+                            // actuality, we should not, so we basically should do nothing because we are going to just
+                            // generate a new poi with the replacement token name if we fix that issue.
+                        } else {
+                            // In this case, we can follow the previous path to grant reputation to the last place
+                            // visited, so the player gets *something* for reputation, however erroneously.
+                            stage.getChanges().addMapReputation(E.addMapReputation);
+                        }
+                    } else {
+                        WorldSave.getCurrentSave().getPointOfInterestChanges(E.POIReference).addMapReputation(E.addMapReputation);
+                    }
                 } else {
                     stage.getChanges().addMapReputation(E.addMapReputation);
                 }

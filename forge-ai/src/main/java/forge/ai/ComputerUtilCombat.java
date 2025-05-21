@@ -1735,6 +1735,7 @@ public class ComputerUtilCombat {
         final int attackerLife = getDamageToKill(attacker, false)
                 + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
+        // AI should be less worried about Deathtouch
         if (blocker.hasDoubleStrike()) {
             if (defenderDamage > 0 && (hasKeyword(blocker, "Deathtouch", withoutAbilities, combat) || attacker.hasSVar("DestroyWhenDamaged"))) {
                 return true;
@@ -1964,6 +1965,7 @@ public class ComputerUtilCombat {
         final int attackerLife = getDamageToKill(attacker, false)
                 + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
+        // AI should be less worried about deathtouch
         if (attacker.hasDoubleStrike()) {
             if (attackerDamage >= defenderLife) {
                 return true;

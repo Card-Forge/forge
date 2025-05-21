@@ -20,9 +20,14 @@ ScryfallCode=FCA
 25 R Mangara, the Diplomat @Toshitaka Matsuda
 27 U Wall of Omens @ISAMU KAMIKOKURYO
 28 U Brainstorm @Akihiko Yoshida
+30 U Laboratory Maniac @Tetsuya Nomura
 31 M Rhystic Study @Square Enix
 33 U Deadly Dispute @Airi Yoshioka
+34 R Diabolic Intent @Fumio Minagawa
+35 M Gix, Yawgmoth Praetor @SUEMI Jun
 36 R K'rrik, Son of Yawgmoth @Yusuke Mogi
+37 R Varragoth, Bloodsky Sire @Square Enix
+39 U Light Up the Stage @Square Enix
 40 U Lightning Bolt @Toshitaka Matsuda
 41 R Mizzix's Mastery @Toshitaka Matsuda
 42 M Najeela, the Blade-Blossom @Tetsuya Nomura
@@ -33,6 +38,7 @@ ScryfallCode=FCA
 50 R Bruse Tarl, Boorish Herder @Square Enix
 51 U Dovin's Veto @Akihiko Yoshida
 54 R Isshin, Two Heavens as One @Tetsuya Nomura
+56 R Kraum, Ludevic's Opus @Square Enix
 57 R Muldrotha, the Gravetide @Chikako Nakano
 58 M Thrasios, Triton Hero @Square Enix
 60 R Yuriko, the Tiger's Shadow @Tetsuya Nomura
