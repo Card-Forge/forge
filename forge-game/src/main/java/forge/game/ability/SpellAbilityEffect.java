@@ -393,11 +393,11 @@ public abstract class SpellAbilityEffect {
             } else {
                 sb.append("beginning of ");
                 sb.append(your ? "your" : "the");
-            if (upkeep) {
-                sb.append(" next upkeep.");
-            } else {
-                sb.append(" next end step.");
-            }
+                if (upkeep) {
+                    sb.append(" next upkeep.");
+                } else {
+                    sb.append(" next end step.");
+                }
             }
             desc = sb.toString();
         }
