@@ -1,0 +1,11 @@
+Name:Garnet, Princess of Alexandria
+ManaCost:G W
+Types:Legendary Creature Human Noble Cleric
+PT:2/2
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever NICKNAME attacks, you may remove a lore counter from each of any number of Sagas you control. Put a +1/+1 counter on NICKNAME for each lore counter removed this way.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Choices$ Saga.YouCtrl | CounterType$ LORE | CounterNum$ 1 | ChoiceOptional$ True | SubAbility$ DBPutCounter | RememberAmount$ True
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
+Oracle:Lifelink\nWhenever Garnet attacks, you may remove a lore counter from each of any number of Sagas you control. Put a +1/+1 counter on Garnet for each lore counter removed this way.
