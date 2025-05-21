@@ -233,6 +233,7 @@ Praetor:Praetors
 Primarch:Primarchs
 Prism:Prisms
 Processor:Processors
+Qu:Qu
 Raccoon:Raccoons
 Rabbit:Rabbits
 Ranger:Rangers

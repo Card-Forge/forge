@@ -4850,7 +4850,7 @@
 											"key": ""
 										},
 										"issueQuest": "18",
-										"POIReference": ""
+										"POIReference": "$(poi_1)"
 									}
 								],
 								"name": "\"What else was I going to do? Go save the world?\" (Accept Quest)"
@@ -4878,7 +4878,7 @@
 											"key": ""
 										},
 										"issueQuest": "18",
-										"POIReference": ""
+										"POIReference": "$(poi_1)"
 									}
 								],
 								"name": "One way to find out. (Accept Quest)"
@@ -4985,7 +4985,7 @@
 			"id": 1,
 			"name": "Leave",
 			"description": "Leave town to begin your quest.",
-			"anyPOI": true,
+			"here": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
@@ -5009,7 +5009,7 @@
 			"prologue": {},
 			"epilogue": {},
 			"failureDialog": {},
-			"POIToken": ""
+			"POIToken": "$(poi_1)"
 		}
 	],
 	"questSourceTags": [

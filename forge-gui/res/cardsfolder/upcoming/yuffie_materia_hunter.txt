@@ -1,0 +1,9 @@
+Name:Yuffie, Materia Hunter
+ManaCost:2 R
+Types:Legendary Creature Human Ninja
+PT:3/3
+K:Ninjutsu:1 R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When NICKNAME enters, gain control of target noncreature artifact for as long as you control NICKNAME. Then you may attach an Equipment you control to NICKNAME.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | LoseControl$ LeavesPlay,LoseControl | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Optional$ True | Choices$ Equipment.YouCtrl | ChoiceTitle$ Choose an Equipment you control | Defined$ Self
+Oracle:Ninjutsu {1}{R} ({1}{R}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhen Yuffie enters, gain control of target noncreature artifact for as long as you control Yuffie. Then you may attach an Equipment you control to Yuffie.

@@ -1,0 +1,8 @@
+Name:Yuna, Hope of Spira
+ManaCost:3 G W
+Types:Legendary Creature Human Cleric
+PT:3/5
+S:Mode$ Continuous | Affected$ Card.Self,Creature.Enchantment+YouCtrl | AddKeyword$ Trample & Lifelink & Ward:2 | Condition$ PlayerTurn | Description$ During your turn, NICKNAME and enchantment creatures you control have trample, lifelink, and ward {2}.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, return up to one target enchantment card from your graveyard to the battlefield with a finality counter on it. (If a permanent with a finality counter on it would be put into a graveyard from the battlefield, exile it instead.)
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Enchantment.YouOwn | WithCountersType$ FINALITY | WithCountersAmount$ 1 | TgtPrompt$ Select target enchantment card in your graveyard
+Oracle:During your turn, Yuna and enchantment creatures you control have trample, lifelink, and ward {2}.\nAt the beginning of your end step, return up to one target enchantment card from your graveyard to the battlefield with a finality counter on it. (If a permanent with a finality counter on it would be put into a graveyard from the battlefield, exile it instead.)

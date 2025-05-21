@@ -1,0 +1,5 @@
+Name:Blitzball Shot
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Target creature gets +3/+3 and gains trample until end of turn.
+Oracle:Target creature gets +3/+3 and gains trample until end of turn.

@@ -8,7 +8,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerZones$ Ba
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Sanguine Bond | Zone$ Library | LibraryPosition$ Count$Random.0.15 | RememberMade$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ DrawTrig | staticAbilities$ FreeCast | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:DrawTrig:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card.
-SVar:FreeCast:Mode$ Continuous | MayPlay$ True | MayPlayAltManaCost$ 0 | MayPlayDontGrantZonePermissions$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Hand | Description$ You may pay {0} rather than pay this spell's mana cost.
+SVar:DrawTrig:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this permanent enters, draw a card.
+SVar:FreeCast:Mode$ Continuous | MayPlay$ True | MayPlayAltManaCost$ 0 | MayPlayDontGrantZonePermissions$ True | Affected$ Card.Self | AffectedZone$ Hand,Graveyard,Exile,Library,Command | EffectZone$ All | Description$ You may pay {0} rather than pay this spell's mana cost.
 SVar:TrigDraw:DB$ Draw
 Oracle:Flying, lifelink\nWhenever Sanguine Soothsayer attacks, conjure a card named Sanguine Bond into the top fifteen cards of your library at random. It perpetually gains "You may pay {0} rather than pay this spell's mana cost" and "When this permanent enters, draw a card."

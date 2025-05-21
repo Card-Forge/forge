@@ -1,0 +1,15 @@
+Name:Fandaniel, Telophoroi Ascian
+ManaCost:4 B
+Types:Legendary Creature Elder Wizard
+PT:4/5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, surveil 1.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, each opponent may sacrifice a nontoken creature of their choice. Each opponent who doesn't loses 2 life for each instant and sorcery card in your graveyard.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature.!token | RememberSacrificed$ True | Optional$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ OppNonRememberedController | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:SVar$Y/Times.2
+SVar:Y:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+SVar:BuffedBy:Instant,Sorcery
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Whenever you cast an instant or sorcery spell, surveil 1.\nAt the beginning of your end step, each opponent may sacrifice a nontoken creature of their choice. Each opponent who doesn't loses 2 life for each instant and sorcery card in your graveyard.

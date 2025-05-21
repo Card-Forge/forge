@@ -1,0 +1,10 @@
+Name:Lifestream's Blessing
+ManaCost:4 G G
+Types:Instant
+K:Foretell:4 G
+A:SP$ Draw | NumCards$ X | SubAbility$ DBGainLife | SpellDescription$ Draw X cards, where X is the greatest power among creatures you controlled as you cast this spell. If this spell was cast from exile, you gain twice X life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y | Defined$ You
+SVar:X:Count$LastStateBattlefieldWithFallback Creature.YouCtrl$GreatestPower
+SVar:Y:SVar$X/Times.Z
+SVar:Z:Count$wasCastFromExile.2.0
+Oracle:Draw X cards, where X is the greatest power among creatures you controlled as you cast this spell. If this spell was cast from exile, you gain twice X life.\nForetell {4}{G} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

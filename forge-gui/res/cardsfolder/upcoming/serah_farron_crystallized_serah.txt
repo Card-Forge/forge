@@ -1,0 +1,21 @@
+Name:Serah Farron
+ManaCost:1 G W
+Types:Legendary Creature Human Citizen
+PT:2/2
+S:Mode$ ReduceCost | EffectZone$ Battlefield | ValidCard$ Creature.Legendary | Activator$ You | Type$ Spell | OnlyFirstSpell$ True | Amount$ 2 | Description$ The first legendary creature spell you cast each turn costs {2} less to cast.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Creature.Other+Legendary+YouCtrl | PresentCompare$ GE2 | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of combat on your turn, if you control two or more other legendary creatures, you may transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+SVar:PlayMain1:TRUE
+DeckHints:Type$Legendary
+Oracle:The first legendary creature spell you cast each turn costs {2} less to cast.\nAt the beginning of combat on your turn, if you control two or more other legendary creatures, you may transform Serah Farron.
+
+ALTERNATE
+
+Name:Crystallized Serah
+ManaCost:no cost
+Colors:green,white
+Types:Legendary Artifact
+S:Mode$ ReduceCost | EffectZone$ Battlefield | ValidCard$ Creature.Legendary | Activator$ You | Type$ Spell | OnlyFirstSpell$ True | Amount$ 2 | Description$ The first legendary creature spell you cast each turn costs {2} less to cast.
+S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Legendary creatures you control get +2/+2.
+Oracle:The first legendary creature spell you cast each turn costs {2} less to cast.\nLegendary creatures you control get +2/+2.

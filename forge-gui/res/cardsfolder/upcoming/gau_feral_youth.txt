@@ -1,0 +1,13 @@
+Name:Gau, Feral Youth
+ManaCost:1 R
+Types:Legendary Creature Human Berserker
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Rage — Whenever NICKNAME attacks, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDealDamage | CheckSVar$ X | TriggerDescription$ At the beginning of each end step, if a card left your graveyard this turn, NICKNAME deals damage equal to its power to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ Y
+SVar:X:Count$LeftGraveyardThisTurn Card.YouOwn
+SVar:Y:Count$CardPower
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Rage — Whenever Gau attacks, put a +1/+1 counter on it.\nAt the beginning of each end step, if a card left your graveyard this turn, Gau deals damage equal to its power to each opponent.

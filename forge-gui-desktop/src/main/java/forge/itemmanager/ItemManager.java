@@ -901,7 +901,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             predicates.add(mainSearchFilter.buildPredicate(this.genericType));
         }
 
-        final Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : IterableUtil.and(predicates);
+        final Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : IterableUtil.<T>and(predicates);
         if (this.filterPredicate == newFilterPredicate) { return false; }
 
         this.filterPredicate = newFilterPredicate;

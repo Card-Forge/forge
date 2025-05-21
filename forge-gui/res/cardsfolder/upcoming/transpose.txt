@@ -1,0 +1,9 @@
+Name:Transpose
+ManaCost:2 B
+Types:Instant
+A:SP$ Draw | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. You lose 1 life. If this spell was cast from your hand, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_1_wizard_snipe | TokenOwner$ You | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromYourHand | ConditionCompare$ EQ1
+K:Rebound
+Oracle:Draw a card, then discard a card. You lose 1 life. If this spell was cast from your hand, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

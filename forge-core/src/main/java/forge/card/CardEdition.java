@@ -870,7 +870,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         public CardEdition getEditionByCodeOrThrow(final String code) {
             final CardEdition set = this.get(code);
-            if (null == set && code.equals("???")) //Hardcoded set ??? is not with the others, needs special check.
+            if (null == set && code.equals(UNKNOWN_CODE)) //Hardcoded set ??? is not with the others, needs special check.
                 return UNKNOWN;
             if (null == set) {
                 throw new RuntimeException("Edition with code '" + code + "' not found");
@@ -1000,5 +1000,13 @@ public final class CardEdition implements Comparable<CardEdition> {
                     : MyRandom.getRandom().nextInt(9) + 11;
         }
         return 0;
+    }
+
+    public boolean hasBasicLands() {
+        for(String landName : MagicColor.Constant.BASIC_LANDS) {
+            if (null == StaticData.instance().getCommonCards().getCard(landName, this.getCode(), 0))
+                return false;
+        }
+        return true;
     }
 }

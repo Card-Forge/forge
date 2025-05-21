@@ -1,0 +1,11 @@
+Name:The Warring Triad
+ManaCost:3
+Types:Legendary Artifact Creature God
+PT:5/5
+K:Flying
+K:Trample
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT8 | Description$ As long as there are fewer than eight cards in your graveyard, CARDNAME isn't a creature.
+A:AB$ Mana | Cost$ T Mill<1> | Defined$ Targeted | ValidTgts$ Player | Produced$ Any | SpellDescription$ Target player adds one mana of any color.
+SVar:X:Count$ValidGraveyard Card.YouOwn
+Oracle:Flying, trample, haste\nAs long as there are fewer than eight cards in your graveyard, The Warring Triad isn't a creature.\n{T}, Mill a card: Target player adds one mana of any color.

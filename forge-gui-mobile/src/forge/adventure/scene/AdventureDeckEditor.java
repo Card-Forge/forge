@@ -667,6 +667,61 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
     }
 
+    protected void launchBasicLandDialog() {
+        CardEdition defaultLandSet;
+        Set<CardEdition> availableEditionCodes = new HashSet<>();
+
+        if (currentEvent != null) {
+            //suggest a random set from the ones used in the limited card pool that have all basic lands
+            for (PaperCard p : currentEvent.registeredDeck.getAllCardsInASinglePool().toFlatList()) {
+                availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
+            }
+            defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
+        } else {
+            defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
+        }
+
+        if (defaultLandSet == null) {
+            defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
+        }
+
+        List<CardEdition> unlockedEditions = new ArrayList<>();
+        unlockedEditions.add(defaultLandSet);
+
+        // Loop through Landscapes and add them to unlockedEditions
+        if (currentEvent == null) {
+            Map<String, CardEdition> editionsByName = new HashMap<>();
+            for (CardEdition e : FModel.getMagicDb().getEditions()) {
+                editionsByName.put(e.getName().toLowerCase(), e);
+            }
+
+            String sketchbookPrefix = "landscape sketchbook - ";
+            for (String itemName : AdventurePlayer.current().getItems()) {
+                if (!itemName.toLowerCase().startsWith(sketchbookPrefix)) {
+                    continue;
+                }
+
+                // Extract the set name after the prefix
+                String setName = itemName.substring(sketchbookPrefix.length()).trim();
+                CardEdition edition = editionsByName.get(setName.toLowerCase());
+
+                // Add the edition if found and it has basic lands
+                if (edition != null && edition.hasBasicLands()) {
+                    unlockedEditions.add(edition);
+                }
+            }
+        }
+
+        AddBasicLandsDialog dialog = new AddBasicLandsDialog(getDeck(), defaultLandSet, new Callback<CardPool>() {
+            @Override
+            public void run(CardPool landsToAdd) {
+                getMainDeckPage().addCards(landsToAdd);
+            }
+        }, unlockedEditions);
+        dialog.show();
+        setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
+    }
+
     @Override
     protected boolean allowsAddBasic() {
         if (currentEvent == null)

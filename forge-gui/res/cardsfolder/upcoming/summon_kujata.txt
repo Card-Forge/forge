@@ -1,0 +1,16 @@
+Name:Summon: Kujata
+ManaCost:5 R
+Types:Enchantment Creature Saga Ox
+PT:7/5
+K:Chapter:3:DBLightning,DBIce,DBFire
+SVar:DBLightning:DB$ DealDamage | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | NumDmg$ 3 | SpellDescription$ Lightning — This creature deals 3 damage to each of up to two target creatures.
+SVar:DBIce:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TgtPrompt$ Select up to three target creatures | SpellDescription$ Ice — Up to three target creatures can't block this turn.
+SVar:DBFire:DB$ Discard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Fire — Discard a card, then draw two cards. When you discard a card this way, this creature deals damage equal to that card's mana value to each opponent.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigDealDamage | RememberObjects$ Remembered | TriggerDescription$ When you discard a card this way, this creature deals damage equal to that card's mana value to each opponent. | SubAbility$ DBCleanup
+SVar:TrigDealDamage:DB$ DamageAll | NumDmg$ X | ValidPlayers$ Player.Opponent
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Trample
+K:Haste
+SVar:X:TriggerRemembered$CardManaCost
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Lightning — This creature deals 3 damage to each of up to two target creatures.\nII — Ice — Up to three target creatures can't block this turn.\nIII — Fire — Discard a card, then draw two cards. When you discard a card this way, this creature deals damage equal to that card's mana value to each opponent.\nTrample, haste

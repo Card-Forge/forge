@@ -1,0 +1,13 @@
+Name:Umaro, Raging Yeti
+ManaCost:5 R
+Types:Legendary Creature Yeti Berserker
+PT:6/6
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ At the beginning of combat on your turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPumpAll,DBDiscard,DBDealDamage | Random$ True
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | NumAtt$ +3 | KW$ Trample | SpellDescription$ Other creatures you control get +3/+0 and gain trample until end of turn.
+SVar:DBDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw | SpellDescription$ Discard your hand, then draw four cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 4
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ NICKNAME deals 5 damage to any target.
+SVar:PlayMain1:TRUE
+Oracle:Trample\nAt the beginning of combat on your turn, choose one at random —\n• Other creatures you control get +3/+0 and gain trample until end of turn.\n• Discard your hand, then draw four cards.\n• Umaro deals 5 damage to any target.

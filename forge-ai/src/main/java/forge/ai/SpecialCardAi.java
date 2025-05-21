@@ -1469,6 +1469,7 @@ public class SpecialCardAi {
             if (best != null) {
                 sa.resetTargets();
                 sa.getTargets().add(best);
+                sa.setXManaCostPaid(best.getCMC());
                 return true;
             }
 

@@ -60,7 +60,11 @@ public class SpellSmithScene extends UIScene {
     //Other
     private final float basePrice = 125f;
     private int currentPrice = 0;
+    private int lockedPrice = 0;
+
     private int currentShardPrice = 0;
+    private int lockedShardPrice = 0;
+
     private List<CardEdition> editions = null;
     private Reward currentReward = null;
     private boolean paidInShards = false;
@@ -144,6 +148,8 @@ public class SpellSmithScene extends UIScene {
         cost_high = 9999;
         rarity = "";
         currentPrice = (int) basePrice;
+        lockedPrice = currentPrice;
+        lockedShardPrice = currentShardPrice;
         for (Map.Entry<String, TextraButton> B : colorButtons.entrySet()) B.getValue().setColor(Color.WHITE);
         for (Map.Entry<String, TextraButton> B : costButtons.entrySet()) B.getValue().setColor(Color.WHITE);
         for (Map.Entry<String, TextraButton> B : rarityButtons.entrySet()) B.getValue().setColor(Color.WHITE);
@@ -407,6 +413,8 @@ public class SpellSmithScene extends UIScene {
 
     public void pullCard(boolean usingShards) {
         paidInShards = usingShards;
+        lockedShardPrice = currentShardPrice;
+        lockedPrice = currentPrice;
         PaperCard P = cardPool.get(MyRandom.getRandom().nextInt(cardPool.size())); //Don't use the standard RNG.
         currentReward = null;
         if (Config.instance().getSettingData().useAllCardVariants) {
@@ -432,9 +440,9 @@ public class SpellSmithScene extends UIScene {
 
     private void acceptSmithing() {
         if (paidInShards) {
-            Current.player().takeShards(currentShardPrice);
+            Current.player().takeShards(lockedShardPrice);
         } else {
-            Current.player().takeGold(currentPrice);
+            Current.player().takeGold(lockedPrice);
         }
 
         Current.player().addReward(currentReward);
@@ -447,9 +455,9 @@ public class SpellSmithScene extends UIScene {
         // Decline the smith reward for 10% of original price
         float priceAdjustment = .10f;
         if (paidInShards) {
-            Current.player().takeShards((int)(currentShardPrice * priceAdjustment));
+            Current.player().takeShards((int)(lockedShardPrice * priceAdjustment));
         } else {
-            Current.player().takeGold((int)(currentPrice * priceAdjustment));
+            Current.player().takeGold((int)(lockedPrice * priceAdjustment));
         }
 
         clearReward();

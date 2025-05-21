@@ -1,0 +1,9 @@
+Name:Phantom Train
+ManaCost:3 B
+Types:Artifact Vehicle
+PT:4/4
+K:Trample
+A:AB$ PutCounter | Cost$ Sac<1/Artifact.Other;Creature.Other/another artifact or creature> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBAnimate | SpellDescription$ Put a +1/+1 counter on this Vehicle. It becomes a Spirit artifact creature in addition to its other types until end of turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Artifact,Creature,Spirit
+DeckHas:Ability$Sacrifice|Counters
+Oracle:Trample\nSacrifice another artifact or creature: Put a +1/+1 counter on this Vehicle. It becomes a Spirit artifact creature in addition to its other types until end of turn.

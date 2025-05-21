@@ -1,0 +1,8 @@
+Name:Sphere Grid
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on that creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Reach & Trample | Description$ Unlock Ability — Creatures you control with +1/+1 counters on them have reach and trample.
+DeckHas:Ability$Counters
+Oracle:Whenever a creature you control deals combat damage to a player, put a +1/+1 counter on that creature.\nUnlock Ability — Creatures you control with +1/+1 counters on them have reach and trample.
