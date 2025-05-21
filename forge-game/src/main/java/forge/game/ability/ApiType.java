@@ -92,6 +92,7 @@ public enum ApiType {
     ExchangeControlVariant (ControlExchangeVariantEffect.class),
     ExchangePower (PowerExchangeEffect.class),
     ExchangeZone (ZoneExchangeEffect.class),
+    ExchangeTextBox (TextBoxExchangeEffect.class),
     Explore (ExploreEffect.class),
     Fight (FightEffect.class),
     FlipACoin (FlipCoinEffect.class),
