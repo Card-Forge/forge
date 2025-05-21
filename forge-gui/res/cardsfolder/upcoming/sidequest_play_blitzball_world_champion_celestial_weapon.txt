@@ -19,4 +19,4 @@ Colors:red
 Types:Legendary Artifact Equipment
 K:Equip:3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Double Strike | Description$ Double Overdrive — Equipped creature gets +2/+0 and has double strike.
-Oracle:Double Overdrive — Equipped creature gets +2/+0 and has double strike.\nEquip {3} (3:Attach to target creature you control. Equip only as a sorcery.)
+Oracle:Double Overdrive — Equipped creature gets +2/+0 and has double strike.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
