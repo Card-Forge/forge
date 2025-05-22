@@ -63,7 +63,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         for (final Player flipper : playersToFlip) {
             if (noCall) {
                 int countHeads = flipCoins(flipper, sa, amount);
-                int countTails = countHeads - amount;
+                int countTails = Math.abs(countHeads - amount);
                 if (countHeads > 0) {
                     if (sa.hasParam("RememberResult")) {
                         host.addFlipResult(flipper, "Heads");
@@ -132,7 +132,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 }
             } else {
                 int countWins = flipCoins(flipper, sa, amount);
-                int countLosses = countWins - amount;
+                int countLosses = Math.abs(countWins - amount);
                 if (countWins > 0) {
                     if (sa.hasParam("RememberWinner")) {
                         host.addRemembered(flipper);
