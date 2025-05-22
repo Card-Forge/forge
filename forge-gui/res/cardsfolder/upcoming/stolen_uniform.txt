@@ -1,11 +1,9 @@
 Name:Stolen Uniform
 ManaCost:U
 Types:Instant
-A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ ThisTargetedCard | SubAbility$ DBPumpTwo | SpellDescription$ Choose target creature you control and target Equipment. Gain control of that Equipment until end of turn. Attach it to the chosen creature. When you lose control of that Equipment this turn, if it's attached to a creature you control, unattach it.
-SVar:DBPumpTwo:DB$ Pump | ValidTgts$ Equipment | ImprintCards$ ThisTargetedCard | SubAbility$ DBGainControl
-SVar:DBGainControl:DB$ GainControl | Defined$ Imprinted | LoseControl$ EOT | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Object$ Imprinted | Defined$ Remembered | ForgetRemembered$ True | SubAbility$ DBDelayTrig
-SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ ChangesController | ValidCard$ Card.Equipment+IsTriggerRemembered+AttachedTo Creature.YouCtrl | ValidOriginalController$ You | RememberObjects$ Imprinted | ThisTurn$ True | Execute$ TrigUnattach | SubAbility$ DBCleanup | TriggerDescription$ When you lose control of that Equipment this turn, if it's attached to a creature you control, unattach it.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBGainControl | SpellDescription$ Choose target creature you control and target Equipment. Gain control of that Equipment until end of turn. Attach it to the chosen creature. When you lose control of that Equipment this turn, if it's attached to a creature you control, unattach it.
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Equipment | Defined$ ThisTargetedCard | LoseControl$ EOT | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ Valid Equipment.nonCreature+targetedBy | Defined$ Valid Creature.targetedBy | SubAbility$ DBDelayTrig
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ ChangesController | ValidCard$ Card.Equipment+IsTriggerRemembered+AttachedTo Creature.YouCtrl | ValidOriginalController$ You | RememberObjects$ Valid Equipment.nonCreature+targetedBy | ThisTurn$ True | Execute$ TrigUnattach | TriggerDescription$ When you lose control of that Equipment this turn, if it's attached to a creature you control, unattach it.
 SVar:TrigUnattach:DB$ Unattach | Defined$ DelayTriggerRememberedLKI
-SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 Oracle:Choose target creature you control and target Equipment. Gain control of that Equipment until end of turn. Attach it to the chosen creature. When you lose control of that Equipment this turn, if it's attached to a creature you control, unattach it.
