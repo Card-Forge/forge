@@ -8,5 +8,5 @@ SVar:DBDraw:DB$ Draw | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompar
 SVar:DBSac:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8 | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8 | Defined$ Opponent
 SVar:X:TriggeredCard$CastTotalManaSpent
-DeckHints:Type$nonCreature+nonLand
+DeckHints:Type$Card.nonCreature+nonLand
 Oracle:Whenever you cast a noncreature spell, create a 1/1 colorless Hero creature token. If four or more mana was spent to cast that spell, draw two cards. If eight or more mana was spent to cast that spell, sacrifice Tellah and it deals that much damage to each opponent.
