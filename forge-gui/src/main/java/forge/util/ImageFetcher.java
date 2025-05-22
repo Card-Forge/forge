@@ -235,10 +235,12 @@ public abstract class ImageFetcher {
             }
             String[] tempdata = tmp.substring(2).split("\\|"); //We want to check the edition first.
             String tokenName = tempdata[0];
-            String setCode = tempdata[1];
+            String setCode = tempdata.length > 1 ? tempdata[1] : CardEdition.UNKNOWN_CODE;
 
-            StringBuilder sb = new StringBuilder(setCode);
-            sb.append("/");
+            StringBuilder sb = new StringBuilder();
+            if (tempdata.length > 1) {
+                sb.append(setCode).append("/");
+            }
             if (tempdata.length > 2) {
                 sb.append(tempdata[2]).append("_");
             }
