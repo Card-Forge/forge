@@ -16,6 +16,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityFlipCoinMod;
 import forge.game.trigger.TriggerType;
 import forge.util.Localizer;
 import forge.util.MyRandom;
@@ -173,7 +174,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         int result = 0;
         boolean won = false;
         do {
-            Boolean fixedResult = true;
+            Boolean fixedResult = StaticAbilityFlipCoinMod.fixedResult(flipper);
             for (int i = 0; i < amount; i++) {
                 won = flipCoin(flipper, sa, multiplier, fixedResult,"");
                 if (won) {
