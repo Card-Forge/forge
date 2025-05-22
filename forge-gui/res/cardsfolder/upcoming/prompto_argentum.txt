@@ -1,0 +1,8 @@
+Name:Prompto Argentum
+ManaCost:1 R
+Types:Legendary Creature Human Scout
+PT:2/2
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | ValidSAonCard$ Spell.ManaSpent GE4 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Selfie Shot — Whenever you cast a noncreature spell, if at least four mana was spent to cast it, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+Oracle:Haste\nSelfie Shot — Whenever you cast a noncreature spell, if at least four mana was spent to cast it, create a Treasure token.
