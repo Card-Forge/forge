@@ -176,7 +176,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         do {
             Boolean fixedResult = StaticAbilityFlipCoinMod.fixedResult(flipper);
             for (int i = 0; i < amount; i++) {
-                won = flipCoin(flipper, sa, multiplier, fixedResult,"");
+                won = flipCoin(flipper, sa, multiplier, fixedResult, info);
                 if (won) {
                     result++;
                 }
