@@ -1,4 +1,4 @@
-Name:Radiant Fountain
+Name:Adventurer's Inn
 ManaCost:no cost
 Types:Land Town
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this land enters, you gain 2 life.
