@@ -3004,6 +3004,14 @@ public class CardFactoryUtil {
                 System.err.println("Malformed Equip entry! - Card: " + card.toString());
                 return;
             }
+            boolean hasFlav = false;
+            String flavor = "";
+            // Flavor keyword titles should be last in the card script K: line
+            if (keyword.contains(":Flavor ")) {
+                flavor = (keyword.split(":Flavor ", 2)[1]) + (" — ");
+                keyword = keyword.substring(0, keyword.indexOf(":Flavor "));
+                hasFlav = true;
+            }
             String[] k = keyword.split(":");
             // Get cost string
             String equipCost = k[1];
@@ -3024,7 +3032,9 @@ public class CardFactoryUtil {
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
             }
-            abilityStr.append(" | PrecostDesc$ Equip");
+            abilityStr.append(" | PrecostDesc$ ");
+            if (hasFlav) abilityStr.append(flavor);
+            abilityStr.append("Equip");
             if (k.length > 3 && !k[3].isEmpty()) {
                 abilityStr.append(" ").append(vstr);
             }
@@ -3041,7 +3051,7 @@ public class CardFactoryUtil {
             if (!extraDesc.isEmpty()) {
                 abilityStr.append(". ").append(extraDesc).append(". ");
             }
-            if (!altCost) {
+            if (!altCost && !hasFlav) {
                 abilityStr.append("(").append(inst.getReminderText()).append(")");
             }
             if (!extra.isEmpty()) {
