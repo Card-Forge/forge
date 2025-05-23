@@ -1,4 +1,5 @@
 Name:The Gold Saucer
+ManaCost:no cost
 Types:Land Town
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ FlipACoin | Cost$ 2 T | WinSubAbility$ DBToken | SpellDescription$ Flip a coin. If you win the flip, create a Treasure token.
