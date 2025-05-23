@@ -227,6 +227,15 @@ public abstract class ImageFetcher {
                 // This function adds to downloadUrls for us
                 this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
             }
+        } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
+            // extra logic for hidden card to not clog the other logic
+            final String filename = "hidden.png";
+            if (ImageKeys.missingCards.contains(filename))
+                return;
+            // scryfall only as png version
+            downloadUrls.add("https://cards.scryfall.io/back.png");
+            ImageKeys.missingCards.add(filename);
+            destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             String tmp = imageKey;
             if (tmp.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
