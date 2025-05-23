@@ -105,7 +105,10 @@ public final class ImageKeys {
         String[] tempdata = null;
         if (key.startsWith(ImageKeys.TOKEN_PREFIX)) {
             tempdata = key.substring(ImageKeys.TOKEN_PREFIX.length()).split("\\|");
-            String tokenname = tempdata[0] + "_" + tempdata[1];
+            String tokenname = tempdata[0];
+            if (tempdata.length > 1) {
+                tokenname += "_" + tempdata[1];
+            }
             if (tempdata.length > 2) {
                 tokenname += "_" + tempdata[2];
             }
@@ -153,20 +156,21 @@ public final class ImageKeys {
             }
             if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
                 String setlessFilename = tempdata[0];
-                String setCode = tempdata[1];
+                String setCode = tempdata.length > 1 ? tempdata[1] : "";
                 String collectorNumber = tempdata.length > 2 ? tempdata[2] : "";
-
-                if (!collectorNumber.isEmpty()) {
-                    file = findFile(dir, setCode + "/" + collectorNumber + "_" + setlessFilename);
+                if (!setCode.isEmpty()) {
+                    if (!collectorNumber.isEmpty()) {
+                        file = findFile(dir, setCode + "/" + collectorNumber + "_" + setlessFilename);
+                        if (file != null) {
+                            cachedCards.put(filename, file);
+                            return file;
+                        }
+                    }
+                    file = findFile(dir, setCode + "/" + setlessFilename);
                     if (file != null) {
                         cachedCards.put(filename, file);
                         return file;
                     }
-                }
-                file = findFile(dir, setCode + "/" + setlessFilename);
-                if (file != null) {
-                    cachedCards.put(filename, file);
-                    return file;
                 }
                 file = findFile(dir, setlessFilename);
                 if (file != null) {

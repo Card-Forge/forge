@@ -1,0 +1,11 @@
+Name:Gaius van Baelsar
+ManaCost:2 B B
+Types:Legendary Creature Human Soldier
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBNonToken,DBEnchantment
+SVar:DBToken:DB$ Sacrifice | Defined$ Player | SacValid$ Creature.token | SpellDescription$ Each player sacrifices a creature token of their choice.
+SVar:DBNonToken:DB$ Sacrifice | Defined$ Player | SacValid$ Creature.!token | SpellDescription$ Each player sacrifices a nontoken creature of their choice.
+SVar:DBEnchantment:DB$ Sacrifice | Defined$ Player | SacValid$ Enchantment | SpellDescription$ Each player sacrifices an enchantment of their choice.
+DeckHas:Ability$Sacrifice
+Oracle:When Gaius van Baelsar enters, choose one —\n• Each player sacrifices a creature token of their choice.\n• Each player sacrifices a nontoken creature of their choice.\n• Each player sacrifices an enchantment of their choice.

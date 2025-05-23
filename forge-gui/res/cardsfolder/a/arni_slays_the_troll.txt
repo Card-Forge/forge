@@ -1,11 +1,11 @@
 Name:Arni Slays the Troll
 ManaCost:R G
 Types:Enchantment Saga
-K:Chapter:3:DBPump,DBPutCounter,DBGainLife
+K:Chapter:3:DBPump,DBMana,DBGainLife
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights up to one target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature you don't control
-SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBRedMana | SpellDescription$ Add {R}. Put two +1/+1 counters on up to one target creature you control.
-SVar:DBRedMana:DB$ Mana | Produced$ R
+SVar:DBMana:DB$ Mana | Produced$ R | SubAbility$ DBPutCounter | SpellDescription$ Add {R}. Put two +1/+1 counters on up to one target creature you control.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SpellDescription$ You gain life equal to the greatest power among creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 DeckHas:Ability$Counters|LifeGain

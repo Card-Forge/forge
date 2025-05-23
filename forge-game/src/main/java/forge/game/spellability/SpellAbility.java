@@ -1644,12 +1644,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
-    protected List<IHasSVars> getSVarFallback() {
+    @Override
+    protected List<IHasSVars> getSVarFallback(final String name) {
         List<IHasSVars> result = Lists.newArrayList();
         if (getParent() != null) {
             result.add(getParent());
         }
-        result.addAll(super.getSVarFallback());
+        result.addAll(super.getSVarFallback(name));
         return result;
     }
 

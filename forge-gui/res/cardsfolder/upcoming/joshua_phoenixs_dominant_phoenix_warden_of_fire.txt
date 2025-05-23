@@ -1,0 +1,32 @@
+Name:Joshua, Phoenix's Dominant
+ManaCost:1 R W
+Types:Legendary Creature Human Noble Wizard
+PT:3/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When NICKNAME enters, discard up to two cards, then draw that many cards.
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ ChangeZone | Cost$ 3 R W T | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Exile NICKNAME, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | SubAbility$ DBCleanup
+AlternateMode:DoubleFaced
+SVar:X:Remembered$Amount
+DeckHas:Ability$Discard
+Oracle:When Joshua enters, discard up to two cards, then draw that many cards.\n{3}{R}{W}, {T}: Exile Joshua, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Phoenix, Warden of Fire
+ManaCost:no cost
+Colors:red,white
+Types:Legendary Enchantment Creature Saga Phoenix
+PT:4/4
+K:Chapter:3:DBRisingFlames,DBRisingFlames,DBFlamesOfRebirth
+SVar:DBRisingFlames:DB$ DealDamage | NumDmg$ 2 | Defined$ Player.Opponent | SpellDescription$ Rising Flames — NICKNAME deals 2 damage to each opponent.
+SVar:DBFlamesOfRebirth:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.YouOwn | MaxTotalTargetCMC$ 6 | SubAbility$ DBExile | TgtPrompt$ Select any number of creature cards with total mana value 6 or less | SpellDescription$ Return any number of target creature cards with total mana value 6 or less from your graveyard to the battlefield. Exile NICKNAME, then return it to the battlefield (front face up).
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | RememberChanged$ True
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Flying
+K:Lifelink
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+Oracle:(As this Saga enters and after your draw step, add a lore counter.)\nI, II — Rising Flames — Phoenix deals 2 damage to each opponent.\nIII — Flames of Rebirth — Return any number of target creature cards with total mana value 6 or less from your graveyard to the battlefield. Exile Phoenix, then return it to the battlefield (front face up).\nFlying, lifelink

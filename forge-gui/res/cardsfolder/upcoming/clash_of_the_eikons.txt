@@ -1,0 +1,9 @@
+Name:Clash of the Eikons
+ManaCost:G
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBFight,DBRemoveCounter,DBPutCounter
+SVar:DBFight:DB$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBFight2 | SpellDescription$ Target creature you control fights target creature an opponent controls.
+SVar:DBFight2:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls.
+SVar:DBRemoveCounter:DB$ RemoveCounter | ValidTgts$ Saga.YouCtrl | AITgts$ Saga.counters_GE1_LORE | TgtPrompt$ Select target Saga you control | CounterType$ LORE | CounterNum$ 1 | SpellDescription$ Remove a lore counter from target Saga you control. (Removing lore counters doesn't cause chapter abilities to trigger.)
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Saga.YouCtrl | TgtPrompt$ Select target Saga you control | CounterType$ LORE | CounterNum$ 1 | SpellDescription$ Put a lore counter on target Saga you control.
+Oracle:Choose one or more —\n• Target creature you control fights target creature an opponent controls.\n• Remove a lore counter from target Saga you control. (Removing lore counters doesn't cause chapter abilities to trigger.)\n• Put a lore counter on target Saga you control.

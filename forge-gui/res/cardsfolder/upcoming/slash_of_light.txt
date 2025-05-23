@@ -1,0 +1,8 @@
+Name:Slash of Light
+ManaCost:1 W
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of creatures you control plus the number of Equipment you control to target creature.
+SVar:X:Count$Valid Creature.YouCtrl/Plus.Y
+SVar:Y:Count$Valid Equipment.YouCtrl
+DeckHints:Type$Equipment
+Oracle:Slash of Light deals damage equal to the number of creatures you control plus the number of Equipment you control to target creature.

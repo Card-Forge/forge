@@ -186,6 +186,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         triggerList.triggerChangesZoneAll(game, sa);
 
+        if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
+            registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
+        }
+
         changeZoneUntilCommand(triggerList, sa);
 
         // CR 701.20d If an effect would cause a player to shuffle a set of objects into a library,

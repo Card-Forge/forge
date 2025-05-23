@@ -1,0 +1,11 @@
+Name:Locke Cole
+ManaCost:1 U B
+Types:Legendary Creature Human Rogue
+PT:2/3
+K:Deathtouch
+K:Lifelink
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+DeckHas:Ability$Discard
+Oracle:Deathtouch, lifelink\nWhenever Locke Cole deals combat damage to a player, draw a card, then discard a card.

@@ -1,0 +1,11 @@
+Name:Tellah, Great Sage
+ManaCost:3 U R
+Types:Legendary Creature Human Wizard
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 colorless Hero creature token. If four or more mana was spent to cast that spell, draw two cards. If eight or more mana was spent to cast that spell, sacrifice NICKNAME and it deals that much damage to each opponent.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_hero | TokenOwner$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4 | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8 | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8 | Defined$ Opponent
+SVar:X:TriggeredCard$CastTotalManaSpent
+Oracle:Whenever you cast a noncreature spell, create a 1/1 colorless Hero creature token. If four or more mana was spent to cast that spell, draw two cards. If eight or more mana was spent to cast that spell, sacrifice Tellah and it deals that much damage to each opponent.

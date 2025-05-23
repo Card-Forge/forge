@@ -722,7 +722,7 @@
   "rewards": [
     {
       "count":4,
-      "cardName":"Swamp"
+      "type": "landSketchbookShop"
     },
 	{
       "count":4,
@@ -738,7 +738,7 @@
   "rewards": [
     {
       "count":4,
-      "cardName":"Forest"
+      "type": "landSketchbookShop"
     },
 	{
       "count":4,
@@ -754,7 +754,7 @@
   "rewards": [
     {
       "count":4,
-      "cardName":"Mountain"
+      "type": "landSketchbookShop"
     },
 	{
       "count":4,
@@ -770,7 +770,7 @@
   "rewards": [
     {
       "count":4,
-      "cardName":"Island"
+      "type": "landSketchbookShop"
     },
 	{
       "count":4,
@@ -786,7 +786,7 @@
   "rewards": [
     {
       "count":4,
-      "cardName":"Plains"
+      "type": "landSketchbookShop"
     },
 	{
       "count":4,
