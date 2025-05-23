@@ -202,25 +202,30 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         boolean noCall = sa.hasParam("NoCall");
         boolean choice = true;
         if (fixedResult != null) {
-            choice = fixedResult;
+            flipResults.add(fixedResult);
+        } else {
             // no reason to ask if result is fixed anyway
-            noCall = true;
-            multiplier = 1;
-        }
+            if (!noCall) {
+                choice = flipper.getController().chooseBinary(sa, sa.getHostCard().getName() + " - " + Localizer.getInstance().getMessage("lblCallCoinFlip") + info, PlayerController.BinaryChoiceType.HeadsOrTails);
+            }
 
-        if (!noCall) {
-            choice = flipper.getController().chooseBinary(sa, sa.getHostCard().getName() + " - " + Localizer.getInstance().getMessage("lblCallCoinFlip") + info, PlayerController.BinaryChoiceType.HeadsOrTails);
-        }
-        for (int i = 0; i < multiplier; i++) {
-            flipResults.add(MyRandom.getRandom().nextBoolean());
+            for (int i = 0; i < multiplier; i++) {
+                flipResults.add(MyRandom.getRandom().nextBoolean());
+            }
         }
 
         boolean result = flipResults.size() == 1 ? flipResults.iterator().next() : flipper.getController().chooseFlipResult(sa, flipper, BOTH_CHOICES, true);
         boolean wonOrHeads = result == choice;
 
+        String outcome;
+        if (noCall) {
+            outcome = wonOrHeads ? Localizer.getInstance().getMessage("lblHeads") : Localizer.getInstance().getMessage("lblTails");
+        } else {
+            outcome = wonOrHeads ? Localizer.getInstance().getMessage("lblWin") : Localizer.getInstance().getMessage("lblLose");
+        }
         // Play the Flip A Coin sound
         flipper.getGame().fireEvent(new GameEventFlipCoin());
-        flipper.getGame().getAction().notifyOfValue(sa, flipper, wonOrHeads ? Localizer.getInstance().getMessage("lblWin") : Localizer.getInstance().getMessage("lblLose"), null);
+        flipper.getGame().getAction().notifyOfValue(sa, flipper, outcome, null);
 
         flipper.flip();
 
