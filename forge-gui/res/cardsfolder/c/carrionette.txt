@@ -2,5 +2,5 @@ Name:Carrionette
 ManaCost:1 B
 Types:Creature Skeleton
 PT:1/1
-A:AB$ ChangeZone | Cost$ 2 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | ThisDefinedAndTgts$ Self | Origin$ Battlefield,Graveyard | Destination$ Exile | UnlessCost$ 2 | UnlessPayer$ TargetedController | ActivationZone$ Graveyard | SpellDescription$ Exile CARDNAME and target creature unless that creature's controller pays {2}. Activate only if CARDNAME is in your graveyard.
+A:AB$ ChangeZone | Cost$ 2 B B | ValidTgts$ Creature.inZoneBattlefield | TgtPrompt$ Select target creature | ThisDefinedAndTgts$ Self | Origin$ Battlefield,Graveyard | Destination$ Exile | UnlessCost$ 2 | UnlessPayer$ TargetedController | ActivationZone$ Graveyard | SpellDescription$ Exile CARDNAME and target creature unless that creature's controller pays {2}. Activate only if CARDNAME is in your graveyard.
 Oracle:{2}{B}{B}: Exile Carrionette and target creature unless that creature's controller pays {2}. Activate only if Carrionette is in your graveyard.
