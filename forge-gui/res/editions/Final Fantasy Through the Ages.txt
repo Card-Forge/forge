@@ -6,20 +6,30 @@ Type=Collector_Edition
 ScryfallCode=FCA
 
 [cards]
+1 R Adeline, Resplendent Cathar @Yoshitaka Amano
 3 R Sram, Senior Edificer @Yoshitaka Amano
+4 U Counterspell @Yoshitaka Amano
 5 M Urza, Lord High Artificer @Yoshitaka Amano
 6 R Venser, Shaper Savant @Yoshitaka Amano
+7 R Bolas's Citadel @Yoshitaka Amano
+8 R Dark Ritual @Yoshitaka Amano
+9 U Fatal Push @Yoshitaka Amano
 10 U Syr Konrad, the Grim @Yoshitaka Amano
 11 M Yawgmoth, Thran Physician @Yoshitaka Amano
 12 M Ancient Copper Dragon @Yoshitaka Amano
+14 M Purphoros, God of the Forge @Yoshitaka Amano
+15 R Azusa, Lost but Seeking @Yoshitaka Amano
 16 M Nyxbloom Ancient @Yoshitaka Amano
 17 R Jodah, the Unifier @Yoshitaka Amano
 18 R Tymna the Weaver @Yoshitaka Amano
 19 R Winota, Joiner of Forces @Yoshitaka Amano
+21 M Akroma's Will @Square Enix
 22 U Danitha Capashen, Paragon @Square Enix
+23 R Kenrith, the Returned King @Square Enix
 25 R Mangara, the Diplomat @Toshitaka Matsuda
 27 U Wall of Omens @ISAMU KAMIKOKURYO
 28 U Brainstorm @Akihiko Yoshida
+29 R Cryptic Command @Kazuya Takahashi
 30 U Laboratory Maniac @Tetsuya Nomura
 31 M Rhystic Study @Square Enix
 33 U Deadly Dispute @Airi Yoshioka
@@ -27,21 +37,28 @@ ScryfallCode=FCA
 35 M Gix, Yawgmoth Praetor @SUEMI Jun
 36 R K'rrik, Son of Yawgmoth @Yusuke Mogi
 37 R Varragoth, Bloodsky Sire @Square Enix
+38 U Captain Lannery Storm @Square Enix
 39 U Light Up the Stage @Square Enix
 40 U Lightning Bolt @Toshitaka Matsuda
 41 R Mizzix's Mastery @Toshitaka Matsuda
 42 M Najeela, the Blade-Blossom @Tetsuya Nomura
 43 M Ragavan, Nimble Pilferer @SHUKO MURASE
+44 R Carpet of Flowers @ISAMU KAMIKOKURYO
+45 U Farseek @Yusuke Mogi
 46 U Fynn, the Fangbearer @Square Enix
 47 U Nature's Claim @Square Enix
+48 R Primeval Titan @Tomohiro Hasegawa
 49 M Atraxa, Grand Unifier @Tetsuya Nomura
 50 R Bruse Tarl, Boorish Herder @Square Enix
 51 U Dovin's Veto @Akihiko Yoshida
+53 R Ishai, Ojutai Dragonspeaker @Square Enix
 54 R Isshin, Two Heavens as One @Tetsuya Nomura
 56 R Kraum, Ludevic's Opus @Square Enix
 57 R Muldrotha, the Gravetide @Chikako Nakano
 58 M Thrasios, Triton Hero @Square Enix
+59 M Vial Smasher the Fierce @Square Enix
 60 R Yuriko, the Tiger's Shadow @Tetsuya Nomura
+61 R Chromatic Lantern @Kiyoshi Arai
 62 R Smuggler's Copter @Square Enix
 63 U Strixhaven Stadium @Square Enix
 64 R Command Beacon @Square Enix
