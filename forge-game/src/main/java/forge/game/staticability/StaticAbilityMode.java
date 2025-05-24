@@ -160,6 +160,9 @@ public enum StaticAbilityMode {
     // StaticAbilityWitherDamage
     WitherDamage,
 
+    // StaticAbilityFlipCoinMod
+    FlipCoinMod,
+
     // StaticAbilityPlotZone
     PlotZone,
 

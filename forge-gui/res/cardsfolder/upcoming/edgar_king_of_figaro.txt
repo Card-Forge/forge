@@ -1,0 +1,8 @@
+Name:Edgar, King of Figaro
+ManaCost:4 U U
+PT:4/5
+Types:Legendary Creature Human Artificer Noble
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw a card for each artifact you control.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Count$Valid Artifact.YouCtrl
+S:Mode$ FlipCoinMod | ValidPlayer$ You | CheckSVar$ Count$YouFlipThisTurn | SVarCompare$ EQ0 | Result$ True | Description$ Two-Headed Coin — The first time you flip one or more coins each turn, those coins come up heads and you win those flips.
+Oracle:When Edgar enters, draw a card for each artifact you control.\nTwo-Headed Coin — The first time you flip one or more coins each turn, those coins come up heads and you win those flips.
