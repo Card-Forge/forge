@@ -1,0 +1,17 @@
+Name:Xho Cai, Flickering Talon
+ManaCost:U R W
+Types:Legendary Creature Bird Monk
+PT:2/3
+K:Flying
+K:Vigilance
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When NICKNAME enters, the next noncreature spell you cast costs {1} less to cast.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | Duration$ Permanent
+SVar:ReduceCost:Mode$ ReduceCost | Type$ Spell | ValidCard$ Card.nonCreature | Activator$ You | Amount$ 1 | Description$ The next noncreature spell you cast costs {1} less to cast.
+SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Flurry — Whenever you cast your second spell each turn, exile up to one target creature you control, then return it to the battlefield under its owner's control.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying, vigilance, haste\nWhen Xho Cai enters, the next noncreature spell you cast costs {1} less to cast.\nFlurry — Whenever you cast your second spell each turn, exile up to one target creature you control, then return it to the battlefield under its owner's control.
