@@ -1,0 +1,14 @@
+Name:Vaan, Street Thief
+ManaCost:2 R
+Types:Legendary Creature Human Scout
+PT:2/2
+T:Mode$ DamageDoneOnce | ValidSource$ Scout.YouCtrl,Pirate.YouCtrl,Rogue.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDig | TriggerDescription$ Whenever one or more Scouts, Pirates, and/or Rogues you control deal combat damage to a player, exile the top card of that player's library. You may cast it. If you don't, create a Treasure token.
+SVar:TrigDig:DB$ Dig | Defined$ TriggeredTarget | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | Optional$ True | ForgetPlayed$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GT0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ SpellCast | ValidCard$ Card.YouDontOwn | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever you cast a spell you don't own, put a +1/+1 counter on each Scout, Pirate, and Rogue you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Scout.YouCtrl,Pirate.YouCtrl,Rogue.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Scout|Pirate|Rogue
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+Oracle:Whenever one or more Scouts, Pirates, and/or Rogues you control deal combat damage to a player, exile the top card of that player's library. You may cast it. If you don't, create a Treasure token.\nWhenever you cast a spell you don't own, put a +1/+1 counter on each Scout, Pirate, and Rogue you control.
