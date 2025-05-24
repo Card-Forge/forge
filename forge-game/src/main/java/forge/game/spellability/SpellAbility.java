@@ -25,6 +25,7 @@ import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import forge.game.card.*;
 import forge.game.cost.CostSacrifice;
+import forge.game.staticability.StaticAbilityCantBeCopied;
 import forge.util.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -426,6 +427,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
         return true;
+    }
+
+    public boolean cantBeCopied() {
+        return hasParam("CantCopy") || StaticAbilityCantBeCopied.cantBeCopied(getHostCard());
     }
 
     // Spell, and Ability, and other Ability objects override this method
