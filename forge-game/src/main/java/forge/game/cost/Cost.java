@@ -1034,9 +1034,6 @@ public class Cost implements Serializable {
         }
     }
 
-    public boolean canPay(SpellAbility sa, final boolean effect) {
-        return canPay(sa, sa.getActivatingPlayer(), effect);
-    }
     public boolean canPay(SpellAbility sa, Player payer, final boolean effect) {
         for (final CostPart part : this.getCostParts()) {
             if (!part.canPay(sa, payer, effect)) {
