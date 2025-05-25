@@ -1,0 +1,9 @@
+Name:Cargo Ship
+ManaCost:1 U
+Types:Artifact Vehicle
+PT:2/3
+K:Flying
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ Spell.Artifact,Activated.Artifact | SpellDescription$ Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.
+K:Crew:1
+Oracle:Flying, vigilance\n{T}: Add {C}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)
