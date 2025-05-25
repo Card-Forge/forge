@@ -2,8 +2,9 @@ Name:Deadpool, Trading Card
 ManaCost:2 B R
 Types:Legendary Creature Mutant Mercenary Hero
 PT:5/3
-K:ETBReplacement:Other:DBExchangeText:Optional
-SVar:DBExchangeText:DB$ ExchangeTextBox | ValidTgts$ Creature.Other | TgtPrompt$ Choose a creature to exchange text boxes with | SpellDescription$ You may exchange CARDNAME's text box and another creature's.
+K:ETBReplacement:Other:DBChooseExchange:Optional
+SVar:DBChooseExchange:DB$ ChooseCard | Defined$ You | Choices$ Creature.Other | ChoiceTitle$ Choose a creature to exchange text boxes with | SubAbility$ DBExchangeText
+SVar:DBExchangeText:DB$ ExchangeTextBox | Defined$ Self & ChosenCard | SpellDescription$ You may exchange CARDNAME's text box and another creature's.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Lose3 | TriggerDescription$ At the beginning of your upkeep, you lose 3 life.
 SVar:Lose3:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 3
 A:AB$ Draw | Cost$ 3 Sac<1/CARDNAME> | Defined$ Player.Other | NumCards$ 1 | SpellDescription$ Each other player draws a card.
