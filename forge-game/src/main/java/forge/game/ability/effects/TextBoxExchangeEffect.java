@@ -11,7 +11,6 @@ import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.KeywordsChange;
 import forge.game.card.CardTraitChanges;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
@@ -78,9 +77,6 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
         to.copyChangedSVarsFrom(from.textHolder);
         to.setChangedCardTraitsByText(from.traits);
         to.getChangedCardKeywordsByText().clear();
-        for (Cell<Long, Long, KeywordsChange> cell : from.keywordTable.cellSet()) {
-            to.getChangedCardKeywordsByText().put(cell.getRowKey(), cell.getColumnKey(), cell.getValue().copy(to, true));
-        }
 
         List<SpellAbility> spells = Lists.newArrayList();
         for (SpellAbility s : from.spells) {
@@ -126,10 +122,6 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
             data.traits.put(cell.getRowKey(), cell.getColumnKey(), cell.getValue());
         }
 
-        data.keywordTable = HashBasedTable.create();
-        for (Cell<Long, Long, KeywordsChange> cell : card.getChangedCardKeywordsByText().cellSet()) {
-            data.keywordTable.put(cell.getRowKey(), cell.getColumnKey(), cell.getValue());
-        }
 
         CardState state = card.getCurrentState();
         data.spells = Lists.newArrayList();
@@ -156,14 +148,13 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
                 data.statics.add(st);
             }
         }
-        data.keywords = Lists.newArrayList(state.getIntrinsicKeywords());
+        data.keywords = Lists.newArrayList(card.getKeywords());
         return data;
     }
 
     private static class TextBoxData {
         Card textHolder;
         Table<Long, Long, CardTraitChanges> traits;
-        Table<Long, Long, KeywordsChange> keywordTable;
         List<SpellAbility> spells;
         List<Trigger> triggers;
         List<ReplacementEffect> replacements;
