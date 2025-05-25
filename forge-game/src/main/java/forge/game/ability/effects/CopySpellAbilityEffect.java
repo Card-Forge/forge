@@ -13,7 +13,6 @@ import forge.game.card.CardFactory;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbilityCantBeCopied;
 import forge.game.zone.ZoneType;
 import forge.util.*;
 import forge.util.collect.FCollection;
@@ -66,7 +65,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
         List<SpellAbility> tgtSpells = getTargetSpells(sa);
 
-        tgtSpells.removeIf(tgtSA -> StaticAbilityCantBeCopied.cantBeCopied(tgtSA.getHostCard()));
+        tgtSpells.removeIf(SpellAbility::cantBeCopied);
 
         if (tgtSpells.isEmpty() || amount == 0) {
             return;

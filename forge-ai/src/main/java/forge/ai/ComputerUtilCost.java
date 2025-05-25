@@ -608,7 +608,7 @@ public class ComputerUtilCost {
         }
 
         return ComputerUtilMana.canPayManaCost(cost, sa, player, extraManaNeeded, effect)
-                && CostPayment.canPayAdditionalCosts(cost, sa, effect);
+                && CostPayment.canPayAdditionalCosts(cost, sa, effect, player);
     }
 
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {
