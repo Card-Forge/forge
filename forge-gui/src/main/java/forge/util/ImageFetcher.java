@@ -227,6 +227,15 @@ public abstract class ImageFetcher {
                 // This function adds to downloadUrls for us
                 this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
             }
+        } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
+            // extra logic for hidden card to not clog the other logic
+            final String filename = "hidden.png";
+            if (ImageKeys.missingCards.contains(filename))
+                return;
+            // scryfall only as png version
+            downloadUrls.add("https://cards.scryfall.io/back.png");
+            ImageKeys.missingCards.add(filename);
+            destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             String tmp = imageKey;
             if (tmp.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
@@ -235,10 +244,12 @@ public abstract class ImageFetcher {
             }
             String[] tempdata = tmp.substring(2).split("\\|"); //We want to check the edition first.
             String tokenName = tempdata[0];
-            String setCode = tempdata[1];
+            String setCode = tempdata.length > 1 ? tempdata[1] : CardEdition.UNKNOWN_CODE;
 
-            StringBuilder sb = new StringBuilder(setCode);
-            sb.append("/");
+            StringBuilder sb = new StringBuilder();
+            if (tempdata.length > 1) {
+                sb.append(setCode).append("/");
+            }
             if (tempdata.length > 2) {
                 sb.append(tempdata[2]).append("_");
             }

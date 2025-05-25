@@ -107,12 +107,12 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     }
 
     @Override
-    protected List<IHasSVars> getSVarFallback() {
+    protected List<IHasSVars> getSVarFallback(final String name) {
         // fused or spliced
         if (getRootAbility().getCardState() != getCardState()) {
             return Lists.newArrayList(getCardState());
         }
-        return super.getSVarFallback();
+        return super.getSVarFallback(name);
     }
 
     /** {@inheritDoc} */

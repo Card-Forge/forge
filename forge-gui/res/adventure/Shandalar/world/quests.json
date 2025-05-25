@@ -1268,7 +1268,7 @@
 							}
 						],
 						"name": "You shrug your shoulders. It's not your problem. (Decline Quest)",
-						"text": "The criminal glances at you and hurredly scampers off. (-1 Reputation)",
+						"text": "The criminal glances at you and hurriedly scampers off. (-1 Reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -1327,7 +1327,7 @@
 						]
 					},
 					{
-						"name": "You clear your throat in an exagerated manner.",
+						"name": "You clear your throat in an exaggerated manner.",
 						"text": "The $(enemy_2) drops a small satchel as they begin to run away.",
 						"options": [
 							{
@@ -3646,7 +3646,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "Despite the insistance of the compass needle, you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
+		"text": "Despite the insistence of the compass needle, you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -6531,7 +6531,7 @@
 				"text": "Thank you, noble adventurer. Slimefoot is a creature of pure malevolence. A monstrous being that has taken root in the heart of the treacherous swamp. Its corrosive touch and toxic aura have brought devastation to our lands. To defeat it, you must journey through the perilous swamp, filled with treacherous terrain and deadly creatures lurking within.",
 				"options": [
 					{
-						"name": "I see. So you want me to travel to Slimefoots swamp and defeat him ?",
+						"name": "I see. So you want me to travel to Slimefoot's swamp and defeat him ?",
 						"text": "Slimefoot is a formidable foe, adept at both offense and defense. Its body secretes a corrosive slime, and its tentacles strike with lightning speed. Prepare yourself for a challenging battle, my friend. Draw upon your combat skills, use potions and magical abilities wisely, and exploit any weaknesses you can find. Only then can you hope to overcome this vile creature.",
 						"options": [
 							{
@@ -6674,7 +6674,7 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Return to town and report your success in clearing Slimefoots Lair.",
+			"description": "Return to town and report your success in clearing Slimefoot's Lair.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -9925,7 +9925,7 @@
 				"options": [
 					{
 						"name": "(Continue)",
-						"text": "A small group of scholars carrying books around the entrance seems to confirm the building's purpose, but something odd about their manerisms has you on edge as you approach.",
+						"text": "A small group of scholars carrying books around the entrance seems to confirm the building's purpose, but something odd about their mannerisms has you on edge as you approach.",
 						"options": [
 							{
 								"name": "(Continue)"

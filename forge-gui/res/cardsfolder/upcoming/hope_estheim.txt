@@ -1,0 +1,9 @@
+Name:Hope Estheim
+ManaCost:W U
+Types:Legendary Creature Human Wizard
+PT:2/2
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your end step, each opponent mills X cards, where X is the amount of life you gained this turn.
+SVar:TrigMill:DB$ Mill | Defined$ Opponent | NumCards$ X
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:Lifelink\nAt the beginning of your end step, each opponent mills X cards, where X is the amount of life you gained this turn.

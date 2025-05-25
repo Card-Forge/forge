@@ -1,0 +1,5 @@
+Name:Overkill
+ManaCost:2 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumDef$ -9999 | IsCurse$ True | SpellDescription$ Target creature gets -0/-9999 until end of turn.
+Oracle:Target creature gets -0/-9999 until end of turn.

@@ -68,12 +68,11 @@
 },{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2,
-{
+  &quot;addMaxCount&quot;: 2
+},{
   &quot;type&quot;: &quot;item&quot;,
   &quot;count&quot;: 1,
   &quot;itemName&quot;: &quot;Landscape Sketchbook - Mirage&quot;
-}
 }]</property>
    </properties>
   </object>

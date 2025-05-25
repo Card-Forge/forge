@@ -1,0 +1,10 @@
+Name:The Gold Saucer
+ManaCost:no cost
+Types:Land Town
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ FlipACoin | Cost$ 2 T | WinSubAbility$ DBToken | SpellDescription$ Flip a coin. If you win the flip, create a Treasure token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+A:AB$ Draw | Cost$ 3 T Sac<2/Artifact> | SpellDescription$ Draw a card.
+DeckHas:Ability$Token
+DeckHints:Type$Artifact
+Oracle:{T}: Add {C}.\n{2}, {T}: Flip a coin. If you win the flip, create a Treasure token.\n{3}, {T}, Sacrifice two artifacts: Draw a card.
