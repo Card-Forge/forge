@@ -10,9 +10,12 @@ import forge.adventure.data.BiomeData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.data.WorldData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
+import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
@@ -21,6 +24,7 @@ import forge.deck.DeckProxy;
 import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.screens.CoverScreen;
 
 import java.util.ArrayList;
@@ -270,6 +274,22 @@ public class ConsoleCommandInterpreter {
                 return "Added item " + s[0] + ".";
             }
             return "Cannot find item " + s[0];
+        });
+        registerCommand(new String[]{"give", "pack"}, s -> {
+            if (s.length < 1) {
+                return "Command needs 1 parameter: Pack code.";
+            }
+            CardEdition.Collection editions = FModel.getMagicDb().getEditions();
+            String passedEdition = s[0];
+            if(editions.get(passedEdition) == null) {
+                return "Passed pack code not found: " + passedEdition;
+            }
+            if(!editions.get(passedEdition).hasBoosterTemplate()) {
+                return "Passed edition does not have a booster template (yet?): " + passedEdition;
+            }
+
+            AdventurePlayer.current().addReward(new Reward(AdventureEventController.instance().generateBooster(editions.get(passedEdition).getCode())));
+            return "Added pack of " + passedEdition;
         });
         registerCommand(new String[]{"fullHeal"}, s -> {
             Current.player().fullHeal();
