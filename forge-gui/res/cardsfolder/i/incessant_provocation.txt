@@ -3,5 +3,5 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBAnimate | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | staticAbilities$ PerpetualMustAttack | Duration$ Perpetual | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains "This creature attacks each combat if able."
-SVar:PerpetualMustAttack:Mode$ MustAttack | Affected$ Card.Self | Description$ This creature attacks each combat if able.
+SVar:PerpetualMustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks each combat if able.
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. It perpetually gains "This creature attacks each combat if able."

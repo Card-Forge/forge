@@ -504,7 +504,7 @@
 	{
 	   &quot;name&quot;:&quot;Trust her word&quot;,
 	   &quot;action&quot;: [{&quot;addLife&quot;: 10, &quot;deleteMapObject&quot;:240}],
-	   &quot;text&quot;:&quot;She takes a handful of the mushrooms and crushes them into a vial already containing some unknown liquid. She then takes a swig of it, and slowly places it down on the ground for you before leaving hurridly. (+10 health recovered)&quot;
+	   &quot;text&quot;:&quot;She takes a handful of the mushrooms and crushes them into a vial already containing some unknown liquid. She then takes a swig of it, and slowly places it down on the ground for you before leaving hurriedly. (+10 health recovered)&quot;
 	},
      {
 	&quot;name&quot;:&quot;Finish her off&quot;,

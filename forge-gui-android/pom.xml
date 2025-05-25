@@ -141,7 +141,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-android</artifactId>
-            <version>1.13.0</version>
+            <version>1.13.5</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/libs/gdx-backend-android.jar</systemPath>
         </dependency>

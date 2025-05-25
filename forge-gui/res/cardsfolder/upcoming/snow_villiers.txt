@@ -1,0 +1,10 @@
+Name:Snow Villiers
+ManaCost:2 W
+Types:Legendary Creature Human Rebel Monk
+PT:*/3
+K:Vigilance
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:BuffedBy:Creature
+DeckHas:Ability$Token
+Oracle:Vigilance\nSnow Villier's power is equal to the number of creatures you control.
