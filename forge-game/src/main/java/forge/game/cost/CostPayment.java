@@ -93,12 +93,15 @@ public class CostPayment extends ManaConversionMatrix {
      * @return a boolean.
      */
     public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability, final boolean effect) {
+        return canPayAdditionalCosts(cost, ability, effect, ability.getActivatingPlayer());
+    }
+    public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability, final boolean effect, final Player payer) {
         if (cost == null) {
             return true;
         }
 
         cost = CostAdjustment.adjust(cost, ability, effect);
-        return cost.canPay(ability, effect);
+        return cost.canPay(ability, payer, effect);
     }
 
     /**

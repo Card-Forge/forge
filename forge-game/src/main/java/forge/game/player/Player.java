@@ -108,6 +108,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int investigatedThisTurn;
     private int surveilThisTurn;
     private int committedCrimeThisTurn;
+    private int numFlipsThisTurn;
     private int numRollsThisTurn;
     private List<Integer> diceRollsThisTurn = Lists.newArrayList();
     private int expentThisTurn;
@@ -1447,6 +1448,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         numRollsThisTurn++;
     }
 
+    public final void resetNumFlipsThisTurn() {
+        numFlipsThisTurn = 0;
+    }
+    public final int getNumFlipsThisTurn() {
+        return numFlipsThisTurn;
+    }
+    public void flip() {
+        numFlipsThisTurn++;
+    }
+
     public final Card discard(final Card c, final SpellAbility sa, final boolean effect, Map<AbilityKey, Object> params) {
         if (!c.canBeDiscardedBy(sa, effect)) {
             return null;
@@ -2527,6 +2538,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setNumDrawnLastTurn(getNumDrawnThisTurn());
         resetNumDrawnThisTurn();
         resetNumRollsThisTurn();
+        resetNumFlipsThisTurn();
         resetNumExploredThisTurn();
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
