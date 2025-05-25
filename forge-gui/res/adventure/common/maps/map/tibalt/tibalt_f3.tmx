@@ -71,7 +71,7 @@
    <properties>
     <property name="defeatDialog">[
 	{
-		&quot;text&quot;: &quot;The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortuered victims, you see the red barrier disapear. The way to Tibalt's chambers is open&quot;,
+		&quot;text&quot;: &quot;The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortured victims, you see the red barrier disappear. The way to Tibalt's chambers is open&quot;,
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;(Continue)&quot;,
