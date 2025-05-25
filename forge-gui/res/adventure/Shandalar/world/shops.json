@@ -1429,7 +1429,7 @@
     }]
 },{                                    
 "name":"Blue",                  
-"description":"Hermitic Study",
+"description":"Hermetic Study",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"BlueShop",
   "rewards": [
@@ -1623,7 +1623,7 @@
     }]
 },{
   "name":"RWG",
-  "description":"Caberetti Curios",
+  "description":"Cabaretti Curios",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"RWGShop",
   "rewards": [

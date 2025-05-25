@@ -142,7 +142,7 @@
    <properties>
     <property name="dialog">[
 	{
-		&quot;text&quot;: &quot;Suddently you hear strange sounds coming behind you. A coarse voice thunders behind you: HONEY MINE, YOU DIE !&quot;,
+		&quot;text&quot;: &quot;Suddenly you hear strange sounds coming behind you. A coarse voice thunders behind you: HONEY MINE, YOU DIE !&quot;,
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;You have a bad feeling about this.&quot;,
