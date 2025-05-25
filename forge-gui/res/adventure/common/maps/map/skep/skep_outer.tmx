@@ -439,7 +439,7 @@
 ]
         </property>
     <property name="displayNameOverride" value="Lord Garrin"/>
-    <property name="enemy" value="Legionaire"/>
+    <property name="enemy" value="Legionnaire"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="spawn.Normal" type="bool" value="true"/>
