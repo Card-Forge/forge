@@ -8,4 +8,5 @@ SVar:DBExchangeText:DB$ ExchangeTextBox | Defined$ Self & ChosenCard
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Lose3 | TriggerDescription$ At the beginning of your upkeep, you lose 3 life.
 SVar:Lose3:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 3
 A:AB$ Draw | Cost$ 3 Sac<1/CARDNAME> | Defined$ Player.Other | NumCards$ 1 | SpellDescription$ Each other player draws a card.
+AI:RemoveDeck:All
 Oracle:As Deadpool enters, you may exchange his text box and another creature's.\nAt the beginning of your upkeep, you lose 3 life.\n{3}, Sacrifice this creature: Each other player draws a card.
