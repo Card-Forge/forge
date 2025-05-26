@@ -115,7 +115,6 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
             data.traits.put(cell.getRowKey(), cell.getColumnKey(), cell.getValue());
         }
 
-
         CardState state = card.getCurrentState();
         data.spells = Lists.newArrayList();
         for (SpellAbility s : state.getSpellAbilities()) {
@@ -141,7 +140,14 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
                 data.statics.add(st);
             }
         }
-        data.keywords = Lists.newArrayList(card.getKeywords());
+
+        data.keywords = Lists.newArrayList();
+        for (KeywordInterface ki : card.getKeywords()) {
+            if (ki.isIntrinsic()) {
+                data.keywords.add(ki);
+            }
+        }
+
         return data;
     }
 
