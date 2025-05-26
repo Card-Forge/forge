@@ -5680,6 +5680,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             final String newtxt = AbilityUtils.applyKeywordTextChangeEffects(oldtxt, this);
             if (!newtxt.equals(oldtxt)) {
                 KeywordInterface newKw = Keyword.getInstance(newtxt);
+                newKw.createTraits(this, true);
                 addKeywords.add(newKw);
                 removeKeywords.add(kw);
             } else if (oldtxt.startsWith("Class")) {
