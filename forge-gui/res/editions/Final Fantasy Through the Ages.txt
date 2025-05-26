@@ -7,6 +7,7 @@ ScryfallCode=FCA
 
 [cards]
 1 R Adeline, Resplendent Cathar @Yoshitaka Amano
+2 M Ranger-Captain of Eos @Yoshitaka Amano
 3 R Sram, Senior Edificer @Yoshitaka Amano
 4 U Counterspell @Yoshitaka Amano
 5 M Urza, Lord High Artificer @Yoshitaka Amano
@@ -17,6 +18,7 @@ ScryfallCode=FCA
 10 U Syr Konrad, the Grim @Yoshitaka Amano
 11 M Yawgmoth, Thran Physician @Yoshitaka Amano
 12 M Ancient Copper Dragon @Yoshitaka Amano
+13 R Godo, Bandit Warlord @Yoshitaka Amano
 14 M Purphoros, God of the Forge @Yoshitaka Amano
 15 R Azusa, Lost but Seeking @Yoshitaka Amano
 16 M Nyxbloom Ancient @Yoshitaka Amano
@@ -27,6 +29,7 @@ ScryfallCode=FCA
 22 U Danitha Capashen, Paragon @Square Enix
 23 R Kenrith, the Returned King @Square Enix
 25 R Mangara, the Diplomat @Toshitaka Matsuda
+26 U Stroke of Midnight @Square Enix
 27 U Wall of Omens @ISAMU KAMIKOKURYO
 28 U Brainstorm @Akihiko Yoshida
 29 R Cryptic Command @Kazuya Takahashi
