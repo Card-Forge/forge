@@ -76,17 +76,13 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
         for (StaticAbility st : from.statics) {
             statics.add(st.copy(to, false));
         }
-        if (!spellabilities.isEmpty() || !triggers.isEmpty() || !reps.isEmpty() || !statics.isEmpty()) {
-            to.addChangedCardTraitsByText(spellabilities, triggers, reps, statics, ts, 0);
-        }
+        to.addChangedCardTraitsByText(spellabilities, triggers, reps, statics, ts, 0);
 
         List<KeywordInterface> kws = Lists.newArrayList();
         for (KeywordInterface kw : from.keywords) {
             kws.add(kw.copy(to, false));
         }
-        if (!kws.isEmpty()) {
-            to.addChangedCardKeywordsByText(kws, ts, 0, false);
-        }
+        to.addChangedCardKeywordsByText(kws, ts, 0, false);
 
         to.updateChangedText();
         to.updateStateForView();
