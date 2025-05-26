@@ -88,7 +88,6 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
 
         to.updateChangedText();
         to.updateStateForView();
-        to.updateKeywords();
     }
 
     private static TextBoxData captureTextBoxData(final Card card) {
