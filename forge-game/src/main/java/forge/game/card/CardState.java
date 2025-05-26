@@ -419,6 +419,11 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         default:
             return;
         }
+        // if card has left or right split, disable intrinsic Spell for original
+        if (getStateName().equals(CardStateName.Original) && (getCard().hasState(CardStateName.LeftSplit) || getCard().hasState(CardStateName.RightSplit))) {
+            return;
+        }
+
         CardTypeView type = getTypeWithChanges();
         if (type.isLand()) {
             if (landAbility == null) {
