@@ -171,12 +171,12 @@
   "rewards": [
     {
       "count":6,
-	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure ",
+	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure",
 	  "colors": ["blue"]
     },
 	{
       "count":2,
-	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure "
+	  "cardText": "draw(s)?|(exile|reveal|look|search).*library|scry|seek|conjure"
     }]
 },
 {     
@@ -467,7 +467,7 @@
     }]
 },{                                      
 "name":"White4",                  
-"description":"Only mostly dead",
+"description":"Only Mostly Dead",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"RotatingShop",
 "overlaySprite":"Overlay6White",
@@ -722,7 +722,7 @@
   "rewards": [
     {
       "count":4,
-      "type": "landSketchbookShop"
+      "cardName":"Swamp"
     },
 	{
       "count":4,
@@ -738,7 +738,7 @@
   "rewards": [
     {
       "count":4,
-      "type": "landSketchbookShop"
+      "cardName":"Forest"
     },
 	{
       "count":4,
@@ -754,7 +754,7 @@
   "rewards": [
     {
       "count":4,
-      "type": "landSketchbookShop"
+      "cardName":"Mountain"
     },
 	{
       "count":4,
@@ -770,7 +770,7 @@
   "rewards": [
     {
       "count":4,
-      "type": "landSketchbookShop"
+      "cardName":"Island"
     },
 	{
       "count":4,
@@ -786,7 +786,7 @@
   "rewards": [
     {
       "count":4,
-      "type": "landSketchbookShop"
+      "cardName":"Plains"
     },
 	{
       "count":4,
@@ -1912,7 +1912,7 @@
 	}]
 },{
   "name":"Angel",
-  "description":"Halos R' Us",
+  "description":"Halos 'R' Us",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"AngelShop",
   "rewards": [
@@ -4974,7 +4974,7 @@
 	]
 },{
   "name":"Shaman",
-  "description":"Shaman for ya man",
+  "description":"Shaman for Ya Man",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"ShamanShop",
   "rewards": [
@@ -5585,7 +5585,7 @@
   },
   {
     "name": "GreenBoosterPackShop",
-    "description":"Nature’s Nurture Packs",
+    "description":"Nature's Nurture Packs",
     "spriteAtlas":"maps/tileset/buildings.atlas",
     "overlaySprite": "Overlay4Green",
     "sprite": "BoosterShop",

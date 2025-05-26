@@ -4,7 +4,7 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
  <tileset firstgid="16001" source="../../tileset/FarmFood.tsx"/>
- <layer id="10" name="Colission" width="50" height="40">
+ <layer id="10" name="Collision" width="50" height="40">
   <data encoding="base64" compression="zlib">
    eJztz0EKgDAMRNHu9QbqVT2Z3k1dBEQQ2yTFtPwH2SVhJiUAAIB+rcP3RLeNeXt75t4fcjuIiF1KO4hIXbQdRIQu05lhMebw+GFFD98fVvTw/WFFD98fHmZjBuu9lyuHNovl1ptkKc2jvavlnic3k+amtmcmzUTRQwfRQwfxlrWlDgAAtOYAbb4bLg==
   </data>
