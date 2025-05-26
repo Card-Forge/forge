@@ -109,7 +109,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;The inscription reads: Unautorized visitors be warned, dangerous birds ahead.&quot;,
+    &quot;text&quot;:&quot;The inscription reads: Unauthorized visitors be warned, dangerous birds ahead.&quot;,
     &quot;options&quot;:[
       { &quot;name&quot;:&quot;Walk away&quot; }
 ]

@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
  <tileset firstgid="16001" source="../../tileset/FarmFood.tsx"/>
  <tileset firstgid="20097" source="../../tileset/main-nocollide.tsx"/>
- <layer id="25" name="Colision" width="31" height="22">
+ <layer id="25" name="Collision" width="31" height="22">
   <data encoding="base64" compression="zlib">
    eJxjYBgF1AJ8AvgxJfrpYTc2mhhAyG5SzCIVDKTdhNxFL3uI8SctwgJbWsFmB7obsbHxuY8YM8lxN6XmkAMIhRUhfcTm08GQB6gBSPX3QAFC5Q85cvjUkutGUuSpGcb0tjtEcuDsHgXUBwCRlA5C
   </data>
