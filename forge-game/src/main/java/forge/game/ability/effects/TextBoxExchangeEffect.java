@@ -37,7 +37,6 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         final List<Card> tgtCards = getTargetCards(sa);
-        final Card host = sa.getHostCard();
         if (tgtCards.size() < 2) {
             return;
         }
@@ -49,6 +48,7 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
         final TextBoxData data1 = captureTextBoxData(c1);
         final TextBoxData data2 = captureTextBoxData(c2);
 
+        final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final long ts = game.getNextTimestamp();
 
@@ -60,9 +60,9 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
     }
 
     private static void swapTextBox(final Card to, final TextBoxData from, final long ts) {
-        List<SpellAbility> spells = Lists.newArrayList();
+        List<SpellAbility> spellabilities = Lists.newArrayList();
         for (SpellAbility sa : from.spellabilities) {
-            spells.add(sa.copy(to, false));
+            spellabilities.add(sa.copy(to, false));
         }
         List<Trigger> triggers = Lists.newArrayList();
         for (Trigger tr : from.triggers) {
@@ -76,7 +76,9 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
         for (StaticAbility st : from.statics) {
             statics.add(st.copy(to, false));
         }
-        to.addChangedCardTraitsByText(spells, triggers, reps, statics, ts, 0);
+        if (!spellabilities.isEmpty() || !triggers.isEmpty() || !reps.isEmpty() || !statics.isEmpty()) {
+            to.addChangedCardTraitsByText(spellabilities, triggers, reps, statics, ts, 0);
+        }
 
         List<KeywordInterface> kws = Lists.newArrayList();
         for (KeywordInterface kw : from.keywords) {
