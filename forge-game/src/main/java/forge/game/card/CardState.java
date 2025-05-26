@@ -51,6 +51,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class CardState extends GameObject implements IHasSVars, ITranslatable {
     private String name = "";
@@ -68,8 +69,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
     private Set<Integer> attractionLights = null;
 
-    private final FCollection<SpellAbility> nonManaAbilities = new FCollection<>();
-    private final FCollection<SpellAbility> manaAbilities = new FCollection<>();
+    private final FCollection<SpellAbility> abilities = new FCollection<>();
     private FCollection<Trigger> triggers = new FCollection<>();
     private FCollection<ReplacementEffect> replacementEffects = new FCollection<>();
     private FCollection<StaticAbility> staticAbilities = new FCollection<>();
@@ -359,22 +359,21 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public final FCollectionView<SpellAbility> getSpellAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, null);
-        newCol.addAll(manaAbilities);
-        newCol.addAll(nonManaAbilities);
+        newCol.addAll(abilities);
         card.updateSpellAbilities(newCol, this, null);
         return newCol;
     }
     public final FCollectionView<SpellAbility> getManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, true);
-        newCol.addAll(manaAbilities);
+        newCol.addAll(abilities.stream().filter(SpellAbility::isManaAbility).toList());
         card.updateSpellAbilities(newCol, this, true);
         return newCol;
     }
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, false);
-        newCol.addAll(nonManaAbilities);
+        newCol.addAll(abilities.stream().filter(Predicate.not(SpellAbility::isManaAbility)).toList());
         card.updateSpellAbilities(newCol, this, false);
         return newCol;
     }
@@ -383,20 +382,22 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit)) {
-                if (null == mana || mana == true) {
-                    newCol.addAll(getCard().getState(CardStateName.LeftSplit).manaAbilities);
+                CardState leftState = getCard().getState(CardStateName.LeftSplit);
+                Collection<SpellAbility> leftAbilities = leftState.abilities;
+                if (null != mana) {
+                    leftAbilities = leftAbilities.stream().filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility)).toList();
                 }
-                if (null == mana || mana == false) {
-                    newCol.addAll(getCard().getState(CardStateName.LeftSplit).nonManaAbilities);
-                }
+                newCol.addAll(leftAbilities);
+                leftState.updateSpellAbilities(newCol, mana);
             }
             if (getCard().hasState(CardStateName.RightSplit)) {
-                if (null == mana || mana == true) {
-                    newCol.addAll(getCard().getState(CardStateName.RightSplit).manaAbilities);
+                CardState rightState = getCard().getState(CardStateName.RightSplit);
+                Collection<SpellAbility> rightAbilities = rightState.abilities;
+                if (null != mana) {
+                    rightAbilities = rightAbilities.stream().filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility)).toList();
                 }
-                if (null == mana || mana == false) {
-                    newCol.addAll(getCard().getState(CardStateName.RightSplit).nonManaAbilities);
-                }
+                newCol.addAll(rightAbilities);
+                rightState.updateSpellAbilities(newCol, mana);
             }
         }
 
@@ -434,7 +435,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         } else if (type.isAura()) {
             newCol.add(getAuraSpell());
         } else if (type.isPermanent()) {
-            if (nonManaAbilities.anyMatch(s -> (
+            if (abilities.anyMatch(s -> (
                     s.isBasicSpell() && s.getSubAbility() == null && (ApiType.PermanentCreature.equals(s.getApi()) || ApiType.PermanentNoncreature.equals(s.getApi())))
                 )) {
                 return;
@@ -528,10 +529,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     public final boolean addSpellAbility(final SpellAbility a) {
-        if (a.isManaAbility()) {
-            return manaAbilities.add(a);
-        }
-        return nonManaAbilities.add(a);
+        return abilities.add(a);
     }
 
     public final FCollectionView<Trigger> getTriggers() {
@@ -714,17 +712,10 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         setAttractionLights(source.getAttractionLights());
         setSVars(source.getSVars());
 
-        manaAbilities.clear();
-        for (SpellAbility sa : source.manaAbilities) {
+        abilities.clear();
+        for (SpellAbility sa : source.abilities) {
             if (sa.isIntrinsic()) {
-                manaAbilities.add(sa.copy(card, lki));
-            }
-        }
-
-        nonManaAbilities.clear();
-        for (SpellAbility sa : source.nonManaAbilities) {
-            if (sa.isIntrinsic()) {
-                nonManaAbilities.add(sa.copy(card, lki));
+                abilities.add(sa.copy(card, lki));
             }
         }
 
@@ -793,15 +784,9 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     public final void addAbilitiesFrom(final CardState source, final boolean lki) {
-        for (SpellAbility sa : source.manaAbilities) {
-            if (sa.isIntrinsic()) {
-                manaAbilities.add(sa.copy(card, lki));
-            }
-        }
-
-        for (SpellAbility sa : source.nonManaAbilities) {
+        for (SpellAbility sa : source.abilities) {
             if (sa.isIntrinsic() && sa.getApi() != ApiType.PermanentCreature && sa.getApi() != ApiType.PermanentNoncreature) {
-                nonManaAbilities.add(sa.copy(card, lki));
+                abilities.add(sa.copy(card, lki));
             }
         }
 
@@ -868,8 +853,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
     public ImmutableList<CardTraitBase> getTraits() {
         return ImmutableList.<CardTraitBase>builder()
-                .addAll(manaAbilities)
-                .addAll(nonManaAbilities)
+                .addAll(abilities)
                 .addAll(triggers)
                 .addAll(replacementEffects)
                 .addAll(staticAbilities)
