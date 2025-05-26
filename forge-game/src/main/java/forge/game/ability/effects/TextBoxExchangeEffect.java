@@ -64,13 +64,6 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
     }
 
     private static void swapTextBox(final Card to, final TextBoxData from, final long ts) {
-        to.getChangedCardTraitsByText().clear();
-        to.clearChangedCardKeywords(false);
-        to.copyChangedTextFrom(from.textHolder);
-        to.copyChangedSVarsFrom(from.textHolder);
-        to.setChangedCardTraitsByText(from.traits);
-        to.getChangedCardKeywordsByText().clear();
-
         List<SpellAbility> spells = Lists.newArrayList();
         for (SpellAbility s : from.spells) {
             SpellAbility cp = s.copy(to, false);
@@ -106,14 +99,6 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
 
     private static TextBoxData captureTextBoxData(final Card card) {
         TextBoxData data = new TextBoxData();
-        data.textHolder = new Card(0, card.getGame());
-        data.textHolder.copyChangedTextFrom(card);
-        data.textHolder.copyChangedSVarsFrom(card);
-
-        data.traits = HashBasedTable.create();
-        for (Cell<Long, Long, CardTraitChanges> cell : card.getChangedCardTraitsByText().cellSet()) {
-            data.traits.put(cell.getRowKey(), cell.getColumnKey(), cell.getValue());
-        }
 
         CardState state = card.getCurrentState();
         data.spells = Lists.newArrayList();
@@ -152,8 +137,6 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
     }
 
     private static class TextBoxData {
-        Card textHolder;
-        Table<Long, Long, CardTraitChanges> traits;
         List<SpellAbility> spells;
         List<Trigger> triggers;
         List<ReplacementEffect> replacements;
