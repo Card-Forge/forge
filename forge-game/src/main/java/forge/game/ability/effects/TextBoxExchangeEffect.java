@@ -42,19 +42,12 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         final List<Card> tgtCards = getTargetCards(sa);
         final Card host = sa.getHostCard();
-        if (tgtCards.isEmpty()) {
+        if (tgtCards.size() < 2) {
             return;
         }
 
-        final Card c1;
-        final Card c2;
-        if (tgtCards.size() == 1) {
-            c1 = host;
-            c2 = tgtCards.get(0);
-        } else {
-            c1 = tgtCards.get(0);
-            c2 = tgtCards.get(1);
-        }
+        final Card c1 = tgtCards.get(0);
+        final Card c2 = tgtCards.get(1);
 
         // snapshot the original text boxes before modifying
         final TextBoxData data1 = captureTextBoxData(c1);
