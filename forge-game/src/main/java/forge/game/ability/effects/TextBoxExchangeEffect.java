@@ -1,9 +1,6 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Table.Cell;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
@@ -11,7 +8,6 @@ import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.KeywordInterface;
-import forge.game.card.CardTraitChanges;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
@@ -65,10 +61,8 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
 
     private static void swapTextBox(final Card to, final TextBoxData from, final long ts) {
         List<SpellAbility> spells = Lists.newArrayList();
-        for (SpellAbility s : from.spells) {
-            SpellAbility cp = s.copy(to, false);
-            cp.setIntrinsic(true);
-            spells.add(cp);
+        for (SpellAbility sa : from.spellabilities) {
+            spells.add(sa.copy(to, false));
         }
         List<Trigger> triggers = Lists.newArrayList();
         for (Trigger tr : from.triggers) {
@@ -99,29 +93,29 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
 
     private static TextBoxData captureTextBoxData(final Card card) {
         TextBoxData data = new TextBoxData();
-
         CardState state = card.getCurrentState();
-        data.spells = Lists.newArrayList();
-        for (SpellAbility s : state.getSpellAbilities()) {
-            if (s.isIntrinsic()) {
-                data.spells.add(s);
+
+        data.spellabilities = Lists.newArrayList();
+        for (SpellAbility sa : state.getSpellAbilities()) {
+            if (sa.isIntrinsic() && sa.getKeyword() == null) {
+                data.spellabilities.add(sa);
             }
         }
         data.triggers = Lists.newArrayList();
-        for (Trigger t : state.getTriggers()) {
-            if (t.isIntrinsic()) {
-                data.triggers.add(t);
+        for (Trigger tr : state.getTriggers()) {
+            if (tr.isIntrinsic() && tr.getKeyword() == null) {
+                data.triggers.add(tr);
             }
         }
         data.replacements = Lists.newArrayList();
-        for (ReplacementEffect r : state.getReplacementEffects()) {
-            if (r.isIntrinsic()) {
-                data.replacements.add(r);
+        for (ReplacementEffect re : state.getReplacementEffects()) {
+            if (re.isIntrinsic() && re.getKeyword() == null) {
+                data.replacements.add(re);
             }
         }
         data.statics = Lists.newArrayList();
         for (StaticAbility st : state.getStaticAbilities()) {
-            if (st.isIntrinsic()) {
+            if (st.isIntrinsic() && st.getKeyword() == null) {
                 data.statics.add(st);
             }
         }
@@ -137,7 +131,7 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
     }
 
     private static class TextBoxData {
-        List<SpellAbility> spells;
+        List<SpellAbility> spellabilities;
         List<Trigger> triggers;
         List<ReplacementEffect> replacements;
         List<StaticAbility> statics;
