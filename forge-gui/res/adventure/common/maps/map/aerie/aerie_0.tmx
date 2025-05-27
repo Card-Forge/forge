@@ -59,15 +59,15 @@
    <properties>
     <property name="dialog">[
 	{
-		&quot;text&quot;: &quot;Welcome {var=player_name}, I see you are here to look at some of our fine birds. You must be pretty smart to come to us, since our prices are indeed unmatched compared to those of other sellers in Shandalar !&quot;,
+		&quot;text&quot;: &quot;Welcome {var=player_name}, I see you are here to look at some of our fine birds. You must be pretty smart to come to us, since our prices are indeed unmatched compared to those of other sellers in Shandalar!&quot;,
 		&quot;options&quot;: [
 			{
-				&quot;name&quot;: &quot;Who are you ?&quot;,
+				&quot;name&quot;: &quot;Who are you?&quot;,
 				&quot;text&quot;: &quot;I'm a worker of the aerie guild, we are one of the biggest conglomerate of breeders of the various bird species of Shandalar. We have a few breeding sites like this scattered around the various biomes of Shandalar. My task is to sell those birds to eager adventurers like you. So take a look around.&quot;,
 				&quot;options&quot;: [
 					{
-						&quot;name&quot;: &quot;Am I allowed to enter the aerie ?&quot;,
-						&quot;text&quot;: &quot;I'm afraid to say to you that you are not allowed to do that. Our guild is very protective of it's breeding practices, which have been developed over a span of more than thousands of years. Because of that, we don't want our competitors peeking into our business. If anyone without permission enters the aerie, that person will be reprimanded by the various guards and even the birds, who have been trained to attack unwanted intruders.'&quot;,
+						&quot;name&quot;: &quot;Am I allowed to enter the aerie?&quot;,
+						&quot;text&quot;: &quot;I'm afraid to say to you that you are not allowed to do that. Our guild is very protective of its breeding practices, which have been developed over a span of more than thousands of years. Because of that, we don't want our competitors peeking into our business. If anyone without permission enters the aerie, that person will be reprimanded by the various guards and even the birds, who have been trained to attack unwanted intruders.'&quot;,
 						&quot;options&quot;: [
 							{
 								&quot;name&quot;: &quot;Thanks for the information, goodbye&quot;,

@@ -2084,7 +2084,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;Behind this gate, you see the legendary Liliana. She appears to be deep in to a ritual of some sort. But to reach her, you need to find the mayor first.&quot;,
+    &quot;text&quot;:&quot;Behind this gate, you see the legendary Liliana. She appears to be deep into a ritual of some sort. But to reach her, you need to find the mayor first.&quot;,
     &quot;loctext&quot;:&quot;&quot;,
     &quot;condition&quot;: [ { &quot;actorID&quot;: 224 } ],
     &quot;options&quot;:[ { &quot;name&quot;:&quot;(Continue)&quot; } ]

@@ -49,19 +49,19 @@
     &quot;text&quot;: &quot;The Wounded Sliver looks at you interestedly&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;What are you ?&quot;,
+        &quot;name&quot;: &quot;What are you?&quot;,
         &quot;text&quot;: &quot;I'm the queen of the Slivers of the Skep, at least I used to be until my position was usurped.&quot;,
         &quot;options&quot;: [
           {
-            &quot;name&quot;: &quot;Usurped ? What are you talking about ?&quot;,
+            &quot;name&quot;: &quot;Usurped? What are you talking about?&quot;,
             &quot;text&quot;: &quot;For millenia I've been keeping the Sliver of the Skep healthy and peaceful,keeping them under control to prevent them attacking outsiders. Everything changed when the Sliver Queen attacked the Skep. She attacked me and took control over this hive. As you can see, I was unable to defeat her.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;So I guess the Sliver Queen is causing the Slivers of the Skep to be this aggressive ? &quot;,
+                &quot;name&quot;: &quot;So I guess the Sliver Queen is causing the Slivers of the Skep to be this aggressive? &quot;,
                 &quot;text&quot;: &quot;Exactly, she's been assembling a mighty host of Slivers from all around the multiverse. Soon enough she will have an army large enough to conquer the whole of Shandalar&quot;,
                 &quot;options&quot;: [
                   {
-                    &quot;name&quot;: &quot;Where is she located ? I will take care of it.&quot;,
+                    &quot;name&quot;: &quot;Where is she located? I will take care of it.&quot;,
                     &quot;text&quot;: &quot;I appreciate your enthusiasm, however the queen is not an opponent to take on lightly. First of all, in order to gain access to her lair you need to defeat her three of her lieutenants that are scattered around here in the Skep. Only then will the magic shield disappear and will you be able to enter her lair.&quot;,
                     &quot;options&quot;: [
                       {
@@ -107,8 +107,8 @@
       { &quot;checkMapFlag&quot;: &quot;TalkToFallen&quot; },
       { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
     ],
-    &quot;name&quot;: &quot;The Sliver Queen has been defeated !&quot;,
-    &quot;text&quot;: &quot;My .... my gratitude to you stranger. I feel my strength slowly returning. As promised I'll take control of the Slivers again as her queen, the people of Shandalar shouldn't fear the Sliver's of the Skep anymore. Though be warned adventurer, my children will still defend against any intruder why goes into the skep. Goodbye Adventurer&quot;,
+    &quot;name&quot;: &quot;The Sliver Queen has been defeated!&quot;,
+    &quot;text&quot;: &quot;My .... my gratitude to you stranger. I feel my strength slowly returning. As promised I'll take control of the Slivers again as her queen, the people of Shandalar shouldn't fear the Slivers of the Skep anymore. Though be warned adventurer, my children will still defend against any intruder why goes into the skep. Goodbye Adventurer&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;(Continue)&quot;,
@@ -357,7 +357,7 @@
     &quot;text&quot;: &quot;Good day, Adventurer. As you can see, we have quite a situation right here&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;What is happening around here ?&quot;,
+        &quot;name&quot;: &quot;What is happening around here?&quot;,
         &quot;text&quot;: &quot;Well, for an unknown reason, the Slivers of the Skep have become hostile and have been launching raiding parties into the various towns of Shandalar. General Jarkhald has summoned a large host to deal with this situation.&quot;,
         &quot;options&quot;: [
           {
@@ -365,12 +365,12 @@
             &quot;text&quot;: &quot;Well, we tried that before but due to the huge amount of Slivers we haven't had much progress outside of walling off the hive to prevent further attacks against the surrounding villagers.&quot;,
             &quot;options&quot;: [
               {
-                &quot;name&quot;: &quot;Any way I could be of use to deal with the Slivers ?&quot;,
+                &quot;name&quot;: &quot;Any way I could be of use to deal with the Slivers?&quot;,
                 &quot;text&quot;: &quot;Well, Slivers form a hivemind, meaning that if their queen would somehow be neutralized, the sliver won't be a problem anymore. Sadly, we don't have a brave volunteer who is willing to enter the hive and deal with the queen ... &quot;,
                 &quot;options&quot;: [
                   {
-                    &quot;name&quot;: &quot;I'll can deal with the queen, but what's in it for me ?&quot;,
-                    &quot;text&quot;: &quot; Outside of the thanks of the people of Shandalar for dealing with these horrific creatures, I will give you a fancy new piece of armor that will help you in your upcoming adventures. Deal with the queen and come back to me to receive your reward. I'll have my men open the gate to let you enter the hive. Good luck Adventurer !&quot;,
+                    &quot;name&quot;: &quot;I'll can deal with the queen, but what's in it for me?&quot;,
+                    &quot;text&quot;: &quot; Outside of the thanks of the people of Shandalar for dealing with these horrific creatures, I will give you a fancy new piece of armor that will help you in your upcoming adventures. Deal with the queen and come back to me to receive your reward. I'll have my men open the gate to let you enter the hive. Good luck Adventurer!&quot;,
                     &quot;options&quot;: [
                       {
                         &quot;name&quot;: &quot;End&quot;,
@@ -402,7 +402,7 @@
         &quot;not&quot;: true
       }
     ],
-    &quot;text&quot;: &quot;Those things are still creeping beyond the walls, I take it you haven't yet took care of the task ?'&quot;,
+    &quot;text&quot;: &quot;Those things are still creeping beyond the walls, I take it you haven't yet took care of the task?'&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;(Continue)&quot;
@@ -415,7 +415,7 @@
       { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
     ],
     &quot;name&quot;: &quot;The Slivers won't be a problem anymore.&quot;,
-    &quot;text&quot;: &quot;I didn't think you would actually be able to do that, as promised I'll give you the item I spoke of before. Thanks Adventurer. BOYS listen up ! Our job here is done, the leader of these things is dead ! Let's get out of this creepy place, Ales' on me !&quot;,
+    &quot;text&quot;: &quot;I didn't think you would actually be able to do that, as promised I'll give you the item I spoke of before. Thanks Adventurer. BOYS listen up! Our job here is done, the leader of these things is dead! Let's get out of this creepy place, Ales' on me!&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;(Continue)&quot;,
@@ -1327,7 +1327,7 @@
    &quot;condition&quot;: [
       { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
     ],
-    &quot;text&quot;:&quot;Where did all those fancy folk just go to ? Did someone say free ale ?&quot;,
+    &quot;text&quot;:&quot;Where did all those fancy folk just go to? Did someone say free ale?&quot;,
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;(Continue)&quot;
