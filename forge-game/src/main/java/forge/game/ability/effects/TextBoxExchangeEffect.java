@@ -62,19 +62,28 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
     private static void swapTextBox(final Card to, final TextBoxData from, final long ts) {
         List<SpellAbility> spellabilities = Lists.newArrayList();
         for (SpellAbility sa : from.spellabilities) {
-            spellabilities.add(sa.copy(to, false));
+            SpellAbility copy = sa.copy(to, false, true);
+            // need to persist any previous word changes
+            copy.changeTextIntrinsic(copy.getChangedTextColors(), copy.getChangedTextTypes());
+            spellabilities.add(copy);
         }
         List<Trigger> triggers = Lists.newArrayList();
         for (Trigger tr : from.triggers) {
-            triggers.add(tr.copy(to, false));
+            Trigger copy = tr.copy(to, false, true);
+            copy.changeTextIntrinsic(copy.getChangedTextColors(), copy.getChangedTextTypes());
+            triggers.add(copy);
         }
         List<ReplacementEffect> reps = Lists.newArrayList();
         for (ReplacementEffect re : from.replacements) {
-            reps.add(re.copy(to, false));
+            ReplacementEffect copy = re.copy(to, false, true);
+            copy.changeTextIntrinsic(copy.getChangedTextColors(), copy.getChangedTextTypes());
+            reps.add(copy);
         }
         List<StaticAbility> statics = Lists.newArrayList();
         for (StaticAbility st : from.statics) {
-            statics.add(st.copy(to, false));
+            StaticAbility copy = st.copy(to, false, true);
+            copy.changeTextIntrinsic(copy.getChangedTextColors(), copy.getChangedTextTypes());
+            statics.add(copy);
         }
         to.addChangedCardTraitsByText(spellabilities, triggers, reps, statics, ts, 0);
 
