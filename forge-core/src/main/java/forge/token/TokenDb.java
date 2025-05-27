@@ -72,7 +72,15 @@ public class TokenDb implements ITokenDatabase {
     }
 
     protected PaperToken addTokenInSet(CardEdition edition, String name, CardEdition.EditionEntry t) {
-        return new PaperToken(rulesByName.get(name), edition, name, t.collectorNumber(), t.artistName());
+        CardRules rules;
+        if (rulesByName.containsKey(name)) {
+            rules = rulesByName.get(name);
+        } else if ("w_2_2_spirit".equals(name) || "w_3_3_spirit".equals(name)) { // Hotfix for Endure Token
+            rules = rulesByName.get("w_x_x_spirit");
+        } else {
+            throw new RuntimeException("wrong token name:" + name);
+        }
+        return new PaperToken(rules, edition, name, t.collectorNumber(), t.artistName());
     }
 
     // try all editions to find token

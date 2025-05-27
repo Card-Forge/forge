@@ -1236,7 +1236,7 @@
 							}
 						],
 						"name": "You shrug your shoulders. It's not your problem. (Decline Quest)",
-						"text": "The criminal glances at you and hurredly scampers off. (-1 Reputation)",
+						"text": "The criminal glances at you and hurriedly scampers off. (-1 Reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -1295,7 +1295,7 @@
 						]
 					},
 					{
-						"name": "You clear your throat in an exagerated manner.",
+						"name": "You clear your throat in an exaggerated manner.",
 						"text": "The $(enemy_2) drops a small satchel as they begin to run away.",
 						"options": [
 							{
@@ -3588,7 +3588,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "Despite the insistance of the needle you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
+		"text": "Despite the insistence of the needle you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"

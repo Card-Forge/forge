@@ -230,7 +230,7 @@
     &quot;text&quot;: &quot;Welcome {var=player_name}, Akroma has been waiting eagerly for this moment.&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Is that so ? I guess you woudn't mind opening that gate in front of me ?&quot;,
+        &quot;name&quot;: &quot;Is that so ? I guess you wouldn't mind opening that gate in front of me ?&quot;,
         &quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Akroma, ruler of Angels.&quot;,
         &quot;options&quot;: [
           {

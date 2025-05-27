@@ -387,7 +387,7 @@
     &quot;loctext&quot;:&quot;&quot;,
     &quot;options&quot;:[ 
 	{ &quot;name&quot;:&quot;(Continue)&quot;,
-	  &quot;text&quot;:&quot;After a moment, you feel a shift in the energy of your surroundings. The ethereal haze that had accompanied the graveyard's fences dissapates. Shapes begin to move at the edge of your vision. It seems there might have been something true about the guardian's role here.&quot;
+	  &quot;text&quot;:&quot;After a moment, you feel a shift in the energy of your surroundings. The ethereal haze that had accompanied the graveyard's fences dissipates. Shapes begin to move at the edge of your vision. It seems there might have been something true about the guardian's role here.&quot;
 	  &quot;options&quot;:[
 		{&quot;name&quot;: &quot;(Continue)&quot;,
 	    	  &quot;action&quot;: [{&quot;deleteMapObject&quot;: 258}, {&quot;activateMapObject&quot;: 230},{&quot;activateMapObject&quot;: 248},{&quot;activateMapObject&quot;: 246},{&quot;activateMapObject&quot;: 247}]

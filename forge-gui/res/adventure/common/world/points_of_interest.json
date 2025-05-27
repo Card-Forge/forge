@@ -3407,7 +3407,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "WasteTown",
-		"map": "../common/maps/map/main_story_explore/waste_town_abandoned.tmx",
+		"map": "../common/maps/map/main_story_defend/waste_town_abandoned.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Quest_APortalToNowhere"

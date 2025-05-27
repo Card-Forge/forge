@@ -17,6 +17,7 @@ ScryfallCode=FIN
 12 C Coeurl @Miho Midorikawa
 13 U Crystal Fragments @Bachzim
 14 U The Crystal's Chosen @Kotetsu Kinoshita
+16 R Dion, Bahamut's Dominant @Kevin Glint
 17 U Dragoon's Lance @Josephine Chang
 18 C Dwarven Castle Guard @Crystal Fae
 19 C Fate of the Sun-Cryst @Erikas Perl
@@ -32,6 +33,7 @@ ScryfallCode=FIN
 34 R Stiltzkin, Moogle Merchant @Hendry Iwanaga
 36 M Summon: Knights of Round @Toshiaki Takayama
 37 U Summon: Primal Garuda @Madeline Boni
+38 R Ultima @Gintas Galvanauskas
 40 C Weapons Vendor @Mushk Rizvi
 41 C White Auracite @Magali Villeneuve
 42 C White Mage's Staff @Kim Dingwall
@@ -39,10 +41,12 @@ ScryfallCode=FIN
 44 C You're Not Alone @Ignatius Budi
 45 U Zack Fair @Yoshio Sugiura
 46 R Astrologian's Planisphere @Josephine Chang
+47 U Cargo Ship @Thanh Tuấn
 49 C Dragoon's Wyvern @Jason Kiantoro
-50 C Dreams of Laguna @Josu Solano
+50 C Dreams of Laguna @Solan
 51 R Edgar, King of Figaro @Jake Murray
 53 U Ether @Ben Wootten
+54 M Gogo, Master of Mimicry @Thea Dumitriu
 55 C Ice Flan @SHOSUKE
 56 C Ice Magic @Masateru Ikeda
 58 R Jill, Shiva's Dominant @Arif Wijaya
@@ -55,10 +59,12 @@ ScryfallCode=FIN
 68 C Retrieve the Esper @Jake Murray
 70 C Sage's Nouliths @Justyna Dura
 71 C Sahagin @Nino Is
+74 U Sleep Magic @Le Vuong
 75 U Stolen Uniform @Daniel Correia
 77 R Summon: Leviathan @OTUMAMI
 78 U Summon: Shiva @Fajareka Setiawan
 80 C Syncopate @Nijihayashi
+83 U Ultros, Obnoxious Octopus @Domenico Cava
 84 U Valkyrie Aerial Unit @hippo
 85 R The Water Crystal @Pablo Mendoza
 86 M Y'shtola Rhul @Immanuela Crovius
@@ -76,6 +82,8 @@ ScryfallCode=FIN
 105 R Kain, Traitorous Dragoon @Russell Dongjun Lu
 106 C Malboro @Dan Watson
 107 C Namazu Trader @Andrea Montalto
+108 R Ninja's Blades @Immanuela Crovius
+109 U Overkill @Bachzim
 110 U Phantom Train @Gal Or
 111 U Poison the Waters @Arif Wijaya
 113 U Reno and Rude @Maji
@@ -106,12 +114,15 @@ ScryfallCode=FIN
 146 M Nibelheim Aflame @Arou
 148 U Prompto Argentum @Billy Christian
 149 U Queen Brahne @Lorenzo Mastroianni
+151 R Raubahn, Bull of Ala Mhigo @Julia Vasilyeva
 154 U Samurai's Katana @Smirtouille
 157 U Self-Destruct @Liiga Smilshkalne
 158 U Sidequest: Play Blitzball @Ittoku
 161 U Summon: Esper Ramuh @Justyna Dura
+163 C Summon: G.F. Ifrit @Lordigan
 164 C Suplex @Fang Xinyu
 166 R Triple Triad @Ben Wootten
+168 R Vaan, Street Thief @Jake Murray
 169 C Warrior's Sword @Andrea Tentori Montalto
 170 R Zell Dincht @Kevin Sidharta
 172 M Ancient Adamantoise @Kevin Glint
@@ -127,6 +138,7 @@ ScryfallCode=FIN
 194 U Quina, Qu Gourmet @Fajareka Setiawan
 195 U Reach the Horizon @ikeda_cpt
 196 R A Realm Reborn @Anna Podedworna
+197 U Ride the Shoopuf @Leonardo Santanna
 199 R Sazh Katzroy @Colin Boyer
 200 U Sazh's Chocobo @Domenico Cava
 203 U Summon: Fenrir @Chun Lo
@@ -139,6 +151,7 @@ ScryfallCode=FIN
 211 U Vanille, Cheerful l'Cie @Simon Dominic
 212 M Absolute Virtue @Toni Infante
 213 R Balthier and Fran @Arif Wijaya
+214 U Black Waltz No. 3 @Lordigan
 215 R Choco, Seeker of Paradise @Miho Midorikawa
 216 U Cid, Timeless Artificer @Lius Lasahido
 218 M Emet-Selch, Unsundered @Néstor Ossandón Leal
@@ -146,6 +159,7 @@ ScryfallCode=FIN
 221 U Garland, Knight of Cornelia @Billy Christian
 222 U Garnet, Princess of Alexandria @Daniel Correia
 224 U Gladiolus Amicitia @Gal Or
+226 R Hope Estheim @Fariba Khamseh
 227 U Ignis Scientia @Mingchen Shen
 228 R Jenova, Ancient Calamity @Ignatius Budi
 229 R Joshua, Phoenix's Dominant @Lius Lasahido
@@ -160,6 +174,7 @@ ScryfallCode=FIN
 241 U Shantotto, Tactician Magician @Joshua Raphael
 242 R Sin, Spira's Punishment @John Tedrick
 243 R Squall, SeeD Mercenary @Yuu Fujiki
+244 R Tellah, Great Sage @Yumi Yaoshida
 245 M Terra, Magical Adept @Clare Wong
 246 U Tidus, Blitzball Star @Nakamura8
 247 U Ultimecia, Time Sorceress @Mikio Masuda
@@ -174,8 +189,10 @@ ScryfallCode=FIN
 267 R The Regalia @Jonas De Ro
 270 C World Map @Septian Fajrianto
 271 C Adventurer's Inn @Allen Morris
+272 R Balamb Garden, SeeD Academy @Jonas De Ro
 273 C Baron, Airship Kingdom @Rockey Chen
 274 U Capital City @Wei Guan
+275 R Clive's Hideaway @Jonas De Ro
 278 C Gohn, Town of Ruin @Salvatorre Zee Yazzie
 279 U The Gold Saucer @Anthony Devine
 280 C Gongaga, Reactor Town @Le Vuong
@@ -224,6 +241,7 @@ ScryfallCode=FIN
 325 U Ambrosia Whiteheart @Shie Nanahara
 326 R Moogles' Valor @Yoshiya
 327 R Stiltzkin, Moogle Merchant @Yumeko
+328 R Ultima @Hisashi Momose
 330 R The Wind Crystal @Minoru
 332 U Stolen Uniform @Karuta Shiki
 333 R The Water Crystal @Makura Tami
@@ -242,6 +260,7 @@ ScryfallCode=FIN
 346 R Jenova, Ancient Calamity @Karo ARAI
 347 U Omega, Heartless Evolution @Tomohito
 348 R Sin, Spira's Punishment @Ayami Nakashima
+349 R Tellah, Great Sage @Ono Tako
 350 M Aettir and Priwen @Shie Nanahara
 351 M Buster Sword @Karuta Shiki
 356 M Summon: Bahamut @Kota Nakatsubo
@@ -259,6 +278,8 @@ ScryfallCode=FIN
 373 R Summon: Titan @Ezoi
 374 R Aerith Gainsborough @Syutsuri
 375 M Cloud, Midgar Mercenary @Maji
+376 R Dion, Bahamut's Dominant @Maji
+377 M Gogo, Master of Mimicry @Ryuichi Sakuma
 378 R Jill, Shiva's Dominant @Rika Suzuki
 379 R Ardyn, the Usurper @Rorubei
 380 R Cecil, Dark Knight @Misei Ito
@@ -269,10 +290,13 @@ ScryfallCode=FIN
 385 M Clive, Ifrit's Dominant @Murakami Hisashi
 386 R Firion, Wild Rose Warrior @Kato Ayaka
 387 U Prompto Argentum @Kato Ayaka
+388 R Raubahn, Bull of Ala Mhigo @PE-nekoR
+390 R Vaan, Street Thief @Kato Ayaka
 391 R Tifa Lockhart @Yoshiro Ambe
 392 U Vanille, Cheerful l'Cie @ikeda_cpt
 393 R Balthier and Fran @S. Makimura
 394 M Emet-Selch, Unsundered @Rorubei
+396 R Hope Estheim @Shiyu
 397 R Joshua, Phoenix's Dominant @Susumu Kuroi
 398 M Kefka, Court Mage @Rorubei
 399 R Kuja, Genome Sorcerer @Masateru Ikeda & Robert Cornelius
@@ -302,6 +326,7 @@ ScryfallCode=FIN
 424 U Ambrosia Whiteheart @Fajareka Setiawan
 426 R Beatrix, Loyal General @Bachzim
 427 M Cloud, Midgar Mercenary @Kazto Furuya
+428 R Dion, Bahamut's Dominant @Kevin Glint
 431 R Rosa, Resolute White Mage @Christian Angel
 432 U Snow Villiers @Fariba Khamseh
 433 R Stiltzkin, Moogle Merchant @Hendry Iwanaga
@@ -310,6 +335,7 @@ ScryfallCode=FIN
 439 R Matoya, Archon Elder @Luisa J. Preissler
 440 U Quistis Trepe @Touge369
 441 R Ultimecia, Temporal Threat @Bachzim
+442 U Ultros, Obnoxious Octopus @Domenico Cava
 443 M Y'shtola Rhul @Immanuela Crovius
 444 R Ardyn, the Usurper @Russell Lu
 445 R Cecil, Dark Knight @Josu Hernaiz
@@ -331,6 +357,8 @@ ScryfallCode=FIN
 462 R Lightning, Security Sergeant @Ramza Psyru
 463 U Prompto Argentum @Billy Christian
 464 U Queen Brahne @Lorenzo Mastroianni
+465 R Raubahn, Bull of Ala Mhigo @Julia Vasilyeva
+467 R Vaan, Street Thief @Jake Murray
 468 R Zell Dincht @Kevin Sidharta
 469 R Bartz and Boko @Ryuichi Sakuma
 471 U Quina, Qu Gourmet @Fajareka Setiawan
@@ -340,6 +368,7 @@ ScryfallCode=FIN
 475 U Vanille, Cheerful l'Cie @Simon Dominic
 476 M Absolute Virtue @Toni Infante
 477 R Balthier and Fran @Arif Wijaya
+478 U Black Waltz No. 3 @Lordigan
 479 R Choco, Seeker of Paradise @Miho Midorikawa
 480 U Cid, Timeless Artificer @Lius Lasahido
 482 M Cloud, Planet's Champion @Magali Villeneuve
@@ -348,6 +377,8 @@ ScryfallCode=FIN
 486 U Garland, Knight of Cornelia @Billy Christian
 487 U Garnet, Princess of Alexandria @Daniel Correia
 489 U Gladiolus Amicitia @Gal Or
+491 R Hope Estheim @Fariba Khamseh
+492 U Ignis Scientia @Mingchen Shen
 493 R Jenova, Ancient Calamity @Ignatius Budi
 494 R Joshua, Phoenix's Dominant @Lius Lasahido
 496 M Kefka, Court Mage @Xui Ton
@@ -362,6 +393,7 @@ ScryfallCode=FIN
 507 U Shantotto, Tactician Magician @Joshua Raphael
 508 R Sin, Spira's Punishment @John Tedrick
 509 R Squall, SeeD Mercenary @Yuu Fujiki
+510 R Tellah, Great Sage @Yumi Yaoshida
 511 M Terra, Magical Adept @Clare Wong
 512 U Tidus, Blitzball Star @Nakamura8
 513 U Ultimecia, Time Sorceress @Mikio Masuda
@@ -380,10 +412,12 @@ ScryfallCode=FIN
 529 R Zenos yae Galvus @Susumu Kuroi
 530 M Clive, Ifrit's Dominant @Murakami Hisashi
 531 R Firion, Wild Rose Warrior @Kato Ayaka
+535 R Vaan, Street Thief @Kato Ayaka
 536 R Tifa Lockhart @Yoshiro Ambe
 537 U Vanille, Cheerful l'Cie @ikeda_cpt
 538 R Balthier and Fran @S. Makimura
 539 M Emet-Selch, Unsundered @Rorubei
+541 R Hope Estheim @Shiyu
 542 R Joshua, Phoenix's Dominant @Susumu Kuroi
 543 M Kefka, Court Mage @Rorubei
 544 R Kuja, Genome Sorcerer @Masateru Ikeda & Robert Cornelius
