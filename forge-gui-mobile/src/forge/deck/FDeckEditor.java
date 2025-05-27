@@ -110,8 +110,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return controller;
         }
 
-        public CardEdition getBasicLandSet(Deck currentDeck) {
-            return DeckProxy.getDefaultLandSet(currentDeck);
+        public List<CardEdition> getBasicLandSets(Deck currentDeck) {
+            return List.of(DeckProxy.getDefaultLandSet(currentDeck));
         }
     }
 
@@ -629,15 +629,22 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected void showAddBasicLandsDialog() {
-        CardEdition defaultLandSet = this.editorConfig.getBasicLandSet(getDeck());
+        List<CardEdition> allowedLandSets = this.editorConfig.getBasicLandSets(getDeck());
+        if(allowedLandSets == null || allowedLandSets.isEmpty())
+            allowedLandSets = List.of(FModel.getMagicDb().getEditions().get("JMP"));
+        CardEdition defaultLandSet = allowedLandSets.get(0);
         AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<>() {
             @Override
             public void run(CardPool landsToAdd) {
-                getMainDeckPage().addCards(landsToAdd);
+                addChosenBasicLands(landsToAdd);
             }
-        }, null);
+        }, editorConfig.hasInfiniteCardPool() ? null : allowedLandSets); //Null allows any lands to be selected
         dialog.show();
         setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
+    }
+
+    protected void addChosenBasicLands(CardPool landsToAdd) {
+        getMainDeckPage().addCards(landsToAdd);
     }
 
     public DeckEditorConfig getEditorConfig() {
@@ -1630,10 +1637,48 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             super.addCards(cards);
         }
 
-        protected ItemPool<PaperCard> getCardPool() {
+        public ItemPool<PaperCard> getCardPool() {
+            final DeckEditorConfig editorConfig = parentScreen.getEditorConfig();
+            Deck currentDeck = parentScreen.getDeck();
+            List<Predicate<PaperCard>> filters = new ArrayList<>();
+
             //Clone the pool to ensure we don't mutate it by adding to or removing from this page.
             //Can override this if that behavior is desired.
-            return CardPool.createFrom(parentScreen.getEditorConfig().getCardPool(cardManager.getWantUnique()), PaperCard.class);
+            ItemPool<PaperCard> cardPool = CardPool.createFrom(parentScreen.getEditorConfig().getCardPool(cardManager.getWantUnique()), PaperCard.class);
+
+            if(editorConfig.usePlayerInventory() && currentDeck != null) {
+                //Remove any items from the pool that are in the deck.
+                cardPool.removeAll(currentDeck.getAllCardsInASinglePool(true, true));
+            }
+
+            //Add format filter.
+            if(editorConfig.getCardFilter() != null)
+                filters.add(editorConfig.getCardFilter());
+
+            if(editorConfig.hasInfiniteCardPool()) {
+                //Dump all the variant cards our deck calls for into the card pool.
+                for(DeckSection variant : parentScreen.getVariantCardPools()) {
+                    switch(variant) {
+                        case Avatar: cardPool.addAll(FModel.getAvatarPool()); break;
+                        case Conspiracy: cardPool.addAll(FModel.getConspiracyPool()); break;
+                        case Planes: cardPool.addAll(FModel.getPlanechaseCards()); break;
+                        case Schemes: cardPool.addAll(FModel.getArchenemyCards()); break;
+                        case Dungeon: cardPool.addAll(FModel.getDungeonPool()); break;
+                        case Attractions: cardPool.addAll(FModel.getAttractionPool()); break;
+                        case Contraptions: cardPool.addAll(FModel.getContraptionPool()); break;
+                    }
+                }
+            }
+
+            if(!filters.isEmpty()) {
+                Predicate<PaperCard> filter = filters.get(0);
+                if(filters.size() > 1)
+                    for(int i = 1; i < filters.size(); i++)
+                        filter = filter.and(filters.get(i));
+                cardPool.retainIf(filter);
+            }
+
+            return cardPool;
         }
 
         public void scheduleRefresh() {
@@ -1662,51 +1707,22 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             final DeckFormat deckFormat = editorConfig.getDeckFormat();
             Deck currentDeck = parentScreen.getDeck();
             ItemPool<PaperCard> cardPool = this.getCardPool();
-            List<Predicate<PaperCard>> filters = new ArrayList<>();
             String label = "lblCards";
 
-            //Add format filter.
-            if(editorConfig.getCardFilter() != null)
-                filters.add(editorConfig.getCardFilter());
-
-            if(editorConfig.usePlayerInventory() && currentDeck != null) {
-                //Remove any items from the pool that are in the deck.
-                cardPool.removeAll(currentDeck.getAllCardsInASinglePool(true, true));
-            }
-            else if(editorConfig.hasInfiniteCardPool()) {
-                //Dump all the variant cards our deck calls for into the card pool.
-                for(DeckSection variant : parentScreen.getVariantCardPools()) {
-                    switch(variant) {
-                        case Avatar: cardPool.addAll(FModel.getAvatarPool()); break;
-                        case Conspiracy: cardPool.addAll(FModel.getConspiracyPool()); break;
-                        case Planes: cardPool.addAll(FModel.getPlanechaseCards()); break;
-                        case Schemes: cardPool.addAll(FModel.getArchenemyCards()); break;
-                        case Dungeon: cardPool.addAll(FModel.getDungeonPool()); break;
-                        case Attractions: cardPool.addAll(FModel.getAttractionPool()); break;
-                        case Contraptions: cardPool.addAll(FModel.getContraptionPool()); break;
-                    }
-                }
-            }
-
-            if(editorConfig.hasCommander() && deckFormat != null && currentDeck != null) {
+            if(editorConfig.hasCommander() && parentScreen.getCardSourcePage() == this && deckFormat != null && currentDeck != null) {
+                //TODO: Commander filters probably should be handled elsewhere. Probably the card manager. I don't like mutating the pool outside of getCardPool.
+                //Maybe we add a button in the card manager to filter for valid cards and pass the current commander choice to it.
+                //Then we just remove the "add to deck" option when clicking a card outside the color identity.
                 if(needsCommander()) {
                     //If we need a commander, show only commander candidates.
-                    filters.add(deckFormat.isLegalCommanderPredicate());
+                    cardPool.retainIf(deckFormat.isLegalCommanderPredicate());
                     if(editorConfig.getGameType() == GameType.Oathbreaker)
                         label = "lblOathbreakers";
                     else
                         label = "lblCommanders";
                 }
                 else //If we have a commander, filter for color identity.
-                    filters.add(deckFormat.isLegalCardForCommanderPredicate(currentDeck.getCommanders()));
-            }
-
-            if(!filters.isEmpty()) {
-                Predicate<PaperCard> filter = filters.get(0);
-                if(filters.size() > 1)
-                    for(int i = 1; i < filters.size(); i++)
-                        filter = filter.and(filters.get(i));
-                cardPool.retainIf(filter);
+                    cardPool.retainIf(deckFormat.isLegalCardForCommanderPredicate(currentDeck.getCommanders()));
             }
 
             cardManager.setCaption(Forge.getLocalizer().getMessage(label));

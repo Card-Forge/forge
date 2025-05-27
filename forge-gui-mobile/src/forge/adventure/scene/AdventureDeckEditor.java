@@ -62,8 +62,34 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         @Override
-        public CardEdition getBasicLandSet(Deck currentDeck) {
-            return FModel.getMagicDb().getEditions().get("JMP");
+        public List<CardEdition> getBasicLandSets(Deck currentDeck) {
+            List<CardEdition> unlockedEditions = new ArrayList<>();
+            unlockedEditions.add(FModel.getMagicDb().getEditions().get("JMP"));
+
+            // Loop through Landscapes and add them to unlockedEditions
+            if (currentEvent == null) {
+                Map<String, CardEdition> editionsByName = new HashMap<>();
+                for (CardEdition e : FModel.getMagicDb().getEditions()) {
+                    editionsByName.put(e.getName().toLowerCase(), e);
+                }
+
+                String sketchbookPrefix = "landscape sketchbook - ";
+                for (String itemName : AdventurePlayer.current().getItems()) {
+                    if (!itemName.toLowerCase().startsWith(sketchbookPrefix)) {
+                        continue;
+                    }
+
+                    // Extract the set name after the prefix
+                    String setName = itemName.substring(sketchbookPrefix.length()).trim();
+                    CardEdition edition = editionsByName.get(setName.toLowerCase());
+
+                    // Add the edition if found and it has basic lands
+                    if (edition != null && edition.hasBasicLands()) {
+                        unlockedEditions.add(edition);
+                    }
+                }
+            }
+            return unlockedEditions;
         }
     }
 
@@ -108,8 +134,8 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override protected IDeckController getController() { return ADVENTURE_DECK_CONTROLLER; }
 
         @Override
-        public CardEdition getBasicLandSet(Deck currentDeck) {
-            return DeckProxy.getDefaultLandSet(event.registeredDeck);
+        public List<CardEdition> getBasicLandSets(Deck currentDeck) {
+            return List.of(DeckProxy.getDefaultLandSet(event.registeredDeck));
         }
 
         @Override
@@ -165,7 +191,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         @Override
-        protected ItemPool<PaperCard> getCardPool() {
+        public ItemPool<PaperCard> getCardPool() {
             return contents.getAllCardsInASinglePool();
         }
 
@@ -394,7 +420,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
 
         @Override
-        protected ItemPool<PaperCard> getCardPool() {
+        public ItemPool<PaperCard> getCardPool() {
             //No need to override addCard and removeCard, because autoSellCards IS the card pool here.
             //It'll be updated automatically as cards are added and removed from this page.
             return Current.player().getAutoSellCards();
@@ -659,67 +685,41 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     @Override
+    protected void addChosenBasicLands(CardPool landsToAdd) {
+        //Take the basic lands from the player's collection if they have them. If they need more, create unsellable copies.
+        CardPool requiredNewLands = new CardPool();
+        CardPool landsToMove = new CardPool();
+        CatalogPage catalog = getCatalogPage();
+        ItemPool<PaperCard> availablePool = catalog.getCardPool();
+        for(Map.Entry<PaperCard, Integer> entry : landsToAdd) {
+            int needed = entry.getValue();
+            PaperCard card = entry.getKey();
+            int moveableSellable = Math.min(availablePool.count(card), needed);
+            landsToMove.add(card, moveableSellable);
+            needed -= moveableSellable;
+            if(needed <= 0)
+                continue;
+            PaperCard unsellable = card.getNoSellVersion();
+            //It'd probably be better to do some kind of fuzzy search that matches prints but ignores flags.
+            //But for now, unsellable is the only one that should matter here.
+            int moveableUnsellable = Math.min(availablePool.count(unsellable), needed);
+            landsToMove.add(unsellable, needed); //We'll acquire the rest later.
+            if(needed > moveableUnsellable)
+                requiredNewLands.add(unsellable, needed - moveableUnsellable);
+        }
+        if(!requiredNewLands.isEmpty())
+            Current.player().addCards(requiredNewLands);
+        catalog.refresh();
+        catalog.moveCards(landsToMove, getMainDeckPage());
+    }
+
+    @Override
     protected void cacheTabPages() {
         super.cacheTabPages();
         for(TabPage<FDeckEditor> page : tabPages) {
             if(page instanceof CollectionAutoSellPage)
                 this.autoSellPage = (CollectionAutoSellPage) page;
         }
-    }
-
-    protected void launchBasicLandDialog() {
-        CardEdition defaultLandSet;
-        Set<CardEdition> availableEditionCodes = new HashSet<>();
-
-        if (currentEvent != null) {
-            //suggest a random set from the ones used in the limited card pool that have all basic lands
-            for (PaperCard p : currentEvent.registeredDeck.getAllCardsInASinglePool().toFlatList()) {
-                availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
-            }
-            defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
-        } else {
-            defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
-        }
-
-        if (defaultLandSet == null) {
-            defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
-        }
-
-        List<CardEdition> unlockedEditions = new ArrayList<>();
-        unlockedEditions.add(defaultLandSet);
-
-        // Loop through Landscapes and add them to unlockedEditions
-        if (currentEvent == null) {
-            Map<String, CardEdition> editionsByName = new HashMap<>();
-            for (CardEdition e : FModel.getMagicDb().getEditions()) {
-                editionsByName.put(e.getName().toLowerCase(), e);
-            }
-
-            String sketchbookPrefix = "landscape sketchbook - ";
-            for (String itemName : AdventurePlayer.current().getItems()) {
-                if (!itemName.toLowerCase().startsWith(sketchbookPrefix)) {
-                    continue;
-                }
-
-                // Extract the set name after the prefix
-                String setName = itemName.substring(sketchbookPrefix.length()).trim();
-                CardEdition edition = editionsByName.get(setName.toLowerCase());
-
-                // Add the edition if found and it has basic lands
-                if (edition != null && edition.hasBasicLands()) {
-                    unlockedEditions.add(edition);
-                }
-            }
-        }
-
-        AddBasicLandsDialog dialog = new AddBasicLandsDialog(getDeck(), defaultLandSet, new Callback<CardPool>() {
-            @Override
-            public void run(CardPool landsToAdd) {
-                getMainDeckPage().addCards(landsToAdd);
-            }
-        }, unlockedEditions);
-        dialog.show();
-        setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
     }
 
     @Override

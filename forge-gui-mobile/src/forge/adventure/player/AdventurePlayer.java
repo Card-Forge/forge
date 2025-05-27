@@ -663,6 +663,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         newCards.add(card, amount);
     }
 
+    public void addCards(ItemPool<PaperCard> cardPool) {
+        cards.addAll(cardPool);
+        newCards.addAll(cardPool);
+    }
+
     public void addReward(Reward reward) {
         switch (reward.getType()) {
             case Card:
