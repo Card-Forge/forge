@@ -2,7 +2,7 @@ Name:Diamond Weapon
 ManaCost:7 G G
 Types:Legendary Artifact Creature Elemental
 PT:8/8
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each attacking creature.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each permanent card in your graveyard.
 K:Reach
 K:Prevent all combat damage that would be dealt to CARDNAME.
 SVar:X:Count$ValidGraveyard Permanent.YouOwn
