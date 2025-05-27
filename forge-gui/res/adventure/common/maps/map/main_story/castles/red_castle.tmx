@@ -227,7 +227,7 @@
     &quot;text&quot;: &quot;Welcome {var=player_name}, dragon queen Lathliss has been waiting eagerly for this moment.&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;Is that so ? I guess you woudn't mind opening that gate in front of me ?&quot;,
+        &quot;name&quot;: &quot;Is that so ? I guess you wouldn't mind opening that gate in front of me ?&quot;,
         &quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am only an ordinary dragon, a mere servant of the mighty Lathliss, queen of dragons.&quot;,
         &quot;options&quot;: [
           {

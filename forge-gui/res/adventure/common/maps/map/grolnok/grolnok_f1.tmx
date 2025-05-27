@@ -87,10 +87,10 @@
     &quot;options&quot;:[
     { &quot;name&quot;:&quot;go away&quot; },
     {      
-        &quot;name&quot;:&quot;unlock with Grolnoks Key&quot;,     
-        &quot;condition&quot;:[{&quot;item&quot;:&quot;Grolnoks Key&quot;}],    
+        &quot;name&quot;:&quot;unlock with Grolnok's Key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Grolnok's Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Grolnoks Key&quot;}]} ]
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Grolnok's Key&quot;}]} ]
     }
     ]
 }]</property>
@@ -143,7 +143,7 @@
     &quot;type&quot;: &quot;item&quot;,
     &quot;probability&quot;: 1,
     &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Grolnoks Key&quot;
+    &quot;itemName&quot;: &quot;Grolnok's Key&quot;
   }
 ]
 </property>

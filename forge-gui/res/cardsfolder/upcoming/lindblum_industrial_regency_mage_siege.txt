@@ -1,4 +1,4 @@
-Name:Linblum, Industrial Regency
+Name:Lindblum, Industrial Regency
 ManaCost:no cost
 Types:Land Town
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.

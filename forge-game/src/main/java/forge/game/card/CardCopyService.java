@@ -308,6 +308,7 @@ public class CardCopyService {
         newCopy.setPhasedOut(copyFrom.getPhasedOut());
         newCopy.setTapped(copyFrom.isTapped());
         newCopy.setTributed(copyFrom.isTributed());
+        newCopy.setUnearthed(copyFrom.isUnearthed());
         newCopy.setMonstrous(copyFrom.isMonstrous());
         newCopy.setRenowned(copyFrom.isRenowned());
         newCopy.setSolved(copyFrom.isSolved());
@@ -352,8 +353,6 @@ public class CardCopyService {
         }
         newCopy.setChosenEvenOdd(copyFrom.getChosenEvenOdd());
 
-        newCopy.setUnearthed(copyFrom.isUnearthed());
-
         newCopy.copyFrom(copyFrom);
 
         // for getReplacementList (run after setChangedCardKeywords for caching)
@@ -361,14 +360,16 @@ public class CardCopyService {
         newCopy.setStoredReplacements(copyFrom.getStoredReplacements());
 
         newCopy.copyChangedTextFrom(copyFrom);
+        newCopy.updateChangedText();
 
         newCopy.setGameTimestamp(copyFrom.getGameTimestamp());
         newCopy.setLayerTimestamp(copyFrom.getLayerTimestamp());
 
         newCopy.setBestowTimestamp(copyFrom.getBestowTimestamp());
 
-        newCopy.setForetold(copyFrom.isForetold());
         newCopy.setTurnInZone(copyFrom.getTurnInZone());
+
+        newCopy.setForetold(copyFrom.isForetold());
         newCopy.setForetoldCostByEffect(copyFrom.isForetoldCostByEffect());
 
         newCopy.setPlotted(copyFrom.isPlotted());

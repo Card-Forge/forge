@@ -1,0 +1,8 @@
+Name:Ride the Shoopuf
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Animate | Cost$ 5 G G | Defined$ Self | Power$ 7 | Toughness$ 7 | Types$ Creature,Beast | Duration$ Permanent | SpellDescription$ This enchantment becomes a 7/7 Beast creature in addition to its other types.
+DeckHas:Ability$Counters
+Oracle:Landfall — Whenever a land you control enters, put a +1/+1 counter on target creature you control.\n{5}{G}{G}: This enchantment becomes a 7/7 Beast creature in addition to its other types.
