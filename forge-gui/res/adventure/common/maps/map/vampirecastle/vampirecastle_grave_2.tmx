@@ -248,7 +248,7 @@
           { &quot;name&quot;: &quot;Walk away&quot; },
           {
             &quot;name&quot;: &quot;Open the coffin&quot;,
-            &quot;text&quot;: &quot;As you open the coffin, an ancient figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL ?&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, an ancient figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL?&quot;,
             &quot;options&quot;: [
               {
                 &quot;name&quot;: &quot;Prepare yourself!&quot;,
