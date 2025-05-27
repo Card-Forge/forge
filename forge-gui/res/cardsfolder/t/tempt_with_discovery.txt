@@ -1,11 +1,8 @@
 Name:Tempt with Discovery
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.YouCtrl | ChangeNum$ 1 | Hidden$ True | NoShuffle$ True | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Tempting offer — Search your library for a land card and put it onto the battlefield. Each opponent may search their library for a land card and put it onto the battlefield. For each opponent who searches a library this way, search your library for a land card and put it onto the battlefield. Then each player who searched a library this way shuffles.
-SVar:DBRepeat:DB$ RepeatEach | RepeatSubAbility$ DBChangeZone | RepeatPlayers$ Player.Opponent | SubAbility$ DBSearchAgain | RepeatOptionalForEachPlayer$ True | RepeatOptionalMessage$ Do you want to search your library for a land card and put it onto the battlefield?
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.RememberedPlayerCtrl | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBCount
-SVar:DBCount:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1
-SVar:DBSearchAgain:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.YouCtrl | ChangeNum$ X | Hidden$ True | Shuffle$ True | StackDescription$ None | SubAbility$ DBReset
-SVar:DBReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
-SVar:X:Number$0
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.YouCtrl | ChangeNum$ 1 | Hidden$ True | NoShuffle$ True | SubAbility$ DBOppSearch | StackDescription$ SpellDescription | SpellDescription$ Tempting offer — Search your library for a land card and put it onto the battlefield. Each opponent may search their library for a land card and put it onto the battlefield. For each opponent who searches a library this way, search your library for a land card and put it onto the battlefield. Then each player who searched a library this way shuffles.
+SVar:DBOppSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | DefinedPlayer$ Opponent | RememberSearched$ True | Optional$ True | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBSearchAgain
+SVar:DBSearchAgain:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.YouCtrl | ChangeNum$ Count$RememberedSize | Hidden$ True | Shuffle$ True | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Tempting offer — Search your library for a land card and put it onto the battlefield. Each opponent may search their library for a land card and put it onto the battlefield. For each opponent who searches a library this way, search your library for a land card and put it onto the battlefield. Then each player who searched a library this way shuffles.
