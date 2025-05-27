@@ -1,0 +1,7 @@
+Name:Magic Damper
+ManaCost:U
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | TgtPrompt$ Select target creature you control | KW$ Hexproof | SubAbility$ DBUntap | SpellDescription$ Target creature you control gets +1/+1 and gains hexproof until end of turn. Untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+DeckHas:Keyword$Hexproof
+Oracle:Target creature you control gets +1/+1 and gains hexproof until end of turn. Untap it.
