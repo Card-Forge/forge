@@ -2900,7 +2900,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As soon as you turn to head back to town, you hear the squeaking of wagon wheels in the distance. Your employer comes in to view, and drives his wagon right up to you.",
+		"text": "As soon as you turn to head back to town, you hear the squeaking of wagon wheels in the distance. Your employer comes into view, and drives his wagon right up to you.",
 		"options": [
 			{
 				"action": [
@@ -3688,7 +3688,7 @@
 	"name": "A Vision of Destruction",
 	"description": "Clear out all enemies in the $(poi_1) and report back.",
 	"offerDialog": {
-		"text": "Walking in to the village, an old man looks up as if expecting you and rushes over (to the extent that he is able) \"$(playername). I need you to turn around and leave. NOW.\"",
+		"text": "Walking into the village, an old man looks up as if expecting you and rushes over (to the extent that he is able) \"$(playername). I need you to turn around and leave. NOW.\"",
 		"options": [
 			{
 				"name": "You take a good look at the old man, but do not recognize his features. \"Should I know you?\"",
@@ -3901,7 +3901,7 @@
 				"text": "\"My vision was less than specific about whether or not it would be changed by your actions. So... yes.\"",
 				"options": [
 					{
-						"name": "You glance around at a clear sky warily before going on in to town. (Complete Quest)"
+						"name": "You glance around at a clear sky warily before going on into town. (Complete Quest)"
 					}
 				]
 			}
@@ -4237,7 +4237,7 @@
 				"options": [
 					{
 						"name": "You wait for him to continue.",
-						"text": "\"I've come in to an inheritance of a small estate that I've been expecting for years. Recently, I've had some hard times, and I've convinced some individuals to let me borrow against the land.\"",
+						"text": "\"I've come into an inheritance of a small estate that I've been expecting for years. Recently, I've had some hard times, and I've convinced some individuals to let me borrow against the land.\"",
 						"options": [
 							{
 								"name": "\"I see.\" You think you know where this is headed.",
@@ -4546,7 +4546,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "You feel awkward pulling your $(enemy_1)s in to town, but it doesn't actually seem that out of place here with other macabre scenes around. (This quest will only given in black biome in the future).",
+		"text": "You feel awkward pulling your $(enemy_1)s into town, but it doesn't actually seem that out of place here with other macabre scenes around. (This quest will only given in black biome in the future).",
 		"options": [
 			{
 				"name": "You look around for someone that seems to be expecting bodies.",
@@ -5030,7 +5030,7 @@
 													}
 												],
 												"name": "\"And if I bring in six?\" (Accept Quest)",
-												"text": "\"Then you will have brought down too many.We're thinning them, not removing them.\"",
+												"text": "\"Then you will have brought down too many. We're thinning them, not removing them.\"",
 												"options": [
 													{
 														"name": "You nod and prepare to leave. (Continue)"
@@ -5505,7 +5505,7 @@
 										"name": "\"I can do that.\" (Accept Quest)"
 									},
 									{
-										"name": "\"Sorry, I just decided that I'm more in to magic than science.\" (Decline Quest)"
+										"name": "\"Sorry, I just decided that I'm more into magic than science.\" (Decline Quest)"
 									}
 								]
 							}
@@ -5769,7 +5769,7 @@
 	"name": "Heart of a Champion",
 	"description": "Enter and win an upcoming arena event.",
 	"offerDialog": {
-		"text": "\"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\" A young girl yells at the top of her lungs at each passer by in the town. Most people come in to view already covering their ears, having heard this plenty of times before.",
+		"text": "\"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\" A young girl yells at the top of her lungs at each passer by in the town. Most people come into view already covering their ears, having heard this plenty of times before.",
 		"options": [
 			{
 				"name": "You walk over to her. \"Okay, kid, settle down, I heard you. What's this about?\"",

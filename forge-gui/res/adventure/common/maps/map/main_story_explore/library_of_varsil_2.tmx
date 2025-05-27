@@ -41,7 +41,7 @@
    &quot;text&quot;: &quot;'Damnation of the Mad Jester' is presented as the fictional tale of a man named Kuthuman whose meticulously detailed tales of fanciful worlds elevated his stature from a beggar to a royal entertainer before being dragged away by demons in the midst of the king's court which harmed not another soul.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;,
-      &quot;text&quot;: &quot;This copy is prefaced, however, by a scribe's notes that all of the historical figures in the text of note and their interactions appear to be extremely accurately depicted, calling in to question the fictional origin of Kuthuman's tale.&quot;,
+      &quot;text&quot;: &quot;This copy is prefaced, however, by a scribe's notes that all of the historical figures in the text of note and their interactions appear to be extremely accurately depicted, calling into question the fictional origin of Kuthuman's tale.&quot;,
       &quot;options&quot;: [{
          &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
       }]
