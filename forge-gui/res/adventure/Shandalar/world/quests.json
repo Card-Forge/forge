@@ -41,7 +41,7 @@
 					},
 					{
 						"name": "\"And what if I find the right people myself?\"",
-						"text": "He shrugs as though that wouldn't bother him. \"Then I'll have to find someone bigger, badder, and most importantly, faster than you to work with.\"",
+						"text": "He shrugs as though that wouldn't bother him. \"Then I'll have to find someone bigger, badder, and, most importantly, faster than you to work with.\"",
 						"options": [
 							{
 								"name": "\"Good luck with that.\" (Decline Quest)"
@@ -591,7 +591,7 @@
 												]
 											}
 										],
-										"name": "Quickly and discretely help yourself to a spell before continuing.",
+										"name": "Quickly and discreetly help yourself to a spell before continuing.",
 										"text": "You receive a spell of dubious quality.",
 										"options": [
 											{
@@ -2200,7 +2200,7 @@
 							},
 							{
 								"name": "Curious as to why this would be on the board, your gaze lingers for a moment.",
-								"text": "As you look at the wordless paper, words find their way into your mind by unknown, other, means. 'FIND.' '{COLOR=red}KILL!{ENDCOLOR}' 'REWARD.'",
+								"text": "As you look at the wordless paper, words find their way into your mind by unknown means. 'FIND.' '{COLOR=red}KILL!{ENDCOLOR}' 'REWARD.'",
 								"options": [
 									{
 										"action": [
@@ -2285,7 +2285,7 @@
 						"options": [
 							{
 								"name": "You continue to read.",
-								"text": "Secondly, another's handwriting has scrawled over what might have actually been a romantic bit, with the following. \"Don't bother. I killed him yesterday\"",
+								"text": "Secondly, another's handwriting was scrawled over what might have actually been a romantic bit with the following. \"Don't bother. I killed him yesterday\"",
 								"options": [
 									{
 										"name": "You shake your head and walk away. (Decline Quest)"
@@ -2870,7 +2870,7 @@
 		"options": [
 			{
 				"name": "\"Capable just so happens to be my middle name.\"",
-				"text": "He looks perplexed for a moment, but glances back at the wagon as though distracted by it. \"I was hoping you could handle some business for me\"",
+				"text": "He looks perplexed for a moment, but glances back at the wagon as though distracted by it. \"I was hoping you could handle some business for me.\"",
 				"options": [
 					{
 						"name": "Business? What sort of business?",
@@ -4339,7 +4339,7 @@
 												"POIReference": ""
 											}
 										],
-										"name": "\"So long as I get to keep whatever I find along the way, too.\" (Accept Quest)."
+										"name": "\"So long as I get to keep whatever I find along the way too.\" (Accept Quest)."
 									},
 									{
 										"name": "\"I don't think I'm interested. Sorry.\" (Decline Quest)"
@@ -4558,7 +4558,7 @@
 				"text": "Most of the ads are nondescript, weather worn, or written in an unfamiliar language. A few catch your eye, however.",
 				"options": [
 					{
-						"name": "You look at what seems to be an advertisement of some sort, off to one side.",
+						"name": "You look at what seems to be an advertisement of some sort off to one side.",
 						"text": "It reads: \"Gimgee's self-replicating paper. When you need unlimited paper or to clear a forest from afar, it's got to be Gimgee's.\"",
 						"options": [
 							{
@@ -4678,7 +4678,7 @@
 					},
 					{
 						"name": "You take a closer look at the carts.",
-						"text": "$(enemy_1)s and a few random creatures are filling most of one cart., while the other holds a few identical satchels of goods.",
+						"text": "$(enemy_1)s and a few random creatures are filling most of one cart, while the other holds a few identical satchels of goods.",
 						"options": [
 							{
 								"name": "Turn your attention to the carts' attendant.",
@@ -6314,7 +6314,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -6367,7 +6367,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "\"Do you really think I have nothing better to do ? Find someone else to take care of it\" (Decline Quest)",
+								"name": "\"Do you really think I have nothing better to do? Find someone else to take care of it.\" (Decline Quest)",
 								"text": "Maven the Alchemist keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
 								"options": [
 									{
@@ -6518,7 +6518,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are. (-1 Local Reputation)",
 				"options": [
 					{
@@ -6717,7 +6717,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -6750,7 +6750,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "Consider it done, note the location of the old sewers on my map. (Accept Quest) (WARNING HARD QUEST)"
+								"name": "Consider it done. If you'd note the location of the old sewers on my map... (Accept Quest) (WARNING HARD QUEST)"
 							},
 							{
 								"action": [
@@ -7381,7 +7381,7 @@
 				"options": [
 					{
 						"name": "(Continue)",
-						"text": "The inn contains some special events. You can also sell extra cards there, or buy temporary extra health.\n\nThe '?' sign denotes a town square / job board where you can obtain side quests.\n\nAll of the other buildings with signs out front are shops, most of them sell cards.\n\nTo leave town, walk back toward the edge of the screen just below your current location.",
+						"text": "The inn contains some special events. You can also sell extra cards there, or buy temporary extra health.\n\nThe '?' sign denotes a town square or a job board where you can obtain side quests.\n\nAll of the other buildings with signs out front are shops, most of them sell cards.\n\nTo leave town, walk back toward the edge of the screen just below your current location.",
 						"options": [
 							{
 								"name": "(Continue)",
@@ -7713,7 +7713,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -7921,7 +7921,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -8127,7 +8127,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"name": "Sorry, I don't have the time for this. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -8367,7 +8367,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},
@@ -8551,7 +8551,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},
@@ -8735,7 +8735,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},
@@ -8918,7 +8918,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},
@@ -9102,7 +9102,7 @@
 						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "(Quest complete)"
+				"name": "(Quest Complete)"
 			}
 		]
 	},

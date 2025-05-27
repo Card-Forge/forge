@@ -6,7 +6,7 @@
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
- <layer id="28" name="Colission" width="44" height="40">
+ <layer id="28" name="Collision" width="44" height="40">
   <data encoding="base64" compression="zlib">
    eJztmG1uwjAMhvsz+bPT7AoDxEU3Om7FRznGZHUWL1Y+nMTJQNorWYg0dR+5ttt646dpI0xKHk9ZTrvfPfvM3tlN09HVsewUHKcK3m+3muSa4b88pomPhhd9aXhRJ2Anu4g9yKy5l1pe9lfKqxEz51jnQA6lFPNF66W+UJzv2jrRKlavLawkrM+je8wfthpJXgtWEvJax7e0x2nUi1fKmtc6f3uJeh7lbW9eC9/vb3djn724rXhDfM/O2+J7ZM5bxPefN65n5A3xcD9oZejRS2K8KWYNR4/eJ5/fW6/jxXNHsaJv/i3hxXND673qrJW35Zuyllfmg1yv9TtKoVh9udUOynfqv+ZllXwDj5IFL/upvX7pfgvemmtrzsHjuVq/JnwtfrWDmFuUcGqfRVpeUijGN1jDPrNAv7Tqf628yDrDnIjXr/4e+wV6jbQRvDnW2PwwpG1BjLW8PNP4dHHWD/+4l6RhruFNCa9P381nMJwVMq/MmxSzxWyn1l+MlxRitmYtVYqXdBb3ZoSWRD3meEfrlukfzGtdP6XS9nquRTmvH6ne7+HWeiVW0g/3a5Vc
   </data>

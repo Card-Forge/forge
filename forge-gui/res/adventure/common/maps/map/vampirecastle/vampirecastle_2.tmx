@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon/animatedtiles.tsx"/>
  <tileset firstgid="28289" source="../../tileset/dungeon/dungeon_bis.tsx"/>
- <layer id="9" name="Colission" width="32" height="24">
+ <layer id="9" name="Collision" width="32" height="24">
   <data encoding="base64" compression="zlib">
    eJxjYMANnPnwSNIYDKTdpNpPbbdSYt5AhxulYKDdT8h+kDwM08t+ZDEYG5f9lKadgfI/seYRaz+p7hvs/hkFAw/Q895ovI2CUTAKhjIAAJ+mCxQ=
   </data>
