@@ -4,6 +4,6 @@ Types:Legendary Artifact Creature Elemental
 PT:8/8
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each permanent card in your graveyard.
 K:Reach
-K:Prevent all combat damage that would be dealt to CARDNAME.
+R:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.Self | Description$ Immune — Prevent all combat damage that would be dealt to CARDNAME.
 SVar:X:Count$ValidGraveyard Permanent.YouOwn
 Oracle:This spell costs {1} less to cast for each permanent card in your graveyard.\nReach\nImmune — Prevent all combat damage that would be dealt to Diamond Weapon.
