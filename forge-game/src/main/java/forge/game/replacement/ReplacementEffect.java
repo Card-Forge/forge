@@ -23,7 +23,6 @@ import java.util.Objects;
 
 import com.google.common.collect.*;
 
-import forge.game.trigger.Trigger;
 import forge.util.ITranslatable;
 import org.apache.commons.lang3.StringUtils;
 
