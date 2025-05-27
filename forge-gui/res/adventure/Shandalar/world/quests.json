@@ -6178,7 +6178,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_1))",
+		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_2))",
 		"options": [
 			{
 				"action": [
@@ -6383,7 +6383,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_1))",
+		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_2))",
 		"options": [
 			{
 				"action": [
@@ -6586,7 +6586,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_1))",
+		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_2))",
 		"options": [
 			{
 				"action": [
@@ -6615,7 +6615,7 @@
 							}
 						],
 						"addMapReputation": 3,
-						"POIReference": "$(poi_1)"
+						"POIReference": "$(poi_2)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -6785,7 +6785,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_1))",
+		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_2))",
 		"options": [
 			{
 				"action": [
@@ -7782,7 +7782,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As you enter the village, the local townspeople rush towards you to thank you for defeating Kiora. (+3 Reputation in $(poi_1))",
+		"text": "As you enter the village, the local townspeople rush towards you to thank you for defeating Kiora. (+3 Reputation in $(poi_2))",
 		"options": [
 			{
 				"action": [
@@ -7883,6 +7883,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"failureDialog": {},
@@ -7990,7 +7991,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_1))",
+		"text": "As you enter the village, the local townspeople rush towards you to thank you for your deeds. (+3 Reputation in $(poi_2))",
 		"options": [
 			{
 				"action": [
@@ -8023,7 +8024,9 @@
 									"Mythic Rare"
 								]
 							}
-						]
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_2)"
 					}
 				],
 				"name": "It's nothing I couldn't handle. (Complete Quest)"
@@ -8089,6 +8092,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"failureDialog": {},
