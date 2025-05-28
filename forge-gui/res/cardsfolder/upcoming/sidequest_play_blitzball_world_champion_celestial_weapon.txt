@@ -1,0 +1,22 @@
+Name:Sidequest: Play Blitzball
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2
+T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE6 | Execute$ TrigTransform | TriggerDescription$ At the end of combat on your turn, if a player was dealt 6 or more combat damage this turn, transform this enchantment, then attach it to a creature you control.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control | Object$ Self | AILogic$ Pump
+SVar:X:Count$MaxCombatDamageThisTurn
+SVar:PlayMain1:TRUE
+AlternateMode:DoubleFaced
+Oracle:At the beginning of combat on your turn, target creature you control gets +2/+0 until end of turn.\nAt the end of combat on your turn, if a player was dealt 6 or more combat damage this turn, transform this enchantment, then attach it to a creature you control.
+
+ALTERNATE
+
+Name:World Champion, Celestial Weapon
+ManaCost:no cost
+Colors:red
+Types:Legendary Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Double Strike | Description$ Double Overdrive — Equipped creature gets +2/+0 and has double strike.
+Oracle:Double Overdrive — Equipped creature gets +2/+0 and has double strike.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

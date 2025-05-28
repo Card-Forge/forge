@@ -1,0 +1,23 @@
+Name:Sidequest: Hunt the Mark
+ManaCost:3 B B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this enchantment enters, destroy up to one target creature.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | CheckSVar$ DiedThisTurn | TriggerDescription$ At the beginning of your end step, if a creature died under an opponent's control this turn, create a Treasure token. Then if you control three or more Treasures, transform this enchantment.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 1 | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionCheckSVar$ NumTreasure | ConditionSVarCompare$ GE3 | Mode$ Transform
+SVar:DiedThisTurn:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.OppCtrl
+SVar:NumTreasure:Count$Valid Treasure.YouCtrl
+AlternateMode:DoubleFaced
+Oracle:When this enchantment enters, destroy up to one target creature.\nAt the beginning of your end step, if a creature died under an opponent's control this turn, create a Treasure token. Then if you control three or more Treasures, transform this enchantment.
+
+ALTERNATE
+
+Name:Yiazmat, Ultimate Mark
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Dragon
+PT:5/6
+A:AB$ Pump | Cost$ 1 B Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ NICKNAME gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it.)
+SVar:DBTap:DB$ Tap | Defined$ Self
+Oracle:{1}{B}, Sacrifice another creature or artifact: Yiazmat gains indestructible until end of turn. Tap it.

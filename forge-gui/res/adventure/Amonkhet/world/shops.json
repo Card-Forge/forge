@@ -428,7 +428,7 @@
     }]
 },{                                      
 "name":"White4",                  
-"description":"Only mostly dead",
+"description":"Only Mostly Dead",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"RotatingShop",
 "overlaySprite":"Overlay6White",
@@ -1380,7 +1380,7 @@
     }]
 },{                                    
 "name":"Blue",                  
-"description":"Hermitic Study",
+"description":"Hermetic Study",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"BlueShop",
   "rewards": [

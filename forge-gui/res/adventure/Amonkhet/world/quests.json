@@ -41,7 +41,7 @@
 					},
 					{
 						"name": "\"And what if I find the right people myself?\"",
-						"text": "He shrugs as though that wouldn't bother him. \"Then I'll have to find someone bigger, badder, and most importantly faster than you to work with.\"",
+						"text": "He shrugs as though that wouldn't bother him. \"Then I'll have to find someone bigger, badder, and, most importantly, faster than you to work with.\"",
 						"options": [
 							{
 								"name": "\"Good luck with that.\" (Decline Quest)"
@@ -585,7 +585,7 @@
 										]
 									}
 								],
-								"name": "Quickly and discretely help yourself to a spell before continuing.",
+								"name": "Quickly and discreetly help yourself to a spell before continuing.",
 								"text": "You receive a spell of dubious quality.",
 								"options": [
 									{
@@ -817,7 +817,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "Consciously or unconsciously, you brush your shoulders off as you walk back in to town. The locals appear delighted that you have taken care of their problem. (+3 Local Reputation)",
+		"text": "Consciously or unconsciously, you brush your shoulders off as you walk back into town. The locals appear delighted that you have taken care of their problem. (+3 Local Reputation)",
 		"options": [
 			{
 				"action": [
@@ -1236,7 +1236,7 @@
 							}
 						],
 						"name": "You shrug your shoulders. It's not your problem. (Decline Quest)",
-						"text": "The criminal glances at you and hurredly scampers off. (-1 Reputation)",
+						"text": "The criminal glances at you and hurriedly scampers off. (-1 Reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -1295,7 +1295,7 @@
 						]
 					},
 					{
-						"name": "You clear your throat in an exagerated manner.",
+						"name": "You clear your throat in an exaggerated manner.",
 						"text": "The $(enemy_2) drops a small satchel as they begin to run away.",
 						"options": [
 							{
@@ -2153,7 +2153,7 @@
 							},
 							{
 								"name": "Curious as to why this would be on the board, your gaze lingers for a moment.",
-								"text": "As you look at the wordless paper, words find their way in to your mind by unknown other means. 'FIND.' '{COLOR=red}KILL!{ENDCOLOR}' 'REWARD.'",
+								"text": "As you look at the wordless paper, words find their way into your mind by unknown means. 'FIND.' '{COLOR=red}KILL!{ENDCOLOR}' 'REWARD.'",
 								"options": [
 									{
 										"action": [
@@ -2203,7 +2203,7 @@
 										]
 									},
 									{
-										"name": "You decide that the invasive thoughts, if you can call them that, are unwelcomed, and you take a step back.",
+										"name": "You decide that the invasive thoughts, if you can call them that, are unwelcome, and you take a step back.",
 										"text": "The thoughts urgently follow you for a moment. '{COLOR=red}KKKKiiiiill...{ENDCOLOR}' But as you take another step back, the words vanish from your mind.",
 										"options": [
 											{
@@ -2238,7 +2238,7 @@
 						"options": [
 							{
 								"name": "You continue to read.",
-								"text": "Secondly, another handwriting has scrawled over what might have actually been a romantic bit with the following. \"Don't bother. I killed him yesterday.\"",
+								"text": "Secondly, another's handwriting was scrawled over what might have actually been a romantic bit with the following. \"Don't bother. I killed him yesterday.\"",
 								"options": [
 									{
 										"name": "You shake your head and walk away. (Decline Quest)"
@@ -2647,7 +2647,7 @@
 						]
 					}
 				],
-				"name": "\"Almost. I believe there's a reward due to level the scales.\"",
+				"name": "\"Almost. I believe there's a reward due, to level the scales.\"",
 				"text": "The druid frowns slightly, but hands you a bundle wrapped in small vines. (-1 Local Reputation)",
 				"options": [
 					{
@@ -2900,7 +2900,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As soon as you turn to head back to town, you hear the squeaking of wagon wheels in the distance. Your employer comes in to view, and drives his wagon right up to you.",
+		"text": "As soon as you turn to head back to town, you hear the squeaking of wagon wheels in the distance. Your employer comes into view, and drives his wagon right up to you.",
 		"options": [
 			{
 				"action": [
@@ -3588,7 +3588,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "Despite the insistance of the needle you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
+		"text": "Despite the insistence of the needle you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -3688,7 +3688,7 @@
 	"name": "A Vision of Destruction",
 	"description": "Clear out all enemies in the $(poi_1) and report back.",
 	"offerDialog": {
-		"text": "Walking in to the village, an old man looks up as if expecting you and rushes over (to the extent that he is able) \"$(playername). I need you to turn around and leave. NOW.\"",
+		"text": "Walking into the village, an old man looks up as if expecting you and rushes over (to the extent that he is able) \"$(playername). I need you to turn around and leave. NOW.\"",
 		"options": [
 			{
 				"name": "You take a good look at the old man, but do not recognize his features. \"Should I know you?\"",
@@ -3901,7 +3901,7 @@
 				"text": "\"My vision was less than specific about whether or not it would be changed by your actions. So... yes.\"",
 				"options": [
 					{
-						"name": "You glance around at a clear sky warily before going on in to town. (Complete Quest)"
+						"name": "You glance around at a clear sky warily before going on into town. (Complete Quest)"
 					}
 				]
 			}
@@ -4034,7 +4034,7 @@
 							},
 							{
 								"name": "\"I must decline. I respect the local inhabitants far more than faceless nobility.\" (Decline Quest)",
-								"text": "He gives you the smallest bow imaginable, just enough to say that one was given without indicating respect.",
+								"text": "He gives you the smallest bow imaginable, just enough to say that one was given, without indicating respect.",
 								"options": [
 									{
 										"name": "(Continue)"
@@ -4069,7 +4069,7 @@
 			},
 			{
 				"name": "You can't put your finger on it, but something seems off about the man. \"This isn't a good time.\" (Decline Quest)",
-				"text": "He gives you the smallest bow imaginable, just enough to say that one was given without indicating respect. (-1 Local Reputation)",
+				"text": "He gives you the smallest bow imaginable, just enough to say that one was given, without indicating respect. (-1 Local Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -4237,7 +4237,7 @@
 				"options": [
 					{
 						"name": "You wait for him to continue.",
-						"text": "\"I've come in to an inheritance of a small estate that I've been expecting for years. Recently, I've had some hard times, and I've convinced some individuals to let me borrow against the land.\"",
+						"text": "\"I've come into an inheritance of a small estate that I've been expecting for years. Recently, I've had some hard times, and I've convinced some individuals to let me borrow against the land.\"",
 						"options": [
 							{
 								"name": "\"I see.\" You think you know where this is headed.",
@@ -4546,7 +4546,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "You feel awkward pulling your $(enemy_1)s in to town, but it doesn't actually seem that out of place here with other macabre scenes around. (This quest will only given in black biome in the future).",
+		"text": "You feel awkward pulling your $(enemy_1)s into town, but it doesn't actually seem that out of place here with other macabre scenes around. (This quest will only given in black biome in the future).",
 		"options": [
 			{
 				"name": "You look around for someone that seems to be expecting bodies.",
@@ -4597,7 +4597,7 @@
 					},
 					{
 						"name": "You take a closer look at the carts.",
-						"text": "$(enemy_1)s and a few random creatures are filling most of one cart., while the other holds a few identical satchels of goods.",
+						"text": "$(enemy_1)s and a few random creatures are filling most of one cart, while the other holds a few identical satchels of goods.",
 						"options": [
 							{
 								"name": "Turn your attention to the carts' attendant.",
@@ -5030,7 +5030,7 @@
 													}
 												],
 												"name": "\"And if I bring in six?\" (Accept Quest)",
-												"text": "\"Then you will have brought down too many.We're thinning them, not removing them.\"",
+												"text": "\"Then you will have brought down too many. We're thinning them, not removing them.\"",
 												"options": [
 													{
 														"name": "You nod and prepare to leave. (Continue)"
@@ -5505,7 +5505,7 @@
 										"name": "\"I can do that.\" (Accept Quest)"
 									},
 									{
-										"name": "\"Sorry, I just decided that I'm more in to magic than science.\" (Decline Quest)"
+										"name": "\"Sorry, I just decided that I'm more into magic than science.\" (Decline Quest)"
 									}
 								]
 							}
@@ -5769,7 +5769,7 @@
 	"name": "Heart of a Champion",
 	"description": "Enter and win an upcoming arena event.",
 	"offerDialog": {
-		"text": "\"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\" A young girl yells at the top of her lungs at each passer by in the town. Most people come in to view already covering their ears, having heard this plenty of times before.",
+		"text": "\"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\" A young girl yells at the top of her lungs at each passer by in the town. Most people come into view already covering their ears, having heard this plenty of times before.",
 		"options": [
 			{
 				"name": "You walk over to her. \"Okay, kid, settle down, I heard you. What's this about?\"",

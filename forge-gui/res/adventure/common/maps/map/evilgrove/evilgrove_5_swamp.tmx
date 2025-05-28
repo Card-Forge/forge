@@ -6,7 +6,7 @@
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
- <layer id="9" name="Colission" width="50" height="50">
+ <layer id="9" name="Collision" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt2EEKwCAMBEA/0f/3qaWHQvFg6UFZw8wD1IUQo60BkOw89l5/1V4rcwDAHxXuqDuDHDnkyFMlB8BqFfpnhQzsbVSD6fX5zIPvuTD9zAAzpfbAvl9/vedTc/Qq/UuwH7UH812IzBgL
   </data>
@@ -332,7 +332,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;The inscription reads: The Neverglades national park has been closed to visitors due to the arrival of unwanted guests on the perimiter of the park&quot;,
+    &quot;text&quot;:&quot;The inscription reads: The Neverglades National Park has been closed to visitors due to the arrival of unwanted guests on the perimeter of the park&quot;,
     &quot;options&quot;:[
       { &quot;name&quot;:&quot;Walk away&quot; }
 ]

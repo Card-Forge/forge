@@ -1,0 +1,7 @@
+Name:Choco-Comet
+ManaCost:X R R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBToken | SpellDescription$ CARDNAME deals X damage to any target. Create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_bird_landfall | TokenOwner$ You
+SVar:X:Count$xPaid
+Oracle:Choco-Comet deals X damage to any target.\nCreate a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."

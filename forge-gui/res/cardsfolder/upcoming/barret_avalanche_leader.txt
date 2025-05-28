@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Equipm
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_rebel | TokenOwner$ You
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, attach up to one target Equipment you control to target Rebel you control.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target Equipment you control | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Rebel.YouCtrl | TgtPrompt$ Select target Rebel you control.
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Rebel.YouCtrl | TgtPrompt$ Select target Rebel you control
 DeckHas:Ability$Token
 DeckNeeds:Type$Equipment
 Oracle:Reach\nAvalanche! — Whenever an Equipment you control enters, create a 2/2 red Rebel creature token.\nAt the beginning of combat on your turn, attach up to one target Equipment you control to target Rebel you control.

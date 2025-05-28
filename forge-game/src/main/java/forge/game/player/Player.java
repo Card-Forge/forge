@@ -108,6 +108,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int investigatedThisTurn;
     private int surveilThisTurn;
     private int committedCrimeThisTurn;
+    private int numFlipsThisTurn;
     private int numRollsThisTurn;
     private List<Integer> diceRollsThisTurn = Lists.newArrayList();
     private int expentThisTurn;
@@ -295,6 +296,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Scheme, scheme);
         game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
+    }
+
+    /**
+     * returns all players.
+     */
+    public final PlayerCollection getRegisteredPlayers() {
+        return game.getRegisteredPlayers();
     }
 
     /**
@@ -838,6 +846,13 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final int getMaxOpponentAssignedDamage() {
         return Aggregates.max(getRegisteredOpponents(), GameEntity::getAssignedDamage);
+    }
+
+    /**
+     * Get the greatest amount of combat damage assigned to a single player this turn.
+     */
+    public final int getMaxAssignedCombatDamage() {
+        return Aggregates.max(getRegisteredPlayers(), GameEntity::getAssignedCombatDamage);
     }
 
     public final boolean canReceiveCounters(final CounterType type) {
@@ -1431,6 +1446,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void roll() {
         numRollsThisTurn++;
+    }
+
+    public final void resetNumFlipsThisTurn() {
+        numFlipsThisTurn = 0;
+    }
+    public final int getNumFlipsThisTurn() {
+        return numFlipsThisTurn;
+    }
+    public void flip() {
+        numFlipsThisTurn++;
     }
 
     public final Card discard(final Card c, final SpellAbility sa, final boolean effect, Map<AbilityKey, Object> params) {
@@ -2513,6 +2538,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setNumDrawnLastTurn(getNumDrawnThisTurn());
         resetNumDrawnThisTurn();
         resetNumRollsThisTurn();
+        resetNumFlipsThisTurn();
         resetNumExploredThisTurn();
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();

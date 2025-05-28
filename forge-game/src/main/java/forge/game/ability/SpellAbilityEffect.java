@@ -356,6 +356,7 @@ public abstract class SpellAbilityEffect {
         boolean intrinsic = sa.isIntrinsic();
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");
+        boolean upkeep = location.endsWith("Upkeep");
 
         String desc = sa.getParamOrDefault("AtEOTDesc", "");
 
@@ -364,6 +365,9 @@ public abstract class SpellAbilityEffect {
         }
         if (combat) {
             location = location.substring(0, location.length() - "Combat".length());
+        }
+        if (upkeep) {
+            location = location.substring(0, location.length() - "Upkeep".length());
         }
 
         if (desc.isEmpty()) {
@@ -389,14 +393,18 @@ public abstract class SpellAbilityEffect {
             } else {
                 sb.append("beginning of ");
                 sb.append(your ? "your" : "the");
-                sb.append(" next end step.");
+                if (upkeep) {
+                    sb.append(" next upkeep.");
+                } else {
+                    sb.append(" next end step.");
+                }
             }
             desc = sb.toString();
         }
 
         StringBuilder delTrig = new StringBuilder();
         delTrig.append("Mode$ Phase | Phase$ ");
-        delTrig.append(combat ? "EndCombat "  : "End Of Turn ");
+        delTrig.append(combat ? "EndCombat " : upkeep ? "Upkeep" : "End Of Turn ");
 
         if (your) {
             delTrig.append("| ValidPlayer$ You ");

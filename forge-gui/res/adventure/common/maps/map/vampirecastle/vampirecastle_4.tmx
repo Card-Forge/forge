@@ -265,7 +265,7 @@
     &quot;options&quot;: [
       {
         &quot;name&quot;: &quot;You are free to go, Sorin has been dealt with&quot;,
-        &quot;text&quot;: &quot;Thanks .. .Thank you sir, please take this item as a token of my gratitude&quot;,
+        &quot;text&quot;: &quot;Thanks... Thank you sir, please take this item as a token of my gratitude&quot;,
         &quot;options&quot;: [
           {
               &quot;name&quot;: &quot;(Take the Challenge Coin)&quot;,            

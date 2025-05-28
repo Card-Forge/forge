@@ -1,0 +1,12 @@
+Name:Stone Drake
+ManaCost:3 U B
+Types:Creature Drake
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDistract,DBEnthrall
+SVar:DBDistract:DB$ Tap | ValidTgts$ Land | SubAbility$ DBDraw | SpellDescription$ Distract — Tap target land. Draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:DBEnthrall:DB$ Discard | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Enthrall — Target player discards a card for each spell you've cast this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+Oracle:Flying\nWhen Stone Drake enters the battlefield, choose one —\n• Distract — Tap target land. Draw a card.\n• Enthrall — Target player discards a card for each spell you've cast this turn.

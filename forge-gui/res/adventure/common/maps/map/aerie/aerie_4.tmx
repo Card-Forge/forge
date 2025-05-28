@@ -12,7 +12,7 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
  <tileset firstgid="16001" source="../../tileset/dungeon.tsx"/>
- <layer id="9" name="Colission" width="30" height="17">
+ <layer id="9" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYCAOmPDhxrQEA2UvzG58fHrZSw/7cIUtjE0LN7lxYmJaAXqlmcFsL73yzEDZS4wYPQByngFhWqbrkQoGU74aigAA3LUM8Q==
   </data>

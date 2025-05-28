@@ -1,0 +1,24 @@
+Name:Sidequest: Raise a Chocobo
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_bird_landfall | TokenOwner$ You
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Bird.YouCtrl | PresentCompare$ GE4 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, if you control four or more Birds, transform this enchantment.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+DeckNeeds:Type$Bird
+SVar:BuffedBy:Land
+Oracle:When this enchantment enters, create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."\nAt the beginning of your first main phase, if you control four or more Birds, transform this enchantment.
+
+ALTERNATE
+
+Name:Black Chocobo
+ManaCost:no cost
+Colors:green
+Types:Creature Bird
+PT:2/2
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this permanent transforms into CARDNAME, search your library for a land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Landfall — Whenever a land you control enters, Birds you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Bird.YouCtrl | NumAtt$ +1
+Oracle:When this permanent transforms into Black Chocobo, search your library for a land card, put it onto the battlefield tapped, then shuffle.\nLandfall — Whenever a land you control enters, Birds you control get +1/+0 until end of turn.
