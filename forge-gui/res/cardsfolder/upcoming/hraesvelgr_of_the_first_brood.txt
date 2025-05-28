@@ -1,5 +1,5 @@
 Name:Hraesvelgr of the First Brood
-ManaCost:3 U
+ManaCost:4 U
 Types:Legendary Creature Elder Dragon
 PT:5/5
 K:Flying

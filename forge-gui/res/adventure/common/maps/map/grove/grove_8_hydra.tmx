@@ -132,7 +132,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;Dangerous Beast Ahead ! Turn back now !&quot;,
+    &quot;text&quot;:&quot;Dangerous Beast Ahead! Turn back now!&quot;,
     &quot;options&quot;:[
       { &quot;name&quot;:&quot;Walk away&quot; }
 ]
