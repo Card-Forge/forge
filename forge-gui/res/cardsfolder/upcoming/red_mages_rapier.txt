@@ -1,0 +1,10 @@
+Name:Red Mage's Rapier
+ManaCost:1 R
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddTrigger$ TrigSpellCast | AddType$ Wizard | Description$ Equipped creature has "Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn." and is a Wizard in addition to its other types.
+SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2
+K:Equip:3
+DeckHas:Ability$Token & Type$Wizard
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature has "Whenever you cast a noncreature spell, this creature gets +2/+0 until end of turn." and is a Wizard in addition to its other types.\nEquip {3}
