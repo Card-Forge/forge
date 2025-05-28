@@ -1,0 +1,6 @@
+Name:Scorpion Sentinel
+ManaCost:1 U
+Types:Artifact Creature Robot Scorpion
+PT:1/4
+S:Mode$ Continuous | IsPresent$ Land.YouCtrl | PresentCompare$ GE7 | Affected$ Card.Self | AddPower$ 3 | Description$ As long as you control seven or more lands, this creature gets +3/+0.
+Oracle:As long as you control seven or more lands, this creature gets +3/+0.
