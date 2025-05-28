@@ -1,7 +1,7 @@
 Name:Random Encounter
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Shuffle | Defined$ You | SubAbility$ DBMill | SpellDescription$ Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste. At the beginning of the next end step, return those creatures to their owner's hand.
+A:SP$ Shuffle | Defined$ You | SubAbility$ DBMill | SpellDescription$ Shuffle your library, then mill four cards. Put each creature card milled this way onto the battlefield. They gain haste.
 SVar:DBMill:DB$ Mill | NumCards$ 4 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZoneAll
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | KW$ Haste | Defined$ Remembered | Duration$ Permanent | SubAbility$ DBDelTrig
