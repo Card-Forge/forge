@@ -1,0 +1,8 @@
+Name:Monk's Fist
+ManaCost:2
+Types:Artifact Equipment
+K:Job select
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddType$ Monk | Description$ Equipped creature gets +1/+0 and is a Monk in addition to its other types.
+K:Equip:2
+DeckHas:Ability$Token & Type$Monk
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +1/+0 and is a Monk in addition to its other types.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

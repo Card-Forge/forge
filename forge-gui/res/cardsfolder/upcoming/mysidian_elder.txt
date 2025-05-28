@@ -1,0 +1,7 @@
+Name:Mysidian Elder
+ManaCost:2 R
+Types:Creature Human Wizard
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_1_wizard_snipe | TokenOwner$ You
+Oracle:When this creature enters, create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."

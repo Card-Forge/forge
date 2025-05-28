@@ -409,7 +409,7 @@
         &quot;loctext&quot;: &quot;&quot;,
         &quot;options&quot;: [
             {
-                &quot;name&quot;: &quot;Lathliss ! It's time to end this !&quot;,
+                &quot;name&quot;: &quot;Lathliss! It's time to end this!&quot;,
                 &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
                 &quot;condition&quot;: [
                     {
@@ -435,7 +435,7 @@
                         }
                     }
                 ],
-                &quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE !&quot;,
+                &quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE!&quot;,
                 &quot;loctext&quot;: &quot;&quot;
             }
         ]

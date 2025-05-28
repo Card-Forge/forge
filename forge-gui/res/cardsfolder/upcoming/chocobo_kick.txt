@@ -1,0 +1,10 @@
+Name:Chocobo Kick
+ManaCost:1 G
+Types:Sorcery
+K:Kicker:Return<1/Land>
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDealDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature an opponent control. If this spell was kicked, the creature you control deals twice that much damage instead.
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:Count$Kicked.Y.Z
+SVar:Y:ParentTargeted$CardPower/Times.2
+SVar:Z:ParentTargeted$CardPower
+Oracle:Kicker—Return a land you control to its owner's hand. (You may return a land you control to its owner's hand in addition to any other costs as you cast this spell.)\nTarget creature you control deals damage equal to its power to target creature an opponent control. If this spell was kicked, the creature you control deals twice that much damage instead.

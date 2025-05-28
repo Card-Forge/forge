@@ -442,8 +442,8 @@ A216 M A-Winota, Joiner of Forces @Magali Villeneuve
 7 Forest|IKO|3
 
 [tokens]
-1 w_1_1_cat_bird_flying @Kekai Kotaki
-2 w_1_1_cat_lifelink @Kekai Kotaki
+1 w_1_1_cat_lifelink @Kekai Kotaki
+2 w_1_1_cat_bird_flying @Leesha Hannigan
 3 w_1_1_human_soldier @Manuel Castañón
 4 w_1_1_human_soldier @Manuel Castañón
 5 w_1_1_human_soldier @Manuel Castañón
@@ -453,3 +453,7 @@ A216 M A-Winota, Joiner of Forces @Magali Villeneuve
 9 feather @Lie Setiawan
 10 g_3_3_beast @Aaron Miller
 11 g_x_x_dinosaur_beast_trample @Svetlin Velinov
+
+[other]
+12 emblem_narset_of_the_ancient_way @Yongjae Choi
+13 companion @Dan Murayama Scott

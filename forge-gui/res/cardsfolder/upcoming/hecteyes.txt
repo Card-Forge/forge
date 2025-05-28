@@ -1,0 +1,7 @@
+Name:Hecteyes
+ManaCost:1 B
+Types:Creature Ooze Horror
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When this creature enters, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose
+Oracle:When this creature enters, each opponent discards a card.

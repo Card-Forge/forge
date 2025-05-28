@@ -27,7 +27,7 @@
    eJxjYBgFwxH4azAwBGiQJ0ZtkA00PweI5wLZ80gUozY4YQ/B1owMDDaMpIkNNHAGho0LjeMKBqba45ePB7ojgU5uEXGgjz2jYBSMgsEBphMof0bBKBgqIBBYTwbRqa4kBHKB7sgbJG4ZCWAwtV2GklveidHFGQxMoggaxkYHPeLUt/euJgPDPSA+BqznrkLxQIGfQHf8grqFwwGCBwoUaULwYACwOMoTgeAgwYFzCyyOSHGLugQEjwLKAAB+Nixb
   </data>
  </layer>
- <layer id="25" name="Clutter Biss" width="35" height="35">
+ <layer id="25" name="Clutter Bis" width="35" height="35">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
