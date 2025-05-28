@@ -17,7 +17,7 @@ ManaCost:no cost
 Colors:green
 Types:Creature Bird
 PT:2/2
-T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When this permanent transforms into CARDNAME, search your library for a land card, put it onto the battlefield tapped, then shuffle.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this permanent transforms into CARDNAME, search your library for a land card, put it onto the battlefield tapped, then shuffle.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Landfall — Whenever a land you control enters, Birds you control get +1/+0 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Bird.YouCtrl | NumAtt$ +1
