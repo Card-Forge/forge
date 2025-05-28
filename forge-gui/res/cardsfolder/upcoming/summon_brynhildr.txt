@@ -1,0 +1,13 @@
+Name:Summon: Brynhildr
+ManaCost:1 R
+Types:Enchantment Creature Saga Knight
+PT:2/1
+K:Chapter:3:DBChain,DBGestaltMode,DBGestaltMode
+SVar:DBChain:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Chain — Exile the top card of your library. During any turn you put a lore counter on this Saga, you may play that card.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | CheckSVar$ X | SVarCompare$ GE1 | AffectedZone$ Exile | MayPlay$ True | Description$ During any turn you put a lore counter on this Saga, you may play that card.
+SVar:DBGestaltMode:DB$ DelayedTrigger | Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ GrantHaste | SpellDescription$ Gestalt Mode — When you next cast a creature spell this turn, it gains haste until end of turn.
+SVar:GrantHaste:DB$ Animate | Defined$ TriggeredCardLKICopy | Keywords$ Haste
+SVar:X:Count$CountersAddedThisTurn LORE You Card.EffectSource
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Chain — Exile the top card of your library. During any turn you put a lore counter on this Saga, you may play that card.\nII, III — Gestalt Mode — When you next cast a creature spell this turn, it gains haste until end of turn.
