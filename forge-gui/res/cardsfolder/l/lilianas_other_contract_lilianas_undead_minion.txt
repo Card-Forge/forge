@@ -18,6 +18,6 @@ ManaCost:no cost
 Types:Legendary Planeswalker You
 Loyalty:5
 R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | Layer$ CantHappen | Description$ You can't lose the game and your opponents can't win the game.
-A:AB$ LoseLife | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life.
+A:AB$ LoseLife | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | LifeAmount$ 1  | SpellDescription$ Each opponent loses 1 life.
 A:AB$ Destroy | Cost$ SubCounter<4/LOYALTY> | ValidTgts$ Creature | Planeswalker$ True | SpellDescription$ Destroy target creature.
 Oracle:You can't lose the game.\n[+1]: Each opponent loses 1 life.\n[-4]: Destroy target creature.
