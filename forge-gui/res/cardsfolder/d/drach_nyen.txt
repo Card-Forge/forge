@@ -9,7 +9,7 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 K:Equip:2
-SVar:X:Imprinted$CardPower
+SVar:X:Imprinted$CardPower/LimitMin.0
 SVar:NeedsToPlay:Creature.OppCtrl
 DeckHas:Keyword$Menace
 Oracle:Echo of the First Murder — When Drach'Nyen enters, exile up to one target creature.\nDaemon Sword — Equipped creature has menace and gets +X/+0, where X is the exiled card's power.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
