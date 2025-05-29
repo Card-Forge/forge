@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Vampire | TgtPrompt$ Select target Vampire | NumAtt$ +X | NumDef$ +X
-SVar:X:Count$ValidExile Card.ExiledWithSource$CardPower
+SVar:X:Count$ValidExile Card.ExiledWithSource$CardPower/LimitMin.0
 # Release notes indicate that this effect should work with Vehicle cards.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Vampire
