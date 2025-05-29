@@ -15,7 +15,7 @@ ALTERNATE
 Name:Neo Exdeath, Dimension's End
 ManaCost:no cost
 Colors:black,green
-Types:Legendary Creature Spirt Avatar
+Types:Legendary Creature Spirit Avatar
 PT:*/3
 K:Trample
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to the number of permanent cards in your graveyard.
