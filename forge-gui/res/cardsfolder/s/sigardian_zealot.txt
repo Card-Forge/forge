@@ -7,5 +7,5 @@ SVar:TrigChoose:DB$ ChooseCard | MinAmount$ 0 | Amount$ Max | Choices$ Creature 
 SVar:DBPump:DB$ Pump | Defined$ ChosenCard | NumAtt$ +X | NumDef$ +X | KW$ Vigilance | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:Max:Count$DifferentPower_Creature
-SVar:X:Count$CardPower
+SVar:X:Count$CardPower/LimitMin.0
 Oracle:At the beginning of combat on your turn, choose any number of creatures with different powers. Each of them gets +X/+X and gains vigilance until end of turn, where X is Sigardian Zealot's power.
