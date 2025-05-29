@@ -8,7 +8,7 @@ SVar:Berserk:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | RememberChose
 SVar:DBPump1:DB$ Pump | Defined$ Remembered | KW$ Trample | NumAtt$ +X1 | SubAbility$ DBDelayedTrigger1
 SVar:DBDelayedTrigger1:DB$ DelayedTrigger | RememberObjects$ Remembered | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy1 | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, destroy that creature if it attacked this turn.
 SVar:TrigDestroy1:DB$ Destroy | Defined$ DelayTriggerRemembered | ConditionDefined$ DelayTriggerRemembered | ConditionPresent$ Card.attackedThisTurn
-SVar:X1:Remembered$CardPower
+SVar:X1:Remembered$CardPower/LimitMin.0
 SVar:DBCleanup:DB$ Cleanup | Log$ True | ClearRemembered$ True | ClearChosenCard$ True
 SVar:Twiddle:DB$ ChooseCard | Choices$ Artifact,Creature,Land | AtRandom$ True | SubAbility$ DBTapOrUntap2 | SpellDescription$ You may tap or untap an artifact, creature, or land chosen at random.
 SVar:DBTapOrUntap2:DB$ TapOrUntap | Defined$ ChosenCard | SubAbility$ DBCleanup
