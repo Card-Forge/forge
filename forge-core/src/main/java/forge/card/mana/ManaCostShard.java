@@ -331,6 +331,10 @@ public enum ManaCostShard {
         return (colorCode & this.shard) > 0;
     }
 
+    public boolean isAnyColor() {
+        return (this.shard & COLORS_SUPERPOSITION) != 0;
+    }
+
     public boolean canBePaidWithManaOfColor(byte colorCode) {
         return this.isOr2Generic() || ((COLORS_SUPERPOSITION | ManaAtom.COLORLESS) & this.shard) == 0 ||
                 this.isColor(colorCode);
