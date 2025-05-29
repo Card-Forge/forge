@@ -9,6 +9,6 @@ SVar:TrigReset:DB$ Cleanup | ClearImprinted$ True
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ Y | Description$ CARDNAME gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.
 T:Mode$ ChangesZone | ValidCard$ Card.IsImprinted+ExiledWithSourceLKI | Origin$ Exile | Execute$ DBForget | Static$ True
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
-SVar:X:Imprinted$CardPower
-SVar:Y:Imprinted$CardToughness
+SVar:X:Imprinted$CardPower/LimitMin.0
+SVar:Y:Imprinted$CardToughness/LimitMin.0
 Oracle:Imprint — When Phyrexian Ingester enters, you may exile target nontoken creature.\nPhyrexian Ingester gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.
