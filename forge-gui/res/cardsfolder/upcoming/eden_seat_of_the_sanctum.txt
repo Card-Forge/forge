@@ -1,0 +1,10 @@
+Name:Eden, Seat of the Sanctum
+ManaCost:no cost
+Types:Land Town
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mill | Cost$ 5 T | NumCards$ 2 | Defined$ You | SubAbility$ DBSelfSac | StackDescription$ SpellDescription | SpellDescription$ Mill two cards. Then you may sacrifice this land. When you do, return another target permanent card from your graveyard to your hand.
+SVar:DBSelfSac:DB$ Sacrifice | SacValid$ Self | SacMessage$ this land | Optional$ True | RememberSacrificed$ True | SubAbility$ TrigImmediateTrig | StackDescription$ None
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigReturn | SubAbility$ DBCleanup | StackDescription$ None | TriggerDescription$ When you do, return another target permanent card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select another target permanent card in your graveyard | ValidTgts$ Permanent.Other+YouCtrl
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{T}: Add {C}.\n{5}, {T}: Mill two cards. Then you may sacrifice this land. When you do, return another target permanent card from your graveyard to your hand.

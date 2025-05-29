@@ -1,0 +1,11 @@
+Name:Excalibur II
+ManaCost:1
+Types:Legendary Artifact Equipment
+K:Equip:3
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each charge counter on CARDNAME.
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a charge counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
+SVar:X:Count$CardCounters.CHARGE
+DeckHas:Ability$Counters
+DeckHints:Ability$LifeGain
+Oracle:Whenever you gain life, put a charge counter on Excalibur II.\nEquipped creature gets +1/+1 for each charge counter on Excalibur II.\nEquip {3}
