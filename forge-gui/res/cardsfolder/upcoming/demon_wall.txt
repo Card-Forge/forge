@@ -1,0 +1,9 @@
+Name:Demon Wall
+ManaCost:1 B
+Types:Artifact Creature Demon Wall
+PT:3/3
+K:Defender
+K:Menace
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self+HasCounters | Description$ As long as this creature has a counter on it, it can attack as though it didn't have defender.
+A:AB$ PutCounter | Cost$ 5 B | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on this creature.
+Oracle:Defender\nMenace (This creature can't be blocked except by two or more creatures.)\nAs long as this creature has a counter on it, it can attack as though it didn't have defender.\n{5}{B}: Put two +1/+1 counters on this creature.

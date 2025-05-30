@@ -3,10 +3,8 @@ ManaCost:5 G G
 Types:Sorcery
 A:SP$ SacrificeAll | ValidCards$ Artifact,Enchantment,Land.nonBasic | RememberSacrificed$ True | SubAbility$ DBRepeat | SpellDescription$ Each player sacrifices all artifacts, enchantments, and nonbasic lands they control. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles.
 SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered.Land | UseImprinted$ True | RepeatSubAbility$ DBSearch | ClearRemembered$ True | SubAbility$ DBShuffle
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | RememberChanged$ True | DefinedPlayer$ ImprintedController | Chooser$ ImprintedController | NoShuffle$ True | Optional$ True
-SVar:DBShuffle:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleSearched | SubAbility$ DBCleanup
-SVar:ShuffleSearched:DB$ Shuffle | Defined$ Player.IsRemembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
-SVar:X:Count$Valid Card.IsRemembered+RememberedPlayerCtrl
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | RememberSearched$ True | DefinedPlayer$ ImprintedController | Chooser$ ImprintedController | NoShuffle$ True | Optional$ True
+SVar:DBShuffle:DB$ Shuffle | Defined$ Player.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
 Oracle:Each player sacrifices all artifacts, enchantments, and nonbasic lands they control. For each land sacrificed this way, its controller may search their library for a basic land card and put it onto the battlefield tapped. Then each player who searched their library this way shuffles.

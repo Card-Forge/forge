@@ -1,0 +1,8 @@
+Name:Resentful Revelation
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
+K:Flashback:6 B
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Delirium
+Oracle:Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.\nFlashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

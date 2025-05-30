@@ -1,0 +1,7 @@
+Name:Travel the Overworld
+ManaCost:5 U U
+Types:Sorcery
+K:Affinity:Town
+A:SP$ Draw | NumCards$ 4 | SpellDescription$ Draw four cards.
+DeckHints:Type$Town
+Oracle:Affinity for Towns (This spell costs {1} less to cast for each Town you control.)\nDraw four cards.

@@ -1040,6 +1040,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     handleCastWhileSearching(fetchList, decider);
                 }
+                if (sa.hasParam("RememberSearched")) {
+                    source.addRemembered(player);
+                }
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
                 runParams.put(AbilityKey.Target, player);
                 game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);

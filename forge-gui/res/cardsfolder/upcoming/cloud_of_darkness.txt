@@ -1,0 +1,9 @@
+Name:Cloud of Darkness
+ManaCost:2 B G G
+Types:Legendary Creature Avatar
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Particle Beam — When CARDNAME enters, target creature an opponent controls gets -X/-X until end of turn, where X is the number of permanent cards in your graveyard.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -X | NumDef$ -X | IsCurse$ True
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+Oracle:Flying\nParticle Beam — When Cloud of Darkness enters, target creature an opponent controls gets -X/-X until end of turn, where X is the number of permanent cards in your graveyard.
