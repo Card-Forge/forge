@@ -7968,6 +7968,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         this.savedLastKnownZone = zone;
     }
 
+    public final boolean hasChapter() {
+        return getCurrentState().hasChapter();
+    }
+
     public final int getFinalChapterNr() {
         return getCurrentState().getFinalChapterNr();
     }
