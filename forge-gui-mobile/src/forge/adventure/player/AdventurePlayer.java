@@ -37,7 +37,7 @@ import java.util.*;
 public class AdventurePlayer implements Serializable, SaveFileContent {
     public static final int MIN_DECK_COUNT = 10;
     // this is a purely arbitrary limit, could be higher or lower; just meant as some sort of reasonable limit for the user
-    public static final int MAX_DECK_COUNT = 50;
+    public static final int MAX_DECK_COUNT = 20;
     // Player profile data.
     private String name;
     private int heroRace;
