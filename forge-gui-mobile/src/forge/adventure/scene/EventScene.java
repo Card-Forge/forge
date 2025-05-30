@@ -511,13 +511,11 @@ public class EventScene extends MenuScene implements IAfterMatch {
 
             if (match.p1 instanceof AdventureEventData.AdventureEventHuman) {
                 humanMatch = match;
-                continue;
             } else if (match.p2 instanceof AdventureEventData.AdventureEventHuman) {
                 AdventureEventData.AdventureEventParticipant placeholder = match.p1;
                 match.p1 = match.p2;
                 match.p2 = placeholder;
                 humanMatch = match;
-                continue;
             } else {
                 //Todo: Actually run match simulation here
                 if (MyRandom.percentTrue(50)) {
@@ -530,7 +528,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
                     match.winner = match.p2;
                 }
             }
-
         }
 
         if (humanMatch != null && humanMatch.round != currentEvent.currentRound)
@@ -539,14 +536,16 @@ public class EventScene extends MenuScene implements IAfterMatch {
             DuelScene duelScene = DuelScene.instance();
             EnemySprite enemy = humanMatch.p2.getSprite();
             currentEvent.nextOpponent = humanMatch.p2;
+            advance.setDisabled(true);
             FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
                 duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy, false, currentEvent);
+                advance.setDisabled(false);
                 Forge.switchScene(duelScene);
             }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName(), humanMatch.p1.getRecord(), humanMatch.p2.getRecord())));
         } else {
             finishRound();
+            advance.setDisabled(false);
         }
-        advance.setDisabled(false);
     }
 
     AdventureEventData.AdventureEventMatch humanMatch = null;
