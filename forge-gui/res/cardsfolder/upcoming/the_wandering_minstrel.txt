@@ -1,0 +1,11 @@
+Name:The Wandering Minstrel
+ManaCost:G U
+Types:Legendary Creature Human Bard
+PT:1/3
+R:Event$ Moved | ValidCard$ Land.YouCtrl | Destination$ Battlefield | ReplaceWith$ ETBUntapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Lands you control enter untapped.
+SVar:ETBUntapped:DB$ Untap | ETB$ True | Defined$ ReplacedCard
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Town.YouCtrl | PresentCompare$ GE5 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ The Minstrel's Ballad — At the beginning of combat on your turn, if you control five or more Towns, create a 2/2 Elemental creature token that's all colors.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ all_2_2_elemental | TokenOwner$ You
+A:AB$ PumpAll | Cost$ 3 W U B R G | ValidCards$ Creature.YouCtrl+StrictlyOther | NumAtt$ +X | NumDef$ +X | SpellDescription$ Other creatures you control get +X/+X until end of turn, where X is the number of Towns you control.
+SVar:X:Count$Valid Town.YouCtrl
+Oracle:Lands you control enter untapped.\nThe Minstrel's Ballad — At the beginning of combat on your turn, if you control five or more Towns, create a 2/2 Elemental creature token that's all colors.\n{3}{W}{U}{B}{R}{G}: Other creatures you control get +X/+X until end of turn, where X is the number of Towns you control.

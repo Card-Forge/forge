@@ -303,10 +303,10 @@ public class PumpEffect extends SpellAbilityEffect {
         
         int a = 0;
         int d = 0;
-        if (sa.hasParam("NumAtt") && !sa.getParam("NumAtt").equals("Double")) {
+        if (sa.hasParam("NumAtt") && !sa.getParam("NumAtt").equals("Double") && !sa.getParam("NumAtt").equals("Triple")) {
             a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, true);
         }
-        if (sa.hasParam("NumDef") && !sa.getParam("NumDef").equals("Double")) {
+        if (sa.hasParam("NumDef") && !sa.getParam("NumDef").equals("Double") && !sa.getParam("NumDef").equals("Triple")) {
             d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa, true);
         }
 
@@ -487,6 +487,14 @@ public class PumpEffect extends SpellAbilityEffect {
             if (sa.hasParam("NumDef") && sa.getParam("NumDef").equals("Double")) {
                 d = tgtC.getNetToughness();
             }
+
+            if (sa.hasParam("NumAtt") && sa.getParam("NumAtt").equals("Triple")) {
+                a = tgtC.getNetPower()*2;
+            }
+            if (sa.hasParam("NumDef") && sa.getParam("NumDef").equals("Triple")) {
+                d = tgtC.getNetToughness()*2;
+            }
+
 
             applyPump(sa, tgtC, a, d, affectedKeywords, timestamp);
         }
