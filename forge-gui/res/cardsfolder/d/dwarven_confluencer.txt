@@ -1,0 +1,7 @@
+Name:Dwarven Confluencer
+ManaCost:2 R
+Types:Creature Dwarf
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Land.!token | TgtPrompt$ Select target nontoken land | SubAbility$ DBToken | SpellDescription$ Destroy target nontoken land. Its controller creates a Mana Confluence token.
+SVar:DBToken:DB$ CopyPermanent | DefinedName$ Mana Confluence | Controller$ TargetedController
+Oracle:{T}: Destroy target nontoken land. Its controller creates a Mana Confluence token. (It’s a land with “{T}, Pay 1 life: Add one mana of any color.”)
