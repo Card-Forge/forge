@@ -459,6 +459,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         boolean hasDynamicDeckCount = data.containsKey("deckCount");
         if (hasDynamicDeckCount) {
             int dynamicDeckCount = data.readInt("deckCount");
+            // in case the save had previously saved more decks than the current version allows (in case of the max being lowered)
+            dynamicDeckCount = Math.min(MAX_DECK_COUNT, dynamicDeckCount);
             for (int i = 0; i < dynamicDeckCount; i++){
                 // the first x elements are pre-created
                 if (i < MIN_DECK_COUNT) {
