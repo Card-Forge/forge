@@ -15,8 +15,8 @@ public class PermanentCreatureEffect extends PermanentEffect {
     public String getStackDescription(final SpellAbility sa) {
         final CardState source = sa.getCardState();
         final StringBuilder sb = new StringBuilder();
-        sb.append(CardTranslation.getTranslatedName(source.getName())).append(" - ").append(Localizer.getInstance().getMessage("lblCreature")).append(" ").append(source.getBasePower());
-        sb.append(" / ").append(source.getBaseToughness());
+        sb.append(CardTranslation.getTranslatedName(source.getName())).append(" - ").append(Localizer.getInstance().getMessage("lblCreature")).append(" ").append(source.getBasePowerString());
+        sb.append(" / ").append(source.getBaseToughnessString());
         return sb.toString();
     }
 }
