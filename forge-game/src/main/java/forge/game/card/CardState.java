@@ -443,7 +443,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
 
             if (permanentAbility == null) {
                 permanentAbility = new SpellPermanent(card, this);
-                permanentAbility.setCardState(this);
             }
             newCol.add(permanentAbility);
         }
@@ -472,7 +471,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         } else {
             if (permanentAbility == null) {
                 permanentAbility = new SpellPermanent(card, this);
-                permanentAbility.setCardState(this);
             }
             return permanentAbility;
         }
@@ -511,7 +509,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             String st = "SP$ Attach | ValidTgts$ Card.CanBeEnchantedBy,Player.CanBeEnchantedBy | TgtZone$ Battlefield,Graveyard | TgtPrompt$ Select target " + desc + extra;
             auraAbility = AbilityFactory.getAbility(st, this);
             auraAbility.setIntrinsic(true);
-            auraAbility.setCardState(this);
         }
         return this.auraAbility;
     }
