@@ -3207,7 +3207,6 @@ public class CardFactoryUtil {
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Fuse") && card.getStateName().equals(CardStateName.Original)) {
             final SpellAbility sa = AbilityFactory.buildFusedAbility(card.getCard());
-            card.addSpellAbility(sa);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Haunt")) {
             if (!host.isCreature() && intrinsic) {

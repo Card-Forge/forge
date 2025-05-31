@@ -5382,6 +5382,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // Layer 1
         keywords.insertAll(state.getIntrinsicKeywords());
+        if (state.getStateName().equals(CardStateName.Original)) {
+            if (hasState(CardStateName.LeftSplit)) {
+                keywords.insertAll(getState(CardStateName.LeftSplit).getIntrinsicKeywords());
+            }
+            if (hasState(CardStateName.RightSplit)) {
+                keywords.insertAll(getState(CardStateName.RightSplit).getIntrinsicKeywords());
+            }
+        }
 
         keywords.applyChanges(getChangedCardKeywordsList());
 
