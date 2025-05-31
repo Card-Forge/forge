@@ -733,7 +733,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         } else if (mode.equals("TurnFaceDown")) {
             CardStateName oldState = getCurrentStateName();
-            if (oldState == CardStateName.Original || oldState == CardStateName.Flipped) {
+            if (oldState == CardStateName.Original || oldState == CardStateName.Flipped
+                    || oldState == CardStateName.LeftSplit || oldState == CardStateName.RightSplit || oldState == CardStateName.EmptyRoom) {
                 return turnFaceDown();
             }
         } else if (mode.equals("Meld") && isMeldable()) {
