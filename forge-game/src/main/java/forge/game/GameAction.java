@@ -1628,7 +1628,7 @@ public class GameAction {
 
     private boolean stateBasedAction_Saga(Card c, CardCollection sacrificeList) {
         boolean checkAgain = false;
-        if (!c.isSaga()) {
+        if (!c.isSaga() || !c.hasChapter()) {
             return false;
         }
         // needs to be effect, because otherwise it might be a cost?

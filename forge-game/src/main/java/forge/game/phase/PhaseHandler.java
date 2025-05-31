@@ -277,7 +277,7 @@ public class PhaseHandler implements java.io.Serializable {
                     GameEntityCounterTable table = new GameEntityCounterTable();
                     // all Sagas get a Lore counter at the beginning of pre combat
                     for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
-                        if (c.isSaga()) {
+                        if (c.isSaga() && c.hasChapter()) {
                             c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
                         }
                     }

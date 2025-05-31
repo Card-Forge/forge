@@ -450,3 +450,18 @@ ScryfallCode=FIC
 484 C Command Tower @Anthony Devine
 485 C Command Tower @Eduardo Francisco
 486 C Command Tower @Jonas De Ro
+
+[tokens]
+1 w_1_1_human_soldier @Allen Morris
+2 w_1_1_human_soldier @Thanh Tuấn
+3 w_1_1_spirit_flying @Craig Elliott
+4 u_1_1_bird_flying_vigilance @Constantin Marin
+5 u_1_1_squid_islandwalk @Daniel Correia
+6 b_2_2_zombie @Anton Solovianchyk
+7 r_2_2_rebel @Anthony Devine
+8 the_blackjack @Enora Mercier
+9 c_a_clue_draw @David Frasheski
+
+[other]
+10 foretell @Gal Or
+11 monarch @Nereida

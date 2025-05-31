@@ -807,6 +807,10 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         }
     }
 
+    public final boolean hasChapter() {
+        return getTriggers().anyMatch(Trigger::isChapter);
+    }
+
     public final int getFinalChapterNr() {
         int n = 0;
         for (final Trigger t : getTriggers()) {

@@ -25,9 +25,11 @@ ScryfallCode=FCA
 17 R Jodah, the Unifier @Yoshitaka Amano
 18 R Tymna the Weaver @Yoshitaka Amano
 19 R Winota, Joiner of Forces @Yoshitaka Amano
+20 R Traxos, Scourge of Kroog @Yoshitaka Amano
 21 M Akroma's Will @Square Enix
 22 U Danitha Capashen, Paragon @Square Enix
 23 R Kenrith, the Returned King @Square Enix
+24 R Loran of the Third Path @Square Enix
 25 R Mangara, the Diplomat @Toshitaka Matsuda
 26 U Stroke of Midnight @Square Enix
 27 U Wall of Omens @ISAMU KAMIKOKURYO
@@ -35,6 +37,7 @@ ScryfallCode=FCA
 29 R Cryptic Command @Kazuya Takahashi
 30 U Laboratory Maniac @Tetsuya Nomura
 31 M Rhystic Study @Square Enix
+32 R Teferi, Mage of Zhalfir @Square Enix
 33 U Deadly Dispute @Airi Yoshioka
 34 R Diabolic Intent @Fumio Minagawa
 35 M Gix, Yawgmoth Praetor @SUEMI Jun
@@ -54,8 +57,10 @@ ScryfallCode=FCA
 49 M Atraxa, Grand Unifier @Tetsuya Nomura
 50 R Bruse Tarl, Boorish Herder @Square Enix
 51 U Dovin's Veto @Akihiko Yoshida
+52 R Inalla, Archmage Ritualist @Square Enix
 53 R Ishai, Ojutai Dragonspeaker @Square Enix
 54 R Isshin, Two Heavens as One @Tetsuya Nomura
+55 M Kinnan, Bonder Prodigy @Square Enix
 56 R Kraum, Ludevic's Opus @Square Enix
 57 R Muldrotha, the Gravetide @Chikako Nakano
 58 M Thrasios, Triton Hero @Square Enix

@@ -3400,17 +3400,14 @@ public class AbilityUtils {
             return doXMath(numTied, m, source, ctb);
         }
 
-        final String[] sq;
-        sq = l[0].split("\\.");
-
         // the number of players passed in
-        if (sq[0].equals("Amount")) {
+        if (l[0].equals("Amount")) {
             return doXMath(players.size(), m, source, ctb);
         }
 
-        if (sq[0].startsWith("HasProperty")) {
+        if (l[0].startsWith("HasProperty")) {
             int totPlayer = 0;
-            String property = sq[0].substring(11);
+            String property = l[0].substring(11);
             for (Player p : players) {
                 if (p.hasProperty(property, controller, source, ctb)) {
                     totPlayer++;
@@ -3434,7 +3431,7 @@ public class AbilityUtils {
             return doXMath(totPlayer, m, source, ctb);
         }
 
-        if (sq[0].contains("DamageThisTurn")) {
+        if (l[0].contains("DamageThisTurn")) {
             int totDmg = 0;
             for (Player p : players) {
                 totDmg += p.getAssignedDamage();
