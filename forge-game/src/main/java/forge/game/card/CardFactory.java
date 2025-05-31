@@ -254,15 +254,7 @@ public class CardFactory {
 
             // ******************************************************************
             // ************** Link to different CardFactories *******************
-            if (state == CardStateName.LeftSplit || state == CardStateName.RightSplit) {
-                for (final SpellAbility sa : card.getSpellAbilities()) {
-                    sa.setCardState(card.getState(state));
-                }
-                CardFactoryUtil.setupKeywordedAbilities(card);
-                final CardState original = card.getState(CardStateName.Original);
-                original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
-                original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
-            } else if (state != CardStateName.Original) {
+            if (state != CardStateName.Original) {
                 CardFactoryUtil.setupKeywordedAbilities(card);
             }
         }
