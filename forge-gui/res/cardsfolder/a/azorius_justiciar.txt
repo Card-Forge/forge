@@ -3,6 +3,6 @@ ManaCost:2 W W
 Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ When CARDNAME enters, detain up to two target creatures your opponents control. (Until your next turn, those creatures can't attack or block and their activated abilities can't be activated.)
-SVar:Detain:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | Duration$ UntilYourNextTurn | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain. | AILogic$ DetainNonLand
+SVar:Detain:DB$ Detain | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain.
 SVar:PlayMain1:TRUE
 Oracle:When Azorius Justiciar enters, detain up to two target creatures your opponents control. (Until your next turn, those creatures can't attack or block and their activated abilities can't be activated.)

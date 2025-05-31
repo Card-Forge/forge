@@ -501,19 +501,6 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        // Detain target nonland permanent: don't target noncreature permanents that don't have
-        // any activated abilities.
-        if ("DetainNonLand".equals(sa.getParam("AILogic"))) {
-            list = CardLists.filter(list, CardPredicates.CREATURES.or(card -> {
-                for (SpellAbility sa1 : card.getSpellAbilities()) {
-                    if (sa1.isActivatedAbility()) {
-                        return true;
-                    }
-                }
-                return false;
-            }));
-        }
-
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
