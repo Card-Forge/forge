@@ -494,8 +494,9 @@ public final class AbilityFactory {
         AbilityRecordType leftType = AbilityRecordType.getRecordType(leftMap);
         ApiType leftApi = leftType.getApiTypeOf(leftMap);
         leftMap.put("StackDescription", leftMap.get("SpellDescription"));
-        leftMap.put("SpellDescription", "Fuse (you may cast both halves of this card from your hand).");
+        leftMap.put("SpellDescription", "Fuse (You may cast one or both halves of this card from your hand.)");
         leftMap.put("ActivationZone", "Hand");
+        leftMap.put("Secondary", "True");
 
         CardState rightState = card.getState(CardStateName.RightSplit);
         SpellAbility rightAbility = rightState.getFirstAbility();
