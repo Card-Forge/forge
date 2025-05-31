@@ -15,8 +15,9 @@ import forge.model.FModel;
 
 public class ConquestDeckEditor extends FDeckEditor {
     public ConquestDeckEditor(final ConquestCommander commander) {
-        super(EditorType.PlanarConquest, new DeckProxy(commander.getDeck(), Forge.getLocalizer().getMessage("lblConquestCommander"),
-                GameType.PlanarConquest, FModel.getConquest().getDecks()), true);
+        super(FDeckEditor.EditorConfigPlanarConquest,
+                new DeckProxy(commander.getDeck(), Forge.getLocalizer().getMessage("lblConquestCommander"), GameType.PlanarConquest, FModel.getConquest().getDecks())
+        );
 
         setSaveHandler(e -> {
             commander.reloadDeck(); //ensure commander receives deck changes

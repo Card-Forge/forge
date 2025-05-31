@@ -373,7 +373,7 @@ public class LimitedPlayer {
         if (this.draft.getDraftLog() != null) {
             this.draft.getDraftLog().addLogEntry(message);
         }
-        // Mobile doesnt have a draft log yet
+        System.out.println("[DRAFT] " + message);
     }
 
     public DraftPack nextChoice() {
