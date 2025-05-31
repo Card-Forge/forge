@@ -1655,6 +1655,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     protected List<IHasSVars> getSVarFallback(final String name) {
         List<IHasSVars> result = Lists.newArrayList();
+        if (isKeyword(Keyword.FUSE)) {
+            SpellAbility original = this.getOriginalAbility();
+            if (original != null) {
+                result.add(original);
+            }
+        }
         if (getParent() != null) {
             result.add(getParent());
         }
