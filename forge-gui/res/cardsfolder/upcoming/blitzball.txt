@@ -1,0 +1,8 @@
+Name:Blitzball
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Draw | PrecostDesc$ GOOOOAAAALLL! — | Cost$ T Sac<1/CARDNAME> | NumCards$ 2 | CheckSVar$ X | SpellDescription$ Draw two cards. Activate only if an opponent was dealt combat damage by a legendary creature this turn.
+SVar:X:PlayerCountRegisteredOpponents$HasPropertywasDealtCombatDamageThisTurnBy Creature.Legendary GE1
+DeckHints:Type$Legendary
+Oracle:{T}: Add one mana of any color.\nGOOOOAAAALLL! — {T}, Sacrifice this artifact: Draw two cards. Activate only if an opponent was dealt combat damage by a legendary creature this turn.

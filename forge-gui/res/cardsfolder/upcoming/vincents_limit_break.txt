@@ -1,0 +1,11 @@
+Name:Vincent's Limit Break
+ManaCost:1 B
+Types:Instant
+K:Tiered
+A:SP$ Charm | Choices$ DBGalianBeast,DBDeathGigas,DBHellmasker | AdditionalDescription$ Until end of turn, target creature you control gains "When this creature dies, return it to the battlefield tapped under its owner's control" and has the chosen base power and toughness.
+SVar:DBGalianBeast:DB$ Animate | PrecostDesc$ Galian Beast | ModeCost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Triggers$ TrigDeath | Power$ 3 | Toughness$ 2 | StackDescription$ Until end of turn, {c:Targeted} is 3/2 and gains "When this creature dies, return it to the battlefield tapped under its owner's control." | SpellDescription$ 3/2.
+SVar:DBDeathGigas:DB$ Animate | PrecostDesc$ Death Gigas | ModeCost$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Triggers$ TrigDeath | Power$ 5 | Toughness$ 2 | StackDescription$ Until end of turn, {c:Targeted} is 5/2 and gains "When this creature dies, return it to the battlefield tapped under its owner's control." | SpellDescription$ 5/2.
+SVar:DBHellmasker:DB$ Animate | PrecostDesc$ Hellmasker | ModeCost$ 3 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Triggers$ TrigDeath | Power$ 7 | Toughness$ 2 | StackDescription$ Until end of turn, {c:Targeted} is 7/2 and gains "When this creature dies, return it to the battlefield tapped under its owner's control." | SpellDescription$ 7/2.
+SVar:TrigDeath:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy
+Oracle:Tiered (Choose one additional cost.)\nUntil end of turn, target creature you control gains "When this creature dies, return it to the battlefield tapped under its owner's control" and has the chosen base power and toughness.\n• Galian Beast — {0} — 3/2.\n• Death Gigas — {1} — 5/2.\n• Hellmasker — {3} — 7/2.
