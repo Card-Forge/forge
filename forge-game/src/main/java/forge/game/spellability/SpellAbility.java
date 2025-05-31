@@ -1208,6 +1208,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbility copy(Card host, final boolean lki) {
         return copy(host, this.getActivatingPlayer(), lki);
     }
+    public SpellAbility copy(Card host, final boolean lki, boolean keepTextChanges) {
+        return copy(host, this.getActivatingPlayer(), lki, keepTextChanges);
+    }
     public SpellAbility copy(Card host, Player activ, final boolean lki) {
         return copy(host, activ, lki, false);
     }

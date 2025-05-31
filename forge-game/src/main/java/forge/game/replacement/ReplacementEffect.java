@@ -181,15 +181,18 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         return meetsCommonRequirements(getMapParams());
     }
 
+    public final ReplacementEffect copy(Card newHost, boolean lki) {
+        return copy(newHost, lki, false);
+    }
     /**
      * Gets the copy.
      *
      * @return the copy
      */
-    public final ReplacementEffect copy(final Card host, final boolean lki) {
+    public final ReplacementEffect copy(final Card host, final boolean lki, boolean keepTextChanges) {
         final ReplacementEffect res = (ReplacementEffect) clone();
 
-        copyHelper(res, host);
+        copyHelper(res, host, lki || keepTextChanges);
 
         final SpellAbility sa = this.getOverridingAbility();
         if (sa != null) {
