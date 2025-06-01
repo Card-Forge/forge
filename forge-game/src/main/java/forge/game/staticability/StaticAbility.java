@@ -591,13 +591,16 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
     }
 
-    public StaticAbility copy(Card host, final boolean lki) {
+    public final StaticAbility copy(Card newHost, boolean lki) {
+        return copy(newHost, lki, false);
+    }
+    public StaticAbility copy(Card host, final boolean lki, boolean keepTextChanges) {
         StaticAbility clone = null;
         try {
             clone = (StaticAbility) clone();
             clone.id = lki ? id : nextId();
 
-            copyHelper(clone, host);
+            copyHelper(clone, host, lki || keepTextChanges);
 
             // reset to force refresh if needed
             clone.payingTrigSA = null;

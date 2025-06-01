@@ -5324,6 +5324,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
+    public void setChangedCardKeywordsByText(Table<Long, Long, KeywordsChange> changedCardKeywords) {
+        this.changedCardKeywordsByText.clear();
+        for (Table.Cell<Long, Long, KeywordsChange> entry : changedCardKeywords.cellSet()) {
+            this.changedCardKeywordsByText.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue().copy(this, true));
+        }
+    }
+
     public final void addChangedCardKeywordsInternal(
         final Collection<KeywordInterface> keywords, final Collection<KeywordInterface> removeKeywords,
         final boolean removeAllKeywords,
@@ -8351,5 +8358,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         this.changedCardNames.putAll(in.changedCardNames);
         setChangedCardTraits(in.getChangedCardTraits());
+
+        setChangedCardTraitsByText(in.getChangedCardTraitsByText());
+        setChangedCardKeywordsByText(in.getChangedCardKeywordsByText());
     }
 }
