@@ -9,9 +9,9 @@ import java.util.List;
 
 import forge.ImageKeys;
 import forge.assets.*;
-import forge.item.PaperCard;
-import forge.util.ImageUtil;
 import forge.util.TextBounds;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
@@ -156,13 +156,7 @@ public class CardImageRenderer {
         }
         //space for artist
         textBoxHeight -= 2 * PT_FONT.getCapHeight();
-        PaperCard paperCard = null;
-        try {
-            paperCard = ImageUtil.getPaperCardFromImageKey(state.getImageKey());
-        } catch (Exception e) {}
-        String artist = "WOTC";
-        if (paperCard != null && !paperCard.getArtist().isEmpty())
-            artist = paperCard.getArtist();
+        String artist = ObjectUtils.firstNonNull(state.getArtist(), "WOTC");
         float minTextBoxHeight = 2 * headerHeight;
         if (textBoxHeight < minTextBoxHeight) {
             artHeight -= (minTextBoxHeight - textBoxHeight); //subtract from art height if text box not big enough otherwise

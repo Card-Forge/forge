@@ -20,6 +20,8 @@ package forge.card;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import forge.StaticData;
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -149,6 +151,10 @@ public final class CardRules implements ICardCharacteristics {
         return splitType;
     }
 
+    public boolean hasBackSide() {
+        return CardSplitType.DUAL_FACED_CARDS.contains(splitType) || splitType == CardSplitType.Flip;
+    }
+
     public ICardFace getMainPart() {
         return mainPart;
     }
@@ -165,20 +171,32 @@ public final class CardRules implements ICardCharacteristics {
         return Iterables.concat(Arrays.asList(mainPart, otherPart), specializedParts.values());
     }
 
-    public ICardFace getWSpecialize() {
-        return specializedParts.get(CardStateName.SpecializeW);
-    }
-    public ICardFace getUSpecialize() {
-        return specializedParts.get(CardStateName.SpecializeU);
-    }
-    public ICardFace getBSpecialize() {
-        return specializedParts.get(CardStateName.SpecializeB);
-    }
-    public ICardFace getRSpecialize() {
-        return specializedParts.get(CardStateName.SpecializeR);
-    }
-    public ICardFace getGSpecialize() {
-        return specializedParts.get(CardStateName.SpecializeG);
+    public String getImageName(CardStateName state) {
+        if (splitType == CardSplitType.Split) {
+            return mainPart.getName() + otherPart.getName();
+        } else if (state.equals(splitType.getChangedStateName())) {
+            if (otherPart != null) {
+                return otherPart.getName();
+            } else if (this.hasBackSide()) {
+                if (!getMeldWith().isEmpty()) {
+                    final CardDb db = StaticData.instance().getCommonCards();
+                    return db.getRules(getMeldWith()).getOtherPart().getName();
+                }
+                return null;
+            }
+        }
+
+        switch (state) {
+            case SpecializeW:
+            case SpecializeU:
+            case SpecializeB:
+            case SpecializeR:
+            case SpecializeG:
+                ICardFace face = specializedParts.get(state);
+                return face != null ? face.getName() : null;
+            default:
+                return getName();
+        }
     }
 
     public String getName() {

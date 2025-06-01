@@ -247,9 +247,6 @@ public class ImageCache {
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         }
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
-            if (card != null)
-                imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
             if (StringUtils.isBlank(imageKey)) {
                 if (useDefaultIfNotFound)
                     return getDefaultImage();

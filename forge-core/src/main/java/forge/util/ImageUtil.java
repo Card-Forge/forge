@@ -5,6 +5,7 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
+import forge.card.CardStateName;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
@@ -24,20 +25,17 @@ public class ImageUtil {
             key = imageKey.substring(ImageKeys.CARD_PREFIX.length());
         else
             return null;
+
+        if (key.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
+            key = key.substring(0, key.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        }
+
         if (key.isEmpty())
             return null;
 
-        CardDb db = StaticData.instance().getCommonCards();
-        PaperCard cp = null;
-        //db shouldn't be null
-        if (db != null) {
-            cp = db.getCard(key);
-            if (cp == null) {
-                db = StaticData.instance().getVariantCards();
-                if (db != null)
-                    cp = db.getCard(key);
-            }
-        }
+        String[] tempdata = key.split("\\|");
+        PaperCard cp = StaticData.instance().fetchCard(tempdata[0], tempdata[1], tempdata[2]);
+
         if (cp == null)
             System.err.println("Can't find PaperCard from key: " + key);
         // return cp regardless if it's null
@@ -53,6 +51,21 @@ public class ImageUtil {
             key += "|" + artIndex;
         return key;
     }
+
+    public static String getImageRelativePath(String name, String set, String collectorNumber, boolean artChop) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(set).append("/");
+        if (!collectorNumber.isEmpty() && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            sb.append(collectorNumber).append("_");
+        }
+        sb.append(StringUtils.stripAccents(name));
+
+        sb.append(artChop ? ".artcrop" : ".fullborder");
+        sb.append(".jpg");
+        return sb.toString();
+    }
+
 
     public static String getImageRelativePath(PaperCard cp, String face, boolean includeSet, boolean isDownloadUrl) {
         final String nameToUse = cp == null ? null : getNameToUse(cp, face);
@@ -123,25 +136,15 @@ public class ImageUtil {
             else
                 return null;
         } else if (face.equals("white")) {
-            if (card.getWSpecialize() != null) {
-                return card.getWSpecialize().getName();
-            }
+            return card.getImageName(CardStateName.SpecializeW);
         } else if (face.equals("blue")) {
-            if (card.getUSpecialize() != null) {
-                return card.getUSpecialize().getName();
-            }
+            return card.getImageName(CardStateName.SpecializeU);
         } else if (face.equals("black")) {
-            if (card.getBSpecialize() != null) {
-                return card.getBSpecialize().getName();
-            }
+            return card.getImageName(CardStateName.SpecializeB);
         } else if (face.equals("red")) {
-            if (card.getRSpecialize() != null) {
-                return card.getRSpecialize().getName();
-            }
+            return card.getImageName(CardStateName.SpecializeR);
         } else if (face.equals("green")) {
-            if (card.getGSpecialize() != null) {
-                return card.getGSpecialize().getName();
-            }
+            return card.getImageName(CardStateName.SpecializeG);
         } else if (CardSplitType.Split == cp.getRules().getSplitType()) {
             return card.getMainPart().getName() + card.getOtherPart().getName();
         } else if (!IPaperCard.NO_FUNCTIONAL_VARIANT.equals(cp.getFunctionalVariant())) {
@@ -150,50 +153,86 @@ public class ImageUtil {
         return cp.getName();
     }
 
+    public static String getNameToUse(PaperCard cp, CardStateName face) {
+        if (!IPaperCard.NO_FUNCTIONAL_VARIANT.equals(cp.getFunctionalVariant())) {
+            return cp.getFunctionalVariant();
+        }
+        final CardRules card = cp.getRules();
+        return card.getImageName(face);
+    }
+
     public static String getImageKey(PaperCard cp, String face, boolean includeSet) {
         return getImageRelativePath(cp, face, includeSet, false);
+    }
+
+    public static String getImageKey(PaperCard cp, CardStateName face) {
+        String name = getNameToUse(cp, face);
+        String number = cp.getCollectorNumber();
+        String suffix = "";
+        switch (face) {
+        case SpecializeB:
+            number += "b";
+            break;
+        case SpecializeG:
+            number += "g";
+            break;
+        case SpecializeR:
+            number += "r";
+            break;
+        case SpecializeU:
+            number += "u";
+            break;
+        case SpecializeW:
+            number += "w";
+            break;
+        case Meld:
+        case Modal:
+        case Secondary:
+        case Transformed:
+            suffix = ImageKeys.BACKFACE_POSTFIX;
+            break;
+        case Flipped:
+            break; // add info to rotate the image?
+        default:
+            break;
+        };
+        return ImageKeys.CARD_PREFIX + name + CardDb.NameSetSeparator + cp.getEdition()
+            + CardDb.NameSetSeparator + number + CardDb.NameSetSeparator + cp.getArtIndex() + suffix;
     }
 
     public static String getDownloadUrl(PaperCard cp, String face) {
         return getImageRelativePath(cp, face, true, true);
     }
 
-    public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop){
-        return getScryfallDownloadUrl(cp, face, setCode, langCode, useArtCrop, false);
+    public static String getScryfallDownloadUrl(String collectorNumber, String setCode, String langCode, String faceParam, boolean useArtCrop){
+        return getScryfallDownloadUrl(collectorNumber, setCode, langCode, faceParam, useArtCrop, false);
     }
 
-    public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop, boolean hyphenateAlchemy){
-        String editionCode;
-        if ((setCode != null) && (setCode.length() > 0))
-            editionCode = setCode;
-        else
-            editionCode = cp.getEdition().toLowerCase();
-        String cardCollectorNumber = cp.getCollectorNumber();
+    public static String getScryfallDownloadUrl(String collectorNumber, String setCode, String langCode, String faceParam, boolean useArtCrop, boolean hyphenateAlchemy){
         // Hack to account for variations in Arabian Nights
-        cardCollectorNumber = cardCollectorNumber.replace("+", "†");
+        collectorNumber = collectorNumber.replace("+", "†");
         // override old planechase sets from their modified id since scryfall move the planechase cards outside their original setcode
-        if (cardCollectorNumber.startsWith("OHOP")) {
-            editionCode = "ohop";
-            cardCollectorNumber = cardCollectorNumber.substring("OHOP".length());
-        } else if (cardCollectorNumber.startsWith("OPCA")) {
-            editionCode = "opca";
-            cardCollectorNumber = cardCollectorNumber.substring("OPCA".length());
-        } else if (cardCollectorNumber.startsWith("OPC2")) {
-            editionCode = "opc2";
-            cardCollectorNumber = cardCollectorNumber.substring("OPC2".length());
+        if (collectorNumber.startsWith("OHOP")) {
+            setCode = "ohop";
+            collectorNumber = collectorNumber.substring("OHOP".length());
+        } else if (collectorNumber.startsWith("OPCA")) {
+            setCode = "opca";
+            collectorNumber = collectorNumber.substring("OPCA".length());
+        } else if (collectorNumber.startsWith("OPC2")) {
+            setCode = "opc2";
+            collectorNumber = collectorNumber.substring("OPC2".length());
         } else if (hyphenateAlchemy) {
-            if (!cardCollectorNumber.startsWith("A")) {
+            if (!collectorNumber.startsWith("A")) {
                 return null;
             }
 
-            cardCollectorNumber = cardCollectorNumber.replace("A", "A-");
+            collectorNumber = collectorNumber.replace("A", "A-");
         }
         String versionParam = useArtCrop ? "art_crop" : "normal";
-        String faceParam = "";
-        if (cp.getRules().getOtherPart() != null) {
-            faceParam = (face.equals("back") ? "&face=back" : "&face=front");
+        if (!faceParam.isEmpty()) {
+            faceParam = (faceParam.equals("back") ? "&face=back" : "&face=front");
         }
-        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
+        return String.format("%s/%s/%s?format=image&version=%s%s", setCode, collectorNumber,
                 langCode, versionParam, faceParam);
     }
 

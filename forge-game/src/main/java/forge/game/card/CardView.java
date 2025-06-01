@@ -1335,9 +1335,21 @@ public class CardView extends GameEntityView {
         }
         void updateImageKey(Card c) {
             set(TrackableProperty.ImageKey, c.getImageKey());
+            IPaperCard pc = c.getPaperCard();
+            if (pc != null) {
+                set(TrackableProperty.Artist, pc.getArtist());
+            }
         }
         void updateImageKey(CardState c) {
             set(TrackableProperty.ImageKey, c.getImageKey());
+            IPaperCard pc = c.getCard().getPaperCard();
+            if (pc != null) { // currently Artist is per Card
+                set(TrackableProperty.Artist, pc.getArtist());
+            }
+        }
+
+        public String getArtist() {
+            return get(TrackableProperty.Artist);
         }
 
         public CardTypeView getType() {

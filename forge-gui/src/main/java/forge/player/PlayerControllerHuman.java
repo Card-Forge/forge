@@ -1931,7 +1931,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (GuiBase.getInterface().isLibgdxPort()) {
             CardView cardView;
             try {
-                cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(sa.getView().getHostCard().getCurrentState().getTrackableImageKey()));
+                cardView = sa.getView().getHostCard();
             } catch (Exception e) {
                 SpellAbilityView spellAbilityView = sa.getView();
                 if (spellAbilityView != null) //updated view
