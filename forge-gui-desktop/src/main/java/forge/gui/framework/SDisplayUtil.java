@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import forge.gui.FThreads;
+import forge.toolbox.FButton;
 import forge.view.FFrame;
 
 /**
@@ -103,9 +104,8 @@ public class SDisplayUtil {
             if (dc != null) {
                 dc.setSelected(tab0);
             }
-            // set focus back to previous owner, if any
-            // if (null != c  &&  c instanceof FButton) {  //pfps UGLY but maybe necessary (probably not)
-            if (null != c) {
+            // To prevent stealing keyboard focus, set focus back to previous owner, but only if it was a button.
+            if (c instanceof FButton) {
                 c.requestFocusInWindow();
             }
         };

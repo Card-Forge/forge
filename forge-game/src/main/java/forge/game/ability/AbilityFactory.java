@@ -209,15 +209,6 @@ public final class AbilityFactory {
             }
         }
 
-        else if (api == ApiType.PermanentCreature || api == ApiType.PermanentNoncreature) {
-            // If API is a permanent type, and creating AF Spell
-            // Clear out the auto created SpellPermanent spell
-            if (type == AbilityRecordType.Spell
-                    && !mapParams.containsKey("SubAbility") && !mapParams.containsKey("NonBasicSpell")) {
-                hostCard.clearFirstSpell();
-            }
-        }
-
         if (abCost == null) {
             abCost = parseAbilityCost(state, mapParams, type);
         }
@@ -503,8 +494,9 @@ public final class AbilityFactory {
         AbilityRecordType leftType = AbilityRecordType.getRecordType(leftMap);
         ApiType leftApi = leftType.getApiTypeOf(leftMap);
         leftMap.put("StackDescription", leftMap.get("SpellDescription"));
-        leftMap.put("SpellDescription", "Fuse (you may cast both halves of this card from your hand).");
+        leftMap.put("SpellDescription", "Fuse (You may cast one or both halves of this card from your hand.)");
         leftMap.put("ActivationZone", "Hand");
+        leftMap.put("Secondary", "True");
 
         CardState rightState = card.getState(CardStateName.RightSplit);
         SpellAbility rightAbility = rightState.getFirstAbility();
@@ -519,8 +511,10 @@ public final class AbilityFactory {
         totalCost.add(parseAbilityCost(rightState, rightMap, rightType));
 
         final SpellAbility left = getAbility(leftType, leftApi, leftMap, totalCost, leftState, leftState);
+        left.setOriginalAbility(leftAbility);
         left.setCardState(card.getState(CardStateName.Original));
         final AbilitySub right = (AbilitySub) getAbility(AbilityRecordType.SubAbility, rightApi, rightMap, null, rightState, rightState);
+        right.setOriginalAbility(rightAbility);
         left.appendSubAbility(right);
         return left;
     }

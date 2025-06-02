@@ -2790,15 +2790,9 @@ public class GameAction {
             return false;
         }
 
-        SpellAbility aura = new SpellAbility.EmptySa(ApiType.Attach, source);
-        if (source.hasSVar("AttachAITgts")) {
-            aura.putParam("AITgts", source.getSVar("AttachAITgts"));
-        }
-        if (source.hasSVar("AttachAILogic")) {
-            aura.putParam("AILogic", source.getSVar("AttachAILogic"));
-        }
-        if (source.hasSVar("AttachAIValid")) {
-            aura.putParam("AIValid", source.getSVar("AttachAIValid"));
+        SpellAbility aura = source.getCurrentState().getAuraSpell();
+        if (aura == null) {
+            return false;
         }
 
         Set<ZoneType> zones = EnumSet.noneOf(ZoneType.class);
