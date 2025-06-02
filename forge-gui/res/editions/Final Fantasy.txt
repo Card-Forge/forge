@@ -627,7 +627,12 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 548 R The Wandering Minstrel @Penekor
 549 M Yuna, Hope of Spira @osamu
 550 U Zidane, Tantalus Thief @Canata Katana
-572 L Plains @Jonas De Ro
+551 M Traveling Chocobo @Toni Infante
+551a M Traveling Chocobo @Toni Infante
+551b M Traveling Chocobo @Toni Infante
+551c M Traveling Chocobo @Toni Infante
+551d M Traveling Chocobo @Toni Infante
+551f M Traveling Chocobo @Toni Infante572 L Plains @Jonas De Ro
 573 L Island @Eddie Mendoza
 574 L Swamp @Domenico Cava
 575 L Mountain @Domenico Cava
@@ -640,14 +645,6 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 583 U Circle of Power @Josephine Chang
 584 U Barret Wallace @Patrik Hell
 585 C Laughing Mad @RARE ENGINE
-
-[special slot]
-551 M Traveling Chocobo @Toni Infante
-551a M Traveling Chocobo @Toni Infante
-551b M Traveling Chocobo @Toni Infante
-551c M Traveling Chocobo @Toni Infante
-551d M Traveling Chocobo @Toni Infante
-551f M Traveling Chocobo @Toni Infante
 
 [jumpstart]
 552 M Cloud, Planet's Champion @Magali Villeneuve
