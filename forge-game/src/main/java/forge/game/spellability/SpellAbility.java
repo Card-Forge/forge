@@ -1009,6 +1009,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (stackDescription.equals(text) && !text.isEmpty()) {
             return getHostCard().getName() + " - " + text;
         }
+        if (stackDescription.isEmpty()) {
+            return "";
+        }
         return TextUtil.fastReplace(stackDescription, "CARDNAME", getHostCard().getName());
     }
     public void setStackDescription(final String s) {
@@ -1101,7 +1104,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 sb.append(" ");
             }
             String desc = node.getDescription();
-            if (node.getHostCard() != null) {
+            if (node.getHostCard() != null && !desc.isEmpty()) {
                 ITranslatable nameSource = getHostName(node);
                 desc = CardTranslation.translateMultipleDescriptionText(desc, nameSource);
                 String translatedName = CardTranslation.getTranslatedName(nameSource);
@@ -1207,6 +1210,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public SpellAbility copy(Card host, final boolean lki) {
         return copy(host, this.getActivatingPlayer(), lki);
+    }
+    public SpellAbility copy(Card host, final boolean lki, boolean keepTextChanges) {
+        return copy(host, this.getActivatingPlayer(), lki, keepTextChanges);
     }
     public SpellAbility copy(Card host, Player activ, final boolean lki) {
         return copy(host, activ, lki, false);
@@ -1652,6 +1658,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     protected List<IHasSVars> getSVarFallback(final String name) {
         List<IHasSVars> result = Lists.newArrayList();
+        if (isKeyword(Keyword.FUSE)) {
+            SpellAbility original = this.getOriginalAbility();
+            if (original != null) {
+                result.add(original);
+            }
+        }
         if (getParent() != null) {
             result.add(getParent());
         }

@@ -55,6 +55,8 @@ public class SpellPermanent extends SpellApiBased {
         super(cardstate.getType().isCreature() ? ApiType.PermanentCreature : ApiType.PermanentNoncreature, sourceCard,
                 cost, null, Maps.newHashMap());
 
+        setCardState(cardstate);
+
         // reset StackDescription for something with Text
         this.setStackDescription("");
         this.setDescription(this.getStackDescription());

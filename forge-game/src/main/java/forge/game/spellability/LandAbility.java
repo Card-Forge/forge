@@ -79,7 +79,7 @@ public class LandAbility extends AbilityStatic {
         StringBuilder sb = new StringBuilder(StringUtils.capitalize(localizer.getMessage("lblPlayLand")));
 
         if (getHostCard().isModal()) {
-            sb.append(" (").append(CardTranslation.getTranslatedName(getHostCard().getName(ObjectUtils.firstNonNull(getCardStateName(), CardStateName.Original)))).append(")");
+            sb.append(" (").append(CardTranslation.getTranslatedName(getCardState().getName())).append(")");
         }
 
         StaticAbility sta = getMayPlay();
