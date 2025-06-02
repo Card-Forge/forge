@@ -4,6 +4,68 @@ Date=2025-06-13
 Name=Final Fantasy
 Type=Expansion
 ScryfallCode=FIN
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=30
+# https://mtgscribe.com/2025/05/11/final-fantasy-play-booster-fact-sheet/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
+Booster=6 Common,1 Common-Guest,3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 AnyLand
+
+[Common]
+Base=Common:!fromSheet("FIN dual lands"):fromSheet("FIN cards")
+
+[Common-Guest]
+Base=Common:!fromSheet("FIN dual lands"):fromSheet("FIN cards")
+Replace=.2083F Uncommon:fromSheet("FCA cards")
+Replace=.0982F Rare:fromSheet("FCA cards")
+Replace=.0231F Mythic:fromSheet("FCA cards")
+
+[Uncommon]
+Base=Uncommon:fromSheet("FIN cards")
+Replace=.003F Uncommon:fromSheet("FIN borderless")
+Replace=.0006F :name("Cid, Timeless Artificer"):!fromSheet("FIN extended art")
+Replace=.0084F :name("Cid, Timeless Artificer"):fromSheet("FIN extended art")
+
+
+[RareMythic]
+Base=Rare:fromSheet("FIN cards")
+Replace=.1F Mythic:fromSheet("FIN cards")
+Replace=.08F Rare:fromSheet("FIN borderless")
+Replace=.01F Mythic:fromSheet("FIN borderless")
+Replace=.005F Rare:fromSheet("FIN alternate art")
+Replace=.005F Mythic:fromSheet("FIN alternate art")
+
+[Wildcard]
+Base=Uncommon:fromSheet("FIN cards")
+Replace=.167F Common:fromSheet("FIN cards"):!fromSheet("FIN dual lands")
+Replace=.026F Common:fromSheet("FIN borderless")
+Replace=.057F Uncommon:fromSheet("FIN borderless")
+Replace=.134F Rare:fromSheet("FIN cards")
+Replace=.0134F Rare:fromSheet("FIN borderless")
+Replace=.0008F Rare:fromSheet("FIN alternate art")
+Replace=.017F Mythic:fromSheet("FIN cards")
+Replace=.0017F Mythic:fromSheet("FIN borderless")
+Replace=.0008F Mythic:fromSheet("FIN alternate art")
+
+[WildcardFoil]
+Base=Common:fromSheet("FIN cards"):!fromSheet("FIN dual lands")
+Replace=.001F Common:fromSheet("FIN borderless")
+Replace=.359F Uncommon:fromSheet("FIN cards")
+Replace=.005F Uncommon:fromSheet("FIN borderless")
+Replace=.055F Rare:fromSheet("FIN cards")
+Replace=.0092F Rare:fromSheet("FIN borderless")
+Replace=.0008F Rare:fromSheet("FIN alternate art")
+Replace=.0075F Mythic:fromSheet("FIN cards")
+Replace=.0018F Mythic:fromSheet("FIN borderless")
+Replace=.0007F Mythic:fromSheet("FIN alternate art")
+Replace=.0000625F :name("Cid, Timeless Artificer"):!fromSheet("FIN extended art")
+Replace=.0009375F :name("Cid, Timeless Artificer"):fromSheet("FIN extended art")
+
+
+[AnyLand]
+Base=fromSheet("FIN dual lands")
+Replace=.22F :fromSheet("FIN dual lands")+
+Replace=.27F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")
+Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 
 [cards]
 1 M Summon: Bahamut @Arif Wijaya
@@ -278,26 +340,26 @@ ScryfallCode=FIN
 270 C World Map @Septian Fajrianto
 271 C Adventurer's Inn @Allen Morris
 272 R Balamb Garden, SeeD Academy @Jonas De Ro
-273 C Baron, Airship Kingdom @Rockey Chen
+273 L Baron, Airship Kingdom @Rockey Chen
 274 U Capital City @Wei Guan
 275 R Clive's Hideaway @Jonas De Ro
 276 C Crossroads Village @Hristo D. Chukov
 277 U Eden, Seat of the Sanctum @Leon Tukker
-278 C Gohn, Town of Ruin @Salvatorre Zee Yazzie
+278 L Gohn, Town of Ruin @Salvatorre Zee Yazzie
 279 U The Gold Saucer @Anthony Devine
-280 C Gongaga, Reactor Town @Le Vuong
-281 C Guadosalam, Farplane Gateway @Vaigintas Pakenis
-282 C Insomnia, Crown City @Jonas De Ro
+280 L Gongaga, Reactor Town @Le Vuong
+281 L Guadosalam, Farplane Gateway @Vaigintas Pakenis
+282 L Insomnia, Crown City @Jonas De Ro
 283 R Ishgard, the Holy See @KOHEI YAMADA
 284 R Jidoor, Aristocratic Capital @Erikas Perl
 285 R Lindblum, Industrial Regency @Piotr Dura
 286 R Midgar, City of Mako @Anthony Devine
-287 C Rabanastre, Royal City @Shahab Alizadeh
-288 C Sharlayan, Nation of Scholars @David Frasheski
+287 L Rabanastre, Royal City @Shahab Alizadeh
+288 L Sharlayan, Nation of Scholars @David Frasheski
 289 R Starting Town @Hristo D. Chukov
-290 C Treno, Dark City @Jonas De Ro
-291 C Vector, Imperial Capital @Lordigan
-292 C Windurst, Federation Center @Constantin Marin
+290 L Treno, Dark City @Jonas De Ro
+291 L Vector, Imperial Capital @Lordigan
+292 L Windurst, Federation Center @Constantin Marin
 293 R Zanarkand, Ancient Metropolis @Erikas Perl
 294 L Plains @Shahab Alizadeh
 295 L Plains @Jonas De Ro
@@ -317,11 +379,16 @@ ScryfallCode=FIN
 309 L Wastes @Eddie Mendoza
 
 [alternate art]
-310 R Ishgard, the Holy See @David Frasheski
-311 R Jidoor, Aristocratic Capital @Craig Elliott
-312 R Lindblum, Industrial Regency @Enora Mercier
-313 R Midgar, City of Mako @Josu Solano
-314 R Zanarkand, Ancient Metropolis @Jonas De Ro
+315 R Ardyn, the Usurper @Roberto Ferrari
+316 R Kain, Traitorous Dragoon @Toshitaka Matsuda
+317 M Sephiroth, Fabled SOLDIER @Tetsuya Nomura
+318 M Clive, Ifrit's Dominant @Kazuya Takahashi
+319 R Balthier and Fran @Akihiko Yoshida
+320 M Lightning, Army of One @ISAMU KAMIKOKURYO
+321 M Vivi Ornitier @Toshiyuki Itahana
+322 M Kefka, Court Mage @Yoshitaka Amano
+323 M Terra, Magical Adept @Yoshitaka Amano
+324 R Ultima, Origin of Oblivion @Ono Tako
 407 U Cid, Timeless Artificer @Gal Or
 408 U Cid, Timeless Artificer @Lee Woo-chul
 409 U Cid, Timeless Artificer @Narendra Bintara Adi
@@ -338,16 +405,11 @@ ScryfallCode=FIN
 420 U Cid, Timeless Artificer @Magali Villeneuve
 
 [borderless]
-315 R Ardyn, the Usurper @Roberto Ferrari
-316 R Kain, Traitorous Dragoon @Toshitaka Matsuda
-317 M Sephiroth, Fabled SOLDIER @Tetsuya Nomura
-318 M Clive, Ifrit's Dominant @Kazuya Takahashi
-319 R Balthier and Fran @Akihiko Yoshida
-320 M Lightning, Army of One @ISAMU KAMIKOKURYO
-321 M Vivi Ornitier @Toshiyuki Itahana
-322 M Kefka, Court Mage @Yoshitaka Amano
-323 M Terra, Magical Adept @Yoshitaka Amano
-324 R Ultima, Origin of Oblivion @Ono Tako
+310 R Ishgard, the Holy See @David Frasheski
+311 R Jidoor, Aristocratic Capital @Craig Elliott
+312 R Lindblum, Industrial Regency @Enora Mercier
+313 R Midgar, City of Mako @Josu Solano
+314 R Zanarkand, Ancient Metropolis @Jonas De Ro
 325 U Ambrosia Whiteheart @Shie Nanahara
 326 R Moogles' Valor @Yoshiya
 327 R Stiltzkin, Moogle Merchant @Yumeko
@@ -565,12 +627,6 @@ ScryfallCode=FIN
 548 R The Wandering Minstrel @Penekor
 549 M Yuna, Hope of Spira @osamu
 550 U Zidane, Tantalus Thief @Canata Katana
-551 M Traveling Chocobo @Toni Infante
-551a M Traveling Chocobo @Toni Infante
-551b M Traveling Chocobo @Toni Infante
-551c M Traveling Chocobo @Toni Infante
-551d M Traveling Chocobo @Toni Infante
-551f M Traveling Chocobo @Toni Infante
 572 L Plains @Jonas De Ro
 573 L Island @Eddie Mendoza
 574 L Swamp @Domenico Cava
@@ -584,6 +640,14 @@ ScryfallCode=FIN
 583 U Circle of Power @Josephine Chang
 584 U Barret Wallace @Patrik Hell
 585 C Laughing Mad @RARE ENGINE
+
+[special slot]
+551 M Traveling Chocobo @Toni Infante
+551a M Traveling Chocobo @Toni Infante
+551b M Traveling Chocobo @Toni Infante
+551c M Traveling Chocobo @Toni Infante
+551d M Traveling Chocobo @Toni Infante
+551f M Traveling Chocobo @Toni Infante
 
 [jumpstart]
 552 M Cloud, Planet's Champion @Magali Villeneuve
@@ -638,3 +702,15 @@ ScryfallCode=FIN
 1 copy @Joseph Weston
 24 emblem_sephiroth_one_winged_angel @Wisnu Tan
 25 copy @Joseph Weston
+
+[dual lands]
+1 Baron, Airship Kingdom|FIN
+1 Gohn, Town of Ruin|FIN
+1 Gongaga, Reactor Town|FIN
+1 Guadosalam, Farplane Gateway|FIN
+1 Insomnia, Crown City|FIN
+1 Rabanastre, Royal City|FIN
+1 Sharlayan, Nation of Scholars|FIN
+1 Treno, Dark City|FIN
+1 Vector, Imperial Capital|FIN
+1 Windurst, Federation Center|FIN
