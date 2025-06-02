@@ -632,7 +632,7 @@ Replace=.18F BasicLand:fromSheet("FIN cards"):!fromSheet("FIN dual lands")+
 551b M Traveling Chocobo @Toni Infante
 551c M Traveling Chocobo @Toni Infante
 551d M Traveling Chocobo @Toni Infante
-551f M Traveling Chocobo @Toni Infante572 L Plains @Jonas De Ro
+551f M Traveling Chocobo @Toni Infante
 572 L Plains @Jonas De Ro
 573 L Island @Eddie Mendoza
 574 L Swamp @Domenico Cava
