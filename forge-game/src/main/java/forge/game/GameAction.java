@@ -548,20 +548,20 @@ public class GameAction {
 
         copied.updateStateForView();
 
+        // we don't want always trigger before counters are placed
+        game.getTriggerHandler().suppressMode(TriggerType.Always);
+        // Need to apply any static effects to produce correct triggers
+        checkStaticAbilities();
+
         // needed for counters + ascend
         if (!suppress && toBattlefield) {
             game.getTriggerHandler().registerActiveTrigger(copied, false);
         }
 
-        if (!table.isEmpty()) {
-            // we don't want always trigger before counters are placed
-            game.getTriggerHandler().suppressMode(TriggerType.Always);
-            // Need to apply any static effects to produce correct triggers
-            checkStaticAbilities();
-            // do ETB counters after zone add
-            table.replaceCounterEffect(game, null, true, true, params);
-            game.getTriggerHandler().clearSuppression(TriggerType.Always);
-        }
+        // do ETB counters after zone add
+        table.replaceCounterEffect(game, null, true, true, params);
+
+        game.getTriggerHandler().clearSuppression(TriggerType.Always);
 
         // update static abilities after etb counters have been placed
         checkStaticAbilities();
