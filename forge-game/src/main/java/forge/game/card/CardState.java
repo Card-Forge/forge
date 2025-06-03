@@ -434,15 +434,10 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
             return;
         }
 
-        if (getCard().isInPlay()) {
-            return;
-        }
-
         CardTypeView type = getTypeWithChanges();
         if (type.isLand()) {
             if (landAbility == null) {
-                landAbility = new LandAbility(card);
-                landAbility.setCardState(this);
+                landAbility = new LandAbility(card, this);
             }
             newCol.add(landAbility);
         } else if (type.isAura()) {
