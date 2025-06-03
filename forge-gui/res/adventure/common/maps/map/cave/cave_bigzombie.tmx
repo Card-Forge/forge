@@ -32,7 +32,7 @@
   <object id="53" template="../../obj/treasure.tx" x="194" y="125"/>
   <object id="54" template="../../obj/enemy.tx" x="201.253" y="161.473">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Dreadhorde Invasion&quot; }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [&quot;Dreadhorde Invasion&quot;]}"/>
     <property name="enemy" value="Big Zombie"/>
     <property name="speedModifier" type="float" value="3"/>
     <property name="threatRange" type="int" value="60"/>

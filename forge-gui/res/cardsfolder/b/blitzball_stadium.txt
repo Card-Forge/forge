@@ -9,4 +9,4 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Count$DifferentCounterKinds_Ca
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:X:Count$xPaid
-Oracle:When this artifact enters, support X. (Put a +1/+1 counter on each of up to X target creatures.)\nGo for the Goal! — {3},{T}: Until end of turn, target creature gains "Whenever this creature deals combat damage to a player, draw a card for each kind of counter on it" and it can't be blocked this turn.
+Oracle:When this artifact enters, support X. (Put a +1/+1 counter on each of up to X target creatures.)\nGo for the Goal! — {3}, {T}: Until end of turn, target creature gains "Whenever this creature deals combat damage to a player, draw a card for each kind of counter on it" and it can't be blocked this turn.

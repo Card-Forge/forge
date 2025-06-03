@@ -249,6 +249,27 @@ public class Controls {
         return ret;
     }
 
+    static public SelectBox<Integer> newComboBox(Integer[] text, int item, Function<Object, Void> func) {
+        SelectBox<Integer> ret = newComboBox();
+        ret.getStyle().listStyle.selection.setTopHeight(4);
+        ret.setItems(text);
+        ret.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                try {
+                    func.apply(((SelectBox) actor).getSelected());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        func.apply(item);
+        ret.getList().setAlignment(Align.center);
+        ret.setSelected(item);
+        ret.setAlignment(Align.right);
+        return ret;
+    }
+
     static public TextField newTextField(String text) {
         return new TextField(text, getSkin());
     }

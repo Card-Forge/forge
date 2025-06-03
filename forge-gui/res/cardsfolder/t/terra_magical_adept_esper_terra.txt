@@ -2,7 +2,7 @@ Name:Terra, Magical Adept
 ManaCost:1 R G
 Types:Legendary Creature Human Wizard Warrior
 PT:4/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When NICKNAME enters, mill five cards. Put up to one enchantment milled this this way into your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When NICKNAME enters, mill five cards. Put up to one enchantment milled this way into your hand.
 SVar:TrigMill:DB$ Mill | NumCards$ 5 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Enchantment.YouOwn+IsRemembered | Hidden$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -11,7 +11,7 @@ SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination
 AlternateMode:DoubleFaced
 DeckHas:Ability$Mill
 DeckHints:Ability$Graveyard|Token|Counters & Type$Enchantment
-Oracle:When Terra enters, mill five cards. Put up to one enchantment milled this this way into your hand.\nTrance — {4}{R}{G}, {T}: Exile Terra, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
+Oracle:When Terra enters, mill five cards. Put up to one enchantment milled this way into your hand.\nTrance — {4}{R}{G}, {T}: Exile Terra, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
 
 ALTERNATE
 
