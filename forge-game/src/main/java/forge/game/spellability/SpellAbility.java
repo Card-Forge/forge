@@ -1222,11 +1222,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         try {
             clone = (SpellAbility) clone();
             clone.id = lki ? id : nextId();
-            clone.view = new SpellAbilityView(clone, lki || host.getGame() == null ? null : host.getGame().getTracker());
 
             // don't use setHostCard to not trigger the not copied parts yet
 
             copyHelper(clone, host, lki || keepTextChanges);
+
+            // need CardState before View
+            clone.view = new SpellAbilityView(clone, lki || host.getGame() == null ? null : host.getGame().getTracker());
 
             // always set this to false, it is only set in CopyEffect
             clone.mayChooseNewTargets = false;

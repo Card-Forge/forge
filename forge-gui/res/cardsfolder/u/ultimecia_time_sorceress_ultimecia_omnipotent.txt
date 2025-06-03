@@ -13,7 +13,7 @@ Oracle:Whenever Ultimecia enters or attacks, surveil 2. (Look at the top two car
 ALTERNATE
 
 Name:Ultimecia, Omnipotent
-ManaCost:
+ManaCost:no cost
 Colors:blue,black
 Types:Legendary Creature Nightmare Warlock
 PT:7/7

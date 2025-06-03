@@ -22,7 +22,7 @@ PT:5/5
 K:Chapter:3:DBWingsOfLight,DBWingsOfLight,DBGigaflare
 SVar:DBWingsOfLight:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll | SpellDescription$ Wings of Light — Put a +1/+1 counter on each other creature you control. Those creatures gain flying until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+StrictlyOther | KW$ Flying
-SVar:DBGigaflare:DB$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBExile | SpellDescription$ Gigaflare — Destroy target permanent. Exile NICKNAME, then return it to the battlefield (front face up).
+SVar:DBGigaflare:DB$ Destroy | ValidTgts$ Permanent | SubAbility$ DBExile | SpellDescription$ Gigaflare — Destroy target permanent. Exile NICKNAME, then return it to the battlefield (front face up).
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | RememberChanged$ True
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
