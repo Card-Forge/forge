@@ -12,7 +12,6 @@
     <name>Forge Mobile</name>
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -109,6 +108,12 @@
                     <artifactId>gdx</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
