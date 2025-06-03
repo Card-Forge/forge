@@ -195,12 +195,18 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     protected SpellAbility(final Card iSourceCard, final Cost toPay) {
-        this(iSourceCard, toPay, null);
+        this(iSourceCard, toPay, null, null);
     }
     protected SpellAbility(final Card iSourceCard, final Cost toPay, SpellAbilityView view0) {
+        this(iSourceCard, toPay, view0, null);
+    }
+    protected SpellAbility(final Card iSourceCard, final Cost toPay, SpellAbilityView view0, CardState cs) {
         id = nextId();
         hostCard = iSourceCard;
         payCosts = toPay;
+        if (cs != null) {
+            cardState = cs;
+        }
         if (view0 == null) {
             view0 = new SpellAbilityView(this);
         }
