@@ -1,21 +1,21 @@
 //Rank|Name|Rarity|Set
 #1|Adeline, Resplendent Cathar|R|FIN
-#2|Summon Leviathan|R|FIN
+#2|Summon: Leviathan|R|FIN
 #3|Ardyn, the Usurper|R|FIN
 #4|Absolute Virtue|M|FIN
 #5|Atraxa, Grand Unifier|M|FIN
 #6|Kenrith, the Returned King|R|FIN
-#7|Summon Bahamut|M|FIN
+#7|Summon: Bahamut|M|FIN
 #8|Ultima|R|FIN
 #9|Gilgamesh, Master-at-Arms|R|FIN
 #10|Ragavan, Nimble Pilferer|M|FIN
 #11|Sin, Spira's Punishment|R|FIN
 #12|Dion, Bahamut's Dominant|R|FIN
-#13|Summon Knights of Round|M|FIN
+#13|Summon: Knights of Round|M|FIN
 #14|Venat, Heart of Hydaelyn|R|FIN
 #15|Edgar, King of Figaro|R|FIN
 #16|Jecht, Reluctant Guardian|R|FIN
-#17|Summon Primal Odin|R|FIN
+#17|Summon: Primal Odin|R|FIN
 #18|Clive, Ifrit's Dominant|M|FIN
 #19|Firion, Wild Rose Warrior|R|FIN
 #20|Kuja, Genome Sorcerer|R|FIN
@@ -36,7 +36,7 @@
 #35|Yawgmoth, Thran Physician|M|FIN
 #36|The Wind Crystal|R|FIN
 #37|Seifer Almasy|R|FIN
-#38|Summon GF Cerberus|R|FIN
+#38|Summon: GF Cerberus|R|FIN
 #39|Kefka, Court Mage|M|FIN
 #40|Yuna, Hope of Spira|M|FIN
 #41|The Regalia|R|FIN
@@ -49,10 +49,10 @@
 #48|Y'shtola Rhul|M|FIN
 #49|Sephiroth, Fabled SOLDIER|M|FIN
 #50|Zenos yae Galvus|R|FIN
-#51|Summon Brynhildr|R|FIN
+#51|Summon: Brynhildr|R|FIN
 #52|Esper Origins|R|FIN
 #53|Sazh Katzroy|R|FIN
-#54|Summon Titan|R|FIN
+#54|Summon: Titan|R|FIN
 #55|Balthier and Fran|R|FIN
 #56|Joshua, Phoenix's Dominant|R|FIN
 #57|Terra, Magical Adept|M|FIN
@@ -120,7 +120,7 @@
 #119|Ambrosia Whiteheart|U|FIN
 #120|Zell Dincht|R|FIN
 #121|Clash of the Eikons|U|FIN
-#122|Summon Fenrir|U|FIN
+#122|Summon: Fenrir|U|FIN
 #123|Gladiolus Amicitia|U|FIN
 #124|Locke Cole|U|FIN
 #125|Omega, Heartless Evolution|U|FIN
@@ -141,11 +141,11 @@
 #140|Demon Wall|U|FIN
 #141|The Final Days|U|FIN
 #142|Reno and Rude|U|FIN
-#143|Summon Anima|U|FIN
+#143|Summon: Anima|U|FIN
 #144|Diamond Weapon|U|FIN
 #145|Ride the Shoopuf|U|FIN
 #146|Sazh's Chocobo|U|FIN
-#147|Sidequest Raise a Chocobo|U|FIN
+#147|Sidequest: Raise a Chocobo|U|FIN
 #148|The Emperor of Palamecia|U|FIN
 #149|Garland, Knight of Cornelia|U|FIN
 #150|Giott, King of the Dwarves|U|FIN
@@ -160,13 +160,13 @@
 #159|The Crystal's Chosen|U|FIN
 #160|Magitek Armor|U|FIN
 #161|Snow Villiers|U|FIN
-#162|Summon Primal Garuda|U|FIN
+#162|Summon: Primal Garuda|U|FIN
 #163|White Auracite|C|FIN
 #164|Zack Fair|U|FIN
 #165|Eject|U|FIN
-#166|Sidequest Card Collection|U|FIN
+#166|Sidequest: Card Collection|U|FIN
 #167|Sleep Magic|U|FIN
-#168|Summon Shiva|U|FIN
+#168|Summon: Shiva|U|FIN
 #169|Al Bhed Salvagers|U|FIN
 #170|Kain, Traitorous Dragoon|R|FIN
 #171|Overkill|U|FIN
@@ -176,7 +176,7 @@
 #175|Opera Love Song|U|FIN
 #176|Queen Brahne|U|FIN
 #177|Samurai's Katana|U|FIN
-#178|Summon Esper Ramuh|U|FIN
+#178|Summon: Esper Ramuh|U|FIN
 #179|Suplex|C|FIN
 #180|Thunder Magic|C|FIN
 #181|Chocobo Kick|C|FIN
@@ -194,7 +194,7 @@
 #193|Gaelicat|C|FIN
 #194|Restoration Magic|U|FIN
 #195|Stiltzkin, Moogle Merchant|R|FIN
-#196|Summon Choco Mog|C|FIN
+#196|Summon: Choco/Mog|C|FIN
 #197|White Mage's Staff|C|FIN
 #198|Cargo Ship|U|FIN
 #199|Combat Tutorial|C|FIN
@@ -207,11 +207,11 @@
 #206|Gaius van Baelsar|U|FIN
 #207|Sephiroth's Intervention|C|FIN
 #208|Shambling Cie'th|U|FIN
-#209|Sidequest Hunt the Mark|U|FIN
+#209|Sidequest: Hunt the Mark|U|FIN
 #210|Vayne's Treachery|C|FIN
 #211|Vincent Valentine|R|FIN
 #212|Prompto Argentum|U|FIN
-#213|Sidequest Play Blitzball|U|FIN
+#213|Sidequest: Play Blitzball|U|FIN
 #214|Chocobo Racetrack|U|FIN
 #215|Gysahl Greens|C|FIN
 #216|Summoner's Grimoire|R|FIN
@@ -245,7 +245,7 @@
 #244|Ancient Adamantoise|M|FIN
 #245|Goobbue Gardener|C|FIN
 #246|Quina, Qu Gourmet|U|FIN
-#247|Summon Fat Chocobo|C|FIN
+#247|Summon: Fat Chocobo|C|FIN
 #248|Baron, Airship Kingdom|C|FIN
 #249|Clive's Hideaway|R|FIN
 #250|Gohn, Town of Ruin|C|FIN
@@ -284,7 +284,7 @@
 #283|Adventurer's Airship|C|FIN
 #284|Monk's Fist|C|FIN
 #285|Crossroads Village|C|FIN
-#286|Summon GF Ifrit|C|FIN
+#286|Summon: G.F. Ifrit|C|FIN
 #287|Counterspell|U|FIN
 #288|Farseek|U|FIN
 #289|Sram, Senior Edificer|R|FIN
@@ -320,7 +320,7 @@
 #319|Poison the Waters|U|FIN
 #320|Reach the Horizon|U|FIN
 #321|Phoenix Down|U|FIN
-#322|Sidequest Catch a Fish|U|FIN
+#322|Sidequest: Catch a Fish|U|FIN
 #323|Dark Confidant|M|FIN
 #324|Phantom Train|U|FIN
 #325|Zodiark, Umbral God|R|FIN
