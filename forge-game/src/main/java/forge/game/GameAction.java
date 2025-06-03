@@ -2794,6 +2794,7 @@ public class GameAction {
         if (aura == null) {
             return false;
         }
+        aura.setActivatingPlayer(source.getController());
 
         Set<ZoneType> zones = EnumSet.noneOf(ZoneType.class);
         boolean canTargetPlayer = false;
