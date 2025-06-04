@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
@@ -222,6 +223,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         reward.setAutoSell(!reward.isAutoSell());
         String c = reward.isAutoSell() ? "[%85][GREEN]" : "[%85][GRAY]";
         autoSell.setText(c + "\uFF04");
+        autoSell.getColor().a = reward.isAutoSell() ? 1f : 0.7f;
     }
 
     public RewardActor(Reward reward, boolean flippable, RewardScene.Type type, boolean showOverlay) {
@@ -237,6 +239,17 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             case Card: {
                 if (!reward.isNoSell) {
                     autoSell = Controls.newTextButton("[%85][GRAY]\uFF04");
+                    autoSell.getColor().a = 0.7f; // semi-transparent by default
+                    autoSell.addListener(new InputListener() {
+                        @Override
+                        public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                            if (!reward.isAutoSell()) autoSell.getColor().a = 1f;
+                        }
+                        @Override
+                        public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                            if (!reward.isAutoSell()) autoSell.getColor().a = 0.7f;
+                        }
+                    });
                     float scale = autoSell.getWidth();
                     autoSell.setSize(scale, scale * 1.2f);
                     autoSell.addListener(new ClickListener() {
@@ -848,7 +861,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         super.act(delta);
         if (clicked) {
             if (flipProcess < 1)
-                flipProcess += delta * 2.4;
+                flipProcess += delta * 4;
             else
                 flipProcess = 1;
 
@@ -1113,6 +1126,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         public TextraLabel getStoredLabel() {
             return cLabel;
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            batch.setColor(1f, 1f, 1f, 1f); // Set color before drawing each actor, per libGDX docs
+            super.draw(batch, parentAlpha);
         }
     }
 
