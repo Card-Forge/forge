@@ -59,32 +59,6 @@ import java.util.Scanner;
 import static forge.localinstance.properties.ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE;
 
 /**
- * Extend and override TooltipManager to avoid the built-in default animations.
- */
-class RewardTooltipManager extends TooltipManager {
-    private static RewardTooltipManager instance;
-
-    public static RewardTooltipManager getInstance() {
-        if (instance == null) {
-            instance = new RewardTooltipManager();
-        }
-        return instance;
-    }
-
-    @Override
-    protected void showAction(Tooltip tooltip) {
-        // Override the default show action without animations for instant tooltip display
-    }
-
-    @Override
-    protected void hideAction(Tooltip tooltip) {
-        tooltip.getContainer().addAction(Actions.sequence(
-                Actions.removeActor() // Remove from stage
-        ));
-    }
-}
-
-/**
  * Render the rewards as a card on the reward scene.
  */
 public class RewardActor extends Actor implements Disposable, ImageFetcher.Callback {
@@ -1282,6 +1256,32 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 //e.printStackTrace();
             }
             super.draw(batch, parentAlpha);
+        }
+    }
+
+    /**
+     * Extend and override TooltipManager to avoid the built-in default animations.
+     */
+    static class RewardTooltipManager extends TooltipManager {
+        private static RewardTooltipManager instance;
+
+        public static RewardTooltipManager getInstance() {
+            if (instance == null) {
+                instance = new RewardTooltipManager();
+            }
+            return instance;
+        }
+
+        @Override
+        protected void showAction(Tooltip tooltip) {
+            // Overriding showAction for instant tooltip display
+        }
+
+        @Override
+        protected void hideAction(Tooltip tooltip) {
+            tooltip.getContainer().addAction(Actions.sequence(
+                    Actions.removeActor() // Remove tooltip without animation
+            ));
         }
     }
 }
