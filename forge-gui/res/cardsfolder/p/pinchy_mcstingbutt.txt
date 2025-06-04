@@ -1,0 +1,9 @@
+Name:Pinchy McStingbutt
+ManaCost:2 B
+Types:Creature Scorpion
+PT:1/3
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, conjure a card named Death of a Thousand Stings, Lethal Sting, or Stinging Shot at random into your hand and reveal it.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Choices$ Death of a Thousand Stings,Lethal Sting,Stinging Shot | Zone$ Hand | AtRandom$ True | Reveal$ True
+SVar:MustBeBlocked:True
+Oracle:Deathtouch\nWhenever Pinchy McStingbutt deals combat damage to a player, conjure a card named Death of a Thousand Stings, Lethal Sting, or Stinging Shot at random into your hand and reveal it. (Treat conjured cards like cards.)
