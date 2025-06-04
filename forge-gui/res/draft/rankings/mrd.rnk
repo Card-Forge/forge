@@ -4,7 +4,7 @@
 #3|Molder Slug|R|MRD
 #4|Troll Ascetic|R|MRD
 #5|Duplicant|R|MRD
-#6|Arc Slogger|R|MRD
+#6|Arc-Slogger|R|MRD
 #7|Glissa Sunseeker|R|MRD
 #8|Solar Tide|R|MRD
 #9|Bosh, Iron Golem|R|MRD
@@ -94,10 +94,10 @@
 #93|Goblin Replica|C|MRD
 #94|Talisman of Progress|U|MRD
 #95|Seat of the Synod|C|MRD
-#96|Leonin Den Guard|C|MRD
+#96|Leonin Den-Guard|C|MRD
 #97|Slith Firewalker|U|MRD
 #98|Copper Myr|C|MRD
-#99|Taj Nar Swordsmith|U|MRD
+#99|Taj-Nar Swordsmith|U|MRD
 #100|Talisman of Indulgence|U|MRD
 #101|Irradiate|C|MRD
 #102|Leonin Scimitar|C|MRD
@@ -112,7 +112,7 @@
 #111|Bottle Gnomes|U|MRD
 #112|Slith Bloodletter|U|MRD
 #113|Vault of Whispers|C|MRD
-#114|Tel Jilad Archers|C|MRD
+#114|Tel-Jilad Archers|C|MRD
 #115|Talisman of Impulse|U|MRD
 #116|Disciple of the Vault|C|MRD
 #117|Needlebug|U|MRD
@@ -123,7 +123,7 @@
 #122|Fabricate|U|MRD
 #123|Flayed Nim|U|MRD
 #124|Ancient Den|C|MRD
-#125|Tel Jilad Chosen|C|MRD
+#125|Tel-Jilad Chosen|C|MRD
 #126|Goblin Dirigible|U|MRD
 #127|Clockwork Vorrac|U|MRD
 #128|Aether Spellbomb|C|MRD
@@ -139,11 +139,11 @@
 #138|Great Furnace|C|MRD
 #139|Yotian Soldier|C|MRD
 #140|Rust Elemental|U|MRD
-#141|Trolls of Tel Jilad|U|MRD
+#141|Trolls of Tel-Jilad|U|MRD
 #142|Woebearer|U|MRD
 #143|Dragon Blood|U|MRD
 #144|Sun Droplet|U|MRD
-#145|Tel Jilad Exile|C|MRD
+#145|Tel-Jilad Exile|C|MRD
 #146|Fatespinner|R|MRD
 #147|Stalking Stones|U|MRD
 #148|Soldier Replica|C|MRD
@@ -169,11 +169,11 @@
 #168|Myr Incubator|R|MRD
 #169|Lightning Coils|R|MRD
 #170|Necrogen Spellbomb|C|MRD
-#171|Krark Clan Grunt|C|MRD
+#171|Krark-Clan Grunt|C|MRD
 #172|Wail of the Nim|C|MRD
-#173|Tooth of Chiss Goria|C|MRD
+#173|Tooth of Chiss-Goria|C|MRD
 #174|War Elemental|R|MRD
-#175|Golem Skin Gauntlets|U|MRD
+#175|Golem-Skin Gauntlets|U|MRD
 #176|Steel Wall|C|MRD
 #177|Slagwurm Armor|C|MRD
 #178|Neurok Familiar|C|MRD
@@ -187,7 +187,7 @@
 #186|Ornithopter|U|MRD
 #187|Relic Bane|U|MRD
 #188|Wall of Blood|U|MRD
-#189|Scale of Chiss Goria|C|MRD
+#189|Scale of Chiss-Goria|C|MRD
 #190|Elf Replica|C|MRD
 #191|Vermiculos|R|MRD
 #192|Psychic Membrane|U|MRD
@@ -203,7 +203,7 @@
 #202|Worldslayer|R|MRD
 #203|Viridian Joiner|C|MRD
 #204|Tower of Murmurs|R|MRD
-#205|Dead Iron Sledge|U|MRD
+#205|Dead-Iron Sledge|U|MRD
 #206|Extraplanar Lens|R|MRD
 #207|Slith Strider|U|MRD
 #208|Dross Harvester|R|MRD
@@ -232,7 +232,7 @@
 #231|Wanderguard Sentry|C|MRD
 #232|Awe Strike|C|MRD
 #233|Liar's Pendulum|R|MRD
-#234|Krark Clan Shaman|C|MRD
+#234|Krark-Clan Shaman|C|MRD
 #235|Power Conduit|U|MRD
 #236|Vorrac Battlehorns|C|MRD
 #237|Brown Ouphe|C|MRD
@@ -266,7 +266,7 @@
 #265|Necrogen Mists|R|MRD
 #266|Jinxed Choker|R|MRD
 #267|Myr Mindservant|U|MRD
-#268|Tel Jilad Stylus|U|MRD
+#268|Tel-Jilad Stylus|U|MRD
 #269|Disarm|C|MRD
 #270|Rule of Law|R|MRD
 #271|Leveler|R|MRD
