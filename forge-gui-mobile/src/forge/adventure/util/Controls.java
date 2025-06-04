@@ -48,6 +48,12 @@ public class Controls {
             this.setWidth(this.layout.getWidth() + (this.style != null && this.style.background != null ? this.style.background.getLeftWidth() + this.style.background.getRightWidth() : 0.0F));
             layout();
         }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            batch.setColor(1f, 1f, 1f, 1f); // Set color before drawing each actor, per libGDX docs
+            super.draw(batch, parentAlpha);
+        }
     }
 
     static class TextButtonFix extends TextraButton {

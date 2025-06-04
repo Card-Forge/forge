@@ -248,7 +248,7 @@ public class RewardScene extends UIScene {
                             reward.flip();
                         }
                     }, delay);
-                    delay += 0.15f;
+                    delay += 0.12f;
                 }
             }
         } else {
@@ -424,10 +424,10 @@ public class RewardScene extends UIScene {
                 restockButton.setVisible(false);
                 break;
             case Loot:
-                headerLabel.skipToTheEnd();
                 headerLabel.setPosition(restockButton.getX(), restockButton.getY());
                 headerLabel.setVisible(true);
                 headerLabel.setText("[%?SHINY][;]\u2610 " + Forge.getLocalizer().getMessage("lblAll"));
+                headerLabel.skipToTheEnd();
                 restockButton.setVisible(false);
                 break;
             case RewardChoice:
