@@ -141,3 +141,4 @@ Pioneer Masters, 3/6/PIO, PIO
 Innistrad Remastered, 3/6/INR, INR
 Aetherdrift, 3/6/DFT, DFT
 Tarkir Dragonstorm, 3/6/TDM, TDM
+Final Fantasy, 3/6/FIN, FIN

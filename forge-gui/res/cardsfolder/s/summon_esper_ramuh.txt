@@ -1,0 +1,9 @@
+Name:Summon: Esper Ramuh
+ManaCost:2 R R
+Types:Enchantment Creature Saga Wizard
+PT:3/3
+K:Chapter:3:DBJudgmentBolt,DBPumpAll,DBPumpAll
+SVar:DBJudgmentBolt:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | SpellDescription$ Judgment Bolt — This creature deals damage equal to the number of noncreature, nonland cards in your graveyard to target creature an opponent controls.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Wizard.YouCtrl | NumAtt$ +1 | SpellDescription$ Wizards you control get +1/+0 until end of turn.
+SVar:X:Count$ValidGraveyard Card.nonCreature+nonLand+YouOwn
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Judgment Bolt — This creature deals damage equal to the number of noncreature, nonland cards in your graveyard to target creature an opponent controls.\nII, III — Wizards you control get +1/+0 until end of turn.

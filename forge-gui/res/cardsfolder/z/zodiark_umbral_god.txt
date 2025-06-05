@@ -1,0 +1,14 @@
+Name:Zodiark, Umbral God
+ManaCost:B B B B B
+Types:Legendary Creature God
+PT:5/5
+K:Indestructible
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigRepeatEach | TriggerDescription$ When NICKNAME enters, each player sacrifices half the non-God creatures they control of their choice, rounded down.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | Amount$ Y | SacValid$ Creature.nonGod | Defined$ Remembered
+SVar:Y:Count$Valid Creature.nonGod+RememberedPlayerCtrl/HalfDown
+T:Mode$ Sacrificed | ValidCard$ Creature.Other | ValidPlayer$ Player | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player sacrifices another creature, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Sacrifice|Counters
+DeckHints:Ability$Sacrifice
+Oracle:Indestructible\nWhen Zodiark enters, each player sacrifices half the non-God creatures they control of their choice, rounded down.\nWhenever a player sacrifices another creature, put a +1/+1 counter on Zodiark.

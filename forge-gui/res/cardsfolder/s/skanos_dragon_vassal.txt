@@ -73,9 +73,10 @@ ManaCost:4 G G
 Types:Legendary Creature Dragon Ranger
 PT:6/6
 K:Vigilance
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains vigilance and gets +X/+0 until end of turn, where X is NICKNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ +X | KW$ Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$Whenever CARDNAME attacks, untap another target attacking creature. It gets +X/+0 until end of turn, where X is NICKNAME's power.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +X
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
 DeckHas:Keyword$Vigilance
-Oracle:Vigilance\nWhenever Skanos, Green Dragon Vassal attacks, another target attacking creature gains vigilance and gets +X/+0 until end of turn, where X is Skanos's power.
+Oracle:Vigilance\nWhenever Skanos, Green Dragon Vassal attacks, untap another target attacking creature. It gets +X/+0 until end of turn, where X is Skanos's power.

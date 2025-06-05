@@ -1,0 +1,23 @@
+Name:Ultimecia, Time Sorceress
+ManaCost:3 U B
+Types:Legendary Creature Human Warlock
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ Whenever NICKNAME enters or attacks, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, you may pay {4}{U}{U}{B}{B} and exile eight cards from your graveyard. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ 4 U U B B ExileFromGrave<8/Card> | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:Whenever Ultimecia enters or attacks, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nAt the beginning of your end step, you may pay {4}{U}{U}{B}{B} and exile eight cards from your graveyard. If you do, transform Ultimecia.
+
+ALTERNATE
+
+Name:Ultimecia, Omnipotent
+ManaCost:no cost
+Colors:blue,black
+Types:Legendary Creature Nightmare Warlock
+PT:7/7
+K:Menace
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigAddTurn | TriggerDescription$ Time Compression — When this creature transforms into CARDNAME, take an extra turn after this one.
+SVar:TrigAddTurn:DB$ AddTurn | NumTurns$ 1
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nTime Compression — When this creature transforms into Ultimecia, Omnipotent, take an extra turn after this one.

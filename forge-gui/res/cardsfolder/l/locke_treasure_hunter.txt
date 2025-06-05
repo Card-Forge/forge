@@ -1,0 +1,14 @@
+Name:Locke, Treasure Hunter
+ManaCost:1 B R
+Types:Legendary Creature Human Rogue
+PT:2/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGTX | Description$ NICKNAME can't be blocked by creatures with greater power.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Mug — Whenever NICKNAME attacks, each player mills a card. If a land card was milled this way, create a Treasure token. Until end of turn, you may cast a spell from among those cards.
+SVar:TrigMill:DB$ Mill | Defined$ Player | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Land | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ EffSModeContinuous | SubAbility$ DBCleanup | ForgetOnMoved$ Graveyard,Exile
+SVar:EffSModeContinuous:Mode$ Continuous | MayPlay$ True | Affected$ Card.nonLand+IsRemembered | MayPlayLimit$ 1 | AffectedZone$ Graveyard,Exile | Description$ Until end of turn, you may cast a spell from among those cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$CardPower
+DeckHas:Ability$Token & Type$Artifact|Treasure
+Oracle:Locke can't be blocked by creatures with greater power.\nMug — Whenever Locke attacks, each player mills a card. If a land card was milled this way, create a Treasure token. Until end of turn, you may cast a spell from among those cards.

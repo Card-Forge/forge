@@ -1,0 +1,12 @@
+Name:Summon: G.F. Cerberus
+ManaCost:2 R R
+Types:Enchantment Creature Saga Dog
+PT:3/3
+K:Chapter:3:DBSurveil,DBDouble,DBTriple
+SVar:DBSurveil:DB$ Surveil | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:DBDouble:DB$ DelayedTrigger | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy1 | SpellDescription$ Double — When you next cast an instant or sorcery spell this turn, copy it. You may choose new targets for the copy.
+SVar:EffTrigCopy1:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+SVar:DBTriple:DB$ DelayedTrigger | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy2 | SpellDescription$ Triple — When you next cast an instant or sorcery spell this turn, copy it twice. You may choose new targets for the copies.
+SVar:EffTrigCopy2:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 2 | MayChooseTarget$ True
+SVar:BuffedBy:Instant,Sorcery
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\nII — Double — When you next cast an instant or sorcery spell this turn, copy it. You may choose new targets for the copy.\nIII — Triple — When you next cast an instant or sorcery spell this turn, copy it twice. You may choose new targets for the copies.

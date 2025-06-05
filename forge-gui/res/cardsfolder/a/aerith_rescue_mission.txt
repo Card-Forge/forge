@@ -1,0 +1,8 @@
+Name:Aerith Rescue Mission
+ManaCost:3 W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBTokens,DBTap | CharmNum$ 1
+SVar:DBTokens:DB$ Token | TokenScript$ c_1_1_hero | TokenOwner$ You | TokenAmount$ 3 | SpellDescription$ Take the Elevator — Create three 1/1 colorless Hero creature tokens.
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select up to three target creatures | SubAbility$ DBPutCounter | SpellDescription$ Take 59 Flights of Stairs — Tap up to three target creatures. Put a stun counter on one of them.
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.targetedBy | CounterType$ Stun | CounterNum$ 1
+Oracle:Choose one —\n• Take the Elevator — Create three 1/1 colorless Hero creature tokens.\n• Take 59 Flights of Stairs — Tap up to three target creatures. Put a stun counter on one of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)

@@ -1,0 +1,10 @@
+Name:The Wind Crystal
+ManaCost:2 W W
+Types:Legendary Artifact
+S:Mode$ ReduceCost | ValidCard$ Card.White | Type$ Spell | Activator$ You | Amount$ 1 | Description$ White spells you cast cost {1} less to cast.
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainDouble | AILogic$ DoubleLife | Description$ If you would gain life, you gain twice that much life instead.
+SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+A:AB$ PumpAll | Cost$ 4 W W T | ValidCards$ Creature.YouCtrl | KW$ Flying & Lifelink | SpellDescription$ Creatures you control gain flying and lifelink until end of turn.
+SVar:X:ReplaceCount$LifeGained/Twice
+DeckHints:Ability$LifeGain
+Oracle:White spells you cast cost {1} less to cast.\nIf you would gain life, you gain twice that much life instead.\n{4}{W}{W}, {T}: Creatures you control gain flying and lifelink until end of turn.

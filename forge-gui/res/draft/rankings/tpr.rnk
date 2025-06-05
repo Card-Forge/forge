@@ -1,14 +1,14 @@
 //Rank|Name|Rarity|Set
-#1|Legacys Allure|R|TPR
+#1|Legacy's Allure|R|TPR
 #2|Flame Wave|R|TPR
 #3|Living Death|M|TPR
 #4|Soltari Guerrillas|R|TPR
 #5|Rolling Thunder|U|TPR
-#6|Commander Greven il Vec|R|TPR
+#6|Commander Greven il-Vec|R|TPR
 #7|Silver Wyvern|R|TPR
 #8|Rathi Dragon|R|TPR
-#9|Volraths Stronghold|M|TPR
-#10|Vhati il Dal|R|TPR
+#9|Volrath's Stronghold|M|TPR
+#10|Vhati il-Dal|R|TPR
 #11|Ephemeron|R|TPR
 #12|Stronghold Assassin|R|TPR
 #13|Magmasaur|R|TPR
@@ -18,25 +18,25 @@
 #17|Crovax the Cursed|R|TPR
 #18|Kezzerdrix|R|TPR
 #19|Tradewind Rider|R|TPR
-#20|Selenia Dark Angel|R|TPR
+#20|Selenia, Dark Angel|R|TPR
 #21|Pacifism|U|TPR
 #22|Dracoplasm|R|TPR
 #23|Spike Hatcher|R|TPR
 #24|Flowstone Wyvern|U|TPR
 #25|Shard Phoenix|M|TPR
-#26|Evincars Justice|U|TPR
+#26|Evincar's Justice|U|TPR
 #27|Dark Banishing|C|TPR
 #28|Master Decoy|C|TPR
 #29|Exalted Dragon|R|TPR
 #30|Killer Whale|U|TPR
-#31|Mirri Cat Warrior|R|TPR
-#32|Orim Samite Healer|R|TPR
+#31|Mirri, Cat Warrior|R|TPR
+#32|Orim, Samite Healer|R|TPR
 #33|Soltari Champion|U|TPR
 #34|Carnassid|U|TPR
 #35|Ogre Shaman|R|TPR
 #36|Reanimate|U|TPR
 #37|Acidic Sliver|U|TPR
-#38|Paladin en Vec|R|TPR
+#38|Paladin en-Vec|R|TPR
 #39|Lightning Blast|C|TPR
 #40|Coffin Queen|R|TPR
 #41|Fanning the Flames|R|TPR
@@ -50,7 +50,7 @@
 #49|Spitting Hydra|R|TPR
 #50|Cataclysm|M|TPR
 #51|Mawcor|R|TPR
-#52|Gerrards Battle Cry|R|TPR
+#52|Gerrard's Battle Cry|R|TPR
 #53|Kindle|C|TPR
 #54|Recurring Nightmare|M|TPR
 #55|Rootwalla|C|TPR
@@ -64,7 +64,7 @@
 #63|Soltari Trooper|C|TPR
 #64|Skyshroud Vampire|U|TPR
 #65|Dauthi Warlord|U|TPR
-#66|Warrior en Kor|U|TPR
+#66|Warrior en-Kor|U|TPR
 #67|Spike Colony|C|TPR
 #68|Counterspell|U|TPR
 #69|Dismiss|U|TPR
@@ -102,7 +102,7 @@
 #101|Serpent Warrior|C|TPR
 #102|Youthful Knight|C|TPR
 #103|Renegade Warlord|U|TPR
-#104|Spirit en Kor|C|TPR
+#104|Spirit en-Kor|C|TPR
 #105|Spirit Mirror|R|TPR
 #106|Sift|C|TPR
 #107|Legerdemain|U|TPR
@@ -151,7 +151,7 @@
 #150|Skyshroud Elf|C|TPR
 #151|Rampant Growth|C|TPR
 #152|Smite|C|TPR
-#153|Shaman en Kor|R|TPR
+#153|Shaman en-Kor|R|TPR
 #154|Cursed Flesh|C|TPR
 #155|Spike Feeder|U|TPR
 #156|Reality Anchor|C|TPR
@@ -161,7 +161,7 @@
 #160|Sea Monster|C|TPR
 #161|Elven Rite|C|TPR
 #162|Wall of Diffusion|C|TPR
-#163|Deaths Duet|C|TPR
+#163|Death's Duet|C|TPR
 #164|Starke of Rath|M|TPR
 #165|Mnemonic Sliver|C|TPR
 #166|Barbed Sliver|C|TPR
@@ -192,7 +192,7 @@
 #191|Mindless Automaton|R|TPR
 #192|Intuition|R|TPR
 #193|Hermit Druid|U|TPR
-#194|Mage il Vec|U|TPR
+#194|Mage il-Vec|U|TPR
 #195|Stun|C|TPR
 #196|Harrow|C|TPR
 #197|Wall of Souls|U|TPR
@@ -207,8 +207,8 @@
 #206|Gaseous Form|C|TPR
 #207|Spellshock|U|TPR
 #208|Cannibalize|U|TPR
-#209|Volraths Curse|U|TPR
-#210|Nomads en Kor|C|TPR
+#209|Volrath's Curse|U|TPR
+#210|Nomads en-Kor|C|TPR
 #211|Survival of the Fittest|M|TPR
 #212|Patchwork Gnomes|C|TPR
 #213|Emmessi Tome|U|TPR
@@ -219,7 +219,7 @@
 #218|Craven Giant|C|TPR
 #219|Dream Prowler|U|TPR
 #220|Thrull Surgeon|C|TPR
-#221|Volraths Laboratory|R|TPR
+#221|Volrath's Laboratory|R|TPR
 #222|Lab Rats|C|TPR
 #223|Spell Blast|C|TPR
 #224|Conviction|C|TPR

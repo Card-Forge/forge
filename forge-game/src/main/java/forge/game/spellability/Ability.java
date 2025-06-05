@@ -22,6 +22,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardState;
 import forge.game.cost.Cost;
 
 /**
@@ -36,6 +37,9 @@ public abstract class Ability extends SpellAbility {
 
     protected Ability(final Card sourceCard, final ManaCost manaCost) {
         this(sourceCard, new Cost(manaCost, true), null);
+    }
+    protected Ability(final Card sourceCard, final ManaCost manaCost, final CardState state) {
+        super(sourceCard, new Cost(manaCost, true), null, state);
     }
     protected Ability(final Card sourceCard, final ManaCost manaCost, SpellAbilityView view0) {
         this(sourceCard, new Cost(manaCost, true), view0);

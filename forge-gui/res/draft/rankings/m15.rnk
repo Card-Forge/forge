@@ -3,11 +3,11 @@
 #2|Soul of New Phyrexia|M|M15
 #3|Soul of Shandalar|M|M15
 #4|Soul of Theros|M|M15
-#5|Chandra Pyromaster|M|M15
-#6|Garruk Apex Predator|M|M15
-#7|Nissa Worldwaker|M|M15
+#5|Chandra, Pyromaster|M|M15
+#6|Garruk, Apex Predator|M|M15
+#7|Nissa, Worldwaker|M|M15
 #8|Soul of Zendikar|M|M15
-#9|Jace the Living Guildpact|M|M15
+#9|Jace, the Living Guildpact|M|M15
 #10|Soul of Innistrad|M|M15
 #11|Soul of Ravnica|M|M15
 #12|Liliana Vess|M|M15
@@ -15,11 +15,11 @@
 #14|Sliver Hivelord|M|M15
 #15|Scuttling Doom Engine|R|M15
 #16|Indulgent Tormentor|R|M15
-#17|Avacyn Guardian Angel|R|M15
+#17|Avacyn, Guardian Angel|R|M15
 #18|Spectra Ward|R|M15
 #19|Hornet Queen|R|M15
 #20|Master of Predicaments|R|M15
-#21|Ob Nixilis Unshackled|R|M15
+#21|Ob Nixilis, Unshackled|R|M15
 #22|Siege Dragon|R|M15
 #23|Hoarding Dragon|R|M15
 #24|Resolute Archangel|R|M15
@@ -27,13 +27,13 @@
 #26|Kalonian Twingrove|R|M15
 #27|Genesis Hydra|R|M15
 #28|Chasm Skulker|R|M15
-#29|Polymorphists Jest|R|M15
+#29|Polymorphist's Jest|R|M15
 #30|Goblin Rabblemaster|R|M15
 #31|Spirit Bonds|R|M15
 #32|Burning Anger|R|M15
 #33|Aetherspouts|R|M15
 #34|Hornet Nest|R|M15
-#35|Yisan the Wanderer Bard|R|M15
+#35|Yisan, the Wanderer Bard|R|M15
 #36|Chord of Calling|R|M15
 #37|Phytotitan|R|M15
 #38|Preeminent Captain|R|M15
@@ -47,11 +47,11 @@
 #46|Illusory Angel|U|M15
 #47|Stormtide Leviathan|R|M15
 #48|Heat Ray|U|M15
-#49|Urborg Tomb of Yawgmoth|R|M15
-#50|Kurkesh Onakke Ancient|R|M15
+#49|Urborg, Tomb of Yawgmoth|R|M15
+#50|Kurkesh, Onakke Ancient|R|M15
 #51|Necrogen Scudder|U|M15
 #52|Waste Not|R|M15
-#53|Jalira Master Polymorphist|R|M15
+#53|Jalira, Master Polymorphist|R|M15
 #54|Return to the Ranks|R|M15
 #55|Mass Calcify|R|M15
 #56|Ancient Silverback|U|M15
@@ -61,7 +61,7 @@
 #60|Obelisk of Urd|R|M15
 #61|Quickling|U|M15
 #62|Ulcerate|U|M15
-#63|In Garruks Wake|R|M15
+#63|In Garruk's Wake|R|M15
 #64|Mercurial Pretender|R|M15
 #65|Paragon of Open Graves|U|M15
 #66|Paragon of Fierce Defiance|U|M15
@@ -72,12 +72,12 @@
 #71|Sliver Hive|R|M15
 #72|Xathrid Slyblade|U|M15
 #73|Nightfire Giant|U|M15
-#74|Ajanis Pridemate|U|M15
+#74|Ajani's Pridemate|U|M15
 #75|Shield of the Avatar|R|M15
 #76|Turn to Frog|U|M15
 #77|Paragon of Eternal Wilds|U|M15
-#78|Jaces Ingenuity|U|M15
-#79|Lifes Legacy|R|M15
+#78|Jace's Ingenuity|U|M15
+#79|Life's Legacy|R|M15
 #80|Juggernaut|U|M15
 #81|Grindclock|R|M15
 #82|Brood Keeper|U|M15
@@ -87,7 +87,7 @@
 #86|Yavimaya Coast|R|M15
 #87|Shivan Reef|R|M15
 #88|Phyrexian Revoker|R|M15
-#89|Necromancers Stockpile|R|M15
+#89|Necromancer's Stockpile|R|M15
 #90|Feral Incarnation|U|M15
 #91|Reclamation Sage|U|M15
 #92|Roaring Primadox|U|M15
@@ -125,16 +125,16 @@
 #124|Oreskos Swiftclaw|C|M15
 #125|Warden of the Beyond|U|M15
 #126|Dissipate|U|M15
-#127|Rogues Gloves|U|M15
+#127|Rogue's Gloves|U|M15
 #128|Child of Night|C|M15
-#129|Nissas Expedition|U|M15
-#130|Krenkos Enforcer|C|M15
+#129|Nissa's Expedition|U|M15
+#130|Krenko's Enforcer|C|M15
 #131|Belligerent Sliver|U|M15
 #132|Sungrace Pegasus|C|M15
 #133|Accursed Spirit|C|M15
 #134|Carrion Crow|C|M15
 #135|Caustic Tar|U|M15
-#136|Brawlers Plate|U|M15
+#136|Brawler's Plate|U|M15
 #137|The Chain Veil|M|M15
 #138|Shaman of Spring|C|M15
 #139|Typhoid Rats|C|M15
@@ -156,14 +156,14 @@
 #155|Divination|C|M15
 #156|Darksteel Citadel|U|M15
 #157|Invasive Species|C|M15
-#158|Heliods Pilgrim|C|M15
+#158|Heliod's Pilgrim|C|M15
 #159|Void Snare|C|M15
 #160|Sign in Blood|C|M15
 #161|Nimbus of the Isles|C|M15
 #162|Charging Rhino|C|M15
 #163|Wall of Limbs|U|M15
 #164|Aeronaut Tinkerer|C|M15
-#165|Will Forged Golem|C|M15
+#165|Will-Forged Golem|C|M15
 #166|Titanic Growth|C|M15
 #167|Scrapyard Mongrel|C|M15
 #168|Midnight Guard|C|M15
@@ -178,7 +178,7 @@
 #177|Shadowcloak Vampire|C|M15
 #178|Oppressive Rays|C|M15
 #179|Marked by Honor|C|M15
-#180|Tyrants Machine|C|M15
+#180|Tyrant's Machine|C|M15
 #181|Hot Soup|U|M15
 #182|Torch Fiend|C|M15
 #183|Thundering Giant|C|M15
@@ -188,7 +188,7 @@
 #187|Blastfire Bolt|C|M15
 #188|Undergrowth Scavenger|C|M15
 #189|Rummaging Goblin|C|M15
-#190|Crowds Favor|C|M15
+#190|Crowd's Favor|C|M15
 #191|Rotfeaster Maggot|C|M15
 #192|Leeching Sliver|U|M15
 #193|Foundry Street Denizen|C|M15
@@ -197,24 +197,24 @@
 #196|Ephemeral Shields|C|M15
 #197|Satyr Wayfinder|C|M15
 #198|Research Assistant|C|M15
-#199|Necromancers Assistant|C|M15
+#199|Necromancer's Assistant|C|M15
 #200|Sanctified Charge|C|M15
 #201|Mind Rot|C|M15
-#202|Witchs Familiar|C|M15
+#202|Witch's Familiar|C|M15
 #203|Lava Axe|C|M15
 #204|Eternal Thirst|C|M15
 #205|Crippling Blight|C|M15
 #206|Zof Shade|C|M15
 #207|Hammerhand|C|M15
-#208|Carnivorous Moss Beast|C|M15
+#208|Carnivorous Moss-Beast|C|M15
 #209|Soulmender|C|M15
 #210|Divine Favor|C|M15
 #211|Plummet|C|M15
-#212|Rangers Guile|C|M15
+#212|Ranger's Guile|C|M15
 #213|Negate|C|M15
 #214|Unmake the Graves|C|M15
 #215|Festergloom|C|M15
-#216|Miners Bane|C|M15
+#216|Miner's Bane|C|M15
 #217|Mind Sculpt|C|M15
 #218|Glacial Crasher|C|M15
 #219|Radiant Fountain|C|M15
@@ -226,7 +226,7 @@
 #225|Statute of Denial|C|M15
 #226|Solemn Offering|C|M15
 #227|Naturalize|C|M15
-#228|Hunters Ambush|C|M15
+#228|Hunter's Ambush|C|M15
 #229|Vineweft|C|M15
 #230|Invisibility|C|M15
 #231|Diffusion Sliver|U|M15
@@ -241,7 +241,7 @@
 #240|Stain the Mind|R|M15
 #241|Back to Nature|U|M15
 #242|Aggressive Mining|R|M15
-#243|Tormods Crypt|U|M15
+#243|Tormod's Crypt|U|M15
 #244|Crucible of Fire|R|M15
 #245|Staff of the Mind Magus|U|M15
 #246|Staff of the Sun Magus|U|M15

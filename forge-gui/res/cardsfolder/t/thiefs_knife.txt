@@ -1,0 +1,10 @@
+Name:Thief's Knife
+ManaCost:2 U
+Types:Artifact Equipment
+K:Job select
+K:Equip:4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddType$ Rogue | AddTrigger$ TrigDmg | Description$ Equipped creature gets +1/+1, has "Whenever this creature deals combat damage to a player, draw a card," and is a Rogue in addition to its other types.
+SVar:TrigDmg:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$Token & Type$Rogue
+Oracle:Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)\nEquipped creature gets +1/+1, has "Whenever this creature deals combat damage to a player, draw a card," and is a Rogue in addition to its other types.\nEquip {4}

@@ -1,0 +1,7 @@
+Name:Swallowed by Leviathan
+ManaCost:2 U
+Types:Instant
+A:SP$ Surveil | Amount$ 2 | SubAbility$ DBCounter | StackDescription$ {p:You} chooses {s:Targeted}. {p:You} surveils 2, | SpellDescription$ Choose target spell. Surveil 2,
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtZone$ Stack | ValidTgts$ Card | UnlessCost$ X | StackDescription$ REP the chosen spell_{s:Targeted} & its controller_{p:TargetedController} & your_{p:You}'s | SpellDescription$ then counter the chosen spell unless its controller pays {1} for each card in your graveyard.
+SVar:X:Count$ValidGraveyard Card.YouOwn
+Oracle:Choose target spell. Surveil 2, then counter the chosen spell unless its controller pays {1} for each card in your graveyard. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
