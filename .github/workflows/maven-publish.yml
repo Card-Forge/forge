@@ -81,7 +81,7 @@ jobs:
           export _JAVA_OPTIONS="-Xmx2g"
           d=$(date +%m.%d)
           # build only desktop and only try to move desktop files
-          mvn -U -B clean -P windows-linux install -e -T 1C release:clean release:prepare release:perform -DskipTests
+          mvn -U -B clean -P windows-linux install -DskipTests -Dskip.flatten=true -e -T 1C release:clean release:prepare release:perform
           mkdir izpack
           # move bz2 and jar from work dir to izpack dir
           mv /home/runner/work/forge/forge/forge-installer/*/*.{bz2,jar} izpack/
