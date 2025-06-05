@@ -343,7 +343,7 @@
                 <executions>
                     <execution>
                         <id>flatten</id>
-                        <phase>process-resources</phase>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>flatten</goal>
                         </goals>
