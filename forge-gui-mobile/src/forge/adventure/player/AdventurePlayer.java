@@ -24,8 +24,10 @@ import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
+import forge.util.BuildInfo;
 import forge.util.ItemPool;
 
 import java.io.Serializable;
@@ -36,6 +38,10 @@ import java.util.*;
  */
 public class AdventurePlayer implements Serializable, SaveFileContent {
     public static final int NUMBER_OF_DECKS = 10;
+    /**
+     * Increment this any time a breaking change to a save is made that will require conversion
+     */
+    public static final int ADVENTURE_SAVE_VERSION = 1;
     // Player profile data.
     private String name;
     private int heroRace;
@@ -295,6 +301,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     @Override
     public void load(SaveFileData data) {
         clear(); //Reset player data.
+        int saveVersion = data.containsKey("saveFileVersion") ? data.readInt("saveFileVersion") : 0;
+        if(ForgePreferences.DEV_MODE)
+            System.out.printf("Loading file - Forge version '%s'%n", data.containsKey("saveFileForgeVersion") ? data.readString("saveFileForgeVersion") : "Unknown");
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife = data.readInt("startingLife");
         this.difficultyData.staringMoney = data.readInt("staringMoney");
@@ -529,6 +538,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     @Override
     public SaveFileData save() {
         SaveFileData data = new SaveFileData();
+
+        data.store("saveFileVersion", ADVENTURE_SAVE_VERSION);
+        data.store("saveFileForgeVersion", BuildInfo.getVersionString());
 
         data.store("statistic", this.statistic.save());
         data.store("startingLife", this.difficultyData.startingLife);
