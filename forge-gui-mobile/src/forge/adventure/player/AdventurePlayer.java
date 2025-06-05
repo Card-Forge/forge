@@ -523,10 +523,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         usingCustomDeck = data.containsKey("usingCustomDeck") && data.readBool("usingCustomDeck");
         announceCustom = data.containsKey("announceCustom") && data.readBool("announceCustom");
 
-        for(int i = 0; i < decks.size(); i++) {
-            ItemPool<PaperCard> missingDeckCards = decks.get(i).getAllCardsInASinglePool(true, true).skimOverflow(cards);
-            if(!missingDeckCards.isEmpty()) {
-                System.err.printf("%d cards in deck '%s' are not available in the card pool. Granting...%n", missingDeckCards.countAll(), decks.get(i).getName());
+        for (Deck entries : decks) {
+            ItemPool<PaperCard> missingDeckCards = entries.getAllCardsInASinglePool(true, true).skimOverflow(cards);
+            if (!missingDeckCards.isEmpty()) {
+                System.err.printf("%d cards in deck '%s' are not available in the card pool. Granting...%n", missingDeckCards.countAll(), entries.getName());
                 cards.addAll(missingDeckCards);
                 //TODO: In the future, we should just remove these cards from the decks.
             }
