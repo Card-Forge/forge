@@ -1,24 +1,24 @@
 //Rank|Name|Rarity|Set
-#1|Ajani Caller of the Pride|M|M13
-#2|Garruk Primal Hunter|M|M13
-#3|Jace Memory Adept|M|M13
+#1|Ajani, Caller of the Pride|M|M13
+#2|Garruk, Primal Hunter|M|M13
+#3|Jace, Memory Adept|M|M13
 #4|Thundermaw Hellkite|M|M13
 #5|Sublime Archangel|M|M13
 #6|Liliana of the Dark Realms|M|M13
 #7|Primordial Hydra|M|M13
-#8|Chandra the Firebrand|M|M13
-#9|Akromas Memorial|M|M13
+#8|Chandra, the Firebrand|M|M13
+#9|Akroma's Memorial|M|M13
 #10|Elderscale Wurm|M|M13
-#11|Nicol Bolas Planeswalker|M|M13
+#11|Nicol Bolas, Planeswalker|M|M13
 #12|Vampire Nocturnus|M|M13
 #13|Serra Avatar|M|M13
-#14|Nefarox Overlord of Grixis|R|M13
+#14|Nefarox, Overlord of Grixis|R|M13
 #15|Thragtusk|R|M13
-#16|Odric Master Tactician|R|M13
+#16|Odric, Master Tactician|R|M13
 #17|Captain of the Watch|R|M13
-#18|Talrand Sky Summoner|R|M13
-#19|Krenko Mob Boss|R|M13
-#20|Yeva Natures Herald|R|M13
+#18|Talrand, Sky Summoner|R|M13
+#19|Krenko, Mob Boss|R|M13
+#20|Yeva, Nature's Herald|R|M13
 #21|Staff of Nin|R|M13
 #22|Xathrid Gorgon|R|M13
 #23|Silklash Spider|R|M13
@@ -35,7 +35,7 @@
 #34|Disciple of Bolas|R|M13
 #35|Magmaquake|R|M13
 #36|Flames of the Firebrand|U|M13
-#37|Talrands Invocation|U|M13
+#37|Talrand's Invocation|U|M13
 #38|Intrepid Hero|R|M13
 #39|Shimian Specter|R|M13
 #40|Sands of Delirium|R|M13
@@ -45,7 +45,7 @@
 #44|Knight of Glory|U|M13
 #45|Cathedral of War|R|M13
 #46|Volcanic Geyser|U|M13
-#47|Garruks Packleader|U|M13
+#47|Garruk's Packleader|U|M13
 #48|Public Execution|U|M13
 #49|Acidic Slime|U|M13
 #50|Murder|C|M13
@@ -80,7 +80,7 @@
 #79|Sentinel Spider|C|M13
 #80|Attended Knight|C|M13
 #81|Mwonvuli Beast Tracker|U|M13
-#82|Jaces Phantasm|U|M13
+#82|Jace's Phantasm|U|M13
 #83|Prized Elephant|U|M13
 #84|Chronomaton|U|M13
 #85|Bloodhunter Bat|C|M13
@@ -99,7 +99,7 @@
 #98|Hellion Crucible|R|M13
 #99|Evolving Wilds|C|M13
 #100|Mindclaw Shaman|U|M13
-#101|Duty Bound Dead|C|M13
+#101|Duty-Bound Dead|C|M13
 #102|Servant of Nefarox|C|M13
 #103|Arbor Elf|C|M13
 #104|Giant Scorpion|C|M13
@@ -113,25 +113,25 @@
 #112|Timberpack Wolf|C|M13
 #113|Primal Huntbeast|C|M13
 #114|Turn to Slag|C|M13
-#115|Faiths Reward|R|M13
+#115|Faith's Reward|R|M13
 #116|Primal Clay|U|M13
 #117|Welkin Tern|C|M13
 #118|Mark of Mutiny|U|M13
 #119|Mogg Flunkies|C|M13
 #120|Faerie Invaders|C|M13
 #121|Omniscience|M|M13
-#122|Captains Call|C|M13
+#122|Captain's Call|C|M13
 #123|Wind Drake|C|M13
 #124|Guardians of Akrasa|C|M13
-#125|Ajanis Sunstriker|C|M13
+#125|Ajani's Sunstriker|C|M13
 #126|Archaeomancer|C|M13
 #127|Phylactery Lich|R|M13
 #128|Ring of Thune|U|M13
-#129|Krenkos Command|C|M13
+#129|Krenko's Command|C|M13
 #130|Essence Scatter|C|M13
 #131|Unsummon|C|M13
 #132|Farseek|C|M13
-#133|Yevas Forcemage|C|M13
+#133|Yeva's Forcemage|C|M13
 #134|Spelltwine|R|M13
 #135|Kitesail|U|M13
 #136|Goblin Arsonist|C|M13
@@ -140,7 +140,7 @@
 #139|Ravenous Rats|C|M13
 #140|Diabolic Revelation|R|M13
 #141|Divination|C|M13
-#142|Lilianas Shade|C|M13
+#142|Liliana's Shade|C|M13
 #143|Encrust|C|M13
 #144|Titanic Growth|C|M13
 #145|Scroll Thief|C|M13
@@ -150,7 +150,7 @@
 #149|War Falcon|C|M13
 #150|Rewind|U|M13
 #151|Crippling Blight|C|M13
-#152|Chandras Fury|C|M13
+#152|Chandra's Fury|C|M13
 #153|Torch Fiend|U|M13
 #154|Ring of Evos Isle|U|M13
 #155|Battleflight Eagle|C|M13
@@ -190,7 +190,7 @@
 #189|Downpour|C|M13
 #190|Vile Rebirth|C|M13
 #191|Divine Favor|C|M13
-#192|Rangers Path|C|M13
+#192|Ranger's Path|C|M13
 #193|Courtly Provocateur|U|M13
 #194|Trumpet Blast|C|M13
 #195|Glorious Charge|C|M13
@@ -205,7 +205,7 @@
 #204|Disentomb|C|M13
 #205|Wall of Fire|C|M13
 #206|Wild Guess|C|M13
-#207|Serpents Gift|C|M13
+#207|Serpent's Gift|C|M13
 #208|Rain of Blades|U|M13
 #209|Revive|U|M13
 #210|Cleaver Riot|U|M13
@@ -216,15 +216,15 @@
 #215|Hydrosurge|C|M13
 #216|Smelt|C|M13
 #217|Craterize|C|M13
-#218|Angels Mercy|C|M13
+#218|Angel's Mercy|C|M13
 #219|Gem of Becoming|U|M13
 #220|Bountiful Harvest|C|M13
 #221|Ground Seal|R|M13
 #222|Boundless Realms|R|M13
 #223|Touch of the Eternal|R|M13
 #224|Reliquary Tower|U|M13
-#225|Wits End|R|M13
-#226|Tormods Crypt|U|M13
+#225|Wit's End|R|M13
+#226|Tormod's Crypt|U|M13
 #227|Door to Nothingness|R|M13
 #228|Battle of Wits|R|M13
 #229|Clock of Omens|U|M13

@@ -12,8 +12,8 @@
 #11|Kodama of the North Tree|R|CHK
 #12|Kodama of the South Tree|R|CHK
 #13|Kiku, Night's Flower|R|CHK
-#14|Eight and a Half Tails|R|CHK
-#15|Kiki Jiki, Mirror Breaker|R|CHK
+#14|Eight-and-a-Half-Tails|R|CHK
+#15|Kiki-Jiki, Mirror Breaker|R|CHK
 #16|Hideous Laughter|U|CHK
 #17|Honden of Infinite Rage|U|CHK
 #18|Seshiro the Anointed|R|CHK
@@ -25,7 +25,7 @@
 #24|Yamabushi's Flame|C|CHK
 #25|Sosuke, Son of Seshiro|U|CHK
 #26|Hanabi Blast|U|CHK
-#27|Long Forgotten Gohei|R|CHK
+#27|Long-Forgotten Gohei|R|CHK
 #28|Nezumi Shortfang|R|CHK
 #29|Strength of Cedars|U|CHK
 #30|Thief of Hope|U|CHK
@@ -50,9 +50,9 @@
 #49|Isamaru, Hound of Konda|R|CHK
 #50|Myojin of Cleansing Fire|R|CHK
 #51|Honden of Cleansing Fire|U|CHK
-#52|No Dachi|U|CHK
+#52|No-Dachi|U|CHK
 #53|Jushi Apprentice|R|CHK
-#54|Kashi Tribe Reaver|U|CHK
+#54|Kashi-Tribe Reaver|U|CHK
 #55|He Who Hungers|R|CHK
 #56|Ghostly Prison|U|CHK
 #57|Samurai of the Pale Curtain|U|CHK
@@ -62,12 +62,12 @@
 #61|Frostwielder|C|CHK
 #62|Blood Rites|U|CHK
 #63|Ronin Houndmaster|C|CHK
-#64|Sensei Golden Tail|R|CHK
+#64|Sensei Golden-Tail|R|CHK
 #65|Painwracker Oni|U|CHK
 #66|Takeno, Samurai General|R|CHK
 #67|Mothrider Samurai|C|CHK
 #68|Innocence Kami|U|CHK
-#69|Sakura Tribe Elder|C|CHK
+#69|Sakura-Tribe Elder|C|CHK
 #70|Kodama's Might|C|CHK
 #71|Kodama's Reach|C|CHK
 #72|Scuttling Death|C|CHK
@@ -77,14 +77,14 @@
 #76|Konda, Lord of Eiganjo|R|CHK
 #77|Honden of Life's Web|U|CHK
 #78|Orochi Hatchery|R|CHK
-#79|Marrow Gnawer|R|CHK
+#79|Marrow-Gnawer|R|CHK
 #80|Mystic Restraints|C|CHK
 #81|Soratami Rainshaper|C|CHK
-#82|Soratami Mirror Mage|U|CHK
+#82|Soratami Mirror-Mage|U|CHK
 #83|Honden of Night's Reach|U|CHK
 #84|Devouring Greed|C|CHK
 #85|Order of the Sacred Bell|C|CHK
-#86|Kusari Gama|R|CHK
+#86|Kusari-Gama|R|CHK
 #87|Wicked Akuba|C|CHK
 #88|Kami of Fire's Roar|C|CHK
 #89|Soilshaper|U|CHK
@@ -121,19 +121,19 @@
 #120|River Kaijin|C|CHK
 #121|Samurai Enforcers|U|CHK
 #122|Tenza, Godo's Maul|U|CHK
-#123|Zo Zu the Punisher|R|CHK
+#123|Zo-Zu the Punisher|R|CHK
 #124|Kitsune Diviner|C|CHK
 #125|Orochi Eggwatcher|U|CHK
 #126|Soratami Cloudskater|C|CHK
-#127|Floating Dream Zubera|C|CHK
+#127|Floating-Dream Zubera|C|CHK
 #128|Sachi, Daughter of Seshiro|U|CHK
 #129|Iname, Life Aspect|R|CHK
 #130|Initiate of Blood|U|CHK
-#131|Hundred Talon Kami|C|CHK
-#132|Ashen Skin Zubera|C|CHK
+#131|Hundred-Talon Kami|C|CHK
+#132|Ashen-Skin Zubera|C|CHK
 #133|Kami of the Palace Fields|U|CHK
 #134|Journeyer's Kite|R|CHK
-#135|Matsu Tribe Decoy|C|CHK
+#135|Matsu-Tribe Decoy|C|CHK
 #136|Dampen Thought|U|CHK
 #137|Serpent Skin|C|CHK
 #138|Lantern Kami|C|CHK
@@ -147,7 +147,7 @@
 #146|Soulless Revival|C|CHK
 #147|Night of Souls' Betrayal|R|CHK
 #148|Waking Nightmare|C|CHK
-#149|Dripping Tongue Zubera|C|CHK
+#149|Dripping-Tongue Zubera|C|CHK
 #150|Counsel of the Soratami|C|CHK
 #151|Callous Deceiver|C|CHK
 #152|Guardian of Solitude|U|CHK
@@ -157,7 +157,7 @@
 #156|Reach Through Mists|C|CHK
 #157|Kami of the Painted Road|C|CHK
 #158|Hinder|U|CHK
-#159|Nine Ringed Bo|U|CHK
+#159|Nine-Ringed Bo|U|CHK
 #160|Gifts Ungiven|R|CHK
 #161|Jade Idol|U|CHK
 #162|Uncontrollable Anger|C|CHK
@@ -181,7 +181,7 @@
 #180|Soulblast|R|CHK
 #181|Sokenzan Bruiser|C|CHK
 #182|Call to Glory|C|CHK
-#183|Ben Ben, Akki Hermit|R|CHK
+#183|Ben-Ben, Akki Hermit|R|CHK
 #184|Okina, Temple to the Grandfathers|R|CHK
 #185|Distress|C|CHK
 #186|Myojin of Night's Reach|R|CHK
@@ -190,13 +190,13 @@
 #189|Cranial Extraction|R|CHK
 #190|Orochi Leafcaller|C|CHK
 #191|Ethereal Haze|C|CHK
-#192|Silent Chant Zubera|C|CHK
+#192|Silent-Chant Zubera|C|CHK
 #193|Myojin of Life's Web|R|CHK
 #194|Lava Spike|C|CHK
 #195|Shinka, the Bloodsoaked Keep|R|CHK
 #196|Gale Force|U|CHK
 #197|Commune with Nature|C|CHK
-#198|Lantern Lit Graveyard|U|CHK
+#198|Lantern-Lit Graveyard|U|CHK
 #199|Dosan the Falling Leaf|R|CHK
 #200|Lure|U|CHK
 #201|Wear Away|C|CHK
@@ -213,16 +213,16 @@
 #212|Azusa, Lost but Seeking|R|CHK
 #213|Akki Avalanchers|C|CHK
 #214|Konda's Banner|R|CHK
-#215|Kashi Tribe Warriors|C|CHK
+#215|Kashi-Tribe Warriors|C|CHK
 #216|Thoughtbind|C|CHK
 #217|Reverse the Sands|R|CHK
 #218|Myojin of Infinite Rage|R|CHK
 #219|Vine Kami|C|CHK
 #220|Student of Elements|U|CHK
-#221|Thousand legged Kami|U|CHK
+#221|Thousand-legged Kami|U|CHK
 #222|Kitsune Mystic|R|CHK
 #223|Unearthly Blizzard|C|CHK
-#224|Nezumi Bone Reader|U|CHK
+#224|Nezumi Bone-Reader|U|CHK
 #225|Myojin of Seeing Winds|R|CHK
 #226|Tranquil Garden|U|CHK
 #227|Oni Possession|U|CHK
@@ -245,7 +245,7 @@
 #244|Midnight Covenant|C|CHK
 #245|Hisoka's Guard|C|CHK
 #246|Shisato, Whispering Hunter|R|CHK
-#247|Honor Worn Shaku|U|CHK
+#247|Honor-Worn Shaku|U|CHK
 #248|Lifted by Clouds|C|CHK
 #249|Wandering Ones|C|CHK
 #250|Glimpse of Nature|R|CHK
@@ -271,7 +271,7 @@
 #270|Part the Veil|R|CHK
 #271|Numai Outcast|U|CHK
 #272|Hall of the Bandit Lord|R|CHK
-#273|Hair Strung Koto|R|CHK
+#273|Hair-Strung Koto|R|CHK
 #274|Horizon Seed|U|CHK
 #275|Ore Gorger|U|CHK
 #276|Nature's Will|R|CHK

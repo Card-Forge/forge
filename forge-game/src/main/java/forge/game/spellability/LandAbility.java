@@ -21,6 +21,7 @@ import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
+import forge.game.card.CardState;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
@@ -31,8 +32,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class LandAbility extends AbilityStatic {
 
-    public LandAbility(Card sourceCard) {
-        super(sourceCard, ManaCost.NO_COST);
+    public LandAbility(Card sourceCard, CardState state) {
+        super(sourceCard, ManaCost.NO_COST, state);
 
         getRestrictions().setZone(ZoneType.Hand);
     }

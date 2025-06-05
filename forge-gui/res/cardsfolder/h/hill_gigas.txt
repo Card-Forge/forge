@@ -1,0 +1,8 @@
+Name:Hill Gigas
+ManaCost:4 R R
+Types:Creature Giant
+PT:5/4
+K:Trample
+K:Haste
+K:TypeCycling:Mountain:2
+Oracle:Trample, haste\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)

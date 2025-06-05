@@ -52,6 +52,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class CardState extends GameObject implements IHasSVars, ITranslatable {
     private String name = "";
@@ -366,14 +367,16 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public final FCollectionView<SpellAbility> getManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, true);
-        newCol.addAll(abilities.stream().filter(SpellAbility::isManaAbility).toList());
+        // stream().toList() causes crash on Android, use Collectors.toList()
+        newCol.addAll(abilities.stream().filter(SpellAbility::isManaAbility).collect(Collectors.toList()));
         card.updateSpellAbilities(newCol, this, true);
         return newCol;
     }
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
         updateSpellAbilities(newCol, false);
-        newCol.addAll(abilities.stream().filter(Predicate.not(SpellAbility::isManaAbility)).toList());
+        // stream().toList() causes crash on Android, use Collectors.toList()
+        newCol.addAll(abilities.stream().filter(Predicate.not(SpellAbility::isManaAbility)).collect(Collectors.toList()));
         card.updateSpellAbilities(newCol, this, false);
         return newCol;
     }
@@ -385,7 +388,10 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 CardState leftState = getCard().getState(CardStateName.LeftSplit);
                 Collection<SpellAbility> leftAbilities = leftState.abilities;
                 if (null != mana) {
-                    leftAbilities = leftAbilities.stream().filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility)).toList();
+                    leftAbilities = leftAbilities.stream()
+                            .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
+                            // stream().toList() causes crash on Android, use Collectors.toList()
+                            .collect(Collectors.toList());
                 }
                 newCol.addAll(leftAbilities);
                 leftState.updateSpellAbilities(newCol, mana);
@@ -394,7 +400,10 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
                 CardState rightState = getCard().getState(CardStateName.RightSplit);
                 Collection<SpellAbility> rightAbilities = rightState.abilities;
                 if (null != mana) {
-                    rightAbilities = rightAbilities.stream().filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility)).toList();
+                    rightAbilities = rightAbilities.stream()
+                            .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
+                            // stream().toList() causes crash on Android, use Collectors.toList()
+                            .collect(Collectors.toList());
                 }
                 newCol.addAll(rightAbilities);
                 rightState.updateSpellAbilities(newCol, mana);
@@ -428,8 +437,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         CardTypeView type = getTypeWithChanges();
         if (type.isLand()) {
             if (landAbility == null) {
-                landAbility = new LandAbility(card);
-                landAbility.setCardState(this);
+                landAbility = new LandAbility(card, this);
             }
             newCol.add(landAbility);
         } else if (type.isAura()) {

@@ -389,7 +389,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
     @Override
     public void onActivate() {
         decksUsingMyCards = new ItemPool<>(InventoryItem.class);
-        for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++) {
+        for (int i = 0; i < AdventurePlayer.current().getDeckCount(); i++) {
             final Deck deck = AdventurePlayer.current().getDeck(i);
             CardPool main = deck.getMain();
             for (final Map.Entry<PaperCard, Integer> e : main) {
@@ -649,6 +649,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             Map<String, CardEdition> editionsByName = new HashMap<>();
             for (CardEdition e : FModel.getMagicDb().getEditions()) {
                 editionsByName.put(e.getName().toLowerCase(), e);
+                editionsByName.put(e.getName().replace(":", "").toLowerCase(), e);
             }
 
             String sketchbookPrefix = "landscape sketchbook - ";

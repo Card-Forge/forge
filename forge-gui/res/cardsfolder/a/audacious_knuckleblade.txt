@@ -10,4 +10,4 @@ SVar:DBUntap:DB$ Untap
 A:AB$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | KW$ Haste | Exhaust$ True | SpellDescription$ Creatures you control gain haste until end of turn.
 DeckHas:Ability$Graveyard
 DeckHints:Name$Audacious Knuckleblade
-Oracle:Exhaust — {2}{G}: Seek a card named Audacious Knuckleblade and put it onto the battlefield tapped.\nExhaust — {1}{U}: Surveil 2, then untap this creature./nExhaust — {R}: Creatures you control gain haste until end of turn.
+Oracle:Exhaust — {2}{G}: Seek a card named Audacious Knuckleblade and put it onto the battlefield tapped.\nExhaust — {1}{U}: Surveil 2, then untap this creature.\nExhaust — {R}: Creatures you control gain haste until end of turn.

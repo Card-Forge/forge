@@ -1,7 +1,7 @@
 //Rank|Name|Rarity|Set
 #1|Sword of Body and Mind|M|SOM
 #2|Wurmcoil Engine|M|SOM
-#3|Molten Tail Masticore|M|SOM
+#3|Molten-Tail Masticore|M|SOM
 #4|Skithiryx, the Blight Dragon|M|SOM
 #5|Elspeth Tirel|M|SOM
 #6|Koth of the Hammer|M|SOM
@@ -17,7 +17,7 @@
 #16|Mox Opal|M|SOM
 #17|Contagion Engine|R|SOM
 #18|Sunblast Angel|R|SOM
-#19|Hoard Smelter Dragon|R|SOM
+#19|Hoard-Smelter Dragon|R|SOM
 #20|Carnifex Demon|R|SOM
 #21|Myr Battlesphere|R|SOM
 #22|Precursor Golem|R|SOM
@@ -125,11 +125,11 @@
 #124|Kemba's Skyguard|C|SOM
 #125|Blight Mamba|C|SOM
 #126|Bladed Pinions|C|SOM
-#127|Sky Eel School|C|SOM
+#127|Sky-Eel School|C|SOM
 #128|Bloodshot Trainee|U|SOM
 #129|Strider Harness|C|SOM
 #130|Fume Spitter|C|SOM
-#131|Tel Jilad Fallen|C|SOM
+#131|Tel-Jilad Fallen|C|SOM
 #132|Untamed Might|C|SOM
 #133|Carrion Call|U|SOM
 #134|Instill Infection|C|SOM
@@ -158,7 +158,7 @@
 #157|Vedalken Certarch|C|SOM
 #158|Neurok Invisimancer|C|SOM
 #159|Nihil Spellbomb|C|SOM
-#160|Blade Tribe Berserkers|C|SOM
+#160|Blade-Tribe Berserkers|C|SOM
 #161|Necrogen Censer|C|SOM
 #162|Blackcleave Goblin|C|SOM
 #163|Vector Asp|C|SOM
@@ -172,7 +172,7 @@
 #171|Bonds of Quicksilver|C|SOM
 #172|Grindclock|R|SOM
 #173|Abuna Acolyte|U|SOM
-#174|Tel Jilad Defiance|C|SOM
+#174|Tel-Jilad Defiance|C|SOM
 #175|Flameborn Hellion|C|SOM
 #176|Ferrovore|C|SOM
 #177|Moriok Reaver|C|SOM
