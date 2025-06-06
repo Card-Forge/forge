@@ -35,49 +35,25 @@ public abstract class ImageFetcher {
         langCodeMap.put("zh-HK", "zht");
     };
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
-    private HashMap<String, String> tokenImages;
 
-    private String getScryfallDownloadURL(PaperCard c, String face, boolean useArtCrop, boolean hasSetLookup, String imagePath, ArrayList<String> downloadUrls) {
-        StaticData data = StaticData.instance();
-        CardEdition edition = data.getEditions().get(c.getEdition());
+    private String getScryfallDownloadURL(String collectorNumber, CardEdition edition, String face, boolean useArtCrop, ArrayList<String> downloadUrls) {
         if (edition == null) // edition does not exist - some error occurred with card data
             return null;
-        if (hasSetLookup) {
-            List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(c.getName());
-            for (PaperCard pc : clones) {
-                if (clones.size() > 1) {//clones only
-                    if (!c.getEdition().equalsIgnoreCase(pc.getEdition())) {
-                        CardEdition ed = data.getEditions().get(pc.getEdition());
-                        if (ed != null) {
-                            String setCode =ed.getScryfallCode();
-                            String langCode = ed.getCardsLangCode();
-                            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, face, setCode, langCode, useArtCrop));
-                        }
-                    }
-                } else {// original from set
-                    CardEdition ed = data.getEditions().get(pc.getEdition());
-                    if (ed != null) {
-                        String setCode =ed.getScryfallCode();
-                        String langCode = ed.getCardsLangCode();
-                        downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, face, setCode, langCode, useArtCrop));
-                    }
-                }
-            }
-        } else {
-            String setCode = edition.getScryfallCode();
-            String langCode = edition.getCardsLangCode();
-            String primaryUrl = ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop);
-            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + primaryUrl);
 
-            // It seems like the scryfall lookup might be better if we didn't include the language code at all?
-            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(c, face, setCode, "", useArtCrop));
+        String setCode = edition.getScryfallCode();
+        String langCode = edition.getCardsLangCode();
+        String primaryUrl = ImageUtil.getScryfallDownloadUrl(collectorNumber, setCode, langCode, face, useArtCrop);
+        downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + primaryUrl);
 
-            String alternateUrl = ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop, true);
-            if (alternateUrl != null && !alternateUrl.equals(primaryUrl)) {
-                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + alternateUrl);
-                downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(c, face, setCode, "", useArtCrop, true));
-            }
+        // It seems like the scryfall lookup might be better if we didn't include the language code at all?
+        downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(collectorNumber, setCode, "", face, useArtCrop));
+
+        String alternateUrl = ImageUtil.getScryfallDownloadUrl(collectorNumber, setCode, langCode, face, useArtCrop, true);
+        if (alternateUrl != null && !alternateUrl.equals(primaryUrl)) {
+            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + alternateUrl);
+            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(collectorNumber, setCode, "", face, useArtCrop, true));
         }
+
         return null;
     }
 
@@ -131,7 +107,45 @@ public abstract class ImageFetcher {
         File destFile = null;
         String face = "";
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
-            PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            String tmp = imageKey;
+            if (tmp.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
+                face = "back";
+                tmp = tmp.substring(0, tmp.length() - ImageKeys.BACKFACE_POSTFIX.length());
+            }
+            String[] tempdata = tmp.substring(2).split("\\|"); //We want to check the edition first.
+
+            String name = tempdata[0];
+            String setCode = tempdata.length > 1 ? tempdata[1] : CardEdition.UNKNOWN_CODE;
+            String collectorNumber = tempdata.length > 3 ? tempdata[2] : IPaperCard.NO_COLLECTOR_NUMBER;
+
+            CardEdition edition = StaticData.instance().getEditions().get(setCode);
+            if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
+
+            if (useArtCrop) {
+                CardEdition.EditionEntry ee;
+                if (!collectorNumber.isEmpty() && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+                    ee = edition.getCardFromCollectorNumber(collectorNumber);
+                    if (ee == null) { // TODO handle Specialize Collector number
+                        ee = edition.getCardFromCollectorNumber(collectorNumber.substring(0, collectorNumber.length() - 1));
+                    }
+                } else {
+                    ee = Aggregates.random(edition.getCardInSet(name));
+                }
+
+                // Skip fetching if artist info is not available for art crop
+                if (ee != null && ee.artistName().isEmpty()) {
+                    return;
+                }
+            }
+
+            //TODO i don't want from imageKey to PaperCard, just to check for isCustom
+            PaperCard paperCard = StaticData.instance().fetchCard(name, setCode, collectorNumber);
+            // TODO handle Specialize Collector number
+            if (paperCard == null && !collectorNumber.isEmpty() && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+                paperCard = StaticData.instance().fetchCard(name, setCode, collectorNumber.substring(0, collectorNumber.length() - 1));
+            }
+
+            //PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(tmp);
             if (paperCard == null) {
                 System.err.println("Paper card not found for: " + imageKey);
                 return;
@@ -143,71 +157,21 @@ public abstract class ImageFetcher {
             // Skip fetching if artist info is not available for art crop
             if (useArtCrop && paperCard.getArtist().isEmpty())
                 return;
-            String imagePath = ImageUtil.getImageRelativePath(paperCard, "", true, false);
-            final boolean hasSetLookup = ImageKeys.hasSetLookup(imagePath);
-            if (imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
-                face = "back";
-            } else if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
-                face = "white";
-            } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
-                face = "blue";
-            } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
-                face = "black";
-            } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
-                face = "red";
-            } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
-                face = "green";
+
+            String imagePath = ImageUtil.getImageRelativePath(name, setCode, collectorNumber, useArtCrop);
+
+            destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, imagePath);
+            if (destFile.exists()) {
+                paperCard.hasImage(true);
             }
-            String filename = "";
-            switch (face) {
-                case "back":
-                    filename = paperCard.getCardAltImageKey();
-                    break;
-                case "white":
-                    filename = paperCard.getCardWSpecImageKey();
-                    break;
-                case "blue":
-                    filename = paperCard.getCardUSpecImageKey();
-                    break;
-                case "black":
-                    filename = paperCard.getCardBSpecImageKey();
-                    break;
-                case "red":
-                    filename = paperCard.getCardRSpecImageKey();
-                    break;
-                case "green":
-                    filename = paperCard.getCardGSpecImageKey();
-                    break;
-                default:
-                    filename = paperCard.getCardImageKey();
-                    break;
-            }
-            if (useArtCrop) {
-                filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
-            }
-            boolean updateLink = false;
-            if ("back".equals(face)) {// seems getimage relative path don't process variants for back faces.
-                try {
-                    filename = TextUtil.fastReplace(filename, "1.full", imageKey.substring(imageKey.lastIndexOf('|') + 1, imageKey.indexOf('$')) + ".full");
-                    updateLink = true;
-                } catch (Exception e) {
-                    filename = paperCard.getCardAltImageKey();
-                    updateLink = false;
-                }
-            }
-            destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
 
             //skip ftp if using art crop
+            /*
             if (!useArtCrop) {
                 //move priority of ftp image here
                 StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
                 if (!hasSetLookup) {
-                    if (!updateLink) {
-                        setDownload.append(ImageUtil.getDownloadUrl(paperCard, face));
-                    } else {
-                        String url = ImageUtil.getDownloadUrl(paperCard, face);
-                        setDownload.append(TextUtil.fastReplace(url, "1.full", imageKey.substring(imageKey.lastIndexOf('|') + 1, imageKey.indexOf('$')) + ".full"));
-                    }
+                    setDownload.append(ImageUtil.getDownloadUrl(paperCard, face));
                     downloadUrls.add(setDownload.toString());
                 } else {
                     List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard.getName());
@@ -222,10 +186,10 @@ public abstract class ImageFetcher {
                     }
                 }
             }
-            final String cardCollectorNumber = paperCard.getCollectorNumber();
-            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            //*/
+            if (!collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
                 // This function adds to downloadUrls for us
-                this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
+                this.getScryfallDownloadURL(collectorNumber, edition, face, useArtCrop, downloadUrls);
             }
         } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
             // extra logic for hidden card to not clog the other logic
@@ -315,13 +279,6 @@ public abstract class ImageFetcher {
         }
 
         if (destFile.exists()) {
-            // TODO: Figure out why this codepath gets reached.
-            //  Ideally, fetchImage() wouldn't be called if we already have the image.
-            if (prefix.equals(ImageKeys.CARD_PREFIX)) {
-                PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
-                if (paperCard != null)
-                    paperCard.hasImage(true);
-            }
             return;
         }
 

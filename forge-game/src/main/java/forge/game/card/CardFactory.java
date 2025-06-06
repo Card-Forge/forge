@@ -187,7 +187,7 @@ public class CardFactory {
         c.setRarity(cp.getRarity());
 
         // Would like to move this away from in-game entities
-        String originalPicture = cp.getImageKey(false);
+        String originalPicture = cp.getCardImageKey();
         c.setImageKey(originalPicture);
 
         if(cp.isToken())
@@ -198,11 +198,11 @@ public class CardFactory {
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
                 c.setState(CardStateName.Flipped, false);
-                c.setImageKey(cp.getImageKey(true));
+                c.setImageKey(cp.getCardAltImageKey());
             }
             else if (c.isDoubleFaced() && cardRules != null) {
                 c.setState(cardRules.getSplitType().getChangedStateName(), false);
-                c.setImageKey(cp.getImageKey(true));
+                c.setImageKey(cp.getCardAltImageKey());
             }
             else if (c.isSplitCard()) {
                 c.setState(CardStateName.LeftSplit, false);
@@ -216,23 +216,23 @@ public class CardFactory {
                 c.setImageKey(originalPicture);
             } else if (c.canSpecialize()) {
                 c.setState(CardStateName.SpecializeW, false);
-                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_W);
+                c.setImageKey(cp.getCardWSpecImageKey());
                 c.setSetCode(cp.getEdition());
                 c.setRarity(cp.getRarity());
                 c.setState(CardStateName.SpecializeU, false);
-                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_U);
+                c.setImageKey(cp.getCardUSpecImageKey());
                 c.setSetCode(cp.getEdition());
                 c.setRarity(cp.getRarity());
                 c.setState(CardStateName.SpecializeB, false);
-                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_B);
+                c.setImageKey(cp.getCardBSpecImageKey());
                 c.setSetCode(cp.getEdition());
                 c.setRarity(cp.getRarity());
                 c.setState(CardStateName.SpecializeR, false);
-                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_R);
+                c.setImageKey(cp.getCardRSpecImageKey());
                 c.setSetCode(cp.getEdition());
                 c.setRarity(cp.getRarity());
                 c.setState(CardStateName.SpecializeG, false);
-                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_G);
+                c.setImageKey(cp.getCardGSpecImageKey());
                 c.setSetCode(cp.getEdition());
                 c.setRarity(cp.getRarity());
             }
