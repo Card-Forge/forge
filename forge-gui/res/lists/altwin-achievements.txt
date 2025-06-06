@@ -37,6 +37,7 @@ Phage the Untouchable|The Untouchable|None are immune to her deadly touch!
 Promising Stairs|Fully Explored|That's just good cardio.
 Ramses, Assassin Lord|The Precise Strike|Break one gear and the whole machine stops. You are that gear.
 Revel in Riches|The Dead Man's Chest|Yo-ho-ho, and a bottle of rum!
+Shinryu, Transcendent Rival|Burning Chains|You are the one I have chosen.
 Simic Ascendancy|The Ascension|As you can see, we are going through a period of unprecedented growth.
 Sinner's Judgment|The Final Judgment|Your appeal has been denied.
 Strixhaven Stadium|The Mage Tower|And that's game, set, and match!
