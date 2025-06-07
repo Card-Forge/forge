@@ -7,7 +7,7 @@ K:Trample
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy any number of target artifacts and/or enchantments with total mana value X or less.
-SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ Y | MaxTotalTargetCMC$ X | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to X target creature cards with total mana value X or less
+SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ Y | MaxTotalTargetCMC$ X | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select any number of target artifacts and/or enchantments with total mana value X or less
 SVar:Y:Count$Valid Enchantment,Artifact
 DeckHas:Ability$Counters
 Oracle:Vigilance, trample\nRampaging Yao Guai enters with X +1/+1 counters on it.\nWhen Rampaging Yao Guai enters, destroy any number of target artifacts and/or enchantments with total mana value X or less.
