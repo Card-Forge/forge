@@ -158,13 +158,19 @@ The platform-specific projects are:
 
 #### forge-ai
 
+The forge-ai project contains the artificial intelligence components of Forge, including the computer opponent logic, decision-making algorithms, and AI strategy implementations.
+
 #### forge-core
+
+The forge-core project contains the core game engine, card mechanics, rules engine, and fundamental game logic. It includes the implementation of Magic: The Gathering rules, card interactions, and the game state management system.
 
 #### forge-game
 
+The forge-game project handles the game session management, player interactions, and game flow control. It includes implementations for multiplayer support, game modes, matchmaking, and game state persistence. This module bridges the core game engine with the user interface and networking components.
+
 #### forge-gui
 
-The forge-gui project includes the scripting resource definitions in the res/ path.
+The forge-gui project contains the user interface components and rendering logic for the game. It includes the main game window, card displays, player interactions, and the scripting resource definitions in the res/ path.
 
 #### forge-gui-android
 
