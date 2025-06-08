@@ -16,6 +16,7 @@ import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FOptionPane;
+import forge.util.ItemPool;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;
@@ -70,6 +71,21 @@ public class FDeckViewer extends FScreen {
 
         Forge.getClipboard().setContents(deckList.toString());
         FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblDeckListCopiedClipboard", deck.getName()));
+    }
+
+    public static void copyCollectionToClipboard(ItemPool<PaperCard> pool) {
+        final String nl = System.lineSeparator();
+        final StringBuilder collectionList = new StringBuilder();
+        java.util.Set<String> accounted = new java.util.HashSet<>();
+        for (final java.util.Map.Entry<PaperCard, Integer> entry : pool) {
+            String cardName = entry.getKey().getCardName();
+            if (!accounted.contains(cardName)) {
+                collectionList.append(entry.getValue()).append(" ").append(cardName).append(nl);
+                accounted.add(cardName);
+            }
+        }
+        Forge.getClipboard().setContents(collectionList.toString());
+        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblCollectionCopiedClipboard"));
     }
 
     private final Deck deck;
