@@ -1,8 +1,8 @@
-# TODO: Improve AI logic. Currently AI will sacrifice even if Troll can't attack at all.
 Name:Clackbridge Troll
 ManaCost:3 B B
 Types:Creature Troll
 PT:8/8
+# TODO: Improve AI logic. Currently AI will sacrifice even if Troll can't attack at all.
 K:Haste
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TripleGoat | TriggerDescription$ When CARDNAME enters, target opponent creates three 0/1 white Goat creature tokens.

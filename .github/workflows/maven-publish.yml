@@ -81,7 +81,7 @@ jobs:
           export _JAVA_OPTIONS="-Xmx2g"
           d=$(date +%m.%d)
           # build only desktop and only try to move desktop files
-          mvn -U -B clean -P windows-linux install -e -T 1C release:clean release:prepare release:perform -DskipTests
+          mvn -U -B clean -P windows-linux install -DskipTests -Dskip.flatten=true -e -T 1C release:clean release:prepare release:perform
           mkdir izpack
           # move bz2 and jar from work dir to izpack dir
           mv /home/runner/work/forge/forge/forge-installer/*/*.{bz2,jar} izpack/
@@ -127,6 +127,44 @@ jobs:
           allowUpdates: true
           removeArtifacts: true
           makeLatest: true
+
+      - name: 🔧 Install XML tools
+        run: sudo apt-get install -y libxml2-utils
+
+      - name: 🔼 Bump versionCode in root POM
+        id: bump_version
+        run: |
+          cd /home/runner/work/forge/forge/
+          
+          current_version=$(xmllint --xpath "//*[local-name()='versionCode']/text()" pom.xml)
+          echo "Current versionCode: $current_version"
+
+          IFS='.' read -r major minor patch <<< "${current_version}"
+          new_patch=$(printf "%02d" $((10#$patch + 1)))
+          new_version="${major}.${minor}.${new_patch}"
+
+          sed -i -E "s|<versionCode>.*</versionCode>|<versionCode>${new_version}</versionCode>|" pom.xml
+
+          echo "version_code=${new_version}" >> $GITHUB_OUTPUT
+          
+      - name: ♻️ Restore {revision} in child POMs
+        run: |
+          find . -name pom.xml ! -path "./pom.xml" | while read -r pom; do
+            sed -i -E 's|<version>2\.0+\.[0-9]+(-SNAPSHOT)?</version>|<version>${revision}</version>|' "$pom"
+          done
+
+      - name: 💾 Commit restored {revision}
+        run: |
+          # Add only pom.xml files
+          find . -name pom.xml -exec git add {} \;
+
+          # Commit if there are changes
+          if git diff --cached --quiet; then
+            echo "No pom.xml changes to commit."
+          else
+            git commit -m "Restore POM files for preparation of next release" || echo "No changes to commit"
+            git push
+          fi
 
       - name: Send failure notification to Discord
         if: failure() # This step runs only if the job fails
