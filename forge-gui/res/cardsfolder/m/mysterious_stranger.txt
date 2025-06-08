@@ -6,7 +6,7 @@ K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, for each graveyard with an instant or sorcery card in it, exile target instant or sorcery card from that graveyard. If two or more cards are exiled this way, choose one of them at random and copy it. You may cast the copy without paying its mana cost.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Instant,Sorcery | TgtPrompt$ For each player, select a target instant or sorcery card from their graveyard. | TargetMin$ OneEach | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | RememberChanged$ True | SubAbility$ ChooseRandom
 SVar:ChooseRandom:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Exile | Defined$ You | Amount$ 1 | AtRandom$ True | ConditionCheckSVar$ CountExiled | ConditionSVarCompare$ GE2 | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Valid$ Card.ChosenCard | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Optional$ True | CopyCard$ True
+SVar:DBPlay:DB$ Play | Valid$ Card.ChosenCard | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:OneEach:PlayerCountPlayers$Amount
 SVar:CountExiled:Count$ValidExile Card.IsRemembered
