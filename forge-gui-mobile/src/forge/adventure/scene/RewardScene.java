@@ -83,10 +83,6 @@ public class RewardScene extends UIScene {
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
-
-        if (type != Type.Shop) {
-            doneButton.setText("[+OK]");
-        }
     }
 
     @Override
@@ -342,6 +338,8 @@ public class RewardScene extends UIScene {
             this.shopActor = shopActor;
             this.changes = shopActor.getMapStage().getChanges();
             addToSelectable(restockButton);
+        } else {
+            doneButton.setText("[+OK]");
         }
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             actor.remove();
