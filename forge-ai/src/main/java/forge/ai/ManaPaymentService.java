@@ -973,6 +973,8 @@ public class ManaPaymentService {
         final CardCollection fourManaSources = new CardCollection();
         final CardCollection fiveManaSources = new CardCollection();
         final CardCollection anyColorManaSources = new CardCollection();
+        final CardCollection highOutputManaSources = new CardCollection(); // For sources that can produce multiple mana at once
+        final Map<Card, Integer> manaOutputPotential = new HashMap<>(); // Map to track potential mana output
 
         // Sort mana sources
         // 1. Use lands that can only produce colorless mana without
@@ -1020,6 +1022,8 @@ public class ManaPaymentService {
             boolean needsLimitedResources = false;
             boolean unpreferredCost = false;
             boolean producesAnyColor = false;
+            boolean isHighOutput = false;
+            int potentialManaOutput = 0;
             final List<SpellAbility> manaAbilities = getAIPlayableMana(card);
 
             for (final SpellAbility m : manaAbilities) {
@@ -1046,6 +1050,33 @@ public class ManaPaymentService {
                     }
                 }
 
+                // Check for abilities that can produce multiple mana (like Serra's Sanctum)
+                if (m.hasParam("Amount")) {
+                    String amountStr = m.getParam("Amount");
+                    // Check for X value in Amount
+                    if (amountStr.contains("X")) {
+                        // Use AbilityUtils.calculateAmount for proper X calculation
+                        potentialManaOutput = AbilityUtils.calculateAmount(card, amountStr, m);
+                        if (potentialManaOutput > 2) { // If we can produce 3+ mana with one tap
+                            isHighOutput = true;
+                        }
+                    } else {
+                        try {
+                            int amount = Integer.parseInt(amountStr);
+                            if (amount > 1) {
+                                potentialManaOutput = amount;
+                                isHighOutput = true;
+                            }
+                        } catch (NumberFormatException e) {
+                            // Try to use AbilityUtils.calculateAmount as a fallback for complex expressions
+                            potentialManaOutput = AbilityUtils.calculateAmount(card, amountStr, m);
+                            if (potentialManaOutput > 1) {
+                                isHighOutput = true;
+                            }
+                        }
+                    }
+                }
+
                 AbilitySub sub = m.getSubAbility();
                 // We really shouldn't be hardcoding names here. ChkDrawback should just return true for them
                 if (sub != null && !card.getName().equals("Pristine Talisman") && !card.getName().equals("Zhur-Taa Druid")) {
@@ -1055,6 +1086,15 @@ public class ManaPaymentService {
                     needsLimitedResources = true; // TODO: check for good drawbacks (gainLife)
                 }
                 usableManaAbilities++;
+            }
+
+            // Special case for Serra's Sanctum and similar cards
+            if (isHighOutput && potentialManaOutput > 0) {
+                // If this source can produce a lot of mana at once, prioritize it
+                highOutputManaSources.add(card);
+                // Store the potential output in our map
+                manaOutputPotential.put(card, potentialManaOutput);
+                continue;
             }
 
             if (unpreferredCost) {
@@ -1079,6 +1119,15 @@ public class ManaPaymentService {
                 fiveManaSources.add(card);
             }
         }
+
+        // Sort high output mana sources by potential output (highest first)
+        highOutputManaSources.sort((a, b) -> Integer.compare(
+            manaOutputPotential.getOrDefault(b, 0),
+            manaOutputPotential.getOrDefault(a, 0)
+        ));
+
+        // Add high output sources first - they're most efficient
+        sortedManaSources.addAll(sortedManaSources.size(), highOutputManaSources);
         sortedManaSources.addAll(sortedManaSources.size(), colorlessManaSources);
         sortedManaSources.addAll(sortedManaSources.size(), oneManaSources);
         sortedManaSources.addAll(sortedManaSources.size(), twoManaSources);

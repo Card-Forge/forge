@@ -331,7 +331,7 @@ public enum ManaCostShard {
         return (colorCode & this.shard) > 0;
     }
 
-    public boolean isAnyColor() {
+    public boolean isColored() {
         return (this.shard & COLORS_SUPERPOSITION) != 0;
     }
 
