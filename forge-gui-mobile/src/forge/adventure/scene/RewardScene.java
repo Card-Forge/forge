@@ -83,6 +83,10 @@ public class RewardScene extends UIScene {
         detailButton.setVisible(false);
         doneButton = ui.findActor("done");
         restockButton = ui.findActor("restock");
+
+        if (type != Type.Shop) {
+            doneButton.setText("[+OK]");
+        }
     }
 
     @Override
@@ -159,18 +163,15 @@ public class RewardScene extends UIScene {
     boolean done(boolean skipShowLoot) {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         if (!skipShowLoot) {
-            doneButton.setText("[+OK]");
             showLootOrDone();
             return true;
         }
         if (type != null) {
             switch (type) {
                 case Shop:
-                    doneButton.setText("[+OK]");
                     break;
                 case QuestReward:
                 case Loot:
-                    doneButton.setText("[+OK]");
                     break;
             }
         }
@@ -217,7 +218,6 @@ public class RewardScene extends UIScene {
     @Override
     public void enter() {
         autoSell = false;
-        doneButton.setText("[+OK]");
         updateDetailButton();
         super.enter();
     }
@@ -406,7 +406,6 @@ public class RewardScene extends UIScene {
 
         switch (type) {
             case Shop:
-                doneButton.setText("[+OK]");
                 String shopName = shopActor.getDescription();
                 if ((shopName != null && !shopName.isEmpty())) {
                     headerLabel.setVisible(true);
@@ -425,7 +424,6 @@ public class RewardScene extends UIScene {
                 headerLabel.setVisible(false);
                 headerLabel.setText("");
                 restockButton.setVisible(false);
-                doneButton.setText("[+OK]");
                 break;
             case Loot:
                 headerLabel.skipToTheEnd();
@@ -433,11 +431,9 @@ public class RewardScene extends UIScene {
                 headerLabel.setVisible(true);
                 headerLabel.setText("[%?SHINY][;]\u2610 " + Forge.getLocalizer().getMessage("lblAll"));
                 restockButton.setVisible(false);
-                doneButton.setText("[+OK]");
                 break;
             case RewardChoice:
                 restockButton.setVisible(false);
-                doneButton.setText("[+OK]");
                 headerLabel.setVisible(remainingSelections > 0);
                 headerLabel.setText(Forge.getLocalizer().getMessage("lblSelectRewards", remainingSelections));
                 doneButton.setDisabled(remainingSelections > 0);
