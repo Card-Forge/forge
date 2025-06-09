@@ -4679,7 +4679,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             this.bonusFromCounters = bonusFromCounters;
         }
         public int getTotal() {
-            return currentValue + tempBoost + bonusFromCounters;
+            // 100k can be safely tripled 9 times before overflowing int32.
+            return Math.min(currentValue + tempBoost + bonusFromCounters, 100000);
         }
         @Override
         public String toString() {
