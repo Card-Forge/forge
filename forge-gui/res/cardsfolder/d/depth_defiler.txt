@@ -9,6 +9,5 @@ SVar:TrigCharm:DB$ Charm | CharmNum$ Count$Kicked.2.1 | Choices$ DBChangeZone,DB
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player to draw two cards, then discard a card | Defined$ ThisTargetedPlayer | SubAbility$ DBDiscard | SpellDescription$ Target player draws two cards, then discards a card.
 SVar:DBDiscard:DB$ Discard | Defined$ ParentTarget | NumCards$ 1 | Mode$ TgtChoose
-SVar:X:Count$Valid Card.Self+kicked
 SVar:PlayMain1:TRUE
 Oracle:Devoid (This card has no color.)\nKicker {C} (You may pay an additional {C} as you cast this spell.)\nWhen you cast this spell, choose one. If it was kicked, choose both instead.\n• Return target creature to its owner's hand.\n• Target player draws two cards, then discards a card.
