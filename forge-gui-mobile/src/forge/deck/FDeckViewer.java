@@ -16,7 +16,6 @@ import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FOptionPane;
-import forge.util.ItemPool;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;
