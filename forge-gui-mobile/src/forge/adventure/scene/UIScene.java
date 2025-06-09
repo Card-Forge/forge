@@ -340,16 +340,15 @@ public class UIScene extends Scene {
     }
 
     public boolean keyPressed(int keycode) {
+        ui.pressDown(keycode);
+    
         Selectable selection = getSelected();
-
         if (KeyBinding.Use.isPressed(keycode)) {
             if (selection != null) {
                 selection.onPressDown(this);
-                return true;
             }
         }
 
-        ui.pressDown(keycode);
         if (stage.getKeyboardFocus() instanceof SelectBox) {
             SelectBox box = (SelectBox) stage.getKeyboardFocus();
             if (box.getScrollPane().hasParent()) {
