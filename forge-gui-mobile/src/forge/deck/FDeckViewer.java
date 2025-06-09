@@ -73,14 +73,14 @@ public class FDeckViewer extends FScreen {
         FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
-    public static void copyCollectionToClipboard(ItemPool<PaperCard> pool) {
+    public static void copyCollectionToClipboard(CardPool pool) {
         final String nl = System.lineSeparator();
         final StringBuilder collectionList = new StringBuilder();
         Set<String> accounted = new HashSet<>();
         for (final Entry<PaperCard, Integer> entry : pool) {
             String cardName = entry.getKey().getCardName();
             if (!accounted.contains(cardName)) {
-                collectionList.append(entry.getValue()).append(" ").append(cardName).append(nl);
+                collectionList.append(pool.countByName(cardName)).append(" ").append(cardName).append(nl);
                 accounted.add(cardName);
             }
         }
