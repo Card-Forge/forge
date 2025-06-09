@@ -76,8 +76,8 @@ public class FDeckViewer extends FScreen {
     public static void copyCollectionToClipboard(ItemPool<PaperCard> pool) {
         final String nl = System.lineSeparator();
         final StringBuilder collectionList = new StringBuilder();
-        java.util.Set<String> accounted = new java.util.HashSet<>();
-        for (final java.util.Map.Entry<PaperCard, Integer> entry : pool) {
+        Set<String> accounted = new HashSet<>();
+        for (final Entry<PaperCard, Integer> entry : pool) {
             String cardName = entry.getKey().getCardName();
             if (!accounted.contains(cardName)) {
                 collectionList.append(entry.getValue()).append(" ").append(cardName).append(nl);
