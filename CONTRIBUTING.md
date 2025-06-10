@@ -158,7 +158,7 @@ The platform-specific projects are:
 
 #### forge-ai
 
-The forge-ai project contains the artificial intelligence components of Forge, including the computer opponent logic, decision-making algorithms, and AI strategy implementations.
+The forge-ai project contains the computer opponent logic for gameplay. It includes decision-making algorithms for specific abilities, cards and turn phases.
 
 #### forge-core
 
