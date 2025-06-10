@@ -38,6 +38,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
@@ -56,8 +57,11 @@ import forge.util.BuildInfo;
 import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.ImageFetcher;
+import forge.util.ItemPool;
 import forge.util.OperatingSystem;
 import forge.util.SwingImageFetcher;
+
+import static java.util.function.Predicate.*;
 
 public class GuiDesktop implements IGuiBase {
     private ImageFetcher imageFetcher = new SwingImageFetcher();
@@ -360,4 +364,14 @@ public class GuiDesktop implements IGuiBase {
     public float getScreenScale() {
         return screenScale;
     }
+
+    public <T extends PaperCard> void prefetchAllImages(ItemPool<T> pool) {
+        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_PREFETCH_CARD_POOL_IMAGES)) return;
+        if (pool == null) return;
+        pool.toFlatList().stream()
+                         .filter(not(PaperCard::hasImage))
+                         .map(card -> card.getImageKey(false))
+                         .forEach(getImageFetcher()::fetchImageWithoutCallback);
+    }
+
 }

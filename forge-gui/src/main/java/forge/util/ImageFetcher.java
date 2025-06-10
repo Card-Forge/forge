@@ -81,6 +81,10 @@ public abstract class ImageFetcher {
         return null;
     }
 
+    public void fetchImageWithoutCallback(String imageKey) {
+        fetchImage(imageKey, () -> {});
+    }
+
     public void fetchImage(final String imageKey, final Callback callback) {
         FThreads.assertExecutedByEdt(true);
 

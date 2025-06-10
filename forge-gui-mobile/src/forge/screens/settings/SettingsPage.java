@@ -495,6 +495,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                                 }
                             },
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_PREFETCH_CARD_POOL_IMAGES,
+                                    Forge.getLocalizer().getMessage("lblPrefetchDeckImages"),
+                                    Forge.getLocalizer().getMessage("nlPrefetchDeckImages")),
+                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER,
                         Forge.getLocalizer().getMessage("cbImageFetcher"),
                         Forge.getLocalizer().getMessage("nlImageFetcher")),

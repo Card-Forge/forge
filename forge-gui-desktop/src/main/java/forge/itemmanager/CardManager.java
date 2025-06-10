@@ -8,6 +8,7 @@ import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.QuestWorld;
 import forge.gamemodes.quest.data.QuestPreferences;
+import forge.gui.GuiBase;
 import forge.gui.GuiUtils;
 import forge.item.PaperCard;
 import forge.itemmanager.filters.*;
@@ -90,6 +91,17 @@ public class CardManager extends ItemManager<PaperCard> {
                 cardsMap.put(cardEntry.getKey(), cardEntry.getValue());
         }
         return cardsMap.entrySet();
+    }
+
+    @Override
+    public void updateView(final boolean forceFilter, final Iterable<PaperCard> itemsToSelect) {
+        prefetchImages();
+        super.updateView(forceFilter, itemsToSelect);
+    }
+
+    private void prefetchImages() {
+        if (isInfinite() || getPool().isEmpty()) return;
+        GuiBase.getInterface().prefetchAllImages(getPool());
     }
 
     // Select the Card Art Entry to add, based on current Card Art Preference Order.
