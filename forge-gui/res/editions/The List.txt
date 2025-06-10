@@ -2,7 +2,7 @@
 Code=PLST
 Date=2020-09-26
 Name=The List
-Type=Masters
+Type=Reprint
 ScryfallCode=PLST
 
 [cards]
