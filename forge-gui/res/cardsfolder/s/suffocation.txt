@@ -2,8 +2,8 @@ Name:Suffocation
 ManaCost:1 U
 Types:Instant
 Text:Cast this spell only if you were dealt damage this turn by a red instant or sorcery spell.
-T:Mode$ DamageDone | ValidSource$ Sorcery.Red,Instant.Red | ValidTarget$ You | Execute$ TrigClear | Static$ True
-SVar:TrigClear:DB$ Cleanup | ClearRemembered$ True | SubAbility$ TrigRemember
+T:Mode$ DamageDone | ValidSource$ Sorcery.Red,Instant.Red | ValidTarget$ You | Execute$ TrigClearRem | Static$ True
+SVar:TrigClearRem:DB$ Cleanup | ClearRemembered$ True | SubAbility$ TrigRemember
 SVar:TrigRemember:DB$ Pump | RememberObjects$ TriggeredSourceController
 T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ Cleanup | ClearRemembered$ True
