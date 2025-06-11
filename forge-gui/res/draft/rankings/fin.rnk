@@ -2,7 +2,7 @@
 #1|Adeline, Resplendent Cathar|R|FCA
 #2|Dion, Bahamut's Dominant|R|FIN
 #3|Smuggler's Copter|R|FCA
-#4|Summon Leviathan|R|FIN
+#4|Summon: Leviathan|R|FIN
 #5|Atraxa, Grand Unifier|M|FCA
 #6|Ardyn, the Usurper|R|FIN
 #7|Yawgmoth, Thran Physician|M|FCA
@@ -15,10 +15,10 @@
 #14|The Regalia|R|FIN
 #15|Primeval Titan|R|FCA
 #16|Ragavan, Nimble Pilferer|M|FCA
-#17|Summon Primal Odin|R|FIN
+#17|Summon: Primal Odin|R|FIN
 #18|Clive, Ifrit's Dominant|M|FIN
 #19|Sazh Katzroy|R|FIN
-#20|Summon Titan|R|FIN
+#20|Summon: Titan|R|FIN
 #21|Absolute Virtue|M|FIN
 #22|Kuja, Genome Sorcerer|R|FIN
 #23|Lightning, Army of One|M|FIN
@@ -32,7 +32,7 @@
 #31|Winota, Joiner of Forces|R|FCA
 #32|Cloud, Midgar Mercenary|M|FIN
 #33|Delivery Moogle|U|FIN
-#34|Summon Knights of Round|M|FIN
+#34|Summon: Knights of Round|M|FIN
 #35|Edgar, King of Figaro|R|FIN
 #36|Bartz and Boko|R|FIN
 #37|Yuna, Hope of Spira|M|FIN
@@ -57,7 +57,7 @@
 #56|Samurai's Katana|U|FIN
 #57|Seifer Almasy|R|FIN
 #58|Esper Origins|R|FIN
-#59|Summon Fenrir|U|FIN
+#59|Summon: Fenrir|U|FIN
 #60|Torgal, A Fine Hound|U|FIN
 #61|Traveling Chocobo|M|FIN
 #62|Cloud of Darkness|U|FIN
@@ -66,12 +66,12 @@
 #65|Kraum, Ludevic's Opus|R|FCA
 #66|Varragoth, Bloodsky Sire|R|FCA
 #67|Vial Smasher the Fierce|M|FCA
-#68|Summon Bahamut|M|FIN
+#68|Summon: Bahamut|M|FIN
 #69|Dragoon's Lance|U|FIN
 #70|Moogles' Valor|R|FIN
 #71|Astrologian's Planisphere|R|FIN
 #72|Valkyrie Aerial Unit|U|FIN
-#73|Summon Brynhildr|R|FIN
+#73|Summon: Brynhildr|R|FIN
 #74|Sazh's Chocobo|U|FIN
 #75|Vanille, Cheerful l'Cie|U|FIN
 #76|Balthier and Fran|R|FIN
@@ -95,7 +95,7 @@
 #94|Cecil, Dark Knight|R|FIN
 #95|Reno and Rude|U|FIN
 #96|Raubahn, Bull of Ala Mhigo|R|FIN
-#97|Summon GF Cerberus|R|FIN
+#97|Summon: G.F. Cerberus|R|FIN
 #98|Locke Cole|U|FIN
 #99|Omega, Heartless Evolution|U|FIN
 #100|Vivi Ornitier|M|FIN
@@ -109,11 +109,11 @@
 #108|White Auracite|C|FIN
 #109|Zack Fair|U|FIN
 #110|Sleep Magic|U|FIN
-#111|Summon Shiva|U|FIN
+#111|Summon: Shiva|U|FIN
 #112|Demon Wall|U|FIN
 #113|Overkill|U|FIN
 #114|Sephiroth's Intervention|C|FIN
-#115|Summon Anima|U|FIN
+#115|Summon: Anima|U|FIN
 #116|Vayne's Treachery|C|FIN
 #117|Freya Crescent|U|FIN
 #118|Thunder Magic|C|FIN
@@ -163,7 +163,7 @@
 #162|Balamb T-Rexaur|C|FIN
 #163|Coliseum Behemoth|U|FIN
 #164|Diamond Weapon|U|FIN
-#165|Summon Fat Chocobo|C|FIN
+#165|Summon: Fat Chocobo|C|FIN
 #166|Hope Estheim|R|FIN
 #167|Judge Magister Gabranth|U|FIN
 #168|Crossroads Village|C|FIN
@@ -192,13 +192,13 @@
 #191|Dark Knight's Greatsword|U|FIN
 #192|Evil Reawakened|U|FIN
 #193|The Final Days|U|FIN
-#194|Sidequest Hunt the Mark|U|FIN
+#194|Sidequest: Hunt the Mark|U|FIN
 #195|Vincent Valentine|R|FIN
 #196|Prompto Argentum|U|FIN
 #197|Sandworm|U|FIN
 #198|Ancient Adamantoise|M|FIN
 #199|Quina, Qu Gourmet|U|FIN
-#200|Sidequest Raise a Chocobo|U|FIN
+#200|Sidequest: Raise a Chocobo|U|FIN
 #201|Tifa Lockhart|R|FIN
 #202|Rufus Shinra|U|FIN
 #203|Tellah, Great Sage|R|FIN
@@ -214,8 +214,8 @@
 #213|Vector, Imperial Capital|C|FIN
 #214|Windurst, Federation Center|C|FIN
 #215|Aerith Rescue Mission|C|FIN
-#216|Summon Choco Mog|C|FIN
-#217|Summon Primal Garuda|U|FIN
+#216|Summon: Choco/Mog|C|FIN
+#217|Summon: Primal Garuda|U|FIN
 #218|White Mage's Staff|C|FIN
 #219|Dreams of Laguna|C|FIN
 #220|Sahagin|C|FIN
@@ -226,7 +226,7 @@
 #225|Item Shopkeep|C|FIN
 #226|Mysidian Elder|C|FIN
 #227|Opera Love Song|U|FIN
-#228|Summon Esper Ramuh|U|FIN
+#228|Summon: Esper Ramuh|U|FIN
 #229|Vaan, Street Thief|R|FIN
 #230|Bard's Bow|C|FIN
 #231|Chocobo Kick|C|FIN
@@ -248,7 +248,7 @@
 #247|Quistis Trepe|U|FIN
 #248|Rook Turret|C|FIN
 #249|Sage's Nouliths|C|FIN
-#250|Sidequest Card Collection|U|FIN
+#250|Sidequest: Card Collection|U|FIN
 #251|Syncopate|C|FIN
 #252|Circle of Power|U|FIN
 #253|Shambling Cie'th|U|FIN
@@ -259,7 +259,7 @@
 #258|Commune with Beavers|C|FIN
 #259|Gran Pulse Ochu|C|FIN
 #260|Ride the Shoopuf|U|FIN
-#261|Summon GF Ifrit|C|FIN
+#261|Summon: G.F. Ifrit|C|FIN
 #262|Farseek|U|FCA
 #263|Ishai, Ojutai Dragonspeaker|R|FCA
 #264|Auron's Inspiration|U|FIN
@@ -280,7 +280,7 @@
 #279|Coral Sword|U|FIN
 #280|Red Mage's Rapier|C|FIN
 #281|Sabotender|C|FIN
-#282|Sidequest Play Blitzball|U|FIN
+#282|Sidequest: Play Blitzball|U|FIN
 #283|Chocobo Racetrack|U|FIN
 #284|Goobbue Gardener|C|FIN
 #285|Loporrit Scout|C|FIN
@@ -320,7 +320,7 @@
 #319|Reach the Horizon|U|FIN
 #320|PuPu UFO|U|FIN
 #321|Phoenix Down|U|FIN
-#322|Sidequest Catch a Fish|U|FIN
+#322|Sidequest: Catch a Fish|U|FIN
 #323|The Water Crystal|R|FIN
 #324|The Fire Crystal|R|FIN
 #325|Sorceress's Schemes|U|FIN
