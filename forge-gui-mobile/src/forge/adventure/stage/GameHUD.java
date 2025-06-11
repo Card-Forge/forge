@@ -813,9 +813,10 @@ public class GameHUD extends Stage {
             toggleConsole();
             return true;
         }
-        if (keycode == Input.Keys.BACK) {
+        if (KeyBinding.Back.isPressed(keycode)) {
             if (console.isVisible()) {
                 toggleConsole();
+                return true;
             }
         }
         if (console.isVisible())
