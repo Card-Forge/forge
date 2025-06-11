@@ -50,6 +50,7 @@ public class ThreadUtil {
     public static ExecutorService getServicePool() {
         return service;
     }
+
     public static void refreshServicePool() {
         service = Executors.newWorkStealingPool();
     }
@@ -83,4 +84,33 @@ public class ThreadUtil {
         }
         return result;
     }
+
+    /* Image Retrieval */
+    /**
+     * @implNote Operations on these threads will be network IO-bound, so
+     * adjusting the count based on available processors should not be necessary.
+     */
+    private static final int IMAGE_FETCH_THREAD_COUNT = 10;
+    private static final int IMAGE_FETCH_DELAY_IN_MILLIS = 1000;
+    private static ScheduledExecutorService scheduledImageFetchService = Executors.newScheduledThreadPool(IMAGE_FETCH_THREAD_COUNT);
+    private static ScheduledExecutorService getImageFetcherService() {
+        return scheduledImageFetchService;
+    }
+
+    /**
+     * Fetch an image using a dedicated thread pool that enforces adherence to
+     * rate-limiting requirements.
+     *
+     * @implSpec Scryfall <a href="https://scryfall.com/docs/api#rate-limits-and-good-citizenship">specifies</a>
+     * a ~10 request/sec rate limit for their API.
+     * @implNote Limiting the thread pool to no more than 10 threads at a
+     * 1s schedule interval, we ensure that no more than 10 requests
+     * are made each second while simultaneously maximizing the retrieval rate.
+     * Due to the latency of the HTTP request-response cycle, using fewer threads would
+     * result in a lower rate of retrieval than the rate-limit limit requires.
+     */
+    public static void scheduleImageFetch(Runnable runnable) {
+        getImageFetcherService().schedule(runnable, IMAGE_FETCH_DELAY_IN_MILLIS, TimeUnit.MILLISECONDS);
+    }
+
 }
