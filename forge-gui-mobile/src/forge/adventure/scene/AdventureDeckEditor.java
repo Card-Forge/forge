@@ -1612,5 +1612,13 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         }
         return true;
     }
+
+    @Override
+    public boolean keyUp(int keyCode) {
+        if (keyCode == Input.Keys.ESCAPE) {
+            return this.tabHeader.btnBack.trigger();
+        }
+        return super.keyUp(keyCode);
+    }
 }
 
