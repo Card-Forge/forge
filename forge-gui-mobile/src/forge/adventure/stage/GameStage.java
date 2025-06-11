@@ -577,9 +577,6 @@ public abstract class GameStage extends Stage {
             if (!player.isMoving())
                 stop();
         }
-        if (KeyBinding.Menu.isPressed(keycode)) {
-            openMenu();
-        }
         return false;
     }
 
