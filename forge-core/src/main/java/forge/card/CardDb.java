@@ -655,9 +655,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             // ALSO: Set Code are always UpperCase
             CardEdition edition = editions.get(reqEditionCode.toUpperCase());
 
-            // Check if this is a MB1, MB2, or PLIST card and try PLST first
+            // Check if this is a MB1 or PLIST card and use PLST instead
             // These sets have been deprecated by Scryfall and replaced with PLST
-            if (Set.of("MB1", "MB2", "PLIST").contains(reqEditionCode)) {
+            if (Set.of("MB1", "PLIST").contains(reqEditionCode)) {
                 edition = editions.get("PLST");
             }
 

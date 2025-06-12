@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # This script recursively scans all .dck files in a given directory (and subdirectories),
-# replacing lines that reference cards from MB1, MB2, PLIST, or PLST sets.
+# replacing lines that reference cards from MB1, PLIST, or PLST sets.
 # It uses "forge-gui/res/editions/The List.txt" to find the matching card and assigns
 # a collector number based on the card’s occurrence index in that file (1-based).
 # Artist names are used for more accurate matching when available.
@@ -11,7 +11,7 @@ import os
 from collections import defaultdict
 
 
-TARGET_SETS = {"MB1", "MB2", "PLIST", "PLST"}
+TARGET_SETS = {"MB1", "PLIST", "PLST"}
 LIST_PATH = os.path.join("forge-gui", "res", "editions", "The List.txt")
 
 
