@@ -274,6 +274,14 @@ public class Forge implements ApplicationListener {
         return false;
     }
 
+    public static boolean hasExternalInput() {
+        return hasGamepad() || hasKeyboard();
+    }
+
+    public static boolean hasKeyboard() {
+        return !GuiBase.isAndroid();
+    }
+
     public static InputProcessor getInputProcessor() {
         return inputProcessor;
     }

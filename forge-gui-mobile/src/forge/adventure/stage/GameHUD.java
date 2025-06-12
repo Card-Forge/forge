@@ -884,7 +884,7 @@ public class GameHUD extends Stage {
         dialogOnlyInput = true;
         gameStage.hudIsShowingDialog(true);
         MapStage.getInstance().hudIsShowingDialog(true);
-        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+        if (Forge.hasExternalInput() && !dialogButtonMap.isEmpty())
             this.setKeyboardFocus(dialogButtonMap.first());
     }
 
