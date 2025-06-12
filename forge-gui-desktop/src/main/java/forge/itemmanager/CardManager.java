@@ -25,6 +25,8 @@ import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static java.util.function.Predicate.not;
+
 /** 
  * ItemManager for cards
  *
@@ -100,8 +102,12 @@ public class CardManager extends ItemManager<PaperCard> {
     }
 
     private void prefetchImages() {
-        if (isInfinite() || getPool().isEmpty()) return;
-        GuiBase.getInterface().prefetchAllImages(getPool());
+        if (isInfinite() || getPool() == null || getPool().isEmpty()) return;
+        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_PREFETCH_CARD_POOL_IMAGES)) return;
+        getPool().toFlatList().stream()
+                .filter(not(PaperCard::hasImage))
+                .map(card -> card.getImageKey(false))
+                .forEach(GuiBase.getInterface().getImageFetcher()::fetchImageWithoutCallback);
     }
 
     // Select the Card Art Entry to add, based on current Card Art Preference Order.

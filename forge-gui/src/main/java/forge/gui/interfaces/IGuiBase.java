@@ -9,7 +9,6 @@ import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
 import forge.util.Callback;
 import forge.util.ImageFetcher;
-import forge.util.ItemPool;
 
 import java.io.File;
 import java.io.IOException;
@@ -65,5 +64,4 @@ public interface IGuiBase {
     void preventSystemSleep(boolean preventSleep);
     float getScreenScale();
     UpnpServiceConfiguration getUpnpPlatformService();
-    <T extends PaperCard> void prefetchAllImages(ItemPool<T> pool);
 }
