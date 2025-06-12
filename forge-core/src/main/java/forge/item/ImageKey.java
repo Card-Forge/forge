@@ -3,7 +3,8 @@ package forge.item;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.testng.collections.Lists;
+
+import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardEdition;
