@@ -110,7 +110,7 @@ public abstract class GameStage extends Stage {
         dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
 
-        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+        if (Forge.hasExternalInput() && !dialogButtonMap.isEmpty())
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
     }
 
