@@ -216,6 +216,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     WorldSave.getCurrentSave().autoSave();
                     loadPOI(point.getPointOfInterest());
                     point.getMapSprite().checkOut();
+                    WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
                     return true;
                 } else {
                     if (point == collidingPoint) {
@@ -365,7 +366,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         super.draw();
         if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
             MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}Chaos Mode!{ENDBLINK}\n" +
-                    "Enemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.",
+                            "Enemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.",
                     WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
         } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
