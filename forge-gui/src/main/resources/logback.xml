@@ -1,10 +1,29 @@
 <configuration>
-  <appender name="A1" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>%-4r [%t] %-5p %c %x - %m%n</pattern>
+  <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
+  <import class="ch.qos.logback.core.FileAppender"/>
+  <import class="ch.qos.logback.core.ConsoleAppender"/>
+
+  <appender name="FILE" class="FileAppender">
+    <file>debug.log</file>
+    <append>true</append>
+    <immediateFlush>true</immediateFlush>
+    <encoder class="PatternLayoutEncoder">
+        <pattern>%d [%-5p][%-16t][%-25c{5}] %m%n</pattern>
     </encoder>
   </appender>
-  <root level="ALL">
+
+  <appender name="A1" class="ConsoleAppender">
+    <encoder>
+        <pattern>%d [%-5p][%-16t][%-25c{5}] %m%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="DEBUG">
     <appender-ref ref="A1"/>
   </root>
+
+  <root level="ALL">
+    <appender-ref ref="FILE"/>
+  </root>
+
 </configuration>

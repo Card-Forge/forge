@@ -14,7 +14,12 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.RejectedExecutionException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class ImageFetcher {
+    private static final Logger log = LoggerFactory.getLogger(ImageFetcher.class);
+
     // see https://scryfall.com/docs/api/languages and
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
@@ -108,12 +113,12 @@ public abstract class ImageFetcher {
             final ArrayList<String> downloadUrls = new ArrayList<>();
             final String filename = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
             downloadUrls.add("https://downloads.cardforge.org/images/products/boosters/"+ filename);
-            System.out.println("Fetching from "+downloadUrls);
+            log.info("Fetching from %s".formatted(downloadUrls));
 
 
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_BOOSTER_PICS_DIR);
             File destFile = new File(ForgeConstants.CACHE_BOOSTER_PICS_DIR, filename);
-            System.out.println("Destination File "+ destFile.getAbsolutePath()+" exists: " + destFile.exists());
+            log.info("Destination file: %s [exists: %s]".formatted(destFile.getAbsolutePath(), destFile.exists()));
             if(destFile.exists())
                 return;
             setupObserver(destFile.getAbsolutePath(),callback,downloadUrls);
@@ -143,7 +148,7 @@ public abstract class ImageFetcher {
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
             PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
             if (paperCard == null) {
-                System.err.println("Paper card not found for: " + imageKey);
+                log.error("Paper card not found for: {}", imageKey);
                 return;
             }
             //Skip fetching if it's a custom user card.
@@ -277,7 +282,7 @@ public abstract class ImageFetcher {
                 return;
 
             if (tempdata.length < 2) {
-                System.err.println("Token image key is malformed: " + imageKey);
+                log.error("Token image key is malformed: {}", imageKey);
                 return;
             }
 
@@ -320,7 +325,7 @@ public abstract class ImageFetcher {
         }
 
         if (downloadUrls.isEmpty()) {
-            System.err.println("No download URLs for: " + imageKey);
+            log.error("No download URLs for: {}", imageKey);
             return;
         }
 
@@ -337,6 +342,7 @@ public abstract class ImageFetcher {
 
         setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
     }
+
     private void setupObserver(final String destPath, final Callback callback, final ArrayList<String> downloadUrls) {
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.
@@ -371,8 +377,10 @@ public abstract class ImageFetcher {
              * add an unnecessary 1s delay to one-off fetches.
              */
             if (currentFetches.size() <= BULK_FETCH_THRESHOLD) {
+                log.trace("Dispatching next request to general thread pool [queueSize: {}]", fetching.size());
                 ThreadUtil.getServicePool().submit(downloadTask);
             } else {
+                log.trace("Dispatching next request to ImageFetcher thread pool [queueSize: {}]", fetching.size());
                 ThreadUtil.scheduleImageFetch(downloadTask);
             }
         } catch (RejectedExecutionException re) {
