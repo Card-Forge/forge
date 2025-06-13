@@ -363,12 +363,18 @@ public abstract class ImageFetcher {
 
         final Runnable notifyObservers = () -> {
             FThreads.assertExecutedByEdt(true);
-
-            for (Callback o : currentFetches.get(destPath)) {
-                if (o != null)
-                    o.onImageFetched();
+            try {
+                for (Callback o : currentFetches.get(destPath)) {
+                    if (o != null)
+                        o.onImageFetched();
+                }
+            } catch (RuntimeException e) {
+                log.error("Error while notifying observers for path: {} ({})", destPath, e.getMessage());
+                throw e;
+            } finally {
+                currentFetches.remove(destPath);
+                log.trace("Removed: {} [queueSize: {}]", destPath, currentFetches.size());
             }
-            currentFetches.remove(destPath);
         };
 
         try {
