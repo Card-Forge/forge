@@ -1,6 +1,7 @@
 package forge.util;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ThreadUtil {
     static {
@@ -8,15 +9,16 @@ public class ThreadUtil {
     }
 
     private static class WorkerThreadFactory implements ThreadFactory {
-        private int countr = 0;
-        private String prefix = "";
+        private final AtomicInteger counter = new AtomicInteger(1);
+        private final String prefix;
 
         public WorkerThreadFactory(String prefix) {
             this.prefix = prefix;
         }
 
+        @Override
         public Thread newThread(Runnable r) {
-            return new Thread(r, prefix + "-" + countr++);
+            return new Thread(r, String.format("%s-%02d", prefix, counter.getAndIncrement()));
         }
     }
 
@@ -27,7 +29,7 @@ public class ThreadUtil {
 
     // This pool is designed to parallel CPU or IO intensive tasks like parse cards or download images, assuming a load factor of 0.5
     public final static ExecutorService getComputingPool(float loadFactor) {
-        return Executors.newFixedThreadPool((int)(Runtime.getRuntime().availableProcessors() / (1-loadFactor)));
+        return Executors.newFixedThreadPool((int)(Runtime.getRuntime().availableProcessors() / (1-loadFactor)), new WorkerThreadFactory("Computing"));
     }
 
     public static boolean isMultiCoreSystem() {
@@ -54,6 +56,7 @@ public class ThreadUtil {
     public static void refreshServicePool() {
         service = Executors.newWorkStealingPool();
     }
+
     public static <T> T limit(Callable<T> task, long millis){
         Future<T> future = null;
         T result;
@@ -68,6 +71,7 @@ public class ThreadUtil {
         }
         return result;
     }
+
     public static <T> T executeWithTimeout(Callable<T> task, int milliseconds) {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<T> future = executor.submit(task);
@@ -92,7 +96,7 @@ public class ThreadUtil {
      */
     private static final int IMAGE_FETCH_THREAD_COUNT = 10;
     private static final int IMAGE_FETCH_DELAY_IN_MILLIS = 1000;
-    private static ScheduledExecutorService scheduledImageFetchService = Executors.newScheduledThreadPool(IMAGE_FETCH_THREAD_COUNT);
+    private static ScheduledExecutorService scheduledImageFetchService = Executors.newScheduledThreadPool(IMAGE_FETCH_THREAD_COUNT, new WorkerThreadFactory("ImageFetcher"));
     private static ScheduledExecutorService getImageFetcherService() {
         return scheduledImageFetchService;
     }
