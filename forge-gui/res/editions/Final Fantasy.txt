@@ -8,7 +8,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=30
 # https://mtgscribe.com/2025/05/11/final-fantasy-play-booster-fact-sheet/
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,WildcardFoil
-Booster=6 Common,1 Common-Guest,3 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 AnyLand
+Booster=6 Common, 1 Common-Guest, 1 Uncommon, 1 Uncommon, 1 Uncommon, 1 RareMythic, 1 Wildcard, 1 WildcardFoil+, 1 AnyLand
 
 [Common]
 Base=Common:!fromSheet("FIN dual lands"):fromSheet("FIN cards")
