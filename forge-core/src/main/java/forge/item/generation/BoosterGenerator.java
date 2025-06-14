@@ -401,44 +401,66 @@ public class BoosterGenerator {
             System.out.println(numCards + " of type " + slotType);
 
             // For cards that end in '+', attempt to convert this card to foil.
-            boolean convertCardFoil = slotType.endsWith("+");
-            if (convertCardFoil) {
+            boolean convertAllToFoil = slotType.endsWith("+");
+            if (convertAllToFoil) {
                 slotType = slotType.substring(0, slotType.length() - 1);
             }
 
-            // Unpack Base
             BoosterSlot boosterSlot = boosterSlots.get(slotType);
-            String determineSheet = boosterSlot.replaceSlot();
+            Map<String, Integer> slotReplacementCount = bulkSlotReplacement(boosterSlot, numCards);
 
-            if (determineSheet.endsWith("+")) {
-                determineSheet = determineSheet.substring(0, determineSheet.length() - 1);
-                convertCardFoil = true;
-            }
+            List<PaperCard> paperCards = Lists.newArrayList();
+            for(Map.Entry<String, Integer> entry : slotReplacementCount.entrySet()) {
+                String determineSheet = entry.getKey();
+                int numCardsToGenerate = entry.getValue();
 
-            String setCode = template.getEdition();
-
-            // Ok, so we have a sheet now. Most should be standard sheets, but some named edition sheets
-            List<PaperCard> paperCards;
-            PrintSheet ps;
-            try {
-                // Apply the edition to the sheet name by default. We'll try again if thats not a real sheet
-                ps = getPrintSheet(determineSheet + " " + setCode);
-            } catch(Exception e) {
-                ps = getPrintSheet(determineSheet);
-            }
-            if (convertCardFoil) {
-                paperCards = Lists.newArrayList();
-                for(PaperCard pc : ps.random(numCards, true)) {
-                    paperCards.add(pc.getFoiled());
+                if (determineSheet == null || determineSheet.isEmpty() || numCardsToGenerate == 0) {
+                    continue;
                 }
-            } else {
-                paperCards = ps.random(numCards, true);
-            }
 
-            result.addAll(paperCards);
+                // If the sheet ends with a '+', convert all cards in replacement section to foil
+                boolean convertThisToFoil = false;
+                if (determineSheet.endsWith("+")) {
+                    determineSheet = determineSheet.substring(0, determineSheet.length() - 1);
+                    convertThisToFoil = true;
+                }
+
+                String setCode = template.getEdition();
+                PrintSheet ps;
+                try {
+                    // Apply the edition to the sheet name by default. We'll try again if thats not a real sheet
+                    ps = getPrintSheet(determineSheet + " " + setCode);
+                } catch (Exception e) {
+                    ps = getPrintSheet(determineSheet);
+                }
+                if (convertAllToFoil || convertThisToFoil) {
+                    for (PaperCard pc : ps.random(numCardsToGenerate, true)) {
+                        paperCards.add(pc.getFoiled());
+                    }
+                } else {
+                    paperCards.addAll(ps.random(numCardsToGenerate, true));
+                }
+
+                result.addAll(paperCards);
+            }
         }
 
         return result;
+    }
+
+    private static Map<String, Integer> bulkSlotReplacement(BoosterSlot boosterSlot, int numCards) {
+        Map<String, Integer> slotReplacementCount = new HashMap<>();
+
+        for(int i = 0; i < numCards; i++) {
+            String determineSheet = boosterSlot.replaceSlot();
+            if (slotReplacementCount.containsKey(determineSheet)) {
+                slotReplacementCount.put(determineSheet, slotReplacementCount.get(determineSheet) + 1);
+            } else {
+                slotReplacementCount.put(determineSheet, 1);
+            }
+        }
+
+        return slotReplacementCount;
     }
 
     private static void ensureGuaranteedCardInBooster(List<PaperCard> result, SealedTemplate template, String boosterMustContain) {

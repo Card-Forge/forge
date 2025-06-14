@@ -59,7 +59,6 @@ Replace=.0007F Mythic:fromSheet("FIN alternate art")
 Replace=.0000625F :name("Cid, Timeless Artificer"):!fromSheet("FIN alternate art")
 Replace=.0009375F :name("Cid, Timeless Artificer"):fromSheet("FIN alternate art")
 
-
 [AnyLand]
 Base=fromSheet("FIN dual lands")
 Replace=.22F :fromSheet("FIN dual lands")+
