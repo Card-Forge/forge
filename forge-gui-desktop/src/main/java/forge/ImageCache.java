@@ -40,7 +40,7 @@ import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
-import forge.card.CardSplitType;
+import forge.card.CardEdition;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
@@ -56,8 +56,8 @@ import forge.model.FModel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.imaging.FCardImageRenderer;
+import forge.util.Aggregates;
 import forge.util.ImageUtil;
-import forge.util.TextUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -171,65 +171,41 @@ public class ImageCache {
 
         IPaperCard ipc = null;
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-        String specColor = "";
-        if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
-            specColor = "white";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
-            specColor = "blue";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
-            specColor = "black";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
-            specColor = "red";
-        } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
-            specColor = "green";
-        }
+        boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT));
+        String fileName = imageKey;
         if (altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
-        if (!specColor.isEmpty())
-            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            ipc = ImageUtil.getPaperCardFromImageKey(imageKey);
-            if (ipc != null) {
-                if (altState) {
-                    imageKey = ipc.getCardAltImageKey();
-                } else if (!specColor.isEmpty()) {
-                    switch (specColor) {
-                        case "white":
-                            imageKey = ipc.getCardWSpecImageKey();
-                            break;
-                        case "blue":
-                            imageKey = ipc.getCardUSpecImageKey();
-                            break;
-                        case "black":
-                            imageKey = ipc.getCardBSpecImageKey();
-                            break;
-                        case "red":
-                            imageKey = ipc.getCardRSpecImageKey();
-                            break;
-                        case "green":
-                            imageKey = ipc.getCardGSpecImageKey();
-                            break;
+            String[] tempdata = imageKey.substring(2).split("\\|"); //We want to check the edition first.
+
+            String name = tempdata[0];
+            String setCode = tempdata.length > 1 ? tempdata[1] : CardEdition.UNKNOWN_CODE;
+            String collectorNumber = tempdata.length > 3 ? tempdata[2] : IPaperCard.NO_COLLECTOR_NUMBER;
+
+            CardEdition edition = StaticData.instance().getEditions().get(setCode);
+
+            if (useArtCrop) {
+                CardEdition.EditionEntry ee;
+                if (!collectorNumber.isEmpty() && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+                    ee = edition.getCardFromCollectorNumber(collectorNumber);
+                    if (ee != null) { // TODO handle Specialize Collector number
+                        ee = edition.getCardFromCollectorNumber(collectorNumber.substring(0, collectorNumber.length() - 1));
                     }
                 } else {
-                    imageKey = ipc.getCardImageKey();
+                    ee = Aggregates.random(edition.getCardInSet(name));
                 }
-                if (StringUtils.isBlank(imageKey))
-                    return Pair.of(_defaultImage, true);
-            }
-        }
 
-        // Replace .full to .artcrop if art crop is preferred
-        // Only allow use art if the artist info is available
-        boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT))
-            && ipc != null && !ipc.getArtist().isEmpty();
-        String originalKey = imageKey;
-        if (useArtCrop) {
-            if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
-                // Art crop will always use front face as image key for flip cards
-                imageKey = ipc.getCardImageKey();
+                // Skip fetching if artist info is not available for art crop
+                if (ee != null && ee.artistName().isEmpty()) {
+                    useArtCrop = false;
+                }
             }
-            imageKey = TextUtil.fastReplace(imageKey, ".full", ".artcrop");
-        }
+            ipc = StaticData.instance().fetchCard(name, setCode, collectorNumber);
+
+            fileName = ImageUtil.getImageRelativePath(name, setCode, collectorNumber, useArtCrop);
+        } // TODO add artCrop for Token
+
+        String originalKey = imageKey;
 
         // Load from file and add to cache if not found in cache initially.
         BufferedImage original = getImage(imageKey);
@@ -239,16 +215,11 @@ public class ImageCache {
         }
 
         // if art crop is exist, check also if the full card image is also cached.
-        if (useArtCrop && original != null) {
-            BufferedImage cached = _CACHE.getIfPresent(originalKey);
-            if (cached != null)
-                return Pair.of(cached, false);
-        }
 
         boolean noBorder = !useArtCrop && !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
         boolean fetcherEnabled = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
         boolean isPlaceholder = (original == null) && fetcherEnabled;
-        String setCode = imageKey.split("/")[0].trim().toUpperCase();
+        String setCode = fileName.split("/")[0].trim().toUpperCase();
 
         // If the user has indicated that they prefer Forge NOT render a black border, round the image corners
         // to account for JPEG images that don't have a transparency.
@@ -301,7 +272,7 @@ public class ImageCache {
                 CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
                 String legalString = null;
                 original = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-                if (art != null) {
+                if (art != null && ipc != null) {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(StaticData.instance().getCardEdition(ipc.getEdition()).getDate());
                     int year = cal.get(Calendar.YEAR);

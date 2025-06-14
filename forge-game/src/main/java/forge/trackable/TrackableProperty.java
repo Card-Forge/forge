@@ -118,6 +118,7 @@ public enum TrackableProperty {
 
     //Card State
     Name(TrackableTypes.StringType),
+    Artist(TrackableTypes.StringType),
     Colors(TrackableTypes.ColorSetType),
     OriginalColors(TrackableTypes.ColorSetType),
     LeftSplitColors(TrackableTypes.ColorSetType),

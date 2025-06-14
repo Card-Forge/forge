@@ -124,8 +124,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         if(reward.type.equals(Reward.Type.Card)) {
             imageKey = reward.getCard().getImageKey(false);
-            PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
-            imageKey = card.getCardImageKey();
 
 
             int count = 0;
@@ -248,8 +246,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 hasbackface = reward.getCard().hasBackFace();
                 if (ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(false)) && !Forge.enableUIMask.equals("Art")) {
                     int count = 0;
-                    PaperCard card = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(false));
-                    File frontFace = ImageKeys.getImageFile(card.getCardImageKey());
+                    File frontFace = ImageKeys.getImageFile(reward.getCard().getImageKey(false));
                     if (frontFace != null) {
                         try {
                             Texture front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
@@ -275,8 +272,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     //preload card back for performance
                     if (hasbackface) {
                         if (ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(true))) {
-                            PaperCard cardBack = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(true));
-                            File backFace = ImageKeys.getImageFile(cardBack.getCardAltImageKey());
+                            File backFace = ImageKeys.getImageFile(reward.getCard().getImageKey(true));
                             if (backFace != null) {
                                 try {
                                     Texture back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
@@ -400,8 +396,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (imageKey != "") {
                     isBooster = true;
                     File file = new File(IMAGE_LIST_QUEST_BOOSTERS_FILE);
-                    try {
-                        Scanner scanner = new Scanner(file);
+                    try (Scanner scanner = new Scanner(file)) {
                         String boosterPath = "";
                         while(scanner.hasNextLine())
                         {
