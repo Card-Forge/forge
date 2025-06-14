@@ -4,8 +4,8 @@ Types:Instant
 A:SP$ Untap | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBPump | SpellDescription$ Untap target attacking creature.
 SVar:DBPump:DB$ Effect | ReplacementEffects$ RPrevent1,RPrevent2 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DelTrigSlowtrip | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-SVar:RPrevent2:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by that creature this turn. | Secondary$ True
-SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | SpellDescription$ Draw a card at the beginning of the next turn's upkeep.
-SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:RPrevent2:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.IsRemembered | Secondary$ True | Description$ Prevent all combat damage that would be dealt to and dealt by that creature this turn.
+SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card. | StackDescription$ REP Draw_{p:You} draws | SpellDescription$ Draw a card at the beginning of the next turn's upkeep.
+SVar:DrawSlowtrip:DB$ Draw
 AI:RemoveDeck:All
 Oracle:Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.\nDraw a card at the beginning of the next turn's upkeep.
