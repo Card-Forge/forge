@@ -83,6 +83,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbFilteredHands = new OptionsCheckBox(localizer.getMessage("cbFilteredHands"));
     private final JCheckBox cbImageFetcher = new OptionsCheckBox(localizer.getMessage("cbImageFetcher"));
     private final JCheckBox cbDisableCardImages = new OptionsCheckBox(localizer.getMessage("lblDisableCardImages"));
+    private final JCheckBox cbPrefetchCardPoolImages = new OptionsCheckBox(localizer.getMessage("lblPrefetchCardPoolImages"));
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox(localizer.getMessage("cbCloneImgSource"));
     private final JCheckBox cbScaleLarger = new OptionsCheckBox(localizer.getMessage("cbScaleLarger"));
     private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox(localizer.getMessage("cbRenderBlackCardBorders"));
@@ -374,6 +375,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbDisableCardImages, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisableCardImages")), descriptionConstraints);
+
+        pnlPrefs.add(cbPrefetchCardPoolImages, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPrefetchCardPoolImages")), descriptionConstraints);
 
         pnlPrefs.add(cbDisplayFoil, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisplayFoil")), descriptionConstraints);
@@ -717,6 +721,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbDisableCardImages() {
         return cbDisableCardImages;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbPrefetchCardPoolImages() {
+        return cbPrefetchCardPoolImages;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
