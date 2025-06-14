@@ -1,0 +1,18 @@
+# Adjust logging thresholds of specific packages and loggers using these properties.
+#
+# Logback looks for "logging.properties", so to make adjustments:
+#
+#   cp logging.properties.example logging.properties
+#
+# Then adjust thresholds to increase or decrease granularity for packages or individual
+# loggers as needed.
+
+## Turn on the logging firehose
+logback.logger.forge=ALL
+
+### Suggestions for Specific Areas of Functionality
+
+## Image Retrieval
+#logback.logger.forge.util=DEBUG
+#logback.logger.forge.util.ImageFetcher=ALL
+#logback.logger.forge.util.SwingImageFetcher=ALL
