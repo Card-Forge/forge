@@ -6,7 +6,7 @@
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
- <tileset firstgid="16001" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="16385" source="../../tileset/main-nocollide.tsx"/>
  <layer id="1" name="Background" width="35" height="25">
   <data encoding="base64" compression="zlib">
    eJybxsnAMG0AMDYwEO4YCm6hBxhIu9HBqFuwg8HmloFOsyMFqLIPtAsgAOSOUbdggsHijlEwCgYzmCM60C4YBaNg6AIAYHk9+Q==
@@ -24,12 +24,12 @@
  </layer>
  <layer id="5" name="AboveSprites" width="35" height="25">
   <data encoding="base64" compression="zlib">
-   eJzNlktuwjAQhp22Ujelq8SqVJUdN2BTIagESH0seyV6jKqAaLsADsAtOEDLgoPwGAtHHqYe26Qh5Je+lfP4PBk7FqLYDBKesnj4iICzQH6kEL/AQv4d28Tue88LrE3f845hiV0iUrNTugyT/TFbHl/L44LzeSfEBQNNE/XzKNnNCffuB1kvDWmuaeh7H6Tb5a2+TwfoAt8wVrs0+ILr4qsh57KUBpWediraRWV+a+ih+nAunNupXK5grAJco77K4xt9JYa0V2wumDGMTYAp49Ik+3aoC+1dri6Yp6oQz8BL1e6CWcdhLm14Voehq99Dv1NIv2BC9passdXJ5rKO/XvKsUJdsq4lmsjRd+rs0JKG9Do1/2O43Ou6zm520IScm961I/5X/Od/7XNxudl6Nksfr2K3iyt5u6j6pv1waPJ24faKkPM+t/fis8Mh0DWRxaUoXNkCTvTB1g==
+   eJzNlk9OAjEUhztI4gZczTQmBHbcwI0hSCIslC1HgmMQlYAu1AN4A5ccAFlwENHX0Ekfz762jMMwv+Rbdf58ffPaqRDF5inhKYuHjwioBLKSQnwBa/l37Cd233tWYG0ePe+YldglIjU7pcss2R+z5XNUHhecRVOIKgNNF/XzPNnNCffuA1kvHWmu6eh7e9LtMrnapw8MgBcYa58bfMF18dWQc9lIg8pYOxXtorJsGMaoPpwL53YqlxqM1YEL1Fd5fKPnxJD2is0F8wpjb8A749Il+3aoC+1dri6Yu5YQ98CwZXfBbOMwl1t4Vp9hoN9Dv1NIv2BC9passdXJ5rKN/XvKsUJdsq4lmsjRd+rscCMN6XVq/sdwudZ1/bjcQRNybppqR/yv+M//2uficrP1bJY+/o7dLq7k7aLqm/bDocnbhdsrQs773N6Lzw6HQNdEFpeicOUXefTD2g==
   </data>
  </layer>
  <layer id="6" name="Clutter" width="35" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF1Ab/RUgTpxSsEIVgEMgF2rEcyA6XhPAXimLXAxK/5s/AcB2Ib/hTzy0HJfDIhSDYK5HchcuN1HDLSjz+J0WcEjAHaCYTElYOQeXbiaFimLi9GKZZPcHUdx8yQHcLDHPI4tYD8xMhQIwaXKDCgoGh0oJ8/dQEO4Du2Eklt5QHUMccEBDGkff2KTAw7FdA0LiAaCDt3RKjyMAQq4igcYHNFLoFOb0QGy6q7PjNZCazbEBOL8SGCyG30KrMBAGQ3eiYEKBVuUSqOwiBRBFMTAmgpr+p5abBDiipB2gNqFkeUwqoWR5TCigtj0cB5QAAqOk3GA==
+   eJxjYBgF1Ab/RUgTpxSsEIVgEMgF2rEcyA6XhPAXimLXAxIPCwSqA+KIQOq55aAEbjnHMAR7JZK7cLmRGm5Zicf/pIhTAuYAzWRCwotDUfl2YqgYJm4vhmkWTyj13YcM0N0CwxyyuPXA/EQIEKMGF6iwYGCotCBfPzXBDqA7dlLJLd+pmPeEceS9fQoMDPsVEDQuMDWI9m6JUWRgiFVE0LiAcTBl9iOnF2LDRZUdv5nMZJYNyOmF2HAh5BZalZkgALIbHRMCtCqXSHUHIZAogokpAdT0N7XcNNgBJfUArQE1y2NKATXLY0oBpeXxKKAcAABkFTay
   </data>
  </layer>
  <layer id="7" name="AboveAboveClutter" width="35" height="25">
@@ -52,7 +52,7 @@
   <object id="49" template="../../obj/gold.tx" x="48.3333" y="126.333"/>
   <object id="50" template="../../obj/enemy.tx" x="298.667" y="182">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Black Market&quot; }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [&quot;Black Market&quot;]}"/>
     <property name="enemy" value="Cosmic Horror"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
