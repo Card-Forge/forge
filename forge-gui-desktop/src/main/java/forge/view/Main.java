@@ -23,16 +23,22 @@ import forge.error.ExceptionHandler;
 import forge.gui.GuiBase;
 import forge.gui.card.CardReaderExperiments;
 import forge.util.BuildInfo;
+
 import io.sentry.Sentry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Main class for Forge's swing application view.
  */
 public final class Main {
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
+
     /**
      * Main entry point for Forge
      */
     public static void main(final String[] args) {
+        log.info("Starting Forge GUI Desktop...");
         Sentry.init(options -> {
             options.setEnableExternalConfiguration(true);
             options.setRelease(BuildInfo.getVersionString());
