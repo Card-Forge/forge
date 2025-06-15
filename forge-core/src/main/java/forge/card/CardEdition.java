@@ -433,6 +433,17 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public Multimap<String, EditionEntry> getTokens() { return tokenMap; }
 
+    public EditionEntry getTokenFromCollectorNumber(String collectorNumber) {
+        if(collectorNumber == null || collectorNumber.isEmpty())
+            return null;
+        for(EditionEntry c : this.tokenMap.values()) {
+            //Could build a map for this one too if it's used for more than one-offs.
+            if (c.collectorNumber.equalsIgnoreCase(collectorNumber))
+                return c;
+        }
+        return null;
+    }
+
     public String getTokenSet(String token) {
         if (tokenMap.containsKey(token)) {
             return this.getCode();

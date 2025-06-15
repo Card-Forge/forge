@@ -18,7 +18,8 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return null;
 
-        File file = ImageKeys.getImageFile(key);
+        boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT));
+        File file = ImageKeys.getImageFile(key, useArtCrop);
         if (file != null) {
             if (!file.exists()) {
                 return null;

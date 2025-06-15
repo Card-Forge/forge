@@ -24,7 +24,6 @@ import forge.util.CardTranslation;
 import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.TextUtil;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.util.*;
@@ -385,20 +384,14 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     @Override
     public String getImageKey(boolean altState) {
-        String normalizedName = StringUtils.stripAccents(name);
-        String imageKey = ImageKeys.CARD_PREFIX + normalizedName + CardDb.NameSetSeparator
-                + edition + CardDb.NameSetSeparator + artIndex;
-        if (altState) {
-            imageKey += ImageKeys.BACKFACE_POSTFIX;
-        }
-        return imageKey;
+        return altState ? this.getCardAltImageKey() : this.getCardImageKey();
     }
 
     private String cardImageKey = null;
     @Override
     public String getCardImageKey() {
         if (this.cardImageKey == null)
-            this.cardImageKey = ImageUtil.getImageKey(this, "", true);
+            this.cardImageKey = ImageUtil.getImageKey(this, CardStateName.Original);
         return cardImageKey;
     }
 
@@ -407,9 +400,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public String getCardAltImageKey() {
         if (this.cardAltImageKey == null){
             if (this.hasBackFace())
-                this.cardAltImageKey = ImageUtil.getImageKey(this, "back", true);
+                this.cardAltImageKey = ImageUtil.getImageKey(this, this.getRules().getSplitType().getChangedStateName());
             else  // altImageKey will be the same as cardImageKey
-                this.cardAltImageKey = ImageUtil.getImageKey(this, "", true);
+                this.cardAltImageKey = getCardImageKey();
         }
         return cardAltImageKey;
     }
@@ -419,9 +412,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public String getCardWSpecImageKey() {
         if (this.cardWSpecImageKey == null) {
             if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardWSpecImageKey = ImageUtil.getImageKey(this, "white", true);
+                this.cardWSpecImageKey = ImageUtil.getImageKey(this, CardStateName.SpecializeW);
             else  // just use cardImageKey
-                this.cardWSpecImageKey = ImageUtil.getImageKey(this, "", true);
+                this.cardWSpecImageKey = getCardImageKey();
         }
         return cardWSpecImageKey;
     }
@@ -431,9 +424,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public String getCardUSpecImageKey() {
         if (this.cardUSpecImageKey == null) {
             if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardUSpecImageKey = ImageUtil.getImageKey(this, "blue", true);
+                this.cardUSpecImageKey = ImageUtil.getImageKey(this, CardStateName.SpecializeU);
             else  // just use cardImageKey
-                this.cardUSpecImageKey = ImageUtil.getImageKey(this, "", true);
+                this.cardUSpecImageKey = getCardImageKey();
         }
         return cardUSpecImageKey;
     }
@@ -443,9 +436,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public String getCardBSpecImageKey() {
         if (this.cardBSpecImageKey == null) {
             if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardBSpecImageKey = ImageUtil.getImageKey(this, "black", true);
+                this.cardBSpecImageKey = ImageUtil.getImageKey(this, CardStateName.SpecializeB);
             else  // just use cardImageKey
-                this.cardBSpecImageKey = ImageUtil.getImageKey(this, "", true);
+                this.cardBSpecImageKey = getCardImageKey();
         }
         return cardBSpecImageKey;
     }
@@ -455,9 +448,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public String getCardRSpecImageKey() {
         if (this.cardRSpecImageKey == null) {
             if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardRSpecImageKey = ImageUtil.getImageKey(this, "red", true);
+                this.cardRSpecImageKey = ImageUtil.getImageKey(this, CardStateName.SpecializeR);
             else  // just use cardImageKey
-                this.cardRSpecImageKey = ImageUtil.getImageKey(this, "", true);
+                this.cardRSpecImageKey = getCardImageKey();
         }
         return cardRSpecImageKey;
     }
@@ -467,18 +460,16 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public String getCardGSpecImageKey() {
         if (this.cardGSpecImageKey == null) {
             if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardGSpecImageKey = ImageUtil.getImageKey(this, "green", true);
+                this.cardGSpecImageKey = ImageUtil.getImageKey(this, CardStateName.SpecializeG);
             else  // just use cardImageKey
-                this.cardGSpecImageKey = ImageUtil.getImageKey(this, "", true);
+                this.cardGSpecImageKey = getCardImageKey();
         }
         return cardGSpecImageKey;
     }
 
     @Override
     public boolean hasBackFace(){
-        CardSplitType cst = this.rules.getSplitType();
-        return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld
-                || cst == CardSplitType.Modal;
+        return this.rules.hasBackSide();
     }
 
     @Override

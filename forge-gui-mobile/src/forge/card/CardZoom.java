@@ -103,27 +103,22 @@ public class CardZoom extends FOverlay {
                 if (pc != null) {
                     Card cardW = Card.fromPaperCard(pc, null);
                     cardW.setState(CardStateName.SpecializeW, true);
-                    cardW.setImageKey(pc, CardStateName.SpecializeW);
                     list.add(cardW.getView());
 
                     Card cardU = Card.fromPaperCard(pc, null);
-                    cardU.setState(CardStateName.SpecializeU, true);
-                    cardU.setImageKey(pc, CardStateName.SpecializeU);
+                    cardU.setState(CardStateName.SpecializeU, true);;
                     list.add(cardU.getView());
 
                     Card cardB = Card.fromPaperCard(pc, null);
                     cardB.setState(CardStateName.SpecializeB, true);
-                    cardB.setImageKey(pc, CardStateName.SpecializeB);
                     list.add(cardB.getView());
 
                     Card cardR = Card.fromPaperCard(pc, null);
                     cardR.setState(CardStateName.SpecializeR, true);
-                    cardR.setImageKey(pc, CardStateName.SpecializeR);
                     list.add(cardR.getView());
 
                     Card cardG = Card.fromPaperCard(pc, null);
                     cardG.setState(CardStateName.SpecializeG, true);
-                    cardG.setImageKey(pc, CardStateName.SpecializeG);
                     list.add(cardG.getView());
                 }
                 if (!list.isEmpty())

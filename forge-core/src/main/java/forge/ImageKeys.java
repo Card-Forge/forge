@@ -33,11 +33,6 @@ public final class ImageKeys {
     public static final String RADIATION_IMAGE       = "radiation";
 
     public static final String BACKFACE_POSTFIX  = "$alt";
-    public static final String SPECFACE_W = "$wspec";
-    public static final String SPECFACE_U = "$uspec";
-    public static final String SPECFACE_B = "$bspec";
-    public static final String SPECFACE_R = "$rspec";
-    public static final String SPECFACE_G = "$gspec";
 
     private static String CACHE_CARD_PICS_DIR, CACHE_TOKEN_PICS_DIR, CACHE_ICON_PICS_DIR, CACHE_BOOSTER_PICS_DIR,
         CACHE_FATPACK_PICS_DIR, CACHE_BOOSTERBOX_PICS_DIR, CACHE_PRECON_PICS_DIR, CACHE_TOURNAMENTPACK_PICS_DIR;
@@ -97,13 +92,28 @@ public final class ImageKeys {
         return cachedCards.get(key);
     }
     public static File getImageFile(String key) {
+        return getImageFile(key, false);
+    }
+    public static File getImageFile(String key, boolean artCrop) {
         if (StringUtils.isEmpty(key))
             return null;
 
         final String dir;
         final String filename;
         String[] tempdata = null;
-        if (key.startsWith(ImageKeys.TOKEN_PREFIX)) {
+        if (key.startsWith(ImageKeys.CARD_PREFIX)) {
+            tempdata = key.substring(ImageKeys.CARD_PREFIX.length()).split("\\|");
+            String tokenname = tempdata[0];
+            if (tempdata.length > 1) {
+                tokenname += "_" + tempdata[1];
+            }
+            if (tempdata.length > 2) {
+                tokenname += "_" + tempdata[2];
+            }
+            filename = tokenname ;
+
+            dir = CACHE_CARD_PICS_DIR;
+        } else if (key.startsWith(ImageKeys.TOKEN_PREFIX)) {
             tempdata = key.substring(ImageKeys.TOKEN_PREFIX.length()).split("\\|");
             String tokenname = tempdata[0];
             if (tempdata.length > 1) {
@@ -154,7 +164,31 @@ public final class ImageKeys {
                 cachedCards.put(filename, file);
                 return file;
             }
-            if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
+            if (tempdata != null && dir.equals(CACHE_CARD_PICS_DIR)) {
+                String setlessFilename = tempdata[0] + (artCrop ? ".artcrop" : ".fullborder");
+                String setCode = tempdata.length > 1 ? tempdata[1] : "";
+                String collectorNumber = tempdata.length > 2 ? tempdata[2] : "";
+                if (!setCode.isEmpty()) {
+                    if (!collectorNumber.isEmpty()) {
+                        file = findFile(dir, setCode + "/" + collectorNumber + "_" + setlessFilename);
+                        if (file != null) {
+                            cachedCards.put(filename, file);
+                            return file;
+                        }
+                    }
+                    file = findFile(dir, setCode + "/" + setlessFilename);
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                }
+                file = findFile(dir, setlessFilename);
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+            }
+            if (tempdata != null && dir.equals(CACHE_TOKEN_PICS_DIR)) {
                 String setlessFilename = tempdata[0];
                 String setCode = tempdata.length > 1 ? tempdata[1] : "";
                 String collectorNumber = tempdata.length > 2 ? tempdata[2] : "";
