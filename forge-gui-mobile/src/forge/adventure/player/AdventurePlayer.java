@@ -24,10 +24,8 @@ import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.localinstance.properties.ForgePreferences;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
-import forge.util.BuildInfo;
 import forge.util.ItemPool;
 
 import java.io.Serializable;
@@ -40,11 +38,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public static final int MIN_DECK_COUNT = 10;
     // this is a purely arbitrary limit, could be higher or lower; just meant as some sort of reasonable limit for the user
     public static final int MAX_DECK_COUNT = 20;
-    /**
-     * Increment this any time a breaking change to a save is made that will require conversion.
-     * Conversion logic can be applied in onSaveVersionBump.
-     */
-    public static final int ADVENTURE_SAVE_VERSION = 1;
     // Player profile data.
     private String name;
     private int heroRace;
@@ -308,9 +301,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     @Override
     public void load(SaveFileData data) {
         clear(); //Reset player data.
-        int saveVersion = data.containsKey("saveFileVersion") ? data.readInt("saveFileVersion") : 0;
-        if(ForgePreferences.DEV_MODE)
-            System.out.printf("Loading file - Forge version '%s'%n", data.containsKey("saveFileForgeVersion") ? data.readString("saveFileForgeVersion") : "Unknown");
+        int saveVersion = WorldSave.getSaveVersion();
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife = data.readInt("startingLife");
         this.difficultyData.staringMoney = data.readInt("staringMoney");
@@ -539,7 +530,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             autoSellCards.removeAll(missingAutoSellCards);
         }
 
-        if(saveVersion < ADVENTURE_SAVE_VERSION)
+        if(saveVersion < WorldSave.ADVENTURE_SAVE_VERSION)
             onSaveVersionBump(data, saveVersion);
 
         onLifeTotalChangeList.emit();
@@ -551,9 +542,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     @Override
     public SaveFileData save() {
         SaveFileData data = new SaveFileData();
-
-        data.store("saveFileVersion", ADVENTURE_SAVE_VERSION);
-        data.store("saveFileForgeVersion", BuildInfo.getVersionString());
 
         data.store("statistic", this.statistic.save());
         data.store("startingLife", this.difficultyData.startingLife);
@@ -652,6 +640,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @param oldVersion The ADVENTURE_SAVE_VERSION used when the save file was written.
      */
     protected void onSaveVersionBump(SaveFileData data, int oldVersion) {
+        System.out.printf("Migrating save version %d -> %d%n", oldVersion, WorldSave.ADVENTURE_SAVE_VERSION);
         //This function is only run after processing SaveFileData, but we could also have one run before processing if
         //we needed to convert raw fields.
         if (oldVersion < 1) {
