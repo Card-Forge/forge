@@ -20,6 +20,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     //private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
     private final java.util.Map<Integer, Integer> reputation = new HashMap<>();
     private Boolean isBookmarked;
+    private Boolean isVisited;
 
     public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent {
         @Override
@@ -67,6 +68,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
             reputation.putAll((java.util.Map<Integer, Integer>) data.readObject("reputation"));
         }
         isBookmarked = (Boolean) data.readObject("isBookmarked");
+        isVisited = (Boolean) data.readObject("isVisited");
     }
 
     @Override
@@ -78,6 +80,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
         data.storeObject("shopSeeds", shopSeeds);
         data.storeObject("reputation", reputation);
         data.storeObject("isBookmarked", isBookmarked);
+        data.storeObject("isVisited", isVisited);
         return data;
     }
 
@@ -176,5 +179,13 @@ public class PointOfInterestChanges implements SaveFileContent  {
     public void clearDeletedObjects() {
         // reset map when assigning as a quest target that needs enemies
         deletedObjects.clear();
+    }
+    public boolean isVisited() {
+        if (isVisited ==null)
+            return false;
+        return isVisited;
+    }
+    public void visit() {
+        isVisited = true;
     }
 }

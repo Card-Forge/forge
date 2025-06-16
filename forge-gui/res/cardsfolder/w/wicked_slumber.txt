@@ -2,8 +2,8 @@ Name:Wicked Slumber
 ManaCost:3 U
 Types:Instant
 K:Convoke
-A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBCounter | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | SpellDescription$ Tap up to two target creatures. Put a stun counter on either of them. Then put a stun counter on either of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
-SVar:DBCounter:DB$ PutCounter | Choices$ Card.targetedBy | ChoiceTitle$ Choose a creature tapped this to put a stun counter on | CounterType$ Stun | CounterNum$ 1 | SubAbility$ DBCounterBis
-SVar:DBCounterBis:DB$ PutCounter | Choices$ Card.targetedBy | ChoiceTitle$ Choose a creature tapped this to put a stun counter on | CounterType$ Stun | CounterNum$ 1
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBCounter | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | StackDescription$ Tap {c:Targeted}. {p:You} puts a stun counter on a creature targeted by this spell. Then {p:You} puts a stun counter on a creature targeted by this spell. | SpellDescription$ Tap up to two target creatures. Put a stun counter on either of them. Then put a stun counter on either of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBCounter:DB$ PutCounter | Choices$ Card.targetedBy | ChoiceTitle$ Choose a creature targeted by this spell | CounterType$ STUN | CounterNum$ 1 | SubAbility$ DBCounterBis | StackDescription$ None
+SVar:DBCounterBis:DB$ PutCounter | Choices$ Card.targetedBy | ChoiceTitle$ Choose a creature targeted by this spell | CounterType$ STUN | CounterNum$ 1 | StackDescription$ None
 DeckHas:Ability$Counters
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nTap up to two target creatures. Put a stun counter on either of them. Then put a stun counter on either of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)

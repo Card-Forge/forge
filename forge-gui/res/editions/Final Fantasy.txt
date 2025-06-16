@@ -22,9 +22,8 @@ Replace=.0231F Mythic:fromSheet("FCA cards")
 [Uncommon]
 Base=Uncommon:fromSheet("FIN cards")
 Replace=.003F Uncommon:fromSheet("FIN borderless")
-Replace=.0006F :name("Cid, Timeless Artificer"):!fromSheet("FIN extended art")
-Replace=.0084F :name("Cid, Timeless Artificer"):fromSheet("FIN extended art")
-
+Replace=.0006F :name("Cid, Timeless Artificer"):!fromSheet("FIN alternate art")
+Replace=.0084F :name("Cid, Timeless Artificer"):fromSheet("FIN alternate art")
 
 [RareMythic]
 Base=Rare:fromSheet("FIN cards")
@@ -57,9 +56,8 @@ Replace=.0008F Rare:fromSheet("FIN alternate art")
 Replace=.0075F Mythic:fromSheet("FIN cards")
 Replace=.0018F Mythic:fromSheet("FIN borderless")
 Replace=.0007F Mythic:fromSheet("FIN alternate art")
-Replace=.0000625F :name("Cid, Timeless Artificer"):!fromSheet("FIN extended art")
-Replace=.0009375F :name("Cid, Timeless Artificer"):fromSheet("FIN extended art")
-
+Replace=.0000625F :name("Cid, Timeless Artificer"):!fromSheet("FIN alternate art")
+Replace=.0009375F :name("Cid, Timeless Artificer"):fromSheet("FIN alternate art")
 
 [AnyLand]
 Base=fromSheet("FIN dual lands")

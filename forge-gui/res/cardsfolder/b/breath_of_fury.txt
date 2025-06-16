@@ -7,7 +7,7 @@ T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Combat
 SVar:TrigSacrifice:DB$ SacrificeAll | ValidCards$ Card.EnchantedBy | SubAbility$ StillFurious
 SVar:StillFurious:DB$ Attach | Object$ Self | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control to attach Breath of Fury to | RememberAttached$ True | SubAbility$ CatchBreath
 SVar:CatchBreath:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ TheFuryContinues | ConditionDefined$ Remembered | ConditionPresent$ Card
-SVar:TheFuryContinues:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ Cleanup
-SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TheFuryContinues:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:Enchant creature you control\nWhen enchanted creature deals combat damage to a player, sacrifice it and attach Breath of Fury to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase.

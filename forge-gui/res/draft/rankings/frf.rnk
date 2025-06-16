@@ -1,5 +1,5 @@
 //Rank|Name|Rarity|Set
-#1|Ugin the Spirit Dragon|M|FRF
+#1|Ugin, the Spirit Dragon|M|FRF
 #2|Shaman of the Great Hunt|M|FRF
 #3|Brutal Hordechief|M|FRF
 #4|Monastery Mentor|M|FRF
@@ -7,26 +7,26 @@
 #6|Whisperwood Elemental|M|FRF
 #7|Warden of the First Tree|M|FRF
 #8|Soulfire Grand Master|M|FRF
-#9|Dromoka the Eternal|R|FRF
+#9|Dromoka, the Eternal|R|FRF
 #10|Citadel Siege|R|FRF
-#11|Tasigur the Golden Fang|R|FRF
-#12|Kolaghan the Storm's Fury|R|FRF
+#11|Tasigur, the Golden Fang|R|FRF
+#12|Kolaghan, the Storm's Fury|R|FRF
 #13|Archfiend of Depravity|R|FRF
-#14|Silumgar the Drifting Death|R|FRF
+#14|Silumgar, the Drifting Death|R|FRF
 #15|Crux of Fate|R|FRF
 #16|Palace Siege|R|FRF
 #17|Ghastly Conscription|M|FRF
 #18|Dragonscale General|R|FRF
 #19|Mardu Strike Leader|R|FRF
-#20|Alesha Who Smiles at Death|R|FRF
-#21|Ojutai Soul of Winter|R|FRF
+#20|Alesha, Who Smiles at Death|R|FRF
+#21|Ojutai, Soul of Winter|R|FRF
 #22|Daghatar the Adamant|R|FRF
 #23|Yasova Dragonclaw|R|FRF
-#24|Shu Yun the Silent Tempest|R|FRF
-#25|Atarka World Render|R|FRF
+#24|Shu Yun, the Silent Tempest|R|FRF
+#25|Atarka, World Render|R|FRF
 #26|Flamewake Phoenix|R|FRF
 #27|Temur War Shaman|R|FRF
-#28|Sage Eye Avengers|R|FRF
+#28|Sage-Eye Avengers|R|FRF
 #29|Outpost Siege|R|FRF
 #30|Sandsteppe Mastodon|R|FRF
 #31|Temporal Trespass|M|FRF
@@ -65,7 +65,7 @@
 #64|Vaultbreaker|U|FRF
 #65|Marang River Prowler|U|FRF
 #66|Mindscour Dragon|U|FRF
-#67|Mardu Woe Reaper|U|FRF
+#67|Mardu Woe-Reaper|U|FRF
 #68|Douse in Gloom|C|FRF
 #69|Aven Surveyor|C|FRF
 #70|Frost Walker|U|FRF
@@ -74,7 +74,7 @@
 #73|Wandering Champion|U|FRF
 #74|Hunt the Weak|C|FRF
 #75|Gurmag Angler|C|FRF
-#76|Abzan Kin Guard|U|FRF
+#76|Abzan Kin-Guard|U|FRF
 #77|Reality Shift|U|FRF
 #78|Honor's Reward|U|FRF
 #79|Sultai Emissary|C|FRF
@@ -100,7 +100,7 @@
 #99|Cached Defenses|U|FRF
 #100|Hooded Assassin|C|FRF
 #101|Jeskai Barricade|U|FRF
-#102|Lotus Eye Mystics|U|FRF
+#102|Lotus-Eye Mystics|U|FRF
 #103|Channel Harm|U|FRF
 #104|Soul Summons|C|FRF
 #105|Hungering Yeti|U|FRF
@@ -117,7 +117,7 @@
 #116|Fearsome Awakening|U|FRF
 #117|Harsh Sustenance|C|FRF
 #118|Tranquil Cove|L|FRF
-#119|Wind Scarred Crag|L|FRF
+#119|Wind-Scarred Crag|L|FRF
 #120|Collateral Damage|C|FRF
 #121|Feral Krushok|C|FRF
 #122|Arashin Cleric|C|FRF
@@ -146,7 +146,7 @@
 #145|Refocus|C|FRF
 #146|Ethereal Ambush|C|FRF
 #147|Ancestral Vengeance|C|FRF
-#148|Great Horn Krushok|C|FRF
+#148|Great-Horn Krushok|C|FRF
 #149|Sudden Reclamation|U|FRF
 #150|Diplomacy of the Wastes|U|FRF
 #151|Grave Strength|U|FRF

@@ -48,6 +48,12 @@ public class Controls {
             this.setWidth(this.layout.getWidth() + (this.style != null && this.style.background != null ? this.style.background.getLeftWidth() + this.style.background.getRightWidth() : 0.0F));
             layout();
         }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            batch.setColor(1f, 1f, 1f, 1f); // Set color before drawing each actor, per libGDX docs
+            super.draw(batch, parentAlpha);
+        }
     }
 
     static class TextButtonFix extends TextraButton {
@@ -506,10 +512,11 @@ public class Controls {
         private String currencyIcon;
         private boolean isShards;
         private int currencyAmount;
-        private float animationDelay = 2f; //seconds to wait before replacing intermediate label
+        private float intermediateDuration = 2f; // Seconds to wait before replacing intermediate label
         private final String NEGDECOR = "[RED]-";
         private final String POSDECOR = "[GREEN]+";
         private final Timer t = new Timer();
+        private boolean isInitializing = true;
 
         public AccountingLabel(TextraLabel target, boolean isShards) {
             target.setVisible(false);
@@ -521,50 +528,72 @@ public class Controls {
             if (isShards) {
                 currencyAmount = Current.player().getShards();
                 currencyIcon = "[+Shards]";
-                Current.player().onShardsChange(() -> update(AdventurePlayer.current().getShards(), true));
+                Current.player().onShardsChange(() -> {
+                    if (!isInitializing) { // Avoid unwanted call to update() during scene initialization, triggering animation
+                        update(AdventurePlayer.current().getShards(), true);
+                    }
+                });
             } else {
                 currencyAmount = Current.player().getGold();
                 currencyIcon = "[+Gold] "; //fix space since gold sprite is wider than a single glyph
-                Current.player().onGoldChange(() -> update(AdventurePlayer.current().getGold(), true));
+                Current.player().onGoldChange(() -> {
+                if (!isInitializing) { // Avoid unwanted call to update() during scene initialization, triggering animation
+                    update(AdventurePlayer.current().getGold(), true);
+                }
+            });
             }
             label.setText(getLabelText(currencyAmount));
             setName(label.getName());
             replaceLabel(label);
+
+            isInitializing = false; // Initialization complete
         }
 
-        public void setAnimationDelay(float animationDelay) {
-            this.animationDelay = animationDelay;
+        public void setIntermediateDuration(float intermediateDuration) {
+            this.intermediateDuration = intermediateDuration;
         }
 
-        public float getAnimationDelay() {
-            return animationDelay;
+        public float getIntermediateDuration() {
+            return intermediateDuration;
         }
 
         public void update(int newAmount) {
             update(newAmount, false);
         }
 
-        public void update(int newAmount, boolean animate) {
+        public void update(int newAmount, boolean animateIntermediate) {
 
-            if (animate) {
+            if (animateIntermediate) {
                 TextraLabel temporaryLabel = getUpdateLabel(newAmount);
                 currencyAmount = newAmount;
                 replaceLabel(temporaryLabel);
 
-                t.schedule(new AccountingLabelUpdater(temporaryLabel), animationDelay);
+                // Add a quick 'bump' animation to the temporary label
+                SequenceAction sequence = new SequenceAction();
+                sequence.addAction(Actions.alpha(0.25f));
+                sequence.addAction(Actions.parallel(
+                        Actions.alpha(1f, 0.05f, Interpolation.pow2Out),
+                        Actions.moveBy(0f, 2f, 0.05f, Interpolation.pow2Out)
+                ));
+                sequence.addAction(Actions.moveBy(0f, -2f, 0.05f, Interpolation.pow2Out));
+
+                temporaryLabel.addAction(sequence);
+
+                t.schedule(new AccountingLabelUpdater(temporaryLabel), intermediateDuration);
             } else {
                 currencyAmount = newAmount;
-                drawFinalLabel(false);
+                drawFinalLabel(true); // Draw final label with animation since the intermediate label was not used.
             }
         }
 
-        private void drawFinalLabel(boolean fadeIn) {
+        private void drawFinalLabel(boolean animateFinal) {
 
             TextraLabel finalLabel = getDefaultLabel();
-            if (fadeIn) {
+            if (animateFinal) {
+                // Add a quick fade-in animation to the final label
                 SequenceAction sequence = new SequenceAction();
-                sequence.addAction(Actions.alpha(0.5f));
-                sequence.addAction(Actions.alpha(1f, 2f, Interpolation.pow2Out));
+                sequence.addAction(Actions.alpha(0.25f));
+                sequence.addAction(Actions.alpha(1f, 0.1f, Interpolation.pow2Out));
                 finalLabel.addAction(sequence);
             }
             replaceLabel(finalLabel);
@@ -577,7 +606,7 @@ public class Controls {
         private TextraLabel getUpdateLabel(int newAmount) {
             int delta = newAmount - currencyAmount;
             String updateText = delta == 0 ? "" : (delta < 0 ? NEGDECOR + delta * -1 : POSDECOR + delta);
-            return Controls.newTextraLabel(getLabelText(currencyAmount, updateText));
+            return Controls.newTextraLabel(getLabelText(newAmount, updateText));
         }
 
         private String getLabelText(int amount) {
@@ -600,13 +629,15 @@ public class Controls {
             label.remove();
             label = newLabel;
             placeholder.getStage().addActor(label);
+
+            label.setZIndex(placeholder.getZIndex() - 1); // Ensure the new label is behind any tooltips that were present
         }
 
         private class AccountingLabelUpdater extends Timer.Task {
             @Override
             public void run() {
                 if (label.equals(target)) {
-                    drawFinalLabel(true);
+                    drawFinalLabel(false); // Passing false to avoid final animation since the intermediate label was animated
                 }
             }
 

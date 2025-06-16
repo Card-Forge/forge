@@ -19,7 +19,7 @@
 #18|Mistbind Clique|R|LRW
 #19|Cryptic Command|R|LRW
 #20|Cloudthresher|R|LRW
-#21|Nath of the Gilt Leaf|R|LRW
+#21|Nath of the Gilt-Leaf|R|LRW
 #22|Wydwen, the Biting Gale|R|LRW
 #23|Purity|R|LRW
 #24|Cairn Wanderer|R|LRW
@@ -80,7 +80,7 @@
 #79|Avian Changeling|C|LRW
 #80|Hoofprints of the Stag|R|LRW
 #81|Ghostly Changeling|U|LRW
-#82|Jagged Scar Archers|U|LRW
+#82|Jagged-Scar Archers|U|LRW
 #83|Fallowsage|U|LRW
 #84|Hamletback Goliath|R|LRW
 #85|Aethersnipe|C|LRW
@@ -120,7 +120,7 @@
 #119|Flamekin Harbinger|U|LRW
 #120|Smokebraider|C|LRW
 #121|Kinsbaile Balloonist|C|LRW
-#122|Gilt Leaf Ambush|C|LRW
+#122|Gilt-Leaf Ambush|C|LRW
 #123|Treefolk Harbinger|U|LRW
 #124|Wanderwine Prophets|R|LRW
 #125|Arbiter of Knollridge|R|LRW
@@ -129,7 +129,7 @@
 #128|Vivid Creek|U|LRW
 #129|Battlewand Oak|C|LRW
 #130|Hornet Harasser|C|LRW
-#131|Inner Flame Igniter|U|LRW
+#131|Inner-Flame Igniter|U|LRW
 #132|Ethereal Whiskergill|U|LRW
 #133|Vivid Grove|U|LRW
 #134|Whirlpool Whelm|C|LRW
@@ -137,24 +137,24 @@
 #136|Vivid Meadow|U|LRW
 #137|Kithkin Greatheart|C|LRW
 #138|Spellstutter Sprite|C|LRW
-#139|Blind Spot Giant|C|LRW
+#139|Blind-Spot Giant|C|LRW
 #140|Consuming Bonfire|C|LRW
 #141|Amoeboid Changeling|C|LRW
 #142|Stinkdrinker Daredevil|C|LRW
 #143|Vivid Crag|U|LRW
 #144|Skeletal Changeling|C|LRW
-#145|Gilt Leaf Palace|R|LRW
+#145|Gilt-Leaf Palace|R|LRW
 #146|Wanderwine Hub|R|LRW
 #147|Fertile Ground|C|LRW
 #148|Wings of Velis Vel|C|LRW
 #149|Nath's Elite|C|LRW
-#150|Fire Belly Changeling|C|LRW
+#150|Fire-Belly Changeling|C|LRW
 #151|Windbrisk Heights|R|LRW
 #152|Knucklebone Witch|R|LRW
 #153|Judge of Currents|C|LRW
 #154|Forced Fruition|R|LRW
 #155|Glen Elendra Pranksters|U|LRW
-#156|Inner Flame Acolyte|C|LRW
+#156|Inner-Flame Acolyte|C|LRW
 #157|Shimmering Grotto|C|LRW
 #158|Ponder|C|LRW
 #159|Wanderer's Twig|C|LRW
@@ -178,17 +178,17 @@
 #177|Ancient Amphitheater|R|LRW
 #178|Ceaseless Searblades|U|LRW
 #179|Inkfathom Divers|C|LRW
-#180|Adder Staff Boggart|C|LRW
+#180|Adder-Staff Boggart|C|LRW
 #181|Flamekin Bladewhirl|U|LRW
 #182|Horde of Notions|R|LRW
 #183|Soulbright Flamekin|C|LRW
 #184|Surge of Thoughtweft|C|LRW
-#185|Bog Strider Ash|C|LRW
+#185|Bog-Strider Ash|C|LRW
 #186|Goatnapper|U|LRW
 #187|Footbottom Feast|C|LRW
 #188|Elvish Promenade|U|LRW
 #189|Hillcomber Giant|C|LRW
-#190|Boggart Sprite Chaser|C|LRW
+#190|Boggart Sprite-Chaser|C|LRW
 #191|Faerie Trickery|C|LRW
 #192|Blades of Velis Vel|C|LRW
 #193|Hearthcage Giant|U|LRW
@@ -202,17 +202,17 @@
 #201|Familiar's Ruse|U|LRW
 #202|Mournwhelk|C|LRW
 #203|Crush Underfoot|U|LRW
-#204|Burrenton Forge Tender|U|LRW
+#204|Burrenton Forge-Tender|U|LRW
 #205|Guardian of Cloverdell|U|LRW
 #206|Shelldock Isle|R|LRW
 #207|Mosswort Bridge|R|LRW
 #208|Kithkin Healer|C|LRW
 #209|Spiderwig Boggart|C|LRW
 #210|Lys Alana Scarblade|U|LRW
-#211|Hurly Burly|C|LRW
+#211|Hurly-Burly|C|LRW
 #212|Nightshade Stinger|C|LRW
 #213|Oakgnarl Warrior|C|LRW
-#214|Gilt Leaf Seer|C|LRW
+#214|Gilt-Leaf Seer|C|LRW
 #215|Ego Erasure|U|LRW
 #216|Tideshaper Mystic|C|LRW
 #217|Oaken Brawler|C|LRW
@@ -226,7 +226,7 @@
 #225|Black Poplar Shaman|C|LRW
 #226|Merrow Commerce|U|LRW
 #227|Sentry Oak|U|LRW
-#228|Quill Slinger Boggart|C|LRW
+#228|Quill-Slinger Boggart|C|LRW
 #229|Lairwatch Giant|C|LRW
 #230|Boggart Birth Rite|C|LRW
 #231|Ringskipper|C|LRW
@@ -239,11 +239,11 @@
 #238|Flamekin Brawler|C|LRW
 #239|Faultgrinder|C|LRW
 #240|Lace with Moonglove|C|LRW
-#241|Thousand Year Elixir|R|LRW
+#241|Thousand-Year Elixir|R|LRW
 #242|Facevaulter|C|LRW
 #243|Rootgrapple|C|LRW
 #244|Nath's Buffoon|C|LRW
-#245|Warren Scourge Elf|C|LRW
+#245|Warren-Scourge Elf|C|LRW
 #246|Needle Drop|C|LRW
 #247|Ingot Chewer|C|LRW
 #248|Scarred Vinebreeder|C|LRW
