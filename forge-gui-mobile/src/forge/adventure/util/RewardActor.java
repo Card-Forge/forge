@@ -1,6 +1,7 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -38,20 +39,27 @@ import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
+import forge.card.CardZoom;
 import forge.deck.DeckSection;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.item.PaperToken;
 import forge.item.SealedProduct;
+import forge.localinstance.properties.ForgeConstants;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
+import forge.util.FileUtil;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
+import forge.card.CardEdition;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static forge.localinstance.properties.ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE;
@@ -90,6 +98,21 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
     RewardImage toolTipImage;
     String description = "";
+
+    private static class RelatedCard {
+        final Texture texture;
+        final String name;
+        final boolean isToken;
+
+        RelatedCard(Texture texture, String name, boolean isToken) {
+            this.texture = texture;
+            this.name = name;
+            this.isToken = isToken;
+        }
+    }
+
+    private List<RelatedCard> relatedCards;
+    private int currentCardIndex = 0;
 
     @Override
     public void dispose() {
@@ -351,6 +374,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         }
                     }
                 }
+                initializeRelatedCards();
+                
                 break;
             }
             case Item: {
@@ -507,11 +532,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 @Override
                 public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                     hover = true;
+                    System.out.println("RewardActor: enter");
                 }
 
                 @Override
                 public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                     hover = false;
+                    System.out.println("RewardActor: exit");
                 }
             });
         }
@@ -537,30 +564,99 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
     }
 
+    private Texture getTokenTexture(String tokenName) {
+        if (tokenName == null || tokenName.isEmpty()) {
+            System.out.println("RewardActor: getTokenTexture: invalid token name");
+            return null;
+        }
+
+        PaperToken token = StaticData.instance().getAllTokens().getToken(tokenName);
+        if (token == null) {
+            System.out.println("RewardActor: getTokenTexture: token not found: " + tokenName);
+            return null;
+        }
+
+        System.out.println("RewardActor: getTokenTexture: token found: " + tokenName);
+        CardView tokenView = CardView.getCardForUi(token);
+        if (tokenView == null) {
+            System.out.println("RewardActor: getTokenTexture: tokenView is null");
+            return null;
+        }
+
+        // Get the token's image key in the correct format
+        String editionCode = token.getEdition();
+        String imageKey = ImageKeys.getTokenKey(tokenName + "|" + editionCode);
+        System.out.println("RewardActor: getTokenTexture: imageKey: " + imageKey);
+
+        // Try to get the texture from cache
+        Texture tokenTexture = ImageCache.getInstance().getImage(imageKey, false);
+        if (tokenTexture == null) {
+            System.out.println("RewardActor: getTokenTexture: texture not found in cache");
+            return null;
+        }
+
+        System.out.println("RewardActor: getTokenTexture: texture found");
+        return tokenTexture;
+    }
+
+    private void initializeRelatedCards() {
+        relatedCards = new ArrayList<>();
+
+        // Add main card as the first option
+        if (toolTipImage != null && toolTipImage.getDrawable() instanceof TextureRegionDrawable) {
+            Texture mainTexture = ((TextureRegionDrawable) toolTipImage.getDrawable()).getRegion().getTexture();
+            relatedCards.add(new RelatedCard(mainTexture, "Main Card", false));
+        }
+        
+        // Add back face if it exists
+        if (reward.getCard().hasBackFace()) {
+            Texture alt = ImageCache.getInstance().getImage(reward.getCard().getImageKey(true), false);
+            if (alt != null) {
+                relatedCards.add(new RelatedCard(alt, "Back Face", false));
+            } else if (Talt != null) {
+                relatedCards.add(new RelatedCard(Talt, "Back Face", false));
+            }
+        }
+
+        // Add tokens
+        List<String> tokenScripts = reward.getCard().getRules().getTokens();
+        for (String tokenName : tokenScripts) {
+            Texture tokenTexture = getTokenTexture(tokenName);
+            if (tokenTexture != null) {
+                relatedCards.add(new RelatedCard(tokenTexture, "Token: " + tokenName, true));
+            }
+        }
+    }
+
     private void switchTooltip() {
-        if (!Reward.Type.Card.equals(reward.type))
+        System.out.println("RewardActor: switchTooltip");
+        if (!Reward.Type.Card.equals(reward.type)) {
+            System.out.println("RewardActor: switchTooltip: not a card");
             return;
-        if (!reward.getCard().hasBackFace())
+        }
+
+        // Initialize related cards if not done yet
+        if (relatedCards == null) {
+            initializeRelatedCards();
+        }
+
+        if (relatedCards.isEmpty()) {
+            System.out.println("RewardActor: switchTooltip: no related cards found");
             return;
+        }
+
+        // Move to next card
+        currentCardIndex = (currentCardIndex + 1) % relatedCards.size();
+        RelatedCard currentCard = relatedCards.get(currentCardIndex);
+        System.out.println("RewardActor: switchTooltip: showing " + currentCard.name);
+
         if (GuiBase.isAndroid() || Forge.hasGamepad()) {
             if (holdTooltip.tooltip_actor.altcImage != null) {
                 holdTooltip.tooltip_actor.swapActor(holdTooltip.tooltip_actor.cImage, holdTooltip.tooltip_actor.altcImage);
             }
         } else {
-            Texture alt = ImageCache.getInstance().getImage(reward.getCard().getImageKey(true), false);
             if (hover) {
-                if (alternate) {
-                    if (alt != null) {
-                        tooltip.setActor(new ComplexTooltip(new RewardImage(processDrawable(alt))));
-                    } else {
-                        if (Talt == null)
-                            Talt = renderPlaceholder(new Graphics(), reward.getCard(), true);
-                        tooltip.setActor(new ComplexTooltip(new RewardImage(processDrawable(Talt))));
-                    }
-                } else {
-                    if (toolTipImage != null)
-                        tooltip.setActor(new ComplexTooltip(toolTipImage));
-                }
+                tooltip.setActor(new ComplexTooltip(new RewardImage(processDrawable(currentCard.texture))));
             }
         }
     }
