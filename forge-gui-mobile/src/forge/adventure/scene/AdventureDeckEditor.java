@@ -71,6 +71,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                 Map<String, CardEdition> editionsByName = new HashMap<>();
                 for (CardEdition e : FModel.getMagicDb().getEditions()) {
                     editionsByName.put(e.getName().toLowerCase(), e);
+                    editionsByName.put(e.getName().replace(":", "").toLowerCase(), e); //TODO: Proper item migration support. This is just there to fix one typo'd item name
                 }
 
                 String sketchbookPrefix = "landscape sketchbook - ";
