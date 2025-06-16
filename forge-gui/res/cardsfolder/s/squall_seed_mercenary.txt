@@ -1,0 +1,10 @@
+Name:Squall, SeeD Mercenary
+ManaCost:2 W B
+Types:Legendary Creature Human Knight Mercenary
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Rough Divide — Whenever a creature you control attacks alone, it gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Double Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, return target permanent card with mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+cmcLE3 | TgtPrompt$ Select target permanent card with mana value 3 or less in your graveyard
+DeckHas:Ability$Graveyard
+Oracle:Rough Divide — Whenever a creature you control attacks alone, it gains double strike until end of turn.\nWhenever Squall deals combat damage to a player, return target permanent card with mana value 3 or less from your graveyard to the battlefield.

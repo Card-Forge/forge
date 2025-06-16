@@ -6,8 +6,8 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Once the Forge archive has been decompressed you should then be able to launch Forge by using the included launcher. Launching Forge by double clicking on the forge jar file in the past caused a java heap space error. Forge's memory requirements have increased over time and the launchers increase the java heap space available to Forge. Currently you can launch Forge by double clicking on the forge jar file without a java heap space error but this is likely to change as we add in more sounds, icons, etc.
 
-- The Mac OS application version -
-We provide separate macOS builds of desktop and mobile (backported) Forge packaged as native Mac applications. Please check the relevant thread for details and download links.
+- Mac OS -
+We DO NOT provide a separate macOS builds of desktop and mobile (backported). Instead, please run Forge using the forge.command or forge-adventure.command files.
 
 
 - Online Multiplayer -

@@ -1,0 +1,9 @@
+Name:Summon: Fat Chocobo
+ManaCost:4 G
+Types:Enchantment Creature Saga Bird
+PT:4/4
+K:Chapter:4:DBWark,DBKerplunk,DBKerplunk,DBKerplunk
+SVar:DBWark:DB$ Token | TokenScript$ g_2_2_bird_landfall | SpellDescription$ Wark — Create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."
+SVar:DBKerplunk:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | SpellDescription$ Kerplunk — Creatures you control gain trample until end of turn.
+DeckHas:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Wark — Create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."\nII, III, IV — Kerplunk — Creatures you control gain trample until end of turn.

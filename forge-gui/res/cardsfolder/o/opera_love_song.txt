@@ -1,0 +1,10 @@
+Name:Opera Love Song
+ManaCost:1 R
+Types:Instant
+A:SP$ Charm | Choices$ DBExile,DBPump
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. You may play those cards until your next end step.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards until your next end step.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select one or two target creatures | TargetMin$ 1 | TargetMax$ 2 | NumAtt$ +2 | SpellDescription$ One or two target creatures each get +2/+0 until end of turn.
+Oracle:Choose one —\n• Exile the top two cards of your library. You may play those cards until your next end step.\n• One or two target creatures each get +2/+0 until end of turn.

@@ -602,7 +602,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     @Override
     public void onActivate() {
         decksUsingMyCards = new ItemPool<>(InventoryItem.class);
-        for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++) {
+        for (int i = 0; i < Current.player().getDeckCount(); i++) {
             final Deck deck = Current.player().getDeck(i);
             CardPool main = deck.getMain();
             for (final Map.Entry<PaperCard, Integer> e : main) {

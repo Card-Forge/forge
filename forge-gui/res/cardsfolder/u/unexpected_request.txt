@@ -1,0 +1,9 @@
+Name:Unexpected Request
+ManaCost:2 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBAttach | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. You may attach an Equipment you control to that creature. If you do, unattach it at the beginning of the next end step.
+SVar:DBAttach:DB$ Attach | Optional$ True | Choices$ Equipment.YouCtrl | ChoiceTitle$ Choose an Equipment you control | Defined$ ParentTarget | RememberAttached$ True | SubAbility$ DBDelayTrig | StackDescription$ None
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | Execute$ TrigUnattach | SubAbility$ DBCleanup | TriggerDescription$ If you do, unattach chosen Equipment at the beginning of the next end step.
+SVar:TrigUnattach:DB$ Unattach | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. You may attach an Equipment you control to that creature. If you do, unattach it at the beginning of the next end step.

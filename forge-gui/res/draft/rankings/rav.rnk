@@ -4,7 +4,7 @@
 #3|Ursapine|R|RAV
 #4|Gleancrawler|R|RAV
 #5|Vulturous Zombie|R|RAV
-#6|Grave Shell Scarab|R|RAV
+#6|Grave-Shell Scarab|R|RAV
 #7|Char|R|RAV
 #8|Firemane Angel|R|RAV
 #9|Hex|R|RAV
@@ -111,15 +111,15 @@
 #110|Gaze of the Gorgon|C|RAV
 #111|Indentured Oaf|U|RAV
 #112|Screeching Griffin|C|RAV
-#113|Vitu Ghazi, the City Tree|U|RAV
+#113|Vitu-Ghazi, the City-Tree|U|RAV
 #114|Remand|U|RAV
 #115|Tidewater Minion|C|RAV
 #116|Telling Time|U|RAV
 #117|Bathe in Light|U|RAV
 #118|Fiery Conclusion|C|RAV
-#119|Golgari Grave Troll|R|RAV
+#119|Golgari Grave-Troll|R|RAV
 #120|Overgrown Tomb|R|RAV
-#121|Flame Kin Zealot|U|RAV
+#121|Flame-Kin Zealot|U|RAV
 #122|Elves of Deep Shadow|C|RAV
 #123|Twisted Justice|U|RAV
 #124|Cloudstone Curio|R|RAV
@@ -136,7 +136,7 @@
 #135|Transluminant|C|RAV
 #136|Selesnya Sagittars|U|RAV
 #137|Boros Garrison|C|RAV
-#138|Root Kin Ally|U|RAV
+#138|Root-Kin Ally|U|RAV
 #139|Clinging Darkness|C|RAV
 #140|Recollect|U|RAV
 #141|Frenzied Goblin|U|RAV
@@ -151,7 +151,7 @@
 #150|Greater Forgeling|U|RAV
 #151|Crown of Convergence|R|RAV
 #152|Psychic Drain|U|RAV
-#153|Guardian of Vitu Ghazi|C|RAV
+#153|Guardian of Vitu-Ghazi|C|RAV
 #154|Sunhome, Fortress of the Legion|U|RAV
 #155|Hunted Troll|R|RAV
 #156|Seeds of Strength|C|RAV
@@ -183,11 +183,11 @@
 #182|Ordruun Commando|C|RAV
 #183|Flickerform|R|RAV
 #184|Three Dreams|R|RAV
-#185|Sell Sword Brute|C|RAV
+#185|Sell-Sword Brute|C|RAV
 #186|Goblin Spelunkers|C|RAV
 #187|Seed Spark|U|RAV
 #188|Grifter's Blade|U|RAV
-#189|Boros Fury Shield|C|RAV
+#189|Boros Fury-Shield|C|RAV
 #190|Sewerdreg|C|RAV
 #191|Rolling Spoil|U|RAV
 #192|Glass Golem|U|RAV
@@ -196,7 +196,7 @@
 #195|Molten Sentry|R|RAV
 #196|Convolute|C|RAV
 #197|Induce Paranoia|C|RAV
-#198|War Torch Goblin|C|RAV
+#198|War-Torch Goblin|C|RAV
 #199|Moonlight Bargain|R|RAV
 #200|Boros Recruit|C|RAV
 #201|Thoughtpicker Witch|C|RAV
@@ -252,7 +252,7 @@
 #251|Shred Memory|C|RAV
 #252|Vindictive Mob|U|RAV
 #253|Dark Heart of the Wood|U|RAV
-#254|Stone Seeder Hierophant|C|RAV
+#254|Stone-Seeder Hierophant|C|RAV
 #255|Cyclopean Snare|U|RAV
 #256|Necromantic Thirst|C|RAV
 #257|Instill Furor|U|RAV
@@ -264,7 +264,7 @@
 #263|Seismic Spike|C|RAV
 #264|Sins of the Past|R|RAV
 #265|Goblin Fire Fiend|C|RAV
-#266|Chant of Vitu Ghazi|U|RAV
+#266|Chant of Vitu-Ghazi|U|RAV
 #267|Wojek Apothecary|U|RAV
 #268|Quickchange|C|RAV
 #269|Breath of Fury|R|RAV

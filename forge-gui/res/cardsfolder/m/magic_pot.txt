@@ -1,0 +1,9 @@
+Name:Magic Pot
+ManaCost:3
+Types:Artifact Creature Goblin Construct
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+A:AB$ ChangeZone | Cost$ 2 T | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+DeckHas:Ability$Token
+Oracle:When this creature dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")\n{2}, {T}: Exile target card from a graveyard.

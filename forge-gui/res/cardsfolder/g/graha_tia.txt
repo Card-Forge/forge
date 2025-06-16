@@ -1,0 +1,8 @@
+Name:G'raha Tia
+ManaCost:4 W
+Types:Legendary Creature Cat Archer
+PT:3/5
+K:Reach
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature.Other+YouCtrl,Artifact.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ The Allagan Eye — Whenever one or more other creatures and/or artifacts you control die, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+Oracle:Reach\nThe Allagan Eye — Whenever one or more other creatures and/or artifacts you control die, draw a card. This ability triggers only once each turn.

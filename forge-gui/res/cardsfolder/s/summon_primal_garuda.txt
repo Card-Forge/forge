@@ -1,0 +1,9 @@
+Name:Summon: Primal Garuda
+ManaCost:3 W
+Types:Enchantment Creature Saga Harpy
+PT:3/3
+K:Flying
+K:Chapter:3:DBDmg,DBPump,DBPump
+SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature.tapped+OppCtrl | NumDmg$ 4 | TgtPrompt$ Select target tapped creature an opponent controls | SpellDescription$ Aerial Blast — This creature deals 4 damage to target tapped creature an opponent controls.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Flying | NumAtt$ +1 | SpellDescription$ Slipstream — Another target creature you control gets +1/+0 and gains flying until end of turn.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Aerial Blast — This creature deals 4 damage to target tapped creature an opponent controls.\nII, III — Slipstream — Another target creature you control gets +1/+0 and gains flying until end of turn.\nFlying

@@ -1,0 +1,9 @@
+Name:Yuna's Whistle
+ManaCost:1 G G
+Types:Instant
+A:SP$ DigUntil | Valid$ Card.Creature | ValidDescription$ creature | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | FoundDestination$ Hand | RememberFound$ True | SubAbility$ DBImmediateTrigger | StackDescription$ REP Reveal_{p:You} reveals & of your_of their & you reveal_they reveal & Put_{p:You} puts & your hand_their hand & your library_their library | SpellDescription$ Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | Execute$ TrigPutCounter | StackDescription$ REP When you reveal_When {p:You} reveals & put_they put & you control_they control | SpellDescription$ When you reveal a creature card this way, put X +1/+1 counters on target creature you control, where X is the mana value of that card.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ X | CounterType$ P1P1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+Oracle:Reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest on the bottom of your library in a random order. When you reveal a creature card this way, put X +1/+1 counters on target creature you control, where X is the mana value of that card.

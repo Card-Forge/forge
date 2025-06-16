@@ -1,0 +1,7 @@
+Name:Light of Judgment
+ManaCost:4 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 6 | SubAbility$ DBChoose | SpellDescription$ CARDNAME deals 6 damage to target creature. Destroy up to one Equipment attached to that creature.
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ 1 | Choices$ Equipment.AttachedTo Targeted | ChoiceTitle$ Choose an Equipment attached to the targeted creature | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard
+Oracle:Light of Judgment deals 6 damage to target creature. Destroy up to one Equipment attached to that creature.

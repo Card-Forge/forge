@@ -1,27 +1,27 @@
 //Rank|Name|Rarity|Set
-#1|Pharika God of Affliction|M|JOU
-#2|Ajani Mentor of Heroes|M|JOU
+#1|Pharika, God of Affliction|M|JOU
+#2|Ajani, Mentor of Heroes|M|JOU
 #3|Godsend|M|JOU
-#4|Iroas God of Victory|M|JOU
-#5|Keranos God of Storms|M|JOU
+#4|Iroas, God of Victory|M|JOU
+#5|Keranos, God of Storms|M|JOU
 #6|Prophetic Flamespeaker|M|JOU
-#7|Athreos God of Passage|M|JOU
+#7|Athreos, God of Passage|M|JOU
 #8|Sage of Hours|M|JOU
-#9|Kruphix God of Horizons|M|JOU
+#9|Kruphix, God of Horizons|M|JOU
 #10|Dictate of Heliod|R|JOU
 #11|Dawnbringer Charioteers|R|JOU
 #12|Silence the Believers|R|JOU
-#13|King Macar the Gold Cursed|R|JOU
+#13|King Macar, the Gold-Cursed|R|JOU
 #14|Master of the Feast|R|JOU
 #15|Hypnotic Siren|R|JOU
 #16|Setessan Tactics|R|JOU
 #17|Hydra Broodmaster|R|JOU
-#18|Heroes Bane|R|JOU
+#18|Heroes' Bane|R|JOU
 #19|Dictate of Erebos|R|JOU
 #20|Doomwake Giant|R|JOU
 #21|Eidolon of Blossoms|R|JOU
 #22|Spawn of Thraxes|R|JOU
-#23|Pheres Band Warchief|R|JOU
+#23|Pheres-Band Warchief|R|JOU
 #24|Battlefield Thaumaturge|R|JOU
 #25|Harness by Force|R|JOU
 #26|Extinguish All Hope|R|JOU
@@ -53,7 +53,7 @@
 #52|Crystalline Nautilus|U|JOU
 #53|Riddle of Lightning|U|JOU
 #54|Revel of the Fallen God|R|JOU
-#55|Nyx Fleece Ram|U|JOU
+#55|Nyx-Fleece Ram|U|JOU
 #56|Gnarled Scarhide|U|JOU
 #57|Underworld Coinsmith|U|JOU
 #58|Brain Maggot|U|JOU
@@ -62,11 +62,11 @@
 #61|Nyx Weaver|U|JOU
 #62|Spiteful Blow|U|JOU
 #63|Phalanx Formation|U|JOU
-#64|Mogiss Warhound|U|JOU
+#64|Mogis's Warhound|U|JOU
 #65|Dictate of the Twin Gods|R|JOU
 #66|Bassara Tower Archer|U|JOU
 #67|Nightmarish End|U|JOU
-#68|War Wing Siren|C|JOU
+#68|War-Wing Siren|C|JOU
 #69|Wildfire Cerberus|U|JOU
 #70|Spirespine|U|JOU
 #71|Skybind|R|JOU
@@ -83,7 +83,7 @@
 #82|Cloaked Siren|C|JOU
 #83|Dakra Mystic|U|JOU
 #84|Grim Guardian|C|JOU
-#85|Supply Line Cranes|C|JOU
+#85|Supply-Line Cranes|C|JOU
 #86|Stormchaser Chimera|U|JOU
 #87|Chariot of Victory|U|JOU
 #88|Feast of Dreams|C|JOU
@@ -92,28 +92,28 @@
 #91|Desperate Stand|U|JOU
 #92|Disciple of Deceit|U|JOU
 #93|Hubris|C|JOU
-#94|Ajanis Presence|C|JOU
+#94|Ajani's Presence|C|JOU
 #95|Goldenhide Ox|U|JOU
-#96|Pharikas Chosen|C|JOU
-#97|Lagonna Band Trailblazer|C|JOU
+#96|Pharika's Chosen|C|JOU
+#97|Lagonna-Band Trailblazer|C|JOU
 #98|Oreskos Swiftclaw|C|JOU
 #99|Quarry Colossus|U|JOU
 #100|Oakheart Dryads|C|JOU
 #101|Harvestguard Alseids|C|JOU
 #102|Bladetusk Boar|C|JOU
 #103|Sigiled Skink|C|JOU
-#104|Pheres Band Thunderhoof|C|JOU
+#104|Pheres-Band Thunderhoof|C|JOU
 #105|Satyr Hoplite|C|JOU
 #106|Armory of Iroas|U|JOU
 #107|Ravenous Leucrocota|C|JOU
 #108|Starfall|C|JOU
-#109|Gold Forged Sentinel|U|JOU
+#109|Gold-Forged Sentinel|U|JOU
 #110|Eagle of the Watch|C|JOU
 #111|Strength from the Fallen|U|JOU
 #112|Eidolon of Rhetoric|U|JOU
 #113|Nyx Infusion|C|JOU
 #114|Oppressive Rays|C|JOU
-#115|Kioras Dismissal|U|JOU
+#115|Kiora's Dismissal|U|JOU
 #116|Akroan Mastiff|C|JOU
 #117|Interpret the Signs|U|JOU
 #118|Renowned Weaver|C|JOU
@@ -123,7 +123,7 @@
 #122|Font of Fortunes|C|JOU
 #123|Armament of Nyx|C|JOU
 #124|Ritual of the Returned|U|JOU
-#125|Thassas Ire|U|JOU
+#125|Thassa's Ire|U|JOU
 #126|Spite of Mogis|U|JOU
 #127|Reviving Melody|U|JOU
 #128|Font of Fertility|C|JOU
@@ -140,10 +140,10 @@
 #139|Rouse the Mob|C|JOU
 #140|Tormented Thoughts|U|JOU
 #141|Blinding Flare|U|JOU
-#142|Natures Panoply|C|JOU
+#142|Nature's Panoply|C|JOU
 #143|Pensive Minotaur|C|JOU
 #144|Cruel Feeding|C|JOU
-#145|Thassas Devourer|C|JOU
+#145|Thassa's Devourer|C|JOU
 #146|Cast into Darkness|C|JOU
 #147|Market Festival|C|JOU
 #148|Triton Shorestalker|C|JOU
@@ -153,14 +153,14 @@
 #152|Lightning Diadem|C|JOU
 #153|Gluttonous Cyclops|C|JOU
 #154|Knowledge and Power|U|JOU
-#155|Flamespeakers Will|C|JOU
+#155|Flamespeaker's Will|C|JOU
 #156|Rotted Hulk|C|JOU
 #157|Font of Ire|C|JOU
-#158|Kruphixs Insight|C|JOU
+#158|Kruphix's Insight|C|JOU
 #159|Pull from the Deep|U|JOU
 #160|Dictate of Karametra|R|JOU
 #161|Rollick of Abandon|U|JOU
 #162|Font of Vigor|C|JOU
 #163|Godhunter Octopus|C|JOU
 #164|Desecration Plague|C|JOU
-#165|Deserters Quarters|U|JOU
+#165|Deserter's Quarters|U|JOU

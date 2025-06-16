@@ -1,0 +1,13 @@
+Name:Audacious Knuckleblade
+ManaCost:G U R
+Types:Creature Ogre Warrior Wizard
+PT:4/4
+A:AB$ Seek | Cost$ 2 G | Type$ Card.namedAudacious Knuckleblade | Exhaust$ True | RememberFound$ True | SubAbility$ DBPut | SpellDescription$ Seek a card named Audacious Knuckleblade and put it onto the battlefield tapped.
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Surveil | Cost$ 1 U | Amount$ 2 | Exhaust$ True | SubAbility$ DBUntap | SpellDescription$ Surveil 2, then untap this creature.
+SVar:DBUntap:DB$ Untap
+A:AB$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | KW$ Haste | Exhaust$ True | SpellDescription$ Creatures you control gain haste until end of turn.
+DeckHas:Ability$Graveyard
+DeckHints:Name$Audacious Knuckleblade
+Oracle:Exhaust — {2}{G}: Seek a card named Audacious Knuckleblade and put it onto the battlefield tapped.\nExhaust — {1}{U}: Surveil 2, then untap this creature.\nExhaust — {R}: Creatures you control gain haste until end of turn.

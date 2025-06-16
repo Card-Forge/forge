@@ -1,0 +1,6 @@
+Name:Ring of the Lucii
+ManaCost:4
+Types:Legendary Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+A:AB$ Tap | Cost$ 2 T PayLife<1> | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Tap target nonland permanent.
+Oracle:{T}: Add {C}{C}.\n{2}, {T}, Pay 1 life: Tap target nonland permanent.

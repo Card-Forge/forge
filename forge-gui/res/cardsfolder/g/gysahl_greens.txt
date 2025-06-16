@@ -1,0 +1,6 @@
+Name:Gysahl Greens
+ManaCost:1 G
+Types:Sorcery
+K:Flashback:6 G
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_bird_landfall | TokenOwner$ You | SpellDescription$ Create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."
+Oracle:Create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."\nFlashback {6}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

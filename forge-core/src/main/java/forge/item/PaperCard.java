@@ -347,11 +347,32 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         if (pc == null) {
             pc = StaticData.instance().getVariantCards().getCard(name, edition, artIndex);
             if (pc == null) {
-                throw new IOException(TextUtil.concatWithSpace("Card", name, "not found"));
+                System.out.println("PaperCard: " + name + " not found with set and index " + edition + ", " + artIndex);
+                pc = readObjectAlternate(name, edition);
+                if (pc == null) {
+                    throw new IOException(TextUtil.concatWithSpace("Card", name, "not found with set and index", edition, Integer.toString(artIndex)));
+                }
+                System.out.println("Alternate object found: " + pc.getName() + ", " + pc.getEdition() + ", " + pc.getArtIndex());
             }
         }
         rules = pc.getRules();
         rarity = pc.getRarity();
+    }
+
+    private IPaperCard readObjectAlternate(String name, String edition) throws ClassNotFoundException, IOException {
+        IPaperCard pc = StaticData.instance().getCommonCards().getCard(name, edition);
+        if (pc == null) {
+            pc = StaticData.instance().getVariantCards().getCard(name, edition);
+        }
+
+        if (pc == null) {
+            pc = StaticData.instance().getCommonCards().getCard(name);
+            if (pc == null) {
+                pc = StaticData.instance().getVariantCards().getCard(name);
+            }
+        }
+
+        return pc;
     }
 
     @Serial

@@ -1,0 +1,13 @@
+Name:Estinien Varlineau
+ManaCost:2 W B
+Types:Legendary Creature Elf Warrior
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast a noncreature spell, put a +1/+1 counter on CARDNAME. It gains flying until end of turn.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Flying
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your second main phase, you draw X cards and lose X life, where X is the number of your opponents who were dealt combat damage by CARDNAME or a Dragon this turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
+SVar:X:PlayerCountRegisteredOpponents$HasPropertywasDealtCombatDamageThisTurnBy Card.Self,Dragon GE1
+DeckHas:Keyword$Flying & Ability$Counters
+Oracle:Whenever you cast a noncreature spell, put a +1/+1 counter on Estinien Varlineau. It gains flying until end of turn.\nAt the beginning of your second main phase, you draw X cards and lose X life, where X is the number of your opponents who were dealt combat damage by Estinien Varlineau or a Dragon this turn.

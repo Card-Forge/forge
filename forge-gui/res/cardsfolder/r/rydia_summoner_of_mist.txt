@@ -1,0 +1,11 @@
+Name:Rydia, Summoner of Mist
+ManaCost:R G
+Types:Legendary Creature Human Shaman
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Landfall — Whenever a land you control enters, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
+A:AB$ ChangeZone | PrecostDesc$ Summon — | Cost$ X T | ValidTgts$ Saga.YouOwn+cmcEQX | TgtPrompt$ Choose target Saga card with mana value X in your graveyard | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True | WithCountersType$ FINALITY | WithCountersAmount$ 1 | SubAbility$ DBPump | RememberChanged$ True | SpellDescription$ Return target Saga card with mana value X from your graveyard to the battlefield with a finality counter on it. It gains haste until end of turn. Activate only as a sorcery.
+SVar:DBPump:DB$ Pump | KW$ Haste | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+Oracle:Landfall — Whenever a land you control enters, you may discard a card. If you do, draw a card.\nSummon — {X}, {T}: Return target Saga card with mana value X from your graveyard to the battlefield with a finality counter on it. It gains haste until end of turn. Activate only as a sorcery.

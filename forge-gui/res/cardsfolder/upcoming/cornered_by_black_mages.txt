@@ -1,6 +1,0 @@
-Name:Cornered by Black Mages
-ManaCost:1 B B
-Types:Sorcery
-A:SP$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBToken | SpellDescription$ Target opponent sacrifices a creature of their choice. Create a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_1_wizard_snipe | TokenOwner$ You
-Oracle:Target opponent sacrifices a creature of their choice.\nCreate a 0/1 black Wizard creature token with "Whenever you cast a noncreature spell, this token deals 1 damage to each opponent."
