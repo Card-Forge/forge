@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
@@ -113,6 +114,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private List<RelatedCard> relatedCards;
     private int currentCardIndex = 0;
+    private boolean isClicking = false; // Flag to prevent hover reset during clicks
 
     @Override
     public void dispose() {
@@ -497,16 +499,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
 
                 @Override
-                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    hover = true;
-                }
-
-                @Override
-                public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    hover = false;
-                }
-
-                @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     hover = true;
                     return super.touchDown(event, x, y, pointer, button);
@@ -519,7 +511,39 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 }
             });
         } else {
+            // Separate hover listener using InputListener
+            addListener(new InputListener() {
+                @Override
+                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                    hover = true;
+                    // Only reset to main card when hovering if not clicking
+                    if (!isClicking && relatedCards != null && !relatedCards.isEmpty()) {
+                        currentCardIndex = 0; // Index of main card
+                        RelatedCard mainCard = relatedCards.get(currentCardIndex);
+                        tooltip.setActor(new ComplexTooltip(new RewardImage(processDrawable(mainCard.texture))));
+                    }
+                }
+
+                @Override
+                public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                    hover = false;
+                }
+            });
+
+            // Separate click listener
             addListener(new ClickListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    isClicking = true;
+                    return super.touchDown(event, x, y, pointer, button);
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    isClicking = false;
+                    super.touchUp(event, x, y, pointer, button);
+                }
+
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if (flipOnClick)
@@ -527,18 +551,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     if (frontSideUp())
                         alternate = !alternate;
                     switchTooltip();
-                }
-
-                @Override
-                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    hover = true;
-                    System.out.println("RewardActor: enter");
-                }
-
-                @Override
-                public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    hover = false;
-                    System.out.println("RewardActor: exit");
                 }
             });
         }
@@ -566,36 +578,29 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private Texture getTokenTexture(String tokenName) {
         if (tokenName == null || tokenName.isEmpty()) {
-            System.out.println("RewardActor: getTokenTexture: invalid token name");
             return null;
         }
 
         PaperToken token = StaticData.instance().getAllTokens().getToken(tokenName);
         if (token == null) {
-            System.out.println("RewardActor: getTokenTexture: token not found: " + tokenName);
             return null;
         }
 
-        System.out.println("RewardActor: getTokenTexture: token found: " + tokenName);
         CardView tokenView = CardView.getCardForUi(token);
         if (tokenView == null) {
-            System.out.println("RewardActor: getTokenTexture: tokenView is null");
             return null;
         }
 
         // Get the token's image key in the correct format
         String editionCode = token.getEdition();
         String imageKey = ImageKeys.getTokenKey(tokenName + "|" + editionCode);
-        System.out.println("RewardActor: getTokenTexture: imageKey: " + imageKey);
 
         // Try to get the texture from cache
         Texture tokenTexture = ImageCache.getInstance().getImage(imageKey, false);
         if (tokenTexture == null) {
-            System.out.println("RewardActor: getTokenTexture: texture not found in cache");
             return null;
         }
 
-        System.out.println("RewardActor: getTokenTexture: texture found");
         return tokenTexture;
     }
 
@@ -629,9 +634,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private void switchTooltip() {
-        System.out.println("RewardActor: switchTooltip");
         if (!Reward.Type.Card.equals(reward.type)) {
-            System.out.println("RewardActor: switchTooltip: not a card");
             return;
         }
 
@@ -641,14 +644,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
 
         if (relatedCards.isEmpty()) {
-            System.out.println("RewardActor: switchTooltip: no related cards found");
             return;
         }
 
         // Move to next card
         currentCardIndex = (currentCardIndex + 1) % relatedCards.size();
         RelatedCard currentCard = relatedCards.get(currentCardIndex);
-        System.out.println("RewardActor: switchTooltip: showing " + currentCard.name);
 
         if (GuiBase.isAndroid() || Forge.hasGamepad()) {
             if (holdTooltip.tooltip_actor.altcImage != null) {
