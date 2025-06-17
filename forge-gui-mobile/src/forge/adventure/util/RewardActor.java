@@ -14,10 +14,12 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
+import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -120,8 +122,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     @Override
     public void onImageFetched() {
         ImageCache.getInstance().clear();
-
-
 
         if(reward.type.equals(Reward.Type.Card)) {
             imageKey = reward.getCard().getImageKey(false);
@@ -582,8 +582,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.getInstance().croppedBorderImage(texture));
         float origW = texture.getWidth();
         float origH = texture.getHeight();
-        float boundW = Scene.getIntendedWidth() * 0.95f;
-        float boundH = Scene.getIntendedHeight() * 0.95f;
+        float boundW = GuiBase.isAndroid() ? Scene.getIntendedWidth() * 0.95f : Scene.getIntendedWidth() * 0.7f; // Use smaller size for Desktop
+        float boundH = GuiBase.isAndroid() ? Scene.getIntendedHeight() * 0.95f : Scene.getIntendedHeight() * 0.7f; // Use smaller size for Desktop
         float newW = origW;
         float newH = origH;
         if (origW > boundW) {
@@ -1137,7 +1137,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     class ImageToolTip extends Tooltip<ComplexTooltip> {
         public ImageToolTip(ComplexTooltip contents) {
-            super(contents);
+            super(contents, RewardTooltipManager.getInstance());
         }
 
         public Image getImage() {
@@ -1275,6 +1275,32 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 //e.printStackTrace();
             }
             super.draw(batch, parentAlpha);
+        }
+    }
+
+    /**
+     * Extend and override TooltipManager to avoid the built-in default animations.
+     */
+    static class RewardTooltipManager extends TooltipManager {
+        private static RewardTooltipManager instance;
+
+        public static RewardTooltipManager getInstance() {
+            if (instance == null) {
+                instance = new RewardTooltipManager();
+            }
+            return instance;
+        }
+
+        @Override
+        protected void showAction(Tooltip tooltip) {
+            // Overriding showAction for instant tooltip display
+        }
+
+        @Override
+        protected void hideAction(Tooltip tooltip) {
+            tooltip.getContainer().addAction(Actions.sequence(
+                    Actions.removeActor() // Remove tooltip without animation
+            ));
         }
     }
 }
