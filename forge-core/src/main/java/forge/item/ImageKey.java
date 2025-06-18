@@ -1,21 +1,30 @@
 package forge.item;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 
+import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardStateName;
 
-public record ImageKey(String setCode, String name, String collectorNumber, String artistName, CardStateName state, ImageType type, boolean custom) {
+public record ImageKey(String setCode, String name, String collectorNumber, String artistName, CardStateName state, ImageType type, boolean custom) implements Serializable
+{
 
     public List<String> getFilename(ArtStyle art) {
         List<String> result = Lists.newArrayList();
         String cn = getCollectorNumberByState();
         if (type == ImageType.Token) {
+            if (ImageKeys.HIDDEN_CARD.equals(name)) {
+                // hidden only exist as png
+                result.add("hidden.png");
+                return result;
+            }
             // TODO Token doesn't use fullborder or artcrop ArtStyle yet
             if (!StringUtils.isEmpty(setCode) && !setCode.equals(CardEdition.UNKNOWN_CODE)) {
                 if (!StringUtils.isEmpty(cn) && !cn.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
@@ -36,9 +45,12 @@ public record ImageKey(String setCode, String name, String collectorNumber, Stri
         return result;
     }
 
-    public String getScryfallUrl(ArtStyle art) {
+    public Pair<String, String> getDownloadUrl(ArtStyle art) {
         if (custom) {
             return null;
+        }
+        if (type == ImageType.Token && ImageKeys.HIDDEN_CARD.equals(name)) {
+            return Pair.of("hidden.png", "https://cards.scryfall.io/back.png");
         }
         if (StringUtils.isEmpty(collectorNumber) || collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
             return null;
@@ -54,6 +66,7 @@ public record ImageKey(String setCode, String name, String collectorNumber, Stri
         if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET) return null;
         // differ token code
         String setCode = type == ImageType.Card ? edition.getScryfallCode() : edition.getTokensCode();
+        String cn = getCollectorNumberByState();
         String langCode = edition.getCardsLangCode();
         String faceParam = "";
         switch(state) {
@@ -67,10 +80,14 @@ public record ImageKey(String setCode, String name, String collectorNumber, Stri
             faceParam = "&face=front";
             break;
         }
-        // TODO make scryfall art_crop of split cards separate
 
-        return String.format("%s/%s/%s?format=image&version=%s%s", setCode, getCollectorNumberByState(),
-                langCode, art.scryfall, faceParam);
+        String ext = art.scryfall == "png" ? ".png" : ".jpg";
+        String filepath = setCode + "/" + cn + "_" + name + ext;
+        // TODO make scryfall art_crop of split cards separate
+        String url = ImageKeys.URL_PIC_SCRYFALL_DOWNLOAD + String.format(
+            "%s/%s/%s?format=image&version=%s%s", setCode, cn, langCode, art.scryfall, faceParam
+        );
+        return Pair.of(filepath, url);
     }
     protected String getCollectorNumberByState() {
         String scryCN = collectorNumber;

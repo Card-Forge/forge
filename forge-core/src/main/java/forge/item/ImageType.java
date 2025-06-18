@@ -2,6 +2,11 @@ package forge.item;
 
 public enum ImageType {
     Card,
-    Token
+    Token,
+    Booster,
+    FatPack,
+    BoosterBox,
+    Precon,
+    TournamentPack,
     ;
 }
