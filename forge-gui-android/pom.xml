@@ -250,6 +250,11 @@
             <artifactId>org.jupnp.android</artifactId>
             <version>3.0.3</version>
         </dependency>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
 
     <profiles>
