@@ -192,6 +192,12 @@ public class ImageUtil {
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
             faceParam = (face.equals("back") ? "&face=back" : "&face=front");
+        } else if (cp.getRules().getSplitType() == CardSplitType.Meld
+                    && !cardCollectorNumber.endsWith("a")
+                    && !cardCollectorNumber.endsWith("b")) {
+            // Only the bottom half of a meld card shares a collector number.
+            // Hanweir Garrison EMN already has a appended.
+            cardCollectorNumber += face.equals("back") ? "b" : "a";
         }
         return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
                 langCode, versionParam, faceParam);
