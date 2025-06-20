@@ -193,6 +193,9 @@ public class ImageUtil {
         if (cp.getRules().getOtherPart() != null) {
             faceParam = (face.equals("back") ? "&face=back" : "&face=front");
         }
+        if (cp.getRules().getSplitType() == CardSplitType.Meld) {
+            cardCollectorNumber += face.equals("back") ? "b" : "a";
+        }
         return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
                 langCode, versionParam, faceParam);
     }
