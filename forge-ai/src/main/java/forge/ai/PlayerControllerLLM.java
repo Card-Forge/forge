@@ -7,18 +7,25 @@ import forge.LobbyPlayer;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameObject;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.KeywordInterface;
 import forge.util.ITriggerEvent;
+import com.google.common.collect.Lists;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -86,6 +93,26 @@ public class PlayerControllerLLM extends PlayerControllerAi {
         manaPool.addProperty("colorless", player.getManaPool().getAmountOfColor(MagicColor.COLORLESS));
         playerInfo.add("manaPool", manaPool);
         
+        // Add lands that can produce mana
+        JsonArray availableManaLands = new JsonArray();
+        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isLand() && !c.getManaAbilities().isEmpty() && !c.isTapped()) {
+                JsonObject landObj = createCardJson(c);
+                
+                // Add info about what mana this land can produce
+                JsonArray manaProduced = new JsonArray();
+                for (SpellAbility sa : c.getManaAbilities()) {
+                    if (sa.getManaPart() != null) {
+                        manaProduced.add(sa.getManaPart().getOrigProduced());
+                    }
+                }
+                landObj.add("manaAbilities", manaProduced);
+                
+                availableManaLands.add(landObj);
+            }
+        }
+        playerInfo.add("availableManaLands", availableManaLands);
+        
         state.add("player", playerInfo);
         
         // Game phase info
@@ -95,6 +122,7 @@ public class PlayerControllerLLM extends PlayerControllerAi {
         gamePhase.addProperty("currentPhase", currentPhase != null ? currentPhase.toString() : "UNKNOWN");
         gamePhase.addProperty("currentTurn", phaseHandler.getTurn());
         gamePhase.addProperty("isPlayerTurn", phaseHandler.getPlayerTurn() == player);
+        gamePhase.addProperty("canPlayLand", player.getLandsPlayedThisTurn() < 1);
         state.add("gamePhase", gamePhase);
         
         // Battlefield for player
@@ -109,6 +137,8 @@ public class PlayerControllerLLM extends PlayerControllerAi {
         JsonArray hand = new JsonArray();
         for (Card c : player.getCardsIn(ZoneType.Hand)) {
             JsonObject cardObj = createCardJson(c);
+            // Add castability info
+            cardObj.addProperty("canCastNow", ComputerUtilMana.hasEnoughManaSourcesToCast(c.getFirstSpellAbility(), player));
             hand.add(cardObj);
         }
         state.add("hand", hand);
@@ -120,6 +150,14 @@ public class PlayerControllerLLM extends PlayerControllerAi {
             commanders.add(cardObj);
         }
         state.add("commanders", commanders);
+        
+        // Graveyard
+        JsonArray graveyard = new JsonArray();
+        for (Card c : player.getCardsIn(ZoneType.Graveyard)) {
+            JsonObject cardObj = createCardJson(c);
+            graveyard.add(cardObj);
+        }
+        state.add("graveyard", graveyard);
         
         // Opponents
         JsonArray opponents = new JsonArray();
@@ -137,6 +175,14 @@ public class PlayerControllerLLM extends PlayerControllerAi {
                 }
                 opponentObj.add("battlefield", opponentBattlefield);
                 
+                // Opponent's graveyard
+                JsonArray opponentGraveyard = new JsonArray();
+                for (Card c : p.getCardsIn(ZoneType.Graveyard)) {
+                    JsonObject cardObj = createCardJson(c);
+                    opponentGraveyard.add(cardObj);
+                }
+                opponentObj.add("graveyard", opponentGraveyard);
+                
                 // Opponent's commanders
                 JsonArray opponentCommanders = new JsonArray();
                 for (Card c : p.getCommanders()) {
@@ -149,6 +195,17 @@ public class PlayerControllerLLM extends PlayerControllerAi {
             }
         }
         state.add("opponents", opponents);
+        
+        // Stack
+        JsonArray stackArray = new JsonArray();
+        for (SpellAbilityStackInstance si : getGame().getStack()) {
+            JsonObject stackObj = new JsonObject();
+            stackObj.addProperty("name", si.getSourceCard().getName());
+            stackObj.addProperty("controller", si.getActivatingPlayer().getName());
+            stackObj.addProperty("description", si.getStackDescription());
+            stackArray.add(stackObj);
+        }
+        state.add("stack", stackArray);
         
         return state;
     }
@@ -163,8 +220,38 @@ public class PlayerControllerLLM extends PlayerControllerAi {
         cardObj.addProperty("type", card.getType() != null ? card.getType().toString() : "Unknown");
         cardObj.addProperty("power", card.getNetPower());
         cardObj.addProperty("toughness", card.getNetToughness());
+        cardObj.addProperty("cmc", card.getCMC());
         cardObj.addProperty("text", card.getSpellText());
         cardObj.addProperty("isTapped", card.isTapped());
+        
+        // Add keywords
+        JsonArray keywords = new JsonArray();
+        for (KeywordInterface kw : card.getKeywords()) {
+            keywords.add(kw.getOriginal());
+        }
+        cardObj.add("keywords", keywords);
+        
+        // Add colors
+        JsonArray colors = new JsonArray();
+        for (byte color : MagicColor.WUBRG) {
+            if (card.getColor().hasAnyColor(color)) {
+                colors.add(MagicColor.toLongString(color));
+            }
+        }
+        cardObj.add("colors", colors);
+        
+        // Add counter information
+        if (!card.getCounters().isEmpty()) {
+            JsonArray counters = new JsonArray();
+            for (CounterType counterType : card.getCounters().keySet()) {
+                JsonObject counter = new JsonObject();
+                counter.addProperty("type", counterType.getName());
+                counter.addProperty("count", card.getCounters(counterType));
+                counters.add(counter);
+            }
+            cardObj.add("counters", counters);
+        }
+        
         return cardObj;
     }
     
@@ -481,5 +568,122 @@ public class PlayerControllerLLM extends PlayerControllerAi {
         // If we got here without a valid response, return a reasonable default
         logger.warning("LLM failed to provide valid mulligan choice, defaulting to keep hand");
         return true; // Default to keeping hand
+    }
+    
+    @Override
+    public List<SpellAbility> chooseSpellAbilityToPlay() {
+        logger.info("chooseSpellAbilityToPlay called for " + player.getName());
+        
+        // Skip resetting predicted combat as we don't use it in LLM controller
+
+        // Create game state for the LLM
+        JsonObject state = createGameStateJson("chooseSpellAbilityToPlay");
+        
+        // Gather available spell abilities
+        CardCollection cards = ComputerUtilAbility.getAvailableCards(getGame(), player);
+        cards = ComputerUtilCard.dedupeCards(cards);
+        List<SpellAbility> saList = ComputerUtilAbility.getSpellAbilities(cards, player);
+        
+        // Filter out lands and other non-interesting abilities
+        List<SpellAbility> filteredSaList = new ArrayList<>(saList);
+        filteredSaList.removeIf(spellAbility -> {
+            return (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
+        });
+        
+        // Add available land plays
+        CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(getGame(), player);
+        if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
+            for (Card land : landsWannaPlay) {
+                List<SpellAbility> landAbilities = land.getAllPossibleAbilities(player, true);
+                // Only include land abilities
+                landAbilities.removeIf(sa -> !sa.isLandAbility());
+                filteredSaList.addAll(landAbilities);
+            }
+        }
+        
+        // Add spell abilities to the state for LLM to choose from
+        JsonArray abilities = new JsonArray();
+        for (SpellAbility sa : filteredSaList) {
+            JsonObject saObj = new JsonObject();
+            saObj.addProperty("id", sa.getId());
+            saObj.addProperty("hostCard", sa.getHostCard() != null ? sa.getHostCard().getName() : "Unknown");
+            saObj.addProperty("description", sa.getDescription());
+            saObj.addProperty("isLand", sa.isLandAbility());
+            
+            // Add additional data about cost
+            if (sa.getPayCosts() != null) {
+                saObj.addProperty("costDescription", sa.getPayCosts().toString());
+            }
+            
+            // Add information about legal targets if targeting is involved
+            if (sa.usesTargeting()) {
+                JsonArray targets = new JsonArray();
+                for (GameObject obj : getGame().getCardsIn(ZoneType.Battlefield)) {
+                    if (sa.canTarget(obj)) {
+                        JsonObject target = new JsonObject();
+                        if (obj instanceof Card) {
+                            Card card = (Card) obj;
+                            target.addProperty("name", card.getName());
+                            target.addProperty("controller", card.getController().getName());
+                            target.addProperty("type", card.getType().toString());
+                        }
+                        targets.add(target);
+                    }
+                }
+                saObj.add("potentialTargets", targets);
+            }
+            
+            abilities.add(saObj);
+        }
+        state.add("availableAbilities", abilities);
+        
+        // Get LLM response
+        try {
+            JsonObject response = askLLM(state, "chooseSpellAbilityToPlay");
+            
+            if (response != null && response.has("chosenAbilityId")) {
+                int chosenId = response.get("chosenAbilityId").getAsInt();
+                
+                // If no ability was chosen (chosenAbilityId = -1 or empty list), return null
+                if (chosenId == -1 || filteredSaList.isEmpty()) {
+                    logger.info("LLM chose not to play any ability");
+                    return null;
+                }
+                
+                // Find the matching ability
+                for (SpellAbility sa : filteredSaList) {
+                    if (sa.getId() == chosenId) {
+                        // Found the chosen ability, return it as a single-element list
+                        logger.info("LLM chose ability: " + sa.getDescription() + " from card " + 
+                                  (sa.getHostCard() != null ? sa.getHostCard().getName() : "Unknown"));
+                        return singleSpellAbilityList(sa);
+                    }
+                }
+                
+                logger.warning("LLM chose an ability ID that wasn't found: " + chosenId);
+            }
+            
+            // If LLM didn't choose an ability or the chosen ability wasn't found,
+            // return null to indicate no action
+            logger.warning("LLM failed to choose a valid ability");
+            return null;
+            
+        } catch (Exception e) {
+            // Log the error and fall back to built-in AI behavior
+            logger.severe("Error communicating with LLM service for card playing: " + e.getMessage());
+            e.printStackTrace();
+            
+            // Fall back to the parent class implementation
+            logger.info("Falling back to built-in AI behavior for card playing");
+            return super.chooseSpellAbilityToPlay();
+        }
+    }
+    
+    // Helper method to create a single-element list (borrowed from PlayerControllerAi)
+    private List<SpellAbility> singleSpellAbilityList(SpellAbility sa) {
+        if (sa == null) {
+            return null;
+        }
+        return Lists.newArrayList(sa);
     }
 }

@@ -95,16 +95,16 @@ public class LLMClient {
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/json; utf-8");
             conn.setRequestProperty("Accept", "application/json");
-            conn.setConnectTimeout(10000); // 10 seconds
-            conn.setReadTimeout(10000);    // 10 seconds
+            conn.setConnectTimeout(600000); // 10 minutes
+            conn.setReadTimeout(600000);    // 10 minutes
             
             if (DEBUG) {
                 System.out.println("Connection properties:");
                 System.out.println("- Method: " + conn.getRequestMethod());
                 System.out.println("- Content-Type: " + conn.getRequestProperty("Content-Type"));
                 System.out.println("- Accept: " + conn.getRequestProperty("Accept"));
-                System.out.println("- Connect timeout: " + conn.getConnectTimeout() + "ms");
-                System.out.println("- Read timeout: " + conn.getReadTimeout() + "ms");
+                System.out.println("- Connect timeout: " + conn.getConnectTimeout() + "ms (" + (conn.getConnectTimeout()/60000) + " minutes)");
+                System.out.println("- Read timeout: " + conn.getReadTimeout() + "ms (" + (conn.getReadTimeout()/60000) + " minutes)");
                 System.out.println("Sending HTTP request...");
             }
             

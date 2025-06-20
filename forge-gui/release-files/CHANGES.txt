@@ -1,6 +1,16 @@
 ## Unreleased
 ### No issue
 
+**llm v0 OK**
+
+
+[5e56ef2f0ca3d66](https://github.com/Card-Forge/forge/commit/5e56ef2f0ca3d66) Gérôme Pistre *2025-05-31 12:03:01*
+
+**wow**
+
+
+[b6402bca52fe0c2](https://github.com/Card-Forge/forge/commit/b6402bca52fe0c2) Gérôme Pistre *2025-05-30 17:35:51*
+
 **123**
 
 
