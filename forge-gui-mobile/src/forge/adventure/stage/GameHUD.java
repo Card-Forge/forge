@@ -786,6 +786,7 @@ public class GameHUD extends Stage {
         console.toggle();
         if (console.isVisible()) {
             clearAbility();
+            console.setZIndex(ui.getChildren().size);
         } else {
             updateAbility();
         }
