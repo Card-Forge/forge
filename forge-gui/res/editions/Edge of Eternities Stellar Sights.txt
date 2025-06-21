@@ -1,0 +1,10 @@
+[metadata]
+Code=EOS
+Date=2025-08-01
+Name=Edge of Eternities: Stellar Sights
+Type=Collector_Edition
+ScryfallCode=EOS
+
+[cards]
+28 M Mutavault @Andrew Mar
+73 M Mutavault @Aeron Ng
