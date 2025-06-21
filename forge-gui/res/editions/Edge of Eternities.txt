@@ -9,7 +9,9 @@ ScryfallCode=EOE
 2 M Tezzeret, Cruel Captain @Chris Rahn
 35 R The Seriema @Sergey Glushakov
 115 M Sothera, the Supervoid @Dominik Mayer
+189 U Harmonious Grovestrider @Ron Spencer
 225 U Sami, Ship's Engineer @Zara Alfonso
+233 U Tannuk, Memorial Ensign @David Auden Nash
 251 R Breeding Pool @Constantin Marin
 254 R Godless Shrine @Rob Rey
 256 R Sacred Foundry @Titus Lunter
