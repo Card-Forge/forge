@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 
 import forge.card.MagicColor;
 import forge.game.Game;
+import forge.game.GameImpl;
 import forge.game.GameOutcome;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
@@ -38,7 +39,7 @@ public class SubgameEffect extends SpellAbilityEffect {
             players.add(p.getRegisteredPlayer());
         }
 
-        return new Game(players, maingame.getRules(), maingame.getMatch(), maingame, startingLife);
+        return new GameImpl(players, maingame.getRules(), maingame.getMatch(), maingame, startingLife);
     }
 
     private void setCardsInZone(Player player, final ZoneType zoneType, final CardCollectionView oldCards, boolean addMapping) {

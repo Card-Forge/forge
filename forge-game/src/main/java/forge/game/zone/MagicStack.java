@@ -285,7 +285,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.resetOnceResolved();
 
             // parts are paid sequentially, so collect directly or some trigger might get lost
-            if (game.costPaymentStack.peek() != null) {
+            if (game.costPaymentStack().peek() != null) {
                 game.getTriggerHandler().collectTriggerForWaiting();
             }
             return;

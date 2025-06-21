@@ -25,7 +25,7 @@ public class SpellAbilityPicker {
     private Game game;
     private Player player;
     private Score bestScore;
-    private boolean printOutput = false;
+    private boolean printOutput = true;
     private SpellAbilityChoicesIterator interceptor;
 
     private Plan plan;

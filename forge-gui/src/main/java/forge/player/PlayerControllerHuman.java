@@ -592,7 +592,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             cost.decreaseGenericMana(willPay);
             return true;
-        } else if (sa.getHostCard().getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        } else if (sa.getHostCard().getGame().configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             // Let's roll it back!
             return false;
         } else {
@@ -2365,7 +2365,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean canUndoLastAction() {
-        if (!getGame().stack.canUndo(player)) {
+        if (!getGame().stack().canUndo(player)) {
             return false;
         }
         final Player priorityPlayer = getGame().getPhaseHandler().getPriorityPlayer();
