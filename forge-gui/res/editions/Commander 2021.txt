@@ -440,11 +440,11 @@ ScryfallCode=C21
 22 c_x_x_a_construct @Kieran Yanner
 23 c_0_0_a_construct_total_artifacts @Zoltan Boros
 24 c_a_food_sac @Steve Prescott
-27 c_3_3_a_golem_flying @Andrew Mar
+25 c_3_3_a_golem_flying @Andrew Mar
+26 c_3_3_a_golem_trample @Andrew Mar
+27 c_3_3_a_golem_vigilance @Andrew Mar
 28 c_1_1_a_myr @Ryan Pancoast
 29 c_1_1_a_thopter_flying @Svetlin Velinov
-30 c_3_3_a_golem_trample @Andrew Mar
-31 c_3_3_a_golem_vigilance @Andrew Mar
 
 [other]
 eternalize_champion_of_wits
