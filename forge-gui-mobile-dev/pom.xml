@@ -239,5 +239,10 @@
             <version>1.13.5</version>
             <classifier>natives-desktop</classifier>
         </dependency>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

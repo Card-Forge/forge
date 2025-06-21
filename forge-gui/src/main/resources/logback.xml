@@ -1,10 +1,92 @@
-<configuration>
-  <appender name="A1" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>%-4r [%t] %-5p %c %x - %m%n</pattern>
-    </encoder>
-  </appender>
-  <root level="ALL">
-    <appender-ref ref="A1"/>
-  </root>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+
+<!-- Configuration Options
+"debug" emits logging diagnostics at runtime.
+  Default: false
+  Recommendation: set this to "true" while iterating on updates to this configuration file,
+    or when troubleshooting logging issues.
+  c.f. https://logback.qos.ch/manual/configuration.html#configDebug
+"scan" auto-reloads properties file on changes.
+  Default: true, 60s interval
+  Note: This only affects the separate properties file, NOT this configuration file itself.
+  c.f. https://logback.qos.ch/manual/configuration.html#autoScan
+"enablePackagingData" annotates stack traces with package versioning information, but with a performance penalty.
+  Default: false
+  Recommendation: set this to "true" while testing dependencies updates.
+  c.f. https://logback.qos.ch/manual/configuration.html#packagingData
+-->
+<configuration scan="true" scanPeriod="60 seconds" debug="false" enablePackagingData="false">
+  <import class="ch.qos.logback.core.FileAppender"/>
+  <import class="ch.qos.logback.core.ConsoleAppender"/>
+  <import class="ch.qos.logback.core.hook.DefaultShutdownHook"/>
+
+  <!-- Properties
+Adjust logging thresholds of specific packages and loggers using this properties file.
+
+Ensure "scan=true" and reduce the scanPeriod if you are iterating on logging level adjustments.
+Set "debug=true" on the configuration to see reload messages.
+  -->
+  <propertiesConfigurator file="../forge-gui/src/main/resources/logging.properties"/>
+
+  <!-- Defined here for reuse. -->
+  <variable name="defaultLoggingPattern" value="%d [%-5p][%-25c{5}] %m%n"/>
+  <variable name="threadsLoggingPattern" value="%d [%-5p][%-16t][%-25c{5}] %m%n"/>
+  <variable name="loggingPattern" value="${loggingPattern:-${defaultLoggingPattern}}"/>
+
+  <!-- Variables
+Override these with CLI arguments:
+    c.f. https://logback.qos.ch/manual/configuration.html#variableSubstitution
+
+      java -DloggingFilename="${HOME}/forge-dev.log"
+           -DloggingIsFileEnabled=true
+           -DloggingThreshold=ERROR
+
+  -->
+  <variable name="loggingFilename" value="${loggingFilename:-development.log}" />
+  <variable name="loggingIsFileEnabled" value="${loggingIsFileEnabled:-false}" />
+  <variable name="loggingIsConsoleEnabled" value="${loggingIsConsoleEnabled:-true}" />
+  <variable name="loggingThreshold" value="${loggingThreshold:-INFO}" />
+
+  <!-- File Logging
+Only create a log file if explicitly enabled by setting the
+loggingIsFileEnabled variable to "true".
+  -->
+  <if condition='property("loggingIsFileEnabled").equals("true")'>
+    <then>
+      <appender name="FILE" class="FileAppender">
+        <file>${loggingFilename}</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+          <pattern>${loggingPattern}</pattern>
+        </encoder>
+      </appender>
+
+      <root level="${loggingThreshold}">
+        <appender-ref ref="FILE"/>
+      </root>
+    </then>
+  </if>
+
+  <!-- Console Logging
+Console logging is enabled by default, but can be disabled by setting the
+loggingIsConsoleEnabled variable to "false".
+  -->
+  <if condition='property("loggingIsConsoleEnabled").equals("true")'>
+    <then>
+      <appender name="CONSOLE" class="ConsoleAppender">
+        <encoder>
+          <pattern>${loggingPattern}</pattern>
+        </encoder>
+      </appender>
+
+      <root level="${loggingThreshold}">
+        <appender-ref ref="CONSOLE"/>
+      </root>
+    </then>
+  </if>
+
+  <shutdownHook class="DefaultShutdownHook"/>
+
 </configuration>
