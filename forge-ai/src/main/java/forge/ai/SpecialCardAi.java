@@ -359,7 +359,7 @@ public class SpecialCardAi {
         private static final int demonSacThreshold = Integer.MAX_VALUE; // if we're in dire conditions, sac everything from worst to best hoping to find an answer
 
         public static boolean considerSacrificingCreature(final Player ai, final SpellAbility sa) {
-            Card c = source.getHostCard();
+            Card c = sa.getHostCard();
 
             // Only check for sacrifice if it's the owner's turn, and it can attack.
             // TODO: Maybe check if sacrificing a creature allows AI to kill the opponent with the rest on their turn?
