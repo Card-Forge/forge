@@ -3,10 +3,7 @@ package forge.player;
 import com.google.common.collect.Iterables;
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -90,7 +87,7 @@ public class HumanPlay {
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
-            if (!controller.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            if (!controller.getGame().configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
                 Card rollback = p.getGame().getCardState(source);
                 if (castFaceDown) {
                     rollback.setFaceDown(false);

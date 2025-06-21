@@ -4,6 +4,7 @@ import forge.ai.AiDeckStatistics;
 import forge.ai.CreatureEvaluator;
 import forge.card.mana.ManaAtom;
 import forge.game.Game;
+import forge.game.GameOptions;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.CostSacrifice;
@@ -53,7 +54,7 @@ public class GameStateEvaluator {
         Game gameCopy;
         GameCopier copier = new GameCopier(evalGame);
 
-        if (evalGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (evalGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             gameCopy = copier.makeCopy();
         } else {
             gameCopy = copier.makeCopy(null, aiPlayer);

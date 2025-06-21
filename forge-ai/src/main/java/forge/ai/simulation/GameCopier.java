@@ -50,7 +50,7 @@ public class GameCopier {
 
     public GameCopier(Game origGame) {
         this.origGame = origGame;
-        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (origGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             this.snapshot = new GameSnapshot(origGame);
         }
     }
@@ -67,7 +67,7 @@ public class GameCopier {
         return makeCopy(null, null);
     }
     public Game makeCopy(PhaseType advanceToPhase, Player aiPlayer) {
-        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (origGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             // How do we advance to phase when using restores?
             return snapshot.makeCopy();
         }
@@ -80,7 +80,7 @@ public class GameCopier {
 
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
-        Game newGame = new Game(newPlayers, currentRules, newMatch);
+        Game newGame = new GameImpl(newPlayers, currentRules, newMatch);
         newGame.dangerouslySetTimestamp(origGame.getTimestamp());
 
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
@@ -214,9 +214,7 @@ public class GameCopier {
     }
 
     private void copyGameState(Game newGame, Player aiPlayer) {
-        newGame.EXPERIMENTAL_RESTORE_SNAPSHOT = origGame.EXPERIMENTAL_RESTORE_SNAPSHOT;
-        newGame.AI_TIMEOUT = origGame.AI_TIMEOUT;
-        newGame.AI_CAN_USE_TIMEOUT = origGame.AI_CAN_USE_TIMEOUT;
+        newGame.setConfiguration(origGame.configuration());
         newGame.setAge(origGame.getAge());
 
         // TODO countersAddedThisTurn
@@ -475,7 +473,7 @@ public class GameCopier {
     }
 
     public GameObject find(GameObject o) {
-        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (origGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             return snapshot.find(o);
         }
 
@@ -497,7 +495,7 @@ public class GameCopier {
         return result;
     }
     public GameObject reverseFind(GameObject o) {
-        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (origGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             return snapshot.reverseFind(o);
         }
 

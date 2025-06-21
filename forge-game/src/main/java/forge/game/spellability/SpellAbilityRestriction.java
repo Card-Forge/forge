@@ -546,7 +546,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         // Rule 605.3c about Mana Abilities
         if (sa.isManaAbility()) {
-            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+            for (IndividualCostPaymentInstance i : game.costPaymentStack()) {
                 if (i.getPayment().getAbility().equals(sa)) {
                     return false;
                 }
@@ -611,7 +611,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         // Special check for Lion's Eye Diamond
-        if (sa.isManaAbility() && c.getGame().costPaymentStack.peek() != null && isInstantSpeed()) {
+        if (sa.isManaAbility() && c.getGame().costPaymentStack().peek() != null && isInstantSpeed()) {
             return false;
         }
 

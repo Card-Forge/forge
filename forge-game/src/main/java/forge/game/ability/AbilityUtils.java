@@ -2827,7 +2827,7 @@ public class AbilityUtils {
             final String validFilter = workingCopy[1];
             // use objectXCount ?
             int activated = CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
-            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+            for (IndividualCostPaymentInstance i : game.costPaymentStack()) {
                 if (i.getPayment().getAbility().isValid(validFilter, player, c, ctb)) {
                     activated++;
                 }

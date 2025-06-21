@@ -2335,8 +2335,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
         runParams.put(AbilityKey.Card, cpy);
         runParams.put(AbilityKey.Cause, source);
-        runParams.put(AbilityKey.CostStack, game.costPaymentStack);
-        runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
+        runParams.put(AbilityKey.CostStack, game.costPaymentStack());
+        runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack().peek());
         game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
     }
 

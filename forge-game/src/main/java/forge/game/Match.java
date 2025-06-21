@@ -68,7 +68,7 @@ public class Match {
     }
 
     public Game createGame() {
-        return new Game(players, rules, this);
+        return new GameImpl(players, rules, this);
     }
 
     public void startGame(final Game game) {

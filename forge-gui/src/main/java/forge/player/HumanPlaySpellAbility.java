@@ -22,6 +22,7 @@ import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameObject;
+import forge.game.GameOptions;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
@@ -169,7 +170,7 @@ public class HumanPlaySpellAbility {
 
             if (ability.isTrigger()) {
                 // Only roll back triggers if they were not paid for
-                if (game.EXPERIMENTAL_RESTORE_SNAPSHOT && preCostRequisites) {
+                if (game.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT) && preCostRequisites) {
                     GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
                 } else {
                     // If precost requsities failed, then there probably isn't anything to refund during experimental
