@@ -163,7 +163,7 @@ public class Combat {
         combatantsThatDealtFirstStrikeDamage.get().clear();
 
         //clear tracking for cards that care about "this combat"
-        Game game = playerWhoAttacks.getGame();
+        IGame game = playerWhoAttacks.getGame();
         for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
             c.getDamageHistory().endCombat();
         }
@@ -573,7 +573,7 @@ public class Combat {
         // restore the original defender in case it was changed before the creature was
         // removed from combat but before the trigger resolved (e.g. Ulamog, the Ceaseless
         // Hunger + Portal Mage + Unsummon)
-        Game game = c.getGame();
+        IGame game = c.getGame();
         for (SpellAbilityStackInstance si : game.getStack()) {
             if (si.isTrigger() && c.equals(si.getSourceCard())) {
                 GameEntity origDefender = (GameEntity)si.getTriggeringObject(AbilityKey.OriginalDefender);
@@ -671,7 +671,7 @@ public class Combat {
     }
 
     // Call this method right after turn-based action of declare blockers has been performed
-    public final void fireTriggersForUnblockedAttackers(final Game game) {
+    public final void fireTriggersForUnblockedAttackers(final IGame game) {
         boolean bFlag = false;
         List<GameEntity> defenders = Lists.newArrayList();
         for (AttackingBand ab : attackedByBands.get().values()) {
@@ -927,7 +927,7 @@ public class Combat {
     }
 
     public void dealAssignedDamage() {
-        final Game game = playerWhoAttacks.getGame();
+        final IGame game = playerWhoAttacks.getGame();
         game.copyLastState();
 
         CardDamageMap preventMap = new CardDamageMap();

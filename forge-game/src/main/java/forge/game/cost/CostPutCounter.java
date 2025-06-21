@@ -18,7 +18,7 @@
 package forge.game.cost;
 
 import com.google.common.collect.Sets;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
@@ -141,7 +141,7 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         if (this.payCostFromSource()) {
             if (isETBReplacement(ability, effect)) {
                 final Card copy = CardCopyService.getLKICopy(source);

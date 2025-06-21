@@ -11,7 +11,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
 import forge.game.EvenOdd;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -40,7 +40,7 @@ import java.util.*;
 public class CardProperty {
 
     public static boolean cardHasProperty(Card card, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         final Combat combat = game.getCombat();
         // lki can't be null but it does return this
         final Card lki = game.getChangeZoneLKIInfo(card);

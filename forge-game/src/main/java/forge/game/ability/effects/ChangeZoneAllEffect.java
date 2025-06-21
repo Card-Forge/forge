@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
@@ -46,7 +46,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         CardCollection cards;
         PlayerCollection tgtPlayers = getTargetPlayers(sa);
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = new CardCollection(game.getCardsIn(origin));

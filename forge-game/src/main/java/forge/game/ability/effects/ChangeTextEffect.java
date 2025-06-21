@@ -8,7 +8,7 @@ import forge.GameCommand;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
@@ -24,7 +24,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final Long timestamp = game.getNextTimestamp();
         final boolean permanent = "Permanent".equals(sa.getParam("Duration"));
 

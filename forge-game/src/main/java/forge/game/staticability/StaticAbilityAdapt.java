@@ -1,6 +1,6 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -8,7 +8,7 @@ import forge.game.zone.ZoneType;
 public class StaticAbilityAdapt {
 
     public static boolean anyWithAdapt(final SpellAbility sa, final Card card) {
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CanAdapt)) {

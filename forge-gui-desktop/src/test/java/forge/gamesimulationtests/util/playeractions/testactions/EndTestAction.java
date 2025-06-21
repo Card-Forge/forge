@@ -1,6 +1,6 @@
 package forge.gamesimulationtests.util.playeractions.testactions;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 
@@ -14,7 +14,7 @@ public class EndTestAction extends TestAction {
 	}
 
 	@Override
-	public void perform( Game game, Player player ) {
+	public void perform(IGame game, Player player ) {
 		endTest( player );
 	}
 }

@@ -8,7 +8,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityFactory;
@@ -168,7 +168,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
     protected void resolvePerType(SpellAbility sa, Player placer, CounterType counterType, int counterAmount,
                                   GameEntityCounterTable table, boolean stopForTypes) {
         final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
         final boolean etbcounter = sa.hasParam("ETB");
@@ -582,7 +582,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
         final String amount = sa.getParamOrDefault("CounterNum", "1");
         final int counterAmount = AbilityUtils.calculateAmount(card, amount, sa);

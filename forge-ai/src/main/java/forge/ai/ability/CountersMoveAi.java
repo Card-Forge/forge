@@ -4,7 +4,7 @@ import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
@@ -118,7 +118,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
 
             if (!sa.isTargetNumberValid() && mandatory) {
-                final Game game = ai.getGame();
+                final IGame game = ai.getGame();
                 List<Card> tgtCards = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
                 if (tgtCards.isEmpty()) {
@@ -228,7 +228,7 @@ public class CountersMoveAi extends SpellAbilityAi {
 
     private boolean moveTgtAI(final Player ai, final SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final String type = sa.getParam("CounterType");
         final CounterType cType = "Any".equals(type) || "All".equals(type) ? null : CounterType.getType(type);
 

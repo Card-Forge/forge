@@ -3,7 +3,7 @@ package forge.game.ability.effects;
 import java.util.*;
 
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
@@ -107,7 +107,7 @@ public class DigEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         final Player cont = host.getController();
         Player chooser = activator;
         int digNum = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);

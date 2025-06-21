@@ -12,7 +12,7 @@ import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.mana.ManaCost;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
@@ -33,7 +33,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         final Card host = sa.getHostCard();
 
         if (sa.hasParam("Echo")) {

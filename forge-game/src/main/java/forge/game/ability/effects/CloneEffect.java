@@ -3,7 +3,7 @@ package forge.game.ability.effects;
 import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.StaticData;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -58,7 +58,7 @@ public class CloneEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         List<Card> cloneTargets = new ArrayList<>();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         final List<String> pumpKeywords = Lists.newArrayList();
 
         if (sa.hasParam("PumpKeywords")) {

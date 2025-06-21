@@ -7,7 +7,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.card.CardStateName;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -28,7 +28,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 
 public class ComputerUtilAbility {
-    public static CardCollection getAvailableLandsToPlay(final Game game, final Player player) {
+    public static CardCollection getAvailableLandsToPlay(final IGame game, final Player player) {
         if (!game.getStack().isEmpty() || !game.getPhaseHandler().getPhase().isMain()) {
             return null;
         }
@@ -61,7 +61,7 @@ public class ComputerUtilAbility {
         return landList;
     }
 
-    public static CardCollection getAvailableCards(final Game game, final Player player) {
+    public static CardCollection getAvailableCards(final IGame game, final Player player) {
         CardCollection all = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
@@ -143,7 +143,7 @@ public class ComputerUtilAbility {
         return result;
     }
 
-    public static SpellAbility getTopSpellAbilityOnStack(Game game, SpellAbility sa) {
+    public static SpellAbility getTopSpellAbilityOnStack(IGame game, SpellAbility sa) {
         Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
 
         if (!it.hasNext()) {
@@ -258,7 +258,7 @@ public class ComputerUtilAbility {
                         return 0; // fallback if neither SA have a host card somehow
                     }
                 }
-                Game game = hostCardForGame.getGame();
+                IGame game = hostCardForGame.getGame();
                 if (game.getActivePlanes() != null) {
                     for (Card c : game.getActivePlanes()) {
                         if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {

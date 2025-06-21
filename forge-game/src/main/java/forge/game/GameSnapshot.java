@@ -20,24 +20,24 @@ import java.util.List;
 import java.util.Map;
 
 public class GameSnapshot {
-    private final Game origGame;
-    private Game newGame = null;
+    private final IGame origGame;
+    private IGame newGame = null;
     private boolean restore = false;
 
     private final SnapshotEntityMap gameObjectMap = new SnapshotEntityMap();
 
-    public GameSnapshot(Game origGame) {
+    public GameSnapshot(IGame origGame) {
         this.origGame = origGame;
     }
 
-    public Game getCopiedGame() {
+    public IGame getCopiedGame() {
         return origGame;
     }
 
-    public Game makeCopy() {
+    public IGame makeCopy() {
         return makeCopy(null, true);
     }
-    public Game makeCopy(List<RegisteredPlayer> replacementPlayers, boolean includeStack) {
+    public IGame makeCopy(List<RegisteredPlayer> replacementPlayers, boolean includeStack) {
         List<RegisteredPlayer> newPlayers;
         if (replacementPlayers != null) {
             newPlayers = replacementPlayers;
@@ -55,13 +55,13 @@ public class GameSnapshot {
         return newGame;
     }
 
-    public void restoreGameState(Game currentGame) {
+    public void restoreGameState(IGame currentGame) {
         System.out.println("Restoring game state with timestamp of :" + newGame.getTimestamp());
         restore = true;
         assignGameState(newGame, currentGame, true);
     }
 
-    public void assignGameState(Game fromGame, Game toGame, boolean includeStack) {
+    public void assignGameState(IGame fromGame, IGame toGame, boolean includeStack) {
         for (int i = 0; i < fromGame.getPlayers().size(); i++) {
             Player origPlayer = fromGame.getPlayers().get(i);
             Player newPlayer = findBy(toGame, origPlayer);
@@ -189,7 +189,7 @@ public class GameSnapshot {
     }
 
     private void copyManaPool(Player fromPlayer, Player toPlayer) {
-        Game toGame = toPlayer.getGame();
+        IGame toGame = toPlayer.getGame();
         toPlayer.getManaPool().resetPool();
         for (Mana m : fromPlayer.getManaPool()) {
             toPlayer.getManaPool().addMana(copyMana(m, toGame), false);
@@ -197,7 +197,7 @@ public class GameSnapshot {
         toPlayer.updateManaForView();
     }
 
-    private Mana copyMana(Mana m, Game toGame) {
+    private Mana copyMana(Mana m, IGame toGame) {
         Card fromCard = m.getSourceCard();
         Card toCard = findBy(toGame, fromCard);
         // Are we copying over mana abilities properly?
@@ -209,7 +209,7 @@ public class GameSnapshot {
         return newMana;
     }
 
-    private void copyStack(Game fromGame, Game toGame) {
+    private void copyStack(IGame fromGame, IGame toGame) {
         // Try to match the StackInstance ID. If we don't find it, generate a new stack instance that matches
         // If we do find it, we may need to alter the existing stack instance
         // If we find it and we're restoring, we dont need to do anything
@@ -268,7 +268,7 @@ public class GameSnapshot {
         }
     }
 
-    public void copyGameState(Game fromGame, Game toGame) {
+    public void copyGameState(IGame fromGame, IGame toGame) {
         toGame.setAge(fromGame.getAge());
         toGame.dangerouslySetTimestamp(fromGame.getTimestamp());
 
@@ -358,7 +358,7 @@ public class GameSnapshot {
         }
     }
 
-    private Card createCardCopy(Game newGame, Player newOwner, Card c) {
+    private Card createCardCopy(IGame newGame, Player newOwner, Card c) {
         Card newCard = new CardCopyService(c, newGame).copyCard(false, newOwner);
         newCard.dangerouslySetGame(newGame);
         return newCard;
@@ -385,7 +385,7 @@ public class GameSnapshot {
 
     public class SnapshotEntityMap implements IEntityMap {
         @Override
-        public Game getGame() {
+        public IGame getGame() {
             if (restore) {
                 return origGame;
             }
@@ -413,11 +413,11 @@ public class GameSnapshot {
         }
     }
 
-    private Card findBy(Game toGame, Card fromCard) {
+    private Card findBy(IGame toGame, Card fromCard) {
         return toGame.findById(fromCard.getId());
     }
 
-    private Player findBy(Game toGame, Player fromPlayer) {
+    private Player findBy(IGame toGame, Player fromPlayer) {
         return toGame.getPlayer(fromPlayer.getId());
     }
 

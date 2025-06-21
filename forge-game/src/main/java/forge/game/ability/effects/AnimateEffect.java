@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 
 import forge.card.CardType;
 import forge.card.ColorSet;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
@@ -54,7 +54,7 @@ public class AnimateEffect extends AnimateEffectBase {
             toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
         }
 
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         // Every Animate event needs a unique time stamp
         final long timestamp = game.getNextTimestamp();
 

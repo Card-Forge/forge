@@ -19,9 +19,10 @@ package forge.player;
 
 import com.google.common.collect.Iterables;
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.GameObject;
+import forge.game.GameOptions;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
@@ -58,7 +59,7 @@ public class HumanPlaySpellAbility {
 
     public final boolean playAbility(final boolean mayChooseTargets, final boolean isFree, final boolean skipStack) {
         final Player human = ability.getActivatingPlayer();
-        final Game game = human.getGame();
+        final IGame game = human.getGame();
         boolean refreeze = game.getStack().isFrozen();
 
         if (!skipStack) {
@@ -169,7 +170,7 @@ public class HumanPlaySpellAbility {
 
             if (ability.isTrigger()) {
                 // Only roll back triggers if they were not paid for
-                if (game.EXPERIMENTAL_RESTORE_SNAPSHOT && preCostRequisites) {
+                if (game.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT) && preCostRequisites) {
                     GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
                 } else {
                     // If precost requsities failed, then there probably isn't anything to refund during experimental

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -24,7 +24,7 @@ public class PermanentEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         final CardZoneTable table = AbilityKey.addCardZoneTableParams(moveParams, sa);
 

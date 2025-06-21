@@ -21,7 +21,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -140,11 +140,11 @@ public class CostPayment extends ManaConversionMatrix {
             costParts = decisionMaker.getPlayer().getController().orderCosts(costParts);
         }
 
-        final Game game = decisionMaker.getPlayer().getGame();
+        final IGame game = decisionMaker.getPlayer().getGame();
 
         for (final CostPart part : costParts) {
             // Wrap the cost and push onto the cost stack
-            game.costPaymentStack.push(part, this);
+            game.costPaymentStack().push(part, this);
 
             PaymentDecision pd = part.accept(decisionMaker);
 
@@ -154,11 +154,11 @@ public class CostPayment extends ManaConversionMatrix {
             }
 
             if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability, decisionMaker.isEffect())) {
-                game.costPaymentStack.pop(); // cost is resolved
+                game.costPaymentStack().pop(); // cost is resolved
                 return false;
             }
             this.paidCostParts.add(part);
-            game.costPaymentStack.pop(); // cost is resolved
+            game.costPaymentStack().pop(); // cost is resolved
         }
 
         // this clears lists used for undo. 
@@ -184,29 +184,29 @@ public class CostPayment extends ManaConversionMatrix {
 
         // Set all of the decisions before attempting to pay anything
 
-        final Game game = decisionMaker.getPlayer().getGame();
+        final IGame game = decisionMaker.getPlayer().getGame();
 
         for (final CostPart part : parts) {
             PaymentDecision decision = part.accept(decisionMaker);
             if (null == decision) return false;
 
             // wrap the payment and push onto the cost stack
-            game.costPaymentStack.push(part, this);
+            game.costPaymentStack().push(part, this);
             if (decisionMaker.paysRightAfterDecision() && !part.payAsDecided(decisionMaker.getPlayer(), decision, ability, decisionMaker.isEffect())) {
-                game.costPaymentStack.pop(); // cost is resolved
+                game.costPaymentStack().pop(); // cost is resolved
                 return false;
             }
 
-            game.costPaymentStack.pop(); // cost is either paid or deferred
+            game.costPaymentStack().pop(); // cost is either paid or deferred
             decisions.put(part, decision);
         }
 
         for (final CostPart part : parts) {
             // wrap the payment and push onto the cost stack
-            game.costPaymentStack.push(part, this);
+            game.costPaymentStack().push(part, this);
 
             if (!part.payAsDecided(decisionMaker.getPlayer(), decisions.get(part), this.ability, decisionMaker.isEffect())) {
-                game.costPaymentStack.pop(); // cost is resolved
+                game.costPaymentStack().pop(); // cost is resolved
                 return false;
             }
             // abilities care what was used to pay for them
@@ -214,7 +214,7 @@ public class CostPayment extends ManaConversionMatrix {
                 ((CostPartWithList) part).resetLists();
             }
 
-            game.costPaymentStack.pop(); // cost is resolved
+            game.costPaymentStack().pop(); // cost is resolved
         }
         return true;
     }
@@ -328,7 +328,7 @@ public class CostPayment extends ManaConversionMatrix {
     }
 
     public static boolean handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
-        final Game game = sa.getHostCard().getGame();
+        final IGame game = sa.getHostCard().getGame();
         final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         AbilityKey.addCardZoneTableParams(params, table);

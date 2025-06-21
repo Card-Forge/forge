@@ -2,7 +2,7 @@ package forge.localinstance.achievements;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
 import forge.localinstance.properties.ForgeConstants;
@@ -58,7 +58,7 @@ public class AltWinAchievements extends AchievementCollection {
         }
 
         @Override
-        protected boolean eval(Player player, Game game) {
+        protected boolean eval(Player player, IGame game) {
             return true; //if this reaches this point, it can be presumed that alternate win condition achieved
         }
 

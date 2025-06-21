@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -26,7 +26,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         int digNum = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
 
         final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("SourceZone")) : ZoneType.Library;

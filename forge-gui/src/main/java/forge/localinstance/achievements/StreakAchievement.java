@@ -2,7 +2,7 @@ package forge.localinstance.achievements;
 
 import org.w3c.dom.Element;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.util.XmlUtil;
 
@@ -20,10 +20,10 @@ public abstract class StreakAchievement extends Achievement {
                 mythicDesc0, mythicThreshold0);
     }
 
-    protected abstract Boolean eval(Player player, Game game);
+    protected abstract Boolean eval(Player player, IGame game);
 
     @Override
-    protected final int evaluate(final Player player, final Game game) {
+    protected final int evaluate(final Player player, final IGame game) {
         final Boolean val = eval(player, game);
         if (val != null) { //null means don't increment or reset
             if (val) {

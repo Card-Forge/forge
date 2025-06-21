@@ -8,7 +8,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CounterEffect;
@@ -35,7 +35,7 @@ public class CounterAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         int tgtCMC = 0;
         SpellAbility tgtSA = null;
 
@@ -247,7 +247,7 @@ public class CounterAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         if (sa.usesTargeting()) {
             if (game.getStack().isEmpty()) {
@@ -315,7 +315,7 @@ public class CounterAi extends SpellAbilityAi {
         return true;
     }
 
-    public Pair<SpellAbility, Boolean> chooseTargetSpellAbility(Game game, SpellAbility sa, Player ai, boolean mandatory) {
+    public Pair<SpellAbility, Boolean> chooseTargetSpellAbility(IGame game, SpellAbility sa, Player ai, boolean mandatory) {
         SpellAbility tgtSA;
         SpellAbility leastBadOption = null;
         SpellAbility bestOption = null;
@@ -364,7 +364,7 @@ public class CounterAi extends SpellAbilityAi {
     public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // ward or human misplay
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
         for (SpellAbility toBeCountered : spells) {
             if (!toBeCountered.isCounterableBy(sa)) {

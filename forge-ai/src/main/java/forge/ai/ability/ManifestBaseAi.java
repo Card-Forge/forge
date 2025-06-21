@@ -5,7 +5,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -85,7 +85,7 @@ public abstract class ManifestBaseAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Card host = sa.getHostCard();
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;

@@ -19,7 +19,7 @@ package forge.game.cost;
 
 import com.google.common.collect.Lists;
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -84,7 +84,7 @@ public class CostExile extends CostPartWithList {
     @Override
     public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         CardCollectionView typeList;
         if (zoneRestriction != 1) {
@@ -171,7 +171,7 @@ public class CostExile extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         String type = this.getType();
         if (type.equals("All")) {

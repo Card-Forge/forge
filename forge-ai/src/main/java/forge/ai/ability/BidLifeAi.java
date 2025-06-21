@@ -3,7 +3,7 @@ package forge.ai.ability;
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -19,7 +19,7 @@ public class BidLifeAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();

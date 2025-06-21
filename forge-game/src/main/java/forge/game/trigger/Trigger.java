@@ -233,7 +233,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      *
      * @return a boolean.
      */
-    public final boolean phasesCheck(final Game game) {
+    public final boolean phasesCheck(final IGame game) {
         PhaseHandler phaseHandler = game.getPhaseHandler();
         if (null != validPhases) {
             if (!validPhases.contains(phaseHandler.getPhase())) {
@@ -298,7 +298,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      *
      * @return a boolean.
      */
-    public final boolean requirementsCheck(Game game) {
+    public final boolean requirementsCheck(IGame game) {
         if (hasParam("APlayerHasMoreLifeThanEachOther")) {
             int highestLife = Integer.MIN_VALUE; // Negative base just in case a few Lich's or Platinum Angels are running around
             final List<Player> healthiest = new ArrayList<>();
@@ -374,7 +374,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         return true;
     }
 
-    public boolean meetsRequirementsOnTriggeredObjects(Game game, final Map<AbilityKey, Object> runParams) {
+    public boolean meetsRequirementsOnTriggeredObjects(IGame game, final Map<AbilityKey, Object> runParams) {
         String condition = getParam("Condition");
 
         if (isKeyword(Keyword.EVOLVE) || "Evolve".equals(condition)) {

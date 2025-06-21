@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
@@ -25,7 +25,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final String landType = sa.getParam("Clone");
         Stream<PaperCard> cardStream = StaticData.instance().getCommonCards().streamUniqueCards();
         if ("BasicLand".equals(landType)) {

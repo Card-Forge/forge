@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -35,7 +35,7 @@ public class Domain extends ProgressiveAchievement {
     };
 
     @Override
-    protected boolean eval(Player player, Game game) {
+    protected boolean eval(Player player, IGame game) {
         if (game.getRules().hasAppliedVariant(GameType.MomirBasic) || game.getRules().hasAppliedVariant(GameType.MoJhoSto)) {
             // Not an achievement in Momir Basic (easy to get due to predefined deck contents)
             return false;

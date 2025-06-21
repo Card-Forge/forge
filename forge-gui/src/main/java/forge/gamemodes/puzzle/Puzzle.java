@@ -9,7 +9,7 @@ import com.google.common.collect.Sets;
 
 import forge.ai.GameState;
 import forge.card.GamePieceType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameType;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
@@ -112,14 +112,14 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         return FModel.getMagicDb().getCommonCards().getCard(cardName, setCode, artID);
     }
 
-    public void setupMaxPlayerHandSize(Game game, int maxHandSize) {
+    public void setupMaxPlayerHandSize(IGame game, int maxHandSize) {
         for (Player p : game.getPlayers()) {
             p.setStartingHandSize(maxHandSize);
             p.setMaxHandSize(maxHandSize);
         }
     }
 
-    public void addGoalEnforcement(Game game) {
+    public void addGoalEnforcement(IGame game) {
         Player human = null;
         for (Player p : game.getPlayers()) {
             if (p.getController().isGuiPlayer()) {
@@ -224,7 +224,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
     }
 
     @Override
-    protected void applyGameOnThread(final Game game) {
+    protected void applyGameOnThread(final IGame game) {
         setupMaxPlayerHandSize(game, 7);
         super.applyGameOnThread(game);
         addGoalEnforcement(game);

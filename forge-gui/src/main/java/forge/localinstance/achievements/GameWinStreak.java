@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.util.Localizer;
 
@@ -16,7 +16,7 @@ public class GameWinStreak extends StreakAchievement {
     }
 
     @Override
-    protected Boolean eval(Player player, Game game) {
+    protected Boolean eval(Player player, IGame game) {
         return player.getOutcome().hasWon();
     }
 }

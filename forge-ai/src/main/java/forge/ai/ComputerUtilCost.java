@@ -13,7 +13,7 @@ import com.google.common.collect.Sets;
 
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.Combat;
@@ -634,7 +634,7 @@ public class ComputerUtilCost {
     }
 
     public static boolean isFreeCastAllowedByPermanent(Player player, String altCost) {
-        Game game = player.getGame();
+        IGame game = player.getGame();
         for (Card cardInPlay : game.getCardsIn(ZoneType.Battlefield)) {
             if (cardInPlay.hasSVar("AllowFreeCast")) {
                 return altCost == null ? "Always".equals(cardInPlay.getSVar("AllowFreeCast"))

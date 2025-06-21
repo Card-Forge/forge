@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -22,7 +22,7 @@ public class RevealEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final boolean anyNumber = sa.hasParam("AnyNumber");
         final boolean optional = sa.hasParam("Optional");
         int cnt = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa) : 1;

@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.CardStateName;
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
@@ -23,12 +23,12 @@ public class CardCopyService {
     // This pulled in functions from CardFactory and CardUtil
 
     private final Card copyFrom;
-    private final Game toGame;
+    private final IGame toGame;
     public CardCopyService(Card copyFrom) {
         this(copyFrom, copyFrom == null ? null : copyFrom.getGame());
     }
 
-    public CardCopyService(Card copyFrom, Game toGame) {
+    public CardCopyService(Card copyFrom, IGame toGame) {
         this.copyFrom = copyFrom;
         this.toGame = toGame;
     }

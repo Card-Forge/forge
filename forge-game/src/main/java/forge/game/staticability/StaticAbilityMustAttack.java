@@ -1,6 +1,6 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -17,7 +17,7 @@ public class StaticAbilityMustAttack {
 
     public static List<GameEntity> entitiesMustAttack(final Card attacker) {
         final List<GameEntity> entityList = new ArrayList<>();
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.MustAttack)) {

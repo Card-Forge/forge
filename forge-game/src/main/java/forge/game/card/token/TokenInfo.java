@@ -8,7 +8,7 @@ import forge.StaticData;
 import forge.card.CardType;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
@@ -106,11 +106,11 @@ public class TokenInfo {
         return relevantTypes.toArray(new String[0]);
     }
 
-    private Card toCard(Game game) {
+    private Card toCard(IGame game) {
         return toCard(game, game.nextCardId());
     }
 
-    private Card toCard(Game game, int id) {
+    private Card toCard(IGame game, int id) {
         final Card c = new Card(id, game);
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
@@ -146,7 +146,7 @@ public class TokenInfo {
     }
 
     public Card makeOneToken(final Player controller, int id) {
-        final Game game = controller.getGame();
+        final IGame game = controller.getGame();
         final Card c = toCard(game, id);
 
         c.setOwner(controller);
@@ -279,7 +279,7 @@ public class TokenInfo {
             return null;
         }
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         Card editionHost = sa.getOriginalHost();
         if (sa.getKeyword() != null && sa.getKeyword().getStatic() != null) {

@@ -3,7 +3,7 @@ package forge.ai.ability;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -120,7 +120,7 @@ public class AttachAi extends SpellAbilityAi {
 
     private boolean doAdvancedFlashAuraLogic(Player ai, SpellAbility sa, Card attachTarget) {
         Card source = sa.getHostCard();
-        Game game = ai.getGame();
+        IGame game = ai.getGame();
         Combat combat = game.getCombat();
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
 

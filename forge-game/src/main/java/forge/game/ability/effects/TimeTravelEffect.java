@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -32,7 +32,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         int num = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
 
         PlayerController pc = activator.getController();

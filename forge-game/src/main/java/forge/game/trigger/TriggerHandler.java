@@ -25,7 +25,7 @@ import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
 import forge.game.CardTraitPredicates;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -52,9 +52,9 @@ public class TriggerHandler {
     private final List<Trigger> thisTurnDelayedTriggers = Collections.synchronizedList(new ArrayList<>());
     private final ListMultimap<Player, Trigger> playerDefinedDelayedTriggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
     private final List<TriggerWaiting> waitingTriggers = Collections.synchronizedList(new ArrayList<>());
-    private final Game game;
+    private final IGame game;
 
-    public TriggerHandler(final Game gameState) {
+    public TriggerHandler(final IGame gameState) {
         game = gameState;
     }
 

@@ -11,7 +11,7 @@ import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.io.DeckSerializer;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEndReason;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
@@ -170,7 +170,7 @@ public class SimulateMatch {
         final StopWatch sw = new StopWatch();
         sw.start();
 
-        final Game g1 = mc.createGame();
+        final IGame g1 = mc.createGame();
         // will run match in the same thread
         try {
             TimeLimitedCodeBlock.runWithTimeout(() -> {

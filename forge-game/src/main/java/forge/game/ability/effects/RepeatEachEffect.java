@@ -7,7 +7,7 @@ import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
@@ -38,7 +38,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         final SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         if (sa.hasParam("Optional") && sa.hasParam("OptionPrompt") && //for now, OptionPrompt is needed
                 !activator.getController().confirmAction(sa, null, sa.getParam("OptionPrompt"), null)) {
             return;

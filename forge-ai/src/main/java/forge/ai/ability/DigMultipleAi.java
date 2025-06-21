@@ -3,7 +3,7 @@ package forge.ai.ability;
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -21,7 +21,7 @@ public class DigMultipleAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;

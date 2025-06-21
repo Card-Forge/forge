@@ -8,7 +8,7 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -41,7 +41,7 @@ public class EffectEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
 
         String[] effectAbilities = null;
         String[] effectTriggers = null;

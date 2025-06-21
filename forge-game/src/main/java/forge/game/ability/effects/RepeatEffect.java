@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -64,7 +64,7 @@ public class RepeatEffect extends SpellAbilityEffect {
     private static boolean checkRepeatConditions(final SpellAbility sa) {
         //boolean doAgain = false;
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
 
         if (sa.hasParam("RepeatPresent")) {
             final String repeatPresent = sa.getParam("RepeatPresent");

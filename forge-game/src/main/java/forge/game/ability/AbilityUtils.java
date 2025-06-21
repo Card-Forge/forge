@@ -60,7 +60,7 @@ public class AbilityUtils {
         final String[] incR = changedDef.split("\\.", 2);
         sa = adjustTriggerContext(incR, sa);
         String defined = incR[0];
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
 
         Card c = null;
         Player player = null;
@@ -358,7 +358,7 @@ public class AbilityUtils {
         return cards;
     }
 
-    private static CardCollection addRememberedFromCardState(Game game, Card c) {
+    private static CardCollection addRememberedFromCardState(IGame game, Card c) {
         CardCollection coll = new CardCollection();
         Card newState = game.getCardState(c);
         if (c.getMeldedWith() != null) {
@@ -410,7 +410,7 @@ public class AbilityUtils {
             player = card.getController();
         }
 
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
 
         // Strip and save sign for calculations
         final boolean startsWithPlus = amount.charAt(0) == '+';
@@ -943,7 +943,7 @@ public class AbilityUtils {
     public static PlayerCollection getDefinedPlayers(final Card card, final String def, CardTraitBase sa) {
         final PlayerCollection players = new PlayerCollection();
         final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
-        final Game game = card == null ? null : card.getGame();
+        final IGame game = card == null ? null : card.getGame();
         String changedDef = (def == null) ? "You" : applyAbilityTextChangeEffects(def, sa); // default to Self
         final String[] incR = changedDef.split("\\.", 2);
         sa = adjustTriggerContext(incR, sa);
@@ -1240,7 +1240,7 @@ public class AbilityUtils {
         final FCollection<SpellAbility> sas = new FCollection<>();
         final String changedDef = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
         final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         final String[] incR = changedDef.split("\\.", 2);
         sa = adjustTriggerContext(incR, sa);
         String defined = incR[0];
@@ -1328,7 +1328,7 @@ public class AbilityUtils {
         }
 
         Player pl = sa.getActivatingPlayer();
-        final Game game = pl.getGame();
+        final IGame game = pl.getGame();
 
         if (sa.isTrigger() && !sa.getTrigger().isStatic() && sa.getParent() == null) {
             // when trigger cost are paid before the effect does resolve, need to clean the trigger
@@ -1356,7 +1356,7 @@ public class AbilityUtils {
         AbilityUtils.resolveApiAbility(sa, game);
     }
 
-    private static void resolvePreAbilities(final SpellAbility sa, final Game game) {
+    private static void resolvePreAbilities(final SpellAbility sa, final IGame game) {
         Player controller = sa.getActivatingPlayer();
         Card source = sa.getHostCard();
 
@@ -1380,7 +1380,7 @@ public class AbilityUtils {
         }
     }
 
-    private static void resolveSubAbilities(final SpellAbility sa, final Game game) {
+    private static void resolveSubAbilities(final SpellAbility sa, final IGame game) {
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub == null || sa.isWrapper()) {
             return;
@@ -1400,7 +1400,7 @@ public class AbilityUtils {
         AbilityUtils.resolveApiAbility(abSub, game);
     }
 
-    private static void resolveApiAbility(final SpellAbility sa, final Game game) {
+    private static void resolveApiAbility(final SpellAbility sa, final IGame game) {
         final Card card = sa.getHostCard();
 
         String msg = "AbilityUtils:resolveApiAbility: try to resolve API ability";
@@ -1426,7 +1426,7 @@ public class AbilityUtils {
         resolveSubAbilities(sa, game);
     }
 
-    private static void handleUnlessCost(final SpellAbility sa, final Game game) {
+    private static void handleUnlessCost(final SpellAbility sa, final IGame game) {
         final Card source = sa.getHostCard();
 
         // The player who has the chance to cancel the ability
@@ -1623,7 +1623,7 @@ public class AbilityUtils {
         sq = l[0].split("\\.");
         String[] paidparts = l[0].split("\\$", 2);
         Iterable<Card> someCards = null;
-        final Game game = c.getGame();
+        final IGame game = c.getGame();
 
         if (ctb != null) {
             // Count$Compare <int comparator value>.<True>.<False>
@@ -2827,7 +2827,7 @@ public class AbilityUtils {
             final String validFilter = workingCopy[1];
             // use objectXCount ?
             int activated = CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
-            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+            for (IndividualCostPaymentInstance i : game.costPaymentStack()) {
                 if (i.getPayment().getAbility().isValid(validFilter, player, c, ctb)) {
                     activated++;
                 }
@@ -3454,7 +3454,7 @@ public class AbilityUtils {
         final String[] l = s.split("/");
         final String m = CardFactoryUtil.extractOperators(s);
 
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
 
         // count valid cards on the battlefield
         if (l[0].startsWith("Valid ")) {
@@ -3835,7 +3835,7 @@ public class AbilityUtils {
     private static CardCollectionView getCardListForXCount(final Card c, final Player cc, final String[] sq, CardTraitBase ctb) {
         final List<Player> opps = cc.getOpponents();
         CardCollection someCards = new CardCollection();
-        final Game game = c.getGame();
+        final IGame game = c.getGame();
 
         // Generic Zone-based counting
         // Count$QualityAndZones.Subquality

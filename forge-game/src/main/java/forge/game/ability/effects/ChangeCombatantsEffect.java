@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
@@ -31,7 +31,7 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
         boolean isCombatChanged = false;
         final boolean isOptional = sa.hasParam("Optional");
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
 
         // TODO: may expand this effect for defined blocker (False Orders, General Jarkeld, Sorrow's Path, Ydwen Efreet)
         for (final Card c : getTargetCards(sa)) {

@@ -8,7 +8,7 @@ import forge.GameCommand;
 import forge.card.CardRarity;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.card.*;
@@ -277,7 +277,7 @@ public abstract class SpellAbilityEffect {
         return getPlayers(definedFirst, definedParam, sa, null);
     }
     private static PlayerCollection getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa, List<Player> resultDuplicate) {
-        Game game = sa.getHostCard().getGame();
+        IGame game = sa.getHostCard().getGame();
         PlayerCollection resultUnique = null;
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
         if (useTargets) {
@@ -568,7 +568,7 @@ public abstract class SpellAbilityEffect {
 
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
         final Card host = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         final Card eff = createEffect(sa, sa.getActivatingPlayer(), host + "'s Effect", host.getImageKey());
 
         addLeaveBattlefieldReplacement(eff, zone);
@@ -605,7 +605,7 @@ public abstract class SpellAbilityEffect {
         return createEffect(sa, sa.getHostCard(), controller, name, image, controller.getGame().getNextTimestamp());
     }
     public static Card createEffect(final SpellAbility sa, final Card hostCard, final Player controller, final String name, final String image, final long timestamp) {
-        final Game game = controller.getGame();
+        final IGame game = controller.getGame();
         final Card eff = new Card(game.nextCardId(), game);
 
         eff.setGameTimestamp(timestamp);
@@ -653,7 +653,7 @@ public abstract class SpellAbilityEffect {
 
             final Card host = sa.getHostCard();
             final Player controller = sa.getActivatingPlayer();
-            final Game game = host.getGame();
+            final IGame game = host.getGame();
             String zone = sa.getParamOrDefault("ReplaceDyingZone", "Exile");
 
             CardCollection cards = null;
@@ -708,7 +708,7 @@ public abstract class SpellAbilityEffect {
 
     protected static boolean addToCombat(Card c, SpellAbility sa, String attackingParam, String blockingParam) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         if (!c.isCreature() || !game.getPhaseHandler().inCombat()) {
             return false;
         }
@@ -787,7 +787,7 @@ public abstract class SpellAbilityEffect {
         }
 
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
         hostCard.addUntilLeavesBattlefield(triggerList.allCards());
         final TriggerHandler trigHandler = game.getTriggerHandler();
 
@@ -904,7 +904,7 @@ public abstract class SpellAbilityEffect {
     }
     protected static void addUntilCommand(final SpellAbility sa, GameCommand until, String duration, Player controller) {
         Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         // in case host was LKI or still resolving
         if (host.isLKI() || host.getZone() == null || host.getZone().is(ZoneType.Stack)) {
             host = game.getCardState(host);
@@ -1073,7 +1073,7 @@ public abstract class SpellAbilityEffect {
         movedCard.setExiledBy(exiler);
     }
 
-    public static GameCommand exileEffectCommand(final Game game, final Card effect) {
+    public static GameCommand exileEffectCommand(final IGame game, final Card effect) {
         return new GameCommand() {
             private static final long serialVersionUID = 1L;
 

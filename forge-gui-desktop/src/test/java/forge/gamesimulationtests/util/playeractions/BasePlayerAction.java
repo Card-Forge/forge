@@ -1,6 +1,6 @@
 package forge.gamesimulationtests.util.playeractions;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 
 public abstract class BasePlayerAction {
@@ -15,7 +15,7 @@ public abstract class BasePlayerAction {
 		return player;
 	}
 
-	public boolean isApplicable( Game game ) {
+	public boolean isApplicable( IGame game ) {
 		return preCondition == null || preCondition.isApplicable( game );
 	}
 

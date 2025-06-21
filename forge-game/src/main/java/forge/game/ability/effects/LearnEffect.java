@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -19,7 +19,7 @@ public class LearnEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         CardZoneTable table = AbilityKey.addCardZoneTableParams(moveParams, sa);
         for (Player p : getTargetPlayers(sa)) {

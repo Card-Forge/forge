@@ -3,7 +3,7 @@ package forge.game.ability.effects;
 import forge.util.Localizer;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
@@ -32,7 +32,7 @@ public class InvestigateEffect extends TokenEffectBase {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
 
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
 

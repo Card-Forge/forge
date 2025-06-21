@@ -212,7 +212,7 @@ public class TargetSelection {
 
     private boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
-        final Game game = ability.getActivatingPlayer().getGame();
+        final IGame game = ability.getActivatingPlayer().getGame();
 
         GameEntityViewMap<Card, CardView> gameCacheChooseCard = GameEntityView.getMap(choices);
 
@@ -318,7 +318,7 @@ public class TargetSelection {
         final List<Object> selectOptions = new ArrayList<>();
         HashMap<StackItemView, SpellAbilityStackInstance> stackItemViewCache = new HashMap<>();
 
-        final Game game = ability.getActivatingPlayer().getGame();
+        final IGame game = ability.getActivatingPlayer().getGame();
         for (final SpellAbilityStackInstance si : game.getStack()) {
             SpellAbility abilityOnStack = si.getSpellAbility();
             if (ability.canTargetSpellAbility(abilityOnStack)) {

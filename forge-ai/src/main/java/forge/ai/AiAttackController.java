@@ -21,6 +21,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
 import forge.game.GameEntity;
+import forge.game.GameOptions;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
@@ -96,8 +97,8 @@ public class AiAttackController {
         myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
         refreshCombatants(defendingOpponent);
-        this.timeOut = ai.getGame().getAITimeout();
-        this.canUseTimeout = ai.getGame().canUseTimeout();
+        this.timeOut = ai.getGame().configuration().get(GameOptions.AI_TIMEOUT);
+        this.canUseTimeout = ai.getGame().configuration().get(GameOptions.AI_CAN_USE_TIMEOUT);
     } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -111,8 +112,8 @@ public class AiAttackController {
             attackers.add(attacker);
         }
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
-        this.timeOut = ai.getGame().getAITimeout();
-        this.canUseTimeout = ai.getGame().canUseTimeout();
+        this.timeOut = ai.getGame().configuration().get(GameOptions.AI_TIMEOUT);
+        this.canUseTimeout = ai.getGame().configuration().get(GameOptions.AI_CAN_USE_TIMEOUT);
     } // overloaded constructor to evaluate single specified attacker
 
     private void refreshCombatants(GameEntity defender) {

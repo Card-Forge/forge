@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -31,7 +31,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 

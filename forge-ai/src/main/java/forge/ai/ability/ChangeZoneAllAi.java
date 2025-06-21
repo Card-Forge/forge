@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.cost.Cost;
@@ -24,7 +24,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final String aiLogic = sa.getParamOrDefault("AILogic" ,"");

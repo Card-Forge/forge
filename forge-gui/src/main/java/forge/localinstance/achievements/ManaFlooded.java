@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameType;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -19,7 +19,7 @@ public class ManaFlooded extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game) {
+    protected int evaluate(Player player, IGame game) {
         if (game.getRules().hasAppliedVariant(GameType.MomirBasic) || game.getRules().hasAppliedVariant(GameType.MoJhoSto)) {
             return 0; // in Momir Basic, getting a lot of lands out is not an achievement:w
         }

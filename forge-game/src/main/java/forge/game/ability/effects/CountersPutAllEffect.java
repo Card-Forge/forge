@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -48,7 +48,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         int counterAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("CounterNum", "1"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
 
         if (counterAmount <= 0) {
             return;

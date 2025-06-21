@@ -6,7 +6,7 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -53,7 +53,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final int counterAmount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CounterNum", "1"), sa);
 
         if (counterAmount <= 0) {

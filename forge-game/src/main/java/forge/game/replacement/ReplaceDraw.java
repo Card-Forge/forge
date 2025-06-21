@@ -19,7 +19,7 @@ package forge.game.replacement;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -55,7 +55,7 @@ public class ReplaceDraw extends ReplacementEffect {
         }
 
         if (hasParam("NotFirstCardInDrawStep")) {
-            final Game game = getHostCard().getGame();
+            final IGame game = getHostCard().getGame();
 
             final Player p = (Player)runParams.get(AbilityKey.Affected);
             if (p.numDrawnThisDrawStep() == 0 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {

@@ -15,7 +15,7 @@ import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
@@ -73,7 +73,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
     protected TokenCreateTable makeTokenTable(TokenCreateTable tokenTable, final boolean clone, CardZoneTable triggerList, MutableBoolean combatChanged, final SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         long timestamp = game.getNextTimestamp();
         Set<Card> originalTokens = Sets.newHashSet(tokenTable.columnKeySet());
 
@@ -227,7 +227,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
     private boolean attachTokenTo(Card tok, SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         GameEntity aTo = Iterables.getFirst(
                 AbilityUtils.getDefinedEntities(host, sa.getParam("AttachedTo"), sa), null);
@@ -274,7 +274,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         }
         final String duration = sa.getParam("PumpDuration");
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final GameCommand untilEOT = new GameCommand() {
             private static final long serialVersionUID = -42244224L;
 

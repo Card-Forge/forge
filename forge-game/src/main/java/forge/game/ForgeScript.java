@@ -390,7 +390,7 @@ public class ForgeScript {
             }
         } else if (property.equals("CouldCastTiming")) {
             Card host = sa.getHostCard();
-            Game game = host.getGame();
+            IGame game = host.getGame();
             if (game.getStack().isSplitSecondOnStack()) {
                 return false;
             }

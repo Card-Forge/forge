@@ -87,7 +87,7 @@ public final class GameActionUtil {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
         Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         if (sa.isSpell() && source.isInPlay()) {
             return alternatives;
@@ -397,7 +397,7 @@ public final class GameActionUtil {
         sa.clearPipsToReduce();
 
         Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         boolean lkicheck = false;
 
         Card newHost = ((Spell)sa).getAlternateHost(source);
@@ -590,7 +590,7 @@ public final class GameActionUtil {
         }
         SpellAbility result = null;
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
 
@@ -770,7 +770,7 @@ public final class GameActionUtil {
     }
 
     public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {
-        final Game game = sourceCard.getGame();
+        final IGame game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
         eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(sourceCard + "'s Effect");
@@ -881,7 +881,7 @@ public final class GameActionUtil {
         return sb.toString();
     }
 
-    public static CardCollectionView orderCardsByTheirOwners(Game game, CardCollectionView list, ZoneType dest, SpellAbility sa) {
+    public static CardCollectionView orderCardsByTheirOwners(IGame game, CardCollectionView list, ZoneType dest, SpellAbility sa) {
         if (list.size() <= 1 &&
                 (sa == null || !sa.getActivatingPlayer().getController().isFullControl(FullControlFlag.LayerTimestampOrder))) {
             return list;
@@ -937,7 +937,7 @@ public final class GameActionUtil {
 
     public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
         // cancel ability during target choosing
-        final Game game = ability.getActivatingPlayer().getGame();
+        final IGame game = ability.getActivatingPlayer().getGame();
 
         if (game.restoreGameState()) {
             // If we're able to restore the whole game state when rolling back an ability don't try to manually roll back

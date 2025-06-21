@@ -17,7 +17,7 @@
  */
 package forge.game.cost;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -104,7 +104,7 @@ public class CostExileFromStack extends CostPart {
      */
     @Override
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        Game game = ai.getGame();
+        IGame game = ai.getGame();
         CardCollection list = new CardCollection();
         for (final SpellAbility sa : decision.sp) {
             ability.addCostToHashList(CardCopyService.getLKICopy(sa.getHostCard()), "Exiled", true);

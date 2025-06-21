@@ -1,6 +1,6 @@
 package forge.gamesimulationtests.util.playeractions.testactions;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.playeractions.BasePlayerAction;
@@ -10,5 +10,5 @@ public abstract class TestAction extends BasePlayerAction {
 		super( player );
 	}
 
-	public abstract void perform( Game game, Player player );
+	public abstract void perform(IGame game, Player player );
 }

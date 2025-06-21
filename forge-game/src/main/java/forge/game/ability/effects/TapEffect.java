@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -25,7 +25,7 @@ public class TapEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         final boolean remTapped = sa.hasParam("RememberTapped");
         final boolean alwaysRem = sa.hasParam("AlwaysRemember");
         if (remTapped) {

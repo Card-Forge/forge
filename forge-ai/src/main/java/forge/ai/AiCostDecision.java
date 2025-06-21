@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -385,7 +385,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (cost.payCostFromSource()) {
             return PaymentDecision.card(source);
         }
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         CardCollection chosen = new CardCollection();
         CardCollectionView list;
 

@@ -17,7 +17,7 @@
  */
 package forge.gamemodes.match.input;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -54,7 +54,7 @@ public class InputLondonMulligan extends InputSyncronizedBase {
     @Override
     public final void showMessage() {
         final Localizer localizer = Localizer.getInstance();
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         game.getView().updateIsMulligan(true);
         int cardsLeft = toReturn - selected.size();
 

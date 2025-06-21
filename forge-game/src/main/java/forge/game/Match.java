@@ -59,7 +59,7 @@ public class Match {
         return titleAppend.toString();
     }
 
-    public void addGamePlayed(Game finished) {
+    public void addGamePlayed(IGame finished) {
         if (!finished.isGameOver()) {
             throw new IllegalStateException("Game is not over yet.");
         }
@@ -67,15 +67,15 @@ public class Match {
         gameOutcomes.put(finished.getId(), finished.getOutcome());
     }
 
-    public Game createGame() {
+    public IGame createGame() {
         return new Game(players, rules, this);
     }
 
-    public void startGame(final Game game) {
+    public void startGame(final IGame game) {
         startGame(game, null);
     }
 
-    public void startGame(final Game game, Runnable startGameHook) {
+    public void startGame(final IGame game, Runnable startGameHook) {
         prepareAllZones(game);
         if (rules.useAnte()) {  // Deciding which cards go to ante
             Multimap<Player, Card> list = game.chooseCardsForAnte(rules.getMatchAnteRarity());
@@ -216,7 +216,7 @@ public class Match {
         library.setCards(newLibrary);
     }
 
-    private void prepareAllZones(final Game game) {
+    private void prepareAllZones(final IGame game) {
         // need this code here, otherwise observables fail
         Trigger.resetIDs();
         game.getTriggerHandler().clearDelayedTrigger();
@@ -349,7 +349,7 @@ public class Match {
         }
     }
 
-    private void executeAnte(Game lastGame) {
+    private void executeAnte(IGame lastGame) {
         GameOutcome outcome = lastGame.getOutcome();
 
         // remove all the lost cards from owners' decks

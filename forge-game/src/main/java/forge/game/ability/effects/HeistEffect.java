@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -28,7 +28,7 @@ public class HeistEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         final Card source = sa.getHostCard();
         final Player player = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).get(0);
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         final Player target = getTargetPlayers(sa).get(0);
         final CardZoneTable triggerList = new CardZoneTable();
         final int num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("Num", "1"), sa);

@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -22,7 +22,7 @@ public class MillEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa) : 1;
 
         if (numCards <= 0) {

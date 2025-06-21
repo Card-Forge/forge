@@ -17,7 +17,7 @@
  */
 package forge.game.cost;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -122,7 +122,7 @@ public class CostPutCardToLib extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         int i = getAbilityAmount(ability);
 

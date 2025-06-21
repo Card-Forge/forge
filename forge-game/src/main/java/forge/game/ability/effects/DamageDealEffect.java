@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
@@ -130,7 +130,7 @@ public class DamageDealEffect extends DamageBaseEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
 
         final List<Card> definedSources = AbilityUtils.getDefinedCards(hostCard, sa.getParam("DamageSource"), sa);
         if (definedSources == null || definedSources.isEmpty()) {

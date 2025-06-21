@@ -30,7 +30,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import forge.game.CardTraitBase;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
@@ -51,7 +51,7 @@ import forge.util.TextUtil;
 import forge.util.Visitor;
 
 public class ReplacementHandler {
-    private final Game game;
+    private final IGame game;
 
     private Set<ReplacementEffect> hasRun = Sets.newHashSet();
 
@@ -62,7 +62,7 @@ public class ReplacementHandler {
      * ReplacementHandler.
      * @param gameState
      */
-    public ReplacementHandler(Game gameState) {
+    public ReplacementHandler(IGame gameState) {
         game = gameState;
     }
 

@@ -3,7 +3,7 @@ package forge.game.ability.effects;
 import java.util.Collection;
 import java.util.List;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -41,7 +41,7 @@ public class RegenerateEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Game game = sa.getHostCard().getGame();
+        final IGame game = sa.getHostCard().getGame();
         CardCollection result = new CardCollection();
 
         for (Card c : getDefinedCardsOrTargeted(sa)) {
@@ -68,7 +68,7 @@ public class RegenerateEffect extends SpellAbilityEffect {
             return;
         }
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
 
         // create Effect for Regeneration
         final Card eff = createEffect(

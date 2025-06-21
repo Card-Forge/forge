@@ -3,7 +3,7 @@ package forge.ai.ability;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
@@ -47,7 +47,7 @@ public class ChooseCardAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Card host = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         List<ZoneType> choiceZone;
         if (sa.hasParam("ChoiceZone")) {
@@ -196,7 +196,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             options = CardLists.getValidCards(options, "Card.nonLand", host.getController(), host, sa);
             choice = Aggregates.random(options);
         } else if (logic.equals("NeedsPrevention")) {
-            final Game game = ai.getGame();
+            final IGame game = ai.getGame();
             final Combat combat = game.getCombat();
             CardCollectionView better = CardLists.filter(options, c -> {
                 if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {

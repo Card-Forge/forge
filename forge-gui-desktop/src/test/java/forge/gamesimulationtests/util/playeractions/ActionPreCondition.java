@@ -1,6 +1,6 @@
 package forge.gamesimulationtests.util.playeractions;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.phase.PhaseType;
 
 /** This class allows you to specify that an action should only happen on turn X, during phase Y, ...
@@ -9,7 +9,7 @@ public class ActionPreCondition {
 	private Integer requiredTurn;
 	private PhaseType requiredPhaseType;
 
-	public boolean isApplicable( Game game ) {
+	public boolean isApplicable( IGame game ) {
 		if( requiredTurn != null ) {
 			if( requiredTurn != game.getPhaseHandler().getTurn() ) {
 				return false;

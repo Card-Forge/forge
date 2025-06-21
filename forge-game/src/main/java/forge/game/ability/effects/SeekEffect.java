@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -30,7 +30,7 @@ public class SeekEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         List<String> seekTypes = Lists.newArrayList();
         if (sa.hasParam("Types")) {

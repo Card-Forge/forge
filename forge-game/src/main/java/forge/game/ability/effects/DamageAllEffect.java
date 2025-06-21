@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -54,7 +54,7 @@ public class DamageAllEffect extends DamageBaseEffect {
         final List<Card> definedSources = AbilityUtils.getDefinedCards(source, sa.getParam("DamageSource"), sa);
         final Card card = definedSources.get(0);
         final Card sourceLKI = card.getGame().getChangeZoneLKIInfo(card);
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
 
         final int dmg = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
 

@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.card.MagicColor;
+import forge.game.IGame;
 import forge.game.Game;
 import forge.game.GameOutcome;
 import forge.game.ability.AbilityKey;
@@ -30,7 +31,7 @@ import forge.util.collect.FCollectionView;
 
 public class SubgameEffect extends SpellAbilityEffect {
 
-    private Game createSubGame(Game maingame, int startingLife) {
+    private IGame createSubGame(IGame maingame, int startingLife) {
         List<RegisteredPlayer> players = Lists.newArrayList();
 
         // Add remaining players to subgame
@@ -59,7 +60,7 @@ public class SubgameEffect extends SpellAbilityEffect {
         zone.setCards(newCards);
     }
 
-    private void initVariantsZonesSubgame(final Game subgame, final Player maingamePlayer, final Player player) {
+    private void initVariantsZonesSubgame(final IGame subgame, final Player maingamePlayer, final Player player) {
         PlayerZone com = player.getZone(ZoneType.Command);
         RegisteredPlayer registeredPlayer = player.getRegisteredPlayer();
 
@@ -93,7 +94,7 @@ public class SubgameEffect extends SpellAbilityEffect {
         // 720.2 doesn't mention Conspiracy cards so I guess they don't move
     }
 
-    private void prepareAllZonesSubgame(final Game maingame, final Game subgame) {
+    private void prepareAllZonesSubgame(final IGame maingame, final IGame subgame) {
         final FCollectionView<Player> players = subgame.getPlayers();
         final FCollectionView<Player> maingamePlayers = maingame.getPlayers();
         final List<ZoneType> outsideZones = Arrays.asList(ZoneType.Hand, ZoneType.Battlefield,
@@ -155,13 +156,13 @@ public class SubgameEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
-        final Game maingame = hostCard.getGame();
+        final IGame maingame = hostCard.getGame();
 
         int startingLife = -1;
         if (sa.hasParam("StartingLife")) {
             startingLife = Integer.parseInt(sa.getParam("StartingLife"));
         }
-        Game subgame = createSubGame(maingame, startingLife);
+        IGame subgame = createSubGame(maingame, startingLife);
 
         String startMessage = Localizer.getInstance().getMessage("lblSubgameStart",
                 CardTranslation.getTranslatedName(hostCard.getName()));

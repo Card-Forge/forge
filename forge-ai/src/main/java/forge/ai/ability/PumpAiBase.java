@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.*;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.combat.Combat;
@@ -84,7 +84,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * @return true, if is useful keyword
      */
     public boolean isUsefulCurseKeyword(final Player ai, final String keyword, final Card card, final SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Combat combat = game.getCombat();
         final PhaseHandler ph = game.getPhaseHandler();
         //int attack = getNumAttack(sa);
@@ -161,7 +161,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * @return true, if is useful keyword
      */
     public boolean isUsefulPumpKeyword(final Player ai, final String keyword, final Card card, final SpellAbility sa, final int attack) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Combat combat = game.getCombat();
         final PhaseHandler ph = game.getPhaseHandler();
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
@@ -416,7 +416,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      */
     protected CardCollection getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
         CardCollection list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Combat combat = game.getCombat();
         list = CardLists.getTargetableCards(list, sa);
 

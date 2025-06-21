@@ -403,6 +403,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return name;
     }
 
-    public abstract Game getGame();
+    public abstract IGame getGame();
     public abstract GameEntityView getView();
 }

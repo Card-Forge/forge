@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -22,7 +22,7 @@ public class RingTemptsYouEffect extends EffectEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Player p = sa.getActivatingPlayer();
-        Game game = p.getGame();
+        IGame game = p.getGame();
 
         if (p.getTheRing() == null)
             p.createTheRing(sa.getOriginalHost().getSetCode());

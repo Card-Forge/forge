@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -27,7 +27,7 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
 
         final Card host = sa.getHostCard();
         final Player p = sa.getActivatingPlayer();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         boolean flippedOnce = false;
 
         // TODO: allow to make a bounding box of sorts somehow, ideally - upgrade to a full system allowing to actually target by location

@@ -19,7 +19,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameStage;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -58,7 +58,7 @@ public class TriggerDrawn extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        final Game game = getHostCard().getGame();
+        final IGame game = getHostCard().getGame();
         final int number = ((Integer) runParams.get(AbilityKey.Number));
 
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {

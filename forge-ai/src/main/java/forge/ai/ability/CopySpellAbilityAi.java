@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
@@ -18,7 +18,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        Game game = aiPlayer.getGame();
+        IGame game = aiPlayer.getGame();
         int chance = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_COPY_OWN_SPELL_WHILE_ON_STACK);
         int diff = ((PlayerControllerAi)aiPlayer.getController()).getAi().getIntProperty(AiProps.ALWAYS_COPY_SPELL_IF_CMC_DIFF);
         String logic = sa.getParamOrDefault("AILogic", "");

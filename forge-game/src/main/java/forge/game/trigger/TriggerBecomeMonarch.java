@@ -2,7 +2,7 @@ package forge.game.trigger;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -17,7 +17,7 @@ public class TriggerBecomeMonarch extends Trigger {
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
         final Card host = getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;

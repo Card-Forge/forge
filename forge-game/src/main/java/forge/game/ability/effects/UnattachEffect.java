@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -23,7 +23,7 @@ public class UnattachEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final Game game = sa.getHostCard().getGame();
+        final IGame game = sa.getHostCard().getGame();
         for (final Card tgtC : getTargetCards(sa)) {
             if (!tgtC.isInPlay()) {
                 continue;

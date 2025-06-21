@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.ComputerUtilAbility;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -27,7 +27,7 @@ public class PermanentNoncreatureAi extends PermanentAi {
 
         final Card host = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         // Check for valid targets before casting
         if (host.hasSVar("OblivionRing")) {

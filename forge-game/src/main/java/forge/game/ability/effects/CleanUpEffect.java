@@ -3,7 +3,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -27,7 +27,7 @@ public class CleanUpEffect extends SpellAbilityEffect {
         } else {
             source = sa.getHostCard();
         }
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         String logMessage = "";
         if (sa.hasParam("Log")) {

@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
@@ -363,7 +363,7 @@ public class QuestDraftUtils {
                 Match mc = new Match(rules, registered, "Simulated Match");
                 String winner = null;
                 while (!mc.isMatchOver()) {
-                    Game gm = mc.createGame();
+                    IGame gm = mc.createGame();
                     mc.startGame(gm);
                     // Update dialog with winner
                 }

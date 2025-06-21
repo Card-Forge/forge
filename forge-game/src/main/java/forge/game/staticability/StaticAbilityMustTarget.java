@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
@@ -30,7 +30,7 @@ public class StaticAbilityMustTarget {
         // (ChangeTarget does not go this path so not checked here.)
         if (spellAbility.isCopied()) return true;
 
-        final Game game = spellAbility.getHostCard().getGame();
+        final IGame game = spellAbility.getHostCard().getGame();
         List<Pair<String, ZoneType>> restrictions = getAllRestrictions(spellAbility);
 
         if (restrictions.isEmpty()) return true;
@@ -55,7 +55,7 @@ public class StaticAbilityMustTarget {
     }
 
     private static List<Pair<String, ZoneType>> getAllRestrictions(final SpellAbility spellAbility) {
-        final Game game = spellAbility.getHostCard().getGame();
+        final IGame game = spellAbility.getHostCard().getGame();
         List<Pair<String, ZoneType>> restrictions = new ArrayList<>();
 
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {

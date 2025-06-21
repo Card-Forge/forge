@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.*;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
@@ -42,7 +42,7 @@ public class PermanentCreatureAi extends PermanentAi {
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Card card = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         // FRF Dash Keyword
         if (sa.isDash()) {
@@ -103,7 +103,7 @@ public class PermanentCreatureAi extends PermanentAi {
     }
 
     private boolean doAdvancedFlashLogic(Card card, final Player ai, SpellAbility sa) {
-        Game game = ai.getGame();
+        IGame game = ai.getGame();
         PhaseHandler ph = game.getPhaseHandler();
         Combat combat = game.getCombat();
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
@@ -202,7 +202,7 @@ public class PermanentCreatureAi extends PermanentAi {
 
         final Card card = sa.getHostCard();
         final ManaCost mana = card.getManaCost();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         /*
          * Checks if the creature will have non-positive toughness after

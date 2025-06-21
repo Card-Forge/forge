@@ -3,7 +3,7 @@ package forge.ai.ability;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -109,7 +109,7 @@ public class PhasesAi extends SpellAbilityAi {
         return false;
     }
 
-    private boolean phasesUnpreferredTargeting(final Game game, final SpellAbility sa, final boolean mandatory) {
+    private boolean phasesUnpreferredTargeting(final IGame game, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
 
         CardCollectionView list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);

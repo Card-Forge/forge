@@ -17,7 +17,7 @@
  */
 package forge.game.spellability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -81,7 +81,7 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
             player = this.getHostCard().getController();
         }
         
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         if (game.getStack().isSplitSecondOnStack() && !this.isManaAbility()) {
             return false;
         }

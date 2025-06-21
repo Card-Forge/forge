@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
@@ -38,7 +38,7 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final boolean perpetual = "Perpetual".equals(sa.getParam("Duration"));
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final Card c1;
         final Card c2;
 

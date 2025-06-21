@@ -1,12 +1,12 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityCantChangeDayTime {
 
-    public static boolean cantChangeDay(final Game game, Boolean value) {
+    public static boolean cantChangeDay(final IGame game, Boolean value) {
         if (value == null) {
             return false;
         }

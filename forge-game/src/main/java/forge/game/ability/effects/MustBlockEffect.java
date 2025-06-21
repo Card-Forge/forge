@@ -7,7 +7,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -24,7 +24,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
 
         List<Card> cards;
         if (sa.hasParam("DefinedAttacker")) {

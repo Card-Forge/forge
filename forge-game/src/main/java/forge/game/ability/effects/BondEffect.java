@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -19,7 +19,7 @@ public class BondEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
         Player p = sa.getActivatingPlayer();
-        Game game = source.getGame();
+        IGame game = source.getGame();
         for (Card tgtC : getTargetCards(sa)) {
             Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore

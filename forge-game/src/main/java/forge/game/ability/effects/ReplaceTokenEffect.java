@@ -12,7 +12,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -34,7 +34,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         final Player p = sa.getActivatingPlayer();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         SpellAbility repSA = sa;
 
         if (repSA.getReplacingObjects().isEmpty()) {

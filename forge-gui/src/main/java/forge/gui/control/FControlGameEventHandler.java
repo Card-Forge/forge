@@ -3,7 +3,7 @@ package forge.gui.control;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardView;
@@ -323,7 +323,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardAttachment event) {
-        final Game game = event.equipment.getGame();
+        final IGame game = event.equipment.getGame();
         final Zone zEq = game.getZoneOf(event.equipment);
         if (event.oldEntiy instanceof Card) {
             updateZone(game.getZoneOf((Card)event.oldEntiy));

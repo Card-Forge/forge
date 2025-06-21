@@ -228,7 +228,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return source.getZone() == player.getZone(cost.from.get(0)) && confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
         }
 
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
 
         String type = cost.getType();
         boolean fromTopGrave = false;
@@ -379,7 +379,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostExileFromStack cost) {
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
 
         final String type = cost.getType();
         final List<SpellAbility> saList = new ArrayList<>();
@@ -671,7 +671,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         // for costs declared mandatory, this is only reachable with a valid amount
         if (player.canPayLife(c, isEffect(), ability) && confirmAction(cost, message)) {
             //force mandatory if paylife is paid.. todo add check if all can be paid
-            if (!player.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            if (!player.getGame().configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
                 // If we can restore the game state, don't force the SA to be mandatory
                 mandatory = true;
             }

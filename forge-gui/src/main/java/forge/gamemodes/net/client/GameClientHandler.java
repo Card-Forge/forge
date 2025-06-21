@@ -34,7 +34,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private final IGuiGame gui;
     private Tracker tracker;
     private Match match;
-    private Game game;
+    private IGame game;
 
     /**
      * Creates a client-side game handler.
@@ -155,7 +155,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         return match;
     }
 
-    private Game createGame() {
+    private IGame createGame() {
         this.tracker = null;
         return this.match.createGame();
     }

@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -42,7 +42,7 @@ public class UntapEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final boolean etb = sa.hasParam("ETB");
-        final Game game = sa.getHostCard().getGame();
+        final IGame game = sa.getHostCard().getGame();
 
         if (sa.hasParam("UntapUpTo")) {
             untapChoose(sa, false);

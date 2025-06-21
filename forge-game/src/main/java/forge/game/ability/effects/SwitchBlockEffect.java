@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -17,7 +17,7 @@ import forge.game.trigger.TriggerType;
 
 public class SwitchBlockEffect extends SpellAbilityEffect {
 
-    private void runTriggers(final Game game, final Card attacker, final Card blocker) {
+    private void runTriggers(final IGame game, final Card attacker, final Card blocker) {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Attacker, attacker);
         runParams.put(AbilityKey.Blocker, blocker);
@@ -28,7 +28,7 @@ public class SwitchBlockEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final Combat combat = game.getPhaseHandler().getCombat();
         boolean isTargetingAttacker = false;
 

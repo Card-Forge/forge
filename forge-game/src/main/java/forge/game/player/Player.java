@@ -173,7 +173,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int teamNumber = -1;
 
     private PlayerController controller;
-    private final Game game;
+    private final IGame game;
 
     private boolean triedToDrawFromEmptyLibrary = false;
     private CardCollection lostOwnership = new CardCollection();
@@ -213,7 +213,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
 
-    public Player(String name0, Game game0, final int id0) {
+    public Player(String name0, IGame game0, final int id0) {
         super(id0);
 
         game = game0;
@@ -256,7 +256,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public Game getGame() {
+    public IGame getGame() {
         return game;
     }
 
@@ -2335,8 +2335,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
         runParams.put(AbilityKey.Card, cpy);
         runParams.put(AbilityKey.Cause, source);
-        runParams.put(AbilityKey.CostStack, game.costPaymentStack);
-        runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
+        runParams.put(AbilityKey.CostStack, game.costPaymentStack());
+        runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack().peek());
         game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
     }
 
@@ -3153,7 +3153,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    public Card assignCompanion(Game game, PlayerController player) {
+    public Card assignCompanion(IGame game, PlayerController player) {
         List<Card> legalCompanions = Lists.newArrayList();
 
         boolean uniqueNames = true;
@@ -3234,7 +3234,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
      }
 
-    public static DetachedCardEffect createCompanionEffect(Game game, Card companion) {
+    public static DetachedCardEffect createCompanionEffect(IGame game, Card companion) {
         final String name = Lang.getInstance().getPossesive(companion.getName()) + " Companion Effect";
         DetachedCardEffect eff = new DetachedCardEffect(companion, name);
 
@@ -3300,7 +3300,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         com.add(eff);
     }
 
-    public void createPlanechaseEffects(Game game) {
+    public void createPlanechaseEffects(IGame game) {
         final PlayerZone com = getZone(ZoneType.Command);
         final String name = "Planar Dice";
         final Card eff = new Card(game.nextCardId(), game);

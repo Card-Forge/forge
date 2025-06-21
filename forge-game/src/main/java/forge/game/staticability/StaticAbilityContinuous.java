@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.card.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.StaticEffect;
 import forge.game.StaticEffects;
 import forge.game.ability.AbilityUtils;
@@ -90,7 +90,7 @@ public final class StaticAbilityContinuous {
         final Player controller = hostCard.getController();
 
         final List<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
 
         final StaticEffects effects = game.getStaticEffects();
         final StaticEffect se = effects.getStaticEffect(stAb);
@@ -961,7 +961,7 @@ public final class StaticAbilityContinuous {
     }
 
     private static CardCollection cardsGainedFrom(final String param, final Map<String, String> params,
-                                                  final Card hostCard, final StaticAbility stAb, final Game game) {
+                                                  final Card hostCard, final StaticAbility stAb, final IGame game) {
         CardCollection cards = new CardCollection();
         if (param.contains("Defined")) {
             cards.addAll(AbilityUtils.getDefinedCards(hostCard, params.get(param), stAb));
@@ -1003,7 +1003,7 @@ public final class StaticAbilityContinuous {
 
     public static CardCollectionView getAffectedCards(final StaticAbility stAb, final CardCollectionView preList) {
         final Card hostCard = stAb.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
         final Player controller = hostCard.getController();
 
         if (stAb.isCharacteristicDefining()) {

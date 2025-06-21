@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.phase.PhaseHandler;
@@ -20,7 +20,7 @@ public class CloneAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         boolean useAbility = true;
 

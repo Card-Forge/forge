@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -32,7 +32,7 @@ public class AttachEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         CardCollectionView attachments;
 

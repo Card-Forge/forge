@@ -3,7 +3,7 @@ package forge.ai.ability;
 import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.CardTraitPredicates;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -36,7 +36,7 @@ import java.util.Map;
 public class EffectAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai,final SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= .6667;
         String logic = "";
 
@@ -452,7 +452,7 @@ public class EffectAi extends SpellAbilityAi {
     }
 
     protected boolean cantRegenerateCheckCombat(Card host) {
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         if (!game.getPhaseHandler().inCombat()) {
             return false;
         }
@@ -476,7 +476,7 @@ public class EffectAi extends SpellAbilityAi {
     }
 
     protected boolean cantRegenerateCheckStack(Card host) {
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         // do this only in reaction to a threatening spell on directly on the stack
         MagicStack stack = game.getStack();

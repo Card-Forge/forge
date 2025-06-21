@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
@@ -33,7 +33,7 @@ public class EncodeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
 
         if (host.isToken()) {
             return;

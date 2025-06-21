@@ -20,7 +20,7 @@ package forge.game.combat;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
@@ -67,7 +67,7 @@ public class CombatUtil {
         }
 
         // Relevant battles (protected by the attacking player's opponents)
-        final Game game = playerWhoAttacks.getGame();
+        final IGame game = playerWhoAttacks.getGame();
         final CardCollection battles = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.BATTLES);
         for (Card battle : battles) {
             if (battle.getProtectingPlayer().isOpponentOf(playerWhoAttacks)) {
@@ -106,7 +106,7 @@ public class CombatUtil {
         final AttackConstraints constraints = combat.getAttackConstraints();
         final Pair<Map<Card, GameEntity>, Integer> bestAttack = constraints.getLegalAttackers();
         final Map<Card, GameEntity> attackers = new HashMap<>(combat.getAttackersAndDefenders());
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
 
         return getAllPossibleDefenders(attacker.getController()).anyMatch(defender -> {
             if (!canAttack(attacker, defender) || getAttackCost(game, attacker, defender) != null) {
@@ -199,7 +199,7 @@ public class CombatUtil {
     }
 
     private static boolean canAttack(final Card attacker, final GameEntity defender, final boolean forNextTurn) {
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
 
         if (attacker.isBattle()) {
             return false;
@@ -264,7 +264,7 @@ public class CombatUtil {
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      */
-    public static boolean checkPropagandaEffects(final Game game, final Card attacker, final Combat combat, final List<Card> attackersWithOptionalCost) {
+    public static boolean checkPropagandaEffects(final IGame game, final Card attacker, final Combat combat, final List<Card> attackersWithOptionalCost) {
         final Cost attackCost = getAttackCost(game, attacker,  combat.getDefenderByAttacker(attacker), attackersWithOptionalCost);
         if (attackCost == null) {
             return true;
@@ -282,7 +282,7 @@ public class CombatUtil {
                 "Pay additional cost to declare " + attacker + " an attacker");
     }
 
-    public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
+    public static Cost getAttackCost(final IGame game, final Card attacker, final GameEntity defender) {
         return getAttackCost(game, attacker, defender, ImmutableList.of());
     }
     /**
@@ -290,7 +290,7 @@ public class CombatUtil {
      * defender.
      *
      * @param game
-     *            the {@link Game}.
+     *            the {@link IGame}.
      * @param attacker
      *            the attacking creature.
      * @param defender
@@ -298,7 +298,7 @@ public class CombatUtil {
      * @return the {@link Cost} of attacking, or {@code null} if there is no
      *         cost.
      */
-    public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender, final List<Card> attackersWithOptionalCost) {
+    public static Cost getAttackCost(final IGame game, final Card attacker, final GameEntity defender, final List<Card> attackersWithOptionalCost) {
         final Cost attackCost = new Cost(ManaCost.ZERO, true);
         boolean hasCost = false;
         // Sort abilities to apply them in proper order
@@ -331,7 +331,7 @@ public class CombatUtil {
         return attackersWithCost;
     }
 
-    public static boolean payRequiredBlockCosts(Game game, Card blocker, Card attacker) {
+    public static boolean payRequiredBlockCosts(IGame game, Card blocker, Card attacker) {
         Cost blockCost = getBlockCost(game, blocker, attacker);
         if (blockCost == null) {
             return true;
@@ -344,7 +344,7 @@ public class CombatUtil {
         return blocker.getController().getController().payCombatCost(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ");
     }
 
-    public static Cost getBlockCost(Game game, Card blocker, Card attacker) {
+    public static Cost getBlockCost(IGame game, Card blocker, Card attacker) {
         Cost blockCost = new Cost(ManaCost.ZERO, true);
         // Sort abilities to apply them in proper order
         boolean noCost = true;
@@ -374,7 +374,7 @@ public class CombatUtil {
      * @param c
      *            a {@link forge.game.card.Card} object.
      */
-    public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat, boolean triggers) {
+    public static void checkDeclaredAttacker(final IGame game, final Card c, final Combat combat, boolean triggers) {
         final GameEntity defender = combat.getDefenderByAttacker(c);
         final List<Card> otherAttackers = combat.getAttackers();
 

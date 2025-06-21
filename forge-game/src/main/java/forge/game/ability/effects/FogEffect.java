@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.replacement.ReplacementEffect;
@@ -17,7 +17,7 @@ public class FogEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
         final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();
         StringBuilder sb = new StringBuilder("Event$ DamageDone | ActiveZones$ Command | IsCombat$ True");

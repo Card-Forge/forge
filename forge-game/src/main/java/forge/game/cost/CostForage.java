@@ -1,6 +1,6 @@
 package forge.game.cost;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -41,7 +41,7 @@ public class CostForage extends CostPartWithList {
     protected boolean canPayListAtOnce() { return true; }
     @Override
     protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
-        final Game game = payer.getGame();
+        final IGame game = payer.getGame();
         if (targetCards.size() == 3) {
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, table);

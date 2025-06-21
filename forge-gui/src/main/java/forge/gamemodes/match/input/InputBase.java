@@ -17,7 +17,7 @@
  */
 package forge.gamemodes.match.input;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseHandler;
@@ -136,7 +136,7 @@ public abstract class InputBase implements java.io.Serializable, Input {
             controller.getGui().showCardPromptMessage(getOwner(), message, card);
     }
 
-    protected String getTurnPhasePriorityMessage(final Game game) {
+    protected String getTurnPhasePriorityMessage(final IGame game) {
         final PhaseHandler ph = game.getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
         Localizer localizer = Localizer.getInstance();

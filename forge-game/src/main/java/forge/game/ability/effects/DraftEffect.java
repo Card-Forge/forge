@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.StaticData;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -43,7 +43,7 @@ import java.util.*;
          moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
          final Card source = sa.getHostCard();
          final Player player = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).get(0);
-         final Game game = player.getGame();
+         final IGame game = player.getGame();
          final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Hand"));
          List<String> spellbook = Arrays.asList(sa.getParamOrDefault("Spellbook", "").split(","));
          final int numToDraft = AbilityUtils.calculateAmount(source,

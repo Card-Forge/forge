@@ -21,7 +21,7 @@ import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
@@ -60,7 +60,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
     }
 
     private boolean doTgt(Player ai, SpellAbility sa, boolean mandatory) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         // remove counter with Time might use Exile Zone too
         final TargetRestrictions tgt = sa.getTargetRestrictions();

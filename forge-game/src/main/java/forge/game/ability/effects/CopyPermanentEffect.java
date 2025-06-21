@@ -17,7 +17,7 @@ import forge.StaticData;
 import forge.card.CardRarity;
 import forge.card.CardRulesPredicates;
 import forge.card.CardStateName;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -108,7 +108,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
     public void resolve(final SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         boolean useZoneTable = true;
         boolean chosenMap = "ChosenMap".equals(sa.getParam("Defined"));
         CardZoneTable triggerList = sa.getChangeZoneTable();

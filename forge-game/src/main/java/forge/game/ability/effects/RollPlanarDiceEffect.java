@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.PlanarDice;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.event.GameEventRollDie;
@@ -20,7 +20,7 @@ public class RollPlanarDiceEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
 
         if (game.getActivePlanes() == null) { // not a planechase game, nothing happens
             return;

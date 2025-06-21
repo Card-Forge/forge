@@ -24,7 +24,7 @@ import forge.ai.ability.FightAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
@@ -79,7 +79,7 @@ public class SpecialCardAi {
     // Arena and Magus of the Arena
     public static class Arena {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            final Game game = ai.getGame();
+            final IGame game = ai.getGame();
 
             if (!game.getPhaseHandler().is(PhaseType.END_OF_TURN) || game.getPhaseHandler().getNextTurn() != ai) {
                 return false; // at opponent's EOT only, to conserve mana
@@ -434,7 +434,7 @@ public class SpecialCardAi {
     public static class ElectrostaticPummeler {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             final Card source = sa.getHostCard();
-            Game game = ai.getGame();
+            IGame game = ai.getGame();
             Combat combat = game.getCombat();
             Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetCombatDamage(), source.getNetToughness());
 
@@ -1123,7 +1123,7 @@ public class SpecialCardAi {
     // Necropotence
     public static class Necropotence {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            Game game = ai.getGame();
+            IGame game = ai.getGame();
             int computerHandSize = ai.getZone(ZoneType.Hand).size();
             int maxHandSize = ai.getMaxHandSize();
 
@@ -1202,7 +1202,7 @@ public class SpecialCardAi {
     // Nykthos, Shrine to Nyx
     public static class NykthosShrineToNyx {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            Game game = ai.getGame();
+            IGame game = ai.getGame();
             PhaseHandler ph = game.getPhaseHandler();
             if (!ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.MAIN2)) {
                 // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?
@@ -1663,7 +1663,7 @@ public class SpecialCardAi {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             // check the top ability on stack if it's (a) an opponent's counterspell targeting the AI's spell;
             // (b) a black or a blue spell targeting something that belongs to the AI
-            Game game = ai.getGame();
+            IGame game = ai.getGame();
             if (game.getStack().isEmpty()) {
                 return false;
             }
@@ -1741,7 +1741,7 @@ public class SpecialCardAi {
     public static class UginTheSpiritDragon {
         public static boolean considerPWAbilityPriority(final Player ai, final SpellAbility sa, final ZoneType origin, CardCollectionView oppType, CardCollectionView computerType) {
             Card source = sa.getHostCard();
-            Game game = source.getGame();
+            IGame game = source.getGame();
             
             final int loyalty = source.getCounters(CounterEnumType.LOYALTY);
             int x = -1, best = 0;
@@ -1794,7 +1794,7 @@ public class SpecialCardAi {
     // Yawgmoth's Bargain
     public static class YawgmothsBargain {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            Game game = ai.getGame();
+            IGame game = ai.getGame();
             PhaseHandler ph = game.getPhaseHandler();
 
             if (ai.getCardsIn(ZoneType.Library).isEmpty()) {

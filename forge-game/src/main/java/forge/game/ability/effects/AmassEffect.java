@@ -8,7 +8,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -49,7 +49,7 @@ public class AmassEffect extends TokenEffectBase {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final Player activator = sa.getActivatingPlayer();
         final int amount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("Num", "1"), sa);
         final String type = sa.getParam("Type");

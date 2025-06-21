@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -28,7 +28,7 @@ public class ChaosEnsuesEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
 
         if (game.getActivePlanes() == null) { // not a planechase game, nothing happens
             return;

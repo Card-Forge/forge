@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
@@ -42,7 +42,7 @@ public class IncubateEffect extends TokenEffectBase {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final int times = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Times", "1"), sa);
         sa.putParam("WithCountersType", "P1P1");
         sa.putParam("WithCountersAmount", sa.getParamOrDefault("Amount", "1"));

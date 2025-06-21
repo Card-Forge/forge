@@ -7,7 +7,7 @@ import com.google.common.collect.Sets;
 
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -15,7 +15,7 @@ import forge.game.zone.ZoneType;
 public class StaticAbilityUnspentMana {
 
     public static Collection<Byte> getManaToKeep(final Player player) {
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         Set<Byte> result = Sets.newHashSet();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
@@ -29,7 +29,7 @@ public class StaticAbilityUnspentMana {
     }
 
     public static boolean hasManaBurn(final Player player) {
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.ManaBurn)) {

@@ -8,7 +8,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import forge.game.CardTraitBase;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameObjectPredicates;
 import forge.game.ability.AbilityKey;
@@ -56,7 +56,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         }
     }
 
-    public void triggerDamageDoneOnce(boolean isCombat, final Game game) {
+    public void triggerDamageDoneOnce(boolean isCombat, final IGame game) {
         // Source -> Targets
         for (Map.Entry<Card, Map<GameEntity, Integer>> e : rowMap().entrySet()) {
             final Card sourceLKI = e.getKey();
@@ -109,7 +109,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         game.getTriggerHandler().runTrigger(TriggerType.DamageAll, runParams, false);
     }
 
-    public void triggerExcessDamage(boolean isCombat, Map<Card, Integer> lethalDamage, final Game game, final SpellAbility cause, final Map<Integer, Card> lkiCache) {
+    public void triggerExcessDamage(boolean isCombat, Map<Card, Integer> lethalDamage, final IGame game, final SpellAbility cause, final Map<Integer, Card> lkiCache) {
         int storedExcess = 0;
 
         CardCollection damagedList = new CardCollection();

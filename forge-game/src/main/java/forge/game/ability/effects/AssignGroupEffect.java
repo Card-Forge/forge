@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -35,7 +35,7 @@ public class AssignGroupEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         List<GameObject> defined = getDefinedOrTargeted(sa, "Defined");
 

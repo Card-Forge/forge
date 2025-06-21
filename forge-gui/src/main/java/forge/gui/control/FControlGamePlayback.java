@@ -1,7 +1,7 @@
 package forge.gui.control;
 
 import com.google.common.eventbus.Subscribe;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.CardView;
 import forge.game.event.*;
 import forge.gamemodes.match.input.InputPlaybackControl;
@@ -31,13 +31,13 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         return inputPlayback;
     }
 
-    private Game game;
+    private IGame game;
 
-    public Game getGame() {
+    public IGame getGame() {
         return game;
     }
 
-    public void setGame(final Game game0) {
+    public void setGame(final IGame game0) {
         game = game0;
         inputPlayback = new InputPlaybackControl(game, this);
     }

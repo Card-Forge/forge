@@ -3,7 +3,7 @@ package forge.ai.ability;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.keyword.Keyword;
@@ -44,7 +44,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
 
     protected boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {
         int restDamage = d;
-        final Game game = comp.getGame();
+        final IGame game = comp.getGame();
         Player enemy = comp.getWeakestOpponent();
         boolean dmgByCardsInHand = false;
         Card hostcard = sa.getHostCard();

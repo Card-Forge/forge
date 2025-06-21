@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -99,7 +99,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
      * @return a boolean.
      */
     protected boolean tapPrefTargeting(final Player ai, final Card source, final SpellAbility sa, final boolean mandatory) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         CardCollection tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
         tapList = CardLists.filter(tapList, CardPredicates.CAN_TAP);
         tapList = CardLists.filter(tapList, c -> {
@@ -235,7 +235,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
      */
     protected  boolean tapUnpreferredTargeting(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 

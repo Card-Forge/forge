@@ -81,7 +81,7 @@ import static java.lang.Math.max;
  * @version $Id$
  */
 public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITranslatable {
-    private Game game;
+    private IGame game;
     private final IPaperCard paperCard;
 
     private final Map<CardStateName, CardState> states = Maps.newEnumMap(CardStateName.class);
@@ -381,7 +381,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
      * Instantiates a new card not associated to any paper card.
      * @param id0 the unique id of the new card.
      */
-    public Card(final int id0, final Game game0) {
+    public Card(final int id0, final IGame game0) {
         this(id0, null, game0);
     }
 
@@ -393,10 +393,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
      * card.
      * @see IPaperCard
      */
-    public Card(final int id0, final IPaperCard paperCard0, final Game game0) {
+    public Card(final int id0, final IPaperCard paperCard0, final IGame game0) {
         this(id0, paperCard0, game0, game0 == null ? null : game0.getTracker());
     }
-    public Card(final int id0, final IPaperCard paperCard0, final Game game0, final Tracker tracker0) {
+    public Card(final int id0, final IPaperCard paperCard0, final IGame game0, final Tracker tracker0) {
         super(id0);
 
         game = game0;
@@ -7554,11 +7554,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public Game getGame() {
+    public IGame getGame() {
         return game;
     }
 
-    public void dangerouslySetGame(Game newGame) {
+    public void dangerouslySetGame(IGame newGame) {
         game = newGame;
     }
 

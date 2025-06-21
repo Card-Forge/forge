@@ -1,7 +1,7 @@
 package forge.localinstance.achievements;
 
 import forge.deck.Deck;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.gui.GuiBase;
@@ -54,7 +54,7 @@ public class ChallengeAchievements extends AchievementCollection {
         }
 
         @Override
-        protected boolean eval(Player player, Game game) {
+        protected boolean eval(Player player, IGame game) {
             if (!ChallengeAchievements.checkValidGameMode(game)) {
                 return false;
             }
@@ -69,7 +69,7 @@ public class ChallengeAchievements extends AchievementCollection {
         }
 
         @Override
-        protected final boolean eval(Player player, Game game) {
+        protected final boolean eval(Player player, IGame game) {
             if (!ChallengeAchievements.checkValidGameMode(game)) {
                 return false;
             }
@@ -82,7 +82,7 @@ public class ChallengeAchievements extends AchievementCollection {
         protected abstract boolean eval(Deck deck);
     }
 
-    public static boolean checkValidGameMode(final Game game) {
+    public static boolean checkValidGameMode(final IGame game) {
         // these modes use a fixed pre-defined deck format, so challenge achievements don't apply in them
         return !game.getRules().hasAppliedVariant(GameType.MomirBasic) && !game.getRules().hasAppliedVariant(GameType.MoJhoSto)
                 && !game.getRules().hasAppliedVariant(GameType.Puzzle);

@@ -6,13 +6,13 @@ import com.google.common.collect.Lists;
 
 import forge.MulliganDefs;
 import forge.StaticData;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameType;
 import forge.game.player.Player;
 
 public class MulliganService {
     Player firstPlayer;
-    Game game;
+    IGame game;
     List<AbstractMulligan> mulligans = Lists.newArrayList();
 
     public MulliganService(Player player) {

@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -52,7 +52,7 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card host = sa.getHostCard();
-        Game game = host.getGame();
+        IGame game = host.getGame();
         Card object1 = null;
         Card object2 = null;
 

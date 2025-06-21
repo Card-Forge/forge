@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
@@ -22,7 +22,7 @@ public class AmassAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, final SpellAbility sa) {
         CardCollection aiArmies = CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Army");
         Card host = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         if (!aiArmies.isEmpty()) {
             return aiArmies.anyMatch(CardPredicates.canReceiveCounters(CounterEnumType.P1P1));

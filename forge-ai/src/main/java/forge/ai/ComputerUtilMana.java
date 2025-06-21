@@ -14,7 +14,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitPredicates;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -362,7 +362,7 @@ public class ComputerUtilMana {
 
     public static String predictManaReplacement(SpellAbility saPayment, Player ai, ManaCostShard toPay) {
         Card hostCard = saPayment.getHostCard();
-        Game game = hostCard.getGame();
+        IGame game = hostCard.getGame();
         String manaProduced = toPay.isSnow() && hostCard.isSnow() ? "S" : GameActionUtil.generatedTotalMana(saPayment);
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(hostCard);
@@ -1558,7 +1558,7 @@ public class ComputerUtilMana {
     //This method is currently used by AI to estimate mana available
     private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {
         final ListMultimap<Integer, SpellAbility> manaMap = ArrayListMultimap.create();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         // Loop over all current available mana sources
         for (final Card sourceCard : getAvailableManaSources(ai, checkPlayable)) {

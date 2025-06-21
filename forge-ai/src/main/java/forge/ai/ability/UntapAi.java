@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.*;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -347,7 +347,7 @@ public class UntapAi extends SpellAbilityAi {
 
     private boolean doPreventCombatDamageLogic(final Player ai, final SpellAbility sa) {
         // Only Maze of Ith and Maze of Shadows uses this. Feel free to use it aggressively.
-        Game game = ai.getGame();
+        IGame game = ai.getGame();
         sa.resetTargets();
 
         if (!game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
@@ -391,7 +391,7 @@ public class UntapAi extends SpellAbilityAi {
     private boolean doPoolExtraManaLogic(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final PhaseHandler ph = source.getGame().getPhaseHandler();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         if (source.isTapped()) {
             return true;
@@ -468,7 +468,7 @@ public class UntapAi extends SpellAbilityAi {
         // Paralyze effects
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
-            final Game game = host.getGame();
+            final IGame game = host.getGame();
             for (Card card : AbilityUtils.getDefinedCards(host, null, sa)) {
                 final Card gameCard = game.getCardState(card, null);
                 if (gameCard == null

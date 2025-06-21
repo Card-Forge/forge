@@ -25,7 +25,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -437,7 +437,7 @@ public class TargetRestrictions {
      */
     public final boolean hasCandidates(final SpellAbility sa) {
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
-        final Game game = srcCard.getGame();
+        final IGame game = srcCard.getGame();
 
         this.applyTargetTextChanges(sa);
 
@@ -504,7 +504,7 @@ public class TargetRestrictions {
     }
 
     public final List<GameEntity> getAllCandidates(final SpellAbility sa, final boolean isTargeted, final boolean onlyNonCard) {
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         final List<GameEntity> candidates = Lists.newArrayList();
         for (Player player : game.getPlayers()) {
             if (sa.canTarget(player)) {

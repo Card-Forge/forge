@@ -4,7 +4,7 @@ import forge.ai.*;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.phase.PhaseType;
@@ -22,16 +22,16 @@ import java.util.Random;
 import java.util.Set;
 
 public class SpellAbilityPicker {
-    private Game game;
+    private IGame game;
     private Player player;
     private Score bestScore;
-    private boolean printOutput = false;
+    private boolean printOutput = true;
     private SpellAbilityChoicesIterator interceptor;
 
     private Plan plan;
     private int numSimulations;
 
-    public SpellAbilityPicker(Game game, Player player) {
+    public SpellAbilityPicker(IGame game, Player player) {
         this.game = game;
         this.player = player;
     }

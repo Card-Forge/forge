@@ -23,7 +23,7 @@ import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
@@ -84,7 +84,7 @@ public class CardFactoryUtil {
                 if (!hostCard.isCopiedSpell() && !hostCard.isFaceDown()) {
                     hostCard.setOriginalStateAsFaceDown();
                 }
-                final Game game = hostCard.getGame();
+                final IGame game = hostCard.getGame();
 
                 Map<AbilityKey, Object> params = AbilityKey.newMap();
                 CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, this);
@@ -3109,7 +3109,7 @@ public class CardFactoryUtil {
                     }
 
                     Player activator = this.getActivatingPlayer();
-                    final Game game = activator.getGame();
+                    final IGame game = activator.getGame();
 
                     if (!activator.hasKeyword("Foretell on any player's turn") && !game.getPhaseHandler().isPlayerTurn(activator)) {
                         return false;
@@ -3125,7 +3125,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void resolve() {
-                    final Game game = getHostCard().getGame();
+                    final IGame game = getHostCard().getGame();
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, this);
 
@@ -3456,7 +3456,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void resolve() {
-                    final Game game = getHostCard().getGame();
+                    final IGame game = getHostCard().getGame();
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, this);
 
@@ -3687,7 +3687,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void resolve() {
-                    final Game game = this.getHostCard().getGame();
+                    final IGame game = this.getHostCard().getGame();
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, this);
 

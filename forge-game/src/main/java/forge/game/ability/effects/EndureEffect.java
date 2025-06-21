@@ -7,7 +7,7 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
@@ -49,7 +49,7 @@ public class EndureEffect extends TokenEffectBase {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         String num = sa.getParamOrDefault("Num", "1");
         int amount = AbilityUtils.calculateAmount(host, num, sa);
 

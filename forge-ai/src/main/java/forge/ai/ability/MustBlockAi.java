@@ -5,7 +5,7 @@ import forge.ai.AiCardMemory;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -24,7 +24,7 @@ public class MustBlockAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = aiPlayer.getGame();
+        final IGame game = aiPlayer.getGame();
         final Combat combat = game.getCombat();
         final boolean onlyLethal = !"AllowNonLethal".equals(sa.getParam("AILogic"));
 

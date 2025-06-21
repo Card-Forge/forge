@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -30,7 +30,7 @@ import forge.util.PredicateString.StringOp;
 public class VentureEffect  extends SpellAbilityEffect {
 
     private Card getDungeonCard(SpellAbility sa, Player player, Map<AbilityKey, Object> moveParams) {
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
 
         CardCollectionView commandCards = player.getCardsIn(ZoneType.Command);
         for (Card card : commandCards) {
@@ -98,7 +98,7 @@ public class VentureEffect  extends SpellAbilityEffect {
             return;
         }
 
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         Card dungeon = getDungeonCard(sa, player, moveParams);
         String room = dungeon.getCurrentRoom();
         String nextRoom = null;

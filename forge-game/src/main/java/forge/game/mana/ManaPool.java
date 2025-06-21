@@ -21,7 +21,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.cost.CostPayment;
 import forge.game.event.EventValueChangeType;
@@ -103,7 +103,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     }
 
     public final boolean hasBurn() {
-        final Game game = owner.getGame();
+        final IGame game = owner.getGame();
         return game.getRules().hasManaBurn() || StaticAbilityUnspentMana.hasManaBurn(owner);
     }
 

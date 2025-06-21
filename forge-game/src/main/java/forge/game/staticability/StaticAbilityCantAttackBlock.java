@@ -20,7 +20,7 @@ package forge.game.staticability;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -65,7 +65,7 @@ public class StaticAbilityCantAttackBlock {
      */
     public static boolean applyCantAttackAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
         final Card hostCard = stAb.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
 
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
@@ -176,7 +176,7 @@ public class StaticAbilityCantAttackBlock {
     }
 
     public static boolean canBlockTapped(final Card card)  {
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.BlockTapped)) {
@@ -365,7 +365,7 @@ public class StaticAbilityCantAttackBlock {
     }
 
     public static boolean canAttackHaste(final Card attacker, final GameEntity defender) {
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
         if (!attacker.isSick()) {
             return true;
         }
@@ -402,7 +402,7 @@ public class StaticAbilityCantAttackBlock {
             result.setLeft(2);
         }
 
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.MinMaxBlocker)) {
@@ -436,7 +436,7 @@ public class StaticAbilityCantAttackBlock {
     }
 
     public static boolean attackVigilance(final Card card)  {
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.AttackVigilance)) {

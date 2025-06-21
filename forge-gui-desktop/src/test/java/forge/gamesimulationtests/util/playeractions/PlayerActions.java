@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.testactions.TestAction;
@@ -23,7 +23,7 @@ public class PlayerActions {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T getNextActionIfApplicable( Player player, Game game, Class<T> actionType ) {
+	public <T> T getNextActionIfApplicable(Player player, IGame game, Class<T> actionType ) {
 		if( playerActions.isEmpty() ) {
 			return null;
 		}
@@ -43,11 +43,11 @@ public class PlayerActions {
 		return null;
 	}
 
-	private boolean isApplicable( BasePlayerAction action, Game game ) {
+	private boolean isApplicable( BasePlayerAction action, IGame game ) {
 		return action != null && action.isApplicable( game );
 	}
 
-	private boolean isRightPlayer( Player player, Game game, BasePlayerAction action ) {
+	private boolean isRightPlayer(Player player, IGame game, BasePlayerAction action ) {
 		return action.getPlayer() == null || player.equals( PlayerSpecificationHandler.INSTANCE.find( game, action.getPlayer() ) );
 	}
 

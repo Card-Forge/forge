@@ -9,7 +9,7 @@ import com.google.common.collect.Maps;
 
 import forge.card.CardType;
 import forge.card.ColorSet;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -36,7 +36,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         if (sa.hasParam("Toughness")) {
             toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         // Every Animate event needs a unique time stamp
         final long timestamp = game.getNextTimestamp();

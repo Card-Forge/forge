@@ -103,7 +103,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         return result;
     }
 
-    public void triggerCountersPutAll(final Game game) {
+    public void triggerCountersPutAll(final IGame game) {
         if (isEmpty()) {
             return;
         }
@@ -122,12 +122,12 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         game.getTriggerHandler().runTrigger(TriggerType.CounterAddedAll, runParams, false);
     }
 
-    public void replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect) {
+    public void replaceCounterEffect(final IGame game, final SpellAbility cause, final boolean effect) {
         replaceCounterEffect(game, cause, effect, false, null);
     }
 
     @SuppressWarnings("unchecked")
-    public boolean replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect, final boolean etb, Map<AbilityKey, Object> params) {
+    public boolean replaceCounterEffect(final IGame game, final SpellAbility cause, final boolean effect, final boolean etb, Map<AbilityKey, Object> params) {
         if (isEmpty()) {
             return false;
         }

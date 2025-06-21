@@ -21,7 +21,7 @@ package forge.ai.ability;
 import java.util.Map;
 
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -221,7 +221,7 @@ public class DrawAi extends SpellAbilityAi {
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final String logic = sa.getParamOrDefault("AILogic", "");
         final boolean considerPrimary = logic.equals("ConsiderPrimary");
         final boolean drawback = sa.getParent() != null && !considerPrimary;

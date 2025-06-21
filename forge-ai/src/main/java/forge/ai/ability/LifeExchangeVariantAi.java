@@ -1,7 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -24,7 +24,7 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         if ("Tree of Redemption".equals(sourceName)) {
             if (!ai.canGainLife())

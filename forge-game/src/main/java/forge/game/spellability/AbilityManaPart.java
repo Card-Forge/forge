@@ -25,7 +25,7 @@ import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityKey;
@@ -149,7 +149,7 @@ public class AbilityManaPart implements java.io.Serializable {
     public final String produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         String afterReplace = produced;
 
         SpellAbility root = sa == null ? null : sa.getRootAbility();
@@ -245,7 +245,7 @@ public class AbilityManaPart implements java.io.Serializable {
     }
 
     public void addNoCounterEffect(SpellAbility saBeingPaid) {
-        final Game game = sourceCard.getGame();
+        final IGame game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
         eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(sourceCard + "'s Effect");
@@ -390,7 +390,7 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (restriction.startsWith("CostContains")) {
-                Game game = sa.getHostCard().getGame();
+                IGame game = sa.getHostCard().getGame();
                 Cost payment = sa.getPayCosts();
                 if (game.getStack().isResolving() && sa.hasParam("UnlessCost")) {
                     payment = AbilityUtils.calculateUnlessCost(sa, sa.getParam("UnlessCost"), false);

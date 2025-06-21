@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.util.Localizer;
 
@@ -15,7 +15,7 @@ public class TotalMatchWins extends ProgressiveAchievement {
     }
 
     @Override
-    protected boolean eval(Player player, Game game) {
+    protected boolean eval(Player player, IGame game) {
         return game.getMatch().isMatchOver() && game.getMatch().isWonBy(player.getLobbyPlayer());
     }
 

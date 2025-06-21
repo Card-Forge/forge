@@ -1,12 +1,12 @@
 package forge.game.event;
 
-import forge.game.Game;
+import forge.game.IGame;
 
 public class GameEventSubgameEnd extends GameEvent {
-    public final Game maingame;
+    public final IGame maingame;
     public final String message;
 
-    public GameEventSubgameEnd(Game game, String message0) {
+    public GameEventSubgameEnd(IGame game, String message0) {
         maingame = game;
         message = message0;
     }

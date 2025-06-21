@@ -3,10 +3,7 @@ package forge.player;
 import com.google.common.collect.Iterables;
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -90,7 +87,7 @@ public class HumanPlay {
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
-            if (!controller.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            if (!controller.getGame().configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
                 Card rollback = p.getGame().getCardState(source);
                 if (castFaceDown) {
                     rollback.setFaceDown(false);
@@ -502,7 +499,7 @@ public class HumanPlay {
 
     private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
         final Card hostCard = ability.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
         final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         AbilityKey.addCardZoneTableParams(params, table);

@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -45,7 +45,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         boolean noRegen = sa.hasParam("NoRegen");
         final Card card = sa.getHostCard();
         final boolean isOptional = sa.hasParam("Optional");
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         final String desc = sa.getParamOrDefault("ValidDescription", "");
 
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();

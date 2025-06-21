@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -31,7 +31,7 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
     protected void manifestLoop(SpellAbility sa, Player p, final int amount) {
         final Card source = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         CardCollection tgtCards;
         boolean fromLibrary = false;

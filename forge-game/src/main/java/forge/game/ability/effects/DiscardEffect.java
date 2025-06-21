@@ -7,7 +7,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -119,7 +119,7 @@ public class DiscardEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String mode = sa.getParam("Mode");
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         final List<Player> targets = getTargetPlayers(sa),
                 discarders;

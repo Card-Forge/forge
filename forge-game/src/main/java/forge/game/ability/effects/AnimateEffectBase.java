@@ -32,7 +32,7 @@ import forge.card.RemoveType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.cost.Cost;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -54,7 +54,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             List<String> abilities, final List<String> triggers, final List<String> replacements, final List<String> stAbs,
             final long timestamp, final String duration) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final boolean perpetual = "Perpetual".equals(duration);
 
         boolean addAllCreatureTypes = sa.hasParam("AddAllCreatureTypes");

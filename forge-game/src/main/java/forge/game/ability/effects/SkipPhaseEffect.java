@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -50,7 +50,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
     public static void createSkipPhaseEffect(SpellAbility sa, final Player player,
             final String duration, final String phase, final String step) {
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
         final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();
         final boolean isNextThisTurn = duration != null && duration.equals("NextThisTurn");

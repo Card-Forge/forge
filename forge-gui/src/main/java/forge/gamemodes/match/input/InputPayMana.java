@@ -6,7 +6,7 @@ import forge.ai.PlayerControllerAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
@@ -34,7 +34,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     protected int phyLifeToLose = 0;
 
     protected final Player player;
-    protected final Game game;
+    protected final IGame game;
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
     protected boolean effect;
