@@ -1,0 +1,10 @@
+[metadata]
+Code=EOC
+Date=2025-08-01
+Name=Edge of Eternities Commander
+Type=Commander
+ScryfallCode=EOC
+
+[cards]
+3 M Kilo, Apogee Mind @Tuan Duong Chu
+4 M Szarel, Genesis Shepherd @Matt Stewart
