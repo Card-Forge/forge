@@ -199,9 +199,6 @@ public class ImageUtil {
             // Hanweir Garrison EMN already has a appended.
             cardCollectorNumber += face.equals("back") ? "b" : "a";
         }
-        if (cp.getRules().getSplitType() == CardSplitType.Meld) {
-            cardCollectorNumber += face.equals("back") ? "b" : "a";
-        }
         return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
                 langCode, versionParam, faceParam);
     }
