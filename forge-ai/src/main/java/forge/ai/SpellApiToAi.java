@@ -77,6 +77,7 @@ public enum SpellApiToAi {
             .put(ApiType.DelayedTrigger, DelayedTriggerAi.class)
             .put(ApiType.Destroy, DestroyAi.class)
             .put(ApiType.DestroyAll, DestroyAllAi.class)
+            .put(ApiType.Detain, DetainAi.class)
             .put(ApiType.Dig, DigAi.class)
             .put(ApiType.DigMultiple, DigMultipleAi.class)
             .put(ApiType.DigUntil, DigUntilAi.class)
