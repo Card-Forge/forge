@@ -7,7 +7,6 @@ ScryfallCode=PF25
 
 [cards]
 1 M Serra the Benevolent @Matthew D. Wilson
-1C R Arcane Signet @David Astruga
 1F R Avacyn's Pilgrim @Mark Zug
 2 R Ponder @Mark Zug
 3 M The First Sliver @Svetlin Velinov
@@ -17,3 +16,7 @@ F4 R Second City @Mark Rosewater
 7 R Sliver Hive @Igor Kieryluk
 F8 R All-You-Can-Eat Buffet @Mark Rosewater
 9 R Tifa Lockhart @Nijihayashi
+10 R Arcane Signet @David Astruga
+11 R Rograkh, Son of Rohgahh @Square Enix
+12 R Rograkh, Son of Rohgahh @Square Enix
+13 R Swords to Plowshares @Kodai Okamoto

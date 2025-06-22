@@ -23,5 +23,4 @@ ScryfallCode=PPRO
 2022-2 M Teferi, Hero of Dominaria @Chris Rallis
 2022-3 R Nykthos, Shrine to Nyx @Alayna Danner
 2025-1 M Cloud, Midgar Mercenary @Tetsuya Nomura
-2025-2 R Rograkh, Son of Rohgahh @Square Enix
 2025-3 R Aerith Gainsborough @Susumu Kuroi
