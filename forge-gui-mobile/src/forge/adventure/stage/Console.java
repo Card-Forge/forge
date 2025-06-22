@@ -75,6 +75,10 @@ public class Console extends Window {
     }
 
     public void command(String text) {
+        if (text.equalsIgnoreCase("exit")) {
+            toggle();
+            return;
+        }
         Cell<Label> newLine=content.add(text);
         newLine.getActor().setColor(1,1,1,1);
         newLine.growX().align(Align.left|Align.bottom).row();
