@@ -365,6 +365,7 @@ Junk
 Key:Keys
 Map
 Powerstone:Powerstones
+Spacecraft:Spacecrafts
 Treasure:Treasures
 Vehicle:Vehicles
 [WalkerTypes]

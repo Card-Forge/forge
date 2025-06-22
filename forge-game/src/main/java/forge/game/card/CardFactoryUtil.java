@@ -3591,6 +3591,16 @@ public class CardFactoryUtil {
             sa.setSVar("ScavengeX", "Exiled$CardPower");
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Station")) {
+            String effect = "AB$ PutCounter | Cost$ tapXType<1/Creature.Other> | Defined$ Self " +
+                    "| CounterType$ CHARGE | CounterNum$ StationX | SorcerySpeed$ True " +
+                    "| CostDesc$ | SpellDescription$ Station (" + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("StationX", "Tapped$CardPower");
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
+
         } else if (keyword.startsWith("Encore")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
