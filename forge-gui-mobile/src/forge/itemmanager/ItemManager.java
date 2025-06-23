@@ -38,7 +38,6 @@ import forge.card.CardZoom.ActivateHandler;
 import forge.gui.FThreads;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.AdvancedSearchFilter;
-import forge.itemmanager.filters.CardColorFilter;
 import forge.itemmanager.filters.CardFormatFilter;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.filters.TextSearchFilter;
@@ -359,26 +358,16 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         float fieldHeight = searchFilter.getMainComponent().getHeight();
         float viewButtonWidth = fieldHeight;
         helper.offset(0, ItemFilter.PADDING);
-        // for Adventure Mode Store, Sideboard and Deck Event previews layout
-        if (ItemManagerConfig.ADVENTURE_STORE_POOL.equals(config) || ItemManagerConfig.ADVENTURE_SIDEBOARD.equals(config)) {
-            for (ItemFilter<? extends T> filter : filters.get()) {
-                if (filter instanceof CardColorFilter) {
-                    filter.getWidget().setVisible(true);
-                    helper.include(filter.getWidget(), (viewButtonWidth + helper.getGapX()) * 7, fieldHeight);
-                    break;
-                }
-            }
-            helper.include(searchFilter.getWidget(), searchFilter.getPreferredWidth(helper.getRemainingLineWidth() - (viewButtonWidth + helper.getGapX()) , fieldHeight), fieldHeight);
-            helper.include(btnView, viewButtonWidth, fieldHeight);
-            helper.newLine();
-            helper.fill(currentView.getScroller());
-            return;
-        } else {
-            helper.fillLine(searchFilter.getWidget(), fieldHeight, (viewButtonWidth + helper.getGapX()) * 3); //leave room for search, view, and options buttons
-            helper.include(btnSearch, viewButtonWidth, fieldHeight);
-            helper.include(btnView, viewButtonWidth, fieldHeight);
-            helper.include(btnAdvancedSearchOptions, viewButtonWidth, fieldHeight);
-        }
+        List<FLabel> buttons = new ArrayList<>(3);
+        if(btnSearch.isEnabled())
+            buttons.add(btnSearch);
+        buttons.add(btnView);
+        if(btnAdvancedSearchOptions.isEnabled())
+            buttons.add(btnAdvancedSearchOptions);
+        float rightPadding = (viewButtonWidth + helper.getGapX()) * buttons.size();
+        helper.fillLine(searchFilter.getWidget(), fieldHeight, rightPadding); //leave room for search, view, and options buttons
+        for(FLabel button : buttons)
+            helper.include(button, viewButtonWidth, fieldHeight);
         helper.newLine();
         if (advancedSearchFilter != null && advancedSearchFilter.getWidget().isVisible()) {
             helper.fillLine(advancedSearchFilter.getWidget(), fieldHeight);
