@@ -100,14 +100,15 @@ public class BoosterDraftTest implements IBoosterDraft {
     }
 
     @Override
-    public void setLogEntry(IDraftLog draftingProcess) {
-
-    }
+    public void setLogEntry(IDraftLog draftingProcess) {}
 
     @Override
     public IDraftLog getDraftLog() {
         return null;
     }
+
+    @Override
+    public void addLog(String message) {}
 
     @Override
     public LimitedPlayer getNeighbor(LimitedPlayer p, boolean left) {

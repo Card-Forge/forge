@@ -8,7 +8,6 @@ import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
-import forge.localinstance.properties.ForgePreferences;
 import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
@@ -36,7 +35,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         }
 
         DraftPack chooseFrom = packQueue.peek();
-        debugPrint("Pack: " + chooseFrom);
+        debugPrint(chooseFrom.toString());
         if (chooseFrom.isEmpty()) {
             debugPrint("Skipped (Empty pack)");
             return null;
@@ -59,8 +58,6 @@ public class LimitedPlayerAI extends LimitedPlayer {
                 deckCols.addColorsOf(bestPick);
             }
         }
-
-        debugPrint("Picked: " + bestPick);
 
         return bestPick;
     }
@@ -312,9 +309,4 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return null;
     }
 
-    private void debugPrint(String text) {
-        if(!ForgePreferences.DEV_MODE)
-            return;
-        System.out.println("Player[" + order + "] - " + text);
-    }
 }

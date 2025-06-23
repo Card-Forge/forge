@@ -46,4 +46,9 @@ public class DraftPack extends ForwardingList<PaperCard> {
     protected List<PaperCard> delegate() {
         return cards;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Pack #%d: (%d)%s", id, cards.size(), cards);
+    }
 }

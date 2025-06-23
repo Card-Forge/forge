@@ -10,6 +10,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.TextUtil;
 
@@ -108,6 +109,7 @@ public class LimitedPlayer {
             return null;
         }
 
+        debugPrint("Picked: " + bestPick);
         DraftPack chooseFrom = packQueue.peek();
         if (chooseFrom == null) {
             return null;
@@ -370,10 +372,7 @@ public class LimitedPlayer {
     }
 
     public void addLog(String message) {
-        if (this.draft.getDraftLog() != null) {
-            this.draft.getDraftLog().addLogEntry(message);
-        }
-        System.out.println("[DRAFT] " + message);
+        this.draft.addLog(message);
     }
 
     public DraftPack nextChoice() {
@@ -812,5 +811,11 @@ public class LimitedPlayer {
             List<String> noteList = player.getDraftNotes().computeIfAbsent(exchangeCard.getName(), k -> Lists.newArrayList());
             noteList.add(note);
         });
+    }
+
+    public void debugPrint(String text) {
+        if(!ForgePreferences.DEV_MODE)
+            return;
+        System.out.println("Player[" + order + "] - " + text);
     }
 }

@@ -2099,6 +2099,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         @Override
+        protected void updateCaption() {
+            BoosterDraft draft = parentScreen.getDraft();
+            if (draft == null)
+                return;
+            int packNumber = draft.getCurrentBoosterIndex() + 1;
+            String lblPackN = Forge.getLocalizer().getMessage("lblPackN", String.valueOf(packNumber));
+            caption = lblPackN;
+            cardManager.setCaption(lblPackN);
+        }
+
+        @Override
         public void refresh() {
             BoosterDraft draft = parentScreen.getDraft();
             if (draft == null)
@@ -2106,8 +2117,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             CardPool pool = draft.nextChoice();
             this.draftingFaceDown = getDraftPlayer().hasArchdemonCurse();
-            int packNumber = draft.getCurrentBoosterIndex() + 1;
-            caption = Forge.getLocalizer().getMessage("lblPackN", String.valueOf(packNumber));
 
             if(draftingFaceDown) {
                 ItemPool<PaperCard> fakePool = new ItemPool<>(PaperCard.class);
@@ -2284,7 +2293,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         public void setEditor(FDeckEditor editor) {
             this.editor = editor;
-            editor.notifyNewControllerModel();
+            if(editor != null)
+                editor.notifyNewControllerModel();
         }
 
         public void setRootFolder(IStorage<T> folder0) {

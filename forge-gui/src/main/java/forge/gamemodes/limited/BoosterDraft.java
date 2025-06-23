@@ -65,7 +65,7 @@ public class BoosterDraft implements IBoosterDraft {
     static final List<CustomLimited> customs = new ArrayList<>();
     protected LimitedPoolType draftFormat;
 
-    protected final List<Supplier<List<PaperCard>>> product = new ArrayList<>();
+    protected final List<IUnOpenedProduct> product = new ArrayList<>();
     public static void initializeCustomDrafts() {
         loadCustomDrafts();
     }
@@ -81,7 +81,7 @@ public class BoosterDraft implements IBoosterDraft {
     protected boolean generateProduct() {
         switch (this.draftFormat) {
             case Full: // Draft from all cards in Forge
-                final Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedTemplate.genericDraftBooster);
+                final IUnOpenedProduct s = new UnOpenedProduct(SealedTemplate.genericDraftBooster);
 
                 for (int i = 0; i < 3; i++) {
                     this.product.add(s);
@@ -208,7 +208,7 @@ public class BoosterDraft implements IBoosterDraft {
                         allEditions.getOrderedEditions(),
                         themeFilter);
                 // Add chaos "boosters" as special suppliers
-                final Supplier<List<PaperCard>> ChaosDraftSupplier;
+                final IUnOpenedProduct ChaosDraftSupplier;
                 try {
                     ChaosDraftSupplier = new ChaosBoosterSupplier(chaosDraftEditions);
                 } catch(IllegalArgumentException e) {
@@ -355,7 +355,7 @@ public class BoosterDraft implements IBoosterDraft {
 
         final CardPool result = new CardPool();
 
-        List<PaperCard> nextChoice = localPlayer.nextChoice();
+        DraftPack nextChoice = localPlayer.nextChoice();
         if (nextChoice != null && !nextChoice.isEmpty())
             result.addAllFlat(nextChoice);
 
@@ -364,6 +364,9 @@ public class BoosterDraft implements IBoosterDraft {
             this.passPacks();
             // Recur until we find a cardpool or finish
             return nextChoice();
+        }
+        else {
+            localPlayer.debugPrint(String.valueOf(nextChoice));
         }
 
         return result;
@@ -393,7 +396,7 @@ public class BoosterDraft implements IBoosterDraft {
             pl.newPack();
         }
         if (this.getDraftLog() != null) {
-            this.getDraftLog().addLogEntry("Round " + this.nextBoosterGroup + " is starting...");
+            this.addLog("Round " + this.nextBoosterGroup + " is starting...");
         }
         this.currentBoosterSize = firstPlayer.packQueue.peek().size();
         return true;
@@ -456,6 +459,7 @@ public class BoosterDraft implements IBoosterDraft {
             LimitedPlayer passToPlayer = null;
             if (passingPack.isEmpty()) {
                 packsInDraft--;
+                debugPrint("Pack #" + passingPack.getId() + " is empty. Discarding. " + packsInDraft + " packs remain.");
                 continue;
             }
 
@@ -478,6 +482,8 @@ public class BoosterDraft implements IBoosterDraft {
                         passToPlayer = SGuiChoose.one("Which player with Canal Dredger should we pass the last card to?", dredgers);
                     }
                 }
+                if(passToPlayer != null)
+                    debugPrint("Last card in pack " + passingPack.getId() + " passed to Player[" + passToPlayer.order + "] (Canal Dredger)");
             }
 
             if (passToPlayer == null) {
@@ -486,6 +492,12 @@ public class BoosterDraft implements IBoosterDraft {
 
             passToPlayer.receiveOpenedPack(passingPack);
         }
+
+        if(ForgePreferences.DEV_MODE) {
+            int[] packCounts = players.stream().mapToInt((p) -> p.packQueue.size()).toArray();
+            int[] unopenedPackCounts = players.stream().mapToInt((p) -> p.unopenedPacks.size()).toArray();
+            debugPrint("Packs passed. Remaining in draft: " + packsInDraft + "; Opened: " + Arrays.toString(packCounts) + "; Unopened: " + Arrays.toString(unopenedPackCounts));
+        }
     }
 
     protected void computerChoose() {
@@ -493,6 +505,7 @@ public class BoosterDraft implements IBoosterDraft {
         for (int i = 1; i < N_PLAYERS; i++) {
             LimitedPlayer pl = this.players.get(i);
             if (pl.shouldSkipThisPick()) {
+                pl.debugPrint("Skipped (shouldSkipThisPick)");
                 continue;
             }
 
@@ -666,5 +679,19 @@ public class BoosterDraft implements IBoosterDraft {
                 this.draftPicks.put(cnBk, newValue);
             }
         }
+    }
+
+    @Override
+    public void addLog(String message) {
+        if (this.getDraftLog() != null) {
+            this.getDraftLog().addLogEntry(message);
+        }
+        System.out.println("[DRAFT] " + message);
+    }
+
+    public void debugPrint(String text) {
+        if(!ForgePreferences.DEV_MODE)
+            return;
+        System.out.println("[DRAFT] - " + text);
     }
 }
