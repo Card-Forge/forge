@@ -601,25 +601,15 @@ public class AdventureDeckEditor extends FDeckEditor {
     private static ItemPool<InventoryItem> decksUsingMyCards = new ItemPool<>(InventoryItem.class);
 
     public static void leave() {
-        if (currentEvent != null && currentEvent.getDraft() != null && !currentEvent.isDraftComplete) {
-            Localizer localizer = Forge.getLocalizer();
-            String confirmPrompt = localizer.getMessageorUseDefault("lblEndAdventureEventConfirm", "This will end the current event, and your entry fee will not be refunded.\n\nLeave anyway?");
-            FOptionPane.showConfirmDialog(confirmPrompt, localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, new Callback<>() {
-                @Override
-                public void run(Boolean result) {
-                    if (result) {
-                        currentEvent.eventStatus = AdventureEventController.EventStatus.Abandoned;
-                        Current.player().newCards.clear();
-                        Forge.clearCurrentScreen();
-                        Forge.switchToLast();
-                    }
+        Forge.getCurrentScreen().onClose(new Callback<>() {
+            @Override
+            public void run(Boolean result) {
+                if (result) {
+                    Forge.clearCurrentScreen();
+                    Forge.switchToLast();
                 }
-            });
-        } else {
-            Current.player().newCards.clear();
-            Forge.clearCurrentScreen();
-            Forge.switchToLast();
-        }
+            }
+        });
     }
 
     @Override
@@ -795,19 +785,46 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     @Override
     public void onClose(final Callback<Boolean> canCloseCallback) {
-        String errorMessage = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
-        if (errorMessage != null) {
-            FOptionPane.showErrorDialog(errorMessage);
+        String deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
+        Localizer localizer = Forge.getLocalizer();
+        if (deckError != null) {
+            //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
+            String warning = localizer.getMessage("lblAdventureDeckError", deckError);
+            FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, new Callback<>() {
+                @Override
+                public void run(Boolean result) {
+                    resolveClose(canCloseCallback, result == true);
+                }
+            });
+            FOptionPane.showErrorDialog(deckError);
+            resolveClose(canCloseCallback, false);
+            return;
         }
 
-        // if currentEvent is null, it should have been cleared or overwritten somehow
-        if (currentEvent != null && currentEvent.getDraft() != null && !isShop) {
-            if (currentEvent.isDraftComplete || canCloseCallback == null) {
-                super.onClose(canCloseCallback); //can skip prompt if draft saved
-                return;
-            }
-            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessageorUseDefault("lblEndAdventureEventConfirm", "This will end the current event, and your entry fee will not be refunded.\n\nLeave anyway?"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, canCloseCallback);
+        if(canCloseCallback == null)
+            return;
+
+        if (isDrafting()) {
+            FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, new Callback<>() {
+                @Override
+                public void run(Boolean result) {
+                    resolveClose(canCloseCallback, result == true);
+                }
+            });
+            return;
         }
+
+        resolveClose(canCloseCallback, true);
+    }
+
+    private void resolveClose(final Callback<Boolean> canCloseCallback, boolean result) {
+        if(result) {
+            Current.player().newCards.clear();
+            if(isDrafting())
+                getCurrentEvent().eventStatus = AdventureEventController.EventStatus.Abandoned;
+        }
+        if(canCloseCallback != null)
+            canCloseCallback.run(result);
     }
 
 
