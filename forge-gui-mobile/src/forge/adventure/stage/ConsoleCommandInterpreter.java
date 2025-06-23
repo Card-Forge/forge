@@ -11,6 +11,7 @@ import forge.adventure.data.EnemyData;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.util.AdventureEventController;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
@@ -224,6 +225,15 @@ public class ConsoleCommandInterpreter {
             }
             Current.player().addCard(card);
             return "Added card: " + card.getName();
+        });
+        registerCommand(new String[]{"give", "booster"}, s -> {
+            if (s.length < 1) return "Command needs 1 parameter: Set code.";
+            CardEdition edition = StaticData.instance().getCardEdition(s[0]);
+            if (edition == null) return "Cannot find set code: " + s[0];
+            if (edition.getBoosterTemplate() == null) return "Cannot find booster for set code: " + s[0];
+            Deck newPack = AdventureEventController.instance().generateBooster(s[0]);
+            Current.player().addBooster(newPack);
+            return "Added Booster: " + edition.getName();
         });
         registerCommand(new String[]{"give", "nosell", "card"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Card name.";
