@@ -67,27 +67,25 @@ public class AdventureDeckEditor extends FDeckEditor {
             unlockedEditions.add(FModel.getMagicDb().getEditions().get("JMP"));
 
             // Loop through Landscapes and add them to unlockedEditions
-            if (currentEvent == null) {
-                Map<String, CardEdition> editionsByName = new HashMap<>();
-                for (CardEdition e : FModel.getMagicDb().getEditions()) {
-                    editionsByName.put(e.getName().toLowerCase(), e);
-                    editionsByName.put(e.getName().replace(":", "").toLowerCase(), e); //TODO: Proper item migration support. This is just there to fix one typo'd item name
+            Map<String, CardEdition> editionsByName = new HashMap<>();
+            for (CardEdition e : FModel.getMagicDb().getEditions()) {
+                editionsByName.put(e.getName().toLowerCase(), e);
+                editionsByName.put(e.getName().replace(":", "").toLowerCase(), e); //TODO: Proper item migration support. This is just there to fix one typo'd item name
+            }
+
+            String sketchbookPrefix = "landscape sketchbook - ";
+            for (String itemName : AdventurePlayer.current().getItems()) {
+                if (!itemName.toLowerCase().startsWith(sketchbookPrefix)) {
+                    continue;
                 }
 
-                String sketchbookPrefix = "landscape sketchbook - ";
-                for (String itemName : AdventurePlayer.current().getItems()) {
-                    if (!itemName.toLowerCase().startsWith(sketchbookPrefix)) {
-                        continue;
-                    }
+                // Extract the set name after the prefix
+                String setName = itemName.substring(sketchbookPrefix.length()).trim();
+                CardEdition edition = editionsByName.get(setName.toLowerCase());
 
-                    // Extract the set name after the prefix
-                    String setName = itemName.substring(sketchbookPrefix.length()).trim();
-                    CardEdition edition = editionsByName.get(setName.toLowerCase());
-
-                    // Add the edition if found and it has basic lands
-                    if (edition != null && edition.hasBasicLands()) {
-                        unlockedEditions.add(edition);
-                    }
+                // Add the edition if found and it has basic lands
+                if (edition != null && edition.hasBasicLands()) {
+                    unlockedEditions.add(edition);
                 }
             }
             return unlockedEditions;
@@ -123,16 +121,18 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     protected static class AdventureEventEditorConfig extends DeckEditorConfig {
         protected AdventureEventData event;
+        private final AdventureEventDeckController controller;
 
         public AdventureEventEditorConfig(AdventureEventData event) {
             this.event = event;
+            this.controller = new AdventureEventDeckController(event);
         }
 
         @Override public GameType getGameType() { return GameType.AdventureEvent; }
         @Override public DeckFormat getDeckFormat() { return DeckFormat.Limited; }
         @Override public boolean isLimited() { return true; }
         @Override public boolean isDraft() { return event.getDraft() != null; }
-        @Override protected IDeckController getController() { return ADVENTURE_DECK_CONTROLLER; }
+        @Override protected IDeckController getController() { return this.controller; }
 
         @Override
         public List<CardEdition> getBasicLandSets(Deck currentDeck) {
@@ -476,16 +476,27 @@ public class AdventureDeckEditor extends FDeckEditor {
         }
     }
 
+    public AdventureEventData getCurrentEvent() {
+        IDeckController controller = getDeckController();
+        if(!(controller instanceof AdventureEventDeckController eventController))
+            return null;
+        return eventController.currentEvent;
+    }
+
     @Override
     public BoosterDraft getDraft() {
-        if (currentEvent == null)
+        AdventureEventData currentEvent = getCurrentEvent();
+        if(currentEvent == null)
             return null;
         return currentEvent.getDraft();
     }
 
     @Override
     public boolean isDrafting() {
-        return currentEvent != null && !currentEvent.isDraftComplete;
+        AdventureEventData currentEvent = getCurrentEvent();
+        if(currentEvent == null)
+            return false;
+        return currentEvent.draft != null && !currentEvent.isDraftComplete;
     }
 
     public static AdventureEventData currentEvent;
@@ -497,6 +508,9 @@ public class AdventureDeckEditor extends FDeckEditor {
     @Override
     public void completeDraft() {
         super.completeDraft();
+        AdventureEventData currentEvent = getCurrentEvent();
+        if(currentEvent == null)
+            return;
         currentEvent.isDraftComplete = true;
         Deck[] opponentDecks = currentEvent.getDraft().getDecks();
         for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
@@ -626,16 +640,17 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     public void refresh() {
-        for (TabPage<FDeckEditor> page : tabPages) {
-            if (page instanceof CatalogPage)
-                ((CatalogPage) page).scheduleRefresh();
-            else if (page instanceof CardManagerPage)
-                ((CardManagerPage) page).refresh();
-        }
+        FThreads.invokeInBackgroundThread(() -> {
+            for (TabPage<FDeckEditor> page : tabPages) {
+                if (page instanceof CatalogPage)
+                    ((CatalogPage) page).scheduleRefresh();
+                else if (page instanceof CardManagerPage)
+                    ((CardManagerPage) page).refresh();
+            }
+        });
     }
 
 
-    boolean isShop;
     protected AdventureDeckHeader deckHeader;
     protected FDraftLog draftLog;
     protected CollectionAutoSellPage autoSellPage;
@@ -644,13 +659,12 @@ public class AdventureDeckEditor extends FDeckEditor {
         super(createAsShop ? new ShopConfig() : new AdventureEditorConfig(),
                 createAsShop ? null : Current.player().getSelectedDeck(),
                 e -> leave());
-        isShop = createAsShop;
         if(createAsShop)
             setHeaderText(Forge.getLocalizer().getMessage("lblSell"));
     }
 
     public AdventureDeckEditor(AdventureEventData event) {
-        super(new AdventureEventEditorConfig(event), e -> leave());
+        super(new AdventureEventEditorConfig(event), event.registeredDeck, e -> leave());
         currentEvent = event;
 
         if(event.getDraft() != null) {
@@ -725,6 +739,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     @Override
     protected boolean allowsAddBasic() {
+        AdventureEventData currentEvent = getCurrentEvent();
         if (currentEvent == null)
             return true;
         if (!currentEvent.eventRules.allowsAddBasicLands)
@@ -759,6 +774,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     @Override
     public Deck getDeck() {
+        AdventureEventData currentEvent = getCurrentEvent();
         if (currentEvent == null)
             return Current.player().getSelectedDeck();
         else
@@ -916,6 +932,39 @@ public class AdventureDeckEditor extends FDeckEditor {
             if(currentDeck == null)
                 return "New Deck";
             return currentDeck.getName();
+        }
+
+        @Override public void notifyModelChanged() {} //
+        @Override public void exitWithoutSaving() {} //Too many external variables to just revert the deck. Not supported for now.
+    }
+
+    private static class AdventureEventDeckController implements IDeckController {
+        FDeckEditor editor;
+        AdventureEventData currentEvent;
+
+        public AdventureEventDeckController(AdventureEventData currentEvent) {
+            this.currentEvent = currentEvent;
+        }
+
+        @Override
+        public void setEditor(FDeckEditor editor) {
+            this.editor = editor;
+            if(editor != null)
+                editor.notifyNewControllerModel();
+        }
+
+        @Override public void setDeck(Deck deck) {this.newDeck();} //Deck is supplied by the event.
+        @Override public void newDeck() {
+            if(editor != null)
+                editor.notifyNewControllerModel();
+        }
+        @Override public Deck getDeck() { return currentEvent.registeredDeck; }
+
+        @Override
+        public String getDeckDisplayName() {
+            if(getDeck() == null)
+                return "Uninitialized Deck";
+            return getDeck().getName();
         }
 
         @Override public void notifyModelChanged() {} //
