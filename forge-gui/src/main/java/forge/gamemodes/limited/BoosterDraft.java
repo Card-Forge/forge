@@ -52,6 +52,7 @@ public class BoosterDraft implements IBoosterDraft {
     public static final String FILE_EXT = ".draft";
     private final List<LimitedPlayer> players = new ArrayList<>();
     private final LimitedPlayer localPlayer;
+    private boolean localPlayerExtraPick = false;
 
     private IDraftLog draftLog = null;
 
@@ -351,7 +352,9 @@ public class BoosterDraft implements IBoosterDraft {
             }
         }
 
-        this.computerChoose();
+        if(!localPlayerExtraPick)
+            this.computerChoose();
+        localPlayerExtraPick = false;
 
         final CardPool result = new CardPool();
 
@@ -548,9 +551,14 @@ public class BoosterDraft implements IBoosterDraft {
 
         boolean passPack = this.localPlayer.draftCard(c);
         if (passPack) {
-            // Leovolds Operative and Cogwork Librarian get to draft an extra card.. How do we do that?
+            // Computer players do their extra drafts in computerChoose.
+            // Human players get handed the same pack twice by nextChoice.
+            // A flag here disables the AI choosing again when nextChoice is called.
+            // This could be done a lot better but that'd basically involve reorganizing all the draft logic.
             this.passPacks();
         }
+        else
+            localPlayerExtraPick = true;
         this.currentBoosterPick++;
 
         // Return whether or not we passed, but that the UI always needs to refresh
