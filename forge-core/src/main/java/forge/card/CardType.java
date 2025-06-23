@@ -516,7 +516,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     @Override
     public boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
     @Override
-    public boolean isAura()           { return hasSubtype("Aura"); }
+    public boolean isAura() { return hasSubtype("Aura"); }
     @Override
     public boolean isEquipment()  { return hasSubtype("Equipment"); }
     @Override
@@ -528,6 +528,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public boolean isContraption() {
         return hasSubtype("Contraption");
     }
+
+    public boolean isVehicle() { return hasSubtype("Vehicle"); }
+    public boolean isSpacecraft() { return hasSubtype("Spacecraft"); }
 
     @Override
     public boolean isSaga() {
