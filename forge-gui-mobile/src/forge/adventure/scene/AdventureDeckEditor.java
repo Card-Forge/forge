@@ -20,6 +20,7 @@ import forge.card.CardZoom;
 import forge.deck.*;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gui.FThreads;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.*;
@@ -425,7 +426,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             super.initialize();
             cardManager.setBtnAdvancedSearchOptions(true);
             cardManager.setCatalogDisplay(true);
-            scheduleRefresh();
+            cardManager.setPool(getCardPool(), false); //Need to update this early for the caption.
         }
 
         @Override

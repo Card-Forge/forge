@@ -168,7 +168,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
         public GameTypeDeckEditorConfig setCatalogConfig(ItemManagerConfig catalogConfig, String captionKey) {
             this.catalogConfig = catalogConfig;
-            this.catalogCaption = captionKey; //TODO: Test.
+            this.catalogCaption = captionKey;
             return this;
         }
 
@@ -1305,7 +1305,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             PaperCard sampleCard = cardManager.getSelectedItem();
             String labelAction, labelSection;
             CardManagerPage cardSourcePage = parentScreen.getCardSourcePage();
-            if(destination == null || destination instanceof CatalogPage || destination == cardSourcePage) {
+            if(destination == null || destination instanceof CatalogPage
+                    || (destination == cardSourcePage && !(source instanceof CatalogPage))) {
                 //Removing from this section, e.g. "Remove from sideboard"
                 labelAction = "lblRemove";
                 if(source instanceof DeckSectionPage)
@@ -1617,7 +1618,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             //If we're hidden, we can delay refreshing. But there's a slight complication.
             //When looking at a deck section, selecting a card that could have more copies added will let you pull
             //those copies from this catalog. They need to be readily available.
-            if (isInitialized && !isVisible() && !parentScreen.getEditorConfig().hasInfiniteCardPool()) {
+            if (isInitialized && !isVisible() && parentScreen.getCardSourcePage() == this && !parentScreen.getEditorConfig().hasInfiniteCardPool()) {
                 needRefreshWhenShown = true;
                 //Throw in the all cards that might be requested by other pages. The other pages will determine if they
                 //can actually be added, and we'll clear these out in the real refresh.
@@ -1881,25 +1882,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             } else {
                 caption = captionPrefix + " (" + parentScreen.getDeck().get(deckSection).countAll() + ")";
             }
-        }
-
-        @Override
-        public void addCard(PaperCard card, int qty) {
-            super.addCard(card, qty);
-            if(parentScreen.hiddenExtraSections.contains(this.deckSection))
-                parentScreen.showExtraSectionTab(this.deckSection);
-        }
-        @Override
-        public void addCards(Iterable<Entry<PaperCard, Integer>> cards) {
-            super.addCards(cards);
-            if(parentScreen.hiddenExtraSections.contains(this.deckSection))
-                parentScreen.showExtraSectionTab(this.deckSection);
-        }
-
-        @Override
-        public void setCards(CardPool cards) {
-            super.setCards(cards);
-            if(parentScreen.hiddenExtraSections.contains(this.deckSection) && !cards.isEmpty())
+            if(parentScreen.hiddenExtraSections.contains(this.deckSection) && cardManager.getPool() != null && !cardManager.getPool().isEmpty())
                 parentScreen.showExtraSectionTab(this.deckSection);
         }
 
