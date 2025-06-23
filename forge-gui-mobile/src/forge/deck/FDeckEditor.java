@@ -2032,9 +2032,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             //sort options so current option is on top and selected by default
             List<PaperCard> sortedOptions = new ArrayList<>();
             sortedOptions.add(card);
-            for (Entry<PaperCard, Integer> option : cardOptions) {
-                if (option != card) {
-                    sortedOptions.add(option.getKey());
+            for (Entry<PaperCard, Integer> optionEntry : cardOptions) {
+                PaperCard option = optionEntry.getKey();
+                if (!option.equals(card)) {
+                    sortedOptions.add(option);
                 }
             }
             final Localizer localizer = Forge.getLocalizer();
@@ -2048,7 +2049,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     if (replacement == null || replacement == card)
                         return;
                     //Next, ask how many copies they'd like to swap, taking into account the number available.
-                    int maxMovable = Math.min(cardOptions.count(replacement), cardManager.getItemCount(card));
+                    int available = parentScreen.getCardSourcePage().cardManager.isInfinite() ? Integer.MAX_VALUE : cardOptions.count(replacement);
+                    int maxMovable = Math.min(available, cardManager.getItemCount(card));
                     new MoveQuantityPrompt(promptQuantity, maxMovable, (amount) -> {
                         CardManagerPage sourcePage = parentScreen.getCardSourcePage();
                         //Finally, swap the cards.
