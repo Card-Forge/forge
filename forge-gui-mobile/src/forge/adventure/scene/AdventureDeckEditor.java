@@ -922,7 +922,8 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override
         public void setEditor(FDeckEditor editor) {
             this.editor = editor;
-            editor.notifyNewControllerModel();
+            if(editor != null)
+               editor.notifyNewControllerModel();
         }
 
         @Override public void setDeck(Deck deck) {

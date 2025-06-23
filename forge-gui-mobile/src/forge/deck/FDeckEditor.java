@@ -76,6 +76,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
         public boolean allowsCardReplacement() { return hasInfiniteCardPool(); }
 
+        public List<CardEdition> getBasicLandSets(Deck currentDeck) {
+            return List.of(DeckProxy.getDefaultLandSet(currentDeck));
+        }
+
         protected abstract IDeckController getController();
         protected abstract DeckEditorPage[] getInitialPages();
 
@@ -91,12 +95,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             IDeckController controller = this.getController();
             if(!(controller instanceof FileDeckController<?>))
                 throw new UnsupportedOperationException("Tried to load a deck by file name without a FileDeckController.");
+            controller.setEditor(null);
             ((FileDeckController<?>) controller).load(editDeckPath, editDeckName);
             return controller;
         }
 
         private IDeckController initDeckController(Deck newDeck) {
             IDeckController controller = this.getController();
+            controller.setEditor(null);
             if(newDeck != null)
                 controller.setDeck(newDeck);
             else
@@ -106,12 +112,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         private IDeckController initDeckController() {
             IDeckController controller = this.getController();
+            controller.setEditor(null);
             controller.newDeck();
             return controller;
-        }
-
-        public List<CardEdition> getBasicLandSets(Deck currentDeck) {
-            return List.of(DeckProxy.getDefaultLandSet(currentDeck));
         }
     }
 
