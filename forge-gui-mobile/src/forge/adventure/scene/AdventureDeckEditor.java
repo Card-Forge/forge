@@ -323,9 +323,17 @@ public class AdventureDeckEditor extends FDeckEditor {
 
             CollectionAutoSellPage autoSellPage = adventureEditor.getAutoSellPage();
             int amountInCollection = Current.player().getCards().count(card); //Number we have, including ones in auto-sell and ones used in decks
-            int safeToSellCount = amountInCollection - Current.player().getCopiesUsedInDecks(card); //Number we can sell without losing cards from a deck.
+            int copiesUsedInDecks = Current.player().getCopiesUsedInDecks(card); //Number currently in use by this or any other deck.
+            int safeToSellCount = amountInCollection - copiesUsedInDecks; //Number we can sell without losing cards from a deck.
             int autoSellCount = Current.player().autoSellCards.count(card); //Number currently in auto-sell.
             int canMoveToAutoSell = safeToSellCount - autoSellCount; //Number that can be moved to auto-sell from here.
+
+            if (copiesUsedInDecks > 0) {
+                String text = localizer.getMessage("lblCopiesInUse", copiesUsedInDecks);
+                FMenuItem usedHint = new FMenuItem(text, FSkinImage.HDLIBRARY, n -> {});
+                usedHint.setEnabled(false);
+                menu.addItem(usedHint);
+            }
 
             if (card.hasNoSellValue()) {
                 String prompt = String.format("%s - %s %s", card, localizer.getMessage("lblRemove"), lblHowMany);
