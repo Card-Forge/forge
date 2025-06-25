@@ -1,7 +1,6 @@
 Name:Exchange of Words
 ManaCost:1 U U
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBChooseExchange | TriggerDescription$ When this enchantment enters, choose two target creatures. For as long as this enchantment remains on the battlefield, exchange the text boxes of those creatures.
-SVar:DBChooseExchange:DB$ Effect | Defined$ You | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | SubAbility$ DBExchangeText | Duration$ AsLongAsInPlay
-SVar:DBExchangeText:DB$ ExchangeTextBox | Defined$ Targeted & ChosenCard | Duration$ AsLongAsInPlay
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBExchangeText | TriggerDescription$ When this enchantment enters, choose two target creatures. For as long as this enchantment remains on the battlefield, exchange the text boxes of those creatures.
+SVar:DBExchangeText:DB$ ExchangeTextBox | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | Defined$ You & Targeted | Duration$ AsLongAsInPlay
 Oracle:When this enchantment enters, choose two target creatures. For as long as this enchantment remains on the battlefield, exchange the text boxes of those creatures.
