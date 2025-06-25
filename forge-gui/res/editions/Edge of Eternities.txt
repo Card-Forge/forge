@@ -1,0 +1,28 @@
+[metadata]
+Code=EOE
+Date=2025-08-01
+Name=Edge of Eternities
+Type=Expansion
+ScryfallCode=EOE
+
+[cards]
+2 M Tezzeret, Cruel Captain @Chris Rahn
+35 R The Seriema @Sergey Glushakov
+115 M Sothera, the Supervoid @Dominik Mayer
+189 U Harmonious Grovestrider @Ron Spencer
+225 U Sami, Ship's Engineer @Zara Alfonso
+233 U Tannuk, Memorial Ensign @David Auden Nash
+251 R Breeding Pool @Constantin Marin
+254 R Godless Shrine @Rob Rey
+256 R Sacred Foundry @Titus Lunter
+258 R Stomping Ground @Bruce Brenneise
+261 R Watery Grave @Sergey Glushakov
+262 L Plains @Adam Paquette
+263 L Island @Adam Paquette
+264 L Swamp @Adam Paquette
+265 L Mountain @Adam Paquette
+266 L Forest @Adam Paquette
+287 M Tezzeret, Cruel Captain @Magali Villeneuve
+323 R The Seriema @Sergey Glushakov
+360 M Sothera, the Supervoid @Mateusz Urbanowicz
+382 M Sothera, the Supervoid @Micha Huigen

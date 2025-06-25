@@ -3,21 +3,16 @@ ManaCost:2 R
 Types:Sorcery
 # Target a creature for three damage
 A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose target creature for 3 damage | SubAbility$ RepeatFlip | StackDescription$ None | SpellDescription$ Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, CARDNAME has no effect. If you win one or more flips, CARDNAME deals 3 damage to target creature. If you win two or more flips, CARDNAME deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control.
-# Repeat flip
 SVar:RepeatFlip:DB$ Repeat | RepeatSubAbility$ FlipAgain | RepeatCheckSVar$ Loss | RepeatSVarCompare$ EQ0 | RepeatOptional$ True | SubAbility$ DamageCreature
 SVar:FlipAgain:DB$ FlipACoin | WinSubAbility$ IncrementWins | LoseSubAbility$ IncrementLoss
-SVar:IncrementWins:DB$ StoreSVar | SVar$ Wins | Type$ CountSVar | Expression$ Wins/Plus.1
+SVar:IncrementWins:DB$ StoreSVar | SVar$ Win | Type$ CountSVar | Expression$ Win/Plus.1
 SVar:IncrementLoss:DB$ StoreSVar | SVar$ Loss | Type$ CountSVar | Expression$ Loss/Plus.1 | SubAbility$ ResetWins
-SVar:ResetWins:DB$ StoreSVar | SVar$ Wins | Type$ Number | Expression$ 0
-# Damage target creature
-SVar:DamageCreature:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ Wins | ConditionSVarCompare$ GE1 | SubAbility$ DamageOpponents
-# Damage each opponent
-SVar:DamageOpponents:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 6 | ConditionCheckSVar$ Wins | ConditionSVarCompare$ GE2 | SubAbility$ DrawNine
-# Draw nine cards
-SVar:DrawNine:DB$ Draw | Defined$ You | NumCards$ 9 | ConditionCheckSVar$ Wins | ConditionSVarCompare$ GE3 | SubAbility$ UntapLands
-# Untap lands
-SVar:UntapLands:DB$ UntapAll | ValidCards$ Land.YouCtrl | ConditionCheckSVar$ Wins | ConditionSVarCompare$ GE3
-SVar:Wins:Number$0
+SVar:ResetWins:DB$ StoreSVar | SVar$ Win | Type$ Number | Expression$ 0
+SVar:DamageCreature:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ Win | ConditionSVarCompare$ GE1 | SubAbility$ DamageOpponents
+SVar:DamageOpponents:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 6 | ConditionCheckSVar$ Win | ConditionSVarCompare$ GE2 | SubAbility$ DrawNine
+SVar:DrawNine:DB$ Draw | Defined$ You | NumCards$ 9 | ConditionCheckSVar$ Win | ConditionSVarCompare$ GE3 | SubAbility$ UntapLands
+SVar:UntapLands:DB$ UntapAll | ValidCards$ Land.YouCtrl | ConditionCheckSVar$ Win | ConditionSVarCompare$ GE3
+SVar:Win:Number$0
 SVar:Loss:Number$0
 AI:RemoveDeck:All
 Oracle:Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, Fiery Gambit has no effect. If you win one or more flips, Fiery Gambit deals 3 damage to target creature. If you win two or more flips, Fiery Gambit deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control.

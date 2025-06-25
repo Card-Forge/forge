@@ -688,3 +688,18 @@ A193 R A-Nadu, Winged Wisdom @Daren Bader
 32 c_3_3_a_phyrexian_golem @Volkan Baǵa
 33 c_1_1_a_servo @Jung Park
 34 c_a_treasure_sac @Nino Vecia
+38 c_0_1_eldrazi_spawn_sac @Aleksi Briclot
+39 b_2_2_zombie @Anna Steinbauer
+40 r_1_1_gremlin @Tony Foti
+#41
+42 g_0_1_plant @Daren Bader
+43 g_1_1_insect @Madeline Bon
+45 c_a_treasure_sac @Nino Vecia
+
+[other]
+1 copy @David Palumbo
+15 eternalize_fanatic_of_rhonas @Bartek Fedyczak
+24 spellgorger_weird @Steve Ellis
+35 emblem_tamiyo_seasoned_scholar @Magali Villeneuve
+36 energy @Liz Leo
+37 copy @David Palumbo
