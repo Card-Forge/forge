@@ -2792,7 +2792,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final Cost blitzCost = new Cost(k[1], false);
 
-            final SpellAbility newSA = card.getFirstSpellAbility().copyWithManaCostReplaced(host.getController(), blitzCost);
+            final SpellAbility newSA = card.getFirstSpellAbilityWithFallback().copyWithManaCostReplaced(host.getController(), blitzCost);
 
             if (k.length > 2) {
                 newSA.getMapParams().put("ValidAfterStack", k[2]);
@@ -2905,7 +2905,7 @@ public class CardFactoryUtil {
             }
             desc += ")";
 
-            final SpellAbility sa = card.getFirstSpellAbility();
+            final SpellAbility sa = card.getFirstSpellAbilityWithFallback();
             final SpellAbility newSA = sa.copyWithDefinedCost(new Cost(costStr, false));
 
             newSA.getRestrictions().setIsPresent(validStr + ".YouCtrl+CanBeSacrificedBy");
