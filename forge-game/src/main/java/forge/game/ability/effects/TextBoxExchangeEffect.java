@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
 
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -52,14 +53,43 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         final long ts = game.getNextTimestamp();
 
-        swapTextBox(c1, data2, ts);
-        swapTextBox(c2, data1, ts);
+        swapTextBox(c1, data2, ts, sa.getId());
+        swapTextBox(c2, data1, ts, sa.getId());
+
+        if (sa.hasParam("Duration")) {
+            final GameCommand revertTextExchange = new GameCommand() {
+                private static final long serialVersionUID = 5331255714437747836L;
+
+                @Override
+                public void run() {
+                    // Check if the cards are still there and revert what it is
+                    Card card1 = game.getCardState(c1, null);
+                    Card card2 = game.getCardState(c2, null);
+
+                    if (card1 != null && c1.equalsWithGameTimestamp(card1)) {
+                        card1.removeChangedCardTraits(ts, sa.getId());
+                        card1.removeChangedCardKeywords(ts, sa.getId(), false);
+                        card1.updateChangedText();
+                        card1.updateStateForView();
+                    }
+
+                    if (card2 != null && c2.equalsWithGameTimestamp(card2)) {
+                        card2.removeChangedCardTraits(ts, sa.getId());
+                        card2.removeChangedCardKeywords(ts, sa.getId(), false);
+                        card2.updateChangedText();
+                        card2.updateStateForView();
+                    }
+                }
+            };
+
+            addUntilCommand(sa, revertTextExchange);
+        }
 
         game.fireEvent(new GameEventCardStatsChanged(c1));
         game.fireEvent(new GameEventCardStatsChanged(c2));
     }
 
-    private static void swapTextBox(final Card to, final TextBoxData from, final long ts) {
+    private static void swapTextBox(final Card to, final TextBoxData from, final long ts, int abilityId) {
         List<SpellAbility> spellabilities = Lists.newArrayList();
         for (SpellAbility sa : from.spellabilities) {
             SpellAbility copy = sa.copy(to, false, true);
@@ -85,13 +115,13 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
             copy.changeTextIntrinsic(copy.getChangedTextColors(), copy.getChangedTextTypes());
             statics.add(copy);
         }
-        to.addChangedCardTraitsByText(spellabilities, triggers, reps, statics, ts, 0);
+        to.addChangedCardTraitsByText(spellabilities, triggers, reps, statics, ts, abilityId);
 
         List<KeywordInterface> kws = Lists.newArrayList();
         for (KeywordInterface kw : from.keywords) {
             kws.add(kw.copy(to, false));
         }
-        to.addChangedCardKeywordsByText(kws, ts, 0, false);
+        to.addChangedCardKeywordsByText(kws, ts, abilityId, false);
 
         to.updateChangedText();
         to.updateStateForView();
