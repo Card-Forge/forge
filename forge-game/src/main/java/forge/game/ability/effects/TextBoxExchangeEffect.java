@@ -62,7 +62,7 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    // Check if the cards are still there and revert what it is
+                    // Check if the cards are still there
                     Card card1 = game.getCardState(c1, null);
                     Card card2 = game.getCardState(c2, null);
 
@@ -89,7 +89,7 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
         game.fireEvent(new GameEventCardStatsChanged(c2));
     }
 
-    private static void swapTextBox(final Card to, final TextBoxData from, final long ts, int abilityId) {
+    private static void swapTextBox(final Card to, final TextBoxData from, final long ts, final int abilityId) {
         List<SpellAbility> spellabilities = Lists.newArrayList();
         for (SpellAbility sa : from.spellabilities) {
             SpellAbility copy = sa.copy(to, false, true);
