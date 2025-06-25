@@ -1,0 +1,9 @@
+[metadata]
+Code=TLA
+Date=2025-11-21
+Name=Avatar: The Last Airbender
+Type=Expansion
+ScryfallCode=TLA
+
+[cards]
+363 M Avatar Aang  @Bryan Konietzko
