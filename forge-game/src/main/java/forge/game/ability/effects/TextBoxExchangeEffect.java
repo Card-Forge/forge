@@ -71,6 +71,7 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
                         card1.removeChangedCardKeywords(ts, sa.getId(), false);
                         card1.updateChangedText();
                         card1.updateStateForView();
+                        game.fireEvent(new GameEventCardStatsChanged(card1));
                     }
 
                     if (card2 != null && c2.equalsWithGameTimestamp(card2)) {
@@ -78,6 +79,7 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
                         card2.removeChangedCardKeywords(ts, sa.getId(), false);
                         card2.updateChangedText();
                         card2.updateStateForView();
+                        game.fireEvent(new GameEventCardStatsChanged(card2));
                     }
                 }
             };
