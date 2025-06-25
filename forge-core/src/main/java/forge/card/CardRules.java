@@ -285,7 +285,10 @@ public final class CardRules implements ICardCharacteristics {
             return true;
         }
         CardType type = mainPart.getType();
-        if (type.isLegendary() && canBeCreature()) {
+        if (!type.isLegendary()) {
+            return false;
+        }
+        if (canBeCreature() || type.isVehicle() || type.isSpacecraft()) {
             return true;
         }
         return false;
