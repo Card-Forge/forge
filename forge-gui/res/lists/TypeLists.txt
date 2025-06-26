@@ -362,6 +362,7 @@ Fortification
 Gold
 Incubator:Incubators
 Junk
+Lander:Landers
 Key:Keys
 Map
 Powerstone:Powerstones
