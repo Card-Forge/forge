@@ -42,32 +42,32 @@ public class GameCopier {
         ZoneType.Command,
     };
 
-    private Game origGame;
+    private IGame origGame;
     private BiMap<Player, Player> playerMap = HashBiMap.create();
     private BiMap<Card, Card> cardMap = HashBiMap.create();
     private CopiedGameObjectMap gameObjectMap;
     private GameSnapshot snapshot = null;
 
-    public GameCopier(Game origGame) {
+    public GameCopier(IGame origGame) {
         this.origGame = origGame;
-        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (origGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             this.snapshot = new GameSnapshot(origGame);
         }
     }
 
-    public Game getOriginalGame() {
+    public IGame getOriginalGame() {
         return origGame;
     }
 
-    public Game getCopiedGame() {
+    public IGame getCopiedGame() {
         return gameObjectMap.getGame();
     }
 
-    public Game makeCopy() {
+    public IGame makeCopy() {
         return makeCopy(null, null);
     }
-    public Game makeCopy(PhaseType advanceToPhase, Player aiPlayer) {
-        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+    public IGame makeCopy(PhaseType advanceToPhase, Player aiPlayer) {
+        if (origGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             // How do we advance to phase when using restores?
             return snapshot.makeCopy();
         }
@@ -80,7 +80,7 @@ public class GameCopier {
 
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
-        Game newGame = new Game(newPlayers, currentRules, newMatch);
+        IGame newGame = new Game(newPlayers, currentRules, newMatch);
         newGame.dangerouslySetTimestamp(origGame.getTimestamp());
 
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
@@ -181,7 +181,7 @@ public class GameCopier {
         return newGame;
     }
 
-    private static void copyStack(Game origGame, Game newGame, IEntityMap map) {
+    private static void copyStack(IGame origGame, IGame newGame, IEntityMap map) {
         for (SpellAbilityStackInstance origEntry : origGame.getStack()) {
             SpellAbility origSa = origEntry.getSpellAbility();
             Card origHostCard = origSa.getHostCard();
@@ -213,10 +213,8 @@ public class GameCopier {
         return clone;
     }
 
-    private void copyGameState(Game newGame, Player aiPlayer) {
-        newGame.EXPERIMENTAL_RESTORE_SNAPSHOT = origGame.EXPERIMENTAL_RESTORE_SNAPSHOT;
-        newGame.AI_TIMEOUT = origGame.AI_TIMEOUT;
-        newGame.AI_CAN_USE_TIMEOUT = origGame.AI_CAN_USE_TIMEOUT;
+    private void copyGameState(IGame newGame, Player aiPlayer) {
+        newGame.setConfiguration(origGame.configuration());
         newGame.setAge(origGame.getAge());
 
         // TODO countersAddedThisTurn
@@ -285,7 +283,7 @@ public class GameCopier {
     private static PaperCard hidden_info_card = new PaperCard(CardRules.fromScript(Lists.newArrayList("Name:hidden", "Types:Artifact", "Oracle:")), "", CardRarity.Common);
     private static final boolean PRUNE_HIDDEN_INFO = false;
     private static final boolean USE_FROM_PAPER_CARD = true;
-    private Card createCardCopy(Game newGame, Player newOwner, Card c, Player aiPlayer) {
+    private Card createCardCopy(IGame newGame, Player newOwner, Card c, Player aiPlayer) {
         if (c.isToken() && !c.isImmutable()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner);
             new CardCopyService(c).copyCopiableCharacteristics(result, null, null);
@@ -332,7 +330,7 @@ public class GameCopier {
         return newCard;
     }
 
-    private void addCard(Game newGame, ZoneType zone, Card c, Player aiPlayer) {
+    private void addCard(IGame newGame, ZoneType zone, Card c, Player aiPlayer) {
         final Player owner = playerMap.get(c.getOwner());
         final Card newCard = createCardCopy(newGame, owner, c, aiPlayer);
         cardMap.put(c, newCard);
@@ -457,14 +455,14 @@ public class GameCopier {
     }
 
     private class CopiedGameObjectMap implements IEntityMap {
-        private final Game copiedGame;
+        private final IGame copiedGame;
 
-        public CopiedGameObjectMap(Game copiedGame) {
+        public CopiedGameObjectMap(IGame copiedGame) {
             this.copiedGame = copiedGame;
         }
 
         @Override
-        public Game getGame() {
+        public IGame getGame() {
             return copiedGame;
         }
 
@@ -475,7 +473,7 @@ public class GameCopier {
     }
 
     public GameObject find(GameObject o) {
-        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (origGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             return snapshot.find(o);
         }
 
@@ -497,7 +495,7 @@ public class GameCopier {
         return result;
     }
     public GameObject reverseFind(GameObject o) {
-        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (origGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             return snapshot.reverseFind(o);
         }
 

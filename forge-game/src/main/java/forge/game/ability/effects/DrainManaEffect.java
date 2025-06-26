@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.mana.Mana;
@@ -30,7 +30,7 @@ public class DrainManaEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Game game = sa.getHostCard().getGame();
+        final IGame game = sa.getHostCard().getGame();
         final List<Mana> drained = new ArrayList<>();
         final Map<Player, Integer> lossMap = Maps.newHashMap();
 

@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Maps;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -29,7 +29,7 @@ public class UntapAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         Map<Player, CardCollection> untapMap = Maps.newHashMap();
 
         CardCollectionView list = !sa.usesTargeting() && !sa.hasParam("Defined") ?

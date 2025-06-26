@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.util.Lang;
 
@@ -19,10 +19,10 @@ public abstract class ProgressiveAchievement extends Achievement {
                 mythicDesc0, mythicThreshold0);
     }
 
-    protected abstract boolean eval(Player player, Game game);
+    protected abstract boolean eval(Player player, IGame game);
 
     @Override
-    protected final int evaluate(Player player, Game game) {
+    protected final int evaluate(Player player, IGame game) {
         if (eval(player, game)) {
             return getBest() + 1;
         }

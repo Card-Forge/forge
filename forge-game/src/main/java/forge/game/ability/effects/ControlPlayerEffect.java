@@ -3,7 +3,7 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
@@ -27,7 +27,7 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player controller = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Controller"), sa).get(0);
-        final Game game = controller.getGame();
+        final IGame game = controller.getGame();
 
         for (final Player pTarget: getTargetPlayers(sa)) {
             // before next untap gain control

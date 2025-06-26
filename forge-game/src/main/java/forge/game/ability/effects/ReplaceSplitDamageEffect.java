@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
@@ -20,7 +20,7 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
 
         // outside of Replacement Effect, unwanted result
         if (!sa.isReplacementAbility()) {

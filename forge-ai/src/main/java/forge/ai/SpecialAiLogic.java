@@ -4,7 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.ai.ability.TokenAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -33,7 +33,7 @@ public class SpecialAiLogic {
     // A logic for cards like Pongify, Crib Swap, Angelic Ascension
     public static boolean doPongifyLogic(final Player ai, final SpellAbility sa) {
         Card source = sa.getHostCard();
-        Game game = source.getGame();
+        IGame game = source.getGame();
         PhaseHandler ph = game.getPhaseHandler();
         boolean isDestroy = ApiType.Destroy.equals(sa.getApi());
         SpellAbility tokenSA = sa.findSubAbilityByType(ApiType.Token);
@@ -113,7 +113,7 @@ public class SpecialAiLogic {
 
     // A logic for cards that say "Sacrifice a creature: CARDNAME gets +X/+X until EOT"
     public static boolean doAristocratLogic(final Player ai, final SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Combat combat = game.getCombat();
         final Card source = sa.getHostCard();
         final int numOtherCreats = Math.max(0, ai.getCreaturesInPlay().size() - 1);
@@ -250,7 +250,7 @@ public class SpecialAiLogic {
             return false;
         }
 
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Combat combat = game.getCombat();
         final int selfEval = ComputerUtilCard.evaluateCreature(source);
 
@@ -371,7 +371,7 @@ public class SpecialAiLogic {
     public static boolean preferHasteForRiot(SpellAbility sa, Player player) {
         // returning true means preferring Haste, returning false means preferring a +1/+1 counter
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final Card copy = CardCopyService.getLKICopy(host);
         copy.setLastKnownZone(player.getZone(ZoneType.Battlefield));
 

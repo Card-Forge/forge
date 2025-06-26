@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -43,7 +43,7 @@ public class DiscoverEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final PlayerCollection players = getDefinedPlayersOrTargeted(sa);
 
         // Exile cards from the top of your library until you exile a nonland card with <N> mana value or less.
@@ -149,7 +149,7 @@ public class DiscoverEffect extends SpellAbilityEffect {
         }
     }
 
-    private void changeZone(CardCollection cards, ZoneType zone, Game game, SpellAbility sa) {
+    private void changeZone(CardCollection cards, ZoneType zone, IGame game, SpellAbility sa) {
         CardZoneTable table = new CardZoneTable();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());

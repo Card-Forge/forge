@@ -19,7 +19,7 @@ package forge.game.staticability;
 
 import java.util.List;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -36,7 +36,7 @@ public class StaticAbilityCantBeCast {
     public static boolean cantBeCastAbility(final SpellAbility spell, final Card card, final Player activator) {
         card.setCastSA(spell);
 
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         allp.add(card);
         for (final Card ca : allp) {
@@ -56,7 +56,7 @@ public class StaticAbilityCantBeCast {
         if (spell.isTrigger()) {
             return false;
         }
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantBeActivated)) {
@@ -71,7 +71,7 @@ public class StaticAbilityCantBeCast {
     }
 
     public static boolean cantPlayLandAbility(final SpellAbility spell, final Card card, final Player activator) {
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantPlayLand)) {

@@ -23,7 +23,7 @@ import java.util.Set;
 
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -40,7 +40,7 @@ public class StaticAbilityCantTarget {
     static String MODE = "CantTarget";
 
     public static boolean cantTarget(final Card card, final SpellAbility spellAbility)  {
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantTarget)) {
@@ -56,7 +56,7 @@ public class StaticAbilityCantTarget {
     }
 
     public static boolean cantTarget(final Player player, final SpellAbility spellAbility)  {
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantTarget)) {

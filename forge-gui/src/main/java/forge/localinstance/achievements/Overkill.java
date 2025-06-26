@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.util.Localizer;
 
@@ -16,7 +16,7 @@ public class Overkill extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game) {
+    protected int evaluate(Player player, IGame game) {
         if (player.getOutcome().hasWon()) {
             Player opponent = player.getSingleOpponent();
             if (opponent != null && opponent.getLife() < 0) {

@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
 
 import forge.GameCommand;
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -35,7 +35,7 @@ public class PumpEffect extends SpellAbilityEffect {
             final int a, final int d, final List<String> keywords,
             final long timestamp) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final String duration = sa.getParam("Duration");
         final boolean perpetual = ("Perpetual").equals(duration);
 
@@ -285,7 +285,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         final Card host = sa.getHostCard();
         final long timestamp = game.getNextTimestamp();
         List<Card> tgtCards = getCardsfromTargets(sa);

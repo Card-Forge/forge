@@ -15,7 +15,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -55,7 +55,7 @@ public class VoteEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         final List<Object> voteType = Lists.newArrayList();
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final Player activator = sa.getActivatingPlayer();
 
         final boolean secret = sa.hasParam("Secretly");

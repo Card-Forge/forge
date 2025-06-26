@@ -3,7 +3,7 @@ package forge.ai.ability;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -167,7 +167,7 @@ public class SacrificeAi extends SpellAbilityAi {
     }
 
     public static boolean doSacOneEachLogic(Player ai, SpellAbility sa) {
-        Game game = ai.getGame();
+        IGame game = ai.getGame();
 
         sa.resetTargets();
         for (Player p : game.getPlayers()) {

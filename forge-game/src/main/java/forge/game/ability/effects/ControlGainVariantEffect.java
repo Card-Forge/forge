@@ -6,7 +6,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 import forge.game.Direction;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -32,7 +32,7 @@ public class ControlGainVariantEffect extends SpellAbilityEffect {
         // Multiple players gain control of multiple permanents in an effect
         // GainControl embedded in RepeatEach effects don't work well with timestamps
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         long tStamp = game.getNextTimestamp();
         final String controller = sa.getParam("ChangeController");
         final Map<Player, CardCollection> gainControl = Maps.newHashMap(); // {newController, CardCollection}

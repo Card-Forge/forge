@@ -5,7 +5,7 @@ import java.util.HashMap;
 import com.google.common.collect.Lists;
 
 import forge.card.GamePieceType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -24,7 +24,7 @@ public class MutateEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player p = host.getOwner();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         // 111.11. A copy of a permanent spell becomes a token as it resolves.
         // The token has the characteristics of the spell that became that token.
         // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.

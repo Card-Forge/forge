@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
@@ -49,7 +49,7 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
         final TextBoxData data2 = captureTextBoxData(c2);
 
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final long ts = game.getNextTimestamp();
 
         swapTextBox(c1, data2, ts);

@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.*;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -17,7 +17,7 @@ public class ChooseColorAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final PhaseHandler ph = game.getPhaseHandler();
 

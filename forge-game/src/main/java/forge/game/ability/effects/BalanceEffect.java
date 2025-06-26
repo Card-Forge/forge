@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -32,7 +32,7 @@ public class BalanceEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
         Card source = sa.getHostCard();
-        Game game = activator.getGame();
+        IGame game = activator.getGame();
         String valid = sa.getParamOrDefault("Valid", "Card");
         ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
 

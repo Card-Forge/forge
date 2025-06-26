@@ -24,7 +24,7 @@ import java.util.function.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameType;
 import forge.game.card.*;
 import forge.game.event.EventValueChangeType;
@@ -47,7 +47,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     private final CardCollection cardList = new CardCollection();
     protected final ZoneType zoneType;
-    protected final Game game;
+    protected final IGame game;
 
     protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
     protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
@@ -62,7 +62,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         cardList.sort(COMPARATOR);
     }
 
-    public Zone(final ZoneType zone0, Game game0) {
+    public Zone(final ZoneType zone0, IGame game0) {
         zoneType = zone0;
         game = game0;
     }

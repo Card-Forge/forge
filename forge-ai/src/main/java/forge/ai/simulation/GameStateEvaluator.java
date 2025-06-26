@@ -3,7 +3,8 @@ package forge.ai.simulation;
 import forge.ai.AiDeckStatistics;
 import forge.ai.CreatureEvaluator;
 import forge.card.mana.ManaAtom;
-import forge.game.Game;
+import forge.game.IGame;
+import forge.game.GameOptions;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.CostSacrifice;
@@ -35,9 +36,9 @@ public class GameStateEvaluator {
 
     private static class CombatSimResult {
         public GameCopier copier;
-        public Game gameCopy;
+        public IGame gameCopy;
     }
-    private CombatSimResult simulateUpcomingCombatThisTurn(final Game evalGame, final Player aiPlayer) {
+    private CombatSimResult simulateUpcomingCombatThisTurn(final IGame evalGame, final Player aiPlayer) {
         PhaseType phase = evalGame.getPhaseHandler().getPhase();
         if (phase.isAfter(PhaseType.COMBAT_DAMAGE) || evalGame.isGameOver()) {
             return null;
@@ -50,10 +51,10 @@ public class GameStateEvaluator {
             return null;
         }
 
-        Game gameCopy;
+        IGame gameCopy;
         GameCopier copier = new GameCopier(evalGame);
 
-        if (evalGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (evalGame.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             gameCopy = copier.makeCopy();
         } else {
             gameCopy = copier.makeCopy(null, aiPlayer);
@@ -74,7 +75,7 @@ public class GameStateEvaluator {
         return str;
     }
 
-    private Score getScoreForGameOver(Game game, Player aiPlayer) {
+    private Score getScoreForGameOver(IGame game, Player aiPlayer) {
         if (game.getOutcome().getWinningTeam() == aiPlayer.getTeam() ||
                 game.getOutcome().isWinner(aiPlayer.getRegisteredPlayer())) {
             return new Score(Integer.MAX_VALUE);
@@ -83,7 +84,7 @@ public class GameStateEvaluator {
         return new Score(Integer.MIN_VALUE);
     }
 
-    public Score getScoreForGameState(Game game, Player aiPlayer) {
+    public Score getScoreForGameState(IGame game, Player aiPlayer) {
         if (game.isGameOver()) {
             return getScoreForGameOver(game, aiPlayer);
         }
@@ -99,7 +100,7 @@ public class GameStateEvaluator {
         return getScoreForGameStateImpl(game, aiPlayer);
     }
 
-    private Score getScoreForGameStateImpl(Game game, Player aiPlayer) {
+    private Score getScoreForGameStateImpl(IGame game, Player aiPlayer) {
         int score = 0;
         // TODO: more than 2 players
         // TODO: try and reuse evaluateBoardPosition
@@ -173,7 +174,7 @@ public class GameStateEvaluator {
         return new Score(score, summonSickScore);
     }
 
-    public int evalManaBase(Game game, Player player, AiDeckStatistics statistics) {
+    public int evalManaBase(IGame game, Player player, AiDeckStatistics statistics) {
         // TODO should these be fixed quantities or should they be linear out of like 1000/(desired - total)?
         int value = 0;
         // get the colors of mana we can produce and the maximum number of pips
@@ -215,7 +216,7 @@ public class GameStateEvaluator {
         return value;
     }
 
-    public int evalCard(Game game, Player aiPlayer, Card c) {
+    public int evalCard(IGame game, Player aiPlayer, Card c) {
         // TODO: These should be based on other considerations - e.g. in relation to opponents state.
         if (c.isCreature()) {
             return eval.evaluateCreature(c);

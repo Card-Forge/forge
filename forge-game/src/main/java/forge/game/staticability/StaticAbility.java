@@ -26,7 +26,7 @@ import java.util.Set;
 import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameStage;
 import forge.game.IIdentifiable;
@@ -359,7 +359,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      */
     public final boolean checkConditions() {
         final Player controller = getHostCard().getController();
-        final Game game = getHostCard().getGame();
+        final IGame game = getHostCard().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
         if (!zonesCheck()) {

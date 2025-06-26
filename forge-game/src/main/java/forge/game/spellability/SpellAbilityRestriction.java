@@ -23,7 +23,7 @@ import java.util.function.Predicate;
 
 import com.google.common.collect.Sets;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.GameType;
@@ -309,7 +309,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      */
     public final boolean checkTimingRestrictions(final Card c, final SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
 
         if (this.isPlayerTurn() && !game.getPhaseHandler().isPlayerTurn(activator)) {
             return false;
@@ -366,7 +366,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     }
 
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
 
         // 205.4e. Any instant or sorcery spell with the supertype "legendary" is subject to a casting restriction
         if ((c.isSorcery() || c.isInstant()) && c.getType().isLegendary() && CardLists.getValidCardCount(
@@ -546,7 +546,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         // Rule 605.3c about Mana Abilities
         if (sa.isManaAbility()) {
-            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+            for (IndividualCostPaymentInstance i : game.costPaymentStack()) {
                 if (i.getPayment().getAbility().equals(sa)) {
                     return false;
                 }
@@ -611,7 +611,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         // Special check for Lion's Eye Diamond
-        if (sa.isManaAbility() && c.getGame().costPaymentStack.peek() != null && isInstantSpeed()) {
+        if (sa.isManaAbility() && c.getGame().costPaymentStack().peek() != null && isInstantSpeed()) {
             return false;
         }
 

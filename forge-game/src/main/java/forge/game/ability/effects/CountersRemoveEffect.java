@@ -9,7 +9,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -67,7 +67,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
 
         PlayerController pc = activator.getController();
@@ -216,7 +216,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         int removed = 0;
 
         final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
         final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(entity.getCounters());

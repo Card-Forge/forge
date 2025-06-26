@@ -2,7 +2,7 @@ package forge.gamesimulationtests.util.playeractions.testactions;
 
 import org.testng.Assert;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.gamesimulationtests.util.IntegerConstraint;
 import forge.gamesimulationtests.util.card.CardSpecification;
@@ -21,7 +21,7 @@ public class CardAssertAction extends AssertAction {
 	}
 
 	@Override
-	public void performAssertion( final Game game ) {
+	public void performAssertion( final IGame game ) {
 		final Card card = CardSpecificationHandler.INSTANCE.find( game, cardRequirements, IntegerConstraint.ZERO_OR_ONE );
 		Assert.assertNotNull( card );
 	}

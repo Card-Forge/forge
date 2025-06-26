@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -27,7 +27,7 @@ public class TapAllAi extends SpellAbilityAi {
 
         final Card source = sa.getHostCard();
         final Player opp = ai.getStrongestOpponent();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
             return false;
@@ -79,7 +79,7 @@ public class TapAllAi extends SpellAbilityAi {
     }
 
     private CardCollectionView getTapAllTargets(final String valid, final Card source, SpellAbility sa) {
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         CardCollectionView tmpList = game.getCardsIn(ZoneType.Battlefield);
         tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source, sa);
         tmpList = CardLists.filter(tmpList, CardPredicates.UNTAPPED);

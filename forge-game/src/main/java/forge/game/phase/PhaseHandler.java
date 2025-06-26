@@ -90,9 +90,9 @@ public class PhaseHandler implements java.io.Serializable {
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
 
-    private final transient Game game;
+    private final transient IGame game;
 
-    public PhaseHandler(final Game game0) {
+    public PhaseHandler(final IGame game0) {
         game = game0;
     }
 
@@ -1070,7 +1070,7 @@ public class PhaseHandler implements java.io.Serializable {
                             // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
                             // that player receives priority afterward.
                             pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
-                        } else if (game.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+                        } else if (game.configuration().get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
                             rollback = true;
                         }
 

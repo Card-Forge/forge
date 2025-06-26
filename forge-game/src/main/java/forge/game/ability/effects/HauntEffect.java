@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -18,7 +18,7 @@ public class HauntEffect extends SpellAbilityEffect {
             // get new version instead of battlefield lki
             host = (Card) sa.getTriggeringObject(AbilityKey.NewCard);
         }
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         Card card = game.getCardState(host, null);
         if (card == null) {
             return;

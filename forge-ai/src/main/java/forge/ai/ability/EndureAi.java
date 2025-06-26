@@ -5,7 +5,7 @@ import com.google.common.collect.Sets;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
@@ -40,7 +40,7 @@ public class EndureAi extends SpellAbilityAi {
     public static boolean shouldPutCounters(Player ai, SpellAbility sa) {
         // TODO: adapted from Fabricate AI in TokenAi, maybe can be refactored to a single method
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final String num = sa.getParamOrDefault("Num", "1");
         final int amount = AbilityUtils.calculateAmount(source, num, sa);
 

@@ -1,7 +1,7 @@
 package forge.gamemodes.match.input;
 
 import com.google.common.collect.Lists;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -17,7 +17,7 @@ public class InputChooseStartingHand extends InputSyncronizedBase {
     // When you like one, click OK and the rest will be cleared
     private final Deque<PlayerZone> hands;
     PlayerZone primaryHand = null;
-    Game game;
+    IGame game;
 
 
     public InputChooseStartingHand(final PlayerControllerHuman controller, final Player humanPlayer) {

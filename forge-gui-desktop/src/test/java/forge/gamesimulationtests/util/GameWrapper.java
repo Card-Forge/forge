@@ -32,7 +32,7 @@ public class GameWrapper {
 	private final GameStateSpecification initialGameStateSpecification;
 	private final PlayerActions playerActions;
 	private final GameLog gameLog;
-	private Game game;
+	private IGame game;
 
 	public GameWrapper(GameStateSpecification initialGameStateSpecification, PlayerActions playerActions) {
 		this(initialGameStateSpecification, playerActions,
@@ -159,7 +159,7 @@ public class GameWrapper {
 		return playerActions;
 	}
 
-	public Game getGame() {
+	public IGame getGame() {
 		return game;
 	}
 

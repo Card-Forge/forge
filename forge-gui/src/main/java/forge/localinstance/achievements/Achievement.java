@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
@@ -122,7 +122,7 @@ public abstract class Achievement {
         return null;
     }
 
-    protected abstract int evaluate(Player player, Game game);
+    protected abstract int evaluate(Player player, IGame game);
 
     public boolean isActive() {
         return earnedSpecial() || earnedMythic() || earnedRare() || earnedUncommon() || earnedCommon();

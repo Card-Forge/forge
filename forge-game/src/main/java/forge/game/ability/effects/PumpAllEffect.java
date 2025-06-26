@@ -9,7 +9,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -25,7 +25,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
     private static void applyPumpAll(final SpellAbility sa,
             final Iterable<Card> list, final int a, final int d,
             final List<String> keywords, final List<ZoneType> affectedZones) {
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
         final List<String> kws = Lists.newArrayList();
         final List<String> hiddenkws = Lists.newArrayList();
@@ -126,7 +126,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         final List<ZoneType> affectedZones = Lists.newArrayList();
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
 
         if (!checkValidDuration(sa.getParam("Duration"), sa)) {
             return;

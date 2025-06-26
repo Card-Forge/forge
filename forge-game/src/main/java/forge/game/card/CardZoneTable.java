@@ -8,7 +8,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Table;
 import forge.game.CardTraitBase;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameAction;
 import forge.game.ability.AbilityKey;
 import forge.game.player.PlayerCollection;
@@ -97,7 +97,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         return dataMap;
     }
 
-    public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
+    public void triggerChangesZoneAll(final IGame game, final SpellAbility cause) {
         triggerTokenCreatedOnce(game);
         if (cause != null && cause.getReplacingObject(AbilityKey.InternalTriggerTable) == this) {
             // will be handled by original "cause" instead
@@ -131,7 +131,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         }
     }
 
-    private void triggerTokenCreatedOnce(Game game) {
+    private void triggerTokenCreatedOnce(IGame game) {
         if (!createdTokens.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, createdTokens);

@@ -19,7 +19,7 @@ package forge.game.replacement;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -49,7 +49,7 @@ public class ReplaceDamage extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        final Game game = getHostCard().getGame();
+        final IGame game = getHostCard().getGame();
 
         if (((Integer) runParams.get(AbilityKey.DamageAmount)) == 0) {
             // If no actual damage is dealt, there is nothing to replace

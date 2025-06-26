@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import org.apache.commons.lang3.ObjectUtils;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
@@ -23,7 +23,7 @@ public class DayTimeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card host = sa.getHostCard();
-        Game game = host.getGame();
+        IGame game = host.getGame();
         String newValue = sa.getParam("Value");
         if (newValue.equals("Day")) {
             game.setDayTime(false);

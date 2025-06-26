@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -55,7 +55,7 @@ public class FightEffect extends DamageBaseEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         List<Card> fighters = getFighters(sa);
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         // check is done in getFighters
         if (fighters.size() < 2) {
@@ -88,7 +88,7 @@ public class FightEffect extends DamageBaseEffect {
         Card fighter1 = null;
         Card fighter2 = null;
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         CardCollectionView tgts = null;
         if (sa.usesTargeting()) {

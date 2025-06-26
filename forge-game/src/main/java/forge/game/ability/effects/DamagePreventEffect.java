@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -121,7 +121,7 @@ public class DamagePreventEffect extends SpellAbilityEffect {
 
     private static void addPreventNextDamage(SpellAbility sa, GameEntity o, int numDam) {
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
         final Player player = hostCard.getController();
         final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();

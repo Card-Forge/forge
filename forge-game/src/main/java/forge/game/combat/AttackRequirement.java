@@ -9,7 +9,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -29,7 +29,7 @@ public class AttackRequirement {
         this.attacker = attacker;
         this.causesToAttack = causesToAttack;
 
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
         int nAttackAnything = 0;
 
         if (attacker.isGoaded()) {

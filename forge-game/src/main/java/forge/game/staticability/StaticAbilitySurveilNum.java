@@ -1,6 +1,6 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -8,7 +8,7 @@ import forge.game.zone.ZoneType;
 public class StaticAbilitySurveilNum {
 
     public static int surveilNumMod(Player p) {
-        final Game game = p.getGame();
+        final IGame game = p.getGame();
         int mod = 0;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {

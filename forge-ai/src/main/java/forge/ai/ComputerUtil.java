@@ -74,10 +74,10 @@ import java.util.function.Predicate;
  * @version $Id$
  */
 public class ComputerUtil {
-    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game) {
+    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final IGame game) {
         return handlePlayingSpellAbility(ai, sa, game, null);
     }
-    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
+    public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final IGame game, Runnable chooseTargets) {
         final Card source = sa.getHostCard();
         final Card host = sa.getHostCard();
         final Zone hz = host.isCopiedSpell() ? null : host.getZone();
@@ -214,7 +214,7 @@ public class ComputerUtil {
         return restrict;
     }
 
-    public static final boolean playStack(SpellAbility sa, final Player ai, final Game game) {
+    public static final boolean playStack(SpellAbility sa, final Player ai, final IGame game) {
         sa.setActivatingPlayer(ai);
         if (!ComputerUtilCost.canPayCost(sa, ai, false))
             return false;
@@ -248,7 +248,7 @@ public class ComputerUtil {
         return false;
     }
 
-    public static final boolean playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
+    public static final boolean playNoStack(final Player ai, SpellAbility sa, final IGame game, final boolean effect) {
         sa.setActivatingPlayer(ai);
         // TODO: We should really restrict what doesn't use the Stack
         if (!ComputerUtilCost.canPayCost(sa, ai, effect)) {
@@ -275,7 +275,7 @@ public class ComputerUtil {
         return getCardPreference(ai, activate, pref, typeList, null);
     }
     public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList, SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         String prefDef = "";
         if (activate != null) {
             prefDef = activate.getSVar("AIPreference");
@@ -986,7 +986,7 @@ public class ComputerUtil {
         ComputerUtilCombat.setCombatRegenTestSuppression(true); // do not check canRegenerate recursively from combat code
 
         final Player controller = card.getController();
-        final Game game = controller.getGame();
+        final IGame game = controller.getGame();
         final CardCollectionView l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
             for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -1041,7 +1041,7 @@ public class ComputerUtil {
         int prevented = 0;
 
         final Player controller = card.getController();
-        final Game game = controller.getGame();
+        final IGame game = controller.getGame();
 
         final CardCollectionView l = controller.getCardsIn(ZoneType.Battlefield);
         for (final Card c : l) {
@@ -1273,7 +1273,7 @@ public class ComputerUtil {
             return true;
         }
 
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
         final CardCollection landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS);
         final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
@@ -1308,7 +1308,7 @@ public class ComputerUtil {
 
     // returns true if it's better to wait until blockers are declared
     public static boolean waitForBlocking(final SpellAbility sa) {
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
         return sa.getHostCard().isCreature()
@@ -1659,7 +1659,7 @@ public class ComputerUtil {
      * @return list of threatened objects
      */
     public static List<GameObject> predictThreatenedObjects(final Player ai, final SpellAbility sa, boolean top) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final List<GameObject> objects = new ArrayList<>();
         if (game.getStack().isEmpty()) {
             return objects;
@@ -2037,7 +2037,7 @@ public class ComputerUtil {
         return predictCreatureWillDieThisTurn(ai, creature, excludeSa, false);
     }
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa, final boolean nonCombatOnly) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         // a creature will [hopefully] die from a spell on stack
         boolean willDieFromSpell = false;
@@ -2093,7 +2093,7 @@ public class ComputerUtil {
     public static boolean playImmediately(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Zone zone = source.getZone();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
 
         if (sa.isTrigger() || zone == null || sa.isCopied()) {
             return true;
@@ -2396,7 +2396,7 @@ public class ComputerUtil {
             validTypes = ImmutableList.of();
         }
 
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         String chosen = "";
         if (kindOfType.equals("Card")) {
             // TODO
@@ -2539,7 +2539,7 @@ public class ComputerUtil {
     public static Object vote(Player ai, List<Object> options, SpellAbility sa, Multimap<Object, Player> votes, Player forPlayer) {
         final Card source = sa.getHostCard();
         final Player controller = source.getController();
-        final Game game = controller.getGame();
+        final IGame game = controller.getGame();
 
         boolean opponent = controller.isOpponentOf(ai);
 
@@ -2769,7 +2769,7 @@ public class ComputerUtil {
     public static int getDamageForPlaying(final Player player, final SpellAbility sa) {
         // check for bad spell cast triggers
         int damage = 0;
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         final Card card = sa.getHostCard();
         final FCollection<Trigger> theTriggers = new FCollection<>();
 
@@ -2826,7 +2826,7 @@ public class ComputerUtil {
 
     public static int getDamageFromETB(final Player player, final Card permanent) {
         int damage = 0;
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         final FCollection<Trigger> theTriggers = new FCollection<>();
 
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
@@ -3217,7 +3217,7 @@ public class ComputerUtil {
             return false; // no use in sacrificing a card in an attempt to regenerate it
         }
         ComputerUtilCost.setSuppressRecursiveSacCostCheck(true);
-        Game game = ai.getGame();
+        IGame game = ai.getGame();
         Combat combat = game.getCombat();
         boolean isThreatened = (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false)
                 && (!ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, combat) && !ComputerUtilCombat.isDangerousToSacInCombat(ai, c, combat)))

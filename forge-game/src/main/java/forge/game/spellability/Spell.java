@@ -23,7 +23,7 @@ import forge.game.card.CardCopyService;
 import org.apache.commons.lang3.ObjectUtils;
 
 import forge.card.CardStateName;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
@@ -84,7 +84,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             }
         }
 
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         if (game.getStack().isSplitSecondOnStack()) {
             return false;
         }

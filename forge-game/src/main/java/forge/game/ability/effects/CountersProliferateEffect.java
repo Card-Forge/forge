@@ -3,7 +3,7 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
@@ -35,7 +35,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Player p = sa.getActivatingPlayer();
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         int num = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);

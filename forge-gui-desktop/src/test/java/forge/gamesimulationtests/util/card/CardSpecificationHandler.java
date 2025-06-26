@@ -1,6 +1,6 @@
 package forge.gamesimulationtests.util.card;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.gamesimulationtests.util.IntegerConstraint;
@@ -11,11 +11,11 @@ import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 public class CardSpecificationHandler extends SpecificationHandler<Card, CardSpecification> {
     public static final CardSpecificationHandler INSTANCE = new CardSpecificationHandler();
 
-    public Card find(Game game, final CardSpecification cardSpecification) {
+    public Card find(IGame game, final CardSpecification cardSpecification) {
         return find(getCardsToSearch(game, cardSpecification), cardSpecification);
     }
 
-    public Card find(Game game, final CardSpecification cardSpecification, final IntegerConstraint expectedNumberOfResults) {
+    public Card find(IGame game, final CardSpecification cardSpecification, final IntegerConstraint expectedNumberOfResults) {
         return find(getCardsToSearch(game, cardSpecification), cardSpecification, expectedNumberOfResults);
     }
 
@@ -26,7 +26,7 @@ public class CardSpecificationHandler extends SpecificationHandler<Card, CardSpe
                 && (cardSpecification.getOwner() == null || PlayerSpecificationHandler.INSTANCE.matches(card.getOwner(), cardSpecification.getOwner()));
     }
 
-    private CardCollectionView getCardsToSearch(Game game, final CardSpecification cardSpecification) {
+    private CardCollectionView getCardsToSearch(IGame game, final CardSpecification cardSpecification) {
         if ((cardSpecification.getController() == null && cardSpecification.getOwner() == null) || game.getPlayers().size() == game.getRegisteredPlayers().size()) {
             return game.getCardsInGame();
         }
@@ -40,7 +40,7 @@ public class CardSpecificationHandler extends SpecificationHandler<Card, CardSpe
         throw new IllegalStateException("Can't handle this case");
     }
 
-    private CardCollectionView getCardsToSearch(Game game, final PlayerSpecification relevantPlayer) {
+    private CardCollectionView getCardsToSearch(IGame game, final PlayerSpecification relevantPlayer) {
         return PlayerSpecificationHandler.INSTANCE.find(game, relevantPlayer).getAllCards();
     }
 }

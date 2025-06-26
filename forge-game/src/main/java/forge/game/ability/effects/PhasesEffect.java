@@ -8,7 +8,7 @@ import forge.game.card.CardCollection;
 import forge.game.trigger.TriggerType;
 import forge.util.Lang;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -38,7 +38,7 @@ public class PhasesEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         CardCollectionView tgtCards;
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         final Card source = sa.getHostCard();
         final boolean phaseInOrOut = sa.hasParam("PhaseInOrOut");
         final boolean wontPhaseInNormal = sa.hasParam("WontPhaseInNormal");

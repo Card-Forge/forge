@@ -1,6 +1,6 @@
 package forge.gamesimulationtests.util.playeractions;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
@@ -19,7 +19,7 @@ public class CastSpellFromHandAction extends BasePlayerAction {
 		spellName = spellName0;
 	}
 
-	public void castSpellFromHand(Player player, Game game) {
+	public void castSpellFromHand(Player player, IGame game) {
 		CardCollectionView cardsInHand = player.getCardsIn(ZoneType.Hand);
 		Card cardToPlay = null;
 		for (Card card : cardsInHand) {

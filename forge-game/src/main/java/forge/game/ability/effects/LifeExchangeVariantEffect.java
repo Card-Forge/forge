@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Maps;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -50,7 +50,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
         Integer power = null;
         Integer toughness = null;
 
-        final Game game = p.getGame();
+        final IGame game = p.getGame();
         final long timestamp = game.getNextTimestamp();
 
         final int pLife = p.getLife();

@@ -15,7 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.primitives.Ints;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -42,7 +42,7 @@ public class AttackConstraints {
     private final List<Set<GameEntity>> playerRequirements;
 
     public AttackConstraints(final Combat combat) {
-        final Game game = combat.getAttackingPlayer().getGame();
+        final IGame game = combat.getAttackingPlayer().getGame();
         possibleAttackers = combat.getAttackingPlayer().getCreaturesInPlay();
         possibleDefenders = combat.getDefenders();
         globalRestrictions = GlobalAttackRestrictions.getGlobalRestrictions(combat.getAttackingPlayer(), possibleDefenders);

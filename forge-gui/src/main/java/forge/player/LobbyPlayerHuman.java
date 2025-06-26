@@ -1,7 +1,7 @@
 package forge.player;
 
 import forge.LobbyPlayer;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -23,7 +23,7 @@ public class LobbyPlayerHuman extends LobbyPlayer implements IGameEntitiesFactor
     }
 
     @Override
-    public Player createIngamePlayer(final Game game, final int id) {
+    public Player createIngamePlayer(final IGame game, final int id) {
         final Player player = new Player(GuiDisplayUtil.personalizeHuman(getName()), game, id);
         final PlayerControllerHuman controller = new PlayerControllerHuman(game, player, this);
         player.setFirstController(controller);

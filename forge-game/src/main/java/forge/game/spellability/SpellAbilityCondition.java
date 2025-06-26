@@ -19,7 +19,7 @@ package forge.game.spellability;
 
 import com.google.common.collect.Iterables;
 import forge.card.ColorSet;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.GameType;
@@ -260,7 +260,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             System.out.println(sa.getHostCard().getName()
                     + " Did not have activator set in SpellAbility_Condition.checkConditions()");
         }
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final Card host = sa.getHostCard();
 

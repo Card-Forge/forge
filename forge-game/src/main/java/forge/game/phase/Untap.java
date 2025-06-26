@@ -24,7 +24,7 @@ import java.util.Map.Entry;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -53,9 +53,9 @@ import forge.game.zone.ZoneType;
  */
 public class Untap extends Phase {
     private static final long serialVersionUID = 4515266331266259123L;
-    protected final Game game;
+    protected final IGame game;
 
-    public Untap(final Game game0) {
+    public Untap(final IGame game0) {
         super(PhaseType.UNTAP);
         game = game0;
     }
@@ -201,7 +201,7 @@ public class Untap extends Phase {
     }
 
     public static void doPhasing(final Player turn) {
-        Game game = turn.getGame();
+        IGame game = turn.getGame();
 
         // Needs to include phased out cards
         final List<Card> list = CardLists.filter(game.getCardsIncludePhasingIn(ZoneType.Battlefield),
@@ -257,7 +257,7 @@ public class Untap extends Phase {
         if (previous == null) {
             return;
         }
-        final Game game = previous.getGame();
+        final IGame game = previous.getGame();
         List<Card> casted = game.getStack().getSpellsCastLastTurn();
 
         if (game.isDay() && casted.stream().noneMatch(CardPredicates.isController(previous))) {

@@ -19,7 +19,7 @@ package forge.game.cost;
 
 import com.google.common.collect.Sets;
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -166,7 +166,7 @@ public class CostSacrifice extends CostPartWithList {
     protected boolean canPayListAtOnce() { return true; }
     @Override
     protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
-        final Game game = ability.getHostCard().getGame();
+        final IGame game = ability.getHostCard().getGame();
         // no table there, it is already handled by CostPartWithList
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         AbilityKey.addCardZoneTableParams(moveParams, table);

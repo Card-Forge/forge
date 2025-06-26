@@ -1,6 +1,6 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.zone.ZoneType;
 
@@ -14,7 +14,7 @@ public class StaticAbilityCantPhase {
     }
 
     static private boolean cantPhase(Card card, StaticAbilityMode mode) {
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(mode)) {

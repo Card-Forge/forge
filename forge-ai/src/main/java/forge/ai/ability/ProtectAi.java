@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.*;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -94,7 +94,7 @@ public class ProtectAi extends SpellAbilityAi {
      */
     public static CardCollection getProtectCreatures(final Player ai, final SpellAbility sa) {
         final List<String> gains = ProtectEffect.getProtectionList(sa);
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Combat combat = game.getCombat();
         final PhaseHandler ph = game.getPhaseHandler();
         
@@ -179,7 +179,7 @@ public class ProtectAi extends SpellAbilityAi {
     }
 
     private boolean protectTgtAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         if (!mandatory && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS) 
         		&& game.getStack().isEmpty()) {
             return false;

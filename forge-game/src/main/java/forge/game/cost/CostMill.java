@@ -17,7 +17,7 @@
  */
 package forge.game.cost;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
@@ -94,7 +94,7 @@ public class CostMill extends CostPart {
 
     @Override
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        Game game = ai.getGame();
+        IGame game = ai.getGame();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, ability);
         ability.getPaidHash().put("Milled", true, game.getAction().mill(new PlayerCollection(ai), decision.c, ZoneType.Graveyard, ability, moveParams));

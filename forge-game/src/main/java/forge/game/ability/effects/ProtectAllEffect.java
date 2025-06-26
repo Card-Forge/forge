@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -45,7 +45,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");

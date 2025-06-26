@@ -2,7 +2,7 @@ package forge.game.staticability;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -24,7 +24,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 public class StaticAbilityPanharmonicon {
 
-    public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
+    public static int handlePanharmonicon(final IGame game, final Trigger t, final Map<AbilityKey, Object> runParams) {
         int n = 0;
 
         if (t.isStatic() && t.getMode() != TriggerType.TapsForMana && t.getMode() != TriggerType.ManaAdded) {

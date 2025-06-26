@@ -5,7 +5,7 @@ import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -324,7 +324,7 @@ public class DamageDealAi extends DamageAiBase {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
 
         // Filter MustTarget requirements
@@ -401,7 +401,7 @@ public class DamageDealAi extends DamageAiBase {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.PLANESWALKERS);
 
         CardCollection killables = CardLists.filter(hPlay, c -> c.getSVar("Targeting").equals("Dies")
@@ -426,7 +426,7 @@ public class DamageDealAi extends DamageAiBase {
         return null;
     }
 
-    private List<Card> getTargetableCards(Player ai, SpellAbility sa, Player pl, TargetRestrictions tgt, Player activator, Card source, Game game) {
+    private List<Card> getTargetableCards(Player ai, SpellAbility sa, Player pl, TargetRestrictions tgt, Player activator, Card source, IGame game) {
         List<Card> hPlay = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), activator, source, sa);
 
         if (activator.equals(ai)) {
@@ -490,7 +490,7 @@ public class DamageDealAi extends DamageAiBase {
             final boolean mandatory, boolean immediately) {
         final Card source = sa.getHostCard();
         final boolean noPrevention = sa.hasParam("NoPrevention");
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final boolean divided = sa.isDividedAsYouChoose();
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
@@ -1055,7 +1055,7 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
 
-        Game game = ai.getGame();
+        IGame game = ai.getGame();
         int chance = ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
 
         if (chance > 0 && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || ComputerUtil.aiLifeInDanger(ai, true, 0))) {

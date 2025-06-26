@@ -5,7 +5,7 @@ import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -22,7 +22,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
-        final Game game = sa.getHostCard().getGame();
+        final IGame game = sa.getHostCard().getGame();
         final SpellAbility topSa = game.getStack().isEmpty() ? null
                 : ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
 

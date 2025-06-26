@@ -20,7 +20,7 @@ package forge.ai.ability;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -73,7 +73,7 @@ public class ControlGainAi extends SpellAbilityAi {
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final PlayerCollection opponents = ai.getOpponents();
 
         // if Defined, then don't worry about targeting
@@ -290,7 +290,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         // Special card logic that is processed elsewhere
         if (sa.hasParam("AILogic")) {

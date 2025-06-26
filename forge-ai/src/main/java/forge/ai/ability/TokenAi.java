@@ -7,7 +7,7 @@ import java.util.Map;
 import com.google.common.collect.Iterables;
 
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -138,7 +138,7 @@ public class TokenAi extends SpellAbilityAi {
         /*
          * readParameters() is called in checkPhaseRestrictions
          */
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Player opp = ai.getWeakestOpponent();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
@@ -224,7 +224,7 @@ public class TokenAi extends SpellAbilityAi {
      * Checks if the token(s) can save a creature from a sacrifice effect
      */
     private boolean canInterruptSacrifice(final Player ai, final SpellAbility sa, final Card token, final String tokenAmount) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         if (game.getStack().isEmpty()) {
             return false; // nothing to interrupt
         }
@@ -361,7 +361,7 @@ public class TokenAi extends SpellAbilityAi {
         result.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
         // Apply static abilities
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         ComputerUtilCard.applyStaticContPT(game, result, null);
         return result;
     }

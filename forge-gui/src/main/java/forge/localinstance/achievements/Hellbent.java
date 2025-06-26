@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
@@ -17,7 +17,7 @@ public class Hellbent extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game) {
+    protected int evaluate(Player player, IGame game) {
         if (player.getOutcome().hasWon()) {
             if (player.getZone(ZoneType.Hand).size() == 0) {
                 if (player.getZone(ZoneType.Library).size() == 0) {

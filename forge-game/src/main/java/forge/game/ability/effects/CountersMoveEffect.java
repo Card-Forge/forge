@@ -6,7 +6,7 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -84,7 +84,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         final String counterNum = sa.getParamOrDefault("CounterNum", "1");
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         CounterType cType = null;
         if (!counterName.matches("Any") && !counterName.matches("All")) {
@@ -323,7 +323,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final PlayerController pc = activator.getController();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         // rule 121.5: If the first and second objects are the same object, nothing happens
         if (src.equals(dest)) {

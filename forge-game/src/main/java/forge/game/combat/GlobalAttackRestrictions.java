@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import com.google.common.primitives.Ints;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -107,7 +107,7 @@ public class GlobalAttackRestrictions {
      */
     public static GlobalAttackRestrictions getGlobalRestrictions(final Player attackingPlayer, final FCollectionView<GameEntity> possibleDefenders) {
         final MapToAmount<GameEntity> defenderMax = new LinkedHashMapToAmount<>(possibleDefenders.size());
-        final Game game = attackingPlayer.getGame();
+        final IGame game = attackingPlayer.getGame();
 
         int max = StaticAbilityAttackRestrict.globalAttackRestrict(game);
 

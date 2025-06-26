@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
@@ -51,7 +51,7 @@ public class CounterEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         final CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
@@ -131,7 +131,7 @@ public class CounterEffect extends SpellAbilityEffect {
     }
 
     private static boolean checkSingleSAForConditionWouldDestroy(SpellAbility sa, SpellAbility tgtSA) {
-        Game game = sa.getHostCard().getGame();
+        IGame game = sa.getHostCard().getGame();
 
         if (tgtSA.getApi() != ApiType.Destroy && tgtSA.getApi() != ApiType.DestroyAll) {
             return false;
@@ -240,7 +240,7 @@ public class CounterEffect extends SpellAbilityEffect {
      *            object.
      */
     private static boolean removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, Map<AbilityKey, Object> params) {
-        final Game game = tgtSA.getActivatingPlayer().getGame();
+        final IGame game = tgtSA.getActivatingPlayer().getGame();
         Card movedCard = null;
         final Card c = tgtSA.getHostCard();
 

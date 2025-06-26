@@ -20,7 +20,7 @@ package forge.ai;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -747,7 +747,7 @@ public class ComputerUtilCombat {
     }
     public static boolean combatTriggerWillTrigger(final Card attacker, final Card defender, final Trigger trigger,
             Combat combat, final List<Card> plannedAttackers) {
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
         boolean willTrigger = false;
         final Card source = trigger.getHostCard();
         if (combat == null) {
@@ -896,7 +896,7 @@ public class ComputerUtilCombat {
             power -= attacker.getNetCombatDamage();
         }
 
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
         // look out for continuous static abilities that only care for blocking creatures
         final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
@@ -1030,7 +1030,7 @@ public class ComputerUtilCombat {
             toughness += attacker.getNetToughness() - blocker.getNetToughness();
         }
 
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
         final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
@@ -1170,7 +1170,7 @@ public class ComputerUtilCombat {
             power += blocker.getNetPower() - attacker.getNetPower();
         }
 
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
         final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
@@ -1371,7 +1371,7 @@ public class ComputerUtilCombat {
             toughness += blocker.getNetToughness() - attacker.getNetToughness();
         }
 
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
         final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
@@ -1836,7 +1836,7 @@ public class ComputerUtilCombat {
         	return true;
         }
 
-        final Game game = blocker.getGame();
+        final IGame game = blocker.getGame();
         final FCollection<Trigger> theTriggers = new FCollection<>();
         for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
@@ -2340,7 +2340,7 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        final Game game = attacker.getGame();
+        final IGame game = attacker.getGame();
 
         // first try to replace the damage
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(target);

@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.util.Localizer;
@@ -18,7 +18,7 @@ public class VariantWins extends ProgressiveAchievement {
     }
 
     @Override
-    protected boolean eval(Player player, Game game) {
+    protected boolean eval(Player player, IGame game) {
         if (player.getOutcome().hasWon()) {
             if (game.getRules().hasAppliedVariant(variant)) {
                 return true;

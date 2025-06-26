@@ -7,7 +7,7 @@ import forge.ai.*;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.game.CardTraitPredicates;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AnimateEffectBase;
@@ -45,7 +45,7 @@ import java.util.Map;
 public class AnimateAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         if ("Attacking".equals(aiLogic)) { // Launch the Fleet
             if (ph.getPlayerTurn().isOpponentOf(ai) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -85,7 +85,7 @@ public class AnimateAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Card source = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         // Interrupt sacrifice effect
         if (!game.getStack().isEmpty()) {
             SpellAbility topStack = game.getStack().peekAbility();
@@ -144,7 +144,7 @@ public class AnimateAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = aiPlayer.getGame();
+        final IGame game = aiPlayer.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         if (!sa.metConditions() && sa.getSubAbility() == null) {
             return false; // what is this for?
@@ -287,7 +287,7 @@ public class AnimateAi extends SpellAbilityAi {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
 
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
         // Filter AI-specific targets if provided
@@ -454,7 +454,7 @@ public class AnimateAi extends SpellAbilityAi {
     private static void becomeAnimated(final Card card, final boolean hasOriginalCardSickness, final SpellAbility sa) {
         // duplicating AnimateEffect.resolve
         final Card source = sa.getHostCard();
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
         card.setSickness(hasOriginalCardSickness);
 

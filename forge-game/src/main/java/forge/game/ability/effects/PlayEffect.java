@@ -15,7 +15,7 @@ import com.google.common.collect.ImmutableList;
 
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -77,7 +77,7 @@ public class PlayEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         boolean optional = sa.hasParam("Optional");
         final boolean remember = sa.hasParam("RememberPlayed");
         final boolean imprint = sa.hasParam("ImprintPlayed");
@@ -484,7 +484,7 @@ public class PlayEffect extends SpellAbilityEffect {
     }
 
     public static void addReplaceGraveyardEffect(Card c, Card hostCard, SpellAbility sa, SpellAbility tgtSA, String zone) {
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
         final String name = hostCard.getName() + "'s Effect";
         final String image = hostCard.getImageKey();
@@ -519,7 +519,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
     protected void addIllusionaryMaskReplace(Card c, SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
         final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();

@@ -6,7 +6,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
@@ -36,7 +36,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
 
         if (mapParams.containsKey("SpellDescription") && !mapParams.containsKey("TriggerDescription")) {

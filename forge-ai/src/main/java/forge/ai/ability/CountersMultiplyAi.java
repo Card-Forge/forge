@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
@@ -120,7 +120,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
     private boolean setTargets(Player ai, SpellAbility sa) {
         final CounterType counterType = getCounterType(sa);
 
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 

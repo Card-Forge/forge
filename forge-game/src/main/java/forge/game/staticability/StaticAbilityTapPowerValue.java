@@ -1,6 +1,6 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -8,7 +8,7 @@ import forge.game.zone.ZoneType;
 public class StaticAbilityTapPowerValue {
 
     public static boolean withToughness(final Card card, final SpellAbility sa) {
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.TapPowerValue)) {
@@ -37,7 +37,7 @@ public class StaticAbilityTapPowerValue {
 
     public static int getMod(final Card card, SpellAbility sa) {
         int i = 0;
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.TapPowerValue)) {

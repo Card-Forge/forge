@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -17,7 +17,7 @@ public class HauntAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card card = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         if (sa.usesTargeting() && !card.isToken()) {
             final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
                     CardPredicates.CREATURES);

@@ -4,7 +4,7 @@ package forge.ai.simulation;
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
@@ -19,14 +19,14 @@ public class GameSimulator {
     public static boolean COPY_STACK = false;
     final private SimulationController controller;
     private GameCopier copier;
-    private Game simGame;
+    private IGame simGame;
     private Player aiPlayer;
     private GameStateEvaluator eval;
     private List<String> origLines;
     private Score origScore;
     private SpellAbilityChoicesIterator interceptor;
 
-    public GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer, PhaseType advanceToPhase) {
+    public GameSimulator(SimulationController controller, IGame origGame, Player origAiPlayer, PhaseType advanceToPhase) {
         this.controller = controller;
         copier = new GameCopier(origGame);
         simGame = copier.makeCopy(advanceToPhase, origAiPlayer);
@@ -50,7 +50,7 @@ public class GameSimulator {
         if (COPY_STACK && !origGame.getStackZone().isEmpty()) {
             origLines = new ArrayList<>();
             debugLines = origLines;
-            Game copyOrigGame = copier.makeCopy();
+            IGame copyOrigGame = copier.makeCopy();
             Player copyOrigAiPlayer = copyOrigGame.getPlayers().get(1);
             resolveStack(copyOrigGame, copyOrigGame.getPlayers().get(0));
             origScore = eval.getScoreForGameState(copyOrigGame, copyOrigAiPlayer);
@@ -60,7 +60,7 @@ public class GameSimulator {
         debugLines = null;
     }
 
-    private void ensureGameCopyScoreMatches(Game origGame, Player origAiPlayer) {
+    private void ensureGameCopyScoreMatches(IGame origGame, Player origAiPlayer) {
         eval.setDebugging(true);
         List<String> simLines = new ArrayList<>();
         debugLines = simLines;
@@ -244,7 +244,7 @@ public class GameSimulator {
         return score;
     }
 
-    public static void resolveStack(final Game game, final Player opponent) {
+    public static void resolveStack(final IGame game, final Player opponent) {
         // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
         PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
         sim.setUseSimulation(true);
@@ -275,7 +275,7 @@ public class GameSimulator {
         }, sim);
     }
 
-    public Game getSimulatedGameState() {
+    public IGame getSimulatedGameState() {
         return simGame;
     }
 

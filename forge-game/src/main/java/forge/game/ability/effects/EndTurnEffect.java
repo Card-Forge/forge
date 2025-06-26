@@ -3,7 +3,7 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardCollection;
@@ -29,7 +29,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
             return;
         }
 
-        Game game = ender.getGame();
+        IGame game = ender.getGame();
         // CR 721.1a
         game.getTriggerHandler().clearWaitingTriggers();
 

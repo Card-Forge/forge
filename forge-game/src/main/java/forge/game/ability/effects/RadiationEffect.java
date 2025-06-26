@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -14,7 +14,7 @@ public class RadiationEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final int num = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "0"), sa);
 
         GameEntityCounterTable table = new GameEntityCounterTable();

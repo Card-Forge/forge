@@ -26,7 +26,7 @@ import com.google.common.collect.*;
 import forge.util.ITranslatable;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -154,7 +154,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      *
      * @return a boolean.
      */
-    public boolean requirementsCheck(Game game) {
+    public boolean requirementsCheck(IGame game) {
         if (this.isSuppressed()) {
             return false; // Effect removed by effect
         }

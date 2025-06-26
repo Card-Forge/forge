@@ -25,7 +25,7 @@ import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -81,7 +81,7 @@ public class CardFactory {
     private static Card copySpellHost(final SpellAbility sourceSA, final SpellAbility targetSA, Player controller) {
         final Card source = sourceSA.getHostCard();
         final Card original = targetSA.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         int id = game.nextCardId();
 
         // need to create a physical card first, i need the original card faces
@@ -173,10 +173,10 @@ public class CardFactory {
         return copySA;
     }
 
-    public static Card getCard(final IPaperCard cp, final Player owner, final Game game) {
+    public static Card getCard(final IPaperCard cp, final Player owner, final IGame game) {
         return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId(), game);
     }
-    public static Card getCard(final IPaperCard cp, final Player owner, final int cardId, final Game game) {
+    public static Card getCard(final IPaperCard cp, final Player owner, final int cardId, final IGame game) {
         CardRules cardRules = cp.getRules();
         final Card c = readCard(cardRules, cp, cardId, game);
         c.setRules(cardRules);
@@ -305,7 +305,7 @@ public class CardFactory {
         return sa;
     }
 
-    private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, Game game) {
+    private static Card readCard(final CardRules rules, final IPaperCard paperCard, int cardId, IGame game) {
         final Card card = new Card(cardId, paperCard, game);
 
         // 1. The states we may have:

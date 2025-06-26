@@ -13,11 +13,7 @@ import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.deck.Deck;
-import forge.game.Game;
-import forge.game.GameRules;
-import forge.game.GameStage;
-import forge.game.GameType;
-import forge.game.Match;
+import forge.game.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
@@ -34,7 +30,7 @@ import forge.model.FModel;
 public class SimulationTest {
     private static boolean initialized = false;
 
-    public Game resetGame() {
+    public IGame resetGame() {
         // need to be done after FModel.initialize, or the Localizer isn't loaded yet
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
@@ -44,16 +40,16 @@ public class SimulationTest {
         players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("p1", options)));
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players, "Test");
-        Game game = new Game(players, rules, match);
+        IGame game = new Game(players, rules, match);
         game.setAge(GameStage.Play);
-        game.EXPERIMENTAL_RESTORE_SNAPSHOT = false;
-        game.AI_TIMEOUT = FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT);
-        game.AI_CAN_USE_TIMEOUT = true; //Only Android is restricted according to API Level
+        game.configuration().set(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT, false);
+        game.configuration().set(GameOptions.AI_TIMEOUT, FModel.getPreferences().getPrefInt(FPref.MATCH_AI_TIMEOUT));
+        game.configuration().set(GameOptions.AI_CAN_USE_TIMEOUT, true); //Only Android is restricted according to API Level
 
         return game;
     }
 
-    protected Game initAndCreateGame() {
+    protected IGame initAndCreateGame() {
         if (!initialized) {
             GuiBase.setInterface(new GuiDesktop());
             FModel.initialize(null, preferences -> {
@@ -67,7 +63,7 @@ public class SimulationTest {
         return resetGame();
     }
 
-    protected GameSimulator createSimulator(Game game, Player p) {
+    protected GameSimulator createSimulator(IGame game, Player p) {
         return new GameSimulator(new SimulationController(new Score(0)) {
             @Override
             public boolean shouldRecurse() {
@@ -76,7 +72,7 @@ public class SimulationTest {
         }, game, p, null);
     }
 
-    protected int countCardsWithName(Game game, String name) {
+    protected int countCardsWithName(IGame game, String name) {
         int i = 0;
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals(name)) {
@@ -86,7 +82,7 @@ public class SimulationTest {
         return i;
     }
 
-    protected Card findCardWithName(Game game, String name) {
+    protected Card findCardWithName(IGame game, String name) {
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals(name)) {
                 return c;
@@ -95,7 +91,7 @@ public class SimulationTest {
         return null;
     }
 
-    protected String gameStateToString(Game game) {
+    protected String gameStateToString(IGame game) {
         StringBuilder sb = new StringBuilder();
         for (ZoneType zone : ZoneType.values()) {
             CardCollectionView cards = game.getCardsIn(zone);

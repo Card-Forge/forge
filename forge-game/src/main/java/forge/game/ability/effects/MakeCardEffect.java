@@ -4,7 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.ICardFace;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -33,7 +33,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
         final PlayerCollection players = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
         for (final Player player : players) {
-            final Game game = player.getGame();
+            final IGame game = player.getGame();
 
             List<ICardFace> faces = new ArrayList<>();
             List<PaperCard> pack = null;

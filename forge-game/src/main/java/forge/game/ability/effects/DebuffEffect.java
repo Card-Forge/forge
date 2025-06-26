@@ -10,7 +10,7 @@ import com.google.common.collect.Lists;
 
 import forge.GameCommand;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.keyword.Keyword;
@@ -65,7 +65,7 @@ public class DebuffEffect extends SpellAbilityEffect {
         if (sa.hasParam("Keywords")) {
             kws.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
 
         for (final Card tgtC : getTargetCards(sa)) {

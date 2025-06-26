@@ -71,14 +71,14 @@ import java.util.*;
  * @version $Id$
  */
 public class GameAction {
-    private final Game game;
+    private final IGame game;
 
     private boolean holdCheckingStaticAbilities = false;
 
     private final static Comparator<StaticAbility> effectOrder = Comparator.comparing(StaticAbility::isCharacteristicDefining).reversed()
             .thenComparing(s -> s.getHostCard().getLayerTimestamp());
 
-    public GameAction(Game game0) {
+    public GameAction(IGame game0) {
         game = game0;
     }
 
@@ -598,7 +598,7 @@ public class GameAction {
             runParams.put(AbilityKey.Cause, cause);
             runParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType().name() : null);
             runParams.put(AbilityKey.Destination, zoneTo.getZoneType().name());
-            runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
+            runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack().peek());
             runParams.put(AbilityKey.MergedCards, mergedCards);
             if (params != null) {
                 runParams.putAll(params);
@@ -945,8 +945,8 @@ public class GameAction {
         if (params != null) {
             runParams.putAll(params);
         }
-        runParams.put(AbilityKey.CostStack, game.costPaymentStack);
-        runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
+        runParams.put(AbilityKey.CostStack, game.costPaymentStack());
+        runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack().peek());
 
         game.getTriggerHandler().runTrigger(TriggerType.Exiled, runParams, false);
 

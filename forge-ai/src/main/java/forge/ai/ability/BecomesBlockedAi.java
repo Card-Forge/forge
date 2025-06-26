@@ -3,7 +3,7 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -19,7 +19,7 @@ public class BecomesBlockedAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Game game = aiPlayer.getGame();
+        final IGame game = aiPlayer.getGame();
 
         if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 || !game.getPhaseHandler().getPlayerTurn().isOpponentOf(aiPlayer)) {

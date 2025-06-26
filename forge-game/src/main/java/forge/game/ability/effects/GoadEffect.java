@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -29,7 +29,7 @@ public class GoadEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player player = sa.getActivatingPlayer();
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         final long timestamp = game.getNextTimestamp();
         final boolean remember = sa.hasParam("RememberGoaded");
         final boolean ungoad = sa.hasParam("NoLonger");

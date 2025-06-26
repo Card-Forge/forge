@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 
 import com.google.common.collect.Maps;
 import forge.GameCommand;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -91,7 +91,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         if (null == c || c.hasKeyword("Other players can't gain control of CARDNAME.")) {
             return;
         }
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         if (c.isInPlay()) {
             c.removeTempController(tStamp);
 
@@ -114,7 +114,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final List<Player> controllers = getDefinedPlayersOrTargeted(sa, "NewController");
 
         final Player newController = controllers.isEmpty() ? activator : controllers.get(0);
-        final Game game = newController.getGame();
+        final IGame game = newController.getGame();
 
         CardCollectionView tgtCards;
         if (sa.hasParam("Choices")) {
@@ -272,7 +272,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
     }
 
     private CardCollectionView getDefinedCards(final SpellAbility sa) {
-        final Game game = sa.getHostCard().getGame();
+        final IGame game = sa.getHostCard().getGame();
         if (sa.hasParam("AllValid")) {
             return AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AllValid"), sa);
         }

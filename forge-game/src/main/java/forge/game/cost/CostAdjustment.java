@@ -7,7 +7,7 @@ import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -41,7 +41,7 @@ public class CostAdjustment {
 
         final Player player = sa.getActivatingPlayer();
         final Card host = sa.getHostCard();
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         Cost result = cost.copy();
         boolean isStateChangeToFaceDown = false;
 
@@ -176,7 +176,7 @@ public class CostAdjustment {
             return true;
         }
 
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         final Card originalCard = sa.getHostCard();
         boolean isStateChangeToFaceDown = false;
 
@@ -502,7 +502,7 @@ public class CostAdjustment {
         final Player controller = hostCard.getController();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
 
         if (!st.matchesValidParam("ValidCard", card)) {
             return false;

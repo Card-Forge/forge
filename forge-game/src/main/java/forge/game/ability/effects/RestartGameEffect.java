@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameAction;
 import forge.game.GameStage;
 import forge.game.ability.SpellAbilityEffect;
@@ -22,7 +22,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         FCollectionView<Player> players = game.getPlayers();
 
         // Don't grab Ante Zones

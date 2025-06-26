@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.card.CardStateName;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -24,7 +24,7 @@ public class MeldEffect extends SpellAbilityEffect {
         Card hostCard = sa.getHostCard();
         String primName = sa.getParam("Primary");
         String secName = sa.getParam("Secondary");
-        Game game = hostCard.getGame();
+        IGame game = hostCard.getGame();
         Player controller = sa.getActivatingPlayer();
 
         // a permanent you control and own named secondary

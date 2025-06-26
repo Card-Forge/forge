@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.LobbyPlayer;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -36,7 +36,7 @@ public class LobbyPlayerForTests extends LobbyPlayer implements IGameEntitiesFac
     }
 
     @Override
-    public Player createIngamePlayer(Game gameState, final int id) {
+    public Player createIngamePlayer(IGame gameState, final int id) {
         Player dummyPlayer = new Player(getName(), gameState, id);
         dummyPlayer.setFirstController(createControllerFor(dummyPlayer));
         return dummyPlayer;

@@ -2,7 +2,7 @@ package forge.gamesimulationtests.util.playeractions;
 
 import java.util.List;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -19,7 +19,7 @@ public class ActivateAbilityAction extends BasePlayerAction {
 		this.cardWithAbility = cardWithAbility;
 	}
 
-	public void activateAbility( Player player, Game game ) {
+	public void activateAbility( Player player, IGame game ) {
 		Card actualCardWithAbility = CardSpecificationHandler.INSTANCE.find( game, cardWithAbility );
 		
 		List<SpellAbility> abilities = actualCardWithAbility.getAllPossibleAbilities( player, true );

@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.phase.PhaseHandler;
@@ -17,7 +17,7 @@ public class RollDiceAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         Card source = sa.getHostCard();
-        Game game = aiPlayer.getGame();
+        IGame game = aiPlayer.getGame();
         PhaseHandler ph = game.getPhaseHandler();
         Cost cost = sa.getPayCosts();
         String logic = sa.getParamOrDefault("AILogic", "");

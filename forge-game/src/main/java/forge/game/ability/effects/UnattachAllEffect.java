@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -27,7 +27,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(final SpellAbility sa) {
         Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         String valid = sa.getParam("UnattachValid");
 
         // If Cast Targets will be checked on the Stack

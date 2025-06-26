@@ -28,7 +28,7 @@ import forge.card.MagicColor.Constant;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -969,7 +969,7 @@ public class ComputerUtilCard {
     public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
         List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         Player opp = ai.getStrongestOpponent();
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
@@ -1061,7 +1061,7 @@ public class ComputerUtilCard {
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
         final Player ai = sa.getActivatingPlayer();
         final AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final PhaseType phaseType = ph.getPhase();
         final Player opp = ph.getPlayerTurn().isOpponentOf(ai) ? ph.getPlayerTurn() : ai.getStrongestOpponent();
@@ -1294,7 +1294,7 @@ public class ComputerUtilCard {
     }
     public static boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int toughness,
                                          final int power, final List<String> keywords, boolean immediately) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final PhaseHandler phase = game.getPhaseHandler();
         final Combat combat = phase.getCombat();
         final boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && phase.is(PhaseType.MAIN1, ai);
@@ -1771,7 +1771,7 @@ public class ComputerUtilCard {
      * @param vCard   creature to work with
      * @param exclude list of cards to exclude when considering ability sources, accepts null
      */
-    public static void applyStaticContPT(final Game game, Card vCard, final CardCollectionView exclude) {
+    public static void applyStaticContPT(final IGame game, Card vCard, final CardCollectionView exclude) {
         if (!vCard.isCreature()) {
             return;
         }
@@ -1958,7 +1958,7 @@ public class ComputerUtilCard {
     }
 
     public static AiPlayDecision checkNeedsToPlayReqs(final Card card, final SpellAbility sa) {
-        Game game = card.getGame();
+        IGame game = card.getGame();
         boolean isRightSplit = sa != null && sa.getCardState().getStateName() == CardStateName.RightSplit;
         String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
         String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";

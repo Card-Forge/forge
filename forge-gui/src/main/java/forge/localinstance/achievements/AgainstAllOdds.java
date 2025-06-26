@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
@@ -18,7 +18,7 @@ public class AgainstAllOdds extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game) {
+    protected int evaluate(Player player, IGame game) {
         if (player.getOutcome().hasWon() && game.getRegisteredPlayers().size() - player.getRegisteredOpponents().size() == 1) {
             int teamNum = 0;
             for (Player opp : player.getRegisteredOpponents()) {

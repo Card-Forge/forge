@@ -456,7 +456,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         CardCollectionView tgtCards = getTargetCards(sa);
         final Player activator = sa.getActivatingPlayer();
         final Card hostCard = sa.getHostCard();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         final CardCollection commandCards = new CardCollection();
 
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
@@ -887,7 +887,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     private void changeZonePlayerInvariant(Player chooser, SpellAbility sa, List<Player> fetchers) {
         final Card source = sa.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final boolean chooseFromDef = sa.hasParam("ChooseFromDefined");
         final boolean defined = sa.hasParam("Defined") || chooseFromDef;
         final String changeType = sa.getParamOrDefault("ChangeType", "");
@@ -1545,7 +1545,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            object.
      * @param game
      */
-    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList, GameEntityCounterTable counterTable) {
+    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final IGame game, CardZoneTable triggerList, GameEntityCounterTable counterTable) {
         final Card tgtHost = tgtSA.getHostCard();
         game.getStack().remove(si);
 

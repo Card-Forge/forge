@@ -1,6 +1,6 @@
 package forge.gamemodes.match.input;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.gui.control.FControlGamePlayback;
@@ -15,8 +15,8 @@ public class InputPlaybackControl extends InputSyncronizedBase {
 
     private PlaybackSpeed speed = PlaybackSpeed.NORMAL;
 
-    private final Game game;
-    public InputPlaybackControl(final Game game0, final FControlGamePlayback fControlGamePlayback) {
+    private final IGame game;
+    public InputPlaybackControl(final IGame game0, final FControlGamePlayback fControlGamePlayback) {
         super(fControlGamePlayback.getController());
         game = game0;
         control = fControlGamePlayback;

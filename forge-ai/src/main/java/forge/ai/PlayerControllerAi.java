@@ -61,7 +61,7 @@ public class PlayerControllerAi extends PlayerController {
 
     private boolean pilotsNonAggroDeck = false;
 
-    public PlayerControllerAi(Game game, Player p, LobbyPlayer lp) {
+    public PlayerControllerAi(IGame game, Player p, LobbyPlayer lp) {
         super(game, p, lp);
 
         brains = new AiController(p, game);
@@ -1147,7 +1147,7 @@ public class PlayerControllerAi extends PlayerController {
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         String choice = choices.get(0);
         SpellAbility hostsa = null;     //for Protect sub-ability
-        if (getGame().stack.size() > 1) {
+        if (getGame().stack().size() > 1) {
             for (SpellAbilityStackInstance si : getGame().getStack()) {
                 SpellAbility spell = si.getSpellAbility();
                 if (sa != spell && sa.getHostCard() != spell.getHostCard()) {
@@ -1161,8 +1161,8 @@ public class PlayerControllerAi extends PlayerController {
         }
         final Combat combat = getGame().getCombat();
         if (combat != null) {
-            if (getGame().stack.size() == 1) {
-                SpellAbility topstack = getGame().stack.peekAbility();
+            if (getGame().stack().size() == 1) {
+                SpellAbility topstack = getGame().stack().peekAbility();
                 if (topstack.getSubAbility() == sa) {
                     hostsa = topstack;
                 }

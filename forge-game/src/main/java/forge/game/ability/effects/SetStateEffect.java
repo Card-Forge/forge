@@ -1,7 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.card.CardStateName;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
@@ -51,7 +51,7 @@ public class SetStateEffect extends SpellAbilityEffect {
         final Player p = sa.getActivatingPlayer();
         final String mode = sa.getParam("Mode");
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         final boolean remChanged = sa.hasParam("RememberChanged");
         final boolean optional = sa.hasParam("Optional");

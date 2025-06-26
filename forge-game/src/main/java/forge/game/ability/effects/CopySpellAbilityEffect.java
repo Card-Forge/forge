@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameObjectPredicates;
 import forge.game.ability.AbilityKey;
@@ -56,7 +56,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
 
         int amount = 1;
         if (sa.hasParam("Amount")) {

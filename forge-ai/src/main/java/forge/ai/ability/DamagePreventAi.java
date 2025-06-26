@@ -4,7 +4,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -26,7 +26,7 @@ public class DamagePreventAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Combat combat = game.getCombat();
         boolean chance = false;
 
@@ -168,7 +168,7 @@ public class DamagePreventAi extends SpellAbilityAi {
     private boolean preventDamageMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         sa.resetTargets();
         // filter AIs battlefield by what I can target
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         CardCollectionView targetables = game.getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getTargetableCards(targetables, sa);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);

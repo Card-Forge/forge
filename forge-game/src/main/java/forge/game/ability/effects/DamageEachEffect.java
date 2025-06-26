@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
@@ -47,7 +47,7 @@ public class DamageEachEffect extends DamageBaseEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final IGame game = card.getGame();
         final String num = sa.getParamOrDefault("NumDmg", "X");
 
         FCollectionView<Card> sources;

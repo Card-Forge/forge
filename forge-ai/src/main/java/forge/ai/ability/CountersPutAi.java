@@ -3,7 +3,7 @@ package forge.ai.ability;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -338,7 +338,7 @@ public class CountersPutAi extends CountersAi {
         }
 
         if (sa.hasParam("Adapt")) {
-            Game game = ai.getGame();
+            IGame game = ai.getGame();
             Combat combat = game.getCombat();
 
             if (!source.canReceiveCounters(CounterType.get(CounterEnumType.P1P1)) || source.getCounters(CounterEnumType.P1P1) > 0) {
@@ -668,7 +668,7 @@ public class CountersPutAi extends CountersAi {
     @Override
     public boolean chkAIDrawback(final SpellAbility sa, Player ai) {
         boolean chance = true;
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         Card choice = null;
         final String type = sa.getParam("CounterType");
         final String logic = sa.getParamOrDefault("AILogic", "");

@@ -89,7 +89,7 @@ import static java.lang.Math.max;
  */
 public class AiController {
     private final Player player;
-    private final Game game;
+    private final IGame game;
     private final AiCardMemory memory;
     private Combat predictedCombat;
     private Combat predictedCombatNextTurn;
@@ -100,7 +100,7 @@ public class AiController {
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
 
-    public AiController(final Player computerPlayer, final Game game0) {
+    public AiController(final Player computerPlayer, final IGame game0) {
         player = computerPlayer;
         game = game0;
         memory = new AiCardMemory();
@@ -131,7 +131,7 @@ public class AiController {
         return simPicker;
     }
 
-    public Game getGame() {
+    public IGame getGame() {
         return game;
     }
 
@@ -1791,7 +1791,7 @@ public class AiController {
 
         // instead of computing all available concurrently just add a simple timeout depending on the user prefs
         try {
-            return future.get(game.getAITimeout(), TimeUnit.SECONDS);
+            return future.get(game.configuration().get(GameOptions.AI_TIMEOUT), TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             future.cancel(true);
             return null;

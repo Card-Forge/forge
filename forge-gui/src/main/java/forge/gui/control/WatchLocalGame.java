@@ -4,7 +4,7 @@
 package forge.gui.control;
 
 import forge.LobbyPlayer;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
@@ -18,7 +18,7 @@ import forge.util.ITriggerEvent;
 import java.util.List;
 
 public class WatchLocalGame extends PlayerControllerHuman {
-    public WatchLocalGame(final Game game0, final LobbyPlayer lp, final IGuiGame gui) {
+    public WatchLocalGame(final IGame game0, final LobbyPlayer lp, final IGuiGame gui) {
         super(game0, null, lp);
         setGui(gui);
     }

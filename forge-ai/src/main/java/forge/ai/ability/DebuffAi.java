@@ -5,7 +5,7 @@ import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -29,7 +29,7 @@ public class DebuffAi extends SpellAbilityAi {
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getHostCard();
-        final Game game = ai.getGame(); 
+        final IGame game = ai.getGame();
         if (!sa.usesTargeting() && !source.isInPlay()) {
             return false;
         }

@@ -21,7 +21,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -46,7 +46,7 @@ public class RegenerateAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Combat combat = game.getCombat();
         final Card hostCard = sa.getHostCard();
         boolean chance = false;
@@ -137,7 +137,7 @@ public class RegenerateAi extends SpellAbilityAi {
     }
 
     private static boolean regenMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         sa.resetTargets();
         // filter AIs battlefield by what I can target
         CardCollectionView targetables = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);

@@ -1,6 +1,6 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -8,7 +8,7 @@ import forge.game.zone.ZoneType;
 
 public class StaticAbilityAttackRestrict {
 
-    static public int globalAttackRestrict(Game game) {
+    static public int globalAttackRestrict(IGame game) {
         int max = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
@@ -27,7 +27,7 @@ public class StaticAbilityAttackRestrict {
     }
 
     static public int attackRestrictNum(GameEntity defender) {
-        final Game game = defender.getGame();
+        final IGame game = defender.getGame();
         int num = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {

@@ -1,6 +1,6 @@
 package forge.gamesimulationtests.util.playeractions.testactions;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.Player;
 
 public abstract class AssertAction extends TestAction {
@@ -8,10 +8,10 @@ public abstract class AssertAction extends TestAction {
 		super( null );//AssertActions may be about a player, but they're not really actions taken by a player...
 	}
 
-	public abstract void performAssertion( Game game );
+	public abstract void performAssertion( IGame game );
 
 	@Override
-	public void perform( Game game, Player player ) {
+	public void perform(IGame game, Player player ) {
 		performAssertion( game );
 	}
 }

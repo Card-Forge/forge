@@ -1,6 +1,6 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -8,7 +8,7 @@ import forge.game.zone.ZoneType;
 public class StaticAbilityCantBecomeMonarch {
 
     public static boolean anyCantBecomeMonarch(final Player player) {
-        final Game game = player.getGame();
+        final IGame game = player.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(StaticAbilityMode.CantBecomeMonarch)) {

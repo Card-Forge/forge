@@ -17,7 +17,7 @@
  */
 package forge.gamemodes.match.input;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.actions.PassPriorityAction;
@@ -96,7 +96,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     private void passPriority(final Runnable runnable) {
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANA_LOST_PROMPT)) {
             //if gui player has mana floating that will be lost if phase ended right now, prompt before passing priority
-            final Game game = getController().getGame();
+            final IGame game = getController().getGame();
             if (game.getStack().isEmpty()) { //phase can't end right now if stack isn't empty
                 Player player = game.getPhaseHandler().getPriorityPlayer();
                 if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {

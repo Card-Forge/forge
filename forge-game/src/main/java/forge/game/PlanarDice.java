@@ -21,7 +21,7 @@ public enum PlanarDice {
     Blank;
 
     public static PlanarDice roll(Player roller, PlanarDice riggedResult) {
-        final Game game = roller.getGame();
+        final IGame game = roller.getGame();
         int rolls = 1;
         int ignore = 0;
 

@@ -1,6 +1,6 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -9,7 +9,7 @@ import forge.game.zone.ZoneType;
 public class StaticAbilityMaxCounter {
 
     public static Integer maxCounter(final Card c, final CounterType type) {
-        final Game game = c.getGame();
+        final IGame game = c.getGame();
 
         Integer result = null;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {

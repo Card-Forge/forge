@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.util.Localizer;
@@ -17,7 +17,7 @@ public class ArcaneMaster extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game) {
+    protected int evaluate(Player player, IGame game) {
         if (game.getRules().hasAppliedVariant(GameType.MomirBasic) || game.getRules().hasAppliedVariant(GameType.MoJhoSto)) {
             return defaultValue; // Momir Basic is exempt from this achievement (custom rules do not require any spellcasting by default)
         }

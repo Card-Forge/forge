@@ -3,7 +3,7 @@ package forge.ai.blocking;
 import forge.ai.ComputerUtilCard;
 import forge.ai.PlayerControllerAi;
 import forge.ai.simulation.SimulationTest;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
@@ -15,7 +15,7 @@ public class BasicBlockTests extends SimulationTest {
 
     @Test
     public void noBlockingVsDeathtouch() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player attacker = game.getPlayers().get(1);
         Player defender = game.getPlayers().get(0);
 

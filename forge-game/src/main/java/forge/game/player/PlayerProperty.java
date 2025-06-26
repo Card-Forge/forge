@@ -3,7 +3,7 @@ package forge.game.player;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.game.CardTraitBase;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class PlayerProperty {
 
     public static boolean playerHasProperty(Player player, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
-        Game game = player.getGame();
+        IGame game = player.getGame();
         if (property.equals("Activator")) {
             if (!player.equals(spellAbility.getHostCard().getController())) {
                 return false;

@@ -7,7 +7,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.TreeBasedTable;
 
 import forge.card.mana.ManaCost;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
@@ -419,7 +419,7 @@ public class WrappedAbility extends Ability {
     // //////////////////////////////////////
     @Override
     public void resolve() {
-        final Game game = getActivatingPlayer().getGame();
+        final IGame game = getActivatingPlayer().getGame();
         final Trigger regtrig = getTrigger();
 
         if (!(TriggerType.Always.equals(regtrig.getMode())) && !regtrig.hasParam("NoResolvingCheck")) {

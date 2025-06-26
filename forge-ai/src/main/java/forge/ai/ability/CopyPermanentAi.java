@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -108,7 +108,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(final Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         final boolean canCopyLegendary = sa.hasParam("NonLegendary");

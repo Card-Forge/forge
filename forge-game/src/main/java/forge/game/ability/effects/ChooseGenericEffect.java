@@ -12,7 +12,7 @@ import forge.game.card.CardDamageMap;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.event.GameEventCardModeChosen;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntityCounterTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -34,7 +34,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Game game = host.getGame();
+        final IGame game = host.getGame();
 
         final List<SpellAbility> abilities = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
         if (sa.hasParam("NumRandomChoices")) {

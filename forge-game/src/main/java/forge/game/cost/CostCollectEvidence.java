@@ -1,6 +1,6 @@
 package forge.game.cost;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -70,7 +70,7 @@ public class CostCollectEvidence extends CostPartWithList {
 
     @Override
     protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
-        final Game game = payer.getGame();
+        final IGame game = payer.getGame();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         AbilityKey.addCardZoneTableParams(moveParams, table);
         CardCollection moved = game.getAction().exile(new CardCollection(targetCards), ability, moveParams);

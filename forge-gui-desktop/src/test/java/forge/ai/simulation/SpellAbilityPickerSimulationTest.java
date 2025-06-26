@@ -10,7 +10,7 @@ import forge.model.FModel;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
@@ -22,7 +22,7 @@ import forge.game.zone.ZoneType;
 public class SpellAbilityPickerSimulationTest extends SimulationTest {
     @Test
     public void testPickingLethalDamage() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         p.setTeam(0);
 
@@ -47,7 +47,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testPickingKillingCreature() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCard("Mountain", p);
@@ -69,7 +69,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testSequenceStartingWithPlayingLand() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         Card mountain = addCardToZone("Mountain", p, ZoneType.Hand);
@@ -96,7 +96,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testPlayingLandAfterSpell() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCards("Island", 2, p);
@@ -123,7 +123,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testModeSelection() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCard("Plains", p);
@@ -147,7 +147,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testModeSelection2() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCard("Plains", p);
@@ -167,7 +167,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testMultipleModes() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCards("Mountain", 4, p);
@@ -193,7 +193,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testMultipleModes2() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCards("Mountain", 4, p);
@@ -218,7 +218,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testMultipleTargets() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCards("Mountain", 2, p);
@@ -244,7 +244,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testLandSearchForCombo() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCard("Forest", p);
@@ -282,7 +282,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void playTaplandIfNoPlays() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         // start with a hand with a basic, a tapland, and a card that can't be cast
@@ -301,7 +301,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void playBouncelandIfNoPlays() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         // start with a hand with a basic, a bounceland, and a card that can't be cast
@@ -320,7 +320,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void playTronOverBasic() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         // start with a hand with a basic, a Tron land, and a card that can't be cast
@@ -340,7 +340,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void playManalessLands() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         // start with a hand with a land that can't produce mana.
@@ -356,7 +356,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void playBasicOverUtility() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         // start with a hand with a colorless utility land and a basic
@@ -377,7 +377,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void targetUtilityLandOverRainbow() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         opponent.setLife(20, null);
@@ -427,7 +427,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
             }
 
             // reset the game
-            Game game = resetGame();
+            IGame game = resetGame();
             Player p = game.getPlayers().get(1);
             Player opponent = game.getPlayers().get(0);
             opponent.setLife(20, null);
@@ -472,7 +472,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         System.out.println(funky);
         for (Card c : funky) {
             GameStateEvaluator gse = new GameStateEvaluator();
-            Game game = resetGame();
+            IGame game = resetGame();
             System.out.println(c.getName() + ": " + gse.evalCard(game, game.getStartingPlayer(), c));
         }
         AssertJUnit.assertEquals(0, funky.size());
@@ -480,7 +480,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testPlayRememberedCardsLand() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCards("Mountain", 2, p);
@@ -511,7 +511,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testPlayRememberedCardsSpell() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCards("Mountain", 3, p);
@@ -538,7 +538,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test(enabled = true)
     public void testPlayingPumpSpellsAfterBlocks() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         opponent.setLife(2, null);
@@ -586,7 +586,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testPlayingSorceryPumpSpellsBeforeBlocks() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         opponent.setLife(2, null);
@@ -611,7 +611,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testPlayingRemovalBeforeBlocks() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         opponent.setLife(2, null);
@@ -642,7 +642,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         // seed during choice evaluation, although in the future, it may make sense to handle it
         // some other way.
 
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
 
@@ -676,7 +676,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testNoSimulationsWhenNoTargets() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCards("Forest", 2, p);
@@ -694,7 +694,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testLandDropPruning() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCardToZone("Island", p, ZoneType.Hand);
@@ -713,7 +713,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testSpellCantTargetSelf() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
 
@@ -735,7 +735,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testModalSpellCantTargetSelf() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
 
@@ -758,7 +758,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testModalSpellNoTargetsForModeWithSubAbility() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCardToZone("Temur Charm", p, ZoneType.Hand);
@@ -777,7 +777,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testModalSpellNoTargetsForAnyModes() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         addCardToZone("Drown in the Loch", p, ZoneType.Hand);
@@ -797,7 +797,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void threeDistinctTargetSpell() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
 
@@ -825,7 +825,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void threeDistinctTargetSpellCantBeCast() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
 
@@ -843,7 +843,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void correctTargetChoicesWithTwoTargetSpell() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
 
@@ -867,7 +867,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
     @Test
     public void testPithingNeedlePreventsAbilitiesFromBeingChosen() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Player opponent = game.getPlayers().get(0);
         opponent.setLife(1, null);

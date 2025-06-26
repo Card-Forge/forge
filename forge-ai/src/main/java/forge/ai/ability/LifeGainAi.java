@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
@@ -28,7 +28,7 @@ public class LifeGainAi extends SpellAbilityAi {
      */
     @Override
     protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         final int life = ai.getLife();
 
@@ -77,7 +77,7 @@ public class LifeGainAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final int life = ai.getLife();
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);

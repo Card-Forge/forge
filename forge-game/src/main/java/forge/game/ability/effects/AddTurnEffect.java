@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -68,7 +68,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
 
     public static void createCantSetSchemesInMotionEffect(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
-        final Game game = hostCard.getGame();
+        final IGame game = hostCard.getGame();
         final String name = hostCard.getName() + "'s Effect";
         final String image = hostCard.getImageKey();
 

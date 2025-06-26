@@ -9,7 +9,7 @@ import forge.game.player.PlayerView;
 import forge.util.CardTranslation;
 
 import forge.card.CardType;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -58,7 +58,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final Game game = activator.getGame();
+        final IGame game = activator.getGame();
         CardCollection allChosen = new CardCollection();
 
         final PlayerCollection tgtPlayers = getDefinedPlayersOrTargeted(sa);

@@ -4,7 +4,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.ComputerUtilCost;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -31,7 +31,7 @@ public class PumpAllAi extends PumpAiBase {
     @Override
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Combat combat = game.getCombat();
         final Cost abCost = sa.getPayCosts();
         final String logic = sa.getParamOrDefault("AILogic", "");

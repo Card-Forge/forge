@@ -77,7 +77,7 @@ public abstract class PlayerController {
     protected final Player player;
     protected final LobbyPlayer lobbyPlayer;
 
-    public PlayerController(Game game0, Player p, LobbyPlayer lp) {
+    public PlayerController(IGame game0, Player p, LobbyPlayer lp) {
         gameView = game0.getView();
         player = p;
         lobbyPlayer = lp;
@@ -87,7 +87,7 @@ public abstract class PlayerController {
         return false;
     }
 
-    public Game getGame() { return gameView.getGame(); }
+    public IGame getGame() { return gameView.getGame(); }
     public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
     public LobbyPlayer getLobbyPlayer() { return lobbyPlayer; }

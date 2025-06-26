@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.SpellAbilityAi;
 import forge.game.Direction;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -20,7 +20,7 @@ public class ChooseDirectionAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final String logic = sa.getParam("AILogic");
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
         if (logic == null) {
             return false;
         } else {

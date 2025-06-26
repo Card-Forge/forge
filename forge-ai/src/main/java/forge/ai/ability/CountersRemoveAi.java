@@ -5,7 +5,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -92,7 +92,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
     private boolean doTgt(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");

@@ -1,6 +1,6 @@
 package forge.localinstance.achievements;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
@@ -20,7 +20,7 @@ public class Blackjack extends Achievement {
     }
 
     @Override
-    protected int evaluate(Player player, Game game) {
+    protected int evaluate(Player player, IGame game) {
         if (player.getOutcome().hasWon()) {
             for (Player p : game.getRegisteredPlayers()) {
                 if (p.isOpponentOf(player) && p.getOutcome().lossState == GameLossReason.CommanderDamage) {

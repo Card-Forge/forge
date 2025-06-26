@@ -10,7 +10,7 @@ import forge.card.CardStateName;
 import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
@@ -160,7 +160,7 @@ public abstract class GameState {
         }
     }
 
-    public void initFromGame(Game game) {
+    public void initFromGame(IGame game) {
         playerStates.clear();
         for (Player player : game.getPlayers()) {
             PlayerState p = new PlayerState();
@@ -239,7 +239,7 @@ public abstract class GameState {
         return "P" + p.getGame().getPlayers().indexOf(p);
     }
 
-    private Player parsePlayerString(Game game, String str) {
+    private Player parsePlayerString(IGame game, String str) {
         if (str.equalsIgnoreCase("HUMAN")) {
             return game.getPlayers().get(0);
         } else if (str.equalsIgnoreCase("AI")) {
@@ -577,11 +577,11 @@ public abstract class GameState {
         }
     }
 
-    public void applyToGame(final Game game) {
+    public void applyToGame(final IGame game) {
         game.getAction().invoke(() -> applyGameOnThread(game));
     }
 
-    protected void applyGameOnThread(final Game game) {
+    protected void applyGameOnThread(final IGame game) {
         if (game.getPlayers().size() != playerStates.size()) {
             throw new RuntimeException("Non-matching number of players, (" +
                 game.getPlayers().size() + " vs. " + playerStates.size() + ")");
@@ -684,7 +684,7 @@ public abstract class GameState {
     }
 
     private void updateManaPool(Player p, String manaDef, boolean clearPool, boolean persistent) {
-        Game game = p.getGame();
+        IGame game = p.getGame();
         if (clearPool) {
             p.getManaPool().clearPool(false);
         }
@@ -702,7 +702,7 @@ public abstract class GameState {
         }
     }
 
-    private void handleCombat(final Game game, final Player attackingPlayer, final Player defendingPlayer, final boolean toDeclareBlockers) {
+    private void handleCombat(final IGame game, final Player attackingPlayer, final Player defendingPlayer, final boolean toDeclareBlockers) {
         // First we need to ensure that all attackers are declared in the Declare Attackers step,
         // even if proceeding straight to Declare Blockers
         game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_ATTACKERS, attackingPlayer, turn);
@@ -793,7 +793,7 @@ public abstract class GameState {
         return tgtID;
     }
 
-    private void handleScriptedTargetingForSA(final Game game, final SpellAbility sa, int tgtID) {
+    private void handleScriptedTargetingForSA(final IGame game, final SpellAbility sa, int tgtID) {
         Player human = game.getPlayers().get(0);
         Player ai = game.getPlayers().get(1);
 
@@ -816,7 +816,7 @@ public abstract class GameState {
         }
     }
 
-    private void handleScriptExecution(final Game game) {
+    private void handleScriptExecution(final IGame game) {
         for (Entry<Card, String> scriptPtr : cardToScript.entrySet()) {
             Card c = scriptPtr.getKey();
             String sPtr = scriptPtr.getValue();
@@ -825,10 +825,10 @@ public abstract class GameState {
         }
     }
 
-    private void executeScript(Game game, Card c, String sPtr) {
+    private void executeScript(IGame game, Card c, String sPtr) {
         executeScript(game, c, sPtr, false);
     }
-    private void executeScript(Game game, Card c, String sPtr, boolean putOnStack) {
+    private void executeScript(IGame game, Card c, String sPtr, boolean putOnStack) {
         int tgtID = TARGET_NONE;
         if (sPtr.contains("->")) {
             String tgtDef = sPtr.substring(sPtr.lastIndexOf("->") + 2);
@@ -919,7 +919,7 @@ public abstract class GameState {
         }
     }
 
-    private void handlePrecastSpells(final Game game) {
+    private void handlePrecastSpells(final IGame game) {
         for (int i = 0; i < playerStates.size(); i++) {
             if (playerStates.get(i).precast != null) {
                 String[] spellList = TextUtil.split(playerStates.get(i).precast, ';');
@@ -930,7 +930,7 @@ public abstract class GameState {
         }
     }
 
-    private void handleAddSAsToStack(final Game game) {
+    private void handleAddSAsToStack(final IGame game) {
         for (int i = 0; i < playerStates.size(); i++) {
             if (playerStates.get(i).putOnStack != null) {
                 String[] spellList = TextUtil.split(playerStates.get(i).putOnStack, ';');
@@ -941,10 +941,10 @@ public abstract class GameState {
         }
     }
 
-    private void precastSpellFromCard(String spellDef, final Player activator, final Game game) {
+    private void precastSpellFromCard(String spellDef, final Player activator, final IGame game) {
         precastSpellFromCard(spellDef, activator, game, false);
     }
-    private void precastSpellFromCard(String spellDef, final Player activator, final Game game, final boolean putOnStack) {
+    private void precastSpellFromCard(String spellDef, final Player activator, final IGame game, final boolean putOnStack) {
         int tgtID = TARGET_NONE;
         String scriptID = "";
 
@@ -1097,7 +1097,7 @@ public abstract class GameState {
             return;
         }
 
-        Game game = top.getGame();
+        IGame game = top.getGame();
 
         bottom.setMergedToCard(top);
         if (!top.hasMergedCard()) {

@@ -2,7 +2,7 @@ package forge.game.staticability;
 
 import com.google.common.collect.Table.Cell;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.*;
 import forge.game.ability.AbilityKey;
 import forge.game.trigger.Trigger;
@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 
 public class StaticAbilityDisableTriggers {
 
-    public static boolean disabled(final Game game, final Trigger regtrig, final Map<AbilityKey, Object> runParams)  {
+    public static boolean disabled(final IGame game, final Trigger regtrig, final Map<AbilityKey, Object> runParams)  {
         CardCollectionView cardList = null;
         // if LTB look back
         if ((regtrig.getMode() == TriggerType.ChangesZone || regtrig.getMode() == TriggerType.ChangesZoneAll) && "Battlefield".equals(regtrig.getParam("Origin"))) {

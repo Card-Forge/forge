@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -14,7 +14,7 @@ import forge.game.trigger.TriggerType;
 public class ManifestDreadEffect extends ManifestEffect {
     @Override
     protected void manifestLoop(SpellAbility sa, Player p, final int amount) {
-        final Game game = p.getGame();
+        final IGame game = p.getGame();
         for (int i = 0; i < amount; i++) {
             CardCollection tgtCards = p.getTopXCardsFromLibrary(2);
             CardCollection toGrave = new CardCollection();

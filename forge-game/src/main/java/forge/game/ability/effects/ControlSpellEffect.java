@@ -3,7 +3,7 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import com.google.common.collect.Iterables;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -50,7 +50,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
         final List<Player> controllers = getDefinedPlayersOrTargeted(sa, "NewController");
 
         final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
-        final Game game = newController.getGame();
+        final IGame game = newController.getGame();
 
         // If an Exchange needs to happen, make sure both parties are still in the right zones
 

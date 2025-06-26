@@ -2,7 +2,7 @@ package forge.ai.controller;
 
 import forge.ai.simulation.GameSimulator;
 import forge.ai.simulation.SimulationTest;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -17,7 +17,7 @@ public class AutoPaymentTest extends SimulationTest {
 
     @Test
     public void dontPayWithAshnodsAltar() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         String llanowar = "Llanowar Elves";
@@ -40,7 +40,7 @@ public class AutoPaymentTest extends SimulationTest {
         int score = sim.simulateSpellAbility(mindstone.getFirstSpellAbility()).value;
 
         AssertJUnit.assertTrue(score > 0);
-        Game simGame = sim.getSimulatedGameState();
+        IGame simGame = sim.getSimulatedGameState();
 
         Card mindstoneBF = findCardWithName(simGame, stone);
         AssertJUnit.assertNotNull(mindstoneBF);
@@ -51,7 +51,7 @@ public class AutoPaymentTest extends SimulationTest {
 
     @Test
     public void payWithTreasuresOverPhyrexianAltar() {
-        Game game = initAndCreateGame();
+        IGame game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
 
         String squire = "Squire";
@@ -70,7 +70,7 @@ public class AutoPaymentTest extends SimulationTest {
         int score = sim.simulateSpellAbility(dragon.getFirstSpellAbility()).value;
 
         AssertJUnit.assertTrue(score > 0);
-        Game simGame = sim.getSimulatedGameState();
+        IGame simGame = sim.getSimulatedGameState();
 
         Card dragonBF = findCardWithName(simGame, shivan);
         AssertJUnit.assertNotNull(dragonBF);

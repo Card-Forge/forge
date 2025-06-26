@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -27,7 +27,7 @@ public class DigAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Card host = sa.getHostCard();
         Player libraryOwner = ai;

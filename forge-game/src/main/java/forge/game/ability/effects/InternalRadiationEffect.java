@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -20,7 +20,7 @@ public class InternalRadiationEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Player p = sa.getActivatingPlayer();
-        final Game game = p.getGame();
+        final IGame game = p.getGame();
 
         int numRad = p.getCounters(CounterEnumType.RAD);
 

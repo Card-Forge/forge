@@ -5,7 +5,7 @@ import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -58,7 +58,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
             }
         }
         if (sa.hasParam("AILogic")) {
-            final Game game = ai.getGame();
+            final IGame game = ai.getGame();
             if (sa.getParam("AILogic").equals("NeedsPrevention")) {
                 if (!game.getStack().isEmpty()) {
                     final SpellAbility topStack = game.getStack().peekAbility();
@@ -109,7 +109,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
     public Card chooseSingleCard(final Player aiChoser, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if ("NeedsPrevention".equals(sa.getParam("AILogic"))) {
             final Player ai = sa.getActivatingPlayer();
-            final Game game = ai.getGame();
+            final IGame game = ai.getGame();
             if (!game.getStack().isEmpty()) {
                 Card chosenCard = chooseCardOnStack(sa, ai, game);
                 if (chosenCard != null) {
@@ -166,7 +166,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
         }
     }
 
-    private Card chooseCardOnStack(SpellAbility sa, Player ai, Game game) {
+    private Card chooseCardOnStack(SpellAbility sa, Player ai, IGame game) {
         for (SpellAbilityStackInstance si : game.getStack()) {
             final Card source = si.getSourceCard();
             final SpellAbility abilityOnStack = si.getSpellAbility();

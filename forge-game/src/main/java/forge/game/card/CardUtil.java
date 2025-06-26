@@ -26,7 +26,7 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.CardTraitBase;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -99,7 +99,7 @@ public final class CardUtil {
      */
     public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
-        final Game game = src.getGame();
+        final IGame game = src.getGame();
         if (to != ZoneType.Stack) {
             for (Player p : game.getRegisteredPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
@@ -121,7 +121,7 @@ public final class CardUtil {
      */
     public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
-        final Game game = src.getGame();
+        final IGame game = src.getGame();
         if (to != ZoneType.Stack) {
             for (Player p : game.getPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedLastTurn(from));
@@ -157,7 +157,7 @@ public final class CardUtil {
         }
 
         final Card source = targetSA.getHostCard();
-        final Game game = source.getGame();
+        final IGame game = source.getGame();
         final CardCollection res = new CardCollection();
         final String[] valid = targetSA.getParam("ValidTgts").split(",");
         final CardCollectionView tgts = targetSA.getTargets().getTargetCards();
@@ -373,7 +373,7 @@ public final class CardUtil {
     public static List<Card> getValidCardsToTarget(final SpellAbility ability) {
         final TargetRestrictions tgt = ability.getTargetRestrictions();
         final Card activatingCard = ability.getHostCard();
-        final Game game = ability.getActivatingPlayer().getGame();
+        final IGame game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
         List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), activatingCard, ability);

@@ -38,7 +38,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
@@ -1635,7 +1635,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public CardCollection knownDetermineDefined(final String defined) {
         final CardCollection ret = new CardCollection();
         final CardCollection list = AbilityUtils.getDefinedCards(getHostCard(), defined, this);
-        final Game game = getActivatingPlayer().getGame();
+        final IGame game = getActivatingPlayer().getGame();
 
         for (final Card c : list) {
             final Card actualCard = game.getCardState(c);

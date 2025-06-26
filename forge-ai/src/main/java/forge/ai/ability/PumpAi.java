@@ -3,7 +3,7 @@ package forge.ai.ability;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -33,7 +33,7 @@ public class PumpAi extends PumpAiBase {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("MoveCounter".equals(aiLogic)) {
-            final Game game = ai.getGame();
+            final IGame game = ai.getGame();
             List<Card> tgtCards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
                     CardPredicates.isTargetableBy(sa));
             if (tgtCards.isEmpty()) {
@@ -94,7 +94,7 @@ public class PumpAi extends PumpAiBase {
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && ph.is(PhaseType.MAIN1, ai);
         if (game.getStack().isEmpty() && hasTapCost(sa.getPayCosts(), sa.getHostCard())) {
             if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
@@ -115,7 +115,7 @@ public class PumpAi extends PumpAiBase {
 
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Card source = sa.getHostCard();
         final SpellAbility root = sa.getRootAbility();
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
@@ -359,7 +359,7 @@ public class PumpAi extends PumpAiBase {
     		boolean immediately) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.newArrayList();
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Card source = sa.getHostCard();
         final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
 
@@ -757,7 +757,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     private boolean doSameNameLogic(Player aiPlayer, SpellAbility sa) {
-        final Game game = aiPlayer.getGame();
+        final IGame game = aiPlayer.getGame();
         final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final ZoneType origin = ZoneType.listValueOf(sa.getSubAbility().getParam("Origin")).get(0);

@@ -3,7 +3,7 @@ package forge.ai.ability;
 import forge.ai.*;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -29,7 +29,7 @@ public class PlayAi extends SpellAbilityAi {
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         final String logic = sa.getParamOrDefault("AILogic", "");
 
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
         final Card source = sa.getHostCard();
         // don't use this as a response (ReplaySpell logic is an exception, might be called from a subability
         // while the trigger is on stack)

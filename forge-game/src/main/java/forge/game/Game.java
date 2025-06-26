@@ -31,6 +31,7 @@ import forge.card.CardStateName;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.combat.Combat;
+import forge.game.config.Configuration;
 import forge.game.event.Event;
 import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventGameOutcome;
@@ -61,7 +62,7 @@ import java.util.function.Predicate;
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
-public class Game {
+public class Game implements IGame {
 
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
@@ -92,11 +93,6 @@ public class Game {
     private final GameLog gameLog = new GameLog();
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
-    public int AI_TIMEOUT = 5;
-    public boolean AI_CAN_USE_TIMEOUT = true;
-
-    public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
-    // While this is false here, its really set by the Match/Preferences
 
     // If this merges with LKI In the future, it will need to change forms
     private GameSnapshot previousGameState = null;
@@ -133,70 +129,85 @@ public class Game {
     private final Match match;
     private GameStage age = GameStage.BeforeMulligan;
     private GameOutcome outcome;
-    private final Game maingame;
+    private final IGame maingame;
 
     private final GameView view;
     private final Tracker tracker = new Tracker();
+    private Configuration configuration = new Configuration();
 
     /**
      * Gets the id.
      *
      * @return the id
      */
+    @Override
     public int getId() {
         return this.id;
     }
 
+    @Override
     public Player getStartingPlayer() {
         return startingPlayer;
     }
+    @Override
     public void setStartingPlayer(final Player p) {
         startingPlayer = p;
     }
 
+    @Override
     public Player getMonarch() {
         return monarch;
     }
+    @Override
     public void setMonarch(final Player p) {
         monarch = p;
     }
 
+    @Override
     public Player getMonarchBeginTurn() {
         return monarchBeginTurn;
     }
+    @Override
     public void setMonarchBeginTurn(Player monarchBeginTurn) {
         this.monarchBeginTurn = monarchBeginTurn;
     }
 
+    @Override
     public Player getHasInitiative() {
         return initiative;
     }
+    @Override
     public void setHasInitiative(final Player p) {
         initiative = p;
     }
 
+    @Override
     public CardZoneTable getUntilHostLeavesPlayTriggerList() {
         return untilHostLeavesPlayTriggerList;
     }
 
+    @Override
     public CardCollectionView getLastStateBattlefield() {
         return lastStateBattlefield;
     }
+    @Override
     public CardCollectionView getLastStateGraveyard() {
         return lastStateGraveyard;
     }
 
+    @Override
     public void stashGameState() {
         // Take a snapshot of the current state to restore to previous state
-        if (EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (configuration.get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             previousGameState = new GameSnapshot(this);
             previousGameState.makeCopy();
         }
     }
 
+    @Override
     public boolean restoreGameState() {
         // Restore game state snapshot
-        if (previousGameState == null || !EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        if (previousGameState == null || !configuration.get(GameOptions.EXPERIMENTAL_RESTORE_SNAPSHOT)) {
             return false;
         }
 
@@ -204,6 +215,7 @@ public class Game {
         return true;
     }
 
+    @Override
     public void copyLastState() {
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();
@@ -214,6 +226,7 @@ public class Game {
         }
     }
 
+    @Override
     public CardCollectionView copyLastState(ZoneType type) {
         CardCollection result = new CardCollection();
         Map<Integer, Card> cachedMap = Maps.newHashMap();
@@ -223,14 +236,17 @@ public class Game {
         return result;
     }
 
+    @Override
     public CardCollectionView copyLastStateBattlefield() {
         return copyLastState(ZoneType.Battlefield);
     }
 
+    @Override
     public CardCollectionView copyLastStateGraveyard() {
         return copyLastState(ZoneType.Graveyard);
     }
 
+    @Override
     public void updateLastStateForCard(Card c) {
         if (c == null || c.getZone() == null) {
             return;
@@ -248,11 +264,18 @@ public class Game {
         }
     }
 
+    @Override
+    public CostPaymentStack costPaymentStack() {
+        return costPaymentStack;
+    }
+
     private final GameEntityCache<Player, PlayerView> playerCache = new GameEntityCache<>();
+    @Override
     public Player getPlayer(PlayerView playerView) {
         return playerCache.get(playerView);
     }
 
+    @Override
     public Player getPlayer(int id) {
         for(Player p : allPlayers) {
             if (p.getId() == id) {
@@ -262,45 +285,55 @@ public class Game {
         return null;
     }
 
+    @Override
     public void addPlayer(int id, Player player) {
         playerCache.put(id, player);
     }
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
     private final Table<Integer, Long, Card> changeZoneLKIInfo = HashBasedTable.create();
+    @Override
     public final void addChangeZoneLKIInfo(Card lki) {
         if (lki == null) {
             return;
         }
         changeZoneLKIInfo.put(lki.getId(), lki.getGameTimestamp(), lki);
     }
+    @Override
     public final Card getChangeZoneLKIInfo(Card c) {
         if (c == null) {
             return null;
         }
         return ObjectUtils.defaultIfNull(changeZoneLKIInfo.get(c.getId(), c.getGameTimestamp()), c);
     }
+    @Override
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
     }
 
+    @Override
     public void addLeftBattlefieldThisTurn(Card lki) {
         leftBattlefieldThisTurn.add(lki);
     }
+    @Override
     public void addLeftGraveyardThisTurn(Card lki) {
         leftGraveyardThisTurn.add(lki);
     }
 
+    @Override
     public List<Card> getLeftBattlefieldThisTurn() {
         return leftBattlefieldThisTurn;
     }
+    @Override
     public List<Card> getLeftGraveyardThisTurn() {
         return leftGraveyardThisTurn;
     }
 
+    @Override
     public void clearLeftBattlefieldThisTurn() {
         leftBattlefieldThisTurn.clear();
     }
+    @Override
     public void clearLeftGraveyardThisTurn() {
         leftGraveyardThisTurn.clear();
     }
@@ -309,7 +342,7 @@ public class Game {
         this(players0, rules0, match0, null, -1);
     }
 
-    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0, Game maingame0, int startingLife) { /* no more zones to map here */
+    public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0, IGame maingame0, int startingLife) { /* no more zones to map here */
         rules = rules0;
         match = match0;
         maingame = maingame0;
@@ -375,10 +408,12 @@ public class Game {
         subscribeToEvents(gameLog.getEventVisitor());
     }
 
+    @Override
     public GameView getView() {
         return view;
     }
 
+    @Override
     public Tracker getTracker() {
         return tracker;
     }
@@ -386,10 +421,12 @@ public class Game {
     /**
      * Gets the players who are still fighting to win.
      */
+    @Override
     public final PlayerCollection getPlayers() {
         return ingamePlayers;
     }
 
+    @Override
     public final PlayerCollection getLostPlayers() {
         return lostPlayers;
     }
@@ -397,6 +434,7 @@ public class Game {
     /**
      * Gets the players who are still fighting to win, in turn order.
      */
+    @Override
     public final PlayerCollection getPlayersInTurnOrder() {
         if (getTurnOrder().isDefaultDirection()) {
             return ingamePlayers;
@@ -406,6 +444,7 @@ public class Game {
         return players;
     }
 
+    @Override
     public final PlayerCollection getPlayersInTurnOrder(Player p) {
         final PlayerCollection players = new PlayerCollection(getPlayersInTurnOrder());
 
@@ -417,6 +456,7 @@ public class Game {
     /**
      * Gets the nonactive players who are still fighting to win, in turn order.
      */
+    @Override
     public final PlayerCollection getNonactivePlayers() {
         // Don't use getPlayersInTurnOrder to prevent copying the player collection twice
         final PlayerCollection players = new PlayerCollection(ingamePlayers);
@@ -431,29 +471,37 @@ public class Game {
      * Gets the players who participated in match (regardless of outcome).
      * <i>Use this in UI and after match calculations</i>
      */
+    @Override
     public final PlayerCollection getRegisteredPlayers() {
         return allPlayers;
     }
 
+    @Override
     public final Untap getUntap() {
         return untap;
     }
+    @Override
     public final Phase getUpkeep() {
         return upkeep;
     }
+    @Override
     public final Phase getEndOfCombat() {
         return endOfCombat;
     }
+    @Override
     public final Phase getEndOfTurn() {
         return endOfTurn;
     }
+    @Override
     public final Phase getCleanup() {
         return cleanup;
     }
 
+    @Override
     public void addSBACheckedCommand(final GameCommand c) {
         sbaCheckedCommandList.add(c);
     }
+    @Override
     public final void runSBACheckedCommands() {
         for (final GameCommand c : sbaCheckedCommandList) {
             c.run();
@@ -461,52 +509,66 @@ public class Game {
         sbaCheckedCommandList.clear();
     }
 
+    @Override
     public final PhaseHandler getPhaseHandler() {
         return phaseHandler;
     }
+    @Override
     public final void updateTurnForView() {
         view.updateTurn(phaseHandler);
     }
+    @Override
     public final void updatePhaseForView() {
         view.updatePhase(phaseHandler);
     }
+    @Override
     public final void updatePlayerTurnForView() {
         view.updatePlayerTurn(phaseHandler);
     }
 
+    @Override
     public final MagicStack getStack() {
         return stack;
     }
+    @Override
     public final void updateStackForView() {
         view.updateStack(stack);
     }
 
+    @Override
     public final StaticEffects getStaticEffects() {
         return staticEffects;
     }
 
+    @Override
     public final TriggerHandler getTriggerHandler() {
         return triggerHandler;
     }
 
+    @Override
     public final Combat getCombat() {
         return getPhaseHandler().getCombat();
     }
+    @Override
     public final void updateCombatForView() {
         view.updateCombat(getCombat());
     }
 
+    @Override
     public final GameLog getGameLog() {
         return gameLog;
     }
+    @Override
     public final void updateGameLogForView() {
         view.updateGameLog(gameLog);
     }
 
+    @Override
     public final Zone getStackZone() {
         return stackZone;
     }
 
+    @Override
     public CardCollectionView getCardsPlayerCanActivateInStack() {
         return CardLists.filter(stackZone.getCards(), c -> {
             for (final SpellAbility sa : c.getSpellAbilities()) {
@@ -522,50 +584,61 @@ public class Game {
     /**
      * The Direction in which the turn order of this Game currently proceeds.
      */
+    @Override
     public final Direction getTurnOrder() {
         if (phaseHandler.getPlayerTurn() != null && phaseHandler.getPlayerTurn().isTurnOrderReversed()) {
             return turnOrder.getOtherDirection();
         }
-    	return turnOrder;
+        return turnOrder;
     }
+    @Override
     public final void reverseTurnOrder() {
-    	turnOrder = turnOrder.getOtherDirection();
+        turnOrder = turnOrder.getOtherDirection();
     }
+    @Override
     public final void resetTurnOrder() {
-    	turnOrder = Direction.getDefaultDirection();
+        turnOrder = Direction.getDefaultDirection();
     }
 
     /**
      * Create and return the next timestamp.
      */
+    @Override
     public final long getNextTimestamp() {
         timestamp = getTimestamp() + 1;
         return getTimestamp();
     }
+    @Override
     public final long getTimestamp() {
         return timestamp;
     }
 
+    @Override
     public void dangerouslySetTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
+    @Override
     public final GameOutcome getOutcome() {
         return outcome;
     }
 
-    public final Game getMaingame() {
+    @Override
+    public final IGame getMaingame() {
         return maingame;
     }
 
+    @Override
     public ReplacementHandler getReplacementHandler() {
         return replacementHandler;
     }
 
+    @Override
     public synchronized boolean isGameOver() {
         return age == GameStage.GameOver;
     }
 
+    @Override
     public synchronized void setGameOver(GameEndReason reason) {
         for (Player p : allPlayers) {
             p.clearController();
@@ -592,10 +665,12 @@ public class Game {
         }
     }
 
+    @Override
     public Zone getZoneOf(final Card card) {
         return card == null ? null : card.getLastKnownZone();
     }
 
+    @Override
     public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
@@ -603,6 +678,7 @@ public class Game {
         return getPlayers().getCardsIn(zone);
     }
 
+    @Override
     public CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
@@ -615,6 +691,7 @@ public class Game {
         return cards;
     }
 
+    @Override
     public CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
         CardCollection cards = new CardCollection();
         for (final ZoneType z : zones) {
@@ -623,6 +700,7 @@ public class Game {
         return cards;
     }
 
+    @Override
     public CardCollectionView getCardsInOwnedBy(final Iterable<ZoneType> zones, Player p) {
         CardCollection cards = new CardCollection();
         for (final ZoneType z : zones) {
@@ -631,18 +709,22 @@ public class Game {
         return CardLists.filter(cards, CardPredicates.isOwner(p));
     }
 
+    @Override
     public boolean isCardExiled(final Card c) {
         return getCardsIn(ZoneType.Exile).contains(c);
     }
 
+    @Override
     public boolean isCardInPlay(final String cardName) {
         return getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals(cardName));
     }
 
+    @Override
     public boolean isCardInCommand(final String cardName) {
         return getCardsIn(ZoneType.Command).anyMatch(CardPredicates.nameEquals(cardName));
     }
 
+    @Override
     public CardCollectionView getColoredCardsInPlay(final String color) {
         final CardCollection cards = new CardCollection();
         for (Player p : getPlayers()) {
@@ -672,9 +754,11 @@ public class Game {
         }
     }
 
+    @Override
     public Card getCardState(final Card card) {
         return getCardState(card, card);
     }
+    @Override
     public Card getCardState(final Card card, final Card notFound) {
         CardStateVisitor visit = new CardStateVisitor(card);
         this.forEachCardInGame(visit);
@@ -702,6 +786,7 @@ public class Game {
         }
     }
 
+    @Override
     public Card findByView(CardView view) {
         if (view == null) {
             return null;
@@ -717,16 +802,19 @@ public class Game {
         return visit.getFound();
     }
 
+    @Override
     public Card findById(int id) {
         CardIdVisitor visit = new CardIdVisitor(id);
         this.forEachCardInGame(visit);
         return visit.getFound();
     }
 
+    @Override
     public void forEachCardInGame(Visitor<Card> visitor) {
         forEachCardInGame(visitor, false);
     }
     // Allows visiting cards in game without allocating a temporary list.
+    @Override
     public void forEachCardInGame(Visitor<Card> visitor, boolean withSideboard) {
         for (final Player player : getPlayers()) {
             if (!visitor.visitAll(player.getZone(ZoneType.Graveyard).getCards())) {
@@ -756,6 +844,7 @@ public class Game {
         }
         visitor.visitAll(getStackZone().getCards());
     }
+    @Override
     public CardCollectionView getCardsInGame() {
         final CardCollection all = new CardCollection();
         Visitor<Card> visitor = new Visitor<Card>() {
@@ -769,10 +858,12 @@ public class Game {
         return all;
     }
 
+    @Override
     public final GameAction getAction() {
         return action;
     }
 
+    @Override
     public final Match getMatch() {
         return match;
     }
@@ -784,6 +875,7 @@ public class Game {
      * @return A {@link Player}, whose turn comes after the current player, or
      * {@code null} if there are no players in the game.
      */
+    @Override
     public Player getNextPlayerAfter(final Player playerTurn) {
         return getNextPlayerAfter(playerTurn, getTurnOrder());
     }
@@ -796,6 +888,7 @@ public class Game {
      * @return A {@link Player}, whose turn comes after the current player, or
      * {@code null} if there are no players in the game.
      */
+    @Override
     public Player getNextPlayerAfter(final Player playerTurn, final Direction turnOrder) {
         int iPlayer = ingamePlayers.indexOf(playerTurn);
 
@@ -805,28 +898,29 @@ public class Game {
 
         final int shift = turnOrder.getShift();
         if (-1 == iPlayer) { // if playerTurn has just lost
-        	final int totalNumPlayers = allPlayers.size();
+            final int totalNumPlayers = allPlayers.size();
             int iAlive;
             iPlayer = allPlayers.indexOf(playerTurn);
             do {
                 iPlayer = (iPlayer + shift) % totalNumPlayers;
                 if (iPlayer < 0) {
-                	iPlayer += totalNumPlayers;
+                    iPlayer += totalNumPlayers;
                 }
                 iAlive = ingamePlayers.indexOf(allPlayers.get(iPlayer));
             } while (iAlive < 0);
             iPlayer = iAlive;
         } else { // for the case playerTurn hasn't died
-        	final int numPlayersInGame = ingamePlayers.size();
-        	iPlayer = (iPlayer + shift) % numPlayersInGame;
-        	if (iPlayer < 0) {
-        		iPlayer += numPlayersInGame;
-        	}
+            final int numPlayersInGame = ingamePlayers.size();
+            iPlayer = (iPlayer + shift) % numPlayersInGame;
+            if (iPlayer < 0) {
+                iPlayer += numPlayersInGame;
+            }
         }
 
         return ingamePlayers.get(iPlayer);
     }
 
+    @Override
     public int getPosition(Player player, Player startingPlayer) {
         int startPosition = ingamePlayers.indexOf(startingPlayer);
         int myPosition = ingamePlayers.indexOf(player);
@@ -837,6 +931,7 @@ public class Game {
         return myPosition - startPosition + 1;
     }
 
+    @Override
     public void onPlayerLost(Player p) {
         //set for Avatar
         p.setHasLost(true);
@@ -992,39 +1087,49 @@ public class Game {
      * Fire only the events after they became real for gamestate and won't get replaced.<br>
      * The events are sent to UI, log and sound system. Network listeners are under development.
      */
+    @Override
     public void fireEvent(final Event event) {
         events.post(event);
     }
+    @Override
     public void subscribeToEvents(final Object subscriber) {
         events.register(subscriber);
     }
 
+    @Override
     public GameRules getRules() {
         return rules;
     }
 
+    @Override
     public List<Card> getActivePlanes() {
         return activePlanes;
     }
+    @Override
     public void setActivePlanes(List<Card> activePlane0) {
         activePlanes = activePlane0;
     }
 
+    @Override
     public GameStage getAge() {
         return age;
     }
+    @Override
     public void setAge(GameStage value) {
         age = value;
     }
 
     private int cardIdCounter = 0, hiddenCardIdCounter = 0;
+    @Override
     public int nextCardId() {
         return ++cardIdCounter;
     }
+    @Override
     public int nextHiddenCardId() {
         return ++hiddenCardIdCounter;
     }
 
+    @Override
     public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity) {
         Multimap<Player, Card> anteed = ArrayListMultimap.create();
 
@@ -1127,6 +1232,7 @@ public class Game {
         return rarities;
     }
 
+    @Override
     public void clearCaches() {
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();
@@ -1134,6 +1240,7 @@ public class Game {
     }
 
     // Does the player control any cards that care about the order of cards in the graveyard?
+    @Override
     public boolean isGraveyardOrdered(final Player p) {
         for (Card c : p.getAllCards()) {
             if (c.hasSVar("NeedsOrderedGraveyard")) {
@@ -1151,6 +1258,7 @@ public class Game {
         return false;
     }
 
+    @Override
     public Player getControlVote() {
         Player result = null;
         long maxValue = 0;
@@ -1164,16 +1272,20 @@ public class Game {
         return result;
     }
 
+    @Override
     public void incPiledGuessedSA() {
         numPiledGuessedSA++;
     }
+    @Override
     public int getNumPiledGuessedSA() {
         return numPiledGuessedSA;
     }
+    @Override
     public void resetNumPiledGuessedSA() {
         numPiledGuessedSA = 0;
     }
 
+    @Override
     public void onCleanupPhase() {
         resetNumPiledGuessedSA();
         clearLeftBattlefieldThisTurn();
@@ -1193,6 +1305,7 @@ public class Game {
         }
     }
 
+    @Override
     public void addCounterAddedThisTurn(Player putter, CounterType cType, Card card, Integer value) {
         if (putter == null || card == null || value <= 0) {
             return;
@@ -1205,6 +1318,7 @@ public class Game {
         result.add(Pair.of(CardCopyService.getLKICopy(card), value));
     }
 
+    @Override
     public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
         int result = 0;
         Set<CounterType> types = null;
@@ -1228,6 +1342,7 @@ public class Game {
         }
         return result;
     }
+    @Override
     public int getCounterAddedThisTurn(CounterType cType, Card card) {
         int result = 0;
         Set<CounterType> types = null;
@@ -1250,18 +1365,22 @@ public class Game {
         return result;
     }
 
+    @Override
     public void clearCounterAddedThisTurn() {
         countersAddedThisTurn.clear();
     }
 
+    @Override
     public void addCounterRemovedThisTurn(CounterType cType, Card card, Integer value) {
         countersRemovedThisTurn.put(cType, Pair.of(CardCopyService.getLKICopy(card), value));
     }
 
+    @Override
     public void addCounterRemovedThisTurn(CounterType cType, Player player, Integer value) {
         countersRemovedThisTurn.put(cType, Pair.of(player, value));
     }
 
+    @Override
     public int getCounterRemovedThisTurn(CounterType cType, String valid, Card source, Player sourceController, CardTraitBase ctb) {
         int result = 0;
         for (Pair<GameEntity, Integer> p : countersRemovedThisTurn.get(cType)) {
@@ -1272,6 +1391,7 @@ public class Game {
         return result;
     }
 
+    @Override
     public void clearCounterRemovedThisTurn() {
         countersRemovedThisTurn.clear();
     }
@@ -1287,6 +1407,7 @@ public class Game {
      * @param ctb
      * @return List<Integer> for each source
      */
+    @Override
     public List<Integer> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
         final List<Integer> dmgList = Lists.newArrayList();
         for (CardDamageHistory cdh : globalDamageHistory) {
@@ -1305,27 +1426,33 @@ public class Game {
         return dmgList;
     }
 
+    @Override
     public void addGlobalDamageHistory(CardDamageHistory cdh, Pair<Integer, Boolean> dmg, Card source, GameEntity target) {
         globalDamageHistory.add(cdh);
         damageThisTurnLKI.put(dmg, Pair.of(source, target));
     }
+    @Override
     public void clearGlobalDamageHistory() {
         globalDamageHistory.clear();
         damageThisTurnLKI.clear();
     }
 
+    @Override
     public Pair<Card, GameEntity> getDamageLKI(Pair<Integer, Boolean> dmg) {
         return damageThisTurnLKI.get(dmg);
     }
 
+    @Override
     public Card getTopLibForPlayer(Player P) {
         return topLibsCast.get(P);
     }
+    @Override
     public void setTopLibsCast() {
         for (Player p : getPlayers()) {
             topLibsCast.put(p, p.getTopXCardsFromLibrary(1).isEmpty() ? null : p.getTopXCardsFromLibrary(1).get(0));
         }
     }
+    @Override
     public void clearTopLibsCast(SpellAbility sa) {
         // if nothing left to pay
         if (sa.getActivatingPlayer().getPaidForSA() == null) {
@@ -1348,23 +1475,29 @@ public class Game {
             facedownWhileCasting.clear();
         }
     }
+    @Override
     public void addFacedownWhileCasting(Card c, int numDrawn) {
         facedownWhileCasting.put(c, numDrawn);
     }
 
+    @Override
     public boolean isDay() {
         return this.daytime != null && this.daytime == false;
     }
+    @Override
     public boolean isNight() {
         return this.daytime != null && this.daytime == true;
     }
+    @Override
     public boolean isNeitherDayNorNight() {
         return this.daytime == null;
     }
 
+    @Override
     public Boolean getDayTime() {
         return this.daytime;
     }
+    @Override
     public void setDayTime(Boolean value) {
         if (StaticAbilityCantChangeDayTime.cantChangeDay(this, value)) {
             return;
@@ -1379,10 +1512,19 @@ public class Game {
         if (!isNeitherDayNorNight())
             fireEvent(new GameEventDayTimeChanged(isDay()));
     }
-    public int getAITimeout() {
-        return AI_TIMEOUT;
+
+    @Override
+    public Configuration configuration() {
+        return configuration;
     }
-    public boolean canUseTimeout() {
-        return AI_CAN_USE_TIMEOUT;
+
+    @Override
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
+    }
+
+    @Override
+    public MagicStack stack() {
+        return stack;
     }
 }

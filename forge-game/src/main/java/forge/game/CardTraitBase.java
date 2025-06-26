@@ -287,7 +287,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
     protected boolean meetsCommonRequirements(Map<String, String> params) {
         Player hostController = this.getHostCard().getController();
-        final Game game = hostController.getGame();
+        final IGame game = hostController.getGame();
 
         // intervening if check, make sure to use right controller
         if (!game.getStack().isEmpty() && game.getStack().isResolving(getHostCard())) {

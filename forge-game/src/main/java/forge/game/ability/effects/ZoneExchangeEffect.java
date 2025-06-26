@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -35,7 +35,7 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Player p = sa.getActivatingPlayer();
-        final Game game = p.getGame();
+        final IGame game = p.getGame();
         final String type = sa.getParam("Type");
         final String valid = sa.getParam("ValidExchange");
         final ZoneType zone1 = sa.hasParam("Zone1") ? ZoneType.smartValueOf(sa.getParam("Zone1")) : ZoneType.Battlefield;

@@ -1,6 +1,6 @@
 package forge.game.ability.effects;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -18,7 +18,7 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
-        Game game = activator.getGame();
+        IGame game = activator.getGame();
 
         if (game.getActivePlanes() == null) { // not a planechase game, nothing happens
             return;

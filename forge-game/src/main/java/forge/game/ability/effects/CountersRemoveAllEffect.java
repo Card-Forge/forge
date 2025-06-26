@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.google.common.collect.Lists;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -49,7 +49,7 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
         int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
-        final Game game = sa.getActivatingPlayer().getGame();
+        final IGame game = sa.getActivatingPlayer().getGame();
 
         CardCollectionView cards = game.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getActivatingPlayer(), sa.getHostCard(), sa);

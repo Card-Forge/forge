@@ -1,6 +1,6 @@
 package forge.game.staticability;
 
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.mana.ManaConversionMatrix;
@@ -11,7 +11,7 @@ import forge.game.zone.ZoneType;
 public class StaticAbilityManaConvert {
 
     public static boolean manaConvert(ManaConversionMatrix matrix, Player p, Card card, SpellAbility sa) {
-        final Game game = p.getGame();
+        final IGame game = p.getGame();
         boolean changed = false;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {

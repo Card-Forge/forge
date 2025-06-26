@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
@@ -880,7 +880,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
-        final Game game = ai.getGame();
+        final IGame game = ai.getGame();
 
         final AbilitySub abSub = sa.getSubAbility();
         ApiType subApi = null;
@@ -1318,7 +1318,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return target to bounce, null if no good targets
      */
     private static Card canBouncePermanent(final Player ai, SpellAbility sa, CardCollectionView list) {
-        Game game = ai.getGame();
+        IGame game = ai.getGame();
         // filter out untargetables
         CardCollectionView aiPermanents = CardLists.filterControlledBy(list, ai);
         CardCollection aiPlaneswalkers = CardLists.filter(aiPermanents, CardPredicates.PLANESWALKERS);

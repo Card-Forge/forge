@@ -31,10 +31,10 @@ import forge.util.collect.FCollectionView;
 public class GameView extends TrackableObject {
     private static final long serialVersionUID = 8522884512960961528L;
 
-    private final transient Game game; //TODO: Remove this when possible before network support added
+    private final transient IGame game; //TODO: Remove this when possible before network support added
     private final transient Match match; //TODO: Remove this when possible before network support added
 
-    public GameView(final Game game) {
+    public GameView(final IGame game) {
         super(game.getId(), game.getTracker());
         match = game.getMatch();
         this.game = game;
@@ -55,7 +55,7 @@ public class GameView extends TrackableObject {
         return match;
     }
 
-    public Game getGame() {
+    public IGame getGame() {
         return game;
     }
 
@@ -63,7 +63,7 @@ public class GameView extends TrackableObject {
         return get(TrackableProperty.Players);
     }
 
-    public void updatePlayers(final Game game) {
+    public void updatePlayers(final IGame game) {
         set(TrackableProperty.Players, PlayerView.getCollection(game.getPlayers()));
     }
 
@@ -186,7 +186,7 @@ public class GameView extends TrackableObject {
         return get(TrackableProperty.WinningTeam);
     }
 
-    void updateGameOver(final Game game) {
+    void updateGameOver(final IGame game) {
         set(TrackableProperty.GameOver, game.isGameOver());
         set(TrackableProperty.MatchOver, game.getMatch().isMatchOver());
         if (game.getOutcome() != null && game.getOutcome().getWinningLobbyPlayer() != null) {

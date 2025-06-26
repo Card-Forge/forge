@@ -68,7 +68,7 @@ import java.util.function.Predicate;
 public class PlayerControllerForTests extends PlayerController {
     private PlayerActions playerActions;
 
-    public PlayerControllerForTests(Game game, Player player, LobbyPlayer lobbyPlayer) {
+    public PlayerControllerForTests(IGame game, Player player, LobbyPlayer lobbyPlayer) {
         super(game, player, lobbyPlayer);
     }
 
@@ -367,7 +367,7 @@ public class PlayerControllerForTests extends PlayerController {
         }
     }
 
-    private Player getPlayerBeingAttacked(Game game, Player attacker, PlayerSpecification defenderSpecification) {
+    private Player getPlayerBeingAttacked(IGame game, Player attacker, PlayerSpecification defenderSpecification) {
         if (defenderSpecification != null) {
             return PlayerSpecificationHandler.INSTANCE.find(getGame().getPlayers(), defenderSpecification);
         }

@@ -3,7 +3,7 @@ package forge.ai;
 import java.util.Set;
 
 import forge.LobbyPlayer;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.player.IGameEntitiesFactory;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
@@ -53,7 +53,7 @@ public class LobbyPlayerAi extends LobbyPlayer implements IGameEntitiesFactory {
     }
 
     @Override
-    public Player createIngamePlayer(Game game, final int id) {
+    public Player createIngamePlayer(IGame game, final int id) {
         Player ai = new Player(getName(), game, id);
         ai.setFirstController(createControllerFor(ai));
 

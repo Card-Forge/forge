@@ -24,7 +24,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import forge.card.ColorSet;
-import forge.game.Game;
+import forge.game.IGame;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
@@ -78,7 +78,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             return false;
         }
         final Card cast = spellAbility.getHostCard();
-        final Game game = cast.getGame();
+        final IGame game = cast.getGame();
         final SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(spellAbility);
 
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface IEntityMap {
-    public abstract Game getGame();
+    public abstract IGame getGame();
 
     public abstract GameObject map(GameObject o);
 
