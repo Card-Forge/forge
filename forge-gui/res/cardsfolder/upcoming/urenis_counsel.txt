@@ -1,0 +1,8 @@
+Name:Ureni's Counsel
+ManaCost:6 U
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each Dragon card in your library.
+SVar:X:Count$ValidLibrary Dragon.YouOwn
+A:SP$ Seek | Type$ Dragon | SpellDescription$ Seek a Dragon card.
+K:Harmonize:8 R R
+Oracle:This spell costs {1} less to cast for each Dragon card in your library.\nSeek a Dragon card.\nHarmonize {8}{R}{R}
