@@ -18,7 +18,7 @@ public record ImageKey(String setCode, String name, String collectorNumber, Stri
 
     public List<String> getFilename(ArtStyle art) {
         List<String> result = Lists.newArrayList();
-        String cn = getCollectorNumberByState();
+        String cn = collectorNumber;
         if (type == ImageType.Token) {
             if (ImageKeys.HIDDEN_CARD.equals(name)) {
                 // hidden only exist as png
@@ -66,11 +66,9 @@ public record ImageKey(String setCode, String name, String collectorNumber, Stri
         if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET) return null;
         // differ token code
         String setCode = type == ImageType.Card ? edition.getScryfallCode() : edition.getTokensCode();
-        String cn = getCollectorNumberByState();
         String langCode = edition.getCardsLangCode();
         String faceParam = "";
         switch(state) {
-        case Meld:
         case Modal:
         case Secondary:
         case Transformed:
@@ -82,34 +80,11 @@ public record ImageKey(String setCode, String name, String collectorNumber, Stri
         }
 
         String ext = art.scryfall == "png" ? ".png" : ".jpg";
-        String filepath = setCode + "/" + cn + "_" + name + ext;
+        String filepath = setCode + "/" + collectorNumber + "_" + name + ext;
         // TODO make scryfall art_crop of split cards separate
         String url = ImageKeys.URL_PIC_SCRYFALL_DOWNLOAD + String.format(
-            "%s/%s/%s?format=image&version=%s%s", setCode, cn, langCode, art.scryfall, faceParam
+            "%s/%s/%s?format=image&version=%s%s", setCode, collectorNumber, langCode, art.scryfall, faceParam
         );
         return Pair.of(filepath, url);
-    }
-    protected String getCollectorNumberByState() {
-        String scryCN = collectorNumber;
-        switch(state) {
-        case SpecializeB:
-            scryCN += "b";
-            break;
-        case SpecializeG:
-            scryCN += "g";
-            break;
-        case SpecializeR:
-            scryCN += "r";
-            break;
-        case SpecializeU:
-            scryCN += "u";
-            break;
-        case SpecializeW:
-            scryCN += "w";
-            break;
-        default:
-            break;
-        }
-        return scryCN;
     }
 }
