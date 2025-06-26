@@ -37,6 +37,10 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(final SpellAbility sa) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+            return;
+        }
+        
         final List<Card> tgtCards = getTargetCards(sa);
         if (tgtCards.size() < 2) {
             return;
