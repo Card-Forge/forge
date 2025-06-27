@@ -2122,23 +2122,13 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Amplify")) {
             final String[] ampString = keyword.split(":");
             final String amplifyMagnitude = ampString[1];
-            final String ampTypes = ampString[2];
-            String[] refinedTypes = ampTypes.split(",");
-            final StringBuilder types = new StringBuilder();
-            for (int i = 0; i < refinedTypes.length; i++) {
-                types.append("Card.").append(refinedTypes[i]).append("+YouCtrl");
-                if (i + 1 != refinedTypes.length) {
-                    types.append(",");
-                }
-            }
 
             // Setup ETB replacement effects
             final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
                     + " | ReplacementResult$ Updated | Description$ Amplify " + amplifyMagnitude + " ("
                     + inst.getReminderText() + ")";
 
-            final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
-                    + types.toString() + " | RememberRevealed$ True";
+            final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ Card.YouOwn+sharesCreatureTypeWith+Other+NotDefinedReplacedSimultaneousETB | RememberRevealed$ True";
 
             SpellAbility saReveal = AbilityFactory.getAbility(abString, card);
 
