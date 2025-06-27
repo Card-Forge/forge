@@ -2469,6 +2469,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         public String getNextAvailableName() {
             String name = model.getName();
+            if(name.isEmpty())
+                name = "New Deck";
             int idx = name.lastIndexOf('(');
             if (idx != -1) {
                 name = name.substring(0, idx).trim(); //strip old number
@@ -2476,10 +2478,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
             String baseName = name;
             int number = 2;
-            do {
+            while (currentFolder.contains(name)) {
                 name = baseName + " (" + number + ")";
                 number++;
-            } while (currentFolder.contains(name));
+            }
 
             return name;
         }
