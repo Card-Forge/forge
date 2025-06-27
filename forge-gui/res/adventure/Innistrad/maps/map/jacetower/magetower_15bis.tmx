@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="73">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2jtq76i9o/aO2jtqL6q9e4G4npt+dtYC7doDtHMnneteEN4NxAD/oTSv
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr5GRg6BzFo3gUj+JRPIpH8YjAAGRZIuw=
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7w8TA8GeQ42YGBoYWJNzKQB97FRkZUIAy4/C2dz/QnngmiJ2xQPoghfY2kxBnMD9Tw6/I4TeTGTXtoOPZzLSxl1hAbXtB8XaAETeGxS817N2PZC6htELN+CUnbOhpbzNSugKlv9HyanjZux8tT1FaTg4EBgB/d7C0
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAooA494BtoFo4BYAACV4wDv
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="208" y="224.543">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_7.tmx"/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="206.644" y="57.6553">
+   <properties>
+    <property name="enemy" value="Blue Wiz1"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="41.5904" y="125.514">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

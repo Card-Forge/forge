@@ -1,0 +1,9 @@
+Name:Garruk's Mighty Axe
+ManaCost:no cost
+Types:Artifact Equipment
+S:Mode$ ReduceCost | ValidCard$ Creature.powerGE4+Green,Garruk | EffectZone$ Command | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Garruk and green creature spells you cast with power 4 or greater cost {1} less to cast.
+S:Mode$ Continuous | Affected$ Planeswalker.YouCtrl+Garruk | EffectZone$ Command | AddAbility$ PWWolf | Description$ Garruk planeswalkers you control have "[0]: Create a 2/2 black and green Wolf creature token with 'When this creature dies, put a loyalty counter on each Garruk you control.'"
+SVar:PWWolf:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ bg_2_2_wolf_garruk | TokenOwner$ You | SpellDescription$ Create a 2/2 black and green Wolf creature token with "When this creature dies, put a loyalty counter on each Garruk you control."
+A:AB$ MakeCard | Cost$ G G PayShards<2> | Conjure$ True | ActivationLimit$ 1 | Zone$ Battlefield | ActivationZone$ Command | AtRandom$ True | SubAbility$ Eject | Spellbook$ Garruk's Companion,Garruk's Gorehorn,Garruk's Harbinger,Garruk's Horde,Garruk's Packleader,Garruk's Warsteed,Briarpack Alpha,Mist Leopard,Predatory Wurm,Primal Huntbeast | SpellDescription$ Conjure one of Garruk's beasts onto the battlefield under your control. Activate this ability only once each game. Exile CARDNAME.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:Garruk and green creature spells you cast with power 4 or greater cost {1} less to cast.\nGarruk planeswalkers you control have "[0]: Create a 2/2 black and green Wolf creature token with 'When this creature dies, put a loyalty counter on each Garruk you control.'"\n{M}{M},{G}{G}:Conjure one of Garruk's beasts onto the battlefield under your control. Activate this ability only once each game. Exile Garruk's Mighty Axe.

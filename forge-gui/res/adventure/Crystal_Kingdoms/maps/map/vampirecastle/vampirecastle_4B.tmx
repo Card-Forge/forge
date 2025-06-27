@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="10" name="Collision" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0bEJACAMRcEM4AjuP6eVYCGIjZJwV1n68yIA4F5vv3/wVuW9c9u6cfeufIPKTv30zU3f2vQFAAAAAIAcBsbMAvk=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmTuOAzEIhtNukSoptsgeMNXeJmeIcpA9V+QCLULg4WWYkVL8isfyYD6DGaQ8vk6nR0C/t9j7marwBfa4fsdE7d6vOlXwjn0ibNH3LeeWpVX+7pEb2x05xO2H58eYkxTvSPyrYku5KRO+Wxwz9y6Vxp8KXsnv88+/pDWz85N4YczZ7Li7wPhEOgvS1gKObQ+8L8K5JWzv72K7q128sO/4tbBGeavqFVebuByu4KW+VPCOOSunlleqcyvji+uj9B3x8mJbnfnM1X+OF8YVvJpYe3toGk887uCd9SceXvpdl3qclfkcrVVa3i02rs/h9q/g3VpfwQvPXJ2GPTCfJW+s/JW8Wv8yeaW9s1i9fkVydC+89LdDlDczn7uYrLxRdTNRzXzSxFeKMzfXzao5Cw8vnrOc755EWTz9Vnb+rWKE56z6fJQYc8ySuv2sYu/2ySucd9k9pTafZ2tX3ROpRknfHG09A9uz/7O6Y67J55k8HNaziMbYypTJWi0pTy25i3m7eSy81juaXbs99rJ7gKxcx/bwHfXUfev5em0fRbN+UVp/dN6j+v7RWr0B+I7fGg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1s0KgkAQB/DtJCt06B3qHHmXPBV0L4LoRfrw2Kv1CCFIBD1E0CmXVtyNTaPS2ZX/D4ZVdw8zzCgyBlCf44g6g2Z5AXUGzbv1qDMA+E304bmJxe/3umRvNtTvQ8OZaaCvwiEo37dBIteQMxb7jO1ljLm+3yZ5rSkvYqfUbFLVP9v6q/btwvVa8zjLel/n23VV9Zq41l/hJFdTvVEWW580vb9SZ1TM9sbXQ9Ra9q1ysb+565vniRI2WmWx9J7Xd9JM6hd3i+uFR5dHXQYd6gy+13c093kL5wgAAADsgv8NAAAAALDZA1x4NEE=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl20OwiAMhvm7jJ1g8zoeQs8yvdZ0eBMPo0abGELlY1A+LMn7Z6HAQ1P2dpFCLI1p3+HKfbZaeI+DEFdZlg5DOt7dU6WNMWF+gXfuhTghOvf2OTEE+1DwvvaYELnMiaHvfah4TfW8fuZcftQbFutar7l4Q+p5S6wpnnmZt2ZeeBfWgnjv3VspeE3rtcw7Z/z/cv3WxYt5APDkrfFiZxilmfcm/X2vssTa/LfawAv51PPnypvaF8f2z3oM3Ll+xwrhDfHANv/s6r9j8Pp8z12/kBsVwKvfJXbHa0G8k5YLH17KM8fi1d8eF17f9xXqWvewOXgp/caWUWO/oHtYSl7Tei37Se4XmJd54/Cm6Bdc43Pw5hQlL+blKUX5/y1ppOQNrbmU8umPWhLzMm9LYt7/5X0A8YLXig==
+  </data>
+ </layer>
+ <layer id="9" name="Tilelaag 4" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0kENwCAURMHVABqK1VYggnrFAPktmVHwkt0EAIC/m9UBG90teVp1xV7rfldPRi9L+YyTPw0AAAAAAJzlBbBOBCE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../obj/door_up.tx" x="802.112" y="297.76">
+   <properties>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4C.tmx"/>
+    <property name="teleportObjectId" value="65"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/door_down.tx" x="48.9816" y="304.041">
+   <properties>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="517.558" y="531.191">
+   <properties>
+    <property name="enemy" value="High Vampire"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="74,76,77,78,77,76,74"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="640.989" y="193.444">
+   <properties>
+    <property name="enemy" value="Undead Roamer"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/treasure.tx" x="390.083" y="317.167"/>
+  <object id="71" template="../../obj/booster.tx" x="730.462" y="324.215">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="394.545" y="387.141">
+   <properties>
+    <property name="enemy" value="Unraveling Crawler"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="630.52" y="361.231">
+   <properties>
+    <property name="enemy" value="Unholy Skull"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="80,81"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/waypoint.tx" x="793.388" y="528.726"/>
+  <object id="75" template="../../obj/waypoint.tx" x="799.866" y="368.634"/>
+  <object id="76" template="../../obj/waypoint.tx" x="245.557" y="531.503"/>
+  <object id="77" template="../../obj/waypoint.tx" x="240.005" y="71.5836"/>
+  <object id="78" template="../../obj/waypoint.tx" x="472.278" y="66.9566"/>
+  <object id="79" template="../../obj/gold.tx" x="142.839" y="273.319"/>
+  <object id="80" template="../../obj/waypoint.tx" x="638.848" y="237.228"/>
+  <object id="81" template="../../obj/waypoint.tx" x="636.072" y="463.023"/>
+  <object id="82" template="../../obj/enemy.tx" x="390.843" y="149.316">
+   <properties>
+    <property name="enemy" value="Harpy"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/manashards.tx" x="736.014" y="125.256"/>
+  <object id="84" template="../../obj/manashards.tx" x="731.387" y="472.278"/>
+ </objectgroup>
+</map>

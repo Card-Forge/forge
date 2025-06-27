@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Desert of the Fervent&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyr42RgqBvk+L0AfkyOmenCEEzIrtuiCBoZw+QtgewqMdzm4bIXXS0IWCOZiw1UikHUoNtJqr3ouAJqLj4AUoNuJzn2kgOwmUEPe7GBoWIvNey+IYrApOQnSvyIbCcx9iJjVnbi/ERNe0F2gnAOGwLjCkMbJLth+dwWKGZHhl9BGJudsHhAtrNcDNNeUBlWKgaxn5KyGd1emJ9vimIvq2HlJyV2Ekpj1KgfyLGXmvYQwuSkF2QMAD5y21A=
+  </data>
+ </layer>
+ <layer id="3" name="Decoration" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBicoI2TeIxNLzXMJQcPlL247B5I/9LKfnyA3v4caHtpYT8pgFr2YbPXl05hDQI/SPQrNdyRLozA9ApzZDvpZS+6naTai2w3qW4hxy5K/U1tQMgecuwEALmXp8k=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlH0KwyAMxf3TXMxJD9abjHZutxrrdowpbeCRav1oyxZ4FEH95aWJhpQyfy6nlbon9NDtd8bOIuvl11cd15PacrE0n5V7L4IVi37ZE7497O8K/FqK540eU8E8ZA5enwpujpHjBt6bZmaIM7lbkeNOXrcfcM9gu8q+Zi7/sxaPDnqypK/RM/ZLTpLL81fa18we9do3MuS7IWtb4zXFH+FemYPk4rzXeM3VX/oOd2Mv8vzyDO9hmoVhaf1GhJjoWFaMy7UeoLZHcmJCbkf7mF9HRLgU
+  </data>
+ </layer>
+ <layer id="6" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIx08JyD/DIntTAPzCYHlHAwMK4D4OScDwwsgduOk0EAigRfULmRMLED28zM0uQU82NkgAPLrCwrsJQag2wkC2PxKK/thAJdfaW3vY6C5azhoZ28bVL87mvhA+Xcg4hYE8PmVUoDLDFx24tNDrr2weH5Bh7DE5RZy7QQAeJMo3A==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="285" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/gold.tx" x="193.167" y="39.75"/>
+  <object id="55" template="../../obj/treasure.tx" x="223.101" y="42.1694"/>
+  <object id="61" template="../../obj/enemy.tx" x="209.675" y="119.464">
+   <properties>
+    <property name="enemy" value="Cerodon"/>
+    <property name="speedModifier" type="float" value="4"/>
+    <property name="threatRange" type="int" value="70"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/manashards.tx" x="98.7808" y="104.447"/>
+  <object id="70" template="../../obj/manashards.tx" x="342.344" y="62.6373"/>
+  <object id="81" template="../../obj/manashards.tx" x="250.577" y="202.911"/>
+ </objectgroup>
+</map>

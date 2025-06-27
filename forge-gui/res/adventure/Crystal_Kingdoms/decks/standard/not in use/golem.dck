@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=MIR 2 Tribe: Golems
+Title=Golems
+Difficulty=medium
+Description="Once, a wealthy king commissioned an artificial creature to be crafted from the royal treasury, thinking it a clever ploy to have the jewels guard themselves." -Azeworai, "The Golem's Wish"
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[Main]
+4 Basalt Golem|MIR
+4 Crystal Golem|MIR
+4 Alloy Golem
+20 Wastes
+4 Igneous Golem|MIR
+4 Lead Golem|MIR
+4 Battered Golem
+4 Matopi Golem|VIS
+4 Patagia Golem|MIR
+4 Quicksand|VIS
+4 Sand Golem|MIR

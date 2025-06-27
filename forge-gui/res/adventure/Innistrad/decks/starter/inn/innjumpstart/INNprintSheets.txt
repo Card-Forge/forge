@@ -1,0 +1,189 @@
+[ISD Dearly Departed 1]
+1 Dearly Departed|ISD
+1 Doomed Traveler|ISD
+1 Unruly Mob|ISD
+1 Avacynian Priest|ISD
+1 Mausoleum Guard|ISD
+1 Elder Cathar|ISD
+1 Slayer of the Wicked|ISD
+1 Sharpened Pitchfork|ISD
+1 Blazing Torch|ISD
+1 Bonds of Faith|ISD
+1 Moment of Heroism|ISD
+8 Plains|ISD
+
+[ISD Dearly Departed 2]
+1 Dearly Departed|ISD
+1 Doomed Traveler|ISD
+1 Unruly Mob|ISD
+1 Avacynian Priest|ISD
+1 Mausoleum Guard|ISD
+1 Selfless Cathar|ISD
+1 Fiend Hunter|ISD
+1 Mask of Avacyn|ISD
+1 Blazing Torch|ISD
+1 Bonds of Faith|ISD
+1 Moment of Heroism|ISD
+8 Plains|ISD
+
+[ISD Fraying Sanity 1]
+1 Undead Alchemist|ISD
+1 Deranged Assistant|ISD
+1 Armored Skaab|ISD
+1 Makeshift Mauler|ISD
+1 Cobbled Wings|ISD
+1 Cellar Door|ISD
+1 Selhoff Occultist|ISD
+1 Murder of Crows|ISD
+1 Ghoulcaller's Bell|ISD
+1 Stitched Drake|ISD
+1 Skaab Goliath|ISD
+8 Island|ISD
+
+[ISD Fraying Sanity 2]
+1 Undead Alchemist|ISD
+1 Deranged Assistant|ISD
+1 Delver of Secrets|ISD
+1 Makeshift Mauler|ISD
+1 Cobbled Wings|ISD
+1 Cellar Door|ISD
+1 Curse of the Bloody Tome|ISD
+1 Murder of Crows|ISD
+1 Trepanation Blade|ISD
+1 Stitched Drake|ISD
+1 Skaab Goliath|ISD
+8 Island|ISD
+
+[ISD Undead Horde 1]
+1 Unbreathing Horde|ISD
+1 Diregraf Ghoul|ISD
+1 Ghoulraiser|ISD
+1 Moan of the Unhallowed|ISD
+1 Graveyard Shovel|ISD
+1 Walking Corpse|ISD
+1 Ghoulcaller's Chant|ISD
+1 Cellar Door|ISD
+1 Tribute to Hunger|ISD
+1 Dead Weight|ISD
+1 Manor Skeleton|ISD
+8 Swamp|ISD
+
+[ISD Undead Horde 2]
+1 Unbreathing Horde|ISD
+1 Diregraf Ghoul|ISD
+1 Ghoulraiser|ISD
+1 Moan of the Unhallowed|ISD
+1 Demonmail Hauberk|ISD
+1 Rotting Fensnake|ISD
+1 Ghoulcaller's Chant|ISD
+1 Cellar Door|ISD
+1 Tribute to Hunger|ISD
+1 Gruesome Deformity|ISD
+1 Manor Skeleton|ISD
+8 Swamp|ISD
+
+[ISD Bloody Marauders 1]
+1 Falkenrath Marauders|ISD
+1 Bloodcrazed Neonate|ISD
+1 Rakish Heir|ISD
+1 Inquisitor's Flail|ISD
+1 Night Revelers|ISD
+1 Vampiric Fury|ISD
+1 Crossway Vampire|ISD
+1 Rage Thrower|ISD
+1 Rolling Temblor|ISD
+1 Furor of the Bitten|ISD
+1 Nightbird's Clutches|ISD
+8 Mountain|ISD
+
+[ISD Bloody Marauders 2]
+1 Falkenrath Marauders|ISD
+1 Bloodcrazed Neonate|ISD
+1 Rakish Heir|ISD
+1 Demonmail Hauberk|ISD
+1 Night Revelers|ISD
+1 Vampiric Fury|ISD
+1 Crossway Vampire|ISD
+1 Rage Thrower|ISD
+1 Rolling Temblor|ISD
+1 Curse of the Pierced Heart|ISD
+1 Harvest Pyre|ISD
+8 Mountain|ISD
+
+[ISD Transformations 1]
+1 Villagers of Estwald|ISD
+1 Ulvenwald Mystics|ISD
+1 Mayor of Avabruck|ISD
+1 Gatstaf Shepherd|ISD
+1 Ambush Viper|ISD
+1 Grizzled Outcasts|ISD
+1 Lumberknot|ISD
+1 Moonmist|ISD
+1 Full Moon's Rise|ISD
+1 Somberwald Spider|ISD
+1 Prey Upon|ISD
+8 Forest|ISD
+
+[ISD Transformations 2]
+1 Villagers of Estwald|ISD
+1 Ulvenwald Mystics|ISD
+1 Mayor of Avabruck|ISD
+1 Gatstaf Shepherd|ISD
+1 Darkthicket Wolf|ISD
+1 Grizzled Outcasts|ISD
+1 Boneyard Wurm|ISD
+1 Moonmist|ISD
+1 Full Moon's Rise|ISD
+1 Woodland Sleuth|ISD
+1 Prey Upon|ISD
+8 Forest|ISD
+
+[ISD Black Inserts]
+Skirsdag High Priest|ISD
+Endless Ranks of the Dead|ISD
+Heartless Summoning|ISD
+Bloodline Keeper|ISD
+Bloodgift Demon|ISD
+Curse of Death's Hold|ISD
+Army of the Damned|ISD
+Grimoire of the Dead|ISD
+
+[ISD Blue Inserts]
+Back from the Brink|ISD
+Laboratory Maniac|ISD
+Rooftop Storm|ISD
+Snapcaster Mage|ISD
+Sturmgeist|ISD
+Runechanter's Pike|ISD
+Skaab Ruinator|ISD
+Mirror-Mad Phantasm|ISD
+
+[ISD Green Inserts]
+Kessig Cagebreakers|ISD
+Moldgraf Monstrosity|ISD
+Gutter Grime|ISD
+Elder of Laurels|ISD
+Creeping Renaissance|ISD
+Splinterfright|ISD
+Essence of the Wild|ISD
+Tree of Redemption|ISD
+
+[ISD Red Inserts]
+Blasphemous Act|ISD
+Curse of Stalked Prey|ISD
+Instigator Gang|ISD
+Kruin Outlaw|ISD
+Charmbreaker Devils|ISD
+Devil's Play|ISD
+Past in Flames|ISD
+Balefire Dragon|ISD
+
+[ISD White Inserts]
+Angel of Flight Alabaster|ISD
+Champion of the Parish|ISD
+Divine Reckoning|ISD
+Mentor of the Meek|ISD
+Geist-Honored Monk|ISD
+Witchbane Orb|ISD
+Mikaeus, the Lunarch|ISD
+Angelic Overseer|ISD

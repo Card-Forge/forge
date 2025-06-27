@@ -1,0 +1,27 @@
+[metadata]
+Name=Radagast 2
+Title=Radagast
+Difficulty=medium
+Description=Mono G Muraganda Petroglyphs deck with vanilla creatures and a few tokens
+Icon=Radagast.jpg
+Deck Type=constructed
+[main]
+23 Forest|M11
+4 Muraganda Petroglyphs
+2 Hornet Sting
+2 Hurricane
+1 Needle Storm
+1 Momentous Fall
+4 Elvish Warrior
+4 Leatherback Baloth
+3 Gnarled Mass
+3 Trained Armodon
+3 Call of the Herd
+1 Beacon of Creation
+3 Imperiosaur
+2 Bestial Menace
+1 Beast Attack
+1 Moss Monster
+1 Silverback Ape
+1 Craw Wurm
+[sideboard]

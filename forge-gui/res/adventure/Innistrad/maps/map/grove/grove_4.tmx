@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="77">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Treetop Village&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydlU1uAjEMhSNRqkyuAC29HJsuWHbHj3q5AcQd+nuQjjV54s0jcVAtRUiM7c9+dmZC+J8tUgi/MYS3bnq+433xz6n+rB9ynJw8ygazFWdm/iW2xW668dRyIL/xf8hnlsa4R6cn1GrsL4qN6co95/8/ht9V9uO6SnaJfs3g7oaz726ZduZpZL6kaY0tPWrPe5nN05Bv3U2Z6HUr+3MQv5KZ3nPRGjpxHvhynzDdIeV6s1TmRnrVOk1bnjmzjWt+l4LeFvcpsWavVGfpviHO5rkXDbG7Wqe3B+pXmwv62kmsdydnuY737nZn+D5DI7U+TtmIxY57bO6VmborJSbviLGhJ2tUY28LfbaYZuvGfvIcPa7tBHKdG7umPdVm79Vu+ixJowfyRU2HSl5jg486Vw7rlN+Zx9zHsTIDzL3GVcN+lr4d+j7lw3eZd+1e43cF3ymPqexl1p/tD+lLhME=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydVUFOw0AMtJA4Jb9IIAjxDF6Th0ClFv6UFlL4UY+sFU8zGO9uy0hWN7blGdvbpBeRURY83yxn2EsjcteK3Ccb2jXO/v+a1hLjmWUF/IeU85Hss134YJ63szxYX+EFRuKcrCf4WZv69fngeKALuV8Vbq7rsY/dZ6B31jxTrMQ9ulo5DdcCdyTHjRzWqujo/BDUndzz0X4HWXek0D4i7kv68zNhMAefWW90D7nuUKjfX6ELs9CZfdvZ86Lfp0JdzL+kK4fHDC9rPZr22j3meJfNWqG9Rbzq9/ck2rv3lfbukZtzdGcVudn6fH+noAt+z7tJ/neL8cx8/zWUdn+6jd/nU7twX/p/YV3RPlizxqP9em6uo1y7ZG/N31gujhzo1F53le8XuKFT8/cWQ+3Z8aLetvk9M3wzuUbJJtv5Jsgf6Pul75FXlwPd+FaUOH8APL1qjg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="193.5" y="272" width="48" height="27">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="194.5" y="111.5">
+   <properties>
+    <property name="enemy" value="Gorilla"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="97.0361" y="97.7062">
+   <properties>
+    <property name="enemy" value="Gorilla"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="70,69,71,72,73,72,71,69"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="338.026" y="132.015">
+   <properties>
+    <property name="enemy" value="Gorilla"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="75,74,76"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/treasure.tx" x="195.5" y="96"/>
+  <object id="66" template="../../obj/booster.tx" x="21.4794" y="146.253">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;RIX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RIX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;RIX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/manashards.tx" x="338.212" y="224.407"/>
+  <object id="69" template="../../obj/waypoint.tx" x="92.7784" y="148.309"/>
+  <object id="70" template="../../obj/waypoint.tx" x="94.1495" y="74.2681"/>
+  <object id="71" template="../../obj/waypoint.tx" x="150.366" y="147.624"/>
+  <object id="72" template="../../obj/waypoint.tx" x="130.485" y="214.809"/>
+  <object id="73" template="../../obj/waypoint.tx" x="69.4691" y="205.211"/>
+  <object id="74" template="../../obj/waypoint.tx" x="338.897" y="199.727"/>
+  <object id="75" template="../../obj/waypoint.tx" x="363.578" y="124.315"/>
+  <object id="76" template="../../obj/waypoint.tx" x="288.165" y="151.052"/>
+ </objectgroup>
+</map>

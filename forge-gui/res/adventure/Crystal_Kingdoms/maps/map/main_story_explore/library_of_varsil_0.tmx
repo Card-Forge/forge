@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="20">
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/rivers.tsx"/>
+ <tileset firstgid="27393" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="37505" source="../../tileset/dungeon.tsx"/>
+ <tileset firstgid="41985" source="../../tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="30" height="40">
+  <data encoding="base64" compression="zlib">
+   eJyLZWFgiB3Fo3gUj+JRjBMnWgyMvaKWDAwSQHzecuDsPz1AdjdZDVy4g+yGhfm0Wdgxuh5i1RHCT61xm4dLD6X2ngP6NXkAwhrmV2ScxomK8cmhyxPr12YrwvYSwqTaa4jFrzB7J7ATh4m1F5Zvkiyw+5VW9oLKC0lLhgZ8aYkW9hKDR+2ln720zEejeBSP4lE8ikcxAMAE71k=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlktOwzAQhr2gaQVsOQewQ+otWPJq98AdvOEAOE1bNSycBQgOE9hUPMqGozDFNh3cOH61pUj80q82ztjfTOyMQshMbGR2Cu6BM3AfPAAPwTu5+GVoPJPxfc0uYoLDhx45ZHK858nSlQluV2cqqxoxJ0VxoYJ1+EDjMlEbhXEK9ynkRoFLgUOZGPt+1qGC+bwvuc8Vz1sxXuX1ANXbi+BCXRzy7gbk+8UOlcw7mnvrMAfHyPPzcQ3vCgOnudg3dX6H8r8yk3vMIuvFUvup9vEF8VJxrqxnuBXJNnkVOi0I6RRxa1xtE3JACF01N0Q+3GZNTROPeid8xn3nrrP8dMzn7RJzEpBPOzDHGI3R897dIGRPs9JhIaykx+2jWBe1EbeEuY+aTdLjngyxdxVjY+1acR8SQi4awlNNip+/U6n790k910Ulyv2IV58f/SyVlnp9uWfcHt/5Y9y3X+LqWgbXpbWuQ70jWDO3+KaG27Sw8H21xlYy349M3lzg+xviGO55Y9aHsFVP0nsZ9mUjnGtS6VmXy3esSbif+3IXJRM39Ds1lrtItSq+u+q4MXtp07rtr60nLYu7bP1z/fUJ3KlgJA==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdld1OE0EUx2cv4a4FuqVf6JXxXUyMRk1AgURvfICSIIkI6COgie0WWnqr8YPSWmx8B0m1WHgGNPoC/o97JntsZ3fbLfSCk/yzs7Mz5zfnnJlZe1epqZJS36DjPaVOqq5eok1WqKqhzeE528JfG+02GHHI3vXGavZR0RWtgdhRucQklvanmSYjdtxxRWsgZlQuqS38+TG16RxMnQNXs2ReBzFidkSNpNJQxtBPOtrzahzF/nGx5g7q8x36yqJ6ZStKzUFt0U86pu+l0bn2DoT6JKCY0CKYyxW3djHHq2OSaxmFq+vRrfafqyCT5+a0+r+vYawj8qrPVRBTnhvKd5BdjakNv2+2yGHvvdIrfS/ERL7DDOxQ0/cKxX/H8fbVPSf8XohivXcaxbMtuK90TkrmOYPaNcR+PSB+7VNzo3I+5pWq5b33R3GlHsfD5+2UldotD8/Tdrai1J8V87cFg98u+lKI8zYrDZ1E4FO8daiR7/+2BH8vbLe9yc95cGYF9xRjHnC+t3jMczyXQ9byHrxbiPeuIeYlw1xiLkDFsqv7aGcq/ePCuDfAuwn9GpD7GowClMJ5TUNFtJ0IXIr1Q8/e0neJifsDjCrVFHoIdSnXEbg/wf3ts7dM3EEtjEv2xrCnxsH1s8vKfTuh1LuJ8XPPJnGOJsfP9bOL5vr9+y9rvH5WKHv3sNSi8DnvM8YZgetnMg9R49qE1ri9Cj2Bnl0Ad4N9E28LmrPwD7bcdg5PG7pijc59KhhkCfichg6hL/ycYXYDOoA+nwOXYkhBnyyXv8+MNTGmhffZAeIchlvjuJoc2wEzkszQtUzzesJqOyiXjHJNNdUxNjn+deXVtsbr0e+jcom5z/sla7nv69yX4tomub/B7KzlzTXFH8ZdZf/TIhZ6z4iaJ5ijnzmus16vqeZBXMmk+ta4tjMi9hz30/6lvVW33Don+el3poK4acHU+erNecvgU6+jyeusD8ltMZOsyfN1zIfi219smXZP
+  </data>
+ </layer>
+ <layer id="7" name="Shading" width="30" height="40" opacity="0.55">
+  <data encoding="base64" compression="zlib">
+   eJztw0EJADAMBLCanLsam5s9TsKgj5JAqgB2O53TbicAAAB/HhT3BM0=
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgcYPq8gTHzOpqasqkMDOVTibcDm3p0M4kB24BmbCfBXlLVDwZwg4pxTEp6ISc+6GHWQAD09EpqeicWoMc1enrFln6pUQagxw85ZQA1ADYzqZn+6Ql8lg20C+gPWFcMtAvwg8AFDAyzFwy0K4YfeLSQPDliALH5SGQBZfbAgDuRabgHj7uo5RZ0ILiAoQGZL0Qje4gFwnSwH58dnTQqY0Px2AkDYUSoGQWjYBSMglEwCgYTAADYSDkG
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="13" template="../../obj/entry_down.tx" x="224" y="184" width="32" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_1.tmx"/>
+    <property name="teleportObjectId" value="7"/>
+   </properties>
+  </object>
+  <object id="14" template="../../obj/portal.tx" x="144" y="256">
+   <properties>
+    <property name="activeQuestFlag" value="defeatedLibraryOfVarsilBoss"/>
+    <property name="portalState" value="inactive"/>
+    <property name="sprite" value="sprites/portal3.atlas"/>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_4.tmx"/>
+    <property name="teleportObjectId" value="34"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="144" height="640"/>
+  <object id="2" template="../../obj/collision.tx" x="-32" y="640" width="544" height="32"/>
+  <object id="3" template="../../obj/collision.tx" x="368" y="0" width="144" height="640"/>
+  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="5" template="../../obj/waypoint.tx" name="5" x="336" y="288"/>
+  <object id="7" template="../../obj/entry_up.tx" x="176" y="640" width="128" height="16"/>
+  <object id="8" template="../../obj/waypoint.tx" name="8" x="128" y="288"/>
+  <object id="9" template="../../obj/waypoint.tx" name="9" x="232" y="448"/>
+  <object id="10" template="../../obj/enemy.tx" x="128" y="336">
+   <properties>
+    <property name="enemy" value="Archivist"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="r5-8-9"/>
+   </properties>
+  </object>
+  <object id="11" template="../../obj/enemy.tx" x="336" y="336">
+   <properties>
+    <property name="enemy" value="Archivist"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="r5-8-9"/>
+   </properties>
+  </object>
+  <object id="12" template="../../obj/enemy.tx" x="232" y="232">
+   <properties>
+    <property name="enemy" value="Archivist"/>
+   </properties>
+  </object>
+  <object id="15" template="../../obj/collision.tx" x="112" y="0" width="256" height="160"/>
+  <object id="16" template="../../obj/collision.tx" x="112" y="464" width="96" height="176"/>
+  <object id="17" template="../../obj/collision.tx" x="256" y="160" width="112" height="64"/>
+  <object id="18" template="../../obj/collision.tx" x="112" y="160" width="112" height="64"/>
+  <object id="19" template="../../obj/collision.tx" x="272" y="464" width="96" height="176"/>
+ </objectgroup>
+</map>

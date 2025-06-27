@@ -1,0 +1,112 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+	{
+      "type": "Image",
+      "image": "ui/tavern.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Scroll",
+      "name": "stats",
+      "style": "paper",
+      "x": 300,
+      "y": 18,
+      "width": 160,
+      "height": 200
+    },
+    {
+      "type": "Window",
+      "name": "scrollWindow",
+      "x": 15,
+      "y": 30,
+      "width": 256,
+	  "maxWidth": 200,
+	  "prefWidth": 140,
+      "height": 240
+    },
+    {
+      "type": "Table",
+      "name": "enemies",
+      "x": 15,
+      "y": 7,
+      "width": 256,
+      "height": 222
+    },
+    {
+      "type":  "Scroll",
+      "name":  "blessingInfo",
+      "style": "nobg",
+      "x": 308,
+      "y": 20,
+      "width": 144,
+      "height": 195
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "binding": "Back",
+      "width": 85,
+      "height": 30,
+      "x": 390,
+      "y": 224
+    },
+    {
+      "type": "TextButton",
+      "name": "nextPage",
+      "text": "[%200]>",
+      "width": 30,
+      "height": 30,
+      "x": 241,
+      "y": 0
+    },
+	{
+      "type": "Window",
+      "name": "header",
+      "x": 45,
+      "y": 0,
+      "width": 196,
+      "height": 30
+    },
+	{
+      "type": "TextButton",
+      "name": "previousPage",
+      "text": "[%200]<",
+      "width": 30,
+      "height": 30,
+      "x": 15,
+      "y": 0
+    },
+	{
+      "type": "TextButton",
+      "name": "advance",
+      "text": "Advance",
+      "binding": "Status",
+      "width": 85,
+      "height": 30,
+      "x": 305,
+      "y": 224
+    },
+	{
+      "type": "TextButton",
+      "name": "editDeck",
+      "text": "[+Deck]",
+      "width": 30,
+      "height": 30,
+      "x": 275,
+      "y": 224
+    },
+	{
+      "type": "Table",
+      "name": "metaDraftTable",
+      "x": 15,
+      "y": 7,
+      "width": 256,
+      "height": 222
+    }
+  ]
+}

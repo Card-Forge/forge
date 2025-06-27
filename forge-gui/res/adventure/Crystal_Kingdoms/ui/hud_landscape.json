@@ -1,0 +1,165 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "name": "gamehud",
+      "width": 75,
+      "height": 104,
+      "image": "ui/hud_portrait.png",
+      "x": 405,
+      "y": 0
+    },
+    {
+      "type": "Image",
+      "name": "map",
+      "width": 80,
+      "height": 80,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "type": "Image",
+      "name": "mapborder",
+      "image": "ui/minimap.png",
+      "width": 80,
+      "height": 80,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "type": "Image",
+      "name": "blank",
+      "image": "ui/blank.png",
+      "width": 46,
+      "height": 46,
+      "x": 425,
+      "y": 10
+    },
+    {
+      "type": "Image",
+      "name": "avatar",
+      "width": 46,
+      "height": 46,
+      "x": 425,
+      "y": 10
+    },
+    {
+      "type": "Image",
+      "name": "avatarborder",
+      "image": "ui/avatarhud.png",
+      "width": 46,
+      "height": 46,
+      "x": 425,
+      "y": 10
+    },
+    {
+      "type": "TypingLabel",
+      "name": "keyCollection",
+      "font": "default",
+      "width": 75,
+      "height": 96,
+      "x": 410,
+      "y": 5
+    },
+    {
+      "type": "TypingLabel",
+      "name": "lifePoints",
+      "font": "default",
+      "width": 64,
+      "height": 16,
+      "x": 425,
+      "y": 56
+    },
+    {
+      "type": "TypingLabel",
+      "name": "shards",
+      "font": "default",
+      "width": 64,
+      "height": 16,
+      "x": 425,
+      "y": 70
+    },
+    {
+      "type": "TypingLabel",
+      "name": "money",
+      "font": "default",
+      "width": 64,
+      "height": 16,
+      "x": 425,
+      "y": 84
+    },
+    {
+      "type": "TextButton",
+      "name": "deck",
+      "text": "[%120][+Deck]",
+      "binding": "Deck",
+      "width": 45,
+      "height": 25,
+      "x": 198,
+      "y": 240
+    },
+    {
+      "type": "TextButton",
+      "name": "inventory",
+      "text": "[%120][+Item]",
+      "binding": "Inventory",
+      "width": 45,
+      "height": 25,
+      "x": 243,
+      "y": 240
+    },
+    {
+      "type": "TextButton",
+      "name": "logbook",
+      "text": "[%120][+Logbook]",
+	  "binding": "Status",
+      "width": 45,
+      "height": 25,
+      "x": 288,
+      "y": 240
+    },
+    {
+      "type": "TextButton",
+      "name": "menu",
+      "text": "[%120][+Menu]",
+      "binding": "Menu",
+      "width": 45,
+      "height": 25,
+      "x": 108,
+      "y": 240
+    },
+    {
+      "type": "TextButton",
+      "name": "openmap",
+      "text": "[%80]tr(lblZoom)",
+      "binding": "Map",
+      "width": 80,
+      "height": 20,
+      "x": 0,
+      "y": 80
+    },
+	{
+      "type": "TextButton",
+      "name": "exittoworldmap", 
+      "text": "[%120][+ExitToWorldMap]",
+	  "binding": "ExitToWorldMap",
+      "width": 45,
+      "height": 25,
+      "x": 333,
+      "y": 240
+    },
+    {
+      "type": "TextButton",
+      "name": "bookmark",
+      "text": "[%120][+Bookmark]",
+      "binding": "Bookmark",
+      "width": 45,
+      "height": 25,
+      "x": 153,
+      "y": 240
+    }
+  ]
+}

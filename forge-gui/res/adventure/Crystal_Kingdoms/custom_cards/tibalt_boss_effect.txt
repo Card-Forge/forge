@@ -1,0 +1,21 @@
+Name:Tibalt's Boss Effect
+ManaCost:no cost
+Colors:red,black
+Types:Enchantment
+T:Mode$ LifeGained | TriggerZones$ Command | ValidPlayer$ Opponent | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent gains life, put a flame counter on Tibalt.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ FLAME | CounterNum$ 1
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | ValidPlayer$ You | Execute$ TrigRollDice | TriggerDescription$ Roll a D20, then add the amount of flame counters on Tibalt's Boss Effect to the roll.
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-5:DBConjureSmall,6-10:DBRandomLoot:,11-15:DBDamage,16:DBCast,17-18:DBWheel,19-20:DBConjureBig | SpellDescription$ Roll a D20
+SVar:DBConjureSmall:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Chained Brute,Big Spender,Devilish Valet,Gibbering Fiend,Hobblefiend,Footlight Fiend,Forge Devil,Festival Crasher,Hulking Devil,Mayhem Devil,Spiteful Prankster,Vexing Devil,Wildfire Devils | Zone$ Battlefield | SpellDescription$ Conjure a random Devil onto the battlefield.
+SVar:DBRandomLoot:DB$ Draw | Defined$ Player | NumCards$ 3 | SubAbility$ DBDiscard3 | SpellDescription$ Each player draws three cards, then discards three cards at random.
+SVar:DBDiscard3:DB$ Discard | Defined$ Player | Mode$ Random | NumCards$ 3
+SVar:DBDamage:DB$ ChooseCard | AtRandom$ True | Choices$ Creature | SubAbility$ DBDamageBis | SpellDescription$ Tibalt deals seven damage to a creature chosen at random. Then Tibalt returns a random creature card to the battlefield.
+SVar:DBDamageBis:DB$ DealDamage | NumDmg$ 7 | Defined$ ChosenCard | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature | ChangeNum$ 1 | GainControl$ True | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBCast:DB$ Play | AnySupportedCard$ Names:Hellion Eruption,Insurrection,Warp World,Shahrazad,Possibility Storm,Scrambleverse | RandomCopied$ True | CopyCard$ True | WithoutManaCost$ True | SpellDescription$ Cast a copy of one of the following cards chosen at random—Hellion Eruption, Insurrection, Warp World, Shahrazad, Possibility Storm, Scrambleverse.
+SVar:DBWheel:DB$ Discard | Mode$ Hand | Defined$ Player | SubAbility$ DBEachDraw | SpellDescription$ Each player discards their hand, then draws seven cards.
+SVar:DBEachDraw:DB$ Draw | Defined$ Player | NumCards$ 7
+SVar:DBConjureBig:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Harvester of Souls,Archfiend of Depravity,Bloodgift Demon,Ob Nixilis; Unshackled,Nightmare Shepherd,Archfiend of Despair,Lord of the Void,Sire of Insanity,Reaper from the Abyss,Archfiend of Spite,Abyssal Persecutor | Zone$ Battlefield | SpellDescription$ Conjure a random Demon onto the battlefield.
+SVar:X:Count$CardCounters.FLAME
+Oracle:Whenever an opponent gains life, put a flame counter on Tibalt\nAt the beginning of your upkeep roll a D20, then add the amount of flame counters on Tibalt's Boss Effect to the roll. \n1—5 | Conjure a random Devil onto the battlefield. \n6—10 | Each player draws three cards, then discards three cards at random.\n11—15 | Tibalt deals seven damage to a creature chosen at random.\n16 | Cast a copy of one of the following cards chosen at random—Hellion Eruption, Insurrection, Warp World,Shahrazad,Possibility Storm,Scrambleverse.\n17—18 | Each player discards their hand, then draws seven cards.\n19—20 | Conjure a random Demon onto the battlefield.

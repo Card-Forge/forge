@@ -1,0 +1,128 @@
+aerie_guard.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 464, 59
+  size: 34, 33   
+Idle 
+  xy: 7, 2
+  size: 17, 21
+Idle 
+  xy: 39, 2
+  size: 17, 21
+Idle 
+  xy: 71, 2
+  size: 17, 21
+Idle 
+  xy: 103, 2
+  size: 17, 21
+Idle 
+  xy: 135, 2
+  size: 17, 21
+Idle 
+  xy: 167, 2
+  size: 17, 21
+Idle 
+  xy: 199, 2
+  size: 17, 21
+Idle 
+  xy: 231, 2
+  size: 17, 21
+Idle 
+  xy: 263, 2
+  size: 17, 21
+Idle 
+  xy: 295, 2
+  size: 17, 21
+Idle 
+  xy: 327, 2
+  size: 17, 21
+Idle 
+  xy: 359, 2
+  size: 17, 21
+Idle 
+  xy: 391, 2
+  size: 17, 21
+Idle 
+  xy: 423, 2
+  size: 17, 21
+Idle 
+  xy: 455, 2
+  size: 17, 21
+Idle 
+  xy: 487, 2
+  size: 17, 21
+Walk 
+  xy: 6, 56
+  size: 18, 25
+Walk 
+  xy: 38, 56
+  size: 18, 25
+Walk 
+  xy: 70, 56
+  size: 18, 25
+Walk 
+  xy: 102, 56
+  size: 18, 25
+Walk 
+  xy: 134, 56
+  size: 18, 25
+Attack 
+  xy: 2, 27
+  size: 32, 23
+Attack 
+  xy: 34, 27
+  size: 32, 23
+Attack 
+  xy: 66, 27
+  size: 32, 23
+Attack 
+  xy: 98, 27
+  size: 32, 23
+Attack 
+  xy: 130, 27
+  size: 32, 23
+Attack 
+  xy: 162, 27
+  size: 32, 23
+Death
+  xy: 0, 86
+  size: 32, 23
+Death
+  xy: 32, 86
+  size: 32, 23
+Death
+  xy: 64, 86
+  size: 32, 23
+Death
+  xy: 96, 86
+  size: 32, 23
+Death
+  xy: 128, 86
+  size: 32, 23
+Death
+  xy: 160, 86
+  size: 32, 23
+Death
+  xy: 192, 86
+  size: 32, 23
+Death
+  xy: 224, 86
+  size: 32, 23
+Death
+  xy: 256, 86
+  size: 32, 23
+Death
+  xy: 288, 86
+  size: 32, 23
+Death
+  xy: 320, 86
+  size: 32, 23
+Death
+  xy: 352, 86
+  size: 32, 23
+Death
+  xy: 384, 86
+  size: 32, 23

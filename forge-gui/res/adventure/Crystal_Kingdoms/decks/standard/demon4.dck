@@ -1,0 +1,23 @@
+[metadata]
+Name=Nether Fiend 1
+Title=Nether Fiend
+Icon=NetherFiend.jpg
+Difficulty=easy
+Description=Black Lord of the Pit deck.
+Deck Type=constructed
+[main]
+4 Animate Dead|LEB
+4 Black Knight|4ED
+3 Bog Rats|DRK
+3 Erg Raiders|ARN
+2 Frozen Shade|LEB
+2 Junún Efreet|ARN
+2 Kormus Bell|LEB
+4 Lord of the Pit|LEB
+4 Mishra's Factory|ATQ
+4 Nether Shadow|LEB
+2 Soul Net|LEB
+20 Swamp|4ED
+3 Terror|4ED
+4 The Hive|LEB
+[sideboard]

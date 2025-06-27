@@ -1,0 +1,74 @@
+wraith.png
+size: 250,100
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 219, 24
+  size: 31, 29     
+Idle 
+  xy: 6, 33
+  size: 16, 16   
+Idle 
+  xy: 38, 33
+  size: 16, 16 
+Idle 
+  xy: 70, 33
+  size: 16, 16 
+Idle 
+  xy: 102, 33
+  size: 16, 16 
+Walk 
+  xy: 6, 33
+  size: 16, 16   
+Walk 
+  xy: 38, 33
+  size: 16, 16 
+Walk 
+  xy: 70, 33
+  size: 16, 16 
+Walk 
+  xy: 102, 33
+  size: 16, 16 
+Attack 
+  xy: 7, 6
+  size: 20, 20  
+Attack 
+  xy: 39, 6
+  size: 20, 20 
+Attack 
+  xy: 71, 6
+  size: 20, 20  
+Attack 
+  xy: 103, 6
+  size: 20, 20   
+Attack 
+  xy: 71, 6
+  size: 20, 20  
+Attack 
+  xy: 103, 6
+  size: 20, 20   
+Attack 
+  xy: 135, 6
+  size: 20, 20   
+Death 
+  xy: 5, 80
+  size: 20, 20
+Death 
+  xy: 37, 80
+  size: 20, 20
+Death 
+  xy: 69, 80
+  size: 20, 20
+Death 
+  xy: 101, 80
+  size: 20, 20
+Death 
+  xy: 133, 80
+  size: 20, 20
+Death 
+  xy: 165, 80
+  size: 20, 20
+Death 
+  xy: 197, 80
+  size: 20, 20

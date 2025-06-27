@@ -1,0 +1,35 @@
+sandwurm2.png
+size: 160,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 0, 0
+  size: 32,32
+Idle
+ xy: 0,37
+ size:32,18
+Attack 
+  xy: 32, 5
+  size: 32,18     
+Attack 
+  xy: 64, 5
+  size: 32,18     
+Attack 
+  xy: 96, 5
+  size: 32,18     
+Attack 
+  xy: 128, 5
+  size: 32,18     
+Death 
+  xy: 32, 37
+  size: 32,18     
+Death 
+  xy: 64, 37
+  size: 32,18     
+Death 
+  xy: 96, 37
+  size: 32,18     
+Death 
+  xy: 128, 37
+  size: 32,18     

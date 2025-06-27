@@ -1,0 +1,56 @@
+Name:Waker of the Dead
+Colors:black
+Types:Legendary Title
+R:Event$ GainLife | ActiveZones$ Command | ValidPlayer$ Player.Opponent | ReplaceWith$ LimitedGain | Description$ Opponents cannot gain life beyond their starting life total.
+SVar:LimitedGain:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+SVar:X:ReplaceCount$LifeGained/LimitMax.Y
+SVar:Y:PlayerCountDefinedReplacedPlayer$StartingLife/Minus.Z
+SVar:Z:PlayerCountDefinedReplacedPlayer$LifeTotal
+#---
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ConjureMissing | ActivationZone$ Command
+#---
+SVar:ConjureMissing:    DB$ Branch | BranchConditionSVar$ ChaliceCount     | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1     | FalseSubAbility$ ConjureMissing0    | Description$ A |  StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing1:   DB$ Branch | BranchConditionSVar$ RestlessCount    | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing11    | FalseSubAbility$ ConjureMissing10   | Description$ B | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing10:  DB$ Branch | BranchConditionSVar$ GravesCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing101   | FalseSubAbility$ ConjureMissing100  | Description$ C | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing11:  DB$ Branch | BranchConditionSVar$ GravesCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing111   | FalseSubAbility$ ConjureMissing110  | Description$ D | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing101: DB$ Branch | BranchConditionSVar$ DisturbanceCount | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1011  | FalseSubAbility$ ConjureMissing1010 | Description$ E | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing100: DB$ Branch | BranchConditionSVar$ DisturbanceCount | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1001  | FalseSubAbility$ ConjureMissing1000 | Description$ F | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing110: DB$ Branch | BranchConditionSVar$ DisturbanceCount | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1101  | FalseSubAbility$ ConjureMissing1100 | Description$ G | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing111: DB$ Branch | BranchConditionSVar$ DisturbanceCount | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1111  | FalseSubAbility$ ConjureMissing1110 | Description$ H | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing0:   DB$ Branch | BranchConditionSVar$ RestlessCount    | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing01    | FalseSubAbility$ ConjureMissing00   | Description$ I | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing01:  DB$ Branch | BranchConditionSVar$ GravesCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing011   | FalseSubAbility$ ConjureMissing010  | Description$ J | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing010: DB$ Branch | BranchConditionSVar$ DisturbanceCount | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing0101  | FalseSubAbility$ ConjureMissing0100 | Description$ K | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing011: DB$ Branch | BranchConditionSVar$ DisturbanceCount | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing0111  | FalseSubAbility$ ConjureMissing0110 | Description$ L | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing00:  DB$ Branch | BranchConditionSVar$ GravesCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing001   | FalseSubAbility$ ConjureMissing000  | Description$ M | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing000: DB$ Branch | BranchConditionSVar$ DisturbanceCount | BranchConditionSVarCompare$ EQ0 | FalseSubAbility$ ConjureMissing0001 | FalseSubAbility$ DraftSpell         | Description$ N | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing001: DB$ Branch | BranchConditionSVar$ DisturbanceCount | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing0011  | FalseSubAbility$ ConjureMissing0010 | Description$ O | StackDescription$ Description | SpellDescription$ Description
+#---
+SVar:ConjureMissing0001: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Disturbance | Zone$ Battlefield | SpellDescription$ 0001 | StackDescription$ SpellDescription
+SVar:ConjureMissing0010: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Shallow Graves | Zone$ Battlefield | SpellDescription$ 0010 | StackDescription$ SpellDescription
+SVar:ConjureMissing0011: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Disturbance,Curse of Shallow Graves | Zone$ Battlefield | SpellDescription$ 0011 | StackDescription$ SpellDescription
+SVar:ConjureMissing0100: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of the Restless Dead | Zone$ Battlefield | SpellDescription$ 0100 | StackDescription$ SpellDescription
+SVar:ConjureMissing0101: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Disturbance,Curse of the Restless Dead | Zone$ Battlefield | SpellDescription$ 0101 | StackDescription$ SpellDescription
+SVar:ConjureMissing0110: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Shallow Graves,Curse of the Restless Dead | Zone$ Battlefield | SpellDescription$ 0110 | StackDescription$ SpellDescription
+SVar:ConjureMissing0111: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Shallow Graves,Curse of Disturbance,Curse of the Restless Dead | Zone$ Battlefield | SpellDescription$ 0111 | StackDescription$ SpellDescription
+SVar:ConjureMissing1000: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Chalice of Life | Zone$ Battlefield | SpellDescription$ 1000 | StackDescription$ SpellDescription
+SVar:ConjureMissing1001: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Disturbance,Chalice of Life | Zone$ Battlefield | SpellDescription$ 1001 | StackDescription$ SpellDescription
+SVar:ConjureMissing1010: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Shallow Graves,Chalice of Life | Zone$ Battlefield | SpellDescription$ 1010 | StackDescription$ SpellDescription
+SVar:ConjureMissing1011: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Disturbance,Curse of Shallow Graves,Chalice of Life | Zone$ Battlefield | SpellDescription$ 1011 | StackDescription$ SpellDescription
+SVar:ConjureMissing1100: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of the Restless Dead,Chalice of Life | Zone$ Battlefield | SpellDescription$ 1100 | StackDescription$ SpellDescription
+SVar:ConjureMissing1101: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Disturbance,Curse of the Restless Dead,Chalice of Life | Zone$ Battlefield | SpellDescription$ 1101 | StackDescription$ SpellDescription
+SVar:ConjureMissing1110: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Shallow Graves,Curse of the Restless Dead,Chalice of Life | Zone$ Battlefield | SpellDescription$ 1110 | StackDescription$ SpellDescription
+SVar:ConjureMissing1111: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Curse of Disturbance,Curse of Shallow Graves,Curse of the Restless Dead,Chalice of Life | Zone$ Battlefield | SpellDescription$ 1111 | StackDescription$ SpellDescription
+#---
+SVar:DraftSpell:DB$Draft | Spellbook$ Liliana's Caress,Phyrexian Arena,Oath of Liliana,Liliana of the Dark Realms,The Chain Veil,Liliana; Death Mage,Liliana; Death's Majesty,Liliana; Death Wielder,Liliana; Dreadhorde General,Liliana; Heretical Healer,Liliana of the Dark Realms,Liliana of the Veil,Liliana's Devotee,Liliana's Elite,Liliana's Indignation,Liliana's Influence,Liliana's Mastery,Liliana's Reaver,Liliana's Scorn,Liliana's Scrounger,Liliana's Shade,Liliana's Talent,Liliana; the Last Hope,Liliana; the Necromancer,Liliana; Untouched by Death,Liliana Vess,Liliana; Waker of the Dead
+# Mapping items present with bit mask (partial explanation of above weird naming)
+#1000
+SVar:ChaliceCount:Count$NamedYouCtrl.Chalice of Life
+#0100
+SVar:RestlessCount:Count$NamedYouCtrl.Curse of the Restless Dead
+#0010
+SVar:GravesCount:Count$NamedYouCtrl.Curse of Shallow Graves
+#0001
+SVar:DisturbanceCount:Count$NamedYouCtrl.Curse of Disturbance
+#(1101 means only Curse of Shallow Graves are missing, 0001 means only Curse of Disturbance is present)
+#---
+Oracle: Your opponents cannot gain life beyond their starting life total./nAt the beginning of your upkeep, conjure and cast without paying its mana cost one of the following cards that you do not already control: Chalice of Life, Curse of the Restless Dead, Curse of Shallow Graves, or Curse of Disturbance.\nIf you do not conjure a card in this way, draft a spell from CARDNAME's spellbook into your hand.

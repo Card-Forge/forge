@@ -1,0 +1,45 @@
+[metadata]
+Name=Pebbles Flintstone 3
+Title=Pebbles Flintstone
+Difficulty=hard
+Description=WU Meekstone deck with Meekstone, Marble Titan and creatures with vigilance
+Icon=Pebbles Flintstone.jpg
+Deck Type=constructed
+[main]
+1 Tempest Drake
+1 Armored Griffin
+1 Radiant, Archangel
+4 Sejiri Refuge
+1 Riptide Crab
+4 Coastal Tower
+2 Blinding Light
+1 Shu General
+1 Absorb
+3 Island|M12
+1 Herald of Serra
+1 Skyhunter Prowler
+1 Mox Pearl
+4 Tundra
+1 Shepherd of the Lost
+1 Serra Angel
+1 Courier Hawk
+3 Marble Titan
+1 Diving Griffin
+1 Jhovall Queen
+1 Honor of the Pure
+1 Kismet
+1 Frozen Aether
+1 Kazandu Blademaster
+1 Mox Sapphire
+4 Plains|M12
+2 Guan Yu's 1,000-Li March
+4 Meekstone
+1 Standing Troops
+1 Hussar Patrol
+3 Serra Avenger
+1 Griffin Sentinel
+1 Zhang Fei, Fierce Warrior
+1 Reverence
+2 Imposing Sovereign
+1 Knight of Obligation
+[sideboard]

@@ -1,0 +1,77 @@
+orc_warrior.png
+size: 640,576
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 268, 36
+  size: 16, 16      
+Idle 
+  xy: 4,34
+  size: 32,26 
+Idle 
+  xy: 68,34
+  size: 32,26 
+Idle 
+  xy: 132,34
+  size: 32,26 
+Idle 
+  xy: 196,34
+  size: 32,26 
+Walk
+  xy: 4,96
+  size: 33,28 
+Walk
+  xy: 68,96
+  size: 33,28 
+Walk
+  xy: 132,96
+  size: 33,28 
+Walk
+  xy: 196,96
+  size: 33,28 
+Walk
+  xy: 260,96
+  size: 33,28 
+Walk
+  xy: 324,96
+  size: 33,28 
+Walk
+  xy: 388,96
+  size: 33,28 
+Walk
+  xy: 452,96
+  size: 33,28 
+Attack 
+  xy: 2,224
+  size: 50,29  
+Attack 
+  xy: 66,224
+  size: 50,29 
+Attack 
+  xy: 130,224
+  size: 50,29 
+Attack 
+  xy: 194,224
+  size: 50,29 
+Attack 
+  xy:258,224
+  size: 50,29 
+Death 
+  xy: 2,548
+  size: 45,24 
+Death 
+  xy: 66,548
+  size: 45,24 
+Death 
+  xy: 130,548
+  size: 45,24 
+Death 
+  xy: 194,548
+  size: 45,24 
+Death 
+  xy: 258,548
+  size: 45,24 
+Death 
+  xy: 322,548
+  size: 45,24 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings-nocollide.tsx"/>
+ <object name="portal" type="portal" gid="532" width="16" height="16">
+  <properties>
+   <property name="direction" value="down"/>
+   <property name="portalState" value="inactive"/>
+   <property name="sprite" value="sprites/portal.atlas"/>
+   <property name="teleport" value=""/>
+   <property name="teleportObjectId" value=""/>
+  </properties>
+ </object>
+</template>

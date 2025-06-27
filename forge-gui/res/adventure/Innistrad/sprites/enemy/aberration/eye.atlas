@@ -1,0 +1,44 @@
+eye.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 107, 42
+  size: 12, 12     
+Idle 
+  xy: 8,7
+  size: 17, 17   
+Idle 
+  xy: 40,7
+  size: 17, 17   
+Idle 
+  xy: 72,7
+  size: 17, 17   
+Idle 
+  xy: 104,7
+  size: 17, 17   
+Idle 
+  xy: 136,7
+  size: 17, 17   
+Idle 
+  xy: 168,7
+  size: 17, 17   
+Idle 
+  xy: 200,7
+  size: 17, 17   
+Idle 
+  xy: 232,7
+  size: 17, 17   
+Attack 
+  xy: 8,39
+  size: 17, 17   
+Attack 
+  xy: 40,39
+  size: 17, 17   
+Attack 
+  xy: 72,39
+  size: 17, 17   
+Attack 
+  xy: 104,39
+  size: 17, 17    

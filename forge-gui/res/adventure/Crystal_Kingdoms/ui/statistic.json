@@ -1,0 +1,183 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "name": "lastScreen",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Scroll",
+      "name": "stats",
+      "style": "paper",
+      "x": 300,
+      "y": 18,
+      "width": 160,
+      "height": 200
+    },
+    {
+      "type": "Window",
+      "name": "scrollWindow",
+      "x": 15,
+      "y": 18,
+      "width": 256,
+      "height": 235
+    },
+    {
+      "type": "Table",
+      "name": "enemies",
+      "x": 15,
+      "y": 22,
+      "width": 256,
+      "height": 220
+    },
+    {
+      "type": "Image",
+      "name": "avatar",
+      "x": 384,
+      "y": 28,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "type": "Image",
+      "name": "colorFrame",
+      "image": "ui/colorC.png",
+      "x": 368,
+      "y": 45,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "type": "Label",
+      "name": "totalWins",
+      "x": 410,
+      "y": 102,
+      "width": 80,
+      "height": 24,
+      "fontColor":"black"
+    },
+    {
+      "type": "Label",
+      "name": "wins",
+      "text": "tr(lblWinProper):",
+      "x": 330,
+      "y": 102,
+      "width": 80,
+      "height": 24,
+      "fontColor":"black"
+    },
+    {
+      "type": "Label",
+      "name": "totalLoss",
+      "x": 410,
+      "y": 113,
+      "width": 80,
+      "height": 24,
+      "fontColor":"black"
+    },
+    {
+      "type": "Label",
+      "name": "loss",
+      "text": "tr(lblLossProper):",
+      "x": 330,
+      "y": 113,
+      "width": 80,
+      "height": 24,
+      "fontColor":"black"
+    },
+    {
+      "type": "Label",
+      "name": "lossWinRatio",
+      "x": 410,
+      "y": 125,
+      "width": 80,
+      "height": 24,
+      "fontColor":"black"
+    },
+    {
+      "type": "Label",
+      "name": "winloss",
+      "text": "tr(lblWinProper)/tr(lblLossProper):",
+      "x": 330,
+      "y": 125,
+      "width": 80,
+      "height": 24,
+      "fontColor":"black"
+    },
+    {
+      "type":  "Scroll",
+      "name":  "blessingInfo",
+      "style": "nobg",
+      "x": 308,
+      "y": 143,
+      "width": 144,
+      "height": 72
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "binding": "Back",
+      "width": 80,
+      "height": 30,
+      "x": 395,
+      "y": 224
+    },
+    {
+      "type": "TextButton",
+      "name": "toggleAward",
+      "text": "[%120][+AWARD]",
+      "width": 30,
+      "height": 30,
+      "x": 285,
+      "y": 224
+    },
+    {
+      "type": "TypingLabel",
+      "name": "playerName",
+      "x": 310,
+      "y": 20,
+      "width": 80,
+      "height": 24,
+      "fontColor":"black"
+    },
+    {
+      "type": "Label",
+      "name": "lifePoints",
+      "width": 64,
+      "height": 16,
+      "x": 310,
+      "y": 40
+    },
+    {
+      "type": "Label",
+      "name": "money",
+      "width": 64,
+      "height": 16,
+      "x": 310,
+      "y": 80
+    },
+    {
+      "type": "Label",
+      "name": "shards",
+      "width": 64,
+      "height": 16,
+      "x": 310,
+      "y": 60
+    },
+	{
+      "type": "TextButton",
+      "name": "quests",
+      "text": "Quests",
+      "binding": "Status",
+      "width": 80,
+      "height": 30,
+      "x": 315,
+      "y": 224
+    }
+  ]
+}

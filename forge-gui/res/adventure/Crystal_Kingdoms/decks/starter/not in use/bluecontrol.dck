@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Title=Djinn of the Lamp
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=easy
+Description=Blue control
+Deck Type=constructed
+Name=BlueControl
+[Main]
+2 Air Elemental|S99
+2 Brilliant Plan|PTK
+2 Counterintelligence|PTK
+4 Counterspell|S99
+3 Djinn of the Lamp|POR
+4 False Summoning|PO2
+2 Horned Turtle|POR
+8 Island|S99|1
+3 Island|S99|2
+10 Island|S99|3
+3 Island|S99|4
+2 Lu Su, Wu Advisor|PTK
+3 Lu Xun, Scholar General|PTK
+4 Man-o'-War|POR
+2 Mystic Denial|POR
+2 Preemptive Strike|PTK
+4 Tidings|S99

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="65">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Background 2" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJwTYWFgEBnFo3gUj+JRPIpH8YjAAOuCL9E=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy7y8DAcHcUY8X2QOwAxPfobO89NDa97YdhBxr5iZhwp6a/7XGYdQ/Nj9S0E5d99mSEx1DGyH6mB3ZAspNeYYwepwMZtyMlXQ0GPzsw0DdtUxMDAHvnsGo=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVFsKwjAQXHxAgs0pvIM3MEiv4694Hav1VmrtIYqYIVma1p/WtcHAQGhCZ2dnNlYT2T/GRRGVDlfV3U/N22RE6xXRze0fDvuN35eqxa/rgD5wbYnoYDw/4+TOntqjFvayX3vlcFZeIy/mhWaJTtaEfx9N20P2E2fxwh3chd5vdQI77etHL/GvQnmNsZ+skfnmjntpZB5W+tOn+BtqAKcNevOJcwy8Mq+ZM4QaUvCyB3mUA2mehuQbPJw19loyN0N0coY4Z9L8jsla3evvTJjhMViY7mzdA1K90+g9hRnnNyxVtm2YX/hQJPA71ivV+AYcc8n7
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILhCz6zD7QLRsEoGFwAAAmmAPs=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="193" y="270.25" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="291.25" y="59.5833"/>
+  <object id="53" template="../../obj/gold.tx" x="129.273" y="205.447"/>
+  <object id="55" template="../../obj/treasure.tx" x="42.4167" y="115"/>
+  <object id="56" template="../../obj/enemy.tx" x="208.083" y="82.5">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Waste Not&quot;]
+}</property>
+    <property name="enemy" value="Cloaker"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="231.667" y="233.583">
+   <properties>
+    <property name="enemy" value="Spiked Ravager"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="183.417" y="198.167">
+   <properties>
+    <property name="enemy" value="Spiked Ravager"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/gold.tx" x="268.5" y="241"/>
+  <object id="61" template="../../obj/enemy.tx" x="96" y="104">
+   <properties>
+    <property name="enemy" value="Spiked Ravager"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/manashards.tx" x="173.75" y="46"/>
+  <object id="64" template="../../obj/gold.tx" x="208.5" y="57"/>
+ </objectgroup>
+</map>

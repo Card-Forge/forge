@@ -1,0 +1,80 @@
+dwarflarge.png
+size: 320,117
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 73, 32
+  size: 16, 16   
+Idle 
+  xy: 4, 0
+  size: 28, 21
+Idle 
+  xy: 36, 0
+  size: 28, 21
+Idle 
+  xy: 68, 0
+  size: 28, 21
+Idle 
+  xy: 100, 0
+  size: 28, 21
+Idle 
+  xy: 132, 0
+  size: 28, 21
+Walk
+  xy: 5, 32
+  size: 27, 20
+Walk
+  xy: 37, 32
+  size: 27, 20
+Walk
+  xy: 69, 32
+  size: 27, 20
+Walk
+  xy: 101, 32
+  size: 27, 20
+Walk
+  xy: 133, 32
+  size: 27, 20
+Walk
+  xy: 165, 32
+  size: 27, 20
+Walk
+  xy: 197, 32
+  size: 27, 20
+Walk
+  xy: 229, 32
+  size: 27, 20
+Attack
+  xy: 5, 58
+  size: 27, 27
+Attack
+  xy: 37, 58
+  size: 27, 27
+Attack
+  xy: 69, 58
+  size: 27, 27
+Attack
+  xy: 101, 58
+  size: 27, 27
+Attack
+  xy: 133, 58
+  size: 27, 27
+Attack
+  xy: 165, 58
+  size: 27, 27
+Attack
+  xy: 197, 58
+  size: 27, 27
+Death
+  xy: 5, 90
+  size: 27, 27
+Death
+  xy: 37, 90
+  size: 27, 27
+Death
+  xy: 69, 90
+  size: 27, 27
+Death
+  xy: 101, 90
+  size: 27, 27

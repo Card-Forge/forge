@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="28" nextobjectid="222">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
+ <tileset firstgid="16001" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="20097" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="27" name="Collision" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFAwn4BFAxNYAbJ3Y80gAuf9MizPHZRw9AjN208jep7qA3oKW/B5tfkQE94pteQFsTN0YH1PY3zJ7nnAiMy25agdUcCIwLUNPfyOmalnUIITOJsRubvylxK676cyDy+mAuX+gJAOSYFiY=
+  </data>
+ </layer>
+ <layer id="23" name="Background" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYKANMOEjjGkFaGm3Gyf13EnIfHS7aG03PkBrt2DzNzpND7sJyVFqN0g/OkY3e7D4G5c7qQ0I+ZtW9pEqR65dxIYjsv9xYUrdQoneMi3cmFizkf1BDBvGb9LDjQnZTYp92Ow+pIeJcdmNK87IsRsEBsrflNqNHh6k2D3Q8U0NfyO7g1rqB7L+H2gAAMHYS94=
+  </data>
+ </layer>
+ <layer id="22" name="Walls" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJwz4WNgMKERJgRoZS8xboDJM4oyMDDhwXZi1MXMogi7FwLZIZKoGATeS9IGz6fA7r8i+Pm0tBukfrsEAoP46Goa+RkYmpBwMz/97JYXYGBQQMKKArjtRk9fzFjMo5XdMP8iy+Oy2wqaXmHutBej3G5kvZSm871Au/Yh4f1U8je18xh6fM+jo93o6ZwSfxMqJynJY4QwyLwFPAi8SA8V09LfIPPQ7UPGC5HsnkPl+AYBYu0eSH/TIr4Hi7/dHVDjAdluWzHM+LbGIkYtDCqDiWnzCAtgx/Rob9HKbgBreqTl
+  </data>
+ </layer>
+ <layer id="24" name="ClutterBis" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFpID/ItQ174IwA8NBTggGsfGB+aLUtZsUMJB2kwKa+CEYHyAlzEkBiZIMDEmS1DOPFPAfZK8UYXUjNa3B/D0QdqMDJlEERuZbi2HKI2NmEt1GzXQ+B2j3Iz3KzACBQxIQTCybHIDL31zA/MEtRTwbHRwB+v8oEB8jIxyUJSCYWDY6YNFnYGAFYjZ93Hbg8jel4UkJoDTMiQG4/I0vPPGBdcAwTreHYGQQIki+G0cBZQAA1402TA==
+  </data>
+ </layer>
+ <layer id="25" name="Clutter" width="31" height="22">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6OC/CGE1fKb45VMksWNCYKEogt0iTlg9MoCpZ5LCjgczQPb3P0lUmlywEmimigRpdtMSzMFizzwa+BsXuCBMvFpsbiUGEBvmyICe/iYlDIgBIey45bCF4VwSw5UHrZwRYcOuDpc4NcFlAwaGK0B8FYhd9BkYXIHYDYg79BgYOvVoa7ewIdCPQCwKxC1AO1uBuA2ITwDtPUllu3mdsYsfB9rTAsVDFRySgGB0trIEBGMDR4D+PQrEx2jgb0J1HAswjlmBmE2fMnuQ/YeLDQPt9gwM7g4QDAJqEhBMa2AtRns7hioAAB6cMPs=
+  </data>
+ </layer>
+ <layer id="26" name="AboveSprites" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowACDqQMtAtGwUgBo2kNApRT8POHCxiNb9LBYAmzdj0IZtcnXg+13M4CtJMViNlIsBsEWsRJt4scPaOAPgAApiYKNQ==
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="115" template="../../obj/gold.tx" x="92.4733" y="149.744"/>
+  <object id="117" template="../../obj/enemy.tx" x="410.167" y="232.68" width="16.6667" height="12.6667">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Chef's Boss Effect&quot; ]
+}</property>
+    <property name="enemy" value="The Cheff"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Basement Key&quot;
+  }
+]
+</property>
+    <property name="waypoints" value="219,218"/>
+   </properties>
+  </object>
+  <object id="122" template="../../obj/enemy.tx" x="378.102" y="117.958">
+   <properties>
+    <property name="enemy" value="Apprentice Red Wizard"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="169" template="../../obj/enemy.tx" x="132.706" y="119.913">
+   <properties>
+    <property name="enemy" value="Rogue"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="216,215"/>
+   </properties>
+  </object>
+  <object id="173" template="../../obj/waypoint.tx" x="327.209" y="294.093"/>
+  <object id="178" template="../../obj/enemy.tx" x="218.946" y="201.624">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="192,183"/>
+   </properties>
+  </object>
+  <object id="183" template="../../obj/waypoint.tx" x="140.194" y="202.17"/>
+  <object id="185" template="../../obj/manashards.tx" x="134.816" y="58.3119"/>
+  <object id="186" template="../../obj/manashards.tx" x="178.144" y="59.0319"/>
+  <object id="192" template="../../obj/waypoint.tx" x="327.356" y="203.896"/>
+  <object id="193" template="../../obj/collision.tx" x="30.4688" y="18.6517" width="460.199" height="20.1039"/>
+  <object id="195" template="../../obj/collision.tx" x="479.663" y="27.3272" width="16" height="286.103"/>
+  <object id="196" template="../../obj/collision.tx" x="27.6244" y="28.5159" width="16" height="334.084"/>
+  <object id="203" template="../../obj/gold.tx" x="45.8978" y="214.529"/>
+  <object id="204" template="../../obj/gold.tx" x="45.5645" y="70.6262"/>
+  <object id="205" template="../../obj/enemy.tx" x="68.9918" y="79.1982">
+   <properties>
+    <property name="enemy" value="High Elf"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="206" template="../../obj/enemy.tx" x="68.0862" y="151.197">
+   <properties>
+    <property name="enemy" value="Dwarf Mercenary"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="207" template="../../obj/enemy.tx" x="70.3503" y="214.139">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="208" template="../../obj/enemy.tx" x="64.5263" y="280.39">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="210" template="../../obj/gold.tx" x="93.4443" y="297.459"/>
+  <object id="211" template="../../obj/booster.tx" x="160.72" y="122.902">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="212" template="../../obj/booster.tx" x="191.776" y="89.7264">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="213" template="../../obj/booster.tx" x="194.569" y="155.656">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="214" template="../../obj/collision.tx" x="28.0216" y="296.553" width="464.275" height="16"/>
+  <object id="215" template="../../obj/waypoint.tx" x="131.175" y="163.439"/>
+  <object id="216" template="../../obj/waypoint.tx" x="131.175" y="79.4386"/>
+  <object id="217" template="../../obj/enemy.tx" x="324.842" y="243.105">
+   <properties>
+    <property name="enemy" value="Master Blue Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="192,173"/>
+   </properties>
+  </object>
+  <object id="218" template="../../obj/waypoint.tx" x="432.509" y="228.439"/>
+  <object id="219" template="../../obj/waypoint.tx" x="395.509" y="229.105"/>
+  <object id="220" template="../../obj/collision.tx" x="351.038" y="183.105" width="142.275" height="24.6104"/>
+  <object id="221" template="../../obj/door_down.tx" x="242.334" y="95.0333" width="32.3503" height="30.8105" rotation="0.284412">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../common/maps/map/zedruu/zedruu_f1.tmx"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

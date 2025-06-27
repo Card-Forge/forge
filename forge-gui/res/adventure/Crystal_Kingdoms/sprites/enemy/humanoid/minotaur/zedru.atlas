@@ -1,0 +1,11 @@
+zedru.png
+size: 52,62
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 5,10
+  size: 32,32
+Idle 
+  xy: 2,2
+  size: 48, 56

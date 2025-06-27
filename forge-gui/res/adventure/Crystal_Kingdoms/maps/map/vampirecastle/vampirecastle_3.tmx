@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="27" height="29" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/animatedtiles.tsx"/>
+ <layer id="11" name="Collision" width="27" height="29">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BkAhke3JgYtdSwixh9pAJK3EmJXbQG9LKHEkBP95GbNuhpF3qc4UubMD417CKU16hlFzH5mlZ2YTOT3v4iN0+O2kW5XcTYRy9/4dNHTbsI6RsF9AMAC28XIQ==
+  </data>
+ </layer>
+ <layer id="7" name="Grass" width="27" height="29">
+  <data encoding="base64" compression="zlib">
+   eJxjYCANVHLixoRAGecophRnGZOmvoKRfm7bxjRqH7Uxve0bKMxoCMG0NB/ZHmyYUjskmFDNwmYmtezawkTYLFz20yJuiDWXkHuJ8RO54YesDz2eaJUmqBnno3jwYlLSP6XpC196pXb6pZc9xNpFzfiiV74crvkfAGVPYxc=
+  </data>
+ </layer>
+ <layer id="8" name="AboveGrove" width="27" height="29">
+  <data encoding="base64" compression="zlib">
+   eJztlUkOwjAMRVuJTeAuiEEMZ+oBKnXTG3AjTlQuwJJaxYr5sjOQiBWWvlKSxs/fhNDum6bNEEXv/MjPFNaex3ZRDod0W3mGFM2zLF5KbvxMem4+OTzm1h5iIU/6LGGFesJr2MdSVowXeqfET20hq0b9uX3UVIsxurgGV8bhiHkaC8+eDJkXzzb7oufp7PfzPOaV94YVGkd66o6zDp6j1Y/34fDuvfwe5P2KHAriSE8hDvpCnnYO5Lr0FGJxrbg2iJz4PzFmcmIs5mnz08XL4sj6uHchVi39WfV4v2JJf6nvd7tZV69veBgm66TfATnSItQHVqiuEhZyZD9KWJjTuhtT+m6x7utl1PLi7wR5qefQ8kRsrXe9835TWHLvC2FBA14=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="27" height="29">
+  <data encoding="base64" compression="zlib">
+   eJy1lk1OwzAQhZ2ITdpF2LaHgJakhV4F9QTd8LNAYsOCPXdhiwQcAjhFcgB+VniSvngysZ2Ylic9NZUdf/F4PHZ5pFTJXCyVU5tV/Xs+Vuomqf06Mu1prPuc1S7m2jPt3LSXf2B9MZbkVf0y7ZP6mfPAoPbi2PSBorkxWD4e50DggSPbJSeyxITz1vr5NnHHhd51cWwszns4MLxv7Z/xdkzPGrhk47jmB/m+u49DuoiUeozbrr6feKdth3I4iziHcR0vmJQK7q6iccAhgUXrz5XuyAPjWefxi8fIc5kPiL9LiBvn8P1j81rkHs8fqc3CtPGYDeE8jUyey++VLOI0zyuzHsS57+FgTtSf8lzGjrM4ByxI1p4+lmst5LgQ35uUZ6gF0r742QQWcszGa/pmbK/m3XrUy9rGD2eQa362epNPlFpoLyfD5+RiNTzL2UJ604x37Y89sXy6nCp1pX09/X/WvmPoU0gM+dojp0IUEkPJC1VIDCVPng8kWz3Dfx7DIuu+28fjor1HY7hqJ49hdb8L5PHxaJ7VXSgzd0pZO6HmPhnAkxwYcp2XdE4Our/O2t9NY7vGlPWdhDo/iMXiAs6nfvcu6dp3pvSxiMPPnV+Yz/LL
+  </data>
+ </layer>
+ <layer id="10" name="Tree" width="27" height="29">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzllsENwjAMRX2FkkO7RI+FO4sgsQC0DMCFsg7MACwAhSPsAQOQ0Fr6rRJIoOEAX7IqRYlfnMZ2phHRPiTK5Hcm7ZVyQZTI+X2wQfh8TSr9HsKSoxjD15iH1LxCrjmCTaKStxTPeTax6NZlleF+fSmpzq6AuHyJz4Rj9BnXL8n2rn6ieadu31DikL+uPpv+UsipUwsslftFIz/PMdElrjNd7zj+a4yl6esqOTdgBQFRL7DnsG/cqzofrgG8jxxq3EKU4yvJWTuwuH7qxtv4FywV0zTSs96txyZhT/ApjMk3C2PaW7JGhnmmcRb3Y+6nvoU838qF+c77EMf2LaV/0rf5baRTmz2Zc1zlAfbDTZdoq7Fd9zMOvmWPUINzzXt27FDndRxVRw7wZZbu/GxZ+G64A6H8WXE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="173.787" y="464.227" width="74.1276" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="240.197" y="299.81">
+   <properties>
+    <property name="enemy" value="Gargoyle 2"/>
+    <property name="speedModifier" type="float" value="5"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/gold.tx" x="159.451" y="163.641"/>
+  <object id="65" template="../../obj/enemy.tx" x="208.042" y="98.2767" width="15.6274" height="17.4905">
+   <properties>
+    <property name="enemy" value="Bat"/>
+    <property name="waypoints" value="72,73,74,75"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="144.997" y="298.6" width="15.4009" height="15.4009">
+   <properties>
+    <property name="enemy" value="Gargoyle 2"/>
+    <property name="speedModifier" type="float" value="5"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/entry_up.tx" x="145.517" y="208.488" width="29.0414" height="31.2771">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_grave_3.tmx"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="184.641" y="206.252">
+   <properties>
+    <property name="enemy" value="Vampire"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="192.466" y="320.645">
+   <properties>
+    <property name="displayNameOverride" value="Minor Vampire"/>
+    <property name="enemy" value="Vampire"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="waypoints" value="71,70"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/waypoint.tx" x="194.701" y="255.065"/>
+  <object id="71" template="../../obj/waypoint.tx" x="193.211" y="398.893"/>
+  <object id="72" template="../../obj/waypoint.tx" x="88.1341" y="71.7392"/>
+  <object id="73" template="../../obj/waypoint.tx" x="367.594" y="120.179"/>
+  <object id="74" template="../../obj/waypoint.tx" x="306.113" y="377.654"/>
+  <object id="75" template="../../obj/waypoint.tx" x="5.78668" y="332.196"/>
+  <object id="76" template="../../obj/collision.tx" x="1.188" y="112.591" width="30.4371" height="351.996"/>
+  <object id="77" template="../../obj/collision.tx" x="0.629236" y="0.569942" width="432.09" height="110.644"/>
+  <object id="78" template="../../obj/collision.tx" x="273.195" y="112.913" width="158.593" height="350.979"/>
+  <object id="79" template="../../obj/collision.tx" x="0.803807" y="464.896" width="433.977" height="15.1539"/>
+  <object id="80" template="../../obj/treasure.tx" x="129.494" y="167.501">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Black&quot; ],
+		&quot;subTypes&quot;: [ &quot;Vampire&quot; ],
+		&quot;count&quot;: 5
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/manashards.tx" x="249.103" y="164.892"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <object name="Dummy" type="dummy" gid="4120" width="16" height="16">
+  <properties>
+   <property name="blocking" type="bool" value="true"/>
+   <property name="sprite" value=""/>
+  </properties>
+ </object>
+</template>

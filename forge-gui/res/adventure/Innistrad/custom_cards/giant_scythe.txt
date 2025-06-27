@@ -1,0 +1,7 @@
+Name:Giant Scythe
+ManaCost:no cost
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | EffectZone$ Command | AddToughness$ 2 | AddType$ Scarecrow | Description$ Artifact creatures you control get +0/+2 and are Scarecrows in addition to their other types.
+A:AB$ ChangeZone | Cost$ 3 PayShards<4> Sac<3/Scarecrow/Scarecrows> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+Artifact | TgtPrompt$ Select target artifact creature cards from your graveyard | ChangeNum$ 1 | Tapped$ True | ActivationZone$ Command | SorcerySpeed$ True | SubAbility$ ExileSelf | SpellDescription$ Return target artifact creature from your graveyard to the battlefield tapped. Activate only as a sorcery. Exile Giant Scythe.
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:Artifact creatures your control get +0/+2 and are Scarecrows in addition to their other types. \n{3}, {M}{M}{M}{M}, Sacrifice three Scarecrows: Return target artifact creature from your graveyard to the battlefield tapped. Activate only as a sorcery. Exile Giant Scythe.

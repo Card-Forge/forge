@@ -1,0 +1,86 @@
+witchlarge.png
+size: 320,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 72,38
+  size: 16, 16  
+Idle 
+  xy: 4, 7
+  size: 25, 25    
+Idle 
+  xy: 36, 7
+  size: 25, 25      
+Idle 
+  xy: 68, 7
+  size: 25, 25   
+Idle 
+  xy: 100, 7
+  size: 25, 25   
+Walk 
+  xy: 0, 160
+  size: 32, 32
+Walk 
+  xy: 32, 160
+  size: 32, 32
+Walk 
+  xy: 64, 160
+  size: 32, 32
+Walk 
+  xy: 96, 160
+  size: 32, 32
+Attack 
+  xy: 0, 68
+  size: 32, 28
+Attack 
+  xy: 32, 68
+  size: 32, 28
+Attack 
+  xy: 64, 68
+  size: 32, 28
+Attack 
+  xy: 96, 68
+  size: 32, 28
+Attack 
+  xy: 128, 68
+  size: 32, 28
+Attack 
+  xy: 160, 68
+  size: 32, 28
+Attack 
+  xy: 192, 68
+  size: 32, 28
+Attack 
+  xy: 224, 68
+  size: 32, 28
+Death
+  xy: 4, 132
+  size: 25, 28
+Death
+  xy: 36, 132
+  size: 25, 28
+Death
+  xy: 68, 132
+  size: 25, 28
+Death
+  xy: 100, 132
+  size: 25, 28
+Death
+  xy: 132, 132
+  size: 25, 28
+Death
+  xy: 164, 132
+  size: 25, 28
+Death
+  xy: 196, 132
+  size: 25, 28
+Death
+  xy: 228, 132
+  size: 25, 28
+Death
+  xy: 260, 132
+  size: 25, 28
+Death
+  xy: 292, 132
+  size: 25, 28

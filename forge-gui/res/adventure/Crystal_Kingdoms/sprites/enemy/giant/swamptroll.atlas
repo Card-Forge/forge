@@ -1,0 +1,107 @@
+swamptroll.png
+size: 512, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Avatar
+  xy: 88, 156
+  size: 20, 20
+Idle
+  xy: 10, 29
+  size: 40, 35
+Idle
+  xy: 74, 29
+  size: 40, 35
+Idle
+  xy: 138, 29
+  size: 40, 35
+Idle
+  xy: 202, 29
+  size: 40, 35
+Idle
+  xy: 10, 285
+  size: 40, 35
+Idle
+  xy: 74, 285
+  size: 40, 35
+Idle
+  xy: 138, 285
+  size: 40, 35
+Idle
+  xy: 202, 285
+  size: 40, 35
+Idle
+  xy: 10, 477
+  size: 40, 35
+Idle
+  xy: 74, 477
+  size: 40, 35
+Idle
+  xy: 138, 477
+  size: 40, 35
+Idle
+  xy: 202, 477
+  size: 40, 35
+Idle
+  xy: 266, 477
+  size: 40, 35
+Idle
+  xy: 330, 477
+  size: 40, 35
+Idle
+  xy: 394, 477
+  size: 40, 35
+Idle
+  xy: 458, 477
+  size: 40, 35
+Walk
+  xy: 5, 88
+  size: 40, 40
+Walk
+  xy: 69, 88
+  size: 40, 40
+Walk
+  xy: 133, 88
+  size: 40, 40
+Walk
+  xy: 197, 88
+  size: 40, 40
+Walk
+  xy: 261, 88
+  size: 40, 40
+Walk
+  xy: 325, 88
+  size: 40, 40
+Walk
+  xy: 389, 88
+  size: 40, 40
+Walk
+  xy: 453, 88
+  size: 40, 40
+Attack
+  xy: 0, 157
+  size: 55, 35
+Attack
+  xy: 64, 157
+  size: 55, 35
+Attack
+  xy: 128, 157
+  size: 55, 35
+Attack
+  xy: 192, 157
+  size: 55, 35
+Attack
+  xy: 256, 157
+  size: 55, 35
+Death
+  xy: 0, 350
+  size: 55, 35
+Death
+  xy: 64, 350
+  size: 55, 35
+Death
+  xy: 128, 350
+  size: 55, 35
+Death
+  xy: 192, 350
+  size: 55, 35

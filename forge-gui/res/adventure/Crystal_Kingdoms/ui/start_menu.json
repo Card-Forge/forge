@@ -1,0 +1,114 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/title_bg.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "TextButton",
+      "name": "Start",
+      "text": "tr(lblNewGame)",
+      "selectable": true,
+      "width": 80,
+      "height": 30,
+      "x": 160,
+      "y": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "Start+",
+      "text": "tr(lblNewGame) +",
+      "selectable": true,
+      "width": 80,
+      "height": 30,
+      "x": 240,
+      "y": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "Load",
+      "text": "tr(lblLoad)",
+      "selectable": true,
+      "width": 160,
+      "height": 30,
+      "x": 160,
+      "y": 60
+    },
+    {
+      "type": "TextButton",
+      "name": "Save",
+      "text": "tr(lblSave)",
+      "selectable": true,
+      "width": 160,
+      "height": 30,
+      "x": 160,
+      "y": 100
+    },
+    {
+      "type": "TextButton",
+      "name": "Resume",
+      "text": "tr(lblResume)",
+      "selectable": true,
+      "width": 160,
+      "binding": "Back",
+      "height": 30,
+      "x": 160,
+      "y": 140
+    },
+    {
+      "type": "TextButton",
+      "name": "Continue",
+      "text": "tr(lblContinue)",
+      "selectable": true,
+      "width": 160,
+      "height": 30,
+      "x": 160,
+      "y": 140
+    },
+    {
+      "type": "TextButton",
+      "name": "Settings",
+      "text": "tr(lblSettings)",
+      "selectable": true,
+      "width": 80,
+      "height": 30,
+      "x": 160,
+      "y": 180
+    },
+    {
+      "type": "TextButton",
+      "name": "Backup",
+      "text": "tr(lblData)",
+      "selectable": true,
+      "width": 80,
+      "height": 30,
+      "x": 240,
+      "y": 180
+    },
+    {
+      "type": "TextButton",
+      "name": "Exit",
+      "text": "tr(lblExit)",
+      "selectable": true,
+      "width": 75,
+      "height": 30,
+      "x": 160,
+      "y": 220
+    },
+    {
+      "type": "TextButton",
+      "name": "Switch",
+      "text": "tr(lblClassic)",
+      "selectable": true,
+      "width": 75,
+      "height": 30,
+      "x": 245,
+      "y": 220
+    }
+  ]
+}

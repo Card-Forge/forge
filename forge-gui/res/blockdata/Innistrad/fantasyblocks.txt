@@ -1,0 +1,32 @@
+# Name, Draft/Sealed/Lands, All sets and metas
+(3) Arabian Ice Age, 3/6/ICE, ICE ARN LEG      
+(3) Unlimited Power, 3/6/2ED, 2ED ARN LEG      
+(3) Dark Empires, 3/6/3ED, DRK FEM HML      
+(3) Urza's Tempest Mirage, 3/6/5ED, MIR TMP USG      
+(3) Twilight of an Era, 3/6/7ED, INV ODY ONS      
+(3) New Dawn, 3/6/9ED, MRD CHK RAV      
+(4) Arabian Africa, 3/6/MIR, ARN MIR VIS WTH     
+(5-6) Chronicles 01 - Origins, 3/6/2ED, 2ED ARN ATQ LEG DRK FEM   
+(5-6) Chronicles 02 - Icy Mirage, 3/6/5ED, ICE HML ALL MIR VIS WTH   
+(5-6) Chronicles 03 - Urza's Tempest, 3/6/6ED, TMP USG STH ULG EXO UDS   
+(5-6) Chronicles 04 - Mercadian Invasion, 3/6/7ED, MMQ INV NMS PLS PCY APC   
+(5-6) Chronicles 05 - Onslaught Odyssey, 3/6/8ED, ODY ONS TOR LGN JUD SCG   
+(5-6) Chronicles 06 - Champions of Mirrodin, 3/6/9ED, MRD CHK DST BOK 5DN SOK   
+(5-6) Chronicles 07 - Ravnica Spiral, 3/6/9ED, RAV TSP GPT PLC DIS FUT   
+(5-6) Chronicles 08 - Cold Lorwynmoor (5 only), 3/6/10E, LRW SHM MOR EVE CSP    
+(5-6) Chronicles 09 - Shards of Zendikar, 3/6/M11, ALA ZEN CFX WWK ARB ROE   
+(5-6) Chronicles 10 - Scars of Innistrad, 3/6/M11, SOM ISD MBS DKA NPH AVR   
+(5-6) Oldschool 93-94 Magic (6-pack sealed), 3/6/LEB, LEB ARN ATQ LEG DRK
+(6) Africa-Asia, 3/6/MIR, MIR CHK VIS BOK WTH SOK   
+(6-7)Cores 1 (2,3,4,5,6,7), 3/6/4ED, 2ED 3ED 4ED 5ED 6ED 7ED   
+(6-7)Cores 2 (8,9,10,M10,M11,M12,M13), 3/7/10E, 8ED 9ED 10E M10 M11 M12 M13  
+(7) Oldschool 93-94 Magic (7-pack sealed, with FEM), 3/7/LEB, LEA LEB ARN ATQ LEG DRK FEM
+(8) Oldschool 93-94 Magic (8-pack sealed, with FEM), 3/8/LEB, LEA LEB 2ED ARN ATQ LEG DRK FEM
+(4) Ice Age Extended, 3/6/ICE, ICE ALL CSP HML     
+(6) Sample 6-pack, 3/6/2ED, 2ED ICE HML LEG DRK FEM   
+(7) Sample 7-pack, 3/7/4ED, 4ED ALL ICE HML LEG DRK FEM  
+(8) Sample 8-pack, 3/8/4ED, 4ED ALL ICE HML LEG DRK FEM CHR 
+(9) Sample 9-pack, 3/9/2ED, 2ED ALL ICE HML LEG DRK FEM ATQ ARN
+(9) MtG Encyclopedia, 3/9/2ED, 2ED ATQ ARN DRK LEG FEM ICE HML ALL
+(3) Metaset Sample, 3/6/2ED, Meta-Cube(ArabianExtended)ARAB Meta-JoinedSet(ISD DKA AVR M13)M13-ISD Meta-Full()
+(3) Metaset Sample 2, 3/6/2ED, Meta-Choose(CUBE(ArabianExtended)Arabian Extended;FULL()*;JoinedSet(ICE ALL HML CSP)Ice Age Block Extended;Booster(2ED)Unlimited booster;Pack(4ED)4th Edition Tournament)CHOOSE Meta-Random(Full()*;JoinedSet(CHK BOK SOK)KAMI;Booster(8ED)8ED)RANDOM

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
+ <layer id="8" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILhDZz5UPFA2Ekve9HtHgWjAB0AAPU3A80=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBqkeBcHA8NuIN4DxHGc2DG17YSZGwnEUTjspLbdyGZ+B+IfBOylht2EzKeF3ZTYSYndg9XenRIQnMGDKu7Mh8D0tHe7BAIPF3sP6RGHh5K9+Oymtb247Ka1nbjsprV9uOymp720wABiEhwG
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91d0NgjAQB/ALjxxMILKGuopOoe/qHOocJqg4BaDreDw0NKTl7lr1kn94oPTXr9AqA6iYFIJo+5C03+QA98yfdc73JXULy3zQ8wr+uglsjWvMqTLj4WyJy5kNArSomzfnjs16NK++tvRuZ42phKGtz5a4c2ZtuZo5+pa6pxTgTLmk02fKVU0S7i5o/5aUlWMffznfjrwX5Y3DHv/D7at09NmvoS9tEuc+I89VHeDa9hF1Z2qPblP7vzJ2rKm9F6Q2Z2pd2z6gP5wZ4rq++cb9+wHU1M/w
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wIKJgeEyHmzJRBs7r2AxN1IQwb5EZbtx2YkNUMtuUuyklt3k2EkNu82YUOOPXsCMBPciq4WlbxMapG989sLY5NpLrn9paS+63As9BoaXeqhi5Np7DahvBiNx9mroMzBo6iP404D6rlMQv/jsBoEjQD8eBeJjSH6l1E50u7HlKRagH1mBmE2funai2w0D2OKe2nYi2z2dEYLNkNgwTAs7aQUAh0Yscw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6OAK00C7YBQMJmBCo/RwmQmBkYEZhfZRqp+WYIkeA8NSIF6mR197nwDtewrEz6ho7zUC4XzOgIFBRZ+BQRWI1fQx5a/TMJ5a9FBpegFlCQSmFZjBSDuzCYHpjKg0uvhQAQAGkxHP
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="87" template="../../obj/door_down.tx" x="308.384" y="159.596" width="39.283" height="32.2627">
+   <properties>
+    <property name="teleport" value="../common/maps/map/aerie/aerie_4.tmx"/>
+    <property name="teleportObjectId" value="87"/>
+   </properties>
+  </object>
+  <object id="88" template="../../obj/door_right.tx" x="209" y="160" width="46.5" height="41.6667">
+   <properties>
+    <property name="direction" value="right"/>
+    <property name="teleport" value="../common/maps/map/aerie/aerie_2.tmx"/>
+    <property name="teleportObjectId" value="91"/>
+   </properties>
+  </object>
+  <object id="89" template="../../obj/enemy.tx" x="186.348" y="216.593">
+   <properties>
+    <property name="enemy" value="Aerie Guard"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="96,97,98,99,98,97,96,95,100,94,101,102,101,94,100,95"/>
+   </properties>
+  </object>
+  <object id="90" template="../../obj/enemy.tx" x="224.667" y="41">
+   <properties>
+    <property name="enemy" value="Falcon"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="92" template="../../obj/enemy.tx" x="96" y="106.333">
+   <properties>
+    <property name="enemy" value="Falcon"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/enemy.tx" x="144" y="218">
+   <properties>
+    <property name="enemy" value="Falcon"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="94" template="../../obj/waypoint.tx" x="178.667" y="91"/>
+  <object id="95" template="../../obj/waypoint.tx" x="166.333" y="219"/>
+  <object id="96" template="../../obj/waypoint.tx" x="203.667" y="219.667"/>
+  <object id="97" template="../../obj/waypoint.tx" x="204" y="247"/>
+  <object id="98" template="../../obj/waypoint.tx" x="258" y="246.667"/>
+  <object id="99" template="../../obj/waypoint.tx" x="309" y="191"/>
+  <object id="100" template="../../obj/waypoint.tx" x="145" y="140.333"/>
+  <object id="101" template="../../obj/waypoint.tx" x="275" y="87"/>
+  <object id="102" template="../../obj/waypoint.tx" x="274.667" y="147"/>
+  <object id="103" template="../../obj/gold.tx" x="276.333" y="158.333"/>
+  <object id="104" template="../../obj/treasure.tx" x="86.3333" y="132.333">
+   <properties>
+    <property name="reward">[
+  {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;probability&quot;: 1,
+      &quot;count&quot;: 1,
+      &quot;addMaxCount&quot;: 5,
+      &quot;colors&quot;: [
+        &quot;White&quot;,
+        &quot;Blue&quot;,
+        &quot;Green&quot;
+      ],
+      &quot;rarity&quot;: [
+        &quot;Common&quot;,
+        &quot;Rare&quot;,
+        &quot;Uncommon&quot;
+      ],
+      &quot;subTypes&quot;: [
+        &quot;Bird&quot;
+      ],
+      &quot;cardTypes&quot;: [
+        &quot;Creature&quot;
+      ]
+    }
+]</property>
+   </properties>
+  </object>
+  <object id="105" template="../../obj/manashards.tx" x="187.667" y="43"/>
+ </objectgroup>
+</map>

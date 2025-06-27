@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJx7zcLA8JoOOIwTFdPLDnrYO1D+HY72irLT116QfciYXH9TYic2TKyfKQlnUu2ndroixl5apGdi/Exte7HZQWt70c2nVziTkr7pVV6h2z8Q9lLDv8TqI+RfAEzdgbg=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbxcHAsJpEvAaIV5Eo7saJij2AOAyKRdmJx+iAkHpc9qLrJcYsXPi9ACrGZrcHEf4kxV/Y7MdlL6lhTEpc4AtnWtgHA0zmCExLe9HtwmUvtf0KswOZLW2IGdbUClNscQqzD1scUzv94MPE5F9q24nPXmyA2PAlxi2U2EuuHDZ7s3nI9y829fjKIUrDmVg/vuDEby85dRIyxlYP4PPvMyB+joRh8ujiIIzudnIwzF4A3fFjOA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzLFGFgWGDEwMBkjh2D5NAxLrWEcKYIAlNqFqX2D4S99LQTFnf0tnMUj+LhhgcyHw1EOTmKaRuXyPUQet1ASR2JTS8u+wDet4OO
+  </data>
+ </layer>
+ <layer id="6" name="Walls" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1VUFOxDAMjDg1X+AEf+iKF7Ss+kQQcCws/IqW7TPWVjuqd2q3RYKRrCTbxDOeONo6p1RTnIqUPiW+iuW3/wrl7GVUfOeRX6PLo45ToAdaoZfXW7xHiZcypVb2vkuc8xg6H2R8lKgmHmjBOUD19rSOuKHP1urtVV6bV+fdtL49pAXwm5fPensn++6DvXafx6FoJ48+inGuI9A4NfAe6xHu13oXoTH6qil3xPuT57uLcPMwz60ngPaEopryaQ24j71ee7B9xqP1qTIeQq/V3GS/n5gHuYcd787jtffXFnMeePIkPj2XS13I3WX/PR5Jr+1vrPt8zVkTN5/33ia+/abXuA7uae4X1r4G6yf66FX8eyuXdTDvHvB9gHMIfNuq2Z6J3nIE1MI9FvWUx43exZzfifd2wQ3Os5Mn4lyLLf+Y6y//HyPuNf/W4gJXn8Zr
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="180.619" y="273.324" width="86.3778" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="148.559" y="42.3155">
+   <properties>
+    <property name="reward">[
+  {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;probability&quot;: 1,
+      &quot;count&quot;: 1,
+      &quot;addMaxCount&quot;: 5,
+      &quot;colors&quot;: [
+        &quot;Black&quot;
+      ],
+      &quot;rarity&quot;: [
+        &quot;Common&quot;,
+        &quot;Rare&quot;,
+        &quot;Uncommon&quot;
+      ],
+      &quot;subTypes&quot;: [
+        &quot;Spider&quot;
+      ],
+      &quot;cardTypes&quot;: [
+        &quot;Creature&quot;
+      ]
+    }
+]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="144.327" y="139.568"/>
+  <object id="50" template="../../obj/enemy.tx" x="109.994" y="43.33">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="228.619" y="199.505">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="62,61,60,59,58,65,64,63"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="199.504" y="63.9914">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="395.893" y="125.396">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="60,59,58,65,64,63,62,61"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/booster.tx" x="200.563" y="45.4642">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;DST&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="88.0768" y="110.839">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="65,64,63,60,59,58"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/waypoint.tx" x="221.473" y="109.515"/>
+  <object id="59" template="../../obj/waypoint.tx" x="311.197" y="52.0811"/>
+  <object id="60" template="../../obj/waypoint.tx" x="400" y="64"/>
+  <object id="61" template="../../obj/waypoint.tx" x="400.657" y="215.12"/>
+  <object id="62" template="../../obj/waypoint.tx" x="297.169" y="176.478"/>
+  <object id="63" template="../../obj/waypoint.tx" x="155.039" y="224.384"/>
+  <object id="64" template="../../obj/waypoint.tx" x="57.6392" y="213.797"/>
+  <object id="65" template="../../obj/waypoint.tx" x="68.7555" y="109.78"/>
+  <object id="66" template="../../obj/manashards.tx" x="25.0843" y="99.9871"/>
+  <object id="67" template="../../obj/manashards.tx" x="355.398" y="105.281"/>
+ </objectgroup>
+</map>

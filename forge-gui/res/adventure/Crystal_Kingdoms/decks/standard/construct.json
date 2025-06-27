@@ -1,0 +1,11 @@
+{                                    
+"name":"Construct",
+  "template":
+  {
+   "count":80,
+   "colors":[],
+   "tribe":"Construct",    
+   "tribeCards":0.8,
+   "rares":0.1
+  }
+}

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="31" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="72">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="9" name="Background" width="40" height="31">
+  <data encoding="base64" compression="zlib">
+   eJzt0MEJACAMBMG0bnWWkHZE0J/+Yi7CBuYr63kzcwAAUEZf1B23rl/65qmbTo37ot57taF6q4i2zH9U3Q0AAOQYfcV9Qw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="31">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJACAMAMHUAedwruy/hKVN+iDewfcfAQAAAP/Ya/qgV3kD3nIApBwBdg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="31">
+  <data encoding="base64" compression="zlib">
+   eJzt00sKgCAUheGzgKa1pkBag9MetoYat7fWUctIg6CBBgbpDc4Hdyb4I1eAiL6wNcDe5K6Io6fcBWGuTWrf1Sax797GvjiS2xypXdI9vZmu/edT7UKrgM5Ob2ewY+yMKtDq6UqxE2/uSL2rkv8tEcmxFJhzN/iYCljLs4+IfuYA/30tEg==
+  </data>
+ </layer>
+ <layer id="10" name="ClutterAbove" width="40" height="31">
+  <data encoding="base64" compression="zlib">
+   eJztkzkOgzAUBf8F0tJESg0noYCjJNACUparpkVecoS8gsKWQEQhwb94I01h2ZZGXkQIIYQQEmJLEQc9fMFxcm6OLDOWseS3mArvETroq9Q1Itc+Hp9rkQtsYFunaQo5DvHYoMlCB73CPm2w73Pu+AvPLvakqE/TWc3x7778sG3/Xn1t9t3+HfoexYYz1H6/t359DSFLvAGiJy2u
+  </data>
+ </layer>
+ <layer id="1" name="Above" width="40" height="31">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJyVWEtTXEUU7hgiIpm5FzSJ72y0TPncuZkkDBlYBAqtiCU+FhaEZ6KV8hVABplJZeXWsoyFMYqiP8BSF/4BNbpxE8AIMhCytmKZbJL4nerz2Wcu91J6qr66fbt7ur/z6nt6CpFzJ2PnViKPJaANOAi8HfvnirY5T9r78WzPQEfkx+W3vwEir59y7kzF49qM+1d2tTi3F3gFfY9j7AngyYrvf6DFryGcalE9xyXTlrHfgYumn2PSv2DG7e8vAJOx53HC8HvtVOD4PTjcrRzPY+xn4BfgSKtz37b49cgtybFm9plS+9VMv7Vrm/pB5k7gOQ1UgRLeD0TZHJ9XHt8AY1XnjgHHq37+1y31e5FTzbTJ7aB5r8SeA1FRXFS+7erfDvVxm+Fo/fxRJdhQ+Fmf3wvc1eL3m9a1a9Fm/64B5Tj4sBq7TJlRuxHkLe13U/xMfi/Chr3AQ3h/uOL5fgc82+p1a4+CfWqGn/Dhussm1kX25dI5FjDnkJlXOwwdgfXDoe9ERq70w69Hq57vy62+b1ptwzhbULtdUG7D4HEcGI/rbXelN7T/RvsqcK3Xz5OcODPlxwa6sCcw2FWvR1o+3w+b3Qc8gr5HgcfUvuPGB4vKTbj0g9eneec+A46hPZpLt9vJ5/zcoyljNfBaA9YT/Lby8w94/xH4CRjDmgO6t0hZ9Re7DQKz4PYxsAO4Ne/nXIKvNoDL6jPq8UV+M7+BbvAGBrtDH3XM8vMwfDwCjAKNWHM78FU+cBVbCSenvK7j/QbQpPsPwRbDwIjaZE650adJeaPHuTd70sfoZ9pQcne3nofi75vYd5vuK+3b8h479CnczuHZYO0HXhvA5a60HYP8+XTQWXx/T87nT6fmj+iTtKH4+CXND2lz3/5c8CP5bdfYk/yQedRjCL4aBka6s5j5+JCYaVQd6ftFPQ87LM/KZj8/qPZsVH4N+c22Ez4yPqSxKO9r8NM6cAnYyPCZyLzGzJzqyNwZ1zNxwZxXH1Q25wqlIYUfOTYpP9rynIl/8dVbfdn8pjBWBqb7AlfKvlw4hyg2DnnOiA0l5oaMb53hJ7k7qDHJ3GDuXcG+fxl+VzO4Xkf/jb6gk5WS8TFtKPykNnihNdiP/nQJ+/Fd4sfqnyZp3wmRrJwWKRsbSn31oXL8tRriT+zn8gGWG9FkuI1pLpYSMW6/E5M9Pt9GE/aSvhH9HqUJ+b2vHEUaE3xoR7HZLTq2zfCb17NuRmuKNv3eJr8T85oX5DisMcTzqmDq2EMpeUKOss7nwCfAl3l/DtOfN3P16x0w3/2C1hSsaex34shpP2fO5MWc7sEcY62zoDUSJcmxGIV6Tfa3a57V9uROf25JbSe6FqNQ63PtPdDjDuBO47uCrt1p9md/R0Z9aP0sWDU1s+yfXIt7l1VfiWe2K4kzgvLM6WAj1qz7o3BnYZ3Nuklquj8y+HEN1vesBxkTcp4UE/qVEjZ5dTfuDLuCX62U43BvISfWlYum1rS2sT4WW7+ja8jv+Zw0d4dVc9aX1Cf0KzkVo3obdSbmr0ThjsK1WJcna2FyfKrq7Sdcxk39J7oIL46tGv0YD7aWJgd7zxJ/FZSP7D1huFh/885Fv9kzK034fbS6UE/ei1m/2t/w/kKIfZdNzFBfe5ei3Xjf472LexcTPPtvT4drDnG6lLAdc2FR9+L+wn8mDnsn82jczLNSNLG/bPZ5b2e2TWebgx3T9uLYVne7/yo2vlajkJulKNxZO6Pw/ZKxs81b2NZlj/1fiJ+SscR72WIitukviYWC4c7v0aSxd0n7qFNHVH/H3EoKxg7iJ3uerJg1GLusG+V9Kg45Zu/xMr4nF84f1nLlOOSpzUd77pA/v1nMb7GR8Fs1tltK0dHWPIxhG3M2zmYyYtH+btrobf+fYN5OmPVmm4Od+L/JP1L7TUM=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="541" y="497.25" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="364.75" y="179.333"/>
+  <object id="53" template="../../obj/enemy.tx" x="431.75" y="204">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="334.667" y="187.833">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="214.5" y="112.917">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/collision.tx" x="0.25" y="496.25" width="640" height="16"/>
+  <object id="57" template="../../obj/collision.tx" x="0" y="-16.75" width="640" height="16"/>
+  <object id="58" template="../../obj/collision.tx" x="640.5" y="-17.708" width="16" height="530.166"/>
+  <object id="59" template="../../obj/collision.tx" x="-16.25" y="-16.958" width="16" height="529.416"/>
+  <object id="60" template="../../obj/manashards.tx" x="209" y="73.5"/>
+  <object id="62" template="../../obj/enemy.tx" x="126" y="341">
+   <properties>
+    <property name="enemy" value="Polar Bear"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/booster.tx" x="97.5" y="334.75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;CSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/collision.tx" x="0" y="384" width="16" height="64"/>
+  <object id="65" template="../../obj/collision.tx" x="212.114" y="127.948" width="41.1636" height="63.1229"/>
+  <object id="66" template="../../obj/collision.tx" x="388.095" y="80.1991" width="41.1636" height="63.1229"/>
+  <object id="67" template="../../obj/collision.tx" x="291.764" y="240.751" width="41.1636" height="63.1229"/>
+  <object id="68" template="../../obj/collision.tx" x="246.309" y="176.947" width="46.5848" height="13.9149"/>
+  <object id="69" template="../../obj/collision.tx" x="223.165" y="241.168" width="70.3548" height="13.9149"/>
+  <object id="70" template="../../obj/collision.tx" x="357.653" y="178.198" width="42.4147" height="13.9149"/>
+  <object id="71" template="../../obj/collision.tx" x="410.405" y="243.67" width="39.4956" height="37.2679"/>
+ </objectgroup>
+</map>

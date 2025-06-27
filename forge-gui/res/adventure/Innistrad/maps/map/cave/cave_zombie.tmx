@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="69">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9lW0OgjAMhvtvWwyn8CxDwpmM1/HzVqh4DNfMhlIbE7ZKkwbYxp6+bRltAGgX+i45Wix4t8QvHuCa/JHutxuAfiUm8lyWCsf0/PoD456uNz+NPZOffWZaaiUWOurS9HSfuqJmKy71Ctkg9HLNljnuBFdjU40tc4z7HZpvdgzzPuZjMh+1OUajGIYw8aiXaUyrxVKtnEWGdaQeloZzYyivM/8+pNaezTs2b9XPPM/7Zs6l2EYRX02Of/WytrdcV6tZyzVZVNY5I67G1vqGn9GWZweyTz67tiePbY1/kdYLtdw3fCuxfQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFhADbANjJNQB2DkfADsSsA2Av3wDYiQzYB9h+eoCR4EdksJgEtUuobPdIC+vhDgAB0AGH
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="209" y="272">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/door_down.tx" x="224.166" y="17">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_zombie_floor2.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="66.1099" y="156.843">
+   <properties>
+    <property name="enemy" value="Undead Goblin"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/treasure.tx" x="58.1448" y="93.8145"/>
+  <object id="68" template="../../obj/manashards.tx" x="73.7287" y="249.653"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="8">
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects"/>
+ <objectgroup id="6" name="Waypoints">
+  <object id="1" template="../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="2" template="../obj/collision.tx" x="-32" y="320" width="544" height="32"/>
+  <object id="3" template="../obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="4" template="../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="5" template="../obj/waypoint.tx" name="5" x="224" y="32"/>
+  <object id="6" x="-64" y="-96" width="608" height="64">
+   <text wrap="1">See https://github.com/Card-Forge/forge/wiki/Create-new-Maps for instructions &amp; tips</text>
+  </object>
+  <object id="7" template="../obj/entry_up.tx" x="96" y="320"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,14 @@
+Name:First Head of the Hydra
+ManaCost:no cost
+Types:Creature Hydra
+Colors:green,blue
+PT:1/4
+K:Defender
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | Layer$ CantHappen | Description$ You can't lose the game and your opponents can't win the game.
+R:Event$ GameWin | ActiveZones$ Battlefield | ValidPlayer$ Opponent | Layer$ CantHappen | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would leave the battlefield, instead exile it with three time counters on it. It gains suspend.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | WithCountersType$ TIME | WithCountersAmount$ 3 | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ GiveSuspend
+SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.withoutSuspend+YouOwn | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent
+Oracle:Defender/nYou can't lose the game and your opponents can't win the game.\nAt the beginning of your draw step, draw an additional card. \nIf First Head of the Hydra would leave the battlefield, instead exile it with three time counters on it. It gains suspend.

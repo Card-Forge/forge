@@ -1,0 +1,152 @@
+dragonlarge.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 339, 144
+  size: 16, 16   
+Idle 
+  xy: 4, 6
+  size: 50, 36   
+Idle 
+  xy: 68, 6
+  size: 50, 36  
+Idle 
+  xy: 132, 6
+  size: 50, 36  
+Idle 
+  xy: 196, 6
+  size: 50, 36  
+Idle 
+  xy: 260, 6
+  size: 50, 36 
+Idle 
+  xy: 324, 6
+  size: 50, 36   
+Idle 
+  xy: 388, 6
+  size: 50, 36  
+Idle 
+  xy: 452, 6
+  size: 50, 36  
+Idle 
+  xy: 516, 6
+  size: 50, 36  
+Idle 
+  xy: 580, 6
+  size: 50, 36 
+Idle 
+  xy: 644, 6
+  size: 50, 36   
+Idle 
+  xy: 708, 6
+  size: 50, 36  
+Idle 
+  xy: 772, 6
+  size: 50, 36  
+Idle 
+  xy: 836, 6
+  size: 50, 36  
+Idle 
+  xy: 900, 6
+  size: 50, 36 
+Idle 
+  xy: 964, 6
+  size: 50, 36   
+Walk 
+  xy: 4, 62
+  size: 50, 36   
+Walk 
+  xy: 68, 62
+  size: 50, 36  
+Walk 
+  xy: 132, 62
+  size: 50, 36  
+Walk 
+  xy: 196, 62
+  size: 50, 36  
+Walk 
+  xy: 260, 62
+  size: 50, 36  
+Walk 
+  xy: 324, 62
+  size: 50, 36
+Attack 
+  xy: 0, 129
+  size: 63, 46 
+Attack 
+  xy: 64, 129
+  size: 63, 46 
+Attack 
+  xy: 128, 129
+  size: 55, 46 
+Attack 
+  xy: 184, 129
+  size: 63, 46 
+Attack 
+  xy: 250, 131
+  size: 60, 46 
+Attack 
+  xy: 314, 131
+  size: 60, 46 
+Attack 
+  xy: 376, 131
+  size: 63, 46  
+Attack 
+  xy: 442, 129
+  size: 63, 46 
+Attack 
+  xy: 506, 136
+  size: 63, 46
+Attack 
+  xy: 570, 129
+  size: 63, 46 
+Death 
+  xy: 8, 204
+  size: 56, 51 
+Death 
+  xy: 72, 204
+  size: 56, 51 
+Death 
+  xy: 136, 204
+  size: 56, 51 
+Death 
+  xy: 200, 204
+  size: 56, 51 
+Death 
+  xy: 264, 204
+  size: 56, 51 
+Death 
+  xy: 328, 204
+  size: 56, 51 
+Death 
+  xy: 392, 204
+  size: 56, 51 
+Death 
+  xy: 456, 204
+  size: 56, 51 
+Death 
+  xy: 520, 204
+  size: 56, 51 
+Death 
+  xy: 584, 204
+  size: 56, 51 
+Death 
+  xy: 648, 204
+  size: 56, 51 
+Death 
+  xy: 712, 204
+  size: 56, 51 
+Death 
+  xy: 776, 204
+  size: 56, 51 
+Death 
+  xy: 840, 204
+  size: 56, 51 
+Death 
+  xy: 904, 204
+  size: 56, 51 
+Death 
+  xy: 968, 204
+  size: 56, 51 

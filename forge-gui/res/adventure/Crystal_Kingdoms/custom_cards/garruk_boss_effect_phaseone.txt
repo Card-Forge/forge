@@ -1,0 +1,12 @@
+Name:Garruk's Boss Effect Phase One
+ManaCost:no cost
+Types:Enchantment
+S:Mode$ ReduceCost | ValidCard$ Beast,Garruk | EffectZone$ Command | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Beast and Garruk spells you cast cost {1} less.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Whenever an opponent casts a noncreature spell, put an prey counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ Prey
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Card.Self+counters_GE5_PREY | PresentZone$ Command | Execute$ TrigConjure | TriggerDescription$ At the beginning of your upkeep, if there are 5 or more Prey counters on CARDNAME, conjure one of Garruk's beasts onto the battlefield under your control.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Zone$ Battlefield | AtRandom$ True | Spellbook$ Garruk's Companion,Garruk's Gorehorn,Garruk's Harbinger,Garruk's Horde,Garruk's Packleader,Garruk's Warsteed,Briarpack Alpha,Mist Leopard,Predatory Wurm,Primal Huntbeast
+R:Event$ GameLoss | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ ExileSetLife | Description$ If Garruk would be defeated, instead exile CARDNAME and Garruk's life total becomes 40. Activate Phase 2.
+SVar:ExileSetLife:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self | SubAbility$ DBSetLife
+SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ 40
+Oracle:Beast and Garruk spells you cast cost {1} less.\nWhenever an opponent casts a noncreature spell, put an prey counter on Garruk Boss Effect, Phase One.\nAt the beginning of your upkeep, if there are 5 or more Prey counters on Garuk Boss Effect, Phase One, conjure one of Garruk's beasts onto the battlefield under your control.\nIf Garruk would be defeated, instead exile Garruk Boss Effect, Phase One and Garruk's life total becomes 40. Activate Phase 2.

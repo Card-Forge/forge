@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="77">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
+ <layer id="9" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0AosEEXFwx2M+nd4g5Hm3+EKANPVC1E=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyLZWFgiB3kOIMbE9PL7iZuBB7ocBjFtMe/uDDF7imQZxa2dIsr7ZKillx7QX5Dx9jsGLWXNvE7UPbSOl0RUrtdAoFpbS8ypqe9yPJunAhMjr24MDZArlkAuY7TAw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNY1MTzcvAsIuHfBzFS569skCMC2hwo2JsQJpM/+KyV0EAFeMC1LaXWDDU7J3Lgok5cLiFCyiewY2Kd9HBv9jU0iOcR+0dtXew519S7M3AUkaTa+9eIK7jxo7rofbUQvmyULUwAGLvIdNeXHqwAWLNQbcXAF/gtCU=
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFuEAjPwODBjcDQxOUBmF6AJhdyJjWYCcPA8MuID4rjcAg/m4e2tstjWYvtcEuHkzcAA1TUByD4reZH8KXw6JWmoIwWCGKimFmyQswMCgAsaIAhC8OdI8EGpakYrzjsncX0I7rnKh4OwX2EutfatuLC2Czdxv30PfvIQlUjMveYFD65YbgEB4IDqUgPa8URcW47EUGslQoQ5QlUDEue0F2ZXBTz150ALN3L9C+fUC8H2pvHTeCpoW91AYA7EFF/A==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcoJabgaEOC67npr5dMUAcC2VL8zAwNPIzMDQB8Td2CN0MxLI82NVTAn4B8W8ke/cKMDDsQ8L7BVDtRVZPTSDNg8qX5cGujtaA2vYOJX+IA9O1BBTTC3iKMTB4AXGbOIRNLwCyD4RhdtPTXpid9LTXE8lOeto7EkEGjfMPcl2ETW6wAwDCsh0s
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="308.242" y="247.89" width="38.2392" height="39.9582">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_1.tmx"/>
+    <property name="teleportObjectId" value="69"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="143.736" y="175.68">
+   <properties>
+    <property name="enemy" value="Adept Blue Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="276.245" y="153.496">
+   <properties>
+    <property name="enemy" value="Adept Green Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="208.248" y="115.342">
+   <properties>
+    <property name="enemy" value="Blue Golem"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/booster.tx" x="96.1148" y="144.623">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ARB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ARB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ARB&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/booster.tx" x="300.204" y="122.439">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/gold.tx" x="314.401" y="55.0013"/>
+  <object id="75" template="../../obj/manashards.tx" x="120.96" y="55.0013"/>
+  <object id="76" template="../../obj/entry_up.tx" x="204.017" y="51.835" width="25.4153" height="17.3026">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_2B.tmx"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

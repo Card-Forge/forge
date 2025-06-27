@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="88">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVVFuwjAM9QQraYHCNfjhVgg0aQxxDDbgWBSE1A24B9sNZquxarw0pDBNs2QJJ/V7sfNiAP6fbQzA1vxdHudOY4AoAcgURo5xD9f76GP85im+3G8kZW6oSUzKZZ8J7DbunUy5l2L8jvGHON/e7ofUzXznCOAzKvK+7O+X2H8u5qc95ud1zb1R8c4U51y3AF7RF+hv6ANT1uTi0869oX4/Jj85p+peJhiP0JfINTSlr1rXuaruxMWpeUkHDwH1+PyA2N0KPcleSSOtEDflSt38Bif33cXLRrmk2Q76scYZfP1lbRH33qFxrbU8QEtU57GiVr5TrS/XN/K981t19Z7WqCdVvQ3hJBsJTM1N2PMad8lYu4C50VD9TC2u6+2mdj7kHtxmjTkpuQ8K01Xvc1z0M7NzLFPzso61rY6vmfHo7db/o3s4Q7i/AdXleTk=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytVVtuwkAMXFXq1+YWpJAUFC7R03AQaAml5Ui8Up736WfXYqwdTBJaqZZG2Xgdj+31OlPvXDdxrh+wDHgP76sk6gqsZe/VXzDFN7pXQif2nYB9QErffAKyXgSIqH/m6RtOq8vhtwueFM+MYpc4CvKtfmR/7uv5csR8wnODZwa7XsAa+i3WB9IpTkBG3BLfmeLQPE7wJbJy17KDvwP2+wED1ywzH3PX/ErUWt9z4muSbYN+2aA/0lkXlHOPajw0nJ32EG5k0xLfGnVU/pLytbz/IRmtJ7gntoelz9789Xf2/OrqWaf78BdfUrN9wDisn6jO2lN6L0rYT+ieiVR/zHOHXhE/c/ixvNKfX0mcFToDSrrvC9/OwzJBD0v8z8ntLFJo3Ququ84A1fXunP0Mec3gK8cdPdJ8sVBOni0So965bk3P2X49omYVzRKueVbDyzMqpfcOzZvzL3p93WAnPdXGLedZEbfWlmvI56x9/PIQbeye7gtsXzF07u4Ru/a/9po95zGd6SCJHLon5/H9GG2aePVfwXmwvfiuDK/mUSLnEeU5cvc5mVv/s9ae801dvAs27rG/z/kDc96cpQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="229.386" y="104.333"/>
+  <object id="64" template="../../obj/enemy.tx" x="230.621" y="123.08">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Heartbeat of Spring&quot; ] }"/>
+    <property name="enemy" value="Chimera"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/manashards.tx" x="46.377" y="106.249"/>
+  <object id="81" template="../../obj/collision.tx" x="-15.5" y="0.028" width="16" height="273.444"/>
+  <object id="82" template="../../obj/collision.tx" x="481.5" y="-0.222" width="16" height="273.444"/>
+  <object id="83" template="../../obj/collision.tx" x="-15.73" y="-16.5" width="516.96" height="16"/>
+  <object id="84" template="../../obj/collision.tx" x="-14.48" y="273" width="516.96" height="16"/>
+ </objectgroup>
+</map>

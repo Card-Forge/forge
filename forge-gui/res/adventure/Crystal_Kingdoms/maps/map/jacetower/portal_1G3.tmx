@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlVsOAiEMRfs/nRUQN6ZrMa4L0b2NhDQ213aKOMSbECiPHp6F6K3LSnRnovPayjr/ReJXfKNO3PLErSx55v1xFkNUy0XZGXzU/sXhamWDr9dToL+lxJ9MPU9MXpuMtfp6XIs5W7iPCfiPl/3sqOvhoF193Ba7Xe5zVDfCrdL3eIZmcnH/vfO4Lq3N4kY+LJ+4/9556LXhG418jJxxD/doada/uDpO6rc0m4s2sqN4F8VEL8Za8/g2Do0q7cT+KutvOCptbIlYNg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydlVFOwzAQRC2FIsdXoBQu1x8++OSvAnG5tFHvALQchIziUcdb23FZyapar/3Gu2PXuf/FQ3Du1zv31qfj5NvWb0J5bpj2OFT2sWwyl9YhkJ9jY+1rPw/u8TV9/vg0B3Pgn+X3Lszr7itnotaPPv3dhwt39DPzOcwawVZduTj6VHMLV5kYq+n7TnoIdheu62GjND/4a+62T5ljXKNc5mteLqBtZWrNOlmunkPXWA9Zbq2Xlkmu9X5Op2WDi7xjwX/fxoOIF9HZet+UDe8+ii7WCFrpP2h7N/XXWt4StTvZRR2f0jty9T6zRjaGwt70eI2tZz3FmrCnub4ps+SRlnuz629nIrYL/tQ+1rioL/caF7xmz1TqfU07PLcOF8/dSS412XdR2eRT51PI60Qc4pu5j/P7Qh77XuLaoD9z/x32PdWhd1m91hr6Vmzk3DWmZa9j/TX+ACzueoQ=
+  </data>
+ </layer>
+ <layer id="7" name="Trees" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlVEKwjAMhouv2y108yKepgdRH5x3kikMT2WCBENImm5t8YfAaJt+aZJ2Yx/CWNmOYKRzF8LgrN+DPTPs4Pi+BHcxfMjvLdajIthp9/tGzUosyEIfWsulscmvtTAezo6+S3V2q3NSjVJ8rR5SqZx4DMmLbL/SXK/xv0Gck9F/LTX8oa8kVztzzpgWs5c/4rbOs+w74l5h/L6iJ0vF345H77Ot+7IlXwt7L3PYpaLYMVbr/1VD1l1Bfop76b711+YxPzTPDXOG+0bGoHeK1+oDraNBhg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFB6lgxiEy9YmzYGJ0OXx6iAEuTGQ6jkogkBXBVgZiVyEGBjcg1kBSYwnkWwlhxsVxKK1OwFxk0MaNXT4RaH6SEKpYKJAfhiaGC8Dci8teXO7SZkewVbCI4QKwsACF2UmoubjSmQ4WezM4GBj62VBxJpqYHtQdjsAwcEIKB2cg2wWItQg7E26vNVC9DZIZtkC2HRLfHsh2gPJPQu2NBfLjkNTEA9kJRMQHcjoJB6qPQNITCWRHIfGjgewYNHvRw5+Y+AAB5DSLrEcdhxkw+9BpdHkQAIWjCgNuoAyl0eMVPU6RxdBpGM7iQLWXWgBfWYouR4q9hMo7QmUisvwnMv3bAyxXOtBwHzfp5mSRYbcaDyqG2U8qgNUFAA6INjE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="63" template="../../obj/door_down.tx" x="359.959" y="17.8328">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1G2.tmx"/>
+    <property name="teleportObjectId" value="63"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/door_up.tx" x="80.5779" y="271.455">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1G4.tmx"/>
+    <property name="teleportObjectId" value="63"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/gold.tx" x="2.33333" y="94.6667"/>
+  <object id="66" template="../../obj/enemy.tx" x="22.6667" y="94.6667">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/treasure.tx" x="447.667" y="257.333"/>
+  <object id="68" template="../../obj/enemy.tx" x="447.333" y="229">
+   <properties>
+    <property name="enemy" value="Spider"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="353" y="63.3333">
+   <properties>
+    <property name="enemy" value="Snake"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="79.6667" y="224.667">
+   <properties>
+    <property name="enemy" value="Dino"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="254.667" y="201.333">
+   <properties>
+    <property name="enemy" value="Bear"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

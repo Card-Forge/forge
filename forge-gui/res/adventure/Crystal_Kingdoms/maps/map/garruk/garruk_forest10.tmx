@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="71">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzVlkEOwyAMBHONxBOa7+TP7et6ikoRXq/XjkpX8iUBe7DBcO7bdv6RjbL+ZWI82repbEhXHDQfxe/HMOtRNOYBrcWKw+RwBSHGFXQXn1fbiCr5xr1XwZjJ4YwHGcvTj0V86GxVGePX65ksm7IONH7WT2f9fObDqodXN2U8u/9Qvav5rjnZHv0rPlZKzSK+V+dDezCi1w18/Rzm/Kox+nkKH/tmZPsXYhvfeR4z0/+yxvg82oeH4UM5yBhTT+b+YHwg3/23qBg+5Y2lnh2PsYrv2bg+E2FEfFW5WIWvsr4sX+Qur863x8fmMHM3KL1ZeeNb52r2nYnDsKlm8VXZGxqBiRM=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6Aes13vtbEDEnpJVVVVVfXpAffWXM8=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1V21u6zAMy8802ddFvQ69aLp1B5q9hYDAUbLibgKCt5cqMiVTtLwu0/RQn895ms6n6dtK/fe1Pm/7/61t1e+5+r/U52P++fZx+e1n4+Bp/uy77mu335/q3++zjrWaddZFr9uwZXBZXw9b+x1Yehib73X2sdscbqIGyorBhVwspkJYPIy2JlgXe9jDuzk52dqBM3gHzqg9AkaLBe8s1/Cu5eHVFeudBUfLXrcbrcO1V/mtgjf8jrmjOBHttVqDsUT59cxyAc9IHGsXyvPi9PMoRq/3VW95+2b5pmo8grHtIXNW5WHry7X6b+vlyr97+nmPZTQwqzu977KcsGY1JdKTo5xW33FvwEetbfNQWmjxe3qicudzmvefsXl9yDUb6Ss+q5pdTrlzGn7oQYXH21fmicdR1cMZjbZ+ZZ+XvFgqT/aNcsnUPdIdnp+8WJyjx5URfYvmNi/WRvvn9RHigye2V7z+yOJX/IWh5ldTm0hDVO05fi9PFTOaNew5O3Jmsy5l5uGmPVmtz94BejGYp8wDWElqD8fHLMD6fIRLzaLZiefoo2t4s+qReJH2RVo2Mk9wPGg0Y47uIvBXM66aq0fnMqt/2fMdvInuq94dqpeLiqU4jxpH848yqyvefGR73eOZN4dE6/H3DXPmPsr5FZofeve4zD2eMaOuEQdQf28W690x/0K/R84mz+xcdg82xnhU/78AR0z7Ww==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztl0sKgzAQQN3YS9idBa3X1kvoThda8FKli0CQmPk3InmrYCYzwflliiJjQZv6AjdgMNa/Cs42RPnOW5eKejGM3npXtFUxzrwjewvzHi9Af8/UK2FKYDODB/LPk6Brh0XYWNQDCbPwfI2U24R2jnyU9VEZYRERLl5db0kdN5TeQMk1B7Z3Y2t/KK61ajjlX6T22xlX62dQzFjn2w/Lun9HHiffodhyORF628XmLGnN18xFzVjpInucWnqE+w63wJ+VQv74R55DcOagjA5fSzYWWA==
+  </data>
+ </layer>
+ <layer id="7" name="Walls of Trees " width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzNl91ugzAMhbkvb9HSPSqtVO2dRvaD9lQjUi1ZZ7Y5MayrJV8RO1+c5Dic+6473/24+Dv4yfl2UnGP8Dr/x+Jo5c6D3wYjnuU/EmMYtsgK5H+B+Nlh0HPNBGOGDWtr1Rc5xb/73zkiRlz3f1hUx2fgq4bneS++8dB118Pz8VWuy+LTEv/Wb2f0ziGbW3guigvz6O+vKzlvxlivhh7j6PAwWoe8Ov8I+WQsrjlilByopZYelYBX4nVMND7Sc51jABY5H8x51fvEjM9oYI1BLR3+iA9jsv2D5ZN6tObeqi9Dw31n17InX+sZzOTO6p/YTO5ZK5/EeNqCGlUt27tEm1r4biv6Z2nq5LCPhuYim+SrvQF7j9Vbovsrd43tB5OzHv1NayrqsZyPUbF6b6y6B3imCrBG/cxaF6srdZ4vY90t97cYc3n65v2rrOWPekf2bZS5n1nGzDyszrDm3Y8tNdzTIr5MDfd617N8LTWsbJ8P3N+WGmZ7Q6TNTO/Qem/ltbTZ6ofMW/4KczBsUZ9g6z2QOVrm+AEQY/Fq
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../obj/treasure.tx" x="237.667" y="177.583"/>
+  <object id="63" template="../../obj/gold.tx" x="322.666" y="47"/>
+  <object id="65" template="../../obj/enemy.tx" x="224.36" y="392.771">
+   <properties>
+    <property name="enemy" value="Centaur"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="220.861" y="281.033">
+   <properties>
+    <property name="enemy" value="Satyr"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/gold.tx" x="16.167" y="350.833"/>
+  <object id="69" template="../../obj/enemy.tx" x="476.796" y="309.503">
+   <properties>
+    <property name="enemy" value="Satyr"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/door_up.tx" x="271.5" y="480">
+   <properties>
+    <property name="teleport" value="maps/map/grove_11.tmx"/>
+    <property name="teleportObjectId" value="69"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

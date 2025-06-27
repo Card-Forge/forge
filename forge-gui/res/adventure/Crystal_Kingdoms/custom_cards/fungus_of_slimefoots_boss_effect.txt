@@ -1,0 +1,13 @@
+Name:Fungus of Slimefoot's Boss Effect
+ManaCost:no cost
+Colors:black,green
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigAnimateAll | TriggerDescription$ At the beginning of your upkeep, Saprolings you control perpetually become Forest lands in addition to their other types.
+SVar:TrigAnimateAll:DB$ AnimateAll | Duration$ Perpetual | Abilities$ ABMana | Types$ Land,Forest | SetColor$ Green | ValidCards$ Saproling.YouCtrl+nonForest
+SVar:ABMana:AB$Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | CheckSVar$ X | SVarCompare$ GE2 | Execute$ TrigConjure | TriggerDescription$ At the beginning of each end step, if two or more creatures died this turn, conjure a random Fungus onto the battlefield.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Cankerbloom,Corpsejack Menace,Undercellar Myconid,Utopia Mycon,Sporemound,Deathspore Thallid,Sporoloth Ancient,Thallid Shell-Dweller,Psychotrope Thallid,Sporecrown Thallid,Sporesower Thallid,Thallid | Zone$ Battlefield
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.!token+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Command | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken creatures you control die, create a 1/1 green Saproling creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling
+Oracle:Saprolings you control are Forest lands in addition to their other types.\nAt the beginning of each end step, if two or more creatures died this turn, conjure a random Fungus onto the battlefield. \nWhenever one or more nontoken creatures you control die, create a 1/1 green Saproling creature token. This ability triggers only once each turn.

@@ -1,0 +1,7 @@
+Name:Presence of the Hydra
+ManaCost:no cost
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ Mana | EffectZone$ Command | Description$ Lands you control have "{T}: Add one mana of any color. Spend this mana only on costs that contain {X}."
+SVar:Mana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ CostContainsX | SpellDescription$ Add any mana of any color. Spend this mana only on costs that contain {X}.
+A:AB$ MakeCard | Cost$ 1 G PayShards<2> | Conjure$ True | GameActivationLimit$ 1 | SorcerySpeed$ True | Zone$ Hand | ActivationZone$ Command | AtRandom$ True | Spellbook$ Polukranos Reborn,Managorger Hydra,Apex Devastator,Kalonian Hydra,Genesis Hydra,Steelbane Hydra,Ulvenwald Hydra,Voracious Hydra,Hooded Hydra,Primordial Hydra,Rampant Rejuvenator | SpellDescription$ Conjure a random Hydra into your hand. Activate this ability only once and only as a sorcery.
+Oracle:Lands you control have "{T}: Add one mana of any color. Spend this mana only on costs that contain {X}."\n{M}{M},1 G, Conjure a random Hydra into your hand. Activate this ability only once and only as a sorcery.

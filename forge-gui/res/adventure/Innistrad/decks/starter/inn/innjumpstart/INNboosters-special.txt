@@ -1,0 +1,11 @@
+# ISD Jumpstart
+ISD Dearly Departed 1: 1 wholeSheet("ISD Dearly Departed 1"), 1 RareMythic:fromSheet("ISD White Inserts")
+ISD Dearly Departed 2: 1 wholeSheet("ISD Dearly Departed 2"), 1 RareMythic:fromSheet("ISD White Inserts")
+ISD Fraying Sanity 1: 1 wholeSheet("ISD Fraying Sanity 1"), 1 RareMythic:fromSheet("ISD Blue Inserts")
+ISD Fraying Sanity 2: 1 wholeSheet("ISD Fraying Sanity 2"), 1 RareMythic:fromSheet("ISD Blue Inserts")
+ISD Undead Horde 1: 1 wholeSheet("ISD Undead Horde 1"), 1 RareMythic:fromSheet("ISD Black Inserts")
+ISD Undead Horde 2: 1 wholeSheet("ISD Undead Horde 2"), 1 RareMythic:fromSheet("ISD Black Inserts")
+ISD Bloody Marauders 1: 1 wholeSheet("ISD Bloody Marauders 1"), 1 RareMythic:fromSheet("ISD Red Inserts")
+ISD Bloody Marauders 2: 1 wholeSheet("ISD Bloody Marauders 2"), 1 RareMythic:fromSheet("ISD Red Inserts")
+ISD Transformations 1: 1 wholeSheet("ISD Transformations 1"), 1 RareMythic:fromSheet("ISD Green Inserts")
+ISD Transformations 2: 1 wholeSheet("ISD Transformations 2"), 1 RareMythic:fromSheet("ISD Green Inserts")

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Daring Piracy&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" name="dungeon large" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
+  <image source="../../tileset/dungeon/dungeon_bis.png" width="2048" height="2048"/>
+ </tileset>
+ <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlj0OwCAIhZ3araMn7eCxesSuhgg+/jRpOjBR+XgI2HqXUn/7pD3nHuYurjVXa86ec1wOSExrfZG40jeZXMR/tHV17v0SdxZX0yOUOeNG9MiImc2lNZkx0Tpr+gHV6uVyWrP1Uj/CRGKhM6PRauFKMxzNRXaGh2ndGz1Tw9W+e5QjMaWZQXeSxON0ev87NCyuV6x6vP3q4a5irdCSoetqc4u8sxFX8kdzX9519Jk=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlFlOwzAURfPLztqoDRmsZiEUCdgAK2AlbANlXgXfLIBTVZaMFY8ZvnjS+bLi0+v71CT5H9dkhyR5hBwKKKECcdjW23B/Cx30MMAI08be7EheyKGAEioQR7/vxTXO23B/Cx30MMAIk4e3xvnwMn/m6i9LOYccCiihApG6vcLidfXXcH8LHfQwwAiTwyuzGvMu7C/Wu6Q/28g3Pr3Ony/pzzRq1m+DN7Y/03w+/c36/hb/+2OcMuvH875OmXVrb21wurxfK+2v+r4+3hN7dIE6ve/4JeB/Vc0a6r15dHxG7zXEG+q8ueToTr1bX6/N9XO9o7tszpB9Vh0ul/6+oV6fPDZMWaV3LssS19nik8ztXqzLxyeJdca4VPZ0xXhtO7KGV810XjGfztb327x7eHR+AeGtlkA=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0Btcb2VguNlKf3tL2xgYyoD4aisqvkaCW0p4ybdXsB0Vi7aTbhap9pa30daOgbL3SitmPJbRwV6Bdsx4JGSvoDkDg5A59d1CKJwnAu2cRMDecjLT81BIV+TkVWrYSy2Az94DTBBMD3sXMhOv9zQLA4MuFFNqrz2aGaXA+CzDEafprKTbBwO8wDzMj6UsZgT6+zM7fr3k2htMwFwmLGGOHN+E7P0HVcuIZA6p+aEKi3ps9qLHCyzM/hFInyA/duCRRy6b0O3t4WBg6OVA8BmJSKP/0dxDjB50e7U4GRi0OQnrwwZA4YKcP/DhLArSMzKAxQEl+YMSgMtebGkLHZBTNxGyFx8AAF3oTdk=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="260" y="479.167" width="48" height="34">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="61.25" y="388"/>
+  <object id="51" template="../../obj/treasure.tx" x="271" y="149.333"/>
+  <object id="52" template="../../obj/gold.tx" x="248.833" y="145.833"/>
+  <object id="54" template="../../obj/enemy.tx" x="202.001" y="150.583">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Coastal Piracy&quot;]
+}</property>
+    <property name="enemy" value="Pirate Captain"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="198.666" y="247.667">
+   <properties>
+    <property name="enemy" value="Pirate"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="63,62,60,61,60"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="76.6667" y="399.333">
+   <properties>
+    <property name="enemy" value="Pirate"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="247" y="416">
+   <properties>
+    <property name="enemy" value="Pirate"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="317" y="339.5">
+   <properties>
+    <property name="enemy" value="Pirate"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" x="186.5" y="396.833">
+   <properties>
+    <property name="enemy" value="Pirate"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="68,66"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/waypoint.tx" x="199.5" y="212.5"/>
+  <object id="61" template="../../obj/waypoint.tx" x="116.5" y="215"/>
+  <object id="62" template="../../obj/waypoint.tx" x="199" y="344.5"/>
+  <object id="63" template="../../obj/waypoint.tx" x="198.667" y="137.167"/>
+  <object id="64" template="../../obj/waypoint.tx" x="203.5" y="476"/>
+  <object id="65" template="../../obj/waypoint.tx" x="348.5" y="469.5"/>
+  <object id="66" template="../../obj/waypoint.tx" x="98.1667" y="449.833"/>
+  <object id="67" template="../../obj/waypoint.tx" x="365.5" y="422"/>
+  <object id="68" template="../../obj/waypoint.tx" x="240.333" y="353.333"/>
+  <object id="69" template="../../obj/collision.tx" x="-0.5" y="480.5" width="481" height="16"/>
+  <object id="70" template="../../obj/collision.tx" x="0" y="-17.5" width="481" height="16"/>
+  <object id="71" template="../../obj/collision.tx" x="481" y="-19.5415" width="16" height="516.083"/>
+  <object id="72" template="../../obj/collision.tx" x="-16" y="-19.5415" width="16" height="516.083"/>
+  <object id="74" template="../../obj/enemy.tx" x="453" y="178.333">
+   <properties>
+    <property name="enemy" value="Scorpion"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/manashards.tx" x="463.333" y="126.667"/>
+  <object id="76" template="../../obj/manashards.tx" x="300" y="338.333"/>
+  <object id="77" template="../../obj/booster.tx" x="135" y="212.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

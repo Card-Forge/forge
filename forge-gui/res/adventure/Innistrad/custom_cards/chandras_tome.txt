@@ -1,0 +1,12 @@
+Name:Chandra's Tome
+ManaCost:no cost
+Colors:red
+Types:Artifact
+#Drafts a Chandra-related card
+A:AB$ Draft | Cost$ PayShards<2> | ActivationZone$ Command | Spellbook$ Chandra Ablaze,Chandra; Acolyte of Flame,Chandra; Awakened Inferno,Chandra; Bold Pyromancer,Chandra; Dressed to Kill,Chandra; Fire Artisan,Chandra; Fire of Kaladesh,Chandra; Flamecaller,Chandra; Flame's Catalyst,Chandra; Flame's Fury,Chandra; Heart of Fire,Chandra Nalaar,Chandra; Novice Pyromancer,Chandra; Pyrogenius,Chandra; Pyromaster,Chandra's Regulator,Chandra's Triumph,Chandra; the Firebrand,Chandra; Torch of Defiance,Oath of Chandra | Zone$ Hand | SubAbility$ Eject | SpellDescription$ Draft a card from CARDNAME's spellbook.
+A:AB$ Draft | Cost$ PayShards<3> | ActivationZone$ Command | RememberDrafted$ True | Spellbook$ Chandra Ablaze,Chandra; Acolyte of Flame,Chandra; Awakened Inferno,Chandra; Bold Pyromancer,Chandra; Dressed to Kill,Chandra; Fire Artisan,Chandra; Fire of Kaladesh,Chandra; Flamecaller,Chandra; Flame's Catalyst,Chandra; Flame's Fury,Chandra; Heart of Fire,Chandra Nalaar,Chandra; Novice Pyromancer,Chandra; Pyrogenius,Chandra; Pyromaster,Chandra's Regulator,Chandra's Triumph,Chandra; the Firebrand,Chandra; Torch of Defiance,Oath of Chandra | Zone$ Hand | SubAbility$ ModifySpell | SpellDescription$ Draft a card from CARDNAME's spellbook.
+SVar:ModifySpell:DB$ Animate | Defined$ Remembered | staticAbilities$ SpendAnyMana | Duration$ Perpetual | SubAbility$ Eject | SpellDescription$ That card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+S:Mode$ Continuous | Description$ CARDNAME may only be activated once.
+Oracle:{M}{M}: Draft a card from CARDNAME's spellbook. Exile CARDNAME.\n{M}{M}{M}: Draft a card from CARDNAME's spellbook. That card perpetually gains "You may spend mana as though it were mana of any color to cast this spell." Exile CARDNAME.\nCARDNAME may only be activated once.

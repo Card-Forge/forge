@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="62">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40" opacity="0.9">
+  <data encoding="base64" compression="zlib">
+   eJztlk1SAjEQRmehhZCDiJZ7deMRuIlbqjgCjroHS47hDQRh4UqHwsNQpoukpm06Pz0k4ILFq8g4VB5fp5P02kXRO3LkSDIGBu557PdzeoWI+e4+8pOyr7oCb2rDaWvDody4OajjIfPj5lm3Nkgdc9fWeq1JPf+bH533kDV21bWpH/ZM4exyuztr3icpM8VrzvqBG/ZLQQq/lD67OnK5xdA346hTFGPNStUM9ecHw1zVY6nHl07+3PrI71vPW2kmet7Pk22+2tuU5jeFXH29GnIDOJ8YP/pOqF8layfGKeSHHUsmwyZZSXOjfvhZV6+HR+011eNMydyoi+s96Avog/sIR3B5MoBTEy+JGxDrBlldmL729cOAjNRZ4iZZh+B3qXnVbkvl9xswXpxfqKbSHnERcxfg9jRXPWGf5fYHX3Y2P/x8jH6jq+au88CV25WSZdMl70N9K1WPlfm/q+a59jtff6xIn/hqPETn41yYjbS+4HeDuIUcHW52jS8yOVFg75uZulqWHj84z6VrqSkL0xt4jYGXy82S08meEfa8sOdEjBf2m2bI0JdDjNfI3CNz5tfEy7r9qLo36P6UO8sQ9p77vofekLpxawJ/vjb70nkid+7Ouasvx7PwLmDvnfRul5IYB9dz4EP9PZfg75g8fwG8aFSK
+  </data>
+ </layer>
+ <layer id="7" name="Tilelaag 3" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlk1uwjAQRmeT1iS9QShwp56HgkLP1JNUYpkUuEK7rOpRPGJi7LgNsZPFPGmUHxB5+mZsAiAIgiAM4WNxrblwyADesvac+83BEd02DwA/j9d7tuNUruTmYi6ORK0APlV7/l50nU5qWkd02+QAu8WtH7o968/KPK0f722ln/mqa+/w2zMfvP4q4joesu41ZYd+K31c5+21a+5SziN6kQv2cKmPZ3089swdzmftmMXvovude6G9BJ9/NvNVGzfud7SyWnmy5fd2I2SKPT45vGw/KpoB357DC3/zXrYmi4a54Zrg5csnVGOAe8VFdb18z/ur21Cof2uzNhvV38vUuVXWbGFWIS+sbcJeltppWfRnRusltB5i8fLUepZm1i7q1g29msBajY1vtpBQT2PA30u4n51dKLcYfvZ/kZ0d7+sUvawC/ep7H0jhV/5j/0rtRszZbaivIAiCMD6/isAelQ==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2DFOwzAUBmAvhJjkArAgEByFNmIGzsA1mDhKCmEGJoZyBSQOQIBcAEaELecpjxc7dRInjkSe9KtVh+br87PTdsEZW8yZM+df5jZkLOcqmXh+F/o34SxFcL3xaRihb+/ENwWjtIHrImZsN9Ibcw9OafvZVrne0hufdvz0Evp2FKjsB8p4L2yPyPcV+TEmXPUNfDLHQd33wv0YsQ8eqU/aINR4OsLamvoHM4h9EJjJIXooXRmyUd9z6dtkhF66Nn6I3IR1l8yhyCuvfDIPBh8YvyO3Zw/ds1div66RjabJR9f8pKcrL98H20wumT1hO4/NHt0ZnoVVLmN735L/XVOw0Wqyta02voTXZw2X9JzFVbrYUtGzlcgnV7H1ybU9CNScrQ0u0zra2NLSVJDrSp+NkX5n0lUfG3W1TVefTbm4h1Afvn7XvkH1OVPomdzUqy4+F2uLz2Rb35i9o7ZNvjblYvaShmv29Q0xey7L1XeXvka4L9D3cLU/dGdMG1eBPqe8T6wM94uxe+hivoY0+vhd3rSfp9TDFM07PNftgyF/ozUZC17Ne4Feoz32/d+LyY/76KOHNoE+Tt3nco/8AmLvIlE=
+  </data>
+ </layer>
+ <layer id="8" name="Water" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1FEJAEAIREF/7Z/RHpfiFGUmwYOFjQCAHpXTBQD/+bqb7AoAAPs8+BUCyw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../obj/door_up.tx" x="321.655" y="637.409">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23B3.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/door_left.tx" x="544.011" y="320.655">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23A4.tmx"/>
+    <property name="teleportObjectId" value="59"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

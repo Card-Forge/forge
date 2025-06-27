@@ -1,0 +1,10 @@
+Name:Scarecrow Totem
+ManaCost:no cost
+Types:Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChoose | TriggerDescription$ At the beginning of your end step, conjure a duplicate of a random creature card from your opponent's library into your hand. The duplicate perpetually becomes an artifact Scarecrow in addition to its other types and gains "You may pay {4} rather than pay this spell's mana cost."
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Artifact,Scarecrow | staticAbilities$ STAltCost | Duration$ Perpetual | SubAbility$ DBClearChosen
+SVar:STAltCost:Mode$ Continuous | EffectZone$ All | MayPlay$ True | MayPlayAltManaCost$ 4 | MayPlayDontGrantZonePermissions$ True | Affected$ Card.Self | AffectedZone$ Hand,Graveyard,Library,Exile,Command | Description$ You may pay {4} rather than pay this spell's mana cost.
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+Oracle:At the beginning of your end step, conjure a duplicate of a random creature card from your opponent's library into your hand. The duplicate perpetually becomes an artifact Scarecrow in addition to its other types and gains "You may pay {4} rather than pay this spell's mana cost."

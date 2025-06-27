@@ -1,0 +1,128 @@
+genie.png
+size: 1088,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 147, 220
+  size: 16, 16
+Wake 
+  xy: 10, 90
+  size: 42, 39      
+Wake 
+  xy: 74, 90
+  size: 42, 39      
+Wake 
+  xy: 138, 90
+  size: 42, 39      
+Wake 
+  xy: 202, 90
+  size: 42, 39      
+Wake 
+  xy: 266, 90
+  size: 42, 39            
+Wake 
+  xy: 330, 90
+  size: 42, 39     
+Wake 
+  xy: 394, 90
+  size: 42, 39      
+Wake 
+  xy: 458, 90
+  size: 42, 39      
+Wake 
+  xy: 522, 90
+  size: 42, 39      
+Wake 
+  xy: 586, 90
+  size: 42, 39      
+Wake 
+  xy: 650, 90
+  size: 42, 39            
+Wake 
+  xy: 714, 90
+  size: 42, 39   
+Wake 
+  xy: 778, 90
+  size: 42, 39      
+Wake 
+  xy: 842, 90
+  size: 42, 39      
+Wake 
+  xy: 906, 90
+  size: 42, 39      
+Wake 
+  xy: 970, 90
+  size: 42, 39            
+Wake 
+  xy: 1034, 90
+  size: 42, 39 
+Idle 
+  xy: 9, 157
+  size: 45, 35 
+Idle 
+  xy: 73, 157
+  size: 45, 35 
+Idle 
+  xy: 137, 157
+  size: 45, 35 
+Idle 
+  xy: 201, 157
+  size: 45, 35 
+Idle 
+  xy: 265, 157
+  size: 45, 35 
+Idle 
+  xy: 329, 157
+  size: 45, 35 
+Walk 
+  xy: 9, 157
+  size: 45, 35 
+Walk 
+  xy: 73, 157
+  size: 45, 35 
+Walk 
+  xy: 137, 157
+  size: 45, 35 
+Walk 
+  xy: 201, 157
+  size: 45, 35 
+Walk 
+  xy: 265, 157
+  size: 45, 35 
+Walk 
+  xy: 329, 157
+  size: 45, 35   
+Attack 
+  xy: 9, 205
+  size: 47, 51     
+Attack 
+  xy: 73, 205
+  size: 47, 51       
+Attack 
+  xy: 137, 205
+  size: 47, 51    
+Attack 
+  xy: 201, 205
+  size: 47, 51        
+Attack 
+  xy: 265, 205
+  size: 47, 51        
+Attack 
+  xy: 329, 205
+  size: 47, 51     
+Attack 
+  xy: 393, 205
+  size: 47, 51                  
+Death 
+  xy: 140, 415
+  size: 42, 33      
+Death 
+  xy: 204, 415
+  size: 42, 33 
+Death 
+  xy: 268, 415
+  size: 42, 33 
+Death 
+  xy: 332, 415
+  size: 42, 33 

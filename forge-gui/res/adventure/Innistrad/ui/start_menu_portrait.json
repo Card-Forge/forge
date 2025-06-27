@@ -1,0 +1,113 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/title_bg_portrait.png",
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "TextButton",
+      "name": "Start",
+      "text": "tr(lblNewGame)",
+      "selectable": true,
+      "width": 238,
+      "height": 48,
+      "x": 16,
+      "y": 16
+    },
+    {
+      "type": "TextButton",
+      "name": "Start+",
+      "text": "tr(lblNewGame) +",
+      "selectable": true,
+      "width": 238,
+      "height": 48,
+      "x": 16,
+      "yOffset": 8
+    },
+    {
+      "type": "TextButton",
+      "name": "Load",
+      "text": "tr(lblLoad)",
+      "selectable": true,
+      "width": 238,
+      "height": 48,
+      "x": 16,
+      "yOffset": 8
+    },
+    {
+      "type": "TextButton",
+      "name": "Save",
+      "text": "tr(lblSave)",
+      "selectable": true,
+      "width": 238,
+      "height": 48,
+      "x": 16,
+      "yOffset": 8
+    },
+    {
+      "type": "TextButton",
+      "name": "Resume",
+      "text": "tr(lblResume)",
+      "selectable": true,
+      "width": 238,
+      "height": 48,
+      "x": 16,
+      "yOffset": 8
+    },
+    {
+      "type": "TextButton",
+      "name": "Settings",
+      "text": "tr(lblSettings)",
+      "selectable": true,
+      "width": 118,
+      "height": 48,
+      "x": 16,
+      "yOffset": 8
+    },
+    {
+      "type": "TextButton",
+      "name": "Backup",
+      "text": "tr(lblData)",
+      "selectable": true,
+      "width": 118,
+      "height": 48,
+      "x": 134,
+      "yOffset": -48
+    },
+    {
+      "type": "TextButton",
+      "name": "Switch",
+      "text": "tr(lblClassic)",
+      "selectable": true,
+      "width": 238,
+      "height": 48,
+      "x": 16,
+      "yOffset": 8
+    },
+    {
+      "type": "TextButton",
+      "name": "Exit",
+      "text": "tr(lblExit)",
+      "selectable": true,
+      "width": 238,
+      "height": 48,
+      "x": 16,
+      "yOffset": 8
+    },
+    {
+      "type": "TextButton",
+      "name": "Continue",
+      "text": "tr(lblContinue)",
+      "selectable": true,
+      "width": 238,
+      "height": 48,
+      "x": 16,
+      "yOffset": 8
+    }
+  ]
+}

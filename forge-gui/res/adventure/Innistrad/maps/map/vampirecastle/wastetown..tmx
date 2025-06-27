@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="72" height="66" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="62">
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="72" height="66">
+  <data encoding="base64" compression="zlib">
+   eJzt20tOw0AMBuBuEGLBCnGOgggSJ+AiXXEHDsMVAIkj9C7cAlkowh0m87Ab2xO70r9K04y/TiavyfFmtzsq5/nKbrRtwqeei8tyPPrMtffYefFptUnX8eBDsdmST20sodiM4lOrkVN/67at+kDb7vbLDmvaaBr12uQ8JGy0jKg+uK25ZRJGON/XuvsXGEg79ATatoZR7//mzYjSt60bQV1zf+d6Udtg2QgHfDhG1O1a70fp/0k14mx3RKNc1vLZQmpG2u2zkNL5E+c3R9m3WvL0kDcKm9O6UqOwOa0NPpzzZ6nrUK207l/p9d9I54SUftNz/PLQT0o2c+05ny2PL7lArXjMwctgrPZsg+tesvNu0+oXNmFDSdiET/iET/jYTPgsB+4Jhc//4Gux9ymMlmzCqG7j3QjGmJqNVyOwSe+n1nI/6bdbMr3PU0s+W7nHCv0GQnnevOTzNf2Gsw9aeR7JmX8G9efmFoLNVsYp7vw8qP8TBduUHEeJ1PzFUfuR5PzO8AkfTqTHoHNsb625wOHTn73C3HCujUeflveGpG0szWOAdnw8ytXOseG+6zW6UYvN/D1v/ajVRstH06jHRtNHw6jXRtsHAj5SRr02kJdXXR+I1PEcH5MOyXnF0jrgU8vb7V9avo9jyYcSXPu502pk1WdNmx4jzz6zUek4YM1HyqW1H1ny0bDBRpT332r5AUrMn2E=
+  </data>
+ </layer>
+ <layer id="7" name="Foilage" width="72" height="66">
+  <data encoding="base64" compression="zlib">
+   eJzt2sEJgDAQRUHBEsQ6REzs3Basy7sgORjdEGYKCJ/HHjMMAAAAAAD8ac3RC9p1aPMo79ELAPo3ztEL6MGSohe0SxsA6M+6RS9on0ZlGpVpVKYRX0mb+3qSKnQ5p/dvtOB+IzXaAADQP/+kAAAAqOUCtSwITg==
+  </data>
+ </layer>
+ <layer id="2" name="Floor" width="72" height="66">
+  <data encoding="base64" compression="zlib">
+   eJzt2+FugjAUQGGeaG2xmL31ygLvt175bQuM3duO8yVNjNFQj0pRdBiAvqWP9yOM1rNrH40AALieY32tWqP1DNpHozoa1dGojkZ1sq6Fh/UsgP8ncswIAAAAAACAziVnPQMAALDX5x+f8+39nHJQOK7puZFGn9d2Om2k1ee1rQ4bafZJ9CmiT5lT/ozrL9gefcroU77/HfvEx/Z91p6hxcVhmBvZPy95Hs+GflNbajPl653Pz7XXndM8ttFo7+smKfcR1o2OvKcs+girRkf3N1Z9hHajM/tiyz5Cs9GZdfx7un4eR0WlPmf+j+JDfRy9fchjzd3nne2XBtYzC9Jo2tEoNvAatiKN1srjX27cR9Qa+Zv3EaVG9NlIny+/rZkyxnx5ziP9ss8PUJZQsg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="72" height="66">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztm+tNxDAMgFsYAV2XQT1GRV2GGYBpkIWiM8VxHk1iJ/En9c/BqfbXPJ3eshhGn6y3ZXkKXM836ShlADdvW/j/9m0+T7FuMMckfnLcAKP4CY0pOW6AHvysgTEzt23EAOOQ5jEI507FWtONQ6sjKnccaws31H214IsJPr9v7dzg+2pbJ2l8bhgN8WmIgUNDfBpi4Dj3PYlYtTvCSMVqjvTeNwdqzqvd/1que2pR8xn3sCeKoYajEdoOpqSj0dw4Sjga1Q1wNbdR3bi6TUpuVJ1rVDepeY3aTiioOXgVqgFq5Dwmu/ylaoAacS7O+R+Et1nZiTqf8zO7Gx8H0aaMB+BnlD1UDcwPj/nhMT885ofH/PwH5vM7Ovc0Pw985+iLOWLXgbM7ilkjz+ooZf/Q03lWCew9SD813oPk6mo9cWVP7vPD1dV640ofiakr9u7o6hhyPsun2mLPjlqNsb06ajkH9TjfmR8e7X4+XvKvErmZn/Ixt7yXpJ/W5zVa/OC6Fne1dJP7LGr40bbW4Nzg30FdcZHav7Q4Crlxfzsa+wGkHcW6AST8AFKOUtwAUn6A1o5S3QCSfoCWjt4z3jdzuUj5wTHUZs9YT7jvfHmu7+1v7p8R65fXLe13Ez3uD0sQ23dm9QPEOJrZDxByNLsfgHNkfn7JmT9i+AGrpRQk
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects" visible="0">
+  <object id="48" template="../../obj/treasure.tx" x="112.333" y="520.333"/>
+  <object id="50" template="../../obj/enemy.tx" x="112.902" y="544.559">
+   <properties>
+    <property name="enemy" value="High Vampire"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="77">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2jtq76i9o/aO2jtqL6q9e4G4npt+dtYC7doDtHMnneteEN4NxAD/oTSv
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr5GRg6BzFo3gUj+JRPIpH8YjAAGRZIuw=
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7w8TA8GcUj+JRPIpH8SgexSMCAwCWUPoU
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAooA9/YB9oFo4BYAACu/AD+
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="208.667" y="225.21">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_2.tmx"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="206.712" y="152.781">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Rhystic Study&quot;,&quot;Haughty Djinn&quot; ]
+ &quot;opponent&quot;: {
+   &quot;startBattleWithCard&quot;: [ &quot;Wishclaw Talisman&quot; ]
+ }
+}</property>
+    <property name="enemy" value="Mighty Djinn"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/treasure.tx" x="206.037" y="135.253"/>
+  <object id="75" template="../../obj/booster.tx" x="189.184" y="118.4">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/booster.tx" x="219.52" y="118.063">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ALA&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,680 @@
+avatar.png
+size: 160,368
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none       
+Kor_m 
+  xy: 0, 0
+  size: 16, 16         
+Kor_m 
+  xy: 16, 0
+  size: 16, 16        
+Kor_m 
+  xy: 32, 0
+  size: 16, 16        
+Kor_m 
+  xy: 48, 0
+  size: 16, 16        
+Kor_m 
+  xy: 64, 0
+  size: 16, 16        
+Kor_m 
+  xy: 80, 0
+  size: 16, 16        
+Kor_m 
+  xy: 96, 0
+  size: 16, 16        
+Kor_m 
+  xy: 112, 0
+  size: 16, 16        
+Kor_m 
+  xy: 128, 0
+  size: 16, 16        
+Kor_m 
+  xy: 144, 0
+  size: 16, 16        
+Kor_f
+  xy: 0, 16
+  size: 16, 16         
+Kor_f 
+  xy: 16, 16
+  size: 16, 16        
+Kor_f 
+  xy: 32, 16
+  size: 16, 16        
+Kor_f 
+  xy: 48, 16
+  size: 16, 16        
+Kor_f 
+  xy: 64, 16
+  size: 16, 16        
+Kor_f 
+  xy: 80, 16
+  size: 16, 16        
+Kor_f 
+  xy: 96, 16
+  size: 16, 16        
+Kor_f 
+  xy: 112, 16
+  size: 16, 16        
+Kor_f 
+  xy: 128, 16
+  size: 16, 16        
+Kor_f 
+  xy: 144, 16
+  size: 16, 16        
+Devil_m
+  xy: 0, 32
+  size: 16, 16         
+Devil_m 
+  xy: 16, 32
+  size: 16, 16        
+Devil_m 
+  xy: 32, 32
+  size: 16, 16        
+Devil_m 
+  xy: 48, 32
+  size: 16, 16        
+Devil_m 
+  xy: 64, 32
+  size: 16, 16        
+Devil_m 
+  xy: 80, 32
+  size: 16, 16        
+Devil_m 
+  xy: 96, 32
+  size: 16, 16        
+Devil_m 
+  xy: 112, 32
+  size: 16, 16        
+Devil_m 
+  xy: 128, 32
+  size: 16, 16        
+Devil_m 
+  xy: 144, 32
+  size: 16, 16        
+Devil_f
+  xy: 0, 48
+  size: 16, 16         
+Devil_f
+  xy: 16, 48
+  size: 16, 16        
+Devil_f
+  xy: 32, 48
+  size: 16, 16        
+Devil_f
+  xy: 48, 48
+  size: 16, 16        
+Devil_f
+  xy: 64, 48
+  size: 16, 16        
+Devil_f
+  xy: 80, 48
+  size: 16, 16        
+Devil_f
+  xy: 96, 48
+  size: 16, 16        
+Devil_f
+  xy: 112, 48
+  size: 16, 16        
+Devil_f
+  xy: 128, 48
+  size: 16, 16        
+Devil_f
+  xy: 144, 48
+  size: 16, 16        
+Human_m
+  xy: 0, 64
+  size: 16, 16         
+Human_m
+  xy: 16, 64
+  size: 16, 16        
+Human_m
+  xy: 32, 64
+  size: 16, 16        
+Human_m
+  xy: 48, 64
+  size: 16, 16        
+Human_m
+  xy: 64, 64
+  size: 16, 16        
+Human_m
+  xy: 80, 64
+  size: 16, 16        
+Human_m
+  xy: 96, 64
+  size: 16, 16        
+Human_m
+  xy: 112, 64
+  size: 16, 16        
+Human_m
+  xy: 128, 64
+  size: 16, 16        
+Human_m
+  xy: 144, 64
+  size: 16, 16        
+Human_f
+  xy: 0, 80
+  size: 16, 16         
+Human_f
+  xy: 16, 80
+  size: 16, 16        
+Human_f
+  xy: 32, 80
+  size: 16, 16        
+Human_f
+  xy: 48, 80
+  size: 16, 16        
+Human_f
+  xy: 64, 80
+  size: 16, 16        
+Human_f
+  xy: 80, 80
+  size: 16, 16        
+Human_f
+  xy: 96, 80
+  size: 16, 16        
+Human_f
+  xy: 112, 80
+  size: 16, 16        
+Human_f
+  xy: 128, 80
+  size: 16, 16        
+Human_f
+  xy: 144, 80
+  size: 16, 16        
+Viashino_m
+  xy: 0, 96
+  size: 16, 16         
+Viashino_m
+  xy: 16, 96
+  size: 16, 16        
+Viashino_m
+  xy: 32, 96
+  size: 16, 16        
+Viashino_m
+  xy: 48, 96
+  size: 16, 16        
+Viashino_m
+  xy: 64, 96
+  size: 16, 16        
+Viashino_m
+  xy: 80, 96
+  size: 16, 16        
+Viashino_m
+  xy: 96, 96
+  size: 16, 16        
+Viashino_m
+  xy: 112, 96
+  size: 16, 16        
+Viashino_m
+  xy: 128, 96
+  size: 16, 16        
+Viashino_m
+  xy: 144, 96
+  size: 16, 16        
+Viashino_f
+  xy: 0, 112
+  size: 16, 16         
+Viashino_f
+  xy: 16, 112
+  size: 16, 16        
+Viashino_f
+  xy: 32, 112
+  size: 16, 16        
+Viashino_f
+  xy: 48, 112
+  size: 16, 16        
+Viashino_f
+  xy: 64, 112
+  size: 16, 16        
+Viashino_f
+  xy: 80, 112
+  size: 16, 16        
+Viashino_f
+  xy: 96, 112
+  size: 16, 16        
+Viashino_f
+  xy: 112, 112
+  size: 16, 16        
+Viashino_f
+  xy: 128, 112
+  size: 16, 16        
+Viashino_f
+  xy: 144, 112
+  size: 16, 16        
+Metathran_m
+  xy: 0, 128
+  size: 16, 16         
+Metathran_m
+  xy: 16, 128
+  size: 16, 16        
+Metathran_m
+  xy: 32, 128
+  size: 16, 16        
+Metathran_m
+  xy: 48, 128
+  size: 16, 16        
+Metathran_m
+  xy: 64, 128
+  size: 16, 16        
+Metathran_m
+  xy: 80, 128
+  size: 16, 16        
+Metathran_m
+  xy: 96, 128
+  size: 16, 16        
+Metathran_m
+  xy: 112, 128
+  size: 16, 16        
+Metathran_m
+  xy: 128, 128
+  size: 16, 16        
+Metathran_m
+  xy: 144, 128
+  size: 16, 16        
+Metathran_f
+  xy: 0, 144
+  size: 16, 16         
+Metathran_f
+  xy: 16, 144
+  size: 16, 16        
+Metathran_f
+  xy: 32, 144
+  size: 16, 16        
+Metathran_f
+  xy: 48, 144
+  size: 16, 16        
+Metathran_f
+  xy: 64, 144
+  size: 16, 16        
+Metathran_f
+  xy: 80, 144
+  size: 16, 16        
+Metathran_f
+  xy: 96, 144
+  size: 16, 16        
+Metathran_f
+  xy: 112, 144
+  size: 16, 16        
+Metathran_f
+  xy: 128, 144
+  size: 16, 16        
+Metathran_f
+  xy: 144, 144
+  size: 16, 16        
+Undead_m
+  xy: 0, 160
+  size: 16, 16         
+Undead_m
+  xy: 16, 160
+  size: 16, 16        
+Undead_m
+  xy: 32, 160
+  size: 16, 16        
+Undead_m
+  xy: 48, 160
+  size: 16, 16        
+Undead_m
+  xy: 64, 160
+  size: 16, 16        
+Undead_m
+  xy: 80, 160
+  size: 16, 16        
+Undead_m
+  xy: 96, 160
+  size: 16, 16        
+Undead_m
+  xy: 112, 160
+  size: 16, 16        
+Undead_m
+  xy: 128, 160
+  size: 16, 16        
+Undead_m
+  xy: 144, 160
+  size: 16, 16        
+Undead_f
+  xy: 0, 176
+  size: 16, 16         
+Undead_f
+  xy: 16, 176
+  size: 16, 16        
+Undead_f
+  xy: 32, 176
+  size: 16, 16        
+Undead_f
+  xy: 48, 176
+  size: 16, 16        
+Undead_f
+  xy: 64, 176
+  size: 16, 16        
+Undead_f
+  xy: 80, 176
+  size: 16, 16        
+Undead_f
+  xy: 96, 176
+  size: 16, 16        
+Undead_f
+  xy: 112, 176
+  size: 16, 16        
+Undead_f
+  xy: 128, 176
+  size: 16, 16        
+Undead_f
+  xy: 144, 176
+  size: 16, 16         
+Elf_m
+  xy: 0, 192
+  size: 16, 16         
+Elf_m
+  xy: 16, 192
+  size: 16, 16        
+Elf_m
+  xy: 32, 192
+  size: 16, 16        
+Elf_m
+  xy: 48, 192
+  size: 16, 16        
+Elf_m
+  xy: 64, 192
+  size: 16, 16        
+Elf_m
+  xy: 80, 192
+  size: 16, 16        
+Elf_m
+  xy: 96, 192
+  size: 16, 16        
+Elf_m
+  xy: 112, 192
+  size: 16, 16        
+Elf_m
+  xy: 128, 192
+  size: 16, 16        
+Elf_m
+  xy: 144, 192
+  size: 16, 16        
+Elf_f
+  xy: 0, 208
+  size: 16, 16         
+Elf_f
+  xy: 16, 208
+  size: 16, 16        
+Elf_f
+  xy: 32, 208
+  size: 16, 16        
+Elf_f
+  xy: 48, 208
+  size: 16, 16        
+Elf_f
+  xy: 64, 208
+  size: 16, 16        
+Elf_f
+  xy: 80, 208
+  size: 16, 16        
+Elf_f
+  xy: 96, 208
+  size: 16, 16        
+Elf_f
+  xy: 112, 208
+  size: 16, 16        
+Elf_f
+  xy: 128, 208
+  size: 16, 16        
+Elf_f
+  xy: 144, 208
+  size: 16, 16        
+Dwarf_m
+  xy: 0, 224
+  size: 16, 16         
+Dwarf_m
+  xy: 16, 224
+  size: 16, 16        
+Dwarf_m
+  xy: 32, 224
+  size: 16, 16        
+Dwarf_m
+  xy: 48, 224
+  size: 16, 16        
+Dwarf_m
+  xy: 64, 224
+  size: 16, 16        
+Dwarf_m
+  xy: 80, 224
+  size: 16, 16        
+Dwarf_m
+  xy: 96, 224
+  size: 16, 16        
+Dwarf_m
+  xy: 112, 224
+  size: 16, 16        
+Dwarf_m
+  xy: 128, 224
+  size: 16, 16        
+Dwarf_m
+  xy: 144, 224
+  size: 16, 16        
+Dwarf_f
+  xy: 0, 240
+  size: 16, 16         
+Dwarf_f
+  xy: 16, 240
+  size: 16, 16        
+Dwarf_f
+  xy: 32, 240
+  size: 16, 16        
+Dwarf_f
+  xy: 48, 240
+  size: 16, 16        
+Dwarf_f
+  xy: 64, 240
+  size: 16, 16        
+Dwarf_f
+  xy: 80, 240
+  size: 16, 16        
+Dwarf_f
+  xy: 96, 240
+  size: 16, 16        
+Dwarf_f
+  xy: 112, 240
+  size: 16, 16        
+Dwarf_f
+  xy: 128, 240
+  size: 16, 16        
+Dwarf_f
+  xy: 144, 240
+  size: 16, 16        
+Phyrexian_m
+  xy: 0, 256
+  size: 16, 16         
+Phyrexian_m
+  xy: 16, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 32, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 48, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 64, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 80, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 96, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 112, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 128, 256
+  size: 16, 16        
+Phyrexian_m
+  xy: 144, 256
+  size: 16, 16        
+Phyrexian_f
+  xy: 0, 272
+  size: 16, 16         
+Phyrexian_f
+  xy: 16, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 32, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 48, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 64, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 80, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 96, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 112, 272
+  size: 16, 16        
+Phyrexian_f
+  xy: 128, 272
+  size: 16, 16        
+Phyrexian_f
+  size: 16, 16        
+  xy: 144, 272
+Werewolf_m
+  xy: 0, 288
+  size: 16, 16         
+Werewolf_m
+  xy: 16, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 32, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 48, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 64, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 80, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 96, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 112, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 128, 288
+  size: 16, 16        
+Werewolf_m
+  xy: 144, 288
+  size: 16, 16        
+Werewolf_f
+  xy: 0, 304
+  size: 16, 16         
+Werewolf_f
+  xy: 16, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 32, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 48, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 64, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 80, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 96, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 112, 304
+  size: 16, 16        
+Werewolf_f
+  xy: 128, 304
+  size: 16, 16        
+Werewolf_f
+  size: 16, 16        
+  xy: 144, 304  
+Leonin_m
+  xy: 0, 320
+  size: 16, 16         
+Leonin_m
+  xy: 16, 320
+  size: 16, 16        
+Leonin_m
+  xy: 32, 320
+  size: 16, 16        
+Leonin_m
+  xy: 48, 320
+  size: 16, 16        
+Leonin_m
+  xy: 64, 320
+  size: 16, 16        
+Leonin_m
+  xy: 80, 320
+  size: 16, 16        
+Leonin_m
+  xy: 96, 320
+  size: 16, 16        
+Leonin_m
+  xy: 112, 320
+  size: 16, 16        
+Leonin_m
+  xy: 128, 320
+  size: 16, 16        
+Leonin_m
+  xy: 144, 320
+  size: 16, 16        
+Leonin_f
+  xy: 0, 336
+  size: 16, 16         
+Leonin_f
+  xy: 16, 336
+  size: 16, 16        
+Leonin_f
+  xy: 32, 336
+  size: 16, 16        
+Leonin_f
+  xy: 48, 336
+  size: 16, 16        
+Leonin_f
+  xy: 64, 336
+  size: 16, 16        
+Leonin_f
+  xy: 80, 336
+  size: 16, 16        
+Leonin_f
+  xy: 96, 336
+  size: 16, 16        
+Leonin_f
+  xy: 112, 336
+  size: 16, 16        
+Leonin_f
+  xy: 128, 336
+  size: 16, 16        
+Leonin_f
+  size: 16, 16        
+  xy: 144, 336
+Dragon_r
+  xy: 48, 352
+  size: 16, 16       
+Dragon_w
+  xy: 0, 352
+  size: 16, 16        
+Dragon_g
+  xy: 64, 352
+  size: 16, 16    
+Dragon_b
+  xy: 32, 352
+  size: 16, 16            
+Dragon_u
+  xy: 16, 352
+  size: 16, 16       

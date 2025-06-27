@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEKACAIBND2fti5L291iLxAU+qG29SnBElvTRiGCc1QQWp0rdXnsdMulV10FmJluFn3VnAR+zXXsrPeN8KP/h883VWfNdPj1pN9boQuXbr/uhNtp9Ws
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzVl0tOwzAQhg0skB33DIZ1OUNRBIEjcIDCQQpH4AAFCYFyJ5AQIWtWYY1HttWJm9jTxI3ESKO4TuLvn44fk4Vk7DBj7Ej7FLYUjN0Kw5ySe5BtmODn0ui4E/tjQqwL2eZOEbcfq/MPreV5Ym5q3s1su2+tGe+yHSe2x7QStthP1sfE+t0zD3F/jdopYsq48ZjdB+KqhNF41XP12y+ad0zwV+2nsp9bcqOL6+uJ3Ljgxl0brhBjjjRcC/MueIF+QzuP7AeO+0DItZJmPBHQiPXVAfYqa3N/zsLsWBxYXxFgK6sPuJTcXQhafi+FGfctMP9Ky6XEQnnGPVdG5vy+uDFboTnYzBn7nafhhtYvmMvxJyF31Px+WS7O77JDs/LWBOgovL2jtv9Jhfqxu7lb2bXMvb0DzqXYOa9ke406HTkaE69frLOL6c7+XesMhfYDf0x3H+9v/n3/LAQ+lV1aLmVv6zL//KfWOGO564E1x1gu2JA6JxU3xvRrpbHcZjasxkkR7xD7z1z3nbTL9wmVC/Oi6aijwf4AV6hrzg==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4B2YAcLA4M0jfEuFkx7Q1lJd+sUDtLUY7ODHHtJBdS211iHgcFEB5MNA7BwIcdeUsMUGxiK4TyZAn8TYy96PFlrMTDYaGHqwxW32OJ5KIYzCLxnR6UJAQ1G7HZ8JcFeStI1Kf49DHSruyYDgwcQ63Fiyg/m+N3BRpm9pzUosx9kB3o+hNmLL/6eQ+0lNw8T619izBc0pszeL6zk1aGk1NvfkOxF9xOhfILuZnLSIznxRA17yQGk2EuNupMce6kJyLWXUr8PNf8OFnsBQlgyOA==
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0iESgDAQQ9F/C3Bg29373wWGwyBwlEFRpuI/FRGXgKQRTAlztlnjuu+0VFjre6/nzoef+dQWsMeVo0CW595f+0qS1MMJLegJDQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
+  <object id="41" template="../../obj/shop.tx" x="256" y="208">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/shop.tx" x="272" y="144">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/shop.tx" x="320" y="144">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/shop.tx" x="304" y="208">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/shop.tx" x="352" y="208">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/shop.tx" x="352" y="272">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/shop.tx" x="304" y="272">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/shop.tx" x="256" y="272">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi,Saga"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/inn.tx" x="150" y="273"/>
+  <object id="48" template="../../obj/shop.tx" x="104" y="272">
+   <properties>
+    <property name="commonShopList" value="Equipment"/>
+    <property name="noRestock" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/shop.tx" x="97" y="209">
+   <properties>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,Creature,Creature2Blue,Creature2Red,Creature2Black,Creature2White,Creature2Green,Creature2Colorless,Sliver,Wall,Assembly,Human"/>
+        <property name="mythicShopList" value="Assassin,Squirrel,Dragon,Vampire,Minotaur,Dwarf,Devil,Soldier,Demon,Druid,Bird,Wolf,Knight,Skeleton,Shaman,Wizard,Pirate,Rogue,Dinosaur,Ogre,Planeswalker,Legend,WUBRG"/>
+        <property name="rareShopList" value="Human,Zombie,Goblin,Elf,Merfolk,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,PhyrexianColorless"/>
+        <property name="uncommonShopList" value="Land,Vehicle,Equip,Wand,Artifact,Multicolor,Golem,Colorless,Enchantment,Instant"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/shardtrader.tx" x="400" y="288"/>
+  <object id="62" template="../../obj/quest.tx" x="159" y="209" width="34" height="16">
+   <properties>
+    <property name="questtype" value="waste_town_identity"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

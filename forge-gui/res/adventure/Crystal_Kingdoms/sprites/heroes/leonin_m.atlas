@@ -1,0 +1,485 @@
+leonin_m.png
+size: 518,80
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none           
+IdleRight 
+  xy: 0, 0
+  size: 16, 16             
+IdleRight 
+  xy: 16, 0
+  size: 16, 16        
+IdleRight 
+  xy: 32, 0
+  size: 16, 16          
+IdleRight 
+  xy: 48, 0
+  size: 16, 16      
+IdleRightDown 
+  xy: 64, 0
+  size: 16, 16             
+IdleRightDown 
+  xy: 80, 0
+  size: 16, 16        
+IdleRightDown 
+  xy: 96, 0
+  size: 16, 16          
+IdleRightDown 
+  xy: 112, 0
+  size: 16, 16      
+IdleDown 
+  xy: 128, 0
+  size: 16, 16             
+IdleDown 
+  xy: 144, 0
+  size: 16, 16        
+IdleDown 
+  xy: 160, 0
+  size: 16, 16          
+IdleDown 
+  xy: 176, 0
+  size: 16, 16     
+IdleLeftDown 
+  xy: 192, 0
+  size: 16, 16             
+IdleLeftDown 
+  xy: 208, 0
+  size: 16, 16        
+IdleLeftDown 
+  xy: 224, 0
+  size: 16, 16          
+IdleLeftDown 
+  xy: 240, 0
+  size: 16, 16      
+IdleLeft 
+  xy: 256, 0
+  size: 16, 16             
+IdleLeft 
+  xy: 272, 0
+  size: 16, 16        
+IdleLeft 
+  xy: 288, 0
+  size: 16, 16          
+IdleLeft 
+  xy: 304, 0
+  size: 16, 16      
+IdleLeftUp
+  xy: 320, 0
+  size: 16, 16             
+IdleLeftUp 
+  xy: 336, 0
+  size: 16, 16        
+IdleLeftUp 
+  xy: 352, 0
+  size: 16, 16          
+IdleLeftUp 
+  xy: 368, 0
+  size: 16, 16     
+IdleUp
+  xy: 384, 0
+  size: 16, 16             
+IdleUp 
+  xy: 400, 0
+  size: 16, 16        
+IdleUp 
+  xy: 416, 0
+  size: 16, 16          
+IdleUp 
+  xy: 432, 0
+  size: 16, 16        
+IdleRightUp
+  xy: 448, 0
+  size: 16, 16             
+IdleRightUp 
+  xy: 464, 0
+  size: 16, 16        
+IdleRightUp 
+  xy: 480, 0
+  size: 16, 16          
+IdleRightUp 
+  xy: 496, 0
+  size: 16, 16       
+WalkRight 
+  xy: 0, 16
+  size: 16, 16             
+WalkRight 
+  xy: 16, 16
+  size: 16, 16        
+WalkRight 
+  xy: 32, 16
+  size: 16, 16          
+WalkRight 
+  xy: 48, 16
+  size: 16, 16      
+WalkRightDown 
+  xy: 64, 16
+  size: 16, 16             
+WalkRightDown 
+  xy: 80, 16
+  size: 16, 16        
+WalkRightDown 
+  xy: 96, 16
+  size: 16, 16          
+WalkRightDown 
+  xy: 112, 16
+  size: 16, 16      
+WalkDown 
+  xy: 128, 16
+  size: 16, 16             
+WalkDown 
+  xy: 144, 16
+  size: 16, 16        
+WalkDown 
+  xy: 160, 16
+  size: 16, 16          
+WalkDown 
+  xy: 176, 16
+  size: 16, 16     
+WalkLeftDown 
+  xy: 192, 16
+  size: 16, 16             
+WalkLeftDown 
+  xy: 208, 16
+  size: 16, 16        
+WalkLeftDown 
+  xy: 224, 16
+  size: 16, 16          
+WalkLeftDown 
+  xy: 240, 16
+  size: 16, 16      
+WalkLeft 
+  xy: 256, 16
+  size: 16, 16             
+WalkLeft 
+  xy: 272, 16
+  size: 16, 16        
+WalkLeft 
+  xy: 288, 16
+  size: 16, 16          
+WalkLeft 
+  xy: 304, 16
+  size: 16, 16      
+WalkLeftUp
+  xy: 320, 16
+  size: 16, 16             
+WalkLeftUp 
+  xy: 336, 16
+  size: 16, 16        
+WalkLeftUp 
+  xy: 352, 16
+  size: 16, 16          
+WalkLeftUp 
+  xy: 368, 16
+  size: 16, 16     
+WalkUp
+  xy: 384, 16
+  size: 16, 16             
+WalkUp 
+  xy: 400, 16
+  size: 16, 16        
+WalkUp 
+  xy: 416, 16
+  size: 16, 16          
+WalkUp 
+  xy: 432, 16
+  size: 16, 16        
+WalkRightUp
+  xy: 448, 16
+  size: 16, 16             
+WalkRightUp 
+  xy: 464, 16
+  size: 16, 16        
+WalkRightUp 
+  xy: 480, 16
+  size: 16, 16          
+WalkRightUp 
+  xy: 496, 16
+  size: 16, 16       
+AttackRight 
+  xy: 0, 32
+  size: 16, 16             
+AttackRight 
+  xy: 16, 32
+  size: 16, 16        
+AttackRight 
+  xy: 32, 32
+  size: 16, 16          
+AttackRight 
+  xy: 48, 32
+  size: 16, 16      
+AttackRightDown 
+  xy: 64, 32
+  size: 16, 16             
+AttackRightDown 
+  xy: 80, 32
+  size: 16, 16        
+AttackRightDown 
+  xy: 96, 32
+  size: 16, 16          
+AttackRightDown 
+  xy: 112, 32
+  size: 16, 16      
+AttackDown 
+  xy: 128, 32
+  size: 16, 16             
+AttackDown 
+  xy: 144, 32
+  size: 16, 16        
+AttackDown 
+  xy: 160, 32
+  size: 16, 16          
+AttackDown 
+  xy: 176, 32
+  size: 16, 16     
+AttackLeftDown 
+  xy: 192, 32
+  size: 16, 16             
+AttackLeftDown 
+  xy: 208, 32
+  size: 16, 16        
+AttackLeftDown 
+  xy: 224, 32
+  size: 16, 16          
+AttackLeftDown 
+  xy: 240, 32
+  size: 16, 16      
+AttackLeft 
+  xy: 256, 32
+  size: 16, 16             
+AttackLeft 
+  xy: 272, 32
+  size: 16, 16        
+AttackLeft 
+  xy: 288, 32
+  size: 16, 16          
+AttackLeft 
+  xy: 304, 32
+  size: 16, 16      
+AttackLeftUp
+  xy: 320, 32
+  size: 16, 16             
+AttackLeftUp 
+  xy: 336, 32
+  size: 16, 16        
+AttackLeftUp 
+  xy: 352, 32
+  size: 16, 16          
+AttackLeftUp 
+  xy: 368, 32
+  size: 16, 16     
+AttackUp
+  xy: 384, 32
+  size: 16, 16             
+AttackUp 
+  xy: 400, 32
+  size: 16, 16        
+AttackUp 
+  xy: 416, 32
+  size: 16, 16          
+AttackUp 
+  xy: 432, 32
+  size: 16, 16        
+AttackRightUp
+  xy: 448, 32
+  size: 16, 16             
+AttackRightUp 
+  xy: 464, 32
+  size: 16, 16        
+AttackRightUp 
+  xy: 480, 32
+  size: 16, 16          
+AttackRightUp 
+  xy: 496, 32
+  size: 16, 16       
+HitRight 
+  xy: 0, 48
+  size: 16, 16             
+HitRight 
+  xy: 16, 48
+  size: 16, 16        
+HitRight 
+  xy: 32, 48
+  size: 16, 16          
+HitRight 
+  xy: 48, 48
+  size: 16, 16      
+HitRightDown 
+  xy: 64, 48
+  size: 16, 16             
+HitRightDown 
+  xy: 80, 48
+  size: 16, 16        
+HitRightDown 
+  xy: 96, 48
+  size: 16, 16          
+HitRightDown 
+  xy: 112, 48
+  size: 16, 16      
+HitDown 
+  xy: 128, 48
+  size: 16, 16             
+HitDown 
+  xy: 144, 48
+  size: 16, 16        
+HitDown 
+  xy: 160, 48
+  size: 16, 16          
+HitDown 
+  xy: 176, 48
+  size: 16, 16     
+HitLeftDown 
+  xy: 192, 48
+  size: 16, 16             
+HitLeftDown 
+  xy: 208, 48
+  size: 16, 16        
+HitLeftDown 
+  xy: 224, 48
+  size: 16, 16          
+HitLeftDown 
+  xy: 240, 48
+  size: 16, 16      
+HitLeft 
+  xy: 256, 48
+  size: 16, 16             
+HitLeft 
+  xy: 272, 48
+  size: 16, 16        
+HitLeft 
+  xy: 288, 48
+  size: 16, 16          
+HitLeft 
+  xy: 304, 48
+  size: 16, 16      
+HitLeftUp
+  xy: 320, 48
+  size: 16, 16             
+HitLeftUp 
+  xy: 336, 48
+  size: 16, 16        
+HitLeftUp 
+  xy: 352, 48
+  size: 16, 16          
+HitLeftUp 
+  xy: 368, 48
+  size: 16, 16     
+HitUp
+  xy: 384, 48
+  size: 16, 16             
+HitUp 
+  xy: 400, 48
+  size: 16, 16        
+HitUp 
+  xy: 416, 48
+  size: 16, 16          
+HitUp 
+  xy: 432, 48
+  size: 16, 16        
+HitRightUp
+  xy: 448, 48
+  size: 16, 16             
+HitRightUp 
+  xy: 464, 48
+  size: 16, 16        
+HitRightUp 
+  xy: 480, 48
+  size: 16, 16          
+HitRightUp 
+  xy: 496, 48
+  size: 16, 16       
+DeathRight 
+  xy: 0, 64
+  size: 16, 16             
+DeathRight 
+  xy: 16, 64
+  size: 16, 16        
+DeathRight 
+  xy: 32, 64
+  size: 16, 16          
+DeathRight 
+  xy: 48, 64
+  size: 16, 16      
+DeathRightDown 
+  xy: 64, 64
+  size: 16, 16             
+DeathRightDown 
+  xy: 80, 64
+  size: 16, 16        
+DeathRightDown 
+  xy: 96, 64
+  size: 16, 16          
+DeathRightDown 
+  xy: 112, 64
+  size: 16, 16      
+DeathDown 
+  xy: 128, 64
+  size: 16, 16             
+DeathDown 
+  xy: 144, 64
+  size: 16, 16        
+DeathDown 
+  xy: 160, 64
+  size: 16, 16          
+DeathDown 
+  xy: 176, 64
+  size: 16, 16     
+DeathLeftDown 
+  xy: 192, 64
+  size: 16, 16             
+DeathLeftDown 
+  xy: 208, 64
+  size: 16, 16        
+DeathLeftDown 
+  xy: 224, 64
+  size: 16, 16          
+DeathLeftDown 
+  xy: 240, 64
+  size: 16, 16      
+DeathLeft 
+  xy: 256, 64
+  size: 16, 16             
+DeathLeft 
+  xy: 272, 64
+  size: 16, 16        
+DeathLeft 
+  xy: 288, 64
+  size: 16, 16          
+DeathLeft 
+  xy: 304, 64
+  size: 16, 16      
+DeathLeftUp
+  xy: 320, 64
+  size: 16, 16             
+DeathLeftUp 
+  xy: 336, 64
+  size: 16, 16        
+DeathLeftUp 
+  xy: 352, 64
+  size: 16, 16          
+DeathLeftUp 
+  xy: 368, 64
+  size: 16, 16     
+DeathUp
+  xy: 384, 64
+  size: 16, 16             
+DeathUp 
+  xy: 400, 64
+  size: 16, 16        
+DeathUp 
+  xy: 416, 64
+  size: 16, 16          
+DeathUp 
+  xy: 432, 64
+  size: 16, 16        
+DeathRightUp
+  xy: 448, 64
+  size: 16, 16             
+DeathRightUp 
+  xy: 464, 64
+  size: 16, 16        
+DeathRightUp 
+  xy: 480, 64
+  size: 16, 16          
+DeathRightUp 
+  xy: 496, 64
+  size: 16, 16       

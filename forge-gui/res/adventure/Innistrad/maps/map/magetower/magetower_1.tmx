@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="75">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Mind Magus&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6ECah4FhFx4sy0M7e/EBatuL7E98gNr+JuRPdECpvfjiczfU7J00iG9S/YkOhqK9yGmJ1LCjpn+Hu7113BAMA8SUVzA91MhPxACYPdQsN9D9jQ3s5aGOP7HZX4/D7loa2IdsL8xPMPtroeGwh8zyCQABdykZ
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBrFKHgHD2XyQ8VeUs2jlv30tneg9I/aO2rvcLKXXP1Dtdwg1byhVC8AAHeEH2g=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYN08NOcu01YWJguIwHmzHRzl58gNr2IvsTHyDG36TaSwqg1F588XkF6pZLJMY3sfZSAoaivchpCRZ2A+Hf4W7vdEYIhgFC5RUIwPSQay+p6QtmLzXLDXR/47IXlz/JsZdYf9OyXsDmb3zxScheAFQQ6SE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwkwM2MX/8BOX3fQGmhpE6dOm0h1gxVokuB+UTYE+w/1nUIUGOrhPRgALG1/wpNnKQ1nZx7K9NMaSEDT8q8BsHs64wBYOsQAANwYBw0=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="277" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="207.333" y="58.8333">
+   <properties>
+    <property name="reward">[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Blue&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Iron Armor&quot;},
+{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 1,
+&quot;cardName&quot;: &quot;Staff of the Mind Magus&quot;}]</property>
+    <property name="spawn.Normal" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="207.402" y="88.0586">
+   <properties>
+    <property name="enemy" value="Apprentice Blue Wizard"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="72,73"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="119" y="148">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="68,67,66,67"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/gold.tx" x="283" y="237"/>
+  <object id="64" template="../../obj/booster.tx" x="312.5" y="167.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/waypoint.tx" x="208.5" y="78.5"/>
+  <object id="66" template="../../obj/waypoint.tx" x="211" y="133"/>
+  <object id="67" template="../../obj/waypoint.tx" x="118" y="131.5"/>
+  <object id="68" template="../../obj/waypoint.tx" x="117.5" y="195"/>
+  <object id="69" template="../../obj/waypoint.tx" x="271" y="171"/>
+  <object id="70" template="../../obj/waypoint.tx" x="207" y="172" width="16" height="17.5"/>
+  <object id="71" template="../../obj/enemy.tx" x="206.5" y="149">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="70,69,66,65"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/waypoint.tx" x="247" y="91.5"/>
+  <object id="73" template="../../obj/waypoint.tx" x="161" y="92"/>
+  <object id="74" template="../../obj/manashards.tx" x="234" y="189.5"/>
+ </objectgroup>
+</map>

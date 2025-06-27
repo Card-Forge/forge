@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="67">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Stensia Masquerade&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
+  </data>
+ </layer>
+ <layer id="2" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyT4WFgkCEBR/MyMOwC0lG8pOmjFMsCMQhI09FOetsLC1sQ3g21dycPQoxWYQ7yYwQvbkwrv8PCFhnA7KRlmGOzFxmM2jtq71Cydy8Q13FDcD03xK5aboTYHhrZi83vw7l8Hgz2guI6mYPyOAUAs91TwQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxFoM9LXPh0c9uESpza4Sx9rCAIHGpvfBqWvqzMw3ABiezRxegK7AbATBO7QyR5k/9ErfYHiEZv/BiJ+R8EowAUAPEcJCQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="268" width="48" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_1.tmx"/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="193.5" y="125.987">
+   <properties>
+    <property name="deckOverride" value="decks/standard/vampire_br.dck"/>
+    <property name="enemy" value="Ancient Vampire"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/dialog.tx" type="dialog" gid="11530" x="195.244" y="129.616" width="25.7101" height="18.009" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;You see a coffin lying at the center of the crypt. This relic of vampiric history, once a vessel for the undying, now stood as a time-worn testament to the passage of ages, a silent witness to the secrets and shadows that had unfolded within its confines. The ancient coffin, a repository of centuries, exuded an aura of both menace and melancholy, a silent sentinel to the mysteries of the nocturnal realm.&quot;,
+    &quot;options&quot;: [
+      { &quot;name&quot;: &quot;Walk away&quot; },
+      {
+        &quot;name&quot;: &quot;Take a closer look at the rusty coffin&quot;,
+        &quot;text&quot;: &quot;You sense an immense amount of power radiating from the coffin. You also begin to note the various unholy symbols engraved around the base of coffin.&quot;,
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;Walk away&quot; },
+          {
+            &quot;name&quot;: &quot;Open the coffin&quot;,
+            &quot;text&quot;: &quot;As you open the coffin, an ancient figure awakes in the gloom. It cries out in an ancient voice: YOU DARE WAKE ME, PUNY MORTAL ?&quot;,
+            &quot;options&quot;: [
+              {
+                &quot;name&quot;: &quot;Prepare yourself!&quot;,
+                &quot;action&quot;: [
+                  { &quot;activateMapObject&quot;: 50 },
+                  { &quot;deleteMapObject&quot;: 63 },
+                  { &quot;deleteMapObject&quot;: -1 }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="63" name="Ward" type="dialog" gid="11912" x="195.651" y="58.297" width="39.2943" height="16">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave.&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/manashards.tx" x="154.394" y="169.462"/>
+  <object id="65" template="../../obj/treasure.tx" x="208.637" y="23.8091">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;randomCard&quot;,
+    &quot;colors&quot;: [ &quot;Black&quot; ],
+    &quot;subTypes&quot;: [ &quot;Vampire&quot; ],
+    &quot;count&quot;: 5
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;count&quot;: 1,
+    &quot;probability&quot;: 0.1,
+    &quot;itemName&quot;: &quot;Dark Boots&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;count&quot;: 1,
+    &quot;probability&quot;: 0.1,
+    &quot;itemName&quot;: &quot;Dark Shield&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;count&quot;: 1,
+    &quot;probability&quot;: 0.1,
+    &quot;itemName&quot;: &quot;Dark Armor&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;count&quot;: 1,
+    &quot;probability&quot;: 0.1,
+    &quot;itemName&quot;: &quot;Blood Vial&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;count&quot;: 1,
+    &quot;probability&quot;: 0.1,
+    &quot;itemName&quot;: &quot;Dark Amulet&quot;
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/booster.tx" x="197.253" y="42.225">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

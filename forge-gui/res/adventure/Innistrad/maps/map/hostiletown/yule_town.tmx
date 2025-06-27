@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="84">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0zEKwCAMQFFx1bU37eG8g5dykG6l1QSTDD/wNsGPklxSyhvapfM2X+efe3enKztXSfss2uiz77PqkvRJ9/eu0+k+zTtE77P438h9Hm2rfV5tfyK3AQAAAB4GoRhJ8w==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlEEOwiAQRdm2aFwYQw/iXnfG6N61d3CnNzF6AuOJehQbhRCDoTODlRYw4SV/Q0l5TKfDWMaHUxnbgKYuGFsUsS1wlF+d/X5mKd2OgXrwMDIJeZbKmbfXqIRw21Q6Y6H9vrnHp9tQrlz6bKXXbqpzE/hedf6+bGcIx/ccugvjhvnZ9aQ8KD/1fgro+UrWbiJM1pXbj6KP+s1n8HqD/PuYH7S/qx/mAnHhcH89gDWVK+AdYt7YdPm+MbDnIcUQ9cP6yJ7X2PmNNWP6Bus7V/9RfRiSf+i/lMl+fmQ/N8+E54cihRpRZD8/sh9jLzw8SzI=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlt1OwjAUgI+IkoBegEGN+gLAtfocXBgv5ecVvPPvOQiaYKLxDdQtGnkV4xPIhfFG8DS02Wnp1iplE7MvOVnXle2jOz1rPQMSuzmAPYz9nNz/uQQTbK5O9gmOV+Tzw7XoiAvmZRtJMg+OLtDl1byznXUbfjbpfxTNgcN3SHPaqwE88PjKB+0w2Hifjz2qADQqZr96JvyaCebiESfa7uBxoQCwWBi3qV8X+07Q7dTCbxoaOA9NHkPSZnGJDj0eKmxsKx+cR/mpNahfnt5bzJGYLxNRfjfFoM1cR+vydVMN9aroUDU76O7Vrpn9GLQGXm3YPUtHm+Qe4xyPFxhnPC/Dvhmzyj9XxOEnaksP45qsV4GYt44mH238HsvjsOUdc26g5B1zeMLnP/P1AcuyG323Lzimb5l/P3UTiPt2SZ1mDh73E/33GK2I2m3r9xtHF8wq/9S12FTmR1f76G98y/frAs+iDocRhx/dL+2Q/dKWxf7q44/XvxQZXQ1OSUmKW9xj3hXN45LitQTwVpL3wv+Fb5svbUM=
+  </data>
+ </layer>
+ <layer id="5" name="Rooftops" width="40" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzVl91u0zAUx33BrqBq2vExGE8w3oDC2m6dNL4uES/CyIBA2RtwjwAJOpBgg9tJSMAzIAEbDEaLxOcFqOIBOEfxUf41TuwsbSWO9Fcax7F//vvYcfuTSvVJU1W3DpMuUN3jZaUeVZR6TFqrxPdp0anE11W6PnDoYeXf9/u74GMt0u9TpNPVdDaMearXcmhBt4XjFT4fRuT7Qr+/kr4ZbXYsHnB0qV7Poc8wVmknD9/vyYTv1YGkrWfH/DzMirRx+fIhm/AhIwZ7ebRUjFfG7MOH87qxR6lp0KgjL9/5Cf+275MHHcfc41qw5bCLb4nqHtR8a4divqz9BOMFsb0skJvcD/f7y4MN+cYZ0rcw3tyfCNnGxbdOnjwhPdVzPFUaZEBmUza+2zNK3ZkZHt8Z8uQs6RzshdK/ySplnK+ypxT1715KPkpOfyeuH6Sf1UG2Dep7nuoskKZL8f5l+spRlO/5LtcL87UDpS4H2fVGmX/iiy2YTyQhftr4XlPOvSmQd6690dzDbHxdqlMnnYS6vv7d2qvUxX3+vDYmk82MkOb6BmkF5jwPX1rcdeQgfj9M3/DcaYtx78+4bjnMc6fp+aj40ua2RuWzpE/6OZ47G0buIZ/vN7hoRJRbyyn7yhZwS/yZGDxfuc5ZR3KewdivE1rm3iEhZ8PIYz8sGrwWhKlFukT9fSjH65L7bujyLF6OBoxrbghziznPPlwjbdJ9j7QUJM/aen63dTnnW8PC+pHud0jvSO9z8NVSxsV719VgsJ9I72ebwCJtXIHyWX1lX5uaNdJj6Bk5mfVNkvGLN3U9V3PgjeQP/scKtWfX9bOu9kTakvbYr7flpF6oy5EP8wPH2zL8imCe6jlzZEu/I33UdJ4ym7k+QmPNhDAe9ryZ8a7U3wYvZWxNuJq5Jb5JDkr7K5b200LmZDlI1p5vXVwbOxn5HUF9ZHPl2DCirfvGvPsf4i8xCvfm
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="224.5" y="478.659" width="48" height="16"/>
+  <object id="48" template="../../obj/collision.tx" x="-18" y="0.485" width="17" height="479.03"/>
+  <object id="49" template="../../obj/collision.tx" x="640.5" y="-1.015" width="17" height="479.03"/>
+  <object id="50" template="../../obj/collision.tx" x="-17.9165" y="-16.5" width="681.833" height="16"/>
+  <object id="51" template="../../obj/collision.tx" x="-20.4165" y="479" width="681.833" height="16"/>
+  <object id="52" template="../../obj/shop.tx" x="224.333" y="257.792" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="SnowShop"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/shop.tx" x="480.833" y="256.792" width="31.3333" height="32.4167">
+   <properties>
+    <property name="commonShopList" value="SnowShop"/>
+    <property name="noRestock" type="bool" value="false"/>
+    <property name="signXOffset" type="float" value="0"/>
+    <property name="signYOffset" type="float" value="-5"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/manashards.tx" x="464" y="112.5"/>
+  <object id="56" template="../../obj/treasure.tx" x="289" y="113.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 8,
+  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="350" y="46">
+   <properties>
+    <property name="enemy" value="Polar Bear"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="70,68,69,68"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="96" y="60">
+   <properties>
+    <property name="enemy" value="Polar Bear"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="71,72,73,72"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" x="117" y="381.5">
+   <properties>
+    <property name="enemy" value="Polar Bear"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="125,123,127,128,122,128"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/enemy.tx" x="354.5" y="331.5">
+   <properties>
+    <property name="enemy" value="Penguin"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/enemy.tx" x="288.5" y="162">
+   <properties>
+    <property name="enemy" value="Penguin"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="79,81,79,76,79"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="350" y="223.5">
+   <properties>
+    <property name="enemy" value="Penguin"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="78,82"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="377.5" y="157.5">
+   <properties>
+    <property name="enemy" value="Penguin"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="80,79,77,78,77,79"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/treasure.tx" x="472" y="186">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 8,
+  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/enemy.tx" x="563.5" y="401.5">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/gold.tx" x="542" y="383.5"/>
+  <object id="67" template="../../obj/gold.tx" x="447" y="112.5"/>
+  <object id="68" template="../../obj/waypoint.tx" x="369.5" y="65"/>
+  <object id="69" template="../../obj/waypoint.tx" x="521.5" y="69.5"/>
+  <object id="70" template="../../obj/waypoint.tx" x="308.5" y="17.5"/>
+  <object id="71" template="../../obj/waypoint.tx" x="139" y="62"/>
+  <object id="72" template="../../obj/waypoint.tx" x="60.5" y="150.5"/>
+  <object id="73" template="../../obj/waypoint.tx" x="115" y="220"/>
+  <object id="74" template="../../obj/waypoint.tx" x="481" y="286.5"/>
+  <object id="75" template="../../obj/waypoint.tx" x="226" y="288.5"/>
+  <object id="76" template="../../obj/waypoint.tx" x="352" y="289"/>
+  <object id="78" template="../../obj/waypoint.tx" x="448" y="220.5"/>
+  <object id="79" template="../../obj/waypoint.tx" x="352.5" y="155"/>
+  <object id="80" template="../../obj/waypoint.tx" x="461.5" y="159.5"/>
+  <object id="81" template="../../obj/waypoint.tx" x="240.5" y="160"/>
+  <object id="82" template="../../obj/waypoint.tx" x="256.5" y="220"/>
+  <object id="83" template="../../obj/treasure.tx" x="74.5" y="371">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 8,
+  &quot;superTypes&quot;: [ &quot;Snow&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

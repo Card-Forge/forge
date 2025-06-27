@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings.tsx"/>
+ <object name="Shop" class="shop" gid="1251" width="16" height="16">
+  <properties>
+   <property name="commonShopList" value=""/>
+   <property name="hasSign" type="bool" value="true"/>
+   <property name="mythicShopList" value=""/>
+   <property name="noRestock" type="bool" value="false"/>
+   <property name="rareShopList" value=""/>
+   <property name="signXOffset" type="float" value="16"/>
+   <property name="signYOffset" type="float" value="-16"/>
+   <property name="type" value="shop"/>
+   <property name="uncommonShopList" value=""/>
+  </properties>
+ </object>
+</template>

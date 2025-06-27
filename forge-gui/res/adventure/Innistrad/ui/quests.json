@@ -1,0 +1,60 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "name": "lastScreen",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Window",
+      "name": "scrollWindow",
+	  "style": "paper",
+      "x": 15,
+      "y": 18,
+      "width": 400,
+      "height": 235
+    },
+    {
+      "type": "Table",
+      "name": "questList",
+      "x": 20,
+      "y": 22,
+      "width": 390,
+      "height": 220,
+	  "fontColor":"black"
+    },
+	{
+      "type": "Table",
+      "name": "questDetails",
+      "x": 20,
+      "y": 22,
+      "width": 390,
+      "height": 220,
+	  "fontColor":"black"
+    },
+	{
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "binding": "Back",
+      "width": 60,
+      "height": 30,
+      "x": 420,
+      "y": 224
+    },
+	{
+      "type": "TextButton",
+      "name": "status",
+      "text": "Status",
+      "binding": "Status",
+      "width": 60,
+      "height": 30,
+      "x": 420,
+      "y": 184
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+goblinzombie.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 102,14
+  size: 13, 13  
+Idle 
+  xy: 0, 8
+  size: 32, 24    
+Idle 
+  xy: 32, 8
+  size: 32, 24        
+Idle 
+  xy: 64, 8
+  size: 32, 24    
+Idle 
+  xy: 96, 8
+  size: 32, 24     
+Walk 
+  xy: 0, 38
+  size: 32, 26    
+Walk 
+  xy: 32, 38
+  size: 32, 26 
+Walk 
+  xy: 64, 38
+  size: 32, 26 
+Walk 
+  xy: 96, 38
+  size: 32, 26 
+Walk 
+  xy: 128, 38
+  size: 32, 26 
+Walk 
+  xy: 160, 38
+  size: 32, 26 
+Walk 
+  xy: 192, 38
+  size: 32, 26 
+Walk 
+  xy: 224, 38
+  size: 32, 26 
+Attack 
+  xy: 0, 70
+  size: 32, 26
+Attack 
+  xy: 32, 70
+  size: 32, 26
+Attack 
+  xy: 64, 70
+  size: 32, 26
+Attack 
+  xy: 96, 70
+  size: 32, 26
+Attack 
+  xy: 128, 70
+  size: 32, 26
+Attack 
+  xy: 160, 70
+  size: 32, 26
+Death
+  xy: 0, 134
+  size: 32, 26
+Death
+  xy: 32, 134
+  size: 32, 26
+Death
+  xy: 64, 134
+  size: 32, 26
+Death
+  xy: 96, 134
+  size: 32, 26
+Death
+  xy: 128, 134
+  size: 32, 26

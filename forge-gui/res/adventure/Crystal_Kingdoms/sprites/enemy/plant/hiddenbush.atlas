@@ -1,0 +1,29 @@
+hiddenbush.png
+size: 138,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none  
+Avatar        
+  xy: 62, 118
+  size: 16, 16     
+Idle 
+  xy: 0, 0
+  size: 46, 48  
+Idle 
+  xy: 46, 0
+  size: 46, 48 
+Idle 
+  xy: 92, 0
+  size: 46, 48
+Attack 
+  xy: 0, 48
+  size: 46, 48  
+Attack 
+  xy: 46, 48
+  size: 46, 48 
+Attack 
+  xy: 92, 48
+  size: 46, 48 
+Attack 
+  xy: 46, 96
+  size: 46, 48 

@@ -1,0 +1,9 @@
+Name:Death Ring
+ManaCost:no cost
+Types:Artifact
+A:AB$ RepeatEach | Cost$ PayShards<2> | ActivationZone$ Command | SorcerySpeed$ True | IsPresent$ Creature.YouCtrl | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseRandom | SubAbility$ DBPutCounter | SpellDescription$ For each player, put a -1/-1 counter on a random creature with the lowest toughness that player controls. Then if your creature has power less than one, sacrifice it.
+SVar:DBChooseRandom:DB$ ChooseCard | AtRandom$ True | Choices$ Creature.leastToughnessControlledByRememberedPlayer | RevealTitle$ Randomly chosen creature: | Reveal$ True | RememberChosen$ True
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ M1M1 | SubAbility$ ConditionalSac | StackDescription$ None | SpellDescription$ Activate only if you control a creature and only as a sorcery.
+SVar:ConditionalSac:DB$ SacrificeAll | Defined$ Remembered.powerLT1+YouCtrl | SubAbility$ DBCleanup | SpellDescription$ If your creature has power less than one, sacrifice it.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+Oracle:{M}{M}: For each player, put a -1/-1 counter on a random creature with the lowest toughness that player controls. Then if your creature has power less than one, sacrifice it. Activate only if you control a creature and only as a sorcery.

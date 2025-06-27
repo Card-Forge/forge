@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJztlWEKhSAMx/e9dQJ5F6uzVOfyaXerUcOxXAnvVRD9YUyZ7reJIkDSBxfvZt/WAE2d/C+iHF9cLJdLcmnM3uP+PovBFjDFvcpB64PBlfIZvmQFtT4nh1tmqbzRT4mYq3s6Wy/3udyuAog3cJ1gvdxruOM8HqrruRab7l6/mlVXdxA/4jK7F6wo5lZd/CZKz4y5+s/6h42qp6jipAnAtj93
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydlV1uwjAQhC2lVI6vAP25HC996GPfEFUvF4i4Q1vagzSjeMR4sR3TlSxE4vU33h07zv0v1sG5X+/cW5+Os2/Lfwzld8O0xrGyjmWTuZSHwPwcG7mv/Ty4xuf0++3TOXgH/o8878Kcd1/ZE7W+9+lzHy7c0c/M5zBrBFt15eLkU80tXGVirKb/O+kh2F24roeN0vvBX3O3fcocY45yOV/n5QLaVqbWrJPl6j40x3rIcmu9tExyrfdzOi0bXMw7Ffz3ZTyIeBGdredN2fDug+hijaCV/oO2vam/1vKWqJ3JLur4kN6Rq+eZNbIxFNamx2ts3es51oQ9zfVNmSWPtJybXX87E7Fd8Kf2scZFfbnWuOA1u6dS72va4blNuHjuTuZSk70XlU0+dT5VWMd4Zx7iPg6FHrDvJa4N+jP37bD3qQ49y+q11tC7gt+EJaayWfuN0f0HDRV5wA==
+  </data>
+ </layer>
+ <layer id="7" name="Trees" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1VVsOgkAMbPxlb6H44Tk8DQdRjMY7iZp4LGlgwqR2HyhOsj/ddmZaCoiINPIJjR0qkTqIbP9w9qtJh4H4vc95mLNxeNZOXqqG+2Nor4hbb56XZxhqkMscipfRZt65UF72F8uRUYO1G+d+CbAPTzvlNccXA8/XQx3K+ktp5TQYqtWMujneEsypv/Q+u8J+l8TO7BXg7cOv4N6wV7H3qCSGb1quztaU7tW38HzJqNv28Wu13ExTHhTYK33GtzBoNyaHEfM1d172PwNt+31Vf201zQW+OI67lAdwef8maKMPngnuodOZ2jP58hDTLOHOHdSejP7R0XwDzR5VyA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxTYRh4cGyA7T9IBTMO0VnvQIcZKQDZrcpIbA0satHj4jiUVqeqi8gD2NyLDeBzqwoJ9sHCAhRmJ6FsXGlFB485sPAnJwy1iFADiyN0t2mj8ZHllRkoA9TIs+QAXGkAV9gSm2ZgAF/6QA4zUv1Pr/yDz13ocgORp0mNDxg4xENVZww4AADo/hJ6
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="62" template="../../obj/door_down.tx" x="64" y="15.3333">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1G.tmx"/>
+    <property name="teleportObjectId" value="74"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/door_up.tx" x="368" y="271">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1G3.tmx"/>
+    <property name="teleportObjectId" value="63"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

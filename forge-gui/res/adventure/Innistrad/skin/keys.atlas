@@ -1,0 +1,648 @@
+
+keys.png
+size: 480, 112
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+1 
+  xy: 0, 0
+  size: 16, 16  
+1_pressed
+  xy: 16, 0
+  size: 16, 16 
+2 
+  xy: 32, 0
+  size: 16, 16  
+2_pressed
+  xy: 48, 0
+  size: 16, 16
+3 
+  xy: 64, 0
+  size: 16, 16  
+3_pressed
+  xy: 80, 0
+  size: 16, 16 
+4 
+  xy: 96, 0
+  size: 16, 16  
+4_pressed
+  xy: 112, 0
+  size: 16, 16 
+5 
+  xy: 128, 0
+  size: 16, 16  
+5_pressed
+  xy: 144, 0
+  size: 16, 16 
+6 
+  xy: 160, 0
+  size: 16, 16
+6_pressed
+  xy: 176, 0
+  size: 16, 16 
+7
+  xy: 192, 0
+  size: 16, 16  
+7_pressed
+  xy: 208, 0
+  size: 16, 16
+8 
+  xy: 224, 0
+  size: 16, 16  
+8_pressed
+  xy: 240, 0
+  size: 16, 16
+9 
+  xy: 256, 0
+  size: 16, 16  
+9_pressed
+  xy: 272, 0
+  size: 16, 16
+0 
+  xy: 288, 0
+  size: 16, 16  
+0_pressed
+  xy: 304, 0
+  size: 16, 16
+clear 
+  xy: 320, 0
+  size: 16, 16  
+clear_pressed
+  xy: 336, 0
+  size: 16, 16
+Back
+  xy: 352, 0
+  size: 32, 16  
+Back_pressed
+  xy: 384, 0
+  size: 32, 16
+Escape 
+  xy: 416, 0
+  size: 16, 16  
+Escape_pressed
+  xy: 448, 0
+  size: 16, 16 
+Q 
+  xy: 0, 16
+  size: 16, 16  
+Q_pressed
+  xy: 16, 16
+  size: 16, 16 
+W 
+  xy: 32, 16
+  size: 16, 16  
+W_pressed
+  xy: 48, 16
+  size: 16, 16
+E 
+  xy: 64, 16
+  size: 16, 16  
+E_pressed
+  xy: 80, 16
+  size: 16, 16 
+R 
+  xy: 96, 16
+  size: 16, 16  
+R_pressed
+  xy: 112, 16
+  size: 16, 16 
+T 
+  xy: 128, 16
+  size: 16, 16  
+T_pressed
+  xy: 144, 16
+  size: 16, 16 
+Y 
+  xy: 160, 16
+  size: 16, 16
+Y_pressed
+  xy: 176, 16
+  size: 16, 16 
+U
+  xy: 192, 16
+  size: 16, 16  
+U_pressed
+  xy: 208, 16
+  size: 16, 16
+I 
+  xy: 224, 16
+  size: 16, 16  
+I_pressed
+  xy: 240, 16
+  size: 16, 16
+O 
+  xy: 256, 16
+  size: 16, 16  
+O_pressed
+  xy: 272, 16
+  size: 16, 16
+P 
+  xy: 288, 16
+  size: 16, 16  
+P_pressed
+  xy: 304, 16
+  size: 16, 16
+clearSquare
+  xy: 320, 16
+  size: 16, 16  
+clearSquare_pressed
+  xy: 336, 16
+  size: 16, 16
+Enter
+  xy: 384, 112
+  size: 16, 16  
+Enter_pressed
+  xy: 400, 112
+  size: 16, 16
+Tab
+  xy: 416, 16
+  size: 32, 16  
+Tab_pressed
+  xy: 448, 16
+  size: 32, 16
+A
+  xy: 0, 32
+  size: 16, 16  
+A_pressed
+  xy: 16, 32
+  size: 16, 16 
+S
+  xy: 32, 32
+  size: 16, 16  
+S_pressed
+  xy: 48, 32
+  size: 16, 16
+D 
+  xy: 64, 32
+  size: 16, 16  
+D_pressed
+  xy: 80, 32
+  size: 16, 16 
+F 
+  xy: 96, 32
+  size: 16, 16  
+F_pressed
+  xy: 112, 32
+  size: 16, 16 
+G 
+  xy: 128, 32
+  size: 16, 16  
+G_pressed
+  xy: 144, 32
+  size: 16, 16 
+H 
+  xy: 160, 32
+  size: 16, 16
+H_pressed
+  xy: 176, 32
+  size: 16, 16 
+J
+  xy: 192, 32
+  size: 16, 16  
+J_pressed
+  xy: 208, 32
+  size: 16, 16
+K 
+  xy: 224, 32
+  size: 16, 16  
+K_pressed
+  xy: 240, 32
+  size: 16, 16
+L 
+  xy: 256, 32
+  size: 16, 16  
+L_pressed
+  xy: 272, 32
+  size: 16, 16
+Up 
+  xy: 288, 32
+  size: 16, 16  
+Up_pressed
+  xy: 304, 32
+  size: 16, 16
+clearSquareLong
+  xy: 320, 32
+  size: 32, 16   
+Space
+  xy: 352, 32
+  size: 32, 16  
+Space_pressed
+  xy: 384, 32
+  size: 32, 16
+L-Shift
+  xy: 416, 32
+  size: 32, 16  
+L-Shift_pressed
+  xy: 448, 32
+  size: 32, 16
+R-Shift
+  xy: 416, 32
+  size: 32, 16  
+R-Shift_pressed
+  xy: 448, 32
+  size: 32, 16
+Z
+  xy: 0, 48
+  size: 16, 16  
+Z_pressed
+  xy: 16, 48
+  size: 16, 16 
+X
+  xy: 32, 48
+  size: 16, 16  
+X_pressed
+  xy: 48, 48
+  size: 16, 16
+C 
+  xy: 64, 48
+  size: 16, 16  
+C_pressed
+  xy: 80, 48
+  size: 16, 16 
+V 
+  xy: 96, 48
+  size: 16, 16  
+V_pressed
+  xy: 112, 48
+  size: 16, 16 
+B 
+  xy: 128, 48
+  size: 16, 16  
+B_pressed
+  xy: 144, 48
+  size: 16, 16 
+N 
+  xy: 160, 48
+  size: 16, 16
+N_pressed
+  xy: 176, 48
+  size: 16, 16 
+M
+  xy: 192, 48
+  size: 16, 16  
+M_pressed
+  xy: 208, 48
+  size: 16, 16
+Left 
+  xy: 224, 48
+  size: 16, 16  
+Left_pressed
+  xy: 240, 48
+  size: 16, 16
+Right 
+  xy: 256, 48
+  size: 16, 16  
+Right_pressed
+  xy: 272, 48
+  size: 16, 16
+Down 
+  xy: 288, 48
+  size: 16, 16  
+Down_pressed
+  xy: 304, 48
+  size: 16, 16
+clearSquareLong_pressed
+  xy: 320, 48
+  size: 32, 16   
+R-Alt
+  xy: 352, 48
+  size: 32, 16  
+R-Alt_pressed
+  xy: 384, 48
+  size: 32, 16
+L-Alt
+  xy: 352, 48
+  size: 32, 16  
+L-Alt_pressed
+  xy: 384, 48
+  size: 32, 16
+Control
+  xy: 416, 48
+  size: 32, 16  
+Control_pressed
+  xy: 448, 48
+  size: 32, 16 
+XBox_B
+  xy: 0, 64
+  size: 16, 16  
+XBox_B_pressed
+  xy: 16, 64
+  size: 16, 16 
+XBox_A
+  xy: 32, 64
+  size: 16, 16  
+XBox_A_pressed
+  xy: 48, 64
+  size: 16, 16
+XBox_Y 
+  xy: 64, 64
+  size: 16, 16  
+XBox_Y_pressed
+  xy: 80, 64
+  size: 16, 16 
+XBox_X
+  xy: 96, 64
+  size: 16, 16  
+XBox_X_pressed
+  xy: 112, 64
+  size: 16, 16 
+XBox_L
+  xy: 128, 64
+  size: 16, 16  
+XBox_L_pressed
+  xy: 144, 64
+  size: 16, 16 
+XBox_R 
+  xy: 160, 64
+  size: 16, 16
+XBox_R_pressed
+  xy: 176, 64
+  size: 16, 16 
+XBox_L2
+  xy: 192, 64
+  size: 16, 16  
+XBox_L2_pressed
+  xy: 208, 64
+  size: 16, 16
+XBox_R2
+  xy: 224, 64
+  size: 16, 16  
+XBox_R2_pressed
+  xy: 240, 64
+  size: 16, 16
+XBox_Select
+  xy: 256, 64
+  size: 16, 16  
+XBox_Select_pressed
+  xy: 272, 64
+  size: 16, 16
+XBox_Start 
+  xy: 288, 64
+  size: 16, 16  
+XBox_Start_pressed
+  xy: 304, 64
+  size: 16, 16
+XBox_Left
+  xy: 320, 64
+  size: 16, 16   
+XBox_Left_pressed
+  xy: 336, 64
+  size: 16, 16   
+XBox_Right
+  xy: 352, 64
+  size: 16, 16   
+XBox_Right_pressed
+  xy: 368, 64
+  size: 16, 16   
+XBox_Down
+  xy: 384, 64
+  size: 16, 16   
+XBox_Down_pressed
+  xy: 400, 64
+  size: 16, 16   
+XBox_Up
+  xy: 416, 64
+  size: 16, 16   
+XBox_Up_pressed
+  xy: 432, 64
+  size: 16, 16  
+Playstation_B
+  xy: 0, 80
+  size: 16, 16  
+Playstation_B_pressed
+  xy: 16, 80
+  size: 16, 16 
+Playstation_A
+  xy: 32, 80
+  size: 16, 16  
+Playstation_A_pressed
+  xy: 48, 80
+  size: 16, 16
+Playstation_Y 
+  xy: 64, 80
+  size: 16, 16  
+Playstation_Y_pressed
+  xy: 80, 80
+  size: 16, 16 
+Playstation_X
+  xy: 96, 80
+  size: 16, 16  
+Playstation_X_pressed
+  xy: 112, 80
+  size: 16, 16 
+Playstation_L
+  xy: 128, 80
+  size: 16, 16  
+Playstation_L_pressed
+  xy: 144, 80
+  size: 16, 16 
+Playstation_R 
+  xy: 160, 80
+  size: 16, 16
+Playstation_R_pressed
+  xy: 176, 80
+  size: 16, 16 
+Playstation_L2
+  xy: 192, 80
+  size: 16, 16  
+Playstation_L2_pressed
+  xy: 208, 80
+  size: 16, 16
+Playstation_R2
+  xy: 224, 80
+  size: 16, 16  
+Playstation_R2_pressed
+  xy: 240, 80
+  size: 16, 16
+Playstation_Select
+  xy: 256, 80
+  size: 16, 16  
+Playstation_Select_pressed
+  xy: 272, 80
+  size: 16, 16
+Playstation_Start 
+  xy: 288, 80
+  size: 16, 16  
+Playstation_Start_pressed
+  xy: 304, 80
+  size: 16, 16
+Playstation_Left
+  xy: 320, 80
+  size: 16, 16   
+Playstation_Left_pressed
+  xy: 336, 80
+  size: 16, 16   
+Playstation_Right
+  xy: 352, 80
+  size: 16, 16   
+Playstation_Right_pressed
+  xy: 368, 80
+  size: 16, 16   
+Playstation_Down
+  xy: 384, 80
+  size: 16, 16   
+Playstation_Down_pressed
+  xy: 400, 80
+  size: 16, 16   
+Playstation_Up
+  xy: 416, 80
+  size: 16, 16   
+Playstation_Up_pressed
+  xy: 432, 80
+  size: 16, 16  
+Switch_B
+  xy: 0, 96
+  size: 16, 16  
+Switch_B_pressed
+  xy: 16, 96
+  size: 16, 16 
+Switch_A
+  xy: 32, 96
+  size: 16, 16  
+Switch_A_pressed
+  xy: 48, 96
+  size: 16, 16
+Switch_Y 
+  xy: 64, 96
+  size: 16, 16  
+Switch_Y_pressed
+  xy: 80, 96
+  size: 16, 16 
+Switch_X
+  xy: 96, 96
+  size: 16, 16  
+Switch_X_pressed
+  xy: 112, 96
+  size: 16, 16 
+Switch_L
+  xy: 128, 96
+  size: 16, 16  
+Switch_L_pressed
+  xy: 144, 96
+  size: 16, 16 
+Switch_R 
+  xy: 160, 96
+  size: 16, 16
+Switch_R_pressed
+  xy: 176, 96
+  size: 16, 16 
+Switch_L2
+  xy: 192, 96
+  size: 16, 16  
+Switch_L2_pressed
+  xy: 208, 96
+  size: 16, 16
+Switch_R2
+  xy: 224, 96
+  size: 16, 16  
+Switch_R2_pressed
+  xy: 240, 96
+  size: 16, 16
+Switch_Select
+  xy: 256, 96
+  size: 16, 16  
+Switch_Select_pressed
+  xy: 272, 96
+  size: 16, 16
+Switch_Start 
+  xy: 288, 96
+  size: 16, 16  
+Switch_Start_pressed
+  xy: 304, 96
+  size: 16, 16
+Switch_Left
+  xy: 320, 96
+  size: 16, 16   
+Switch_Left_pressed
+  xy: 336, 96
+  size: 16, 16   
+Switch_Right
+  xy: 352, 96
+  size: 16, 16   
+Switch_Right_pressed
+  xy: 368, 96
+  size: 16, 16   
+Switch_Down
+  xy: 384, 96
+  size: 16, 16   
+Switch_Down_pressed
+  xy: 400, 96
+  size: 16, 16   
+Switch_Up
+  xy: 416, 96
+  size: 16, 16   
+Switch_Up_pressed
+  xy: 432, 96
+  size: 16, 16 
+F1 
+  xy: 0, 112
+  size: 16, 16  
+F1_pressed
+  xy: 16, 112
+  size: 16, 16 
+F2 
+  xy: 32, 112
+  size: 16, 16  
+F2_pressed
+  xy: 48, 112
+  size: 16, 16
+F3 
+  xy: 64, 112
+  size: 16, 16  
+F3_pressed
+  xy: 80, 112
+  size: 16, 16 
+F4 
+  xy: 96, 112
+  size: 16, 16  
+F4_pressed
+  xy: 112, 112
+  size: 16, 16 
+F5 
+  xy: 128, 112
+  size: 16, 16  
+F5_pressed
+  xy: 144, 112
+  size: 16, 16 
+F6 
+  xy: 160, 112
+  size: 16, 16
+F6_pressed
+  xy: 176, 112
+  size: 16, 16 
+F7
+  xy: 192, 112
+  size: 16, 16  
+F7_pressed
+  xy: 208, 112
+  size: 16, 16
+F8 
+  xy: 224, 112
+  size: 16, 16  
+F8_pressed
+  xy: 240, 112
+  size: 16, 16
+F9 
+  xy: 256, 112
+  size: 16, 16  
+F9_pressed
+  xy: 272, 112
+  size: 16, 16
+F10 
+  xy: 288, 112
+  size: 16, 16  
+F10_pressed
+  xy: 304, 112
+  size: 16, 16
+F11 
+  xy: 320, 112
+  size: 16, 16  
+F11_pressed
+  xy: 336, 112
+  size: 16, 16
+F12 
+  xy: 352, 112
+  size: 16, 16  
+F12_pressed
+  xy: 368, 112
+  size: 16, 16

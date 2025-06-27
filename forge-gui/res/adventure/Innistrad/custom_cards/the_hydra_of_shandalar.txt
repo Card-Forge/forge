@@ -1,0 +1,10 @@
+Name:The Hydra of Shandalar
+ManaCost:no cost
+Colors:green
+Types:Enchantment
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | AddKeyword$ Provoke | Description$ Creatures your opponents control have provoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)
+T:Mode$ DamageDone | TriggerZones$ Command | ValidSource$ Creature.OppCtrl | ValidTarget$ You | CombatDamage$ True | CheckSVar$ CurrentLife | SVarCompare$ LE0 | Execute$ TrigDmg | TriggerDescription$ Whenever a creature an opponent controls deals combat damage to you while you have 0 or less life, CARDNAME deals that much damage to target Hydra you control.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature.Hydra | TgtPrompt$ Select target Hydra you control | TargetsWithDefinedController$ TriggeredTarget | NumDmg$ Y
+SVar:Y:TriggerCount$DamageAmount
+SVar:CurrentLife:Count$YourLifeTotal
+Oracle:Creatures your opponents control have provoke (Whenever this creature attacks, you may have target creature defending player controls untap and block it if able.)\nWhenever a creature an opponent controls deals combat damage to you while you have 0 or less life, CARDNAME deals that much damage to target Hydra you control.

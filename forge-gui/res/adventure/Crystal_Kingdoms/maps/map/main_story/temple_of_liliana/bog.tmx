@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="31" height="37" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="273">
+ <properties>
+  <property name="canFailDungeon" type="bool" value="true"/>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="31" height="37">
+  <data encoding="csv">
+1641,1641,1641,1641,1641,1641,1641,1641,1641,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2267,2268,1641,1641,1641,1641,1641,1641,1641,1641,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2426,1641,1641,1641,1641,1641,1641,1641,1641,2904,2904,2904,2904,2904,2904,2904,2904,2422,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2426,2430,2430,2430,2430,2430,2430,2430,2430,2430,2904,2904,2904,2904,2904,2904,2904,2422,2422,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,1006,2904,2904,2904,2904,2904,2422,2422,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,1006,1007,1327,2422,2422,2422,2422,2422,2904,2904,2422,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2263,1073744254,2904,2904,2904,2422,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2421,2422,1073744254,2430,2147486078,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,1073744254,2904,2422,2904,2904,2904,2266,2267,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2421,2147486070,2904,2904,2904,2424,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2263,2577,2904,2579,2904,2904,2424,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2422,2422,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2421,2422,2904,2904,2904,2268,2266,2581,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2263,2584,2422,2904,1952,1952,1952,1952,1320,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2579,2581,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2426,2422,2904,2904,1952,1952,1952,1952,1952,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2426,2422,2904,1952,1952,2904,2904,1952,1952,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,1073744250,2422,2904,2904,1952,2904,2904,1952,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2426,2422,2904,2904,2904,2904,2904,1952,1952,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2584,2904,2904,1952,2904,2904,2904,1952,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,1952,2904,2904,1952,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,15647,15649,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2268,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2584,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2268,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2582,2265,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2268,2904,2904,2904,2904,2904,2266,2581,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2268,2904,2904,2904,2266,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2583,2584,2580,2580,2580,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2422,2422,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2263,2583,2583,2583,2584,2422,2582,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2584,2904,2904,2904,2904,2904,2266,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2426,2904,2904,2904,2904,2904,2904,2582,2583,2583,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2426,2904,2904,2904,2904,2904,2904,2904,2904,2904,2424,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2426,2904,2904,2904,2904,2904,2904,2904,2904,2904,2424,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2426,2904,2904,2904,2904,2904,2904,2904,2904,2904,2424,2904,2263,2265,2904,2263,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2579,2904,2904,2904,2904,2904,2904,2904,2904,2424,2904,2584,2423,2904,2421,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2268,2266,2580,2580,2580,2580,2580,2580,2581,2904,2904,2904,2904,2421,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2579,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,
+2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904,2904
+</data>
+ </layer>
+ <layer id="3" name="Tile Layer 2" width="31" height="37">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,2422,2422,2422,2589,0,0,0,0,2422,1952,1952,1952,1952,1952,1952,1952,1952,1952,1952,1952,1952,1952,
+0,0,0,0,0,0,0,0,0,0,2422,2589,4878,0,0,0,0,2587,2109,1316,1952,1952,1952,1952,1952,1952,1952,1952,1952,1952,1952,
+0,0,0,0,0,0,0,0,0,0,2422,0,0,0,0,0,0,2900,2898,1949,1952,1952,1952,1952,1952,1952,1952,1952,1952,1952,1952,
+0,0,0,0,0,0,0,0,0,0,2587,0,0,0,0,0,0,2900,2898,0,1951,1952,1952,1952,1952,1952,1952,1952,1952,1952,1789,
+0,0,0,0,0,0,1230,1230,1230,1231,0,1227,1386,3057,0,0,0,2271,12625,375,2109,1952,1952,1952,1789,1952,1952,1952,1952,1789,1950,
+0,0,0,0,0,0,1230,1230,1230,1545,1069,1386,2271,0,2898,0,0,2587,2422,2422,0,2109,2110,1790,1947,2108,2110,1790,1952,1953,2422,
+0,0,0,0,0,0,1230,1230,1230,1231,2900,2422,2589,2741,0,0,0,0,2741,2741,2741,2741,0,1949,2110,1950,0,1951,1952,1953,2422,
+0,1361,3057,3057,3057,2739,1229,1230,1705,1701,2271,2589,692,0,0,0,0,0,0,0,0,0,0,0,0,0,1791,1948,1952,1950,2422,
+2422,2422,2422,2422,2422,2897,1700,1703,1701,2900,2422,2898,0,0,2147486705,3057,3057,3057,3057,3057,0,0,2276,0,2586,0,1951,1952,1953,0,0,
+2422,2422,2422,2422,2422,3056,0,0,0,1073744724,2422,2273,2147486705,2271,2422,2422,2422,2422,2422,2422,2273,0,0,0,2587,0,1949,1790,1953,0,0,
+2422,2422,2422,2422,2422,2422,2897,0,0,2900,2422,2422,2422,2422,2422,2422,2422,2422,2589,2587,2422,2898,0,0,0,0,0,1949,1950,0,0,
+2741,2741,0,3054,2742,2422,2897,0,0,0,2741,0,2422,2422,2422,2422,2422,2589,0,0,2741,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,2900,2422,2897,0,0,0,0,1791,2741,2741,2741,2741,2741,1795,0,0,0,0,0,0,0,0,0,0,0,0,0,
+9065,0,0,0,2900,2422,2897,0,0,0,1793,1948,1952,1952,1950,1949,1790,2105,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,2900,2422,2897,0,0,0,1951,1952,1952,1953,1641,1791,2103,1950,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,3058,2422,2897,0,0,0,1949,1790,1315,1950,1641,1951,1953,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,2900,2422,2422,2897,0,0,0,1791,1948,1953,1641,1641,1951,2105,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,2900,2422,2422,2897,0,0,1791,1948,1952,1953,1641,1641,1951,1953,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,2742,2422,2897,0,1791,1948,1952,1789,1950,1641,1641,1951,1953,0,0,0,0,0,0,0,0,0,0,0,0,1207,0,
+0,9065,0,0,2895,2422,2897,0,1951,1952,1952,1953,1641,1641,1641,15647,1069,0,0,0,0,0,0,0,0,0,0,0,0,1365,0,
+0,0,0,0,2895,2422,2897,0,1949,1790,1952,2105,1641,1641,1641,1951,1953,0,0,0,0,0,0,0,0,0,0,0,0,1365,0,
+0,0,0,0,2895,2422,2897,0,0,2106,1952,1953,1641,1641,1641,1951,1953,0,0,0,0,0,0,0,0,0,0,0,0,1365,0,
+0,0,0,0,2895,2422,2897,0,0,1951,1952,1953,1641,1641,1791,1948,1953,0,0,2271,2272,2273,0,0,0,0,0,0,0,1365,0,
+0,0,0,0,2895,2422,2897,0,0,1949,1790,1947,1794,1794,2103,2110,1950,0,0,2429,2430,2431,0,0,2271,2272,2273,0,0,1365,0,
+0,0,0,0,2895,2422,2897,0,0,0,1949,1790,1952,1789,1950,0,0,0,0,2422,2422,2422,2422,2422,2422,2430,2431,0,0,1365,0,
+0,0,0,0,0,0,3055,0,0,0,0,1949,2110,1950,0,0,0,0,4034,5196,2422,2422,2422,2422,2422,2422,2422,2422,2422,1365,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2422,2428,1791,1794,1792,0,4872,1791,1795,2422,1365,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,4036,4037,0,0,0,2422,1791,1948,1952,1947,1946,1794,1948,1953,2422,1365,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,4193,4194,4195,0,2271,2272,2422,1951,1952,1952,1952,1073743776,3221227424,3221227424,1953,2422,1365,0,
+0,0,0,0,1791,1952,1789,2110,1952,0,0,0,2008,0,4352,4353,0,2429,2430,2422,1951,1952,1952,1952,2147485600,1073743776,3221227424,1953,2422,1365,0,
+0,0,0,0,1951,1789,1950,2422,1949,1790,1794,1794,1795,0,0,0,0,0,2588,2422,1951,1952,3221227424,1952,1952,1952,1073743776,1953,2422,1524,1051,
+0,0,0,0,1951,1947,1792,2422,2422,1951,1952,1952,2105,0,0,0,0,0,0,2422,1951,1952,1952,1952,1952,1952,1789,1950,2422,0,0,
+0,0,0,0,1949,0,1947,1794,1794,1948,1952,1952,1953,0,0,0,0,0,0,2422,1951,1789,1790,1952,1952,1952,1953,2422,2422,0,0,
+0,2147497389,0,0,0,0,0,0,0,0,2110,2110,1950,0,2271,4872,2273,0,0,2422,1949,2107,1948,1952,1073743776,1789,1950,2422,2422,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,2429,2430,2431,0,0,2422,2422,1951,1952,1952,1952,1950,2422,2422,2422,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,2587,2588,2589,0,0,2422,2422,1949,2110,2110,1950,4186,2422,2422,2422,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2422,2422,2422,2422,2422,2422,2422,2422,2422,2422,0,0
+</data>
+ </layer>
+ <layer id="4" name="Tile Layer 3" width="31" height="37">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,532,0,0,0,536,691,691,691,537,0,534,5808,6283,5810,0,0,0,5808,6283,5810,0,0,0,
+1047,1206,0,0,0,0,0,0,690,537,0,536,692,0,5196,0,690,537,534,0,0,0,0,0,155,0,0,0,0,0,0,
+0,1361,0,0,0,0,0,0,0,532,0,534,5197,5199,0,0,1225,532,534,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1361,0,1071,1072,1072,1072,1072,1072,1073,537,534,1227,1069,1069,1069,1386,532,534,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1361,0,1229,1230,1230,0,10491,10492,0,1322,692,0,1007,375,375,375,695,694,12626,376,0,0,0,0,0,0,0,0,0,0,
+0,1361,0,1700,1704,1230,0,0,0,0,0,375,0,0,0,0,0,0,12653,12654,694,375,376,0,0,0,0,0,0,0,0,
+0,1361,0,0,1700,1704,0,0,0,0,1164,0,536,691,691,691,691,691,691,691,691,691,692,0,0,0,0,0,0,0,0,
+375,3057,375,375,375,1700,1704,0,0,1006,695,536,1227,1069,1069,1069,1069,1069,1069,1069,1069,1069,1069,1069,1069,1228,0,0,0,0,0,
+0,0,0,0,0,534,0,0,0,1164,0,534,1383,374,1007,375,375,375,375,1007,1008,0,0,0,0,1383,0,0,0,1208,1051,
+0,0,0,0,0,694,376,1383,0,1164,0,694,1541,1327,12625,12626,0,0,0,0,1326,1008,0,8908,0,1383,0,0,0,1365,0,
+0,313,0,0,0,0,534,1383,0,1164,0,0,0,0,12653,12654,0,0,1168,1169,0,1166,0,0,0,1383,0,0,0,1365,0,
+691,853,0,852,537,533,534,1383,0,1322,1323,537,0,0,0,0,0,1168,1324,1322,1323,1324,0,0,1542,1702,1543,0,0,1365,10825,
+0,0,0,0,532,0,534,1383,0,0,0,690,691,691,691,691,691,692,0,1227,1069,1069,1069,1069,1544,1230,1231,0,0,1365,10825,
+0,0,0,15862,532,0,534,1383,0,0,0,0,0,0,0,0,5548,0,0,1383,3930,3931,3931,3935,1700,1703,1701,0,0,1365,0,
+0,0,0,0,532,0,534,1383,0,0,0,5863,2147489511,0,2147492717,0,0,0,0,1383,4088,4084,4084,4093,0,1383,0,0,0,1365,9066,
+0,0,15862,374,695,0,534,1383,0,0,0,0,2147492719,0,0,0,0,0,0,1383,4246,4086,4084,4085,0,1383,0,0,0,1365,0,
+0,0,15862,532,0,0,534,1383,0,0,0,0,0,5701,0,0,0,1227,1069,1386,0,4241,4242,4243,0,1383,0,0,0,1523,0,
+0,0,0,532,0,0,534,1383,0,0,0,0,0,0,0,0,0,1383,0,0,0,0,0,0,0,1385,1069,1069,1069,1069,1070,
+0,0,0,690,537,0,534,1383,0,0,8693,0,0,0,0,0,0,1383,3930,3932,0,0,0,0,3925,3926,3927,0,0,0,10825,
+0,9065,0,0,532,0,534,1383,0,0,0,0,0,0,0,1711,1713,1540,4091,4239,3935,0,3930,3934,4244,4084,4085,0,0,0,10825,
+0,0,0,0,532,0,534,1383,0,0,0,0,1242,1243,0,0,0,1383,4249,4250,4239,3926,3928,4092,4086,4242,4243,0,0,0,0,
+0,0,0,0,532,0,534,1383,0,0,5393,0,0,0,0,0,0,1383,0,0,4083,4084,4087,4250,4088,4089,3929,3926,3932,0,0,
+0,0,0,0,532,0,534,1383,0,0,0,0,0,0,0,0,0,1383,0,0,4241,4242,4243,0,4249,4082,4089,4092,4090,0,0,
+0,0,0,0,532,0,534,1383,0,0,0,0,5547,0,8695,0,0,1383,4878,4880,0,0,0,0,0,4246,4082,4084,4090,0,10825,
+0,0,0,0,532,533,534,1383,0,0,0,0,5547,5547,0,0,0,1383,5036,5038,0,0,0,0,0,0,4246,4247,4248,0,0,
+0,0,0,0,690,691,692,1383,0,0,0,0,0,2008,2005,0,0,1383,5194,1227,1069,1069,1069,1069,1070,0,0,0,0,0,0,
+0,0,0,0,0,0,0,1383,0,0,2003,2004,2004,2322,2326,4878,4875,1382,1069,1386,0,0,0,0,0,0,0,0,3924,0,10825,
+0,0,0,0,1227,1069,1069,1386,9068,0,2161,2162,2167,2317,2005,5194,5191,1383,0,0,0,9071,0,0,0,0,2147489195,0,3924,0,0,
+0,0,0,1227,1386,1793,1794,1794,1794,1792,2161,2162,2162,2162,2163,0,0,1385,1069,1228,0,0,0,0,0,9071,0,0,3924,0,10825,
+0,0,0,1383,0,0,0,0,0,1953,2319,2328,2328,2165,2321,0,374,375,376,1383,0,0,5547,0,0,0,0,0,0,0,0,
+0,0,0,1383,0,0,0,0,0,1947,0,0,2324,2323,2013,0,532,2002,534,1383,0,0,0,0,2147489511,0,0,0,0,0,0,
+0,0,2147483961,1383,0,0,0,0,0,0,1952,1952,0,2161,2317,2010,690,691,692,1383,2147489355,0,2147492719,0,0,5549,0,0,3930,3926,3931,
+0,0,0,1383,0,1790,0,0,0,0,1952,1952,0,2161,2165,2329,0,1227,1069,1386,5707,0,0,5547,0,0,0,3925,3928,4089,4092,
+0,0,0,1383,0,1949,2110,2110,2110,2110,0,0,0,2319,2321,0,0,1383,0,0,0,0,0,0,0,0,0,4083,4092,4092,4092,
+0,0,0,1383,0,0,0,0,1227,1069,1069,1069,1069,1069,1069,1069,1069,1386,0,0,0,0,5393,0,0,0,0,4083,4092,4092,4092,
+0,0,0,1385,1069,1069,1069,1069,1386,4872,0,0,0,0,0,0,0,4872,0,0,0,0,0,0,0,0,3930,4240,4089,4092,4090,
+0,0,0,0,0,0,0,0,0,0,0,4873,4875,0,4872,0,0,0,4873,4875,0,0,0,0,0,0,4083,4084,4092,4247,4248
+</data>
+ </layer>
+ <layer id="5" name="Tile Layer 4" width="31" height="37">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,2900,0,0,0,0,4878,4880,2741,2587,0,2898,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,2587,0,0,0,5192,4743,4744,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,2900,0,2898,0,0,4901,4902,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,690,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+3057,375,3057,3057,3057,0,0,0,0,1701,0,0,0,0,0,0,0,0,0,0,18439,18440,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18597,18598,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4743,4744,0,0,0,
+0,15704,15705,15706,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4901,4902,0,0,0,
+15700,15702,15866,15703,2010,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2170,2170,2170,15866,15867,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15863,15866,2170,2171,15867,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2170,15866,2170,15866,15867,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2170,15866,2171,15861,16022,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,15866,2171,15867,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2162,15866,15867,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2162,15866,2007,2010,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,15863,15866,2162,2171,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2162,15866,15866,2171,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2162,2162,15866,2171,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,15866,15866,15866,2171,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2162,2162,15866,2171,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,15866,2162,2162,2171,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2162,15866,15866,2162,2171,3054,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2162,2162,15866,2162,2168,2002,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2162,15866,15866,2165,16022,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,15866,2165,16022,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2170,2168,0,0,0,4747,4748,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15863,2167,2168,0,0,0,4905,4750,4748,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2165,2326,0,0,0,0,4905,4906,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2168,0,0,4743,4744,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,15864,0,0,4901,4902,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2168,0,0,0,0,0,2002,0,0,0,0,18439,18440,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15866,2168,0,0,0,0,0,0,0,0,0,0,18597,18598,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+15863,2168,0,0,0,0,2002,0,2002,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Objects">
+  <object id="2" template="../../../obj/collision.tx" x="-16" y="-16" width="16" height="624"/>
+  <object id="3" template="../../../obj/collision.tx" x="0.25" y="592.75" width="495.75" height="15.25"/>
+  <object id="4" template="../../../obj/collision.tx" x="496" y="-16" width="16" height="624"/>
+  <object id="5" template="../../../obj/collision.tx" x="0" y="-16" width="496.295" height="16"/>
+  <object id="187" template="../../../obj/enemy.tx" x="112" y="576">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 5,
+ &quot;startBattleWithCard&quot;: [ &quot;Deathspore Thallid&quot;,&quot;Deathspore Thallid&quot;,&quot;Thallid Shell-Dweller&quot;,&quot;Thallid Shell-Dweller&quot; ]
+}</property>
+    <property name="enemy" value="Golgari Fungus"/>
+   </properties>
+  </object>
+  <object id="188" template="../../../obj/enemy.tx" x="112" y="304">
+   <properties>
+    <property name="enemy" value="Necromancer"/>
+   </properties>
+  </object>
+  <object id="189" template="../../../obj/treasure.tx" x="121" y="62">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="193" template="../../../obj/enemy.tx" x="368" y="416">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 5,
+ &quot;startBattleWithCard&quot;: [ &quot;Deathspore Thallid&quot;,&quot;Deathspore Thallid&quot;,&quot;Thallid Shell-Dweller&quot;,&quot;Thallid Shell-Dweller&quot; ]
+}</property>
+    <property name="enemy" value="Golgari Fungus"/>
+    <property name="pursueRange" type="int" value="80"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="194" template="../../../obj/treasure.tx" x="192" y="144">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="198" template="../../../obj/enemy.tx" x="272" y="304">
+   <properties>
+    <property name="enemy" value="Liliana's Alchemist"/>
+   </properties>
+  </object>
+  <object id="199" template="../../../obj/enemy.tx" x="176" y="240">
+   <properties>
+    <property name="enemy" value="Dimir Faerie"/>
+    <property name="pursueRange" type="int" value="90"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="250,251,252,249"/>
+   </properties>
+  </object>
+  <object id="200" template="../../../obj/enemy.tx" x="352" y="304">
+   <properties>
+    <property name="enemy" value="Golgari Treefolk"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="201" template="../../../obj/enemy.tx" x="224" y="320">
+   <properties>
+    <property name="enemy" value="Dimir Faerie"/>
+   </properties>
+  </object>
+  <object id="202" template="../../../obj/treasure.tx" x="223.795" y="272.136">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="203" template="../../../obj/scroll.tx" x="70.3333" y="279">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Liliana's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="205" template="../../../obj/treasure.tx" x="112" y="592">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="211" template="../../../obj/enemy.tx" x="64" y="80">
+   <properties>
+    <property name="enemy" value="Orzhov Cleric"/>
+    <property name="pursueRange" type="int" value="75"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="212" template="../../../obj/enemy.tx" x="112" y="128">
+   <properties>
+    <property name="Type" value="enemy"/>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 8,
+}</property>
+    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="pursueRange" type="int" value="75"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="215" template="../../../obj/enemy.tx" x="230.5" y="164.5">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Carrion Screecher&quot; ]
+}</property>
+    <property name="enemy" value="Harpy 2"/>
+    <property name="threatRange" type="int" value="70"/>
+   </properties>
+  </object>
+  <object id="216" template="../../../obj/enemy.tx" x="295.75" y="97.5">
+   <properties>
+    <property name="enemy" value="Harpy"/>
+    <property name="pursueRange" type="int" value="90"/>
+    <property name="threatRange" type="int" value="70"/>
+   </properties>
+  </object>
+  <object id="228" template="../../../obj/entry_right.tx" x="473" y="299" width="23" height="37.6667">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/graveyard.tmx"/>
+    <property name="teleportObjectId" value="267"/>
+   </properties>
+  </object>
+  <object id="231" template="../../../obj/manashards.tx" x="400" y="576"/>
+  <object id="232" template="../../../obj/gold.tx" x="352" y="592"/>
+  <object id="233" template="../../../obj/treasure.tx" x="224" y="352"/>
+  <object id="235" template="../../../obj/enemy.tx" x="272" y="528">
+   <properties>
+    <property name="effect" value=""/>
+    <property name="enemy" value="Vampire"/>
+    <property name="pursueRange" type="int" value="75"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="236" template="../../../obj/enemy.tx" x="400" y="192">
+   <properties>
+    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="pursueRange" type="int" value="80"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="253,254,wait3,260,254,wait3"/>
+   </properties>
+  </object>
+  <object id="237" template="../../../obj/dialog.tx" x="368" y="160">
+   <properties>
+    <property name="dialog" value="[]"/>
+   </properties>
+  </object>
+  <object id="238" template="../../../obj/treasure.tx" x="64" y="144">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="239" template="../../../obj/treasure.tx" x="80" y="176">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="240" template="../../../obj/enemy.tx" x="256" y="48">
+   <properties>
+    <property name="defeatDialog">[
+  {
+     &quot;text&quot;: &quot;Defeated, the witch drops her staff entirely, the last of her spells fizzle out. \&quot;Wait... Let me go, and I will not raise any alarm.\&quot;&quot;,
+     &quot;options&quot;:[
+     {
+	&quot;name&quot;:&quot;Hear her out&quot;,
+	&quot;text&quot;:&quot;\&quot;...And these mushrooms are poisonous if given properly, but I suppose you could heal with them in the right dosage.\&quot; She pauses for a moment, as if considering that she might need to do so herself.&quot;,
+	&quot;options&quot;: [
+	{
+	   &quot;name&quot;:&quot;Trust her word&quot;,
+	   &quot;action&quot;: [{&quot;addLife&quot;: 10, &quot;deleteMapObject&quot;:240}],
+	   &quot;text&quot;:&quot;She takes a handful of the mushrooms and crushes them into a vial already containing some unknown liquid. She then takes a swig of it, and slowly places it down on the ground for you before leaving hurriedly. (+10 health recovered)&quot;
+	},
+     {
+	&quot;name&quot;:&quot;Finish her off&quot;,
+	&quot;action&quot;: [{&quot;addGold&quot;: 250, &quot;deleteMapObject&quot;:240}],
+	&quot;text&quot;:&quot;She is unable to put up much more of a fight. You find a bunch of questionable mushrooms and some gold on her. (+250 gold)&quot;
+	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+     },
+     {
+	&quot;name&quot;:&quot;Let her leave&quot;,
+	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
+	&quot;action&quot;:[
+	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]},
+	    {&quot;deleteMapObject&quot;:240}
+	],
+	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+     }
+	]
+     },
+     {
+	&quot;name&quot;:&quot;Finish her off&quot;,
+	&quot;action&quot;: [{&quot;addGold&quot;: 250, &quot;deleteMapObject&quot;:240}],
+	&quot;text&quot;:&quot;She is unable to put up much more of a fight. You find a bunch of questionable mushrooms and some gold on her. (+250 gold)&quot;
+	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+     },
+     {
+	&quot;name&quot;:&quot;Let her leave&quot;,
+	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
+	&quot;action&quot;:[
+	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]},
+	    {&quot;deleteMapObject&quot;:240}
+	],
+	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+     }
+     ]
+  }
+]</property>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;An old crone leers at you, but does not raise her staff to attack.&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Walk away&quot; },
+      { &quot;name&quot;:&quot;Attack the witch&quot;,
+	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]},
+      {
+        &quot;name&quot;:&quot;Approach her slowly&quot;,
+        &quot;text&quot;: &quot;\&quot;Be gone with you! You will not have them!\&quot; She steps back, dropping some of the herbs and mushrooms that she appears to have been gathering.&quot;,
+        &quot;options&quot;: [
+	{ &quot;name&quot;:&quot;Walk away&quot; },
+	{ &quot;name&quot;:&quot;Attack the witch&quot;,
+	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]
+	}
+	]
+      }]
+   }
+]</property>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Staff of the Death Magus&quot; ]
+}</property>
+    <property name="enemy" value="Witch"/>
+   </properties>
+  </object>
+  <object id="241" template="../../../obj/entry_down.tx" x="0" y="16" width="144" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/town.tmx"/>
+    <property name="teleportObjectId" value="241"/>
+   </properties>
+  </object>
+  <object id="242" template="../../../obj/enemy.tx" x="0" y="336">
+   <properties>
+    <property name="enemy" value="Viper"/>
+    <property name="waypoints" value="243,244,wait5"/>
+   </properties>
+  </object>
+  <object id="245" template="../../../obj/treasure.tx" x="416" y="416">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Demonic Contract&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="249" template="../../../obj/waypoint.tx" x="176" y="384"/>
+  <object id="250" template="../../../obj/waypoint.tx" x="176" y="224"/>
+  <object id="259" template="../../../obj/enemy.tx" x="304" y="496">
+   <properties>
+    <property name="enemy" value="Black Sliver"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="255,256,257,258,257,256"/>
+   </properties>
+  </object>
+  <object id="261" template="../../../obj/enemy.tx" x="80" y="400">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 8,
+ &quot;startBattleWithCard&quot;: [ &quot;Vrock&quot; ]
+}</property>
+    <property name="enemy" value="Harpy"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="263" template="../../../obj/enemy.tx" x="256" y="368">
+   <properties>
+    <property name="enemy" value="Dimir Faerie"/>
+    <property name="pursueRange" type="int" value="90"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="252,249,250,251"/>
+   </properties>
+  </object>
+  <object id="270" template="../../../obj/portal.tx" x="450" y="343">
+   <properties>
+    <property name="activeQuestFlag" value="lilianaBogPortal"/>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/keep.tmx"/>
+    <property name="teleportObjectId" value=""/>
+   </properties>
+  </object>
+  <object id="271" template="../../../obj/dialog.tx" x="416" y="288" width="16" height="48">
+   <properties>
+    <property name="dialog">[{ 
+&quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaBogPortal&quot;, &quot;not&quot;:true}],
+&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;lilianaBogPortal&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 270}]
+}]</property>
+   </properties>
+  </object>
+  <object id="272" template="../../../obj/dialog.tx" x="432" y="256" width="32" height="16">
+   <properties>
+    <property name="dialog">[{ 
+&quot;condition&quot;: [{&quot;checkQuestFlag&quot;:&quot;lilianaBog&quot;, &quot;not&quot;:true}],
+&quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;lilianaBog&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 270}]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="Waypoints">
+  <object id="243" template="../../../obj/waypoint.tx" x="0" y="304"/>
+  <object id="244" template="../../../obj/waypoint.tx" x="0" y="400"/>
+  <object id="246" template="../../../obj/waypoint.tx" x="48" y="576"/>
+  <object id="247" template="../../../obj/waypoint.tx" x="112" y="432"/>
+  <object id="248" template="../../../obj/waypoint.tx" x="112" y="112"/>
+  <object id="251" template="../../../obj/waypoint.tx" x="256" y="224"/>
+  <object id="252" template="../../../obj/waypoint.tx" x="256" y="384"/>
+  <object id="253" template="../../../obj/waypoint.tx" x="400" y="128"/>
+  <object id="254" template="../../../obj/waypoint.tx" x="400" y="208"/>
+  <object id="255" template="../../../obj/waypoint.tx" x="304" y="528"/>
+  <object id="256" template="../../../obj/waypoint.tx" x="304" y="464"/>
+  <object id="257" template="../../../obj/waypoint.tx" x="272" y="464"/>
+  <object id="258" template="../../../obj/waypoint.tx" x="272" y="336"/>
+  <object id="260" template="../../../obj/waypoint.tx" x="304" y="208"/>
+ </objectgroup>
+</map>

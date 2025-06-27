@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzVllEOwjAMQ/eLtBsMrrM7A5dDfExEoXVtt3QiUgRiSfraBHf7ZVn2P/JstWdO7ev6+YzusiEr1W7FxO8xhtmXw6bGl3KYM3TYRvHFmF6+X7GdxafuZRQfy+yctcsYOW7r92/I2f0iPqaOy3fU3og4xMdyPEGPXb6sjy22yJcZlFlQ41vzVzsnZU2V78jp0egz+dh8p2eszdZnhw/NoFqD7bFiKl+v7jp8jD6rultjK+nC2zaQi/TPuRdyXktTI19mRL29B73r4XPnAN0fyJg+5vuulVuKQXzqO7S6tsI4io81hXEml2qj+Rx9m8Wn6u+D/C+j+VPWc+6HXr7ae36um+vEZ6W+sGswbI5njR3tL2nhj4U=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6Aes13vtbEDEnpJVVVVVfXpAffWXM8=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1V21u6zAMy8802ddFvQ69aLp1B5q9hYDAUbLibgKCt5cqMiVTtLwu0/RQn895ms6n6dtK/fe1Pm/7/61t1e+5+r/U52P++fZx+e1n4+Bp/uy77mu335/q3++zjrWaddZFr9uwZXBZXw9b+x1Yehib73X2sdscbqIGyorBhVwspkJYPIy2JlgXe9jDuzk52dqBM3gHzqg9AkaLBe8s1/Cu5eHVFeudBUfLXrcbrcO1V/mtgjf8jrmjOBHttVqDsUT59cxyAc9IHGsXyvPi9PMoRq/3VW95+2b5pmo8grHtIXNW5WHry7X6b+vlyr97+nmPZTQwqzu977KcsGY1JdKTo5xW33FvwEetbfNQWmjxe3qicudzmvefsXl9yDUb6Ss+q5pdTrlzGn7oQYXH21fmicdR1cMZjbZ+ZZ+XvFgqT/aNcsnUPdIdnp+8WJyjx5URfYvmNi/WRvvn9RHigye2V7z+yOJX/IWh5ldTm0hDVO05fi9PFTOaNew5O3Jmsy5l5uGmPVmtz94BejGYp8wDWElqD8fHLMD6fIRLzaLZiefoo2t4s+qReJH2RVo2Mk9wPGg0Y47uIvBXM66aq0fnMqt/2fMdvInuq94dqpeLiqU4jxpH848yqyvefGR73eOZN4dE6/H3DXPmPsr5FZofeve4zD2eMaOuEQdQf28W690x/0K/R84mz+xcdg82xnhU/78AR0z7Ww==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztl0sKwjAQQLvRS9SdgrXX1kvUnV2o0EtJwcAgk/l1JinYt2lIpvnMN2majQi62hvIcED62uK7kHFTymvP8VTKQ85K+R60d47zUozf7wD6Jse1tPqe93EhxkdijOIE2tj8V+O8S7hXWHNDDmcfLE/mmHgRM575YOBFWB7G/5K+j0L5l3EduBbkjfRpbLwUD91TpLOk2uLpNxY0tcFiB2ntluZ+zK+9crhGF7XtlmNt9Yzzmeh4m4nM+1GUzHm/7DP9nG+lmMDudtQ7C8v5GqyxiOnY01d6YszDvtZ7eATwrYTZo0Scc6z1/fwPfAC/mxqm
+  </data>
+ </layer>
+ <layer id="7" name="Walls of Trees " width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzNl1FugzAMhnmHW1C6p2m3XJiEdqdBy9BONSJh1f1lOzZlUy3lKXbyxTG/w7mpqvM22nVcYJyUuROL+4+R97+uA23aeHCuE+K9/K3Dx8Om2VBX1Qw8GL8oDHyvxcEYZaPcvThjOEPe6wfipgKjdx+ytOZuDMZ1hTxYeYzsQ2xSHqyY2XFHWM97+Ep50Ng8ZzmKD/0zQ7+Oj9rnr5lWh1+NvDYa1h1xjWydvr4fVp0OzO+zvp1HyqHFiBy0H+liSceIm9bH9bjP6Finh/uagEHKB2dFXtJiqln09ei0pOfI0Rl8aJ2xjmReDeRn0/qZp16jfBizp39E9qR8RLToUX3hd+C946h2HaF/f8X3qP5xPm8NRnt7NIdJ0FtP3ve8IQZD/zAfkoZ6857q+56Se0MSdDWxvmHlrt3unfcti0tj1M6UfWZBt3K9fTc3Ru2NlbmWRtd30glN8yXtRJ835Z6JUaqfiJZJGuZ5a3m+91LviHy/Hm5pb6rDPYxSLzvStP8/NO37eBY7mi8pb+Zn4Ivqr/UPUOLDN7lVx7iWl++VfYvS+lbvsPRmENi5fmffd6HvYC/Ctzyfj7BRvKaXeU76b0B/aw3PPB+//W/+Ag==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../obj/treasure.tx" x="324.167" y="48.583"/>
+  <object id="63" template="../../obj/gold.tx" x="545.666" y="143"/>
+  <object id="65" template="../../obj/enemy.tx" x="288.069" y="336">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/gold.tx" x="306.167" y="46.833"/>
+  <object id="69" template="../../obj/enemy.tx" x="224" y="160">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="447.75" y="319.75">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="415.75" y="176">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="128.25" y="176.25">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="64" y="321">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/treasure.tx" x="88" y="33"/>
+  <object id="75" template="../../obj/treasure.tx" x="191.5" y="33.5"/>
+  <object id="76" template="../../obj/gold.tx" x="486.5" y="47.5"/>
+  <object id="77" template="../../obj/door_right.tx" x="0.666667" y="415.667">
+   <properties>
+    <property name="teleport" value="maps/map/grove_11.tmx"/>
+    <property name="teleportObjectId" value="70"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

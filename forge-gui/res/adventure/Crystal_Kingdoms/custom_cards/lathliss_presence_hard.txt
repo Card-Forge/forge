@@ -1,0 +1,8 @@
+Name:Lathliss' Presence (Hard Mode)
+ManaCost:no cost
+Colors:red
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | Execute$ TrigDamage | ValidPlayer$ You | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each creature and planeswalker you don't control.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | ValidDescription$ each creature and each planeswalker | NumDmg$ 1
+S:Mode$ NoCleanupDamage | EffectZone$ Command | ValidCard$ Creature.OppCtrl,Planeswalker.OppCtrl | Description$ Damage isn't removed from creatures and planeswalkers your opponents control during cleanup steps.
+Oracle:At the beginning of your upkeep, Lathliss's Presence deals 1 damage to each creature and planeswalker you don't control\nDamage isn't removed from creatures and planeswalkers your opponents control during cleanup steps.

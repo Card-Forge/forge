@@ -1,0 +1,6 @@
+Name:Sleep Wand
+ManaCost:no cost
+Types:Artifact
+A:AB$ PutCounter | Cost$ PayShards<2> | ActivationZone$ Command | ActivationLimit$ 1 | SubAbility$ Eject | ValidTgts$ Creature | CounterType$ Stun | CounterNum$ 1 | SpellDescription$ Put a stun counter on target creature. (If a permanent with a stun counter would become untapped, remove one from it instead.). Exile CARDNAME.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:{M}:Put a stun counter on target creature. Exile Sleep Wand.

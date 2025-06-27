@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="86">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Burning Sands|ODY|1&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy7zsnAcB0Hfs2CH+PSRwkmZCct7BVlx42pbT/MDHx24rOfHnai44Gwk1y7B9JeSu0kx25q2kuK3dS2l1h30NpeXHYPlL3ElFFD1V5CbiDHzbTyOzHlL7XsRS7HaFXnAQDfK/8w
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydlbFOw0AMhl2VIQldmtIZGGFHlMLOU6RFHdkoCHYeAwQrj1EoLGWlSDADT0HaYitnnev4UolIv6I7Rf7O//13mcYAHdR5AlADgFEEsMAx4LgXlzVHPUXFt2f4TRfHU9R7XMx9uPEqHShmiFfFHia+Bo+7K7hWj2Mc5/h+dm/WS7TMXgi+1B7OXyae0XH9dRU3E70QcxaXa5F+A3zNpp6JMzS8YLb0VjPvUoB+s9B9usxnL2gNFpv0hXW/hX5Qb46bVfSZI2/mtFBsuQaLTcxj1PW610Psc8e9nhjeHrYAbtNCgwr2wK29L2psNgC2UEns39sNz9W99gK1aQ3M1t7Lnilrj5GX9EDmTa8zF7U1n9ifzgPyft4s+1115nhvQ1zeU1mX1W77NWjfOW8yc5It86y57KeVJcr31Yafs9hW5mR++F6h+UkdYLfuv79JfZ6OWuWc6bnQvsjM6XtGZ1E+Vg+WeD1W5gaB/WYvuGfr2cH507VCI5FTGkuf5LljT/iOoz1nz6nHfXF3TFz9muK91sP/CL1HVcqEtxdJwZZnYGLwxpF9TuT3q8T1+rH/d7IfufBFngm6V/Re/Ud8R/0B2R3vqA==
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVlT0OwjAMhcuUgfpuILHCPRoQt+F0TNAB2GjUWjLua/PjLFiyrCSOPz9FSZrmf+22HePGUMNTWY3eGaATj31tLfiZbCxdN6UnlHdv6zN1TohXoZfPR7I5/2RgytyO5tpjbmHqPan1l+ZK2JrP4537XZd2BPMx9kHdE81DvbB/phjOHnFSNCONuWcbq4v6it3rdwYL7UecpXGJPs3lOxLsQpiFmLXspVjsezfn51rpuyajX3mju0rvtyesM+V/eAwa+3aMz8G/148UeA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytlU1OwzAQhScJ7IiPgYBtWrgJoHILTsECASr9gWMVuEWldlNVsGMse5SX0bgOpSO9NHFsf2/GdvpQE507oguWj+VJ+C0MpeIMxsscTxXRuiRasV6q8Pwc5dsf65bj+2tOjpkKYXvmlBmzqHkd2r1Pndc3X17Z07Bq2wZ8/9PDADJEb6yBC3qPbPGGzElp13lcBj+aj30a1zJSGrp2HGWYFl884Fog94r1EXWpuH3ytNYbPWD+TSIv3S5DtkU+z5SXDXAXkONnhtu3vrvqbq053ms/xZ656rnHaq01V0K+D/+psZW3nD08d1M4u8jWXNqDaY2XGjRqn0nM+P3tgXLW8ntuofYZxqFqbXHVluvUelfO13y5ibqLfUbxOVcn/Y2RWMH+8myZi4A3L8OzNa/47RN4zk9dl4184UkI6+uoWzvpnxPOJ/+9eK6Wyodm3x/ba/aX+AVxyWVB
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="208" y="272"/>
+  <object id="50" template="../../obj/treasure.tx" x="378.5" y="93">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;probability&quot;: 1,
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;mythicrare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.6,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythicrare&quot; ],
+  &quot;addMaxCount&quot;: 1
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="138.5" y="60">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;probability&quot;: 1,
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.6,
+  &quot;rarity&quot;: [ &quot;uncommon&quot;, &quot;rare&quot; ],
+  &quot;addMaxCount&quot;: 1
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/gold.tx" x="132.666" y="128">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/gold.tx" x="416.167" y="141.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/gold.tx" x="287.5" y="253.667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="141.834" y="157.5">
+   <properties>
+    <property name="enemy" value="Volcano Elemental"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="43.1667" y="145.5">
+   <properties>
+    <property name="enemy" value="Amonkhet Minotaur Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="81,82,81,83,84,83"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="211" y="162.834">
+   <properties>
+    <property name="enemy" value="Flame Elemental"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="252.833" y="45.3333">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Flagstones of Trokair|TSR|1&quot; ]
+}</property>
+    <property name="enemy" value="Axgard Dwarf"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" x="389.666" y="111.5">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Desert|AFC|1&quot; ]
+}</property>
+    <property name="enemy" value="Pyromancer"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/treasure.tx" x="418" y="238.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;probability&quot;: 1,
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.6,
+  &quot;rarity&quot;: [ &quot;uncommon&quot;, &quot;rare&quot; ],
+  &quot;addMaxCount&quot;: 1
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/treasure.tx" x="400.667" y="93">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;probability&quot;: 1,
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;mythicrare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.6,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythicrare&quot; ],
+  &quot;addMaxCount&quot;: 1
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/collision.tx" x="-2.84217e-14" y="272" width="479.667" height="16"/>
+  <object id="69" template="../../obj/collision.tx" x="-0.500167" y="-16.6667" width="479.667" height="16"/>
+  <object id="70" template="../../obj/collision.tx" x="-16.6667" y="0" width="16" height="272"/>
+  <object id="71" template="../../obj/collision.tx" x="479.667" y="-0.333333" width="16" height="272"/>
+  <object id="72" template="../../obj/enemy.tx" x="224.667" y="96.3333">
+   <properties>
+    <property name="enemy" value="Sand Golem"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="196.333" y="135">
+   <properties>
+    <property name="enemy" value="Magma Fire Elemental"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="76,77"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/booster.tx" x="114.333" y="127.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MM2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MM2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MM2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/enemy.tx" x="335.667" y="147.333">
+   <properties>
+    <property name="enemy" value="Phoenix"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="79,78,80"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/waypoint.tx" x="129.667" y="89.6667"/>
+  <object id="77" template="../../obj/waypoint.tx" x="332.667" y="217.333"/>
+  <object id="78" template="../../obj/waypoint.tx" x="43.3333" y="63.6667"/>
+  <object id="79" template="../../obj/waypoint.tx" x="313.333" y="107.333"/>
+  <object id="80" template="../../obj/waypoint.tx" x="33.3333" y="240.333"/>
+  <object id="81" template="../../obj/waypoint.tx" x="45.6667" y="113"/>
+  <object id="82" template="../../obj/waypoint.tx" x="105.333" y="65.3333"/>
+  <object id="83" template="../../obj/waypoint.tx" x="45" y="209.333"/>
+  <object id="84" template="../../obj/waypoint.tx" x="159.333" y="209"/>
+  <object id="85" template="../../obj/manashards.tx" x="219.667" y="22.3333"/>
+ </objectgroup>
+</map>

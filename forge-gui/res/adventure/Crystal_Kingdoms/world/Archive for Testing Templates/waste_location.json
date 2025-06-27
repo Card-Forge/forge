@@ -1,0 +1,28 @@
+{
+		"startPointX": 0.5,
+		"startPointY": 0.5,
+		"name": "waste",
+		"noiseWeight": 0.3,
+		"distWeight": 1.0,     
+    "tilesetName":"Waste",
+    "tilesetAtlas":"world/tilesets/terrain.atlas",    
+    "terrain":[
+    {
+    "spriteName":"Waste_1",
+    "min": 0,           
+    "max": 0.2,           
+    "resolution": 5
+    },    {
+    "spriteName":"Waste_2",
+    "min": 0.8,           
+    "max": 1.0,           
+    "resolution": 5
+    }
+    ],
+		"width": 0.85,
+		"height": 0.85,
+		"color": "aeaeae",
+    "spriteNames":[ "WasteTree","Stone","WasteRock"]  ,
+    "enemies":[ "ClayGolem","Construct","Eldrazi","Gargoyle","Gargoyle 2","Golem","Bandit","Black Wiz1","Black Wiz2","Black Wiz3","Blue Wiz1","Blue Wiz2","Blue Wiz3","Green Wiz1","Green Wiz2","Green Wiz3","Red Wiz1","Red Wiz2","Red Wiz3","White Wiz1","White Wiz2","White Wiz3" ]  ,
+    "pointsOfInterest":[ "Waste Town","Test" ]
+}

@@ -1,0 +1,18 @@
+
+compass.png
+size: 50,50
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none               
+right3
+  xy: 9,0
+  size: 50,50
+right2
+  xy: 6,0
+  size: 50,50
+right1
+  xy: 3,0
+  size: 50,50
+right0
+  xy: 0,0
+  size: 50,50

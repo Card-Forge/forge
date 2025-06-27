@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="107">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzN1lEKwjAMBuDCpmP38Cy9gQ89ieApPJkw8Ba7g0jBh9Il6Z80lAl5mHTma5K6pTWEZIz3fAxkDbWWu78nNHlba719VK64HnNTXnRvXERFrSifVA/Kr/Vxv4k693/k9fss+7jvkJrVPdHUsjVznI8zSj7rOUF86AxGB6vUt9bctc6L5Msfi4+aD03fpf729Nvq4/YXB/tqZ2sOPS3a+nHrymuqfiN86P0jfeX1Azx3iM97HrPN0+cZGpvGd7+M24Olf2fzbdM5fGfvL+rL587TiP4Pas6v5LO+A7+WEG5Xm6/Ol32WZzwSnLHlk56fz4D5vovdlwAflVtTq16f1FtNPz+TLkdpo3w/PdHxqw==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJz7x8nAcI5lYDAIILNBYD8HA8N/oJsYuBgY4jgheKDchuw+ZAxy0yGgO/8A6dcDFHZY3cyFYCdw4nb/QOBYaDzCwg09/vHho1jSwGAKd6LjhwrxgQyo7T5qhSkt3TgS3AcrA/8PYNmMN/wGuGwmBg929w0FPFjzx1Bx3ygexaN4FJOLV7JB6BxWCB5o96DjZayo+Cwd7f7HjoqRwwfdXQPhPvRwArkRl7sGg/sIYX2oWuQ2KQgAAAtcOz8=
+  </data>
+ </layer>
+ <layer id="7" name="Mountain Walls" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzNljtOA0EMhncCm6QBGshKNPRwAVquwRmoqEISREFLh8QFuEBEFpJLQCoajkCHEJSIWLMjHK/teewW/JIVZcaxv7U9ky1MlhUee9nk7bRjjfrvruyR2F5AnlhzeYAFC77DOrCVKL/kDypNOi/E4577ydTzSCoT/EM4cb8g/liJ+dwLzx/DqTFiPsz20QKLNLe0/4NAPhyX0xIxHxOfSSDfKKvni+Hjns/pPM+yI2HGJgKjxuuk9Vjiu9/wJBNyg2779X18fmN6zPUW7ISpIdSvqWJnUOLjepzKJ/UoZAb/C580gxofZaR811vNeX019PHhPcrXqc7QTd+apEVXZ0zlGwtxmupSiIvXNL6F0evYVFJcui7df3NjGQ8qm1d+b4nzFsI3ZNbbrk9HudO5OuH1gdCzWL7UM+tT2RIflsbq9uDsfqL3ikPEcRWQI4ZxuG1nkPqlPB/4P6xYLzKdM7aG+zt/fq5GKT3A7wuLinNEfODMzJkzrAlq6JjwJ13TYr12rU171s7ydU5nM+Pno/UFPnoXcL6OwRm3Bpqi2eT+P3x3se9MSXaXr9t7z37ifSqOz93FWs18NaV+S+Y3P1Wdvor6XiwfZYlhk/icvgU+mJkZw/cLoMsq1g==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="26">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytVrtuU0EQXaM4D4kYo4Adhw/wyrohUIAoge8AJKihQUI2Nq+OjkAZoKOiQ+A4FtBRAwURgSo9VJAeMaO7o507ntlrI450tPexj7NnZ2e3WXGuWcI14DZja8b6VhuC9V37p3EEfAh1fSiHxphdl38fhTFOL+Xlz8OxDfJq5ty1zKko067Nn7A7V+xrKDSuhrrLyriL7PkuaLuXFfu2oOlbZe3eKm1aHZhDJ39uGO0Q6FsK5Ou0+sgvXJ8T85GEjwt5eQa0nVX0jYG3nc2+Mj7GQEOJOakN5/5pLvKcQoR8bij+W3xd0XVyfVbbOyXztMDjPsWW0NkXfZTp0+KvWYe1ZsT1HdV14t7tsjH5M70TW0qs8nUgnZZero+QVYol4RfE+G/ggbIXuqLkfmGM4/6gva7FScpP1DiqOxOD0PEmlI+BT5ZjDhmIBHPeO3cBeNHn7z03GUcNRU+ZvmmwXnPuJHCjZte5BLouA6/4qEUbQ+b7lD4Zw4QVGOOY13VQvnsH/9+LOjereYlrPTTGkGuc0keUGjdg3FOGPsIe/P8W6hzAnvpzqKjvg9c9/Bd9lHdQ59F5PS8ivxrfiSssz+8r+t64yT08jb5UPB7JoifkTwrjUOL+2BH9Ymyk/NPuRI9gQ24uFu8kHDyncX33wZ8HPtZB8LOJ53Te7yDhF51vPJdncDauL8X3Xi3OlQPfub5noO25L/7HGER0EnlB+iTvRqhPy7fkQU/kEJ7mUrGZis89dmeTfg4rxfVFfTzfSkh9Gl4Y/pC/5F8vzJvPi2slyPhP5dvvQbM8H1JnnNSHoPxCoPXR1qDsvJBnp+Yh97zO7u07oGPsJ/Xti/x5XIzN43vW80zTZ3n+BXTs+tyHW9XoO+3jl+DX9Wr6Dl2mD+OEnyGoj8731D2Z5xMk+ie/fQa+Wkjr4vr6UouLOYn+9V06T62FvtAXTgSWW23nnrbz5xtGTp/mzC3TUXbWoC+cP0K5DdpG7fh9Vm3/g5o+i5Z/VP4FzAnreQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../obj/treasure.tx" x="110.444" y="326.898"/>
+  <object id="51" template="../../obj/treasure.tx" x="176.166" y="54.6663"/>
+  <object id="57" template="../../obj/enemy.tx" x="453.5" y="65.0004">
+   <properties>
+    <property name="enemy" value="Bear"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="340.167" y="285.167">
+   <properties>
+    <property name="enemy" value="Kor Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="91,92"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" x="422.5" y="196.167">
+   <properties>
+    <property name="enemy" value="Dwarf"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="93,94"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/entry_right.tx" x="623.5" y="320" width="16" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/gold.tx" x="416.978" y="181.522"/>
+  <object id="68" template="../../obj/enemy.tx" x="471" y="285">
+   <properties>
+    <property name="enemy" value="Kor Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="288" y="224">
+   <properties>
+    <property name="enemy" value="Kor Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="94,95"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="177" y="171">
+   <properties>
+    <property name="enemy" value="Armored Knight "/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="96,95"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="176" y="107.5">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Nahiri Boss Effect&quot;]
+}</property>
+    <property name="enemy" value="Nahiri"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/treasure.tx" x="87.024" y="381.417"/>
+  <object id="73" template="../../obj/enemy.tx" x="413.724" y="311.841">
+   <properties>
+    <property name="enemy" value="Armored Knight "/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="97,103"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/door_down.tx" x="472.75" y="64.6667">
+   <properties>
+    <property name="teleport" value="../common/maps/map/nahiri/nahiricave.tmx"/>
+    <property name="teleportObjectId" value="71"/>
+   </properties>
+  </object>
+  <object id="85" template="../../obj/waypoint.tx" x="391.5" y="57"/>
+  <object id="91" template="../../obj/waypoint.tx" x="385.5" y="282.667"/>
+  <object id="92" template="../../obj/waypoint.tx" x="320.667" y="282"/>
+  <object id="93" template="../../obj/waypoint.tx" x="423.5" y="223.917"/>
+  <object id="94" template="../../obj/waypoint.tx" x="309.833" y="223"/>
+  <object id="95" template="../../obj/waypoint.tx" x="177.25" y="224"/>
+  <object id="96" template="../../obj/waypoint.tx" x="178" y="144.5"/>
+  <object id="97" template="../../obj/waypoint.tx" x="418.5" y="291.333"/>
+  <object id="98" template="../../obj/manashards.tx" x="233" y="107.5"/>
+  <object id="99" template="../../obj/manashards.tx" x="326.75" y="55.75"/>
+  <object id="100" template="../../obj/manashards.tx" x="49.25" y="326"/>
+  <object id="101" template="../../obj/manashards.tx" x="59.5" y="366.75"/>
+  <object id="102" template="../../obj/manashards.tx" x="486" y="375"/>
+  <object id="103" template="../../obj/waypoint.tx" x="413.667" y="361.667"/>
+  <object id="104" template="../../obj/enemy.tx" x="81.5489" y="352.323">
+   <properties>
+    <property name="enemy" value="Yeti"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="106" template="../../obj/door_down.tx" x="117" y="287">
+   <properties>
+    <property name="teleport" value="../common/maps/map/nahiri/nahiricave.tmx"/>
+    <property name="teleportObjectId" value="96"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

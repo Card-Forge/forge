@@ -1,0 +1,77 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "name": "lastScreen",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Window",
+      "name": "deckSlots",
+      "x": 15,
+      "y": 18,
+      "width": 330,
+      "height": 235
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "binding": "Back",
+      "width": 100,
+      "height": 30,
+      "x": 365,
+      "y": 10
+    },
+    {
+      "type": "TextButton",
+      "name": "rename",
+      "text": "tr(lblRename)",
+      "width": 100,
+      "height": 30,
+      "x": 365,
+      "y": 50
+    },
+    {
+      "type": "TextButton",
+      "name": "edit",
+      "text": "tr(lblEdit)",
+      "binding": "Use",
+      "width": 100,
+      "height": 30,
+      "x": 365,
+      "y": 90
+    },
+    {
+      "type": "TextButton",
+      "name": "copy",
+      "text": "tr(lblCopy)",
+      "width": 100,
+      "height": 30,
+      "x": 365,
+      "y": 130
+    },
+    {
+      "type": "TextButton",
+      "name": "delete",
+      "text": "tr(lblDelete)",
+      "width": 100,
+      "height": 30,
+      "x": 365,
+      "y": 170
+    },
+    {
+      "type": "TextButton",
+      "name": "add",
+      "text": "tr(lblAddDeck)",
+      "width": 100,
+      "height": 30,
+      "x": 365,
+      "y": 210
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{                                    
+"name":"White",
+  "mainDeck": [
+    {  
+      "count":16, 
+      "cardName": "Plains" 
+    },        
+    {  
+      "count":11,
+      "colors": ["white"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [1,2]
+    },
+    {  
+      "count":7,
+      "colors": ["white"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [3]
+    },
+    {  
+      "count":5,
+      "colors": ["white"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [4,5,6]
+    },
+    {  
+      "count":1,
+      "colors": ["white"],
+      "rarity": ["rare"],   
+      "manaCosts": [4,5,6,7,8,9] 
+    }
+    ]
+}
+

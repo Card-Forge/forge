@@ -1,0 +1,14 @@
+Name:Fifth Head of the Hydra
+ManaCost:no cost
+Types:Creature Hydra
+Colors:green,blue
+PT:1/4
+K:Defender
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | Layer$ CantHappen | Description$ You can't lose the game and your opponents can't win the game.
+R:Event$ GameWin | ActiveZones$ Battlefield | ValidPlayer$ Opponent | Layer$ CantHappen | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
+T:Mode$ Phase | Phase$ End Of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of each opponents end step, that player exiles the top 4 cards from their library
+SVar:TrigDig:DB$ Dig | Defined$ ActivePlayer | DigNum$ 4 | DestinationZone$ Exile | ChangeNum$ All
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would leave the battlefield, instead exile it with three time counters on it. It gains suspend.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | WithCountersType$ TIME | WithCountersAmount$ 3 | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ GiveSuspend
+SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.withoutSuspend+YouOwn | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent
+Oracle:Defender/nYou can't lose the game and your opponents can't win the game.\nAt the beginning of each opponents end step, that player exiles 4 cards. \nIf Fifth Head of the Hydra would leave the battlefield, instead exile it with three time counters on it. It gains suspend.

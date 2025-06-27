@@ -1,0 +1,7 @@
+Name:Farmer's Tools
+ManaCost:no cost
+Types:Artifact
+A:AB$ RepeatEach | Cost$ PayShards<2> | ActivationZone$ Command | RepeatSubAbility$ DBChangeZone | RepeatPlayers$ Player | SubAbility$ Eject | StartingWith$ You | SpellDescription$ Starting with you, each player may put a land card from their hand onto the battlefield. Exile Farmer's Tools.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land.RememberedPlayerCtrl | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeNum$ 1 | Hidden$ True
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:{M}{M}: Starting with you, each player may put a land card from their hand onto the battlefield. Exile Farmer's Tools.

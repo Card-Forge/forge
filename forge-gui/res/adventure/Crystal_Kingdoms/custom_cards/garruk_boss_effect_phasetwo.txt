@@ -1,0 +1,17 @@
+Name:Garruk's Boss Effect Phase Two
+ManaCost:no cost
+Types:Enchantment
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Self | AffectedZone$ Command | RemoveAllAbilities$ True | IsPresent$ Card.namedGarruk's Boss Effect Phase One | PresentZone$ Command | PresentCompare$ EQ1
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Forest.YouCtrl | AddType$ Swamp | Description$ Each Forest you control is a Swamp in addition to its other land types.
+S:Mode$ Continuous | Affected$ Beast.YouCtrl | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Trample & Deathtouch | Description$ Beast creatures you control get +3/+3 and have trample and deathtouch.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | PresentZone$ Command | Execute$ TrigConjure | TriggerDescription$ At the beginning of your upkeep, conjure a card from Garruk's Phase 2 spellbook into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Zone$ Hand | AtRandom$ True | Spellbook$ Garruk; Apex Predator,Garruk; Cursed Huntsman,Garruk Relentless,In Garruk's Wake,Rampaging Baloths,Manglehorn,Elder Gargaroth,Gemrazer,Thragtusk,Sawtusk Demolisher,Avenger of Zendikar,Soul of the Harvest,Kogla; the Titan Ape,Terastodon,Bane of Progress
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | Execute$ DBPump | TriggerZones$ Command | TriggerDescription$ Whenever an opponent casts a noncreature spell, perpetually increase the power and toughness of creatures you control and creature cards in your hand, library, and graveyard by 1.
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | PumpZone$ Battlefield,Hand,Graveyard,Library | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigReanimate | TriggerDescription$ At the beginning of your end step, return a random creature card from your graveyard to the battlefield. It gains "If this creature would leave the battlefield, exile it instead."
+SVar:TrigReanimate:DB$ ChangeZone | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Battlefield | RememberChanged$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Replacements$ ReplaceDies | Defined$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:ReplaceDies:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If this creature would leave the battlefield, exile it instead.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Each Forest you control is a Swamp in addition to its other land types.\nBeast creatures you control get +3/+3 and have trample and deathtouch.\nAt the beginning of your upkeep, conjure a card from Garruk's Phase 2 spellbook into your hand.\nWhenever an opponent casts a noncreature spell, perpetually increase the power and toughness of creatures you control and creature cards in your hand, library, and graveyard by 1.\nAt the beginning of your end step, return a random creature card from your graveyard to the battlefield. That creature gains "If this creature would leave the battlefield, exile it instead."

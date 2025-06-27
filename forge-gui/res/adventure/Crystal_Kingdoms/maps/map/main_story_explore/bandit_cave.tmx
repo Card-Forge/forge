@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="29">
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwL42RgCBvFo3gUj+JRPIpH8SgexVTDAKJT3qk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFlII/ZOgRZ2BoIEW9BBl2DAZATtjQGogPtANoBEhNU6SCrbQ0nI5gJhcDw2wu+ttrw83AcAOIbwLxLDLcQE74g/x6C2ifBRIGuYGW/ke2cw6QfQ1IzwXS87gQ/ofZT824sIHaB7LrOjdC/CoW+0Hus+TGbRYpAGT+dRxmYQt/cuz9hUUMX51gg2YnufaSAnDFO66wIQR+EqkOFr+U2EUsWEOiegCPqy2y
+  </data>
+ </layer>
+ <layer id="7" name="Clutter" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhYUMc7wA4gA3CJovJXSQ+MO/CBC8K45Wp4GRpg7Coqhz8+e7GBIlnq2k9rcEVmoF1APugQH2gXDD7QQkaYVA/yMgtYHjUMlN2rB2FZSA3gKjaw9qtJYBdvhKZfHyLdlytCmr3qOOzFB5qw5CnkOodYgMvPMJCDwy+DqZwDAKNcD2Q=
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJylVUFuwzAMy9F5mNuhH63X7ldtujxjFgaiLEc5DWZASJBIIilb8mGepkO3S5mmr/L7PrLwu3a7z89nFnchP+cT/5f+vM3jPGEf3XTdKIaxlvnVR3MfJddpoHUxuBzDuc7dv3X77t8+y1+Oiqv88e60YlVTD+b/IOxToiF4rlL/wOZY+IWWsDXJz/WCvmq0ZnyAfUz0uPy6pw/iqBqQ753vvB+js5f5KQZ4av2dZpfTcc56RTniLIYhB/Y948k5UVNXM+UIHD4n4ATMvZrUrwou+t0Zn+mterras5/ijnpT9SinzJexkX8L91y8lj0rsDHDwS/raaxKZwP2Xx4Ol/XyvLqW532S7SevrTpp/V1P6ozQO8ZhrqZ2I82uJ/dobDLT38Ud3Uv6ne+DJnuyhalzIOulKrVwcSONPPeaiXV6WTPfJW6+Q3srrz3g/MN+ANcA6cw=
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="8" template="../../obj/gold.tx" x="272" y="64"/>
+  <object id="9" template="../../obj/gold.tx" x="176" y="288"/>
+  <object id="10" template="../../obj/booster.tx" x="432" y="48">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NMS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NMS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NMS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="28" template="../../obj/treasure.tx" x="48" y="48"/>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="2" template="../../obj/collision.tx" x="-32" y="320" width="544" height="32"/>
+  <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="5" template="../../obj/waypoint.tx" name="5" x="80" y="200"/>
+  <object id="7" template="../../obj/entry_up.tx" x="54.3422" y="319.154" width="83.5102" height="10.9262"/>
+  <object id="11" template="../../obj/waypoint.tx" name="11" x="160" y="208"/>
+  <object id="12" template="../../obj/waypoint.tx" name="12" x="144" y="112"/>
+  <object id="13" template="../../obj/waypoint.tx" name="13" x="48" y="64"/>
+  <object id="14" template="../../obj/waypoint.tx" name="14" x="192" y="288"/>
+  <object id="15" template="../../obj/waypoint.tx" name="15" x="304" y="224"/>
+  <object id="16" template="../../obj/waypoint.tx" name="16" x="416" y="288"/>
+  <object id="17" template="../../obj/treasure.tx" x="336" y="304"/>
+  <object id="18" template="../../obj/waypoint.tx" name="18" x="368" y="128"/>
+  <object id="19" template="../../obj/waypoint.tx" name="19" x="400" y="32"/>
+  <object id="20" template="../../obj/waypoint.tx" name="20" x="192" y="64"/>
+  <object id="21" template="../../obj/waypoint.tx" name="21" x="256" y="32"/>
+  <object id="22" template="../../obj/waypoint.tx" name="22" x="256" y="152"/>
+  <object id="23" template="../../obj/enemy.tx" x="352" y="80">
+   <properties>
+    <property name="enemy" value="Bandit Scoundrel"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="18,19,r18-19,w10"/>
+   </properties>
+  </object>
+  <object id="24" template="../../obj/enemy.tx" x="384" y="256">
+   <properties>
+    <property name="enemy" value="Bandit Archer"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="15,r15-16,w5"/>
+   </properties>
+  </object>
+  <object id="25" template="../../obj/enemy.tx" x="128" y="208">
+   <properties>
+    <property name="enemy" value="Bandit Slingshot"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="r5-11-14, w5, r5-11-14, w10"/>
+   </properties>
+  </object>
+  <object id="26" template="../../obj/enemy.tx" x="48" y="80">
+   <properties>
+    <property name="enemy" value="Bandit Archer"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="12,r12-13,w5"/>
+   </properties>
+  </object>
+  <object id="27" template="../../obj/enemy.tx" x="224" y="64">
+   <properties>
+    <property name="enemy" value="Bandit Scoundrel"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="r20-21-22, r20-21-22"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

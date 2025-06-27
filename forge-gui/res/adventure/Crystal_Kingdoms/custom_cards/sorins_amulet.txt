@@ -1,0 +1,9 @@
+Name:Sorin's Amulet
+ManaCost:no cost
+Types:Enchantment
+A:AB$ MakeCard | Cost$ B B PayShards<4> PayLife<4> | IsPresent$ Vampire.YouCtrl | PresentZone$ Library | PresentCompare$ GE20 | ActivationZone$ Command | GameActivationLimit$ 1 | Conjure$ True | AtRandom$ True | Spellbook$ Sorin; Grim Nemesis,Sorin; Imperious Bloodlord,Sorin; Lord of Innistrad,Sorin Markov,Sorin; Solemn Visitor,Sorin the Mirthless,Sorin; Vampire Lord,Sorin; Vengeful Bloodlord | WithCounter$ TIME | WithCounterNum$ 3 | Zone$ Exile | RememberMade$ True | SubAbility$ GiveSuspend | SpellDescription$ Conjure a Sorin planeswalker into exile with three time counters, it gains suspend. Activate this ability only if your library contains 20 or more vampires and only once each game.
+SVar:GiveSuspend:DB$ Pump | Defined$ Remembered | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Vampire.YouCtrl | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ YourLife | SVarCompare$ LT10 | AddKeyword$ Lifelink | Description$ As long as your life total is lower than 10, Vampires you control have +1/+1 and have lifelink.
+SVar:YourLife:Count$YourLifeTotal
+Oracle:{B}{B},{M}{M}{M}{M},Pay 4 life: Conjure a Sorin planeswalker into exile with three time counters, it gains suspend. Activate this ability only if your library contains 20 or more vampires and only once each game.\nAs long as your life total is lower than 10, Vampires you control have +1/+1 and have lifelink.

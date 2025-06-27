@@ -1,0 +1,98 @@
+gladiator.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 73,4
+  size: 16, 16  
+Idle 
+  xy: 6, 4
+  size: 20, 28  
+Idle 
+  xy: 38, 4
+  size: 20, 28  
+Idle 
+  xy: 70, 4
+  size: 20, 28  
+Idle 
+  xy: 102, 4
+  size: 20, 28  
+Idle 
+  xy: 134, 4
+  size: 20, 28  
+Idle 
+  xy: 6, 100
+  size: 20, 28  
+Idle 
+  xy: 38, 100
+  size: 20, 28  
+Idle 
+  xy: 70, 100
+  size: 20, 28  
+Walk 
+  xy: 0, 32
+  size: 32, 32
+Walk 
+  xy: 32, 32
+  size: 32, 32
+Walk 
+  xy: 64, 32
+  size: 32, 32
+Walk 
+  xy: 96, 32
+  size: 32, 32
+Walk 
+  xy: 128, 32
+  size: 32, 32
+Walk 
+  xy: 160, 32
+  size: 32, 32
+Walk 
+  xy: 192, 32
+  size: 32, 32
+Walk 
+  xy: 224, 32
+  size: 32, 32
+Attack 
+  xy: 0, 64
+  size: 32, 32
+Attack 
+  xy: 32, 64
+  size: 32, 32
+Attack 
+  xy: 64, 64
+  size: 32, 32
+Attack 
+  xy: 96, 64
+  size: 32, 32
+Attack 
+  xy: 128, 64
+  size: 32, 32
+Attack 
+  xy: 160, 64
+  size: 32, 32
+Attack 
+  xy: 192, 64
+  size: 32, 32
+Death
+  xy: 0, 128
+  size: 32, 32
+Death
+  xy: 32, 128
+  size: 32, 32
+Death
+  xy: 64, 128
+  size: 32, 32
+Death
+  xy: 96, 128
+  size: 32, 32
+Death
+  xy: 128, 128
+  size: 32, 32
+Death
+  xy: 160, 128
+  size: 32, 32
+Death
+  xy: 192, 128
+  size: 32, 32

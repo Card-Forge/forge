@@ -1,0 +1,18 @@
+Name:Sorin's Boss Effect
+ManaCost:no cost
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ YourLife | SVarCompare$ GE40 | Execute$ TrigSeek | TriggerDescription$ As long as Sorin's life total is 40 or more, Sorin seeks two nonland cards every upkeep and can't lose the game and his opponents can't win the game.
+SVar:TrigSeek:DB$ Seek | Num$ 2 | Type$ Card.nonLand
+R:Event$ GameLoss | ActiveZones$ Command | ValidPlayer$ You | Layer$ CantHappen | CheckSVar$ YourLife | SVarCompare$ GE40 | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
+R:Event$ GameWin | ActiveZones$ Command | ValidPlayer$ Opponent | Layer$ CantHappen | Secondary$ True | EffectZone$ Command | CheckSVar$ YourLife | Secondary$ True | SVarCompare$ GE40 | Description$ You can't lose the game and your opponents can't win the game.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ YourLifeCompare | SVarCompare$ EQ2 | Execute$ TrigConjure | TriggerDescription$ As long as Sorin's life total is between 20 and 40, at Sorin's upkeep, conjure a card from Sorin's Spellbook into exile with 2 time counters on it, it gains suspend.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Sorin; Grim Nemesis,Sorin; Imperious Bloodlord,Sorin; Lord of Innistrad,Sorin Markov,Sorin; Solemn Visitor,Sorin the Mirthless,Sorin; Vampire Lord,Sorin; Vengeful Bloodlord,Timothar; Baron of Bats,Olivia Voldaren,Patriarch's Bidding,Licia; Sanguine Tribune,Astarion; the Decadent,Strefan; Maurer Progenitor,Evelyn; the Covetous,Anje; Maid of Dishonor,Edgar Markov,Swords to Plowshares,Cruel Celebrant,Olivia's Wrath,Markov Baron,Champion of Dusk,Vein Ripper,Anguished Unmaking,Mortify,Void Rend,Terminate,Despark,Bedevil,Utter End,Ruinous Ultimatum,Sign in Blood,Reanimate,Victimize | Zone$ Exile | RememberMade$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterNum$ 3 | CounterType$ TIME | SubAbility$ GiveSuspend
+SVar:GiveSuspend:DB$ Pump | Defined$ Remembered | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Vampire.YouCtrl | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ YourLife | SVarCompare$ LT20 | AddKeyword$ Lifelink | Description$ As long as Sorin's life total is lower than 20, Sorin's Vampires get +2/+2 and have lifelink.
+SVar:Y:Count$Compare YourLife GE20.1.0
+SVar:X:Count$Compare YourLife LE40.1.0
+SVar:YourLifeCompare:SVar$X/Plus.Y
+SVar:YourLife:Count$YourLifeTotal
+Oracle:As long as Sorin's life total is 40 or more, Sorin seeks two nonland cards every upkeep and can't lose the game and his opponents can't win the game. \nAs long as Sorin's life total is between 20 and 40, at Sorin's upkeep, conjure a card from Sorin's Spellbook into exile with 2 time counters on it, it gains suspend.\nAs long as Sorin's life total is lower than 20, Sorin's Vampires get +2/+2 and have lifelink.

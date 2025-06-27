@@ -1,0 +1,11 @@
+# XXX Shen Custom Jumpstart for Innistrad plane
+XXX White Pack Name 1: 1 wholeSheet("XXX White Pack Name 1"), 1 RareMythic:fromSheet("XXX White Inserts")
+XXX White Pack Name 2: 1 wholeSheet("XXX White Pack Name 2"), 1 RareMythic:fromSheet("XXX White Inserts")
+XXX Blue Pack Name 1: 1 wholeSheet("XXX Blue Pack Name 1"), 1 RareMythic:fromSheet("XXX Blue Inserts")
+XXX Blue Pack Name 2: 1 wholeSheet("XXX Blue Pack Name 2"), 1 RareMythic:fromSheet("XXX Blue Inserts")
+XXX Black Pack Name 1: 1 wholeSheet("XXX Black Pack Name 1"), 1 RareMythic:fromSheet("XXX Black Inserts")
+XXX Black Pack Name 2: 1 wholeSheet("XXX Black Pack Name 2"), 1 RareMythic:fromSheet("XXX Black Inserts")
+XXX Red Pack Name 1: 1 wholeSheet("XXX Red Pack Name 1"), 1 RareMythic:fromSheet("XXX Red Inserts")
+XXX Red Pack Name 2: 1 wholeSheet("XXX Red Pack Name 2"), 1 RareMythic:fromSheet("XXX Red Inserts")
+XXX Green Pack Name 1: 1 wholeSheet("XXX Green Pack Name 1"), 1 RareMythic:fromSheet("XXX Green Inserts")
+XXX Green Pack Name 2: 1 wholeSheet("XXX Green Pack Name 2"), 1 RareMythic:fromSheet("XXX Green Inserts")

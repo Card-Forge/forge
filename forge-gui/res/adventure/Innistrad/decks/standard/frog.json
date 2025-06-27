@@ -1,0 +1,12 @@
+{                                    
+"name":"Frog",
+  "template":
+  {
+   "count":60,
+   "colors":["Blue","Black","Green"],
+   "tribe":"Frog",        
+   "tribeCards":0.5,
+   "tribeSynergyCards":0.2,
+   "rares":0.5
+  }
+}

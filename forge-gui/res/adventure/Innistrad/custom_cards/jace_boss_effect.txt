@@ -1,0 +1,15 @@
+Name:Jace Boss Effect
+ManaCost:no cost
+Colors:blue
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigBranch | TriggerDescription$ At the beginning of your end step, if your opponent's deck contains 10 or more creature cards, conjure a duplicate of a random creature card from your or your opponent's library onto the battlefield under your control. The duplicate perpetually becomes a blue Illusion creature with base power and toughness 2/2 and has "When this creature becomes the target of a spell or ability, sacrifice it." \nOtherwise, conjure a random card from Jace's Spellbook unto the battlefield under your control.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$GE10 | TrueSubAbility$ DBChoose | FalseSubAbility$ DBConjureSpellBook
+SVar:DBChoose:DB$ ChooseCard | Choices$ Creature | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Animate | Defined$ Remembered | Power$ 2 | Toughness$ 2 | Triggers$ DismissTarget | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DismissTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ DismissSac | TriggerDescription$ When this creature becomes the target of a spell or ability, sacrifice it.
+SVar:DismissSac:DB$ Sacrifice
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+SVar:DBConjureSpellBook:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Hedron Archive,Jace's Erasure,Oracle of the Alpha,Jace's Sanctum,Phantom Warrior,Psychic Corrosion,Unstoppable Plan,Trail of Evidence | Zone$ Battlefield
+SVar:X:Count$ValidLibrary Creature.OppOwn
+Oracle:At the beginning of your end step, if your opponent's deck contains 10 or more creature cards, conjure a duplicate of a random creature card from your or your opponent's library onto the battlefield under your control. The duplicate perpetually becomes a blue Illusion creature with base power and toughness 2/2 and has "When this creature becomes the target of a spell or ability, sacrifice it." \nOtherwise, conjure a random card from Jace's Spellbook unto the battlefield under your control.

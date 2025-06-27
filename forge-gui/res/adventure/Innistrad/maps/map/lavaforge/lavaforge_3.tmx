@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="90">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Kher Keep&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="8" name="Colission" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEOwiAQBVCWcDPjRY3UW5lWj6ETnYgNMAPMJy78STea9PVPZXTuNxO9c8v7uvh51ho+n18Dzo47ax+ELZmpzRl9Bq2Ze4YR+9BhjiYOzqq3s0VXtlt8qxmTvTScd9S7lea/AX9TR+HeqM6SS53PgB0ouWxTLH2Nm/qWtvZs9e7MUjR7xdrk1OaNMimlzkiTk+uM3B2cUucZdsu5muGiO9f6ouzT893eFft6tinZ6axy/2Nk3ML3pTVTu3YP6ft/XnkAKftLsw==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzF1tEJxDAIANB+HBwdoKtlrKzXIbpE8UPwRI3ReBGklCZ5aRJs7/M4biWfj51av0zi2P38zSoXgjo0JDvr4xjX105w4brC9ppa7jCj9k43a0bsle6Mvdr1zqPatewdLkS1jcYOl9v0Htp0ZQ5ajDypL3V5/R95li0997hezxvSenN3tWmNy89VlSutd5VHg/5H0LP8D7eTvW2T5zfqWW6lj3OgLkbUp22tfp3VKj7GqOZJ7T39pXptvXcmcV+1Ws3f3VN7o9+HxnLGnt0Py23KumdCW1PN5ect4/J4AVk1BK4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9l0tOAkEQhgtJdJodIpdwb4LoOYgbHuEGaqI38AAuJXoVX2xci0EP4A3YycOqTFe6qKmeIQTo5E/ox9RXVV3dM4wcQAN1XQEoAcBzArDAPmC/47Kao16TdO0lrmlif4T6cunYt+8X6VQxJe93H+ANx969honNvqoEG9xvFnB1jJpVP1iWZC8EX+oEx28qgdHw8TUVt+1jYybZj7X7PYBJYuedRTET58rIBbNlbi1mpwrQRT0dpn16ntZQLqYujd9ilyJ+f3pu2wXmzGWfeUBeH7kLz2Yur/uLsGON645j7bm4vxZbqu997xp+x7g61k7E9lktsLsi9zpmqrWXJEjmQNab9nMqbGs+sX9QAxyf4fy8ms133nnnvY1xZ9WsXVa9HnzQeSc2n7+py553Wc+ay/mcGfv5iL9vj8KYxZaSOeD64XuFxj/K6Z7zeqqjgdd5bdknayy2L7Lm9D0zdukc+yObFYOud+mPVXNku2XsN3Opf1zOOQA5TedD5uTOc6VoX5lLdySxV2lki5WXG15TxGUxX9vWzFXnqYY02+LSPRKzbdktEjXN1lyLuQn1XZy7LaaVb+Zum6lj5vcv1RJ/U+wiZrm3zN5FzDJ2Yvd2lGvNnfv5dc/MOlzJlue1yIfYHaYb1xJx+J05TMKex+5Mttsqpe8W0kXeR02EyedorPh5bGqTUni+Z6zh73EpyZRcySe2rPE8G0XzMWmuZBc9u6rk/w+Wxd00u2fY/wcVrKYm
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztll0OgjAMxwcvSnQX8iDGF188BQLhCD6o0RN4E2/jmyaKT5oFF2ppKeMjIcZ/0uhY299qx5xSw1Gsi++Zp9TOz+3pVccJ06Iga+8Xz7c12G2YkEXpPG5fG5TJJTE9YFiXaTMmzpVo3sd8pmA+0mU2tz5uPtWcZ+631t911zGJaYVrpWIoi4nfiIqvYkvC9eAceLwknkvs04RmcnmoNZneUxyOexvReTmO1FtKXIypV9ojxjIHFhWvVJljx7Z+uBbX+jDXviNGiS7n4XrKaRXUY78+fo967qIoruu5tglyM+JqxPu+rSyTe1ct0/ReYl8bnOO/rC56FVWc81gh8O16nwxVM696LPlD4f/GvhV2wGuSw2VPuWrR072WEjxz7wR33tNajuCuexDuvX/legPYHSr5
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9V9tO20AUPA5PSHakOKSfUEy/oBL8A2+Up94+BgUTQRUQeeDygzX0JUKt1NseeUcen6zNkkKPNPJ6s97ZmT17yTQT2RmKHLvn1Jdjod+8ds9th5krV6nIvcNXh9MNkW8D9+7wZaN+P/PQev1O25ZZ/W0iDcSUbRSe+4T40R+4lRPj0Vhkdf2x59M+3gw7CHqiMPoxBvCgjfYN/iqgMyZ+mIb4tjD+36VtwA99ss7vEcTaZO7m59xDx2DHXHrd06ztg76jrLoTz3kxeFx3YjAfrOovPQe8VX2cA1PvscZDstpnDDSWhpc9hHbGzMNqfSpCmvHKecdzr7zraOW+hbhtG85h5BZ8XtfjkO5zk3PwnNf6rINX/pFfaBzsP+eb8l663w+fSbPF0vBiXa+bz7GegLeiuUVu6bz3abZh62J42eOS5llDud8lNb/GTS5ym9flo80G+URkaxIYUCCYl8+g0D4O7btjkb1xm1Px1tX9GYl88Pg46uadU17jDCqz8BmCfQShuseTBuLef40a/O7htdzwGXO94+ssp8bPUZuH8cnhOo/3G55jrkM6Eer35w5e1vq+x3NeyyXlVBcnc4d4eZ7V/z7PQzl22cPJ3PuvGlzlq+jzHJqRV7yODkML9hlj6XnZa42H/8BbDNtea7y0ZuWt0tU96yW5D1yfi0GzfrFv3KVxug+oPmZ8p5sNJ84He9eL0W3vU6HQfZ6x8OsF/hbD9v+N0F5t+4jlqNLwHRr3WHvnC925AR5TX9jzlu/OJ1lz94n9H8bzYHmsLj5vcQ5hTv8CoEr+DQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="207.206" y="480.299" width="83.4919" height="16"/>
+  <object id="51" template="../../obj/treasure.tx" x="134.001" y="151.842">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;probability&quot;: 1,
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.6,
+  &quot;rarity&quot;: [ &quot;uncommon&quot;, &quot;rare&quot; ],
+  &quot;addMaxCount&quot;: 1
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/gold.tx" x="153.575" y="137.264">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/gold.tx" x="212.068" y="159.708">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="76.989" y="209.376">
+   <properties>
+    <property name="enemy" value="Kobold Shaman"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="80,83"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/collision.tx" x="-0.264674" y="479.769" width="479.667" height="16"/>
+  <object id="69" template="../../obj/collision.tx" x="-0.500167" y="-16.6667" width="479.667" height="16"/>
+  <object id="70" template="../../obj/collision.tx" x="-16.6667" y="0" width="16" height="493.003"/>
+  <object id="71" template="../../obj/collision.tx" x="479.667" y="-0.333333" width="16" height="495.12"/>
+  <object id="72" template="../../obj/enemy.tx" x="223.344" y="96.8626">
+   <properties>
+    <property name="enemy" value="Kobold Dragoncaller"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="78,77,85,77,78"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="319.407" y="287.717">
+   <properties>
+    <property name="enemy" value="Kobold Warrior"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/booster.tx" x="126.508" y="130.774">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;LEG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;LEG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;LEG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/enemy.tx" x="109.9" y="337.369">
+   <properties>
+    <property name="enemy" value="Kobold Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/waypoint.tx" x="253" y="114.375"/>
+  <object id="78" template="../../obj/waypoint.tx" x="162.172" y="54.4031"/>
+  <object id="79" template="../../obj/waypoint.tx" x="43.6299" y="120.037"/>
+  <object id="80" template="../../obj/waypoint.tx" x="143.173" y="209.895"/>
+  <object id="82" template="../../obj/waypoint.tx" x="209.085" y="159.293"/>
+  <object id="83" template="../../obj/waypoint.tx" x="43.412" y="206.422"/>
+  <object id="85" template="../../obj/waypoint.tx" x="330.254" y="182.036"/>
+  <object id="88" template="../../obj/enemy.tx" x="101.31" y="106.869">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Fearsome Whelp&quot; ]
+}</property>
+    <property name="enemy" value="Vulcano Dragon"/>
+    <property name="fleeRange" value="0"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="89" template="../../obj/manashards.tx" x="121.426" y="370.22"/>
+ </objectgroup>
+</map>

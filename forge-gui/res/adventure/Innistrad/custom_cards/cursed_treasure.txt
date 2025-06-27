@@ -1,0 +1,7 @@
+Name:Cursed Treasure
+ManaCost:no cost
+Types:Artifact
+A:AB$ Token | Cost$ PayShards<1> | ActivationZone$ Command | TokenScript$ c_a_treasure_sac | SubAbility$ DBLoseLife | ActivationLimit$ 1 | SpellDescription$ Create a Treasure token. You lose 2 life. Exile Cursed Treasure.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ You | SubAbility$ Eject
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:{M}: Create a Treasure token. You lose 2 life. Exile Cursed Treasure.

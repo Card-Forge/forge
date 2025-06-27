@@ -1,0 +1,12 @@
+Name:Jace's Signature Hoodie
+ManaCost:no cost
+Colors:blue
+Types:Enchantment
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Command | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, each opponent mills a card.
+SVar:TrigMill:DB$ Mill | Defined$ Opponent | NumCards$ 1
+A:AB$ ChooseCard | Cost$ PayShards<2> | GameActivationLimit$ 1 | ActivationZone$ Command | Choices$ Creature.OppOwn+cmcLE6 | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure | StackDescription$ SpellDescription | SpellDescription$ Conjure a duplicate of a random creature card from your opponent's library with mana value 6 or less onto the battlefield under your control.
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Colors$ Blue | OverwriteColors$ True | Types$ Creature,Illusion | RemoveCardTypes$ True | Power$ 2 | Toughness$ 2 | Duration$ Perpetual | SubAbility$ Eject | StackDescription$ SpellDescription | SpellDescription$ The duplicate perpetually becomes a blue Illusion creature with base power and toughness 2/2.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | SpellDescription$ Exile CARDNAME. | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+Oracle:Whenever you draw a card, each opponent mills a card.\n{M}{M}: Conjure a duplicate of a random creature card from your opponent's library with mana value 6 or less onto the battlefield under your control. The duplicate perpetually becomes a blue Illusion creature with base power and toughness 2/2. Exile Jace's Signature Hoodie.

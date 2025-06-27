@@ -1,0 +1,10 @@
+Name:Demonic Contract
+ManaCost:no cost
+Colors:black
+Types:Artifact
+A:AB$ DigUntil | Cost$ PayShards<3> PayLife<X> | XMin$ 1 | ActivationZone$ Command | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Library | RevealedDestination$ Library | FoundLibraryPosition$ -1 | RevealedLibraryPosition$ -1 | RememberFound$ True | Shuffle$ True | SubAbility$ DBScry | SpellDescription$ Reveal cards from the top of your library until you reveal a nonland card. Note that card name. Then shuffle the revealed cards back into your library.
+SVar:DBScry:DB$ Scry | ScryNum$ X
+SVar:X:Count$xPaid
+T:Mode$ Drawn | ValidCard$ Card.nonLand+sharesNameWith Remembered+OwnedBy You | Static$ True | Execute$ ContractForfeit | TriggerDescription$ If you would draw a card with the same name as one noted with Demonic Contract, you lose the game.
+SVar:ContractForfeit:DB$ LosesGame | Defined$ You | SpellDescription$ You lose the game.
+Oracle:{M}{M}{M}, pay X life: Reveal the top card of your library until you reveal a non-land card. Note that card name, then shuffle the revealed cards back into your library. Scry X. X cannot be 0.\nWhen you draw any card with a name noted by Demonic Contract, you lose the game.

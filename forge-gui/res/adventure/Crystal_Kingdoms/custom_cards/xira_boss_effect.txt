@@ -1,0 +1,12 @@
+Name:Xira's Boss Effect
+ManaCost:no cost
+Colors:black,green,red
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Insect.YouCtrl+!token | EffectZone$ Command | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Double team | Description$ Nontoken Insects you control have +1/+1 and double team.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ PutCounterAll | TriggerDescription$ At the beginning of your upkeep, put an egg counter on each nontoken creature.
+SVar:PutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.!token | CounterType$ EGG | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | TriggerZones$ Command | Destination$ Graveyard | ValidCard$ Creature.counters_GE1_EGG | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with an egg counter on it dies, draw a card and create X 1/1 black Insect creature token with flying where X is the amount of egg counters on that creature.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ b_1_1_insect_flying | TokenAmount$ X
+SVar:X:TriggeredCard$CardCounters.EGG
+Oracle:Nontoken Insects you control have +1/+1 and double team\nAt the beginning of your upkeep, put an egg counter on each nontoken creature.\nWhen a creature with an egg counter dies, draw a card and create X 1/1 black Insect creature token with flying where X is the amount of egg counters on that creature.

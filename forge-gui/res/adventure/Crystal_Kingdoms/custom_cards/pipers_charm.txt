@@ -1,0 +1,7 @@
+Name:Piper's Charm
+ManaCost:no cost
+Types:Artifact
+A:AB$ Effect | Cost$ PayShards<3> | ActivationZone$ Command | SubAbility$ Eject | ValidTgts$ Creature | StaticAbilities$ MustBlock | RememberObjects$ Targeted | StackDescription$ {c:Targeted} blocks this turn if able. | SpellDescription$ Target creature blocks this turn if able. Exile CARDNAME.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:{M}{M}{M}: Target creature blocks this turn if able. Exile Piper's Charm.

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBicIJqXOHVRRKobBQhAbNjiAqNhPgpGwcCBvTyU6d9Dpv5dPAhMD32DCRAb5uSGLS6AHHbo4YdPjhAAAJpcD5U=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJwTZGFgEATiaZwQmpoYZCYuTEhfEzfxmJDdhPyHrJZSe0kJS2rbS6ydpNhFDTeQ40dq2QuiaWkvvrimt39Hmr30iF988U0ve9HLTGrbi61cJlSG0cKP1E5j5KThwWAvsWUKsekGm3kAsWqmYw==
+  </data>
+ </layer>
+ <layer id="8" name="Background 2" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAFUzgY8IJw/NI4wWQC5lIDEHL7QAJa+v8r7YymChjpcU8NgCsM6e1vbPl/sKc/SgE90i8IDMY0TC+/0wN8I0EtpXFBrbgkxc24AHocgvIrAIdXDfs=
+  </data>
+ </layer>
+ <layer id="2" name="Floor and Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBicYBcP8ZiaQJZI86SHsL2XmRB4N5Hm7eRB1UcOINaPuAC5fh+1d9Te4WTvdEYErucmTk8tN6o+SsFIKCeRASzc6rghGBbutdwIMWqFLT4A8z+l/gMAkX4dBQ==
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBic4DIT8ZiawIxI80yGib1XiDTvEhXsJdaPuAC5fh+1d9Te4WQvMpjBSJy6aUSqIxaMtHISBKYzIjAs3KchidEDwPxPqf8AYAwVUg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBicwIyJOHUmRKobBQhAbNjiArQK82X8tDF3pIPlBMJ16Wi4DymAK/+i558VOOJ1tMwkHQy3+ggAfq4FRA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="208.333" y="270.665">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/door_up.tx" x="209" y="96">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1W.tmx"/>
+    <property name="teleportObjectId" value="69"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/door_down.tx" x="176.667" y="210">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1R.tmx"/>
+    <property name="teleportObjectId" value="67"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/door_down.tx" x="241.333" y="210">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1B.tmx"/>
+    <property name="teleportObjectId" value="63"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/door_down.tx" x="145.333" y="144.667">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1G.tmx"/>
+    <property name="teleportObjectId" value="69"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/door_down.tx" x="272.667" y="147.333">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1U.tmx"/>
+    <property name="teleportObjectId" value="87"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,53 @@
+Name:Fire of Kaladesh
+ManaCost:no cost
+Colors:red
+Types:Legendary Title
+S:Mode$ Continuous | Affected$ Permanent.YouCtrl+Legendary | AddKeyword$ Ward:2 | Description$ Legendary permanents you control have ward {2}. | ActivationZone$ Command
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ConjureMissing | ActivationZone$ Command
+#---
+SVar:ConjureMissing:    DB$ Branch | BranchConditionSVar$ GauntletCount  | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1     | FalseSubAbility$ ConjureMissing0    | Description$ A | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing1:   DB$ Branch | BranchConditionSVar$ RegulatorCount | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing11    | FalseSubAbility$ ConjureMissing10   | Description$ B | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing10:  DB$ Branch | BranchConditionSVar$ GogglesCount   | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing101   | FalseSubAbility$ ConjureMissing100  | Description$ C | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing11:  DB$ Branch | BranchConditionSVar$ GogglesCount   | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing111   | FalseSubAbility$ ConjureMissing110  | Description$ D | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing101: DB$ Branch | BranchConditionSVar$ OathCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1011  | FalseSubAbility$ ConjureMissing1010 | Description$ E | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing100: DB$ Branch | BranchConditionSVar$ OathCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1001  | FalseSubAbility$ ConjureMissing1000 | Description$ F | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing110: DB$ Branch | BranchConditionSVar$ OathCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1101  | FalseSubAbility$ ConjureMissing1100 | Description$ G | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing111: DB$ Branch | BranchConditionSVar$ OathCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing1111  | FalseSubAbility$ ConjureMissing1110 | Description$ H | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing0:   DB$ Branch | BranchConditionSVar$ RegulatorCount | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing01    | FalseSubAbility$ ConjureMissing00   | Description$ I | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing01:  DB$ Branch | BranchConditionSVar$ GogglesCount   | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing011   | FalseSubAbility$ ConjureMissing010  | Description$ J | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing010: DB$ Branch | BranchConditionSVar$ OathCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing0101  | FalseSubAbility$ ConjureMissing0100 | Description$ K | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing011: DB$ Branch | BranchConditionSVar$ OathCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing0111  | FalseSubAbility$ ConjureMissing0110 | Description$ L | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing00:  DB$ Branch | BranchConditionSVar$ GogglesCount   | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing001   | FalseSubAbility$ ConjureMissing000  | Description$ M | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing000: DB$ Branch | BranchConditionSVar$ OathCount      | BranchConditionSVarCompare$ EQ0 | FalseSubAbility$ ConjureMissing0001 | FalseSubAbility$ DraftSpell         | Description$ N | StackDescription$ Description | SpellDescription$ Description
+SVar:ConjureMissing001: DB$ Branch | BranchConditionSVar$ OathCount      | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ ConjureMissing0011  | FalseSubAbility$ ConjureMissing0010 | Description$ O | StackDescription$ Description | SpellDescription$ Description
+#---
+SVar:ConjureMissing0001: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Oath of Chandra | Zone$ Battlefield | SpellDescription$ 0001 | StackDescription$ SpellDescription
+SVar:ConjureMissing0010: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Pyromancer's Goggles | Zone$ Battlefield | SpellDescription$ 0010 | StackDescription$ SpellDescription
+SVar:ConjureMissing0011: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Oath of Chandra,Pyromancer's Goggles | Zone$ Battlefield | SpellDescription$ 0011 | StackDescription$ SpellDescription
+SVar:ConjureMissing0100: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Chandra's Regulator | Zone$ Battlefield | SpellDescription$ 0100 | StackDescription$ SpellDescription
+SVar:ConjureMissing0101: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Oath of Chandra,Chandra's Regulator | Zone$ Battlefield | SpellDescription$ 0101 | StackDescription$ SpellDescription
+SVar:ConjureMissing0110: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Pyromancer's Goggles,Chandra's Regulator | Zone$ Battlefield | SpellDescription$ 0110 | StackDescription$ SpellDescription
+SVar:ConjureMissing0111: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Pyromancer's Goggles,Oath of Chandra,Chandra's Regulator | Zone$ Battlefield | SpellDescription$ 0111 | StackDescription$ SpellDescription
+SVar:ConjureMissing1000: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Pyromancer's Gauntlet | Zone$ Battlefield | SpellDescription$ 1000 | StackDescription$ SpellDescription
+SVar:ConjureMissing1001: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Oath of Chandra,Pyromancer's Gauntlet | Zone$ Battlefield | SpellDescription$ 1001 | StackDescription$ SpellDescription
+SVar:ConjureMissing1010: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Pyromancer's Goggles,Pyromancer's Gauntlet | Zone$ Battlefield | SpellDescription$ 1010 | StackDescription$ SpellDescription
+SVar:ConjureMissing1011: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Oath of Chandra,Pyromancer's Goggles,Pyromancer's Gauntlet | Zone$ Battlefield | SpellDescription$ 1011 | StackDescription$ SpellDescription
+SVar:ConjureMissing1100: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Chandra's Regulator,Pyromancer's Gauntlet | Zone$ Battlefield | SpellDescription$ 1100 | StackDescription$ SpellDescription
+SVar:ConjureMissing1101: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Oath of Chandra,Chandra's Regulator,Pyromancer's Gauntlet | Zone$ Battlefield | SpellDescription$ 1101 | StackDescription$ SpellDescription
+SVar:ConjureMissing1110: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Pyromancer's Goggles,Chandra's Regulator,Pyromancer's Gauntlet | Zone$ Battlefield | SpellDescription$ 1110 | StackDescription$ SpellDescription
+SVar:ConjureMissing1111: DB$MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Oath of Chandra,Pyromancer's Goggles,Chandra's Regulator,Pyromancer's Gauntlet | Zone$ Battlefield | SpellDescription$ 1111 | StackDescription$ SpellDescription
+#---
+SVar:DraftSpell:DB$Draft | Spellbook$ Chandra Ablaze,Chandra; Acolyte of Flame,Chandra; Awakened Inferno,Chandra; Bold Pyromancer,Chandra; Dressed to Kill,Chandra; Fire Artisan,Chandra; Fire of Kaladesh,Chandra; Flamecaller,Chandra; Flame's Catalyst,Chandra; Flame's Fury,Chandra; Heart of Fire,Chandra Nalaar,Chandra; Novice Pyromancer,Chandra; Pyrogenius,Chandra; Pyromaster,Chandra; the Firebrand,Chandra; Torch of Defiance | ActivationZone$ Command | Zone$ Hand | SpellDescription$ Draft | StackDescription$ SpellDescription
+#---
+# Mapping items present with bit mask (partial explanation of above weird naming)
+#1000
+SVar:GauntletCount:Count$NamedYouCtrl.Pyromancer's Gauntlet
+#0100
+SVar:RegulatorCount:Count$NamedYouCtrl.Chandra's Regulator
+#0010
+SVar:GogglesCount:Count$NamedYouCtrl.Pyromancer's Goggles
+#0001
+SVar:OathCount:Count$NamedYouCtrl.Oath of Chandra
+#(1101 means only Goggles are missing, 0001 means only Oath is present) 1010
+#---
+Oracle: Legendary permanents you control have ward {2}./nAt the beginning of your upkeep, conjure onto the battlefield one of the following cards that you do not already control. Pyromancer's Gauntlet, Chandra's Regulator, Pyromancer's Goggles, or Oath of Chandra.\nIf you do not conjure a card in this way, draft a spell from CARDNAME's spellbook into your hand.

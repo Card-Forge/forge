@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <object name="Gate" type="dialog" gid="4125" width="16" height="16">
+  <properties>
+   <property name="dialog">[
+  {
+    &quot;effect&quot;:[],
+    &quot;name&quot;:&quot;ABC&quot;,
+    &quot;text&quot;:&quot;I am a big gate. Greetings.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;condition&quot;:[],
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ]
+  }
+]</property>
+  </properties>
+ </object>
+</template>

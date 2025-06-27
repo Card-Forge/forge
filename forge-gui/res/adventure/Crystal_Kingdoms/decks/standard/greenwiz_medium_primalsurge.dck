@@ -1,0 +1,23 @@
+[metadata]
+Name=Suika Ibuki 3
+Title=Suika Ibuki
+Difficulty=hard
+Description=Mono G Primal Surge deck
+Icon=Suika Ibuki.jpg
+Deck Type=constructed
+[main]
+23 Forest
+1 Gaea's Cradle
+1 Coat of Arms
+1 Ambush Commander
+4 Elvish Archdruid
+4 Elvish Mystic
+4 Fyndhorn Elves
+4 Llanowar Elves
+4 Priest of Titania
+4 Soul of the Harvest
+1 Concordant Crossroads
+1 Primal Rage
+4 Rites of Flourishing
+4 Primal Surge
+[sideboard]

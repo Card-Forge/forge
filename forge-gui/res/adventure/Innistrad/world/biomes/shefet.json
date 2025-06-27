@@ -1,0 +1,45 @@
+{
+"startPointX": 0.5,
+"startPointY": 0.5,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "shefet",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "White",
+"terrain": [
+	{
+		"spriteName": "White_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "White_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.5,
+"height": 0.5,
+"color": "efe697",
+"spriteNames": [
+	"Skull"
+],
+"enemies": [
+	"Adventurer",
+	"Camel",
+	"Cerodon",
+	"Dune Beetle",
+	"Falcon",
+	"Mummy",
+	"Greater Sandwurm",
+	"Scarab",
+	"Shefet Monitor",
+	"Stray Cat",
+	"Sunmare"
+],
+"pointsOfInterest": [
+	"Oasis"
+],
+"structures": []
+}

@@ -1,0 +1,9 @@
+Name:Zedruu's Boss Effect
+ManaCost:no cost
+Colors:black,white,blue,red
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigConjure | TriggerDescription$ At the beginning of your end step target opponent conjures one of Zedruu's gifts onto the battlefield under their control.
+SVar:TrigConjure:DB$ MakeCard | Defined$ Opponent | Conjure$ True | AtRandom$ True | Spellbook$ Nine Lives,Akroan Horse,Steel Golem,Soulless Jailer,Silent Arbiter,Flumph,Howling Mine,Jinxed Idol,Phyrexian Vault,Plague Reaver,Abyssal Persecutor,Hunted Wumpus,Demonic Taskmaster,Grid Monitor,Master of the Feast,Font of Mythos,Statecraft,Moderation,Dark Confidant,Ensnaring Bridge,Solemnity,Blood Moon,Stony Silence,Cursed Totem,Damping Sphere,Embargo | Zone$ Battlefield | RememberMade$ True
+S:Mode$ Continuous | AddAbility$ Sac | Affected$ Permanent.IsRemembered | EffectZone$ Command | Description$ Permanents gifted by Zedruu gain: {3}, Pay 3 life, Sacrifice this card: Zedruu conjures a random Minotaur or Monk creature token under her control."
+SVar:Sac:AB$ CopyPermanent | Controller$ Opponent | Cost$ 3 T PayLife<3> Sac<1/CARDNAME/this gifted permanent> | Defined$ You | NumCopies$ 1 | ValidSupportedCopy$ Creature.Minotaur | RandomCopied$ True | RandomNum$ 1 | SpellDescription$ Zedruu conjures a random Minotaur or Monk creature token under her control.
+Oracle:At the beginning of your end step target opponent conjures one of Zedruu's gifts onto the battlefield under their control.\nPermanents gifted by Zedruu gain: {3}, Pay 3 life, Sacrifice this card: Zedruu conjures a random Minotaur or Monk creature token under her control."

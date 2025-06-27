@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="88">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWw37E0gvqaqqqqqqqqqqqu8DFRHS7A==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl1EKwjAQRPdX2p6g9ToeQs9iPZda72ZEAjG4aWzaZkwnMFCY+egLDJvtapGuMB12unL/GxLvqRG51Z86Njielp3KuzfyTwvkaVnykpe8GEzkJe9cvA+jvhK5GJ2r9/eQ2bNyM72XTX1fve62BfFiMmO8Y2+Xu9EVxHMzU3ljuoF4Unn9PoS6kstzM6m8KB1dur8ar+212yd/X1nbC3U8dj/SeBFm7BLz1862YSO8oY7kZiIveclL3l/2o287CIKnZVP3o38TeclbkshL3pJEXvKWJPKStySRd7u8T2lO1+w=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt17EJwzAQQNHTAC68Q8AgXLvWGlkmZTYIuMgc8Sj2AJ7CVSAoJBhBdEGSTfJfo0Mnna4SnAgAjSVRnfOXOY3OvOJLoprYF+fXebVft+E4xs2KDFafexobkanRvalxzVcaG3Jvcb9VE16J/xkAgJIO5vMZ4FecKv2dmDknJGb2yT0f4b85xdljriYAAAAAAMDDHbGFE3Q=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../obj/door_up.tx" x="35.2402" y="285.749">
+   <properties>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4B.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/treasure.tx" x="784.167" y="63.75"/>
+  <object id="76" template="../../obj/treasure.tx" x="704.5" y="64.6667"/>
+  <object id="77" template="../../obj/gold.tx" x="744.5" y="62.9167"/>
+  <object id="78" template="../../obj/enemy.tx" x="374.417" y="306.667">
+   <properties>
+    <property name="enemy" value="Vampire"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/enemy.tx" x="744.5" y="143.954">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Sorin's Boss Effect&quot;]
+}</property>
+    <property name="enemy" value="Sorin"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Sorin's Amulet&quot;,
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Sorin's Key&quot;,
+  }
+]
+</property>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="80" template="../../obj/enemy.tx" x="601.124" y="138.781">
+   <properties>
+    <property name="enemy" value="Vampire Lord"/>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/booster.tx" x="786.91" y="92.8676">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../obj/booster.tx" x="709.178" y="87.3152">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/enemy.tx" x="709.178" y="228.9">
+   <properties>
+    <property name="enemy" value="Unholy Skull"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="80,81"/>
+   </properties>
+  </object>
+  <object id="84" template="../../obj/enemy.tx" x="145.615" y="224.273">
+   <properties>
+    <property name="enemy" value="Unholy Skull"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="80,81"/>
+   </properties>
+  </object>
+  <object id="85" template="../../obj/waypoint.tx" x="74.3597" y="227.049"/>
+  <object id="86" template="../../obj/manashards.tx" x="505.592" y="73.4344"/>
+  <object id="87" template="../../obj/manashards.tx" x="790.612" y="392.694"/>
+ </objectgroup>
+</map>

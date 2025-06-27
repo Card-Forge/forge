@@ -1,0 +1,14 @@
+Name:Third Head of the Hydra
+ManaCost:no cost
+Types:Creature Hydra
+PT:1/4
+Colors:green,blue
+K:Defender
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | Layer$ CantHappen | Description$ You can't lose the game and your opponents can't win the game.
+R:Event$ GameWin | ActiveZones$ Battlefield | ValidPlayer$ Opponent | Layer$ CantHappen | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Hydra.Other+YouCtrl
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Other Hydras you control enter with two extra +1/+1 counters on them.
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would leave the battlefield, instead exile it with three time counters on it. It gains suspend.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | WithCountersType$ TIME | WithCountersAmount$ 3 | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ GiveSuspend
+SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.withoutSuspend+YouOwn | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent
+Oracle:Defender/nYou can't lose the game and your opponents can't win the game.\nOther Hydras you control enter with two extra +1/+1 counters on them. \nIf Third Head of the Hydra would leave the battlefield, instead exile it with three time counters on it. It gains suspend.

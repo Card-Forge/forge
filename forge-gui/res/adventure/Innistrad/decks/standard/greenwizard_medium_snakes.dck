@@ -1,0 +1,34 @@
+[metadata]
+Name=Nagini 2
+Title=Nagini
+Difficulty=medium
+Description=Mono G Snake deck
+Icon=Nagini.jpg
+Deck Type=constructed
+[main]
+2 Tangle Asp|5DN
+2 River Boa|ZEN
+2 Mire Boa|PLC
+2 Ohran Viper|CSP
+2 Kashi-Tribe Elite|SOK
+1 Orochi Ranger|CHK
+2 Sosuke's Summons|BOK
+2 Kashi-Tribe Warriors|CHK
+2 Death-Hood Cobra|NPH
+1 Overwhelming Stampede|M11
+1 Needle Storm|9ED
+2 Stonewood Invocation|TSP
+2 Seshiro the Anointed|CHK
+2 Sakura-Tribe Elder|CHK
+1 Sachi, Daughter of Seshiro|CHK
+1 Boa Constrictor|MMQ
+1 Hornet Cobra|LEG
+20 Forest|MBS
+1 Kashi-Tribe Reaver|CHK
+1 Whirlwind|S99
+4 Verdant Catacombs|ZEN
+3 Sosuke, Son of Seshiro|CHK
+1 Ambush Viper
+1 Hooded Hydra
+1 Lotus Cobra
+[sideboard]

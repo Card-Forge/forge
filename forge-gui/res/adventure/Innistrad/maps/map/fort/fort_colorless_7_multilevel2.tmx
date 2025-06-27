@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="87">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt10EOgjAQQNEuuiGuvC1XYcMN5o7EEGIzqVVopzjNX7zEBVF+yui4TCEsAAAAgKH5EcI6/eZ17d33W9vwDy3PuJP4fn2lIW053q/EqqNFg24p9Vh31DYcdIP+HE8d+ky8d+j5s+4Qww7d4r1DBuhIW7zOh362PHeM8lz1mHMxPo8e37vpebfeS3K7iUVHbmdosSfmZqLXfNS26Ia7fgd1x9n/Ud8aendI/HxfpR32zLWtOwAAAAAAY9gAP8bTjA==
+  </data>
+ </layer>
+ <layer id="7" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzNWltOI0EMHGAkdia5A3COLJAfxLngEHxGe7cs59iNlZRijO12e7ojShpFSvrlZ9s1WU3D8L4ahs95MDEexnwoz/Wkj98dvn9y1pN4ne0zbOfjeo/zedxfY+3pMO5h7e+1mc9npzU3xlr/fh333RkyaliddEkPPwdkgL74uJLuPYyFs3EZPJu8KN+vhC75Oo/z97GQxQLpoMYnLBksm+xPvqHJws+wc/yWcLfWbYK5lg6s/a5Oe41s7vX09Rwbphuuy6xfWGeROtRkoNgiXWJvHn/AKM7OQb9BZorH+/Xxk8DXtUD2fp7Pn9Jvab8bdp4bRQ7kCXpob8Q8H/cc0K1lY9ioRc601nhj5+dxCH2TfraKfkrgPklokTMRM1bsWeu39MkoSjnTin8PrXxSYtsg/slXvZx4pegj65MS3L5RSP8EPLtgHz4v65Pauq39U9sb/oBHkyV7H/TwT8o/mp3knh8Vto+ihX/S+VFbePXAS+DOyqC1f3oyRPZbgiX+WSMDgPu3hyxYv3btqBxSR1QfRWydgWcX1FcyhiM17tJ8lIGVMynHjErOhB1KNUKklmsFL1/uT/vLvFtT48AuPeHlTNwhpZwJfe+dMZe0iwTp8V74G+ptOS7Sq5EsU4d7sBZePQZ9yzjL9u29UOIBCFLXXO4no75shWxvGIHkEEq9zFJkesMokLt/ErL6pDzQqxax0CsuL5V3M3yanA9YZ+2Zd7O9IQef53HghF41YqY35OjFbe9vD3Nv6+fV9oaEWm7b4ig0ZOTI9IYRblvG9qaCP8zaI9MrfLsXcMZp+d2dlQOI8ml8DOdqS/kiqqelckT5NB7vUgbrzq+x+VI5CBE+DajlG6L3oZSj9TsdrV76PbfvDzV7eO90AM6neYjwadH+UIK/07H8qsS31/JpsLHHWUd7cu2dTiQ++H2U5dNK74mj/aGV56QcJc48y6eNYu8/ytxSf0iw6iIuR4QzHyc/3xO8fDlW2FH2hxxybchRw5lfkk/T8p1WF3F7tK6RW/FpWn8obb7kHqzh04DXpH20vMuxRI4aPo1AMnjvlpETI74oY4fLUXuXW/8Dwrl4vmz13ycpC+Jf2iNyl3PcKb9rfFrv/z5pfpV5/8+h8Wn/AWz1VdM=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1QEKgkAQRmG3M4VH1c5lHSgWHFpinR2VjV96HwhZCvu00WEAAAAA+nveYpuyvL7XxhrvxfeLcIvXUKPYsrfBKLWcnQGVljEwDy17ju3lTIedq97xSLFzlTuWwOxfoWNK7fuh9F70/lfRZ7Hy/fin59WRY3uZk7/lGZnWzzXeb782B2a6ds2VGkyr5btDscF4LWWHcoPZmpPcUe4DAAAAAICPN9LfOvY=
+  </data>
+ </layer>
+ <layer id="8" name="Ornamental Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1jEKgDAMQFH1TOJVvZgHEofg0qIVKqG8N4VO+UMh0wQAAP1tS/l9XcpzRrWGkqwtLQ0hW8uXhpCl5Wo4Cru07JelBejHP2dUb+7CJ1n+xwh3SRjhTgwj3O2h1rLP95y9AQAAAP52Aln9BpM=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztWssNwjAMhRMsUIkF4AIXGJIFYAgYjwN3aFGhiuzEv8RJxZMqpFLiF+f5BywWMK5r5A0EpyXveStcAJ5XzrOJfVL8AK3bMkL/xXxgtfeL9HPGvse0g+GYSffYuuF9zv65MY0htMn1mRQcX5fiZAHOGbaSa6b1QKK7XHHljen5Tf3iVT+90fvAY+/UepMr3rzjmLJ/iCOV91zjF9rX+X3tNr/rXJxVHN5a00DaF0qB1SqqD2vM4z2nWA0ee6XoM4YaunfwK2obuS+Z5+aKmD73CU1yz4PER7/EAKs6siWuw7GXaw7CzuPWfa6vPWetHwrmOs95jnoeIyznuVr6KO08FwKbg/4oi9L9lQWs+tmxJjxW+rVa7bGl81wqL0ExPdrK2SOHdmvsx3to9NKq1nrE8o13HYDmIO/6S9Uz13dSX2N8WtZkjbDwp1bPKQ4SjtQ64pELvH7X4uDpTcABVjU8h55TCHVsGX/emPKTznOl9FzTnMPVM+v7BN7SAzh8cuRljc4t+WA8vOIwZlejZ+j/Pdp5jsOn5rz2Aq3/VD8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="511.833" y="350.043">
+   <properties>
+    <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel3.tmx"/>
+    <property name="teleportObjectId" value="49"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/gold.tx" x="269.084" y="370.999"/>
+  <object id="74" template="../../obj/treasure.tx" x="269.75" y="354.416"/>
+  <object id="75" template="../../obj/enemy.tx" x="417.084" y="368.917">
+   <properties>
+    <property name="enemy" value="False Monk"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="84,83"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/enemy.tx" x="370.584" y="329.833">
+   <properties>
+    <property name="enemy" value="False Knight"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/enemy.tx" x="448.5" y="306.833">
+   <properties>
+    <property name="enemy" value="False Monk"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="85,86"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/entry_up.tx" x="336.171" y="478.828">
+   <properties>
+    <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel.tmx"/>
+    <property name="teleportObjectId" value="49"/>
+   </properties>
+  </object>
+  <object id="80" template="../../obj/manashards.tx" x="435.168" y="237.433"/>
+  <object id="81" template="../../obj/enemy.tx" x="293" y="360.333">
+   <properties>
+    <property name="enemy" value="High Cultist"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="82" template="../../obj/enemy.tx" x="369.333" y="395.667">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="False Knight"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/waypoint.tx" x="419" y="262.667"/>
+  <object id="84" template="../../obj/waypoint.tx" x="415" y="423"/>
+  <object id="85" template="../../obj/waypoint.tx" x="450" y="281.667"/>
+  <object id="86" template="../../obj/waypoint.tx" x="447" y="417.333"/>
+ </objectgroup>
+</map>

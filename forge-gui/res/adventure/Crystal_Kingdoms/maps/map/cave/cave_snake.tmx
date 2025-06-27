@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="79">
+ <editorsettings>
+  <export target="cave_1..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="8" name="Lowest" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxFcZRt89oLkYJjW9iLbhY6paSet7SDV7lEwCkbBKBgFo2AUjIJRMAroCQADehY/
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1ksKhDAMgGEX88AqnsPTeAO3ZRbSk87MzvtI0WCUVNqSxE2FfyEKnzEuHOqqGojGxzHqHs7OnoYZM+enWdM0fX8TdnOfJ+bdTmhemB36Grk9TIT123q3cu6z3R1pq1TSan7d/wxa9c2a9uzgwsHl2q3QdXx4k8O1CS6XGXLP+4Sdcu+VcrHlz6W+Je925uhqBDO7m1yL9pvqX32bMa6r090cE+cuXEfcL/Hfm/OuOe3i6rgce14A+hI6Iw==
+  </data>
+ </layer>
+ <layer id="6" name="BackgroundBlend" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzd1ktOwzAQBmAvWojtFnELHgdBYsMN2MIKirgF0BV3Ako3ULgKByCjMPJkOjN2QoqAXxoFUciXsR3Xzg2XI19eJZmHn3fBfIrNz+cx/f7Mr1cXu0vGk+Z6LZhQx7H990O5GHTfKufeSU2V+Sh1T0fOHUb5M0gMtlNiS2bO7RPJpXP031xub9pdbdXr76uutuX5HdoF837ceLT6vEc39Rp+jk3dGetZM6mLPZaYSzIOC2NMppVucpeWFDD3WS2MvsH+GOmuZB8ovXAXyloLvO+cq+XEd3MhM2ZqLu1NcqlNv68sV9o3tD7RhTm8DW0XC0zJpesewl1rfLEnrWde9DP8f7xnzuXjjC6eOfYyY4ouvd9uSDZeJRdtdFdVWjsP9fVRsSUTip5HeKzxnvk0x9q7mjM1l9s0O6HpGaK918v4fVPrGYLj/VI/x2uVnscyrf0gt29gz7gvXvj28+A9YA1J58y+ufTtnuGMNQnrZ6yS75e+2cRZ5De7dN/8a/kEKVqSWg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzFlksOgjAQhlkYQyFRL6UxLLyBW9dew2i8hvi4hvGxMS48gfFxDDspE+pYSwu0/MkfoKH9ZqbDIwjsNGB616m7tJ5PLrK3ofCOeyMdccwF918sD5af0zh8icbhm09jaYqdGOz71EFvFHEnjvqxyVoXsV3U2ZTtUu8KeY1bwqB5ZD7PpK9dqAnuKjSr8TEOglP8Xcc9v15a1JUy6TcL94rqmvXeSLoXzm3YlGnzzaJcZC+4D7EYv7XVc6vs6Yj9XtMxWTMezzlWc21yRo7KOiboIv0TmNa6o9hHXa4qZi/K31Mu/oeQie8UMDDBVXqrSOsw52Ge/5g6rk1MfX7vkwm2CdPEsF4aijVVktfuctaL5S7L1PGBl1bIpwwf5IuH3mT5qp5Jlx5m+Sae862L+wHXaJFh
+  </data>
+ </layer>
+ <layer id="7" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztljtOw0AQhl0g5NgWlDzEARAHiaIUaXgcgZprICSuEcXQpEKio4hCS8EJECESl2BG3pF/RjsG79qp8kuj9Uv7zYxnZ3c4SJKhx8o0SR6cPab1865k8T4Vo2u25o7cvFPifNH1LK3uPzqMVXNLFycz13A/cSZiH3Q+YrirQRWjjzlRnHkc1qwpzdTcWFnMs7w/pnBxzeB/65u7cnV7TeNNDwyLi+xNc7Gecd1ugqt96JMtdYV9UPcu1AHV+aGzozyOy7FxD8J9oFS1fZtV4zOxvncquyrC2b68cp/UOV7Q/PfZby7bUyQX41s3/N9zivHEsY9pvCzCuZqJe+ErzX2X1d9z3My+KMKZwh2pPUjEa/k0r3rm+25tC8jt0r37i2Fxua64niS/8wausJfwPJTLQjbGK7nWbDRL1nlBahm/Yzb7skesfbI3VV9tuJZwHYnGLgfW3t6W+9LAxXyPlR9NYuY0oJ9a5xzWf9k++WK0uLFn1LZ+dn0m32qrH7YWnWs=
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztz0ERAAAEAEEy6d9NCIbPboGbiwCAmcrf9nX/8xcANjX5pwDR
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="196" y="480" width="40" height="8">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="112.522" y="340.819"/>
+  <object id="50" template="../../obj/enemy.tx" x="134.676" y="345.362">
+   <properties>
+    <property name="enemy" value="Poisonous Snake"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="220.966" y="236.941">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Forest&quot;, &quot;Mountain&quot; ]
+}</property>
+    <property name="enemy" value="Hellion"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/treasure.tx" x="70.4356" y="65.1836">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/enemy.tx" x="364.086" y="354.805">
+   <properties>
+    <property name="enemy" value="Hidden Snake"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/enemy.tx" x="71.906" y="237.367">
+   <properties>
+    <property name="enemy" value="Snake"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/booster.tx" x="65.0452" y="369.737">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="124.369" y="26.7066">
+   <properties>
+    <property name="enemy" value="Poisonous Snake"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/waypoint.tx" x="147.372" y="300.727"/>
+  <object id="65" template="../../obj/waypoint.tx" x="138.09" y="111.859"/>
+  <object id="66" template="../../obj/waypoint.tx" x="333.416" y="113.473"/>
+  <object id="67" template="../../obj/enemy.tx" x="139.301" y="222.436">
+   <properties>
+    <property name="enemy" value="Viper"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="65,66,72,64"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="307.991" y="186.115">
+   <properties>
+    <property name="enemy" value="Viper"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="66,72,64,65"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="61.4131" y="144.144">
+   <properties>
+    <property name="enemy" value="Poisonous Snake"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/gold.tx" x="36.7957" y="142.53"/>
+  <object id="72" template="../../obj/waypoint.tx" x="320.905" y="295.884"/>
+  <object id="73" template="../../obj/manashards.tx" x="151.408" y="75.1344"/>
+  <object id="74" template="../../obj/manashards.tx" x="372.965" y="97.734"/>
+  <object id="75" template="../../obj/manashards.tx" x="384.265" y="256.739"/>
+  <object id="77" template="../../obj/enemy.tx" x="269.249" y="64.2381">
+   <properties>
+    <property name="enemy" value="Poisonous Snake"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/gold.tx" x="398.793" y="348.348"/>
+ </objectgroup>
+</map>

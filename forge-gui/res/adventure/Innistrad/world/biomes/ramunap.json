@@ -1,0 +1,63 @@
+{
+"startPointX": 0.5,
+"startPointY": 0.5,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "ramunap",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Red",
+"terrain": [
+	{
+		"spriteName": "Red_2",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "Red_3",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.95,
+"height": 0.95,
+"color": "b63729",
+"spriteNames": [
+	"Gravel",
+	"Skull"
+],
+"enemies": [
+	"Beast",
+	"Cerodon",
+	"Dragon",
+	"Insect",
+	"Hellion",
+	"Hyena",
+	"Lizard",
+	"Red Beast",
+	"Scarab",
+	"StoneElemental",
+	"VolcanoElemental"
+],
+"pointsOfInterest": [],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/structures.atlas",
+		"sourcePath": "world/structures/models/mountain.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.5,
+		"width": 0.5,
+		"periodicOutput": false,
+		"mappingInfo": [
+			{
+				"name": "mountain",
+				"color": "a07020",
+				"collision": true
+			}
+		]
+	}
+]
+}

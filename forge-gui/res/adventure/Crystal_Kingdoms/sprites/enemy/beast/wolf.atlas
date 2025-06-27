@@ -1,0 +1,119 @@
+wolf.png
+size: 640,384
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 420,234
+  size: 16, 16  
+Idle 
+  xy: 11, 152
+  size: 40, 40    
+Idle 
+  xy: 75, 152
+  size: 40, 40         
+Idle 
+  xy: 139, 152
+  size: 40, 40    
+Idle 
+  xy: 203, 152
+  size: 40, 40    
+Idle 
+  xy: 267, 152
+  size: 40, 40         
+Idle 
+  xy: 331, 152
+  size: 40, 40    
+Idle 
+  xy: 395, 152
+  size: 40, 40  
+Idle 
+  xy: 459, 152
+  size: 40, 40  
+Idle 
+  xy: 523, 152
+  size: 40, 40
+Idle 
+  xy: 587, 152
+  size: 40, 40
+Idle 
+  xy: 11, 24
+  size: 40, 40    
+Idle 
+  xy: 75, 24
+  size: 40, 40         
+Idle 
+  xy: 139, 24
+  size: 40, 40    
+Idle 
+  xy: 203, 24
+  size: 40, 40    
+Idle 
+  xy: 267, 24
+  size: 40, 40         
+Idle 
+  xy: 331, 24
+  size: 40, 40    
+Idle 
+  xy: 395, 24
+  size: 40, 40  
+Idle 
+  xy: 459, 24
+  size: 40, 40  
+Walk 
+  xy: 11, 88
+  size: 50, 40
+Walk 
+  xy: 75, 88
+  size: 50, 40
+Walk 
+  xy: 139, 88
+  size: 50, 40
+Walk 
+  xy: 203, 88
+  size: 50, 40
+Walk 
+  xy: 267, 88
+  size: 50, 40
+Walk 
+  xy: 331, 88
+  size: 50, 40
+Walk 
+  xy: 395, 88
+  size: 50, 40
+Walk 
+  xy: 459, 88
+  size: 50, 40
+Attack 
+  xy: 11, 216
+  size: 50, 40
+Attack 
+  xy: 75, 216
+  size: 50, 40
+Attack 
+  xy: 139, 216
+  size: 50, 40
+Attack 
+  xy: 203, 216
+  size: 50, 40
+Attack 
+  xy: 267, 216
+  size: 50, 40
+Attack 
+  xy: 331, 216
+  size: 50, 40
+Attack 
+  xy: 395, 216
+  size: 50, 40
+Death
+  xy: 11, 344
+  size: 50, 40
+Death
+  xy: 75, 344
+  size: 50, 40
+Death
+  xy: 139, 344
+  size: 50, 40
+Death
+  xy: 203, 344
+  size: 50, 40

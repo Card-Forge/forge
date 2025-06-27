@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlVEOwiAMhnk1shPIdpwdQs9iPJdT7jaa7M+apiUrijZpRhnloxTKfAph/rNCpI0+KVqf9q/GfEV7jk8llblvQwhL+V6H3SZmLvo492OPW1zPjQ2bvskZsxxf8wfnXmJ7x91G/B62d50kxKS8ZubbM8dccKbyAV5LbJavdod6S4rtXL7+0dgHa39qdaNFPHn4NruV+yvxcunOo6ahfcRvYjkAC7WC2rU6ifE4RxfjXGrviaxVkmu9S1w5l/tJH8kFMwmuxvdwvboCmI47gw==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5GRgiBzFo3gUD2l8kXng3TCKR/FIxFeGYN4DAL0FxCQ=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyNlUtKA0EQhpsJSma2eojs9AA+Qm6gCYYsjF5jjOQEikLwMiKI4iXECG7capKVEBX7d7rSf9c8koJienqK+qqqu2qmkTFTpx9W+3GoV7VQX2hvHGeqbVg/yX+Rgnlt7Z7qnnlqVeQgyp5pYkzL8Z6tniX+m7Hr93UTyKgiBjBvapndPA65C58kb477SnEJ8yTO20vcI2ILk/0jZ/jQsbMg50GSre/JHvpQz9eJ8wd7Rvtfa379bf3+UOy7dr1P7xsNYzYb/r2MWyQTyzxPqm0k5mGS1VbYW5a5XcB9JCZi1f7hC9zcORVImvi7K2yuzXHsuVwjiVWzhTtewhV2S7FZdK7annNjrvZTJuJrlfNh+wHZM5f3cT9/K+JAzw4Utyxu5N1Uc0C4TXVeENStis2C+7OzQs2QD+46uM0SW5lbYMNWx6UlTcJ+1vLfx262gHth+7gTFc8lnh/LepJzKpo32D+Ks7s3cTNL2Frm1B9l809Lkb3kemuZh3Z9WfMzGuxelJ9LkK7db0dhbHvOrudqpWclRPzgG5hdxRRFn3dohuFMOT6ZqUOaI4tauXzu6r6PW+6/grqVMUXH1J9tZTuLQiZUatV383zunu0oVM38Aw5vycg=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYEAF/cwQ/J6JgeEdEwMGmM6MqRYGQHo+4tBHDPjBysDQBzRvKjNhdchgMtQdIH3ocvjAKx7S3YhP/2se7O4jFrxGMs+QE7ccPoCu7xMTdnEYIMWt+NQGosU5zF6YOLlhgg1oeeGW+4TkDmLCTJMRvzy6v/DZi64W5k5kv2Ozbwk3cXZgC8NPZOY1QgBX2MHcgM2/6ACWP/i0IfRndoQcLj8TMhOXf0lNX7jU4yoTQPbCwgQ9L8VhyVu72CA0zO/UBsSWB9Qyh1BZiZ4ncZU3tARBWNIGLJ7/cqLy8YEwoDmRJOSrD2hlTjiQHwzEIWTkzTCo3mAi9CLbC1Lfywypf3sI1J8gAADmSD6H
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="15" y="75.75">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;subTypes&quot;: [ &quot;Goblin&quot; ],
+		&quot;count&quot;: 5
+	},
+	{
+		&quot;type&quot;: &quot;item&quot;,
+		&quot;count&quot;: 1,
+		&quot;probability&quot;: 0.2,
+		&quot;itemName&quot;: &quot;Battle Standard&quot;
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="323.5" y="177.5">
+   <properties>
+    <property name="enemy" value="Goblin Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="64,71,61,71,64"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="432.333" y="59.3333"/>
+  <object id="52" template="../../obj/gold.tx" x="402.583" y="257.75"/>
+  <object id="53" template="../../obj/enemy.tx" x="54.333" y="146.667">
+   <properties>
+    <property name="enemy" value="Goblin Chief"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="66,65"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="224.333" y="39.833">
+   <properties>
+    <property name="enemy" value="Goblin Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="68,61,62,61,68,69,70,69"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="427.167" y="116.833">
+   <properties>
+    <property name="enemy" value="Goblin Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="74,73,72,63,72,73"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="211.236" y="141.909">
+   <properties>
+    <property name="enemy" value="Goblin Chief"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="434.333" y="74.3337">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="194" y="172.667">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" x="228" y="174.5">
+   <properties>
+    <property name="enemy" value="Goblin "/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/waypoint.tx" x="115.5" y="149"/>
+  <object id="61" template="../../obj/waypoint.tx" x="271.5" y="62.5" width="16" height="14"/>
+  <object id="62" template="../../obj/waypoint.tx" x="328" y="61"/>
+  <object id="63" template="../../obj/waypoint.tx" x="416.5" y="220.5"/>
+  <object id="64" template="../../obj/waypoint.tx" x="324.5" y="217"/>
+  <object id="65" template="../../obj/waypoint.tx" x="64" y="208"/>
+  <object id="66" template="../../obj/waypoint.tx" x="83.5" y="70.5"/>
+  <object id="67" template="../../obj/booster.tx" x="192.5" y="140">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MM2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MM2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MM2&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/waypoint.tx" x="257.5" y="40.5" width="16" height="14"/>
+  <object id="69" template="../../obj/waypoint.tx" x="164.5" y="49" width="16" height="14"/>
+  <object id="70" template="../../obj/waypoint.tx" x="166.5" y="108.5" width="16" height="14"/>
+  <object id="71" template="../../obj/waypoint.tx" x="298.5" y="130"/>
+  <object id="72" template="../../obj/waypoint.tx" x="441" y="197"/>
+  <object id="73" template="../../obj/waypoint.tx" x="422" y="154.5"/>
+  <object id="74" template="../../obj/waypoint.tx" x="427" y="99.5"/>
+  <object id="75" template="../../obj/manashards.tx" x="338" y="109.5"/>
+  <object id="76" template="../../obj/manashards.tx" x="82.5" y="96"/>
+  <object id="77" template="../../obj/enemy.tx" x="16.5" y="95.5">
+   <properties>
+    <property name="enemy" value="Goblin"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

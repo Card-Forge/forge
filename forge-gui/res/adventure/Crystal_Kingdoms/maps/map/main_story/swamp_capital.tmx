@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="94">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="40" height="40" opacity="0.9">
+  <data encoding="base64" compression="zlib">
+   eJztw7ENAAAMAiB3l/5/rX80kNBLqqqqqqqq+ugA4iKowQ==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNmM9u00AQxpc6qUgvTvISkXJBPbeIR4AL5QWKW/pH0Jb3gJZzAJm+TVt4FtLmCHQGPOrnyex6E5zEI42sbmfXv/1mZu04S51Lus61la+R76V+5zm7dL2kq1gWiNXr89xv3Qd/nU7fn+e1PHN1vOV6D5pDGKy11mFfbDnE4f1zNV80ybvl/fncWlPzJwbzpeLLVE5EN7aWsabP99PyujJ3HfakmTGXmstaJ4M9ab55c4rjOJZE7Nma047kq6rjRbvwaQ5fPmLrch639i582E9/Hjv3bGPaXWfaQ+M4z7qiP+qU9y6sFt+IYj8v2b907PPG4suN+c+Hzr0YLo9PGGP5DontaMl8YjF8Vf6W2N/9B/9XxfeScvsK8svnjpy98/DVrd858XxS54ucJavg0/qJhlZ+pX9PKF+nRs7OaOx9zbVo1d856If5XcX5YumH/bHq/Fb1b9P6Q/PhO2MTnh9N46uqvzbkuCnnixi+N3CPNC2/2urg+zVw7vegHv3wWbeq+gvph8+6JvItIr+L5Gta/2rbot8D2+RJJ3zdhrgW+ZoRZ83Bcfn76UY8X8h0L4mNDA2e9Jzb7MWt51t3VpNeytS3hLyoIWQ67Dt33A+zfaS1Jul0j1p7CJnWIle/jYXvhmLe9Muxei9itzT2M/VzYdxEzddrai3kWxq+8zAfxx2pWL0XvO8HGt8BfUQH1EPiUEPfmvh//L4wmvGMYOOcXhQuGor+B+Q/eg81wDqPK/Lsy5PwzXJG+Iz5vhfOfKzdXZFfS0dkS4p3MN7TTlrOSz6HfpZxfVwT11XvX40IH3OxjndGLf69P+ST8zJOy7F16cd1J7llEz50n4Zouvdi9QvVCJvuL9RCPFSLchZZ7xQx+lX1nWVaw9B56RuvK78+PtbsotBSn0kxtii+e9gCXBk=
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztV0tOwzAQHQk2iZtcoWFJrgArRIPoniPAPShXgZYeClRacw88aqwMlv9x06rKk0ZxHNvzMs/jD8CIESPOBe8FwMeRbFm4+d2VAI2wn4FtJuy+9OPn0y41fP2m4LfLAX7zsD5D8ntlAG8srE9ffiExkfy+aoDvOpzfi6WPiR/6XGXmfpQ/tp2JcuNp2K9v/NaZXTP6Hfll4j132ILtn1eT/vxc8aP8XP8isSBtVL8mjWk71Iy39pB3mnHl2SjfsWz7Fxe/eW3mSNtNRdyriVkf+o1le02xjiWInwmx6wtqKmMm84PGlyuGdcjPlB9zD31duBFj3NYdJ1d+0HhXRJsU+aEDzRnKzzc/YvzKdhciLpdtbExllZ9NX1VnWo5Z/3bKmDofppyleSXzRqerfI/Rl/pQc1j6qBQeOk19tT50/ur2NJ77r4WHmH8Ua6KjGm/U7+k6LT+6d5jmH63DOIXmbCy/z6Kbf7o1S1fP2vU59v6yKvz4bQLvDVzYtuz2j01bF3MH2QbO+8f6/9MG25lZHcdnvFBuz44xXeevlNxiEHPnGBIxe+6QcOl7bNDz3yni1OfftD2HjBhxTvgDItPgIw==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJwCAMheG3gOAA0rvOXSdrd9BjT8UiFipFRPg/CCSQQCCRAADAX0eQzlDq5KXs5+0DzPL8/S851sJ9AbRE0xe3vXOunh/B2ZJv9r0PAACs4QIr1ijS
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1M0JwkAQBeDXQUowt7BLbinFn1iN8Zb0oY3oRXswF70kZTiHCPlHIcsQ8z5Y2HmwMDDDAkRERO6lEZBF3XxtgY1tZhepr63sJvW9lj0MkJvp+/zFKQTOoW4PGrYyh53t5rFk+56cplXf/W/uS7OSHfRnsIf5wN/hcr6FvCnN+J3ceQbAK9DuQg/3jz4OHpBU5+hpd0NERET/7g2GHy7H
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../obj/inn.tx" x="361" y="371"/>
+  <object id="53" template="../../obj/spellsmith.tx" x="376" y="194"/>
+  <object id="55" template="../../obj/shop.tx" x="416" y="402">
+   <properties>
+    <property name="commonShopList" value="Swamp"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/entry_up.tx" x="258" y="639" width="97" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/entry_left.tx" x="354" y="635" width="16" height="197.002" rotation="0"/>
+  <object id="60" template="../../obj/entry_right.tx" x="242" y="642" width="16" height="198"/>
+  <object id="61" template="../../obj/arena.tx" x="168" y="178">
+   <properties>
+    <property name="arena">{
+
+    &quot;enemyPool&quot;:[
+	&quot;Adept Black Wizard&quot;,
+	&quot;Apprentice Black Wizard&quot;,
+	&quot;Challenger 20&quot;,
+	&quot;Challenger 21&quot;,
+	&quot;Challenger 22&quot;,
+	&quot;Curselord&quot;,
+	&quot;Dark Knight&quot;,
+	&quot;Dawnhart Witch&quot;,
+	&quot;Death Knight&quot;,
+	&quot;Dross Gladiator&quot;,
+	&quot;Harpy&quot;,
+	&quot;Harpy 2&quot;,
+	&quot;High Vampire&quot;,
+	&quot;Lich&quot;,
+	&quot;Master Black Wizard&quot;,
+	&quot;Necromancer&quot;,
+	&quot;Rat Ninja&quot;,
+	&quot;Vampire&quot;,
+	&quot;Vampire Lord&quot;
+	&quot;Witch&quot;,
+	],
+    &quot;rounds&quot;:3,
+    &quot;entryFee&quot;:100,
+     &quot;rewards&quot;: [[
+		{
+			&quot;type&quot;: &quot;gold&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 500 
+		}
+		],[{
+			&quot;type&quot;: &quot;item&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemNames&quot;: [&quot;Death Ring&quot;,&quot;Dark Armor&quot;,&quot;Dark Shield&quot;,&quot;Dark Boots&quot;]
+		}
+		],
+		[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Rare&quot;,&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;black&quot;] 
+		}
+		]
+		] 
+}</property>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/shop.tx" x="216" y="241">
+   <properties>
+    <property name="commonShopList" value="BlackItems"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/shop.tx" x="115" y="241">
+   <properties>
+    <property name="commonShopList" value="BlackEquipment"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/shop.tx" x="376" y="322">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/shop.tx" x="424" y="274">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/shop.tx" x="424" y="322">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signXOffset" type="float" value="18"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/shop.tx" x="472" y="274">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/shop.tx" x="472" y="322">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/shop.tx" x="520" y="274">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/shop.tx" x="520" y="322">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/shop.tx" x="376" y="274">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/quest.tx" type="quest" x="248" y="306">
+   <properties>
+    <property name="questtype" value="swamp_capital"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/shop.tx" x="519" y="194">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="84" template="../../obj/shop.tx" x="456" y="194">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Black,Creature6Black,BlackBoosterPackShop,Instant6Black,Vampire,Zombie,Skeleton,Demon,Spiders"/>
+    <property name="mythicShopList" value="Planeswalker4Black,WUBRG,RWB,RUB,RGB,UWB,UGB,UWB,Legend4Black,PhyrexianBlack"/>
+    <property name="rareShopList" value="Artifact4Black,Land4Black,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Black,Wand4Black"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Rogue4Black,Sliver4Black,Knight4Black,Multicolor8Black"/>
+   </properties>
+  </object>
+  <object id="90" template="../../obj/RotatingShop.tx" type="RotatingShop" x="200" y="402">
+   <properties>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/RotatingShop.tx" type="RotatingShop" x="153" y="402">
+   <properties>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="92" template="../../obj/RotatingShop.tx" type="RotatingShop" x="106" y="402">
+   <properties>
+    <property name="rotation" value="Black1,Black2,Black3,Black4,Black5,Black6"/>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/shardtrader.tx" x="152" y="339">
+   <properties>
+    <property name="signYOffset" type="float" value="-8"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

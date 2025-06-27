@@ -1,0 +1,8 @@
+Name:Slimefoot's Slimy Staff
+ManaCost:no cost
+Colors:black,green
+Types:Artifact Equipment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a spore counter on each fungus you control.
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Fungus.YouCtrl | CounterType$ SPORE | CounterNum$ 1
+A:AB$ MakeCard | Cost$ G PayShards<2> | Name$ Bayou | ActivationZone$ Command | Zone$ Hand | IsPresent$ Land.YouOwn | PresentZone$ Hand | PresentCompare$ EQ0 | GameActivationLimit$ 1 | SpellDescription$ Conjure a card named Bayou into your hand. Activate only if there are no land cards in your hand and only once each game.
+Oracle:At the beginning of your end step, put a spore counter on each fungus you control.\n{M}{M},{G}:Conjure a card named Bayou into your hand. Activate only if there are no land cards in your hand and only once each game.

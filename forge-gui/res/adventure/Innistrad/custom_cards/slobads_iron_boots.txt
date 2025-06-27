@@ -1,0 +1,9 @@
+Name:Slobad's Iron Boots
+ManaCost:no cost
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Artifact | AddToughness$ 1 | AddPower$ 1 | EffectZone$ Command | Description$ Artifact Creatures you control get +1/+1
+T:Mode$ ChangesZone | ValidCard$ Artifact.!token+YouCtrl | ActivationLimit$ 1 | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever a nontoken artifact you control is put into a graveyard from the battlefield, create a colorless artifact token named Scrap. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ scrap
+A:AB$ Token | Cost$ 4 PayShards<2> Sac<3/Artifact> | ActivationLimit$ 1 | ActivationZone$ Command | TokenScript$ c_0_0_a_construct_total_artifacts | TokenOwner$ You | SubAbility$ DBExileSelf | SpellDescription$ Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control." Exile Slobad's Iron Boots.
+SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:Artifact Creatures you control get +1/+1.\nWhenever a nontoken artifact you control is put into a graveyard from the battlefield, create a colorless artifact token named Scrap. This ability triggers only once each turn.\n{4}, {M}{M}, Sacrifice three artifacts: Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control." Exile Slobad's Iron Boots.

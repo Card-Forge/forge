@@ -1,0 +1,85 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [      
+    {
+      "type": "Scroll",
+      "name": "map",    
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "TextButton",
+      "name": "done",
+      "text": "[%80]tr(lblBack)",
+      "width": 60,
+      "height": 20,
+      "x": 5,
+      "y": 455
+    },
+    {
+      "type": "TextButton",
+      "name": "quest",
+      "text": "[%80]tr(lblQuest)",
+      "width": 60,
+      "height": 20,
+      "x": 205,
+      "y": 455
+    },
+    {
+      "type": "TextButton",
+      "name": "details",
+      "text": "[%80] Details",
+      "width": 60,
+      "height": 20,
+      "x": 105,
+      "y": 245
+    },
+    {
+      "type": "TextButton",
+      "name": "events",
+      "text": "[%80] Events",
+      "width": 60,
+      "height": 20,
+      "x": 105,
+      "y": 245
+    },
+    {
+      "type": "TextButton",
+      "name": "reputation",
+      "text": "[%80] Reputation",
+      "width": 60,
+      "height": 20,
+      "x": 105,
+      "y": 245
+    },
+    {
+      "type": "TextButton",
+      "name": "names",
+      "text": "[%80] Names",
+      "width": 60,
+      "height": 20,
+      "x": 105,
+      "y": 245
+    },
+    {
+      "type": "TextButton",
+      "name": "zoomIn",
+      "text": "[%80]+",
+      "width": 20,
+      "height": 20,
+      "x": 5,
+      "y": 5
+    },
+    {
+      "type": "TextButton",
+      "name": "zoomOut",
+      "text": "[%80]-",
+      "width": 20,
+      "height": 20,
+      "x": 245,
+      "y": 5
+    }
+  ]
+}

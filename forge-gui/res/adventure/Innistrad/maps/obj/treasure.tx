@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings.tsx"/>
+ <object name="Treasure" type="reward" gid="504" width="16" height="16">
+  <properties>
+   <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   <property name="spawn.Easy" type="bool" value="true"/>
+   <property name="spawn.Hard" type="bool" value="true"/>
+   <property name="spawn.Normal" type="bool" value="true"/>
+   <property name="sprite" value="sprites/treasure.atlas"/>
+  </properties>
+ </object>
+</template>

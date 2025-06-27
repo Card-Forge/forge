@@ -1,0 +1,86 @@
+banditarcher.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 104, 9
+  size: 14, 14      
+Idle 
+  xy: 5,11
+  size: 22,21 
+Idle 
+  xy: 37,11
+  size: 22,21 
+Idle 
+  xy: 69,11
+  size: 22,21 
+Idle 
+  xy: 101,11
+  size: 22,21 
+Walk
+  xy: 4,40
+  size: 25,24 
+Walk
+  xy: 36,40
+  size: 25,24 
+Walk
+  xy: 68,40
+  size: 25,24 
+Walk
+  xy: 100,40
+  size: 25,24 
+Walk
+  xy: 132,40
+  size: 25,24 
+Walk
+  xy: 164,40
+  size: 25,24 
+Walk
+  xy: 196,40
+  size: 25,24 
+Walk
+  xy: 228,40
+  size: 25,24 
+Attack 
+  xy: 6,72
+  size: 24,24 
+Attack 
+  xy: 38,72
+  size: 24,24 
+Attack 
+  xy: 70,72
+  size: 24,24 
+Attack 
+  xy: 102,72
+  size: 24,24 
+Attack 
+  xy: 134,72
+  size: 24,24 
+Attack 
+  xy: 166,72
+  size: 24,24 
+Attack 
+  xy: 198,72
+  size: 24,24 
+Death 
+  xy: 6,138
+  size: 25,22 
+Death 
+  xy: 38,138
+  size: 25,22 
+Death 
+  xy: 70,138
+  size: 25,22 
+Death 
+  xy: 102,138
+  size: 25,22 
+Death 
+  xy: 134,138
+  size: 25,22 
+Death 
+  xy: 166,138
+  size: 25,22 
+Death 
+  xy: 198,138
+  size: 25,22 

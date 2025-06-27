@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="104">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Favorable Winds&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../tileset/dungeon.tsx"/>
+ <layer id="9" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOmPDhxrQEA2UvzG58fHrZSw/7cIUtjE0LN7lxYmJaAXqlmcFsL73yzEDZS4wYPQByngFhWqbrkQoGU74aigAA3LUM8Q==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBrFo3gU0xW7cTIw7JRAYGQ5GKC3vQPl34HCC0QReKDdMopHMT0xAMwjGf4=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMAliECk2oGMeqjeRkYdvHgxlG8hM0i1l4ZJDt3A2l8YCcRdpNiLzF2Ems3MfaSaicxdhOyl1w7CdlNjL2yZNoJAyZM1Lf3MhMCo4PtEghMbXvNsNg3nO1FDmf0sL4C5UtjMZsYe/dSmK72kGEvst313KTZV8uN3U5SyytS7MZnJ6n1Aja7QXFaygxhlzATZyep9iLbXceNGxOykxx7semhRv0LAIHByk4=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wIKJgeEyHmzJRBs7rxAw9xKV7SbGTmrbTYqd1LKbHDupYbcZDdIJpfaiyyGnaxgwobO7YW4i115yw5mW9hIjR66914D6ZjCSZi96mUYuwGc3NjtB+W4aUP11KqQpYuymtp247AaFcykzhF3CTBs7ke2ezgjBZkhsGKaFnbQCAI/GKq8=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOpEgicLIkKp+WgEkKgRmlUPm0Bv9V8fOpDfKAYZkPxAlAnAjESTQOWxjgAYYlLxD/A9r3H2QnlrBtEae+vcoSmHgwAhMm2pp/Gc18MwrtI1b/zgEKb1rYS4v0SQhcIxDO+Nw0jZGB4TqN09VIAaXMELqEmfZ2TWdEpdHFhwoAADvQFp0=
+  </data>
+ </layer>
+ <layer id="8" name="AboveClutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgw0ckhgYexfwYIq9FaO/O2gBjhlC8Eixl80IgpHBcTq4A5u97EbY1dIa0MO/2ACyf38B8e+BccagALTy+wlDCIaBOBrZgw44jCB4qAMAghcPXA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="87" template="../../obj/door_down.tx" x="308.967" y="159.096" width="38.783" height="47.596">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../common/maps/map/aerie/aerie_3.tmx"/>
+    <property name="teleportObjectId" value="87"/>
+   </properties>
+  </object>
+  <object id="89" template="../../obj/enemy.tx" x="186.598" y="216.593">
+   <properties>
+    <property name="enemy" value="Aerie Guard"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="98,99,100,99,98,95,101,97,101,95"/>
+   </properties>
+  </object>
+  <object id="90" template="../../obj/enemy.tx" x="141.25" y="138">
+   <properties>
+    <property name="enemy" value="Owl"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="96,95,94"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/enemy.tx" x="261.5" y="61.25">
+   <properties>
+    <property name="enemy" value="Owl"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="94,97,96,95,94"/>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/gold.tx" x="129.75" y="73.75"/>
+  <object id="94" template="../../obj/waypoint.tx" x="214.75" y="55.75"/>
+  <object id="95" template="../../obj/waypoint.tx" x="141" y="216.75"/>
+  <object id="96" template="../../obj/waypoint.tx" x="116.75" y="88.5"/>
+  <object id="97" template="../../obj/waypoint.tx" x="237.75" y="108.25"/>
+  <object id="98" template="../../obj/waypoint.tx" x="222.5" y="220.25"/>
+  <object id="99" template="../../obj/waypoint.tx" x="277.25" y="182"/>
+  <object id="100" template="../../obj/waypoint.tx" x="271.75" y="143.25"/>
+  <object id="101" template="../../obj/waypoint.tx" x="142" y="113.25"/>
+  <object id="102" template="../../obj/treasure.tx" x="303.75" y="202">
+   <properties>
+    <property name="reward">[
+  {
+      &quot;type&quot;: &quot;card&quot;,
+      &quot;probability&quot;: 1,
+      &quot;count&quot;: 1,
+      &quot;addMaxCount&quot;: 5,
+      &quot;colors&quot;: [
+        &quot;White&quot;,
+        &quot;Blue&quot;,
+        &quot;Green&quot;
+      ],
+      &quot;rarity&quot;: [
+        &quot;Common&quot;,
+        &quot;Rare&quot;,
+        &quot;Uncommon&quot;
+      ],
+      &quot;subTypes&quot;: [
+        &quot;Bird&quot;
+      ],
+      &quot;cardTypes&quot;: [
+        &quot;Creature&quot;
+      ]
+    }
+]</property>
+   </properties>
+  </object>
+  <object id="103" template="../../obj/door_left.tx" x="212" y="160" width="35" height="39.5">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="teleport" value="../common/maps/map/aerie/aerie_0.tmx"/>
+    <property name="teleportObjectId" value="130"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

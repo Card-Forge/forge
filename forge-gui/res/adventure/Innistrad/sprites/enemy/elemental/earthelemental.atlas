@@ -1,0 +1,81 @@
+earthelemental.png
+size: 192,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 3, 106
+  size: 16, 16    
+Idle 
+  xy: 1, 55
+  size: 23, 18
+Idle 
+  xy: 33, 55
+  size: 23, 18
+Idle 
+  xy: 65, 55
+  size: 23, 18
+Idle 
+  xy: 97, 55
+  size: 23, 18 
+Idle 
+  xy: 129, 55
+  size: 23, 18  
+Idle 
+  xy: 161, 55
+  size: 23, 18
+Walk 
+  xy: 4, 1
+  size: 23, 18     
+Walk 
+  xy: 36, 1
+  size: 23, 18   
+Walk 
+  xy: 68, 1
+  size: 23, 18   
+Walk 
+  xy: 100, 1
+  size: 23, 18  
+Walk 
+  xy: 132, 1
+  size: 23, 18   
+Walk 
+  xy: 164, 1
+  size: 23, 18  
+Attack
+  xy: 5, 25
+  size: 22, 20  
+Attack
+  xy: 37, 25
+  size: 22, 20  
+Attack
+  xy: 69, 25
+  size: 22, 20   
+Attack
+  xy: 101, 25
+  size: 22, 20   
+Attack
+  xy: 133, 25
+  size: 22, 20   
+Attack
+  xy: 165, 25
+  size: 22, 20         
+Death
+  xy: 0, 81
+  size: 32,19      
+Death
+  xy: 32, 81
+  size: 32,19   
+Death
+  xy: 64, 81
+  size: 32,19  
+Death
+  xy: 96, 81
+  size: 32,19  
+Death
+  xy: 128, 81
+  size: 32,19  
+Death
+  xy: 160, 81
+  size: 32,19  
+  

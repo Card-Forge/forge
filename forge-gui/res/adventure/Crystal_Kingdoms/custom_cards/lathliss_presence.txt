@@ -1,0 +1,10 @@
+Name:Lathliss' Presence
+ManaCost:no cost
+Colors:red
+Types:Enchantment
+T:Mode$ ExcessDamage | ValidTarget$ Creature.OppCtrl,Planeswalker.OppCtrl | CombatDamage$ False | TriggerZones$ Command | Execute$ TrigDamage | TriggerDescription$ Whenever a creature or planeswalker an opponent controls is dealt excess noncombat damage, Lathliss' Presence deals damage equal to the excess to that permanent's controller.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredTargetController | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Command | AddAbility$ Pump | Description$ Creatures you control have "{R}: This creature gets +1/+0 until end of turn."
+SVar:Pump:AB$ Pump | Defined$ Self | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Whenever a creature or planeswalker an opponent controls is dealt excess noncombat damage, Lathliss' Presence deals damage equal to the excess to that permanent's controller.\nCreatures you control have "{R}: This creature gets +1/+0 until end of turn."

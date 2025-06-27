@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="75">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="7" name="SubBackground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILBD/w4B8bOgbB3FIwCWgIAFFIBBg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8CMDa3AjMDn6KbWTlvai24MNw9ReZcONaWEvPvtoZe80Vgimtr247IbZR0t70c1At5MYe8mxG5+9xNgHw6Skf1LMxWcfqfmOGvYi269FRp6n1N4eLgaGYwNgLyXl10izdyj4mVL/URsDAJ7fCgE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlV9uwjAMxv0wTW1yELaDrK320BtwoAHdMSYYPO0O/L3GRMcxZiux6obAnHafZLW1hH+x8yUUOUAxID4zgE12nVv7vHwfUv8W84zP77yry7kSXP7NAMww5sbxh6wh7IPqt1j/yToGPSn3AY53xO+TdflnDFLr15PCr0QfVJ9VebbUxPM4Dtb1TKrxt1+PAC/KfluMVQYqbZHzbjruAt/3tlsnsbVcnq1WxG6Mi72YR+3npuU2pl83/NaKvXb5p16lf2Iin7HXXkfu7fShH/e40ntabqxf8mwql0Oe+XtR+nNJqpRcPsN8fkJ/a3qmOS+z/qzJr7sg2LfEDO+M0N/aWct9Lm+P86q32Ox/cp2fU+8PvjcWwdllpf4XyP3+S1sbZ45h011djawxlEtK8UYsfgHCC6IT
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVlG0OwiAMhvlJjdfaXDiH1/Ecm85b4QfHkIY1lgoxkfLDN2mWEOjD25YZ878awZiLzdfukL4e+nGPe2MOHfOXNEefITIfMc72+34N3hMSE2t8tf09k0fk3SD10kHOxT2t/qeY77R7h9uYyOO+J8Z1W+0XwZ8b7jKwnNI3Ced4Vay/rPFqcx75Xyp1+FW+wKrdCQP9Si6+O03xvvO13nPu4bMONF80W9QHTZXeziBmH/swNnLp7hSh8IbpX7YwZivXsTwUxJAcGS0K4nyNocHS0guZtlYK
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFxIJWcfrbR4ydK0Wpbx+9/ToK6A9WiEIwsYBa6QxkDgjzkGBeFS917B4FEECtuBwFQxMAAONFCYE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="353.118" y="63.0671">
+   <properties>
+    <property name="enemy" value="Adept Blue Wizard"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="412.092" y="218.43"/>
+  <object id="53" template="../../obj/enemy.tx" x="336.341" y="207.974">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/manashards.tx" x="160.598" y="62.4034"/>
+  <object id="55" template="../../obj/manashards.tx" x="233.118" y="35.6713"/>
+  <object id="56" template="../../obj/manashards.tx" x="318.079" y="29.5837"/>
+  <object id="57" template="../../obj/manashards.tx" x="371.808" y="26.937"/>
+  <object id="59" template="../../obj/booster.tx" x="368.367" y="62.9327">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/booster.tx" x="352.486" y="207.18">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/enemy.tx" x="162.186" y="142.07">
+   <properties>
+    <property name="enemy" value="Apprentice Blue Wizard"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="70,69,71,72,73,72,71,69"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="256.939" y="174.625">
+   <properties>
+    <property name="enemy" value="Apprentice Blue Wizard"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="327.342" y="106.869">
+   <properties>
+    <property name="enemy" value="Apprentice Blue Wizard"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="72,73,72,71,69,70,69,71"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/treasure.tx" x="437.447" y="199.769"/>
+  <object id="65" template="../../obj/enemy.tx" x="412.832" y="147.099">
+   <properties>
+    <property name="enemy" value="Master Blue Wizard"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/booster.tx" x="432.418" y="144.188">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ELD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/gold.tx" x="300.875" y="54.1985"/>
+  <object id="68" template="../../obj/gold.tx" x="253.233" y="61.6093"/>
+  <object id="69" template="../../obj/waypoint.tx" x="166.156" y="188.124"/>
+  <object id="70" template="../../obj/waypoint.tx" x="167.744" y="111.103"/>
+  <object id="71" template="../../obj/waypoint.tx" x="275.466" y="194.74"/>
+  <object id="72" template="../../obj/waypoint.tx" x="338.459" y="75.3724"/>
+  <object id="73" template="../../obj/waypoint.tx" x="423.948" y="76.9604"/>
+  <object id="74" template="../../obj/waypoint.tx" x="434.271" y="171.978"/>
+ </objectgroup>
+</map>

@@ -11,10 +11,7 @@ import forge.CardStorageReader;
 import forge.Forge;
 import forge.ImageKeys;
 import forge.adventure.data.*;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.ColorSet;
+import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
@@ -30,6 +27,7 @@ import forge.util.FileUtil;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +49,7 @@ public class Config {
     private ObjectMap<String, ObjectMap<String, Sprite>> atlasSprites = new ObjectMap<>();
     private ObjectMap<PointOfInterestData, Array<Sprite>> poiSprites = new ObjectMap<>();
     private ObjectMap<String, ObjectMap<String, Array<Sprite>>> animatedSprites = new ObjectMap<>();
+    private String planePrefix;
 
     static public Config instance() {
         if (currentConfig == null)
@@ -107,13 +106,19 @@ public class Config {
         //prefix = "forge-gui/res/adventure/Shandalar/";
         prefix = getPlanePath(settingsData.plane);
         commonPrefix = resPath() + "/res/adventure/" + commonDirectoryName + "/";
+        planePrefix = resPath() + "/res/adventure/" + settingsData.plane + "/";
+        Path planeTest = Paths.get(planePrefix, "config.json");
+
 
         currentConfig = this;
         if (FModel.getPreferences() != null)
             Lang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE);
         try {
-            configData = new Json().fromJson(ConfigData.class, new FileHandle(commonPrefix + "config.json"));
-
+            if (Files.exists(planeTest)) {
+                configData = new Json().fromJson(ConfigData.class, new FileHandle(planePrefix + "config.json"));
+            } else {
+                configData = new Json().fromJson(ConfigData.class, new FileHandle(commonPrefix + "config.json"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             configData = new ConfigData();
@@ -142,7 +147,7 @@ public class Config {
     public int getBlurDivisor() {
         int val = 1;
         try {
-            switch(settingsData.videomode) {
+            switch (settingsData.videomode) {
                 case "720p":
                 case "768p":
                     val = 8;
@@ -163,6 +168,7 @@ public class Config {
         }
         return val;
     }
+
     public String getPrefix() {
         return prefix;
     }

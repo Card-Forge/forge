@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="86">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="SubGround" width="45" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1U0KgCAQQGF33SI6RD836FpdpVO2DhEpLCpyNCfeB4PbpwhjDAAAQDnG9uuCo7umEpsBAPrYfcJOwR80/TYaaGqdOndq6bW0/QdLU+uVWvAec+Umht9zOfad75XoPrMMbt4K+8LWVO0xzU9JNvt3Tt0d27zvzNErQUMj0lsBSIQiiQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="45" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzFmc9u00AQxn0xBl6BJm0kJG6tIMkWcUCCQ+7wEq3EvScoUSXegtIgIV4ALkXQPgASj8MR8Mj+lPXn2d3Z/CmRPtnerGd/OzM73jiLqigWBs3udGW5B/eVVSPrPZvSm2k+M/qC+e30ZlivXFGc1mPdq4/z+niS6WMwW3nLav24COPALa+F++8tO/MiwTtyXcZS0a7r2xQuXzEO8fdOrcta35yNOSaf+d20EeJy1orjBt+B1xpDsMf6nBvsgFlYZex5y53yg4yPOclau4qwyPenxnkVxB2yO58uffVs0lzHcvq8ZQbP0On5IW0Xbd/vzsaNdYvr0uh75t51fZYnt5vzS6fnNNqQv+DWxvN9yX3AcGHgFnE+Q1IDdjyWudLHj50lzqgzErOBF7eysteclGAb8f6gxNhfb8gf+D3E/3ncjduqNTe0xsQu8oZ9/XraKOb3kMC9KjPWmHavljd+Dop+Plz6PSeGJ8peRfwWq0/QKMAby1GsA9FskucjGe/3YXPOzKGaYGWOPeMtvshh5jFTzCH5vuS4it1Bht0v+0XxdV9n1vxkYR5mjH/m1fWBW+ZgzPcvDori5UGfORTbFDOvv9geRri4f+4+8WPVZ8Y8xMae6yrEaxnP78v9LTZSsUCtZGafO4eX+XL6w4+psTTWkK83KTw7Q8zySTHz+Tbl+5LXUOoZoPFifptmf1Cvm6PH/XZtb4l9uz8fjv+q+ZDzm1+EPXSqTcS1nvk2ySx1SNv/SLuI+XhvyfXCZ5P5rbvmfGYwCe/zSb89NBcWPzfByvyr+Jef/3h2g5dZf9V7uuNHNmZ/bcqHmXN9qzGLXz6N+76Vcyurz8zxkM+6NZiZhQ9+8XlXkbYPB+t7o42h68aZmdHOzK8yfLtJjRReOcaY0ecmmKXGPK1/898vuzGR+u5zM/Oi6tcK0Q9l38k+4BwKtWu6bm3x+0CNW8tn0d1xVzz+n8NGzBwTfMm6Tswda5b9zWvwf0vzNcdVy+ltiN+5+opx77l+/dD+a8iJeU5/7V3xLMCP7zT7Wk7nMqcUeq89C5xra21dZmbiWLG90Hv40H0hWxyD1H40x/42mNlu6n+odWxvgxn6B9/MbT0=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="45" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzFmVFu00AQhiOhqnY4Qkgo4pEHHkoCF3Aa5Zkb8ACXKIlyEiSQCoQzVIIbAFVfKSS0OQaeOoN/T/7Ztd0iRlpFtXdnv52dmZ11x2mnM67RLvP2IanX17aP+bhPLce2nW+d3mzOo7yt0kKPtuU/XIfaV+dsM48wM1kRfbdhI+TWeZraaOIwM31oo2WAX9YW4xBd75OSfdpyzUx+JFV225/th9qBvfNsVqcvxl7I1ov83a+8X79b6rU2wvlE72/QF2OZNOgrfqz7EbL1cf5ubvSuCXtmGJ5t+5/k7zaOzUQPru9gxH1EfU36ZvD80rG1MM/IO8w1qEtscQj9PD9F+2p/j1l09ka7+uyeqvS6hV/EhO3ZGWFGm1kRZpt3cS/OO1X/Cfl0HbF7JtwP7+76qNjsO4w7c/RJnzf7RevAL9qnLbPoYj4r+u6PivfIrTGAMazytVPoUlbWhDsD21wFYtETL8bU1jpXBn6xNP5xDuuPNTZfKId8I89CZ4H4wSnYWhgXw6KJjJ/wffPagxG3T1PuWB6bDavz6hpi4jF7+dvLIUxYTYL2tPsqtuiP2jN7+xo7z1EyMvYqLWNM5nr+uPidwvtY7HjMdr42dtbYYntma0ab90Jx/zdPgLD4s+ep1Ec/A7ZQHZLXWK2AeU1ty/y/Tp71eNG2wnuQn3+DbpX7BBg2Zpy3b6FWZ0+9fDohvK/zZy+eVs9u9AU7X1NmHK/xySQzY5bEH5R3NuTrVV+w9mnCrLy6b5uAf0/JGpl9lffL3q6N2V56+8dYl8C7Sav3GqZf66YQ7zUz4cpSPw/G7kYY35ZVWaY145Hx6r3Eit6xmJ09ZsvKYhd1oE08H0deYV05vCqTO9W/kaMuq7duvLtpf7uvg+0Z6tlW1nNhcvQlMIfuTZgPGKvGnrWjzfN2P+bD4o4qzHOy7mPHtzHWmT9MCK/WS3ateu6gP2yILhSsDa3Ivere9m4Vql895ozwWlta++u7kA+1kdh3iCNg9vJMKJ4190vdKu0dXIql3mI+i7J8yXXGvkNgP4/77WHJhe3C5LG+4fZ8VuXRK/48lI/FN8QeyI0+rv4rOUBif52Uv8qpeUF8c51UudFnY/IZzsQQs7Wr5l2MW4w9san4u+SEVVI2ZeoB92mN+wIK1rT4HSJWO7OYw29RencZBHiUm+W3NsJqI5vDsGaQ+a9tmVa/oWmNq782BhYkJ2NtbPvrWcbuRaF6zqsfvPPTrtuuQet5Nt72D31TCDFb346dR7G8v07q15AhnlhNh3vfdi6NEfGrNvchy3MTjqbM8h2vyf8E/ncT5r3922f+A0HysAs=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="45" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmE0OgjAQhbt14Q08AyTEnRcw7nRn2LDTW3gUD+HPQdQreA6VkIYGoUzHx7Qg3wYCoX0z82gHlBoZEufItwIeD98CRkToqz9tPCf2+7eG60PMRRe05ZfCYVoc778PBYWy7oWm2QShbZcotU8AA/0Jc8G5tD9PUbjrlfZgVeM6VmoT88fj4JojrsY2pPqpkNcmJHoPp7x7swwzJ6eGodRDQgcqz1SqMemewsYxK8+l9VKpxpXr9KUVsceYOeeC9u/lE9fViE3nF5Fn15w1fY+gcNHT5T6F8EFXhNZLtfnd177SNK+rh02fIfzvq36SvX+f2BJ7aLP2dc9w6sr1QmrM/1p836fGlEPpRXyTWuLJ9Q/Z23X1dWUJ+A8mjda86pH2UXPJGzhfOxU=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="368.059" y="639.942" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="81.3713" y="473.87"/>
+  <object id="50" template="../../obj/enemy.tx" x="639.943" y="383.514">
+   <properties>
+    <property name="enemy" value="Fungus"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="390.492" y="183.777"/>
+  <object id="53" template="../../obj/enemy.tx" x="330.598" y="199.872">
+   <properties>
+    <property name="enemy" value="Homarid"/>
+    <property name="speedModifier" type="float" value="3"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="55.1085" y="183.559">
+   <properties>
+    <property name="enemy" value="Amphin Warrior"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="250.14" y="224.5">
+   <properties>
+    <property name="enemy" value="Amphin Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="80,77,78"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/manashards.tx" x="601.543" y="64.9447"/>
+  <object id="58" template="../../obj/booster.tx" x="35.298" y="105.398">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;PLC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;PLC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;PLC&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/treasure.tx" x="687.333" y="320"/>
+  <object id="60" template="../../obj/treasure.tx" x="471" y="58.6667"/>
+  <object id="61" template="../../obj/manashards.tx" x="498" y="250"/>
+  <object id="62" template="../../obj/manashards.tx" x="665.333" y="595.333"/>
+  <object id="63" template="../../obj/manashards.tx" x="139.333" y="556.333"/>
+  <object id="64" template="../../obj/manashards.tx" x="157.667" y="568.333"/>
+  <object id="65" template="../../obj/manashards.tx" x="136.667" y="584.667"/>
+  <object id="66" template="../../obj/manashards.tx" x="225.667" y="386.333"/>
+  <object id="67" template="../../obj/manashards.tx" x="99.6667" y="300.667"/>
+  <object id="68" template="../../obj/manashards.tx" x="143" y="183.667"/>
+  <object id="69" template="../../obj/manashards.tx" x="151.333" y="48.3333"/>
+  <object id="70" template="../../obj/enemy.tx" x="36.3333" y="445.333">
+   <properties>
+    <property name="enemy" value="Poisonous Snake"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="527" y="155.667">
+   <properties>
+    <property name="enemy" value="Amphin Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="75,79"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="461.667" y="385.667">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="76,78,77,78,76,75"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/enemy.tx" x="648.333" y="92">
+   <properties>
+    <property name="enemy" value="Amphin Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/waypoint.tx" x="589" y="225.333"/>
+  <object id="76" template="../../obj/waypoint.tx" x="428.667" y="475.333"/>
+  <object id="77" template="../../obj/waypoint.tx" x="272.667" y="289.667"/>
+  <object id="78" template="../../obj/waypoint.tx" x="329.333" y="385.333"/>
+  <object id="79" template="../../obj/waypoint.tx" x="457.333" y="77"/>
+  <object id="80" template="../../obj/waypoint.tx" x="212.667" y="114.667"/>
+  <object id="82" template="../../obj/enemy.tx" x="204.667" y="502">
+   <properties>
+    <property name="enemy" value="Apprentice Blue Wizard"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="83,84,85"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/waypoint.tx" x="231.667" y="513"/>
+  <object id="84" template="../../obj/waypoint.tx" x="227.333" y="383.667"/>
+  <object id="85" template="../../obj/waypoint.tx" x="93.6667" y="456.333"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6BuE+BgrBNPLvgXsEAyzF8QmVS+5evBhbOEix0xYHSV2wsKBGH3UtpcUPBB2DqS9+OwetXfUXlrYS4zd5LqP3LKD0vKGluU6NvtJ0UsvDAAUXz5k
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy9VTtOA0EMNQxIk0E5BIpAqeAslJBATZOtCG06hDhCLgKXoUab0FGEBCHhpx0r3vmsdgv2SVaUmXl+tnc8Li3RfEhUOKIH/m2Lcz5fMvf+hOjTtucBoiP8l0F9f8a+J4ZoyvbEe1eHsY9nXv8IdB+Hdf8pIE+Jf+z269C7Y3tje/XaKT+IeaxqhVhvPRecwtXPzzOxCOfb1Nc3/P/0uLKpiXkTtS/cX3VuZavvMXNpbqiXwvtBpS2x53haF/XAt1zb+D78tNDU2l+2slysG7OvDe4BdMUA3IO2uXaFzll6QN+7Lrl2gc5ZUKo6/5cuoHMO73dfurqPEENfuoDupT51gZHX3vLeTYP2Ne8tj5rPpLDgftsFHOllQUobPOiBi/pcsF16wzqsCWGu0sfopZGqt9bOxRpia2J9HW+oi/cc2pgnhYv97BLveoi170XcU+Gl9AD4ktkF3dy8ys2OlX9zzlw8A0OIb5yXmYfv9QcdYGWV
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFlW0OgjAMhut2D0/jBfwg6qFEE/WaBozIX9uMJnVpxzACTd6QlW5PW8IK8G17B3DyAA98nn3QbaBoz8WH88poHRvxDqgC9Ua1To+TtnZBsU+Ls5jMozop57uRXx/XitOsQX/dMVO8pQ9KvV8t8phkV59f41BLcXN6NRZ7au4UuczFnZOd859Pwd3g+jgymxhb1E5wysTd+S9e0d1LT6W+VN2/fotK3IPWbLDqJqbWJ86V/TI39tNce7n+fvJM4rr5rMroU+yP+5rDlOe0In+exxq3EVyK5/21kae0D31zSck=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="280.333" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="192.396" y="34.3787"/>
+  <object id="49" template="../../obj/gold.tx" x="355.065" y="66.2689"/>
+  <object id="50" template="../../obj/enemy.tx" x="83.5746" y="135.792">
+   <properties>
+    <property name="enemy" value="Merfolk Fighter"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="60,59"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="219.432" y="140.105">
+   <properties>
+    <property name="enemy" value="Merfolk warrior"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="327.738" y="143.857">
+   <properties>
+    <property name="enemy" value="Merfolk Fighter"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="58,57"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/booster.tx" x="298.194" y="34.0691">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/manashards.tx" x="43.1769" y="128.183"/>
+  <object id="57" template="../../obj/waypoint.tx" x="73.1023" y="216.224"/>
+  <object id="58" template="../../obj/waypoint.tx" x="291.688" y="131.218"/>
+  <object id="59" template="../../obj/waypoint.tx" x="322.047" y="217.525"/>
+  <object id="60" template="../../obj/waypoint.tx" x="124.713" y="73.9697"/>
+  <object id="61" template="../../obj/enemy.tx" x="248.318" y="76.5719">
+   <properties>
+    <property name="enemy" value="Sand Golem"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

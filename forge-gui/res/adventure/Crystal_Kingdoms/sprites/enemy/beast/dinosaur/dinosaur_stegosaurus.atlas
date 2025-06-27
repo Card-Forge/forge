@@ -1,0 +1,122 @@
+dinosaur_stegosaurus.png
+size: 384,94
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 142, 27
+  size: 16, 16
+Idle 
+  xy: 0, 3
+  size: 32, 16
+Idle 
+  xy: 32, 3
+  size: 32, 16
+Idle 
+  xy: 64, 3
+  size: 32, 16
+Idle 
+  xy: 96, 3
+  size: 32, 16
+Idle 
+  xy: 128, 3
+  size: 32, 16
+Idle 
+  xy: 160, 3
+  size: 32, 16
+Idle 
+  xy: 192, 3
+  size: 32, 16
+Idle 
+  xy: 224, 3
+  size: 32, 16
+Idle 
+  xy: 256, 3
+  size: 32, 16
+Idle 
+  xy: 288, 3
+  size: 32, 16
+Idle 
+  xy: 320, 3
+  size: 32, 16
+Idle 
+  xy: 352, 3
+  size: 32, 16
+Walk
+  xy: 0, 27
+  size: 32, 16
+Walk
+  xy: 32, 27
+  size: 32, 16
+Walk
+  xy: 64, 27
+  size: 32, 16
+Walk
+  xy: 96, 27
+  size: 32, 16
+Walk
+  xy: 128, 27
+  size: 32, 16
+Walk
+  xy: 160, 27
+  size: 32, 16
+Attack
+  xy: 0, 52
+  size: 32, 16
+Attack
+  xy: 32, 52
+  size: 32, 16
+Attack
+  xy: 64, 52
+  size: 32, 16
+Attack
+  xy: 96, 52
+  size: 32, 16
+Attack
+  xy: 128,52
+  size: 32, 16
+Attack
+  xy: 160,52
+  size: 32, 16
+Attack
+  xy: 192, 52
+  size: 32, 16
+Attack
+  xy: 224,52
+  size: 32, 16
+Attack
+  xy: 256,52
+  size: 32, 16
+Death
+  xy: 3, 76
+  size: 32, 16
+Death
+  xy: 35, 76
+  size: 32, 16
+Death
+  xy: 67, 76
+  size: 32, 16
+Death
+  xy: 99, 76
+  size: 32, 16
+Death
+  xy: 131, 76
+  size: 32, 16
+Death
+  xy: 163, 76
+  size: 32, 16
+Death
+  xy: 195, 76
+  size: 32, 16
+Death
+  xy: 227, 76
+  size: 32, 16
+Death
+  xy: 259, 76
+  size: 32, 16
+Death
+  xy: 291, 76
+  size: 32, 16
+Death
+  xy: 323, 76
+  size: 32, 16

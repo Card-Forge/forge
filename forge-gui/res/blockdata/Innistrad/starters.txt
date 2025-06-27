@@ -1,0 +1,22 @@
+LEA: 23 Common, 13 Uncommon, 2 Rare, 22 BasicLand
+LEB: 23 Common, 13 Uncommon, 2 Rare, 22 BasicLand
+2ED: 23 Common, 13 Uncommon, 2 Rare, 22 BasicLand
+3ED: 23 Common, 13 Uncommon, 2 Rare, 22 BasicLand
+4ED: 26 Common, 9 Uncommon, 3 Rare, 22 BasicLand
+ICE: 26 Common, 9 Uncommon, 3 Rare, 22 BasicLand
+5ED: 26 Common, 9 Uncommon, 3 Rare, 22 BasicLand
+MIR: 25 Common, 10 Uncommon, 3 Rare, 22 BasicLand
+TMP: 25 Common, 10 Uncommon, 3 Rare, 22 BasicLand
+USG: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+6ED: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+MMQ: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+INV: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+ODY: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+ONS: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+MRD: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+CHK: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+RAV: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+TSP: 29 Common, 10 Uncommon, 3 Rare, 3 TimeShifted TSB, 30 BasicLand
+LRW: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+SHM: 32 Common, 10 Uncommon, 3 Rare, 30 BasicLand
+ALA: 32 Common, 10 Uncommon, 3 RareMythic, 30 BasicLand

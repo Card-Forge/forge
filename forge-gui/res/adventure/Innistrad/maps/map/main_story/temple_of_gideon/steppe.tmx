@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="31" height="37" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="275">
+ <properties>
+  <property name="canFailDungeon" type="bool" value="true"/>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="23809" source="../../../tileset/rivers.tsx"/>
+ <tileset firstgid="41089" source="../../../tileset/rivers-nocolide.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="31" height="37">
+  <data encoding="csv">
+3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,3176,24169,2374,2374,3176,3176,3176,3176,3176,3176,3176,3176,3176,
+3176,3176,3176,3176,3176,3176,3176,3176,3168,3164,3164,3164,3164,3164,3164,3164,3172,3176,3176,24350,23809,2374,2374,3176,3176,3176,3176,3168,3164,3164,3172,
+3176,3176,3176,3176,3176,3176,3176,3176,3166,2856,2856,2856,2856,2856,2856,2856,3163,3164,3164,2856,24709,3172,2374,3176,3176,3176,3176,3166,2856,2856,3171,
+3176,3176,3176,3176,3176,3176,3176,3176,3166,2856,3169,3173,3173,3173,3165,2856,2856,2856,2856,2856,24709,2856,3163,3164,3164,3164,3164,3162,3169,3173,3175,
+3176,3176,3176,3176,3176,3176,3176,3176,3166,2856,3171,3176,3176,3176,3174,3165,2856,2856,2856,2856,24709,2856,2856,3169,3165,2856,2856,2856,3171,3176,3176,
+3176,3176,3168,3172,3176,3176,3176,3176,3166,2856,3171,3168,3172,3176,3176,3174,3173,3173,3173,3173,23989,23809,3169,3175,3174,3173,3173,3173,3175,3176,3176,
+3176,3168,3162,3163,3164,3164,3164,3164,3162,2856,3171,3166,3163,3164,3164,3164,3172,3176,3176,2374,3174,24714,23809,3164,3164,3164,3164,3164,3164,3172,3176,
+3168,3162,2856,2856,2856,2856,3169,3173,3173,3173,3175,3166,2856,2856,2856,2856,3163,3172,3176,3176,2374,1427,1582,1272,23809,2856,2856,2856,2856,3163,3164,
+3166,2856,2856,2856,2856,3169,3175,3176,3168,3164,3164,3162,2856,2856,2856,2856,2856,3163,3164,3164,3172,2374,1427,1268,1425,23809,2856,2856,2856,2856,2856,
+3166,2856,3169,3173,3173,3175,3176,3168,3162,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,3163,3172,3168,1427,1588,24712,23809,2856,2856,2856,2856,
+3162,3169,3175,3176,3176,3176,3176,3166,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,3163,3162,2856,2856,2856,23989,23809,2856,2856,2856,
+2856,3163,3172,3176,3176,3168,3164,3162,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,958,959,960,2856,2856,2856,2856,2147507997,2856,2856,2856,
+2856,2856,3163,3164,3164,3162,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,958,959,1279,1117,1278,960,2856,2856,24170,24352,24175,2856,2856,
+958,960,2856,2856,2856,2856,2856,958,960,2856,2856,2856,2856,2856,958,959,959,959,1279,1117,1117,1117,1117,1118,2856,2856,24349,2856,24169,2856,2856,
+1116,1278,960,2856,2856,958,959,1279,1118,2856,2856,2856,2856,2856,1116,1120,1275,1275,1275,1275,1121,1117,1117,1118,2856,2856,24709,23810,23811,2856,2856,
+1279,1120,1276,2856,958,1279,1117,1117,1118,2856,2856,2856,2856,2856,1116,1118,2856,2856,2856,2856,1274,1275,1121,1278,960,2856,24530,24711,2856,2856,2856,
+1117,1118,2856,2856,1274,1121,1117,1117,1278,960,2856,2856,2856,2856,1116,1118,2856,2856,958,959,960,2856,1116,1117,1118,2856,24172,24355,2856,2856,2856,
+1117,1118,2856,2856,2856,1116,1117,1117,1120,1276,2856,2856,2856,2856,1116,1118,2856,958,1279,1117,1278,959,1279,1117,1118,2856,24529,2856,2856,2856,2856,
+1117,1118,2856,2856,2856,1116,1117,1120,1276,2856,2856,2856,2856,2856,1116,1278,960,1274,1275,1121,1117,1117,1120,1275,1276,2856,24709,2856,2856,2856,2856,
+1117,1118,2856,2856,2856,1274,1275,1276,2856,2856,2856,2856,2856,2856,1274,1121,1278,959,960,1116,1117,1120,1276,2856,2856,2856,41989,2856,2856,2856,2856,
+1117,1118,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,1274,1275,1121,1118,1116,1117,1118,2856,2856,2856,2856,41989,2856,2856,2856,2856,
+1275,1276,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,1116,1118,1274,1121,1278,959,960,2856,2856,24709,2856,2856,2856,2856,
+2856,2856,2856,958,960,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,1116,1118,2856,1274,1121,1117,1118,2856,23810,23811,2856,2856,2856,2856,
+2856,2856,2856,1116,1278,959,959,960,2856,2856,2856,2856,2856,958,959,959,959,1279,1278,2856,959,1279,1117,1118,2856,24529,2856,2856,2856,2856,2856,
+2856,2856,2856,1116,1117,1117,1117,1278,960,2856,2856,2856,2856,1116,1117,1117,1117,1117,1120,2856,1121,1117,1117,1118,2856,23989,23809,2856,2856,2856,2856,
+2856,2856,2856,1274,1275,1121,1117,1117,1278,960,2856,2856,2856,1116,1117,1117,1117,1117,1118,2856,1116,1117,1120,1276,2856,2856,23989,23992,23993,23809,2856,
+2856,2856,2856,2856,2856,1274,1121,1117,1117,1278,960,2856,2856,1274,1275,1275,1275,1121,1278,2856,1279,1120,1276,2856,2856,2856,2856,2856,2856,24709,2856,
+2856,2856,2856,2856,958,960,1274,1121,1117,1117,1118,2856,2856,2856,2856,2856,2856,1116,1117,1117,1117,1118,2856,2856,2856,2856,2856,2856,2856,23989,23809,
+2856,2856,2856,2856,1116,1118,2856,1274,1121,1117,1118,2856,2856,2856,2856,2856,2856,1116,1120,2856,1275,1276,2856,2856,2856,2856,2856,2856,2856,2856,23989,
+2856,2856,2856,2856,1116,1278,959,960,1116,1117,1118,2856,2856,2856,2856,2856,2856,1116,1278,959,960,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,
+2856,2856,2856,2856,1274,1275,1121,1278,1279,1117,1118,2856,2856,2856,2856,2856,2856,1274,1275,1275,1276,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,
+2856,2856,2856,2856,2856,2856,1274,1275,1275,1121,1118,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,
+2856,2856,2856,2856,2856,2856,2856,2856,2856,1274,1276,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,
+2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,
+2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,
+2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,
+2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856,2856
+</data>
+ </layer>
+ <layer id="3" name="Tile Layer 2" width="31" height="37">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3324,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3324,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3320,2531,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2531,3164,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1711,1712,1713,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3323,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3323,3323,2531,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2534,3323,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2534,3323,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,1861,1863,0,0,0,0,0,0,0,0,3320,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,1861,2336,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,1861,2336,2495,2179,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2495,2179,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16040,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,2684360857,2684360699,2684360541,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,2684360859,2684360701,2684360543,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,6392,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,6708,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,6392,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,6550,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2021,0,0,0,0,0,0,6708,0,0,0,2287,2607,2289,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,2019,2337,1862,1863,0,0,0,0,0,0,2287,2288,2608,2290,2605,0,0,0,0,0,
+0,2980,0,0,0,0,0,0,0,0,0,2177,2178,2494,2337,1862,1863,0,0,0,0,2445,2446,2446,2448,0,0,0,0,0,0,
+0,0,0,0,2980,0,0,0,0,0,0,0,0,2177,2178,2494,2337,1863,0,0,0,2603,2292,2446,2448,0,0,0,0,2287,2289,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2177,2494,2337,1862,1862,1862,1862,1863,0,2605,0,0,2287,2288,2608,2447,
+0,2980,0,15731,2287,2607,2288,2288,2607,2288,2288,2288,2289,0,0,0,2177,2178,2494,2495,2178,2494,2021,0,0,0,2287,2608,2290,2291,2605,
+0,0,0,0,2603,2604,2292,2446,2446,2446,2446,2446,2606,2289,0,0,0,0,2019,2021,0,2019,2021,0,0,2287,2608,2290,2605,0,0,
+0,0,0,2980,0,2287,2608,2290,2292,2446,2446,2290,2604,2605,0,0,0,0,2019,2337,1862,2336,2021,0,0,2603,2604,2605,0,0,0,
+0,0,0,0,0,2445,2446,2447,2603,2291,2291,2605,0,0,0,0,0,0,2177,2178,2178,2178,2179,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="Tile Layer 3" width="31" height="37">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2373,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2531,2220,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3452,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,0,0,0,2147487098,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,52,2147486853,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,209,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,3447,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3205,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2147483683,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3450,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,3449,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,3451,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,212,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2147483684,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2147486853,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,193,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3447,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="5" name="Tile Layer 4" width="31" height="37">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6393,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6709,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6393,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1117,1117,1117,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6709,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Objects">
+  <object id="2" template="../../../obj/collision.tx" x="-16" y="-16" width="16" height="624"/>
+  <object id="3" template="../../../obj/collision.tx" x="0.25" y="592.75" width="495.75" height="15.25"/>
+  <object id="4" template="../../../obj/collision.tx" x="496" y="-16" width="16" height="624"/>
+  <object id="5" template="../../../obj/collision.tx" x="0" y="-16" width="496.295" height="16"/>
+  <object id="187" template="../../../obj/enemy.tx" x="-304" y="240">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 5,
+ &quot;startBattleWithCard&quot;: [ &quot;Deathspore Thallid&quot;,&quot;Deathspore Thallid&quot;,&quot;Thallid Shell-Dweller&quot;,&quot;Thallid Shell-Dweller&quot; ]
+}</property>
+    <property name="enemy" value="Golgari Fungus"/>
+   </properties>
+  </object>
+  <object id="188" template="../../../obj/enemy.tx" x="-352" y="304">
+   <properties>
+    <property name="enemy" value="Necromancer"/>
+   </properties>
+  </object>
+  <object id="189" template="../../../obj/treasure.tx" x="432" y="224">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="193" template="../../../obj/enemy.tx" x="326" y="474">
+   <properties>
+    <property name="enemy" value="White Sliver"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="194" template="../../../obj/treasure.tx" x="-64" y="432">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="198" template="../../../obj/enemy.tx" x="-256" y="320">
+   <properties>
+    <property name="enemy" value="Liliana's Alchemist"/>
+   </properties>
+  </object>
+  <object id="199" template="../../../obj/enemy.tx" x="-352" y="256">
+   <properties>
+    <property name="enemy" value="Dimir Faerie"/>
+    <property name="pursueRange" type="int" value="90"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="250,251,252,249"/>
+   </properties>
+  </object>
+  <object id="200" template="../../../obj/enemy.tx" x="-176" y="320">
+   <properties>
+    <property name="enemy" value="Golgari Treefolk"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="201" template="../../../obj/enemy.tx" x="-304" y="336">
+   <properties>
+    <property name="enemy" value="Dimir Faerie"/>
+   </properties>
+  </object>
+  <object id="202" template="../../../obj/treasure.tx" x="16" y="576">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="203" template="../../../obj/scroll.tx" x="272" y="256">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Gideon's Defeat&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="205" template="../../../obj/treasure.tx" x="-80" y="528">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="211" template="../../../obj/enemy.tx" x="176" y="288">
+   <properties>
+    <property name="enemy" value="Orzhov Cleric"/>
+    <property name="pursueRange" type="int" value="75"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="212" template="../../../obj/enemy.tx" x="-240" y="272">
+   <properties>
+    <property name="Type" value="enemy"/>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 8,
+}</property>
+    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="pursueRange" type="int" value="75"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="215" template="../../../obj/enemy.tx" x="-224" y="320">
+   <properties>
+    <property name="enemy" value="Kor Weaponsmith"/>
+    <property name="threatRange" type="int" value="70"/>
+   </properties>
+  </object>
+  <object id="216" template="../../../obj/enemy.tx" x="-304" y="304">
+   <properties>
+    <property name="enemy" value="Harpy"/>
+    <property name="pursueRange" type="int" value="90"/>
+    <property name="threatRange" type="int" value="70"/>
+   </properties>
+  </object>
+  <object id="231" template="../../../obj/manashards.tx" x="96" y="464"/>
+  <object id="232" template="../../../obj/gold.tx" x="112" y="480"/>
+  <object id="233" template="../../../obj/treasure.tx" x="336" y="272">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="235" template="../../../obj/enemy.tx" x="64" y="544">
+   <properties>
+    <property name="enemy" value="Kor Weaponsmith"/>
+    <property name="threatRange" type="int" value="70"/>
+   </properties>
+  </object>
+  <object id="236" template="../../../obj/enemy.tx" x="-160" y="272">
+   <properties>
+    <property name="enemy" value="Liliana's Alchemist"/>
+    <property name="pursueRange" type="int" value="80"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="253,254,wait3,260,254,wait3"/>
+   </properties>
+  </object>
+  <object id="237" template="../../../obj/dialog.tx" x="-128" y="384">
+   <properties>
+    <property name="dialog">[
+    {
+        &quot;name&quot;: &quot;&quot;,
+        &quot;text&quot;: &quot;You enter the gate.&quot;,
+        &quot;loctext&quot;: &quot;&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;Lathliss ! It's time to end this !&quot;,
+                &quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
+                &quot;condition&quot;: [
+                    {
+                        &quot;getMapFlag&quot;: {
+                            &quot;key&quot;: &quot;enemiesDefeated&quot;,
+                            &quot;op&quot;: &quot;&gt;=&quot;,
+                            &quot;val&quot;: 3
+                        }
+                    }
+                ],
+                &quot;text&quot;:    &quot;With a gust of red flames, the door burns away, leaving only ashes in your path. You are now free to pass.&quot;,
+                &quot;options&quot;:
+                    [ { &quot;name&quot;: &quot;(continue)&quot; } ]
+            },
+            {
+                &quot;name&quot;: &quot;You knock on the door&quot;,
+                &quot;condition&quot;: [
+                    {
+                        &quot;getMapFlag&quot;: {
+                            &quot;key&quot;: &quot;enemiesDefeated&quot;,
+                            &quot;op&quot;: &quot;&lt;=&quot;,
+                            &quot;val&quot;: 2
+                        }
+                    }
+                ],
+                &quot;text&quot;: &quot;YOU ARE NOT WORTHY, BEGONE !&quot;,
+                &quot;loctext&quot;: &quot;&quot;
+            }
+        ]
+    }
+]</property>
+   </properties>
+  </object>
+  <object id="238" template="../../../obj/treasure.tx" x="-64" y="480">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="239" template="../../../obj/treasure.tx" x="144" y="48">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="240" template="../../../obj/enemy.tx" x="-208" y="272">
+   <properties>
+    <property name="defeatDialog">[
+  {
+     &quot;text&quot;: &quot;Defeated, the witch drops her staff entirely, the last of her spells fizzle out. \&quot;Wait... Let me go, and I will not raise any alarm.\&quot;&quot;,
+     &quot;options&quot;:[
+     {
+	&quot;name&quot;:&quot;Hear her out&quot;,
+	&quot;text&quot;:&quot;\&quot;...And these mushrooms are poisonous if given properly, but I suppose you could heal with them in the right dosage.\&quot; She pauses for a moment, as if considering that she might need to do so herself.&quot;,
+	&quot;options&quot;: [
+	{
+	   &quot;name&quot;:&quot;Trust her word&quot;,
+	   &quot;action&quot;: [{&quot;addLife&quot;: 10, &quot;deleteMapObject&quot;:240}],
+	   &quot;text&quot;:&quot;She takes a handful of the mushrooms and crushes them into a vial already containing some unknown liquid. She then takes a swig of it, and slowly places it down on the ground for you before leaving hurridly. (+10 health recovered)&quot;
+	},
+     {
+	&quot;name&quot;:&quot;Finish her off&quot;,
+	&quot;action&quot;: [{&quot;addGold&quot;: 250, &quot;deleteMapObject&quot;:240}],
+	&quot;text&quot;:&quot;She is unable to put up much more of a fight. You find a bunch of questionable mushrooms and some gold on her. (+250 gold)&quot;
+	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+     },
+     {
+	&quot;name&quot;:&quot;Let her leave&quot;,
+	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
+	&quot;action&quot;:[
+	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]},
+	    {&quot;deleteMapObject&quot;:240}
+	],
+	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+     }
+	]
+     },
+     {
+	&quot;name&quot;:&quot;Finish her off&quot;,
+	&quot;action&quot;: [{&quot;addGold&quot;: 250, &quot;deleteMapObject&quot;:240}],
+	&quot;text&quot;:&quot;She is unable to put up much more of a fight. You find a bunch of questionable mushrooms and some gold on her. (+250 gold)&quot;
+	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+     },
+     {
+	&quot;name&quot;:&quot;Let her leave&quot;,
+	&quot;text&quot;:&quot;She bows her head and scrambles away, leaving her staff behind.&quot;,
+	&quot;action&quot;:[
+	    {&quot;grantRewards&quot;:[{&quot;type&quot;:&quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Staff of the Death Magus&quot;}]},
+	    {&quot;deleteMapObject&quot;:240}
+	],
+	&quot;options&quot;:[ {&quot;name&quot;:&quot;(Continue)&quot;} ]
+     }
+     ]
+  }
+]</property>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;An old crone leers at you, but does not raise her staff to attack.&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Walk away&quot; },
+      { &quot;name&quot;:&quot;Attack the witch&quot;,
+	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]},
+      {
+        &quot;name&quot;:&quot;Approach her slowly&quot;,
+        &quot;text&quot;: &quot;\&quot;Be gone with you! You will not have them!\&quot; She steps back, dropping some of the herbs and mushrooms that she appears to have been gathering.&quot;,
+        &quot;options&quot;: [
+	{ &quot;name&quot;:&quot;Walk away&quot; },
+	{ &quot;name&quot;:&quot;Attack the witch&quot;,
+	  &quot;action&quot;:[{&quot;battleWithActorID&quot;:-1}]
+	}
+	]
+      }]
+   }
+]</property>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Staff of the Death Magus&quot; ]
+}</property>
+    <property name="enemy" value="Witch"/>
+   </properties>
+  </object>
+  <object id="241" template="../../../obj/entry_down.tx" x="-528" y="32" width="144" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/town.tmx"/>
+    <property name="teleportObjectId" value="241"/>
+   </properties>
+  </object>
+  <object id="242" template="../../../obj/enemy.tx" x="-256" y="288">
+   <properties>
+    <property name="enemy" value="Viper"/>
+    <property name="waypoints" value="243,244,wait5"/>
+   </properties>
+  </object>
+  <object id="245" template="../../../obj/treasure.tx" x="-112" y="432">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;probability&quot;: 0.01,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;(WHITE ITEM)&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="249" template="../../../obj/waypoint.tx" x="-224" y="176"/>
+  <object id="250" template="../../../obj/waypoint.tx" x="-224" y="208"/>
+  <object id="259" template="../../../obj/enemy.tx" x="464" y="256">
+   <properties>
+    <property name="enemy" value="White Sliver"/>
+    <property name="pursueRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="261" template="../../../obj/enemy.tx" x="-288" y="272">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 8,
+ &quot;startBattleWithCard&quot;: [ &quot;Vrock&quot; ]
+}</property>
+    <property name="enemy" value="Harpy"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="263" template="../../../obj/enemy.tx" x="32" y="464">
+   <properties>
+    <property name="enemy" value="Dimir Faerie"/>
+    <property name="pursueRange" type="int" value="90"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="252,249,250,251"/>
+   </properties>
+  </object>
+  <object id="270" template="../../../obj/portal.tx" x="320" y="560">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="portalState" value="active"/>
+    <property name="teleport" value="../common/maps/map/main_story/temple_of_gideon/keep.tmx"/>
+    <property name="teleportObjectId" value=""/>
+   </properties>
+  </object>
+  <object id="271" template="../../../obj/collision.tx" x="300" y="430" width="4" height="26"/>
+  <object id="272" template="../../../obj/collision.tx" x="320" y="430" width="4" height="26"/>
+  <object id="273" template="../../../obj/collision.tx" x="300" y="380" width="4" height="12"/>
+  <object id="274" template="../../../obj/collision.tx" x="320" y="380" width="4" height="12"/>
+ </objectgroup>
+ <objectgroup id="7" name="Waypoints">
+  <object id="243" template="../../../obj/waypoint.tx" x="-128" y="112"/>
+  <object id="244" template="../../../obj/waypoint.tx" x="-80" y="112"/>
+  <object id="246" template="../../../obj/waypoint.tx" x="-80" y="176"/>
+  <object id="247" template="../../../obj/waypoint.tx" x="-224" y="144"/>
+  <object id="248" template="../../../obj/waypoint.tx" x="-80" y="144"/>
+  <object id="251" template="../../../obj/waypoint.tx" x="-128" y="208"/>
+  <object id="252" template="../../../obj/waypoint.tx" x="-176" y="112"/>
+  <object id="253" template="../../../obj/waypoint.tx" x="-128" y="144"/>
+  <object id="254" template="../../../obj/waypoint.tx" x="-128" y="176"/>
+  <object id="255" template="../../../obj/waypoint.tx" x="-176" y="208"/>
+  <object id="256" template="../../../obj/waypoint.tx" x="-176" y="176"/>
+  <object id="257" template="../../../obj/waypoint.tx" x="-224" y="112"/>
+  <object id="258" template="../../../obj/waypoint.tx" x="-176" y="144"/>
+  <object id="260" template="../../../obj/waypoint.tx" x="-80" y="208"/>
+ </objectgroup>
+</map>

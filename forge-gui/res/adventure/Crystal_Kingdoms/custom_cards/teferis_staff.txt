@@ -1,0 +1,8 @@
+Name:Teferi's Staff
+ManaCost:no cost
+Types:Artifact Equipment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap target artifact or land you control.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Artifact.YouCtrl,Land.YouCtrl | TgtPrompt$ Select target artifact or land you control
+A:AB$ Phases | Cost$ U W PayShards<2> | ActivationLimit$ 1 | ValidTgts$ Permanent | SubAbility$ Eject | ActivationZone$ Command | SpellDescription$ Target permanent phases out. (Treat it and anything attached to it as though they don't exist until its controllers's next turn.)
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:At the beginning of your end step, untap target artifact or land you control.\n{M}{M}, {U}{W}: Target permanent phases out. (Treat it and anything attached to it as though they don't exist until its controllers's next turn.). Exile Teferi's Staff.

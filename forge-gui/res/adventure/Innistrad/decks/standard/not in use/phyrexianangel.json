@@ -1,0 +1,12 @@
+{                                    
+"name":"Orthodoxy Angel",
+  "template":
+  {
+   "count":60,
+   "colors":["White", "Green"],
+   "tribe":"Phyrexian",        
+   "tribeCards":1.0,
+   "tribeSynergyCards":0.5,
+   "rares":0.4
+  }
+}

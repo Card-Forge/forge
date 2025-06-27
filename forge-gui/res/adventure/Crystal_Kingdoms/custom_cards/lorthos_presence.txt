@@ -1,0 +1,7 @@
+Name:Lorthos' Presence
+ManaCost:no cost
+Colors:blue
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.nonLand+OppCtrl | TriggerZones$ Command | Execute$ TrigStunCounter | TriggerDescription$ Whenever a nonland permanent an opponent controls enters, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigStunCounter:DB$ PutCounter | Defined$ TriggeredCard | CounterType$ Stun | CounterNum$ 1
+Oracle:Whenever a nonland permanent an opponent controls enters, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)

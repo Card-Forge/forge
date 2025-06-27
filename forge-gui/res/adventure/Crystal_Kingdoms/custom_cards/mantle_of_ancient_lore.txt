@@ -1,0 +1,9 @@
+Name:Mantle of Ancient Lore
+ManaCost:no cost
+Colors:blue,black
+Types:Artifact
+T:Mode$ ConjureAll | ValidPlayer$ You | ValidCard$ Card | TriggerZones$ Command | Execute$ TrigScry | TriggerDescription$ Whenever you conjure one or more cards, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+A:AB$ MakeCard | Cost$ 3 PayShards<3> | SubAbility$ Eject | IsPresent$ Card.YouCtrl | PresentZone$ Library | PresentCompare$ GE125 | Conjure$ True | Names$ Ancestral Recall,Black Lotus,Mox Emerald,Mox Jet,Mox Pearl,Mox Ruby,Mox Sapphire,Time Walk,Timetwister | Zone$ Library | ActivationZone$ Command | GameActivationLimit$ 1 | SpellDescription$ Conjure the Power Nine into your library, then shuffle. Activate this ability only if your library contains 125 or more cards and only once. Exile CARDNAME.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:Whenever you conjure one or more cards, scry 1.{M}{M}{M},{3}: Conjure the Power Nine into your library, then shuffle. Activate this ability only if your library contains 125 or more cards and only once.Exile Mantle of Ancient Lore.

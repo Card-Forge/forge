@@ -1,0 +1,15 @@
+Name:Slobad's Boss Effect
+ManaCost:no cost
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Artifact | AddToughness$ 2 | EffectZone$ Command | Description$ Artifact creatures you control get +0/+2.
+T:Mode$ DamageDoneOnce | ValidTarget$ You | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever you are dealt damage, create X Scrap tokens, where X is the amount of damage dealt.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ scrap
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Permanent.namedScrap | PresentCompare$ GE5 | TriggerZones$ Command | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of your end step, if you have five or more Scrap tokens, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control." Then you sacrifice five scrap tokens.
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Permanent.namedScrap | Defined$ You | Amount$ 5 | RememberSacrificed$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent Card | ConditionCompare$ GE5 | TokenScript$ c_0_0_a_construct_total_artifacts | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Permanent.namedScrap | PresentCompare$ GE10 | TriggerZones$ Command | Execute$ TrigSacrificeAll | TriggerDescription$ At the beginning your upkeep, if you have ten or more Scrap tokens, exile all Scrap tokens and conjure a Darksteel Colossus onto the battlefield.
+SVar:TrigSacrificeAll:DB$ ChangeZoneAll | ChangeType$ Permanent.namedScrap | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Darksteel Colossus | Zone$ Battlefield
+SVar:X:TriggerCount$DamageAmount
+Oracle:Artifact creatures you control get +0/+2.\nWhenever you are dealt damage, create X Scrap tokens, where X is the amount of damage dealt.\nAt the beginning of your end step, if you have five or more Scrap tokens, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control." Then you sacrifice five scrap tokens.\nAt the beginning your upkeep, if you have ten or more Scrap tokens, exile all Scrap tokens and conjure a Darksteel Colossus onto the battlefield.

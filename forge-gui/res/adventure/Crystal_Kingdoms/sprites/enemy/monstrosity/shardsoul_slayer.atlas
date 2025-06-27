@@ -1,0 +1,86 @@
+shardsoul_slayer.png
+size: 512,320
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 225, 95
+  size: 16, 16      
+Idle 
+  xy: 14,28
+  size: 34,36 
+Idle 
+  xy: 78,28
+  size: 34,36 
+Idle 
+  xy: 142,28
+  size: 34,36 
+Idle 
+  xy: 206,28
+  size: 34,36 
+Idle 
+  xy: 270,28
+  size: 34,36 
+Idle 
+  xy: 334,28
+  size: 34,36 
+Idle 
+  xy: 398,28
+  size: 34,36 
+Walk
+  xy: 8, 90
+  size: 44,38
+Walk
+  xy: 72, 90
+  size: 44,38
+Walk
+  xy: 136, 90
+  size: 44,38
+Walk
+  xy: 200, 90
+  size: 44,38
+Walk
+  xy: 264, 90
+  size: 44,38
+Walk
+  xy: 328, 90
+  size: 44,38
+Walk
+  xy: 392, 90
+  size: 44,38
+Walk
+  xy: 456, 90
+  size: 44,38
+Attack 
+  xy: 10, 149
+  size: 55, 43
+Attack 
+  xy: 74, 149
+  size: 55, 43
+Attack 
+  xy: 138, 149
+  size: 55, 43
+Attack 
+  xy: 202, 149
+  size: 55, 43
+Attack 
+  xy: 266, 149
+  size: 55, 43
+Death 
+  xy: 15,277
+  size: 50, 43
+Death 
+  xy: 79,277
+  size: 50, 43
+Death 
+  xy: 143,277
+  size: 50, 43
+Death 
+  xy: 207,277
+  size: 50, 43
+Death 
+  xy: 271,277
+  size: 50, 43
+Death 
+  xy: 335,277
+  size: 50, 43

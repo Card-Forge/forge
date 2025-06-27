@@ -1,0 +1,11 @@
+Name:Slime Boss Effect
+ManaCost:no cost
+Colors:black,green
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPut | TriggerDescription$ At the beginning of your upkeep, put a slime counter on CARDNAME, then each opponent conjures X cards named Blasted Landscape into their library, where X is the amount of slime counters on CARDNAME.
+SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ SLIME | CounterNum$ 1 | SubAbility$ DBGunk
+SVar:DBGunk:DB$ MakeCard | Defined$ Opponent | Name$ Blasted Landscape | Zone$ Library | Amount$ X | Conjure$ True
+T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigGainLife | TriggerZones$ Command | TriggerDescription$ Whenever a player cycles a card, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:X:Count$CardCounters.SLIME
+Oracle:At the beginning of your upkeep, put a slime counter on Slime Boss Effect, then each opponent conjures X cards named Blasted Landscape into their library, where X is the amount of slime counters on Slime Boss Effect.\nWhenever a player cycles a card, you gain 2 life.

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="74">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlU0OgkAMhWfLAkQUbqC30IUh7OA2XsMDGBJZiKdy401MgxPG0g4dfmKMvuQtxmH6tZ0imadUxpjScTHcEnF5rEPZeaxdMOyc1q9x70HXpd/snX16X1sibjZWYdeHpD0H6yqmLRHXTxs3TZr1mHmW3iPFBeE6o7DxVFypJMyxXKjxsm8NaxduHdM2hfciZq6kXPNuzPNwh/o+KQaOD/XqZ1242JiL2WO5nCiumSsXf06uLT73e50rdcvn5cbE3qZQalsQ+RDzbOMuLf106fWVeHe4ODamKxdqK/eNbXH6mFNy04Rnwh7+Lkhy00zzG+ci7n9Lqk9wq9fsPgzbZPZW2lOO65IvcIf0tE8pqvmBerEM5+GevPd4Y+bGlfvXd+kJ07yAKw==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzVlc1OwkAQgOdCgKs3bHkA1Gdgyw0P8Cw+iXdBEoMnlBAehvg8zoKjs9P9bd0mbPKlbbqZj5mhs4MbgMEVcKua0db7Og2zmcIbwb1P/XzeUpleTk6vy5nDW6iwM9Yb08eUXHN6bX561tcuvLbn3F7N+yPAdo7X+a+7E6+lBlHe3QLgA/kU7BdmvF3gvc47xTtZAtwJ7pGHpRlX7pPvOW2+X9mDlB5dg/erd6FLLzlt3pG6YItFHn1GSGK8R4z5gntXyFqZv517OXxPE6/OUXtHFZ6fSFGZMQuLV9Y11Uu1PeeLvhWyrupxudfWzxQv76mvzuT1zahyVsf1n5VeV52p1t75OKvjyrGWr6XOJd6Pq7CXehCqq807+ZmPxDkmOjcOL1++79XnJTdx6IfrTD69YmdDiOfhXy4yN75ccyzFy3PR3pizNnUWck69OMd/e5s623jbOGO93yfe42I=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzllU0KAjEMhYsgIp5g1IXgD/6BN5jZioLn8CQuvYAK6kpQPI14Hls0mBnTdDK2uPDBw6qJ30srU6VkGs6EDZ5UT9I2aiRvc30+uZH2LlZ7+N6s8Xtf3Cj5NGZl1yG5wB7os2+i+SGDcch5OU88/R8jlB9+O5sB1xfh9omeiNg3+AyY2/g77snCdRlLwm1Plepod7V7U1lWzD3o3qOwX6rzjOYevuSa/drE7jrq/PNosPgNl9O/cfOI4o49PbO2zNwUl6unasG/5nJZbM+rENwLOjfg4Roup4RL5efmLCJbZrz2yaO4k/nz1XX3hJLhSM6qiFbVtLGKslslGdfcCaPXfTG03Bv3spu5rPE110qabctky2BjctybI7dUmGnjwpyhmK59prSuvp1HZoYs0/gBuMaNRg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlsFOg0AQhvegQY8evFTvCpJiome5NhB4LI8+QFuTnluE+IYywsRhOrvsLnDzT/5Qsst8zOwyW6X89JQNf1Pr5k3RmsVZpbJRd6maRcCl8T/fOoPa64HPn4vL8+q5B+TjO4D26XJc8H1vYESZue5jirLz/QKmeaHrvHumyafnxfcP157UE7k14UZl+56lH/dh48993AyvLlyTgDtmH41xdyNxOTex7B/Hdt5JcJz9cZNcP+7LtZEUK5nIDS324hJcG/1z9VzQs0M/k/olCPoj54btfWXguuQsfccQc8e4lEm5tI/MzeV50n61BLfp6y7lGQo9p5rIBfE+yfOE3I5F51PvqpiHy2tJBVw4C/E8BMcO5yLt07GwhpQZetZ0TIlm79BxrK2ppi+XbtyG5AyKhH2DtTUx68CNi2sG/yvAv2tXDL29UKq8UupVyAmZtxbcj+uh4RnkfmXdPTfMa1hsyjRx6+CciVwaH/zO5ty0Y1WgZ5q4EtPGNkyJ+63J04eJdZPW4gcjTMcF
+  </data>
+ </layer>
+ <layer id="8" name="Clutter2" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lktOwzAQhr1j1QuwgzalaUuQcgDYNY/S3gaQOAubPtKSvlA4FBsuwQyulakVO3aS9pd+OY4df/Z44oQxew1ixtYRL9FCyYix1Si/T/sNY/V4JvKOz9+Rca6feOkEjHUDXhfGflg+NMRdxzlT53XDXBMmdV3uBp7fSr4/rsktaBPe1eSmE2BLxhgcxnxN20lu0Y7Xu4nZ+DSeszC/dqeM9SVTLtYH07y/qA/JvTL1wtP6PCzuh1zv+XQPOzAPB9wdm/OE2oG+fQnzSBRzQa0ie2YViXj0pPnK9SrKyBrcghzF9k/gpOADeBvwuqlSRf7J7+GmJE/L9kKWq8g/mdu3yNM6qnvuNMlNINargngvLeJbhetArLsF8e5Ajn088usvy2+hb3nO0nZkUtuKnpOqM0vFXIT2OS10A+PdgtuatVKmmBty2xGPt1Ph7JrBmHPwQhrbj5r5xuk0j3LepWTCqrqHJsou9H3JrvTt54q54L63eIl59E3W7Gvyyeb/QsV9Ae7rkU3PK0/iImtfEiPUW8t+Lilh7c/4/vwY9MF9sNlqw1/LfzWRQmJ+v5o+VfagTDR2f7FciE0=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="168" y="479.5" width="160.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="350.25" y="31"/>
+  <object id="51" template="../../obj/treasure.tx" x="270.5" y="32.333"/>
+  <object id="52" template="../../obj/gold.tx" x="403.871" y="206.481"/>
+  <object id="54" template="../../obj/enemy.tx" x="288.623" y="55.4841">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Cold-Eyed Selkie&quot;]
+}</property>
+    <property name="enemy" value="Merfolk Elite"/>
+    <property name="speedModifier" type="float" value="4"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/booster.tx" x="381.883" y="147.478">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;LEG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;LEG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;LEG&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/manashards.tx" x="401" y="131.5"/>
+  <object id="58" template="../../obj/waypoint.tx" x="163.93" y="145.792"/>
+  <object id="59" template="../../obj/waypoint.tx" x="386.615" y="211.395"/>
+  <object id="60" template="../../obj/waypoint.tx" x="334" y="142.5"/>
+  <object id="61" template="../../obj/waypoint.tx" x="301.247" y="348.699"/>
+  <object id="62" template="../../obj/waypoint.tx" x="220.203" y="361.104"/>
+  <object id="63" template="../../obj/enemy.tx" x="365.954" y="241.335">
+   <properties>
+    <property name="enemy" value="Merfolk Avatar"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="59,61"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="222.807" y="200.828">
+   <properties>
+    <property name="enemy" value="Merfolk Avatar"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="73,62"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/enemy.tx" x="281.429" y="148.579">
+   <properties>
+    <property name="enemy" value="Merfolk Avatar"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="60,58"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="181.19" y="316.007">
+   <properties>
+    <property name="enemy" value="Water Elemental"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/collision.tx" x="-1" y="-16.5" width="482" height="16"/>
+  <object id="68" template="../../obj/collision.tx" x="-1" y="479.5" width="482" height="16"/>
+  <object id="69" template="../../obj/collision.tx" x="481" y="-5.0415" width="16" height="502.083"/>
+  <object id="70" template="../../obj/collision.tx" x="-15.5" y="-11.5415" width="16" height="502.083"/>
+  <object id="71" template="../../obj/manashards.tx" x="342.294" y="353.998"/>
+  <object id="72" template="../../obj/gold.tx" x="105.402" y="107.42"/>
+  <object id="73" template="../../obj/waypoint.tx" x="222.839" y="129.616"/>
+ </objectgroup>
+</map>

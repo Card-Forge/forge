@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="86">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Sun Magus&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcQJaHgUGaB0KDAIwtzTMy7I3ipY+9u3ggeDfUnp08CLHhCEb9O+rf4QRGmn9HAWUAAAPNGkU=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJx7ws7A8GQUj+JRPIpH8SgexSMCAwBnNdQ6
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1FsKgCAQBVD/zRVoG6u1WNuy194yYkik8s4QfUTCRVDGM4IYKqXCC3FZkJrWKDVW12nMcy7tb+YU57sxADbnvoiJ2qjLMREbcSVmyUbcWmjSsML7/u633SWm1zLTx7pZ6DqhTebZuZx/kmPfmdx/ErVLJtdN7U7voR68PtZKpsTNa+itW0H/aVYIl805
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBic4DEXA0MTN2H8lIv6diry4Fcnz0M9u4m1k5p2k2ontewmx050u8m1lxIwau+ovbj0kZsXYHmQHEBuPiQ331NiNzXsJNVuatqJbjcMN0PjrhGtPqKmneigEc3eZgrSPQArjCuE
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF2IC0FgODjBaqmKYmA4OWJm3tNQfaaYFmryvQTjca24sM/knSzy56gTY0vgIPBCvyQPjyPAgxfPqGKiDWv0MVjMbv8I5fbKBAEz9/FOAGAFzUC1I=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="274.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="208.402" y="64.8086">
+   <properties>
+    <property name="enemy" value="Master White Wizard"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/treasure.tx" x="195.5" y="50.5">
+   <properties>
+    <property name="reward">[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;White&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Jungle Shield&quot;},
+{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 1,
+&quot;cardName&quot;: &quot;Staff of the Sun Magus&quot;}]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/booster.tx" x="208.5" y="78">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="172" y="125.5">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="174" y="156.5">
+   <properties>
+    <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="170" y="190">
+   <properties>
+    <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="243" y="190">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="243.5" y="155">
+   <properties>
+    <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="243" y="124.5">
+   <properties>
+    <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/enemy.tx" x="120" y="102">
+   <properties>
+    <property name="enemy" value="Armored Knight"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="78,83,79,81,80,82,77,76"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/enemy.tx" x="300.5" y="106">
+   <properties>
+    <property name="enemy" value="Armored Knight"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="81,80,82,77,76,78,83,79"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/waypoint.tx" x="124" y="136"/>
+  <object id="77" template="../../obj/waypoint.tx" x="121.5" y="187"/>
+  <object id="78" template="../../obj/waypoint.tx" x="134.5" y="85.5"/>
+  <object id="79" template="../../obj/waypoint.tx" x="281.5" y="91"/>
+  <object id="80" template="../../obj/waypoint.tx" x="293" y="188"/>
+  <object id="81" template="../../obj/waypoint.tx" x="301" y="135.5"/>
+  <object id="82" template="../../obj/waypoint.tx" x="208" y="190"/>
+  <object id="83" template="../../obj/waypoint.tx" x="209" y="95.5"/>
+  <object id="84" template="../../obj/enemy.tx" x="207.5" y="144.5">
+   <properties>
+    <property name="enemy" value="Armored Knight"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="83,82"/>
+   </properties>
+  </object>
+  <object id="85" template="../../obj/manashards.tx" x="98.5" y="144"/>
+ </objectgroup>
+</map>

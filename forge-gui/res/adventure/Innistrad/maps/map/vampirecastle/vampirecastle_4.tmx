@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_2.tsx"/>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWw37E0gvqaqqqqqqqqqqqu8DFRHS7A==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmW0OgyAMhvlrhifYdh0PsZ1l7lz7uttMNhJtQFssSps2eX+QUMczKS9I1zjXDTp53eqaqfYejwTea+vc06d1aaf9YJs7b9y3BO950FwcQT/Y5s4b992D9/H/z18+3tbGmxtSeW8H5/pB90O8rY1XW/1+/O99pfROjJuah6370rzUeZAaC+f6UJIX44ex9RnroYEXW/eleW19Nt5aebG1GKsvSbw574ry+zmR4l3ysbGXaeBdo8ALPQMTFP/PCfh8DC88O6Z4JQSGd2kuBN6e4OUhKP6fE/D5nLxBEup3zkOW5r5EXk7/xaz1qfNLad5azkdb8ebkSua189E+vNiah9+vqOsD535SwvcNzv3kFvcLFB9dk2f3C9vy2v0CLqTuN7juFyih4X6hlv0G9p4g9INt7rxa/LcGGa9uGa9uBc4vNVqY7w==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1zEKgzAUxvG4OdjBQfACnbxPrTh5Ec/jJbr0FL2JRTuUDkKGQEt89pn4/8GDDCZ88UkwxgDyhsJde3cv3RUr3/3S37iF2t+PS25MbdU1104EAG6N0PkktQ4g6VH9XthWe9JO8F9dqp1Azjn5/swt2z4H4sL5DISD+wJwLK01njzm9wf771801jjEd/DSDrBTo3aAlWaPOcv3+xRNAgDQ8AalaD+G
+  </data>
+ </layer>
+ <layer id="8" name="Clutter" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2EEKgCAQQFEPYOuu1bru0qqDdIl2dS+hTYS0qbBCambiP5BBERyVcaFzQL6ulM7Apu3chup8HLBoFlp3rZveHxv1BAAAAAAA4NzkYxy9bB5faYoY60I2D7ynVXa3Gv4htZ1JjvBw3Lr93V31/yK1r3Bjjlap98DyvgAAaQv38hQy
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="65" template="../../obj/door_down.tx" x="816.832" y="303.333">
+   <properties>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4B.tmx"/>
+    <property name="teleportObjectId" value="67"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="405.666" y="515.667">
+   <properties>
+    <property name="enemy" value="Vampire"/>
+    <property name="waypoints" value="95,94"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="272.917" y="202.438">
+   <properties>
+    <property name="enemy" value="Gargoyle"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/treasure.tx" x="586.167" y="96.5"/>
+  <object id="70" template="../../obj/entry_left.tx" x="3.66667" y="305"/>
+  <object id="71" template="../../obj/enemy.tx" x="561.115" y="202.691">
+   <properties>
+    <property name="enemy" value="Gargoyle"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="560.857" y="411.421">
+   <properties>
+    <property name="enemy" value="Gargoyle 2"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="272.652" y="411.053">
+   <properties>
+    <property name="enemy" value="Gargoyle 2"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/enemy.tx" x="387.333" y="228">
+   <properties>
+    <property name="enemy" value="Bat"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="74,83,86,85"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/enemy.tx" x="454.667" y="314.667">
+   <properties>
+    <property name="enemy" value="Bat"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="87,84,85,83"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/enemy.tx" x="319.333" y="376.667">
+   <properties>
+    <property name="enemy" value="Bat"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="82,87,84,85,83"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/manashards.tx" x="356.667" y="62"/>
+  <object id="78" template="../../obj/manashards.tx" x="761.333" y="62.6667"/>
+  <object id="79" template="../../obj/manashards.tx" x="820" y="548.667"/>
+  <object id="80" template="../../obj/manashards.tx" x="576.667" y="480"/>
+  <object id="81" template="../../obj/booster.tx" x="812.667" y="425.333">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../obj/waypoint.tx" x="518.667" y="226.667"/>
+  <object id="83" template="../../obj/waypoint.tx" x="292.667" y="356"/>
+  <object id="84" template="../../obj/waypoint.tx" x="549.333" y="377.333"/>
+  <object id="85" template="../../obj/waypoint.tx" x="316.667" y="218.667"/>
+  <object id="86" template="../../obj/waypoint.tx" x="354.667" y="298"/>
+  <object id="87" template="../../obj/waypoint.tx" x="543.333" y="270"/>
+  <object id="88" template="../../obj/gate.tx" x="639.235" y="434.149">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;A big gate is blocking the path, through the bars you can see an imposing figure in the room beyond.&quot;,
+    &quot;options&quot;: [
+      { &quot;name&quot;: &quot;go away&quot; },
+      {
+        &quot;name&quot;: &quot;unlock with the key&quot;,
+        &quot;condition&quot;: [
+          { &quot;item&quot;: &quot;Sorin's Key&quot; }
+        ],
+        &quot;text&quot;: &quot;The gate is unlocked&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;continue&quot;,
+            &quot;action&quot;: [
+              { &quot;deleteMapObject&quot;: -1 },
+              { &quot;removeItem&quot;: &quot;Sorin's Key&quot; }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="92" template="../../obj/enemy.tx" x="417.333" y="100.667">
+   <properties>
+    <property name="enemy" value="Vampire"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="93" template="../../obj/enemy.tx" x="225.333" y="308">
+   <properties>
+    <property name="enemy" value="Vampire"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="94" template="../../obj/waypoint.tx" x="277.333" y="510.667"/>
+  <object id="95" template="../../obj/waypoint.tx" x="545.333" y="505.333"/>
+  <object id="96" template="../../obj/enemy.tx" x="638.667" y="306.667">
+   <properties>
+    <property name="enemy" value="Vampire Lord"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="98,99"/>
+   </properties>
+  </object>
+  <object id="97" template="../../obj/enemy.tx" x="751.333" y="147.333">
+   <properties>
+    <property name="enemy" value="Vampire Lord"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="98" template="../../obj/waypoint.tx" x="638.667" y="64"/>
+  <object id="99" template="../../obj/waypoint.tx" x="638.667" y="399.333"/>
+  <object id="105" template="../../obj/enemy.tx" x="734.676" y="508.364">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;*The poor peasant cowers before you* &quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;You are free to go, Sorin has been dealt with&quot;,
+        &quot;text&quot;: &quot;Thanks... Thank you sir, please take this item as a token of my gratitude&quot;,
+        &quot;options&quot;: [
+          {
+              &quot;name&quot;: &quot;(Take the Challenge Coin)&quot;,            
+              &quot;action&quot;: [
+              { &quot;deleteMapObject&quot;: -1 },
+              { &quot;addItem&quot;: &quot;Challenge Coin&quot; }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+] </property>
+    <property name="displayNameOverride" value="Captive"/>
+    <property name="enemy" value="Farmer"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

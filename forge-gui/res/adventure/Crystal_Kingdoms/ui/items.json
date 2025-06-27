@@ -1,0 +1,87 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [    
+    {
+      "type": "Image",
+      "name": "rewards_background",   
+      "image": "ui/reward.png",
+      "width": 480,
+      "height": 270
+    },      
+    {
+      "type": "Image",
+      "name": "market_background",   
+      "image": "ui/market.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "name": "cards",
+      "x": 5,
+      "y": 5,
+      "width": 405,
+      "height": 265
+    },
+    {
+      "type": "TextButton",
+      "name": "detail",
+      "text": "Detail",
+      "binding": "Equip",
+      "width": 48,
+      "height": 30,
+      "x": 420,
+      "y": 80
+    }  ,
+    {
+      "type": "TextButton",
+      "name": "done",
+      "text": "Back",
+      "width": 48,
+      "height": 30,
+      "binding": "Back",
+      "x": 420,
+      "y": 120
+    }  ,
+    {
+      "type": "Label",
+      "name": "playerGold",
+	  "style":"background",
+      "text": "[+Gold]",
+      "width": 48,
+      "height": 30,
+      "x": 420,
+      "y": 200
+    },
+	{
+      "type": "TextButton",
+      "name": "restock",
+      "text": "Restock",
+      "width": 48,
+      "height": 30,
+      "x": 420,
+      "y": 160
+    },
+	{
+      "type": "Label",
+      "name": "playerShards",
+	  "style":"background",
+      "text": "[+Shards]",
+      "width": 48,
+      "height": 30,
+      "x": 420,
+      "y": 240
+    },
+    {
+      "type": "TypingLabel",
+      "name": "shopName",
+      "style":"background",
+      "text": "A Street Market",
+      "width": 48,
+      "height": 20,
+      "x": 200,
+      "y": 0
+    }
+  ]
+}

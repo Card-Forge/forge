@@ -1,0 +1,7 @@
+Name:Hill Giant Club
+ManaCost:no cost
+Types:Artifact
+A:AB$ Effect | Cost$ PayShards<2> | ActivationZone$ Command | ActivationLimit$ 1 | SubAbility$ Eject | ValidTgts$ Creature | StaticAbilities$ UnblockableLE2 | RememberObjects$ Targeted | SpellDescription$ Target creature can't be blocked by creatures with power 2 or less this turn. Exile Hill Giant Club.
+SVar:UnblockableLE2:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | ValidBlocker$ Creature.powerLE2 | Description$ {c:Targeted} can't be blocked by creatures with power 2 or less this turn.
+SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:{M}{M}: Target creature can't be blocked by creatures with power 2 or less this turn. Exile Hill Giant Club.

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="69">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Dream Halls|TPR|1&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17" opacity="0.9">
+  <data encoding="base64" compression="zlib">
+   eJzFVNEOgyAMLG/yYXOGH102/Ssz4mcMszbrTsTCTHYJgYDcXYst0RuPjv6Cqz+HZ/U/pjEZ44hJ9w7fBvbi1NC8vf8e69mT78zerj1AzKgrvNqHK/AFYw51zLc0L6A7KM3gt/Gi75qYI99dFIdoiS/RxXhLb3WE3n9mzKdoO/aVy/Nezn7VlX08R20iu2arbonjDN09zpK3EqQmdb3X5rlFV///M6+nrl1Xeq61hjSk9rAfjexnz1drz8ohxy+cuC+9Bf1bIbWn443wXhfoZ0TbnlULa59BoLda1NR8C16fd0IQ
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJw7Zs7AcGwUj+JRPIpH8SgexSMCAwA4PvgW
+  </data>
+ </layer>
+ <layer id="12" name="Shroud" width="30" height="17" opacity="0.15">
+  <data encoding="base64" compression="zlib">
+   eJydVYENwjAMa1ceQfuBbzaOGRwxOGZwV0GilRrNy5K0I1KFEHHcOG5wbh9zcO6ePj+dfM6+PXdKvz2DQFJiSDnXbv3e+y32BofXwVzEPILNmSOm3MWv3BH4JCzek/PWesQgvTL3mLCX0x6bucZy3n69Z8bm3m5CjxnzKjVRT4k73/nLcobCxfVEjSRNEMNrYkQlJ3ZtPrMwFi/1rPGSX8hjOZfzkrbUa4vHSBuu3xxkj5EfaYZjt+XTfCn1S30Qt+YNbeY1/a2gt7H4bW2sxedXe+ctoe0hnHtknNo7J/013/OQPIxz773NyWuQD2r80v7Dnmlf1PaLpZkUM+wg1LwFZ/1XLAf81jfunVbuf3hrcxoMjY/youb8fXNOi28q2B+WMM/d
+  </data>
+ </layer>
+ <layer id="10" name="Lower Ground" width="30" height="17" opacity="0.3">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMKrgZGCq5iVBIRQCyk972wuy8w8XAIM5DP3vFeCCYnnaCQDU3Ao8C2oGbwPR0C4hvc9HXTike4vMQPjfC5G4R4f5ybtLyLky9BA+m3chmEQKiPKTlI5D6e1wQs6vQzCfFXnKAKA53IruJVnbjcxOu8KAlAJU9ILvv0rnMRbZ/JJZ/ABKlIbM=
+  </data>
+ </layer>
+ <layer id="9" name="Lower Bridges" width="30" height="17" opacity="0.3">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwEocw6MvQdH7aULUBogewcSqAD9fIAAVh0E4YLuzsHgplEwCmgJAFbyDA8=
+  </data>
+ </layer>
+ <layer id="11" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVUkOwjAMzJGmuaGyfaMU+Bgq2zsQ8DL2f3AjlmNhgtNIrVoxkg+tnZlJWjtKIS5aqVWqOscuRV0edQD+rzZu+vOurODMjFJPW7tPMKBmI9RJvDw3Mbh2ZLAG3vUdN2n7vOArt/mpjVfvN89514In2tfCrYea0nlYpqh9tzE08p5hrZQHjkLHdXN3bqAHex0Y5MrMLyfXfgiavi/QPetwvspfHWTMfyhfdWZtIubtH+B/qy5APRnqy7Y0qSep35vqV80WH9TvM/09b3y+scGA3NbrkbOWZ1ZMl/odZk1onvFzkThL5z9Wx3VJW+o9vo9jEuYkb4WnHUNodu/c88Fqzi3nKcFnv47PjTp3mnQXAWbuWywa/vdvxy9dUQ==
+  </data>
+ </layer>
+ <layer id="13" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFldsOwiAMhv9LuBp36gNpfCVPz7N5eKtNt8ewhJGQWklQrE16QWn+b4OWAsF6C9wMsLGvfqH43aLYcpo870p5Q5L/KTOnyblS/jdMSXOY/Wzq6ZbY409sf9bbimdZwtX+57ZSzZbwRuJMc21pML2t3/SvJlfzXlOur6nO6PCld1Orlzj7l70U6zjq92xG5Ni7BtiTHxp5LbG6pG+4Pp9Pfm9kfM84ki8dsHIhtnBhfWLsyJusPP8iW9rj3xYZEjeNtRke134CR5hSwA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lFEKwjAMhrO39RpWaS/i1XqBeSB92CEUFIpeQUGf7NgKNSZNu7Efwkqa5Eu7EoC8msxeb4XkQnUtwNUA3MwvlzNv/31Sr5zegfnJcAc54PdzzENb3gd31q0COCLbKZrfzeRhP47hcmulp757m8/n+oq+eyX3pMavZ7ha8fdP9VL67iMXkhoN2qcYaaxOaviZXGyRS/HiOq1RqpjD3SHFpWLW4KZMKraGu59yNsT/o87LzapYo1TSGx3MEX1R82xYn8PcuxgQJc0kPI8kewbmq4LrgD5HGveQyy1Wzexfu4el+gJ6niZx
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="199.974" y="271.026" width="32" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/gold.tx" x="333.108" y="97.7427"/>
+  <object id="56" template="../../obj/gold.tx" x="188.694" y="74.3844">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="335.727" y="242.192">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;mythicrare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.6,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythicrare&quot; ],
+  &quot;addMaxCount&quot;: 1
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/treasure.tx" x="99.0669" y="60.0876">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="28.9129" y="186.082"/>
+  <object id="50" template="../../obj/enemy.tx" x="80.4976" y="79.0146">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 4,
+ &quot;startBattleWithCard&quot;: [ &quot;Arcane Encyclopedia|M19|1&quot; ]
+}</property>
+    <property name="enemy" value="Master Green Wizard"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/enemy.tx" x="351.877" y="205.729">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 3,
+ &quot;startBattleWithCard&quot;: [ &quot;Dragon's Hoard|M19|1&quot; ]
+}</property>
+    <property name="enemy" value="Dragon"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="95.9379" y="221.137">
+   <properties>
+    <property name="enemy" value="Adept Blue Wizard"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="351.074" y="112.139">
+   <properties>
+    <property name="enemy" value="Penguin"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/enemy.tx" x="390.006" y="145.61">
+   <properties>
+    <property name="enemy" value="Jellyfish"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="60,59,58,61,58,59"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="28.3333" y="102.667">
+   <properties>
+    <property name="enemy" value="Jellyfish"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="61,58,59,60,59,58"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/waypoint.tx" x="106.667" y="162"/>
+  <object id="59" template="../../obj/waypoint.tx" x="274.333" y="161.333"/>
+  <object id="60" template="../../obj/waypoint.tx" x="446" y="88.3333"/>
+  <object id="61" template="../../obj/waypoint.tx" x="6" y="36"/>
+  <object id="62" template="../../obj/collision.tx" x="480.333" y="0.666667" width="16" height="272"/>
+  <object id="63" template="../../obj/collision.tx" x="-16.3333" y="1.66667" width="16" height="272"/>
+  <object id="64" template="../../obj/collision.tx" x="8.49983" y="271.667" width="479.667" height="16"/>
+  <object id="65" template="../../obj/collision.tx" x="1.1665" y="-15.6667" width="479.667" height="16"/>
+  <object id="66" template="../../obj/manashards.tx" x="337" y="42.3333"/>
+  <object id="67" template="../../obj/manashards.tx" x="356" y="233.333"/>
+  <object id="68" template="../../obj/manashards.tx" x="69.3333" y="65.3333"/>
+ </objectgroup>
+</map>

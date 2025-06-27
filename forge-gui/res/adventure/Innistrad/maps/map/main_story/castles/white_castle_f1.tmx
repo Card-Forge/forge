@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{&quot;startBattleWithCardInCommandZone&quot;: [ &quot;Akroma's Presence&quot; ]
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyz5GNgsBzFGNgGiK9jwdY0ttcKiLEBi1F7qYrn8TIwzAbiObwQ+2ZB+XN56ZO+YP6mtT/paS8oz9wC4ptY6BtQe6/hkAfR5OYtbGkolB17usImTm5YwOxt5GdgaCIBN/NTx155AQYGBRKwosCovaP2jto7au/A2LsXaM4+LFgVh/h+KtmLCygJ4JcftZc4DGtLYcOg9hXI3ll41NCizQUKC5C9A9G+Gsr2AgDj7PCe
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzbENADAIA0FvAANEGZUwOpHSU9LkT7JcvgTgF2HSuUub7S5/v322CwAAgF4BRR8CBQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="50" template="../../../obj/enemy.tx" x="195.849" y="285.618" width="32" height="32">
+   <properties>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Mox Pearl&quot; ]
+}</property>
+    <property name="enemy" value="Akroma"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="53" template="../../../obj/scroll.tx" x="209" y="77.6667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Pearl&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../obj/gate.tx" x="209" y="160">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;A big gate is blocking the path, through the bars you can see a Mox Pearl in the room beyond. (you need all five colored keys to open this gate)&quot;,
+		&quot;options&quot;: [
+			{ &quot;name&quot;: &quot;go away&quot; },
+			{
+				&quot;name&quot;: &quot;unlock with the five colored keys&quot;,
+				&quot;condition&quot;: [
+					{ &quot;item&quot;: &quot;Blue Key&quot; },
+					{ &quot;item&quot;: &quot;Green Key&quot; },
+					{ &quot;item&quot;: &quot;Black Key&quot; },
+					{ &quot;item&quot;: &quot;White Key&quot; },
+					{ &quot;item&quot;: &quot;Red Key&quot; }
+				],
+				&quot;text&quot;: &quot;The gate is unlocked&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;continue&quot;,
+						&quot;action&quot;: [
+							{ &quot;deleteMapObject&quot;: -1 },
+							{ &quot;removeItem&quot;: &quot;Blue Key&quot; },
+							{ &quot;removeItem&quot;: &quot;Green Key&quot; },
+							{ &quot;removeItem&quot;: &quot;Black Key&quot; },
+							{ &quot;removeItem&quot;: &quot;White Key&quot; },
+							{ &quot;removeItem&quot;: &quot;Red Key&quot; }
+						]
+					}
+				]
+			}
+		]
+	}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

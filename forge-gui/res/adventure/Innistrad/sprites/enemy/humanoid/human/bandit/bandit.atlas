@@ -1,0 +1,77 @@
+bandit.png
+size: 256,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 104, 75
+  size: 14, 14      
+Idle 
+  xy: 6,11
+  size: 21,21 
+Idle 
+  xy: 38,11
+  size: 21,21 
+Idle 
+  xy: 70,11
+  size: 21,21 
+Idle 
+  xy: 102,11
+  size: 21,21 
+Walk
+  xy: 6,40
+  size: 24,24 
+Walk
+  xy: 38,40
+  size: 24,24 
+Walk
+  xy: 70,40
+  size: 24,24 
+Walk
+  xy: 102,40
+  size: 24,24 
+Walk
+  xy: 134,40
+  size: 24,24 
+Walk
+  xy: 166,40
+  size: 24,24 
+Walk
+  xy: 198,40
+  size: 24,24 
+Walk
+  xy: 230,40
+  size: 24,24 
+Attack 
+  xy: 6,72
+  size: 24,24 
+Attack 
+  xy: 38,72
+  size: 24,24 
+Attack 
+  xy: 70,72
+  size: 24,24 
+Attack 
+  xy: 102,72
+  size: 24,24 
+Attack 
+  xy: 134,72
+  size: 24,24 
+Death 
+  xy: 6,138
+  size: 25,22 
+Death 
+  xy: 38,138
+  size: 25,22 
+Death 
+  xy: 70,138
+  size: 25,22 
+Death 
+  xy: 102,138
+  size: 25,22 
+Death 
+  xy: 134,138
+  size: 25,22 
+Death 
+  xy: 166,138
+  size: 25,22 

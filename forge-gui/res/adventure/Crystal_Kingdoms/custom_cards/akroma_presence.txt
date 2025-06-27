@@ -1,0 +1,8 @@
+Name:Akroma's Presence
+ManaCost:no cost
+Colors:white
+Types:Enchantment
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Creatures you control get +1/+1 and have vigilance.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:Creatures you control get +1/+1 and have vigilance.\nAt the beginning of your upkeep, you gain 2 life.

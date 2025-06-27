@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Howling Moon&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzlldsNgzAMRf1bYSYIrMMQ7Sy0c/HarbVSi1srT6qqH1zpKhG2c0IgCdGuW0s0M9G19X1sbRw1XD5tJXXyPFQr6tm3jve+tBP7GoynuDGHamVOS4Sr0vhk5h17347TXGSWStdAnKpFtuX2lcxanY2r7LNwj6zz+optmXnlcoTpYI+WcPXMSimXc4T7rXSNLbfj/3xf4aJ/xcxxkT02RPe3H014XMzBPMfpeyHE1TFWOIPlf7XsEXI0jndWLXcGqywbmRovtegJ6pZIqA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpHEM7kHBg7B8JedAwAE5sA4Q==
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydlb9OxDAMxiOVQ0muIHbgjgF4s1sYjo2NA93Ce7GUO3VBYufvg5BPjRXHctKCJatS6/jn2F9SY/5np96YH2vMncv9y05bv/Dlb13IsavkkWxijq2DIV5jY+3aDV7KQfnB/w7P85in8cO6w8qeqNZHl7+3PnH3kfsensvw/tPmdWnW23rNxF3EfJIJn/mBeeHz2LeR3KV+dWw2Gzf0aeVyJu31XmgHsSexvuNCP9HvmfhGfZKaaHy+TzKuIdovr682S8lcO137Wp2SDT0grlf0h5l82DQ3shtW59Tzxtlcu1RnSQewp7kxz23ey79Y7Uw2kbFVZncVmNdtiuuVPF0hN2m8xuZ7Je0hH+dqRnPXNMJ7pLFLTMSPcVcj+uRzlMY19+BSLpzDl8C8bPN7p7Qn+K0yf43J2Wc+ae6AxVI/NsrdSGw47qIjn2os2S7embg7XrG3yvyn/K/mQp/av0Pep+SogZ9lPveppt1TNSZ3+ldhvWT+ApBJfm8=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytVUtOw0AMtfis0jsUqYUgxDE4zRwEioDeKS0JYlXuAQdgyTzVr7EszyQLnmRNkrH9bI/HWYtIkiMezo7PlMdG5HohcpOlXYz79vuUwC7Shy9RnkFG4Pvvpcg+67xn6dVeCrwr1fPSK4fXJ5gzfHYyciT3TJ194B/fmQeeETfj97xJRl2i13UndcA3YyIGpwPOEq/18x9YBfFFdSYfYmXu1vY28N259w9dW117sxedr69xhFTZ82dvYeON8qVN6w0N1tPhncBaoGafBV7me2/sbI0A9kotrhLudN005b7iGdk+PmSyL0eIfdohp/Nc0IuoCQz8POE98n1CfGfOH+Ut9fsyc15VeKPZxjpbM9trpdpOpHdCaaai7lvNg3cH51vKv4Ta2UdzA9Ip/3Nlbvga1+Kye6hddH89v+UG12uWN62Jv+vRvp/PAHR2M/5b1if16XtwvMzjRfftvyPN5LQ13wT6jAnAHHlyOrDdNvM4/wAMm3OG
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="189.925" y="98.9167"/>
+  <object id="52" template="../../obj/gold.tx" x="337.083" y="256.25"/>
+  <object id="56" template="../../obj/enemy.tx" x="201.634" y="120.017">
+   <properties>
+    <property name="enemy" value="Wolf"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="84.5516" y="114.031">
+   <properties>
+    <property name="enemy" value="Wolf"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="67,69,65,66,68,69"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="375.232" y="107.175">
+   <properties>
+    <property name="enemy" value="Wolf"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="79,80,73,74,75,77,78,76,72,71"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/booster.tx" x="275.825" y="65.3557">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;XLN&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/waypoint.tx" x="94.8351" y="164.763"/>
+  <object id="66" template="../../obj/waypoint.tx" x="41.3609" y="170.933"/>
+  <object id="67" template="../../obj/waypoint.tx" x="117.459" y="70.8402"/>
+  <object id="68" template="../../obj/waypoint.tx" x="41.3609" y="120.201"/>
+  <object id="69" template="../../obj/waypoint.tx" x="109.232" y="122.943"/>
+  <object id="70" template="../../obj/gold.tx" x="192.871" y="33.134"/>
+  <object id="71" template="../../obj/waypoint.tx" x="377.289" y="169.562"/>
+  <object id="72" template="../../obj/waypoint.tx" x="311.474" y="170.933"/>
+  <object id="73" template="../../obj/waypoint.tx" x="309.418" y="88.665"/>
+  <object id="74" template="../../obj/waypoint.tx" x="168.191" y="87.9794"/>
+  <object id="75" template="../../obj/waypoint.tx" x="168.876" y="137.34"/>
+  <object id="76" template="../../obj/waypoint.tx" x="301.876" y="210.696"/>
+  <object id="77" template="../../obj/waypoint.tx" x="207.268" y="157.907"/>
+  <object id="78" template="../../obj/waypoint.tx" x="212.753" y="201.784"/>
+  <object id="79" template="../../obj/waypoint.tx" x="381.402" y="116.773"/>
+  <object id="80" template="../../obj/waypoint.tx" x="310.789" y="123.629"/>
+  <object id="81" template="../../obj/manashards.tx" x="50.2732" y="33.8196"/>
+ </objectgroup>
+</map>
