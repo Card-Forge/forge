@@ -125,7 +125,7 @@
       "height": 30,
       "x": 35,
       "y": 440
-    }
+    },
     {
       "type": "TextButton",
       "name": "toggleAward",
