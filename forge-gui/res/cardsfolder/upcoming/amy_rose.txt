@@ -1,0 +1,13 @@
+Name:Amy Rose
+ManaCost:2 R W
+Types:Legendary Creature Hedgehog Warrior
+PT:3/3
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, attach up to one target Equipment to her. Then up to one other target attacking creature gets +X/+0 until end of turn, where X is CARDNAME's power.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target equipment to attach to CARDNAME | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | Defined$ Self | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select another target attacking creature. | NumAtt$ +X
+SVar:X:Count$CardPower
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Equipment
+Oracle:Haste\nWhenever Amy Rose attacks, attach up to one target Equipment to her. Then up to one other target attacking creature gets +X/+0 until end of turn, where X is Amy Rose's power.
