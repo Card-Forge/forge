@@ -5,7 +5,7 @@
   "elements": [
     {
       "type": "Image",
-      "image": "ui/title_bg_portrait.png",
+      "image": "ui/inn_title_bg.png",
       "width": 270,
       "height": 480
     },

@@ -5,7 +5,7 @@
   "elements": [
 	{
       "type": "Image",
-      "image": "ui/tavern.png",
+      "image": "ui/inn_tavern.png",
       "width": 480,
       "height": 270
     },

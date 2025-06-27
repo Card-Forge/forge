@@ -26,34 +26,11 @@
 	"Skull"
 ],
 "enemies": [
-	"Ammit",
-	"Angel Warrior",
-	"Archer",
-	"Bat",
-	"Big Zombie",
-	"Crocodile",
-	"Curselord",
-	"Demon",
-	"Dune Beetle",
-	"Giant Spider",
-	"Horror",
-	"Insect",
-	"Mummy",
-	"Plague Belcher",
-	"Scarab",
-	"Scorpion",
-	"Vulture",
-	"Wild Rat",
-	"Zombie",
-	"Zombie Aven",
-	"Zombie Bat",
-	"Zombie Camel",
-	"Zombie Jackal",
-	"Zombie Minotaur",
-	"Zombie Naga",
-	"Zombie Lord"
+
 ],
-"pointsOfInterest": [],
+"pointsOfInterest": [
+
+],
 "structures": [
 	{
 		"N": 2,

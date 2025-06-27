@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<template>
- <object name="collsion" class="collision" width="21.5" height="290.5">
-  <properties>
-   <property name="type" value="collision"/>
-  </properties>
- </object>
-</template>

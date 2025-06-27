@@ -5,7 +5,7 @@
   "elements": [
     {
       "type": "Image",
-      "image": "ui/shardalley_portrait.png",
+      "image": "ui/inn_shard.png",
       "width": 270,
       "height": 480
     },      

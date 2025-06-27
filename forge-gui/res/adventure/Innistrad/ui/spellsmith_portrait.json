@@ -5,7 +5,7 @@
   "elements": [
     {
       "type": "Image",
-      "image": "ui/spellsmith_portrait.png",
+      "image": "ui/inn_spellsmith.png",
       "width": 270,
       "height": 480
     },
