@@ -8,3 +8,5 @@ ScryfallCode=EOS
 [cards]
 28 M Mutavault @Andrew Mar
 73 M Mutavault @Aeron Ng
+118 M Mutavault @Andrew Mar
+163 M Mutavault @Aeron Ng
