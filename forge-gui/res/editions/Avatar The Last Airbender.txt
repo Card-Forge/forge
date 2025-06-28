@@ -6,4 +6,4 @@ Type=Expansion
 ScryfallCode=TLA
 
 [cards]
-363 M Avatar Aang  @Bryan Konietzko
+363 M Avatar Aang @Bryan Konietzko
