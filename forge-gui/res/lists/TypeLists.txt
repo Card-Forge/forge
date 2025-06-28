@@ -96,6 +96,7 @@ Drone:Drones
 Druid:Druids
 Dryad:Dryads
 Dwarf:Dwarves
+Echidna:Echidnas
 Efreet:Efreets
 Egg:Eggs
 Elder:Elders
@@ -136,6 +137,7 @@ Hag:Hags
 Halfling:Halflings
 Hamster:Hamsters
 Harpy:Harpies
+Hedgehog:Hedgehogs
 Hellion:Hellions
 Hero:Heroes
 Hippo:Hippos

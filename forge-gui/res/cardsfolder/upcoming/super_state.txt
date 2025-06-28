@@ -1,0 +1,10 @@
+Name:Super State
+ManaCost:7
+Types:Legendary Enchantment Aura
+K:Enchant:Creature.YouCtrl:creature you control
+SVar:AttachAILogic:Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 9 | SetToughness$ 9 | AddKeyword$ Flying & First Strike & Trample & Haste | Description$ Enchanted creature has base power and toughness 9/9 and has flying, first strike, trample, and haste.
+T:Mode$ DamageDone | ValidSource$ Creature.EnchantedBy | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDmg | TriggerDescription$ Whenever enchanted creature deals combat damage to an opponent, it deals that much damage to each other opponent.
+SVar:TrigDmg:DB$ DamageAll | ValidPlayers$ OppNonTriggeredTarget | DamageSource$ TriggeredSource | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Enchant creature you control\nEnchanted creature has base power and toughness 9/9 and has flying, first strike, trample, and haste.\nWhenever enchanted creature deals combat damage to an opponent, it deals that much damage to each other opponent.
