@@ -42,9 +42,10 @@ jobs:
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
 
-      - name: Install old maven (3.8.1)
+      - name: Install old maven (3.8.1) cached from Forge servers
         run: |
-          curl -o apache-maven-3.8.1-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
+          #curl -o apache-maven-3.8.1-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
+          curl -o apache-maven-3.8.1.bin.tar.gz https://github.com/Card-Forge/forge-extras/raw/refs/heads/main/lib/apache-maven-3.8.1-bin.tar.gz
           tar xf apache-maven-3.8.1-bin.tar.gz
           export PATH=$PWD/apache-maven-3.8.1/bin:$PATH
           export MAVEN_HOME=$PWD/apache-maven-3.8.1
