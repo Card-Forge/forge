@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="95">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/inn_dungeon_floor.tsx"/>
+ <tileset firstgid="12530" source="../../tileset/Inn_Dungeon.tsx"/>
+ <tileset firstgid="17010" source="../../tileset/inn_main.tsx"/>
+ <layer id="7" name="Floor" width="20" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxbqcfAsHIUj+JRPIqHMZbhoY95AFR8HD4=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="20" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNk1sKgCAQRV1AS2gNLrbnGiKKPltAD9tVM5A0iDdJ+2jggFgeRi+TZ0rlgEIrVTpUGv8foqezbg0/8i10diVaor7WW4LPMpFjjPDw+xsHzoDvPXiyCWXkey8u60OFeke+Tt+k+p48sb4395UZ+PJgDmIH34yTh+wJvV+oRuCLLeT7oj+eqeZCrhF29uReygzK2Zs9fO07AUHVcJ0=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="20" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCANvLUkUcMIAkeMGRj4DRkYBIBYEIiFDFHlfxpA6MlpDAzBjgwMt4C4yoyBodoMu3ksJgwM/kAzAoA4EIiDgNgPycxKKNswHWgm0KxpQPwLaNZvHObFRTIw9AP1TADiiUA8CYj70Nz4MZ6B4RMQfwbiL/GkhwE66E8A2gfEE4F4UgJh9cbR+OV1ExkY9IBYH4gNEiFiM9KwqzUF+s0MiM2R/FiB5t/TQDPOAPFZID4HNc8sHSH/14iB4R8Q/wfisgzC7i+FqhHJRIhdcUSw9wLTyD5jwubo2OKWE3FCdT+y23EBWLwSitt6C1Q96OoaEyA0LB5A8QqKC2Li9jQed8L8gR4Xgw106zEw9ABxrx52eQAroU61
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="20" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMANLpkzMEwE4klAvMqBgWG1Ax7FRAAhCwida8XA8Apo1msKzRts4BwwnNqNMTGy/JQ0BoYz5qj60PkwIGABkesH4glA3Iemjhsob5QOoUFAyomBgR/I5rHA7UZ0uYlIZopm4vffYAX8OPzbDfSbhSHp5gkhmXcOGj6geOhBCqvpjgwMYY6Y9vUh5RkYOI/E/hjPwPAJiL/Ek+4uGMDlX2qAbiS3CgPTw11H3GphoCkBlf+AgB5QeFzAkeZpBWR4UDE1zMMGAFyiLRI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="195.625" y="270.665" width="26.375" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,55 @@
+{
+"startPointX": 0.20,
+"startPointY": 0.45,
+"noiseWeight": 0.6,
+"distWeight": 1.5,
+"name": "Stensia",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Black",
+"terrain": [
+	{
+		"spriteName": "Black_2",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "Black_3",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 1,
+"height": 1,
+"color": "110903",
+"spriteNames": [
+	"Skull"
+],
+"enemies": [
+
+],
+"pointsOfInterest": [
+
+],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/structures.atlas",
+		"sourcePath": "world/structures/models/mountain.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"periodicOutput": false,
+		"mappingInfo": [
+			{
+				"name": "mountain",
+				"color": "a07020",
+				"collision": true
+			}
+		]
+	}
+]
+}

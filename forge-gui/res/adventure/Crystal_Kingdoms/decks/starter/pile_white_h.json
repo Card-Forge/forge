@@ -1,0 +1,48 @@
+{                                    
+"name":"White",
+  "mainDeck": [
+    {  
+      "count":15, 
+      "cardName": "Plains" 
+    },        
+    {  
+      "count":6, 
+      "cardName": "Forest" 
+    },   
+    {  
+      "count":6, 
+      "cardName": "Island" 
+    },
+    {  
+      "count":9,
+      "colors": ["white"],
+      "rarity": ["Common"],   
+      "manaCosts": [1,2]
+    },
+    {  
+      "count":6,
+      "colors": ["green","blue"],
+      "rarity": ["Common"],   
+      "manaCosts": [1,2]
+    },
+    {  
+      "count":6,
+      "colors": ["white"],
+      "rarity": ["Common"],   
+      "manaCosts": [3,4]
+    },
+    {  
+      "count":3,
+      "colors": ["green","blue"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [3,4]
+    },
+    {  
+      "count":9,
+      "colors": ["white"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [5,6]
+    } 
+    ]
+}
+

@@ -1,0 +1,31 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/inn_title_bg.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Scroll",
+      "name": "settings",
+      "x": 15,
+      "y": 18,
+      "width": 382,
+      "height": 235
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "tr(lblBack)",
+      "binding": "Back",
+      "width": 52,
+      "height": 30,
+      "x": 415,
+      "y": 120
+    }
+  ]
+}

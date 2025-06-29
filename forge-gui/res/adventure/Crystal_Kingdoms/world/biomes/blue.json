@@ -1,0 +1,216 @@
+{
+"startPointX": 0.79,
+"startPointY": 0.43,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "FF10 Spira",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Blue",
+"terrain": [
+	{
+		"spriteName": "Blue_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "Blue_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.7,
+"height": 0.7,
+"color": "10a2e0",
+"spriteNames": [
+	"Shell"
+],
+"enemies": [
+	"Adept Blue Wizard",
+	"Aether Channeler",
+	"Angelic Overseer",
+	"Apprentice Blue Wizard",
+	"Bird",
+	"Blue Sliver",
+	"Challenger 20",
+	"Challenger 21",
+	"Challenger 22",
+	"Crab",
+	"Djinn",
+	"Doppelganger",
+	"Dragonfly",
+	"Drake",
+	"Elemental",
+	"Frog",
+	"Frost Titan",
+	"Geist",
+	"Geistmage",
+	"Gitaxian Underling",
+	"Hermit Crab",
+	"Horror",
+	"Ibis",
+	"Ibis-headed Aven Initiate",
+	"Illusionist",
+	"Jellyfish",
+	"Master Blue Wizard",
+	"Merfolk",
+	"Merfolk Avatar",
+	"Merfolk Fighter",
+	"Merfolk Lord",
+	"Merfolk Soldier",
+	"Merfolk warrior",
+	"Octopus",
+	"Owl",
+	"Pirate",
+	"Polar Bear",
+	"Rogue",
+	"Scorpion",
+	"Sea Monster",
+	"Tarkir Djinn",
+	"Turtle",
+	"Walking Brain",
+	"Water Elemental"
+
+],
+"pointsOfInterest": [
+	"Blue Castle",
+	"Island Capital",
+	"Island Town Generic",
+	"Island Town Identity",
+	"Island Town Tribal",
+	"Aerie",
+	"NestU",
+	"MerfolkPool",
+	"MerfolkPool1",
+	"MerfolkPool2",
+	"MerfolkPool3",
+	"MerfolkPool4",
+	"MerfolkPool5",
+	"DjinnPalace",
+	"DjinnPalace1",
+	"Factory",
+	"Factory1",
+	"FortBlue1",
+	"FortBlue2",
+	"FortBlue3",
+	"FortBlue4",
+	"FortBlue5",
+	"MageTowerX",
+	"MageTowerU",
+	"MageTowerU1",
+	"MageTowerU2",
+	"MageTowerU3",
+	"MageTowerU4",
+	"MageTowerU5",
+	"MageTowerU7",
+	"CaveU",
+	"CaveU1",
+	"CaveU2",
+	"CaveU3",
+	"CaveU4",
+	"CaveCE",
+	"CaveAmphin",
+	"GitaxianLab",
+	"Kiora Island",
+	"Teferi Hideout",
+	"Jacehold",
+	"Skep",
+	"Dream Halls",
+	"Crawlspace",
+	"Quest_LibraryOfVarsil"
+],
+"structures": [
+	{
+		"N":2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/blue_structures.atlas",
+		"sourcePath": "world/structures/models/blue.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.1,
+		"width": 0.1,
+		"symmetry": 8,
+		"periodicOutput": false,
+		"mappingInfo": [
+			{
+				"name": "water",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "tree",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "pineapple",
+				"color": "ffff00",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ff8000",
+				"collision": true
+			},
+			{
+				"name": "rock2",
+				"color": "804000",
+				"collision": true
+			},
+			{
+				"name": "rock3",
+				"color": "402000",
+				"collision": true
+			},
+			{
+				"name": "rock4",
+				"color": "201000",
+				"collision": true
+			}
+		]
+	},
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/blue_structures.atlas",
+		"sourcePath": "world/structures/models/beach.png",
+		"maskPath": "world/structures/masks/ring.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "water",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "tree",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "dune",
+				"color": "ff8000",
+				"collision": true
+			},
+			{
+				"name": "dune2",
+				"color": "402000",
+				"collision": true
+			}
+		]
+	}
+]
+}
