@@ -973,6 +973,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         showMenu(delay, 0f, 0f);
     }
 
+    /**
+     * Generic object that can be deleted to abort a delayed showMenu invocation.
+     */
+    private Object menuDelayCancel = null;
     public void showMenu(boolean delay, float left, float width) {
         if (contextMenuBuilder != null && getSelectionCount() > 0) {
             itemLeft = left;
@@ -981,7 +985,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 contextMenu = new ContextMenu();
             }
             if (delay) { //delay showing menu to prevent it hiding right away
+                final Object delayObj = new Object();
+                this.menuDelayCancel = delayObj;
                 FThreads.delayInEDT(50, () -> {
+                    if(menuDelayCancel != delayObj)
+                        return;
                     contextMenu.show();
                     Gdx.graphics.requestRendering();
                 });
@@ -994,6 +1002,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void closeMenu() {
         if (isContextMenuOpen())
             contextMenu.hide();
+        menuDelayCancel = null;
     }
 
     public boolean isContextMenuOpen() {

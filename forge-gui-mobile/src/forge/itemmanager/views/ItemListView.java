@@ -249,6 +249,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                             }
                             else if (count == 2 && index == prevTapIndex) {
                                 itemManager.activateSelectedItems();
+                                itemManager.closeMenu();
                             }
                         }
                     }
