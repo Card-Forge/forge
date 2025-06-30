@@ -508,7 +508,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         return currentEvent.draft != null && !currentEvent.isDraftComplete;
     }
 
-    public static AdventureEventData currentEvent;
+    public static AdventureEventData currentEvent; //TODO: Remove
 
     public void setEvent(AdventureEventData event) {
         currentEvent = event;
@@ -786,27 +786,31 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     @Override
     public void onClose(final Callback<Boolean> canCloseCallback) {
-        String deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
+        if(canCloseCallback == null) {
+            resolveClose(null, true);
+            return;
+        }
+
         Localizer localizer = Forge.getLocalizer();
-        if (deckError != null) {
-            //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
-            String warning = localizer.getMessage("lblAdventureDeckError", deckError);
-            FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, new Callback<>() {
+        if (isDrafting()) {
+            FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, new Callback<>() {
                 @Override
                 public void run(Boolean result) {
                     resolveClose(canCloseCallback, result == true);
                 }
             });
-            FOptionPane.showErrorDialog(deckError);
-            resolveClose(canCloseCallback, false);
+            return;
+        }
+        else if(getCurrentEvent() != null || getDeck().isEmpty()) {
+            resolveClose(canCloseCallback, true);
             return;
         }
 
-        if(canCloseCallback == null)
-            return;
-
-        if (isDrafting()) {
-            FOptionPane.showConfirmDialog(localizer.getMessage("lblEndAdventureEventConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, new Callback<>() {
+        String deckError = GameType.Adventure.getDeckFormat().getDeckConformanceProblem(getDeck());
+        if (deckError != null) {
+            //Allow the player to close the editor with an invalid deck, but warn them that cards may be swapped out.
+            String warning = localizer.getMessage("lblAdventureDeckError", deckError);
+            FOptionPane.showConfirmDialog(warning, localizer.getMessage("lblInvalidDeck"), false, new Callback<>() {
                 @Override
                 public void run(Boolean result) {
                     resolveClose(canCloseCallback, result == true);
