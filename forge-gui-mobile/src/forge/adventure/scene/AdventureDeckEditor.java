@@ -650,6 +650,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             for (CardEdition e : FModel.getMagicDb().getEditions()) {
                 editionsByName.put(e.getName().toLowerCase(), e);
                 editionsByName.put(e.getName().replace(":", "").toLowerCase(), e);
+                editionsByName.put(e.getName().replace("'", "").toLowerCase(), e);
             }
 
             String sketchbookPrefix = "landscape sketchbook - ";
