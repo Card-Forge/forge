@@ -1,20 +1,550 @@
 ## Unreleased
 ### No issue
 
-**llm v0 OK**
+**fixes**
 
 
-[5e56ef2f0ca3d66](https://github.com/Card-Forge/forge/commit/5e56ef2f0ca3d66) Gérôme Pistre *2025-05-31 12:03:01*
+[795221732fd5890](https://github.com/Card-Forge/forge/commit/795221732fd5890) Gérôme Pistre *2025-06-20 10:07:20*
 
 **wow**
 
 
-[b6402bca52fe0c2](https://github.com/Card-Forge/forge/commit/b6402bca52fe0c2) Gérôme Pistre *2025-05-30 17:35:51*
+[5bc48dd944fab5b](https://github.com/Card-Forge/forge/commit/5bc48dd944fab5b) Gérôme Pistre *2025-06-20 10:07:20*
 
 **123**
 
 
-[d5ac80045fcb1cc](https://github.com/Card-Forge/forge/commit/d5ac80045fcb1cc) Gérôme Pistre *2025-05-29 15:33:13*
+[3cb859813ecdd1e](https://github.com/Card-Forge/forge/commit/3cb859813ecdd1e) Gérôme Pistre *2025-06-20 10:07:20*
+
+**llm v0 OK**
+
+
+[3571cd6ec7b5db8](https://github.com/Card-Forge/forge/commit/3571cd6ec7b5db8) Gérôme Pistre *2025-06-20 10:07:20*
+
+**Fix ConcurrentModificationException (#7865) (#7867)**
+
+ * Fix ConcurrentModificationException (#7865)
+ * Update CostPayment.java
+
+[2b8b386882cb819](https://github.com/Card-Forge/forge/commit/2b8b386882cb819) Cees Timmerman *2025-06-20 05:33:32*
+
+**Update kuja_genome_sorcerer_trance_kuja_fate_defied.txt**
+
+ * Closes #7869
+
+[45a50274519552d](https://github.com/Card-Forge/forge/commit/45a50274519552d) Hans Mackowiak *2025-06-20 05:32:18*
+
+**Update Modern Horizons 3.txt**
+
+ * Closes #7864
+
+[2cb72f55f3d5025](https://github.com/Card-Forge/forge/commit/2cb72f55f3d5025) Hans Mackowiak *2025-06-19 08:12:05*
+
+**fix null pointer on draft refresh (#7863)**
+
+
+[fa27fbab46ccef1](https://github.com/Card-Forge/forge/commit/fa27fbab46ccef1) jpvorenk *2025-06-18 01:36:29*
+
+**Adventure:  Made tooltips instant and reduced size (#7787)**
+
+ * Made adventure reward tooltips instant and adjusted their size on Desktop
+ * Moved RewardTooltipManager to be an internal class of RewardActor.
+
+[87821fe2871af69](https://github.com/Card-Forge/forge/commit/87821fe2871af69) EfourC *2025-06-17 00:40:08*
+
+**card: correct sundown pass mana order (#7855)**
+
+ * card: correct sundown pass mana order
+
+[cee4bcd86723d66](https://github.com/Card-Forge/forge/commit/cee4bcd86723d66) Seth Milliken *2025-06-15 08:28:23*
+
+**Update yuna_grand_summoner.txt**
+
+
+[b9cc4c18a8cae75](https://github.com/Card-Forge/forge/commit/b9cc4c18a8cae75) tool4ever *2025-06-14 19:56:29*
+
+**Corrected height of buttons for disabled Auto and Quck save slots, and adjusted font color.**
+
+
+[4577e61940b52cc](https://github.com/Card-Forge/forge/commit/4577e61940b52cc) EfourC *2025-06-14 17:59:24*
+
+**Made the autoSell buttons for rewards semi-transparent unless selected and fixed transparency carrying over to other Actors in a batch. Also made small adjustment to card flipping speed to be a little more snappy and fit the sound effect better.**
+
+
+[9ac6147a9815132](https://github.com/Card-Forge/forge/commit/9ac6147a9815132) EfourC *2025-06-14 17:54:14*
+
+**Replace each card in a slot individually instead of replacing the whole slot at once. (Fixes higher rates of replacements) (#7854)**
+
+
+[74d4ea8a7874f23](https://github.com/Card-Forge/forge/commit/74d4ea8a7874f23) Chris H *2025-06-14 15:02:54*
+
+**Update adventure mode deck editor to support ESC key to go back.**
+
+
+[f2570b4cef9418f](https://github.com/Card-Forge/forge/commit/f2570b4cef9418f) Robin Woodby *2025-06-14 14:33:41*
+
+**Remove redundant call to openMenu causing flickering**
+
+
+[f0ebc3e6a0099f4](https://github.com/Card-Forge/forge/commit/f0ebc3e6a0099f4) Robin Woodby *2025-06-14 14:33:41*
+
+**Fix issue where eventTouchUp is firing before keyUp in GameHUD**
+
+
+[ed7fb03b9ca89a7](https://github.com/Card-Forge/forge/commit/ed7fb03b9ca89a7) Robin Woodby *2025-06-14 14:33:41*
+
+**Autofocus the first dialog option on desktop with keyboard input**
+
+ * Previously, autofocus only worked with gamepads connected.
+
+[e2f4c7f872622fe](https://github.com/Card-Forge/forge/commit/e2f4c7f872622fe) Robin Woodby *2025-06-14 14:33:41*
+
+**Fix setText call for done button on rewards page**
+
+
+[bebb894f3e566d5](https://github.com/Card-Forge/forge/commit/bebb894f3e566d5) Robin Woodby *2025-06-14 14:33:41*
+
+**Fix enter key not working to save/load in menus**
+
+
+[97e19390216bae3](https://github.com/Card-Forge/forge/commit/97e19390216bae3) Robin Woodby *2025-06-14 14:33:41*
+
+**Change back button to esc in shop and reward screens for consistency**
+
+
+[6891f9a5d59dfdf](https://github.com/Card-Forge/forge/commit/6891f9a5d59dfdf) Robin Woodby *2025-06-14 14:33:41*
+
+**Revert reward scene done button text to check mark except for shop**
+
+ * This way translation when loading from file works for &quot;Done&quot;
+
+[288c533c91d076d](https://github.com/Card-Forge/forge/commit/288c533c91d076d) Robin Woodby *2025-06-14 14:33:41*
+
+**Allow ESC to dismiss console in addition to android back button**
+
+
+[07db8e5a94e70d1](https://github.com/Card-Forge/forge/commit/07db8e5a94e70d1) Robin Woodby *2025-06-14 14:33:41*
+
+**Update crypt.tmx (#7853)**
+
+
+[37a62eed6b874d0](https://github.com/Card-Forge/forge/commit/37a62eed6b874d0) Simisays *2025-06-14 13:40:25*
+
+**Details Labels and Zooming on Adventure World Map (#7840)**
+
+ * Details Button on Adventure Map.
+ * Zooming on Adventure Map
+ * no Wildcard Import
+
+[3ee6b0e58d36cb1](https://github.com/Card-Forge/forge/commit/3ee6b0e58d36cb1) MD200210 *2025-06-13 04:12:28*
+
+**Add missing module descriptions in contributing docs**
+
+
+[ef28173b65bdeae](https://github.com/Card-Forge/forge/commit/ef28173b65bdeae) Robin Woodby *2025-06-12 01:05:20*
+
+**Remove double spaces and fix typos**
+
+
+[a26614c6b603d41](https://github.com/Card-Forge/forge/commit/a26614c6b603d41) Robin Woodby *2025-06-12 01:05:20*
+
+**Update forge-ai description to be more specific and less redundant**
+
+
+[7e6f77234544b10](https://github.com/Card-Forge/forge/commit/7e6f77234544b10) Robin Woodby *2025-06-12 01:05:20*
+
+**Update rydias_return.txt**
+
+
+[ee00293e4811a7b](https://github.com/Card-Forge/forge/commit/ee00293e4811a7b) Chris H *2025-06-11 20:21:50*
+
+**Fix Update Symbols**
+
+
+[ce977387e6cee12](https://github.com/Card-Forge/forge/commit/ce977387e6cee12) MatthiasD *2025-06-11 20:00:52*
+
+**Fix Cid (#7842)**
+
+
+[8cc45dbbd80420d](https://github.com/Card-Forge/forge/commit/8cc45dbbd80420d) MD200210 *2025-06-11 15:47:29*
+
+**Update and change FCA**
+
+
+[851a4c104ccff9b](https://github.com/Card-Forge/forge/commit/851a4c104ccff9b) MatthiasD *2025-06-11 14:28:49*
+
+**Fix: Update getCommander method to enable StorageImmediatelySerialized subfolders**
+
+
+[45ddf3fded99dad](https://github.com/Card-Forge/forge/commit/45ddf3fded99dad) Ryan Hamilton *2025-06-11 13:09:10*
+
+**Update depth_defiler.txt (#7829)**
+
+
+[cb538f40263c8d1](https://github.com/Card-Forge/forge/commit/cb538f40263c8d1) tool4ever *2025-06-09 08:36:34*
+
+**Adventure: AccountingLabel animation update**
+
+
+[6bd6db3c169ff50](https://github.com/Card-Forge/forge/commit/6bd6db3c169ff50) EfourC *2025-06-09 01:57:07*
+
+**Update queen_brahne.txt**
+
+
+[6af3940ffb00c4f](https://github.com/Card-Forge/forge/commit/6af3940ffb00c4f) Chris H *2025-06-09 01:43:34*
+
+**Cleanup: DBCleanup (#7822)**
+
+
+[66c864c8d72263f](https://github.com/Card-Forge/forge/commit/66c864c8d72263f) Renato Filipe Vidal Santos *2025-06-08 18:32:18*
+
+**Fix ff limited cards (#7819)**
+
+ * Fixing the power and toughness of two cards relevant in limited
+ * ---------
+ * Co-authored-by: Agetian &lt;stavdev@mail.ru&gt;
+
+[15354dd8e8e3794](https://github.com/Card-Forge/forge/commit/15354dd8e8e3794) rwalters *2025-06-08 05:37:56*
+
+**Update blot_out.txt**
+
+
+[215070fe3fe7d7c](https://github.com/Card-Forge/forge/commit/215070fe3fe7d7c) Renato Filipe Vidal Santos *2025-06-07 10:59:12*
+
+**Update overtaker.txt (#7815)**
+
+
+[ed73883e809512f](https://github.com/Card-Forge/forge/commit/ed73883e809512f) Renato Filipe Vidal Santos *2025-06-07 09:59:25*
+
+**Update ayula_queen_among_bears.txt (#7812)**
+
+ * Update ayula_queen_among_bears.txt
+ * Update rampaging_yao_guai.txt
+ * Update ulvenwald_bear.txt
+ * Update rampaging_yao_guai.txt
+
+[df85ebc0aa1b62a](https://github.com/Card-Forge/forge/commit/df85ebc0aa1b62a) Renato Filipe Vidal Santos *2025-06-07 07:43:33*
+
+**Update shambling_cieth.txt**
+
+ * Closes #7810
+
+[885a6af943acb5f](https://github.com/Card-Forge/forge/commit/885a6af943acb5f) Hans Mackowiak *2025-06-06 15:50:13*
+
+**Update tranquil_frillback.txt**
+
+
+[94820d4782a2b7b](https://github.com/Card-Forge/forge/commit/94820d4782a2b7b) Renato Filipe Vidal Santos *2025-06-06 15:05:11*
+
+**Update wicked_slumber.txt**
+
+
+[7f044e5ac30a681](https://github.com/Card-Forge/forge/commit/7f044e5ac30a681) Renato Filipe Vidal Santos *2025-06-06 13:11:59*
+
+**Update primeval_bounty.txt (#7807)**
+
+
+[1284f2362066025](https://github.com/Card-Forge/forge/commit/1284f2362066025) Renato Filipe Vidal Santos *2025-06-06 10:34:37*
+
+**Add Final Fantasy achievements by Marek14 (#7806)**
+
+ * - Add FIN achievements by Marek14.
+ * - Minor tweak.
+
+[bdcc8acdc47e26e](https://github.com/Card-Forge/forge/commit/bdcc8acdc47e26e) Agetian *2025-06-06 07:21:44*
+
+**[maven-release-plugin] prepare release forge-2.0.04**
+
+
+[f8b3f9dd307b4bd](https://github.com/Card-Forge/forge/commit/f8b3f9dd307b4bd) GitHub Actions *2025-06-06 03:37:40*
+
+**[maven-release-plugin] prepare for next development iteration**
+
+
+[7a277ce28390fee](https://github.com/Card-Forge/forge/commit/7a277ce28390fee) GitHub Actions *2025-06-06 03:37:40*
+
+**Automate patch version increment**
+
+
+[73a9dfcf43283fa](https://github.com/Card-Forge/forge/commit/73a9dfcf43283fa) Chris H *2025-06-06 03:37:40*
+
+**Automate patch version increment**
+
+
+[840f3ea96c2a2fe](https://github.com/Card-Forge/forge/commit/840f3ea96c2a2fe) Chris H *2025-06-06 02:45:57*
+
+**Update flatten to work with full release**
+
+
+[51929434be82435](https://github.com/Card-Forge/forge/commit/51929434be82435) Chris H *2025-06-06 02:45:57*
+
+**fixed weapons_vendor.txt power/toughness**
+
+
+[3ec480afa463119](https://github.com/Card-Forge/forge/commit/3ec480afa463119) gsonnier333 *2025-06-06 01:21:27*
+
+**Update summon_g_f_ifrit.txt**
+
+
+[3d19e9e44456a99](https://github.com/Card-Forge/forge/commit/3d19e9e44456a99) Chris H *2025-06-06 01:21:14*
+
+**Fixing Animate Dead and similar effects)**
+
+
+[6d987791f708ada](https://github.com/Card-Forge/forge/commit/6d987791f708ada) Renato Filipe Vidal Santos *2025-06-05 12:25:08*
+
+**Incidental fixes: 2025-06-05**
+
+
+[7b7da00c22afbd1](https://github.com/Card-Forge/forge/commit/7b7da00c22afbd1) Renato Filipe Vidal Santos *2025-06-05 06:54:38*
+
+**Update stangg.txt**
+
+
+[34791bd89223d61](https://github.com/Card-Forge/forge/commit/34791bd89223d61) tool4ever *2025-06-05 06:53:38*
+
+**Add files via upload**
+
+
+[e6bcd1be72ab1d0](https://github.com/Card-Forge/forge/commit/e6bcd1be72ab1d0) Renato Filipe Vidal Santos *2025-06-05 00:33:46*
+
+**Merge pull request #7794 from paulsnoops/fin-formats**
+
+ * Add Final Fantasy to formats
+
+[4cac35498323119](https://github.com/Card-Forge/forge/commit/4cac35498323119) Paul Hammerton *2025-06-04 17:11:13*
+
+**Add Final Fantasy to formats**
+
+
+[042f7f77a9d7f13](https://github.com/Card-Forge/forge/commit/042f7f77a9d7f13) Paul Hammerton *2025-06-04 17:06:21*
+
+**Update summon_leviathan.txt**
+
+ * Fix Draw
+
+[5fbb1dd0cda3dbe](https://github.com/Card-Forge/forge/commit/5fbb1dd0cda3dbe) Hans Mackowiak *2025-06-04 06:55:00*
+
+**Update summon_leviathan.txt**
+
+ * Closes #7784
+
+[bb14dfc00ec59ad](https://github.com/Card-Forge/forge/commit/bb14dfc00ec59ad) Hans Mackowiak *2025-06-04 05:20:24*
+
+**Update fin.rnk**
+
+
+[f83cc4ccfa08f25](https://github.com/Card-Forge/forge/commit/f83cc4ccfa08f25) Renato Filipe Vidal Santos *2025-06-03 15:05:10*
+
+**Update zodiark_umbral_god.txt**
+
+
+[d0d6835a5d7d88e](https://github.com/Card-Forge/forge/commit/d0d6835a5d7d88e) tool4ever *2025-06-03 13:24:17*
+
+**SpellAbility: set CardState inside constructor**
+
+
+[104bc8fc55bb7b6](https://github.com/Card-Forge/forge/commit/104bc8fc55bb7b6) tool4EvEr *2025-06-03 11:26:25*
+
+**Adventure: added support for dynamic deck count (#7669)**
+
+ * Added: utility method for adding an integer selecting combo-box.
+ * Added: Adventure now supports dynamic amount of decks
+ * Tweaked: lowered max deck count to 20.
+ * Added: dynamic deck count can&#x27;t ever be higher than the maximum in current version.
+
+[057dd867a85568a](https://github.com/Card-Forge/forge/commit/057dd867a85568a) SprinkleMeTimbers *2025-06-03 10:17:30*
+
+**Update some names in fin rankings (#7776)**
+
+
+[9eed8f5095ef37f](https://github.com/Card-Forge/forge/commit/9eed8f5095ef37f) Chris H *2025-06-03 10:17:18*
+
+**Migrate FIN upcoming (#7777)**
+
+
+[1f62be977340ca3](https://github.com/Card-Forge/forge/commit/1f62be977340ca3) Chris H *2025-06-03 10:13:01*
+
+**Update CardState updateSpellAbilities only when not inPlay (#7780)**
+
+ * Fix copy order
+
+[7a46f92059212c7](https://github.com/Card-Forge/forge/commit/7a46f92059212c7) Hans Mackowiak *2025-06-03 10:12:35*
+
+**attachAuraOnIndirectETB: fix missing activator**
+
+
+[cfa79b96761bd74](https://github.com/Card-Forge/forge/commit/cfa79b96761bd74) tool4EvEr *2025-06-03 07:54:37*
+
+**Fix Dark Depths triggering vs. Blood Moon (#7768)**
+
+
+[c0a63fa15b17a2c](https://github.com/Card-Forge/forge/commit/c0a63fa15b17a2c) tool4ever *2025-06-03 06:07:10*
+
+**Add files via upload**
+
+
+[c61537ae1668a79](https://github.com/Card-Forge/forge/commit/c61537ae1668a79) Renato Filipe Vidal Santos *2025-06-03 03:44:22*
+
+**Add files via upload**
+
+
+[3871095b926b1f2](https://github.com/Card-Forge/forge/commit/3871095b926b1f2) Renato Filipe Vidal Santos *2025-06-03 03:44:22*
+
+**Update cave_bigzombie.tmx**
+
+
+[dee846da4961241](https://github.com/Card-Forge/forge/commit/dee846da4961241) Simisays *2025-06-03 02:08:08*
+
+**fix incorrect resource name**
+
+
+[2477553d1341956](https://github.com/Card-Forge/forge/commit/2477553d1341956) Jason Vorenkamp *2025-06-03 01:46:37*
+
+**Cleaning upcoming: 2025-06-02**
+
+
+[c9df7d7f8eaa292](https://github.com/Card-Forge/forge/commit/c9df7d7f8eaa292) Renato Filipe Vidal Santos *2025-06-02 16:02:17*
+
+**(Adventure) Fix draft scene transition (#7666)**
+
+ * Fixing an issue in which touching the space the map occupies outside of the world map does not allow the player to move (very relevant on maps with content in the top left corner)
+ * Fixing a bug in which the transition screen&#x27;s non-blocking of the start match button can be clicked multiple times, which results in a crash when the match ends
+
+[53cb093f9efcdea](https://github.com/Card-Forge/forge/commit/53cb093f9efcdea) rwalters *2025-06-02 14:24:50*
+
+**Added Draft Info (#7764)**
+
+ * FIN Draft Info
+ * (cherry picked from commit ad0385617b26391efa2b866157eea674ea850e1e)
+ * Correction
+ * Correction
+ * Correction
+
+[28e86970dc30c97](https://github.com/Card-Forge/forge/commit/28e86970dc30c97) MD200210 *2025-06-02 14:24:10*
+
+**Fix sketchbooks that are missing colons in the name**
+
+
+[f847fc1669f7513](https://github.com/Card-Forge/forge/commit/f847fc1669f7513) Chris H *2025-06-02 11:22:26*
+
+**CardState: fix Android not having stream().toList(); Closes #7761**
+
+
+[f3df55177a687aa](https://github.com/Card-Forge/forge/commit/f3df55177a687aa) Hans Mackowiak *2025-06-02 05:10:26*
+
+**Hotfix PaperCard edition issues**
+
+
+[be6f3451273f7c7](https://github.com/Card-Forge/forge/commit/be6f3451273f7c7) Chris H *2025-06-02 02:50:58*
+
+**fix: do not steal keyboard focus when "Visually Alert on Receipt of Priority" is enabled**
+
+ * When the &quot;Visually Alert on Receipt of Priority&quot; feature is enabled,
+ * the &#x60;showTab()&#x60; call at the beginning of &#x60;forge.gui.framework.SDisplayUtil.remind()&#x60;
+ * steals focus from the primary button whenever anything goes on the
+ * stack.
+ * This change, previously suggested by pfps as probably not necessary, is
+ * indeed necessary after all to prevent that focus stealing by restoring
+ * focus to the previous owner only if the owner was an &#x60;FButton&#x60;.
+ * fixes https://github.com/Card-Forge/forge/issues/7660
+
+[7fa89cbc2ee9c41](https://github.com/Card-Forge/forge/commit/7fa89cbc2ee9c41) Seth Milliken *2025-06-01 18:17:09*
+
+**fixed locke_treasure_hunter.txt unblockable condition (#7752)**
+
+
+[567e13c92b4fcc7](https://github.com/Card-Forge/forge/commit/567e13c92b4fcc7) Greg Sonnier *2025-06-01 08:30:27*
+
+**CardState: Refactor LandAbility/Aura/PermSpell (#7680)**
+
+ * CardState: Refactor LandAbility/Aura/PermSpell
+ * Update CardState.java
+ * Fix Room
+ * unify manaAbilities and nonManaAbilities and fix Room cards
+ * CardView: fix Left&amp;Right Split not update abilities
+ * AbilityFactory: make Fuse Ability Secondary
+ * CardFactory: remove extra logic for LeftSplit and RightSplit
+ * AbilityFactory: set OriginalAbility for Fuse Parts
+ * SpellPermanent: fix Desc for CardState
+ * PermanentCreatureEffect: use getBasePowerString/getBaseToughnessString
+ * LandAbility: fix Modal Lands
+
+[6f5a933de39e270](https://github.com/Card-Forge/forge/commit/6f5a933de39e270) Hans Mackowiak *2025-06-01 07:53:40*
+
+**Add TextBoxExchangeEffect Ability and 'Deadpool, Trading Card' (#7637)**
+
+ * capure Textboxes to avoid LKI copy
+ * Fix copying keyworded traits twice
+ * Support keepTextChanges across all traits
+ * Co-authored-by: kvn &lt;kevni@secure.mailbox.org&gt;
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@&gt;
+
+[e40567c9c8ccddb](https://github.com/Card-Forge/forge/commit/e40567c9c8ccddb) kvn1338 *2025-06-01 07:19:50*
+
+**Fix only turning fully unlocked rooms face down (#7742)**
+
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@&gt;
+
+[928ac875b5edbf1](https://github.com/Card-Forge/forge/commit/928ac875b5edbf1) tool4ever *2025-05-31 11:28:52*
+
+**Merge pull request #7740 from paulsnoops/edition-updates**
+
+ * Edition updates: FCA, FIC, FIN, SLD
+
+[f4831bc51b666ee](https://github.com/Card-Forge/forge/commit/f4831bc51b666ee) Paul Hammerton *2025-05-31 10:19:28*
+
+**Edition updates: FCA, FIC, FIN, SLD**
+
+
+[d3e0e79325b402c](https://github.com/Card-Forge/forge/commit/d3e0e79325b402c) Paul Hammerton *2025-05-31 10:05:48*
+
+**Add files via upload (#7730)**
+
+
+[ac3015eff132805](https://github.com/Card-Forge/forge/commit/ac3015eff132805) Renato Filipe Vidal Santos *2025-05-31 07:52:06*
+
+**Fix Estinien Varlineau (#7738)**
+
+
+[554e73e3526d461](https://github.com/Card-Forge/forge/commit/554e73e3526d461) tool4ever *2025-05-31 06:42:04*
+
+**line endings**
+
+
+[fe86bb1be34c1d7](https://github.com/Card-Forge/forge/commit/fe86bb1be34c1d7) Hans Mackowiak *2025-05-30 22:01:54*
+
+**The FINAL Fantasy cards (#7736)**
+
+
+[f98eca392506eea](https://github.com/Card-Forge/forge/commit/f98eca392506eea) Fulgur14 *2025-05-30 18:01:51*
+
+**4 FIN cards (#7727)**
+
+
+[8506fd2bab63264](https://github.com/Card-Forge/forge/commit/8506fd2bab63264) Fulgur14 *2025-05-30 18:01:34*
+
+**Saga: do State-Based and Turn-Based Action only with Chapters (#7737)**
+
+
+[c2ffa227e25d625](https://github.com/Card-Forge/forge/commit/c2ffa227e25d625) Hans Mackowiak *2025-05-30 17:16:15*
+
+**line endings**
+
+
+[f33f780b257bd0e](https://github.com/Card-Forge/forge/commit/f33f780b257bd0e) Hans Mackowiak *2025-05-30 16:58:30*
+
+**FIN: Memories Returning (#7731)**
+
+
+[855e4dcabd2b40d](https://github.com/Card-Forge/forge/commit/855e4dcabd2b40d) Renato Filipe Vidal Santos *2025-05-30 08:23:13*
+
+**Couple fixes (#7732)**
+
+ * Update breaching_hippocamp.txt
+ * Update skanos_dragon_vassal.txt
+
+[40c9a06b21f9d07](https://github.com/Card-Forge/forge/commit/40c9a06b21f9d07) Fulgur14 *2025-05-30 05:52:06*
 
 **Update INSTALLATION.txt**
 
