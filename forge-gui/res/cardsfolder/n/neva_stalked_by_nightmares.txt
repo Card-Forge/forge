@@ -4,7 +4,7 @@ Types:Legendary Creature Human Noble
 PT:2/2
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters, return target creature or enchantment card from your graveyard to your hand.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl,Enchantment.YouCtrl | TgtPrompt$ Select target creature or enchantment you control in your graveyard
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl,Enchantment.YouCtrl | TgtPrompt$ Select target creature or enchantment card in your graveyard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on NICKNAME, then scry 1.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 1
