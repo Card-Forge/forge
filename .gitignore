@@ -1,11 +1,14 @@
 # Ignore IDEA config files
 
-*.idea
+*.idea/*
 *.iml
 *.tmp
 .metadata
 .recommenders
 
+# Except project codeStyle
+!.idea/codeStyles/
+!.idea/codeStyles/Project.xml
 
 # Ignore Eclipse config files
 
