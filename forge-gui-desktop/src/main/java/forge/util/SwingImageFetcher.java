@@ -10,7 +10,11 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SwingImageFetcher extends ImageFetcher {
+    private static final Logger log = LoggerFactory.getLogger(SwingImageFetcher.class);
 
     @Override
     protected Runnable getDownloadTask(String[] downloadUrls, String destPath, Runnable notifyObservers) {
@@ -39,7 +43,7 @@ public class SwingImageFetcher extends ImageFetcher {
             if (!newdespath.contains(".full") && urlToDownload.startsWith(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD) && !destPath.startsWith(ForgeConstants.CACHE_TOKEN_PICS_DIR))
                 newdespath = newdespath.replace(".jpg", ".fullborder.jpg"); //fix planes/phenomenon for round border options
             URL url = new URL(urlToDownload);
-            System.out.println("Attempting to fetch: " + url);
+            log.info("Attempting to fetch: {}", url);
             BufferedImage image = ImageIO.read(url);
             // First, save to a temporary file so that nothing tries to read
             // a partial download.
@@ -49,25 +53,25 @@ public class SwingImageFetcher extends ImageFetcher {
             if (ImageIO.write(image, "jpg", destFile)) {
                 // Now, rename it to the correct name.
                 if (destFile.renameTo(new File(newdespath))) {
-                    System.out.println("Saved image to " + newdespath);
+                    log.info("Saved image to: {}", newdespath);
                     SwingUtilities.invokeLater(notifyObservers);
                 } else {
-                    System.err.println("Failed to rename image to " + newdespath);
+                    log.error("Failed to rename image to: {}", newdespath);
                     return false;
                 }
             } else {
-                System.err.println("Failed to save image from " + url + " as jpeg");
+                log.error("Failed to save image from jpeg: {}", url);
                 // try to save image as png instead
                 if (ImageIO.write(image, "png", destFile)) {
                     String newPath = newdespath.replace(".jpg", ".png");
                     if (destFile.renameTo(new File(newPath))) {
-                        System.out.println("Saved image to " + newPath);
+                        log.info("Saved image to: {}", newPath);
                         SwingUtilities.invokeLater(notifyObservers);
                     } else {
-                        System.err.println("Failed to rename image to " + newPath);
+                        log.error("Failed to rename image to: {}", newPath);
                     }
                 } else {
-                    System.err.println("Failed to save image from " + url + " as png");
+                    log.error("Failed to save image as png from: {}", url);
                 }
                 return false;
             }
@@ -102,7 +106,7 @@ public class SwingImageFetcher extends ImageFetcher {
                         break;
                     }
                 } catch (IOException e) {
-                    System.err.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
+                    log.error("Failed to download card image: {} ({})", destPath, e.getMessage());
                     if (urlToDownload.contains("tokens")) {
                         int setIndex = urlToDownload.lastIndexOf('_');
                         int typeIndex = urlToDownload.lastIndexOf('.');
@@ -115,7 +119,7 @@ public class SwingImageFetcher extends ImageFetcher {
                                 break;
                             }
                         } catch (IOException t) {
-                            System.err.println("Failed to download setless token [" + destPath + "]: " + e.getMessage());
+                            log.error("Failed to download setless token: {} ({})", destPath, e.getMessage());
                         }
                     }
                 }
