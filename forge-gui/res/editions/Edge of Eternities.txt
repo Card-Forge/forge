@@ -10,6 +10,7 @@ ScryfallCode=EOE
 35 R The Seriema @Sergey Glushakov
 115 M Sothera, the Supervoid @Dominik Mayer
 189 U Harmonious Grovestrider @Ron Spencer
+212 U Alpharael, Dreaming Acolyte @Cristi Balanescu
 225 U Sami, Ship's Engineer @Zara Alfonso
 233 U Tannuk, Memorial Ensign @David Auden Nash
 251 R Breeding Pool @Constantin Marin
@@ -25,4 +26,10 @@ ScryfallCode=EOE
 287 M Tezzeret, Cruel Captain @Magali Villeneuve
 323 R The Seriema @Sergey Glushakov
 360 M Sothera, the Supervoid @Mateusz Urbanowicz
+367 L Plains @Adam Paquette
+368 L Island @Adam Paquette
+369 L Swamp @Adam Paquette
+370 L Mountain @Adam Paquette
+371 L Forest @Adam Paquette
 382 M Sothera, the Supervoid @Micha Huigen
+386 M Sothera, the Supervoid @Mateusz Urbanowicz

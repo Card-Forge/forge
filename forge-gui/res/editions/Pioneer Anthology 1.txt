@@ -1,0 +1,19 @@
+[metadata]
+Code=PA1
+Date=2025-05-05
+Name=Pioneer Anthology 1
+Type=Online
+ScryfallCode=PA1
+
+[cards]
+1 C Triton Shorestalker @Svetlin Velinov
+2 R Battle at the Bridge @Chris Rallis
+3 U Magmatic Insight @Ryan Barger
+4 U Roast @Zoltan Boros
+5 U Kazuul's Toll Collector @Greg Staples
+6 U Nissa's Defeat @Kieran Yanner
+7 U Rakdos Charm @Zoltan Boros
+8 M Borborygmos Enraged @Aleksi Briclot
+9 U Warping Wail @Jason Felix
+10 U Encroaching Wastes @Richard Wright
+11 R Sanctum of Ugin @James Paick
