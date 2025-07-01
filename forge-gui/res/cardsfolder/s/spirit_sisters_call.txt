@@ -5,7 +5,8 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigChoose:DB$ ChooseCard | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Choose target permanent card in your graveyard | TgtZone$ Graveyard | DefinedCards$ Targeted | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | Optional$ True | SacValid$ Permanent.sharesCardTypeWith Targeted | SacMessage$ permanent that shares a card type with the chosen card | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Defined$ Targeted | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Replacements$ ReplaceLeaves | Defined$ Targeted | Duration$ Permanent
+SVar:DBAnimate:DB$ Animate | ConditionDefined$ Remembered | ConditionPresent$ Card | Replacements$ ReplaceLeaves | Defined$ Targeted | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:ReplaceLeaves:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If this permanent would leave the battlefield, exile it instead of putting it anywhere else.
 SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
 DeckHas:Ability$Graveyard|Sacrifice
