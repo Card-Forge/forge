@@ -24,4 +24,5 @@ public class ConfigData {
     public String[] restrictedEditions;
     public String[] allowedEditions;
     public String[] restrictedEvents;
+    public String[] allowedJumpstart;
 }

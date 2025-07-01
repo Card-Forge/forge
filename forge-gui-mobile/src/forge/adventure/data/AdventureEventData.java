@@ -403,8 +403,12 @@ public class AdventureEventData implements Serializable {
             }
         }
         ConfigData configData = Config.instance().getConfigData();
-        if (configData.allowedEditions != null) {
-            List<String> allowed = Arrays.asList(configData.allowedEditions);
+        if (configData.allowedJumpstart != null) {
+            Set<String> allowed = Set.of(configData.allowedJumpstart);
+            legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
+        }
+        else if (configData.allowedEditions != null) {
+            Set<String> allowed = Set.of(configData.allowedEditions);
             legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
         } else {
             for (String restricted : configData.restrictedEditions) {
