@@ -1,0 +1,440 @@
+{% extends "base.html" %}
+
+{% block title %}Simulation Statistics - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1><i class="fas fa-chart-bar"></i> Simulation Statistics</h1>
+                <p class="text-muted">Analysis for "{{ simulation.name }}"</p>
+            </div>
+            <div>
+                <a href="{{ url_for('statistics.statistics_dashboard') }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Summary Cards -->
+<div class="row">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <h3>{{ stats.simulation.completed_games }}</h3>
+                <p class="mb-0">Games Completed</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <h3>
+                    {% if stats.duration %}
+                        {% if stats.duration.average > 60 %}
+                            {{ "%.1f"|format(stats.duration.average / 60) }}m
+                        {% else %}
+                            {{ "%.0f"|format(stats.duration.average) }}s
+                        {% endif %}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </h3>
+                <p class="mb-0">Avg Game Duration</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body text-center">
+                <h3>
+                    {% if stats.turns %}
+                        {{ "%.1f"|format(stats.turns.average) }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </h3>
+                <p class="mb-0">Avg Turns</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body text-center">
+                <h3>{{ simulation.players|length }}</h3>
+                <p class="mb-0">Players</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row -->
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-trophy"></i> Win Rate by Deck</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="win-rate-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-clock"></i> Game Duration Over Time</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="duration-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-dice"></i> Turn Count Distribution</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="turn-distribution-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-users"></i> Player Position Analysis</h5>
+            </div>
+            <div class="card-body">
+                {% if stats.position_analysis %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Position</th>
+                                    <th>Games</th>
+                                    <th>Wins</th>
+                                    <th>Win Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for position, data in stats.position_analysis.items() %}
+                                <tr>
+                                    <td>Player {{ position }}</td>
+                                    <td>{{ data.games }}</td>
+                                    <td>{{ data.wins }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress flex-grow-1 me-2" style="height: 15px;">
+                                                <div class="progress-bar bg-primary" 
+                                                     style="width: {{ data.win_rate }}%">
+                                                </div>
+                                            </div>
+                                            <span class="text-muted small">{{ "%.1f"|format(data.win_rate) }}%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No position data available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Deck Performance Table -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-cards-blank"></i> Deck Performance Summary</h5>
+            </div>
+            <div class="card-body">
+                {% if stats.deck_performance %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Deck</th>
+                                    <th>Games</th>
+                                    <th>Wins</th>
+                                    <th>Win Rate</th>
+                                    <th>Avg Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for deck_id, performance in stats.deck_performance.items() %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ deck_id[:30] }}</strong>
+                                        {% if deck_id|length > 30 %}...{% endif %}
+                                        <br>
+                                        <small class="text-muted">
+                                            <a href="{{ url_for('statistics.deck_statistics', deck_id=deck_id) }}" 
+                                               class="text-decoration-none">
+                                                View Detailed Stats
+                                            </a>
+                                        </small>
+                                    </td>
+                                    <td>{{ performance.games }}</td>
+                                    <td>{{ performance.wins }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress flex-grow-1 me-2" style="height: 20px;">
+                                                <div class="progress-bar 
+                                                    {% if performance.win_rate > 50 %}bg-success
+                                                    {% elif performance.win_rate > 25 %}bg-warning
+                                                    {% else %}bg-danger{% endif %}" 
+                                                     style="width: {{ performance.win_rate }}%">
+                                                </div>
+                                            </div>
+                                            <span class="fw-bold">{{ "%.1f"|format(performance.win_rate) }}%</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {% if performance.avg_duration > 60 %}
+                                            {{ "%.1f"|format(performance.avg_duration / 60) }}m
+                                        {% else %}
+                                            {{ "%.0f"|format(performance.avg_duration) }}s
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No deck performance data available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Card Statistics -->
+{% if stats.card_statistics %}
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-layer-group"></i> Card Types Played</h5>
+            </div>
+            <div class="card-body">
+                {% if stats.card_statistics.card_types %}
+                    <div class="row">
+                        {% for card_type, count in stats.card_statistics.card_types.items() %}
+                        <div class="col-6 mb-3">
+                            <div class="text-center">
+                                <h4 class="text-primary">{{ count }}</h4>
+                                <small class="text-muted">{{ card_type }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">No card type data available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-magic"></i> Spell Categories</h5>
+            </div>
+            <div class="card-body">
+                {% if stats.card_statistics.spell_categories %}
+                    <div class="row">
+                        {% for category, count in stats.card_statistics.spell_categories.items() %}
+                        <div class="col-6 mb-3">
+                            <div class="text-center">
+                                <h4 class="text-success">{{ count }}</h4>
+                                <small class="text-muted">{{ category }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">No spell category data available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if stats.card_statistics.commander_stats %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-crown"></i> Commander Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <h3 class="text-warning">{{ "%.1f"|format(stats.card_statistics.commander_stats.avg_casts_per_game) }}</h3>
+                            <p class="text-muted">Average Casts per Game</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <h3 class="text-info">1.4</h3>
+                            <p class="text-muted">Baseline Expected</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            {% set performance = (stats.card_statistics.commander_stats.avg_casts_per_game / 1.4 * 100) %}
+                            <h3 class="{% if performance > 100 %}text-success{% elif performance > 80 %}text-warning{% else %}text-danger{% endif %}">
+                                {{ "%.0f"|format(performance) }}%
+                            </h3>
+                            <p class="text-muted">vs Baseline</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+
+<!-- Game Details -->
+{% if simulation.game_results %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list"></i> Individual Game Results</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Game</th>
+                                <th>Winner</th>
+                                <th>Duration</th>
+                                <th>Turns</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for game in simulation.game_results %}
+                            <tr>
+                                <td><strong>Game {{ game.game_number }}</strong></td>
+                                <td>
+                                    {% if game.winner_player_number %}
+                                        Player {{ game.winner_player_number }}
+                                        <br><small class="text-muted">{{ game.winner_deck_id[:20] }}{% if game.winner_deck_id|length > 20 %}...{% endif %}</small>
+                                    {% else %}
+                                        <span class="text-muted">Unknown</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if game.game_duration_seconds %}
+                                        {% if game.game_duration_seconds > 60 %}
+                                            {{ "%.1f"|format(game.game_duration_seconds / 60) }}m
+                                        {% else %}
+                                            {{ game.game_duration_seconds }}s
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ game.total_turns or '-' }}</td>
+                                <td>
+                                    {% if game.game_log %}
+                                        <a href="{{ url_for('statistics.game_log', game_id=game.id) }}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-file-alt"></i> View Log
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">No log</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Export Section -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-download"></i> Export Data</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Export simulation data for external analysis</p>
+                <div class="btn-group">
+                    <button class="btn btn-outline-primary" onclick="exportData('csv')">
+                        <i class="fas fa-file-csv"></i> Export CSV
+                    </button>
+                    <button class="btn btn-outline-success" onclick="exportData('json')">
+                        <i class="fas fa-file-code"></i> Export JSON
+                    </button>
+                    <button class="btn btn-outline-info" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Initialize charts when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    MTGSimApp.statistics.initializeCharts('{{ simulation.id }}');
+});
+
+// Export functionality
+function exportData(format) {
+    const url = `/statistics/api/simulation/{{ simulation.id }}/export?format=${format}`;
+    window.open(url, '_blank');
+}
+
+// Print styles
+const printStyles = `
+    @media print {
+        .btn, .card-header, nav { display: none !important; }
+        .card { border: 1px solid #000 !important; margin-bottom: 20px; }
+        .chart-container { height: 300px !important; }
+    }
+`;
+
+// Add print styles
+const styleSheet = document.createElement("style");
+styleSheet.innerText = printStyles;
+document.head.appendChild(styleSheet);
+</script>
+{% endblock %}

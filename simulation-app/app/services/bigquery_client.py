@@ -1,0 +1,288 @@
+from google.cloud import bigquery
+import os
+import json
+import logging
+
+logger = logging.getLogger(__name__)
+
+class BigQueryClient:
+    def __init__(self):
+        """Initialize BigQuery client with service account credentials."""
+        credentials_path = os.environ.get('BIGQUERY_CREDENTIALS_PATH')
+        project_id = os.environ.get('GOOGLE_CLOUD_PROJECT')
+        
+        # Debug logging
+        logger.info(f"Initializing BigQueryClient with credentials_path: {credentials_path}")
+        logger.info(f"Environment GOOGLE_CLOUD_PROJECT: {project_id}")
+        
+        if credentials_path and os.path.exists(credentials_path):
+            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+            
+            # Extract project ID from service account file if not provided
+            if not project_id:
+                try:
+                    with open(credentials_path, 'r') as f:
+                        credentials_data = json.load(f)
+                        project_id = credentials_data.get('project_id')
+                        logger.info(f"Extracted project_id from credentials: {project_id}")
+                except Exception as e:
+                    logger.error(f"Error reading credentials file: {e}")
+        
+        # Hardcode the correct project ID for now
+        if not project_id:
+            project_id = "elated-liberty-100303"
+            logger.info(f"Using hardcoded project_id: {project_id}")
+        
+        logger.info(f"Final project_id: {project_id}")
+        
+        if not project_id:
+            raise ValueError("Project ID must be provided via GOOGLE_CLOUD_PROJECT environment variable or service account credentials")
+        
+        try:
+            self.client = bigquery.Client(project=project_id)
+            self.project_id = project_id
+            self.dataset_id = 'mtg-tools'  # Based on existing logs
+            logger.info(f"BigQuery client initialized successfully with project: {self.project_id}")
+        except Exception as e:
+            logger.error(f"Error initializing BigQuery client: {e}")
+            raise
+    
+    def search_decks(self, query='', commander='', colors='', limit=20, offset=0):
+        """Search for decks in BigQuery based on filters."""
+        base_sql = f"""
+        SELECT 
+            deck_id,
+            deck_name,
+            deck_url,
+            commander_1,
+            commander_2,
+            is_W,
+            is_U,
+            is_B,
+            is_R,
+            is_G,
+            source,
+            CASE 
+                WHEN is_W THEN 'W' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_U THEN 'U' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_B THEN 'B' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_R THEN 'R' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_G THEN 'G' ELSE '' 
+            END AS color_identity
+        FROM `{self.project_id}.{self.dataset_id}.decks`
+        WHERE 1=1
+        """
+        
+        params = []
+        
+        if query:
+            base_sql += " AND (deck_name LIKE @query OR deck_id LIKE @query)"
+            params.append(bigquery.ScalarQueryParameter("query", "STRING", f"%{query}%"))
+        
+        if commander:
+            base_sql += " AND (commander_1 LIKE @commander OR commander_2 LIKE @commander)"
+            params.append(bigquery.ScalarQueryParameter("commander", "STRING", f"%{commander}%"))
+        
+        if colors:
+            # Handle color filtering based on the boolean columns
+            color_conditions = []
+            if 'W' in colors:
+                color_conditions.append("is_W = true")
+            if 'U' in colors:
+                color_conditions.append("is_U = true")
+            if 'B' in colors:
+                color_conditions.append("is_B = true")
+            if 'R' in colors:
+                color_conditions.append("is_R = true")
+            if 'G' in colors:
+                color_conditions.append("is_G = true")
+            
+            if color_conditions:
+                base_sql += f" AND ({' AND '.join(color_conditions)})"
+        
+        base_sql += " ORDER BY deck_name LIMIT @limit OFFSET @offset"
+        params.extend([
+            bigquery.ScalarQueryParameter("limit", "INT64", limit),
+            bigquery.ScalarQueryParameter("offset", "INT64", offset)
+        ])
+        
+        job_config = bigquery.QueryJobConfig(query_parameters=params)
+        
+        try:
+            results = self.client.query(base_sql, job_config=job_config)
+            return [dict(row) for row in results]
+        except Exception as e:
+            logger.error(f"Error searching decks: {e}")
+            return []
+    
+    def get_deck(self, deck_id):
+        """Get detailed information about a specific deck."""
+        sql = f"""
+        SELECT 
+            deck_id,
+            deck_name,
+            deck_url,
+            commander_1,
+            commander_2,
+            is_W,
+            is_U,
+            is_B,
+            is_R,
+            is_G,
+            source,
+            CASE 
+                WHEN is_W THEN 'W' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_U THEN 'U' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_B THEN 'B' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_R THEN 'R' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_G THEN 'G' ELSE '' 
+            END AS color_identity
+        FROM `{self.project_id}.{self.dataset_id}.decks`
+        WHERE deck_id = @deck_id
+        """
+        
+        job_config = bigquery.QueryJobConfig(
+            query_parameters=[
+                bigquery.ScalarQueryParameter("deck_id", "STRING", deck_id)
+            ]
+        )
+        
+        try:
+            results = self.client.query(sql, job_config=job_config)
+            rows = list(results)
+            if rows:
+                return dict(rows[0])
+            return None
+        except Exception as e:
+            logger.error(f"Error getting deck {deck_id}: {e}")
+            return None
+    
+    def get_commanders(self):
+        """Get list of unique commanders."""
+        sql = f"""
+        SELECT DISTINCT commander_1 as commander
+        FROM `{self.project_id}.{self.dataset_id}.decks`
+        WHERE commander_1 IS NOT NULL
+        UNION DISTINCT
+        SELECT DISTINCT commander_2 as commander
+        FROM `{self.project_id}.{self.dataset_id}.decks`
+        WHERE commander_2 IS NOT NULL
+        ORDER BY commander
+        """
+        
+        try:
+            results = self.client.query(sql)
+            return [row.commander for row in results]
+        except Exception as e:
+            logger.error(f"Error getting commanders: {e}")
+            return []
+    
+    def get_color_identities(self):
+        """Get list of unique color identities."""
+        sql = f"""
+        SELECT DISTINCT 
+            CASE 
+                WHEN is_W THEN 'W' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_U THEN 'U' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_B THEN 'B' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_R THEN 'R' ELSE '' 
+            END ||
+            CASE 
+                WHEN is_G THEN 'G' ELSE '' 
+            END AS color_identity
+        FROM `{self.project_id}.{self.dataset_id}.decks`
+        ORDER BY color_identity
+        """
+        
+        try:
+            results = self.client.query(sql)
+            return [row.color_identity for row in results if row.color_identity]
+        except Exception as e:
+            logger.error(f"Error getting color identities: {e}")
+            return []
+    
+    def deck_exists(self, deck_id):
+        """Check if a deck exists in the database."""
+        sql = f"""
+        SELECT COUNT(*) as count
+        FROM `{self.project_id}.{self.dataset_id}.decks`
+        WHERE deck_id = @deck_id
+        """
+        
+        job_config = bigquery.QueryJobConfig(
+            query_parameters=[
+                bigquery.ScalarQueryParameter("deck_id", "STRING", deck_id)
+            ]
+        )
+        
+        try:
+            results = self.client.query(sql, job_config=job_config)
+            row = next(iter(results))
+            return row.count > 0
+        except Exception as e:
+            logger.error(f"Error checking if deck exists {deck_id}: {e}")
+            return False
+    
+    def save_simulation_results(self, simulation_results):
+        """Save simulation results to BigQuery for long-term storage."""
+        # This would insert into a results table for backup/analytics
+        # Implementation depends on desired schema for results storage
+        table_id = f"{self.project_id}.{self.dataset_id}.simulation_results"
+        
+        try:
+            # Convert simulation results to BigQuery format
+            rows_to_insert = self._format_results_for_bigquery(simulation_results)
+            
+            table = self.client.get_table(table_id)
+            errors = self.client.insert_rows_json(table, rows_to_insert)
+            
+            if errors:
+                logger.error(f"Error inserting simulation results: {errors}")
+                return False
+            
+            logger.info(f"Successfully saved {len(rows_to_insert)} simulation results to BigQuery")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error saving simulation results: {e}")
+            return False
+    
+    def _format_results_for_bigquery(self, simulation_results):
+        """Format simulation results for BigQuery insertion."""
+        # Implementation would depend on the exact format of simulation_results
+        # and the desired BigQuery schema
+        formatted_rows = []
+        
+        for result in simulation_results:
+            formatted_rows.append({
+                'simulation_id': result.get('simulation_id'),
+                'game_number': result.get('game_number'),
+                'winner': result.get('winner'),
+                'duration': result.get('duration'),
+                'statistics': result.get('statistics'),
+                'timestamp': result.get('timestamp')
+            })
+        
+        return formatted_rows

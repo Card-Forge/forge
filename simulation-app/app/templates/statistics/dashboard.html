@@ -1,0 +1,404 @@
+{% extends "base.html" %}
+
+{% block title %}Statistics Dashboard - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1><i class="fas fa-chart-bar"></i> Statistics Dashboard</h1>
+        <p class="text-muted">Comprehensive analysis of your MTG simulations</p>
+    </div>
+</div>
+
+<!-- Summary Cards -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ simulations|length }}</h4>
+                        <p class="mb-0">Total Simulations</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-play fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ total_games }}</h4>
+                        <p class="mb-0">Games Analyzed</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-gamepad fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>
+                            {% if avg_game_duration > 60 %}
+                                {{ "%.1f"|format(avg_game_duration / 60) }}m
+                            {% else %}
+                                {{ avg_game_duration }}s
+                            {% endif %}
+                        </h4>
+                        <p class="mb-0">Avg Game Duration</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if simulations %}
+<!-- Simulations List -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list"></i> Your Simulations</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Simulation</th>
+                                <th>Status</th>
+                                <th>Games</th>
+                                <th>Created</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for simulation in simulations %}
+                            <tr>
+                                <td>
+                                    <strong>{{ simulation.name }}</strong><br>
+                                    <small class="text-muted">{{ simulation.players|length }} players</small>
+                                </td>
+                                <td>
+                                    <span class="badge 
+                                        {% if simulation.status == 'completed' %}bg-success
+                                        {% elif simulation.status == 'running' %}bg-primary
+                                        {% elif simulation.status == 'failed' %}bg-danger
+                                        {% elif simulation.status == 'stopped' %}bg-warning
+                                        {% else %}bg-secondary{% endif %}">
+                                        {{ simulation.status.title() }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="progress flex-grow-1 me-2" style="height: 15px; min-width: 60px;">
+                                            <div class="progress-bar bg-primary" 
+                                                 style="width: {{ simulation.progress_percent }}%">
+                                            </div>
+                                        </div>
+                                        <span class="text-muted small">{{ simulation.games_completed }}/{{ simulation.num_games }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ simulation.created_at.strftime('%Y-%m-%d') }}<br>
+                                    <small class="text-muted">{{ simulation.created_at.strftime('%H:%M') }}</small>
+                                </td>
+                                <td>
+                                    {% if simulation.started_at and simulation.completed_at %}
+                                        {% set duration = (simulation.completed_at - simulation.started_at).total_seconds() %}
+                                        {% if duration > 3600 %}
+                                            {{ "%.1f"|format(duration / 3600) }}h
+                                        {% elif duration > 60 %}
+                                            {{ "%.0f"|format(duration / 60) }}m
+                                        {% else %}
+                                            {{ "%.0f"|format(duration) }}s
+                                        {% endif %}
+                                    {% elif simulation.started_at %}
+                                        <span class="text-muted">Running...</span>
+                                    {% else %}
+                                        <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        {% if simulation.status == 'completed' and simulation.games_completed > 0 %}
+                                            <a href="{{ url_for('statistics.simulation_statistics', simulation_id=simulation.id) }}" 
+                                               class="btn btn-success" title="View Statistics">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </a>
+                                        {% elif simulation.status == 'running' %}
+                                            <a href="{{ url_for('monitoring.simulation_status', simulation_id=simulation.id) }}" 
+                                               class="btn btn-primary" title="Monitor">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted small">No stats</span>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Stats for Completed Simulations -->
+{% set completed_simulations = simulations|selectattr("status", "equalto", "completed")|list %}
+{% if completed_simulations %}
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-trophy"></i> Recent Simulation Performance</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="recent-performance-chart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-clock"></i> Game Duration Trends</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="duration-trends-chart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-medal"></i> Top Performing Simulations</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for simulation in completed_simulations[:3] %}
+                    <div class="col-md-4">
+                        <div class="card border-success">
+                            <div class="card-body text-center">
+                                <h6 class="card-title">{{ simulation.name }}</h6>
+                                <p class="card-text">
+                                    <strong>{{ simulation.games_completed }}</strong> games completed<br>
+                                    <small class="text-muted">
+                                        {{ simulation.completed_at.strftime('%Y-%m-%d') if simulation.completed_at }}
+                                    </small>
+                                </p>
+                                <a href="{{ url_for('statistics.simulation_statistics', simulation_id=simulation.id) }}" 
+                                   class="btn btn-sm btn-success">
+                                    View Stats
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% else %}
+<!-- Empty State -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-chart-bar fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No Simulation Data</h4>
+                <p class="text-muted mb-4">Run some simulations to see detailed statistics and analysis.</p>
+                <a href="{{ url_for('simulation.new_simulation') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create First Simulation
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Quick Actions -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-tools"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="d-grid">
+                            <a href="{{ url_for('simulation.new_simulation') }}" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> New Simulation
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-grid">
+                            <a href="{{ url_for('decks.deck_browser') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-cards-blank"></i> Browse Decks
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-grid">
+                            <a href="{{ url_for('monitoring.monitoring_dashboard') }}" class="btn btn-outline-info">
+                                <i class="fas fa-eye"></i> Monitor Active
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-grid">
+                            <button class="btn btn-outline-success" onclick="exportAllData()">
+                                <i class="fas fa-download"></i> Export All Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tips and Information -->
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-lightbulb"></i> Analysis Tips</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success"></i> Run at least 20-50 games for reliable statistics</li>
+                    <li><i class="fas fa-check text-success"></i> Compare similar power level decks for accurate results</li>
+                    <li><i class="fas fa-check text-success"></i> Track commander cast frequency (baseline: 1.4 per game)</li>
+                    <li><i class="fas fa-check text-success"></i> Monitor turn order advantages in multiplayer</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Key Metrics</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><strong>Win Rate:</strong> Percentage of games won by each deck</li>
+                    <li><strong>Avg Turns:</strong> Game length indicator (8-12 turns typical)</li>
+                    <li><strong>Position Advantage:</strong> Player 1 vs others performance</li>
+                    <li><strong>Commander Efficiency:</strong> How often commanders impact games</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Export all data functionality
+function exportAllData() {
+    // This would trigger a comprehensive export of all user simulation data
+    alert('Export functionality coming soon!');
+}
+
+// Initialize dashboard charts if we have completed simulations
+{% if completed_simulations %}
+document.addEventListener('DOMContentLoaded', function() {
+    // Recent performance chart
+    const recentCtx = document.getElementById('recent-performance-chart');
+    if (recentCtx) {
+        new Chart(recentCtx, {
+            type: 'bar',
+            data: {
+                labels: [{% for sim in completed_simulations[-5:] %}'{{ sim.name[:15] }}'{% if not loop.last %},{% endif %}{% endfor %}],
+                datasets: [{
+                    label: 'Games Completed',
+                    data: [{% for sim in completed_simulations[-5:] %}{{ sim.games_completed }}{% if not loop.last %},{% endif %}{% endfor %}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+    
+    // Duration trends chart
+    const durationCtx = document.getElementById('duration-trends-chart');
+    if (durationCtx) {
+        new Chart(durationCtx, {
+            type: 'line',
+            data: {
+                labels: [{% for sim in completed_simulations[-5:] %}'{{ sim.created_at.strftime("%m/%d") }}'{% if not loop.last %},{% endif %}{% endfor %}],
+                datasets: [{
+                    label: 'Avg Duration (min)',
+                    data: [{% for sim in completed_simulations[-5:] %}{% if sim.started_at and sim.completed_at %}{{ ((sim.completed_at - sim.started_at).total_seconds() / 60)|round(1) }}{% else %}0{% endif %}{% if not loop.last %},{% endif %}{% endfor %}],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Minutes'
+                        }
+                    }
+                }
+            }
+        });
+    }
+});
+{% endif %}
+</script>
+{% endblock %}

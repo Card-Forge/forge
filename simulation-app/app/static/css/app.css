@@ -1,0 +1,202 @@
+/* Custom styles for MTG Simulation App */
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.progress {
+    background-color: #e9ecef;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.badge {
+    font-size: 0.75em;
+}
+
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.deck-preview {
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 0.25rem;
+    border: 1px solid #dee2e6;
+}
+
+.player-row {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+}
+
+.player-row:hover {
+    background-color: #e9ecef;
+}
+
+.deck-search {
+    font-family: monospace;
+}
+
+.list-group-item-action:hover {
+    background-color: #f8f9fa;
+}
+
+.modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* Chart containers */
+.chart-container {
+    position: relative;
+    height: 400px;
+    margin: 1rem 0;
+}
+
+/* Statistics cards */
+.stat-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.stat-card h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+/* Monitoring dashboard */
+.simulation-status {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+}
+
+.simulation-status.running {
+    background-color: #cce5ff;
+    border-left: 4px solid #007bff;
+}
+
+.simulation-status.completed {
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+}
+
+.simulation-status.failed {
+    background-color: #f8d7da;
+    border-left: 4px solid #dc3545;
+}
+
+.simulation-status.pending {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+}
+
+/* Deck browser */
+.deck-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.deck-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.color-identity {
+    display: inline-flex;
+    gap: 0.25rem;
+}
+
+.color-symbol {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
+.color-symbol.W { background-color: #fffbd5; }
+.color-symbol.U { background-color: #0e68ab; }
+.color-symbol.B { background-color: #150b00; }
+.color-symbol.R { background-color: #d3202a; }
+.color-symbol.G { background-color: #00733e; }
+.color-symbol.C { background-color: #ccc2c0; }
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.spinner-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .player-row {
+        margin-bottom: 1rem;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+    
+    .stat-card h3 {
+        font-size: 2rem;
+    }
+}
+
+/* Alert improvements */
+.alert {
+    border-radius: 0.5rem;
+}
+
+.alert-dismissible .btn-close {
+    padding: 0.75rem 1rem;
+}
+
+/* Button improvements */
+.btn {
+    border-radius: 0.375rem;
+}
+
+.btn-group .btn {
+    border-radius: 0;
+}
+
+.btn-group .btn:first-child {
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+}
+
+.btn-group .btn:last-child {
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
