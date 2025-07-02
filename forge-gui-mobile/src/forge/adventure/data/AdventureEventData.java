@@ -396,23 +396,29 @@ public class AdventureEventData implements Serializable {
     private CardBlock pickJumpstartCardBlock() {
         Iterable<CardBlock> src = FModel.getBlocks(); //all blocks
         List<CardBlock> legalBlocks = new ArrayList<>();
-        for (CardBlock b : src) { // for each block
-            //I hate doing this, but it seems like the simplest way to reliably filter out prereleases
-            if (b.getName().toUpperCase().contains("JUMPSTART")) {
-                legalBlocks.add(b);
-            }
-        }
         ConfigData configData = Config.instance().getConfigData();
         if (configData.allowedJumpstart != null) {
             Set<String> allowed = Set.of(configData.allowedJumpstart);
-            legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
+            for (CardBlock b : src) { // for each block
+                if (allowed.contains(b.getName())) {
+                    legalBlocks.add(b);
+                }
+            }
         }
-        else if (configData.allowedEditions != null) {
-            Set<String> allowed = Set.of(configData.allowedEditions);
-            legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
-        } else {
-            for (String restricted : configData.restrictedEditions) {
-                legalBlocks.removeIf(q -> q.getName().equals(restricted));
+        else {
+            for (CardBlock b : src) { // for each block
+                //I hate doing this, but it seems like the simplest way to reliably filter out prereleases
+                if (b.getName().toUpperCase().contains("JUMPSTART")) {
+                    legalBlocks.add(b);
+                }
+            }
+            if (configData.allowedEditions != null) {
+                Set<String> allowed = Set.of(configData.allowedEditions);
+                legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
+            } else {
+                for (String restricted : configData.restrictedEditions) {
+                    legalBlocks.removeIf(q -> q.getName().equals(restricted));
+                }
             }
         }
         return legalBlocks.isEmpty() ? null : Aggregates.random(legalBlocks);
