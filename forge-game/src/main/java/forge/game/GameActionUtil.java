@@ -248,6 +248,14 @@ public final class GameActionUtil {
                     alternatives.add(foretold);
                 }
 
+                if (source.isWarped() && activator.equals(source.getOwner()) && !source.enteredThisTurn() && !source.getManaCost().isNoCost()) {
+                    final SpellAbility normalWarp = sa.copy(activator);
+                    normalWarp.getRestrictions().setZone(ZoneType.Exile);
+                    // no alternative cost for this
+                    normalWarp.putParam("AfterDescription", "(From Warp)");
+                    alternatives.add(normalWarp);
+                }
+
                 if (activator.canCastSorcery() && source.isPlotted() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner()) && !source.enteredThisTurn()) {
                     final SpellAbility plotted = sa.copyWithNoManaCost(activator);
                     plotted.setAlternativeCost(AlternativeCost.Plotted);

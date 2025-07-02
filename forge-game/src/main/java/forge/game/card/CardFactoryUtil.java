@@ -3761,6 +3761,26 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Warp")) {
+            final String[] k = keyword.split(":");
+            final Cost warpCost = new Cost(k[1], false);
+
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(warpCost);
+
+            final StringBuilder desc = new StringBuilder();
+            desc.append("Warp ").append(warpCost.toSimpleString()).append(" (");
+            desc.append(inst.getReminderText());
+            desc.append(")");
+
+            newSA.setDescription(desc.toString());
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Warped)");
+            newSA.setStackDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.Warp);
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.endsWith(" offering")) {
             final String offeringType = keyword.split(" ")[0];
             final SpellAbility sa = card.getFirstSpellAbility();
