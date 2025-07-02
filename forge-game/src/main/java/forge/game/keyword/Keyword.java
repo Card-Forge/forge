@@ -200,7 +200,7 @@ public enum Keyword {
     VANISHING("Vanishing", KeywordWithAmount.class, false, "This permanent enters with {%d:time counter} on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it."),
     VIGILANCE("Vigilance", SimpleKeyword.class, true, "Attacking doesn't cause this creature to tap."),
     WARD("Ward", KeywordWithCost.class, false, "Whenever this permanent becomes the target of a spell or ability an opponent controls, counter it unless that player pays %s."),
-    WARP("Warp", KeywordWithCost.class, false, "You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from ecile on a later turn."),
+    WARP("Warp", KeywordWithCost.class, false, "You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn."),
     WITHER("Wither", SimpleKeyword.class, true, "This deals damage to creatures in the form of -1/-1 counters."),
 
     // mayflash additional cast
