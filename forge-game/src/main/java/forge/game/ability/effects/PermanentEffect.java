@@ -41,6 +41,10 @@ public class PermanentEffect extends SpellAbilityEffect {
             c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Blitz"), c.getGame().getNextTimestamp(), 0);
             registerDelayedTrigger(sa, "Sacrifice", Lists.newArrayList(c));
         }
+        if (sa.isWarp() && c.isInPlay()) {
+            c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Warp"), c.getGame().getNextTimestamp(), 0);
+            registerDelayedTrigger(sa, "Exile", Lists.newArrayList(c));
+        }
 
         table.triggerChangesZoneAll(game, sa);
     }
