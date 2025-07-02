@@ -104,18 +104,16 @@ class ForgeInterface:
     
     def _run_simulation_with_context(self, simulation_id):
         """Wrapper to run simulation with Flask application context."""
-        if self.app:
-            with self.app.app_context():
-                # Re-fetch the simulation object within the app context
-                simulation = Simulation.query.get(simulation_id)
-                if simulation:
-                    self._run_simulation(simulation)
-        else:
-            # Fallback to current_app if app not provided
-            with current_app.app_context():
-                simulation = Simulation.query.get(simulation_id)
-                if simulation:
-                    self._run_simulation(simulation)
+        from flask import current_app
+        
+        # Get the app instance - either from self.app or current_app
+        app = self.app or current_app._get_current_object()
+        
+        with app.app_context():
+            # Re-fetch the simulation object within the app context
+            simulation = Simulation.query.get(simulation_id)
+            if simulation:
+                self._run_simulation(simulation)
     
     def _run_simulation(self, simulation):
         """Run a simulation (called in separate thread)."""

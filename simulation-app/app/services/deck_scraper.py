@@ -435,19 +435,39 @@ class DeckScraper:
         return "\n".join(lines)
     
     def upload_to_bigquery(self, deck_data: Dict) -> bool:
-        """Upload deck data to BigQuery using pandas_gbq (following mtg pattern)."""
+        """Upload deck data to BigQuery using pandas_gbq with proper authentication."""
         try:
             import pandas as pd
             import pandas_gbq
             from google.oauth2 import service_account
+            import google.auth
             
-            # Get credentials path from environment
+            # Get project ID
+            project_id = os.environ.get('GOOGLE_CLOUD_PROJECT', 'elated-liberty-100303')
+            credentials = None
+            
+            # Try service account first
             credentials_path = os.environ.get('BIGQUERY_CREDENTIALS_PATH')
-            if not credentials_path or not os.path.exists(credentials_path):
-                raise Exception("BigQuery credentials not found")
+            if credentials_path and os.path.exists(credentials_path):
+                try:
+                    logger.info(f"Using service account credentials from: {credentials_path}")
+                    credentials = service_account.Credentials.from_service_account_file(
+                        credentials_path,
+                        scopes=['https://www.googleapis.com/auth/bigquery']
+                    )
+                except Exception as e:
+                    logger.warning(f"Failed to load service account credentials: {e}")
             
-            credentials = service_account.Credentials.from_service_account_file(credentials_path)
-            project_id = "elated-liberty-100303"  # Following mtg pattern
+            # Fall back to ADC
+            if credentials is None:
+                try:
+                    logger.info("Using Application Default Credentials for BigQuery upload")
+                    credentials, _ = google.auth.default(
+                        scopes=['https://www.googleapis.com/auth/bigquery']
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to get ADC credentials: {e}")
+                    raise Exception("No valid BigQuery credentials found")
             
             prefixed_deck_id = f"{deck_data['source']}-{deck_data['deck_id']}"
             

@@ -1,4 +1,6 @@
 from google.cloud import bigquery
+from google.oauth2 import service_account
+import google.auth
 import os
 import json
 import logging
@@ -7,44 +9,96 @@ logger = logging.getLogger(__name__)
 
 class BigQueryClient:
     def __init__(self):
-        """Initialize BigQuery client with service account credentials."""
+        """Initialize BigQuery client with proper authentication."""
         credentials_path = os.environ.get('BIGQUERY_CREDENTIALS_PATH')
         project_id = os.environ.get('GOOGLE_CLOUD_PROJECT')
         
-        # Debug logging
         logger.info(f"Initializing BigQueryClient with credentials_path: {credentials_path}")
         logger.info(f"Environment GOOGLE_CLOUD_PROJECT: {project_id}")
         
+        credentials = None
+        
+        # Try service account file first if provided
         if credentials_path and os.path.exists(credentials_path):
-            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
-            
-            # Extract project ID from service account file if not provided
-            if not project_id:
-                try:
+            try:
+                logger.info(f"Loading service account credentials from: {credentials_path}")
+                credentials = service_account.Credentials.from_service_account_file(
+                    credentials_path,
+                    scopes=['https://www.googleapis.com/auth/bigquery']
+                )
+                
+                # Extract project ID from service account file if not provided
+                if not project_id:
                     with open(credentials_path, 'r') as f:
                         credentials_data = json.load(f)
                         project_id = credentials_data.get('project_id')
-                        logger.info(f"Extracted project_id from credentials: {project_id}")
-                except Exception as e:
-                    logger.error(f"Error reading credentials file: {e}")
+                        logger.info(f"Extracted project_id from service account: {project_id}")
+                
+                logger.info("Service account credentials loaded successfully")
+                
+            except Exception as e:
+                logger.error(f"Error loading service account credentials: {e}")
+                credentials = None
         
-        # Hardcode the correct project ID for now
+        # Fall back to Application Default Credentials if service account failed
+        if credentials is None:
+            try:
+                logger.info("Attempting to use Application Default Credentials (ADC)")
+                credentials, adc_project = google.auth.default(
+                    scopes=['https://www.googleapis.com/auth/bigquery']
+                )
+                
+                # Use project from ADC if not specified elsewhere
+                if not project_id:
+                    project_id = adc_project
+                    logger.info(f"Using project from ADC: {project_id}")
+                
+                logger.info("Application Default Credentials loaded successfully")
+                
+            except Exception as e:
+                logger.error(f"Error loading Application Default Credentials: {e}")
+                
+                # Final fallback - try without explicit credentials (environment-based)
+                logger.warning("Falling back to environment-based authentication")
+                credentials = None
+        
+        # Set fallback project ID if still not found
         if not project_id:
             project_id = "elated-liberty-100303"
-            logger.info(f"Using hardcoded project_id: {project_id}")
-        
-        logger.info(f"Final project_id: {project_id}")
+            logger.info(f"Using fallback project_id: {project_id}")
         
         if not project_id:
-            raise ValueError("Project ID must be provided via GOOGLE_CLOUD_PROJECT environment variable or service account credentials")
+            raise ValueError("Project ID must be provided via GOOGLE_CLOUD_PROJECT environment variable, service account credentials, or ADC")
         
         try:
-            self.client = bigquery.Client(project=project_id)
+            # Create BigQuery client with explicit credentials if available
+            if credentials:
+                self.client = bigquery.Client(credentials=credentials, project=project_id)
+                logger.info(f"BigQuery client created with explicit credentials")
+            else:
+                self.client = bigquery.Client(project=project_id)
+                logger.info(f"BigQuery client created with environment credentials")
+            
             self.project_id = project_id
-            self.dataset_id = 'mtg-tools'  # Based on existing logs
-            logger.info(f"BigQuery client initialized successfully with project: {self.project_id}")
+            self.dataset_id = 'mtg'
+            
+            # Test the connection
+            try:
+                # Simple test query to verify authentication works
+                test_query = f"SELECT 1 as test_value"
+                test_job = self.client.query(test_query)
+                list(test_job.result())  # Force execution
+                logger.info(f"BigQuery client initialized and tested successfully with project: {self.project_id}")
+            except Exception as test_error:
+                logger.warning(f"BigQuery client created but test query failed: {test_error}")
+                # Don't fail initialization, just warn
+            
         except Exception as e:
             logger.error(f"Error initializing BigQuery client: {e}")
+            logger.error("Troubleshooting tips:")
+            logger.error("1. Ensure BIGQUERY_CREDENTIALS_PATH points to a valid service account key")
+            logger.error("2. Or run 'gcloud auth application-default login' for ADC")
+            logger.error("3. Or set GOOGLE_APPLICATION_CREDENTIALS environment variable")
             raise
     
     def search_decks(self, query='', commander='', colors='', limit=20, offset=0):

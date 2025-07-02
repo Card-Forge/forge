@@ -19,6 +19,12 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
     
+    # User loader for Flask-Login
+    @login_manager.user_loader
+    def load_user(user_id):
+        from .models.user import User
+        return User.query.get(int(user_id))
+    
     # Register blueprints
     from .routes.main import main_bp
     from .routes.simulation import simulation_bp
@@ -27,6 +33,7 @@ def create_app():
     from .routes.decks import decks_bp
     from .routes.auth import auth_bp
     from .routes.deck_import import deck_import_bp
+    from .routes.api import api_bp
     
     app.register_blueprint(main_bp)
     app.register_blueprint(simulation_bp, url_prefix='/simulation')
@@ -35,6 +42,7 @@ def create_app():
     app.register_blueprint(decks_bp, url_prefix='/decks')
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(deck_import_bp, url_prefix='/deck_import')
+    app.register_blueprint(api_bp, url_prefix='/api')
     
     # Create tables
     with app.app_context():
