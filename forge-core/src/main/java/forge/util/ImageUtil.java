@@ -9,6 +9,9 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
         //get nearest power of actualSize to baseSize so that the image renders good
@@ -191,7 +194,8 @@ public class ImageUtil {
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
-            if (["tdm", "sld"].contains(editionCode) && cardCollectorNumber.endsWith("b")) {
+            final List<String> setsWithDifferentBacks = Arrays.asList("tdm", "sld");
+            if (setsWithDifferentBacks.contains(editionCode) && cardCollectorNumber.endsWith("b")) {
                 faceParam = "&face=back";
                 cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
             } else {
