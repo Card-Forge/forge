@@ -191,7 +191,12 @@ public class ImageUtil {
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
-            faceParam = (face.equals("back") ? "&face=back" : "&face=front");
+            if ("tdm".equals(editionCode) && cardCollectorNumber.endsWith("b")) {
+                faceParam = "&face=back";
+                cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
+            } else {
+                faceParam = (face.equals("back") ? "&face=back" : "&face=front");
+            }
         } else if (cp.getRules().getSplitType() == CardSplitType.Meld
                     && !cardCollectorNumber.endsWith("a")
                     && !cardCollectorNumber.endsWith("b")) {
