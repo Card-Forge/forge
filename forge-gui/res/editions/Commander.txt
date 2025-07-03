@@ -6,7 +6,7 @@ Code2=COM
 Alias=CMD
 Type=Commander
 BoosterBox=0
-ScryfallCode=cmd
+ScryfallCode=CMD
 
 [cards]
 1 U Artisan of Kozilek @Jason Felix
