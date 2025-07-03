@@ -191,7 +191,7 @@ public class ImageUtil {
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
-            if ("tdm".equals(editionCode) && cardCollectorNumber.endsWith("b")) {
+            if (["tdm", "sld"].contains(editionCode) && cardCollectorNumber.endsWith("b")) {
                 faceParam = "&face=back";
                 cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
             } else {
