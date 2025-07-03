@@ -72,8 +72,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 // 2. prepare new target choices
                 SpellAbilityStackInstance replaceIn = chosenTarget.getKey();
                 GameObject oldTarget = chosenTarget.getValue();
-                TargetChoices oldTargetBlock = replaceIn.getTargetChoices();
-                TargetChoices newTargetBlock = oldTargetBlock.clone();
+                TargetChoices newTargetBlock = replaceIn.getTargetChoices();
+                TargetChoices oldTargetBlock = newTargetBlock.clone();
                 // gets the divided value from old target
                 Integer div = oldTargetBlock.getDividedValue(oldTarget);
                 // 3. test if updated choices would be correct.
