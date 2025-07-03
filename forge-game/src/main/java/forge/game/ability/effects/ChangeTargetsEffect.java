@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -37,7 +38,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
         final Player chooser = sa.hasParam("Chooser") ? getDefinedPlayersOrTargeted(sa, "Chooser").get(0) : activator;
 
         final MagicStack stack = activator.getGame().getStack();
-        
+
         for (final SpellAbility tgtSA : sas) {
             SpellAbilityStackInstance si = stack.getInstanceMatchingSpellAbilityID(tgtSA);
             if (si == null) {
@@ -87,7 +88,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     if (div != null) {
                         newTargetBlock.addDividedAllocation(newTarget, div);
                     }
-                    replaceIn.updateTarget(newTargetBlock, sa.getHostCard());
+                    replaceIn.updateTarget(oldTargetBlock, sa.getHostCard());
                 }
             } else {
                 while (changingTgtSI != null) {
@@ -104,25 +105,26 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             if (candidates.isEmpty()) {
                                 return;
                             }
-                            changingTgtSA.resetTargets();
                             GameEntity choice = Aggregates.random(candidates);
+                            TargetChoices oldTarget = changingTgtSA.getTargets();
+                            changingTgtSA.resetTargets();
                             changingTgtSA.getTargets().add(choice);
                             if (changingTgtSA.isDividedAsYouChoose()) {
                                 changingTgtSA.addDividedAllocation(choice, div);
                             }
-
-                            changingTgtSI.updateTarget(changingTgtSA.getTargets(), sa.getHostCard());
+                            changingTgtSI.updateTarget(oldTarget, sa.getHostCard());
                         }
                         else if (sa.hasParam("DefinedMagnet")) {
                             GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
                             if (newTarget != null && changingTgtSA.canTarget(newTarget)) {
                                 int div = changingTgtSA.getTotalDividedValue();
+                                TargetChoices oldTarget = changingTgtSA.getTargets();
                                 changingTgtSA.resetTargets();
                                 changingTgtSA.getTargets().add(newTarget);
-                                changingTgtSI.updateTarget(changingTgtSA.getTargets(), sa.getHostCard());
                                 if (changingTgtSA.isDividedAsYouChoose()) {
                                     changingTgtSA.addDividedAllocation(newTarget, div);
                                 }
+                                changingTgtSI.updateTarget(oldTarget, sa.getHostCard());
                             }
                         } else {
                             // Update targets, with a potential new target
@@ -132,8 +134,9 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                 source = changingTgtSA.getTargetCard();
                             }
                             Predicate<GameObject> filter = sa.hasParam("TargetRestriction") ? GameObjectPredicates.restriction(sa.getParam("TargetRestriction").split(","), activator, source, sa) : null;
-                            TargetChoices newTarget = chooser.getController().chooseNewTargetsFor(changingTgtSA, filter, false);
-                            changingTgtSI.updateTarget(newTarget, sa.getHostCard());
+                            TargetChoices oldTarget = changingTgtSA.getTargets();
+                            chooser.getController().chooseNewTargetsFor(changingTgtSA, filter, false);
+                            changingTgtSI.updateTarget(oldTarget, sa.getHostCard());
                         }
                     }
                     changingTgtSI = changingTgtSI.getSubInstance();
