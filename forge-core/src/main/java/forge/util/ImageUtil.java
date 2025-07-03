@@ -171,6 +171,8 @@ public class ImageUtil {
         String cardCollectorNumber = cp.getCollectorNumber();
         // Hack to account for variations in Arabian Nights
         cardCollectorNumber = cardCollectorNumber.replace("+", "†");
+        // Fix black star in URL
+        cardCollectorNumber = cardCollectorNumber.replace("★", "%E2%98%85");
         // override old planechase sets from their modified id since scryfall move the planechase cards outside their original setcode
         if (cardCollectorNumber.startsWith("OHOP")) {
             editionCode = "ohop";
