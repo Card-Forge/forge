@@ -16,15 +16,13 @@ class StatisticsEngine:
         if not simulation:
             return None
         
-        # Basic simulation info
+        # Basic simulation info  
         stats = {
-            'simulation': {
-                'id': simulation.id,
-                'name': simulation.name,
-                'total_games': simulation.num_games,
-                'completed_games': simulation.games_completed,
-                'status': simulation.status
-            }
+            'simulation_id': simulation.id,
+            'simulation_name': simulation.name,
+            'total_games': simulation.num_games,
+            'completed_games': simulation.games_completed,
+            'status': simulation.status
         }
         
         # Game results summary
@@ -33,12 +31,18 @@ class StatisticsEngine:
         if game_results:
             # Win rate by deck
             deck_performance = self._calculate_deck_performance(game_results)
+            stats['win_rates_by_deck'] = {deck: perf['win_rate'] for deck, perf in deck_performance.items()}
             stats['deck_performance'] = deck_performance
+            
+            # Win rate by player number
+            position_analysis = self._analyze_player_positions(game_results)
+            stats['win_rates_by_player'] = {f"Player {pos}": data['win_rate'] for pos, data in position_analysis.items() if data['games'] > 0}
             
             # Game duration analysis
             durations = [game.game_duration_seconds for game in game_results if game.game_duration_seconds]
             if durations:
-                stats['duration'] = {
+                stats['average_game_duration'] = sum(durations) / len(durations)
+                stats['duration_stats'] = {
                     'average': sum(durations) / len(durations),
                     'min': min(durations),
                     'max': max(durations),
@@ -48,14 +52,13 @@ class StatisticsEngine:
             # Turn analysis
             turns = [game.total_turns for game in game_results if game.total_turns]
             if turns:
-                stats['turns'] = {
+                stats['average_turn_count'] = sum(turns) / len(turns)
+                stats['turn_distribution'] = self._get_turn_distribution(turns)
+                stats['turn_stats'] = {
                     'average': sum(turns) / len(turns),
                     'min': min(turns),
                     'max': max(turns)
                 }
-            
-            # Player position analysis
-            stats['position_analysis'] = self._analyze_player_positions(game_results)
             
             # Card statistics
             stats['card_statistics'] = self._get_card_statistics(simulation_id)
@@ -156,6 +159,14 @@ class StatisticsEngine:
             comparison_data[deck_id] = performance
         
         return comparison_data
+    
+    def _get_turn_distribution(self, turns):
+        """Calculate turn count distribution by ranges."""
+        distribution = {}
+        for turn_count in turns:
+            turn_range = f"{(turn_count//5)*5}-{(turn_count//5)*5+4}"
+            distribution[turn_range] = distribution.get(turn_range, 0) + 1
+        return distribution
     
     def _calculate_deck_performance(self, game_results):
         """Calculate win rates and performance metrics for each deck."""
