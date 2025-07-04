@@ -229,6 +229,12 @@ class ForgeInterface:
             'is_other': False
         }
         
+        # First check if this is a land - if so, always classify as "other"
+        card_type_info = self._classify_card_type(spell_name)
+        if card_type_info.get('is_land', False):
+            functional_classification['is_other'] = True
+            return functional_classification
+        
         spell_lower = spell_name.lower()
         
         # Removal spells - destroy, exile, bounce, damage to creatures/planeswalkers
