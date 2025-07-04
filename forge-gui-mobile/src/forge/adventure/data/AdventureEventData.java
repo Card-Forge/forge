@@ -404,6 +404,11 @@ public class AdventureEventData implements Serializable {
                     legalBlocks.add(b);
                 }
             }
+            for (CardBlock b : FModel.getFantasyBlocks()) {
+                if (allowed.contains(b.getName())) {
+                    legalBlocks.add(b);
+                }
+            }
         }
         else {
             for (CardBlock b : src) { // for each block
