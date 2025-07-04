@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+
+{% block title %}Game Log - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1><i class="fas fa-file-alt"></i> Game Log</h1>
+                <p class="text-muted">
+                    Game {{ game_result.game_number }} from "{{ simulation.name }}"
+                </p>
+            </div>
+            <div>
+                <a href="{{ url_for('statistics.simulation_statistics', simulation_id=simulation.id) }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Statistics
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Game Summary -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Game Summary</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-2">
+                    <strong>Game Number:</strong> {{ game_result.game_number }}
+                </div>
+                <div class="mb-2">
+                    <strong>Duration:</strong> 
+                    {% if game_result.game_duration_seconds %}
+                        {% if game_result.game_duration_seconds > 60 %}
+                            {{ "%.1f"|format(game_result.game_duration_seconds / 60) }} minutes
+                        {% else %}
+                            {{ game_result.game_duration_seconds }} seconds
+                        {% endif %}
+                    {% else %}
+                        Unknown
+                    {% endif %}
+                </div>
+                <div class="mb-2">
+                    <strong>Total Turns:</strong> {{ game_result.total_turns or 'Unknown' }}
+                </div>
+                <div class="mb-2">
+                    <strong>Winner:</strong> 
+                    {% if game_result.winner_player_number %}
+                        Player {{ game_result.winner_player_number }} ({{ game_result.winner_deck_id }})
+                    {% else %}
+                        Unknown
+                    {% endif %}
+                </div>
+                {% if game_result.elimination_order %}
+                <div class="mb-2">
+                    <strong>Elimination Order:</strong>
+                    <ol class="mb-0">
+                        {% for player in game_result.elimination_order %}
+                            <li>Player {{ player }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+                {% endif %}
+                <div class="mb-2">
+                    <strong>Completed:</strong> {{ game_result.created_at.strftime('%Y-%m-%d %H:%M:%S') }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-users"></i> Players</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for player in simulation.players %}
+                    <div class="col-md-6 mb-2">
+                        <div class="card {% if game_result.winner_player_number == player.player_number %}border-success{% endif %}">
+                            <div class="card-body p-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>Player {{ player.player_number }}</strong>
+                                        {% if game_result.winner_player_number == player.player_number %}
+                                            <span class="badge bg-success ms-1">Winner</span>
+                                        {% endif %}
+                                        <br>
+                                        <small class="text-muted font-monospace">{{ player.deck_id[:30] }}{% if player.deck_id|length > 30 %}...{% endif %}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Game Log -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5><i class="fas fa-terminal"></i> Full Game Log</h5>
+                <div>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="toggleWrap()">
+                        <i class="fas fa-text-width"></i> Toggle Wrap
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary" onclick="downloadLog()">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                {% if game_result.game_log %}
+                    <pre id="game-log" class="mb-0 p-3" style="background-color: #f8f9fa; max-height: 600px; overflow-y: auto; white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 12px;">{{ game_result.game_log }}</pre>
+                {% else %}
+                    <div class="p-4 text-center text-muted">
+                        <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
+                        <p>No game log available for this game.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Log Analysis -->
+{% if game_result.game_log %}
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-search"></i> Quick Analysis</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-2">
+                    <strong>Log Lines:</strong> <span id="line-count">Calculating...</span>
+                </div>
+                <div class="mb-2">
+                    <strong>Turn Count:</strong> <span id="turn-count">Calculating...</span>
+                </div>
+                <div class="mb-2">
+                    <strong>Damage Events:</strong> <span id="damage-count">Calculating...</span>
+                </div>
+                <div class="mb-2">
+                    <strong>Spells Cast:</strong> <span id="spell-count">Calculating...</span>
+                </div>
+                <div class="mb-2">
+                    <strong>Combat Events:</strong> <span id="combat-count">Calculating...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-filter"></i> Log Filters</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-2">
+                    <input type="text" class="form-control form-control-sm" id="search-filter" placeholder="Search log..." onkeyup="filterLog()">
+                </div>
+                <div class="btn-group-vertical w-100">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="showOnly('Turn:')">Show Turns Only</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="showOnly('Damage:')">Show Damage Only</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="showOnly('Add to stack:')">Show Spells Only</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="showOnly('Combat:')">Show Combat Only</button>
+                    <button class="btn btn-sm btn-outline-primary" onclick="showAll()">Show All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+let originalLog = '';
+
+document.addEventListener('DOMContentLoaded', function() {
+    const logElement = document.getElementById('game-log');
+    if (logElement) {
+        originalLog = logElement.textContent;
+        analyzeLog();
+    }
+});
+
+function analyzeLog() {
+    if (!originalLog) return;
+    
+    const lines = originalLog.split('\n');
+    const lineCount = lines.length;
+    
+    const turnCount = lines.filter(line => line.includes('Turn:')).length;
+    const damageCount = lines.filter(line => line.includes('Damage:')).length;
+    const spellCount = lines.filter(line => line.includes('Add to stack:')).length;
+    const combatCount = lines.filter(line => line.includes('Combat:')).length;
+    
+    document.getElementById('line-count').textContent = lineCount;
+    document.getElementById('turn-count').textContent = turnCount;
+    document.getElementById('damage-count').textContent = damageCount;
+    document.getElementById('spell-count').textContent = spellCount;
+    document.getElementById('combat-count').textContent = combatCount;
+}
+
+function toggleWrap() {
+    const logElement = document.getElementById('game-log');
+    if (logElement.style.whiteSpace === 'nowrap') {
+        logElement.style.whiteSpace = 'pre-wrap';
+    } else {
+        logElement.style.whiteSpace = 'nowrap';
+        logElement.style.overflowX = 'auto';
+    }
+}
+
+function downloadLog() {
+    const logContent = originalLog;
+    const blob = new Blob([logContent], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = `game_{{ game_result.game_number }}_{{ simulation.name|replace(' ', '_') }}.log`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
+
+function filterLog() {
+    const searchTerm = document.getElementById('search-filter').value;
+    const logElement = document.getElementById('game-log');
+    
+    if (!searchTerm) {
+        logElement.textContent = originalLog;
+        return;
+    }
+    
+    const lines = originalLog.split('\n');
+    const filteredLines = lines.filter(line => 
+        line.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    
+    logElement.textContent = filteredLines.join('\n');
+}
+
+function showOnly(prefix) {
+    const logElement = document.getElementById('game-log');
+    const lines = originalLog.split('\n');
+    const filteredLines = lines.filter(line => line.includes(prefix));
+    logElement.textContent = filteredLines.join('\n');
+}
+
+function showAll() {
+    const logElement = document.getElementById('game-log');
+    logElement.textContent = originalLog;
+    document.getElementById('search-filter').value = '';
+}
+</script>
+{% endblock %}

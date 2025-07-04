@@ -241,6 +241,12 @@ public enum Keyword {
                 if (k2 != Keyword.UNDEFINED) {
                     keyword = k2;
                     details = x[1];
+                    
+                    // Special handling for Enchant keyword
+                    if (keyword == Keyword.ENCHANT && details.contains(":")) {
+                        // Handle format K:Enchant:Land by removing the colon after Enchant
+                        details = details.replaceFirst(":", "");
+                    }
                 }
             }
         } else {

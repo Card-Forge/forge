@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block title %}Monitoring Dashboard - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1><i class="fas fa-eye"></i> Monitoring Dashboard</h1>
+        <p class="text-muted">Real-time overview of running simulations</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ running_simulations|length }}</h4>
+                        <p class="mb-0">Total Running</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-play fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ user_simulations|length }}</h4>
+                        <p class="mb-0">Your Running</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-user fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>10</h4>
+                        <p class="mb-0">Max Concurrent</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-server fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if running_simulations %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list"></i> All Running Simulations</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Simulation</th>
+                                <th>Progress</th>
+                                <th>Started</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for simulation in running_simulations %}
+                            <tr>
+                                <td>
+                                    {% if simulation.user_id == current_user.id %}
+                                        <strong>You</strong>
+                                    {% else %}
+                                        User #{{ simulation.user_id }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <strong>{{ simulation.name }}</strong><br>
+                                    <small class="text-muted">{{ simulation.num_games }} games</small>
+                                </td>
+                                <td>
+                                    <div class="progress mb-1" style="height: 20px;">
+                                        <div class="progress-bar bg-primary" 
+                                             role="progressbar" 
+                                             style="width: {{ simulation.progress_percent }}%"
+                                             aria-valuenow="{{ simulation.progress_percent }}" 
+                                             aria-valuemin="0" aria-valuemax="100">
+                                            {{ "%.1f"|format(simulation.progress_percent) }}%
+                                        </div>
+                                    </div>
+                                    <small class="text-muted">
+                                        {{ simulation.games_completed }} / {{ simulation.num_games }} games
+                                    </small>
+                                </td>
+                                <td>
+                                    {% if simulation.started_at %}
+                                        {{ simulation.started_at.strftime('%H:%M') }}<br>
+                                        <small class="text-muted">{{ simulation.started_at.strftime('%m/%d') }}</small>
+                                    {% else %}
+                                        <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if simulation.user_id == current_user.id %}
+                                        <a href="{{ url_for('monitoring.simulation_status', simulation_id=simulation.id) }}" 
+                                           class="btn btn-sm btn-primary">
+                                            <i class="fas fa-eye"></i> Monitor
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">Not yours</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if user_simulations %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-user-check"></i> Your Running Simulations</h5>
+            </div>
+            <div class="card-body">
+                {% for simulation in user_simulations %}
+                    <div class="simulation-status running mb-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <h6 class="mb-1">{{ simulation.name }}</h6>
+                                <small class="text-muted">{{ simulation.num_games }} games total</small>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="progress mb-1" style="height: 20px;">
+                                    <div class="progress-bar bg-primary" 
+                                         role="progressbar" 
+                                         style="width: {{ simulation.progress_percent }}%"
+                                         aria-valuenow="{{ simulation.progress_percent }}" 
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        {{ "%.1f"|format(simulation.progress_percent) }}%
+                                    </div>
+                                </div>
+                                <small class="text-muted">
+                                    {{ simulation.games_completed }} / {{ simulation.num_games }} completed
+                                </small>
+                            </div>
+                            <div class="col-md-2">
+                                {% if simulation.started_at %}
+                                    <small class="text-muted">
+                                        Running<br>
+                                        {{ simulation.started_at.strftime('%H:%M') }}
+                                    </small>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-2">
+                                <a href="{{ url_for('monitoring.simulation_status', simulation_id=simulation.id) }}" 
+                                   class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i> Monitor
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if not running_simulations %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-pause-circle fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No Running Simulations</h4>
+                <p class="text-muted mb-4">All simulations are currently idle.</p>
+                <a href="{{ url_for('simulation.new_simulation') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Start New Simulation
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-server"></i> System Status</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h5>{{ running_simulations|length }}/10</h5>
+                            <small class="text-muted">Concurrent Limit</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h5 id="system-cpu">N/A</h5>
+                            <small class="text-muted">CPU Usage</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h5 id="system-memory">N/A</h5>
+                            <small class="text-muted">Memory Usage</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h5>0</h5>
+                            <small class="text-muted">Queue Size</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-refresh if there are running simulations
+{% if running_simulations %}
+setInterval(function() {
+    location.reload();
+}, 10000); // Refresh every 10 seconds
+
+// Update system status
+function updateSystemStatus() {
+    fetch('/monitoring/api/system/status')
+        .then(response => response.json())
+        .then(data => {
+            if (data.system_resources) {
+                document.getElementById('system-cpu').textContent = data.system_resources.cpu_usage || 'N/A';
+                document.getElementById('system-memory').textContent = data.system_resources.memory_usage || 'N/A';
+            }
+        })
+        .catch(error => {
+            console.error('Error updating system status:', error);
+        });
+}
+
+// Update system status every 30 seconds
+setInterval(updateSystemStatus, 30000);
+updateSystemStatus();
+{% endif %}
+
+// Manual refresh button
+function refreshDashboard() {
+    location.reload();
+}
+</script>
+{% endblock %}

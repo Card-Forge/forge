@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+
+{% block title %}Simulations - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1><i class="fas fa-play"></i> My Simulations</h1>
+                <p class="text-muted">Manage your EDH simulation runs</p>
+            </div>
+            <div>
+                <a href="{{ url_for('simulation.new_simulation') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> New Simulation
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list"></i> Simulation History</h5>
+            </div>
+            <div class="card-body">
+                {% if simulations %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Progress</th>
+                                    <th>Players</th>
+                                    <th>Created</th>
+                                    <th>Duration</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for simulation in simulations %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ simulation.name }}</strong>
+                                        <br>
+                                        <small class="text-muted">{{ simulation.num_games }} games</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge 
+                                            {% if simulation.status == 'completed' %}bg-success
+                                            {% elif simulation.status == 'running' %}bg-primary
+                                            {% elif simulation.status == 'failed' %}bg-danger
+                                            {% elif simulation.status == 'stopped' %}bg-warning
+                                            {% else %}bg-secondary{% endif %}">
+                                            {{ simulation.status.title() }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="progress mb-1" style="height: 20px;">
+                                            <div class="progress-bar 
+                                                {% if simulation.status == 'completed' %}bg-success
+                                                {% elif simulation.status == 'running' %}bg-primary
+                                                {% elif simulation.status == 'failed' %}bg-danger
+                                                {% else %}bg-secondary{% endif %}" 
+                                                role="progressbar" 
+                                                style="width: {{ simulation.progress_percent }}%"
+                                                aria-valuenow="{{ simulation.progress_percent }}" 
+                                                aria-valuemin="0" aria-valuemax="100">
+                                                {{ "%.1f"|format(simulation.progress_percent) }}%
+                                            </div>
+                                        </div>
+                                        <small class="text-muted">
+                                            {{ simulation.games_completed }} / {{ simulation.num_games }} games
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            {% for player in simulation.players %}
+                                                <small class="text-muted">
+                                                    P{{ player.player_number }}: {{ player.deck_id[:20] }}{% if player.deck_id|length > 20 %}...{% endif %}
+                                                </small>
+                                            {% endfor %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ simulation.created_at.strftime('%Y-%m-%d') }}
+                                        <br>
+                                        <small class="text-muted">{{ simulation.created_at.strftime('%H:%M') }}</small>
+                                    </td>
+                                    <td>
+                                        {% if simulation.started_at and simulation.completed_at %}
+                                            {% set duration = (simulation.completed_at - simulation.started_at).total_seconds() %}
+                                            {% if duration > 3600 %}
+                                                {{ "%.1f"|format(duration / 3600) }}h
+                                            {% elif duration > 60 %}
+                                                {{ "%.0f"|format(duration / 60) }}m
+                                            {% else %}
+                                                {{ "%.0f"|format(duration) }}s
+                                            {% endif %}
+                                        {% elif simulation.started_at %}
+                                            <span class="text-muted">Running...</span>
+                                        {% else %}
+                                            <span class="text-muted">-</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            {% if simulation.status == 'pending' %}
+                                                <form method="POST" action="{{ url_for('simulation.start_simulation', simulation_id=simulation.id) }}" class="d-inline">
+                                                    <button type="submit" class="btn btn-success" title="Start Simulation">
+                                                        <i class="fas fa-play"></i>
+                                                    </button>
+                                                </form>
+                                            {% elif simulation.status == 'running' %}
+                                                <a href="{{ url_for('monitoring.simulation_status', simulation_id=simulation.id) }}" 
+                                                   class="btn btn-primary" title="Monitor">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <form method="POST" action="{{ url_for('simulation.stop_simulation', simulation_id=simulation.id) }}" class="d-inline">
+                                                    <button type="submit" class="btn btn-warning" title="Stop Simulation"
+                                                            onclick="return confirm('Are you sure you want to stop this simulation?')">
+                                                        <i class="fas fa-stop"></i>
+                                                    </button>
+                                                </form>
+                                            {% elif simulation.status == 'completed' %}
+                                                <a href="{{ url_for('statistics.simulation_statistics', simulation_id=simulation.id) }}" 
+                                                   class="btn btn-success" title="View Statistics">
+                                                    <i class="fas fa-chart-bar"></i>
+                                                </a>
+                                            {% elif simulation.status == 'failed' %}
+                                                <button class="btn btn-danger" title="Error: {{ simulation.error_message }}" disabled>
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                </button>
+                                            {% endif %}
+                                            
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-outline-secondary dropdown-toggle" 
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ url_for('simulation.new_simulation') }}?clone={{ simulation.id }}">
+                                                            <i class="fas fa-copy"></i> Clone
+                                                        </a>
+                                                    </li>
+                                                    {% if simulation.status in ['completed', 'failed', 'stopped'] %}
+                                                    <li>
+                                                        <form method="POST" action="{{ url_for('simulation.delete_simulation', simulation_id=simulation.id) }}" class="d-inline">
+                                                            <button type="submit" class="dropdown-item text-danger"
+                                                                    onclick="return confirm('Are you sure you want to delete this simulation?')">
+                                                                <i class="fas fa-trash"></i> Delete
+                                                            </button>
+                                                        </form>
+                                                    </li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-play fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">No Simulations Yet</h4>
+                        <p class="text-muted mb-4">Create your first EDH simulation to get started with deck analysis.</p>
+                        <a href="{{ url_for('simulation.new_simulation') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Create First Simulation
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if simulations %}
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Total Simulations</h5>
+                <h2 class="text-primary">{{ simulations|length }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Running</h5>
+                <h2 class="text-info">{{ simulations|selectattr("status", "equalto", "running")|list|length }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Completed</h5>
+                <h2 class="text-success">{{ simulations|selectattr("status", "equalto", "completed")|list|length }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-refresh running simulations every 10 seconds
+if (document.querySelectorAll('.badge.bg-primary').length > 0) {
+    setInterval(function() {
+        location.reload();
+    }, 10000);
+}
+</script>
+{% endblock %}

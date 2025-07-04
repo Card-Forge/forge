@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+        <p class="text-muted">Overview of your MTG EDH simulations</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ total_simulations }}</h4>
+                        <p class="mb-0">Total Simulations</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-play fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ total_games }}</h4>
+                        <p class="mb-0">Games Played</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-gamepad fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>{{ recent_simulations|length }}</h4>
+                        <p class="mb-0">Recent Simulations</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list"></i> Recent Simulations</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_simulations %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Progress</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for simulation in recent_simulations %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ simulation.name }}</strong>
+                                    </td>
+                                    <td>
+                                        <span class="badge {% if simulation.status == 'completed' %}bg-success{% elif simulation.status == 'running' %}bg-primary{% elif simulation.status == 'failed' %}bg-danger{% else %}bg-secondary{% endif %}">
+                                            {{ simulation.status.title() }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar" role="progressbar" 
+                                                 style="width: {{ simulation.progress_percent }}%"
+                                                 aria-valuenow="{{ simulation.progress_percent }}" 
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                                {{ "%.1f"|format(simulation.progress_percent) }}%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ simulation.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            {% if simulation.status == 'running' %}
+                                                <a href="{{ url_for('monitoring.simulation_status', simulation_id=simulation.id) }}" 
+                                                   class="btn btn-outline-primary">
+                                                    <i class="fas fa-eye"></i> Monitor
+                                                </a>
+                                            {% elif simulation.status == 'completed' %}
+                                                <a href="{{ url_for('statistics.simulation_statistics', simulation_id=simulation.id) }}" 
+                                                   class="btn btn-outline-success">
+                                                    <i class="fas fa-chart-bar"></i> Stats
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No simulations yet. <a href="{{ url_for('simulation.new_simulation') }}">Create your first simulation</a>.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-rocket"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('simulation.new_simulation') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> New Simulation
+                    </a>
+                    <a href="{{ url_for('decks.deck_browser') }}" class="btn btn-outline-secondary">
+                        <i class="fas fa-cards-blank"></i> Browse Decks
+                    </a>
+                    <a href="{{ url_for('monitoring.monitoring_dashboard') }}" class="btn btn-outline-info">
+                        <i class="fas fa-eye"></i> Monitor Running
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Tips</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-lightbulb text-warning"></i> Start with 10-20 games for quick testing</li>
+                    <li><i class="fas fa-lightbulb text-warning"></i> Monitor simulations in real-time</li>
+                    <li><i class="fas fa-lightbulb text-warning"></i> Compare deck performance with statistics</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -11,7 +11,7 @@ ignoredSet = [ 'ASTRAL', 'ATH', 'BD', 'BR', 'CM1', 'DD2', 'DDC', 'DDD', 'DDE', '
 
 toolsDir = os.path.abspath(os.path.dirname( __file__ ))
 resDir = os.path.abspath(os.path.join(toolsDir, '..', 'res'))
-pathToMtgData = os.path.join(toolsDir, "mtg-data.txt")
+pathToMtgData = os.path.join(toolsDir, "mtg-tools-data.txt")
 
 def initializeFormats():
 	formats = {}
@@ -126,7 +126,7 @@ def printDistinctOracle(missingSet, fileName):
 
 if __name__ == '__main__':
 	if not os.path.exists(pathToMtgData) :
-		print("This script requires the text version of Arch's mtg-data to be present.You can download it from slightlymagic.net's forum and either place the text version next to this script or edit this script and provide the path to the file at the top.")
+		print("This script requires the text version of Arch's mtg-tools-data to be present.You can download it from slightlymagic.net's forum and either place the text version next to this script or edit this script and provide the path to the file at the top.")
 		print("Press Enter to exit")
 		raw_input("")
 		sys.exit()
@@ -150,8 +150,8 @@ if __name__ == '__main__':
 	line = ""
 	prevline = ""
 
-	#Parse mtg-data
-	print("Parsing mtg-data")
+	#Parse mtg-tools-data
+	print("Parsing mtg-tools-data")
 	with open(pathToMtgData) as mtgdata :
 		for line in mtgdata :
 			# Parse the sets at the top of the mtgdata file
