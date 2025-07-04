@@ -101,25 +101,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Controller, ownerAndController);
         set(TrackableProperty.ImageKey, imageKey);
     }
-
-    public int getFullBorderMode() {
-        return get(TrackableProperty.FullBorderMode);
-    }
-
-    public void updateFullBorderMode(final int mode) {
-        set(TrackableProperty.FullBorderMode, mode);
-    }
-
-    public boolean isFullBorder(final String image) {
-        if (getFullBorderMode() < 1) { // 0 not yet queried the texture image string
-            if (image.contains(".fullborder.") || image.contains("tokens"))
-                updateFullBorderMode(1); // 1 for texture/card image that has full borders or tokens
-            else
-                updateFullBorderMode(2); // 2 for old image format
-        }
-        return getFullBorderMode() == 1;
-    }
-
     public PlayerView getOwner() {
         return get(TrackableProperty.Owner);
     }

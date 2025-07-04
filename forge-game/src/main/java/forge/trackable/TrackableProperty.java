@@ -18,8 +18,6 @@ public enum TrackableProperty {
     Counters(TrackableTypes.CounterMapType),
     CurrentPlane(TrackableTypes.StringType),
     PlanarPlayer(TrackableTypes.PlayerViewType),
-    //FullBorderMode
-    FullBorderMode(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
 
     //Card
     Owner(TrackableTypes.PlayerViewType),

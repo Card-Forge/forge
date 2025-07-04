@@ -295,7 +295,7 @@ public class ImageCache {
                   image fetcher to update automatically after the card image/s are downloaded*/
                 imageLoaded = false;
                 if (image != null && imageRecord.get().get(image.toString()) == null)
-                    imageRecord.get().put(image.toString(), new ImageRecord(Color.valueOf("#171717").toString(), false, getRadius(image))); //black border
+                    imageRecord.get().put(image.toString(), new ImageRecord(Color.valueOf("#171717").toString(), false, getRadius(image), image.toString().contains(".fullborder.") || image.toString().contains("tokens"))); //black border
             }
         }
         return image;
@@ -349,7 +349,7 @@ public class ImageCache {
                     radius = 22;
                 updateImageRecord(cardTexture.toString(),
                         borderless ? Color.valueOf("#171717").toString() : isCloserToWhite(getpixelColor(cardTexture)).getLeft(),
-                        !borderless && isCloserToWhite(getpixelColor(cardTexture)).getRight(), radius);
+                        !borderless && isCloserToWhite(getpixelColor(cardTexture)).getRight(), radius, cardTexture.toString().contains(".fullborder.") || cardTexture.toString().contains("tokens"));
             }
             return cardTexture;
         }
@@ -444,8 +444,8 @@ public class ImageCache {
             return 1;
         return 0;
     }
-    public void updateImageRecord(String textureString, String colorValue, Boolean isClosertoWhite, int radius) {
-        imageRecord.get().put(textureString, new ImageRecord(colorValue, isClosertoWhite, radius));
+    public void updateImageRecord(String textureString, String colorValue, Boolean isClosertoWhite, int radius, boolean fullborder) {
+        imageRecord.get().put(textureString, new ImageRecord(colorValue, isClosertoWhite, radius, fullborder));
     }
 
     public int getRadius(Texture t) {
@@ -458,6 +458,13 @@ public class ImageCache {
         if (i == null)
             return 20;
         return i;
+    }
+
+    public boolean isFullBorder(String textureString) {
+        ImageRecord record = imageRecord.get().get(textureString);
+        if (record == null)
+            return false;
+        return record.isFullBorder;
     }
 
     public FImage getBorder(String textureString) {
@@ -544,11 +551,13 @@ public class ImageCache {
         String colorValue;
         Boolean isCloserToWhite;
         Integer cardRadius;
+        boolean isFullBorder;
 
-        ImageRecord(String colorString, Boolean closetoWhite, int radius) {
+        ImageRecord(String colorString, Boolean closetoWhite, int radius, boolean fullborder) {
             colorValue = colorString;
             isCloserToWhite = closetoWhite;
             cardRadius = radius;
+            isFullBorder = fullborder;
         }
     }
 }
