@@ -335,11 +335,11 @@ public class AdventureEventData implements Serializable {
         }
         if (configData.allowedEditions != null) {
             Set<String> allowed = Set.of(configData.allowedEditions);
-            filter = filter.and(q -> allowed.contains(q.getName()));
+            filter = filter.and(q -> allowed.contains(q.getCode()));
         } else {
             List<String> restrictedList = Arrays.asList(configData.restrictedEditions);
             Set<String> restricted = new HashSet<>(restrictedList); //Would use Set.of but that throws an error if there's any duplicates, and users edit these lists all the time.
-            filter = filter.and(q -> !restricted.contains(q.getName()));
+            filter = filter.and(q -> !restricted.contains(q.getCode()));
         }
 
         List<CardEdition> allEditions = new ArrayList<>();
