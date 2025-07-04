@@ -1,0 +1,8 @@
+Name:Terrasymbiosis
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ CounterAddedOnce | CounterType$ P1P1 | ValidObject$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidSource$ You | Execute$ TrigDraw | ResolvedLimit$ 1 | OptionalDecider$ You | TriggerDescription$ Whenever you put one or more +1/+1 counters on a creature you control, you may draw that many cards. Do this only once each turn.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+SVar:X:TriggerCount$Amount
+DeckNeeds:Ability$Counters
+Oracle:Whenever you put one or more +1/+1 counters on a creature you control, you may draw that many cards. Do this only once each turn.
