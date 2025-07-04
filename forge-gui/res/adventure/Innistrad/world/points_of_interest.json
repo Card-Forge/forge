@@ -29,9 +29,24 @@
 		]
 	},
 	{
+		"name": "inn_forgotten_lodge_1",
+		"type": "dungeon",
+		"count": 18,
+		"spriteAtlas": "../common/maps/tileset/inn_buildings.atlas",
+		"sprite": "lodge_1",
+		"map": "../common/maps/map/hunting_lodge/inn_forgotten_lodge_1.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Hostile",
+			"Dungeon",
+			"BiomeColorless",
+			"Sidequest"
+		]
+	},
+	{
 		"name": "inn_lodge_1",
 		"type": "dungeon",
-		"count": 15,
+		"count": 12,
 		"spriteAtlas": "../common/maps/tileset/inn_buildings.atlas",
 		"sprite": "lodge_1",
 		"map": "../common/maps/map/hunting_lodge/inn_lodge_1.tmx",

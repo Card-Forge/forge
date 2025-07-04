@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/INN_dungen_crawler_tileset.tsx"/>
- <tileset firstgid="24193" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="24193" source="../../tileset/main-nocollide.tsx"/>
  <tileset firstgid="34305" source="../../tileset/inn_main.tsx"/>
- <tileset firstgid="44417" source="../../tileset/main.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyVlf1WgzAMxTumw83BA1mOjwboce6L8chqckgOd3ft1D9yUlrozS9NwxhDGMXKJoQP8TuxN7FPsZXMfb9MtpfnQ5w9jtkHGPfw/CX7VLLnYzPtrZoPZj53tHhcN/yi0yfmD6Rf2r5L8Sfx5zjrazyqtxBfG2+X2FPXeA7ZmFt9K7ZpppxWxrc0XdUrwBfNLW+wXOT2P9A6xqU5fRbbiq1N8xJn1sK4+zjrYi6Rd6S9R1v3eFj33XKsXjWHeM2r3+pcZ98MpMFn7FqoyTG2pqnMT8a8t3eQdyCrbT53jrmceL4q01Ltk+mvm1ve3D0KidodEjWAMemz3qUd6F2sppm3g/PFffeg5RoDvcO8ztECa0V17Lyu3Sf2RW0/U48j10dcd2O5Vt5lgtdrCw17Ca8Nd+JzhtbqujJbZHj5/nbxupcg57077TnRM95a79Kz9ZiYl2sLOVk/QJyp/uLMF8pDjtf7Zf2arjOsAR8jIzLremU9cmUaI+n7e5xb1MCaQd5cLx2tlj1nOneM1/puNeSd65jjcV5mReayme9wCb3rL2P9X//3Gx//AK1XMOI=
@@ -20,16 +19,16 @@
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJz7w8/A8BeI6QXOc0LoWQIMDLMFIOwmXlS54QwGsx9vT2dguDOdfvZVzkDlK/DRz25iwE0iw4JWcSpFZHhU8+KWu67NwHADiKtm4FZDC3APGHb3kcKvDo/9FUhyt+iY/kgFpMYzevomBlygcfmghJSmbgLTxS1t3GopSdcyONIuKB08AMbxQ6R4poWfy0kM+zhgHRiPVA/Sq5z+g1T/IttJa/sBcL4onQ==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJz7w8/A8BeI6QXOc0LoWQIMDLMFIOwmXlS54QwGsx9vT2dguDOdfvZVzkDlK/DRz25iwE0iw4JWcSpFZHhU8+KWu67NwHADiKtm4FZDC3APGHb3kcKvDo/9FUhyt+iY/kgFpMYzevomBgRsJ10PKUAJKU3dBKaLW9q41VKSrmVwpF1QOngAjOOHSPFMCz+Xkxj2ccA6MB6pHqRXOf0Hqf5FtpPW9gMAIPko+Q==
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYMAPQviJEyPWjIDtuNXhksOnR52FgUERiOWBWAEJg8TIBbj8d54Twd4LNH8/EEezMjDEAPEeIHsfEEcC2WpE2C2Px6220xkY7KZjVxsHND+WFSLeywGxH2b3fiLs3QtVS4z6BKjZB4E4lRVTPhnq9ySoHHq4wfgg90exQsxJQVKPD0Qj+dNmOnbzCYFDUH8eR/NnRxt2PnL8UgJAbgf5E1uYwYAKC/Z0gu42SoEDMOwckdISKEyOsKDahc3fNkh6QPLkho0eVG8CUrwjm0WtMEcGpIYhunrk8gZX2RULFI8D4ngi0yQ2f2ITw1fWgcBvoH1/gPgr1N4mXuzqcKVxZOAEjGPn6ahiuOJjpgADw3Qgni2A3330BMhxQygdkZomCMUDPoCvnKJFeifFfhgAADghR58=
+   eJxjYMAPQviJEyPWjAucuNXhksOnR52FgUERiOWBWAEJg8TIBbj8dx7JHXuB5u8H4mhWBoYYIN4DZO8D4kggW40Iu+XxuNV2OgOD3XTsauOA5seyQsR7OSD2w+zeT4S9e6FqiVGfADX7IBCnsmLKJ0P9ngSVQw83GB/k/ihWiDkpSOrxgWgkf9pMx24+IXAI6s/jaP7saMPOP48nnZECQG4H+RNbmMGACgv2dILuNkqBAzDsHJHSEihMjrCg2oXN3zZIekDy5IaNHlRvAlK8I5tFrTBHBqSGIbp65PIGV9kVCxSPA+J4ItMkNn9iE8NX1oHAb6B9f4D4K9TeJl7s6nClcWTgBIxj5+moYrjiY6YAA8N0IJ4tgN999ATIcUMoHZGaJgjFAz6Ar5yiRXonxX4YAACfCUZd
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

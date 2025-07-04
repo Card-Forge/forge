@@ -36,6 +36,7 @@
 	"Missionary of Saint Traft",
 	"Sigardian Priest",
 	"Wandering Geist",
+	"Watcher in the Web",
 	"Wolfkin Outcast"
 ],
 "pointsOfInterest": [
@@ -44,7 +45,8 @@
 	"inn_ulvenwald_town",
 	"inn_ulvenwald_village",
 	"inn_Cave_river",
-	"inn_lodge_1"
+	"inn_lodge_1",
+	"inn_forgotten_lodge_1"
 ],
 "structures": [
 	{

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/INN_dungen_crawler_tileset.tsx"/>
- <tileset firstgid="24193" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="24193" source="../../tileset/main-nocollide.tsx"/>
  <tileset firstgid="34305" source="../../tileset/inn_main.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
@@ -19,14 +19,14 @@
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
    eJz7w8/A8BeI6QXOc0LoWQIMDLMFIOwmXlS5wQgU+KhjzmD24+3pDAx3ptPPvsoZqHxYGFfPwFQ7EOAmkWFBaZzexWGPFJFprpoXt9x1bQaGG0BchSdMlaiUtpHBPaCf7iP5qw5ofz3UDbJo9lUgue0WHdMfqYDUeEZP34pEhPMFGpcPyHF9E5gubmnjVktJupbB4VdQOngAjOOHSPFMCz+Xk1iGxAHrwHikepBe5fQfpPoX2U5a2w8Almws8w==
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYMAPQviJEyPWjAucuNXhksOnR52FgUERiOWBWAEJg8TIBbj8dx7JHXuB5u8H4mhWBoYYIN4DZO8D4kggW40Iu+XxuNV2OgOD3XTsauOA5seyQsR7ORgYkpHs3k+EvXuhaolRnwA1+yAQp7JiyidD/Z4ElUMPNxgf5P4oVog5KUjq8YFoJH/aTMduPiFwCOrP42j+7GjDzrefzoAXuPMwMHjwELYX5HaQP7GFGQyosGBPJ+huA4GnQDufEWEvNuAA9JMjkr9AYXKEBbddMGCDpAeU7s/jyYP4gB5UXwKR8U4NgM9fxKhHLm9wlV2xQPE4II4nMU0SAvjKOhD4DbTvDxB/hdrbxItdHa40jgycgHHsjJbmccXzTAEGhulAPFsAv/voCUgpD0hNE4TiAR/A5y5y8xG17IcBAIqQQwU=
   </data>

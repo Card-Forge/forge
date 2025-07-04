@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="104">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -58,17 +58,17 @@
   <object id="95" template="../../obj/enemy.tx" x="153.684" y="135.789">
    <properties>
     <property name="enemy" value="Wolfkin Outcast"/>
-    <property name="pursueRange" type="int" value="10"/>
-    <property name="threatRange" type="int" value="3"/>
-    <property name="waypoints" value="99,100,101,102,100,101"/>
+    <property name="pursueRange" type="int" value="20"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="101,102,104,105,99,100,105,101,102,104,105,99,100,105,104"/>
    </properties>
   </object>
-  <object id="96" template="../../obj/enemy.tx" x="147.719" y="40">
+  <object id="96" template="../../obj/enemy.tx" x="151.901" y="39.0909" width="9.81818" height="10.1818">
    <properties>
     <property name="enemy" value="Immerwolf"/>
     <property name="pursueRange" type="int" value="15"/>
     <property name="spawn.Easy" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="97" template="../../obj/gold.tx" x="191.579" y="32.9825">
@@ -97,5 +97,7 @@
   <object id="100" template="../../obj/waypoint.tx" x="233.333" y="199.298"/>
   <object id="101" template="../../obj/waypoint.tx" x="103.509" y="124.561"/>
   <object id="102" template="../../obj/waypoint.tx" x="228.772" y="123.86"/>
+  <object id="104" template="../../obj/waypoint.tx" x="152.25" y="128"/>
+  <object id="105" template="../../obj/waypoint.tx" x="153.25" y="179.75"/>
  </objectgroup>
 </map>

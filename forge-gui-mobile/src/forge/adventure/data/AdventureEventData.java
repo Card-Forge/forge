@@ -323,23 +323,30 @@ public class AdventureEventData implements Serializable {
 
     private CardBlock pickWeightedCardBlock() {
         CardEdition.Collection editions = FModel.getMagicDb().getEditions();
+        ConfigData configData = Config.instance().getConfigData();
         Iterable<CardBlock> src = FModel.getBlocks(); //all blocks
         Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(selectSetPool());
+
+        if(configData.restrictedEvents != null) {
+            //Temporary restriction until rewards are more diverse - don't want to award restricted cards so these editions need different rewards added.
+            //Also includes sets that use conspiracy or commander drafts.
+            Set<String> restrictedEvents = Set.of(configData.restrictedEvents);
+            filter = filter.and((q) -> !restrictedEvents.contains(q.getCode()));
+        }
+        if (configData.allowedEditions != null) {
+            Set<String> allowed = Set.of(configData.allowedEditions);
+            filter = filter.and(q -> allowed.contains(q.getCode()));
+        } else {
+            List<String> restrictedList = Arrays.asList(configData.restrictedEditions);
+            Set<String> restricted = new HashSet<>(restrictedList); //Would use Set.of but that throws an error if there's any duplicates, and users edit these lists all the time.
+            filter = filter.and(q -> !restricted.contains(q.getCode()));
+        }
+
         List<CardEdition> allEditions = new ArrayList<>();
         StreamUtil.stream(editions)
                 .filter(filter)
                 .filter(CardEdition::hasBoosterTemplate)
                 .forEach(allEditions::add);
-
-        //Temporary restriction until rewards are more diverse - don't want to award restricted cards so these editions need different rewards added.
-        List<String> restrictedDrafts = new ArrayList<>();
-        restrictedDrafts.add("LEA");
-        restrictedDrafts.add("LEB");
-        restrictedDrafts.add("2ED");
-        restrictedDrafts.add("30A");
-        restrictedDrafts.add("CNS");
-        restrictedDrafts.add("CN2");
-        allEditions.removeIf(q -> restrictedDrafts.contains(q.getCode()));
 
         List<CardBlock> legalBlocks = new ArrayList<>();
         for (CardBlock b : src) { // for each block
@@ -365,15 +372,15 @@ public class AdventureEventData implements Serializable {
                 for (PrintSheet ps : c.getPrintSheetsBySection()) {
                     //exclude block with sets containing P9 cards..
                     if (ps.containsCardNamed("Black Lotus", 1)
-                                || ps.containsCardNamed("Mox Emerald", 1)
-                                || ps.containsCardNamed("Mox Pearl", 1)
-                                || ps.containsCardNamed("Mox Ruby", 1)
-                                || ps.containsCardNamed("Mox Sapphire", 1)
-                                || ps.containsCardNamed("Mox Jet", 1)
-                                || ps.containsCardNamed("Ancestral Recall", 1)
-                                || ps.containsCardNamed("Timetwister", 1)
-                                || ps.containsCardNamed("Time Walk", 1)) {
-                            isOkay = false;
+                            || ps.containsCardNamed("Mox Emerald", 1)
+                            || ps.containsCardNamed("Mox Pearl", 1)
+                            || ps.containsCardNamed("Mox Ruby", 1)
+                            || ps.containsCardNamed("Mox Sapphire", 1)
+                            || ps.containsCardNamed("Mox Jet", 1)
+                            || ps.containsCardNamed("Ancestral Recall", 1)
+                            || ps.containsCardNamed("Timetwister", 1)
+                            || ps.containsCardNamed("Time Walk", 1)) {
+                        isOkay = false;
                         break;
                     }
                 }
@@ -383,34 +390,35 @@ public class AdventureEventData implements Serializable {
             }
         }
 
-        ConfigData configData = Config.instance().getConfigData();
-        if (configData.allowedEditions != null) {
-            List<String> allowed = Arrays.asList(configData.allowedEditions);
-            legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
-        } else {
-            for (String restricted : configData.restrictedEditions) {
-                legalBlocks.removeIf(q -> q.getName().equals(restricted));
-            }
-        }
         return legalBlocks.isEmpty() ? null : Aggregates.random(legalBlocks);
     }
 
     private CardBlock pickJumpstartCardBlock() {
         Iterable<CardBlock> src = FModel.getBlocks(); //all blocks
         List<CardBlock> legalBlocks = new ArrayList<>();
-        for (CardBlock b : src) { // for each block
-            //I hate doing this, but it seems like the simplest way to reliably filter out prereleases
-            if (b.getName().toUpperCase().contains("JUMPSTART")) {
-                legalBlocks.add(b);
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.allowedJumpstart != null) {
+            Set<String> allowed = Set.of(configData.allowedJumpstart);
+            for (CardBlock b : src) { // for each block
+                if (allowed.contains(b.getName())) {
+                    legalBlocks.add(b);
+                }
             }
         }
-        ConfigData configData = Config.instance().getConfigData();
-        if (configData.allowedEditions != null) {
-            List<String> allowed = Arrays.asList(configData.allowedEditions);
-            legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
-        } else {
-            for (String restricted : configData.restrictedEditions) {
-                legalBlocks.removeIf(q -> q.getName().equals(restricted));
+        else {
+            for (CardBlock b : src) { // for each block
+                //I hate doing this, but it seems like the simplest way to reliably filter out prereleases
+                if (b.getName().toUpperCase().contains("JUMPSTART")) {
+                    legalBlocks.add(b);
+                }
+            }
+            if (configData.allowedEditions != null) {
+                Set<String> allowed = Set.of(configData.allowedEditions);
+                legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
+            } else {
+                for (String restricted : configData.restrictedEditions) {
+                    legalBlocks.removeIf(q -> q.getName().equals(restricted));
+                }
             }
         }
         return legalBlocks.isEmpty() ? null : Aggregates.random(legalBlocks);

@@ -647,6 +647,60 @@
 		]
 	},
 	{
+		"name": "Immerwolf",
+		"sprite": "sprites/enemy/beast/wolf.atlas",
+		"deck": [
+			"decks/standard/INN/inn_immerwolf_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.1,
+		"difficulty": 0.1,
+		"speed": 45,
+		"life": 15,
+		"scale": 0.5,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 2,
+				"count": 2,
+				"addMaxCount": 2
+			},
+			{
+				"type": "gold",
+				"probability": 0.7,
+				"count": 5,
+				"addMaxCount": 85
+			},
+			{
+				"type": "card",
+				"count": 0,
+				"addMaxCount": 2,
+				"colors": [
+					"Red",
+					"Green"
+				],
+				"rarity": [
+					"Uncommon",
+					"Rare"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"colors": "GR",
+		"questTags": [
+			"Wolf",
+			"Howlpack",
+			"BiomeGreen",
+			"IdentityGreen",
+			"IdentityRed"
+		]
+	},
+	{
 		"name": "Laboratory Assistant",
 		"sprite": "sprites/enemy/humanoid/human/wizard/archivist.atlas",
 		"deck": [
@@ -761,7 +815,7 @@
 				]
 			}
 		],
-		"colors": "W",
+		"colors": "G",
 		"questTags": [
 			"Spirit",
 			"Nature",
@@ -1144,6 +1198,77 @@
 			"IdentityBlue",
 			"BiomeWhite",
 			"BiomeColorless"
+		]
+	},
+	{
+		"name": "Watcher in the Web",
+		"sprite": "sprites/enemy/beast/spider_black.atlas",
+		"deck": [
+			"decks/standard/INN/inn_spider_easy.dck"
+		],
+		"ai": "",
+		"spawnRate": 0.3,
+		"difficulty": 0.1,
+		"speed": 30,
+		"life": 13,
+		"rewards": [
+			{
+				"type": "deckCard",
+				"probability": 2,
+				"count": 2,
+				"addMaxCount": 2
+			},
+			{
+				"type": "gold",
+				"probability": 0.3,
+				"count": 5,
+				"addMaxCount": 85
+			},
+			{
+				"type": "card",
+				"probability": 0.45,
+				"count": 1,
+				"addMaxCount": 2,
+				"colors": [
+					"Green"
+				],
+				"rarity": [
+					"Uncommon",
+					"Common"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID",
+					"VOW"
+				]
+			},
+			{
+				"type": "card",
+				"count": 0,
+				"addMaxCount": 1,
+				"colors": [
+					"Green"
+				],
+				"rarity": [
+					"Uncommon",
+					"Rare"
+				],
+				"editions":[
+					"SOI",
+					"DKA",
+					"ISD",
+					"MID"
+				]
+			}
+		],
+		"colors": "G",
+		"questTags": [
+			"Spider",
+			"BiomeGreen",
+			"IdentityGreen",
+			"abandoned"
 		]
 	},
 	{

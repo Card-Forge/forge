@@ -23,4 +23,6 @@ public class ConfigData {
     public String[] restrictedCards;
     public String[] restrictedEditions;
     public String[] allowedEditions;
+    public String[] restrictedEvents;
+    public String[] allowedJumpstart;
 }
