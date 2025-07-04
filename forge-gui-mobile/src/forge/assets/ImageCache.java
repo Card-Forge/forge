@@ -460,8 +460,10 @@ public class ImageCache {
         return i;
     }
 
-    public boolean isFullBorder(String textureString) {
-        ImageRecord record = imageRecord.get().get(textureString);
+    public boolean isFullBorder(Texture image) {
+        if (image == null)
+            return false;
+        ImageRecord record = imageRecord.get().get(image.toString());
         if (record == null)
             return false;
         return record.isFullBorder;
