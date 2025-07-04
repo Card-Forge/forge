@@ -18,6 +18,8 @@ public enum TrackableProperty {
     Counters(TrackableTypes.CounterMapType),
     CurrentPlane(TrackableTypes.StringType),
     PlanarPlayer(TrackableTypes.PlayerViewType),
+    //CardViewMode
+    CardViewMode(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
 
     //Card
     Owner(TrackableTypes.PlayerViewType),

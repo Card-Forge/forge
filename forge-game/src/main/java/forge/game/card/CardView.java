@@ -102,6 +102,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ImageKey, imageKey);
     }
 
+    public int getCardViewMode() {
+        return get(TrackableProperty.CardViewMode);
+    }
+
+    public void updateCardViewMode(final int mode) {
+        set(TrackableProperty.CardViewMode, mode);
+    }
     public PlayerView getOwner() {
         return get(TrackableProperty.Owner);
     }
