@@ -1,0 +1,12 @@
+Name:Infinite Guideline Station
+ManaCost:W U B R G
+Types:Legendary Artifact Spacecraft
+PT:7/15
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a tapped 2/2 colorless Robot artifact creature token for each multicolored permanent you control.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_2_2_a_robot | TokenTapped$ True | TokenOwner$ You
+K:Station:12
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE12_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ AttackTrig | Description$ STATION 12+ Flying Whenever CARDNAME attacks, draw a card for each multicolored permanent you control.
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, draw a card for each multicolored permanent you control.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Permanent.YouCtrl+MultiColor
+Oracle:When Infinite Guideline Station enters, create a tapped 2/2 colorless Robot artifact creature token for each multicolored permanent you control.\nStation (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 12+.)\nSTATION 12+\nFlying\nWhenever Infinite Guideline Station attacks, draw a card for each multicolored permanent you control.
