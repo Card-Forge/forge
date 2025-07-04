@@ -111,11 +111,11 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isFullBorder(final String image) {
-        if (getFullBorderMode() < 1) {
+        if (getFullBorderMode() < 1) { // 0 not yet queried the texture image string
             if (image.contains(".fullborder.") || image.contains("tokens"))
-                updateFullBorderMode(1);
+                updateFullBorderMode(1); // 1 for texture/card image that has full borders or tokens
             else
-                updateFullBorderMode(2);
+                updateFullBorderMode(2); // 2 for old image format
         }
         return getFullBorderMode() == 1;
     }
