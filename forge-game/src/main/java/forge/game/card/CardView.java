@@ -109,6 +109,17 @@ public class CardView extends GameEntityView {
     public void updateCardViewMode(final int mode) {
         set(TrackableProperty.CardViewMode, mode);
     }
+
+    public boolean isFullBorder(final String image) {
+        if (getCardViewMode() < 1) {
+            if (image.contains(".fullborder.") || image.contains("tokens"))
+                updateCardViewMode(1);
+            else
+                updateCardViewMode(2);
+        }
+        return getCardViewMode() == 1;
+    }
+
     public PlayerView getOwner() {
         return get(TrackableProperty.Owner);
     }
