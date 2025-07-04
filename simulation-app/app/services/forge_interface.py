@@ -9,7 +9,7 @@ from datetime import datetime
 from flask import current_app
 from typing import Dict, List, Optional
 from ..models.simulation import Simulation, GameResult
-from ..models.statistics import GameStatistics
+from ..models.statistics import GameStatistics, CardPlay
 from .. import db
 
 logger = logging.getLogger(__name__)
@@ -213,6 +213,229 @@ class ForgeInterface:
             classification['is_battle'] = 'Battle' in types
         
         return classification
+    
+    def _classify_spell_function(self, spell_name: str) -> Dict[str, bool]:
+        """Classify spell by its gameplay function."""
+        functional_classification = {
+            'is_removal': False,
+            'is_ramp': False,
+            'is_card_draw': False,
+            'is_counterspell': False,
+            'is_protection': False,
+            'is_board_wipe': False,
+            'is_tribal': False,
+            'is_combo_piece': False,
+            'is_value_engine': False,
+            'is_other': False
+        }
+        
+        spell_lower = spell_name.lower()
+        
+        # Removal spells - destroy, exile, bounce, damage to creatures/planeswalkers
+        removal_keywords = [
+            'destroy', 'exile', 'murder', 'doom', 'terminate', 'path', 'swords',
+            'lightning bolt', 'shock', 'burn', 'damage', 'wrath', 'damnation',
+            'board wipe', 'mass destruction', 'apocalypse', 'armageddon',
+            'return to hand', 'bounce', 'unsummon', 'capsize', 'cyclonic rift',
+            'vandalblast', 'shatter', 'naturalize', 'disenchant', 'vindicate',
+            'utter end', 'anguished unmaking', 'generous gift', 'chaos warp',
+            'beast within', 'reality shift', 'pongify', 'rapid hybridization'
+        ]
+        
+        # Ramp spells - mana acceleration, land ramp, mana rocks
+        ramp_keywords = [
+            'rampant growth', 'cultivate', 'kodama\'s reach', 'explosive vegetation',
+            'search for forest', 'search for basic land', 'sol ring', 'signets',
+            'mana rock', 'mana dork', 'llanowar elves', 'birds of paradise',
+            'ramp', 'mana acceleration', 'land to battlefield', 'tapped land',
+            'arcane signet', 'fellwar stone', 'mind stone', 'hedron archive',
+            'thran dynamo', 'gilded lotus', 'worn powerstone', 'add', 'talisman',
+            'mox', 'lotus', 'crypt', 'vault', 'diamond', 'chrome mox', 
+            'mox tantalite', 'mox amber', 'mox opal'
+        ]
+        
+        # Card draw spells
+        card_draw_keywords = [
+            'draw card', 'draw', 'divination', 'ancestral recall', 'brainstorm',
+            'ponder', 'preordain', 'rhystic study', 'mystic remora', 'phyrexian arena',
+            'sylvan library', 'scroll', 'insight', 'harmonize', 'concentrate',
+            'tidings', 'opportunity', 'sphinx\'s revelation', 'blue sun\'s zenith',
+            'stroke of genius', 'pull from tomorrow'
+        ]
+        
+        # Counterspells
+        counterspell_keywords = [
+            'counter', 'counterspell', 'negate', 'dispel', 'spell pierce',
+            'force of will', 'mana drain', 'cryptic command', 'dissolve',
+            'cancel', 'essence scatter', 'swan song', 'mental misstep',
+            'fierce guardianship', 'force of negation', 'arcane denial',
+            'no more lies', 'absorb', 'disdainful stroke', 'flusterstorm',
+            'dovin\'s veto', 'mystic confluence', 'rewind'
+        ]
+        
+        # Protection spells - protect creatures/permanents, hexproof, indestructible
+        protection_keywords = [
+            'protection', 'hexproof', 'indestructible', 'shroud', 'ward',
+            'lightning greaves', 'swiftfoot boots', 'mother of runes',
+            'heroic intervention', 'teferi\'s protection', 'boros charm',
+            'rootborn defenses', 'unbreakable formation', 'selfless spirit'
+        ]
+        
+        # Board wipes - mass removal effects
+        board_wipe_keywords = [
+            'wrath of god', 'damnation', 'board wipe', 'mass destruction',
+            'day of judgment', 'fumigate', 'cleansing nova', 'austere command',
+            'blasphemous act', 'chain reaction', 'pyroclasm', 'anger of the gods',
+            'terminus', 'merciless eviction', 'cyclonic rift', 'evacuation'
+        ]
+        
+        # Tribal spells - support specific creature types
+        tribal_keywords = [
+            'tribal', 'dragon', 'elf', 'goblin', 'soldier', 'wizard', 'beast',
+            'herald\'s horn', 'vanquisher\'s banner', 'door of destinies',
+            'coat of arms', 'adaptive automaton', 'metallic mimic',
+            'crucible of fire', 'elvish archdruid', 'goblin king', 'warrior',
+            'knight', 'zombie', 'vampire', 'angel', 'demon', 'spirit'
+        ]
+        
+        # Combo pieces - infinite combos, synergy engines
+        combo_keywords = [
+            'infinite', 'combo', 'laboratory maniac', 'thassa\'s oracle',
+            'approach of the second sun', 'felidar sovereign', 'test of endurance',
+            'dramatic reversal', 'isochron scepter', 'painter\'s servant',
+            'grindstone', 'splinter twin', 'pestermite', 'kiki-jiki'
+        ]
+        
+        # Value engines - ongoing card advantage
+        value_engine_keywords = [
+            'engine', 'value', 'recurring', 'eternal witness', 'archaeomancer',
+            'snapcaster mage', 'flashback', 'buyback', 'rebound',
+            'the great henge', 'beast whisperer', 'mentor of the meek',
+            'skull clamp', 'graveyard', 'graveyard recursion', 'archaeologist',
+            'whenever', 'trigger', 'enters the battlefield', 'etb', 'study',
+            'library', 'academy', 'research', 'tutor', 'search', 'forge'
+        ]
+        
+        # Check each category
+        functional_classification['is_removal'] = any(keyword in spell_lower for keyword in removal_keywords)
+        functional_classification['is_ramp'] = any(keyword in spell_lower for keyword in ramp_keywords)
+        functional_classification['is_card_draw'] = any(keyword in spell_lower for keyword in card_draw_keywords)
+        functional_classification['is_counterspell'] = any(keyword in spell_lower for keyword in counterspell_keywords)
+        functional_classification['is_protection'] = any(keyword in spell_lower for keyword in protection_keywords)
+        functional_classification['is_board_wipe'] = any(keyword in spell_lower for keyword in board_wipe_keywords)
+        functional_classification['is_tribal'] = any(keyword in spell_lower for keyword in tribal_keywords)
+        functional_classification['is_combo_piece'] = any(keyword in spell_lower for keyword in combo_keywords)
+        functional_classification['is_value_engine'] = any(keyword in spell_lower for keyword in value_engine_keywords)
+        
+        # Generic fallback classification based on card type and common patterns
+        if not any(functional_classification[key] for key in functional_classification if key != 'is_other'):
+            # Get card type to help with classification
+            card_type_info = self._classify_card_type(spell_name)
+            
+            # Check if we got valid card type information
+            has_valid_type = any(card_type_info.get(key, False) for key in card_type_info)
+            
+            if has_valid_type:
+                # Artifacts are often ramp (mana rocks)
+                if card_type_info.get('is_artifact', False):
+                    functional_classification['is_ramp'] = True
+                
+                # Only classify creatures as value engines if they have obvious utility keywords
+                elif card_type_info.get('is_creature', False):
+                    # Check if creature has utility-suggesting keywords
+                    utility_keywords = ['lord', 'master', 'champion', 'sage', 'advisor', 'shaman', 'priest', 'oracle']
+                    if any(keyword in spell_lower for keyword in utility_keywords):
+                        functional_classification['is_value_engine'] = True
+                    # Otherwise leave as "other" - many creatures are just beaters
+                    
+                # Instants and sorceries that aren't already classified likely have niche effects
+                elif card_type_info.get('is_instant', False) or card_type_info.get('is_sorcery', False):
+                    # Don't assume these are removal - could be utility spells
+                    pass
+                    
+                # Enchantments are more likely to be value engines due to ongoing effects
+                elif card_type_info.get('is_enchantment', False):
+                    functional_classification['is_value_engine'] = True
+                    
+                # Planeswalkers are typically value engines
+                elif card_type_info.get('is_planeswalker', False):
+                    functional_classification['is_value_engine'] = True
+            # If we can't determine card type, leave as "other"
+        
+        # If no functional category matches, mark as "other"
+        has_function = any(functional_classification[key] for key in functional_classification if key != 'is_other')
+        functional_classification['is_other'] = not has_function
+        if not has_function:
+            print('Warning', spell_name, 'failed to be classified')
+        return functional_classification
+    
+    def _record_card_play(self, card_name: str, player_num: int, deck_id: str, turn_number: int, 
+                         play_order: int, is_land: bool = False) -> Dict:
+        """Record a card play for detailed tracking."""
+        # Get card type classification
+        card_classification = self._classify_card_type(card_name)
+        functional_classification = self._classify_spell_function(card_name)
+        
+        # Determine primary card type
+        primary_type = 'unknown'
+        if card_classification['is_land']:
+            primary_type = 'land'
+        elif card_classification['is_creature']:
+            primary_type = 'creature'
+        elif card_classification['is_artifact']:
+            primary_type = 'artifact'
+        elif card_classification['is_enchantment']:
+            primary_type = 'enchantment'
+        elif card_classification['is_instant']:
+            primary_type = 'instant'
+        elif card_classification['is_sorcery']:
+            primary_type = 'sorcery'
+        elif card_classification['is_planeswalker']:
+            primary_type = 'planeswalker'
+        elif card_classification['is_battle']:
+            primary_type = 'battle'
+        
+        # Determine primary functional category
+        functional_category = 'other'
+        if functional_classification['is_removal']:
+            functional_category = 'removal'
+        elif functional_classification['is_ramp']:
+            functional_category = 'ramp'
+        elif functional_classification['is_card_draw']:
+            functional_category = 'card_draw'
+        elif functional_classification['is_counterspell']:
+            functional_category = 'counterspell'
+        elif functional_classification['is_protection']:
+            functional_category = 'protection'
+        elif functional_classification['is_board_wipe']:
+            functional_category = 'board_wipe'
+        elif functional_classification['is_tribal']:
+            functional_category = 'tribal'
+        elif functional_classification['is_combo_piece']:
+            functional_category = 'combo_piece'
+        elif functional_classification['is_value_engine']:
+            functional_category = 'value_engine'
+        
+        # Check if it's a commander
+        is_commander = 'general' in card_name.lower() or any(cmd in card_name.lower() for cmd in ['commander'])
+        
+        # Get mana cost if available from database
+        mana_cost = None
+        if card_name in self.card_database:
+            mana_cost = self.card_database[card_name].get('mana_cost', None)
+        
+        return {
+            'card_name': card_name,
+            'player_number': player_num,
+            'deck_id': deck_id,
+            'turn_number': turn_number,
+            'play_order': play_order,
+            'card_type': primary_type,
+            'functional_category': functional_category,
+            'is_land': is_land,
+            'is_commander': is_commander,
+            'mana_cost': mana_cost
+        }
     
     def _normalize_card_name(self, card_name: str) -> str:
         """Normalize card name for fuzzy matching."""
@@ -461,21 +684,32 @@ class ForgeInterface:
                         cards_drawn=player_data.get('cards_drawn', 0),
                         total_mana_available=player_data.get('mana_produced', 0),
                         damage_dealt=player_data.get('life_lost', 0),  # Approximate
-                        final_life_total=40 - player_data.get('life_lost', 0)  # Estimate
+                        final_life_total=40 - player_data.get('life_lost', 0),  # Estimate
+                        # Functional categories
+                        removal_spells_cast=player_data.get('removal_spells_cast', 0),
+                        ramp_spells_cast=player_data.get('ramp_spells_cast', 0),
+                        card_draw_spells_cast=player_data.get('card_draw_spells_cast', 0),
+                        counterspells_cast=player_data.get('counterspells_cast', 0),
+                        protection_spells_cast=player_data.get('protection_spells_cast', 0),
+                        board_wipes_cast=player_data.get('board_wipes_cast', 0),
+                        tribal_spells_cast=player_data.get('tribal_spells_cast', 0),
+                        combo_pieces_cast=player_data.get('combo_pieces_cast', 0),
+                        value_engines_cast=player_data.get('value_engines_cast', 0),
+                        other_spells_cast=player_data.get('other_spells_cast', 0)
                     )
                     game_result.statistics.append(stats)
                 
-                return game_result
+                return game_result, parsed_results
             else:
                 logger.error(f"Game failed with return code {result.returncode}: {result.stderr}")
-                return None
+                return None, None
                 
         except subprocess.TimeoutExpired:
             logger.error(f"Game {game_num} timed out after {timeout} seconds")
-            return None
+            return None, None
         except Exception as e:
             logger.error(f"Error running game {game_num}: {e}")
-            return None
+            return None, None
     
     def _run_games_sequential(self, simulation, deck_ids, sim_info):
         """Run games one by one (for distributed execution or small batches)."""
@@ -487,7 +721,7 @@ class ForgeInterface:
             
             try:
                 # Run single game
-                game_result = self._run_single_game(simulation, game_num, deck_ids)
+                game_result, parsed_results = self._run_single_game(simulation, game_num, deck_ids)
                 
                 if game_result:
                     # Update progress
@@ -496,6 +730,26 @@ class ForgeInterface:
                     
                     # Save game result
                     db.session.add(game_result)
+                    db.session.flush()  # Flush to get the game_result.id
+                    
+                    # Save individual card plays
+                    if parsed_results and 'card_plays' in parsed_results:
+                        for card_play_data in parsed_results['card_plays']:
+                            card_play = CardPlay(
+                                game_id=game_result.id,
+                                player_number=card_play_data['player_number'],
+                                deck_id=card_play_data['deck_id'],
+                                turn_number=card_play_data['turn_number'],
+                                card_name=card_play_data['card_name'],
+                                card_type=card_play_data['card_type'],
+                                functional_category=card_play_data['functional_category'],
+                                is_land=card_play_data['is_land'],
+                                is_commander=card_play_data['is_commander'],
+                                play_order=card_play_data['play_order'],
+                                mana_cost=card_play_data['mana_cost']
+                            )
+                            db.session.add(card_play)
+                    
                     db.session.commit()
                     
                     logger.info(f"Completed game {game_num}/{simulation.num_games} for simulation {simulation.id}")
@@ -692,7 +946,18 @@ class ForgeInterface:
                         cards_drawn=player_data.get('cards_drawn', 0),
                         total_mana_available=player_data.get('mana_produced', 0),
                         damage_dealt=player_data.get('life_lost', 0),  # Approximate
-                        final_life_total=40 - player_data.get('life_lost', 0)  # Estimate
+                        final_life_total=40 - player_data.get('life_lost', 0),  # Estimate
+                        # Functional categories
+                        removal_spells_cast=player_data.get('removal_spells_cast', 0),
+                        ramp_spells_cast=player_data.get('ramp_spells_cast', 0),
+                        card_draw_spells_cast=player_data.get('card_draw_spells_cast', 0),
+                        counterspells_cast=player_data.get('counterspells_cast', 0),
+                        protection_spells_cast=player_data.get('protection_spells_cast', 0),
+                        board_wipes_cast=player_data.get('board_wipes_cast', 0),
+                        tribal_spells_cast=player_data.get('tribal_spells_cast', 0),
+                        combo_pieces_cast=player_data.get('combo_pieces_cast', 0),
+                        value_engines_cast=player_data.get('value_engines_cast', 0),
+                        other_spells_cast=player_data.get('other_spells_cast', 0)
                     )
                     game_result.statistics.append(stats)
                 
@@ -737,6 +1002,17 @@ class ForgeInterface:
             'sorceries_played': 0,
             'lands_played': 0,
             'commander_casts': 0,
+            # Functional categories
+            'removal_spells_cast': 0,
+            'ramp_spells_cast': 0,
+            'card_draw_spells_cast': 0,
+            'counterspells_cast': 0,
+            'protection_spells_cast': 0,
+            'board_wipes_cast': 0,
+            'tribal_spells_cast': 0,
+            'combo_pieces_cast': 0,
+            'value_engines_cast': 0,
+            'other_spells_cast': 0,
             'mana_produced': 0,
             'life_gained': 0,
             'life_lost': 0,
@@ -749,6 +1025,10 @@ class ForgeInterface:
         current_turn_player = None
         players_alive = set(range(1, len(deck_ids) + 1))
         players_eliminated = []
+        
+        # Track card plays for detailed recording
+        card_plays = []
+        play_order_counter = 0
         
         # More comprehensive parsing patterns
         patterns = {
@@ -905,6 +1185,47 @@ class ForgeInterface:
                     if not card_categorized:
                         logger.debug(f"Uncategorized spell cast: {spell_name} by player {player_num}")
                     
+                    # Classify by functional category
+                    functional_classification = self._classify_spell_function(spell_name)
+                    
+                    if functional_classification['is_removal']:
+                        player_stats[player_num]['removal_spells_cast'] += 1
+                    
+                    if functional_classification['is_ramp']:
+                        player_stats[player_num]['ramp_spells_cast'] += 1
+                    
+                    if functional_classification['is_card_draw']:
+                        player_stats[player_num]['card_draw_spells_cast'] += 1
+                    
+                    if functional_classification['is_counterspell']:
+                        player_stats[player_num]['counterspells_cast'] += 1
+                    
+                    if functional_classification['is_protection']:
+                        player_stats[player_num]['protection_spells_cast'] += 1
+                    
+                    if functional_classification['is_board_wipe']:
+                        player_stats[player_num]['board_wipes_cast'] += 1
+                    
+                    if functional_classification['is_tribal']:
+                        player_stats[player_num]['tribal_spells_cast'] += 1
+                    
+                    if functional_classification['is_combo_piece']:
+                        player_stats[player_num]['combo_pieces_cast'] += 1
+                    
+                    if functional_classification['is_value_engine']:
+                        player_stats[player_num]['value_engines_cast'] += 1
+                    
+                    if functional_classification['is_other']:
+                        player_stats[player_num]['other_spells_cast'] += 1
+                    
+                    # Record individual card play
+                    play_order_counter += 1
+                    card_play_record = self._record_card_play(
+                        spell_name, player_num, deck_ids[player_num - 1],
+                        current_turn, play_order_counter, is_land=False
+                    )
+                    card_plays.append(card_play_record)
+                    
                     # Check if it's a commander cast
                     spell_lower = spell_name.lower()
                     if 'general' in spell_lower or any(cmd in spell_lower for cmd in ['chatterfang', 'commander']):
@@ -932,6 +1253,14 @@ class ForgeInterface:
                         if not card_classification['is_land']:
                             # Log unexpected non-land in land play (but still count it)
                             logger.debug(f"Unexpected non-land in land play: {land_name}")
+                        
+                        # Record individual card play
+                        play_order_counter += 1
+                        card_play_record = self._record_card_play(
+                            land_name, player_num, deck_ids[player_num - 1],
+                            current_turn, play_order_counter, is_land=True
+                        )
+                        card_plays.append(card_play_record)
                     
                     break
             
@@ -1016,7 +1345,18 @@ class ForgeInterface:
                 'cards_drawn': stats['cards_drawn'],
                 'mana_produced': stats['mana_produced'],
                 'life_gained': stats['life_gained'],
-                'life_lost': stats['life_lost']
+                'life_lost': stats['life_lost'],
+                # Functional categories
+                'removal_spells_cast': stats['removal_spells_cast'],
+                'ramp_spells_cast': stats['ramp_spells_cast'],
+                'card_draw_spells_cast': stats['card_draw_spells_cast'],
+                'counterspells_cast': stats['counterspells_cast'],
+                'protection_spells_cast': stats['protection_spells_cast'],
+                'board_wipes_cast': stats['board_wipes_cast'],
+                'tribal_spells_cast': stats['tribal_spells_cast'],
+                'combo_pieces_cast': stats['combo_pieces_cast'],
+                'value_engines_cast': stats['value_engines_cast'],
+                'other_spells_cast': stats['other_spells_cast']
             })
         
         result = {
@@ -1024,7 +1364,8 @@ class ForgeInterface:
             'winner_deck_id': winner_deck_id or deck_ids[0],
             'total_turns': max(1, total_turns or current_turn),
             'elimination_order': elimination_order or list(range(1, len(deck_ids) + 1)),
-            'player_statistics': player_statistics
+            'player_statistics': player_statistics,
+            'card_plays': card_plays  # Add card plays for detailed recording
         }
         
         logger.debug(f"Parsed result: Winner P{result['winner_player_number']}, Turns: {result['total_turns']}")

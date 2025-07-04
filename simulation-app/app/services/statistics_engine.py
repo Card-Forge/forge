@@ -252,6 +252,12 @@ class StatisticsEngine:
             func.sum(GameStatistics.ramp_spells_cast).label('total_ramp'),
             func.sum(GameStatistics.card_draw_spells_cast).label('total_card_draw'),
             func.sum(GameStatistics.counterspells_cast).label('total_counterspells'),
+            func.sum(GameStatistics.protection_spells_cast).label('total_protection'),
+            func.sum(GameStatistics.board_wipes_cast).label('total_board_wipes'),
+            func.sum(GameStatistics.tribal_spells_cast).label('total_tribal'),
+            func.sum(GameStatistics.combo_pieces_cast).label('total_combo_pieces'),
+            func.sum(GameStatistics.value_engines_cast).label('total_value_engines'),
+            func.sum(GameStatistics.other_spells_cast).label('total_other'),
             func.avg(GameStatistics.commander_casts).label('avg_commander_casts')
         ).join(
             GameResult, GameStatistics.game_id == GameResult.id
@@ -274,7 +280,13 @@ class StatisticsEngine:
                     'Removal': stats.total_removal or 0,
                     'Ramp': stats.total_ramp or 0,
                     'Card Draw': stats.total_card_draw or 0,
-                    'Counterspells': stats.total_counterspells or 0
+                    'Counterspells': stats.total_counterspells or 0,
+                    'Protection': stats.total_protection or 0,
+                    'Board Wipes': stats.total_board_wipes or 0,
+                    'Tribal': stats.total_tribal or 0,
+                    'Combo Pieces': stats.total_combo_pieces or 0,
+                    'Value Engines': stats.total_value_engines or 0,
+                    'Other': stats.total_other or 0
                 },
                 'commander_stats': {
                     'avg_casts_per_game': float(stats.avg_commander_casts or 0)
