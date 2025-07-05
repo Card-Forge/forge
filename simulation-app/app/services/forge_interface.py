@@ -451,6 +451,31 @@ class ForgeInterface:
         normalized = ' '.join(normalized.split())
         return normalized
     
+    def _parse_mana_value(self, mana_value: str) -> int:
+        """Parse a mana value string and return the total mana amount."""
+        if not mana_value:
+            return 0
+        
+        # Handle pure numbers
+        if mana_value.isdigit():
+            return int(mana_value)
+        
+        # Handle mana symbols like {2}{R}{G}
+        if '{' in mana_value:
+            total = 0
+            # Find all mana symbols
+            symbols = re.findall(r'\{([^}]+)\}', mana_value)
+            for symbol in symbols:
+                if symbol.isdigit():
+                    total += int(symbol)
+                else:
+                    # Colored mana symbols count as 1 each
+                    total += 1
+            return total
+        
+        # Default case
+        return 1
+    
     def _classify_token(self, token_name: str) -> Dict[str, bool]:
         """Classify token cards based on their name."""
         classification = {
@@ -688,7 +713,9 @@ class ForgeInterface:
                         planeswalkers_played=player_data.get('planeswalkers_played', 0),
                         lands_played=player_data.get('lands_played', 0),
                         cards_drawn=player_data.get('cards_drawn', 0),
-                        total_mana_available=player_data.get('mana_produced', 0),
+                        total_mana_available=player_data.get('total_mana_available', 0),
+                        land_drops_made=player_data.get('land_drops_made', 0),
+                        land_drops_missed=player_data.get('land_drops_missed', 0),
                         damage_dealt=player_data.get('life_lost', 0),  # Approximate
                         final_life_total=40 - player_data.get('life_lost', 0),  # Estimate
                         # Functional categories
@@ -950,7 +977,9 @@ class ForgeInterface:
                         planeswalkers_played=player_data.get('planeswalkers_played', 0),
                         lands_played=player_data.get('lands_played', 0),
                         cards_drawn=player_data.get('cards_drawn', 0),
-                        total_mana_available=player_data.get('mana_produced', 0),
+                        total_mana_available=player_data.get('total_mana_available', 0),
+                        land_drops_made=player_data.get('land_drops_made', 0),
+                        land_drops_missed=player_data.get('land_drops_missed', 0),
                         damage_dealt=player_data.get('life_lost', 0),  # Approximate
                         final_life_total=40 - player_data.get('life_lost', 0),  # Estimate
                         # Functional categories
@@ -999,7 +1028,12 @@ class ForgeInterface:
         # Player statistics tracking
         player_stats = defaultdict(lambda: {
             'mana_spent': 0,
+            'mana_produced': 0,
+            'total_mana_available': 0,
+            'land_drops_made': 0,
+            'land_drops_missed': 0,
             'cards_played': 0,
+            'cards_drawn': 0,
             'creatures_played': 0,
             'artifacts_played': 0,
             'enchantments_played': 0,
@@ -1019,12 +1053,12 @@ class ForgeInterface:
             'combo_pieces_cast': 0,
             'value_engines_cast': 0,
             'other_spells_cast': 0,
-            'mana_produced': 0,
             'life_gained': 0,
             'life_lost': 0,
-            'cards_drawn': 0,
             'turn_count': 0,
-            'turns_survived': 0
+            'turns_survived': 0,
+            'lands_per_turn': {},  # Track land drops per turn
+            'mana_per_turn': {}    # Track mana usage per turn
         })
         
         current_turn = 0
@@ -1068,13 +1102,27 @@ class ForgeInterface:
             ],
             'mana_ability': [
                 r'Mana: Ai\((\d+)\)-.* - Add (\{[^}]+\}|\d+)',
-                r'Ai\((\d+)\)-.* adds? (\{[^}]+\}|\d+) to mana pool',
-                r'Player (\d+) adds? (\{[^}]+\}|\d+)'
+                r'Ai\((\d+)\)-.* adds? (\{[^}]+\}|\d+) to (?:their )?mana pool',
+                r'Player (\d+) adds? (\{[^}]+\}|\d+)',
+                r'Ai\((\d+)\)-.* taps .* for (\{[^}]+\}|\d+)',
+                r'Ai\((\d+)\)-.* activates? .* Add (\{[^}]+\}|\d+)'
+            ],
+            'mana_spent': [
+                r'Ai\((\d+)\)-.* pays? (\{[^}]+\}|\d+)',
+                r'Ai\((\d+)\)-.* spends? (\{[^}]+\}|\d+)',
+                r'Cost: (\{[^}]+\}|\d+) .*Ai\((\d+)\)'
             ],
             'card_draw': [
                 r'Ai\((\d+)\)-.* draws? (\d+) cards?',
                 r'Player (\d+) draws? (\d+) cards?',
-                r'Draw: Ai\((\d+)\)-.* draws? (.*?)'
+                r'Draw: Ai\((\d+)\)-.* draws? (\d+)?',
+                r'Ai\((\d+)\)-.* draw(?:s)? a card',
+                r'Draw phase: Ai\((\d+)\)-.* draws? (\d+)?'
+            ],
+            'land_drop': [
+                r'Main Phase: Ai\((\d+)\)-.* played (.+) \(\d+\)$',
+                r'Land drop: Ai\((\d+)\)-.* plays (.+)',
+                r'Ai\((\d+)\)-.* plays (.+) as land drop'
             ],
             'life_change': [
                 r'Ai\((\d+)\)-.* gains? (\d+) life',
@@ -1270,23 +1318,38 @@ class ForgeInterface:
                     
                     break
             
-            # Track mana abilities
+            # Track mana abilities (mana production)
             for pattern in patterns['mana_ability']:
                 match = re.search(pattern, line)
                 if match:
                     player_num = int(match.group(1))
                     mana_value = match.group(2) if len(match.groups()) > 1 else "1"
                     
-                    # Parse mana value (simplified)
-                    mana_amount = 1
-                    if mana_value.isdigit():
-                        mana_amount = int(mana_value)
-                    elif '{' in mana_value:
-                        # Count mana symbols
-                        mana_amount = mana_value.count('{')
+                    mana_amount = self._parse_mana_value(mana_value)
                     
                     player_stats[player_num]['mana_produced'] += mana_amount
-                    player_stats[player_num]['mana_spent'] += mana_amount  # Rough estimate
+                    player_stats[player_num]['total_mana_available'] += mana_amount
+                    
+                    # Track mana per turn
+                    if current_turn not in player_stats[player_num]['mana_per_turn']:
+                        player_stats[player_num]['mana_per_turn'][current_turn] = 0
+                    player_stats[player_num]['mana_per_turn'][current_turn] += mana_amount
+                    break
+            
+            # Track mana spent
+            for pattern in patterns['mana_spent']:
+                match = re.search(pattern, line)
+                if match:
+                    if len(match.groups()) == 2:
+                        player_num = int(match.group(1))
+                        mana_value = match.group(2)
+                    else:
+                        # Pattern where cost comes first
+                        mana_value = match.group(1)
+                        player_num = int(match.group(2))
+                    
+                    mana_amount = self._parse_mana_value(mana_value)
+                    player_stats[player_num]['mana_spent'] += mana_amount
                     break
             
             # Track card draws
@@ -1295,10 +1358,29 @@ class ForgeInterface:
                 if match:
                     player_num = int(match.group(1))
                     cards_drawn = 1
-                    if len(match.groups()) > 1 and match.group(2).isdigit():
-                        cards_drawn = int(match.group(2))
+                    if len(match.groups()) > 1 and match.group(2):
+                        if match.group(2).isdigit():
+                            cards_drawn = int(match.group(2))
+                        # Handle phrases like "a card"
+                        elif "card" in match.group(2).lower():
+                            cards_drawn = 1
                     
                     player_stats[player_num]['cards_drawn'] += cards_drawn
+                    break
+            
+            # Track land drops
+            for pattern in patterns['land_drop']:
+                match = re.search(pattern, line)
+                if match:
+                    player_num = int(match.group(1))
+                    land_name = match.group(2).strip() if len(match.groups()) > 1 else ""
+                    
+                    # Track land drops per turn
+                    if current_turn not in player_stats[player_num]['lands_per_turn']:
+                        player_stats[player_num]['lands_per_turn'][current_turn] = 0
+                    
+                    player_stats[player_num]['lands_per_turn'][current_turn] += 1
+                    player_stats[player_num]['land_drops_made'] += 1
                     break
             
             # Track life changes
@@ -1318,6 +1400,15 @@ class ForgeInterface:
         for player_num in players_alive:
             player_stats[player_num]['turns_survived'] = total_turns or current_turn
         
+        # Calculate missed land drops (estimate: 1 land drop per turn - lands played)
+        for player_num in range(1, len(deck_ids) + 1):
+            turns_played = player_stats[player_num]['turns_survived']
+            lands_dropped = len(player_stats[player_num]['lands_per_turn'])
+            
+            # Estimate missed land drops (conservative: turns - actual land drops)
+            estimated_missed = max(0, turns_played - lands_dropped) if turns_played > 0 else 0
+            player_stats[player_num]['land_drops_missed'] = estimated_missed
+        
         # Build elimination order (first eliminated to last)
         elimination_order = players_eliminated.copy()
         if winner_player_number and winner_player_number not in elimination_order:
@@ -1336,7 +1427,11 @@ class ForgeInterface:
             player_statistics.append({
                 'player_number': player_number,
                 'deck_id': deck_id,
-                'total_mana_spent': max(stats['mana_spent'], stats['mana_produced']),
+                'total_mana_spent': stats['mana_spent'],
+                'total_mana_available': stats['total_mana_available'],
+                'land_drops_made': stats['land_drops_made'],
+                'land_drops_missed': stats['land_drops_missed'],
+                'cards_drawn': stats['cards_drawn'],
                 'cards_played_total': stats['cards_played'],
                 'creatures_played': stats['creatures_played'],
                 'commander_casts': max(1, stats['commander_casts']),  # Assume at least 1
@@ -1348,7 +1443,6 @@ class ForgeInterface:
                 'sorceries_played': stats['sorceries_played'],
                 'planeswalkers_played': stats['planeswalkers_played'],
                 'lands_played': stats['lands_played'],
-                'cards_drawn': stats['cards_drawn'],
                 'mana_produced': stats['mana_produced'],
                 'life_gained': stats['life_gained'],
                 'life_lost': stats['life_lost'],

@@ -7,8 +7,8 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <h1><i class="fas fa-chart-bar"></i> Simulation Statistics</h1>
-                <p class="text-muted">Analysis for "{{ simulation.name }}"</p>
+                <h1 class="mtg-title"><i class="fas fa-chart-bar"></i> Simulation Statistics</h1>
+                <p class="mtg-subtitle">Analysis for "{{ simulation.name }}"</p>
             </div>
             <div>
                 <a href="{{ url_for('statistics.statistics_dashboard') }}" class="btn btn-outline-secondary">
@@ -19,92 +19,127 @@
     </div>
 </div>
 
-<!-- Summary Cards -->
-<div class="row">
-    <div class="col-md-3">
-        <div class="card bg-primary text-white">
-            <div class="card-body text-center">
-                <h3>{{ stats.simulation.completed_games }}</h3>
-                <p class="mb-0">Games Completed</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card bg-success text-white">
-            <div class="card-body text-center">
-                <h3>
-                    {% if stats.duration %}
-                        {% if stats.duration.average > 60 %}
-                            {{ "%.1f"|format(stats.duration.average / 60) }}m
-                        {% else %}
-                            {{ "%.0f"|format(stats.duration.average) }}s
-                        {% endif %}
-                    {% else %}
-                        N/A
-                    {% endif %}
-                </h3>
-                <p class="mb-0">Avg Game Duration</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card bg-info text-white">
-            <div class="card-body text-center">
-                <h3>
-                    {% if stats.turns %}
-                        {{ "%.1f"|format(stats.turns.average) }}
-                    {% else %}
-                        N/A
-                    {% endif %}
-                </h3>
-                <p class="mb-0">Avg Turns</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card bg-warning text-white">
-            <div class="card-body text-center">
-                <h3>{{ simulation.players|length }}</h3>
-                <p class="mb-0">Players</p>
-            </div>
-        </div>
+<!-- Navigation Tabs -->
+<div class="row mt-4">
+    <div class="col-12">
+        <ul class="nav nav-tabs" id="statsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="global-tab" data-bs-toggle="tab" data-bs-target="#global" type="button" role="tab" aria-controls="global" aria-selected="true">
+                    <i class="fas fa-globe"></i> Global Summary
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="game-details-tab" data-bs-toggle="tab" data-bs-target="#game-details" type="button" role="tab" aria-controls="game-details" aria-selected="false">
+                    <i class="fas fa-gamepad"></i> Game Details
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="turn-by-turn-tab" data-bs-toggle="tab" data-bs-target="#turn-by-turn" type="button" role="tab" aria-controls="turn-by-turn" aria-selected="false">
+                    <i class="fas fa-list-ol"></i> Turn-by-Turn
+                </button>
+            </li>
+        </ul>
     </div>
 </div>
 
-<!-- Charts Row -->
-<div class="row mt-4">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-trophy"></i> Win Rate by Deck</h5>
+<div class="tab-content" id="statsTabContent">
+    <!-- Global Summary Tab -->
+    <div class="tab-pane fade show active" id="global" role="tabpanel" aria-labelledby="global-tab">
+
+        <!-- Summary Cards -->
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <div class="card stat-card bg-primary text-white">
+                    <div class="card-body text-center">
+                        <h3>{{ stats.completed_games or stats.total_games or 0 }}</h3>
+                        <p class="mb-0">Games Completed</p>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="chart-container">
-                    <canvas id="win-rate-chart"></canvas>
+            <div class="col-md-3">
+                <div class="card stat-card bg-success text-white">
+                    <div class="card-body text-center">
+                        <h3>
+                            {% if stats.duration_stats %}
+                                {% if stats.duration_stats.average > 60 %}
+                                    {{ "%.1f"|format(stats.duration_stats.average / 60) }}m
+                                {% else %}
+                                    {{ "%.0f"|format(stats.duration_stats.average) }}s
+                                {% endif %}
+                            {% elif stats.average_game_duration %}
+                                {% if stats.average_game_duration > 60 %}
+                                    {{ "%.1f"|format(stats.average_game_duration / 60) }}m
+                                {% else %}
+                                    {{ "%.0f"|format(stats.average_game_duration) }}s
+                                {% endif %}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </h3>
+                        <p class="mb-0">Avg Game Duration</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-info text-white">
+                    <div class="card-body text-center">
+                        <h3>
+                            {% if stats.turn_stats %}
+                                {{ "%.1f"|format(stats.turn_stats.average) }}
+                            {% elif stats.average_turn_count %}
+                                {{ "%.1f"|format(stats.average_turn_count) }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </h3>
+                        <p class="mb-0">Avg Turns</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-warning text-white">
+                    <div class="card-body text-center">
+                        <h3>{{ simulation.players|length }}</h3>
+                        <p class="mb-0">Players</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-clock"></i> Game Duration Over Time</h5>
+
+        <!-- Charts Row -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card mtg-card-frame">
+                    <div class="card-header">
+                        <h5 class="mtg-glow-text"><i class="fas fa-trophy"></i> Win Rate by Deck</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="win-rate-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="chart-container">
-                    <canvas id="duration-chart"></canvas>
+            
+            <div class="col-md-6">
+                <div class="card mtg-card-frame">
+                    <div class="card-header">
+                        <h5 class="mtg-glow-text"><i class="fas fa-clock"></i> Game Duration Over Time</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="duration-chart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 <div class="row mt-4">
     <div class="col-md-6">
-        <div class="card">
+        <div class="card mtg-card-frame">
             <div class="card-header">
-                <h5><i class="fas fa-dice"></i> Turn Count Distribution</h5>
+                <h5 class="mtg-glow-text"><i class="fas fa-dice"></i> Turn Count Distribution</h5>
             </div>
             <div class="card-body">
                 <div class="chart-container">
@@ -115,36 +150,32 @@
     </div>
     
     <div class="col-md-6">
-        <div class="card">
+        <div class="card mtg-card-frame">
             <div class="card-header">
-                <h5><i class="fas fa-users"></i> Player Position Analysis</h5>
+                <h5 class="mtg-glow-text"><i class="fas fa-users"></i> Player Position Analysis</h5>
             </div>
             <div class="card-body">
-                {% if stats.position_analysis %}
+                {% if stats.win_rates_by_player %}
                     <div class="table-responsive">
-                        <table class="table table-sm">
+                        <table class="table table-dark table-sm">
                             <thead>
                                 <tr>
                                     <th>Position</th>
-                                    <th>Games</th>
-                                    <th>Wins</th>
                                     <th>Win Rate</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for position, data in stats.position_analysis.items() %}
+                                {% for player, win_rate in stats.win_rates_by_player.items() %}
                                 <tr>
-                                    <td>Player {{ position }}</td>
-                                    <td>{{ data.games }}</td>
-                                    <td>{{ data.wins }}</td>
+                                    <td>{{ player }}</td>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="progress flex-grow-1 me-2" style="height: 15px;">
                                                 <div class="progress-bar bg-primary" 
-                                                     style="width: {{ data.win_rate }}%">
+                                                     style="width: {{ win_rate }}%">
                                                 </div>
                                             </div>
-                                            <span class="text-muted small">{{ "%.1f"|format(data.win_rate) }}%</span>
+                                            <span class="text-muted small">{{ "%.1f"|format(win_rate) }}%</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -170,7 +201,7 @@
             <div class="card-body">
                 {% if stats.deck_performance %}
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-dark table-hover">
                             <thead>
                                 <tr>
                                     <th>Deck</th>
@@ -194,26 +225,26 @@
                                             </a>
                                         </small>
                                     </td>
-                                    <td>{{ performance.games }}</td>
-                                    <td>{{ performance.wins }}</td>
+                                    <td>{{ performance['games'] }}</td>
+                                    <td>{{ performance['wins'] }}</td>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="progress flex-grow-1 me-2" style="height: 20px;">
                                                 <div class="progress-bar 
-                                                    {% if performance.win_rate > 50 %}bg-success
-                                                    {% elif performance.win_rate > 25 %}bg-warning
+                                                    {% if performance['win_rate'] > 50 %}bg-success
+                                                    {% elif performance['win_rate'] > 25 %}bg-warning
                                                     {% else %}bg-danger{% endif %}" 
-                                                     style="width: {{ performance.win_rate }}%">
+                                                     style="width: {{ performance['win_rate'] }}%">
                                                 </div>
                                             </div>
-                                            <span class="fw-bold">{{ "%.1f"|format(performance.win_rate) }}%</span>
+                                            <span class="fw-bold">{{ "%.1f"|format(performance['win_rate']) }}%</span>
                                         </div>
                                     </td>
                                     <td>
-                                        {% if performance.avg_duration > 60 %}
-                                            {{ "%.1f"|format(performance.avg_duration / 60) }}m
+                                        {% if performance.get('avg_duration', 0) > 60 %}
+                                            {{ "%.1f"|format(performance['avg_duration'] / 60) }}m
                                         {% else %}
-                                            {{ "%.0f"|format(performance.avg_duration) }}s
+                                            {{ "%.0f"|format(performance.get('avg_duration', 0)) }}s
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -229,86 +260,257 @@
     </div>
 </div>
 
-<!-- Card Statistics -->
-{% if stats.card_statistics %}
-<div class="row mt-4">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-layer-group"></i> Card Types Played</h5>
+        <!-- Card Statistics -->
+        {% if stats.card_statistics %}
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-layer-group"></i> Card Types Played</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if stats.card_statistics.get('card_types') %}
+                            <div class="row">
+                                {% for card_type, count in stats.card_statistics.card_types.items() %}
+                                <div class="col-6 mb-3">
+                                    <div class="text-center">
+                                        <h4 class="text-primary">{{ count }}</h4>
+                                        <small class="text-muted">{{ card_type }}</small>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted">No card type data available</p>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                {% if stats.card_statistics.card_types %}
-                    <div class="row">
-                        {% for card_type, count in stats.card_statistics.card_types.items() %}
-                        <div class="col-6 mb-3">
-                            <div class="text-center">
-                                <h4 class="text-primary">{{ count }}</h4>
-                                <small class="text-muted">{{ card_type }}</small>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-magic"></i> Spell Categories</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if stats.card_statistics.get('spell_categories') %}
+                            <div class="row">
+                                {% for category, count in stats.card_statistics.spell_categories.items() %}
+                                <div class="col-6 mb-3">
+                                    <div class="text-center">
+                                        <h4 class="text-success">{{ count }}</h4>
+                                        <small class="text-muted">{{ category }}</small>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted">No spell category data available</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if stats.card_statistics.get('commander_stats') %}
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-crown"></i> Commander Statistics</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <h3 class="text-warning">{{ "%.1f"|format(stats.card_statistics.commander_stats.get('avg_casts_per_game', 0)) }}</h3>
+                                    <p class="text-muted">Average Casts per Game</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <h3 class="text-info">1.4</h3>
+                                    <p class="text-muted">Baseline Expected</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    {% set avg_casts = stats.card_statistics.commander_stats.get('avg_casts_per_game', 0) %}
+                                    {% if avg_casts > 0 %}
+                                        {% set performance = (avg_casts / 1.4 * 100) %}
+                                        <h3 class="{% if performance > 100 %}text-success{% elif performance > 80 %}text-warning{% else %}text-danger{% endif %}">
+                                            {{ "%.0f"|format(performance) }}%
+                                        </h3>
+                                    {% else %}
+                                        <h3 class="text-muted">N/A</h3>
+                                    {% endif %}
+                                    <p class="text-muted">vs Baseline</p>
+                                </div>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
-                {% else %}
-                    <p class="text-muted">No card type data available</p>
-                {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+    
+    <!-- Game Details Tab -->
+    <div class="tab-pane fade" id="game-details" role="tabpanel" aria-labelledby="game-details-tab">
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-gamepad"></i> Game Selection</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <label for="gameSelect" class="form-label">Select Game:</label>
+                                <select class="form-select" id="gameSelect" onchange="loadGameDetails()">
+                                    <option value="">Choose a game...</option>
+                                    {% for game in simulation.game_results %}
+                                    <option value="{{ game.id }}" data-game-number="{{ game.game_number }}">
+                                        Game {{ game.game_number }} - 
+                                        {% if game.winner_player_number %}Player {{ game.winner_player_number }}{% else %}Unknown{% endif %} - 
+                                        {% if game.total_turns %}{{ game.total_turns }} turns{% else %}Duration unknown{% endif %}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-muted">
+                                    <small>Select a game to view detailed statistics and card play analysis</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Details Content -->
+        <div id="gameDetailsContent" class="row mt-4" style="display: none;">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-info-circle"></i> Game <span id="selectedGameNumber"></span> Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 class="text-primary" id="gameWinner"></h4>
+                                    <p class="text-muted">Winner</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 class="text-success" id="gameDuration"></h4>
+                                    <p class="text-muted">Duration</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 class="text-info" id="gameTurns"></h4>
+                                    <p class="text-muted">Total Turns</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h4 class="text-warning" id="gameCardsPlayed"></h4>
+                                    <p class="text-muted">Cards Played</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Statistics Cards -->
+        <div id="gameStatsCards" class="row mt-4" style="display: none;">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-users"></i> Player Performance</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="playerPerformanceTable"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-magic"></i> Spell Categories</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="spellCategoriesChart"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-magic"></i> Spell Categories</h5>
-            </div>
-            <div class="card-body">
-                {% if stats.card_statistics.spell_categories %}
-                    <div class="row">
-                        {% for category, count in stats.card_statistics.spell_categories.items() %}
-                        <div class="col-6 mb-3">
-                            <div class="text-center">
-                                <h4 class="text-success">{{ count }}</h4>
-                                <small class="text-muted">{{ category }}</small>
+    <!-- Turn-by-Turn Tab -->
+    <div class="tab-pane fade" id="turn-by-turn" role="tabpanel" aria-labelledby="turn-by-turn-tab">
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-gamepad"></i> Turn-by-Turn Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <label for="turnGameSelect" class="form-label">Select Game:</label>
+                                <select class="form-select" id="turnGameSelect" onchange="loadTurnByTurnData()">
+                                    <option value="">Choose a game...</option>
+                                    {% for game in simulation.game_results %}
+                                    <option value="{{ game.id }}" data-game-number="{{ game.game_number }}">
+                                        Game {{ game.game_number }} - {{ game.total_turns or 'Unknown' }} turns
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-muted">
+                                    <small>Select a game to view detailed turn-by-turn card play analysis</small>
+                                </div>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
-                {% else %}
-                    <p class="text-muted">No spell category data available</p>
-                {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-{% if stats.card_statistics.commander_stats %}
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-crown"></i> Commander Statistics</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="text-center">
-                            <h3 class="text-warning">{{ "%.1f"|format(stats.card_statistics.commander_stats.avg_casts_per_game) }}</h3>
-                            <p class="text-muted">Average Casts per Game</p>
-                        </div>
+        
+        <!-- Turn-by-Turn Table -->
+        <div id="turnByTurnContent" class="row mt-4" style="display: none;">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list-ol"></i> Turn-by-Turn Card Plays - Game <span id="selectedTurnGameNumber"></span></h5>
                     </div>
-                    <div class="col-md-4">
-                        <div class="text-center">
-                            <h3 class="text-info">1.4</h3>
-                            <p class="text-muted">Baseline Expected</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="text-center">
-                            {% set performance = (stats.card_statistics.commander_stats.avg_casts_per_game / 1.4 * 100) %}
-                            <h3 class="{% if performance > 100 %}text-success{% elif performance > 80 %}text-warning{% else %}text-danger{% endif %}">
-                                {{ "%.0f"|format(performance) }}%
-                            </h3>
-                            <p class="text-muted">vs Baseline</p>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped table-hover" id="turnByTurnTable">
+                                <thead>
+                                    <tr>
+                                        <th>Turn</th>
+                                        <th>Player</th>
+                                        <th>Card</th>
+                                        <th>Type</th>
+                                        <th>Category</th>
+                                        <th>Mana Cost</th>
+                                        <th>Play Order</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="turnByTurnTableBody">
+                                    <!-- Dynamic content -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -316,8 +518,6 @@
         </div>
     </div>
 </div>
-{% endif %}
-{% endif %}
 
 <!-- Game Details -->
 {% if simulation.game_results %}
@@ -329,7 +529,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-dark table-hover">
                         <thead>
                             <tr>
                                 <th>Game</th>
@@ -421,6 +621,134 @@ document.addEventListener('DOMContentLoaded', function() {
 function exportData(format) {
     const url = `/statistics/api/simulation/{{ simulation.id }}/export?format=${format}`;
     window.open(url, '_blank');
+}
+
+// Load game details for selected game
+function loadGameDetails() {
+    const gameSelect = document.getElementById('gameSelect');
+    const gameId = gameSelect.value;
+    const gameNumber = gameSelect.options[gameSelect.selectedIndex].getAttribute('data-game-number');
+    
+    if (!gameId) {
+        document.getElementById('gameDetailsContent').style.display = 'none';
+        document.getElementById('gameStatsCards').style.display = 'none';
+        return;
+    }
+    
+    // Show loading state
+    document.getElementById('gameDetailsContent').style.display = 'block';
+    document.getElementById('gameStatsCards').style.display = 'block';
+    document.getElementById('selectedGameNumber').textContent = gameNumber;
+    
+    // Fetch game details
+    fetch(`/statistics/api/game/${gameId}/details`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                updateGameDetails(data.game);
+            } else {
+                console.error('Failed to load game details:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading game details:', error);
+        });
+}
+
+// Update game details display
+function updateGameDetails(game) {
+    document.getElementById('gameWinner').textContent = game.winner ? `Player ${game.winner}` : 'Unknown';
+    document.getElementById('gameDuration').textContent = game.duration || 'Unknown';
+    document.getElementById('gameTurns').textContent = game.turns || 'Unknown';
+    document.getElementById('gameCardsPlayed').textContent = game.cards_played || 'Unknown';
+    
+    // Update player performance table
+    if (game.player_stats) {
+        const tableHtml = `
+            <table class="table table-dark table-sm">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Cards Played</th>
+                        <th>Mana Spent</th>
+                        <th>Final Life</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${game.player_stats.map(player => `
+                        <tr>
+                            <td>Player ${player.player_number}</td>
+                            <td>${player.cards_played || 0}</td>
+                            <td>${player.mana_spent || 0}</td>
+                            <td>${player.final_life || 0}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+        document.getElementById('playerPerformanceTable').innerHTML = tableHtml;
+    }
+    
+    // Update spell categories
+    if (game.spell_categories) {
+        const categoryHtml = Object.entries(game.spell_categories)
+            .map(([category, count]) => `
+                <div class="d-flex justify-content-between">
+                    <span>${category}</span>
+                    <span class="badge bg-primary">${count}</span>
+                </div>
+            `).join('');
+        document.getElementById('spellCategoriesChart').innerHTML = categoryHtml;
+    }
+}
+
+// Load turn-by-turn data
+function loadTurnByTurnData() {
+    const gameSelect = document.getElementById('turnGameSelect');
+    const gameId = gameSelect.value;
+    const gameNumber = gameSelect.options[gameSelect.selectedIndex].getAttribute('data-game-number');
+    
+    if (!gameId) {
+        document.getElementById('turnByTurnContent').style.display = 'none';
+        return;
+    }
+    
+    document.getElementById('turnByTurnContent').style.display = 'block';
+    document.getElementById('selectedTurnGameNumber').textContent = gameNumber;
+    
+    // Fetch turn-by-turn data
+    fetch(`/statistics/api/game/${gameId}/turns`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                updateTurnByTurnTable(data.turns);
+            } else {
+                console.error('Failed to load turn data:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading turn data:', error);
+        });
+}
+
+// Update turn-by-turn table
+function updateTurnByTurnTable(turns) {
+    const tbody = document.getElementById('turnByTurnTableBody');
+    tbody.innerHTML = turns.map(turn => `
+        <tr>
+            <td>${turn.turn_number}</td>
+            <td>Player ${turn.player_number}</td>
+            <td><strong>${turn.card_name}</strong></td>
+            <td>
+                <span class="badge bg-secondary">${turn.card_type || 'Unknown'}</span>
+            </td>
+            <td>
+                <span class="badge bg-info">${turn.functional_category || 'Unknown'}</span>
+            </td>
+            <td>${turn.mana_cost || '-'}</td>
+            <td>${turn.play_order || '-'}</td>
+        </tr>
+    `).join('');
 }
 
 // Print styles
