@@ -12,6 +12,7 @@ Lair
 Locus
 Mine
 Omenpath
+Planet:Planets
 Power-Plant
 Sphere:Spheres
 Tower
@@ -364,7 +365,9 @@ Fortification
 Gold
 Incubator:Incubators
 Junk
+Lander:Landers
 Key:Keys
+Lander:Landers
 Map
 Powerstone:Powerstones
 Spacecraft:Spacecrafts
