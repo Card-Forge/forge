@@ -3763,20 +3763,27 @@ public class CardFactoryUtil {
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Warp")) {
             final String[] k = keyword.split(":");
-            final Cost warpCost = new Cost(k[1], false);
+            final Cost warpCost = new Cost(k[1], true);
 
             final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(warpCost);
 
+            StringBuilder sbCost = new StringBuilder("Warp");
+            if (!warpCost.isOnlyManaCost()) { //Something other than a mana cost
+                sbCost.append("—");
+            } else {
+                sbCost.append(" ");
+            }
+
+            newSA.putParam("PrecostDesc", sbCost.toString());
+            newSA.putParam("CostDesc", warpCost.toString());
+            // need to add the "."?
+
+            // makes new SpellDescription
             final StringBuilder desc = new StringBuilder();
-            desc.append("Warp ").append(warpCost.toSimpleString()).append(" (");
-            desc.append(inst.getReminderText());
-            desc.append(")");
-
+            desc.append(newSA.getCostDescription());
+            desc.append("(").append(inst.getReminderText()).append(")");
             newSA.setDescription(desc.toString());
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" (Warped)");
-            newSA.setStackDescription(sb.toString());
+            newSA.putParam("AfterDescription", "(Warped)");
 
             newSA.setAlternativeCost(AlternativeCost.Warp);
             newSA.setIntrinsic(intrinsic);
