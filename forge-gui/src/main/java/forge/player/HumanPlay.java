@@ -514,6 +514,7 @@ public class HumanPlay {
                 hostCard.addExiledCard(d);
                 d.setExiledWith(hostCard);
                 d.setExiledBy(hostCard.getController());
+                d.setExiledSA(ability);
             }
         }
         if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {

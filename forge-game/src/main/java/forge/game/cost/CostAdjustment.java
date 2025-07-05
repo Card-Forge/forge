@@ -271,6 +271,7 @@ public class CostAdjustment {
                         host.addExiledCard(d);
                         d.setExiledWith(host);
                         d.setExiledBy(host.getController());
+                        d.setExiledSA(sa);
                         table.put(ZoneType.Graveyard, d.getZone().getZoneType(), d);
                     }
                 }
