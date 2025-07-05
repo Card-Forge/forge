@@ -393,3 +393,8 @@ ScryfallCode=LCC
 13 g_3_3_frog_lizard @Jack Wang
 14 wb_1_1_vampire_lifelink @Zoltan Boros
 15 c_a_blood_draw @Miranda Meeks
+
+[other]
+16 emblem_sorin_lord_of_innistrad @Michael Komarck
+17 blessing @Alfven Ato
+18 monarch @Volkan Baǵa
