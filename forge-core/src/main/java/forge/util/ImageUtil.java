@@ -9,6 +9,9 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
         //get nearest power of actualSize to baseSize so that the image renders good
@@ -100,7 +103,7 @@ public class ImageUtil {
 
         if (includeSet) {
             String editionAliased = isDownloadUrl ? StaticData.instance().getEditions().getCode2ByCode(edition) : ImageKeys.getSetFolder(edition);
-            if (editionAliased == "") //FIXME: Custom Cards Workaround
+            if (editionAliased.isEmpty()) //FIXME: Custom Cards Workaround
                 editionAliased = edition;
             return TextUtil.concatNoSpace(editionAliased, "/", fname);
         } else {
@@ -164,15 +167,13 @@ public class ImageUtil {
 
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop, boolean hyphenateAlchemy){
         String editionCode;
-        if ((setCode != null) && (setCode.length() > 0))
+        if (setCode != null && !setCode.isEmpty())
             editionCode = setCode;
         else
             editionCode = cp.getEdition().toLowerCase();
         String cardCollectorNumber = cp.getCollectorNumber();
         // Hack to account for variations in Arabian Nights
         cardCollectorNumber = cardCollectorNumber.replace("+", "†");
-        // Fix black star in URL
-        cardCollectorNumber = cardCollectorNumber.replace("★", "%E2%98%85");
         // override old planechase sets from their modified id since scryfall move the planechase cards outside their original setcode
         if (cardCollectorNumber.startsWith("OHOP")) {
             editionCode = "ohop";
@@ -201,7 +202,7 @@ public class ImageUtil {
             // Hanweir Garrison EMN already has a appended.
             cardCollectorNumber += face.equals("back") ? "b" : "a";
         }
-        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, URLEncoder.encode(cardCollectorNumber, StandardCharsets.UTF_8),
                 langCode, versionParam, faceParam);
     }
 
