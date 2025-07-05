@@ -1,0 +1,218 @@
+{
+"startPointX": 0.31,
+"startPointY": 0.78,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "red",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Red",
+"terrain": [
+	{
+		"spriteName": "Red_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "Red_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.7,
+"height": 0.7,
+"color": "b63729",
+"spriteNames": [
+	"Gravel"
+],
+"enemies": [
+	"Armadillo",
+	"Adept Red Wizard",
+	"Amonkhet Minotaur Warrior",
+	"Apprentice Red Wizard",
+	"Ashmouth Devil",
+	"Axgard Dwarf",
+	"Berserker",
+	"Boar",
+	"Boggart",
+	"Bull",
+	"Challenger 20",
+	"Challenger 21",
+	"Challenger 22",
+	"Cyclops",
+	"Devil",
+	"Dinosaur",
+	"Dragon",
+	"Dwarf",
+	"Earth Elemental",
+	"Efreet",
+	"Falcon",
+	"Fire Elemental",
+	"Flame Elemental",
+	"Furnace Goblin",
+	"Goblin",
+	"Goblin Chief",
+    "Goblin Fanatic",
+	"Goblin Warrior",
+	"Hedgehog",
+	"Heart-Piercer Manticore",
+	"Hellhound",
+	"Hellion",
+	"Immersturm Demon",
+	"Khenra Warrior",
+	"Kavu",
+	"Bloodgift Demon",
+	"Khan",
+	"Kobold",
+	"Master Red Wizard",
+	"Mindclaw Shaman",
+	"Minotaur",
+	"Minotaur Flayer",
+    "Naked Mole Rat",
+	"Raptor",
+	"Red Beast",
+	"Red Sliver",
+	"Scorpion",
+	"Shaman",
+	"Troll",
+	"Vampire Lord",
+	"Viashino",
+	"Wild-Magic Sorcerer",
+	"Yeti"
+],
+	"pointsOfInterest": [
+		"Red Castle",
+		"Mountain Capital",
+		"Mountain Town Generic",
+		"Mountain Town Identity",
+		"Mountain Town Tribal",
+		"YuleTown",
+		"BarbarianCamp",
+		"BarbarianCamp1",
+		"BarbarianCamp2",
+		"BarbarianCamp3",
+		"BarbarianCamp4",
+		"BarbarianCamp5",
+		"FurnaceBase",
+		"LavaForge1",
+		"LavaForge2",
+		"Maze",
+		"Maze1",
+		"Maze2",
+		"Fort8",
+		"SnowAbbey",
+		"SnowAbbey1",
+		"SnowAbbey2",
+		"SkullCaveR",
+		"SkullCaveR1",
+		"SkullCaveR2",
+		"CaveR",
+		"CaveR1",
+		"CaveR2",
+		"CaveR3",
+		"CaveR4",
+		"CaveR5",
+		"CaveR6",
+		"CaveR7",
+		"CaveDragon",
+		"CaveKobold",
+		"CaveR8",
+		"CaveR9",
+		"CaveRA",
+		"CaveRB",
+		"CaveRC",
+		"CaveRE",
+		"CaveRG",
+		"CaveRH",
+		"KorEncampment",
+		"CaveCerodon",
+		"Temple of Chandra",
+		"Tibalts Fortress",
+		"Zedruu City",
+		"Lavaforge Kobold",
+		"Quest_ShardMines"
+	],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/red_structures.atlas",
+		"sourcePath": "world/structures/models/red.png",
+		"maskPath": "world/structures/masks/ring.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "mountain",
+				"color": "ff0000",
+				"collision": true
+			},
+			{
+				"name": "tree",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "tree3",
+				"color": "0000ff",
+				"collision": true
+			},
+			{
+				"name": "tree4",
+				"color": "ff00ff",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ffff00",
+				"collision": true
+			}
+		]
+	},
+	{
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/red_structures.atlas",
+		"sourcePath": "world/structures/models/volcano.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.2,
+		"width": 0.2,
+		"N": 2,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "lava",
+				"color": "ffff00",
+				"collision": true
+			},
+			{
+				"name": "mountain",
+				"color": "ff0000",
+				"collision": true
+			},
+			{
+				"name": "dead_tree",
+				"color": "000000",
+				"collision": true
+			},
+			{
+				"name": "dead_tree2",
+				"color": "808080",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "0000ff",
+				"collision": true
+			}
+		]
+	}
+]
+}

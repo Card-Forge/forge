@@ -1,0 +1,12 @@
+{                                    
+"name":"Spider",
+  "template":
+  {
+   "count":60,
+   "colors":["Green","Black"],
+   "tribe":"Spider",        
+   "tribeCards":1.0,
+   "tribeSynergyCards":0.3,
+   "rares":0.8
+  }
+}

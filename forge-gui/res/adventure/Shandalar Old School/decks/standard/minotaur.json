@@ -1,0 +1,11 @@
+{                                    
+"name":"Minotaur",
+  "template":
+  {
+   "count":60,
+   "colors":["Red"],
+   "tribe":"Minotaur",
+   "tribeSynergyCards":0.1,
+   "rares":0.8
+  }
+}

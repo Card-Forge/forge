@@ -1,0 +1,107 @@
+[
+
+	{
+		"name": "inn_Cave_river",
+		"type": "cave",
+		"count": 15,
+		"spriteAtlas": "../common/maps/tileset/inn_buildings.atlas",
+		"sprite": "Cave",
+		"map": "../common/maps/map/cave/inn_cave_river_entrance.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Hostile",
+			"Cave",
+			"BiomeColorless",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_crescentus",
+		"type": "town",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/inn_buildings.atlas",
+		"sprite": "crescentus",
+		"map": "../common/maps/map/main_story/inn_crescentus.tmx",
+		"radiusFactor": 0.5,
+		"questTags": [
+			"Capital",
+			"BiomeMoonlight"
+		]
+	},
+	{
+		"name": "inn_forgotten_lodge_1",
+		"type": "dungeon",
+		"count": 18,
+		"spriteAtlas": "../common/maps/tileset/inn_buildings.atlas",
+		"sprite": "lodge_1",
+		"map": "../common/maps/map/hunting_lodge/inn_forgotten_lodge_1.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Hostile",
+			"Dungeon",
+			"BiomeColorless",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_lodge_1",
+		"type": "dungeon",
+		"count": 12,
+		"spriteAtlas": "../common/maps/tileset/inn_buildings.atlas",
+		"sprite": "lodge_1",
+		"map": "../common/maps/map/hunting_lodge/inn_lodge_1.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Hostile",
+			"Dungeon",
+			"BiomeColorless",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_ulvenwald_hamlet",
+		"type": "town",
+		"count": 4,
+		"spriteAtlas": "../common/maps/tileset/inn_buildings.atlas",
+		"sprite": "ulvenwaldtown",
+		"map": "../common/maps/map/towns/inn_ulvenwald_hamlet.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Town",
+			"BiomeColorless",
+			"TownGeneric",
+			"Sidequest"
+		]
+	},
+	{
+		"name": "inn_ulvenwald_town",
+		"type": "town",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/inn_buildings.atlas",
+		"sprite": "ulvenwaldtown",
+		"map": "../common/maps/map/towns/inn_ulvenwald_town.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Capital",
+			"BiomeColorless",
+			"TownGeneric",
+			"Sidequest"
+		]
+	},
+
+	{
+		"name": "inn_ulvenwald_village",
+		"type": "town",
+		"count": 10,
+		"spriteAtlas": "../common/maps/tileset/inn_buildings.atlas",
+		"sprite": "ulvenwaldtown",
+		"map": "../common/maps/map/towns/inn_ulvenwald_hamlet.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Town",
+			"BiomeColorless",
+			"TownGeneric",
+			"Sidequest"
+		]
+	}
+]

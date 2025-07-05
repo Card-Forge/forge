@@ -3,8 +3,8 @@
   "screenHeight": 270,
   "skin": "skin/ui_skin.json",
   "playerBaseSpeed": 32,
-  "minDeckSize": 40,         
-  "colorIds":["W","U","B","R","G"],  
+  "minDeckSize": 40,
+  "colorIds":["W","U","B","R","G"],
   "colorIdNames":["tr(lblWhite) [+W]","tr(lblBlue) [+U]","tr(lblBlack) [+B]","tr(lblRed) [+R]","tr(lblGreen) [+G]"],
   "restrictedCards": [
     "Black Lotus",
@@ -68,7 +68,7 @@
     "Anax and Cymede & Kynaios and Tiro",
     "Call from the Grave",
     "Mise"
-    
+
   ],
   "restrictedEditions": [
     "HTR",
@@ -81,13 +81,23 @@
     "CMB1",
     "UST",
     "UGL",
-    "UNH", 
+    "UNH",
     "PPC1",
     "UND",
     "PUST",
     "DA1",
-    "UST",
     "UNF"
+  ],
+  "restrictedEvents": [
+    "LEA",
+    "LEB",
+    "2ED",
+    "30A",
+    "CNS",
+    "CN2",
+    "CMR",
+    "CLB",
+    "CMM"
   ],
   "difficulties": [
     {
@@ -96,11 +106,11 @@
       "startingShards": 5,
       "staringMoney": 500,
       "enemyLifeFactor": 0.8,
-      "spawnRank": 0,          
-      "goldLoss": 0.02,          
+      "spawnRank": 0,
+      "goldLoss": 0.02,
       "lifeLoss": 0.1,
       "rewardMaxFactor" : 1.5,
-      "sellFactor": 0.6,  
+      "sellFactor": 0.6,
       "shardSellRatio": 0.95,
       "starterDecks": {
         "W":"decks/starter/white_e.json",
@@ -135,10 +145,10 @@
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
       "rewardMaxFactor" : 1.0,
-      "spawnRank": 1,                   
-      "goldLoss": 0.1,             
-      "lifeLoss": 0.2,  
-      "sellFactor": 0.5,      
+      "spawnRank": 1,
+      "goldLoss": 0.1,
+      "lifeLoss": 0.2,
+      "sellFactor": 0.5,
       "shardSellRatio": 0.8,
       "starterDecks": {
         "W":"decks/starter/white_n.json",
@@ -171,9 +181,9 @@
       "staringMoney": 125,
       "enemyLifeFactor": 1.5,
       "rewardMaxFactor" : 0.5,
-      "spawnRank": 2,         
+      "spawnRank": 2,
       "goldLoss": 0.3,
-      "lifeLoss": 0.3,  
+      "lifeLoss": 0.3,
       "sellFactor": 0.25,
       "shardSellRatio": 0.6,
       "starterDecks": {
@@ -233,26 +243,25 @@
     }
   ],
   "starterEditions": [
-	"JMP",
-	"DMU",
-	"BRO",
-	"J22",
-	"ONE",
-	"MOM",
-	"LTR",
-	"J25",
-	"(All)"
+    "JMP",
+    "DMU",
+    "BRO",
+    "J22",
+    "ONE",
+    "MOM",
+    "LTR",
+    "J25",
+    "(All)"
   ],
   "starterEditionNames": [
-	"Jumpstart",
-	"Dominaria United",
-	"The Brothers' War",
-	"Jumpstart 22",
-	"Phyrexia: ONE",
-	"March of the Machine",
-	"Lord of the Rings",
-	"Jumpstart 25",
-	"(All)"
-	]
+    "Jumpstart",
+    "Dominaria United",
+    "The Brothers' War",
+    "Jumpstart 22",
+    "Phyrexia: ONE",
+    "March of the Machine",
+    "Lord of the Rings",
+    "Jumpstart 25",
+    "(All)"
+  ]
 }
-

@@ -1,0 +1,49 @@
+{                                    
+"name":"White",
+  "mainDeck": [
+    {  
+      "count":18, 
+      "cardName": "Plains|ISD"
+    },        
+    {  
+      "count":9, 
+      "cardName": "Forest|ISD"
+    },   
+    {  
+      "count":9,
+      "colors": ["white"],
+      "rarity": ["Uncommon","Common"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [1,2]
+    },
+    {  
+      "count":6,
+      "colors": ["green"],
+      "rarity": ["Uncommon","Common"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [1,2]
+    },
+    {  
+      "count":6,
+      "colors": ["white"],
+      "rarity": ["Uncommon","Common"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [3,4]
+    },
+    {  
+      "count":3,
+      "colors": ["green"],
+      "rarity": ["Uncommon","Common"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [3,4]
+    },
+    {  
+      "count":9,
+      "colors": ["white"],
+      "rarity": ["rare"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [5,6,7,8,9] 
+    }
+    ]
+}
+

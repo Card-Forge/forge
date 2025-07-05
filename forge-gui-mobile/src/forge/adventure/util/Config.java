@@ -111,9 +111,12 @@ public class Config {
         currentConfig = this;
         if (FModel.getPreferences() != null)
             Lang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE);
+        FileHandle file = new FileHandle(prefix + "config.json");
+        //TODO: Plane's config file should be merged with the common config file.
+        if(!file.exists())
+            file = new FileHandle(commonPrefix + "config.json");
         try {
-            configData = new Json().fromJson(ConfigData.class, new FileHandle(commonPrefix + "config.json"));
-
+            configData = new Json().fromJson(ConfigData.class, file);
         } catch (Exception e) {
             e.printStackTrace();
             configData = new ConfigData();

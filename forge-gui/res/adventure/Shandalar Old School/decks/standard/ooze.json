@@ -1,0 +1,12 @@
+{                                    
+"name":"Ooze",
+  "template":
+  {
+   "count":60,
+   "colors":["Green","Blue","Black"],
+   "tribe":"Ooze",        
+   "tribeCards":1.0,
+   "tribeSynergyCards":0.2,
+   "rares":0.6
+  }
+}

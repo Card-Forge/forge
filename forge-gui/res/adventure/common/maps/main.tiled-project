@@ -5,7 +5,10 @@
     "compatibilityVersion": 1100,
     "extensionsPath": "extensions",
     "folders": [
-        "."
+        ".",
+        "map/library"
+    ],
+    "properties": [
     ],
     "propertyTypes": [
     ]

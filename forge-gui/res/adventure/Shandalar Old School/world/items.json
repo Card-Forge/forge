@@ -1,0 +1,1558 @@
+[
+  {
+    "name": "Challenge Coin",
+    "description": "A heavy coin made of gold.",
+    "iconName": "ChallengeCoin"
+  },
+  {
+    "name": "Silver Challenge Coin",
+    "description": "A decorative coin made of silver.",
+    "iconName": "SilverChallengeCoin"
+  },
+  {
+    "name": "Bronze Challenge Coin",
+    "description": "A lightweight coin made of bronze.",
+    "iconName": "BronzeChallengeCoin"
+  },
+  {
+    "name": "Sir Donovan's Amulet",
+    "usableOnWorldMap": true,
+    "description": "A talisman for remotely contacting your employer",
+    "iconName": "SirDonovansAmulet",
+    "dialogOnUse": {
+      "text": "The amulet lies inert until mana is channeled through it.",
+      "options": [
+        {
+          "name": "Put the amulet away"
+        },
+        {
+          "condition": [
+            { "checkQuestFlag": "Quest_ShardMines_Epilogue" },
+            {
+              "checkQuestFlag": "Quest_ShardMines_EpilogueComplete",
+              "not": true
+            },
+            { "hasShards": 3 }
+          ],
+          "name": "Contact Sir Donovan (Requires 3 Mana Shards)",
+          "action": [
+            {
+              "setQuestFlag": {
+                "key": "Quest_ShardMines_EpilogueComplete",
+                "val": 1
+              },
+              "addShards": -3
+            }
+          ],
+          "text": "Unsure exactly what to expect, you channel a bit of energy from your own mana shards into the amulet. It glows an array of colors for the briefest of moments and then fades.",
+          "options": [
+            {
+              "name": "(Continue)",
+              "text": "A thought enters your mind in response, not so much words as an urge - you should go to a town.",
+              "options": [
+                {
+                  "name": "(Continue)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition": [
+            { "checkQuestFlag": "Quest_ShardMines_Epilogue" },
+            {
+              "checkQuestFlag": "Quest_ShardMines_EpilogueComplete",
+              "not": true
+            },
+            {
+              "hasShards": 3,
+              "not": true
+            }
+          ],
+          "isDisabled": true,
+          "name": "Contact Sir Donovan (Requires 3 Mana Shards)"
+        },
+        {
+          "condition": [
+            {
+              "getQuestFlag": {
+                "key": "exploreShand1",
+                "op": "=",
+                "val": 6
+              }
+            },
+            {
+              "getQuestFlag": {
+                "key": "exploreShand1",
+                "op": ">",
+                "val": 6
+              },
+              "not": true
+            },
+            { "hasShards": 5 }
+          ],
+          "name": "Contact Sir Donovan (Requires 5 Mana Shards)",
+          "text": "You funnel the power of your mana shards into the artifact. It takes using a few more of them before the device reacts this time, but eventually it glows in multiple colors once again.",
+          "options": [
+            {
+              "name": "(Continue)",
+              "action": [
+                {
+                  "setQuestFlag": {
+                    "key": "exploreShand1",
+                    "val": 7
+                  },
+                  "addShards": -5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "getQuestFlag": {
+                "key": "exploreShand1",
+                "op": "=",
+                "val": 6
+              }
+            },
+            {
+              "getQuestFlag": {
+                "key": "exploreShand1",
+                "op": ">",
+                "val": 6
+              },
+              "not": true
+            },
+            {
+              "hasShards": 5,
+              "not": true
+            }
+          ],
+          "isDisabled": true,
+          "name": "Contact Sir Donovan (Requires 5 Mana Shards)"
+        }
+      ]
+    },
+    "questItem": true
+  },
+  {
+    "name": "Landscape Sketchbook",
+    "description": "A leather bound notebook containing sketches of various landscapes across Shandalar",
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
+  },
+  {
+    "name": "Landscape Sketchbook - Mirage",
+    "description": "A leather bound notebook containing sketches of tropical locations",
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
+  },
+  {
+    "name": "Landscape Sketchbook - Urza's Saga",
+    "description": "A leather bound notebook containing many different angles of the same terrain features",
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
+  },
+  {
+    "name": "Landscape Sketchbook - Coldsnap",
+    "description": "A leather bound notebook containing sketches of frost covered vistas",
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
+  },
+  {
+    "name": "Jayemdae Tome",
+    "description": "Draft a Chandra themed card that can be cast with mana of any color.",
+    "equipmentSlot": "Left",
+    "iconName": "ChandrasTome",
+    "effect": {
+      "startBattleWithCard": [
+        "Jayemdae Tome"
+      ]
+    }
+  },
+  {
+
+    "name": "Ring of Renewal",
+    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "equipmentSlot": "Neck",
+    "iconName": "PhoenixCharm",
+    "effect": {
+      "startBattleWithCard": [
+        "Ring of Renewal"
+      ]
+    }
+  },
+  {
+    "name": "Chandra's Stone",
+    "description": "A small red gemstone recovered after your battle with Chandra.",
+    "iconName": "r"
+  },
+  {
+    "name": "Mogg Fanatic",
+    "description": "Starts the battle with a Mogg Fanatic.",
+    "equipmentSlot": "Neck",
+    "iconName": "PhoenixCharm",
+    "effect": {
+      "startBattleWithCard": [
+        "Mogg Fanatic"
+      ]
+    }
+  },
+  {
+    "name": "Liliana's Stone",
+    "description": "A small black gemstone recovered after your battle with Liliana.",
+    "iconName": "b"
+  },
+  {
+    "name": "Bottle of Suleiman",
+    "description": "Sign away your soul to know what the future holds",
+    "equipmentSlot": "Right",
+    "iconName": "DemonicContract",
+    "effect": {
+      "startBattleWithCard": [
+        "Bottle of Suleiman"
+      ]
+    }
+  },
+  {
+    "name": "Scryb Sprites",
+    "equipmentSlot": "Neck",
+    "iconName": "PipersCharm",
+    "cost": 1500,
+    "effect": {
+      "startBattleWithCard": [
+        "Scryb Sprites"
+      ]
+    }
+  },
+  {
+    "name": "Ivory Cup",
+    "equipmentSlot": "Left",
+    "cost": 1500,
+    "iconName": "SleepWand",
+    "effect": {
+      "startBattleWithCard": [
+        "Ivory Cup"
+      ]
+    }
+  },
+  {
+    "name": "War Barge",
+    "equipmentSlot": "Right",
+    "cost": 2500,
+    "iconName": "HillGiantClub",
+    "effect": {
+      "startBattleWithCard": [
+        "War Barge"
+      ]
+    }
+  },
+  {
+    "name": "Haunted Crossroads",
+    "equipmentSlot": "Right",
+    "iconName": "CursedTreasure",
+    "cost": 6000,
+    "effect": {
+      "startBattleWithCard": [
+        "Haunted Crossroads"
+      ]
+    }
+  },
+  {
+    "name": "Millstone",
+    "equipmentSlot": "Left",
+    "iconName": "FarmersTools",
+    "cost": 6000,
+    "effect": {
+      "startBattleWithCard": [
+        "Millstone"
+      ]
+    }
+  },
+  {
+    "name": "Sol Ring",
+    "equipmentSlot": "Left",
+    "iconName": "SolRing",
+    "effect": {
+      "startBattleWithCard": [
+        "Sol Ring"
+      ]
+    }
+  },
+  {
+    "name": "Mox Emerald",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxEmerald",
+    "effect": {
+      "startBattleWithCard": [
+        "Mox Emerald"
+      ]
+    }
+  },
+  {
+    "name": "Black Lotus",
+    "equipmentSlot": "Right",
+    "iconName": "BlackLotus",
+    "effect": {
+      "startBattleWithCard": [
+        "Black Lotus"
+      ]
+    }
+  },
+  {
+    "name": "Mox Jet",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxJet",
+    "effect": {
+      "startBattleWithCard": [
+        "Mox Jet"
+      ]
+    }
+  },
+  {
+    "name": "Mox Pearl",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxPearl",
+    "effect": {
+      "startBattleWithCard": [
+        "Mox Pearl"
+      ]
+    }
+  },
+  {
+    "name": "Mox Ruby",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxRuby",
+    "effect": {
+      "startBattleWithCard": [
+        "Mox Ruby"
+      ]
+    }
+  },
+  {
+    "name": "Mox Sapphire",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxSapphire",
+    "effect": {
+      "startBattleWithCard": [
+        "Mox Sapphire"
+      ]
+    }
+  },
+  {
+    "name": "Mons's Goblin Raiders",
+    "equipmentSlot": "Left",
+    "iconName": "BattleStandard",
+    "effect": {
+      "lifeModifier": -1,
+      "startBattleWithCard": [
+        "Mons's Goblin Raiders"
+      ]
+    }
+  },
+  {
+    "name": "Hivestone",
+    "equipmentSlot": "Left",
+    "iconName": "Hivestone",
+    "effect": {
+      "startBattleWithCard": [
+        "Hivestone"
+      ]
+    }
+  },
+  {
+    "name": "Life Amulet",
+    "equipmentSlot": "Neck",
+    "iconName": "LifeAmulet",
+    "cost": 4000,
+    "effect": {
+      "lifeModifier": 2
+    }
+  },
+  {
+    "name": "Red Key",
+    "iconName": "RedKey",
+    "questItem": true
+  },
+  {
+    "name": "Basement Key",
+    "iconName": "RedKey",
+    "questItem": true
+  },
+  {
+    "name": "Outer Gate Key",
+    "iconName": "RedKey",
+    "questItem": true
+  },
+  {
+    "name": "Nahiri's Key",
+    "iconName": "RedKey",
+    "questItem": true
+  },
+  {
+    "name": "White Key",
+    "iconName": "WhiteKey",
+    "questItem": true
+  },
+  {
+    "name": "Blue Key",
+    "iconName": "BlueKey",
+    "questItem": true
+  },
+  {
+    "name": "Green Key",
+    "iconName": "GreenKey",
+    "questItem": true
+  },
+  {
+    "name": "Black Key",
+    "iconName": "BlackKey",
+    "questItem": true
+  },
+  {
+    "name": "Strange Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Torturer's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Grolnoks Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Rusty Old Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Illusionist's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Sorin's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Tibalt's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Axt",
+    "equipmentSlot": "Left",
+    "iconName": "SteelAxt",
+    "cost": 2500,
+    "effect": {
+      "startBattleWithCard": [
+        "Bonesplitter"
+      ]
+    }
+  },
+  {
+    "name": "Dwarven Warriors",
+    "equipmentSlot": "Left",
+    "iconName": "BronzeSword",
+    "cost": 2500,
+    "effect": {
+      "startBattleWithCard": [
+        "Dwarven Warriors"
+      ]
+    }
+  },
+  {
+    "name": "Iron Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "IronBoots",
+    "cost": 2000,
+    "effect": {
+      "moveSpeed": 1.2
+    }
+  },
+  {
+    "name": "Iron Shield",
+    "equipmentSlot": "Right",
+    "iconName": "IronShield",
+    "cost": 6500,
+    "effect": {
+      "lifeModifier": 2
+    }
+  },
+  {
+    "name": "Iron Armor",
+    "equipmentSlot": "Body",
+    "cost": 3000,
+    "iconName": "IronArmor",
+    "effect": {
+      "lifeModifier": 2
+    }
+  },
+  {
+    "name": "Bonesplitter",
+    "equipmentSlot": "Left",
+    "iconName": "SteelSword",
+    "cost": 4500,
+    "effect": {
+      "startBattleWithCard": [
+        "Bonesplitter"
+      ]
+    }
+  },
+  {
+    "name": "Steel Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "SteelBoots",
+    "cost": 4500,
+    "effect": {
+      "lifeModifier": 1,
+      "moveSpeed": 1.2
+    }
+  },
+  {
+    "name": "Thunder Wall",
+    "equipmentSlot": "Right",
+    "iconName": "SteelShield",
+    "cost": 6500,
+    "effect": {
+      "startBattleWithCard": [
+        "Thunder Wall"
+      ]
+    }
+  },
+  {
+    "name": "Steel Armor",
+    "equipmentSlot": "Body",
+    "cost": 5000,
+    "iconName": "SteelArmor",
+    "effect": {
+      "lifeModifier": 3
+    }
+  },
+  {
+    "name": "Armor of the Hivelord",
+    "equipmentSlot": "Body",
+    "iconName": "HiveLordArmor",
+    "effect": {
+      "lifeModifier": 5,
+      "changeStartCards": 1
+    }
+  },
+  {
+    "name": "Leather Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "LeatherBoots",
+    "effect": {
+      "moveSpeed": 1.15
+    }
+  },
+  {
+    "name": "Living Armor",
+    "equipmentSlot": "Right",
+    "iconName": "JungleShield",
+    "cost": 4500,
+    "effect": {
+      "startBattleWithCard": [
+        "Living Armor"
+      ]
+  }
+  },
+  {
+   "name": "Soul Warden",
+    "equipmentSlot": "Neck",
+    "iconName": "SorinAmulet",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Soul Warden"
+      ]
+  }
+  },
+  {
+    "name": "Dagger",
+    "equipmentSlot": "Left",
+    "iconName": "Dagger",
+    "cost": 2000,
+    "effect": {
+      "startBattleWithCard": [
+        "Spare Dagger"
+      ]
+    }
+  },
+  {
+    "name": "Cheat",
+    "equipmentSlot": "Neck",
+    "iconName": "Goose",
+    "effect": {
+      "startBattleWithCard": [
+        "Blightsteel Colossus",
+        "Urabrask the Hidden",
+        "Avatar of Slaughter"
+      ]
+    }
+  },
+  {
+    "name": "Aladdin's Ring",
+    "equipmentSlot": "Right",
+    "cost": 1500,
+    "iconName": "AladdinsRing",
+    "effect": {
+      "startBattleWithCard": [
+        "Aladdin's Ring"
+      ]
+    }
+  },
+  {
+    "name": "Spell Book",
+    "iconName": "SpellBook",
+    "equipmentSlot": "Left",
+    "cost": 8000,
+    "effect": {
+      "changeStartCards": 1
+    }
+  },
+  {
+    "name": "Goblin Balloon Brigade",
+    "equipmentSlot": "Right",
+    "iconName": "CursedRing",
+    "effect": {
+      "startBattleWithCard": [
+        "Goblin Balloon Brigade"
+      ]
+    }
+  },
+  {
+    "name": "Mithril Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "MithrilBoots",
+    "cost": 10000,
+    "effect": {
+      "lifeModifier": 2,
+      "moveSpeed": 1.3
+    }
+  },
+  {
+    "name": "Wall of Wood",
+    "equipmentSlot": "Right",
+    "iconName": "MithrilShield",
+    "cost": 6500,
+    "effect": {
+      "startBattleWithCard": [
+        "Wall of Wood"
+      ]
+    }
+
+  },
+  {
+    "name": "Mithril Armor",
+    "equipmentSlot": "Body",
+    "iconName": "MithrilArmor",
+    "cost": 15000,
+    "effect": {
+      "lifeModifier": 5
+    }
+  },
+  {
+    "name": "Serpent Generator",
+    "equipmentSlot": "Left",
+    "iconName": "PresenceoftheHydra",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Serpent Generator"
+      ]
+    }
+  },
+  {
+    "name": "Skull of Orm",
+    "equipmentSlot": "Right",
+    "iconName": "DeathRing",
+    "cost": 3500,
+    "effect": {
+      "startBattleWithCard": [
+        "Skull of Orm"
+      ]
+    }
+  },
+  {
+    "name": "Dwarven Blastminer",
+    "equipmentSlot": "Left",
+    "cost": 6000,
+    "iconName": "FlameSword",
+    "effect": {
+      "startBattleWithCard": [
+        "Dwarven Blastminer"
+      ]
+    }
+  },
+  {
+    "name": "Wall of Spears",
+    "equipmentSlot": "Right",
+    "cost": 2500,
+    "iconName": "MirrorShield",
+    "effect": {
+      "startBattleWithCard": [
+        "Wall of Spears"
+      ]
+    }
+  },
+  {
+    "name": "Library of Leng",
+    "equipmentSlot": "Right",
+    "iconName": "DungeonMap",
+    "cost": 12000,
+    "effect": {
+      "startBattleWithCard": [
+        "Library of Leng"
+      ]
+    }
+  },
+  {
+    "name": "Aladdin's Lamp",
+    "equipmentSlot": "Right",
+    "iconName": "AladdinsLamp",
+    "cost": 1000,
+    "effect": {
+      "startBattleWithCard": [
+        "Aladdin's Lamp"
+      ]
+    }
+  },
+  {
+    "name": "Heart-Piercer",
+    "equipmentSlot": "Left",
+    "iconName": "CompositeBow",
+    "cost": 2000,
+    "effect": {
+      "startBattleWithCard": [
+        "Heart-Piercer Bow"
+      ]
+    }
+  },
+  {
+    "name": "Wood Bow",
+    "equipmentSlot": "Left",
+    "iconName": "WoodBow",
+    "cost": 1000,
+    "effect": {
+      "startBattleWithCard": [ "Fyndhorn Bow" ]
+    }
+  },
+  {
+    "name": "Sandals",
+    "equipmentSlot": "Boots",
+    "iconName": "Sandals",
+    "effect": {
+      "moveSpeed": 1.1
+    }
+  },
+  {
+    "name": "Gold Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "GoldBoots",
+    "cost": 10000,
+    "effect": {
+      "lifeModifier": 2,
+      "moveSpeed": 1.3
+    }
+  },
+  {
+    "name": "Gold Shield",
+    "equipmentSlot": "Right",
+    "iconName": "GoldShield",
+    "cost": 13000,
+    "effect": {
+      "lifeModifier": 3
+    }
+  },
+  {
+    "name": "Gold Armor",
+    "equipmentSlot": "Body",
+    "iconName": "GoldArmor",
+    "cost": 15000,
+    "effect": {
+      "lifeModifier": 4
+    }
+  },
+  {
+    "name": "Dark Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "DarkBoots",
+    "cost": 2000,
+    "effect": {
+      "startBattleWithCard": [
+        "Clattering Augur"
+      ],
+      "lifeModifier": -2,
+      "moveSpeed": 1.3
+    }
+  },
+  {
+    "name": "Wall of Shadows",
+    "equipmentSlot": "Right",
+    "iconName": "DarkShield",
+    "cost": 2500,
+    "effect": {
+      "startBattleWithCard": [
+        "Wall of Shadows"
+      ],
+      "lifeModifier": -1
+    }
+  },
+  {
+    "name": "Dark Armor",
+    "equipmentSlot": "Body",
+    "cost": 3000,
+    "iconName": "DarkArmor",
+    "effect": {
+      "startBattleWithCard": [
+        "Skeletal Snake"
+      ],
+      "lifeModifier": -1
+    }
+  },
+  {
+    "name": "Carrion Feeder",
+    "equipmentSlot": "Right",
+    "iconName": "Blood",
+    "cost": 1000,
+    "effect": {
+      "startBattleWithCard": [
+        "Carrion Feeder"
+      ]
+    }
+  },
+  {
+    "name": "Mind Stone",
+    "equipmentSlot": "Right",
+    "iconName": "Clue",
+    "cost": 3000,
+    "effect": {
+      "startBattleWithCard": [
+        "Mind Stone"
+      ]
+    }
+  },
+  {
+    "name": "Serenity",
+    "equipmentSlot": "Right",
+    "iconName": "Cheese",
+    "cost": 1000,
+    "effect": {
+      "startBattleWithCard": [
+        "Serenity"
+      ]
+    }
+  },
+  {
+    "name": "Howling Mine",
+    "equipmentSlot": "Right",
+    "iconName": "GoldStack",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Howling Mine"
+      ]
+    }
+  },
+  {
+    "name": "Treasure Trove",
+    "equipmentSlot": "Right",
+    "iconName": "Treasure",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Treasure Trove"
+      ]
+    }
+  },
+  {
+    "name": "Mystic Remora",
+    "equipmentSlot": "Right",
+    "iconName": "Shard",
+    "cost": 3500,
+    "effect": {
+      "startBattleWithCard": [
+        "Mystic Remora"
+      ]
+    }
+  },
+  {
+    "name": "Rod of Ruin",
+    "equipmentSlot": "Left",
+    "iconName": "MadStaff",
+    "effect": {
+      "startBattleWithCard": [
+        "Rod of Ruin"
+      ]
+    }
+  },
+  {
+    "name": "Soldevi Digger",
+    "equipmentSlot": "Neck",
+    "cost": 3000,
+    "iconName": "DarkAmulet",
+    "effect": {
+      "startBattleWithCard": [
+        "Soldevi Digger"
+      ]
+    }
+  },
+  {
+    "name": "Barbed Sextant",
+    "equipmentSlot": "Right",
+    "iconName": "PandorasBox",
+    "cost": 1500,
+    "effect": {
+      "startBattleWithCard": [
+        "Barbed Sextant"
+      ]
+    }
+  },
+  {
+    "name": "Disrupting Scepter",
+    "equipmentSlot": "Left",
+    "iconName": "DisruptingScepter",
+    "cost": 2500,
+    "effect": {
+      "startBattleWithCard": [
+        "Disrupting Scepter"
+      ]
+    }
+  },
+  {
+    "name": "Entrancing Lyre",
+    "equipmentSlot": "Right",
+    "iconName": "EntrancingLyre",
+    "effect": {
+      "startBattleWithCard": [
+        "Entrancing Lyre"
+      ]
+    }
+  },
+  {
+    "name": "Heavy Arbalest",
+    "equipmentSlot": "Left",
+    "iconName": "HeavyArbalest",
+    "cost": 1500,
+    "effect": {
+      "startBattleWithCard": [
+        "Heavy Arbalest"
+      ]
+    }
+  },
+  {
+    "name": "Planar Portal",
+    "equipmentSlot": "Right",
+    "iconName": "RingofThreeWishes",
+    "cost": 2500,
+    "effect": {
+      "startBattleWithCard": [
+        "Planar Portal"
+      ]
+    }
+  },
+  {
+    "name": "Iron Star",
+    "equipmentSlot": "Left",
+    "iconName": "TheBlackstaffofWaterdeep",
+    "cost": 3500,
+    "effect": {
+      "startBattleWithCard": [
+        "Iron Star"
+      ]
+    }
+  },
+  {
+    "name": "Unerring Sling",
+    "equipmentSlot": "Left",
+    "iconName": "UnerringSling",
+    "cost": 4000,
+    "effect": {
+      "startBattleWithCard": [
+        "Unerring Sling"
+      ]
+    }
+  },
+  {
+    "name": "Jeweled Amulet",
+    "equipmentSlot": "Neck",
+    "cost": 5000,
+    "iconName": "JeweledAmulet",
+    "effect": {
+      "startBattleWithCard": [
+        "Jeweled Amulet"
+      ]
+    }
+  },
+  {
+    "name": "Traveler's Amulet",
+    "equipmentSlot": "Neck",
+    "iconName": "TravelersAmulet",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Traveler's Amulet"
+      ]
+    }
+  },
+  {
+    "name": "Amulet of Kroog",
+    "equipmentSlot": "Neck",
+    "iconName": "RelicAmulet",
+    "cost": 2500,
+    "effect": {
+      "startBattleWithCard": [
+        "Amulet of Kroog"
+      ]
+    }
+  },
+  {
+    "name": "Amulet of Vigor",
+    "equipmentSlot": "Neck",
+    "iconName": "AmuletofVigor",
+    "cost": 7000,
+    "effect": {
+      "startBattleWithCard": [
+        "Amulet of Vigor"
+      ]
+    }
+  },
+  {
+    "name": "Jade Monolith",
+    "equipmentSlot": "Neck",
+    "iconName": "VeilstoneAmulet",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Jade Monolith"
+      ]
+    }
+  },
+  {
+    "name": "Jandor's Ring",
+    "equipmentSlot": "Right",
+    "iconName": "JandorsRing",
+    "cost": 2500,
+    "effect": {
+      "startBattleWithCard": [
+        "Jandor's Ring"
+      ]
+    }
+  },
+  {
+    "name": "Jinxed Ring",
+    "equipmentSlot": "Right",
+    "iconName": "JinxedRing",
+    "effect": {
+      "opponent": {
+        "startBattleWithCard": [
+          "Jinxed Ring"
+        ]
+      }
+    }
+  },
+  {
+    "name": "Tormod's Crypt",
+    "equipmentSlot": "Left",
+    "iconName": "Nine-RingedBo",
+    "effect": {
+      "startBattleWithCard": [
+        "Tormod's Crypt"
+      ]
+    }
+  },
+  {
+    "name": "Ring of Immortals",
+    "equipmentSlot": "Right",
+    "iconName": "RingofImmortals",
+    "effect": {
+      "startBattleWithCard": [
+        "Ring of Immortals"
+      ]
+    }
+  },
+  {
+    "name": "Mana Prism",
+    "equipmentSlot": "Right",
+    "iconName": "PrismRing",
+    "cost": 2000,
+    "effect": {
+      "startBattleWithCard": [
+        "Mana Prism"
+      ]
+    }
+  },
+  {
+    "name": "Ring of Renewal",
+    "equipmentSlot": "Right",
+    "iconName": "RingofRenewal",
+    "effect": {
+      "startBattleWithCard": [
+        "Ring of Renewal"
+      ]
+    }
+  },
+  {
+    "name": "Serrated Arrows",
+    "equipmentSlot": "Right",
+    "iconName": "KiteShield",
+    "cost": 1500,
+    "effect": {
+      "startBattleWithCard": [
+        "Serrated Arrows"
+      ]
+    }
+  },
+  {
+    "name": "Shell Wand",
+    "equipmentSlot": "Left",
+    "cost": 4000,
+    "effect": {
+      "opponent": {
+        "lifeModifier": -2
+      }
+    },
+    "iconName": "ShellWand"
+  },
+
+  {
+    "name": "Manasight Amulet",
+    "equipmentSlot": "Neck",
+    "effect": {
+      "colorView": true
+    },
+    "description": "Grants Manasight, letting you know the colors used by your adversaries.",
+    "iconName": "RelicAmulet"
+  },
+  {
+    "name": "Ivory Tower",
+    "equipmentSlot": "Boots",
+    "cost": 8000,
+    "effect": {
+      "opponent": {
+        "lifeModifier": 5
+      },
+      "startBattleWithCard": [
+        "Ivory Tower"
+      ]
+    },
+    "description": "Brings life to both friend and foe",
+    "iconName": "LightBoots"
+  },
+  {
+    "name": "Fortune Coin",
+    "equipmentSlot": "Left",
+    "effect": {
+      "name": "",
+      "goldModifier": 0.85,
+      "cardRewardBonus": 1
+    },
+    "description": "",
+    "iconName": "FortuneCoin"
+  },
+  {
+    "name": "Colorless rune",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability2",
+    "description": "Teleports you to the center",
+    "commandOnUse": "teleport to poi Spawn",
+    "iconName": "ColorlessRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "White rune",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability2",
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the plains",
+    "commandOnUse": "teleport to poi \"Plains Capital\"",
+    "iconName": "WhiteRune",
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Black rune",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability2",
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the swamp",
+    "commandOnUse": "teleport to poi \"Swamp Capital\"",
+    "iconName": "BlackRune",
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Blue rune",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability2",
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the island",
+    "commandOnUse": "teleport to poi \"Island Capital\"",
+    "iconName": "BlueRune",
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Red rune",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability2",
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the mountain",
+    "commandOnUse": "teleport to poi \"Mountain Capital\"",
+    "iconName": "RedRune",
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Green rune",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability2",
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the forest",
+    "commandOnUse": "teleport to poi \"Forest Capital\"",
+    "iconName": "GreenRune",
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "White Staff",
+    "equipmentSlot": "Ability1",
+    "usableOnWorldMap": true,
+    "usableInPoi": true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Heals you half of your life",
+    "commandOnUse": "heal percent 0.5",
+    "iconName": "WhiteStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
+    "name": "Black Staff",
+    "equipmentSlot": "Ability1",
+    "usableOnWorldMap": true,
+    "usableInPoi": false,
+    "effect": {
+      "name": ""
+    },
+    "description": "Hide from enemies for some time",
+    "commandOnUse": "hide 10",
+    "iconName": "BlackStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
+    "name": "Blue Staff",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability1",
+    "effect": {
+      "name": ""
+    },
+    "description": "Lets you fly for some time",
+    "commandOnUse": "fly 10",
+    "iconName": "BlueStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
+    "name": "Red Staff",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability1",
+    "effect": {
+      "name": ""
+    },
+    "description": "Kills the closest enemy on the Overworld",
+    "commandOnUse": "remove enemy nearest",
+    "iconName": "RedStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
+    "name": "Green Staff",
+    "equipmentSlot": "Ability1",
+    "usableOnWorldMap": true,
+    "usableInPoi": true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Doubles your speed for some time",
+    "commandOnUse": "sprint 10",
+    "iconName": "GreenStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
+    "name": "Staff of the Ages",
+    "equipmentSlot": "Left",
+    "iconName": "GreenStaff",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Staff of the Ages"
+      ]
+    }
+  },
+  {
+    "name": "Jester's Cap",
+    "equipmentSlot": "Left",
+    "iconName": "SleepWand",
+    "effect": {
+      "lifeModifier": -1,
+      "startBattleWithCard": [
+        "Jester's Cap"
+      ]
+    }
+  },
+  {
+    "name": "Gaea's Touch",
+    "equipmentSlot": "Boots",
+    "iconName": "SteelBoots",
+    "effect": {
+      "lifeModifier": -1,
+      "moveSpeed": 1.20,
+      "startBattleWithCard": [
+        "Gaea's Touch"
+      ]
+    }
+  },
+  {
+    "name": "Helm of Obedience",
+    "equipmentSlot": "Head",
+    "iconName": "MoxJet",
+    "effect": {
+      "lifeModifier": -1,
+      "moveSpeed": 1.20,
+      "startBattleWithCard": [
+        "Snake Basket"
+      ],
+      "opponent": {
+        "startBattleWithCard": [
+          "Helm of Obedience"
+        ]
+      }
+    }
+  },
+  {
+    "name": "Robe of Mirrors",
+    "equipmentSlot": "Body",
+    "iconName": "BlueRobes",
+    "effect": {
+      "lifeModifier": -1,
+      "cardRewardBonus": 1,
+      "startBattleWithCard": [
+        "Robe of Mirrors"
+      ]
+    }
+  },
+  {
+    "name": "Teferi's Puzzle Box",
+    "equipmentSlot": "Left",
+    "iconName": "MadStaff",
+    "effect": {
+      "lifeModifier": 1,
+      "cardRewardBonus": 1,
+      "startBattleWithCard": [
+        "Teferi's Puzzle Box"
+      ]
+    }
+  },
+  {
+    "name": "Hidden Ancients",
+    "equipmentSlot": "Left",
+    "iconName": "GarrukAxe",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCard": [
+        "Hidden Ancients"
+      ]
+    }
+  },
+  {
+    "name": "Dwarven Hold",
+    "equipmentSlot": "Right",
+    "iconName": "Armory",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCard": [
+        "Dwarven Hold"
+      ]
+    }
+  },
+  {
+    "name": "Dark Sphere",
+    "equipmentSlot": "Left",
+    "iconName": "Scythe",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCard": [
+        "Dark Sphere"
+      ]
+    }
+  },
+  {
+    "name": "Chicken Egg",
+    "equipmentSlot": "Right",
+    "iconName": "ChickenEgg",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCard": [
+        "Chicken Egg"
+      ]
+    }
+  },
+  {
+    "name": "Goblin Tinkerer",
+    "equipmentSlot": "Left",
+    "iconName": "BurningBook",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCard": [
+        "Goblin Tinkerer"
+      ]
+    }
+  },
+  {
+    "name": "Crown of the Ages",
+    "equipmentSlot": "Neck",
+    "iconName": "BrownHat",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCard": [
+        "Crown of the Ages"
+      ]
+    }
+  },
+  {
+    "name": "Cursed Rack",
+    "equipmentSlot": "Left",
+    "iconName": "UnderworldCookbook",
+    "effect": {
+      "startBattleWithCard": [
+        "Cursed Rack"
+      ]
+    }
+  },
+  {
+    "name": "Mantle of Ancient Lore",
+    "equipmentSlot": "Body",
+    "iconName": "Conjurer's Mantle",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCard": [
+        "Mantle of Ancient Lore"
+      ]
+    }
+  },
+  {
+    "name": "Crystal Rod",
+    "equipmentSlot": "Left",
+    "iconName": "ZedruuLantern",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCard": [
+        "Crystal Rod"
+      ]
+    }
+  },
+  {
+    "name": "Grolnok's Skin",
+    "equipmentSlot": "Right",
+    "iconName": "FrogSkin",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCard": [
+        "Grolnok's Skin"
+      ]
+    }
+  },
+  {
+    "name": "Land's Edge",
+    "equipmentSlot": "Boots",
+    "iconName": "MetallicBoots",
+    "effect": {
+      "lifeModifier": 1,
+      "moveSpeed": 1.35,
+      "startBattleWithCard": [
+        "Land's Edge"
+      ]
+    }
+  },
+  {
+    "name": "Serra's Blessing",
+    "description": "Turn a creature hexproof until end of turn.",
+    "equipmentSlot": "Neck",
+    "iconName": "HallowedSigil",
+    "effect": {
+      "startBattleWithCard": [
+        "Serra's Blessing"
+      ]
+    }
+  },
+  {
+    "name": "Cursed Totem",
+    "description": "Devour the life of an enemy creature, killing it.",
+    "equipmentSlot": "Right",
+    "iconName": "UnhallowedSigil",
+    "effect": {
+      "startBattleWithCard": [
+        "Cursed Totem"
+      ]
+    }
+  },
+  {
+    "name": "Cultist's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "First Shard",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Second Shard",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Third Shard",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Fourth Shard",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Fifth Shard",
+    "iconName": "StrangeKey",
+    "questItem": true
+  }
+]
