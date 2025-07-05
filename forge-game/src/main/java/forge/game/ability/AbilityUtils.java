@@ -3751,6 +3751,10 @@ public class AbilityUtils {
             return Aggregates.max(paidList, Card::getNetToughness);
         }
 
+        if (string.startsWith("TapPowerValue")) {
+            return CardLists.getTotalPower(paidList, ctb);
+        }
+
         if (string.startsWith("SumToughness")) {
             return Aggregates.sum(paidList, Card::getNetToughness);
         }
