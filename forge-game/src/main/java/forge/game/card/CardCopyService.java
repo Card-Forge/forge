@@ -66,8 +66,15 @@ public class CardCopyService {
             out.setCollectible(copyFrom.isCollectible());
 
             // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
-            out.setAttachedCards(copyFrom.getAttachedCards());
-            out.setEntityAttachedTo(copyFrom.getEntityAttachedTo());
+            if (copyFrom.hasCardAttachments()) {
+                out.setAttachedCards(copyFrom.getAttachedCards());
+            }
+            if (copyFrom.isAttachedToEntity()) {
+                out.setEntityAttachedTo(copyFrom.getEntityAttachedTo());
+            }
+            if (copyFrom.hasMergedCard()) {
+                out.setMergedCards(copyFrom.getMergedCards());
+            }
 
             out.setLeavesPlayCommands(copyFrom.getLeavesPlayCommands());
 

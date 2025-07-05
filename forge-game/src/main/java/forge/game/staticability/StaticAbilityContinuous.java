@@ -43,6 +43,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 /**
@@ -273,7 +274,7 @@ public final class StaticAbilityContinuous {
                     if (hostCard.hasChosenPlayer()) {
                         Player cp = hostCard.getChosenPlayer();
                         input = input.replaceAll("ChosenPlayerUID", String.valueOf(cp.getId()));
-                        input = input.replaceAll("ChosenPlayerName", cp.getName());
+                        input = input.replaceAll("ChosenPlayerName", Matcher.quoteReplacement(cp.getName()));
                     }
                     if (hostCard.hasNamedCard()) {
                         final String chosenName = hostCard.getNamedCard().replace(",", ";");
