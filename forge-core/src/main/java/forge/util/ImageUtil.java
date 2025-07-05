@@ -9,6 +9,9 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
         //get nearest power of actualSize to baseSize so that the image renders good
@@ -190,7 +193,12 @@ public class ImageUtil {
         }
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
+
+        // Prevents from breaking sets with multiples arts like Antiquities
+        final List<String> setsWithAlternateBacks = Arrays.asList("tdm", "sld");
+
         if (cp.getRules().getOtherPart() != null) {
+  
             faceParam = (face.equals("back") ? "&face=back" : "&face=front");
         } else if (cp.getRules().getSplitType() == CardSplitType.Meld
                     && !cardCollectorNumber.endsWith("a")
@@ -198,6 +206,9 @@ public class ImageUtil {
             // Only the bottom half of a meld card shares a collector number.
             // Hanweir Garrison EMN already has a appended.
             cardCollectorNumber += face.equals("back") ? "b" : "a";
+        } else if (setsWithAlternateBacks.contains(editionCode) && cardCollectorNumber.endsWith("b")) {
+            faceParam = "&face=back";
+            cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
         }
         return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
                 langCode, versionParam, faceParam);
@@ -218,8 +229,7 @@ public class ImageUtil {
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
-            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
-            } else {
+            if ((c != '"') && (c != '/') && (c != ':') && (c != '?')) {
                 out.append(c);
             }
         }
