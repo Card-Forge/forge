@@ -1,0 +1,9 @@
+Name:Tapestry Warden
+ManaCost:3 G
+Types:Artifact Creature Robot Soldier
+PT:3/4
+K:Vigilance
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.powerLTtoughness+YouCtrl | Description$ Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.
+S:Mode$ TapPowerValue | ValidCard$ Creature.powerLTtoughness+YouCtrl | ValidSA$ Activated.Station | Value$ Toughness | Description$ Each creature you control with toughness greater than its power stations permanents using its toughness rather than its power.
+SVar:PlayMain1:TRUE
+Oracle:Vigilance\nEach creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.\nEach creature you control with toughness greater than its power stations permanents using its toughness rather than its power.

@@ -130,7 +130,6 @@ public enum AbilityKey {
     SourceSA("SourceSA"),
     SpellAbility("SpellAbility"),
     SpellAbilityTargets("SpellAbilityTargets"),
-    StackInstance("StackInstance"),
     StackSa("StackSa"),
     SurveilNum("SurveilNum"),
     Target("Target"),
@@ -140,7 +139,7 @@ public enum AbilityKey {
     Valiant("Valiant"),
     Won("Won"),
 
-    // below used across different Replacements, don't reuse
+    // below shared across different Replacements, don't reuse
     InternalTriggerTable("InternalTriggerTable"),
     SimultaneousETB("SimultaneousETB"); // for CR 614.13c
 

@@ -3587,10 +3587,9 @@ public class CardFactoryUtil {
                     "| CostDesc$ | SpellDescription$ Station (" + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            sa.setSVar("StationX", "Tapped$CardPower");
+            sa.setSVar("StationX", "TappedCards$TapPowerValue");
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
         } else if (keyword.startsWith("Encore")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
