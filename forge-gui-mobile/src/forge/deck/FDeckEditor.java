@@ -54,6 +54,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage SIDEBOARD_ICON = Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
     private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
+    //Toggle that suppresses most conformity logic in the editor.
+    public static final String DECK_TAG_SUPPRESS_CONFORMITY = "noEditorConformity";
+
     public static abstract class DeckEditorConfig {
         public abstract GameType getGameType();
         public DeckFormat getDeckFormat() {
@@ -626,6 +629,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     );
                 }
                 addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e -> FDeckViewer.copyDeckToClipboard(deck)));
+                if(!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY) || FModel.getPreferences().getPrefBoolean(FPref.DEV_MODE_ENABLED))
+                    addItem(new FCheckBoxMenuItem(localizer.getMessage("cbEnforceDeckLegality"), shouldEnforceConformity(), e -> toggleConformity()));
                 ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
             }
         };
@@ -648,6 +653,26 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected void addChosenBasicLands(CardPool landsToAdd) {
         getMainDeckPage().addCards(landsToAdd);
+    }
+
+    protected boolean shouldEnforceConformity() {
+        if(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY))
+            return true;
+        if(this.deck == null)
+            return true;
+        return !this.deck.getTags().contains(DECK_TAG_SUPPRESS_CONFORMITY);
+    }
+
+    protected void toggleConformity() {
+        if(this.deck == null)
+            return;
+        Set<String> tags = this.deck.getTags();
+        if(tags.contains(DECK_TAG_SUPPRESS_CONFORMITY))
+            tags.remove(DECK_TAG_SUPPRESS_CONFORMITY);
+        else
+            tags.add(DECK_TAG_SUPPRESS_CONFORMITY);
+        if(getCatalogPage() != null)
+            getCatalogPage().scheduleRefresh(); //Refresh to update commander options.
     }
 
     public DeckEditorConfig getEditorConfig() {
@@ -786,12 +811,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         if(numAllowedInDeck == Integer.MAX_VALUE)
             return numAvailable;
-        else if(!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            if(numAllowedInDeck == 1) //Don't prompt for quantity when editing singleton decks, even with conformity off.
-                return 1;
-            else
-                return numAvailable;
-        }
+        else if(!shouldEnforceConformity())
+            return numAvailable;
         else {
             //Limited number of copies. If we're adding to the deck, cap the amount accordingly.
             if(source instanceof CatalogPage || (isLimitedEditor() && source == this.getSideboardPage()))
@@ -805,6 +826,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         DeckFormat format = this.editorConfig.getDeckFormat();
         if(card == null)
             return 0;
+        else if (!shouldEnforceConformity())
+            return Integer.MAX_VALUE;
         else if(DeckFormat.canHaveSpecificNumberInDeck(card) != null)
             return DeckFormat.canHaveSpecificNumberInDeck(card);
         else if (DeckFormat.canHaveAnyNumberOf(card))
@@ -1292,11 +1315,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected abstract void buildMenu(final FDropDownMenu menu, final PaperCard card);
 
         protected void addMoveCardMenuItem(FDropDownMenu menu, CardManagerPage source, CardManagerPage destination, final Callback<Integer> callback) {
-            ItemPool<PaperCard> selectedItemPool = cardManager.getSelectedItemPool();
-            if (source != this || cardManager.isInfinite()) {
-                //Determine how many we can actually move.
-                selectedItemPool = parentScreen.getAllowedAdditions(selectedItemPool, source, destination);
-            }
+            //Determine how many we can actually move.
+            ItemPool<PaperCard> selectedItemPool = parentScreen.getAllowedAdditions(cardManager.getSelectedItemPool(), source, destination);
+
             int maxMovable = selectedItemPool.isEmpty() ? 0 : Integer.MAX_VALUE;
             for (Entry<PaperCard, Integer> i : selectedItemPool)
                 maxMovable = Math.min(maxMovable, i.getValue());
@@ -1508,6 +1529,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             commanders.removeIf((c) -> c.getRules().canBeSignatureSpell());
             if(commanders.size() != 1)
                 return false;
+            if(!parentScreen.shouldEnforceConformity())
+                return true;
             return commanders.get(0).getRules().canBePartnerCommanders(card.getRules());
         }
 
@@ -1533,6 +1556,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         protected boolean canOnlyBePartnerCommander(final PaperCard card) {
             if (!parentScreen.isCommanderEditor()) {
+                return false;
+            }
+            if(!parentScreen.shouldEnforceConformity()) {
                 return false;
             }
 
@@ -1725,7 +1751,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     else
                         label = "lblCommanders";
                 }
-                else //If we have a commander, filter for color identity.
+                else if(parentScreen.shouldEnforceConformity()) //If we have a commander, filter for color identity.
                     cardPool.retainIf(deckFormat.isLegalCardForCommanderPredicate(currentDeck.getCommanders()));
             }
 
