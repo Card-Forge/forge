@@ -211,42 +211,19 @@ public class ConsoleCommandInterpreter {
             return "Got out";
         });
         registerCommand(new String[]{"give", "card"}, s -> {
-            if (s.length < 1) return "Usage: give card <cardName> [amount] OR give card <cardName> <setName> <collectorNumber> [amount]";
-
-            String cardName = s[0];
-            int amount = 1;
-            PaperCard card = null;
-
-            if (s.length <= 2) {
-                // Format: give card <cardName> [amount]
-                card = StaticData.instance().fetchCard(cardName);
-                if (card == null)
-                    return "Cannot find card: " + cardName;
-
-                if (s.length == 2) {
-                    try {
-                        amount = Integer.parseInt(s[1]);
-                    } catch (NumberFormatException ignored) { }
+            if (s.length < 1) return "Command needs 1 parameter: Card name.";
+            PaperCard card = StaticData.instance().fetchCard(s[0]);
+            if (card == null) return "Cannot find card: " + s[0];
+            if(s.length >= 2) {
+                try {
+                    int amount = Integer.parseInt(s[1]);
+                    Current.player().addCard(card, amount);
+                    return String.format("Added %d cards: %s", amount, card.getName());
                 }
-            } else {
-                // Format: give card <cardName> <setName> <collectorNumber> [amount]
-
-                String setName = s[1];
-                String collectorNumber = s[2];
-
-                card = StaticData.instance().fetchCard(cardName, setName, collectorNumber);
-                if (card == null)
-                    return String.format("Cannot find card: %s in set %s with collector number %s.", cardName, setName, collectorNumber);
-
-                if (s.length >= 4) {
-                    try {
-                        amount = Integer.parseInt(s[3]);
-                    } catch (NumberFormatException ignored) { }
-                }
+                catch(NumberFormatException ignored) {}
             }
-
-            Current.player().addCard(card, amount);
-            return String.format("Added %d cards: %s", amount, card.getName());
+            Current.player().addCard(card);
+            return "Added card: " + card.getName();
         });
         registerCommand(new String[]{"give", "nosell", "card"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Card name.";
