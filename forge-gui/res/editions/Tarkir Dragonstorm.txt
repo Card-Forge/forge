@@ -428,17 +428,17 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 375 R Yathan Roadwatcher @Kevin Glint
 376 R Zurgo, Thunder's Decree @Chuck Lukacs
 377 R Clarion Conqueror @Crystal Sully
-377b R Clarion Conqueror @Crystal Sully
+377☇ R Clarion Conqueror @Crystal Sully
 378 R Marang River Regent @Brian Valeza
-378b R Marang River Regent @Brian Valeza
+378☇ R Marang River Regent @Brian Valeza
 379 R Scavenger Regent @Allen Douglas
-379b R Scavenger Regent @Allen Douglas
+379☇ R Scavenger Regent @Allen Douglas
 380 R Magmatic Hellkite @Alison Johnstun
-380b R Magmatic Hellkite @Alison Johnstun
+380☇ R Magmatic Hellkite @Alison Johnstun
 381 R Bloomvine Regent @Brooklyn Smith
-381b R Bloomvine Regent @Brooklyn Smith
+381☇ R Bloomvine Regent @Brooklyn Smith
 382 M Ugin, Eye of the Storms @Antonio José Manzanedo
-382b M Ugin, Eye of the Storms @Antonio José Manzanedo
+382☇ M Ugin, Eye of the Storms @Antonio José Manzanedo
 399 M Ugin, Eye of the Storms @Joshua Raphael
 400 M Clarion Conqueror @Nathaniel Himawan
 401 M Elspeth, Storm Slayer @Ekaterina Burmak
@@ -530,3 +530,6 @@ Replace=.012F Mythic:fromSheet("TDM cards")
 14 g_5_5_elephant @Deruchenko Alexander
 15 reliquary_dragon @Andrew Mar
 16 c_a_treasure_sac @Gaboleps
+
+[other]
+1 copy @Alejandro Pacheco

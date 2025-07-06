@@ -174,8 +174,6 @@ public class ImageUtil {
         else
             editionCode = cp.getEdition().toLowerCase();
         String cardCollectorNumber = cp.getCollectorNumber();
-        // Hack to account for variations in Arabian Nights
-        cardCollectorNumber = cardCollectorNumber.replace("+", "†");
         // override old planechase sets from their modified id since scryfall move the planechase cards outside their original setcode
         if (cardCollectorNumber.startsWith("OHOP")) {
             editionCode = "ohop";
@@ -196,11 +194,7 @@ public class ImageUtil {
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
 
-        // Prevents from breaking sets with multiples arts like Antiquities
-        final List<String> setsWithAlternateBacks = Arrays.asList("tdm", "sld");
-
         if (cp.getRules().getOtherPart() != null) {
-  
             faceParam = (face.equals("back") ? "&face=back" : "&face=front");
         } else if (cp.getRules().getSplitType() == CardSplitType.Meld
                     && !cardCollectorNumber.endsWith("a")
@@ -208,7 +202,7 @@ public class ImageUtil {
             // Only the bottom half of a meld card shares a collector number.
             // Hanweir Garrison EMN already has a appended.
             cardCollectorNumber += face.equals("back") ? "b" : "a";
-        } else if (setsWithAlternateBacks.contains(editionCode) && cardCollectorNumber.endsWith("b")) {
+        } else if (cardCollectorNumber.endsWith("☇")) {
             faceParam = "&face=back";
             cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
         }
