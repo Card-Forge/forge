@@ -101,7 +101,7 @@ class BigQueryClient:
             logger.error("3. Or set GOOGLE_APPLICATION_CREDENTIALS environment variable")
             raise
     
-    def search_decks(self, query='', commander='', colors='', limit=20, offset=0):
+    def search_decks(self, query='', commander='', colors='', source='', color_match_mode='any', limit=20, offset=0):
         """Search for decks in BigQuery based on filters."""
         base_sql = f"""
         SELECT 
@@ -145,8 +145,12 @@ class BigQueryClient:
             base_sql += " AND (commander_1 LIKE @commander OR commander_2 LIKE @commander)"
             params.append(bigquery.ScalarQueryParameter("commander", "STRING", f"%{commander}%"))
         
+        if source:
+            base_sql += " AND source = @source"
+            params.append(bigquery.ScalarQueryParameter("source", "STRING", source))
+        
         if colors:
-            # Handle color filtering based on the boolean columns
+            # Handle color filtering based on the boolean columns and match mode
             color_conditions = []
             if 'W' in colors:
                 color_conditions.append("is_W = true")
@@ -160,7 +164,27 @@ class BigQueryClient:
                 color_conditions.append("is_G = true")
             
             if color_conditions:
-                base_sql += f" AND ({' AND '.join(color_conditions)})"
+                if color_match_mode == 'exact':
+                    # Exact match: must have exactly these colors
+                    all_colors = ['W', 'U', 'B', 'R', 'G']
+                    exact_conditions = []
+                    for color in all_colors:
+                        if color in colors:
+                            exact_conditions.append(f"is_{color} = true")
+                        else:
+                            exact_conditions.append(f"is_{color} = false")
+                    base_sql += f" AND ({' AND '.join(exact_conditions)})"
+                elif color_match_mode == 'subset':
+                    # Subset: must have only these colors or fewer
+                    subset_conditions = []
+                    for color in ['W', 'U', 'B', 'R', 'G']:
+                        if color not in colors:
+                            subset_conditions.append(f"is_{color} = false")
+                    if subset_conditions:
+                        base_sql += f" AND ({' AND '.join(subset_conditions)})"
+                else:  # 'any' mode (default)
+                    # Contains any: must have at least one of these colors
+                    base_sql += f" AND ({' OR '.join(color_conditions)})"
         
         base_sql += " ORDER BY deck_name LIMIT @limit OFFSET @offset"
         params.extend([
@@ -227,6 +251,73 @@ class BigQueryClient:
             logger.error(f"Error getting deck {deck_id}: {e}")
             return None
     
+    def count_decks(self, query='', commander='', colors='', source='', color_match_mode='any'):
+        """Count decks matching the specified filters."""
+        base_sql = f"""
+        SELECT COUNT(*) as total
+        FROM `{self.project_id}.{self.dataset_id}.decks`
+        WHERE 1=1
+        """
+        
+        params = []
+        
+        if query:
+            base_sql += " AND (deck_name LIKE @query OR deck_id LIKE @query)"
+            params.append(bigquery.ScalarQueryParameter("query", "STRING", f"%{query}%"))
+        
+        if commander:
+            base_sql += " AND (commander_1 LIKE @commander OR commander_2 LIKE @commander)"
+            params.append(bigquery.ScalarQueryParameter("commander", "STRING", f"%{commander}%"))
+        
+        if source:
+            base_sql += " AND source = @source"
+            params.append(bigquery.ScalarQueryParameter("source", "STRING", source))
+        
+        if colors:
+            # Same color filtering logic as search_decks
+            color_conditions = []
+            if 'W' in colors:
+                color_conditions.append("is_W = true")
+            if 'U' in colors:
+                color_conditions.append("is_U = true")
+            if 'B' in colors:
+                color_conditions.append("is_B = true")
+            if 'R' in colors:
+                color_conditions.append("is_R = true")
+            if 'G' in colors:
+                color_conditions.append("is_G = true")
+            
+            if color_conditions:
+                if color_match_mode == 'exact':
+                    all_colors = ['W', 'U', 'B', 'R', 'G']
+                    exact_conditions = []
+                    for color in all_colors:
+                        if color in colors:
+                            exact_conditions.append(f"is_{color} = true")
+                        else:
+                            exact_conditions.append(f"is_{color} = false")
+                    base_sql += f" AND ({' AND '.join(exact_conditions)})"
+                elif color_match_mode == 'subset':
+                    subset_conditions = []
+                    for color in ['W', 'U', 'B', 'R', 'G']:
+                        if color not in colors:
+                            subset_conditions.append(f"is_{color} = false")
+                    if subset_conditions:
+                        base_sql += f" AND ({' AND '.join(subset_conditions)})"
+                else:  # 'any' mode (default)
+                    base_sql += f" AND ({' OR '.join(color_conditions)})"
+        
+        job_config = bigquery.QueryJobConfig(query_parameters=params)
+        
+        try:
+            results = self.client.query(base_sql, job_config=job_config)
+            for row in results:
+                return row.total
+            return 0
+        except Exception as e:
+            logger.error(f"Error counting decks: {e}")
+            return 0
+
     def get_commanders(self):
         """Get list of unique commanders."""
         sql = f"""

@@ -1079,6 +1079,7 @@ class ForgeInterface:
                 r'Player (\d+) \((.*?)\) has won'
             ],
             'turn_start': [
+                r'Turn: Turn (\d+) \(Ai\((\d+)\)',
                 r'Turn (\d+) \(Ai\((\d+)\)',
                 r'Turn (\d+): Ai\((\d+)\)',
                 r'--- Turn (\d+) - Player (\d+)'
@@ -1101,7 +1102,8 @@ class ForgeInterface:
                 r'Land: Player (\d+) played (.+) \(\d+\)$'
             ],
             'mana_ability': [
-                r'Mana: Ai\((\d+)\)-.* - Add (\{[^}]+\}|\d+)',
+                r'Mana: (.+) - \{T\}: Add (\{[^}]+\}|\{[^}]+\}\{[^}]+\})',
+                r'Mana: (.+) - Add (\{[^}]+\})',
                 r'Ai\((\d+)\)-.* adds? (\{[^}]+\}|\d+) to (?:their )?mana pool',
                 r'Player (\d+) adds? (\{[^}]+\}|\d+)',
                 r'Ai\((\d+)\)-.* taps .* for (\{[^}]+\}|\d+)',
@@ -1117,7 +1119,8 @@ class ForgeInterface:
                 r'Player (\d+) draws? (\d+) cards?',
                 r'Draw: Ai\((\d+)\)-.* draws? (\d+)?',
                 r'Ai\((\d+)\)-.* draw(?:s)? a card',
-                r'Draw phase: Ai\((\d+)\)-.* draws? (\d+)?'
+                r'Draw phase: Ai\((\d+)\)-.* draws? (\d+)?',
+                r'Phase: Ai\((\d+)\)-.*\'s Draw step'
             ],
             'land_drop': [
                 r'Main Phase: Ai\((\d+)\)-.* played (.+) \(\d+\)$',
@@ -1149,12 +1152,22 @@ class ForgeInterface:
                 if match:
                     turn_num = int(match.group(1))
                     player_num = int(match.group(2))
-                    if turn_num > current_turn:
-                        current_turn = turn_num
-                        current_turn_player = player_num
-                        # Increment turn count for all alive players
-                        for p in players_alive:
-                            player_stats[p]['turn_count'] += 1
+                    
+                    # Update current tracking
+                    current_turn = turn_num
+                    current_turn_player = player_num
+                    
+                    # Calculate the actual "round" number
+                    # In MTG: Turn 1 = Player 1's first turn, Turn 2 = Player 2's first turn, etc.
+                    # Round 1 = Turns 1-N (where N = number of players)
+                    # Round 2 = Turns (N+1)-(2N), etc.
+                    num_players = len(deck_ids)
+                    actual_round = ((turn_num - 1) // num_players) + 1
+                    
+                    # Set the turn count for this player to the current round
+                    if player_num in player_stats:
+                        player_stats[player_num]['turn_count'] = actual_round
+                    
                     break
             
             # Check for winner
@@ -1322,8 +1335,16 @@ class ForgeInterface:
             for pattern in patterns['mana_ability']:
                 match = re.search(pattern, line)
                 if match:
-                    player_num = int(match.group(1))
-                    mana_value = match.group(2) if len(match.groups()) > 1 else "1"
+                    # For new format "Mana: Card Name - {T}: Add {C}{C}"
+                    if pattern.startswith(r'Mana: (.+) -'):
+                        card_name = match.group(1)
+                        mana_value = match.group(2) if len(match.groups()) > 1 else "1"
+                        # Determine player from current turn or context
+                        player_num = current_turn_player if current_turn_player else 1
+                    else:
+                        # For older patterns with explicit player numbers
+                        player_num = int(match.group(1))
+                        mana_value = match.group(2) if len(match.groups()) > 1 else "1"
                     
                     mana_amount = self._parse_mana_value(mana_value)
                     
@@ -1358,7 +1379,12 @@ class ForgeInterface:
                 if match:
                     player_num = int(match.group(1))
                     cards_drawn = 1
-                    if len(match.groups()) > 1 and match.group(2):
+                    
+                    # Handle different patterns
+                    if pattern.endswith("Draw step"):
+                        # Draw step - assume 1 card drawn
+                        cards_drawn = 1
+                    elif len(match.groups()) > 1 and match.group(2):
                         if match.group(2).isdigit():
                             cards_drawn = int(match.group(2))
                         # Handle phrases like "a card"

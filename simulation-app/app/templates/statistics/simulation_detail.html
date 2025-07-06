@@ -135,61 +135,21 @@
             </div>
         </div>
 
-<div class="row mt-4">
-    <div class="col-md-6">
-        <div class="card mtg-card-frame">
-            <div class="card-header">
-                <h5 class="mtg-glow-text"><i class="fas fa-dice"></i> Turn Count Distribution</h5>
-            </div>
-            <div class="card-body">
-                <div class="chart-container">
-                    <canvas id="turn-distribution-chart"></canvas>
+        <!-- Mana Available Chart -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card mtg-card-frame">
+                    <div class="card-header">
+                        <h5 class="mtg-glow-text"><i class="fas fa-coins"></i> Average Mana Available by Round</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="mana-available-chart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="col-md-6">
-        <div class="card mtg-card-frame">
-            <div class="card-header">
-                <h5 class="mtg-glow-text"><i class="fas fa-users"></i> Player Position Analysis</h5>
-            </div>
-            <div class="card-body">
-                {% if stats.win_rates_by_player %}
-                    <div class="table-responsive">
-                        <table class="table table-dark table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Position</th>
-                                    <th>Win Rate</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for player, win_rate in stats.win_rates_by_player.items() %}
-                                <tr>
-                                    <td>{{ player }}</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="progress flex-grow-1 me-2" style="height: 15px;">
-                                                <div class="progress-bar bg-primary" 
-                                                     style="width: {{ win_rate }}%">
-                                                </div>
-                                            </div>
-                                            <span class="text-muted small">{{ "%.1f"|format(win_rate) }}%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                {% else %}
-                    <p class="text-muted">No position data available</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Deck Performance Table -->
 <div class="row mt-4">
@@ -201,22 +161,25 @@
             <div class="card-body">
                 {% if stats.deck_performance %}
                     <div class="table-responsive">
-                        <table class="table table-dark table-hover">
+                        <table class="table table-dark table-hover sortable-table">
                             <thead>
                                 <tr>
-                                    <th>Deck</th>
-                                    <th>Games</th>
-                                    <th>Wins</th>
-                                    <th>Win Rate</th>
-                                    <th>Avg Duration</th>
+                                    <th data-sortable="text">Commander / Deck</th>
+                                    <th data-sortable="number">Games</th>
+                                    <th data-sortable="number">Wins</th>
+                                    <th data-sortable="percentage">Win Rate</th>
+                                    <th data-sortable="number">Avg Elimination</th>
+                                    <th data-sortable="duration">Avg Duration</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for deck_id, performance in stats.deck_performance.items() %}
                                 <tr>
                                     <td>
-                                        <strong>{{ deck_id[:30] }}</strong>
-                                        {% if deck_id|length > 30 %}...{% endif %}
+                                        <strong>{{ performance.get('commander_name', deck_id[:30]) }}</strong>
+                                        {% if performance.get('deck_name') and performance.get('deck_name') != performance.get('commander_name') %}
+                                            <br><small class="text-muted">{{ performance['deck_name'][:40] }}{% if performance['deck_name']|length > 40 %}...{% endif %}</small>
+                                        {% endif %}
                                         <br>
                                         <small class="text-muted">
                                             <a href="{{ url_for('statistics.deck_statistics', deck_id=deck_id) }}" 
@@ -241,6 +204,18 @@
                                         </div>
                                     </td>
                                     <td>
+                                        {% if performance.get('avg_elimination_position') %}
+                                            <span class="badge 
+                                                {% if performance['avg_elimination_position'] <= 1.5 %}bg-success
+                                                {% elif performance['avg_elimination_position'] <= 2.5 %}bg-warning
+                                                {% else %}bg-danger{% endif %}">
+                                                {{ "%.1f"|format(performance['avg_elimination_position']) }}
+                                            </span>
+                                        {% else %}
+                                            <span class="text-muted">-</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
                                         {% if performance.get('avg_duration', 0) > 60 %}
                                             {{ "%.1f"|format(performance['avg_duration'] / 60) }}m
                                         {% else %}
@@ -260,93 +235,104 @@
     </div>
 </div>
 
-        <!-- Card Statistics -->
-        {% if stats.card_statistics %}
+        <!-- Spell Type Analysis by Deck -->
+        {% if stats.card_statistics and stats.card_statistics.get('spell_type_table') %}
         <div class="row mt-4">
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-12">
+                <div class="card mtg-card-frame">
                     <div class="card-header">
-                        <h5><i class="fas fa-layer-group"></i> Card Types Played</h5>
+                        <h5 class="mtg-glow-text"><i class="fas fa-layer-group"></i> Spell Types by Deck</h5>
                     </div>
                     <div class="card-body">
-                        {% if stats.card_statistics.get('card_types') %}
-                            <div class="row">
-                                {% for card_type, count in stats.card_statistics.card_types.items() %}
-                                <div class="col-6 mb-3">
-                                    <div class="text-center">
-                                        <h4 class="text-primary">{{ count }}</h4>
-                                        <small class="text-muted">{{ card_type }}</small>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <p class="text-muted">No card type data available</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5><i class="fas fa-magic"></i> Spell Categories</h5>
-                    </div>
-                    <div class="card-body">
-                        {% if stats.card_statistics.get('spell_categories') %}
-                            <div class="row">
-                                {% for category, count in stats.card_statistics.spell_categories.items() %}
-                                <div class="col-6 mb-3">
-                                    <div class="text-center">
-                                        <h4 class="text-success">{{ count }}</h4>
-                                        <small class="text-muted">{{ category }}</small>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <p class="text-muted">No spell category data available</p>
-                        {% endif %}
+                        <p class="text-muted mb-3">Average cards played per game by spell type across {{ stats.card_statistics.total_games }} games</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped sortable-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sortable="text">Spell Type</th>
+                                        {% for player_key, player_info in stats.card_statistics.spell_type_table.players.items() %}
+                                        <th data-sortable="number">{{ player_info.commander_name }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for spell_type, deck_values in stats.card_statistics.spell_type_table.data.items() %}
+                                    <tr>
+                                        <td><strong>{{ spell_type }}</strong></td>
+                                        {% for player_key, player_info in stats.card_statistics.spell_type_table.players.items() %}
+                                        <td>
+                                            {% set value = deck_values.get(player_info.commander_name, 0) %}
+                                            <span class="badge 
+                                                {% if spell_type == 'Creatures' %}bg-primary
+                                                {% elif spell_type == 'Instants' %}bg-info
+                                                {% elif spell_type == 'Sorceries' %}bg-success
+                                                {% elif spell_type == 'Artifacts' %}bg-secondary
+                                                {% elif spell_type == 'Enchantments' %}bg-warning
+                                                {% elif spell_type == 'Planeswalkers' %}bg-purple
+                                                {% elif spell_type == 'Lands' %}bg-dark
+                                                {% else %}bg-light text-dark{% endif %}">
+                                                {{ value }}
+                                            </span>
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        {% if stats.card_statistics.get('commander_stats') %}
+        <!-- Spell Functions by Deck -->
+        {% if stats.card_statistics.get('spell_function_table') %}
         <div class="row mt-4">
             <div class="col-12">
-                <div class="card">
+                <div class="card mtg-card-frame">
                     <div class="card-header">
-                        <h5><i class="fas fa-crown"></i> Commander Statistics</h5>
+                        <h5 class="mtg-glow-text"><i class="fas fa-magic"></i> Spell Functions by Deck</h5>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="text-center">
-                                    <h3 class="text-warning">{{ "%.1f"|format(stats.card_statistics.commander_stats.get('avg_casts_per_game', 0)) }}</h3>
-                                    <p class="text-muted">Average Casts per Game</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="text-center">
-                                    <h3 class="text-info">1.4</h3>
-                                    <p class="text-muted">Baseline Expected</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="text-center">
-                                    {% set avg_casts = stats.card_statistics.commander_stats.get('avg_casts_per_game', 0) %}
-                                    {% if avg_casts > 0 %}
-                                        {% set performance = (avg_casts / 1.4 * 100) %}
-                                        <h3 class="{% if performance > 100 %}text-success{% elif performance > 80 %}text-warning{% else %}text-danger{% endif %}">
-                                            {{ "%.0f"|format(performance) }}%
-                                        </h3>
-                                    {% else %}
-                                        <h3 class="text-muted">N/A</h3>
-                                    {% endif %}
-                                    <p class="text-muted">vs Baseline</p>
-                                </div>
-                            </div>
+                        <p class="text-muted mb-3">Average functional spells cast per game by category</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped sortable-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sortable="text">Function</th>
+                                        {% for player_key, player_info in stats.card_statistics.spell_function_table.players.items() %}
+                                        <th data-sortable="number">{{ player_info.commander_name }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for spell_function, deck_values in stats.card_statistics.spell_function_table.data.items() %}
+                                    <tr>
+                                        <td><strong>{{ spell_function }}</strong></td>
+                                        {% for player_key, player_info in stats.card_statistics.spell_function_table.players.items() %}
+                                        <td>
+                                            {% set value = deck_values.get(player_info.commander_name, 0) %}
+                                            <span class="badge 
+                                                {% if spell_function == 'Removal' %}bg-danger
+                                                {% elif spell_function == 'Ramp' %}bg-success
+                                                {% elif spell_function == 'Card Draw' %}bg-info
+                                                {% elif spell_function == 'Counterspells' %}bg-primary
+                                                {% elif spell_function == 'Protection' %}bg-warning
+                                                {% elif spell_function == 'Board Wipes' %}bg-dark
+                                                {% elif spell_function == 'Tribal' %}bg-secondary
+                                                {% elif spell_function == 'Combo Pieces' %}bg-purple
+                                                {% elif spell_function == 'Value Engines' %}bg-light text-dark
+                                                {% else %}bg-info{% endif %}">
+                                                {{ value }}
+                                            </span>
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -354,10 +340,77 @@
         </div>
         {% endif %}
         {% endif %}
+
     </div>
     
     <!-- Game Details Tab -->
     <div class="tab-pane fade" id="game-details" role="tabpanel" aria-labelledby="game-details-tab">
+        
+        <!-- Game Results Table -->
+        {% if simulation.game_results %}
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list"></i> Individual Game Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover sortable-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sortable="number">Game</th>
+                                        <th data-sortable="text">Winner</th>
+                                        <th data-sortable="duration">Duration</th>
+                                        <th data-sortable="number">Turns</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for game in simulation.game_results %}
+                                    <tr>
+                                        <td><strong>Game {{ game.game_number }}</strong></td>
+                                        <td>
+                                            {% if game.winner_player_number %}
+                                                Player {{ game.winner_player_number }}
+                                                <br><small class="text-muted">{{ game.winner_deck_id[:20] }}{% if game.winner_deck_id|length > 20 %}...{% endif %}</small>
+                                            {% else %}
+                                                <span class="text-muted">Unknown</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if game.game_duration_seconds %}
+                                                {% if game.game_duration_seconds > 60 %}
+                                                    {{ "%.1f"|format(game.game_duration_seconds / 60) }}m
+                                                {% else %}
+                                                    {{ game.game_duration_seconds }}s
+                                                {% endif %}
+                                            {% else %}
+                                                <span class="text-muted">-</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ game.total_turns or '-' }}</td>
+                                        <td>
+                                            {% if game.game_log %}
+                                                <a href="{{ url_for('statistics.game_log', game_id=game.id) }}" 
+                                                   class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-file-alt"></i> View Log
+                                                </a>
+                                            {% else %}
+                                                <span class="text-muted">No log</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
         <div class="row mt-3">
             <div class="col-12">
                 <div class="card">
@@ -452,6 +505,22 @@
                 </div>
             </div>
         </div>
+
+        <!-- Game Mana Chart -->
+        <div id="gameManaChart" class="row mt-4" style="display: none;">
+            <div class="col-12">
+                <div class="card mtg-card-frame">
+                    <div class="card-header">
+                        <h5 class="mtg-glow-text"><i class="fas fa-coins"></i> Mana Available by Round - Game <span id="selectedGameManaNumber"></span></h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="game-mana-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Turn-by-Turn Tab -->
@@ -495,16 +564,16 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-dark table-striped table-hover" id="turnByTurnTable">
+                            <table class="table table-dark table-striped table-hover sortable-table" id="turnByTurnTable">
                                 <thead>
                                     <tr>
-                                        <th>Turn</th>
-                                        <th>Player</th>
-                                        <th>Card</th>
-                                        <th>Type</th>
-                                        <th>Category</th>
-                                        <th>Mana Cost</th>
-                                        <th>Play Order</th>
+                                        <th data-sortable="number">Turn</th>
+                                        <th data-sortable="text">Player</th>
+                                        <th data-sortable="text">Card</th>
+                                        <th data-sortable="text">Type</th>
+                                        <th data-sortable="text">Category</th>
+                                        <th data-sortable="number">Mana Cost</th>
+                                        <th data-sortable="number">Play Order</th>
                                     </tr>
                                 </thead>
                                 <tbody id="turnByTurnTableBody">
@@ -519,70 +588,6 @@
     </div>
 </div>
 
-<!-- Game Details -->
-{% if simulation.game_results %}
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-list"></i> Individual Game Results</h5>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-dark table-hover">
-                        <thead>
-                            <tr>
-                                <th>Game</th>
-                                <th>Winner</th>
-                                <th>Duration</th>
-                                <th>Turns</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for game in simulation.game_results %}
-                            <tr>
-                                <td><strong>Game {{ game.game_number }}</strong></td>
-                                <td>
-                                    {% if game.winner_player_number %}
-                                        Player {{ game.winner_player_number }}
-                                        <br><small class="text-muted">{{ game.winner_deck_id[:20] }}{% if game.winner_deck_id|length > 20 %}...{% endif %}</small>
-                                    {% else %}
-                                        <span class="text-muted">Unknown</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% if game.game_duration_seconds %}
-                                        {% if game.game_duration_seconds > 60 %}
-                                            {{ "%.1f"|format(game.game_duration_seconds / 60) }}m
-                                        {% else %}
-                                            {{ game.game_duration_seconds }}s
-                                        {% endif %}
-                                    {% else %}
-                                        <span class="text-muted">-</span>
-                                    {% endif %}
-                                </td>
-                                <td>{{ game.total_turns or '-' }}</td>
-                                <td>
-                                    {% if game.game_log %}
-                                        <a href="{{ url_for('statistics.game_log', game_id=game.id) }}" 
-                                           class="btn btn-sm btn-outline-primary">
-                                            <i class="fas fa-file-alt"></i> View Log
-                                        </a>
-                                    {% else %}
-                                        <span class="text-muted">No log</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
 
 <!-- Export Section -->
 <div class="row mt-4">
@@ -615,7 +620,116 @@
 // Initialize charts when page loads
 document.addEventListener('DOMContentLoaded', function() {
     MTGSimApp.statistics.initializeCharts('{{ simulation.id }}');
+    initializeManaAvailableChart('{{ simulation.id }}');
 });
+
+// Initialize Mana Available Chart
+function initializeManaAvailableChart(simulationId) {
+    fetch(`/statistics/api/simulation/${simulationId}/mana-by-turn`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                createManaAvailableChart(data.mana_data);
+            } else {
+                console.error('Failed to load mana data:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading mana data:', error);
+        });
+}
+
+// Create Mana Available Chart
+function createManaAvailableChart(manaData) {
+    const ctx = document.getElementById('mana-available-chart').getContext('2d');
+    
+    // Generate distinct colors for each deck
+    const colors = [
+        '#1976d2', '#388e3c', '#d32f2f', '#ff9800', 
+        '#9c27b0', '#00796b', '#f57c00', '#303f9f'
+    ];
+    
+    const datasets = [];
+    let colorIndex = 0;
+    
+    for (const [commanderName, turnData] of Object.entries(manaData)) {
+        const color = colors[colorIndex % colors.length];
+        
+        datasets.push({
+            label: commanderName,
+            data: turnData.map(item => ({
+                x: item.turn,
+                y: item.avg_mana_available
+            })),
+            borderColor: color,
+            backgroundColor: color + '20',
+            fill: false,
+            tension: 0.2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+        });
+        
+        colorIndex++;
+    }
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#f5f5f5'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Average Mana Available by Turn',
+                    color: '#b8860b'
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Round',
+                        color: '#f5f5f5'
+                    },
+                    ticks: {
+                        color: '#f5f5f5'
+                    },
+                    grid: {
+                        color: '#555555'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Average Mana Available',
+                        color: '#f5f5f5'
+                    },
+                    ticks: {
+                        color: '#f5f5f5'
+                    },
+                    grid: {
+                        color: '#555555'
+                    }
+                }
+            },
+            elements: {
+                line: {
+                    borderWidth: 2
+                }
+            }
+        }
+    });
+}
 
 // Export functionality
 function exportData(format) {
@@ -632,13 +746,16 @@ function loadGameDetails() {
     if (!gameId) {
         document.getElementById('gameDetailsContent').style.display = 'none';
         document.getElementById('gameStatsCards').style.display = 'none';
+        document.getElementById('gameManaChart').style.display = 'none';
         return;
     }
     
     // Show loading state
     document.getElementById('gameDetailsContent').style.display = 'block';
     document.getElementById('gameStatsCards').style.display = 'block';
+    document.getElementById('gameManaChart').style.display = 'block';
     document.getElementById('selectedGameNumber').textContent = gameNumber;
+    document.getElementById('selectedGameManaNumber').textContent = gameNumber;
     
     // Fetch game details
     fetch(`/statistics/api/game/${gameId}/details`)
@@ -646,6 +763,8 @@ function loadGameDetails() {
         .then(data => {
             if (data.success) {
                 updateGameDetails(data.game);
+                // Load mana chart for this game
+                loadGameManaChart(gameId);
             } else {
                 console.error('Failed to load game details:', data.error);
             }
@@ -665,13 +784,13 @@ function updateGameDetails(game) {
     // Update player performance table
     if (game.player_stats) {
         const tableHtml = `
-            <table class="table table-dark table-sm">
+            <table class="table table-dark table-sm sortable-table">
                 <thead>
                     <tr>
-                        <th>Player</th>
-                        <th>Cards Played</th>
-                        <th>Mana Spent</th>
-                        <th>Final Life</th>
+                        <th data-sortable="text">Player</th>
+                        <th data-sortable="number">Cards Played</th>
+                        <th data-sortable="number">Mana Spent</th>
+                        <th data-sortable="number">Final Life</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -687,6 +806,12 @@ function updateGameDetails(game) {
             </table>
         `;
         document.getElementById('playerPerformanceTable').innerHTML = tableHtml;
+        
+        // Reinitialize sorting for dynamically added table
+        const newTable = document.querySelector('#playerPerformanceTable .sortable-table');
+        if (newTable) {
+            MTGSimApp.tables.makeSortable(newTable);
+        }
     }
     
     // Update spell categories
@@ -700,6 +825,119 @@ function updateGameDetails(game) {
             `).join('');
         document.getElementById('spellCategoriesChart').innerHTML = categoryHtml;
     }
+}
+
+// Load game mana chart
+function loadGameManaChart(gameId) {
+    fetch(`/statistics/api/game/${gameId}/mana-by-turn`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                createGameManaChart(data.mana_data);
+            } else {
+                console.error('Failed to load game mana data:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading game mana data:', error);
+        });
+}
+
+// Create Game Mana Chart
+function createGameManaChart(manaData) {
+    const ctx = document.getElementById('game-mana-chart').getContext('2d');
+    
+    // Clear any existing chart
+    if (window.gameManaChartInstance) {
+        window.gameManaChartInstance.destroy();
+    }
+    
+    // Generate distinct colors for each deck
+    const colors = [
+        '#1976d2', '#388e3c', '#d32f2f', '#ff9800', 
+        '#9c27b0', '#00796b', '#f57c00', '#303f9f'
+    ];
+    
+    const datasets = [];
+    let colorIndex = 0;
+    
+    for (const [commanderName, turnData] of Object.entries(manaData)) {
+        const color = colors[colorIndex % colors.length];
+        
+        datasets.push({
+            label: commanderName,
+            data: turnData.map(item => ({
+                x: item.turn,
+                y: item.mana_available
+            })),
+            borderColor: color,
+            backgroundColor: color + '20',
+            fill: false,
+            tension: 0.2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+        });
+        
+        colorIndex++;
+    }
+    
+    window.gameManaChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#f5f5f5'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Mana Available by Round (Single Game)',
+                    color: '#b8860b'
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Round',
+                        color: '#f5f5f5'
+                    },
+                    ticks: {
+                        color: '#f5f5f5'
+                    },
+                    grid: {
+                        color: '#555555'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Mana Available',
+                        color: '#f5f5f5'
+                    },
+                    ticks: {
+                        color: '#f5f5f5'
+                    },
+                    grid: {
+                        color: '#555555'
+                    }
+                }
+            },
+            elements: {
+                line: {
+                    borderWidth: 2
+                }
+            }
+        }
+    });
 }
 
 // Load turn-by-turn data
@@ -749,6 +987,12 @@ function updateTurnByTurnTable(turns) {
             <td>${turn.play_order || '-'}</td>
         </tr>
     `).join('');
+    
+    // Reinitialize sorting for turn-by-turn table
+    const turnTable = document.getElementById('turnByTurnTable');
+    if (turnTable) {
+        MTGSimApp.tables.makeSortable(turnTable);
+    }
 }
 
 // Print styles

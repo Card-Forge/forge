@@ -174,7 +174,6 @@ window.MTGSimApp = {
                 .then(data => {
                     this.createWinRateChart(data.win_rates);
                     this.createDurationChart(data.game_durations);
-                    this.createTurnDistributionChart(data.turn_distribution);
                 })
                 .catch(error => {
                     console.error('Error loading chart data:', error);
@@ -251,51 +250,114 @@ window.MTGSimApp = {
                     }
                 }
             });
-        },
-        
-        createTurnDistributionChart: function(data) {
-            const ctx = document.getElementById('turn-distribution-chart');
-            if (!ctx) return;
-            
-            this.charts.turnDistribution = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: 'Number of Games',
-                        data: data.data,
-                        backgroundColor: '#4BC0C0'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Turn Count Distribution'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Number of Games'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Turn Range'
-                            }
-                        }
-                    }
-                }
-            });
         }
     },
     
+    // Table sorting functionality
+    tables: {
+        initializeSortable: function() {
+            const sortableTables = document.querySelectorAll('.sortable-table');
+            sortableTables.forEach(table => {
+                this.makeSortable(table);
+            });
+        },
+        
+        makeSortable: function(table) {
+            const headers = table.querySelectorAll('th[data-sortable]');
+            headers.forEach((header, index) => {
+                header.style.cursor = 'pointer';
+                header.addEventListener('click', () => {
+                    this.sortTable(table, index, header.dataset.sortable);
+                });
+                
+                // Add sort indicator
+                header.innerHTML += ' <span class="sort-indicator"></span>';
+            });
+        },
+        
+        sortTable: function(table, columnIndex, dataType) {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const header = table.querySelectorAll('th')[columnIndex];
+            const sortIndicator = header.querySelector('.sort-indicator');
+            
+            // Determine sort direction
+            const currentDirection = header.dataset.sortDirection || 'asc';
+            const newDirection = currentDirection === 'asc' ? 'desc' : 'asc';
+            header.dataset.sortDirection = newDirection;
+            
+            // Clear all other sort indicators
+            table.querySelectorAll('th .sort-indicator').forEach(indicator => {
+                indicator.innerHTML = '';
+            });
+            
+            // Set current sort indicator
+            sortIndicator.innerHTML = newDirection === 'asc' ? '▲' : '▼';
+            
+            // Sort rows
+            rows.sort((a, b) => {
+                const aValue = this.getCellValue(a, columnIndex, dataType);
+                const bValue = this.getCellValue(b, columnIndex, dataType);
+                
+                let comparison = 0;
+                
+                switch (dataType) {
+                    case 'number':
+                        comparison = parseFloat(aValue) - parseFloat(bValue);
+                        break;
+                    case 'date':
+                        comparison = new Date(aValue) - new Date(bValue);
+                        break;
+                    case 'percentage':
+                        const aPercent = parseFloat(aValue.replace('%', ''));
+                        const bPercent = parseFloat(bValue.replace('%', ''));
+                        comparison = aPercent - bPercent;
+                        break;
+                    case 'duration':
+                        comparison = this.parseDuration(aValue) - this.parseDuration(bValue);
+                        break;
+                    default: // text
+                        comparison = aValue.localeCompare(bValue);
+                }
+                
+                return newDirection === 'asc' ? comparison : -comparison;
+            });
+            
+            // Reorder rows in table
+            rows.forEach(row => tbody.appendChild(row));
+        },
+        
+        getCellValue: function(row, columnIndex, dataType) {
+            const cell = row.cells[columnIndex];
+            let value = cell.textContent.trim();
+            
+            // Handle special cases
+            if (dataType === 'percentage') {
+                // Extract percentage value from progress bars or text
+                const progressBar = cell.querySelector('.progress-bar');
+                if (progressBar) {
+                    value = progressBar.style.width || '0%';
+                }
+            }
+            
+            return value;
+        },
+        
+        parseDuration: function(duration) {
+            // Parse duration strings like "1h 30m", "45m", "120s"
+            let seconds = 0;
+            const hoursMatch = duration.match(/(\d+)h/);
+            const minutesMatch = duration.match(/(\d+)m/);
+            const secondsMatch = duration.match(/(\d+)s/);
+            
+            if (hoursMatch) seconds += parseInt(hoursMatch[1]) * 3600;
+            if (minutesMatch) seconds += parseInt(minutesMatch[1]) * 60;
+            if (secondsMatch) seconds += parseInt(secondsMatch[1]);
+            
+            return seconds;
+        }
+    },
+
     // Deck browser functions
     decks: {
         searchTimeout: null,
@@ -389,6 +451,9 @@ window.MTGSimApp = {
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize deck search if on deck browser page
     MTGSimApp.decks.initializeSearch();
+    
+    // Initialize sortable tables
+    MTGSimApp.tables.initializeSortable();
     
     // Auto-start monitoring if on simulation detail page
     const simulationId = document.querySelector('[data-simulation-id]')?.dataset.simulationId;

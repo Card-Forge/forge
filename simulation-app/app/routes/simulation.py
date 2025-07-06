@@ -15,47 +15,23 @@ def list_simulations():
     simulations = Simulation.query.filter_by(user_id=current_user.id).order_by(Simulation.created_at.desc()).all()
     return render_template('simulation/list.html', simulations=simulations)
 
-@simulation_bp.route('/new', methods=['GET', 'POST'])
+@simulation_bp.route('/new')
 @login_required
 def new_simulation():
-    """Create a new simulation configuration."""
-    if request.method == 'POST':
-        simulation_name = request.form['name']
-        num_games = int(request.form['num_games'])
-        game_timeout = int(request.form.get('game_timeout', 600))  # 10 minutes default
-        
-        # Validate num_games limit
-        if num_games > 100:
-            flash('Maximum 100 games per simulation')
-            return render_template('simulation/new.html')
-        
-        # Create simulation
-        simulation = Simulation(
-            id=str(uuid.uuid4()),
-            name=simulation_name,
-            user_id=current_user.id,
-            num_games=num_games,
-            game_timeout=game_timeout,
-            status='pending'
-        )
-        db.session.add(simulation)
-        
-        # Add players
-        for i in range(4):  # Support up to 4 players
-            deck_id = request.form.get(f'player_{i}_deck')
-            if deck_id:  # Only add players with selected decks
-                player = SimulationPlayer(
-                    simulation_id=simulation.id,
-                    player_number=i + 1,
-                    deck_id=deck_id
-                )
-                db.session.add(player)
-        
-        db.session.commit()
-        flash('Simulation created successfully')
-        return redirect(url_for('simulation.list_simulations'))
-    
-    return render_template('simulation/new.html')
+    """Create a new simulation - redirect to unified deck selection page."""
+    return redirect(url_for('simulation.deck_selection'))
+
+@simulation_bp.route('/deck-selection')
+@login_required
+def deck_selection():
+    """Unified deck selection and simulation configuration page."""
+    return render_template('simulation/deck_selection.html')
+
+@simulation_bp.route('/<simulation_id>')
+@login_required
+def view_simulation(simulation_id):
+    """View a specific simulation - redirect to monitoring page."""
+    return redirect(url_for('monitoring.simulation_status', simulation_id=simulation_id))
 
 @simulation_bp.route('/<simulation_id>/start', methods=['POST'])
 @login_required

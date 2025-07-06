@@ -13,28 +13,64 @@ def deck_browser():
 @decks_bp.route('/api/search')
 @login_required
 def api_deck_search():
-    """API endpoint for deck search."""
-    query = request.args.get('q', '')
+    """Enhanced API endpoint for deck search with advanced filtering."""
+    # Basic search parameters
+    name = request.args.get('name', '')
     commander = request.args.get('commander', '')
+    source = request.args.get('source', '')
+    
+    # Color filtering
     colors = request.args.get('colors', '')
-    limit = int(request.args.get('limit', 20))
-    offset = int(request.args.get('offset', 0))
+    color_match_mode = request.args.get('colorMatchMode', 'any')
+    
+    # Pagination with validation
+    try:
+        page = int(request.args.get('page', 1))
+    except (ValueError, TypeError):
+        page = 1
+    
+    try:
+        limit = int(request.args.get('limit', 20))
+    except (ValueError, TypeError):
+        limit = 20
+    
+    # Ensure valid ranges
+    page = max(1, page)
+    limit = max(1, min(100, limit))  # Cap at 100 to prevent abuse
+    offset = (page - 1) * limit
+    
+    # Legacy support for 'q' parameter
+    if not name and request.args.get('q'):
+        name = request.args.get('q')
     
     bigquery_client = BigQueryClient()
     
     try:
         results = bigquery_client.search_decks(
-            query=query,
+            query=name,
             commander=commander,
             colors=colors,
+            source=source,
+            color_match_mode=color_match_mode,
             limit=limit,
             offset=offset
         )
         
+        # Get total count for pagination
+        total_count = bigquery_client.count_decks(
+            query=name,
+            commander=commander,
+            colors=colors,
+            source=source,
+            color_match_mode=color_match_mode
+        )
+        
         return jsonify({
             'decks': results,
-            'total': len(results),
-            'has_more': len(results) == limit
+            'total': total_count,
+            'page': page,
+            'limit': limit,
+            'has_more': (page * limit) < total_count
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500

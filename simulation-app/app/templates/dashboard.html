@@ -5,8 +5,17 @@
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
-        <p class="text-muted">Overview of your MTG EDH simulations</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="mtg-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+                <p class="mtg-subtitle">Overview of your MTG EDH simulations</p>
+            </div>
+            <div>
+                <a href="{{ url_for('simulation.deck_selection') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus"></i> New Simulation
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 

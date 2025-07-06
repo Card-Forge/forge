@@ -214,12 +214,28 @@ def api_game_turns(game_id):
         'turns': turns_data
     })
 
-@statistics_bp.route('/api/game/<int:game_id>/debug')
+@statistics_bp.route('/api/simulation/<simulation_id>/mana-by-turn')
 @login_required
-def api_game_debug(game_id):
-    """Debug endpoint to check what data exists for a game."""
+def api_simulation_mana_by_turn(simulation_id):
+    """API endpoint for mana available by turn data."""
+    simulation = Simulation.query.get_or_404(simulation_id)
+    
+    if simulation.user_id != current_user.id:
+        return jsonify({'error': 'Unauthorized'}), 403
+    
+    stats_engine = StatisticsEngine()
+    mana_data = stats_engine.get_mana_by_turn_data(simulation_id)
+    
+    return jsonify({
+        'success': True,
+        'mana_data': mana_data
+    })
+
+@statistics_bp.route('/api/game/<int:game_id>/mana-by-turn')
+@login_required
+def api_game_mana_by_turn(game_id):
+    """API endpoint for mana available by turn data for a specific game."""
     from ..models.simulation import GameResult
-    from ..models.statistics import CardPlay
     
     game_result = GameResult.query.get_or_404(game_id)
     simulation = game_result.simulation
@@ -227,50 +243,11 @@ def api_game_debug(game_id):
     if simulation.user_id != current_user.id:
         return jsonify({'error': 'Unauthorized'}), 403
     
-    # Get all related data
-    game_stats = GameStatistics.query.filter_by(game_id=game_id).all()
-    card_plays = CardPlay.query.filter_by(game_id=game_id).all()
-    
-    debug_info = {
-        'game_result': {
-            'id': game_result.id,
-            'game_number': game_result.game_number,
-            'winner_player_number': game_result.winner_player_number,
-            'winner_deck_id': game_result.winner_deck_id,
-            'total_turns': game_result.total_turns,
-            'game_duration_seconds': game_result.game_duration_seconds
-        },
-        'game_statistics_count': len(game_stats),
-        'game_statistics': [],
-        'card_plays_count': len(card_plays),
-        'sample_card_plays': []
-    }
-    
-    # Add game statistics details
-    for stat in game_stats:
-        debug_info['game_statistics'].append({
-            'player_number': stat.player_number,
-            'deck_id': stat.deck_id,
-            'total_mana_spent': stat.total_mana_spent,
-            'final_life_total': stat.final_life_total,
-            'cards_played_total': stat.cards_played_total,
-            'creatures_played': stat.creatures_played,
-            'lands_played': stat.lands_played,
-            'turns_survived': stat.turns_survived
-        })
-    
-    # Add sample card plays
-    for card_play in card_plays[:10]:  # First 10 only
-        debug_info['sample_card_plays'].append({
-            'player_number': card_play.player_number,
-            'turn_number': card_play.turn_number,
-            'card_name': card_play.card_name,
-            'card_type': card_play.card_type,
-            'functional_category': card_play.functional_category,
-            'play_order': card_play.play_order
-        })
+    stats_engine = StatisticsEngine()
+    mana_data = stats_engine.get_single_game_mana_data(game_id)
     
     return jsonify({
         'success': True,
-        'debug': debug_info
+        'mana_data': mana_data
     })
+

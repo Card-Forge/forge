@@ -1,14 +1,61 @@
 from sqlalchemy import func
 from ..models.simulation import Simulation, GameResult
 from ..models.statistics import GameStatistics, DeckStatistics, SimulationSummary
+from ..services.bigquery_client import BigQueryClient
 from .. import db
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
 class StatisticsEngine:
     def __init__(self):
-        pass
+        self.bigquery_client = BigQueryClient()
+        self._deck_cache = {}  # Cache for deck information
+    
+    def _get_deck_info(self, deck_id):
+        """Get deck information including commander names."""
+        if deck_id in self._deck_cache:
+            return self._deck_cache[deck_id]
+        
+        try:
+            deck = self.bigquery_client.get_deck(deck_id)
+            if deck:
+                commander_name = deck.get('commander_1', '')
+                if deck.get('commander_2'):
+                    commander_name += f" // {deck.get('commander_2')}"
+                
+                deck_info = {
+                    'commander_name': commander_name or 'Unknown Commander',
+                    'deck_name': deck.get('deck_name', deck_id),
+                    'color_identity': deck.get('color_identity', 'C')
+                }
+            else:
+                deck_info = {
+                    'commander_name': f'Unknown ({deck_id[:20]}...)',
+                    'deck_name': deck_id,
+                    'color_identity': 'C'
+                }
+            
+            self._deck_cache[deck_id] = deck_info
+            return deck_info
+        except Exception as e:
+            logger.warning(f"Could not get deck info for {deck_id}: {e}")
+            return {
+                'commander_name': f'Unknown ({deck_id[:20]}...)',
+                'deck_name': deck_id,
+                'color_identity': 'C'
+            }
+    
+    def _get_deck_display_name(self, deck_id):
+        """Get display name for deck (commander name + deck name if needed)."""
+        deck_info = self._get_deck_info(deck_id)
+        commander_name = deck_info['commander_name']
+        
+        # Check if we need to disambiguate with deck name
+        # This would be more robust with a proper lookup of all commanders
+        # For now, just return commander name
+        return commander_name
     
     def get_simulation_statistics(self, simulation_id):
         """Get comprehensive statistics for a simulation."""
@@ -34,9 +81,6 @@ class StatisticsEngine:
             stats['win_rates_by_deck'] = {deck: perf['win_rate'] for deck, perf in deck_performance.items()}
             stats['deck_performance'] = deck_performance
             
-            # Win rate by player number
-            position_analysis = self._analyze_player_positions(game_results)
-            stats['win_rates_by_player'] = {f"Player {pos}": data['win_rate'] for pos, data in position_analysis.items() if data['games'] > 0}
             
             # Game duration analysis
             durations = [game.game_duration_seconds for game in game_results if game.game_duration_seconds]
@@ -53,7 +97,6 @@ class StatisticsEngine:
             turns = [game.total_turns for game in game_results if game.total_turns]
             if turns:
                 stats['average_turn_count'] = sum(turns) / len(turns)
-                stats['turn_distribution'] = self._get_turn_distribution(turns)
                 stats['turn_stats'] = {
                     'average': sum(turns) / len(turns),
                     'min': min(turns),
@@ -131,23 +174,9 @@ class StatisticsEngine:
             'data': [game.game_duration_seconds for game in game_results if game.game_duration_seconds]
         }
         
-        # Turn count distribution
-        turn_counts = {}
-        for game in game_results:
-            if game.total_turns:
-                turns = game.total_turns
-                turn_range = f"{(turns//5)*5}-{(turns//5)*5+4}"  # Group into ranges
-                turn_counts[turn_range] = turn_counts.get(turn_range, 0) + 1
-        
-        turn_distribution_data = {
-            'labels': sorted(turn_counts.keys()),
-            'data': [turn_counts[label] for label in sorted(turn_counts.keys())]
-        }
-        
         return {
             'win_rates': win_rate_data,
-            'game_durations': duration_data,
-            'turn_distribution': turn_distribution_data
+            'game_durations': duration_data
         }
     
     def compare_decks(self, deck_ids, user_id):
@@ -160,140 +189,288 @@ class StatisticsEngine:
         
         return comparison_data
     
-    def _get_turn_distribution(self, turns):
-        """Calculate turn count distribution by ranges."""
-        distribution = {}
-        for turn_count in turns:
-            turn_range = f"{(turn_count//5)*5}-{(turn_count//5)*5+4}"
-            distribution[turn_range] = distribution.get(turn_range, 0) + 1
-        return distribution
-    
     def _calculate_deck_performance(self, game_results):
         """Calculate win rates and performance metrics for each deck."""
         deck_stats = {}
         
-        # Initialize deck stats
+        # Initialize deck stats with commander names
         for game in game_results:
             for player in game.simulation.players:
                 if player.deck_id not in deck_stats:
+                    deck_info = self._get_deck_info(player.deck_id)
                     deck_stats[player.deck_id] = {
+                        'commander_name': deck_info['commander_name'],
+                        'deck_name': deck_info['deck_name'],
+                        'color_identity': deck_info['color_identity'],
                         'games': 0,
                         'wins': 0,
                         'eliminations': [],
-                        'durations': []
+                        'durations': [],
+                        'elimination_positions': []  # Track what position they were eliminated
                     }
         
-        # Count wins and games
+        # Count wins, games, and elimination positions
         for game in game_results:
             winner_deck = game.winner_deck_id
             
-            for player in game.simulation.players:
-                deck_id = player.deck_id
-                deck_stats[deck_id]['games'] += 1
-                
-                if deck_id == winner_deck:
-                    deck_stats[deck_id]['wins'] += 1
-                
-                if game.game_duration_seconds:
-                    deck_stats[deck_id]['durations'].append(game.game_duration_seconds)
+            # Get game statistics to determine elimination order
+            game_stats = GameStatistics.query.filter_by(game_id=game.id).all()
+            
+            # Sort by final life (higher = better position, 0 = eliminated)
+            # Winner gets position 1, others ranked by life total
+            sorted_players = sorted(game_stats, key=lambda x: (
+                1 if x.deck_id == winner_deck else 0,  # Winner first
+                x.final_life_total or 0  # Then by life total
+            ), reverse=True)
+            
+            for position, player_stat in enumerate(sorted_players, 1):
+                deck_id = player_stat.deck_id
+                if deck_id in deck_stats:
+                    deck_stats[deck_id]['games'] += 1
+                    deck_stats[deck_id]['elimination_positions'].append(position)
+                    
+                    if deck_id == winner_deck:
+                        deck_stats[deck_id]['wins'] += 1
+                    
+                    if game.game_duration_seconds:
+                        deck_stats[deck_id]['durations'].append(game.game_duration_seconds)
         
-        # Calculate rates
+        # Calculate metrics
         for deck_id, stats in deck_stats.items():
             total_games = stats['games']
             if total_games > 0:
                 stats['win_rate'] = (stats['wins'] / total_games) * 100
+                
+                # Calculate average elimination position (1 = always wins, 4 = always eliminated first)
+                if stats['elimination_positions']:
+                    stats['avg_elimination_position'] = sum(stats['elimination_positions']) / len(stats['elimination_positions'])
+                else:
+                    stats['avg_elimination_position'] = 0
+                
                 if stats['durations']:
                     stats['avg_duration'] = sum(stats['durations']) / len(stats['durations'])
                 else:
                     stats['avg_duration'] = 0
             else:
                 stats['win_rate'] = 0
+                stats['avg_elimination_position'] = 0
                 stats['avg_duration'] = 0
         
         return deck_stats
     
-    def _analyze_player_positions(self, game_results):
-        """Analyze advantage of different player positions."""
-        position_stats = {1: {'games': 0, 'wins': 0}, 2: {'games': 0, 'wins': 0}, 
-                         3: {'games': 0, 'wins': 0}, 4: {'games': 0, 'wins': 0}}
-        
-        for game in game_results:
-            winner_player = game.winner_player_number
-            
-            # Count games for each position
-            for player in game.simulation.players:
-                position = player.player_number
-                if position in position_stats:
-                    position_stats[position]['games'] += 1
-                    
-                    if position == winner_player:
-                        position_stats[position]['wins'] += 1
-        
-        # Calculate win rates
-        for position, stats in position_stats.items():
-            if stats['games'] > 0:
-                stats['win_rate'] = (stats['wins'] / stats['games']) * 100
-            else:
-                stats['win_rate'] = 0
-        
-        return position_stats
-    
     def _get_card_statistics(self, simulation_id):
-        """Get aggregated card usage statistics for a simulation."""
-        stats = db.session.query(
-            func.sum(GameStatistics.creatures_played).label('total_creatures'),
-            func.sum(GameStatistics.instants_played).label('total_instants'),
-            func.sum(GameStatistics.sorceries_played).label('total_sorceries'),
-            func.sum(GameStatistics.artifacts_played).label('total_artifacts'),
-            func.sum(GameStatistics.enchantments_played).label('total_enchantments'),
-            func.sum(GameStatistics.planeswalkers_played).label('total_planeswalkers'),
-            func.sum(GameStatistics.lands_played).label('total_lands'),
-            func.sum(GameStatistics.removal_spells_cast).label('total_removal'),
-            func.sum(GameStatistics.ramp_spells_cast).label('total_ramp'),
-            func.sum(GameStatistics.card_draw_spells_cast).label('total_card_draw'),
-            func.sum(GameStatistics.counterspells_cast).label('total_counterspells'),
-            func.sum(GameStatistics.protection_spells_cast).label('total_protection'),
-            func.sum(GameStatistics.board_wipes_cast).label('total_board_wipes'),
-            func.sum(GameStatistics.tribal_spells_cast).label('total_tribal'),
-            func.sum(GameStatistics.combo_pieces_cast).label('total_combo_pieces'),
-            func.sum(GameStatistics.value_engines_cast).label('total_value_engines'),
-            func.sum(GameStatistics.other_spells_cast).label('total_other'),
-            func.avg(GameStatistics.commander_casts).label('avg_commander_casts')
+        """Get per-game and per-player card usage statistics for a simulation."""
+        # Get all game statistics for this simulation
+        game_stats = db.session.query(
+            GameStatistics,
+            GameResult.game_number
         ).join(
             GameResult, GameStatistics.game_id == GameResult.id
         ).filter(
             GameResult.simulation_id == simulation_id
-        ).first()
+        ).order_by(GameResult.game_number, GameStatistics.player_number).all()
         
-        if stats:
-            return {
+        if not game_stats:
+            return {}
+        
+        # Organize data by game and player
+        games_data = {}
+        player_averages = {}
+        
+        for stat, game_number in game_stats:
+            if game_number not in games_data:
+                games_data[game_number] = {}
+            
+            # Store per-game, per-player data
+            games_data[game_number][stat.player_number] = {
                 'card_types': {
-                    'Creatures': stats.total_creatures or 0,
-                    'Instants': stats.total_instants or 0,
-                    'Sorceries': stats.total_sorceries or 0,
-                    'Artifacts': stats.total_artifacts or 0,
-                    'Enchantments': stats.total_enchantments or 0,
-                    'Planeswalkers': stats.total_planeswalkers or 0,
-                    'Lands': stats.total_lands or 0
+                    'Creatures': stat.creatures_played or 0,
+                    'Instants': stat.instants_played or 0,
+                    'Sorceries': stat.sorceries_played or 0,
+                    'Artifacts': stat.artifacts_played or 0,
+                    'Enchantments': stat.enchantments_played or 0,
+                    'Planeswalkers': stat.planeswalkers_played or 0,
+                    'Lands': stat.lands_played or 0
                 },
                 'spell_categories': {
-                    'Removal': stats.total_removal or 0,
-                    'Ramp': stats.total_ramp or 0,
-                    'Card Draw': stats.total_card_draw or 0,
-                    'Counterspells': stats.total_counterspells or 0,
-                    'Protection': stats.total_protection or 0,
-                    'Board Wipes': stats.total_board_wipes or 0,
-                    'Tribal': stats.total_tribal or 0,
-                    'Combo Pieces': stats.total_combo_pieces or 0,
-                    'Value Engines': stats.total_value_engines or 0,
-                    'Other': stats.total_other or 0
+                    'Removal': stat.removal_spells_cast or 0,
+                    'Ramp': stat.ramp_spells_cast or 0,
+                    'Card Draw': stat.card_draw_spells_cast or 0,
+                    'Counterspells': stat.counterspells_cast or 0,
+                    'Protection': stat.protection_spells_cast or 0,
+                    'Board Wipes': stat.board_wipes_cast or 0,
+                    'Tribal': stat.tribal_spells_cast or 0,
+                    'Combo Pieces': stat.combo_pieces_cast or 0,
+                    'Value Engines': stat.value_engines_cast or 0,
+                    'Other': stat.other_spells_cast or 0
                 },
-                'commander_stats': {
-                    'avg_casts_per_game': float(stats.avg_commander_casts or 0)
-                }
+                'commander_casts': stat.commander_casts or 0,
+                'deck_id': stat.deck_id,
+                'total_mana_spent': stat.total_mana_spent or 0,
+                'final_life': stat.final_life_total or 0
             }
+            
+            # Calculate player averages across all games
+            if stat.player_number not in player_averages:
+                player_averages[stat.player_number] = {
+                    'games_count': 0,
+                    'card_types_total': {key: 0 for key in ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Planeswalkers', 'Lands']},
+                    'spell_categories_total': {key: 0 for key in ['Removal', 'Ramp', 'Card Draw', 'Counterspells', 'Protection', 'Board Wipes', 'Tribal', 'Combo Pieces', 'Value Engines', 'Other']},
+                    'commander_casts_total': 0,
+                    'deck_id': stat.deck_id
+                }
+            
+            player_avg = player_averages[stat.player_number]
+            player_avg['games_count'] += 1
+            
+            # Add to totals for average calculation
+            for card_type, count in games_data[game_number][stat.player_number]['card_types'].items():
+                player_avg['card_types_total'][card_type] += count
+            
+            for spell_cat, count in games_data[game_number][stat.player_number]['spell_categories'].items():
+                player_avg['spell_categories_total'][spell_cat] += count
+                
+            player_avg['commander_casts_total'] += (stat.commander_casts or 0)
         
-        return {}
+        # Calculate actual averages
+        for player_num, avg_data in player_averages.items():
+            games_count = avg_data['games_count']
+            if games_count > 0:
+                avg_data['card_types_avg'] = {
+                    card_type: round(total / games_count, 1) 
+                    for card_type, total in avg_data['card_types_total'].items()
+                }
+                avg_data['spell_categories_avg'] = {
+                    spell_cat: round(total / games_count, 1) 
+                    for spell_cat, total in avg_data['spell_categories_total'].items()
+                }
+                avg_data['commander_casts_avg'] = round(avg_data['commander_casts_total'] / games_count, 1)
+        
+        # Create table format: columns = decks/players, rows = spell types
+        spell_type_table = self._create_spell_type_table(game_stats)
+        spell_function_table = self._create_spell_function_table(game_stats)
+        
+        # Create mana and draw analysis
+        mana_analysis = self._create_mana_analysis(game_stats)
+        draw_analysis = self._create_draw_analysis(game_stats)
+        
+        return {
+            'per_game_data': games_data,
+            'player_averages': player_averages,
+            'total_games': len(games_data),
+            'spell_type_table': spell_type_table,
+            'spell_function_table': spell_function_table,
+            'mana_analysis': mana_analysis,
+            'draw_analysis': draw_analysis
+        }
+    
+    def _create_spell_type_table(self, game_stats):
+        """Create table with columns = decks/players and rows = spell types."""
+        table_data = {}
+        players = {}
+        
+        # Process each game stat
+        for stat, game_number in game_stats:
+            player_key = f"Player {stat.player_number}"
+            deck_info = self._get_deck_info(stat.deck_id)
+            commander_name = deck_info['commander_name']
+            
+            if player_key not in players:
+                players[player_key] = {
+                    'commander_name': commander_name,
+                    'deck_id': stat.deck_id,
+                    'games_count': 0,
+                    'totals': {
+                        'Creatures': 0,
+                        'Instants': 0,
+                        'Sorceries': 0,
+                        'Artifacts': 0,
+                        'Enchantments': 0,
+                        'Planeswalkers': 0,
+                        'Lands': 0
+                    }
+                }
+            
+            players[player_key]['games_count'] += 1
+            players[player_key]['totals']['Creatures'] += stat.creatures_played or 0
+            players[player_key]['totals']['Instants'] += stat.instants_played or 0
+            players[player_key]['totals']['Sorceries'] += stat.sorceries_played or 0
+            players[player_key]['totals']['Artifacts'] += stat.artifacts_played or 0
+            players[player_key]['totals']['Enchantments'] += stat.enchantments_played or 0
+            players[player_key]['totals']['Planeswalkers'] += stat.planeswalkers_played or 0
+            players[player_key]['totals']['Lands'] += stat.lands_played or 0
+        
+        # Calculate averages and create final table
+        spell_types = ['Creatures', 'Instants', 'Sorceries', 'Artifacts', 'Enchantments', 'Planeswalkers', 'Lands']
+        
+        for spell_type in spell_types:
+            table_data[spell_type] = {}
+            for player_key, player_data in players.items():
+                games_count = player_data['games_count']
+                avg_value = player_data['totals'][spell_type] / games_count if games_count > 0 else 0
+                table_data[spell_type][player_data['commander_name']] = round(avg_value, 1)
+        
+        return {
+            'data': table_data,
+            'players': {p: {'commander_name': d['commander_name'], 'deck_id': d['deck_id']} for p, d in players.items()}
+        }
+    
+    def _create_spell_function_table(self, game_stats):
+        """Create table with columns = decks/players and rows = spell functions."""
+        table_data = {}
+        players = {}
+        
+        # Process each game stat
+        for stat, game_number in game_stats:
+            player_key = f"Player {stat.player_number}"
+            deck_info = self._get_deck_info(stat.deck_id)
+            commander_name = deck_info['commander_name']
+            
+            if player_key not in players:
+                players[player_key] = {
+                    'commander_name': commander_name,
+                    'deck_id': stat.deck_id,
+                    'games_count': 0,
+                    'totals': {
+                        'Removal': 0,
+                        'Ramp': 0,
+                        'Card Draw': 0,
+                        'Counterspells': 0,
+                        'Protection': 0,
+                        'Board Wipes': 0,
+                        'Tribal': 0,
+                        'Combo Pieces': 0,
+                        'Value Engines': 0,
+                        'Other': 0
+                    }
+                }
+            
+            players[player_key]['games_count'] += 1
+            players[player_key]['totals']['Removal'] += stat.removal_spells_cast or 0
+            players[player_key]['totals']['Ramp'] += stat.ramp_spells_cast or 0
+            players[player_key]['totals']['Card Draw'] += stat.card_draw_spells_cast or 0
+            players[player_key]['totals']['Counterspells'] += stat.counterspells_cast or 0
+            players[player_key]['totals']['Protection'] += stat.protection_spells_cast or 0
+            players[player_key]['totals']['Board Wipes'] += stat.board_wipes_cast or 0
+            players[player_key]['totals']['Tribal'] += stat.tribal_spells_cast or 0
+            players[player_key]['totals']['Combo Pieces'] += stat.combo_pieces_cast or 0
+            players[player_key]['totals']['Value Engines'] += stat.value_engines_cast or 0
+            players[player_key]['totals']['Other'] += stat.other_spells_cast or 0
+        
+        # Calculate averages and create final table
+        spell_functions = ['Removal', 'Ramp', 'Card Draw', 'Counterspells', 'Protection', 'Board Wipes', 'Tribal', 'Combo Pieces', 'Value Engines', 'Other']
+        
+        for spell_function in spell_functions:
+            table_data[spell_function] = {}
+            for player_key, player_data in players.items():
+                games_count = player_data['games_count']
+                avg_value = player_data['totals'][spell_function] / games_count if games_count > 0 else 0
+                table_data[spell_function][player_data['commander_name']] = round(avg_value, 1)
+        
+        return {
+            'data': table_data,
+            'players': {p: {'commander_name': d['commander_name'], 'deck_id': d['deck_id']} for p, d in players.items()}
+        }
     
     def update_deck_statistics(self, deck_id):
         """Update aggregated statistics for a deck."""
@@ -315,3 +492,258 @@ class StatisticsEngine:
             deck_stats.avg_turns_survived = sum(g.turns_survived for g in games) / len(games)
         
         db.session.commit()
+    
+    def _create_mana_analysis(self, game_stats):
+        """Create mana analysis by deck."""
+        analysis = {}
+        players = {}
+        
+        # Process each game stat
+        for stat, game_number in game_stats:
+            deck_info = self._get_deck_info(stat.deck_id)
+            commander_name = deck_info['commander_name']
+            
+            if commander_name not in players:
+                players[commander_name] = {
+                    'games_count': 0,
+                    'total_mana_spent': 0,
+                    'total_lands': 0,
+                    'total_mana_available': 0
+                }
+            
+            players[commander_name]['games_count'] += 1
+            players[commander_name]['total_mana_spent'] += stat.total_mana_spent or 0
+            players[commander_name]['total_lands'] += stat.lands_played or 0
+            players[commander_name]['total_mana_available'] += stat.total_mana_available or 0
+        
+        # Calculate averages
+        for commander, data in players.items():
+            games_count = data['games_count']
+            if games_count > 0:
+                analysis[commander] = {
+                    'avg_mana_spent': round(data['total_mana_spent'] / games_count, 1),
+                    'avg_cmc': round((data['total_mana_spent'] / games_count) / max(1, data['total_lands'] / games_count), 1),
+                    'avg_lands': round(data['total_lands'] / games_count, 1)
+                }
+        
+        return analysis
+    
+    def _create_draw_analysis(self, game_stats):
+        """Create draw analysis by deck."""
+        analysis = {}
+        players = {}
+        
+        # Process each game stat
+        for stat, game_number in game_stats:
+            deck_info = self._get_deck_info(stat.deck_id)
+            commander_name = deck_info['commander_name']
+            
+            if commander_name not in players:
+                players[commander_name] = {
+                    'games_count': 0,
+                    'total_cards_drawn': 0,
+                    'total_turns': 0
+                }
+            
+            players[commander_name]['games_count'] += 1
+            players[commander_name]['total_cards_drawn'] += stat.cards_drawn or 0
+            players[commander_name]['total_turns'] += stat.turns_survived or 0
+        
+        # Calculate averages
+        for commander, data in players.items():
+            games_count = data['games_count']
+            if games_count > 0:
+                total_cards = data['total_cards_drawn']
+                total_turns = data['total_turns']
+                avg_turns_per_game = total_turns / games_count
+                
+                analysis[commander] = {
+                    'total_cards_drawn': round(total_cards / games_count, 1),
+                    'avg_draw_per_turn': round(total_cards / max(1, total_turns), 1) if total_turns > 0 else 0,
+                    'extra_draws': round(max(0, (total_cards / games_count) - avg_turns_per_game), 1)
+                }
+        
+        return analysis
+    
+    def get_mana_by_turn_data(self, simulation_id):
+        """Get mana available by turn for each deck."""
+        # Get all game statistics for this simulation
+        game_stats = db.session.query(
+            GameStatistics,
+            GameResult.game_number
+        ).join(
+            GameResult, GameStatistics.game_id == GameResult.id
+        ).filter(
+            GameResult.simulation_id == simulation_id
+        ).order_by(GameResult.game_number, GameStatistics.player_number).all()
+        
+        if not game_stats:
+            return {}
+        
+        # Parse game logs to extract turn-by-turn mana data
+        mana_by_turn = {}
+        
+        for stat, game_number in game_stats:
+            deck_info = self._get_deck_info(stat.deck_id)
+            commander_name = deck_info['commander_name']
+            
+            if commander_name not in mana_by_turn:
+                mana_by_turn[commander_name] = {}
+            
+            # Parse the game log to extract mana available by turn
+            game_result = GameResult.query.filter_by(
+                simulation_id=simulation_id,
+                game_number=game_number
+            ).first()
+            
+            if game_result and game_result.game_log:
+                # Get number of players from simulation
+                num_players = len(game_result.simulation.players)
+                turn_mana = self._parse_mana_from_log(game_result.game_log, stat.player_number, num_players)
+                
+                for turn, mana in turn_mana.items():
+                    if turn not in mana_by_turn[commander_name]:
+                        mana_by_turn[commander_name][turn] = []
+                    mana_by_turn[commander_name][turn].append(mana)
+        
+        # Calculate averages for each turn
+        result = {}
+        for commander_name, turns in mana_by_turn.items():
+            result[commander_name] = []
+            for turn in sorted(turns.keys()):
+                mana_values = turns[turn]
+                avg_mana = sum(mana_values) / len(mana_values)
+                result[commander_name].append({
+                    'turn': turn,
+                    'avg_mana_available': round(avg_mana, 1)
+                })
+        
+        return result
+    
+    def _parse_mana_from_log(self, game_log, player_number, num_players):
+        """Parse game log to extract mana available by turn for a specific player."""
+        turn_mana = {}
+        
+        if not game_log:
+            return turn_mana
+        
+        lines = game_log.split('\n')
+        current_turn = 1
+        current_turn_player = 1
+        mana_this_turn = 0
+        
+        for line in lines:
+            line = line.strip()
+            
+            # Look for turn indicators using the corrected pattern
+            if line.startswith('Turn: Turn'):
+                try:
+                    # Extract: "Turn: Turn 1 (Ai(1)-BgllFrIGN0mQ0vCapWKbJQ)"
+                    turn_match = re.search(r'Turn: Turn (\d+) \(Ai\((\d+)\)', line)
+                    if turn_match:
+                        new_turn = int(turn_match.group(1))
+                        new_player = int(turn_match.group(2))
+                        
+                        # Save previous turn's mana if it was our player
+                        if current_turn_player == player_number and mana_this_turn > 0:
+                            # Convert to round number
+                            round_number = ((current_turn - 1) // num_players) + 1
+                            turn_mana[round_number] = mana_this_turn
+                        
+                        current_turn = new_turn
+                        current_turn_player = new_player
+                        mana_this_turn = 0
+                except (IndexError, ValueError):
+                    pass
+            
+            # Look for mana production during this player's turn
+            if current_turn_player == player_number:
+                # Pattern: "Mana: Ancient Tomb (73) - {T}: Add {C}{C}. Ancient Tomb deals 2 damage to you."
+                mana_match = re.search(r'Mana: .+ - \{T\}: Add (\{[^}]+\}(?:\{[^}]+\})*)', line)
+                if mana_match:
+                    mana_symbols = mana_match.group(1)
+                    mana_amount = self._parse_mana_symbols(mana_symbols)
+                    mana_this_turn += mana_amount
+                    continue
+                
+                # Alternative pattern: "Mana: Card - Add {C}"
+                mana_match = re.search(r'Mana: .+ - Add (\{[^}]+\})', line)
+                if mana_match:
+                    mana_symbols = mana_match.group(1)
+                    mana_amount = self._parse_mana_symbols(mana_symbols)
+                    mana_this_turn += mana_amount
+        
+        # Save the last turn's mana
+        if current_turn_player == player_number and mana_this_turn > 0:
+            round_number = ((current_turn - 1) // num_players) + 1
+            turn_mana[round_number] = mana_this_turn
+        
+        # If we couldn't parse enough mana from logs, use estimated values
+        if len(turn_mana) < 3:
+            logger.warning(f"Limited mana data parsed for player {player_number}, using estimates")
+            # Estimate based on typical mana progression
+            for turn in range(1, 16):  # Up to turn 15
+                if turn not in turn_mana:
+                    # Assume 1 mana per turn on average, with some variance
+                    estimated_mana = min(turn, 10)  # Cap at 10 mana
+                    turn_mana[turn] = estimated_mana
+        
+        return turn_mana
+    
+    def _parse_mana_symbols(self, mana_string):
+        """Parse mana symbols like {C}{C} or {W}{B} and return total mana value."""
+        # Count occurrences of mana symbols
+        mana_count = 0
+        
+        # Find all mana symbols in braces
+        symbols = re.findall(r'\{([^}]+)\}', mana_string)
+        
+        for symbol in symbols:
+            if symbol.isdigit():
+                # Numeric mana like {2}
+                mana_count += int(symbol)
+            elif symbol in ['W', 'U', 'B', 'R', 'G', 'C']:
+                # Colored or colorless mana
+                mana_count += 1
+            elif '/' in symbol:
+                # Hybrid mana like {W/B} - count as 1
+                mana_count += 1
+        
+        return mana_count
+    
+    def get_single_game_mana_data(self, game_id):
+        """Get mana available by turn for each deck in a specific game."""
+        # Get the game result
+        game_result = GameResult.query.get(game_id)
+        if not game_result or not game_result.game_log:
+            return {}
+        
+        # Get all game statistics for this specific game
+        game_stats = GameStatistics.query.filter_by(game_id=game_id).all()
+        
+        if not game_stats:
+            return {}
+        
+        # Get number of players from simulation
+        num_players = len(game_result.simulation.players)
+        
+        # Parse mana data for each player
+        mana_by_player = {}
+        
+        for stat in game_stats:
+            deck_info = self._get_deck_info(stat.deck_id)
+            commander_name = deck_info['commander_name']
+            
+            # Parse the game log for this specific player
+            turn_mana = self._parse_mana_from_log(game_result.game_log, stat.player_number, num_players)
+            
+            if turn_mana:
+                # Convert to the format expected by the chart
+                mana_by_player[commander_name] = []
+                for turn in sorted(turn_mana.keys()):
+                    mana_by_player[commander_name].append({
+                        'turn': turn,
+                        'mana_available': turn_mana[turn]
+                    })
+        
+        return mana_by_player

@@ -6,13 +6,17 @@ import os
 db = SQLAlchemy()
 login_manager = LoginManager()
 
-def create_app():
+def create_app(config=None):
     app = Flask(__name__)
     
     # Configuration
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///simulation.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    # Apply test configuration if provided
+    if config:
+        app.config.update(config)
     
     # Initialize extensions
     db.init_app(app)

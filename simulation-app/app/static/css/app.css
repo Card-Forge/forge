@@ -8,7 +8,7 @@
     --mtg-light-gray: #4a4a4a;
     --mtg-border: #555555;
     --mtg-accent: #8b4513;
-    --mtg-gold: #d4af37;
+    --mtg-gold: #b8860b;
     --mtg-silver: #c0c0c0;
     --mtg-white: #f5f5f5;
     --mtg-red: #d32f2f;
@@ -18,7 +18,7 @@
     --mtg-artifact: #8d6e63;
     --mtg-purple: #7b1fa2;
     --mtg-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    --mtg-glow: 0 0 10px rgba(212, 175, 55, 0.3);
+    --mtg-glow: 0 0 10px rgba(184, 134, 11, 0.3);
 }
 
 /* Base dark theme */
@@ -65,7 +65,7 @@ a:hover {
 .navbar-brand {
     font-weight: bold;
     color: var(--mtg-gold) !important;
-    text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    text-shadow: 0 0 5px rgba(184, 134, 11, 0.5);
 }
 
 .navbar-dark {
@@ -81,7 +81,7 @@ a:hover {
 
 .navbar-dark .navbar-nav .nav-link:hover {
     color: var(--mtg-gold) !important;
-    text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    text-shadow: 0 0 5px rgba(184, 134, 11, 0.5);
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
@@ -211,6 +211,10 @@ a:hover {
 
 .badge.bg-secondary {
     background: linear-gradient(45deg, var(--mtg-artifact), #a1887f) !important;
+}
+
+.badge.bg-purple {
+    background: linear-gradient(45deg, var(--mtg-purple), #9c27b0) !important;
 }
 
 /* Buttons with MTG styling */
@@ -343,7 +347,7 @@ a:hover {
     background-color: var(--mtg-medium-gray);
     border-color: var(--mtg-gold);
     color: var(--mtg-white);
-    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 5px rgba(184, 134, 11, 0.3);
 }
 
 /* List groups */
@@ -602,20 +606,61 @@ strong, b {
 
 /* Form controls */
 .form-control, .form-select {
-    background-color: var(--mtg-dark-gray);
-    border-color: var(--mtg-border);
-    color: var(--mtg-white);
+    background-color: var(--mtg-dark-gray) !important;
+    border-color: var(--mtg-border) !important;
+    color: var(--mtg-white) !important;
 }
 
 .form-control:focus, .form-select:focus {
-    background-color: var(--mtg-medium-gray);
-    border-color: var(--mtg-gold);
-    color: var(--mtg-white);
-    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+    background-color: var(--mtg-medium-gray) !important;
+    border-color: var(--mtg-gold) !important;
+    color: var(--mtg-white) !important;
+    box-shadow: 0 0 5px rgba(184, 134, 11, 0.3) !important;
+}
+
+.form-control:disabled, .form-select:disabled {
+    background-color: var(--mtg-medium-gray) !important;
+    border-color: var(--mtg-border) !important;
+    color: var(--mtg-silver) !important;
+}
+
+/* Ensure placeholder text is visible */
+.form-control::placeholder {
+    color: var(--mtg-silver) !important;
+    opacity: 0.7;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: var(--mtg-silver) !important;
+    opacity: 0.7;
+}
+
+.form-control::-moz-placeholder {
+    color: var(--mtg-silver) !important;
+    opacity: 0.7;
+}
+
+.form-control:-ms-input-placeholder {
+    color: var(--mtg-silver) !important;
+    opacity: 0.7;
+}
+
+/* Specific override for search inputs */
+input[type="text"], input[type="search"], input[type="email"], input[type="password"] {
+    background-color: var(--mtg-dark-gray) !important;
+    border-color: var(--mtg-border) !important;
+    color: var(--mtg-white) !important;
+}
+
+input[type="text"]:focus, input[type="search"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    background-color: var(--mtg-medium-gray) !important;
+    border-color: var(--mtg-gold) !important;
+    color: var(--mtg-white) !important;
+    box-shadow: 0 0 5px rgba(184, 134, 11, 0.3) !important;
 }
 
 .form-label {
-    color: var(--mtg-white);
+    color: var(--mtg-white) !important;
     font-weight: bold;
 }
 
@@ -695,14 +740,14 @@ strong, b {
 
 .mtg-glow-text {
     color: var(--mtg-gold);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+    text-shadow: 0 0 10px rgba(184, 134, 11, 0.6);
 }
 
 .mtg-card-frame {
     background: linear-gradient(135deg, var(--mtg-dark-gray), var(--mtg-medium-gray));
     border: 2px solid var(--mtg-border);
     border-radius: 12px;
-    box-shadow: var(--mtg-shadow), inset 0 1px 3px rgba(212, 175, 55, 0.1);
+    box-shadow: var(--mtg-shadow), inset 0 1px 3px rgba(184, 134, 11, 0.1);
     transition: all 0.3s ease;
 }
 
@@ -779,6 +824,44 @@ strong, b {
     color: var(--mtg-silver) !important;
 }
 
+/* Override any remaining default text colors that might be invisible in dark theme */
+.text-body-secondary {
+    color: var(--mtg-silver) !important;
+}
+
+/* Ensure all text elements are visible by default */
+* {
+    color: var(--mtg-white);
+}
+
+/* Override Bootstrap's default text colors that might be problematic */
+.text-body-emphasis {
+    color: var(--mtg-white) !important;
+}
+
+.text-body-tertiary {
+    color: var(--mtg-silver) !important;
+}
+
+/* Make sure paragraph text is visible */
+p {
+    color: var(--mtg-white) !important;
+}
+
+/* Override any remaining dark text classes */
+.text-dark {
+    color: var(--mtg-white) !important;
+}
+
+.text-black {
+    color: var(--mtg-white) !important;
+}
+
+/* Ensure all Bootstrap text utilities are properly overridden */
+.text-reset {
+    color: var(--mtg-white) !important;
+}
+
 /* Specific fixes for deck-related elements */
 .deck-title, .deck-name, [class*="deck"] h1, [class*="deck"] h2, [class*="deck"] h3, 
 [class*="deck"] h4, [class*="deck"] h5, [class*="deck"] h6 {
@@ -816,6 +899,42 @@ strong, b {
     filter: invert(1);
 }
 
+/* Sortable table styles */
+.sortable-table th[data-sortable] {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.sortable-table th[data-sortable]:hover {
+    background-color: var(--mtg-medium-gray) !important;
+}
+
+.sortable-table th[data-sortable] .sort-indicator {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.8em;
+    color: var(--mtg-gold);
+    font-weight: bold;
+    min-width: 10px;
+}
+
+.sortable-table th[data-sortable]:not([data-sort-direction]) .sort-indicator:before {
+    content: '⇅';
+    color: var(--mtg-silver);
+    opacity: 0.5;
+}
+
+.sortable-table th[data-sortable]:hover:not([data-sort-direction]) .sort-indicator:before {
+    opacity: 1;
+}
+
+/* Animation for sorting */
+.sortable-table tbody tr {
+    transition: all 0.3s ease;
+}
+
 /* Print styles for dark theme */
 @media print {
     body {
@@ -831,5 +950,9 @@ strong, b {
     
     .btn, .navbar { 
         display: none !important; 
+    }
+    
+    .sort-indicator {
+        display: none !important;
     }
 }
