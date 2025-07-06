@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -379,10 +380,17 @@ public class UIScene extends Scene {
             }
         }
         if(!textboxOpen){
-            if (KeyBinding.Down.isPressed(keycode))
-                selectNextDown();
-            if (KeyBinding.Up.isPressed(keycode))
-                selectNextUp();
+            if (stage.getKeyboardFocus() instanceof TextField) {
+                if (Input.Keys.S != keycode && KeyBinding.Down.isPressed(keycode))
+                    selectNextDown();
+                if (Input.Keys.W != keycode && KeyBinding.Up.isPressed(keycode))
+                    selectNextUp();
+            } else {
+                if (KeyBinding.Down.isPressed(keycode))
+                    selectNextDown();
+                if (KeyBinding.Up.isPressed(keycode))
+                    selectNextUp();
+            }
             if (!(stage.getKeyboardFocus() instanceof Selector) && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)) {
                 if (KeyBinding.Right.isPressed(keycode))
                     selectNextRight();
