@@ -151,7 +151,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         cards.addAllFlat(deck.getAllCardsInASinglePool().toFlatList());
 
         this.difficultyData.startingLife = difficultyData.startingLife;
-        this.difficultyData.staringMoney = difficultyData.staringMoney;
+        this.difficultyData.startingMoney = difficultyData.startingMoney;
         this.difficultyData.startingDifficulty = difficultyData.startingDifficulty;
         this.difficultyData.name = difficultyData.name;
         this.difficultyData.spawnRank = difficultyData.spawnRank;
@@ -161,7 +161,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.difficultyData.goldLoss = difficultyData.goldLoss;
         this.difficultyData.lifeLoss = difficultyData.lifeLoss;
 
-        gold = difficultyData.staringMoney;
+        gold = difficultyData.startingMoney;
         name = n;
         heroRace = race;
         avatarIndex = avatar;
@@ -190,7 +190,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         maxLife = diff.startingLife;
         this.difficultyData.startingShards = diff.startingShards;
         this.difficultyData.startingLife = diff.startingLife;
-        this.difficultyData.staringMoney = diff.staringMoney;
+        this.difficultyData.startingMoney = diff.startingMoney;
         this.difficultyData.startingDifficulty = diff.startingDifficulty;
         this.difficultyData.name = diff.name;
         this.difficultyData.spawnRank = diff.spawnRank;
@@ -303,7 +303,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         clear(); //Reset player data.
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife = data.readInt("startingLife");
-        this.difficultyData.staringMoney = data.readInt("staringMoney");
+        this.difficultyData.startingMoney = data.readInt("startingMoney");
         this.difficultyData.startingDifficulty = data.readBool("startingDifficulty");
         this.difficultyData.name = data.readString("difficultyName");
         this.difficultyData.enemyLifeFactor = data.readFloat("enemyLifeFactor");
@@ -565,7 +565,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         data.store("statistic", this.statistic.save());
         data.store("startingLife", this.difficultyData.startingLife);
-        data.store("staringMoney", this.difficultyData.staringMoney);
+        data.store("startingMoney", this.difficultyData.startingMoney);
         data.store("startingDifficulty", this.difficultyData.startingDifficulty);
         data.store("difficultyName", this.difficultyData.name);
         data.store("enemyLifeFactor", this.difficultyData.enemyLifeFactor);
