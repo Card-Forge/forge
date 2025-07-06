@@ -411,7 +411,7 @@ ScryfallCode=IKO
 387 R Crystalline Giant @Kotakan
 
 [rebalanced]
-A216 M A-Winota, Joiner of Forces @Magali Villeneuve
+A-216 M A-Winota, Joiner of Forces @Magali Villeneuve
 
 [Lands]
 10 Bloodfell Caves|IKO

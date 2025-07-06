@@ -585,10 +585,10 @@ Replace=.042F fromSheet("MH3 commanders")
 496 R Flusterstorm @Andrew Mar
 
 [rebalanced]
-A29 R A-Guide of Souls @Ryan Valle
-A38 M A-Ocelot Pride @Chris Seaman
-A122 C A-Galvanic Discharge @Zoltan Boros
-A193 R A-Nadu, Winged Wisdom @Daren Bader
+A-29 R A-Guide of Souls @Ryan Valle
+A-38 M A-Ocelot Pride @Chris Seaman
+A-122 C A-Galvanic Discharge @Zoltan Boros
+A-193 R A-Nadu, Winged Wisdom @Daren Bader
 
 [new to modern]
 1 Angel of the Ruins|MH3

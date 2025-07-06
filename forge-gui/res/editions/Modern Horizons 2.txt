@@ -589,6 +589,10 @@ ScryfallCode=MH2
 6 Patchwork Gnomes|MH2|1
 6 Zuran Orb|MH2|1
 
+[rebalanced]
+A-121 U A-Dragon's Rage Channeler @Martina Fačková
+A-145 C A-Unholy Heat @Kari Christensen
+
 [tokens]
 1 w_1_1_bird_flying @Howard Lyon
 2 u_0_3_crab @Yeong-Hao Han

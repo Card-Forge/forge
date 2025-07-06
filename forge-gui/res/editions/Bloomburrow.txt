@@ -443,7 +443,7 @@ Replace=.012F RareMythic:fromSheet("BLB cards")
 386 R Thundertrap Trainer @Jesper Ejsing
 
 [rebalanced]
-A138 U A-Heartfire Hero @Jakub Kasper
+A-138 U A-Heartfire Hero @Jakub Kasper
 
 [special guests]
 1 Sword of Fire and Ice|SPG
