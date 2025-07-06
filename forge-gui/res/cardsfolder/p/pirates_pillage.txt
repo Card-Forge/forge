@@ -1,7 +1,8 @@
 Name:Pirate's Pillage
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 R Discard<1/Card/card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Discard<1/Card> | EffectZone$ All | Description$ As an additional cost to cast this spell, discard a card.
+A:SP$ Draw | NumCards$ 2 | Defined$ You | SubAbility$ DBToken | SpellDescription$ Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
