@@ -70,3 +70,6 @@ ScryfallCode=FCA
 62 R Smuggler's Copter @Square Enix
 63 U Strixhaven Stadium @Square Enix
 64 R Command Beacon @Square Enix
+
+[rebalanced]
+A-19 R A-Winota, Joiner of Forces @Yoshitaka Amano
