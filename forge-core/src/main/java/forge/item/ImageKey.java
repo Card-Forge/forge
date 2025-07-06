@@ -1,6 +1,8 @@
 package forge.item;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -82,8 +84,16 @@ public record ImageKey(String setCode, String name, String collectorNumber, Stri
         String ext = art.scryfall == "png" ? ".png" : ".jpg";
         String filepath = setCode + "/" + collectorNumber + "_" + name + ext;
         // TODO make scryfall art_crop of split cards separate
+        String collectorNumberEncoded;
+        try {
+            // encode with Charset isn't supported on Android
+            collectorNumberEncoded = URLEncoder.encode(collectorNumber, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            collectorNumberEncoded = collectorNumber;
+        }
+
         String url = ImageKeys.URL_PIC_SCRYFALL_DOWNLOAD + String.format(
-            "%s/%s/%s?format=image&version=%s%s", setCode, collectorNumber, langCode, art.scryfall, faceParam
+            "%s/%s/%s?format=image&version=%s%s", setCode, collectorNumberEncoded, langCode, art.scryfall, faceParam
         );
         return Pair.of(filepath, url);
     }
