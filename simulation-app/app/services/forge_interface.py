@@ -17,8 +17,8 @@ logger = logging.getLogger(__name__)
 class ForgeInterface:
     def __init__(self, app=None):
         """Initialize Forge interface with configuration from environment."""
-        self.forge_jar_path = os.environ.get('FORGE_JAR_PATH', '/Users/geromepistre/projects/forge4/forge-gui-desktop/target/forge-gui-desktop-2.0.04-SNAPSHOT-jar-with-dependencies.jar')
-        self.forge_languages_path = os.environ.get('FORGE_LANGUAGES_PATH', '/Users/geromepistre/projects/forge4/languages')
+        self.forge_jar_path = os.environ.get('FORGE_JAR_PATH', '/app/forge/forge-gui-desktop-2.0.04-SNAPSHOT-jar-with-dependencies.jar')
+        self.forge_languages_path = os.environ.get('FORGE_LANGUAGES_PATH', '/app/languages')
         self.llm_endpoint = os.environ.get('LLM_ENDPOINT', 'http://localhost:7861')
         self.max_concurrent = int(os.environ.get('MAX_CONCURRENT_SIMULATIONS', '10'))
         self.batch_size = int(os.environ.get('FORGE_BATCH_SIZE', '10'))  # Games per batch
@@ -47,10 +47,19 @@ class ForgeInterface:
         """Load card database from Forge's card data files."""
         card_db = {}
         
-        # Path to Forge card data files
-        cardsfolder_path = "/Users/geromepistre/projects/forge4/forge-gui/res/cardsfolder"
+        # Path to Forge card data files - check both local and container paths
+        cardsfolder_paths = [
+            "/app/forge/res/cardsfolder",
+            "/Users/geromepistre/projects/forge4/forge-gui/res/cardsfolder"
+        ]
         
-        if os.path.exists(cardsfolder_path):
+        cardsfolder_path = None
+        for path in cardsfolder_paths:
+            if os.path.exists(path):
+                cardsfolder_path = path
+                break
+        
+        if cardsfolder_path and os.path.exists(cardsfolder_path):
             logger.debug(f"Loading card database from: {cardsfolder_path}")
             
             # Find all card files

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
@@ -28,6 +28,26 @@ def create_app(config=None):
     def load_user(user_id):
         from .models.user import User
         return User.query.get(int(user_id))
+    
+    # Health check endpoints for container deployment
+    @app.route('/health')
+    def health_check():
+        """Basic health check endpoint for load balancers."""
+        return jsonify({
+            'status': 'healthy',
+            'version': '1.0.0',
+            'service': 'forge-simulation-app'
+        }), 200
+    
+    @app.route('/ready')
+    def readiness_check():
+        """Readiness check endpoint for container orchestration."""
+        try:
+            # Check database connection
+            db.session.execute('SELECT 1')
+            return jsonify({'status': 'ready'}), 200
+        except Exception as e:
+            return jsonify({'status': 'not ready', 'error': str(e)}), 503
     
     # Register blueprints
     from .routes.main import main_bp

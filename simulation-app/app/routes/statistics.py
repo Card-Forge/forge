@@ -251,3 +251,40 @@ def api_game_mana_by_turn(game_id):
         'mana_data': mana_data
     })
 
+@statistics_bp.route('/api/simulation/<simulation_id>/mana-spent-by-turn')
+@login_required
+def api_simulation_mana_spent_by_turn(simulation_id):
+    """API endpoint for mana spent by turn data."""
+    simulation = Simulation.query.get_or_404(simulation_id)
+    
+    if simulation.user_id != current_user.id:
+        return jsonify({'error': 'Unauthorized'}), 403
+    
+    stats_engine = StatisticsEngine()
+    mana_spent_data = stats_engine.get_mana_spent_by_turn_data(simulation_id)
+    
+    return jsonify({
+        'success': True,
+        'mana_data': mana_spent_data
+    })
+
+@statistics_bp.route('/api/game/<int:game_id>/mana-spent-by-turn')
+@login_required
+def api_game_mana_spent_by_turn(game_id):
+    """API endpoint for mana spent by turn data for a specific game."""
+    from ..models.simulation import GameResult
+    
+    game_result = GameResult.query.get_or_404(game_id)
+    simulation = game_result.simulation
+    
+    if simulation.user_id != current_user.id:
+        return jsonify({'error': 'Unauthorized'}), 403
+    
+    stats_engine = StatisticsEngine()
+    mana_spent_data = stats_engine.get_single_game_mana_spent_data(game_id)
+    
+    return jsonify({
+        'success': True,
+        'mana_data': mana_spent_data
+    })
+

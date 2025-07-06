@@ -135,9 +135,9 @@
             </div>
         </div>
 
-        <!-- Mana Available Chart -->
+        <!-- Mana Charts -->
         <div class="row mt-4">
-            <div class="col-12">
+            <div class="col-md-6">
                 <div class="card mtg-card-frame">
                     <div class="card-header">
                         <h5 class="mtg-glow-text"><i class="fas fa-coins"></i> Average Mana Available by Round</h5>
@@ -145,6 +145,19 @@
                     <div class="card-body">
                         <div class="chart-container">
                             <canvas id="mana-available-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card mtg-card-frame">
+                    <div class="card-header">
+                        <h5 class="mtg-glow-text"><i class="fas fa-fire"></i> Average Mana Spent by Round</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="mana-spent-chart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -506,9 +519,9 @@
             </div>
         </div>
 
-        <!-- Game Mana Chart -->
+        <!-- Game Mana Charts -->
         <div id="gameManaChart" class="row mt-4" style="display: none;">
-            <div class="col-12">
+            <div class="col-md-6">
                 <div class="card mtg-card-frame">
                     <div class="card-header">
                         <h5 class="mtg-glow-text"><i class="fas fa-coins"></i> Mana Available by Round - Game <span id="selectedGameManaNumber"></span></h5>
@@ -516,6 +529,19 @@
                     <div class="card-body">
                         <div class="chart-container">
                             <canvas id="game-mana-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card mtg-card-frame">
+                    <div class="card-header">
+                        <h5 class="mtg-glow-text"><i class="fas fa-fire"></i> Mana Spent by Round - Game <span id="selectedGameManaSpentNumber"></span></h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="game-mana-spent-chart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -621,6 +647,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     MTGSimApp.statistics.initializeCharts('{{ simulation.id }}');
     initializeManaAvailableChart('{{ simulation.id }}');
+    initializeManaSpentChart('{{ simulation.id }}');
 });
 
 // Initialize Mana Available Chart
@@ -731,6 +758,114 @@ function createManaAvailableChart(manaData) {
     });
 }
 
+// Initialize Mana Spent Chart
+function initializeManaSpentChart(simulationId) {
+    fetch(`/statistics/api/simulation/${simulationId}/mana-spent-by-turn`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                createManaSpentChart(data.mana_data);
+            } else {
+                console.error('Failed to load mana spent data:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading mana spent data:', error);
+        });
+}
+
+// Create Mana Spent Chart
+function createManaSpentChart(manaData) {
+    const ctx = document.getElementById('mana-spent-chart').getContext('2d');
+    
+    // Generate distinct colors for each deck
+    const colors = [
+        '#d32f2f', '#ff9800', '#1976d2', '#388e3c', 
+        '#9c27b0', '#00796b', '#f57c00', '#303f9f'
+    ];
+    
+    const datasets = [];
+    let colorIndex = 0;
+    
+    for (const [commanderName, turnData] of Object.entries(manaData)) {
+        const color = colors[colorIndex % colors.length];
+        
+        datasets.push({
+            label: commanderName,
+            data: turnData.map(item => ({
+                x: item.turn,
+                y: item.avg_mana_spent
+            })),
+            borderColor: color,
+            backgroundColor: color + '20',
+            fill: false,
+            tension: 0.2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+        });
+        
+        colorIndex++;
+    }
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#f5f5f5'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Average Mana Spent by Turn',
+                    color: '#b8860b'
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Round',
+                        color: '#f5f5f5'
+                    },
+                    ticks: {
+                        color: '#f5f5f5'
+                    },
+                    grid: {
+                        color: '#555555'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Average Mana Spent',
+                        color: '#f5f5f5'
+                    },
+                    ticks: {
+                        color: '#f5f5f5'
+                    },
+                    grid: {
+                        color: '#555555'
+                    }
+                }
+            },
+            elements: {
+                line: {
+                    borderWidth: 2
+                }
+            }
+        }
+    });
+}
+
 // Export functionality
 function exportData(format) {
     const url = `/statistics/api/simulation/{{ simulation.id }}/export?format=${format}`;
@@ -756,6 +891,7 @@ function loadGameDetails() {
     document.getElementById('gameManaChart').style.display = 'block';
     document.getElementById('selectedGameNumber').textContent = gameNumber;
     document.getElementById('selectedGameManaNumber').textContent = gameNumber;
+    document.getElementById('selectedGameManaSpentNumber').textContent = gameNumber;
     
     // Fetch game details
     fetch(`/statistics/api/game/${gameId}/details`)
@@ -763,8 +899,9 @@ function loadGameDetails() {
         .then(data => {
             if (data.success) {
                 updateGameDetails(data.game);
-                // Load mana chart for this game
+                // Load mana charts for this game
                 loadGameManaChart(gameId);
+                loadGameManaSpentChart(gameId);
             } else {
                 console.error('Failed to load game details:', data.error);
             }
@@ -921,6 +1058,119 @@ function createGameManaChart(manaData) {
                     title: {
                         display: true,
                         text: 'Mana Available',
+                        color: '#f5f5f5'
+                    },
+                    ticks: {
+                        color: '#f5f5f5'
+                    },
+                    grid: {
+                        color: '#555555'
+                    }
+                }
+            },
+            elements: {
+                line: {
+                    borderWidth: 2
+                }
+            }
+        }
+    });
+}
+
+// Load game mana spent chart
+function loadGameManaSpentChart(gameId) {
+    fetch(`/statistics/api/game/${gameId}/mana-spent-by-turn`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                createGameManaSpentChart(data.mana_data);
+            } else {
+                console.error('Failed to load game mana spent data:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading game mana spent data:', error);
+        });
+}
+
+// Create Game Mana Spent Chart
+function createGameManaSpentChart(manaData) {
+    const ctx = document.getElementById('game-mana-spent-chart').getContext('2d');
+    
+    // Clear any existing chart
+    if (window.gameManaSpentChartInstance) {
+        window.gameManaSpentChartInstance.destroy();
+    }
+    
+    // Generate distinct colors for each deck
+    const colors = [
+        '#d32f2f', '#ff9800', '#1976d2', '#388e3c', 
+        '#9c27b0', '#00796b', '#f57c00', '#303f9f'
+    ];
+    
+    const datasets = [];
+    let colorIndex = 0;
+    
+    for (const [commanderName, turnData] of Object.entries(manaData)) {
+        const color = colors[colorIndex % colors.length];
+        
+        datasets.push({
+            label: commanderName,
+            data: turnData.map(item => ({
+                x: item.turn,
+                y: item.mana_spent
+            })),
+            borderColor: color,
+            backgroundColor: color + '20',
+            fill: false,
+            tension: 0.2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+        });
+        
+        colorIndex++;
+    }
+    
+    window.gameManaSpentChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#f5f5f5'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Mana Spent by Round (Single Game)',
+                    color: '#b8860b'
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Round',
+                        color: '#f5f5f5'
+                    },
+                    ticks: {
+                        color: '#f5f5f5'
+                    },
+                    grid: {
+                        color: '#555555'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Mana Spent',
                         color: '#f5f5f5'
                     },
                     ticks: {
