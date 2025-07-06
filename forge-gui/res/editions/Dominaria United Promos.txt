@@ -1,0 +1,9 @@
+[metadata]
+Code=PDMU
+Date=2022-09-09
+Name=Dominaria United Promos
+Type=Promo
+ScryfallCode=PDMU
+
+[cards]
+1★ R Llanowar Elves @Chris Rahn
