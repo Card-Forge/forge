@@ -4,7 +4,6 @@ Date=2025-04-11
 Name=Tarkir: Dragonstorm
 Type=Expansion
 ScryfallCode=TDM
-TokensCode=TTDM
 # https://mtgscribe.com/2025/03/20/play-booster-fact-sheet-dragonstorm/
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard,FoilWildcard
 Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 FoilWildcard
