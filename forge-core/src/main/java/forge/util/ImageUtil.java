@@ -9,9 +9,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
         //get nearest power of actualSize to baseSize so that the image renders good
@@ -103,7 +100,7 @@ public class ImageUtil {
 
         if (includeSet) {
             String editionAliased = isDownloadUrl ? StaticData.instance().getEditions().getCode2ByCode(edition) : ImageKeys.getSetFolder(edition);
-            if (editionAliased.isEmpty()) //FIXME: Custom Cards Workaround
+            if (editionAliased == "") //FIXME: Custom Cards Workaround
                 editionAliased = edition;
             return TextUtil.concatNoSpace(editionAliased, "/", fname);
         } else {
@@ -167,7 +164,7 @@ public class ImageUtil {
 
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop, boolean hyphenateAlchemy){
         String editionCode;
-        if (setCode != null && !setCode.isEmpty())
+        if ((setCode != null) && (setCode.length() > 0))
             editionCode = setCode;
         else
             editionCode = cp.getEdition().toLowerCase();
@@ -202,7 +199,7 @@ public class ImageUtil {
             // Hanweir Garrison EMN already has a appended.
             cardCollectorNumber += face.equals("back") ? "b" : "a";
         }
-        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, URLEncoder.encode(cardCollectorNumber, StandardCharsets.UTF_8),
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
                 langCode, versionParam, faceParam);
     }
 
