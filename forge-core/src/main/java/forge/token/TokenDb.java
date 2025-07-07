@@ -112,13 +112,13 @@ public class TokenDb implements ITokenDatabase {
 
         // Token exists in edition, return token at artIndex or a random one.
         if (loadTokenFromSet(realEdition, tokenName)) {
-            List<PaperToken> list = new ArrayList<>(allTokenByName.get(fullName));
+            Collection<PaperToken> collection = allTokenByName.get(fullName);
 
-            if (artIndex < 1 || artIndex > list.size()) {
-                return Aggregates.random(list);
+            if (artIndex < 1 || artIndex > collection.size()) {
+                return Aggregates.random(collection);
             }
 
-            return list.get(artIndex - 1);
+            return Iterables.get(collection, artIndex - 1);
         }
         PaperToken fallback = this.fallbackToken(tokenName);
         if (fallback != null) {
