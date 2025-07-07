@@ -385,7 +385,7 @@ public class UIScene extends Scene {
             if (KeyBinding.Down.isPressed(keycode, !(stage.getKeyboardFocus() instanceof TextField))
                     || KeyBinding.Down.isPressed(keycode, Input.Keys.S != keycode))
                 selectNextDown();
-            //Allow letter W for TextField since this is binded on down keys
+            //Allow letter W for TextField since this is binded on up keys
             if (KeyBinding.Up.isPressed(keycode, !(stage.getKeyboardFocus() instanceof TextField))
                     || KeyBinding.Up.isPressed(keycode, Input.Keys.W != keycode))
                 selectNextUp();
