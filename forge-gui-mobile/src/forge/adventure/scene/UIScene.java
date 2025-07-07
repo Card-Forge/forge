@@ -243,6 +243,7 @@ public class UIScene extends Scene {
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo) {
         return createGenericDialog(title, label, stringYes, stringNo, runnableYes, runnableNo, false, "");
     }
+
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo, boolean cancelButton, String stringCancel) {
         Dialog dialog = new Dialog(title == null ? "" : title, Controls.getSkin());
         textboxOpen = true;
@@ -342,7 +343,7 @@ public class UIScene extends Scene {
 
     public boolean keyPressed(int keycode) {
         ui.pressDown(keycode);
-    
+
         Selectable selection = getSelected();
         if (KeyBinding.Use.isPressed(keycode)) {
             if (selection != null) {
@@ -379,13 +380,16 @@ public class UIScene extends Scene {
                 scroll.setScrollY(scroll.getScrollY() + 20);
             }
         }
-        if(!textboxOpen){
+        if (!textboxOpen) {
+            //Allow letter S for TextField since this is binded on down keys
             if (KeyBinding.Down.isPressed(keycode, !(stage.getKeyboardFocus() instanceof TextField))
-                    || KeyBinding.Down.isPressed(keycode,Input.Keys.S != keycode))
+                    || KeyBinding.Down.isPressed(keycode, Input.Keys.S != keycode))
                 selectNextDown();
+            //Allow letter W for TextField since this is binded on down keys
             if (KeyBinding.Up.isPressed(keycode, !(stage.getKeyboardFocus() instanceof TextField))
-                    || KeyBinding.Up.isPressed(keycode,Input.Keys.W != keycode))
+                    || KeyBinding.Up.isPressed(keycode, Input.Keys.W != keycode))
                 selectNextUp();
+            // Allow Right & Left keybinds if not Selector, Slider or Textfield
             if (KeyBinding.Right.isPressed(keycode, !(stage.getKeyboardFocus() instanceof Selector)
                     && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)))
                 selectNextRight();
