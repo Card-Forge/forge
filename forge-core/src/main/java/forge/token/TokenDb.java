@@ -1,6 +1,7 @@
 package forge.token;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
@@ -10,7 +11,6 @@ import forge.card.CardRules;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.util.Aggregates;
-import forge.util.MyRandom;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -42,7 +42,6 @@ public class TokenDb implements ITokenDatabase {
 
     public boolean containsRule(String rule) {
         return this.rulesByName.containsKey(rule);
-
     }
 
     public void preloadTokens() {
