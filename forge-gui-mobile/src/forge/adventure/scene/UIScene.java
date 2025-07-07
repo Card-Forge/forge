@@ -380,23 +380,18 @@ public class UIScene extends Scene {
             }
         }
         if(!textboxOpen){
-            if (stage.getKeyboardFocus() instanceof TextField) {
-                if (Input.Keys.S != keycode && KeyBinding.Down.isPressed(keycode))
-                    selectNextDown();
-                if (Input.Keys.W != keycode && KeyBinding.Up.isPressed(keycode))
-                    selectNextUp();
-            } else {
-                if (KeyBinding.Down.isPressed(keycode))
-                    selectNextDown();
-                if (KeyBinding.Up.isPressed(keycode))
-                    selectNextUp();
-            }
-            if (!(stage.getKeyboardFocus() instanceof Selector) && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)) {
-                if (KeyBinding.Right.isPressed(keycode))
-                    selectNextRight();
-                if (KeyBinding.Left.isPressed(keycode))
-                    selectNextLeft();
-            }
+            if (KeyBinding.Down.isPressed(keycode, !(stage.getKeyboardFocus() instanceof TextField))
+                    || KeyBinding.Down.isPressed(keycode,Input.Keys.S != keycode))
+                selectNextDown();
+            if (KeyBinding.Up.isPressed(keycode, !(stage.getKeyboardFocus() instanceof TextField))
+                    || KeyBinding.Up.isPressed(keycode,Input.Keys.W != keycode))
+                selectNextUp();
+            if (KeyBinding.Right.isPressed(keycode, !(stage.getKeyboardFocus() instanceof Selector)
+                    && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)))
+                selectNextRight();
+            if (KeyBinding.Left.isPressed(keycode, !(stage.getKeyboardFocus() instanceof Selector)
+                    && !(stage.getKeyboardFocus() instanceof TextField) && !(stage.getKeyboardFocus() instanceof Slider)))
+                selectNextLeft();
         }
         if (!dialogShowing()) {
             Button pressedButton = ui.buttonPressed(keycode);
