@@ -4234,7 +4234,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return ImmutableList.of();
         }
         Iterable<CardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
-        return ImmutableList<CardChangedType>.builder()
+        return ImmutableList.<CardChangedType>builder()
             .addAll(changedCardTypesByText.values()) // Layer 3
             .addAll(byText) // Layer 3 by Word Changes,
             .addAll(changedCardTypesCharacterDefining.values()) // Layer 4
