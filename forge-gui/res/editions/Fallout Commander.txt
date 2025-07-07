@@ -1095,3 +1095,6 @@ ScryfallCode=PIP
 18 c_a_treasure_sac @Rafater
 19 c_a_treasure_sac @Rafater
 20 wasteland_survival_guide @Sergio Cosmai
+
+[other]
+22 radiation @Skinnyelbows
