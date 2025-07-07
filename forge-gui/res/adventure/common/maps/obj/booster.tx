@@ -26,7 +26,7 @@
 </property>
    <property name="spawn.Easy" type="bool" value="true"/>
    <property name="spawn.Hard" type="bool" value="true"/>
-   <property name="spawn.Normal" type="bool" value="false"/>
+   <property name="spawn.Normal" type="bool" value="true"/>
    <property name="sprite" value="sprites/booster.atlas"/>
   </properties>
  </object>
