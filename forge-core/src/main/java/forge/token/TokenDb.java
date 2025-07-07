@@ -10,6 +10,7 @@ import forge.card.CardRules;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -101,12 +102,23 @@ public class TokenDb implements ITokenDatabase {
 
     @Override
     public PaperToken getToken(String tokenName, String edition) {
+        return getToken(tokenName, edition, -1);
+    }
+
+    @Override
+    public PaperToken getToken(String tokenName, String edition, int artIndex) {
         CardEdition realEdition = editions.getEditionByCodeOrThrow(edition);
         String fullName = String.format("%s_%s", tokenName, realEdition.getCode().toLowerCase());
 
-        // token exist in Set, return one at random
+        // Token exists in edition, return token at artIndex or a random one.
         if (loadTokenFromSet(realEdition, tokenName)) {
-            return Aggregates.random(allTokenByName.get(fullName));
+            List<PaperToken> list = new ArrayList<>(allTokenByName.get(fullName));
+
+            if (artIndex < 1 || artIndex > list.size()) {
+                return Aggregates.random(list);
+            }
+
+            return list.get(artIndex - 1);
         }
         PaperToken fallback = this.fallbackToken(tokenName);
         if (fallback != null) {
@@ -124,11 +136,6 @@ public class TokenDb implements ITokenDatabase {
         }
 
         return extraTokensByName.get(fullName);
-    }
-
-    @Override
-    public PaperToken getToken(String tokenName, String edition, int artIndex) {
-        return null;
     }
 
     @Override
