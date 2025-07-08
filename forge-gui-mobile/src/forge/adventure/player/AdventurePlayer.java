@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.google.common.collect.Lists;
+
 import forge.Forge;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -129,7 +130,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         AdventureEventController.clear();
         AdventureQuestController.clear();
     }
-
 
     static public AdventurePlayer current() {
         return WorldSave.getCurrentSave().getPlayer();
@@ -300,10 +300,15 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     @Override
     public void load(SaveFileData data) {
-        clear(); //Reset player data.
+        clear(); // Reset player data.
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife = data.readInt("startingLife");
-        this.difficultyData.startingMoney = data.readInt("startingMoney");
+        // Support for old typo
+        if (data.containsKey("staringMoney")) {
+            this.difficultyData.startingMoney = data.readInt("staringMoney");
+        } else {
+            this.difficultyData.startingMoney = data.readInt("startingMoney");
+        }
         this.difficultyData.startingDifficulty = data.readBool("startingDifficulty");
         this.difficultyData.name = data.readString("difficultyName");
         this.difficultyData.enemyLifeFactor = data.readFloat("enemyLifeFactor");
@@ -372,14 +377,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         if (data.containsKey("inventory")) {
             String[] inv = (String[]) data.readObject("inventory");
-            //Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
-            //This only needs to be done on load.
+            // Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
+            // This only needs to be done on load.
             for (String i : inv) {
                 if (ItemData.getItem(i) != null) inventoryItems.add(i);
                 else {
                     System.err.printf("Cannot find item name %s\n", i);
-                    //Allow official© permission for the player to get a refund. We will allow it this time.
-                    //TODoooo: Divine retribution if the player refunds too much. Use the orbital laser cannon.
+                    // Allow official© permission for the player to get a refund. We will allow it this time.
+                    // TODO: Divine retribution if the player refunds too much. Use the orbital laser cannon.
                     System.out.println("Developers have blessed you! You are allowed to cheat the cost of the item back!");
                 }
             }
@@ -389,7 +394,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             String[] items = (String[]) data.readObject("equippedItems");
 
             assert (slots.length == items.length);
-            //Like above, prevent items with wrong names. If it triggered in inventory it'll trigger here as well.
+            // Prevent items with wrong names. If it triggered in inventory, it'll trigger here as well.
             for (int i = 0; i < slots.length; i++) {
                 if (ItemData.getItem(items[i]) != null)
                     equippedItems.put(slots[i], items[i]);
@@ -454,15 +459,15 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
-        // load decks
-        // check if this save has dynamic deck count, use set-count load if not
+        // Load decks
+        // Check if this save has dynamic deck count, use set-count load if not
         boolean hasDynamicDeckCount = data.containsKey("deckCount");
         if (hasDynamicDeckCount) {
             int dynamicDeckCount = data.readInt("deckCount");
-            // in case the save had previously saved more decks than the current version allows (in case of the max being lowered)
+            // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
             dynamicDeckCount = Math.min(MAX_DECK_COUNT, dynamicDeckCount);
             for (int i = 0; i < dynamicDeckCount; i++){
-                // the first x elements are pre-created
+                // The first x elements are pre-created
                 if (i < MIN_DECK_COUNT) {
                     decks.set(i, new Deck(data.readString("deck_name_" + i)));
                 }
@@ -473,11 +478,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 if (data.containsKey("sideBoardCards_" + i))
                     decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i))));
             }
-            // in case we allow removing decks from the deck selection GUI, populate up to the minimum
+            // In case we allow removing decks from the deck selection GUI, populate up to the minimum
             for (int i = dynamicDeckCount++; i < MIN_DECK_COUNT; i++) {
                 decks.set(i, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
             }
-        // legacy load
+        // Legacy load
         } else {
             for (int i = 0; i < MIN_DECK_COUNT; i++) {
                 if (!data.containsKey("deck_name_" + i)) {
@@ -502,7 +507,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
         if (data.containsKey("noSellCards")) {
-            //Legacy list of unsellable cards. Now done via CardRequest flags. Convert the corresponding cards.
+            // Legacy list of unsellable cards. Now done via CardRequest flags. Convert the corresponding cards.
             PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
             CardPool noSellPool = new CardPool();
             noSellPool.addAllFlat(List.of(items));
@@ -524,7 +529,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
                 System.out.printf("Converted legacy noSellCards item - %s (%d / %d copies)%n", item, noSellCopies, totalCopies);
 
-                //Also go through their decks and update cards there.
+                // Also go through their decks and update cards there.
                 for (Deck deck : decks) {
                     int inUse = 0;
                     for (Map.Entry<DeckSection, CardPool> section : deck) {
@@ -610,7 +615,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         data.storeObject("blessing", blessing);
 
-        //Save character flags.
+        // Save character flags.
         ArrayList<String> characterFlagsKey = new ArrayList<>();
         ArrayList<Byte> characterFlagsValue = new ArrayList<>();
         for (Map.Entry<String, Byte> entry : characterFlags.entrySet()) {
@@ -620,7 +625,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("characterFlagsKey", characterFlagsKey.toArray(new String[0]));
         data.storeObject("characterFlagsValue", characterFlagsValue.toArray(new Byte[0]));
 
-        //Save quest flags.
+        // Save quest flags.
         ArrayList<String> questFlagsKey = new ArrayList<>();
         ArrayList<Byte> questFlagsValue = new ArrayList<>();
         for (Map.Entry<String, Byte> entry : questFlags.entrySet()) {
@@ -818,7 +823,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         onLifeTotalChangeList.emit();
         onGoldChangeList.emit();
         return life < 1;
-        //If true, the player would have had 0 or less, and thus is actually "defeated" if the caller cares about it
+        // If true, the player would have had 0 or less, and thus is actually "defeated" if the caller cares about it
     }
 
     public void win() {
