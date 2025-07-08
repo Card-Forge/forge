@@ -733,7 +733,14 @@ public class AbilityUtils {
                 else if (calcX[0].startsWith("Triggered") || (calcX[0].startsWith("CardTriggered"))) {
                     final SpellAbility root = sa.getRootAbility();
                     final int s = calcX[0].startsWith("Triggered") ? 9 : 13;
-                    list = new CardCollection((Card) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(s))));
+                    final Object triggeringObject = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(s)));
+                    if (triggeringObject instanceof Card singleton)
+                        list = new CardCollection(singleton);
+                    else if (triggeringObject instanceof Player activator){
+                        //this is only used for Rug of Smothering
+                        if (calcX[1].equalsIgnoreCase("SpellsCastThisTurn"))
+                            val = activator.getSpellsCastThisTurn();
+                    }
                 }
                 else if (calcX[0].startsWith("Replaced")) {
                     final SpellAbility root = sa.getRootAbility();
