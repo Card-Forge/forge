@@ -3,6 +3,6 @@ ManaCost:X X X
 Types:Artifact
 K:etbCounter:CHARGE:X
 SVar:X:Count$xPaid
-A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ Y | SpellDescription$ DBMana | SpellDescription$ Choose a color. Add one mana of that color for each charge counter on this artifact.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ Y | SpellDescription$ Choose a color. Add one mana of that color for each charge counter on this artifact.
 SVar:Y:Count$CardCounters.CHARGE
 Oracle:This artifact enters with X charge counters on it.\n{T}: Choose a color. Add one mana of that color for each charge counter on this artifact.
