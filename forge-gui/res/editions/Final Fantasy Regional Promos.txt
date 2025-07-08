@@ -4,6 +4,7 @@ Date=2025-06-13
 Name=Final Fantasy Regional Promos
 Type=Promo
 ScryfallCode=RFIN
+CardLang=ja
 
 [cards]
 J1 R Force of Negation @Ittoku
