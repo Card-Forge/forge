@@ -10,7 +10,6 @@ import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
@@ -193,7 +192,17 @@ public class ImageUtil {
             // Hanweir Garrison EMN already has a appended.
             cardCollectorNumber += face.equals("back") ? "b" : "a";
         }
-        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, URLEncoder.encode(cardCollectorNumber, StandardCharsets.UTF_8),
+
+        String cardCollectorNumberEncoded;
+        try {
+            cardCollectorNumberEncoded = URLEncoder.encode(cardCollectorNumber, "UTF-8");
+        } catch (Exception e) {
+            // Unlikely, for the possibility that "UTF-8" is not supported.
+            System.err.println("UTF-8 encoding not supported on this device.");
+            cardCollectorNumberEncoded = cardCollectorNumber;
+        }
+
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumberEncoded,
                 langCode, versionParam, faceParam);
     }
 
