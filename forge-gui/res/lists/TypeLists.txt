@@ -370,7 +370,7 @@ Key:Keys
 Lander:Landers
 Map
 Powerstone:Powerstones
-Spacecraft:Spacecrafts
+Spacecraft:Spacecraft
 Treasure:Treasures
 Vehicle:Vehicles
 [WalkerTypes]
