@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Artifact Spacecraft
 PT:4/5
 K:Station:7
-S:Mode$ Continuous | Affected$ Card.Self+counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ AttackTrig | Description$ STATION 7+ Flying Whenever this Spacecraft attacks, you may put a creature card from your hand onto the battlefield.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE7_CHARGE | AddType$ Creature | AddKeyword$ Flying | AddTrigger$ AttackTrig | Description$ STATION 7+ Flying,,,Whenever this Spacecraft attacks, you may put a creature card from your hand onto the battlefield.
 SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever this Spacecraft attacks, you may put a creature card from your hand onto the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1
 SVar:HasAttackEffect:TRUE
