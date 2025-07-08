@@ -17,7 +17,6 @@
  */
 package forge.deck;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
@@ -40,8 +39,6 @@ import java.util.regex.Pattern;
 
 public class CardPool extends ItemPool<PaperCard> {
     private static final long serialVersionUID = -5379091255613968393L;
-    // Sets merged into PLST
-    private ImmutableList<String> plstMergedSets = ImmutableList.of("PAGL", "PHED", "PCTB", "MB1", "FMB1");
 
     public CardPool() {
         super(PaperCard.class);
@@ -78,13 +75,6 @@ public class CardPool extends ItemPool<PaperCard> {
     }
     private void add(String cardName, String setCode, String collectorNumber, final int amount, boolean addAny, Map<String, String> flags) {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
-
-        // Merge sets into PLST
-        if (plstMergedSets.contains(setCode.toUpperCase())) {
-            System.err.println("Card from a deprecated set found: " + cardName + " (" + setCode + "). Converting to PLST.");
-            setCode = "PLST";
-            collectorNumber = "";
-        }
 
         for (Map.Entry<String, CardDb> entry: dbs.entrySet()){
             CardDb db = entry.getValue();

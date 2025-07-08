@@ -653,7 +653,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             // This get is robust even against expansion aliases (e.g. TE and TMP both valid for Tempest) -
             // MOST of the extensions have two short codes, 141 out of 221 (so far)
             // ALSO: Set Code are always UpperCase
-            CardEdition edition = editions.get(reqEditionCode.toUpperCase());
+            if (CardEdition.plstMergedEditions.contains(reqEditionCode.toUpperCase())) {
+                request.edition = "PLST";
+                request.collectorNumber = "";
+            }
+            CardEdition edition = editions.get(request.edition.toUpperCase());
 
             PaperCard cardFromSet = this.getCardFromSet(request.cardName, edition, request.artIndex, request.collectorNumber, request.isFoil);
             if(cardFromSet != null && request.flags != null)
