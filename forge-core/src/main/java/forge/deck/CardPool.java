@@ -17,6 +17,7 @@
  */
 package forge.deck;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
@@ -39,6 +40,9 @@ import java.util.regex.Pattern;
 
 public class CardPool extends ItemPool<PaperCard> {
     private static final long serialVersionUID = -5379091255613968393L;
+
+    // Sets merged into PLST
+    private ImmutableList<String> plstMergedSets = ImmutableList.of("PAGL", "PHED", "PCTB", "MB1", "FMB1");
 
     public CardPool() {
         super(PaperCard.class);
@@ -77,12 +81,26 @@ public class CardPool extends ItemPool<PaperCard> {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
         for (Map.Entry<String, CardDb> entry: dbs.entrySet()){
             CardDb db = entry.getValue();
+
+            // TODO: Merge sets into PLST
+            /*if (plstMergedSets.contains(setCode.toLowerCase())) {
+                setCode = "PLST";
+                collectorNumber = "";
+            }*/
+
             PaperCard paperCard = db.getCard(cardName, setCode, collectorNumber, flags);
             if (paperCard != null) {
                 this.add(paperCard, amount);
                 return;
             }
         }
+
+        // Try to get non-Alchemy version if it cannot find it.
+        if (cardName.startsWith("A-")) {
+            System.out.println("Alchemy card not found for '" + cardName + "'. Trying to get its non-Alchemy equivalent.");
+            cardName = cardName.replaceFirst("A-", "");
+        }
+
         //Failed to find it. Fall back accordingly?
         this.add(cardName, setCode, IPaperCard.NO_ART_INDEX, amount, addAny, flags);
     }
