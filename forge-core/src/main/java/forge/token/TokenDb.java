@@ -124,9 +124,10 @@ public class TokenDb implements ITokenDatabase {
             return fallback;
         }
 
-        if (!extraTokensByName.containsKey(fullName)) {
+        CardRules cr = rulesByName.get(tokenName);
+        if (!extraTokensByName.containsKey(fullName) && cr != null) {
             try {
-                PaperToken pt = new PaperToken(rulesByName.get(tokenName), realEdition, tokenName, "", IPaperCard.NO_ARTIST_NAME);
+                PaperToken pt = new PaperToken(cr, realEdition, tokenName, "", IPaperCard.NO_ARTIST_NAME);
                 extraTokensByName.put(fullName, pt);
                 return pt;
             } catch(Exception e) {

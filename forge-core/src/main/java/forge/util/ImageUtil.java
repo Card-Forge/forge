@@ -67,6 +67,10 @@ public class ImageUtil {
         }
         
         String[] split = key.split("\\|");
+        if (!db.containsRule(split[0])) {
+            return null;
+        }
+        
         PaperToken pt = switch (split.length) {
             case 1 -> db.getToken(split[0]);
             case 2, 3 -> db.getToken(split[0], split[1]);
