@@ -1,9 +1,10 @@
 [metadata]
-Code=MPS_AKH
+Code=MP2
+Code2=MPS_AKH
 Date=2017-04-28
-Name=Masterpiece Series - Amonkhet
+Name=Amonkhet Invocations
 Type=Collector_Edition
-ScryfallCode=mp2
+ScryfallCode=MP2
 
 #Bonus cards for AKH Amonkhet
 [cards]
