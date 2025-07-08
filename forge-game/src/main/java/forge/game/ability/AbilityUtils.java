@@ -658,7 +658,7 @@ public class AbilityUtils {
                 val = playerXCount(getDefinedPlayers(card, key, sa), calcX[1], card, ability);
             }
             else if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")
-                    || calcX[0].startsWith("TriggeredDefendingPlayer")) {
+                    || calcX[0].startsWith("TriggeredDefendingPlayer") || calcX[0].startsWith("TriggeredActivator")) {
                 final SpellAbility root = sa.getRootAbility();
                 Object o = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9)));
                 val = o instanceof Player ? playerXProperty((Player) o, calcX[1], card, ability) : 0;
@@ -733,14 +733,7 @@ public class AbilityUtils {
                 else if (calcX[0].startsWith("Triggered") || (calcX[0].startsWith("CardTriggered"))) {
                     final SpellAbility root = sa.getRootAbility();
                     final int s = calcX[0].startsWith("Triggered") ? 9 : 13;
-                    final Object triggeringObject = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(s)));
-                    if (triggeringObject instanceof Card singleton)
-                        list = new CardCollection(singleton);
-                    else if (triggeringObject instanceof Player activator){
-                        //this is only used for Rug of Smothering
-                        if (calcX[1].equalsIgnoreCase("SpellsCastThisTurn"))
-                            val = activator.getSpellsCastThisTurn();
-                    }
+                    list = new CardCollection((Card) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(s))));
                 }
                 else if (calcX[0].startsWith("Replaced")) {
                     final SpellAbility root = sa.getRootAbility();
