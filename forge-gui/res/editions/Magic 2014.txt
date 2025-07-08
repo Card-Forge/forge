@@ -274,3 +274,7 @@ ScryfallCode=M14
 9 g_3_3_beast @John Donahue
 10 g_1_1_saproling @Brad Rigney
 11 g_2_2_wolf @Lars Grant-West
+
+[other]
+12 emblem_liliana_of_the_dark_realms @D. Alexander Gregory
+13 emblem_garruk_caller_of_beasts @Karl Kopinski

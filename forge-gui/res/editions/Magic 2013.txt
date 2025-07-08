@@ -274,3 +274,6 @@ ScryfallCode=M13
 8 g_3_3_beast @John Donahue
 9 g_1_1_saproling @Brad Rigney
 10 g_6_6_wurm @Anthony Francisco
+
+[other]
+11 emblem_liliana_of_the_dark_realms @D. Alexander Gregory
