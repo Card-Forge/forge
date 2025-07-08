@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -784,18 +785,22 @@ public class StaticData {
         Queue<String> TOKEN_Q = new ConcurrentLinkedQueue<>();
         boolean nifHeader = false;
         boolean cniHeader = false;
+        final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
         for (CardEdition e : editions) {
             if (CardEdition.Type.FUNNY.equals(e.getType()))
                 continue;
 
             Map<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
             List<CompletableFuture<?>> futures = new ArrayList<>();
+            
             for (CardEdition.EditionEntry c : e.getAllCardsInSet()) {
+                int amount = 1;
+
                 if (cardCount.containsKey(c.name())) {
-                    cardCount.put(c.name(), Pair.of(c.collectorNumber() != null && c.collectorNumber().startsWith("F"), cardCount.get(c.name()).getRight() + 1));
-                } else {
-                    cardCount.put(c.name(), Pair.of(c.collectorNumber() != null && c.collectorNumber().startsWith("F"), 1));
+                    amount = cardCount.get(c.name()).getRight() + 1;
                 }
+
+                cardCount.put(c.name(), Pair.of(c.collectorNumber() != null && funnyCardCollectorNumberPattern.matcher(c.collectorNumber()).matches(), amount));
             }
 
             // loop through the cards in this edition, considering art variations...
