@@ -43,10 +43,10 @@ import java.util.function.Predicate;
  * GameType is an enum to determine the type of current game. :)
  */
 public enum DeckFormat {
-    //               Main board: allowed size             SB: restriction   Max distinct non basic cards
-    Constructed    ( Range.between(60, Integer.MAX_VALUE), Range.between(0, 15), 4),
-    QuestDeck      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
-    Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE) {
+    //               Main board: allowed size         SB: restriction  Max distinct non-basic cards
+    Constructed    ( Range.of(60, Integer.MAX_VALUE), Range.of(0, 15), 4),
+    QuestDeck      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, 15), 4),
+    Limited        ( Range.of(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE) {
         @Override
         public String getAttractionDeckConformanceProblem(Deck deck) {
             //Limited attraction decks have a minimum size of 3 and no singleton restriction.
@@ -61,17 +61,17 @@ public enum DeckFormat {
             return null;
         }
     },
-    Commander      ( Range.is(99),                         Range.between(0, 10), 1, null,
+    Commander      ( Range.is(99),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getCommanderPredicate().test(card)
     ),
-    Oathbreaker      ( Range.is(58),                         Range.between(0, 10), 1, null,
+    Oathbreaker      ( Range.is(58),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getOathbreakerPredicate().test(card)
     ),
-    Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
-    Brawl      ( Range.is(59), Range.between(0, 15), 1, null,
+    Pauper      ( Range.is(60),                         Range.of(0, 10), 1),
+    Brawl      ( Range.is(59), Range.of(0, 15), 1, null,
             card -> StaticData.instance().getBrawlPredicate().test(card)
     ),
-    TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
+    TinyLeaders    ( Range.is(49),                         Range.of(0, 10), 1, new Predicate<>() {
         private final Set<String> bannedCards = ImmutableSet.of(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
                 "Fastbond", "Flash", "Goblin Recruiter", "Grindstone", "Hermit Druid", "Imperial Seal", "Jeweled Bird", "Karakas", "Library of Alexandria", "Mana Crypt", "Mana Drain", "Mana Vault", "Metalworker", "Mind Twist", "Mishra's Workshop",
@@ -83,11 +83,11 @@ public enum DeckFormat {
             // Check for split cards explicitly, as using rules.getManaCost().getCMC()
             // will return the sum of the costs, which is not what we want.
             if (rules.getMainPart().getManaCost().getCMC() > 3) {
-                return false; //only cards with CMC less than 3 are allowed
+                return false; // Only cards with CMC less than 3 are allowed
             }
             ICardFace otherPart = rules.getOtherPart();
             if (otherPart != null && otherPart.getManaCost().getCMC() > 3) {
-                return false; //only cards with CMC less than 3 are allowed
+                return false; // Only cards with CMC less than 3 are allowed
             }
             return !bannedCards.contains(rules.getName());
         }
@@ -107,12 +107,12 @@ public enum DeckFormat {
             cmcLevels.add(ImmutablePair.of(new FilterCMC(3, 3), 3));
         }
     },
-    PlanarConquest ( Range.between(40, Integer.MAX_VALUE), Range.is(0), 1),
-    Adventure      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
-    Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
-    Planechase     ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
-    Archenemy      ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
-    Puzzle         ( Range.between(0, Integer.MAX_VALUE), Range.is(0), 4);
+    PlanarConquest ( Range.of(40, Integer.MAX_VALUE), Range.is(0), 1),
+    Adventure      ( Range.of(40, Integer.MAX_VALUE), Range.of(0, 15), 4),
+    Vanguard       ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
+    Planechase     ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
+    Archenemy      ( Range.of(60, Integer.MAX_VALUE), Range.is(0), 4),
+    Puzzle         ( Range.of(0, Integer.MAX_VALUE), Range.is(0), 4);
 
     private final Range<Integer> mainRange;
     private final Range<Integer> sideRange; // null => no check
@@ -250,9 +250,9 @@ public enum DeckFormat {
                     wildColors += pc.getRules().getAddsWildCardColor() ? 1 : 0;
                 }
 
-                // special check for Partner
+                // Special check for Partner
                 if (commanders.size() == 2) {
-                    // two commander = 98 cards
+                    // Two commander = 98 cards
                     min--;
                     max--;
 
@@ -269,7 +269,7 @@ public enum DeckFormat {
 
             Set<String> basicLandNames = new HashSet<>();
             for (final Entry<PaperCard, Integer> cp : deck.get(DeckSection.Main)) {
-                //If colourless commander allow one type of basic land
+                // If colourless commander allow one type of basic land
                 if (cmdCI == 0 && cp.getKey().getRules().getType().isBasicLand()){
                     basicLandNames.add(cp.getKey().getName());
                     if(basicLandNames.size() < 2){
@@ -294,7 +294,7 @@ public enum DeckFormat {
                 }
             }
 
-            if (erroneousCI.size() > 0) {
+            if (!erroneousCI.isEmpty()) {
                 StringBuilder sb = new StringBuilder("contains one or more cards that do not match the commanders color identity:");
 
                 for (PaperCard cp : erroneousCI) {
@@ -320,7 +320,7 @@ public enum DeckFormat {
                     erroneousCI.add(cp.getKey());
                 }
             }
-            if (erroneousCI.size() > 0) {
+            if (!erroneousCI.isEmpty()) {
                 final StringBuilder sb = new StringBuilder("contains the following illegal cards:\n");
 
                 for (final PaperCard cp : erroneousCI) {
@@ -344,14 +344,13 @@ public enum DeckFormat {
         }
 
         final int maxCopies = getMaxCardCopies();
-        //Must contain no more than 4 of the same card
-        //shared among the main deck and sideboard, except
-        //basic lands, Shadowborn Apostle, Relentless Rats and Rat Colony
+        // Must contain no more than 4 of the same card shared among the main deck and sideboard, except
+        // basic lands, Shadowborn Apostle, Relentless Rats and Rat Colony.
         // Seven Dwarves can have 7 in the deck. More than 7 in deck + sb is ok in Limited
 
         final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander());
 
-        // should group all cards by name, so that different editions of same card are really counted as the same card
+        // Should group all cards by name, so that different editions of same card are really counted as the same card
         for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, pc -> StaticData.instance().getCommonCards().getName(pc.getName(), true))) {
             IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
             if (simpleCard != null && simpleCard.getRules().isCustom() && !StaticData.instance().allowCustomCardsInDecksConformance())
@@ -382,9 +381,9 @@ public enum DeckFormat {
         int sideboardSize = deck.has(DeckSection.Sideboard) ? deck.get(DeckSection.Sideboard).countAll() : 0;
         Range<Integer> sbRange = getSideRange();
         if (sbRange != null && sideboardSize > 0 && !sbRange.contains(sideboardSize)) {
-            return sbRange.getMinimum() == sbRange.getMaximum()
-            ? TextUtil.concatWithSpace("must have a sideboard of", String.valueOf(sbRange.getMinimum()), "cards or no sideboard at all")
-            : TextUtil.concatWithSpace("must have a sideboard of", String.valueOf(sbRange.getMinimum()), "to", String.valueOf(sbRange.getMaximum()), "cards or no sideboard at all");
+            return sbRange.getMinimum().equals(sbRange.getMaximum())
+                ? TextUtil.concatWithSpace("must have a sideboard of", String.valueOf(sbRange.getMinimum()), "cards or no sideboard at all")
+                : TextUtil.concatWithSpace("must have a sideboard of", String.valueOf(sbRange.getMinimum()), "to", String.valueOf(sbRange.getMaximum()), "cards or no sideboard at all");
         }
 
         return null;
@@ -395,7 +394,7 @@ public enum DeckFormat {
         if (attractionDeck.countAll() < 10)
             return "must contain at least 10 attractions, or none at all";
         for (Entry<PaperCard, Integer> cp : attractionDeck) {
-            //Constructed Attraction deck must be singleton
+            // Constructed Attraction deck must be singleton
             if (attractionDeck.countByName(cp.getKey()) > 1)
                 return TextUtil.concatWithSpace("contains more than 1 copy of the attraction", cp.getKey().getName());
         }
@@ -407,16 +406,16 @@ public enum DeckFormat {
         if (contraptionDeck.countAll() < 15)
             return "must contain at least 15 contraptions, or none at all";
         for (Entry<PaperCard, Integer> cp : contraptionDeck) {
-            //Constructed Contraption deck must be singleton
+            // Constructed Contraption deck must be singleton
             if (contraptionDeck.countByName(cp.getKey()) > 1)
                 return TextUtil.concatWithSpace("contains more than 1 copy of the contraption", cp.getKey().getName());
         }
         return null;
     }
 
-    public static boolean canHaveAnyNumberOf(final IPaperCard icard) {
-        return icard.getRules().getType().isBasicLand()
-            || Iterables.contains(icard.getRules().getMainPart().getKeywords(),
+    public static boolean canHaveAnyNumberOf(final IPaperCard iCard) {
+        return iCard.getRules().getType().isBasicLand()
+            || Iterables.contains(iCard.getRules().getMainPart().getKeywords(),
                 "A deck can have any number of cards named CARDNAME.");
     }
 
@@ -426,7 +425,7 @@ public enum DeckFormat {
     }
 
     public static String getPlaneSectionConformanceProblem(final CardPool planes) {
-        //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
+        // Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
         if (planes == null || planes.countAll() < 10) {
             return "should have at least 10 planes";
         }
@@ -446,7 +445,7 @@ public enum DeckFormat {
     }
 
     public static String getSchemeSectionConformanceProblem(final CardPool schemes) {
-        //Must contain at least 20 schemes, max 2 of each.
+        // Must contain at least 20 schemes, max 2 of each.
         if (schemes == null || schemes.countAll() < 20) {
             return "must contain at least 20 schemes";
         }
@@ -482,7 +481,7 @@ public enum DeckFormat {
     }
 
     public void adjustCMCLevels(List<ImmutablePair<FilterCMC, Integer>> cmcLevels) {
-        //not needed by default
+        // Not needed by default
     }
 
     public boolean isLegalCard(PaperCard pc) {
@@ -530,7 +529,7 @@ public enum DeckFormat {
                 for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
                     if (!paperCardPoolFilter.test(cp.getKey())) {
                         System.err.println(
-                                "Excluding deck: '" + deck.toString() +
+                                "Excluding deck: '" + deck +
                                 "' Reason: '" + cp.getKey() + "' is not legal."
                         );
                         return false;
@@ -555,9 +554,10 @@ public enum DeckFormat {
             cmdCI |= p.getRules().getColorIdentity().getColor();
         }
         Predicate<CardRules> predicate = CardRulesPredicates.hasColorIdentity(cmdCI);
-        if (commanders.size() == 1 && commanders.get(0).getRules().canBePartnerCommander()) { //also show available partners a commander can have a partner
-            //702.124g If a legendary card has more than one partner ability, you may choose which one to use when designating your commander, but you can’t use both.
-            //Notably, no partner ability or combination of partner abilities can ever let a player have more than two commanders.
+        if (commanders.size() == 1 && commanders.get(0).getRules().canBePartnerCommander()) {
+            // Also show available partners a commander can have a partner.
+            // 702.124g If a legendary card has more than one partner ability, you may choose which one to use when designating your commander, but you can’t use both.
+            // Notably, no partner ability or combination of partner abilities can ever let a player have more than two commanders.
             predicate = predicate.or(CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
         }
         return PaperCardPredicates.fromRules(predicate);

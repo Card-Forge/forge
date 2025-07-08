@@ -4,6 +4,7 @@ Date=2024-02-08
 Name=Year of the Dragon 2024
 Type=Promo
 ScryfallCode=PL24
+TokensCode=PL24
 
 [cards]
 1 R Dragonlord's Servant @Song Qijin
@@ -14,4 +15,4 @@ ScryfallCode=PL24
 7 R Dragon Tempest @TSWCK
 
 [tokens]
-r_4_4_dragon_flying
+3 r_4_4_dragon_flying @Song Qijin
