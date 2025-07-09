@@ -156,5 +156,5 @@ ScryfallCode=EOE
 399 R Emissary Escort @Lius Lasahido
 
 [tokens]
-# 1 c_1_1_sliver @Igor Grechanyi
+1 c_1_1_sliver @Igor Grechanyi
 8 c_a_lander_sac_search @Jorge Jacinto
