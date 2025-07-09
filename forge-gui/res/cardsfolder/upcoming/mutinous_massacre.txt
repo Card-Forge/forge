@@ -1,0 +1,7 @@
+Name:Mutinous Massacre
+ManaCost:3 B B R R
+Types:Sorcery
+A:SP$ ChooseEvenOdd | StackDescription$ SpellDescription | SubAbility$ DBDestroyAll | SpellDescription$ Choose odd or even. Destroy each creature with mana value of the chosen quality. Then gain control of all creatures until end of turn. Untap them. They gain haste until end of turn. (Zero is even.)
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.cmcChosenEvenOdd | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | AllValid$ Creature | Untap$ True | AddKWs$ Haste | LoseControl$ EOT
+Oracle:Choose odd or even. Destroy each creature with mana value of the chosen quality. Then gain control of all creatures until end of turn. Untap them. They gain haste until end of turn. (Zero is even.)
