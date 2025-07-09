@@ -231,20 +231,28 @@ public class ImageUtil {
         }
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
-        if (cp.getRules().getOtherPart() != null) {
-            faceParam = (face.equals("back") ? "&face=back" : "&face=front");
-        } else if (cp.getRules().getSplitType() == CardSplitType.Meld
-                    && !cardCollectorNumber.endsWith("a")
-                    && !cardCollectorNumber.endsWith("b")) {
+        if (cp.getRules().getSplitType() == CardSplitType.Meld) {
+            if (face.equals("back")) {
+                PaperCard meldBasePc = cp.getMeldBaseCard();
+                cardCollectorNumber = meldBasePc.getCollectorNumber();
+                String collectorNumerSuffix = "";
 
-                // Only the bottom half of a meld card shares a collector number.
-                // Hanweir Garrison EMN already has a appended.
-                // Exception: The front facing card doesn't use a in FIN
-                if (face.equals("back")) {
-                    cardCollectorNumber += "b";
-                } else if (!editionCode.equals("fin")) {
-                    cardCollectorNumber += "a";
+                if (cardCollectorNumber.endsWith("a")) {
+                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
+                } else if (cardCollectorNumber.endsWith("as")) {
+                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
+                    collectorNumerSuffix = "s";
+                } else if (cardCollectorNumber.endsWith("ap")) {
+                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
+                    collectorNumerSuffix = "p";
                 }
+
+                cardCollectorNumber += "b" + collectorNumerSuffix;
+            }
+
+            faceParam = "&face=front";
+        } else if (cp.getRules().getOtherPart() != null) {
+            faceParam = (face.equals("back") ? "&face=back" : "&face=front");
         }
 
         String cardCollectorNumberEncoded;
