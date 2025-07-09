@@ -237,9 +237,15 @@ public class ImageUtil {
         } else if (cp.getRules().getSplitType() == CardSplitType.Meld
                     && !cardCollectorNumber.endsWith("a")
                     && !cardCollectorNumber.endsWith("b")) {
-            // Only the bottom half of a meld card shares a collector number.
-            // Hanweir Garrison EMN already has a appended.
-            cardCollectorNumber += face.equals("back") ? "b" : "a";
+
+                // Only the bottom half of a meld card shares a collector number.
+                // Hanweir Garrison EMN already has a appended.
+                // Exception: The front facing card doesn't use a in FIN
+                if (face.equals("back")) {
+                    cardCollectorNumber += "b";
+                } else if (!editionCode.equals("fin")) {
+                    cardCollectorNumber += "a";
+                }
         } else if (cardCollectorNumber.endsWith("☇")) {
             faceParam = "&face=back";
             cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
