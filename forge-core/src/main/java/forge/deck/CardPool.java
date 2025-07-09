@@ -75,7 +75,6 @@ public class CardPool extends ItemPool<PaperCard> {
     }
     private void add(String cardName, String setCode, String collectorNumber, final int amount, boolean addAny, Map<String, String> flags) {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
-
         for (Map.Entry<String, CardDb> entry: dbs.entrySet()){
             CardDb db = entry.getValue();
             PaperCard paperCard = db.getCard(cardName, setCode, collectorNumber, flags);
