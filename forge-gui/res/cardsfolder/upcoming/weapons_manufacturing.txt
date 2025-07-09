@@ -1,0 +1,8 @@
+Name:Weapons Manufacturing
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl+!token | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken artifact you control enters, create a colorless artifact token named Munitions with "When this token leaves the battlefield, it deals 2 damage to any target."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ munitions | TokenOwner$ You
+SVar:BuffedBy:Artifact
+DeckHas:Ability$Token
+Oracle:Whenever a nontoken artifact you control enters, create a colorless artifact token named Munitions with "When this token leaves the battlefield, it deals 2 damage to any target."

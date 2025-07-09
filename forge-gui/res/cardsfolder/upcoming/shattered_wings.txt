@@ -1,0 +1,7 @@
+Name:Shattered Wings
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment,Creature.withFlying | TgtPrompt$ Select target artifact, enchantment, or creature with flying | SubAbility$ DBSurveil | SpellDescription$ Destroy target artifact, enchantment, or creature with flying. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:DBSurveil:DB$ Surveil | Amount$ 1
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Destroy target artifact, enchantment, or creature with flying. Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

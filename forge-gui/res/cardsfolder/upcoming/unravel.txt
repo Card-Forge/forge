@@ -1,0 +1,8 @@
+Name:Unravel
+ManaCost:1 U U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. If the amount of mana spent to cast that spell was less than its mana value, you draw a card.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ LTY
+SVar:X:Targeted$CastTotalManaSpent
+SVar:Y:Targeted$CardManaCost
+Oracle:Counter target spell. If the amount of mana spent to cast that spell was less than its mana value, you draw a card.
