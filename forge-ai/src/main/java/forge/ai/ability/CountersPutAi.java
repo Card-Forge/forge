@@ -98,7 +98,7 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        if (sa.hasParam("LevelUp")) {
+        if (sa.isKeyword(Keyword.LEVEL_UP)) {
             // creatures enchanted by curse auras have low priority
             if (ph.getPhase().isBefore(PhaseType.MAIN2)) {
                 for (Card aura : source.getEnchantedBy()) {
