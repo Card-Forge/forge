@@ -3,7 +3,7 @@ Code=TD1
 Date=2010-11-08
 Name=Magic Online Deck Series
 Type=Online
-ScryfallCode=td0
+ScryfallCode=TD0
 
 [cards]
 B1 U Aura of Silence @D. Alexander Gregory
