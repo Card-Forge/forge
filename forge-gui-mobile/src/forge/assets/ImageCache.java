@@ -32,6 +32,7 @@ import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import forge.deck.DeckProxy;
 import forge.gui.GuiBase;
+import forge.item.PaperToken;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -250,14 +251,18 @@ public class ImageCache {
             PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
             if (card != null)
                 imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
-            if (StringUtils.isBlank(imageKey)) {
-                if (useDefaultIfNotFound)
-                    return getDefaultImage();
-                else
-                    return null;
-            }
+        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
+            PaperToken token = ImageUtil.getPaperTokenFromImageKey(imageKey);
+            if (token != null)
+                imageKey = token.getCardImageKey();
         }
 
+        if (StringUtils.isBlank(imageKey)) {
+            if (useDefaultIfNotFound)
+                return getDefaultImage();
+            else
+                return null;
+        }
 
         Texture image;
         File imageFile = ImageKeys.getImageFile(imageKey);

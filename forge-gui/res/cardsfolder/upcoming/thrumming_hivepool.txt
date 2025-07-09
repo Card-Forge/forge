@@ -1,0 +1,9 @@
+Name:Thrumming Hivepool
+ManaCost:6
+Types:Artifact
+K:Affinity:Sliver
+S:Mode$ Continuous | Affected$ Sliver.YouCtrl | AddKeyword$ Double Strike & Haste | Description$ Slivers you control have double strike and haste.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create two 1/1 colorless Sliver creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_sliver | TokenOwner$ You
+SVar:PlayMain1:TRUE
+Oracle:Affinity for Slivers (This spell costs {1} less to cast for each Sliver you control.)\nSlivers you control have double strike and haste.\nAt the beginning of your upkeep, create two 1/1 colorless Sliver creature tokens.

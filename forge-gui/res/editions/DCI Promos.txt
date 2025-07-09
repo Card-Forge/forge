@@ -56,6 +56,7 @@ ScryfallCode=DCI
 48 R Staggershock @Raymond Swanland
 49 R Deathless Angel @Johann Bodin
 50 R Fling @Daren Bader
+50† R Fling @Daren Bader
 51 R Sylvan Ranger @Ciruelo
 52 C Liliana's Specter @Jaime Jones
 53 R Mitotic Slime @Ron Spencer

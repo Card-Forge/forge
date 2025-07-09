@@ -1,0 +1,5 @@
+Name:Beyond the Quiet
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Creature,Spacecraft | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all creatures and Spacecraft.
+Oracle:Exile all creatures and Spacecraft.
