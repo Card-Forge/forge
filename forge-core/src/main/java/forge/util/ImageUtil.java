@@ -235,19 +235,19 @@ public class ImageUtil {
             if (face.equals("back")) {
                 PaperCard meldBasePc = cp.getMeldBaseCard();
                 cardCollectorNumber = meldBasePc.getCollectorNumber();
-                String collectorNumerSuffix = "";
+                String collectorNumberSuffix = "";
 
                 if (cardCollectorNumber.endsWith("a")) {
                     cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
                 } else if (cardCollectorNumber.endsWith("as")) {
                     cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumerSuffix = "s";
+                    collectorNumberSuffix = "s";
                 } else if (cardCollectorNumber.endsWith("ap")) {
                     cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumerSuffix = "p";
+                    collectorNumberSuffix = "p";
                 }
 
-                cardCollectorNumber += "b" + collectorNumerSuffix;
+                cardCollectorNumber += "b" + collectorNumberSuffix;
             }
 
             faceParam = "&face=front";
