@@ -1,0 +1,8 @@
+Name:Sami, Wildcat Captain
+ManaCost:4 R W
+Types:Legendary Creature Human Artificer Rogue
+PT:4/4
+K:Double Strike
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.wasCastByYou | AffectedZone$ Stack | AddKeyword$ Affinity:Artifact | Description$ Spells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)
+Oracle:Double strike, vigilance\nSpells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)

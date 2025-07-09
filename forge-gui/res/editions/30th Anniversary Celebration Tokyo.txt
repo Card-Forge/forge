@@ -4,6 +4,7 @@ Date=2023-09-01
 Name=30th Anniversary Celebration Tokyo
 Type=Promo
 ScryfallCode=P30T
+CardLang=ja
 
 [cards]
 1 R Destroy Evil @Naoki Saito

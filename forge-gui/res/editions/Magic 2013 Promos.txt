@@ -6,6 +6,7 @@ Type=Promo
 ScryfallCode=PM13
 
 [cards]
+A10 R Hamletback Goliath @Paolo Parente & Brian Snõddy
 118★ R Xathrid Gorgon @Wesley Burt
 140★ R Magmaquake @Sam Burley
 177★ U Mwonvuli Beast Tracker @Jason A. Engle

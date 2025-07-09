@@ -580,3 +580,6 @@ ScryfallCode=LTC
 12 g_1_1_insect_flying_deathtouch @Oleg Bulakh
 13 g_x_x_treefolk @Audrey Benjaminsen
 14 br_6_6_dragon_flying_menace_steal @Crystal Sully
+
+[other]
+15 monarch @Audrey Benjaminsen

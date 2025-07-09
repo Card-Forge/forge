@@ -224,7 +224,7 @@ public class ImageCache {
             && ipc != null && !ipc.getArtist().isEmpty();
         String originalKey = imageKey;
         if (useArtCrop) {
-            if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
+            if (ipc.getRules().getSplitType() == CardSplitType.Flip) {
                 // Art crop will always use front face as image key for flip cards
                 imageKey = ipc.getCardImageKey();
             }

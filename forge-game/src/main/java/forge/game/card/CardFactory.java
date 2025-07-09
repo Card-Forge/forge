@@ -742,7 +742,7 @@ public class CardFactory {
                         TextUtil.fastReplace(host.getName(), ",", ""),
                         " ", "_").toLowerCase();
                 String set = host.getSetCode().toLowerCase();
-                state.setImageKey(ImageKeys.getTokenKey("offspring_" + name + "_" + set));
+                state.setImageKey(ImageKeys.getTokenKey("offspring_" + name + "|" + set));
             }
 
             

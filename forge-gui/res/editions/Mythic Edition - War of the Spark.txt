@@ -3,7 +3,7 @@ Code=MPS_WAR
 Date=2018-10-05
 Name=Mythic Edition - War of the Spark
 Type=Collector_Edition
-ScryfallCode=med
+ScryfallCode=MED
 
 [cards]
 WS1 M Ugin, the Spirit Dragon @Chris Rahn
@@ -18,3 +18,6 @@ WS8 M Sarkhan Unbroken @Eric Deschamps
 [tokens]
 W1 b_3_3_beast_deathtouch @Dave Kendall
 W2 r_4_4_dragon_flying @Raymond Swanland
+
+[other]
+W3 emblem_garruk_apex_predator @Victor Adame Minguez

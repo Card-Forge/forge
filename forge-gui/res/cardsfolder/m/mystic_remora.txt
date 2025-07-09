@@ -3,6 +3,6 @@ ManaCost:U
 Types:Enchantment
 K:Cumulative upkeep:1
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a noncreature spell, you may draw a card unless that player pays {4}.
-SVar:TrigDraw:DB$ Draw | Defined$ You | UnlessCost$ 4 | UnlessPayer$ TriggeredPlayer | NumCards$ 1 | OptionalDecider$ You
+SVar:TrigDraw:DB$ Draw | Defined$ You | UnlessCost$ 4 | UnlessPayer$ TriggeredActivator | NumCards$ 1 | OptionalDecider$ You
 AI:RemoveDeck:Random
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever an opponent casts a noncreature spell, you may draw a card unless that player pays {4}.

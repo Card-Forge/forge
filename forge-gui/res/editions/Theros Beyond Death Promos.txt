@@ -1,0 +1,9 @@
+[metadata]
+Code=PTHB
+Date=2020-01-24
+Name=Theros: Beyond Death Promos
+Type=Promo
+ScryfallCode=PTHB
+
+[cards]
+235★ R Nyx Lotus @Raoul Vitale

@@ -4,6 +4,7 @@ Date=2019-07-12
 Name=Core Set 2020 Promos
 Type=Promo
 ScryfallCode=PM20
+TokensCode=TM20
 
 [cards]
 69 C Negate @Magali Villeneuve
@@ -13,3 +14,6 @@ ScryfallCode=PM20
 185 R Nightpack Ambusher @Sam Rowan
 197 U Thrashing Brontodon @Jakub Kasper
 206 U Corpse Knight @Karl Kopinski
+
+[tokens]
+8 g_2_2_wolf @Aaron Miller

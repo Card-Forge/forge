@@ -3,7 +3,7 @@ ManaCost:4 RP
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card.CostsPhyrexianMana | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell with {H} in its mana cost, CARDNAME deals damage equal to that spell's mana value to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
-SVar:X:TriggeredStackInstance$CardManaCostLKI
+SVar:X:TriggeredSpellAbility$CardManaCostLKI
 SVar:BuffedBy:Card.CostsPhyrexianMana
 AI:RemoveDeck:Random
 Oracle:({R/P} can be paid with either {R} or 2 life.)\nWhenever you cast a spell with {H} in its mana cost, Rage Extractor deals damage equal to that spell's mana value to any target.

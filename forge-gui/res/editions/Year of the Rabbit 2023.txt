@@ -4,6 +4,7 @@ Date=2023-02-10
 Name=Year of the Rabbit 2023
 Type=Promo
 ScryfallCode=PL23
+TokensCode=PL23
 
 [cards]
 1 R Rabbit Battery @TSWCK
@@ -13,4 +14,4 @@ ScryfallCode=PL23
 6 R Arcbound Ravager @Walleystation
 
 [tokens]
-c_a_food_sac
+2 c_a_food_sac @TSWCK

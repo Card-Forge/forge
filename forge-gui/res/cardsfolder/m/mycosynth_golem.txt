@@ -3,5 +3,5 @@ ManaCost:11
 Types:Artifact Creature Golem
 PT:4/5
 K:Affinity:Artifact
-S:Mode$ Continuous | Affected$ Artifact.Creature+YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Affinity:Artifact | Description$ Artifact creature spells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)
+S:Mode$ Continuous | Affected$ Artifact.Creature+wasCastByYou | AffectedZone$ Stack | AddKeyword$ Affinity:Artifact | Description$ Artifact creature spells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nArtifact creature spells you cast have affinity for artifacts. (They cost {1} less to cast for each artifact you control.)

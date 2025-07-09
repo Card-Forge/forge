@@ -34,9 +34,15 @@ public enum KeyBinding {
     }
 
     public boolean isPressed(int key) {
-        for (int i = 0; i < bindings.length; i++) {
-            if (key == bindings[i]) {
-                return true;
+        return isPressed(key, null);
+    }
+
+    public boolean isPressed(int key, Boolean requiredCondition) {
+        if (requiredCondition == null || requiredCondition) {
+            for (int i = 0; i < bindings.length; i++) {
+                if (key == bindings[i]) {
+                    return true;
+                }
             }
         }
         return false;

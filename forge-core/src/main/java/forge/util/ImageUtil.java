@@ -7,8 +7,12 @@ import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import java.util.regex.Pattern;
+import forge.item.PaperToken;
+import forge.token.TokenDb;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.regex.Pattern;
+import java.net.URLEncoder;
 
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
@@ -44,6 +48,43 @@ public class ImageUtil {
         // return cp regardless if it's null
         return cp;
     }
+
+    public static PaperToken getPaperTokenFromImageKey(final String imageKey) {
+        String key;
+        if (imageKey == null ||
+            !imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
+            return null;
+        }
+
+        key = imageKey.substring(ImageKeys.TOKEN_PREFIX.length());
+            
+        if (key.isEmpty()) {
+            return null;
+        }
+
+        TokenDb db = StaticData.instance().getAllTokens();
+        if (db == null) {
+            return null;
+        }
+        
+        String[] split = key.split("\\|");
+        if (!db.containsRule(split[0])) {
+            return null;
+        }
+        
+        PaperToken pt = switch (split.length) {
+            case 1 -> db.getToken(split[0]);
+            case 2, 3 -> db.getToken(split[0], split[1]);
+            default -> db.getToken(split[0], split[1], Integer.parseInt(split[3]));
+        };
+
+        if (pt == null) {
+            System.err.println("Can't find PaperToken from key: " + key);
+        }
+            
+        return pt;
+    }
+
     public static String transformKey(String imageKey) {
         String key;
         String edition= imageKey.substring(0, imageKey.indexOf("/"));
@@ -101,7 +142,7 @@ public class ImageUtil {
 
         if (includeSet) {
             String editionAliased = isDownloadUrl ? StaticData.instance().getEditions().getCode2ByCode(edition) : ImageKeys.getSetFolder(edition);
-            if (editionAliased == "") //FIXME: Custom Cards Workaround
+            if (editionAliased.isEmpty()) //FIXME: Custom Cards Workaround
                 editionAliased = edition;
             return TextUtil.concatNoSpace(editionAliased, "/", fname);
         } else {
@@ -166,7 +207,7 @@ public class ImageUtil {
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop, boolean hyphenateAlchemy){
         final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
         String editionCode;
-        if ((setCode != null) && (setCode.length() > 0))
+        if (setCode != null && !setCode.isEmpty())
             editionCode = setCode;
         else
             editionCode = cp.getEdition().toLowerCase();
@@ -200,11 +241,27 @@ public class ImageUtil {
         } else if (cp.getRules().getSplitType() == CardSplitType.Meld
                     && !cardCollectorNumber.endsWith("a")
                     && !cardCollectorNumber.endsWith("b")) {
-            // Only the bottom half of a meld card shares a collector number.
-            // Hanweir Garrison EMN already has a appended.
-            cardCollectorNumber += face.equals("back") ? "b" : "a";
+
+                // Only the bottom half of a meld card shares a collector number.
+                // Hanweir Garrison EMN already has a appended.
+                // Exception: The front facing card doesn't use a in FIN
+                if (face.equals("back")) {
+                    cardCollectorNumber += "b";
+                } else if (!editionCode.equals("fin")) {
+                    cardCollectorNumber += "a";
+                }
         }
-        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
+
+        String cardCollectorNumberEncoded;
+        try {
+            cardCollectorNumberEncoded = URLEncoder.encode(cardCollectorNumber, "UTF-8");
+        } catch (Exception e) {
+            // Unlikely, for the possibility that "UTF-8" is not supported.
+            System.err.println("UTF-8 encoding not supported on this device.");
+            cardCollectorNumberEncoded = cardCollectorNumber;
+        }
+
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumberEncoded,
                 langCode, versionParam, faceParam);
     }
 

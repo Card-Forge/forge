@@ -1,0 +1,7 @@
+Name:Xu-Ifit, Osteoharmonist
+ManaCost:1 B B
+Types:Legendary Creature Human Wizard
+PT:2/3
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SorcerySpeed$ True | StaticEffect$ Animate | SpellDescription$ Return target creature card from your graveyard to the battlefield. It's a Skeleton in addition to its other types and has no abilities. Activate only as a sorcery.
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Skeleton | RemoveAllAbilities$ True
+Oracle:{T}: Return target creature card from your graveyard to the battlefield. It's a Skeleton in addition to its other types and has no abilities. Activate only as a sorcery.

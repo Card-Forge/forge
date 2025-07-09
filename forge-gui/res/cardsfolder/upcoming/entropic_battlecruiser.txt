@@ -1,0 +1,15 @@
+Name:Entropic Battlecruiser
+ManaCost:3 B
+Types:Artifact Spacecraft
+PT:3/10
+K:Station:8
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_CHARGE | AddTrigger$ DiscardTrig | Description$ STATION 1+ Whenever an opponent discards a card, they lose 3 life.
+SVar:DiscardTrig:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an opponent discards a card, they lose 3 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 3
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE8_CHARGE | AddType$ Creature | AddKeyword$ Flying & Deathtouch | AddTrigger$ AttackTrig | Description$ STATION 8+ Flying, deathtouch,,,Whenever this Spacecraft attacks, each opponent discards a card. Each opponent who can't loses 3 life.
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever this Spacecraft attacks, each opponent discards a card. Each opponent who can't loses 3 life.
+SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ OppNonRememberedController | LifeAmount$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery. It's an artifact creature at 8+.)\nSTATION 1+\nWhenever an opponent discards a card, they lose 3 life.\nSTATION 8+\nFlying, deathtouch\nWhenever this Spacecraft attacks, each opponent discards a card. Each opponent who can't loses 3 life.

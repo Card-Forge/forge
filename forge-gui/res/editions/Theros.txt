@@ -272,5 +272,5 @@ ScryfallCode=THS
 9 rg_2_2_satyr_haste @Johann Bodin
 10 c_3_3_e_a_golem @Yeong-Hao Han
 
-[others]
+[other]
 11 emblem_elspeth_suns_champion @Eric Deschamps

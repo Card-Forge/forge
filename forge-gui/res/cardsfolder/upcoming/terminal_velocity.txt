@@ -1,0 +1,13 @@
+Name:Terminal Velocity
+ManaCost:4 R R
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact.YouOwn,Creature.YouOwn | SubAbility$ DBPump | RememberChanged$ True | AILogic$ BeforeCombat | SpellDescription$ You may put an artifact or creature card from your hand onto the battlefield. That permanent gains haste, "When this permanent leaves the battlefield, it deals damage equal to its mana value to each creature," and "At the beginning of your end step, sacrifice this permanent."
+SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | Triggers$ LeaveTrigger,EndTrigger | SubAbility$ DBCleanup
+SVar:LeaveTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When this permanent leaves the battlefield, it deals damage equal to its mana value to each creature.
+SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature | ValidDescription$ each creature. | NumDmg$ X
+SVar:EndTrigger:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, sacrifice this permanent.
+SVar:TrigSac:DB$ Sacrifice
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CardManaCost
+SVar:PlayMain1:TRUE
+Oracle:You may put an artifact or creature card from your hand onto the battlefield. That permanent gains haste, "When this permanent leaves the battlefield, it deals damage equal to its mana value to each creature," and "At the beginning of your end step, sacrifice this permanent."

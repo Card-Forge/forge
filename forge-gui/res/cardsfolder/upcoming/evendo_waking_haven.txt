@@ -1,0 +1,11 @@
+Name:Evendo, Waking Haven
+ManaCost:no cost
+Types:Land Planet
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+K:Station:12
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE12_CHARGE | AddAbility$ EvendoMana | Description$ STATION 12+ {G}, {T}: Add {G} for each creature you control.
+SVar:EvendoMana:AB$ Mana | Cost$ G T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each creature you control.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:This land enters tapped.\n{T}: Add {G}.\nStation (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)\nSTATION 12+\n{G}, {T}: Add {G} for each creature you control.

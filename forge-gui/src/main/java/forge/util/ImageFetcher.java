@@ -192,7 +192,6 @@ public abstract class ImageFetcher {
                     updateLink = true;
                 } catch (Exception e) {
                     filename = paperCard.getCardAltImageKey();
-                    updateLink = false;
                 }
             }
             destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
@@ -270,7 +269,6 @@ public abstract class ImageFetcher {
                 System.err.println("Token image key is malformed: " + imageKey);
                 return;
             }
-
 
             // Load the paper token from filename + edition
             CardEdition edition = StaticData.instance().getEditions().get(setCode);

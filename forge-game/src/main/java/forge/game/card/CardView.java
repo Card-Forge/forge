@@ -101,7 +101,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Controller, ownerAndController);
         set(TrackableProperty.ImageKey, imageKey);
     }
-
     public PlayerView getOwner() {
         return get(TrackableProperty.Owner);
     }
@@ -1061,6 +1060,8 @@ public class CardView extends GameEntityView {
                     mergedCollection.add(card);
                 }
             }
+        } else {
+            set(TrackableProperty.MergedCards, null);
         }
         updateMergeCollections(mergedCollection);
 

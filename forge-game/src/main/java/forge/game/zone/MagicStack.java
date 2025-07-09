@@ -267,7 +267,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 addAbilityActivatedThisTurn(sp, source);
             }
 
-            Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(source.getController());
+            Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Activator, activator);
             runParams.put(AbilityKey.SpellAbility, sp);
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
@@ -355,7 +355,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         si = push(sp, si, id);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
-        Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
+        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
 
         if (sp.isSpell() && !sp.isCopied()) {
             final Card lki = CardCopyService.getLKICopy(sp.getHostCard());
@@ -394,7 +394,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
-        runParams.put(AbilityKey.SpellAbility, si.getSpellAbility());
+        runParams.put(AbilityKey.SpellAbility, sp);
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
 
