@@ -302,7 +302,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         if (num <= 0) {
             counters.remove(counterType);
         } else {
-            counters.put(counterType, num);
+            counters.put(counterType, Math.min(num, 10_000));
         }
     }
     public void setCounters(final CounterEnumType counterType, final Integer num) {
