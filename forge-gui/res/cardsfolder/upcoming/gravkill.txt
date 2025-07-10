@@ -1,0 +1,4 @@
+Name:Gravkill
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature,Spacecraft | TgtPrompt$ Select target creature or Spacecraft | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or Spacecraft.
+Oracle:Exile target creature or Spacecraft.
