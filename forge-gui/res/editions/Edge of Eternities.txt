@@ -90,21 +90,21 @@ ScryfallCode=EOE
 259 M Susur Secundi, Void Altar @Adam Paquette
 260 M Uthros, Titanic Godcore @Adam Paquette
 261 R Watery Grave @Sergey Glushakov
-262 C Plains @Adam Paquette
-263 C Island @Adam Paquette
-264 C Swamp @Adam Paquette
-265 C Mountain @Adam Paquette
-266 C Forest @Adam Paquette
-267 C Plains @Alayna Danner
-268 C Plains @Sergey Glushakov
-269 C Island @Sergey Glushakov
-270 C Island @Liiga Smilshkalne
-271 C Swamp @Sergey Glushakov
-272 C Swamp @Liiga Smilshkalne
-273 C Mountain @Sergey Glushakov
-274 C Mountain @Julian Kok Joon Wen
-275 C Forest @Sergey Glushakov
-276 C Forest @Julian Kok Joon Wen
+262 L Plains @Adam Paquette
+263 L Island @Adam Paquette
+264 L Swamp @Adam Paquette
+265 L Mountain @Adam Paquette
+266 L Forest @Adam Paquette
+267 L Plains @Alayna Danner
+268 L Plains @Sergey Glushakov
+269 L Island @Sergey Glushakov
+270 L Island @Liiga Smilshkalne
+271 L Swamp @Sergey Glushakov
+272 L Swamp @Liiga Smilshkalne
+273 L Mountain @Sergey Glushakov
+274 L Mountain @Julian Kok Joon Wen
+275 L Forest @Sergey Glushakov
+276 L Forest @Julian Kok Joon Wen
 278 R Breeding Pool @Chris Ostrowski
 280 R Godless Shrine @Chris Ostrowski
 282 R Sacred Foundry @Chris Ostrowski
@@ -151,11 +151,11 @@ ScryfallCode=EOE
 360 M Sothera, the Supervoid @Mateusz Urbanowicz
 363 M Mutinous Massacre @Aogachou
 365 M The Endstone @Hidetaka Tenjin
-367 C Plains @Adam Paquette
-368 C Island @Adam Paquette
-369 C Swamp @Adam Paquette
-370 C Mountain @Adam Paquette
-371 C Forest @Adam Paquette
+367 L Plains @Adam Paquette
+368 L Island @Adam Paquette
+369 L Swamp @Adam Paquette
+370 L Mountain @Adam Paquette
+371 L Forest @Adam Paquette
 373 R Breeding Pool @Chris Ostrowski
 375 R Godless Shrine @Chris Ostrowski
 377 R Sacred Foundry @Chris Ostrowski
