@@ -961,7 +961,7 @@ ScryfallCode=CLB
 936 R Elder Brain @Nino Is
 
 [dungeons]
-S Undercity
+20 Undercity
 
 [foils]
 Abdel Adrian, Gorion's Ward+|CLB
@@ -1193,3 +1193,6 @@ Zevlor, Elturel Exile|CLB
 46 rg_2_2_satyr_haste @Johann Bodin
 47 c_a_clue_draw @Campbell White
 48 c_a_gold_sac @Yeong-Hao Han
+
+[other]
+20☇ initiative @Ioannis Fiore
