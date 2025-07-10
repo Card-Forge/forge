@@ -3,8 +3,7 @@ ManaCost:2 B B
 Types:Creature Insect Cleric
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChooseCard | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, you and defending player each discard a card or sacrifice a permanent. You draw a card for each land card put into a graveyard this way.
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | Mandatory$ True | Choices$ Card.YouOwn+inZoneHand,Permanent.CanBeSacrificedBy You | ChoiceTitle$ Choose a card or permanent | AILogic$ WorstCard | SubAbility$ DBChooseOpp
-SVar:DBChooseOpp:DB$ ChooseCard | Defined$ TriggeredDefendingPlayer | Mandatory$ True | Choices$ Card.inZoneHand+OwnedBy TriggeredDefendingPlayer,Permanent.CanBeSacrificedBy TriggeredDefendingPlayer | ChoiceTitle$ Choose a card or permanent | AILogic$ WorstCard | SubAbility$ DBDiscard
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | Mandatory$ True | Choices$ Card.inZoneHand,Permanent.CanBeSacrificed | ControlledByPlayer$ Chooser | ChoiceTitle$ Choose a card or permanent | AILogic$ WorstCard | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ TriggeredDefendingPlayerAndYou | DiscardValid$ Card.isChosen | RememberDiscarded$ True | SubAbility$ DBSac
 SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredDefendingPlayerAndYou | SacValid$ Permanent.isChosen | RememberSacrificed$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
