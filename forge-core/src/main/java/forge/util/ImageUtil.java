@@ -269,6 +269,10 @@ public class ImageUtil {
         if (!faceParam.isEmpty()) {
             faceParam = (faceParam.equals("back") ? "&face=back" : "&face=front");
         }
+        if (collectorNumber.endsWith("☇")) {
+            faceParam = "&face=back";
+            collectorNumber = collectorNumber.substring(0, collectorNumber.length() - 1);
+        }
         return String.format("%s/%s/%s?format=image&version=%s%s", setCode, collectorNumber,
                 langCode, versionParam, faceParam);
     }
