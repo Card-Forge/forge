@@ -836,7 +836,7 @@ public final class StaticAbilityContinuous {
                 if (!addedAbilities.isEmpty() || !addedTrigger.isEmpty() || addReplacements != null || addStatics != null
                     || removeAllAbilities) {
                     affectedCard.addChangedCardTraits(
-                        addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana,
+                        addedAbilities, null, addedTrigger, null, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana,
                         se.getTimestamp(), stAb.getId(), false
                     );
                 }
@@ -948,7 +948,7 @@ public final class StaticAbilityContinuous {
         addIgnore.setIntrinsic(false);
         addIgnore.setApi(ApiType.InternalIgnoreEffect);
         addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
-        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, false, false, sourceCard.getLayerTimestamp(), stAb.getId());
+        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, null, false, false, sourceCard.getLayerTimestamp(), stAb.getId());
 
         final GameCommand removeIgnore = new GameCommand() {
             private static final long serialVersionUID = -5415775215053216360L;

@@ -1010,7 +1010,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         KeywordsChange cks = new KeywordsChange(kws, removeKeywords, false);
         if (!cks.getAbilities().isEmpty() || !cks.getTriggers().isEmpty() || !cks.getReplacements().isEmpty() || !cks.getStaticAbilities().isEmpty()) {
             getKeywordCard().addChangedCardTraits(
-                cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, timestamp, staticId);
+                cks.getAbilities(), null, cks.getTriggers(), null, cks.getReplacements(), cks.getStaticAbilities(), false, false, timestamp, staticId);
         }
         changedKeywords.put(timestamp, staticId, cks);
         updateKeywords();
