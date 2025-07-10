@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MTG Simulation App{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/app.css') }}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('main.dashboard') }}">
+                <i class="fas fa-magic"></i> MTG Simulation
+            </a>
+            
+            {% if current_user.is_authenticated %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.dashboard') }}">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('simulation.list_simulations') }}">
+                            <i class="fas fa-play"></i> Simulations
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('monitoring.monitoring_dashboard') }}">
+                            <i class="fas fa-eye"></i> Monitoring
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('statistics.statistics_dashboard') }}">
+                            <i class="fas fa-chart-bar"></i> Statistics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('simulation.deck_selection') }}">
+                            <i class="fas fa-cards-blank"></i> New Simulation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('deck_import.import_page') }}">
+                            <i class="fas fa-download"></i> Import
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user"></i> {{ current_user.username }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="row">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- MTG-themed background elements -->
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; opacity: 0.05;">
+        <div style="position: absolute; top: 10%; left: 10%; width: 100px; height: 100px; background: radial-gradient(circle, var(--mtg-gold), transparent); border-radius: 50%;"></div>
+        <div style="position: absolute; top: 30%; right: 15%; width: 80px; height: 80px; background: radial-gradient(circle, var(--mtg-blue), transparent); border-radius: 50%;"></div>
+        <div style="position: absolute; bottom: 20%; left: 20%; width: 120px; height: 120px; background: radial-gradient(circle, var(--mtg-green), transparent); border-radius: 50%;"></div>
+        <div style="position: absolute; bottom: 40%; right: 10%; width: 90px; height: 90px; background: radial-gradient(circle, var(--mtg-red), transparent); border-radius: 50%;"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

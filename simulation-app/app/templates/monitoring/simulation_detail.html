@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}Monitor Simulation - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1><i class="fas fa-eye"></i> Monitor Simulation</h1>
+                <p class="text-muted">Real-time status for "{{ simulation.name }}"</p>
+            </div>
+            <div>
+                <a href="{{ url_for('simulation.list_simulations') }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" data-simulation-id="{{ simulation.id }}">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-tachometer-alt"></i> Simulation Status</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Current Status</h6>
+                        <span id="status-badge" class="badge 
+                            {% if simulation.status == 'completed' %}bg-success
+                            {% elif simulation.status == 'running' %}bg-primary
+                            {% elif simulation.status == 'failed' %}bg-danger
+                            {% elif simulation.status == 'stopped' %}bg-warning
+                            {% else %}bg-secondary{% endif %}">
+                            {{ simulation.status.title() }}
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Games Progress</h6>
+                        <span id="games-completed">{{ simulation.games_completed }} / {{ simulation.num_games }}</span>
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <h6>Progress</h6>
+                    <div class="progress mb-2" style="height: 25px;">
+                        <div id="progress-bar" class="progress-bar 
+                            {% if simulation.status == 'completed' %}bg-success
+                            {% elif simulation.status == 'running' %}bg-primary
+                            {% elif simulation.status == 'failed' %}bg-danger
+                            {% else %}bg-secondary{% endif %}" 
+                            role="progressbar" 
+                            style="width: {{ simulation.progress_percent }}%"
+                            aria-valuenow="{{ simulation.progress_percent }}" 
+                            aria-valuemin="0" aria-valuemax="100">
+                            {{ "%.1f"|format(simulation.progress_percent) }}%
+                        </div>
+                    </div>
+                </div>
+                
+                {% if simulation.status == 'running' %}
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <h6>Estimated Completion</h6>
+                        <span id="estimated-completion" class="text-muted">Calculating...</span>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Elapsed Time</h6>
+                        <span id="elapsed-time" class="text-muted">
+                            {% if simulation.started_at %}
+                                Running...
+                            {% else %}
+                                -
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if simulation.status == 'running' %}
+                <div class="mt-4">
+                    <form method="POST" action="{{ url_for('simulation.stop_simulation', simulation_id=simulation.id) }}" class="d-inline">
+                        <button type="submit" class="btn btn-warning"
+                                onclick="return confirm('Are you sure you want to stop this simulation?')">
+                            <i class="fas fa-stop"></i> Stop Simulation
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
+                
+                <div id="error-container" class="mt-3">
+                    {% if simulation.error_message %}
+                        <div class="alert alert-danger">
+                            <h6>Error:</h6>
+                            {{ simulation.error_message }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        {% if simulation.status == 'completed' %}
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-check-circle"></i> Simulation Complete</h5>
+            </div>
+            <div class="card-body">
+                <p>This simulation has completed successfully!</p>
+                <a href="{{ url_for('statistics.simulation_statistics', simulation_id=simulation.id) }}" 
+                   class="btn btn-success">
+                    <i class="fas fa-chart-bar"></i> View Statistics
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Simulation Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <strong>Name:</strong><br>
+                    {{ simulation.name }}
+                </div>
+                
+                <div class="mb-3">
+                    <strong>Total Games:</strong><br>
+                    {{ simulation.num_games }}
+                </div>
+                
+                <div class="mb-3">
+                    <strong>Game Timeout:</strong><br>
+                    {{ simulation.game_timeout }} seconds
+                </div>
+                
+                <div class="mb-3">
+                    <strong>Created:</strong><br>
+                    {{ simulation.created_at.strftime('%Y-%m-%d %H:%M') }}
+                </div>
+                
+                {% if simulation.started_at %}
+                <div class="mb-3">
+                    <strong>Started:</strong><br>
+                    {{ simulation.started_at.strftime('%Y-%m-%d %H:%M') }}
+                </div>
+                {% endif %}
+                
+                {% if simulation.completed_at %}
+                <div class="mb-3">
+                    <strong>Completed:</strong><br>
+                    {{ simulation.completed_at.strftime('%Y-%m-%d %H:%M') }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-users"></i> Players & Decks</h5>
+            </div>
+            <div class="card-body">
+                {% for player in simulation.players %}
+                    <div class="mb-3 pb-2 {% if not loop.last %}border-bottom{% endif %}">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <strong>Player {{ player.player_number }}</strong><br>
+                                <small class="text-muted font-monospace">{{ player.deck_id }}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-clock"></i> Auto-Refresh</h5>
+            </div>
+            <div class="card-body">
+                {% if simulation.status == 'running' %}
+                    <p class="text-muted mb-2">
+                        <i class="fas fa-sync-alt fa-spin"></i> 
+                        Auto-refreshing every 5 seconds
+                    </p>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.reload()">
+                        <i class="fas fa-sync-alt"></i> Refresh Now
+                    </button>
+                {% else %}
+                    <p class="text-muted mb-2">Simulation is not running</p>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="location.reload()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-refresh for running simulations
+{% if simulation.status == 'running' %}
+setInterval(function() {
+    MTGSimApp.monitoring.updateSimulationStatus('{{ simulation.id }}');
+}, 5000);
+
+// Initial status update
+MTGSimApp.monitoring.updateSimulationStatus('{{ simulation.id }}');
+{% endif %}
+
+// Manual refresh button enhancement
+function refreshStatus() {
+    {% if simulation.status == 'running' %}
+        MTGSimApp.monitoring.updateSimulationStatus('{{ simulation.id }}');
+    {% else %}
+        location.reload();
+    {% endif %}
+}
+
+// Add click handler to refresh button
+document.addEventListener('DOMContentLoaded', function() {
+    const refreshButtons = document.querySelectorAll('button[onclick="location.reload()"]');
+    refreshButtons.forEach(button => {
+        button.onclick = refreshStatus;
+    });
+});
+</script>
+{% endblock %}

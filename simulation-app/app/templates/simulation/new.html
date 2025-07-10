@@ -1,0 +1,304 @@
+{% extends "base.html" %}
+
+{% block title %}New Simulation - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1><i class="fas fa-plus"></i> New Simulation</h1>
+        <p class="text-muted">Configure your EDH simulation</p>
+    </div>
+</div>
+
+<form method="POST" id="simulation-form">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-cog"></i> Simulation Configuration</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Simulation Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required 
+                                       placeholder="e.g., Competitive Meta Test">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="num_games" class="form-label">Number of Games</label>
+                                <input type="number" class="form-control" id="num_games" name="num_games" 
+                                       min="1" max="100" value="10" required>
+                                <div class="form-text">Maximum 100 games</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="game_timeout" class="form-label">Game Timeout (seconds)</label>
+                                <input type="number" class="form-control" id="game_timeout" name="game_timeout" 
+                                       min="300" max="3600" value="600">
+                                <div class="form-text">10 minutes default</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5><i class="fas fa-users"></i> Players & Decks</h5>
+                </div>
+                <div class="card-body">
+                    <div id="players-container">
+                        {% for i in range(4) %}
+                        <div class="row mb-3 player-row" data-player="{{ i }}">
+                            <div class="col-md-2">
+                                <label class="form-label">Player {{ i + 1 }}</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" 
+                                           id="player_{{ i }}_enabled" 
+                                           {% if i < 2 %}checked{% endif %}>
+                                    <label class="form-check-label" for="player_{{ i }}_enabled">
+                                        Enabled
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <label class="form-label">Deck</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control deck-search" 
+                                           id="player_{{ i }}_deck_search"
+                                           placeholder="Search for deck..."
+                                           {% if i >= 2 %}disabled{% endif %}>
+                                    <button class="btn btn-outline-secondary" type="button" 
+                                            id="player_{{ i }}_browse" {% if i >= 2 %}disabled{% endif %}>
+                                        <i class="fas fa-search"></i> Browse
+                                    </button>
+                                </div>
+                                <input type="hidden" name="player_{{ i }}_deck" id="player_{{ i }}_deck">
+                                <div class="deck-preview mt-2" id="player_{{ i }}_preview" style="display: none;">
+                                    <small class="text-muted">
+                                        <span class="deck-name"></span> - 
+                                        <span class="deck-commander"></span> - 
+                                        <span class="deck-colors"></span>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-info-circle"></i> Simulation Info</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Format:</strong> EDH (Commander)</p>
+                    <p><strong>AI Type:</strong> Standard AI</p>
+                    <p><strong>Max Concurrent:</strong> 10 simulations</p>
+                    <p><strong>Est. Duration:</strong> <span id="estimated-duration">~10 minutes</span></p>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play"></i> Create Simulation
+                        </button>
+                        <a href="{{ url_for('simulation.list_simulations') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Deck Search Modal -->
+<div class="modal fade" id="deckSearchModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Select Deck</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="modal-deck-search" placeholder="Search decks...">
+                </div>
+                <div id="deck-search-results">
+                    <div class="text-center">
+                        <p class="text-muted">Enter search terms to find decks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentPlayerIndex = 0;
+
+// Player enable/disable functionality
+document.querySelectorAll('input[type="checkbox"][id*="player_"][id*="enabled"]').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const playerIndex = this.id.match(/player_(\d+)_enabled/)[1];
+        const deckSearch = document.getElementById(`player_${playerIndex}_deck_search`);
+        const browseBtn = document.getElementById(`player_${playerIndex}_browse`);
+        
+        if (this.checked) {
+            deckSearch.disabled = false;
+            browseBtn.disabled = false;
+        } else {
+            deckSearch.disabled = true;
+            browseBtn.disabled = true;
+            deckSearch.value = '';
+            document.getElementById(`player_${playerIndex}_deck`).value = '';
+            document.getElementById(`player_${playerIndex}_preview`).style.display = 'none';
+        }
+    });
+});
+
+// Browse deck buttons
+document.querySelectorAll('button[id*="browse"]').forEach(button => {
+    button.addEventListener('click', function() {
+        currentPlayerIndex = this.id.match(/player_(\d+)_browse/)[1];
+        const modal = new bootstrap.Modal(document.getElementById('deckSearchModal'));
+        modal.show();
+    });
+});
+
+// Deck search in modal
+let searchTimeout;
+document.getElementById('modal-deck-search').addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    const query = this.value;
+    
+    if (query.length < 2) {
+        document.getElementById('deck-search-results').innerHTML = '<p class="text-muted">Enter at least 2 characters</p>';
+        return;
+    }
+    
+    searchTimeout = setTimeout(() => {
+        searchDecks(query);
+    }, 300);
+});
+
+function searchDecks(query) {
+    document.getElementById('deck-search-results').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Searching...</div>';
+    
+    fetch(`/decks/api/search?q=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+            displaySearchResults(data.decks);
+        })
+        .catch(error => {
+            document.getElementById('deck-search-results').innerHTML = '<div class="alert alert-danger">Error searching decks</div>';
+        });
+}
+
+function displaySearchResults(decks) {
+    const container = document.getElementById('deck-search-results');
+    
+    if (decks.length === 0) {
+        container.innerHTML = '<p class="text-muted">No decks found</p>';
+        return;
+    }
+    
+    let html = '<div class="list-group">';
+    decks.forEach(deck => {
+        const commander = (deck.commander_1 || '') + (deck.commander_2 ? ` // ${deck.commander_2}` : '');
+        const deckId = deck.deck_id || '';
+        const colorIdentity = deck.color_identity || '';
+        
+        html += `
+            <button type="button" class="list-group-item list-group-item-action" 
+                    data-deck-id="${deckId}" 
+                    data-commander="${commander}" 
+                    data-colors="${colorIdentity}"
+                    onclick="selectDeckFromButton(this)">
+                <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1">${deck.deck_name || 'Unknown Deck'}</h6>
+                    <small class="text-muted">${colorIdentity || 'Colorless'}</small>
+                </div>
+                <p class="mb-1">${commander || 'Unknown Commander'}</p>
+                <small class="text-muted">Source: ${deck.source || 'Unknown'}</small>
+            </button>
+        `;
+    });
+    html += '</div>';
+    
+    container.innerHTML = html;
+}
+
+function selectDeckFromButton(button) {
+    const deckId = button.getAttribute('data-deck-id');
+    const commander = button.getAttribute('data-commander');
+    const colors = button.getAttribute('data-colors');
+    
+    selectDeck(deckId, commander, colors);
+}
+
+function selectDeck(deckId, commander, colors) {
+    // Set the hidden field value
+    document.getElementById(`player_${currentPlayerIndex}_deck`).value = deckId;
+    
+    // Update the search field
+    document.getElementById(`player_${currentPlayerIndex}_deck_search`).value = deckId;
+    
+    // Show deck preview
+    const preview = document.getElementById(`player_${currentPlayerIndex}_preview`);
+    preview.querySelector('.deck-name').textContent = deckId;
+    preview.querySelector('.deck-commander').textContent = commander;
+    preview.querySelector('.deck-colors').textContent = colors;
+    preview.style.display = 'block';
+    
+    // Close modal
+    bootstrap.Modal.getInstance(document.getElementById('deckSearchModal')).hide();
+}
+
+// Update estimated duration
+document.getElementById('num_games').addEventListener('input', function() {
+    const games = parseInt(this.value) || 10;
+    const estimatedMinutes = Math.ceil(games * 0.5); // Rough estimate
+    document.getElementById('estimated-duration').textContent = `~${estimatedMinutes} minutes`;
+});
+
+// Form validation
+document.getElementById('simulation-form').addEventListener('submit', function(e) {
+    const enabledPlayers = document.querySelectorAll('input[type="checkbox"][id*="enabled"]:checked');
+    
+    if (enabledPlayers.length < 2) {
+        e.preventDefault();
+        alert('At least 2 players must be enabled');
+        return;
+    }
+    
+    // Check that enabled players have decks selected
+    let missingDecks = false;
+    enabledPlayers.forEach(checkbox => {
+        const playerIndex = checkbox.id.match(/player_(\d+)_enabled/)[1];
+        const deckValue = document.getElementById(`player_${playerIndex}_deck`).value;
+        if (!deckValue) {
+            missingDecks = true;
+        }
+    });
+    
+    if (missingDecks) {
+        e.preventDefault();
+        alert('All enabled players must have a deck selected');
+        return;
+    }
+});
+</script>
+{% endblock %}

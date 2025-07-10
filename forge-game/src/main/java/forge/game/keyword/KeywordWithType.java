@@ -25,6 +25,15 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
             case LANDWALK:
                 type = details.split(":")[1];
                 break;
+            case ENCHANT:
+                // Special handling for Enchant keyword - already handled in Keyword.java
+                // But here's an additional safeguard
+                if (details.contains(":")) {
+                    type = details.split(":")[1];
+                } else {
+                    type = details;
+                }
+                break;
             default:
                 type = details.split(":")[0];
             }

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 # This python script is designed to handle the following: individual cards located in /res/cardsfolder/*
-# Insert of Oracle data into data files from mtg-data.txt
-# Future possibilities. Using mtg-data to add SetInfo data and other Outside Game Data (Type, PT, etc)
+# Insert of Oracle data into data files from mtg-tools-data.txt
+# Future possibilities. Using mtg-tools-data to add SetInfo data and other Outside Game Data (Type, PT, etc)
 # Hopefully the oracleScript can replace both SetInfo Scripts by current SetInfo scripts by expanding their current functionality
 
 # python oracleScript.py <offlineMode> <setAbbreviation>

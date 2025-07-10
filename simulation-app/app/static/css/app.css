@@ -1,0 +1,958 @@
+/* MTG-Inspired Dark Theme */
+
+/* Root variables for consistent theming */
+:root {
+    --mtg-black: #1a1a1a;
+    --mtg-dark-gray: #2d2d2d;
+    --mtg-medium-gray: #3a3a3a;
+    --mtg-light-gray: #4a4a4a;
+    --mtg-border: #555555;
+    --mtg-accent: #8b4513;
+    --mtg-gold: #b8860b;
+    --mtg-silver: #c0c0c0;
+    --mtg-white: #f5f5f5;
+    --mtg-red: #d32f2f;
+    --mtg-blue: #1976d2;
+    --mtg-green: #388e3c;
+    --mtg-black-mana: #0d0d0d;
+    --mtg-artifact: #8d6e63;
+    --mtg-purple: #7b1fa2;
+    --mtg-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --mtg-glow: 0 0 10px rgba(184, 134, 11, 0.3);
+}
+
+/* Base dark theme */
+body {
+    background-color: var(--mtg-black);
+    color: var(--mtg-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(75, 0, 130, 0.1) 0%, transparent 50%);
+    background-attachment: fixed;
+}
+
+/* Ensure all text elements have proper contrast */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--mtg-white);
+}
+
+p, span, div, a {
+    color: var(--mtg-white);
+}
+
+/* Override Bootstrap text utilities for dark theme */
+.text-muted {
+    color: var(--mtg-silver) !important;
+}
+
+.text-dark {
+    color: var(--mtg-white) !important;
+}
+
+/* Ensure links are visible */
+a {
+    color: var(--mtg-gold);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--mtg-silver);
+    text-decoration: underline;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-weight: bold;
+    color: var(--mtg-gold) !important;
+    text-shadow: 0 0 5px rgba(184, 134, 11, 0.5);
+}
+
+.navbar-dark {
+    background: linear-gradient(135deg, var(--mtg-black), var(--mtg-dark-gray)) !important;
+    border-bottom: 2px solid var(--mtg-accent);
+    box-shadow: var(--mtg-shadow);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--mtg-white) !important;
+    transition: all 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--mtg-gold) !important;
+    text-shadow: 0 0 5px rgba(184, 134, 11, 0.5);
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+    color: var(--mtg-gold) !important;
+    font-weight: bold;
+}
+
+/* Cards */
+.card {
+    background: linear-gradient(135deg, var(--mtg-dark-gray), var(--mtg-medium-gray));
+    border: 1px solid var(--mtg-border);
+    box-shadow: var(--mtg-shadow);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: var(--mtg-white);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mtg-glow), var(--mtg-shadow);
+}
+
+.card-body {
+    color: var(--mtg-white);
+}
+
+.card-title {
+    color: var(--mtg-gold) !important;
+    font-weight: bold;
+}
+
+.card-text {
+    color: var(--mtg-white) !important;
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--mtg-medium-gray), var(--mtg-light-gray));
+    border-bottom: 1px solid var(--mtg-border);
+    color: var(--mtg-gold);
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Progress bars with MTG theme */
+.progress {
+    background-color: var(--mtg-dark-gray);
+    border: 1px solid var(--mtg-border);
+    border-radius: 6px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar {
+    background: linear-gradient(45deg, var(--mtg-gold), var(--mtg-silver));
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar.bg-success {
+    background: linear-gradient(45deg, var(--mtg-green), #66bb6a) !important;
+}
+
+.progress-bar.bg-primary {
+    background: linear-gradient(45deg, var(--mtg-blue), #42a5f5) !important;
+}
+
+.progress-bar.bg-warning {
+    background: linear-gradient(45deg, #ff9800, #ffb74d) !important;
+}
+
+.progress-bar.bg-danger {
+    background: linear-gradient(45deg, var(--mtg-red), #ef5350) !important;
+}
+
+/* Tables */
+.table {
+    color: var(--mtg-white);
+    background-color: transparent;
+}
+
+.table-dark {
+    --bs-table-bg: var(--mtg-dark-gray);
+    --bs-table-striped-bg: var(--mtg-medium-gray);
+    --bs-table-hover-bg: var(--mtg-light-gray);
+    border-color: var(--mtg-border);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--mtg-light-gray);
+    transition: all 0.2s ease;
+}
+
+.table th {
+    border-color: var(--mtg-border);
+    color: var(--mtg-gold);
+    font-weight: bold;
+}
+
+.table td {
+    border-color: var(--mtg-border);
+}
+
+/* Badges with MTG color identity */
+.badge {
+    font-size: 0.75em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.badge.bg-primary {
+    background: linear-gradient(45deg, var(--mtg-blue), #42a5f5) !important;
+}
+
+.badge.bg-success {
+    background: linear-gradient(45deg, var(--mtg-green), #66bb6a) !important;
+}
+
+.badge.bg-warning {
+    background: linear-gradient(45deg, #ff9800, #ffb74d) !important;
+}
+
+.badge.bg-danger {
+    background: linear-gradient(45deg, var(--mtg-red), #ef5350) !important;
+}
+
+.badge.bg-info {
+    background: linear-gradient(45deg, #17a2b8, #4dd0e1) !important;
+}
+
+.badge.bg-secondary {
+    background: linear-gradient(45deg, var(--mtg-artifact), #a1887f) !important;
+}
+
+.badge.bg-purple {
+    background: linear-gradient(45deg, var(--mtg-purple), #9c27b0) !important;
+}
+
+/* Buttons with MTG styling */
+.btn {
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--mtg-blue), #42a5f5);
+    border-color: var(--mtg-blue);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #1565c0, var(--mtg-blue));
+    box-shadow: var(--mtg-glow);
+}
+
+.btn-success {
+    background: linear-gradient(45deg, var(--mtg-green), #66bb6a);
+    border-color: var(--mtg-green);
+}
+
+.btn-success:hover {
+    background: linear-gradient(45deg, #2e7d32, var(--mtg-green));
+    box-shadow: 0 0 10px rgba(56, 142, 60, 0.3);
+}
+
+.btn-outline-primary {
+    color: var(--mtg-blue);
+    border-color: var(--mtg-blue);
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(45deg, var(--mtg-blue), #42a5f5);
+    color: white;
+}
+
+.btn-outline-secondary {
+    color: var(--mtg-silver);
+    border-color: var(--mtg-silver);
+}
+
+.btn-outline-secondary:hover {
+    background: linear-gradient(45deg, var(--mtg-silver), #e0e0e0);
+    color: var(--mtg-black);
+}
+
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Deck and player elements */
+.deck-preview {
+    padding: 0.5rem;
+    background: linear-gradient(135deg, var(--mtg-dark-gray), var(--mtg-medium-gray));
+    border-radius: 6px;
+    border: 1px solid var(--mtg-border);
+    box-shadow: var(--mtg-shadow);
+    color: var(--mtg-white);
+}
+
+.deck-preview * {
+    color: var(--mtg-white) !important;
+}
+
+.player-row {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border: 1px solid var(--mtg-border);
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--mtg-dark-gray), var(--mtg-medium-gray));
+    box-shadow: var(--mtg-shadow);
+    transition: all 0.3s ease;
+    color: var(--mtg-white);
+}
+
+.player-row * {
+    color: var(--mtg-white) !important;
+}
+
+.player-row:hover {
+    background: linear-gradient(135deg, var(--mtg-medium-gray), var(--mtg-light-gray));
+    transform: translateY(-2px);
+    box-shadow: var(--mtg-glow), var(--mtg-shadow);
+}
+
+/* Deck names and titles */
+.deck-name {
+    color: var(--mtg-gold) !important;
+    font-weight: bold;
+}
+
+/* Override any dark text that might appear */
+.text-secondary {
+    color: var(--mtg-silver) !important;
+}
+
+.text-primary {
+    color: var(--mtg-blue) !important;
+}
+
+.text-success {
+    color: var(--mtg-green) !important;
+}
+
+.text-warning {
+    color: #ffc107 !important;
+}
+
+.text-danger {
+    color: var(--mtg-red) !important;
+}
+
+.text-info {
+    color: #17a2b8 !important;
+}
+
+.deck-search {
+    font-family: monospace;
+    background-color: var(--mtg-dark-gray);
+    border-color: var(--mtg-border);
+    color: var(--mtg-white);
+}
+
+.deck-search:focus {
+    background-color: var(--mtg-medium-gray);
+    border-color: var(--mtg-gold);
+    color: var(--mtg-white);
+    box-shadow: 0 0 5px rgba(184, 134, 11, 0.3);
+}
+
+/* List groups */
+.list-group-item {
+    background-color: var(--mtg-dark-gray);
+    border-color: var(--mtg-border);
+    color: var(--mtg-white);
+}
+
+.list-group-item-action:hover {
+    background-color: var(--mtg-medium-gray);
+    color: var(--mtg-gold);
+}
+
+/* Modals */
+.modal-content {
+    background-color: var(--mtg-dark-gray);
+    border-color: var(--mtg-border);
+    color: var(--mtg-white);
+}
+
+.modal-header {
+    border-bottom-color: var(--mtg-border);
+    color: var(--mtg-white);
+}
+
+.modal-title {
+    color: var(--mtg-gold) !important;
+}
+
+.modal-footer {
+    border-top-color: var(--mtg-border);
+}
+
+.modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    color: var(--mtg-white);
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+    background-color: var(--mtg-dark-gray);
+    border-color: var(--mtg-border);
+}
+
+.dropdown-item {
+    color: var(--mtg-white);
+}
+
+.dropdown-item:hover {
+    background-color: var(--mtg-medium-gray);
+    color: var(--mtg-gold);
+}
+
+.dropdown-divider {
+    border-top-color: var(--mtg-border);
+}
+
+/* Small text elements */
+small, .small {
+    color: var(--mtg-silver) !important;
+}
+
+/* Strong/bold text */
+strong, b {
+    color: var(--mtg-white);
+}
+
+/* Breadcrumbs and navigation elements */
+.breadcrumb {
+    background-color: var(--mtg-dark-gray);
+}
+
+.breadcrumb-item {
+    color: var(--mtg-silver);
+}
+
+.breadcrumb-item.active {
+    color: var(--mtg-white);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: var(--mtg-silver);
+}
+
+/* Chart containers */
+.chart-container {
+    position: relative;
+    height: 400px;
+    margin: 1rem 0;
+    background: linear-gradient(135deg, var(--mtg-black), var(--mtg-dark-gray));
+    border-radius: 6px;
+    padding: 1rem;
+    border: 1px solid var(--mtg-border);
+}
+
+/* Statistics cards with MTG-inspired backgrounds */
+.stat-card {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--mtg-dark-gray), var(--mtg-medium-gray));
+    border-radius: 8px;
+    border: 1px solid var(--mtg-border);
+    box-shadow: var(--mtg-shadow);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--mtg-glow), var(--mtg-shadow);
+}
+
+.stat-card h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--mtg-gold);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.stat-card p {
+    color: var(--mtg-white);
+    margin-bottom: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Special stat card colors for different card types */
+.stat-card.bg-primary {
+    background: linear-gradient(135deg, var(--mtg-blue), #1565c0) !important;
+}
+
+.stat-card.bg-success {
+    background: linear-gradient(135deg, var(--mtg-green), #2e7d32) !important;
+}
+
+.stat-card.bg-info {
+    background: linear-gradient(135deg, #17a2b8, #0d7377) !important;
+}
+
+.stat-card.bg-warning {
+    background: linear-gradient(135deg, #ff9800, #f57c00) !important;
+}
+
+.stat-card.bg-danger {
+    background: linear-gradient(135deg, var(--mtg-red), #c62828) !important;
+}
+
+/* Monitoring dashboard */
+.simulation-status {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--mtg-dark-gray), var(--mtg-medium-gray));
+    border: 1px solid var(--mtg-border);
+    box-shadow: var(--mtg-shadow);
+    transition: all 0.3s ease;
+}
+
+.simulation-status.running {
+    background: linear-gradient(135deg, rgba(25, 118, 210, 0.2), rgba(25, 118, 210, 0.1));
+    border-left: 4px solid var(--mtg-blue);
+    box-shadow: 0 0 10px rgba(25, 118, 210, 0.2);
+}
+
+.simulation-status.completed {
+    background: linear-gradient(135deg, rgba(56, 142, 60, 0.2), rgba(56, 142, 60, 0.1));
+    border-left: 4px solid var(--mtg-green);
+    box-shadow: 0 0 10px rgba(56, 142, 60, 0.2);
+}
+
+.simulation-status.failed {
+    background: linear-gradient(135deg, rgba(211, 47, 47, 0.2), rgba(211, 47, 47, 0.1));
+    border-left: 4px solid var(--mtg-red);
+    box-shadow: 0 0 10px rgba(211, 47, 47, 0.2);
+}
+
+.simulation-status.pending {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.2), rgba(255, 152, 0, 0.1));
+    border-left: 4px solid #ff9800;
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.2);
+}
+
+.simulation-status:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mtg-glow), var(--mtg-shadow);
+}
+
+/* Deck browser */
+.deck-card {
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(135deg, var(--mtg-dark-gray), var(--mtg-medium-gray));
+    border: 1px solid var(--mtg-border);
+    box-shadow: var(--mtg-shadow);
+}
+
+.deck-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--mtg-glow), 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.color-identity {
+    display: inline-flex;
+    gap: 0.25rem;
+}
+
+.color-symbol {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid var(--mtg-border);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.color-symbol.W { 
+    background: radial-gradient(circle, #fffbd5, #f5f5dc);
+    border-color: #e6e6e6;
+}
+.color-symbol.U { 
+    background: radial-gradient(circle, #0e68ab, #1976d2);
+    border-color: #0d47a1;
+}
+.color-symbol.B { 
+    background: radial-gradient(circle, #150b00, #2c2c2c);
+    border-color: #000;
+}
+.color-symbol.R { 
+    background: radial-gradient(circle, #d3202a, #f44336);
+    border-color: #b71c1c;
+}
+.color-symbol.G { 
+    background: radial-gradient(circle, #00733e, #4caf50);
+    border-color: #1b5e20;
+}
+.color-symbol.C { 
+    background: radial-gradient(circle, #ccc2c0, #9e9e9e);
+    border-color: #616161;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    filter: grayscale(50%);
+}
+
+.spinner-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    color: var(--mtg-gold);
+}
+
+/* Form controls */
+.form-control, .form-select {
+    background-color: var(--mtg-dark-gray) !important;
+    border-color: var(--mtg-border) !important;
+    color: var(--mtg-white) !important;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--mtg-medium-gray) !important;
+    border-color: var(--mtg-gold) !important;
+    color: var(--mtg-white) !important;
+    box-shadow: 0 0 5px rgba(184, 134, 11, 0.3) !important;
+}
+
+.form-control:disabled, .form-select:disabled {
+    background-color: var(--mtg-medium-gray) !important;
+    border-color: var(--mtg-border) !important;
+    color: var(--mtg-silver) !important;
+}
+
+/* Ensure placeholder text is visible */
+.form-control::placeholder {
+    color: var(--mtg-silver) !important;
+    opacity: 0.7;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: var(--mtg-silver) !important;
+    opacity: 0.7;
+}
+
+.form-control::-moz-placeholder {
+    color: var(--mtg-silver) !important;
+    opacity: 0.7;
+}
+
+.form-control:-ms-input-placeholder {
+    color: var(--mtg-silver) !important;
+    opacity: 0.7;
+}
+
+/* Specific override for search inputs */
+input[type="text"], input[type="search"], input[type="email"], input[type="password"] {
+    background-color: var(--mtg-dark-gray) !important;
+    border-color: var(--mtg-border) !important;
+    color: var(--mtg-white) !important;
+}
+
+input[type="text"]:focus, input[type="search"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    background-color: var(--mtg-medium-gray) !important;
+    border-color: var(--mtg-gold) !important;
+    color: var(--mtg-white) !important;
+    box-shadow: 0 0 5px rgba(184, 134, 11, 0.3) !important;
+}
+
+.form-label {
+    color: var(--mtg-white) !important;
+    font-weight: bold;
+}
+
+/* Tabs */
+.nav-tabs {
+    border-bottom-color: var(--mtg-border);
+}
+
+.nav-tabs .nav-link {
+    color: var(--mtg-white);
+    background-color: var(--mtg-dark-gray);
+    border-color: var(--mtg-border);
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--mtg-gold);
+    background-color: var(--mtg-medium-gray);
+    border-color: var(--mtg-border);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--mtg-gold);
+    background-color: var(--mtg-medium-gray);
+    border-color: var(--mtg-border) var(--mtg-border) var(--mtg-medium-gray);
+    font-weight: bold;
+}
+
+.tab-content {
+    background-color: transparent;
+}
+
+/* Alerts with MTG theme */
+.alert {
+    border-radius: 8px;
+    border: 1px solid var(--mtg-border);
+    background: linear-gradient(135deg, var(--mtg-dark-gray), var(--mtg-medium-gray));
+    color: var(--mtg-white);
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(23, 162, 184, 0.2), rgba(23, 162, 184, 0.1));
+    border-color: #17a2b8;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(56, 142, 60, 0.2), rgba(56, 142, 60, 0.1));
+    border-color: var(--mtg-green);
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.2), rgba(255, 152, 0, 0.1));
+    border-color: #ff9800;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, rgba(211, 47, 47, 0.2), rgba(211, 47, 47, 0.1));
+    border-color: var(--mtg-red);
+}
+
+.alert-dismissible .btn-close {
+    padding: 0.75rem 1rem;
+    filter: brightness(1.5);
+}
+
+/* MTG-specific elements */
+.mtg-title {
+    color: var(--mtg-gold);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+}
+
+.mtg-subtitle {
+    color: var(--mtg-silver);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.mtg-glow-text {
+    color: var(--mtg-gold);
+    text-shadow: 0 0 10px rgba(184, 134, 11, 0.6);
+}
+
+.mtg-card-frame {
+    background: linear-gradient(135deg, var(--mtg-dark-gray), var(--mtg-medium-gray));
+    border: 2px solid var(--mtg-border);
+    border-radius: 12px;
+    box-shadow: var(--mtg-shadow), inset 0 1px 3px rgba(184, 134, 11, 0.1);
+    transition: all 0.3s ease;
+}
+
+.mtg-card-frame:hover {
+    box-shadow: var(--mtg-glow), var(--mtg-shadow);
+    transform: translateY(-2px);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--mtg-dark-gray);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--mtg-border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mtg-gold);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .player-row {
+        margin-bottom: 1rem;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+    
+    .stat-card h3 {
+        font-size: 2rem;
+    }
+    
+    .nav-tabs .nav-link {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+    }
+}
+
+/* Button group improvements */
+.btn-group .btn {
+    border-radius: 0;
+}
+
+.btn-group .btn:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.btn-group .btn:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+/* Additional text contrast fixes */
+/* Ensure all child elements inherit proper colors */
+.card *, .modal-content *, .dropdown-menu *, .list-group-item * {
+    color: inherit;
+}
+
+/* Fix for Bootstrap's default dark text */
+.text-body {
+    color: var(--mtg-white) !important;
+}
+
+.text-black-50 {
+    color: var(--mtg-silver) !important;
+}
+
+/* Override any remaining default text colors that might be invisible in dark theme */
+.text-body-secondary {
+    color: var(--mtg-silver) !important;
+}
+
+/* Ensure all text elements are visible by default */
+* {
+    color: var(--mtg-white);
+}
+
+/* Override Bootstrap's default text colors that might be problematic */
+.text-body-emphasis {
+    color: var(--mtg-white) !important;
+}
+
+.text-body-tertiary {
+    color: var(--mtg-silver) !important;
+}
+
+/* Make sure paragraph text is visible */
+p {
+    color: var(--mtg-white) !important;
+}
+
+/* Override any remaining dark text classes */
+.text-dark {
+    color: var(--mtg-white) !important;
+}
+
+.text-black {
+    color: var(--mtg-white) !important;
+}
+
+/* Ensure all Bootstrap text utilities are properly overridden */
+.text-reset {
+    color: var(--mtg-white) !important;
+}
+
+/* Specific fixes for deck-related elements */
+.deck-title, .deck-name, [class*="deck"] h1, [class*="deck"] h2, [class*="deck"] h3, 
+[class*="deck"] h4, [class*="deck"] h5, [class*="deck"] h6 {
+    color: var(--mtg-gold) !important;
+}
+
+/* Ensure table text is visible */
+.table-dark {
+    color: var(--mtg-white);
+}
+
+.table-dark th, .table-dark td {
+    color: var(--mtg-white);
+}
+
+.table-dark thead th {
+    color: var(--mtg-gold);
+}
+
+/* Form labels and help text */
+.form-text {
+    color: var(--mtg-silver) !important;
+}
+
+.invalid-feedback {
+    color: var(--mtg-red) !important;
+}
+
+.valid-feedback {
+    color: var(--mtg-green) !important;
+}
+
+/* Close button for modals/alerts */
+.btn-close {
+    filter: invert(1);
+}
+
+/* Sortable table styles */
+.sortable-table th[data-sortable] {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.sortable-table th[data-sortable]:hover {
+    background-color: var(--mtg-medium-gray) !important;
+}
+
+.sortable-table th[data-sortable] .sort-indicator {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.8em;
+    color: var(--mtg-gold);
+    font-weight: bold;
+    min-width: 10px;
+}
+
+.sortable-table th[data-sortable]:not([data-sort-direction]) .sort-indicator:before {
+    content: '⇅';
+    color: var(--mtg-silver);
+    opacity: 0.5;
+}
+
+.sortable-table th[data-sortable]:hover:not([data-sort-direction]) .sort-indicator:before {
+    opacity: 1;
+}
+
+/* Animation for sorting */
+.sortable-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+/* Print styles for dark theme */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .card {
+        background: white !important;
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+    
+    .btn, .navbar { 
+        display: none !important; 
+    }
+    
+    .sort-indicator {
+        display: none !important;
+    }
+}

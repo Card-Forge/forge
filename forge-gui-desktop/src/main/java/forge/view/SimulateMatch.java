@@ -8,6 +8,8 @@ import java.util.concurrent.TimeoutException;
 import org.apache.commons.lang3.time.StopWatch;
 
 import forge.LobbyPlayer;
+import forge.ai.LLMClient;
+import forge.ai.LobbyPlayerLLM;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.io.DeckSerializer;
@@ -35,7 +37,13 @@ import forge.util.storage.IStorage;
 
 public class SimulateMatch {
     public static void simulate(String[] args) {
-        FModel.initialize(null, null);
+        System.out.println("=========================================================");
+        System.out.println("FORGE SIMULATION MODE STARTING");
+        System.out.println("=========================================================");
+        
+        // Try to catch initialization errors early
+        try {
+            FModel.initialize(null, null);
 
         System.out.println("Simulation mode");
         if (args.length < 4) {
@@ -114,7 +122,32 @@ public class SimulateMatch {
                 if (i > 1) {
                     sb.append(" vs ");
                 }
-                String name = TextUtil.concatNoSpace("Ai(", String.valueOf(i), ")-", d.getName());
+                // Check if controller type is specified
+                String controllerType = "ai";
+                if (params.containsKey("c")) {
+                    List<String> controllers = params.get("c");
+                    if (controllers.size() == 1 && controllers.get(0).contains(",")) {
+                        // Parse comma-separated list
+                        String[] ctrlTypes = controllers.get(0).split(",");
+                        if (i - 1 < ctrlTypes.length) {
+                            controllerType = ctrlTypes[i - 1].toLowerCase();
+                        }
+                    } else if (i - 1 < controllers.size()) {
+                        controllerType = controllers.get(i - 1).toLowerCase();
+                    } else if (!controllers.isEmpty()) {
+                        controllerType = controllers.get(0).toLowerCase();
+                    }
+                }
+                
+                String name;
+                String gameId = System.getProperty("game.id", "");
+                String uniqueSuffix = gameId.isEmpty() ? "" : "-" + gameId;
+                
+                if ("llm".equals(controllerType)) {
+                    name = TextUtil.concatNoSpace("LLM(", String.valueOf(i), ")-", d.getName(), uniqueSuffix);
+                } else {
+                    name = TextUtil.concatNoSpace("Ai(", String.valueOf(i), ")-", d.getName(), uniqueSuffix);
+                }
                 sb.append(name);
 
                 RegisteredPlayer rp;
@@ -124,7 +157,25 @@ public class SimulateMatch {
                 } else {
                     rp = new RegisteredPlayer(d);
                 }
-                rp.setPlayer(GamePlayerUtil.createAiPlayer(name, i - 1));
+                
+                // Create appropriate player controller
+                LobbyPlayer lobbyPlayer;
+                if ("llm".equals(controllerType)) {
+                    System.out.println("===============================================");
+                    System.out.println("CREATING LLM CONTROLLER FOR PLAYER " + i);
+                    System.out.println("===============================================");
+                    String llmEndpoint = System.getProperty("llm.endpoint", "http://localhost:7861");
+                    System.out.println("Using LLM endpoint: " + llmEndpoint);
+                    LLMClient llmClient = new LLMClient(llmEndpoint);
+                    lobbyPlayer = new LobbyPlayerLLM(name, llmClient);
+                } else {
+                    System.out.println("===============================================");
+                    System.out.println("CREATING AI CONTROLLER FOR PLAYER " + i);
+                    System.out.println("===============================================");
+                    lobbyPlayer = GamePlayerUtil.createAiPlayer(name, i - 1);
+                }
+                
+                rp.setPlayer(lobbyPlayer);
                 pp.add(rp);
                 i++;
             }
@@ -150,37 +201,67 @@ public class SimulateMatch {
         }
 
         System.out.flush();
+        } catch (Exception e) {
+            System.err.println("=========================================================");
+            System.err.println("CRITICAL INITIALIZATION ERROR");
+            System.err.println("=========================================================");
+            e.printStackTrace();
+            System.err.println("=========================================================");
+            System.exit(1);
+        }
     }
 
     private static void argumentHelp() {
-        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -q");
+        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -c [C] -q");
         System.out.println("\tsim - stands for simulation mode");
         System.out.println("\tdeck1 (or deck2,...,X) - constructed deck name or filename (has to be quoted when contains multiple words)");
         System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
+        System.out.println("\tBigQuery deck IDs (containing hyphens) will be automatically downloaded if not found locally");
         System.out.println("\tD - absolute directory to load decks from");
         System.out.println("\tN - number of games, defaults to 1 (Ignores match setting)");
         System.out.println("\tM - Play full match of X games, typically 1,3,5 games. (Optional, overrides N)");
         System.out.println("\tT - Type of tournament to run with all provided decks (Bracket, RoundRobin, Swiss)");
         System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
+        System.out.println("\tC - controller type for players (llm, ai, or comma-separated list like 'llm,ai')");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
+        System.out.println();
+        System.out.println("BigQuery Deck Download:");
+        System.out.println("\tDecks with hyphens in their names are automatically detected as BigQuery deck IDs");
+        System.out.println("\tExample: 'commander-deck-12345' will be downloaded from BigQuery before simulation");
+        System.out.println("\tRequires get_decks.py script and BigQuery credentials to be configured");
     }
 
     public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog) {
+        String gameId = System.getProperty("game.id", "unknown");
+        System.out.println("DEBUG: Starting simulateSingleMatch for game " + gameId);
+        
         final StopWatch sw = new StopWatch();
         sw.start();
 
         final Game g1 = mc.createGame();
+        System.out.println("DEBUG: Game created for " + gameId);
+        
         // will run match in the same thread
         try {
+            System.out.println("DEBUG: Starting game execution for " + gameId);
             TimeLimitedCodeBlock.runWithTimeout(() -> {
                 mc.startGame(g1);
                 sw.stop();
+                System.out.println("DEBUG: Game execution completed for " + gameId);
             }, 120, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
+            System.out.println("DEBUG: Game " + gameId + " timed out, stopping as draw");
             System.out.println("Stopping slow match as draw");
         } catch (Exception | StackOverflowError e) {
+            System.err.println("============================================================");
+            System.err.println("CRITICAL ERROR DURING SIMULATION (Game " + gameId + ")");
+            System.err.println("============================================================");
             e.printStackTrace();
+            System.err.println("============================================================");
+            System.err.println("Terminating simulation due to critical error");
+            System.err.println("============================================================");
+            System.exit(1);  // Terminate process on critical errors
         } finally {
             if (sw.isStarted()) {
                 sw.stop();
@@ -188,6 +269,7 @@ public class SimulateMatch {
             if (!g1.isGameOver()) {
                 g1.setGameOver(GameEndReason.Draw);
             }
+            System.out.println("DEBUG: simulateSingleMatch cleanup completed for " + gameId);
         }
 
         List<GameLogEntry> log;
@@ -226,7 +308,41 @@ public class SimulateMatch {
                 }
 
                 deckGroup.addAiDeck(d);
-                players.add(new TournamentPlayer(GamePlayerUtil.createAiPlayer(d.getName(), 0), numPlayers));
+                
+                // Check if controller type is specified
+                String controllerType = "ai";
+                if (params.containsKey("c")) {
+                    List<String> controllers = params.get("c");
+                    if (controllers.size() == 1 && controllers.get(0).contains(",")) {
+                        // Parse comma-separated list
+                        String[] ctrlTypes = controllers.get(0).split(",");
+                        if (numPlayers < ctrlTypes.length) {
+                            controllerType = ctrlTypes[numPlayers].toLowerCase();
+                        }
+                    } else if (numPlayers < controllers.size()) {
+                        controllerType = controllers.get(numPlayers).toLowerCase();
+                    } else if (!controllers.isEmpty()) {
+                        controllerType = controllers.get(0).toLowerCase();
+                    }
+                }
+                
+                LobbyPlayer lobbyPlayer;
+                String gameId = System.getProperty("game.id", "");
+                String uniqueSuffix = gameId.isEmpty() ? "" : "-" + gameId;
+                String playerName = d.getName() + uniqueSuffix;
+                
+                if ("llm".equals(controllerType)) {
+                    String llmEndpoint = System.getProperty("llm.endpoint", "http://localhost:7861");
+                    if (numPlayers == 0) { // Only print once
+                        System.out.println("Using LLM endpoint: " + llmEndpoint);
+                    }
+                    LLMClient llmClient = new LLMClient(llmEndpoint);
+                    lobbyPlayer = new LobbyPlayerLLM(playerName, llmClient);
+                } else {
+                    lobbyPlayer = GamePlayerUtil.createAiPlayer(playerName, 0);
+                }
+                
+                players.add(new TournamentPlayer(lobbyPlayer, numPlayers));
                 numPlayers++;
             }
         }
@@ -245,7 +361,38 @@ public class SimulateMatch {
                         return;
                     }
                     deckGroup.addAiDeck(d);
-                    players.add(new TournamentPlayer(GamePlayerUtil.createAiPlayer(d.getName(), 0), numPlayers));
+                    
+                    // Check if controller type is specified
+                    String controllerType = "ai";
+                    if (params.containsKey("c")) {
+                        List<String> controllers = params.get("c");
+                        if (controllers.size() == 1 && controllers.get(0).contains(",")) {
+                            // Parse comma-separated list
+                            String[] ctrlTypes = controllers.get(0).split(",");
+                            if (numPlayers < ctrlTypes.length) {
+                                controllerType = ctrlTypes[numPlayers].toLowerCase();
+                            }
+                        } else if (numPlayers < controllers.size()) {
+                            controllerType = controllers.get(numPlayers).toLowerCase();
+                        } else if (!controllers.isEmpty()) {
+                            controllerType = controllers.get(0).toLowerCase();
+                        }
+                    }
+                    
+                    LobbyPlayer lobbyPlayer;
+                    String gameId = System.getProperty("game.id", "");
+                    String uniqueSuffix = gameId.isEmpty() ? "" : "-" + gameId;
+                    String playerName = d.getName() + uniqueSuffix;
+                    
+                    if ("llm".equals(controllerType)) {
+                        String llmEndpoint = System.getProperty("llm.endpoint", "http://localhost:7861");
+                        LLMClient llmClient = new LLMClient(llmEndpoint);
+                        lobbyPlayer = new LobbyPlayerLLM(playerName, llmClient);
+                    } else {
+                        lobbyPlayer = GamePlayerUtil.createAiPlayer(playerName, 0);
+                    }
+                    
+                    players.add(new TournamentPlayer(lobbyPlayer, numPlayers));
                     numPlayers++;
                 }
             }
@@ -342,6 +489,39 @@ public class SimulateMatch {
     }
 
     private static Deck deckFromCommandLineParameter(String deckname, GameType type) {
+        // Check if this looks like a BigQuery deck ID and try to download it
+        if (DeckDownloader.isBigQueryDeckId(deckname)) {
+            String gameTypeName = type.equals(GameType.Commander) ? "Commander" : "Constructed";
+            
+            // Check if deck already exists locally
+            if (!DeckDownloader.deckExistsLocally(deckname, gameTypeName)) {
+                System.out.println("Deck not found locally, attempting to download from BigQuery: " + deckname);
+                
+                if (DeckDownloader.downloadDeck(deckname, gameTypeName)) {
+                    System.out.println("Successfully downloaded deck: " + deckname);
+                } else {
+                    System.err.println("Failed to download deck from BigQuery: " + deckname);
+                    // Fall through to normal loading in case it exists locally with a different name
+                }
+            } else {
+                System.out.println("Deck already exists locally: " + deckname);
+            }
+            
+            // After downloading, try to find the downloaded deck file
+            String downloadedDeckName = DeckDownloader.findDownloadedDeckFile(deckname, gameTypeName);
+            if (downloadedDeckName != null) {
+                String baseDir = type.equals(GameType.Commander) ?
+                        ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR;
+                File deckFile = new File(baseDir, downloadedDeckName + ".dck");
+                if (deckFile.exists()) {
+                    System.out.println("Loading downloaded deck from: " + deckFile.getAbsolutePath());
+                    return DeckSerializer.fromFile(deckFile);
+                }
+            } else {
+                System.err.println("Could not find downloaded deck file for BigQuery ID: " + deckname);
+            }
+        }
+        
         int dotpos = deckname.lastIndexOf('.');
         if (dotpos > 0 && dotpos == deckname.length() - 4) {
             String baseDir = type.equals(GameType.Commander) ?

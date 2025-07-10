@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}Deck Import Help - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1><i class="fas fa-question-circle"></i> Deck Import Help</h1>
+        <p class="text-muted">Learn how to import deck lists from supported websites</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-globe"></i> Supported Websites</h5>
+            </div>
+            <div class="card-body">
+                {% for site, example in example_urls.items() %}
+                <div class="mb-4">
+                    <h6><i class="fas fa-check text-success"></i> {{ site|title }}</h6>
+                    <p>URL Format: <code>{{ example }}</code></p>
+                    
+                    {% if site == 'moxfield' %}
+                    <p class="small text-muted">
+                        Moxfield provides a JSON API which gives us the most complete deck information including commanders and color identity.
+                    </p>
+                    {% elif site == 'deckstats' %}
+                    <p class="small text-muted">
+                        Deckstats requires HTML parsing. Make sure your deck is publicly visible.
+                    </p>
+                    {% elif site == 'archidekt' %}
+                    <p class="small text-muted">
+                        Archidekt provides a JSON API with comprehensive deck data including categories and card details.
+                    </p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-cogs"></i> How It Works</h5>
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li><strong>URL Validation:</strong> We check if the URL is from a supported website</li>
+                    <li><strong>Deck Scraping:</strong> We fetch the deck list using the site's API or HTML parsing</li>
+                    <li><strong>Format Conversion:</strong> The deck is converted to Forge .dck format</li>
+                    <li><strong>Database Storage:</strong> The deck is stored in BigQuery for use in simulations</li>
+                </ol>
+                
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> Imported decks are automatically available for use in simulations.
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-exclamation-triangle"></i> Troubleshooting</h5>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="troubleshootingAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseOne" aria-expanded="false">
+                                "Unsupported URL" Error
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>Make sure you're using a URL from a supported website</li>
+                                    <li>Check that the URL format matches the examples above</li>
+                                    <li>Ensure you're using the direct deck URL, not a search or profile page</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseTwo" aria-expanded="false">
+                                "Failed to scrape deck" Error
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>Verify the deck exists and is publicly visible</li>
+                                    <li>Try refreshing the page and importing again</li>
+                                    <li>Some decks may have privacy settings that prevent access</li>
+                                    <li>Check if the deck has been deleted or moved</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseThree" aria-expanded="false">
+                                "Failed to upload to BigQuery" Error
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>This is usually a temporary server issue</li>
+                                    <li>Try importing the deck again after a few minutes</li>
+                                    <li>The deck may already exist in the database</li>
+                                    <li>Contact support if the problem persists</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-lightbulb"></i> Tips</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        Use the preview feature to verify deck data before importing
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        Imported decks are immediately available in simulations
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        The system automatically detects commanders and color identity
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        Private decks cannot be imported - make sure they're public
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-code"></i> Forge Format</h5>
+            </div>
+            <div class="card-body">
+                <p class="small">Imported decks are automatically converted to Forge .dck format:</p>
+                <pre class="bg-light p-2 small">[metadata]
+Name=Deck Name
+
+[Commander]
+1 Commander Name
+
+[Main]
+1 Card Name
+2 Another Card
+...</pre>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-body text-center">
+                <a href="{{ url_for('deck_import.import_page') }}" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Back to Import
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

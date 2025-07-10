@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+
+{% block title %}Import Deck - MTG Simulation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1><i class="fas fa-download"></i> Import Deck</h1>
+        <p class="text-muted">Import deck lists from Moxfield, Deckstats, and Archidekt</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-link"></i> Import from URL</h5>
+            </div>
+            <div class="card-body">
+                <form id="import-form">
+                    <div class="mb-3">
+                        <label for="deck-url" class="form-label">Deck URL</label>
+                        <input type="url" class="form-control" id="deck-url" 
+                               placeholder="https://www.moxfield.com/decks/your-deck-id" required>
+                        <div class="form-text">
+                            Paste a deck URL from Moxfield, Deckstats, or Archidekt
+                        </div>
+                        <div id="url-validation" class="mt-2"></div>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-outline-primary" id="preview-btn" disabled>
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="import-btn" disabled>
+                            <i class="fas fa-download"></i> Import Deck
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Import Progress -->
+                <div id="import-progress" class="mt-3" style="display: none;">
+                    <div class="d-flex align-items-center">
+                        <div class="spinner-border spinner-border-sm me-2" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <span id="progress-text">Processing...</span>
+                    </div>
+                </div>
+                
+                <!-- Result Messages -->
+                <div id="result-messages" class="mt-3"></div>
+            </div>
+        </div>
+        
+        <!-- Preview Card -->
+        <div class="card mt-3" id="preview-card" style="display: none;">
+            <div class="card-header">
+                <h5><i class="fas fa-eye"></i> Deck Preview</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Deck Information</h6>
+                        <table class="table table-dark table-sm">
+                            <tr>
+                                <td><strong>Name:</strong></td>
+                                <td id="preview-name">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Commander:</strong></td>
+                                <td id="preview-commander">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Source:</strong></td>
+                                <td id="preview-source">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cards:</strong></td>
+                                <td id="preview-cards">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Colors:</strong></td>
+                                <td id="preview-colors">-</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Forge Format Preview</h6>
+                        <pre id="preview-forge" class="bg-light p-2 small" style="max-height: 300px; overflow-y: auto;"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Supported Sites</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success"></i> <strong>Moxfield</strong><br>
+                        <small class="text-muted">moxfield.com/decks/[deck-id]</small>
+                    </li>
+                    <li class="mt-2"><i class="fas fa-check text-success"></i> <strong>Deckstats</strong><br>
+                        <small class="text-muted">deckstats.net/decks/[user]/[deck-id]</small>
+                    </li>
+                    <li class="mt-2"><i class="fas fa-check text-success"></i> <strong>Archidekt</strong><br>
+                        <small class="text-muted">archidekt.com/decks/[deck-id]</small>
+                    </li>
+                </ul>
+                
+                <hr>
+                
+                <p class="small text-muted">
+                    <i class="fas fa-lightbulb"></i> 
+                    <strong>Tip:</strong> Make sure the deck is publicly visible on the source website.
+                </p>
+                
+                <a href="{{ url_for('deck_import.import_help') }}" class="btn btn-outline-info btn-sm">
+                    <i class="fas fa-question-circle"></i> Need Help?
+                </a>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5><i class="fas fa-history"></i> Recent Imports</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">Recent deck imports will appear here.</p>
+                <!-- TODO: Add recent imports list -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentUrl = '';
+let urlCheckTimeout;
+
+// URL validation
+document.getElementById('deck-url').addEventListener('input', function() {
+    const url = this.value.trim();
+    const validationDiv = document.getElementById('url-validation');
+    const previewBtn = document.getElementById('preview-btn');
+    const importBtn = document.getElementById('import-btn');
+    
+    // Clear previous timeout
+    clearTimeout(urlCheckTimeout);
+    
+    if (!url) {
+        validationDiv.innerHTML = '';
+        previewBtn.disabled = true;
+        importBtn.disabled = true;
+        return;
+    }
+    
+    // Show checking indicator
+    validationDiv.innerHTML = '<small class="text-muted"><i class="fas fa-spinner fa-spin"></i> Checking URL...</small>';
+    
+    urlCheckTimeout = setTimeout(() => {
+        checkUrl(url);
+    }, 500);
+});
+
+function checkUrl(url) {
+    fetch('/deck_import/api/check-url', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: url })
+    })
+    .then(response => response.json())
+    .then(data => {
+        const validationDiv = document.getElementById('url-validation');
+        const previewBtn = document.getElementById('preview-btn');
+        const importBtn = document.getElementById('import-btn');
+        
+        if (data.supported) {
+            validationDiv.innerHTML = `
+                <small class="text-success">
+                    <i class="fas fa-check"></i> 
+                    Supported ${data.site} deck (ID: ${data.deck_id})
+                </small>
+            `;
+            previewBtn.disabled = false;
+            importBtn.disabled = false;
+            currentUrl = url;
+        } else {
+            validationDiv.innerHTML = `
+                <small class="text-danger">
+                    <i class="fas fa-times"></i> 
+                    Unsupported URL. Supported sites: ${data.supported_sites ? data.supported_sites.join(', ') : 'moxfield, deckstats, archidekt'}
+                </small>
+            `;
+            previewBtn.disabled = true;
+            importBtn.disabled = true;
+            currentUrl = '';
+        }
+    })
+    .catch(error => {
+        document.getElementById('url-validation').innerHTML = `
+            <small class="text-warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                Error checking URL
+            </small>
+        `;
+        console.error('Error:', error);
+    });
+}
+
+// Preview functionality
+document.getElementById('preview-btn').addEventListener('click', function() {
+    if (!currentUrl) return;
+    
+    showProgress('Loading preview...');
+    
+    fetch('/deck_import/api/preview', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: currentUrl })
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideProgress();
+        
+        if (data.success) {
+            showPreview(data);
+        } else {
+            showError(data.error || 'Failed to load preview');
+        }
+    })
+    .catch(error => {
+        hideProgress();
+        showError('Network error occurred');
+        console.error('Error:', error);
+    });
+});
+
+// Import functionality
+document.getElementById('import-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    if (!currentUrl) return;
+    
+    showProgress('Importing deck...');
+    
+    fetch('/deck_import/api/import', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: currentUrl })
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideProgress();
+        
+        if (data.success) {
+            showSuccess(`Successfully imported "${data.deck_name}" (ID: ${data.deck_id})`);
+            // Clear form
+            document.getElementById('deck-url').value = '';
+            document.getElementById('url-validation').innerHTML = '';
+            document.getElementById('preview-btn').disabled = true;
+            document.getElementById('import-btn').disabled = true;
+            hidePreview();
+        } else {
+            showError(data.error || 'Failed to import deck');
+        }
+    })
+    .catch(error => {
+        hideProgress();
+        showError('Network error occurred');
+        console.error('Error:', error);
+    });
+});
+
+function showProgress(text) {
+    document.getElementById('progress-text').textContent = text;
+    document.getElementById('import-progress').style.display = 'block';
+    document.getElementById('result-messages').innerHTML = '';
+}
+
+function hideProgress() {
+    document.getElementById('import-progress').style.display = 'none';
+}
+
+function showSuccess(message) {
+    document.getElementById('result-messages').innerHTML = `
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+}
+
+function showError(message) {
+    document.getElementById('result-messages').innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+}
+
+function showPreview(data) {
+    document.getElementById('preview-name').textContent = data.deck_name || 'Unknown';
+    
+    let commander = data.commander_1 || 'Unknown';
+    if (data.commander_2) {
+        commander += ` // ${data.commander_2}`;
+    }
+    document.getElementById('preview-commander').textContent = commander;
+    document.getElementById('preview-source').textContent = data.source || 'Unknown';
+    document.getElementById('preview-cards').textContent = data.card_count || '0';
+    
+    // Show color identity
+    const colors = [];
+    if (data.color_identity) {
+        ['W', 'U', 'B', 'R', 'G'].forEach(color => {
+            if (data.color_identity[color]) {
+                colors.push(color);
+            }
+        });
+    }
+    document.getElementById('preview-colors').textContent = colors.length > 0 ? colors.join('') : 'Colorless';
+    
+    document.getElementById('preview-forge').textContent = data.forge_preview || 'No preview available';
+    
+    document.getElementById('preview-card').style.display = 'block';
+}
+
+function hidePreview() {
+    document.getElementById('preview-card').style.display = 'none';
+}
+</script>
+{% endblock %}
