@@ -1,0 +1,8 @@
+Name:Planetary Annihilation
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ ChooseCard | Defined$ Player | Choices$ Land | ControlledByPlayer$ Chooser | Amount$ 6 | ChoiceTitle$ Choose six lands to keep | Mandatory$ True | Reveal$ True | SubAbility$ DBSac | StackDescription$ SpellDescription | SpellDescription$ Each player chooses six lands they control, then sacrifices the rest. CARDNAME deals 6 damage to each creature.
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Land.nonChosenCard | SubAbility$ DBDamageAll
+SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 6 | ValidDescription$ each creature.
+DeckHas:Ability$Sacrifice
+Oracle:Each player chooses six lands they control, then sacrifices the rest. Planetary Annihilation deals 6 damage to each creature.

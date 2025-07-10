@@ -6,30 +6,174 @@ Type=Expansion
 ScryfallCode=EOE
 
 [cards]
+1 R Anticausal Vestige @Chase Stone
 2 M Tezzeret, Cruel Captain @Chris Rahn
+4 R Astelli Reclaimer @Carly Milligan
+6 C Banishing Light @Rovina Cai
+9 M Cosmogrand Zenith @Anna Steinbauer
+14 U Emergency Eject @Leon Tukker
+15 M Exalted Sunborn @Scott M. Fischer
+19 R Haliya, Guided by Light @Kieran Yanner
 35 R The Seriema @Sergey Glushakov
+37 U Starfield Shepherd @Marta Nael
+38 C Starfighter Pilot @Nathaniel Himawan
+51 R Consult the Star Charts @Antonio José Manzanedo
+56 R Emissary Escort @Igor Grechanyi
+58 C Illvoi Galeblade @Nathaniel Himawan
+66 C Mechanozoa @Daarken
+70 U Mouth of the Storm @Domenico Cava
+72 M Quantum Riddler @Izzy
+77 C Starbreach Whale @Sam Burley
+78 R Starfield Vocalist @Nathaniel Himawan
+83 U Unravel @Josh Hass
+88 R Archenemy's Charm @Brigitte Roka & Clifton Stommel
+94 C Decode Transmissions @Josh Hass
+97 R Elegy Acolyte @Diana Franco
+98 C Embrace Oblivion @Andreas Zafiratos
+105 C Hullcarver @Michal Ivan
+108 C Insatiable Skittermaw @Diego Gisbert
 115 M Sothera, the Supervoid @Dominik Mayer
+116 R Sunset Saboteur @Mirko Failoni
+120 C Temporal Intervention @Chris Rallis
+121 U Timeline Culler @Alfonso Santano
+122 U Tragic Trajectory @Ovidio Cartagena
+125 U Voidforged Titan @Diego Gisbert
+131 U Debris Field Crusher @David Álvarez
+138 C Kav Landseeker @Karl Kopinski
+148 R Nova Hellkite @Raymond Swanland
+154 C Red Tiger Mechan @Simon Dominic
+159 R Rust Harvester @Jake Murray
+161 U Systems Override @Hardy Fowler
+164 U Terrapact Intimidator @Slawomir Maniak
+167 R Warmaker Gunship @Julian Kok Joon Wen
+168 R Weapons Manufacturing @Marco Gorlei
+169 U Weftstalker Ardent @Valera Lutfullina
+175 U Broodguard Elite @Paolo Parente
+181 U Eusocial Engineering @Francisco Badilla
+183 R Frenzied Baloth @Diana Franco
+185 C Galactic Wayfarer @Quintin Gleim
 189 U Harmonious Grovestrider @Ron Spencer
+201 M Ouroboroid @Samuel Perin
+205 U Seedship Impact @Constantin Marin
+206 C Shattered Wings @Sergey Glushakov
+209 U Tapestry Warden @Andreas Zafiratos
+210 R Terrasymbiosis @Viko Menezes
 212 U Alpharael, Dreaming Acolyte @Cristi Balanescu
+214 R Biotech Specialist @Alexandre Honoré
+215 R Cosmogoyf @Chris Rahn
+217 R Genemorph Imago @Brian Valeza
+219 R Infinite Guideline Station @Piotr Dura
+222 R Mutinous Massacre @Quintin Gleim
+224 R Ragost, Deft Gastronaut @Zack Stella
 225 U Sami, Ship's Engineer @Zara Alfonso
+226 M Sami, Wildcat Captain @Kieran Yanner
+228 R Singularity Rupture @Liiga Smilshkalne
+232 U Syr Vondam, the Lucent @Cristi Balanescu
 233 U Tannuk, Memorial Ensign @David Auden Nash
+235 U Bygone Colossus @Maxime Minard
+236 C Chrome Companion @Gray Highsmith
+238 M Dawnsire, Sunstar Dreadnought @Jaime Jones
+240 M The Endstone @Ryan Pancoast
+241 R The Eternity Elevator @Josu Solano
+242 R Extinguisher Battleship @Danny Schwartz
+243 C Nutrient Block @Francisco Miyara
+247 R Thrumming Hivepool @Rob Rey
+248 U Virulent Silencer @Kenn Yap
+249 C Wurmwall Sweeper @Hardy Fowler
+250 M Adagia, Windswept Bastion @Adam Paquette
 251 R Breeding Pool @Constantin Marin
+252 C Command Bridge @Constantin Marin
 254 R Godless Shrine @Rob Rey
+255 M Kavaron, Memorial World @Adam Paquette
 256 R Sacred Foundry @Titus Lunter
 258 R Stomping Ground @Bruce Brenneise
+259 M Susur Secundi, Void Altar @Adam Paquette
+260 M Uthros, Titanic Godcore @Adam Paquette
 261 R Watery Grave @Sergey Glushakov
 262 L Plains @Adam Paquette
 263 L Island @Adam Paquette
 264 L Swamp @Adam Paquette
 265 L Mountain @Adam Paquette
 266 L Forest @Adam Paquette
+267 L Plains @Alayna Danner
+268 L Plains @Sergey Glushakov
+269 L Island @Sergey Glushakov
+270 L Island @Liiga Smilshkalne
+271 L Swamp @Sergey Glushakov
+272 L Swamp @Liiga Smilshkalne
+273 L Mountain @Sergey Glushakov
+274 L Mountain @Julian Kok Joon Wen
+275 L Forest @Sergey Glushakov
+276 L Forest @Julian Kok Joon Wen
+278 R Breeding Pool @Chris Ostrowski
+280 R Godless Shrine @Chris Ostrowski
+282 R Sacred Foundry @Chris Ostrowski
+283 R Stomping Ground @Chris Ostrowski
+284 M Susur Secundi, Void Altar @Piotr Dura
+285 M Uthros, Titanic Godcore @Piotr Dura
+286 R Watery Grave @Chris Ostrowski
 287 M Tezzeret, Cruel Captain @Magali Villeneuve
+288 R Astelli Reclaimer @Benjamin Ee
+289 R Haliya, Guided by Light @Eleonor Piteira
+293 R Elegy Acolyte @Justin Hernandez & Alexis Hernandez
+299 R Genemorph Imago @Benjamin Ee
+300 R Ragost, Deft Gastronaut @Dominik Mayer
+301 M Sami, Wildcat Captain @Ashley Mackenzie
+305 M Quantum Riddler @Cacho Rubione
+307 R Archenemy's Charm @Peter Diamond
+309 R Nova Hellkite @Micha Huigen
+310 R Rust Harvester @Scott Balmer
+311 R Weapons Manufacturing @Micha Huigen
+312 R Terrasymbiosis @Jack Hughes
+313 R Cosmogoyf @Princess Hidir
+314 R Mutinous Massacre @Jack Hughes
+317 R Anticausal Vestige @Chase Stone
+318 M Exalted Sunborn @Scott M. Fischer
 323 R The Seriema @Sergey Glushakov
+325 R Consult the Star Charts @Antonio José Manzanedo
+326 R Emissary Escort @Igor Grechanyi
+328 R Starfield Vocalist @Nathaniel Himawan
+334 R Sunset Saboteur @Mirko Failoni
+338 R Terminal Velocity @Xabi Gaztelua
+339 R Warmaker Gunship @Julian Kok Joon Wen
+342 R Frenzied Baloth @Diana Franco
+345 M Ouroboroid @Samuel Perin
+347 R Biotech Specialist @Alexandre Honoré
+348 R Infinite Guideline Station @Piotr Dura
+350 R Singularity Rupture @Liiga Smilshkalne
+353 M The Endstone @Ryan Pancoast
+354 R The Eternity Elevator @Josu Solano
+355 R Extinguisher Battleship @Danny Schwartz
+356 R Thrumming Hivepool @Rob Rey
+357 M Anticausal Vestige @Nottsuo
+358 M Exalted Sunborn @Makoron
+359 M Starfield Vocalist @nina
 360 M Sothera, the Supervoid @Mateusz Urbanowicz
+363 M Mutinous Massacre @Aogachou
+365 M The Endstone @Hidetaka Tenjin
 367 L Plains @Adam Paquette
 368 L Island @Adam Paquette
 369 L Swamp @Adam Paquette
 370 L Mountain @Adam Paquette
 371 L Forest @Adam Paquette
+373 R Breeding Pool @Chris Ostrowski
+375 R Godless Shrine @Chris Ostrowski
+377 R Sacred Foundry @Chris Ostrowski
+378 R Stomping Ground @Chris Ostrowski
+379 M Susur Secundi, Void Altar @Piotr Dura
+380 M Uthros, Titanic Godcore @Piotr Dura
+381 R Watery Grave @Chris Ostrowski
 382 M Sothera, the Supervoid @Micha Huigen
+383 M Anticausal Vestige @Nottsuo
+384 M Exalted Sunborn @Makoron
+385 M Starfield Vocalist @nina
 386 M Sothera, the Supervoid @Mateusz Urbanowicz
+389 M Mutinous Massacre @Aogachou
+391 M The Endstone @Hidetaka Tenjin
+393 U Starfield Shepherd @Marta Nael
+398 R Singularity Rupture @Néstor Ossandón Leal
+399 R Emissary Escort @Lius Lasahido
+
+[tokens]
+1 c_1_1_sliver @Igor Grechanyi
+8 c_a_lander_sac_search @Jorge Jacinto
