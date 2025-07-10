@@ -14,12 +14,23 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.RejectedExecutionException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class ImageFetcher {
+    private static final Logger log = LoggerFactory.getLogger(ImageFetcher.class);
+
     // see https://scryfall.com/docs/api/languages and
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
     protected static final boolean disableHostedDownload = true;
     private static final HashSet<String> fetching = new HashSet<>();
+    /**
+     * If the size of the fetching queue exceeds this threshold,
+     * we need to start rate-limiting.
+     * @implNote This threshold should correspond with {@link ThreadUtil#IMAGE_FETCH_THREAD_COUNT}.
+     */
+    private static final int BULK_FETCH_THRESHOLD = 10;
 
     static {
         langCodeMap.put("en-US", "en");
@@ -81,6 +92,10 @@ public abstract class ImageFetcher {
         return null;
     }
 
+    public void fetchImageWithoutCallback(String imageKey) {
+        fetchImage(imageKey, () -> {});
+    }
+
     public void fetchImage(final String imageKey, final Callback callback) {
         FThreads.assertExecutedByEdt(true);
 
@@ -98,12 +113,12 @@ public abstract class ImageFetcher {
             final ArrayList<String> downloadUrls = new ArrayList<>();
             final String filename = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
             downloadUrls.add("https://downloads.cardforge.org/images/products/boosters/"+ filename);
-            System.out.println("Fetching from "+downloadUrls);
+            log.info("Fetching from %s".formatted(downloadUrls));
 
 
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_BOOSTER_PICS_DIR);
             File destFile = new File(ForgeConstants.CACHE_BOOSTER_PICS_DIR, filename);
-            System.out.println("Destination File "+ destFile.getAbsolutePath()+" exists: " + destFile.exists());
+            log.info("Destination file: %s [exists: %s]".formatted(destFile.getAbsolutePath(), destFile.exists()));
             if(destFile.exists())
                 return;
             setupObserver(destFile.getAbsolutePath(),callback,downloadUrls);
@@ -133,7 +148,7 @@ public abstract class ImageFetcher {
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
             PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
             if (paperCard == null) {
-                System.err.println("Paper card not found for: " + imageKey);
+                log.error("Paper card not found for: {}", imageKey);
                 return;
             }
             //Skip fetching if it's a custom user card.
@@ -266,7 +281,7 @@ public abstract class ImageFetcher {
                 return;
 
             if (tempdata.length < 2) {
-                System.err.println("Token image key is malformed: " + imageKey);
+                log.error("Token image key is malformed: {}", imageKey);
                 return;
             }
 
@@ -308,7 +323,7 @@ public abstract class ImageFetcher {
         }
 
         if (downloadUrls.isEmpty()) {
-            System.err.println("No download URLs for: " + imageKey);
+            log.error("No download URLs for: {}", imageKey);
             return;
         }
 
@@ -325,6 +340,7 @@ public abstract class ImageFetcher {
 
         setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
     }
+
     private void setupObserver(final String destPath, final Callback callback, final ArrayList<String> downloadUrls) {
         // Note: No synchronization is needed here because this is executed on
         // EDT thread (see assert on top) and so is the notification of observers.
@@ -345,18 +361,36 @@ public abstract class ImageFetcher {
 
         final Runnable notifyObservers = () -> {
             FThreads.assertExecutedByEdt(true);
-
-            for (Callback o : currentFetches.get(destPath)) {
-                if (o != null)
-                    o.onImageFetched();
+            try {
+                for (Callback o : currentFetches.get(destPath)) {
+                    if (o != null)
+                        o.onImageFetched();
+                }
+            } catch (RuntimeException e) {
+                log.error("Error while notifying observers for path: {} ({})", destPath, e.getMessage());
+                throw e;
+            } finally {
+                currentFetches.remove(destPath);
+                log.trace("Removed: {} [queueSize: {}]", destPath, currentFetches.size());
             }
-            currentFetches.remove(destPath);
         };
+
         try {
-            ThreadUtil.getServicePool().submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
+            Runnable downloadTask = getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers);
+            /* Using the scheduled executor service unconditionally for all fetches would
+             * add an unnecessary 1s delay to one-off fetches.
+             */
+            if (currentFetches.size() <= BULK_FETCH_THRESHOLD) {
+                log.trace("Dispatching next request to general thread pool [queueSize: {}]", fetching.size());
+                ThreadUtil.getServicePool().submit(downloadTask);
+            } else {
+                log.trace("Dispatching next request to ImageFetcher thread pool [queueSize: {}]", fetching.size());
+                ThreadUtil.scheduleImageFetch(downloadTask);
+            }
         } catch (RejectedExecutionException re) {
             re.printStackTrace();
         }
+
     }
 
     protected abstract Runnable getDownloadTask(String[] toArray, String destPath, Runnable notifyObservers);
