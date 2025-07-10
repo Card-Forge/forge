@@ -11,6 +11,7 @@ import forge.item.PaperToken;
 import forge.token.TokenDb;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.regex.Pattern;
 import java.net.URLEncoder;
 
 public class ImageUtil {
@@ -204,6 +205,7 @@ public class ImageUtil {
     }
 
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop, boolean hyphenateAlchemy){
+        final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
         String editionCode;
         if (setCode != null && !setCode.isEmpty())
             editionCode = setCode;
@@ -228,7 +230,10 @@ public class ImageUtil {
             }
 
             cardCollectorNumber = cardCollectorNumber.replace("A", "A-");
+        } else if (funnyCardCollectorNumberPattern.matcher(cardCollectorNumber).matches()) {
+            cardCollectorNumber = cardCollectorNumber.substring(1);
         }
+
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
