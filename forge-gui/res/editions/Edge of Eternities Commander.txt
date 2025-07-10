@@ -6,7 +6,6 @@ Type=Commander
 ScryfallCode=EOC
 
 [cards]
-
 1 M Hearthhull, the Worldseed @Daniel Ljunggren
 2 M Inspirit, Flagship Vessel @Titus Lunter
 3 M Kilo, Apogee Mind @Tuan Duong Chu
