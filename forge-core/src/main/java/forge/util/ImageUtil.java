@@ -251,16 +251,7 @@ public class ImageUtil {
             cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
         }
 
-        String cardCollectorNumberEncoded;
-        try {
-            cardCollectorNumberEncoded = URLEncoder.encode(cardCollectorNumber, "UTF-8");
-        } catch (Exception e) {
-            // Unlikely, for the possibility that "UTF-8" is not supported.
-            System.err.println("UTF-8 encoding not supported on this device.");
-            cardCollectorNumberEncoded = cardCollectorNumber;
-        }
-
-        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumberEncoded,
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, encodeUtf8(cardCollectorNumber),
                 langCode, versionParam, faceParam);
     }
 
@@ -273,8 +264,18 @@ public class ImageUtil {
             faceParam = "&face=back";
             collectorNumber = collectorNumber.substring(0, collectorNumber.length() - 1);
         }
-        return String.format("%s/%s/%s?format=image&version=%s%s", setCode, collectorNumber,
+        return String.format("%s/%s/%s?format=image&version=%s%s", setCode, encodeUtf8(collectorNumber),
                 langCode, versionParam, faceParam);
+    }
+
+    private static String encodeUtf8(String s) {
+        try {
+            return URLEncoder.encode(s, "UTF-8");
+        } catch (Exception e) {
+            // Unlikely, for the possibility that "UTF-8" is not supported.
+            System.err.println("UTF-8 encoding not supported on this device.");
+            return s;
+        }
     }
 
     public static String toMWSFilename(String in) {
