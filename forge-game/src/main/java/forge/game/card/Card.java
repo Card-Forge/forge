@@ -1090,7 +1090,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final boolean isOnAdventure() {
         if (!isAdventureCard())
             return false;
-        if (getExiledWith() == null)
+        if (!equals(getExiledWith()))
             return false;
         if (!CardStateName.Secondary.equals(getExiledWith().getCurrentStateName()))
             return false;
@@ -7650,8 +7650,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         CardState oState = getState(CardStateName.Original);
         final List<SpellAbility> abilities = Lists.newArrayList();
         for (SpellAbility sa : getSpellAbilities()) {
-            //adventure spell check
-            if (isAdventureCard() && sa.isAdventure() && isOnAdventure()) {
+            if (sa.isAdventure() && isOnAdventure()) {
                 continue; // skip since it's already on adventure
             }
             //add alternative costs as additional spell abilities
