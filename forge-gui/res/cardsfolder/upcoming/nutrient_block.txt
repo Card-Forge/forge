@@ -1,0 +1,9 @@
+Name:Nutrient Block
+ManaCost:1
+Types:Artifact Food
+K:Indestructible
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this artifact is put into a graveyard from the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$LifeGain
+Oracle:Indestructible (Effects that say "destroy" don't destroy this artifact.)\n{2}, {T}, Sacrifice this artifact: You gain 3 life.\nWhen this artifact is put into a graveyard from the battlefield, draw a card.

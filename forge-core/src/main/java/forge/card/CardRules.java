@@ -288,7 +288,9 @@ public final class CardRules implements ICardCharacteristics {
         if (!type.isLegendary()) {
             return false;
         }
-        if (canBeCreature() || type.isVehicle() || type.isSpacecraft()) {
+        if (canBeCreature() || type.isVehicle() || (
+                type.isSpacecraft() && getPower() != null)) {
+            // Spacecraft need printed PT
             return true;
         }
         return false;
