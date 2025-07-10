@@ -1,0 +1,6 @@
+Name:Hullcarver
+ManaCost:B
+Types:Artifact Creature Robot Assassin
+PT:1/1
+K:Deathtouch
+Oracle:Deathtouch

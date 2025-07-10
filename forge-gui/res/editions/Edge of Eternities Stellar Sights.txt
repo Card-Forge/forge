@@ -6,7 +6,46 @@ Type=Collector_Edition
 ScryfallCode=EOS
 
 [cards]
+3 R Blinkmoth Nexus @Calder Moore
+5 R Cascading Cataracts @Andrew Mar
+7 R Celestial Colonnade @Andrew Mar
+8 R Contested War Zone @Josu Solano
+14 R Eldrazi Temple @Calder Moore
+15 R Endless Sands @Tim Brumley
+16 M Gemstone Caverns @Mark Poole
+18 R High Market @Andrew Theophilopoulos
+21 M Inventors' Fair @Finnian MacManus
+25 M Mana Confluence @Sam Burley
 28 M Mutavault @Andrew Mar
+31 R Nesting Grounds @John Thacker
+32 M Petrified Field @Finnian MacManus
+34 R Power Depot @Daniel Romanovsky
+37 R Scavenger Grounds @Andrew Theophilopoulos
+44 R Thespian's Stage @Bruce Brenneise
+48 R Blinkmoth Nexus @Meel Tamphanon
+52 R Celestial Colonnade @Ann-Sophie De Steur
+59 R Eldrazi Temple @BEMOCS
+61 M Gemstone Caverns @BEMOCS
+63 R High Market @WFlemming Illustration
+70 M Mana Confluence @Matteo Bassini
 73 M Mutavault @Aeron Ng
+76 R Nesting Grounds @WFlemming Illustration
+89 R Thespian's Stage @William Phifer
+93 R Blinkmoth Nexus @Calder Moore
+97 R Celestial Colonnade @Andrew Mar
+104 R Eldrazi Temple @Calder Moore
+106 M Gemstone Caverns @Mark Poole
+108 R High Market @Andrew Theophilopoulos
+115 M Mana Confluence @Sam Burley
 118 M Mutavault @Andrew Mar
+121 R Nesting Grounds @John Thacker
+134 R Thespian's Stage @Bruce Brenneise
+138 R Blinkmoth Nexus @Meel Tamphanon
+142 R Celestial Colonnade @Ann-Sophie De Steur
+149 R Eldrazi Temple @BEMOCS
+151 M Gemstone Caverns @BEMOCS
+153 R High Market @WFlemming Illustration
+160 M Mana Confluence @Matteo Bassini
 163 M Mutavault @Aeron Ng
+166 R Nesting Grounds @WFlemming Illustration
+179 R Thespian's Stage @William Phifer

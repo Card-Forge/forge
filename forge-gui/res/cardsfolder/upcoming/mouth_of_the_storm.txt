@@ -1,0 +1,10 @@
+Name:Mouth of the Storm
+ManaCost:6 U
+Types:Creature Elemental
+PT:6/6
+K:Flying
+K:Ward:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When this creature enters, creatures your opponents control get -3/-0 until your next turn.
+SVar:TrigPumpAll:DB$ PumpAll | NumAtt$ -3 | ValidCards$ Creature.OppCtrl | IsCurse$ True | Duration$ UntilYourNextTurn
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhen this creature enters, creatures your opponents control get -3/-0 until your next turn.
