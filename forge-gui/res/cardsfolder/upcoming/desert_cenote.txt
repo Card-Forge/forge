@@ -1,0 +1,11 @@
+Name:Desert Cenote
+ManaCost:no cost
+Types:Land Desert
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ If you were the starting player, this land enters tapped.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
+SVar:X:Count$StartingPlayer.0.1
+K:ETBReplacement:Other:ChooseColors
+SVar:ChooseColors:DB$ ChooseColor | Defined$ You | TwoColors$ True | UpTo$ True | ColorsFrom$ ValidHand Card.YouOwn | AILogic$ MostProminentInComputerDeck | SpellDescription$ As this land enters, choose up to two colors from among cards in your hand.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Combo Chosen | SpellDescription$ Add one mana of a chosen color.
+Oracle:If you were the starting player, this land enters tapped.\nAs this land enters, choose up to two colors from among cards in your hand.\n{T}: Add {C}.\n{T}: Add one mana of a chosen color.
