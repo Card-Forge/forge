@@ -434,8 +434,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(list);
     }
 
-    private PaymentDecision exileFromMiscZone(final CostExile cost, final int nNeeded, final CardCollection typeList,
-                                              final boolean sharedType) {
+    private PaymentDecision exileFromMiscZone(final CostExile cost, final int nNeeded, final CardCollection typeList, final boolean sharedType) {
         // when it's always a single triggered card getting exiled don't act like it might be different by offering the zone for choice
         if (cost.zoneRestriction == -1 && ability.isTrigger() && nNeeded == 1 && typeList.size() == 1) {
             if (confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(typeList.getFirst().getName())))) {
@@ -445,21 +444,20 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         final List<ZoneType> origin = Lists.newArrayList(cost.from);
-        final CardCollection exiled = new CardCollection();
         final String required = sharedType ? " (must share a card type)" : "";
 
         final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, ability, typeList,
                 mandatory ? nNeeded : 0, nNeeded, null, cost.toString(nNeeded) + required,
                 null);
+
+        if (chosen.size() < nNeeded) {
+            return null;
+        }
         if (sharedType) {
             if (!chosen.get(1).sharesCardTypeWith(chosen.get(0))) return null;
         }
 
-        exiled.addAll(chosen);
-        if (exiled.size() < nNeeded) {
-            return null;
-        }
-        return PaymentDecision.card(exiled);
+        return PaymentDecision.card(chosen);
     }
 
     private PaymentDecision exileFromTopGraveType(final int nNeeded, final CardCollection typeList) {
@@ -1057,18 +1055,18 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         @Override
         protected boolean hasAllTargets() {
-            final int sum = getDistibutedCounters();
+            final int sum = getDistributedCounters();
             return sum >= max;
         }
 
         @Override
         protected String getMessage() {
             return max == Integer.MAX_VALUE
-                    ? String.format(message, getDistibutedCounters())
-                    : String.format(message, max - getDistibutedCounters());
+                    ? String.format(message, getDistributedCounters())
+                    : String.format(message, max - getDistributedCounters());
         }
 
-        private int getDistibutedCounters() {
+        private int getDistributedCounters() {
             return counterTable.totalValues();
         }
 
