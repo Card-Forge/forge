@@ -155,11 +155,3 @@ ScryfallCode=APC
 141 R Llanowar Wastes @Rob Alexander
 142 R Shivan Reef @Rob Alexander
 143 R Yavimaya Coast @Anthony S. Waters
-
-[tokens]
-b_3_3_angel_flying
-b_2_1_cat
-b_3_3_kavu
-b_6_6_wurm_trample
-g_1_1_saproling
-rw_1_1_goblin_soldier
