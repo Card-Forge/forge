@@ -19,6 +19,7 @@ ScryfallCode=EOE
 37 U Starfield Shepherd @Marta Nael
 38 C Starfighter Pilot @Nathaniel Himawan
 39 C Starport Security @Lie Setiawan
+41 U Sunstar Expansionist @Mark Poole
 46 U Annul @Carlos Palma Cruchaga
 51 R Consult the Star Charts @Antonio José Manzanedo
 56 R Emissary Escort @Igor Grechanyi
@@ -26,6 +27,7 @@ ScryfallCode=EOE
 66 C Mechanozoa @Daarken
 70 U Mouth of the Storm @Domenico Cava
 72 M Quantum Riddler @Izzy
+76 U Specimen Freighter @Sergey Glushakov
 77 C Starbreach Whale @Sam Burley
 78 R Starfield Vocalist @Nathaniel Himawan
 83 U Unravel @Josh Hass
@@ -34,6 +36,7 @@ ScryfallCode=EOE
 94 C Decode Transmissions @Josh Hass
 97 R Elegy Acolyte @Diana Franco
 98 C Embrace Oblivion @Andreas Zafiratos
+101 U Fell Gravship @David Álvarez
 103 C Gravkill @Dominik Mayer
 105 C Hullcarver @Michal Ivan
 108 C Insatiable Skittermaw @Diego Gisbert
@@ -43,13 +46,19 @@ ScryfallCode=EOE
 121 U Timeline Culler @Alfonso Santano
 122 U Tragic Trajectory @Ovidio Cartagena
 123 U Umbral Collar Zealot @Dmitry Burmak
+124 C Virus Beetle @Leesha Hannigan
 125 U Voidforged Titan @Diego Gisbert
+130 U "Cut the Fuel Line" @
 131 U Debris Field Crusher @David Álvarez
 136 U Galvanizing Sawship @Constantin Marin
 138 C Kav Landseeker @Karl Kopinski
+139 U Kavaron Harrier @Hardy Fowler
+144 U Memorial Team Leader @Andrew Mar
 148 R Nova Hellkite @Raymond Swanland
+152 C Plasma Bolt @Viko Menezes
 153 R Possibility Technician @Antonio José Manzanedo
 154 C Red Tiger Mechan @Simon Dominic
+155 U Remnant Elemental @Nereida
 158 U Ruinous Rampage @David Astruga
 159 R Rust Harvester @Jake Murray
 161 U Systems Override @Hardy Fowler
@@ -61,8 +70,11 @@ ScryfallCode=EOE
 181 U Eusocial Engineering @Francisco Badilla
 182 M Famished Worldsire @Kev Walker
 183 R Frenzied Baloth @Diana Franco
+184 C Fungal Colossus @Sergey Glushakov
 185 C Galactic Wayfarer @Quintin Gleim
 189 U Harmonious Grovestrider @Ron Spencer
+190 U Hemosymbic Mite @Amanda Lee
+200 R Mightform Harmonizer @Bartek Fedyczak
 201 M Ouroboroid @Samuel Perin
 205 U Seedship Impact @Constantin Marin
 206 C Shattered Wings @Sergey Glushakov
@@ -81,6 +93,7 @@ ScryfallCode=EOE
 228 R Singularity Rupture @Liiga Smilshkalne
 232 U Syr Vondam, the Lucent @Cristi Balanescu
 233 U Tannuk, Memorial Ensign @David Auden Nash
+234 U All-Fates Scroll @Sam Guay
 235 U Bygone Colossus @Maxime Minard
 236 C Chrome Companion @Gray Highsmith
 238 M Dawnsire, Sunstar Dreadnought @Jaime Jones
@@ -89,6 +102,7 @@ ScryfallCode=EOE
 241 R The Eternity Elevator @Josu Solano
 242 R Extinguisher Battleship @Danny Schwartz
 243 C Nutrient Block @Francisco Miyara
+245 U Survey Mechan @Johann Bodin
 247 R Thrumming Hivepool @Rob Rey
 248 U Virulent Silencer @Kenn Yap
 249 C Wurmwall Sweeper @Hardy Fowler
@@ -151,6 +165,8 @@ ScryfallCode=EOE
 326 R Emissary Escort @Igor Grechanyi
 328 R Starfield Vocalist @Nathaniel Himawan
 334 R Sunset Saboteur @Mirko Failoni
+335 R Zero Point Ballad @David Astruga
+337 R Pain for All @Dmitry Burmak
 338 R Terminal Velocity @Xabi Gaztelua
 339 R Warmaker Gunship @Julian Kok Joon Wen
 340 R Bioengineered Future @Constantin Marin

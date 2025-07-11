@@ -15,6 +15,7 @@ ScryfallCode=EOS
 15 R Endless Sands @Tim Brumley
 16 M Gemstone Caverns @Mark Poole
 18 R High Market @Andrew Theophilopoulos
+20 M Inkmoth Nexus @Piotr Dura
 21 M Inventors' Fair @Finnian MacManus
 25 M Mana Confluence @Sam Burley
 28 M Mutavault @Andrew Mar
@@ -30,11 +31,13 @@ ScryfallCode=EOS
 59 R Eldrazi Temple @BEMOCS
 61 M Gemstone Caverns @BEMOCS
 63 R High Market @WFlemming Illustration
+65 M Inkmoth Nexus @Matteo Bassini
 66 M Inventors' Fair @Sylvia Liu
 70 M Mana Confluence @Matteo Bassini
 73 M Mutavault @Aeron Ng
 76 R Nesting Grounds @WFlemming Illustration
 81 M Reflecting Pool @Sam Chivers
+82 R Scavenger Grounds @BEMOCS
 89 R Thespian's Stage @William Phifer
 93 R Blinkmoth Nexus @Calder Moore
 94 R Bonders' Enclave @Eleonor Piteira
