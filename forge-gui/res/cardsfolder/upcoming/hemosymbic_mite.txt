@@ -1,4 +1,5 @@
 Name:Hemosymbic Mite
+ManaCost:G
 Types:Creature Mite
 PT:1/1
 T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature becomes tapped, another target creature you control gets +X/+X until end of turn, where X is this creature's power.
