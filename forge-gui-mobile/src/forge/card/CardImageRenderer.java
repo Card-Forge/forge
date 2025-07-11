@@ -82,7 +82,7 @@ public class CardImageRenderer {
     }
 
     public static void drawFaceDownCard(CardView card, Graphics g, float x, float y, float w, float h) {
-        //try to draw the card sleeves first
+        // Try to draw the card sleeves first
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         if (sleeves != null)
             g.drawImage(sleeves, x, y, w, h);
@@ -104,7 +104,11 @@ public class CardImageRenderer {
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
-        CardStateView state = altState ? card.getAlternateState() : isChoiceList && card.isSplitCard() ? card.getLeftSplitState() : card.getCurrentState();
+        CardStateView state = altState
+            ? card.getAlternateState()
+            : isChoiceList && card.isSplitCard() 
+                ? card.getLeftSplitState()
+                : card.getCurrentState();
         final boolean isFaceDown = card.isFaceDown();
         final boolean canShow = MatchController.instance.mayView(card);
         //override
@@ -123,7 +127,11 @@ public class CardImageRenderer {
         //determine colors for borders
         final List<DetailColors> borderColors;
         if (isFaceDown) {
-            borderColors = !altState ? ImmutableList.of(DetailColors.FACE_DOWN) : !useCardBGTexture ? ImmutableList.of(DetailColors.FACE_DOWN) : CardDetailUtil.getBorderColors(state, canShow);
+            borderColors = !altState
+                ? ImmutableList.of(DetailColors.FACE_DOWN)
+                : !useCardBGTexture 
+                    ? ImmutableList.of(DetailColors.FACE_DOWN)
+                    : CardDetailUtil.getBorderColors(state, canShow);
         } else {
             borderColors = CardDetailUtil.getBorderColors(state, canShow);
         }
