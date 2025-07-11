@@ -8,14 +8,15 @@ public enum GameLogEntryType {
     ANTE("Ante"),
     ZONE_CHANGE("Zone Change"),
     PLAYER_CONTROL("Player control"),
-    COMBAT("Combat"),
+    DAMAGE("Damage"),
+    // Where's life loss?
+    LAND("Land"),
     DISCARD("Discard"),
+    COMBAT("Combat"),
     INFORMATION("Information"),
     EFFECT_REPLACED("Replacement Effect"),
-    LAND("Land"),
     STACK_RESOLVE("Resolve stack"),
     STACK_ADD("Add to stack"),
-    DAMAGE("Damage"),
     MANA("Mana"),
     PHASE("Phase");
     
