@@ -12,6 +12,8 @@ import forge.token.TokenDb;
 import org.apache.commons.lang3.StringUtils;
 
 import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.List;
 
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
@@ -210,8 +212,6 @@ public class ImageUtil {
         else
             editionCode = cp.getEdition().toLowerCase();
         String cardCollectorNumber = cp.getCollectorNumber();
-        // Hack to account for variations in Arabian Nights
-        cardCollectorNumber = cardCollectorNumber.replace("+", "†");
         // override old planechase sets from their modified id since scryfall move the planechase cards outside their original setcode
         if (cardCollectorNumber.startsWith("OHOP")) {
             editionCode = "ohop";
@@ -231,6 +231,7 @@ public class ImageUtil {
         }
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
+
         if (cp.getRules().getOtherPart() != null) {
             faceParam = (face.equals("back") ? "&face=back" : "&face=front");
         } else if (cp.getRules().getSplitType() == CardSplitType.Meld
@@ -245,6 +246,9 @@ public class ImageUtil {
                 } else if (!editionCode.equals("fin")) {
                     cardCollectorNumber += "a";
                 }
+        } else if (cardCollectorNumber.endsWith("☇")) {
+            faceParam = "&face=back";
+            cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
         }
 
         return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, encodeUtf8(cardCollectorNumber),
@@ -255,6 +259,10 @@ public class ImageUtil {
         String versionParam = "normal";
         if (!faceParam.isEmpty()) {
             faceParam = (faceParam.equals("back") ? "&face=back" : "&face=front");
+        }
+        if (collectorNumber.endsWith("☇")) {
+            faceParam = "&face=back";
+            collectorNumber = collectorNumber.substring(0, collectorNumber.length() - 1);
         }
         return String.format("%s/%s/%s?format=image&version=%s%s", setCode, encodeUtf8(collectorNumber),
                 langCode, versionParam, faceParam);
@@ -276,8 +284,7 @@ public class ImageUtil {
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
-            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
-            } else {
+            if ((c != '"') && (c != '/') && (c != ':') && (c != '?')) {
                 out.append(c);
             }
         }
