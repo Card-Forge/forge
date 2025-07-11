@@ -383,34 +383,3 @@ ScryfallCode=J21
 [rebalanced]
 A438 U A-Dragon's Rage Channeler @Martina Fackova
 A529 C A-Unholy Heat @Kari Christensen
-
-[tokens]
-c_1_1_a_thopter_flying
-w_1_1_bird_flying
-g_1_1_snake
-g_2_2_wolf
-g_3_3_elephant
-c_2_2_shapshifter_changeling
-c_3_3_a_phyrexian_golem
-c_a_treasure_sac
-c_1_1_eldrazi_scion_sac
-g_1_1_squirrel
-g_4_4_beast
-b_2_2_zombie
-w_1_1_spirit_flying
-u_0_3_crab
-c_a_clue_draw
-c_1_1_sliver
-r_1_1_goblin
-g_0_1_plant
-u_8_8_kraken
-c_a_food_sac
-b_1_1_rat
-u_1_1_illusion_flying
-g_2_2_bear
-u_2_2_djinn_monk_flying
-w_3_3_bird_flying
-g_1_2_spider_reach
-r_1_1_elemental
-w_4_4_angel_flying_vigilance
-w_1_1_human_soldier
