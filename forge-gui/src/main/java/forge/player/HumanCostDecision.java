@@ -221,16 +221,23 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostExile cost) {
+        String type = cost.getType();
+        Card onlyPayable = null;
         if (cost.payCostFromSource()) {
-            if (!source.canExiledBy(ability, isEffect())) {
-                return null;
-            }
-            return source.getZone() == player.getZone(cost.from.get(0)) && confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
+            onlyPayable = source;
+        }
+        if (type.equals("OriginalHost")) {
+            onlyPayable = ability.getOriginalHost();
         }
 
-        final Game game = player.getGame();
+        if (onlyPayable != null) {
+            if (onlyPayable.canExiledBy(ability, isEffect()) && onlyPayable.getZone() == player.getZone(cost.from.get(0))
+                    && confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(onlyPayable.getName())))) {
+                return PaymentDecision.card(onlyPayable);
+            }
+            return null;
+        }
 
-        String type = cost.getType();
         boolean fromTopGrave = false;
         if (type.contains("FromTopGrave")) {
             type = TextUtil.fastReplace(type, "FromTopGrave", "");
@@ -262,6 +269,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             nTypes = Integer.parseInt(num);
         }
 
+        final Game game = player.getGame();
         CardCollection list;
         if (cost.zoneRestriction != 1) {
             list = new CardCollection(game.getCardsIn(cost.from));
