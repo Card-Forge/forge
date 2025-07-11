@@ -123,7 +123,8 @@ public class CostExile extends CostPartWithList {
                     return String.format("Exile %s from your %s", this.getType(), origin);
                 }
                 return String.format("Exile %s", this.getType());
-            } else if (this.getType().equals("All")) {
+            }
+            if (this.getType().equals("All")) {
                 return String.format("Exile all cards from your %s", origin);
             }
 
@@ -163,9 +164,9 @@ public class CostExile extends CostPartWithList {
 
             return String.format("Exile %s from your %s",
                     Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
-        } else {
-            return exileMultiZoneCostString(false, chosenX);
         }
+
+        return exileMultiZoneCostString(false, chosenX);
     }
 
     @Override
@@ -186,6 +187,9 @@ public class CostExile extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             return list.contains(source);
+        }
+        if (getType().equals("OriginalHost")) {
+            return list.contains(ability.getOriginalHost());
         }
 
         boolean totalCMC = false;
