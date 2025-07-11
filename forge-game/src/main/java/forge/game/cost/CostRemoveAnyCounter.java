@@ -45,6 +45,7 @@ public class CostRemoveAnyCounter extends CostPart {
 
     public final CounterType counter;
     public final Boolean oneOrMore;
+    public final Boolean single;
 
     /**
      * Instantiates a new cost CostRemoveAnyCounter.
@@ -52,10 +53,11 @@ public class CostRemoveAnyCounter extends CostPart {
      * @param amount
      *            the amount
      */
-    public CostRemoveAnyCounter(final String amount, final CounterType counter, final String type, final String description, final boolean oneOrMore) {
+    public CostRemoveAnyCounter(final String amount, final CounterType counter, final String type, final String description, final boolean oneOrMore, final boolean single) {
         super(amount, type, description);
         this.counter = counter;
         this.oneOrMore = oneOrMore;
+        this.single = single;
     }
 
     @Override
@@ -72,13 +74,21 @@ public class CostRemoveAnyCounter extends CostPart {
                 if (!c.canRemoveCounters(this.counter)) {
                     continue;
                 }
-                allCounters += c.getCounters(this.counter);
+                if (single && c.getCounters(this.counter) > allCounters) {
+                    allCounters = c.getCounters(this.counter);
+                } else {
+                    allCounters += c.getCounters(this.counter);
+                }
             } else {
                 for (Map.Entry<CounterType, Integer> entry : c.getCounters().entrySet()) {
                     if (!c.canRemoveCounters(entry.getKey())) {
                         continue;
                     }
-                    allCounters += entry.getValue();
+                    if (single && entry.getValue() > allCounters) {
+                        allCounters = entry.getValue();
+                    } else {
+                        allCounters += entry.getValue();
+                    }
                 }
             }
         }
