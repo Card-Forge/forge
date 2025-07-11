@@ -368,7 +368,7 @@ ScryfallCode=C16
 7 u_2_2_bird_flying @Peter Mohrbacher
 8 u_1_1_squid_islandwalk @Jack Wang
 9 u_1_1_a_thopter_flying @Andrew Murray
-10 b_0_0_phyrexian_germ @Igor Kieryluk
+10 b_0_0_germ @Igor Kieryluk
 11 b_2_2_zombie @Lucas Graciano
 12 r_1_1_goblin_all_attack @Wayne Reynolds
 13 r_3_3_ogre @Paul Bonner
