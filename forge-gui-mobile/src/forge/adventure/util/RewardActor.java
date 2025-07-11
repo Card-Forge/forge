@@ -539,11 +539,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
                     @Override
                     public void dragStop(InputEvent event, float x, float y, int pointer) {
-                        float deltaY = y - startY;
+                        isDragging = false;
 
+                        if (!frontSideUp() || !hover)
+                            return;
+
+                        float deltaY = y - startY;
                         if (deltaY < 0) {
-                            isDragging = false;
-                            SoundSystem.instance.play(SoundEffectType.FlipCard, false);
                             shouldDisplayText = !shouldDisplayText;
                             switchTooltip();
                         }
@@ -599,9 +601,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
                 tooltip.setActor(new ComplexTooltip(new RewardImage(processDrawable(alt))));
             } else {
+                T = renderPlaceholder(new Graphics(), reward.getCard(), false);
+
                 RewardImage image = shouldDisplayText
-                        ? new RewardImage(processDrawable(T))
-                        : toolTipImage;
+                    ? new RewardImage(processDrawable(T))
+                    : toolTipImage;
 
                 if (image == null)
                     return;
@@ -998,11 +1002,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             x = -getWidth() / 2;
         }
         if (Reward.Type.Card.equals(reward.getType())) {
-            if (T == null) {
-                T = renderPlaceholder(new Graphics(), reward.getCard(), false);
-            }
-                    
             if (!loaded || image == null) {
+                if (T == null) {
+                    T = renderPlaceholder(new Graphics(), reward.getCard(), false);
+                }
+
                 drawCard(batch, T, x, width);
             } else {
                 drawCard(batch, image, x, width);
