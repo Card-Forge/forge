@@ -1,0 +1,8 @@
+Name:Solar Array
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBEffect | SpellDescription$ Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst. (If it's a creature, it enters with a +1/+1 counter on it for each color of mana spent to cast it. Otherwise, it enters with that many charge counters on it.)
+SVar:DBEffect:DB$ Effect | Triggers$ SpellCast
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | TriggerZones$ Command | OneOff$ True | Execute$ DBAnimate | TriggerDescription$ When you next cast an artifact spell this turn, that spell gains sunburst. (If it's a creature, it enters with a +1/+1 counter on it for each color of mana spent to cast it. Otherwise, it enters with that many charge counters on it.)
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCardLKICopy | Keywords$ Sunburst | Duration$ Permanent
+Oracle:{T}: Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst. (If it's a creature, it enters with a +1/+1 counter on it for each color of mana spent to cast it. Otherwise, it enters with that many charge counters on it.)

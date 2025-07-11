@@ -1,0 +1,9 @@
+Name:Surge Conductor
+ManaCost:3
+Types:Artifact Creature Robot
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+!token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigProliferate | TriggerDescription$ Whenever another nontoken artifact you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counters & Type$Artifact
+Oracle:Whenever another nontoken artifact you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
