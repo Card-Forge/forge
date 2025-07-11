@@ -12,6 +12,7 @@ import forge.game.card.*;
 import forge.game.cost.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -973,7 +974,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source, ability);
         list = CardLists.filter(list, CardPredicates.hasCounters());
 
-        final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(controller, c, cost, cost.counter, list, ability, cost.single);
+        final InputSelectCardToRemoveCounter inp = new InputSelectCardToRemoveCounter(controller, c, cost, cost.counter, list, ability);
         inp.setCancelAllowed(true);
         inp.showAndWait();
         if (inp.hasCancelled()) {
@@ -988,18 +989,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         private final CounterType counterType;
         private final CardCollectionView validChoices;
-        private boolean oneSource = false;
-        private int numToRemove = 1;
 
         private final GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
-        public InputSelectCardToRemoveCounter(final PlayerControllerHuman controller, final int cntCounters, final CostPart costPart, final CounterType cType, final CardCollectionView validCards, final SpellAbility sa, final boolean single) {
+        public InputSelectCardToRemoveCounter(final PlayerControllerHuman controller, final int cntCounters, final CostPart costPart, final CounterType cType, final CardCollectionView validCards, final SpellAbility sa) {
             super(controller, cntCounters, cntCounters, sa);
             this.validChoices = validCards;
-            if (single) {
-                oneSource = true;
-                numToRemove = cntCounters;
-            }
             counterType = cType;
             String fromWhat = costPart.getDescriptiveType();
             if (fromWhat.equals("CARDNAME") || fromWhat.equals("NICKNAME")) {
@@ -1007,7 +1002,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
 
             setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostSelect",
-                    single ? "" : "%d", counterType == null ? "" : " " + counterType.getName().toLowerCase(), fromWhat));
+                    "%d", counterType == null ? "" : " " + counterType.getName().toLowerCase(), fromWhat));
         }
 
         @Override
@@ -1016,71 +1011,28 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 return false;
             }
 
-            if (oneSource) {
-                if (removeAnyType(c, numToRemove) < numToRemove) return false;
-            } else {
-                CounterType cType = this.counterType;
-                if (cType == null) {
-                    Map<CounterType, Integer> cmap = counterTable.filterToRemove(c);
+            CounterType cType = this.counterType;
+            if (cType == null) {
+                Map<CounterType, Integer> cmap = counterTable.filterToRemove(c);
 
-                    String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
+                String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
 
-                    cType = getController().chooseCounterType(Lists.newArrayList(cmap.keySet()), sa, prompt, null);
-                }
-
-                if (cType == null || !c.canRemoveCounters(cType)) {
-                    return false;
-                }
-
-                if (c.getCounters(cType) <= counterTable.get(null, c, cType)) {
-                    return false;
-                }
-
-                counterTable.put(null, c, cType, 1);
+                cType = getController().chooseCounterType(Lists.newArrayList(cmap.keySet()), sa, prompt, null);
             }
+
+            if (cType == null || !c.canRemoveCounters(cType)) {
+                    return false;
+            }
+
+            if (c.getCounters(cType) <= counterTable.get(null, c, cType)) {
+                    return false;
+            }
+
+            counterTable.put(null, c, cType, 1);
 
             onSelectStateChanged(c, true);
             refresh();
             return true;
-        }
-
-        private int removeAnyType(final Card c, int cntToRemove) {
-            int removed = 0;
-
-            final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(c.getCounters());
-            for (CounterType ct : ImmutableList.copyOf(tgtCounters.keySet())) {
-                if (!c.canRemoveCounters(ct)) {
-                    tgtCounters.remove(ct);
-                }
-            }
-
-            while (cntToRemove > 0 && !tgtCounters.isEmpty()) {
-                Map<String, Object> params = Maps.newHashMap();
-                params.put("Target", c);
-
-                String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
-                CounterType chosenType = getController().chooseCounterType(ImmutableList.copyOf(tgtCounters.keySet()), sa, prompt, params);
-
-                int max = Math.min(cntToRemove, tgtCounters.get(chosenType));
-                // remove selection so player can't cheat additional trigger by choosing the same type multiple times
-                tgtCounters.remove(chosenType);
-                int remaining = Aggregates.sum(tgtCounters.values());
-                // player must choose enough so he can still reach the amount with other types
-                int min = Math.max(1, max - remaining);
-                prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName());
-                params = Maps.newHashMap();
-                params.put("Target", c);
-                params.put("CounterType", chosenType);
-                int chosenAmount = getController().chooseNumber(sa, prompt, min, max, params);
-
-                if (chosenAmount > 0) {
-                    removed += chosenAmount;
-                    counterTable.put(null, c, chosenType, chosenAmount);
-
-                    cntToRemove -= chosenAmount;
-                }
-            }
-            return removed;
         }
 
         @Override
@@ -1147,6 +1099,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostRemoveCounter cost) {
         final String amount = cost.getAmount();
         final String type = cost.getType();
+        final CounterType cntrs = cost.counter;
+        final boolean anyCounters = cntrs == null;
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
         int cntRemoved = 1;
         if (!amount.equals("All")) {
@@ -1154,9 +1109,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (cost.payCostFromSource()) {
-            final int maxCounters = source.getCounters(cost.counter);
+            final int maxCounters = anyCounters ? source.getNumAllCounters() : source.getCounters(cntrs);
             if (amount.equals("All")) {
-                if (!InputConfirm.confirm(controller, ability, Localizer.getInstance().getMessage("lblRemoveAllCountersConfirm"))) {
+                String prompt = Localizer.getInstance().getMessage("lblRemoveAllCountersConfirm") + (anyCounters ? "" : " (" + cntrs.getName() + ")");
+                if (!InputConfirm.confirm(controller, ability, prompt)) {
                     return null;
                 }
                 cntRemoved = maxCounters;
@@ -1165,7 +1121,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 if (maxCounters < cntRemoved) {
                     return null;
                 }
-                if (!confirmAction(cost, Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", amount, cost.counter.getName().toLowerCase(), CardTranslation.getTranslatedName(source.getName())))) {
+                if (!confirmAction(cost, Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", amount, anyCounters ? "" : cntrs.getName().toLowerCase(), CardTranslation.getTranslatedName(source.getName())))) {
                     return null;
                 }
             }
@@ -1173,10 +1129,13 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (maxCounters < cntRemoved) {
                 return null;
             }
-            return PaymentDecision.card(source, cntRemoved >= 0 ? cntRemoved : maxCounters);
+            counterTable = generateCounterTable(source, cntrs, cntRemoved >= 0 ? cntRemoved : maxCounters, ability);
+            if (counterTable.isEmpty()) return null;
+            return PaymentDecision.counters(counterTable);
 
         } else if (type.equals("OriginalHost")) {
-            final int maxCounters = ability.getOriginalHost().getCounters(cost.counter);
+            final Card origHost = ability.getOriginalHost();
+            final int maxCounters = anyCounters ? origHost.getNumAllCounters() : origHost.getCounters(cntrs);
             if (amount.equals("All")) {
                 cntRemoved = maxCounters;
             }
@@ -1184,12 +1143,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 return null;
             }
 
-            return PaymentDecision.card(ability.getOriginalHost(), cntRemoved >= 0 ? cntRemoved : maxCounters);
+            counterTable = generateCounterTable(origHost, cntrs, cntRemoved >= 0 ? cntRemoved : maxCounters, ability);
+            if (counterTable.isEmpty()) return null;
+            return PaymentDecision.counters(counterTable);
         }
 
         CardCollectionView validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source, ability);
         // you can only select 1 card to remove N counters from
-        validCards = CardLists.filter(validCards, CardPredicates.hasCounter(cost.counter, cntRemoved));
+        validCards = anyCounters ? CardLists.filterAnyCounters(validCards, cntRemoved) :
+                CardLists.filter(validCards, CardPredicates.hasCounter(cntrs, cntRemoved));
         if (validCards.isEmpty()) {
             return null;
         }
@@ -1208,7 +1170,53 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        return PaymentDecision.card(selected, cntRemoved);
+        return PaymentDecision.counters(generateCounterTable(selected, cntrs, cntRemoved, ability));
+    }
+
+    private GameEntityCounterTable generateCounterTable (final Card c, final CounterType cType, int cntToRemove, final SpellAbility sa) {
+        final GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        if (cType != null) {
+            counterTable.put(null, c, cType, cntToRemove);
+        } else {
+            final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(c.getCounters());
+            for (CounterType ct : ImmutableList.copyOf(tgtCounters.keySet())) {
+                if (!c.canRemoveCounters(ct)) {
+                    tgtCounters.remove(ct);
+                }
+            }
+            if (tgtCounters.isEmpty()) return counterTable;
+            if (tgtCounters.size() == 1) {
+                counterTable.put(null, c, tgtCounters.entrySet().iterator().next().getKey(), cntToRemove);
+            } else while (cntToRemove > 0) {
+                Map<String, Object> params = Maps.newHashMap();
+                PlayerController pc = c.getController().getController();
+                params.put("Target", c);
+
+                String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
+                CounterType chosenType = pc.chooseCounterType(ImmutableList.copyOf(tgtCounters.keySet()), sa, prompt, params);
+
+                int max = Math.min(cntToRemove, tgtCounters.get(chosenType));
+                int remaining = Aggregates.sum(tgtCounters.values());
+                // player must choose enough so he can still reach the amount with other types
+                int min = Math.max(1, max - remaining);
+                prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName());
+                params = Maps.newHashMap();
+                params.put("Target", c);
+                params.put("CounterType", chosenType);
+                int chosenAmount = pc.chooseNumber(sa, prompt, min, max, params);
+
+                if (chosenAmount > 0) {
+                    counterTable.put(null, c, chosenType, chosenAmount);
+                    if (tgtCounters.get(chosenType) > chosenAmount) {
+                        tgtCounters.put(chosenType, tgtCounters.get(chosenType) - chosenAmount);
+                    } else {
+                        tgtCounters.remove(chosenType);
+                    }
+                    cntToRemove -= chosenAmount;
+                }
+            }
+        }
+        return counterTable;
     }
 
     @Override

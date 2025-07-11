@@ -411,16 +411,11 @@ public class Cost implements Serializable {
             final String[] splitStr = abCostParse(parse, 4);
             final String description = splitStr.length > 3 ? splitStr[3] : null;
             boolean oneOrMore = false;
-            boolean single = false;
             if (splitStr[0].equals("X1+")) {
                 oneOrMore = true;
                 splitStr[0] = "X";
             }
-            if (splitStr[2].startsWith("SINGLE_")) {
-                single = true;
-                splitStr[2] = splitStr[2].substring(7);
-            }
-            return new CostRemoveAnyCounter(splitStr[0], CounterType.getType(splitStr[1]), splitStr[2], description, oneOrMore, single);
+            return new CostRemoveAnyCounter(splitStr[0], CounterType.getType(splitStr[1]), splitStr[2], description, oneOrMore);
         }
 
         if (parse.startsWith("Exile<")) {
