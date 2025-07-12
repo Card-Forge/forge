@@ -597,6 +597,7 @@ public class CardRenderer {
 
     public static void drawCard(Graphics g, IPaperCard pc, float x, float y, float w, float h, CardStackPosition pos) {
         Texture image = new RendererCachedCardImage(pc, false).getImage();
+        final CardView card = CardView.getCardForUi(pc);
         float radius = (h - w) / 8;
         float croppedArea = isModernFrame(pc) ? CROP_MULTIPLIER : 0.97f;
         float minusxy = isModernFrame(pc) ? 0.0f : 0.13f * radius;
@@ -609,7 +610,7 @@ public class CardRenderer {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, true, true);
             } else {
                 if (Forge.enableUIMask.equals("Full")) {
-                    if (image.toString().contains(".fullborder."))
+                    if (ImageCache.getInstance().isFullBorder(image))
                         g.drawCardRoundRect(image, null, x, y, w, h, false, false);
                     else {
                         //tint the border
@@ -622,7 +623,6 @@ public class CardRenderer {
                     g.drawImage(image, x, y, w, h);
             }
             if (pc.isFoil()) { //draw foil effect if needed
-                final CardView card = CardView.getCardForUi(pc);
                 if (card.getCurrentState().getFoilIndex() == 0) { //if foil finish not yet established, assign a random one
                     card.getCurrentState().setFoilIndexOverride(-1);
                 }
@@ -630,7 +630,7 @@ public class CardRenderer {
             }
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
-            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, true, true);
+            CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos, true, true);
         }
     }
 
@@ -663,7 +663,7 @@ public class CardRenderer {
                 if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane() || (card.getCurrentState().isBattle() && !showAltState) || (card.getAlternateState() != null && card.getAlternateState().isBattle() && showAltState)) && rotate) {
                     if (Forge.enableUIMask.equals("Full")) {
-                        if (image.toString().contains(".fullborder."))
+                        if (ImageCache.getInstance().isFullBorder(image))
                             g.drawCardRoundRect(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                         else {
                             g.drawRotatedImage(FSkin.getBorders().get(0), x, y, w, h, x + w / 2, y + h / 2, -90);
@@ -675,7 +675,7 @@ public class CardRenderer {
                         g.drawRotatedImage(image, x, y, w, h, x + w / 2, y + h / 2, -90);
                 } else {
                     if (Forge.enableUIMask.equals("Full") && canshow) {
-                        if (image.toString().contains(".fullborder."))
+                        if (ImageCache.getInstance().isFullBorder(image))
                             g.drawCardRoundRect(image, crack_overlay, x, y, w, h, drawGray(card), magnify ? false : card.getDamage() > 0);
                         else {
                             //boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();

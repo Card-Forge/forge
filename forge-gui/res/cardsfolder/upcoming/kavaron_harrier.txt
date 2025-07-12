@@ -1,0 +1,8 @@
+Name:Kavaron Harrier
+ManaCost:R
+Types:Artifact Creature Robot Soldier
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTokenAttacking | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, you may pay {2}. If you do, create a 2/2 colorless Robot artifact creature token that's tapped and attacking. Sacrifice that token at end of combat.
+SVar:TrigTokenAttacking:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenScript$ c_2_2_a_robot | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | AtEOT$ SacrificeCombat
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature attacks, you may pay {2}. If you do, create a 2/2 colorless Robot artifact creature token that's tapped and attacking. Sacrifice that token at end of combat.

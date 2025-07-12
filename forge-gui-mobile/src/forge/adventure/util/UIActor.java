@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
+import com.github.tommyettinger.textra.Styles;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
@@ -231,7 +232,7 @@ public class UIActor extends Group {
                         newActor.setFont(Controls.getTextraFont(property.value.toString()));
                     break;
                 case "style":
-                    newActor.style = (Controls.getSkin().get(property.value.toString(), Label.LabelStyle.class));
+                    newActor.style = new Styles.LabelStyle(Controls.getSkin().get(property.value.toString(), Label.LabelStyle.class));
                     break;
                 case "color":
                 case "fontColor":
@@ -277,7 +278,7 @@ public class UIActor extends Group {
                     newActor.setText(localize(property.value.toString()));
                     break;
                 case "style":
-                    newActor.setStyle(Controls.getSkin().get(property.value.toString(), TextButton.TextButtonStyle.class));
+                    newActor.setStyle(new Styles.TextButtonStyle(Controls.getSkin().get(property.value.toString(), TextButton.TextButtonStyle.class)));
                     break;
                 case "binding":
                     keyMap.put(KeyBinding.valueOf(property.value.toString()), newActor);

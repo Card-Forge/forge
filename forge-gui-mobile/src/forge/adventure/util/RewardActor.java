@@ -26,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Scaling;
+import com.github.tommyettinger.textra.Styles;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
@@ -221,8 +222,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private void updateAutoSell() {
         reward.setAutoSell(!reward.isAutoSell());
-        String c = reward.isAutoSell() ? "[%85][GREEN]" : "[%85][GRAY]";
-        autoSell.setText(c + "\uFF04");
+        autoSell.setText(reward.isAutoSell() ? "[%85][+Sell]" : "[%85][GRAY] ");
         autoSell.getColor().a = reward.isAutoSell() ? 1f : 0.7f;
     }
 
@@ -238,7 +238,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         switch (reward.type) {
             case Card: {
                 if (!reward.isNoSell) {
-                    autoSell = Controls.newTextButton("[%85][GRAY]\uFF04");
+                    autoSell = Controls.newTextButton("[%85][GRAY] ");
                     autoSell.getColor().a = 0.7f; // semi-transparent by default
                     autoSell.addListener(new InputListener() {
                         @Override
@@ -946,7 +946,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         overlayLabel.setWidth(this.getWidth());
         overlayLabel.setWrap(true);
         overlayLabel.setAlignment(alignment);
-        overlayLabel.style = (Controls.getSkin().get(labelStyle, Label.LabelStyle.class));
+        overlayLabel.style = new Styles.LabelStyle(Controls.getSkin().get(labelStyle, Label.LabelStyle.class));
         //compute layout
         overlayLabel.layout();
         //get the layout values and apply
@@ -1100,7 +1100,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             x = cImage.getX() + inset;
             y = cImage.getPrefHeight() / 2.3f;
             ARP = Forge.isLandscapeMode() ? 100 : 150;
-            cLabel = new TextraLabel("[%" + ARP + "]" + description, Controls.getSkin(), Controls.getTextraFont());
+            cLabel = new TextraLabel("[%" + ARP + "]" + description, new Styles.LabelStyle(Controls.getSkin().get(Label.LabelStyle.class)), Controls.getTextraFont());
             cLabel.setAlignment(align);
             cLabel.setWrap(true);
             cLabel.setWidth(width);

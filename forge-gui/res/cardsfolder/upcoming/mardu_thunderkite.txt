@@ -1,0 +1,9 @@
+Name:Mardu Thunderkite
+ManaCost:R W B
+Types:Creature Dragon
+PT:2/4
+K:Flying
+K:Mobilize:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, creatures you control perpetually gain your choice of menace, lifelink, or haste.
+SVar:TrigPump:DB$ Pump | Defined$ Valid Creature.YouCtrl | Duration$ Perpetual | KWChoice$ Menace,Lifelink,Haste
+Oracle:Flying\nMobilize 2\nWhen this creature enters, creatures you control perpetually gain your choice of menace, lifelink, or haste.

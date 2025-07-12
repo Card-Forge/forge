@@ -3239,7 +3239,7 @@ public class CardFactoryUtil {
 
             StringBuilder sb = new StringBuilder();
             sb.append("AB$ PutCounter | Cost$ ").append(manacost).append(" | PrecostDesc$ Level up | CostDesc$ ");
-            sb.append(ManaCostParser.parse(manacost)).append(" | SorcerySpeed$ True | LevelUp$ True | Secondary$ True");
+            sb.append(ManaCostParser.parse(manacost)).append(" | SorcerySpeed$ True | Secondary$ True");
             sb.append("| CounterType$ LEVEL | StackDescription$ {p:You} levels up {c:Self}.");
             if (card.hasSVar("maxLevel")) {
                 final String strMaxLevel = card.getSVar("maxLevel");
@@ -3587,10 +3587,9 @@ public class CardFactoryUtil {
                     "| CostDesc$ | SpellDescription$ Station (" + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            sa.setSVar("StationX", "Tapped$CardPower");
+            sa.setSVar("StationX", "TappedCards$TapPowerValue");
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
         } else if (keyword.startsWith("Encore")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
