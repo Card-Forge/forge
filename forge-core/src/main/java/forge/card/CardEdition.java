@@ -555,20 +555,6 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
 
             sheets.add(sheet);
-
-            String code2 = this.getCode2();
-            if (code2 != null) {
-                PrintSheet sheet2 = new PrintSheet(String.format("%s %s", code2, sectionName));
-                sheet2.addAll(sheet.all());
-                sheets.add(sheet2);
-            }
-
-            String alias = this.getAlias();
-            if (alias != null) {
-                PrintSheet sheet3 = new PrintSheet(String.format("%s %s", alias, sectionName));
-                sheet3.addAll(sheet.all());
-                sheets.add(sheet3);
-            }
         }
 
         for (String sheetName : customPrintSheetsToParse.keySet()) {
@@ -837,7 +823,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
         private void initAliases(CardEdition E){ //Add the alias to the edition here, to ensure it's always done equally.
             String alias = E.getAlias();
-            if (null != alias) aliasToEdition.put(alias, E);
+            if (null != alias)
+                aliasToEdition.put(alias, E);
             aliasToEdition.put(E.getCode2(), E);
         }
         @Override
@@ -866,7 +853,10 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
 
             CardEdition baseResult = super.get(code);
-            return baseResult == null ? aliasToEdition.get(code) : baseResult;
+
+            return baseResult == null
+                ? aliasToEdition.get(code)
+                : baseResult;
         }
 
         public Iterable<CardEdition> getOrderedEditions() {
