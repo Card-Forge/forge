@@ -278,7 +278,7 @@ public class UIActor extends Group {
                     newActor.setText(localize(property.value.toString()));
                     break;
                 case "style":
-                    newActor.setStyle(Controls.getSkin().get(property.value.toString(), TextButton.TextButtonStyle.class));
+                    newActor.setStyle(new Styles.TextButtonStyle(Controls.getSkin().get(property.value.toString(), TextButton.TextButtonStyle.class)));
                     break;
                 case "binding":
                     keyMap.put(KeyBinding.valueOf(property.value.toString()), newActor);

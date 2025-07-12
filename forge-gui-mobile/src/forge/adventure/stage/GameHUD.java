@@ -30,6 +30,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.github.tommyettinger.textra.Styles;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
@@ -484,7 +485,7 @@ public class GameHUD extends Stage {
                 ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
                 AdventureQuestController.instance().updateItemUsed(data);
             });
-            button.setStyle(Controls.getSkin().get("menu", TextButton.TextButtonStyle.class));
+            button.setStyle(new Styles.TextButtonStyle(Controls.getSkin().get("menu", TextButton.TextButtonStyle.class)));
             abilityButtonMap.add(button);
         }
     }
