@@ -53,7 +53,7 @@ Replace=.04 Mythic:fromSheet("INR cards")
 11 M Archangel Avacyn @James Ryman
 12 C Avacynian Priest @Greg Staples
 13 C Bound by Moonsilver @Joseph Meehan
-14 R Bruna, the Fading Light @Clint Cearley
+14a R Bruna, the Fading Light @Clint Cearley
 15 C Cathar Commando @Evyn Fong
 16 U Cathar's Call @Matt Stewart
 17 R Cathars' Crusade @Karl Kopinski
@@ -196,7 +196,7 @@ Replace=.04 Mythic:fromSheet("INR cards")
 154 U Fiery Temper @Johannes Voss
 155 U Furyblade Vampire @Lius Lasahido
 156 U Geier Reach Bandit @Slawomir Maniak
-157 R Hanweir Garrison @Vincent Proce
+157a R Hanweir Garrison @Vincent Proce
 158 C Hanweir Watchkeep @Wayne Reynolds
 159 U Honeymoon Hearse @Raoul Vitale
 160 C Hungry Ridgewolf @Olena Richards
