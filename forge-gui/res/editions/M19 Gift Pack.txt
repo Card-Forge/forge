@@ -2,9 +2,8 @@
 Code=G18
 Date=2018-11-16
 Name=M19 Gift Pack
-Code2=G18
 Type=Promo
-ScryfallCode=g18
+ScryfallCode=G18
 
 [cards]
 GP1 R Angelic Guardian @Sara Winters
