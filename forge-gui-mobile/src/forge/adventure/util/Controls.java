@@ -473,8 +473,10 @@ public class Controls {
 
     public static TypingLabel newTypingLabel(String name) {
         TypingLabel ret = new TypingLabel(name == null ? "" : name, new Styles.LabelStyle(getSkin().get(Label.LabelStyle.class)), getTextraFont());
-        //ret.setVariable("player_name", Current.player().getName());
-        //ret.setVariable("player_color_id", colorIdToTypingString(Current.player().getColorIdentity()));
+        String pn = Current.player().getName();
+        if (pn != null) // this variable is used for dialogs
+            ret.setVariable("player_name", pn);
+        ret.setVariable("player_color_id", colorIdToTypingString(Current.player().getColorIdentity()));
         return ret;
     }
 
