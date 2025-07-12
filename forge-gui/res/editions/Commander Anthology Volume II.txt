@@ -337,3 +337,6 @@ ScryfallCode=CM2
 15 tuktuk_the_returned @Franz Vohwinkel
 16 c_3_3_a_phyrexian_wurm_deathtouch @Raymond Swanland
 17 c_3_3_a_phyrexian_wurm_lifelink @Raymond Swanland
+
+[other]
+18 emblem_daretti_scrap_savant @Dan Murayama Scott
