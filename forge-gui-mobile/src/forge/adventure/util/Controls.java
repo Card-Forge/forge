@@ -18,11 +18,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.Timer;
-import com.github.tommyettinger.textra.Font;
-import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
-import com.github.tommyettinger.textra.TypingButton;
-import com.github.tommyettinger.textra.TypingLabel;
+import com.github.tommyettinger.textra.*;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.card.ColorSet;
@@ -37,7 +33,7 @@ import java.util.function.Function;
 public class Controls {
     static class LabelFix extends TextraLabel {
         public LabelFix(String text, Font font) {
-            super(text, getSkin(), font);
+            super(text, new Styles.LabelStyle(getSkin().get(Label.LabelStyle.class)), font);
         }
 
         @Override
@@ -58,7 +54,7 @@ public class Controls {
 
     static class TextButtonFix extends TextraButton {
         public TextButtonFix(@Null String text) {
-            super(text == null ? "NULL" : text, Controls.getSkin(), Controls.getTextraFont());
+            super(text == null ? "NULL" : text, new Styles.TextButtonStyle(Controls.getSkin().get(TextButton.TextButtonStyle.class)), Controls.getTextraFont());
             addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -93,7 +89,7 @@ public class Controls {
 
     static class TypingButtonFix extends TypingButton {
         public TypingButtonFix(@Null String text) {
-            super(text == null ? "NULL" : text, Controls.getSkin(), Controls.getTextraFont());
+            super(text == null ? "NULL" : text, new Styles.TextButtonStyle(Controls.getSkin().get(TextButton.TextButtonStyle.class)), Controls.getTextraFont());
             addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -477,9 +473,9 @@ public class Controls {
     }
 
     public static TypingLabel newTypingLabel(String name) {
-        TypingLabel ret = new TypingLabel(name == null ? "" : name, getSkin(), getTextraFont());
-        ret.setVariable("player_name", Current.player().getName());
-        ret.setVariable("player_color_id", colorIdToTypingString(Current.player().getColorIdentity()));
+        TypingLabel ret = new TypingLabel(name == null ? "" : name, new Styles.LabelStyle(getSkin().get(Label.LabelStyle.class)), getTextraFont());
+        //ret.setVariable("player_name", Current.player().getName());
+        //ret.setVariable("player_color_id", colorIdToTypingString(Current.player().getColorIdentity()));
         return ret;
     }
 
