@@ -3,7 +3,6 @@ package forge.player;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.*;
@@ -1021,11 +1020,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             }
 
             if (cType == null || !c.canRemoveCounters(cType)) {
-                    return false;
+                return false;
             }
 
             if (c.getCounters(cType) <= counterTable.get(null, c, cType)) {
-                    return false;
+                return false;
             }
 
             counterTable.put(null, c, cType, 1);
@@ -1101,7 +1100,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String type = cost.getType();
         final CounterType cntrs = cost.counter;
         final boolean anyCounters = cntrs == null;
-        GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        GameEntityCounterTable counterTable;
 
         int cntRemoved = 1;
         if (!amount.equals("All")) {
@@ -1170,7 +1169,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        return PaymentDecision.counters(generateCounterTable(selected, cntrs, cntRemoved, ability));
+        counterTable = generateCounterTable(selected, cntrs, cntRemoved, ability);
+        if (counterTable.isEmpty()) return null;
+        return PaymentDecision.counters(counterTable);
     }
 
     private GameEntityCounterTable generateCounterTable (final Card c, final CounterType cType, int cntToRemove, final SpellAbility sa) {
@@ -1178,42 +1179,32 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (cType != null) {
             counterTable.put(null, c, cType, cntToRemove);
         } else {
-            final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(c.getCounters());
-            for (CounterType ct : ImmutableList.copyOf(tgtCounters.keySet())) {
+            Map<CounterType, Integer> cMap = counterTable.filterToRemove(c);
+            for (CounterType ct : ImmutableList.copyOf(cMap.keySet())) {
                 if (!c.canRemoveCounters(ct)) {
-                    tgtCounters.remove(ct);
+                    cMap.remove(ct);
                 }
             }
-            if (tgtCounters.isEmpty()) return counterTable;
-            if (tgtCounters.size() == 1) {
-                counterTable.put(null, c, tgtCounters.entrySet().iterator().next().getKey(), cntToRemove);
+            if (cMap.isEmpty()) return counterTable;
+            if (cMap.size() == 1) {
+                counterTable.put(null, c, cMap.entrySet().iterator().next().getKey(), cntToRemove);
             } else while (cntToRemove > 0) {
-                Map<String, Object> params = Maps.newHashMap();
-                PlayerController pc = c.getController().getController();
-                params.put("Target", c);
+                final PlayerController pc = c.getController().getController();
 
                 String prompt = Localizer.getInstance().getMessage("lblSelectCountersTypeToRemove");
-                CounterType chosenType = pc.chooseCounterType(ImmutableList.copyOf(tgtCounters.keySet()), sa, prompt, params);
+                CounterType chosen = pc.chooseCounterType(Lists.newArrayList(cMap.keySet()), sa, prompt, null);
 
-                int max = Math.min(cntToRemove, tgtCounters.get(chosenType));
-                int remaining = Aggregates.sum(tgtCounters.values());
-                // player must choose enough so he can still reach the amount with other types
+                int max = Math.min(cntToRemove, cMap.get(chosen));
+                int remaining = Aggregates.sum(cMap.values());
                 int min = Math.max(1, max - remaining);
-                prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName());
-                params = Maps.newHashMap();
-                params.put("Target", c);
-                params.put("CounterType", chosenType);
-                int chosenAmount = pc.chooseNumber(sa, prompt, min, max, params);
+                prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosen.getName());
+                int chosenAmount = pc.chooseNumber(sa, prompt, min, max, null);
 
                 if (chosenAmount > 0) {
-                    counterTable.put(null, c, chosenType, chosenAmount);
-                    if (tgtCounters.get(chosenType) > chosenAmount) {
-                        tgtCounters.put(chosenType, tgtCounters.get(chosenType) - chosenAmount);
-                    } else {
-                        tgtCounters.remove(chosenType);
-                    }
-                    cntToRemove -= chosenAmount;
+                    counterTable.put(null, c, chosen, chosenAmount);
+                    cMap = counterTable.filterToRemove(c);
                 }
+                cntToRemove -= chosenAmount;
             }
         }
         return counterTable;

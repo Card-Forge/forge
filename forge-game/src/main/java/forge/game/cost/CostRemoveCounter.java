@@ -104,7 +104,8 @@ public class CostRemoveCounter extends CostPart {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        final String ctrName = this.counter == null ? "counters" : this.counter.getName().toLowerCase() + " counters";
+        final boolean anyCounter = this.counter == null;
+        final String ctrName = anyCounter ? "counters" : this.counter.getName().toLowerCase() + " counters";
         if (this.counter != null && this.counter.is(CounterEnumType.LOYALTY) && payCostFromSource()) {
             sb.append("-").append(this.getAmount());
         } else {
@@ -112,6 +113,8 @@ public class CostRemoveCounter extends CostPart {
             if (this.getAmount().equals("X")) {
                 if (oneOrMore) {
                     sb.append("one or more ");
+                } else if (anyCounter) {
+                    sb.append ("X ");
                 } else {
                     sb.append("any number of ");
                 }
@@ -120,7 +123,7 @@ public class CostRemoveCounter extends CostPart {
                 sb.append("all ").append(ctrName);
             } else {
                 sb.append(Lang.nounWithNumeralExceptOne(this.getAmount(),
-                        this.counter == null ? "counter" : this.counter.getName().toLowerCase() + " counter"));
+                        anyCounter ? "counter" : this.counter.getName().toLowerCase() + " counter"));
             }
 
             sb.append(" from ");
