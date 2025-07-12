@@ -2114,15 +2114,8 @@ public class AbilityUtils {
         if (sq[0].contains("CardCounters")) {
             // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
             int count = 0;
-            if (sq[1].equals("ALL")) {
-                for (Integer i : c.getCounters().values()) {
-                    if (i != null && i > 0) {
-                        count += i;
-                    }
-                }
-            } else {
-                count = c.getCounters(CounterType.getType(sq[1]));
-            }
+            if (sq[1].equals("ALL")) count = c.getNumAllCounters();
+            else count = c.getCounters(CounterType.getType(sq[1]));
             return doXMath(count, expr, c, ctb);
         }
 
