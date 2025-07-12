@@ -169,6 +169,12 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             removedAbilities.add(sa.getOriginalAbility());
         }
 
+        // remove triggers
+        final List<Trigger> removedTriggers = Lists.newArrayList();
+        if (sa.hasParam("RemoveThisTrigger")) {
+            removedTriggers.add(sa.getTrigger());
+        }
+
         // give abilities
         final List<SpellAbility> addedAbilities = Lists.newArrayList();
         for (final String s : abilities) {
@@ -234,8 +240,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         // after unanimate to add RevertCost
         if (removeAll || removeNonManaAbilities
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
-                || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-            c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
+                || !removedTriggers.isEmpty() || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
+            c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, removedTriggers, addedReplacements,
                 addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
             if (perpetual) {
                 Map <String, Object> params = new HashMap<>();

@@ -1831,7 +1831,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             SpellAbility sa = AbilityFactory.getAbility(abStr, this);
             sa.setIntrinsic(false);
 
-            addChangedCardTraits(ImmutableList.of(sa), null, null, null, null, true, false, timestamp, 0);
+            addChangedCardTraits(ImmutableList.of(sa), null, null, null, null, null, true, false, timestamp, 0);
             return true;
         }
         if (!counterType.isKeywordCounter()) {
@@ -5100,21 +5100,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addChangedCardTraitsByText(Collection<SpellAbility> spells,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics, long timestamp, long staticId) {
         changedCardTraitsByText.put(timestamp, staticId, new CardTraitChanges(
-            spells, null, trigger, replacements, statics, true, false
+            spells, null, trigger, null, replacements, statics, true, false
         ));
         updateAbilityTextForView();
     }
 
     public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
-            Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
+            Collection<Trigger> trigger, Collection<Trigger> removedTriggers, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             boolean removeAll, boolean removeNonMana, long timestamp, long staticId) {
-        addChangedCardTraits(spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana, timestamp, staticId, true);
+        addChangedCardTraits(spells, removedAbilities, trigger, removedTriggers, replacements, statics, removeAll, removeNonMana, timestamp, staticId, true);
     }
     public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
-            Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
+            Collection<Trigger> trigger, Collection<Trigger> removedTriggers, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
             boolean removeAll, boolean removeNonMana, long timestamp, long staticId, boolean updateView) {
         changedCardTraits.put(timestamp, staticId, new CardTraitChanges(
-            spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana
+            spells, removedAbilities, trigger, removedTriggers, replacements, statics, removeAll, removeNonMana
         ));
         if (updateView) {
             updateAbilityTextForView();
@@ -5139,7 +5139,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         return Iterables.concat(
             changedCardTraitsByText.values(), // Layer 3
-            ImmutableList.of(new CardTraitChanges(landManaAbilities, null, null, null, null, hasRemoveIntrinsic(), false)), // Layer 4
+            ImmutableList.of(new CardTraitChanges(landManaAbilities, null, null, null, null,null, hasRemoveIntrinsic(), false)), // Layer 4
             changedCardTraits.values() // Layer 6
         );
     }
@@ -7272,6 +7272,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 list.clear();
             }
             list.addAll(ck.getTriggers());
+            if (!ck.getRemovedTriggers().isEmpty()) {
+                List<Trigger> toRemove = Lists.newArrayList();
+                for (final Trigger t : ck.getRemovedTriggers()) {
+                    for (final Trigger l : list) {
+                        if (t.getMode() == l.getMode() && t.toString().equals(l.toString())) {
+                            toRemove.add(l);
+                            break;
+                        }
+                    }
+                }
+                list.removeAll(toRemove);
+            }
         }
 
         // Keywords are already sorted by Layer
