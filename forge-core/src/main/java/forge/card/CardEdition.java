@@ -555,6 +555,20 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
 
             sheets.add(sheet);
+
+            String code2 = this.getCode2();
+            if (code2 != null) {
+                PrintSheet sheet2 = new PrintSheet(String.format("%s %s", code2, sectionName));
+                sheet2.addAll(sheet.all());
+                sheets.add(sheet2);
+            }
+
+            String alias = this.getAlias();
+            if (alias != null) {
+                PrintSheet sheet3 = new PrintSheet(String.format("%s %s", alias, sectionName));
+                sheet3.addAll(sheet.all());
+                sheets.add(sheet3);
+            }
         }
 
         for (String sheetName : customPrintSheetsToParse.keySet()) {
