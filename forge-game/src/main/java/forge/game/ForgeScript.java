@@ -257,6 +257,8 @@ public class ForgeScript {
             return sa.isKeyword(Keyword.DAYBOUND);
         } else if (property.equals("Nightbound")) {
             return sa.isKeyword(Keyword.NIGHTBOUND);
+        } else if (property.equals("Warp")) {
+            return sa.isWarp();
         } else if (property.equals("Ward")) {
             return sa.isKeyword(Keyword.WARD);
         } else if (property.equals("CumulativeUpkeep")) {

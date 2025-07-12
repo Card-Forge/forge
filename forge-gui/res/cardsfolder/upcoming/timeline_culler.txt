@@ -1,0 +1,8 @@
+Name:Timeline Culler
+ManaCost:B B
+Types:Creature Drix Warlock
+PT:2/2
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | ValidSA$ Spell.Warp | AffectedZone$ Graveyard | EffectZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard using its warp ability.
+K:Warp:B PayLife<2>
+Oracle:Haste\nYou may cast this card from your graveyard using its warp ability.\nWarp—{B}, Pay 2 life. (You may cast this card from your hand of graveyard for its warp cost. If you do, exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
