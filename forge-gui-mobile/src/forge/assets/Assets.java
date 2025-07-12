@@ -338,9 +338,7 @@ public class Assets implements Disposable {
         if (!textrafonts.containsKey("textrafont")) {
             Font font = new Font(bitmapFont);
             font.addAtlas(item_atlas);
-            //problematic atlas since some buttons are small, and this is too big for some buttons, need a way to enable
-            //this via property
-            //font.addAtlas(pixelmana_atlas, -90f, 20f, 0f);
+            font.addAtlas(pixelmana_atlas);
             font.integerPosition = false;
             textrafonts.put("textrafont", font);
         }

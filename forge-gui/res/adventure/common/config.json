@@ -5,7 +5,7 @@
   "playerBaseSpeed": 32,
   "minDeckSize": 40,         
   "colorIds":["W","U","B","R","G"],  
-  "colorIdNames":["tr(lblWhite) [+W]","tr(lblBlue) [+U]","tr(lblBlack) [+B]","tr(lblRed) [+R]","tr(lblGreen) [+G]"],
+  "colorIdNames":["tr(lblWhite) [+pmW]","tr(lblBlue) [+pmU]","tr(lblBlack) [+pmB]","tr(lblRed) [+pmR]","tr(lblGreen) [+pmG]"],
   "restrictedCards": [
     "Black Lotus",
     "Mox Emerald",

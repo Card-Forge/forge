@@ -327,7 +327,7 @@ public class SaveLoadScene extends UIScene {
         String noMapData = "[RED]No Map Data!";
         if (worldSaveHeader.name.contains(Character.toString(ASCII_179))) {
             String[] split = TextUtil.split(worldSaveHeader.name, ASCII_179);
-            if (getLocation) // unicode symbols with \\uFFxx seems crashes TextraTypist 2.x.x
+            if (getLocation) // unicode symbols with \\uFFxx blackout the stage using TextraTypist 2.x.x
                 return split.length > 1 ? split[1].replaceAll("\uFF0A", "• ") : noMapData;
             else
                 return split[0];
