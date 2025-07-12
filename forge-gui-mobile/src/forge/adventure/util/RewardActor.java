@@ -222,8 +222,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private void updateAutoSell() {
         reward.setAutoSell(!reward.isAutoSell());
-        String c = reward.isAutoSell() ? "[%85][GREEN]" : "[%85][GRAY]";
-        autoSell.setText(c + "$");
+        autoSell.setText(reward.isAutoSell() ? "[%85][+Sell]" : "[%85][GRAY] ");
         autoSell.getColor().a = reward.isAutoSell() ? 1f : 0.7f;
     }
 
@@ -239,7 +238,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         switch (reward.type) {
             case Card: {
                 if (!reward.isNoSell) {
-                    autoSell = Controls.newTextButton("[%85][GRAY]$");
+                    autoSell = Controls.newTextButton("[%85][GRAY] ");
                     autoSell.getColor().a = 0.7f; // semi-transparent by default
                     autoSell.addListener(new InputListener() {
                         @Override
