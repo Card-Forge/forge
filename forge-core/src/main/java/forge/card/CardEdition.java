@@ -42,7 +42,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-
 /**
  * <p>
  * CardSet class.
@@ -823,7 +822,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
         private void initAliases(CardEdition E){ //Add the alias to the edition here, to ensure it's always done equally.
             String alias = E.getAlias();
-            if (null != alias) aliasToEdition.put(alias, E);
+            if (null != alias)
+                aliasToEdition.put(alias, E);
             aliasToEdition.put(E.getCode2(), E);
         }
         @Override
@@ -852,7 +852,10 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
 
             CardEdition baseResult = super.get(code);
-            return baseResult == null ? aliasToEdition.get(code) : baseResult;
+
+            return baseResult == null
+                ? aliasToEdition.get(code)
+                : baseResult;
         }
 
         public Iterable<CardEdition> getOrderedEditions() {

@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
-
 /**
  * TODO: Write javadoc for this type.
  *
@@ -160,5 +159,4 @@ public class PrintSheet {
         }
 
     }
-
 }
