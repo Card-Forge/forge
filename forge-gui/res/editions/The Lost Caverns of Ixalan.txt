@@ -437,7 +437,7 @@ ScryfallCode=LCI
 409 U Bartolomé del Presidio @Randy Gallegos
 
 [rebalanced]
-A150 U A-Geological Appraiser @Alix Branwyn
+A-150 U A-Geological Appraiser @Alix Branwyn
 
 [double-face]
 9 Idol of the Deep King|LCI

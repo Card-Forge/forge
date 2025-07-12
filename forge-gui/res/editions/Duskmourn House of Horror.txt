@@ -475,7 +475,7 @@ Replace=.078F RareMythic:fromSheet("DSK cards")
 417 R Twitching Doll @John Tedrick
 
 [rebalanced]
-A143 R A-Leyline of Resonance @Sergey Glushakov
+A-143 R A-Leyline of Resonance @Sergey Glushakov
 
 [special guests]
 1 Collected Company|SPG

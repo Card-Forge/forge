@@ -784,8 +784,8 @@ ScryfallCode=J21
 776 R Sliver Hive
 
 [rebalanced]
-A438 U A-Dragon's Rage Channeler @Martina Fackova
-A529 C A-Unholy Heat @Kari Christensen
+A-438 U A-Dragon's Rage Channeler @Martina Fackova
+A-529 C A-Unholy Heat @Kari Christensen
 
 [tokens]
 u_8_8_kraken
