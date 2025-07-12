@@ -89,10 +89,14 @@ public class CardImageRenderer {
     }
 
     public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean showArtist) {
-        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, false, false, showArtist);
+        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, false, false, showArtist, true);
     }
 
     public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist) {
+        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, noText, isChoiceList, showArtist, true);
+    }
+
+    public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist, boolean showArtBox) {
         updateStaticFields(w, h);
 
         float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
@@ -154,7 +158,7 @@ public class CardImageRenderer {
         y += headerHeight;
 
         float artWidth = w - 2 * artInset;
-        float artHeight = artWidth / CardRenderer.CARD_ART_RATIO;
+        float artHeight = !showArtBox ? 0f : artWidth / CardRenderer.CARD_ART_RATIO;
         float typeBoxHeight = 2 * TYPE_FONT.getCapHeight();
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
