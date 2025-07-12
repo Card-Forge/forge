@@ -27,6 +27,7 @@ ScryfallCode=EOS
 44 R Thespian's Stage @Bruce Brenneise
 48 R Blinkmoth Nexus @Meel Tamphanon
 49 R Bonders' Enclave @BEMOCS
+50 R Cascading Cataracts @Sam Chivers
 52 R Celestial Colonnade @Ann-Sophie De Steur
 59 R Eldrazi Temple @BEMOCS
 61 M Gemstone Caverns @BEMOCS
@@ -36,6 +37,7 @@ ScryfallCode=EOS
 70 M Mana Confluence @Matteo Bassini
 73 M Mutavault @Aeron Ng
 76 R Nesting Grounds @WFlemming Illustration
+79 R Power Depot @Lazare Gvimradze
 81 M Reflecting Pool @Sam Chivers
 82 R Scavenger Grounds @BEMOCS
 89 R Thespian's Stage @William Phifer
@@ -45,6 +47,7 @@ ScryfallCode=EOS
 104 R Eldrazi Temple @Calder Moore
 106 M Gemstone Caverns @Mark Poole
 108 R High Market @Andrew Theophilopoulos
+110 M Inkmoth Nexus @Piotr Dura
 115 M Mana Confluence @Sam Burley
 118 M Mutavault @Andrew Mar
 121 R Nesting Grounds @John Thacker
@@ -56,6 +59,7 @@ ScryfallCode=EOS
 149 R Eldrazi Temple @BEMOCS
 151 M Gemstone Caverns @BEMOCS
 153 R High Market @WFlemming Illustration
+155 M Inkmoth Nexus @Matteo Bassini
 160 M Mana Confluence @Matteo Bassini
 163 M Mutavault @Aeron Ng
 166 R Nesting Grounds @WFlemming Illustration

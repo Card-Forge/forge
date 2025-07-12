@@ -30,15 +30,25 @@ ScryfallCode=EOC
 22 R Glittering Massif @Cristi Balanescu
 23 R Radiant Summit @Marco Gorlei
 24 R Vernal Fen @Titus Lunter
+25 R Patrolling Peacemaker @Michal Ivan
+26 R Insight Engine @Gaboleps
+27 R Uthros Research Craft @Piotr Dura
 28 R Eumidian Wastewaker @Mathias Kollros
+29 R Depthshaker Titan @PINDURSKI
 30 R Evendo Brushrazer @Igor Grechanyi
+31 R Long-Range Sensor @Artur Treffner
 32 R Planetary Annihilation @Cristi Balanescu
 33 R Baloth Prime @Joshua Raphael
 34 R Exploration Broodship @Borja Pindado
 35 R Horizon Explorer @Filip Burburan
 36 R Scouring Swarm @Diana Franco
+37 R Moxite Refinery @Nadia Hurianova
+38 R Solar Array @Sergey Glushakov
+39 R Surge Conductor @Alexandr Leskinen
 40 R Eumidian Hatchery @Valera Lutfullina
 41 R Festering Thicket @Jakob Eirich
+42 R Glittering Massif @Cristi Balanescu
+43 R Radiant Summit @Marco Gorlei
 44 R Vernal Fen @Titus Lunter
 45 U Swords to Plowshares @Nadia Hurianova
 46 R Swan Song @Lorenzo Mastroianni
