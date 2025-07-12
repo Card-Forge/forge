@@ -85,8 +85,18 @@
     "UND",
     "PUST",
     "DA1",
-    "UST",
     "UNF"
+  ],
+  "restrictedEvents": [
+    "LEA",
+    "LEB",
+    "2ED",
+    "30A",
+    "CNS",
+    "CN2",
+    "CMR",
+    "CLB",
+    "CMM"
   ],
   "difficulties": [
     {
