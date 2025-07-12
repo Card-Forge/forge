@@ -45,7 +45,11 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            boolean redrawPT = false;
+            boolean redrawPT = sa.hasParam("SwitchPT");
+
+            if (sa.hasParam("SwitchPT")) {
+                tgtC.addSwitchPT(timestamp, 0);
+            }
 
             if (a != 0 || d != 0) {
                 if (perpetual) {
@@ -89,6 +93,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
+                        tgtC.removeSwitchPT(timestamp, 0);
                         tgtC.removePTBoost(timestamp, 0);
                         tgtC.removeChangedCardKeywords(timestamp, 0);
                         tgtC.removeHiddenExtrinsicKeywords(timestamp, 0);

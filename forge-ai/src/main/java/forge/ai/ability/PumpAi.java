@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
@@ -14,6 +15,9 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -57,12 +61,6 @@ public class PumpAi extends PumpAiBase {
             return SpecialAiLogic.doAristocratLogic(ai, sa);
         } else if (aiLogic.startsWith("AristocratCounters")) {
             return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
-        } else if (aiLogic.equals("SwitchPT")) {
-            // Some more AI would be even better, but this is a good start to prevent spamming
-            if (sa.isActivatedAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
-                // Will prevent flipping back and forth
-                return false;
-            }
         }
 
         return super.checkAiLogic(ai, sa, aiLogic);
@@ -83,11 +81,6 @@ public class PumpAi extends PumpAiBase {
             if (!ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !isThreatened) {
                 return false;
             }
-        } else if (logic.equals("SwitchPT")) {
-            // Some more AI would be even better, but this is a good start to prevent spamming
-            if (ph.getPhase().isAfter(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE) || !ph.inCombat()) {
-                return false;
-            }
         }
         return super.checkPhaseRestrictions(ai, sa, ph);
     }
@@ -101,6 +94,12 @@ public class PumpAi extends PumpAiBase {
                 return false;
             }
             if (ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN) && ph.getPlayerTurn().isOpponentOf(ai)) {
+                return false;
+            }
+        }
+        if (sa.hasParam("SwitchPT")) {
+            // Some more AI would be even better, but this is a good start to prevent spamming
+            if (ph.getPhase().isAfter(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE) || !ph.inCombat()) {
                 return false;
             }
         }
@@ -248,6 +247,14 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
+        if (sa.hasParam("SwitchPT")) {
+            // Some more AI would be even better, but this is a good start to prevent spamming
+            if (sa.isActivatedAbility() && sa.getActivationsThisTurn() > 0 && !sa.usesTargeting()) {
+                // Will prevent flipping back and forth
+                return false;
+            }
+        }
+
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
         }
@@ -356,7 +363,7 @@ public class PumpAi extends PumpAiBase {
     } // pumpPlayAI()
 
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
-    		boolean immediately) {
+                boolean immediately) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.newArrayList();
         final Game game = ai.getGame();
@@ -464,6 +471,65 @@ public class PumpAi extends PumpAiBase {
             if (isFight) {
                 return FightAi.canFightAi(ai, sa, attack, defense);
             }
+        }
+
+        if (sa.hasParam("SwitchPT")) {
+            // Logic to kill opponent creatures
+            CardCollection oppCreatures = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
+            if (!oppCreatures.isEmpty()) {
+                CardCollection oppCreaturesFiltered = CardLists.filter(oppCreatures, card -> {
+                    // don't care about useless creatures
+                    if (ComputerUtilCard.isUselessCreature(ai, card)
+                            || card.hasSVar("EndOfTurnLeavePlay")) {
+                        return false;
+                    }
+                    // dies by target
+                    if (card.getSVar("Targeting").equals("Dies")) {
+                        return true;
+                    }
+                    // dies by state based action
+                    if (card.getNetPower() <= 0) {
+                        return true;
+                    }
+                    if (card.hasKeyword(Keyword.INDESTRUCTIBLE)) {
+                        return false;
+                    }
+                    // check if switching PT causes it to be lethal
+                    Card lki = CardCopyService.getLKICopy(card);
+                    lki.addSwitchPT(-1, 0);
+
+                    // check if creature could regenerate
+                    Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(card);
+                    runParams.put(AbilityKey.Regeneration, true);
+                    List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
+                    // non-Regeneration one like Totem-Armor
+                    // should do it anyway to destroy the aura?
+                    if (repDestoryList.stream().anyMatch(r -> !r.hasParam("Regeneration"))) {
+                        return false;
+                    }
+                    // TODO make it force to use regen?
+                    // should check phase and make it before combat damage or better before blocker?
+                    if (repDestoryList.stream().anyMatch(r -> r.hasParam("Regeneration")) && card.canBeShielded()) {
+                        return false;
+                    }
+
+                    // maybe do it anyway to reduce its power?
+                    if (card.getLethal() - card.getDamage() > 0) {
+                        return false;
+                    }
+                    return true;
+                });
+                // the ones that die by switching PT
+                if (!oppCreaturesFiltered.isEmpty()) {
+                    Card best = ComputerUtilCard.getBestCreatureAI(oppCreaturesFiltered);
+                    if (best != null) {
+                        sa.getTargets().add(best);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         if (sa.isCurse()) {
