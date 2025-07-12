@@ -74,7 +74,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     final int preview_h = 680;
 
     TextureRegion backTexture;
-    Texture image, T, Talt;
+    Texture image, T, Tnotext, Talt, Taltnotext;
     Graphics graphics;
     Texture generatedTooltip = null; //Storage for a generated tooltip. To dispose of on exit.
     boolean needsToBeDisposed;
@@ -92,6 +92,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     public int renderedCount = 0; //Counter for cards that require rendering a preview.
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
     RewardImage toolTipImage;
+    RewardImage alternateToolTipImage;
     String description = "";
     private boolean shouldDisplayText = false;
     private boolean isDragging = false;
@@ -283,33 +284,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         loaded = false;
                     }
                     ImageCache.getInstance().updateSynqCount(frontFace, count);
-                    //preload card back for performance
-                    if (hasbackface) {
-                        if (ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(true))) {
-                            PaperCard cardBack = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(true));
-                            File backFace = ImageKeys.getImageFile(cardBack.getCardAltImageKey());
-                            if (backFace != null) {
-                                try {
-                                    Texture back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
-                                    if (back == null) {
-                                        Forge.getAssets().manager().load(backFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
-                                        Forge.getAssets().manager().finishLoadingAsset(backFace.getPath());
-                                        back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
-                                    }
-                                    if (back != null) {
-                                        ImageCache.getInstance().updateSynqCount(backFace, 1);
-                                        generateBackFace(reward, back);
-                                    } else {
-                                        generateBackFace(reward, getRenderedBackface(reward));
-                                    }
-                                } catch (Exception e) {
-                                    System.err.println("Failed to load image: " + backFace.getPath());
-                                }
-                            }
-                        } else {
-                            generateBackFace(reward, getRenderedBackface(reward));
-                        }
-                    }
                 } else {
                     String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), "", true, false);
                     File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath + "border") : null;
@@ -355,11 +329,22 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         loaded = false;
                         if (!ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(false)))
                             fetcher.fetchImage(reward.getCard().getImageKey(false), this);
-                        if (hasbackface) {
-                            if (!ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(true))) {
-                                fetcher.fetchImage(reward.getCard().getImageKey(true), () -> System.out.println("Backface fetched: " + reward.getCard().getImageKey(true)));
-                            }
-                        }
+                    }
+                }
+
+                //preload card back for performance
+                if (hasbackface) {
+                    generateBackFace(reward, getRenderedBackface(reward));
+
+                    String altKey = reward.getCard().getImageKey(true);
+
+                    if (ImageCache.getInstance().imageKeyFileExists(altKey)) {
+                        updateBackFace(altKey);
+                    } else {
+                        fetcher.fetchImage(altKey, () -> {
+                            System.out.println("Backface fetched: " + altKey);
+                            updateBackFace(altKey);
+                        });
                     }
                 }
                 break;
@@ -563,9 +548,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private void generateBackFace(Reward r, Texture t) {
         try {
+            alternateToolTipImage = new RewardImage(processDrawable(t));
+
             if (holdTooltip != null) {
                 if (holdTooltip.tooltip_actor.getChildren().size <= 2) {
-                    holdTooltip.tooltip_actor.altcImage = new RewardImage(processDrawable(t));
+                    holdTooltip.tooltip_actor.altcImage = alternateToolTipImage;
                     holdTooltip.tooltip_actor.addActorAt(2, holdTooltip.tooltip_actor.altcImage);
                     holdTooltip.tooltip_actor.swapActor(holdTooltip.tooltip_actor.altcImage, holdTooltip.tooltip_actor.cImage);
                 }
@@ -573,6 +560,29 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         } catch (Exception e) {
             System.err.println("Failed to load alternate image: " + r.getCard());
         }
+    }
+
+    private void updateBackFace(String key) {
+        PaperCard cardBack = ImageUtil.getPaperCardFromImageKey(key);
+        File backFace = ImageKeys.getImageFile(cardBack.getCardAltImageKey());
+        if (backFace != null) {
+            try {
+                Texture back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
+                if (back == null) {
+                    Forge.getAssets().manager().load(backFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                    Forge.getAssets().manager().finishLoadingAsset(backFace.getPath());
+                    back = Forge.getAssets().manager().get(backFace.getPath(), Texture.class, false);
+                }
+                if (back != null) {
+                    ImageCache.getInstance().updateSynqCount(backFace, 1);
+                    generateBackFace(reward, back);
+                } else {
+                    generateBackFace(reward, getRenderedBackface(reward));
+                }
+            } catch (Exception e) {
+                System.err.println("Failed to load image: " + backFace.getPath());
+            }
+        };
     }
 
     private void switchTooltip() {
@@ -589,22 +599,23 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (!hover)
                 return;
             if (reward.getCard().hasBackFace() && alternate) {
-                if (Talt == null)
-                    Talt = renderPlaceholder(new Graphics(), reward.getCard(), true);
+                if (Taltnotext == null)
+                    Taltnotext = renderPlaceholder(new Graphics(), reward.getCard(), true, false);
 
-                Texture alt = shouldDisplayText
-                        ? Talt
-                        : ImageCache.getInstance().getImage(reward.getCard().getImageKey(true), false);
+                RewardImage altImage = shouldDisplayText
+                        ? new RewardImage(processDrawable(Taltnotext))
+                        : alternateToolTipImage;
 
-                if (alt == null)
+                if (altImage == null)
                     return;
 
-                tooltip.setActor(new ComplexTooltip(new RewardImage(processDrawable(alt))));
+                tooltip.setActor(new ComplexTooltip(altImage));
             } else {
-                T = renderPlaceholder(new Graphics(), reward.getCard(), false);
+                if (Tnotext == null)
+                    Tnotext = renderPlaceholder(new Graphics(), reward.getCard(), false, false);
 
                 RewardImage image = shouldDisplayText
-                    ? new RewardImage(processDrawable(T))
+                    ? new RewardImage(processDrawable(Tnotext))
                     : toolTipImage;
 
                 if (image == null)
@@ -695,12 +706,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
     }
 
-    private Texture renderPlaceholder(Graphics g, PaperCard card, boolean alternate) { //Use CardImageRenderer to output a Texture.
+    private Texture renderPlaceholder(Graphics g, PaperCard card, boolean alternate) {
+        return renderPlaceholder(g, card, alternate, true);
+    }
+
+    private Texture renderPlaceholder(Graphics g, PaperCard card, boolean alternate, boolean displayArt) { //Use CardImageRenderer to output a Texture.
         if (renderedCount < 1) {
             renderedCount++;
             //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
             g.begin(preview_w, preview_h);
-            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, true);
+            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
             g.end();
         }
         Matrix4 m = new Matrix4();
@@ -711,7 +726,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         g.begin(preview_w, preview_h);
         g.setProjectionMatrix(m);
         g.startClip();
-        CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, true);
+        CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, false, false, true, displayArt);
         g.end();
         g.endClip();
         //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
@@ -1122,7 +1137,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     class ComplexTooltip extends Group {
         private TextraLabel cLabel;
         private Image cImage, altcImage;
-        private boolean shouldDisplayText = false;
         private float inset, width, x, y;
         private int ARP;
 
