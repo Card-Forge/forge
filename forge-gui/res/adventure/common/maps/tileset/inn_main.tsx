@@ -539,7 +539,6 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="0.0869565" y="-0.0434783" width="11.8696" height="8"/>
    <object id="2" x="2.04348" y="7.95652" width="10.9565" height="7"/>
-   <object id="3" x="13" y="14.9565"/>
   </objectgroup>
  </tile>
  <tile id="4726">
@@ -606,6 +605,26 @@
    <object id="2" x="1.04348" y="4" width="13.0435" height="5.04348"/>
    <object id="3" x="4.13043" y="2" width="7.86957" height="1.95652"/>
    <object id="4" x="7.91304" y="1.04348" width="2.17391" height="1"/>
+  </objectgroup>
+ </tile>
+ <tile id="4817">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="4818">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="4819">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="4820">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
   </objectgroup>
  </tile>
  <tile id="4880">
@@ -729,6 +748,26 @@
    <frame tileid="6806" duration="100"/>
   </animation>
  </tile>
+ <tile id="6919">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="6920">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="6921">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="6922">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
  <tile id="6964">
   <animation>
    <frame tileid="6964" duration="30"/>
@@ -739,6 +778,26 @@
    <frame tileid="6965" duration="100"/>
    <frame tileid="6964" duration="100"/>
   </animation>
+ </tile>
+ <tile id="7077">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="7078">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="7079">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="7080">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
  </tile>
  <tile id="7175">
   <animation>
@@ -764,6 +823,26 @@
    <frame tileid="7186" duration="100"/>
   </animation>
  </tile>
+ <tile id="7235">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="7236">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="7237">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="11" y="0" width="5" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="7238">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="5" height="16"/>
+  </objectgroup>
+ </tile>
  <tile id="7373">
   <animation>
    <frame tileid="7373" duration="100"/>
@@ -771,6 +850,22 @@
    <frame tileid="7375" duration="100"/>
    <frame tileid="7376" duration="100"/>
   </animation>
+ </tile>
+ <tile id="7393">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="-0.0625" y="0" width="5.0625" height="16"/>
+   <object id="2" x="11" y="-0.0625" width="5.125" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="7394">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="11" y="0" width="5" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="7395">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="5" height="16"/>
+  </objectgroup>
  </tile>
  <tile id="8750">
   <objectgroup draworder="index" id="2">
