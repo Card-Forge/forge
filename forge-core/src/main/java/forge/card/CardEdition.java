@@ -124,6 +124,8 @@ public final class CardEdition implements Comparable<CardEdition> {
     // reserved names of sections inside edition files, that are not parsed as cards
     private static final List<String> reservedSectionNames = ImmutableList.of("metadata", "tokens", "other");
 
+    public static final ImmutableList<String> plstMergedEditions = ImmutableList.of("PAGL", "PHED", "PCTB", "MB1", "FMB1");
+
     // commonly used printsheets with collector number
     public enum EditionSectionWithCollectorNumbers {
         CARDS("cards"),
