@@ -189,10 +189,14 @@ public class VLobby implements ILobbyView {
                 }
             });
         }
+        String defaultGamesInMatch = FModel.getPreferences().getPref(FPref.UI_MATCHES_PER_GAME);
+        if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
+            defaultGamesInMatch = "3";
+        }
         gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w 150px!, h 30px!");
         gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
-        gamesInMatch.setSelectedItem("3");
+        gamesInMatch.setSelectedItem(defaultGamesInMatch);
         pnlStart.add(gamesInMatchFrame);
     }
 
