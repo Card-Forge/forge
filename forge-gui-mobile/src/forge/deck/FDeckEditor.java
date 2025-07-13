@@ -1010,6 +1010,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     @Override
+    public boolean keyUp(int keyCode) {
+        if (keyCode == Keys.ESCAPE && this.tabHeader.btnBack != null) {
+            return this.tabHeader.btnBack.trigger();
+        }
+        return super.keyUp(keyCode);
+    }
+
+    @Override
     public FScreen getLandscapeBackdropScreen() {
         return null; //never use backdrop for editor
     }

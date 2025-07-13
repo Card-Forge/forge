@@ -74,6 +74,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             for (CardEdition e : FModel.getMagicDb().getEditions()) {
                 editionsByName.put(e.getName().toLowerCase(), e);
                 editionsByName.put(e.getName().replace(":", "").toLowerCase(), e); //TODO: Proper item migration support. This is just there to fix one typo'd item name
+                editionsByName.put(e.getName().replace("'", "").toLowerCase(), e);
             }
 
             String sketchbookPrefix = "landscape sketchbook - ";
@@ -1010,12 +1011,5 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override public void exitWithoutSaving() {} //Too many external variables to just revert the deck. Not supported for now.
     }
 
-    @Override
-    public boolean keyUp(int keyCode) {
-        if (keyCode == Input.Keys.ESCAPE) {
-            return this.tabHeader.btnBack.trigger();
-        }
-        return super.keyUp(keyCode);
-    } //TODO: Move
 }
 
