@@ -26,6 +26,8 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FRadioButton;
 import forge.toolbox.FSkin;
 import forge.toolbox.JXButtonPanel;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
@@ -57,6 +59,9 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
     private final JComboBox<String> cbOpponent = new JComboBox<>();
 
+    private final JComboBox gamesInMatch = new JComboBox(new String[] {"1","3","5"});
+    private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+
     private final JLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
         .text(localizer.getMessage("lblBuildorselectadeck")).build();
@@ -71,6 +76,10 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
     private final FLabel lblDir3 = new FLabel.Builder()
         .text(localizer.getMessage("lblDraftText3"))
+        .fontSize(12).build();
+
+    private final FLabel lblGamesInMatch = new FLabel.Builder()
+        .text(localizer.getMessage("lblGamesInMatch"))
         .fontSize(12).build();
 
     private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text(localizer.getMessage("lblNewBoosterDraftGame")).fontSize(16).build();
@@ -91,10 +100,23 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         radSingle.setSelected(true);
         grpPanel.add(cbOpponent, "w 200px!, h 30px!");
 
-        pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        pnlStart.setLayout(new MigLayout("insets 0, gap 0",
+                                         "[grow][pref!]",
+                                         "[pref!][grow,fill][pref!]"));
         pnlStart.setOpaque(false);
-        pnlStart.add(grpPanel, "gapright 20");
-        pnlStart.add(btnStart);
+        pnlStart.add(grpPanel, "cell 0 0 1 3, growy, gapright 20");
+
+        String defaultGamesInMatch = FModel.getPreferences().getPref(FPref.UI_MATCHES_PER_GAME);
+        if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
+            defaultGamesInMatch = "3";
+        }
+        gamesInMatchFrame.add(lblGamesInMatch, "w 150px!, h 30px!");
+        gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
+        gamesInMatchFrame.setOpaque(false);
+        gamesInMatch.setSelectedItem(defaultGamesInMatch);
+        pnlStart.add(gamesInMatchFrame, "cell 1 0, alignx center, aligny top");
+
+        pnlStart.add(btnStart, "cell 1 2, alignx center, aligny bottom");
     }
 
     /* (non-Javadoc)
