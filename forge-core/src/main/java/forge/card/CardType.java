@@ -659,36 +659,36 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (subtypes.isEmpty()) {
             return;
         }
-        Set<Predicate> allowedTypes = Sets.newHashSet();
+        Predicate<String> allowedTypes = x -> false;
         if (isCreature() || isKindred()) {
-            allowedTypes.add(Predicates.IS_CREATURE_TYPE);
+            allowedTypes = allowedTypes.or(Predicates.IS_CREATURE_TYPE);
         }
         if (isLand()) {
-            allowedTypes.add(Predicates.IS_LAND_TYPE);
+            allowedTypes = allowedTypes.or(Predicates.IS_LAND_TYPE);
         }
         if (isArtifact()) {
-            allowedTypes.add(Predicates.IS_ARTIFACT_TYPE);
+            allowedTypes = allowedTypes.or(Predicates.IS_ARTIFACT_TYPE);
         }
         if (isEnchantment()) {
-            allowedTypes.add(Predicates.IS_ENCHANTMENT_TYPE);
+            allowedTypes = allowedTypes.or(Predicates.IS_ENCHANTMENT_TYPE);
         }
         if (isInstant() || isSorcery()) {
-            allowedTypes.add(Predicates.IS_SPELL_TYPE);
+            allowedTypes = allowedTypes.or(Predicates.IS_SPELL_TYPE);
         }
         if (isPlaneswalker()) {
-            allowedTypes.add(Predicates.IS_WALKER_TYPE);
+            allowedTypes = allowedTypes.or(Predicates.IS_WALKER_TYPE);
         }
         if (isDungeon()) {
-            allowedTypes.add(Predicates.IS_DUNGEON_TYPE);
+            allowedTypes = allowedTypes.or(Predicates.IS_DUNGEON_TYPE);
         }
         if (isBattle()) {
-            allowedTypes.add(Predicates.IS_BATTLE_TYPE);
+            allowedTypes = allowedTypes.or(Predicates.IS_BATTLE_TYPE);
         }
         if (isPlane()) {
-            allowedTypes.add(Predicates.IS_PLANAR_TYPE);
+            allowedTypes = allowedTypes.or(Predicates.IS_PLANAR_TYPE);
         }
 
-        subtypes.removeIf(t -> allowedTypes.stream().noneMatch(p -> p.test(t)));
+        subtypes.removeIf(allowedTypes.negate());
     }
 
     @Override
