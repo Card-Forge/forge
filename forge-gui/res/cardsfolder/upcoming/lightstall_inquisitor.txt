@@ -8,7 +8,7 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlaye
 SVar:DBEffect:DB$ Effect | Duration$ Permanent | StaticAbilities$ MayPlay,CostsMore | AddReplacementEffect$ LandsTapped | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | MayPlayPlayer$ CardOwner
 SVar:CostsMore:Mode$ RaiseCost | ValidCard$ Card.IsRemembered+CastSa Spell.MayPlaySource | AffectedZone$ Exile | Type$ Spell | Amount$ 1
-SVar:LandsTapped:Event$ Moved | ValidCard$ Land.IsRemembered | ValidCause$ LandAbility.MayPlaySource | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield
+SVar:LandsTapped:Event$ Moved | ValidCard$ Land.IsRemembered | ValidCause$ LandAbility.MayPlaySource | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Vigilance\nWhen this creature enters, each opponent exiles a card from their hand and may play that card for as long as it remains exiled. Each spell cast this way costs {1} more to cast. Each land played this way enters tapped.
