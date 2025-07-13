@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Dinosaur
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPay | TriggerDescription$ When CARDNAME enters, you may pay {G} up to three times. When you pay this cost one or more times, ABILITY
-SVar:TrigPay:AB$ ImmediateTrigger | Cost$ Mana<G\NumTimes> | Announce$ NumTimes | AnnounceLimit$ 3 | ConditionCheckSVar$ NumTimes | ConditionSVarCompare$ GE1 | RememberSVarAmount$ NumTimes | Execute$ TrigCharm | TriggerDescription$ When you pay this cost one or more times, ABILITY
+SVar:TrigPay:AB$ ImmediateTrigger | Cost$ Mana<G\NumTimes> | Announce$ NumTimes | AnnounceMax$ 3 | ConditionCheckSVar$ NumTimes | ConditionSVarCompare$ GE1 | RememberSVarAmount$ NumTimes | Execute$ TrigCharm | TriggerDescription$ When you pay this cost one or more times, ABILITY
 SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ Count$TriggerRememberAmount | Choices$ DestroyAE,ExileGrave,GainLife
 SVar:DestroyAE:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:ExileGrave:DB$ ChangeZoneAll | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SpellDescription$ Exile target player's graveyard.

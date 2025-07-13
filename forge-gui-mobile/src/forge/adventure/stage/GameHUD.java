@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -484,7 +483,7 @@ public class GameHUD extends Stage {
                 ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
                 AdventureQuestController.instance().updateItemUsed(data);
             });
-            button.setStyle(Controls.getSkin().get("menu", TextButton.TextButtonStyle.class));
+            button.setStyle(Controls.getTextButtonStyle("menu"));
             abilityButtonMap.add(button);
         }
     }
@@ -727,8 +726,8 @@ public class GameHUD extends Stage {
         setAlpha(menuGroup, visible);
         setAlpha(avatarGroup, visible);
 
-        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\uFF0F");
-        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\uFF0F");
+        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\u2613");
+        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\u2613");
 
         for (TextraButton button : abilityButtonMap) {
             setAlpha(button, visible);
@@ -786,6 +785,7 @@ public class GameHUD extends Stage {
         console.toggle();
         if (console.isVisible()) {
             clearAbility();
+            console.setZIndex(ui.getChildren().size);
         } else {
             updateAbility();
         }
@@ -794,6 +794,12 @@ public class GameHUD extends Stage {
     @Override
     public boolean keyUp(int keycode) {
         ui.pressUp(keycode);
+    
+        Button pressedButton = ui.buttonPressed(keycode);
+        if (pressedButton != null) {
+            pressedButton.fire(eventTouchUp);
+        }
+
         return super.keyUp(keycode);
     }
 
@@ -807,16 +813,17 @@ public class GameHUD extends Stage {
             toggleConsole();
             return true;
         }
-        if (keycode == Input.Keys.BACK) {
+        if (KeyBinding.Back.isPressed(keycode)) {
             if (console.isVisible()) {
                 toggleConsole();
+                return true;
             }
         }
         if (console.isVisible())
             return true;
         Button pressedButton = ui.buttonPressed(keycode);
         if (pressedButton != null) {
-            performTouch(pressedButton);
+            pressedButton.fire(eventTouchDown);
         }
         return super.keyDown(keycode);
     }
@@ -877,7 +884,7 @@ public class GameHUD extends Stage {
         dialogOnlyInput = true;
         gameStage.hudIsShowingDialog(true);
         MapStage.getInstance().hudIsShowingDialog(true);
-        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+        if (Forge.hasExternalInput() && !dialogButtonMap.isEmpty())
             this.setKeyboardFocus(dialogButtonMap.first());
     }
 
@@ -888,8 +895,8 @@ public class GameHUD extends Stage {
             public boolean act(float v) {
                 if (exitDungeon) {
                     MapStage.getInstance().exitDungeon(false);
-                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "\uFF0F");
-                    setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "\uFF0F");
+                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "\u2613");
+                    setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "\u2613");
                 }
                 return true;
             }

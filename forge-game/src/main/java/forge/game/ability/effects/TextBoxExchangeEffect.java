@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Lists;
 
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -36,6 +37,10 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(final SpellAbility sa) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+            return;
+        }
+        
         final List<Card> tgtCards = getTargetCards(sa);
         if (tgtCards.size() < 2) {
             return;
@@ -54,6 +59,37 @@ public class TextBoxExchangeEffect extends SpellAbilityEffect {
 
         swapTextBox(c1, data2, ts);
         swapTextBox(c2, data1, ts);
+
+        if (sa.hasParam("Duration")) {
+            final GameCommand revertTextExchange = new GameCommand() {
+                private static final long serialVersionUID = 5331255714437747836L;
+
+                @Override
+                public void run() {
+                    // Check if the cards are still there
+                    Card card1 = game.getCardState(c1, null);
+                    Card card2 = game.getCardState(c2, null);
+
+                    if (card1 != null && c1.equalsWithGameTimestamp(card1)) {
+                        card1.removeChangedCardTraits(ts, 0);
+                        card1.removeChangedCardKeywords(ts, 0, false);
+                        card1.updateChangedText();
+                        card1.updateStateForView();
+                        game.fireEvent(new GameEventCardStatsChanged(card1));
+                    }
+
+                    if (card2 != null && c2.equalsWithGameTimestamp(card2)) {
+                        card2.removeChangedCardTraits(ts, 0);
+                        card2.removeChangedCardKeywords(ts, 0, false);
+                        card2.updateChangedText();
+                        card2.updateStateForView();
+                        game.fireEvent(new GameEventCardStatsChanged(card2));
+                    }
+                }
+            };
+
+            addUntilCommand(sa, revertTextExchange);
+        }
 
         game.fireEvent(new GameEventCardStatsChanged(c1));
         game.fireEvent(new GameEventCardStatsChanged(c2));

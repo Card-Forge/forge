@@ -448,7 +448,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         if (data.copyPlayerDeck && Current.latestDeck() != null) {
             List<PaperCard> paperCardList = Current.latestDeck().getMain().toFlatList().stream()
                     .filter(paperCard -> !paperCard.isVeryBasicLand())
-                    .toList();
+                    .collect(Collectors.toList());
 
             if (paperCardList.size() < 6) {
                 // Player trying to cheese doppleganger and farm cards. Sorry, the fun police have arrived

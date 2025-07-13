@@ -1132,8 +1132,10 @@ public class MapStage extends GameStage {
         dialog.show(dialogStage, Actions.show());
         dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
-        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+
+        if (Forge.hasExternalInput() && !dialogButtonMap.isEmpty()) {
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
+        }
     }
 
 

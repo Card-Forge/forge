@@ -1,0 +1,129 @@
+{
+"startPointX": 0.55,
+"startPointY": 0.3,
+"noiseWeight": 0.3,
+"distWeight": 1.5,
+"name": "blue",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Blue",
+"terrain": [
+	{
+		"spriteName": "Blue_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "Blue_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.7,
+"height": 0.7,
+"color": "10a2e0",
+"spriteNames": [
+	"Shell"
+],
+"enemies": [
+
+
+],
+"pointsOfInterest": [
+
+],
+"structures": [
+	{
+		"N":2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/blue_structures.atlas",
+		"sourcePath": "world/structures/models/blue.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.1,
+		"width": 0.1,
+		"symmetry": 8,
+		"periodicOutput": false,
+		"mappingInfo": [
+			{
+				"name": "water",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "tree",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "pineapple",
+				"color": "ffff00",
+				"collision": true
+			},
+			{
+				"name": "rock",
+				"color": "ff8000",
+				"collision": true
+			},
+			{
+				"name": "rock2",
+				"color": "804000",
+				"collision": true
+			},
+			{
+				"name": "rock3",
+				"color": "402000",
+				"collision": true
+			},
+			{
+				"name": "rock4",
+				"color": "201000",
+				"collision": true
+			}
+		]
+	},
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/blue_structures.atlas",
+		"sourcePath": "world/structures/models/beach.png",
+		"maskPath": "world/structures/masks/ring.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"mappingInfo": [
+			{
+				"name": "water",
+				"color": "00ffff",
+				"collision": true
+			},
+			{
+				"name": "tree",
+				"color": "00ff00",
+				"collision": true
+			},
+			{
+				"name": "tree2",
+				"color": "008000",
+				"collision": true
+			},
+			{
+				"name": "dune",
+				"color": "ff8000",
+				"collision": true
+			},
+			{
+				"name": "dune2",
+				"color": "402000",
+				"collision": true
+			}
+		]
+	}
+]
+}

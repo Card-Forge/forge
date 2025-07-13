@@ -2122,23 +2122,13 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Amplify")) {
             final String[] ampString = keyword.split(":");
             final String amplifyMagnitude = ampString[1];
-            final String ampTypes = ampString[2];
-            String[] refinedTypes = ampTypes.split(",");
-            final StringBuilder types = new StringBuilder();
-            for (int i = 0; i < refinedTypes.length; i++) {
-                types.append("Card.").append(refinedTypes[i]).append("+YouCtrl");
-                if (i + 1 != refinedTypes.length) {
-                    types.append(",");
-                }
-            }
 
             // Setup ETB replacement effects
             final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
                     + " | ReplacementResult$ Updated | Description$ Amplify " + amplifyMagnitude + " ("
                     + inst.getReminderText() + ")";
 
-            final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
-                    + types.toString() + " | RememberRevealed$ True";
+            final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ Card.YouOwn+sharesCreatureTypeWith+Other+NotDefinedReplacedSimultaneousETB | RememberRevealed$ True";
 
             SpellAbility saReveal = AbilityFactory.getAbility(abString, card);
 
@@ -2792,7 +2782,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final Cost blitzCost = new Cost(k[1], false);
 
-            final SpellAbility newSA = card.getFirstSpellAbility().copyWithManaCostReplaced(host.getController(), blitzCost);
+            final SpellAbility newSA = card.getFirstSpellAbilityWithFallback().copyWithManaCostReplaced(host.getController(), blitzCost);
 
             if (k.length > 2) {
                 newSA.getMapParams().put("ValidAfterStack", k[2]);
@@ -2905,7 +2895,7 @@ public class CardFactoryUtil {
             }
             desc += ")";
 
-            final SpellAbility sa = card.getFirstSpellAbility();
+            final SpellAbility sa = card.getFirstSpellAbilityWithFallback();
             final SpellAbility newSA = sa.copyWithDefinedCost(new Cost(costStr, false));
 
             newSA.getRestrictions().setIsPresent(validStr + ".YouCtrl+CanBeSacrificedBy");
@@ -3249,7 +3239,7 @@ public class CardFactoryUtil {
 
             StringBuilder sb = new StringBuilder();
             sb.append("AB$ PutCounter | Cost$ ").append(manacost).append(" | PrecostDesc$ Level up | CostDesc$ ");
-            sb.append(ManaCostParser.parse(manacost)).append(" | SorcerySpeed$ True | LevelUp$ True | Secondary$ True");
+            sb.append(ManaCostParser.parse(manacost)).append(" | SorcerySpeed$ True | Secondary$ True");
             sb.append("| CounterType$ LEVEL | StackDescription$ {p:You} levels up {c:Self}.");
             if (card.hasSVar("maxLevel")) {
                 final String strMaxLevel = card.getSVar("maxLevel");
@@ -3589,6 +3579,15 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setSVar("ScavengeX", "Exiled$CardPower");
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Station")) {
+            String effect = "AB$ PutCounter | Cost$ tapXType<1/Creature.Other> | Defined$ Self " +
+                    "| CounterType$ CHARGE | CounterNum$ StationX | SorcerySpeed$ True " +
+                    "| CostDesc$ | SpellDescription$ Station (" + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setSVar("StationX", "TappedCards$TapPowerValue");
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Encore")) {

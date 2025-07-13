@@ -516,7 +516,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     @Override
     public boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
     @Override
-    public boolean isAura()           { return hasSubtype("Aura"); }
+    public boolean isAura() { return hasSubtype("Aura"); }
     @Override
     public boolean isEquipment()  { return hasSubtype("Equipment"); }
     @Override
@@ -528,6 +528,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public boolean isContraption() {
         return hasSubtype("Contraption");
     }
+
+    public boolean isVehicle() { return hasSubtype("Vehicle"); }
+    public boolean isSpacecraft() { return hasSubtype("Spacecraft"); }
 
     @Override
     public boolean isSaga() {
@@ -656,33 +659,36 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (subtypes.isEmpty()) {
             return;
         }
-        if (!isCreature() && !isKindred()) {
-            subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
+        Predicate<String> allowedTypes = x -> false;
+        if (isCreature() || isKindred()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_CREATURE_TYPE);
         }
-        if (!isLand()) {
-            subtypes.removeIf(Predicates.IS_LAND_TYPE);
+        if (isLand()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_LAND_TYPE);
         }
-        if (!isArtifact()) {
-            subtypes.removeIf(Predicates.IS_ARTIFACT_TYPE);
+        if (isArtifact()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_ARTIFACT_TYPE);
         }
-        if (!isEnchantment()) {
-            subtypes.removeIf(Predicates.IS_ENCHANTMENT_TYPE);
+        if (isEnchantment()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_ENCHANTMENT_TYPE);
         }
-        if (!isInstant() && !isSorcery()) {
-            subtypes.removeIf(Predicates.IS_SPELL_TYPE);
+        if (isInstant() || isSorcery()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_SPELL_TYPE);
         }
-        if (!isPlaneswalker()) {
-            subtypes.removeIf(Predicates.IS_WALKER_TYPE);
+        if (isPlaneswalker()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_WALKER_TYPE);
         }
-        if (!isDungeon()) {
-            subtypes.removeIf(Predicates.IS_DUNGEON_TYPE);
+        if (isDungeon()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_DUNGEON_TYPE);
         }
-        if (!isBattle()) {
-            subtypes.removeIf(Predicates.IS_BATTLE_TYPE);
+        if (isBattle()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_BATTLE_TYPE);
         }
-        if (!isPlane()) {
-            subtypes.removeIf(Predicates.IS_PLANAR_TYPE);
+        if (isPlane()) {
+            allowedTypes = allowedTypes.or(Predicates.IS_PLANAR_TYPE);
         }
+
+        subtypes.removeIf(allowedTypes.negate());
     }
 
     @Override

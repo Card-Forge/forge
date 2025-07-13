@@ -692,6 +692,9 @@ public class AdventureDeckEditor extends FDeckEditor {
             protected void buildMenu() {
                 Localizer localizer = Forge.getLocalizer();
                 addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
+                addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyCollectionToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> {
+                    FDeckViewer.copyCollectionToClipboard(AdventurePlayer.current().getCards());
+                }));
                 if (allowsAddBasic()) {
                     FMenuItem addBasic = new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> showAddBasicLandsDialog());
                     addItem(addBasic);
@@ -1006,5 +1009,13 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override public void notifyModelChanged() {} //
         @Override public void exitWithoutSaving() {} //Too many external variables to just revert the deck. Not supported for now.
     }
+
+    @Override
+    public boolean keyUp(int keyCode) {
+        if (keyCode == Input.Keys.ESCAPE) {
+            return this.tabHeader.btnBack.trigger();
+        }
+        return super.keyUp(keyCode);
+    } //TODO: Move
 }
 

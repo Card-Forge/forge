@@ -308,7 +308,7 @@ public class MenuScene extends UIScene {
         }
         dialog.show(stage, Actions.show());
         dialog.setPosition((stage.getWidth() - dialog.getWidth()) / 2, (stage.getHeight() - dialog.getHeight()) / 2);
-        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+        if (Forge.hasExternalInput() && !dialogButtonMap.isEmpty())
             stage.setKeyboardFocus(dialogButtonMap.first());
     }
 

@@ -14,9 +14,11 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
+import com.badlogic.gdx.scenes.scene2d.ui.TooltipManager;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -120,8 +122,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     public void onImageFetched() {
         ImageCache.getInstance().clear();
 
-
-
         if(reward.type.equals(Reward.Type.Card)) {
             imageKey = reward.getCard().getImageKey(false);
             PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
@@ -220,8 +220,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private void updateAutoSell() {
         reward.setAutoSell(!reward.isAutoSell());
-        String c = reward.isAutoSell() ? "[%85][GREEN]" : "[%85][GRAY]";
-        autoSell.setText(c + "\uFF04");
+        autoSell.setText(reward.isAutoSell() ? "[%85][+Sell]" : "[%85][GRAY] ");
+        autoSell.getColor().a = reward.isAutoSell() ? 1f : 0.7f;
     }
 
     public RewardActor(Reward reward, boolean flippable, RewardScene.Type type, boolean showOverlay) {
@@ -236,7 +236,18 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         switch (reward.type) {
             case Card: {
                 if (!reward.isNoSell) {
-                    autoSell = Controls.newTextButton("[%85][GRAY]\uFF04");
+                    autoSell = Controls.newTextButton("[%85][GRAY] ");
+                    autoSell.getColor().a = 0.7f; // semi-transparent by default
+                    autoSell.addListener(new InputListener() {
+                        @Override
+                        public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                            if (!reward.isAutoSell()) autoSell.getColor().a = 1f;
+                        }
+                        @Override
+                        public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                            if (!reward.isAutoSell()) autoSell.getColor().a = 0.7f;
+                        }
+                    });
                     float scale = autoSell.getWidth();
                     autoSell.setSize(scale, scale * 1.2f);
                     autoSell.addListener(new ClickListener() {
@@ -569,8 +580,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.getInstance().croppedBorderImage(texture));
         float origW = texture.getWidth();
         float origH = texture.getHeight();
-        float boundW = Scene.getIntendedWidth() * 0.95f;
-        float boundH = Scene.getIntendedHeight() * 0.95f;
+        float boundW = GuiBase.isAndroid() ? Scene.getIntendedWidth() * 0.95f : Scene.getIntendedWidth() * 0.7f; // Use smaller size for Desktop
+        float boundH = GuiBase.isAndroid() ? Scene.getIntendedHeight() * 0.95f : Scene.getIntendedHeight() * 0.7f; // Use smaller size for Desktop
         float newW = origW;
         float newH = origH;
         if (origW > boundW) {
@@ -848,7 +859,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         super.act(delta);
         if (clicked) {
             if (flipProcess < 1)
-                flipProcess += delta * 2.4;
+                flipProcess += delta * 4;
             else
                 flipProcess = 1;
 
@@ -933,7 +944,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         overlayLabel.setWidth(this.getWidth());
         overlayLabel.setWrap(true);
         overlayLabel.setAlignment(alignment);
-        overlayLabel.style = (Controls.getSkin().get(labelStyle, Label.LabelStyle.class));
+        overlayLabel.style = Controls.getLabelStyle(labelStyle);
         //compute layout
         overlayLabel.layout();
         //get the layout values and apply
@@ -1087,7 +1098,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             x = cImage.getX() + inset;
             y = cImage.getPrefHeight() / 2.3f;
             ARP = Forge.isLandscapeMode() ? 100 : 150;
-            cLabel = new TextraLabel("[%" + ARP + "]" + description, Controls.getSkin(), Controls.getTextraFont());
+            cLabel = Controls.newTextraLabel("[%" + ARP + "]" + description);
             cLabel.setAlignment(align);
             cLabel.setWrap(true);
             cLabel.setWidth(width);
@@ -1114,11 +1125,17 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         public TextraLabel getStoredLabel() {
             return cLabel;
         }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            batch.setColor(1f, 1f, 1f, 1f); // Set color before drawing each actor, per libGDX docs
+            super.draw(batch, parentAlpha);
+        }
     }
 
     class ImageToolTip extends Tooltip<ComplexTooltip> {
         public ImageToolTip(ComplexTooltip contents) {
-            super(contents);
+            super(contents, RewardTooltipManager.getInstance());
         }
 
         public Image getImage() {
@@ -1256,6 +1273,32 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 //e.printStackTrace();
             }
             super.draw(batch, parentAlpha);
+        }
+    }
+
+    /**
+     * Extend and override TooltipManager to avoid the built-in default animations.
+     */
+    static class RewardTooltipManager extends TooltipManager {
+        private static RewardTooltipManager instance;
+
+        public static RewardTooltipManager getInstance() {
+            if (instance == null) {
+                instance = new RewardTooltipManager();
+            }
+            return instance;
+        }
+
+        @Override
+        protected void showAction(Tooltip tooltip) {
+            // Overriding showAction for instant tooltip display
+        }
+
+        @Override
+        protected void hideAction(Tooltip tooltip) {
+            tooltip.getContainer().addAction(Actions.sequence(
+                    Actions.removeActor() // Remove tooltip without animation
+            ));
         }
     }
 }

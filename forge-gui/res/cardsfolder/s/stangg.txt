@@ -4,7 +4,7 @@ Types:Legendary Creature Human Warrior
 PT:3/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigStangg | TriggerDescription$ When CARDNAME enters, create Stangg Twin, a legendary 3/4 red and green Human Warrior creature token.
 SVar:TrigStangg:DB$ Token | TokenAmount$ 1 | TokenScript$ stangg_twin | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedLKI | Triggers$ TrigExile,TrigSac | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedLKI | Triggers$ TrigExile,TrigSac | Duration$ Permanent | ForgetOnMoved$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TrigExile:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.EffectSource | Execute$ ExileTwin | TriggerDescription$ When EFFECTSOURCE leaves the battlefield, exile that token.
 SVar:ExileTwin:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile

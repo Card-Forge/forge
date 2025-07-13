@@ -32,6 +32,7 @@ Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 4. **Java Requirement:** Ensure you have **Java 17 or later** installed.
 
 ### 📱 Android Installation
+- _(Note: **Android 11** is the minimum requirements with at least **6GB RAM** to run smoothly. You need to enable **"Install unknown apps"** for Forge to initialize and update itself)_
 - Download the **APK** from the [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots). On the first launch, Forge will automatically download all necessary assets.
 
 ---

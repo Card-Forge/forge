@@ -74,7 +74,7 @@
   </object>
   <object id="58" template="../../obj/enemy.tx" x="153" y="516">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Exquisite Blood&quot; }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Exquisite Blood&quot; ] }"/>
     <property name="enemy" value="Fallen Angel"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>

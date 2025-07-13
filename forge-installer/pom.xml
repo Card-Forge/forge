@@ -297,5 +297,31 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>no-flatten</id>
+            <activation>
+                <property>
+                    <name>skip.flatten</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <phase>none</phase>
+                            </execution>
+                            <execution>
+                                <id>flatten.clean</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>

@@ -2126,8 +2126,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         public void refresh() {
             BoosterDraft draft = parentScreen.getDraft();
-            if (draft == null)
+            if (draft == null || !draft.hasNextChoice()) {
                 return;
+            }
 
             CardPool pool = draft.nextChoice();
             this.draftingFaceDown = getDraftPlayer().hasArchdemonCurse();

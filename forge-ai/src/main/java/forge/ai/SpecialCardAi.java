@@ -359,18 +359,28 @@ public class SpecialCardAi {
         private static final int demonSacThreshold = Integer.MAX_VALUE; // if we're in dire conditions, sac everything from worst to best hoping to find an answer
 
         public static boolean considerSacrificingCreature(final Player ai, final SpellAbility sa) {
+            Card c = sa.getHostCard();
+
+            // Only check for sacrifice if it's the owner's turn, and it can attack.
+            // TODO: Maybe check if sacrificing a creature allows AI to kill the opponent with the rest on their turn?
+            if (!CombatUtil.canAttack(c) ||
+                !ai.getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                return false;
+            }
+
             CardCollection flyingCreatures = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.UNTAPPED.and(
-                            CardPredicates.hasKeyword(Keyword.FLYING).or(CardPredicates.hasKeyword(Keyword.REACH))));
+                CardPredicates.UNTAPPED.and(
+                    CardPredicates.hasKeyword(Keyword.FLYING).or(CardPredicates.hasKeyword(Keyword.REACH))));
             boolean hasUsefulBlocker = false;
 
-            for (Card c : flyingCreatures) {
-                if (!ComputerUtilCard.isUselessCreature(ai, c)) {
+            for (Card fc : flyingCreatures) {
+                if (!ComputerUtilCard.isUselessCreature(ai, fc)) {
                     hasUsefulBlocker = true;
+                    break;
                 }
             }
 
-            return ai.getLife() <= sa.getHostCard().getNetPower() && !hasUsefulBlocker;
+            return ai.getLife() <= c.getNetPower() && !hasUsefulBlocker;
         }
         
         public static int getSacThreshold() {
