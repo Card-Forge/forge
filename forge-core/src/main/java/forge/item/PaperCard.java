@@ -343,12 +343,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         // default deserialization
         ois.defaultReadObject();
 
-        if (CardEdition.plstMergedEditions.contains(edition.toUpperCase())) {
-            System.out.println("Deprecated set detected: Card " + name + " (" + edition + ") will be changed into PLST.");
-            edition = "PLST";
-            collectorNumber = "";
-        }
-
         IPaperCard pc = StaticData.instance().getCommonCards().getCard(name, edition, artIndex);
         if (pc == null) {
             pc = StaticData.instance().getVariantCards().getCard(name, edition, artIndex);
