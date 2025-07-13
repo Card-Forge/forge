@@ -32,25 +32,17 @@ import java.util.function.Function;
  */
 public class Controls {
 
-    static public Styles.LabelStyle getLabelStyle() {
-        return getLabelStyle("default");
+    static public Label.LabelStyle getLabelStyle(String name) {
+        return getSkin().get(name, Label.LabelStyle.class);
     }
 
-    static public Styles.LabelStyle getLabelStyle(String name) {
-        return new Styles.LabelStyle(getSkin().get(name, Label.LabelStyle.class));
-    }
-
-    static public Styles.TextButtonStyle getTextButtonStyle() {
-        return getTextButtonStyle("default");
-    }
-
-    static public Styles.TextButtonStyle getTextButtonStyle(String name) {
-        return new Styles.TextButtonStyle(getSkin().get(name, TextButton.TextButtonStyle.class));
+    static public TextButton.TextButtonStyle getTextButtonStyle(String name) {
+        return getSkin().get(name, TextButton.TextButtonStyle.class);
     }
 
     static class LabelFix extends TextraLabel {
         public LabelFix(String text, Font font) {
-            super(text, getLabelStyle(), font);
+            super(text, getSkin(), font);
         }
 
         @Override
@@ -71,7 +63,7 @@ public class Controls {
 
     static class TextButtonFix extends TextraButton {
         public TextButtonFix(@Null String text) {
-            super(text == null ? "NULL" : text, getTextButtonStyle(), getTextraFont());
+            super(text == null ? "NULL" : text, Controls.getSkin(), Controls.getTextraFont());
             addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -106,7 +98,7 @@ public class Controls {
 
     static class TypingButtonFix extends TypingButton {
         public TypingButtonFix(@Null String text) {
-            super(text == null ? "NULL" : text, getTextButtonStyle(), getTextraFont());
+            super(text == null ? "NULL" : text, Controls.getSkin(), Controls.getTextraFont());
             addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -474,22 +466,22 @@ public class Controls {
         String nextline = vertical ? "\n" : "";
         String colorId = "";
         if (color.hasWhite())
-            colorId += "[+pmW]"+nextline;
+            colorId += "[+W]"+nextline;
         if (color.hasBlue())
-            colorId += "[+pmU]"+nextline;
+            colorId += "[+U]"+nextline;
         if (color.hasBlack())
-            colorId += "[+pmB]"+nextline;
+            colorId += "[+B]"+nextline;
         if (color.hasRed())
-            colorId += "[+pmR]"+nextline;
+            colorId += "[+R]"+nextline;
         if (color.hasGreen())
-            colorId += "[+pmG]"+nextline;
+            colorId += "[+G]"+nextline;
         if (color.isColorless())
-            colorId += "[+pmC]"+nextline;
+            colorId += "[+C]"+nextline;
         return colorId;
     }
 
     public static TypingLabel newTypingLabel(String name) {
-        TypingLabel ret = new TypingLabel(name == null ? "" : name, getLabelStyle(), getTextraFont());
+        TypingLabel ret = new TypingLabel(name == null ? "" : name, getSkin(), getTextraFont());
         String pn = Current.player().getName();
         if (pn != null) // this variable is used for dialogs
             ret.setVariable("player_name", pn);
