@@ -659,33 +659,36 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (subtypes.isEmpty()) {
             return;
         }
-        if (!isCreature() && !isKindred()) {
-            subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
+        Set<Predicate> allowedTypes = Sets.newHashSet();
+        if (isCreature() || isKindred()) {
+            allowedTypes.add(Predicates.IS_CREATURE_TYPE);
         }
-        if (!isLand()) {
-            subtypes.removeIf(Predicates.IS_LAND_TYPE);
+        if (isLand()) {
+            allowedTypes.add(Predicates.IS_LAND_TYPE);
         }
-        if (!isArtifact()) {
-            subtypes.removeIf(Predicates.IS_ARTIFACT_TYPE);
+        if (isArtifact()) {
+            allowedTypes.add(Predicates.IS_ARTIFACT_TYPE);
         }
-        if (!isEnchantment()) {
-            subtypes.removeIf(Predicates.IS_ENCHANTMENT_TYPE);
+        if (isEnchantment()) {
+            allowedTypes.add(Predicates.IS_ENCHANTMENT_TYPE);
         }
-        if (!isInstant() && !isSorcery()) {
-            subtypes.removeIf(Predicates.IS_SPELL_TYPE);
+        if (isInstant() || isSorcery()) {
+            allowedTypes.add(Predicates.IS_SPELL_TYPE);
         }
-        if (!isPlaneswalker()) {
-            subtypes.removeIf(Predicates.IS_WALKER_TYPE);
+        if (isPlaneswalker()) {
+            allowedTypes.add(Predicates.IS_WALKER_TYPE);
         }
-        if (!isDungeon()) {
-            subtypes.removeIf(Predicates.IS_DUNGEON_TYPE);
+        if (isDungeon()) {
+            allowedTypes.add(Predicates.IS_DUNGEON_TYPE);
         }
-        if (!isBattle()) {
-            subtypes.removeIf(Predicates.IS_BATTLE_TYPE);
+        if (isBattle()) {
+            allowedTypes.add(Predicates.IS_BATTLE_TYPE);
         }
-        if (!isPlane()) {
-            subtypes.removeIf(Predicates.IS_PLANAR_TYPE);
+        if (isPlane()) {
+            allowedTypes.add(Predicates.IS_PLANAR_TYPE);
         }
+
+        subtypes.removeIf(t -> allowedTypes.stream().noneMatch(p -> p.test(t)));
     }
 
     @Override
