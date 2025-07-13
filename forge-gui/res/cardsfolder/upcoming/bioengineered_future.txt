@@ -1,0 +1,10 @@
+Name:Bioengineered Future
+ManaCost:1 G G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_lander_sac_search | TokenOwner$ You
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.YouCtrl
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Each creature you control enters with an additional +1/+1 counter on it for each land that entered the battlefield under your control this turn.
+SVar:X:Count$ThisTurnEntered_Battlefield_Land.YouCtrl
+DeckHas:Ability$Counters
+Oracle:When this enchantment enters, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")\nEach creature you control enters with an additional +1/+1 counter on it for each land that entered the battlefield under your control this turn.

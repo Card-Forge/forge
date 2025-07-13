@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -484,7 +483,7 @@ public class GameHUD extends Stage {
                 ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
                 AdventureQuestController.instance().updateItemUsed(data);
             });
-            button.setStyle(Controls.getSkin().get("menu", TextButton.TextButtonStyle.class));
+            button.setStyle(Controls.getTextButtonStyle("menu"));
             abilityButtonMap.add(button);
         }
     }
@@ -727,8 +726,8 @@ public class GameHUD extends Stage {
         setAlpha(menuGroup, visible);
         setAlpha(avatarGroup, visible);
 
-        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\uFF0F");
-        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\uFF0F");
+        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\u2613");
+        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\u2613");
 
         for (TextraButton button : abilityButtonMap) {
             setAlpha(button, visible);
@@ -896,8 +895,8 @@ public class GameHUD extends Stage {
             public boolean act(float v) {
                 if (exitDungeon) {
                     MapStage.getInstance().exitDungeon(false);
-                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "\uFF0F");
-                    setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "\uFF0F");
+                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "\u2613");
+                    setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "\u2613");
                 }
                 return true;
             }

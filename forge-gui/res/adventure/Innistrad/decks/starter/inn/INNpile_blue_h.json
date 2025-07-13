@@ -1,0 +1,53 @@
+{                                    
+"name":"Blue",
+  "mainDeck": [
+    {  
+      "count":15, 
+      "cardName": "Island|ISD"
+    },        
+    {  
+      "count":6, 
+      "cardName": "Plains|ISD"
+    },   
+    {  
+      "count":6, 
+      "cardName": "Swamp|ISD"
+    },
+    {  
+      "count":9,
+      "colors": ["blue"],
+      "rarity": ["Common"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [1,2]
+    },
+    {  
+      "count":6,
+      "colors": ["white","black"],
+      "rarity": ["Common"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [1,2]
+    },
+    {  
+      "count":6,
+      "colors": ["blue"],
+      "rarity": ["Common"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [3,4]
+    },
+    {  
+      "count":3,
+      "colors": ["white","black"],
+      "rarity": ["Common"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [3,4]
+    },
+    {  
+      "count":9,
+      "colors": ["blue"],
+      "rarity": ["Uncommon","Common"],
+      "editions": ["ISD","DKA","SOI","MID"],
+      "manaCosts": [5,6]
+    } 
+    ]
+}
+

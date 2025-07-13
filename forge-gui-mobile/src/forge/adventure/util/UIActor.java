@@ -231,7 +231,7 @@ public class UIActor extends Group {
                         newActor.setFont(Controls.getTextraFont(property.value.toString()));
                     break;
                 case "style":
-                    newActor.style = (Controls.getSkin().get(property.value.toString(), Label.LabelStyle.class));
+                    newActor.style = Controls.getLabelStyle(property.value.toString());
                     break;
                 case "color":
                 case "fontColor":
@@ -277,7 +277,7 @@ public class UIActor extends Group {
                     newActor.setText(localize(property.value.toString()));
                     break;
                 case "style":
-                    newActor.setStyle(Controls.getSkin().get(property.value.toString(), TextButton.TextButtonStyle.class));
+                    newActor.setStyle(Controls.getTextButtonStyle(property.value.toString()));
                     break;
                 case "binding":
                     keyMap.put(KeyBinding.valueOf(property.value.toString()), newActor);

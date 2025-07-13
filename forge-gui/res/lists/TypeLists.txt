@@ -365,7 +365,6 @@ Fortification
 Gold
 Incubator:Incubators
 Junk
-Lander:Landers
 Key:Keys
 Lander:Landers
 Map
