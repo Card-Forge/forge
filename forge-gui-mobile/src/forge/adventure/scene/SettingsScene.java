@@ -32,7 +32,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class SettingsScene extends UIScene {
     private final Table settingGroup;
     TextraButton backButton;
-    //TextraButton newPlane;
+    TextraButton newPlane;
     ScrollPane scrollPane;
 
     SelectBox<String> selectSourcePlane;
@@ -99,7 +99,7 @@ public class SettingsScene extends UIScene {
 
         settingGroup = new Table();
         //temporary disable custom world until it works correctly on each update
-        /*selectSourcePlane = Controls.newComboBox();
+        selectSourcePlane = Controls.newComboBox();
         newPlaneName = Controls.newTextField("");
 
         selectSourcePlane.setItems(Config.instance().getAllAdventures());
@@ -108,17 +108,17 @@ public class SettingsScene extends UIScene {
             Config.instance().saveSettings();
             return null;
         });
-        newPlane = Controls.newTextButton("Create own plane");
+        /*newPlane = Controls.newTextButton("Create own plane");
         newPlane.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 createNewPlane();
             }
-        });
+        });*/
         addLabel(Forge.getLocalizer().getMessage("lblWorld"));
         settingGroup.add(plane).align(Align.right).pad(2);
         addLabel(Forge.getLocalizer().getMessage("lblCreate") + Forge.getLocalizer().getMessage("lblWorld"));
-        settingGroup.add(newPlane).align(Align.right).pad(2);*/
+        settingGroup.add(newPlane).align(Align.right).pad(2);
 
         if (!GuiBase.isAndroid()) {
             SelectBox<String> videomode = Controls.newComboBox(ForgeConstants.VIDEO_MODES, Config.instance().getSettingData().videomode, o -> {
