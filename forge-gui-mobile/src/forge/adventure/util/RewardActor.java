@@ -944,7 +944,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         overlayLabel.setWidth(this.getWidth());
         overlayLabel.setWrap(true);
         overlayLabel.setAlignment(alignment);
-        overlayLabel.style = Controls.getLabelStyle();
+        overlayLabel.style = Controls.getLabelStyle(labelStyle);
         //compute layout
         overlayLabel.layout();
         //get the layout values and apply
