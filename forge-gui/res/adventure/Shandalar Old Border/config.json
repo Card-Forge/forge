@@ -593,7 +593,12 @@
     "ZEN",
     "ZNC",
     "ZNE",
-    "ZNR"
+    "ZNR",
+    "PCEL",
+    "UNK",
+    "EOE",
+    "EOC",
+    "YTDM"
   ],
   "difficulties": [
     {
