@@ -753,16 +753,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         return false;
     }
 
-    private int getExtraSectionMaxCopies(DeckSection section) {
-        return switch (section) {
-            case Avatar, Commander, Planes, Dungeon -> 1;
-            case Schemes -> 2;
-            case Conspiracy -> Integer.MAX_VALUE;
-            case Attractions, Contraptions -> isLimitedEditor() ? Integer.MAX_VALUE : 1;
-            default -> FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
-        };
-    }
-
     protected ItemPool<PaperCard> getAllowedAdditions(Iterable<Entry<PaperCard, Integer>> itemsToAdd, CardManagerPage source, CardManagerPage destination)
     {
         ItemPool<PaperCard> additions = new ItemPool<>(destination.cardManager.getGenericType());
@@ -822,22 +812,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    private int getNumAllowedInDeck(PaperCard card) {
+    public int getNumAllowedInDeck(PaperCard card) {
         DeckFormat format = this.editorConfig.getDeckFormat();
         if(card == null)
             return 0;
         else if (!shouldEnforceConformity())
             return Integer.MAX_VALUE;
-        else if(DeckFormat.canHaveSpecificNumberInDeck(card) != null)
-            return DeckFormat.canHaveSpecificNumberInDeck(card);
-        else if (DeckFormat.canHaveAnyNumberOf(card))
-            return Integer.MAX_VALUE;
-        else if (!FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY))
-            return Integer.MAX_VALUE;
-        else if (card.getRules().isVariant())
-            return getExtraSectionMaxCopies(DeckSection.matchingSection(card));
-        else if (format != null)
-            return format.getMaxCardCopies();
+        else if(format != null)
+            return format.getMaxCardCopies(card);
         else
             return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
     }

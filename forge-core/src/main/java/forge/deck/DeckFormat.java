@@ -57,6 +57,13 @@ public enum DeckFormat {
             //Limited contraption decks have no restrictions.
             return null;
         }
+
+        @Override
+        public int getExtraSectionMaxCopies(DeckSection section) {
+            if(section == DeckSection.Attractions || section == DeckSection.Contraptions)
+                return Integer.MAX_VALUE;
+            return super.getExtraSectionMaxCopies(section);
+        }
     },
     Commander      ( Range.is(99),                         Range.of(0, 10), 1, null,
             card -> StaticData.instance().getCommanderPredicate().test(card)
@@ -188,10 +195,37 @@ public enum DeckFormat {
     }
 
     /**
-     * @return the maxCardCopies
+     * @return the default maximum copies of a card in this format.
      */
     public int getMaxCardCopies() {
         return maxCardCopies;
+    }
+
+    /**
+     * @return the maximum copies of the specified card allowed in this format. This does not include ban or restricted lists.
+     */
+    public int getMaxCardCopies(PaperCard card) {
+        if(canHaveSpecificNumberInDeck(card) != null)
+            return canHaveSpecificNumberInDeck(card);
+        else if (canHaveAnyNumberOf(card))
+            return Integer.MAX_VALUE;
+        else if (card.getRules().isVariant()) {
+            DeckSection section = DeckSection.matchingSection(card);
+            if(section == DeckSection.Planes && card.getRules().getType().isPhenomenon())
+                return 2; //These are two-of.
+            return getExtraSectionMaxCopies(section);
+        }
+        else
+            return this.getMaxCardCopies();
+    }
+
+    public int getExtraSectionMaxCopies(DeckSection section) {
+        return switch (section) {
+            case Avatar, Commander, Planes, Dungeon, Attractions, Contraptions -> 1;
+            case Schemes -> 2;
+            case Conspiracy -> Integer.MAX_VALUE;
+            default -> maxCardCopies;
+        };
     }
 
     /**
