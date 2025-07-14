@@ -399,6 +399,7 @@ public class CardCopyService {
 
         newCopy.setExiledBy(copyFrom.getExiledBy());
         newCopy.setExiledWith(getLKICopy(copyFrom.getExiledWith(), cachedMap));
+        newCopy.setExiledSA(copyFrom.getExiledSA());
         newCopy.addExiledCards(copyFrom.getExiledCards());
 
         newCopy.setDiscarded(copyFrom.wasDiscarded());

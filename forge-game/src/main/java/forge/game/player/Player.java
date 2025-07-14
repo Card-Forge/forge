@@ -118,7 +118,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int descended;
     private int numRingTemptedYou;
     private int devotionMod;
-    private boolean revolt = false;
     private Card ringBearer, theRing;
     private int speed;
 
@@ -2142,10 +2141,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasRevolt() {
-        return revolt;
-    }
-    public final void setRevolt(final boolean val) {
-        revolt = val;
+        return getGame().getLeftBattlefieldThisTurn().stream().anyMatch(CardPredicates.isController(this));
     }
 
     public final int getDescended() {
@@ -2549,7 +2545,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetDiscardedThisTurn();
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
-        setRevolt(false);
         setDescended(0);
         setSpellsCastLastTurn(getSpellsCastThisTurn());
         resetSpellsCastThisTurn();
