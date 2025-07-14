@@ -57,6 +57,8 @@ public class BoosterDraft implements IBoosterDraft {
     private IDraftLog draftLog = null;
 
     private String doublePickDuringDraft = ""; // "FirstPick" or "Always"
+    private boolean shouldShowDraftLog = false;
+
     protected int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
@@ -127,6 +129,8 @@ public class BoosterDraft implements IBoosterDraft {
                 }
 
                 final int nPacks = block.getCntBoostersDraft();
+
+                this.shouldShowDraftLog = block.getName().contains("Conspiracy");
 
                 if (sets.size() > 1) {
                     Object p;
@@ -239,6 +243,8 @@ public class BoosterDraft implements IBoosterDraft {
             }
         }
 
+        draft.shouldShowDraftLog = block.getName().contains("Conspiracy"); //TODO: Make this an actual property on the block and/or edition data.
+
         IBoosterDraft.LAND_SET_CODE[0] = block.getLandSet();
         IBoosterDraft.CUSTOM_RANKINGS_FILE[0] = null;
 
@@ -283,6 +289,11 @@ public class BoosterDraft implements IBoosterDraft {
     @Override
     public IDraftLog getDraftLog() {
         return draftLog;
+    }
+
+    @Override
+    public boolean shouldShowDraftLog() {
+        return this.shouldShowDraftLog; //Hacky implementation for now.
     }
 
     @Override

@@ -929,7 +929,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         BoosterDraft draft = getDraft();
         assert(draft != null);
 
-        final Deck[] computerDecks = draft.getDecks();
+        final Deck[] computerDecks = draft.getComputerDecks();
         final LimitedPlayer[] players = draft.getOpposingPlayers();
 
         LimitedPlayer humanPlayer = draft.getHumanPlayer();

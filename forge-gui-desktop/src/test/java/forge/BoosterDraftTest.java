@@ -108,6 +108,11 @@ public class BoosterDraftTest implements IBoosterDraft {
     }
 
     @Override
+    public boolean shouldShowDraftLog() {
+        return false;
+    }
+
+    @Override
     public void addLog(String message) {}
 
     @Override

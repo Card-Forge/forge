@@ -32,9 +32,11 @@ public class DraftingProcessScreen extends FDeckEditor {
         this.questDraftController = questDraftController;
         getCatalogPage().scheduleRefresh(); //must refresh after draft set
 
-        this.draftLog = new FDraftLog();
-        draft.setLogEntry(this.draftLog);
-        deckHeader.initDraftLog(this.draftLog, this);
+        if(draft.shouldShowDraftLog()) {
+            this.draftLog = new FDraftLog();
+            draft.setLogEntry(this.draftLog);
+            deckHeader.initDraftLog(this.draftLog, this);
+        }
     }
 
     @Override

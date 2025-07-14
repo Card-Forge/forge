@@ -668,7 +668,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         super(new AdventureEventEditorConfig(event), event.registeredDeck, e -> leave());
         currentEvent = event;
 
-        if(event.getDraft() != null) {
+        if(event.getDraft() != null && event.getDraft().shouldShowDraftLog()) {
             this.draftLog = new FDraftLog();
             event.getDraft().setLogEntry(this.draftLog);
             deckHeader.initDraftLog(this.draftLog, this);

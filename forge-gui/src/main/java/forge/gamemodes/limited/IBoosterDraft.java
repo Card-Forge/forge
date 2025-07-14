@@ -22,6 +22,10 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * <p>
  * BoosterDraft interface.
@@ -53,6 +57,7 @@ public interface IBoosterDraft {
 
     void setLogEntry(IDraftLog draftingProcess);
     IDraftLog getDraftLog();
+    boolean shouldShowDraftLog();
     void addLog(String message);
     void postDraftActions();
     LimitedPlayer getNeighbor(LimitedPlayer p, boolean left);
