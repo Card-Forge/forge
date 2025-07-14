@@ -1053,7 +1053,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         CardEdition edition = StaticData.instance().getCardEdition(code);
         if(edition == null && code.equals(CardEdition.UNKNOWN_CODE))
             return true;
-        return edition != null && Type.REPRINT_SET_TYPES.contains(edition.getType());
+        return edition != null && !Type.REPRINT_SET_TYPES.contains(edition.getType());
     };
 
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
