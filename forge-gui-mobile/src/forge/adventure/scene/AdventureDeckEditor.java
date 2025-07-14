@@ -383,6 +383,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             super.buildDeckMenu(menu);
             if (!(parentScreen instanceof AdventureDeckEditor adventureEditor) || adventureEditor.getAutoSellPage() == null)
                 return;
+            menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyCollectionToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyCollectionToClipboard(AdventurePlayer.current().getCards())));
             FMenuItem sellCurrentFilters = new FMenuItem(Forge.getLocalizer().getMessage("lblAutoSellCurrentFilters"), FSkinImage.QUEST_COINSTACK, e1 -> autoSellAllByFilter(adventureEditor.getAutoSellPage()));
             sellCurrentFilters.setTextColor(255, 0, 0);
             menu.addItem(sellCurrentFilters);
@@ -692,7 +693,6 @@ public class AdventureDeckEditor extends FDeckEditor {
             protected void buildMenu() {
                 Localizer localizer = Forge.getLocalizer();
                 addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
-                addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyCollectionToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyCollectionToClipboard(AdventurePlayer.current().getCards())));
                 if (allowsAddBasic()) {
                     FMenuItem addBasic = new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> showAddBasicLandsDialog());
                     addItem(addBasic);
