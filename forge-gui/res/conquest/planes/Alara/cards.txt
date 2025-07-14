@@ -24,7 +24,7 @@ Cathedral of War
 Meren of Clan Nel Toth|C15
 Jazal Goldmane|C14
 Jhessian Thief|ORI
-Rhox Faithmender|J25
+Rhox Faithmender|M13
 Rhox Pikemaster
 Scourge of Nel Toth|C15
 Breya, Etherium Shaper|C16
