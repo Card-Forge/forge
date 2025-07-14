@@ -146,10 +146,6 @@ public class GameAction {
             c.updateRooms();
         }
 
-        if (fromBattlefield && !toBattlefield) {
-            c.getController().setRevolt(true);
-        }
-
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
         Card copied = null;
         Card lastKnownInfo = null;
