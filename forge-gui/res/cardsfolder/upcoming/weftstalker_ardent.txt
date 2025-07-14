@@ -1,0 +1,8 @@
+Name:Weftstalker Ardent
+ManaCost:2 R
+Types:Creature Drix Artificer
+PT:2/3
+K:Warp:R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl,Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever a creature you control enters, CARDNAME deals 1 damage to each opponent. 
+SVar:TrigDmg:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1 
+Oracle: Whenever another creature or artifact you control enters, this creature deals 1 damage to each opponent.
