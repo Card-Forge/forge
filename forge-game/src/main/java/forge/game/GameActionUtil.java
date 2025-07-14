@@ -31,6 +31,7 @@ import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -248,14 +249,6 @@ public final class GameActionUtil {
                     alternatives.add(foretold);
                 }
 
-                if (source.isWarped() && activator.equals(source.getOwner()) && !source.enteredThisTurn() && !source.getManaCost().isNoCost()) {
-                    final SpellAbility normalWarp = sa.copy(activator);
-                    normalWarp.getRestrictions().setZone(ZoneType.Exile);
-                    // no alternative cost for this
-                    normalWarp.putParam("AfterDescription", "(From Warp)");
-                    alternatives.add(normalWarp);
-                }
-
                 if (activator.canCastSorcery() && source.isPlotted() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner()) && !source.enteredThisTurn()) {
                     final SpellAbility plotted = sa.copyWithNoManaCost(activator);
                     plotted.setAlternativeCost(AlternativeCost.Plotted);
@@ -339,6 +332,10 @@ public final class GameActionUtil {
             // non basic are only allowed if PayManaCost is yes
             if ((!sa.isBasicSpell() || (sa.costHasManaX() && sa.getPayCosts().getCostMana() != null
                     && sa.getPayCosts().getCostMana().getXMin() > 0)) && o.getPayManaCost() == PayManaCost.NO) {
+                continue;
+            }
+            // Timeline Culler overrides zone restriction
+            if (sa.isKeyword(Keyword.WARP) && !sa.getHostCard().equals(o.getHost())) {
                 continue;
             }
             final Card host = o.getHost();

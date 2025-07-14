@@ -15,9 +15,11 @@ import forge.game.keyword.Keyword;
 import forge.game.player.*;
 import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -28,6 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -751,6 +754,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 // look at the exiled card
                 if (sa.hasParam("WithMayLook") || sa.hasParam("Foretold")) {
                     movedCard.addMayLookFaceDownExile(activator);
+                }
+
+                if (sa.isTrigger() && sa.getTrigger().isKeyword(Keyword.WARP)) {
+                    Card eff = createEffect(sa, activator, "Warped " + sa.getHostCard(), sa.getHostCard().getImageKey());
+                    StringBuilder sbPlay = new StringBuilder();
+                    sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand+!ThisTurnEntered");
+                    sbPlay.append(" | AffectedZone$ Exile | Description$ You may cast the card.");
+                    final StaticAbility st = eff.addStaticAbility(sbPlay.toString());
+                    eff.addRemembered(movedCard);
+                    addForgetOnMovedTrigger(eff, "Exile");
+                    game.getAction().moveToCommand(eff, sa);
                 }
 
                 // CR 400.7k

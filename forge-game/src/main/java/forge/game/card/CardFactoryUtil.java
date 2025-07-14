@@ -3785,6 +3785,7 @@ public class CardFactoryUtil {
             newSA.setDescription(desc.toString());
             newSA.putParam("AfterDescription", "(Warped)");
 
+            newSA.getRestrictions().setZone(ZoneType.Hand);
             newSA.setAlternativeCost(AlternativeCost.Warp);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
