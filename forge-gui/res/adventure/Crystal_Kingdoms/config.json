@@ -5,6 +5,7 @@
   "playerBaseSpeed": 32,
   "minDeckSize": 40,         
   "colorIds":["W","U","B","R","G"],
+  "colorIdNames":["tr(lblWhite) [+W]","tr(lblBlue) [+U]","tr(lblBlack) [+B]","tr(lblRed) [+R]","tr(lblGreen) [+G]"],
   "restrictedCards": [
     "Black Lotus",
     "Mox Emerald",
@@ -83,6 +84,7 @@
   "allowedEditions": [
     "FIN"
   ],
+  "cardRewardsOld": ["False"],
   "difficulties": [
     {
       "name": "Easy",
