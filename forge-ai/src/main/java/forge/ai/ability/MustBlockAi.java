@@ -121,11 +121,7 @@ public class MustBlockAi extends SpellAbilityAi {
     private List<Card> determineBlockerFromList(final Card attacker, final Player ai, Iterable<Card> options, SpellAbility sa,
             final boolean onlyLethal, final boolean testTapped) {
         List<Card> list = CardLists.filter(options, c -> {
-            boolean tapped = c.isTapped();
-            if (testTapped) {
-                c.setTapped(false);
-            }
-            if (!CombatUtil.canBlock(attacker, c)) {
+            if (!CombatUtil.canBlock(attacker, c, testTapped)) {
                 return false;
             }
             if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, c, null, false)) {
@@ -133,9 +129,6 @@ public class MustBlockAi extends SpellAbilityAi {
             }
             if (onlyLethal && !ComputerUtilCombat.canDestroyBlocker(ai, c, attacker, null, false)) {
                 return false;
-            }
-            if (testTapped) {
-                c.setTapped(tapped);
             }
             return true;
         });
