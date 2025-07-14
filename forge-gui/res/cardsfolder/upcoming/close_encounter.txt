@@ -1,0 +1,7 @@
+Name:Close Encounter
+ManaCost:1 G
+Types:Instant
+A:SP$ DealDamage | Cost$ 1 G ChooseTODO<1/Creature.YouCtrl+inZoneBattlefield;Creature.YouOwn+inZoneExile+warped> | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the power of the chosen creature or card to target creature.
+SVar:X:Revealed$CardPower
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, choose a creature you control or reveal a creature card from your hand.\nCARDNAME deals damage equal to the power of the chosen creature or card to target creature.
