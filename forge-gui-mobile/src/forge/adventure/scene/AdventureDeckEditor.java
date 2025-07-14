@@ -284,7 +284,6 @@ public class AdventureDeckEditor extends FDeckEditor {
                     if (result) {
                         Current.player().doBulkSell(toSell);
                         refresh();
-                        //parentScreen.deckHeader.updateGold(); //TODO: Is this even needed?
                     }
                 }
             });
@@ -693,9 +692,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             protected void buildMenu() {
                 Localizer localizer = Forge.getLocalizer();
                 addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
-                addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyCollectionToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> {
-                    FDeckViewer.copyCollectionToClipboard(AdventurePlayer.current().getCards());
-                }));
+                addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyCollectionToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyCollectionToClipboard(AdventurePlayer.current().getCards())));
                 if (allowsAddBasic()) {
                     FMenuItem addBasic = new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> showAddBasicLandsDialog());
                     addItem(addBasic);
