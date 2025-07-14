@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+YouCtrl,Artifact.Other+YouCtrl | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever NICKNAME or another creature or artifact you control enters, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw a card if you've gained 3 or more life this turn.
-SVar:TrigDraw:DB$ Draw | ConditionCheckSVar$ X | SVarCompare$ GE3
+SVar:TrigDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3
 K:Warp:W
 SVar:X:Count$LifeYouGainedThisTurn
 DeckHas:Ability$LifeGain
