@@ -188,8 +188,9 @@ public class LimitedPlayer {
         }
 
         if ((playerFlags & IllusionaryInformantPeek) == IllusionaryInformantPeek) {
-            if (handleIllusionaryInformant()) {
-                addLog(name() + " peeked at " + fromPlayer.name() + "'s next pick with Illusionary Informant and turned it face down.");
+            LimitedPlayer peekAt = handleIllusionaryInformant();
+            if (peekAt != null) {
+                addLog(name() + " peeked at " + peekAt.name() + "'s next pick with Illusionary Informant and turned it face down.");
                 playerFlags &= ~IllusionaryInformantPeek;
             }
         }
@@ -648,20 +649,20 @@ public class LimitedPlayer {
         }
     }
 
-    public boolean handleIllusionaryInformant() {
         Integer player = SGuiChoose.getInteger("Peek at another player's last pick?", 0, draft.getOpposingPlayers().length);
         if (Objects.equals(player, null)) {
             return false;
         }
 
         LimitedPlayer peekAt = draft.getPlayer(player);
+    public LimitedPlayer handleIllusionaryInformant() {
         if (peekAt == null) {
-            return false;
+            return null;
         }
 
-        SGuiChoose.reveal("Player " + player + " lastPicked: ",  Lists.newArrayList(peekAt.getLastPick()));
+        SGuiChoose.reveal("Player " + peekAt + " lastPicked: ",  Lists.newArrayList(peekAt.getLastPick()));
 
-        return true;
+        return peekAt;
     }
 
     public PaperCard handleSpirePhantasm(DraftPack chooseFrom) {

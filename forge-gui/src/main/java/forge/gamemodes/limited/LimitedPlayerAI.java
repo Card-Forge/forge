@@ -186,23 +186,13 @@ public class LimitedPlayerAI extends LimitedPlayer {
     }
 
     @Override
-    public boolean handleIllusionaryInformant() {
+    public LimitedPlayer handleIllusionaryInformant() {
         // Always choose the next pack I will open
         // What do I do with this information? Great question. I have no idea.
-        int player;
-        do {
-            player = MyRandom.getRandom().nextInt(draft.getOpposingPlayers().length + 1);
-        } while(player == this.order);
-
-
-        LimitedPlayer peekAt = draft.getPlayer(player);
-        if (peekAt == null) {
-            return false;
-        }
-
+        LimitedPlayer peekAt = draft.getAllPlayers().stream().filter((s) -> s != this).collect(StreamUtil.random()).orElse(null);
         // Not really sure what the AI does with this information. But its' known now.
         //peekAt.getLastPick();
-        return true;
+        return peekAt;
     }
 
     @Override

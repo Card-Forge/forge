@@ -524,7 +524,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         if(currentEvent == null)
             return;
         currentEvent.isDraftComplete = true;
-        Deck[] opponentDecks = currentEvent.getDraft().getDecks();
+        Deck[] opponentDecks = currentEvent.getDraft().getComputerDecks();
         for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
             currentEvent.participants[i].setDeck(opponentDecks[i]);
         }

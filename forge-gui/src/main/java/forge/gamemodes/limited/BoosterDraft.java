@@ -406,7 +406,7 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     @Override
-    public Deck[] getDecks() {
+    public Deck[] getComputerDecks() {
         Deck[] decks = new Deck[7];
         for (int i = 1; i < N_PLAYERS; i++) {
             decks[i - 1] = ((LimitedPlayerAI) this.players.get(i)).buildDeck(IBoosterDraft.LAND_SET_CODE[0] != null ? IBoosterDraft.LAND_SET_CODE[0].getCode() : null);
@@ -416,12 +416,17 @@ public class BoosterDraft implements IBoosterDraft {
 
     @Override
     public LimitedPlayer[] getOpposingPlayers() {
-        return this.players.toArray(new LimitedPlayer[7]);
+        return this.players.subList(1, players.size()).toArray(new LimitedPlayer[7]);
     }
 
     @Override
     public LimitedPlayer getHumanPlayer() {
         return this.localPlayer;
+    }
+
+    @Override
+    public List<LimitedPlayer> getAllPlayers() {
+        return Collections.unmodifiableList(this.players);
     }
 
     @Override

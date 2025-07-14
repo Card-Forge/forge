@@ -932,6 +932,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         final Deck[] computerDecks = draft.getDecks();
         final LimitedPlayer[] players = draft.getOpposingPlayers();
 
+        LimitedPlayer humanPlayer = draft.getHumanPlayer();
+        humanPlayer.getDeck().setDraftNotes(humanPlayer.getSerializedDraftNotes());
         for(int i = 0; i < computerDecks.length; i++) {
             Deck deck = computerDecks[i];
             LimitedPlayer player = players[i];

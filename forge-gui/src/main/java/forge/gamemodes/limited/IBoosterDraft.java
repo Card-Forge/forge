@@ -37,9 +37,15 @@ public interface IBoosterDraft {
     boolean hasNextChoice();
     boolean isRoundOver();
     DraftPack addBooster(CardEdition edition);
-    Deck[] getDecks(); // size 7, all the computers decks
+    Deck[] getComputerDecks(); // size 7, all the computers decks
     LimitedPlayer[] getOpposingPlayers(); // size 7, all the computers
     LimitedPlayer getHumanPlayer();
+    default List<LimitedPlayer> getAllPlayers() {
+        List<LimitedPlayer> out = new ArrayList<>();
+        out.add(getHumanPlayer());
+        out.addAll(Arrays.asList(getOpposingPlayers()));
+        return out;
+    }
 
     CardEdition[] LAND_SET_CODE = { null };
     String[] CUSTOM_RANKINGS_FILE = { null };

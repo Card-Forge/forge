@@ -32,7 +32,7 @@ public class BoosterDraftTest implements IBoosterDraft {
 
     @Override
     @Test(timeOut = 1000)
-    public Deck[] getDecks() {
+    public Deck[] getComputerDecks() {
         return null;
     }
 

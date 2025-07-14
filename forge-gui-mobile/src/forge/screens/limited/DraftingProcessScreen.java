@@ -109,7 +109,7 @@ public class DraftingProcessScreen extends FDeckEditor {
         isDraftSaved = true;
 
         // Construct computer's decks and save draft
-        final Deck[] computer = draft.getDecks();
+        final Deck[] computer = draft.getComputerDecks();
 
         final DeckGroup finishedDraft = new DeckGroup(name);
         finishedDraft.setHumanDeck((Deck) getDeck().copyTo(name));
