@@ -5,7 +5,6 @@
   "playerBaseSpeed": 45,
   "minDeckSize": 40,         
   "colorIds":["W","U","B","R","G"],
-  "colorIdNames":["tr(lblWhite) [+pmW]","tr(lblBlue) [+pmU]","tr(lblBlack) [+pmB]","tr(lblRed) [+pmR]","tr(lblGreen) [+pmG]"],
   "restrictedCards": [
     "Black Lotus",
     "Mox Emerald",
@@ -593,7 +592,6 @@
     "ZEN",
     "ZNC",
     "ZNE",
-    "ZNR"
   ],
   "difficulties": [
     {

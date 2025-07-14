@@ -31,9 +31,18 @@ import java.util.function.Function;
  * Class to create ui elements in the correct style
  */
 public class Controls {
+
+    static public Label.LabelStyle getLabelStyle(String name) {
+        return getSkin().get(name, Label.LabelStyle.class);
+    }
+
+    static public TextButton.TextButtonStyle getTextButtonStyle(String name) {
+        return getSkin().get(name, TextButton.TextButtonStyle.class);
+    }
+
     static class LabelFix extends TextraLabel {
         public LabelFix(String text, Font font) {
-            super(text, new Styles.LabelStyle(getSkin().get(Label.LabelStyle.class)), font);
+            super(text, getSkin(), font);
         }
 
         @Override
@@ -54,7 +63,7 @@ public class Controls {
 
     static class TextButtonFix extends TextraButton {
         public TextButtonFix(@Null String text) {
-            super(text == null ? "NULL" : text, new Styles.TextButtonStyle(Controls.getSkin().get(TextButton.TextButtonStyle.class)), Controls.getTextraFont());
+            super(text == null ? "NULL" : text, Controls.getSkin(), Controls.getTextraFont());
             addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -89,7 +98,7 @@ public class Controls {
 
     static class TypingButtonFix extends TypingButton {
         public TypingButtonFix(@Null String text) {
-            super(text == null ? "NULL" : text, new Styles.TextButtonStyle(Controls.getSkin().get(TextButton.TextButtonStyle.class)), Controls.getTextraFont());
+            super(text == null ? "NULL" : text, Controls.getSkin(), Controls.getTextraFont());
             addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -457,22 +466,22 @@ public class Controls {
         String nextline = vertical ? "\n" : "";
         String colorId = "";
         if (color.hasWhite())
-            colorId += "[+pmW]"+nextline;
+            colorId += "[+W]"+nextline;
         if (color.hasBlue())
-            colorId += "[+pmU]"+nextline;
+            colorId += "[+U]"+nextline;
         if (color.hasBlack())
-            colorId += "[+pmB]"+nextline;
+            colorId += "[+B]"+nextline;
         if (color.hasRed())
-            colorId += "[+pmR]"+nextline;
+            colorId += "[+R]"+nextline;
         if (color.hasGreen())
-            colorId += "[+pmG]"+nextline;
+            colorId += "[+G]"+nextline;
         if (color.isColorless())
-            colorId += "[+pmC]"+nextline;
+            colorId += "[+C]"+nextline;
         return colorId;
     }
 
     public static TypingLabel newTypingLabel(String name) {
-        TypingLabel ret = new TypingLabel(name == null ? "" : name, new Styles.LabelStyle(getSkin().get(Label.LabelStyle.class)), getTextraFont());
+        TypingLabel ret = new TypingLabel(name == null ? "" : name, getSkin(), getTextraFont());
         String pn = Current.player().getName();
         if (pn != null) // this variable is used for dialogs
             ret.setVariable("player_name", pn);
@@ -518,7 +527,7 @@ public class Controls {
         public AccountingLabel(TextraLabel target, boolean isShards) {
             target.setVisible(false);
             placeholder = target;
-            label = Controls.newTextraLabel(target.getName() + "Replacement");
+            label = newTextraLabel(target.getName() + "Replacement");
             currencyAmount = isShards ? Current.player().getShards() : Current.player().getGold();
             this.isShards = isShards;
 
@@ -597,13 +606,13 @@ public class Controls {
         }
 
         private TextraLabel getDefaultLabel() {
-            return Controls.newTextraLabel(getLabelText(currencyAmount));
+            return newTextraLabel(getLabelText(currencyAmount));
         }
 
         private TextraLabel getUpdateLabel(int newAmount) {
             int delta = newAmount - currencyAmount;
             String updateText = delta == 0 ? "" : (delta < 0 ? NEGDECOR + delta * -1 : POSDECOR + delta);
-            return Controls.newTextraLabel(getLabelText(newAmount, updateText));
+            return newTextraLabel(getLabelText(newAmount, updateText));
         }
 
         private String getLabelText(int amount) {
