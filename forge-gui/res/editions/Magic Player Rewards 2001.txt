@@ -4,15 +4,16 @@ Date=2001-01-01
 Name=Magic Player Rewards 2001
 Type=Promo
 ScryfallCode=MPR
+TokensCode=MPR
 
 [cards]
 1 R Wasteland @Una Fricker
 
 [tokens]
-g_1_1_saproling
-g_3_3_elephant
-u_1_1_bird_flying
-w_1_1_spirit_flying
-rw_1_1_goblin_soldier
-g_2_2_bear
-g_4_4_beast
+2 g_1_1_saproling @Jeff Laubenstein
+3 g_3_3_elephant @Terese Nielsen
+4 u_1_1_bird_flying @Michael Sutfin
+5 w_1_1_spirit_flying @John Matson
+6 rw_1_1_goblin_soldier @Ron Spears
+7 g_2_2_bear @Heather Hudson
+8 g_4_4_beast @Larry Elmore
