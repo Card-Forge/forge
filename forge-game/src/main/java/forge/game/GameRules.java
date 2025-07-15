@@ -15,6 +15,7 @@ public class GameRules {
     private boolean AISideboardingEnabled = false;
     private boolean sideboardForAI = false;
     private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
+    private int simTimeout = 120;
 
     // it's a preference, not rule... but I could hardly find a better place for it
     private boolean useGrayText;
@@ -123,5 +124,13 @@ public class GameRules {
     }
     public void setWarnAboutAICards(final boolean warnAboutAICards) {
         this.warnAboutAICards = warnAboutAICards;
+    }
+
+    public int getSimTimeout() {
+        return this.simTimeout;
+    }
+
+    public void setSimTimeout(final int duration) {
+        this.simTimeout = duration;
     }
 }
