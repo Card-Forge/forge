@@ -228,6 +228,9 @@ public enum Keyword {
             final String[] x = k.split(":", 2);
             keyword = smartValueOf(x[0]);
             details = x[1];
+            // Flavor keyword titles should be last in the card script K: line
+            if (details.contains(":Flavor ")) details = details.substring(0, details.indexOf(":Flavor "));
+            // Simply remove flavor here so it doesn't goof up parsing details
         } else if (k.contains(" ")) {
             // First strike
             keyword = smartValueOf(k);
