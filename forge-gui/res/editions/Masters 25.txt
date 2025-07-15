@@ -276,3 +276,6 @@ ScryfallCode=A25
 12 g_1_1_insect @Ron Spencer
 13 g_2_2_wolf @Daren Bader
 14 stangg_twin @Izzy
+
+[other]
+15 morph @Seb McKinnon
