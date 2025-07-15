@@ -2,7 +2,6 @@
 Code=PC2
 Date=2012-06-01
 Name=Planechase 2012
-Code2=PC2
 Type=Multiplayer
 ScryfallCode=PC2
 
@@ -27,7 +26,7 @@ ScryfallCode=PC2
 18 R Higure, the Still Wind @Christopher Moeller
 19 U Illusory Angel @Allen Williams
 20 C Mistblade Shinobi @Kev Walker
-21 C Ninja of the Deep Hours @Dan Scott
+21 C Ninja of the Deep Hours @Dan Murayama Scott
 22 U Peregrine Drake @Bob Eggleton
 23 C Primal Plasma @Luca Zontini
 24 R Sakashima's Student @Brian Snõddy
@@ -135,7 +134,7 @@ ScryfallCode=PC2
 126 C Shimmering Grotto @Cliff Childs
 127 U Skarrg, the Rage Pits @Martina Pilcerova
 128 U Tainted Isle @Alan Pollack
-129 C Terramorphic Expanse @Dan Scott
+129 C Terramorphic Expanse @Dan Murayama Scott
 130 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
 131 U Vivid Creek @Fred Fields
 132 L Plains @John Avon
@@ -163,64 +162,3 @@ ScryfallCode=PC2
 154 L Forest @Véronique Meignaud
 155 L Forest @Vincent Proce
 156 L Forest @Stephen Tappin
-OPC21 C Chaotic Aether @Dan Scott
-OPC22 C Interplanar Tunnel @Chuck Lukacs
-OPC23 C Morphic Tide @Brandon Kitkouski
-OPC24 C Mutual Epiphany @Jason Felix
-OPC25 C Planewide Disaster @Dave Kendall
-OPC26 C Reality Shaping @Dan Scott
-OPC27 C Spatial Merging @Gabor Szikszai
-OPC28 C Time Distortion @rk post
-OPC29 C Akoum @Rob Alexander
-OPC210 C Aretopolis @Christopher Moeller
-OPC211 C Astral Arena @Sam Burley
-OPC212 C Bloodhill Bastion @Mark Hyzer
-OPC213 C Edge of Malacol @Goran Josic
-OPC214 C Furnace Layer @Kekai Kotaki
-OPC215 C Gavony @Dave Kendall
-OPC216 C Glen Elendra @Omar Rayyan
-OPC217 C Grand Ossuary @Kekai Kotaki
-OPC218 C Grove of the Dreampods @Erica Yang
-OPC219 C Hedron Fields of Agadeem @Vincent Proce
-OPC220 C Jund @Aleksi Briclot
-OPC221 C Kessig @Adam Paquette
-OPC222 C Kharasha Foothills @Trevor Claxton
-OPC223 C Kilnspire District @John Avon
-OPC224 C Lair of the Ashen Idol @Philip Straub
-OPC225 C Mount Keralia @Franz Vohwinkel
-OPC226 C Nephalia @Daniel Ljunggren
-OPC227 C Norn's Dominion @Igor Kieryluk
-OPC228 C Onakke Catacomb @Nic Klein
-OPC229 C Orochi Colony @Charles Urbach
-OPC230 C Orzhova @Charles Urbach
-OPC231 C Prahv @Drew Baker
-OPC232 C Quicksilver Sea @Charles Urbach
-OPC233 C Selesnya Loft Gardens @Martina Pilcerova
-OPC234 C Stensia @Vincent Proce
-OPC235 C Takenuma @Cliff Childs
-OPC236 C Talon Gates @Chippy
-OPC237 C Trail of the Mage-Rings @Vincent Proce
-OPC238 C Truga Jungle @Jim Nelson
-OPC239 C Windriddle Palaces @Kekai Kotaki
-OPC240 C The Zephyr Maze @rk post
-
-[tokens]
-c_0_1_eldrazi_spawn_sac
-c_7_7_eldrazi_annihilator
-w_4_4_angel_flying
-b_0_0_phyrexian_germ
-b_2_4_spider_reach
-b_2_2_zombie
-r_1_1_goblin
-r_1_1_goblin
-r_4_4_hellion
-g_3_3_beast
-g_3_3_boar
-g_1_1_insect
-g_1_1_ooze
-g_2_2_ooze_mitotic
-g_0_1_plant
-g_1_1_saproling
-g_1_1_saproling
-g_1_1_saproling
-g_1_1_saproling
