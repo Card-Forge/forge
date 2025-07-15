@@ -14,6 +14,3 @@ ScryfallCode=G11
 6 R Dark Confidant @Ron Spears
 7 R Doubling Season @Chuck Lukacs
 8 R Goblin Welder @Scott M. Fischer
-
-[tokens]
-g_2_2_wolf
