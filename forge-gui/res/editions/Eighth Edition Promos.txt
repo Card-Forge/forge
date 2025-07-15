@@ -7,6 +7,3 @@ ScryfallCode=P8ED
 
 [cards]
 216★ R Rukh Egg @Mark Zug
-
-[tokens]
-r_4_4_bird_flying
