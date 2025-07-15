@@ -1,0 +1,35 @@
+name: Normalize Line Endings to CRLF
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  convert-eol:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dos2unix
+        run: sudo apt-get update && sudo apt-get install -y dos2unix
+
+      - name: Convert LF to CRLF
+        run: |
+          find . -type f -name "*.txt" -exec unix2dos -q {} \;
+
+      - name: Configure Git User
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
+      - name: Commit changes if any
+        run: |
+          git diff --quiet && echo "No changes to commit" || (
+            git add .
+            git commit -m "Fix line endings to CRLF"
+            git push
+          )
