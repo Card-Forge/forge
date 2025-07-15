@@ -1,0 +1,10 @@
+Name:Mechanozoa
+ManaCost:4 U U
+Types:Artifact Creature Robot Jellyfish
+PT:5/5
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When this creature enters, tap target artifact or creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl | TgtPrompt$ Select target artifact or creature an opponent controls | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+K:Warp:2 U
+DeckHas:Ability$Counters
+Oracle:When this creature enters, tap target artifact or creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nWarp {2}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)
