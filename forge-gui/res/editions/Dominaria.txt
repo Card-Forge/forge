@@ -314,4 +314,4 @@ ScryfallCode=DOM
 
 [other]
 15 emblem_jaya_ballard @Magali Villeneuve
-16 emblem_teferi-_ero_of_dominaria @Chris Rallis
+16 emblem_teferi_hero_of_dominaria @Chris Rallis
