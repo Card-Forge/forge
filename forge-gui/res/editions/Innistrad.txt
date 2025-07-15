@@ -286,6 +286,7 @@ ScryfallCode=ISD
 7 b_2_2_zombie @Lucas Graciano
 8 b_2_2_zombie @Christopher Moeller
 9 b_2_2_zombie @Cynthia Sheppard
+# Technically a g_x_x_ooze, but it has unique art and g_x_x_ooze_gutter_grime doesn't exist
 10 g_x_x_ooze_gutter_grime @Erica Yang
 11 g_1_2_spider_reach @Daniel Ljunggren
 12 g_2_2_wolf @David Palumbo
