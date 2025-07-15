@@ -337,25 +337,7 @@ public class CardUtil {
     {
         List<PaperCard> result = new ArrayList<>();
         CardPredicate pre = new CardPredicate(data, true);
-        // Special handling for basic lands to exclude Snow-Covered variants when using cardTypes/subTypes filter
-        boolean isBasicLandFilter = false;
-        boolean shouldExcludeSnowCovered = false;
 
-        if (data.cardTypes != null && data.subTypes != null) {
-            for (String cardType : data.cardTypes) {
-                if ("Land".equals(cardType)) {
-                    for (String subType : data.subTypes) {
-                        if ("Plains".equals(subType) || "Island".equals(subType) ||
-                                "Swamp".equals(subType) || "Mountain".equals(subType) ||
-                                "Forest".equals(subType)) {
-                            isBasicLandFilter = true;
-                            shouldExcludeSnowCovered = true;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
         for (final PaperCard item : cards)
         {
             if(pre.test(item))
@@ -363,96 +345,27 @@ public class CardUtil {
         }
         return result;
     }
-    private static boolean isBasicLandName(String name) {
-        if (name == null) return false;
-        return name.equals("Plains") || name.equals("Island") || name.equals("Swamp") || name.equals("Mountain") || name.equals("Forest") || name.equals("Wastes") || name.startsWith("Snow-Covered");
-    }
 
-    public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count, Random r) {
-        ConfigData configData = Config.instance().getConfigData();
-        if (configData.cardRewardsOld.equals("True")) {
-            if (data.cardName != null && isBasicLandName(data.cardName)) {
-                List<PaperCard> allPrintingsOfBasicLand = FModel.getMagicDb().getCommonCards().getAllCards(data.cardName);
+    public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count, Random r)
+    {
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
 
-                ConfigData config = Config.instance().getConfigData();
-                final List<String> restrictedEditions = (config != null && config.restrictedEditions != null) ? Arrays.asList(config.restrictedEditions) : Collections.emptyList();
-
-                List<PaperCard> globallyAllowedPrintings = allPrintingsOfBasicLand.stream()
-                        .filter(p -> !restrictedEditions.contains(p.getEdition()))
-                        .collect(Collectors.toList());
-
-                if (!globallyAllowedPrintings.isEmpty()) {
-                    cards = globallyAllowedPrintings;
-                }
-            }
-
-            final List<PaperCard> resultList = new ArrayList<>();
-
-            // Step 1: Filter all printings based on RewardData criteria
-            // CardPredicate used by getPredicateResult does not use filterData.cardName, so previous override of sourceCardPrintings is safe.
-            List<PaperCard> initialFilteredPrintings = getPredicateResult(cards, data);
-
-            if (initialFilteredPrintings.isEmpty()) {
-                return resultList; // No printings match the filter
-            }
-
-            // Step 2: Extract unique card names from the filtered printings
-            List<String> uniqueCardNameList = initialFilteredPrintings.stream()
-                    .map(PaperCard::getName)
-                    .distinct()
-                    .collect(Collectors.toList());
-
-            if (uniqueCardNameList.isEmpty()) {
-                return resultList; // Should not happen if initialFilteredPrintings is not empty, but as a safeguard
-            }
-
-            // Step 3: Loop 'count' times to select cards
+        final List<PaperCard> result = new ArrayList<>();
+        List<PaperCard> pool = getPredicateResult(cards, data);
+        if (pool.size() > 0) {
             for (int i = 0; i < count; i++) {
-                if (uniqueCardNameList.isEmpty()) break; // Cannot select more unique names if list is exhausted (though we allow name repeats)
-
-                // Step 3a: Select a Unique Name randomly
-                // If sourceCardPrintings was overridden for a basic land, uniqueCardNameList will contain just that one basic land name.
-                String chosenName = uniqueCardNameList.get(r.nextInt(uniqueCardNameList.size()));
-
-                // Step 3b: Gather all printings of chosenName that were in initialFilteredPrintings
-                List<PaperCard> candidatePrintingsForChosenName = initialFilteredPrintings.stream()
-                        .filter(pc -> pc.getName().equals(chosenName))
-                        .collect(Collectors.toList());
-
-                // Step 3c: Handle empty candidates (should be rare if logic is correct)
-                if (candidatePrintingsForChosenName.isEmpty()) {
-                    System.err.println("CardUtil.generateCards: No candidate printings found for chosen name '" + chosenName + "' from initial filtered list. Skipping this selection.");
-                    continue;
-                }
-
-                // Step 3d: Select a Random Printing from the candidates for the chosen name
-                PaperCard finalChosenPrinting = candidatePrintingsForChosenName.get(r.nextInt(candidatePrintingsForChosenName.size()));
-
-                // Step 3e: Add the selected printing to the result list
-                resultList.add(finalChosenPrinting);
-            }
-
-            return resultList;
-        } else {
-            boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
-
-            final List<PaperCard> result = new ArrayList<>();
-            List<PaperCard> pool = getPredicateResult(cards, data);
-            if (pool.size() > 0) {
-                for (int i = 0; i < count; i++) {
-                    PaperCard candidate = pool.get(r.nextInt(pool.size()));
-                    if (candidate != null) {
-                        if (allCardVariants) {
-                            PaperCard finalCandidate = CardUtil.getCardByName(candidate.getCardName()); // get a random set variant
-                            result.add(finalCandidate);
-                        } else {
-                            result.add(candidate);
-                        }
+                PaperCard candidate = pool.get(r.nextInt(pool.size()));
+                if (candidate != null) {
+                    if (allCardVariants) {
+                        PaperCard finalCandidate = CardUtil.getCardByName(candidate.getCardName()); // get a random set variant
+                        result.add(finalCandidate);
+                    } else {
+                        result.add(candidate);
                     }
                 }
             }
-            return result;
         }
+        return result;
     }
     public static int getCardPrice(PaperCard card)
     {
@@ -898,48 +811,13 @@ public class CardUtil {
 
     public static PaperCard getCardByName(String cardName) {
         List<PaperCard> validCards;
-        ConfigData configData = Config.instance().getConfigData();
-        if (configData.cardRewardsOld.equals("True")) {
-            boolean isBasicLand = isBasicLandName(cardName);
-            if (isBasicLand) {
-                // For basic lands, get all printings but filter based on config restrictions
-                validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName);
-                // Filter to allowedEditions or remove restrictedEditions
-                    if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
-                        List<String> allowedList = Arrays.asList(configData.allowedEditions);
-                        validCards = validCards.stream()
-                                .filter(card -> allowedList.contains(card.getEdition()))
-                                .collect(Collectors.toList());
-                    } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
-                        List<String> restrictedList = Arrays.asList(configData.restrictedEditions);
-                        validCards = validCards.stream()
-                                .filter(card -> !restrictedList.contains(card.getEdition()))
-                                .collect(Collectors.toList());
-                    }
-                // If no valid cards after filtering, fall back to default behavior
-                if (validCards.isEmpty()) {
-                    validCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
-                }
-            } else {
-                //Standard behavior for non-basic land cards
-                if (Config.instance().getSettingData().useAllCardVariants)
-                    validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName);
-                else
-                    validCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
-            }
+        //Faster to ask the CardDB for a card name than it is to search the pool.
+        if (Config.instance().getSettingData().useAllCardVariants)
+            validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName);
+        else
+            validCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
 
-            // Use a new Random instance to ensure printing diversity isn't tied to the world's seeded RNG
-            return validCards.get(new Random().nextInt(validCards.size()));
-
-        } else {
-            //Faster to ask the CardDB for a card name than it is to search the pool.
-            if (Config.instance().getSettingData().useAllCardVariants)
-                validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName);
-            else
-                validCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
-
-            return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
-        }
+        return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
     }
 
     public static PaperCard getCardByNameAndEdition(String cardName, String edition) {
@@ -954,26 +832,11 @@ public class CardUtil {
             return getCardByName(cardName);
         }
 
-        ConfigData configData = Config.instance().getConfigData();
-        if (configData.cardRewardsOld.equals("True")) {
-            // Use a new Random instance here as well for consistency
-            return validCards.get(new Random().nextInt(validCards.size()));
-        }
-        else {
-            return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
-        }
+        return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
     }
 
     public static Collection<PaperCard> getFullCardPool(boolean allCardVariants) {
-        ConfigData configData = Config.instance().getConfigData();
-        if (configData.cardRewardsOld.equals("True")) {
-            // Always return all cards initially; filtering by edition happens later.
-            // The allCardVariants flag might be used elsewhere, but for initial pool generation, we need all printings.
-            return FModel.getMagicDb().getCommonCards().getAllCards();
-        }
-        else {
-            return allCardVariants ? FModel.getMagicDb().getCommonCards().getAllCards() : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
-        }
+        return allCardVariants ? FModel.getMagicDb().getCommonCards().getAllCards() : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
     }
 }
 

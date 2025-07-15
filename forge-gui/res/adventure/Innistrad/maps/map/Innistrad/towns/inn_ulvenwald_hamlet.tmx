@@ -3,10 +3,10 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../../tileset/INN_dungen_crawler_tileset.tsx"/>
- <tileset firstgid="24193" source="../../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="24193" source="../../../../../common/maps/tileset/main-nocollide.tsx"/>
  <tileset firstgid="34305" source="../../../tileset/inn_main.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
@@ -32,23 +32,23 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../obj/entry_up.tx" x="240" y="272"/>
-  <object id="42" template="../../../obj/shop.tx" x="303.485" y="113.122" width="18.3333" height="15.1212">
+  <object id="38" template="../../../../../common/maps/obj/entry_up.tx" x="240" y="272"/>
+  <object id="42" template="../../../../../common/maps/obj/shop.tx" x="303.485" y="113.122" width="18.3333" height="15.1212">
    <properties>
     <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Human,Werewolf"/>
    </properties>
   </object>
-  <object id="43" template="../../../obj/shop.tx" x="351.515" y="160.576" width="17.9394" height="14.5758">
+  <object id="43" template="../../../../../common/maps/obj/shop.tx" x="351.515" y="160.576" width="17.9394" height="14.5758">
    <properties>
     <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Human,Werewolf"/>
    </properties>
   </object>
-  <object id="46" template="../../../obj/shop.tx" x="369.878" y="224.394" width="29.6667" height="14.394">
+  <object id="46" template="../../../../../common/maps/obj/shop.tx" x="369.878" y="224.394" width="29.6667" height="14.394">
    <properties>
     <property name="shopList" value="Equipment"/>
    </properties>
   </object>
-  <object id="51" template="../../../obj/inn.tx" x="127.849" y="160.031" width="31.9394" height="18.3636"/>
-  <object id="52" template="../../../obj/quest.tx" x="174.545" y="79.6969" width="34.6364" height="18.3636"/>
+  <object id="51" template="../../../../../common/maps/obj/inn.tx" x="127.849" y="160.031" width="31.9394" height="18.3636"/>
+  <object id="52" template="../../../../../common/maps/obj/quest.tx" x="174.545" y="79.6969" width="34.6364" height="18.3636"/>
  </objectgroup>
 </map>

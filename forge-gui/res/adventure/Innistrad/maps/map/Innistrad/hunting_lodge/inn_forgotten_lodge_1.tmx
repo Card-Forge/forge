@@ -3,7 +3,7 @@
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../../tileset/inn_dungeon_floor.tsx"/>
  <tileset firstgid="12530" source="../../../tileset/Inn_Dungeon.tsx"/>
@@ -35,12 +35,12 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../obj/entry_up.tx" x="195.625" y="270.665" width="26.375" height="16">
+  <object id="38" template="../../../../../common/maps/obj/entry_up.tx" x="195.625" y="270.665" width="26.375" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="95" template="../../../obj/enemy.tx" name="Enemy" x="33.5" y="207.25" visible="1">
+  <object id="95" template="../../../../../common/maps/obj/enemy.tx" name="Enemy" x="33.5" y="207.25" visible="1">
    <properties>
     <property name="enemy" value="Watcher in the Web"/>
     <property name="hidden" type="bool" value="true"/>
@@ -48,7 +48,7 @@
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="97" template="../../../obj/enemy.tx" name="Enemy" x="211.75" y="174.75" visible="1">
+  <object id="97" template="../../../../../common/maps/obj/enemy.tx" name="Enemy" x="211.75" y="174.75" visible="1">
    <properties>
     <property name="enemy" value="Watcher in the Web"/>
     <property name="hidden" type="bool" value="true"/>
@@ -56,7 +56,7 @@
     <property name="threatRange" type="int" value="45"/>
    </properties>
   </object>
-  <object id="99" template="../../../obj/enemy.tx" name="Enemy" x="121.75" y="138.25" visible="1">
+  <object id="99" template="../../../../../common/maps/obj/enemy.tx" name="Enemy" x="121.75" y="138.25" visible="1">
    <properties>
     <property name="enemy" value="Watcher in the Web"/>
     <property name="hidden" type="bool" value="false"/>
@@ -65,7 +65,7 @@
     <property name="waypoints" value="105,104,103"/>
    </properties>
   </object>
-  <object id="101" template="../../../obj/enemy.tx" name="Enemy" x="248.75" y="158" visible="1">
+  <object id="101" template="../../../../../common/maps/obj/enemy.tx" name="Enemy" x="248.75" y="158" visible="1">
    <properties>
     <property name="enemy" value="Watcher in the Web"/>
     <property name="hidden" type="bool" value="true"/>
@@ -73,7 +73,7 @@
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="96" template="../../../obj/manashards.tx" x="16" y="236.75">
+  <object id="96" template="../../../../../common/maps/obj/manashards.tx" x="16" y="236.75">
    <properties>
     <property name="reward">[
   {
@@ -84,7 +84,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="98" template="../../../obj/booster.tx" x="84.75" y="159.25">
+  <object id="98" template="../../../../../common/maps/obj/booster.tx" x="84.75" y="159.25">
    <properties>
     <property name="reward">[
   {
@@ -111,7 +111,7 @@
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="100" template="../../../obj/gold.tx" x="258.75" y="161">
+  <object id="100" template="../../../../../common/maps/obj/gold.tx" x="258.75" y="161">
    <properties>
     <property name="reward">[
   {
@@ -122,7 +122,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="102" template="../../../obj/gold.tx" x="126" y="45.5">
+  <object id="102" template="../../../../../common/maps/obj/gold.tx" x="126" y="45.5">
    <properties>
     <property name="reward">[
   {
@@ -135,8 +135,8 @@
     <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="103" template="../../../obj/waypoint.tx" x="59.75" y="124.25"/>
-  <object id="104" template="../../../obj/waypoint.tx" x="107" y="157.25"/>
-  <object id="105" template="../../../obj/waypoint.tx" x="128.75" y="125.25"/>
+  <object id="103" template="../../../../../common/maps/obj/waypoint.tx" x="59.75" y="124.25"/>
+  <object id="104" template="../../../../../common/maps/obj/waypoint.tx" x="107" y="157.25"/>
+  <object id="105" template="../../../../../common/maps/obj/waypoint.tx" x="128.75" y="125.25"/>
  </objectgroup>
 </map>

@@ -96,20 +96,11 @@ public class RewardData implements Serializable {
     static private void initializeAllCards(){
         ConfigData configData = Config.instance().getConfigData();
         RewardData legals = configData.legalCards;
-        if(configData.cardRewardsOld.equals("True")) {
-            if(legals==null)
-                // Load all printings so subsequent filtering can correctly handle reprints in restricted formats
-                allCards = CardUtil.getFullCardPool(true);
-            else
-                // Load all printings so subsequent filtering can correctly handle reprints in restricted formats
-                allCards = IterableUtil.filter(CardUtil.getFullCardPool(true), new CardUtil.CardPredicate(legals, true));
-        }
-        else{
-            if (legals == null)
-                allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
-            else
-                allCards = IterableUtil.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
-        }
+
+        if(legals==null)
+            allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
+        else
+            allCards = IterableUtil.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
         //Filter out specific cards.
         allCards = IterableUtil.filter(allCards, input -> {
             if(input == null)
@@ -199,19 +190,7 @@ public class RewardData implements Serializable {
                 case "card":
                 case "randomCard":
                     if( cardName != null && !cardName.isEmpty() ) {
-                        ConfigData configData = Config.instance().getConfigData();
-                        if(configData.cardRewardsOld.equals("True")) {
-                            if (allCardVariants) {
-                                for (int i = 0; i < count + addedCount; i++) {
-                                    // Fetch a new random printing for each card instance
-                                    PaperCard chosenPrinting = CardUtil.getCardByName(cardName);
-                                    ret.add(new Reward(chosenPrinting, isNoSell));
-                                }
-                            }
-                        }
-                        else
                         if (allCardVariants) {
-
                             PaperCard card = CardUtil.getCardByName(cardName);
                             for (int i = 0; i < count + addedCount; i++) {
                                 ret.add(new Reward(CardUtil.getCardByNameAndEdition(cardName, card.getEdition()), isNoSell));
@@ -339,44 +318,30 @@ public class RewardData implements Serializable {
         return ret;
     }
     static public List<PaperCard> rewardsToCards(Iterable<Reward> dataList) {
-        ArrayList<PaperCard> ret = new ArrayList<PaperCard>();
-        ConfigData configData = Config.instance().getConfigData();
-        if (configData.cardRewardsOld.equals("True")) {
-            // Directly add the card from the reward without homogenizing basic land editions
+        ArrayList<PaperCard> ret=new ArrayList<PaperCard>();
+
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
+
+        if (allCardVariants) {
+            String basicLandEdition = "";
             for (Reward data : dataList) {
                 PaperCard card = data.getCard();
-                if (card != null) { // Ensure card exists
+                if (card.isVeryBasicLand()) {
+                    // ensure that all basic lands share the same edition so the deck doesn't look odd
+                    if (basicLandEdition.isEmpty()) {
+                        basicLandEdition = card.getEdition();
+                    }
+                    ret.add(CardUtil.getCardByNameAndEdition(card.getName(), basicLandEdition));
+                } else {
                     ret.add(card);
                 }
             }
-            // The 'else' block for !allCardVariants is removed as it's effectively covered by the simplified loop above now.
-            // If allCardVariants were false, the loop above would still just add the card from the reward.
-            return ret; // Ensure the list is returned
-        }
-        else {
-            boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
-
-            if (allCardVariants) {
-                String basicLandEdition = "";
-                for (Reward data : dataList) {
-                    PaperCard card = data.getCard();
-                    if (card.isVeryBasicLand()) {
-                        // ensure that all basic lands share the same edition so the deck doesn't look odd
-                        if (basicLandEdition.isEmpty()) {
-                            basicLandEdition = card.getEdition();
-                        }
-                        ret.add(CardUtil.getCardByNameAndEdition(card.getName(), basicLandEdition));
-                    } else {
-                        ret.add(card);
-                    }
-                }
-            } else {
-                for (Reward data : dataList) {
-                    ret.add(data.getCard());
-                }
+        } else {
+            for (Reward data : dataList) {
+                ret.add(data.getCard());
             }
-            return ret;
         }
+        return ret;
     }
 
 }

@@ -25,5 +25,4 @@ public class ConfigData {
     public String[] allowedEditions;
     public String[] restrictedEvents;
     public String[] allowedJumpstart;
-    public String[] cardRewardsOld;
 }
