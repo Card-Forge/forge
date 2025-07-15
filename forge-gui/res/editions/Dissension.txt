@@ -2,7 +2,6 @@
 Code=DIS
 Date=2006-05-05
 Name=Dissension
-Code2=DIS
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
@@ -193,11 +192,3 @@ ScryfallCode=DIS
 178 C Rakdos Carnarium @John Avon
 179 U Rix Maadi, Dungeon Palace @Martina Pilcerova
 180 C Simic Growth Chamber @John Avon
-
-[tokens]
-r_3_1_elemental
-r_2_1_goblin_haste
-g_1_1_saproling
-wu_1_1_bird_flying
-gu_2_2_drake_flying
-gu_1_1_snake
