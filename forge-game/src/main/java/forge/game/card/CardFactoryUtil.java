@@ -3761,6 +3761,34 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Warp")) {
+            final String[] k = keyword.split(":");
+            final Cost warpCost = new Cost(k[1], true);
+
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(warpCost);
+
+            StringBuilder sbCost = new StringBuilder("Warp");
+            if (!warpCost.isOnlyManaCost()) { //Something other than a mana cost
+                sbCost.append("—");
+            } else {
+                sbCost.append(" ");
+            }
+
+            newSA.putParam("PrecostDesc", sbCost.toString());
+            newSA.putParam("CostDesc", warpCost.toString());
+            // need to add the "."?
+
+            // makes new SpellDescription
+            final StringBuilder desc = new StringBuilder();
+            desc.append(newSA.getCostDescription());
+            desc.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(desc.toString());
+            newSA.putParam("AfterDescription", "(Warped)");
+
+            newSA.getRestrictions().setZone(ZoneType.Hand);
+            newSA.setAlternativeCost(AlternativeCost.Warp);
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.endsWith(" offering")) {
             final String offeringType = keyword.split(" ")[0];
             final SpellAbility sa = card.getFirstSpellAbility();
