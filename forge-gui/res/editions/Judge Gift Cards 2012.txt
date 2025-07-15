@@ -4,6 +4,7 @@ Date=2012-01-01
 Name=Judge Gift Cards 2012
 Type=Promo
 ScryfallCode=J12
+TokensCode=J12
 
 [cards]
 1 R Xiahou Dun, the One-Eyed @Junko Taguchi
@@ -16,4 +17,4 @@ ScryfallCode=J12
 8 R Command Tower @Ryan Yee
 
 [tokens]
-g_3_3_centaur
+9 g_3_3_centaur @James Ryman
