@@ -2,7 +2,6 @@
 Code=KHM
 Date=2021-02-05
 Name=Kaldheim
-Code2=KHM
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!fromSheet("KHM Snow Lands"):fromsheet("KHM cards"), 3 Uncommon:fromSheet("KHM cards"), 1 RareMythic:fromSheet("KHM cards"), 1 fromSheet("KHM Snow Lands")
@@ -503,4 +502,4 @@ A387 U A-Thornmantle Striker @Magali Villeneuve
 20 emblem_kaya_the_inexorable @Tyler Jacobson
 21 emblem_tibalt_cosmic_impostor @Yongjae Choi
 22 emblem_tyvar_kell @Chris Rallis
-23 foretell
+23 foretell @
