@@ -21,6 +21,3 @@ ScryfallCode=V12
 13 M Urborg, Tomb of Yawgmoth @John Avon
 14 M Vesuva @Zoltan Boros & Gabor Szikszai
 15 M Windbrisk Heights @Omar Rayyan
-
-[tokens]
-c_1_1_spirit
