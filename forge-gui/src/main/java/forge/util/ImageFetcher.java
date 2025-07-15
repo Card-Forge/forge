@@ -282,6 +282,7 @@ public abstract class ImageFetcher {
             if (tempdata.length < 2) {
                 if (!"planechase".equals(tempdata[0]))
                     System.err.println("Token image key is malformed: " + imageKey);
+                ImageKeys.missingCards.add(filename);
                 return;
             }
 
