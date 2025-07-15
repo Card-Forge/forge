@@ -15,6 +15,7 @@ import forge.card.PrintSheet;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
+import forge.gamemodes.limited.LimitedPlayer;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.model.CardBlock;
 import forge.model.FModel;
@@ -292,6 +293,7 @@ public class AdventureEventData implements Serializable {
         MyRandom.setRandom(getEventRandom());
         if (draft == null && (eventStatus == AdventureEventController.EventStatus.Available || eventStatus == AdventureEventController.EventStatus.Entered)) {
             draft = BoosterDraft.createDraft(LimitedPoolType.Block, getCardBlock(), packConfiguration);
+            assignPlayerNames(draft);
         }
         if (packConfiguration == null) {
             packConfiguration = getBoosterConfiguration(getCardBlock());
@@ -462,6 +464,15 @@ public class AdventureEventData implements Serializable {
         }
 
         participants[numberOfOpponents] = getHumanPlayer();
+    }
+
+    private void assignPlayerNames(BoosterDraft draft) {
+        if(participants == null)
+            return;
+        draft.getHumanPlayer().setName(getHumanPlayer().getName());
+        LimitedPlayer[] opponents = draft.getOpposingPlayers();
+        for(int i = 0; i < Math.min(participants.length, opponents.length); i++)
+            opponents[i].setName(participants[i].getName());
     }
 
     private transient AdventureEventHuman humanPlayerInstance;
