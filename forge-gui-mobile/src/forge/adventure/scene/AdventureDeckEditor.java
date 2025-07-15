@@ -140,6 +140,13 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public List<CardEdition> getBasicLandSets(Deck currentDeck) {
+            if(event.cardBlock != null) {
+                if(event.cardBlock.getLandSet() != null)
+                    return List.of(event.cardBlock.getLandSet());
+                List<CardEdition> eventSets = event.cardBlock.getSets();
+                if(!eventSets.isEmpty())
+                    return eventSets;
+            }
             return List.of(DeckProxy.getDefaultLandSet(event.registeredDeck));
         }
 
@@ -706,6 +713,8 @@ public class AdventureDeckEditor extends FDeckEditor {
 
     @Override
     protected void addChosenBasicLands(CardPool landsToAdd) {
+        if(isLimitedEditor())
+            super.addChosenBasicLands(landsToAdd);
         //Take the basic lands from the player's collection if they have them. If they need more, create unsellable copies.
         CardPool requiredNewLands = new CardPool();
         CardPool landsToMove = new CardPool();

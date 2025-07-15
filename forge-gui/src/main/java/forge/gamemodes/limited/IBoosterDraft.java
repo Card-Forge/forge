@@ -20,6 +20,7 @@ package forge.gamemodes.limited;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 
 import java.util.ArrayList;
@@ -37,7 +38,13 @@ import java.util.List;
 public interface IBoosterDraft {
     int getRound();
     CardPool nextChoice();
-    boolean setChoice(PaperCard c);
+
+    default boolean setChoice(PaperCard c) {
+        return setChoice(c, DeckSection.Sideboard);
+    }
+
+    boolean setChoice(PaperCard c, DeckSection section);
+    void skipChoice();
     boolean hasNextChoice();
     boolean isRoundOver();
     DraftPack addBooster(CardEdition edition);

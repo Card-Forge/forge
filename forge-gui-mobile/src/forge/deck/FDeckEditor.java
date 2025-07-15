@@ -641,13 +641,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         if(allowedLandSets == null || allowedLandSets.isEmpty())
             allowedLandSets = List.of(FModel.getMagicDb().getEditions().get("JMP"));
         CardEdition defaultLandSet = allowedLandSets.get(0);
-        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<>() {
-            @Override
-            public void run(CardPool landsToAdd) {
-                addChosenBasicLands(landsToAdd);
-            }
-        }, editorConfig.hasInfiniteCardPool() ? null : allowedLandSets); //Null allows any lands to be selected
-        dialog.show();
+        List<CardEdition> finalAllowedLandSets = allowedLandSets;
+        FThreads.invokeInEdtNowOrLater(() -> {
+            AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<>() {
+                @Override
+                public void run(CardPool landsToAdd) {
+                    addChosenBasicLands(landsToAdd);
+                }
+            }, editorConfig.hasInfiniteCardPool() ? null : finalAllowedLandSets); //Null allows any lands to be selected
+            dialog.show();
+
+        });
         setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
     }
 
@@ -1989,8 +1993,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         @Override
                         public void run(Integer result) {
                             moveCard(card, cardSourcePage, result);
-                            parentScreen.getCatalogPage().refresh(); //refresh so commander options shown again
-                            parentScreen.setSelectedPage(parentScreen.getCatalogPage());
+                            if(cardSourcePage == parentScreen.getCatalogPage()) {
+                                parentScreen.getCatalogPage().refresh(); //refresh so commander options shown again
+                                parentScreen.setSelectedPage(parentScreen.getCatalogPage());
+                            }
                         }
                     });
                 }
@@ -2109,7 +2115,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             BoosterDraft draft = parentScreen.getDraft();
             if (draft == null)
                 return;
-            int packNumber = draft.getCurrentBoosterIndex() + 1;
+            if(draft.getHumanPlayer().nextChoice() == null)
+                return;
+            int packNumber = draft.getHumanPlayer().nextChoice().getId();
             String lblPackN = Forge.getLocalizer().getMessage("lblPackN", String.valueOf(packNumber));
             caption = lblPackN;
             cardManager.setCaption(lblPackN);
@@ -2123,6 +2131,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
 
             CardPool pool = draft.nextChoice();
+
+            if(pool == null) {
+                //Some packs were still being passed around, but now the round is over.
+                cardManager.setPool(new CardPool());
+                draft.postDraftActions();
+                hideTab(); //hide this tab page when finished drafting
+                parentScreen.completeDraft();
+            }
+
             this.draftingFaceDown = getDraftPlayer().hasArchdemonCurse();
 
             if(draftingFaceDown) {
@@ -2142,6 +2159,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return;
             }
 
+            this.updateCaption();
             cardManager.setEnabled(true);
         }
 
@@ -2168,14 +2186,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return; //Shouldn't happen?
             }
             moveCard(card, destinationPage);
-            afterCardPicked(card);
         }
 
-        private void afterCardPicked(PaperCard card) {
+        @Override
+        public void moveCard(PaperCard card, CardManagerPage destination, int qty) {
+            assert(qty == 1);
+            assert(destination instanceof DeckSectionPage);
             BoosterDraft draft = parentScreen.getDraft();
             cardManager.setEnabled(false); //Prevent any weird inputs until choices are made and the next set of cards is ready.
+            DeckSection section = ((DeckSectionPage) destination).deckSection;
             FThreads.invokeInBackgroundThread(() -> {
-                draft.setChoice(card);
+                draft.setChoice(card, section);
 
                 // TODO Implement handling of extra boosters
 
@@ -2187,6 +2208,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     hideTab(); //hide this tab page when finished drafting
                     parentScreen.completeDraft();
                 }
+
+                parentScreen.getDeckController().notifyModelChanged();
+                destination.cardManager.refresh();
+                this.updateCaption();
+                destination.updateCaption();
             });
         }
 
@@ -2194,6 +2220,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             BoosterDraft draft = parentScreen.getDraft();
             cardManager.setEnabled(false);
             FThreads.invokeInBackgroundThread(() -> {
+                draft.skipChoice();
                 if (draft.hasNextChoice()) {
                     refresh();
                 }
@@ -2216,7 +2243,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     public void run(Integer result) { //ignore quantity
                         PaperCard realCard = getDraftPlayer().pickFromArchdemonCurse(getDraftPlayer().nextChoice());
                         moveCard(realCard, parentScreen.getSideboardPage());
-                        afterCardPicked(realCard);
                     }
                 });
                 return;
@@ -2227,14 +2253,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 @Override
                 public void run(Integer result) { //ignore quantity
                     moveCard(card, destinationPage);
-                    afterCardPicked(card);
                 }
             });
             addMoveCardMenuItem(menu, this, parentScreen.getSideboardPage(), new Callback<>() {
                 @Override
                 public void run(Integer result) { //ignore quantity
                     moveCard(card, parentScreen.getSideboardPage());
-                    afterCardPicked(card);
                 }
             });
         }

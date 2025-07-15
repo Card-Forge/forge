@@ -22,6 +22,7 @@ import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
@@ -52,7 +53,7 @@ public class BoosterDraft implements IBoosterDraft {
     public static final String FILE_EXT = ".draft";
     private final List<LimitedPlayer> players = new ArrayList<>();
     private final LimitedPlayer localPlayer;
-    private boolean localPlayerExtraPick = false;
+    private boolean readyForComputerPick = false;
 
     private IDraftLog draftLog = null;
 
@@ -62,7 +63,6 @@ public class BoosterDraft implements IBoosterDraft {
     protected int nextBoosterGroup = 0;
     private int currentBoosterSize = 0;
     private int currentBoosterPick = 0;
-    private int packsInDraft;
 
     private final Map<String, Float> draftPicks = new TreeMap<>();
     static final List<CustomLimited> customs = new ArrayList<>();
@@ -272,7 +272,6 @@ public class BoosterDraft implements IBoosterDraft {
 
     public DraftPack addBooster(CardEdition edition) {
         final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(edition.getCode()));
-        this.packsInDraft++;
         return new DraftPack(product.get(), nextId++);
     }
 
@@ -363,9 +362,9 @@ public class BoosterDraft implements IBoosterDraft {
             }
         }
 
-        if(!localPlayerExtraPick)
+        if(readyForComputerPick || localPlayer.shouldSkipThisPick())
             this.computerChoose();
-        localPlayerExtraPick = false;
+        readyForComputerPick = false;
 
         final CardPool result = new CardPool();
 
@@ -376,6 +375,7 @@ public class BoosterDraft implements IBoosterDraft {
         if (result.isEmpty()) {
             // Can't set a card, since none are available. Just pass "empty" packs.
             this.passPacks();
+            readyForComputerPick = true;
             // Recur until we find a cardpool or finish
             return nextChoice();
         }
@@ -400,7 +400,7 @@ public class BoosterDraft implements IBoosterDraft {
     public boolean startRound() {
         this.nextBoosterGroup++;
         this.currentBoosterPick = 0;
-        packsInDraft = this.players.size();
+        this.readyForComputerPick = true;
         LimitedPlayer firstPlayer = this.players.get(0);
         if (firstPlayer.unopenedPacks.isEmpty()) {
             return false;
@@ -468,6 +468,7 @@ public class BoosterDraft implements IBoosterDraft {
             }
         }
 
+        Map<DraftPack, LimitedPlayer> toPass = new HashMap<>();
         for (int i = 0; i < N_PLAYERS; i++) {
             LimitedPlayer pl = this.players.get(i);
             DraftPack passingPack = pl.passPack();
@@ -477,8 +478,7 @@ public class BoosterDraft implements IBoosterDraft {
 
             LimitedPlayer passToPlayer = null;
             if (passingPack.isEmpty()) {
-                packsInDraft--;
-                debugPrint("Pack #" + passingPack.getId() + " is empty. Discarding. " + packsInDraft + " packs remain.");
+                debugPrint("Pack #" + passingPack.getId() + " is empty. Discarding.");
                 continue;
             }
 
@@ -509,13 +509,16 @@ public class BoosterDraft implements IBoosterDraft {
                 passToPlayer = this.players.get((i + adjust + N_PLAYERS) % N_PLAYERS);
             }
 
-            passToPlayer.receiveOpenedPack(passingPack);
+            assert(!toPass.containsKey(passingPack));
+
+            toPass.put(passingPack, passToPlayer);
         }
+        toPass.forEach((pack, player) -> player.receiveOpenedPack(pack));
 
         if(ForgePreferences.DEV_MODE) {
             int[] packCounts = players.stream().mapToInt((p) -> p.packQueue.size()).toArray();
             int[] unopenedPackCounts = players.stream().mapToInt((p) -> p.unopenedPacks.size()).toArray();
-            debugPrint("Packs passed. Remaining in draft: " + packsInDraft + "; Opened: " + Arrays.toString(packCounts) + "; Unopened: " + Arrays.toString(unopenedPackCounts));
+            debugPrint("Packs passed. Remaining Opened: " + Arrays.toString(packCounts) + "; Unopened: " + Arrays.toString(unopenedPackCounts));
         }
     }
 
@@ -543,8 +546,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     @Override
     public boolean isRoundOver() {
-        // Really should check if all packs are empty, but this is a good enough approximation
-        return packsInDraft == 0;
+        return players.stream().allMatch((p) -> p.packQueue.isEmpty());
     }
 
     @Override
@@ -554,7 +556,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     // Return false is the pack will be passed
     @Override
-    public boolean setChoice(final PaperCard c) {
+    public boolean setChoice(final PaperCard c, DeckSection section) {
         final DraftPack thisBooster = this.localPlayer.nextChoice();
 
         if (!thisBooster.contains(c)) {
@@ -565,21 +567,27 @@ public class BoosterDraft implements IBoosterDraft {
 
         recordDraftPick(thisBooster, c);
 
-        boolean passPack = this.localPlayer.draftCard(c);
+        boolean passPack = this.localPlayer.draftCard(c, section);
         if (passPack) {
             // Computer players do their extra drafts in computerChoose.
             // Human players get handed the same pack twice by nextChoice.
             // A flag here disables the AI choosing again when nextChoice is called.
             // This could be done a lot better but that'd basically involve reorganizing all the draft logic.
             this.passPacks();
+            readyForComputerPick = true;
         }
-        else
-            localPlayerExtraPick = true;
         this.currentBoosterPick++;
 
         // Return whether or not we passed, but that the UI always needs to refresh
         // But returning might be useful for testing or other things?
         return passPack;
+    }
+
+    @Override
+    public void skipChoice() {
+        this.localPlayer.debugPrint("Skipped pick.");
+        this.passPacks();
+        readyForComputerPick = true;
     }
 
     public void postDraftActions() {

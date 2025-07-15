@@ -3,6 +3,7 @@ package forge;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.card.Card;
 import forge.gamemodes.limited.DraftPack;
 import forge.gamemodes.limited.IBoosterDraft;
@@ -66,9 +67,14 @@ public class BoosterDraftTest implements IBoosterDraft {
      * @return
      */
     @Override
-    public boolean setChoice(final PaperCard c) {
+    public boolean setChoice(final PaperCard c, DeckSection section) {
         System.out.println(c.getName());
         return false;
+    }
+
+    @Override
+    public void skipChoice() {
+        System.out.println("Skip.");
     }
 
     @Override
