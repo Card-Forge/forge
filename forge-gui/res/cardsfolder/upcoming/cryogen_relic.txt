@@ -1,0 +1,8 @@
+Name:Cryogen Relic
+ManaCost:1 U
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this artifact enters or leaves the battlefield, draw a card.
+T:Mode$ ChangesZone | Destination$ Any | Origin$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+A:AB$ PutCounter | Cost$ 1 U Sac<1/CARDNAME> | CounterType$ STUN | CounterNum$ 1 | ValidTgts$ Creature.tapped | TgtPrompt$ Select a tapped creature | TargetMin$ 0 | TargetMax$ 1
+Oracle:When this artifact enters or leaves the battlefield, draw a card.\n{1}{U}, Sacrifice this artifact: Put a stun counter on up to one target tapped creature. (If a permanent with a stun counter would become untapped, remove one from it instead.)
