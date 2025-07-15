@@ -674,6 +674,9 @@ public class LimitedPlayer {
     }
 
     public boolean handleLeovoldsOperative(DraftPack pack, PaperCard drafted) {
+        if(pack.isEmpty())
+            return false;
+
         if (Objects.equals(SGuiChoose.one("Draft an extra pick with Leovold's Operative?", Lists.newArrayList("Yes", "No")), "No")) {
             return false;
         }
@@ -683,6 +686,8 @@ public class LimitedPlayer {
     }
 
     public boolean handleCogworkLibrarian(DraftPack pack, PaperCard drafted) {
+        if(pack.isEmpty())
+            return false;
         return !Objects.equals(SGuiChoose.one("Draft an extra pick with Cogwork Librarian?", Lists.newArrayList("Yes", "No")), "No");
     }
 
