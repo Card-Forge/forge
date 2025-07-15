@@ -34,6 +34,7 @@ ScryfallCode=EOE
 46 U Annul @Carlos Palma Cruchaga
 51 R Consult the Star Charts @Antonio José Manzanedo
 52 C Cryogen Relic @Eelis Kyttanen
+54 U Desculpting Blast @Jeremy Wilson
 56 R Emissary Escort @Igor Grechanyi
 58 C Illvoi Galeblade @Nathaniel Himawan
 66 C Mechanozoa @Daarken
@@ -52,6 +53,7 @@ ScryfallCode=EOE
 94 C Decode Transmissions @Josh Hass
 97 R Elegy Acolyte @Diana Franco
 98 C Embrace Oblivion @Andreas Zafiratos
+99 R Entropic Battlecruiser @Josiah "Jo" Cameron
 101 U Fell Gravship @David Álvarez
 103 C Gravkill @Dominik Mayer
 105 C Hullcarver @Michal Ivan
@@ -92,6 +94,7 @@ ScryfallCode=EOE
 172 R Bioengineered Future @Constantin Marin
 175 U Broodguard Elite @Paolo Parente
 176 U Close Encounter @Inkognit
+178 C Drix Fatemaker @Anna Pavleeva
 181 U Eusocial Engineering @Francisco Badilla
 182 M Famished Worldsire @Kev Walker
 183 R Frenzied Baloth @Diana Franco
@@ -100,6 +103,7 @@ ScryfallCode=EOE
 189 U Harmonious Grovestrider @Ron Spencer
 190 U Hemosymbic Mite @Amanda Lee
 196 R Loading Zone @Matt Stewart
+197 U Meltstrider Eulogist @Jason A. Engle
 200 R Mightform Harmonizer @Bartek Fedyczak
 201 M Ouroboroid @Samuel Perin
 203 C Sami's Curiosity @Tuan Duong Chu
@@ -116,6 +120,7 @@ ScryfallCode=EOE
 219 R Infinite Guideline Station @Piotr Dura
 220 U Interceptor Mechan @Leonardo Santanna
 222 R Mutinous Massacre @Quintin Gleim
+223 R Pinnacle Emissary @Alejandro Pacheco
 224 R Ragost, Deft Gastronaut @Zack Stella
 225 U Sami, Ship's Engineer @Zara Alfonso
 226 M Sami, Wildcat Captain @Kieran Yanner
