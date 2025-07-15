@@ -1,0 +1,8 @@
+Name:Close Encounter
+ManaCost:1 G
+Types:Instant
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ ChooseCard<1/Creature.YouCtrl+inZoneBattlefield;Creature.YouOwn+inZoneExile+warped> | EffectZone$ All | Description$ As an additional cost to cast this spell, choose a creature you control or a warped creature card you own in exile.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the power of the chosen creature or card to target creature.
+SVar:X:Revealed$CardPower
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, choose a creature you control or a warped creature card you own in exile.\nCARDNAME deals damage equal to the power of the chosen creature or card to target creature.

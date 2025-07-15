@@ -477,6 +477,12 @@ public class Cost implements Serializable {
             return new CostReturn(splitStr[0], splitStr[1], description);
         }
 
+        if (parse.startsWith("ChooseCard<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostReveal(splitStr[0], splitStr[1], description, "All");
+        }
+
         if (parse.startsWith("Reveal<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
