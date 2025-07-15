@@ -1,4 +1,4 @@
-name: Normalize Line Endings to CRLF
+name: Normalize Line Endings to LF in cardsfolder
 
 on:
   push:
@@ -17,9 +17,9 @@ jobs:
       - name: Install dos2unix
         run: sudo apt-get update && sudo apt-get install -y dos2unix
 
-      - name: Convert LF to CRLF
+      - name: Convert CRLF to LF in cardsfolder
         run: |
-          find . -type f -name "*.txt" -exec unix2dos -q {} \;
+          find forge/forge-gui/res/cardsfolder -type f -name "*.txt" -exec dos2unix -q {} \;
 
       - name: Configure Git User
         run: |
@@ -30,6 +30,6 @@ jobs:
         run: |
           git diff --quiet && echo "No changes to commit" || (
             git add .
-            git commit -m "Fix line endings to CRLF"
+            git commit -m "Fix line endings to LF"
             git push
           )
