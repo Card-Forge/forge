@@ -2,7 +2,6 @@
 Code=ORI
 Date=2015-07-17
 Name=Magic Origins
-Code2=ORI
 Type=Core
 BoosterCovers=5
 Booster=10 Common:fromSheet("ORI cards"), 3 Uncommon:fromSheet("ORI cards"), 1 RareMythic:fromSheet("ORI cards"), 1 BasicLand
@@ -314,7 +313,7 @@ ScryfallCode=ORI
 8 g_2_2_elemental @Marco Nelor
 9 g_1_1_elf_warrior @William O'Connor
 10 c_1_1_a_thopter_flying @Adam Paquette
-11 c_1_1_a_thopter_flying @Adam Paquette
+11 c_1_1_a_thopter_flying @Svetlin Velinov
 
 [other]
 12 emblem_jace_telepath_unbound @Jaime Jones
