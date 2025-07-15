@@ -363,13 +363,3 @@ FoilAlwaysInCommonSlot=False
 348 L Forest @Rob Alexander
 349 L Forest @Rob Alexander
 350 L Forest @Terry Springer
-
-[tokens]
-butterfly
-w_1_1_soldier
-w_1_1_spirit_flying
-b_2_2_zombie
-g_1_1_insect
-g_2_2_monkey
-g_1_1_saproling
-g_1_1_snake
