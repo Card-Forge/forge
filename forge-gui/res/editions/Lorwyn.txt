@@ -2,7 +2,6 @@
 Code=LRW
 Date=2007-10-12
 Name=Lorwyn
-Code2=LRW
 Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
@@ -320,7 +319,8 @@ ScryfallCode=LRW
 4 u_1_1_merfolk_wizard @Mark Poole
 5 b_1_1_goblin_rogue @Richard Sardinha
 6 r_3_1_elemental_shaman @Jim Pavelec
-7 r_3_1_elemental_shaman_haste @Jim Pavelec
+# Duplicated as there is no r_3_1_elemental_shaman_haste token yet
+6 r_3_1_elemental_shaman_haste @Jim Pavelec
 7 g_3_3_beast @John Donahue
 8 g_4_4_elemental @Brandon Kitkouski
 9 g_1_1_elf_warrior @Dominick Domingo
