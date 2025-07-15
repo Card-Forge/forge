@@ -2,7 +2,6 @@
 Code=MBS
 Date=2011-02-04
 Name=Mirrodin Besieged
-Code2=MBS
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
@@ -170,8 +169,9 @@ TokenFallbackCode=SOM
 155 L Forest @Mark Tedin
 
 [tokens]
-1 b_0_0_phyrexian_germ @Igor Kieryluk
+1 b_0_0_germ @Igor Kieryluk
+# Technically a b_2_2_zombie, but it has unique art and b_2_2_phyrexian_zombie doesn't exist
 2 b_2_2_phyrexian_zombie @Dave Kendall
 3 c_9_9_a_golem @Svetlin Velinov
-4 c_x_x_a_phyrexian_horror @Scott Chou
+4 c_x_x_a_horror @Scott Chou
 5 c_1_1_a_thopter_flying @Volkan Baǵa
