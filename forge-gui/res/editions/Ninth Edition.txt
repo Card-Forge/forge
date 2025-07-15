@@ -370,10 +370,7 @@ S3 C Coral Eel @Una Fricker
 S4 C Giant Octopus @Heather Hudson
 S5 C Index @Kev Walker
 S7 R Vizzerdrix @Dave Dorman
+S7a R Vizzerdrix @Dave Dorman
 S8 C Goblin Raider @Greg Staples
 S9 U Enormous Baloth @Mark Tedin
 S10 C Spined Wurm @Carl Critchlow
-
-[tokens]
-r_4_4_bird_flying
-g_1_1_saproling
