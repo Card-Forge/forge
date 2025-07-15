@@ -162,9 +162,3 @@ A153 L Mountain @Qin Jun
 A154 L Forest @Ji Yong
 A155 L Forest @Ji Yong
 A156 L Forest @Ji Yong
-
-[tokens]
-w_4_4_angel_flying
-w_1_1_soldier
-b_2_1_cat
-g_1_1_hippo
