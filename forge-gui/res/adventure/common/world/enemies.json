@@ -12158,7 +12158,6 @@
 	"spawnRate": 1,
 	"difficulty": 1,
 	"speed": 30,
-	"scale": 0.5,
 	"life": 25,
 	"rewards": [
 		{
@@ -12249,7 +12248,6 @@
 	"spawnRate": 1,
 	"difficulty": 1,
 	"speed": 30,
-	"scale": 0.5,
 	"life": 55,
 	"rewards": [
 		{
@@ -16899,7 +16897,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
-	"scale": 0.5,
 	"life": 40,
 	"rewards": [
 		{
@@ -17223,7 +17220,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"scale": 0.35,
 	"life": 40,
 	"rewards": [
 		{
@@ -20629,7 +20625,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
-	"scale": 0.5,
 	"life": 40,
 	"rewards": [
 		{
@@ -26394,7 +26389,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"scale": 0.5,
 	"life": 40,
 	"rewards": [
 		{
@@ -26608,7 +26602,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"scale": 0.5,
 	"life": 40,
 	"rewards": [
 		{
@@ -28701,7 +28694,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"scale": 0.5,
 	"life": 50,
 	"rewards": [
 		{
@@ -28888,7 +28880,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
-	"scale": 0.5,
 	"life": 40,
 	"rewards": [
 		{
