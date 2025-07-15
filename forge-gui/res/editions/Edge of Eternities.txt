@@ -8,48 +8,81 @@ ScryfallCode=EOE
 [cards]
 1 R Anticausal Vestige @Chase Stone
 2 M Tezzeret, Cruel Captain @Chris Rahn
+3 U All-Fates Stalker @Lius Lasahido
 4 R Astelli Reclaimer @Carly Milligan
 6 C Banishing Light @Rovina Cai
+7 R Beyond the Quiet @Yohann Schepacz
 9 M Cosmogrand Zenith @Anna Steinbauer
 14 U Emergency Eject @Leon Tukker
 15 M Exalted Sunborn @Scott M. Fischer
 19 R Haliya, Guided by Light @Kieran Yanner
+20 R Hardlight Containment @Dominik Mayer
+22 U Honored Knight-Captain @Forrest Imel
+25 R Lumen-Class Frigate @Zezhou Chen
+26 C Luxknight Breacher @Cristi Balanescu
+28 U Pulsar Squadron Ace @Javier Charro
+29 C Radiant Strike @Aleksi Briclot
+31 U Reroute Systems @Sergey Glushakov
+32 U Rescue Skiff @Viko Menezes
 33 U Scout for Survivors @Greg Staples
 35 R The Seriema @Sergey Glushakov
 37 U Starfield Shepherd @Marta Nael
 38 C Starfighter Pilot @Nathaniel Himawan
 39 C Starport Security @Lie Setiawan
+40 R Sunstar Chaplain @Valera Lutfullina
+41 U Sunstar Expansionist @Mark Poole
 46 U Annul @Carlos Palma Cruchaga
 51 R Consult the Star Charts @Antonio José Manzanedo
+52 C Cryogen Relic @Eelis Kyttanen
+54 U Desculpting Blast @Jeremy Wilson
 56 R Emissary Escort @Igor Grechanyi
 58 C Illvoi Galeblade @Nathaniel Himawan
 66 C Mechanozoa @Daarken
+68 R Mm'menon, the Right Hand @Joshua Raphael
 70 U Mouth of the Storm @Domenico Cava
 72 M Quantum Riddler @Izzy
+76 U Specimen Freighter @Sergey Glushakov
 77 C Starbreach Whale @Sam Burley
 78 R Starfield Vocalist @Nathaniel Himawan
+81 R "Interstellar Gacha Ship" @Adrián Rodríguez Pérez
 83 U Unravel @Josh Hass
+86 M Weftwalking @Rovina Cai
 87 M Alpharael, Stonechosen @Kieran Yanner
 88 R Archenemy's Charm @Brigitte Roka & Clifton Stommel
+91 R Chorale of the Void @Alix Branwyn
 94 C Decode Transmissions @Josh Hass
 97 R Elegy Acolyte @Diana Franco
 98 C Embrace Oblivion @Andreas Zafiratos
+99 R Entropic Battlecruiser @Josiah "Jo" Cameron
+101 U Fell Gravship @David Álvarez
 103 C Gravkill @Dominik Mayer
 105 C Hullcarver @Michal Ivan
+106 U Hylderblade @Viko Menezes
 108 C Insatiable Skittermaw @Diego Gisbert
+109 U Lightless Evangel @Viko Menezes
+110 U Monoist Circuit-Feeder @Quintin Gleim
 115 M Sothera, the Supervoid @Dominik Mayer
 116 R Sunset Saboteur @Mirko Failoni
 120 C Temporal Intervention @Chris Rallis
 121 U Timeline Culler @Alfonso Santano
 122 U Tragic Trajectory @Ovidio Cartagena
 123 U Umbral Collar Zealot @Dmitry Burmak
+124 C Virus Beetle @Leesha Hannigan
 125 U Voidforged Titan @Diego Gisbert
+130 U Cut Propulsion @Andrea Piparo
 131 U Debris Field Crusher @David Álvarez
 136 U Galvanizing Sawship @Constantin Marin
 138 C Kav Landseeker @Karl Kopinski
+139 U Kavaron Harrier @Hardy Fowler
+143 C Melded Moxite @Alexandr Leskinen
+144 U Memorial Team Leader @Andrew Mar
 148 R Nova Hellkite @Raymond Swanland
+151 R Pain for All @Dmitry Burmak
+152 C Plasma Bolt @Viko Menezes
 153 R Possibility Technician @Antonio José Manzanedo
 154 C Red Tiger Mechan @Simon Dominic
+155 U Remnant Elemental @Nereida
+157 U Roving Actuator @Sergey Glushakov
 158 U Ruinous Rampage @David Astruga
 159 R Rust Harvester @Jake Murray
 161 U Systems Override @Hardy Fowler
@@ -57,44 +90,63 @@ ScryfallCode=EOE
 167 R Warmaker Gunship @Julian Kok Joon Wen
 168 R Weapons Manufacturing @Marco Gorlei
 169 U Weftstalker Ardent @Valera Lutfullina
+171 U Atmospheric Greenhouse @Sergey Glushakov
+172 R Bioengineered Future @Constantin Marin
 175 U Broodguard Elite @Paolo Parente
+176 U Close Encounter @Inkognit
+178 C Drix Fatemaker @Anna Pavleeva
 181 U Eusocial Engineering @Francisco Badilla
 182 M Famished Worldsire @Kev Walker
 183 R Frenzied Baloth @Diana Franco
+184 C Fungal Colossus @Sergey Glushakov
 185 C Galactic Wayfarer @Quintin Gleim
 189 U Harmonious Grovestrider @Ron Spencer
+190 U Hemosymbic Mite @Amanda Lee
+196 R Loading Zone @Matt Stewart
+197 U Meltstrider Eulogist @Jason A. Engle
+200 R Mightform Harmonizer @Bartek Fedyczak
 201 M Ouroboroid @Samuel Perin
+203 C Sami's Curiosity @Tuan Duong Chu
 205 U Seedship Impact @Constantin Marin
 206 C Shattered Wings @Sergey Glushakov
 209 U Tapestry Warden @Andreas Zafiratos
 210 R Terrasymbiosis @Viko Menezes
 212 U Alpharael, Dreaming Acolyte @Cristi Balanescu
+213 U Biomechan Engineer @Monztre
 214 R Biotech Specialist @Alexandre Honoré
 215 R Cosmogoyf @Chris Rahn
+216 R Dyadrine, Synthesis Amalgam @Igor Grechanyi
 217 R Genemorph Imago @Brian Valeza
 219 R Infinite Guideline Station @Piotr Dura
 220 U Interceptor Mechan @Leonardo Santanna
 222 R Mutinous Massacre @Quintin Gleim
+223 R Pinnacle Emissary @Alejandro Pacheco
 224 R Ragost, Deft Gastronaut @Zack Stella
 225 U Sami, Ship's Engineer @Zara Alfonso
 226 M Sami, Wildcat Captain @Kieran Yanner
+227 U Seedship Broodtender @Eric Wilkerson
 228 R Singularity Rupture @Liiga Smilshkalne
+231 R Syr Vondam, Sunstar Exemplar @Ryan Pancoast
 232 U Syr Vondam, the Lucent @Cristi Balanescu
 233 U Tannuk, Memorial Ensign @David Auden Nash
+234 U All-Fates Scroll @Sam Guay
 235 U Bygone Colossus @Maxime Minard
 236 C Chrome Companion @Gray Highsmith
+237 U Dauntless Scrapbot @Alix Branwyn
 238 M Dawnsire, Sunstar Dreadnought @Jaime Jones
 239 M The Dominion Bracelet @Nathaniel Himawan
 240 M The Endstone @Ryan Pancoast
 241 R The Eternity Elevator @Josu Solano
 242 R Extinguisher Battleship @Danny Schwartz
 243 C Nutrient Block @Francisco Miyara
+245 U Survey Mechan @Johann Bodin
 247 R Thrumming Hivepool @Rob Rey
 248 U Virulent Silencer @Kenn Yap
 249 C Wurmwall Sweeper @Hardy Fowler
 250 M Adagia, Windswept Bastion @Adam Paquette
 251 R Breeding Pool @Constantin Marin
 252 C Command Bridge @Constantin Marin
+253 M Evendo, Waking Haven @Adam Paquette
 254 R Godless Shrine @Rob Rey
 255 M Kavaron, Memorial World @Adam Paquette
 256 R Sacred Foundry @Titus Lunter
@@ -119,6 +171,7 @@ ScryfallCode=EOE
 276 L Forest @Julian Kok Joon Wen
 277 M Adagia, Windswept Bastion @Piotr Dura
 278 R Breeding Pool @Chris Ostrowski
+279 M Evendo, Waking Haven @Piotr Dura
 280 R Godless Shrine @Chris Ostrowski
 281 M Kavaron, Memorial World @Piotr Dura
 282 R Sacred Foundry @Chris Ostrowski
@@ -129,12 +182,16 @@ ScryfallCode=EOE
 287 M Tezzeret, Cruel Captain @Magali Villeneuve
 288 R Astelli Reclaimer @Benjamin Ee
 289 R Haliya, Guided by Light @Eleonor Piteira
+290 R Mm'menon, the Right Hand @Dominik Mayer
 292 M Alpharael, Stonechosen @Jeremy Wilson
 293 R Elegy Acolyte @Justin Hernandez & Alexis Hernandez
-295 R Possibility Technician @Antonio José Manzanedo
+295 R Possibility Technician @Matthew G. Lewis
+297 R Mightform Harmonizer @Jessica Fong
+298 R Dyadrine, Synthesis Amalgam @Matthew G. Lewis
 299 R Genemorph Imago @Benjamin Ee
 300 R Ragost, Deft Gastronaut @Dominik Mayer
 301 M Sami, Wildcat Captain @Ashley Mackenzie
+302 R Syr Vondam, Sunstar Exemplar @Jeremy Wilson
 304 M Cosmogrand Zenith @Marlene Yui
 305 M Quantum Riddler @Cacho Rubione
 307 R Archenemy's Charm @Peter Diamond
@@ -147,10 +204,15 @@ ScryfallCode=EOE
 317 R Anticausal Vestige @Chase Stone
 318 M Exalted Sunborn @Scott M. Fischer
 323 R The Seriema @Sergey Glushakov
+324 R Sunstar Chaplain @Valera Lutfullina
 325 R Consult the Star Charts @Antonio José Manzanedo
 326 R Emissary Escort @Igor Grechanyi
 328 R Starfield Vocalist @Nathaniel Himawan
+330 M Weftwalking @Rovina Cai
+331 R Chorale of the Void @Alix Branwyn
 334 R Sunset Saboteur @Mirko Failoni
+335 R Zero Point Ballad @David Astruga
+337 R Pain for All @Dmitry Burmak
 338 R Terminal Velocity @Xabi Gaztelua
 339 R Warmaker Gunship @Julian Kok Joon Wen
 340 R Bioengineered Future @Constantin Marin
@@ -180,6 +242,7 @@ ScryfallCode=EOE
 371 L Forest @Adam Paquette
 372 M Adagia, Windswept Bastion @Piotr Dura
 373 R Breeding Pool @Chris Ostrowski
+374 M Evendo, Waking Haven @Piotr Dura
 375 R Godless Shrine @Chris Ostrowski
 376 M Kavaron, Memorial World @Piotr Dura
 377 R Sacred Foundry @Chris Ostrowski
@@ -198,6 +261,7 @@ ScryfallCode=EOE
 393 U Starfield Shepherd @Marta Nael
 394 U Annul @Carlos Palma Cruchaga
 395 U Umbral Collar Zealot @Dmitry Burmak
+396 U Kavaron Harrier @Hardy Fowler
 398 R Singularity Rupture @Néstor Ossandón Leal
 399 R Emissary Escort @Lius Lasahido
 
