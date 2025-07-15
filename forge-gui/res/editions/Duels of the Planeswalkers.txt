@@ -119,8 +119,3 @@ ScryfallCode=DPA
 111 L Forest @John Avon
 112 L Forest @Steven Belledin
 113 L Forest @Jim Nelson
-
-[tokens]
-g_1_1_elf_warrior
-g_1_1_saproling
-g_2_2_wolf
