@@ -15,7 +15,3 @@ ScryfallCode=GDY
 7 R Recruitment Officer @Zoltan Boros
 8 R Braids, Arisen Nightmare @Anastasia Balakchina
 9 M Surge Engine @Volkan Baǵa
-
-[tokens]
-u_x_x_illusion
-g_4_4_rhino_warrior
