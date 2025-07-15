@@ -1,0 +1,8 @@
+Name:Dragon Token
+ManaCost:no cost
+Colors:all
+Types:Creature Dragon
+PT:4/4
+K:Flying
+Text:This creature is all colors.
+Oracle:Flying\nThis creature is all colors.
