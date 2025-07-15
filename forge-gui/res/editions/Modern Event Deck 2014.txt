@@ -1,7 +1,7 @@
 [metadata]
 Code=MD1
 Date=2014-05-30
-Name=Modern Event Deck
+Name=Modern Event Deck 2014
 Code2=MD1
 Type=Boxed_Set
 ScryfallCode=MD1
@@ -37,7 +37,7 @@ ScryfallCode=MD1
 [tokens]
 1 w_1_1_soldier @Goran Josic
 2 w_1_1_spirit_flying @Kev Walker
-3 c_1_1_a_phyrexian_myr @Matt Stewart
+3 c_1_1_a_myr @Matt Stewart
 
 [other]
 4 emblem_elspeth_knight_errant @Volkan Baǵa
