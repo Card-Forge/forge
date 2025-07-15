@@ -5,6 +5,7 @@ Name=HasCon 2017
 Type=Funny
 ScryfallCode=H17
 TokensCode=H17
+Border=Silver
 
 [cards]
 1 R Grimlock, Dinobot Leader @Tyler Jacobson
