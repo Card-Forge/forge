@@ -36,7 +36,6 @@ public abstract class ImageFetcher {
     }
 
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
-    private HashMap<String, String> tokenImages;
 
     private String getScryfallDownloadURL(PaperCard c, String face, boolean useArtCrop, boolean hasSetLookup, String imagePath, ArrayList<String> downloadUrls) {
         StaticData data = StaticData.instance();
@@ -256,7 +255,7 @@ public abstract class ImageFetcher {
                 face = "back";
                 tmp = tmp.substring(0, tmp.length() - ImageKeys.BACKFACE_POSTFIX.length());
             }
-            String[] tempdata = tmp.substring(2).split("\\|"); //We want to check the edition first.
+            String[] tempdata = tmp.substring(2).split("\\|"); // We want to check the edition first.
             String tokenName = tempdata[0];
             String setCode = tempdata.length > 1 ? tempdata[1] : CardEdition.UNKNOWN_CODE;
 
@@ -274,10 +273,10 @@ public abstract class ImageFetcher {
             sb.append(".jpg");
 
             final String filename = sb.toString();
-            if (ImageKeys.missingCards.contains(filename))
-                return;
-
-            if (filename.equalsIgnoreCase("null.jpg"))
+            destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
+            if (ImageKeys.missingCards.contains(filename)
+                    || filename.equalsIgnoreCase("null.jpg")
+                    || destFile.exists())
                 return;
 
             if (tempdata.length < 2) {
@@ -321,17 +320,19 @@ public abstract class ImageFetcher {
             }
 
             ImageKeys.missingCards.add(filename);
-            destFile = new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, filename);
         }
 
         if (downloadUrls.isEmpty()) {
             System.err.println("No download URLs for: " + imageKey);
+            if (destFile != null) {
+                System.err.println("  You may put your own image in: " + destFile.getAbsolutePath());
+            }
             return;
         }
 
         if (destFile.exists()) {
             // TODO: Figure out why this codepath gets reached.
-            //  Ideally, fetchImage() wouldn't be called if we already have the image.
+            // Ideally, fetchImage() wouldn't be called if we already have the image.
             if (prefix.equals(ImageKeys.CARD_PREFIX)) {
                 PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
                 if (paperCard != null)
