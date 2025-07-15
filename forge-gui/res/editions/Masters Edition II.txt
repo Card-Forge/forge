@@ -2,7 +2,6 @@
 Code=ME2
 Date=2008-09-22
 Name=Masters Edition II
-Code2=ME2
 Type=Online
 BoosterCovers=1
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
@@ -254,13 +253,3 @@ ScryfallCode=ME2
 243 L Snow-Covered Swamp @Douglas Shuler
 244 L Snow-Covered Mountain @Tom Wänerstrand
 245 L Snow-Covered Forest @Pat Lewis
-
-[tokens]
-kelp
-w_0_1_caribou
-w_0_1_deserter
-w_1_1_knight_banding
-w_1_1_soldier
-b_x_x_spirit
-g_1_1_saproling
-br_3_1_graveborn_haste
