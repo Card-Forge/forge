@@ -1202,3 +1202,6 @@ ScryfallCode=WHO
 29 c_a_treasure_sac @Justyna Dura
 30 c_a_treasure_sac @Justyna Dura
 31 c_a_treasure_sac @Justyna Dura
+
+[other]
+1 copy @Xabi Gaztelua
