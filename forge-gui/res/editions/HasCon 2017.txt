@@ -12,4 +12,4 @@ TokensCode=H17
 3 M Sword of Dungeons & Dragons @Chris Rahn
 
 [tokens]
-4 all_4_4_dragon_flying @Autumn Rain Turkel
+4 c_4_4_dragon_flying @Autumn Rain Turkel
