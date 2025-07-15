@@ -21,6 +21,3 @@ ScryfallCode=DRB
 13 R Shivan Dragon @Justin Sweet
 14 R Thunder Dragon @Chris Rahn
 15 R Two-Headed Dragon @Sam Wood
-
-[tokens]
-g_1_1_saproling
