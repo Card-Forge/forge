@@ -315,6 +315,8 @@ ScryfallCode=KTK
 5 b_2_2_vampire_flying @Cynthia Sheppard
 6 b_2_2_zombie @Wayne Reynolds
 7 r_1_1_goblin @Kev Walker
+# Duplicated as there is no r_1_1_goblin_haste token yet
+7 r_1_1_goblin_haste @Kev Walker
 8 g_4_4_bear @Kev Walker
 9 g_1_1_snake @Lars Grant-West
 10 bg_x_x_spirit_warrior @Ryan Alexander Lee
