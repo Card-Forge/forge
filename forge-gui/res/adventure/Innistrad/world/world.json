@@ -1,0 +1,26 @@
+{
+"width": 700,
+"height": 700,
+"playerStartPosX": 0.85,
+"playerStartPosY": 0.6,
+"noiseZoomBiome": 30,
+"miniMapTileSize": 4,
+"tileSize": 16,
+"roadTileset": {
+	"tilesetAtlas": "world/tilesets/terrain.atlas",
+	"tilesetName": "Road",
+	"color": "ffffff"
+},
+"biomesSprites": "world/sprites/map_sprites.json",
+"maxRoadDistance": 1000,
+"biomesNames": [
+	"world/biomes/base.json",
+	"world/biomes/inn_approaches.json",
+	"world/biomes/inn_gavony.json",
+	"world/biomes/inn_nephalia.json",
+	"world/biomes/inn_stensia.json",
+	"world/biomes/inn_geierreach.json",
+	"world/biomes/inn_kessig.json",
+	"world/biomes/inn_moonlight.json"
+]
+}

@@ -1263,7 +1263,7 @@ public abstract class GameState {
             } else if (cardinfo[0].startsWith("T:")) {
                 String tokenStr = cardinfo[0].substring(2);
                 PaperToken token = StaticData.instance().getAllTokens().getToken(tokenStr,
-                        setCode != null ? setCode : CardEdition.UNKNOWN.getName());
+                        setCode != null ? setCode : CardEdition.UNKNOWN_CODE);
                 if (token == null) {
                     System.err.println("ERROR: Tried to create a non-existent token named " + cardinfo[0] + " when loading game state!");
                     continue;

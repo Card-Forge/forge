@@ -459,6 +459,9 @@ Dot
 GoldCoin
   xy: 464, 63
   size: 16, 16
+Sell
+  xy: 464, 79
+  size: 16, 16
 Magnifier
   xy: 448, 63
   size: 16, 16
