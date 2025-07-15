@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Final Fantasy #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/06/latest-3-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Ensure your solution satisfies all possible blocks. You have five cards remaining in your library. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Realm-Scorcher Hellkite;Loot, the Pathfinder;Greasewrench Goblin;Staff of Compleation;Gogo, Mysterious Mime
+p0battlefield=Gogo, Master of Mimicry;Vivi Ornitier;Pit Automaton;The Enigma Jewel;Botanical Sanctum;Botanical Sanctum;Botanical Sanctum;Mountain;Mountain;Mountain;Tarnation Vista|ChosenColor:red|NoETBTrigs
+p0library=Opt;Opt;Opt;Opt;Opt
+p1life=18
+p1battlefield=Barret Wallace;Rinoa Heartilly;T:angelo|Set:FIN

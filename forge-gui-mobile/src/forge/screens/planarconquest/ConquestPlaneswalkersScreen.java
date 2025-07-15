@@ -15,7 +15,7 @@ import forge.util.Callback;
 public class ConquestPlaneswalkersScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;
 
-    private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(FModel.getPlanes().iterator().next().getCommanders()) { //just use commanders as temporary list
+    private final FChoiceList<PaperCard> lstPlaneswalkers = add(new FChoiceList<PaperCard>(FModel.getPlanes().iterator().next().getCommanders()) { // Just use commanders as temporary list
         @Override
         protected void onItemActivate(Integer index, PaperCard value) {
             Forge.back();
@@ -44,7 +44,7 @@ public class ConquestPlaneswalkersScreen extends FScreen {
 
         final PaperCard planeswalker = lstPlaneswalkers.getSelectedItem();
         if (planeswalker == null) {
-            canCloseCallback.run(true); //shouldn't happen, but don't block closing screen if no commanders
+            canCloseCallback.run(true); // Shouldn't happen, but don't block closing screen if no commanders
             return;
         }
 
