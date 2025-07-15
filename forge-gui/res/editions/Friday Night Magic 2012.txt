@@ -22,5 +22,5 @@ TokensCode=F12
 
 [tokens]
 1a w_1_1_human @Lars Grant-West
-# Double-faced tokens not supported yet
+# Double-faced tokens are not supported yet
 # 1a☇ g_2_2_wolf @Lars Grant-West
