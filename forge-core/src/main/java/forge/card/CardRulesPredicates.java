@@ -63,7 +63,10 @@ public final class CardRulesPredicates {
         return new LeafNumber(LeafNumber.CardField.TOUGHNESS, op, what);
     }
 
-    // P/T
+    public static Predicate<CardRules> pt(final ComparableOp op, final int what) {
+        return new LeafNumber(LeafNumber.CardField.PT, op, what);
+    }
+
     /**
      * Rules.
      *
@@ -419,7 +422,7 @@ public final class CardRulesPredicates {
 
     public static class LeafNumber implements Predicate<CardRules> {
         public enum CardField {
-            CMC, GENERIC_COST, POWER, TOUGHNESS
+            CMC, GENERIC_COST, POWER, TOUGHNESS, PT
         }
 
         private final LeafNumber.CardField field;
@@ -445,6 +448,9 @@ public final class CardRulesPredicates {
                 return value != Integer.MAX_VALUE && this.op(value, this.operand);
             case TOUGHNESS:
                 value = card.getIntToughness();
+                return value != Integer.MAX_VALUE && this.op(value, this.operand);
+            case PT:
+                value = card.getIntPower() + card.getIntToughness();
                 return value != Integer.MAX_VALUE && this.op(value, this.operand);
             default:
                 return false;

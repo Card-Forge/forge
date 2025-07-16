@@ -45,6 +45,84 @@ public class AdvancedSearchParser {
                     predicate = CardRulesPredicates.rules(StringOp.CONTAINS_IC, valueStr);
                     break;
 
+            case "power":
+            case "pow":
+                if (valueStr.matches("\\d+")) {
+                    try {
+                        int power = Integer.parseInt(valueStr);
+                        ComparableOp op = null;
+                        switch (opUsed) {
+                            case "!":
+                            case ":":
+                            case "=":  op = ComparableOp.EQUALS; break;
+                            case "!=": op = ComparableOp.NOT_EQUALS; break;
+                            case ">=": op = ComparableOp.GT_OR_EQUAL; break;
+                            case ">":  op = ComparableOp.GREATER_THAN; break;
+                            case "<=": op = ComparableOp.LT_OR_EQUAL; break;
+                            case "<":  op = ComparableOp.LESS_THAN; break;
+                        }
+                        if (op != null) {
+                            predicate = CardRulesPredicates.power(op, power);
+                        }
+                    }
+                    catch (NumberFormatException ignored) {
+                        // Ignore and return null for invalid number formats
+                    }
+                }
+                break;
+
+            case "toughness":
+            case "tou":
+                if (valueStr.matches("\\d+")) {
+                    try {
+                        int power = Integer.parseInt(valueStr);
+                        ComparableOp op = null;
+                        switch (opUsed) {
+                            case "!":
+                            case ":":
+                            case "=":  op = ComparableOp.EQUALS; break;
+                            case "!=": op = ComparableOp.NOT_EQUALS; break;
+                            case ">=": op = ComparableOp.GT_OR_EQUAL; break;
+                            case ">":  op = ComparableOp.GREATER_THAN; break;
+                            case "<=": op = ComparableOp.LT_OR_EQUAL; break;
+                            case "<":  op = ComparableOp.LESS_THAN; break;
+                        }
+                        if (op != null) {
+                            predicate = CardRulesPredicates.toughness(op, power);
+                        }
+                    }
+                    catch (NumberFormatException ignored) {
+                        // Ignore and return null for invalid number formats
+                    }
+                }
+                break;
+
+            case "pt":
+            case "powtou":
+                if (valueStr.matches("\\d+")) {
+                    try {
+                        int power = Integer.parseInt(valueStr);
+                        ComparableOp op = null;
+                        switch (opUsed) {
+                            case "!":
+                            case ":":
+                            case "=":  op = ComparableOp.EQUALS; break;
+                            case "!=": op = ComparableOp.NOT_EQUALS; break;
+                            case ">=": op = ComparableOp.GT_OR_EQUAL; break;
+                            case ">":  op = ComparableOp.GREATER_THAN; break;
+                            case "<=": op = ComparableOp.LT_OR_EQUAL; break;
+                            case "<":  op = ComparableOp.LESS_THAN; break;
+                        }
+                        if (op != null) {
+                            predicate = CardRulesPredicates.pt(op, power);
+                        }
+                    }
+                    catch (NumberFormatException ignored) {
+                        // Ignore and return null for invalid number formats
+                    }
+                }
+                break;
+
             case "cmc":
             case "mv":
             case "manavalue":
