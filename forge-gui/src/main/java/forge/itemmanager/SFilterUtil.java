@@ -151,6 +151,12 @@ public class SFilterUtil {
     }
 
     private static Predicate<CardRules> parseAdvancedToken(String token) {
+        boolean negated = false;
+        if (token.startsWith("-")) {
+            token = token.substring(1).trim();
+            negated = true;
+        }
+
         String[] operators = {"!=", "<=", ">=", "=", "<", ">", ":"};
         int index = -1;
         String opUsed = null;
@@ -175,6 +181,7 @@ public class SFilterUtil {
         String valueStr = token.substring(index + opUsed.length()).trim();
 
         try {
+            Predicate<CardRules> predicate = null;
             switch (key) {
                 case "cmc":
                 case "mv":
@@ -190,17 +197,28 @@ public class SFilterUtil {
                         case "<":  op = ComparableOp.LESS_THAN; break;
                     }
                     if (op != null) {
-                        return CardRulesPredicates.cmc(op, cmcValue);
+                        predicate = CardRulesPredicates.cmc(op, cmcValue);
                     }
                     break;
                 case "t":
                 case "type":
                     switch (opUsed) {
-                        case "=":  return CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr);
-                        case "!=": return CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr).negate();
+                        case "=":  predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr); break;
+                        case "!=": predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr).negate(); break;
+                    }
+                    break;
+                case "kw":
+                case "keyword":
+                    switch (opUsed) {
+                        case "=":  predicate = CardRulesPredicates.hasKeyword(valueStr); break;
+                        case "!=": predicate = CardRulesPredicates.hasKeyword(valueStr).negate(); break;
                     }
                     break;
             }
+            if (predicate != null && negated) {
+                return predicate.negate();
+            }
+            return predicate;
         } catch (NumberFormatException ignored) {
             // Ignore and return null for invalid number formats
         }
