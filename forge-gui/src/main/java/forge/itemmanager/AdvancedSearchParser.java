@@ -2,6 +2,8 @@ package forge.itemmanager;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.util.ComparableOp;
 import forge.util.PredicateString.StringOp;
 
@@ -70,6 +72,40 @@ public class AdvancedSearchParser {
                         case ":":
                         case "=":  predicate = CardRulesPredicates.hasKeyword(valueStr); break;
                         case "!=": predicate = CardRulesPredicates.hasKeyword(valueStr).negate(); break;
+                    }
+                    break;
+                case "c":
+                case "color":
+                    if (valueStr.equals("c")) {
+                        switch (opUsed) {
+                            case ":":
+                            case "=": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).isColorless(); break;
+                            case "!=":
+                            case ">": predicate = card -> !ColorSet.fromMask(card.getColor().getColor()).isColorless(); break;
+                        }
+                    } else if (valueStr.equals("m")) {
+                        switch (opUsed) {
+                            case ":":
+                            case "=": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).countColors() >= 2; break;
+                            case "!=":
+                            case "<": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).countColors() == 1; break;
+                        }
+                    } else {
+                        byte mask = 0;
+                        for (char c : valueStr.toCharArray()) {
+                            byte color = MagicColor.fromName(c);
+                            if (color == 0) {
+                                continue;
+                            }
+                            mask |= color;
+                        }
+                        final byte finalMask = mask;
+
+                        switch (opUsed) {
+                            case ":": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).hasAllColors(finalMask); break;
+                            case "=": 
+                            case "!": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).hasExactlyColor(finalMask); break;
+                        }
                     }
                     break;
             }
