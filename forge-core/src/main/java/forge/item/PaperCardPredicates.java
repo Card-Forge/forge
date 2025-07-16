@@ -5,9 +5,9 @@ import forge.card.*;
 import forge.util.PredicateString;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 /**
@@ -91,7 +91,8 @@ public abstract class PaperCardPredicates {
         }
 
         private PredicateSets(final List<String> wantSets, final boolean shouldContain) {
-            this.sets = new HashSet<>(wantSets);
+            this.sets = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+            this.sets.addAll(wantSets);
             this.mustContain = shouldContain;
         }
     }

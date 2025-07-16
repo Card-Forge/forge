@@ -1,9 +1,13 @@
 package forge.itemmanager;
 
+import forge.StaticData;
+import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.CardRulesPredicates.LeafNumber;
 import forge.card.MagicColor;
-import forge.game.card.CardPredicates;
+import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.ComparableOp;
 import forge.util.PredicateString.StringOp;
 
@@ -11,7 +15,7 @@ import java.util.function.Predicate;
 
 public class AdvancedSearchParser {
 
-    public static Predicate<CardRules> parseAdvancedToken(String token) {
+    public static Predicate<CardRules> parseAdvancedRulesToken(String token) {
         boolean negated = false;
         if (token.startsWith("-")) {
             token = token.substring(1).trim();
@@ -29,44 +33,54 @@ public class AdvancedSearchParser {
                 break;
             }
         }
-        if (index < 0 || opUsed == null) {
+        if (index < 0) {
+            return null;
+        }
+
+        ComparableOp op = getComparableOp(opUsed);
+        if (op == null) {
             return null;
         }
 
         String key = token.substring(0, index).trim().toLowerCase();
         String valueStr = token.substring(index + opUsed.length()).trim().toLowerCase();
+        boolean creatureOnly = false;
 
         Predicate<CardRules> predicate = null;
         switch (key) {
             case "o":
             case "oracle":
-                case ":":
-                case "=":
-                    predicate = CardRulesPredicates.rules(StringOp.CONTAINS_IC, valueStr);
-                    break;
+                switch (opUsed) {
+                    case ":":
+                    case "=":
+                        predicate = CardRulesPredicates.rules(StringOp.CONTAINS_IC, valueStr);
+                        break;
+                }
+                
+                break;
 
             case "power":
             case "pow":
                 if (valueStr.matches("\\d+")) {
                     try {
                         int power = Integer.parseInt(valueStr);
-                        ComparableOp op = null;
-                        switch (opUsed) {
-                            case "!":
-                            case ":":
-                            case "=":  op = ComparableOp.EQUALS; break;
-                            case "!=": op = ComparableOp.NOT_EQUALS; break;
-                            case ">=": op = ComparableOp.GT_OR_EQUAL; break;
-                            case ">":  op = ComparableOp.GREATER_THAN; break;
-                            case "<=": op = ComparableOp.LT_OR_EQUAL; break;
-                            case "<":  op = ComparableOp.LESS_THAN; break;
-                        }
-                        if (op != null) {
-                            predicate = CardRulesPredicates.power(op, power);
-                        }
+                        creatureOnly = true;
+                        predicate = CardRulesPredicates.power(op, power);
                     }
                     catch (NumberFormatException ignored) {
                         // Ignore and return null for invalid number formats
+                    }
+                } else {
+                    switch(valueStr) {
+                        case "toughness":
+                        case "tou":
+                            creatureOnly = true;
+                            predicate = c -> {
+                                int toughness = c.getIntToughness();
+                                return new LeafNumber(LeafNumber.CardField.POWER, op, toughness).test(c);
+                            };
+
+                            break;
                     }
                 }
                 break;
@@ -75,73 +89,48 @@ public class AdvancedSearchParser {
             case "tou":
                 if (valueStr.matches("\\d+")) {
                     try {
-                        int power = Integer.parseInt(valueStr);
-                        ComparableOp op = null;
-                        switch (opUsed) {
-                            case "!":
-                            case ":":
-                            case "=":  op = ComparableOp.EQUALS; break;
-                            case "!=": op = ComparableOp.NOT_EQUALS; break;
-                            case ">=": op = ComparableOp.GT_OR_EQUAL; break;
-                            case ">":  op = ComparableOp.GREATER_THAN; break;
-                            case "<=": op = ComparableOp.LT_OR_EQUAL; break;
-                            case "<":  op = ComparableOp.LESS_THAN; break;
-                        }
-                        if (op != null) {
-                            predicate = CardRulesPredicates.toughness(op, power);
-                        }
+                        int thoughness = Integer.parseInt(valueStr);
+                        creatureOnly = true;
+                        predicate = CardRulesPredicates.toughness(op, thoughness);
                     }
                     catch (NumberFormatException ignored) {
                         // Ignore and return null for invalid number formats
+                    }
+                } else {
+                    switch(valueStr) {
+                        case "power":
+                        case "pow":
+                            creatureOnly = true;
+                            predicate = c -> {
+                                int power = c.getIntPower();
+                                return new LeafNumber(LeafNumber.CardField.TOUGHNESS, op, power).test(c);
+                            };
+
+                            break;
                     }
                 }
                 break;
 
             case "pt":
-            case "powtou":
+            case "powtou": {
                 if (valueStr.matches("\\d+")) {
                     try {
                         int power = Integer.parseInt(valueStr);
-                        ComparableOp op = null;
-                        switch (opUsed) {
-                            case "!":
-                            case ":":
-                            case "=":  op = ComparableOp.EQUALS; break;
-                            case "!=": op = ComparableOp.NOT_EQUALS; break;
-                            case ">=": op = ComparableOp.GT_OR_EQUAL; break;
-                            case ">":  op = ComparableOp.GREATER_THAN; break;
-                            case "<=": op = ComparableOp.LT_OR_EQUAL; break;
-                            case "<":  op = ComparableOp.LESS_THAN; break;
-                        }
-                        if (op != null) {
-                            predicate = CardRulesPredicates.pt(op, power);
-                        }
+                        creatureOnly = true;
+                        predicate = CardRulesPredicates.pt(op, power);
                     }
                     catch (NumberFormatException ignored) {
                         // Ignore and return null for invalid number formats
                     }
                 }
                 break;
-
+            }
             case "cmc":
             case "mv":
             case "manavalue":
                 try {
                     int cmcValue = Integer.parseInt(valueStr);
-                    ComparableOp op = null;
-                    switch (opUsed) {
-                        case "!":
-                        case ":":
-                        case "=":  op = ComparableOp.EQUALS; break;
-                        case "!=": op = ComparableOp.NOT_EQUALS; break;
-                        case ">=": op = ComparableOp.GT_OR_EQUAL; break;
-                        case ">":  op = ComparableOp.GREATER_THAN; break;
-                        case "<=": op = ComparableOp.LT_OR_EQUAL; break;
-                        case "<":  op = ComparableOp.LESS_THAN; break;
-                    }
-                    if (op != null) {
-                        predicate = CardRulesPredicates.cmc(op, cmcValue);
-                    }
+                    predicate = CardRulesPredicates.cmc(op, cmcValue);
                 }
                 catch (NumberFormatException ignored) {
                     // Ignore and return null for invalid number formats
@@ -298,6 +287,29 @@ public class AdvancedSearchParser {
                             }
                     }
                 }
+
+                break;
+
+            case "name":
+                switch(opUsed) {
+                    case "!":
+
+                        predicate = CardRulesPredicates.name(StringOp.EQUALS_IC, valueStr);
+
+                        break;
+
+                    case "!=":
+                        predicate = CardRulesPredicates.name(StringOp.EQUALS_IC, valueStr).negate();
+
+                        break;
+
+                    case "=":
+                    case ":":
+                        predicate = CardRulesPredicates.name(StringOp.CONTAINS_IC, valueStr);
+
+                        break;
+                }
+                    
         }
 
         if (predicate == null) {
@@ -305,10 +317,120 @@ public class AdvancedSearchParser {
         }
 
         if (negated) {
-            return predicate.negate();
+            predicate = predicate.negate();
+        }
+
+        if (creatureOnly) {
+            predicate = CardRulesPredicates.IS_CREATURE.and(predicate);
         }
 
         return predicate;
+    }
+
+    public static Predicate<PaperCard> parseAdvancedPaperCardToken(String token) {
+        boolean negated = false;
+        if (token.startsWith("-")) {
+            token = token.substring(1).trim();
+            negated = true;
+        }
+
+        String[] operators = {"!=", "<=", ">=", "=", "<", ">", ":", "!"};
+        int index = -1;
+        String opUsed = null;
+        for (String op : operators) {
+            int idx = token.indexOf(op);
+            if (idx >= 0) {
+                index = idx;
+                opUsed = op;
+                break;
+            }
+        }
+        if (index < 0) {
+            return null;
+        }
+
+        ComparableOp op = getComparableOp(opUsed);
+        if (op == null) {
+            return null;
+        }
+
+        String key = token.substring(0, index).trim().toLowerCase();
+        String valueStr = token.substring(index + opUsed.length()).trim().toLowerCase();
+
+        Predicate<PaperCard> predicate = null;
+        switch (key) {
+            case "set":
+            case "s":
+            case "edition":
+            case "e":
+                switch (opUsed) {
+                    case ":":
+                    case "=":
+                        predicate = PaperCardPredicates.printedInSet(valueStr);
+                        break;
+                    
+                    case "!=":
+                        predicate = PaperCardPredicates.printedInSet(valueStr).negate();
+                        break;
+                }
+
+                break;
+
+            case "in":
+                switch (opUsed) {
+                    case ":":
+                    case "=":
+                        predicate = c -> {
+                            CardEdition e = StaticData.instance().getEditions().get(valueStr);
+
+                            if (e == null) {
+                                return false;
+                            }
+
+                            return !e.getCardInSet(c.getName()).isEmpty();
+                        };
+                        break;
+
+                    case "!=":
+                        predicate = c -> {
+                            CardEdition e = StaticData.instance().getEditions().get(valueStr);
+
+                            if (e == null) {
+                                return true;
+                            }
+
+                            return e.getCardInSet(c.getName()).isEmpty();
+                        };
+                        break;
+                }
+
+                break;
+        }
+
+        if (predicate == null) {
+            return null;
+        }
+
+        if (negated) {
+            predicate = predicate.negate();
+        }
+
+        return predicate;
+    }
+
+    private static ComparableOp getComparableOp(String opUsed) {
+        ComparableOp op = null;
+        switch (opUsed) {
+            case "!":
+            case ":":
+            case "=":  op = ComparableOp.EQUALS; break;
+            case "!=": op = ComparableOp.NOT_EQUALS; break;
+            case ">=": op = ComparableOp.GT_OR_EQUAL; break;
+            case ">":  op = ComparableOp.GREATER_THAN; break;
+            case "<=": op = ComparableOp.LT_OR_EQUAL; break;
+            case "<":  op = ComparableOp.LESS_THAN; break;
+        }
+        return op;
     }
 
     private static byte getColorMaskFromString(String valueStr) {

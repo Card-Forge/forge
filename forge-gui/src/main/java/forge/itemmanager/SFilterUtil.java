@@ -45,20 +45,29 @@ public class SFilterUtil {
         }
 
         List<String> tokens = getSplitText(text);
-        List<Predicate<CardRules>> advancedPredicates = new ArrayList<>();
+        List<Predicate<CardRules>> advancedCardRulesPredicates = new ArrayList<>();
+        List<Predicate<PaperCard>> advancedPaperCardPredicates = new ArrayList<>();
         List<String> regularTokens = new ArrayList<>();
 
         for (String token : tokens) {
-            Predicate<CardRules> advPred = AdvancedSearchParser.parseAdvancedToken(token);
-            if (advPred != null) {
-                advancedPredicates.add(advPred);
-            } else {
+            Predicate<CardRules> advCardRules = AdvancedSearchParser.parseAdvancedRulesToken(token);
+            Predicate<PaperCard> advPaperCard = AdvancedSearchParser.parseAdvancedPaperCardToken(token);
+
+            if (advCardRules != null) {
+                advancedCardRulesPredicates.add(advCardRules);
+            }
+
+            if (advPaperCard != null) {
+                advancedPaperCardPredicates.add(advPaperCard);
+            }
+
+            if (advCardRules == null && advPaperCard == null) {
                 regularTokens.add(token);
             }
         }
 
         Predicate<CardRules> textFilter;
-        if (advancedPredicates.isEmpty()) {
+        if (advancedCardRulesPredicates.isEmpty()) {
             if (BooleanExpression.isExpression(text)) {
                 BooleanExpression expression = new BooleanExpression(text, inName, inType, inText, inCost);
                 
@@ -78,16 +87,16 @@ public class SFilterUtil {
                 textFilter = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
             }
         } else {
-            Predicate<CardRules> advancedPredicate = IterableUtil.and(advancedPredicates);
+            Predicate<CardRules> advancedCardRulesPredicate = IterableUtil.and(advancedCardRulesPredicates);
             Predicate<CardRules> regularPredicate = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
-            textFilter = advancedPredicate.and(regularPredicate);
+            textFilter = advancedCardRulesPredicate.and(regularPredicate);
         }
 
         if (invert) {
             textFilter = textFilter.negate();
         }
 
-        return PaperCardPredicates.fromRules(textFilter);
+        return PaperCardPredicates.fromRules(textFilter).and(IterableUtil.and(advancedPaperCardPredicates));
     }
 
     private static List<String> getSplitText(String text) {
