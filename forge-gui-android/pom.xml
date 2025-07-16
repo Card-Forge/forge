@@ -615,6 +615,13 @@
                             <sign>
                                 <debug>false</debug>
                             </sign>
+                            <renameManifestPackage>forge.app.debug</renameManifestPackage>
+                            <manifestPlaceholders>
+                                <!-- this becomes ${applicationId} inside merged manifests -->
+                                <applicationId>forge.app.debug</applicationId>
+                                <!-- Sentry 7.x uses ${sentryAuthority} instead -->
+                                <sentryAuthority>forge.app.debug.sentryinitprovider</sentryAuthority>
+                            </manifestPlaceholders>
                             <sdk>
                                 <platform>${androidPlatform}</platform>
                                 <buildTools>${androidBuildTools}</buildTools>
