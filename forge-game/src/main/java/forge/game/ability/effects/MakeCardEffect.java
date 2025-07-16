@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
+import forge.card.CardEdition;
 import forge.card.ICardFace;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
@@ -150,7 +151,12 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         if (pack != null) {
                             pc = Iterables.getLast(IterableUtil.filter(pack, PaperCardPredicates.name(name)));
                         } else {
-                            pc = StaticData.instance().getCommonCards().getUniqueByName(name);
+                            // Try to get the card in the sa host's current edition
+                            pc = StaticData.instance().getCommonCards().getCard(name, sa.getHostCard() != null ? sa.getHostCard().getSetCode() : CardEdition.UNKNOWN_CODE);
+
+                            if (pc == null) {
+                                pc = StaticData.instance().getCommonCards().getCard(name);
+                            }
                         }
                         Card card = Card.fromPaperCard(pc, player);
 
@@ -183,7 +189,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         Card cc;
                         if (c.getZone().getZoneType().equals(ZoneType.None)) cc = c;
                         else { // make another copy
-                            PaperCard next = StaticData.instance().getCommonCards().getUniqueByName(c.getName());
+                            PaperCard next = StaticData.instance().getCommonCards().getCard(c.getName(), c.getSetCode());
                             cc = Card.fromPaperCard(next, player);
                             game.getAction().moveTo(ZoneType.None, cc, sa, moveParams);
                         }
