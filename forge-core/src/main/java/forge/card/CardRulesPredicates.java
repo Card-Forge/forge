@@ -371,17 +371,18 @@ public final class CardRulesPredicates {
             if (null == subject) {
                 return false;
             }
+            ColorSet cardColor = subject.getColor();
             switch (this.op) {
             case CountColors:
-                return subject.getColor().countColors() == this.color;
+                return cardColor.countColors() == this.color;
             case CountColorsGreaterOrEqual:
-                return subject.getColor().countColors() >= this.color;
+                return cardColor.countColors() >= this.color;
             case Equals:
-                return subject.getColor().isEqual(this.color);
+                return cardColor.isEqual(this.color);
             case HasAllOf:
-                return subject.getColor().hasAllColors(this.color);
+                return cardColor.hasAllColors(this.color);
             case HasAnyOf:
-                return subject.getColor().hasAnyColor(this.color);
+                return cardColor.hasAnyColor(this.color);
             case CanCast:
                 return subject.canCastWithAvailable(this.color);
             default:

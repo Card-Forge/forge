@@ -16,7 +16,7 @@ public class AdvancedSearchParser {
             negated = true;
         }
 
-        String[] operators = {"!=", "<=", ">=", "=", "<", ">", ":"};
+        String[] operators = {"!=", "<=", ">=", "=", "<", ">", ":", "!"};
         int index = -1;
         String opUsed = null;
         for (String op : operators) {
@@ -31,11 +31,6 @@ public class AdvancedSearchParser {
             return null;
         }
 
-        // Normalize colon operator to equals
-        if (":".equals(opUsed)) {
-            opUsed = "=";
-        }
-
         String key = token.substring(0, index).trim().toLowerCase();
         String valueStr = token.substring(index + opUsed.length()).trim();
 
@@ -48,6 +43,8 @@ public class AdvancedSearchParser {
                     int cmcValue = Integer.parseInt(valueStr);
                     ComparableOp op = null;
                     switch (opUsed) {
+                        case "!":
+                        case ":":
                         case "=":  op = ComparableOp.EQUALS; break;
                         case "!=": op = ComparableOp.NOT_EQUALS; break;
                         case ">=": op = ComparableOp.GT_OR_EQUAL; break;
@@ -62,6 +59,7 @@ public class AdvancedSearchParser {
                 case "t":
                 case "type":
                     switch (opUsed) {
+                        case ":":
                         case "=":  predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr); break;
                         case "!=": predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr).negate(); break;
                     }
@@ -69,6 +67,7 @@ public class AdvancedSearchParser {
                 case "kw":
                 case "keyword":
                     switch (opUsed) {
+                        case ":":
                         case "=":  predicate = CardRulesPredicates.hasKeyword(valueStr); break;
                         case "!=": predicate = CardRulesPredicates.hasKeyword(valueStr).negate(); break;
                     }
