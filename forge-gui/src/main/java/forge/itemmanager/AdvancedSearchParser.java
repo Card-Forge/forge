@@ -89,9 +89,9 @@ public class AdvancedSearchParser {
             case "tou":
                 if (valueStr.matches("\\d+")) {
                     try {
-                        int thoughness = Integer.parseInt(valueStr);
+                        int toughness = Integer.parseInt(valueStr);
                         creatureOnly = true;
-                        predicate = CardRulesPredicates.toughness(op, thoughness);
+                        predicate = CardRulesPredicates.toughness(op, toughness);
                     }
                     catch (NumberFormatException ignored) {
                         // Ignore and return null for invalid number formats
