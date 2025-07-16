@@ -3,6 +3,7 @@ package forge.itemmanager;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
+import forge.game.card.CardPredicates;
 import forge.util.ComparableOp;
 import forge.util.PredicateString.StringOp;
 
@@ -37,6 +38,13 @@ public class AdvancedSearchParser {
 
         Predicate<CardRules> predicate = null;
         switch (key) {
+            case "o":
+            case "oracle":
+                case ":":
+                case "=":
+                    predicate = CardRulesPredicates.rules(StringOp.CONTAINS_IC, valueStr);
+                    break;
+
             case "cmc":
             case "mv":
             case "manavalue":
