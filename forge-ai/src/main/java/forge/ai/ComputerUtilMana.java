@@ -1077,7 +1077,9 @@ public class ComputerUtilMana {
     private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost, Multimap<ManaCostShard, SpellAbility> sourcesForShards) {
         List<ManaCostShard> shardsToPay = Lists.newArrayList(cost.getDistinctShards());
         // optimize order so that the shards with less available sources are considered first
-        shardsToPay.sort(Comparator.comparingInt(shard -> sourcesForShards.get(shard).size()));
+        if(sourcesForShards != null){// NPE happens if there are no mana sources and cost has multiple distinct phyrexian shards
+            shardsToPay.sort(Comparator.comparingInt(shard->sourcesForShards.get(shard).size()));
+        }
         // mind the priorities
         // * Pay mono-colored first
         // * Pay 2/C with matching colors
