@@ -151,7 +151,7 @@ public class SFilterUtil {
     }
 
     private static Predicate<CardRules> parseAdvancedToken(String token) {
-        String[] operators = {"!=", "<=", ">=", "=", "<", ">"};
+        String[] operators = {"!=", "<=", ">=", "=", "<", ">", ":"};
         int index = -1;
         String opUsed = null;
         for (String op : operators) {
@@ -166,12 +166,19 @@ public class SFilterUtil {
             return null;
         }
 
+        // Normalize colon operator to equals
+        if (":".equals(opUsed)) {
+            opUsed = "=";
+        }
+
         String key = token.substring(0, index).trim().toLowerCase();
         String valueStr = token.substring(index + opUsed.length()).trim();
 
         try {
             switch (key) {
                 case "cmc":
+                case "mv":
+                case "manavalue":
                     int cmcValue = Integer.parseInt(valueStr);
                     ComparableOp op = null;
                     switch (opUsed) {
