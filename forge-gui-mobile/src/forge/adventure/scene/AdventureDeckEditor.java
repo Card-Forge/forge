@@ -761,7 +761,8 @@ public class AdventureDeckEditor extends FDeckEditor {
         if (isDrafting())
             return false;
         if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered
-                || currentEvent.eventStatus == AdventureEventController.EventStatus.Ready)
+                || currentEvent.eventStatus == AdventureEventController.EventStatus.Ready
+                || currentEvent.eventStatus == AdventureEventController.EventStatus.Started)
             return true;
         return false;
     }
