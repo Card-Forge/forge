@@ -24,7 +24,6 @@ import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.BinaryUtil;
-import forge.util.ComparableOp;
 import forge.util.IterableUtil;
 import forge.util.PredicateString.StringOp;
 
@@ -35,7 +34,6 @@ import forge.util.PredicateString.StringOp;
  * <i>(S at beginning of class name denotes a static factory.)</i>
  */
 public class SFilterUtil {
-    
     /**
      * builds a string search filter
      */
@@ -51,7 +49,7 @@ public class SFilterUtil {
         List<String> regularTokens = new ArrayList<>();
 
         for (String token : tokens) {
-            Predicate<CardRules> advPred = parseAdvancedToken(token);
+            Predicate<CardRules> advPred = AdvancedSearchParser.parseAdvancedToken(token);
             if (advPred != null) {
                 advancedPredicates.add(advPred);
             } else {
@@ -148,81 +146,6 @@ public class SFilterUtil {
             terms.add(IterableUtil.or(subands));
         }
         return IterableUtil.and(terms);
-    }
-
-    private static Predicate<CardRules> parseAdvancedToken(String token) {
-        boolean negated = false;
-        if (token.startsWith("-")) {
-            token = token.substring(1).trim();
-            negated = true;
-        }
-
-        String[] operators = {"!=", "<=", ">=", "=", "<", ">", ":"};
-        int index = -1;
-        String opUsed = null;
-        for (String op : operators) {
-            int idx = token.indexOf(op);
-            if (idx >= 0) {
-                index = idx;
-                opUsed = op;
-                break;
-            }
-        }
-        if (index < 0 || opUsed == null) {
-            return null;
-        }
-
-        // Normalize colon operator to equals
-        if (":".equals(opUsed)) {
-            opUsed = "=";
-        }
-
-        String key = token.substring(0, index).trim().toLowerCase();
-        String valueStr = token.substring(index + opUsed.length()).trim();
-
-        try {
-            Predicate<CardRules> predicate = null;
-            switch (key) {
-                case "cmc":
-                case "mv":
-                case "manavalue":
-                    int cmcValue = Integer.parseInt(valueStr);
-                    ComparableOp op = null;
-                    switch (opUsed) {
-                        case "=":  op = ComparableOp.EQUALS; break;
-                        case "!=": op = ComparableOp.NOT_EQUALS; break;
-                        case ">=": op = ComparableOp.GT_OR_EQUAL; break;
-                        case ">":  op = ComparableOp.GREATER_THAN; break;
-                        case "<=": op = ComparableOp.LT_OR_EQUAL; break;
-                        case "<":  op = ComparableOp.LESS_THAN; break;
-                    }
-                    if (op != null) {
-                        predicate = CardRulesPredicates.cmc(op, cmcValue);
-                    }
-                    break;
-                case "t":
-                case "type":
-                    switch (opUsed) {
-                        case "=":  predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr); break;
-                        case "!=": predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr).negate(); break;
-                    }
-                    break;
-                case "kw":
-                case "keyword":
-                    switch (opUsed) {
-                        case "=":  predicate = CardRulesPredicates.hasKeyword(valueStr); break;
-                        case "!=": predicate = CardRulesPredicates.hasKeyword(valueStr).negate(); break;
-                    }
-                    break;
-            }
-            if (predicate != null && negated) {
-                return predicate.negate();
-            }
-            return predicate;
-        } catch (NumberFormatException ignored) {
-            // Ignore and return null for invalid number formats
-        }
-        return null;
     }
 
     public static <T extends InventoryItem> Predicate<T> buildItemTextFilter(String text) {
