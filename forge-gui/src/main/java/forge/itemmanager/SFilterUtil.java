@@ -24,6 +24,7 @@ import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.BinaryUtil;
+import forge.util.ComparableOp;
 import forge.util.IterableUtil;
 import forge.util.PredicateString.StringOp;
 
@@ -45,35 +46,48 @@ public class SFilterUtil {
             return x -> true;
         }
 
-        if (BooleanExpression.isExpression(text)) {
-            BooleanExpression expression = new BooleanExpression(text, inName, inType, inText, inCost);
-            
-            try {
-                Predicate<CardRules> filter = expression.evaluate();
-                if (filter != null) {
-                    return PaperCardPredicates.fromRules(invert ? filter.negate() : filter);
-                }
-            }
-            catch (Exception ignored) {
-                ignored.printStackTrace();
-                //Continue with standard filtering if the expression is not valid.
+        List<String> tokens = getSplitText(text);
+        List<Predicate<CardRules>> advancedPredicates = new ArrayList<>();
+        List<String> regularTokens = new ArrayList<>();
+
+        for (String token : tokens) {
+            Predicate<CardRules> advPred = parseAdvancedToken(token);
+            if (advPred != null) {
+                advancedPredicates.add(advPred);
+            } else {
+                regularTokens.add(token);
             }
         }
 
-        List<String> splitText = getSplitText(text);
-        List<Predicate<CardRules>> terms = new ArrayList<>();
-        for (String s : splitText) {
-            List<Predicate<CardRules>> subands = new ArrayList<>();
-
-            if (inName) { subands.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s));       }
-            if (inType) { subands.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
-            if (inText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS_IC, s));      }
-            if (inCost) { subands.add(CardRulesPredicates.cost(StringOp.CONTAINS_IC, s));       }
-
-            terms.add(IterableUtil.or(subands));
-        }
         Predicate<CardRules> textFilter;
-        textFilter = invert ? IterableUtil.or(terms).negate() : IterableUtil.and(terms);
+        if (advancedPredicates.isEmpty()) {
+            if (BooleanExpression.isExpression(text)) {
+                BooleanExpression expression = new BooleanExpression(text, inName, inType, inText, inCost);
+                
+                try {
+                    Predicate<CardRules> filter = expression.evaluate();
+                    if (filter != null) {
+                        textFilter = filter;
+                    } else {
+                        textFilter = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    textFilter = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
+                }
+            } else {
+                textFilter = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
+            }
+        } else {
+            Predicate<CardRules> advancedPredicate = IterableUtil.and(advancedPredicates);
+            Predicate<CardRules> regularPredicate = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
+            textFilter = advancedPredicate.and(regularPredicate);
+        }
+
+        if (invert) {
+            textFilter = textFilter.negate();
+        }
 
         return PaperCardPredicates.fromRules(textFilter);
     }
@@ -115,6 +129,75 @@ public class SFilterUtil {
             splitText.add(entry.toString());
         }
         return splitText;
+    }
+
+    private static Predicate<CardRules> buildRegularTextPredicate(List<String> tokens, boolean inName, boolean inType, boolean inText, boolean inCost) {
+        if (tokens.isEmpty()) {
+            return x -> true;
+        }
+
+        List<Predicate<CardRules>> terms = new ArrayList<>();
+        for (String s : tokens) {
+            List<Predicate<CardRules>> subands = new ArrayList<>();
+
+            if (inName) { subands.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s));       }
+            if (inType) { subands.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
+            if (inText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS_IC, s));      }
+            if (inCost) { subands.add(CardRulesPredicates.cost(StringOp.CONTAINS_IC, s));       }
+
+            terms.add(IterableUtil.or(subands));
+        }
+        return IterableUtil.and(terms);
+    }
+
+    private static Predicate<CardRules> parseAdvancedToken(String token) {
+        String[] operators = {"!=", "<=", ">=", "=", "<", ">"};
+        int index = -1;
+        String opUsed = null;
+        for (String op : operators) {
+            int idx = token.indexOf(op);
+            if (idx >= 0) {
+                index = idx;
+                opUsed = op;
+                break;
+            }
+        }
+        if (index < 0 || opUsed == null) {
+            return null;
+        }
+
+        String key = token.substring(0, index).trim().toLowerCase();
+        String valueStr = token.substring(index + opUsed.length()).trim();
+
+        try {
+            switch (key) {
+                case "cmc":
+                    int cmcValue = Integer.parseInt(valueStr);
+                    ComparableOp op = null;
+                    switch (opUsed) {
+                        case "=":  op = ComparableOp.EQUALS; break;
+                        case "!=": op = ComparableOp.NOT_EQUALS; break;
+                        case ">=": op = ComparableOp.GT_OR_EQUAL; break;
+                        case ">":  op = ComparableOp.GREATER_THAN; break;
+                        case "<=": op = ComparableOp.LT_OR_EQUAL; break;
+                        case "<":  op = ComparableOp.LESS_THAN; break;
+                    }
+                    if (op != null) {
+                        return CardRulesPredicates.cmc(op, cmcValue);
+                    }
+                    break;
+                case "t":
+                case "type":
+                    switch (opUsed) {
+                        case "=":  return CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr);
+                        case "!=": return CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr).negate();
+                    }
+                    break;
+            }
+        } catch (NumberFormatException ignored) {
+            // Ignore and return null for invalid number formats
+        }
+        return null;
     }
 
     public static <T extends InventoryItem> Predicate<T> buildItemTextFilter(String text) {
