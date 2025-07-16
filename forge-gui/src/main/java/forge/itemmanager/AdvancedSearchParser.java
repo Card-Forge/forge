@@ -2,7 +2,6 @@ package forge.itemmanager;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
-import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.util.ComparableOp;
 import forge.util.PredicateString.StringOp;
@@ -34,14 +33,14 @@ public class AdvancedSearchParser {
         }
 
         String key = token.substring(0, index).trim().toLowerCase();
-        String valueStr = token.substring(index + opUsed.length()).trim();
+        String valueStr = token.substring(index + opUsed.length()).trim().toLowerCase();
 
-        try {
-            Predicate<CardRules> predicate = null;
-            switch (key) {
-                case "cmc":
-                case "mv":
-                case "manavalue":
+        Predicate<CardRules> predicate = null;
+        switch (key) {
+            case "cmc":
+            case "mv":
+            case "manavalue":
+                try {
                     int cmcValue = Integer.parseInt(valueStr);
                     ComparableOp op = null;
                     switch (opUsed) {
@@ -57,65 +56,245 @@ public class AdvancedSearchParser {
                     if (op != null) {
                         predicate = CardRulesPredicates.cmc(op, cmcValue);
                     }
-                    break;
-                case "t":
-                case "type":
-                    switch (opUsed) {
-                        case ":":
-                        case "=":  predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr); break;
-                        case "!=": predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr).negate(); break;
-                    }
-                    break;
-                case "kw":
-                case "keyword":
-                    switch (opUsed) {
-                        case ":":
-                        case "=":  predicate = CardRulesPredicates.hasKeyword(valueStr); break;
-                        case "!=": predicate = CardRulesPredicates.hasKeyword(valueStr).negate(); break;
-                    }
-                    break;
-                case "c":
-                case "color":
-                    if (valueStr.equals("c")) {
-                        switch (opUsed) {
-                            case ":":
-                            case "=": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).isColorless(); break;
-                            case "!=":
-                            case ">": predicate = card -> !ColorSet.fromMask(card.getColor().getColor()).isColorless(); break;
-                        }
-                    } else if (valueStr.equals("m")) {
-                        switch (opUsed) {
-                            case ":":
-                            case "=": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).countColors() >= 2; break;
-                            case "!=":
-                            case "<": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).countColors() == 1; break;
-                        }
-                    } else {
-                        byte mask = 0;
-                        for (char c : valueStr.toCharArray()) {
-                            byte color = MagicColor.fromName(c);
-                            if (color == 0) {
-                                continue;
-                            }
-                            mask |= color;
-                        }
-                        final byte finalMask = mask;
+                }
+                catch (NumberFormatException ignored) {
+                    // Ignore and return null for invalid number formats
+                }
+
+                break;
+
+            case "t":
+            case "type":
+                switch (opUsed) {
+                    case ":":
+                    case "=": 
+                        predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr);
+                        break;
+
+                    case "!=":
+                        predicate = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, valueStr).negate();
+                        break;
+                }
+                break;
+
+            case "kw":
+            case "keyword":
+                switch (opUsed) {
+                    case ":":
+                    case "=":
+                        predicate = CardRulesPredicates.hasKeyword(valueStr);
+                        break;
+
+                    case "!=":
+                        predicate = CardRulesPredicates.hasKeyword(valueStr).negate();
+                        break;
+                }
+                break;
+
+            case "c":
+            case "color":
+                if (valueStr.matches("\\d+")) {
+                    try {
+                        byte colorCnt = Byte.parseByte(valueStr);
 
                         switch (opUsed) {
-                            case ":": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).hasAllColors(finalMask); break;
+                            case ":":
                             case "=": 
-                            case "!": predicate = card -> ColorSet.fromMask(card.getColor().getColor()).hasExactlyColor(finalMask); break;
+                                predicate = CardRulesPredicates.hasCntColors(colorCnt);
+                                break;
+                                
+                            case "!":
+                            case "!=":
+                                predicate = CardRulesPredicates.hasCntColors(colorCnt).negate();
+                                break;
+
+                            case ">=":
+                                predicate = CardRulesPredicates.hasAtLeastCntColors(colorCnt);
+                                break;
+
+                            case ">":
+                                predicate = CardRulesPredicates.hasMoreCntColors(colorCnt);
+                                break;
+
+                            case "<=":
+                                predicate = CardRulesPredicates.hasAtMostCntColors(colorCnt);
+                                break;
+
+                            case "<":
+                                predicate = CardRulesPredicates.hasLessCntColors(colorCnt);
+                                break;
                         }
                     }
-                    break;
-            }
-            if (predicate != null && negated) {
-                return predicate.negate();
-            }
-            return predicate;
-        } catch (NumberFormatException ignored) {
-            // Ignore and return null for invalid number formats
+                    catch (NumberFormatException ignored) {
+                        // Ignore and return null for invalid number formats
+                    }
+                } else {
+                    switch(valueStr) {
+                        case "c":
+                        case "colorless":
+                            switch (opUsed) {
+                                case ":":
+                                case "=": 
+                                case "<=":
+                                    predicate = CardRulesPredicates.IS_COLORLESS;
+                                    break;
+
+                                case "!=":
+                                case ">":
+                                    predicate = CardRulesPredicates.IS_COLORLESS.negate();
+                                    break;
+                            }
+                            break;
+
+                        case "m":
+                        case "multi":
+                        case "multicolor":
+                            switch (opUsed) {
+                                case "!":
+                                case ":":
+                                case "=": 
+                                case ">=":
+                                case ">": 
+                                    predicate = CardRulesPredicates.IS_MULTICOLOR;
+                                    break;
+
+                                case "!=":
+                                    predicate = CardRulesPredicates.IS_MONOCOLOR;
+                                    break;
+
+                                case "<":
+                                    predicate = CardRulesPredicates.hasAtMostCntColors((byte)1);
+                                    break;
+                            }
+                            break;
+
+                        default:
+                            byte givenMask = getColorMaskFromString(valueStr);
+                            switch (opUsed) {
+                                case ":":
+                                case ">=": 
+                                    predicate = card -> {
+                                        byte cardMask = card.getColor().getColor();
+
+                                        return (cardMask & givenMask) == givenMask;
+                                    };
+                                    break;
+
+                                case "!":
+                                case "=":
+                                    predicate = card -> card.getColor().getColor() == givenMask;
+                                    break;
+
+                                case "!=":
+                                    predicate = card -> card.getColor().getColor() != givenMask;
+                                    break;
+
+                                case ">":
+                                    predicate = card -> {
+                                        byte cardMask = card.getColor().getColor();
+                                        return (cardMask & givenMask) == givenMask && (cardMask & ~givenMask) != 0;
+                                    };
+                                    break;
+
+                                case "<=":
+                                    predicate = card -> {
+                                        byte cardMask = card.getColor().getColor();
+                                        return (cardMask & ~givenMask) == 0;
+                                    };
+                                    break;
+
+                                case "<":
+                                    predicate = card -> {
+                                        byte cardMask = card.getColor().getColor();
+                                        return (cardMask & ~givenMask) == 0 && cardMask != givenMask;
+                                    };
+                                    break;
+                            }
+                    }
+                }
         }
-        return null;
+
+        if (predicate == null) {
+            return null;
+        }
+
+        if (negated) {
+            return predicate.negate();
+        }
+
+        return predicate;
+    }
+
+    private static byte getColorMaskFromString(String valueStr) {
+        valueStr = valueStr.toLowerCase();
+
+        switch (valueStr) {
+            case "white": return MagicColor.WHITE;
+            case "blue": return MagicColor.BLUE;
+            case "black": return MagicColor.BLACK;
+            case "red": return MagicColor.RED;
+            case "green": return MagicColor.GREEN;
+
+            // Ravnica guilds + Strixhaven colleges
+            case "azorius": return MagicColor.WHITE | MagicColor.BLUE;
+            case "dimir": return MagicColor.BLUE | MagicColor.BLACK;
+            case "rakdos": return MagicColor.BLACK | MagicColor.RED;
+            case "gruul": return MagicColor.RED | MagicColor.GREEN;
+            case "selesnya": return MagicColor.WHITE | MagicColor.GREEN;
+            case "silverquill":
+            case "orzhov": return MagicColor.WHITE | MagicColor.BLACK;
+            case "prismari":
+            case "izzet": return MagicColor.BLUE | MagicColor.RED;
+            case "witherbloom":
+            case "golgari": return MagicColor.BLACK | MagicColor.GREEN;
+            case "lorehold":
+            case "boros": return MagicColor.WHITE | MagicColor.RED;
+            case "quandrix":
+            case "simic": return MagicColor.BLUE | MagicColor.GREEN;
+
+            // Alara Shards + New Capenna Families
+            case "brokers":
+            case "bant": return MagicColor.WHITE | MagicColor.BLUE | MagicColor.GREEN;
+            case "obscura":
+            case "esper": return MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK;
+            case "maestros":
+            case "grixis": return MagicColor.BLUE | MagicColor.BLACK | MagicColor.RED;
+            case "riveteers":
+            case "jund": return MagicColor.BLACK | MagicColor.RED | MagicColor.GREEN;
+            case "cabaretti":
+            case "naya": return MagicColor.WHITE | MagicColor.RED | MagicColor.GREEN;
+
+            // Tarkir Clans + Ikoria Triomes
+            case "indatha":
+            case "abzan": return MagicColor.WHITE | MagicColor.BLACK | MagicColor.GREEN;
+            case "raugrin":
+            case "jeskai": return MagicColor.WHITE | MagicColor.BLUE | MagicColor.RED;
+            case "zagoth":
+            case "sultai": return MagicColor.BLUE | MagicColor.BLACK | MagicColor.GREEN;
+            case "savai":
+            case "mardu": return MagicColor.WHITE | MagicColor.BLACK | MagicColor.RED;
+            case "ketria":
+            case "temur": return MagicColor.BLUE | MagicColor.RED | MagicColor.GREEN;
+
+            // Four-color Identities
+            case "chaos": return MagicColor.BLACK | MagicColor.GREEN | MagicColor.RED | MagicColor.BLUE;
+            case "aggression": return MagicColor.BLACK | MagicColor.GREEN | MagicColor.RED | MagicColor.WHITE;
+            case "altruism": return MagicColor.GREEN | MagicColor.RED | MagicColor.BLUE | MagicColor.WHITE;
+            case "growth": return MagicColor.BLACK | MagicColor.GREEN | MagicColor.BLUE | MagicColor.WHITE;
+            case "artifice": return MagicColor.BLACK | MagicColor.RED | MagicColor.BLUE | MagicColor.WHITE;
+
+            case "all": return MagicColor.ALL_COLORS;
+
+            default:
+                byte mask = 0;
+                for (char c : valueStr.toCharArray()) {
+                    byte color = MagicColor.fromName(c);
+                    if (color == 0) {
+                        continue;
+                    }
+                    mask |= color;
+                }
+                return mask;
+        }
     }
 }

@@ -248,6 +248,18 @@ public final class CardRulesPredicates {
         return new LeafColor(LeafColor.ColorOperator.CountColorsGreaterOrEqual, cntColors);
     }
 
+    public static Predicate<CardRules> hasMoreCntColors(final byte cntColors) {
+        return new LeafColor(LeafColor.ColorOperator.CountColorsGreater, cntColors);
+    }
+
+    public static Predicate<CardRules> hasAtMostCntColors(final byte cntColors) {
+        return new LeafColor(LeafColor.ColorOperator.CountColorsSmallerOrEqual, cntColors);
+    }
+
+    public static Predicate<CardRules> hasLessCntColors(final byte cntColors) {
+        return new LeafColor(LeafColor.ColorOperator.CountColorsSmaller, cntColors);
+    }
+
     public static Predicate<CardRules> hasColorIdentity(final int colormask) {
         return rules -> rules.getColorIdentity().hasNoColorsExcept(colormask);
     }
@@ -355,7 +367,15 @@ public final class CardRulesPredicates {
 
     private static class LeafColor implements Predicate<CardRules> {
         public enum ColorOperator {
-            CountColors, CountColorsGreaterOrEqual, HasAnyOf, HasAllOf, Equals, CanCast
+            CountColors,
+            CountColorsGreaterOrEqual,
+            CountColorsGreater,
+            CountColorsSmallerOrEqual,
+            CountColorsSmaller,
+            HasAnyOf,
+            HasAllOf,
+            Equals,
+            CanCast
         }
 
         private final LeafColor.ColorOperator op;
@@ -377,6 +397,12 @@ public final class CardRulesPredicates {
                 return cardColor.countColors() == this.color;
             case CountColorsGreaterOrEqual:
                 return cardColor.countColors() >= this.color;
+            case CountColorsGreater:
+                return cardColor.countColors() > this.color;
+            case CountColorsSmallerOrEqual:
+                return cardColor.countColors() <= this.color;
+            case CountColorsSmaller:
+                return cardColor.countColors() < this.color;
             case Equals:
                 return cardColor.isEqual(this.color);
             case HasAllOf:
