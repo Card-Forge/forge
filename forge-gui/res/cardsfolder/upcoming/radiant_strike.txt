@@ -1,0 +1,6 @@
+Name:Radiant Strike
+ManaCost:3 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Artifact,Creature.tapped | TgtPrompt$ Select target artifact or tapped creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or tapped creature. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+Oracle:Destroy target artifact or tapped creature. You gain 3 life.
