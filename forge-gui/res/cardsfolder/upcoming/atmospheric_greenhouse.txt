@@ -1,4 +1,4 @@
-Name:Atmoshperic Greenhouse
+Name:Atmospheric Greenhouse
 ManaCost:4 G
 Types:Artifact Spacecraft
 PT:5/4
