@@ -444,8 +444,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         if(isLimitedEditor()) {
             if(deckController.getDeck() == null)
                 this.deck = new Deck();
-            if(isDraftEditor() && !isDrafting())
-                tabPages.get(0).hideTab(); //hide Draft Pack page if editing existing draft deck
+            if(isDraftEditor() && !isDrafting() && catalogPage != null)
+                catalogPage.hideTab(); //hide Draft Pack page if editing existing draft deck
         }
 
         //Initialize pages.
