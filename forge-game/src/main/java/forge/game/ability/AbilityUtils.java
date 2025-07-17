@@ -794,7 +794,7 @@ public class AbilityUtils {
     public static List<GameEntity> getDefinedEntities(final Card card, final String[] def, final CardTraitBase sa) {
         final List<GameEntity> objects = new ArrayList<>();
         for (String d : def) {
-            objects.addAll(AbilityUtils.getDefinedEntities(card, d, sa));
+            objects.addAll(getDefinedEntities(card, d, sa));
         }
         return objects;
     }
@@ -1351,7 +1351,7 @@ public class AbilityUtils {
             }
             return;
         }
-        AbilityUtils.resolveApiAbility(sa, game);
+        resolveApiAbility(sa, game);
     }
 
     private static void resolvePreAbilities(final SpellAbility sa, final Game game) {
@@ -1373,7 +1373,7 @@ public class AbilityUtils {
             AbilitySub giftAbility = (AbilitySub) sa.getAdditionalAbility("GiftAbility");
             if (giftAbility != null) {
                 giftAbility.setActivatingPlayer(controller);
-                AbilityUtils.resolveApiAbility(giftAbility, game);
+                resolveApiAbility(giftAbility, game);
             }
         }
     }
@@ -1395,7 +1395,7 @@ public class AbilityUtils {
         } else {
             game.getTriggerHandler().resetActiveTriggers();
         }
-        AbilityUtils.resolveApiAbility(abSub, game);
+        resolveApiAbility(abSub, game);
     }
 
     private static void resolveApiAbility(final SpellAbility sa, final Game game) {
@@ -2486,7 +2486,7 @@ public class AbilityUtils {
         if (sq[0].startsWith("TypesSharedWith")) {
             Set<CardType.CoreType> thisTypes = Sets.newHashSet(c.getType().getCoreTypes());
             Set<CardType.CoreType> matches = new HashSet<>();
-            for (Card c1 : AbilityUtils.getDefinedCards(ctb.getHostCard(), l[0].split(" ", 2)[1], ctb)) {
+            for (Card c1 : getDefinedCards(ctb.getHostCard(), l[0].split(" ", 2)[1], ctb)) {
                 for (CardType.CoreType type : Sets.newHashSet(c1.getType().getCoreTypes())) {
                     if (thisTypes.contains(type)) {
                         matches.add(type);
