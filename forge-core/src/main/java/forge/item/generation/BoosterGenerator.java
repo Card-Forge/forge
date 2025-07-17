@@ -72,7 +72,7 @@ public class BoosterGenerator {
         String passedEdition = sheetName.split(" ")[0];
         CardEdition realEdition = StaticData.instance().getEditions().get(passedEdition);
 
-        if (realEdition == null) {
+        if (realEdition.getCode().equals(passedEdition)) {
             staticSheetsCorrespondance.put(sheetName, sheetName);
 
             return StaticData.instance().getPrintSheets().get(sheetName);
