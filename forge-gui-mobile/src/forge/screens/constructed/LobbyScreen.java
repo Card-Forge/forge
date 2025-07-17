@@ -589,6 +589,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     @Override
+    public void onActivate() {
+        cbGamesInMatch.setSelectedItem(FModel.getPreferences().getPref(FPref.UI_MATCHES_PER_GAME));
+    }
+
+    @Override
     public void update(final boolean fullUpdate) {
         int playerCount = lobby.getNumberOfSlots();
 
