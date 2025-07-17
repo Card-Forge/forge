@@ -241,7 +241,7 @@ public class RewardData implements Serializable {
                         for(String restrictedCard: configData.restrictedCards)
                         {
                             allEditions.removeIf(
-                                    cardEdition -> cardEdition.getAllCardsInSet().stream().anyMatch(
+                                    cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
                                             o -> o.name().equals(restrictedCard))
                             );
                         }

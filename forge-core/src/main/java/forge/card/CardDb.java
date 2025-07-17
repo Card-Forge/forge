@@ -659,7 +659,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if(cardFromSet != null && request.flags != null)
                 cardFromSet = cardFromSet.copyWithFlags(request.flags);
 
-            return cardFromSet;
+            if (cardFromSet != null)
+                return cardFromSet;
         }
 
         // 2. Card lookup in edition with specified filter didn't work.
