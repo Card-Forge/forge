@@ -152,11 +152,8 @@ public class MakeCardEffect extends SpellAbilityEffect {
                             pc = Iterables.getLast(IterableUtil.filter(pack, PaperCardPredicates.name(name)));
                         } else {
                             // Try to get the card in the sa host's current edition
-                            pc = StaticData.instance().getCommonCards().getCard(name, sa.getHostCard() != null ? sa.getHostCard().getSetCode() : CardEdition.UNKNOWN_CODE);
-
-                            if (pc == null) {
-                                pc = StaticData.instance().getCommonCards().getCard(name);
-                            }
+                            String editionCode = sa.getHostCard() != null ? sa.getHostCard().getSetCode() : CardEdition.UNKNOWN_CODE;
+                            pc = StaticData.instance().getCommonCards().getCard(name, editionCode);
                         }
                         Card card = Card.fromPaperCard(pc, player);
 
