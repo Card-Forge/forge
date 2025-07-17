@@ -27,7 +27,6 @@ public class QuestLogScene extends UIScene {
     private QuestLogScene() {
         super(Forge.isLandscapeMode() ? "ui/quests.json" : "ui/quests_portrait.json");
 
-
         scrollWindow = ui.findActor("scrollWindow");
         root = ui.findActor("questList");
         detailRoot = ui.findActor("questDetails");
@@ -38,9 +37,7 @@ public class QuestLogScene extends UIScene {
         ui.onButtonPress("status", QuestLogScene.this::status);
         ui.onButtonPress("backToList", QuestLogScene.this::backToList);
 
-
-        //Todo - refactor below, replace buttons in landscape
-
+        // TODO - refactor below, replace buttons in landscape
         scrollContainer = new Table(Controls.getSkin());
         scrollContainer.row();
 
@@ -77,8 +74,11 @@ public class QuestLogScene extends UIScene {
         ScrollPane scroller = new ScrollPane(scrollContainer);
         root.add(scroller).colspan(3).fill().expand();
 
-
-
+        backToListButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                buildList();
+            }
+        });
     }
 
     private static QuestLogScene object;
@@ -92,16 +92,12 @@ public class QuestLogScene extends UIScene {
     }
 
     @Override
-    public void dispose() {
-
-    }
+    public void dispose() { }
 
     @Override
     public void enter() {
         super.enter();
         buildList();
-
-
     }
 
     public void buildList(){
@@ -116,7 +112,7 @@ public class QuestLogScene extends UIScene {
             nameLabel.setColor(Color.BLACK);
             scrollContainer.add(nameLabel).align(Align.left).expandX();
             Button details = Controls.newTextButton(Forge.getLocalizer().getMessage("lblDetails"));
-            details.addListener( new ClickListener(){
+            details.addListener(new ClickListener() {
                 public void clicked(InputEvent event, float x, float y){
                     loadDetailsPane(quest);
                 }
@@ -128,7 +124,7 @@ public class QuestLogScene extends UIScene {
         performTouch(scrollPaneOfActor(scrollContainer)); //can use mouse wheel if available to scroll
     }
 
-    private void backToList(){
+    private void backToList() {
         abandonQuestButton.setVisible(false);
         trackButton.setVisible(false);
         backToListButton.setVisible(false);
@@ -137,8 +133,8 @@ public class QuestLogScene extends UIScene {
         detailRoot.setVisible(false);
     }
 
-    private void loadDetailsPane(AdventureQuestData quest){
-        if (quest == null){
+    private void loadDetailsPane(AdventureQuestData quest) {
+        if (quest == null) {
             return;
         }
         root.setVisible(false);
@@ -146,16 +142,15 @@ public class QuestLogScene extends UIScene {
         detailScrollContainer.clear();
         detailScrollContainer.row();
         trackButton.setText(quest.isTracked?Forge.getLocalizer().getMessage("lblUntrackQuest"):Forge.getLocalizer().getMessage("lblTrackQuest"));
-        trackButton.addListener( new ClickListener(){
-            public void clicked(InputEvent event, float x, float y){
+        trackButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
                 toggleTracked(quest);
             }
         });
 
         abandonQuestButton.setColor(Color.RED);
-        abandonQuestButton.addListener( new ClickListener(){
-            public void clicked(InputEvent event, float x, float y){
-
+        abandonQuestButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
                 Dialog confirm = createGenericDialog("", Forge.getLocalizer().getMessage("lblAbandonQuestConfirm"),Forge.getLocalizer().getMessage("lblYes"),Forge.getLocalizer().getMessage("lblNo"), () -> abandonQuest(quest), null);
                 showDialog(confirm);
             }
@@ -208,7 +203,7 @@ public class QuestLogScene extends UIScene {
         }
     }
 
-    private void toggleTracked(AdventureQuestData quest){
+    private void toggleTracked(AdventureQuestData quest) {
         if (quest.isTracked){
             quest.isTracked = false;
             trackButton.setText(Forge.getLocalizer().getMessage("lblTrackQuest"));
@@ -225,7 +220,7 @@ public class QuestLogScene extends UIScene {
     @Override
     public boolean back(){
         //Needed so long as quest log and stats are separate scenes that link to each other
-        Forge.switchScene(lastGameScene==null?GameScene.instance():lastGameScene);
+        Forge.switchScene(lastGameScene==null ? GameScene.instance() : lastGameScene);
         return true;
     }
 
@@ -234,5 +229,4 @@ public class QuestLogScene extends UIScene {
         AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
         buildList();
     }
-
 }
