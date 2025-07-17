@@ -1134,8 +1134,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public Predicate<? super PaperCard> wasPrintedInSets(Collection<String> setCodes) {
         Set<String> sets = new HashSet<>(setCodes);
         return paperCard -> getAllCards(paperCard.getName()).stream()
-                .map(PaperCard::getEdition)
-                .anyMatch(sets::contains);
+                .map(PaperCard::getEdition).anyMatch(editionCode ->
+                    sets.contains(editionCode) &&
+                        StaticData.instance().getCardEdition(editionCode).isCardObtainable(paperCard.getName())
+                );
     }
 
     // This Predicate validates if a card is legal in a given format (identified by the list of allowed sets)

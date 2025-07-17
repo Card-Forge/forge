@@ -118,6 +118,10 @@ public class RewardData implements Serializable {
                 return false;
             return !Arrays.asList(configData.restrictedCards).contains(input.getName());
         });
+
+        // Only allow obtainable cards
+        allCards = IterableUtil.filter(allCards, input -> StaticData.instance().getCardEdition(input.getEdition()).isCardObtainable(input.getCardName()));
+
         //Filter AI cards for enemies.
         allEnemyCards= IterableUtil.filter(allCards, input -> {
             if (input == null) return false;
