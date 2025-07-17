@@ -2,7 +2,6 @@
 Code=BRO
 Date=2022-11-18
 Name=The Brothers' War
-Code2=BRO
 Type=Expansion
 BoosterCovers=3
 Booster=9 Common:fromsheet("BRO cards"), 3 Uncommon:fromSheet("BRO cards"), 1 RareMythic:fromSheet("BRO cards"), 1 fromSheet("BRO lands"), 1 fromSheet("BRR cards")
@@ -173,7 +172,7 @@ ScryfallCode=BRO
 160 U Heavyweight Demolisher @Svetlin Velinov
 161 C Mishra's Juggernaut @Steve Prescott
 162 U Mishra's Research Desk @Matt Stewart
-163 R Phyrexian Dragon Engine @Chris Rahn
+163a R Phyrexian Dragon Engine @Chris Rahn
 164 C Scrapwork Mutt @Sidharth Chaturvedi
 165 M Skitterbeam Battalion @Leon Tukker
 166 U Alloy Animist @Kim Sokol
@@ -266,7 +265,7 @@ ScryfallCode=BRO
 253 U Thran Power Suit @Raf Kayupov
 254 R Thran Spider @Joshua Cairos
 255 C Tower Worker @Gaboleps
-256 R Argoth, Sanctum of Nature @Cristi Balanescu
+256a R Argoth, Sanctum of Nature @Cristi Balanescu
 257 R Battlefield Forge @Thomas Stoop
 258 R Blast Zone @Jorge Jacinto
 259 R Brushland @Thomas Stoop
