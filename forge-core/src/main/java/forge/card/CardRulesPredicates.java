@@ -67,6 +67,10 @@ public final class CardRulesPredicates {
         return new LeafNumber(LeafNumber.CardField.PT, op, what);
     }
 
+    public static Predicate<CardRules> loyalty(final ComparableOp op, final int what) {
+        return new LeafNumber(LeafNumber.CardField.LOYALTY, op, what);
+    }
+
     /**
      * Rules.
      *
@@ -422,7 +426,7 @@ public final class CardRulesPredicates {
 
     public static class LeafNumber implements Predicate<CardRules> {
         public enum CardField {
-            CMC, GENERIC_COST, POWER, TOUGHNESS, PT
+            CMC, GENERIC_COST, POWER, TOUGHNESS, PT, LOYALTY
         }
 
         private final LeafNumber.CardField field;
@@ -443,6 +447,18 @@ public final class CardRulesPredicates {
                 return this.op(card.getManaCost().getCMC(), this.operand);
             case GENERIC_COST:
                 return this.op(card.getManaCost().getGenericCost(), this.operand);
+            case LOYALTY:
+                String sLoyalty = card.getInitialLoyalty();
+                if (StringUtils.isBlank(sLoyalty) || !sLoyalty.matches("\\d+")) {
+                    return false;
+                }
+                try {
+                    value = Integer.parseInt(sLoyalty) ;
+                }
+                catch (NumberFormatException ignored) {
+                    return false;
+                }
+                return this.op(value, this.operand);
             case POWER:
                 value = card.getIntPower();
                 return value != Integer.MAX_VALUE && this.op(value, this.operand);

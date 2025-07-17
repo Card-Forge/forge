@@ -112,7 +112,7 @@ public abstract class AdvancedSearchParser {
                 break;
 
             case "pt":
-            case "powtou": {
+            case "powtou":
                 if (valueStr.matches("\\d+")) {
                     try {
                         int power = Integer.parseInt(valueStr);
@@ -124,7 +124,20 @@ public abstract class AdvancedSearchParser {
                     }
                 }
                 break;
-            }
+
+            case "loy":
+            case "loyalty":
+                if (valueStr.matches("\\d+")) {
+                    try {
+                        int loyalty = Integer.parseInt(valueStr);
+                        predicate = CardRulesPredicates.loyalty(op, loyalty);
+                    }
+                    catch (NumberFormatException ignored) {
+                        // Ignore and return null for invalid number formats
+                    }
+                }
+                break;
+
             case "cmc":
             case "mv":
             case "manavalue":
