@@ -42,7 +42,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-
 /**
  * <p>
  * CardSet class.
@@ -384,6 +383,15 @@ public final class CardEdition implements Comparable<CardEdition> {
     public List<EditionEntry> getCards() { return cardMap.get(EditionSectionWithCollectorNumbers.CARDS.getName()); }
     public List<EditionEntry> getRebalancedCards() { return cardMap.get(EditionSectionWithCollectorNumbers.REBALANCED.getName()); }
     public List<EditionEntry> getFunnyEternalCards() { return cardMap.get(EditionSectionWithCollectorNumbers.ETERNAL.getName()); }
+    public List<EditionEntry> getObtainableCards() { 
+        List<EditionEntry> allCards = new ArrayList<>(getAllCardsInSet());
+        List<EditionEntry> conjuredCards = cardMap.get(EditionSectionWithCollectorNumbers.CONJURED.getName());
+        if (conjuredCards != null) {
+            allCards.removeAll(conjuredCards);
+        }
+
+        return allCards; 
+    }
     public List<EditionEntry> getAllCardsInSet() {
         return cardsInSet;
     }
