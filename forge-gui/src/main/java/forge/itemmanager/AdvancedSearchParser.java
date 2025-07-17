@@ -67,9 +67,7 @@ public abstract class AdvancedSearchParser {
                         creatureOnly = true;
                         predicate = CardRulesPredicates.power(op, power);
                     }
-                    catch (NumberFormatException ignored) {
-                        // Ignore and return null for invalid number formats
-                    }
+                    catch (NumberFormatException ignored) {}
                 } else {
                     switch(valueStr) {
                         case "toughness":
@@ -93,9 +91,7 @@ public abstract class AdvancedSearchParser {
                         creatureOnly = true;
                         predicate = CardRulesPredicates.toughness(op, toughness);
                     }
-                    catch (NumberFormatException ignored) {
-                        // Ignore and return null for invalid number formats
-                    }
+                    catch (NumberFormatException ignored) {}
                 } else {
                     switch(valueStr) {
                         case "power":
@@ -119,9 +115,7 @@ public abstract class AdvancedSearchParser {
                         creatureOnly = true;
                         predicate = CardRulesPredicates.pt(op, power);
                     }
-                    catch (NumberFormatException ignored) {
-                        // Ignore and return null for invalid number formats
-                    }
+                    catch (NumberFormatException ignored) {}
                 }
                 break;
 
@@ -132,9 +126,7 @@ public abstract class AdvancedSearchParser {
                         int loyalty = Integer.parseInt(valueStr);
                         predicate = CardRulesPredicates.loyalty(op, loyalty);
                     }
-                    catch (NumberFormatException ignored) {
-                        // Ignore and return null for invalid number formats
-                    }
+                    catch (NumberFormatException ignored) {}
                 }
                 break;
 
@@ -145,9 +137,7 @@ public abstract class AdvancedSearchParser {
                     int cmcValue = Integer.parseInt(valueStr);
                     predicate = CardRulesPredicates.cmc(op, cmcValue);
                 }
-                catch (NumberFormatException ignored) {
-                    // Ignore and return null for invalid number formats
-                }
+                catch (NumberFormatException ignored) {}
 
                 break;
 
@@ -213,9 +203,7 @@ public abstract class AdvancedSearchParser {
                                 break;
                         }
                     }
-                    catch (NumberFormatException ignored) {
-                        // Ignore and return null for invalid number formats
-                    }
+                    catch (NumberFormatException ignored) {}
                 } else {
                     switch(valueStr) {
                         case "c":
@@ -359,11 +347,6 @@ public abstract class AdvancedSearchParser {
             }
         }
         if (index < 0) {
-            return null;
-        }
-
-        ComparableOp op = getComparableOp(opUsed);
-        if (op == null) {
             return null;
         }
 
