@@ -852,10 +852,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
 
             CardEdition baseResult = super.get(code);
-
-            return baseResult == null
-                ? aliasToEdition.get(code)
-                : baseResult;
+            return baseResult == null ? aliasToEdition.get(code) : baseResult;
         }
 
         public Iterable<CardEdition> getOrderedEditions() {
