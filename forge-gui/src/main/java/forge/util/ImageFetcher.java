@@ -223,8 +223,16 @@ public abstract class ImageFetcher {
             }
             final String cardCollectorNumber = paperCard.getCollectorNumber();
             if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
-                // This function adds to downloadUrls for us
-                this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
+                // Dungeons are in the tokens set
+                if (paperCard.getRules().getType().isDungeon()) {
+                    CardEdition edition = StaticData.instance().getEditions().get(paperCard.getEdition());
+                    String tokensCode = edition.getTokensCode();
+                    String langCode = edition.getCardsLangCode();
+
+                    downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallTokenDownloadUrl(cardCollectorNumber, tokensCode, langCode, face));
+                } else {
+                    this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
+                }
             }
         } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
             // extra logic for hidden card to not clog the other logic
