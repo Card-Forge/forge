@@ -1644,7 +1644,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 needRefreshWhenShown = true;
                 //Throw in the all cards that might be requested by other pages. The other pages will determine if they
                 //can actually be added, and we'll clear these out in the real refresh.
-                cardManager.setPool(parentScreen.getDeck().getAllCardsInASinglePool(), true);
+                cardManager.setPool(parentScreen.getDeck().getAllCardsInASinglePool(true, true), true);
             }
             else {
                 scheduleRefresh();

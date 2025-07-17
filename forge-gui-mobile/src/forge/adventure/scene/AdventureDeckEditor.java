@@ -114,7 +114,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override public boolean usePlayerInventory() { return false; }
         @Override public boolean isLimited() { return true; }
-        @Override public ItemPool<PaperCard> getCardPool(boolean wantUnique) { return deckToPreview.getAllCardsInASinglePool(); }
+        @Override public ItemPool<PaperCard> getCardPool(boolean wantUnique) { return deckToPreview.getAllCardsInASinglePool(true, true); }
         @Override public boolean allowsCardReplacement() { return false; }
 
         @Override
@@ -204,12 +204,12 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public ItemPool<PaperCard> getCardPool() {
-            return contents.getAllCardsInASinglePool();
+            return contents.getAllCardsInASinglePool(true, true);
         }
 
         @Override
         public void refresh() {
-            if (contents != null) cardManager.setPool(contents.getAllCardsInASinglePool());
+            if (contents != null) cardManager.setPool(contents.getAllCardsInASinglePool(true, true));
         }
 
         @Override
