@@ -437,6 +437,15 @@ public final class CardEdition implements Comparable<CardEdition> {
         return false;
     }
 
+    public boolean isCardObtainable(String cardName) {
+        for (EditionEntry ee : cardMap.get(EditionSectionWithCollectorNumbers.CONJURED.getName())) {
+            if (ee.name.equals(cardName)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
     public Multimap<String, EditionEntry> getTokens() { return tokenMap; }
@@ -547,6 +556,9 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         List<PrintSheet> sheets = Lists.newArrayList();
         for (String sectionName : cardMap.keySet()) {
+            if (sectionName.equals(EditionSectionWithCollectorNumbers.CONJURED.getName())) {
+                continue;
+            }
             PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), sectionName));
 
             List<EditionEntry> cards = cardMap.get(sectionName);
