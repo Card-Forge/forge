@@ -18,6 +18,7 @@ import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ICDoc;
 import forge.itemmanager.ItemManagerConfig;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -72,6 +73,8 @@ public enum CSubmenuDraft implements ICDoc {
 
         view.getRadAll().addActionListener(radioAction);
         view.getRadMultiple().addActionListener(radioAction);
+
+        view.getGamesInMatch().addItemListener(e -> updateGamesInMatchPrefs());
     }
 
     /* (non-Javadoc)
@@ -97,16 +100,24 @@ public enum CSubmenuDraft implements ICDoc {
                 view.getBtnBuildDeck().requestFocusInWindow();
             }
         });
+
+        syncGamesInMatchFromPrefs();
     }
 
     private void startGame(final GameType gameType) {
         final Localizer localizer = Localizer.getInstance();
-        final boolean gauntlet = VSubmenuDraft.SINGLETON_INSTANCE.isGauntlet();
-        final DeckProxy humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
+        final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
+        final boolean gauntlet = view.isGauntlet();
+        final DeckProxy humanDeck = view.getLstDecks().getSelectedItem();
+        final String gamesInMatch = view.getGamesInMatch().getSelectedItem().toString();
 
         if (humanDeck == null) {
             FOptionPane.showErrorDialog(localizer.getMessage("lblNoDeckSelected"), localizer.getMessage("lblNoDeck"));
             return;
+        }
+
+        if (!gamesInMatch.equals(FPref.UI_MATCHES_PER_GAME)) {
+            FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
@@ -244,6 +255,29 @@ public enum CSubmenuDraft implements ICDoc {
             combo.addItem("4");
             combo.addItem("5");
         }
+    }
+
+    /** Saves the number of games in match select to preferences. */
+    private void updateGamesInMatchPrefs() {
+      final ForgePreferences prefs = FModel.getPreferences();
+      final JComboBox<String> gamesInMatch = VSubmenuDraft.SINGLETON_INSTANCE.getGamesInMatch();
+      final String selectedItem = (String) gamesInMatch.getSelectedItem();
+      if (selectedItem != null && !selectedItem.isEmpty()) {
+          prefs.setPref(FPref.UI_MATCHES_PER_GAME, selectedItem);
+          prefs.save();
+      }
+    }
+
+    /** Saves Games in match selection **/
+    private void syncGamesInMatchFromPrefs() {
+      final ForgePreferences prefs = FModel.getPreferences();
+      final JComboBox<String> gamesInMatch = VSubmenuDraft.SINGLETON_INSTANCE.getGamesInMatch();
+      final String defaultGamesInMatch = prefs.getPref(FPref.UI_MATCHES_PER_GAME);
+      if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
+          gamesInMatch.setSelectedItem("3");
+      } else {
+          gamesInMatch.setSelectedItem(defaultGamesInMatch);
+      }
     }
 
 }

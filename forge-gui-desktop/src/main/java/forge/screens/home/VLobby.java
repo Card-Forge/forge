@@ -74,7 +74,7 @@ public class VLobby implements ILobbyView {
 
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
-    private final JComboBox gamesInMatch = new JComboBox(new String[] {"1","3","5"});
+    private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
 
@@ -182,9 +182,6 @@ public class VLobby implements ILobbyView {
             btnStart.addActionListener(arg0 -> {
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
-                    if (!gamesInMatch.getSelectedItem().equals(FPref.UI_MATCHES_PER_GAME)) {
-                        FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, (String) gamesInMatch.getSelectedItem());
-                    }
                     startGame.run();
                 }
             });
@@ -193,10 +190,11 @@ public class VLobby implements ILobbyView {
         if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
             defaultGamesInMatch = "3";
         }
+
         gamesInMatchFrame.add(newLabel(localizer.getMessage("lblGamesInMatch")), "w 150px!, h 30px!");
         gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
-        gamesInMatch.setSelectedItem(defaultGamesInMatch);
+
         pnlStart.add(gamesInMatchFrame);
     }
 
@@ -857,6 +855,11 @@ public class VLobby implements ILobbyView {
     /** Return the Vanguard avatars not flagged RemoveDeck:All or RemoveDeck:Random. */
     public List<PaperCard> getNonRandomAiAvatars() {
         return nonRandomAiAvatars;
+    }
+
+    /** Return the gamesInMatch */
+    public JComboBox<String> getGamesInMatch() {
+      return gamesInMatch;
     }
 
     /** Populate vanguard lists. */

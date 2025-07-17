@@ -59,7 +59,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
     private final JComboBox<String> cbOpponent = new JComboBox<>();
 
-    private final JComboBox gamesInMatch = new JComboBox(new String[] {"1","3","5"});
+    private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
 
     private final JLabel lblInfo = new FLabel.Builder()
@@ -169,6 +169,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     public JRadioButton getRadSingle() { return radSingle; }
     public JRadioButton getRadMultiple() { return radMultiple; }
     public JRadioButton getRadAll() { return radAll; }
+    public JComboBox<String> getGamesInMatch() { return gamesInMatch; }
 
     //========== Overridden from IVDoc
 

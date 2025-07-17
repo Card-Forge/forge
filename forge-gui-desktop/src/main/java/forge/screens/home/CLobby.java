@@ -1,8 +1,11 @@
 package forge.screens.home;
 
+import java.awt.event.ItemEvent;
+
 import java.util.Arrays;
 import java.util.Vector;
 
+import javax.swing.*;
 import javax.swing.SwingUtilities;
 
 import com.google.common.collect.Iterables;
@@ -54,6 +57,7 @@ public class CLobby {
             // General updates when switching back to this view
             view.getBtnStart().requestFocusInWindow();
         });
+        syncGamesInMatchFromPrefs();
     }
 
     public void initialize() {
@@ -72,5 +76,34 @@ public class CLobby {
         // Pre-select checkboxes
         view.getCbSingletons().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_SINGLETONS));
         view.getCbArtifacts().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+
+        view.getGamesInMatch().addItemListener(e -> {
+          if (e.getStateChange() == ItemEvent.SELECTED) {
+            updateGamesInMatchPrefs();
+          }
+        });
+    }
+
+    /** Saves the number of games in match select to preferences. */
+    private void updateGamesInMatchPrefs() {
+        final ForgePreferences prefs = FModel.getPreferences();
+        final JComboBox<String> gamesInMatch = view.getGamesInMatch();
+        final String selectedItem = (String) gamesInMatch.getSelectedItem();
+        if (selectedItem != null && !selectedItem.isEmpty()) {
+            prefs.setPref(FPref.UI_MATCHES_PER_GAME, selectedItem);
+            prefs.save();
+        }
+    }
+
+    /** Saves Games in match selection **/
+    private void syncGamesInMatchFromPrefs() {
+        final ForgePreferences prefs = FModel.getPreferences();
+        final JComboBox<String> gamesInMatch = view.getGamesInMatch();
+        final String defaultGamesInMatch = prefs.getPref(FPref.UI_MATCHES_PER_GAME);
+        if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
+            gamesInMatch.setSelectedItem("3");
+        } else {
+            gamesInMatch.setSelectedItem(defaultGamesInMatch);
+        }
     }
 }
