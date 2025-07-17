@@ -4,6 +4,7 @@ Date=2014-09-05
 Name=Duel Decks: Speed vs. Cunning
 Type=Duel_Deck
 ScryfallCode=DDN
+TokensCode=DDN
 
 [cards]
 1 M Zurgo Helmsmasher @Ryan Alexander Lee
@@ -89,4 +90,4 @@ ScryfallCode=DDN
 81 L Plains @Andreas Rocha
 
 [tokens]
-r_1_1_goblin
+82 r_1_1_goblin @Karl Kopinski
