@@ -150,7 +150,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         deck = startingDeck;
         decks.set(0, deck);
 
-        cards.addAllFlat(deck.getAllCardsInASinglePool().toFlatList());
+        cards.addAllFlat(deck.getAllCardsInASinglePool(true, true).toFlatList());
 
         this.difficultyData.startingLife = difficultyData.startingLife;
         this.difficultyData.startingMoney = difficultyData.startingMoney;
@@ -421,6 +421,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         deck.getMain().addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deckCards"))));
         if (data.containsKey("sideBoardCards"))
             deck.getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards"))));
+        if(data.containsKey("attractionDeckCards"))
+            deck.getOrCreate(DeckSection.Attractions).addAll(CardPool.fromCardList(List.of((String[]) data.readObject("attractionDeckCards"))));
+        if(data.containsKey("contraptionDeckCards")) //TODO: Generalize this. Can't we just serialize the whole deck?
+            deck.getOrCreate(DeckSection.Contraptions).addAll(CardPool.fromCardList(List.of((String[]) data.readObject("contraptionDeckCards"))));
 
         if (data.containsKey("characterFlagsKey") && data.containsKey("characterFlagsValue")) {
             String[] keys = (String[]) data.readObject("characterFlagsKey");
@@ -475,6 +479,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 decks.get(i).getMain().addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i))));
                 if (data.containsKey("sideBoardCards_" + i))
                     decks.get(i).getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards_" + i))));
+                if (data.containsKey("attractionDeckCards_" + i))
+                    decks.get(i).getOrCreate(DeckSection.Attractions).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("attractionDeckCards_" + i))));
+                if (data.containsKey("contraptionDeckCards_" + i))
+                    decks.get(i).getOrCreate(DeckSection.Contraptions).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("contraptionDeckCards_" + i))));
             }
             // In case we allow removing decks from the deck selection GUI, populate up to the minimum
             for (int i = dynamicDeckCount++; i < MIN_DECK_COUNT; i++) {
@@ -640,6 +648,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("deckCards", deck.getMain().toCardList("\n").split("\n"));
         if (deck.get(DeckSection.Sideboard) != null)
             data.storeObject("sideBoardCards", deck.get(DeckSection.Sideboard).toCardList("\n").split("\n"));
+        if (deck.get(DeckSection.Attractions) != null)
+            data.storeObject("attractionDeckCards", deck.get(DeckSection.Attractions).toCardList("\n").split("\n"));
+        if (deck.get(DeckSection.Contraptions) != null)
+            data.storeObject("contraptionDeckCards", deck.get(DeckSection.Contraptions).toCardList("\n").split("\n"));
 
         // save decks dynamically
         data.store("deckCount", getDeckCount());
@@ -648,6 +660,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             data.storeObject("deck_" + i, decks.get(i).getMain().toCardList("\n").split("\n"));
             if (decks.get(i).get(DeckSection.Sideboard) != null)
                 data.storeObject("sideBoardCards_" + i, decks.get(i).get(DeckSection.Sideboard).toCardList("\n").split("\n"));
+            if (decks.get(i).get(DeckSection.Attractions) != null)
+                data.storeObject("attractionDeckCards_" + i, decks.get(i).get(DeckSection.Attractions).toCardList("\n").split("\n"));
+            if (decks.get(i).get(DeckSection.Contraptions) != null)
+                data.storeObject("contraptionDeckCards_" + i, decks.get(i).get(DeckSection.Contraptions).toCardList("\n").split("\n"));
         }
         data.store("selectedDeckIndex", selectedDeckIndex);
         data.storeObject("cards", cards.toCardList("\n").split("\n"));
