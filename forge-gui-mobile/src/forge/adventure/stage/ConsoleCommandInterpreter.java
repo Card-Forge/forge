@@ -282,9 +282,13 @@ public class ConsoleCommandInterpreter {
             return "Added all cards from: " + edition.getCode();
         });
         registerCommand(new String[]{"give", "boosters"}, s -> {
-            if (s.length < 1) return "Command needs at least 1 parameter: Edition code.";
+            if (s.length < 1)
+                return "Command needs at least 1 parameter: Edition code.";
             CardEdition edition = StaticData.instance().getCardEdition(s[0]);
-            if (edition == null) return "Cannot find edition: " + s[0];
+            if (edition == null)
+                return "Cannot find edition: " + s[0];
+            if (!edition.hasBoosterTemplate())
+                return edition.getCode() + " doesn't have a booster template.";
 
             int amount = 1;
             if (s.length >= 2) {
@@ -299,7 +303,7 @@ public class ConsoleCommandInterpreter {
 
             return "Added " + amount + " " + edition.getCode() + " booster(s)";
         });
-        registerCommand(new String[]{"clearNoSell"}, s -> {
+        registerCommand(new String[]{"clearnosell"}, s -> {
             CardPool cards = Current.player().getCards();
             for(PaperCard c : cards.getFilteredPool(c -> c.getMarkedFlags().noSellValue).toFlatList()) {
                 cards.remove(c);
