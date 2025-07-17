@@ -1,19 +1,19 @@
 package forge.itemmanager;
 
-import forge.StaticData;
-import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRulesPredicates.LeafNumber;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
+import forge.itemmanager.advancedsearchparsers.InParser;
+import forge.itemmanager.advancedsearchparsers.RarityParser;
 import forge.util.ComparableOp;
 import forge.util.PredicateString.StringOp;
 
 import java.util.function.Predicate;
 
-public class AdvancedSearchParser {
+public abstract class AdvancedSearchParser {
 
     public static Predicate<CardRules> parseAdvancedRulesToken(String token) {
         boolean negated = false;
@@ -309,7 +309,7 @@ public class AdvancedSearchParser {
 
                         break;
                 }
-                    
+                break;
         }
 
         if (predicate == null) {
@@ -380,30 +380,48 @@ public class AdvancedSearchParser {
                 switch (opUsed) {
                     case ":":
                     case "=":
-                        predicate = c -> {
-                            CardEdition e = StaticData.instance().getEditions().get(valueStr);
+                        predicate = InParser.handle(valueStr);
+                        break;
+                    
+                    case "!=":
+                        predicate = InParser.handle(valueStr).negate();
+                        break;
 
-                            if (e == null) {
-                                return false;
-                            }
+                }
+                break;
 
-                            return !e.getCardInSet(c.getName()).isEmpty();
-                        };
+            case "r":
+            case "rarity":
+                switch (opUsed) {
+                    case "!":
+                    case ":":
+                    case "=":
+                        predicate = RarityParser.handleExact(valueStr);
                         break;
 
                     case "!=":
-                        predicate = c -> {
-                            CardEdition e = StaticData.instance().getEditions().get(valueStr);
+                        predicate = RarityParser.handleExact(valueStr);
+                        if (predicate != null) {
+                            predicate = predicate.negate();
+                        }
+                        break;
 
-                            if (e == null) {
-                                return true;
-                            }
+                    case ">":
+                        predicate = RarityParser.handleGreater(valueStr);
+                        break;
 
-                            return e.getCardInSet(c.getName()).isEmpty();
-                        };
+                    case ">=":
+                        predicate = RarityParser.handleGreaterOrEqual(valueStr);
+                        break;
+
+                    case "<":
+                        predicate = RarityParser.handleLess(valueStr);
+                        break;
+
+                    case "<=":
+                        predicate = RarityParser.handleLessOrEqual(valueStr);
                         break;
                 }
-
                 break;
         }
 
