@@ -34,6 +34,7 @@ import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
 import forge.gui.GuiBase;
+import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IPlayerChangeListener;
@@ -75,6 +76,8 @@ public class VLobby implements ILobbyView {
     private final StartButton btnStart  = new StartButton();
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
+    private final SwingPrefBinders.ComboBox gamesInMatchBinder =
+      new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
     private final JPanel constructedFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2")); // Main content frame
 
@@ -857,9 +860,9 @@ public class VLobby implements ILobbyView {
         return nonRandomAiAvatars;
     }
 
-    /** Return the gamesInMatch */
-    public JComboBox<String> getGamesInMatch() {
-      return gamesInMatch;
+    /** Return the gamesInMatchBinder */
+    public SwingPrefBinders.ComboBox getGamesInMatchBinder() {
+      return gamesInMatchBinder;
     }
 
     /** Populate vanguard lists. */
