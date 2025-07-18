@@ -16,36 +16,11 @@ public abstract class InParser {
      */
     public static Predicate<PaperCard> handle(String tokenValue) {
         Predicate<PaperCard> predicate = null;
-        switch (tokenValue) {
-            case "c":
-            case "common":
-                predicate = PaperCardPredicates.printedWithRarity(CardRarity.Common)
-                    .or(PaperCardPredicates.printedWithRarity(CardRarity.BasicLand));
-                break;
+        CardRarity rarity = RarityParser.ParseRarityFromStr(tokenValue);
 
-            case "u":
-            case "uncommon":
-                predicate = PaperCardPredicates.printedWithRarity(CardRarity.Uncommon);
-                break;
-
-            case "r":
-            case "rare":
-                predicate = PaperCardPredicates.printedWithRarity(CardRarity.Rare);
-                break;
-
-            case "m":
-            case "mythic":
-                predicate = PaperCardPredicates.printedWithRarity(CardRarity.MythicRare);
-                break;
-
-            case "s":
-            case "special":
-                predicate = PaperCardPredicates.printedWithRarity(CardRarity.Special);
-                break;
-
-            // Not a rarity. Assume it is a set
-            default:
-                predicate = c -> {
+        if (rarity == null) {
+             // Not a rarity. Assume it is a set
+            predicate = c -> {
                     CardEdition e = StaticData.instance().getEditions().get(tokenValue);
                     
                     if (e == null) {
@@ -54,6 +29,8 @@ public abstract class InParser {
 
                     return !e.getCardInSet(c.getName()).isEmpty();
                 };
+        } else {
+            predicate = PaperCardPredicates.printedWithRarity(rarity);
         }
         
         return predicate;

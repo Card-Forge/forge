@@ -14,10 +14,10 @@ public abstract class RarityParser {
     static {
         RARITY_RANK = new HashMap<>();
         RARITY_RANK.put(CardRarity.BasicLand, 0);
-        RARITY_RANK.put(CardRarity.Common, 0);
-        RARITY_RANK.put(CardRarity.Uncommon, 1);
-        RARITY_RANK.put(CardRarity.Rare, 2);
-        RARITY_RANK.put(CardRarity.MythicRare, 3);
+        RARITY_RANK.put(CardRarity.Common, 1);
+        RARITY_RANK.put(CardRarity.Uncommon, 2);
+        RARITY_RANK.put(CardRarity.Rare, 3);
+        RARITY_RANK.put(CardRarity.MythicRare, 4);
     }
 
     /**
@@ -27,31 +27,16 @@ public abstract class RarityParser {
      */
     public static Predicate<PaperCard> handleExact(String tokenValue) {
         Predicate<PaperCard> predicate = null;
-        switch(tokenValue) {
-            case "c":
-            case "common":
-                predicate = new PredicateRarityCheck(ComparableOp.EQUALS, CardRarity.Common);
-                break;
+        CardRarity rarity = ParseRarityFromStr(tokenValue);
 
-            case "u":
-            case "uncommon":
-                predicate = new PredicateRarityCheck(ComparableOp.EQUALS, CardRarity.Uncommon);
-                break;
+        if (rarity == null) {
+            return null;
+        }
 
-            case "r":
-            case "rare":
-                predicate = new PredicateRarityCheck(ComparableOp.EQUALS, CardRarity.Rare);
-                break;
-
-            case "m":
-            case "mythic":
-                predicate = new PredicateRarityCheck(ComparableOp.EQUALS, CardRarity.MythicRare);
-                break;
-
-            case "s":
-            case "special":
-                predicate = PaperCardPredicates.IS_SPECIAL;
-                break;
+        if (rarity.equals(CardRarity.Special)) {
+            predicate = PaperCardPredicates.IS_SPECIAL;
+        } else {
+            predicate = new PredicateRarityCheck(ComparableOp.EQUALS, rarity);
         }
         
         return predicate;
@@ -64,26 +49,16 @@ public abstract class RarityParser {
      */
     public static Predicate<PaperCard> handleGreater(String tokenValue) {
         Predicate<PaperCard> predicate = null;
-        switch(tokenValue) {
-            case "c":
-            case "common":
-                predicate = new PredicateRarityCheck(ComparableOp.GREATER_THAN, CardRarity.Common);
-                break;
+        CardRarity rarity = ParseRarityFromStr(tokenValue);
 
-            case "u":
-            case "uncommon":
-                predicate = new PredicateRarityCheck(ComparableOp.GREATER_THAN, CardRarity.Uncommon);
-                break;
+        if (rarity == null || rarity.equals(CardRarity.Special)) {
+            return null;
+        }
 
-            case "r":
-            case "rare":
-                predicate = new PredicateRarityCheck(ComparableOp.GREATER_THAN, CardRarity.Rare);
-                break;
-
-            case "m":
-            case "mythic":
-                predicate = x -> false;
-                break;
+        if (rarity.equals(CardRarity.MythicRare)) {
+            predicate = x -> false;
+        } else {
+            predicate = new PredicateRarityCheck(ComparableOp.GREATER_THAN, rarity);
         }
         
         return predicate;
@@ -95,30 +70,13 @@ public abstract class RarityParser {
      * @return Predicate or null
      */
     public static Predicate<PaperCard> handleGreaterOrEqual(String tokenValue) {
-        Predicate<PaperCard> predicate = null;
-        switch(tokenValue) {
-            case "c":
-            case "common":
-                predicate = new PredicateRarityCheck(ComparableOp.GT_OR_EQUAL, CardRarity.Common);
-                break;
+        CardRarity rarity = ParseRarityFromStr(tokenValue);
 
-            case "u":
-            case "uncommon":
-                predicate = new PredicateRarityCheck(ComparableOp.GT_OR_EQUAL, CardRarity.Uncommon);
-                break;
-
-            case "r":
-            case "rare":
-                predicate = new PredicateRarityCheck(ComparableOp.GT_OR_EQUAL, CardRarity.Rare);
-                break;
-
-            case "m":
-            case "mythic":
-                predicate = new PredicateRarityCheck(ComparableOp.GT_OR_EQUAL, CardRarity.MythicRare);
-                break;
+        if (rarity == null || rarity.equals(CardRarity.Special)) {
+            return null;
         }
         
-        return predicate;
+        return new PredicateRarityCheck(ComparableOp.GT_OR_EQUAL, rarity);
     }
 
     /**
@@ -128,26 +86,16 @@ public abstract class RarityParser {
      */
     public static Predicate<PaperCard> handleLess(String tokenValue) {
         Predicate<PaperCard> predicate = null;
-        switch(tokenValue) {
-            case "c":
-            case "common":
-                predicate = x -> false;
-                break;
+        CardRarity rarity = ParseRarityFromStr(tokenValue);
 
-            case "u":
-            case "uncommon":
-                predicate = new PredicateRarityCheck(ComparableOp.LESS_THAN, CardRarity.Uncommon);
-                break;
+        if (rarity == null || rarity.equals(CardRarity.Special)) {
+            return null;
+        }
 
-            case "r":
-            case "rare":
-                predicate = new PredicateRarityCheck(ComparableOp.LESS_THAN, CardRarity.Rare);
-                break;
-
-            case "m":
-            case "mythic":
-                predicate = new PredicateRarityCheck(ComparableOp.LESS_THAN, CardRarity.MythicRare);
-                break;
+        if (rarity.equals(CardRarity.BasicLand)) {
+            predicate = x -> false;
+        } else {
+            predicate = new PredicateRarityCheck(ComparableOp.LESS_THAN, rarity);
         }
         
         return predicate;
@@ -159,30 +107,51 @@ public abstract class RarityParser {
      * @return Predicate or null
      */
     public static Predicate<PaperCard> handleLessOrEqual(String tokenValue) {
-        Predicate<PaperCard> predicate = null;
-        switch(tokenValue) {
+        CardRarity rarity = ParseRarityFromStr(tokenValue);
+
+        if (rarity == null || rarity.equals(CardRarity.Special)) {
+            return null;
+        }
+
+        return new PredicateRarityCheck(ComparableOp.LT_OR_EQUAL, rarity);
+    }
+
+    public static CardRarity ParseRarityFromStr(String input) {
+        CardRarity value = null;
+
+        switch(input) {
+            case "l":
+            case "land":
+                value = CardRarity.BasicLand;
+                break;
+
             case "c":
             case "common":
-                predicate = new PredicateRarityCheck(ComparableOp.LT_OR_EQUAL, CardRarity.Common);
+                value = CardRarity.Common;
                 break;
 
             case "u":
             case "uncommon":
-                predicate = new PredicateRarityCheck(ComparableOp.LT_OR_EQUAL, CardRarity.Uncommon);
+                value = CardRarity.Uncommon;
                 break;
 
             case "r":
             case "rare":
-                predicate = new PredicateRarityCheck(ComparableOp.LT_OR_EQUAL, CardRarity.Rare);
+                value = CardRarity.Rare;
                 break;
 
             case "m":
             case "mythic":
-                predicate = new PredicateRarityCheck(ComparableOp.LT_OR_EQUAL, CardRarity.MythicRare);
+                value = CardRarity.MythicRare;
+                break;
+
+            case "s":
+            case "special":
+                value = CardRarity.Special;
                 break;
         }
-        
-        return predicate;
+
+        return value;
     }
 
     private static final class PredicateRarityCheck implements Predicate<PaperCard> {
