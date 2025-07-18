@@ -20,6 +20,7 @@ import forge.gamemodes.match.HostedMatch;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
+import forge.util.GuiPrefBinders;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.filters.ItemFilter;
@@ -48,6 +49,8 @@ public class LoadSealedScreen extends LaunchScreen {
     // Max games in a match frame and variables
     private final FLabel lblGamesInMatch = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblMatch") + ":").font(GAME_MODE_FONT).build());
     private final FComboBox<String> cbGamesInMatch = add(new FComboBox<>());
+    private final GuiPrefBinders.ComboBox cbGamesInMatchBinder = new GuiPrefBinders.ComboBox(
+        FPref.UI_MATCHES_PER_GAME, cbGamesInMatch);
 
     public LoadSealedScreen() {
         super(null, LoadGameMenu.getMenu());
@@ -63,15 +66,13 @@ public class LoadSealedScreen extends LaunchScreen {
         cbGamesInMatch.addItem("1");
         cbGamesInMatch.addItem("3");
         cbGamesInMatch.addItem("5");
-        cbGamesInMatch.setSelectedItem(FModel.getPreferences().getPref((FPref.UI_MATCHES_PER_GAME)));
-        cbGamesInMatch.setChangedHandler(event -> FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, cbGamesInMatch.getSelectedItem()));
     }
 
     @Override
     public void onActivate() {
         lstDecks.setPool(DeckProxy.getAllSealedDecks());
         lstDecks.setSelectedString(DeckPreferences.getSealedDeck());
-        cbGamesInMatch.setSelectedItem(FModel.getPreferences().getPref(FPref.UI_MATCHES_PER_GAME));
+        cbGamesInMatchBinder.load();
     }
 
     private void editSelectedDeck() {
