@@ -44,7 +44,7 @@ public class SFilterUtil {
             return x -> true;
         }
 
-        List<String> segments = splitByOrOutsideQuotes(text);
+        List<String> segments = splitBySegments(text);
         if (segments.isEmpty()) {
             return x -> true;
         }
@@ -129,7 +129,7 @@ public class SFilterUtil {
         return PaperCardPredicates.fromRules(textFilter).and(IterableUtil.and(advancedPaperCardPredicates));
     }
 
-    private static List<String> splitByOrOutsideQuotes(String text) {
+    private static List<String> splitBySegments(String text) {
         List<String> segments = new ArrayList<>();
         StringBuilder currentSegment = new StringBuilder();
         boolean inQuotes = false;
