@@ -4,6 +4,7 @@ Date=2016-08-19
 Name=From the Vault: Lore
 Type=Collector_Edition
 ScryfallCode=V16
+TokensCode=V16
 
 [cards]
 1 M Beseech the Queen @Jason Chan
@@ -23,5 +24,4 @@ ScryfallCode=V16
 15 M Unmask @rk post
 
 [tokens]
-marit_lage
-b_x_x_phyrexian_minion
+16 marit_lage @Stephan Martiniere
