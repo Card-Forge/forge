@@ -56,7 +56,6 @@ public abstract class AdvancedSearchParser {
                         predicate = CardRulesPredicates.rules(StringOp.CONTAINS_IC, valueStr);
                         break;
                 }
-                
                 break;
 
             case "power":
@@ -77,7 +76,6 @@ public abstract class AdvancedSearchParser {
                                 int toughness = c.getIntToughness();
                                 return new LeafNumber(LeafNumber.CardField.POWER, op, toughness).test(c);
                             };
-
                             break;
                     }
                 }
@@ -101,7 +99,6 @@ public abstract class AdvancedSearchParser {
                                 int power = c.getIntPower();
                                 return new LeafNumber(LeafNumber.CardField.TOUGHNESS, op, power).test(c);
                             };
-
                             break;
                     }
                 }
@@ -138,7 +135,6 @@ public abstract class AdvancedSearchParser {
                     predicate = CardRulesPredicates.cmc(op, cmcValue);
                 }
                 catch (NumberFormatException ignored) {}
-
                 break;
 
             case "t":
@@ -288,26 +284,21 @@ public abstract class AdvancedSearchParser {
                             }
                     }
                 }
-
                 break;
 
             case "name":
                 switch(opUsed) {
                     case "!":
-
                         predicate = CardRulesPredicates.name(StringOp.EQUALS_IC, valueStr);
-
                         break;
 
                     case "!=":
                         predicate = CardRulesPredicates.name(StringOp.EQUALS_IC, valueStr).negate();
-
                         break;
 
                     case "=":
                     case ":":
                         predicate = CardRulesPredicates.name(StringOp.CONTAINS_IC, valueStr);
-
                         break;
                 }
                 break;
@@ -369,7 +360,6 @@ public abstract class AdvancedSearchParser {
                         predicate = PaperCardPredicates.printedInSet(valueStr).negate();
                         break;
                 }
-
                 break;
 
             case "in":
@@ -382,7 +372,6 @@ public abstract class AdvancedSearchParser {
                     case "!=":
                         predicate = InParser.handle(valueStr).negate();
                         break;
-
                 }
                 break;
 
