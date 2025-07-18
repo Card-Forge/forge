@@ -240,3 +240,6 @@ Wurmcoil Engine|MPS_KLD
 1 r_2_2_gremlin @Jason Rainville
 2 ragavan @Daniel Ljunggren
 3 etherium_cell @Craig J Spearing
+
+[other]
+4 emblem_tezzeret_the_schemer @Ryan Alexander Lee

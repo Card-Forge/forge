@@ -7,6 +7,7 @@ ScryfallCode=PAKH
 
 [cards]
 35 U Trueheart Duelist @Magali Villeneuve
+49 R Curator of Mysteries @Christine Choi
 78 R Archfiend of Ifnir @Slawomir Maniak
 134 R Glorybringer @Grzegorz Rutkowski
 234 R Oracle's Vault @Cliff Childs
