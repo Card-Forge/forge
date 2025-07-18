@@ -2,6 +2,8 @@ package forge.itemmanager.advancedsearchparsers;
 
 import java.util.function.Predicate;
 
+import forge.StaticData;
+import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
@@ -18,7 +20,16 @@ public abstract class InParser {
 
         if (rarity == null) {
              // Not a rarity. Assume it is a set
-            predicate = PaperCardPredicates.printedInSet(tokenValue);
+            predicate = c -> {
+                    CardEdition e = StaticData.instance().getEditions().get(tokenValue);
+                    
+                    if (e == null) {
+                        return false;
+                    }
+
+                    return !e.getCardInSet(c.getName()).isEmpty() &&
+                        e.getObtainableCards().stream().anyMatch(ee -> ee.name().equals(c.getName()));
+                };
         } else {
             predicate = PaperCardPredicates.printedWithRarity(rarity);
         }
