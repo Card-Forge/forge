@@ -1,6 +1,8 @@
 package forge.item;
 
 import com.google.common.collect.Lists;
+
+import forge.StaticData;
 import forge.card.*;
 import forge.util.PredicateString;
 import org.apache.commons.lang3.StringUtils;
@@ -87,7 +89,8 @@ public abstract class PaperCardPredicates {
 
         @Override
         public boolean test(final PaperCard card) {
-            return this.sets.contains(card.getEdition()) == this.mustContain;
+            return this.sets.contains(card.getEdition()) == this.mustContain &&
+                StaticData.instance().getCardEdition(card.getEdition()).isCardObtainable(card.getName());
         }
 
         private PredicateSets(final List<String> wantSets, final boolean shouldContain) {

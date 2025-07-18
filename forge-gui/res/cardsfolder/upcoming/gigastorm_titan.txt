@@ -1,0 +1,7 @@
+Name:Gigastorm Titan
+ManaCost:4 U
+Types:Creature Elemental
+PT:4/4
+S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 3 | CheckSVar$ X | SVarCompare$ GE1 | Description$ This spell costs {3} less to cast if you've cast another spell this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+Oracle:This spell cost {3} less to cast if you've cast another spell this turn.
