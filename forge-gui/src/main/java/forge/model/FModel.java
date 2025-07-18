@@ -407,47 +407,14 @@ public final class FModel {
             final List<String> typeListFile = FileUtil.readFile(ForgeConstants.TYPE_LIST_FILE);
 
             Set<String> addTo = null;
+            loadTypes(addTo, typeListFile);
 
-            for (final String s : typeListFile) {
-                if (s.equals("[BasicTypes]")) {
-                    addTo = CardType.Constant.BASIC_TYPES;
-                } else if (s.equals("[LandTypes]")) {
-                    addTo = CardType.Constant.LAND_TYPES;
-                } else if (s.equals("[CreatureTypes]")) {
-                    addTo = CardType.Constant.CREATURE_TYPES;
-                } else if (s.equals("[SpellTypes]")) {
-                    addTo = CardType.Constant.SPELL_TYPES;
-                } else if (s.equals("[EnchantmentTypes]")) {
-                    addTo = CardType.Constant.ENCHANTMENT_TYPES;
-                } else if (s.equals("[ArtifactTypes]")) {
-                    addTo = CardType.Constant.ARTIFACT_TYPES;
-                } else if (s.equals("[WalkerTypes]")) {
-                    addTo = CardType.Constant.WALKER_TYPES;
-                } else if (s.equals("[DungeonTypes]")) {
-                    addTo = CardType.Constant.DUNGEON_TYPES;
-                } else if (s.equals("[BattleTypes]")) {
-                    addTo = CardType.Constant.BATTLE_TYPES;
-                } else if (s.equals("[PlanarTypes]")) {
-                    addTo = CardType.Constant.PLANAR_TYPES;
-                } else if (s.length() > 1) {
-                    if (addTo != null) {
-                        if (s.contains(":")) {
-                            String[] k = s.split(":");
-                            addTo.add(k[0]);
-                            CardType.Constant.pluralTypes.put(k[0], k[1]);
-
-                            if (k[0].contains(" ")) {
-                                CardType.Constant.MultiwordTypes.add(k[0]);
-                            }
-                        } else {
-                            addTo.add(s);
-                            if (s.contains(" ")) {
-                                CardType.Constant.MultiwordTypes.add(s);
-                            }
-                        }
-                    }
-                }
+            File customTypesFile = new File(ForgeConstants.USER_CUSTOM_TYPE_LIST_FILE);
+            if (customTypesFile.exists()) {
+                final List<String> customTypeListFile = FileUtil.readFile(ForgeConstants.USER_CUSTOM_TYPE_LIST_FILE);
+                loadTypes(addTo, customTypeListFile);
             }
+
             CardType.Constant.LOADED.set();
         }
 
@@ -462,6 +429,58 @@ public final class FModel {
                 }
             }
             keywordsLoaded = true;
+        }
+    }
+
+    private static void loadTypes(Set<String> addTo, List<String> fileContent) {
+        for (final String s : fileContent) {
+            if (s.equals("[BasicTypes]")) {
+                addTo = CardType.Constant.BASIC_TYPES;
+            } else if (s.equals("[LandTypes]")) {
+                addTo = CardType.Constant.LAND_TYPES;
+            } else if (s.equals("[CreatureTypes]")) {
+                addTo = CardType.Constant.CREATURE_TYPES;
+            } else if (s.equals("[SpellTypes]")) {
+                addTo = CardType.Constant.SPELL_TYPES;
+            } else if (s.equals("[EnchantmentTypes]")) {
+                addTo = CardType.Constant.ENCHANTMENT_TYPES;
+            } else if (s.equals("[ArtifactTypes]")) {
+                addTo = CardType.Constant.ARTIFACT_TYPES;
+            } else if (s.equals("[WalkerTypes]")) {
+                addTo = CardType.Constant.WALKER_TYPES;
+            } else if (s.equals("[DungeonTypes]")) {
+                addTo = CardType.Constant.DUNGEON_TYPES;
+            } else if (s.equals("[BattleTypes]")) {
+                addTo = CardType.Constant.BATTLE_TYPES;
+            } else if (s.equals("[PlanarTypes]")) {
+                addTo = CardType.Constant.PLANAR_TYPES;
+            } else if (s.length() > 1) {
+                if (addTo != null) {
+                    if (s.contains(":")) {
+                        String[] k = s.split(":");
+
+                        if (addTo.contains(k[0])) {
+                            continue;
+                        }
+
+                        addTo.add(k[0]);
+                        CardType.Constant.pluralTypes.put(k[0], k[1]);
+
+                        if (k[0].contains(" ")) {
+                            CardType.Constant.MultiwordTypes.add(k[0]);
+                        }
+                    } else {
+                        if (addTo.contains(s)) {
+                            continue;
+                        }
+
+                        addTo.add(s);
+                        if (s.contains(" ")) {
+                            CardType.Constant.MultiwordTypes.add(s);
+                        }
+                    }
+                }
+            }
         }
     }
 
