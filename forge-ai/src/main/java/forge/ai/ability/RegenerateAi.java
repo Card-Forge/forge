@@ -17,10 +17,7 @@
  */
 package forge.ai.ability;
 
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -123,17 +120,15 @@ public class RegenerateAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        boolean chance = false;
-
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        boolean chance;
         if (sa.usesTargeting()) {
             chance = regenMandatoryTarget(ai, sa, mandatory);
         } else {
             // If there's no target on the trigger, just say yes.
             chance = true;
         }
-
-        return chance;
+        return chance ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     private static boolean regenMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {

@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -26,7 +28,7 @@ public class LifeLoseAi extends SpellAbilityAi {
      * SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
 
         final Card source = sa.getHostCard();
@@ -48,14 +50,13 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         if (tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-
         if (sa.usesTargeting()) {
-            return doTgt(ai, sa, false);
+            boolean result = doTgt(ai, sa, false);
+            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /*
@@ -166,11 +167,11 @@ public class LifeLoseAi extends SpellAbilityAi {
      * forge.game.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
+    protected AiAbilityDecision doTriggerAINoCost(final Player ai, final SpellAbility sa,
     final boolean mandatory) {
         if (sa.usesTargeting()) {
             if (!doTgt(ai, sa, mandatory)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
@@ -191,7 +192,15 @@ public class LifeLoseAi extends SpellAbilityAi {
                 : AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
         // For cards like Foul Imp, ETB you lose life
-        return mandatory || !tgtPlayers.contains(ai) || amount <= 0 || amount + 3 <= ai.getLife();
+        if (mandatory) {
+            return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
+        }
+
+        if (!tgtPlayers.contains(ai) || amount <= 0 || amount + 3 <= ai.getLife()) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
     }
 
     @Override

@@ -1,10 +1,7 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -26,10 +23,10 @@ import java.util.Map;
 public abstract class ManifestBaseAi extends SpellAbilityAi {
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // Manifest doesn't have any "Pay X to manifest X triggers"
 
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)

@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.CardStateName;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
@@ -51,9 +49,9 @@ public class SetStateAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // Gross generalization, but this always considers alternate states more powerful
-        return !sa.getHostCard().isInAlternateState();
+        return sa.getHostCard().isInAlternateState() ? new AiAbilityDecision(0, AiPlayDecision.CantPlayAi) : new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     @Override

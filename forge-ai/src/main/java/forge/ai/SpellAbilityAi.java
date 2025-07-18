@@ -39,28 +39,31 @@ import forge.util.collect.FCollectionView;
  */
 public abstract class SpellAbilityAi {
 
-    public final boolean canPlayAIWithSubs(final Player aiPlayer, final SpellAbility sa) {
-        if (!canPlayAI(aiPlayer, sa)) {
-            return false;
+    public final AiAbilityDecision canPlayAIWithSubs(final Player aiPlayer, final SpellAbility sa) {
+        AiAbilityDecision decision = canPlayAI(aiPlayer, sa);
+        if (!decision.willingToPlay()) {
+            return decision;
         }
         final AbilitySub subAb = sa.getSubAbility();
-        return subAb == null || chkDrawbackWithSubs(aiPlayer,  subAb);
+        return subAb == null || chkDrawbackWithSubs(aiPlayer, subAb).willingToPlay()
+            ? new AiAbilityDecision(100, AiPlayDecision.WillPlay)
+            : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
      * Handles the AI decision to play a "main" SpellAbility
      */
-    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
 
         if (sa.getRestrictions() != null && !sa.getRestrictions().canPlay(source, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
         }
 
         return canPlayWithoutRestrict(ai, sa);
     }
 
-    protected boolean canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
+    protected AiAbilityDecision canPlayWithoutRestrict(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Cost cost = sa.getPayCosts();
 
@@ -72,7 +75,7 @@ public abstract class SpellAbilityAi {
         if (!checkConditions(ai, sa, sa.getConditions())) {
             SpellAbility sub = sa.getSubAbility();
             if (sub != null && !checkConditions(ai, sub, sub.getConditions())) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.NeedsToPlayCriteriaNotMet);
             }
         }
 
@@ -81,23 +84,23 @@ public abstract class SpellAbilityAi {
             final boolean alwaysOnDiscard = "AlwaysOnDiscard".equals(logic) && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
                     && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
             if (!checkAiLogic(ai, sa, logic)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
             if (!alwaysOnDiscard && !checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler(), logic)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.MissingPhaseRestrictions);
             }
         } else if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.MissingPhaseRestrictions);
         }
 
         if (!checkApiLogic(ai, sa)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         // needs to be after API logic because needs to check possible X Cost?
         if (cost != null && !willPayCosts(ai, sa, cost, source)) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     protected boolean checkConditions(final Player ai, final SpellAbility sa, SpellAbilityCondition con) {
@@ -166,9 +169,9 @@ public abstract class SpellAbilityAi {
      */
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false; // prevent infinite loop
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations).willingToPlay(); // prevent infinite loop
         }
-        return MyRandom.getRandom().nextFloat() < .8f; // random success
+        return new AiAbilityDecision(MyRandom.getRandom().nextFloat() < .8f ? 100 : 0, AiPlayDecision.WillPlay).willingToPlay(); // random success
     }
 
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
@@ -183,28 +186,38 @@ public abstract class SpellAbilityAi {
             return sa.isTargetNumberValid();
         }
 
-        return doTriggerNoCostWithSubs(aiPlayer, sa, mandatory);
+        return doTriggerNoCostWithSubs(aiPlayer, sa, mandatory).willingToPlay();
     }
 
-    public final boolean doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        if (!doTriggerAINoCost(aiPlayer, sa, mandatory) && !"Always".equals(sa.getParam("AILogic"))) {
-            return false;
+    public final AiAbilityDecision doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        AiAbilityDecision decision = doTriggerAINoCost(aiPlayer, sa, mandatory);
+        if (!decision.willingToPlay() && !"Always".equals(sa.getParam("AILogic"))) {
+            return decision;
         }
         final AbilitySub subAb = sa.getSubAbility();
-        return subAb == null || chkDrawbackWithSubs(aiPlayer, subAb) || mandatory;
+        if (subAb == null) {
+            if (mandatory) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+
+            return decision;
+        }
+
+        return chkDrawbackWithSubs(aiPlayer, subAb);
     }
 
     /**
      * Handles the AI decision to play a triggered SpellAbility
      */
-    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        if (canPlayWithoutRestrict(aiPlayer, sa) && (!mandatory || sa.isTargetNumberValid())) {
-            return true;
+    protected AiAbilityDecision doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        AiAbilityDecision decision = canPlayWithoutRestrict(aiPlayer, sa);
+        if (decision.willingToPlay() && (!mandatory || sa.isTargetNumberValid())) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // not mandatory, short way out
         if (!mandatory) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         // invalid target might prevent it
@@ -220,30 +233,30 @@ public abstract class SpellAbilityAi {
                 if (sa.canTarget(p)) {
                     sa.resetTargets();
                     sa.getTargets().add(p);
-                    return true;
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
 
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
-        return true;
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
      * Handles the AI decision to play a sub-SpellAbility
      */
-    public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
         // sub-SpellAbility might use targets too
         if (sa.usesTargeting()) {
             // no Candidates, no adding to Stack
             if (!sa.getTargetRestrictions().hasCandidates(sa)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
             // but if it does, it should override this function
             System.err.println("Warning: default (ie. inherited from base class) implementation of chkAIDrawback is used by " + sa.getHostCard().getName() + " for " + this.getClass().getName() + ". Consider declaring an overloaded method");
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
-        return true;
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -304,9 +317,18 @@ public abstract class SpellAbilityAi {
      * @param ab
      * @return
      */
-    public boolean chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
+    public AiAbilityDecision chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
-        return SpellApiToAi.Converter.get(ab).chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));
+        AiAbilityDecision decision = SpellApiToAi.Converter.get(ab).chkAIDrawback(ab, aiPlayer);
+        if (!decision.willingToPlay()) {
+            return decision;
+        }
+
+        if (subAb == null) {
+            return decision;
+        }
+
+        return chkDrawbackWithSubs(aiPlayer, subAb);
     }
 
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {

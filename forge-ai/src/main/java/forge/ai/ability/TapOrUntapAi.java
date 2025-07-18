@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -12,7 +14,7 @@ public class TapOrUntapAi extends TapAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected AiAbilityDecision canPlayAI(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
 
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -27,16 +29,20 @@ public class TapOrUntapAi extends TapAiBase {
             }
 
             if (!bFlag) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         } else {
             sa.resetTargets();
             if (!tapPrefTargeting(ai, source, sa, false)) {
-                return false;
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
         }
 
-        return randomReturn;
+        if (randomReturn) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.StopRunawayActivations);
+        }
     }
 
 }

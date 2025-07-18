@@ -175,8 +175,12 @@ public class DrawAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay());
+    public AiAbilityDecision chkAIDrawback(SpellAbility sa, Player ai) {
+        if (targetAI(ai, sa, sa.isTrigger() && sa.getHostCard().isInPlay())) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
     }
 
     /**
@@ -534,12 +538,16 @@ public class DrawAi extends SpellAbilityAi {
     } // drawTargetAI()
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected AiAbilityDecision doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (!mandatory && !willPayCosts(ai, sa, sa.getPayCosts(), sa.getHostCard())) {
-            return false;
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        return targetAI(ai, sa, mandatory);
+        if (targetAI(ai, sa, mandatory)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else {
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
+        }
     }
 
     /* (non-Javadoc)
