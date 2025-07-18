@@ -9,5 +9,5 @@ T:Mode$ Sacrificed | ValidCard$ Land | Execute$ TrigToken | TriggerZones$ Battle
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenTapped$ True | SubAbility$ DBUntap | TokenOwner$ You
 SVar:DBUntap:DB$ Untap
 A:AB$ GainLife | Cost$ 4 Sac<1/Land> | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
-DeckHas:Ability$Counters|Token|Lifegain
+DeckHas:Ability$Counters|Token|LifeGain
 Oracle:This creature enters tapped with six stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nWhenever you sacrifice a land, create a tapped 4/4 green Beast creature token and untap this creature.\n{4}, Sacrifice a land: You gain 2 life.
