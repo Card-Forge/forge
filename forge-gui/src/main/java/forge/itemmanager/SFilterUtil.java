@@ -44,7 +44,41 @@ public class SFilterUtil {
             return x -> true;
         }
 
-        List<String> tokens = getSplitText(text);
+        List<String> segments = splitByOrOutsideQuotes(text);
+        if (segments.isEmpty()) {
+            return x -> true;
+        }
+
+        List<Predicate<PaperCard>> segmentPredicates = new ArrayList<>();
+        for (String segment : segments) {
+            segment = segment.trim();
+            if (segment.isEmpty()) {
+                continue;
+            }
+            Predicate<PaperCard> segmentPredicate = buildPredicateFromTokens(segment, inName, inType, inText, inCost);
+            if (segmentPredicate != null) {
+                segmentPredicates.add(segmentPredicate);
+            }
+        }
+
+        Predicate<PaperCard> overallPredicate;
+        if (segmentPredicates.isEmpty()) {
+            overallPredicate = x -> true;
+        } else if (segmentPredicates.size() == 1) {
+            overallPredicate = segmentPredicates.get(0);
+        } else {
+            overallPredicate = IterableUtil.or(segmentPredicates);
+        }
+
+        if (invert) {
+            overallPredicate = overallPredicate.negate();
+        }
+
+        return overallPredicate;
+    }
+
+    private static Predicate<PaperCard> buildPredicateFromTokens(String segment, boolean inName, boolean inType, boolean inText, boolean inCost) {
+        List<String> tokens = getSplitText(segment);
         List<Predicate<CardRules>> advancedCardRulesPredicates = new ArrayList<>();
         List<Predicate<PaperCard>> advancedPaperCardPredicates = new ArrayList<>();
         List<String> regularTokens = new ArrayList<>();
@@ -68,8 +102,8 @@ public class SFilterUtil {
 
         Predicate<CardRules> textFilter;
         if (advancedCardRulesPredicates.isEmpty()) {
-            if (BooleanExpression.isExpression(text)) {
-                BooleanExpression expression = new BooleanExpression(text, inName, inType, inText, inCost);
+            if (BooleanExpression.isExpression(segment)) {
+                BooleanExpression expression = new BooleanExpression(segment, inName, inType, inText, inCost);
                 
                 try {
                     Predicate<CardRules> filter = expression.evaluate();
@@ -92,11 +126,50 @@ public class SFilterUtil {
             textFilter = advancedCardRulesPredicate.and(regularPredicate);
         }
 
-        if (invert) {
-            textFilter = textFilter.negate();
+        return PaperCardPredicates.fromRules(textFilter).and(IterableUtil.and(advancedPaperCardPredicates));
+    }
+
+    private static List<String> splitByOrOutsideQuotes(String text) {
+        List<String> segments = new ArrayList<>();
+        StringBuilder currentSegment = new StringBuilder();
+        boolean inQuotes = false;
+        boolean escapeNext = false;
+
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+
+            if (escapeNext) {
+                currentSegment.append(ch);
+                escapeNext = false;
+                continue;
+            }
+
+            if (ch == '\\') {
+                escapeNext = true;
+                continue;
+            }
+
+            if (ch == '"') {
+                inQuotes = !inQuotes;
+            }
+
+            if (!inQuotes && i + 2 <= text.length() && text.substring(i, i+2).equalsIgnoreCase("or")) {
+                boolean isWordBoundaryBefore = i > 0 && !Character.isLetterOrDigit(text.charAt(i-1));
+                boolean isWordBoundaryAfter = i + 2 < text.length() && !Character.isLetterOrDigit(text.charAt(i+2));
+
+                if (isWordBoundaryBefore && isWordBoundaryAfter) {
+                    segments.add(currentSegment.toString());
+                    currentSegment = new StringBuilder();
+                    i++;
+                    continue;
+                }
+            }
+
+            currentSegment.append(ch);
         }
 
-        return PaperCardPredicates.fromRules(textFilter).and(IterableUtil.and(advancedPaperCardPredicates));
+        segments.add(currentSegment.toString());
+        return segments;
     }
 
     private static List<String> getSplitText(String text) {
@@ -132,7 +205,7 @@ public class SFilterUtil {
             }
             entry.append(ch);
         }
-        if (entry.length() > 0) {
+        if (!entry.isEmpty()) {
             splitText.add(entry.toString());
         }
         return splitText;
