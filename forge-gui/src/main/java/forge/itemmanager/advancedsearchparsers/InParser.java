@@ -28,7 +28,7 @@ public abstract class InParser {
                     }
 
                     return !e.getCardInSet(c.getName()).isEmpty() &&
-                        e.getObtainableCards().stream().anyMatch(ee -> ee.name().equals(c.getName()));
+                        e.isCardObtainable(c.getName());
                 };
         } else {
             predicate = PaperCardPredicates.printedWithRarity(rarity);
