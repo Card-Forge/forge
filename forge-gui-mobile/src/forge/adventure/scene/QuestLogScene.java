@@ -35,7 +35,11 @@ public class QuestLogScene extends UIScene {
         backToListButton = Controls.newTextButton("Quest List");
         ui.onButtonPress("return", QuestLogScene.this::back);
         ui.onButtonPress("status", QuestLogScene.this::status);
-        ui.onButtonPress("backToList", QuestLogScene.this::backToList);
+        backToListButton.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                buildList();
+            }
+        });
 
         // TODO - refactor below, replace buttons in landscape
         scrollContainer = new Table(Controls.getSkin());
@@ -73,12 +77,6 @@ public class QuestLogScene extends UIScene {
         root.row();
         ScrollPane scroller = new ScrollPane(scrollContainer);
         root.add(scroller).colspan(3).fill().expand();
-
-        backToListButton.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                buildList();
-            }
-        });
     }
 
     private static QuestLogScene object;
