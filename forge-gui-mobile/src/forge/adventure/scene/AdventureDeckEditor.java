@@ -817,7 +817,7 @@ public class AdventureDeckEditor extends FDeckEditor {
             });
             return;
         }
-        else if(getCurrentEvent() != null || getDeck().isEmpty()) {
+        else if(getEditorConfig().isLimited() || getDeck().isEmpty()) {
             resolveClose(canCloseCallback, true);
             return;
         }
