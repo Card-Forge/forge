@@ -1,4 +1,4 @@
-Name:Dyadrine, Synthesis Amalgam 
+Name:Dyadrine, Synthesis Amalgam
 ManaCost:X G W
 Types:Legendary Artifact Creature Construct
 PT:0/1

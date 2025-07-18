@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="80">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="80">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <properties>
   <property name="preventEscape" type="bool" value="true"/>
  </properties>
- <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/inn_dungeon_floor.tsx"/>
- <tileset firstgid="12530" source="../../tileset/INN_dungen_crawler_tileset.tsx"/>
+ <tileset firstgid="1" source="../../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/inn_dungeon_floor.tsx"/>
+ <tileset firstgid="12530" source="../../../tileset/INN_dungen_crawler_tileset.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztzTERACAMBMEowiXgApiYANwRCSl+qK7Yer2YOb6qoQn15DvCFFq8vLy8vJJ3hyN0ky8AAA/74tft
@@ -34,7 +34,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="69" template="../../obj/enemy.tx" gid="2147495067" x="208" y="224">
+  <object id="69" template="../../../../../common/maps/obj/enemy.tx" gid="2147495067" x="208" y="224">
    <properties>
     <property name="dialog">[{
   &quot;text&quot;:&quot;Hello, planeswalker {var=player_name}, welcome to my abode&quot;,
@@ -115,12 +115,12 @@
     <property name="enemy" value="Cloaked Old Man"/>
    </properties>
   </object>
-  <object id="70" template="../../obj/entry_down.tx" x="207.5" y="97">
+  <object id="70" template="../../../../../common/maps/obj/entry_down.tx" x="207.5" y="97">
    <properties>
     <property name="noExit" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="78" template="../../obj/portal.tx" x="207" y="81">
+  <object id="78" template="../../../../../common/maps/obj/portal.tx" x="207" y="81">
    <properties>
     <property name="activeQuestFlag" value="mainQuest"/>
     <property name="portalState" value="closed"/>
