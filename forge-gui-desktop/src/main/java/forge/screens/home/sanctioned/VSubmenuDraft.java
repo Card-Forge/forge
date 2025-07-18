@@ -13,6 +13,7 @@ import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.gui.SwingPrefBinders;
 import forge.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -60,6 +61,8 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     private final JComboBox<String> cbOpponent = new JComboBox<>();
 
     private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
+    private final SwingPrefBinders.ComboBox gamesInMatchBinder =
+        new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
     private final JPanel gamesInMatchFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
 
     private final JLabel lblInfo = new FLabel.Builder()
@@ -113,7 +116,6 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         gamesInMatchFrame.add(lblGamesInMatch, "w 150px!, h 30px!");
         gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
-        gamesInMatch.setSelectedItem(defaultGamesInMatch);
         pnlStart.add(gamesInMatchFrame, "cell 1 0, alignx center, aligny top");
 
         pnlStart.add(btnStart, "cell 1 2, alignx center, aligny bottom");
@@ -169,7 +171,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     public JRadioButton getRadSingle() { return radSingle; }
     public JRadioButton getRadMultiple() { return radMultiple; }
     public JRadioButton getRadAll() { return radAll; }
-    public JComboBox<String> getGamesInMatch() { return gamesInMatch; }
+    public SwingPrefBinders.ComboBox getGamesInMatchBinder() { return gamesInMatchBinder; }
 
     //========== Overridden from IVDoc
 
