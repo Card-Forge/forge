@@ -182,14 +182,7 @@ public class CostRemoveCounter extends CostPart {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         int removed = 0;
-        if (decision.counterTable == null) {
-            final int toRemove = decision.c;
-            for (Card c : decision.cards) {
-                removed += toRemove;
-                c.subtractCounter(counter, toRemove, ai);
-                c.getGame().updateLastStateForCard(c);
-            }
-        } else for (Map.Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.empty()).entrySet()) {
+        for (Map.Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.empty()).entrySet()) {
             for (Map.Entry<CounterType, Integer> v : e.getValue().entrySet()) {
                 removed += v.getValue();
                 e.getKey().subtractCounter(v.getKey(), v.getValue(), ai);
