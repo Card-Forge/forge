@@ -44,39 +44,93 @@ public class SFilterUtil {
             return x -> true;
         }
 
-        List<String> segments = splitBySegments(text);
-        if (segments.isEmpty()) {
-            return x -> true;
-        }
-
-        List<Predicate<PaperCard>> segmentPredicates = new ArrayList<>();
-        for (String segment : segments) {
-            segment = segment.trim();
-            if (segment.isEmpty()) {
-                continue;
+        try {
+            List<String> tokens = tokenize(text);
+            tokens = insertImplicitAndTokens(tokens);
+            ExpressionParser parser = new ExpressionParser(tokens, inName, inType, inText, inCost);
+            Predicate<PaperCard> predicate = parser.parse();
+            if (invert) {
+                predicate = predicate.negate();
             }
-            Predicate<PaperCard> segmentPredicate = buildPredicateFromTokens(segment, inName, inType, inText, inCost);
-            if (segmentPredicate != null) {
-                segmentPredicates.add(segmentPredicate);
-            }
+            return predicate;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return x -> false;
         }
-
-        Predicate<PaperCard> overallPredicate;
-        if (segmentPredicates.isEmpty()) {
-            overallPredicate = x -> true;
-        } else if (segmentPredicates.size() == 1) {
-            overallPredicate = segmentPredicates.get(0);
-        } else {
-            overallPredicate = IterableUtil.or(segmentPredicates);
-        }
-
-        if (invert) {
-            overallPredicate = overallPredicate.negate();
-        }
-
-        return overallPredicate;
     }
 
+    private static List<String> tokenize(String text) {
+        List<String> tokens = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+        boolean inQuotes = false;
+        boolean escapeNext = false;
+
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+
+            if (escapeNext) {
+                current.append(ch);
+                escapeNext = false;
+                continue;
+            }
+
+            if (ch == '\\') {
+                escapeNext = true;
+                continue;
+            }
+
+            if (ch == '"') {
+                inQuotes = !inQuotes;
+                continue;
+            }
+
+            if (!inQuotes && (ch == '(' || ch == ')' || ch == ' ')) {
+                if (current.length() > 0) {
+                    tokens.add(current.toString());
+                    current = new StringBuilder();
+                }
+                if (ch != ' ') {
+                    tokens.add(String.valueOf(ch));
+                }
+                continue;
+            }
+
+            current.append(ch);
+        }
+
+        if (current.length() > 0) {
+            tokens.add(current.toString());
+        }
+
+        return tokens;
+    }
+
+    private static List<String> insertImplicitAndTokens(List<String> tokens) {
+        if (tokens.isEmpty()) {
+            return tokens;
+        }
+
+        List<String> result = new ArrayList<>();
+        result.add(tokens.get(0));
+
+        for (int i = 1; i < tokens.size(); i++) {
+            String prev = tokens.get(i - 1);
+            String current = tokens.get(i);
+
+            if (!prev.equals("(") &&
+                !prev.equalsIgnoreCase("or") &&
+                !prev.equalsIgnoreCase("and") && 
+                !current.equals(")") &&
+                !current.equalsIgnoreCase("or") &&
+                !current.equalsIgnoreCase("and") &&
+                !current.equalsIgnoreCase("not")) {
+                result.add("and");
+            }
+            result.add(current);
+        }
+
+        return result;
+    }
     private static Predicate<PaperCard> buildPredicateFromTokens(String segment, boolean inName, boolean inType, boolean inText, boolean inCost) {
         List<String> tokens = getSplitText(segment);
         List<Predicate<CardRules>> advancedCardRulesPredicates = new ArrayList<>();
@@ -129,49 +183,6 @@ public class SFilterUtil {
         return PaperCardPredicates.fromRules(textFilter).and(IterableUtil.and(advancedPaperCardPredicates));
     }
 
-    private static List<String> splitBySegments(String text) {
-        List<String> segments = new ArrayList<>();
-        StringBuilder currentSegment = new StringBuilder();
-        boolean inQuotes = false;
-        boolean escapeNext = false;
-
-        for (int i = 0; i < text.length(); i++) {
-            char ch = text.charAt(i);
-
-            if (escapeNext) {
-                currentSegment.append(ch);
-                escapeNext = false;
-                continue;
-            }
-
-            if (ch == '\\') {
-                escapeNext = true;
-                continue;
-            }
-
-            if (ch == '"') {
-                inQuotes = !inQuotes;
-            }
-
-            if (!inQuotes && i + 2 <= text.length() && text.substring(i, i+2).equalsIgnoreCase("or")) {
-                boolean isWordBoundaryBefore = i > 0 && !Character.isLetterOrDigit(text.charAt(i-1));
-                boolean isWordBoundaryAfter = i + 2 < text.length() && !Character.isLetterOrDigit(text.charAt(i+2));
-
-                if (isWordBoundaryBefore && isWordBoundaryAfter) {
-                    segments.add(currentSegment.toString());
-                    currentSegment = new StringBuilder();
-                    i++;
-                    continue;
-                }
-            }
-
-            currentSegment.append(ch);
-        }
-
-        segments.add(currentSegment.toString());
-        return segments;
-    }
-
     private static List<String> getSplitText(String text) {
         boolean inQuotes = false;
         StringBuilder entry = new StringBuilder();
@@ -180,7 +191,7 @@ public class SFilterUtil {
             char ch = text.charAt(i);
             switch (ch) {
             case ' ':
-                if (!inQuotes) { //if not in quotes, end current entry
+                if (!inQuotes) { // If not in quotes, end current entry
                     if (entry.length() > 0) {
                         splitText.add(entry.toString());
                         entry = new StringBuilder();
@@ -190,15 +201,15 @@ public class SFilterUtil {
                 break;
             case '"':
                 inQuotes = !inQuotes;
-                continue; //don't append quotation character itself
+                continue; // Don't append quotation character itself
             case '\\':
                 if (i < text.length() - 1 && text.charAt(i + 1) == '"') {
-                    ch = '"'; //allow appending escaped quotation character
-                    i++; //prevent changing inQuotes for that character
+                    ch = '"'; // Allow appending escaped quotation character
+                    i++; // Prevent changing inQuotes for that character
                 }
                 break;
             case ',':
-                if (!inQuotes) { //ignore commas outside quotes
+                if (!inQuotes) { // Ignore commas outside quotes
                     continue;
                 }
                 break;
@@ -236,6 +247,80 @@ public class SFilterUtil {
         }
 
         return new ItemTextPredicate<>(text);
+    }
+
+    private static class ExpressionParser {
+        private final List<String> tokens;
+        private int index;
+        private final boolean inName;
+        private final boolean inType;
+        private final boolean inText;
+        private final boolean inCost;
+
+        public ExpressionParser(List<String> tokens, boolean inName, boolean inType, boolean inText, boolean inCost) {
+            this.tokens = tokens;
+            this.index = 0;
+            this.inName = inName;
+            this.inType = inType;
+            this.inText = inText;
+            this.inCost = inCost;
+        }
+
+        public Predicate<PaperCard> parse() {
+            return parseOr();
+        }
+
+        private Predicate<PaperCard> parseOr() {
+            Predicate<PaperCard> left = parseAnd();
+            while (index < tokens.size() && tokens.get(index).equalsIgnoreCase("or")) {
+                index++;
+                Predicate<PaperCard> right = parseAnd();
+                left = left.or(right);
+            }
+            return left;
+        }
+
+        private Predicate<PaperCard> parseAnd() {
+            Predicate<PaperCard> left = parseNot();
+            while (index < tokens.size() && tokens.get(index).equalsIgnoreCase("and")) {
+                index++;
+                Predicate<PaperCard> right = parseNot();
+                left = left.and(right);
+            }
+            return left;
+        }
+
+        private Predicate<PaperCard> parseNot() {
+            if (index < tokens.size() && tokens.get(index).equalsIgnoreCase("not")) {
+                index++;
+                return parseNot().negate();
+            }
+            return parsePrimary();
+        }
+
+        private Predicate<PaperCard> parsePrimary() {
+            if (index < tokens.size() && tokens.get(index).equals("(")) {
+                index++;
+                Predicate<PaperCard> expr = parseOr();
+                if (index >= tokens.size() || !tokens.get(index).equals(")")) {
+                    throw new RuntimeException("Mismatched parentheses");
+                }
+                index++;
+                return expr;
+            } else if (index < tokens.size()) {
+                String token = tokens.get(index);
+                index++;
+                return buildPredicateFromToken(token);
+            } else {
+                throw new RuntimeException("Unexpected end of expression");
+            }
+        }
+
+        private Predicate<PaperCard> buildPredicateFromToken(String token) {
+            List<String> tokenList = new ArrayList<>();
+            tokenList.add(token);
+            return buildPredicateFromTokens(String.join(" ", tokenList), inName, inType, inText, inCost);
+        }
     }
 
     private static class ItemTextPredicate<T extends InventoryItem> implements Predicate<T> {
