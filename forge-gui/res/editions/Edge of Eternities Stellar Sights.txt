@@ -62,6 +62,7 @@ ScryfallCode=EOS
 57 M Dust Bowl @Aeron Ng
 58 R Echoing Deeps @Sam Chivers
 59 R Eldrazi Temple @BEMOCS
+60 R Endless Sands @WFlemming Illustration
 61 M Gemstone Caverns @BEMOCS
 62 M Grove of the Burnwillows @Sam Chivers
 63 R High Market @WFlemming Illustration
