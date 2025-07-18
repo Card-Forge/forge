@@ -93,9 +93,9 @@ public class LibGDXImageFetcher extends ImageFetcher {
                     }
                 } catch (IOException e) {
                     if (isPlanechaseBG) {
-                        System.out.println("Failed to download planechase background [" + destPath + "] image: " + e.getMessage());
+                        System.err.println("Failed to download planechase background [" + destPath + "] image: " + e.getMessage());
                     } else {
-                        System.out.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
+                        System.err.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
                         if (urlToDownload.contains("tokens")) {
                             int setIndex = urlToDownload.lastIndexOf('_');
                             int typeIndex = urlToDownload.lastIndexOf('.');
