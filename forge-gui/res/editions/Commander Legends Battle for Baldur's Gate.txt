@@ -1169,7 +1169,7 @@ Zevlor, Elturel Exile|CLB
 22 c_1_1_shapeshifter_changeling @Steve Prescott
 23 c_2_2_shapeshifter_changeling @Johann Bodin
 24 c_3_2_shapeshifter_changeling @Igor Grechanyi
-25 w_4_4_angel_flying_vigilance @
+25 w_4_4_angel_flying_vigilance @Alexander Mokhov
 26 w_1_1_human @Ben Maier
 27 w_1_1_kor_warrior @Randy Vargas
 28 u_2_2_shapeshifter_changeling @Filip Burburan
