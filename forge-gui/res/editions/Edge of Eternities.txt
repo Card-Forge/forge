@@ -40,12 +40,16 @@ ScryfallCode=EOE
 43 U Wedgelight Rammer @Nadia Hurianova
 46 U Annul @Carlos Palma Cruchaga
 47 U Atomic Microsizer @Gabor Szikszai
+48 U Cerebral Download @Antonio José Manzanedo
+50 U Codecracker Hound @Julia Metzger
 51 R Consult the Star Charts @Antonio José Manzanedo
 52 C Cryogen Relic @Eelis Kyttanen
 54 U Desculpting Blast @Jeremy Wilson
 56 R Emissary Escort @Igor Grechanyi
+57 U Gigastorm Titan @Bryan Sola
 58 C Illvoi Galeblade @Nathaniel Himawan
 63 U Mechan Assembler @Mirko Failoni
+64 U Mechan Navigator @Konstantin Porubov
 66 C Mechanozoa @Daarken
 68 R Mm'menon, the Right Hand @Joshua Raphael
 69 R Moonlit Meditation @Liiga Smilshkalne
@@ -64,12 +68,14 @@ ScryfallCode=EOE
 86 M Weftwalking @Rovina Cai
 87 M Alpharael, Stonechosen @Kieran Yanner
 88 R Archenemy's Charm @Brigitte Roka & Clifton Stommel
+90 U Blade of the Swarm @Nino Is
 91 R Chorale of the Void @Alix Branwyn
 94 C Decode Transmissions @Josh Hass
 96 U Dubious Delicacy @Tianxing Xu
 97 R Elegy Acolyte @Diana Franco
 98 C Embrace Oblivion @Andreas Zafiratos
 99 R Entropic Battlecruiser @Josiah "Jo" Cameron
+100 U Faller's Faithful @Lie Setiawan
 101 U Fell Gravship @David Álvarez
 103 C Gravkill @Dominik Mayer
 105 C Hullcarver @Michal Ivan
@@ -99,6 +105,7 @@ ScryfallCode=EOE
 142 U Lithobraking @Andrew Mar
 143 C Melded Moxite @Alexandr Leskinen
 144 U Memorial Team Leader @Andrew Mar
+145 R "Forgotten Sock Closet" @Javier Charro
 148 R Nova Hellkite @Raymond Swanland
 151 R Pain for All @Dmitry Burmak
 152 C Plasma Bolt @Viko Menezes
@@ -109,6 +116,7 @@ ScryfallCode=EOE
 158 U Ruinous Rampage @David Astruga
 159 R Rust Harvester @Jake Murray
 161 U Systems Override @Hardy Fowler
+162 M Tannuk, Steadfast Second @Raymond Swanland
 164 U Terrapact Intimidator @Slawomir Maniak
 167 R Warmaker Gunship @Julian Kok Joon Wen
 168 R Weapons Manufacturing @Marco Gorlei
@@ -124,15 +132,22 @@ ScryfallCode=EOE
 183 R Frenzied Baloth @Diana Franco
 184 C Fungal Colossus @Sergey Glushakov
 185 C Galactic Wayfarer @Quintin Gleim
+188 U Glacier Godmaw @
 189 U Harmonious Grovestrider @Ron Spencer
 190 U Hemosymbic Mite @Amanda Lee
+192 R Icetill Explorer @Warren Mahy
+194 U Larval Scoutlander @Javier Charro
+195 U Lashwhip Predator @Brian Valeza
 196 R Loading Zone @Matt Stewart
 197 U Meltstrider Eulogist @Jason A. Engle
+199 U Meltstrider's Resolve @Carlos Palma Cruchaga
 200 R Mightform Harmonizer @Bartek Fedyczak
 201 M Ouroboroid @Samuel Perin
+202 U Pull Through the Weft @Andrew Mar
 203 C Sami's Curiosity @Tuan Duong Chu
 205 U Seedship Impact @Constantin Marin
 206 C Shattered Wings @Sergey Glushakov
+208 R Sledge-Class Seedship @Leon Tukker
 209 U Tapestry Warden @Andreas Zafiratos
 210 R Terrasymbiosis @Viko Menezes
 212 U Alpharael, Dreaming Acolyte @Cristi Balanescu
@@ -144,6 +159,7 @@ ScryfallCode=EOE
 218 U Haliya, Ascendant Cadet @Justyna Dura
 219 R Infinite Guideline Station @Piotr Dura
 220 U Interceptor Mechan @Leonardo Santanna
+221 U Mm'menon, Uthros Exile @Fajareka Setiawan
 222 R Mutinous Massacre @Quintin Gleim
 223 R Pinnacle Emissary @Alejandro Pacheco
 224 R Ragost, Deft Gastronaut @Zack Stella
@@ -217,6 +233,7 @@ ScryfallCode=EOE
 293 R Elegy Acolyte @Justin Hernandez & Alexis Hernandez
 294 R Xu-Ifit, Osteoharmonist @Ashley Mackenzie
 295 R Possibility Technician @Matthew G. Lewis
+296 M Tannuk, Steadfast Second @Pascal Blanché
 297 R Mightform Harmonizer @Jessica Fong
 298 R Dyadrine, Synthesis Amalgam @Matthew G. Lewis
 299 R Genemorph Imago @Benjamin Ee
@@ -236,11 +253,12 @@ ScryfallCode=EOE
 313 R Cosmogoyf @Princess Hidir
 314 R Mutinous Massacre @Jack Hughes
 315 R Space-Time Anomaly @Princess Hidir
-316 R Secluded Starforge @
+316 R Secluded Starforge @Jaime A. Zuverza
 317 R Anticausal Vestige @Chase Stone
 318 M Exalted Sunborn @Scott M. Fischer
 319 R Hardlight Containment @Dominik Mayer
 321 R Lumen-Class Frigate @Zezhou Chen
+322 R Pinnacle Starcage @Leon Tukker
 323 R The Seriema @Sergey Glushakov
 324 R Sunstar Chaplain @Valera Lutfullina
 325 R Consult the Star Charts @Antonio José Manzanedo
@@ -260,7 +278,9 @@ ScryfallCode=EOE
 340 R Bioengineered Future @Constantin Marin
 341 M Famished Worldsire @Kev Walker
 342 R Frenzied Baloth @Diana Franco
+343 R Icetill Explorer @Warren Mahy
 345 M Ouroboroid @Samuel Perin
+346 R Sledge-Class Seedship @Leon Tukker
 347 R Biotech Specialist @Alexandre Honoré
 348 R Infinite Guideline Station @Piotr Dura
 349 R Pinnacle Emissary @Alejandro Pacheco
@@ -276,9 +296,11 @@ ScryfallCode=EOE
 359 M Starfield Vocalist @nina
 360 M Sothera, the Supervoid @Mateusz Urbanowicz
 361 M Devastating Onslaught @Naochika Morishita
+362 M Icetill Explorer @Raimaru
 363 M Mutinous Massacre @Aogachou
 364 M The Dominion Bracelet @Mai Minamiura
 365 M The Endstone @Hidetaka Tenjin
+366 M Secluded Starforge @Makoto Yukimura
 367 L Plains @Adam Paquette
 368 L Island @Adam Paquette
 369 L Swamp @Adam Paquette
@@ -299,10 +321,11 @@ ScryfallCode=EOE
 384 M Exalted Sunborn @Makoron
 385 M Starfield Vocalist @nina
 386 M Sothera, the Supervoid @Mateusz Urbanowicz
+388 M Icetill Explorer @Raimaru
 389 M Mutinous Massacre @Aogachou
 390 M The Dominion Bracelet @Mai Minamiura
 391 M The Endstone @Hidetaka Tenjin
-392 M Secluded Starforge @
+392 M Secluded Starforge @Makoto Yukimura
 393 U Starfield Shepherd @Marta Nael
 394 U Annul @Carlos Palma Cruchaga
 395 U Umbral Collar Zealot @Dmitry Burmak
