@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="dungen_crawler" tilewidth="16" tileheight="16" tilecount="12288" columns="128">
- <image source="../../world/tilesets/INN_tiles/dungen_crawler.png" width="2048" height="1536"/>
+<tileset version="1.10" tiledversion="1.11.2" name="dungen_crawler" tilewidth="16" tileheight="16" tilecount="12288" columns="128">
+ <image source="INN_tiles/dungen_crawler.png" width="2048" height="1536"/>
  <tile id="2594">
   <animation>
    <frame tileid="2592" duration="100"/>

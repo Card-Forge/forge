@@ -1,4 +1,4 @@
-Name:Pinnacle Emisary
+Name:Pinnacle Emissary
 ManaCost:1 U R
 Types:Artifact Creature Robot
 PT:3/3
