@@ -1,0 +1,10 @@
+Name:Mm'menon, the Right Hand
+ManaCost:3 U U
+Types:Legendary Creature Jellyfish Advisor
+PT:3/4
+K:Flying
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Artifact.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast artifact spells from the top of your library.
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddAbility$ AnyMana | Description$ Artifacts you control have "{T}: Add {U}. Spend this mana only to cast a spell from anywhere other than your hand."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ U | Amount$ 1 | RestrictValid$ Spell.!wasCastFromYourHand | SpellDescription$ Add {U}. Spend this mana only to cast a spell from anywhere other than your hand.
+Oracle:Flying\nYou may look at the top card of your library any time.\nYou may cast artifact spells from the top of your library.\nArtifacts you control have "{T}: Add {U}. Spend this mana only to cast a spell from anywhere other than your hand."

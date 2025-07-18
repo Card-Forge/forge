@@ -1815,6 +1815,10 @@ public class CardProperty {
             if (!card.isForetold()) {
                 return false;
             }
+        } else if (property.equals("warped")) {
+            if (!card.isWarped()) {
+                return false;
+            }
         } else if (property.equals("CrewedThisTurn")) {
             if (!hasTimestampMatch(card, source.getCrewedByThisTurn())) return false;
         } else if (property.equals("CrewedBySourceThisTurn")) {

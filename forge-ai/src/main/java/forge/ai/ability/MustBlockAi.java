@@ -9,10 +9,10 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -40,9 +40,6 @@ public class MustBlockAi extends SpellAbilityAi {
 
         if (!list.isEmpty()) {
             final Card blocker = ComputerUtilCard.getBestCreatureAI(list);
-            if (blocker == null) {
-                return false;
-            }
             sa.getTargets().add(blocker);
             AiCardMemory.rememberCard(aiPlayer, source, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN);
             return true;
@@ -66,11 +63,6 @@ public class MustBlockAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
-        // only use on creatures that can attack
-        if (!ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
-            return false;
-        }
-
         Card attacker = source;
         if (sa.hasParam("DefinedAttacker")) {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedAttacker"), sa);
@@ -84,16 +76,16 @@ public class MustBlockAi extends SpellAbilityAi {
         boolean chance = false;
 
         if (sa.usesTargeting()) {
-            final List<Card> list = determineGoodBlockers(attacker, ai, ai.getWeakestOpponent(), sa, true, true);
-            if (list.isEmpty()) {
-                return sa.isTargetNumberValid();
+            List<Card> list = determineGoodBlockers(attacker, ai, ai.getWeakestOpponent(), sa, true, true);
+            if (list.isEmpty() && mandatory) {
+                list = CardUtil.getValidCardsToTarget(sa);
             }
             final Card blocker = ComputerUtilCard.getBestCreatureAI(list);
             if (blocker == null) {
-                return false;
+                return sa.isTargetNumberValid();
             }
 
-            if (source.hasKeyword(Keyword.PROVOKE) && blocker.isTapped()) {
+            if (!mandatory && sa.isKeyword(Keyword.PROVOKE) && blocker.isTapped()) {
                 // Don't provoke if the attack is potentially lethal
                 Combat combat = ai.getGame().getCombat();
                 if (combat != null) {
@@ -121,11 +113,7 @@ public class MustBlockAi extends SpellAbilityAi {
     private List<Card> determineBlockerFromList(final Card attacker, final Player ai, Iterable<Card> options, SpellAbility sa,
             final boolean onlyLethal, final boolean testTapped) {
         List<Card> list = CardLists.filter(options, c -> {
-            boolean tapped = c.isTapped();
-            if (testTapped) {
-                c.setTapped(false);
-            }
-            if (!CombatUtil.canBlock(attacker, c)) {
+            if (!CombatUtil.canBlock(attacker, c, testTapped)) {
                 return false;
             }
             if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, c, null, false)) {
@@ -133,9 +121,6 @@ public class MustBlockAi extends SpellAbilityAi {
             }
             if (onlyLethal && !ComputerUtilCombat.canDestroyBlocker(ai, c, attacker, null, false)) {
                 return false;
-            }
-            if (testTapped) {
-                c.setTapped(tapped);
             }
             return true;
         });

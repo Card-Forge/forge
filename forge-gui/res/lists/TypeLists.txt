@@ -93,6 +93,7 @@ Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
 Dreadnought:Dreadnoughts
+Drix:Drixes
 Drone:Drones
 Druid:Druids
 Dryad:Dryads
@@ -365,7 +366,6 @@ Fortification
 Gold
 Incubator:Incubators
 Junk
-Lander:Landers
 Key:Keys
 Lander:Landers
 Map
