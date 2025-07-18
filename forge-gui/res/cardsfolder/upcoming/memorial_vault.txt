@@ -6,5 +6,5 @@ SVar:DBMayPlay:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembere
 SVar:STPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Description$ You may play the exiled cards this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Sacrificed$CardManaCost
-DeckHss:Ability$Sacrifice
+DeckHas:Ability$Sacrifice
 Oracle:{T}, Sacrifice another artifact: Exile the top X cards of your library, where X is one plus the mana value of the sacrificed artifact. You may play those cards this turn.
