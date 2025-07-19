@@ -843,7 +843,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
         private void initAliases(CardEdition E){ //Add the alias to the edition here, to ensure it's always done equally.
             String alias = E.getAlias();
-            if (null != alias) aliasToEdition.put(alias, E);
+            if (null != alias)
+                aliasToEdition.put(alias, E);
             aliasToEdition.put(E.getCode2(), E);
         }
         @Override
