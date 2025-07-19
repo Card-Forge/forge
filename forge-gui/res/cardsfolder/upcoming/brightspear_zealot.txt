@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/4
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | CheckSVar$ X | SVarCompare$ GE2 | Description$ This creature has +2/+0 as long as you've cast two or more spells this turn.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | CheckSVar$ X | SVarCompare$ GE2 | Description$ This creature gets +2/+0 as long as you've cast two or more spells this turn.
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
-Oracle:Vigilance\nThis creature has +2/+0 as long as you've cast two or more spells this turn.
+Oracle:Vigilance\nThis creature gets +2/+0 as long as you've cast two or more spells this turn.
