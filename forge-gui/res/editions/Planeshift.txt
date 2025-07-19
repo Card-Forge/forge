@@ -158,8 +158,3 @@ ScryfallCode=PLS
 141 U Rith's Grove @Scott Bailey
 142 U Terminal Moraine @Scott Bailey
 143 U Treva's Ruins @Jerry Tiritilli
-
-[tokens]
-w_1_1_spirit_flying
-g_1_1_hippo
-g_1_1_saproling
