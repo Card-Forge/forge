@@ -257,3 +257,6 @@ ScryfallCode=MMA
 13 g_2_5_treefolk_shaman @Zack Stella
 14 ub_1_1_faerie_rogue_flying @E. M. Gist
 15 bg_1_1_worm @Chuck Lukacs
+
+[other]
+16 emblem_elspeth_knight_errant @Volkan Baǵa

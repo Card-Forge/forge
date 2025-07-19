@@ -61,9 +61,3 @@ ScryfallCode=mps
 52 S Trinisphere @Daniel Ljunggren
 53 S Vedalken Shackles @Svetlin Velinov
 54 S Wurmcoil Engine @Aleksi Briclot
-
-[tokens]
-g_2_2_wolf
-c_1_1_a_thopter_flying
-c_3_3_a_phyrexian_wurm_deathtouch
-c_3_3_a_phyrexian_wurm_lifelink
